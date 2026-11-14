@@ -3,6 +3,7 @@ import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {describe,expect,it} from 'vitest';
 import {parse} from 'yaml';
+import {beforeTopicConsolidation} from '../tools/topic-consolidation-baseline.mjs';
 
 const root=resolve(import.meta.dirname,'../..');
 const page='00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md';
@@ -10,7 +11,7 @@ const prefix='00 Учебник/Assets/Figures/curated/rnn-execution-2026-10-26/
 const hash=(data:Buffer|string)=>createHash('sha256').update(data).digest('hex');
 describe('recurrent execution extension',()=>{
   it('preserves the accepted RNN chapter and reuses the exact D2L explanation',()=>{
-    const chapter=readFileSync(resolve(root,page),'utf8');
+    const chapter=beforeTopicConsolidation(readFileSync(resolve(root,page),'utf8'),page,root);
     const restored=chapter.replace(/<!-- rnn-execution 2026-10-26 -->\n[\s\S]*?<!-- \/rnn-execution -->\n\n/,'')
       .replace('last_updated: 2026-10-26','last_updated: 2026-10-21');
     expect(hash(restored)).toBe('d9cb27f7d76de93f41fe3f252ce1da1bcf53897197decbabaf257dbddfabaa25');

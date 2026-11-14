@@ -13,7 +13,7 @@ const body = read(chapter);
 describe('small-data encoder fine-tuning inside the canonical explanation', () => {
   it('adds the mechanisms to the existing native-English chapter and both topic indexes', () => {
     expect(body).toContain('source_language: en');
-    expect(body.match(/^```python$/gm)).toHaveLength(18);
+    expect(body.match(/^```python$/gm)).toHaveLength(19);
     for (const anchor of ['small-data-fine-tuning', 'fine-tuning-bias-correction',
       'fine-tuning-reinitialization', 'fine-tuning-update-budget', 'intermediate-task-transfer']) {
       expect(body).toContain('id="' + anchor + '"');

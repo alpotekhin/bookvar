@@ -1,7 +1,7 @@
 ---
 title: Атлас современных LLM
 type: textbook-chapter
-status: living
+status: legacy
 last_updated: 2026-07-20
 as_of: 2026-07-20
 previous: "[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving]]"
@@ -9,6 +9,11 @@ next: "[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/0
 ---
 
 # Атлас: Llama, Qwen, DeepSeek, GLM и Kimi
+
+> [!note] Архивный срез
+> Этот текст сохранён для Obsidian. Сопоставление конкретных выпусков
+> и переходы к карточкам семейств находятся в действующем
+> [[02 Атлас моделей/Сравнения/Сравнение семейств#llama-qwen-deepseek-worked-comparison|сравнении семейств]].
 
 > [!abstract] Задача главы
 > Название семейства ещё не описывает устройство конкретной модели. В одной
@@ -217,10 +222,10 @@ Qwen2 и Qwen2.5 остаются близки к декодерной схем�
 - смещения в линейных преобразованиях $Q$, $K$ и $V$;
 - плотные модели разных размеров и отдельно обученные специализированные версии.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/qwen25-figure1-hq.png]]
-
-*В отчёте Qwen2.5 рядом показаны модели разных размеров и специализаций. Это
-карта семейства, а не схема одного блока, общего для всех перечисленных версий.*
+[Рисунок 1 отчёта Qwen2.5](https://arxiv.org/html/2412.15115v2#S0.F1) сравнивает базовые 72B трёх поколений
+и объёмы их корпусов, а не размеры и специализации внутри Qwen2.5.
+[[Papers/Qwen 2.5 Technical Report#qwen-72b-architecture|Разбор конфигураций 72B]]
+отделяет переход к GQA в Qwen2 от изменений в обучении Qwen2.5.
 
 Рост качества Qwen2.5 нельзя приписать одному новому слою. Авторы связывают его
 в том числе с составом и очисткой данных, масштабом предобучения, подготовкой к
@@ -315,11 +320,11 @@ DeepSeek-V3 сохраняет MLA и DeepSeekMoE. Главные нововве
 - значительная часть обучения выполняется в формате FP8;
 - расписание DualPipe уменьшает простои распределённого конвейера.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/deepseek-v3-figure2-architecture-hq.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-originals-2026-11-09/v3-figure2-block.png|Блок DeepSeek-V3: слева две остаточные ветви с RMSNorm, справа общие и выбираемые эксперты и кэшируемые компоненты MLA.]]
 
 *Рисунок 2 из отчёта DeepSeek-V3: слева показан полный блок Transformer, справа —
 устройство DeepSeekMoE и MLA. Дополнительная цель обучения, FP8 и DualPipe не
-являются слоями модели и поэтому на эту схему не входят.*
+являются слоями модели и поэтому на эту схему не входят. DeepSeek-AI, [DeepSeek-V3 Technical Report, рис. 2, с. 7](https://raw.githubusercontent.com/deepseek-ai/DeepSeek-V3/d5c08b384b4d4096e494d61ba7d329f593116872/DeepSeek_V3.pdf#page=7), [MIT](/licenses/deepseek-v3-d5c08b3-MIT.txt).*
 
 Классификация:
 
@@ -344,14 +349,9 @@ R1-Zero и R1 исследуют прежде всего посттренинг,
   используется многостадийная процедура обучения;
 - дистилляция переносит полученное поведение в меньшие плотные модели.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/deepseek-r1-figure1-hq.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-originals-2026-11-09/r1-zero-nature-figure1.png|R1-Zero: слева pass@1 и голосование по 16 ответам на AIME 2024, справа средняя длина ответов на обучающем наборе.]]
 
-*На сохранённом рисунке DeepSeek-R1-Zero слева показана точность на AIME
-(pass@1 и cons@16) по шагам RL, справа — средняя длина ответа на обучении.
-Это кривые изменения поведения, а не схема этапов обучения и не изображение
-MLA/MoE. Источник: DeepSeek-AI, [DeepSeek-R1](https://arxiv.org/abs/2501.12948);
-в сохранённой здесь редакции рисунок подписан Figure 1. Нумерация рисунков
-различается между версиями отчёта.*
+*Daya Guo, Dejian Yang, Haowei Zhang et al., [DeepSeek-R1, Nature, рис. 1](https://www.nature.com/articles/s41586-025-09422-z/figures/1), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Слева точность на AIME 2024 по шагам RL, справа средняя длина генерации на обучающем наборе. Обе панели относятся к R1-Zero.*
 
 Поэтому корректно:
 

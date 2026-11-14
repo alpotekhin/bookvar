@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / '00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор.md'
 text = CHAPTER.read_text()
 blocks = re.findall(r'^```python\n(.*?)^```', text, re.M | re.S)
-assert len(blocks) == 14
+assert len(blocks) == 15
 scope = {}
 output = StringIO()
 with redirect_stdout(output):
@@ -70,6 +70,43 @@ for row in assets:
     assert sha256((ROOT / row['source_page_snapshot']).read_bytes()).hexdigest() == row['source_page_sha256']
     assert sha256((ROOT / row['license_evidence']).read_bytes()).hexdigest() == row['license_evidence_sha256']
 
+# Preserve the complete preceding owner, not just its eight borrowed bodies.
+from topic_consolidation_baseline import before_topic_consolidation
+prior_text = before_topic_consolidation(text, CHAPTER,
+    stop_before_journal="2026-11-03-autoencoder-course-additions.json")
+assert sha256(prior_text.encode()).hexdigest() == \
+    "30f6c8d2da4c7fcf3607ef4649eb74e077286b5e1e538c18e7cad6dee3791874"
+prior_blocks = re.findall(r'^```python\n(.*?)^```', prior_text, re.M | re.S)
+assert len(prior_blocks) == 14
+assert [b for b in blocks if 'frozen_routes' not in b] == prior_blocks
+
+# Independent scalar chain-rule checks for ordinary and frozen-D forwards.
+frozen_gradient_cases = 0
+from itertools import product
+for noise, weight_g, weight_d, bias_d in product(
+        [-2., .5, 2.], [-.4, .1], [-3., .2, 3.], [-1., .7]):
+    w = torch.tensor(weight_g, dtype=torch.float64, requires_grad=True)
+    v = torch.tensor(weight_d, dtype=torch.float64, requires_grad=True)
+    bias = torch.tensor(bias_d, dtype=torch.float64, requires_grad=True)
+    logit = v * w * noise + bias
+    q = logit.detach().sigmoid()
+    objective = F.softplus(-logit)
+    ordinary = torch.autograd.grad(objective, (w, v, bias))
+    expected = ((q-1)*weight_d*noise, (q-1)*weight_g*noise, q-1)
+    for actual, target in zip(ordinary, expected):
+        torch.testing.assert_close(actual, target, atol=1e-12, rtol=1e-12)
+    wf = w.detach().requires_grad_()
+    frozen_objective = F.softplus(-(v.detach()*wf*noise + bias.detach()))
+    frozen, = torch.autograd.grad(frozen_objective, wf)
+    torch.testing.assert_close(frozen, ordinary[0], atol=1e-12, rtol=1e-12)
+    # This separate forward has no graph even though wf is trainable.
+    with torch.no_grad():
+        no_grad_logit = v * wf * noise + bias
+    assert not F.softplus(-no_grad_logit).requires_grad
+    frozen_gradient_cases += 1
+assert scope['frozen_routes']['frozen_D'][2] is None
+assert scope['frozen_routes']['detached_fake'][1] is None
+print(f"PASS {frozen_gradient_cases} independent three-factor/frozen-D chain-rule cases")
 print(output.getvalue())
 print(json.dumps({'chapter_sha256': sha256(CHAPTER.read_bytes()).hexdigest(),
                   'actual_programs': len(blocks), 'unchanged_source_bodies': len(original_bodies),

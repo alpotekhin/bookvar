@@ -2,8 +2,102 @@
 title: Expert и hybrid parallelism
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-23
-last_verified: 2026-10-23
+last_updated: 2026-11-05
+last_verified: 2026-11-05
+reference_terms:
+  - anchor: ep-token-ownership
+    label: "Эксперты на разных процессах и движение токенов"
+    label_en: "Expert ownership and token movement"
+  - anchor: dispatch-compute-combine
+    label: "Dispatch → вычисление экспертов → combine"
+    label_en: "Dispatch → expert computation → combine"
+  - anchor: ep-assignment-permutation
+    label: "Номера назначений и обратная перестановка"
+    label_en: "Assignment identities and inverse permutations"
+  - anchor: ep-gate-placement
+    label: "Где применять коэффициент маршрутизатора"
+    label_en: "Where to apply the routing coefficient"
+  - anchor: ep-variable-splits
+    label: "All-to-all с разными размерами сообщений"
+    label_en: "All-to-all with variable split sizes"
+  - anchor: ep-empty-participants
+    label: "Пустой получатель и участие в коллективах"
+    label_en: "Empty receivers and collective participation"
+  - anchor: ep-autograd-exchange
+    label: "Дифференцируемый обмен и обратные split-списки"
+    label_en: "Autograd-aware exchange and reversed split lists"
+  - anchor: ep-two-rank-example
+    label: "Полный пример EP на двух CPU-процессах"
+    label_en: "Complete two-rank CPU expert-parallel example"
+  - anchor: ep-router-gradients
+    label: "Градиенты экспертов, входов и коэффициентов"
+    label_en: "Expert, input and routing-coefficient gradients"
+  - anchor: ep-selected-softmax
+    label: "Производная softmax по выбранным логитам"
+    label_en: "Softmax gradients over selected logits"
+  - anchor: ep-topk-boundaries
+    label: "Граница выбора top-k и нормированный top-1"
+    label_en: "Top-k boundaries and normalized top-1"
+  - anchor: ep-empty-expert-update
+    label: "Нулевой градиент эксперта и состояние оптимизатора"
+    label_en: "Empty-expert gradients and optimizer state"
+  - anchor: ep-expert-rank-load
+    label: "Дисбаланс экспертов и дисбаланс GPU"
+    label_en: "Expert imbalance versus GPU imbalance"
+  - anchor: ep-capacity-pool
+    label: "Capacity и размер пула назначений"
+    label_en: "Capacity and the assignment pool"
+  - anchor: ep-token-dropping
+    label: "Отбрасывание назначений и ответ MoE-слоя"
+    label_en: "Assignment dropping and the MoE layer output"
+  - anchor: ep-padding
+    label: "Дополнение экспертных входов и лишние вычисления"
+    label_en: "Expert-input padding and extra computation"
+  - anchor: ep-dropless
+    label: "Dropless: переменные буферы без отбрасывания"
+    label_en: "Dropless execution and variable buffers"
+  - anchor: ep-groupedgemm
+    label: "GroupedGEMM: разные веса и размеры групп"
+    label_en: "GroupedGEMM with distinct weights and group sizes"
+  - anchor: ep-fsdp-weight-traffic
+    label: "Почему обычный FSDP собирает не только активные эксперты"
+    label_en: "Why ordinary FSDP gathers more than the active experts"
+  - anchor: ep-tp-versus-ep
+    label: "TP внутри эксперта и распределение целых экспертов"
+    label_en: "Tensor-sharded experts versus expert ownership"
+  - anchor: ep-divisibility
+    label: "Делимость числа экспертов и внутренней ширины"
+    label_en: "Expert-count and hidden-width divisibility"
+  - anchor: ep-dense-expert-replicas
+    label: "Разные группы реплик плотных и экспертных параметров"
+    label_en: "Distinct dense and expert replica groups"
+  - anchor: worked-configuration-1024-gpu
+    label: "1024 GPU: координаты TP/PP/EP/EDP и плотный DP"
+    label_en: "1024 GPUs: TP/PP/EP/EDP coordinates and dense DP"
+  - anchor: ep-parameter-memory
+    label: "Память плотных и экспертных фрагментов"
+    label_en: "Dense and expert parameter-shard memory"
+  - anchor: ep-sp-communication
+    label: "SP перед маршрутизацией и порядок EP/TP-обменов"
+    label_en: "Sequence sharding before routing and EP/TP ordering"
+  - anchor: ep-physical-byte-ledger
+    label: "31.5 MiB на GPU: EP-трафик и TP-трафик отдельно"
+    label_en: "31.5 MiB per GPU: separate EP and TP traffic"
+  - anchor: ep-backward-collectives
+    label: "Обратные обмены и сумма вкладов в токен"
+    label_en: "Backward collectives and summed token contributions"
+  - anchor: ep-edp-loss-normalization
+    label: "Почему среднего по EDP недостаточно для общего loss"
+    label_en: "Why the EDP mean is not the global-loss gradient"
+  - anchor: ep-parallel-folding
+    label: "Parallel Folding: разные разбиения внимания и MoE"
+    label_en: "Parallel Folding: distinct attention and MoE layouts"
+  - anchor: ep-report-configurations
+    label: "DeepSeek-V3 и Llama 3: конфигурации из отчётов"
+    label_en: "DeepSeek-V3 and Llama 3 report configurations"
+  - anchor: ep-correctness-checks
+    label: "Проверки EP: перестановки, градиенты, сообщения"
+    label_en: "EP checks: permutations, gradients and messages"
 source_unit_id:
   - lecture-08-width-parallelism
   - lecture-08-model-strategy-cases
@@ -12,6 +106,8 @@ source_unit_id:
 <a id="cs336-distributed-expert-hybrid"></a>
 
 # 44f. Expert и hybrid parallelism
+
+<a id="ep-token-ownership"></a>
 
 В обычном FFN-блоке все токены проходят через одну и ту же сеть.
 В MoE-слое таких экспертных сетей несколько, а маршрутизатор выбирает
@@ -26,7 +122,7 @@ source_unit_id:
 объём работы и размеры сообщений здесь меняются вместе с решениями
 маршрутизатора.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/expert-hybrid-2026-10-23/hf-ep-layer.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/expert-hybrid-2026-10-23/hf-ep-layer.svg|Экспертный обмен в Transformer: dispatch и combine между полными FFN]]
 
 *Экспертный обмен внутри Transformer-слоя. Перед экспертными FFN токены
 отправляются владельцам выбранных экспертов; после вычисления ответы
@@ -109,6 +205,8 @@ $$
 $y_2=(1.5,1.5)$, $y_3=(2,0.6)$.
 Упаковка, пересылка и перестановка не должны менять эти значения.
 
+<a id="ep-assignment-permutation"></a>
+
 ### Почему недостаточно восстановить размер тензора
 
 В порядке экспертов назначения расположены так:
@@ -131,11 +229,15 @@ original_to_packed = [0, 5, 3, 1, 6, 4, 2, 7]
 При нескольких локальных экспертах отдельная перестановка нужна ещё и
 внутри принимающего процесса; её также обращают перед отправкой.
 
+<a id="ep-gate-placement"></a>
+
 Коэффициент можно применить к готовому ответу эксперта до обратной
 пересылки или после неё — результат одинаков.
 Но заменить $g f(x)$ на $f(gx)$ для нелинейной экспертной сети в общем
 случае нельзя. Оптимизированные реализации могут переносить умножение внутрь
 сети только через те операции, с которыми оно действительно перестановочно.
+
+<a id="ep-variable-splits"></a>
 
 ### Исполнение на двух процессах
 
@@ -145,6 +247,8 @@ original_to_packed = [0, 5, 3, 1, 6, 4, 2, 7]
 B — `[1,2]`: запись на позиции $r$ сообщает число строк от процесса $r$.
 Эти счётчики относятся к назначениям, включая локальные, а не к числу
 уникальных токенов. На обратном пути списки отправки и приёма меняются местами.
+
+<a id="ep-empty-participants"></a>
 
 Процесс без входящих назначений всё равно участвует в коллективе:
 он может отправлять свои токены другим владельцам. Нулевая длина сообщения
@@ -162,6 +266,8 @@ B — `[1,2]`: запись на позиции $r$ сообщает число 
 Вторая явная сортировка по локальным экспертам здесь заменена выбором
 `positions` для каждой матрицы. Оптимизированный GroupedGEMM обычно
 использует заранее упакованные непрерывные группы строк.
+
+<a id="ep-autograd-exchange"></a>
 
 Для данных используется дифференцируемая оболочка: её backward выполняет
 обратный обмен с переставленными списками размеров. Сам
@@ -237,6 +343,8 @@ def expert_parallel_linear(x, selected, gates, local_weights):
     return (by_assignment * gates.unsqueeze(-1)).sum(dim=1)
 ~~~
 
+<a id="ep-two-rank-example"></a>
+
 Чтобы воспроизвести исходный пример, добавим код инициализации и вызова.
 Два Python-блока сохраняются подряд в файл `ep_example.py` и запускаются
 командой `torchrun --standalone --nproc-per-node=2 ep_example.py`.
@@ -276,6 +384,8 @@ B — `[[1.5, 1.5], [2.0, 0.6]]` с обычной погрешностью ок
 обучаемый маршрутизатор получается, если вычислить их через softmax
 выбранных логитов с сохранением графа.
 
+<a id="ep-router-gradients"></a>
+
 ## Как через маршрутизацию проходит градиент
 
 Обозначим входящий градиент для токена $t$ через $u_t=\partial L/\partial y_t$.
@@ -293,6 +403,8 @@ $$
 параметров и входа. Вклады в один исходный токен возвращаются и складываются.
 Это именно сумма: два выбранных эксперта — два слагаемых одной функции,
 а не две независимые оценки, которые следует усреднить.
+
+<a id="ep-selected-softmax"></a>
 
 У входа есть также путь через маршрутизатор. Если
 $z_t=x_tW_r$, а коэффициенты — softmax **по выбранным логитам**, то при
@@ -332,6 +444,8 @@ $$
 +\left.\frac{\partial L}{\partial x_t}\right|_{\mathrm{router}}.
 $$
 
+<a id="ep-topk-boundaries"></a>
+
 Выбор индексов top-$k$ дискретен. Эти производные описывают участок,
 на котором набор выбранных экспертов не меняется; в точках смены выбора
 нельзя проверять производную обычной центральной разностью.
@@ -342,10 +456,14 @@ sigmoid-маршрутизатор, ненормированные коэффи�
 единственный коэффициент равен единице, и градиент основной потери через
 этот коэффициент исчезает.
 
+<a id="ep-empty-expert-update"></a>
+
 Эксперт, не получивший ни одного токена, имеет нулевой вклад в градиент
 основной потери данного шага. Это не равнозначно обещанию неизменных весов:
 отдельное затухание весов и сохранённое состояние оптимизатора могут
 продолжать влиять на обновление.
+
+<a id="ep-expert-rank-load"></a>
 
 <a id="дисбаланс--это-время-а-не-только-loss"></a>
 
@@ -389,6 +507,8 @@ $\rho_{\mathrm{rank}}=5/4=1.25$.
 В частности, эксперт с удвоенной средней нагрузкой не доказывает,
 что владеющий им GPU получил вдвое больше строк.
 
+<a id="ep-capacity-pool"></a>
+
 ### Вместимость: отбросить, дополнить или обработать всё
 
 Чтобы заранее ограничить размеры буферов, можно задать максимальное число
@@ -403,7 +523,7 @@ $$
 применяться отдельно на отправителе, а не ко всей EP-группе; тогда нужно
 подставлять размер именно этого пула.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/expert-hybrid-review-2026-10/mcore-token-capacity.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/expert-hybrid-review-2026-10/mcore-token-capacity.png|Назначения экспертам без ограничения, с отбрасыванием и с дополнением]]
 
 *Три режима на одном распределении $[3,6,5,2]$.
 Без ограничения обрабатываются 16 назначений. При $C=4$ остаются 13,
@@ -412,6 +532,8 @@ $$
 Названия параметров на рисунке исторические; в этой версии документации
 параметр вместимости называется `--moe-expert-capacity-factor`.*
 
+<a id="ep-token-dropping"></a>
+
 **Отбрасывание** (*token dropping*) удаляет лишние назначения.
 Это не обязательно удаление токена из последовательности: у токена может
 сохраниться другой выбранный эксперт, а обходная связь блока остаётся.
@@ -419,17 +541,23 @@ $$
 и перенормировать ли оставшиеся коэффициенты; эти решения влияют на ответ
 и обучение.
 
+<a id="ep-padding"></a>
+
 **Дополнение до вместимости** (*padding*) делает размеры экспертных входов
 предсказуемыми. Фиктивные строки не должны влиять на ответ, но занимают память
 и могут расходовать вычисления. Для нашего первого примера с нагрузками
 $[3,2,3,0]$ при $C=3$ отбрасывать ничего не нужно,
 зато прямоугольные буферы содержат 12 строк вместо восьми.
 
+<a id="ep-dropless"></a>
+
 **Обработка без отбрасывания** (*dropless*) сохраняет все назначения.
 Буферы и размеры сообщений зависят от текущей нагрузки.
 Поэтому нужны поддержка переменных размеров и запас памяти на неравномерное
 распределение. Отсутствие отбрасывания не означает отсутствие любых
 фиктивных строк: ядро может округлять размеры до блоков, удобных оборудованию.
+
+<a id="ep-groupedgemm"></a>
 
 ### Что делает GroupedGEMM
 
@@ -449,6 +577,8 @@ $X_0\in\mathbb R^{n_0\times D},\ldots,X_{E-1}\in\mathbb R^{n_{E-1}\times D}$,
 маршрутизаторе, и не гарантирует высокую эффективность при очень маленьких
 $n_e$. Пустые эксперты должны обрабатываться без изменения нумерации
 остальных.
+
+<a id="ep-fsdp-weight-traffic"></a>
 
 ## Почему шардирования весов бывает недостаточно
 
@@ -475,6 +605,8 @@ EP оставляет полные экспертные матрицы у вла
 нужные активации. Выбор меняет не только число байтов постоянных весов,
 но и то, что пересылается перед каждым экспертным вычислением.
 
+<a id="ep-tp-versus-ep"></a>
+
 <a id="tp-или-ep"></a>
 
 ## Делить матрицу эксперта или распределять экспертов
@@ -486,7 +618,7 @@ TP и EP распределяют разные объекты. При TP оди�
 При EP целые эксперты назначаются владельцам, а токены доставляются
 тем владельцам, которых выбрал маршрутизатор.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/expert-hybrid-review-2026-10/edls-moe-tensor-parallel.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/expert-hybrid-review-2026-10/edls-moe-tensor-parallel.png|TP в MoE: фрагменты всех экспертных сетей на одном GPU]]
 
 *Тензорное разделение MoE в EDLS. Показана работа GPU 1:
 он собирает входы из четырёх групп, сортирует их по экспертам и выполняет
@@ -494,7 +626,7 @@ TP и EP распределяют разные объекты. При TP оди�
 матриц; это не четыре полные копии одного эксперта.
 Источник: авторы Efficient DL Systems, [Week 6, PDF p. 129](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week06_dl_arithmetic/lecture.pdf), MIT; убраны только заголовок слайда и внешние поля.*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/expert-hybrid-review-2026-10/edls-moe-expert-parallel.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/expert-hybrid-review-2026-10/edls-moe-expert-parallel.png|EP в MoE: полные эксперты у владельцев и назначенные им строки]]
 
 *Экспертное разделение в той же лекции, [PDF p. 130](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week06_dl_arithmetic/lecture.pdf).
 GPU 1 получает назначенные его эксперту строки и вычисляет полные
@@ -515,12 +647,16 @@ TP полезен, когда один эксперт слишком велик 
 изменить число в формуле памяти: меняются размеры матриц, число сообщений
 и представление промежуточных тензоров.
 
+<a id="ep-divisibility"></a>
+
 При равном размещении число экспертов должно делиться на EP, а внутренняя
 ширина экспертной сети — на её TP. Некоторые реализации поддерживают
 более общий случай, другие требуют ровно столько-то экспертов на процесс.
 Проверка делимости необходима, но ещё не доказывает полезность конфигурации.
 На слишком маленьких матрицах затраты запуска и обменов могут превысить
 выигрыш от разделения.
+
+<a id="ep-dense-expert-replicas"></a>
 
 <a id="гибридный-и-3d-parallelism"></a>
 
@@ -569,6 +705,8 @@ world_size = 2 * 8 * 8 * 8 = 1024
 совместно используют распределённый набор экспертов. Другой $d$ хранит
 его вторую копию.
 
+<a id="ep-parameter-memory"></a>
+
 Пусть на конвейерной стадии $P_d$ параметров плотных матриц, которые
 действительно разделены по TP, и $P_e$ параметров 64 одинаковых экспертов.
 Один процесс хранит $P_d/8$ первых и $P_e/(8\cdot8)=P_e/64$ вторых.
@@ -577,6 +715,8 @@ world_size = 2 * 8 * 8 * 8 = 1024
 считаются отдельно: делить их число на восемь по этой формуле нельзя.
 Шардирование состояния оптимизатора также не возникает автоматически из
 EP: его задают отдельно, например ZeRO-1 внутри соответствующих групп реплик.
+
+<a id="ep-sp-communication"></a>
 
 <a id="forward-и-backward-в-этой-конфигурации"></a>
 
@@ -617,6 +757,8 @@ TP AllGather собирает строки от всех восьми TP-про�
 Каждый TP-процесс вычисляет частичный ответ; ReduceScatter суммирует части
 и возвращает каждому по 256 строк для обратного EP-обмена.
 
+<a id="ep-physical-byte-ledger"></a>
+
 | Этап прямого прохода | Буфер и исходящие данные на GPU |
 |---|---|
 | EP dispatch | 256 строк, 2 MiB; отправка 1.75 MiB |
@@ -649,6 +791,8 @@ DeepEP-подобный исполнитель может не пересыла�
 Поэтому 31.5 MiB не является ни измерением, ни универсальным требованием
 к профилю NCCL.
 
+<a id="ep-backward-collectives"></a>
+
 ### Обратные обмены и правильное усреднение
 
 Обратный проход обращает перестановки и коллективные операции.
@@ -667,6 +811,8 @@ DeepEP-подобный исполнитель может не пересыла�
 последовательности, нужно также сложить соответствующие вклады в его
 параметры. После этого копии плотных параметров синхронизируются по
 плотной DP-группе, а копии экспертных параметров — по EDP.
+
+<a id="ep-edp-loss-normalization"></a>
 
 Размер группы синхронизации ещё не определяет нормировку потери.
 Пусть все 16 исходных наборов имеют одинаковое число учитываемых токенов,
@@ -694,6 +840,8 @@ $$
 как в [[44 Distributed training и mixed precision]].
 Нормировку проверяют на градиентах одной и той же глобальной функции,
 а не по названию группы процессов.
+
+<a id="ep-parallel-folding"></a>
 
 ### Размещение и разные разбиения для внимания и MoE
 
@@ -727,6 +875,8 @@ CP=2 и делил только восемь плотных DP-реплик на
 Переход должен преобразовать размещение активаций между двумя
 разбиениями; одного переименования групп недостаточно.
 
+<a id="ep-report-configurations"></a>
+
 ## Две реальные конфигурации — не два универсальных рецепта
 
 **DeepSeek-V3.** В [техническом отчёте, версия 2, §3](https://arxiv.org/html/2412.19437v2)
@@ -747,6 +897,8 @@ TP=8, CP=16, PP=16, DP=8.
 появление CP отвечает задаче длинного контекста.
 Нельзя подставить EP вместо CP и считать, что получится та же модель
 или тот же обмен данными.
+
+<a id="ep-correctness-checks"></a>
 
 <a id="проверка-экспертного-параллелизма"></a>
 

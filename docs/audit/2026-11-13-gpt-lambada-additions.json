@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-13",
+  "scope": "Teach LAMBADA at the GPT-2 to GPT-3 transition in both locales, with original Figure 2(a).",
+  "review": {
+    "sources": "Paperno et al. §3.1 and §3.3; Radford et al. §3.3; Brown et al. §3.1.2, Table 3.2 and Appendix H.",
+    "workedCase": "Distinguish unrestricted selection, GPT-2 stop-word exclusion, restricting answers to words in the passage, and GPT-3 demonstrations; the toy scores are not model output.",
+    "provenance": "Figure 2(a) from the author PDF; ACL CC BY 4.0. The registry records the crop box, source hash and output hash.",
+    "verification": "Re-extracted the registered panel and matched its bytes. Built 2089 pages; 798 publication tests passed (13 skipped), 332 built-output tests passed and no broken internal routes, fragments or files were found. Inspected both locales at 375 and 1280 CSS px; no clipped labels or page overflow, and the link opens the matching GPT-3 subsection."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md",
+      "before_sha256": "d4dbec906c73e050c1123cb92fc4795ea51a9fcf7b9e10a1a335f6c59ea42afc",
+      "after_sha256": "ee32c516eaed5af2697689257b6545d1af233ee8a8bd493cd3dd9d0492150c1c",
+      "changes": [
+        {
+          "old": "  - https://aclanthology.org/Q19-1016/",
+          "new": "  - https://aclanthology.org/Q19-1016/\n  - https://aclanthology.org/P16-1144/"
+        },
+        {
+          "old": "В LAMBADA модель часто предсказывала грамматически возможное продолжение,\nкоторое не подходит как последнее слово предложения. Дополнительный\nфильтр повышал accuracy с 52.66% до 63.24%. Ограничение ответов только\nсловами из контекста, полезное одной из прежних систем, для GPT-2 вредило:\n19% правильных ответов не встречались в контексте.\n\nВ суммаризации исходная",
+          "new": "В суммаризации исходная"
+        },
+        {
+          "old": "## Генерация, запоминание и публикация модели",
+          "new": "<a id=\"gpt2-gpt3-lambada\"></a>\n\n### LAMBADA: как выбрать последнее слово\n\nВ LAMBADA из отрывка удаляют последнее слово. При составлении набора\n[Paperno et al., §3.1](https://aclanthology.org/P16-1144.pdf#page=4)\nоставляли отрывок, если двое участников восстановили слово по всему\nтексту, а ни один из десяти других не угадал его по одному последнему\nпредложению. Например, из «Утром Антон уехал на своём…» трудно понять,\nна чём он уехал. Если выше сказано, что он оставил снаружи велосипед,\nпоявляется подсказка. Оценка всё равно требует именно слова из отрывка:\nправдоподобный ответ не всегда совпадает с авторским.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-lambada-2026-11-13/paperno-lambada-figure2a.png|Две составные колонки. Светлая часть означает, что искомое слово уже встречалось в отрывке: больше 80% в LAMBADA и меньше 15% среди отрывков до отбора участниками.]]\n\n*Denis Paperno et al., [The LAMBADA dataset, рис. 2(a)](https://aclanthology.org/P16-1144.pdf#page=6),\n[CC BY 4.0](https://aclanthology.org/faq/copyright/). Панель из оригинала без перерисовки.*\n\nСравните светлые части колонок: в LAMBADA искомое слово уже\nвстречается в отрывке более чем в 80% случаев. В правой колонке\n`input` — случайная выборка из 5000 отрывков, показанных участникам\nдо отбора по их ответам; там таких случаев меньше 15%. Рисунок\nпоказывает, как отбор меняет состав набора. Он не показывает,\nс какой точностью модель умеет выбрать нужное слово среди уже\nпрочитанных. И если слова в отрывке нет, выбор только из прочитанного\nзаведомо исключает правильный ответ. В отчёте GPT-2 таких случаев\nбыло 19%, а ограничение ухудшило результат.\n\nЕсть и другая трудность: языковая модель не знает, что следующее\nслово должно закончить предложение. Пусть ей дали такой префикс:\n\n~~~text\nAnton left his bicycle outside. In the morning he rode away on his\n~~~\n\nДопустим, `very` получило вероятность 0,50,\n`bicycle` — 0,30, `scooter` — 0,20. Без ограничений можно выбрать\n`very` и продолжить `very old bicycle`. Для LAMBADA ответ `very` неверен:\nв тесте на этом месте стояло `bicycle`. Если бы правило выбора\nисключило `very`, победило бы `bicycle`. Сами оценки модели при этом\nне меняются. Числа придуманы для разбора; это не запуск GPT-2,\nи фильтр в примере не воспроизводит список OpenAI.\n\nВ [§3.3 отчёта GPT-2](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=5)\nавторы приближённо учли требование к последнему слову, исключив\nстоп-слова. Точность выросла с 52,66% до 63,24%. Такой фильтр не\nпроверяет, что любое оставшееся слово годится для конца предложения.\nВ [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#LAMBADA: указать, что нужен ровно один ответ|опыте GPT-3 с демонстрациями]]\nпоменяли вход: тот же пример можно оформить как пропуск и показать\nвыше готовую пару «пропуск → слово». У GPT-3 175B было 76,2% на\nобычном продолжении и 86,4% с 15 примерами заполнения пропуска.\nПри сравнении этих двух чисел меняются и формат, и число примеров;\nпри сравнении с 63,24% GPT-2 меняется также модель и способ выбора ответа.\n\n## Генерация, запоминание и публикация модели"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md",
+      "before_sha256": "a71441ded38d94b8388e5c196496d2b026c705b01bc6f77df218e581cc9a7edc",
+      "after_sha256": "1b7d101d5e366ea7764a35f5f6c034a0477b9849e77fd345c00cf21dd217c71d",
+      "changes": [
+        {
+          "old": "canonical_revision: \"d4dbec906c73e050c1123cb92fc4795ea51a9fcf7b9e10a1a335f6c59ea42afc\"",
+          "new": "canonical_revision: \"ee32c516eaed5af2697689257b6545d1af233ee8a8bd493cd3dd9d0492150c1c\""
+        },
+        {
+          "old": "  - https://aclanthology.org/Q19-1016/",
+          "new": "  - https://aclanthology.org/Q19-1016/\n  - https://aclanthology.org/P16-1144/"
+        },
+        {
+          "old": "In LAMBADA, the model often predicts a grammatical continuation that\ndoes not fit as the sentence's final word. An additional filter raises\naccuracy from 52.66% to 63.24%. Restricting answers to words in context,\nuseful for an earlier system, hurts GPT-2: 19% of correct answers do\nnot occur in context.\n\nThe summarization table",
+          "new": "The summarization table"
+        },
+        {
+          "old": "## Generation, memorization, and model release",
+          "new": "<a id=\"gpt2-gpt3-lambada\"></a>\n\n### LAMBADA: choosing the last word\n\nLAMBADA removes the last word from a passage. In building the dataset,\n[Paperno et al., §3.1](https://aclanthology.org/P16-1144.pdf#page=4)\nkept a passage if two readers recovered the word from the full passage\nand none of ten other readers guessed it from the final sentence alone.\n“In the morning he rode away on his…” leaves open what Anton rode.\nAn earlier sentence mentioning his bicycle gives the reader a clue.\nA plausible answer still counts as wrong if it does not match the\noriginal word.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-lambada-2026-11-13/paperno-lambada-figure2a.png|Two stacked bars. The light segment shows that the target word occurred earlier in over 80% of LAMBADA passages and under 15% of passages sampled before human filtering.]]\n\n*Denis Paperno et al., [The LAMBADA dataset, Figure 2(a)](https://aclanthology.org/P16-1144.pdf#page=6),\n[CC BY 4.0](https://aclanthology.org/faq/copyright/). Original panel, not redrawn.*\n\nCompare the light portions of the bars. The target word occurs\nearlier in over 80% of LAMBADA passages. The bar labeled `input`\nrepresents 5,000 randomly sampled passages shown to readers before\nfiltering on their answers. There, the share is under 15%. The figure\nshows how filtering changed the dataset, not how accurately a model\ncan find the right word among the words it has read. If the answer\ndoes not appear earlier, a copy-only rule rules it out entirely.\nIn the GPT-2 report this affected 19% of answers, and restricting\ncandidates to words in the passage lowered accuracy.\n\nThere is a separate problem: the language model does not know that\nthe next word must end the sentence. Give it this prefix:\n\n~~~text\nAnton left his bicycle outside. In the morning he rode away on his\n~~~\n\nSuppose `very` has probability 0.50, `bicycle` 0.30, and `scooter` 0.20.\nUnrestricted selection can pick `very` and go on to write `very old bicycle`.\nIn LAMBADA, `very` is wrong: the missing word was `bicycle`. If the\nselection rule excluded `very`, `bicycle` would win without changing\nthe scores the model produced. These numbers are for illustration,\nnot a GPT-2 run, and the example does not reproduce OpenAI's list.\n\nIn the [GPT-2 report, §3.3](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=5),\nthe authors exclude stop words as an approximation to the final-word\nconstraint. Accuracy rises from 52.66% to 63.24%. That filter does\nnot check whether every remaining word can end a sentence. The\n[[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning#LAMBADA: specifying exactly one answer|GPT-3 experiment with demonstrations]]\ninstead changes the input: the same passage can be written with a blank,\nwith a completed blank-and-answer pair above it. GPT-3 175B scores 76.2%\non plain continuation and 86.4% with 15 fill-in-the-blank examples.\nBetween those two results, both the format and the number of examples\nchange. Compared with GPT-2's 63.24%, the model and answer-selection\nprocedure also differ.\n\n## Generation, memorization, and model release"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "2f693c186b3ae103ad9ef68b09232384afa5534118e256779a5751f7062fe9c1",
+      "after_sha256": "29b7413299aa21f59cb07692b1bbaa7dcce497812490b5e3584411e2c3c4c08b",
+      "changes": [
+        {
+          "old": "  - id: curated-gpt2-coqa-conversation-flow-b606973444a2",
+          "new": "  - {\"id\":\"curated-gpt2-lambada-in-context-6fc74d6f6c42\",\"asset\":\"00 Учебник/Assets/Figures/curated/gpt-lambada-2026-11-13/paperno-lambada-figure2a.png\",\"title\":\"The LAMBADA dataset, Figure 2(a): Target word in or not in context\",\"author\":\"Denis Paperno, Germán Kruszewski, Angeliki Lazaridou, Quan Ngoc Pham, Raffaella Bernardi, Sandro Pezzelle, Marco Baroni, Gemma Boleda, Raquel Fernández\",\"source_url\":\"https://aclanthology.org/P16-1144/\",\"figure_url\":\"https://aclanthology.org/P16-1144.pdf#page=6\",\"source_image_url\":\"https://staff.fnwi.uva.nl/r.fernandezrovira/papers/2016/lambada-acl2016.pdf#page=6\",\"source_asset\":\"05 Источники/Papers/Source PDFs/paperno-p16-1144.pdf\",\"source_asset_sha256\":\"a50a4d049357b0f68edf0e8bfdf8d498461593db5ca930dd5decbff01d5dfc18\",\"source_page\":6,\"render_dpi\":360,\"render_page_size_px\":[2977,4210],\"crop_box_px\":[333,384,1056,1065],\"dimensions_px\":[723,681],\"sha256\":\"6fc74d6f6c4200501bc5668e3b9d70b59244ac3d8aa5ab97b46159300a603aaa\",\"bytes\":27267,\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence_url\":\"https://aclanthology.org/faq/copyright/\",\"derivation\":\"pdf-page-render-crop\",\"modifications\":\"Complete original panel (a), including both bars, all axis labels, legend and panel letter. Adjacent panels and caption excluded. No rescaling, relabeling or redraw.\",\"metadata_status\":\"verified\",\"rights_status\":\"source-license-verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-13\",\"used_in\":[\"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md\",\"en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md\"]}\n  - id: curated-gpt2-coqa-conversation-flow-b606973444a2"
+        }
+      ]
+    }
+  ]
+}

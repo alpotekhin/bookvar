@@ -12,6 +12,51 @@ function sha256(path: string): string {
 }
 
 describe('imbalanced-learn source-native corpus', () => {
+  it('pins the complete local gallery set and retains attribution in the generated guide', () => {
+    const { version, commit, docs_base, notice, notice_sha256, figures, galleries } = JSON.parse(
+      readFileSync(resolve(sourceRoot, 'figures.json'), 'utf8')
+    ) as {
+      version: string; commit: string; docs_base: string; notice: string; notice_sha256: string;
+      figures: Record<string, { gallery: string; asset: string; alt: string;
+        sha256: string; bytes: number; width: number; height: number }>;
+      galleries: Record<string, { title: string; author: string; code_path: string;
+        code_download_url: string; code_sha256: string; page_sha256: string }>;
+    };
+    expect(version).toBe('0.14.2');
+    expect(commit).toBe('8504e95f0160f61d1b617ca66f779646d2ee609e');
+    expect(docs_base).toBe('https://imbalanced-learn.org/0.14/');
+    expect(sha256(resolve(root, notice))).toBe(notice_sha256);
+    expect(notice_sha256).toBe(sha256(resolve(sourceRoot, 'original/LICENSE')));
+    expect(Object.keys(figures)).toHaveLength(23);
+    expect(Object.keys(galleries)).toHaveLength(7);
+    expect(Object.values(figures).filter(figure => figure.asset.startsWith('Assets/'))).toHaveLength(20);
+
+    const publication = JSON.parse(readFileSync(resolve(sourceRoot, 'published/import-manifest.json'), 'utf8'));
+    const pages = publication.pages.map(({ output }: { output: string }) => readFileSync(resolve(root, output), 'utf8')) as string[];
+    for (const [filename, figure] of Object.entries(figures)) {
+      expect(filename).toMatch(/^sphx_glr_plot_\w+_\d{3}\.png$/);
+      const asset = resolve(root, figure.asset);
+      const bytes = readFileSync(asset);
+      expect(bytes.subarray(0, 8).toString('hex')).toBe('89504e470d0a1a0a');
+      expect([bytes.length, bytes.readUInt32BE(16), bytes.readUInt32BE(20)])
+        .toEqual([figure.bytes, figure.width, figure.height]);
+      expect(sha256(asset)).toBe(figure.sha256);
+      const embed = `![[${figure.asset}|${figure.alt}]]`;
+      const owners = pages.filter(page => page.includes(embed));
+      expect(owners).toHaveLength(1);
+      const [, caption] = owners[0].split(embed);
+      const gallery = galleries[figure.gallery];
+      expect(caption.split('\n').filter(Boolean)[0])
+        .toContain(`${gallery.author}, [${gallery.title}](${docs_base}${figure.gallery})`);
+      expect(caption.split('\n').filter(Boolean)[0]).toContain(`${docs_base}_images/${filename}`);
+      expect(gallery.code_path).toBe(figure.gallery.replace('auto_examples/', 'examples/').replace('.html', '.py'));
+      expect(gallery.code_download_url).toMatch(/^https:\/\/imbalanced-learn\.org\/0\.14\/_downloads\/[a-f0-9]{32}\/plot_\w+\.py$/);
+      expect(gallery.code_sha256).toMatch(/^[a-f0-9]{64}$/);
+      expect(gallery.page_sha256).toMatch(/^[a-f0-9]{64}$/);
+    }
+    expect(pages.join('\n')).not.toContain('https://imbalanced-learn.org/stable/_images/');
+  });
+
   it('pins every imported original to the 0.14.2 upstream commit and SHA-256', () => {
     const manifest = parse(readFileSync(resolve(sourceRoot, 'manifest.yml'), 'utf8')) as {
       source: {
@@ -122,6 +167,15 @@ describe('imbalanced-learn source-native corpus', () => {
         .replace(/^>.*$/gm, '');
       expect(narrative.match(/[A-Za-z]{3,}/g)?.length ?? 0).toBeGreaterThan(20);
     }
+  });
+
+  it('renders standalone RST prompts as code and explains labels clipped in the original PNG', () => {
+    const source = readFileSync(resolve(sourceRoot, 'original/user-guide/model_selection.rst'), 'utf8');
+    const markdown = readFileSync(resolve(sourceRoot, 'published/user-guide/model-selection.md'), 'utf8');
+    const prompts = (text: string) => text.match(/^\s*(?:>>>|\.\.\.) .+$/gm)?.map(line => line.trim());
+    expect(prompts(markdown)).toEqual(prompts(source));
+    expect(prompts(markdown.replace(/^```python\n[\s\S]*?^```$/gm, ''))).toBeUndefined();
+    expect(markdown).toContain('Top: InstanceHardnessCV. Bottom: StratifiedKFold.');
   });
 
   it('renders all 27 bibliography entries as individually addressable records', () => {

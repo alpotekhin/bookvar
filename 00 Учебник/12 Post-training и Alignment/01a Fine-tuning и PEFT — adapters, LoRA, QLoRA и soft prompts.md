@@ -3,8 +3,8 @@ title: Fine-tuning and PEFT — adapters, LoRA, QLoRA and soft prompts
 type: textbook-chapter
 status: canonical
 source_language: en
-last_updated: 2026-10-29
-last_verified: 2026-10-29
+last_updated: 2026-11-14
+last_verified: 2026-11-14
 aliases: [Fine-tuning, PEFT, LoRA, QLoRA, Prompt tuning, Prefix tuning]
 previous: "[[00 Учебник/12 Post-training и Alignment/01 SFT и instruction data]]"
 next: "[[00 Учебник/12 Post-training и Alignment/02 Preference data]]"
@@ -24,6 +24,9 @@ reference_terms:
   - label: QLoRA — обучение с квантованной базой
     label_en: QLoRA — training through a quantized base
     anchor: qlora-training
+  - label: QLoRA — градиент через замороженную квантованную матрицу
+    label_en: QLoRA — gradient through a frozen quantized projection
+    anchor: qlora-frozen-gradient-example
   - label: Soft prompts и prompt tuning
     label_en: Soft prompts and prompt tuning
     anchor: soft-prompts
@@ -64,6 +67,7 @@ primary_sources:
   - https://proceedings.mlr.press/v97/houlsby19a.html
   - https://arxiv.org/html/2106.09685v2
   - https://arxiv.org/html/2305.14314v1
+  - https://arxiv.org/html/2407.21783v3#S3.T3
   - https://aclanthology.org/2021.emnlp-main.243/
   - https://aclanthology.org/2021.acl-long.353/
   - https://github.com/huggingface/peft/tree/fee923eb6e0382236478e4259bc69f4aeaab6813
@@ -278,9 +282,40 @@ update learned by unconstrained full fine-tuning must have low rank.
 For a $4096\times4096$ projection and $r=8$, the factors contain
 $8(4096+4096)=65\,536$ parameters, versus $16\,777\,216$ original weights:
 one 256th as many. Applying this choice to two projections in each of 32
-layers gives $4\,194\,304$ trainable factor parameters. A model with GQA
-can have rectangular K/V projections, so the actual module shapes must be
-used instead of assigning $4096^2$ to every projection.
+layers gives $4\,194\,304$ trainable factor parameters if both projections
+are square.
+
+<a id="lora-gqa-budget"></a>
+
+### Compare target modules at the same parameter budget
+
+[Llama 3 8B](https://arxiv.org/html/2407.21783v3#S3.T3) also has 32
+layers and a hidden width of 4,096, but it has 32 query heads and
+only eight K/V heads. Each head has width $4096/32=128$.
+A value projection therefore returns $8\cdot128=1024$ coordinates,
+while a query projection returns all 4,096. At rank 8, their LoRA
+branches have $8(4096+1024)=40\,960$ and $8(4096+4096)=65\,536$
+parameters respectively. The model-wide total for query and value is
+$(65\,536+40\,960)\cdot32=3\,407\,872$.
+
+| Projections adapted in each block | Rank | Trainable factor parameters in 32 blocks |
+| --- | ---: | ---: |
+| Query and value | 8 | 3,407,872 |
+| All four attention projections | 4 | 3,407,872 |
+| All seven attention and FFN projections | 8 | 20,971,520 |
+
+The first two rows have the same budget: adding keys costs as much as
+adding values, and the attention output projection costs as much as queries.
+Halving the rank offsets doubling the sum of the projection dimensions.
+The third row includes three SwiGLU matrices that connect widths 4,096 and
+14,336. They add $3\cdot8(4096+14336)$ parameters per block beyond
+adapting all four attention projections at rank 8.
+These counts exclude embeddings, the output head, biases and any other
+trainable tensors. At BF16 the first two checkpoints would each hold
+about 6.82 MB of factors before metadata. To compare their quality, keep
+the same SFT targets and
+[[00 Учебник/12 Post-training и Alignment/01 SFT и instruction data#sft-accumulation-denominator|loss denominator]]
+as well as the same data and evaluation.
 
 The original LoRA paper investigates which attention projections to adapt
 and how rank affects particular tasks. Its low-rank results on GPT-3 and
@@ -322,6 +357,23 @@ points on WikiSQL and 0.1 on MNLI-m. The 4.7M run is not better than the
 full-weight baseline on every displayed number. Increasing the adapter
 budget also does not improve every task. These results do not define a
 universal “95–100% of full fine-tuning” quality range.
+
+<a id="lora-gpt3-budget-plot"></a>
+
+![[00 Учебник/Assets/Figures/curated/lora-primary-2026-11-10/lora-gpt3-figure2.png|Original GPT-3 175B plot: trainable parameter count versus validation accuracy on WikiSQL and MultiNLI-matched, comparing LoRA, full fine-tuning and two prefix methods.]]
+
+*Edward J. Hu et al., [LoRA, Figure 2](https://arxiv.org/html/2106.09685v2#S5.F2).
+[Microsoft's repository original](https://github.com/microsoft/LoRA/blob/c4593f060e6a368d7bb5af5273b8e42810cdef90/examples/NLG/figures/LoRA_GPT3.PNG),
+[MIT](/licenses/microsoft-lora-c4593f06-MIT.txt). Image and original caption reproduced unchanged.*
+
+On the horizontal axis, 7 means $10^7$ trainable parameters, not 7 million.
+The full fine-tuning point at the far right still uses the same 175B
+base as the LoRA triangles. The leftmost LoRA point, at about 4.7 million
+parameters, is slightly below full fine-tuning on WikiSQL (left) and
+above it on MultiNLI-matched (right). The crosses and stars show the
+two prefix methods; several of their larger settings score lower than
+smaller ones. The plot compares choices for this base and these two tasks,
+not the effect of making the base model larger.
 
 Budget labels also change checkpoint arithmetic: 4.7 million FP16 values
 occupy about 9.4 decimal MB, whereas 18 million occupy about 36 MB, before
@@ -516,6 +568,66 @@ It is not necessary to differentiate a rounding operation to update the
 factors. Quantization changes the fixed function through which those
 gradients pass; it does not remove that computation.
 
+<a id="qlora-frozen-gradient-example"></a>
+### One update through a frozen quantized projection
+
+Take a floating-point base $W_0=\operatorname{diag}(1.1,1.9)$.
+For this constructed example, use uniform signed four-bit values with
+scale $0.5$, rather than NF4. Rounding produces codes $(2,4)$ on the
+diagonal, reconstructed as $\widetilde W_0=\operatorname{diag}(1,2)$.
+The code below keeps those codes in ordinary integer tensors; it does
+not pack two codes into a byte or implement a GPU quantization kernel.
+
+Set $x=(1,-1)^T$, $A=(1,2)$, $B=(0,0)^T$, $s=1$, and
+$\mathcal L=\tfrac12\|h\|^2$. The reconstructed base gives
+$h=(1,-2)^T$ and loss $2.5$. Since $Ax=-1$, the LoRA gradients are
+$\nabla_B=(-1,2)^T$ and $\nabla_A=(0,0)$. The input receives
+$\nabla_x=\widetilde W_0^Th=(1,-4)^T$. An earlier trainable layer can
+use this input gradient even though the base codes and scale stay fixed.
+
+```python
+q_original = torch.diag(torch.tensor([1.1, 1.9], dtype=dtype))
+q_scale = torch.tensor(.5, dtype=dtype)  # fixed, not an optimizer parameter
+q_codes = torch.round(q_original / q_scale).clamp(-8, 7).to(torch.int8)
+q_codes_before = q_codes.clone()
+q_base = q_codes.to(dtype) * q_scale
+q_x = torch.tensor([1., -1.], dtype=dtype, requires_grad=True)
+q_a = nn.Parameter(torch.tensor([[1., 2.]], dtype=dtype))
+q_b = nn.Parameter(torch.zeros(2, 1, dtype=dtype))
+q_optimizer = torch.optim.SGD([q_a, q_b], lr=.1)
+
+def quantized_adapter_output():
+    return q_base @ q_x + q_b @ (q_a @ q_x)
+
+q_initial = quantized_adapter_output()
+torch.testing.assert_close(q_initial, torch.tensor([1., -2.], dtype=dtype))
+assert not torch.allclose(q_initial, q_original @ q_x)
+q_loss = .5 * q_initial.square().sum()
+assert math.isclose(q_loss.item(), 2.5)
+q_loss.backward()
+torch.testing.assert_close(q_b.grad, torch.tensor([[-1.], [2.]], dtype=dtype))
+torch.testing.assert_close(q_a.grad, torch.zeros_like(q_a))
+torch.testing.assert_close(q_x.grad, torch.tensor([1., -4.], dtype=dtype))
+assert q_base.grad is None and q_scale.grad is None and q_codes.grad is None
+
+q_optimizer.step()
+torch.testing.assert_close(
+    quantized_adapter_output(), torch.tensor([.9, -1.8], dtype=dtype)
+)
+assert math.isclose((.5 * quantized_adapter_output().square().sum()).item(), 2.025)
+torch.testing.assert_close(q_codes, q_codes_before)
+```
+
+Only $B$ changes on this first step; neither the rounding operation nor
+the integer codes need a weight gradient. Zero-initialized $B$ preserves
+the **reconstructed** base output, not the output of the original
+floating-point weights. This example follows the frozen-base gradient
+path in [QLoRA, §3, equations 5–6](https://arxiv.org/html/2305.14314v1#S3);
+its uniform codebook and FP64 arithmetic are chosen for inspection,
+not to reproduce NF4, double quantization or BF16 rounding.
+
+### NF4, double quantization and paged optimizers
+
 Three parts of the original recipe address different memory costs.
 **NF4** stores block-normalized weights using a 16-value codebook designed
 around a normal distribution. **Double quantization** compresses the
@@ -542,13 +654,33 @@ of a particular library. Even before scale overhead, 175 billion 4-bit
 weights require $175\cdot10^9/2=87.5$ decimal GB. Such a base cannot fit
 in 48 GB merely because its trainable adapter is small.
 
-The familiar “65B on one 48 GB GPU” result belongs to the published QLoRA
-configuration. Its reported 99.3% comparison concerns Guanaco and ChatGPT
-on the Vicuna evaluation, not equality with full fine-tuning on every
-benchmark. The recipe adds adapters broadly across linear layers rather
-than only the query/value projections of one older LoRA experiment.
-PEFT exposes that targeting choice as `target_modules="all-linear"`;
-the resulting trainable modules still need inspection for the actual model.
+<a id="qlora-target-placement"></a>
+
+### What changes when adapters are moved to other projections
+
+![[00 Учебник/Assets/Figures/curated/peft-qlora-2026-11-14/qlora-figure2-target-modules.svg|Five groups of runs. QLoRA-All is around 64.5 ROUGE-L, QLoRA-FFN around 64.0 and QLoRA-Attention around 63.4. The authors' 16-bit full fine-tuning baseline is around 64.3.]]
+
+*Tim Dettmers, Artidoro Pagnoni, Ari Holtzman and Luke Zettlemoyer,
+[QLoRA, Figure 2](https://arxiv.org/html/2305.14314v1#S4.F2),
+[original SVG](https://arxiv.org/html/2305.14314v1/hyper.svg),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Unmodified figure.*
+
+The authors fine-tuned the original LLaMA 7B on Alpaca. Each dot is
+a run with a different seed; height is ROUGE-L. In the first three
+groups the researchers stored the base in four bits. Adapting
+attention alone reaches about 63.4; FFN alone reaches about 64.0.
+Adapting both reaches about 64.5. The authors' tuned 16-bit full
+fine-tuning baseline, `Alpaca (ours)`, is about 64.3. The original
+Stanford-Alpaca recipe scores lower in this experiment; using it as
+the only baseline would overstate the gain.
+
+Moving from one group to another changes the placement and can also
+change the number of trainable parameters. Unlike
+[LoRA Table 5](https://arxiv.org/html/2106.09685v2#S7.T5),
+the figure does not hold that number fixed. Nor do the dots measure
+variation across datasets. In PEFT, `target_modules="all-linear"`
+selects a broad set of modules. List the actual matches before applying
+the seven-projection count from Llama 3 8B to another model.
 
 ### Account for base weights, trainable state and activations separately
 
@@ -574,6 +706,30 @@ about 50.3 MB at 12 bytes per parameter. Reducing that adapter by half
 does not halve the 14 GB base, or the activation memory needed for a long
 sequence. Quantization, checkpointing, sequence length, batch size and
 sharding address different terms.
+
+<a id="qlora-memory-breakdown"></a>
+
+![[00 Учебник/Assets/Figures/curated/peft-qlora-2026-11-14/qlora-figure6-training-memory.svg|Four normalized stacks for 7B, 13B, 33B and 65B. Total estimates are 6.9, 11.3, 24.7 and 45.0 GB. The quantized base is the largest block in every stack.]]
+
+*Dettmers et al., [QLoRA, Appendix G, Figure 6](https://arxiv.org/html/2305.14314v1#A7.F6),
+[original SVG](https://arxiv.org/html/2305.14314v1/mem.svg),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Unmodified figure.*
+
+All four stacks end at 100%, so read absolute memory from the labels.
+The 65B column has a total estimate of 45.0 GB. Its base alone is
+37,074 MB and the optimizer contribution is 5,760 MB. The base accounts
+for roughly 82% of the total. The estimate uses a batch of one,
+512 tokens and gradient checkpointing; the input-gradient term omits
+attention. Longer inputs can enlarge the part of memory that the chart
+only estimates. The separate “65B on a 48 GB GPU” result used the
+authors' training configuration with paged optimizer state. This
+stack is not a peak-memory measurement or a promise that 3 GB will
+be free on a different run.
+
+The paper also reports 99.3% for Guanaco 65B relative to ChatGPT on
+[the Vicuna evaluation](https://arxiv.org/html/2305.14314v1#S5.T6).
+That number is a ratio of scores assigned by GPT-4, not an estimate
+of memory, a win probability or a comparison with full fine-tuning.
 
 ```python
 rank, width, layers = 8, 4096, 32

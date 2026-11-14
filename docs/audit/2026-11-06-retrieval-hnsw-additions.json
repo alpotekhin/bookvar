@@ -1,0 +1,334 @@
+{
+  "date": "2026-11-06",
+  "status": "source-runtime-reader-local-build-verified",
+  "scope": "Whole retrieval owner review; preserve six earlier executable examples,eight originals and all prior display derivations. Expand HNSW base-layer queues and construction-neighbor reasoning;27 subjects per locale. No translation or release.",
+  "files": [
+    {
+      "source": "00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid.md",
+      "before_sha256": "c2f49438a49ecdf7aac70a44605763ebdcf3311781fb4b10c4514470ceab25bc",
+      "after_sha256": "65d4dc2a013312d1317a85546c11d2592d47b1ce7f98fb452d203ab06e35e6bd",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-20\nlast_verified: 2026-10-20",
+          "new": "last_updated: 2026-11-06\nlast_verified: 2026-11-06\nsource_language: mixed"
+        },
+        {
+          "old": "  - https://github.com/castorini/anserini/blob/07d380635f1719736c6042c6e971fd7d08ee125e/docs/experiments-beir-fusion.md",
+          "new": "  - https://github.com/castorini/anserini/blob/07d380635f1719736c6042c6e971fd7d08ee125e/docs/experiments-beir-fusion.md\n  - https://github.com/nmslib/hnswlib/tree/3f3429661187e4c24a490a0f148fc6bc89042b3d\nreference_terms:\n  - label: \"Полнота кандидатов и покрытие сведений\"\n    label_en: \"Candidate recall and evidence coverage\"\n    anchor: ret-recall\n  - label: \"Retriever, reader и бюджеты кандидатов\"\n    label_en: \"Retriever, reader and candidate budgets\"\n    anchor: ret-reader\n  - label: \"Инвертированный индекс и postings\"\n    label_en: \"Inverted indexes and postings\"\n    anchor: ret-postings\n  - label: \"TF–IDF: частота и редкость\"\n    label_en: \"TF–IDF: frequency and rarity\"\n    anchor: ret-tfidf\n  - label: \"BM25: насыщение и длина документа\"\n    label_en: \"BM25: saturation and document length\"\n    anchor: ret-bm25\n  - label: \"BM25: численный пример\"\n    label_en: \"BM25: worked example\"\n    anchor: ret-bm25-example\n  - label: \"Flat search, IP, L2 и косинус\"\n    label_en: \"Flat search, IP, L2 and cosine\"\n    anchor: ret-flat\n  - label: \"ANN recall и качество поиска\"\n    label_en: \"ANN recall and retrieval quality\"\n    anchor: ret-ann\n  - label: \"IVF: списки, центры и nprobe\"\n    label_en: \"IVF: lists, centroids and nprobe\"\n    anchor: ret-ivf\n  - label: \"HNSW: уровни, M и ширина поиска\"\n    label_en: \"HNSW: layers, M and search breadth\"\n    anchor: ret-hnsw\n  - label: \"PQ, ADC, остатки и OPQ\"\n    label_en: \"PQ, ADC, residuals and OPQ\"\n    anchor: ret-pq\n  - label: \"Faiss: train, add и search\"\n    label_en: \"Faiss: train, add and search\"\n    anchor: ret-faiss\n  - label: \"Chunking: границы и перекрытие\"\n    label_en: \"Chunking: boundaries and overlap\"\n    anchor: ret-chunking\n  - label: \"Структурное и child–parent retrieval\"\n    label_en: \"Structured and child–parent retrieval\"\n    anchor: ret-parent\n  - label: \"Происхождение фрагмента и смещения\"\n    label_en: \"Chunk provenance and offsets\"\n    anchor: ret-provenance\n  - label: \"Декомпозиция, multi-query и ограничения запроса\"\n    label_en: \"Decomposition, multi-query and query constraints\"\n    anchor: ret-query\n  - label: \"HyDE: гипотетический документ и реальные источники\"\n    label_en: \"HyDE: hypothetical documents and real sources\"\n    anchor: ret-hyde\n  - label: \"Pre-/post-filtering и проверка доступа\"\n    label_en: \"Pre-/post-filtering and authorization\"\n    anchor: ret-filtering\n  - label: \"Масштабы оценок при гибридном поиске\"\n    label_en: \"Score scales in hybrid retrieval\"\n    anchor: ret-score-scale\n  - label: \"RRF: ранги, веса и глубина выдачи\"\n    label_en: \"RRF: ranks, weights and retrieval depth\"\n    anchor: ret-rrf\n  - label: \"Union recall и потери после fusion\"\n    label_en: \"Union recall and post-fusion losses\"\n    anchor: ret-fusion-limits\n  - label: \"Версионирование корпуса, модели и индекса\"\n    label_en: \"Corpus, model and index versioning\"\n    anchor: ret-version\n  - label: \"Смена индекса, кэши и отзыв доступа\"\n    label_en: \"Index cutover, caches and access revocation\"\n    anchor: ret-cutover\n  - label: \"Трасса потерянного ответа\"\n    label_en: \"Tracing a lost answer\"\n    anchor: ret-trace\n  - label: \"Раздельная оценка каналов, ANN и fusion\"\n    label_en: \"Separate evaluation of channels, ANN and fusion\"\n    anchor: ret-evaluation\n  - label: \"HNSW: очереди, efSearch и остановка\"\n    label_en: \"HNSW: queues, efSearch and stopping\"\n    anchor: ret-hnsw-queue\n  - label: \"HNSW: выбор связей при построении\"\n    label_en: \"HNSW: construction neighbor selection\"\n    anchor: ret-hnsw-links"
+        },
+        {
+          "old": "## 1. Формальная постановка",
+          "new": "<a id=\"ret-recall\"></a>\n## 1. Формальная постановка"
+        },
+        {
+          "old": "### Поиск кандидатов и чтение",
+          "new": "<a id=\"ret-reader\"></a>\n### Поиск кандидатов и чтение"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/source-first-60-64/openqa-retriever-reader.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/source-first-60-64/openqa-retriever-reader.png|DrQA: document retriever followed by extractive document reader]]"
+        },
+        {
+          "old": "### От термина к списку документов",
+          "new": "<a id=\"ret-postings\"></a>\n### От термина к списку документов"
+        },
+        {
+          "old": "### TF–IDF: частота и редкость",
+          "new": "<a id=\"ret-tfidf\"></a>\n### TF–IDF: частота и редкость"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/source-first-60-64/openqa-tfidf-retriever.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/source-first-60-64/openqa-tfidf-retriever.png|DrQA TF–IDF retrieval over Wikipedia articles]]"
+        },
+        {
+          "old": "### BM25: насыщение частоты и длина",
+          "new": "<a id=\"ret-bm25\"></a>\n### BM25: насыщение частоты и длина"
+        },
+        {
+          "old": "### Один термин в числах",
+          "new": "<a id=\"ret-bm25-example\"></a>\n### Один термин в числах"
+        },
+        {
+          "old": "### Что остаётся после вычисления эмбеддингов",
+          "new": "<a id=\"ret-flat\"></a>\n### Что остаётся после вычисления эмбеддингов"
+        },
+        {
+          "old": "### Где возникает приближение",
+          "new": "<a id=\"ret-ann\"></a>\n### Где возникает приближение"
+        },
+        {
+          "old": "### IVF: сначала список, затем векторы",
+          "new": "<a id=\"ret-ivf\"></a>\n### IVF: сначала список, затем векторы"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/ivf-build.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/ivf-build.png|IVF construction: centroids, assignments and inverted lists]]"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/ivf-search.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/ivf-search.png|IVF search across one or several selected lists]]"
+        },
+        {
+          "old": "### HNSW: поиск по графу",
+          "new": "<a id=\"ret-hnsw\"></a>\n### HNSW: поиск по графу"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/hnsw.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/hnsw.png|HNSW search through upper layers and the base-layer graph]]"
+        },
+        {
+          "old": "Apache-2.0; без изменений. Пунктир связывает появления одной вершины\nна уровнях, стрелки показывают поиск. Фиолетовая точка — запрос,",
+          "new": "Apache-2.0; без изменений. Пунктир между жёлтыми точками связывает\nпоявления одной вершины на уровнях, стрелки показывают поиск.\nФиолетовая точка — запрос,"
+        },
+        {
+          "old": "### Product quantization: код вместо координат",
+          "new": "<a id=\"ret-hnsw-queue\"></a>\n#### Candidate queues and the stopping rule\n\nThe authors distinguish the result count from the search width:\n\n> ```ef``` - the size of the dynamic list for the nearest neighbors (used during the search). Higher ```ef```\n> leads to more accurate but slower search. ```ef``` cannot be set lower than the number of queried nearest neighbors\n> ```k```. The value ```ef``` of can be anything between ```k``` and the size of the dataset.\n\n*hnswlib authors, [HNSW algorithm parameters, v0.8.0](https://github.com/nmslib/hnswlib/blob/3f3429661187e4c24a490a0f148fc6bc89042b3d/ALGO_PARAMS.md).\nOriginal English retained; [Apache-2.0](/licenses/hnswlib-3f342966-Apache-2.0.txt).*\n\nAt the base layer, keep two priority queues. The frontier contains vertices\nwhose adjacency lists may still be inspected, with the closest vertex first.\nThe result queue retains at most `ef` current best vertices, with the farthest\none available for removal. A visited set prevents repeated distance calculations\nfor vertices reached through several edges.\n\nStart both queues with the entry vertex. Pop the closest frontier candidate\nand inspect its previously unseen neighbors. A neighbor enters the queues if\nthe result queue is not full or it is closer than the current worst result.\nIf the result queue grows beyond `ef`, remove its farthest member.\nThe two queues serve different purposes: a vertex removed from the results\ncan still have a pending frontier entry.\n\nFor the unfiltered, no-deletion search used here, stop when the closest remaining\nfrontier candidate is farther than the worst retained result and the result\nqueue is full. This is an approximate stopping rule. A far frontier vertex can\nstill have an edge to a very close, unseen vertex; its own distance is not\na lower bound on all vertices reachable through it.\n\nReturn to the chain above and use squared L2 distances. From query 0,\nthe distances to A, B and C are 16, 25 and 0.01.\n\n| Width / expansion | Result queue and next step |\n| --- | --- |\n| `ef=1`, A | A: 16. Reject B: 25; the frontier becomes empty. |\n| `ef=2`, A | A: 16, B: 25. Keep B because the result queue has space. |\n| `ef=2`, B | C: 0.01, A: 16. Discover C and remove B from results. |\n| `ef=2`, C | C: 0.01, A: 16. No unseen neighbors; return C for `k=1`. |\n\nThe wider search expands three vertices even though `ef=2`.\nThe width limits retained results, not the total number of distance calculations\nor expansions. The final response can still contain just one neighbor.\n\nThe implementation below follows the two-queue logic in\n[hnswlib `searchBaseLayerST`](https://github.com/nmslib/hnswlib/blob/3f3429661187e4c24a490a0f148fc6bc89042b3d/hnswlib/hnswalg.h#L311).\nIt uses a supplied one-dimensional graph to expose the search steps.\nIt does not implement insertion, upper layers, deletion, filtering or the\noptimized memory layout of hnswlib. The Python code and worked graph are\nBookvar teaching additions, not a performance measurement of the library.\n\n```python\nimport heapq\nimport math\n\n\ndef search_layer_demo(points, graph, query, entry, ef, k=1):\n    if (not isinstance(ef, int) or isinstance(ef, bool)\n            or not isinstance(k, int) or isinstance(k, bool) or not 1 <= k <= ef):\n        raise ValueError(\"need integer 1 <= k <= ef\")\n    if entry not in points or set(points) != set(graph):\n        raise ValueError(\"need an entry and an adjacency list for every vertex\")\n    if not math.isfinite(query) or any(not math.isfinite(x) for x in points.values()):\n        raise ValueError(\"need finite one-dimensional coordinates\")\n    if any(v not in points for neighbors in graph.values() for v in neighbors):\n        raise ValueError(\"every edge must point to a known vertex\")\n\n    distance = lambda v: (points[v] - query) ** 2\n    frontier = [(distance(entry), entry)]       # nearest unexpanded first\n    best = [(-distance(entry), entry)]          # farthest retained first\n    visited, expanded = {entry}, []\n    while frontier:\n        d, vertex = heapq.heappop(frontier)\n        if len(best) == ef and d > -best[0][0]:\n            break\n        expanded.append(vertex)\n        for neighbor in graph[vertex]:\n            if neighbor in visited:\n                continue\n            visited.add(neighbor)\n            dn = distance(neighbor)\n            if len(best) < ef or dn < -best[0][0]:\n                heapq.heappush(frontier, (dn, neighbor))\n                heapq.heappush(best, (-dn, neighbor))\n                if len(best) > ef:\n                    heapq.heappop(best)\n    return sorted((-d, v) for d, v in best)[:k], visited, expanded\n\n\npoints = {\"A\": 4., \"B\": 5., \"C\": .1}\ngraph = {\"A\": [\"B\"], \"B\": [\"A\", \"C\"], \"C\": [\"B\"]}\nnarrow, _, _ = search_layer_demo(points, graph, 0., \"A\", ef=1)\nwide, visited, expanded = search_layer_demo(points, graph, 0., \"A\", ef=2)\nassert narrow[0][1] == \"A\" and wide[0][1] == \"C\"\nassert visited == set(points) and expanded == [\"A\", \"B\", \"C\"]\nassert len(expanded) > 2  # ef is not a hard limit on graph expansions\nassert math.isclose(wide[0][0], .01)\n```\n\nIncreasing the width cannot create a missing graph connection. If a component\ncontaining the true nearest neighbor is unreachable from the entry, even a\nwidth equal to the whole database cannot reach it. The graph structure and\nentry selection therefore affect recall separately from the query-time width.\nReturning to all IVF lists has a different property:\nwith IVFFlat it explicitly visits the complete database.\n\n<a id=\"ret-hnsw-links\"></a>\n#### Why construction does not keep only the closest links\n\nIn hnswlib, [getNeighborsByHeuristic2](https://github.com/nmslib/hnswlib/blob/3f3429661187e4c24a490a0f148fc6bc89042b3d/hnswlib/hnswalg.h#L443)\nconsiders candidate neighbors in increasing distance from the new vertex.\nAfter accepting a neighbor, it can reject another candidate that is closer\nto an already accepted neighbor than to the new vertex. The candidate may\nprovide a redundant route through the same nearby region.\n\nFor a new vertex at 0 and candidates A=1, B=1.1 and C=−1.2, the two closest\ncandidates are A and B. With a two-link budget, the heuristic first accepts A.\nIt rejects B because the A–B distance is 0.1, smaller than B's distance 1.1\nfrom the new vertex. It then accepts C: the A–C distance 2.2 exceeds C's\ndistance 1.2 from the new vertex. The two links point to opposite sides\nrather than the same tight group.\n\nThe actual code compares the configured distance function; squared L2 gives\nthe same decisions in this example. This local heuristic does not guarantee\na globally optimal graph or complete connectivity. `efConstruction` controls\nthe candidate search used while adding vertices; `M` limits the retained\nconnections. A wide construction search and a large connection budget change\ndifferent parts of the graph-building procedure.\n\n<a id=\"ret-pq\"></a>\n### Product quantization: код вместо координат"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/pq-codebooks.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/pq-codebooks.png|Product quantization: subspaces, codebooks and vector codes]]"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/pq-search.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/pq-search.png|PQ distance lookup tables and summed subspace distances]]"
+        },
+        {
+          "old": "### Проверка настоящего индекса Faiss",
+          "new": "<a id=\"ret-faiss\"></a>\n### Проверка настоящего индекса Faiss"
+        },
+        {
+          "old": "### Границы фрагмента меняют доступную информацию",
+          "new": "<a id=\"ret-chunking\"></a>\n### Границы фрагмента меняют доступную информацию"
+        },
+        {
+          "old": "### Структура вместо одного размера окна",
+          "new": "<a id=\"ret-parent\"></a>\n### Структура вместо одного размера окна"
+        },
+        {
+          "old": "### Происхождение фрагмента",
+          "new": "<a id=\"ret-provenance\"></a>\n### Происхождение фрагмента"
+        },
+        {
+          "old": "### Сохранить условие запроса",
+          "new": "<a id=\"ret-query\"></a>\n### Сохранить условие запроса"
+        },
+        {
+          "old": "### HyDE: искать по гипотетическому документу",
+          "new": "<a id=\"ret-hyde\"></a>\n### HyDE: искать по гипотетическому документу"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/hyde-pipeline.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/hyde-pipeline.png|HyDE: hypothetical documents used to retrieve real corpus documents]]"
+        },
+        {
+          "old": "### Фильтр до и после top-k",
+          "new": "<a id=\"ret-filtering\"></a>\n### Фильтр до и после top-k"
+        },
+        {
+          "old": "### Почему сумма оценок зависит от масштаба",
+          "new": "<a id=\"ret-score-scale\"></a>\n### Почему сумма оценок зависит от масштаба"
+        },
+        {
+          "old": "### Два списка и одно решение",
+          "new": "<a id=\"ret-rrf\"></a>\n### Два списка и одно решение"
+        },
+        {
+          "old": "### Когда объединение помогает, а когда мешает",
+          "new": "<a id=\"ret-fusion-limits\"></a>\n### Когда объединение помогает, а когда мешает"
+        },
+        {
+          "old": "### Что именно версионировать",
+          "new": "<a id=\"ret-version\"></a>\n### Что именно версионировать"
+        },
+        {
+          "old": "### Переход на новую версию",
+          "new": "<a id=\"ret-cutover\"></a>\n### Переход на новую версию"
+        },
+        {
+          "old": "### Проследить один потерянный ответ",
+          "new": "<a id=\"ret-trace\"></a>\n### Проследить один потерянный ответ"
+        },
+        {
+          "old": "### Разделить проверки",
+          "new": "<a id=\"ret-evaluation\"></a>\n### Разделить проверки"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid|Retrieval: от BM25 до плотного и гибридного поиска]]",
+          "new": "- [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid|Retrieval: от BM25 до плотного и гибридного поиска]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-recall|Полнота кандидатов и покрытие сведений]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-reader|Retriever, reader и бюджеты кандидатов]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-postings|Инвертированный индекс и postings]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-tfidf|TF–IDF: частота и редкость]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-bm25|BM25: насыщение и длина документа]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-bm25-example|BM25: численный пример]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-flat|Flat search, IP, L2 и косинус]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-ann|ANN recall и качество поиска]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-ivf|IVF: списки, центры и nprobe]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-hnsw|HNSW: уровни, M и ширина поиска]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-pq|PQ, ADC, остатки и OPQ]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-faiss|Faiss: train, add и search]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-chunking|Chunking: границы и перекрытие]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-parent|Структурное и child–parent retrieval]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-provenance|Происхождение фрагмента и смещения]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-query|Декомпозиция, multi-query и ограничения запроса]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-hyde|HyDE: гипотетический документ и реальные источники]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-filtering|Pre-/post-filtering и проверка доступа]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-score-scale|Масштабы оценок при гибридном поиске]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-rrf|RRF: ранги, веса и глубина выдачи]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-fusion-limits|Union recall и потери после fusion]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-version|Версионирование корпуса, модели и индекса]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-cutover|Смена индекса, кэши и отзыв доступа]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-trace|Трасса потерянного ответа]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-evaluation|Раздельная оценка каналов, ANN и fusion]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-hnsw-queue|HNSW: очереди, efSearch и остановка]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-hnsw-links|HNSW: выбор связей при построении]]"
+        }
+      ],
+      "before_sha256": "57dc841acf156552724b5cb7d8028b0b274fa7bf6a055b70a22d572218cc2983",
+      "after_sha256": "0977bdcf1289c0ae4e32c11d84a780afae85891db2c8109ff8be10bc627cefd4"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid|Retrieval: from BM25 to dense and hybrid methods]]",
+          "new": "- [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid|Retrieval: from BM25 to dense and hybrid methods]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-recall|Candidate recall and evidence coverage]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-reader|Retriever, reader and candidate budgets]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-postings|Inverted indexes and postings]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-tfidf|TF–IDF: frequency and rarity]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-bm25|BM25: saturation and document length]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-bm25-example|BM25: worked example]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-flat|Flat search, IP, L2 and cosine]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-ann|ANN recall and retrieval quality]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-ivf|IVF: lists, centroids and nprobe]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-hnsw|HNSW: layers, M and search breadth]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-pq|PQ, ADC, residuals and OPQ]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-faiss|Faiss: train, add and search]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-chunking|Chunking: boundaries and overlap]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-parent|Structured and child–parent retrieval]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-provenance|Chunk provenance and offsets]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-query|Decomposition, multi-query and query constraints]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-hyde|HyDE: hypothetical documents and real sources]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-filtering|Pre-/post-filtering and authorization]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-score-scale|Score scales in hybrid retrieval]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-rrf|RRF: ranks, weights and retrieval depth]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-fusion-limits|Union recall and post-fusion losses]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-version|Corpus, model and index versioning]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-cutover|Index cutover, caches and access revocation]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-trace|Tracing a lost answer]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-evaluation|Separate evaluation of channels, ANN and fusion]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-hnsw-queue|HNSW: queues, efSearch and stopping]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-hnsw-links|HNSW: construction neighbor selection]]"
+        }
+      ],
+      "before_sha256": "4cd3a725b1870c5ac0039290a0c94b3ecdc3e56aa1c6d4079a2cf2659b6b4607",
+      "after_sha256": "d844dc8ac613ca031d6b1c45603418237d42b786450037e09d95aee850e130eb"
+    }
+  ],
+  "created": [
+    "publishing/tools/check_hnsw_layer_examples.py",
+    "publishing/fixtures/hnswlib-3f342966/ALGO_PARAMS.md",
+    "publishing/fixtures/hnswlib-3f342966/hnswalg.h",
+    "publishing/fixtures/hnswlib-3f342966/LICENSE",
+    "publishing/fixtures/hnswlib-3f342966/sources.json",
+    "site/public/licenses/hnswlib-3f342966-Apache-2.0.txt"
+  ],
+  "priorExplanationReview": {
+    "evidence": "docs/audit/2026-10-20-retrieval.md",
+    "exactInputSha256": "c2f49438a49ecdf7aac70a44605763ebdcf3311781fb4b10c4514470ceab25bc",
+    "scope": "Fresh entire chapter read. Earlier selected-source comparison and original-figure provenance reused only for exact input bytes and retained mechanisms; new HNSW expansion checked separately."
+  },
+  "sourceComparison": {
+    "upstream": "https://github.com/nmslib/hnswlib",
+    "commit": "3f3429661187e4c24a490a0f148fc6bc89042b3d",
+    "tag": "v0.8.0",
+    "sectionsRead": [
+      "ALGO_PARAMS.md in full31 lines",
+      "hnswalg.h: searchBaseLayerST lines307–441 including initialization,stopping,neighbor insertion,trimming and return",
+      "hnswalg.h: getNeighborsByHeuristic2 lines443–483 in full",
+      "Prior frozen Milvus HNSW documentation152 lines in full"
+    ],
+    "fixtureHashes": [
+      {
+        "file": "ALGO_PARAMS.md",
+        "sha256": "3ccad67dbe9e304ade739b6d63dac1a08931e96a5ab071b90317bcd862a9e22e"
+      },
+      {
+        "file": "hnswalg.h",
+        "sha256": "0fb2c1b1d3aae1ea959b536f96844f3f3ae6a2f32ce063f2c31f93d84a7e5c32"
+      },
+      {
+        "file": "LICENSE",
+        "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1"
+      }
+    ],
+    "limits": "No claim to read all1412 header lines,compile hnswlib or execute its complete index builder. Bookvar Python demo isolates an unfiltered,no-deletion one-dimensional base layer. Source quote retained in original English; exact code/notice fixtures preserve upstream bytes."
+  },
+  "inputRead": {
+    "lines": 1063,
+    "ranges": [
+      "1–285",
+      "286–565",
+      "566–850",
+      "851–1020; last combined read truncated after diagnostic passage",
+      "1005–1063/EOF recovered separately"
+    ]
+  },
+  "runtime": {
+    "command": "LC_ALL=C LANG=C python3 publishing/tools/check_hnsw_layer_examples.py",
+    "observed": {
+      "randomGraphComparisons": 264,
+      "disconnectedAndCompleteControls": 2,
+      "invalidWidthControls": 5,
+      "neighborSelection": [
+        "A",
+        "C"
+      ]
+    },
+    "scope": "CPU teaching logic only; no HNSW memory/latency or retrieval-quality benchmark."
+  },
+  "remaining": [
+    "Next full owners: reranking and full RAG;32 of153 owners still unread after this read registration.",
+    "Inherited OpenQA slide permissions remain separate from exact source identity/pixel and current reader checks; no new independent grant asserted.",
+    "Previous TTC/distillation current visual/UI checks and whole-goal course-completeness/rights/figure/public-checkout/Pages-base/release gates remain open.",
+    "No translation,stage,commit,push or deploy in this pass. Whole-owner read is not accepted-chapter or full-course coverage."
+  ],
+  "finalRead": {
+    "lines": 1303,
+    "ranges": [
+      "1–330",
+      "331–655",
+      "656–985",
+      "986–1303/EOF"
+    ],
+    "subsequentOwnerEdits": false,
+    "style": "Full no-ai-slop SKILL/eval applied with academic qualifications. Preserve original explanatory sequence,complete worked examples,necessary terms and English source excerpt; no synthetic compression into definitions.",
+    "boundedFinalDelta": "Four-column HNSW trace table became two columns after actual375px inspection. Every retained state and action preserved; full revised table and its surrounding explanation reread. Main final remains1303 lines."
+  },
+  "validation": {
+    "scopedVitest": {
+      "files": 3,
+      "tests": 10,
+      "scope": "Retrieval and preceding embeddings preservation plus pre-registration read receipts. Four retrieval cases rerun after the bounded table correction."
+    },
+    "chapterChecker": {
+      "groupedCases": 1174,
+      "faiss": "1.15.1",
+      "log": "/var/tmp/bookvar-retrieval-examples-20261106.log",
+      "scope": "All seven programs standalone/shared,retained numerical controls,frozen sources,exact legacy-slide rerenders,pixel/crop checks and built HTML; not a retrieval benchmark."
+    },
+    "hnswCheck": {
+      "log": "/var/tmp/bookvar-hnsw-layer-examples-20261106.log",
+      "cases": {
+        "randomGraphComparisons": 264,
+        "disconnectedAndCompleteControls": 2,
+        "invalidWidthControls": 5,
+        "neighborSelection": [
+          "A",
+          "C"
+        ]
+      },
+      "quote": "Original parameter explanation verified against pinned ALGO_PARAMS.md"
+    },
+    "build": {
+      "pages": 2013,
+      "pagefindHtml": 2017,
+      "seconds": 28.76,
+      "log": "/var/tmp/bookvar-retrieval-build-20261106.log"
+    },
+    "output": {
+      "tests": 219,
+      "log": "/var/tmp/bookvar-retrieval-output-20261106.log"
+    },
+    "links": {
+      "broken": 0,
+      "log": "/var/tmp/bookvar-retrieval-links-20261106.log"
+    },
+    "size": {
+      "bytes": 857915068,
+      "files": 5635,
+      "headroom": 142084932
+    },
+    "topicIndex": {
+      "owners": 153,
+      "indexes": 2,
+      "subjectsPerLocale": 27
+    },
+    "whitespace": "Scoped tracked diffs and new authored additions checked. Original upstream fixtures not reformatted."
+  },
+  "reader": {
+    "evidence": "docs/audit/evidence/2026-11-06-retrieval-reader",
+    "widths": [
+      1280,
+      375
+    ],
+    "originalFitViewsPersonallyInspected": 16,
+    "mathDisplays": 8,
+    "katexErrors": 0,
+    "pageOverflow": 0,
+    "aspectErrors": 0,
+    "mobilePanExtentErrors": 0,
+    "zoom": "All eight native open/close and4x zoom/pan traces captured. Selected IVF centroids,HNSW base-layer/query/ef label,PQ lookup table and HyDE generated-document legend inspected enlarged.",
+    "tableCorrection": "Initial four-column trace had371px scroll width inside343px and cramped action text. Replaced with two columns preserving all four states/actions. Final desktop632/632 and mobile343/343 table client/scroll widths; all rows readable without sideways panning.",
+    "focusedEvidence": "detail-report.json and375-hnsw-base-focus.png,375-pq-lookup-focus.png,375-hyde-generated-focus.png,1280/375-queue-table.png inspected on final build. Focus probes wait for zoom layout before positioning.",
+    "figureEvidenceReuse": "Whole-image fit views,zoom controls and native subject clicks precede only the bounded four→two-column table change. Image bytes,captions,viewer code,section anchors and target-heading text are unchanged. The changed table and source/HTML checks were reverified after final build.",
+    "navigationEvidence": "docs/audit/evidence/2026-11-06-retrieval-navigation",
+    "nativeSubjects": [
+      "/reference/ → /textbook/retrieval/sparse-dense-hybrid/#ret-hnsw-queue",
+      "/en/reference/ → /en/textbook/retrieval/sparse-dense-hybrid/#ret-hnsw-queue"
+    ],
+    "english": "Explicit canonical-language fallback inspected; native English source explanation retained. No English translation body authored."
+  }
+}

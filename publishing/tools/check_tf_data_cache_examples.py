@@ -3,6 +3,7 @@ from hashlib import sha256
 from pathlib import Path
 import ast
 import re
+from topic_consolidation_baseline import before_topic_consolidation
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -17,7 +18,8 @@ WRAPPED_PAIRS = r"""\begin{aligned}
 
 
 def main():
-    text = CHAPTER.read_text()
+    text = before_topic_consolidation(CHAPTER.read_text(), CHAPTER.relative_to(ROOT).as_posix(),
+                                      "2026-11-04-precision-accumulation-additions.json")
     matches = list(re.finditer(PATTERN, text, re.S))
     assert len(matches) == 1
     original = re.sub(PATTERN, "", text, flags=re.S)

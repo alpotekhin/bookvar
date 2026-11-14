@@ -1,0 +1,29 @@
+{
+  "files": [
+    {
+      "name": "benchmark.py",
+      "bytes": 34840,
+      "sha256": "08a317f895ead50d53f6eab21ee2bcf1169b5c8981b74dc49b5a7e90aa978431",
+      "path": "05 Источники/Originals/roofline-timing-2026-11-04/benchmark.py",
+      "url": "https://raw.githubusercontent.com/pytorch/tutorials/5672cd98a7671eda4d9122b10f8eec580f74d03e/recipes_source/recipes/benchmark.py"
+    },
+    {
+      "name": "timer.py",
+      "bytes": 20798,
+      "sha256": "cc8507321d5247054e7de987b5c0463d58aa26d0f7d083e7f698923464204813",
+      "path": "05 Источники/Originals/roofline-timing-2026-11-04/timer.py",
+      "url": "https://raw.githubusercontent.com/pytorch/pytorch/5c4886908584029761b579af026dcfb627c84070/torch/utils/benchmark/utils/timer.py"
+    },
+    {
+      "name": "common.py",
+      "bytes": 13760,
+      "sha256": "61a4652909e5aa046ae7bdf10a91c9862fe094eaf162cb4db5af330c4cda1357",
+      "path": "05 Источники/Originals/roofline-timing-2026-11-04/common.py",
+      "url": "https://raw.githubusercontent.com/pytorch/pytorch/5c4886908584029761b579af026dcfb627c84070/torch/utils/benchmark/utils/common.py"
+    }
+  ],
+  "licensePaths": [
+    "site/public/licenses/pytorch-tutorials-5672cd98-BSD-3-Clause.txt",
+    "site/public/licenses/pytorch-v2.14.1-LICENSE.txt"
+  ]
+}

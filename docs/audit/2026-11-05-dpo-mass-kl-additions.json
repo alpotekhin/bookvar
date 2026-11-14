@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "kind": "dpo-mass-kl-additions",
+  "review_date": "2026-11-05",
+  "files": [
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
+      "before_sha256": "fd7a08d5813a5427b74a943d8a57f00978877b8edce13ac1027ccc04cf172c06",
+      "after_sha256": "245e8ff660981e3d234d7d83b397e0789c9716c2a9e68980068b1e9d97c5969f",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-24\nlast_verified: 2026-10-24\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\nreference_terms:\n  - anchor: dpo-stages\n    label: \"Какие этапы RLHF заменяет DPO\"\n    label_en: \"Which RLHF stages DPO replaces\"\n  - anchor: dpo-sequence-logp\n    label: \"Логарифм вероятности полного ответа\"\n    label_en: \"Full-response log probability\"\n  - anchor: dpo-preference-model\n    label: \"Вероятность сравнения в модели Брэдли—Терри\"\n    label_en: \"Bradley–Terry comparison probabilities\"\n  - anchor: dpo-rhf-objective\n    label: \"KL-регуляризованная задача и распределение Больцмана\"\n    label_en: \"KL-regularized objective and Boltzmann policy\"\n  - anchor: dpo-derivation\n    label: \"Награда через отношение вероятностей моделей\"\n    label_en: \"Rewards from policy probability ratios\"\n  - anchor: dpo-reward-normalization\n    label: \"Нормировка и восстановление награды: два ответа\"\n    label_en: \"Two-response normalization and reward recovery\"\n  - anchor: dpo-partition-cancellation\n    label: \"Сокращение нормировочной константы\"\n    label_en: \"Partition-function cancellation\"\n  - anchor: dpo-margin\n    label: \"Относительный разрыв и числовой расчёт DPO\"\n    label_en: \"Relative margins and a numeric DPO calculation\"\n  - anchor: dpo-gradient\n    label: \"Логистический вес и градиент DPO\"\n    label_en: \"Logistic weighting and DPO gradients\"\n  - anchor: dpo-beta\n    label: \"Коэффициент β, оптимум и размер градиента\"\n    label_en: \"Beta, optimum and gradient magnitude\"\n  - anchor: dpo-dataflow\n    label: \"Маски, causal shift и сумма logp\"\n    label_en: \"Masks, causal shift and summed log probabilities\"\n  - anchor: dpo-token-batch\n    label: \"Исполняемый шаг DPO с Llama\"\n    label_en: \"An executable Llama DPO update\"\n  - anchor: dpo-reference\n    label: \"Замороженная опорная модель и кэш\"\n    label_en: \"Frozen reference models and cached log probabilities\"\n  - anchor: dpo-offline-boundary\n    label: \"Задание CS336 и границы offline DPO\"\n    label_en: \"The CS336 task and offline DPO boundaries\"\n  - anchor: dpo-controlled-comparison\n    label: \"Контролируемое сравнение PPO и DPO\"\n    label_en: \"Controlled PPO versus DPO comparisons\"\n  - anchor: dpo-irpo\n    label: \"IRPO: новые пары и дополнительная NLL\"\n    label_en: \"IRPO resampling and the additional NLL\"\n  - anchor: dpo-tulu-length-normalization\n    label: \"Tülu 3 и DPO с нормировкой по длине\"\n    label_en: \"Tülu 3 and length-normalized DPO\"\n  - anchor: dpo-preference-data\n    label: \"Происхождение пар, критерии и шум меток\"\n    label_en: \"Pair provenance, criteria and label noise\"\n  - anchor: dpo-failures\n    label: \"Ограничения DPO и падение обеих вероятностей\"\n    label_en: \"DPO limitations and decreasing response probabilities\"\n  - anchor: dpo-diagnostics\n    label: \"Метрики пар и качество новых генераций\"\n    label_en: \"Pair metrics versus new-generation quality\"\n  - anchor: dpo-normalized-mass-kl\n    label: \"Перераспределение вероятности и точный KL\"\n    label_en: \"Probability redistribution and exact KL\"\n  - anchor: dpo-ipo\n    label: \"IPO: конечный целевой разрыв\"\n    label_en: \"IPO finite target margins\"\n  - anchor: dpo-simpo\n    label: \"SimPO: длина и отступ без reference\"\n    label_en: \"SimPO length normalization and reference-free margins\"\n  - anchor: dpo-orpo\n    label: \"ORPO: NLL и отношение шансов\"\n    label_en: \"ORPO NLL and odds ratios\"\n  - anchor: dpo-kto\n    label: \"KTO: положительные и отрицательные метки без пары\"\n    label_en: \"KTO unpaired desirable and undesirable labels\"\n  - anchor: dpo-online\n    label: \"Online DPO и обновление набора пар\"\n    label_en: \"Online DPO and refreshed preference pairs\"\n"
+        },
+        {
+          "old": "## 1. Какую часть RLHF упрощает DPO",
+          "new": "<a id=\"dpo-stages\"></a>\n\n## 1. Какую часть RLHF упрощает DPO"
+        },
+        {
+          "old": "## 2. Вероятность целого ответа",
+          "new": "<a id=\"dpo-sequence-logp\"></a>\n\n## 2. Вероятность целого ответа"
+        },
+        {
+          "old": "## 3. Модель предпочтений как отправная точка",
+          "new": "<a id=\"dpo-preference-model\"></a>\n\n## 3. Модель предпочтений как отправная точка"
+        },
+        {
+          "old": "### Два ответа: нормировка и восстановление награды",
+          "new": "<a id=\"dpo-reward-normalization\"></a>\n\n### Два ответа: нормировка и восстановление награды"
+        },
+        {
+          "old": "### Почему нормировка сокращается",
+          "new": "<a id=\"dpo-partition-cancellation\"></a>\n\n### Почему нормировка сокращается"
+        },
+        {
+          "old": "## 6. Что именно сравнивает функция потерь DPO",
+          "new": "<a id=\"dpo-margin\"></a>\n\n## 6. Что именно сравнивает функция потерь DPO"
+        },
+        {
+          "old": "### Как действует градиент",
+          "new": "<a id=\"dpo-gradient\"></a>\n\n### Как действует градиент"
+        },
+        {
+          "old": "<a id=\"7-что-означает-βbetaβ\"></a>",
+          "new": "<a id=\"dpo-beta\"></a>\n\n<a id=\"7-что-означает-βbetaβ\"></a>"
+        },
+        {
+          "old": "### От токенов до одного шага обучения",
+          "new": "<a id=\"dpo-token-batch\"></a>\n\n### От токенов до одного шага обучения"
+        },
+        {
+          "old": "## 9. Откуда берётся опорная модель",
+          "new": "<a id=\"dpo-reference\"></a>\n\n## 9. Откуда берётся опорная модель"
+        },
+        {
+          "old": "### Что показало контролируемое сравнение",
+          "new": "<a id=\"dpo-controlled-comparison\"></a>\n\n### Что показало контролируемое сравнение"
+        },
+        {
+          "old": "## 11. Iterative Reasoning Preference Optimization",
+          "new": "<a id=\"dpo-irpo\"></a>\n\n## 11. Iterative Reasoning Preference Optimization"
+        },
+        {
+          "old": "<a id=\"12-tülu-3-данные-length-normalization-и-место-dpo-в-recipe\"></a>",
+          "new": "<a id=\"dpo-tulu-length-normalization\"></a>\n\n<a id=\"12-tülu-3-данные-length-normalization-и-место-dpo-в-recipe\"></a>"
+        },
+        {
+          "old": "## 13. Какие данные нужны",
+          "new": "<a id=\"dpo-preference-data\"></a>\n\n## 13. Какие данные нужны"
+        },
+        {
+          "old": "## 15. Диагностика обучения",
+          "new": "<a id=\"dpo-diagnostics\"></a>\n\n## 15. Диагностика обучения"
+        },
+        {
+          "old": "**IPO: конечный целевой разрыв.**",
+          "new": "<a id=\"dpo-ipo\"></a>\n\n**IPO: конечный целевой разрыв.**"
+        },
+        {
+          "old": "**SimPO: сравнение без опорной модели.**",
+          "new": "<a id=\"dpo-simpo\"></a>\n\n**SimPO: сравнение без опорной модели.**"
+        },
+        {
+          "old": "**ORPO: совместное обучение содержанию и предпочтению.**",
+          "new": "<a id=\"dpo-orpo\"></a>\n\n**ORPO: совместное обучение содержанию и предпочтению.**"
+        },
+        {
+          "old": "**KTO: обратная связь без пары.**",
+          "new": "<a id=\"dpo-kto\"></a>\n\n**KTO: обратная связь без пары.**"
+        },
+        {
+          "old": "**Online DPO: обновление данных.**",
+          "new": "<a id=\"dpo-online\"></a>\n\n**Online DPO: обновление данных.**"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo/fig1.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo/fig1.png|RLHF с моделью награды и DPO на готовых парах]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo-review-2026-09/reward-kl-frontier.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo-review-2026-09/reward-kl-frontier.png|Награда и KL в опыте DPO на тональности IMDb]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p74-irpo-loop.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p74-irpo-loop.png|Итерации IRPO с генерацией, проверкой и DPO плюс NLL]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo-2026-10-24/tulu-preference-pipeline.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo-2026-10-24/tulu-preference-pipeline.png|Три стадии построения пар предпочтений Tülu 3]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo-2026-10-24/tulu-prompt-policy-ablations.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo-2026-10-24/tulu-prompt-policy-ablations.png|Абляции запросов и генераторов ответов в Tülu 3]]"
+        },
+        {
+          "old": "вес возрастёт до $\\sigma(2)\\approx0.881$. Это важная\nчасть алгоритма: в статье показано, что наивный вариант без такого взвешивания\nможет вырождаться.",
+          "new": "вес возрастёт до $\\sigma(2)\\approx0.881$. В абляции статьи\nнаивный вариант без такого взвешивания вырождался."
+        },
+        {
+          "old": "> [!warning]\n> Точность на обучающих парах",
+          "new": "<a id=\"dpo-normalized-mass-kl\"></a>\n### Три ответа: куда уходит вероятность и как измерить KL\n\nЗададим условную модель с тремя возможными ответами. В наборе предпочтений\nесть только сравнение $y_w\\succ y_l$; третий ответ в нём отсутствует.\nОпорное распределение и два состояния обучаемой модели:\n\n| Ответ | Опорная и исходная модель | Изменённая модель |\n|---|---:|---:|\n| $y_w$ | 0.4 | 0.2 |\n| $y_l$ | 0.4 | 0.1 |\n| $y_3$ | 0.2 | 0.7 |\n\nОба столбца нормированы. Вероятность выбранного ответа уменьшилась вдвое,\nотвергнутого — вчетверо. Отношение их вероятностей выросло с 1 до 2.\nПри $\\beta=0.5$ логит DPO изменился с нуля до $0.5\\log2$,\nа потеря уменьшилась с $\\log2\\approx0.693147$ до $0.534800$.\nНедостающая масса перешла к $y_3$, о качестве которого сравнение ничего\nне сообщает. Здесь заданы два распределения для проверки функции потерь;\nэто не утверждение, что конкретный шаг оптимизатора перевёл одно в другое.\n\nДля изменённой модели точный KL равен сумме по всем трём ответам:\n$0.2\\log(0.2/0.4)+0.1\\log(0.1/0.4)+0.7\\log(0.7/0.2)\n\\approx0.599675$. Если вместо этого усреднить логарифмические отношения\nтолько по выбранным ответам из набора, получится $\\log(0.2/0.4)\\approx-0.693147$.\nСреднее по двум членам пары тоже отрицательно, примерно $-1.039721$.\nНи одно из этих средних не использует распределение изменённой модели.\nВ точном KL вклад третьего ответа имеет вес 0.7; при генерации он также\nпоявлялся бы примерно в 70% случаев.\n\n```python\nmass_reference = torch.tensor([0.4, 0.4, 0.2], dtype=torch.float64)\nmass_before = mass_reference.clone()\nmass_after = torch.tensor([0.2, 0.1, 0.7], dtype=torch.float64)\n\ndef mass_pair_loss(probability):\n    logp, ref_logp = probability.log(), mass_reference.log()\n    return dpo_loss(logp[:1], logp[1:2],\n                    ref_logp[:1], ref_logp[1:2], beta=0.5)\n\nmass_loss_before = mass_pair_loss(mass_before)\nmass_loss_after = mass_pair_loss(mass_after)\nmass_logratio = (mass_after / mass_reference).log()\nmass_exact_kl = (mass_after * mass_logratio).sum()\nmass_chosen_mean = mass_logratio[0]\nmass_pair_mean = mass_logratio[:2].mean()\n\ntorch.testing.assert_close(mass_after.sum(), torch.tensor(1., dtype=torch.float64))\nassert (mass_after[:2] < mass_before[:2]).all()\nassert mass_after[2] > mass_before[2]\nassert mass_loss_after < mass_loss_before\nassert mass_exact_kl > 0 > mass_chosen_mean\nprint(f\"DPO: {mass_loss_before:.6f} -> {mass_loss_after:.6f}\")\nprint(f\"KL={mass_exact_kl:.6f}, chosen={mass_chosen_mean:.6f}, \"\n      f\"pair={mass_pair_mean:.6f}\")\n```\n\nРазличие следует из распределений усреднения в исходной постановке:\nв [Eq. 3 статьи DPO](https://arxiv.org/html/2305.18290v3#S3)\nответы для KL взяты из текущей стратегии, а в Eq. 7 попарная потеря усредняется\nпо готовому набору сравнений. В маленьком примере доступна полная сумма;\nу языковой модели KL обычно оценивают по новым генерациям. Одиночная\nвыборочная оценка может быть отрицательной из-за случайности, хотя истинный\nKL неотрицателен. Систематическое усреднение по другому распределению —\nотдельная ошибка, которую увеличение числа таких пар не исправляет.\n\n> [!warning]\n> Точность на обучающих парах"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "9b6eb55f2c457ed84ac5b044822df48d6a497d9606e877f139464c291a00a027",
+      "after_sha256": "84f07593017eaf7a02ace8ee6c27b0c3e2bd543a9700379ffad1b40d1829459e",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/12 Post-training и Alignment/05 DPO|DPO — непосредственная оптимизация предпочтений]]\n",
+          "new": "- [[00 Учебник/12 Post-training и Alignment/05 DPO|DPO — непосредственная оптимизация предпочтений]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-stages|Какие этапы RLHF заменяет DPO]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-sequence-logp|Логарифм вероятности полного ответа]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-preference-model|Вероятность сравнения в модели Брэдли—Терри]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-rhf-objective|KL-регуляризованная задача и распределение Больцмана]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-derivation|Награда через отношение вероятностей моделей]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-reward-normalization|Нормировка и восстановление награды: два ответа]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-partition-cancellation|Сокращение нормировочной константы]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-margin|Относительный разрыв и числовой расчёт DPO]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-gradient|Логистический вес и градиент DPO]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-beta|Коэффициент β, оптимум и размер градиента]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-dataflow|Маски, causal shift и сумма logp]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-token-batch|Исполняемый шаг DPO с Llama]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-reference|Замороженная опорная модель и кэш]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-offline-boundary|Задание CS336 и границы offline DPO]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-controlled-comparison|Контролируемое сравнение PPO и DPO]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-irpo|IRPO: новые пары и дополнительная NLL]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-tulu-length-normalization|Tülu 3 и DPO с нормировкой по длине]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-preference-data|Происхождение пар, критерии и шум меток]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-failures|Ограничения DPO и падение обеих вероятностей]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-diagnostics|Метрики пар и качество новых генераций]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-normalized-mass-kl|Перераспределение вероятности и точный KL]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-ipo|IPO: конечный целевой разрыв]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-simpo|SimPO: длина и отступ без reference]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-orpo|ORPO: NLL и отношение шансов]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-kto|KTO: положительные и отрицательные метки без пары]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-online|Online DPO и обновление набора пар]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "40861d543ac9a6c5f11df5c64f725f3ccce476ae7087b987477ee1ab79b28ec3",
+      "after_sha256": "87974ca67d464e0117a21f289b9c54b20857e5ac1565ad8bd66e3a7db093ede5",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/12 Post-training и Alignment/05 DPO|DPO]]\n",
+          "new": "- [[00 Учебник/12 Post-training и Alignment/05 DPO|DPO]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-stages|Which RLHF stages DPO replaces]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-sequence-logp|Full-response log probability]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-preference-model|Bradley–Terry comparison probabilities]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-rhf-objective|KL-regularized objective and Boltzmann policy]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-derivation|Rewards from policy probability ratios]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-reward-normalization|Two-response normalization and reward recovery]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-partition-cancellation|Partition-function cancellation]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-margin|Relative margins and a numeric DPO calculation]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-gradient|Logistic weighting and DPO gradients]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-beta|Beta, optimum and gradient magnitude]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-dataflow|Masks, causal shift and summed log probabilities]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-token-batch|An executable Llama DPO update]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-reference|Frozen reference models and cached log probabilities]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-offline-boundary|The CS336 task and offline DPO boundaries]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-controlled-comparison|Controlled PPO versus DPO comparisons]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-irpo|IRPO resampling and the additional NLL]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-tulu-length-normalization|Tülu 3 and length-normalized DPO]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-preference-data|Pair provenance, criteria and label noise]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-failures|DPO limitations and decreasing response probabilities]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-diagnostics|Pair metrics versus new-generation quality]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-normalized-mass-kl|Probability redistribution and exact KL]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-ipo|IPO finite target margins]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-simpo|SimPO length normalization and reference-free margins]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-orpo|ORPO NLL and odds ratios]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-kto|KTO unpaired desirable and undesirable labels]]\n  - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-online|Online DPO and refreshed preference pairs]]\n"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tools/check_dpo_examples.py",
+      "before_sha256": "035acf18333a35f5f0347219a92d38f67fd70b6cbaa268f9867251526cdadf84",
+      "after_sha256": "900c06a463a57b9c2860ce55aac22dbe5662839b4d6405a29f4dde3524e8bbba",
+      "changes": [
+        {
+          "old": "\"\"\"Execute all six published DPO fences, with a tiny random CPU Llama.",
+          "new": "\"\"\"Execute all seven published DPO fences, with a tiny random CPU Llama."
+        },
+        {
+          "old": "    assert len(blocks) == 6\n",
+          "new": "    assert len(blocks) == 7\n"
+        },
+        {
+          "old": "    print(json.dumps({\"python_fences\": len(blocks), \"device\": \"cpu\", \"torch\": torch.__version__,\n",
+          "new": "    # The fixed comparison and full-policy KL average over different outcomes.\n    mass_before, mass_after, mass_ref = [ns[k] for k in (\n        \"mass_before\", \"mass_after\", \"mass_reference\")]\n    torch.testing.assert_close(mass_before.sum(), mass_before.new_tensor(1.))\n    torch.testing.assert_close(mass_after.sum(), mass_after.new_tensor(1.))\n    torch.testing.assert_close(ns[\"mass_loss_before\"], mass_before.new_tensor(math.log(2)))\n    torch.testing.assert_close(ns[\"mass_loss_after\"],\n                              mass_before.new_tensor(math.log1p(math.exp(-.5*math.log(2)))))\n    torch.testing.assert_close(ns[\"mass_exact_kl\"],\n                              F.kl_div(mass_ref.log(), mass_after, reduction=\"sum\"))\n    torch.testing.assert_close(ns[\"mass_chosen_mean\"], mass_before.new_tensor(-math.log(2)))\n    torch.testing.assert_close(ns[\"mass_pair_mean\"], mass_before.new_tensor(-1.5*math.log(2)))\n    assert (mass_after[:2] < mass_before[:2]).all()\n    assert ns[\"mass_loss_after\"] < ns[\"mass_loss_before\"]\n    assert ns[\"mass_exact_kl\"] > 0 > ns[\"mass_pair_mean\"]\n\n    print(json.dumps({\"python_fences\": len(blocks), \"device\": \"cpu\", \"torch\": torch.__version__,\n"
+        },
+        {
+          "old": "        \"example_stdout\": output.getvalue().splitlines(),\n",
+          "new": "        \"mass_redistribution\": {\n            \"loss_before\": ns[\"mass_loss_before\"].item(),\n            \"loss_after\": ns[\"mass_loss_after\"].item(),\n            \"exact_kl\": ns[\"mass_exact_kl\"].item(),\n            \"chosen_mean\": ns[\"mass_chosen_mean\"].item(),\n            \"pair_mean\": ns[\"mass_pair_mean\"].item(),\n            \"scope\": \"Two stipulated normalized policies, not an observed optimizer transition\",\n        },\n        \"example_stdout\": output.getvalue().splitlines(),\n"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "status": "verified-local-delta",
+    "chapter": {
+      "source": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
+      "inputSha256": "fd7a08d5813a5427b74a943d8a57f00978877b8edce13ac1027ccc04cf172c06",
+      "inputLines": 1266,
+      "finalSha256": "245e8ff660981e3d234d7d83b397e0789c9716c2a9e68980068b1e9d97c5969f",
+      "finalLines": 1450,
+      "wholeRead": "Whole input1-340,341-680,681-1000,1001-1266 (last source tail explicitly recovered after truncated combined output). Final1-400,401-780,781-1130,1131-1450 completely read. No subsequent chapter edits."
+    },
+    "explanation": {
+      "retained": "The complete existing reward/optimal-policy derivation, support/partition assumptions, pair probability versus generation probability, logistic gradients/beta, shift/EOS/PAD masks, random-Llama update, CS336 HH preparation, controlled PPO comparisons, IRPO cycle, Tulu recipe, variants and diagnostics remain. All six earlier programs, all29 display bodies, nine source units and five source figures preserved.",
+      "finding": "The old text distinguished falling chosen/rejected probabilities and chosen-score versus KL diagnostics but did not work through their common normalized distribution inside the chapter. Added an explicitly constructed three-answer case and seventh actual program.",
+      "workedCase": "Reference/initial(.4,.4,.2), alternative(.2,.1,.7), beta.5. Chosen and rejected probabilities both fall; DPO loss.6931471805599453→.5347999967395703. Full KL.5996752057227792; chosen-only mean-.6931471805599453 and pair mean-1.0397207708399179 average over the wrong distribution. Third answer's quality is unknown. This is not a claimed optimizer-produced transition or an observed generation experiment.",
+      "sourceComparisonReuse": "Exact1266-line input SHA matches the accepted October24/29 revision. Both full historical comparison records reread: docs/audit/2026-10-24-dpo.md and docs/audit/2026-10-29-legacy-dpo-verification.json. Their unchanged CS336, implementation, IRPO, Tulu and variant source maps reused; no fresh full-course/slide-deck claim.",
+      "freshSourceRead": {
+        "url": "https://arxiv.org/html/2305.18290v3",
+        "sections": "Complete3,4 and5.1, including equations1-9, weighted gradient, initialization, equivalence classes/theorem/proof sketch. Sections5.2 and experimental setup also read. Focused second open restored the initially truncated equations6-7. No fresh complete appendix or whole-paper claim."
+      },
+      "style": "Whole final explanation reviewed with no-ai-slop plus local academic qualifications. Removed a generic importance label around logistic weighting while retaining the stated ablation result. New prose supplies distributions, intermediate losses and caveats. No original excerpts or translation rewritten."
+    },
+    "examples": {
+      "exit": 0,
+      "publishedPrograms": 7,
+      "python": "3.13",
+      "torch": "2.14.1",
+      "transformers": "4.57.1",
+      "device": "CPU",
+      "executedChapterSha256": "245e8ff660981e3d234d7d83b397e0789c9716c2a9e68980068b1e9d97c5969f",
+      "log": "/var/tmp/bookvar-dpo-final-examples-20261105.log",
+      "retainedChecks": "Random3632-parameter Llama/AdamW loss.6931471824645996→.6890337467193604. Frozen reference stays bitwise unchanged with no gradients; policy/backbone/head update. All24 left/right padding comparisons max1.9073486328125e-6. Shift/EOS/PAD, finite differences, invalid-input controls, variational999-policy grid, IRPO and variant calculations pass.",
+      "newChecks": "Actual printed normalized-case program executes. Independent F.kl_div agrees with the full KL; exact loss, negative chosen/pair means, normalization and falling probabilities checked separately.",
+      "limits": "No pretrained weights, tokenizer or dataset downloads, full LLM fine-tuning, useful-language quality test, GPU kernel/performance or benchmark. The stipulated alternative policy is not reported as an optimizer update."
+    },
+    "subjectsPerLocale": 26,
+    "originalFigures": 5,
+    "materials": "All five existing source-image paths and bytes checked against current registry. No new figures, PDF downloads, crops, grants or registry edits. Existing provenance/pixel comparison evidence reused only on unchanged byte hashes.",
+    "checks": {
+      "scoped": {
+        "exit": 0,
+        "files": 4,
+        "tests": 18,
+        "log": "/var/tmp/bookvar-dpo-scoped-20261105.log"
+      },
+      "adapter": {
+        "exit": 0,
+        "log": "/var/tmp/bookvar-dpo-build-20261105.log"
+      },
+      "build": {
+        "exit": 0,
+        "pages": 2009,
+        "pagefindFiles": 2013,
+        "seconds": 32.98,
+        "log": "/var/tmp/bookvar-dpo-site-build-20261105.log"
+      },
+      "html": {
+        "exit": 0,
+        "tests": 216,
+        "log": "/var/tmp/bookvar-dpo-output-20261105.log"
+      },
+      "links": {
+        "exit": 0,
+        "brokenInternal": 0,
+        "log": "/var/tmp/bookvar-dpo-links-20261105.log"
+      },
+      "topicIndex": {
+        "exit": 0,
+        "topics": 153,
+        "termsInOwner": 26,
+        "log": "/var/tmp/bookvar-dpo-topics-check-20261105.log"
+      },
+      "size": {
+        "exit": 0,
+        "bytes": 856989185,
+        "files": 5626,
+        "limit": 1000000000,
+        "headroom": 143010815
+      },
+      "scopedWhitespace": {
+        "diagnostics": "No whitespace diagnostics in tracked changes or either new journal/test. git diff --no-index --check uses difference status1 for new files.",
+        "scope": "Current owner,indexes,checker,baseline tools,HTML test,root audit and new journal/test."
+      },
+      "receipt": {
+        "exit": 0,
+        "files": 5,
+        "tests": 20,
+        "receiptTests": 2,
+        "currentHashMatches": 113,
+        "unreadOwnersInRoutePass": 40,
+        "log": "/var/tmp/bookvar-dpo-receipts-final-20261105.log",
+        "scope": "Current DPO,prior preference/reward and PEFT preservation plus whole-owner reading receipts; overlaps the earlier18 tests."
+      }
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-05-dpo-reader",
+      "desktop": "Default1280x720, document1280/1280. All five original figures and complete attached captions personally inspected in viewer: RLHF/DPO, sentiment reward-KL, IRPO, full Tulu Figure7 and both Figures10-11. Original English captions, axes and legends readable. All29 display formulas and five tables fit632/632; zero KaTeX errors. New normalized-case table/prose inspected inline.",
+      "mobile": "375x812, document375/375, reader343px. All29 displays and five tables fit343/343 with overflow-x:auto, zero KaTeX errors. New table/paragraph and inline KL wrapping inspected. Tulu pipeline at3x inspected at measured x376,0 and718(max718); left/middle/right stages and full original caption reachable. No all-five enlarged-mobile claim. Temporary viewport reset.",
+      "navigation": "Actual RU and EN subject links reach #dpo-normalized-mass-kl. All26 terms/locale structurally verified. Actual RU/EN Next reach rlvr-verifiers with expected h1. EN explicitly discloses no separate English edition; no translation pass. Russian interface restored and next RLVR owner left open.",
+      "recovery": "Cross-goal old handle and fresh same-browser tab both reported unavailable user support. Documented troubleshooting read, CUA reset and same browser3/tab6 rebound successfully; no unrelated tabs changed."
+    },
+    "remaining": [
+      "Registering this full-owner read gives99 fresh plus14 reused=113 of153;40 unread in the selected pass. These are reading receipts, not accepted-chapter counts.",
+      "Next:RLVR,GRPO,reasoning distillation/test-time compute and remaining synthetic-data,deployment,retrieval,multimodal,agents and recommender owners.",
+      "Course-completeness comparison, existing figure/rights gaps, public-checkout/Pages-base checks and authorized dev/Pages release remain open. No translation,stage,commit,push or deploy."
+    ]
+  }
+}

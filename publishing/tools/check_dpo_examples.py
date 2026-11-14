@@ -1,4 +1,4 @@
-"""Execute all six published DPO fences, with a tiny random CPU Llama.
+"""Execute all seven published DPO fences, with a tiny random CPU Llama.
 
 uv run --offline --with torch==2.14.1 --with numpy==2.3.5 \
   --with transformers==4.57.1 python publishing/tools/check_dpo_examples.py
@@ -31,7 +31,7 @@ def rejects(fn, *args, **kwargs):
 def main():
     text = CHAPTER.read_text()
     blocks = re.findall(r"^\x60{3}python\n(.*?)^\x60{3}\s*$", text, re.M | re.S)
-    assert len(blocks) == 6
+    assert len(blocks) == 7
     ns, output, before = {}, io.StringIO(), {}
     with contextlib.redirect_stdout(output):
         for i, code in enumerate(blocks):
@@ -140,10 +140,34 @@ def main():
     assert math.isclose(orpo, 1.6462103906, abs_tol=1e-9)
     assert math.isclose(F.softplus(torch.tensor(.1)).item(), .74439666, abs_tol=1e-7)
     assert math.isclose(1-torch.tensor(.3).sigmoid().item(), .42555748, abs_tol=1e-7)
+    # The fixed comparison and full-policy KL average over different outcomes.
+    mass_before, mass_after, mass_ref = [ns[k] for k in (
+        "mass_before", "mass_after", "mass_reference")]
+    torch.testing.assert_close(mass_before.sum(), mass_before.new_tensor(1.))
+    torch.testing.assert_close(mass_after.sum(), mass_after.new_tensor(1.))
+    torch.testing.assert_close(ns["mass_loss_before"], mass_before.new_tensor(math.log(2)))
+    torch.testing.assert_close(ns["mass_loss_after"],
+                              mass_before.new_tensor(math.log1p(math.exp(-.5*math.log(2)))))
+    torch.testing.assert_close(ns["mass_exact_kl"],
+                              F.kl_div(mass_ref.log(), mass_after, reduction="sum"))
+    torch.testing.assert_close(ns["mass_chosen_mean"], mass_before.new_tensor(-math.log(2)))
+    torch.testing.assert_close(ns["mass_pair_mean"], mass_before.new_tensor(-1.5*math.log(2)))
+    assert (mass_after[:2] < mass_before[:2]).all()
+    assert ns["mass_loss_after"] < ns["mass_loss_before"]
+    assert ns["mass_exact_kl"] > 0 > ns["mass_pair_mean"]
+
     print(json.dumps({"python_fences": len(blocks), "device": "cpu", "torch": torch.__version__,
         "transformers": transformers.__version__, "parameters": sum(p.numel() for p in policy.parameters()),
         "loss_before": ns["batch_dpo_loss"].item(), "loss_after": ns["updated_loss"].item(),
         "padding_comparisons": 24, "max_padding_error": max_padding_error,
+        "mass_redistribution": {
+            "loss_before": ns["mass_loss_before"].item(),
+            "loss_after": ns["mass_loss_after"].item(),
+            "exact_kl": ns["mass_exact_kl"].item(),
+            "chosen_mean": ns["mass_chosen_mean"].item(),
+            "pair_mean": ns["mass_pair_mean"].item(),
+            "scope": "Two stipulated normalized policies, not an observed optimizer transition",
+        },
         "example_stdout": output.getvalue().splitlines(),
         "chapter_sha256": hashlib.sha256(text.encode()).hexdigest()}, indent=2))
     print("PASS actual DPO fences; CPU only, no downloads or language-quality claim")

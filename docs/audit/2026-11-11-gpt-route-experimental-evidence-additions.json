@@ -1,0 +1,163 @@
+{
+  "date": "2026-11-11",
+  "scope": "Extend the existing GPT-1 → GPT-2 → GPT-3 → LLaMA reading route in both locales; keep canonical model chapters and prior figure links intact.",
+  "review": {
+    "sources": "Radford et al. 2018 §5 Table 5; Radford et al. 2019 §3.3; Brown et al. §3.1.2 Figure 3.2 and Appendix D; Touvron et al. §§1–3 Tables 1–3; Lu et al. 2022 §§1–2 Figures 1–2; Stanford CS336 Assignment 1 v26.0.3 §3 Figure 2.",
+    "worked_cases": "Follow the four fixed demonstrations through 24 orderings, read whiskers on SST-2 versus Subj, trace both residual additions and the placement of RoPE in the CS336 block, compare fixed-model vs cross-model contrasts and compute 6ND from the two published token counts.",
+    "rights": "Lu v2 lists CC BY 4.0 and the ACL publisher policy independently covers the 2022 proceedings. The registered crop keeps both plots and excludes nearby page prose. The already-registered CS336 assignment image is reused under MIT.",
+    "preservation": "No changes to the four canonical model chapters, their navigation order, legacy URLs, or earlier figures.",
+    "validation": "Astro built 2081 pages; check:links found no broken routes, fragments or files; all 296 built-output tests and 198 asset-registry tests passed. In local Chrome the Next control traversed the four chapters in both locales; at widths 1280 and 375 both new placements decoded within the column and zoomed on mobile, with no KaTeX errors. Re-rendering Lu Figure 1 from the pinned PDF reproduced the exact PNG bytes.",
+    "status": "Local only; no commit, push or deployment.",
+    "localBuildFollowThrough": "The build exposed two existing FlashAttention carry-overs: the FA4 source note had no manifest route, and the efficient-attention overview still embedded the retired CRFM tiling image. Register the source note and reuse the licensed FA1 panel in that overview. No other content changes."
+  },
+  "figure": {
+    "id": "curated-gpt-route-lu-figure1-c39af3473f67",
+    "asset": "00 Учебник/Assets/Figures/curated/gpt-route-2026-11-11/lu22-figure1.png",
+    "title": "Four-shot performance across 24 example orders (Figure 1)",
+    "author": "Yao Lu, Max Bartolo, Alastair Moore, Sebastian Riedel and Pontus Stenetorp",
+    "source_url": "https://aclanthology.org/2022.acl-long.556/",
+    "source_image_url": "https://arxiv.org/pdf/2104.08786v2#page=1",
+    "figure_url": "https://arxiv.org/html/2104.08786v2#S1.F1",
+    "source_asset": "05 Источники/Originals/gpt-route-2026-11-11/lu-et-al-2104.08786v2.pdf",
+    "source_asset_sha256": "7a5b89546628145d6a55e44d75ddd5dc989cc1d8ef92212533fb4833c2f36ebf",
+    "source_page": 1,
+    "render_dpi": 360,
+    "render_page_size_px": [
+      2977,
+      4210
+    ],
+    "crop_box_px": [
+      1625,
+      1055,
+      2525,
+      2390
+    ],
+    "dimensions_px": [
+      900,
+      1335
+    ],
+    "sha256": "c39af3473f6711d8b99a2f028b92290279296830f060216b8f66c184a6746e68",
+    "bytes": 49930,
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/gpt-route-2026-11-11/lu-et-al-2104.08786v2.html",
+    "license_evidence_sha256": "dbf720a81fab8167aa1070f9e64d0b61e945a29fc2176c09e915ef13a2ac1a82",
+    "license_evidence_url": "https://arxiv.org/html/2104.08786v2",
+    "modifications": "Both complete author plots, including axes, units, and tick labels, rendered at 360 dpi from page 1. The surrounding paper text and caption are omitted. No redraw or relabeling.",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "metadata_status": "verified",
+    "last_verified": "2026-11-11",
+    "used_in": [
+      "00 Учебник/_index.md",
+      "en/00 Textbook/_index.md"
+    ]
+  },
+  "files": [
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "bc273ca6e404bb1790565dfbee91fc521443319f445d5687c120af7cbe5d67ee",
+      "changes": [
+        {
+          "old": "last_updated: 2026-11-10\n---",
+          "new": "last_updated: 2026-11-11\n---"
+        },
+        {
+          "old": "[[#gpt-decoder-route-data|На каких текстах их обучали]]",
+          "new": "[[#gpt-decoder-route-data|На каких текстах их обучали]] ·\n[[#gpt-decoder-route-evidence|Что показали эксперименты]]"
+        },
+        {
+          "old": "В опыте Zhao и коллег GPT-3 2.7B получала четыре размеченных отзыва",
+          "new": "Lu et al. взяли четыре фиксированных примера и перебрали все $4!=24$\nпорядка. Для каждого порядка они ставили те же четыре примера перед\nкаждым новым текстом и считали долю верных ответов. Веса, состав\nдемонстраций и шаблон запроса оставались прежними. Четыре левые\nпозиции на рисунке относятся к GPT-2, остальные к GPT-3.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-route-2026-11-11/lu22-figure1.png|Две диаграммы размаха по порядкам четырёх примеров. На SST-2 у GPT-2 1.5B большой разброс, у GPT-3 175B малый. На Subj у GPT-3 175B разброс сохраняется.]]\n\n*Yao Lu, Max Bartolo, Alastair Moore, Sebastian Riedel и Pontus Stenetorp,\n[Fantastically Ordered Prompts and Where to Find Them, §2](https://aclanthology.org/2022.acl-long.556/),\n[рис. 1, с. 1 версии v2](https://arxiv.org/pdf/2104.08786v2#page=1),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nОбе панели из статьи, без перерисовки.*\n\nНа верхней панели, для тональности SST-2, у GPT-2 1.5B усы идут\nпримерно от 48 до 87% точности; у GPT-3 175B — примерно от 92 до 95%.\nЛиния внутри коробки показывает медиану по порядкам, а не среднее\nпо разным наборам демонстраций. На нижней панели та же GPT-3 175B\nрешает другую задачу, отличая субъективные высказывания от объективных.\nТам усы охватывают примерно 56–85%. Увеличение модели сократило\nразброс на SST-2, но смена задачи меняет картину.\n\nПо точности нельзя узнать, в какую сторону сместились ответы.\nВ другом опыте Zhao и коллег GPT-3 2.7B получала четыре размеченных отзыва"
+        },
+        {
+          "old": "В LLaMA RoPE поворачивает запросы и ключи перед их сравнением\nи меняет оценки уже разрешённых связей. RMSNorm занимает то же место\nв блоке, что LayerNorm в GPT-2, но масштабирует вектор без вычитания\nсреднего. А в [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-ffn|сравнении FFN на рисунке Tajima et al.]]\nвидно, зачем SwiGLU две входные проекции: одну пропускают через SiLU\nи используют для поэлементного управления другой. Полный путь от токена\nдо логитов разобран [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#От токенов к вероятности продолжения|по схемам Stanford CS336]].",
+          "new": "На схеме Stanford CS336 состояние токена идёт снизу вверх.\nСначала оно раздваивается: один путь ведёт прямо к нижнему сложению\n`Add`, другой проходит через `Norm` и внимание. Такой порядок был\nуже в GPT-2. У первой LLaMA в этой ветви `Norm` означает RMSNorm:\nона масштабирует вектор без вычитания среднего. Внутри внимания RoPE\nповорачивает Q и K перед их сравнением. В GPT-2 позицию добавляли\nк входному вектору токена перед первым блоком.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/llama-2026-10-22/cs336-prenorm-block.png|В нижней ветви норма и причинное внимание с RoPE, в верхней норма и FFN. Обе ветви возвращаются в свой Add.]]\n\n*Stanford CS336 Staff, [Assignment 1: Basics, рис. 2, с. 13](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=13),\n«A pre-norm Transformer block», [MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).\nСхема из задания, без перерисовки.*\n\nВерхняя ветвь работает отдельно с каждой позицией. В LLaMA внутри\n`Position-Wise Feed-Forward` стоит SwiGLU: одна входная проекция\nпроходит через SiLU и поэлементно умножается на вторую. Выходная\nматрица возвращает результат к исходной ширине, иначе его нельзя\nбыло бы сложить с обходной ветвью. [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-ffn|Две проекции и выходная матрица показаны на рисунке Tajima et al.]]"
+        },
+        {
+          "old": "На графике нет GPT-3: по нему нельзя узнать разницу в качестве между\nGPT-3 и LLaMA или приписать её только числу токенов. Для случая, когда\nменьшая модель достигает того же значения функции потерь после более\nдолгого обучения, см.\n[[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#training-and-inference-budget|расчёт затрат на обучение и вывод]].",
+          "new": "На графике нет GPT-3: снижение потерь вдоль одной кривой показывает\nэффект продолжения обучения LLaMA, но не разницу между двумя семействами.\n\n<a id=\"gpt-decoder-route-evidence\"></a>\n\n### Что показали эксперименты\n\nУ GPT-1 есть прямой способ проверить, помогло ли предобучение:\nдообучить тот же Transformer на тех же задачах, но начать со\nслучайных весов. В [таблице 5, §5](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=8)\nсреднее по восьми задачам с предобучением равно 74,7, без него — 59,9.\nРазница в 14,8 пункта относится к переносу весов перед дообучением,\nа не к качеству ответов по одному запросу.\n\nВ LAMBADA нужно предсказать последнее слово отрывка. Не меняя веса,\nможно менять и подсказку, и правило выбора слова. GPT-2 получила\n52,66% без фильтра и 63,24% после исключения стоп-слов\n([§3.3](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=5)).\nУ GPT-3 175B получилось 76,2% с обычным продолжением и 86,4% с\n15 размеченными примерами. В последнем случае авторы также сменили\nформат: вместо дописывания отрывка модель заполняла пропуск.\nС одним примером в этом формате получилось 72,5%: меньше, чем при\nобычном продолжении. Поэтому разность 86,4 и 76,2 включает эффект\nформата, а не только добавления примеров\n([GPT-3, §3.1.2, табл. 3.2 и рис. 3.2](https://arxiv.org/html/2005.14165v4#S3.SS1.SSS2)).\n\nВ [таблице 3 LLaMA](https://arxiv.org/html/2302.13971v1#S2.T3)\nGPT-3 175B и LLaMA 13B сравнивают без демонстраций. На HellaSwag\nнужно выбрать правдоподобное продолжение: 78,9% у GPT-3 и 79,2%\nу LLaMA. На PIQA, где нужно выбрать решение бытовой физической\nзадачи, порядок обратный: 81,0% и 80,1%. Это результаты из\nпубликаций, а не эксперимент, в котором меняли только размер модели.\nНапример, из разницы в 0,3 пункта на HellaSwag нельзя выделить вклад RoPE.\n\nРазмеры моделей при этом различаются примерно в 13,5 раза.\nГрубая оценка вычислений предобучения $6ND$ учитывает и число весов\n$N$, и число обработанных токенов $D$. Для GPT-3 175B при 300 млрд\nтокенов получается около $3.15\\cdot10^{23}$ FLOP; для LLaMA 13B при\nтриллионе — $7.8\\cdot10^{22}$ FLOP. Разрыв около четырёх раз, а не\n13,5: меньшая модель обработала больше токенов.\nЭто оценка, а не замер времени на GPU.\n[[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#training-and-inference-budget|Отдельный расчёт]] показывает, когда более долгое обучение меньшей модели окупается на выводе."
+        }
+      ],
+      "after_sha256": "c406f5f61194772f4f21eaaced1b7915b76958be61faa834fa38ed1b6441d7ff",
+      "lines": 549
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "4b240bc3010957a2761c2fa3aa55c591af4297c360e9611214296345834eb7ae",
+      "changes": [
+        {
+          "old": "canonical_revision: \"bc273ca6e404bb1790565dfbee91fc521443319f445d5687c120af7cbe5d67ee\"\ntranslation_reviewed: \"2026-11-10\"\ntranslation_of: \"00 Учебник/_index.md\"\nlast_updated: 2026-11-10",
+          "new": "canonical_revision: \"c406f5f61194772f4f21eaaced1b7915b76958be61faa834fa38ed1b6441d7ff\"\ntranslation_reviewed: \"2026-11-11\"\ntranslation_of: \"00 Учебник/_index.md\"\nlast_updated: 2026-11-11"
+        },
+        {
+          "old": "[[#gpt-decoder-route-data|What the models trained on]]",
+          "new": "[[#gpt-decoder-route-data|What the models trained on]] ·\n[[#gpt-decoder-route-evidence|What the experiments show]]"
+        },
+        {
+          "old": "Zhao et al. gave GPT-3 2.7B four labeled reviews before each test",
+          "new": "Lu et al. fixed four labeled examples and tried all $4!=24$\npermutations. For each order, they placed the same four demonstrations\nbefore each new text and measured classification accuracy. The model\nweights, examples, and template stayed fixed. The four positions on\nthe left of each plot are GPT-2 models; the other four are GPT-3 models.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-route-2026-11-11/lu22-figure1.png|Box plots of accuracy across four-example prompt orders. GPT-2 1.5B varies widely on SST-2; GPT-3 175B varies little on SST-2 but still varies on Subj.]]\n\n*Yao Lu, Max Bartolo, Alastair Moore, Sebastian Riedel, and Pontus Stenetorp,\n[Fantastically Ordered Prompts and Where to Find Them, §2](https://aclanthology.org/2022.acl-long.556/),\n[Figure 1, p. 1 of v2](https://arxiv.org/pdf/2104.08786v2#page=1),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nBoth plots are from the paper, not redrawn.*\n\nOn the top plot, for SST-2 sentiment, the whiskers for GPT-2 1.5B run\nfrom about 48% to 87% accuracy; for GPT-3 175B, from about 92% to 95%.\nThe line in each box is the median across orders, not an average over\ndifferent sets of examples. The bottom plot measures how well the\nsame models distinguish subjective statements from objective ones.\nFor GPT-3 175B the whiskers there span about 56–85%. The larger model\nwas less sensitive to order on SST-2, but the spread remained on Subj.\n\nAccuracy alone does not tell us which label became more common.\nIn a separate experiment, Zhao et al. gave GPT-3 2.7B four labeled reviews before each test"
+        },
+        {
+          "old": "LLaMA's RoPE rotates queries and keys before comparison, changing the\nscores of the connections the mask allows. RMSNorm goes where GPT-2\nput LayerNorm, but rescales the vector without subtracting its mean.\n[[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-ffn|Tajima et al.'s FFN diagram]]\nshows why SwiGLU has two input projections: the one passed through SiLU\ngates the other element by element. The LLaMA chapter traces the full\npath from a token to logits using [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#От токенов к вероятности продолжения|the Stanford CS336 diagrams]].",
+          "new": "In the Stanford CS336 diagram, the token state enters at the bottom.\nOne branch goes directly to the first `Add`. The other goes through\n`Norm` and attention. GPT-2 already used this order. In the first LLaMA,\n`Norm` stands for RMSNorm, which rescales the vector without subtracting\nits mean. Within attention, RoPE rotates Q and K before their dot\nproduct. GPT-2 instead added a position vector to the token embedding\nbefore the first block.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/llama-2026-10-22/cs336-prenorm-block.png|The lower branch has normalization and causal attention with RoPE. The upper branch has normalization and a position-wise FFN. Each branch has its own residual addition.]]\n\n*Stanford CS336 Staff, [Assignment 1: Basics, Figure 2, p. 13](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=13),\n“A pre-norm Transformer block,” [MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).\nOriginal diagram from the assignment.*\n\nThe upper branch processes each position separately. In LLaMA,\n`Position-Wise Feed-Forward` uses SwiGLU: one input projection goes\nthrough SiLU and multiplies the other element by element. An output\nmatrix restores the model width so the result can be added to the\nresidual stream. [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-ffn|Tajima et al.'s figure shows all three matrices]]."
+        },
+        {
+          "old": "falls while the number of weights stays fixed. The figure does not show\nGPT-3. It cannot tell us how much the two models differed in quality, or\nhow much of a difference the token count would explain. The\n[[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#training-and-inference-budget|training and inference budget calculation]] compares two models when the smaller one needs more training tokens to reach the same loss.",
+          "new": "falls while the number of weights stays fixed. GPT-3 does not appear\nin this figure. Following one curve tells us what happened as LLaMA\ntrained longer, not how the two families compare.\n\n<a id=\"gpt-decoder-route-evidence\"></a>\n\n### What the experiments show\n\nGPT-1's authors checked the value of pretraining by fine-tuning a\nTransformer on the same tasks starting from random weights.\nIn [Table 5, §5](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=8),\nthe mean score across eight tasks is 74.7 with pretraining and 59.9\nwithout it. The\n14.8-point difference measures the value of transferring weights before\nfine-tuning, not the effect of changing a prompt.\n\nLAMBADA asks the model to predict the last word of a passage. The weights\ncan stay fixed while we change the prompt or the rule for choosing the\nword. GPT-2 scored\n52.66% without filtering and 63.24% with a stop-word filter\n([§3.3](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=5)).\nGPT-3 175B scored 76.2% with plain continuation and 86.4% with\n15 demonstrations. In the latter setting the authors also changed\nthe format, from completing a passage to filling in a blank.\nOne demonstration in the new format scored 72.5%, below plain\ncontinuation. The gap between 86.4% and 76.2% therefore includes the\neffect of changing the format\n([GPT-3, §3.1.2, Table 3.2 and Figure 3.2](https://arxiv.org/html/2005.14165v4#S3.SS1.SSS2)).\n\n[LLaMA, Table 3](https://arxiv.org/html/2302.13971v1#S2.T3) compares\nGPT-3 175B and LLaMA 13B without demonstrations. On HellaSwag, where\nthe model chooses a plausible continuation, GPT-3 gets 78.9% and\nLLaMA gets 79.2%. On PIQA, where it chooses a solution to an everyday\nphysical problem, the order reverses: 81.0% and 80.1%. These are\nreported results, not an experiment that varies only model size.\nThe 0.3-point HellaSwag gap does not isolate the effect of RoPE.\n\nThe models differ in size by about 13.5 times. The rough pretraining\ncompute estimate $6ND$ accounts for both the number of weights $N$\nand the number of tokens processed $D$. For GPT-3 175B and 300 billion\ntokens, that gives about $3.15\\cdot10^{23}$ FLOP. For LLaMA 13B\nand one trillion tokens, it gives $7.8\\cdot10^{22}$ FLOP. The gap\nis about fourfold rather than 13.5-fold because the smaller model\nprocessed more tokens. These estimates do not measure GPU time.\nThe [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#training-and-inference-budget|training and inference budget example]]\nshows when the extra training of a smaller model can pay for itself at inference."
+        }
+      ],
+      "after_sha256": "0620701c4e4a410a2d196f25c475ddb50cfad58177c62d9f7a82488e1fbf91ba",
+      "lines": 555
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "d4d2e95421e445faa45cdc8d97f471fe9ad0dca0fca12ae169e37be50ed26c5a",
+      "changes": [
+        {
+          "old": "  - id: \"curated-gpt-history-zhao-figure4-73663ba1da6f\"",
+          "new": "  - id: \"curated-gpt-route-lu-figure1-c39af3473f67\"\n    asset: \"00 Учебник/Assets/Figures/curated/gpt-route-2026-11-11/lu22-figure1.png\"\n    title: \"Four-shot performance across 24 example orders (Figure 1)\"\n    author: \"Yao Lu, Max Bartolo, Alastair Moore, Sebastian Riedel and Pontus Stenetorp\"\n    source_url: \"https://aclanthology.org/2022.acl-long.556/\"\n    source_image_url: \"https://arxiv.org/pdf/2104.08786v2#page=1\"\n    figure_url: \"https://arxiv.org/html/2104.08786v2#S1.F1\"\n    source_asset: \"05 Источники/Originals/gpt-route-2026-11-11/lu-et-al-2104.08786v2.pdf\"\n    source_asset_sha256: \"7a5b89546628145d6a55e44d75ddd5dc989cc1d8ef92212533fb4833c2f36ebf\"\n    source_page: 1\n    render_dpi: 360\n    render_page_size_px: [2977,4210]\n    crop_box_px: [1625,1055,2525,2390]\n    dimensions_px: [900,1335]\n    sha256: \"c39af3473f6711d8b99a2f028b92290279296830f060216b8f66c184a6746e68\"\n    bytes: 49930\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/gpt-route-2026-11-11/lu-et-al-2104.08786v2.html\"\n    license_evidence_sha256: \"dbf720a81fab8167aa1070f9e64d0b61e945a29fc2176c09e915ef13a2ac1a82\"\n    license_evidence_url: \"https://arxiv.org/html/2104.08786v2\"\n    modifications: \"Both complete author plots, including axes, units, and tick labels, rendered at 360 dpi from page 1. The surrounding paper text and caption are omitted. No redraw or relabeling.\"\n    derivation: \"pdf-page-render-crop\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    metadata_status: \"verified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/_index.md\",\"en/00 Textbook/_index.md\"]\n  - id: \"curated-gpt-history-zhao-figure4-73663ba1da6f\""
+        },
+        {
+          "old": "      - \"00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md\"\n  - id: \"curated-llama-bc8c87fb2b8e\"",
+          "new": "      - \"00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md\"\n      - \"00 Учебник/_index.md\"\n      - \"en/00 Textbook/_index.md\"\n  - id: \"curated-llama-bc8c87fb2b8e\""
+        },
+        {
+          "old": "    retirement_reason: \"Replaced by the original tiling panel from the licensed Dao-AILab repository; the blog remains linked.\"\n    used_in: []\n    former_used_in: [\"00 Учебник/14 Inference и оптимизация/56 FlashAttention.md\",\"en/00 Textbook/14 Inference and optimization/56 FlashAttention.md\"]",
+          "new": "    retirement_reason: \"Replaced by the original tiling panel from the licensed Dao-AILab repository; the blog remains linked.\"\n    used_in: []\n    former_used_in: [\"00 Учебник/14 Inference и оптимизация/56 FlashAttention.md\",\"en/00 Textbook/14 Inference and optimization/56 FlashAttention.md\",\"03 Исследовательские линии/Эффективный attention.md\"]"
+        },
+        {
+          "old": "    used_in: [\"00 Учебник/14 Inference и оптимизация/56 FlashAttention.md\",\"en/00 Textbook/14 Inference and optimization/56 FlashAttention.md\"]\n  - id: curated-flash2-part-000000000044",
+          "new": "    used_in: [\"00 Учебник/14 Inference и оптимизация/56 FlashAttention.md\",\"en/00 Textbook/14 Inference and optimization/56 FlashAttention.md\",\"03 Исследовательские линии/Эффективный attention.md\"]\n  - id: curated-flash2-part-000000000044"
+        }
+      ],
+      "after_sha256": "292e9cd8bebc54e1a7dadcc1921f8b892284040c2cf478a65950789fe0c5ed91",
+      "lines": 26498
+    },
+    {
+      "source": "03 Исследовательские линии/Эффективный attention.md",
+      "before_sha256": "780b31e2b2e5530a6e84240c193d22d9d7f39eb6fcc56a9dbc31618c14682565",
+      "changes": [
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention-tiling.png]]\n\n*Блочное вычисление attention: блоки оценок и softmax вычисляются в SRAM,\nа накопленный выход перемасштабируется при изменении\nнормирующего знаменателя. Это оптимизация движения данных, а не изменение\nмножества связей. Источник изображения: Tri Dao,\n[FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://crfm.stanford.edu/2023/07/17/flash2.html);\nисходный алгоритм и доказательство exactness —\n[FlashAttention, §3 и Algorithm 1](https://arxiv.org/abs/2205.14135).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/flashattention-editorial-2026-11-11/fa1-tiling-loops.png|Внешний цикл выбирает плитку K и V. Внутренний проходит по плиткам Q. Промежуточные оценки остаются в SRAM, в HBM записывается обновлённый выход.]]\n\n*Tri Dao и участники FlashAttention,\n[схема из репозитория авторов](https://github.com/Dao-AILab/flash-attention/blob/1fc0221183e799363001394a12dd9e78e15f5dda/assets/flashattn_banner.pdf),\n[BSD-3-Clause](/licenses/flash-attention-1fc02211-BSD-3-Clause.txt).\nВ SRAM хранятся оценки для текущей плитки, а не для всей матрицы.\nСтатистики softmax позволяют обновить частичный выход, когда добавляется\nновая плитка ключей. Алгоритм и доказательство эквивалентности:\n[FlashAttention, §3 и Algorithm 1](https://arxiv.org/abs/2205.14135).*"
+        }
+      ],
+      "after_sha256": "05162c7346139b1e141899137877b09156207afb7d47907b0f8bd5702bffc3ac",
+      "lines": 140
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "changes": [
+        {
+          "old": "      - source: 05 Источники/Papers/Pan et al. 2023 — What in-context learning learns.md",
+          "new": "      - source: 05 Источники/Papers/FlashAttention-4.md\n        route: sources/papers/flashattention-4\n      - source: 05 Источники/Papers/Pan et al. 2023 — What in-context learning learns.md"
+        }
+      ],
+      "before_sha256": "29ba3e9da3f87395ad5f5b6f2c77706778ae3bbe15a030ba7da54104f373a777",
+      "after_sha256": "cbd2ccb56befdf78886dc831561063becb503ba64041616a50bbfaf5637cf143",
+      "lines": 2610
+    }
+  ]
+}

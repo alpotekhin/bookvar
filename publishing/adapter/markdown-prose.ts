@@ -3,7 +3,7 @@ export function mapMarkdownProse(markdown: string, transform: (prose: string) =>
   const inline = (text: string): string => {
     // A code-formatted label is part of a real link. Match the enclosing link
     // before its inner code span; an outer code span still takes precedence.
-    const spans = /!?\[[^\]\n]+\]\([^)\n]+\)|(?<!`)(`+)(?!`)[\s\S]*?(?<!`)\1(?!`)/g;
+    const spans = /\[!\[[^\]\n]*\]\([^)\n]+\)\]\([^)\n]+\)|!?\[[^\]\n]+\]\([^)\n]+\)|(?<!`)(`+)(?!`)[\s\S]*?(?<!`)\1(?!`)/g;
     let end = 0;
     let result = '';
     for (const span of text.matchAll(spans)) {

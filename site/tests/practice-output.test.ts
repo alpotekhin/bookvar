@@ -47,3 +47,23 @@ describe('published interactive scheduler', () => {
     expect(html).toContain('полный разбор примера');
   });
 });
+
+describe('published GPT entailment practice', () => {
+  it('renders the lab, no-script calculation and original figure in both editions', () => {
+    for (const prefix of ['', 'en/']) {
+      const html = readFileSync(resolve(import.meta.dirname, '../dist', prefix + 'practice/gpt-entailment/index.html'), 'utf8');
+      const index = readFileSync(resolve(import.meta.dirname, '../dist', prefix + 'textbook/index.html'), 'utf8');
+      expect(index).toContain('href="/' + prefix + 'practice/gpt-entailment/"');
+      expect(html.match(/<h1(?:\s|>)/g)).toHaveLength(1);
+      for (const id of ['entailment-model', 'entailment-shots', 'entailment-second', 'entailment-input', 'entailment-result']) {
+        expect(html).toContain('id="' + id + '"');
+      }
+      expect(html).toContain('href="#entailment-lab"');
+      expect(html).toContain('<noscript>');
+      expect(html).toContain('39793');
+      expect(html).toContain('min-figure2-demonstrations.png');
+      expect(html).toContain('https://aclanthology.org/2022.emnlp-main.759.pdf#page=2');
+      expect(html).not.toContain('katex-error');
+    }
+  });
+});

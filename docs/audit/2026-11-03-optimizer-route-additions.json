@@ -1,0 +1,252 @@
+{
+  "date": "2026-11-03",
+  "scope": "Optimization chapter reading route and topic reference; no translation, new source asset or release.",
+  "status": "local route/explanation checks complete; not whole-book or publication acceptance",
+  "explanation": {
+    "whole_before_read": "1-370,371-760,761-1160,1161-EOF; 1572 split lines",
+    "findings": [
+      "AGC/AutoClip interrupted clipping-to-AMP and checkpoint flow.",
+      "Muon/SOAP were nested under the launch checklist.",
+      "Only three mechanisms were indexed; adamw anchor pointed to Momentum instead of AdamW.",
+      "SGD's minibatch update needed an explicit equation and a worked loss-increase outcome."
+    ],
+    "source_comparison": {
+      "fresh": [
+        "D2L Momentum: online Basics leaky averages, ill-conditioned trajectories, momentum and effective sample weights; original values and eta distinction compared.",
+        "CS231n saved Parameter updates, Nesterov and adaptive-rate sections; original language/code retained rather than translated.",
+        "PyTorch 2.14 AdamW algorithm: decoupled decay and epsilon placement."
+      ],
+      "reused": [
+        "docs/audit/2026-10-21-optimization.md for unchanged core source comparisons",
+        "docs/audit/2026-10-28-optimizer-memory.md for unchanged memory-method explanations",
+        "docs/audit/2026-10-29-adaptive-clipping-verification.json for unchanged AGC/AutoClip source comparisons"
+      ]
+    },
+    "changes": [
+      "Core completes SGD, adaptive methods, schedule, clipping, AMP and checkpoint before advanced methods.",
+      "Complete adaptive-clipping block moved, not summarized; original source passages remain unchanged.",
+      "20 topic terms lead to canonical mechanisms in both reference locales.",
+      "13 source images and 9 programs retained; source alt labels improved.",
+      "SGD example: L(0)=5, outcomes L(-.4)=4.68 and L(.2)=5.22, expectation4.95 at eta.1."
+    ]
+  },
+  "files": [
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-30",
+          "new": "last_updated: 2026-11-03"
+        },
+        {
+          "old": "reference_terms:\n  - label: Ограничение нормы градиента\n    label_en: Gradient norm clipping\n    anchor: gradient-norm-clipping\n  - label: Adaptive Gradient Clipping — AGC\n    label_en: Adaptive Gradient Clipping — AGC\n    anchor: agc-unitwise\n  - label: AutoClip — порог по истории градиентов\n    label_en: AutoClip — gradient-history thresholds\n    anchor: autoclip\n",
+          "new": "reference_terms:\n  - label: \"SGD и оценка градиента по мини-батчу\"\n    label_en: \"SGD and minibatch gradient estimates\"\n    anchor: minibatch-sgd\n  - label: \"Скорость обучения и кривизна\"\n    label_en: \"Learning rate and curvature\"\n    anchor: learning-rate-curvature\n  - label: \"Momentum — накопление градиентов\"\n    label_en: \"Momentum and gradient history\"\n    anchor: momentum\n  - label: \"Nesterov — градиент в предварительной точке\"\n    label_en: \"Nesterov lookahead gradients\"\n    anchor: nesterov\n  - label: \"Adagrad и RMSProp\"\n    label_en: \"Adagrad and RMSProp\"\n    anchor: adagrad-rmsprop\n  - label: \"Adam — моменты и поправка смещения\"\n    label_en: \"Adam moments and bias correction\"\n    anchor: adam-moments\n  - label: \"AdamW и отличие от L2-регуляризации\"\n    label_en: \"AdamW versus L2 regularization\"\n    anchor: adamw\n  - label: \"Сравнение шагов SGD, Momentum и Adam\"\n    label_en: \"SGD, Momentum and Adam step comparison\"\n    anchor: optimizer-step-comparison\n  - label: \"Warmup, cosine и WSD\"\n    label_en: \"Warmup, cosine and WSD schedules\"\n    anchor: schedule-boundary\n  - label: \"Шум градиента и критический размер батча\"\n    label_en: \"Gradient noise and critical batch size\"\n    anchor: critical-batch-size\n  - label: \"Ограничение нормы градиента\"\n    label_en: \"Gradient norm clipping\"\n    anchor: gradient-norm-clipping\n  - label: \"Loss scaling и порядок AMP\"\n    label_en: \"Loss scaling and AMP operation order\"\n    anchor: optimizer-loss-scaling\n  - label: \"Восстановление оптимизатора, расписания и RNG\"\n    label_en: \"Resuming optimizer, schedule and RNG state\"\n    anchor: optimizer-checkpoint\n  - label: \"Adaptive Gradient Clipping — AGC\"\n    label_en: \"Adaptive Gradient Clipping — AGC\"\n    anchor: agc-unitwise\n  - label: \"AutoClip — порог по истории градиентов\"\n    label_en: \"AutoClip — gradient-history thresholds\"\n    anchor: autoclip\n  - label: \"Muon и SOAP — матричные обновления\"\n    label_en: \"Muon and SOAP matrix updates\"\n    anchor: matrix-optimizers\n  - label: \"Adafactor — факторизация второго момента\"\n    label_en: \"Adafactor second-moment factorization\"\n    anchor: adafactor\n  - label: \"8-bit состояния оптимизатора\"\n    label_en: \"8-bit optimizer states\"\n    anchor: optimizer-8bit-states\n  - label: \"GaLoRE — проекция градиента и моменты\"\n    label_en: \"GaLoRE gradient projection and moments\"\n    anchor: galore-projection\n  - label: \"Память оптимизатора — расчёт по тензорам\"\n    label_en: \"Optimizer memory tensor accounting\"\n    anchor: optimizer-memory-accounting\n"
+        },
+        {
+          "old": "<a id=\"adamw\"></a>\n\n## Накопление импульса, Adam и AdamW",
+          "new": "## Накопление импульса, Adam и AdamW"
+        },
+        {
+          "old": "## От полного градиента к мини-батчам\n",
+          "new": "<a id=\"minibatch-sgd\"></a>\n## От полного градиента к мини-батчам\n"
+        },
+        {
+          "old": "### Скорость обучения и кривизна\n",
+          "new": "<a id=\"learning-rate-curvature\"></a>\n### Скорость обучения и кривизна\n"
+        },
+        {
+          "old": "## Накопление импульса, Adam и AdamW\n",
+          "new": "<a id=\"momentum\"></a>\n## Накопление импульса, Adam и AdamW\n"
+        },
+        {
+          "old": "### Nesterov momentum\n",
+          "new": "<a id=\"nesterov\"></a>\n### Nesterov momentum\n"
+        },
+        {
+          "old": "### Adagrad и RMSProp\n",
+          "new": "<a id=\"adagrad-rmsprop\"></a>\n### Adagrad и RMSProp\n"
+        },
+        {
+          "old": "### Adam: среднее направление и масштаб\n",
+          "new": "<a id=\"adam-moments\"></a>\n### Adam: среднее направление и масштаб\n"
+        },
+        {
+          "old": "### AdamW: уменьшение весов вне моментов\n",
+          "new": "<a id=\"adamw\"></a>\n### AdamW: уменьшение весов вне моментов\n"
+        },
+        {
+          "old": "### Три шага на одной функции\n",
+          "new": "<a id=\"optimizer-step-comparison\"></a>\n### Три шага на одной функции\n"
+        },
+        {
+          "old": "### Размер пакета и критический размер\n",
+          "new": "<a id=\"critical-batch-size\"></a>\n### Размер пакета и критический размер\n"
+        },
+        {
+          "old": "## Смешанная точность\n",
+          "new": "<a id=\"optimizer-loss-scaling\"></a>\n## Смешанная точность\n"
+        },
+        {
+          "old": "### Контрольная точка должна продолжать тот же процесс\n",
+          "new": "<a id=\"optimizer-checkpoint\"></a>\n### Контрольная точка должна продолжать тот же процесс\n"
+        },
+        {
+          "old": "### Adafactor: factor the second moment, not the weight matrix\n",
+          "new": "<a id=\"adafactor\"></a>\n### Adafactor: factor the second moment, not the weight matrix\n"
+        },
+        {
+          "old": "### 8-bit optimizer states: fewer bytes for the same coordinates\n",
+          "new": "<a id=\"optimizer-8bit-states\"></a>\n### 8-bit optimizer states: fewer bytes for the same coordinates\n"
+        },
+        {
+          "old": "### GaLoRE: run Adam in a smaller gradient space\n",
+          "new": "<a id=\"galore-projection\"></a>\n### GaLoRE: run Adam in a smaller gradient space\n"
+        },
+        {
+          "old": "### Account for the remaining tensors\n",
+          "new": "<a id=\"optimizer-memory-accounting\"></a>\n### Account for the remaining tensors\n"
+        },
+        {
+          "old": "<!-- BEGIN REVIEW: adaptive clipping 2026-10-29 -->\n<a id=\"agc-unitwise\"></a>\n\n### AGC: a separate bound for each output unit\n\nTwo output units can have equal gradient norms and very different weight\nnorms. For example, let the rows of a linear weight matrix be $(3,4)$ and\n$(0.03,0.04)$, with the same gradient $(0.3,0.4)$ on each row. Both gradients\nhave norm $0.5$, but the weight norms are $5$ and $0.05$. An SGD step of\nsize $0.1$ changes the first row by 1% of its norm and the second by 100%.\nA global threshold cannot distinguish those two relative changes.\n\nBrock, De, Smith and Simonyan motivate adaptive gradient clipping in\n[§4 of the NFNet paper](https://proceedings.mlr.press/v139/brock21a.html):\n\n> However in practice, we clip gradients based on the unit-wise ratios of\n> gradient norms to parameter norms, which we found to perform better\n> empirically than taking layer-wise norm ratios.\n\nThis is an original English passage, reproduced under CC BY 4.0.\nFor a weight matrix $W\\in\\mathbb R^{m\\times n}$, row $W_i$ contains the\nincoming weights of output unit $i$. Write $G_i$ for the corresponding\ngradient row and define\n\n$$\n\\begin{aligned}\ns_i&=\\max(\\|W_i\\|_2,\\varepsilon_W),\\\\\nb_i&=\\lambda s_i,\\\\\n\\widetilde G_i&=\n\\begin{cases}\nG_i\\,b_i/\\|G_i\\|_2,&\\|G_i\\|_2>b_i,\\\\\nG_i,&\\text{otherwise}.\n\\end{cases}\n\\end{aligned}\n$$\n\nThe zero gradient uses the second branch. Each unit has its own bound $b_i$.\nIn a convolution, the unit contains all input-channel and spatial weights\nof one output filter. A norm over the entire layer would merge those units.\n\nFor the two rows above, choose $\\lambda=0.2$. Their bounds are $1$ and\n$0.01$. The first gradient remains $(0.3,0.4)$; the second is multiplied\nby $0.01/0.5=0.02$ and becomes $(0.006,0.008)$. The relative SGD changes\nare now $0.01$ and $0.02$. For a unit whose weight norm exceeds\n$\\varepsilon_W$, plain SGD without momentum satisfies\n$\\|\\Delta W_i\\|/\\|W_i\\|\\le\\eta\\lambda$.\n\nThe clipped matrix no longer points in the same direction as the original\nmatrix when all its entries are concatenated. AGC preserves each nonzero\nrow's direction, while allowing different rows to shrink by different\nfactors. Global norm clipping instead multiplies every row by the same\nfactor; with a global threshold of $0.5$, both example rows would shrink\nby $1/\\sqrt2$.\n\n```python\nimport torch\n\ndef agc_linear_rows(W, G, *, clipping=.2, weight_floor=1e-3):\n    # Dense [out_features, in_features] matrices; finite CPU example.\n    # This is not a wrapper for arbitrary tensor layouts or sparse gradients.\n    assert W.ndim == 2 and W.shape == G.shape\n    assert clipping > 0 and weight_floor > 0\n    assert torch.isfinite(W).all() and torch.isfinite(G).all()\n    weight_norm = W.norm(dim=1, keepdim=True).clamp_min(weight_floor)\n    gradient_norm = G.norm(dim=1, keepdim=True)\n    bound = clipping * weight_norm\n    clipped = G * (bound / gradient_norm.clamp_min(1e-6))\n    return torch.where(gradient_norm > bound, clipped, G)\n\nW = torch.tensor([[3., 4.], [.03, .04]], dtype=torch.float64)\nG = torch.tensor([[.3, .4], [.3, .4]], dtype=torch.float64)\nclipped = agc_linear_rows(W, G)\ntorch.testing.assert_close(clipped, torch.tensor(\n    [[.3, .4], [.006, .008]], dtype=W.dtype))\nrelative_step = (.1 * clipped).norm(dim=1) / W.norm(dim=1)\ntorch.testing.assert_close(relative_step, torch.tensor(\n    [.01, .02], dtype=W.dtype))\n\n# The weight floor lets a zero-initialized unit receive an update.\nzero_weights = torch.zeros_like(W)\nzero_case = agc_linear_rows(zero_weights, G)\ntorch.testing.assert_close(zero_case.norm(dim=1), torch.full(\n    (2,), .0002, dtype=W.dtype))\nassert torch.equal(agc_linear_rows(W, torch.zeros_like(G)),\n                   torch.zeros_like(G))\nprint(clipped, relative_step)\n```\n\nThe floor $\\varepsilon_W=10^{-3}$ is the paper's default, not a replacement\nfor choosing $\\lambda$. Without a floor, a zero-initialized unit would\nreceive a zero bound and could remain frozen. Near zero, the bound is\nrelative to the floor rather than to the actual weight norm.\n\nThe authors' [reference implementation, commit\nf5de0ede](https://github.com/google-deepmind/deepmind-research/blob/f5de0ede8430809180254ee957abf36ed62579ef/nfnets/optim.py#L446-L499)\nuses linear weights in input–output order and convolution weights in\nHWIO order. Its reduction axes therefore differ from the row-wise PyTorch\nexample. Scalars and vectors also have a separate convention. Copying the\nsame axis numbers into an OI/OIHW implementation would clip different units.\nThe implementation applies AGC before SGD's momentum and weight decay.\nThose later operations, and Adam's moment normalization, are outside the\nplain-SGD relative-step bound derived above.\n\n![[00 Учебник/Assets/Figures/curated/gradient-clipping-2026-10-29/nfnet-agc-ablation.png|Original NFNet Figure 2: batch sizes and AGC thresholds]]\n\n*Andy Brock, Soham De, Samuel L. Smith and Karen Simonyan,\n[Figure 2, ICML 2021, PMLR 139:1059–1071, PDF p. 4](https://proceedings.mlr.press/v139/brock21a/brock21a.pdf#page=4),\nCC BY 4.0. Both original panels and the complete caption are retained.\nOnly surrounding page text was cropped; labels and curves are unchanged.*\n\nPanel (a) compares ImageNet accuracy at different batch sizes, using the\nbest tested clipping threshold for each batch size. It is not a comparison\nat one universal $\\lambda$. Solid and dashed curves distinguish ResNet-50\nand ResNet-200. Panel (b) varies $\\lambda$ for ResNet-50; larger batches\nrequire stronger clipping in this experiment. Section 4.1 also excludes\nthe final classifier from AGC after an ablation. These are NF-ResNet\nexperiments with Nesterov SGD, not evidence that the same threshold or\nlayer exclusions improve every Transformer.\n\n<a id=\"autoclip\"></a>\n\n### AutoClip: choose the threshold from raw gradient history\n\nA fixed clipping threshold is expressed in the units of the loss gradient.\nMultiplying every loss by ten multiplies its gradients by ten. The same\nnumerical threshold then clips a different fraction of batches.\nAutoClip chooses a percentile of observed gradient norms instead of a\nfixed magnitude. The percentile $p$ remains a hyperparameter.\n\nLet $n_t=\\|g_t\\|_2$ be the norm before clipping. At update $t$, append this\nraw norm to the history, calculate its $p$-th percentile, then clip:\n\n$$\n\\begin{aligned}\nH_t&=(n_1,\\ldots,n_t),\\\\\n\\tau_t&=Q_p(H_t),\\\\\n\\widetilde g_t&=\ng_t\\min(1,\\tau_t/n_t)\\qquad(n_t>0).\n\\end{aligned}\n$$\n\nA zero gradient stays zero. The current norm participates in its own\nthreshold; the first finite gradient is therefore unchanged in the ideal\nformula. The [authors' PyTorch implementation](https://github.com/pseeth/autoclip/blob/dfb622c3caca9dc0ecc8bf0afeb773e190256d6e/autoclip.py)\nuses this order and NumPy's percentile convention.\n\nFor raw norms $10,2,4,100$, choose $p=50$ and linear interpolation between\nordered observations:\n\n| Update | Raw norm | Sorted history | Median threshold | Norm sent to optimizer |\n|---:|---:|---|---:|---:|\n| 1 | 10 | 10 | 10 | 10 |\n| 2 | 2 | 2, 10 | 6 | 2 |\n| 3 | 4 | 2, 4, 10 | 4 | 4 |\n| 4 | 100 | 2, 4, 10, 100 | 7 | 7 |\n\nAt the fourth update, the two middle observations are 4 and 10, giving\n$(4+10)/2=7$. Keeping only the clipped norms would produce a different\nhistory and change later thresholds. A 90th-percentile rule and a\n10th-percentile rule are also very different policies: the latter clips\nfar more gradients.\n\n```python\nimport numpy as np\nimport torch\n\ndef autoclip_vector(gradient, history, *, percentile=50.):\n    if not 0 <= percentile <= 100:\n        raise ValueError(\"percentile must be in [0, 100]\")\n    norm = torch.linalg.vector_norm(gradient).item()\n    if not np.isfinite(norm):\n        raise ValueError(\"do not put a nonfinite gradient into history\")\n    history.append(norm)  # Raw norm, including this update.\n    threshold = float(np.percentile(history, percentile, method=\"linear\"))\n    factor = 1. if norm == 0 else min(1., threshold / norm)\n    return gradient * factor, threshold\n\nhistory, thresholds, sent = [], [], []\nfor raw in [10., 2., 4., 100.]:\n    gradient = torch.tensor([.6 * raw, .8 * raw], dtype=torch.float64)\n    clipped, threshold = autoclip_vector(gradient, history)\n    thresholds.append(threshold)\n    sent.append(clipped.norm().item())\nnp.testing.assert_allclose(history, [10., 2., 4., 100.])\nnp.testing.assert_allclose(thresholds, [10., 6., 4., 7.])\nnp.testing.assert_allclose(sent, [10., 2., 4., 7.])\nprint(\"raw:\", history, \"thresholds:\", thresholds, \"sent:\", sent)\n```\n\nThis finite-vector example isolates Algorithm 1. A training loop measures\nthe norm over all selected parameter gradients after accumulation and,\nwhen used, AMP unscaling. It applies clipping before the optimizer updates\nits moments. The history and its configuration must be saved to resume\nthe same procedure. A skipped nonfinite step should not append an infinity\nto the percentile history.\n\nAt $p=100$, the threshold is the largest norm seen so far, including the\ncurrent norm, so clipping does nothing in the ideal formula. At $p=0$,\nthe threshold is the smallest observed norm; one zero in that history\ncan make all subsequent clipped gradients zero. Neither endpoint is a\ngeneral-purpose default. The original paper reports successful $p=1$\nand $p=10$ settings on speech separation, rather than a universal\n90th-percentile recipe.\n\nMultiplying every finite gradient in a fixed history by the same positive\nconstant multiplies both $n_t$ and $\\tau_t$ by that constant. Thus the\nclipping factors remain equal. This does not prove an identical training\ntrajectory: SGD's updates still scale, Adam has $\\varepsilon$, and a changed\ntrajectory can generate different future gradients. A rolling window or\nan approximate quantile can reduce the cost of retaining and processing\nthe growing history, but defines a different history estimator.\n\n![[00 Учебник/Assets/Figures/curated/gradient-clipping-2026-10-29/autoclip-mi.gif|Original AutoClip animation: parameter steps, training loss and gradient norms]]\n\n*Prem Seetharaman, Gordon Wichern, Bryan Pardo and Jonathan Le Roux,\n[original mask-inference animation and explanation](https://github.com/pseeth/autoclip/blob/dfb622c3caca9dc0ecc8bf0afeb773e190256d6e/README.md#training-dynamics),\n[MIT License](/licenses/autoclip-dfb622c3-MIT.txt).\nThe complete 40-frame GIF is unchanged. This is the authors' speech-separation\nexperiment, not a Bookvar training run.*\n\nThe original README explains the panels:\n\n> Training dynamics of a smaller mask inference network (2 BLSTM layers with\n> 300 hidden units) with mask-inference loss and whitened k-means loss, with\n> and without AutoClip. The top left figure shows the norm of the step size\n> taken on the model parameters. The top right figure shows the training\n> loss over time, showing that AutoClip leads to better optimization. The\n> bottom figures show the relationship between gradient norm and a measure\n> of smoothness along the training trajectory. Statistics were recorded\n> every 20 iterations during training. With AutoClip, we observe a stronger\n> correlation (r-value of .86), compared to without (r-value of .62). All\n> gradients to the right of the dashed black line in the bottom right plot\n> are clipped. We show the location of the AutoClip threshold at the end\n> of training. The threshold changes during training.\n\nThe source paragraph accompanies two animations; the one reproduced here\nuses mask-inference loss. The upper-left axis measures actual parameter\ndisplacement, not the raw norm used to select the threshold. The dotted\nline in the lower-right panel marks the final threshold; it should not\nbe read as one fixed value for the entire run. The smoother observed\nAdam steps do not turn gradient clipping into a mathematical bound on\nAdam's step size.\n\n<!-- END REVIEW: adaptive clipping 2026-10-29 -->\n\n<a id=\"optimizer-loss-scaling\"></a>",
+          "new": "<a id=\"optimizer-loss-scaling\"></a>"
+        },
+        {
+          "old": "<span id=\"muon-и-soap-определение-не-равно-победе-в-вашем-запуске\"></span>\n\n### Muon и SOAP: матричные обновления",
+          "new": "Следующая глава: [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections|инициализация, нормализация и residual connections]].\n\n## Адаптивные пороги ограничения градиента\n\n<!-- BEGIN REVIEW: adaptive clipping 2026-10-29 -->\n<a id=\"agc-unitwise\"></a>\n\n### AGC: a separate bound for each output unit\n\nTwo output units can have equal gradient norms and very different weight\nnorms. For example, let the rows of a linear weight matrix be $(3,4)$ and\n$(0.03,0.04)$, with the same gradient $(0.3,0.4)$ on each row. Both gradients\nhave norm $0.5$, but the weight norms are $5$ and $0.05$. An SGD step of\nsize $0.1$ changes the first row by 1% of its norm and the second by 100%.\nA global threshold cannot distinguish those two relative changes.\n\nBrock, De, Smith and Simonyan motivate adaptive gradient clipping in\n[§4 of the NFNet paper](https://proceedings.mlr.press/v139/brock21a.html):\n\n> However in practice, we clip gradients based on the unit-wise ratios of\n> gradient norms to parameter norms, which we found to perform better\n> empirically than taking layer-wise norm ratios.\n\nThis is an original English passage, reproduced under CC BY 4.0.\nFor a weight matrix $W\\in\\mathbb R^{m\\times n}$, row $W_i$ contains the\nincoming weights of output unit $i$. Write $G_i$ for the corresponding\ngradient row and define\n\n$$\n\\begin{aligned}\ns_i&=\\max(\\|W_i\\|_2,\\varepsilon_W),\\\\\nb_i&=\\lambda s_i,\\\\\n\\widetilde G_i&=\n\\begin{cases}\nG_i\\,b_i/\\|G_i\\|_2,&\\|G_i\\|_2>b_i,\\\\\nG_i,&\\text{otherwise}.\n\\end{cases}\n\\end{aligned}\n$$\n\nThe zero gradient uses the second branch. Each unit has its own bound $b_i$.\nIn a convolution, the unit contains all input-channel and spatial weights\nof one output filter. A norm over the entire layer would merge those units.\n\nFor the two rows above, choose $\\lambda=0.2$. Their bounds are $1$ and\n$0.01$. The first gradient remains $(0.3,0.4)$; the second is multiplied\nby $0.01/0.5=0.02$ and becomes $(0.006,0.008)$. The relative SGD changes\nare now $0.01$ and $0.02$. For a unit whose weight norm exceeds\n$\\varepsilon_W$, plain SGD without momentum satisfies\n$\\|\\Delta W_i\\|/\\|W_i\\|\\le\\eta\\lambda$.\n\nThe clipped matrix no longer points in the same direction as the original\nmatrix when all its entries are concatenated. AGC preserves each nonzero\nrow's direction, while allowing different rows to shrink by different\nfactors. Global norm clipping instead multiplies every row by the same\nfactor; with a global threshold of $0.5$, both example rows would shrink\nby $1/\\sqrt2$.\n\n```python\nimport torch\n\ndef agc_linear_rows(W, G, *, clipping=.2, weight_floor=1e-3):\n    # Dense [out_features, in_features] matrices; finite CPU example.\n    # This is not a wrapper for arbitrary tensor layouts or sparse gradients.\n    assert W.ndim == 2 and W.shape == G.shape\n    assert clipping > 0 and weight_floor > 0\n    assert torch.isfinite(W).all() and torch.isfinite(G).all()\n    weight_norm = W.norm(dim=1, keepdim=True).clamp_min(weight_floor)\n    gradient_norm = G.norm(dim=1, keepdim=True)\n    bound = clipping * weight_norm\n    clipped = G * (bound / gradient_norm.clamp_min(1e-6))\n    return torch.where(gradient_norm > bound, clipped, G)\n\nW = torch.tensor([[3., 4.], [.03, .04]], dtype=torch.float64)\nG = torch.tensor([[.3, .4], [.3, .4]], dtype=torch.float64)\nclipped = agc_linear_rows(W, G)\ntorch.testing.assert_close(clipped, torch.tensor(\n    [[.3, .4], [.006, .008]], dtype=W.dtype))\nrelative_step = (.1 * clipped).norm(dim=1) / W.norm(dim=1)\ntorch.testing.assert_close(relative_step, torch.tensor(\n    [.01, .02], dtype=W.dtype))\n\n# The weight floor lets a zero-initialized unit receive an update.\nzero_weights = torch.zeros_like(W)\nzero_case = agc_linear_rows(zero_weights, G)\ntorch.testing.assert_close(zero_case.norm(dim=1), torch.full(\n    (2,), .0002, dtype=W.dtype))\nassert torch.equal(agc_linear_rows(W, torch.zeros_like(G)),\n                   torch.zeros_like(G))\nprint(clipped, relative_step)\n```\n\nThe floor $\\varepsilon_W=10^{-3}$ is the paper's default, not a replacement\nfor choosing $\\lambda$. Without a floor, a zero-initialized unit would\nreceive a zero bound and could remain frozen. Near zero, the bound is\nrelative to the floor rather than to the actual weight norm.\n\nThe authors' [reference implementation, commit\nf5de0ede](https://github.com/google-deepmind/deepmind-research/blob/f5de0ede8430809180254ee957abf36ed62579ef/nfnets/optim.py#L446-L499)\nuses linear weights in input–output order and convolution weights in\nHWIO order. Its reduction axes therefore differ from the row-wise PyTorch\nexample. Scalars and vectors also have a separate convention. Copying the\nsame axis numbers into an OI/OIHW implementation would clip different units.\nThe implementation applies AGC before SGD's momentum and weight decay.\nThose later operations, and Adam's moment normalization, are outside the\nplain-SGD relative-step bound derived above.\n\n![[00 Учебник/Assets/Figures/curated/gradient-clipping-2026-10-29/nfnet-agc-ablation.png|Original NFNet Figure 2: batch sizes and AGC thresholds]]\n\n*Andy Brock, Soham De, Samuel L. Smith and Karen Simonyan,\n[Figure 2, ICML 2021, PMLR 139:1059–1071, PDF p. 4](https://proceedings.mlr.press/v139/brock21a/brock21a.pdf#page=4),\nCC BY 4.0. Both original panels and the complete caption are retained.\nOnly surrounding page text was cropped; labels and curves are unchanged.*\n\nPanel (a) compares ImageNet accuracy at different batch sizes, using the\nbest tested clipping threshold for each batch size. It is not a comparison\nat one universal $\\lambda$. Solid and dashed curves distinguish ResNet-50\nand ResNet-200. Panel (b) varies $\\lambda$ for ResNet-50; larger batches\nrequire stronger clipping in this experiment. Section 4.1 also excludes\nthe final classifier from AGC after an ablation. These are NF-ResNet\nexperiments with Nesterov SGD, not evidence that the same threshold or\nlayer exclusions improve every Transformer.\n\n<a id=\"autoclip\"></a>\n\n### AutoClip: choose the threshold from raw gradient history\n\nA fixed clipping threshold is expressed in the units of the loss gradient.\nMultiplying every loss by ten multiplies its gradients by ten. The same\nnumerical threshold then clips a different fraction of batches.\nAutoClip chooses a percentile of observed gradient norms instead of a\nfixed magnitude. The percentile $p$ remains a hyperparameter.\n\nLet $n_t=\\|g_t\\|_2$ be the norm before clipping. At update $t$, append this\nraw norm to the history, calculate its $p$-th percentile, then clip:\n\n$$\n\\begin{aligned}\nH_t&=(n_1,\\ldots,n_t),\\\\\n\\tau_t&=Q_p(H_t),\\\\\n\\widetilde g_t&=\ng_t\\min(1,\\tau_t/n_t)\\qquad(n_t>0).\n\\end{aligned}\n$$\n\nA zero gradient stays zero. The current norm participates in its own\nthreshold; the first finite gradient is therefore unchanged in the ideal\nformula. The [authors' PyTorch implementation](https://github.com/pseeth/autoclip/blob/dfb622c3caca9dc0ecc8bf0afeb773e190256d6e/autoclip.py)\nuses this order and NumPy's percentile convention.\n\nFor raw norms $10,2,4,100$, choose $p=50$ and linear interpolation between\nordered observations:\n\n| Update | Raw norm | Sorted history | Median threshold | Norm sent to optimizer |\n|---:|---:|---|---:|---:|\n| 1 | 10 | 10 | 10 | 10 |\n| 2 | 2 | 2, 10 | 6 | 2 |\n| 3 | 4 | 2, 4, 10 | 4 | 4 |\n| 4 | 100 | 2, 4, 10, 100 | 7 | 7 |\n\nAt the fourth update, the two middle observations are 4 and 10, giving\n$(4+10)/2=7$. Keeping only the clipped norms would produce a different\nhistory and change later thresholds. A 90th-percentile rule and a\n10th-percentile rule are also very different policies: the latter clips\nfar more gradients.\n\n```python\nimport numpy as np\nimport torch\n\ndef autoclip_vector(gradient, history, *, percentile=50.):\n    if not 0 <= percentile <= 100:\n        raise ValueError(\"percentile must be in [0, 100]\")\n    norm = torch.linalg.vector_norm(gradient).item()\n    if not np.isfinite(norm):\n        raise ValueError(\"do not put a nonfinite gradient into history\")\n    history.append(norm)  # Raw norm, including this update.\n    threshold = float(np.percentile(history, percentile, method=\"linear\"))\n    factor = 1. if norm == 0 else min(1., threshold / norm)\n    return gradient * factor, threshold\n\nhistory, thresholds, sent = [], [], []\nfor raw in [10., 2., 4., 100.]:\n    gradient = torch.tensor([.6 * raw, .8 * raw], dtype=torch.float64)\n    clipped, threshold = autoclip_vector(gradient, history)\n    thresholds.append(threshold)\n    sent.append(clipped.norm().item())\nnp.testing.assert_allclose(history, [10., 2., 4., 100.])\nnp.testing.assert_allclose(thresholds, [10., 6., 4., 7.])\nnp.testing.assert_allclose(sent, [10., 2., 4., 7.])\nprint(\"raw:\", history, \"thresholds:\", thresholds, \"sent:\", sent)\n```\n\nThis finite-vector example isolates Algorithm 1. A training loop measures\nthe norm over all selected parameter gradients after accumulation and,\nwhen used, AMP unscaling. It applies clipping before the optimizer updates\nits moments. The history and its configuration must be saved to resume\nthe same procedure. A skipped nonfinite step should not append an infinity\nto the percentile history.\n\nAt $p=100$, the threshold is the largest norm seen so far, including the\ncurrent norm, so clipping does nothing in the ideal formula. At $p=0$,\nthe threshold is the smallest observed norm; one zero in that history\ncan make all subsequent clipped gradients zero. Neither endpoint is a\ngeneral-purpose default. The original paper reports successful $p=1$\nand $p=10$ settings on speech separation, rather than a universal\n90th-percentile recipe.\n\nMultiplying every finite gradient in a fixed history by the same positive\nconstant multiplies both $n_t$ and $\\tau_t$ by that constant. Thus the\nclipping factors remain equal. This does not prove an identical training\ntrajectory: SGD's updates still scale, Adam has $\\varepsilon$, and a changed\ntrajectory can generate different future gradients. A rolling window or\nan approximate quantile can reduce the cost of retaining and processing\nthe growing history, but defines a different history estimator.\n\n![[00 Учебник/Assets/Figures/curated/gradient-clipping-2026-10-29/autoclip-mi.gif|Original AutoClip animation: parameter steps, training loss and gradient norms]]\n\n*Prem Seetharaman, Gordon Wichern, Bryan Pardo and Jonathan Le Roux,\n[original mask-inference animation and explanation](https://github.com/pseeth/autoclip/blob/dfb622c3caca9dc0ecc8bf0afeb773e190256d6e/README.md#training-dynamics),\n[MIT License](/licenses/autoclip-dfb622c3-MIT.txt).\nThe complete 40-frame GIF is unchanged. This is the authors' speech-separation\nexperiment, not a Bookvar training run.*\n\nThe original README explains the panels:\n\n> Training dynamics of a smaller mask inference network (2 BLSTM layers with\n> 300 hidden units) with mask-inference loss and whitened k-means loss, with\n> and without AutoClip. The top left figure shows the norm of the step size\n> taken on the model parameters. The top right figure shows the training\n> loss over time, showing that AutoClip leads to better optimization. The\n> bottom figures show the relationship between gradient norm and a measure\n> of smoothness along the training trajectory. Statistics were recorded\n> every 20 iterations during training. With AutoClip, we observe a stronger\n> correlation (r-value of .86), compared to without (r-value of .62). All\n> gradients to the right of the dashed black line in the bottom right plot\n> are clipped. We show the location of the AutoClip threshold at the end\n> of training. The threshold changes during training.\n\nThe source paragraph accompanies two animations; the one reproduced here\nuses mask-inference loss. The upper-left axis measures actual parameter\ndisplacement, not the raw norm used to select the threshold. The dotted\nline in the lower-right panel marks the final threshold; it should not\nbe read as one fixed value for the entire run. The smoother observed\nAdam steps do not turn gradient clipping into a mathematical bound on\nAdam's step size.\n\n<!-- END REVIEW: adaptive clipping 2026-10-29 -->\n\n<span id=\"muon-и-soap-определение-не-равно-победе-в-вашем-запуске\"></span>\n<a id=\"matrix-optimizers\"></a>\n\n## Muon и SOAP: матричные обновления"
+        },
+        {
+          "old": "Поэтому способ формирования батча входит в описание эксперимента.\n",
+          "new": "Поэтому способ формирования батча входит в описание эксперимента.\n\nSGD использует полученную оценку в обновлении параметров:\n\n$$\n\\begin{aligned}\ng_t&=\\frac1B\\sum_{i\\in\\mathcal B_t}\\nabla_\\theta L_i(\\theta_{t-1}),\\\\\n\\theta_t&=\\theta_{t-1}-\\eta_tg_t.\n\\end{aligned}\n$$\n\nЗдесь $\\mathcal B_t$ — выбранный мини-батч, а $\\eta_t$ — скорость обучения\nна этом шаге. Все его градиенты вычисляются при одних параметрах\n$\\theta_{t-1}$. Такое обновление и накопление прошлых градиентов\nсопоставлены в [D2L, Momentum — Basics](https://d2l.ai/chapter_optimization/momentum.html#basics).\n\nВ примере выше при $\\eta=0{,}1$ полный градиент перенёс бы параметр\nиз нуля в $-0{,}1$. Один случайный пример перенесёт его либо в $-0{,}4$,\nлибо в $0{,}2$. Средние по всей выборке потери\n$L(\\theta)=\\theta^2/2+\\theta+5$ при этом изменятся с $5$\nдо $4{,}68$ или $5{,}22$. Во втором случае потери возрастут,\nхотя использована несмещённая оценка градиента. Усреднение по двум\nвозможным исходам даёт $4{,}95$; уменьшение в среднем не означает\nуменьшение на каждом случайном шаге.\n"
+        },
+        {
+          "old": "Для LLM часто используют:\n\n1. разогрев — постепенный рост в начале;\n2. максимальная скорость обучения;\n3. косинусное или линейное уменьшение;\n4. небольшая конечная скорость.\n",
+          "new": "При обучении LLM скорость часто сначала постепенно увеличивают до\nпикового значения, а затем уменьшают по косинусному или линейному\nрасписанию до заданного конечного значения.\n"
+        },
+        {
+          "old": "Она непрерывна в $w$",
+          "new": "Оно непрерывно в $w$"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sgd-anisotropic.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sgd-anisotropic.svg|D2L: траектория SGD при разных кривизнах двух координат]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/optimization-2026-10-21/d2l-sgd-divergence.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/optimization-2026-10-21/d2l-sgd-divergence.svg|D2L: расходимость SGD при скорости обучения 0,6]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/optimization-2026-10-21/d2l-momentum-weights.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/optimization-2026-10-21/d2l-momentum-weights.svg|D2L: экспоненциальные веса прошлых градиентов]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-momentum-anisotropic.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-momentum-anisotropic.svg|D2L: сходящаяся траектория momentum при скорости 0,6]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/optimization-2026-10-21/cs231n-nesterov.jpeg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/optimization-2026-10-21/cs231n-nesterov.jpeg|CS231n: текущий параметр и предварительная точка Nesterov]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif|Alec Radford: траектории оптимизаторов около седловой точки]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-learning-rates.jpeg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-learning-rates.jpeg|CS231n: схематические кривые потерь при разных скоростях обучения]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/fp8-format-comparison.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/fp8-format-comparison.png|NVIDIA: разряды и округление одного числа в FP16, BF16, E4M3 и E5M2]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/galore-2026-10-28/galore_code_box.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/galore-2026-10-28/galore_code_box.png|GaLoRE: исходный алгоритм проекции градиента и обратного преобразования]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/galore-2026-10-28/subspace_learning.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/galore-2026-10-28/subspace_learning.png|GaLoRE: последовательное накопление обновлений в разных подпространствах]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/galore-2026-10-28/memory_breakdown.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/galore-2026-10-28/memory_breakdown.svg|GaLoRE: сравнение памяти весов, градиентов, оптимизатора и активаций]]"
+        }
+      ],
+      "before_sha256": "6bcadba24fff88dceadf61dc300e1e1e991cb21fda546acfa38ef345b47c106c",
+      "after_sha256": "f8f458c1542b958a3b4b5eb29dd5fb861565b4267a9a64e9a2fd050849db1f80"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения|SGD, Momentum, Adam и schedules]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#gradient-norm-clipping|Ограничение нормы градиента]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#agc-unitwise|Adaptive Gradient Clipping — AGC]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#autoclip|AutoClip — порог по истории градиентов]]",
+          "new": "- [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения|SGD, Momentum, Adam и schedules]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#minibatch-sgd|SGD и оценка градиента по мини-батчу]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#learning-rate-curvature|Скорость обучения и кривизна]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#momentum|Momentum — накопление градиентов]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#nesterov|Nesterov — градиент в предварительной точке]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#adagrad-rmsprop|Adagrad и RMSProp]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#adam-moments|Adam — моменты и поправка смещения]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#adamw|AdamW и отличие от L2-регуляризации]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#optimizer-step-comparison|Сравнение шагов SGD, Momentum и Adam]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#schedule-boundary|Warmup, cosine и WSD]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#critical-batch-size|Шум градиента и критический размер батча]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#gradient-norm-clipping|Ограничение нормы градиента]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#optimizer-loss-scaling|Loss scaling и порядок AMP]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#optimizer-checkpoint|Восстановление оптимизатора, расписания и RNG]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#agc-unitwise|Adaptive Gradient Clipping — AGC]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#autoclip|AutoClip — порог по истории градиентов]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#matrix-optimizers|Muon и SOAP — матричные обновления]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#adafactor|Adafactor — факторизация второго момента]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#optimizer-8bit-states|8-bit состояния оптимизатора]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#galore-projection|GaLoRE — проекция градиента и моменты]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#optimizer-memory-accounting|Память оптимизатора — расчёт по тензорам]]"
+        }
+      ],
+      "before_sha256": "931db4d30a92f4d47315f4266f3bb4f73564a6fbc5bd72bb8e69f360a57931e6",
+      "after_sha256": "06293d868ab29bb6faf4e26fd44df73ba17ed13dc8b7ef9c0ee6b27171318c7b"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения|SGD, Momentum, Adam, and learning-rate schedules]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#gradient-norm-clipping|Gradient norm clipping]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#agc-unitwise|Adaptive Gradient Clipping — AGC]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#autoclip|AutoClip — gradient-history thresholds]]",
+          "new": "- [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения|SGD, Momentum, Adam, and learning-rate schedules]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#minibatch-sgd|SGD and minibatch gradient estimates]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#learning-rate-curvature|Learning rate and curvature]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#momentum|Momentum and gradient history]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#nesterov|Nesterov lookahead gradients]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#adagrad-rmsprop|Adagrad and RMSProp]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#adam-moments|Adam moments and bias correction]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#adamw|AdamW versus L2 regularization]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#optimizer-step-comparison|SGD, Momentum and Adam step comparison]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#schedule-boundary|Warmup, cosine and WSD schedules]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#critical-batch-size|Gradient noise and critical batch size]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#gradient-norm-clipping|Gradient norm clipping]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#optimizer-loss-scaling|Loss scaling and AMP operation order]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#optimizer-checkpoint|Resuming optimizer, schedule and RNG state]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#agc-unitwise|Adaptive Gradient Clipping — AGC]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#autoclip|AutoClip — gradient-history thresholds]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#matrix-optimizers|Muon and SOAP matrix updates]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#adafactor|Adafactor second-moment factorization]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#optimizer-8bit-states|8-bit optimizer states]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#galore-projection|GaLoRE gradient projection and moments]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#optimizer-memory-accounting|Optimizer memory tensor accounting]]"
+        }
+      ],
+      "before_sha256": "9c803308004b29df00bb24cbe3800ec3cb881717661814a2289690e3cba505e9",
+      "after_sha256": "b9eb2b10aa4f6b97f05312d30c221b855396cec50b599597baaee6e6cb8da73a"
+    }
+  ],
+  "verification": {
+    "chapterSha256": "f8f458c1542b958a3b4b5eb29dd5fb861565b4267a9a64e9a2fd050849db1f80",
+    "wholeBeforeRead": true,
+    "wholeFinalRead": true,
+    "style": "No-ai-slop skill/eval read in full; new prose checked without rewriting quotations or source-language material.",
+    "examples": {
+      "exit": 0,
+      "publishedFences": 9,
+      "runnableFences": 9,
+      "torch": "2.14.1",
+      "numpy": "2.5.4",
+      "device": "CPU",
+      "scope": "All9 actual current fences executed in page order; independent core scalar/quadratic/moment/schedule/noise/clipping/precision/checkpoint checks;144 pinned NFNet cases,36 percentile/scaling cases,original AutoClip handler;26 memory/projection/state cases and actual pinned GaLoRE projector. Not GPU timing or full LLM training.",
+      "commands": [
+        "uv run --python 3.13 --with torch==2.14.1 --with numpy==2.5.4 python publishing/tools/check_optimization_examples.py",
+        "uv run --python 3.13 --with torch==2.14.1 --with numpy==2.5.4 python publishing/tools/check_adaptive_clipping_examples.py",
+        "uv run --python 3.13 --with torch==2.14.1 python publishing/tools/check_optimizer_memory_examples.py"
+      ]
+    },
+    "reader": {
+      "evidence": "docs/audit/evidence/2026-11-03-optimizer-reader",
+      "desktop": "1280x720: all13 original figures inspected in viewer with full captions; original D2L coordinate paths, Nesterov arrows, both animations, FP8 bits, NFNet panels and GaLoRE algorithm/subspaces/memory labels visible. Document1265/1265,zero display-math overflow/KaTeX errors.",
+      "mobile": "390x844: document375/375,zero display-math overflow/KaTeX errors. All13 source images fit inline at <=343px. Six dense figures inspected at2.5x; GaLoRE algorithm also panned to both edges. Four tables fit343px; unchanged AutoClip table is420px in an auto-scrolling343px region.",
+      "navigation": "Actual RU reference->#adamw reaches AdamW subsection, not Momentum. Actual EN reference->#galore-projection reaches source English. EN has9 programs,13 source images and explicit Canonical-language chapter notice. Actual core continuation reaches initialization-normalization-residuals. Temporary viewport reset.",
+      "finalRead": "Final1660-line owner read in full, ranges1-570,571-1100,1101-EOF. No chapter changes after build/read."
+    },
+    "htmlAndPreservation": {
+      "exit": 0,
+      "files": 5,
+      "tests": 203
+    },
+    "build": {
+      "exit": 0,
+      "routes": 2007,
+      "htmlFiles": 2011,
+      "bytes": 851512404,
+      "files": 5592,
+      "headroom": 148487596,
+      "brokenInternalLinks": 0,
+      "linkEvidence": "Full emitted-link check inside passing site-output suite."
+    },
+    "topicIndex": {
+      "topics": 152,
+      "locales": 2
+    },
+    "published": false
+  },
+  "remaining": [
+    "Existing FP8 source-raster permission is a user-permission record, not a newly verified named source license; no new asset was copied.",
+    "AutoClip's unchanged five-column history table uses horizontal scrolling on mobile.",
+    "Whole-course completeness, public-checkout/Pages-base checks and dev publication remain outside this chapter delta."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "revision": "8957207b78d6ccd1b4654a9dd9c9041b657478ab",
+  "attribution": "Artwork by @allison_horst",
+  "permission": {
+    "path": "vignettes/art.Rmd",
+    "line": 12,
+    "gitBlob": "92895af9bea4c5001f2c14b841c478f0e46aeab6",
+    "sha256": "2be7427fd30d5c73d130a37087b6ae2179171c1f7aac2082624e71024bd75b77",
+    "scope": "Teaching with Palmer Penguins; no blanket grant asserted for other uses."
+  },
+  "figures": {
+    "lter_penguins.png": {
+      "anchor": "meet-the-palmer-penguins",
+      "gitBlob": "736ae89b686339afd6af80214a7d7a05b64ef64e",
+      "sha256": "09b8d656b7e432aff84e961af5a3bbb46cf0291ee08f43dd42224dcf2abb7245",
+      "size": [
+        1800,
+        1074
+      ]
+    },
+    "culmen_depth.png": {
+      "anchor": "culmen-measurements",
+      "gitBlob": "3fe2147f206f784837eae99ccdbbd4af08a9192c",
+      "sha256": "421284fdd05eec240a4051898a722416664489ddcf0efd67f49a3582b5879f2c",
+      "size": [
+        3887,
+        2502
+      ]
+    }
+  }
+}

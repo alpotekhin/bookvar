@@ -84,7 +84,7 @@ describe('canonical fine-tuning and PEFT chapter', () => {
   });
 
   it('retains the worked mechanisms and executable scope rather than universal quality/VRAM recipes', () => {
-    expect(body.match(/^```python$/gm)).toHaveLength(18);
+    expect(body.match(/^```python$/gm)).toHaveLength(19);
     for (const anchor of ['choosing-trainable-parameters', 'bottleneck-adapters', 'lora-update',
       'merging-and-serving', 'qlora-training', 'soft-prompts', 'prefix-keys-values'])
       expect(body).toContain('id="' + anchor + '"');

@@ -20,13 +20,38 @@ describe('source-faithful grouped masking and sentence-order additions', () => {
     expect(fragment(read(ru))).toBe(fragment(read(en)));
     expect(fragment(read(ru)).length).toBeGreaterThan(15000);
     for (const p of [ru,en]) {
-      expect(read(p).match(/^```python$/gm)).toHaveLength(8);
+      expect(read(p).match(/^```python$/gm)).toHaveLength(9);
       for (const a of anchors) expect(read(p).split('id="'+a+'"')).toHaveLength(2);
       expect(read(p)).not.toContain('```mermaid');
     }
     expect(read(en)).toContain('canonical_revision: "'+hash(read(ru))+'"');
     for (const p of ['01 Справочник/_index.md','en/01 Reference/_index.md'])
       for (const a of anchors) expect(read(p)).toContain('#'+a+'|');
+  });
+  it('adds matching RTD and GDES examples and restores the prior chapter and index bytes', () => {
+    const extra = ['electra-replaced-token-detection','debertav3-gradient-disentangling'];
+    const example = (p: string) => read(p).split('id="'+extra[1]+'"')[1]
+      .match(/```python\n([\s\S]*?)\n```/)![1];
+    expect(example(ru)).toBe(example(en));
+    for (const p of [ru,en]) {
+      for (const anchor of extra) expect(read(p).split('id="'+anchor+'"')).toHaveLength(2);
+      expect(read(p)).toContain('https://arxiv.org/pdf/2111.09543v4#page=6');
+    }
+    for (const p of ['01 Справочник/_index.md','en/01 Reference/_index.md'])
+      for (const a of extra) expect(read(p)).toContain('#'+a+'|');
+    const journal = JSON.parse(read('docs/audit/2026-11-13-electra-debertav3-additions.json'));
+    expect(journal.files).toHaveLength(5);
+    for (const row of journal.files) {
+      const current = read(row.source);
+      const reviewed = beforeTopicConsolidation(current,row.source,root,
+        '2026-11-13-electra-debertav3-additions.json');
+      expect(hash(reviewed)).toBe(row.after_sha256);
+      const restored = beforeTopicConsolidation(current,row.source,root,
+        '2026-11-13-gpt-route-calibration-additions.json');
+      expect(hash(restored)).toBe(row.before_sha256);
+      expect(() => beforeTopicConsolidation(current+'\nUnreviewed sentence.\n',row.source,root,
+        '2026-11-13-gpt-route-calibration-additions.json')).toThrow();
+    }
   });
   it('preserves the original README passage and the ALBERT swap operators', () => {
     const body = read(ru);

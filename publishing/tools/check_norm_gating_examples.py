@@ -102,6 +102,13 @@ sigmoid=lambda t:1/(1+math.exp(-t))
 expected=np.array([sigmoid(1)*2,-sigmoid(-1)*3])
 np.testing.assert_allclose(env["ffn_output"].numpy()[0],expected,atol=1e-14)
 np.testing.assert_allclose(expected,[1.4621,-.8068],atol=5e-5)
+g=torch.tensor(1.,dtype=torch.float64,requires_grad=True)
+value=torch.tensor(2.,dtype=torch.float64,requires_grad=True)
+(F.silu(g)*value).backward()
+sigma=sigmoid(1.)
+np.testing.assert_allclose([value.grad.item(),g.grad.item()],
+                           [sigma,2*(sigma+sigma*(1-sigma))],atol=1e-14,rtol=0)
+np.testing.assert_allclose([value.grad.item(),g.grad.item()],[.7311,1.8553],atol=5e-5,rtol=0)
 assert 3*4096*11008==135266304
 assert 2*4096*16384==134217728
 assert math.isclose(8/3*4096,10922.6666666667)
@@ -143,6 +150,23 @@ np.testing.assert_allclose(branch(x),x+z,atol=1e-14)
 assert not np.allclose(branch(x),expected_pre)
 print("PASS branch-output normalization differs from both pre- and post-residual normalization")
 
+def gemma_example_branch(a):
+    return np.array([0., 0., a[0] / 10, .4])
+
+direct = gemma_example_branch(v)
+after_input_norm = gemma_example_branch(rms(v))
+np.testing.assert_allclose(v + after_input_norm, [3, 4, .12, .4])
+np.testing.assert_allclose(v + rms(direct), [3, 4, 1.2, 1.6])
+np.testing.assert_allclose(v + rms(after_input_norm), [3, 4, .575, 1.916], atol=5e-4)
+np.testing.assert_allclose(rms(v + direct), [1.194, 1.592, .119, .159], atol=5e-4)
+assert math.isclose(np.sqrt(np.mean(after_input_norm**2)), .2088, abs_tol=5e-5)
+np.testing.assert_allclose([cap*math.tanh(100/cap) for cap in [50, 30]], [48.20, 29.92], atol=.005)
+gemma_scores = torch.tensor([[100., 0.]], dtype=torch.float64)
+reference_mask = torch.zeros_like(gemma_scores, dtype=torch.float32).masked_fill(~env["allowed"], -2.3819763e38)
+gemma_scores = env["softcap"](gemma_scores, 50).float() + reference_mask
+torch.testing.assert_close(gemma_scores.softmax(-1), torch.tensor([[1., 0.]], dtype=torch.float32))
+print("PASS four norm placements, both Gemma 2 soft caps and causal mask after capping")
+
 # Pin actual paper columns instead of relying only on literal chapter numbers.
 paper=ROOT/"05 Источники/Originals/initialization-normalization-2026-10-21/rmsnorm.pdf"
 assert hashlib.sha256(paper.read_bytes()).hexdigest()=="a38ab771022fc10525d2b6b23de40307b2ca7b2bf463f5219da6a0ba1c41225f"
@@ -153,5 +177,10 @@ for pattern in [r"LayerNorm\s+26\.6\s+27\.7\s+248±1\.31s",
     assert re.search(pattern,page),pattern
 assert math.isclose((248-231)/248*100,6.854838709677419)
 print("PASS RMSNorm Table 4 actual rows and 6.9% time reduction, not whole-LLM speedup")
+xiong=ROOT/"05 Источники/Originals/norm-gating-2026-10-22/xiong20b.pdf"
+page=subprocess.check_output(["pdftotext","-layout","-f","4","-l","4",str(xiong),"-"],text=True)
+for value in ("8.45", "31.16", "2.77", "around 34"):
+    assert value in page, value
+print("PASS cited Xiong Figure 2 experiment numbers and both SwiGLU gradient branches")
 print("No released-weight training, GPU latency or universal stability claim.")
 print("CHAPTER_SHA256",hashlib.sha256(CHAPTER.read_bytes()).hexdigest())

@@ -628,6 +628,8 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
             "discovery/m11-p80-scaling-curves.png", "discovery/m11-p81-scaling-traits.png",
             "12-dawn-song-agentic-threat-model-sequence.png",
             "12-prompt-injection-agentpoison.png", "12-agent-monitoring-and-verification.png",
+            "coding-web-computer-use/m05-p17-react-aci.png",
+            "coding-web-computer-use/m07-p11-osworld-contract.png",
         }
         expected_files -= {
             (BERKELEY_ASSET_ROOT / name).relative_to(REPOSITORY_ROOT).as_posix()
@@ -660,6 +662,8 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
             "planseqlearn-2026-10-26/method.png",
             "planseqlearn-2026-10-26/sequencing.png",
             "planseqlearn-2026-10-26/nut-assembly.png",
+            "computer-agents-2026-11-09/swe-agent-overview.png",
+            "computer-agents-2026-11-09/osworld-task-environment.png",
         }
         expected_files |= {
             f"00 Учебник/Assets/Figures/curated/{name}"

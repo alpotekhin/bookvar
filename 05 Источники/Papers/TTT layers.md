@@ -34,10 +34,12 @@ $$
 TTT-Linear использует линейную внутреннюю модель, TTT-MLP — двухслойный MLP.
 Внешний цикл meta-learning подбирает инициализацию и задачу внутреннего обучения.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/ttt-figure3.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/ttt-v1-figure4.png|Таблица сопоставляет три состояния и правила их обновления: вектор RNN, список K/V и параметры внутренней модели TTT.]]
 
-*Figure 3 из статьи сопоставляет vector state RNN, список K/V self-attention и
-параметры внутренней модели TTT.*
+*Yu Sun et al.,
+[Learning to (Learn at Test Time), v1, рис. 4, с. 4](https://arxiv.org/pdf/2407.04620v1#page=4),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). В поздней версии
+статьи это [рисунок 3](https://arxiv.org/html/2407.04620v4#S1.F3).*
 
 ## Что источник не доказывает
 

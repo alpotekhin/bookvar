@@ -2,7 +2,20 @@
 title: Спектральная кластеризация и лапласиан графа
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-25
+last_updated: 2026-11-03
+reference_terms:
+  - label: Ncut — нормированный разрез
+    label_en: Normalized cut (Ncut)
+    anchor: normalized-cut
+  - label: Взвешенная норма и нормировка по степени
+    label_en: Degree-weighted unit-norm constraint
+    anchor: degree-weighted-constraint
+  - label: Commute time — время прохода туда и обратно
+    label_en: Commute time and the Laplacian pseudoinverse
+    anchor: commute-time
+  - label: Ng–Jordan–Weiss — нормировка строк
+    label_en: Ng–Jordan–Weiss row normalization
+    anchor: njw-row-normalization
 primary_sources:
   - https://github.com/esokolov/ml-course-hse/blob/4b21051531fb72dc9eef58632332ad971c92d006/ml2-2026-spring/seminars/sem03-graph-clustering.pdf
   - https://arxiv.org/abs/0711.0189v1
@@ -162,6 +175,89 @@ $$
 двум разным компонентам; полный базис нулевого подпространства такого
 неразличения не создаёт. Разбор этой связи есть в §1.1 и §1.4
 [конспекта Wiskott и Schönfeld](https://www.ini.rub.de/PEOPLE/wiskott/Teaching/UnsupervisedLearning/PublicWeb/LaplacianMatrix-L0-LectureNotes-PublicWeb.pdf).
+
+### Связный граф: что остаётся до полного выравнивания
+
+![[00 Учебник/Assets/Figures/curated/spectral-2026-10-31/wiskott-connected-heat.png|Связная цепочка C–E–G–B–D–F–A: начальные температуры, медленное выравнивание и порядок на оси h]]
+
+*Laurenz Wiskott и Fabian Schönfeld,
+[Laplacian Matrix for Dimensionality Reduction and Clustering, §1.1](https://www.ini.rub.de/PEOPLE/wiskott/Teaching/UnsupervisedLearning/PublicWeb/LaplacianMatrix-L0-LectureNotes-PublicWeb.pdf#page=5),
+Figure 1.1, CC BY-SA 4.0. Сохранены все три кадра, ось $h$ и исходная
+английская подпись.*
+
+Здесь те же семь вершин соединены в одну цепочку
+$C-E-G-B-D-F-A$. На плоскости она выглядит запутанной, но по рёбрам можно
+однозначно пройти от $C$ до $A$. Буквы на нижней оси идут именно в этом
+порядке. Правый кадр показывает поздний момент выравнивания: у одного
+конца цепочки температура ещё немного выше, чем у другого.
+
+При $t\to\infty$ температуры всех семи вершин станут одинаковыми.
+Для связного графа сохраняется только постоянный нулевой вектор,
+и такое конечное состояние уже не различает вершины. Чтобы получить
+одномерное представление, рассматривают отклонение от средней температуры
+до его полного затухания. Если $\lambda_2<\lambda_3$ и $c_2\ne0$, то
+
+$$
+h(t)-\bar h\mathbf1
+=c_2e^{-\lambda_2t}v_2+
+\sum_{r=3}^n c_re^{-\lambda_rt}v_r.
+$$
+
+Отношение каждого следующего коэффициента к первому убывает с множителем
+$e^{-(\lambda_r-\lambda_2)t}$. Поэтому направление центрированного вектора
+температур приближается к направлению второго собственного вектора,
+хотя его длина стремится к нулю.
+Если $c_2=0$, это направление не появится; при кратном собственном
+значении нужно рассматривать всё соответствующее подпространство.
+
+В конце §1.1 авторы связывают физическую модель с вычислением представления:
+
+> This is essentially how the Laplacian eigenmaps algorithm works, except that one does not really
+> use heat diffusion but finds the resulting heat distribution analytically in a more efficient and robust
+> way. It is also possible to map the points into a 2D or even higher-dimensional space by taking more than
+> one heat diffusion mode into account.
+
+*Wiskott и Schönfeld, §1.1, исходный английский текст, CC BY-SA 4.0.*
+
+Для расчёта возьмём рёбра этой цепочки с единичными весами и зададим
+температуру 7 в вершине $A$, ноль в остальных. Это отдельный численный
+пример: конкретные температуры цветных вершин исходного рисунка не заданы.
+Средняя температура равна 1 и сохраняется при передаче тепла.
+У цепочки $\lambda_2=2-2\cos(\pi/7)\approx0{,}198062$.
+
+```python
+import numpy as np
+from scipy.linalg import expm
+
+chain_order = [2, 4, 6, 1, 3, 5, 0]  # C, E, G, B, D, F, A; индексы A...G.
+W_chain = np.zeros((7, 7))
+for left, right in zip(chain_order[:-1], chain_order[1:]):
+    W_chain[left, right] = W_chain[right, left] = 1
+L_chain = np.diag(W_chain.sum(axis=1)) - W_chain
+chain_values, chain_vectors = np.linalg.eigh(L_chain)
+h_chain = np.zeros(7)
+h_chain[0] = 7
+
+for time in [0, 10, 50]:
+    h_time = expm(-time * L_chain) @ h_chain
+    print(time, np.round(h_time[chain_order], 6))
+
+late_heat = expm(-10 * L_chain) @ h_chain
+centered_heat = late_heat - late_heat.mean()
+alignment = abs(centered_heat @ chain_vectors[:, 1]) / np.linalg.norm(centered_heat)
+print("alignment:", round(alignment, 6))
+np.testing.assert_allclose(late_heat.sum(), 7, atol=1e-12)
+np.testing.assert_allclose(chain_values[1], 2 - 2 * np.cos(np.pi / 7))
+```
+
+При $t=10$ температуры в порядке $C,E,G,B,D,F,A$ равны приблизительно
+0,738569; 0,789865; 0,882662; 0,999033; 1,116132; 1,210565; 1,263173.
+Косинус угла центрированного
+состояния со вторым собственным вектором по модулю равен $0{,}999994$.
+При $t=50$ крайние температуры уже около $0{,}999905$ и $1{,}000095$.
+Порядок ещё различим математически, но температурные различия почти исчезли.
+Вычисление собственного вектора позволяет сразу получить направление,
+не выбирая время наблюдения и не вычитая почти равные числа.
 
 ## Численный пример: слабый мост между двумя группами
 
@@ -326,6 +422,7 @@ $h_k^\top Lh_k=\operatorname{cut}(A_k,\bar A_k)/|A_k|$, а след склады
 <a id="нормированные-laplacians"></a>
 ## Нормированные лапласианы
 
+<a id="normalized-cut"></a>
 ### Объём группы и Normalized Cut
 
 RatioCut считает размером группы число вершин. В нормированном разрезе
@@ -442,6 +539,49 @@ print("relaxation:", normalized_values[1], "Ncut:", 2 / 21)
 от ненормированного $0{,}0950124$. Оно также ниже дискретного Ncut
 $2/21$: собственный вектор не обязан принимать ровно два значения.
 
+<a id="degree-weighted-constraint"></a>
+### Геометрия взвешенной нормы
+
+![[00 Учебник/Assets/Figures/curated/spectral-2026-10-31/wiskott-weighted-constraint.png|Пунктирные линии уровня энергии, штриховая окружность обычной нормы и сплошной эллипс взвешенной нормы]]
+
+*Laurenz Wiskott и Fabian Schönfeld,
+[Laplacian Matrix for Dimensionality Reduction and Clustering, §2.4](https://www.ini.rub.de/PEOPLE/wiskott/Teaching/UnsupervisedLearning/PublicWeb/LaplacianMatrix-L0-LectureNotes-PublicWeb.pdf#page=15),
+Figure 2.2, CC BY-SA 4.0. Полный рисунок с оригинальной подписью; номера
+формул в ней относятся к исходному конспекту.*
+
+На рисунке показана смена ограничения при сохранении одной и той же
+квадратичной цели. Мелкий пунктир обозначает её линии уровня.
+Штриховая окружность соответствует обычной единичной норме, сплошной
+эллипс — взвешенной. Различить их можно и без цвета.
+Стрелки указывают точки, в которых соответствующая допустимая кривая
+касается наименьшего достижимого уровня цели.
+
+В обозначениях источника обычные векторы названы $u_\alpha$,
+обобщённые — $w_\alpha$. Авторы объясняют форму ограничения так:
+
+> For the term $w_iD_{ii}w_i$ to have the same effect size in the constraint, a
+> component $w_i$ with large $D_{ii}$ must be smaller than one with a small $D_{ii}$.
+> This is illustrated in Figure 2.2 by the green solid ellipse vs the blue dashed circle.
+> The latter is the set of points with $u_\alpha^\top u_\alpha=1$, the former
+> the set with $w_\alpha^\top Dw_\alpha=1$ with large $D_{ii}$ and small $D_{jj}$.
+
+*Wiskott и Schönfeld, §2.4, исходный английский текст с математической
+вёрсткой обозначений, CC BY-SA 4.0.*
+
+Например, при $D=\operatorname{diag}(4,1/4)$ условие взвешенной нормы
+записывается как $4f_1^2+f_2^2/4=1$. Допустимые точки на координатных осях
+равны $(\pm1/2,0)$ и $(0,\pm2)$; у обычной единичной окружности
+это $(\pm1,0)$ и $(0,\pm1)$. Одна и та же величина $f_i$ вносит больший
+вклад во взвешенную норму при большей степени $d_i$.
+
+Это двумерная схема геометрии ограничения, а не изображение нашего
+четырёхвершинного графа. В спектральной задаче дополнительно действует
+условие ортогональности нулевому направлению. Положение минимума зависит
+и от энергии, и от ограничения; по одному значению степени нельзя заключить,
+что соответствующая координата собственного вектора обязательно увеличится.
+Именно эту взвешенную задачу подстановка $u=D^{1/2}f$ выше переводит
+в обычную задачу для $L_{\mathrm{sym}}$.
+
 ### Случайное блуждание и вероятность выхода из группы
 
 Пусть из вершины $i$ выбирается сосед $j$ с вероятностью
@@ -477,6 +617,89 @@ Ncut складывает вероятности выхода из обеих ч
 Расчёт вероятности выхода остаётся верным при указанном начальном
 распределении; утверждение о сходимости для него не требуется.
 
+<a id="commute-time"></a>
+### Сколько шагов занимает путь туда и обратно
+
+Вероятность выхода за один шаг описывает границу группы. Можно поставить
+другой вопрос: сколько шагов случайное блуждание в среднем делает,
+прежде чем впервые достигнет вершины $j$ из $i$ и затем вернётся в $i$?
+Сумма двух ожидаемых времён первого достижения называется *commute time*:
+$c_{ij}=H_{ij}+H_{ji}$. Считаются шаги дискретного блуждания с матрицей
+$P=D^{-1}W$, не физическое время теплопроводности.
+
+В нашем четырёхвершинном графе из вершины 2 переход в 1 имеет вероятность
+$10/11$, а переход через мост в 3 — $1/11$. До первого достижения 3
+ожидаемые времена удовлетворяют
+
+$$
+\begin{aligned}
+H_{13}&=1+H_{23},\\
+H_{23}&=1+\frac{10}{11}H_{13}+\frac1{11}\,0.
+\end{aligned}
+$$
+
+Единица учитывает сделанный шаг. После перехода в целевую вершину
+дополнительных шагов нет, откуда $H_{23}=21$ и $H_{13}=22$.
+Из симметрии графа $H_{32}=21$, поэтому $c_{23}=42$:
+даже соседние вершины по разные стороны слабого моста могут быть далеки
+по времени блуждания.
+
+Связь со спектром выводится через псевдообратную матрицу лапласиана.
+На связном графе с $n>1$ наименьшее собственное значение равно нулю,
+остальные положительны. Обычной обратной матрицы нет; в псевдообратной
+нулевое направление оставляют нулевым, а положительные значения обращают:
+
+$$
+L^\dagger=\sum_{r=2}^n\frac1{\lambda_r}v_rv_r^\top.
+$$
+
+Согласно Proposition 6 в §6
+[von Luxburg](https://arxiv.org/abs/0711.0189v1),
+
+$$
+c_{ij}=\operatorname{vol}(V)
+(e_i-e_j)^\top L^\dagger(e_i-e_j),
+$$
+
+где $e_i$ — единичный вектор координаты $i$.
+Квадратичная форма без множителя $\operatorname{vol}(V)$ равна
+эффективному электрическому сопротивлению между вершинами,
+если вес ребра трактовать как проводимость. В нашем графе есть только
+один путь между каждой парой. Сопротивления рёбер равны $1,10,1$
+и складываются вдоль пути. При $\operatorname{vol}(V)=4{,}2$
+получаем $c_{12}=4{,}2$, $c_{23}=42$, $c_{14}=50{,}4$.
+
+```python
+positive_values, positive_vectors = eigenvalues[1:], V[:, 1:]
+L_pinv = (positive_vectors / positive_values) @ positive_vectors.T
+commute_embedding = positive_vectors / np.sqrt(positive_values)
+commute_values = {}
+for left, right in [(0, 1), (1, 2), (0, 3)]:
+    difference = np.eye(4)[left] - np.eye(4)[right]
+    commute = d.sum() * (difference @ L_pinv @ difference)
+    embedded_distance = np.sum(
+        (commute_embedding[left] - commute_embedding[right]) ** 2
+    )
+    np.testing.assert_allclose(commute, d.sum() * embedded_distance)
+    commute_values[left, right] = commute
+    print(left + 1, right + 1, round(commute, 6))
+```
+
+Строки матрицы $Z=[v_2/\sqrt{\lambda_2},\ldots,v_n/\sqrt{\lambda_n}]$
+задают представления вершин, для которых
+$c_{ij}=\operatorname{vol}(V)\|z_i-z_j\|^2$.
+Следовательно, обычным евклидовым расстоянием становится
+$\sqrt{c_{ij}/\operatorname{vol}(V)}$, а не само время $c_{ij}$.
+
+У ненормированной спектральной кластеризации используются первые $K$
+собственных векторов без такого масштабирования. Здесь же нужны все
+положительные направления с множителями $1/\sqrt{\lambda_r}$.
+Два представления связаны одним лапласианом, но не тождественны.
+Формула времени предполагает связный граф: между разными компонентами
+блуждание не проходит и ожидаемое время бесконечно, хотя формально
+вычисленная квадратичная форма псевдообратной может оказаться конечной.
+
+<a id="njw-row-normalization"></a>
 ### Зачем Ng–Jordan–Weiss нормирует строки
 
 В алгоритме Ng–Jordan–Weiss (NJW) нормируют строки матрицы $U$.
@@ -518,7 +741,7 @@ np.testing.assert_allclose(T0 @ T0.T, same_component, atol=1e-14)
 print(np.round(np.linalg.norm(U0, axis=1), 6))
 ```
 
-Нормы строк до деления — $(0{,}5;0{,}707107;0{,}5;0{,}707107;0{,}707107)$.
+Нормы пяти строк до деления равны 0,5; 0,707107; 0,5; 0,707107; 0,707107.
 После него скалярное произведение равно 1 для вершин одной компоненты
 и 0 для разных компонент. У связного графа с положительными степенями
 включённый нулевой вектор $D^{1/2}\mathbf1$ не даёт нулевых строк.
@@ -750,8 +973,9 @@ $(C+C^\top)/2$ вместо объединения через максимум. 
   §5 — релаксации разрезов, §6 — интерпретация через случайное блуждание.
 - Laurenz Wiskott и Fabian Schönfeld,
   [Laplacian Matrix for Dimensionality Reduction and Clustering](https://www.ini.rub.de/PEOPLE/wiskott/Teaching/UnsupervisedLearning/PublicWeb/LaplacianMatrix-L0-LectureNotes-PublicWeb.pdf):
-  §1.1 и §1.4 связывают рисунок выравнивания температур с собственными
-  векторами. Текст и авторские рисунки — CC BY-SA 4.0; для сторонних
+  §1.1 и §1.4 связывают рисунки выравнивания температур с собственными
+  векторами; §2.4–2.6 объясняют взвешенную норму и нормированные лапласианы.
+  Текст и авторские рисунки — CC BY-SA 4.0; для сторонних
   изображений в конспекте действуют отдельно указанные лицензии.
 
 **Назад:** [[06 Кластеризация и её ограничения]]  

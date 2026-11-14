@@ -8,6 +8,10 @@ node_modules/
 .cache/
 # Local verification snapshots; not part of the public textbook checkout.
 05 Источники/Originals/
+# Local copies of the HSE course have no verified redistribution grant.
+# The reader-facing catalogue remains tracked separately.
+05 Источники/Courses/HSE ML course/
+Assets/Sources/HSE ML course/
 # The retained deck explicitly says NVIDIA CONFIDENTIAL / DO NOT DISTRIBUTE.
 05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-06-slides.pdf
 __pycache__/

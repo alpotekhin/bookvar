@@ -1,0 +1,160 @@
+{
+  "date": "2026-11-09",
+  "scope": "Four Russian canonical chapters; one worked sequence from Q/K/V to GPT-1 training. Existing navigation and published URLs are retained; no public release.",
+  "review": {
+    "source_sections": [
+      "Vaswani et al., §§3.1–3.2: shift, causal mask, scaled dot product and multi-head attention.",
+      "Alammar, Self-Attention in Detail and Matrix Calculation; Voita, Masked Self-Attention; Karpathy, ng-video-lecture Head at 52201428.",
+      "CS336 Spring 2026, Lecture 2 at 8b59b507, lines 202–276: einsum, reduce and rearrange.",
+      "Radford et al., §§3.1–3.3 and Figure 1; OpenAI train.py at a69b5c43, _norm, block and model."
+    ],
+    "worked_example": "Recomputed from the chapter's actual Q/K/V tensors. The second row has zero future attention, z=(0.330238,1.339523), and positive vocabulary probability 0.083421 for sleeps; unrounded next-token CE is 2.483849872. Dropping or changing the third input preserves the causal prediction; the unmasked negative control changes.",
+    "local_checks": "2015 built pages; 715 publication and 219 output tests passed; zero broken internal links. Ran the self-attention, architecture and GPT-1 example checks and all six masking snippets.",
+    "reader": "Chrome at 375 and 1280 px: followed all four steps from the textbook, both topic-index links in each locale, and the two-way CS336 link. Checked rendered equations and the compact mask table; opened the four selected original figures and tested mobile zoom.",
+    "limits": "English prose is unchanged. Original figure files and chapter embeds are unchanged; the historical GPT-1 paper figure rights remain unverified for public reproduction. This pilot is not whole-book or deployment acceptance."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md",
+      "before_sha256": "270146832ba9d5f349939f802663643786563c05fd88bb0271633fcfce0baba7",
+      "after_sha256": "b430b8e30168f6515998bae75153cf2ad9573eec6a88e7a2e305da208f305feb",
+      "changes": [
+        {
+          "old": "Возьмём три позиции, $d_{\\mathrm{model}}=3$ и $d_k=d_v=2$.\nПусть строки $X$ — три строки единичной матрицы $I_3$.\nВыберем $W_Q$ и $W_K$ с одинаковыми численными значениями,",
+          "new": "Возьмём три позиции: `a`, `cat` и `sleeps`. Для ручного расчёта\nсчитаем каждое слово одним токеном и берём $d_{\\mathrm{model}}=3$,\n$d_k=d_v=2$. Строки $X$ — три строки единичной матрицы $I_3$.\nВыберем $W_Q$ и $W_K$ с одинаковыми численными значениями,"
+        },
+        {
+          "old": "Даже при $Q=K$ веса $a_{13}$ и $a_{31}$ различаются:\nсимметричная матрица скалярных произведений нормируется по разным строкам.",
+          "new": "Даже при $Q=K$ веса $a_{13}$ и $a_{31}$ различаются:\nсимметричная матрица скалярных произведений нормируется по разным строкам.\n\nВ строке `cat` на `sleeps` приходится вес $0.401112$. Для энкодера,\nкоторому дана вся фраза, такая связь допустима. Для модели, которая\nдолжна по `a cat` предсказать `sleeps`, это подсказка из будущего.\n[[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#Что видит второй токен в a cat sleeps|Пересчитаем ту же строку с причинной маской]]."
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md",
+      "before_sha256": "9306be89c604c905489000ffcebffb32e16161f66e07540005d0f394097c0fd5",
+      "after_sha256": "d383a059756b154b2ecfc0f0a0445c4e92ac9e1cb33774a2bec0dfd2a3d5cb9a",
+      "changes": [
+        {
+          "old": "Маска не делает обучение последовательным. Все строки $S$ по-прежнему можно\nвычислить одним матричным умножением; запрещённые связи удаляются перед\nsoftmax. Последовательной остаётся генерация, потому что следующий входной\nтокен ещё не известен.",
+          "new": "Маска не делает обучение последовательным. Все строки $S$ по-прежнему можно\nвычислить одним матричным умножением; запрещённые связи удаляются перед\nsoftmax. Последовательной остаётся генерация, потому что следующий входной\nтокен ещё не известен.\n\n### Что видит второй токен в a cat sleeps\n\nВернёмся к [[00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V#4. Численный пример, который можно проверить вручную|трём позициям из расчёта Q, K и V]].\nУ строки `cat` запрос $(0,1)$, а оценки после деления на $\\sqrt 2$\nравны $(0,1/\\sqrt 2,1/\\sqrt 2)$. В полном внимании `cat` и `sleeps`\nполучают одинаковый вес. В причинной модели последняя оценка заменяется\nна $-\\infty$ до softmax. В знаменателе остаётся $1+e^{1/\\sqrt 2}$:\n\n| Запрос | Веса по порядку токенов |\n| --- | --- |\n| `a` | $(1,0,0)$ |\n| `cat` | $(0.330238,0.669762,0)$ |\n| `sleeps` | $(0.248255,0.248255,0.503490)$ |\n\nТретья строка совпадает с расчётом без маски: справа от `sleeps`\nуже нет токенов. Вторая строка теперь смешивает только\n$v_1=(1,0)$ и $v_2=(0,2)$, давая $z_2\\approx(0.330238,1.339523)$.\nПри обучении `sleeps` есть в последовательности и служит правильным\nответом для строки `cat`. Но $v_3$ не входит в её вычисление. Если\nмодель получила только `a cat`, у второго запроса остаются те же два ключа.\n\nИз двух координат $z_2$ ещё нельзя выбрать слово. Для этого\n[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна#От выхода головы к логитам словаря|вернём результат в остаточную ветвь блока и получим оценки по словарю]]."
+        },
+        {
+          "old": "Последовательность `einsum` → `reduce` → `rearrange` разобрана в\n[CS336, Lecture 2, функции `einops_einsum`, `einops_reduce` и `einops_rearrange`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_02.py#L202-L276).",
+          "new": "Последовательность `einsum` → `reduce` → `rearrange` разобрана в\n[CS336, Lecture 2, функции `einops_einsum`, `einops_reduce` и `einops_rearrange`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_02.py#L202-L276).\n[[05 Источники/Courses/Stanford CS336 Spring 2026/_index#lecture-02|В библиотеке CS336]]\nсобраны оригинальная лекция, её исходный код и задание по реализации внимания."
+        },
+        {
+          "old": "  - assignment-01-task-multihead-self-attention",
+          "new": "  - assignment-01-task-multihead-self-attention\nreference_terms:\n  - label: Причинная маска — видимость токенов и сдвиг целей\n    label_en: Causal mask — token visibility and shifted targets\n    anchor: causal-mask-shifted-targets"
+        },
+        {
+          "old": "### Причинная маска: не подсматривать ответ",
+          "new": "<a id=\"causal-mask-shifted-targets\"></a>\n\n### Причинная маска: не подсматривать ответ"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md",
+      "before_sha256": "a99819704bcdd1ff795c39a2240b8c32331fded5b1372c302f69e381d123d6e8",
+      "after_sha256": "2ac39b604e19de356bf5e4b1cc5cc986a43e7d17105667d8639a07d90e160080",
+      "changes": [
+        {
+          "old": "Один стек выдаёт состояния позиций и логиты; способ выбора токена\nне определяется архитектурой.",
+          "new": "Один стек выдаёт состояния позиций и логиты; способ выбора токена\nне определяется архитектурой.\n\n### От выхода головы к логитам словаря\n\nПо префиксу `a cat` нужно предсказать третий токен. Возьмём\n[[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#Что видит второй токен в a cat sleeps|выход головы на позиции cat]]\n$z_2\\approx(0.330238,1.339523)$ и продолжим расчёт в одном блоке\nс нормализацией после остаточных сложений, как в\n[исходном коде GPT-1, функция block](https://github.com/openai/finetune-transformer-lm/blob/a69b5c43b0452462890bca8ff92fb75dee9290cf/train.py).\n\nУ головы две координаты, а у строки `cat` три: $x_2=(0,1,0)$.\nПусть выходная матрица дописывает к $z_2$ ноль. Тогда после проекции\nи сложения с входом получается $(0.330238,2.339523,0)$.\nLayerNorm вычитает среднее этих трёх координат и делит на\n$\\sqrt{\\operatorname{Var}+10^{-5}}$. Среднее равно примерно $0.889921$,\nдисперсия по трём координатам — $1.068850$. После нормализации\nполучается $(-0.541354,1.402131,-0.860777)$.\n\nДля ручного счёта позиционные добавки и выход FFN равны нулю,\nа у обеих LayerNorm масштаб равен единице и смещение равно нулю.\nВо второй остаточной сумме остаётся выход первой LayerNorm.\nПосле второй нормализации получаем $h_2\\approx(-0.541353,1.402130,-0.860777)$.\nОбе нормализации работают внутри строки; FFN тоже применяется отдельно\nк каждой позиции. Поэтому эти операции не возвращают доступ к `sleeps`.\n\nТеперь применим выходную проекцию из\n[§3.1 статьи GPT-1](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=3):\nкаждый логит равен скалярному произведению $h_2$ и строки токена\nиз входной таблицы. Наш словарь состоит только из `a`, `cat` и `sleeps`,\nа таблица равна $I_3$. Поэтому три координаты $h_2$ становятся тремя\nлогитами в том же порядке:\n\n| Токен словаря | Логит | Вероятность после softmax |\n| --- | ---: | ---: |\n| `a` | $-0.541353$ | $0.114816$ |\n| `cat` | $1.402130$ | $0.801763$ |\n| `sleeps` | $-0.860777$ | $0.083421$ |\n\nУ первого softmax столбцы обозначали позиции входа, у второго —\nтокены словаря. Поэтому `sleeps` может получить ненулевую вероятность,\nдаже если его позиция закрыта маской. Наши заданные веса предпочли бы\n`cat`; правильный ответ `sleeps` нужен для вычисления ошибки.\n[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение#Один префикс на двух этапах обучения|Посмотрим, как GPT-1 использует этот выход при предобучении и что меняется при дообучении]]."
+        },
+        {
+          "old": "last_updated: 2026-10-22",
+          "new": "last_updated: 2026-10-22\nreference_terms:\n  - label: Decoder-only — маска и следующий токен\n    label_en: Decoder-only — masking and next-token prediction\n    anchor: decoder-only-next-token"
+        },
+        {
+          "old": "## Decoder-only: предсказать следующий токен",
+          "new": "<a id=\"decoder-only-next-token\"></a>\n\n## Decoder-only: предсказать следующий токен"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md",
+      "before_sha256": "318e040db226fabac04ba6576bf629775600e4626a03e2ac7ce0a4ec16967499",
+      "after_sha256": "0322cfa1b733476f465537ee766e2c523de5cd8c1d64a997656a88aaab4e3a85",
+      "changes": [
+        {
+          "old": "Для классификации поверх состояния выбранной позиции ставят другую,\nнебольшую матрицу. Обе головы получают представления из одного Transformer,\nно распределения у них разные: по токенам словаря и по меткам задачи.",
+          "new": "Для классификации поверх состояния выбранной позиции ставят другую,\nнебольшую матрицу. Обе головы получают представления из одного Transformer,\nно распределения у них разные: по токенам словаря и по меткам задачи.\n\n### Один префикс на двух этапах обучения\n\nВ [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна#От выхода головы к логитам словаря|примере с одним блоком]] по `a cat`\nполучили $p(\\text{sleeps}\\mid\\text{a cat})\\approx0.083421$.\nВ обучающем тексте после `cat` стоит `sleeps`. Вклад этой позиции в потерю\nравен $-\\ln p\\approx2.484$. Для получения такого сигнала\nне нужна ручная разметка: достаточно знать следующий токен в тексте.\nПо тому же правилу строка `a` учится предсказывать `cat`.\nПравильный токен участвует в потере, а не в вычислении состояния слева от него.\n\nТеперь предположим, что размеченная пара содержит посылку `A cat sleeps`,\nгипотезу `An animal rests` и метку логического следования. GPT-1 подаёт\nобе фразы в тот же причинный стек, разделяет их служебным токеном\nи дописывает `Extract`. Эта последняя позиция видит обе фразы.\nНовая голова получает её состояние и выдаёт три оценки отношений,\nа не оценки словаря. Разметка задаёт правильную связь между фразами;\nиз одного лишь продолжения `a cat` такая метка не получается.\n\nПредобучение даёт начальные веса стека. На втором этапе ошибка\nклассификации меняет и новую голову, и перенесённые веса. Авторы\nсохраняют также языковую потерю как дополнительное слагаемое.\nОбе цели и форматы входов показаны на полном рисунке 1 ниже\n([Radford et al., §§3.1–3.3](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=3))."
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "fcbe72ae2f14d746ca50281cde5f8c2ce4aac462856cb91b01de0955e91a605a",
+      "after_sha256": "49777bf6651814f62d6aa2a849f611f686a9ea2e90c34515a9d9a2d7d5c319bd",
+      "changes": [
+        {
+          "old": "<a id=\"полный-маршрут\"></a>",
+          "new": "Расчёт от внимания до языковой модели начинается с\n[[00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V#4. Численный пример, который можно проверить вручную|трёх токенов a cat sleeps]].\nОт Q, K и V он ведёт через причинную маску и логиты словаря\nк предобучению и дообучению GPT-1.\n\n<a id=\"полный-маршрут\"></a>"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "56ed40badb1bc8a99fb132b3cbf543125170f7438e6da349d42942055cbef4ec",
+      "after_sha256": "06b282d0b81002e61a1721cc0cb836bdee81d82a375cb810931a6224edfa908c",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|Маски, несколько голов и формы тензоров]]",
+          "new": "- [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|Маски, несколько голов и формы тензоров]]\n  - [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#causal-mask-shifted-targets|Причинная маска — видимость токенов и сдвиг целей]]"
+        },
+        {
+          "old": "- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектурных паттерна Transformer]]",
+          "new": "- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектурных паттерна Transformer]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна#decoder-only-next-token|Decoder-only — маска и следующий токен]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+      "before_sha256": "ccc5413eb9399c7a109ed5ac06f8aa55b324e7b46928d1c0d7e784d7f9e01017",
+      "after_sha256": "4692006c33b5f84eaa49ee5a8ee761aaf74e44d190da07abfd4f46d9bd0ba4c1",
+      "changes": [
+        {
+          "old": "[Оригинальная лекция с кодом и иллюстрациями](https://cs336.stanford.edu/lectures/?trace=lecture_02) · [сохранённый Python-файл](Lectures/repository/lecture_02.py)",
+          "new": "[Оригинальная лекция с кодом и иллюстрациями](https://cs336.stanford.edu/lectures/?trace=lecture_02) · [сохранённый Python-файл](Lectures/repository/lecture_02.py)\n\nВ учебнике: [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#Именованные оси: rearrange, einsum и reduce|формы тензоров внимания в примере с двумя головами]]."
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/05 Attention and Transformer/03 Masking, multi-head attention, and tensor shapes.md",
+      "before_sha256": "64bbbd9085a4c30083a2f77df49316bc13087083d43f720ec7937ae781154e9d",
+      "after_sha256": "f839912bc6169f0d470992ecb579fe96d2056bacce44b0de2789c4820a416bea",
+      "changes": [
+        {
+          "old": "### Causal masking and shifted targets",
+          "new": "<a id=\"causal-mask-shifted-targets\"></a>\n\n### Causal masking and shifted targets"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md",
+      "before_sha256": "d2104d394673c898c019becd49fa2337f01ae82abf694ac03ea3fabdbb4212a2",
+      "after_sha256": "25b1f1897798d76eeffd6fb1f64bf2c690dff3b75878c24a3e452944081d42ed",
+      "changes": [
+        {
+          "old": "## Decoder-only: predict the next token",
+          "new": "<a id=\"decoder-only-next-token\"></a>\n\n## Decoder-only: predict the next token"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "83fc5d8e36db4ea4ffaad4427a9279681f185d776bd7ed298b47e3c2926067be",
+      "after_sha256": "14efaaa11a0ab5f6276f90150165eef955dbd6642121bdb2b749ba9674b4af5f",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|Masking, heads, and tensor shapes]] · **EN**",
+          "new": "- [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|Masking, heads, and tensor shapes]] · **EN**\n  - [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#causal-mask-shifted-targets|Causal mask — token visibility and shifted targets]]"
+        },
+        {
+          "old": "- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three architectural patterns]] · **EN**",
+          "new": "- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three architectural patterns]] · **EN**\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна#decoder-only-next-token|Decoder-only — masking and next-token prediction]]"
+        }
+      ]
+    }
+  ]
+}

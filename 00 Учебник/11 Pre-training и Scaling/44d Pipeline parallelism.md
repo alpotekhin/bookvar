@@ -2,8 +2,96 @@
 title: Конвейерное обучение
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-23
-last_verified: 2026-10-23
+last_updated: 2026-11-05
+last_verified: 2026-11-05
+reference_terms:
+  - anchor: pp-boundaries
+    label: "Что передают стадии: активации и производные"
+    label_en: "Stage boundaries: activations and input gradients"
+  - anchor: pp-message-bytes
+    label: "Размер PP-сообщения и время передачи"
+    label_en: "PP message sizes and transfer-time bounds"
+  - anchor: gpipe-complete-p4-m4-schedule
+    label: "GPipe: расписание четырёх стадий и микропакетов"
+    label_en: "GPipe: the complete four-stage/four-microbatch schedule"
+  - anchor: pp-bubble-denominators
+    label: "Pipeline bubble: доля шага и накладные расходы к работе"
+    label_en: "Pipeline bubbles: step fractions versus overhead over work"
+  - anchor: pp-gpipe-memory
+    label: "GPipe: накопление активаций и checkpointing"
+    label_en: "GPipe activation lifetimes and checkpointing"
+  - anchor: pp-gpipe-loop
+    label: "GPipe: порядок forward, backward и optimizer step"
+    label_en: "GPipe forward, backward and optimizer-step order"
+  - anchor: pp-1f1b-schedule
+    label: "1F1B: прогрев, чередование и опустошение"
+    label_en: "1F1B warmup, steady state and drain"
+  - anchor: pp-1f1b-live
+    label: "1F1B: живые активации на разных стадиях"
+    label_en: "1F1B live activation counts by stage"
+  - anchor: pp-weight-stashing
+    label: "Синхронный шаг, PipeDream и версии весов"
+    label_en: "Synchronous steps, PipeDream and weight stashing"
+  - anchor: pp-process-autograd
+    label: "Передача градиента между раздельными autograd-графами"
+    label_en: "Passing gradients between separate autograd graphs"
+  - anchor: pp-stage-balance
+    label: "Баланс стадий по времени и памяти"
+    label_en: "Balancing stage runtime and memory"
+  - anchor: pp-layer-partition
+    label: "Непрерывное разбиение слоёв: динамическое программирование"
+    label_en: "Contiguous layer partitioning with dynamic programming"
+  - anchor: pp-microbatch-size
+    label: "Глобальный batch, число микропакетов и размер GEMM"
+    label_en: "Global batch, microbatch count and GEMM sizes"
+  - anchor: pp-interleaved-placement
+    label: "Interleaving: несколько частей модели на GPU"
+    label_en: "Interleaving multiple model chunks per GPU"
+  - anchor: pp-interleaved-bubble
+    label: "Виртуальные стадии и оценка bubble"
+    label_en: "Virtual stages and the bubble estimate"
+  - anchor: pp-interleaved-bytes
+    label: "Цена interleaving: 12 против 28 GiB по всем связям"
+    label_en: "Interleaving traffic: 12 versus 28 GiB across all links"
+  - anchor: pp-interleaved-priority
+    label: "Depth-first, breadth-first и ограничения flex_pp"
+    label_en: "Depth-first, breadth-first and flex_pp constraints"
+  - anchor: pp-zero-bubble-split
+    label: "Zero Bubble: отдельно производные входов и весов"
+    label_en: "Zero Bubble: separating input and weight gradients"
+  - anchor: pp-deferred-dw-storage
+    label: "Отложенный dW и срок хранения X/dY"
+    label_en: "Deferred weight gradients and X/dY lifetimes"
+  - anchor: pp-zb1p-zb2p
+    label: "ZB1P/ZB2P: расписание и бюджет активаций"
+    label_en: "ZB1P/ZB2P schedules and activation budgets"
+  - anchor: pp-zbv
+    label: "ZBV: обратное размещение двух частей"
+    label_en: "ZBV: reverse placement of two model chunks"
+  - anchor: pp-postvalidation
+    label: "Post-validation: clipping, rollback и состояние оптимизатора"
+    label_en: "Post-validation: clipping, rollback and optimizer state"
+  - anchor: pp-dualpipe
+    label: "DualPipe, DualPipeV и обмены MoE"
+    label_en: "DualPipe, DualPipeV and MoE communication"
+  - anchor: pp-dp-configuration
+    label: "PP×DP: пример 48 блоков на 32 GPU"
+    label_en: "PP×DP: a 48-block model on 32 GPUs"
+  - anchor: pp-tied-weights
+    label: "Общие embedding/output-веса на разных стадиях"
+    label_en: "Tied embedding/output weights across stages"
+  - anchor: pp-global-token-loss
+    label: "Нормировка по полезным токенам всех микропакетов"
+    label_en: "Normalization over valid tokens across microbatches"
+  - anchor: pp-scale-grads
+    label: "scale_grads и повторное усреднение"
+    label_en: "scale_grads and repeated averaging"
+  - anchor: pp-message-contract
+    label: "Согласование сообщений, PP-буферов, shapes и dtype"
+    label_en: "Matching messages, PP buffers, shapes and dtypes"
+  - anchor: pp-validation
+    label: "Проверки математики, расписания и сетевого исполнения"
+    label_en: "Checking mathematics, schedules and distributed execution"
 source_unit_id:
   - lecture-07-parallelism-strategy-comparison
   - lecture-08-pipeline-parallelism
@@ -26,7 +114,7 @@ source_unit_id:
 стадиях. Если проводить через модель один пакет целиком, большинство
 устройств почти всё время будет простаивать.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/pipeline-2026-10-23/hf-naive-pipeline.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/pipeline-2026-10-23/hf-naive-pipeline.svg|Последовательный forward и backward без микропакетов]]
 
 *Последовательное выполнение без микропакетов. Nouamane Tazi и соавторы,
 Hugging Face, Ultra-Scale Playbook,
@@ -47,6 +135,8 @@ Hugging Face, Ultra-Scale Playbook,
 [[44c Tensor и sequence parallelism|tensor parallelism]], здесь один слой
 не делится между стадиями: на границе передают его результат, а не собирают
 частичные результаты одного матричного умножения.
+
+<a id="pp-boundaries"></a>
 
 ## Состояние и формы на границе
 
@@ -80,6 +170,8 @@ $D$ — размер представления токена. Обратное �
 $\partial L/\partial A_i^{(\mu)}$ имеет ту же форму. Его тип данных
 не обязан совпадать с типом активации; объём каждого направления считают
 отдельно.
+
+<a id="pp-message-bytes"></a>
 
 При BF16, $b_\mu=2$, $S=4096$, $D=8192$ одна передача занимает
 
@@ -124,7 +216,7 @@ GPipe сначала выполняет прямые проходы всех м�
 оказаться недостаточно. На GPU также возможны расхождения округления
 из-за другого порядка суммирования.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-pipeline-gpipe.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-pipeline-gpipe.svg|GPipe: прямые проходы всех микропакетов, затем обратные проходы]]
 
 *Расписание GPipe из Hugging Face, Ultra-Scale Playbook.
 [Оригинальный SVG](https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/pp_afab2.svg),
@@ -157,6 +249,8 @@ S3    .  .  . F0 F1 F2 F3 B3 B2 B1 B0  .  .  .
 в такт 6 нельзя, хотя S2 тогда свободна: требуемой производной ещё нет.
 Именно такие зависимости нужно проверять в любой диаграмме расписания.
 
+<a id="pp-bubble-denominators"></a>
+
 ### Откуда берётся доля простоя
 
 Пусть прямой проход одного микропакета занимает $t_F$ на каждой стадии,
@@ -188,6 +282,8 @@ $4/7\approx57{,}1\%$, простой — $3/7\approx42{,}9\%$.
 но только 42,9% от 14 полных. При сравнении графиков нужно сначала
 проверить, какой из этих двух показателей использован.
 
+<a id="pp-gpipe-memory"></a>
+
 ### Почему накапливаются активации
 
 После `F3` первая стадия хранит значения, нужные для обратных проходов
@@ -204,6 +300,8 @@ $4/7\approx57{,}1\%$, простой — $3/7\approx42{,}9\%$.
 [[44b Gradient checkpointing и offload|Пересчёт активаций]] меняет $A$:
 можно сохранять границы частей модели, а внутренние значения восстановить
 перед обратным проходом. Он не меняет сами зависимости между стадиями.
+
+<a id="pp-gpipe-loop"></a>
 
 ### Псевдокод GPipe
 
@@ -230,6 +328,8 @@ optimizer_step_once_after_all_microbatches()
 
 ## 1F1B: освобождать активации раньше
 
+<a id="pp-1f1b-schedule"></a>
+
 <a id="1f1b-warm-up-steady-state-и-drain"></a>
 
 Для обратного прохода микропакета 0 не требуется ждать прямого прохода
@@ -238,7 +338,7 @@ optimizer_step_once_after_all_microbatches()
 следующего микропакета. Такое чередование называется *one forward,
 one backward*, или 1F1B.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-pipeline-1f1b.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-pipeline-1f1b.svg|1F1B: чередование прямых и обратных проходов по стадиям]]
 
 *1F1B в тех же обозначениях. Hugging Face, Ultra-Scale Playbook,
 [оригинальный SVG](https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/pp_1f1b.svg),
@@ -264,6 +364,8 @@ S3    .  .  . F0 B0 F1 B1 F2 B2 F3 B3  .  .  .
 `B0`. На S1 прогревочных проходов два, на S2 — один, на S3 — ни одного.
 После последнего прямого прохода остаётся опустошить конвейер: выполнить
 обратные проходы, для которых ещё сохранены активации.
+
+<a id="pp-1f1b-live"></a>
 
 В этой модели максимум одновременно незавершённых прямых проходов равен
 4, 3, 2 и 1 соответственно. Для стадии с индексом $i$ строгий порядок ниже
@@ -294,6 +396,8 @@ optimizer_step_once_after_flush()
 4, 3, 2 и 1 микропакетов на соответствующих стадиях, тогда как GPipe
 накапливает 16 на каждой.
 
+<a id="pp-weight-stashing"></a>
+
 Оба расписания синхронны: обновление параметров происходит после завершения
 всех микропакетов пакета. Само чередование F и B не требует хранить
 несколько версий весов. В асинхронном обучении с обновлениями между
@@ -304,6 +408,8 @@ $dL/dy=1$ другой микропакет уже изменил $w$ на 4, т
 Хранение версий (*weight stashing*) позволяет использовать подходящий
 старый вес. Исходный PipeDream применяет этот приём, но его асинхронное
 обновление всё равно отличается от синхронного шага на одном общем пакете.
+
+<a id="pp-process-autograd"></a>
 
 ### Как производная пересекает границу процессов
 
@@ -383,6 +489,8 @@ def pipeline_step(parts, x, target, grid):
 
 ## Баланс стадий, память и размер микропакета
 
+<a id="pp-stage-balance"></a>
+
 <a id="stage-balance-bubble-и-память"></a>
 
 Разделить 48 блоков на четыре равные части — разумная отправная точка,
@@ -398,6 +506,8 @@ def pipeline_step(parts, x, target, grid):
 а часть ожиданий зависит от порядка передач. Для грубой оценки можно
 использовать медленнейшую стадию; для проверки нужны временные метки
 операций и обменов.
+
+<a id="pp-layer-partition"></a>
 
 Для последовательной модели можно сначала решить более простую задачу:
 разбить список оценённых стоимостей слоёв на $p$ непрерывных частей так,
@@ -474,6 +584,8 @@ print(partition_costs([2, 2, 8, 2, 2, 2], 3))
 У реальных стадий 900 MiB также могут различаться. Таблица показывает,
 откуда возникает экономия, но не предсказывает пик занятой GPU-памяти.
 
+<a id="pp-microbatch-size"></a>
+
 Увеличение $m$ уменьшает относительный простой. При фиксированном
 глобальном пакете $B$, числе независимых реплик $R$ и равных микропакетах
 
@@ -485,6 +597,8 @@ $$
 Если увеличить $m$ до 32, микропакет уменьшится до одной последовательности.
 На узких матричных произведениях GPU может работать менее эффективно.
 Выигрыш от меньшего простоя тогда частично или полностью теряется.
+
+<a id="pp-interleaved-placement"></a>
 
 ## Несколько частей модели на одном GPU
 
@@ -504,13 +618,15 @@ $$
 Их можно перемежать так, чтобы раньше передавать результаты соседям
 и уменьшать ожидание. Это *interleaved pipeline parallelism*.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/pipeline-review-2026-10/hf-interleaved-1f1b.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/pipeline-review-2026-10/hf-interleaved-1f1b.svg|Перемежающееся 1F1B с двумя частями модели на каждом GPU]]
 
 *Перемежающееся 1F1B. Hugging Face, Ultra-Scale Playbook,
 [оригинальный SVG](https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/pp_1f1b_interleaved.svg),
 Apache-2.0. Разные оттенки выделяют части модели на одном GPU.
 Номер микропакета появляется на устройстве повторно, потому что теперь
 ему нужно пройти обе локальные части.*
+
+<a id="pp-interleaved-bubble"></a>
 
 В идеализированной модели с $v$ равными частями на устройство дополнительное
 время ожидания сокращается примерно в $v$ раз:
@@ -529,6 +645,8 @@ $$
 Делимость числа микропакетов и допустимые порядки операций также зависят
 от конкретной реализации, а не следуют из названия метода.
 
+<a id="pp-interleaved-bytes"></a>
+
 Посчитаем пересылки для указанного размещения. Без перемежения один
 микропакет пересекает три границы устройств в прямом проходе и три
 в обратном. При $v=2$ частей уже восемь, и границ между ними семь:
@@ -540,6 +658,8 @@ $$
 для конечной цепочки не обязано быть точно $v$: формулировка о росте
 обменов в $v$ раз описывает масштабирование числа частей. На конкретной
 GPU считают её фактические входящие и исходящие сообщения.
+
+<a id="pp-interleaved-priority"></a>
 
 Если на одном GPU одновременно готовы две части, нужно ещё выбрать,
 какую запустить. Приоритет поздней части с ранним микропакетом быстрее
@@ -560,6 +680,8 @@ GPU считают её фактические входящие и исходя�
 отдаст приоритет первой части и микропакету 5. Оба порядка должны
 соблюдать те же зависимости. Различаются время ожидания последующих
 стадий и число одновременно сохранённых наборов активаций.
+
+<a id="pp-zero-bubble-split"></a>
 
 <a id="что-меняют-zero-bubble-и-dualpipe"></a>
 
@@ -582,7 +704,7 @@ $$
 а `W` — производную весов. Наши прежние `B0`, `B1` включали обе работы.
 В полном обратном проходе по-прежнему выполняются обе работы.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/dependency.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/dependency.png|Две ветви backward: производная входа B и производная весов W]]
 
 *Разделение обратного прохода на B и W. Penghui Qi, Xinyi Wan,
 Guangxing Huang и Min Lin, Sea AI Lab,
@@ -640,6 +762,8 @@ backward на две равные по времени половины без р
 обновления весов. Поэтому «нулевой простой» означает результат конкретного
 расписания при его допущениях, а не отсутствие любых пауз в реальной системе.
 
+<a id="pp-deferred-dw-storage"></a>
+
 Для отдельного умножения $XW$ отложенная W-работа хранит $X$ формы
 $T\times D_{\mathrm{in}}$ и $dY$ формы $T\times D_{\mathrm{out}}$.
 Если это два отдельных BF16-буфера, их объём равен
@@ -650,6 +774,8 @@ $D_{\mathrm{in}}=D_{\mathrm{out}}=8192$ это 256 MiB на один
 В полном Transformer часть сохранений может использоваться совместно;
 256 MiB здесь относятся только к двум заданным буферам, а не к пику блока.
 
+<a id="pp-zb1p-zb2p"></a>
+
 ### Как отложенная работа заполняет простой
 
 Пусть каждая из работ F, B, W занимает один такт, а передача мгновенна.
@@ -658,7 +784,7 @@ $D_{\mathrm{in}}=D_{\mathrm{out}}=8192$ это 256 MiB на один
 времени на заполнение и завершение. Перенос W в интервалы ожидания
 сокращает это время; сами $3m$ операций на каждой стадии остаются.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/zb1p.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/zb1p.png|ZB1P: отложенные W-операции в расписании четырёх устройств]]
 
 *ZB1P в авторском планировщике, четыре устройства и восемь микропакетов.
 Qi и соавторы, Sea AI Lab,
@@ -681,7 +807,7 @@ Qi и соавторы, Sea AI Lab,
 Можно запустить дополнительные F, но для них придётся сохранить активации.
 Этот вариант показан ниже.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/zb2p.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/zb2p.png|ZB2P: дополнительные forward-операции требуют большего бюджета активаций]]
 
 *ZB2P. Qi и соавторы, Sea AI Lab,
 [исходная страница](https://huggingface.co/spaces/sail/zero-bubble-pipeline-parallellism/blob/34d85332bccf8111db03eed694bbcd10f8231ee4/description2.md),
@@ -712,6 +838,8 @@ Device 1 хранит семь наборов активаций: ни один 
 одного W-такта уже не всегда хватит, чтобы закрыть ожидание. Планировщику
 нужны измеренные длительности, стоимость передач и время жизни буферов.
 
+<a id="pp-zbv"></a>
+
 ### ZBV: две части модели с обратным размещением
 
 В обычном перемежающемся конвейере микропакет дважды проходит устройства
@@ -722,7 +850,7 @@ Device 1 хранит семь наборов активаций: ни один 
 Переход между двумя половинами на GPU 3 локален; остальные шесть
 границ пересекают устройства. Суммарное число слоёв на GPU не изменилось.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/zbv.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/zbv.png|V-образный путь одного микропакета и полное расписание ZBV]]
 
 *Полная исходная схема ZBV, включая путь одного микропакета сверху
 и расписание пакетов снизу. Qi и соавторы, Sea AI Lab,
@@ -743,6 +871,8 @@ Device 1 хранит семь наборов активаций: ни один 
 частями. Это сравнение расписаний при равных временах F/B/W,
 не измерение пика памяти и скорости произвольного Transformer.
 
+<a id="pp-postvalidation"></a>
+
 ### Обновление параметров и post-validation
 
 Проверка клиппинга тоже проходит через все стадии. При локальных
@@ -756,7 +886,7 @@ post-validation: предварительное обновление затем 
 [§4 статьи](https://arxiv.org/html/2401.10241v1#S4), а не разрешение
 вызывать обычный `optimizer.step()` до завершения проверок.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/optimizer.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/optimizer.png|Post-validation: сообщения общей проверки, шаги оптимизатора и откат]]
 
 *Post-validation. Qi и соавторы, Sea AI Lab,
 [исходная страница](https://huggingface.co/spaces/sail/zero-bubble-pipeline-parallellism/blob/34d85332bccf8111db03eed694bbcd10f8231ee4/description2.md),
@@ -784,6 +914,8 @@ post-validation не разрешает.
 равных времён F, input-backward и weight-backward. Поддержка имени
 расписания библиотекой не гарантирует нулевой простой конкретной модели.
 
+<a id="pp-dualpipe"></a>
+
 ### DualPipe и коммуникации MoE
 
 DualPipe дополнительно согласует вычисления с коммуникациями MoE.
@@ -793,6 +925,8 @@ DualPipe дополнительно согласует вычисления с �
 разобраны в [[02 Areas/ML & DL/00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#DualPipe и DualPipeV|разделе о DualPipe]].
 При сравнении фиксируют одинаковую модель, физические GPU,
 объём памяти и число токенов, а не только размер серой области на рисунке.
+
+<a id="pp-dp-configuration"></a>
 
 ## Полная конфигурация
 
@@ -825,6 +959,8 @@ $$
 нужно проверить, есть ли достаточно независимой работы и не задерживается
 ли критический путь.
 
+<a id="pp-tied-weights"></a>
+
 Если входной embedding и выходная проекция используют общие веса,
 их физические копии могут оказаться на первой и последней стадиях.
 Тогда вклады в градиент одного логического параметра нужно **сложить**,
@@ -833,6 +969,8 @@ $$
 Иначе даже правильное расписание будет обучать другую модель.
 
 ## Нормирование потерь и проверка реализации
+
+<a id="pp-global-token-loss"></a>
 
 <a id="trade-offs-и-верификация"></a>
 
@@ -861,11 +999,15 @@ $$
 нужно отдельно выбрать политику пропуска шага, а не делить на ноль.
 Именно поэтому `pipeline_step` использует `reduction="sum"` и общий count.
 
+<a id="pp-scale-grads"></a>
+
 В PyTorch 2.14 расписания `torch.distributed.pipelining` имеют параметр
 `scale_grads`, по умолчанию включённый. Его нужно согласовать с функцией
 потерь: если общий знаменатель уже учтён, дополнительное усреднение
 по числу микропакетов не требуется.
 См. [документацию расписаний](https://docs.pytorch.org/docs/2.14/distributed.pipelining.html#pipeline-schedules).
+
+<a id="pp-message-contract"></a>
 
 Для сетевого выполнения недостаточно, чтобы соседние процессы знали
 форму тензора. Должны совпасть направление, стадия и микропакет сообщения,
@@ -883,6 +1025,8 @@ $$
 для переменных длин используют согласованные padding/bucketing либо
 явно поддержанный runtime-протокол. Маски и position IDs также должны
 оказаться на той стадии, которая их использует.
+
+<a id="pp-validation"></a>
 
 Проверку удобно разделить на три уровня:
 

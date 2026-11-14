@@ -83,6 +83,24 @@ def main():
         assert np.allclose(np.linalg.inv(matrix) @ (matrix @ point), point)
     assert (100 * 2, (700 - 100) * 2) == (200, 1200)
 
+    # Binary relations in the completed panel of Figure 3, not model predictions.
+    precedes = np.array([
+        [0, 1, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [1, 1, 0, 1, 1],
+        [1, 1, 0, 0, 0],
+        [1, 1, 0, 1, 0],
+    ])
+    assert np.array_equal(precedes + precedes.T, 1 - np.eye(5))
+    predecessors = precedes.sum(axis=0)
+    reading_order = predecessors.argsort() + 1
+    assert predecessors.tolist() == [3, 4, 0, 2, 1]
+    assert reading_order.tolist() == [3, 5, 4, 1, 2]
+    invoice_regions = {1: "total", 2: "footnote", 3: "heading", 4: "tax", 5: "subtotal"}
+    assert [invoice_regions[i] for i in reading_order] == [
+        "heading", "subtotal", "tax", "total", "footnote",
+    ]
+
     distance, anls, iou = spaces[8]["edit_distance"], spaces[9]["anls_one"], spaces[10]["box_iou"]
     strings = ["", "0", "О", "ab", "ac", "12 480", "12480"]
     for a, b in itertools.product(strings, repeat=2):
@@ -91,6 +109,7 @@ def main():
         assert 0 <= anls(a, b) <= 1
     assert anls("ab", "ac") == 0
     assert anls("12480", "1248О") == .8
+    assert distance("12480", "12840") == 2 and 12840 - (11000 + 1480) == 360
     for _ in range(100):
         lo = rng.uniform(0, 100, 2)
         hi = lo + rng.uniform(.01, 100, 2)
@@ -119,12 +138,24 @@ def main():
     assert sha(figure_root/"donut-overview.png") == sha(SOURCE/"donut-overview.png")
     assert sha(ROOT/"site/public/licenses/donut-4cfcf972-MIT.txt") == sha(SOURCE/"donut-LICENSE.txt")
     assert sha(ROOT/"site/public/licenses/donut-4cfcf972-NOTICE.txt") == sha(SOURCE/"donut-NOTICE.txt")
-    assert len(re.findall(r"!\[\[", chapter)) == 6
+    reader_figures = {
+        link.split("|", 1)[0].rsplit("/", 1)[-1]
+        for link in re.findall(r"!\[\[([^\]\n]+)\]\]", chapter)
+    }
+    assert reader_figures == {
+        "layoutlmv3-objectives.png", "donut-overview.png", "pix2struct-screenshot-parsing.png",
+        "pix2struct-variable-resolution.png",
+        "grits-figure1-alignment.png", "grits-figure2-representations.png",
+        "pp-doclayout-v2-reading-order.png",
+    }
+    assert "https://proceedings.mlr.press/v202/lee23g/lee23g.pdf#page=2" in chapter
+    assert "https://arxiv.org/pdf/2409.12191v1#page=29" in chapter
     for block in re.findall(r"^~~~json\n(.*?)^~~~", chapter, re.M | re.S):
         json.loads(block)
     print(json.dumps({
         "chapter_sha256": sha(CHAPTER), "standalone_and_shared_code_runs": 24,
         "pinned_donut_serialization_cases": 5, "reading_order_permutations": 24,
+        "paddleocr_figure3_reading_order": reading_order.tolist(),
         "inverse_transform_cases": 100, "string_pairs": len(strings)**2,
         "iou_cases": 100, "new_original_figures": 4,
         "repaired_historical_figures": 1, "unchanged_historical_figures": 1,

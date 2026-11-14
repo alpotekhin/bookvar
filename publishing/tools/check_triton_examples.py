@@ -23,7 +23,8 @@ p = Path(
     "00 Учебник/10 ML Systems/"
     "08 GPU kernels и Triton — от программы к измерению.md"
 )
-text = p.read_text()
+compiler = Path("00 Учебник/10 ML Systems/09 Компиляция графов — PyTorch, JAX и CUDA Graphs.md")
+text = p.read_text() + "\n" + compiler.read_text()
 blocks = re.findall(r"```python\n(.*?)\n```", text, re.S)
 for code in blocks:
     ast.parse(code)
@@ -72,10 +73,14 @@ def units(source):
     ).group(1)
 
 
-assert units(base) == units(text)
+old_units = set(re.findall(r"^  - (.+)$", units(base), re.M))
+kernel_units = set(re.findall(r"^  - (.+)$", units(p.read_text()), re.M))
+compiler_units = set(re.findall(r"^  - (.+)$", units(compiler.read_text()), re.M))
+assert not kernel_units & compiler_units
+assert old_units == kernel_units | compiler_units
 print(
     "Original source_unit_id preserved:",
-    len(re.findall(r"^  - ", units(text), re.M)),
+    len(old_units), "(partitioned between the two canonical owners)",
 )
 
 prose = re.sub(r"```[^\n]*\n.*?\n```", "", text, flags=re.S)

@@ -1,0 +1,191 @@
+{
+  "date": "2026-11-11",
+  "scope": "Keep the LMCache storage and worker-to-server transfer explanation while replacing two inline blog diagrams with licensed paper originals in the textbook and the English source map.",
+  "review": {
+    "sources": "Cheng et al., arXiv:2510.09665v1, §3.1 and Figures 2–3, §4.1–4.3. Chen, Lin and LMCache Team, June 2026 MP store paths and copy-accounting caveat. LMCache MP Architecture and Configuration Reference for the separate current configuration layer.",
+    "rights": "Figures 2 and 3 are the complete byte-identical author PNGs in the CC BY 4.0 version-pinned arXiv HTML. One blog PNG matches its published image but no grant was found. For the second local overview the prior claimed source snapshot is missing; no upstream exact-match or right to republish is claimed. Both archived files stay on disk and are no longer embedded.",
+    "worked_case": "One KV token uses 128 KiB across 32 layers, so a 16-token page in one layer is 64 KiB. A 256-token chunk combines 16 × 32 = 512 page-layer pieces, for 32 MiB. In the stated CPU L1 path there is one device-to-host copy of 32 MiB after gather; at 24 GB/s this copy alone is about 1.40 ms. The copy count is not a measured latency or link traffic estimate for other transports.",
+    "editorial": "Read both input pages. Preserve source excerpts, other LMCache sections, and fallback behavior. Explain the 2025 paper architecture separately from the June 2026 MP example. Direct source image and article links stay available. No publication."
+  },
+  "figures": [
+    {
+      "id": "curated-lmcache-paper-figure2-f41522ce56cf",
+      "asset": "00 Учебник/Assets/Figures/curated/lmcache-paper-2026-11-11/lmcache-figure2-overview.png",
+      "title": "LMCache between inference engines and storage (Figure 2)",
+      "author": "Yihua Cheng, Yuhan Liu, Jiayi Yao, Yuwei An, Xiaokun Chen, Shaoting Feng, Yuyang Huang, Samuel Shen, Kuntai Du and Junchen Jiang",
+      "source_url": "https://arxiv.org/html/2510.09665v1",
+      "figure_url": "https://arxiv.org/html/2510.09665v1#S3.F2",
+      "source_image_url": "https://arxiv.org/html/2510.09665v1/lmcache-arch.png",
+      "source_revision": "arXiv:2510.09665v1",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "https://arxiv.org/html/2510.09665v1",
+      "license_evidence_sha256": "dee75bec455e56d8ec53198a8b97a2edea749291db9360e15027f1f78129cea0",
+      "sha256": "f41522ce56cf0dee4685a70a53a9368cb2f4463d7edfd52e06079a6b4059e460",
+      "source_asset_sha256": "f41522ce56cf0dee4685a70a53a9368cb2f4463d7edfd52e06079a6b4059e460",
+      "dimensions_px": [
+        425,
+        595
+      ],
+      "bytes": 28674,
+      "derivation": "source-raster-copy-byte-verified",
+      "modifications": "Unmodified complete author PNG from the revision-pinned arXiv HTML.",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "en/05 Sources/LMCache/LMCache — map of materials.md"
+      ]
+    },
+    {
+      "id": "curated-lmcache-paper-figure3-75b3622a95c4",
+      "asset": "00 Учебник/Assets/Figures/curated/lmcache-paper-2026-11-11/lmcache-figure3-workflow.png",
+      "title": "LMCache end-to-end workflow (Figure 3)",
+      "author": "Yihua Cheng, Yuhan Liu, Jiayi Yao, Yuwei An, Xiaokun Chen, Shaoting Feng, Yuyang Huang, Samuel Shen, Kuntai Du and Junchen Jiang",
+      "source_url": "https://arxiv.org/html/2510.09665v1",
+      "figure_url": "https://arxiv.org/html/2510.09665v1#S3.F3",
+      "source_image_url": "https://arxiv.org/html/2510.09665v1/e2e_system_diagram.png",
+      "source_revision": "arXiv:2510.09665v1",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "https://arxiv.org/html/2510.09665v1",
+      "license_evidence_sha256": "dee75bec455e56d8ec53198a8b97a2edea749291db9360e15027f1f78129cea0",
+      "sha256": "75b3622a95c4c31795872a31822668e95fceb13fab7bf48f7f55559d095a4a2e",
+      "source_asset_sha256": "75b3622a95c4c31795872a31822668e95fceb13fab7bf48f7f55559d095a4a2e",
+      "dimensions_px": [
+        864,
+        567
+      ],
+      "bytes": 63367,
+      "derivation": "source-raster-copy-byte-verified",
+      "modifications": "Unmodified complete author PNG from the revision-pinned arXiv HTML.",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md"
+      ]
+    }
+  ],
+  "retired": [
+    {
+      "id": "curated-lmcache-blog-mp-mode-architecture-9a4922890960",
+      "asset": "00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-mode-architecture.png",
+      "title": "LMCache MP mode overall architecture and KV transfer paths (historical copy)",
+      "author": "Jiayue Chen, Tony Lin, and LMCache Team",
+      "source_url": "https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/",
+      "publication_status": "retired",
+      "rights_status": "source-republication-unverified",
+      "license": null,
+      "license_url": null,
+      "used_in": [],
+      "retirement_reason": "No verified grant for republication of the blog illustration. Retained as an archive asset; reader pages link to the original article.",
+      "former_used_in": [
+        "en/05 Sources/LMCache/LMCache — map of materials.md"
+      ],
+      "replacements": [
+        "00 Учебник/Assets/Figures/curated/lmcache-paper-2026-11-11/lmcache-figure2-overview.png"
+      ],
+      "sha256": "9a4922890960d9bd22ecd93102f80966d60f27d68a62903a8aca54413fba1e5f",
+      "bytes": 59224,
+      "dimensions_px": [
+        1220,
+        983
+      ],
+      "metadata_status": "verified",
+      "last_verified": "2026-11-11",
+      "provenance_confirmation": "local-bytes-verified-upstream-image-unconfirmed",
+      "modifications": "The former recorded source snapshot is missing; only the archived local copy is byte-pinned. Source article retained as a reference."
+    },
+    {
+      "id": "curated-lmcache-blog-mp-transfer-paths-7e921ffbdc92",
+      "asset": "00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-transfer-paths.png",
+      "author": "Jiayue Chen, Tony Lin, and LMCache Team",
+      "source_url": "https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/",
+      "license": null,
+      "license_url": null,
+      "rights_status": "source-republication-unverified",
+      "provenance_confirmation": "source-bytes-verified",
+      "title": "LMCache multi-process store paths: CUDA IPC, shared memory, and pickle",
+      "source_image_url": "https://blog.lmcache.ai/wp-content/uploads/2026/06/3pathsUpdate-1-edited.png",
+      "modifications": "Byte-identical to the pinned official WordPress image. No verified grant for republication; direct source links retained.",
+      "sha256": "7e921ffbdc9272f81970bdae02f315c93598f071b09b6e672b75cab49521c552",
+      "bytes": 424557,
+      "dimensions_px": [
+        2356,
+        1480
+      ],
+      "metadata_status": "verified",
+      "last_verified": "2026-11-11",
+      "derivation": "source-raster-copy-byte-verified",
+      "source_asset_sha256": "7e921ffbdc9272f81970bdae02f315c93598f071b09b6e672b75cab49521c552",
+      "used_in": [],
+      "publication_status": "retired",
+      "retirement_reason": "No verified grant for republication of the blog illustration. Retained as an archive asset; reader pages link to the original article.",
+      "former_used_in": [
+        "00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md",
+        "en/05 Sources/LMCache/LMCache — map of materials.md"
+      ],
+      "replacements": [
+        "00 Учебник/Assets/Figures/curated/lmcache-paper-2026-11-11/lmcache-figure3-workflow.png",
+        "00 Учебник/Assets/Figures/curated/lmcache-paper-2026-11-11/lmcache-figure2-overview.png"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md",
+      "before_sha256": "fc24e7137ec734b75d0f1aaa24a3c16d54a4130996a421601937c5bb9ec2a4b0",
+      "after_sha256": "b35d80ef393e9777619473cf956b7c0d32e89add4194613488e49e942d39cd17",
+      "lines": 830,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-19",
+          "new": "last_updated: 2026-11-11"
+        },
+        {
+          "old": "  - https://github.com/huggingface/transformers/blob/1d9654e78a23fb167ef539cbd699dfbd3e4830cf/docs/source/en/kv_cache.md",
+          "new": "  - https://github.com/huggingface/transformers/blob/1d9654e78a23fb167ef539cbd699dfbd3e4830cf/docs/source/en/kv_cache.md\n  - https://arxiv.org/abs/2510.09665v1"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-transfer-paths.png]]\n\n*Jiayue Chen, Tony Lin and LMCache Team,\n[Understanding LMCache MP Mode Transfer Paths](https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/).\nПоказана операция store между worker и сервером кеша.\nЭто схема передачи, а не политика выбора токенов или обещание\nавтоматической выгрузки всего активного attention. Исходное изображение\nсохранено без изменений.*\n\nВ CUDA-пути указатель IPC позволяет серверу обратиться к памяти worker,\nно не переносит сами данные в CPU бесплатно: сначала разрозненные блоки\nсобираются в GPU-буфер, затем копируются в CPU.\nВ SHM-пути процессы могут видеть одну физическую область памяти;\nобозначенная одна копия предполагает специализированный C backend,\nа Python fallback добавляет промежуточную копию.\nВ пути pickle данные собираются, сериализуются, передаются и записываются.\nПоэтому число копий и общий объём перемещения зависят от выбранного пути,\nдаже если внешний запрос «сохранить кеш» одинаков.",
+          "new": "<a id=\"lmcache-pages-to-chunks\"></a>\n\n### Как LMCache собирает страницы в один объект\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lmcache-paper-2026-11-11/lmcache-figure3-workflow.png|Коннектор движка соединён с обработчиком токенов и GPU Connector; менеджер хранилища связан с каналом передачи. Слева увеличена часть схемы с GPU, CPU и SSD.]]\n\n*Yihua Cheng et al., [LMCache, рис. 3](https://arxiv.org/html/2510.09665v1#S3.F3), [авторский PNG](https://arxiv.org/html/2510.09665v1/e2e_system_diagram.png), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Рисунок из статьи 2025 года; конкретные пути передачи MP из более поздней документации на нём не показаны.*\n\nПри сохранении движок передаёт коннектору номера токенов и адреса\nстраниц. `Token Processor` определяет, какие токены ещё не сохранены,\nа `GPU Connector` собирает разрозненные страницы в один буфер. На схеме\nменеджер хранилища передаёт собранные данные выбранному хранилищу через\n`Transfer Channel`. При повторном запросе сначала ищут совпавший\nпрефикс. Затем данные загружают и раскладывают по страницам, которые\nдвижок выделил для этого запроса. Найденный ключ ещё не означает,\nчто данные уже лежат там, откуда их прочитает GPU.\n\nВ [§4.1 статьи](https://arxiv.org/html/2510.09665v1#S4.SS1) блок движка покрывает 16 токенов,\nа объект LMCache по умолчанию объединяет 256. Возьмём модель из начала\nглавы, у которой на один токен приходится 128 KiB во всех слоях.\nТогда 16 токенов занимают 64 KiB в одном слое. Чтобы сохранить объект\nиз 256 токенов для всех 32 слоёв, нужно собрать $16\\cdot32=512$\nтаких частей. Полезная нагрузка объекта равна $256\\cdot128=32\\,768$ KiB,\nто есть 32 MiB.\n\n<!-- checked-example: lmcache-chunk-transfer -->\n```python\ntokens_per_page, tokens_per_object, layers = 16, 256, 32\nbytes_per_token = 128 * 2**10\nbytes_per_page_layer = tokens_per_page * bytes_per_token // layers\npage_layers = tokens_per_object // tokens_per_page * layers\nobject_bytes = page_layers * bytes_per_page_layer\nassert bytes_per_page_layer == 64 * 2**10\nassert page_layers == 512\nassert object_bytes == 32 * 2**20\nassert round(1000 * object_bytes / (24 * 10**9), 2) == 1.40\n```\n\nВ [разборе MP от 15 июня 2026 года](https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/) Chen и Lin показывают\n[три пути сохранения](https://blog.lmcache.ai/wp-content/uploads/2026/06/3pathsUpdate-1-edited.png). Они различаются тем, что передаётся\nмежду процессами, и тем, кто копирует данные.\n\n| Путь из статьи | Куда попадает KV при сохранении | Что передаётся через RPC |\n| --- | --- | --- |\n| CUDA IPC | Страницы GPU → временный буфер на GPU → L1 в CPU RAM | Дескриптор и метаданные, не тензоры |\n| POSIX SHM | Worker пишет в область RAM, общую с процессом LMCache | Управляющие сообщения, не тензоры |\n| Pickle | Worker собирает и сериализует KV; сервер читает байты и пишет в свой L1 | Сериализованное содержимое KV |\n\nНа первом пути две операции копирования, но через канал GPU–CPU\n32 MiB проходят только один раз. При 24 GB/s это не менее 1,40 мс\nна саму передачу. Сборка страниц внутри GPU, запуск операций и ожидание\nв эту оценку не входят. В SHM-пути одна копия предполагает\nспециализированное ядро: описанный Python fallback добавляет\nпромежуточный буфер. Эти пути и подсчёт копий относятся к версии из\nстатьи; для конкретного релиза их сверяют с\n[руководством LMCache MP](https://docs.lmcache.ai/mp/architecture.html)."
+        }
+      ]
+    },
+    {
+      "source": "en/05 Sources/LMCache/LMCache — map of materials.md",
+      "before_sha256": "00637916c5a6b9ed502442de397aaab77883dff6197a79f08b8a327c81b2192f",
+      "after_sha256": "8dfe35d2a245d056dd1ff27d31149507fccb3886cc12342367f31948ea743341",
+      "lines": 546,
+      "changes": [
+        {
+          "old": "last_verified: 2026-09-15",
+          "new": "last_updated: 2026-11-11\nlast_verified: 2026-09-15"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-mode-architecture.png]]\n\nThe figure is best read as two cooperating planes:",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lmcache-paper-2026-11-11/lmcache-figure2-overview.png|The inference engine exchanges KV with the storage backend through LMCache.]]\n\n*Yihua Cheng et al., [LMCache, Figure 2](https://arxiv.org/html/2510.09665v1#S3.F2), [original PNG](https://arxiv.org/html/2510.09665v1/lmcache-arch.png), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). This paper overview shows the engine/storage boundary, not the MP process or transport layout.*\n\nIn MP mode, the connector and the separate server have distinct responsibilities:"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-transfer-paths.png]]\n\nThe MP implementation supports distinct local transfer strategies:\n\n| Path | Mechanism | Strength | Constraint |\n|---|---|---|---|\n| LMCache-driven GPU path | CUDA IPC exposes device allocations; the server performs the transfer | Avoids serializing tensor payloads through RPC | Requires compatible local GPU/IPC setup and careful allocation lifetime |\n| Engine-driven path | Worker gathers/scatters and participates in `PREPARE`/`COMMIT` | Works when the server cannot directly operate on engine device memory | More work remains in the engine-side process |\n| POSIX shared memory | Non-GPU payload passes through shared memory | Avoids copying large payloads through ZMQ | Requires shared IPC namespace and managed slots |\n| Pickle fallback | Serialized bytes travel through the protocol | Portable and simple for fallback/testing | Additional copies and serialization overhead |",
+          "new": "The [system paper, §4.1](https://arxiv.org/html/2510.09665v1#S4.SS1) distinguishes engine\npages from storage chunks. In its 16-token-page, 256-token-chunk example,\none chunk spans 16 pages in each layer. For a 32-layer model with 128 KiB\nof KV per token across all layers, that is 512 layer pages of 64 KiB each,\nor 32 MiB per chunk. During retrieval, the destination engine supplies\nits own page addresses; it need not place the returned KV at the source\nworker's addresses.\n\n[Chen and Lin's June 2026 guide](https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/) follows three concrete store\npaths in [the original diagram](https://blog.lmcache.ai/wp-content/uploads/2026/06/3pathsUpdate-1-edited.png):\n\n| Transport in that guide | Store path | Payload crossing the RPC channel |\n|---|---|---|\n| CUDA IPC | GPU pages → GPU staging buffer → server CPU L1 | Handle and metadata only |\n| POSIX shared memory | Worker gathers into a buffer mapped by both processes | Control messages only |\n| Pickle | Worker gathers and serializes; server deserializes and writes private L1 | Serialized KV bytes |\n\nCUDA IPC lets the server address the worker's allocation; it does not\neliminate gather or the device-to-host copy. The guide counts one SHM copy\nwith device-specific C operations and an extra staging copy with the Python\nfallback. Those are counts of operations on the payload, not estimates of\nPCIe traffic or total memory-controller traffic. For the 32 MiB chunk above,\na 24 GB/s device-to-host link gives a 1.40 ms lower bound for that copy alone."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "43e936aed717cbda19fd0aeecd491be3f1e91bba7fd9f9eed241318ee192e636",
+      "after_sha256": "d21d60ef7d2520f89bd6c1fa8c6ca2f9b2d457f25c383a2070e6accf9b89cb5a",
+      "lines": 26488,
+      "changes": [
+        {
+          "old": "  - id: curated-lmcache-blog-mp-mode-architecture-9a4922890960\n    asset: 00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-mode-architecture.png\n    author: Jiayue Chen, Tony Lin, and LMCache Team\n    source_url: https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/\n    license: open educational material; reuse confirmed by repository owner\n    license_url: https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/\n    modifications: copied from the official article without visual modification\n    used_in:\n      - en/05 Sources/LMCache/LMCache — map of materials.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/lmcache-blog-2026/LMCacheMP3paths.excalidraw-1.png\n  - {\"id\":\"curated-lmcache-blog-mp-transfer-paths-7e921ffbdc92\",\"asset\":\"00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-transfer-paths.png\",\"author\":\"Jiayue Chen, Tony Lin, and LMCache Team\",\"source_url\":\"https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"provenance_confirmation\":\"source-bytes-verified\",\"title\":\"LMCache multi-process store paths: CUDA IPC, shared memory, and pickle\",\"source_image_url\":\"https://blog.lmcache.ai/wp-content/uploads/2026/06/3pathsUpdate-1-edited.png\",\"modifications\":\"Byte-identical to the official WordPress upload. The blog artwork has no verified reuse grant.\",\"sha256\":\"7e921ffbdc9272f81970bdae02f315c93598f071b09b6e672b75cab49521c552\",\"bytes\":424557,\"dimensions_px\":[2356,1480],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-byte-verified\",\"source_asset_sha256\":\"7e921ffbdc9272f81970bdae02f315c93598f071b09b6e672b75cab49521c552\",\"used_in\":[\"00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md\",\"en/05 Sources/LMCache/LMCache — map of materials.md\"]}",
+          "new": "  - {\"id\":\"curated-lmcache-paper-figure2-f41522ce56cf\",\"asset\":\"00 Учебник/Assets/Figures/curated/lmcache-paper-2026-11-11/lmcache-figure2-overview.png\",\"title\":\"LMCache between inference engines and storage (Figure 2)\",\"author\":\"Yihua Cheng, Yuhan Liu, Jiayi Yao, Yuwei An, Xiaokun Chen, Shaoting Feng, Yuyang Huang, Samuel Shen, Kuntai Du and Junchen Jiang\",\"source_url\":\"https://arxiv.org/html/2510.09665v1\",\"figure_url\":\"https://arxiv.org/html/2510.09665v1#S3.F2\",\"source_image_url\":\"https://arxiv.org/html/2510.09665v1/lmcache-arch.png\",\"source_revision\":\"arXiv:2510.09665v1\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence\":\"https://arxiv.org/html/2510.09665v1\",\"license_evidence_sha256\":\"dee75bec455e56d8ec53198a8b97a2edea749291db9360e15027f1f78129cea0\",\"sha256\":\"f41522ce56cf0dee4685a70a53a9368cb2f4463d7edfd52e06079a6b4059e460\",\"source_asset_sha256\":\"f41522ce56cf0dee4685a70a53a9368cb2f4463d7edfd52e06079a6b4059e460\",\"dimensions_px\":[425,595],\"bytes\":28674,\"derivation\":\"source-raster-copy-byte-verified\",\"modifications\":\"Unmodified complete author PNG from the revision-pinned arXiv HTML.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-11\",\"used_in\":[\"en/05 Sources/LMCache/LMCache — map of materials.md\"]}\n  - {\"id\":\"curated-lmcache-paper-figure3-75b3622a95c4\",\"asset\":\"00 Учебник/Assets/Figures/curated/lmcache-paper-2026-11-11/lmcache-figure3-workflow.png\",\"title\":\"LMCache end-to-end workflow (Figure 3)\",\"author\":\"Yihua Cheng, Yuhan Liu, Jiayi Yao, Yuwei An, Xiaokun Chen, Shaoting Feng, Yuyang Huang, Samuel Shen, Kuntai Du and Junchen Jiang\",\"source_url\":\"https://arxiv.org/html/2510.09665v1\",\"figure_url\":\"https://arxiv.org/html/2510.09665v1#S3.F3\",\"source_image_url\":\"https://arxiv.org/html/2510.09665v1/e2e_system_diagram.png\",\"source_revision\":\"arXiv:2510.09665v1\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence\":\"https://arxiv.org/html/2510.09665v1\",\"license_evidence_sha256\":\"dee75bec455e56d8ec53198a8b97a2edea749291db9360e15027f1f78129cea0\",\"sha256\":\"75b3622a95c4c31795872a31822668e95fceb13fab7bf48f7f55559d095a4a2e\",\"source_asset_sha256\":\"75b3622a95c4c31795872a31822668e95fceb13fab7bf48f7f55559d095a4a2e\",\"dimensions_px\":[864,567],\"bytes\":63367,\"derivation\":\"source-raster-copy-byte-verified\",\"modifications\":\"Unmodified complete author PNG from the revision-pinned arXiv HTML.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-11\",\"used_in\":[\"00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md\"]}\n  - {\"id\":\"curated-lmcache-blog-mp-mode-architecture-9a4922890960\",\"asset\":\"00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-mode-architecture.png\",\"title\":\"LMCache MP mode overall architecture and KV transfer paths (historical copy)\",\"author\":\"Jiayue Chen, Tony Lin, and LMCache Team\",\"source_url\":\"https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/\",\"publication_status\":\"retired\",\"rights_status\":\"source-republication-unverified\",\"license\":null,\"license_url\":null,\"used_in\":[],\"retirement_reason\":\"No verified grant for republication of the blog illustration. Retained as an archive asset; reader pages link to the original article.\",\"former_used_in\":[\"en/05 Sources/LMCache/LMCache — map of materials.md\"],\"replacements\":[\"00 Учебник/Assets/Figures/curated/lmcache-paper-2026-11-11/lmcache-figure2-overview.png\"],\"sha256\":\"9a4922890960d9bd22ecd93102f80966d60f27d68a62903a8aca54413fba1e5f\",\"bytes\":59224,\"dimensions_px\":[1220,983],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"provenance_confirmation\":\"local-bytes-verified-upstream-image-unconfirmed\",\"modifications\":\"The former recorded source snapshot is missing; only the archived local copy is byte-pinned. Source article retained as a reference.\"}\n  - {\"id\":\"curated-lmcache-blog-mp-transfer-paths-7e921ffbdc92\",\"asset\":\"00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-transfer-paths.png\",\"author\":\"Jiayue Chen, Tony Lin, and LMCache Team\",\"source_url\":\"https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"provenance_confirmation\":\"source-bytes-verified\",\"title\":\"LMCache multi-process store paths: CUDA IPC, shared memory, and pickle\",\"source_image_url\":\"https://blog.lmcache.ai/wp-content/uploads/2026/06/3pathsUpdate-1-edited.png\",\"modifications\":\"Byte-identical to the pinned official WordPress image. No verified grant for republication; direct source links retained.\",\"sha256\":\"7e921ffbdc9272f81970bdae02f315c93598f071b09b6e672b75cab49521c552\",\"bytes\":424557,\"dimensions_px\":[2356,1480],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-byte-verified\",\"source_asset_sha256\":\"7e921ffbdc9272f81970bdae02f315c93598f071b09b6e672b75cab49521c552\",\"used_in\":[],\"publication_status\":\"retired\",\"retirement_reason\":\"No verified grant for republication of the blog illustration. Retained as an archive asset; reader pages link to the original article.\",\"former_used_in\":[\"00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md\",\"en/05 Sources/LMCache/LMCache — map of materials.md\"],\"replacements\":[\"00 Учебник/Assets/Figures/curated/lmcache-paper-2026-11-11/lmcache-figure3-workflow.png\",\"00 Учебник/Assets/Figures/curated/lmcache-paper-2026-11-11/lmcache-figure2-overview.png\"]}"
+        }
+      ]
+    }
+  ]
+}

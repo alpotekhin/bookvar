@@ -1,0 +1,30 @@
+{
+  "revision": "e632aa89ca9e6638d52e1b686095e7442faffbb0",
+  "license": {
+    "path": "site/public/licenses/edls-e632aa89-MIT.txt",
+    "blob": "bfc72b87e4e253c0c29791463ef9a246b15e6982",
+    "sha256": "01908feead9275d5043e082e9fa37e415a2972dca45fd62b8489e1fd2a058a13"
+  },
+  "courseTraces": {
+    "vanilla_ce.png": {
+      "blob": "887893a2718dca30132ba097540dbd9f17b8ee8b",
+      "sha256": "8751edd1d20dee1a808d71d5da9709381c1891bc413c1abe1a84fc4bbb8ea84c"
+    },
+    "liger_ce.png": {
+      "blob": "c3389932e0c17caaa3d267585b512da63709d273",
+      "sha256": "005cc7f69a8bf09dac514dd15ac99239e85626941e2b300674429e7f749b56fb"
+    }
+  },
+  "duplicateTraces": {
+    "compiled_ce.png": "887893a2718dca30132ba097540dbd9f17b8ee8b"
+  },
+  "upstreamFp8Panels": {
+    "FP8.png": "3ceba4dbbb4402138edca52c290b7e826e3023a4",
+    "MXFP8.png": "1a8980bfa1898968c96db2c0d224d5b5d189cc36"
+  },
+  "reusedOriginals": {
+    "te-mxfp8-blocks.png": "a814e91bfb1d62cdc45eab30f2e99c95f8373783e60d4c61e89622c5d51123d7",
+    "ulysses-design.png": "0c41d8e6105bfda47d57280eb992d450a5ed9dcbdcd820d3a9663b8f9346903d",
+    "liger-flce-original.png": "98944c67a835ed49c6162a5ad4282652cacc76a924729b4d5b49093779ac251f"
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "date": "2026-11-09",
+  "scope": "Speculative decoding in RU and EN: distinguish EAGLE-3's illustrated unrolling from the released training code, and read its authors' benchmark chart against the different serving throughput experiment.",
+  "review": {
+    "previousGoalTurn": "Progress. The Chinchilla pass changed the canonical chapter, original figure set, and CS336 semantic destination; the preceding record remains in 2026-11-09-scaling-isoflop-parabola-additions.json.",
+    "sources": [
+      "Li et al., EAGLE-3 arXiv:2503.01840v3 §§3.1–3.2, Figures 3, 5, 6; §4, Table 1 and §4.3; Appendix A. The proceedings figures remain links.",
+      "SafeAILab/EAGLE revision cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b: README embeds the exact original chart; LICENSE and the local public Apache-2.0 notice are byte-identical. cnets.py lines 713–866 and main.py lines 279–285 were checked against pinned bytes."
+    ],
+    "explanation": "Both 932-line Russian and 891-line English input chapters were read in full. The changed passages were reread beside the paper and code. Shifted token IDs remain teacher-sequence inputs in the released training loop, while its continuous state is self-generated. Restrict and renormalize teacher logits on the supported vocabulary; the mask uses the full-vocabulary teacher argmax. Distinguish that choice from sampling at inference.",
+    "numericControl": "Supported target (0.2, 0.8) for two of three tokens yields 0.50740453 cross-entropy with draft (0.25, 0.75), versus 0.28768207 for a one-hot B. A teacher argmax outside the draft vocabulary masks the position. 4.40/3.16=1.39240506 compares two Table 1 speedups; 1.38 in the batched serving study has a different baseline and metric. No runtime benchmarking is claimed.",
+    "figureRights": "EAGLE-1 and EAGLE-2 mechanism figures are already embedded under tracked PMLR/ACL or repository grants. EAGLE-3 now has the complete byte-exact Apache-2.0 repository chart; its Figures 5 and 6 remain linked. DeepSeek-V3 MIT repository contains benchmark.png and niah.png, not the MTP figure. NVIDIA Megatron's MTP image visibly reproduces the DeepSeek report, so it does not independently establish a grant. No permission was confirmed for the exact Toolformer NeurIPS Figure 2; the existing direct link remains."
+  },
+  "verification": {
+    "sourceAndArithmetic": "The chapter checker ran all seven published blocks, 243 exact sequence probabilities, old figure rerenders and the new soft-target/mask calculation. Both pinned training code hashes and the original JPEG/license hashes match. No GPU run or full training reproduction.",
+    "reader": "Chrome inspected the actual RU and EN chapters at 375/1280 CSS px. Training math renders, figure retains its 5862×1535 aspect ratio and pans to both sides at 3.5× in each locale; source-note round trips hit both anchors. Examined the rendered chart, zoomed labels and training equation.",
+    "readerReport": "/var/folders/6c/j5sghwf51gx41g_055zlcs_m0000gq/T/bookvar-gpt-route-IvrVRw/eagle3-report.json",
+    "localBuild": "2059 pages, 252 built-output tests, 27 focused reading/coverage/English reconciliation checks, no broken internal links, topic indexes current.",
+    "assetRegistry": "The dedicated EAGLE-3 original/notice check and the whole-registry exactly-once registration check passed.",
+    "publication": "Local only, no commit, push, or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+      "before_sha256": "32085af4415e2aa3904eded4a14c42e7ced65c81d4288c42af4a5d099ff597ad",
+      "after_sha256": "2c641e7d6584590418cba788fdcecd444f52ce5740de1a843b3cf7e619dcad6d",
+      "lines": 993,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-19\nlast_verified: 2026-10-19",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-11-09"
+        },
+        {
+          "old": "  - https://arxiv.org/html/2503.01840v3",
+          "new": "  - https://arxiv.org/html/2503.01840v3\n  - https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/eagle/traineagle3/cnets.py"
+        },
+        {
+          "old": "а видимость исходного текста определяется соответствующим префиксом.\nМетки для позиций берут из обучающих данных.",
+          "new": "а видимость исходного текста определяется соответствующим префиксом."
+        },
+        {
+          "old": "у EAGLE-1 предсказанный вектор привязан к признаку учителя,\nу EAGLE-3 такой регрессионной обязанности нет.\n\n<a id=\"worked-trade-off\"></a>",
+          "new": "у EAGLE-1 предсказанный вектор привязан к признаку учителя,\nу EAGLE-3 такой регрессионной обязанности нет.\n\n<a id=\"eagle3-training-targets\"></a>\n\n#### Что подают на вход и с чем сравнивают выход\n\nНа рисунке 6 ветви подписаны токенами, но в\n[выпущенном обучающем коде, `dataprepare` и `forward`](https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/eagle/traineagle3/cnets.py#L713-L866)\nмежду шагами передаются скрытые состояния. Основная модель один раз\nсчитает признаки и логиты на обучающей последовательности. На первом\nшаге черновик получает признаки $g$ основной модели. На втором\nвместо них в него возвращается результат первого шага $a$, а\nтокенные ID и строки логитов учителя сдвигаются ещё на одну позицию.\nКод берёт эти ID из обучающей последовательности, а не выбирает\nновый токен из распределения черновика на каждом шаге обучения.\nПри инференсе, напротив, эмбеддинг для следующего шага приходит\nот фактически выбранного токена.\n\nПусть словарь учителя состоит из A, B и C, а черновик предсказывает\nтолько A и B. Если учитель даёт вероятности $(0{,}15;\\,0{,}60;\\,0{,}25)$,\nего максимум B есть в словаре черновика. Код оставляет логиты A и B\nи применяет softmax к ним заново. Это то же самое, что разделить\nвероятности A и B на их сумму $0{,}75$: цель становится\n$(0{,}2;\\,0{,}8)$. При выходе черновика $(0{,}25;\\,0{,}75)$\nвклад этой позиции до усреднения равен\n\n$$\n-0{,}2\\ln(0{,}25)-0{,}8\\ln(0{,}75)\\approx0{,}5074.\n$$\n\nСравнение с единственной меткой B дало бы $-\\ln(0{,}75)\\approx0{,}2877$.\nМягкая цель требует приблизить всё распределение в сокращённом\nсловаре, а не только угадать максимум. Если максимум учителя\nприходится на исключённый C, эта позиция маскируется при подсчёте\nпотерь. В [`main.py`](https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/eagle/traineagle3/main.py#L279-L285)\nпотери развёрнутых шагов суммируют с весами $1;\\,0{,}8;\\,0{,}64;\\ldots$.\nЭто детали указанной реализации; они не определяют правило принятия\nтокенов при инференсе.\n\n<a id=\"worked-trade-off\"></a>"
+        },
+        {
+          "old": "Числа учебные, а не результаты запуска EAGLE.\n\nС ростом пакета обычная модель может лучше использовать прочитанные\nвеса и без черновика. Поэтому опубликованные коэффициенты ускорения\nдля одного запроса и throughput при большом пакете описывают разные\nусловия. Например, EAGLE-3 отдельно сообщает 1.38× по throughput\nпри batch=64 в SGLang v0.4.4, на одном H100, LLaMA 3.1 8B и MT-bench.\nВ этой части эксперимента использовалась цепочка длины 3, без дерева.\nЭто измерение авторов, не универсальный коэффициент метода.",
+          "new": "Числа учебные, а не результаты запуска EAGLE.\n\n<a id=\"eagle3-benchmark-reading\"></a>\n\n### Как читать график ускорения EAGLE-3\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3r.jpg|Ускорение относительно обычного декодирования четырёх моделей; для LLaMA 3.1 8B показаны 3,2× у EAGLE-2 и 4,4× у EAGLE-3.]]\n\n*Yuhui Li, Fangyun Wei, Chao Zhang и Hongyang Zhang,\n[график из официального репозитория EAGLE](https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/figs/eagle3r.jpg),\n[Apache-2.0](/licenses/eagle-cb7e0841-Apache-2.0.txt), файл без изменений.\nЧат-модели оценивали на MT-bench; DeepSeek-R1-Distill-LLaMA-8B — на GSM8K.\nНа графике жадное декодирование.*\n\nСерый столбец в каждой группе означает обычное декодирование **этой же**\nмодели. Для LLaMA-Instruct 3.1 8B\n[Table 1](https://arxiv.org/html/2503.01840v3#S4.T1) даёт 3,16× у EAGLE-2\nи 4,40× у EAGLE-3, округлённые на рисунке до 3,2× и 4,4×.\nОтносительно EAGLE-2 результат EAGLE-3 выше в $4{,}40/3{,}16\\approx1{,}39$\nраза. Это сравнение двух конфигураций: в\n[Appendix A](https://arxiv.org/html/2503.01840v3#A1) авторы увеличивают\nглубину дерева с 6 до 8 при том же числе узлов. Один график не позволяет\nприписать весь выигрыш обучающей цели. Для Vicuna-13B рисунок из репозитория\nпоказывает 4,1× у EAGLE-2, а Table 1 — 4,26×; эти два значения\nне следует смешивать в одном расчёте.\n\nВ другом опыте [§4.3](https://arxiv.org/html/2503.01840v3#S4.SS3)\nизмеряли **пропускную способность** SGLang v0.4.4 при пакете 64:\nодна H100, та же LLaMA-Instruct 3.1 8B и MT-bench, но черновик\nбыл цепочкой длины 3 без дерева. Авторы получили 1,38× относительно\nобычного декодирования SGLang. Близость 1,38× и 1,39× случайна:\nу отношений разные базовые варианты и разные измерения."
+        },
+        {
+          "old": "- [EAGLE, §3 и Appendix A.2](https://arxiv.org/html/2401.15077v3#S3), [EAGLE-2, §3–4](https://aclanthology.org/2024.emnlp-main.422/), [EAGLE-3, §3](https://arxiv.org/html/2503.01840v3#S3): три версии черновой модели и дерева.",
+          "new": "- [EAGLE, §3 и Appendix A.2](https://arxiv.org/html/2401.15077v3#S3), [EAGLE-2, §3–4](https://aclanthology.org/2024.emnlp-main.422/), [EAGLE-3, §3](https://arxiv.org/html/2503.01840v3#S3): три версии черновой модели и дерева.\n- [[05 Источники/Papers/EAGLE-3.md|EAGLE-3: статья, обучающий код и исходный график]]."
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md",
+      "before_sha256": "5551a7a64f565703434ffcfa8fe57b06cbd78448de7791921dc06b0460821f55",
+      "after_sha256": "0ff64f73949bb3ce59f5576ced9cac993f533e60f5150371543acfb6a37a2247",
+      "lines": 948,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-19\nlast_verified: 2026-10-19",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-11-09"
+        },
+        {
+          "old": "  - https://arxiv.org/html/2503.01840v3",
+          "new": "  - https://arxiv.org/html/2503.01840v3\n  - https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/eagle/traineagle3/cnets.py"
+        },
+        {
+          "old": "therefore diagonal; access to original text follows the relevant prefix.\nPosition labels come from the training data.",
+          "new": "therefore diagonal; access to original text follows the relevant prefix."
+        },
+        {
+          "old": "EAGLE-1 ties its predicted vector to a teacher feature; EAGLE-3 has no\nsuch regression constraint.\n\n<a id=\"пример-расчёта-выигрыша-дерева\"></a>",
+          "new": "EAGLE-1 ties its predicted vector to a teacher feature; EAGLE-3 has no\nsuch regression constraint.\n\n<a id=\"eagle3-training-targets\"></a>\n\n#### What the drafter sees and what it learns to match\n\nFigure 6 labels branches with tokens. The\n[released training code, `dataprepare` and `forward`](https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/eagle/traineagle3/cnets.py#L713-L866)\npasses hidden states between steps. The target computes features and\nlogits on the training sequence once. The drafter starts from target\nfeatures $g$. On the second step it feeds its previous output $a$\nback in, while token IDs and teacher logit rows shift by one more\nposition. The code takes these IDs from the training sequence;\nit does not resample a draft token at every training step. At inference,\nthe next embedding comes from the token actually selected.\n\nSuppose the teacher's vocabulary is A, B, C and the drafter predicts\nonly A and B. If the teacher assigns probabilities $(0.15,0.60,0.25)$,\nits argmax B is in the draft vocabulary. The code keeps the logits\nfor A and B and applies softmax again. Equivalently, divide their\nprobabilities by $0.75$ to obtain the target $(0.2,0.8)$.\nWith draft output $(0.25,0.75)$, the position contributes\n\n$$\n-0.2\\ln(0.25)-0.8\\ln(0.75)\\approx0.5074\n$$\n\nbefore averaging. A one-hot label for B would give\n$-\\ln(0.75)\\approx0.2877$. The soft target asks the drafter to\nmatch the distribution over the reduced vocabulary, including A.\nWhen the teacher's argmax is the excluded C, the code masks the\nposition out of the loss. [`main.py`](https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/eagle/traineagle3/main.py#L279-L285)\ncombines the unrolled losses with weights $1,0.8,0.64,\\ldots$.\nThese details describe the pinned training code; they do not define\nthe inference acceptance rule.\n\n<a id=\"пример-расчёта-выигрыша-дерева\"></a>"
+        },
+        {
+          "old": "slower than baseline. These are teaching values, not an EAGLE run.\n\nWith larger batches, the target can reuse weights effectively without\ndrafting. Single-request speedups and large-batch throughput describe\ndifferent conditions. EAGLE-3 separately reports 1.38× throughput at\nbatch 64 in SGLang v0.4.4, using one H100, LLaMA 3.1 8B and MT-bench.\nThat experiment used a length-three chain, not a tree. It is an author\nmeasurement, not a universal multiplier.",
+          "new": "slower than baseline. These are teaching values, not an EAGLE run.\n\n<a id=\"eagle3-benchmark-reading\"></a>\n\n### Reading the EAGLE-3 speedup chart\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3r.jpg|Speedups over vanilla decoding for four target models; the LLaMA 3.1 8B bars show 3.2× for EAGLE-2 and 4.4× for EAGLE-3.]]\n\n*Yuhui Li, Fangyun Wei, Chao Zhang and Hongyang Zhang,\n[chart from the official EAGLE repository](https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/figs/eagle3r.jpg),\n[Apache-2.0](/licenses/eagle-cb7e0841-Apache-2.0.txt), unmodified.\nThe chat models use MT-bench; DeepSeek-R1-Distill-LLaMA-8B uses GSM8K.\nAll bars use greedy decoding.*\n\nEach grey bar is vanilla decoding for that same model. For LLaMA-Instruct\n3.1 8B, [Table 1](https://arxiv.org/html/2503.01840v3#S4.T1) gives 3.16×\nfor EAGLE-2 and 4.40× for EAGLE-3, rounded to 3.2× and 4.4× in the chart.\nRelative to EAGLE-2 the ratio is $4.40/3.16\\approx1.39$. These are two\nconfigurations: in [Appendix A](https://arxiv.org/html/2503.01840v3#A1)\nthe authors increase tree depth from 6 to 8 while keeping the node\nbudget fixed. The chart does not isolate the effect of the training\nobjective. For Vicuna-13B, the repository chart shows 4.1× for EAGLE-2\nbut Table 1 reports 4.26×; do not combine these values in one ratio.\n\n[Section 4.3](https://arxiv.org/html/2503.01840v3#S4.SS3) measures\nthroughput in a separate SGLang v0.4.4 run at batch 64. It uses one H100,\nthe same LLaMA-Instruct 3.1 8B and MT-bench, and a length-three chain\nrather than a tree. The authors report 1.38× over vanilla SGLang.\nThe proximity to 1.39× is incidental: the two ratios have different\nbaselines and measure different quantities."
+        },
+        {
+          "old": "- [EAGLE, §3 and Appendix A.2](https://arxiv.org/html/2401.15077v3#S3), [EAGLE-2, §3–4](https://aclanthology.org/2024.emnlp-main.422/), [EAGLE-3, §3](https://arxiv.org/html/2503.01840v3#S3): feature drafting and tree variants.",
+          "new": "- [EAGLE, §3 and Appendix A.2](https://arxiv.org/html/2401.15077v3#S3), [EAGLE-2, §3–4](https://aclanthology.org/2024.emnlp-main.422/), [EAGLE-3, §3](https://arxiv.org/html/2503.01840v3#S3): feature drafting and tree variants.\n- [[05 Источники/Papers/EAGLE-3.md|EAGLE-3: paper, training code, and original chart]]."
+        },
+        {
+          "old": "canonical_revision: \"32085af4415e2aa3904eded4a14c42e7ced65c81d4288c42af4a5d099ff597ad\"\ntranslation_reviewed: \"2026-10-29\"",
+          "new": "canonical_revision: \"2c641e7d6584590418cba788fdcecd444f52ce5740de1a843b3cf7e619dcad6d\"\ntranslation_reviewed: \"2026-11-09\""
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "ccff0d4c5f951bfc64948293de6b15dde9c726fe76aa053548a0a84230ec1768",
+      "after_sha256": "e27d3aa16d05d1505acbb5057f418b574455be6455b34a8e4d4069cd574ee6f5",
+      "lines": 24306,
+      "changes": [
+        {
+          "old": "assets:",
+          "new": "assets:\n  - id: \"curated-eagle3-speedup-5e404ac75809\"\n    asset: \"00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3r.jpg\"\n    title: \"EAGLE-3 greedy speedup across four target models\"\n    author: \"Yuhui Li, Fangyun Wei, Chao Zhang and Hongyang Zhang\"\n    source_url: \"https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/figs/eagle3r.jpg\"\n    source_image_url: \"https://raw.githubusercontent.com/SafeAILab/EAGLE/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/figs/eagle3r.jpg\"\n    commit: \"cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b\"\n    license: \"Apache-2.0\"\n    license_url: \"https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/LICENSE\"\n    license_copy: \"site/public/licenses/eagle-cb7e0841-Apache-2.0.txt\"\n    license_copy_sha256: \"2c042313b4fb4350fa09f81aabf6b77686855e1071a8af07845684e9cba6d3c7\"\n    source_page_snapshot: \"05 Источники/Originals/eagle3-2026-11-09/README.md\"\n    source_page_sha256: \"a59962f5c3b938b73252953119557cbeebfd4f13a1553e5f2fb4fe9358578a88\"\n    sha256: \"5e404ac75809d8125e1c360c36054c2f90ebd72453a46a352609e538d91f6ba1\"\n    dimensions_px: [5862,1535]\n    derivation: \"source-raster-copy\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"pinned-upstream-repository\"\n    last_verified: \"2026-11-09\"\n    modifications: \"Unmodified complete JPEG copied from the authors' official repository; it is not a crop of the arXiv Figure 2.\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md\",\"en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md\"]"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "1ca14b40a73dc33ef73765f8213d8628a48ab11dbdaa622da11997d50bc5a3d2",
+      "after_sha256": "720ea162f0fce8ab223ea48aca0a1ddc67149e43a52c6a16f85a346ce07cabfc",
+      "lines": 2584,
+      "changes": [
+        {
+          "old": "      - source: Papers/Speculative Decoding.md\n        route: sources/papers/speculative-decoding",
+          "new": "      - source: Papers/Speculative Decoding.md\n        route: sources/papers/speculative-decoding\n      - source: 05 Источники/Papers/EAGLE-3.md\n        route: sources/papers/eagle-3"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tools/check_speculative_examples.py",
+      "before_sha256": "302b473fe55f4f318324c89bd72569d1d599f334e00c561930742d8506dffcc7",
+      "after_sha256": "0a3ea9aca0a6fec2ba4139f2705ea93fb2cce7e073f2a5ebb36540bb6b097c1f",
+      "lines": 313,
+      "changes": [
+        {
+          "old": "    embeds = re.findall(r\"!\\[\\[([^\\]]+)\\]\\]\", chapter)\n    assert len(embeds) == 8",
+          "new": "    embeds = re.findall(r\"!\\[\\[([^\\]|]+)(?:\\|[^\\]]+)?\\]\\]\", chapter)\n    assert len(embeds) == 9"
+        },
+        {
+          "old": "    return {\"figures\": len(embeds), \"new_assets\": len(assets), \"pdf_rerenders\": rerenders}\n\n\ndef sampling_probabilities(prefix, kind):",
+          "new": "    return {\"figures\": len(embeds), \"new_assets\": len(assets), \"pdf_rerenders\": rerenders}\n\n\ndef check_eagle3_training():\n    evidence = ROOT / \"05 Источники/Originals/eagle3-2026-11-09\"\n    for name, expected in [\n        (\"cnets.py\", \"71295b56d8bd5648a1c630af0995f6a23a13671c8e60fe92636fffd9ee786a9c\"),\n        (\"main.py\", \"439c4d8de398c8876f72806d7ba7e6436b5127a4751f3491505a3f51412a4eeb\"),\n    ]:\n        assert digest(evidence / name) == expected\n    source = (evidence / \"cnets.py\").read_text()\n    for statement in [\n        \"hidden_states = hidden_states_out\",\n        \"input_ids = padding(input_ids, left=False)\",\n        \"target = padding(target, left=False)\",\n        \"target_mask = self.t2d[target_max_token]\",\n        \"target_head = target_head[..., self.t2d]\",\n        \"target_p = nn.Softmax(dim=2)(target_head)\",\n        \"plogp = target_p * out_logp\",\n    ]:\n        assert statement in source\n    assert \"ploss_weight = [0.8 ** i\" in (evidence / \"main.py\").read_text()\n    # The comparison uses teacher logits and the teacher argmax before truncation.\n    retained = np.array([True, True, False])\n    probs = np.array([[.15, .60, .25], [.15, .25, .60]])\n    teacher = np.log(probs)\n    masked = teacher[:, retained]\n    target = np.exp(masked) / np.exp(masked).sum(axis=-1, keepdims=True)\n    position_mask = retained[teacher.argmax(axis=-1)]\n    loss = -position_mask.astype(float) * (target * np.log([.25, .75])).sum(axis=-1)\n    np.testing.assert_allclose(target[0], [.2, .8])\n    np.testing.assert_allclose(position_mask, [True, False])\n    np.testing.assert_allclose(loss, [.5074, 0], atol=.00005)\n    np.testing.assert_allclose(-np.log(.75), .2877, atol=.00005)\n    np.testing.assert_allclose(4.40/3.16, 1.39, atol=.005)\n    # Check that both printed editions describe the same quantities.\n    english = ROOT / \"en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md\"\n    for path, expected in [\n        (CHAPTER, [\"0{,}5074\", \"0{,}2877\", \"4{,}40/3{,}16\", \"1,38×\"]),\n        (english, [\"0.5074\", \"0.2877\", \"4.40/3.16\", \"1.38×\"]),\n    ]:\n        text = path.read_text()\n        assert all(item in text for item in expected)\n    return {\"masked_soft_target\": target[0].tolist(), \"training_losses\": loss.tolist(),\n            \"eagle3_over_eagle2\": 4.40/3.16}\n\n\ndef sampling_probabilities(prefix, kind):"
+        },
+        {
+          "old": "        **check_sources(chapter), **check_figures(chapter)",
+          "new": "        **check_sources(chapter), **check_figures(chapter),\n        **check_eagle3_training()"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tests/asset-registry.test.ts",
+      "before_sha256": "c8516b78f43fc33ffaeba8213eb0e26f45e982a904648f2e77969142f00584ad",
+      "after_sha256": "7f8f6870b7231913f8af13e9c8fcfaed698365da7246ecb614be3a1cec4090c0",
+      "lines": 10591,
+      "changes": [
+        {
+          "old": "function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root): void {",
+          "new": "function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root): void {\n  if (entry.id === 'curated-eagle3-speedup-5e404ac75809') {\n    const expected = {\"id\":\"curated-eagle3-speedup-5e404ac75809\",\"asset\":\"00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3r.jpg\",\"title\":\"EAGLE-3 greedy speedup across four target models\",\"author\":\"Yuhui Li, Fangyun Wei, Chao Zhang and Hongyang Zhang\",\"source_url\":\"https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/figs/eagle3r.jpg\",\"source_image_url\":\"https://raw.githubusercontent.com/SafeAILab/EAGLE/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/figs/eagle3r.jpg\",\"commit\":\"cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b\",\"license\":\"Apache-2.0\",\"license_url\":\"https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/LICENSE\",\"license_copy\":\"site/public/licenses/eagle-cb7e0841-Apache-2.0.txt\",\"license_copy_sha256\":\"2c042313b4fb4350fa09f81aabf6b77686855e1071a8af07845684e9cba6d3c7\",\"source_page_snapshot\":\"05 Источники/Originals/eagle3-2026-11-09/README.md\",\"source_page_sha256\":\"a59962f5c3b938b73252953119557cbeebfd4f13a1553e5f2fb4fe9358578a88\",\"sha256\":\"5e404ac75809d8125e1c360c36054c2f90ebd72453a46a352609e538d91f6ba1\",\"dimensions_px\":[5862,1535],\"derivation\":\"source-raster-copy\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"pinned-upstream-repository\",\"last_verified\":\"2026-11-09\",\"modifications\":\"Unmodified complete JPEG copied from the authors' official repository; it is not a crop of the arXiv Figure 2.\",\"used_in\":[\"00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md\",\"en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md\"]};\n    expect(entry).toMatchObject(expected);\n    expect(entry.crop_box_px).toBeUndefined();\n    const file = resolve(repositoryRoot, expected.asset);\n    expect(sha256(file)).toBe(expected.sha256);\n    expect(sha256(resolve(repositoryRoot, expected.license_copy))).toBe(expected.license_copy_sha256);\n    const readme = resolve(repositoryRoot, expected.source_page_snapshot);\n    if (existsSync(readme)) {\n      expect(sha256(readme)).toBe(expected.source_page_sha256);\n      expect(readFileSync(readme, 'utf8')).toContain('./figs/eagle3r.jpg');\n    }\n    expectDecodableImage(file);\n    return;\n  }"
+        },
+        {
+          "old": "describe('publication asset registry', () => {",
+          "new": "describe('publication asset registry', () => {\n  it('pins the EAGLE-3 repository original and license in both editions', () => {\n    const { assets } = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')) as { assets: CuratedAsset[] };\n    const row = assets.find(asset => asset.id === 'curated-eagle3-speedup-5e404ac75809');\n    expect(row).toBeDefined();\n    validateCuratedSourceAsset(row!);\n    for (const source of row!.used_in ?? [])\n      expect(readFileSync(resolve(root, source), 'utf8')).toContain(row!.asset);\n    for (const drift of [{ license: 'CC BY 4.0' }, { crop_box_px: [0, 0, 600, 900] }])\n      expect(() => validateCuratedSourceAsset({ ...row!, ...drift })).toThrow();\n  });"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tests/site-output.test.ts",
+      "before_sha256": "3a17a5b36193a9372c7b39cffa94cf7a1f67e9382eab7f065adc45b5ac77274f",
+      "after_sha256": "dd767ca4addf9c8f5f732b8e3f2606974b3aeeca9346a96a9d6a51ab40d7cab8",
+      "lines": 4885,
+      "changes": [
+        {
+          "old": "    expect(native).toHaveLength(33);",
+          "new": "    expect(native).toHaveLength(34);\n    expect(native.some(page => page.route === 'sources/papers/eagle-3')).toBe(true);"
+        },
+        {
+          "old": "  it('renders the original IsoFLOP figures, worked example and source-note round trip', async () => {",
+          "new": "  it('renders EAGLE-3 training targets and the unchanged original chart in both editions', async () => {\n    const route = 'textbook/inference/speculative-decoding/';\n    const note = 'sources/papers/eagle-3/';\n    for (const locale of ['', 'en/']) {\n      const html = await readFile(join(distDir, locale, route, 'index.html'), 'utf8');\n      expect(html).toContain('id=\"eagle3-training-targets\"');\n      expect(html).toContain('id=\"eagle3-benchmark-reading\"');\n      expect(html).toContain('href=\"/licenses/eagle-cb7e0841-Apache-2.0.txt\"');\n      expect(html).not.toContain('katex-error');\n      const src = [...html.matchAll(/<img[^>]* src=\"([^\"]+)\"/g)]\n        .map(match => match[1]).find(url => url.endsWith('/eagle3r.jpg'));\n      expect(src).toBeDefined();\n      const bytes = await readFile(join(distDir, decodeURIComponent(src!)));\n      expect(createHash('sha256').update(bytes).digest('hex')).toBe('5e404ac75809d8125e1c360c36054c2f90ebd72453a46a352609e538d91f6ba1');\n      expect(html).toContain('href=\"/' + locale + note + '\"');\n      const source = await readFile(join(distDir, locale, note, 'index.html'), 'utf8');\n      for (const anchor of ['eagle3-training-targets', 'eagle3-benchmark-reading'])\n        expect(source).toContain('href=\"/' + locale + route + '#' + anchor + '\"');\n    }\n  });\n  it('renders the original IsoFLOP figures, worked example and source-note round trip', async () => {"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/EAGLE-3.md",
+      "created": true,
+      "after_sha256": "7bd644b88ce6d5a796076f02a9402a916108646405b55558ac6a53cab76188c1"
+    }
+  ]
+}

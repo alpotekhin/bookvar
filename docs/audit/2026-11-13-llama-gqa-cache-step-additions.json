@@ -1,0 +1,69 @@
+{
+  "date": "2026-11-13",
+  "scope": "Extend the two existing LLaMA editions with the GQA cache write/read trace and the experimental reason Llama 2 used GQA under tensor parallelism. Link from the atlas.",
+  "review": {
+    "sources": "Ainslie et al. §§2.2 and 3.3, Figure 2 and Figure 6; Touvron et al. Llama 2 v2 Appendix A.2.1, Table 18 and Figure 24; Dubey et al. §3.2 and Table 3; April Meta model.py at a0940f9cf7065d45bb6675660f80d305c041a754 lines 78–190.",
+    "workedCase": "Single layer, one unsharded sequence, 4 → 5 → 6 cached positions, 8 persistent K/V heads and 32 distinct query outputs. Compute a separate output for every head by addressing head // 4 directly. Under TP=8, 8 distinct GQA heads and 8 replicas of one MQA head use the same number of K/V entries on the eight devices.",
+    "style": "Both unchanged edition inputs match the earlier reviewed revisions. Reread the complete generation comparison in each language and the full atlas entry; exact journal reversal preserves all text outside these insertions and the English revision pointer. No whole-book editorial acceptance.",
+    "provenance": "Reused the existing complete Ainslie et al. Figure 6 crop with its original axes, legend and caption under CC BY 4.0. Llama 2 Figure 24 remains a direct link: the exact manuscript grants arXiv non-exclusive distribution, not a reuse grant to Bookvar.",
+    "verification": "Archived Meta model.py is byte-identical to the pinned source. Its actual Attention.forward and repeat_kv matched a separate head-by-head calculation on CPU, with synthetic projections and no checkpoint. All 23 targeted tests and all 320 built-output tests passed. Root build: 2083 pages, zero broken internal routes, fragments, or files. Chrome: both editions at 375 and 1280 px, no overflow or KaTeX errors, intact source labels, 4× zoom and pan, and a live click from the atlas to the new section. No commit, push or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "changes": [
+        {
+          "old": "Число голов на схеме условное.*",
+          "new": "Число голов на схеме условное.*\n\nПочему не оставить одну общую пару K/V на весь слой? В опыте\n[Meta, приложение A.2.1](https://arxiv.org/html/2307.09288v2#A1.SS2.SSS1),\nвнимание модели 30B делили между восемью A100. При GQA каждая карта\nполучала одну из восьми разных KV-голов. При MQA единственную голову\nкопировали на каждую карту. В обоих случаях восемь карт хранили по\nодной голове на позицию: преимущество MQA по объёму кэша исчезало.\nВ [рис. 24 отчёта Llama 2](https://arxiv.org/html/2307.09288v2#A1.F24)\nу GQA и MQA поэтому близкие результаты, а на больших пакетах обе\nконфигурации помещают больше запросов, чем MHA. Это опыт с моделью 30B,\nне замер выпущенной 70B. В сравнении качества авторы также расширили\nFFN у GQA и MQA, чтобы компенсировать уменьшение числа весов внимания.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gqa-2026-10-22/groups-speed.png|На графике T5-XXL время на пример при восьми группах близко к MQA; при 64 группах оно достигает уровня MHA.]]\n\n*Joshua Ainslie et al., [GQA, рис. 6, с. 4898](https://aclanthology.org/2023.emnlp-main.298.pdf#page=4),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). График и подпись из статьи, без перерисовки.*\n\nЭто другой эксперимент: Ainslie et al. меняли число групп у T5-XXL,\nподавали 2048 токенов и генерировали 512. Синие квадраты при 1 и 8\nгруппах находятся почти на одной высоте. При 64 группах, по одной\nна голову запроса, время доходит до линии MHA. График объясняет,\nпочему выигрыш по объёму кэша нельзя переводить напрямую в ускорение\nили переносить цифры с T5 на Llama."
+        },
+        {
+          "old": "В кэше, наоборот, нет ни FFN, ни словарных матриц. Для одной позиции",
+          "new": "<a id=\"llama-gqa-cache-step\"></a>\n\n#### Один шаг декодирования в Llama 3 8B\n\nПусть в кэше уже четыре позиции, а модель получила пятый токен.\nВозьмём одну последовательность и один слой, без распределения\nпо устройствам. В [коде Meta](https://github.com/meta-llama/llama3/blob/a0940f9cf7065d45bb6675660f80d305c041a754/llama/model.py#L153-L190)\nпроекции дают Q формы `[1, 1, 32, 128]` и K, V формы\n`[1, 1, 8, 128]`. Здесь оси идут в порядке «пакет, позиции,\nголовы, координаты головы». Код применяет RoPE к Q и K и\nзаписывает новые K и V в позицию 4. Используемая часть каждого\nкэша теперь имеет форму `[1, 5, 8, 128]`.\n\nТолько после записи `repeat_kv` расширяет прочитанные K и V до\n`[1, 5, 32, 128]` для умножения матриц. Например, головы Q с\nиндексами 0 и 3 сравнивают разные запросы с одним набором ключей\nиз группы 0. Голова 4 читает группу 1. У каждой головы свой ряд\nиз пяти оценок и своя взвешенная сумма, даже если ключи и значения\nобщие. В кэш расширенные тензоры не записываются: шестой токен\nснова добавит по восемь голов K и V. Ядро, которое поддерживает\nGQA напрямую, может обращаться к группе без явного повторения\nвходных тензоров.\n\nВ кэше, наоборот, нет ни FFN, ни словарных матриц. Для одной позиции"
+        }
+      ],
+      "before_sha256": "1d251da2d09aecb9f1021f3fb06f210b85502f4964074317f92dc9440dd88626",
+      "after_sha256": "4b2116e58e5b353bf50a32b898008d99e1beb2099852af2d3a86780ef27f9a47"
+    },
+    {
+      "source": "en/00 Textbook/07 Anatomy of a modern LLM/01 LLaMA as a baseline architecture.md",
+      "changes": [
+        {
+          "old": "the diagram are illustrative.*",
+          "new": "the diagram are illustrative.*\n\nWhy keep more than one K/V pair per layer? In\n[Meta's experiment, Appendix A.2.1](https://arxiv.org/html/2307.09288v2#A1.SS2.SSS1),\na 30B model split attention across eight A100s. With GQA each GPU\nheld one of eight distinct K/V heads. With MQA each GPU held a copy\nof the same head. Both runs stored one head per position on each\nGPU, so MQA had no cache-size advantage in that setup.\nIn [Figure 24 of the Llama 2 report](https://arxiv.org/html/2307.09288v2#A1.F24),\nGQA and MQA have similar results, and both fit larger batches than\nMHA. The experiment used the 30B ablation models, not the released\n70B model. Meta also widened the FFN in the GQA and MQA quality\nablations to compensate for their smaller attention projections.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gqa-2026-10-22/groups-speed.png|In T5-XXL, time per sample at eight groups is close to MQA; at 64 groups it reaches the MHA line.]]\n\n*Joshua Ainslie et al., [GQA, Figure 6, p. 4898](https://aclanthology.org/2023.emnlp-main.298.pdf#page=4),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Original plot and caption, without redrawing.*\n\nAinslie et al. ran a separate experiment on T5-XXL. They varied the\nnumber of groups, used 2,048 input tokens, and generated 512.\nThe blue squares at one and eight groups are almost level. At\n64 groups, one per query head, the point reaches the MHA line.\nThe reduction in cache size does not translate directly into a\nspeedup, and the T5 timings are not measurements of Llama."
+        },
+        {
+          "old": "The cache contains neither the FFN nor the vocabulary matrices.",
+          "new": "<a id=\"llama-gqa-cache-step\"></a>\n\n#### One decoding step in Llama 3 8B\n\nSuppose four positions are already cached and the model receives a\nfifth token. Use one sequence and one layer, without sharding.\nIn [Meta's code](https://github.com/meta-llama/llama3/blob/a0940f9cf7065d45bb6675660f80d305c041a754/llama/model.py#L153-L190),\nthe projections produce Q of shape `[1, 1, 32, 128]` and K and V of\nshape `[1, 1, 8, 128]`. The axes are batch, position, head, and head\ndimension. The code applies RoPE to Q and K and writes the new K and\nV at position 4. The occupied portion of each cache now has shape\n`[1, 5, 8, 128]`.\n\nOnly after the write does `repeat_kv` expand the K and V slices to\n`[1, 5, 32, 128]` for matrix multiplication. Query heads 0 and 3\ncompare different queries with the same set of keys from group 0.\nHead 4 reads group 1. Every head computes its own five scores and\nweighted sum, even when its keys and values are shared. The expanded\ntensors are not written back: the sixth token adds eight heads each\nfor K and V again. A kernel with native GQA support can address the\ngroup without explicitly repeating the input tensors.\n\nThe cache contains neither the FFN nor the vocabulary matrices."
+        },
+        {
+          "old": "canonical_revision: \"1d251da2d09aecb9f1021f3fb06f210b85502f4964074317f92dc9440dd88626\"\ntranslation_reviewed: \"2026-11-10\"",
+          "new": "canonical_revision: \"4b2116e58e5b353bf50a32b898008d99e1beb2099852af2d3a86780ef27f9a47\"\ntranslation_reviewed: \"2026-11-13\""
+        }
+      ],
+      "before_sha256": "d167b7f9d1816e0ee315387535f20af8e1272e9a3e7ce734543f077d2acf6fc9",
+      "after_sha256": "f3577329681f783e870761bd2725d584a2dc51e596f3123791afc389c688283d"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Llama.md",
+      "changes": [
+        {
+          "old": "[[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#llama-generations|В учебнике подсчитаны и веса, и кэш]].",
+          "new": "[[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#llama-gqa-cache-step|Один шаг декодирования в учебнике]] показывает, почему повторение K/V перед умножением не увеличивает число голов в кэше."
+        }
+      ],
+      "before_sha256": "7aaaeb302d8d6c730133ffd722d847736046570fb24c9337e0a080452fce6e44",
+      "after_sha256": "066d154cc1d555a98ddaf38850b08fd3581239f07a5030d7279f526e2ea44e45"
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "changes": [
+        {
+          "old": "    used_in: [\"00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md\"]\n  - id: \"curated-escher-bird-concepts-276c119f9374\"",
+          "new": "    used_in:\n      - \"00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md\"\n      - \"00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\"\n      - \"en/00 Textbook/07 Anatomy of a modern LLM/01 LLaMA as a baseline architecture.md\"\n  - id: \"curated-escher-bird-concepts-276c119f9374\""
+        }
+      ],
+      "before_sha256": "12b7d49dafa52a0aa9d691f1b8b3ba24d438c1166724061fbe7ac19291fe4e1e",
+      "after_sha256": "b505f161cef5e883255e2873490e521689018020afc2ebb4e1db3f8f6f26b18f"
+    }
+  ]
+}

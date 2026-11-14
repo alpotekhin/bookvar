@@ -2,7 +2,7 @@
 title: Задача обучения и predictive pipeline
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-22
+last_updated: 2026-10-31
 primary_sources:
   - https://github.com/INRIA/scikit-learn-mooc/tree/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6
   - https://scikit-learn.org/stable/common_pitfalls.html
@@ -94,6 +94,88 @@ $X\in\mathbb R^{n\times d}$, а вектор ответов — $y\in\{0,1\}^n$.
 меток. Для оценки на совершенно новых клиентах дополнительно разделяют
 клиентов. Подробные схемы разобраны в
 [[00 Учебник/00 Математические и ML-основания/05 Train, validation и test|главе о train, validation и test]].
+
+## Inspecting the data before fitting a model
+
+*The following excerpts retain the English of Inria's scikit-learn MOOC,
+[First look at our dataset](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/python_scripts/01_tabular_data_exploration.py),
+CC BY 4.0. They concern Adult Census, not the invented customer table above.
+The two figures are original outputs from the course's published notebook.*
+
+Before building a predictive model, it is a good idea to look at the data:
+
+* maybe the task you are trying to achieve can be solved without machine learning;
+* you need to check that the information you need for your task is actually present in the dataset;
+* inspecting the data is a good way to find peculiarities. These can arise during data collection (for example, malfunctioning sensor or missing values), or from the way the data is processed afterwards (for example capped values).
+
+Let's look at the distribution of individual features, to get some insights
+about the data. We can start by plotting histograms, note that this only
+works for features containing numerical values:
+
+![[00 Учебник/Assets/Figures/curated/classical-ml-pipeline/mooc-adult-histograms.png]]
+
+*Inria, scikit-learn MOOC,
+[Visual inspection of the data](https://inria.github.io/scikit-learn-mooc/python_scripts/01_tabular_data_exploration.html#visual-inspection-of-the-data),
+[CC BY 4.0](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE).
+Original published output of `adult_census.hist(figsize=(20, 14))`,
+downloaded unchanged on 2026-10-31. This is a course output, not a Bookvar run.*
+
+We can already make a few comments about some of the variables:
+
+* `"age"`: there are not that many points for `age > 70`. The dataset
+  description does indicate that retired people have been filtered out
+  (`hours-per-week > 0`);
+* `"education-num"`: peak at 10 and 13, hard to tell what it corresponds to
+  without looking much further. We'll do that later in this notebook;
+* `"hours-per-week"` peaks at 40, this was very likely the standard number of
+  working hours at the time of the data collection;
+* most values of `"capital-gain"` and `"capital-loss"` are close to zero.
+
+*Bookvar note on the course's next checks.* The notebook compares
+`education` with `education-num` using a cross-tabulation. Each education
+label corresponds to one numeric code, and each code to one label in
+this dataset: `1st-4th` corresponds to 2 and `Some-college` to 10.
+The columns encode the same information. Removing the numeric copy
+does not remove an independent observation about education. This
+one-to-one relation is stronger than a large correlation coefficient;
+correlated columns need not be interchangeable.
+
+The published `sex` counts are 32,650 Male and 16,192 Female. They describe
+the collected dataset, not the composition of the US population. An
+aggregate prediction score alone cannot establish equal error rates
+across these groups. The notebook links to [Fairlearn](https://fairlearn.org)
+for group-wise assessment; no model or fairness experiment is being
+claimed from the counts themselves.
+
+*Original MOOC explanation resumes.* Another way to inspect the data is to
+do a `pairplot` and show how each variable differs according to our target,
+i.e. `"class"`. Plots along the diagonal show the distribution of individual
+variables for each `"class"`. The plots on the off-diagonal can reveal
+interesting interactions between variables.
+
+![[00 Учебник/Assets/Figures/curated/classical-ml-pipeline/mooc-adult-pairplot.png]]
+
+*Inria, scikit-learn MOOC,
+[Visual inspection of the data](https://inria.github.io/scikit-learn-mooc/python_scripts/01_tabular_data_exploration.html#visual-inspection-of-the-data),
+[CC BY 4.0](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE).
+Original published pairplot of age, education-num and hours-per-week
+for the first 5,000 rows, with income classes distinguished in the legend.
+Downloaded unchanged on 2026-10-31; not a Bookvar experiment.*
+
+*Bookvar reading of the plot.* In the hours-per-week versus age panel,
+people older than 27 who work more than 40 hours include both income
+classes. Those two conditions do not determine the answer. The course
+draws a possible hand-written rule and compares the mixed region with
+regions dominated by one class. It does not establish that the visually
+chosen cutoffs are optimal or that they will work on new observations.
+The [full worked plot and code](https://inria.github.io/scikit-learn-mooc/python_scripts/01_tabular_data_exploration.html#creating-decision-rules-by-hand)
+are retained in the source lesson; learned thresholds are developed
+in [[00 Учебник/01 Классическое машинное обучение/03 Деревья решений|the decision-tree chapter]].
+
+Inspect distributions and cross-tabulations on the training data when
+they will inform feature selection or preprocessing choices. Using
+held-out labels to choose a rule would make that rule part of the
+model-selection process, rather than an independent test.
 
 <span id="baseline-задаёт-смысл-метрике"></span>
 
@@ -259,9 +341,20 @@ $\sqrt{(1/3)^2+1^2}\approx1{,}054$ до A и $5/3\approx1{,}667$
 ### Обучение преобразования и его применение
 
 `StandardScaler.fit(X_train)` вычисляет и сохраняет `mean_`
-и `scale_`. Вызов `transform(X_new)` использует эти числа,
-не оценивая их заново. Для скейлера `fit_transform(X_train)`
-объединяет обучение и применение на обучающих данных.
+и `scale_`. Метод возвращает сам обученный преобразователь,
+а не изменённую таблицу.
+
+![[00 Учебник/Assets/Figures/curated/classical-ml-pipeline/mooc-transformer-fit.svg]]
+
+*Inria, scikit-learn MOOC,
+[Transformer.fit](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/figures/api_diagram-transformer.fit.svg),
+[CC BY 4.0](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE).
+Обучающие признаки поступают в алгоритм оценки статистик.
+Результат сохраняется в состоянии преобразователя. Оригинал без изменений.*
+
+Вызов `transform(X_new)` использует эти числа, не оценивая их заново.
+В нашем примере сохранены среднее стажа 6 и масштаб 3;
+новый стаж 12 преобразуется в 2.
 
 ![[00 Учебник/Assets/Figures/curated/classical-ml-pipeline/mooc-transform.svg]]
 
@@ -269,6 +362,18 @@ $\sqrt{(1/3)^2+1^2}\approx1{,}054$ до A и $5/3\approx1{,}667$
 [Transformer.transform](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/figures/api_diagram-transformer.transform.svg),
 CC BY 4.0. Преобразователь использует сохранённые статистики и выдаёт
 изменённые признаки, а не предсказания класса.*
+
+Для скейлера `fit_transform(X_train)` объединяет обучение и применение
+на обучающих данных. Сначала из $(3,9,3,9)$ получаются среднее 6
+и масштаб 3, затем возвращается $(-1,1,-1,1)$.
+
+![[00 Учебник/Assets/Figures/curated/classical-ml-pipeline/mooc-transformer-fit-transform.svg]]
+
+*Inria, scikit-learn MOOC,
+[Transformer.fit_transform](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/figures/api_diagram-transformer.fit_transform.svg),
+[CC BY 4.0](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE).
+Одна обучающая таблица используется для оценки статистик и для
+преобразования с этими статистиками. Оригинал без изменений.*
 
 Если заново обучить скейлер на единственной новой строке со стажем 12,
 её среднее окажется равным 12, а центрированное значение — нулю.
@@ -341,6 +446,176 @@ $$
 Это предотвращает ошибку выполнения, но не обучает модель распознавать
 новый тариф. Если отброшена одна из известных категорий, её код тоже
 может быть нулевым; в примере ниже категории не отбрасываются.
+
+### Explicit order and unknown ordinal categories
+
+*Original excerpt: Inria, scikit-learn MOOC,
+[Encoding ordinal categories](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/python_scripts/03_categorical_pipeline.py),
+CC BY 4.0. The worked code below is a Bookvar addition.*
+
+By default, `OrdinalEncoder` uses a lexicographical strategy to map string
+category labels to integers. This strategy is arbitrary and often
+meaningless. For instance, suppose the dataset has a categorical variable
+named `"size"` with categories such as "S", "M", "L", "XL". We would like the
+integer representation to respect the meaning of the sizes by mapping them to
+increasing integers such as `0, 1, 2, 3`.
+However, the lexicographical strategy used by default would map the labels
+"S", "M", "L", "XL" to 2, 1, 0, 3, by following the alphabetical order.
+
+The `OrdinalEncoder` class accepts a `categories` constructor argument to
+pass categories in the expected ordering explicitly.
+
+```python
+import numpy as np
+from sklearn.preprocessing import OrdinalEncoder
+
+sizes = [["S"], ["M"], ["L"], ["XL"]]
+alphabetical = OrdinalEncoder().fit(sizes)
+ordered_sizes = OrdinalEncoder(
+    categories=[["S", "M", "L", "XL"]],
+    handle_unknown="use_encoded_value", unknown_value=-1,
+).fit(sizes)
+np.testing.assert_array_equal(
+    alphabetical.transform(sizes).ravel(), [2, 1, 0, 3]
+)
+np.testing.assert_array_equal(
+    ordered_sizes.transform(sizes).ravel(), [0, 1, 2, 3]
+)
+print(ordered_sizes.transform([["XXL"]]))  # [[-1.]]
+```
+
+The explicit order fixes the meaning of comparisons between known sizes.
+It does not establish equal physical distances between them. A linear
+model using this one column still assigns the same change in its linear
+score to S → M as to M → L. One-hot encoding allows separate coefficients.
+
+The code −1 prevents an error for XXL, which was absent during `fit`.
+It does not teach the model how XXL affects the target. A downstream
+numeric model treats −1 as a number: for example, a threshold can place
+it below every known size. The choice of an unknown code therefore needs
+to be considered together with the model. The exact API contract is in
+[OrdinalEncoder](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html).
+
+### Numeric thresholds depend on category order
+
+A numeric decision tree splits a column by a condition such as
+$x_j\leq t$. Suppose four categories A, B, C and D have labels
+0, 1, 0 and 1. With codes A=0, B=1, C=2 and D=3, no single threshold
+puts A and C on one side and B and D on the other. A tree restricted
+to one split can classify at most three of these four training rows.
+
+Reorder the codes to A=0, C=1, B=2 and D=3. The threshold 1.5 now
+separates the two classes exactly. The observations and labels have
+not changed; the allowed one-split classifier has changed because
+it receives a different numeric representation.
+
+```python
+from sklearn.tree import DecisionTreeClassifier
+
+tree_categories = [["A"], ["B"], ["C"], ["D"]]
+tree_labels = [0, 1, 0, 1]
+stump_scores = []
+for order in [["A", "B", "C", "D"], ["A", "C", "B", "D"]]:
+    ordinal = OrdinalEncoder(categories=[order])
+    numeric_codes = ordinal.fit_transform(tree_categories)
+    stump = DecisionTreeClassifier(max_depth=1, random_state=0)
+    stump.fit(numeric_codes, tree_labels)
+    stump_scores.append(stump.score(numeric_codes, tree_labels))
+print(stump_scores)  # [0.75, 1.0]
+```
+
+This example concerns numeric-threshold trees, including
+`DecisionTreeClassifier`. Algorithms with native categorical splits
+can consider groups of categories rather than consecutive numeric codes;
+their categorical input must be configured according to that algorithm's
+API. Merely applying `OrdinalEncoder` does not enable such splits.
+See the [decision-tree mathematical formulation](https://scikit-learn.org/stable/modules/tree.html#mathematical-formulation)
+and [[00 Учебник/01 Классическое машинное обучение/03 Деревья решений|the chapter on decision trees]].
+
+### Rare categories and a shared infrequent column
+
+*Original excerpt: Inria, scikit-learn MOOC,
+[Evaluate our predictive pipeline](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/python_scripts/03_categorical_pipeline.py),
+CC BY 4.0.*
+
+We see that the `"Holand-Netherlands"` category is occurring rarely. This will
+be a problem during cross-validation: if the sample ends up in the test set
+during splitting then the classifier would not have seen the category during
+training and would not be able to encode it.
+
+In scikit-learn, there are some possible solutions to bypass this issue:
+
+* list all the possible categories and provide them to the encoder via the
+  keyword argument `categories` instead of letting the estimator automatically
+  determine them from the training data when calling fit;
+* set the parameter `handle_unknown="ignore"`, i.e. if an unknown category is
+  encountered during transform, the resulting one-hot encoded columns for this
+  feature will be all zeros;
+* adjust the `min_frequency` parameter to collapse the rarest categories
+  observed in the training data into a single one-hot encoded feature. If you
+  enable this option, you can also set `handle_unknown="infrequent_if_exist"`
+  to encode the unknown categories (categories only observed at predict time)
+  as ones in that last column.
+
+*Bookvar worked example and qualification of the last option follow.*
+
+Take five invented training rows: France occurs three times,
+Holand-Netherlands and Vietnam once each. These counts are chosen for the
+example; they are not statistics from Adult Census. With `min_frequency=2`,
+the encoder keeps a column for France and combines the two rare countries
+in a shared column. The `categories_` attribute still lists the original
+known categories; `infrequent_categories_` identifies the grouped ones.
+
+```python
+from sklearn.preprocessing import OneHotEncoder
+
+countries = [["France"], ["France"], ["France"],
+             ["Holand-Netherlands"], ["Vietnam"]]
+grouped = OneHotEncoder(
+    min_frequency=2, handle_unknown="infrequent_if_exist",
+    sparse_output=False,
+).fit(countries)
+print(grouped.get_feature_names_out(["country"]).tolist())
+# ['country_France', 'country_infrequent_sklearn']
+print(grouped.infrequent_categories_[0].tolist())
+# ['Holand-Netherlands', 'Vietnam']
+print(grouped.transform([["France"], ["Vietnam"], ["Atlantis"]]))
+# [[1. 0.]
+#  [0. 1.]
+#  [0. 1.]]
+
+no_rare_bucket = OneHotEncoder(
+    min_frequency=2, handle_unknown="infrequent_if_exist",
+    sparse_output=False,
+).fit([["France"], ["France"], ["France"]])
+print(no_rare_bucket.infrequent_categories_)  # [None]
+print(no_rare_bucket.transform([["Atlantis"]]))  # [[0.]]
+```
+
+Vietnam was observed during training; Atlantis was not. In the first
+encoder both activate the shared column, so a downstream model uses the
+same coefficient for them. That coefficient can be learned from the rare
+training rows, but it does not provide evidence about an unseen country's
+own effect. Grouping sacrifices distinctions between rare categories
+in exchange for fewer parameters and more observations per shared column.
+Whether this improves held-out performance must be tested.
+
+The second encoder has no rare training categories and therefore no
+infrequent column. An unseen country becomes all zeros, just as with
+`handle_unknown="ignore"`. Calling `transform` does not add a new column.
+Conversely, `handle_unknown="ignore"` produces all zeros for an unknown
+country even when a rare-category column exists. These cases follow the
+[OneHotEncoder contract](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html).
+
+Counts, grouping and automatically inferred vocabularies must be learned
+inside each training fold. An explicit vocabulary may instead come from
+a schema known before the experiment. Listing a category in that schema
+allows the encoder to represent it; it does not supply training examples
+for its coefficient. A missing-value marker such as `?` also needs an
+explicit interpretation: the encoder will otherwise treat that string
+as an ordinary category.
+
+### Объединение числовых и категориальных признаков
 
 `ColumnTransformer` направляет числовые и категориальные столбцы
 в разные ветви. После преобразования он соединяет результаты

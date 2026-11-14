@@ -1237,8 +1237,9 @@ on deployment-like data, including difficult and rare cases.
 ![[Assets/Sources/Harvard ML Systems/vol1/model_compression/c6d3e77bf90984ccd1a0aa0e731ead3ded0c3e64.svg]]
 
 *Vijay Janapa Reddi et al.,
-[Harvard ML Systems, Early Exit Architecture](https://mlsysbook.ai/vol1/model_compression/model_compression.html#fig-early-exit-transformers),
-CC BY-NC-SA 4.0; original course drawing based on Xin et al.
+[Harvard ML Systems 0.7.1, Early Exit Architecture](https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/model_compression/model_compression_files/mediabag/c6d3e77bf90984ccd1a0aa0e731ead3ded0c3e64.svg),
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/); course drawing based on
+[Ji Xin et al., BERxiT](https://aclanthology.org/2021.eacl-main.8/), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 After each classifier, the lower branch returns a prediction; `Continue`
 resumes the deeper path. `LTE` is the source's learned exit estimator label.
 The diagram describes a classification decision, not a guarantee that a

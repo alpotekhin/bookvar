@@ -26,12 +26,22 @@ for index, block in enumerate(blocks, 1):
 
 n = namespaces[0]
 torch.testing.assert_close(n["weights"], torch.tensor([
-    .1797594729474699, .6734236212380392, .14681690581449072
+    .07391845386546533, .7261415575430695, .19993998859146533
 ], dtype=torch.float64))
 torch.testing.assert_close(n["context"], torch.tensor([
-    .03294256713297919, 1.4936641482905693
+    -.126021534726, 1.6522231036776045
 ], dtype=torch.float64))
-assert math.isclose(n["loss"].item(), .12873060372781273)
+torch.testing.assert_close(n["scores2"], torch.tensor([
+    -.03102717361091356, .2334605977309656, 1.5231883119115297
+], dtype=torch.float64))
+torch.testing.assert_close(n["weights2"], torch.tensor([
+    .1421638558333902, .18520588126815124, .6726302628984586
+], dtype=torch.float64))
+torch.testing.assert_close(n["context2"], torch.tensor([
+    -.5304664070650684, 1.0430420254347612
+], dtype=torch.float64))
+assert n["weights"].argmax().item() == 1 and n["weights2"].argmax().item() == 2
+assert math.isclose(n["loss"].item(), .06841509841516732)
 assert abs(n["delta"].sum().item()) < 1e-14
 assert n["delta"][1] < 0 and n["delta"][0] > 0 and n["delta"][2] > 0
 torch.testing.assert_close(n["linear1"], n["linear2"])

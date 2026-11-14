@@ -42,25 +42,19 @@ primary_sources:
 
 На двух схемах показаны разные изменения:
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention-tiling.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/flashattention-editorial-2026-11-11/fa1-tiling-loops.png|Внешний цикл выбирает плитку K и V. Внутренний проходит по плиткам Q. Промежуточные оценки остаются в SRAM, в HBM записывается обновлённый выход.]]
 
-*Блочное вычисление attention: блоки оценок и softmax вычисляются в SRAM,
-а накопленный выход перемасштабируется при изменении
-нормирующего знаменателя. Это оптимизация движения данных, а не изменение
-множества связей. Источник изображения: Tri Dao,
-[FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://crfm.stanford.edu/2023/07/17/flash2.html);
-исходный алгоритм и доказательство exactness —
+*Tri Dao и участники FlashAttention,
+[схема из репозитория авторов](https://github.com/Dao-AILab/flash-attention/blob/1fc0221183e799363001394a12dd9e78e15f5dda/assets/flashattn_banner.pdf),
+[BSD-3-Clause](/licenses/flash-attention-1fc02211-BSD-3-Clause.txt).
+В SRAM хранятся оценки для текущей плитки, а не для всей матрицы.
+Статистики softmax позволяют обновить частичный выход, когда добавляется
+новая плитка ключей. Алгоритм и доказательство эквивалентности:
 [FlashAttention, §3 и Algorithm 1](https://arxiv.org/abs/2205.14135).*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-35-36/cs336-mha-gqa-mqa-mla.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-v2-mla-2026-11-09/v2-figure3-attention.png|Четыре схемы: отдельные K/V для каждой головы в MHA, K/V на группу в GQA, одна готовая пара K/V в MQA и общий латент для разных K/V в MLA. Штриховка показывает кэшируемые векторы.]]
 
-*Сопоставление MHA, GQA, MQA и MLA из Stanford CS336 показывает другую ось:
-что именно сохраняется в KV-cache при декодировании. Колонки сравнивают
-представления, а не задают хронологию: MQA опубликован раньше GQA, а MLA
-использует отдельную латентную параметризацию. Источник: Stanford CS336,
-[Lecture 10: Inference](https://github.com/stanford-cs336/spring2025-lectures/blob/main/lecture_10.py),
-рисунок `mla-schema.png`, основанный на Figure 3 отчёта
-[DeepSeek-V2](https://arxiv.org/abs/2405.04434).*
+*DeepSeek-AI, [DeepSeek-V2, рис. 3, с. 7](https://raw.githubusercontent.com/deepseek-ai/DeepSeek-V2/ec98ee3cbffc32104cd55dba8af884b3d772602a/deepseek-v2-tech-report.pdf#page=7), [MIT](/licenses/deepseek-v2-ec98ee3c-MIT.txt). Штриховка показывает, что остаётся в кэше при декодировании. В MLA на этой упрощённой схеме показан латент; отдельный позиционный ключ опущен.*
 
 - FlashAttention сохраняет математический оператор softmax-attention,
   меняя порядок вычислений и обмен с памятью;

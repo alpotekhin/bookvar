@@ -1,0 +1,162 @@
+{
+  "date": "2026-10-30",
+  "scope": "Extend the existing probability chapter with source-language interval-density, CDF, continuous marginalization and continuous-likelihood explanations; preserve all earlier programs and numerical examples. Replace one publicly embedded MML raster with two unchanged licensed D2L SVGs while retaining the exact MML page link and private original.",
+  "files": [
+    {
+      "source": "00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md",
+      "before_sha256": "f658322dcd6ebd32a9d888aa3f612bfd9821e8adc04bdeffc813b1ebc10c6505",
+      "after_sha256": "fc8a67653bef30192a0675320b6cbbf63e7a60ee5e05173c93131a67b746cecf",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-22",
+          "new": "last_updated: 2026-10-30"
+        },
+        {
+          "old": "  - https://d2l.ai/chapter_preliminaries/probability.html\n",
+          "new": "  - https://d2l.ai/chapter_preliminaries/probability.html\n  - https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/random-variables.html\n"
+        },
+        {
+          "old": "На рисунке из Mathematics for Machine Learning слева показаны три\nдискретных исхода: $-1{,}1$, $0{,}3$ и $1{,}5$, каждый с вероятностью $1/3$.\nСправа величина равномерно распределена между $0{,}9$ и $1{,}6$.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/foundations-source-first/mml-discrete-continuous-density.png]]\n\n*Вероятностная масса в отдельных точках и плотность на интервале.\nMarc Peter Deisenroth, A. Aldo Faisal, Cheng Soon Ong,\n[Mathematics for Machine Learning, рис. 6.3, с. 182](https://mml-book.github.io/book/mml-book.pdf#page=188).*\n\nШирина интервала справа равна $1{,}6-0{,}9=0{,}7$. Поэтому высота плотности",
+          "new": "#### From interval probabilities to a density\n\n*Aston Zhang et al.,\n[D2L, Probability Density Functions](https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/random-variables.html#probability-density-functions),\n[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).\nSelected English explanation; notation and equation layout adapted.*\n\nFor a short interval of width $\\epsilon$ near a point where the density\nis continuous,\n\n$$\nP(X\\in[x,x+\\epsilon])\n\\approx \\epsilon\\,p(x).\n$$\n\nFirst, probabilities are never negative, thus we should expect that\n$p(x)\\ge0$ as well.\n\nSecond, let's imagine that we slice up $\\mathbb R$ into an infinite number\nof slices which are $\\epsilon$ wide, say with slices\n$(\\epsilon i,\\epsilon(i+1)]$. For each slice, the probability is\napproximately $\\epsilon p(\\epsilon i)$, so summed over all of them\nit should be\n\n$$\nP(X\\in\\mathbb R)\n\\approx\\sum_i\\epsilon\\,p(\\epsilon i).\n$$\n\nThis is an approximation of an integral. Since the random variable must\ntake on some value, the total probability is one:\n\n$$\n\\int_{-\\infty}^{\\infty}p(x)\\,dx=1.\n$$\n\nOver a finite interval, the same construction gives\n\n$$\nP(a<X\\le b)=\\int_a^b p(x)\\,dx.\n$$\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-density-interval.svg]]\n\n*The filled region under the density curve represents an interval\nprobability, not the height of the curve at a point. D2L shades the\nsampled curve from $x=-2$ to $x=2.99$; its grid sum with step $0.01$\napproximates $P(-2\\le X<3)$ by about $0.7736$.\nAston Zhang et al.,\n[D2L, Probability Density Functions](https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/random-variables.html#probability-density-functions).\nComplete original course SVG, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*\n\n#### Равномерное распределение\n\nВ [MML, рис. 6.3, печатная с. 182 / страница PDF 188](https://mml-book.github.io/book/mml-book.pdf#page=188)\nсопоставлены два случая. Дискретная величина принимает значения\n$-1{,}1$, $0{,}3$ и $1{,}5$, каждое с вероятностью $1/3$.\nНепрерывная величина равномерно распределена между $0{,}9$ и $1{,}6$.\n\nШирина этого интервала равна $1{,}6-0{,}9=0{,}7$. Поэтому высота плотности"
+        },
+        {
+          "old": "и регрессии. Сопоставление двух случаев и рисунок взяты из\n[MML, §6.2](https://mml-book.github.io/book/mml-book.pdf#page=184).",
+          "new": "и регрессии. Сопоставление двух случаев см. в\n[MML, §6.2](https://mml-book.github.io/book/mml-book.pdf#page=184).\n\n#### Cumulative distribution function\n\nThe cumulative distribution function records the probability of being\nat or below a threshold:\n\n$$\nF(x)=P(X\\le x).\n$$\n\nFor a variable with density $p$, this is\n\n$$\nF(x)=\\int_{-\\infty}^{x}p(u)\\,du.\n$$\n\nIt is non-decreasing: increasing the threshold cannot remove any outcomes\nfrom the event. Its limits at $-\\infty$ and $+\\infty$ are zero and one.\nFor the uniform example above,\n\n$$\nF(x)=\n\\begin{cases}\n0,&x<0.9,\\\\\n\\dfrac{x-0.9}{0.7},&0.9\\le x\\le1.6,\\\\\n1,&x>1.6.\n\\end{cases}\n$$\n\nThus $P(1.0<X\\le1.2)=F(1.2)-F(1.0)=2/7$, the same area calculated\nabove. For a discrete variable, $F$ has a jump at each outcome with\npositive mass; the size of the jump equals that outcome's probability.\nThe definition $F(x)=P(X\\le x)$ applies to both cases.\n\n*Aston Zhang et al.,\n[D2L, Cumulative Distribution Functions](https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/random-variables.html#cumulative-distribution-functions),\n[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/);\nthe uniform worked example is expanded here.*"
+        },
+        {
+          "old": "P(Y=y)=\\sum_xP(X=x,Y=y).\n$$\n\n### Правило произведения и формула Байеса",
+          "new": "P(Y=y)=\\sum_xP(X=x,Y=y).\n$$\n\n#### Marginalization for a joint density\n\n*Aston Zhang et al.,\n[D2L, Joint Density Functions and Marginal Distributions](https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/random-variables.html#joint-density-functions),\n[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).\nSelected English explanation; equations split for narrow screens.*\n\nFor two continuous random variables, a small square has probability\napproximately\n\n$$\n\\begin{aligned}\n&P(x<X\\le x+\\epsilon,\\ y<Y\\le y+\\epsilon)\\\\\n&\\qquad\\approx\\epsilon^2p_{X,Y}(x,y).\n\\end{aligned}\n$$\n\nThe joint density is non-negative and integrates to one over the plane.\nTo find the distribution of $X$ alone, we include every possible value\nof $Y$.\n\nRecall that the density is the function $p_X$ so that\n\n$$\nP(X\\in[x,x+\\epsilon])\n\\approx\\epsilon\\,p_X(x).\n$$\n\nThere is no mention of $Y$, but if all we are given is $p_{X,Y}$,\nwe need to include $Y$ somehow. We can first observe that this is the same as\n\n$$\n\\begin{aligned}\n&P(X\\in[x,x+\\epsilon],\\ Y\\in\\mathbb R)\\\\\n&\\qquad\\approx\\epsilon\\,p_X(x).\n\\end{aligned}\n$$\n\nWe split the $Y$-axis into intervals of width $\\epsilon$ and add their\nprobabilities:\n\n$$\n\\begin{aligned}\n\\epsilon\\,p_X(x)\n&\\approx\\sum_i\\epsilon^2p_{X,Y}(x,\\epsilon i).\n\\end{aligned}\n$$\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-marginal.svg]]\n\n*By summing along the columns of our array of probabilities, we are able\nto obtain the marginal distribution for just the random variable\nrepresented along the $x$-axis. Aston Zhang et al.,\n[D2L, Fig. 22.6.1](https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/random-variables.html#fig-marginal).\nComplete original SVG, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*\n\nAfter canceling one factor of $\\epsilon$, the sum becomes an integral\nover $y$ in the limit:\n\n$$\np_X(x)=\\int_{-\\infty}^{\\infty}p_{X,Y}(x,y)\\,dy.\n$$\n\nThis tells us that to get a marginal distribution, we integrate over\nthe variables we do not care about. This process is often referred to as\n*integrating out* the unneeded variables.\n\nFor example, take the joint density $p_{X,Y}(x,y)=4xy$ on the unit square\n$0\\le x,y\\le1$, and zero outside it. Then\n\n$$\n\\begin{aligned}\np_X(x)&=\\int_0^1 4xy\\,dy\\\\\n&=4x\\left[\\frac{y^2}{2}\\right]_0^1=2x,\n\\qquad 0\\le x\\le1.\n\\end{aligned}\n$$\n\nThe resulting density is normalized: $\\int_0^1 2x\\,dx=1$.\nConsequently, $P(X\\le1/2)=\\int_0^{1/2}2x\\,dx=1/4$.\nThis extends the earlier column sum: sums eliminate discrete variables,\nand integrals eliminate variables represented by densities.\n\n### Правило произведения и формула Байеса"
+        },
+        {
+          "old": "### Условное правдоподобие: что считается входом",
+          "new": "### Maximum likelihood for continuous variables\n\n*Aston Zhang et al.,\n[D2L, Maximum Likelihood for Continuous Variables](https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/maximum-likelihood.html#maximum-likelihood-for-continuous-variables),\n[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).\nEnglish explanation adapted; the finite-window qualification and the\nworked solution of Exercise 1 are expanded here.*\n\nEverything that we have done so far assumes we are working with discrete\nrandom variables, but what if we want to work with continuous ones?\n\nWe replace probabilities at observed values with densities and optimize\n\n$$\n-\\sum_{i=1}^{N}\\log p_\\theta(x_i).\n$$\n\nThe question becomes, \"Why is this OK?\" After all, the reason we\nintroduced densities was because probabilities of getting specific\noutcomes themselves were zero.\n\nSuppose that, instead of requiring an exact measurement, we record\nwhether each observation falls in a small interval of width $\\epsilon$.\nThe width is fixed independently of $\\theta$. For $N$ independent\nobservations, define\n\n$$\nE_\\epsilon\n=\\bigcap_{i=1}^{N}\\{X_i\\in[x_i,x_i+\\epsilon]\\}.\n$$\n\nAssume that each density is continuous and positive at the observed\nvalue. For small $\\epsilon$,\n\n$$\n\\begin{aligned}\nP_\\theta(E_\\epsilon)\n&=\\prod_{i=1}^{N}\n\\int_{x_i}^{x_i+\\epsilon}p_\\theta(u)\\,du\\\\\n&\\approx\\epsilon^N\\prod_{i=1}^{N}p_\\theta(x_i).\n\\end{aligned}\n$$\n\nTaking negative logarithms gives\n\n$$\n\\begin{aligned}\n-\\log P_\\theta(E_\\epsilon)\n&\\approx-N\\log\\epsilon\\\\\n&\\quad-\\sum_{i=1}^{N}\\log p_\\theta(x_i).\n\\end{aligned}\n$$\n\nThe first term does not depend on $\\theta$, so it does not affect the\noptimization of this small-interval approximation. The density is not\na probability of an exact observation; it describes how interval\nprobabilities scale with the measurement width.\n\nFor a fixed, non-negligible measurement interval, use its integrated\nprobability. Its maximizing parameter need not be exactly the same as\nthe density's maximizing parameter.\n\n#### One observation from an exponential distribution\n\nD2L's first exercise gives the density\n\n$$\np_\\alpha(x)=\n\\begin{cases}\n\\alpha e^{-\\alpha x},&x\\ge0,\\\\\n0,&x<0,\n\\end{cases}\n\\qquad \\alpha>0,\n$$\n\nand one observation, $x=3$. The likelihood and its negative logarithm are\n\n$$\n\\mathcal L(\\alpha)=\\alpha e^{-3\\alpha},\n\\qquad\n-\\log\\mathcal L(\\alpha)=3\\alpha-\\log\\alpha.\n$$\n\nDifferentiating gives $3-1/\\alpha=0$, so $\\hat\\alpha=1/3$.\nThe second derivative is $1/\\alpha^2>0$ on $\\alpha>0$; this is the\nunique minimum of NLL.\n\nIf the recorded event is instead $3\\le X\\le4$, its probability is\n\n$$\nP_\\alpha(3\\le X\\le4)\n=e^{-3\\alpha}(1-e^{-\\alpha}).\n$$\n\nIts log-derivative is $-3+1/(e^\\alpha-1)$, whose zero occurs at\n$\\hat\\alpha=\\log(4/3)\\approx0.28768$, rather than $1/3$.\nFor a general width $\\epsilon$, the maximizer is\n\n$$\n\\hat\\alpha_\\epsilon\n=\\frac{\\log(1+\\epsilon/3)}{\\epsilon}\n\\longrightarrow\\frac13\n\\quad\\text{as }\\epsilon\\to0.\n$$\n\n### Условное правдоподобие: что считается входом"
+        },
+        {
+          "old": "- Aston Zhang et al., [D2L, §22.7: Maximum Likelihood]",
+          "new": "- Aston Zhang et al., [D2L, §22.6: Random Variables](https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/random-variables.html) — плотность как предел вероятностей интервалов, функция распределения и маргинализация; два оригинальных SVG.\n- Aston Zhang et al., [D2L, §22.7: Maximum Likelihood]"
+        },
+        {
+          "old": "Пунктир — известная вероятность $1/2$. Отдельный новый бросок может\nотдалить частоту от $1/2$; сходимость не означает монотонного приближения.\nAston Zhang et al.,",
+          "new": "Пунктир — известная вероятность $1/2$. Отдельный новый бросок может\nотдалить частоту от $1/2$; сходимость не означает монотонного приближения.\nНа исходной оси Samples показан индекс от 0: точка 0 соответствует\nпервому броску, точка 9 999 — десяти тысячам бросков.\nAston Zhang et al.,"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "9f9bbde15ca3b38e241547c28edf9125be30f088590c46cfaf6494bc7f88d772",
+      "after_sha256": "8f54483ae2873be51a5b36ffb6819aba124051e9aafaeaee8529c1921718110d",
+      "changes": [
+        {
+          "old": "  - id: curated-mml-density-0000000000a4\n    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/mml-discrete-continuous-density.png\n    author: Marc Peter Deisenroth; A. Aldo Faisal; Cheng Soon Ong\n    source_url: https://mml-book.github.io/book/mml-book.pdf\n    license: free-to-view educational book; reuse confirmed by repository owner\n    license_url: https://mml-book.github.io/\n    modifications: Figure 6.3 plots and panel labels cropped from printed page 182, PDF page 188, at 300 dpi; page header and surrounding prose excluded\n    used_in:\n      - 00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/mml-book.pdf\n    source_page: 188\n    source_printed_page: 182\n    render_dpi: 300\n    render_page_size_px: [2481, 3508]\n    crop_box_px: [600, 495, 2010, 1000]\n    source_asset_sha256: 3f87b70c64a35d30ec4e565b4d5cfd18fe913002d3b3bed44691c7d0838911bc\n    sha256: 49e803f4c725f14a81ee4475450f2ea94fe5d6427779db14e914918907d48dd0\n    derivation: pdf-page-render-crop\n",
+          "new": "  - {\"id\":\"curated-d2l-density-interval-35d85344b8bd\",\"asset\":\"00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-density-interval.svg\",\"author\":\"Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola\",\"title\":\"D2L probability as area under a density, original course output\",\"source_url\":\"https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/random-variables.html#probability-density-functions\",\"source_image_url\":\"https://d2l.ai/_images/output_random-variables_886f4c_15_0.svg\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-density-interval.svg\",\"source_asset_sha256\":\"35d85344b8bd9faf7cda96b89bfd235754990ec381f3fdb0ca9d30a812bac27f\",\"sha256\":\"35d85344b8bd9faf7cda96b89bfd235754990ec381f3fdb0ca9d30a812bac27f\",\"bytes\":32316,\"source_code\":\"05 Источники/Originals/probability-native-2026-10-30/random-variables.md\",\"source_code_sha256\":\"506e48d177d6753b65a671702f4e85422d0501496a085728960799ec4bd1e43f\",\"source_code_commit\":\"23d7a5aecceee57d1292c56e90cce307f183bb0a\",\"source_code_url\":\"https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_appendix-mathematics-for-deep-learning/random-variables.md\",\"source_version\":\"Official D2L 1.0.3 generated output; captured exact SHA-256, not an immutable image URL\",\"view_box\":[0,0,310.137492,226.237508],\"license\":\"CC BY-SA 4.0\",\"license_url\":\"https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE\",\"license_evidence\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"license_evidence_sha256\":\"a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\",\"public_license_copy\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"derivation\":\"source-svg-copy\",\"modifications\":\"Complete original SVG copied byte-for-byte. No crop, redraw, relabeling, recoloring or resampling. Attribution and explanation are separate in the chapter.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-10-30\",\"used_in\":[\"00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md\"]}\n  - {\"id\":\"curated-d2l-marginal-cda896c59fd8\",\"asset\":\"00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-marginal.svg\",\"author\":\"Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola\",\"title\":\"D2L marginalization, original Figure 22.6.1\",\"source_url\":\"https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/random-variables.html#fig-marginal\",\"source_image_url\":\"https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/marginal.svg\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-marginal.svg\",\"source_asset_sha256\":\"cda896c59fd8dfb81f4d5d03fd392142da25b331378e1da668a0088cbd44dd51\",\"sha256\":\"cda896c59fd8dfb81f4d5d03fd392142da25b331378e1da668a0088cbd44dd51\",\"bytes\":70709,\"source_code\":\"05 Источники/Originals/probability-native-2026-10-30/random-variables.md\",\"source_code_sha256\":\"506e48d177d6753b65a671702f4e85422d0501496a085728960799ec4bd1e43f\",\"source_code_commit\":\"23d7a5aecceee57d1292c56e90cce307f183bb0a\",\"source_code_url\":\"https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_appendix-mathematics-for-deep-learning/random-variables.md\",\"source_version\":\"Pinned source SVG at recorded commit\",\"view_box\":[0,0,337,163],\"license\":\"CC BY-SA 4.0\",\"license_url\":\"https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE\",\"license_evidence\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"license_evidence_sha256\":\"a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\",\"public_license_copy\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"derivation\":\"source-svg-copy\",\"modifications\":\"Complete original SVG copied byte-for-byte. No crop, redraw, relabeling, recoloring or resampling. Attribution and explanation are separate in the chapter.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-10-30\",\"used_in\":[\"00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md\"]}\n"
+        }
+      ]
+    }
+  ],
+  "binary_moves": [
+    {
+      "from": "00 Учебник/Assets/Figures/curated/foundations-source-first/mml-discrete-continuous-density.png",
+      "to": "05 Источники/Originals/mml-source-2026-10-30/mml-discrete-continuous-density.png",
+      "sha256": "49e803f4c725f14a81ee4475450f2ea94fe5d6427779db14e914918907d48dd0",
+      "bytes": 37312,
+      "original_registry_record": {
+        "id": "curated-mml-density-0000000000a4",
+        "asset": "00 Учебник/Assets/Figures/curated/foundations-source-first/mml-discrete-continuous-density.png",
+        "author": "Marc Peter Deisenroth; A. Aldo Faisal; Cheng Soon Ong",
+        "source_url": "https://mml-book.github.io/book/mml-book.pdf",
+        "license": "free-to-view educational book; reuse confirmed by repository owner",
+        "license_url": "https://mml-book.github.io/",
+        "modifications": "Figure 6.3 plots and panel labels cropped from printed page 182, PDF page 188, at 300 dpi; page header and surrounding prose excluded",
+        "used_in": [
+          "00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md"
+        ],
+        "metadata_status": "verified",
+        "provenance_confirmation": "user-confirmed-open-materials",
+        "source_asset": "raw/papers/external/mml-book.pdf",
+        "source_page": 188,
+        "source_printed_page": 182,
+        "render_dpi": 300,
+        "render_page_size_px": [
+          2481,
+          3508
+        ],
+        "crop_box_px": [
+          600,
+          495,
+          2010,
+          1000
+        ],
+        "source_asset_sha256": "3f87b70c64a35d30ec4e565b4d5cfd18fe913002d3b3bed44691c7d0838911bc",
+        "sha256": "49e803f4c725f14a81ee4475450f2ea94fe5d6427779db14e914918907d48dd0",
+        "derivation": "pdf-page-render-crop"
+      }
+    }
+  ],
+  "source_manifest": [
+    {
+      "path": "05 Источники/Originals/probability-native-2026-10-30/probability.md",
+      "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_preliminaries/probability.md",
+      "sha256": "02b59c319786641678fee4edaf61d8fd038523f9d6764159a03d570e380121f1",
+      "bytes": 43921,
+      "exact": true
+    },
+    {
+      "path": "05 Источники/Originals/probability-native-2026-10-30/maximum-likelihood.md",
+      "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_appendix-mathematics-for-deep-learning/maximum-likelihood.md",
+      "sha256": "d26ee1cf274e9eab38ffa567acb919155a7aec8692cec7ca3bfdfd66d95cef5a",
+      "bytes": 14955,
+      "exact": true
+    },
+    {
+      "path": "05 Источники/Originals/probability-native-2026-10-30/random-variables.md",
+      "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_appendix-mathematics-for-deep-learning/random-variables.md",
+      "sha256": "506e48d177d6753b65a671702f4e85422d0501496a085728960799ec4bd1e43f",
+      "bytes": 44019,
+      "exact": true
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-density-interval.svg",
+      "url": "https://d2l.ai/_images/output_random-variables_886f4c_15_0.svg",
+      "sha256": "35d85344b8bd9faf7cda96b89bfd235754990ec381f3fdb0ca9d30a812bac27f",
+      "bytes": 32316,
+      "exact": true,
+      "viewBox": "0 0 310.137492 226.237508"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-marginal.svg",
+      "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/marginal.svg",
+      "sha256": "cda896c59fd8dfb81f4d5d03fd392142da25b331378e1da668a0088cbd44dd51",
+      "bytes": 70709,
+      "exact": true,
+      "viewBox": "0 0 337 163"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/foundations-source-first/d2l-likelihood-coin.svg",
+      "url": "https://d2l.ai/_images/output_maximum-likelihood_907113_3_0.svg",
+      "sha256": "4b59e1548c8c705ab7e188b8789f6e0f86df0e205ee0ea17b3756a94e3bd3bca",
+      "bytes": 62558,
+      "exact": true,
+      "viewBox": "0 0 353.824992 244.474996"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/foundations-source-first/d2l-coin-frequency-convergence.svg",
+      "url": "https://d2l.ai/_images/output_probability_245b7d_78_0.svg",
+      "sha256": "2906234b60991e9cf930f345eb5948caae3e810992622a61e2e8cd7db7654dfd",
+      "bytes": 173706,
+      "exact": true,
+      "viewBox": "0 0 408.795573 318.394999"
+    },
+    {
+      "path": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+      "url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE",
+      "sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+      "bytes": 14849,
+      "exact": true
+    }
+  ],
+  "source_caveats": [
+    "D2L maximum-likelihood.md line 221 omits a minus sign on the right-hand side of the NLL derivative; this equation is not copied. The chapter derives the correct signs independently.",
+    "D2L's finite-epsilon wording is qualified: dropping the width term applies to the small-interval approximation, not an exact optimizer equality for arbitrary measurement widths. The exponential worked example demonstrates the difference.",
+    "D2L's numerical log example uses a base-10 value. The chapter explicitly uses natural logarithms and retains its independently checked 2000-factor example."
+  ]
+}

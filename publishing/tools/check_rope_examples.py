@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / '00 Учебник/07 Анатомия современной LLM/04 RoPE.md'
 body = CHAPTER.read_text()
 blocks = re.findall(r'~~~python\n(.*?)\n~~~', body, re.S)
-assert len(blocks) == 4
+assert len(blocks) == 5
 ns = {}
 for i, block in enumerate(blocks, 1):
     exec(compile(block, f'{CHAPTER.name}:block-{i}', 'exec'), ns)
@@ -26,6 +26,9 @@ for i, block in enumerate(blocks, 1):
         torch.testing.assert_close(ns['weights'][0,0,-1], torch.tensor(weights,dtype=torch.float64))
         assert abs(ns['full'][0,-1,0,0].item()-sum((j+1)*w for j,w in enumerate(weights))) < 1e-14
     elif i == 4:
+        assert abs(ns['old_angle'].cos().item() - .1559436947653746) < 1e-14
+        assert abs(ns['new_angle'].cos().item() - .8654010374940259) < 1e-14
+    elif i == 5:
         assert abs((ns['fresh']-ns['stale']).abs().max().item()-.0023262835464963327) < 1e-14
     print('PASS published block', i)
 rope, frequencies, attention = [ns[k] for k in ('rope', 'frequencies', 'attention')]
@@ -153,7 +156,8 @@ print('PASS changed-grid upper-layer cache counterexample', (fresh-stale).abs().
 hf_path = ROOT/'05 Источники/Originals/rope-2026-10-22/modeling_rope_utils-v4.57.1.py'
 assert hashlib.sha256(hf_path.read_bytes()).hexdigest() == '55cc0c8cb76f592ab178b4662adcbdf4ad5012bb0b4249c0a96603141f18e9ac'
 hf = extract_functions(hf_path, ['_compute_default_rope_parameters', '_compute_linear_scaling_rope_parameters',
-     '_compute_dynamic_ntk_parameters', '_compute_yarn_parameters'], {'torch':torch, 'math':math})
+     '_compute_dynamic_ntk_parameters', '_compute_yarn_parameters', '_compute_llama3_parameters'],
+     {'torch':torch, 'math':math})
 cfg = SimpleNamespace(rope_theta=10000., head_dim=8, hidden_size=8, num_attention_heads=1,
                       max_position_embeddings=2048, rope_scaling={'factor':4})
 linear, _ = hf['_compute_linear_scaling_rope_parameters'](cfg, torch.device('cpu'))
@@ -170,6 +174,27 @@ for t in (None, 1024, 2048):
     torch.testing.assert_close(freq.double(), frequencies(8))
 torch.testing.assert_close(rope(x, pos/4, frequencies(4)), rope(x, pos, frequencies(4)/4))
 print('PASS pinned HF default/linear/dynamic/YaRN; position/frequency scaling equivalence')
+
+cfg_llama31 = SimpleNamespace(
+    rope_theta=500000., head_dim=128, hidden_size=4096, num_attention_heads=32,
+    max_position_embeddings=131072,
+    rope_scaling={'factor':8, 'low_freq_factor':1, 'high_freq_factor':4,
+                  'original_max_position_embeddings':8192},
+)
+for length in (64, 8192, 131072):
+    grid, factor = hf['_compute_llama3_parameters'](cfg_llama31, torch.device('cpu'), seq_len=length)
+    torch.testing.assert_close(grid.double(), ns['llama31_scaled'], rtol=2e-6, atol=1e-12)
+    assert factor == 1.0
+ratio = ns['ratio']
+assert (ratio == 1).sum().item() == 29
+assert ((ratio > .125) & (ratio < 1)).sum().item() == 6
+assert (ratio == .125).sum().item() == 29
+ends = (2 * math.pi) / torch.tensor([2048., 8192.], dtype=torch.float64)
+torch.testing.assert_close(ns['llama31_frequencies'](ends) / ends,
+                           torch.tensor([1., .125], dtype=torch.float64))
+assert (ns['llama31_scaled'] - ns['llama31_base'] / 8).abs().max().item() > .5
+print('PASS Llama 3.1: 64 pinned HF frequencies, 29/6/29 bands, endpoints, fixed grid and no logit multiplier')
+
 assert torch.tensor([2048,2049]).half().tolist() == [2048.,2048.]
 assert torch.tensor([256,257]).bfloat16().tolist() == [256.,256.]
 assert torch.tensor([2**24,2**24+1]).float()[0] == torch.tensor([2**24,2**24+1]).float()[1]

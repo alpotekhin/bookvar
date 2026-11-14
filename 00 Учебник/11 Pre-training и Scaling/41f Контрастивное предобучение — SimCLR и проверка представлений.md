@@ -3,8 +3,36 @@ title: Контрастивное предобучение — SimCLR и про�
 type: textbook-chapter
 status: canonical
 source_language: en
-last_updated: 2026-10-28
-last_verified: 2026-10-28
+last_updated: 2026-11-05
+last_verified: 2026-11-05
+reference_terms:
+  - anchor: two-view-encoder
+    label: "SimCLR: два вида, общий энкодер и projection head"
+    label_en: "SimCLR: two views, a shared encoder and a projection head"
+  - anchor: augmentation-task
+    label: "SimCLR: аугментации и цветовые shortcuts"
+    label_en: "SimCLR: augmentations and colour shortcuts"
+  - anchor: positive-index
+    label: "Положительные пары и порядок видов в batch"
+    label_en: "Positive-pair indices and view ordering"
+  - anchor: nt-xent
+    label: "NT-Xent: знаменатель, self-mask и градиенты"
+    label_en: "NT-Xent: denominator, self-mask and gradients"
+  - anchor: shared-training-step
+    label: "Полный шаг SimCLR через обе ветви"
+    label_en: "A complete SimCLR step through both branches"
+  - anchor: collapse-and-negatives
+    label: "Коллапс, false negatives и gradient accumulation"
+    label_en: "Collapse, false negatives and gradient accumulation"
+  - anchor: projection-versus-representation
+    label: "Представление до и после projection head"
+    label_en: "Representations before and after the projection head"
+  - anchor: linear-evaluation
+    label: "Linear probing: замороженный энкодер и обучаемая голова"
+    label_en: "Linear probing: a frozen encoder and a trained head"
+  - anchor: simclr-probe-protocol
+    label: "Выбор checkpoint и утечка test labels в probe"
+    label_en: "Checkpoint selection and test-label leakage in a probe"
 primary_sources:
   - https://proceedings.mlr.press/v119/chen20j.html
   - https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial17/SimCLR.html
@@ -471,6 +499,8 @@ assert torch.equal(encoder.weight, saved) and encoder.weight.grad is None
 assert torch.equal(probe(cached).argmax(dim=1), y)
 print("probe fit loss", start, "->", finish, "encoder unchanged")
 ```
+
+<a id="simclr-probe-protocol"></a>
 
 ### A protocol correction when using the tutorial's results
 

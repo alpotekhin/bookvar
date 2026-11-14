@@ -1,0 +1,158 @@
+[
+  {
+    "id": "curated-gmm-20261103-4cd0f062617e",
+    "asset": "00 Учебник/Assets/Figures/curated/gmm-2026-11-03/jake-digit-aic.png",
+    "author": "Jake VanderPlas",
+    "source_url": "https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.12-Gaussian-Mixtures.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.12-Gaussian-Mixtures.ipynb",
+    "source_asset": "05 Источники/Originals/gmm-2026-10-25/jake-gmm.ipynb",
+    "source_asset_sha256": "9438d483e156738ba8d581e54f150590061ff6fbe6147cb38ab56ae0449c07e6",
+    "sha256": "4cd0f062617e44b4312d4f58413c58337b8da8649984483591e84e2eb84df6e7",
+    "dimensions_px": [
+      391,
+      244
+    ],
+    "commit": "d66231454ef753818dc9213c9b5942e067266966",
+    "license": "CC BY-NC-ND 3.0 Unported",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/3.0/",
+    "license_evidence": "05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-LICENSE-TEXT",
+    "license_evidence_sha256": "d74e67958cad1ae4cb585402ef66ae41958ba546e6c5e80a93920013cb81bc2a",
+    "derivation": "notebook-output-extraction",
+    "modifications": "Complete original PNG, no crop, relabeling, translation, redraw or resampling. Saved notebook outputs are decoded, not regenerated.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-11-03",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md"
+    ],
+    "source_member": "/cells/46/outputs/0/data/image~1png",
+    "width": 391,
+    "height": 244,
+    "bytes": 9908
+  },
+  {
+    "id": "curated-gmm-20261103-75ce77d9c4f7",
+    "asset": "00 Учебник/Assets/Figures/curated/gmm-2026-11-03/jake-generated-digits.png",
+    "author": "Jake VanderPlas",
+    "source_url": "https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.12-Gaussian-Mixtures.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.12-Gaussian-Mixtures.ipynb",
+    "source_asset": "05 Источники/Originals/gmm-2026-10-25/jake-gmm.ipynb",
+    "source_asset_sha256": "9438d483e156738ba8d581e54f150590061ff6fbe6147cb38ab56ae0449c07e6",
+    "sha256": "75ce77d9c4f701c68c1dd1a6d6ed33977a0e692e1e7e2fcfe400db2167a3b9ba",
+    "dimensions_px": [
+      459,
+      231
+    ],
+    "commit": "d66231454ef753818dc9213c9b5942e067266966",
+    "license": "CC BY-NC-ND 3.0 Unported",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/3.0/",
+    "license_evidence": "05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-LICENSE-TEXT",
+    "license_evidence_sha256": "d74e67958cad1ae4cb585402ef66ae41958ba546e6c5e80a93920013cb81bc2a",
+    "derivation": "notebook-output-extraction",
+    "modifications": "Complete original PNG, no crop, relabeling, translation, redraw or resampling. Saved notebook outputs are decoded, not regenerated.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-11-03",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md"
+    ],
+    "source_member": "/cells/52/outputs/0/data/image~1png",
+    "width": 459,
+    "height": 231,
+    "bytes": 11762
+  },
+  {
+    "id": "curated-gmm-20261103-32d53b5e501f",
+    "asset": "00 Учебник/Assets/Figures/curated/gmm-2026-11-03/jake-moons-generated.png",
+    "author": "Jake VanderPlas",
+    "source_url": "https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.12-Gaussian-Mixtures.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.12-Gaussian-Mixtures.ipynb",
+    "source_asset": "05 Источники/Originals/gmm-2026-10-25/jake-gmm.ipynb",
+    "source_asset_sha256": "9438d483e156738ba8d581e54f150590061ff6fbe6147cb38ab56ae0449c07e6",
+    "sha256": "32d53b5e501feb04ad7b0eee235dc73443a03a3c060cfcdf493ca363144e6806",
+    "dimensions_px": [
+      377,
+      244
+    ],
+    "commit": "d66231454ef753818dc9213c9b5942e067266966",
+    "license": "CC BY-NC-ND 3.0 Unported",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/3.0/",
+    "license_evidence": "05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-LICENSE-TEXT",
+    "license_evidence_sha256": "d74e67958cad1ae4cb585402ef66ae41958ba546e6c5e80a93920013cb81bc2a",
+    "derivation": "notebook-output-extraction",
+    "modifications": "Complete original PNG, no crop, relabeling, translation, redraw or resampling. Saved notebook outputs are decoded, not regenerated.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-11-03",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md"
+    ],
+    "source_member": "/cells/34/outputs/0/data/image~1png",
+    "width": 377,
+    "height": 244,
+    "bytes": 15879
+  },
+  {
+    "id": "curated-gmm-20261103-7a0112379a3d",
+    "asset": "00 Учебник/Assets/Figures/curated/gmm-2026-11-03/jake-training-digits.png",
+    "author": "Jake VanderPlas",
+    "source_url": "https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.12-Gaussian-Mixtures.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.12-Gaussian-Mixtures.ipynb",
+    "source_asset": "05 Источники/Originals/gmm-2026-10-25/jake-gmm.ipynb",
+    "source_asset_sha256": "9438d483e156738ba8d581e54f150590061ff6fbe6147cb38ab56ae0449c07e6",
+    "sha256": "7a0112379a3d2ed97ce6e09b011520c9fd7eba630000a4662640bd391c4295a6",
+    "dimensions_px": [
+      459,
+      231
+    ],
+    "commit": "d66231454ef753818dc9213c9b5942e067266966",
+    "license": "CC BY-NC-ND 3.0 Unported",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/3.0/",
+    "license_evidence": "05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-LICENSE-TEXT",
+    "license_evidence_sha256": "d74e67958cad1ae4cb585402ef66ae41958ba546e6c5e80a93920013cb81bc2a",
+    "derivation": "notebook-output-extraction",
+    "modifications": "Complete original PNG, no crop, relabeling, translation, redraw or resampling. Saved notebook outputs are decoded, not regenerated.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-11-03",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md"
+    ],
+    "source_member": "/cells/42/outputs/0/data/image~1png",
+    "width": 459,
+    "height": 231,
+    "bytes": 6871
+  },
+  {
+    "id": "curated-gmm-20261103-ab5a8bd8e440",
+    "asset": "00 Учебник/Assets/Figures/curated/gmm-2026-11-03/sklearn-gmm-initialization.png",
+    "author": "The scikit-learn developers",
+    "source_url": "https://scikit-learn.org/1.9/auto_examples/mixture/plot_gmm_init.html",
+    "source_image_url": "https://raw.githubusercontent.com/scikit-learn/scikit-learn.github.io/199d116ab37beed506c63fc9f6a74f56e228de43/1.9/_images/sphx_glr_plot_gmm_init_001.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/gmm-2026-11-03/sklearn-gmm-initialization.png",
+    "source_asset_sha256": "ab5a8bd8e440a80fd83b0ce5ef7614c2d3362377fef0274176ac910951bb3707",
+    "sha256": "ab5a8bd8e440a80fd83b0ce5ef7614c2d3362377fef0274176ac910951bb3707",
+    "dimensions_px": [
+      800,
+      600
+    ],
+    "commit": "199d116ab37beed506c63fc9f6a74f56e228de43",
+    "license": "BSD-3-Clause",
+    "license_url": "https://github.com/scikit-learn/scikit-learn/blob/866c0f51e7560ef0303cbcc5f159df5382ea9e3f/LICENSE",
+    "license_evidence": "site/public/licenses/scikit-learn-1.9.1-BSD-3-Clause.txt",
+    "license_evidence_sha256": "50d6a9d340f19ab355609917993114daf5f47e3161067bcf34955bbd05cd9cb0",
+    "derivation": "source-image-copy",
+    "modifications": "Complete original PNG, no crop, relabeling, translation, redraw or resampling. Saved notebook outputs are decoded, not regenerated.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-11-03",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md"
+    ],
+    "width": 800,
+    "height": 600,
+    "bytes": 82435,
+    "source_page_snapshot": "05 Источники/Originals/gmm-2026-11-03/sklearn-gmm-init-1.9.1.py",
+    "source_page_sha256": "82c5434602c464e1bdfac7483eed0b6d48cf1a41cd18f982182989f74b158731"
+  }
+]

@@ -1,0 +1,181 @@
+{
+  "date": "2026-11-09",
+  "scope": "Continue the local Russian reading path GPT-1 → GPT-2 → GPT-3 → LLaMA v1; keep the main T5 route and reuse the original licensed PMLR normalization figure in both GPT-2 editions. No publication.",
+  "review": {
+    "sources": [
+      "Radford et al. GPT-2 §§2.3 and 3.7 and pinned OpenAI model.py: pre-LN and final norm; translation with demonstration pairs and greedy decoding.",
+      "Brown et al. GPT-3 §§2.1, 2.4, 3.3, Figure 2.1 and Table 3.4: dense/local layer alternation, fixed weights, shot counts, evaluation protocol.",
+      "Touvron et al. LLaMA §§1–2, Figure 1, and pinned first model.py: inference-budget motivation, full causal MHA, RMSNorm, rotary Q/K and gated FFN.",
+      "Xiong et al., PMLR 119 Figure 1, CC BY 4.0: verified the source PDF crop pixel for pixel; reused unchanged in both locales."
+    ],
+    "calculation": "Reused the initial Q/K projections of the previous three-token chapter. At cat the self weight is 0.66976155 before LayerNorm enters Q/K, 0.96014503 with pre-LayerNorm and 0.98028054 with pre-RMSNorm and RoPE in this toy head. At sleeps, a two-position toy band excludes a and renormalizes the two remaining weights. These are CPU arithmetic checks, not measurements from released models.",
+    "local_checks": "2015 pages built, 715 publication and 219 output checks passed, zero broken internal routes or fragments. Ran published GPT-2, GPT-3 and LLaMA example checkers and source-figure checks.",
+    "reader": "Followed the six in-article transitions in Chrome at 375 and 1280 px. Inspected the comparison table and original normalization, demonstration, block and learning-curve images, including zoom and panning. Verified links from the EN LLaMA fallback stay in the EN shell.",
+    "limits": "No full translation, released-model benchmark, public checkout or deployment performed. T5 remains in the main chapter sequence."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md",
+      "before_sha256": "0322cfa1b733476f465537ee766e2c523de5cd8c1d64a997656a88aaab4e3a85",
+      "after_sha256": "dfb6a3fccc8088acc4c18629b1628cecb642908acdafa092ddc4dfa9aee9defa",
+      "changes": [
+        {
+          "old": "Обе цели и форматы входов показаны на полном рисунке 1 ниже\n([Radford et al., §§3.1–3.3](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=3)).",
+          "new": "Обе цели и форматы входов показаны на полном рисунке 1 ниже\n([Radford et al., §§3.1–3.3](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=3)).\n\n[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#Что изменилось относительно GPT-1|В экспериментах GPT-2 задачи решают через словарный выход]].\nПараллельно меняется сам блок: LayerNorm переходит перед attention и FFN."
+        },
+        {
+          "old": "## Одна архитектура для двух этапов",
+          "new": "<a id=\"gpt1-decoder-architecture\"></a>\n\n## Одна архитектура для двух этапов"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md",
+      "before_sha256": "a0417ae755c137144bbccc8f09b935b5b1abf1657d1411eacdec1585b7b7ab23",
+      "after_sha256": "bead8bce5f85a97100b7248afb619e3c6a2303fcc3ecfff8678ed225880409e2",
+      "changes": [
+        {
+          "old": "Меняются глубина, ширина и положение нормализаций.",
+          "new": "Меняются глубина, ширина и положение нормализаций.\n\nВ [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение#Один префикс на двух этапах обучения|примере GPT-1]] по `a cat`\nвычислялись логиты словаря, а для выбора отношения между двумя фразами\nиспользовалась отдельная голова над `Extract`. В экспериментах GPT-2\nвыход остаётся словарным и при решении задачи. Например, после пар\nанглийских и французских фраз модель продолжает незавершённую пару.\nНи весов дополнительной головы, ни шага оптимизатора на этих примерах нет."
+        },
+        {
+          "old": "После последнего блока выполняется ещё одна LayerNorm.\nПри изменении порядка вычислений меняется и прямой путь производной:",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/norm-gating-2026-10-22/xiong-pre-post-norm.png|Два блока Xiong et al.: слева LayerNorm после сложения, справа перед attention и FFN]]\n\n*Ruibin Xiong et al., [On Layer Normalization in the Transformer Architecture](https://proceedings.mlr.press/v119/xiong20b.html),\n[рис. 1](https://proceedings.mlr.press/v119/xiong20b/xiong20b.pdf#page=2),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Обе панели читаются\nснизу вверх. Слева поток после каждого сложения проходит через LayerNorm.\nСправа исходное состояние идёт прямо к сложению, а LayerNorm находится\nна пути к attention или FFN. Схема показывает один блок;\nфинальная нормализация всего стека на ней не показана.*\n\nПосле последнего блока выполняется ещё одна LayerNorm.\nПри изменении порядка вычислений меняется и прямой путь производной:"
+        },
+        {
+          "old": "Оригинальная функция `block` показывает этот порядок без дополнительной\nархитектурной схемы:",
+          "new": "В исходном коде тот же порядок виден в функции `block`:"
+        },
+        {
+          "old": "воспроизводят весь исторический тренировочный рецепт.",
+          "new": "воспроизводят весь исторический тренировочный рецепт.\n\n### Один запрос до и после переноса LayerNorm\n\nВозьмём те же токены `a cat sleeps` и\n[[00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V#4. Численный пример, который можно проверить вручную|матрицы проекций из примера Q, K и V]].\nПозиционные добавки оставим нулевыми. В первом блоке GPT-1 запрос\nпозиции `cat` строился из $x=(0,1,0)$ и был равен $(0,1)$.\nLayerNorm применялась позднее, к сумме выхода attention и входной строки.\n\nВ порядке GPT-2 сначала вычисляется\n$\\operatorname{LN}(x)\\approx(-0.7071,1.4142,-0.7071)$.\nЗдесь масштаб равен единице, смещение нулю, $\\epsilon=10^{-5}$.\nТа же матрица проекции даёт запрос $q_{\\text{cat}}\\approx(-1.4142,0.7071)$.\nКлючи тоже строятся из нормализованных строк. Оценки двух разрешённых\nключей `a` и `cat` после деления на $\\sqrt{2}$ теперь примерно\n$-1.4141$ и $1.7677$. Вес `cat` меняется с $0.6698$ на $0.9601$.\nМаска не менялась: `sleeps` всё ещё закрыт. Разница возникает до softmax,\nпотому что проекции получили другие векторы.\n\nЭто расчёт с одними учебными весами, а не сравнение обученных GPT-1 и GPT-2.\nУ реальной модели больше голов и слоёв, а перенос LayerNorm не обязан\nповышать вес текущего токена.\n\n[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#Перевод и ответ через префикс|От блока GPT-2 перейдём к запросу на перевод]]."
+        },
+        {
+          "old": "учебный prompt является two-shot. Число примеров в контексте и наличие\nградиентного дообучения нужно учитывать раздельно.",
+          "new": "учебный prompt является two-shot. Число примеров в контексте и наличие\nградиентного дообучения нужно учитывать раздельно.\n[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#Где находится «обучение»|В GPT-3 это различие становится частью протокола оценки]]."
+        },
+        {
+          "old": "В [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3]]\nэто сравнение станет отдельной частью экспериментального дизайна.",
+          "new": "В [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3]]\nэто сравнение станет отдельной частью экспериментального дизайна.\n[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#Перевод: направление и параллельные примеры|Сравнить три режима на той же задаче перевода]]."
+        },
+        {
+          "old": "### Pre-norm и остаточные пути",
+          "new": "<a id=\"gpt2-pre-norm\"></a>\n\n### Pre-norm и остаточные пути"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "before_sha256": "3cd49ae19d8bc01c4c68d05a823ffd5c1fd7fee1106332a9a53843491566b0a2",
+      "after_sha256": "3e593627705a59f32dcf8ece3279d364a2dd485f4df14fef8d66271d17bd3b12",
+      "changes": [
+        {
+          "old": "10–100 примеров, насколько позволяет окно 2048 токенов. Fine-tuning\nGPT-3 авторы оставляют за пределами этого исследования.",
+          "new": "10–100 примеров, насколько позволяет окно 2048 токенов. Fine-tuning\nGPT-3 авторы оставляют за пределами этого исследования.\n\nВ [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#Перевод и ответ через префикс|опыте GPT-2 с переводом]] готовые пары уже стояли перед\nнезавершённой. Авторы GPT-3 оценивают одни и те же веса без примеров,\nс одним и с несколькими. На рисунке\nАлламара две законченные строки. Если убрать первую, останется\none-shot; если убрать обе, готовых ответов во входе не будет. Для zero-shot\nзадачу можно пояснить текстовой инструкцией. Число готовых пар ничего\nне говорит о том, обновлялись ли веса.\n\n[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#Полное и локальное внимание|Сравнение блоков: полные и локальные слои]].\n[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#Перевод: направление и параллельные примеры|Сравнение запросов: перевод без примеров и с примерами]]."
+        },
+        {
+          "old": "маски, не опубликованная конфигурация GPT-3: точная ширина полосы\nв §2.1 не указана.",
+          "new": "маски, не опубликованная конфигурация GPT-3: точная ширина полосы\nв §2.1 не указана.\n\nНа тех же [[00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V#4. Численный пример, который можно проверить вручную|трёх токенах a cat sleeps]]\nполный причинный слой разрешал запросу `sleeps` все три ключа.\nЕсли оставить те же Q и K, но взять для примера полосу ширины два\nвместе с текущей позицией, у запроса останутся `cat` и `sleeps`.\nВ полном слое веса по трём позициям были $(0.2483,0.2483,0.5035)$;\nпосле удаления `a` и пересчёта softmax получаются $(0,0.3302,0.6698)$.\nЗдесь сравниваются только маски: нормализации и проекции мы не меняли."
+        },
+        {
+          "old": "В статье GPT-3 one-shot использует одну пару, few-shot — 64 пары.",
+          "new": "В статье GPT-3 one-shot использует одну пару, few-shot — 64 пары.\n\nВозьмём `The bird sings.` из [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#Перевод и ответ через префикс|примера GPT-2]]. Чтобы\nвоспроизвести различие режимов, оставим это предложение и направление\nперевода неизменными. В zero-shot его предваряет только указание\nперевести с английского на французский. В one-shot перед ним появится\nодна готовая пара, например `The cat sleeps. = Le chat dort.`\nЕсли добавить `The dog runs. = Le chien court.`, получится учебный\ntwo-shot. Во всех трёх случаях `L'oiseau chante.` — ожидаемый ответ,\nне часть входа и не зафиксированная генерация модели.\n[Рис. 2.1 Brown et al.](https://arxiv.org/pdf/2005.14165v4#page=7)\nпоказывает этот порядок на авторском примере."
+        },
+        {
+          "old": "и реализацию метрики, а не сравнивать одно число «качества перевода».",
+          "new": "и реализацию метрики, а не сравнивать одно число «качества перевода».\n\nНапример, для En→Fr внутри эксперимента GPT-3 175B получили 25.2 BLEU\nбез демонстраций и 32.6 с 64 парами. Между этими условиями не обучали\nновую модель. Сравнение с 5 BLEU у GPT-2 отвечает на другой вопрос:\nмежду двумя работами одновременно изменились модель, предобучение\nи протокол перевода. Оно не показывает эффект одного лишь увеличения\nчисла параметров.\n\nДальше [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#От GPT-3 к первой LLaMA|в первой LLaMA]] снова меняются сам блок и\nраспределение бюджета между размером модели и объёмом предобучения."
+        },
+        {
+          "old": "а не хронологию публикаций: T5 появилась раньше GPT-3.",
+          "new": "а не хронологию публикаций: T5 появилась раньше GPT-3.\n\n[[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#От GPT-3 к первой LLaMA|Продолжить по причинным декодерам: первая LLaMA]] —\nполное причинное внимание, RMSNorm, RoPE и SwiGLU в том же цикле\nпредсказания следующего токена."
+        },
+        {
+          "old": "### Полное и локальное внимание",
+          "new": "<a id=\"gpt3-full-local-attention\"></a>\n\n### Полное и локальное внимание"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "before_sha256": "76213c88dc1a17d2ea09ca1c5b607f53e5d7e6210cb44dbb9d69f9809bcb9e4e",
+      "after_sha256": "5cc166ae0023c346c1d0b54686fa771dcc41931eedc07a5d8cb9cbd2942bbc4c",
+      "changes": [
+        {
+          "old": "Исходная LLaMA, выпущенная в феврале 2023 года, продолжает текст\nпричинным decoder-only Transformer. В ней объединены pre-norm, RMSNorm,\nвращательные позиции RoPE и полносвязные подслои SwiGLU.\nВ предшествующей T5 уже встречались pre-norm и нормализация без вычитания\nсреднего; у LLaMA нет отдельного encoder и cross-attention.\nПо отношению к GPT-2/3 меняются нормализация, позиционные преобразования\nи FFN, а способ предсказывать следующий токен сохраняется.",
+          "new": "## От GPT-3 к первой LLaMA\n\nПервая LLaMA, выпущенная в феврале 2023 года, по-прежнему предсказывает\nследующий токен в одном причинном стеке. У неё нет отдельного энкодера\nи cross-attention, как у T5. Место нормализации сохраняется таким же,\nкак в GPT-2/3, но нормализация, позиционный сигнал и FFN меняются.\n\n| Модель | Как устроен блок |\n| --- | --- |\n| [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение#gpt1-decoder-architecture|GPT-1]] | LayerNorm после сложения, обучаемые абсолютные позиции, плотное причинное внимание и FFN с GELU. |\n| [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-pre-norm|GPT-2]] | LayerNorm переносится перед подслоем; добавляется норма после стека. Позиции и тип FFN прежние. |\n| [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-full-local-attention|GPT-3]] | Pre-norm сохраняется. Полные причинные слои чередуются с локальными; окно растёт до 2048. |\n| LLaMA v1 | Pre-norm с RMSNorm. RoPE действует на Q и K, FFN использует SwiGLU. Причинное внимание снова полное во всех слоях. |\n\nВсе четыре строки относятся к базовому декодеру. Выбор задачи через\nобучаемую голову или через примеры во входе сам по себе не меняет\nпорядок операций внутри блока."
+        },
+        {
+          "old": "LLaMA — pre-norm с RMSNorm.",
+          "new": "LLaMA — pre-norm с RMSNorm.\n\nНа входе `cat` из [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-pre-norm|расчёта для GPT-2]] вектор $(0,1,0)$\nпосле RMSNorm становится $(0,1.7320,0)$ при единичном масштабе\nи $\\epsilon=10^{-5}$. LayerNorm давала\n$(-0.7071,1.4142,-0.7071)$: вычитание среднего меняло и две\nизначально нулевые координаты. Если оставить прежнюю матрицу проекции,\nпосле RMSNorm запрос `cat` равен $(0,1.7320)$ до применения RoPE."
+        },
+        {
+          "old": "Готовые синусы и косинусы не являются обучаемыми параметрами.\nИной порядок объединения координат допустим лишь при согласованном",
+          "new": "Готовые синусы и косинусы не являются обучаемыми параметрами.\n\nПродолжим расчёт запроса `cat`. Индексы `a` и `cat` равны 0 и 1,\nа в голове две координаты и одна частота $\\omega=1$.\nКлюч `a` после проекции равен $(1.7320,0)$ и не поворачивается.\nЗапрос `cat` и ключ той же позиции поворачиваются одинаково,\nдо $(-1.4574,0.9358)$. Поэтому оценка ключа `a`, которая до поворота\nбыла нулевой, становится примерно $-1.7850$ после деления на $\\sqrt2$.\nОценка собственного ключа остаётся $2.1213$: одинаковый поворот\nне меняет скалярное произведение. В этой игрушечной голове\nвес `cat` равен $0.9803$, а будущее `sleeps` по-прежнему закрыто.\nЧисло показывает совместное действие RMSNorm и RoPE на выбранных\nвекторах, а не типичное распределение весов LLaMA.\n\nИной порядок объединения координат допустим лишь при согласованном"
+        },
+        {
+          "old": "для 1.4T нельзя механически переносить на все размеры модели.",
+          "new": "для 1.4T нельзя механически переносить на все размеры модели.\n\nGPT-3 13B и LLaMA-13B близки по числу параметров, но первая\nувидела 300 млрд токенов, а вторая — триллион, примерно в 3.3 раза\nбольше. Это счётчики токенов двух разных токенизаторов, а не отношение\nобъёмов текстов или вычислений. По сравнению с GPT-3 175B у LLaMA-13B\nтакже меньше весов: при одинаковых двух байтах на параметр получится\nоколо 26 против 350 ГБ только под веса. Размер KV-cache и время\nответа из этого сравнения не следуют."
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md",
+      "before_sha256": "6b248051dd87cc3c58521cdcba0021fe3630ffe8aa0125c728dd821bf6cefbb8",
+      "after_sha256": "220dc8c055bbca2131ed4dfe7d527a6fe7be7461c0be9749fed92af8917c7404",
+      "changes": [
+        {
+          "old": "Another LayerNorm follows the final block. Changing operation order",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/norm-gating-2026-10-22/xiong-pre-post-norm.png|Xiong et al.: post-LN after addition on the left; pre-LN before attention and FFN on the right]]\n\n*Ruibin Xiong et al., [On Layer Normalization in the Transformer Architecture](https://proceedings.mlr.press/v119/xiong20b.html),\n[Figure 1](https://proceedings.mlr.press/v119/xiong20b/xiong20b.pdf#page=2),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nRead both panels from bottom to top. In post-LN, LayerNorm follows\nthe addition. In pre-LN, the residual stream bypasses LayerNorm,\nwhich instead precedes attention or the FFN. This is one block;\nthe final norm of the stack is not shown.*\n\nAnother LayerNorm follows the final block. Changing operation order"
+        },
+        {
+          "old": "### Pre-norm and residual paths",
+          "new": "<a id=\"gpt2-pre-norm\"></a>\n\n### Pre-norm and residual paths"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "49777bf6651814f62d6aa2a849f611f686a9ea2e90c34515a9d9a2d7d5c319bd",
+      "after_sha256": "9f846b43101277cbc7b86f2d1995eaf211c36364aa3eedd73a7dad151d9ff3c3",
+      "changes": [
+        {
+          "old": "к предобучению и дообучению GPT-1.",
+          "new": "к предобучению и дообучению GPT-1. Дальше тот же маршрут прослеживает\n[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#Что изменилось относительно GPT-1|переход к GPT-2]], сравнение запросов в GPT-3 и изменения блока в первой LLaMA."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "8a4700ad38cae587ec22a032e042e075dec004da8b49f616644760bfdc2bd650",
+      "after_sha256": "415add53e4f5a782dff9768a9bd4849c32776837e4ca29c588d21c804625610f",
+      "changes": [
+        {
+          "old": "    used_in: [\"00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md\", \"00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md\"]\n    derivation: pdf-page-render-crop\n    provenance_confirmation: source-license-verified\n    metadata_status: verified\n  - id: curated-norm-gating-gradients-0b409086dc5b",
+          "new": "    used_in: [\"00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md\", \"00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md\", \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md\", \"en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md\"]\n    derivation: pdf-page-render-crop\n    provenance_confirmation: source-license-verified\n    metadata_status: verified\n  - id: curated-norm-gating-gradients-0b409086dc5b"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md",
+      "before_sha256": "4aff198f47b6d6e13167d8394d82a25a887b41b51977121a17acf29dda51a5ef",
+      "after_sha256": "f99f79a7ae1109387a7b1bca7c0117d74da3d7536bcf3c53315de168f49f8c54",
+      "changes": [
+        {
+          "old": "## One architecture for both stages",
+          "new": "<a id=\"gpt1-decoder-architecture\"></a>\n\n## One architecture for both stages"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "before_sha256": "ec0c4f3865b47026148d711be7725225da70cc5e3c52a9d6ac6be0b5fc94c263",
+      "after_sha256": "d9de3b82003a4dad7edfcf29ef1f6c8088ca9ff2cada28e98800dad487e53842",
+      "changes": [
+        {
+          "old": "### Full and local attention",
+          "new": "<a id=\"gpt3-full-local-attention\"></a>\n\n### Full and local attention"
+        }
+      ]
+    }
+  ]
+}

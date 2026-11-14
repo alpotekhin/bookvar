@@ -2,10 +2,76 @@
 title: Численные форматы и mixed precision
 type: textbook-chapter
 status: draft
-last_updated: 2026-10-23
-last_verified: 2026-10-23
+last_updated: 2026-11-04
+last_verified: 2026-11-04
 source_language: mixed
+reference_terms:
+  - anchor: precision-bits
+    label: "Представление числа с плавающей точкой"
+    label_en: "Floating-point representation"
+  - anchor: precision-range
+    label: "Диапазон и шаг FP32, FP16 и BF16"
+    label_en: "FP32, FP16, and BF16 range and spacing"
+  - anchor: precision-subnormals
+    label: "Субнормальные числа и underflow"
+    label_en: "Subnormal values and underflow"
+  - anchor: precision-sums
+    label: "Форматы входа, накопителя и результата"
+    label_en: "Input, accumulator, and output formats"
+  - anchor: precision-input-error
+    label: "Ошибка входа против ошибки накопления"
+    label_en: "Input error versus accumulation error"
+  - anchor: precision-tf32
+    label: "TF32 и политика FP32 matmul"
+    label_en: "TF32 and FP32 matmul policy"
+  - anchor: precision-autocast
+    label: "Политика autocast для разных операций"
+    label_en: "Operation-specific autocast policy"
+  - anchor: precision-master
+    label: "Малые обновления и master weights"
+    label_en: "Small updates and master weights"
+  - anchor: precision-loss-scaling
+    label: "Loss scaling, underflow и overflow"
+    label_en: "Loss scaling, underflow, and overflow"
+  - anchor: precision-amp-step
+    label: "Порядок одного AMP-шага"
+    label_en: "The order of an AMP step"
+  - anchor: precision-accumulation
+    label: "Накопление и вес токенов микропакета"
+    label_en: "Accumulation and microbatch token weights"
+  - anchor: precision-accumulation-order
+    label: "Полный шаг с накоплением и ошибки масштаба"
+    label_en: "A complete accumulated step and mixed scales"
+  - anchor: precision-clipping-order
+    label: "Почему clipping выполняют после unscale"
+    label_en: "Why clipping follows unscale"
+  - anchor: precision-memory
+    label: "Память Adam и native AMP"
+    label_en: "Adam and native AMP memory"
+  - anchor: precision-bandwidth
+    label: "Размер формата и нижняя граница времени"
+    label_en: "Format size and the memory-time bound"
+  - anchor: precision-fp8
+    label: "E4M3, E5M2 и масштаб тензора"
+    label_en: "E4M3, E5M2, and tensor scales"
+  - anchor: precision-scaling-history
+    label: "Current и delayed scaling"
+    label_en: "Current and delayed scaling"
+  - anchor: precision-mxfp8
+    label: "MXFP8 и локальные выбросы"
+    label_en: "MXFP8 and local outliers"
+  - anchor: precision-mxfp8-orientation
+    label: "MXFP8 по строкам и столбцам"
+    label_en: "Rowwise and columnwise MXFP8"
+  - anchor: precision-validation
+    label: "Проверка точности и скорости"
+    label_en: "Validating accuracy and speed"
+  - anchor: precision-mfu
+    label: "Выбор вычислительного пика для MFU"
+    label_en: "Choosing the compute peak for MFU"
 source_unit_id:
+  - pytorch-amp-effective-batch-order
+  - te-mxfp8-row-column-quantization
   - lecture-05-low-precision-intensity
   - assignment-02-task-mixed-precision-accumulation
   - assignment-02-task-benchmarking-mixed-precision
@@ -18,6 +84,8 @@ source_unit_id:
 Число $1 + 2^{-10} = 1{,}0009765625$ точно представимо в FP16. Если записать его в BF16, получится ровно $1$: между единицей и следующим числом этого формата слишком большой промежуток. Зато число $100\,000$, которое не помещается в FP16, в BF16 хранить можно — с округлением. Оба формата занимают два байта, но расходуют биты по-разному.
 
 При обучении нужны обе возможности: хранить очень малые и очень большие значения и различать близкие числа. Одного подходящего формата для всех операций обычно недостаточно. Матричные умножения можно выполнять с меньшей точностью, длинные суммы — накапливать в более широком формате, а веса обновлять так, чтобы малые поправки не исчезали после округления. Такое сочетание форматов называют *обучением в смешанной точности*, или mixed precision.
+
+<a id="precision-bits"></a>
 
 ## Как биты превращаются в число
 
@@ -37,9 +105,11 @@ $$
 
 В FP16 знак равен нулю, смещение экспоненты — 15. В поле экспоненты попадёт $2+15=17$, то есть `10001`, а в десятибитное поле дробной части — `1001000000`. Это число представимо точно. У большинства десятичных дробей двоичная запись бесконечна, поэтому при сохранении приходится выбирать ближайшее представимое значение.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-float-bits.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-float-bits.png|Биты знака, экспоненты и дробной части в FP16, BF16 и двух форматах FP8]]
 
 *Одинаковое исходное число в четырёх форматах. У BF16 больше битов экспоненты, у FP16 — дробной части; у двух вариантов FP8 различается тот же компромисс. NVIDIA Transformer Engine, [оригинал](https://github.com/NVIDIA/TransformerEngine/blob/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/docs/examples/fp8_formats.png), Apache-2.0. Изображение сохранено без изменений.*
+
+<a id="precision-range"></a>
 
 ### Диапазон и точность — разные свойства
 
@@ -65,15 +135,17 @@ BF16 имеет столько же битов экспоненты, сколь�
 Для FP32 оно составляет примерно $3{,}403\cdot10^{38}$,
 для BF16 — $3{,}390\cdot10^{38}$.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/hf-format-ranges.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/hf-format-ranges.png|Диапазоны положительных нормальных значений FP32, FP16 и BF16]]
 
 *Диапазоны положительных **нормальных** чисел; субнормальные значения здесь не показаны. BF16 достигает порядков величины, близких к FP32, тогда как FP16 покрывает гораздо более узкий интервал. Hugging Face, The Ultra-Scale Playbook, [оригинал](https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/mixedprecision.png), Apache-2.0; без изменений.*
 
 Обычно используется округление к ближайшему представимому числу; если два соседних числа равноудалены, выбирается вариант с чётным младшим разрядом (*round to nearest, ties to even*). Около единицы шаг BF16 равен $1/128 \approx 0{,}0078125$. Добавка $2^{-10}$ намного меньше половины этого шага и пропадает. В FP16 та же добавка составляет ровно один шаг.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/hf-format-resolution.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/hf-format-resolution.png|Округление выборки значений от 1 до 2 в FP32, FP16 и BF16]]
 
 *Округление выборки из 10 000 равномерно расположенных чисел между 1 и 2 в разные форматы. Горизонтальная ось показывает расстояние от единицы в логарифмическом масштабе. Совпавшие после округления точки демонстрируют, насколько редкой становится сетка. Это **не полный перечень** представимых значений: первый видимый отступ FP32 около $10^{-4}$ обусловлен выборкой, а настоящий шаг FP32 после единицы равен $2^{-23}\approx1{,}19\cdot10^{-7}$. Hugging Face, [оригинал](https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/mixedprecision_2.png), Apache-2.0; без изменений.*
+
+<a id="precision-subnormals"></a>
 
 ### Что происходит около нуля
 
@@ -82,6 +154,8 @@ BF16 имеет столько же битов экспоненты, сколь�
 Для FP16 минимальное положительное субнормальное число — $2^{-24}\approx5{,}96\cdot10^{-8}$. Число $2^{-26}$ уже ближе к нулю, чем к $2^{-24}$, и при обычном округлении превращается в ноль. Это один из случаев *underflow* — потери слишком малого значения. На другом конце диапазона возникает переполнение, или *overflow*. Результат зависит от формата и операции: возможны бесконечность, `NaN` или насыщение на крайнем конечном значении.
 
 Таблица описывает представление чисел, а не все особенности GPU. Некоторые инструкции и режимы вычислений обнуляют субнормальные значения. Поэтому поддержку нужного формата надо проверять не только для хранения тензора, но и для конкретного вычислительного ядра.
+
+<a id="precision-sums"></a>
 
 ## Почему длинные суммы требуют отдельного внимания
 
@@ -104,6 +178,8 @@ $$
 У BF16 сразу после 256 шаг сетки равен двум. Число 257 находится посередине между 256 и 258; правило ties to even возвращает 256. Следующая единица снова даёт тот же результат. У FP16 аналогичная остановка происходит на 2048.
 
 Это намеренно простой последовательный алгоритм, а не предсказание результата `torch.sum` или матричного умножения: реальные ядра могут складывать по дереву, использовать несколько частичных сумм и более широкий накопитель. Пример объясняет, зачем способ накопления нужно указывать отдельно от типа входа.
+
+<a id="precision-input-error"></a>
 
 ### Ошибка входа и ошибка накопления
 
@@ -145,11 +221,15 @@ $2^{-10}$. Для такого вычисления нужно сохранит�
 
 В PyTorch политика также зависит от аппаратуры и настроек backend: в некоторых FP16/BF16 GEMM разрешены промежуточные редукции с пониженной точностью, даже если основное накопление шире. Для проверки есть настройки `allow_fp16_reduced_precision_reduction` и `allow_bf16_reduced_precision_reduction`. Их смысл и ограничения описаны в [документации по численной точности](https://docs.pytorch.org/docs/2.14/notes/numerical_accuracy.html#reduced-precision-reduction-for-fp16-and-bf16-gemms).
 
+<a id="precision-tf32"></a>
+
 ### TF32: хранение FP32, вычисление с меньшей точностью
 
 TF32 — режим матричной арифметики NVIDIA, а не отдельный 19-битный тип хранения тензора в PyTorch. Входные данные остаются FP32, но для соответствующего матричного умножения используются десять битов дробной части операндов при диапазоне экспоненты FP32; накопление выполняется в FP32.
 
 Поэтому сравнение двух запусков с `dtype=torch.float32` ещё не гарантирует одинакового способа вычисления. В PyTorch 2.14 политику для CUDA matmul задают через `torch.backends.cuda.matmul.fp32_precision`, например `"ieee"` или `"tf32"`. Настройки свёрток задаются отдельно. Старые переключатели `allow_tf32` не следует смешивать с новым API; значения по умолчанию менялись между версиями. См. [TF32 в PyTorch](https://docs.pytorch.org/docs/2.14/notes/numerical_accuracy.html#tensorfloat-32-tf32-on-nvidia-ampere-and-later-devices).
+
+<a id="precision-autocast"></a>
 
 ### Какие операции оставляют более точными
 
@@ -159,6 +239,8 @@ TF32 — режим матричной арифметики NVIDIA, а не от
 
 `autocast` применяет правила к отдельным операциям, а не назначает один тип всему графу. Например, в CUDA-правилах PyTorch 2.14 матричные умножения могут переходить в FP16, а `softmax`, `layer_norm` и `cross_entropy` — в FP32. Это относится к перечисленным операциям API; внутренние промежуточные форматы слитого attention-ядра проверяют отдельно. Списки и исключения, включая операции на месте и вызовы с явным `dtype`, приведены в [Autocast Op Reference](https://docs.pytorch.org/docs/2.14/amp.html#autocast-op-reference).
 
+<a id="precision-master"></a>
+
 ## Как сохранить маленькое обновление веса
 
 Пусть вес равен единице, а оптимизатор на каждом шаге вычитает $10^{-4}$. Само число $10^{-4}$ представимо в FP16 с небольшой ошибкой. Но разность $1-10^{-4}$ при округлении в FP16 снова превращается в единицу. Причина не в том, что поправка слишком близка к нулю, а в том, что она мала **по сравнению с шагом сетки около веса**.
@@ -167,13 +249,15 @@ TF32 — режим матричной арифметики NVIDIA, а не от
 
 Отсюда возникает схема с *master weights*: оптимизатор обновляет основную копию весов в FP32, а для вычислений создаётся копия в FP16 или BF16. Но возможны разные способы организации хранения.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-master-weights.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-master-weights.svg|Две организации FP32-параметров и рабочих весов пониженной точности]]
 
 *Два варианта хранения из документации NVIDIA Transformer Engine. Слева модель хранит FP32-параметры, которые преобразуются перед вычислением; справа модель хранит рабочие веса пониженной точности, а отдельная FP32-копия находится у оптимизатора. Показаны две правые колонки [исходного рисунка](https://github.com/NVIDIA/TransformerEngine/blob/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/docs/features/low_precision_training/introduction/img/master_weights_approaches.svg), Apache-2.0. Геометрия и подписи сохранены; стили оригинала включены в файл для автономного отображения.*
 
 В обычном PyTorch AMP параметры модели изначально остаются FP32. `autocast` выбирает точность отдельных операций и при необходимости преобразует операнды. Отдельную постоянную пару «FP16-веса модели + FP32-веса оптимизатора» он сам по себе не создаёт. Схема справа — другая организация хранения, которую должен поддерживать выбранный оптимизатор или система обучения.
 
 Это также объясняет, почему `model.half()` не эквивалентен включению AMP. Такой вызов меняет хранимые параметры модели, тогда как `autocast` управляет выполнением операций. Общая идея FP32-копии и её значение для малых обновлений разобраны в [Mixed Precision Training](https://arxiv.org/abs/1710.03740).
+
+<a id="precision-loss-scaling"></a>
 
 ## Loss scaling: как не потерять малый градиент
 
@@ -194,6 +278,8 @@ $$
 Слишком большой $S$ приводит к противоположной проблеме — переполнению. Динамический алгоритм следит за конечностью градиентов: при `Inf` или `NaN` пропускает обновление весов и уменьшает коэффициент; после серии успешных шагов может увеличить его. В PyTorch этим занимается `GradScaler`. Коэффициент не обязан всегда быть больше единицы: например, несовместимый с FP16 диапазон значений может заставить алгоритм уменьшать его и дальше.
 
 Для BF16 loss scaling обычно не требуется благодаря широкому диапазону экспоненты. Это не гарантия устойчивости: BF16 по-прежнему округляет значения, допускает переполнение и может потерять достаточно малые числа. Если обучение расходится, одной замены названия формата недостаточно.
+
+<a id="precision-amp-step"></a>
 
 ### Один шаг AMP в PyTorch
 
@@ -216,9 +302,11 @@ for inputs, targets in loader:
     scaler.update()
 ~~~
 
-`autocast` охватывает прямой проход и вычисление loss. Обратный проход выполняется вне этого контекста: он использует типы, выбранные соответствующими операциями прямого прохода. Перед ограничением нормы градиента вызывается `unscale_`, иначе порог ограничения будет применён к увеличенному в $S$ раз градиенту. `scaler.step` проверяет нечисловые значения и при необходимости пропускает шаг оптимизатора.
+`autocast` охватывает прямой проход и вычисление loss. Обратный проход выполняется вне этого контекста: он использует типы, выбранные соответствующими операциями прямого прохода. Перед ограничением нормы градиента вызывается `unscale_`, иначе порог ограничения будет применён к увеличенному в $S$ раз градиенту. `unscale_` также проверяет градиенты на `Inf` и `NaN`; `scaler.step` использует результат этой проверки и при необходимости пропускает обновление. После явного `unscale_` он не проверяет произвольно изменённые градиенты повторно.
 
 Для обычного BF16 AMP можно использовать `autocast(dtype=torch.bfloat16)` без scaler и вызывать `loss.backward()` и `optimizer.step()` напрямую. Поддержку BF16 и выбранных операций проверяют для своего устройства. Подробности API: [AMP](https://docs.pytorch.org/docs/2.14/amp.html) и [примеры обучения](https://docs.pytorch.org/docs/2.14/notes/amp_examples.html).
+
+<a id="precision-accumulation"></a>
 
 ### Накопление градиентов по микропакетам
 
@@ -251,6 +339,111 @@ $$
 между процессами: локальный знаменатель сам по себе не задаёт среднюю
 потерю по всем токенам всех GPU.
 
+
+<a id="precision-accumulation-order"></a>
+
+### A complete accumulated step and two incorrect orders
+
+For a scalar parameter $\theta$, let two microbatches contain two and six
+tokens. Give every token in the first microbatch the loss $2\theta$, and
+every token in the second the loss $10\theta$. The mean loss over all
+eight tokens is $8\theta$, so its gradient is 8. The two microbatches
+contribute $2\cdot2/8=0.5$ and $6\cdot10/8=7.5$.
+
+With a fixed loss scale $S=128$, the first backward pass writes 64 to
+the gradient buffer. The second adds 960. The accumulated buffer is 1024;
+one division by 128 recovers 8. Neither backward pass should clear the
+buffer. The division by eight in each loss supplies token weighting;
+the multiplication by 128 supplies loss scaling. These are separate operations.
+
+| Point in the step | Gradient buffer |
+|---|---:|
+| After the first scaled backward | 64 |
+| After the second scaled backward | 1024 |
+| After one unscale | 8 |
+| Parameter after SGD with learning rate 0.25, starting at 1 | -1 |
+
+PyTorch's [gradient accumulation instructions](https://docs.pytorch.org/docs/2.14/notes/amp_examples.html#gradient-accumulation)
+state:
+
+> Also, grads should remain scaled, and the scale factor should remain constant, while grads for a given effective batch are accumulated.
+
+The following example uses the actual CPU `GradScaler` API and autograd.
+It deliberately uses FP32 scalar arithmetic without `autocast`: its purpose
+is to verify accumulation and optimizer ordering, not FP16 underflow or
+CUDA execution.
+
+~~~python
+import torch
+
+theta = torch.nn.Parameter(torch.tensor(1.0))
+optimizer = torch.optim.SGD([theta], lr=0.25)
+scaler = torch.amp.GradScaler("cpu", init_scale=128.0)
+optimizer.zero_grad(set_to_none=True)
+
+for count, slope in [(2, 2.0), (6, 10.0)]:
+    token_slopes = torch.full((count,), slope)
+    loss = (theta * token_slopes).sum() / 8
+    scaler.scale(loss).backward()
+
+assert theta.grad.item() == 1024.0
+scaler.unscale_(optimizer)
+assert theta.grad.item() == 8.0
+scaler.step(optimizer)
+scaler.update()
+assert theta.item() == -1.0
+print(theta.grad.item(), theta.item())  # 8.0 -1.0
+~~~
+
+Unscaling after only the first microbatch changes 64 into 0.5. A subsequent
+scaled backward then adds 960, leaving 960.5. The buffer now mixes units.
+Calling `unscale_` a second time is not a repair: this API rejects a second
+unscale of the same optimizer before the next update. Calling `step`
+without that second call is also wrong. The scaler remembers the earlier
+unscale and does not divide again; ordinary SGD would use 960.5 as the
+gradient.
+
+Changing scales between microbatches causes a different mixture. Scaling
+the first contribution by 128 and the second by 64 gives
+$64+480=544$. Dividing by 64 gives 8.5, while dividing by 128 gives
+4.25. A common final division cannot restore the desired sum 8 from
+these differently scaled contributions.
+
+<a id="precision-clipping-order"></a>
+
+### Clipping before unscale changes the threshold
+
+Consider an unscaled two-parameter gradient $g=(3,4)$, whose norm is 5.
+For a norm threshold of 1, ideal norm clipping gives
+$g_{\mathrm{clip}}=(0.6,0.8)$. With $S=8$, the scaled gradient is
+$(24,32)$, with norm 40. Clipping that vector to norm 1 also produces
+$(0.6,0.8)$, but a subsequent division by eight shrinks it to
+$(0.075,0.1)$, with norm 0.125. The intended threshold of 1 has become
+$1/S$ in unscaled units.
+
+For nonzero $g$, positive $S$ and a nonnegative threshold $c$, the two orders are
+
+$$
+\begin{aligned}
+\operatorname{clip}(Sg,c)/S
+&=g\min\!\left(1,\frac{c}{S\|g\|}\right),\\
+\operatorname{clip}(g,c)
+&=g\min\!\left(1,\frac{c}{\|g\|}\right).
+\end{aligned}
+$$
+
+Unscale first, then clip the complete accumulated gradient. The displayed
+numbers use the ideal norm formula; `clip_grad_norm_` adds a small
+denominator epsilon, so its floating-point result is approximately
+$(0.6,0.8)$. The API ordering follows
+[PyTorch's clipping example](https://docs.pytorch.org/docs/2.14/notes/amp_examples.html#gradient-clipping);
+the pinned [implementation of `unscale_` and `step`](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/torch/amp/grad_scaler.py#L302-L480)
+also records the per-optimizer state that prevents a second automatic
+division. The source quotation is covered by the published
+[PyTorch license](/licenses/pytorch-v2.14.1-LICENSE.txt).
+
+<a id="precision-memory"></a>
+
 ## Сколько памяти и времени можно сэкономить
 
 Перевод одного массива из FP32 в BF16 уменьшает его размер вдвое. Из этого не следует, что вся модель во время обучения займёт вдвое меньше памяти. Кроме весов нужны градиенты, состояния оптимизатора, активации и временные буферы.
@@ -269,6 +462,8 @@ $$
 
 AMP часто сокращает память активаций и ускоряет матричные умножения, даже если постоянное состояние не уменьшилось. В распределённом обучении тип пересылаемых градиентов также задаётся отдельно: FP32-градиенты обычного DDP не становятся BF16 только из-за `autocast`.
 
+<a id="precision-bandwidth"></a>
+
 ### Пример операции, ограниченной пропускной способностью памяти
 
 Пусть операция читает два массива по $10^8$ элементов и записывает третий такого же размера. Если каждый элемент действительно читается и записывается один раз, объём обмена составляет:
@@ -283,6 +478,8 @@ $$
 При эффективной пропускной способности $1{,}5\ \mathrm{TB/s}$ нижние оценки времени равны $0{,}8$ и $0{,}4$ миллисекунды соответственно. Это оценка только для обмена данными. Затраты на преобразование форматов, запуск ядра, вычисления и дополнительные обращения к памяти могут уменьшить выигрыш.
 
 Для матричного умножения важна и вычислительная производительность. Tensor Cores ускоряют поддерживаемые операции, но один подходящий `dtype` не гарантирует эффективного исполнения. Имеют значение размеры матриц, размещение данных, выбранное ядро и аппаратная архитектура. Кратность размерностей удобному размеру плитки помогает; утверждение «при некратности восьми Tensor Cores не работают» нельзя применять ко всем современным библиотекам.
+
+<a id="precision-fp8"></a>
 
 ## FP8: зачем тензору собственный масштаб
 
@@ -312,13 +509,15 @@ $$
 
 Один масштаб на тензор удобен, но чувствителен к выбросам. Если ради одного большого элемента увеличить $s$, остальные элементы после деления окажутся ближе к нулю. Пока они остаются нормальными числами, относительная точность в основном определяется числом битов дробной части; при масштабировании степенью двойки она сохраняется. Проблема возникает, когда малые значения попадают в субнормальный диапазон, где значащих разрядов становится меньше, или округляются в ноль. Масштабы весов, активаций и градиентов выбирают отдельно, поскольку их распределения различаются.
 
+<a id="precision-scaling-history"></a>
+
 ### Текущий масштаб и масштаб по истории
 
 При *current scaling* сначала находят текущий максимум $a_{\max}=\max|x|$, затем по нему выбирают масштаб и преобразуют тензор. Для простой схемы без запаса можно взять $s=a_{\max}/q_{\max}$. Нулевой тензор требует отдельной обработки, а реальная реализация может ограничивать масштаб степенями двойки или оставлять запас до переполнения. Преимущество — немедленная реакция на изменение значений; цена — максимум должен быть известен до преобразования.
 
 При *delayed scaling* масштаб выбирается по истории предыдущих максимумов. Во время преобразования текущего тензора можно одновременно измерить новый максимум для следующих шагов. Это позволяет избежать отдельного предварительного прохода ради текущего `amax`, но диапазон может измениться быстрее, чем выбранный масштаб. Тогда новые значения насыщаются либо старый большой максимум оставляет слишком грубую сетку для нового малого диапазона.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-current-delayed-scaling.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-current-delayed-scaling.svg|Current scaling с текущим amax и delayed scaling с историей максимумов]]
 
 *Current и delayed scaling. Слева максимум текущего тензора вычисляется
 до квантования; справа используются сохранённые максимумы, а история
@@ -340,11 +539,13 @@ $896/2=448$, и восстановленное значение равно 896.
 
 Это не то же самое, что loss scaling. Здесь масштаб определяет представление конкретного тензора при квантовании; loss scaling изменяет величину градиентов во всём обратном проходе, а затем компенсируется перед обновлением весов.
 
+<a id="precision-mxfp8"></a>
+
 ## MXFP8: один масштаб на небольшой блок
 
 В MXFP8 по спецификации OCP группа из **32 значений FP8** разделяет один восьмибитный масштаб E8M0. Он кодирует положительную степень двойки, а не произвольное число с дробной частью. Таким образом, разные участки тензора могут использовать разные диапазоны.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-mxfp8-blocks.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-mxfp8-blocks.png|Общий масштаб FP8 и отдельные масштабы блоков MXFP8]]
 
 *Слева — FP8 с одним масштабом на весь тензор, справа — отдельные масштабы блоков. Большое значение влияет только на масштаб своего блока. На рисунке ради наглядности в блоке четыре элемента; в MXFP8 по спецификации — 32. NVIDIA Transformer Engine, [оригинал](https://github.com/NVIDIA/TransformerEngine/blob/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/docs/examples/MXFP8_FP8_comparison_1.png), Apache-2.0; без изменений.*
 
@@ -372,6 +573,83 @@ Transformer Engine проверяются отдельно.
 
 Спецификация формата и поддержка его выполнения — разные вещи. Описанный в NVIDIA Transformer Engine аппаратный путь MXFP8 относится к Blackwell; поддержку конкретного устройства и операции нужно проверять. Наличие FP8-операций на Hopper само по себе не означает наличия такого же MXFP8-пути. Источники: [спецификация OCP MX](https://www.opencompute.org/documents/ocp-microscaling-formats-mx-v1-0-spec-final-pdf) и [документация MXFP8](https://docs.nvidia.com/deeplearning/transformer-engine/features/low_precision_training/mxfp8/mxfp8.html).
 
+
+<a id="precision-mxfp8-orientation"></a>
+
+### Rowwise and columnwise quantization retain different values
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-2026-11/te-mxfp8-row-column.svg|MXFP8: блоки 1×32 по строкам и 32×1 по столбцам с отдельными масштабами]]
+
+*Figure 2. MXFP8 rowwise vs columnwise quantization layout. NVIDIA Transformer
+Engine documentation contributors,
+[original SVG](https://github.com/NVIDIA/TransformerEngine/blob/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/docs/features/low_precision_training/mxfp8/img/mxfp8_row_col.svg),
+[Apache-2.0](/licenses/nvidia-transformer-engine-Apache-2.0.txt).
+The complete 650×450 diagram, labels and geometry are retained. The unchanged
+upstream stylesheet is embedded for standalone display.*
+
+Each blue horizontal rectangle in the upper half is one group of 32
+elements along a row. The lower half groups 32 elements along a column.
+Each orange scale belongs to its own group. Turning the stored array
+does not recalculate these scales from the original high-precision values.
+
+For a numerical example, fill a 32×32 matrix with ones and put $2^{20}$
+at position $(0,0)$. Use E4M3 values and the smallest power-of-two
+restoration scale that keeps each group's maximum at or below 448.
+The row containing the outlier needs $s=4096$; every other row needs
+$s=2^{-8}$. Thus rowwise quantization loses the other 31 ones in row
+zero. Columnwise quantization instead loses the other 31 ones in column
+zero. These are different positions:
+
+| Position | Input | By row | By column |
+|---|---:|---:|---:|
+| $(0,0)$ | $2^{20}$ | $2^{20}$ | $2^{20}$ |
+| $(0,1)$ | 1 | 0 | 1 |
+| $(1,0)$ | 1 | 1 | 0 |
+| $(1,1)$ | 1 | 1 | 1 |
+
+The following CPU calculation casts normalized values to real E4M3FN,
+then restores FP32 values. Its scale arrays contain powers of two but
+are stored in FP32 for inspection. It does not construct a hardware-packed
+MXFP8 tensor, swizzle scales or launch a Blackwell GEMM.
+
+~~~python
+import torch
+
+values = torch.ones((32, 32), dtype=torch.float32)
+values[0, 0] = 2**20
+
+def rowwise_roundtrip(matrix):
+    amax = matrix.abs().amax(dim=1, keepdim=True)
+    scale = torch.pow(2.0, torch.ceil(torch.log2(amax / 448.0)))
+    normalized = matrix / scale
+    restored = normalized.to(torch.float8_e4m3fn).float() * scale
+    return restored, scale
+
+rowwise, row_scale = rowwise_roundtrip(values)
+columnwise_t, column_scale = rowwise_roundtrip(values.T)
+columnwise = columnwise_t.T
+
+assert row_scale[0, 0].item() == 4096.0
+assert row_scale[1, 0].item() == 2**-8
+assert rowwise[0, 1].item() == 0.0
+assert columnwise[0, 1].item() == 1.0
+assert rowwise[1, 0].item() == 1.0
+assert columnwise[1, 0].item() == 0.0
+assert not torch.equal(rowwise.T, columnwise_t)
+print(int((rowwise == 0).sum()), int((columnwise == 0).sum()))  # 31 31
+~~~
+
+Here `rowwise_roundtrip` assumes nonzero finite groups. A general quantizer
+also needs policies for zero groups, nonfinite values and the available
+scale range. The example isolates the orientation error without those
+cases. Once the 31 small values have disappeared, a transpose cannot
+recover them. To prepare the other orientation, quantize the high-precision
+source again. This is the constraint in NVIDIA's
+[Handling transposes](https://docs.nvidia.com/deeplearning/transformer-engine/features/low_precision_training/mxfp8/mxfp8.html#handling-transposes);
+it does not mean every columnwise GEMM must physically transpose its inputs.
+
+<a id="precision-validation"></a>
+
 ## Как проверить, что ускорение не испортило обучение
 
 Отсутствие `NaN` — только первая проверка. Обновления весов могут исчезать, а ошибка округления — менять обучение и при вполне конечных значениях loss.
@@ -388,6 +666,8 @@ $$
 Скорость измеряют при одинаковых размерах пакета и последовательностей, после прогрева, с корректной синхронизацией GPU. Различают время отдельного матричного умножения и всего шага, включающего оптимизатор, обмен данными и загрузку пакетов. В отчёте фиксируют устройство, версии библиотек, режим TF32, типы параметров и градиентов, политику накопления и выбранный FP8-рецепт. Профилировщик позволяет проверить, какие ядра действительно выполнялись.
 
 Практический разбор этих измерений находится в [[02 Areas/ML & DL/06 Практика/06a Проверить mixed precision и loss scaling|практике по mixed precision и loss scaling]]. В [Stanford CS336 Assignment 2, стр. 6–9](https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf#page=6) есть задания на накопление сумм и сравнение производительности смешанной точности.
+
+<a id="precision-mfu"></a>
 
 ### Почему после смены формата меняется знаменатель MFU
 
@@ -415,7 +695,6 @@ HFU включает фактически выполненную арифмет�
 - [Micikevicius et al., FP8 Formats for Deep Learning](https://arxiv.org/abs/2209.05433): устройство E4M3/E5M2 и эксперименты с обучением.
 - [PyTorch AMP](https://docs.pytorch.org/docs/2.14/amp.html) и [Numerical Accuracy](https://docs.pytorch.org/docs/2.14/notes/numerical_accuracy.html): актуальные для указанной версии соглашения операций и backend.
 - [NVIDIA Transformer Engine — FP8 primer](https://docs.nvidia.com/deeplearning/transformer-engine/examples/fp8_primer.html): рецепты низкой точности; источник рисунков о форматах, весах и MXFP8.
-- [[02 Areas/ML & DL/Concepts/Training/Mixed Precision Training|Mixed Precision Training — справочная карточка]]: краткое сопоставление AMP, loss scaling и форматов.
 
 ← [[02 Areas/ML & DL/00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE|Арифметика Transformer и MoE]] ·
 [[02 Areas/ML & DL/00 Учебник/10 ML Systems/06 Data pipeline, padding и packing|Data pipeline, padding и packing]] →

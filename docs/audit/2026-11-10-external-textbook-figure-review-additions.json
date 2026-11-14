@@ -1,0 +1,473 @@
+{
+  "date": "2026-11-10",
+  "scope": "Audit 16 external images in the rendered textbook, replace three embeds with source figures whose reuse is established, and exclude the unlicensed local copy of the ReAct project image. Verify the source bytes and license of twelve older D2L images. Preserve original links, examples and archive files.",
+  "review": {
+    "reading": "Figure-scoped revision. Prior whole-chapter reading receipts match both archived chapter inputs exactly. Reviewed the changed sections and neighboring explanations against primary sources; read the complete Agentic learning overview and preserved unrelated sections. The chapter programs and JSON examples are unchanged.",
+    "workedExamples": "ReAct uses Obs 2 to refine Front Row to Front Row (software). RepairAgent can return from a failed patch to information gathering or hypothesis revision. AgentTrek Figure 4 distinguishes 68.8M prefiltered records, 54M after FastText and 18.8M after deduplication; the linked replay example requires finding the correct product-category return policy, not merely opening a page.",
+    "sourceAndRights": "ReAct paper v3 Figure 1(1), CC BY 4.0, is distinct from the project PNG. RepairAgent v2 Figure 2, CC BY 4.0, and AgentTrek v2 Figure 4, CC BY-NC-ND 4.0, match upstream bytes. AgentTrek Figure 5 shows an actual third-party storefront and logos. Source article license is not a clearance for separately owned components.",
+    "transport": "All 16 previously embedded URLs responded HTTP 200 with an image media type in the initial probe. All 13 remaining external URLs decoded in a browser. In the static scan of 310 textbook pages across both editions, no registered image bytes mismatch, no retired images render and no KaTeX errors appear. The literal project PNG is absent from the output asset tree.",
+    "d2l": "Ten SVGs match the files served by their author chapters. LeNet and ResNet-18 instead match the exact repository tag v1.0.3 (b2e2ae30898a9d0126a9699ae7e441de3e272715), where they are the vertical and unrotated originals respectively. The tagged CC BY-SA 4.0 license matches the archived license bytes. No figure or chapter bytes changed.",
+    "renderedReview": "ReAct, RepairAgent and AgentTrek checked in the Russian edition and canonical fallbacks at 1280 and 375 px. RepairAgent labels are readable inline at the narrow width. ReAct and AgentTrek's small labels need the working zoom viewer on mobile. No page-width overflow or figure aspect-ratio change. The English shell of the research overview links to the canonical Russian ReAct example.",
+    "verification": "The final root build produced 2075 pages. The link checker found no broken internal routes, fragments or files; 290 rendered-output tests, 769 publication tests (13 skips) and 588 source-evidence tests passed. Both agent example checkers passed without running an LLM or browser agent. The rendered textbook scan matches 1170 SHA-256 values across 1214 distinct local image paths.",
+    "remaining": "44 older rendered paths still lack SHA-256 and 13 external embeds still need a reuse decision. The licensed Self-Refine v2 and tau-bench v1 papers and the AWS Generative AI Atlas documentation are candidates for relevant replacements in the orchestration and evaluation chapters. Verify the exact figure and any third-party components before reuse.",
+    "publication": "Local only. No commit, push or deployment."
+  },
+  "externalFigures": [
+    {
+      "title": "DDPM algorithms 1–2",
+      "source": "https://hojonathanho.github.io/diffusion/",
+      "url": "https://hojonathanho.github.io/diffusion/assets/img/algorithms.png",
+      "routes": [
+        "textbook/multimodal/diffusion-flow-images",
+        "en/textbook/multimodal/diffusion-flow-images"
+      ],
+      "transport": "200 image/png",
+      "review": "open project website; no redistribution grant found for this original asset",
+      "decision": "external embed still present; source replacement or link-only explanation open"
+    },
+    {
+      "title": "Latent Diffusion Figure 3",
+      "source": "https://ommer-lab.com/research/latent-diffusion-models/",
+      "url": "https://ommer-lab.com/wp-content/uploads/2022/08/article-Figure3-1-1024x508.png",
+      "routes": [
+        "textbook/multimodal/diffusion-flow-images",
+        "en/textbook/multimodal/diffusion-flow-images"
+      ],
+      "transport": "200 image/png",
+      "review": "lab website asset; no redistribution grant found for the figure in the linked paper or on the project site",
+      "decision": "external embed still present; source replacement or link-only explanation open"
+    },
+    {
+      "title": "VQ-VAE Figure 1",
+      "source": "https://arxiv.org/abs/1711.00937v2",
+      "url": "https://arxiv.org/html/1711.00937v2/figures/Figure1_9.png",
+      "routes": [
+        "textbook/multimodal/unified-sequence-chameleon",
+        "en/textbook/multimodal/unified-sequence-chameleon"
+      ],
+      "transport": "200 image/png",
+      "review": "arXiv nonexclusive distribution notice does not grant Bookvar redistribution",
+      "decision": "external embed still present; source replacement or link-only explanation open"
+    },
+    {
+      "title": "ReAct project overview",
+      "source": "https://react-lm.github.io/",
+      "url": "https://react-lm.github.io/files/diagram.png",
+      "routes": [
+        "textbook/agents/tool-use",
+        "en/textbook/agents/tool-use"
+      ],
+      "transport": "200 image/png",
+      "review": "website graphic is distinct from the paper panel; no redistribution grant found for the website PNG",
+      "decision": "replaced by licensed paper Figure 1(1); project image linked, retired local duplicate"
+    },
+    {
+      "title": "Anthropic autonomous-agent loop",
+      "source": "https://www.anthropic.com/research/building-effective-agents",
+      "url": "https://www-cdn.anthropic.com/images/4zrzovbb/website/58d9f10c985c4eb5d53798dea315f7bb5ab6249e-2401x1000.png",
+      "routes": [
+        "textbook/agents/tool-use",
+        "en/textbook/agents/tool-use"
+      ],
+      "transport": "200 image/png",
+      "review": "no explicit redistribution grant found for the article image",
+      "decision": "external embed still present; source replacement or link-only explanation open"
+    },
+    {
+      "title": "Anthropic prompt vs. context engineering",
+      "source": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+      "url": "https://www-cdn.anthropic.com/images/4zrzovbb/website/faa261102e46c7f090a2402a49000ffae18c5dd6-2292x1290.png",
+      "routes": [
+        "textbook/agents/harness-context-engineering",
+        "en/textbook/agents/harness-context-engineering"
+      ],
+      "transport": "200 image/png",
+      "review": "no explicit redistribution grant found for the article image",
+      "decision": "external embed still present; source replacement or link-only explanation open"
+    },
+    {
+      "title": "Anthropic prompt calibration",
+      "source": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+      "url": "https://www-cdn.anthropic.com/images/4zrzovbb/website/0442fe138158e84ffce92bed1624dd09f37ac46f-2292x1288.png",
+      "routes": [
+        "textbook/agents/harness-context-engineering",
+        "en/textbook/agents/harness-context-engineering"
+      ],
+      "transport": "200 image/png",
+      "review": "no explicit redistribution grant found for the article image",
+      "decision": "external embed still present; source replacement or link-only explanation open"
+    },
+    {
+      "title": "OpenHands context condenser",
+      "source": "https://docs.openhands.dev/sdk/guides/context-condenser",
+      "url": "https://mintcdn.com/allhandsai/hwL6uO0ZqM-lmlYG/sdk/guides/assets/condenser_overview_light_mode.png?fit=max&auto=format&n=hwL6uO0ZqM-lmlYG&q=85&s=dc85afa9f2821b1f7a305ad1406ab3d9",
+      "routes": [
+        "textbook/agents/harness-context-engineering",
+        "en/textbook/agents/harness-context-engineering"
+      ],
+      "transport": "200 image/png",
+      "review": "docs repository lacks a repository-level license; the separately licensed SDK is not evidence for this docs PNG",
+      "decision": "external embed still present; source replacement or link-only explanation open"
+    },
+    {
+      "title": "Generative Agents reflection example",
+      "source": "https://arxiv.org/abs/2304.03442v2",
+      "url": "https://arxiv.org/html/2304.03442v2/figures/figure_reflection6.png",
+      "routes": [
+        "textbook/agents/memory-planning-orchestration",
+        "en/textbook/agents/memory-planning-orchestration"
+      ],
+      "transport": "200 image/png",
+      "review": "arXiv nonexclusive notice; no grant for this exact image found in the inspected code or article landing",
+      "decision": "external embed still present; source replacement or link-only explanation open"
+    },
+    {
+      "title": "Anthropic orchestrator and workers",
+      "source": "https://www.anthropic.com/research/building-effective-agents",
+      "url": "https://www-cdn.anthropic.com/images/4zrzovbb/website/8985fc683fae4780fb34eab1365ab78c7e51bc8e-2401x1000.png",
+      "routes": [
+        "textbook/agents/memory-planning-orchestration",
+        "en/textbook/agents/memory-planning-orchestration"
+      ],
+      "transport": "200 image/png",
+      "review": "no explicit redistribution grant found for the article image",
+      "decision": "external embed still present; source replacement or link-only explanation open"
+    },
+    {
+      "title": "Anthropic evaluator and optimizer",
+      "source": "https://www.anthropic.com/research/building-effective-agents",
+      "url": "https://www-cdn.anthropic.com/images/4zrzovbb/website/14f51e6406ccb29e695da48b17017e899a6119c7-2401x1000.png",
+      "routes": [
+        "textbook/agents/memory-planning-orchestration",
+        "en/textbook/agents/memory-planning-orchestration"
+      ],
+      "transport": "200 image/png",
+      "review": "no explicit redistribution grant found for the article image",
+      "decision": "external embed still present; source replacement or link-only explanation open"
+    },
+    {
+      "title": "Anthropic single-turn and multi-turn evaluation",
+      "source": "https://www.anthropic.com/research/demystifying-evals-for-ai-agents",
+      "url": "https://www-cdn.anthropic.com/images/4zrzovbb/website/bd42e7b2f3e9bb5218142796d3ede4816588dec0-4584x2834.png",
+      "routes": [
+        "textbook/agents/evaluation",
+        "en/textbook/agents/evaluation"
+      ],
+      "transport": "200 image/png",
+      "review": "no explicit redistribution grant found for the article image",
+      "decision": "external embed still present; source replacement or link-only explanation open"
+    },
+    {
+      "title": "Anthropic evaluation components",
+      "source": "https://www.anthropic.com/research/demystifying-evals-for-ai-agents",
+      "url": "https://www-cdn.anthropic.com/images/4zrzovbb/website/0205b36f9639fc27f2f6566f73cb56b06f59d555-4584x2580.png",
+      "routes": [
+        "textbook/agents/evaluation",
+        "en/textbook/agents/evaluation"
+      ],
+      "transport": "200 image/png",
+      "review": "no explicit redistribution grant found for the article image",
+      "decision": "external embed still present; source replacement or link-only explanation open"
+    },
+    {
+      "title": "Anthropic pass@k vs. pass^k",
+      "source": "https://www.anthropic.com/research/demystifying-evals-for-ai-agents",
+      "url": "https://www-cdn.anthropic.com/images/4zrzovbb/website/3ddac5be07a0773922ec9df06afec55922f8194a-4584x2580.png",
+      "routes": [
+        "textbook/agents/evaluation",
+        "en/textbook/agents/evaluation"
+      ],
+      "transport": "200 image/png",
+      "review": "no explicit redistribution grant found for the article image",
+      "decision": "external embed still present; source replacement or link-only explanation open"
+    },
+    {
+      "title": "RepairAgent finite-state machine",
+      "source": "https://arxiv.org/html/2403.17134v2#S3.F2",
+      "url": "https://arxiv.org/html/2403.17134v2/states_diagram2.drawio.svg",
+      "routes": [
+        "textbook/agents/coding-web-computer-use",
+        "en/textbook/agents/coding-web-computer-use"
+      ],
+      "transport": "200 image/svg+xml",
+      "review": "CC BY 4.0 applies to this authored paper diagram; exact unmodified SVG",
+      "decision": "localized verbatim"
+    },
+    {
+      "title": "AgentTrek guided replay",
+      "source": "https://arxiv.org/html/2412.09605v2#S2.F5",
+      "url": "https://arxiv.org/html/2412.09605v2/images/part2_v6.png",
+      "routes": [
+        "textbook/agents/coding-web-computer-use",
+        "en/textbook/agents/coding-web-computer-use"
+      ],
+      "transport": "200 image/png",
+      "review": "paper is CC BY-NC-ND 4.0 but Figure 5 contains third-party interface and logos; use the unmodified Figure 4 for tutorial filtering and link Figures 5–6 for replay",
+      "decision": "link to original figure; replaced embed with Figure 4 and a separate replay example"
+    }
+  ],
+  "d2lLegacyFigures": [
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sigmoid.svg",
+      "sourcePage": "https://d2l.ai/chapter_multilayer-perceptrons/mlp.html#activation-functions",
+      "sourceImage": "https://d2l.ai/_images/output_mlp_76f463_48_0.svg",
+      "sha256": "919f4d5fe95251b8a8337fb90f5e4c5869eb58cccdf890af3bba5afc2c072776",
+      "decision": "exact upstream match; retain and pin"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sigmoid-gradient.svg",
+      "sourcePage": "https://d2l.ai/chapter_multilayer-perceptrons/mlp.html#activation-functions",
+      "sourceImage": "https://d2l.ai/_images/output_mlp_76f463_63_0.svg",
+      "sha256": "308927d0b768f063a7760142d0233be44090340f8dc9b916a1d36409dc548368",
+      "decision": "exact upstream match; retain and pin"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-tanh.svg",
+      "sourcePage": "https://d2l.ai/chapter_multilayer-perceptrons/mlp.html#activation-functions",
+      "sourceImage": "https://d2l.ai/_images/output_mlp_76f463_78_0.svg",
+      "sha256": "b31896fdf836337c92d40d9506c29d9a7129f4221b4e9bf9531201ddf9572b0f",
+      "decision": "exact upstream match; retain and pin"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-tanh-gradient.svg",
+      "sourcePage": "https://d2l.ai/chapter_multilayer-perceptrons/mlp.html#activation-functions",
+      "sourceImage": "https://d2l.ai/_images/output_mlp_76f463_93_0.svg",
+      "sha256": "a0b8373b2d090121895b6a85dcd43d6af0afab3c2d7ae52bb3bbf0e0f03c29db",
+      "decision": "exact upstream match; retain and pin"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-relu.svg",
+      "sourcePage": "https://d2l.ai/chapter_multilayer-perceptrons/mlp.html#activation-functions",
+      "sourceImage": "https://d2l.ai/_images/output_mlp_76f463_18_0.svg",
+      "sha256": "350dfd434b6c4210d608a1d55f58a69f07ee28958a14978d17495e60fb59c53c",
+      "decision": "exact upstream match; retain and pin"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-relu-gradient.svg",
+      "sourcePage": "https://d2l.ai/chapter_multilayer-perceptrons/mlp.html#activation-functions",
+      "sourceImage": "https://d2l.ai/_images/output_mlp_76f463_33_0.svg",
+      "sha256": "1c56cdc4b9c5092bf165e96df001cda87a432b60a9e24494a3d5675bf15b7810",
+      "decision": "exact upstream match; retain and pin"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sgd-anisotropic.svg",
+      "sourcePage": "https://d2l.ai/chapter_optimization/momentum.html",
+      "sourceImage": "https://d2l.ai/_images/output_momentum_e3683f_3_1.svg",
+      "sha256": "d3dc77b38a500a85574e5df17e800dd08cd938a23ced8311046229a7f9d5676c",
+      "decision": "exact upstream match; retain and pin"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-momentum-anisotropic.svg",
+      "sourcePage": "https://d2l.ai/chapter_optimization/momentum.html",
+      "sourceImage": "https://d2l.ai/_images/output_momentum_e3683f_27_1.svg",
+      "sha256": "8e68f49a0ffdaa64da9daeabc2065e48476154d5fdb8d79a1a3f97d39ac291cc",
+      "decision": "exact upstream match; retain and pin"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/d2l/dropout.svg",
+      "sourcePage": "https://d2l.ai/chapter_multilayer-perceptrons/dropout.html",
+      "sourceImage": "https://d2l.ai/_images/dropout2.svg",
+      "sha256": "ad463729d07aa97f9f48d136b2aa205504444720eea02cdb9b8a94eef145aa19",
+      "decision": "exact upstream match; retain and pin"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-cross-correlation.svg",
+      "sourcePage": "https://d2l.ai/chapter_convolutional-neural-networks/conv-layer.html",
+      "sourceImage": "https://d2l.ai/_images/correlation.svg",
+      "sha256": "a29e9c6b51db35de2e2c68e60177eaa116050ea11c397e0f8715cf64f6b898be",
+      "decision": "exact upstream match; retain and pin"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/d2l/lenet.svg",
+      "sourcePage": "https://d2l.ai/chapter_convolutional-neural-networks/lenet.html",
+      "sourceImage": "https://raw.githubusercontent.com/d2l-ai/d2l-en/b2e2ae30898a9d0126a9699ae7e441de3e272715/img/lenet-vert.svg",
+      "sha256": "66dc7de32432aebb461dd1845fae53880f07328c03040009f55dd4a0cacbbd11",
+      "decision": "exact upstream match; retain and pin"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/d2l/resnet18.svg",
+      "sourcePage": "https://d2l.ai/chapter_convolutional-modern/resnet.html",
+      "sourceImage": "https://raw.githubusercontent.com/d2l-ai/d2l-en/b2e2ae30898a9d0126a9699ae7e441de3e272715/img/resnet18.svg",
+      "sha256": "2ffaf03da85439f7796dfe5f0ff6113479bdd8c5248740fdf7ca7fa37ffe7883",
+      "decision": "exact upstream match; retain and pin"
+    }
+  ],
+  "files": [
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "31ef281ff80674cbc5fec745885dcb2d74c63f7692214e3f3ae0746a4041abed",
+      "after_sha256": "8fc75e8606fcad43906becddf222aad674032fac4d7148a29ba861f2af8181e3",
+      "lines": 25636,
+      "changes": [
+        {
+          "old": "    provenance_confirmation: source-license-verified\n  - {\"id\":\"curated-repairagent-figure2-8c81df177e7f\",\"asset\":\"00 Учебник/Assets/Figures/curated/external-figure-review-2026-11-10/repairagent-figure2.svg\",\"author\":\"Islem Bouzenia, Premkumar Devanbu, Michael Pradel\",\"title\":\"RepairAgent Figure 2: finite-state machine\",\"source_url\":\"https://arxiv.org/html/2403.17134v2#S3.F2\",\"source_image_url\":\"https://arxiv.org/html/2403.17134v2/states_diagram2.drawio.svg\",\"source_asset_sha256\":\"8c81df177e7f97bed18d45bd0df30de6edd5d73a2928699278bdff4dd703dea1\",\"sha256\":\"8c81df177e7f97bed18d45bd0df30de6edd5d73a2928699278bdff4dd703dea1\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence\":\"https://arxiv.org/html/2403.17134v2\",\"derivation\":\"source-svg-copy\",\"modifications\":\"Complete author SVG copied byte-for-byte. No crop, redraw, sanitization, or visual edit.\",\"metadata_status\":\"verified\",\"rights_status\":\"source-license-verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-10\",\"used_in\":[\"00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md\"]}\n  - id: curated-jamba-vector-5ee975e76a73\n    asset: 00 Учебник/Assets/Figures/curated/course-follow-through/jamba-architecture.svg\n",
+          "new": "    provenance_confirmation: source-license-verified\n  - {\"id\":\"curated-repairagent-figure2-8c81df177e7f\",\"asset\":\"00 Учебник/Assets/Figures/curated/external-figure-review-2026-11-10/repairagent-figure2.svg\",\"author\":\"Islem Bouzenia, Premkumar Devanbu, Michael Pradel\",\"title\":\"RepairAgent Figure 2: finite-state machine\",\"source_url\":\"https://arxiv.org/html/2403.17134v2#S3.F2\",\"source_image_url\":\"https://arxiv.org/html/2403.17134v2/states_diagram2.drawio.svg\",\"source_asset_sha256\":\"8c81df177e7f97bed18d45bd0df30de6edd5d73a2928699278bdff4dd703dea1\",\"sha256\":\"8c81df177e7f97bed18d45bd0df30de6edd5d73a2928699278bdff4dd703dea1\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence\":\"https://arxiv.org/html/2403.17134v2\",\"derivation\":\"source-svg-copy\",\"modifications\":\"Complete author SVG copied byte-for-byte. No crop, redraw, sanitization, or visual edit.\",\"metadata_status\":\"verified\",\"rights_status\":\"source-license-verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-10\",\"used_in\":[\"00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md\"]}\n  - {\"id\":\"curated-agenttrek-data-flow-8d3b3dc9060f\",\"asset\":\"00 Учебник/Assets/Figures/curated/external-figure-review-2026-11-10/agenttrek-figure4.png\",\"author\":\"Yiheng Xu et al.\",\"title\":\"AgentTrek v2, Figure 4: The data flow during the early stages of our pipeline\",\"source_url\":\"https://arxiv.org/html/2412.09605v2#S2.F4\",\"source_image_url\":\"https://arxiv.org/html/2412.09605v2/images/data_flow_v6.png\",\"source_asset_sha256\":\"8d3b3dc9060f631ef25c42b8085e7b1a79fd6b2312ea6dfd1aed12930709fc77\",\"sha256\":\"8d3b3dc9060f631ef25c42b8085e7b1a79fd6b2312ea6dfd1aed12930709fc77\",\"license\":\"CC BY-NC-ND 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by-nc-nd/4.0/\",\"license_evidence\":\"https://arxiv.org/html/2412.09605v2\",\"derivation\":\"source-raster-copy\",\"modifications\":\"Whole original PNG copied byte-for-byte for the noncommercial textbook. No crop, translation, recoloring, resampling or other alteration.\",\"dimensions_px\":[1956,516],\"bytes\":336277,\"metadata_status\":\"verified\",\"rights_status\":\"source-license-verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-10\",\"used_in\":[\"00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md\"]}\n  - id: curated-jamba-vector-5ee975e76a73\n    asset: 00 Учебник/Assets/Figures/curated/course-follow-through/jamba-architecture.svg\n"
+        },
+        {
+          "old": "      - \"00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md\"\n      - \"00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\"\n  - id: \"curated-gpt2-6c608bc2633d\"\n    asset: \"00 Учебник/Assets/Figures/curated/gpt2-2026-10-22/gpt2-self-attention-qkv-3-2.png\"\n",
+          "new": "      - \"00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md\"\n      - \"00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\"\n      - \"en/00 Textbook/07 Anatomy of a modern LLM/01 LLaMA as a baseline architecture.md\"\n  - id: \"curated-gpt2-6c608bc2633d\"\n    asset: \"00 Учебник/Assets/Figures/curated/gpt2-2026-10-22/gpt2-self-attention-qkv-3-2.png\"\n"
+        },
+        {
+          "old": "      - 00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/d2l/dropout.svg\n  - id: curated-d2l-lenet-000000000002\n    asset: 00 Учебник/Assets/Figures/curated/d2l/lenet.svg\n",
+          "new": "      - 00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    former_source_asset: raw/papers/external/d2l/dropout.svg\n    source_image_url: https://d2l.ai/_images/dropout2.svg\n    source_asset_sha256: ad463729d07aa97f9f48d136b2aa205504444720eea02cdb9b8a94eef145aa19\n    sha256: ad463729d07aa97f9f48d136b2aa205504444720eea02cdb9b8a94eef145aa19\n    license_evidence: 05 Источники/Originals/neural-language-model-2026-10-21/d2l-LICENSE.txt\n    license_evidence_sha256: a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\n    rights_status: source-license-verified\n    derivation: source-svg-copy\n    last_verified: \"2026-11-10\"\n  - id: curated-d2l-lenet-000000000002\n    asset: 00 Учебник/Assets/Figures/curated/d2l/lenet.svg\n"
+        },
+        {
+          "old": "      - 00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/d2l/lenet.svg\n  - id: curated-d2l-residual-block-000000000003\n    asset: 00 Учебник/Assets/Figures/curated/d2l/residual-block.svg\n",
+          "new": "      - 00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    former_source_asset: raw/papers/external/d2l/lenet.svg\n    source_image_url: https://raw.githubusercontent.com/d2l-ai/d2l-en/b2e2ae30898a9d0126a9699ae7e441de3e272715/img/lenet-vert.svg\n    source_asset_sha256: 66dc7de32432aebb461dd1845fae53880f07328c03040009f55dd4a0cacbbd11\n    sha256: 66dc7de32432aebb461dd1845fae53880f07328c03040009f55dd4a0cacbbd11\n    license_evidence: 05 Источники/Originals/neural-language-model-2026-10-21/d2l-LICENSE.txt\n    license_evidence_sha256: a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\n    rights_status: source-license-verified\n    derivation: source-svg-copy\n    commit: b2e2ae30898a9d0126a9699ae7e441de3e272715\n    last_verified: \"2026-11-10\"\n  - id: curated-d2l-residual-block-000000000003\n    asset: 00 Учебник/Assets/Figures/curated/d2l/residual-block.svg\n"
+        },
+        {
+          "old": "      - 00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/d2l/resnet18.svg\n  - id: curated-split-mooc-cross-validation-195d5fd7ca62\n    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/mooc-cross-validation-train-test.png\n",
+          "new": "      - 00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    former_source_asset: raw/papers/external/d2l/resnet18.svg\n    source_image_url: https://raw.githubusercontent.com/d2l-ai/d2l-en/b2e2ae30898a9d0126a9699ae7e441de3e272715/img/resnet18.svg\n    source_asset_sha256: 2ffaf03da85439f7796dfe5f0ff6113479bdd8c5248740fdf7ca7fa37ffe7883\n    sha256: 2ffaf03da85439f7796dfe5f0ff6113479bdd8c5248740fdf7ca7fa37ffe7883\n    license_evidence: 05 Источники/Originals/neural-language-model-2026-10-21/d2l-LICENSE.txt\n    license_evidence_sha256: a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\n    rights_status: source-license-verified\n    derivation: source-svg-copy\n    commit: b2e2ae30898a9d0126a9699ae7e441de3e272715\n    last_verified: \"2026-11-10\"\n  - id: curated-split-mooc-cross-validation-195d5fd7ca62\n    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/mooc-cross-validation-train-test.png\n"
+        },
+        {
+          "old": "    author: Shunyu Yao et al.\n    source_url: https://react-lm.github.io/\n    license: open educational material; reuse confirmed by repository owner\n    license_url: https://react-lm.github.io/\n    modifications: copied without content changes\n    used_in:\n      - 00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/source-first-65-68/react-patterns.png\n  - id: curated-react-hotpotqa-000000000070\n",
+          "new": "    author: Shunyu Yao et al.\n    source_url: https://react-lm.github.io/\n    source_image_url: https://react-lm.github.io/files/diagram.png\n    sha256: d5754118adcab0d07293244257d15f6cbc4558610329be370d1a38972d848d2f\n    license: null\n    license_url: null\n    modifications: copied without content changes\n    used_in: []\n    former_used_in:\n      - 00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md\n      - 03 Исследовательские линии/Agentic learning.md\n    metadata_status: needs-confirmation\n    rights_status: project-figure-license-unverified\n    provenance_confirmation: source-image-match-license-unverified\n    publication_status: retired\n    retirement_reason: The exact project image is linked; no reuse grant was verified for that graphic. The licensed paper panel remains in the textbook.\n    replacement: 00 Учебник/Assets/Figures/curated/tool-use-2026-10/react-hotpotqa-primary.png\n    source_asset: raw/papers/external/source-first-65-68/react-patterns.png\n  - id: curated-react-hotpotqa-000000000070\n"
+        },
+        {
+          "old": "      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/source-first-7-14/d2l-sigmoid.svg\n  - id: curated-d2l-sigmoid-grad-00000000008e\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sigmoid-gradient.svg\n",
+          "new": "      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    former_source_asset: raw/papers/external/source-first-7-14/d2l-sigmoid.svg\n    source_image_url: https://d2l.ai/_images/output_mlp_76f463_48_0.svg\n    source_asset_sha256: 919f4d5fe95251b8a8337fb90f5e4c5869eb58cccdf890af3bba5afc2c072776\n    sha256: 919f4d5fe95251b8a8337fb90f5e4c5869eb58cccdf890af3bba5afc2c072776\n    license_evidence: 05 Источники/Originals/neural-language-model-2026-10-21/d2l-LICENSE.txt\n    license_evidence_sha256: a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\n    rights_status: source-license-verified\n    derivation: source-svg-copy\n    last_verified: \"2026-11-10\"\n  - id: curated-d2l-sigmoid-grad-00000000008e\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sigmoid-gradient.svg\n"
+        },
+        {
+          "old": "      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/source-first-7-14/d2l-sigmoid-gradient.svg\n  - id: curated-d2l-tanh-00000000008f\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-tanh.svg\n",
+          "new": "      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    former_source_asset: raw/papers/external/source-first-7-14/d2l-sigmoid-gradient.svg\n    source_image_url: https://d2l.ai/_images/output_mlp_76f463_63_0.svg\n    source_asset_sha256: 308927d0b768f063a7760142d0233be44090340f8dc9b916a1d36409dc548368\n    sha256: 308927d0b768f063a7760142d0233be44090340f8dc9b916a1d36409dc548368\n    license_evidence: 05 Источники/Originals/neural-language-model-2026-10-21/d2l-LICENSE.txt\n    license_evidence_sha256: a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\n    rights_status: source-license-verified\n    derivation: source-svg-copy\n    last_verified: \"2026-11-10\"\n  - id: curated-d2l-tanh-00000000008f\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-tanh.svg\n"
+        },
+        {
+          "old": "      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/source-first-7-14/d2l-tanh.svg\n  - id: curated-d2l-tanh-grad-000000000090\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-tanh-gradient.svg\n",
+          "new": "      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    former_source_asset: raw/papers/external/source-first-7-14/d2l-tanh.svg\n    source_image_url: https://d2l.ai/_images/output_mlp_76f463_78_0.svg\n    source_asset_sha256: b31896fdf836337c92d40d9506c29d9a7129f4221b4e9bf9531201ddf9572b0f\n    sha256: b31896fdf836337c92d40d9506c29d9a7129f4221b4e9bf9531201ddf9572b0f\n    license_evidence: 05 Источники/Originals/neural-language-model-2026-10-21/d2l-LICENSE.txt\n    license_evidence_sha256: a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\n    rights_status: source-license-verified\n    derivation: source-svg-copy\n    last_verified: \"2026-11-10\"\n  - id: curated-d2l-tanh-grad-000000000090\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-tanh-gradient.svg\n"
+        },
+        {
+          "old": "      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/source-first-7-14/d2l-tanh-gradient.svg\n  - id: curated-d2l-relu-000000000091\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-relu.svg\n",
+          "new": "      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    former_source_asset: raw/papers/external/source-first-7-14/d2l-tanh-gradient.svg\n    source_image_url: https://d2l.ai/_images/output_mlp_76f463_93_0.svg\n    source_asset_sha256: a0b8373b2d090121895b6a85dcd43d6af0afab3c2d7ae52bb3bbf0e0f03c29db\n    sha256: a0b8373b2d090121895b6a85dcd43d6af0afab3c2d7ae52bb3bbf0e0f03c29db\n    license_evidence: 05 Источники/Originals/neural-language-model-2026-10-21/d2l-LICENSE.txt\n    license_evidence_sha256: a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\n    rights_status: source-license-verified\n    derivation: source-svg-copy\n    last_verified: \"2026-11-10\"\n  - id: curated-d2l-relu-000000000091\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-relu.svg\n"
+        },
+        {
+          "old": "      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/source-first-7-14/d2l-relu.svg\n  - id: curated-d2l-relu-grad-000000000092\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-relu-gradient.svg\n",
+          "new": "      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    former_source_asset: raw/papers/external/source-first-7-14/d2l-relu.svg\n    source_image_url: https://d2l.ai/_images/output_mlp_76f463_18_0.svg\n    source_asset_sha256: 350dfd434b6c4210d608a1d55f58a69f07ee28958a14978d17495e60fb59c53c\n    sha256: 350dfd434b6c4210d608a1d55f58a69f07ee28958a14978d17495e60fb59c53c\n    license_evidence: 05 Источники/Originals/neural-language-model-2026-10-21/d2l-LICENSE.txt\n    license_evidence_sha256: a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\n    rights_status: source-license-verified\n    derivation: source-svg-copy\n    last_verified: \"2026-11-10\"\n  - id: curated-d2l-relu-grad-000000000092\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-relu-gradient.svg\n"
+        },
+        {
+          "old": "      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/source-first-7-14/d2l-relu-gradient.svg\n  - id: curated-d2l-sgd-000000000093\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sgd-anisotropic.svg\n",
+          "new": "      - 00 Учебник/01 Основы нейронных сетей/02 Функции активации.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    former_source_asset: raw/papers/external/source-first-7-14/d2l-relu-gradient.svg\n    source_image_url: https://d2l.ai/_images/output_mlp_76f463_33_0.svg\n    source_asset_sha256: 1c56cdc4b9c5092bf165e96df001cda87a432b60a9e24494a3d5675bf15b7810\n    sha256: 1c56cdc4b9c5092bf165e96df001cda87a432b60a9e24494a3d5675bf15b7810\n    license_evidence: 05 Источники/Originals/neural-language-model-2026-10-21/d2l-LICENSE.txt\n    license_evidence_sha256: a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\n    rights_status: source-license-verified\n    derivation: source-svg-copy\n    last_verified: \"2026-11-10\"\n  - id: curated-d2l-sgd-000000000093\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sgd-anisotropic.svg\n"
+        },
+        {
+          "old": "      - 00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/source-first-7-14/d2l-sgd-anisotropic.svg\n  - id: curated-d2l-momentum-000000000094\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-momentum-anisotropic.svg\n",
+          "new": "      - 00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    former_source_asset: raw/papers/external/source-first-7-14/d2l-sgd-anisotropic.svg\n    source_image_url: https://d2l.ai/_images/output_momentum_e3683f_3_1.svg\n    source_asset_sha256: d3dc77b38a500a85574e5df17e800dd08cd938a23ced8311046229a7f9d5676c\n    sha256: d3dc77b38a500a85574e5df17e800dd08cd938a23ced8311046229a7f9d5676c\n    license_evidence: 05 Источники/Originals/neural-language-model-2026-10-21/d2l-LICENSE.txt\n    license_evidence_sha256: a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\n    rights_status: source-license-verified\n    derivation: source-svg-copy\n    last_verified: \"2026-11-10\"\n  - id: curated-d2l-momentum-000000000094\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-momentum-anisotropic.svg\n"
+        },
+        {
+          "old": "      - 00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/source-first-7-14/d2l-momentum-anisotropic.svg\n  - id: curated-cs231n-opt-000000000095\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif\n",
+          "new": "      - 00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    former_source_asset: raw/papers/external/source-first-7-14/d2l-momentum-anisotropic.svg\n    source_image_url: https://d2l.ai/_images/output_momentum_e3683f_27_1.svg\n    source_asset_sha256: 8e68f49a0ffdaa64da9daeabc2065e48476154d5fdb8d79a1a3f97d39ac291cc\n    sha256: 8e68f49a0ffdaa64da9daeabc2065e48476154d5fdb8d79a1a3f97d39ac291cc\n    license_evidence: 05 Источники/Originals/neural-language-model-2026-10-21/d2l-LICENSE.txt\n    license_evidence_sha256: a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\n    rights_status: source-license-verified\n    derivation: source-svg-copy\n    last_verified: \"2026-11-10\"\n  - id: curated-cs231n-opt-000000000095\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif\n"
+        },
+        {
+          "old": "      - 00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/source-first-7-14/d2l-cross-correlation.svg\n  - {\"id\":\"curated-cs231n-local-000000000099\",\"asset\":\"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-local-connectivity.jpeg\",\"author\":\"Andrej Karpathy and Stanford CS231n contributors\",\"source_url\":\"https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/cnn/cnn.jpeg\",\"license\":\"MIT\",\"license_url\":\"https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/LICENSE\",\"modifications\":\"Original raster copied byte-for-byte from the identified primary source. No crop, redraw, translated labels, resizing or recompression.\",\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md\"],\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"source_asset\":\"05 Источники/Originals/publication-asset-provenance-2026-10-29/cs231n-cnn.jpeg\",\"source_image_url\":\"https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/cnn/cnn.jpeg\",\"source_asset_sha256\":\"f41da3fd33d2ed75aaaae4530359bb172ff338ea3ac8bb9f1d6499676db3fba7\",\"sha256\":\"f41da3fd33d2ed75aaaae4530359bb172ff338ea3ac8bb9f1d6499676db3fba7\",\"dimensions_px\":[569,202],\"bytes\":24437,\"source_page_snapshot\":\"05 Источники/Originals/publication-asset-provenance-2026-10-29/cs231n-convolutional.md\",\"source_page_sha256\":\"725ee0ce429408655acee7f49b77d8ff241ad867d4a74db0867d95e86f150830\",\"license_evidence\":\"05 Источники/Originals/publication-asset-provenance-2026-10-29/cs231n-LICENSE.txt\",\"license_evidence_sha256\":\"85b365f07b4cfc5d678c548bc41965bc3bc782106b8903bd3b876d9d49a4270d\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-10-29\",\"derivation\":\"source-raster-copy\",\"commit\":\"8ec57ccfc32379ae4b37c45de949af359673f92f\"}\n  - {\"id\":\"curated-cs231n-stride-00000000009a\",\"asset\":\"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-stride-padding.jpeg\",\"author\":\"Andrej Karpathy and Stanford CS231n contributors\",\"source_url\":\"https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/cnn/stride.jpeg\",\"license\":\"MIT\",\"license_url\":\"https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/LICENSE\",\"modifications\":\"Original raster copied byte-for-byte from the identified primary source. No crop, redraw, translated labels, resizing or recompression.\",\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md\"],\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"source_asset\":\"05 Источники/Originals/publication-asset-provenance-2026-10-29/cs231n-stride.jpeg\",\"source_image_url\":\"https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/cnn/stride.jpeg\",\"source_asset_sha256\":\"5b5f71b55bac0ccdad72189c12aee5c5a64f75ef808dc1338230740d629aa1ab\",\"sha256\":\"5b5f71b55bac0ccdad72189c12aee5c5a64f75ef808dc1338230740d629aa1ab\",\"dimensions_px\":[861,172],\"bytes\":33410,\"source_page_snapshot\":\"05 Источники/Originals/publication-asset-provenance-2026-10-29/cs231n-convolutional.md\",\"source_page_sha256\":\"725ee0ce429408655acee7f49b77d8ff241ad867d4a74db0867d95e86f150830\",\"license_evidence\":\"05 Источники/Originals/publication-asset-provenance-2026-10-29/cs231n-LICENSE.txt\",\"license_evidence_sha256\":\"85b365f07b4cfc5d678c548bc41965bc3bc782106b8903bd3b876d9d49a4270d\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-10-29\",\"derivation\":\"source-raster-copy\",\"commit\":\"8ec57ccfc32379ae4b37c45de949af359673f92f\"}\n",
+          "new": "      - 00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    former_source_asset: raw/papers/external/source-first-7-14/d2l-cross-correlation.svg\n    source_image_url: https://d2l.ai/_images/correlation.svg\n    source_asset_sha256: a29e9c6b51db35de2e2c68e60177eaa116050ea11c397e0f8715cf64f6b898be\n    sha256: a29e9c6b51db35de2e2c68e60177eaa116050ea11c397e0f8715cf64f6b898be\n    license_evidence: 05 Источники/Originals/neural-language-model-2026-10-21/d2l-LICENSE.txt\n    license_evidence_sha256: a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\n    rights_status: source-license-verified\n    derivation: source-svg-copy\n    last_verified: \"2026-11-10\"\n  - {\"id\":\"curated-cs231n-local-000000000099\",\"asset\":\"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-local-connectivity.jpeg\",\"author\":\"Andrej Karpathy and Stanford CS231n contributors\",\"source_url\":\"https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/cnn/cnn.jpeg\",\"license\":\"MIT\",\"license_url\":\"https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/LICENSE\",\"modifications\":\"Original raster copied byte-for-byte from the identified primary source. No crop, redraw, translated labels, resizing or recompression.\",\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md\"],\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"source_asset\":\"05 Источники/Originals/publication-asset-provenance-2026-10-29/cs231n-cnn.jpeg\",\"source_image_url\":\"https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/cnn/cnn.jpeg\",\"source_asset_sha256\":\"f41da3fd33d2ed75aaaae4530359bb172ff338ea3ac8bb9f1d6499676db3fba7\",\"sha256\":\"f41da3fd33d2ed75aaaae4530359bb172ff338ea3ac8bb9f1d6499676db3fba7\",\"dimensions_px\":[569,202],\"bytes\":24437,\"source_page_snapshot\":\"05 Источники/Originals/publication-asset-provenance-2026-10-29/cs231n-convolutional.md\",\"source_page_sha256\":\"725ee0ce429408655acee7f49b77d8ff241ad867d4a74db0867d95e86f150830\",\"license_evidence\":\"05 Источники/Originals/publication-asset-provenance-2026-10-29/cs231n-LICENSE.txt\",\"license_evidence_sha256\":\"85b365f07b4cfc5d678c548bc41965bc3bc782106b8903bd3b876d9d49a4270d\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-10-29\",\"derivation\":\"source-raster-copy\",\"commit\":\"8ec57ccfc32379ae4b37c45de949af359673f92f\"}\n  - {\"id\":\"curated-cs231n-stride-00000000009a\",\"asset\":\"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-stride-padding.jpeg\",\"author\":\"Andrej Karpathy and Stanford CS231n contributors\",\"source_url\":\"https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/cnn/stride.jpeg\",\"license\":\"MIT\",\"license_url\":\"https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/LICENSE\",\"modifications\":\"Original raster copied byte-for-byte from the identified primary source. No crop, redraw, translated labels, resizing or recompression.\",\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md\"],\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"source_asset\":\"05 Источники/Originals/publication-asset-provenance-2026-10-29/cs231n-stride.jpeg\",\"source_image_url\":\"https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/cnn/stride.jpeg\",\"source_asset_sha256\":\"5b5f71b55bac0ccdad72189c12aee5c5a64f75ef808dc1338230740d629aa1ab\",\"sha256\":\"5b5f71b55bac0ccdad72189c12aee5c5a64f75ef808dc1338230740d629aa1ab\",\"dimensions_px\":[861,172],\"bytes\":33410,\"source_page_snapshot\":\"05 Источники/Originals/publication-asset-provenance-2026-10-29/cs231n-convolutional.md\",\"source_page_sha256\":\"725ee0ce429408655acee7f49b77d8ff241ad867d4a74db0867d95e86f150830\",\"license_evidence\":\"05 Источники/Originals/publication-asset-provenance-2026-10-29/cs231n-LICENSE.txt\",\"license_evidence_sha256\":\"85b365f07b4cfc5d678c548bc41965bc3bc782106b8903bd3b876d9d49a4270d\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-10-29\",\"derivation\":\"source-raster-copy\",\"commit\":\"8ec57ccfc32379ae4b37c45de949af359673f92f\"}\n"
+        },
+        {
+          "old": "    metadata_status: \"verified\"\n    last_verified: \"2026-10-20\"\n    used_in: [\"00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md\"]\n    sha256: \"8c5057223d4c527352a4d3088342bd6437fb43651a9de01090ebd2cf1f2f69c6\"\n    source_asset_sha256: \"f285b0971ae4a790e402fb93966bed3adde2cf0a04977d08b2b40d6ab0cace69\"\n",
+          "new": "    metadata_status: \"verified\"\n    last_verified: \"2026-10-20\"\n    used_in: [\"00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md\", \"03 Исследовательские линии/Agentic learning.md\"]\n    sha256: \"8c5057223d4c527352a4d3088342bd6437fb43651a9de01090ebd2cf1f2f69c6\"\n    source_asset_sha256: \"f285b0971ae4a790e402fb93966bed3adde2cf0a04977d08b2b40d6ab0cace69\"\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+      "before_sha256": "83a8a6e45eb56a15ce51d2450a81e0ea94ee5c813f6f3cecaee644c523eb03ca",
+      "after_sha256": "506559100112802f7d71df1d33f6760a56bc426966bb5fed4ad589b61eea2570",
+      "lines": 1188,
+      "changes": [
+        {
+          "old": "рассуждения обязательно закончится ошибкой.\n\n[![Reason-only, Act-only и ReAct: рассуждение и обратная связь от среды](https://react-lm.github.io/files/diagram.png)](https://react-lm.github.io/files/diagram.png)\n\n*Сравнение Reason-only, Act-only и ReAct. Источник: Shunyu Yao et al.,\n[ReAct project page](https://react-lm.github.io/), рисунок `diagram.png`.*\n\nВ первом режиме модель строит текстовое рассуждение без нового внешнего\nнаблюдения. Во втором явно выдаёт действия, но промежуточные текстовые\nрассуждения не включены в траекторию. ReAct чередует оба типа шагов.\nОтсутствие видимого текста между вызовами не доказывает, что у современной\nмодели нет внутреннего рассуждения; схема сравнивает форматы prompting\n",
+          "new": "рассуждения обязательно закончится ошибкой.\n\n<a id=\"react-hotpotqa-trajectories\"></a>\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tool-use-2026-10/react-hotpotqa-primary.png|Четыре траектории для вопроса об Apple Remote: обычный запрос, цепочка рассуждений, действия без записанных рассуждений и ReAct.]]\n\n*Shunyu Yao et al., [ReAct v3, Figure 1(1), с. 2](https://arxiv.org/pdf/2210.03629v3#page=2),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nПервая панель исходного рисунка, с английскими подписями.\n[Сводная схема трёх циклов на сайте проекта](https://react-lm.github.io/files/diagram.png).*\n\nВ столбце Reason-only модель строит рассуждение без нового внешнего\nнаблюдения. В Act-only видны действия и ответы среды; промежуточный\nтекст рассуждения не записан. В панели ReAct модель пишет `Thought`\nи `Act`, а среда возвращает `Obs`.\nОтсутствие видимого текста между вызовами не доказывает, что у современной\nмодели нет внутреннего рассуждения; схема сравнивает форматы prompting\n"
+        },
+        {
+          "old": "признак усечения.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tool-use-2026-10/react-hotpotqa-primary.png]]\n\n*Shunyu Yao et al., [ReAct v3, Figure 1(1), PDF p. 2](https://arxiv.org/pdf/2210.03629v3#page=2), CC BY 4.0. Верхняя часть исходного рисунка: один вопрос решается обычным prompting, CoT, Act-only и ReAct. Подписи и английский текст не переводились.*\n\nВопрос в верхней части рисунка: каким устройством, кроме Apple Remote,\nможно управлять программой, для которой этот пульт первоначально предназначался?\nОн требует связать два факта: название программы и другое средство управления.\n",
+          "new": "признак усечения.\n\nВопрос в [траекториях HotpotQA выше](#react-hotpotqa-trajectories):\nкаким устройством, кроме Apple Remote,\nможно управлять программой, для которой этот пульт первоначально предназначался?\nОн требует связать два факта: название программы и другое средство управления.\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
+      "before_sha256": "85baaa1bbb7f12fb1e11ea539130d5b3c4426dce76333f13a25528fb44b6d43e",
+      "after_sha256": "4c6a9236e71bea0d96aef92606d5799034bde9fd7396103bfb9eaaccd27cd628",
+      "lines": 1494,
+      "changes": [
+        {
+          "old": "переход к `Done` завершает работу.\n\n[![Конечный автомат RepairAgent: состояния исследования ошибки, сбора контекста, проверки исправления и завершения.](https://arxiv.org/html/2403.17134v2/states_diagram2.drawio.svg)](https://arxiv.org/html/2403.17134v2/states_diagram2.drawio.svg)\n\n*Islem Bouzenia, Premkumar Devanbu, Michael Pradel,\n[RepairAgent v2, Figure 2](https://arxiv.org/html/2403.17134v2#S3.F2).\nОригинальная схема, CC BY 4.0; стрелки допускают возврат к прежним состояниям.*\n\nНапример, после неудачного патча агент может вызвать `collect_more_information`,\n",
+          "new": "переход к `Done` завершает работу.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/external-figure-review-2026-11-10/repairagent-figure2.svg|Конечный автомат RepairAgent: состояния исследования ошибки, сбора контекста, проверки исправления и завершения.]]\n\n*Islem Bouzenia, Premkumar Devanbu, Michael Pradel,\n[RepairAgent v2, Figure 2](https://arxiv.org/html/2403.17134v2#S3.F2).\n[Оригинальный SVG](https://arxiv.org/html/2403.17134v2/states_diagram2.drawio.svg),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nСтрелки допускают возврат к прежним состояниям.*\n\nНапример, после неудачного патча агент может вызвать `collect_more_information`,\n"
+        },
+        {
+          "old": "мультимодальной модели пытается выполнить эти действия в приложении.\nПолученные записи оценивает другая мультимодальная модель.\n\n[![AgentTrek: руководство направляет агента, наблюдения и действия записываются, отдельный оценщик проверяет траекторию](https://arxiv.org/html/2412.09605v2/images/part2_v6.png)](https://arxiv.org/html/2412.09605v2/images/part2_v6.png)\n\n*Yiheng Xu et al., [AgentTrek v2, Figure 5, p. 5](https://arxiv.org/pdf/2412.09605v2#page=5).\nРуководство, наблюдения, реальные действия и сохраняемые артефакты.\nОригинал подключён с сайта статьи.*\n\nДо исполнения работает отдельный конвейер отбора\n([§2.1](https://arxiv.org/html/2412.09605v2#S2.SS1)). Из большого корпуса\n",
+          "new": "мультимодальной модели пытается выполнить эти действия в приложении.\nПолученные записи оценивает другая мультимодальная модель.\n\nДо исполнения работает отдельный конвейер отбора\n([§2.1](https://arxiv.org/html/2412.09605v2#S2.SS1)). Из большого корпуса\n"
+        },
+        {
+          "old": "текущих экранов и координат.\n\nРуководство уменьшает число решений, которые агенту приходится находить\nсамостоятельно, но не заменяет взаимодействие с приложением. Оно может\n",
+          "new": "текущих экранов и координат.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/external-figure-review-2026-11-10/agenttrek-figure4.png|Отбор руководств AgentTrek. После предварительных фильтров остаётся 68,8 млн записей, после FastText — 54 млн, после дедупликации — 18,8 млн.]]\n\n*Yiheng Xu et al., [AgentTrek v2, Figure 4](https://arxiv.org/html/2412.09605v2#S2.F4).\n[Оригинальный PNG](https://arxiv.org/html/2412.09605v2/images/data_flow_v6.png),\nбез изменений, [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).*\n\nЧитайте числа вдоль верхней линии: 68,8 млн записей осталось после\nпредварительного отбора, 54 млн после FastText, 18,8 млн после удаления\nдубликатов. Правый край, `Web 2.24M`, ещё относится к отбору исходных\nтекстов. Ни на одном из этих этапов браузерный агент не выполняет\nинструкции, поэтому эти числа нельзя принимать за размер корпуса траекторий.\n\nРуководство уменьшает число решений, которые агенту приходится находить\nсамостоятельно, но не заменяет взаимодействие с приложением. Оно может\n"
+        },
+        {
+          "old": "текущему интерфейсу.\n\nПри воспроизведении агент получает снимок экрана и дерево доступности,\nвыполняет команды Playwright, а сборщик сохраняет также DOM, сетевой журнал\n",
+          "new": "текущему интерфейсу.\n\nНа [Figure 5 исходной статьи](https://arxiv.org/html/2412.09605v2#S2.F5)\nстрелка `Action` идёт от агента к сайту, а `Observation` возвращается\nобратно. В [примере поиска правил возврата, Figure 6](https://arxiv.org/html/2412.09605v2#S2.F6)\nодного открытия страницы недостаточно: нужно найти правило для нужной\nкатегории товаров и дать ответ, опираясь на страницу.\nПри воспроизведении агент получает снимок экрана и дерево доступности,\nвыполняет команды Playwright, а сборщик сохраняет также DOM, сетевой журнал\n"
+        }
+      ]
+    },
+    {
+      "source": "03 Исследовательские линии/Agentic learning.md",
+      "before_sha256": "4fb082cc7cd9c2f1fa5b31ba2e9a68f196ceae1d68814dd5105eb04a72ee0f53",
+      "after_sha256": "8ede2ac261b97027d6c79751c495e9af698af9f510f26d6bbffddd1353451a3e",
+      "lines": 242,
+      "changes": [
+        {
+          "old": "## От примеров траекторий к изменению поведения\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-65-68/react-patterns.png]]\n\n*В ReAct рассуждение и действие образуют одну траекторию: результат действия\nвозвращается модели как наблюдение и меняет следующий шаг. На исходной figure\nэтот режим сопоставлен с reason-only и act-only. Источник: Shunyu Yao et al.,\n[ReAct, Figure 1](https://arxiv.org/abs/2210.03629), также опубликован на\n[странице проекта](https://react-lm.github.io/).*\n\nФормат корректного вызова — только часть оцениваемого поведения.\nДлинная задача также требует выбрать инструмент, учесть ошибку,\n",
+          "new": "## От примеров траекторий к изменению поведения\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tool-use-2026-10/react-hotpotqa-primary.png|Четыре траектории для вопроса об Apple Remote. В правой панели ReAct меняет поисковый запрос после ответа среды и находит правильный ответ.]]\n\n*Shunyu Yao et al., [ReAct v3, Figure 1(1), с. 2](https://arxiv.org/pdf/2210.03629v3#page=2),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nПервая панель исходного рисунка. [Общая схема на сайте проекта](https://react-lm.github.io/files/diagram.png).*\n\nВ правой панели поиск по `Front Row` не находит точного совпадения.\nВ наблюдении `Obs 2` среди предложенных вариантов есть `Front Row (software)`.\nАгент берёт этот вариант для следующего поиска и находит ответ.\nРассуждение без поиска слева опирается на ошибочную догадку про Apple TV.\nВ главе о вызовах инструментов этот пример разобран\n[[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#react-hotpotqa-trajectories|по шагам действия и наблюдения]].\n\nФормат корректного вызова — только часть оцениваемого поведения.\nДлинная задача также требует выбрать инструмент, учесть ошибку,\n"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tests/fixtures/legacy-unhashed-assets.json",
+      "before_sha256": "0455b16632af86fa548a1c48ce1f9334bd6a3ee4777bb5f92187362489157f09",
+      "after_sha256": "cfa215a8dddccdbe96271b5474fc3512d0664dd5769574caeb4c6923b213f9f8",
+      "lines": 311,
+      "changes": [
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/cot/cot-examples-fig3.png\",\n    \"00 Учебник/Assets/Figures/curated/cot/cot-prompting-fig1.png\",\n    \"00 Учебник/Assets/Figures/curated/d2l/dropout.svg\",\n    \"00 Учебник/Assets/Figures/curated/d2l/lenet.svg\",\n    \"00 Учебник/Assets/Figures/curated/d2l/residual-block.svg\",\n    \"00 Учебник/Assets/Figures/curated/d2l/resnet18.svg\",\n    \"00 Учебник/Assets/Figures/curated/deepseek-v2/x1.png\",\n    \"00 Учебник/Assets/Figures/curated/deepseek-v2/x3.png\",\n",
+          "new": "    \"00 Учебник/Assets/Figures/curated/cot/cot-examples-fig3.png\",\n    \"00 Учебник/Assets/Figures/curated/cot/cot-prompting-fig1.png\",\n    \"00 Учебник/Assets/Figures/curated/d2l/residual-block.svg\",\n    \"00 Учебник/Assets/Figures/curated/deepseek-v2/x1.png\",\n    \"00 Учебник/Assets/Figures/curated/deepseek-v2/x3.png\",\n"
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/source-first-65-68/pass-at-k-vs-pass-power-k.png\",\n    \"00 Учебник/Assets/Figures/curated/source-first-65-68/react-hotpotqa.png\",\n    \"00 Учебник/Assets/Figures/curated/source-first-65-68/react-patterns.png\",\n    \"00 Учебник/Assets/Figures/curated/source-first-65-68/swe-agent-instance-template-reminders.png\",\n    \"00 Учебник/Assets/Figures/curated/source-first-65-68/system-prompt-calibration.png\",\n",
+          "new": "    \"00 Учебник/Assets/Figures/curated/source-first-65-68/pass-at-k-vs-pass-power-k.png\",\n    \"00 Учебник/Assets/Figures/curated/source-first-65-68/react-hotpotqa.png\",\n    \"00 Учебник/Assets/Figures/curated/source-first-65-68/swe-agent-instance-template-reminders.png\",\n    \"00 Учебник/Assets/Figures/curated/source-first-65-68/system-prompt-calibration.png\",\n"
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-learning-rates.jpeg\",\n    \"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif\",\n    \"00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-cross-correlation.svg\",\n    \"00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-momentum-anisotropic.svg\",\n    \"00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-relu-gradient.svg\",\n    \"00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-relu.svg\",\n    \"00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sgd-anisotropic.svg\",\n    \"00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sigmoid-gradient.svg\",\n    \"00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sigmoid.svg\",\n    \"00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-tanh-gradient.svg\",\n    \"00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-tanh.svg\",\n    \"00 Учебник/Assets/Figures/curated/t5/encoder-decoder-architecture.png\",\n    \"00 Учебник/Assets/Figures/curated/t5/text-to-text-framework.png\",\n",
+          "new": "    \"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-learning-rates.jpeg\",\n    \"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif\",\n    \"00 Учебник/Assets/Figures/curated/t5/encoder-decoder-architecture.png\",\n    \"00 Учебник/Assets/Figures/curated/t5/text-to-text-framework.png\",\n"
+        }
+      ]
+    },
+    {
+      "source": "docs/audit/2026-10-30-reading-route-review.json",
+      "before_sha256": "a6629884d158d031efd22accb349d80f210c3189cc34f0b53b2498d279f584a3",
+      "after_sha256": "2641d1a4fafe06ba09930b0a491d6a57e486390a3fc02b89b5b5fe3166309700",
+      "lines": 8011,
+      "changes": [
+        {
+          "old": "      \"path\": \"00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md\",\n      \"route\": \"textbook/agents/tool-use\",\n      \"sha256\": \"83a8a6e45eb56a15ce51d2450a81e0ea94ee5c813f6f3cecaee644c523eb03ca\",\n      \"lines\": 1186,\n      \"read\": \"Read all 1057 lines of the input across the route pass, then checked the exact revised MCP, idempotency and index deltas in context.\",\n      \"findings\": [\n        \"The licensed original FAQ diagram now has an explicit reading: MCP is a protocol, not an intermediary process. Host, client and server roles are separate.\",\n        \"An out-of-order pair shows why the application associates MCP responses by session and ID, and why result.isError and a JSON-RPC error need different handling.\",\n        \"The retry example distinguishes the model call ID, a new protocol request ID, and the stable intent key; the verifier still requires evidence of the requested action.\"\n      ],\n      \"sourceComparisonEvidence\": \"docs/audit/2026-11-09-tool-use-mcp-additions.json\",\n      \"reviewStage\": \"Whole-owner reading and scoped source, fixture and render checks; no MCP endpoint or model was called.\"\n    },\n",
+          "new": "      \"path\": \"00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md\",\n      \"route\": \"textbook/agents/tool-use\",\n      \"sha256\": \"506559100112802f7d71df1d33f6760a56bc426966bb5fed4ad589b61eea2570\",\n      \"lines\": 1188,\n      \"read\": \"Read all 1057 lines of the input across the route pass, then checked the exact revised MCP, idempotency and index deltas in context.\",\n      \"findings\": [\n        \"The licensed original FAQ diagram now has an explicit reading: MCP is a protocol, not an intermediary process. Host, client and server roles are separate.\",\n        \"An out-of-order pair shows why the application associates MCP responses by session and ID, and why result.isError and a JSON-RPC error need different handling.\",\n        \"The retry example distinguishes the model call ID, a new protocol request ID, and the stable intent key; the verifier still requires evidence of the requested action.\",\n        \"The 2026-11-10 figure-only delta moves the original licensed HotpotQA panel to the first explanation of the tool loop and keeps the distinct project graphic as a link.\"\n      ],\n      \"sourceComparisonEvidence\": \"docs/audit/2026-11-09-tool-use-mcp-additions.json\",\n      \"sourceFigureDeltaEvidence\": \"docs/audit/2026-11-10-external-textbook-figure-review-additions.json\",\n      \"reviewStage\": \"Whole-owner reading and scoped source, fixture and render checks; no MCP endpoint or model was called.\"\n    },\n"
+        },
+        {
+          "old": "      \"path\": \"00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md\",\n      \"route\": \"textbook/agents/coding-web-computer-use\",\n      \"sha256\": \"85baaa1bbb7f12fb1e11ea539130d5b3c4426dce76333f13a25528fb44b6d43e\",\n      \"lines\": 1481,\n      \"read\": \"Read the full 1448-line input across consecutive ranges; the new EnIGMA explanation was checked against the proceedings and reference commands. Unchanged prose preserved via exact reversal.\",\n      \"findings\": [\n",
+          "new": "      \"path\": \"00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md\",\n      \"route\": \"textbook/agents/coding-web-computer-use\",\n      \"sha256\": \"4c6a9236e71bea0d96aef92606d5799034bde9fd7396103bfb9eaaccd27cd628\",\n      \"lines\": 1494,\n      \"read\": \"Read the full 1448-line input across consecutive ranges; the new EnIGMA explanation was checked against the proceedings and reference commands. Unchanged prose preserved via exact reversal.\",\n      \"findings\": [\n"
+        },
+        {
+          "old": "        \"SWE-agent Figure 1 distinguishes ACI commands from environment feedback. OSWorld Figure 2 separates VM setup, agent interaction, artifact retrieval, and grading; the appendix fixes the baseline budget.\",\n        \"Both original figures are CC BY 4.0. The Berkeley source decisions link to the replacement illustrations and preserve the course references without publishing the old frames.\",\n        \"The EnIGMA addition explains persistent process state, the long-output observation formats and why the pooled ablation does not identify the effect of GDB alone. Figures 1 and 3 are from the licensed proceedings version.\"\n      ],\n      \"sourceComparisonEvidence\": \"docs/audit/2026-11-09-berkeley-enigma-interactive-sessions-additions.json\",\n      \"priorSourceComparisonEvidence\": \"docs/audit/2026-11-09-computer-agents-observation-contract-additions.json\",\n      \"reviewStage\": \"Whole-owner reading and scoped source, code and reader checks; no live agent evaluation.\"\n",
+          "new": "        \"SWE-agent Figure 1 distinguishes ACI commands from environment feedback. OSWorld Figure 2 separates VM setup, agent interaction, artifact retrieval, and grading; the appendix fixes the baseline budget.\",\n        \"Both original figures are CC BY 4.0. The Berkeley source decisions link to the replacement illustrations and preserve the course references without publishing the old frames.\",\n        \"The EnIGMA addition explains persistent process state, the long-output observation formats and why the pooled ablation does not identify the effect of GDB alone. Figures 1 and 3 are from the licensed proceedings version.\",\n        \"The 2026-11-10 figure delta compares RepairAgent's states with its original SVG and distinguishes AgentTrek's tutorial counts (Figure 4) from guided-replay trajectories (Figures 5–6, linked).\"\n      ],\n      \"sourceComparisonEvidence\": \"docs/audit/2026-11-09-berkeley-enigma-interactive-sessions-additions.json\",\n      \"sourceFigureDeltaEvidence\": \"docs/audit/2026-11-10-external-textbook-figure-review-additions.json\",\n      \"priorSourceComparisonEvidence\": \"docs/audit/2026-11-09-computer-agents-observation-contract-additions.json\",\n      \"reviewStage\": \"Whole-owner reading and scoped source, code and reader checks; no live agent evaluation.\"\n"
+        }
+      ]
+    },
+    {
+      "source": "docs/audit/2026-11-09-release-readiness.json",
+      "before_sha256": "e3c1bfefd8d89b973f48c7109513f95645e0ab68dc5637bf6f428d0757295d36",
+      "after_sha256": "e5dfa66c4800a76159de2e3365576dfd4f36d50bb1897f1e196b80ed80ae276c",
+      "lines": 1362,
+      "changes": [
+        {
+          "old": "    \"externalImageUrls\": 16,\n    \"scope\": \"Textbook routes in the current root build. The nine records reported as unlabelled in the previous snapshot had YAML-inherited source metadata: that scan did not resolve merge keys. They were nevertheless unpinned and their reuse was not independently established. The chapter now uses eight source originals, links directly to the official Qwen diagram, and preserves the old ten slide files locally but not in the built asset tree. Verified metadata or an exact digest does not by itself verify third-party rights.\"\n  },\n  \"remaining\": [\n    \"Reconcile missing digests and source records for 56 older rendered textbook entries and review 16 external textbook image URLs. The 44 path aliases resolve to registered records and match the built bytes. The broader source-library image inventory is separate.\",\n    \"Continue source/explanation and visual acceptance separately from mechanical build gates.\",\n    \"Live CI and Pages deployment require the user's authorization; dev and main were not changed.\"\n",
+          "new": "    \"externalImageUrls\": 16,\n    \"scope\": \"Textbook routes in the current root build. The nine records reported as unlabelled in the previous snapshot had YAML-inherited source metadata: that scan did not resolve merge keys. They were nevertheless unpinned and their reuse was not independently established. The chapter now uses eight source originals, links directly to the official Qwen diagram, and preserves the old ten slide files locally but not in the built asset tree. Verified metadata or an exact digest does not by itself verify third-party rights.\"\n  },\n  \"externalTextbookFigureReview20261110\": {\n    \"journal\": \"docs/audit/2026-11-10-external-textbook-figure-review-additions.json\",\n    \"externalURLsReviewed\": 16,\n    \"externalEmbedsReplaced\": 3,\n    \"remainingExternalImageUrls\": 13,\n    \"textbookPagesScannedInBothLocales\": 310,\n    \"distinctLocalRenderedImagePaths\": 1214,\n    \"exactRegistryKeys\": 1170,\n    \"assetPrefixAliases\": 44,\n    \"matchingSHA256\": 1158,\n    \"registeredWithoutSHA256\": 56,\n    \"unregistered\": 0,\n    \"mismatchedSHA256\": 0,\n    \"activeRetiredImages\": 0,\n    \"scope\": \"Current root build, textbook manifest only. The linked ReAct project graphic no longer ships as a local copy. RepairAgent Figure 2 and AgentTrek Figure 4 are unchanged copies of the licensed originals. AgentTrek Figures 5–6 are linked as the replay examples; Figure 5 includes third-party interface content. The 13 remaining external images were not cleared for redistribution.\"\n  },\n  \"d2lLegacyFigureReconciliation20261110\": {\n    \"journal\": \"docs/audit/2026-11-10-external-textbook-figure-review-additions.json\",\n    \"checkedD2LFigures\": 12,\n    \"upstreamByteMatchesPinned\": 12,\n    \"textbookRenderedImagePathsWithMatchingSHA256\": 1170,\n    \"registeredTextbookPathsStillWithoutSHA256\": 44,\n    \"scope\": \"Compare the existing SVGs with assets served by the corresponding chapters in Dive into Deep Learning 1.0.3 or archived at the exact tagged revision. LeNet matches the vertical original; ResNet-18 matches the unrotated source image. The exact version license also matches the archived copy. No images or reader routes changed in this subset.\"\n  },\n  \"remaining\": [\n    \"Reconcile digests and source records for 44 older rendered textbook entries. For 13 external textbook images, replace the embed with an appropriate licensed original or link to the source with a worked explanation where redistribution is unconfirmed. The broader source-library image inventory is separate.\",\n    \"Continue source/explanation and visual acceptance separately from mechanical build gates.\",\n    \"Live CI and Pages deployment require the user's authorization; dev and main were not changed.\"\n"
+        }
+      ]
+    }
+  ]
+}

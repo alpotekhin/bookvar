@@ -6,6 +6,7 @@ Small CPU correctness cases only. This is not a quality or performance benchmark
 from pathlib import Path
 import hashlib
 import re
+from importlib.metadata import version
 import numpy as np
 from scipy.optimize import brentq
 from scipy.spatial.distance import cdist
@@ -16,7 +17,9 @@ ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/01 Классическое машинное обучение/07 PCA, t-SNE и UMAP.md"
 chapter_bytes = CHAPTER.read_bytes()
 blocks = re.findall(r"```python\n(.*?)```", chapter_bytes.decode(), re.S)
-assert len(blocks) == 7
+assert len(blocks) == 9
+print('runtime', {name: version(name) for name in
+      ['numpy', 'scipy', 'scikit-learn', 'umap-learn', 'numba']}, flush=True)
 scope = {}
 for index, code in enumerate(blocks, 1):
     print(f"Execute actual chapter block {index}", flush=True)
@@ -27,6 +30,40 @@ np.testing.assert_allclose(scope["error"], 2)
 np.testing.assert_allclose(scope["pca"].explained_variance_ratio_, [.8])
 np.testing.assert_allclose(scope["pca"].explained_variance_, [8/3])
 np.testing.assert_allclose(np.cov(scope["white_codes"], rowvar=False), np.eye(2))
+
+# Compare variance thresholds to an independent covariance eigenproblem.
+digit_data = scope["digit_data"]
+digit_eigenvalues = np.linalg.eigvalsh(np.cov(digit_data, rowvar=False))[::-1]
+digit_cumulative = np.cumsum(digit_eigenvalues) / digit_eigenvalues.sum()
+np.testing.assert_allclose(scope["cumulative_variance"], digit_cumulative, atol=1e-12)
+np.testing.assert_allclose(digit_cumulative[[9,19]], [.7382267688459534, .8943031165985267])
+assert np.searchsorted(digit_cumulative, .9) + 1 == 21
+assert scope["digit_denoiser"].n_components_ == 12
+noise_eigenvalues = np.linalg.eigvalsh(np.cov(scope["noisy_digit_data"], rowvar=False))[::-1]
+assert noise_eigenvalues[:11].sum() / noise_eigenvalues.sum() < .5
+assert noise_eigenvalues[:12].sum() / noise_eigenvalues.sum() >= .5
+np.testing.assert_allclose(np.mean((scope["noisy_digit_data"]-digit_data)**2),
+                           16.11244830782641, atol=1e-12)
+np.testing.assert_allclose(np.mean((scope["filtered_digit_data"]-digit_data)**2),
+                           7.269325473930928, atol=1e-10)
+
+# Balanced finite noise ensemble has exact identity covariance; no Monte Carlo tolerance.
+signal, projector = scope["Xc"], scope["fixed_projector"]
+entries = signal.size
+positive_impulses = np.sqrt(entries) * np.eye(entries).reshape(entries, *signal.shape)
+unit_noise = np.concatenate([positive_impulses, -positive_impulses])
+np.testing.assert_allclose(unit_noise.mean(axis=0), 0, atol=1e-14)
+flat_noise = unit_noise.reshape(2*entries, entries)
+np.testing.assert_allclose(flat_noise.T @ flat_noise / (2*entries), np.eye(entries), atol=1e-14)
+for noise_std in [.1, 1., 2.]:
+    observed = signal + noise_std * unit_noise
+    raw_error = np.mean(np.sum((observed-signal)**2, axis=(1,2)))
+    projected_error = np.mean(np.sum((observed @ projector-signal)**2, axis=(1,2)))
+    np.testing.assert_allclose([raw_error, projected_error], scope["noise_tradeoff"][noise_std], atol=1e-12)
+np.testing.assert_allclose(scope["noise_tradeoff"][.1], [.08, 2.04])
+np.testing.assert_allclose(scope["noise_tradeoff"][1.], [8, 6])
+np.testing.assert_allclose(scope["noise_tradeoff"][2.], [32, 18])
+print("PASS Digits variance thresholds/12-component filtering and exact fixed-projector noise tradeoff")
 rng = np.random.default_rng(20261025)
 for n in [7, 13, 31]:
     for d in [2, 3, 5]:

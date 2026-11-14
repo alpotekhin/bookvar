@@ -3,11 +3,13 @@ import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import YAML from 'yaml';
 import {describe,it,expect} from 'vitest';
+import {beforeTopicConsolidation} from '../tools/topic-consolidation-baseline.mjs';
 const root=resolve(import.meta.dirname,'../..');
 const file='00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md';
-const body=readFileSync(resolve(root,file),'utf8');
+const prior=(path:string)=>beforeTopicConsolidation(readFileSync(resolve(root,path),'utf8'),path,root,'2026-11-03-moe-gate-additions.json');
+const body=prior(file);
 const fm=YAML.parse(body.split('---')[1]);
-const registry=YAML.parse(readFileSync(resolve(root,'05 Источники/asset-registry.yml'),'utf8'),{merge:true}).assets;
+const registry=YAML.parse(prior('05 Источники/asset-registry.yml'),{merge:true}).assets;
 describe('sequence models explanation',()=>{
   it('keeps six executable examples and explicit operator boundaries',()=>{
     expect(body.match(/~~~python\n/g)).toHaveLength(6);

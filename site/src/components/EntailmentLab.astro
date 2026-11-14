@@ -1,0 +1,136 @@
+---
+import { continuationScores, entailmentInput, labels, stages } from '../lib/entailment-lab';
+const { lang, heading } = Astro.props as { lang: 'ru' | 'en'; heading: string };
+const ru = lang === 'ru';
+const models = ['GPT-1', 'GPT-2', 'GPT-3', 'LLaMA v1'];
+const initial = continuationScores('gpt2', 500);
+const t = ru ? {
+  intro: 'Из «A cat sleeps» следует «An animal rests». Сравните вход и оценки трёх меток.',
+  caveat: 'Числа учебные, модели не запускаются.',
+  model: 'Модель', shots: 'Размеченные примеры', second: 'Вероятность второго токена entailment', input: 'Вход модели',
+  candidate: 'Метка', score: 'Оценка', result: 'Выбор по оценкам', nojs: 'Для переключения нужен JavaScript. Расчёт можно проверить вручную ниже.',
+} : {
+  intro: '“A cat sleeps” entails “An animal rests.” Compare the input and the scores for the three labels.',
+  caveat: 'The scores are illustrative; no model runs here.',
+  model: 'Model', shots: 'Labeled examples', second: 'Probability of the second entailment token', input: 'Model input',
+  candidate: 'Label', score: 'Score', result: 'Choice by score', nojs: 'Enable JavaScript to change inputs. The worked calculation is below.',
+};
+const fmt = (n: number) => n.toLocaleString(lang, { maximumFractionDigits: 7 });
+---
+
+<section class="entailment" data-entailment={lang} aria-labelledby="entailment-lab">
+  <h2 id="entailment-lab">{heading}</h2>
+  <p>{t.intro} {t.caveat}</p>
+  <div class="controls">
+    <label>{t.model}
+      <select id="entailment-model" disabled>
+        {stages.map((stage, i) => <option value={stage} selected={stage === 'gpt2'}>{models[i]}</option>)}
+      </select>
+    </label>
+    <label id="entailment-shot-control" hidden>{t.shots}
+      <select id="entailment-shots" disabled>
+        <option value="0">0 (zero-shot)</option>
+        <option value="1">1 (one-shot)</option>
+        <option value="2">2 (two-shot)</option>
+      </select>
+    </label>
+  </div>
+  <h3>{t.input}</h3>
+  <pre id="entailment-input">{entailmentInput('gpt2', 0)}</pre>
+  <p id="entailment-mechanism">{ru ? 'После Relation: языковая голова оценивает весь словарь. Для метки из нескольких токенов перемножаем условные вероятности.' : 'After Relation:, the language-model head scores the whole vocabulary. Multiply the conditional probabilities for a label with multiple tokens.'}</p>
+  <div id="entailment-slider-control">
+    <label for="entailment-second">{t.second}: <output id="entailment-second-value" for="entailment-second">{fmt(.5)}</output></label>
+    <input id="entailment-second" type="range" min="0" max="1000" step="5" value="500" aria-valuetext={fmt(.5)} disabled />
+  </div>
+  <table>
+    <thead><tr><th scope="col">{t.candidate}</th><th scope="col">{t.score}</th></tr></thead>
+    <tbody>
+      {labels.map((name, i) => <tr><th scope="row"><code>{name}</code></th><td data-entailment-score={i}>{i === 0 ? initial.factors.map(fmt).join(' × ') + ' = ' : ''}{fmt(initial.scores[i])}</td></tr>)}
+    </tbody>
+  </table>
+  <p role="status">{t.result}: <strong id="entailment-result">neutral</strong></p>
+  <noscript><p>{t.nojs}</p></noscript>
+</section>
+
+<script>
+  import { classLogits, classProbabilities, continuationScores, entailmentInput } from '../lib/entailment-lab';
+  import type { Stage } from '../lib/entailment-lab';
+  const lab = document.querySelector<HTMLElement>('[data-entailment]');
+  if (lab) {
+    const lang = lab.dataset.entailment;
+    const ru = lang === 'ru';
+    const get = <T extends HTMLElement = HTMLElement>(id: string) => lab.querySelector<T>('#entailment-' + id)!;
+    const model = get<HTMLSelectElement>('model');
+    const shots = get<HTMLSelectElement>('shots');
+    const second = get<HTMLInputElement>('second');
+    const cells = [...lab.querySelectorAll<HTMLElement>('[data-entailment-score]')];
+    const fmt = (n: number) => n.toLocaleString(lang, { maximumFractionDigits: 7 });
+    const mechanism = {
+      gpt1: ru ? 'Дообученная голова над Extract выдаёт по одному логиту на класс. Softmax берётся по трём классам.' : 'The fine-tuned head above Extract emits one logit per class. Softmax runs over the three classes.',
+      gpt2: ru ? 'После Relation: языковая голова оценивает весь словарь. Для метки из нескольких токенов перемножаем условные вероятности.' : 'After Relation:, the language-model head scores the whole vocabulary. Multiply the conditional probabilities for a label with multiple tokens.',
+      gpt3: ru ? 'Размеченные примеры входят в запрос, веса остаются прежними. Здесь добавление примеров меняет только показанный текст: вероятности заданы отдельно.' : 'Demonstrations go in the prompt and the weights stay fixed. Here they change only the text on screen; the probabilities are supplied separately.',
+      llama: ru ? 'Правило оценки то же, но у entailment три токена в этом контексте. Третий множитель в расчёте зафиксирован на 0,8.' : 'The scoring rule is unchanged, but entailment has three tokens in this context. The third factor is fixed at 0.8 in the calculation.',
+    };
+    function update() {
+      const stage = model.value as Stage;
+      const hasShots = stage === 'gpt3' || stage === 'llama';
+      get('shot-control').hidden = !hasShots;
+      shots.disabled = !hasShots;
+      get('slider-control').hidden = stage === 'gpt1';
+      second.disabled = stage === 'gpt1';
+      get('input').textContent = entailmentInput(stage, Number(shots.value));
+      get('mechanism').textContent = mechanism[stage];
+      const p = fmt(Number(second.value) / 1000);
+      get('second-value').textContent = p;
+      second.setAttribute('aria-valuetext', p);
+      if (stage === 'gpt1') {
+        cells.forEach((cell, i) => {
+          cell.textContent = (ru ? 'логит ' : 'logit ') + classLogits[i] + ' → ' + fmt(Number(classProbabilities[i].toFixed(4)));
+        });
+        get('result').textContent = 'entailment';
+      } else {
+        const { factors, scores, winners } = continuationScores(stage, Number(second.value));
+        cells.forEach((cell, i) => {
+          cell.textContent = (i === 0 ? factors.map(fmt).join(' × ') + ' = ' : '') + fmt(scores[i]);
+        });
+        get('result').textContent = winners.length === 1 ? winners[0] :
+          (ru ? 'ничья: ' : 'tie: ') + winners.join(' / ');
+      }
+    }
+    model.disabled = false;
+    model.addEventListener('change', update);
+    shots.addEventListener('change', update);
+    second.addEventListener('input', update);
+    update();
+  }
+</script>
+
+<style>
+  .entailment {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.75rem;
+    padding: clamp(0.75rem, 2.5vw, 1.5rem);
+  }
+  .controls { display: flex; flex-wrap: wrap; align-items: end; gap: 1rem; }
+  .controls > label { margin: 0; }
+  .controls label:not([hidden]) { display: grid; gap: 0.25rem; }
+  select {
+    color: var(--sl-color-text);
+    background: var(--sl-color-bg);
+    font: inherit;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid var(--sl-color-gray-4);
+    border-radius: 0.35rem;
+  }
+  pre {
+    padding: 0.65rem;
+    background: var(--sl-color-bg-inline-code);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-size: var(--sl-text-sm);
+  }
+  input[type="range"] { display: block; width: 100%; max-width: 26rem; accent-color: var(--sl-color-accent); }
+  table { width: 100%; }
+  td, th { padding: 0.35rem 0.45rem; overflow-wrap: anywhere; }
+  [hidden] { display: none; }
+</style>

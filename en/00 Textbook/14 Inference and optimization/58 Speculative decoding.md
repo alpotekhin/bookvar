@@ -2,8 +2,8 @@
 title: "Speculative decoding"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-19
-last_verified: 2026-10-19
+last_updated: 2026-11-11
+last_verified: 2026-11-11
 source_language: mixed
 source_unit_id:
   - lecture-10-section-341-use-shortcuts-but-double-check-lossless
@@ -16,11 +16,13 @@ primary_sources:
   - https://arxiv.org/html/2401.15077v3
   - https://aclanthology.org/2024.emnlp-main.422/
   - https://arxiv.org/html/2503.01840v3
+  - https://openreview.net/forum?id=4exx1hUffq
+  - https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/eagle/traineagle3/cnets.py
   - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py
 locale: en
 translation_status: current
-canonical_revision: "32085af4415e2aa3904eded4a14c42e7ced65c81d4288c42af4a5d099ff597ad"
-translation_reviewed: "2026-10-29"
+canonical_revision: "dfbcfb894a4bb73d9e27175e5a6a7b8f99304fe763b9529cfb2c6d4d22e87a05"
+translation_reviewed: "2026-11-11"
 translation_of: "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md"
 ---
 
@@ -328,21 +330,29 @@ no early stop.
 
 <a id="полный-алгоритм-на-исходном-слайде"></a>
 
-## The full algorithm in the original slide
+<a id="the-full-algorithm-in-the-original-slide"></a>
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-algorithm.png]]
+## Algorithm 2: drafting, verification and correction
 
-*Charlie Chen et al.,
-[Algorithm 2, Speculative Sampling](https://arxiv.org/abs/2302.01318v1),
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/);
-also in [Stanford CS336 Lecture 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L507-L535).
-The upper loop builds the draft, the target supplies $K+1$ distributions,
-and the lower loop accepts a prefix until the first rejection. The code
-above separates correction and bonus-token branches.*
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-algorithm.png|Paper pseudocode: K sequential draft steps, K+1 target distributions, then left-to-right verification. On rejection, sample from the residual.]]
 
-Target logits are computed in parallel, but prefix verification is logically
-sequential. A position's distribution is valid only after all earlier
-proposals have been accepted. Otherwise its conditioning prefix changes.
+*Charlie Chen et al., [Speculative Sampling, Algorithm 2, p. 3](https://arxiv.org/pdf/2302.01318v1#page=3),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Unmodified crop from
+[Stanford CS336, Lecture 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/speculative-sampling-algorithm.png).*
+
+Follow the draft B, A, C from the worked example. The first loop produces
+all three proposals. Between the loops, the target computes four
+distributions: before B, after B, after B A, and after B A C.
+In the second loop, the first row accepts B; the second tests A and
+supplies the distribution for correction if A is rejected. Discard
+the last two rows on that branch: both assume A was accepted.
+Only if all three proposals pass does the fourth row supply a bonus token.
+
+In code, keep the prefix length at the start of the round as $n_0$.
+Check candidate $t$ at position $n_0+t$, conditioned on the accepted
+prefix, then advance the length by the number of emitted tokens,
+including the correction or bonus. This keeps the moving length $n$
+separate from candidate index $t$, which the original pseudocode mixes.
 
 The classical algorithm uses complete $p$ and $q$ distributions.
 Specialized algorithms and kernels may organize storage differently,
@@ -494,30 +504,38 @@ assert expected_progress(0, 4) == 1
 assert expected_progress(1, 4) == 5
 ```
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/speculative-review-2026-10/chen-lookahead.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/speculative-review-2026-10/chen-lookahead.png|Three panels sweep K from 0 to 7: time for 128 tokens, fraction of the K+1 token budget used, and time per cycle. XSum has its minimum on the left at K=3.]]
 
-*Chen et al., [Figure 1](https://arxiv.org/abs/2302.01318v1),
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-Left: time to generate 128 tokens. Center: the authors' acceptance
-efficiency, accepted output divided by $K+1$. Right: cycle time.
-The center curve is not the individual-check $\alpha$ used above.
-XSum latency is lowest around $K=3$. Full rendering of the vector
-figure included in the paper, uncropped.*
+*Chen et al., [Figure 1, p. 7](https://arxiv.org/pdf/2302.01318v1#page=7),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Full rendering of the original vector figure.*
 
-Different tasks already had different optimal settings in the original
-work. A longer draft helps only while additional progress pays for
-drafting and verification. Dynamic lookahead estimates this per request
-instead of fixing one $K$ for every case.
+On the left, XSum's time for 128 tokens falls through $K=3$ and then
+rises. On the right, time per cycle grows roughly linearly with $K$:
+drafting takes longer. In the center, the authors divide mean progress
+per cycle by the maximum of $K+1$. At $K=0$ the ratio is 1 even though
+there are no draft candidates: the ordinary step still emits one token.
+This curve is not the probability $\alpha$ of accepting the next proposal.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-results.png]]
+Reading the XSum points, a cycle emits about 2.8 tokens in 20 ms at $K=3$
+and about 3.6 in 28 ms at $K=7$. The longer draft emits more per cycle
+but takes more time per token. The HumanEval curve on the left keeps
+falling through $K=7$; the plot gives no measurements beyond that point.
+With dynamic lookahead, the system chooses $K$ based on the current
+request and the cost of another cycle.
 
-*Chen et al., Table 1, also used in CS336.
-Chinchilla 70B, 4B draft, batch one, $K=4$, 16 TPU v4:
-reported speedups are about 1.9–2.0× on XSum and 2.46× on HumanEval.
-Sampling settings are listed in the table and paper.
-These are the authors' experiment, not Bookvar measurements.
-[Original](https://arxiv.org/abs/2302.01318v1),
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-results.png|Table for batch size 1 and K=4. XSum and HumanEval rows report task scores, mean time per token, and published speedup.]]
+
+*Chen et al., [Table 1, p. 6](https://arxiv.org/pdf/2302.01318v1#page=6),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Unmodified crop from
+[Stanford CS336, Lecture 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/speculative-sampling-results.png).
+The experiment uses Chinchilla 70B, a 4B draft, and 16 TPU v4 chips.*
+
+The table fixes the draft at $K=4$ with a one-request batch.
+For HumanEval, mean time per token drops from 14.1 to 5.73 ms,
+a ratio of $14.1/5.73\approx2.46$. The authors report $1.92\times$
+for nucleus XSum, while the displayed times give $14.1/7.52\approx1.88$.
+This is a discrepancy in the published table, not a new measurement.
+The XSum optimum at $K=3$ comes from the plot, not the $K=4$ table.
 
 The paper chose a shallow draft partly to reduce communication latency
 on the same TPU devices. Fewer parameters alone do not imply the fastest
@@ -766,9 +784,20 @@ The resulting $g$ is combined with the selected next-token embedding.
 A projection and small decoder produce an internal state $a$, from which
 the LM head obtains token probabilities.
 
+<a id="eagle3-inference-figure"></a>
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-inference-figure5.png|The target processes How can. Across three draft steps, the draft's own a states stand in for unavailable target g states after I and do.]]
+
+*Yuhui Li, Fangyun Wei, Chao Zhang and Hongyang Zhang,
+[EAGLE-3, Figure 5](https://arxiv.org/html/2503.01840v3#S3.F5). Unmodified original.
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), [authors' NeurIPS version on OpenReview](https://openreview.net/forum?id=4exx1hUffq).*
+
 In the paper's example, the target processed “How can” and selected “I.”
-The first cheap step uses $g_{\mathrm{how}},g_{\mathrm{can}}$ and shifted
-embeddings to produce $a_{\mathrm I}$ and token “do.”
+On the left, one projection compresses three features per input position
+to one $g$. At the bottom of step 1 on the right, the drafter pairs
+$g_{\mathrm{how}}$ with $e_{\mathrm{can}}$ and $g_{\mathrm{can}}$ with
+$e_{\mathrm I}$. The last pair gives $a_{\mathrm I}$; the LM head turns
+that state into the distribution from which “do” is drawn.
 For the second step, true $g_{\mathrm I}$ is unavailable: the target has
 not processed “I.” The draft substitutes its own $a_{\mathrm I}$.
 Then $a_{\mathrm{do}}$ substitutes for unavailable $g_{\mathrm{do}}$,
@@ -785,18 +814,61 @@ Training only on true target $g$ would expose later inference steps to a
 different input-state distribution. Unrolled training steps expose the
 draft to that regime in advance.
 
-These steps need their own attention mask. For training text “How can I,”
+<a id="eagle3-training-mask"></a>
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-training-mask-figure6.svg|Three attention masks: the original causal triangle, then one and two diagonal blocks for continuations of separate prefixes.]]
+
+*Li et al., [EAGLE-3, Figure 6](https://arxiv.org/html/2503.01840v3#S3.F6).
+Unmodified original vector figure.
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), [authors' NeurIPS version on OpenReview](https://openreview.net/forum?id=4exx1hUffq).*
+
+In the upper-left mask, each query reads the original text up to its own
+position. For training text “How can I,”
 predictions “are,” “we,” “do” continue three different prefixes:
 “How,” “How can,” “How can I.” They are not the sequence “are we do.”
 At the next step, “are” sees “How → are,” “we” sees “How can → we,”
 and “do” sees “How can I → do.” Attention between new branches is
 therefore diagonal; access to original text follows the relevant prefix.
-Position labels come from the training data.
 
-Original [Figure 5, inference, and Figure 6, training masks](https://proceedings.neurips.cc/paper_files/paper/2025/file/c7b5a35ea98b62512a869c19ea7b03cb-Paper-Conference.pdf#page=5)
-show both on one published page. Symbols $f,g,a$ are not interchangeable:
-EAGLE-1 ties its predicted vector to a teacher feature; EAGLE-3 has no
-such regression constraint.
+In the bottom mask, “help” reads four keys: “How,” “can,” “we” and
+itself. “I” is beyond that branch's original prefix; “are” belongs
+to another branch. Each of the two extra key groups therefore has
+its own diagonal block. A causal mask over the entire flattened array
+would allow additional connections.
+
+<a id="eagle3-training-targets"></a>
+
+#### What the drafter sees and what it learns to match
+
+Figure 6 labels branches with tokens. The
+[released training code, `dataprepare` and `forward`](https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/eagle/traineagle3/cnets.py#L713-L866)
+passes hidden states between steps. The target computes features and
+logits on the training sequence once. The drafter starts from target
+features $g$. On the second step it feeds its previous output $a$
+back in, while token IDs and teacher logit rows shift by one more
+position. The code takes these IDs from the training sequence;
+it does not resample a draft token at every training step. At inference,
+the next embedding comes from the token actually selected.
+
+Suppose the teacher's vocabulary is A, B, C and the drafter predicts
+only A and B. If the teacher assigns probabilities $(0.15,0.60,0.25)$,
+its argmax B is in the draft vocabulary. The code keeps the logits
+for A and B and applies softmax again. Equivalently, divide their
+probabilities by $0.75$ to obtain the target $(0.2,0.8)$.
+With draft output $(0.25,0.75)$, the position contributes
+
+$$
+-0.2\ln(0.25)-0.8\ln(0.75)\approx0.5074
+$$
+
+before averaging. A one-hot label for B would give
+$-\ln(0.75)\approx0.2877$. The soft target asks the drafter to
+match the distribution over the reduced vocabulary, including A.
+When the teacher's argmax is the excluded C, the code masks the
+position out of the loss. [`main.py`](https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/eagle/traineagle3/main.py#L279-L285)
+combines the unrolled losses with weights $1,0.8,0.64,\ldots$.
+These details describe the pinned training code; they do not define
+the inference acceptance rule.
 
 <a id="пример-расчёта-выигрыша-дерева"></a>
 
@@ -817,12 +889,34 @@ That is about 2.71× relative to 10 ms/token. If another domain lowers
 progress to 1.4 tokens at the same cost, the result is 11.07 ms/token,
 slower than baseline. These are teaching values, not an EAGLE run.
 
-With larger batches, the target can reuse weights effectively without
-drafting. Single-request speedups and large-batch throughput describe
-different conditions. EAGLE-3 separately reports 1.38× throughput at
-batch 64 in SGLang v0.4.4, using one H100, LLaMA 3.1 8B and MT-bench.
-That experiment used a length-three chain, not a tree. It is an author
-measurement, not a universal multiplier.
+<a id="eagle3-benchmark-reading"></a>
+
+### Reading the EAGLE-3 speedup chart
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3r.jpg|Speedups over vanilla decoding for four target models; the LLaMA 3.1 8B bars show 3.2× for EAGLE-2 and 4.4× for EAGLE-3.]]
+
+*Yuhui Li, Fangyun Wei, Chao Zhang and Hongyang Zhang,
+[chart from the official EAGLE repository](https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/figs/eagle3r.jpg),
+[Apache-2.0](/licenses/eagle-cb7e0841-Apache-2.0.txt), unmodified.
+The chat models use MT-bench; DeepSeek-R1-Distill-LLaMA-8B uses GSM8K.
+All bars use greedy decoding.*
+
+Each grey bar is vanilla decoding for that same model. For LLaMA-Instruct
+3.1 8B, [Table 1](https://arxiv.org/html/2503.01840v3#S4.T1) gives 3.16×
+for EAGLE-2 and 4.40× for EAGLE-3, rounded to 3.2× and 4.4× in the chart.
+Relative to EAGLE-2 the ratio is $4.40/3.16\approx1.39$. These are two
+configurations: in [Appendix A](https://arxiv.org/html/2503.01840v3#A1)
+the authors increase tree depth from 6 to 8 while keeping the node
+budget fixed. The chart does not isolate the effect of the training
+objective. For Vicuna-13B, the repository chart shows 4.1× for EAGLE-2
+but Table 1 reports 4.26×; do not combine these values in one ratio.
+
+[Section 4.3](https://arxiv.org/html/2503.01840v3#S4.SS3) measures
+throughput in a separate SGLang v0.4.4 run at batch 64. It uses one H100,
+the same LLaMA-Instruct 3.1 8B and MT-bench, and a length-three chain
+rather than a tree. The authors report 1.38× over vanilla SGLang.
+The proximity to 1.39× is incidental: the two ratios have different
+baselines and measure different quantities.
 
 <a id="когда-ускорения-не-будет"></a>
 
@@ -880,6 +974,7 @@ for matched-load comparisons.
 - [Stanford CS336 Lecture 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L507-L543): mechanism and two-token proof.
 - [Google Research: Looking back at speculative decoding](https://research.google/blog/looking-back-at-speculative-decoding/): authors' visualization.
 - [EAGLE, §3 and Appendix A.2](https://arxiv.org/html/2401.15077v3#S3), [EAGLE-2, §3–4](https://aclanthology.org/2024.emnlp-main.422/), [EAGLE-3, §3](https://arxiv.org/html/2503.01840v3#S3): feature drafting and tree variants.
+- [[05 Источники/Papers/EAGLE-3.md|EAGLE-3: paper, original figures, and training code]].
 - [Universal Assisted Generation](https://huggingface.co/blog/universal_assisted_generation): tokenizer synchronization.
 - Zhao et al., [FR-Spec: Accelerating Large-Vocabulary Language Models via Frequency-Ranked Speculative Sampling](https://aclanthology.org/2025.acl-long.198/): reducing the draft LM head's vocabulary; [authors' implementation](https://github.com/thunlp/FR-Spec).
 - Hu et al., [GRIFFIN: Effective Token Alignment for Faster Speculative Decoding](https://arxiv.org/abs/2502.11018v3): token and feature alignment when training the drafter; [authors' implementation](https://github.com/hsj576/GRIFFIN).

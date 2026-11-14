@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-31",
+  "scope": "Original course visual/empirical additions after a full clustering owner/source comparison. All existing derivations, three programs and fourteen embeds retained.",
+  "files": [
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/06 Кластеризация и её ограничения.md",
+      "before_sha256": "4a09c7bd9dab975e556ee7eb44ae18a84adbf45061f274e6aedd6bac7ad77455",
+      "after_sha256": "29488104342c39478edbe451c0f52bbb6cdb108d03e63f34cea22a7cef22069c",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-25\nlast_verified: 2026-10-25",
+          "new": "last_updated: 2026-10-31\nlast_verified: 2026-10-31"
+        },
+        {
+          "old": "## Устойчивость",
+          "new": "### Why the metrics select different numbers of clusters\n\nThe MOOC experiment uses 1,250 Wikinews articles with five editorial\ncategories: business, entertainment, sport, politics and tech.\n`StringEncoder` converts the texts into numerical features; k-means then\ngroups those vectors without using the category labels during its fit.\nV-measure and ARI compare the resulting groups with the editorial categories.\nSilhouette instead evaluates distances within and between the predicted\ngroups. These criteria need not select the same partition.\n\n![[00 Учебник/Assets/Figures/curated/classical-ml-clustering/mooc-news-external-metrics.png|Original MOOC V-measure and ARI curves for Wikinews clustering]]\n\n*scikit-learn MOOC authors,\n[Clustering performance metrics in the presence of labels](https://inria.github.io/scikit-learn-mooc/python_scripts/clustering_supervised_metrics.html),\nCC BY 4.0. Complete original figure, unchanged. Blue and orange curves show\ntraining and validation scores across five `ShuffleSplit` partitions with\n75% used for fitting k-means. The error bars describe variation across these\npartitions, not a confidence interval.*\n\nAmong the tested values from 2 through 10, both external metrics reach their\nlargest mean near 7. Their values remain far below 1: the seven groups do\nnot exactly reproduce the five editorial categories. Nor does this result\nestablish that there are seven underlying topics. It identifies a useful\ncandidate under two specified agreement criteria and one text representation.\n\nIn the source code, `StringEncoder` is fitted once on all articles before\nthese splits. The curves therefore compare k-means fits within that fixed\nrepresentation. They are not a held-out evaluation of the complete\ntext-encoding-and-clustering pipeline. To evaluate the whole procedure on\nnew articles, refit the encoder inside each training partition as well.\n\n![[00 Учебник/Assets/Figures/curated/classical-ml-clustering/mooc-news-silhouette.png|Original MOOC silhouette curves for the same news representation]]\n\n*scikit-learn MOOC authors,\n[Clustering performance metrics in the presence of labels](https://inria.github.io/scikit-learn-mooc/python_scripts/clustering_supervised_metrics.html),\nCC BY 4.0. Complete original figure, unchanged. Each pale line uses a different\nhalf-sample for fitting and predicts the other half; the black line is their\nmean over ten splits. These split sizes differ from the preceding experiment.\nThe encoder is again fixed before splitting.*\n\nThe silhouette analysis tests 2–10 clusters and then 20, 30, 40, 50, 60 and 70.\nIts mean reaches a maximum near 30, at only about 0.16. For these vectors,\nthe smaller groups give a better balance of within-group and between-group\ndistances. The peak does not prove that every small group\nhas a distinct editorial meaning, and adding further clusters does not keep\nimproving the score.\n\n> However, categorizing news articles in too fine-grained topics would make the\n> navigation on a news website too confusing. Therefore for this application, it\n> can be meaningful to select a number of clusters that is smaller than the\n> number of clusters which maximizes the silhouette score.\n\n*scikit-learn MOOC authors, same lesson, CC BY 4.0.\nOriginal English excerpt; not translated.*\n\nIf the objective is to reproduce those five categories, the category labels\ncan instead train a supervised classifier. If the objective is to find\nalternative groupings, inspect representative articles, mixed-topic articles\nand the proposed navigation before selecting a number of groups. Once\neditorial labels or downstream outcomes influence that choice, they are part\nof model selection; an independent assessment needs separate data.\n\n## Устойчивость"
+        },
+        {
+          "old": "## Кластеризация как построение признаков",
+          "new": "### Quantile preprocessing and discrete layers\n\nThe MOOC's customer-segmentation exercise uses three RFM features:\nrecency, frequency and monetary value. It repeatedly clusters half-samples\nof a 2,000-customer dataset, comparing `StandardScaler` with\n`QuantileTransformer`. Both runs use five initializations of k-means.\nIn that experiment the quantile transformation makes the silhouette curves\nsomewhat more stable, but the scores remain low. The illustrated six-cluster\npartition below is a further inspection of the full dataset, not the value\nthat maximized silhouette in every half-sample.\n\n![[00 Учебник/Assets/Figures/curated/classical-ml-clustering/mooc-rfm-quantile-layers.png|Original MOOC customer clusters in quantile-transformed RFM space]]\n\n*scikit-learn MOOC authors,\n[Solution for Exercise M4.01, Stability of k-means](https://inria.github.io/scikit-learn-mooc/python_scripts/clustering_sol_01.html),\nCC BY 4.0. Complete original figure, unchanged. All three axes are transformed\nfeature values, not days, purchase counts or money. Colours denote the six\nk-means groups; the planes at repeated frequency values are a property of\nthe data and transformation, not six independently established customer types.*\n\n> We can observe that the quantile-transformed data has a structure of layered\n> planes because of the discrete integer levels for the lowest values of the\n> \"Frequency\" feature which are overrepresented in the dataset.\n\n*scikit-learn MOOC authors, same solution, CC BY 4.0.\nOriginal English source comment, presented as prose without translation.*\n\nA quantile transformer estimates each feature's distribution from training\nvalues and maps its quantiles to a chosen output distribution. With uniform\noutput, feature values become positions between 0 and 1. This is nonlinear:\nequal differences in purchase counts need not remain equal distances.\nRepeated input values receive the same transformed value. A discrete\nfrequency feature therefore retains repeated coordinate levels; the\ntransformation does not turn it into a continuous distribution.\n\nFor five counts $(0,1,1,2,100)$ and five quantiles, the fitted training\nquantiles are those same sorted values. Their uniform reference positions\nare $(0,0.25,0.5,0.75,1)$. Scikit-learn symmetrically interpolates repeated\ninterior values: each occurrence of 1 receives the middle position 0.375.\nThe transformed values are consequently $(0,0.375,0.375,0.75,1)$.\nThe original gap from 1 to 2 was 1 and becomes 0.375; the gap from 2 to 100\nwas 98 and becomes 0.25. K-means now optimizes distances in this changed\ngeometry. None of these steps establishes that either gap separates\nmeaningful customer groups.\n\n```python\nimport numpy as np\nfrom sklearn.preprocessing import QuantileTransformer\n\npurchase_counts = np.array([0., 1., 1., 2., 100.])[:, None]\nquantile_map = QuantileTransformer(\n    n_quantiles=5, output_distribution=\"uniform\", random_state=0,\n)\ncount_positions = quantile_map.fit_transform(purchase_counts).ravel()\nnp.testing.assert_allclose(count_positions, [0., .375, .375, .75, 1.])\nnp.testing.assert_allclose(quantile_map.inverse_transform(\n    count_positions[:, None]\n), purchase_counts)\nprint(\"Transformed counts:\", count_positions)\n```\n\nChanging rubles to thousands of rubles leaves the earlier standardized\ndistances unchanged. Quantile preprocessing changes relative distances.\nIts stability should therefore be assessed together with the\nresulting customer profiles, not by comparing silhouette values alone across\ndifferent transformed spaces. The source's layered plot is a reason to\ninspect the frequency distribution and the other two features, rather than\nto interpret every coloured region as a customer segment. Transformation\ndetails are documented in\n[scikit-learn, QuantileTransformer](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.QuantileTransformer.html).\n\n## Кластеризация как построение признаков"
+        },
+        {
+          "old": "different transformed spaces. The source's layered plot is a reason to\ninspect the frequency distribution and the other two features, rather than\nto interpret every coloured region as a customer segment. Transformation\ndetails are documented in",
+          "new": "different transformed spaces. Transformation details are documented in"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "5124334acc38c45e63fe12bd7ef4181fd0fedc8af5de85fefba7e3b9ac174b5e",
+      "after_sha256": "28506207ccfca05a7f27afa441c1c03f8a972f4f5776262a749b7690b0515dbf",
+      "changes": [
+        {
+          "old": "  - id: curated-evaluation-transformed-target-42c821c57965",
+          "new": "  - id: curated-clustering-mooc-news-external-metrics-712206c5a261\n    asset: 00 Учебник/Assets/Figures/curated/classical-ml-clustering/mooc-news-external-metrics.png\n    author: INRIA, scikit-learn MOOC contributors\n    source_url: https://github.com/INRIA/scikit-learn-mooc/blob/93840904e26a215ecddf1a30e9a5eb920284fb29/python_scripts/clustering_supervised_metrics.html\n    source_image_url: https://raw.githubusercontent.com/INRIA/scikit-learn-mooc/93840904e26a215ecddf1a30e9a5eb920284fb29/_images/712206c5a2610cac4dc2010e563719e91af6d217784fea59941e2a53a4f16f1b.png\n    commit: 93840904e26a215ecddf1a30e9a5eb920284fb29\n    sha256: 712206c5a2610cac4dc2010e563719e91af6d217784fea59941e2a53a4f16f1b\n    license: CC BY 4.0\n    license_url: https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE\n    license_evidence: 05 Источники/Originals/train-validation-test-2026-10-21/mooc-LICENSE.txt\n    license_evidence_sha256: f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f\n    derivation: source-raster-copy\n    provenance_confirmation: pinned-upstream-repository\n    metadata_status: verified\n    modifications: Unchanged original published image; no crop, text edits or redraw.\n    last_verified: 2026-10-31\n    used_in:\n      - 00 Учебник/01 Классическое машинное обучение/06 Кластеризация и её ограничения.md\n  - id: curated-clustering-mooc-news-silhouette-5604f75c9275\n    asset: 00 Учебник/Assets/Figures/curated/classical-ml-clustering/mooc-news-silhouette.png\n    author: INRIA, scikit-learn MOOC contributors\n    source_url: https://github.com/INRIA/scikit-learn-mooc/blob/93840904e26a215ecddf1a30e9a5eb920284fb29/python_scripts/clustering_supervised_metrics.html\n    source_image_url: https://raw.githubusercontent.com/INRIA/scikit-learn-mooc/93840904e26a215ecddf1a30e9a5eb920284fb29/_images/5604f75c9275f74e35b7679a4980af1f46372513ede60f273859d48cddcbca84.png\n    commit: 93840904e26a215ecddf1a30e9a5eb920284fb29\n    sha256: 5604f75c9275f74e35b7679a4980af1f46372513ede60f273859d48cddcbca84\n    license: CC BY 4.0\n    license_url: https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE\n    license_evidence: 05 Источники/Originals/train-validation-test-2026-10-21/mooc-LICENSE.txt\n    license_evidence_sha256: f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f\n    derivation: source-raster-copy\n    provenance_confirmation: pinned-upstream-repository\n    metadata_status: verified\n    modifications: Unchanged original published image; no crop, text edits or redraw.\n    last_verified: 2026-10-31\n    used_in:\n      - 00 Учебник/01 Классическое машинное обучение/06 Кластеризация и её ограничения.md\n  - id: curated-clustering-mooc-rfm-quantile-layers-cfa0c2204e8c\n    asset: 00 Учебник/Assets/Figures/curated/classical-ml-clustering/mooc-rfm-quantile-layers.png\n    author: INRIA, scikit-learn MOOC contributors\n    source_url: https://github.com/INRIA/scikit-learn-mooc/blob/93840904e26a215ecddf1a30e9a5eb920284fb29/python_scripts/clustering_sol_01.html\n    source_image_url: https://raw.githubusercontent.com/INRIA/scikit-learn-mooc/93840904e26a215ecddf1a30e9a5eb920284fb29/_images/cfa0c2204e8cb75cd4039771c841ab49d814bc10bd48fc555ca77eeefad574ef.png\n    commit: 93840904e26a215ecddf1a30e9a5eb920284fb29\n    sha256: cfa0c2204e8cb75cd4039771c841ab49d814bc10bd48fc555ca77eeefad574ef\n    license: CC BY 4.0\n    license_url: https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE\n    license_evidence: 05 Источники/Originals/train-validation-test-2026-10-21/mooc-LICENSE.txt\n    license_evidence_sha256: f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f\n    derivation: source-raster-copy\n    provenance_confirmation: pinned-upstream-repository\n    metadata_status: verified\n    modifications: Unchanged original published image; no crop, text edits or redraw.\n    last_verified: 2026-10-31\n    used_in:\n      - 00 Учебник/01 Классическое машинное обучение/06 Кластеризация и её ограничения.md\n  - id: curated-evaluation-transformed-target-42c821c57965"
+        }
+      ]
+    }
+  ],
+  "sourceComparison": {
+    "courseCommit": "0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6",
+    "pngOutputCommit": "93840904e26a215ecddf1a30e9a5eb920284fb29",
+    "fullyRead": [
+      [
+        "clustering_kmeans.py.md",
+        434
+      ],
+      [
+        "clustering_hdbscan.py.md",
+        329
+      ],
+      [
+        "clustering_supervised_metrics.py.md",
+        255
+      ],
+      [
+        "clustering_transformer.py.md",
+        237
+      ],
+      [
+        "clustering_sol_01.py.md",
+        371
+      ],
+      [
+        "clustering_sol_02.py.md",
+        229
+      ]
+    ],
+    "supplementary": [
+      "Complete archived hdbscan-how.rst, 403 lines: core distances, mutual reachability, MST, component hierarchy, condensation, EOM, membership strength.",
+      "Complete scikit-learn 1.9.1 QuantileTransformer._transform_col implementation, fetched from the release tag; current KMeans/HDBSCAN/QuantileTransformer API pages located and compared with actual CPU behavior. Not a complete read of all API navigation or guide pages."
+    ],
+    "exclusions": [
+      "K-means optimizes squared distances, not an unsquared-distance objective; initialization/restarts do not guarantee a global optimum.",
+      "The MOOC transformer paragraph says nearest centroid, but KMeans.transform returns distances to every centroid; the current complete nonlinear feature example preserves the correct contract.",
+      "Source external-metric curves fit StringEncoder on all texts before CV: they evaluate KMeans within a fixed representation, not the full pipeline. The silhouette experiment uses different splits; no independent full-pipeline estimate inferred.",
+      "Source silhouette peaks are dataset/representation-dependent, not proof of seven or thirty true topics. No universal monotonic test-quality or cluster-count claim imported.",
+      "Noise label -1 is not a cluster count; sklearn and contrib HDBSCAN neighbor conventions differ.",
+      "Quantile maps preserve repeated feature values; prettier or more stable plots do not establish useful customer segments. No source-wide California Housing/RFM/Wikinews rerun claimed.",
+      "An initial six-observation quantile toy exhibited floating percentile tie shifts; it was replaced with an exactly representable five-quantile example and checked against the released interpolation code, without loosening tolerances."
+    ]
+  },
+  "verification": {
+    "publishedBlocks": 4,
+    "figureEmbeds": 17,
+    "numeric": "Four published programs and independent checks passed at final SHA 29488104342c39478edbe451c0f52bbb6cdb108d03e63f34cea22a7cef22069c. Existing HDBSCAN copy-default FutureWarnings retained. Initial quantile toy discrepancy was corrected against actual release behavior without loosening tolerances.",
+    "reader": "Three new originals checked desktop 1280x720, mobile 360x800 fitted/2x/pan with caption tails, and RFM reader 1280x1040. Three tables 313/313, document 345/345; zero math errors/overflow. Honest EN fallback checked. Fourteen preceding embeds unchanged; earlier full visual checks remain historical.",
+    "build": "Final root build 2007 routes, 2011 HTML files; 205 scoped HTML/preservation checks passed; zero broken internal links. 848895854 bytes, 5567 files. Registry/preservation 170 checks passed before final prose-only deletion; registry/images unchanged and final source/journal preservation rerun. An old three-code-block HTML expectation was updated to four plus explicit new program identifiers.",
+    "published": false
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-30",
+  "scope": "Replace the unsupported MML embed with complete native D2L vector-addition and angle diagrams; retain the polynomial explanation and direct MML figure link. Archive the old raster privately without rewriting Git history.",
+  "files": [
+    {
+      "source": "00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md",
+      "before_sha256": "cad5dc0c553788b6c0fab04f627ad4af9a8bea76f098f4f8f3019c098b76b14f",
+      "after_sha256": "f8f973fe44cec924d2bf470fe587dfdfe848a16e779d89b633d1f1c7d576158a",
+      "changes": [
+        {
+          "old": "  - https://d2l.ai/chapter_preliminaries/linear-algebra.html\n",
+          "new": "  - https://d2l.ai/chapter_preliminaries/linear-algebra.html\n  - https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/geometry-linear-algebraic-ops.html\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/foundations-source-first/mml-vector-geometry.png]]\n\n*Слева показано сложение геометрических векторов, справа — графики функций,\nкоторые тоже можно рассматривать как векторы. Конкретные коэффициенты\nмногочленов в примере выше выбраны отдельно и не описывают эти кривые.\nФрагмент рис. 2.1 из книги Marc Peter\nDeisenroth, A. Aldo Faisal, Cheng Soon Ong,\n[Mathematics for Machine Learning, p. 17](https://mml-book.github.io/book/mml-book.pdf).*\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-native-geometry-2026-10-30/vec-add.svg]]\n\n*Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola,\n[D2L, Geometry of Vectors, Fig. 22.1.3](https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/geometry-linear-algebraic-ops.html).\n“We can visualize vector addition by first following one vector, and then another.”\nComplete original SVG, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/);\nno crop, redraw or translated labels.*\n\nГеометрические векторы и графики многочленов сопоставлены также в\n[MML, рис. 2.1, печатная с. 17 / страница PDF 23](https://mml-book.github.io/book/mml-book.pdf#page=23).\n"
+        },
+        {
+          "old": "Например,\n\n$$\n\\begin{aligned}\n\\begin{bmatrix}1&2&-1\\end{bmatrix}",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-native-geometry-2026-10-30/vec-angle.svg]]\n\n*Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola,\n[D2L, Dot Products and Angles, Fig. 22.1.4](https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/geometry-linear-algebraic-ops.html#dot-products-and-angles).\nThe angle $\\theta$ is measured between the two nonzero vectors.\nComplete original SVG, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/);\nno crop, redraw or translated labels.*\n\nНапример,\n\n$$\n\\begin{aligned}\n\\begin{bmatrix}1&2&-1\\end{bmatrix}"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "89e0f8a294a82bfe0e7e82792981dc18f7cb6065ea37f50c675e397e4562c94a",
+      "after_sha256": "297fac574d91da2763a1d95b21f80b9961a21fe0927e8965fb4fb0105d5b774a",
+      "changes": [
+        {
+          "old": "  - id: curated-mml-vector-geometry-00000000009e\n    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/mml-vector-geometry.png\n    author: Marc Peter Deisenroth; A. Aldo Faisal; Cheng Soon Ong\n    source_url: https://mml-book.github.io/book/mml-book.pdf\n    license: unverified; freely available educational book, no reproduction grant confirmed\n    license_url: https://mml-book.github.io/\n    modifications: Figure 2.1 rendered from page 17; the diagram is preserved, while the page header, original side caption, and surrounding text are removed because Bookvar provides its own linked caption\n    used_in:\n      - 00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md\n    metadata_status: needs-confirmation\n    provenance_confirmation: legacy-attribution-reviewed-permission-unconfirmed\n    source_asset: raw/papers/external/mml-book.pdf\n    source_page: 17\n    derivation: pdf-page-render-crop\n    rights_status: publisher-figure-reproduction-unverified",
+          "new": "  - {\"id\":\"curated-d2l-vec-add-c4cafd62fbe2\",\"asset\":\"00 Учебник/Assets/Figures/curated/tensor-native-geometry-2026-10-30/vec-add.svg\",\"author\":\"Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola\",\"source_url\":\"https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/geometry-linear-algebraic-ops.html\",\"source_image_url\":\"https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/vec-add.svg\",\"source_figure\":\"22.1.3\",\"commit\":\"23d7a5aecceee57d1292c56e90cce307f183bb0a\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/tensor-native-geometry-2026-10-30/vec-add.svg\",\"source_asset_sha256\":\"c4cafd62fbe2eaff376fb6142f4bbd78d2cb5cfc90448042db61a91a1267f384\",\"sha256\":\"c4cafd62fbe2eaff376fb6142f4bbd78d2cb5cfc90448042db61a91a1267f384\",\"bytes\":13857,\"source_viewbox\":[0,0,202,154],\"source_code\":\"05 Источники/Originals/foundations-2026-10-24/geometry-linear-algebraic-ops.md\",\"source_code_url\":\"https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_appendix-mathematics-for-deep-learning/geometry-linear-algebraic-ops.md\",\"source_code_sha256\":\"066c856e5860ea00a7cd49542250e4c97dc810c0a9bfbe3c1e4bf2e66d7c356e\",\"license\":\"CC BY-SA 4.0\",\"license_url\":\"https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE\",\"license_evidence\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"license_evidence_sha256\":\"a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\",\"public_license_copy\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"derivation\":\"source-svg-copy\",\"modifications\":\"None. Complete original SVG copied byte-for-byte; no crop, redraw, relabeling or translation.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-10-30\",\"used_in\":[\"00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md\"]}\n  - {\"id\":\"curated-d2l-vec-angle-46cda6991715\",\"asset\":\"00 Учебник/Assets/Figures/curated/tensor-native-geometry-2026-10-30/vec-angle.svg\",\"author\":\"Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola\",\"source_url\":\"https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/geometry-linear-algebraic-ops.html\",\"source_image_url\":\"https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/vec-angle.svg\",\"source_figure\":\"22.1.4\",\"commit\":\"23d7a5aecceee57d1292c56e90cce307f183bb0a\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/tensor-native-geometry-2026-10-30/vec-angle.svg\",\"source_asset_sha256\":\"46cda699171505338dbd063fd66b0cbacecd95eb8db16b5bc89a7456380e9c3f\",\"sha256\":\"46cda699171505338dbd063fd66b0cbacecd95eb8db16b5bc89a7456380e9c3f\",\"bytes\":11570,\"source_viewbox\":[0,0,205,154],\"source_code\":\"05 Источники/Originals/foundations-2026-10-24/geometry-linear-algebraic-ops.md\",\"source_code_url\":\"https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_appendix-mathematics-for-deep-learning/geometry-linear-algebraic-ops.md\",\"source_code_sha256\":\"066c856e5860ea00a7cd49542250e4c97dc810c0a9bfbe3c1e4bf2e66d7c356e\",\"license\":\"CC BY-SA 4.0\",\"license_url\":\"https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE\",\"license_evidence\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"license_evidence_sha256\":\"a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\",\"public_license_copy\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"derivation\":\"source-svg-copy\",\"modifications\":\"None. Complete original SVG copied byte-for-byte; no crop, redraw, relabeling or translation.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-10-30\",\"used_in\":[\"00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md\"]}"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tests/fixtures/legacy-unhashed-assets.json",
+      "before_sha256": "f2c219f374106ebd99a0226b19fd8b2511a56105ea3b7ddf32333abbbaae032f",
+      "after_sha256": "bef686dee7f2104a08942935c20f9accf5ffefd944330476eb18032137f61a37",
+      "changes": [
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/foundations-source-first/mml-vector-geometry.png\",\n    \"00 Учебник/Assets/Figures/curated/gemma-2/figure1-memorization-tight.png\",\n",
+          "new": "    \"00 Учебник/Assets/Figures/curated/gemma-2/figure1-memorization-tight.png\",\n"
+        }
+      ]
+    }
+  ],
+  "binary_moves": [
+    {
+      "from": "00 Учебник/Assets/Figures/curated/foundations-source-first/mml-vector-geometry.png",
+      "to": "05 Источники/Originals/mml-source-2026-10-30/mml-vector-geometry.png",
+      "sha256": "33959e0d35b9d53bec9aa488780a44bb6b5426c39e84818b7c0e5ffc86ba79d1"
+    }
+  ],
+  "source_manifest": "00 Учебник/Assets/Figures/curated/tensor-native-geometry-2026-10-30/assets.json",
+  "retained_source_manifest": "05 Источники/Originals/mml-source-2026-10-30/retired-figures.json"
+}

@@ -97,10 +97,9 @@ describe('independent reader paths', () => {
     const file = report.files[0];
     const current = readFileSync(resolve(root, file.source), 'utf8');
     const restored = beforeReaderRouteNavigation(current, file.source, root);
-    const changed = beforeReaderRouteNavigation(current + '\nUnreviewed explanation.\n', file.source, root);
     expect(createHash('sha256').update(restored).digest('hex')).toBe(file.before);
-    expect(createHash('sha256').update(changed).digest('hex')).not.toBe(file.before);
-    expect(changed).toContain('Unreviewed explanation.');
+    expect(() => beforeReaderRouteNavigation(current + '\nUnreviewed explanation.\n', file.source, root))
+      .toThrow('Unreviewed topic consolidation revision');
   });
   it('keeps the main sequence and each specialist module separate', () => {
     const paths = readingPaths(section);

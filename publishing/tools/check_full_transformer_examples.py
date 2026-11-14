@@ -260,4 +260,38 @@ for p in lm.parameters():
     assert p.grad is not None and torch.isfinite(p.grad).all()
 assert lm.head.weight is not lm.emb.weight
 print("PASS modern LM: dense RoPE/SDPA, all attention gradients, RMSNorm gradcheck, SwiGLU and causal prefixes")
+
+# Same lexical example in the two layouts. These tiny models verify
+# dependencies, not the ability to translate or the historical GPT-1 weights.
+with torch.no_grad():
+    source = torch.tensor([[3, 4]])  # кот спит
+    target = torch.tensor([[1, 5, 6, 7]])  # BOS the cat sleeps
+    encdec_cat = model(source, target)[0, 2]
+    self_row = model.dec[0].self_attn.last_weights[0, :, 2]
+    cross_row = model.dec[0].cross_attn.last_weights[0, :, 2]
+    assert self_row.shape == (2, 4) and cross_row.shape == (2, 2)
+    assert self_row[:, :3].gt(0).all() and self_row[:, 3].eq(0).all()
+    assert cross_row.gt(0).all()
+    torch.testing.assert_close(self_row.sum(-1), torch.ones(2, dtype=dtype))
+    torch.testing.assert_close(cross_row.sum(-1), torch.ones(2, dtype=dtype))
+    suffix_changed = torch.tensor([[1, 5, 6, 9]])
+    torch.testing.assert_close(model(source, suffix_changed)[0, 2], encdec_cat)
+    source_changed = torch.tensor([[3, 9]])
+    assert (model(source_changed, target)[0, 2] - encdec_cat).abs().max() > 1e-8
+    assert (model.encode(source_changed)[0][:, :1] -
+            model.encode(source)[0][:, :1]).abs().max() > 1e-8
+
+    stream = torch.tensor([[3, 4, 8, 5, 6, 7]])  # кот спит SEP the cat sleeps
+    lm.eval()
+    joined = lm(stream)
+    torch.testing.assert_close(lm(stream[:, :5])[0, 4], joined[0, 4])
+    stream_suffix = stream.clone()
+    stream_suffix[0, 5] = 9
+    torch.testing.assert_close(lm(stream_suffix)[0, 4], joined[0, 4])
+    stream_source = stream.clone()
+    stream_source[0, 1] = 9
+    changed = lm(stream_source)
+    torch.testing.assert_close(changed[0, 0], joined[0, 0])
+    assert (changed[0, 4] - joined[0, 4]).abs().max() > 1e-8
+print("PASS shared phrase: separate encoder/target paths vs one causal stream")
 print("PASS chapter SHA256", hashlib.sha256(CHAPTER.read_bytes()).hexdigest())

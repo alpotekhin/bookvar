@@ -55,6 +55,32 @@ def main():
     torch.testing.assert_close(ns["toy_rewards"], expected_r)
     torch.testing.assert_close(ns["toy_advantages"], expected_a)
     torch.testing.assert_close(ns["toy_returns"][1], torch.tensor([.4655, .49, 0], dtype=dtype))
+    # Follow the second token of the first rollout through the two losses.
+    t = (slice(0, 1), slice(1, 2))
+    advantage, critic_target = ns["toy_advantages"][t], ns["toy_returns"][t]
+    for ratio, actor_value, actor_grad in ((1., .4415, -.4415), (1.3, .5298, 0.)):
+        new_lp = (lp[t] + math.log(ratio)).requires_grad_()
+        token_loss = loss(new_lp, lp[t], advantage, mask[t])
+        assert math.isclose(-token_loss.item(), actor_value, abs_tol=1e-12)
+        assert math.isclose(torch.autograd.grad(token_loss, new_lp)[0].item(),
+                            actor_grad, abs_tol=1e-12)
+    pred = torch.full_like(critic_target, .52, requires_grad=True)
+    critic_error = pred - critic_target
+    assert math.isclose(critic_error.item(), -.4215, abs_tol=1e-12)
+    assert math.isclose(torch.autograd.grad(critic_error.square().mean(), pred)[0].item(),
+                        -.843, abs_tol=1e-12)
+
+    # AReaL Eq. 5: the weight is fixed, only the center of clipping changes.
+    p_b, p_p = (torch.full_like(advantage, p).log() for p in (.10, .20))
+    p_current = torch.full_like(advantage, .22).log().requires_grad_()
+    unit_advantage = torch.ones_like(advantage)
+    old_clip = loss(p_current, p_b, unit_advantage, mask[t])
+    decoupled_clip = (p_p - p_b).exp() * loss(p_current, p_p, unit_advantage, mask[t])
+    assert math.isclose(-old_clip.item(), 1.2, abs_tol=1e-12)
+    assert math.isclose(-decoupled_clip.item(), 2.2, abs_tol=1e-12)
+    assert torch.autograd.grad(old_clip, p_current)[0].item() == 0.
+    assert math.isclose(torch.autograd.grad(decoupled_clip, p_current)[0].item(),
+                        -2.2, abs_tol=1e-12)
     # Closed-form TD sum, independently of the helper's backward recurrence.
     for gamma in (0., .9, 1.):
         for lam in (0., .5, .95, 1.):

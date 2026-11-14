@@ -1,0 +1,17 @@
+Figure 1: A Neural Probabilistic Language Model
+Yoshua Bengio, Réjean Ducharme, Pascal Vincent, Christian Jauvin.
+Copyright (c) 2003 the authors.
+Journal of Machine Learning Research 3 (2003), 1137-1155.
+https://www.jmlr.org/papers/v3/bengio03a.html
+
+Source: publisher PDF, physical page 6, printed page 1142.
+https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf#page=6
+Complete original diagram and original caption. Rendered at 240 dpi;
+surrounding running header and body text excluded, no diagram edits.
+
+Reuse basis: the publisher's public Publication policy states that authors
+grant a CC-by license to the public and retain copyright.
+https://jmlr.org/author-info.html#publication
+The policy does not specify a CC BY version. The 2003 PDF has an author
+copyright notice but no named CC version. No version is inferred here.
+The pinned policy HTML and publisher PDF are recorded in the asset registry.

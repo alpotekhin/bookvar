@@ -15,10 +15,28 @@ from sklearn.ensemble import (
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/01 Классическое машинное обучение/04 Bagging, random forest и gradient boosting.md"
 blocks = re.findall(r"```python\n(.*?)```", CHAPTER.read_text(), re.S)
-assert len(blocks) == 3
+assert len(blocks) == 5
 scope = {}
 for i, code in enumerate(blocks):
     exec(compile(code, f"{CHAPTER}:python-{i+1}", "exec"), scope)
+# The whole base pipeline is cloned and refitted on each bootstrap draw.
+poly_bag = scope["poly_bag"]
+assert len(poly_bag.estimators_) == 100
+assert len({id(p) for p in poly_bag.estimators_}) == 100
+assert len({id(p.named_steps["minmaxscaler"]) for p in poly_bag.estimators_}) == 100
+np.testing.assert_allclose(scope["poly_predictions"].shape, [100, 3])
+np.testing.assert_allclose(poly_bag.predict(scope["poly_check"]), scope["poly_predictions"].mean(axis=0))
+poly_minima = []
+for fitted, indices in zip(poly_bag.estimators_, poly_bag.estimators_samples_):
+    scale = fitted.named_steps["minmaxscaler"]
+    drawn = scope["poly_x"][indices]
+    np.testing.assert_allclose(scale.data_min_, drawn.min(axis=0))
+    np.testing.assert_allclose(scale.data_max_, drawn.max(axis=0))
+    assert fitted.named_steps["polynomialfeatures"].n_output_features_ == 4
+    transformed = scale.transform(drawn)
+    assert transformed.min() >= -1e-14 and transformed.max() <= 1 + 1e-14
+    poly_minima.append(float(scale.data_min_[0]))
+assert len(set(poly_minima)) > 1  # preprocessing was not globally fitted once
 assert scope["oob_counts"].min() > 0
 np.testing.assert_allclose(scope["manual_oob"], scope["bag"].oob_prediction_)
 # Each tree must contribute only to points absent from that tree's draw.
@@ -173,6 +191,37 @@ many = GradientBoostingRegressor(
 ).fit(bin_x,target)
 np.testing.assert_allclose(many.predict(bin_x)[:3],many.predict(bin_x)[0])
 assert np.mean((target-many.predict(bin_x))**2) >= 1/6-1e-12
+# Independently sum the six rows on each side of each histogram boundary.
+np.testing.assert_allclose(scope["hist_G"], [1, -1, 0])
+np.testing.assert_allclose(scope["hist_H"], [.5, .5, .5])
+for boundary, expected_gain in [(0, 1.5), (1, 0)]:
+    left = scope["bin_index"] <= boundary
+    GL = scope["bin_gradient"][left].sum()
+    GR = scope["bin_gradient"][~left].sum()
+    HL = scope["bin_hessian"][left].sum()
+    HR = scope["bin_hessian"][~left].sum()
+    np.testing.assert_allclose(.5 * (GL**2/HL + GR**2/HR - (GL+GR)**2/(HL+HR)), expected_gain)
+np.testing.assert_allclose(scope["hist_gains"], [1.5, 0])
+np.testing.assert_allclose([-1/.5, -(-1)/1], [-2, 1])
+hist_step = HistGradientBoostingClassifier(
+    max_iter=1, max_depth=1, min_samples_leaf=1,
+    learning_rate=1, l2_regularization=0, early_stopping=False, random_state=0,
+).fit(scope["bin_index"].reshape(-1, 1), scope["bin_target"])
+np.testing.assert_allclose(hist_step.decision_function(scope["bin_index"].reshape(-1, 1)), [-2, -2, 1, 1, 1, 1])
+for statistic in [scope["bin_gradient"], scope["bin_hessian"]]:
+    left = scope["bin_index"] <= 0
+    parent = np.bincount(scope["bin_index"], weights=statistic, minlength=3)
+    left_hist = np.bincount(scope["bin_index"][left], weights=statistic[left], minlength=3)
+    right_hist = np.bincount(scope["bin_index"][~left], weights=statistic[~left], minlength=3)
+    np.testing.assert_allclose(parent - left_hist, right_hist)
+# The stated gains implement best-first ordering, not a fitted-data experiment.
+candidates = {"L": 4., "R": .1}
+chosen = max(candidates, key=candidates.get)
+assert chosen == "L"
+del candidates[chosen]
+candidates.update({"LL": 2., "LR": .5})
+assert max(candidates, key=candidates.get) == "LL"
+assert max(map(len, ["LLL", "LLR", "LR", "R"])) == 3
 # Construct the stated depth-two tree; greedy fitting need not choose this structure.
 constructed = np.where(raw_x <= 2.5,
                        np.where(raw_x <= 1.5,0,1),
@@ -210,8 +259,10 @@ for iteration,value in enumerate(losses,start=1):
     if stale == 2:
         break
 assert iteration == 5 and best_iteration == 3
-print("PASS: 3 published blocks; exact bootstrap/OOB; variance; forest feature scopes;"
+assert len(re.findall(r"!\[\[", CHAPTER.read_text())) == 17
+print("PASS: 5 published blocks; cloned pipeline/scaler states; exact bootstrap/OOB; variance; forest feature scopes;"
       " AdaBoost weights; boosting trajectory; CE gradient/Hessian; Newton leaves;"
       " optimal squared-error and imbalanced BCE intercepts; zero initialization;"
-      " multiclass trees; binning limit; stump interactions; stopping vs best iteration.")
+      " multiclass trees; binning limit; histogram scan/subtraction; best-first order;"
+      " stump interactions; stopping vs best iteration; 17 figures.")
 print(f"Chapter SHA-256: {hashlib.sha256(CHAPTER.read_bytes()).hexdigest()}")

@@ -15,7 +15,7 @@ const packet='05 Источники/Originals/gan-dcgan-2026-10-28/d2l/';
 describe('source-first GAN/DCGAN reader',()=>{
   it('retains eight complete source bodies rather than replacing them with API fragments',()=>{
     const text=read(chapter);
-    expect(text.match(/^```python$/gm)).toHaveLength(14);
+    expect(text.match(/^```python$/gm)).toHaveLength(15);
     expect(text.match(/^!\[\[/gm)).toHaveLength(5);
     function blocks(name:string){
       return [...read(packet+name).matchAll(/```\{\.python \.input\}\n([\s\S]*?)\n```/g)]

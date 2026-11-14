@@ -4,10 +4,10 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "5df467640b95eb59a8e5fdc45d7e72fecd15e703ca52011481ae8c480f43f341"
-translation_reviewed: "2026-10-29"
+canonical_revision: "921ed614d591512dc1fcb18e517f9b091ceb9733c986253d25a3eb085f144271"
+translation_reviewed: "2026-11-09"
 translation_of: "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md"
-last_updated: 2026-10-29
+last_updated: 2026-11-09
 last_verified: 2026-09-15
 primary_sources:
   - https://arxiv.org/abs/2304.08485
@@ -40,9 +40,13 @@ $$
 
 The projected vectors have the LLM embedding width and are inserted next to the language instruction. The decoder architecture remains unchanged; visual and text positions interact through causal self-attention.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/llava-figure1-projector.png]]
+![[00 Учебник/Assets/Figures/curated/connectors-2026-11-09/llava-figure1-projector.png|Projection W maps image features to visual embeddings H_v. The LLM takes these alongside instruction embeddings H_q.]]
 
-*Figure 1 from Liu et al., [Visual Instruction Tuning](https://arxiv.org/abs/2304.08485), PDF p. 4. The projector maps CLIP patch features into the language model’s input stream.*
+*Haotian Liu et al., [Visual Instruction Tuning v2, Figure 1, PDF p. 4](https://arxiv.org/pdf/2304.08485v2#page=4),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Projection $W$
+changes the width of $Z_v$ without removing positions. The light $H_v$
+and gray $H_q$ enter the same decoder; green $X_a$ denotes the text response.
+The schematic does not give actual token counts.*
 
 This design inherits standard decoder kernels and caching. Its cost is equally direct: every image token occupies context and contributes to LLM prefill. A projector does not translate an image into words; it produces continuous vectors that the LLM learns to interpret. Information absent from the vision features cannot be restored by the projector.
 
@@ -59,6 +63,8 @@ H_v=\operatorname{GELU}(Z_vW_1+b_1)W_2+b_2.
 $$
 
 For widths 1024 and 4096, the linear layer has 4,198,400 parameters including its bias; the two-layer MLP has 20,979,712. Both return 576 positions. Width conversion and sequence compression are separate operations. Cross-attention is another possibility: its own key/value projections can accept visual features without first making every visual vector an LLM input embedding.
+
+<a id="vlm-projector-prefix"></a>
 
 ### Where the image placeholder goes
 
@@ -114,6 +120,8 @@ The 32 query embeddings are learned parameters, not a user's question and not 32
 ![[00 Учебник/Assets/Figures/curated/connectors-review-2026-10/blip2-qformer.png]]
 
 *Li et al., [BLIP-2, Figure 2, left panel](https://proceedings.mlr.press/v202/li23q.html), CC BY 4.0. Learned queries read the frozen image encoder's features; the large LLM is not involved in this first training stage.*
+
+<a id="vlm-qformer-masks"></a>
 
 ### Three objectives, three attention masks
 
@@ -176,6 +184,38 @@ assert np.isclose(matching_prob[1], .8807970779)
 
 Real batches also need padding masks. The three objectives share parameters but cannot exchange masks without changing what information is available to the prediction.
 
+<a id="vlm-qformer-positives"></a>
+
+### Several captions for one image
+
+In the [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели#vlm-multi-positive|CLIP example]],
+two valid captions were known in advance. During BLIP-2's COCO retrieval
+fine-tuning, rows with the same `image_id` count as positives.
+This is the `forward` branch in [LAVIS, lines 159–187](https://github.com/salesforce/LAVIS/blob/05cb670f47296522e24e7727e366b4a997d28582/lavis/models/blip2_models/blip2_qformer.py#L159-L187),
+not the default rule in BLIP-2 pretraining.
+
+Suppose the softmax over three candidates again gives $p=(0.8,0.1,0.1)$.
+The first two IDs match, giving the positive weights $(1/2,1/2,0)$.
+LAVIS assigns 90% of the target weight to that distribution and
+spreads the remaining 10% evenly across the three candidates:
+
+$$
+q=0.9(1/2,1/2,0)+0.1(1/3,1/3,1/3)
+  =(29/60,29/60,1/30).
+$$
+
+The row loss is $-\sum_j q_j\log p_j$. Its gradient on the second
+score is $0.1-29/60\approx-0.3833$. Without IDs, the first caption alone
+would be positive and smoothing would give the second a target weight
+of $1/30$. The gradient would then be $0.1-1/30\approx+0.0667$.
+The same scores give opposite directions for a one-row update.
+This loss averages log probabilities using the target weights;
+it does not take the log of their sum.
+
+The matching ID also excludes both captions from ITM hard-negative
+sampling. The third caption gets a small contrastive target weight
+through smoothing but remains negative for ITM.
+
 Thirty-two queries make LLM-side cost predictable regardless of the original patch count. They are also an information bottleneck: the same limited representation must support global captioning and questions about tiny details.
 
 In the second BLIP-2 stage, Q-Former outputs are projected to the frozen LLM's input width and trained for image-conditioned generation. Decoder-only and encoder–decoder backbones use different input arrangements. Frozen parameters still participate in differentiation: the loss must backpropagate through the LLM to train the connector, even though no optimizer updates are applied to LLM weights.
@@ -190,9 +230,12 @@ For an LLM of width 4096, projection maps $[32,768]$ to $[32,4096]$. With OPT, t
 
 Flamingo targets interleaved image, video, and text sequences. A Perceiver Resampler maps a variable spatiotemporal grid to a fixed set of latents. Newly inserted gated cross-attention layers let text states query that memory between frozen LM blocks.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/flamingo-figure3-architecture.png]]
-
-*Figure 3 from Alayrac et al., [Flamingo](https://arxiv.org/abs/2204.14198), PDF p. 4. Snowflakes mark frozen vision and language components; the resampler and gated cross-attention are trained from scratch.*
+In [Flamingo, Figure 3, p. 4](https://arxiv.org/pdf/2204.14198v2#page=4),
+follow the image through the vision encoder and Perceiver Resampler,
+and the text through the original language-model layers. The two paths
+meet in the new `GATED XATTN-DENSE` blocks. Snowflakes mark the frozen
+vision encoder and language layers; the resampler and the new blocks
+train from scratch.
 
 A frozen NFNet-F6 supplies spatial features, with temporal information added for video. The Perceiver Resampler produces 64 latents per image or video. Image markers remain in the text stream, but the latents are held in separate memory. With 100 text positions and 64 latents, a text-to-image cross-attention head has a $100\times64$ score matrix, not a $164\times164$ self-attention matrix.
 
@@ -207,6 +250,25 @@ Y'=U+\tanh(\alpha_f)\operatorname{FFW}(U).
 $$
 
 Both gates start at exactly zero. The inserted branches initially act as the identity before the frozen LM block. This does not prevent learning: in $Y+\tanh(\alpha)F_\theta(Y,R)$, the initial gradient to $\theta$ is zero, but the gradient to $\alpha$ includes $F_\theta$ because $\tanh'(0)=1$. After the gate changes, gradients reach the branch parameters.
+
+<a id="vlm-pheye-cross-attention"></a>
+
+Pheye, a later architecture, also lets text query a separate set of
+visual features. In the right-hand panel, the blue path supplies queries
+to `Cross-Attention`; the red path supplies keys and values. The model
+adds the attention output to the text state, then adds the FFW output
+before passing the result into the frozen `LM Layer`.
+
+![[00 Учебник/Assets/Figures/curated/vlm-connectors-2026-11-13/pheye-dense-cross-attention.png|Pheye derives keys and values from vision and queries from text. Cross-attention and FFW outputs are added to the text state before the frozen language-model layer.]]
+
+*Miguel Carvalho and Bruno Martins, [Efficient Architectures for High Resolution Vision-Language Models, Figure 2](https://arxiv.org/html/2501.02584v1#S2.F2),
+[original PNG](https://arxiv.org/html/2501.02584v1/Images/cross-dense.png), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Unmodified figure.*
+
+Pheye has no $\tanh(\alpha)$ multiplier in these branches. Its authors
+[initialize both output matrices with small weights](https://arxiv.org/html/2501.02584v1#S2.SS1),
+so the initial change to the text state is small. Flamingo's change is
+exactly zero at initialization, even if the branch itself produces a
+nonzero output.
 
 ### Which image can a text token see?
 
@@ -240,6 +302,38 @@ assert grad_alpha == -2
 Here −1 means that no image precedes the text position. Equal allowed logits are used only to illustrate the mask. Real logits depend on text and image content. An all-masked row needs explicit handling: softmax over only $-\infty$ is not a valid distribution.
 
 Visual latents do not occupy 64 positions in the text self-attention cache, but they still consume memory. Each inserted cross-attention layer may cache projected visual K/V once and reuse them during decoding. That cache has its own layer count, heads, and widths. A decoder-only runtime therefore needs support for the added layers, image masks, and visual memory, even if the attention operations themselves use standard efficient kernels.
+
+<a id="vlm-visual-kv"></a>
+
+### Cache size for the same request
+
+Take 40 text positions, including control tokens, and one image.
+In all three cases the text decoder has 32 layers, 32 KV heads,
+128 coordinates per head and two bytes per element. One position
+uses $2\cdot32\cdot128\cdot2=16\,384$ bytes per layer, with
+the first factor of two accounting for keys and values. For separate
+visual memory, assume the same widths but only eight cross-attention
+layers. These are hypothetical configurations, not released model specs.
+
+| Connector | Self-KV | Cross-KV |
+| --- | ---: | ---: |
+| 576 input positions | 308 MiB | — |
+| 32 Q-Former positions, as with OPT | 36 MiB | — |
+| 64 latents in separate memory | 20 MiB | 8 MiB |
+
+The first decoder caches $40+576=616$ positions in each of its 32 layers;
+the second caches $40+32=72$. In the third, only the 40 text positions
+go through self-attention. Its separate visual K/V takes
+$64\cdot8\cdot16\,384$ bytes. Processing the first answer token adds
+0.5 MiB to self-KV in all three cases. The separate visual memory does
+not grow. The table excludes weights, activations, original vision
+features and allocator overhead.
+
+On one decoding step, the visual contribution is 576 attention scores
+per head in each of the 32 layers of the first variant, versus 64 in
+each of the eight cross-attention layers of the third. This does not
+predict a latency ratio: the latter adds projections and layers, and
+compression happens before decoding and can discard visual detail.
 
 ## Resampling, early fusion, and deep fusion
 
@@ -306,7 +400,9 @@ A fixed budget is convenient for video but treats a simple object photograph and
 
 <span id="6-early-fusion-и-deep-fusion"></span>
 
-### DeepStack is a different route into the same decoder
+<a id="vlm-deepstack"></a>
+
+### DeepStack adds features inside the decoder
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen3-vl.png]]
 
@@ -390,7 +486,7 @@ Connector comparisons should hold the vision encoder, LLM, data, resolution, and
 | Design | LLM-side visual length | Fusion point | Serving consequence |
 |---|---|---|---|
 | LLaVA projector | usually one position per retained patch | before the decoder | standard causal self-attention with a longer prefix |
-| BLIP-2 Q-Former | fixed learned-query count | before the LLM | compact prefix, potentially lossy bottleneck |
+| BLIP-2 Q-Former | fixed learned-query count | OPT input or Flan-T5 encoder memory | compact interface, potentially lossy bottleneck |
 | Flamingo resampler and cross-attention | fixed latents per image | inside selected layers | separate visual memory and modified blocks |
 | Qwen3-VL merger and DeepStack | merged grid plus aligned intermediate features | input and first three decoder blocks | masked feature additions without extra prefix copies |
 

@@ -1,5 +1,13 @@
 Precision chapter illustration notices
 
+te-mxfp8-row-column.svg retains the complete MXFP8 rowwise/columnwise SVG
+from NVIDIA Transformer Engine revision eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc.
+The unchanged upstream stylesheet is embedded for standalone display; a
+modification notice is inside the SVG. Full geometry and English labels are
+unchanged. Original SVG/CSS are tracked in publishing/fixtures/precision-originals.
+Apache-2.0 is reproduced in nvidia-transformer-engine-Apache-2.0.txt.
+
+
 NVIDIA Transformer Engine contributors, Apache License 2.0.
 Pinned revision: eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc
 License: nvidia-transformer-engine-Apache-2.0.txt

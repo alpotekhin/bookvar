@@ -1,0 +1,89 @@
+{
+  "date": "2026-11-09",
+  "scope": "Integrate the WildBench evaluation mechanism from CS336 Lecture 12 into the canonical evaluation chapter. Preserve the original course item; local only.",
+  "previous_goal_turn": "Progress: the preceding AlpacaEval section, three original figures, and both navigation links are present on the pinned input revision and passed the preceding built-output suite.",
+  "review": {
+    "sources": [
+      "Stanford CS336 Lecture 12, pin 8b59b50, lines 194–206; source-only trace 150 remains in its original archive. WildBench arXiv v2 (CC BY 4.0), §§2–4.3, Figures 3–4 and the two judge templates in Appendices D–E.",
+      "Authors' public repository pin d6b8dcaf377d173d031980f97c16e1a82618c03d: pairwise win-length margin at _create_tables.py:109–153, internal scoring at 233–253, extra display factor at _merge_results.py:94–99. The source code is pinned independently of the arXiv experiment."
+    ],
+    "figures": [
+      {
+        "file": "eval_pipeline_plus.png",
+        "anchor": "S3.F4",
+        "title": "WildBench Figure 4: checklist-guided pairwise and individual evaluation",
+        "size": [
+          1272,
+          490
+        ],
+        "hash": "b833205f2da31d01b94edc53286b9785d2bc57641d475cff5a9064d44053e91a"
+      },
+      {
+        "file": "task_dist.png",
+        "anchor": "S2.F3",
+        "title": "WildBench Figure 3: task categories in three benchmarks",
+        "size": [
+          840,
+          217
+        ],
+        "hash": "237afaff13566084487d0fbd80b15b4c80e0c48df4740349124ac59ca2b85451"
+      }
+    ],
+    "arithmetic": "At K=500, a weak margin of 501 ties, 500 is retained, and a strong win is retained even at 550. The example moves from (0.5 - 0.5 + 1)/3=1/3 to (0 - 0.5 + 1)/3=1/6. S=8 maps to 6 internally and 60 for display. These are arithmetic checks, not judge runs.",
+    "editorial": "The chapter input is byte-identical to the preceding full-body read plus reviewed AlpacaEval insertion. Keep its content and all original code unchanged. New example separates dataset, judge and scoring transformation, preserves the original English figure labels, and does not claim that the benchmark measures all real tasks or isolates a causal effect of length.",
+    "implementation_crosscheck": "The pinned repository's score.json and all_stat_wildbench.-1.json give one reproducible display-scale chain for gpt-4o-2024-05-13: 7.940371456500489 -> 5.880742913000978 -> 58.80742913000978. The latter value is not the older Table 2 experiment result.",
+    "local_verification": "2063 Astro pages; 256 built-output tests, 10 reading/consolidation/residual tests, the exactly-once asset registry check, and zero broken internal routes, fragments, or files. Compared both arXiv figures byte-for-byte with the originals.",
+    "reader_verification": "Followed the section link from the CS336 hub and the original-English paper note at widths 375 and 1280. Both original figures and their captions render in each site shell without distortion. Verified 15 displayed formulas and no KaTeX errors or page overflow. On mobile, opened both figures, enlarged to 4x and panned to the right; inspected the WB-Reward labels, Arena correlation panel, and WildBench category labels.",
+    "limits": "The English shell retains the existing Russian-chapter fallback; the source note is original English. Berkeley integration and wider source completeness remain open. No commit, push or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "changes": [
+        {
+          "old": "  - https://arxiv.org/abs/2404.04475v2",
+          "new": "  - https://arxiv.org/abs/2404.04475v2\n  - https://arxiv.org/abs/2406.04770v2"
+        },
+        {
+          "old": "<span id=\"pairwise-preference-protocol\"></span>",
+          "new": "<a id=\"wildbench-checklist\"></a>\n\n#### WildBench: критерии для отдельного запроса\n\nВ примере WildBench пользователь ищет формулу для таблицы. Она должна\nнайти последнее совпадение в одном столбце и вернуть значение из другого.\nПользователь уже объяснил, что предыдущая формула не сработала, и просит\nальтернативу. Если передать судье только последний вопрос, он не узнает,\nкакое решение уже отвергли. Поэтому судья получает историю, новый запрос\nи критерии, составленные для этой задачи. Один из критериев проверяет\nименно последнее совпадение, другой — синтаксис и совместимость формулы\nс табличным редактором.\n\n![[00 Учебник/Assets/Figures/curated/wildbench-2026-11-09/eval_pipeline_plus.png|Сверху WB-Reward: история, запрос, критерии и два ответа ведут к парному вердикту. Ниже WB-Score: те же данные и один ответ ведут к оценке от 1 до 10. Внизу пример с формулой для электронной таблицы.]]\n\n*Bill Yuchen Lin et al., [WildBench, рис. 4](https://arxiv.org/html/2406.04770v2#S3.F4).\nОригинальный рисунок версии v2 без изменений,\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nДля каждой из 1 024 задач авторы готовили список из 5–10 вопросов:\nобъединяли предложения GPT‑4 Turbo и Claude 3 Opus, затем проверяли\nсписки вручную. В шаблоне судью просят опираться на эти вопросы, но\nне ограничиваться ими. Так, формула, возвращающая первое совпадение,\nможет быть синтаксически правильной и всё равно не решить задачу.\nСам по себе вердикт судьи не подтверждает результат исполнения;\nесли формулу можно проверить на примерах с повторяющимися значениями,\nэто отдельная проверка.\n[Статья, §3.1 и шаблоны D–E](https://arxiv.org/html/2406.04770v2#S3.SS1).\n\nВ верхней ветви рисунка судья сравнивает два ответа. Для кандидата A\nпять вердиктов `A++`, `A+`, `A=B`, `B+`, `B++` дают соответственно\n$1$, $0.5$, $0$, $-0.5$, $-1$. В WB-Reward (Mix) результаты усредняют по\nзадачам и трём базовым моделям: GPT‑4 Turbo, Claude 3 Haiku и\nLlama 2 70B Chat. `A+` против слабого базового ответа и `A+` против\nсильного входят в это среднее отдельно.\n\nПоправку на длину применяют после вердикта. При небольшом выигрыше\nсравнивают длины: если ответ победителя длиннее более чем на $K$\nсимволов, пару считают ничьей. Большой выигрыш оставляют как есть.\n[В коде авторов](https://github.com/allenai/WildBench/blob/d6b8dcaf377d173d031980f97c16e1a82618c03d/leaderboard/data_dir/_create_tables.py#L109-L153)\nусловие проверяется симметрично для победы кандидата и базовой модели.\nПосчитаем три учебных сравнения для одного ответа A длиной 1550 символов\nпри $K=500$:\n\n| Ответ B | Вердикт | Без поправки | С поправкой |\n| --- | --- | ---: | ---: |\n| 1049 символов | `A+`: A длиннее на 501 | $0.5$ | $0$ |\n| 2050 символов | `B+`: B длиннее ровно на 500 | $-0.5$ | $-0.5$ |\n| 1000 символов | `A++`: A длиннее на 550, но выигрыш большой | $1$ | $1$ |\n\nСреднее по этим трём парам меняется с $1/3$ на $1/6$.\nЕсли бы второй ответ был длиннее ещё на один символ, его небольшая победа\nтоже стала бы ничьей, и балл A вырос бы. Поэтому правило может снизить балл\nмногословного кандидата или поднять балл краткого. В\n[[#alpacaeval-length-control|AlpacaEval-LC]] регрессия даёт оценку при\nнулевой разнице длин; WildBench переопределяет только часть уже\nвынесенных вердиктов.\n$K=500$ — один из режимов авторского эксперимента, а не универсальный порог.\n\nВ нижней ветви WB-Score оценивает один ответ по шкале 1–10, без базового\nответа. Оценка $S=8$ становится $2(8-5)=6$ на внутренней шкале.\nВ [закреплённом коде таблицы](https://github.com/allenai/WildBench/blob/d6b8dcaf377d173d031980f97c16e1a82618c03d/leaderboard/data_dir/_merge_results.py#L94-L99)\nесть ещё множитель 10 для показа балла: внутренние 6 отображаются как 60.\nЭто баллы, а не 60% правильных ответов и не доля побед.\nДля сопоставления двух таблиц нужно проверить судью, шкалу и способ усреднения.\n\n![[00 Учебник/Assets/Figures/curated/wildbench-2026-11-09/task_dist.png|Три распределения категорий. В AlpacaEval половина задач — поиск информации; в ArenaHard 57% относятся к программированию и отладке; в WildBench эти две категории занимают 17% и 16%.]]\n\n*Lin et al., [WildBench, рис. 3](https://arxiv.org/html/2406.04770v2#S2.F3).\nОригинальный рисунок, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nВ WildBench v2 задачи отбирали из WildChat: оставляли англоязычные диалоги,\nфильтровали близкие запросы и слишком простые задачи. Модели получают\nсохранённую историю, а не ведут новый разговор с пользователем.\nРазный состав задач может поменять порядок моделей даже при одинаковом\nправиле оценивания. Например, код и отладка занимают\n57% выборки ArenaHard на рисунке и 16% WildBench. Для сервиса, который\nпочти всегда исправляет код, эти доли нужно сопоставить с рабочей нагрузкой.\nКорреляции в правом нижнем углу схемы относятся к конкретной исторической\nвыборке Chatbot Arena; они не измеряют совпадение судьи с человеком\nна отдельной паре ([§4.2, табл. 3](https://arxiv.org/html/2406.04770v2#S4.T3)).\n\n[[05 Источники/Papers/Lin et al. — WildBench.md|Статья, шаблоны судьи и код подсчёта WildBench]] ·\n[Stanford CS336, лекция 12](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_12.py#L194-L199).\n\n<span id=\"pairwise-preference-protocol\"></span>"
+        }
+      ],
+      "before_sha256": "2cbbc829cd049ef88118ec3515b16794b0efe25717b4574538227f4f52e63729",
+      "after_sha256": "84bc1f3e5906e78a04d40b2e3d7711d2234912f15ad1cb5b54a93dbe96bd2fab"
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+      "changes": [
+        {
+          "old": "В учебнике: [[00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md#alpacaeval-length-control|почему судья предпочитает длинные ответы и как AlpacaEval оценивает сравнение при равной длине]]; оригинальные рисунки и расчёт на двух запросах.",
+          "new": "В учебнике: [[00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md#alpacaeval-length-control|почему судья предпочитает длинные ответы и как AlpacaEval оценивает сравнение при равной длине]]; оригинальные рисунки и расчёт на двух запросах.\nТакже [[00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md#wildbench-checklist|разбор WildBench: критерии для отдельного запроса, WB-Score и WB-Reward]]."
+        }
+      ],
+      "before_sha256": "1791d161bdde34bfea49ce241c4df0ab189bdc70f33d912f1dbb45520ab18978",
+      "after_sha256": "7f4429f26ed0faa6c14080dc456ee120b8a2931b71e134b90263ab4e96e7bd24"
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "changes": [
+        {
+          "old": "        route: sources/papers/length-controlled-alpacaeval",
+          "new": "        route: sources/papers/length-controlled-alpacaeval\n      - source: 05 Источники/Papers/Lin et al. — WildBench.md\n        route: sources/papers/wildbench"
+        }
+      ],
+      "before_sha256": "c0056c91a7bc9af87429b6262e7c1220463ca6c90e8e1331cb94298889d1eb61",
+      "after_sha256": "58bf9175a59b410ec8dca66d62dca562078dd6d9e544ff12930103fbf06f72e0"
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "changes": [
+        {
+          "old": "assets:\n",
+          "new": "assets:\n  - id: curated-wildbench-f4-b833205f2da3\n    asset: \"00 Учебник/Assets/Figures/curated/wildbench-2026-11-09/eval_pipeline_plus.png\"\n    title: \"WildBench Figure 4: checklist-guided pairwise and individual evaluation\"\n    author: Bill Yuchen Lin et al.\n    source_url: https://arxiv.org/abs/2406.04770v2\n    source_image_url: https://arxiv.org/html/2406.04770v2/eval_pipeline_plus.png\n    dimensions_px: [1272, 490]\n    source_asset_sha256: b833205f2da31d01b94edc53286b9785d2bc57641d475cff5a9064d44053e91a\n    sha256: b833205f2da31d01b94edc53286b9785d2bc57641d475cff5a9064d44053e91a\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    license_evidence_url: https://arxiv.org/html/2406.04770v2\n    derivation: source-raster-copy\n    modifications: Byte-identical PNG from the authors' CC BY 4.0 arXiv v2 HTML. No crop, redraw, or translated labels.\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    metadata_status: verified\n    last_verified: 2026-11-09\n    used_in: [\"00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md\"]\n  - id: curated-wildbench-f3-237afaff1356\n    asset: \"00 Учебник/Assets/Figures/curated/wildbench-2026-11-09/task_dist.png\"\n    title: \"WildBench Figure 3: task categories in three benchmarks\"\n    author: Bill Yuchen Lin et al.\n    source_url: https://arxiv.org/abs/2406.04770v2\n    source_image_url: https://arxiv.org/html/2406.04770v2/task_dist.png\n    dimensions_px: [840, 217]\n    source_asset_sha256: 237afaff13566084487d0fbd80b15b4c80e0c48df4740349124ac59ca2b85451\n    sha256: 237afaff13566084487d0fbd80b15b4c80e0c48df4740349124ac59ca2b85451\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    license_evidence_url: https://arxiv.org/html/2406.04770v2\n    derivation: source-raster-copy\n    modifications: Byte-identical PNG from the authors' CC BY 4.0 arXiv v2 HTML. No crop, redraw, or translated labels.\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    metadata_status: verified\n    last_verified: 2026-11-09\n    used_in: [\"00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md\"]\n"
+        }
+      ],
+      "before_sha256": "0af211e6179b2023a0ba87a6cb34666491886afdf849e5d819bcd0ee0d3d0ae9",
+      "after_sha256": "9c152e636ef558891038a3ab3ef99b9b154c39c9b24e56888dfa4bae6abb435c"
+    }
+  ]
+}

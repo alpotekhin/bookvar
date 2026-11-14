@@ -6,6 +6,7 @@ import { describe, expect, it } from 'vitest';
 import YAML from 'yaml';
 import { verifyPublicAssets } from '../adapter/public-assets.js';
 import { loadManifest } from '../adapter/manifest.js';
+import { hseCatalogueEntry } from '../adapter/hse-catalogue.js';
 import { mapMarkdownProse } from '../adapter/markdown-prose.js';
 
 const root = resolve(import.meta.dirname, '../..');
@@ -34,6 +35,7 @@ describe('distributed image bytes and public notices', () => {
     const assets = new Set<string>(registry.map((row: { asset: string }) => row.asset));
     const missing = new Set<string>();
     for (const page of manifest.sections.flatMap(section => section.pages)) {
+      if (hseCatalogueEntry(page.source, page.route)) continue;
       for (const source of [page.source, page.sourceEn].filter(Boolean) as string[]) {
         mapMarkdownProse(readFileSync(join(root, source), 'utf8'), prose => {
           for (const match of prose.matchAll(/!\[\[([^\]\n]+)\]\]/g)) {

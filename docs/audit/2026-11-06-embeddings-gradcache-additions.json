@@ -1,0 +1,319 @@
+{
+  "date": "2026-11-06",
+  "status": "source-runtime-reader-local-build-verified",
+  "scope": "One whole canonical embeddings owner: retain prior explanations, examples and eight originals; expand GradCache from published English prose and pinned implementation. No translation or release.",
+  "files": [
+    {
+      "source": "00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md",
+      "before_sha256": "bc9d7e31337190371294760004dbb10b113fedfdb161aeda2a790631d699d1fd",
+      "after_sha256": "face8eec87440ec12eee2f30a91f06c883317031de9c18d3f09cdd6bbd84fa67",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-20\nlast_verified: 2026-10-20",
+          "new": "last_updated: 2026-11-06\nlast_verified: 2026-11-06\nsource_language: mixed"
+        },
+        {
+          "old": "  - https://arxiv.org/abs/2004.04906",
+          "new": "  - https://arxiv.org/abs/2004.04906\n  - https://aclanthology.org/2021.repl4nlp-1.31/"
+        },
+        {
+          "old": "  - https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html",
+          "new": "  - https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html\nreference_terms:\n  - label: \"Mean, CLS и last-token pooling\"\n    label_en: \"Mean, CLS and last-token pooling\"\n    anchor: emb-pooling\n  - label: \"Косинус, скалярное произведение и норма\"\n    label_en: \"Cosine, dot product and vector norms\"\n    anchor: emb-similarity\n  - label: \"Инструкции, токенизация и обрезка\"\n    label_en: \"Instructions, tokenization and truncation\"\n    anchor: emb-input-contract\n  - label: \"SBERT, bi-encoder и cross-encoder\"\n    label_en: \"SBERT, bi-encoders and cross-encoders\"\n    anchor: emb-encoders\n  - label: \"Контрастивное обучение эмбеддингов\"\n    label_en: \"Contrastive embedding training\"\n    anchor: emb-contrastive\n  - label: \"Контрастивный пакет: численный пример\"\n    label_en: \"Contrastive batch: worked example\"\n    anchor: emb-batch-example\n  - label: \"Температура, градиенты и несколько positives\"\n    label_en: \"Temperature, gradients and multiple positives\"\n    anchor: emb-positive-sets\n  - label: \"Hard negatives и ложные отрицательные\"\n    label_en: \"Hard negatives and false negatives\"\n    anchor: emb-negatives\n  - label: \"In-batch negatives и накопление градиентов\"\n    label_en: \"In-batch negatives and gradient accumulation\"\n    anchor: emb-in-batch\n  - label: \"SimCSE и две dropout-маски\"\n    label_en: \"SimCSE and two dropout views\"\n    anchor: emb-simcse\n  - label: \"Pair, contrastive и triplet loss\"\n    label_en: \"Pair, contrastive and triplet losses\"\n    anchor: emb-metric-losses\n  - label: \"MarginMSE и дистилляция оценок\"\n    label_en: \"MarginMSE and score distillation\"\n    anchor: emb-marginmse\n  - label: \"Анизотропия и whitening эмбеддингов\"\n    label_en: \"Embedding anisotropy and whitening\"\n    anchor: emb-anisotropy\n  - label: \"Размерность и память векторного индекса\"\n    label_en: \"Dimension and vector-index memory\"\n    anchor: emb-index-memory\n  - label: \"Matryoshka и вложенные размерности\"\n    label_en: \"Matryoshka and nested dimensions\"\n    anchor: emb-matryoshka\n  - label: \"Совместимость энкодеров и пересчёт корпуса\"\n    label_en: \"Encoder compatibility and corpus re-encoding\"\n    anchor: emb-compatibility\n  - label: \"Релевантность, qrels, Recall и Hit\"\n    label_en: \"Relevance, qrels, Recall and Hit\"\n    anchor: emb-qrels\n  - label: \"MRR и nDCG для эмбеддингов\"\n    label_en: \"MRR and nDCG for embeddings\"\n    anchor: emb-ranking-metrics\n  - label: \"Exact search: пять документов\"\n    label_en: \"Exact search: five-document example\"\n    anchor: emb-exact-search\n  - label: \"Модель, ANN-индекс и неполная разметка\"\n    label_en: \"Model, ANN-index and incomplete-label errors\"\n    anchor: emb-error-decomposition\n  - label: \"GradCache — общий loss и повторные проходы\"\n    label_en: \"GradCache: joint loss and recomputation\"\n    anchor: emb-gradcache"
+        },
+        {
+          "old": "### Что усредняется",
+          "new": "<a id=\"emb-pooling\"></a>\n### Что усредняется"
+        },
+        {
+          "old": "### Норма вектора и функция сравнения",
+          "new": "<a id=\"emb-similarity\"></a>\n### Норма вектора и функция сравнения"
+        },
+        {
+          "old": "### Токенизация, инструкция и обрезка",
+          "new": "<a id=\"emb-input-contract\"></a>\n### Токенизация, инструкция и обрезка"
+        },
+        {
+          "old": "## 2. Почему обычный BERT не является готовой моделью предложений",
+          "new": "<a id=\"emb-encoders\"></a>\n## 2. Почему обычный BERT не является готовой моделью предложений"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/bi-cross-encoder.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/bi-cross-encoder.png|SBERT: separate bi-encoder representations and joint cross-encoder scoring]]"
+        },
+        {
+          "old": "### Матрица оценок и целевой документ",
+          "new": "<a id=\"emb-contrastive\"></a>\n### Матрица оценок и целевой документ"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/dpr-dual-encoder-and-loss.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/dpr-dual-encoder-and-loss.png|DPR dual encoders, dot-product scores and contrastive loss]]"
+        },
+        {
+          "old": "### Один пакет в числах",
+          "new": "<a id=\"emb-batch-example\"></a>\n### Один пакет в числах"
+        },
+        {
+          "old": "### Почему ближайшие отрицательные получают больший градиент",
+          "new": "<a id=\"emb-positive-sets\"></a>\n### Почему ближайшие отрицательные получают больший градиент"
+        },
+        {
+          "old": "### Откуда берутся положительные и отрицательные примеры",
+          "new": "<a id=\"emb-negatives\"></a>\n### Откуда берутся положительные и отрицательные примеры"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/dpr-positive-and-negative-examples.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/dpr-positive-and-negative-examples.png|DPR question with positive and BM25 negative passages]]"
+        },
+        {
+          "old": "### Что даёт пакет",
+          "new": "<a id=\"emb-in-batch\"></a>\n### Что даёт пакет"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/multiple-negatives.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/multiple-negatives.png|Multiple-negatives ranking loss: positives and shared batch negatives]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/dpr-in-batch-negatives.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/dpr-in-batch-negatives.png|DPR historical ablation of in-batch and BM25 negatives]]"
+        },
+        {
+          "old": "При нескольких ускорителях можно обменяться эмбеддингами и собрать\nобщую матрицу. Нужно согласовать индексы положительных пар и\nпередачу градиента через обмен. Cached/GradCache-подходы уменьшают\nнеобходимость хранить активации всей большой партии сразу, но\nтребуют дополнительных проходов и аккуратного воспроизведения\nвычислений. Они не означают неограниченный batch без затрат памяти,\nсети и времени.",
+          "new": "При нескольких ускорителях можно обменяться эмбеддингами и собрать\nобщую матрицу. Нужно согласовать индексы положительных пар и\nпередачу градиента через обмен.\n\n<a id=\"emb-gradcache\"></a>\n### GradCache: full-batch negatives with chunked encoder passes\n\nWith two training pairs, let both the query and document inputs be the rows\nof the identity matrix. A shared linear encoder starts with an identity weight\nmatrix, so the score matrix is also the identity. Each query has one positive\nwith score 1 and one negative with score 0. At temperature 1, the positive\nprobability is about 0.7311 and the mean loss is about 0.3133.\nSplitting the two pairs into singleton losses removes both negatives:\neach softmax then has one entry and both losses are zero.\n\nGradCache keeps the two-by-two loss. It changes when the encoder's computation\ngraphs are built and discarded. First, encode both queries and both documents\nwithout recording encoder activations. These four vectors are enough to\ncalculate the contrastive loss and its derivatives with respect to the vectors.\nThen recompute each encoder chunk with autograd enabled and propagate its\nalready calculated representation gradient into the encoder weights.\n\nThe published paper describes the sequence as follows. The excerpt retains\nthe original English; the numeric example and executable check below are\nBookvar additions.\n\n> **Step1: Graph-less Forward** Before gradient computation, we first run an extra\n> encoder forward pass for each batch instance to get its representation.\n> Importantly, this forward pass runs without constructing the computation\n> graph. We collect and store all representations computed.\n>\n> **Step2: Representation Gradient Computation and Caching** We then compute the\n> contrastive loss for the batch based on the representation from Step1 and\n> have a corresponding computation graph constructed. Despite the mathematical\n> derivation, automatic differentiation system is used in actual implementation,\n> which automatically supports variations of contrastive loss. A backward pass\n> is then run to populate gradients for each representation. Note that the\n> encoder is not included in this gradient computation.\n>\n> **Step3: Sub-batch Gradient Accumulation** We run encoder forward one sub-batch\n> at a time to compute representations and build the corresponding computation\n> graph. We take the sub-batch’s representation gradients from the cache and\n> run back propagation through the encoder. Gradients are accumulated for\n> encoder parameters across all sub-batches.\n>\n> **Step4: Optimization** When all sub-batches are processed, we can step the\n> optimizer to update model parameters as if the full batch is processed in a\n> single forward-backward pass.\n\n*Luyu Gao, Yunyi Zhang, Jiawei Han and Jamie Callan,\n[Scaling Deep Contrastive Learning Batch Size under Memory Limited Setup, §3.3](https://aclanthology.org/2021.repl4nlp-1.31/).\nCC BY 4.0 under the [ACL Anthology policy](https://aclanthology.org/faq/copyright/).\nSelected prose paragraphs reproduced verbatim; the intervening equations and\nthe sentence defining the cache symbols are omitted.*\n\nFor the two-pair example, the derivative with respect to the first query\nvector is approximately $(-0.13447,0.13447)$. The first document gets the\nsame derivative; the second query and document get\n$(0.13447,-0.13447)$. Each derivative includes the factor $1/2$ from the\nmean over the two queries. A cached derivative therefore already includes\nthe full-batch reduction. Dividing it by the number of chunks again would\nmake the parameter gradient too small.\n\nLet $h_i=f_\\theta(x_i)$ be a representation and\n$g_i=\\partial L/\\partial h_i$ its cached gradient. The chain rule gives\n\n$$\n\\begin{aligned}\n\\nabla_\\theta L&=\\sum_i J_i^\\top g_i,\\\\\nJ_i&=\\frac{\\partial f_\\theta(x_i)}{\\partial\\theta}.\n\\end{aligned}\n$$\n\nRecomputing one chunk supplies its vector–Jacobian product without keeping\nall other encoder graphs alive. In code, the scalar surrogate\n$\\sum_i h_i^\\top\\operatorname{stopgrad}(g_i)$ has the required parameter\ngradient. Its numeric value is not the original loss, so it is not a replacement\nfor the loss in training logs. With shared encoder weights, query-side and\ndocument-side contributions accumulate into the same parameter tensors.\n\nThe CPU check below uses a linear encoder, not a pretrained language model.\nIt compares every weight derivative with an ordinary full-batch backward pass.\nNo optimizer update happens between chunks.\n\n```python\nimport torch\nfrom torch import nn\nfrom torch.nn import functional as F\n\n\ndef cached_encoder_grad(model, queries, documents, chunk_size):\n    model.zero_grad(set_to_none=True)\n    with torch.no_grad():\n        q = torch.cat([model(x) for x in queries.split(chunk_size)])\n        d = torch.cat([model(x) for x in documents.split(chunk_size)])\n    q = q.detach().requires_grad_()\n    d = d.detach().requires_grad_()\n    labels = torch.arange(len(queries), device=queries.device)\n    loss = F.cross_entropy(q @ d.T, labels)\n    dq, dd = torch.autograd.grad(loss, (q, d))\n\n    for inputs, gradients in [(queries, dq), (documents, dd)]:\n        for x, g in zip(inputs.split(chunk_size), gradients.split(chunk_size)):\n            # g already contains the mean reduction over all queries.\n            (model(x) * g).sum().backward()\n    return loss.detach(), [p.grad.detach().clone() for p in model.parameters()]\n\n\ninputs = torch.eye(2, dtype=torch.float64)\nencoder = nn.Linear(2, 2, bias=False, dtype=torch.float64)\nwith torch.no_grad():\n    encoder.weight.copy_(torch.eye(2, dtype=torch.float64))\n\nfull_loss = F.cross_entropy(encoder(inputs) @ encoder(inputs).T, torch.arange(2))\nfull_loss.backward()\nfull_gradient = encoder.weight.grad.detach().clone()\ncached_loss, cached_gradients = cached_encoder_grad(encoder, inputs, inputs, 1)\n\nassert torch.allclose(cached_loss, full_loss.detach())\nassert torch.allclose(cached_gradients[0], full_gradient, atol=1e-12)\nprint(round(float(cached_loss), 6))  # 0.313262\nprint(full_gradient)\n# tensor([[-0.2689,  0.2689],\n#         [ 0.2689, -0.2689]], dtype=torch.float64)\n\nencoder.zero_grad(set_to_none=True)\nfor x in inputs.split(1):\n    singleton_loss = F.cross_entropy(encoder(x) @ encoder(x).T, torch.zeros(1, dtype=torch.long))\n    singleton_loss.backward()\nassert torch.count_nonzero(encoder.weight.grad) == 0\n```\n\nThis implementation assumes deterministic, example-independent encoder\ncomputations. A training-mode Transformer usually has dropout. Its recomputed\nchunk must use the same random choices as its first pass, including the separate\nquery and document passes when weights are shared. Otherwise the cached\n$g_i$ belongs to one sampled representation but multiplies the Jacobian of\nanother. The [authors’ implementation](https://github.com/luyug/GradCache/blob/906f03835fbc183132a9db32612a9e8f180ca3b4/src/grad_cache/grad_cache.py)\nrecords a [RandContext](https://github.com/luyug/GradCache/blob/906f03835fbc183132a9db32612a9e8f180ca3b4/src/grad_cache/context_managers.py)\nfor each chunk and restores CPU and relevant CUDA generator states for its\nrecomputation. The short example does not implement that mechanism and must\nnot be used unchanged with stochastic encoders.\n\nRestoring RNG state does not restore arbitrary mutable model state.\nTraining-mode BatchNorm, for example, computes statistics from the chunk;\nchanging the chunk changes the function, and repeated forwards can update\nrunning statistics twice. Equality to a full-batch gradient requires matching\nthe actual forward function, its parameters, stochastic choices and state.\nFloating-point accumulation can also change the final low-order bits.\n\nFor a fixed encoder chunk size, retained encoder activations no longer grow\nwith the full contrastive batch. The representation and gradient caches still\ngrow as $O(Bd)$; the explicit score matrix in this example grows as $O(B^2)$.\nIts loss computation can itself become the memory bottleneck. An extra encoder\nforward pass also costs time. The paper's runtime measurements describe its\nDPR experiment, not a fixed overhead for every model and GPU.\n"
+        },
+        {
+          "old": "### SimCSE: положительная пара без двух разных текстов",
+          "new": "<a id=\"emb-simcse\"></a>\n### SimCSE: положительная пара без двух разных текстов"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/simcse.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/simcse.png|Unsupervised SimCSE dropout views and supervised NLI contrastive pairs]]"
+        },
+        {
+          "old": "### Расстояние, порядок и численная оценка пары",
+          "new": "<a id=\"emb-metric-losses\"></a>\n### Расстояние, порядок и численная оценка пары"
+        },
+        {
+          "old": "### Дистилляция оценок учителя",
+          "new": "<a id=\"emb-marginmse\"></a>\n### Дистилляция оценок учителя"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/distillation.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/distillation.png|Sentence Transformers: cross-encoder teacher and cross-encoder student]]"
+        },
+        {
+          "old": "### Общее направление и косинус",
+          "new": "<a id=\"emb-anisotropy\"></a>\n### Общее направление и косинус"
+        },
+        {
+          "old": "### Сколько стоит размерность",
+          "new": "<a id=\"emb-index-memory\"></a>\n### Сколько стоит размерность"
+        },
+        {
+          "old": "### Matryoshka: обучение нескольких размеров",
+          "new": "<a id=\"emb-matryoshka\"></a>\n### Matryoshka: обучение нескольких размеров"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/matryoshka-results.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/matryoshka-results.png|Matryoshka STSB Spearman correlation at nested embedding dimensions]]"
+        },
+        {
+          "old": "### Когда пересчитывать корпус",
+          "new": "<a id=\"emb-compatibility\"></a>\n### Когда пересчитывать корпус"
+        },
+        {
+          "old": "### Что считать правильным результатом",
+          "new": "<a id=\"emb-qrels\"></a>\n### Что считать правильным результатом"
+        },
+        {
+          "old": "### Порядок внутри первых результатов",
+          "new": "<a id=\"emb-ranking-metrics\"></a>\n### Порядок внутри первых результатов"
+        },
+        {
+          "old": "### Полный пример: пять документов",
+          "new": "<a id=\"emb-exact-search\"></a>\n### Полный пример: пять документов"
+        },
+        {
+          "old": "### Модель, индекс и разметка дают разные ошибки",
+          "new": "<a id=\"emb-error-decomposition\"></a>\n### Модель, индекс и разметка дают разные ошибки"
+        },
+        {
+          "old": "- [SimCSE](https://github.com/princeton-nlp/SimCSE) — схема двух dropout-проходов",
+          "new": "- [[05 Источники/Papers/GradCache|GradCache]] — исходные этапы алгоритма,\n  связь с градиентом полной партии и авторская реализация повторных проходов.\n- [SimCSE](https://github.com/princeton-nlp/SimCSE) — схема двух dropout-проходов"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "66786ca0b4f11a8de594fcc4ad514031f27ae2aa4c6fcb5a399b8df54671413d",
+      "after_sha256": "3e024982b1ef063387c13aeb0c5fb36a02a66ed02331c9f1a4c56c121dd795b0",
+      "changes": [
+        {
+          "old": "      - source: 05 Источники/Papers/TinyBERT.md\n        route: sources/papers/tinybert",
+          "new": "      - source: 05 Источники/Papers/TinyBERT.md\n        route: sources/papers/tinybert\n      - source: 05 Источники/Papers/GradCache.md\n        route: sources/papers/gradcache"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/_index.md",
+      "before_sha256": "1674045258453e082ba39b18fc3bcb983d56a170db4a68efac74f3cb505c301b",
+      "after_sha256": "4188f346eb6dfb109d3da56f992cda381459023cabb020554ce592fc60dd21c9",
+      "changes": [
+        {
+          "old": "- [[05 Источники/Papers/TinyBERT|TinyBERT — дистилляция слоёв Transformer и исходная реализация]]",
+          "new": "- [[05 Источники/Papers/TinyBERT|TinyBERT — дистилляция слоёв Transformer и исходная реализация]]\n- [[05 Источники/Papers/GradCache|GradCache — полный контрастивный пакет и повторные проходы энкодера]]"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "650d14791b82f9c04da5cc393877ad8c7e120bd5cdae79fe973d038e2ffabf21",
+      "after_sha256": "57dc841acf156552724b5cb7d8028b0b274fa7bf6a055b70a22d572218cc2983",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning|Эмбеддинги и метрическое обучение]]",
+          "new": "- [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning|Эмбеддинги и метрическое обучение]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-pooling|Mean, CLS и last-token pooling]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-similarity|Косинус, скалярное произведение и норма]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-input-contract|Инструкции, токенизация и обрезка]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-encoders|SBERT, bi-encoder и cross-encoder]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-contrastive|Контрастивное обучение эмбеддингов]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-batch-example|Контрастивный пакет: численный пример]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-positive-sets|Температура, градиенты и несколько positives]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-negatives|Hard negatives и ложные отрицательные]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-in-batch|In-batch negatives и накопление градиентов]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-simcse|SimCSE и две dropout-маски]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-metric-losses|Pair, contrastive и triplet loss]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-marginmse|MarginMSE и дистилляция оценок]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-anisotropy|Анизотропия и whitening эмбеддингов]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-index-memory|Размерность и память векторного индекса]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-matryoshka|Matryoshka и вложенные размерности]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-compatibility|Совместимость энкодеров и пересчёт корпуса]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-qrels|Релевантность, qrels, Recall и Hit]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-ranking-metrics|MRR и nDCG для эмбеддингов]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-exact-search|Exact search: пять документов]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-error-decomposition|Модель, ANN-индекс и неполная разметка]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-gradcache|GradCache — общий loss и повторные проходы]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "8abebc5fc58272ecf87b8628c6f56ea433bc21f3ba345b7d2e1ffaacd956e59d",
+      "after_sha256": "4cd3a725b1870c5ac0039290a0c94b3ecdc3e56aa1c6d4079a2cf2659b6b4607",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning|Embeddings and metric learning]]",
+          "new": "- [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning|Embeddings and metric learning]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-pooling|Mean, CLS and last-token pooling]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-similarity|Cosine, dot product and vector norms]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-input-contract|Instructions, tokenization and truncation]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-encoders|SBERT, bi-encoders and cross-encoders]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-contrastive|Contrastive embedding training]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-batch-example|Contrastive batch: worked example]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-positive-sets|Temperature, gradients and multiple positives]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-negatives|Hard negatives and false negatives]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-in-batch|In-batch negatives and gradient accumulation]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-simcse|SimCSE and two dropout views]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-metric-losses|Pair, contrastive and triplet losses]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-marginmse|MarginMSE and score distillation]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-anisotropy|Embedding anisotropy and whitening]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-index-memory|Dimension and vector-index memory]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-matryoshka|Matryoshka and nested dimensions]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-compatibility|Encoder compatibility and corpus re-encoding]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-qrels|Relevance, qrels, Recall and Hit]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-ranking-metrics|MRR and nDCG for embeddings]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-exact-search|Exact search: five-document example]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-error-decomposition|Model, ANN-index and incomplete-label errors]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-gradcache|GradCache: joint loss and recomputation]]"
+        }
+      ]
+    }
+  ],
+  "created": [
+    "05 Источники/Papers/GradCache.md",
+    "publishing/tools/check_gradcache_examples.py",
+    "publishing/fixtures/gradcache-906f0383/grad_cache.py",
+    "publishing/fixtures/gradcache-906f0383/context_managers.py",
+    "publishing/fixtures/gradcache-906f0383/LICENSE",
+    "publishing/fixtures/gradcache-906f0383/sources.json"
+  ],
+  "sourceComparison": {
+    "publishedPaper": "https://aclanthology.org/2021.repl4nlp-1.31/",
+    "sectionsRead": [
+      "§3.1–3.4 in full",
+      "§4.1–4.2 in full"
+    ],
+    "excerpt": "§3.3 selected prose paragraphs; equations and cache-symbol sentence explicitly omitted; original English retained.",
+    "upstreamCommit": "906f03835fbc183132a9db32612a9e8f180ca3b4",
+    "codeRead": [
+      "grad_cache.py: forward_no_grad,build_cache,forward_backward,cache_step",
+      "context_managers.py in full"
+    ],
+    "sourceFixtures": [
+      {
+        "file": "grad_cache.py",
+        "sha256": "0f89cb2acb22b071b1d7b7f14a1937917801f53fc2684327b078f8a8f4eaf45d"
+      },
+      {
+        "file": "context_managers.py",
+        "sha256": "23cf8db78a5cff485b2ecef3cb670d0df7591618d9d6005902e466536b88788f"
+      },
+      {
+        "file": "LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      }
+    ],
+    "figureGap": "No new GradCache algorithm diagram: the early arXiv v1 illustration is absent from the CC-BY-covered ACL edition. Its permission has not been inferred from the published paper or Apache code license. Existing eight chapter figures retained."
+  },
+  "runtime": {
+    "command": "LC_ALL=C LANG=C UV_DEFAULT_INDEX=https://pypi.org/simple uv run --offline --python 3.13 --with torch==2.14.1 --with numpy==2.5.4 python publishing/tools/check_gradcache_examples.py",
+    "observed": {
+      "chapterExample": 1,
+      "deterministicPairs": 8,
+      "upstreamDropoutPairs": 8,
+      "missingReplayControls": 8
+    },
+    "limits": "CPU derivative equivalence only. No real-model quality, GPU memory or throughput measurements."
+  },
+  "remaining": [
+    "GradCache algorithm illustration in early arXiv v1 was not imported without confirmed reuse rights; source link retained. The published English method explanation and numeric derivative example are present.",
+    "Inherited DPR-slide permissions remain distinct from source identity and visual accessibility; no new independent grant asserted.",
+    "Next full owners: sparse/dense/hybrid retrieval,reranking,full RAG.",
+    "Earlier TTC/distillation current visual/UI checks,remaining owners,course-completeness/rights gaps,public-checkout/Pages-base and dev/Pages release remain whole-goal work.",
+    "No translation,stage,commit,push or deploy in this pass. Whole-owner read is not full-source teaching acceptance."
+  ],
+  "finalRead": {
+    "inputRanges": [
+      "1–300",
+      "301–610",
+      "611–930/EOF"
+    ],
+    "finalRanges": [
+      "1–300",
+      "301–600",
+      "601–900",
+      "901–1166/EOF, then final bounded display/terminology delta"
+    ],
+    "boundedFinalDelta": "Chain-rule display split into two aligned lines for mobile; vector–Jacobian product terminology corrected; full affected paragraph reread.",
+    "lineCount": 1168,
+    "noAiSlop": "Full SKILL/eval read; existing technical reasoning, licensed English quotations, source captions and code preserved. Academic qualifications retained. No chapter compressed into definitions."
+  },
+  "validation": {
+    "scopedVitest": {
+      "files": 3,
+      "tests": 11,
+      "scope": "GradCache preservation, earlier synthetic subject preservation and pre-registration reading receipts"
+    },
+    "existingChapterChecker": {
+      "groupedChecks": 457,
+      "log": "/var/tmp/bookvar-embeddings-examples-20261106.log"
+    },
+    "siteOutput": {
+      "tests": 219,
+      "log": "/var/tmp/bookvar-embeddings-output-20261106.log",
+      "countChange": "Source-native English pages increased17→18 because GradCache source card was added; exact GradCache route assertion added; content checks retained."
+    },
+    "build": {
+      "pages": 2013,
+      "pagefindHtml": 2017,
+      "seconds": 31.57,
+      "log": "/var/tmp/bookvar-embeddings-build-20261106.log"
+    },
+    "links": {
+      "broken": 0,
+      "log": "/var/tmp/bookvar-embeddings-links-20261106.log"
+    },
+    "size": {
+      "bytes": 857804016,
+      "files": 5634,
+      "headroom": 142195984
+    },
+    "topics": {
+      "owners": 153,
+      "indexes": 2,
+      "subjectsAddedPerLocale": 21
+    },
+    "sourceCoverage": "210 matrix rows; checker passed. Structural coverage only.",
+    "courseLedgers": "CS336 Spring2026 and Berkeley Spring2025 ledgers validate. Not course knowledge-completeness acceptance.",
+    "scopedWhitespace": "Tracked touched paths pass; upstream implementation fixtures retained byte-for-byte."
+  },
+  "reader": {
+    "evidence": "docs/audit/evidence/2026-11-06-embeddings-reader",
+    "widths": [
+      1280,
+      375
+    ],
+    "fitViewsPersonallyInspected": 16,
+    "mathDisplays": 12,
+    "katexErrors": 0,
+    "pageOverflow": 0,
+    "aspectErrors": 0,
+    "captionErrors": 0,
+    "mobileZoom": "All eight4x zoom/pan traces captured; end positions reach both extents. DPR loss/table and both SimCSE sides personally inspected at4x. Whole originals retained; small fit-slide text requires zoom.",
+    "inPage": "New chain-rule display and inline DPR/SimCSE figures personally inspected at both widths. Mobile originals use672px local scrollers inside343px columns; page remains375px.",
+    "navigationEvidence": "docs/audit/evidence/2026-11-06-embeddings-navigation",
+    "nativeSubjectClicks": [
+      "/reference/ → /textbook/retrieval/embeddings-metric-learning/#emb-gradcache",
+      "/en/reference/ → /en/textbook/retrieval/embeddings-metric-learning/#emb-gradcache"
+    ],
+    "englishStatus": "Explicit canonical-language fallback inspected. Original English GradCache excerpt and supplement preserved, not a finished English chapter."
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-09",
+  "scope": "Extend the canonical imbalance chapter from a score threshold to a budget-constrained review queue and a selective-label audit; expose both via the Russian and English reference indexes.",
+  "files": [
+    {
+      "source": "00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация.md",
+      "before_sha256": "ddcb9f7feab72f812c048739963969aa7631ab92779c409a80062805d97f4c42",
+      "after_sha256": "316f47db60352adb742e383b451278a77c11a8e5b53badedfa0fe4bff88ffd3c",
+      "changes": [
+        {
+          "old": "позволяют получить промежуточное число тревог. Группу одинаковых\nоценок нельзя разделить одним числовым порогом.",
+          "new": "позволяют получить промежуточное число тревог. Группу одинаковых\nоценок нельзя разделить одним числовым порогом. Если 150 проверок\nсоставляют жёсткий лимит, можно [[#imbalance-review-capacity|разрешить равенства внутри очереди]]."
+        },
+        {
+          "old": "должны быть новыми по отношению к её обучению.",
+          "new": "должны быть новыми по отношению к её обучению.\n\n<a id=\"imbalance-review-capacity\"></a>\n\n### Очередь на 150 проверок\n\nИз 10 000 операций возьмём все 100 с оценкой 0.9. На остальные\n50 мест претендуют 200 операций с оценкой 0.7. Если дополнительных\nпризнаков для отбора нет, можно выбрать 50 из них равновероятно,\nбез возвращения. У каждой из 200 операций шанс попасть в очередь\nравен $50/200=1/4$. Среди них 30 событий, поэтому случайный отбор\nдобавляет в среднем $30/4=7.5$ истинных срабатываний и $170/4=42.5$\nложных. Нагрузка равна 150 при любом результате жеребьёвки.\n\n| Правило | Проверки | Найдено событий |\n| --- | ---: | ---: |\n| Порог 0.9 | 100 | 60 |\n| Первые 150 | 150 | 67.5 |\n| Порог 0.7 | 300 | 90 |\n\nЧисло 67.5 — среднее по всем жеребьёвкам. При таком отборе в среднем\nостаётся $100-67.5=32.5$ пропуска и возникает $150-67.5=82.5$ ложных\nтревог. При прежних ценах ошибки стоят в среднем\n$32.5\\cdot100+82.5=3332.5$ единицы вместо 4040 при пороге 0.9.\nОжидаемая precision@150 равна $67.5/150=0.45$,\nа ожидаемый recall — $67.5/100=0.675$.\nУ порога 0.9 precision выше (0.60), но он находит меньше событий.\nПорог 0.7 находит больше, но требует вдвое больше проверок,\nчем доступно. [Kar et al., §2](https://arxiv.org/html/1505.06813#S2)\nразбирают precision@k как метрику отбора верхней части списка.\n\nВыбор первых 50 строк с оценкой 0.7 дал бы в учебном массиве\n30 дополнительных событий: там метки сгруппированы для удобства\nподсчёта. Этот порядок нельзя использовать при оценке очереди.\nНа практике вторичный ключ задают до просмотра исходов: например,\nфиксируют случайный порядок по идентификаторам либо используют\nдоступный на момент решения признак и проверяют правило целиком\nна будущих по времени данных.\n\nРанжирование по вероятности минимизирует ожидаемую стоимость ошибок\nпри одинаковых ценах и одинаковом расходе ресурса на одну проверку.\nОжидаемая экономия от положительного решения равна\n$p C_{FN}-(1-p)C_{FP}$ и растёт с $p$. При лимите «не больше 150»\nне нужно заполнять очередь случаями с отрицательной экономией.\nПри разных ценах сравнивают ожидаемую экономию по операциям, а не\nодин риск. В таблице 0.9 и 0.7 — оценки ранжирования; подставлять их\nв формулу вместо $p$ нельзя.\n\nВ примере все операции известны к моменту отбора. Для потока сначала\nзадают интервал накопления или правило немедленного решения. Если\nпотратить все 150 мест утром, более высокий score вечером уже\nне сможет изменить принятые решения."
+        },
+        {
+          "old": "оценка по согласованному протоколу.",
+          "new": "оценка по согласованному протоколу.\n\n<a id=\"imbalance-selective-labels\"></a>\n\n### Когда метки есть только у проверенных операций\n\nПредположим, в одной очереди на 150 проверок нашли 70 событий.\nДля этой очереди precision равна $70/150\\approx0.467$. Вне очереди\nосталось 9850 операций без меток: для recall нужно знать, сколько\nсобытий было среди них. Если считать неразмеченные операции\nотрицательными, получится recall 100% даже у модели, пропускающей\nсобытия каждый день. На [Figure 1 из Lakkaraju et al.](https://www.cs.cornell.edu/home/kleinber/kdd17-selective.pdf)\nодна ветвь решения заканчивается наблюдаемым исходом, другая —\nпропущенной меткой. Это пример проблемы выборочной разметки.\n\nПусть в рамках отдельного аудита можно разметить 197 из 9850 операций\nвне очереди. Отбираем их равновероятно без возвращения, так что шанс\nпопасть в аудит равен 2%. Если найдено одно событие, оно представляет\n$1/0.02=50$ пропущенных событий в оценке для всей группы. Получаем\nоценку recall $70/(70+50)\\approx0.583$. В синтетическом наборе из\n10 000 операций истинных событий ровно 100, так что истинный recall\nэтой очереди равен 0.70. Разница показывает погрешность одной выборки.\nВ эксплуатации бюджет аудита закладывают отдельно или выделяют\nчасть рабочих мест под случайную проверку.\n\nПри разных шансах включения $\\pi_i$ вес каждого проверенного события\nравен $1/\\pi_i$. Если $Y_i$ — метка операции вне очереди, а $I_i$\nуказывает, попала ли она в аудит, оценка числа пропусков имеет вид\n\n$$\n\\widehat{FN}=\\sum_{i\\ \\text{вне очереди}}\\frac{I_iY_i}{\\pi_i}.\n$$\n\nВычислять нужно только слагаемые для проверенных операций.\nПри $\\pi_i>0$ средний вклад каждого случая по всем возможным отборам\nравен его истинной метке: $\\mathbb E[I_i]=\\pi_i$.\nЭто [оценка Хорвица–Томпсона](https://www150.statcan.gc.ca/n1/pub/12-001-x/2013001/article/11831/section2-eng.htm).\nНесмещённость оценки числа пропусков не переносится на дробь\n$TP/(TP+\\widehat{FN})$. В примере при 30 истинных пропусках\nвероятность не найти ни одного в аудите равна\n$\\binom{9820}{197}/\\binom{9850}{197}\\approx0.545$:\nв числителе все способы выбрать 197 операций без событий,\nв знаменателе все способы выбрать 197 операций вне очереди.\nПоэтому рядом с оценкой показывают размер выборки, число найденных\nсобытий и неопределённость с учётом схемы отбора.\n\nЕсли вблизи порога события встречаются чаще, можно выделить этому\nдиапазону больше проверок. Нужно сохранять вероятности включения\nи оставлять ненулевой шанс проверки у остальных: при $\\pi_i=0$\nвзвешивание не восстанавливает вклад группы.\nСлучайная проверка подходит, если она обнаруживает уже существующий\nисход. Если действие меняет его, формула не оценит, что случилось бы\nбез вмешательства."
+        },
+        {
+          "old": "last_updated: 2026-10-20\nlast_verified: 2026-10-20\nprimary_sources:",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-10-20\nreference_terms:\n  - label: Очередь проверки — top‑k и равные оценки\n    label_en: Review capacity — top-k and tied scores\n    anchor: imbalance-review-capacity\n  - label: Выборочная разметка — аудит пропущенных событий\n    label_en: Selective labels — auditing missed events\n    anchor: imbalance-selective-labels\nprimary_sources:"
+        },
+        {
+          "old": "  - https://scikit-learn.org/stable/modules/calibration.html",
+          "new": "  - https://scikit-learn.org/stable/modules/calibration.html\n  - https://arxiv.org/html/1505.06813#S2\n  - https://www.cs.cornell.edu/home/kleinber/kdd17-selective.pdf\n  - https://www150.statcan.gc.ca/n1/pub/12-001-x/2013001/article/11831/section2-eng.htm"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "db2932d70493af49b885d8a3843cb61244f1c61d553b0bb593c3cd6eb1325665",
+      "after_sha256": "e456ddf83ee0dc8040e57c60eb4192db35ff2f3055a53bd0ae042cfecfa0aab8",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация|Несбалансированная классификация: метрики, пороги и обучение]]",
+          "new": "- [[00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация|Несбалансированная классификация: метрики, пороги и обучение]]\n  - [[00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация#imbalance-review-capacity|Очередь проверки — top‑k и равные оценки]]\n  - [[00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация#imbalance-selective-labels|Выборочная разметка — аудит пропущенных событий]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "c450802a6ca17c132b21ddf12caa4c991954bbba78ca091251a1e5e100036169",
+      "after_sha256": "05eb2b9d51577457118e5913baaaebb3f71672a1eb88ca44aa243048775f9076",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация|Imbalanced classification]]",
+          "new": "- [[00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация|Imbalanced classification]]\n  - [[00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация#imbalance-review-capacity|Review capacity — top-k and tied scores]]\n  - [[00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация#imbalance-selective-labels|Selective labels — auditing missed events]]"
+        }
+      ]
+    }
+  ],
+  "review": {
+    "sources": "scikit-learn threshold guide and cost-sensitive example; Kar et al. §2 for precision@k; Lakkaraju et al. §3 and Figure 1 for selectively observed outcomes; Aronow and Samii §2 for the inverse-inclusion estimator.",
+    "examples": "Reuse the same 10,000 fully labeled synthetic observations. Expected counts under a uniform boundary draw are distinguished from the single audit realization. Cost and recall require separate checks.",
+    "visuals": "Retained all existing original gallery figures. Linked to the selectively labeled-outcome diagram at its author-hosted source; no new raster copy or license claim.",
+    "local_checks": "2021 pages built; 724 publication checks and 224 built-output checks passed; zero broken internal routes, fragments or files. Reversal reproduced the pinned original chapter and both preceding reference-index hashes. Threshold gallery PNG matches the archived original byte-for-byte.",
+    "reader": "At 375 and 1280 px followed both reference links and the in-chapter link in both reader shells, opened all 13 figures with captions, inspected the threshold graphic with zoom and pan and verified all three comparison columns remain visible. No page overflow or KaTeX errors on these pages.",
+    "limits": "Synthetic arithmetic and local reader checks only. No new English translation, live policy evaluation, push or deployment."
+  }
+}

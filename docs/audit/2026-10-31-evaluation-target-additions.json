@@ -1,0 +1,111 @@
+{
+  "date": "2026-10-31",
+  "scope": "Source-faithful target-transformation addition after a complete evaluation chapter/source reread. Prior explanations, two programs and fifteen figure embeds retained.",
+  "files": [
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/05 Оценивание, кросс-валидация и выбор порога.md",
+      "before_sha256": "c1c725e2074ccde8ecda865accdddf2c94232df190c66ed327e9148406c01a77",
+      "after_sha256": "8d4ae6db1e65d4fabd43ffeb4eea86e5b0a37e51976fbd34b4511cb2a49b7f16",
+      "changes": [
+        {
+          "old": "| 0,1 | 2 | 98 | 1 | 2/100 | 1 |",
+          "new": "| 0,1 | 2 | 98 | 1 | $\\frac{2}{100}$ | 1 |"
+        },
+        {
+          "old": "| № | Обучение | Зазор | Проверка |",
+          "new": "| № | Обуче&shy;ние | Зазор | Проверка |"
+        },
+        {
+          "old": "last_updated: 2026-10-22",
+          "new": "last_updated: 2026-10-31"
+        },
+        {
+          "old": "## Ошибки оценки, которые выглядят правдоподобно",
+          "new": "### Target transformation and residuals\n\n> On these plots, we see that our model tends to under-estimate the price of the\n> house both for the lowest and large True price values. This means that the\n> residuals still hold some **structure typically visible as the \"banana\" or\n> \"smile\" shape of the residual plot**. This is often a clue that our model\n> could be improved, either by transforming the features, the target or\n> sometimes changing the model type or its parameters. In this case let's try to\n> see if the model would benefit from a target transformation that monotonically\n> reshapes the target variable to follow a normal distribution.\n\n*scikit-learn MOOC authors,\n[Regression](https://inria.github.io/scikit-learn-mooc/python_scripts/metrics_regression.html),\nCC BY 4.0. Original English excerpt; not translated.*\n\nIn the course experiment, `TransformedTargetRegressor` combines a\n`QuantileTransformer(n_quantiles=900, output_distribution=\"normal\")` with\n`LinearRegression`. During `fit`, the transformer learns the distribution of\ntraining targets, maps them to normal quantiles, and passes the transformed\nvalues to the regressor. During `predict`, it maps the regressor's output back\nto prices using the inverse transformation. Predictions and evaluation\nmetrics therefore remain in the original price units; the least-squares\nfit itself takes place in the transformed space.\n\n![[00 Учебник/Assets/Figures/curated/classical-ml-evaluation/regression-transformed-target.png|Original MOOC predictions and residuals after target transformation]]\n\n*scikit-learn MOOC authors,\n[Regression, target transformation](https://inria.github.io/scikit-learn-mooc/python_scripts/metrics_regression.html),\nCC BY 4.0. Unchanged original figure. Both axes still use prices in thousands\nof dollars. The large overprediction near 750 and residual near −600 remain:\nthe transformation has not eliminated every large error. Compare the shape\nof the cloud with the preceding untransformed-model figure, not just the\nrange of its axes.*\n\nChanging the target changes which errors the fit penalizes. With squared\nloss on the original target, a constant model minimizes\n$\\sum_i(y_i-c)^2$ and predicts the arithmetic mean. With squared loss on\n$\\log y$, it minimizes $\\sum_i(\\log y_i-a)^2$; after inversion, its prediction\nis the geometric mean $\\exp(\\frac1n\\sum_i\\log y_i)$.\nFor the two positive targets 1 and 9, these predictions are 5 and 3.\nThe original-scale MSE is 16 at 5 but 20 at 3. The model that minimizes\nlog-space squared error need not minimize original-scale squared error.\nThese are fitted constants for a two-point example, not estimates of\ngeneralization performance.\n\n```python\nimport numpy as np\nfrom sklearn.compose import TransformedTargetRegressor\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import mean_squared_error\n\nconstant_X = np.zeros((2, 1))\npositive_y = np.array([1., 9.])\nraw_constant = LinearRegression().fit(constant_X, positive_y)\nlog_constant = TransformedTargetRegressor(\n    regressor=LinearRegression(), func=np.log, inverse_func=np.exp,\n).fit(constant_X, positive_y)\nraw_prediction = raw_constant.predict([[0.]])[0]\nlog_prediction = log_constant.predict([[0.]])[0]\nnp.testing.assert_allclose([raw_prediction, log_prediction], [5., 3.])\nnp.testing.assert_allclose([\n    mean_squared_error(positive_y, raw_constant.predict(constant_X)),\n    mean_squared_error(positive_y, log_constant.predict(constant_X)),\n], [16., 20.])\n```\n\nThe logarithm is a simple invertible example, not the quantile transformation\nused in the course figure. It requires strictly positive targets. For a\nflexible model, the same issue concerns conditional means:\n$\\exp(\\mathbb E[\\log Y\\mid X])$ generally differs from\n$\\mathbb E[Y\\mid X]$. Inverting a log prediction does not automatically\nrecover the squared-error-optimal price prediction.\n\nA learned target transformer belongs inside the cross-validation procedure,\njust like a learned feature transformer. Fit it only on the targets of each\ntraining fold, transform predictions back, and compute the selected metric\nagainst the untouched validation targets. If the residual plot prompted the\nchoice of transformation, those observations have already participated in\nmodel selection; they are no longer an independent final test.\nThe course reports improved metrics for its Ames experiment, not a guarantee\nfor other datasets or objectives. The complete experiment remains available\nin the linked original lesson; the fit/inverse-predict contract is documented\nin [scikit-learn, Transforming target in regression](https://scikit-learn.org/stable/modules/compose.html#transformed-target-regressor).\n\n## Ошибки оценки, которые выглядят правдоподобно"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "00debbf6f30f3b3300f3c60bf28086668a1c36da207051ebd6ee0596a440b0d6",
+      "after_sha256": "5124334acc38c45e63fe12bd7ef4181fd0fedc8af5de85fefba7e3b9ac174b5e",
+      "changes": [
+        {
+          "old": "  - id: curated-ensembles-mooc-bagging-polynomial-f4eb32e1b459",
+          "new": "  - id: curated-evaluation-transformed-target-42c821c57965\n    asset: 00 Учебник/Assets/Figures/curated/classical-ml-evaluation/regression-transformed-target.png\n    author: INRIA, scikit-learn MOOC contributors\n    source_url: https://github.com/INRIA/scikit-learn-mooc/blob/93840904e26a215ecddf1a30e9a5eb920284fb29/python_scripts/metrics_regression.html\n    source_image_url: https://raw.githubusercontent.com/INRIA/scikit-learn-mooc/93840904e26a215ecddf1a30e9a5eb920284fb29/_images/42c821c57965432baa2d5f05d48516ebf94f928f0fabdc42497b7dc019373d9d.png\n    commit: 93840904e26a215ecddf1a30e9a5eb920284fb29\n    sha256: 42c821c57965432baa2d5f05d48516ebf94f928f0fabdc42497b7dc019373d9d\n    license: CC BY 4.0\n    license_url: https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE\n    license_evidence: 05 Источники/Originals/train-validation-test-2026-10-21/mooc-LICENSE.txt\n    license_evidence_sha256: f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f\n    derivation: source-raster-copy\n    provenance_confirmation: pinned-upstream-repository\n    metadata_status: verified\n    modifications: Unchanged original published image; no crop, text edits or redraw.\n    last_verified: 2026-10-31\n    used_in:\n      - 00 Учебник/01 Классическое машинное обучение/05 Оценивание, кросс-валидация и выбор порога.md\n  - id: curated-ensembles-mooc-bagging-polynomial-f4eb32e1b459"
+        }
+      ]
+    }
+  ],
+  "sourceComparison": {
+    "courseCommit": "0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6",
+    "pngOutputCommit": "93840904e26a215ecddf1a30e9a5eb920284fb29",
+    "fullyRead": [
+      [
+        "metrics_classification.py.md",
+        429
+      ],
+      [
+        "metrics_regression.py.md",
+        311
+      ],
+      [
+        "cross_validation_stratification.py.md",
+        286
+      ],
+      [
+        "cross_validation_grouping.py.md",
+        243
+      ],
+      [
+        "cross_validation_time.py.md",
+        243
+      ],
+      [
+        "cross_validation_nested.py.md",
+        191
+      ]
+    ],
+    "supplementary": [
+      "Complete Transforming target in regression section of scikit-learn 1.9.1 compose.rst, fetched from the release tag."
+    ],
+    "mechanisms": [
+      [
+        "Classification metrics/ranking",
+        "Threshold example, AP versus trapezoids, pair-count AUC, prevalence and undefined denominators retained."
+      ],
+      [
+        "Calibration",
+        "Sigmoid/isotonic examples, probability versus score, Brier caveat retained."
+      ],
+      [
+        "CV estimand and constraints",
+        "Groups, temporal gap, pooled metrics and nested model/threshold selection retained."
+      ],
+      [
+        "Target transformation",
+        "Original-language residual explanation, original post-transform figure; fit/transform/inverse-predict, changed loss and fold isolation added."
+      ],
+      [
+        "Uncertainty",
+        "All 27 paired cluster-bootstrap replicas retained."
+      ]
+    ],
+    "exclusions": [
+      "MOOC's statement that ROC-AUC has lower bound 0.5 is false; existing counterexample and bound zero retained.",
+      "MOOC dummy regression baseline does not guarantee exactly zero held-out R2; train/test mean distinction retained.",
+      "Reconstructed writer boundaries are a source hypothesis, not verified writer labels.",
+      "Leave-one-quarter-out can train on the future, so it is not sufficient for forecasting.",
+      "No guarantee that a target transformation improves original-scale error; the original large residual remains visible.",
+      "No inference of clinical performance from synthetic screening numbers."
+    ]
+  },
+  "verification": {
+    "publishedBlocks": 3,
+    "figureEmbeds": 16,
+    "numeric": "All three published blocks and independent checks passed at final chapter SHA 8d4ae6db1e65d4fabd43ffeb4eea86e5b0a37e51976fbd34b4511cb2a49b7f16.",
+    "reader": "New original checked at desktop 1280x720 and mobile 360x800 with 3x pan/caption inspection. Six final mobile tables 313/313, document 345/345, zero math errors/overflow; honest EN fallback. Previous fifteen image embeds preserved, their earlier full visual checks remain historical.",
+    "build": "Final root build 2007 routes, 2011 HTML files; 202 scoped HTML/preservation tests passed; zero broken internal links. 848444321 bytes, 5564 files. Registry/preservation 169 tests passed before final table-only formatting correction; assets and registry unchanged, final journal preservation rerun.",
+    "published": false
+  }
+}

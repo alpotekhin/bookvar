@@ -1,0 +1,186 @@
+{
+  "date": "2026-11-11",
+  "scope": "Compare two adaptive optimizers on the existing D2L quadratic; use a licensed PMLR plot to explain escape from a saddle point. Preserve the CS231n animation as an external link and a local archival record.",
+  "review": {
+    "sources": "D2L §§12.7.3 and 12.8.2, PyTorch examples; Staib et al. ICML 2019 §6 Figure 1; CS231n adaptive learning rates. The exact archived 2017 PMLR publication agreement covers the proceedings edition; the arXiv edition was not used.",
+    "worked_examples": "Recalculated first, second and twentieth steps with the source coefficients and epsilon inside the root. The gradient at the exact saddle is zero; a 0.01 displacement along the negative-curvature direction produces an SGD update to 0.0101. Explain that Staib et al. inject stochastic gradients by sampling an objective component, with coordinate standard deviations 1 and 0.1.",
+    "style": "Keep the existing optimizer formulas and their placement. Compare the figure runs under their stated settings; distinguish nominal learning rate from initial displacement and a single illustrated case from an optimizer ranking.",
+    "scope_limit": "Canonical Russian owner and existing EN fallback; no translation and no publication. License and source snapshots remain in the ignored local evidence directory.",
+    "verification": "Both SVGs are identical to their archived originals; the PMLR crop was re-rendered at 360 dpi and matched byte-for-byte. Chrome checked all three figures at 1280 and 375 CSS px in both routes, including 4× zoom and pan on mobile. The initial build wrote three all-zero Pagefind JS files despite exiting successfully; a same-version CLI rebuild into a fresh directory differed in only those files, and a subsequent normal Astro build emitted valid modules without repair. On the final build: 2083 pages, 304 output tests, 0 broken internal routes/fragments/files, 2 reading-receipt tests. The 198 registry tests passed before final prose-only adjustments; the verified assets and source links did not change. The exact journal inverse preserves every original code fence."
+  },
+  "figures": [
+    {
+      "id": "curated-optimizer-d2l-adagrad-f264baac3ab8",
+      "asset": "00 Учебник/Assets/Figures/curated/optimizer-curvature-2026-11-11/d2l-adagrad-trajectory.svg",
+      "title": "Adagrad trajectory on the anisotropic quadratic",
+      "author": "Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola",
+      "source_url": "https://d2l.ai/chapter_optimization/adagrad.html#the-algorithm",
+      "source_image_url": "https://d2l.ai/_images/output_adagrad_2fb0ed_3_1.svg",
+      "source_asset": "05 Источники/Originals/optimizer-curvature-2026-11-11/d2l-adagrad-trajectory.svg",
+      "source_asset_sha256": "f264baac3ab84b55816ad15b5dfa2ff5c2d44ec6e443be3f28844732434b7257",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "license_evidence_url": "https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE-SUMMARY",
+      "license_evidence": "05 Источники/Originals/optimizer-curvature-2026-11-11/d2l-license-summary.txt",
+      "license_evidence_sha256": "eeff5a6b129a319ee80e34762695dfa5349fe385a92c02168e6d21deff539f9c",
+      "sha256": "f264baac3ab84b55816ad15b5dfa2ff5c2d44ec6e443be3f28844732434b7257",
+      "bytes": 45804,
+      "source_viewbox": [
+        0,
+        0,
+        326.827087,
+        244.474996
+      ],
+      "modifications": "Original SVG copied byte-for-byte; no crop, redraw, or translation.",
+      "derivation": "source-svg-copy",
+      "rights_status": "source-license-verified",
+      "metadata_status": "verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md"
+      ]
+    },
+    {
+      "id": "curated-optimizer-d2l-rmsprop-694bf0cc30d9",
+      "asset": "00 Учебник/Assets/Figures/curated/optimizer-curvature-2026-11-11/d2l-rmsprop-trajectory.svg",
+      "title": "RMSProp trajectory on the anisotropic quadratic",
+      "author": "Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola",
+      "source_url": "https://d2l.ai/chapter_optimization/rmsprop.html#implementation-from-scratch",
+      "source_image_url": "https://d2l.ai/_images/output_rmsprop_251805_15_1.svg",
+      "source_asset": "05 Источники/Originals/optimizer-curvature-2026-11-11/d2l-rmsprop-trajectory.svg",
+      "source_asset_sha256": "694bf0cc30d91abd3287e46be9fc7c855a5f2feeea417a5b05fdff2630f7626a",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "license_evidence_url": "https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE-SUMMARY",
+      "license_evidence": "05 Источники/Originals/optimizer-curvature-2026-11-11/d2l-license-summary.txt",
+      "license_evidence_sha256": "eeff5a6b129a319ee80e34762695dfa5349fe385a92c02168e6d21deff539f9c",
+      "sha256": "694bf0cc30d91abd3287e46be9fc7c855a5f2feeea417a5b05fdff2630f7626a",
+      "bytes": 45577,
+      "source_viewbox": [
+        0,
+        0,
+        326.827087,
+        244.474996
+      ],
+      "modifications": "Original SVG copied byte-for-byte; no crop, redraw, or translation.",
+      "derivation": "source-svg-copy",
+      "rights_status": "source-license-verified",
+      "metadata_status": "verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md"
+      ]
+    },
+    {
+      "id": "curated-optimizer-staib19a-2b8c72a4cf04",
+      "asset": "00 Учебник/Assets/Figures/curated/optimizer-curvature-2026-11-11/staib19a-figure1.png",
+      "title": "Escaping Saddle Points with Adaptive Gradient Methods, Figure 1",
+      "author": "Matthew Staib, Sashank Reddi, Satyen Kale, Sanjiv Kumar, Suvrit Sra",
+      "source_url": "https://proceedings.mlr.press/v97/staib19a.html",
+      "figure_url": "https://proceedings.mlr.press/v97/staib19a/staib19a.pdf#page=8",
+      "source_image_url": "https://proceedings.mlr.press/v97/staib19a/staib19a.pdf#page=8",
+      "source_asset": "05 Источники/Originals/optimizer-curvature-2026-11-11/staib19a.pdf",
+      "source_asset_sha256": "c2a44df0bef23c3a79bb16227cdf185bc2b9c7e4f70949b4853897327f54cb54",
+      "source_page": 8,
+      "render_dpi": 360,
+      "render_page_size_px": [
+        3060,
+        3960
+      ],
+      "crop_box_px": [
+        1596,
+        348,
+        2628,
+        1422
+      ],
+      "dimensions_px": [
+        1032,
+        1074
+      ],
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence_url": "https://github.com/mlresearch/mlresearch.github.io/blob/a2ef1b1ad989662c516c8f0df1d20eb5993e38c6/pmlr-license-agreement.md",
+      "license_evidence": "05 Источники/Originals/optimizer-curvature-2026-11-11/pmlr-license-agreement-2017.md",
+      "license_evidence_sha256": "1f6264e794cfe5292f6c1c4dca53bfc9bb5777329bd957af8c32c9a39f1e9979",
+      "sha256": "2b8c72a4cf045dd90de92580e751c7ad025edf8895ed754bafac599fc61a00cb",
+      "bytes": 109874,
+      "modifications": "PDF page render cropped to both plot panels, keeping axes and legends. No redraw or relabeling; chapter provides the caption.",
+      "derivation": "pdf-page-render-crop",
+      "rights_status": "source-license-verified",
+      "metadata_status": "verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md"
+      ]
+    }
+  ],
+  "retired": {
+    "id": "curated-cs231n-opt-000000000095",
+    "asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif",
+    "author": "Alec Radford",
+    "source_url": "https://cs231n.github.io/neural-networks-3/",
+    "license": null,
+    "license_url": null,
+    "rights_status": "source-republication-unverified",
+    "provenance_confirmation": "source-bytes-verified",
+    "title": "Optimizer trajectories near a saddle point",
+    "commit": "8ec57ccfc32379ae4b37c45de949af359673f92f",
+    "source_image_url": "https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/nn3/opt1.gif",
+    "modifications": "Unchanged GIF, byte-identical to opt1.gif in the pinned CS231n course repository. The course credits Alec Radford; a grant for the GIF was not verified.",
+    "sha256": "a3d84d671ff120170146dbae76456ac9c2ab5ad15f50ac828791752451173b29",
+    "bytes": 731184,
+    "dimensions_px": [
+      620,
+      480
+    ],
+    "metadata_status": "verified",
+    "last_verified": "2026-11-11",
+    "derivation": "source-raster-copy-byte-verified",
+    "source_asset_sha256": "a3d84d671ff120170146dbae76456ac9c2ab5ad15f50ac828791752451173b29",
+    "used_in": [],
+    "publication_status": "retired",
+    "former_used_in": [
+      "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md"
+    ],
+    "retirement_reason": "No separate redistribution grant was verified; the chapter links to the original CS231n animation and uses a licensed saddle-point plot.",
+    "replacement": "00 Учебник/Assets/Figures/curated/optimizer-curvature-2026-11-11/staib19a-figure1.png"
+  },
+  "files": [
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-11-03",
+          "new": "last_updated: 2026-11-11"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"optimizer-adaptive-trajectories\"></a>\n\n#### Две траектории на одной функции\n\nВернёмся к $L(x)=0{,}1x_1^2+2x_2^2$ и начальной точке $(-5,-2)$.\nВ [примерах D2L](https://d2l.ai/chapter_optimization/adagrad.html#the-algorithm)\nоба метода используют $\\eta=0{,}4$ и точный градиент, который\nв начальной точке равен $(-1,-8)$.\nВ коде книги $\\varepsilon=10^{-6}$ стоит под корнем:\nзнаменатель равен $\\sqrt{r_t+\\varepsilon}$. В первом шаге эта поправка\nмала, зато выбор накопителя меняет длину шага заметно.\n\nУ Adagrad $r_1=(1,64)$. Деление на корень почти выравнивает\nкомпоненты градиента по модулю, и первая точка после обновления\nполучается близкой к $(-4{,}6,-1{,}6)$. Затем $r_t$ продолжает расти:\nчерез 20 шагов параметры всё ещё в точке $(-2{,}383,-0{,}159)$.\nНа графике последние точки оранжевой траектории сближаются, хотя до\nминимума $(0,0)$ ещё есть расстояние.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/optimizer-curvature-2026-11-11/d2l-adagrad-trajectory.svg|Траектория Adagrad идёт от точки (−5, −2) вправо и вверх; через 20 шагов она ещё далеко от начала координат.]]\n\n*Aston Zhang, Zachary C. Lipton, Mu Li и Alexander J. Smola,\n[Dive into Deep Learning, §12.7.3](https://d2l.ai/chapter_optimization/adagrad.html#the-algorithm),\n[исходный SVG](https://d2l.ai/_images/output_adagrad_2fb0ed_3_1.svg),\n[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Без изменений.*\n\nУ RMSProp при $\\rho=0{,}9$ первый накопитель в десять раз меньше:\n$r_1=(0{,}1,6{,}4)$. При том же $\\eta$ первый шаг почти в $\\sqrt{10}$\nраза длиннее по каждой координате и приводит в $(-3{,}735,-0{,}735)$.\nВ следующих обновлениях старые квадраты теряют вес. Когда текущий\nквадрат градиента меньше накопителя, накопитель уменьшается вместо того,\nчтобы продолжать расти. На двадцатом шаге точка $(-0{,}011,0)$\nоказывается близко к центру контуров.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/optimizer-curvature-2026-11-11/d2l-rmsprop-trajectory.svg|RMSProp стартует из точки (−5, −2), первый шаг заметно длиннее, чем у Adagrad; через 20 шагов траектория почти достигает начала координат.]]\n\n*Aston Zhang, Zachary C. Lipton, Mu Li и Alexander J. Smola,\n[Dive into Deep Learning, §12.8.2](https://d2l.ai/chapter_optimization/rmsprop.html#implementation-from-scratch),\n[исходный SVG](https://d2l.ai/_images/output_rmsprop_251805_15_1.svg),\n[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Без изменений.*\n\nНа обоих рисунках одинаковы функция, начальная точка и множитель $\\eta$.\nДлины первых шагов различаются уже из-за нулевого состояния накопителей.\nЭти траектории показывают результат для выбранных настроек; по ним\nнельзя отделить влияние первого шага от влияния затухания на следующих шагах.\n\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif|Alec Radford: траектории оптимизаторов около седловой точки]]\n\n*Анимация Alec Radford в\n[CS231n — Per-parameter adaptive learning rates](https://cs231n.github.io/neural-networks-3/#ada)\nпоказывает поведение методов около седловой точки.\n[Исходный GIF](https://cs231n.github.io/assets/nn3/opt1.gif).\nЗдесь изображена другая поверхность, не функция D2L выше.*\n\nСледующий код воспроизводит таблицу и различие регуляризаторов.",
+          "new": "Следующий код воспроизводит таблицу и различие регуляризаторов."
+        },
+        {
+          "old": "\n",
+          "new": "<a id=\"optimizer-saddle-noise\"></a>\n\n### Выход из седловой точки\n\nНа выпуклой поверхности D2L обе координаты ведут к минимуму. У\n$L(x)=\\tfrac12x_1^2-0{,}05x_2^2$ в точке $(0,0)$ градиент тоже равен нулю,\nно при движении вдоль $x_2$ значение функции падает. Если вычислять\nточный градиент в этой точке и начать с нулевых накопителей, ни SGD,\nни RMSProp не сделает шага. Сдвинем $x_2$ до $0{,}01$. Компонента\nградиента по этой координате станет $-0{,}001$, и шаг SGD\nс $\\eta=0{,}1$ увеличит $x_2$ до $0{,}0101$.\n\nВ опыте [Staib et al., §6](https://proceedings.mlr.press/v97/staib19a.html)\nтакое смещение создаёт случайный выбор слагаемого функции потерь.\nОба метода начинают точно в седле, но получают градиент одного слагаемого\nвместо среднего. У этого градиента в начальной точке среднее равно нулю,\nа стандартные отклонения по координатам равны $1$ и $0{,}1$. Вдоль\nнаправления спуска $x_2$ типичное возмущение слабее в десять раз.\nRMSProp делит компоненты градиента на разные масштабы, поэтому при\nтакой разнице слабое направление не обязано давать столь же малое\nсмещение. Член десятой степени удерживает функцию от неограниченного\nпадения вдали от седла и не меняет кривизну в начале координат.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/optimizer-curvature-2026-11-11/staib19a-figure1.png|Два графика значения функции. Оранжевые линии SGD при η=0,01 и RMSProp при η=0,001 падают примерно в одном диапазоне итераций. Линия SGD после падения колеблется сильнее.]]\n\n*Matthew Staib, Sashank Reddi, Satyen Kale, Sanjiv Kumar и Suvrit Sra,\n[Escaping Saddle Points with Adaptive Gradient Methods](https://proceedings.mlr.press/v97/staib19a.html),\nICML 2019, [рис. 1, с. 8 PDF](https://proceedings.mlr.press/v97/staib19a/staib19a.pdf#page=8),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nОбе панели извлечены из PDF, подписи осей и легенды сохранены.*\n\nНа графиках оранжевые кривые покидают окрестность нуля примерно после\nодного и того же числа итераций: SGD при $\\eta=0{,}01$\nи RMSProp при $\\eta=0{,}001$.\nПосле падения значение функции у SGD заметно колеблется. При меньшей\nскорости RMSProp ($\\eta=0{,}0001$, нижняя зелёная линия) такого падения\nна графике ещё нет. Авторы задавали $\\rho=1-\\eta^{2/3}$, поэтому у\nтрёх запусков RMSProp менялась и скорость обучения, и вес истории.\nИз этого опыта нельзя заключить, что RMSProp быстрее выйдет из любого седла.\n\n[Анимация Alec Radford в CS231n](https://cs231n.github.io/neural-networks-3/#ada)\nпоказывает траектории около седла на другой поверхности\n([оригинальный GIF](https://cs231n.github.io/assets/nn3/opt1.gif)).\n\n"
+        }
+      ],
+      "lines": 1741,
+      "after_sha256": "6687b625639f0a129244e284f3f94718b184d3e0784186fa233f843e79dff6ff",
+      "before_sha256": "f8f458c1542b958a3b4b5eb29dd5fb861565b4267a9a64e9a2fd050849db1f80"
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "changes": [
+        {
+          "old": "  - {\"id\":\"curated-cs231n-opt-000000000095\",\"asset\":\"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif\",\"author\":\"Alec Radford\",\"source_url\":\"https://cs231n.github.io/neural-networks-3/\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"provenance_confirmation\":\"source-bytes-verified\",\"title\":\"Optimizer trajectories near a saddle point\",\"commit\":\"8ec57ccfc32379ae4b37c45de949af359673f92f\",\"source_image_url\":\"https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/nn3/opt1.gif\",\"modifications\":\"Unchanged GIF, byte-identical to opt1.gif in the pinned CS231n course repository. The course credits Alec Radford; a grant for the GIF was not verified.\",\"sha256\":\"a3d84d671ff120170146dbae76456ac9c2ab5ad15f50ac828791752451173b29\",\"bytes\":731184,\"dimensions_px\":[620,480],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-byte-verified\",\"source_asset_sha256\":\"a3d84d671ff120170146dbae76456ac9c2ab5ad15f50ac828791752451173b29\",\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md\"]}",
+          "new": "  - {\"id\":\"curated-optimizer-d2l-adagrad-f264baac3ab8\",\"asset\":\"00 Учебник/Assets/Figures/curated/optimizer-curvature-2026-11-11/d2l-adagrad-trajectory.svg\",\"title\":\"Adagrad trajectory on the anisotropic quadratic\",\"author\":\"Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola\",\"source_url\":\"https://d2l.ai/chapter_optimization/adagrad.html#the-algorithm\",\"source_image_url\":\"https://d2l.ai/_images/output_adagrad_2fb0ed_3_1.svg\",\"source_asset\":\"05 Источники/Originals/optimizer-curvature-2026-11-11/d2l-adagrad-trajectory.svg\",\"source_asset_sha256\":\"f264baac3ab84b55816ad15b5dfa2ff5c2d44ec6e443be3f28844732434b7257\",\"license\":\"CC BY-SA 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by-sa/4.0/\",\"license_evidence_url\":\"https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE-SUMMARY\",\"license_evidence\":\"05 Источники/Originals/optimizer-curvature-2026-11-11/d2l-license-summary.txt\",\"license_evidence_sha256\":\"eeff5a6b129a319ee80e34762695dfa5349fe385a92c02168e6d21deff539f9c\",\"sha256\":\"f264baac3ab84b55816ad15b5dfa2ff5c2d44ec6e443be3f28844732434b7257\",\"bytes\":45804,\"source_viewbox\":[0,0,326.827087,244.474996],\"modifications\":\"Original SVG copied byte-for-byte; no crop, redraw, or translation.\",\"derivation\":\"source-svg-copy\",\"rights_status\":\"source-license-verified\",\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md\"]}\n  - {\"id\":\"curated-optimizer-d2l-rmsprop-694bf0cc30d9\",\"asset\":\"00 Учебник/Assets/Figures/curated/optimizer-curvature-2026-11-11/d2l-rmsprop-trajectory.svg\",\"title\":\"RMSProp trajectory on the anisotropic quadratic\",\"author\":\"Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola\",\"source_url\":\"https://d2l.ai/chapter_optimization/rmsprop.html#implementation-from-scratch\",\"source_image_url\":\"https://d2l.ai/_images/output_rmsprop_251805_15_1.svg\",\"source_asset\":\"05 Источники/Originals/optimizer-curvature-2026-11-11/d2l-rmsprop-trajectory.svg\",\"source_asset_sha256\":\"694bf0cc30d91abd3287e46be9fc7c855a5f2feeea417a5b05fdff2630f7626a\",\"license\":\"CC BY-SA 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by-sa/4.0/\",\"license_evidence_url\":\"https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE-SUMMARY\",\"license_evidence\":\"05 Источники/Originals/optimizer-curvature-2026-11-11/d2l-license-summary.txt\",\"license_evidence_sha256\":\"eeff5a6b129a319ee80e34762695dfa5349fe385a92c02168e6d21deff539f9c\",\"sha256\":\"694bf0cc30d91abd3287e46be9fc7c855a5f2feeea417a5b05fdff2630f7626a\",\"bytes\":45577,\"source_viewbox\":[0,0,326.827087,244.474996],\"modifications\":\"Original SVG copied byte-for-byte; no crop, redraw, or translation.\",\"derivation\":\"source-svg-copy\",\"rights_status\":\"source-license-verified\",\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md\"]}\n  - {\"id\":\"curated-optimizer-staib19a-2b8c72a4cf04\",\"asset\":\"00 Учебник/Assets/Figures/curated/optimizer-curvature-2026-11-11/staib19a-figure1.png\",\"title\":\"Escaping Saddle Points with Adaptive Gradient Methods, Figure 1\",\"author\":\"Matthew Staib, Sashank Reddi, Satyen Kale, Sanjiv Kumar, Suvrit Sra\",\"source_url\":\"https://proceedings.mlr.press/v97/staib19a.html\",\"figure_url\":\"https://proceedings.mlr.press/v97/staib19a/staib19a.pdf#page=8\",\"source_image_url\":\"https://proceedings.mlr.press/v97/staib19a/staib19a.pdf#page=8\",\"source_asset\":\"05 Источники/Originals/optimizer-curvature-2026-11-11/staib19a.pdf\",\"source_asset_sha256\":\"c2a44df0bef23c3a79bb16227cdf185bc2b9c7e4f70949b4853897327f54cb54\",\"source_page\":8,\"render_dpi\":360,\"render_page_size_px\":[3060,3960],\"crop_box_px\":[1596,348,2628,1422],\"dimensions_px\":[1032,1074],\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence_url\":\"https://github.com/mlresearch/mlresearch.github.io/blob/a2ef1b1ad989662c516c8f0df1d20eb5993e38c6/pmlr-license-agreement.md\",\"license_evidence\":\"05 Источники/Originals/optimizer-curvature-2026-11-11/pmlr-license-agreement-2017.md\",\"license_evidence_sha256\":\"1f6264e794cfe5292f6c1c4dca53bfc9bb5777329bd957af8c32c9a39f1e9979\",\"sha256\":\"2b8c72a4cf045dd90de92580e751c7ad025edf8895ed754bafac599fc61a00cb\",\"bytes\":109874,\"modifications\":\"PDF page render cropped to both plot panels, keeping axes and legends. No redraw or relabeling; chapter provides the caption.\",\"derivation\":\"pdf-page-render-crop\",\"rights_status\":\"source-license-verified\",\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md\"]}\n  - {\"id\":\"curated-cs231n-opt-000000000095\",\"asset\":\"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif\",\"author\":\"Alec Radford\",\"source_url\":\"https://cs231n.github.io/neural-networks-3/\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"provenance_confirmation\":\"source-bytes-verified\",\"title\":\"Optimizer trajectories near a saddle point\",\"commit\":\"8ec57ccfc32379ae4b37c45de949af359673f92f\",\"source_image_url\":\"https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/nn3/opt1.gif\",\"modifications\":\"Unchanged GIF, byte-identical to opt1.gif in the pinned CS231n course repository. The course credits Alec Radford; a grant for the GIF was not verified.\",\"sha256\":\"a3d84d671ff120170146dbae76456ac9c2ab5ad15f50ac828791752451173b29\",\"bytes\":731184,\"dimensions_px\":[620,480],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-byte-verified\",\"source_asset_sha256\":\"a3d84d671ff120170146dbae76456ac9c2ab5ad15f50ac828791752451173b29\",\"used_in\":[],\"publication_status\":\"retired\",\"former_used_in\":[\"00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md\"],\"retirement_reason\":\"No separate redistribution grant was verified; the chapter links to the original CS231n animation and uses a licensed saddle-point plot.\",\"replacement\":\"00 Учебник/Assets/Figures/curated/optimizer-curvature-2026-11-11/staib19a-figure1.png\"}"
+        }
+      ],
+      "lines": 26558,
+      "after_sha256": "bca68c5e2d16881a07019acda5803e8840a04dc55392f915ab67cd694f11a3aa",
+      "before_sha256": "dc75fbd1e38622c0d026bf7daff64c303354bb17d958896f0f391836e6eea9b7"
+    }
+  ]
+}

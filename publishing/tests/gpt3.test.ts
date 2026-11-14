@@ -22,9 +22,47 @@ describe('GPT-3 chapter contracts',()=>{
     expect(body).not.toContain('```mermaid');
     expect(body).not.toContain('Научный вопрос состоял');
   });
-  it('registers all five licensed figures and keeps retired paper copies out of the chapter',()=>{
-    const embedded=[...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^\]]+)\]\]/g)].map(m=>m[1]);
-    expect(new Set(embedded)).toEqual(new Set(figures.map((s:any)=>s.asset)));
+  it('registers the source figures without restoring retired paper copies',()=>{
+    const embedded=[...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^\]|]+)(?:\|[^\]]*)?\]\]/g)].map(m=>m[1]);
+    const english='en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md';
+    const mask=assets.find((row:any)=>row.id==='curated-long-context-2c0f0d17c4d9');
+    const demonstrations=assets.find((row:any)=>row.id==='curated-gpt3-min-demonstrations-0c9388f07b5f');
+    const filtering=assets.find((row:any)=>row.id==='curated-gpt3-hellaswag-adversarial-filtering-9c9eebd504eb');
+    const copa=assets.find((row:any)=>row.id==='curated-gpt3-holtzman-copa-65312423131c');
+    const pet=assets.filter((row:any)=>row.id?.startsWith('curated-gpt3-schick-pet-figure'));
+    expect(new Set(embedded)).toEqual(new Set([...figures.map((s:any)=>s.asset),mask.asset,demonstrations.asset,filtering.asset,copa.asset,...pet.map((r:any)=>r.asset)]));
+    expect(copa).toMatchObject({used_in:[chapter,english],license:'CC BY 4.0',
+      source_image_url:'https://arxiv.org/pdf/2104.08315v9#page=8'});
+    expect(hash(read(copa.asset))).toBe(copa.sha256);
+    expect(hash(read(copa.source_asset))).toBe(copa.source_asset_sha256);
+    expect(read(english).toString()).toContain(copa.asset+'|');
+    expect(pet.map((r:any)=>r.source_page)).toEqual([1,2]);
+    for (const r of pet) {
+      expect(r.used_in).toEqual([chapter,english]);
+      expect(r.license).toBe('CC BY 4.0');
+      expect(r.source_image_url).toBe('https://aclanthology.org/2021.naacl-main.185.pdf#page='+r.source_page);
+      expect(hash(read(r.asset))).toBe(r.sha256);
+      expect(hash(read(r.source_asset))).toBe(r.source_asset_sha256);
+      const png=read(r.asset);
+      expect([png.readUInt32BE(16),png.readUInt32BE(20)]).toEqual(r.dimensions_px);
+      expect(read(english).toString()).toContain(r.asset+'|');
+    }
+    expect(mask.used_in).toEqual(expect.arrayContaining([chapter,english]));
+    expect(mask.license).toBe('CC BY 4.0');
+    expect(mask.source_image_url).toBe('https://arxiv.org/html/2310.06825v1/swa.png');
+    expect(hash(read(mask.asset))).toBe(mask.source_asset_sha256);
+    expect(read(english).toString()).toContain(mask.asset+'|');
+    expect(read(english).toString()).toContain(demonstrations.asset+'|');
+    expect(demonstrations.used_in).toEqual(expect.arrayContaining([chapter,english]));
+    expect(demonstrations.license).toBe('CC BY 4.0');
+    expect(hash(read(demonstrations.asset))).toBe(demonstrations.sha256);
+    expect(hash(read(demonstrations.source_asset))).toBe(demonstrations.source_asset_sha256);
+    expect(filtering.used_in).toEqual([chapter,english]);
+    expect(filtering.license).toBe('CC BY 4.0');
+    expect(filtering.figure_url).toBe('https://aclanthology.org/P19-1472.pdf#page=2');
+    expect(hash(read(filtering.asset))).toBe(filtering.sha256);
+    expect(hash(read(filtering.source_asset))).toBe(filtering.source_asset_sha256);
+    expect(read(english).toString()).toContain(filtering.asset+'|');
     expect(figures).toHaveLength(5);
     for(const f of figures){
       const rows=assets.filter((r:any)=>r.asset===f.asset);
@@ -44,10 +82,25 @@ describe('GPT-3 chapter contracts',()=>{
     expect(new Set(assets.filter((r:any)=>r.used_in?.includes(chapter)).map((r:any)=>r.asset)))
       .toEqual(new Set(embedded));
   });
-  it('keeps GPT-2 to GPT-3 to T5 navigation and legacy fragment aliases',()=>{
+  it('uses the same model-scoring comparison and keeps the reported splits distinct',()=>{
+    const english=read('en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md').toString();
+    for(const [locale,story,hella] of [
+      [body,'83,2% | 84,7% | 87,7%','78,9% | 78,1% | 79,3%'],
+      [english,'83.2% | 84.7% | 87.7%','78.9% | 78.1% | 79.3%']
+    ]){
+      expect(locale).toContain('id="gpt-llama-completion-scoring"');
+      expect(locale).toContain('| StoryCloze, test | '+story+' ($K=70$)');
+      expect(locale).toContain('| HellaSwag, dev | '+hella+' ($K=20$)');
+      expect(locale).toContain('#gpt-llama-comparison|');
+    }
+    const logprobs=[-3.6,-4.8];
+    expect(logprobs[0]/2).toBeLessThan(logprobs[1]/4);
+    expect(logprobs[0]/12).toBeGreaterThan(logprobs[1]/14);
+  });
+  it('keeps GPT-2 to GPT-3 to LLaMA navigation and legacy fragment aliases',()=>{
     const fm=YAML.parse(body.split('---')[1]);
     expect(fm.previous).toContain('05 GPT-2');
-    expect(fm.next).toContain('07 T5');
+    expect(fm.next).toContain('01 LLaMA');
     const footer=body.slice(body.lastIndexOf('**Назад:**'));
     expect(footer).toContain(fm.previous.slice(0,-2)+'|');
     expect(footer).toContain(fm.next.slice(0,-2)+'|');

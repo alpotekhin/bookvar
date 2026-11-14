@@ -37,9 +37,14 @@ Mamba, Mamba-2 и hybrid при общих данных. Чистые SSM отс
 in-context learning и phonebook; гибрид с небольшой долей attention заметно
 улучшает recall.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-pure-figure3.png]]
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-hybrid-figure7.png]]
+В [рис. 3 Waleffe et al.](https://arxiv.org/pdf/2406.07887v1#page=8)
+модели обучались на 1,1 трлн токенов. Авторы сопоставляют точный
+ответ, частичное совпадение токенов и вариант, где искомое имя
+сообщают до списка. В [рис. 7](https://arxiv.org/pdf/2406.07887v1#page=14)
+показаны результаты базовых моделей после 3,5 трлн токенов и
+их версии с увеличенным контекстом. В
+[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-recall-limits|главе об ограничениях сжатой памяти]]
+эти результаты сопоставлены с авторским графиком Jelassi et al.
 
 ## Методологический вывод
 

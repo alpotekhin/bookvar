@@ -1,0 +1,160 @@
+{
+  "date": "2026-11-09",
+  "scope": "Close the linked-only DeepSeek-V3 sequential MTP visual and explain the original diagram alongside the independent-head variant in the existing NTP chapter.",
+  "review": {
+    "previousGoalTurn": "Progress: the English GPT-to-LLaMA reading route, original figures, runnable examples and local validation are recorded in 2026-11-09-en-llama-architecture-additions.json.",
+    "source": "Author repository commit d5c08b384b4d4096e494d61ba7d329f593116872 includes both DeepSeek_V3.pdf and LICENSE-CODE; README links the PDF as repository documentation and names MIT for the repository, a separate license for model weights. The report has no separate restriction printed with the figure. The later deletion commit a878eada08ea6913f5a2ae80a43afeffdef082ef names only deletion. The current arXiv deposit license and the community Commons tag are not the basis for reuse.",
+    "figure": "DeepSeek_V3.pdf page 10, 360 dpi, Poppler crop [340,400,2640,1445], complete original diagram at 2300×1045. No changes to labels, arrows or columns; caption kept alongside. Only the 133 KiB crop and MIT notice are stored in the worktree, not a second full PDF.",
+    "lesson": "Read all 812 lines of the preceding chapter and the complete edited chapter; the last source-driven vLLM correction was then reread against the wrapper and block. Compared the left-hand source figure and notation in CS336 Lecture 4 slide 59 with the source PDF and current technical report §§2.2, 3.2.3, 4.2, 4.5.1, 5.4.3. The chapter follows t₁ → hidden state + known t₂ → target t₃, distinguishes shared input/output across depth from embedding tying, and separates the published training ablation from speculative serving. Checked the released weight layout and vLLM v0.11.2; no actual model execution claimed.",
+    "course": "The exact composite CS336 slide remains in the original archive. The DeepSeek mechanism in the coverage and editorial maps points to the precise subsection with the source figure. The two earlier source illustrations (Meta MTP and NTP) are not replaced."
+  },
+  "verification": {
+    "source": "The pinned PDF SHA-256 matched the registry. A second Poppler render gave the same 2300×1045 PNG byte for byte; the local MIT notice matches the official pinned license with a final newline.",
+    "examples": "All three chapter programs passed on Torch 2.14.1 CPU. The five-input, four-target loss denominator example and the shifted-input causal positive/negative controls passed.",
+    "reader": "Followed the CS336 topic link from the course library and inspected desktop and mobile chapter rendering in both locale shells. Natural size 2300×1045; no page overflow, no KaTeX errors. At 3× the mobile viewer pans 718 CSS px to the last column while keeping the source and MIT attribution visible. EN is correctly marked as canonical-language fallback.",
+    "readerReport": "/var/folders/6c/j5sghwf51gx41g_055zlcs_m0000gq/T/bookvar-gpt-route-V0J87p/deepseek-mtp-report.json",
+    "rootBuild": "Final revision: 2059 pages, all 253 built-output checks, no broken internal links. The live local preview served the final vLLM link and exact registered MIT notice. 21 focused audit checks, 93 site tests, source/lecture ledgers and whole-registry exactly-once registration also passed on their affected inputs.",
+    "pagesBase": "Fresh local /bookvar artifact from the final chapter revision: 2059 pages, 5731 files, 874781852 bytes, zero broken internal paths. The rendered final NTP chapter references both the figure and the notice beneath /bookvar; no Pages deployment was requested or made.",
+    "publication": "Local only; no commit, push or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+      "before_sha256": "769b26049eb04c2ca10a5e951dcc8efc6c6fb30dc1c3536e7f32feb3c9d9f5ee",
+      "after_sha256": "a3392072d4252e7528e3bc889e00b7922c64972fa5024d48ea545632cdfd988e",
+      "lines": 855,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-23\nlast_verified: 2026-10-23",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-11-09"
+        },
+        {
+          "old": "  - https://arxiv.org/abs/2412.19437v2",
+          "new": "  - https://arxiv.org/abs/2412.19437v2\n  - https://github.com/deepseek-ai/DeepSeek-V3/blob/d5c08b384b4d4096e494d61ba7d329f593116872/DeepSeek_V3.pdf"
+        },
+        {
+          "old": "### DeepSeek-V3: последовательные дополнительные модули\n\nВ DeepSeek-V3 используется другой вариант MTP. К состоянию основной модели\n$h_t^{(0)}$ добавляют последовательность небольших модулей. Модуль $k$\nполучает состояние предыдущего модуля и эмбеддинг **истинного** следующего\nтокена $x_{t+k}$, соединяет нормализованные векторы линейной проекцией,\nа затем применяет каузальный трансформерный блок. Общая выходная матрица\nпредсказывает уже $x_{t+k+1}$. Архитектура и формулы приведены в\n[DeepSeek-V3, §2.2 и Figure 3](https://arxiv.org/html/2412.19437v2#S2.SS2)\nи разобраны на\n[слайде 59 CS336 Lecture 4](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=59).",
+          "new": "<a id=\"deepseek-sequential-mtp\"></a>\n\n### DeepSeek-V3: последовательные дополнительные модули\n\nВ DeepSeek-V3 каждый дополнительный модуль опирается на предыдущий.\nМодуль $k$\nполучает состояние предыдущего модуля и эмбеддинг **истинного** следующего\nтокена $x_{t+k}$, соединяет нормализованные векторы линейной проекцией,\nа затем применяет каузальный трансформерный блок. Общая выходная матрица\nпредсказывает $x_{t+k+1}$.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ntp-2026-10-23/deepseek-v3-mtp-figure3.png|Основная модель предсказывает t₂ по t₁; первый модуль объединяет её состояние с эмбеддингом t₂ и предсказывает t₃. Пунктиром соединены общие эмбеддинги и выходные головы.]]\n\n*DeepSeek-AI, [DeepSeek-V3 Technical Report, Figure 3, с. 10](https://raw.githubusercontent.com/deepseek-ai/DeepSeek-V3/d5c08b384b4d4096e494d61ba7d329f593116872/DeepSeek_V3.pdf#page=10).\nПолный рисунок из [версии в репозитории авторов](https://github.com/deepseek-ai/DeepSeek-V3/blob/d5c08b384b4d4096e494d61ba7d329f593116872/DeepSeek_V3.pdf), без перерисовки.\n[MIT](/licenses/deepseek-v3-d5c08b3-MIT.txt).\nЭту же схему используют на\n[слайде 59 лекции 4 Stanford CS336](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=59).*\n\nУ основной модели первый вход на схеме — $t_1$, первая цель — $t_2$.\nЧёрная стрелка от стека Transformer несёт скрытое состояние, а не\nпредсказанный ID $t_2$. Первый модуль получает это состояние слева,\nа эмбеддинг $t_2$ — снизу, из обучающего текста. Сверху у этого модуля\nуже другая цель, $t_3$. На схеме показан и следующий модуль, чтобы\nбыло видно повторение сдвига. В опубликованной модели его нет."
+        },
+        {
+          "old": "DeepSeek-V3 использовали $D=1$: основное предсказание следующего токена плюс\nодин дополнительный модуль для следующего за ним. Это не четыре независимые\nголовы на предыдущем рисунке. Эмбеддинги и выходная проекция разделяются с\nосновной моделью, но дополнительный блок и соединяющая проекция имеют свои\nпараметры.",
+          "new": "DeepSeek-V3 использовали $D=1$: основное предсказание следующего токена плюс\nодно дополнительное. По [§4.2 отчёта](https://arxiv.org/html/2412.19437v2#S4.SS2)\nвес $\\lambda$ составлял $0.3$ на первых 10 трлн токенов и $0.1$ на\nоставшихся 4,8 трлн. Надпись `Shared` относится к двум разным матрицам:\nвходная таблица общая для модулей, выходная проекция также общая для\nмодулей. Это не связывает входную таблицу с выходной. У блока и проекции\n$M_k$ свои веса. При обучении DeepSeek разместил начало и конец стека\nна одном ранге конвейера, поэтому модули могли использовать те же\nпараметры и градиенты без отдельной копии\n([§3.2.3](https://arxiv.org/html/2412.19437v2#S3.SS2.SSS3))."
+        },
+        {
+          "old": "Например, для трёх голов с 4, 3 и 2 целями и средними потерями 1, 2 и 3\nравное среднее по головам равно 2, а среднее по всем девяти парам —\n$16/9\\approx1{,}778$. Во втором случае ближняя голова получает больший вес.",
+          "new": "Например, для трёх голов с 4, 3 и 2 целями и средними потерями 1, 2 и 3\nравное среднее по головам равно 2, а среднее по всем девяти парам —\n$16/9\\approx1{,}778$. Во втором случае ближняя голова получает больший вес.\n\nДля сравнения вернёмся к пяти входам $x_0,\\ldots,x_4$ и метке $x_5$.\nЕсли вероятность правильного токена во всех четырёх дополнительных\nпарах равна $1/2$, сумма их потерь равна $4\\log2$. Усреднение по\nдопустимым парам даёт $\\log2$, а формула (24) отчёта при $T=5$ даёт\n$4\\log2/5$. При $D=1$ и $\\lambda=0.3$ вторая величина добавляет\nк основной потере $0.24\\log2$, а не $0.3\\log2$."
+        },
+        {
+          "old": "авторегрессионное распределение основной модели.\n\nПоэтому MTP оценивают двумя отдельными экспериментами. В первом сравнивают\nкачество основной головы после обучения с дополнительными целями и без них,\nпри сопоставимых данных и ресурсах. Во втором измеряют ускорение генерации,\nдолю принятых токенов и накладные расходы проверки. Улучшение в одном\nэксперименте не доказывает улучшения в другом.",
+          "new": "авторегрессионное распределение основной модели.\n\nНа обучении в рисунке $t_2$ берут из корпуса. При генерации после $t_1$\nосновная модель сначала выбирает $t_2$, и модуль получает уже эмбеддинг\nвыбранного токена вместе с состоянием после $t_1$.\nВ [vLLM v0.11.2](https://github.com/vllm-project/vllm/blob/v0.11.2/vllm/model_executor/models/deepseek_mtp.py#L95-L119)\nэто два отдельных входа модуля: `input_ids` и\n`previous_hidden_states`. Его предложение на позицию $t_3$ ещё предстоит\nпроверить основной модели. В отчёте DeepSeek сообщает о принятии\n85–90% вторых токенов и росте скорости до 1,8× по токенам в секунду\n([§5.4.3](https://arxiv.org/html/2412.19437v2#S5.SS4.SSS3)).\nЭто замеры авторов, а не коэффициент ускорения для любого сервера.\n\nВ отдельном эксперименте проверяли качество обучения без этого ускорения.\nВ [Table 4](https://arxiv.org/html/2412.19437v2#S4.T4) пары моделей\nобучались на одинаковых данных: 15,7 млрд параметров основной ветви\nна 1,33 трлн токенов и 228,7 млрд на 540 млрд токенов. На оценке MTP\nотключили, чтобы у каждой пары осталась та же архитектура инференса.\nУ большой модели HumanEval pass@1 вырос с 44,5 до 53,7, но MMLU\nснизился с 67,5 до 66,6. Равный объём данных в этой абляции не\nозначает равных вычислений при обучении: вариант с MTP выполнял\nдополнительный блок."
+        },
+        {
+          "old": "85–90% вторых токенов и росте скорости до 1,8× по токенам в секунду",
+          "new": "85–90% вторых токенов и скорости в 1,8 раза выше по числу токенов в секунду"
+        },
+        {
+          "old": "В [vLLM v0.11.2](https://github.com/vllm-project/vllm/blob/v0.11.2/vllm/model_executor/models/deepseek_mtp.py#L95-L119)\nэто два отдельных входа модуля: `input_ids` и\n`previous_hidden_states`. Его предложение на позицию $t_3$ ещё предстоит\nпроверить основной модели. В отчёте DeepSeek сообщает о принятии\n85–90% вторых токенов и скорости в 1,8 раза выше по числу токенов в секунду\n([§5.4.3](https://arxiv.org/html/2412.19437v2#S5.SS4.SSS3)).\nЭто замеры авторов, а не коэффициент ускорения для любого сервера.",
+          "new": "В [vLLM v0.11.2](https://github.com/vllm-project/vllm/blob/v0.11.2/vllm/model_executor/models/deepseek_mtp.py#L148-L165)\nобёртка вычисляет эмбеддинг по `input_ids`, если ей не передали\n`inputs_embeds`. В блок поступают эмбеддинг и\n`previous_hidden_states`. Предложенный модулем токен $t_3$ проверяет\nосновная модель. В [§5.4.3 отчёта](https://arxiv.org/html/2412.19437v2#S5.SS4.SSS3)\nDeepSeek сообщает, что проверку прошли 85–90% предложенных вторых\nтокенов, а число сгенерированных токенов в секунду выросло в 1,8 раза.\nДля другого сервера результат зависит от нагрузки и стоимости проверки."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "80fb79b2ddb5149467e8a373efc55a70e6a6dbc082bb9f8e9bf54f2f5bb4d5f8",
+      "after_sha256": "fa7d848b55c42b5b3bb47a53cdf7530dfda775f5b3d668a6304fd03def636a6a",
+      "lines": 24338,
+      "changes": [
+        {
+          "old": "  - id: curated-ntp-hf-full-8e4421a0b180",
+          "new": "  - id: curated-deepseek-v3-mtp-figure3-f39402216f59\n    asset: \"00 Учебник/Assets/Figures/curated/ntp-2026-10-23/deepseek-v3-mtp-figure3.png\"\n    title: \"Sequential multi-token prediction (Figure 3)\"\n    author: \"DeepSeek-AI\"\n    source_url: \"https://github.com/deepseek-ai/DeepSeek-V3/blob/d5c08b384b4d4096e494d61ba7d329f593116872/DeepSeek_V3.pdf\"\n    source_image_url: \"https://raw.githubusercontent.com/deepseek-ai/DeepSeek-V3/d5c08b384b4d4096e494d61ba7d329f593116872/DeepSeek_V3.pdf#page=10\"\n    source_asset_sha256: \"1392807ef6297deefc421cea6633af0b819e15a0b7a4a6b0adba4bccdf0ab273\"\n    source_page: 10\n    render_dpi: 360\n    render_page_size_px: [2977,4210]\n    crop_box_px: [340,400,2640,1445]\n    dimensions_px: [2300,1045]\n    commit: \"d5c08b384b4d4096e494d61ba7d329f593116872\"\n    sha256: \"f39402216f591abb5928bbe867be30c7c3f9a6ffcfbc88ba6b34a228e3317903\"\n    license: \"MIT\"\n    license_url: \"https://github.com/deepseek-ai/DeepSeek-V3/blob/d5c08b384b4d4096e494d61ba7d329f593116872/LICENSE-CODE\"\n    license_evidence: \"site/public/licenses/deepseek-v3-d5c08b3-MIT.txt\"\n    license_evidence_sha256: \"6e4c38e1172f42fdbff13edf9a7a017679fb82b0fde415a3e8b3c31c6ed4a4e4\"\n    public_license_copy: \"site/public/licenses/deepseek-v3-d5c08b3-MIT.txt\"\n    rights_status: \"source-license-verified\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"pinned-upstream-repository\"\n    derivation: \"pdf-page-render-crop\"\n    modifications: \"Complete original artwork rendered from the pinned author repository PDF and cropped to its bounds. Caption and running text excluded; no redraw or relabeling.\"\n    last_verified: \"2026-11-09\"\n    used_in: [\"00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md\"]\n  - id: curated-ntp-hf-full-8e4421a0b180"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/editorial-map.yml",
+      "before_sha256": "93000fb056634a0e923ac2ca62bcb73d7513e9a5beec5386426fa57c5e96aeb9",
+      "after_sha256": "a28c141c60ee9b745efbc4b7c6ec2687d88147920a60e1f124ba131da673f27a",
+      "lines": 5469,
+      "changes": [
+        {
+          "old": "    \"lecture-04-deepseek-mtp\": {\n      \"disposition\": \"integrated\",\n      \"destination\": \"00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md\",\n      \"destination_anchor\": \"multi-token-training-objective\",\n      \"reason\": \"Integrated into the existing training-objective chapter: independent heads versus DeepSeek sequential teacher-forced modules, valid target masks, shared embedding/output, auxiliary weighting, and training versus speculative inference.\",\n      \"evidence\": \"Lecture 4 page 59 read and rendered; primary DeepSeek-V3 v2 section 2.2 and Meta MTP v1 section 2 verified. Original licensed Meta Figure 1 illustrates the contrasted independent-head variant; it is not mislabeled as the DeepSeek slide.\"",
+          "new": "    \"lecture-04-deepseek-mtp\": {\n      \"disposition\": \"integrated\",\n      \"destination\": \"00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md\",\n      \"destination_anchor\": \"deepseek-sequential-mtp\",\n      \"reason\": \"Integrated into the existing training-objective chapter: independent heads versus DeepSeek sequential teacher-forced modules, valid target masks, shared embedding/output, auxiliary weighting, and training versus speculative inference.\",\n      \"evidence\": \"Lecture 4 page 59 read and rendered. DeepSeek's left-hand figure is embedded from the MIT-licensed author repository snapshot d5c08b3, PDF page 10; the composite lecture slide stays in the course archive. Meta Figure 1 illustrates the independent-head variant.\""
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/coverage.yml",
+      "before_sha256": "e10a5140be760487b4eb7ce6af9af7dd4d377895e2a7a41054af3438185bff88",
+      "after_sha256": "e8831a253b6fea48aaca4208943359517062060e13bf654e8ce39d6aa7b95583",
+      "lines": 11685,
+      "changes": [
+        {
+          "old": "      \"title\": \"DeepSeek multi-token prediction auxiliary objective\",\n      \"primary_sources\": [\n        \"lecture-04\"\n      ],\n      \"disposition\": \"integrated\",\n      \"destination\": \"00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md\",\n      \"destination_anchor\": \"multi-token-training-objective\",\n      \"reason\": \"Integrated into the existing training-objective chapter: independent heads versus DeepSeek sequential teacher-forced modules, valid target masks, shared embedding/output, auxiliary weighting, and training versus speculative inference.\",\n      \"evidence\": \"Lecture 4 page 59 read and rendered; primary DeepSeek-V3 v2 section 2.2 and Meta MTP v1 section 2 verified. Original licensed Meta Figure 1 illustrates the contrasted independent-head variant; it is not mislabeled as the DeepSeek slide.\"",
+          "new": "      \"title\": \"DeepSeek multi-token prediction auxiliary objective\",\n      \"primary_sources\": [\n        \"lecture-04\"\n      ],\n      \"disposition\": \"integrated\",\n      \"destination\": \"00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md\",\n      \"destination_anchor\": \"deepseek-sequential-mtp\",\n      \"reason\": \"Integrated into the existing training-objective chapter: independent heads versus DeepSeek sequential teacher-forced modules, valid target masks, shared embedding/output, auxiliary weighting, and training versus speculative inference.\",\n      \"evidence\": \"Lecture 4 page 59 read and rendered. DeepSeek's left-hand figure is embedded from the MIT-licensed author repository snapshot d5c08b3, PDF page 10; the composite lecture slide stays in the course archive. Meta Figure 1 illustrates the independent-head variant.\""
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/visuals.yml",
+      "before_sha256": "791cb4cb4122145fb54990656fd234e4b81bb44da51ee4f57d7868663fe35bda",
+      "after_sha256": "b0939b7889f403363a5858510340edcd739783d9914278123449e6c871509602",
+      "lines": 16448,
+      "changes": [
+        {
+          "old": "      \"reason\": \"The mechanism is now integrated in the NTP training-objective chapter, with a separately licensed original Meta MTP figure and an explicit contrast to DeepSeek. This exact composite DeepSeek/EAGLE slide is preserved in the source archive, not claimed as a reused visual.\",",
+          "new": "      \"reason\": \"The full composite slide stays in the course archive. Its left-hand DeepSeek Figure 3 is embedded in the NTP chapter from the MIT-licensed author repository PDF, with original labels; Meta Figure 1 remains the separate comparison for independent prediction heads.\","
+        }
+      ]
+    },
+    {
+      "source": "publishing/tests/site-output.test.ts",
+      "before_sha256": "404ddace7918fa7d92aaaecf4d448c9ec36087bf5783e4f51e09c8d7012326c7",
+      "after_sha256": "3b722808a7113d2d27546d35333d4a38c58f49252983b4357d5ce047167d2f92",
+      "lines": 4910,
+      "changes": [
+        {
+          "old": "    expect(html).toContain('href=\"/textbook/pretraining/dedup-pii-corpus-quality/\"');\n  });\n  it('renders text and image deduplication with five original figures and five Python examples', async () => {",
+          "new": "    expect(html).toContain('href=\"/textbook/pretraining/dedup-pii-corpus-quality/\"');\n  });\n  it('renders the original sequential DeepSeek figure next to its readout and notice in both shells', async () => {\n    for (const prefix of ['', 'en/']) {\n      const html = await readFile(join(distDir, prefix + 'textbook/pretraining/next-token-objective/index.html'), 'utf8');\n      const section = html.match(/<a id=\"deepseek-sequential-mtp\"><\\/a>[\\s\\S]*?(?=<h2\\b)/)?.[0];\n      expect(section).toBeDefined();\n      expect(section).toMatch(/<img[^>]+src=\"[^\"]*\\/deepseek-v3-mtp-figure3\\.png\"[^>]+alt=\"[^\"]*t₂/);\n      expect(section).toContain('DeepSeek_V3.pdf#page=10');\n      expect(section).toContain('href=\"/licenses/deepseek-v3-d5c08b3-MIT.txt\"');\n      expect(section).toContain('1,8 раза');\n      expect(section).toContain('53,7');\n      expect(section).toContain('66,6');\n      expect(section).not.toContain('katex-error');\n      if (prefix) expectCanonicalEditionNotice(html);\n    }\n  });\n  it('renders text and image deduplication with five original figures and five Python examples', async () => {"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tests/asset-registry.test.ts",
+      "before_sha256": "7f8f6870b7231913f8af13e9c8fcfaed698365da7246ecb614be3a1cec4090c0",
+      "after_sha256": "fd8cd3cf53cdd42a7f5f226b47d070227df18110dd3942b88b4d22046739f649",
+      "lines": 10616,
+      "changes": [
+        {
+          "old": "function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root): void {\n  if (entry.id === 'curated-eagle3-speedup-5e404ac75809') {",
+          "new": "function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root): void {\n  if (entry.id === 'curated-deepseek-v3-mtp-figure3-f39402216f59') {\n    const commit = 'd5c08b384b4d4096e494d61ba7d329f593116872';\n    const upstream = 'https://github.com/deepseek-ai/DeepSeek-V3/blob/' + commit;\n    const raw = 'https://raw.githubusercontent.com/deepseek-ai/DeepSeek-V3/' + commit;\n    const asset = '00 Учебник/Assets/Figures/curated/ntp-2026-10-23/deepseek-v3-mtp-figure3.png';\n    const notice = 'site/public/licenses/deepseek-v3-d5c08b3-MIT.txt';\n    const digest = 'f39402216f591abb5928bbe867be30c7c3f9a6ffcfbc88ba6b34a228e3317903';\n    expect(entry).toMatchObject({\n      asset, commit, source_url: upstream + '/DeepSeek_V3.pdf',\n      source_image_url: raw + '/DeepSeek_V3.pdf#page=10',\n      source_asset_sha256: '1392807ef6297deefc421cea6633af0b819e15a0b7a4a6b0adba4bccdf0ab273',\n      source_page: 10, render_dpi: 360, crop_box_px: [340, 400, 2640, 1445],\n      dimensions_px: [2300, 1045], license: 'MIT', license_url: upstream + '/LICENSE-CODE',\n      license_evidence: notice, public_license_copy: notice, sha256: digest,\n      rights_status: 'source-license-verified', derivation: 'pdf-page-render-crop',\n      used_in: ['00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md'],\n    });\n    const path = resolve(repositoryRoot, asset);\n    expect(sha256(path)).toBe(digest);\n    const png = readFileSync(path);\n    expect([png.readUInt32BE(16), png.readUInt32BE(20)]).toEqual([2300, 1045]);\n    expect(sha256(resolve(repositoryRoot, notice))).toBe('6e4c38e1172f42fdbff13edf9a7a017679fb82b0fde415a3e8b3c31c6ed4a4e4');\n    expectDecodableImage(path);\n    return;\n  }\n  if (entry.id === 'curated-eagle3-speedup-5e404ac75809') {"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tools/check_ntp_examples.py",
+      "before_sha256": "d00761340926b57715d889774d01e9ae8b97c890b9a13f4cb2f8726ddd92b9f5",
+      "after_sha256": "3f564c78723729720ac0c8e7f586cd8188173266fd6de320e650550d1a9be6d7",
+      "lines": 252,
+      "changes": [
+        {
+          "old": "    assert [(t, t + 2) for t in range(4)] == [(0, 2), (1, 3), (2, 4), (3, 5)]",
+          "new": "    assert [(t, t + 2) for t in range(4)] == [(0, 2), (1, 3), (2, 4), (3, 5)]\n    # Figure 3 first column: the intermediate is an input, not a label leak.\n    assert [(t, t + 1, t + 2) for t in range(4)] == [\n        (0, 1, 2), (1, 2, 3), (2, 3, 4), (3, 4, 5)\n    ]\n    four_losses = -torch.full((4,), 0.5, dtype=torch.float64).log()\n    close(four_losses.mean(), math.log(2))\n    close(0.3 * four_losses.sum() / 5, 0.24 * math.log(2))\n    assert not torch.isclose(0.3 * four_losses.mean(), 0.3 * four_losses.sum() / 5)"
+        },
+        {
+          "old": "    print(\"PASS: MTP valid-pair counts, 2 vs 16/9 weighting; shifted-input causal boundary\")",
+          "new": "    print(\"PASS: MTP alignment, per-head and report denominators, shifted-input causal boundary\")"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/Assets/Figures/curated/ntp-2026-10-23/deepseek-v3-mtp-figure3.png",
+      "created": true,
+      "after_sha256": "f39402216f591abb5928bbe867be30c7c3f9a6ffcfbc88ba6b34a228e3317903"
+    },
+    {
+      "source": "site/public/licenses/deepseek-v3-d5c08b3-MIT.txt",
+      "created": true,
+      "after_sha256": "6e4c38e1172f42fdbff13edf9a7a017679fb82b0fde415a3e8b3c31c6ed4a4e4"
+    }
+  ]
+}

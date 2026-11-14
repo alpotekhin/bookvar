@@ -2,8 +2,111 @@
 title: GRPO и DeepSeek-R1
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-30
-last_verified: 2026-10-25
+last_updated: 2026-11-05
+last_verified: 2026-11-05
+reference_terms:
+  - label: "GRPO: сравнение ответов на один запрос"
+    label_en: "GRPO: comparing responses to one prompt"
+    anchor: grpo-overview
+  - label: "Расчёт группового преимущества и однородные группы"
+    label_en: "Group advantages and uniform-reward groups"
+    anchor: grpo-group-example
+  - label: "От награды за ответ к токеновому градиенту"
+    label_en: "From outcome rewards to token gradients"
+    anchor: grpo-estimator
+  - label: "Clipping при положительном и отрицательном преимуществе"
+    label_en: "Clipping with positive and negative advantages"
+    anchor: grpo-signed-clipping
+  - label: "Целевая функция GRPO"
+    label_en: "The GRPO objective"
+    anchor: grpo-objective
+  - label: "Оценка KL и различие её градиентов"
+    label_en: "The KL estimator and its different gradients"
+    anchor: grpo-kl-estimator
+  - label: "Текущая, старая и опорная модели"
+    label_en: "Current, old, and reference policies"
+    anchor: grpo-policy-versions
+  - label: "Реализация групповой оценки и маскирования"
+    label_en: "Group estimation and response masking"
+    anchor: grpo-implementation
+  - label: "Процессные награды и суммы будущих оценок"
+    label_en: "Process rewards and future-step sums"
+    anchor: grpo-process-rewards
+  - label: "Нормировка наград по сложности запроса"
+    label_en: "Reward normalization and prompt difficulty"
+    anchor: grpo-normalizations
+  - label: "Нормировка по длине и накопление градиента"
+    label_en: "Length normalization and gradient accumulation"
+    anchor: grpo-length-normalization
+  - label: "Взвешивание данных в GRPO, Dr. GRPO, RFT и MaxRL"
+    label_en: "Data weighting in GRPO, Dr. GRPO, RFT, and MaxRL"
+    anchor: drgrpo-rft-maxrl
+  - label: "Смещение группового среднего и leave-one-out"
+    label_en: "Group-mean bias and leave-one-out baselines"
+    anchor: grpo-baseline-bias
+  - label: "Dr. GRPO: отказ от двух нормировок"
+    label_en: "Dr. GRPO: removing two normalizations"
+    anchor: grpo-dr-grpo
+  - label: "Rejection fine-tuning: обучение на отобранных решениях"
+    label_en: "Rejection fine-tuning: learning from selected solutions"
+    anchor: grpo-rft
+  - label: "MaxRL: популяционные веса и конечная группа"
+    label_en: "MaxRL: population weights and finite groups"
+    anchor: grpo-maxrl
+  - label: "MaxRL и пропуск полностью неуспешных групп"
+    label_en: "MaxRL and skipped all-failure groups"
+    anchor: grpo-maxrl-zero-groups
+  - label: "Контролируемое сравнение RL-методов"
+    label_en: "Controlled comparisons of RL methods"
+    anchor: grpo-controlled-ablation
+  - label: "DAPO: отбор групп, отсечение и штраф за длину"
+    label_en: "DAPO: dynamic sampling, clipping, and length penalties"
+    anchor: dapo-dynamic-sampling
+  - label: "KL, варианты функции потерь и настройки TRL"
+    label_en: "KL, loss variants, and TRL settings"
+    anchor: grpo-kl-settings
+  - label: "Проверяемая конфигурация GRPOConfig"
+    label_en: "A checkable GRPOConfig configuration"
+    anchor: grpo-trl-config
+  - label: "Расхождение генерации и обучения, температура и support"
+    label_en: "Inference/training mismatch, temperature, and support"
+    anchor: grpo-sampling-mismatch
+  - label: "Устаревшие генерации: токеновое и полное перевзвешивание"
+    label_en: "Stale rollouts: token and full-trajectory reweighting"
+    anchor: offpolicy-ratios
+  - label: "GSPO: геометрическое среднее и последовательностный clipping"
+    label_en: "GSPO: geometric means and sequence-level clipping"
+    anchor: gspo
+  - label: "Различия R1-Zero и полного R1"
+    label_en: "R1-Zero versus the full R1 pipeline"
+    anchor: reasoning-case-studies
+  - label: "R1-Zero: генерации, обновления и смена reference"
+    label_en: "R1-Zero: rollouts, updates, and reference refreshes"
+    anchor: grpo-r1-zero
+  - label: "DeepSeek-R1: cold start, RL, отбор данных и повторный SFT"
+    label_en: "DeepSeek-R1: cold start, RL, data selection, and a second SFT"
+    anchor: grpo-r1-pipeline
+  - label: "Kimi k1.5: partial rollouts, replay и маски"
+    label_en: "Kimi k1.5: partial rollouts, replay, and masks"
+    anchor: grpo-kimi-partial-rollouts
+  - label: "Квадратичная цель Kimi k1.5"
+    label_en: "Kimi k1.5's quadratic objective"
+    anchor: grpo-kimi-objective
+  - label: "Kimi k1.5: бонус за длину и неверные ответы"
+    label_en: "Kimi k1.5: length rewards and incorrect answers"
+    anchor: grpo-kimi-length-reward
+  - label: "Qwen3: четыре стадии и режимы think/no_think"
+    label_en: "Qwen3: four stages and think/no_think modes"
+    anchor: grpo-qwen3-stages
+  - label: "Самокоррекция: наблюдаемый текст и границы выводов"
+    label_en: "Self-correction: observed text and limits of inference"
+    anchor: grpo-self-correction
+  - label: "Сбои GRPO и диагностические показатели"
+    label_en: "GRPO failures and diagnostic metrics"
+    anchor: grpo-failures
+  - label: "Открытые реализации GRPO и границы воспроизведения"
+    label_en: "Open GRPO implementations and reproduction limits"
+    anchor: grpo-open-implementations
 aliases:
   - Group Relative Policy Optimization
   - R1-Zero и DeepSeek-R1
@@ -15,6 +118,8 @@ primary_sources:
   - https://arxiv.org/abs/2402.03300
   - https://arxiv.org/abs/2501.12948
   - https://arxiv.org/abs/2503.20783
+  - https://arxiv.org/abs/2503.14476v2
+  - https://arxiv.org/abs/2506.14245v2
   - https://arxiv.org/abs/2602.02710
   - https://arxiv.org/abs/2507.18071
   - https://arxiv.org/abs/2501.12599
@@ -64,6 +169,8 @@ source_unit_id:
 сравнение вместо предсказания функции ценности, которое мы разбирали в главе
 о PPO.
 
+<a id="grpo-overview"></a>
+
 ## Где находится GRPO
 
 RLVR определяет источник награды, а GRPO — способ оценить преимущество ответа
@@ -73,7 +180,7 @@ RLVR определяет источник награды, а GRPO — спос�
 в DeepSeek-R1 он стал частью значительно более широкой схемы подготовки данных
 и дообучения.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ppo-2026-10-24/ppo-framework.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ppo-2026-10-24/ppo-framework.png|PPO: policy and value models, frozen reference and reward models, and GAE]]
 
 *Nathan Lambert, [RLHF Book — PPO](https://rlhfbook.com/c/06-policy-gradients).
 GAE combines value predictions with rewards that include the KL penalty.
@@ -90,7 +197,7 @@ The original paper comparison is linked as
 награда могла бы означать высокую сложность запроса, а не плохой выбор ответа.
 Сравнение внутри группы частично отделяет эти причины.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-review-2026-09/group-advantages.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-review-2026-09/group-advantages.png|GRPO: rewards and group-relative advantages without a value model]]
 
 *Модель порождает несколько ответов, оценщик присваивает им награды, а среднее
 и стандартное отклонение вычисляются отдельно для этой группы. Опорная модель
@@ -111,6 +218,8 @@ $$
 ответ соблюдает вознаграждаемый формат, его преимущество может оказаться
 положительным. Поэтому содержание функции награды из предыдущей главы остаётся
 существенным и после перехода к групповому сравнению.
+
+<a id="grpo-group-example"></a>
 
 ## Сквозной численный пример
 
@@ -193,6 +302,8 @@ L^{clip}_{i,t}&=\min(\rho_{i,t}\hat A_i,\rho^c_{i,t}\hat A_i).
 \end{aligned}
 $$
 
+<a id="grpo-signed-clipping"></a>
+
 ### Ручной расчёт ограничения
 
 Пусть $\epsilon=0.2$.
@@ -212,6 +323,8 @@ $$
 всегда равен нулю. Ограничение функции потерь также не гарантирует, что
 фактические отношения после шага останутся внутри этого интервала.
 
+<a id="grpo-objective"></a>
+
 ## Полная целевая функция
 
 Обозначим оценку KL для выбранного токена через $\hat k_{i,t}$.
@@ -225,6 +338,8 @@ $$
 \left[L^{clip}_{i,t}-\beta\hat k_{i,t}\right].
 \end{aligned}
 $$
+
+<a id="grpo-kl-estimator"></a>
 
 В DeepSeekMath используется не полный перебор словаря, а неотрицательная оценка
 KL на фактически выбранном токене. Если
@@ -281,6 +396,8 @@ print(f"KL: {exact_kl.item():.6f}; estimator: {sampled_kl.item():.6f}")
 print(f"gradients: {exact_kl_gradient.item():.6f}, {sampled_kl_gradient.item():.6f}")
 ```
 
+<a id="grpo-policy-versions"></a>
+
 Здесь участвуют **три разные версии модели**:
 
 - $\pi_{old}$ — сохранённая копия, породившая ответы; она нужна в отношении вероятностей;
@@ -293,6 +410,8 @@ print(f"gradients: {exact_kl_gradient.item():.6f}, {sampled_kl_gradient.item():.
 неизменной на всём протяжении обучения: в расширенном отчёте R1-Zero
 описана замена опорной модели каждые 400 шагов. Это не то же самое,
 что сохранение $\pi_{old}$ для очередной группы генераций.
+
+<a id="grpo-implementation"></a>
 
 ## Минимальная реализация математики
 
@@ -396,6 +515,8 @@ print(f"clipped loss: {clip_example_loss.item():.6f}")
 print(new_token_lp.grad.tolist())
 ```
 
+<a id="grpo-process-rewards"></a>
+
 ### Когда награда дана за отдельные шаги
 
 В [DeepSeekMath, §4.1.3](https://arxiv.org/html/2402.03300v3#S4.SS1.SSS3)
@@ -459,6 +580,8 @@ $\sqrt{p(1-p)}$. В приближении большой группы преи�
 из одних неудач по-прежнему даёт ноль. Большой вес наблюдаемого редкого успеха
 нельзя путать с гарантированно большим ожидаемым прогрессом на трудной задаче.
 
+<a id="grpo-length-normalization"></a>
+
 ## Нормировка по длине
 
 Если сначала усреднить потери по токенам каждого ответа, короткая и длинная
@@ -499,7 +622,7 @@ print(f"equal microbatch weights: {wrong_gradient[0].item():.6f}, {wrong_gradien
 число шагов накопления тоже нужно учитывать, чтобы не применить его дважды.
 Эта проверка соответствует вопросам о накоплении в CS336 Assignment 5, §4.2.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-review-2026-09/length-difficulty-bias.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-review-2026-09/length-difficulty-bias.png|Dr. GRPO: token weights under length and difficulty normalization]]
 
 *Два запроса, по четыре ответа на каждый. Квадраты обозначают токены,
 направление стрелки — знак обновления, её длина — вес после деления на длину
@@ -563,7 +686,9 @@ $L_{ij}$ меняет вес токена: каждый ответ получа�
 от длины, поэтому токен короткого ответа весит больше токена длинного. Эти
 эффекты нельзя обсуждать как одну «стабилизацию».
 
-Есть и более тонкая деталь. Среднее группы $\mu_i$ вычислено с участием того же
+<a id="grpo-baseline-bias"></a>
+
+Среднее группы $\mu_i$ вычислено с участием того же
 ответа, градиент которого оно центрирует. Поэтому среднее группы не является
 независимой от действия базовой оценкой. Утверждение о простом масштабе
 относится к отдельной, **ненормированной** оценке для фиксированного запроса:
@@ -612,6 +737,8 @@ print({name: round(value, 6) for name, value in baseline_expectations.items()})
 Здесь один токен на ответ, нет нормировки по длине, стандартного отклонения
 или ограничения; переносить эти три числа на полную функцию потерь нельзя.
 
+<a id="grpo-dr-grpo"></a>
+
 ### Dr. GRPO
 
 Dr. GRPO не делит преимущество на стандартное отклонение наград и заменяет
@@ -629,7 +756,7 @@ $$
 фиксированный масштаб, благодаря которому длина сгенерированных ответов не
 меняет знаменатель от шага к шагу.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-review-2026-09/length-and-accuracy-ablation.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-review-2026-09/length-and-accuracy-ablation.png|Dr. GRPO: response length and accuracy in the normalization ablation]]
 
 *В этом эксперименте на Qwen2.5-1.5B награда и среднее качество близки у двух
 методов, но у GRPO растёт длина прежде всего ошибочных ответов. Это пример
@@ -637,6 +764,8 @@ $$
 [Figure 6 и условия эксперимента, с. 8](https://arxiv.org/pdf/2503.20783v1#page=8),
 CC BY 4.0. Результат относится к описанным модели, шаблону и задачам MATH;
 он не устанавливает универсального превосходства одной нормировки.*
+
+<a id="grpo-rft"></a>
 
 ### Rejection fine-tuning, или обучение на отобранных решениях
 
@@ -653,6 +782,8 @@ $$
 проще и часто дешевле, но после отбора сводится к обучению по сохранённым
 траекториям: метод не понижает вероятность конкретных неверных ответов явным
 отрицательным членом и наследует ошибки фильтра.
+
+<a id="grpo-maxrl"></a>
 
 ### MaxRL
 
@@ -680,6 +811,8 @@ $$
 10 и примерно 1.11. Однако подстановка эмпирической доли успехов вместо
 неизвестного $p$ добавляет шум; формула для бесконечной выборки не является
 доказательством несмещённости оценки по маленькой группе.
+
+<a id="grpo-maxrl-zero-groups"></a>
 
 У статьи MaxRL есть также различие между теоретической оценкой и практическим
 Algorithm 1. При $N$ попытках, $K$ успехах и
@@ -721,7 +854,7 @@ for actions in product((0., 1.), repeat=2):
 print(f"MaxRL theoretical={maxrl_theoretical:.6f}, skip-failures={maxrl_practical:.6f}")
 ```
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-2026-10-24/maxrl-weight-functions.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-2026-10-24/maxrl-weight-functions.svg|MaxRL: task weights as a function of success probability and finite order]]
 
 *Веса задач в зависимости от вероятности успеха. Для конечного
 порядка $T$ вес MaxRL равен $[1-(1-p)^T]/p$, а $1/p$ получается только в
@@ -742,6 +875,8 @@ CC BY 4.0. Полный исходный SVG без изменений.*
 У группы размера $G$ с $k$ успехами стандартная нормировка даёт успешному
 ответу $\sqrt{(G-k)/k}$ при $0<k<G$. Поэтому при фиксированном $G$
 его максимальный вес без малого слагаемого равен $\sqrt{G-1}$, а не бесконечности.
+
+<a id="grpo-controlled-ablation"></a>
 
 <a id="что-сравнивает-честная-абляция"></a>
 
@@ -767,14 +902,106 @@ Stanford фиксирует запросы, бюджет генерации, п�
 сокращённый опыт обязан показывать каждый запуск и разброс, а не одну лучшую
 кривую.
 
+<a id="dapo-dynamic-sampling"></a>
+
+## DAPO: какие группы попадают в обновление
+
+Пусть для уравнения $3x+6=18$ модель сгенерировала четыре ответа.
+Если проверка только конечного числа вернула $(1,1,1,1)$, после
+вычитания среднего все преимущества равны нулю. Для $(0,0,0,0)$
+получится то же самое. При $(1,0,1,0)$ сравнение даёт сигнал:
+два ответа выше среднего, два ниже. В [DAPO, §3.2](https://arxiv.org/html/2503.14476v2#S3.SS2)
+обе однородные группы отбрасывают, а смешанную оставляют целиком,
+вместе с неверными ответами. Берут новые запросы и продолжают
+генерацию, пока не заполнят пакет группами с обоими исходами.
+В примере награды записаны как 0 и 1; в статье исходные оценки
+правильности равны −1 и 1.
+
+Дополнительная генерация меняет и состав пакета. Пусть запросы A и B
+встречаются одинаково часто, а модель решает их за одну попытку
+с вероятностями 0,99 и 0,5 соответственно. При четырёх независимых
+попытках вероятность смешанной группы равна $1-p^4-(1-p)^4$.
+Для A это 0,0394, для B — 0,875. Среди сохранённых групп доля B
+будет около $0.875/(0.0394+0.875)=0.957$, хотя до отбора она равнялась
+половине. Столь же редко пройдёт отбор задача с $p=0.01$. Если
+записывать только принятые группы, по журналу уже не видно, сколько
+задач отсеялось как слишком лёгкие и сколько как слишком трудные.
+Для сравнения запусков нужны число сгенерированных токенов и время,
+включая отброшенные группы, а не только число шагов оптимизатора.
+
+В том же обновлении DAPO меняет ещё три вещи
+([Yu et al., §3.1–3.4](https://arxiv.org/html/2503.14476v2#S3)):
+
+- **Clip-Higher.** Нижнюю границу отношения вероятностей оставили 0,8,
+  верхнюю подняли с 1,2 до 1,28. Для токена с положительным преимуществом
+  и старой вероятностью 0,01 плато целевой функции начинается при
+  новой вероятности 0,0128 вместо 0,012. При отношении 1,25
+  исходный GRPO уже не поощряет рост этого токена, а DAPO ещё поощряет.
+  Это граница слагаемого потерь, а не предел самой вероятности.
+- **Среднее по токенам.** Вместо двух средних, сначала внутри ответа,
+  затем по ответам, суммируют слагаемые и делят на фактическое число
+  участвующих токенов. Из двух ответов длиной 2 и 20 второй даёт 20
+  слагаемых из 22, а не половину суммы. Это тот же расчёт, что в
+  [[#grpo-length-normalization|разделе о длине ответа]].
+- **Штраф за длину.** В опыте авторов до 16 384 токенов добавка к награде
+  равна нулю, между 16 384 и 20 480 она линейно падает до −1.
+  У правильного ответа на 18 432 токена добавка −0,5,
+  итоговая награда $1-0.5=0.5$. Это изменение награды; исключение
+  обрезанного ответа из потерь — отдельная операция.
+
+### Когда все ответы верны, а решения ещё неточны
+
+Пусть все четыре ответа заканчиваются числом 4,
+но только два содержат верный ход решения. По итоговому числу доля успеха
+равна $4/4$, а среди засчитанных ответов доля верных рассуждений — $2/4$.
+Динамический отбор по правильности числа пропустит такую группу мимо
+оптимизатора. Если в награде есть штраф за длину, он может различать эти
+ответы, но это будет сигнал о длине, а не о правильности рассуждения.
+
+В [репликации Wen et al., §5](https://arxiv.org/html/2506.14245v2#S5)
+авторы проверяли эти показатели раздельно. Обозначим через $C$ число
+правильных конечных ответов, а через $D$ — сколько из них сопровождаются
+рассуждением, которое принял оценщик. Тогда $P(CA)=C/G$,
+а $P(CC\mid CA)=D/C$ при $C>0$. Во втором отношении в знаменатель не входят
+ответы с неверным результатом.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-dapo-2026-11-14/wen-figure4.svg|В репликации DAPO показаны два распределения по обучающим задачам: доля верных ответов и доля верных рассуждений среди них. К 380–400 шагам первая близка к единице, у второй медиана около 0,7.]]
+
+*Xumeng Wen et al., [Reinforcement Learning with Verifiable Rewards
+Implicitly Incentivizes Correct Reasoning in Base LLMs, рис. 4](https://arxiv.org/html/2506.14245v2#S5.F4).
+[Оригинальный SVG](https://arxiv.org/html/2506.14245v2/rollout_verify_easy.svg),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), без изменений.*
+
+На графике сравниваются распределения двух долей по обучающим задачам,
+на которых модель научилась почти всегда выдавать верное число. На
+правом участке первая доля близка к единице, а медиана второй около 0,7.
+Ход решения проверяла другая языковая модель, а не формальный доказатель
+([приложение A.3](https://arxiv.org/html/2506.14245v2#A1.SS3)).
+Это не оценка всех задач и не доказательство, что оставшиеся рассуждения
+неверны. Эксперимент показывает, что рост награды за число не заменяет
+отдельную проверку рассуждения.
+
+Оригинальная работа сообщает рост с 30 до 50 на AIME 2024 при
+последовательном добавлении изменений к исходному варианту обучения
+Qwen2.5-32B. В [таблице 1](https://arxiv.org/html/2503.14476v2#S4.T1)
+это средняя точность по 32 повторениям оценки (avg@32), а не вероятность
+найти хотя бы один верный ответ из 32. Последняя строка относится к
+комбинации всех изменений: эксперимент не измерял их независимый вклад
+при другом порядке.
+
+<a id="grpo-kl-settings"></a>
+
 ## Штраф по KL не определяется одним названием GRPO
 
 DeepSeekMath включает штраф относительно опорной модели. В проверенной
 [реализации TRL](https://github.com/huggingface/trl/blob/ccdaa0065cee4174d2b4eb60f1856c51e51232ed/trl/trainer/grpo_config.py)
 по умолчанию стоят `beta=0.0` и `loss_type="dapo"`. Следовательно, вызов
 класса `GRPOTrainer` без явных настроек не воспроизводит ни исходную формулу
-DeepSeekMath, ни обучение R1. В конфигурации опыта нужно записывать сами
-решения, а не только название класса:
+DeepSeekMath, ни обучение R1. В
+[TRL 0.24.0](https://huggingface.co/docs/trl/v0.24.0/grpo_trainer#loss-types)
+`loss_type="dapo"` задаёт нормировку по активным токенам, но сам по себе
+не включает ни динамический отбор групп, ни штраф за длину.
+В конфигурации опыта нужно записывать сами решения, а не только название класса:
 
 ```yaml
 algorithm: grpo
@@ -783,6 +1010,8 @@ scale_rewards: false
 beta: 0.0
 loss_aggregation: token_mean
 ```
+
+<a id="grpo-trl-config"></a>
 
 <a id="минимальный-пример-запуска-в-trl"></a>
 
@@ -832,6 +1061,8 @@ CPU-пример выше отдельно проверяет математик
 задают заново под оборудование. Названия полей сверены с
 [исходником v0.24.0](https://github.com/huggingface/trl/blob/v0.24.0/trl/trainer/grpo_config.py).
 Из создания конфигурации не следует, что проверен полный `GRPOTrainer`.
+
+<a id="grpo-sampling-mismatch"></a>
 
 ## Несовпадение моделей генерации и обучения
 
@@ -1035,6 +1266,8 @@ $(-0.474342,-0.474342)$. В первом случае токен с отноше
 <!-- source_unit_id: lecture-16-kimi-case -->
 <!-- source_unit_id: lecture-16-qwen-case -->
 
+<a id="grpo-r1-zero"></a>
+
 ### DeepSeek-R1-Zero
 
 R1-Zero начинает обучение с **DeepSeek-V3-Base**, не проводя непосредственно
@@ -1049,7 +1282,7 @@ R1-Zero начинает обучение с **DeepSeek-V3-Base**, не пров
 обеспечило удобного для пользователя ответа: тексты страдали от плохой
 читаемости и смешения языков.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-review-2026-09/r1-zero-training-dynamics.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-review-2026-09/r1-zero-training-dynamics.png|R1-Zero: training dynamics of accuracy and response length]]
 
 *Слева — качество R1-Zero на AIME 2024: один ответ и выбор по согласованности
 16 ответов — разные протоколы оценивания. Справа — средняя длина ответа во
@@ -1072,9 +1305,11 @@ R1-Zero начинает обучение с **DeepSeek-V3-Base**, не пров
 токеновая формула выше следует исходному DeepSeekMath. Одно название метода
 не устраняет это различие в записи и не задаёт точного кода обновления R1.
 
+<a id="grpo-r1-pipeline"></a>
+
 ### Полный DeepSeek-R1
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-r1/figure2-pipeline.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-r1/figure2-pipeline.png|DeepSeek-R1: cold start, reinforcement learning, data selection, and a second SFT]]
 
 *Схема читается слева направо. Фиолетовые блоки — модели, серо-синие — данные.
 Стрелка `Sampling` означает передачу сгенерированных примеров, а не весов.
@@ -1118,6 +1353,8 @@ RL меняет распределение новых ответов по наг
 этих ответов в данные для очередного SFT. Заменить все стадии словом GRPO
 означало бы потерять и происхождение данных, и назначение каждого перехода.
 
+<a id="grpo-kimi-partial-rollouts"></a>
+
 <a id="kimi-k15-rl-требует-не-только-objective-но-и-производственного-контура"></a>
 
 ### Kimi k1.5: стоимость длинных решений
@@ -1130,7 +1367,7 @@ RL меняет распределение новых ответов по наг
 разные участки ответа: это тот же вопрос об устаревании данных, что выше.
 См. [Kimi k1.5, §2.6.2](https://arxiv.org/html/2501.12599v1#S2.SS6.SSS2).
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-2026-10-24/kimi-partial-rollouts.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-2026-10-24/kimi-partial-rollouts.svg|Kimi k1.5: partial rollouts and replayed response segments]]
 
 *Прошлые сегменты ответа поступают из replay buffer, а текущий сегмент
 генерируется на очередной итерации. Это повторное использование уже написанных
@@ -1146,6 +1383,8 @@ CC BY-NC-ND 4.0. Полный исходный SVG без изменений.*
 должен различать уже сохранённый контекст, вновь сгенерированные токены и
 токены, по которым действительно вычислялся градиент. Экономия повторной
 генерации сама по себе не означает точного on-policy обновления всей цепочки.
+
+<a id="grpo-kimi-objective"></a>
 
 Алгоритм Kimi k1.5 тоже не совпадает с формулой GRPO выше. В §2.3.2 авторы
 получают из регуляризованной задачи квадратичную потерю по логарифму отношения
@@ -1199,6 +1438,8 @@ print(f"loss gradient, including 1/k: {kimi_gradient.tolist()}")
 замена $\tau\log Z$ из исходного вывода; это приближение, а не тождество
 для произвольного $\tau$.
 
+<a id="grpo-kimi-length-reward"></a>
+
 Управление длиной влияет и на награду. В Kimi k1.5 короткое правильное решение
 может получить бонус, длинное — штраф; неправильному решению бонус за краткость
 не дают. При длинах 100 и 300 токенов нормированная величина из отчёта
@@ -1210,6 +1451,8 @@ $0.5-(L-L_{min})/(L_{max}-L_{min})$ равна соответственно $0.5
 решение задач. Это явное изменение предпочтения между качеством и стоимостью,
 а не техническая нормировка функции потерь.
 [Kimi k1.5, §2.3.3](https://arxiv.org/html/2501.12599v1#S2.SS3.SSS3).
+
+<a id="grpo-qwen3-stages"></a>
 
 <a id="qwen3-несколько-стадий-вместо-одной-кнопки-reasoning"></a>
 
@@ -1255,6 +1498,8 @@ GSPO из более поздней статьи. Схема относится 
 среда, определяет конкретная задача. См.
 [Qwen3, §4.4](https://arxiv.org/html/2505.09388v1#S4.SS4).
 
+<a id="grpo-self-correction"></a>
+
 ## Что означает наблюдаемый момент самокоррекции
 
 В отчёте приведён пример, где модель останавливается и пересматривает решение.
@@ -1267,6 +1512,8 @@ GSPO из более поздней статьи. Схема относится 
 у базовых моделей ещё до RL. Слово `wait` само по себе не измеряет новый
 навык: нужен разбор правильности решения, а не только частот слов.
 [Understanding R1-Zero-Like Training, §2.3 и Appendix D](https://arxiv.org/html/2503.20783v1#S2.SS3).
+
+<a id="grpo-failures"></a>
 
 ## Характерные сбои и наблюдаемые показатели
 
@@ -1286,6 +1533,8 @@ pass@1 и pass@$k$ на отложенных задачах, долю неодн
 вероятностей, достижение токена конца и число сгенерированных токенов на одно
 успешное решение.
 
+<a id="grpo-open-implementations"></a>
+
 ## Открытые реализации
 
 - [Open-R1](https://github.com/huggingface/open-r1): примеры перехода
@@ -1297,8 +1546,8 @@ pass@1 и pass@$k$ на отложенных задачах, долю неодн
 - [OpenRLHF](https://github.com/OpenRLHF/OpenRLHF): Ray + vLLM + DeepSpeed,
   динамический отбор задач и несколько алгоритмов обучения с подкреплением.
 
-В Open-R1 следует учитывать важную деталь: шаблон диалога дистиллированных
-моделей DeepSeek заранее добавляет `<think>` и может скрывать начало блока
+В Open-R1 шаблон диалога дистиллированных моделей DeepSeek заранее добавляет
+`<think>` и может скрывать начало блока
 рассуждений. Для проверки формата шаблон нужно переопределить, иначе награда
 будет оптимизировать ошибку сериализации.
 

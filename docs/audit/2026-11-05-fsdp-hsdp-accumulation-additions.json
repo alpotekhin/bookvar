@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "kind": "fsdp-hsdp-accumulation-additions",
+  "review_date": "2026-11-05",
+  "files": [
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md",
+      "before_sha256": "183de5525e52384c034fc3996acbd74d20dad9a64560f7a65f24406c15da0ac8",
+      "after_sha256": "2faa647fb2b6c4530c805c14f0476baf4d1259974d85162819002bce4c4d9989",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-23\nlast_verified: 2026-10-23\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\nreference_terms:\n  - anchor: zero-state-sharding\n    label: \"Состояния P/G/O и стадии ZeRO-1/2/3\"\n    label_en: \"P/G/O states and ZeRO stages 1/2/3\"\n  - anchor: zero-memory-formats\n    label: \"16 и 12 байт на параметр: разные схемы хранения\"\n    label_en: \"16 versus 12 bytes per parameter: distinct storage models\"\n  - anchor: zero-owned-adam\n    label: \"Владельцы координат и локальные состояния Adam\"\n    label_en: \"Coordinate ownership and local Adam states\"\n  - anchor: zero-broadcast-vs-collectives\n    label: \"CS336 broadcast-оптимизатор и обмены ZeRO\"\n    label_en: \"CS336 broadcast-based optimizer versus ZeRO collectives\"\n  - anchor: fsdp-full-parameter-lifetime\n    label: \"Жизненный цикл полных весов и градиентов FSDP\"\n    label_en: \"FSDP full-parameter and gradient lifetimes\"\n  - anchor: fsdp-communication-bytes\n    label: \"Байты all-gather весов и reduce-scatter градиентов\"\n    label_en: \"Weight all-gather versus gradient reduce-scatter bytes\"\n  - anchor: peak-memory-synchronization\n    label: \"Prefetch и пик памяти: перекрытие буферов 6/8 GiB\"\n    label_en: \"Prefetch and memory peaks: overlapping 6/8 GiB buffers\"\n  - anchor: fsdp-prefetch-contract\n    label: \"Явная и неявная предзагрузка FSDP2\"\n    label_en: \"Explicit and implicit FSDP2 prefetch\"\n  - anchor: fsdp-per-parameter-dtensor\n    label: \"FSDP1 FlatParameter и отдельные DTensor в FSDP2\"\n    label_en: \"FSDP1 FlatParameter versus FSDP2 per-parameter DTensor\"\n  - anchor: fsdp-bottom-up\n    label: \"Bottom-up fully_shard и создание оптимизатора\"\n    label_en: \"Bottom-up fully_shard and optimizer creation\"\n  - anchor: fsdp-initialization-and-hooks\n    label: \"Согласованная инициализация и hooks вызова модуля\"\n    label_en: \"Consistent initialization and module-call hooks\"\n  - anchor: fsdp-reshard-policy\n    label: \"reshard_after_forward: корень, вложенные группы и int\"\n    label_en: \"reshard_after_forward: root, child groups and integer policy\"\n  - anchor: fsdp-three-dtypes\n    label: \"Исходный dtype, param_dtype и reduce_dtype\"\n    label_en: \"Original dtype, param_dtype and reduce_dtype\"\n  - anchor: fsdp-mesh-groups\n    label: \"DeviceMesh 2×2 и реальные группы процессов\"\n    label_en: \"DeviceMesh 2×2 and actual process groups\"\n  - anchor: fsdp-dtensor-layouts\n    label: \"Shard, Replicate и Partial: размещение и смысл данных\"\n    label_en: \"Shard, Replicate and Partial: placement and semantics\"\n  - anchor: fsdp-partial-nonlinearity\n    label: \"Partial перед ReLU: почему сначала нужна сумма\"\n    label_en: \"Partial before ReLU: why reduction must come first\"\n  - anchor: fsdp-redistribution\n    label: \"Преобразования размещений и необходимые коллективы\"\n    label_en: \"Layout redistributions and their collectives\"\n  - anchor: fsdp-distribute-from-local\n    label: \"distribute_tensor, from_local и collective full_tensor\"\n    label_en: \"distribute_tensor, from_local and collective full_tensor\"\n  - anchor: fsdp-hybrid-memory\n    label: \"HSDP: память по оси shard, репликация по другой оси\"\n    label_en: \"HSDP memory over the shard axis and replica groups\"\n  - anchor: fsdp-hybrid-reduction\n    label: \"HSDP: reduce-scatter по строкам и all-reduce по столбцам\"\n    label_en: \"HSDP row reduce-scatter and column all-reduce\"\n  - anchor: fsdp-tp-composition\n    label: \"FSDP×TP и DataParallelMeshDims\"\n    label_en: \"FSDP×TP and DataParallelMeshDims\"\n  - anchor: fsdp-token-normalization\n    label: \"Неравные числа токенов и глобальный знаменатель\"\n    label_en: \"Unequal token counts and a global denominator\"\n  - anchor: fsdp-nosync-storage\n    label: \"Несинхронизированные градиенты и reshard_after_backward\"\n    label_en: \"Unsynchronized gradients and reshard_after_backward\"\n  - anchor: fsdp-hsdp-accumulation\n    label: \"Накопление HSDP с reduce-scatter без каждого all-reduce\"\n    label_en: \"HSDP accumulation retaining reduce-scatter while deferring all-reduce\"\n  - anchor: fsdp-custom-correctness\n    label: \"Проверка собственного FSDP и ignored_params\"\n    label_en: \"Checking a custom FSDP implementation and ignored_params\"\n  - anchor: fsdp-checkpoint-boundary\n    label: \"Шардированные checkpoints: состояния и границы переноса\"\n    label_en: \"Sharded checkpoints: saved states and portability boundaries\"\n"
+        },
+        {
+          "old": "## Что именно разделяется между устройствами\n",
+          "new": "<a id=\"zero-state-sharding\"></a>\n\n## Что именно разделяется между устройствами\n"
+        },
+        {
+          "old": "В исходной статье ZeRO рассматривается смешанная точность с 16 байтами\n",
+          "new": "<a id=\"zero-memory-formats\"></a>\n\nВ исходной статье ZeRO рассматривается смешанная точность с 16 байтами\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-2026-10-23/hf-zero-memory.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-2026-10-23/hf-zero-memory.png|Разделение параметров, градиентов и состояний оптимизатора в ZeRO-1/2/3]]\n"
+        },
+        {
+          "old": "### Почему можно разделить состояния Adam\n",
+          "new": "<a id=\"zero-owned-adam\"></a>\n\n### Почему можно разделить состояния Adam\n"
+        },
+        {
+          "old": "В учебном задании CS336 оптимизатор делит параметры между процессами,\n",
+          "new": "<a id=\"zero-broadcast-vs-collectives\"></a>\n\nВ учебном задании CS336 оптимизатор делит параметры между процессами,\n"
+        },
+        {
+          "old": "## Время жизни полного параметра\n",
+          "new": "<a id=\"fsdp-full-parameter-lifetime\"></a>\n\n## Время жизни полного параметра\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-review-2026-10/pytorch-fsdp-figure1-overview.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-review-2026-10/pytorch-fsdp-figure1-overview.png|Группы FSDP и сборка полных весов перед вычислением]]\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-2026-10-23/hf-fsdp-forward.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-2026-10-23/hf-fsdp-forward.png|ZeRO-3 forward: сборка весов слоя, вычисление и повторное шардирование]]\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-2026-10-23/hf-fsdp-backward.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-2026-10-23/hf-fsdp-backward.png|ZeRO-3 backward: повторная сборка весов и reduce-scatter градиентов]]\n"
+        },
+        {
+          "old": "### Сколько данных передаётся\n",
+          "new": "<a id=\"fsdp-communication-bytes\"></a>\n\n### Сколько данных передаётся\n"
+        },
+        {
+          "old": "В FSDP2 есть неявная предварительная сборка и методы\n",
+          "new": "<a id=\"fsdp-prefetch-contract\"></a>\n\nВ FSDP2 есть неявная предварительная сборка и методы\n"
+        },
+        {
+          "old": "## FSDP2, DeviceMesh и DTensor\n",
+          "new": "<a id=\"fsdp-per-parameter-dtensor\"></a>\n\n## FSDP2, DeviceMesh и DTensor\n"
+        },
+        {
+          "old": "### Сначала группы параметров, затем оптимизатор\n",
+          "new": "<a id=\"fsdp-bottom-up\"></a>\n\n### Сначала группы параметров, затем оптимизатор\n"
+        },
+        {
+          "old": "FSDP2 не превращает независимо инициализированные случайные модели\n",
+          "new": "<a id=\"fsdp-initialization-and-hooks\"></a>\n\nFSDP2 не превращает независимо инициализированные случайные модели\n"
+        },
+        {
+          "old": "### Когда FSDP2 сохраняет полные веса\n",
+          "new": "<a id=\"fsdp-reshard-policy\"></a>\n\n### Когда FSDP2 сохраняет полные веса\n"
+        },
+        {
+          "old": "### Три формата: исходные веса, вычисления и редукция\n",
+          "new": "<a id=\"fsdp-three-dtypes\"></a>\n\n### Три формата: исходные веса, вычисления и редукция\n"
+        },
+        {
+          "old": "### DeviceMesh: какие процессы участвуют в обмене\n",
+          "new": "<a id=\"fsdp-mesh-groups\"></a>\n\n### DeviceMesh: какие процессы участвуют в обмене\n"
+        },
+        {
+          "old": "### DTensor: где лежат элементы и что они означают\n",
+          "new": "<a id=\"fsdp-dtensor-layouts\"></a>\n\n### DTensor: где лежат элементы и что они означают\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-review-2026-10/edls-dtensor-layouts.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-review-2026-10/edls-dtensor-layouts.png|Один вектор при разных размещениях Shard и Replicate на mesh]]\n"
+        },
+        {
+          "old": "Нелинейную функцию нельзя произвольно применить к локальным вкладам\n",
+          "new": "<a id=\"fsdp-partial-nonlinearity\"></a>\n\nНелинейную функцию нельзя произвольно применить к локальным вкладам\n"
+        },
+        {
+          "old": "| Переход по одной оси mesh | Что нужно сделать |\n",
+          "new": "<a id=\"fsdp-redistribution\"></a>\n\n| Переход по одной оси mesh | Что нужно сделать |\n"
+        },
+        {
+          "old": "`distribute_tensor` получает логический полный тензор. Напротив,\n",
+          "new": "<a id=\"fsdp-distribute-from-local\"></a>\n\n`distribute_tensor` получает логический полный тензор. Напротив,\n"
+        },
+        {
+          "old": "### Гибридное шардирование и сочетание с TP\n",
+          "new": "<a id=\"fsdp-hybrid-memory\"></a>\n\n### Гибридное шардирование и сочетание с TP\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-review-2026-10/pytorch-fsdp-figure4-hybrid-groups.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-review-2026-10/pytorch-fsdp-figure4-hybrid-groups.png|Группы шардирования FSDP и репликация одинаковых частей между группами]]\n"
+        },
+        {
+          "old": "Для сетки $2\\times2$ из предыдущего примера проследим градиент из двух\n",
+          "new": "<a id=\"fsdp-hybrid-reduction\"></a>\n\nДля сетки $2\\times2$ из предыдущего примера проследим градиент из двух\n"
+        },
+        {
+          "old": "При сочетании с TP сначала определяют, какую часть матрицы вычисляет каждый\n",
+          "new": "<a id=\"fsdp-tp-composition\"></a>\n\nПри сочетании с TP сначала определяют, какую часть матрицы вычисляет каждый\n"
+        },
+        {
+          "old": "## Нормировка градиентов и накопление\n",
+          "new": "<a id=\"fsdp-token-normalization\"></a>\n\n## Нормировка градиентов и накопление\n"
+        },
+        {
+          "old": "В FSDP2 `set_requires_gradient_sync(False)` отключает синхронизацию\n",
+          "new": "<a id=\"fsdp-nosync-storage\"></a>\n\nВ FSDP2 `set_requires_gradient_sync(False)` отключает синхронизацию\n"
+        },
+        {
+          "old": "<a id=\"контракт-корректности-custom-fsdp\"></a>\n",
+          "new": "<a id=\"fsdp-hsdp-accumulation\"></a>\n\n### Накопление с двумя уровнями синхронизации HSDP\n\nВ гибридной сетке есть два разных обмена градиентов. Reduce-scatter\nскладывает вклады внутри группы шардирования и оставляет каждому процессу\nего координаты. All-reduce объединяет эти части с соответствующими частями\nдругих реплик. При накоплении можно выполнять первый обмен для каждого\nмикробатча, а второй отложить до конца окна. Тогда между микробатчами\nсохраняются результаты reduce-scatter, а не полные несинхронизированные\nградиенты всех параметров.\n\nВ PyTorch 2.14 для этого служит `set_requires_all_reduce(False)`.\nДокументация описывает его назначение так:\n\n> This can be used to implement gradient accumulation with only reduce-scatter but not all-reduce for HSDP.\n\nИсточник: [PyTorch, FSDPModule.set_requires_all_reduce](https://docs.pytorch.org/docs/2.14/distributed.fsdp.fully_shard.html#torch.distributed.fsdp.FSDPModule.set_requires_all_reduce).\nПри этом `set_requires_gradient_sync` должен оставаться включённым:\nего отключение отменило бы и reduce-scatter. Настройка\n`set_reshard_after_backward` независимо управляет полными весами,\nа не этими частями градиентов.\n\nПроследим два микробатча на прежней сетке\n`[[0,1],[2,3]]`. Пусть в первом локальные градиенты равны\n`[1,2]`, `[3,4]`, `[5,6]`, `[7,8]`, а во втором каждый\nиз них вдвое больше. Каждый микробатч содержит по одному примеру на\nпроцесс, поэтому среднее нужно взять по восьми примерам. Для наглядности\nзапишем суммы без внутренних масштабирований библиотеки.\n\nПосле первого reduce-scatter строка 0 владеет координатами `[4]`\nи `[6]`, строка 1 — `[12]` и `[14]`.\nВторой обмен добавляет соответственно `[8]`, `[12]`,\n`[24]` и `[28]`. Накопленные части строк в совокупности представляют\n\n$$\nG_0=[12,18],\\qquad G_1=[36,42].\n$$\n\nТеперь один межстрочный all-reduce для каждой координаты даёт\n`[48]` на процессах 0/2 и `[60]` на 1/3.\nПосле деления на восемь получаются части среднего градиента `[6]`\nи `[7.5]`. Восстановленный вектор равен `[6,7.5]`.\nЕсли остановиться после reduce-scatter, реплики ещё будут хранить\nразные вклады и выполнят разные обновления. Если ещё раз усреднить\nуже нормированные части, изменится целевая функция.\n\nВ следующем шаге общий знаменатель вычисляется до начала окна.\n`window` — непустой список пар `(inputs, targets)`;\nвсе процессы HSDP-группы проходят одинаковое число микробатчей.\nМодель уже подготовлена через `fully_shard` на двумерном mesh.\nКак и в предыдущем примере, используется стандартное усреднение FSDP2,\n`data_group` включает все реплики данных, а `-100` исключает цель из loss.\n\n<!-- example: fsdp-hybrid-accumulation -->\n~~~python\ndef hsdp_accumulated_step(model, optimizer, window, data_group):\n    import torch\n    import torch.distributed as dist\n    import torch.nn.functional as F\n\n    if not window:\n        raise ValueError(\"The accumulation window must not be empty\")\n    count = sum((targets != -100).sum() for _, targets in window)\n    count = count.to(dtype=torch.int64)\n    dist.all_reduce(count, group=data_group)\n    if count.item() == 0:\n        raise ValueError(\"No valid targets in the global window\")\n\n    scale = dist.get_world_size(data_group) / count.item()\n    optimizer.zero_grad(set_to_none=True)\n    model.set_requires_gradient_sync(True)\n    for index, (inputs, targets) in enumerate(window):\n        model.set_requires_all_reduce(index == len(window) - 1)\n        logits = model(inputs)\n        loss_sum = F.cross_entropy(\n            logits.reshape(-1, logits.size(-1)),\n            targets.reshape(-1),\n            ignore_index=-100,\n            reduction=\"sum\",\n        )\n        (loss_sum * scale).backward()\n    optimizer.step()\n~~~\n\nНа последнем микробатче `set_requires_all_reduce(True)` возвращает\nмежрепличную редукцию и объединяет накопленные части до шага оптимизатора.\nКоэффициент `scale` учитывает весь знаменатель один раз; дополнительное\nделение на число микробатчей не требуется. Процесс без полезных целей\nпродолжает участвовать в проходах и обменах.\n\nОтложен только all-reduce градиентов между репликами. Коллективный\nподсчёт числа целей в начале функции остаётся необходимым. Сборки весов\nтоже никуда не исчезают: ими управляют границы FSDP и политика reshard.\nЧасти градиентов требуют меньше хранения, чем полный несинхронизированный\nбуфер той же группы, но рабочие буферы reduce-scatter и собранные веса\nпо-прежнему участвуют в пике памяти. Такая схема меняет обмены и время\nжизни данных; выигрыш по времени и пик GPU-памяти проверяются отдельно.\n\n<a id=\"fsdp-custom-correctness\"></a>\n\n<a id=\"контракт-корректности-custom-fsdp\"></a>\n"
+        },
+        {
+          "old": "## Distributed Checkpoint\n",
+          "new": "<a id=\"fsdp-checkpoint-boundary\"></a>\n\n## Distributed Checkpoint\n"
+        },
+        {
+          "old": "- PyTorch [2.14 FSDP2 API](https://docs.pytorch.org/docs/2.14/distributed.fsdp.fully_shard.html), [DTensor API](https://docs.pytorch.org/docs/2.14/distributed.tensor.html) и [FSDP2 tutorial](https://docs.pytorch.org/tutorials/intermediate/FSDP_tutorial.html): конкретные правила `fully_shard`, смешанной точности и управления временем жизни весов. Документация проверена 23 октября 2026 года.\n",
+          "new": "- PyTorch [2.14 FSDP2 API](https://docs.pytorch.org/docs/2.14/distributed.fsdp.fully_shard.html), [DTensor API](https://docs.pytorch.org/docs/2.14/distributed.tensor.html) и [FSDP2 tutorial](https://docs.pytorch.org/tutorials/intermediate/FSDP_tutorial.html): конкретные правила `fully_shard`, смешанной точности и управления временем жизни весов.\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "bd943a6dc437028434c82057b3732c129e10fbd1b645e34b87c3d13e4b85cadf",
+      "after_sha256": "856f65c612cc1bdf1594fed104f10feb040138c4b94f69720df0af40a45d200c",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor|ZeRO, FSDP2, DeviceMesh и DTensor]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor|ZeRO, FSDP2, DeviceMesh и DTensor]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#zero-state-sharding|Состояния P/G/O и стадии ZeRO-1/2/3]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#zero-memory-formats|16 и 12 байт на параметр: разные схемы хранения]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#zero-owned-adam|Владельцы координат и локальные состояния Adam]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#zero-broadcast-vs-collectives|CS336 broadcast-оптимизатор и обмены ZeRO]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-full-parameter-lifetime|Жизненный цикл полных весов и градиентов FSDP]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-communication-bytes|Байты all-gather весов и reduce-scatter градиентов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#peak-memory-synchronization|Prefetch и пик памяти: перекрытие буферов 6/8 GiB]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-prefetch-contract|Явная и неявная предзагрузка FSDP2]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-per-parameter-dtensor|FSDP1 FlatParameter и отдельные DTensor в FSDP2]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-bottom-up|Bottom-up fully_shard и создание оптимизатора]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-initialization-and-hooks|Согласованная инициализация и hooks вызова модуля]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-reshard-policy|reshard_after_forward: корень, вложенные группы и int]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-three-dtypes|Исходный dtype, param_dtype и reduce_dtype]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-mesh-groups|DeviceMesh 2×2 и реальные группы процессов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-dtensor-layouts|Shard, Replicate и Partial: размещение и смысл данных]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-partial-nonlinearity|Partial перед ReLU: почему сначала нужна сумма]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-redistribution|Преобразования размещений и необходимые коллективы]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-distribute-from-local|distribute_tensor, from_local и collective full_tensor]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-hybrid-memory|HSDP: память по оси shard, репликация по другой оси]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-hybrid-reduction|HSDP: reduce-scatter по строкам и all-reduce по столбцам]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-tp-composition|FSDP×TP и DataParallelMeshDims]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-token-normalization|Неравные числа токенов и глобальный знаменатель]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-nosync-storage|Несинхронизированные градиенты и reshard_after_backward]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-hsdp-accumulation|Накопление HSDP с reduce-scatter без каждого all-reduce]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-custom-correctness|Проверка собственного FSDP и ignored_params]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-checkpoint-boundary|Шардированные checkpoints: состояния и границы переноса]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "94daad844befd0a49d62a271b54510bad7972b7e7dabd2f31b2c96fa72b95fec",
+      "after_sha256": "8dafb78b6e6d4b6c0ec60357fc093de6540074de012e5ed7d6896c99e1ee6819",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor|ZeRO, FSDP2, DeviceMesh, and DTensor]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor|ZeRO, FSDP2, DeviceMesh, and DTensor]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#zero-state-sharding|P/G/O states and ZeRO stages 1/2/3]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#zero-memory-formats|16 versus 12 bytes per parameter: distinct storage models]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#zero-owned-adam|Coordinate ownership and local Adam states]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#zero-broadcast-vs-collectives|CS336 broadcast-based optimizer versus ZeRO collectives]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-full-parameter-lifetime|FSDP full-parameter and gradient lifetimes]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-communication-bytes|Weight all-gather versus gradient reduce-scatter bytes]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#peak-memory-synchronization|Prefetch and memory peaks: overlapping 6/8 GiB buffers]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-prefetch-contract|Explicit and implicit FSDP2 prefetch]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-per-parameter-dtensor|FSDP1 FlatParameter versus FSDP2 per-parameter DTensor]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-bottom-up|Bottom-up fully_shard and optimizer creation]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-initialization-and-hooks|Consistent initialization and module-call hooks]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-reshard-policy|reshard_after_forward: root, child groups and integer policy]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-three-dtypes|Original dtype, param_dtype and reduce_dtype]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-mesh-groups|DeviceMesh 2×2 and actual process groups]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-dtensor-layouts|Shard, Replicate and Partial: placement and semantics]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-partial-nonlinearity|Partial before ReLU: why reduction must come first]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-redistribution|Layout redistributions and their collectives]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-distribute-from-local|distribute_tensor, from_local and collective full_tensor]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-hybrid-memory|HSDP memory over the shard axis and replica groups]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-hybrid-reduction|HSDP row reduce-scatter and column all-reduce]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-tp-composition|FSDP×TP and DataParallelMeshDims]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-token-normalization|Unequal token counts and a global denominator]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-nosync-storage|Unsynchronized gradients and reshard_after_backward]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-hsdp-accumulation|HSDP accumulation retaining reduce-scatter while deferring all-reduce]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-custom-correctness|Checking a custom FSDP implementation and ignored_params]]\n  - [[00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor#fsdp-checkpoint-boundary|Sharded checkpoints: saved states and portability boundaries]]\n"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "status": "verified-local-delta",
+    "scope": "One complete 793-line input and 1019-line final owner read; 26 subject links per locale, six descriptive original-figure aliases, and a source-backed HSDP two-level accumulation example. All eight prior code blocks, explanations, equations and six original figures retained. One dated review sentence removed from bibliography. No translation, new scientific image, whole-course acceptance or release.",
+    "chapterSha256": "2faa647fb2b6c4530c805c14f0476baf4d1259974d85162819002bce4c4d9989",
+    "fullRead": {
+      "inputLines": 793,
+      "finalLines": 1019,
+      "inputSha256": "183de5525e52384c034fc3996acbd74d20dad9a64560f7a65f24406c15da0ac8",
+      "finalRanges": [
+        "1–200",
+        "201–400",
+        "401–600",
+        "601–800",
+        "801–1019"
+      ],
+      "note": "Final ranges read after the four English subject-label spacing corrections. No later chapter edits."
+    },
+    "explanationReview": {
+      "preserved": "P/G/O and 16 versus 12 bytes; coordinate-owned Adam; full-weight lifetime and separate weight/gradient communication sizes; prefetch peaks; bottom-up grouping, root policy and three dtypes; DeviceMesh, Partial and redistribution; HSDP axes and token normalization; checkpoint portability boundaries.",
+      "sourceComparison": "The entire input exactly matches the accepted 2026-10-23 edition. Its ZeRO, CS336 Lecture 8/Assignment 2, EDLS Week 5, FSDP paper and Playbook comparisons remain evidence for unchanged passages only; both 2026-10-14 and 2026-10-23 FSDP audits were read.",
+      "newSourceSections": [
+        {
+          "url": "https://docs.pytorch.org/docs/2.14/distributed.fsdp.fully_shard.html#torch.distributed.fsdp.FSDPModule.set_requires_all_reduce",
+          "scope": "Complete set_requires_all_reduce, set_requires_gradient_sync, set_reshard_after_backward contracts; relevant fully_shard/root/mixed-precision/prefetch sections. Not a whole API-page read."
+        },
+        {
+          "source": "Installed PyTorch 2.14.1 FSDPModule.set_requires_all_reduce and FSDPParamGroup.post_backward",
+          "scope": "Setter and relevant post-backward reduction path inspected. No upstream source-byte pin or native internal collective-count measurement claimed."
+        }
+      ],
+      "workedExample": "Two 2×2-mesh microbatches: row reduce-scatter sums accumulate to [12,18] and [36,42]; column sums are [48,60]; eight-example mean is [6,7.5]. Logical SUM arithmetic is separated from the implementation's pre/post scaling.",
+      "boundary": "The published function defers only the replica-axis gradient all-reduce. Gradient synchronization stays enabled; weight resharding and the global valid-target count are separate. The same-length nonempty window, 2D HSDP mesh, default averaging and DP-only data_group assumptions are explicit.",
+      "style": "Entire final chapter checked with no-ai-slop/eval.md and local technical qualifications. Full derivations, source excerpts, code, figures and caveats retained; no synthetic definition-only replacement."
+    },
+    "examples": {
+      "exit": 0,
+      "torch": "2.14.1",
+      "device": "CPU/Gloo, four real workers",
+      "programs": 9,
+      "log": "/var/tmp/bookvar-fsdp-hsdp-20261105.log",
+      "executedChapterSha256": "3c27f3c0f888fc871050851636354ba7044c07c4ab4dd63bab49e5dab5b15ec1",
+      "revision": "The executed and final chapters differ only by four English subject-label spaces. Exact inverse/preservation tests bind all nine code blocks and mathematical bodies.",
+      "scope": "All nine actual chapter programs execute. Added six seed/window configurations with two AdamW updates each; full parameters, gradients and AdamW moments match the dense union-data reference with unequal and zero-local valid targets. Empty-window and globally empty-target controls pass. An independent actual two-row-reduce-scatter/one-column-all-reduce trace reproduces [6,7.5]. Prior 1D/2D FSDP, token normalization, dtype, layout, Partial/ReLU and lifetime checks remain passing.",
+      "limits": "No CUDA/NCCL, GPU peak memory, network timing/overlap, native internal collective-count instrumentation, DCP restore experiment or benchmark."
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-05-fsdp-reader",
+      "desktop": "Default 1280×720. Six original content figures load at native proportions; all six originals and full source captions personally inspected in the viewer. Four display equations and four tables fit 632/632, zero KaTeX errors. New accumulation section inspected inline.",
+      "mobile": "375×812 override, document 375/375, reader 343 px. Six content figures preserve proportions; four equations and four tables fit 343/343, zero KaTeX errors. ZeRO original inspected at 2.5× with actual left position 0 and right portion 535.5 (client 375, scroll width 914); stage names, formulas and legend readable. No exact right-edge or all-six mobile zoom claim. New HSDP prose inspected inline; temporary viewport reset.",
+      "navigation": "Actual RU reference → #fsdp-hsdp-accumulation; actual EN reference → #fsdp-token-normalization, each target unique. EN page explicitly discloses no separate English edition. Actual EN Next → expert-hybrid-parallelism with correct h1; Russian interface restored and next owner left open."
+    },
+    "checks": {
+      "scoped": {
+        "files": 4,
+        "tests": 17,
+        "exit": 0,
+        "includesReceiptTests": 2,
+        "hashPinnedWholeReads": 106,
+        "unreadOwners": 47,
+        "log": "/var/tmp/bookvar-fsdp-receipt-final-20261105.log"
+      },
+      "html": {
+        "tests": 212,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-fsdp-output-20261105.log"
+      },
+      "build": {
+        "pages": 2009,
+        "pagefindFiles": 2013,
+        "seconds": 28.19,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-fsdp-build-final-20261105.log"
+      },
+      "links": {
+        "brokenInternal": 0,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-fsdp-links-20261105.log"
+      },
+      "size": {
+        "bytes": 856679742,
+        "files": 5626,
+        "limit": 1000000000,
+        "headroom": 143320258,
+        "exit": 0
+      },
+      "topicIndex": {
+        "topics": 153,
+        "exit": 0
+      }
+    },
+    "remaining": [
+      "After registering this full-owner read, 47 of 153 owners remain unread in this route pass. Read counters are not accepted-chapter counters.",
+      "Next: expert/hybrid parallelism, network/storage/distributed checkpoints and fault tolerance.",
+      "Existing rights/figure gaps, thematic course completeness, public-checkout/Pages-base checks and authorized dev/Pages release remain open."
+    ]
+  }
+}

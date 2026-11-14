@@ -4,10 +4,10 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "9306be89c604c905489000ffcebffb32e16161f66e07540005d0f394097c0fd5"
-translation_reviewed: "2026-10-29"
+canonical_revision: "bb5214bc2fd44c37f7cb66c3d201ef4ccde882963839b73b46c9bcf7eeabfe8b"
+translation_reviewed: "2026-11-10"
 translation_of: "00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md"
-last_updated: 2026-10-29
+last_updated: 2026-11-10
 source_unit_id:
   - lecture-02-einops-named-axes
   - assignment-01-task-scaled-dot-product-attention
@@ -84,6 +84,8 @@ the answer whenever their sum is nonzero. In the `extreme` example,
 underflow has already erased the allowed exponentials. Dividing these zeros
 by their zero sum cannot recover the result.
 
+<a id="causal-mask-shifted-targets"></a>
+
 ### Causal masking and shifted targets
 
 During language-model training, the complete sequence is known and all
@@ -156,12 +158,12 @@ all three are the same $X$. In cross-attention, $X_Q$ comes from the
 decoder and $X_K=X_V$ from the encoder's final output. The projected
 $Q,K,V$ below retain the notation of the preceding chapter.
 
-One softmax produces one distribution over keys. A word may need several
-relationships at once: a nearby word, the subject with which it agrees,
-and a modifier that disambiguates its meaning. Multi-head attention provides
-separate projection sets and separate attention distributions. These roles
-are not assigned to heads in advance; several heads can learn similar
-distributions. All head parameters are trained jointly under the same loss:
+Within one head, a key's weight multiplies every coordinate of its
+value vector. When several heads read the same key, each has its own
+projections and its own weight. A word might get one set of features
+from its neighbor and another from the subject it agrees with.
+The architecture assigns no such roles: the same loss trains all
+projections, and different heads can read the same positions.
 
 $$
 \begin{aligned}
@@ -180,17 +182,24 @@ $$
 \end{gathered}
 $$
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/qkv-for-heads.png]]
+<a id="multihead-source-figure"></a>
 
-*Each head receives its own query, key, and value projections. Source:
-Lena Voita, [Multi-Head Attention](https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html#multi_head_attention).
-The original page also includes an animation of the complete computation.*
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/multihead-2026-11-10/vaswani-multihead-figure2.png|Each head has its own Q, K, and V projections. The head outputs are concatenated along the feature axis and pass through one output projection.]]
 
-The classic Transformer chooses $d_k=d_v=D_h=D_{model}/H$.
-Each head's projection is therefore narrower than the model, and
-concatenation has width $HD_h=D_{model}$. This is a dimensionality choice,
-not a requirement of every multi-head attention layer. In the general case,
-$W^O$ has shape $[Hd_v,D_{model}]$.
+*The bottom Linear blocks project the inputs: Q, K, and V in the diagram
+denote our $X_Q,X_K,X_V$. Each head's three projections feed its own
+Scaled Dot-Product Attention. Concat joins the outputs at a single
+position, and the top Linear applies $W^O$. Vaswani et al.,
+[Attention Is All You Need, Figure 2, right panel](https://arxiv.org/html/1706.03762v7#S3.F2.g2).
+Unmodified panel, reproduced under [Google's permission notice](https://arxiv.org/html/1706.03762v7#p1.1).*
+
+[Lena Voita's explanation](https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html#multi_head_attention)
+includes a separate diagram of the projections and an animation of the full computation.
+
+In the original Transformer, each head returns $D_h$ features, with
+$d_k=d_v=D_h=D_{model}/H$. Concatenation restores width $HD_h=D_{model}$.
+The number of value features per head $d_v$ can differ in other
+designs; in general $W^O$ has shape $[Hd_v,D_{model}]$.
 
 The output projection mixes features from different heads at one position.
 It neither mixes rows belonging to different queries nor replaces attention
@@ -385,11 +394,28 @@ still determines the meaning of those hidden axes.
 [CS336 Lecture 2, einops_einsum, einops_reduce, and einops_rearrange](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_02.py#L202-L276)
 works through this sequence of `einsum`, `reduce`, and `rearrange`.
 
+<a id="two-heads-trace"></a>
+
 ### A numerical example with two heads
 
-Let the first head's values be $(0,8)$ and the second head's values be
-$(4,12)$. For one query, assign weights $(0.75,0.25)$ to head 1 and
-$(0.25,0.75)$ to head 2. Then:
+Take two input positions with vectors $(1,0)$ and $(0,1)$. Each of the
+two heads has one coordinate, so the first column of each projection
+goes to the first head, the second to the second head. The code below
+chooses $W^Q,W^K,W^V$ as follows; multiplying by $X=I_2$ leaves them unchanged:
+
+$$
+\begin{gathered}
+Q=\begin{pmatrix}1&1\\1&1\end{pmatrix},\\
+K=\begin{pmatrix}\log3&0\\0&\log3\end{pmatrix},
+\qquad
+V=\begin{pmatrix}0&4\\8&12\end{pmatrix}.
+\end{gathered}
+$$
+
+At the first position, both heads get scalar query $1$. The first head's
+keys give scores $(\log3,0)$; the second head's give $(0,\log3)$.
+If both positions are visible, softmax gives $(0.75,0.25)$ and
+$(0.25,0.75)$ respectively. Apply these weights to the columns of $V$:
 
 $$
 \begin{gathered}
@@ -398,20 +424,25 @@ z_2=0.25\cdot4+0.75\cdot12=10.
 \end{gathered}
 $$
 
-Scalar queries equal to one, with scores $(\log3,0)$ and $(0,\log3)$,
-produce these weights. The complete implementation below supplies
-projection matrices producing precisely these queries, keys, and values.
-
 Concatenation gives the row $(2,10)$. Choose the output matrix:
 
 $$
 W^O=\begin{bmatrix}1&2\\3&-1\end{bmatrix}.
 $$
 
-Then $(2,10)W^O=(32,-6)$. Averaging the heads would produce a single
+Then $(2,10)W^O=(32,-6)$. A single shared weight $p$ on the second
+token would give a mixture of the same rows of $V$ equal to $(8p,4+8p)$.
+The two coordinates always differ by 4, so no such mixture yields $(2,10)$.
+Averaging the two computed head outputs would produce a single
 number, $6$, losing the distinction between $(2,10)$ and $(6,6)$.
 Yet $(6,6)W^O=(24,6)$. That one average cannot recover both projected
 outputs.
+
+Now enable the causal mask (`causal=True`). At the first position, both heads
+get weights $(1,0)$ because the second key is to its right. Concatenation
+gives $(0,4)$ and the output is $(12,-4)$. At the second position both
+keys are visible, so the output remains $(32,-6)$. All projection
+parameters are unchanged.
 
 ## Complete shape trace
 
@@ -425,7 +456,7 @@ $D_{model}$, $H$ heads, and head width $D_h=D_{model}/H$.
 | split + transpose | each `[B,H,T,Dh]` | each `[2,2,3,2]` |
 | $K^\top$ | `[B,H,Dh,T]` | `[2,2,2,3]` |
 | scores $S$ and weights $A$ | each `[B,H,T,T]` | each `[2,2,3,3]` |
-| values $Z=AV$ | `[B,H,T,Dh]` | `[2,2,3,2]` |
+| head outputs $Z=AV$ | `[B,H,T,Dh]` | `[2,2,3,2]` |
 | merge and output projection | `[B,T,Dmodel]` | `[2,3,4]` |
 
 This example's score matrix contains 36 numbers: two examples, two heads,
@@ -763,6 +794,35 @@ The connection between shapes, parameters, FLOPs, and memory continues in
 [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость#Сначала имена осей, затем операции|the Transformer cost chapter]].
 Implementation continues in
 [[02 Areas/ML & DL/06 Практика/20 Собрать языковую модель с нуля#Этап 2. Модель от базовых операций к логитам|Capstone 1]].
+
+<a id="measuring-head-specialization"></a>
+
+## How head specialization was measured
+
+Voita et al. studied the encoder of an English-to-Russian translator
+trained on six million OpenSubtitles sentence pairs. For each head,
+they measured two different quantities: relevance to the top predicted
+logit using layer-wise relevance propagation (LRP), and the mean
+maximum attention weight across queries, excluding EOS.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/multihead-2026-11-10/voita-trained-heads-figure1.png|Three panels from one experiment: relevance by LRP, mean maximum attention weight, and measured head functions.]]
+
+*Rows are layers; columns are heads sorted by LRP separately within
+each layer. The left panel shows relevance and the center shows the
+mean maximum attention weight. On the right, −1 and +1 mean the
+previous and next token, `v-o` denotes a verb-to-direct-object relation,
+and `r` marks attention to rare tokens. Voita, Talbot, Moiseev, Sennrich,
+and Titov, [Analyzing Multi-Head Self-Attention, Figure 1](https://aclanthology.org/P19-1580.pdf#page=3),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); all three panels cropped from the PDF, not redrawn.*
+
+Compare the first cell of the top row across the three panels. This head
+ranks highest in layer 1 by LRP but has a low mean maximum weight. The
+right panel marks it `r`. In layer 2, two heads score high on both
+measures and usually pick neighboring positions. The authors classified
+a head as positional if its maximum fell at the same relative offset
+at least 90% of the time. These are measurements of a trained model,
+not roles assigned in the architecture. A peak attention weight alone
+does not measure a head's contribution to a prediction.
 
 ## Sources and visual continuations
 

@@ -2,13 +2,39 @@
 title: Gaussian mixture и EM — обучение со скрытой принадлежностью
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-25
+last_updated: 2026-11-03
+reference_terms:
+  - label: GMM — вероятности принадлежности
+    label_en: GMM responsibilities
+    anchor: gmm-responsibilities
+  - label: EM — нижняя граница и монотонность
+    label_en: EM lower bound and monotonicity
+    anchor: em-bound
+  - label: GMM — формы ковариаций
+    label_en: GMM covariance families
+    anchor: gmm-covariance
+  - label: GMM — схлопывание ковариации
+    label_en: GMM covariance collapse
+    anchor: gmm-covariance-collapse
+  - label: GMM — инициализация и повторные запуски
+    label_en: GMM initialization and restarts
+    anchor: gmm-initialization
+  - label: GMM — компоненты и группы
+    label_en: GMM components versus clusters
+    anchor: gmm-density-components
+  - label: GMM — число компонент и AIC/BIC
+    label_en: GMM model selection and AIC/BIC
+    anchor: gmm-model-selection
+  - label: GMM — генерация через PCA
+    label_en: GMM generation through PCA
+    anchor: gmm-pca-generation
 primary_sources:
   - https://mml-book.com/
   - https://scikit-learn.org/stable/modules/mixture.html
   - https://scikit-learn.org/stable/auto_examples/mixture/plot_gmm_covariances.html
   - https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html
   - https://ermongroup.github.io/cs228-notes/learning/latent/
+  - https://scikit-learn.org/stable/auto_examples/mixture/plot_gmm_init.html
 ---
 
 # Gaussian mixture и EM — обучение со скрытой принадлежностью
@@ -132,6 +158,7 @@ $$
 нескольких распределений с разными весами. EM пересчитывает эти веса
 по текущим параметрам, а затем параметры по найденным весам.
 
+<a id="gmm-responsibilities"></a>
 ## E-step: насколько каждая компонента объясняет объект
 
 При текущих параметрах формула Байеса даёт апостериорную вероятность
@@ -182,7 +209,7 @@ $x=2+\tfrac14\log9\approx2{,}5493$. Более частая компонента
 и часть точек за геометрической серединой. При разных ковариациях
 меняются также нормировочные множители и сами расстояния.
 
-![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-uncertainty.png]]
+![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-uncertainty.png|Вероятности принадлежности GMM: точки возле перекрытия двух групп нарисованы мельче, потому что максимальная вероятность ниже]]
 
 *Jake VanderPlas,
 [Generalizing E–M: Gaussian Mixture Models](https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html),
@@ -455,6 +482,7 @@ np.testing.assert_allclose(likelihood_trace[-1],
 
 <a id="почему-likelihood-не-уменьшается"></a>
 
+<a id="em-bound"></a>
 ## Почему точный EM не уменьшает правдоподобие
 
 Введём произвольное распределение $q(z)$:
@@ -538,9 +566,10 @@ print("KL gap:", gap)
 
 <a id="геометрия-covariance"></a>
 
+<a id="gmm-covariance"></a>
 ## Формы ковариаций
 
-![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-covariance-types.png]]
+![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-covariance-types.png|Диагональная, сферическая и полная ковариации: осевой эллипс, круг и повёрнутый эллипс на одном облаке]]
 
 *Jake VanderPlas,
 [Choosing the covariance type](https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html#Choosing-the-covariance-type),
@@ -553,7 +582,7 @@ CC BY-NC-ND 3.0 Unported. Исходный рисунок без изменен�
 вдоль облака. Это контуры плотности, не жёсткая граница, за которой
 компонента перестаёт объяснять данные.
 
-![[00 Учебник/Assets/Figures/curated/advanced-unsupervised-classical/gmm-covariances.png]]
+![[00 Учебник/Assets/Figures/curated/advanced-unsupervised-classical/gmm-covariances.png|Четыре ограничения ковариации GMM на Iris; точки и крестики показывают обучающие и тестовые наблюдения]]
 
 *Решения GMM при разных ограничениях ковариации. Изображение без изменений
 взято из официального примера scikit-learn
@@ -596,7 +625,7 @@ $$
 описывать случайные отклонения. В текущем `GaussianMixture` тип
 по умолчанию — `full`, его следует выбирать осознанно.
 
-![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-stretched.png]]
+![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-stretched.png|Четыре вытянутые компоненты GMM с полными ковариациями и вложенными контурами расстояния Махаланобиса]]
 
 *Jake VanderPlas,
 [Generalizing E–M: Gaussian Mixture Models](https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html),
@@ -614,6 +643,7 @@ CC BY-NC-ND 3.0 Unported. Исходный рисунок без изменен�
 
 <a id="схлопывание-covariance"></a>
 
+<a id="gmm-covariance-collapse"></a>
 ### Схлопывание ковариации
 
 У свободной смеси с несколькими компонентами правдоподобие может
@@ -694,6 +724,7 @@ $|\det A|$, который сокращается в формуле Байеса
 Перестановка номеров компонент не меняет плотность. Нельзя сравнивать
 `component 0` двух запусков без явного сопоставления их параметров.
 
+<a id="gmm-density-components"></a>
 ### Компонента не обязательно равна кластеру
 
 Несколько гауссовских компонент могут аппроксимировать одну изогнутую
@@ -703,7 +734,7 @@ $|\det A|$, который сокращается в формуле Байеса
 
 | Две компоненты | Шестнадцать компонент |
 | --- | --- |
-| ![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-moons-two.png]] | ![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-moons-sixteen.png]] |
+| ![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-moons-two.png|Две гауссовские компоненты пересекают две изогнутые луны и не воспроизводят их форму]] | ![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-moons-sixteen.png|Шестнадцать небольших гауссовских компонент выстраиваются вдоль двух лун, без интерпретации их номеров как классов]] |
 
 *Jake VanderPlas,
 [GMM as Density Estimation](https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html#GMM-as-Density-Estimation),
@@ -717,6 +748,127 @@ CC BY-NC-ND 3.0 Unported. Два исходных рисунка без изме
 вероятностью $\pi_k$, затем точку из её гауссовского распределения; выбор каждой
 компоненты порождает только часть общей формы.
 
+![[00 Учебник/Assets/Figures/curated/gmm-2026-11-03/jake-moons-generated.png|Четыреста новых точек из шестнадцатикомпонентной GMM повторяют две дуги, хотя номера компонент не являются номерами лун]]
+
+*Jake VanderPlas,
+[GMM as Density Estimation](https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html#GMM-as-Density-Estimation),
+CC BY-NC-ND 3.0 Unported. Неизменённый сохранённый PNG ячейки 34:
+400 новых точек из смеси, обученной на 200 исходных.*
+
+> Here the mixture of 16 Gaussian components serves not to find separated clusters of data, but rather to model the overall *distribution* of the input data.
+> This is a generative model of the distribution, meaning that the GMM gives us the recipe to generate new random data distributed similarly to our input.
+> For example, here are 400 new points drawn from this 16-component GMM fit to our original data (see the following figure):
+
+*Jake VanderPlas, исходный английский текст перед этим рисунком.*
+
+На этом этапе исходные точки уже не раскрашиваются и не перераспределяются:
+модель создаёт новые координаты. Результат позволяет сравнить форму
+порождаемого распределения с обучающими дугами. Он не доказывает,
+что плотность точно восстановлена между наблюдениями или в хвостах;
+для такой проверки нужны отдельные данные и критерий.
+
+<a id="gmm-initialization"></a>
+## Инициализация и повторные запуски
+
+Начальные средние определяют первые вероятности принадлежности.
+Если два средних попали в одно облако, обе компоненты могут поделить
+его между собой, пока другая компонента описывает сразу две группы.
+Повышение правдоподобия на каждом шаге не заставляет алгоритм
+перенести одно из средних в более удачное место.
+
+![[00 Учебник/Assets/Figures/curated/gmm-2026-11-03/sklearn-gmm-initialization.png|Четыре способа инициализации GMM: оранжевые ромбы показывают начальные средние, цветные крестики — окончательные назначения; некоторые запуски сливают две верхние группы]]
+
+*The scikit-learn developers,
+[GMM Initialization Methods](https://scikit-learn.org/stable/auto_examples/mixture/plot_gmm_init.html),
+BSD-3-Clause. Полный исходный PNG из документации 1.9, без изменений.
+Данные: 4000 точек, четыре центра, стандартное отклонение 0,60.
+Времена и числа итераций в заголовках относятся к сохранённому
+запуску авторов, а не к измерению в Bookvar.*
+
+На верхней левой панели начальные средние уже расположены по одному
+в каждой группе. EM уточняет их положение и разброс. На верхней правой
+два ромба находятся в нижней левой группе. В результате эта группа
+разделена между компонентами, а две верхние получили один цвет.
+Все четыре компоненты использованы, однако такое решение отличается
+от левого. Нижние панели показывают ещё два набора начальных средних.
+
+В scikit-learn 1.9.1 параметр `init_params` задаёт четыре варианта:
+
+- `kmeans`: сначала выполняется один запуск K-means; жёсткие назначения
+  задают начальные взвешенные оценки средних и ковариаций.
+- `k-means++`: выбираются разнесённые начальные точки по процедуре
+  K-means++, без полного цикла K-means.
+- `random_from_data`: случайно выбираются $K$ различных наблюдений.
+  Они могут оказаться в одной содержательной группе.
+- `random`: каждой строке назначаются случайные положительные веса,
+  нормированные по компонентам. Начальные средние становятся
+  взвешенными средними всей выборки и обычно располагаются близко
+  к её общему центру.
+
+В исходном примере есть дополнительная деталь: первый объект
+`GaussianMixture(max_iter=0)` используется только для извлечения
+начальных `means_`. Во второй объект передаются эти `means_init`;
+остальные параметры инициализируются его стандартным способом.
+Таким образом, рисунок сравнивает полученные стартовые средние,
+а не четыре полностью сохранённых начальных состояния модели.
+Нулевое число итераций не означает, что смесь обучена.
+
+Следующий код повторяет именно эту постановку без построения нового
+рисунка и без измерения времени. Для каждого метода создаётся новый
+генератор с тем же seed; затем его состояние, как в оригинале,
+продолжается во втором обучении.
+
+```python
+from sklearn.datasets import make_blobs
+from sklearn.mixture import GaussianMixture
+
+initialization_data, _ = make_blobs(
+    n_samples=4000, centers=4, cluster_std=0.60, random_state=0
+)
+initialization_data = initialization_data[:, ::-1]
+initialization_results = {}
+for method in ["kmeans", "random_from_data", "k-means++", "random"]:
+    initialization_rng = np.random.RandomState(1234)
+    initial_model = GaussianMixture(
+        4, init_params=method, tol=1e-9, max_iter=0,
+        random_state=initialization_rng
+    ).fit(initialization_data)
+    initial_means = initial_model.means_.copy()
+    initialized_fit = GaussianMixture(
+        4, means_init=initial_means, tol=1e-9, max_iter=2000,
+        random_state=initialization_rng
+    ).fit(initialization_data)
+    if not initialized_fit.converged_:
+        raise RuntimeError("Initialization experiment did not converge")
+    initialization_results[method] = {
+        "initial_means": initial_means,
+        "iterations": initialized_fit.n_iter_,
+        "mean_log_density": initialized_fit.score(initialization_data),
+    }
+    print(method, initialized_fit.n_iter_,
+          initialized_fit.score(initialization_data))
+```
+
+В данном запуске `kmeans`, `k-means++` и `random` дали средний
+логарифм плотности около −3,166742, а `random_from_data` — около
+−3,387813 после 137 итераций. Последний запуск тоже сообщил
+о сходимости, но остановился в худшем решении.
+
+Число итераций само по себе не выбирает лучшее решение: быстрый запуск
+может остановиться в худшем локальном решении. Для одинакового модельного
+семейства сравнивают конечную цель, вырожденность ковариаций и устойчивость
+результата. Несколько запусков с `n_init` выбирают лучшее найденное
+решение по внутренней обучающей цели; это не заменяет валидацию
+при выборе числа компонент и типа ковариации.
+
+Повторный вызов `fit` также не всегда означает новый независимый старт:
+при `warm_start=True` и уже обученном объекте параметры продолжаются.
+Если нужны независимые запуски, создают новые объекты или явно
+управляют этим режимом. Реализации
+[инициализации и цикла обучения](https://github.com/scikit-learn/scikit-learn/blob/866c0f51e7560ef0303cbcc5f159df5382ea9e3f/sklearn/mixture/_base.py)
+показывают, где именно используется генератор и выбирается лучший запуск.
+
+<a id="gmm-model-selection"></a>
 ## Как выбирать число компонент
 
 У более богатого модельного семейства наилучшее достижимое обучающее
@@ -758,7 +910,7 @@ $$
 один вес, 20 координат среднего и 210 элементов симметричной
 ковариации. Число компонент само по себе не описывает сложность.
 
-![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-aic-bic.png]]
+![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-aic-bic.png|AIC и BIC на двух лунах при разном числе компонент; минимум BIC соответствует более простой смеси]]
 
 *Jake VanderPlas,
 [How many components?](https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html#How-many-components?),
@@ -829,6 +981,134 @@ print("test mean log density:", test_logp.mean())
 При практическом выборе дополнительно сравнивают повторные запуски
 и подвыборки. Если принадлежность превращается в решение для объекта,
 оценка по внешней задаче нужна отдельно от качества плотности.
+
+<a id="gmm-pca-generation"></a>
+## Генерация изображений: PCA и смесь в пространстве координат
+
+В примере VanderPlas смесь обучается на рукописных цифрах из Digits.
+Здесь 1797 изображений размером $8\times8$, каждое представлено
+64 яркостями. Вместо определения номера цифры модель должна
+порождать новые изображения.
+
+> We just saw a simple example of using a GMM as a generative model in order to create new samples from the distribution defined by the input data.
+> Here we will run with this idea and generate *new handwritten digits* from the standard digits corpus that we have used before.
+>
+> To start with, let's load the digits data using Scikit-Learn's data tools:
+
+*Jake VanderPlas,
+[Example: GMMs for Generating New Data](https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html#Example:-GMMs-for-Generating-New-Data),
+исходный английский текст, CC BY-NC-ND 3.0 Unported.*
+
+| Обучающие изображения | Сгенерированные изображения |
+| --- | --- |
+| ![[00 Учебник/Assets/Figures/curated/gmm-2026-11-03/jake-training-digits.png|Первые пятьдесят обучающих изображений Digits: пять строк по десять цифр размером восемь на восемь пикселей]] | ![[00 Учебник/Assets/Figures/curated/gmm-2026-11-03/jake-generated-digits.png|Пятьдесят изображений после выборки из GMM в 41-мерном пространстве и обратного PCA-преобразования; часть контуров размыта или неоднозначна]] |
+
+*Jake VanderPlas,
+[Example: GMMs for Generating New Data](https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html#Example:-GMMs-for-Generating-New-Data),
+CC BY-NC-ND 3.0 Unported. Полные исходные PNG из ячеек 42 и 52,
+без изменений. Слева — 50 исходных изображений, справа — первые 50
+из 100 новых. В исходном `plot_digits` показан диапазон яркости 0–16.*
+
+Сначала PCA сохраняет 99% обучающей дисперсии. Для этого набора
+получается 41 координата. При `whiten=True` сохранённые координаты
+дополнительно делятся на корни из соответствующих собственных
+значений. Используя обозначения предыдущей главы, запишем
+центрированное изображение столбцом:
+
+$$
+\begin{aligned}
+u&=D^{-1/2}W^\top(x-\mu),\\
+\hat x&=\mu+WD^{1/2}u.
+\end{aligned}
+$$
+
+Здесь $W$ содержит 41 ортонормированный столбец, а диагональ $D$ —
+сохранённые собственные значения ковариации. Поэтому обратный вызов
+восстанавливает сохранённую проекцию, но не все 64 исходные координаты.
+Доля 99% относится к дисперсии; она не гарантирует сохранения каждой
+детали, по которой человек отличает одну цифру от другой.
+
+Затем GMM с полной ковариацией обучается на $u$. Для генерации
+выбираются номер компоненты $k$ и случайный вектор
+$u_{\mathrm{new}}\sim\mathcal N(\mu_k,\Sigma_k)$; обратное
+преобразование возвращает его к пикселям. Метки цифр для этого
+обучения не используются. Номер выбранной компоненты не является
+предсказанием «это семёрка».
+
+![[00 Учебник/Assets/Figures/curated/gmm-2026-11-03/jake-digit-aic.png|Сохранённая кривая AIC на Digits: критерий снижается при увеличении числа компонент, затем образует неглубокий минимум в районе 140]]
+
+*Jake VanderPlas,
+[Example: GMMs for Generating New Data](https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html#Example:-GMMs-for-Generating-New-Data),
+CC BY-NC-ND 3.0 Unported. Неизменённый PNG ячейки 46.
+Проверялись 50, 60, …, 200 компонент с полной ковариацией.
+Это исторический результат исходного notebook, не повторный подбор
+в текущей версии библиотеки.*
+
+В исходном эксперименте автор выбрал 140 компонент по AIC.
+Число параметров такой смеси в 41 измерении равно
+
+$$
+\begin{aligned}
+p&=139+140\cdot41\\
+&\quad+\frac{140\cdot41\cdot42}{2}\\
+&=126\,419.
+\end{aligned}
+$$
+
+Понижение размерности сократило размер ковариаций, но модель
+остаётся большой по сравнению с 1797 изображениями. Поэтому
+похожий вид сгенерированных цифр и минимум обучающего AIC
+сами по себе не показывают качество на новых данных.
+
+Следующий код проверяет всю последовательность для выбранных
+140 компонент. Он не повторяет перебор AIC и не заменяет сохранённые
+оригинальные рисунки новыми.
+
+```python
+from sklearn.datasets import load_digits
+from sklearn.decomposition import PCA
+
+digit_pixels = load_digits().data
+digit_projection = PCA(
+    n_components=0.99, whiten=True, svd_solver="full"
+).fit(digit_pixels)
+digit_codes = digit_projection.transform(digit_pixels)
+digit_mixture = GaussianMixture(
+    140, covariance_type="full", random_state=0,
+    n_init=1, max_iter=100, tol=1e-3, reg_covar=1e-6
+).fit(digit_codes)
+if not digit_mixture.converged_:
+    raise RuntimeError("Digit mixture did not converge")
+generated_codes, generated_digit_components = digit_mixture.sample(100)
+generated_digit_pixels = digit_projection.inverse_transform(generated_codes)
+np.testing.assert_allclose(
+    digit_projection.transform(generated_digit_pixels), generated_codes,
+    atol=1e-12
+)
+assert digit_codes.shape == (1797, 41)
+assert generated_digit_pixels.shape == (100, 64)
+assert parameter_count(140, 41, "full") == 126419
+print("dimensions / mixture parameters:", digit_codes.shape[1], 126419)
+print("generated pixel range:", generated_digit_pixels.min(),
+      generated_digit_pixels.max())
+```
+
+В этом запуске сгенерированные яркости лежат приблизительно
+между −8,058 и 24,735, хотя обучающие пиксели имеют значения 0–16.
+Гауссовское распределение не ограничивает яркости этим диапазоном.
+Обратное преобразование может дать отрицательные или слишком большие
+значения. Исходная функция рисования показывает заданный диапазон,
+но это ограничение отображения, а не вероятностной модели.
+Если обрезать значения перед использованием, распределение
+изображений изменится.
+
+Также все сгенерированные изображения лежат в одном 41-мерном
+аффинном подпространстве. Их ковариация в 64-мерном пространстве
+имеет ранг не выше 41. Полученная модель имеет плотность в пространстве
+координат PCA, но без дополнительной модели отброшенных направлений
+не задаёт невырожденную плотность по всем 64 пикселям.
+Числа `score` до и после сокращения размерности нельзя напрямую
+сравнивать как плотности в одном пространстве.
 
 <a id="gmm-k-means-и-probabilistic-predictions"></a>
 

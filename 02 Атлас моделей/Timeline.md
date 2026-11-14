@@ -1,7 +1,7 @@
 ---
 title: Хронология моделей и технологий LLM
 type: concept
-last_updated: 2026-10-29
+last_updated: 2026-11-10
 last_verified: 2026-09-07
 status: active
 ---
@@ -89,16 +89,22 @@ Flamingo важен не просто как «модель с картинка�
 | 2025-04 (анонс/карточка) | Llama 4 | early-fusion multimodality и sparse MoE в Scout/Maverick | [Meta, Llama 4](https://ai.meta.com/blog/llama-4-multimodal-intelligence/) |
 | 2025-04 (анонс/карточка) | Qwen3 | dense/MoE семейство и единый переключаемый режим thinking; режим относится прежде всего к постобучению | [Qwen3 release](https://qwenlm.github.io/blog/qwen3/) |
 | 2025-07 (линия репозитория) | Kimi K2 | 1T/32B-active MLA-MoE и MuonClip | [официальный Kimi K2 repository/report](https://github.com/MoonshotAI/Kimi-K2) |
+| 2025-09 (карточка) | Qwen3-Next | три слоя Gated DeltaNet на один слой полного внимания с выходным затвором | [карточка 80B-A3B](https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct), [[02 Атлас моделей/Семейства/Qwen#qwen3-next-comparison|сравнение с Qwen3]] |
 | 2025 (линия репозитория) | GLM-4.5 | MoE и совмещённые thinking/non-thinking режимы | [официальный GLM-4.5 repository](https://github.com/zai-org/GLM-4.5) |
-| 2025 (статья) | Kimi Linear | гибрид Kimi Delta Attention и полного attention как отдельная исследовательская линия | [Kimi Linear](https://arxiv.org/abs/2510.26692) |
+| 2025-10 (статья) | Kimi Linear | отдельная модель с рекуррентным Kimi Delta Attention и периодическими слоями полного MLA | [Kimi Linear](https://arxiv.org/abs/2510.26692), [[02 Атлас моделей/Семейства/Kimi|сравнение поколений]] |
 | 2025-12 (статья) | DeepSeek-V3.2 | DeepSeek Sparse Attention поверх MLA | [DeepSeek-V3.2](https://arxiv.org/abs/2512.02556) |
 | 2025-12 (статья о семействе; Nano — 15.12.2025) | Nemotron 3 | гибрид Mamba-2 и attention с MoE; последующий Super развивает LatentMoE, MTP и низкоточное предобучение | [Nemotron 3 overview](https://arxiv.org/abs/2512.20856), [[02 Атлас моделей/Семейства/Nemotron|карточка семейства]] |
 | 2026 (линия репозитория) | Qwen3.5/3.6 | гибрид Gated DeltaNet и attention; у 3.5 есть плотные и MoE-варианты, мультимодальный вход | [официальный Qwen3.6 repository](https://github.com/QwenLM/Qwen3.6), [[02 Атлас моделей/Семейства/Qwen|конфигурации в карточке семейства]] |
 | 2026 (линия репозитория) | Kimi K2.5 | нативная мультимодальная agentic-ветка K2 | [официальный Kimi K2.5 repository](https://github.com/MoonshotAI/Kimi-K2.5) |
 | 2026-02 (линия репозитория) | GLM-5 | 744B/40B-active, DSA и 28.5T training tokens; последующие 5.1-релизы не следует автоматически считать новым backbone | [GLM-5 report/repository](https://github.com/zai-org/GLM-5) |
 | 2026-03 (статья) | Mamba-3 | следующее поколение state-space архитектуры | [Mamba-3](https://arxiv.org/abs/2603.15569) |
+| 2026-04 (анонс; отчёт — 2026-07) | Gemma 4 | разные KV-головы у полных и локальных слоёв; у компактных моделей часть слоёв делит кэш | [анонс 2 апреля](https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/), [[02 Атлас моделей/Семейства/Gemma|сравнение четырёх поколений]] |
 | 2026-04 (анонс/карточка) | Mistral Medium 3.5 | мультимодальная модель с опубликованными весами под Modified MIT; доступность весов отделяется от полного рецепта обучения | [официальная карточка v26.04](https://docs.mistral.ai/models/mistral-medium-3-5-26-04) |
 | 2026 (статья) | Baichuan-M3 | медицинская ветка; специализированный домен не означает новую универсальную архитектуру | [Baichuan-M3 report](https://arxiv.org/abs/2602.06570) |
+| 2026-06 (анонс) | Gemma 4 12B Unified | проекции пиксельных патчей и отрезков аудио заменяют отдельные глубокие энкодеры | [анонс 3 июня](https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemma-4-12b/), [[05 Источники/Papers/Gemma 3 и Gemma 4#gemma4-vision-audio|разбор входа]] |
+| 2026-07 (отчёт и веса) | Kimi K3 | на смену однородному MLA в K2 пришли 69 рекуррентных слоёв и 24 Gated MLA; добавлены Block Attention Residuals и LatentMoE | [отчёт Kimi Team, 27 июля](https://arxiv.org/html/2607.24653v1), [[05 Источники/Papers/Kimi K3 и K3.1 Pro|разбор конфигураций]] |
+| 2026-08 (релиз и отчёт) | Qwen3.8-Flash-Next | сочетание Gated DeltaNet и блочного отбора позиций QSA; четыре ветви residual и отдельная таблица n-грамм | [[05 Источники/Papers/Qwen3.8-Flash-Next|разбор отчёта]], [Qwen Team, 31 августа](https://arxiv.org/html/2608.30320v1) |
+| 2026-11 (веса) | Kimi K3.1 Pro | во всех 24 слоях MLA добавлен индексатор для отбора позиций; 69 рекуррентных слоёв сохранились | [карточка и веса](https://huggingface.co/moonshotai/Kimi-K3.1-Pro), [vLLM, 4 ноября](https://vllm.ai/blog/2026-11-04-kimi-k31-pro) |
 
 ## Агенты, рассуждение и проверяемые траектории
 

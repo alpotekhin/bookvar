@@ -1,6 +1,6 @@
-"""Execute the nine reader programs, then check independent decision/accounting cases.
+"""Execute the ten reader programs, then check independent decision/accounting cases.
 
-Standard-library CPU arithmetic only. No training, downloads, timing benchmark,
+Standard-library CPU arithmetic only. No dataset/model training, downloads, timing benchmark,
 filesystem writes, or measurements of cloud/hardware performance.
 """
 from contextlib import redirect_stdout
@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества.md"
 text = CHAPTER.read_text()
 programs = re.findall(r"^```python\n(.*?)^```\s*$", text, re.M | re.S)
-assert len(programs) == 9
+assert len(programs) == 10
 scopes = []
 output = StringIO()
 for index, program in enumerate(programs):
@@ -112,10 +112,29 @@ for upstream, downstream, echo, groups in product(
                    min(float(echo / upstream), float(1 / downstream)))
     echo_cases += 1
 
+# Check echoed SGD against the closed-form solution using exact rational inputs.
+# Two presentations with intervening updates differ from one mean-gradient update.
+echoed_sgd = scopes[7]["echoed_sgd"]
+echoed_update_cases = 0
+for initial, rate, repeats in product(
+        map(Fraction, [-2, 0, 1, 3]),
+        [Fraction(0), Fraction(1, 4), Fraction(1, 2), Fraction(1),
+         Fraction(3, 2), Fraction(2)], [0, 1, 2, 3, 10]):
+    actual, trace = echoed_sgd(initial, rate, repeats)
+    expected = 1 + (initial - 1) * (1 - rate) ** repeats
+    assert actual == expected and len(trace) == repeats
+    for step, (gradient, parameter) in enumerate(trace):
+        previous = 1 + (initial - 1) * (1 - rate) ** step
+        assert gradient == previous - 1
+        assert parameter == previous - rate * gradient
+    echoed_update_cases += 1
+assert echoed_sgd(Fraction(0), Fraction(1, 2), 2)[0] == Fraction(3, 4)
+assert Fraction(0) - Fraction(1, 2) * (Fraction(-1 - 1) / 2) == Fraction(1, 2)
+
 # Validate actual chapter metric functions against exact rational area arithmetic.
 metric_cases = 0
-area = scopes[7]["area"]
-first_budget = scopes[7]["first_observed_budget"]
+area = scopes[8]["area"]
+first_budget = scopes[8]["first_observed_budget"]
 for increments in product([1, 3], repeat=3):
     x = [0]
     for increment in increments:
@@ -173,5 +192,6 @@ print(json.dumps({"chapter_sha256": sha256(CHAPTER.read_bytes()).hexdigest(),
                   "break_even_cases": break_even_cases,
                   "topk_cases": topk_cases,
                   "finite_echo_cases": echo_cases,
+                  "echoed_optimizer_step_cases": echoed_update_cases,
                   "metric_cases": metric_cases,
                   "unchanged_original_figures": len(assets)}, indent=2))

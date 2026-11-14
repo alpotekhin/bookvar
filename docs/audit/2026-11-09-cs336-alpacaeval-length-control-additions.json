@@ -1,0 +1,100 @@
+{
+  "date": "2026-11-09",
+  "scope": "Fill the missing length-controlled AlpacaEval mechanism in the canonical evaluation chapter, linked from CS336 Lecture 12 and the primary paper. Local only.",
+  "review": {
+    "sources": [
+      "Stanford CS336 Spring 2026 Lecture 12, pinned 8b59b50, chat_benchmarks lines 155–206 and AlpacaEval lines 183–192.",
+      "Dubois et al., arXiv:2404.04475v2 (CC BY 4.0), §§2–5, Equations 1 and 2, Figures 1–3. The course’s historical source-only correlation asset remains archived; use the versioned, higher-resolution Figure 1 from the primary article, not a live leaderboard."
+    ],
+    "arithmetic": "Toy comparison: sigmoid(-0.2+0.8*tanh(1))=0.6009141; sigmoid(-0.2)=0.4501660; equal-length second instruction sigmoid(0.6)=0.6456563. Two-instruction averages 0.6232852 with observed length and 0.5479112 at zero gap. These are predictions from fixed toy coefficients, not a fitting run, an original AlpacaEval replay or observed judge labels.",
+    "figures": [
+      {
+        "file": "causal_graph.png",
+        "anchor": "S3.F2",
+        "title": "Length-Controlled AlpacaEval, Figure 2: length as a mediator",
+        "size": [
+          3445,
+          815
+        ],
+        "hash": "55402b453ce4ba9bb421b3ce032f366e81e241576e24f23c84267bc749e3254f"
+      },
+      {
+        "file": "length_gameability.png",
+        "anchor": "S4.F3",
+        "title": "Length-Controlled AlpacaEval, Figure 3: sensitivity to verbosity instructions",
+        "size": [
+          6092,
+          2518
+        ],
+        "hash": "e8490330e4b63b33f689b8dca36986a0dbd6f2010d0468cf8bd0e116a35c8f73"
+      },
+      {
+        "file": "chat_correlations.png",
+        "anchor": "S1.F1",
+        "title": "Length-Controlled AlpacaEval, Figure 1: correlation with Chatbot Arena",
+        "size": [
+          4135,
+          1353
+        ],
+        "hash": "6a79ce54dcf68d09864f481db1119db4412caa60272cd90f05d4fd0fc0f588f8"
+      }
+    ],
+    "reader_verification": "On the current build at 375 and 1280 CSS pixels, clicked the new section link from the Russian course hub and the English source note. All three original PNGs retained their intrinsic aspect ratios. Opened each in the image viewer and panned right at 2.5x on the phone; checked readable labels and the original values in screenshots. Fifteen KaTeX display blocks rendered with zero errors, and the page did not overflow horizontally.",
+    "build_verification": "2061 local Astro pages; all 255 built-output tests and 10 scoped reading, consolidation and residual tests passed. Both course ledgers validated. The exactly-once curated asset registry check passed. No broken internal routes, fragments or files.",
+    "limits": "The chapter has no separate English edition in the manifest. The original figures and English source note retain their language; the English site shell uses the existing canonical-language fallback. This addition does not accept the whole evaluation chapter or complete the two course integrations. No commit, push or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-30",
+          "new": "last_updated: 2026-11-09"
+        },
+        {
+          "old": "  - https://arxiv.org/abs/2501.14249\n",
+          "new": "  - https://arxiv.org/abs/2501.14249\n  - https://arxiv.org/abs/2404.04475v2\n"
+        },
+        {
+          "old": "<span id=\"pairwise-preference-protocol\"></span>",
+          "new": "<a id=\"alpacaeval-length-control\"></a>\n\n#### AlpacaEval: поправка на длину ответа\n\nПопросим одну и ту же модель ответить сначала кратко, потом подробно.\nЕсли доля побед резко выросла, по одной цифре не видно, стал ли ответ\nполнее или судье понравилось многословие. В версии AlpacaEval 2.0\nиз [статьи Dubois et al., §2](https://arxiv.org/html/2404.04475v2#S2)\nберут 805 инструкций. На каждую отвечают проверяемая и базовая модели,\nа судья на основе GPT‑4 Turbo оценивает вероятность предпочесть ответ\nкандидата. Обычный win rate — среднее этих оценок, выраженное в процентах.\nСравнение идёт с фиксированным базовым ответом на ту же инструкцию,\nа не с эталоном фактической правильности.\n\n![[00 Учебник/Assets/Figures/curated/alpacaeval-lc-2026-11-09/causal_graph.png|Модель влияет на длину ответа, а длина — на предпочтение судьи. На схеме также показаны прямой путь, инструкция и другие посредники.]]\n\n*Yann Dubois, Balázs Galambosi, Percy Liang и Tatsunori B. Hashimoto,\n[Length-Controlled AlpacaEval, рис. 2](https://arxiv.org/html/2404.04475v2#S3.F2).\nОригинал из статьи, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nПоправка убирает вклад пути через Output length в регрессии.\nИнструкция остаётся в расчёте, а другие посредники эта поправка\nне контролирует.*\n\nАвторы сначала обучают логистическую регрессию предсказывать решения\nсудьи. Для инструкции $x$ обозначим проверяемую модель через $m$,\nбазовую через $b$, а разность длин их ответов через $\\Delta\\ell$.\nВ [уравнении 1](https://arxiv.org/html/2404.04475v2#S3.E1)\nлогит состоит из трёх слагаемых:\n\n$$\n\\begin{aligned}\na_x &= (\\theta_m-\\theta_b)+(\\psi_m-\\psi_b)\\gamma_x,\\\\\nq_x(\\Delta\\ell) &=\n\\sigma\\!\\left(a_x+\\phi_{m,b}\\tanh(\\Delta\\ell/s)\\right),\n\\qquad \\sigma(t)=\\frac{1}{1+e^{-t}}.\n\\end{aligned}\n$$\n\nРазность $\\theta_m-\\theta_b$ задаёт общее преимущество одной модели\nперед другой. Член $(\\psi_m-\\psi_b)\\gamma_x$ позволяет ему меняться\nот запроса к запросу: инструкция, на которой сильна базовая модель,\nможет оказаться трудной для кандидата. $\\gamma_x$ сначала оценивают\nпо сравнениям многих моделей, а затем используют при подгонке\nкоэффициентов кандидата. Для длины $s$ — стандартное отклонение\nразностей длин в данных, а $\\tanh$ ограничивает влияние очень большой\nразницы. Коэффициент $\\phi_{m,b}$ оценивают по разметке судьи, а не\nзадают как штраф за каждый символ.\n\nПусть в учебном примере $a_x=-0.2$, $\\phi_{m,b}=0.8$ и $s=200$.\nОтвет кандидата занимает 450 символов, базовый ответ — 250. Разность\nравна 200, и слагаемое длины составляет $0.8\\tanh(1)\\approx0.6093$.\nРегрессия предсказывает $\\sigma(-0.2+0.6093)\\approx60.1\\%$.\nТеперь подставим $\\Delta\\ell=0$. Слагаемое длины исчезает, и для\nтого же запроса получается $\\sigma(-0.2)\\approx45.0\\%$.\nМодели не генерируют новые ответы, а оценщик не обрезает старые:\nменяется вход уже обученной регрессии.\n\nЕсли для второй инструкции ответы одинаковой длины и $a_x=0.6$,\nобе оценки равны $\\sigma(0.6)\\approx64.6\\%$. Среднее по двум инструкциям\nпри наблюдаемых длинах равно примерно 62.3%, а при нулевой разнице длин\nу каждой пары — 54.8%. Первое число тоже рассчитано регрессией;\nобычный AlpacaEval усредняет исходные оценки судьи. Для LC берут\nсреднее вероятностей после сигмоиды, а не сигмоиду от среднего логита\n([уравнение 2](https://arxiv.org/html/2404.04475v2#S3.E2)).\n\n![[00 Учебник/Assets/Figures/curated/alpacaeval-lc-2026-11-09/length_gameability.png|Две тройки столбцов: краткий, стандартный и подробный ответы. Для GPT‑4 1106 Preview без поправки 22,9 / 50,0 / 64,3 процента, с поправкой 41,9 / 50,0 / 51,6 процента.]]\n\n*Dubois et al., [рис. 3](https://arxiv.org/html/2404.04475v2#S4.F3),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nВсе строки и столбцы исходного рисунка сохранены.*\n\nВ первой строке рисунка меняется инструкция о краткости для\n`gpt4_1106_preview`, а базовый ответ остаётся стандартным. Между\nкраткой и подробной версиями разница падает с $64.3-22.9=41.4$\nдо $51.6-41.9=9.7$ процентного пункта. Поправка уменьшает\nчувствительность оценки к формулировке, но не делает три ответа\nодинаково полезными: просьба о краткости может изменить и содержание.\n\n![[00 Учебник/Assets/Figures/curated/alpacaeval-lc-2026-11-09/chat_correlations.png|Ранговая корреляция с Chatbot Arena: обычный AlpacaEval 2.0 — 0,94, AlpacaEval 2.0 с поправкой — 0,98.]]\n\n*Dubois et al., [рис. 1](https://arxiv.org/html/2404.04475v2#S1.F1),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nОригинальный график из статьи; это сравнение на её выборке,\nа не снимок текущего рейтинга.*\n\nНа 38 общих моделях ранговая корреляция с Chatbot Arena выросла\nс 0,94 до 0,98. Это сходство порядка моделей, а не доля отдельных\nвердиктов, совпавших с человеческими. Для разницы авторы приводят\nbootstrap $p=0.07$, поэтому рисунок не устанавливает устойчивого\nпреимущества на новых выборках. Коррекция длины также не проверяет\nфакты и не устраняет предпочтение собственного стиля судьи.\nЕсли подробность сама входит в критерии качества, оценку при равной\nдлине стоит показывать рядом с исходной и с примерами ответов.\n\n[[05 Источники/Papers/Dubois et al. — Length-Controlled AlpacaEval.md|Статья, исходные рисунки и разделы методики]] ·\n[Stanford CS336, лекция 12, разбор диалоговых тестов](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_12.py#L183-L193).\n\n<span id=\"pairwise-preference-protocol\"></span>"
+        }
+      ],
+      "before_sha256": "910967cba1670d0c65864123b958547b420ca059eb38b7302ad0968436e0f952",
+      "after_sha256": "2cbbc829cd049ef88118ec3515b16794b0efe25717b4574538227f4f52e63729"
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+      "changes": [
+        {
+          "old": "[Оригинальная лекция с кодом и иллюстрациями](https://cs336.stanford.edu/lectures/?trace=lecture_12) · [сохранённый Python-файл](Lectures/repository/lecture_12.py)",
+          "new": "[Оригинальная лекция с кодом и иллюстрациями](https://cs336.stanford.edu/lectures/?trace=lecture_12) · [сохранённый Python-файл](Lectures/repository/lecture_12.py)\n\nВ учебнике: [[00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md#alpacaeval-length-control|почему судья предпочитает длинные ответы и как AlpacaEval оценивает сравнение при равной длине]]; оригинальные рисунки и расчёт на двух запросах."
+        }
+      ],
+      "before_sha256": "4c30bda8cba77a7c3bf456f67cf21081c4bc0dd1529f3cf555b996e71e4aab47",
+      "after_sha256": "1791d161bdde34bfea49ce241c4df0ab189bdc70f33d912f1dbb45520ab18978"
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "changes": [
+        {
+          "old": "      - source: 05 Источники/Papers/Goujon et al. — Piecewise-linear regions.md\n        route: sources/papers/piecewise-linear-regions",
+          "new": "      - source: 05 Источники/Papers/Goujon et al. — Piecewise-linear regions.md\n        route: sources/papers/piecewise-linear-regions\n      - source: 05 Источники/Papers/Dubois et al. — Length-Controlled AlpacaEval.md\n        route: sources/papers/length-controlled-alpacaeval"
+        }
+      ],
+      "before_sha256": "47539335406ab9058916b62a846526a7672aaa43b2d1bfc54b4d5d74e21e7963",
+      "after_sha256": "c0056c91a7bc9af87429b6262e7c1220463ca6c90e8e1331cb94298889d1eb61"
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "changes": [
+        {
+          "old": "assets:\n",
+          "new": "assets:\n  - id: curated-alpacaeval-lc-f2-55402b453ce4\n    asset: \"00 Учебник/Assets/Figures/curated/alpacaeval-lc-2026-11-09/causal_graph.png\"\n    title: \"Length-Controlled AlpacaEval, Figure 2: length as a mediator\"\n    author: Yann Dubois, Balázs Galambosi, Percy Liang and Tatsunori B. Hashimoto\n    source_url: https://arxiv.org/abs/2404.04475v2\n    source_image_url: https://arxiv.org/html/2404.04475v2/Figures/causal_graph.png\n    dimensions_px: [3445, 815]\n    source_asset_sha256: 55402b453ce4ba9bb421b3ce032f366e81e241576e24f23c84267bc749e3254f\n    sha256: 55402b453ce4ba9bb421b3ce032f366e81e241576e24f23c84267bc749e3254f\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    license_evidence_url: https://arxiv.org/html/2404.04475v2\n    derivation: source-raster-copy\n    modifications: Byte-identical PNG from the author's CC BY 4.0 arXiv v2 HTML. No crop, redraw, or translated labels.\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    metadata_status: verified\n    last_verified: 2026-11-09\n    used_in: [\"00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md\"]\n  - id: curated-alpacaeval-lc-f3-e8490330e4b6\n    asset: \"00 Учебник/Assets/Figures/curated/alpacaeval-lc-2026-11-09/length_gameability.png\"\n    title: \"Length-Controlled AlpacaEval, Figure 3: sensitivity to verbosity instructions\"\n    author: Yann Dubois, Balázs Galambosi, Percy Liang and Tatsunori B. Hashimoto\n    source_url: https://arxiv.org/abs/2404.04475v2\n    source_image_url: https://arxiv.org/html/2404.04475v2/Figures/length_gameability.png\n    dimensions_px: [6092, 2518]\n    source_asset_sha256: e8490330e4b63b33f689b8dca36986a0dbd6f2010d0468cf8bd0e116a35c8f73\n    sha256: e8490330e4b63b33f689b8dca36986a0dbd6f2010d0468cf8bd0e116a35c8f73\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    license_evidence_url: https://arxiv.org/html/2404.04475v2\n    derivation: source-raster-copy\n    modifications: Byte-identical PNG from the author's CC BY 4.0 arXiv v2 HTML. No crop, redraw, or translated labels.\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    metadata_status: verified\n    last_verified: 2026-11-09\n    used_in: [\"00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md\"]\n  - id: curated-alpacaeval-lc-f1-6a79ce54dcf6\n    asset: \"00 Учебник/Assets/Figures/curated/alpacaeval-lc-2026-11-09/chat_correlations.png\"\n    title: \"Length-Controlled AlpacaEval, Figure 1: correlation with Chatbot Arena\"\n    author: Yann Dubois, Balázs Galambosi, Percy Liang and Tatsunori B. Hashimoto\n    source_url: https://arxiv.org/abs/2404.04475v2\n    source_image_url: https://arxiv.org/html/2404.04475v2/Figures/chat_correlations.png\n    dimensions_px: [4135, 1353]\n    source_asset_sha256: 6a79ce54dcf68d09864f481db1119db4412caa60272cd90f05d4fd0fc0f588f8\n    sha256: 6a79ce54dcf68d09864f481db1119db4412caa60272cd90f05d4fd0fc0f588f8\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    license_evidence_url: https://arxiv.org/html/2404.04475v2\n    derivation: source-raster-copy\n    modifications: Byte-identical PNG from the author's CC BY 4.0 arXiv v2 HTML. No crop, redraw, or translated labels.\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    metadata_status: verified\n    last_verified: 2026-11-09\n    used_in: [\"00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md\"]\n"
+        }
+      ],
+      "before_sha256": "4d1812373e28abb423f617119e4536ae0d1448d2af330bae515562f06d228b2d",
+      "after_sha256": "0af211e6179b2023a0ba87a6cb34666491886afdf849e5d819bcd0ee0d3d0ae9"
+    }
+  ]
+}

@@ -99,6 +99,9 @@ sections:
       - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md
         source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md
         route: textbook/models/bert-roberta-deberta
+      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md
+        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md
+        route: textbook/models/t5
       - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md
         source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md
         route: textbook/models/gpt-1
@@ -108,10 +111,8 @@ sections:
       - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md
         source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md
         route: textbook/models/gpt-3
-      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md
-        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md
-        route: textbook/models/t5
       - source: 00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md
+        source_en: en/00 Textbook/07 Anatomy of a modern LLM/01 LLaMA as a baseline architecture.md
         route: textbook/modern-llm/llama-architecture
       - source: 00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md
         route: textbook/modern-llm/decoder-block
@@ -149,6 +150,8 @@ sections:
         route: textbook/ml-systems/profiling
       - source: 00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md
         route: textbook/ml-systems/gpu-kernels-triton
+      - source: 00 Учебник/10 ML Systems/09 Компиляция графов — PyTorch, JAX и CUDA Graphs.md
+        route: textbook/ml-systems/graph-compilation-pytorch-jax
       - source: 00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md
         route: textbook/pretraining/data-and-pretraining
       - source: 00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md
@@ -437,14 +440,14 @@ sections:
                 route: textbook/transformer/encoder-decoder-patterns
               - label: BERT, RoBERTa и DeBERTa
                 route: textbook/models/bert-roberta-deberta
+              - label: T5 — text-to-text Transformer
+                route: textbook/models/t5
               - label: GPT-1 — генеративное предобучение
                 route: textbook/models/gpt-1
               - label: GPT-2 — zero-shot через язык
                 route: textbook/models/gpt-2
               - label: GPT-3 — in-context learning
                 route: textbook/models/gpt-3
-              - label: T5 — text-to-text Transformer
-                route: textbook/models/t5
           - label: VI. Анатомия современной LLM
             label_en: VI. Anatomy of a modern LLM
             items:
@@ -609,6 +612,9 @@ sections:
                 route: textbook/ml-systems/profiling
               - label: GPU kernels и Triton — от программы к измерению
                 route: textbook/ml-systems/gpu-kernels-triton
+              - label: "Компиляция графов: PyTorch, JAX и CUDA Graphs"
+                label_en: "Graph compilation: PyTorch, JAX, and CUDA Graphs"
+                route: textbook/ml-systems/graph-compilation-pytorch-jax
             reading_path: ml-systems
           - label: Распределённое обучение
             label_en: Distributed training
@@ -859,6 +865,8 @@ sections:
         route: sources/implementations/sglang
       - source: 05 Источники/Implementation studies/Triton GPU kernels.md
         route: sources/implementations/triton
+      - source: 05 Источники/Implementation studies/Conditional actions and transactional outbox.md
+        route: sources/implementations/conditional-actions-outbox
       - source: 05 Источники/Papers/TTT layers.md
         route: sources/papers/ttt-layers
       - source: 05 Источники/Papers/End-to-End Test-Time Training.md
@@ -867,6 +875,9 @@ sections:
         route: sources/papers/gated-delta-networks
       - source: 05 Источники/Papers/Recall in efficient sequence models.md
         route: sources/papers/recall-efficient-sequence-models
+      - source: 05 Источники/Papers/PaddleOCR-VL v1.md
+        source_en: en/05 Sources/Papers/PaddleOCR-VL v1.md
+        route: sources/papers/paddleocr-vl
       - source: 05 Источники/LMCache/LMCache — карта материалов.md
         source_en: en/05 Sources/LMCache/LMCache — map of materials.md
         route: sources/lmcache/index
@@ -886,6 +897,34 @@ sections:
         route: sources/visual-materials-licenses
       - source: 05 Источники/Papers/DeepSeek-R1.md
         route: sources/papers/deepseek-r1
+      - source: 05 Источники/Papers/TinyBERT.md
+        route: sources/papers/tinybert
+      - source: 05 Источники/Papers/GradCache.md
+        route: sources/papers/gradcache
+      - source: 05 Источники/Papers/ContAccum.md
+        route: sources/papers/contaccum
+      - source: 05 Источники/Papers/LambdaRank and LambdaLoss.md
+        route: sources/papers/lambdarank-lambdaloss
+      - source: 05 Источники/Papers/Delayed conversion feedback.md
+        route: sources/papers/delayed-conversion-feedback
+      - source: 05 Источники/Papers/Implicit feedback weights and negative sampling.md
+        route: sources/papers/implicit-feedback-weights-sampling
+      - source: 05 Источники/Papers/Sequence windows and sampled evaluation.md
+        route: sources/papers/sequence-windows-sampled-evaluation
+      - source: 05 Источники/Papers/The Complexity Trap.md
+        route: sources/papers/complexity-trap-context-management
+      - source: 05 Источники/Papers/AppWorld.md
+        route: sources/papers/appworld
+      - source: 05 Источники/Papers/ToolSandbox.md
+        route: sources/papers/toolsandbox
+      - source: 05 Источники/Papers/Federated Learning with Buffered Asynchronous Aggregation.md
+        route: sources/papers/fedbuff
+      - source: 05 Источники/Papers/Membership inference and memorization audits.md
+        route: sources/papers/membership-memorization-audits
+      - source: 05 Источники/Papers/Label shift and certified robustness.md
+        route: sources/papers/label-shift-certified-robustness
+      - source: 05 Источники/Papers/Gender Shades and selective labels.md
+        route: sources/papers/gender-shades-selective-labels
       - source: Courses/Stanford CS224N/Lecture 03 — Backpropagation and Neural Networks.md
         route: sources/courses/cs224n-lecture-03
       - source: Courses/Stanford CS224N/Lecture 10 — Prompting, RLHF and DPO.md
@@ -2275,6 +2314,8 @@ sections:
         route: sources/papers/phi-2
       - source: Papers/Speculative Decoding.md
         route: sources/papers/speculative-decoding
+      - source: 05 Источники/Papers/EAGLE-3.md
+        route: sources/papers/eagle-3
       - source: Courses/SHAD LLM/Week 1 — Intro to LLMs.md
         route: sources/courses/shad-llm/week-1-intro-to-llms
       - source: Papers/XGrammar.md
@@ -2305,6 +2346,14 @@ sections:
         route: sources/papers/swe-data-pipelines
       - source: 05 Источники/Papers/OLMo 2 Dolmino.md
         route: sources/papers/olmo2-dolmino
+      - source: 05 Источники/Papers/FineWeb.md
+        route: sources/papers/fineweb
+      - source: 05 Источники/Papers/Dolma corpus curation.md
+        route: sources/papers/dolma-corpus-curation
+      - source: 05 Источники/Papers/C4 corpus audit.md
+        route: sources/papers/c4-corpus-audit
+      - source: 05 Источники/Papers/Barbero et al — Attention sinks and packing.md
+        route: sources/papers/barbero-attention-sinks
       - source: 05 Источники/Papers/Model collapse and data accumulation.md
         route: sources/papers/model-collapse-data-accumulation
       - source: Papers/Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.md
@@ -2319,6 +2368,8 @@ sections:
         route: sources/papers/flash-attention
       - source: Papers/Kimi k1.5.md
         route: sources/papers/kimi-k1-5
+      - source: 05 Источники/Papers/Kimi K3 и K3.1 Pro.md
+        route: sources/papers/kimi-k3-k31
       - source: Papers/BERT.md
         route: sources/papers/bert
       - source: Papers/RoBERTa.md
@@ -2339,8 +2390,31 @@ sections:
         route: sources/papers/plan-seq-learn
       - source: 05 Источники/Papers/Mathlib Euler products.md
         route: sources/papers/mathlib-euler-products
+      - source: 05 Источники/Papers/AlphaProof.md
+        route: sources/papers/alphaproof
+      - source: 05 Источники/Papers/FunSearch.md
+        route: sources/papers/funsearch
+      - source: 05 Источники/Papers/AlphaEvolve.md
+        route: sources/papers/alphaevolve
+      - source: 05 Источники/Papers/Emergent Abilities of Large Language Models.md
+        route: sources/papers/emergent-abilities
+      - source: 05 Источники/Papers/Schick and Schütze 2021 — Small Language Models Are Also Few-Shot Learners.md
+        source_en: en/05 Sources/Papers/Small Language Models Are Also Few-Shot Learners.md
+        route: sources/papers/few-shot-pet
+      - source: 05 Источники/Papers/Holtzman et al. — Surface Form Competition.md
+        route: sources/papers/surface-form-competition
+      - source: 05 Источники/Papers/Are Emergent Abilities of Large Language Models a Mirage.md
+        route: sources/papers/emergent-abilities-metric-mirage
+      - source: 05 Источники/Papers/Czech et al. 2026 — Problems with Chinchilla Approach 2.md
+        route: sources/papers/isoflop-parabola-bias
+      - source: 05 Источники/Papers/Sardana et al — Beyond Chinchilla-Optimal.md
+        route: sources/papers/beyond-chinchilla-optimal
+      - source: 05 Источники/Papers/The Sparse Frontier.md
+        route: sources/papers/the-sparse-frontier
       - source: Papers/Qwen3.md
         route: sources/papers/qwen3
+      - source: 05 Источники/Papers/Qwen3.8-Flash-Next.md
+        route: sources/papers/qwen3-8-flash-next
       - source: Papers/Adversarial Training Methods for Semi-Supervised Text Classification.md
         route: sources/papers/adversarial-training-methods-for-semi-supervised-text-classification
       - source: Papers/Revisiting Few-sample BERT Fine-tuning.md
@@ -2393,6 +2467,8 @@ sections:
         route: sources/papers/astra
       - source: Papers/Gemma.md
         route: sources/papers/gemma
+      - source: 05 Источники/Papers/Gemma 3 и Gemma 4.md
+        route: sources/papers/gemma-3-4
       - source: Papers/LoRA.md
         route: sources/papers/lora
       - source: Papers/Self-RAG.md
@@ -2405,6 +2481,22 @@ sections:
         route: sources/courses/stanford-cs224n/lecture-14-reasoning-and-agents
       - source: Papers/GPT 1.0.md
         route: sources/papers/gpt-1-0
+      - source: 05 Источники/Papers/Gulordava et al. 2018 — Tied language model architectures.md
+        route: sources/papers/tied-language-model-architectures
+      - source: 05 Источники/Papers/FlashAttention-4.md
+        route: sources/papers/flashattention-4
+      - source: 05 Источники/Papers/DeepSpeed-FastGen.md
+        route: sources/papers/deepspeed-fastgen
+      - source: 05 Источники/Papers/Pan et al. 2023 — What in-context learning learns.md
+        route: sources/papers/what-in-context-learning-learns
+      - source: 05 Источники/Papers/Gao et al. — How to Train Long-Context Language Models.md
+        route: sources/papers/prolong
+      - source: 05 Источники/Papers/Goujon et al. — Piecewise-linear regions.md
+        route: sources/papers/piecewise-linear-regions
+      - source: 05 Источники/Papers/Dubois et al. — Length-Controlled AlpacaEval.md
+        route: sources/papers/length-controlled-alpacaeval
+      - source: 05 Источники/Papers/Lin et al. — WildBench.md
+        route: sources/papers/wildbench
     sidebar:
       - label: Библиотека источников
         label_en: Source library
@@ -2467,8 +2559,17 @@ sections:
         route: practice/index
       - source: 06 Практика/02 Реализовать causal self-attention.md
         route: practice/causal-self-attention
+      - source: 06 Практика/02a Проверить повороты RoPE.md
+        source_en: en/06 Practice/02a Explore RoPE rotations.md
+        route: practice/rope
+      - source: 06 Практика/03a Оценить текстовую метку от GPT-1 до LLaMA.md
+        source_en: en/06 Practice/03a Score a label from GPT-1 to LLaMA.md
+        route: practice/gpt-entailment
       - source: 06 Практика/01 Собрать micrograd и bigram LM.md
         route: practice/01-sobrat-micrograd-i-bigram-lm
+      - source: 06 Практика/01a Обучить BPE на двух строках.md
+        source_en: en/06 Practice/01a Train BPE on two strings.md
+        route: practice/byte-pair-encoding
       - source: 06 Практика/03 Прочитать современный decoder в LitGPT.md
         route: practice/03-prochitat-sovremennyy-decoder-v-litgpt
       - source: 06 Практика/04 Проследить RLVR pipeline в Open-R1.md

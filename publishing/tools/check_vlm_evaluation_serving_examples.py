@@ -24,7 +24,7 @@ def sha(path):
 def main():
     chapter = CHAPTER.read_text()
     blocks = re.findall(r"^~~~python\n(.*?)^~~~", chapter, re.M | re.S)
-    assert len(blocks) == 17, len(blocks)
+    assert len(blocks) == 18, len(blocks)
     spaces, shared = [], {}
     for i, block in enumerate(blocks, 1):
         code = compile(block, f"{CHAPTER}:block-{i}", "exec")
@@ -112,13 +112,23 @@ def main():
         assert list(asset.size) == [row["width"], row["height"]]
         assert ImageChops.difference(page.crop(row["crop_box_px"]), asset).getbbox() is None
     assert len(re.findall(r"!\[\[", chapter)) == 7
+    review = json.loads((ROOT / "docs/audit/2026-11-13-vlm-evaluation-contamination-additions.json").read_text())
+    figure = review["figure"]
+    assert sha(ROOT / figure["asset"]) == figure["sha256"]
+    assert list(Image.open(ROOT / figure["asset"]).size) == figure["dimensions_px"]
+    for path in figure["used_in"]:
+        text = (ROOT / path).read_text()
+        assert figure["asset"] in text and figure["figure_url"] in text
+        assert "https://arxiv.org/pdf/2409.17146v2#page=19" in text
+        assert "molmo-figure11-openness.png" not in text
     assert "&lt;AND&gt;" in chapter and "<AND>" not in chapter
     print(json.dumps({
-        "chapter_sha256": sha(CHAPTER), "standalone_and_shared_code_runs": 34,
+        "chapter_sha256": sha(CHAPTER), "standalone_and_shared_code_runs": 2 * len(blocks),
         "winoground_rankings": 24, "winoground_success_counts": [6, 6, 4],
         "original_pope_parser_cases": 5, "original_encoder_cache_methods": 4,
         "permutation_and_intersection_cases": 100,
         "new_original_figures": 5, "repaired_existing_figures": 2,
+        "native_contamination_figure": figure["sha256"],
         "pretrained_model_run": False, "network_or_gpu_benchmark": False,
     }, indent=2))
 

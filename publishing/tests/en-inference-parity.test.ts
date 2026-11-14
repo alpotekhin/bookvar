@@ -10,11 +10,11 @@ describe('complete English inference chapter reconciliation', () => {
   it('keeps pinned receipt revisions and checks current section, source and fragment parity', () => {
     const { totals } = inspectEnInferenceParity(root);
     expect(totals.chapters).toBe(7);
-    expect(totals.figures).toBe(44);
-    expect(totals.displayMath).toBe(71);
+    expect(totals.figures).toBe(48);
+    expect(totals.displayMath).toBe(72);
     expect(totals.codeFences).toBe(43);
     expect(totals.originalExcerpts).toBe(20);
-    expect(totals.canonicalSections).toBe(181);
+    expect(totals.canonicalSections).toBe(185);
   });
 
   it('reports the current decoding metadata separately from the unchanged historical receipt', () => {

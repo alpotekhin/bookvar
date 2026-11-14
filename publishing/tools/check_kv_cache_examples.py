@@ -52,10 +52,22 @@ def main():
     assert not torch.allclose(incorrect, last)
 
     # A genuine two-layer decoder, not only the isolated attention equation.
-    from transformers import DynamicCache
+    from transformers import DynamicCache, LogitsProcessor
     model, ids = ns['lm'], ns['token_ids']
     reference = ns['full_output']
     maximum_error = 0.0
+
+    class StopAt(LogitsProcessor):
+        def __init__(self, prompt_length, output_length, eos):
+            self.trigger = prompt_length + output_length - 1
+            self.eos = eos
+
+        def __call__(self, input_ids, scores):
+            forced_id = self.eos if input_ids.shape[1] >= self.trigger else 4
+            forced_scores = torch.full_like(scores, -torch.inf)
+            forced_scores[:, forced_id] = 0
+            return forced_scores
+
     with torch.inference_mode():
         for chunks in ((6,), (1, 1, 1, 1, 1, 1), (2, 4), (3, 2, 1), (5, 1)):
             cache, offset = DynamicCache(config=model.config), 0
@@ -75,6 +87,19 @@ def main():
         greedy = model.generate(ids[:, :3], attention_mask=torch.ones_like(ids[:, :3]),
             max_new_tokens=4, do_sample=False, eos_token_id=None, pad_token_id=0)
         assert torch.equal(greedy, ns['sequence'])
+
+        # Figure 2's final EOS is selected but never forwarded. Check an EOS
+        # chosen at prefill as well as one selected after three decode calls.
+        prompt, eos = ids[:, :3], 2
+        for output_length in (1, 4):
+            stopped = model.generate(
+                prompt, attention_mask=torch.ones_like(prompt), max_new_tokens=8,
+                do_sample=False, eos_token_id=eos, pad_token_id=0,
+                logits_processor=[StopAt(prompt.shape[1], output_length, eos)],
+                return_dict_in_generate=True,
+            )
+            assert stopped.sequences[0, -output_length:].tolist() == [4] * (output_length - 1) + [eos]
+            assert stopped.past_key_values.get_seq_length() == prompt.shape[1] + output_length - 1
 
         bad_rope_cache = DynamicCache(config=model.config)
         model(ids[:, :3], past_key_values=bad_rope_cache, use_cache=True)
@@ -176,7 +201,8 @@ def main():
         'full_model_max_logit_error': maximum_error,
         'wrong_rope_position_max_error': rope_error,
         'wrong_padding_position_max_error': padding_error,
-        'kv_bytes_fp32': stored_bytes, 'manual_greedy_matches_generate': True}, indent=2))
+        'kv_bytes_fp32': stored_bytes, 'manual_greedy_matches_generate': True,
+        'eos_stops_without_a_forward_call': [1, 4]}, indent=2))
     print('PASS: 5 actual Markdown blocks; isolated and genuine two-layer cached decoder; GQA/RoPE/padding; SDPA mask negative control; paged reads/global softmax; byte/rounding and COW arithmetic.')
     print('torch', torch.__version__, 'device CPU')
     print('NOT TESTED: pretrained-model quality, GPU kernels, real allocator concurrency, serving performance.')

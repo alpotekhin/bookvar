@@ -1,0 +1,296 @@
+{
+  "date": "2026-11-11",
+  "scope": "Quantization, both chapter editions. Reconcile the two prior unpinned copies and complete the AWQ calibration example.",
+  "review": {
+    "sources": "Transformers quantization concept guide, affine mapping and reconstruction; pinned documentation-images manifest; Hugging Face bitsandbytes absmax original; AWQ MLSys v5 Figure 2, §3 and §5.1; author repository auto_scale.py lines 29–30, 108–154.",
+    "rights": "The two Transformers PNGs are unchanged from documentation-images (CC BY-NC-SA 4.0). The AWQ author repository copy is unmodified under its MIT license. Both prior files stay in the local source tree with no active embeds; the old blog figure is linked directly.",
+    "workedCases": "Absmax maps −4.3 to −101 and restores about −4.2945. In the affine reconstruction drawing, −77 maps to 0 and −23 maps to 193.32 using the printed scale; the largest signed code minus the zero point requires widening. The 20-point AWQ sweep selects 0.55 on the two toy inputs; its code and loss are identical in both editions.",
+    "preservation": "All other chapter sections, inherited code and quoted source passages are preserved. No GPU measurement, branch update or deployment.",
+    "validation": "Both editions have identical checked Python blocks; six ran on CPU, including the AWQ sweep and affine overflow check. Chrome at 1280 and 375 px decoded all three replacements, showed no clipping of the article column, and opened the original-resolution figures in the viewer. The local 2081-page build passed 297 built-output tests, 200 registry/reading-route tests, and the internal link check. The two retired assets are absent from built output."
+  },
+  "figures": [
+    {
+      "id": "curated-hf-affine-range-77155502a87b",
+      "asset": "00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/hf-affine-range.png",
+      "author": "Hugging Face",
+      "title": "Quantization concepts: real and integer ranges",
+      "sha256": "77155502a87b8a8b4aefb2e6902a5a80a488dac56c5bd2668ddcb05d17ef149d",
+      "bytes": 34052,
+      "dimensions_px": [
+        1356,
+        662
+      ],
+      "source_url": "https://github.com/huggingface/transformers/blob/1d9654e78a23fb167ef539cbd699dfbd3e4830cf/docs/source/en/quantization/concept_guide.md#affine-quantization",
+      "source_image_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/3630f7a2763c93cf7b70fb403dfe669b9f0d27b1/transformers/quant_visual.png",
+      "figure_url": "https://huggingface.co/datasets/huggingface/documentation-images/blob/3630f7a2763c93cf7b70fb403dfe669b9f0d27b1/transformers/quant_visual.png",
+      "source_asset_sha256": "77155502a87b8a8b4aefb2e6902a5a80a488dac56c5bd2668ddcb05d17ef149d",
+      "source_code": "05 Источники/Originals/quantization-editorial-2026-11-11/hf-quantization-concept-guide.md",
+      "source_code_sha256": "2c03d8d110ed2b1c3b1d2187f23efb2d730f809be3cf2c58e1edc07ac800148b",
+      "commit": "3630f7a2763c93cf7b70fb403dfe669b9f0d27b1",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "license_evidence": "05 Источники/Originals/quantization-editorial-2026-11-11/hf-documentation-images-README.md",
+      "license_evidence_sha256": "5e6a73b7ff47813e90e2ed21d14807256b2e89fa55e5075ec69fdf01cde801ce",
+      "license_evidence_url": "https://huggingface.co/datasets/huggingface/documentation-images/blob/3630f7a2763c93cf7b70fb403dfe669b9f0d27b1/README.md",
+      "derivation": "source-raster-copy",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "modifications": "Complete original, byte-for-byte. No redraw, crop or relabeling.",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+        "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md"
+      ]
+    },
+    {
+      "id": "curated-hf-affine-dequant-1ca9f8c38d4d",
+      "asset": "00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/hf-affine-dequant.png",
+      "author": "Hugging Face",
+      "title": "Quantization concepts: affine reconstruction",
+      "sha256": "1ca9f8c38d4da1bae61f1f0b65877683beead611ffbbd4f1711551a2b90923d6",
+      "bytes": 66659,
+      "dimensions_px": [
+        1838,
+        1126
+      ],
+      "source_url": "https://github.com/huggingface/transformers/blob/1d9654e78a23fb167ef539cbd699dfbd3e4830cf/docs/source/en/quantization/concept_guide.md#affine-quantization",
+      "source_image_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/3630f7a2763c93cf7b70fb403dfe669b9f0d27b1/transformers/dequant.png",
+      "figure_url": "https://huggingface.co/datasets/huggingface/documentation-images/blob/3630f7a2763c93cf7b70fb403dfe669b9f0d27b1/transformers/dequant.png",
+      "source_asset_sha256": "1ca9f8c38d4da1bae61f1f0b65877683beead611ffbbd4f1711551a2b90923d6",
+      "source_code": "05 Источники/Originals/quantization-editorial-2026-11-11/hf-quantization-concept-guide.md",
+      "source_code_sha256": "2c03d8d110ed2b1c3b1d2187f23efb2d730f809be3cf2c58e1edc07ac800148b",
+      "commit": "3630f7a2763c93cf7b70fb403dfe669b9f0d27b1",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "license_evidence": "05 Источники/Originals/quantization-editorial-2026-11-11/hf-documentation-images-README.md",
+      "license_evidence_sha256": "5e6a73b7ff47813e90e2ed21d14807256b2e89fa55e5075ec69fdf01cde801ce",
+      "license_evidence_url": "https://huggingface.co/datasets/huggingface/documentation-images/blob/3630f7a2763c93cf7b70fb403dfe669b9f0d27b1/README.md",
+      "derivation": "source-raster-copy",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "modifications": "Complete original, byte-for-byte. No redraw, crop or relabeling.",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+        "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md"
+      ]
+    },
+    {
+      "id": "curated-awq-overview-39cc28b83244",
+      "asset": "00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/awq-overview.png",
+      "author": "Ji Lin et al., MIT HAN Lab",
+      "title": "AWQ: round-to-nearest, FP16 diagnostic, and per-channel scaling",
+      "sha256": "39cc28b832442eda6df54819e4cbd3578f0e8b31c2131dd0d3dd2aadfbe6acef",
+      "bytes": 141914,
+      "dimensions_px": [
+        2016,
+        462
+      ],
+      "source_url": "https://arxiv.org/html/2306.00978v5#S1.F2",
+      "source_image_url": "https://raw.githubusercontent.com/mit-han-lab/llm-awq/d6e797a42b9ef7778de8ee2352116e0f48a78d61/figures/overview.png",
+      "figure_url": "https://github.com/mit-han-lab/llm-awq/blob/d6e797a42b9ef7778de8ee2352116e0f48a78d61/figures/overview.png",
+      "source_asset_sha256": "39cc28b832442eda6df54819e4cbd3578f0e8b31c2131dd0d3dd2aadfbe6acef",
+      "commit": "d6e797a42b9ef7778de8ee2352116e0f48a78d61",
+      "license": "MIT",
+      "license_url": "https://github.com/mit-han-lab/llm-awq/blob/d6e797a42b9ef7778de8ee2352116e0f48a78d61/LICENSE",
+      "license_evidence": "site/public/licenses/awq-d6e797a4-MIT.txt",
+      "public_license_copy": "site/public/licenses/awq-d6e797a4-MIT.txt",
+      "license_evidence_sha256": "2af485d269071b583c62c20250a63349f8313312cc9df0bd9007ca39c6d57bd9",
+      "license_evidence_url": "https://raw.githubusercontent.com/mit-han-lab/llm-awq/d6e797a42b9ef7778de8ee2352116e0f48a78d61/LICENSE",
+      "derivation": "source-raster-copy",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "modifications": "Complete original, byte-for-byte. No redraw, crop or relabeling.",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+        "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md"
+      ]
+    }
+  ],
+  "historical": [
+    {
+      "id": "curated-hf-quant-000000000045",
+      "author": "Hugging Face and Tim Dettmers",
+      "source_url": "https://huggingface.co/blog/hf-bitsandbytes-integration",
+      "figure_url": "https://github.com/huggingface/blog/blob/ee25167d3361425b25144de793a629343d5efc08/assets/96_hf_bitsandbytes_integration/quant-freeze.png",
+      "source_image_url": "https://raw.githubusercontent.com/huggingface/blog/ee25167d3361425b25144de793a629343d5efc08/assets/96_hf_bitsandbytes_integration/quant-freeze.png",
+      "sha256": "77f49147ee2f69632f62c744ed8b235f9efb7f25c123e7c093f9acfddd196523",
+      "dimensions_px": [
+        2660,
+        1482
+      ],
+      "bytes": 251459,
+      "asset": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-quantization-rounding.png",
+      "source_asset": "raw/papers/external/topics-53-59/hf-quantization-rounding.png",
+      "license": null,
+      "license_url": null,
+      "modifications": "Historical bytes match the pinned blog PNG; no verified redistribution license for that blog asset.",
+      "metadata_status": "needs-confirmation",
+      "provenance_confirmation": "source-linked-rights-unverified",
+      "rights_status": "original-raster-license-unverified",
+      "publication_status": "retired",
+      "retirement_reason": "Superseded by a figure from a licensed source.",
+      "used_in": [],
+      "former_used_in": [
+        "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+        "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md"
+      ],
+      "replacements": [
+        "00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/hf-affine-range.png",
+        "00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/hf-affine-dequant.png"
+      ]
+    },
+    {
+      "id": "curated-awq-schema-000000000046",
+      "author": "Ji Lin et al.",
+      "source_url": "https://arxiv.org/abs/2306.00978",
+      "figure_url": "https://arxiv.org/html/2306.00978v5#S1.F2",
+      "sha256": "c5f86883ca05966fde3e45890d83e926326a045d5d24b04ecd91fe4ff8ccd2a4",
+      "dimensions_px": [
+        2632,
+        651
+      ],
+      "bytes": 218593,
+      "asset": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/awq-schema.png",
+      "source_asset": "raw/papers/external/topics-53-59/awq-schema.png",
+      "license": null,
+      "license_url": null,
+      "modifications": "Historical raster of the three paper panels. The active figure uses the separate MIT-licensed author repository bytes.",
+      "metadata_status": "needs-confirmation",
+      "provenance_confirmation": "source-linked-rights-unverified",
+      "rights_status": "original-raster-license-unverified",
+      "publication_status": "retired",
+      "retirement_reason": "Superseded by a figure from a licensed source.",
+      "used_in": [],
+      "former_used_in": [
+        "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+        "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md"
+      ],
+      "replacements": [
+        "00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/awq-overview.png"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+      "before_sha256": "70bd3d2b286af4c5b04150e0a27bf527bd18de4ac6f829d2b7eaeb437f010d17",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29",
+          "new": "last_updated: 2026-11-11"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-quantization-rounding.png]]\n\n*Tim Dettmers и Hugging Face,\n[Making LLMs even more accessible with bitsandbytes](https://huggingface.co/blog/hf-bitsandbytes-integration).\nНа схеме сначала вычисляется $\\alpha=127/\\max|w_i|$, затем веса умножаются\nна $\\alpha$ и округляются. Наш масштаб $s=1/\\alpha$. Числа в нижнем ряду\nподписаны с округлением: визуальное совпадение с верхним рядом не означает,\nчто ошибка восстановления равна нулю.*",
+          "new": "В [примере absmax из статьи о bitsandbytes](https://github.com/huggingface/blog/blob/ee25167d3361425b25144de793a629343d5efc08/assets/96_hf_bitsandbytes_integration/quant-freeze.png)\nнаибольший модуль равен 5,4. Авторы обозначают множитель\n$\\alpha=127/5.4$, обратный нашему шагу $s=5.4/127$. Вес $-4.3$ даёт код\n$-101$, а после восстановления получается $-101s\\approx-4.2945$.\nНа рисунке исходное и восстановленное числа показаны с одним знаком\nпосле запятой. В обоих рядах напечатано $-4.3$."
+        },
+        {
+          "old": "Асимметричная сетка требует хранить и применять $z$. Для матричного",
+          "new": "На схеме Transformers верхняя шкала показывает исходные значения,\nнижняя — целые коды. Средняя стрелка связывает вещественный ноль\nс кодом $z$: в нашем примере $[-1,2]$ это код 5, хотя младший код равен 0.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/hf-affine-range.png|Нижний целочисленный диапазон сопоставлен верхнему вещественному. Код z находится под вещественным нулём и не обязан быть нулевым.]]\n\n*Hugging Face, [Quantization concepts: Affine quantization](https://github.com/huggingface/transformers/blob/1d9654e78a23fb167ef539cbd699dfbd3e4830cf/docs/source/en/quantization/concept_guide.md#affine-quantization),\n[оригинал](https://huggingface.co/datasets/huggingface/documentation-images/blob/3630f7a2763c93cf7b70fb403dfe669b9f0d27b1/transformers/quant_visual.png), [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).\nРисунок без изменений.*\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/hf-affine-dequant.png|Для матрицы кодов INT8 используется один масштаб 3.58 и одна нулевая точка −77. Код −77 в нижней левой ячейке восстанавливается в ноль.]]\n\n*Hugging Face, [Quantization concepts: Affine quantization](https://github.com/huggingface/transformers/blob/1d9654e78a23fb167ef539cbd699dfbd3e4830cf/docs/source/en/quantization/concept_guide.md#affine-quantization),\n[оригинал восстановления](https://huggingface.co/datasets/huggingface/documentation-images/blob/3630f7a2763c93cf7b70fb403dfe669b9f0d27b1/transformers/dequant.png), [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).\nРисунок без изменений. Для ненулевых элементов восстановление приближённое.*\n\nНа втором рисунке $z=-77$, поэтому нижний левый код $-77$ даёт ровно ноль.\nВ верхней левой ячейке видна ошибка округления: из кода\n$-23$ получается $3.58(-23+77)=193.32$, а исходное значение было $191.6$.\nПри восстановлении сначала расширяем целочисленный тип: разность\n$127-(-77)=204$ уже не помещается в знаковый INT8.\n\nАсимметричная сетка требует хранить и применять $z$. Для матричного"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/awq-schema.png]]\n\n*Ji Lin et al., [AWQ, Figure 2](https://arxiv.org/abs/2306.00978).\nСлева — обычное округление INT3; в центре — диагностическое сохранение\n1% весов в FP16; справа — масштабирование AWQ с однородной квантизацией\nвесов. Смешанная точность в центре улучшает perplexity, но неудобна для\nплотного ядра. Схема также используется в\n[Stanford CS336, Lecture 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L480-L487).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/awq-overview.png|Слева все веса округлены в INT3. В центре второй входной канал выделен отдельной строкой весов в FP16. Справа этот канал масштабируется, а все веса снова хранятся в INT3.]]\n\n*Ji Lin и соавторы, [AWQ, рисунок 2](https://arxiv.org/html/2306.00978v5#S1.F2);\n[оригинальная схема из репозитория авторов](https://github.com/mit-han-lab/llm-awq/blob/d6e797a42b9ef7778de8ee2352116e0f48a78d61/figures/overview.png),\n[MIT](/licenses/awq-d6e797a4-MIT.txt). Все три панели сохранены.\nЧисла PPL под панелями относятся к OPT-6.7B с INT3 и группами по 128\nвесов в этом опыте, а не к матрице из учебного примера.*\n\nВ средней панели второй столбец $X$ соответствует второй строке $W$:\nв записи $Y=XW$ их элементы перемножаются. В центре эту строку оставили\nв FP16. В правой панели AWQ использует средний модуль активаций из\nкаждого столбца, чтобы выбрать масштаб соответствующей строки; хранить\nвыделенную строку отдельно в FP16 уже не нужно."
+        },
+        {
+          "old": "более мелкий эффективный шаг после обратного масштабирования. Однако\nувеличение весов может повысить общий максимум группы и ухудшить\nокругление остальных каналов, поэтому масштаб приходится подбирать.",
+          "new": "более мелкий эффективный шаг, если диапазон группы не растёт так же быстро.\nЕсли шаг в преобразованной группе равен $\\Delta_g$, для входного канала $j$\nв исходных координатах это $\\Delta_g/s_j$. Увеличивая $s_j$, можно поднять\nобщий максимум группы и тем самым увеличить $\\Delta_g$ для всех её весов.\nПоэтому масштаб выбирают по ошибке выхода слоя, а не по одной координате."
+        },
+        {
+          "old": "<!-- checked-example: quant-awq-step -->",
+          "new": "<a id=\"awq-calibration-grid\"></a>\n\n#### Как AWQ выбирает масштаб на калибровке\n\nВ предыдущем примере множитель 2 был задан вручную. Добавим второй\nкалибровочный вход $(2,3)$: средние модули по двум входам равны $(6,2)$,\nа выходы до округления — $(3.15,5.53)$. В [AWQ, §3, формула 5](https://arxiv.org/html/2306.00978v5#S3)\nмасштабы пропорциональны этим средним в степени $\\alpha$. Здесь важны\nотношения масштабов, поэтому для счёта можно оставить второй равным 1\nи менять первый по формуле $3^\\alpha$.\n\n| $\\alpha$ | Отношение масштабов | Коды двух весов | Средний квадрат ошибки двух выходов |\n|---:|---:|---:|---:|\n| 0 | 1 | $(1,7)$ | 0,6292 |\n| 0,50 | 1,732 | $(1,7)$ | 0,000978 |\n| 0,55 | 1,830 | $(1,7)$ | 0,000593 |\n| 0,95 | 2,840 | $(2,7)$ | 0,067684 |\n\nПри $\\alpha=0.55$ первый вес после масштабирования равен примерно 0,256.\nШаг по-прежнему 0,25, код равен 1, а эффективный вес после обратного\nмасштабирования — около 0,137 вместо 0,14. При $\\alpha=0.95$ тот же\nвес пересекает границу округления и получает код 2; ошибка на этих входах\nснова растёт. Поиск нужен в том числе из-за таких скачков.\n\nВ [коде авторов](https://github.com/mit-han-lab/llm-awq/blob/d6e797a42b9ef7778de8ee2352116e0f48a78d61/awq/quantize/auto_scale.py#L108-L154) проверяются двадцать кандидатов от 0 до 0,95\nс шагом 0,05. Для каждого восстанавливают веса после пробного округления,\nсравнивают выход с исходным и возвращают параметры перед следующим\nкандидатом. В репозитории сравнивается выход выбранного модуля, который\nможет включать несколько проекций. Ниже проверяется тот же принцип на\nодном выходе с нашей симметричной сеткой, без упаковки весов и GPU.\n\n<!-- checked-example: quant-awq-step -->"
+        },
+        {
+          "old": "np.testing.assert_allclose((awq_x / channel_scale) @ scaled_w, 3.0)",
+          "new": "np.testing.assert_allclose((awq_x / channel_scale) @ scaled_w, 3.0)\n\ncalibration = np.array([[10.0, 1.0], [2.0, 3.0]])\nreference = calibration @ awq_w\nmean_abs = np.abs(calibration).mean(axis=0)\ncandidates = np.arange(20) / 20\nlosses = []\nfor alpha in candidates:\n    channel_factors = mean_abs ** alpha\n    channel_factors /= np.sqrt(channel_factors.max() * channel_factors.min())\n    recovered = np.array(symmetric_quantize(awq_w * channel_factors, 4)[2])\n    estimate = (calibration / channel_factors) @ recovered\n    losses.append(np.mean((estimate - reference) ** 2))\nnp.testing.assert_allclose(reference, [3.15, 5.53])\nnp.testing.assert_allclose(losses[0], 0.6292)\nnp.testing.assert_allclose(losses[10], 0.00097835348309554)\nnp.testing.assert_allclose(candidates[np.argmin(losses)], 0.55)\nnp.testing.assert_allclose(min(losses), 0.00059306982672653)"
+        },
+        {
+          "old": "Здесь масштаб 2 выбран вручную для разбора одного шага. В AWQ кандидаты\nстроятся по статистике активаций, а степень масштабирования выбирают по\nошибке выхода на калибровочных данных. Это поиск преобразования, а не\nдообучение исходных весов градиентным спуском. Само название AWQ не задаёт\nразмер группы, упаковку и конкретное ядро инференса.",
+          "new": "Выбранное $\\alpha=0.55$ относится только к этим двум входам и этому слою.\nВ большом декодере обратные масштабы входов по возможности поглощаются\nпредыдущим оператором. Выбранные масштабы не заменяют проверку качества\nна других данных; размер группы, упаковка и ядро остаются отдельными\nпараметрами развёртывания."
+        }
+      ],
+      "after_sha256": "dc984a95ab2117c1c23c8d75023030e7a54a1cdc3665a9950b78a5e9e43265df",
+      "lines": 1045
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md",
+      "before_sha256": "f68e67a364332742b98b7edc36265178d74361bafa8d03a08fd41f4935161ff9",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29",
+          "new": "last_updated: 2026-11-11"
+        },
+        {
+          "old": "canonical_revision: \"70bd3d2b286af4c5b04150e0a27bf527bd18de4ac6f829d2b7eaeb437f010d17\"\ntranslation_reviewed: \"2026-10-29\"",
+          "new": "canonical_revision: \"dc984a95ab2117c1c23c8d75023030e7a54a1cdc3665a9950b78a5e9e43265df\"\ntranslation_reviewed: \"2026-11-11\""
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-quantization-rounding.png]]\n\n*Tim Dettmers and Hugging Face,\n[Making LLMs even more accessible with bitsandbytes](https://huggingface.co/blog/hf-bitsandbytes-integration).\nThe figure calculates $\\alpha=127/\\max|w_i|$, multiplies by $\\alpha$, then\nrounds. Our scale is $s=1/\\alpha$. Bottom-row labels are themselves rounded;\napparent agreement with the top row does not imply zero reconstruction error.*",
+          "new": "In the [bitsandbytes article's absmax example](https://github.com/huggingface/blog/blob/ee25167d3361425b25144de793a629343d5efc08/assets/96_hf_bitsandbytes_integration/quant-freeze.png),\nthe largest magnitude is 5.4. The figure uses a multiplier\n$\\alpha=127/5.4$, the reciprocal of our step $s=5.4/127$. The weight\n$-4.3$ maps to code $-101$, which reconstructs to $-101s\\approx-4.2945$.\nThe figure prints both values to one decimal place, hiding that error."
+        },
+        {
+          "old": "An asymmetric grid stores and applies $z$. Matrix multiplication therefore",
+          "new": "In the Transformers diagram, the upper line is the real-valued range\nand the lower line is the integer code range. The middle arrow pairs\nreal zero with code $z$. In our $[-1,2]$ example that is code 5,\neven though the lowest code is 0.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/hf-affine-range.png|The lower integer range corresponds to the upper real range. Code z is paired with real zero, but need not itself be zero.]]\n\n*Hugging Face, [Quantization concepts: Affine quantization](https://github.com/huggingface/transformers/blob/1d9654e78a23fb167ef539cbd699dfbd3e4830cf/docs/source/en/quantization/concept_guide.md#affine-quantization),\n[original image](https://huggingface.co/datasets/huggingface/documentation-images/blob/3630f7a2763c93cf7b70fb403dfe669b9f0d27b1/transformers/quant_visual.png), [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).\nUnmodified.*\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/hf-affine-dequant.png|An INT8 code matrix shares scale 3.58 and zero point −77. The bottom-left code −77 reconstructs to zero.]]\n\n*Hugging Face, [Quantization concepts: Affine quantization](https://github.com/huggingface/transformers/blob/1d9654e78a23fb167ef539cbd699dfbd3e4830cf/docs/source/en/quantization/concept_guide.md#affine-quantization),\n[original reconstruction figure](https://huggingface.co/datasets/huggingface/documentation-images/blob/3630f7a2763c93cf7b70fb403dfe669b9f0d27b1/transformers/dequant.png), [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).\nUnmodified. The nonzero reconstructions are approximate.*\n\nIn the second figure, $z=-77$, so the bottom-left code $-77$ reconstructs\nto exactly zero. The top-left cell exposes the rounding error:\ncode $-23$ gives $3.58(-23+77)=193.32$, not the original $191.6$.\nWiden the integer type before subtracting the zero point: $127-(-77)=204$\ndoes not fit in signed INT8.\n\nAn asymmetric grid stores and applies $z$. Matrix multiplication therefore"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/awq-schema.png]]\n\n*Ji Lin et al., [AWQ, Figure 2](https://arxiv.org/abs/2306.00978).\nLeft: ordinary INT3 rounding. Center: the diagnostic that keeps 1% of weights\nin FP16. Right: AWQ scaling with uniform low-bit weight storage.\nThe center improves perplexity but complicates dense execution.\nAlso discussed in [Stanford CS336 Lecture 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L480-L487).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/awq-overview.png|The left panel rounds every weight to INT3. The middle keeps the second input channel's weight row in FP16. The right scales that channel while storing all weights in INT3.]]\n\n*Ji Lin et al., [AWQ, Figure 2](https://arxiv.org/html/2306.00978v5#S1.F2);\n[original figure from the authors' repository](https://github.com/mit-han-lab/llm-awq/blob/d6e797a42b9ef7778de8ee2352116e0f48a78d61/figures/overview.png),\n[MIT](/licenses/awq-d6e797a4-MIT.txt). All three panels are intact.\nThe PPL values are for the figure's OPT-6.7B experiment with INT3\nand groups of 128 weights, not for the small matrices in the drawing.*\n\nIn the middle panel, column two of $X$ pairs with row two of $W$:\nthose entries multiply under $Y=XW$. This panel keeps that row in FP16.\nIn the right panel, AWQ uses each input column's mean absolute activation\nto set the corresponding weight-row scale. The highlighted row no longer\nneeds separate FP16 storage."
+        },
+        {
+          "old": "After rounding it becomes $(XD^{-1})Q(DW)$. A sensitive channel gains a finer\neffective step after inverse scaling. Enlarging weights can also raise the\ngroup maximum and worsen other channels' rounding, so scales must be selected.",
+          "new": "After rounding it becomes $(XD^{-1})Q(DW)$. If the transformed group uses\nstep $\\Delta_g$, the effective step for input channel $j$ is $\\Delta_g/s_j$\nin the original coordinates. Increasing $s_j$ can also raise the group\nmaximum and coarsen $\\Delta_g$ for every weight in the group. AWQ chooses\nscales by output error rather than by the resolution of one coordinate."
+        },
+        {
+          "old": "<!-- checked-example: quant-awq-step -->",
+          "new": "<a id=\"awq-calibration-grid\"></a>\n\n#### How AWQ selects a scale on calibration inputs\n\nThe factor two above was chosen by hand. Add a second calibration\ninput $(2,3)$: the mean absolute inputs are $(6,2)$ and the unquantized\noutputs are $(3.15,5.53)$. In [AWQ, §3, Equation 5](https://arxiv.org/html/2306.00978v5#S3),\nthe channel factors are proportional to these means raised to $\\alpha$.\nFor this calculation only the ratio matters, so we can leave the\nsecond factor at one and set the first to $3^\\alpha$.\n\n| $\\alpha$ | Scale ratio | Weight codes | Mean squared error over both outputs |\n|---:|---:|---:|---:|\n| 0 | 1 | $(1,7)$ | 0.6292 |\n| 0.50 | 1.732 | $(1,7)$ | 0.000978 |\n| 0.55 | 1.830 | $(1,7)$ | 0.000593 |\n| 0.95 | 2.840 | $(2,7)$ | 0.067684 |\n\nAt $\\alpha=0.55$, the first scaled weight is about 0.256. The step is\nstill 0.25, so its code is one and the effective weight after reversing\nthe scale is about 0.137 instead of 0.14. At $\\alpha=0.95$, it crosses\na rounding boundary and gets code two. The output error grows again.\n\nThe [authors' code](https://github.com/mit-han-lab/llm-awq/blob/d6e797a42b9ef7778de8ee2352116e0f48a78d61/awq/quantize/auto_scale.py#L108-L154) tries twenty candidates from 0 to\n0.95 in steps of 0.05. For each candidate it reconstructs the trial\nweights, compares the output with the original, and restores the\nparameters before the next candidate. Its loss can cover a module\nwith several projections. The code below checks the principle on one\noutput with our symmetric grid, without packing or running a GPU kernel.\n\n<!-- checked-example: quant-awq-step -->"
+        },
+        {
+          "old": "np.testing.assert_allclose((awq_x / channel_scale) @ scaled_w, 3.0)",
+          "new": "np.testing.assert_allclose((awq_x / channel_scale) @ scaled_w, 3.0)\n\ncalibration = np.array([[10.0, 1.0], [2.0, 3.0]])\nreference = calibration @ awq_w\nmean_abs = np.abs(calibration).mean(axis=0)\ncandidates = np.arange(20) / 20\nlosses = []\nfor alpha in candidates:\n    channel_factors = mean_abs ** alpha\n    channel_factors /= np.sqrt(channel_factors.max() * channel_factors.min())\n    recovered = np.array(symmetric_quantize(awq_w * channel_factors, 4)[2])\n    estimate = (calibration / channel_factors) @ recovered\n    losses.append(np.mean((estimate - reference) ** 2))\nnp.testing.assert_allclose(reference, [3.15, 5.53])\nnp.testing.assert_allclose(losses[0], 0.6292)\nnp.testing.assert_allclose(losses[10], 0.00097835348309554)\nnp.testing.assert_allclose(candidates[np.argmin(losses)], 0.55)\nnp.testing.assert_allclose(min(losses), 0.00059306982672653)"
+        },
+        {
+          "old": "The factor two was chosen manually for this example. AWQ constructs\ncandidates from activation statistics and selects scaling strength by\ncalibration output error. It searches for a transformation rather than\nfine-tuning original weights by gradient descent. The name alone does\nnot specify group size, packing or inference kernel.",
+          "new": "The selected $\\alpha=0.55$ applies only to these two inputs and this layer.\nIn a full decoder, inverse input scales can often be folded into the\npreceding operation. The chosen scales still need evaluation on other\ninputs. Group size, packing, and kernel choice are separate deployment\ndecisions."
+        }
+      ],
+      "after_sha256": "96005a736390c48fe0fe9b4ed8dd78bc346768830a58e6051f4a1837beb93069",
+      "lines": 1044
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "292e9cd8bebc54e1a7dadcc1921f8b892284040c2cf478a65950789fe0c5ed91",
+      "changes": [
+        {
+          "old": "  - id: curated-hf-quant-000000000045\n    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-quantization-rounding.png\n    author: Hugging Face and Tim Dettmers\n    source_url: https://huggingface.co/blog/hf-bitsandbytes-integration\n    license: open educational material; reuse confirmed by repository owner\n    license_url: https://huggingface.co/blog/hf-bitsandbytes-integration\n    modifications: copied or extracted without visual modification for publication\n    used_in:\n      - 00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/topics-53-59/hf-quantization-rounding.png",
+          "new": "  - id: \"curated-hf-quant-000000000045\"\n    author: \"Hugging Face and Tim Dettmers\"\n    source_url: \"https://huggingface.co/blog/hf-bitsandbytes-integration\"\n    figure_url: \"https://github.com/huggingface/blog/blob/ee25167d3361425b25144de793a629343d5efc08/assets/96_hf_bitsandbytes_integration/quant-freeze.png\"\n    source_image_url: \"https://raw.githubusercontent.com/huggingface/blog/ee25167d3361425b25144de793a629343d5efc08/assets/96_hf_bitsandbytes_integration/quant-freeze.png\"\n    sha256: \"77f49147ee2f69632f62c744ed8b235f9efb7f25c123e7c093f9acfddd196523\"\n    dimensions_px: [2660,1482]\n    bytes: 251459\n    asset: \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-quantization-rounding.png\"\n    source_asset: \"raw/papers/external/topics-53-59/hf-quantization-rounding.png\"\n    license: null\n    license_url: null\n    modifications: \"Historical bytes match the pinned blog PNG; no verified redistribution license for that blog asset.\"\n    metadata_status: \"needs-confirmation\"\n    provenance_confirmation: \"source-linked-rights-unverified\"\n    rights_status: \"original-raster-license-unverified\"\n    publication_status: \"retired\"\n    retirement_reason: \"Superseded by a figure from a licensed source.\"\n    used_in: []\n    former_used_in: [\"00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md\",\"en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md\"]\n    replacements: [\"00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/hf-affine-range.png\",\"00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/hf-affine-dequant.png\"]\n  - id: \"curated-hf-affine-range-77155502a87b\"\n    asset: \"00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/hf-affine-range.png\"\n    author: \"Hugging Face\"\n    title: \"Quantization concepts: real and integer ranges\"\n    sha256: \"77155502a87b8a8b4aefb2e6902a5a80a488dac56c5bd2668ddcb05d17ef149d\"\n    bytes: 34052\n    dimensions_px: [1356,662]\n    source_url: \"https://github.com/huggingface/transformers/blob/1d9654e78a23fb167ef539cbd699dfbd3e4830cf/docs/source/en/quantization/concept_guide.md#affine-quantization\"\n    source_image_url: \"https://huggingface.co/datasets/huggingface/documentation-images/resolve/3630f7a2763c93cf7b70fb403dfe669b9f0d27b1/transformers/quant_visual.png\"\n    figure_url: \"https://huggingface.co/datasets/huggingface/documentation-images/blob/3630f7a2763c93cf7b70fb403dfe669b9f0d27b1/transformers/quant_visual.png\"\n    source_asset_sha256: \"77155502a87b8a8b4aefb2e6902a5a80a488dac56c5bd2668ddcb05d17ef149d\"\n    source_code: \"05 Источники/Originals/quantization-editorial-2026-11-11/hf-quantization-concept-guide.md\"\n    source_code_sha256: \"2c03d8d110ed2b1c3b1d2187f23efb2d730f809be3cf2c58e1edc07ac800148b\"\n    commit: \"3630f7a2763c93cf7b70fb403dfe669b9f0d27b1\"\n    license: \"CC BY-NC-SA 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by-nc-sa/4.0/\"\n    license_evidence: \"05 Источники/Originals/quantization-editorial-2026-11-11/hf-documentation-images-README.md\"\n    license_evidence_sha256: \"5e6a73b7ff47813e90e2ed21d14807256b2e89fa55e5075ec69fdf01cde801ce\"\n    license_evidence_url: \"https://huggingface.co/datasets/huggingface/documentation-images/blob/3630f7a2763c93cf7b70fb403dfe669b9f0d27b1/README.md\"\n    derivation: \"source-raster-copy\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    modifications: \"Complete original, byte-for-byte. No redraw, crop or relabeling.\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md\",\"en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md\"]\n  - id: \"curated-hf-affine-dequant-1ca9f8c38d4d\"\n    asset: \"00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/hf-affine-dequant.png\"\n    author: \"Hugging Face\"\n    title: \"Quantization concepts: affine reconstruction\"\n    sha256: \"1ca9f8c38d4da1bae61f1f0b65877683beead611ffbbd4f1711551a2b90923d6\"\n    bytes: 66659\n    dimensions_px: [1838,1126]\n    source_url: \"https://github.com/huggingface/transformers/blob/1d9654e78a23fb167ef539cbd699dfbd3e4830cf/docs/source/en/quantization/concept_guide.md#affine-quantization\"\n    source_image_url: \"https://huggingface.co/datasets/huggingface/documentation-images/resolve/3630f7a2763c93cf7b70fb403dfe669b9f0d27b1/transformers/dequant.png\"\n    figure_url: \"https://huggingface.co/datasets/huggingface/documentation-images/blob/3630f7a2763c93cf7b70fb403dfe669b9f0d27b1/transformers/dequant.png\"\n    source_asset_sha256: \"1ca9f8c38d4da1bae61f1f0b65877683beead611ffbbd4f1711551a2b90923d6\"\n    source_code: \"05 Источники/Originals/quantization-editorial-2026-11-11/hf-quantization-concept-guide.md\"\n    source_code_sha256: \"2c03d8d110ed2b1c3b1d2187f23efb2d730f809be3cf2c58e1edc07ac800148b\"\n    commit: \"3630f7a2763c93cf7b70fb403dfe669b9f0d27b1\"\n    license: \"CC BY-NC-SA 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by-nc-sa/4.0/\"\n    license_evidence: \"05 Источники/Originals/quantization-editorial-2026-11-11/hf-documentation-images-README.md\"\n    license_evidence_sha256: \"5e6a73b7ff47813e90e2ed21d14807256b2e89fa55e5075ec69fdf01cde801ce\"\n    license_evidence_url: \"https://huggingface.co/datasets/huggingface/documentation-images/blob/3630f7a2763c93cf7b70fb403dfe669b9f0d27b1/README.md\"\n    derivation: \"source-raster-copy\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    modifications: \"Complete original, byte-for-byte. No redraw, crop or relabeling.\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md\",\"en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md\"]"
+        },
+        {
+          "old": "  - id: curated-awq-schema-000000000046\n    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/awq-schema.png\n    author: Ji Lin et al.\n    source_url: https://arxiv.org/abs/2306.00978\n    license: open educational material; reuse confirmed by repository owner\n    license_url: https://arxiv.org/abs/2306.00978\n    modifications: copied or extracted without visual modification for publication\n    used_in:\n      - 00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/topics-53-59/awq-schema.png",
+          "new": "  - id: \"curated-awq-schema-000000000046\"\n    author: \"Ji Lin et al.\"\n    source_url: \"https://arxiv.org/abs/2306.00978\"\n    figure_url: \"https://arxiv.org/html/2306.00978v5#S1.F2\"\n    sha256: \"c5f86883ca05966fde3e45890d83e926326a045d5d24b04ecd91fe4ff8ccd2a4\"\n    dimensions_px: [2632,651]\n    bytes: 218593\n    asset: \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/awq-schema.png\"\n    source_asset: \"raw/papers/external/topics-53-59/awq-schema.png\"\n    license: null\n    license_url: null\n    modifications: \"Historical raster of the three paper panels. The active figure uses the separate MIT-licensed author repository bytes.\"\n    metadata_status: \"needs-confirmation\"\n    provenance_confirmation: \"source-linked-rights-unverified\"\n    rights_status: \"original-raster-license-unverified\"\n    publication_status: \"retired\"\n    retirement_reason: \"Superseded by a figure from a licensed source.\"\n    used_in: []\n    former_used_in: [\"00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md\",\"en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md\"]\n    replacements: [\"00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/awq-overview.png\"]\n  - id: \"curated-awq-overview-39cc28b83244\"\n    asset: \"00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/awq-overview.png\"\n    author: \"Ji Lin et al., MIT HAN Lab\"\n    title: \"AWQ: round-to-nearest, FP16 diagnostic, and per-channel scaling\"\n    sha256: \"39cc28b832442eda6df54819e4cbd3578f0e8b31c2131dd0d3dd2aadfbe6acef\"\n    bytes: 141914\n    dimensions_px: [2016,462]\n    source_url: \"https://arxiv.org/html/2306.00978v5#S1.F2\"\n    source_image_url: \"https://raw.githubusercontent.com/mit-han-lab/llm-awq/d6e797a42b9ef7778de8ee2352116e0f48a78d61/figures/overview.png\"\n    figure_url: \"https://github.com/mit-han-lab/llm-awq/blob/d6e797a42b9ef7778de8ee2352116e0f48a78d61/figures/overview.png\"\n    source_asset_sha256: \"39cc28b832442eda6df54819e4cbd3578f0e8b31c2131dd0d3dd2aadfbe6acef\"\n    commit: \"d6e797a42b9ef7778de8ee2352116e0f48a78d61\"\n    license: \"MIT\"\n    license_url: \"https://github.com/mit-han-lab/llm-awq/blob/d6e797a42b9ef7778de8ee2352116e0f48a78d61/LICENSE\"\n    license_evidence: \"site/public/licenses/awq-d6e797a4-MIT.txt\"\n    public_license_copy: \"site/public/licenses/awq-d6e797a4-MIT.txt\"\n    license_evidence_sha256: \"2af485d269071b583c62c20250a63349f8313312cc9df0bd9007ca39c6d57bd9\"\n    license_evidence_url: \"https://raw.githubusercontent.com/mit-han-lab/llm-awq/d6e797a42b9ef7778de8ee2352116e0f48a78d61/LICENSE\"\n    derivation: \"source-raster-copy\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    modifications: \"Complete original, byte-for-byte. No redraw, crop or relabeling.\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md\",\"en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md\"]"
+        }
+      ],
+      "after_sha256": "29ff6e75c4068399b8ad26e568cabb6fd6b6cb851f1778b3aaaa277555f4c74a",
+      "lines": 26592
+    },
+    {
+      "source": "publishing/tests/fixtures/legacy-unhashed-assets.json",
+      "before_sha256": "18ba5db2c2a134479a1d7ef74d6a8e4c53437ae7f05aed2d39b90bb3de40c014",
+      "changes": [
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/awq-schema.png\",\n    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/contamination-exchangeability.png\",",
+          "new": "    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/contamination-exchangeability.png\","
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-quantization-rounding.png\",\n    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hle-pipeline.png\",",
+          "new": "    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hle-pipeline.png\","
+        }
+      ],
+      "after_sha256": "221f838fbf638a40ed18c66fc1073550e27654fc3923d7e62780b66ee524f94f",
+      "lines": 275
+    }
+  ]
+}

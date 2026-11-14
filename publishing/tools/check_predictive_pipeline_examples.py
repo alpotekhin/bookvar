@@ -18,10 +18,33 @@ ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/01 Классическое машинное обучение/01 Задача обучения и predictive pipeline.md"
 text = CHAPTER.read_text()
 blocks = re.findall(r"```python\n(.*?)```", text, re.S)
-assert len(blocks) == 2
+assert len(blocks) == 5
 scope = {}
 for i, code in enumerate(blocks, 1):
     exec(compile(code, str(CHAPTER) + f":python-{i}", "exec"), scope)
+
+# Explicit ordinal order, unknown sentinel, and a numeric-threshold tree.
+np.testing.assert_array_equal(scope["alphabetical"].transform(scope["sizes"]).ravel(), [2, 1, 0, 3])
+np.testing.assert_array_equal(scope["ordered_sizes"].transform(scope["sizes"]).ravel(), [0, 1, 2, 3])
+np.testing.assert_array_equal(scope["ordered_sizes"].transform([["XXL"]]), [[-1]])
+np.testing.assert_allclose(scope["stump_scores"], [.75, 1.])
+assert scope["stump"].tree_.threshold[0] == 1.5
+
+# Rare observed categories and genuinely unseen categories share a column only
+# under infrequent_if_exist and only if fitting actually created that column.
+grouped = scope["grouped"]
+assert grouped.categories_[0].tolist() == ["France", "Holand-Netherlands", "Vietnam"]
+assert grouped.infrequent_categories_[0].tolist() == ["Holand-Netherlands", "Vietnam"]
+assert grouped.get_feature_names_out(["country"]).tolist() == [
+    "country_France", "country_infrequent_sklearn"
+]
+np.testing.assert_array_equal(grouped.transform([["France"], ["Vietnam"], ["Atlantis"]]),
+                              [[1, 0], [0, 1], [0, 1]])
+assert scope["no_rare_bucket"].infrequent_categories_ == [None]
+np.testing.assert_array_equal(scope["no_rare_bucket"].transform([["Atlantis"]]), [[0]])
+ignored = scope["OneHotEncoder"](min_frequency=2, handle_unknown="ignore",
+                                  sparse_output=False).fit(scope["countries"])
+np.testing.assert_array_equal(ignored.transform([["Atlantis"]]), [[0, 0]])
 preprocess = scope["fitted_preprocess"]
 np.testing.assert_allclose(scope["encoded"], [[2, 1, 1, 0], [0, 0, 0, 0]])
 assert scope["probabilities"].shape == (2, 2)
@@ -172,6 +195,6 @@ np.testing.assert_allclose(
      labels[selected].mean(), labels[selected].sum()/labels.sum()],
     [.5, 1/3, .5, 2/3]
 )
-assert text.count("![[") == 7
-print("PASS: 2 published blocks; fitted coefficients/logits/probabilities, L2 tradeoff, y forwarding, score state isolation, label maturity, fold isolation, arithmetic")
+assert text.count("![[") == 11
+print("PASS: 5 published blocks; ordinal order/sentinel, numeric tree counterexample, rare/unknown categories with/without bucket, fitted coefficients/logits/probabilities, L2 tradeoff, y forwarding, score state isolation, label maturity, fold isolation, arithmetic")
 print("chapter sha256:", sha256(CHAPTER.read_bytes()).hexdigest())

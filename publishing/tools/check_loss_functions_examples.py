@@ -6,6 +6,7 @@ from math import exp, isclose, log, log1p, pi
 from pathlib import Path
 import re
 import numpy as np
+from topic_consolidation_baseline import before_topic_consolidation
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/00 Математические и ML-основания/04 Функции потерь.md"
@@ -23,7 +24,12 @@ def central_gradient(f, z, h=1e-5):
 def main():
     text = CHAPTER.read_text()
     blocks = re.findall(r"^```python\n(.*?)^```\s*$", text, re.M | re.S)
-    assert len(blocks) == 5
+    assert len(blocks) == 6
+    prior = before_topic_consolidation(text, CHAPTER,
+        stop_before_journal="2026-10-30-probability-native-additions.json")
+    prior_blocks = re.findall(r"^```python\n(.*?)^```\s*$", prior, re.M | re.S)
+    assert len(prior_blocks) == 5
+    assert blocks[:4] + blocks[5:] == prior_blocks
     scope = {"__name__": "__chapter_example__"}
     for i, block in enumerate(blocks):
         exec(compile(block, str(CHAPTER)+":block-"+str(i+1), "exec"), scope)
@@ -63,6 +69,17 @@ def main():
     assert scope["loss_new"] < -log_softmax(updated)[0]
     other_x = np.array([-1., .5])
     assert not np.allclose(scope["W_new"]@other_x+scope["b_new"], W@other_x+b)
+    # Equality of two scores is a decision boundary only where both dominate.
+    on_boundary = W @ [.1, -1.]
+    assert np.allclose(on_boundary, [1.3, 1.3, -.75])
+    assert (W @ [0., -1.]).argmax() == 0
+    assert (W @ [.2, -1.]).argmax() == 1
+    hidden_tie = W @ [-.1, 1.]
+    assert np.allclose(hidden_tie, [-1.3, -1.3, .75])
+    assert all((W @ [x1, 1.]).argmax() == 2 for x1 in [-.2, -.1, 0.])
+    pear_example = [.19, .12, .63, .06]
+    assert isclose(sum(pear_example), 1.) and np.argmax(pear_example) == 2
+    assert round(-log(pear_example[2]), 4) == .4620
     # The empirical soft target has the same objective as three one-hot labels.
     predicted = np.array([.7, .3])
     empirical_q = np.array([2/3, 1/3])
@@ -101,6 +118,31 @@ def main():
     assert isclose(scope["token_mean"], .6)
     assert isclose(scope["per_example"].mean(), .75)
     assert not isclose(per_token.mean(), .6)
+
+    # Distinct documented mean denominators for index/probability targets.
+    weighted_logits = scope["weighted_logits"]
+    class_weights = scope["class_weights"]
+    class_ids = scope["class_ids"]
+    targets = scope["probability_targets"]
+    p_weighted = np.exp(log_softmax(weighted_logits))
+    target_weights = class_weights[class_ids]
+    index_loss = lambda scores: np.sum(target_weights *
+        (-log_softmax(scores)[np.arange(2), class_ids])) / target_weights.sum()
+    probability_loss = lambda scores: -(targets * class_weights *
+        log_softmax(scores)).sum(axis=-1).mean()
+    index_gradient = target_weights[:, None] * (p_weighted-targets) / target_weights.sum()
+    assert np.allclose(central_gradient(index_loss, weighted_logits), index_gradient, atol=1e-8)
+    assert np.allclose(central_gradient(probability_loss, weighted_logits),
+                       2*index_gradient, atol=1e-8)
+    assert isclose(index_loss(weighted_logits), scope["index_mean"])
+    assert isclose(probability_loss(weighted_logits), scope["probability_mean"])
+    # The general S*p-r formula also covers genuinely soft, normalized targets.
+    for soft_target in (targets, np.array([[.7, .3], [.4, .6]])):
+        for weights in (np.ones(2), class_weights, 7*class_weights):
+            r = soft_target * weights
+            objective = lambda scores: -(r*log_softmax(scores)).sum(axis=-1).mean()
+            analytic = (r.sum(axis=-1, keepdims=True)*p_weighted-r) / 2
+            assert np.allclose(central_gradient(objective, weighted_logits), analytic, atol=1e-8)
 
     errors = np.array([1., -1., 3.])
     assert isclose(errors.mean(), 1)
@@ -155,7 +197,9 @@ def main():
     assert bce(1000., 0) == bce(-1000., 1) == 1000
     assert isclose(.01*(2**2+(-1)**2), .05)
     assert np.allclose(.02*np.array([2., -1.]), [.04, -.02])
-    assert len(re.findall(r"!\[\[.*?\]\]", text)) == 9
+    assert len(re.findall(r"!\[\[.*?\]\]", text)) == 8
+    assert "foundations-source-first/google-softmax-multiclass.png" in text
+    assert not re.search(r"!\[\[.*?cs231n-(softmax-cross-entropy|linear-decision-boundaries)\.png", text)
     assert "neural-language-model-2026-10-21/d2l-softmaxreg.svg" in text
     hinge = scope["multiclass_hinge"]
     assert np.allclose(central_gradient(lambda scores: hinge(scores, 0), z),
@@ -171,8 +215,8 @@ def main():
                        diagram_exp / diagram_exp.sum())
     assert np.allclose(scope["comparison_ce"],
                        [.0949229564, .2395447662, .5514447139])
-    print("PASS: 5 published blocks; softmax/CE, full W/b/x gradients and parameter step, "
-          "hinge margins/gradient, full source diagram, smoothing, masks, Gaussian MSE, "
+    print("PASS: 6 published blocks; softmax/CE, weighted reductions and gradients, full W/b/x gradients and parameter step, "
+          "decision boundary and hidden tie, hinge margins/gradient, source diagrams, smoothing, masks, Gaussian MSE, "
           f"Brier, BCE; {mean_median_cases} exact mean/median cases")
     print("chapter_sha256:", sha256(CHAPTER.read_bytes()).hexdigest())
 

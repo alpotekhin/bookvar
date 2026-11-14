@@ -6,12 +6,13 @@ import {join,resolve} from 'node:path';
 import {parse} from 'yaml';
 import {describe,expect,it} from 'vitest';
 import {beforeConfidentLearningAddition} from '../tools/confident-learning-baseline.mjs';
+import {beforeTopicConsolidation} from '../tools/topic-consolidation-baseline.mjs';
 
 const root=resolve(import.meta.dirname,'../..');
 const read=(p:string)=>readFileSync(resolve(root,p),'utf8');
 const sha=(s:string|Buffer)=>createHash('sha256').update(s).digest('hex');
 const journal=JSON.parse(read('docs/audit/2026-10-29-confident-learning-addition.json'));
-const text=read(journal.source);
+const text=beforeTopicConsolidation(read(journal.source),journal.source,root);
 const assets=JSON.parse(read('00 Учебник/Assets/Figures/curated/confident-learning-2026-10-29/assets.json'));
 
 describe('Confident Learning: bounded integration, not whole-course acceptance',()=>{

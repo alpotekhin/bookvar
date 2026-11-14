@@ -1,0 +1,76 @@
+[
+  {
+    "id": "curated-d2l-density-interval-35d85344b8bd",
+    "asset": "00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-density-interval.svg",
+    "author": "Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola",
+    "title": "D2L probability as area under a density, original course output",
+    "source_url": "https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/random-variables.html#probability-density-functions",
+    "source_image_url": "https://d2l.ai/_images/output_random-variables_886f4c_15_0.svg",
+    "source_asset": "00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-density-interval.svg",
+    "source_asset_sha256": "35d85344b8bd9faf7cda96b89bfd235754990ec381f3fdb0ca9d30a812bac27f",
+    "sha256": "35d85344b8bd9faf7cda96b89bfd235754990ec381f3fdb0ca9d30a812bac27f",
+    "bytes": 32316,
+    "source_code": "05 Источники/Originals/probability-native-2026-10-30/random-variables.md",
+    "source_code_sha256": "506e48d177d6753b65a671702f4e85422d0501496a085728960799ec4bd1e43f",
+    "source_code_commit": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+    "source_code_url": "https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_appendix-mathematics-for-deep-learning/random-variables.md",
+    "source_version": "Official D2L 1.0.3 generated output; captured exact SHA-256, not an immutable image URL",
+    "view_box": [
+      0,
+      0,
+      310.137492,
+      226.237508
+    ],
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE",
+    "license_evidence": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+    "license_evidence_sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+    "public_license_copy": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original SVG copied byte-for-byte. No crop, redraw, relabeling, recoloring or resampling. Attribution and explanation are separate in the chapter.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-30",
+    "used_in": [
+      "00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md"
+    ]
+  },
+  {
+    "id": "curated-d2l-marginal-cda896c59fd8",
+    "asset": "00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-marginal.svg",
+    "author": "Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola",
+    "title": "D2L marginalization, original Figure 22.6.1",
+    "source_url": "https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/random-variables.html#fig-marginal",
+    "source_image_url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/marginal.svg",
+    "source_asset": "00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-marginal.svg",
+    "source_asset_sha256": "cda896c59fd8dfb81f4d5d03fd392142da25b331378e1da668a0088cbd44dd51",
+    "sha256": "cda896c59fd8dfb81f4d5d03fd392142da25b331378e1da668a0088cbd44dd51",
+    "bytes": 70709,
+    "source_code": "05 Источники/Originals/probability-native-2026-10-30/random-variables.md",
+    "source_code_sha256": "506e48d177d6753b65a671702f4e85422d0501496a085728960799ec4bd1e43f",
+    "source_code_commit": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+    "source_code_url": "https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_appendix-mathematics-for-deep-learning/random-variables.md",
+    "source_version": "Pinned source SVG at recorded commit",
+    "view_box": [
+      0,
+      0,
+      337,
+      163
+    ],
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE",
+    "license_evidence": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+    "license_evidence_sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+    "public_license_copy": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original SVG copied byte-for-byte. No crop, redraw, relabeling, recoloring or resampling. Attribution and explanation are separate in the chapter.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-30",
+    "used_in": [
+      "00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md"
+    ]
+  }
+]

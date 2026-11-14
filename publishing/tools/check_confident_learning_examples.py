@@ -9,11 +9,13 @@ from pathlib import Path
 import re
 import numpy as np
 import sklearn
+from topic_consolidation_baseline import before_topic_consolidation
 
 root = Path(__file__).resolve().parents[2]
 journal = json.loads((root / 'docs/audit/2026-10-29-confident-learning-addition.json').read_text())
 text = (root / journal['source']).read_text()
-assert hashlib.sha256(text.encode()).hexdigest() == journal['after_sha256']
+historical = before_topic_consolidation(text, journal['source'])
+assert hashlib.sha256(historical.encode()).hexdigest() == journal['after_sha256']
 addition = re.search(r'<!-- confident-learning-addition: start -->[\s\S]*?<!-- confident-learning-addition: end -->\n\n', text)[0]
 blocks = re.findall(r'^```python\n(.*?)^```\s*$', addition, re.M | re.S)
 assert len(blocks) == 3
@@ -61,7 +63,7 @@ assert int((flagged & confirmed).sum()) == 3
 assert int(flagged.sum()) == 4
 
 print(json.dumps({
-    'chapter_sha256': journal['after_sha256'], 'actual_new_programs': len(blocks),
+    'chapter_sha256': hashlib.sha256(text.encode()).hexdigest(), 'actual_new_programs': len(blocks),
     'synthetic_oof_fits': 3, 'probability_rows': 12,
     'permutation_checks': 30, 'raw_counted_rows': 10,
     'review_ids': s['ids'][s['order']].tolist(),

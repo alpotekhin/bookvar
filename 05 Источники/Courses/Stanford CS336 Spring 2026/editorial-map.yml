@@ -1500,14 +1500,16 @@
       "evidence": "Lectures/repository/var/traces/lecture_01.json#step=33:rendering=1; reviewed title: gpt4 no details"
     },
     "lecture-01-figure-step-37-rendering-1": {
-      "disposition": "source-only",
-      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
-      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=37:rendering=1; reviewed title: roller flops"
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md",
+      "destination_anchor": "arith-attention-share",
+      "evidence": "Step 37 contrasts attention and FFN FLOP shares for OPT. Chapter uses controlled forward counts from pinned OPT configurations and a separate original prefill FLOP breakdown; it does not reproduce the screenshot's training fractions."
     },
     "lecture-01-figure-step-39-rendering-1": {
-      "disposition": "source-only",
-      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
-      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=39:rendering=1; reviewed title: wei emergence plot"
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "scaling-metric-emergence",
+      "evidence": "Lecture 1 step 39 uses Wei et al. v2 Figure 2; the destination reads the arithmetic panel and distinguishes exact-match scores, edit distances, and test resolution."
     },
     "lecture-01-section-40-what-can-we-learn-in-this-class-that-transfers-to-frontier-models": {
       "disposition": "source-only",
@@ -1615,14 +1617,16 @@
       "evidence": "Lectures/repository/var/traces/lecture_01.json#steps=237-247:semantic=section-237-inference; reviewed title: Inference"
     },
     "lecture-01-figure-step-241-rendering-1": {
-      "disposition": "source-only",
-      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
-      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=241:rendering=1; reviewed title: prefill decode"
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "destination_anchor": "prefill-decode-cache-states",
+      "evidence": "Step 241 uses Li et al. Figure 2. Both textbook editions already retain the original; the explanation now traces four forward calls and distinguishes selected IDs from cached positions."
     },
     "lecture-01-figure-step-276-rendering-1": {
-      "disposition": "source-only",
-      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
-      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=276:rendering=1; reviewed title: chinchilla isoflop"
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "isoflops-experiment",
+      "evidence": "Lecture 9 already owns the procedure. The chapter links the exact Hoffmann Figure 3 used at step 276 and now compares it with licensed symmetric and asymmetric controls."
     },
     "lecture-01-figure-step-280-rendering-1": {
       "disposition": "excluded",
@@ -2683,9 +2687,9 @@
     "lecture-04-deepseek-mtp": {
       "disposition": "integrated",
       "destination": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
-      "destination_anchor": "multi-token-training-objective",
+      "destination_anchor": "deepseek-sequential-mtp",
       "reason": "Integrated into the existing training-objective chapter: independent heads versus DeepSeek sequential teacher-forced modules, valid target masks, shared embedding/output, auxiliary weighting, and training versus speculative inference.",
-      "evidence": "Lecture 4 page 59 read and rendered; primary DeepSeek-V3 v2 section 2.2 and Meta MTP v1 section 2 verified. Original licensed Meta Figure 1 illustrates the contrasted independent-head variant; it is not mislabeled as the DeepSeek slide."
+      "evidence": "Lecture 4 page 59 read and rendered. DeepSeek's left-hand figure is embedded from the MIT-licensed author repository snapshot d5c08b3, PDF page 10; the composite lecture slide stays in the course archive. Meta Figure 1 illustrates the independent-head variant."
     },
     "lecture-04-recap": {
       "disposition": "integrated",
@@ -3269,8 +3273,8 @@
   },
   "assignment-02-task-torch-compile": {
     "disposition": "integrated",
-    "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
-    "destination_anchor": "cs336-systems-triton"
+    "destination": "00 Учебник/10 ML Systems/09 Компиляция графов — PyTorch, JAX и CUDA Graphs.md",
+    "destination_anchor": "torch-compile-graphs-guards-recompilation"
   },
   "assignment-02-deliverable-torch-compile-022": {
     "disposition": "integrated",
@@ -3694,7 +3698,7 @@
   },
   "lecture-10-section-274-deepseek-v4-attention": {
     "disposition": "source-only",
-    "reason": "Retained as a time-sensitive architecture note until the dedicated DeepSeek lineage chapter verifies the released model and primary technical report.",
+    "reason": "Heterogeneous heading umbrella: trace steps 274–279 cover CSA/HCA, 280–284 summarize cache alternatives, and 288–310 cover quantization. CSA/HCA is explained in the long-context chapter, quantization mechanisms in the full quantization chapter, and the diffusion mention now links to the dedicated masked-diffusion chapter. Keep the umbrella source-only rather than claiming that one destination covers every step. See docs/audit/2026-10-29-masked-diffusion.md and the earlier lecture10 boundary map.",
     "evidence": "Lectures/repository/var/traces/lecture_10.json#steps=274-310:semantic=section-274-deepseek-v4-attention"
   },
   "lecture-10-figure-step-296-rendering-1": {
@@ -4314,13 +4318,21 @@
     },
     "lecture-01-visual-figure-step-37-rendering-1": {
       "disposition": "source-only",
-      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
-      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=37:rendering=1; question reviewed: How does roller flops support the lecture section “The industrialization of language models”?"
+      "reason": "Stephen Roller's social-post screenshot remains in the archive. Independent permission to republish it was not verified; the chapter embeds a different licensed original, Nawrot et al. Figure 12.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=37:rendering=1; original post https://x.com/stephenroller/status/1579993017234382849."
     },
     "lecture-01-visual-figure-step-39-rendering-1": {
-      "disposition": "source-only",
-      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
-      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=39:rendering=1; question reviewed: How does wei emergence plot support the lecture section “The industrialization of language models”?"
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "scaling-metric-emergence",
+      "local_file": "00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/wei-emergence-figure2.png",
+      "transformation": "Byte-exact step-39 PNG copy, SHA-256 d905d44f12c6861f6e1febd0af3e7ab446f1ccf1531a1702c43dd4b977dd453b; figure rights verified separately from Wei et al. arXiv v2, CC BY 4.0.",
+      "caption": "Eight tasks, each point a separate model; the horizontal axis is training FLOPs and dashed lines mark chance performance.",
+      "rendered_route": "/textbook/pretraining/scaling-laws/#scaling-metric-emergence",
+      "desktop_evidence": "Source Figure 2 and local PNG inspected; final browser verification is recorded with the chapter revision.",
+      "narrow_evidence": "Full original retained for the mobile viewer; final pan and label checks are recorded with the chapter revision.",
+      "reviewer": "Bookvar editorial review",
+      "checked_at": "2026-11-09"
     },
     "lecture-01-visual-figure-step-50-rendering-1": {
       "disposition": "excluded",
@@ -4364,13 +4376,21 @@
       "evidence": "Lectures/repository/var/traces/lecture_01.json#step=220:rendering=1; question reviewed: How does image d41d89a3b5f61b2597e9a608032479f0 https docs nvidia com dgx dgxb200 user guide images dgx b200 system topology png support the lecture section “Basics”?"
     },
     "lecture-01-visual-figure-step-241-rendering-1": {
-      "disposition": "source-only",
-      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
-      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=241:rendering=1; question reviewed: How does prefill decode support the lecture section “Inference”?"
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "destination_anchor": "prefill-decode-cache-states",
+      "local_file": "00 Учебник/Assets/Figures/curated/attention-review-2026-09/prefill-decode.png",
+      "transformation": "Chapter retains Li et al., arXiv:2407.12391v1 Figure 2, exact 899×344 original PNG, CC BY 4.0, SHA-256 947a70b7cef4d1875d295692731cd4216f189daaf5ac7b586106fc542626e3a6. The 647×248 course version is kept in the archive, not embedded a second time.",
+      "caption": "Prompt prefill emits a; each subsequent call appends K/V for its input and selects the next token. The final selected EOS does not require another call.",
+      "rendered_route": "/textbook/inference/kv-cache-batching-pagedattention/#prefill-decode-cache-states",
+      "desktop_evidence": "Exact upstream PNG and placement inspected; browser evidence pinned in the chapter journal.",
+      "narrow_evidence": "Original PNG remains unmodified for expansion in the viewer; narrow evidence pinned in the chapter journal.",
+      "reviewer": "Bookvar editorial review",
+      "checked_at": "2026-11-09"
     },
     "lecture-01-visual-figure-step-276-rendering-1": {
       "disposition": "source-only",
-      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
+      "reason": "This is a reproduction of Hoffmann et al. Figure 3. The chapter links the exact original; no downstream reuse grant was verified for that image. Czech et al. Figures 3 and 4 are different illustrations under CC BY 4.0.",
       "evidence": "Lectures/repository/var/traces/lecture_01.json#step=276:rendering=1; question reviewed: How does chinchilla isoflop support the lecture section “Assignment 2 (systems)”?"
     },
     "lecture-01-visual-figure-step-280-rendering-1": {
@@ -4445,17 +4465,9 @@
       "evidence": "Lectures/repository/lecture_03.pdf#pages=31-35:semantic=rope-derivation; question reviewed: How do rotations make query-key inner products depend on relative rather than absolute position?"
     },
     "lecture-03-visual-hyperparameter-evidence": {
-      "disposition": "integrated",
-      "destination": "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
-      "destination_anchor": "decoder-hyperparameter-evidence",
-      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architecture/ffn-ratio-evidence-slide.png",
-      "transformation": "Three complete Stanford CS336 Lecture 3 slides rendered from pinned PDF pages 40, 46, and 50 at 180 DPI; no semantic crop or redraw.",
-      "caption": "Source slides preserve the empirical evidence for feed-forward ratio, depth-width aspect ratio, and weight-decay interactions.",
-      "rendered_route": "/textbook/modern-llm/decoder-block/",
-      "desktop_evidence": "All three complete evidence slides were inspected in sequence on the full route at 1440x1000; charts, legends, and captions render without clipping or missing assets.",
-      "narrow_evidence": "At 390x844 all three slides stay within the article column with scrollWidth equal to clientWidth; click-to-zoom exposes each native 1800x1014 slide.",
-      "reviewer": "Codex Task 1 review remediation",
-      "checked_at": "2026-09-06"
+      "disposition": "source-only",
+      "reason": "Retain the full source sequence without republishing composite third-party plots. The decoder chapter retains the discussion and links, and now embeds licensed paper figures.",
+      "evidence": "Lectures/repository/lecture_03.pdf#pages=37-50:semantic=hyperparameter-evidence; three archived renders are recorded in publishing/tools/decoder-block-figures.json."
     },
     "lecture-03-visual-softmax-stability-failures": {
       "disposition": "source-only",

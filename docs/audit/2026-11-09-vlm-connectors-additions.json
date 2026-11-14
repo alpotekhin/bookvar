@@ -1,0 +1,141 @@
+{
+  "date": "2026-11-09",
+  "scope": "Read both current connector editions. Compare identical-image targets in BLIP-2 and place visual and text K/V explicitly for three input interfaces. Add five subject links per locale; replace the first LLaVA course copy with the original, rights-verified paper Figure 1. Local only.",
+  "files": [
+    {
+      "source": "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-20",
+          "new": "last_updated: 2026-11-09\nreference_terms:\n  - label: LLaVA — вставка визуального префикса\n    label_en: LLaVA — inserting a visual prefix\n    anchor: vlm-projector-prefix\n  - label: BLIP‑2 — три маски Q‑Former\n    label_en: BLIP-2 — three Q-Former masks\n    anchor: vlm-qformer-masks\n  - label: BLIP‑2 — несколько подписей одного изображения\n    label_en: BLIP-2 — several captions per image\n    anchor: vlm-qformer-positives\n  - label: VLM — визуальный префикс и отдельный KV-кэш\n    label_en: VLMs — visual prefixes and separate KV caches\n    anchor: vlm-visual-kv\n  - label: Qwen3‑VL — дополнительные признаки DeepStack\n    label_en: Qwen3-VL — injecting DeepStack features\n    anchor: vlm-deepstack"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/vlm-2026/llava-figure1-projector.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/connectors-2026-11-09/llava-figure1-projector.png|Проекция W переводит признаки изображения в визуальные векторы H_v; LLM получает их вместе с векторами инструкции H_q.]]"
+        },
+        {
+          "old": "*Haotian Liu et al., [Visual Instruction Tuning](https://arxiv.org/abs/2304.08485v2),\nрисунок 1 в исходной копии Stanford CS336.\nЗрительные признаки проходят через $W$ и поступают\nв языковую модель вместе с векторами инструкции.*",
+          "new": "*Haotian Liu et al., [Visual Instruction Tuning v2, рис. 1, с. 4](https://arxiv.org/pdf/2304.08485v2#page=4),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Проекция $W$\nменяет ширину $Z_v$, сохраняя число позиций. Светлые $H_v$ и серые $H_q$\nвходят в один декодер, зелёные $X_a$ обозначают текст ответа.\nСхема показывает архитектуру, а не фактическое число токенов.*"
+        },
+        {
+          "old": "### Как изображение занимает позиции в тексте",
+          "new": "<a id=\"vlm-projector-prefix\"></a>\n\n### Как изображение занимает позиции в тексте"
+        },
+        {
+          "old": "### Три цели и три маски",
+          "new": "<a id=\"vlm-qformer-masks\"></a>\n\n### Три цели и три маски"
+        },
+        {
+          "old": "Подмена всех трёх масок одной causal mask меняет метод.",
+          "new": "Подмена всех трёх масок одной causal mask меняет метод.\n\n<a id=\"vlm-qformer-positives\"></a>\n\n### Несколько подписей одного изображения\n\nВ [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели#vlm-multi-positive|примере про CLIP]]\nдве подходящие подписи были известны заранее. При дообучении BLIP-2\nна поиск по COCO такую разметку даёт идентификатор фотографии:\nразные записи с одинаковым `image_id` считаются положительными.\nЭто ветка `forward` в [LAVIS, строки 159–187](https://github.com/salesforce/LAVIS/blob/05cb670f47296522e24e7727e366b4a997d28582/lavis/models/blip2_models/blip2_qformer.py#L159-L187),\nа не общее правило предобучения BLIP-2.\n\nПусть softmax по трём кандидатам снова даёт $p=(0.8,0.1,0.1)$.\nСовпадение ID первых двух записей задаёт веса $(1/2,1/2,0)$.\nLAVIS отводит 90% целевого веса этому распределению, а 10%\nравномерно делит между всеми тремя кандидатами:\n\n$$\nq=0.9(1/2,1/2,0)+0.1(1/3,1/3,1/3)\n  =(29/60,29/60,1/30).\n$$\n\nПотеря строки равна $-\\sum_j q_j\\log p_j$. Её градиент по второй\nоценке равен $0.1-29/60\\approx-0.3833$. Без ID в этой реализации\nположительной осталась бы только первая запись и сглаживание\nдало бы второй целевой вес $1/30$. Градиент тогда равен\n$0.1-1/30\\approx+0.0667$. При тех же оценках обновление по одной строке\nменяет направление. Это усреднение логарифмов по целевым весам,\nа не логарифм суммы вероятностей подходящих подписей.\n\nТот же ID исключает обе подписи из выбора трудных отрицательных\nпар для ITM. Малый вес третьей записи в контрастивной потере\nпоявляется из-за сглаживания; в разметке ITM она остаётся отрицательной."
+        },
+        {
+          "old": "использовать обычные эффективные kernels.",
+          "new": "использовать обычные эффективные kernels.\n\n<a id=\"vlm-visual-kv\"></a>\n\n### Сколько памяти занимает один и тот же запрос\n\nВозьмём 40 текстовых позиций, включая служебные токены, и одно\nизображение. Во всех вариантах текстовый декодер имеет 32 слоя,\n32 головы K/V, по 128 координат на голову и два байта на элемент.\nСлой хранит для одной позиции $2\\cdot32\\cdot128\\cdot2=16\\,384$\nбайта: множитель 2 слева учитывает ключ и значение. Для отдельной\nвизуальной памяти предположим те же размеры, но только восемь\nслоёв cross-attention. Это расчёт для трёх условных конфигураций,\nне параметры выпущенных моделей.\n\n| Подключение | Self-KV | Cross-KV |\n| --- | ---: | ---: |\n| 576 позиций во входе | 308 MiB | — |\n| 32 позиции после Q-Former, как с OPT | 36 MiB | — |\n| 64 latents в отдельной памяти | 20 MiB | 8 MiB |\n\nПервый вариант хранит $40+576=616$ позиций во всех 32 слоях,\nвторой — $40+32=72$. В третьем только текстовые 40 позиций\nпроходят через self-attention; зрительная часть занимает\n$64\\cdot8\\cdot16\\,384$ байта. После обработки первого токена\nответа во всех трёх случаях self-KV увеличится на 0.5 MiB,\nа зрительная память в третьем не изменится. В таблице только K/V:\nвеса, активации, исходные зрительные признаки и запас\nаллокатора сюда не входят.\n\nНа одном decode-шаге визуальная часть даёт 576 оценок на голову\nв каждом из 32 слоёв первого варианта и 64 оценки в каждом из\nвосьми слоёв третьего. Из этих чисел нельзя вывести отношение\nзадержек: третий вариант добавляет проекции и слои, а сжатие\nизображения выполняется до декодирования и может удалить детали."
+        },
+        {
+          "old": "## 6. Early fusion и deep fusion",
+          "new": "<a id=\"vlm-deepstack\"></a>\n\n## 6. Early fusion и deep fusion"
+        },
+        {
+          "old": "| Q-Former BLIP-2 | Фиксированное число query outputs после проекции | Во входе decoder-only или encoder encoder-decoder модели | Подготовку входа выбранной LLM |",
+          "new": "| Q-Former BLIP-2 | Фиксированное число выходов queries после проекции | Во входе OPT или в памяти энкодера FlanT5 | Подготовку входа выбранной LLM |"
+        }
+      ],
+      "before_sha256": "5df467640b95eb59a8e5fdc45d7e72fecd15e703ca52011481ae8c480f43f341",
+      "after_sha256": "e017769c2c84866795be896fdb6795567f167ab0d377b04e2386869c3d441a85"
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md",
+      "changes": [
+        {
+          "old": "canonical_revision: \"5df467640b95eb59a8e5fdc45d7e72fecd15e703ca52011481ae8c480f43f341\"\ntranslation_reviewed: \"2026-10-29\"",
+          "new": "canonical_revision: \"e017769c2c84866795be896fdb6795567f167ab0d377b04e2386869c3d441a85\"\ntranslation_reviewed: \"2026-11-09\""
+        },
+        {
+          "old": "last_updated: 2026-10-29",
+          "new": "last_updated: 2026-11-09"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/llava-figure1-projector.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/connectors-2026-11-09/llava-figure1-projector.png|Projection W maps image features to visual embeddings H_v. The LLM takes these alongside instruction embeddings H_q.]]"
+        },
+        {
+          "old": "*Figure 1 from Liu et al., [Visual Instruction Tuning](https://arxiv.org/abs/2304.08485), PDF p. 4. The projector maps CLIP patch features into the language model’s input stream.*",
+          "new": "*Haotian Liu et al., [Visual Instruction Tuning v2, Figure 1, PDF p. 4](https://arxiv.org/pdf/2304.08485v2#page=4),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Projection $W$\nchanges the width of $Z_v$ without removing positions. The light $H_v$\nand gray $H_q$ enter the same decoder; green $X_a$ denotes the text response.\nThe schematic does not give actual token counts.*"
+        },
+        {
+          "old": "### Where the image placeholder goes",
+          "new": "<a id=\"vlm-projector-prefix\"></a>\n\n### Where the image placeholder goes"
+        },
+        {
+          "old": "### Three objectives, three attention masks",
+          "new": "<a id=\"vlm-qformer-masks\"></a>\n\n### Three objectives, three attention masks"
+        },
+        {
+          "old": "Real batches also need padding masks. The three objectives share parameters but cannot exchange masks without changing what information is available to the prediction.",
+          "new": "Real batches also need padding masks. The three objectives share parameters but cannot exchange masks without changing what information is available to the prediction.\n\n<a id=\"vlm-qformer-positives\"></a>\n\n### Several captions for one image\n\nIn the [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели#vlm-multi-positive|CLIP example]],\ntwo valid captions were known in advance. During BLIP-2's COCO retrieval\nfine-tuning, rows with the same `image_id` count as positives.\nThis is the `forward` branch in [LAVIS, lines 159–187](https://github.com/salesforce/LAVIS/blob/05cb670f47296522e24e7727e366b4a997d28582/lavis/models/blip2_models/blip2_qformer.py#L159-L187),\nnot the default rule in BLIP-2 pretraining.\n\nSuppose the softmax over three candidates again gives $p=(0.8,0.1,0.1)$.\nThe first two IDs match, giving the positive weights $(1/2,1/2,0)$.\nLAVIS assigns 90% of the target weight to that distribution and\nspreads the remaining 10% evenly across the three candidates:\n\n$$\nq=0.9(1/2,1/2,0)+0.1(1/3,1/3,1/3)\n  =(29/60,29/60,1/30).\n$$\n\nThe row loss is $-\\sum_j q_j\\log p_j$. Its gradient on the second\nscore is $0.1-29/60\\approx-0.3833$. Without IDs, the first caption alone\nwould be positive and smoothing would give the second a target weight\nof $1/30$. The gradient would then be $0.1-1/30\\approx+0.0667$.\nThe same scores give opposite directions for a one-row update.\nThis loss averages log probabilities using the target weights;\nit does not take the log of their sum.\n\nThe matching ID also excludes both captions from ITM hard-negative\nsampling. The third caption gets a small contrastive target weight\nthrough smoothing but remains negative for ITM."
+        },
+        {
+          "old": "Visual latents do not occupy 64 positions in the text self-attention cache, but they still consume memory. Each inserted cross-attention layer may cache projected visual K/V once and reuse them during decoding. That cache has its own layer count, heads, and widths. A decoder-only runtime therefore needs support for the added layers, image masks, and visual memory, even if the attention operations themselves use standard efficient kernels.",
+          "new": "Visual latents do not occupy 64 positions in the text self-attention cache, but they still consume memory. Each inserted cross-attention layer may cache projected visual K/V once and reuse them during decoding. That cache has its own layer count, heads, and widths. A decoder-only runtime therefore needs support for the added layers, image masks, and visual memory, even if the attention operations themselves use standard efficient kernels.\n\n<a id=\"vlm-visual-kv\"></a>\n\n### Cache size for the same request\n\nTake 40 text positions, including control tokens, and one image.\nIn all three cases the text decoder has 32 layers, 32 KV heads,\n128 coordinates per head and two bytes per element. One position\nuses $2\\cdot32\\cdot128\\cdot2=16\\,384$ bytes per layer, with\nthe first factor of two accounting for keys and values. For separate\nvisual memory, assume the same widths but only eight cross-attention\nlayers. These are hypothetical configurations, not released model specs.\n\n| Connector | Self-KV | Cross-KV |\n| --- | ---: | ---: |\n| 576 input positions | 308 MiB | — |\n| 32 Q-Former positions, as with OPT | 36 MiB | — |\n| 64 latents in separate memory | 20 MiB | 8 MiB |\n\nThe first decoder caches $40+576=616$ positions in each of its 32 layers;\nthe second caches $40+32=72$. In the third, only the 40 text positions\ngo through self-attention. Its separate visual K/V takes\n$64\\cdot8\\cdot16\\,384$ bytes. Processing the first answer token adds\n0.5 MiB to self-KV in all three cases. The separate visual memory does\nnot grow. The table excludes weights, activations, original vision\nfeatures and allocator overhead.\n\nOn one decoding step, the visual contribution is 576 attention scores\nper head in each of the 32 layers of the first variant, versus 64 in\neach of the eight cross-attention layers of the third. This does not\npredict a latency ratio: the latter adds projections and layers, and\ncompression happens before decoding and can discard visual detail."
+        },
+        {
+          "old": "### DeepStack is a different route into the same decoder",
+          "new": "<a id=\"vlm-deepstack\"></a>\n\n### DeepStack adds features inside the decoder"
+        },
+        {
+          "old": "| BLIP-2 Q-Former | fixed learned-query count | before the LLM | compact prefix, potentially lossy bottleneck |",
+          "new": "| BLIP-2 Q-Former | fixed learned-query count | OPT input or Flan-T5 encoder memory | compact interface, potentially lossy bottleneck |"
+        }
+      ],
+      "before_sha256": "f5882df05aa71cff14b047ee434d24b35c4ce44b387220a0e7b860d20a9a5d3a",
+      "after_sha256": "76a56762f9fef8501310c997a4811d91c24f4fd4bb4d4c06c4a50cfb955c4d70"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64a Connectors и fusion|Как vision encoder подключается к LLM: projector, Q-Former и cross-attention]]",
+          "new": "- [[00 Учебник/16 Multimodal Models/64a Connectors и fusion|Как vision encoder подключается к LLM: projector, Q-Former и cross-attention]]\n  - [[00 Учебник/16 Multimodal Models/64a Connectors и fusion#vlm-projector-prefix|LLaVA — вставка визуального префикса]]\n  - [[00 Учебник/16 Multimodal Models/64a Connectors и fusion#vlm-qformer-masks|BLIP‑2 — три маски Q‑Former]]\n  - [[00 Учебник/16 Multimodal Models/64a Connectors и fusion#vlm-qformer-positives|BLIP‑2 — несколько подписей одного изображения]]\n  - [[00 Учебник/16 Multimodal Models/64a Connectors и fusion#vlm-visual-kv|VLM — визуальный префикс и отдельный KV-кэш]]\n  - [[00 Учебник/16 Multimodal Models/64a Connectors и fusion#vlm-deepstack|Qwen3‑VL — дополнительные признаки DeepStack]]"
+        }
+      ],
+      "before_sha256": "6ae7748208fbe72669a880200cbc27d37273ec9d2d4832118ecf4ec7a7ccbe3a",
+      "after_sha256": "7eca680840b646c0efadb06b62e0c4fdd3e91ff5caefbbf22356ba4862514b24"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64a Connectors и fusion|Connectors and fusion]] · **EN**",
+          "new": "- [[00 Учебник/16 Multimodal Models/64a Connectors и fusion|Connectors and fusion]] · **EN**\n  - [[00 Учебник/16 Multimodal Models/64a Connectors и fusion#vlm-projector-prefix|LLaVA — inserting a visual prefix]]\n  - [[00 Учебник/16 Multimodal Models/64a Connectors и fusion#vlm-qformer-masks|BLIP-2 — three Q-Former masks]]\n  - [[00 Учебник/16 Multimodal Models/64a Connectors и fusion#vlm-qformer-positives|BLIP-2 — several captions per image]]\n  - [[00 Учебник/16 Multimodal Models/64a Connectors и fusion#vlm-visual-kv|VLMs — visual prefixes and separate KV caches]]\n  - [[00 Учебник/16 Multimodal Models/64a Connectors и fusion#vlm-deepstack|Qwen3-VL — injecting DeepStack features]]"
+        }
+      ],
+      "before_sha256": "249efbabe5744aa09750c2f01b2468f21a669d99cb97e4d7e785b6a7cf83a4e6",
+      "after_sha256": "650ccb7d3d6dd6088374c9dc3c55b8ac206ed7bc597b0bd425255bed56d26476"
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "changes": [
+        {
+          "old": "  - id: \"curated-clip-paper-figure1-351759e7ee8b\"",
+          "new": "  - id: \"curated-llava-paper-figure1-310746447f5a\"\n    asset: \"00 Учебник/Assets/Figures/curated/connectors-2026-11-09/llava-figure1-projector.png\"\n    author: \"Haotian Liu, Chunyuan Li, Qingyang Wu, Yong Jae Lee\"\n    source_url: \"https://arxiv.org/abs/2304.08485v2\"\n    source_image_url: \"https://arxiv.org/pdf/2304.08485v2#page=4\"\n    source_figure_label: \"Figure 1, PDF p. 4\"\n    source_asset: \"05 Источники/Originals/connectors-2026-10-20/llava.pdf\"\n    source_asset_sha256: \"dc8bace378a282ea78caa9b5959306202fbfa3b8cedaf8a66541a9af18f4d3bf\"\n    sha256: \"310746447f5ad4ae00a2e54407bed5845795221ca7b863779edacb3b86d80f44\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/connectors-2026-10-20/llava-v2-abstract.html\"\n    license_evidence_sha256: \"ca833da8c03d0b5c3d8be5bb004e9e49c94f4ac8f5161efdb1297f68fa5f903c\"\n    rights_status: \"source-license-verified\"\n    provenance_confirmation: \"licensed-paper-figure\"\n    metadata_status: \"verified\"\n    derivation: \"pdf-page-render-crop\"\n    modifications: \"Rendered the complete Figure 1 from arXiv v2 and removed only the surrounding PDF text and the separate figure caption. No redraw or relabeling.\"\n    used_in: [\"00 Учебник/16 Multimodal Models/64a Connectors и fusion.md\", \"en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md\"]\n    last_verified: \"2026-11-09\"\n    source_page: 4\n    render_dpi: 360\n    render_page_size_px: [3060,3960]\n    crop_box_px: [804,1416,2258,1912]\n  - id: \"curated-clip-paper-figure1-351759e7ee8b\""
+        },
+        {
+          "old": "    modifications: byte-for-byte copy of the pinned course asset; replaces the lower-resolution rendering at the same canonical path\n    used_in:\n      - 00 Учебник/16 Multimodal Models/64a Connectors и fusion.md\n      - en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md\n    metadata_status: verified\n    provenance_confirmation: pinned-upstream-repository\n    derivation: source-raster-copy\n    upstream_source_url: https://arxiv.org/abs/2304.08485",
+          "new": "    modifications: byte-for-byte copy of the pinned course asset; replaces the lower-resolution rendering at the same canonical path\n    used_in: []\n    publication_status: retired\n    retirement_reason: Both reader editions use the verified original arXiv v2 figure; the course copy is preserved.\n    metadata_status: verified\n    provenance_confirmation: pinned-upstream-repository\n    derivation: source-raster-copy\n    upstream_source_url: https://arxiv.org/abs/2304.08485"
+        }
+      ],
+      "before_sha256": "086601d412baf28930e7cdece91f16c0ef8cc472e54402d7049806534a078722",
+      "after_sha256": "e1dd79b86de8436c050bf9af5c988e4d9c247787964e3b734b61522fb47f405b"
+    }
+  ],
+  "review": {
+    "sources": "Liu et al., Visual Instruction Tuning v2 §4.1 and Fig. 1, PMLR BLIP-2 §§3.1–3.3 and Figs. 2–3, pinned LAVIS 05cb670f lines 129–187, Alayrac et al. Flamingo v2 §§2.1–2.3 and Appendix A.1.1–A.1.3, Li et al. OneVision v1 §3.1, Qwen3-VL v1 §§2 and 2.2.",
+    "example": "At row softmax (0.8,0.1,0.1), image IDs (4,4,9) yield smoothed targets (29/60,29/60,1/30) and second-logit slope −0.3833. Diagonal-only targets yield +0.0667. The same input request yields self-KV/cross-KV of 308/0, 36/0 and 20/8 MiB for the three hypothetical interfaces. No latency or released-model memory inferred.",
+    "source_figure": "Checked that the archived and current arXiv v2 PDFs have the same digest, and that the arXiv abstract licenses v2 under CC BY 4.0. Read PDF p. 4 and inspected the entire original diagram; a 360 DPI crop replay matched the embedded binary byte for byte.",
+    "reader": "Chrome at 375 and 1280 px in both locales: five reference links, same-locale return to the CLIP example, seven loaded figures, all three cache table columns visible and no KaTeX errors. Opened the LLaVA, BLIP-2 masks and LLM connection, and Flamingo illustrations with captions; verified mobile zoom and pan.",
+    "local_checks": "2023 pages built; 732 publication tests, 227 built-output tests and two focused asset evidence checks passed. Zero broken internal routes, fragments or files.",
+    "limits": "Paper-use grant verified only for the new LLaVA original. Does not resolve inherited OneVision, Flamingo or Qwen3-VL reproduction records, or assert a checkpoint run or deployment."
+  }
+}

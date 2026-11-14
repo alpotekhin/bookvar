@@ -2,10 +2,97 @@
 title: GPU, CUDA и иерархия памяти
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-29
-last_verified: 2026-10-23
+last_updated: 2026-11-04
+last_verified: 2026-11-04
 source_language: mixed
+reference_terms:
+  - anchor: gpu-grid
+    label: "Один запуск, тысяча элементов"
+    label_en: "Grid, blocks, and threads"
+  - anchor: gpu-sm
+    label: "Размещение блоков на SM"
+    label_en: "Block placement on SMs"
+  - anchor: gpu-simt
+    label: "SIMT и расхождение ветвей"
+    label_en: "SIMT and branch divergence"
+  - anchor: gpu-occupancy
+    label: "Occupancy и волны блоков"
+    label_en: "Occupancy and wave quantization"
+  - anchor: gpu-memory
+    label: "Иерархия памяти GPU"
+    label_en: "GPU memory hierarchy"
+  - anchor: gpu-coalescing
+    label: "Coalescing и выравнивание"
+    label_en: "Coalescing and alignment"
+  - anchor: gpu-banks
+    label: "Банки shared memory"
+    label_en: "Shared-memory banks"
+  - anchor: gpu-swizzle
+    label: "XOR swizzling"
+    label_en: "XOR swizzling"
+  - anchor: gpu-tiling
+    label: "Блочное матричное умножение"
+    label_en: "Tiled matrix multiplication"
+  - anchor: gpu-fringe
+    label: "Неполные плитки и нулевое дополнение"
+    label_en: "Fringe tiles and zero padding"
+  - anchor: gpu-l2
+    label: "Повторное использование через L2"
+    label_en: "L2 reuse and block ordering"
+  - anchor: gpu-tensor-cores
+    label: "Матричные инструкции Tensor Cores"
+    label_en: "Tensor Core matrix instructions"
+  - anchor: gpu-tmem
+    label: "Tensor Memory (TMEM)"
+    label_en: "Tensor Memory (TMEM)"
+  - anchor: gpu-fusion
+    label: "Объединение ядер и промежуточные массивы"
+    label_en: "Kernel fusion and intermediate arrays"
+  - anchor: torch-device-placement
+    label: "Устройство тензора в PyTorch"
+    label_en: "Tensor device placement in PyTorch"
+  - anchor: gpu-streams
+    label: "CUDA streams и события"
+    label_en: "CUDA streams and events"
+  - anchor: gpu-double-buffer
+    label: "Двойная буферизация входа"
+    label_en: "Double-buffered input"
+  - anchor: gpu-copy-overlap
+    label: "Перекрытие передачи и вычислений: трассы"
+    label_en: "Copy/compute overlap in profiler traces"
+  - anchor: gpu-buffer-lifetimes
+    label: "Готовность данных и время жизни буферов"
+    label_en: "Data readiness and buffer lifetimes"
+  - anchor: gpu-hardware-mapping
+    label: "Отображение операции на ускоритель"
+    label_en: "Mapping an operation to an accelerator"
+  - anchor: gpu-im2col
+    label: "Свёртка как GEMM: im2col"
+    label_en: "Convolution as GEMM: im2col"
+  - anchor: gpu-layout
+    label: "Логические оси и физическое размещение"
+    label_en: "Logical axes and physical tensor layout"
+  - anchor: gpu-placement
+    label: "Размещение, выделение памяти и расписание"
+    label_en: "Placement, allocation, and scheduling"
+  - anchor: gpu-unified
+    label: "Unified Memory и размещение страниц"
+    label_en: "Unified Memory and page residency"
+  - anchor: gpu-soc
+    label: "Неоднородные процессоры и fallback"
+    label_en: "Heterogeneous processors and fallback"
+  - anchor: gpu-fleet
+    label: "Границы пакета, узла и кластера"
+    label_en: "Package, node, and fleet boundaries"
+  - anchor: gpu-systolic
+    label: "Систолический массив"
+    label_en: "A systolic array"
+  - anchor: gpu-stationary
+    label: "Weight-, output- и input-stationary"
+    label_en: "Weight-, output-, and input-stationary dataflows"
 source_unit_id:
+  - pytorch-pinmem-four-profiler-traces
+  - pytorch-cuda-streams-and-allocation-lifetime
   - lecture-02-tensor-device-placement
   - lecture-05-gpu-anatomy
   - lecture-05-coalescing-failures
@@ -32,6 +119,8 @@ source_unit_id:
 Подготовка запуска и передача массивов иногда стоят дороже самой операции.
 А большая матрица может обрабатываться медленно даже при свободных
 арифметических блоках, если те ждут операнды из памяти.
+
+<a id="gpu-grid"></a>
 
 ## Один запуск, тысяча элементов
 
@@ -71,7 +160,7 @@ CPU, запускающий работу, называется **host**, GPU —
 Соседний поток получает 520. У FP32 размер элемента равен четырём байтам,
 поэтому адреса отличаются на четыре байта.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/cuda-grid-cta.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/cuda-grid-cta.png|CUDA: grid, блоки CTA и потоки внутри блока]]
 
 *Программная иерархия CUDA: grid содержит блоки, каждый блок — потоки.
 CTA означает Cooperative Thread Array; в обычном CUDA C++ это thread block.
@@ -86,6 +175,8 @@ CTA означает Cooperative Thread Array; в обычном CUDA C++ это
 нужно задавать явно. Подробная семантика и пример проверки границ —
 в [CUDA Programming Guide: Intro to CUDA C++](https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/intro-to-cuda-cpp.html).
 
+<a id="gpu-sm"></a>
+
 ## Как блоки попадают на вычислители
 
 GPU содержит несколько **потоковых мультипроцессоров** — Streaming
@@ -93,7 +184,7 @@ Multiprocessors, или SM. В рамках обычного выполнени�
 на одном SM: его потоки используют регистры этого SM и общую память блока.
 Один SM может одновременно держать несколько блоков, если хватает ресурсов.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/gpu-hardware.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/gpu-hardware.png|Устройство GPU: несколько SM с регистрами и L1/shared memory, общий L2 и HBM]]
 
 *Схема из [Stanford CS336, Lecture 6](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_06.py).
 Внутри каждого SM выделены регистры и область L1/shared memory; L2 обслуживает
@@ -117,6 +208,8 @@ Multiprocessors, или SM. В рамках обычного выполнени�
 работы. Этот пример объясняет индексацию, но не демонстрирует эффективную
 загрузку большого GPU.
 
+<a id="gpu-simt"></a>
+
 ### Почему ветвление внутри warp бывает дорогим
 
 Модель выполнения называется **SIMT** — Single Instruction, Multiple Threads.
@@ -139,6 +232,8 @@ Multiprocessors, или SM. В рамках обычного выполнени�
 потому, что участники находятся в одном warp. Для обмена внутри группы
 и внутри блока существуют соответствующие операции синхронизации.
 [CUDA Programming Guide: SIMT Execution Model](https://docs.nvidia.com/cuda/cuda-programming-guide/03-advanced/advanced-kernel-programming.html#simt-execution-model).
+
+<a id="gpu-occupancy"></a>
 
 ### Occupancy: сколько групп помещается, а не сколько пользы они приносят
 
@@ -179,6 +274,8 @@ Occupancy в этом упрощённом расчёте равна $12/64=18.7
 ёмкость волны другая; правило «сделать число блоков кратным числу SM»
 без этой оговорки неверно.
 
+<a id="gpu-memory"></a>
+
 ## Где хранится один элемент
 
 Предположим, поток выполняет `c[i] = a[i] + b[i]`.
@@ -216,6 +313,8 @@ Local memory используется и по другим причинам, н�
 без проверки. И даже для одного устройства нужно различать ресурс
 одного SM и суммарный ресурс всех SM.
 
+<a id="gpu-coalescing"></a>
+
 ## Coalescing: сколько секторов затронул warp
 
 Память обслуживает обращения не по одному байту. Рассмотрим глобальные
@@ -234,7 +333,7 @@ Local memory используется и по другим причинам, н�
 запрашивают адреса 0–3, справа — 8–11. В обоих случаях вся группа
 обращается внутрь одного сегмента.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-coalescing-4.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-coalescing-4.png|Четыре потока читают четыре соседних адреса внутри одного сегмента]]
 
 *Обращения внутри одного сегмента. NVIDIA и University of Illinois,
 [GPU Teaching Kit, Memory Coalescing, слайд 4](https://engineering.purdue.edu/~smidkiff/ece563/NVidiaGPUTeachingToolkit/Mod6/Lecture-6-2-memory-coalescing.pdf#page=4),
@@ -249,7 +348,7 @@ Local memory используется и по другим причинам, н�
 два сегмента, хотя потокам по-прежнему нужны только четыре значения.
 Первый случай показывает влияние шага, второй — выравнивания.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-coalescing-5.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-coalescing-5.png|Шаг адресов и невыровненное начало заставляют четыре потока затронуть два сегмента]]
 
 *Шаг и смещение увеличивают число затронутых сегментов.
 NVIDIA и University of Illinois,
@@ -290,6 +389,8 @@ NVIDIA и University of Illinois,
 В лекционных объяснениях иногда используют модель 128-байтовых cache lines;
 её нельзя выдавать за универсальное число фактических транзакций современных GPU.
 
+<a id="gpu-banks"></a>
+
 ## Shared memory: почему соседние банки лучше одного
 
 Блоку часто нужно не просто читать свои элементы, а обмениваться ими.
@@ -305,17 +406,17 @@ NVIDIA и University of Illinois,
 
 Начнём с меньшего примера: четыре потока и четыре банка.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/banks-stride-1.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/banks-stride-1.svg|Четыре потока и четыре банка: при шаге 1 каждый банк обслуживает одно слово]]
 
 *Шаг 1: четыре потока T0–T3 обращаются к четырём разным банкам.
 Конфликта нет.*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/banks-stride-2.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/banks-stride-2.svg|При шаге 2 четыре разных слова попадают в два банка, по два обращения на банк]]
 
 *Шаг 2: адреса распределились между двумя банками; каждому приходится
 обслужить два разных слова последовательно.*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/banks-stride-4.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/banks-stride-4.svg|При шаге 4 все четыре разных слова попадают в один банк]]
 
 *Шаг 4: все четыре разных слова находятся в одном банке.
 Все три оригинальные схемы — Jakub Beránek,
@@ -355,6 +456,8 @@ $$
 неудачно записать столбцы в shared memory. В задаче транспонирования
 поэтому приходится согласовывать оба этапа.
 [NVIDIA: Shared Memory and Memory Banks](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/#shared-memory-and-memory-banks).
+
+<a id="gpu-swizzle"></a>
 
 ### Swizzling: переставить элементы вместо добавления колонки
 
@@ -397,6 +500,8 @@ $$
 таблица разворачивает его на четырёх банках, а не задаёт универсальную
 раскладку для любого Tensor Core.
 
+<a id="gpu-tiling"></a>
+
 ## Блочное матричное умножение
 
 Пусть $C=AB$, где $A$ имеет форму $M\times K$, а $B$ — $K\times N$.
@@ -421,7 +526,7 @@ $$
 и C соответственно, а не размеры матриц из формулы выше. Блок (0, 0)
 вычисляет четыре элемента в левом верхнем углу результата.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-6.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-6.png|Блочное умножение 4×4: загрузка первых входных плиток 2×2 из M и N]]
 
 *Шаг 1 — загрузка. NVIDIA и University of Illinois,
 [GPU Teaching Kit, Tiled Matrix Multiplication, слайд 6](https://engineering.purdue.edu/~smidkiff/ece563/NVidiaGPUTeachingToolkit/Mod4/Lecture-4-3-tiled-matrix-multiplication.pdf#page=6),
@@ -434,7 +539,7 @@ $$
 может читать не только собственный элемент, но и элементы, принесённые
 соседями по блоку.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-7.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-7.png|Блочное умножение: первые произведения и повторное использование загруженных элементов]]
 
 *Шаг 2 — произведения для $k=0$.
 NVIDIA и University of Illinois,
@@ -446,7 +551,7 @@ NVIDIA и University of Illinois,
 повторное использование: одно загруженное число участвует в двух
 результатах. Аналогично $N_{0,0}$ используется для $P_{0,0}$ и $P_{1,0}$.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-8.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-8.png|Блочное умножение: вторая пара произведений из тех же входных плиток]]
 
 *Шаг 3 — произведения для $k=1$ из тех же загруженных фрагментов.
 NVIDIA и University of Illinois,
@@ -460,7 +565,7 @@ $M_{0,0}N_{0,0}+M_{0,1}N_{1,0}$. Это ещё не весь результат:
 Стрелки к P показывают, в какую сумму входит произведение; они
 не требуют записывать эту сумму в глобальную память после каждого шага.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-9.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-9.png|Блочное умножение: переход ко второй паре плиток вдоль внутреннего измерения]]
 
 *Шаг 4 — загрузка следующей пары фрагментов.
 NVIDIA и University of Illinois,
@@ -501,6 +606,8 @@ $2b^3=8192$ запросов чисел вместо 512: повторное и�
 точки синхронизации блока; `__syncthreads()` должны достигать
 все участвующие потоки, а не только потоки с допустимым индексом на краю.
 Недостающие элементы обычно заполняют нулями, сохраняя согласованный барьер.
+
+<a id="gpu-fringe"></a>
 
 ### Неполная плитка: что именно заполняется нулями
 
@@ -572,13 +679,15 @@ np.testing.assert_allclose(tiled_matmul(A, B), [[58., 64.], [139., 154.]])
 Поэтому размер фрагмента подбирают под форму задачи и устройство,
 а не увеличивают без ограничений.
 
+<a id="gpu-l2"></a>
+
 ### Повторное использование между блоками: роль L2
 
 Shared memory обслуживает взаимодействие внутри блока. Кэш L2 может
 помочь разным блокам, которым нужны одинаковые части A или B.
 На это влияет порядок соответствия программ выходным фрагментам.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/triton-grouped-vs-row-major.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/triton-grouped-vs-row-major.png|Triton: построчный обход девяти выходных блоков требует 90 разных входных блоков, групповой — 54]]
 
 *Оригинальная иллюстрация из [Triton, Matrix Multiplication](https://triton-lang.org/main/getting-started/tutorials/03-matrix-multiplication.html),
 [исходный файл](https://github.com/triton-lang/triton/blob/1b24a39939875de5333e3990bec3ddcbfc64eb80/docs/getting-started/tutorials/grouped_vs_row_major_ordering.png),
@@ -601,6 +710,8 @@ Tensor Core. Числа 90 и 54 относятся к примеру автор
 завершения. Алгоритм остаётся корректным при любом разрешённом расписании;
 порядок назначения блоков здесь влияет на локальность, а не на результат.
 
+<a id="gpu-tensor-cores"></a>
+
 ### Tensor Cores — другая инструкция для той же алгебры
 
 Tensor Cores выполняют специализированное матричное умножение с накоплением.
@@ -615,6 +726,8 @@ Tensor Cores выполняют специализированное матри�
 накопления также различаются: например, произведения низкой точности
 могут накапливаться в FP32. Подробности численных ошибок относятся к
 [[05 Численные форматы и mixed precision|главе о форматах чисел]].
+
+<a id="gpu-tmem"></a>
 
 На архитектурах Blackwell `sm_100a`/`sm_100f` есть отдельная
 **Tensor Memory (TMEM)** для матричных инструкций пятого поколения.
@@ -642,6 +755,8 @@ $\min(P_{\mathrm{peak}},BW\cdot I)$.
 L2 и HBM — разные величины. Именно это различие понадобится
 в [[03 Измерение производительности и roofline|следующей главе]].
 
+<a id="gpu-fusion"></a>
+
 ## Объединение ядер: не записывать промежуточный массив
 
 Рассмотрим поэлементный расчёт $y=\max(0,ax+b)$, где $a$ и $b$ —
@@ -652,7 +767,7 @@ L2 и HBM — разные величины. Именно это различи�
 Объединённое ядро читает один элемент x, выполняет все три операции
 в регистрах и записывает только y. Это **operator fusion**.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-fusion.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-fusion.svg|Отдельные ядра передают ускорение и скорость через глобальную память, объединённое хранит промежуточные значения в регистрах]]
 
 *Отдельные ядра и объединённое ядро. NVIDIA,
 [Introduction to Warp](https://github.com/NVIDIA/accelerated-computing-hub/blob/c16da250e9aa79936b28a1976738877fc772f8a2/tutorials/warp/notebooks/images/intro-to-warp/warp-kernel-fusion.svg),
@@ -750,6 +865,8 @@ print("CUDA transfer executed:", target_device.type == "cuda")
 Здесь не запрашивается асинхронное копирование. Его нужно рассматривать
 вместе с очередями операций и временем жизни исходных буферов.
 
+<a id="gpu-streams"></a>
+
 ### Очереди CUDA и зависимости
 
 Стандартный способ организовать работу CUDA — **stream**, упорядоченная
@@ -768,7 +885,7 @@ print("CUDA transfer executed:", target_device.type == "cuda")
 передаёт этот буфер на CPU и записывает на диск. Расчёт следующих шагов
 симуляции может продолжаться, пока CPU получает предыдущее состояние.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-same-stream.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-same-stream.png|Сохранение состояния симуляции: D2H-копирование и следующий расчёт в одном stream выполняются последовательно]]
 
 *Передача результата и расчёт в одном stream. NVIDIA,
 [CUDA C++: Streams](https://github.com/NVIDIA/accelerated-computing-hub/blob/c16da250e9aa79936b28a1976738877fc772f8a2/tutorials/cuda-cpp/notebooks/02.03-Streams/02.03.01-Streams.ipynb),
@@ -779,7 +896,7 @@ print("CUDA transfer executed:", target_device.type == "cuda")
 последовательно: они принадлежат одному stream. Асинхронность относительно
 CPU сама по себе не даёт перекрытия на устройстве.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-two-streams.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-two-streams.png|Отдельные streams разрешают перекрыть D2H-передачу снимка с расчётом следующего состояния]]
 
 *Передача и расчёт в разных streams. NVIDIA,
 [Exercise: Async Copy and Streams](https://github.com/NVIDIA/accelerated-computing-hub/blob/c16da250e9aa79936b28a1976738877fc772f8a2/tutorials/cuda-cpp/notebooks/02.03-Streams/02.03.02-Exercise-Async-Copy.ipynb),
@@ -808,6 +925,8 @@ copy engines. Закреплённую память нельзя выделят�
 Поведение default stream также зависит от выбранного режима;
 старый legacy default stream может создавать неочевидные зависимости.
 [CUDA: Asynchronous Execution](https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/asynchronous-execution.html).
+
+<a id="gpu-double-buffer"></a>
 
 ### Три пакета и два буфера
 
@@ -845,7 +964,222 @@ CPU не задерживает подготовку; один copy engine мо�
 отладочной метрики, можно непреднамеренно убрать перекрытие.
 Этот случай разобран в [рекомендациях PyTorch по производительности](https://docs.pytorch.org/tutorials/recipes/recipes/amp_recipe.html#troubleshooting).
 
+<a id="gpu-copy-overlap"></a>
+
+### Pinned memory and a second stream: inspect the device timeline
+
+Vincent Moens profiles four combinations in
+[A guide on good usage of non_blocking and pin_memory() in PyTorch](https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html).
+Each run transfers a CPU tensor to the GPU and multiplies an existing GPU
+tensor, `t3_cuda`, by itself twice. The multiplication does not read the
+transferred input. The operations may therefore overlap without violating
+a data dependency. A kernel that consumes that input would have to wait
+for its copy.
+
+The four original traces below distinguish two questions: when the CPU can
+continue submitting work, and whether the copy and kernel actually occupy
+overlapping intervals on the GPU. Their horizontal scales differ, so the
+widths of bars in different screenshots are not a speedup comparison.
+The stream numbers identify queues in the author's run, not dedicated
+hardware copy engines. Open a figure to enlarge its labels.
+
+With pageable CPU memory and both operations on the same stream, the device
+copy finishes before the multiplication starts. A host API call can return
+before device work completes without removing that ordering.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/trace_streamed0_pinned0.png|PyTorch profiler: pageable input and one stream, with the H2D copy preceding the multiplication]]
+
+*Vincent Moens, [non_blocking and pin_memory()](https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html),
+[original PNG](https://github.com/pytorch/tutorials/blob/5672cd98a7671eda4d9122b10f8eec580f74d03e/_static/img/pinmem/trace_streamed0_pinned0.png),
+[BSD 3-Clause, full notice](/licenses/pytorch-tutorials-5672cd98-BSD-3-Clause.txt).
+Complete source screenshot, unchanged. The copy and GPU kernel are consecutive;
+these are the author's measurements, not a Bookvar benchmark.*
+
+Pinning the source removes the need for a pageable staging path, but does
+not change the stream's order. In the second trace the source is pinned
+and the operations still run consecutively.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/trace_streamed0_pinned1.png|PyTorch profiler: pinned input on the same stream, with no overlap between the H2D copy and multiplication]]
+
+*Vincent Moens, [non_blocking and pin_memory()](https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html),
+[original PNG](https://github.com/pytorch/tutorials/blob/5672cd98a7671eda4d9122b10f8eec580f74d03e/_static/img/pinmem/trace_streamed0_pinned1.png),
+[BSD 3-Clause, full notice](/licenses/pytorch-tutorials-5672cd98-BSD-3-Clause.txt).
+Complete source screenshot, unchanged. Pinned memory alone does not make
+operations in one stream concurrent.*
+
+In the third trace the copy uses a separate stream, but the CPU tensor is
+pageable. The author's run still shows no overlap. Such a transfer can
+require staging through page-locked memory and can block the host during
+preparation. Creating another queue does not by itself provide a suitable
+source buffer or guarantee concurrent device execution.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/trace_streamed1_pinned0.png|PyTorch profiler: pageable input with a separate copy stream, still without device overlap in the author's run]]
+
+*Vincent Moens, [non_blocking and pin_memory()](https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html),
+[original PNG](https://github.com/pytorch/tutorials/blob/5672cd98a7671eda4d9122b10f8eec580f74d03e/_static/img/pinmem/trace_streamed1_pinned0.png),
+[BSD 3-Clause, full notice](/licenses/pytorch-tutorials-5672cd98-BSD-3-Clause.txt).
+Complete source screenshot, unchanged. The visible intervals belong to
+this pageable-memory experiment; they are not a portable transfer-time bound.*
+
+The fourth run combines pinned CPU memory, a separate copy stream and
+non-blocking submission. On the two GPU rows, the H2D interval intersects
+the multiplication interval. The hardware in this experiment can execute
+both at once. A busy copy engine, shared bandwidth or other work could
+reduce or eliminate the overlap on another workload.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/trace_streamed1_pinned1.png|PyTorch profiler: pinned input on a separate stream, with overlapping H2D copy and independent multiplication intervals]]
+
+*Vincent Moens, [non_blocking and pin_memory()](https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html),
+[original PNG](https://github.com/pytorch/tutorials/blob/5672cd98a7671eda4d9122b10f8eec580f74d03e/_static/img/pinmem/trace_streamed1_pinned1.png),
+[BSD 3-Clause, full notice](/licenses/pytorch-tutorials-5672cd98-BSD-3-Clause.txt).
+Complete source screenshot, unchanged. Compare the copy and kernel rows
+within this screenshot, rather than bar lengths across the four figures.*
+
+The profiling function waits for completion before returning. A CPU
+event-synchronization bar therefore appears even in the overlapping run.
+That wait finishes outstanding device work; it does not mean the copy and
+kernel were serialized before the wait.
+
+Pinning also has a preparation cost. Calling
+`pageable.pin_memory().to("cuda", non_blocking=True)` first allocates pinned
+storage and copies the CPU values into it. For a one-off transfer, that
+extra work can exceed the transfer time saved. Preparing reusable pinned
+buffers or using a DataLoader's pinning path moves that cost elsewhere in
+the pipeline; it must still be included in end-to-end measurements.
+The tutorial measures pinning, transfer and their combination separately.
+Its numerical timings describe the author's machine.
+
+<a id="gpu-buffer-lifetimes"></a>
+
+### Data readiness, allocation lifetime and source mutation
+
+The [PyTorch CUDA streams documentation](https://docs.pytorch.org/docs/2.14/notes/cuda.html#cuda-streams)
+states:
+
+> Operations inside each stream are serialized in the order they are created.
+
+Across streams, a consumer needs an explicit dependency on its producer.
+The corrected example in the documentation fills `A` on the default stream
+and sums it on a side stream. The source statements are retained below
+inside a CUDA-availability guard; a final synchronization makes the example
+wait before exiting.
+
+<!-- checked-example: gpu-official-stream-lifetime -->
+```python
+import torch
+
+cuda_stream_example_executed = False
+if torch.cuda.is_available():
+    cuda = torch.device('cuda')
+    s = torch.cuda.Stream()
+    A = torch.empty((100, 100), device=cuda).normal_(0.0, 1.0)
+    s.wait_stream(torch.cuda.default_stream(cuda))
+    with torch.cuda.stream(s):
+        B = torch.sum(A)
+    A.record_stream(s)
+    s.synchronize()
+    cuda_stream_example_executed = True
+print("CUDA stream example executed:", cuda_stream_example_executed)
+```
+
+*PyTorch contributors,
+[CUDA semantics, corrected side-stream example](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/docs/source/notes/cuda.md#cuda-streams),
+[full source license](/licenses/pytorch-v2.14.1-LICENSE.txt).
+The wrapper and final wait are Bookvar additions. With no CUDA device,
+the example skips the device operations; that branch does not test a GPU.*
+
+`wait_stream` makes subsequently submitted work on `s` wait for work
+already submitted to the default stream. It enqueues a device dependency
+rather than blocking the CPU until `normal_` finishes. Consequently,
+`sum(A)` sees initialized values even if the CPU submits it early.
+A host read of `B` would also have to wait for the sum.
+
+`record_stream(s)` serves a different purpose. It informs PyTorch's caching
+allocator that `A`'s storage is in use on `s`, so that storage cannot be
+recycled for another tensor while the sum still reads it. It does not
+order the sum after initialization. Keeping a Python name alive, recording
+a stream and waiting for a producer address different parts of the
+storage and execution problem.
+
+The documentation also shows why a new `torch.empty` allocation can
+need a stream wait even when its old contents will not be read. The allocator
+may return storage previously used by pending operations on the allocation
+stream. Writing the new tensor on another stream without the dependency
+could collide with that earlier use.
+
+Pinned memory has another constraint: its contents can still be modified.
+Pinning prevents the operating system from paging out those pages; it does
+not prevent Python or another CPU thread from overwriting them. A
+non-blocking H2D copy may still be reading the source after the call returns.
+Likewise, after an asynchronous D2H copy, the CPU must wait before reading
+the destination. The tutorial's
+[other copy directions and mutation experiments](https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html#other-copy-directions-gpu-cpu-cpu-mps)
+demonstrate these failures.
+
+In the earlier 3 ms copy and 7 ms kernel example, the pinned host source is
+no longer needed at 3 ms, when its H2D copy completes. The device input is
+still needed until the kernel finishes at 10 ms. The two buffers therefore
+have different safe reuse points:
+
+| Storage | Last reader | Reuse after |
+|---|---|---|
+| Pinned CPU input | H2D copy | 3 ms |
+| GPU input | Kernel | 10 ms |
+
+The following CPU model makes an early overwrite visible. It divides each
+read into two halves so that an overwrite can occur between them. This is a
+teaching interleaving, not a statement about actual DMA transaction size
+or the granularity of GPU instructions.
+
+<!-- checked-example: gpu-copy-interleaving -->
+```python
+def read_interleaving(order):
+    host = [1, 2, 3, 4]
+    device = [None] * 4
+    seen = [None] * 4
+    for operation in order:
+        if operation == "copy_left":
+            device[:2] = host[:2]
+        elif operation == "copy_right":
+            device[2:] = host[2:]
+        elif operation == "read_left":
+            seen[:2] = device[:2]
+        elif operation == "read_right":
+            seen[2:] = device[2:]
+        elif operation == "reuse_host":
+            host[:] = [0] * 4
+        elif operation == "reuse_device":
+            device[:] = [0] * 4
+        else:
+            raise ValueError(operation)
+    return seen
+
+safe = ["copy_left", "copy_right", "reuse_host",
+        "read_left", "read_right", "reuse_device"]
+early_host = ["copy_left", "reuse_host", "copy_right",
+              "read_left", "read_right", "reuse_device"]
+early_device = ["copy_left", "copy_right", "read_left",
+                "reuse_device", "read_right", "reuse_host"]
+assert read_interleaving(safe) == [1, 2, 3, 4]
+assert read_interleaving(early_host) == [1, 2, 0, 0]
+assert read_interleaving(early_device) == [1, 2, 0, 0]
+```
+
+In `early_host`, the first half reaches the device before the overwrite;
+the second half copies the new zeros. In `early_device`, the copy finishes
+correctly, but the kernel's second read sees the overwritten device input.
+Both runs return a mixture of values. Waiting only for H2D completion
+prevents the first failure and still permits the second.
+
+A reusable input pipeline must keep the host source unchanged until its
+copy completes, delay the consumer until its device input is ready, and
+delay the next device write until the previous consumer finishes.
+Separate events can express these three dependencies without a global
+device synchronization at every step.
+
 <!-- hardware-source-completion: mapping:start -->
+<a id="gpu-hardware-mapping"></a>
+
 ## Matching an operation to the accelerator
 
 The CUDA examples above use several resources: arithmetic instructions,
@@ -879,6 +1213,8 @@ a TensorCore. This name describes a TPU core, not NVIDIA's Tensor Cores.
 The [Google architecture guide](https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm#tpu_chip)
 lists these units by TPU generation. The systolic example below follows the
 matrix path; it does not account for the complete layer.
+
+<a id="gpu-im2col"></a>
 
 ### Convolution as a matrix product: the cost of forming patches
 
@@ -922,6 +1258,8 @@ the matrix identity and storage count; it does not select the fastest method.
 *Based on Harvard, [Matrix operations in neural networks](https://github.com/harvard-edge/cs249r_book/blob/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/hw_acceleration/hw_acceleration.qmd#L1268),
 CC BY-NC-SA 4.0. Bookvar supplies the complete numerical example instead of
 reproducing the source's incomplete convolution pseudocode.*
+
+<a id="gpu-layout"></a>
 
 ### Logical dimensions and physical tensor layout
 
@@ -992,6 +1330,8 @@ the CPU format and the other the GPU format. Choose a layout for the selected
 operator and backend, including conversion costs between neighboring
 operators. The example checks addresses and values, not convolution speed.
 
+<a id="gpu-placement"></a>
+
 ### Placement, buffer lifetime and execution order
 
 Mapping a layer requires three related decisions. Placement chooses the
@@ -1028,6 +1368,8 @@ give a concrete example of how a compiled specialization is accepted or
 rejected. These are separate mechanisms, not a promise made by the word
 “compiler.”
 
+<a id="gpu-unified"></a>
+
 ### Unified Memory: a common address does not fix data residency
 
 CUDA Unified Memory allows supported host and device accesses to a common
@@ -1049,6 +1391,8 @@ execution. On a shared-DRAM SoC, there may be no host-to-device copy of that
 kind, but processors still share bandwidth and require correct visibility
 of their writes. “Unified” describes the programming or hardware arrangement,
 not a universal performance guarantee.
+
+<a id="gpu-soc"></a>
 
 ### Heterogeneous processors and unsupported operations
 
@@ -1087,6 +1431,8 @@ design. The hardware chapter identifies the interference; it does not certify
 an automotive safety architecture. For ordinary on-device deployment, the
 [operator and update checks](/textbook/deployment/edge-federated/#a-registered-operator-is-not-every-possible-kernel-configuration)
 likewise belong to the actual target build.
+
+<a id="gpu-fleet"></a>
 
 ### Package, node and fleet boundaries
 
@@ -1145,6 +1491,8 @@ TPU использует другой набор вычислителей и с�
 [Stanford CS336, Lecture 5](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf).
 
 <!-- systems-completion: systolic:start -->
+<a id="gpu-systolic"></a>
+
 ### A systolic array: keep weights, pass inputs and partial sums
 
 An array of multiply-accumulate units can reuse operands through direct links
@@ -1159,7 +1507,7 @@ unit. The colored blocks represent parameters, and the repeated boxes represent
 multiply-accumulators. Loading is a separate part of the operation: stationary
 weights still have to reach the array before they can be reused.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/hardware-completion-2026-10-29/tpu-load-weights.gif]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/hardware-completion-2026-10-29/tpu-load-weights.gif|Google TPU: анимация загрузки параметров в элементы матричного массива]]
 
 *Google Cloud, [TPU architecture — How a TPU works](https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm#how_a_tpu_works),
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
@@ -1173,7 +1521,7 @@ buffers and interconnects still consume energy. The animation's simplified
 memory comparison should not be read as “a real GPU fetches every scalar from
 DRAM” or “a TPU performs no memory accesses.”
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/hardware-completion-2026-10-29/tpu-dataflow.gif]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/hardware-completion-2026-10-29/tpu-dataflow.gif|Google TPU: активации проходят через загруженный массив, частичные суммы передаются дальше]]
 
 *Google Cloud, [TPU architecture](https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm),
 CC BY 4.0. Original dataflow animation, unchanged. Follow one input across the
@@ -1252,7 +1600,7 @@ physical array and local storage have finite sizes.
 
 Harvard's drawing emphasizes the surrounding buffers and accumulation path:
 
-![[Assets/Sources/Harvard ML Systems/vol1/hw_acceleration/844618e87a09fb654cbccb727a9bef56c88aabea.svg]]
+![[Assets/Sources/Harvard ML Systems/vol1/hw_acceleration/844618e87a09fb654cbccb727a9bef56c88aabea.svg|Harvard: систолический массив, данные движутся по строкам, частичные суммы — по столбцам к выходным буферам]]
 
 *Vijay Janapa Reddi et al.,
 [Hardware Acceleration, Systolic Array Dataflow](https://mlsysbook.ai/vol1/hw_acceleration/hw_acceleration.html#fig-systolic-array),
@@ -1261,6 +1609,8 @@ Complete original SVG. `Data` moves horizontally, `Partial Sums` downward;
 the lower buffers collect outputs. This drawing does not label individual PE
 weights, so their values are specified by the worked example rather than
 inferred from the arrows.*
+
+<a id="gpu-stationary"></a>
 
 ### Which operand stays local?
 

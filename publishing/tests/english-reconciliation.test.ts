@@ -18,15 +18,22 @@ const hash = (text: string) => createHash('sha256').update(text).digest('hex');
 function matter(text: string) {
   return parse(text.match(/^---\n([\s\S]*?)\n---/)![1]);
 }
+const llamaReceiptName = '2026-11-09-en-llama-architecture-additions.json';
+const llamaReceipt = JSON.parse(read('docs/audit/' + llamaReceiptName));
+const llamaCanonical = '00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md';
+const llamaEnglish = 'en/00 Textbook/07 Anatomy of a modern LLM/01 LLaMA as a baseline architecture.md';
+const llamaRoute = 'textbook/modern-llm/llama-architecture';
 
 describe('existing English textbook reconciliation', () => {
   it('reorders Constitutional AI in both locales without losing teaching material', () => {
     const name = '2026-10-30-posttraining-order-additions.json';
     const journal = JSON.parse(read('docs/audit/' + name));
     expect(journal.files).toHaveLength(7);
+    const atReview = (source: string) => beforeTopicConsolidation(read(source), source, root, name);
     for (const row of journal.files) {
-      const current = read(row.source);
-      const prior = beforeTopicConsolidation(current, row.source, root,
+      const live = read(row.source);
+      const current = atReview(row.source);
+      const prior = beforeTopicConsolidation(live, row.source, root,
         '2026-10-30-locale-navigation-additions.json');
       expect(hash(current), row.source).toBe(row.after_sha256);
       expect(hash(prior), row.source).toBe(row.before_sha256);
@@ -36,11 +43,11 @@ describe('existing English textbook reconciliation', () => {
         figures: text.match(/!\[\[[^\]]+\]\]/g) ?? [],
       });
       expect(preserved(current), row.source).toEqual(preserved(prior));
-      expect(() => beforeTopicConsolidation(current + '\nunknown edit\n',
+      expect(() => beforeTopicConsolidation(live + '\nunknown edit\n',
         row.source, root, '2026-10-30-locale-navigation-additions.json')).toThrow();
     }
-    expect(matter(read('en/00 Textbook/_index.md')).canonical_revision)
-      .toBe(hash(read('00 Учебник/_index.md')));
+    expect(matter(atReview('en/00 Textbook/_index.md')).canonical_revision)
+      .toBe(hash(atReview('00 Учебник/_index.md')));
     const cai = read('00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md');
     expect(cai).not.toContain('can be read before SFT');
     expect(cai).toContain('#bradley-terry|Reward modeling');
@@ -129,16 +136,53 @@ describe('existing English textbook reconciliation', () => {
     const pages = loadManifest(resolve(root, 'publishing/navigation.yml')).sections
       .find(section => section.id === 'textbook')!.pages.filter(page => page.sourceEn);
     expect(entries).toHaveLength(29);
-    expect(entries.map(row => row.path).sort()).toEqual(pages.map(page => page.sourceEn).sort());
+    const reviewedEditions = [...entries, { path: llamaEnglish, route: llamaRoute,
+      canonical: llamaCanonical, status: 'current', en_body_read: true, outstanding_expansions: [] }];
+    expect(reviewedEditions.map(row => row.path).sort()).toEqual(pages.map(page => page.sourceEn).sort());
     expect(entries.filter(row => row.status === 'current')).toHaveLength(29);
     expect(entries.filter(row => row.status === 'partial')).toHaveLength(0);
-    for (const row of entries) {
+    for (const row of reviewedEditions) {
       const page = pages.find(page => page.sourceEn === row.path)!;
       expect(row.canonical).toBe(page.source);
       expect(row.route).toBe(page.route);
       expect(row.en_body_read).toBe(true);
       expect(row.outstanding_expansions.length === 0).toBe(row.status === 'current');
     }
+  });
+
+  it('pins the later English LLaMA edition without altering the earlier inventory', () => {
+    const created = llamaReceipt.files.find((row: { source: string }) => row.source === llamaEnglish);
+    const english = read(llamaEnglish), canonical = read(llamaCanonical);
+    const reviewed = (text: string, path: string) => beforeTopicConsolidation(text, path, root, llamaReceiptName);
+    expect(created.created).toBe(true);
+    expect(hash(reviewed(english, llamaEnglish))).toBe(created.after_sha256);
+    expect(hash(reviewed(canonical, llamaCanonical))).toBe(llamaReceipt.review.sourceRevision);
+    expect(matter(english)).toMatchObject({
+      locale: 'en', translation_status: 'current', translation_of: llamaCanonical,
+      canonical_revision: hash(canonical),
+    });
+    const images = (text: string) => [...text.matchAll(/^!\[\[(?:02 Areas\/ML & DL\/)?([^\]|]+)/gm)]
+      .map(match => match[1]);
+    const original = images(reviewed(english, llamaEnglish));
+    expect(original).toHaveLength(16);
+    const current = images(english);
+    expect(current).toEqual(images(canonical));
+    const additions = [
+      'gpt2-2026-10-22/gpt2-output-projection-2.png',
+      'gpt2-2026-10-22/gpt2-input-embedding-positional-encoding-3.png',
+      'gpt-history-2026-11-09/tajima-figure1-ffn.svg',
+      'gpt-continuity-2026-11-10/min-figure2-demonstrations.png',
+      'llama-generations-2026-11-10/gao25-figure1-sft.png',
+      'llama-generations-2026-11-10/gao25-figure2-data-mix.png',
+      'gqa-2026-10-22/groups-speed.png',
+      'llama-scaling-2026-11-09/sardana24a-figure2b.png',
+    ].map(path => '00 Учебник/Assets/Figures/curated/' + path);
+    expect(current).toHaveLength(original.length + additions.length);
+    expect(current).toEqual(expect.arrayContaining(additions));
+    // The detailed comparisons now follow the decoder walkthrough in both
+    // languages. Keep the original inventory and enforce current order above.
+    expect(current.filter(path => !additions.includes(path)).sort()).toEqual([...original].sort());
+    for (const path of current) expect(existsSync(resolve(root, path)), path).toBe(true);
   });
 
   it('pins an actual canonical revision and verifies the exact reviewed EN files', () => {
@@ -152,13 +196,15 @@ describe('existing English textbook reconciliation', () => {
       // Restore their exact journaled deltas; unrecorded prose still fails.
       const reviewed = (value: string, source: string) => beforeTopicConsolidation(
         value, source, root, '2026-10-29-scheduler-lab-additions.json');
-      expect(matter(reviewed(text, row.path)).translation_reviewed).toBe('2026-10-29');
-      expect(matter(reviewed(text, row.path)).canonical_revision).toBe(row.canonical_sha256);
-      expect(hash(reviewed(text, row.path)), row.path).toBe(row.after_sha256);
+      const reviewedText = reviewed(text, row.path);
+      const reviewedMetadata = matter(reviewedText);
+      expect(reviewedMetadata.translation_reviewed).toBe('2026-10-29');
+      expect(reviewedMetadata.canonical_revision).toBe(row.canonical_sha256);
+      expect(hash(reviewedText), row.path).toBe(row.after_sha256);
       if (row.status === 'current')
         expect(hash(reviewed(read(row.canonical), row.canonical))).toBe(row.canonical_sha256);
     }
-  });
+  }, 15000);
 
   it('retains locally resolvable source figures in every existing EN chapter', () => {
     for (const row of entries) {

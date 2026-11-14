@@ -1,0 +1,82 @@
+{
+  "date": "2026-11-09",
+  "scope": "Extend the GPT-1 → GPT-2 → GPT-3 → LLaMA v1 reading route with the controlled label-mapping comparison of legacy GPT-3 and LLaMA. Keep T5 in the main curriculum; local only.",
+  "review": {
+    "sources": [
+      "Pan et al., ACL 2023, §§2–4, Appendix B and original Figures 1–2 (https://aclanthology.org/2023.findings-acl.527/)",
+      "ACL Anthology copyright policy (https://aclanthology.org/faq/copyright/)"
+    ],
+    "explanation": "Read the canonical LLaMA chapter and preserve the existing decoder, tokenizer, parameter and training-budget comparisons. The worked two-class example switches the digit-to-class assignment while keeping the test text and weights fixed. Random changes only demonstration targets; Abstract changes both the label symbols and prompt wording. Figure 1 is illustrative, not the minimal Abstract template from Appendix B.",
+    "figure": "The two complete figures are 360 dpi crops of the CC BY 4.0 ACL proceedings PDF, no redraw. Figure 2 compares GPT-3, LLaMA, and OPT under two different sweeps. The text uses approximate values read within the bottom GPT-3 and LLaMA panels, notes unequal evaluation sample counts, and does not attribute accuracy changes to individual layers or architectural components."
+  },
+  "verification": {
+    "localBuild": "2047 pages; 738 publication tests, 244 built-output tests, 2 reading-route receipt tests; topic index check passed; 0 broken internal routes, fragments or files.",
+    "examples": "Ran check_gpt1_examples.py, check_gpt2_examples.py, check_gpt3_examples.py, and check_llama_examples.py with the local CPU runtime. These are executable teaching examples, not reproductions of released-weight evaluations.",
+    "provenance": "Re-rendered both crops from the retained ACL proceedings PDF; byte-for-byte cmp and curated asset-registry coverage passed.",
+    "browser": "Followed the index → GPT-1 → GPT-2 → GPT-3 → LLaMA links at widths 375 and 1280. All 32 embedded figures on that route loaded and no KaTeX errors were observed. Inspected both new original figures; the six-panel chart fits the page and its 2.5× viewer preserves attribution. Verified the source-note round trip and the labelled English fallback route.",
+    "publication": "Local only; no commit, push or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "before_sha256": "7541815b4a7a998cf89b6ad52cc34cfaceb9c72dadeb4dec0f58f636cd01b63a",
+      "after_sha256": "0f93dfc70e7604bc12d5be58c9818c03960427653b4a0b613b0c1bd16b2a9b48",
+      "lines": 1352,
+      "changes": [
+        {
+          "old": "  - https://arxiv.org/abs/2002.05202v1",
+          "new": "  - https://arxiv.org/abs/2002.05202v1\n  - https://aclanthology.org/2023.findings-acl.527/"
+        },
+        {
+          "old": "указать сами демонстрации, их порядок и шаблон запроса. Это измерение\nGPT-3 на SST-2, а не оценка разброса у LLaMA.\n\n<a id=\"training-and-inference-budget\"></a>",
+          "new": "указать сами демонстрации, их порядок и шаблон запроса. Это измерение\nGPT-3 на SST-2, а не оценка разброса у LLaMA.\n\n<a id=\"gpt-llama-label-mapping\"></a>\n\n### Когда примеры задают новое соответствие меток\n\nЕсли модель правильно продолжила отзыв меткой `positive`, это ещё\nне показывает, что она извлекла правило из примеров. Слова\n`positive` и `negative` сами подсказывают, как назвать тональность.\nЧтобы отделить эту подсказку от информации в самих парах, Pan et al.\nсравнили три способа разметить демонстрации.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/pan-icl-figure1.png|Три режима Pan et al.: случайные словесные метки, согласованные цифровые метки и правильные словесные метки; последний столбец показывает эталон]]\n\n*Jane Pan, Tianyu Gao, Howard Chen и Danqi Chen,\n[What In-Context Learning “Learns” In-Context, рис. 1, с. 8298](https://aclanthology.org/2023.findings-acl.527.pdf#page=1),\nFindings of ACL 2023. Оригинальный рисунок,\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nВ нижней строке, **Gold**, положительный отзыв получает метку\n`positive`. В **Random** у каждого показанного отзыва метку\nвыбирают равновероятно из `positive` и `negative`. У отзыва,\nкоторый модель должна классифицировать, эталон остаётся прежним.\nТак можно узнать, справляется ли модель по виду текста и названиям\nклассов, когда размеченные пары не дают надёжного соответствия.\n\nВ **Abstract** соответствие внутри запроса, наоборот, соблюдается,\nно названия классов заменены цифрами. Пусть в одном запросе\n`0` стоит у положительных отзывов, а `1` у отрицательных.\nДля нового положительного отзыва правильный ответ — `0`.\nЕсли переставить цифры во всех демонстрациях, правильный ответ\nстанет `1`, хотя сам отзыв и веса модели не изменятся.\nВ опыте авторы выбирали новую перестановку меток для каждого\nтестового примера и убирали из шаблона слова вроде `Sentiment`.\nЭто уточнение к иллюстрации: в её средней строке название задачи\nоставлено, чтобы три запроса было проще сопоставить.\nВ этих опытах метки занимали по одному токену: для оценки\nдостаточно сравнить их логиты после запроса.\n[Методика: §2–3 и приложение B](https://aclanthology.org/2023.findings-acl.527.pdf#page=2).\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/pan-icl-figure2.png|Шесть графиков Pan et al. для GPT-3, LLaMA и OPT. Сверху меняется размер модели при 32 примерах, снизу число примеров при фиксированной модели. Линии сравнивают Random, Abstract и Gold]]\n\n*Pan et al., [рис. 2, с. 8300](https://aclanthology.org/2023.findings-acl.527.pdf#page=3).\nШесть оригинальных панелей с общей легендой,\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nВ нижнем ряду веса каждой модели фиксированы. На панели GPT-3\n175B переход от 8 к 32 примерам поднимает среднюю точность\n**Abstract** примерно с 45% до 60%; на панели LLaMA-65B —\nпримерно с 48% до 57%. У **Random** такой прибавки нет. Это\nсредние по 16 наборам классификации; вертикальные отрезки показывают\nразброс по трём шаблонам. У GPT-3 и LLaMA различается число\nоценённых примеров, поэтому здесь полезнее читать изменение\nвнутри панели, чем сравнивать высоты точек между семействами.\nРост **Abstract** показывает, что дополнительные пары помогают\nследовать заданному в запросе соответствию. Из графика нельзя\nвывести, какие слои его восстанавливают или какой архитектурный\nкомпонент объясняет разницу между моделями.\n\n<a id=\"training-and-inference-budget\"></a>"
+        },
+        {
+          "old": "- [Touvron et al., LLaMA v1](https://arxiv.org/abs/2302.13971v1): §1 — бюджет вывода; §2 — данные, архитектура и обучение; §3–4 — условия оценки и отдельное instruction fine-tuning.",
+          "new": "- [Touvron et al., LLaMA v1](https://arxiv.org/abs/2302.13971v1): §1 — бюджет вывода; §2 — данные, архитектура и обучение; §3–4 — условия оценки и отдельное instruction fine-tuning.\n- [[05 Источники/Papers/Pan et al. 2023 — What in-context learning learns|Pan et al., What In-Context Learning “Learns” In-Context]]: §2–4 и приложение B — проверка соответствия меток у GPT-3, LLaMA и OPT."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "5556fae0a38f26e3b729439780a9aeecc99303940e29bf504e63ef3c34bf636e",
+      "after_sha256": "16679d5f8ee2d683dda874c3c8ba86df417b0c197f1ba03cc129e466264c417b",
+      "lines": 24122,
+      "changes": [
+        {
+          "old": "  - id: \"curated-gpt-history-gulordava-figure1-ab-653bf6ed32a1\"",
+          "new": "  - {\"id\":\"curated-gpt-history-pan-figure1-d1c1293d0138\",\"asset\":\"00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/pan-icl-figure1.png\",\"title\":\"Three settings for testing in-context learning (Figure 1)\",\"author\":\"Jane Pan, Tianyu Gao, Howard Chen and Danqi Chen\",\"source_url\":\"https://aclanthology.org/2023.findings-acl.527/\",\"source_image_url\":\"https://aclanthology.org/2023.findings-acl.527.pdf#page=1\",\"source_asset\":\"05 Источники/Papers/Source PDFs/pan-acl2023-what-icl-learns.pdf\",\"source_asset_sha256\":\"441a84b4a4782a07c0a71c183632269b9157dcdb504ffed9766f10d2bc29cc6c\",\"source_page\":1,\"render_dpi\":360,\"render_page_size_px\":[2977,4210],\"crop_box_px\":[1545,1050,2603,2063],\"dimensions_px\":[1058,1013],\"sha256\":\"d1c1293d0138dfc5554b2fcb33930faffb61e4d03a79b02f40ab19759222235a\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence_url\":\"https://aclanthology.org/faq/copyright/\",\"modifications\":\"Cropped the complete original figure from the ACL proceedings PDF. Running text and the typeset caption are excluded; no redraw, rescaling or relabeling.\",\"derivation\":\"pdf-page-render-crop\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-09\",\"used_in\":[\"00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\"]}\n  - {\"id\":\"curated-gpt-history-pan-figure2-f08610e63e52\",\"asset\":\"00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/pan-icl-figure2.png\",\"title\":\"In-context accuracy by model size and demonstration count (Figure 2)\",\"author\":\"Jane Pan, Tianyu Gao, Howard Chen and Danqi Chen\",\"source_url\":\"https://aclanthology.org/2023.findings-acl.527/\",\"source_image_url\":\"https://aclanthology.org/2023.findings-acl.527.pdf#page=3\",\"source_asset\":\"05 Источники/Papers/Source PDFs/pan-acl2023-what-icl-learns.pdf\",\"source_asset_sha256\":\"441a84b4a4782a07c0a71c183632269b9157dcdb504ffed9766f10d2bc29cc6c\",\"source_page\":3,\"render_dpi\":360,\"render_page_size_px\":[2977,4210],\"crop_box_px\":[443,350,2540,1795],\"dimensions_px\":[2097,1445],\"sha256\":\"f08610e63e52eec5c66001f6fe3f25254fe82b849455beab0e4d3f526f8846c6\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence_url\":\"https://aclanthology.org/faq/copyright/\",\"modifications\":\"Cropped the complete original figure from the ACL proceedings PDF. Running text and the typeset caption are excluded; no redraw, rescaling or relabeling.\",\"derivation\":\"pdf-page-render-crop\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-09\",\"used_in\":[\"00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\"]}\n  - id: \"curated-gpt-history-gulordava-figure1-ab-653bf6ed32a1\""
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "3077dc04dcf49f2405c42b0c683fdf9530ec9b7639aa02cd88f0a55214aa39fb",
+      "after_sha256": "71bae458926f81fe24322f1077e55ad257b622ed25923d0a39a75a9ad8559f47",
+      "lines": 2572,
+      "changes": [
+        {
+          "old": "      - source: 05 Источники/Papers/Gulordava et al. 2018 — Tied language model architectures.md\n        route: sources/papers/tied-language-model-architectures\n    sidebar:",
+          "new": "      - source: 05 Источники/Papers/Gulordava et al. 2018 — Tied language model architectures.md\n        route: sources/papers/tied-language-model-architectures\n      - source: 05 Источники/Papers/Pan et al. 2023 — What in-context learning learns.md\n        route: sources/papers/what-in-context-learning-learns\n    sidebar:"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/_index.md",
+      "before_sha256": "3e96bf1859ea661f3b9eff2685b93a9170b8ff899b88fa80ad453f8daec34a79",
+      "after_sha256": "c9e33b2f513f3521cfdd8d5265bb72cb352df39e77624b9f36b2e57269b60b10",
+      "lines": 57,
+      "changes": [
+        {
+          "old": "- [[05 Источники/Papers/ContAccum|ContAccum — наборы кандидатов и банк представлений]]\n- [[05 Источники/Papers/LambdaRank and LambdaLoss|LambdaRank and LambdaLoss — nDCG pair weights and cutoff conventions]]",
+          "new": "- [[05 Источники/Papers/ContAccum|ContAccum — наборы кандидатов и банк представлений]]\n- [[05 Источники/Papers/Pan et al. 2023 — What in-context learning learns|What In-Context Learning “Learns” — выбор и подмена меток в демонстрациях]]\n- [[05 Источники/Papers/LambdaRank and LambdaLoss|LambdaRank and LambdaLoss — nDCG pair weights and cutoff conventions]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/Pan et al. 2023 — What in-context learning learns.md",
+      "created": true,
+      "after_sha256": "00095a9f320c221fe622a657c8065fc1d49b0dce8d8741a015876c06acfc74b5"
+    }
+  ]
+}

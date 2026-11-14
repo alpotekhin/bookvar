@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-13",
+  "scope": "Bilingual browser exercise that follows the same NLI example from GPT-1 to LLaMA, linked from the textbook and practice indexes.",
+  "review": {
+    "example": "Class softmax on (1,0,-1); two-factor text score with a tie at 0.625; the same prefix with zero, one or two demonstrations; a third factor on LLaMA. No neural model or tokenizer runs in the browser; the conditional probabilities are supplied.",
+    "sources": "Radford et al. §§3.2–3.3, GPT-2 report §§2–3, Brown et al. §2, Touvron et al. §2.1 and Min et al. Figure 2. The already registered ACL figure was reused with its source link and license. Its emitted bytes match the audited figure in both languages.",
+    "verification": "Local build: 2087 pages, zero broken internal links, 322 built-output checks, 94 site checks, 15 focused publisher checks and 602 source-evidence checks passed. Astro type check reported no errors or warnings. In Chromium at 375 and 1280 CSS px, both locales opened from the textbook index and handled all four stages, two-shot prompt construction, the exact tie and the LLaMA score. The calculation remains readable without JavaScript. No commit, push or deploy."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "94d5b3c5867c50b024a1e96fb0a15679b9d9a8b1f1e5fc571801bb95927da9c2",
+      "after_sha256": "9743c65a5ed59265d18e082849c6d2a1d19aabfc52f7094d6c5fdc011e570b74",
+      "changes": [
+        {
+          "old": "[[#gpt-decoder-route-data|Корпуса и объём обучения]] ·\n[[#gpt-decoder-route-evidence|Результаты опытов]]\n\n<a id=\"полный-маршрут\"></a>\n\n## Основной курс\n",
+          "new": "[[#gpt-decoder-route-data|Корпуса и объём обучения]] ·\n[[#gpt-decoder-route-evidence|Результаты опытов]]\n\n[[06 Практика/03a Оценить текстовую метку от GPT-1 до LLaMA|Проверить расчёт в браузере]]: выберите модель, добавьте примеры в запрос и найдите вероятность, при которой меняется выбранная метка.\n\n<a id=\"полный-маршрут\"></a>\n\n## Основной курс\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "73da0063e2e75c78ac67d39984f040d7b291b07378018b63c8a498e5450a8bfb",
+      "after_sha256": "4c16d799d8466554fa75401dd59f80898e75f9ab97257be7d0bcfd78c72c5cb3",
+      "changes": [
+        {
+          "old": "status: active\nlocale: en\ntranslation_status: current\ncanonical_revision: \"94d5b3c5867c50b024a1e96fb0a15679b9d9a8b1f1e5fc571801bb95927da9c2\"\ntranslation_reviewed: \"2026-11-13\"\ntranslation_of: \"00 Учебник/_index.md\"\nlast_updated: 2026-11-13\n",
+          "new": "status: active\nlocale: en\ntranslation_status: current\ncanonical_revision: \"9743c65a5ed59265d18e082849c6d2a1d19aabfc52f7094d6c5fdc011e570b74\"\ntranslation_reviewed: \"2026-11-13\"\ntranslation_of: \"00 Учебник/_index.md\"\nlast_updated: 2026-11-13\n"
+        },
+        {
+          "old": "[[#gpt-decoder-route-data|Corpora and training length]] ·\n[[#gpt-decoder-route-evidence|Experimental results]]\n\n<a id=\"curriculum\"></a>\n<a id=\"полный-маршрут\"></a>\n",
+          "new": "[[#gpt-decoder-route-data|Corpora and training length]] ·\n[[#gpt-decoder-route-evidence|Experimental results]]\n\n[[en/06 Practice/03a Score a label from GPT-1 to LLaMA|Try the calculation in your browser]]: switch models, add examples to the prompt, and find the probability at which a different label wins.\n\n<a id=\"curriculum\"></a>\n<a id=\"полный-маршрут\"></a>\n"
+        }
+      ]
+    },
+    {
+      "source": "06 Практика/_index.md",
+      "before_sha256": "8680417b70ae511c86b5c592e48ece4800f3a306feefb9eb46ce5e692cb40c5b",
+      "after_sha256": "f035258d383473d72404359bf61c763c2dc503eec5e87e8779f8e5376171d909",
+      "changes": [
+        {
+          "old": "| [[02 Areas/ML & DL/06 Практика/02 Реализовать causal self-attention|Причинное self-attention]] | Матрицы, softmax | Интерактивная проверка маски и реализация на PyTorch |\n| [[02 Areas/ML & DL/06 Практика/02a Проверить повороты RoPE|RoPE: позиции и повороты]] | Скалярное произведение, поворот | Общий сдвиг Q/K и сравнение частот Llama 3.1 в браузере |\n| [[02 Areas/ML & DL/06 Практика/03 Прочитать современный decoder в LitGPT|Прочитать декодер LitGPT]] | Transformer block | Трасса тензоров от embedding до logits |\n| [[02 Areas/ML & DL/06 Практика/04 Проследить RLVR pipeline в Open-R1|Проследить RLVR в Open-R1]] | SFT, policy gradient | Карта данных, генерации, verifier и обновления policy |\n| [[02 Areas/ML & DL/06 Практика/05 Измерить KV-cache и quantization|Измерить KV-cache и квантование]] | Inference basics | Таблица памяти, скорости и ошибки квантования |\n| [[02 Areas/ML & DL/06 Практика/06 Измерить CUDA без самообмана|Измерить CUDA без самообмана]] | Python, PyTorch, CUDA | Воспроизводимый benchmark и profiler trace |\n",
+          "new": "| [[02 Areas/ML & DL/06 Практика/02 Реализовать causal self-attention|Причинное self-attention]] | Матрицы, softmax | Интерактивная проверка маски и реализация на PyTorch |\n| [[02 Areas/ML & DL/06 Практика/02a Проверить повороты RoPE|RoPE: позиции и повороты]] | Скалярное произведение, поворот | Общий сдвиг Q/K и сравнение частот Llama 3.1 в браузере |\n| [[02 Areas/ML & DL/06 Практика/03 Прочитать современный decoder в LitGPT|Прочитать декодер LitGPT]] | Transformer block | Трасса тензоров от embedding до logits |\n| [[06 Практика/03a Оценить текстовую метку от GPT-1 до LLaMA|GPT-1 → LLaMA: от класса к текстовой метке]] | Softmax, условная вероятность | Одна пара предложений, четыре формата оценки и порог смены ответа |\n| [[02 Areas/ML & DL/06 Практика/04 Проследить RLVR pipeline в Open-R1|Проследить RLVR в Open-R1]] | SFT, policy gradient | Карта данных, генерации, verifier и обновления policy |\n| [[02 Areas/ML & DL/06 Практика/05 Измерить KV-cache и quantization|Измерить KV-cache и квантование]] | Inference basics | Таблица памяти, скорости и ошибки квантования |\n| [[02 Areas/ML & DL/06 Практика/06 Измерить CUDA без самообмана|Измерить CUDA без самообмана]] | Python, PyTorch, CUDA | Воспроизводимый benchmark и profiler trace |\n"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "267c58ee4c519a2dc8828d1bdd3279a7610e3c551ddf10f64cc1261586de9a44",
+      "after_sha256": "a313ad19411363312f43a03e81fa8454ac3c0ad9805da09b337a565bbfe918df",
+      "changes": [
+        {
+          "old": "      - source: 06 Практика/02a Проверить повороты RoPE.md\n        source_en: en/06 Practice/02a Explore RoPE rotations.md\n        route: practice/rope\n      - source: 06 Практика/01 Собрать micrograd и bigram LM.md\n        route: practice/01-sobrat-micrograd-i-bigram-lm\n      - source: 06 Практика/01a Обучить BPE на двух строках.md\n",
+          "new": "      - source: 06 Практика/02a Проверить повороты RoPE.md\n        source_en: en/06 Practice/02a Explore RoPE rotations.md\n        route: practice/rope\n      - source: 06 Практика/03a Оценить текстовую метку от GPT-1 до LLaMA.md\n        source_en: en/06 Practice/03a Score a label from GPT-1 to LLaMA.md\n        route: practice/gpt-entailment\n      - source: 06 Практика/01 Собрать micrograd и bigram LM.md\n        route: practice/01-sobrat-micrograd-i-bigram-lm\n      - source: 06 Практика/01a Обучить BPE на двух строках.md\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "173e7af227739875c49f7dd71086440b07a21663a9ac83d37a7e30297d5b48e2",
+      "after_sha256": "6da66312dd385a6c59fe9c24667d71a7ecd37966de7f8665e6b9e74d70d167f7",
+      "changes": [
+        {
+          "old": "      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md\n      - 00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\n      - en/00 Textbook/07 Anatomy of a modern LLM/01 LLaMA as a baseline architecture.md\n  - id: curated-gpt2-liu-translation-prefix-48b93d385b09\n    asset: 00 Учебник/Assets/Figures/curated/gpt-coqa-2026-11-11/liu22-figure3-translation-prefix.png\n    title: \"What Makes Good In-Context Examples for GPT-3?, Figure 3\"\n",
+          "new": "      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md\n      - 00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\n      - en/00 Textbook/07 Anatomy of a modern LLM/01 LLaMA as a baseline architecture.md\n      - 06 Практика/03a Оценить текстовую метку от GPT-1 до LLaMA.md\n      - en/06 Practice/03a Score a label from GPT-1 to LLaMA.md\n  - id: curated-gpt2-liu-translation-prefix-48b93d385b09\n    asset: 00 Учебник/Assets/Figures/curated/gpt-coqa-2026-11-11/liu22-figure3-translation-prefix.png\n    title: \"What Makes Good In-Context Examples for GPT-3?, Figure 3\"\n"
+        }
+      ]
+    }
+  ]
+}

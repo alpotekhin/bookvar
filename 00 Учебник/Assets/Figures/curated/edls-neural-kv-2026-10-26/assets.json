@@ -25,7 +25,10 @@
     "provenance_confirmation": "source-license-verified",
     "last_verified": "2026-10-26",
     "used_in": [
-      "06 Практика/14 Собрать минимальный inference engine.md"
+      "06 Практика/14 Собрать минимальный inference engine.md",
+      "00 Учебник/_index.md",
+      "en/00 Textbook/_index.md",
+      "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md"
     ]
   }
 ]

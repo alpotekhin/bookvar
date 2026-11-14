@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "kind": "peft-quantized-gradient-additions",
+  "review_date": "2026-11-05",
+  "files": [
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md",
+      "before_sha256": "5102f8b7db11f1ce749c7263d75bb124cbeb6ed217e5d6762e10b6f9d96d24b0",
+      "after_sha256": "627b6902dffea6940d41543f7d27d199d6f59dca3b301993abdaaa7d06eb3ab5",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29\nlast_verified: 2026-10-29\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\n"
+        },
+        {
+          "old": "  - label: Soft prompts и prompt tuning\n",
+          "new": "  - label: QLoRA — градиент через замороженную квантованную матрицу\n    label_en: QLoRA — gradient through a frozen quantized projection\n    anchor: qlora-frozen-gradient-example\n  - label: Soft prompts и prompt tuning\n"
+        },
+        {
+          "old": "Three parts of the original recipe address different memory costs.\n",
+          "new": "<a id=\"qlora-frozen-gradient-example\"></a>\n### One update through a frozen quantized projection\n\nTake a floating-point base $W_0=\\operatorname{diag}(1.1,1.9)$.\nFor this constructed example, use uniform signed four-bit values with\nscale $0.5$, rather than NF4. Rounding produces codes $(2,4)$ on the\ndiagonal, reconstructed as $\\widetilde W_0=\\operatorname{diag}(1,2)$.\nThe code below keeps those codes in ordinary integer tensors; it does\nnot pack two codes into a byte or implement a GPU quantization kernel.\n\nSet $x=(1,-1)^T$, $A=(1,2)$, $B=(0,0)^T$, $s=1$, and\n$\\mathcal L=\\tfrac12\\|h\\|^2$. The reconstructed base gives\n$h=(1,-2)^T$ and loss $2.5$. Since $Ax=-1$, the LoRA gradients are\n$\\nabla_B=(-1,2)^T$ and $\\nabla_A=(0,0)$. The input receives\n$\\nabla_x=\\widetilde W_0^Th=(1,-4)^T$. An earlier trainable layer can\nuse this input gradient even though the base codes and scale stay fixed.\n\n```python\nq_original = torch.diag(torch.tensor([1.1, 1.9], dtype=dtype))\nq_scale = torch.tensor(.5, dtype=dtype)  # fixed, not an optimizer parameter\nq_codes = torch.round(q_original / q_scale).clamp(-8, 7).to(torch.int8)\nq_codes_before = q_codes.clone()\nq_base = q_codes.to(dtype) * q_scale\nq_x = torch.tensor([1., -1.], dtype=dtype, requires_grad=True)\nq_a = nn.Parameter(torch.tensor([[1., 2.]], dtype=dtype))\nq_b = nn.Parameter(torch.zeros(2, 1, dtype=dtype))\nq_optimizer = torch.optim.SGD([q_a, q_b], lr=.1)\n\ndef quantized_adapter_output():\n    return q_base @ q_x + q_b @ (q_a @ q_x)\n\nq_initial = quantized_adapter_output()\ntorch.testing.assert_close(q_initial, torch.tensor([1., -2.], dtype=dtype))\nassert not torch.allclose(q_initial, q_original @ q_x)\nq_loss = .5 * q_initial.square().sum()\nassert math.isclose(q_loss.item(), 2.5)\nq_loss.backward()\ntorch.testing.assert_close(q_b.grad, torch.tensor([[-1.], [2.]], dtype=dtype))\ntorch.testing.assert_close(q_a.grad, torch.zeros_like(q_a))\ntorch.testing.assert_close(q_x.grad, torch.tensor([1., -4.], dtype=dtype))\nassert q_base.grad is None and q_scale.grad is None and q_codes.grad is None\n\nq_optimizer.step()\ntorch.testing.assert_close(\n    quantized_adapter_output(), torch.tensor([.9, -1.8], dtype=dtype)\n)\nassert math.isclose((.5 * quantized_adapter_output().square().sum()).item(), 2.025)\ntorch.testing.assert_close(q_codes, q_codes_before)\n```\n\nOnly $B$ changes on this first step; neither the rounding operation nor\nthe integer codes need a weight gradient. Zero-initialized $B$ preserves\nthe **reconstructed** base output, not the output of the original\nfloating-point weights. This example follows the frozen-base gradient\npath in [QLoRA, §3, equations 5–6](https://arxiv.org/html/2305.14314v1#S3);\nits uniform codebook and FP64 arithmetic are chosen for inspection,\nnot to reproduce NF4, double quantization or BF16 rounding.\n\n### NF4, double quantization and paged optimizers\n\nThree parts of the original recipe address different memory costs.\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "64e76cb93d7b108597095c52b11b8f3037420505179d6a21af9f8071ebb5b058",
+      "after_sha256": "d7519a84850d7e69e8221a059415a902573c609d007de5d2490953f144078180",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts#soft-prompts|Soft prompts и prompt tuning]]\n",
+          "new": "  - [[00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts#qlora-frozen-gradient-example|QLoRA — градиент через замороженную квантованную матрицу]]\n  - [[00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts#soft-prompts|Soft prompts и prompt tuning]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "8dfb4660c3f3dfb148f23ce9d89ec213d4f89dc81c0e05cb33d9575194efc7a1",
+      "after_sha256": "f5b4e6af637cf6c79e4623b5ab7d4e945589c1c56dd655a2aab5cd3edc629b4c",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts#soft-prompts|Soft prompts and prompt tuning]]\n",
+          "new": "  - [[00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts#qlora-frozen-gradient-example|QLoRA — gradient through a frozen quantized projection]]\n  - [[00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts#soft-prompts|Soft prompts and prompt tuning]]\n"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tools/check_peft_examples.py",
+      "before_sha256": "ebc2be0128e102e37e3cf68f5bac8d571b4652e7c079da8aa86945f7bbd4fd4b",
+      "after_sha256": "b503a763875f591826e870af12753cf37cdbfab4542a702135fad7a57d93665e",
+      "changes": [
+        {
+          "old": "    assert len(blocks) == 18, \"execute every published Python fence\"\n",
+          "new": "    assert len(blocks) == 19, \"execute every published Python fence\"\n"
+        },
+        {
+          "old": "    assert math.isclose(ns[\"failed_loss\"].item(), math.log(2))\n",
+          "new": "    # The published quantized-base example updates only its LoRA factors.\n    torch.testing.assert_close(ns[\"q_codes\"], ns[\"q_codes_before\"])\n    torch.testing.assert_close(ns[\"q_base\"], torch.diag(torch.tensor([1., 2.], dtype=dtype)))\n    torch.testing.assert_close(ns[\"q_x\"].grad, ns[\"q_base\"].T @ ns[\"q_initial\"].detach())\n    original_gradient = ns[\"q_original\"].T @ (ns[\"q_original\"] @ ns[\"q_x\"].detach())\n    assert not torch.allclose(ns[\"q_x\"].grad, original_gradient)\n    assert not ns[\"q_base\"].requires_grad and not ns[\"q_scale\"].requires_grad\n    assert ns[\"q_codes\"].dtype == torch.int8\n    assert {id(p) for group in ns[\"q_optimizer\"].param_groups for p in group[\"params\"]} == {\n        id(ns[\"q_a\"]), id(ns[\"q_b\"])\n    }\n\n    assert math.isclose(ns[\"failed_loss\"].item(), math.log(2))\n"
+        },
+        {
+          "old": "        \"saved_scale_gb_65b\": ns[\"saved_gb_65b\"],\n",
+          "new": "        \"quantized_base\": {\n            \"codes\": ns[\"q_codes\"].tolist(),\n            \"initial_output\": ns[\"q_initial\"].detach().tolist(),\n            \"input_gradient\": ns[\"q_x\"].grad.tolist(),\n            \"initial_loss\": ns[\"q_loss\"].item(),\n            \"updated_loss\": (.5 * ns[\"quantized_adapter_output\"]().square().sum()).item(),\n            \"codes_unchanged\": torch.equal(ns[\"q_codes\"], ns[\"q_codes_before\"]),\n            \"scope\": \"Uniform signed-four-bit codes stored in int8; FP64 computation, not NF4 or a packed GPU kernel\",\n        },\n        \"saved_scale_gb_65b\": ns[\"saved_gb_65b\"],\n"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "status": "verified-local-delta",
+    "scope": "Whole English-native PEFT owner read and one worked quantized-base gradient added. All preceding source excerpts/explanations,18 prior programs,17 preceding subject entries and10 original figures retained. Both locale routes share the same original English chapter; no translation.",
+    "chapter": {
+      "source": "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md",
+      "inputSha256": "5102f8b7db11f1ce749c7263d75bb124cbeb6ed217e5d6762e10b6f9d96d24b0",
+      "inputLines": 1569,
+      "finalSha256": "627b6902dffea6940d41543f7d27d199d6f59dca3b301993abdaaa7d06eb3ab5",
+      "finalLines": 1632,
+      "inputRead": [
+        "1-240",
+        "241-480",
+        "481-720",
+        "721-960",
+        "961-1200",
+        "1201-1440",
+        "1441-1569"
+      ],
+      "finalRead": [
+        "1-400",
+        "401-800",
+        "801-1200",
+        "1201-1632"
+      ]
+    },
+    "explanation": {
+      "finding": "The existing QLoRA explanation gave the fixed-base gradient formula but no numeric update through a reconstructed quantized matrix. Added original floating weights, integer codes, dequantized values, forward/loss, adapter/input gradients and one SGD update. Separately states that zero B preserves the reconstructed function rather than the original floating-point base.",
+      "example": "W0=diag(1.1,1.9), scale0.5, codes diag(2,4), reconstructed diag(1,2), x=(1,-1), A=(1,2), B=0. Forward(1,-2), loss2.5, dB=(-1,2), dA=0, dx=(1,-4), SGD0.1 gives output(.9,-1.8), loss2.025. Base codes unchanged.",
+      "source": "Freshly read complete QLoRA sections2 and3, including block-wise quantization, LoRA, memory discussion, NF4, double quantization, paged optimizers and equations5-6: https://arxiv.org/html/2305.14314v1#S3 . The published toy uses uniform codes in int8 and FP64, not packed NF4/BF16.",
+      "sourceComparisonReuse": "Input hash5102f8b7 matches the accepted retention revision exactly. Reuse only unchanged mechanism/source comparisons recorded in 2026-10-29-peft-verification.json, 2026-10-29-small-data-finetuning-verification.json and 2026-10-29-retention-verification.json. Their complete mechanism maps were reread; no new whole-course/paper reread claimed.",
+      "scopeLimit": "The pinned HF quantization guide request returned cache miss; no comparison to that new page is claimed. Existing pinned PEFT excerpts and asset/source-license hashes still pass their tests.",
+      "style": "Whole original and final English explanations read. No-ai-slop applied with academic qualifications: retained source quotes, mathematical derivations, examples and caveats; no synthetic summary substituted. New prose gives actual values and intermediate results. No subsequent chapter edits."
+    },
+    "examples": {
+      "exit": 0,
+      "python": "3.13",
+      "torch": "2.14.1",
+      "publishedPrograms": 19,
+      "executedChapterSha256": "627b6902dffea6940d41543f7d27d199d6f59dca3b301993abdaaa7d06eb3ab5",
+      "log": "/var/tmp/bookvar-peft-qlora-examples-20261105.log",
+      "gradientMaxError": 4.440892098500626e-16,
+      "scope": "All19 actual chapter programs execute in order. Verifier independently checks LoRA matrix derivatives, wrong/double merge and factor-sum controls, zero prompt, adapter/KV/memory arithmetic, small-data update/reset/transfer/selection examples, replay/L2-SP/EWC and Fisher estimates. New checks compare quantized input gradient to reconstructed-base multiplication, distinguish the original-float gradient and inspect optimizer parameter identities.",
+      "limits": "Constructed CPU algebra/autograd only. No model download, full-model fine-tuning, GPU NF4/QLoRA/BF16 kernel, paging, GLUE study reproduction, serving performance or benchmark."
+    },
+    "checks": {
+      "scoped": {
+        "exit": 0,
+        "files": 5,
+        "tests": 26,
+        "log": "/var/tmp/bookvar-peft-gradient-scoped-20261105.log",
+        "scope": "New5 tests plus original PEFT/small-data/retention and preceding network/fault tests. Exact historical hashes not changed."
+      },
+      "build": {
+        "exit": 0,
+        "pages": 2009,
+        "pagefindFiles": 2013,
+        "seconds": 32.17,
+        "log": "/var/tmp/bookvar-peft-gradient-build-20261105.log"
+      },
+      "html": {
+        "exit": 0,
+        "tests": 214,
+        "log": "/var/tmp/bookvar-peft-gradient-output-20261105.log"
+      },
+      "links": {
+        "exit": 0,
+        "brokenInternal": 0,
+        "log": "/var/tmp/bookvar-peft-gradient-links-20261105.log"
+      },
+      "size": {
+        "exit": 0,
+        "bytes": 856834802,
+        "files": 5626,
+        "limit": 1000000000,
+        "headroom": 143165198
+      },
+      "topicIndex": {
+        "exit": 0,
+        "topics": 153,
+        "termsInOwner": 18,
+        "log": "/var/tmp/bookvar-peft-gradient-topics-20261105.log"
+      },
+      "receipt": {
+        "exit": 0,
+        "files": 6,
+        "tests": 28,
+        "receiptTests": 2,
+        "currentHashMatches": 110,
+        "unreadOwnersInRoutePass": 43,
+        "log": "/var/tmp/bookvar-peft-gradient-receipts-final-20261105.log",
+        "scope": "Current combined preservation/source and whole-owner receipt suite; overlaps the earlier26 tests."
+      },
+      "scopedWhitespace": {
+        "exit": 0
+      }
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-05-peft-reader",
+      "desktop": "Default1280x720, document1280/1280. All10 originals and captions personally inspected in viewer: adapters, LoRA GIF frame, merge, QLoRA, prompt/prefix, ASAPP, Mosbach and two L2-SP objects. All17 display equations and5 tables fit632/632, zero KaTeX errors. New worked example read inline. GIF bytes preserved; no fresh complete-animation sequence claim.",
+      "mobile": "375x812, document375/375, content343px. All10 figures load at native proportions. Twelve display equations and2 tables fit; five displays (389/381/399/375/355px) and3 tables(412/513/449px) have overflow-x:auto within343px containers, not page overflow. New inline calculation inspected. QLoRA source enlarged2.5x with measured positions282,3.5,496 and538.5, client375/scroll914; all three columns and complete arrow legend readable. No exact-edge, all-ten mobile enlarged or formula-keyboard-accessibility claim. Temporary viewport reset.",
+      "navigation": "Actual RU and EN subject links both reach #qlora-frozen-gradient-example uniquely. EN route shows the same source-native English,19 programs and no unavailable-edition fallback. Actual EN Next opens preference-data with correct h1. Russian interface restored and next owner left open.",
+      "recovery": "A stale cross-turn tab and fresh same-browser tab handle failed. Documented troubleshooting read, CUA reset and the same browser3/tab6 successfully rebound. No unrelated browser/apps used."
+    },
+    "remaining": [
+      "After registering this whole-owner read:96 fresh plus14 reused=110 of153;43 unread. Whole reads are not accepted-chapter counters.",
+      "Next: preference data, reward modeling and remaining post-training; then synthetic-data, deployment, retrieval, multimodal, agents and recommender owners.",
+      "Thematic course completeness, existing figure/rights gaps, public-checkout/Pages-base checks and authorized dev/Pages release remain open. No staging, commit, push or deployment in this pass."
+    ]
+  }
+}

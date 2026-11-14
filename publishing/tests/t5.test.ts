@@ -70,8 +70,8 @@ describe('T5 chapter contracts',()=>{
   });
   it('keeps previous/next links and old fragment aliases',()=>{
     const fm=YAML.parse(body.split('---')[1]);
-    expect(fm.previous).toContain('06 GPT-3');
-    expect(fm.next).toContain('01 LLaMA');
+    expect(fm.previous).toContain('03 BERT');
+    expect(fm.next).toContain('04 GPT-1');
     const footer=body.slice(body.lastIndexOf('**Назад:**'));
     expect(footer).toContain(fm.previous.slice(0,-2)+'|');
     expect(footer).toContain(fm.next.slice(0,-2)+'|');

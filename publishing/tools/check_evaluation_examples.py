@@ -21,7 +21,7 @@ from sklearn.preprocessing import StandardScaler
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/01 Классическое машинное обучение/05 Оценивание, кросс-валидация и выбор порога.md"
 blocks = re.findall(r"```python\n(.*?)```", CHAPTER.read_text(), re.S)
-assert len(blocks) == 2
+assert len(blocks) == 3
 scope = {}
 exec(compile(blocks[0], str(CHAPTER) + ":block1", "exec"), scope)
 y, scores = scope["y"], scope["scores"]
@@ -158,6 +158,36 @@ assert r2_score(truth,np.full(3,2))==0
 assert r2_score(truth,np.full(3,4))<0
 assert mean_squared_error(truth*1000,pred*1000)==3_000_000
 np.testing.assert_allclose([mean_absolute_error(truth*1000,pred*1000),root_mean_squared_error(truth*1000,pred*1000)],[1000,1000*np.sqrt(3)])
+# Execute the published target-transformation example and verify both objectives.
+exec(compile(blocks[2], str(CHAPTER) + ":block3", "exec"), scope)
+raw_constant, log_constant = scope["raw_constant"], scope["log_constant"]
+positive_y = scope["positive_y"]
+np.testing.assert_allclose(log_constant.regressor_.intercept_, np.log(3))
+raw_log_loss = np.mean((np.log(positive_y) - np.log(5)) ** 2)
+optimal_log_loss = np.mean((np.log(positive_y) - np.log(3)) ** 2)
+assert optimal_log_loss < raw_log_loss
+np.testing.assert_allclose(
+    log_constant.predict(scope["constant_X"]),
+    np.exp(log_constant.regressor_.predict(scope["constant_X"])),
+)
+# With a learned transformer, every clone fits only its own training targets.
+from sklearn.compose import TransformedTargetRegressor
+from sklearn.preprocessing import QuantileTransformer
+target_X = np.arange(12).reshape(-1, 1)
+target_y = np.arange(1., 13.) ** 2
+for train, test in KFold(3).split(target_X):
+    transformed = TransformedTargetRegressor(
+        regressor=scope["LinearRegression"](),
+        transformer=QuantileTransformer(n_quantiles=len(train), output_distribution="normal"),
+    ).fit(target_X[train], target_y[train])
+    np.testing.assert_allclose(transformed.transformer_.quantiles_.ravel(), np.sort(target_y[train]))
+    assert not set(transformed.transformer_.quantiles_.ravel()) & set(target_y[test])
+    np.testing.assert_allclose(
+        transformed.predict(target_X[test]),
+        transformed.transformer_.inverse_transform(
+            transformed.regressor_.predict(target_X[test]).reshape(-1, 1)
+        ).ravel(),
+    )
 # The preserved patient-bootstrap example: independent unit and estimand differ.
 visits=[np.array([1,0]),np.array([-1]),np.array([1,0,0])]
 patient_means=np.array([v.mean() for v in visits])
@@ -169,7 +199,8 @@ np.testing.assert_allclose(np.concatenate([visits[i] for i in draw]).mean(),3/7)
 replicas=[patient_means[list(ix)].mean() for ix in product(range(3),repeat=3)]
 np.testing.assert_allclose(np.quantile(replicas,[.025,.975],method="inverted_cdf"),[-1,.5])
 np.testing.assert_allclose(np.quantile(replicas,[.025,.975]),[-.7111111111111111,.46388888888888874])
-print("PASS: 2 published blocks; classification, ranking, calibration, costs, CV;"
+print("PASS: 3 published blocks; classification, ranking, calibration, costs, CV;"
       " exact temporal gap table; original gallery split indices; grouped stratification limit;"
-      " pooled AUC pairs and scale shift; all 120 preprocessing fits; regression and 27 paired cluster-bootstrap replicas")
+      " pooled AUC pairs and scale shift; all 120 preprocessing fits; original/log target objectives;"
+      " learned target-transform isolation; regression and 27 paired cluster-bootstrap replicas")
 print(f"Chapter SHA-256: {hashlib.sha256(CHAPTER.read_bytes()).hexdigest()}")

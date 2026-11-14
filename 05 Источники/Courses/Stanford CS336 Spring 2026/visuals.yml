@@ -412,8 +412,8 @@
       "checked_at": "2026-09-04",
       "source_parent_sha256": "a7d47339eab889679010e926db8beb79f475a0596243f19bb15dbd69223f67e6",
       "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/roller-flops.png",
-      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
-      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=37:rendering=1; question reviewed: How does roller flops support the lecture section “The industrialization of language models”?"
+      "reason": "Stephen Roller's social-post screenshot remains in the archive. Independent permission to republish it was not verified; the chapter embeds a different licensed original, Nawrot et al. Figure 12.",
+      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=37:rendering=1; original post https://x.com/stephenroller/status/1579993017234382849."
     },
     {
       "id": "lecture-01-visual-figure-step-39-rendering-1",
@@ -434,9 +434,9 @@
           "source_location": "Lectures/repository/var/traces/lecture_01.json#step=39:rendering=1"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "scaling-metric-emergence",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -448,15 +448,16 @@
       "extractor_sha256": "1e8d049b33e599e0e23c7edd26601f70120aff2899e13258b4dd3b852092c48f",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "edtrace 0.1.15 archived image rendering",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/pretraining/scaling-laws/#scaling-metric-emergence",
+      "desktop_evidence": "Source Figure 2 and local PNG inspected; final browser verification is recorded with the chapter revision.",
+      "narrow_evidence": "Full original retained for the mobile viewer; final pan and label checks are recorded with the chapter revision.",
+      "reviewer": "Bookvar editorial review",
+      "checked_at": "2026-11-09",
       "source_parent_sha256": "a7d47339eab889679010e926db8beb79f475a0596243f19bb15dbd69223f67e6",
       "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/wei-emergence-plot.png",
-      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
-      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=39:rendering=1; question reviewed: How does wei emergence plot support the lecture section “The industrialization of language models”?"
+      "local_file": "00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/wei-emergence-figure2.png",
+      "transformation": "Byte-exact step-39 PNG copy, SHA-256 d905d44f12c6861f6e1febd0af3e7ab446f1ccf1531a1702c43dd4b977dd453b; figure rights verified separately from Wei et al. arXiv v2, CC BY 4.0.",
+      "caption": "Eight tasks, each point a separate model; the horizontal axis is training FLOPs and dashed lines mark chance performance."
     },
     {
       "id": "lecture-01-visual-figure-step-50-rendering-1",
@@ -690,9 +691,9 @@
           "source_location": "Lectures/repository/var/traces/lecture_01.json#step=241:rendering=1"
         }
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "destination_anchor": "prefill-decode-cache-states",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -704,15 +705,16 @@
       "extractor_sha256": "1e8d049b33e599e0e23c7edd26601f70120aff2899e13258b4dd3b852092c48f",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "edtrace 0.1.15 archived image rendering",
-      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
-      "desktop_evidence": "pending editorial integration; source archive inspected",
-      "narrow_evidence": "pending editorial integration; source archive inspected",
-      "reviewer": "Codex source audit",
-      "checked_at": "2026-09-04",
+      "rendered_route": "/textbook/inference/kv-cache-batching-pagedattention/#prefill-decode-cache-states",
+      "desktop_evidence": "Exact upstream PNG and placement inspected; browser evidence pinned in the chapter journal.",
+      "narrow_evidence": "Original PNG remains unmodified for expansion in the viewer; narrow evidence pinned in the chapter journal.",
+      "reviewer": "Bookvar editorial review",
+      "checked_at": "2026-11-09",
       "source_parent_sha256": "a7d47339eab889679010e926db8beb79f475a0596243f19bb15dbd69223f67e6",
       "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/prefill-decode.png",
-      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
-      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=241:rendering=1; question reviewed: How does prefill decode support the lecture section “Inference”?"
+      "local_file": "00 Учебник/Assets/Figures/curated/attention-review-2026-09/prefill-decode.png",
+      "transformation": "Chapter retains Li et al., arXiv:2407.12391v1 Figure 2, exact 899×344 original PNG, CC BY 4.0, SHA-256 947a70b7cef4d1875d295692731cd4216f189daaf5ac7b586106fc542626e3a6. The 647×248 course version is kept in the archive, not embedded a second time.",
+      "caption": "Prompt prefill emits a; each subsequent call appends K/V for its input and selects the next token. The final selected EOS does not require another call."
     },
     {
       "id": "lecture-01-visual-figure-step-276-rendering-1",
@@ -754,7 +756,7 @@
       "checked_at": "2026-09-04",
       "source_parent_sha256": "a7d47339eab889679010e926db8beb79f475a0596243f19bb15dbd69223f67e6",
       "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/chinchilla-isoflop.png",
-      "reason": "Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.",
+      "reason": "This is a reproduction of Hoffmann et al. Figure 3. The chapter links the exact original; no downstream reuse grant was verified for that image. Czech et al. Figures 3 and 4 are different illustrations under CC BY 4.0.",
       "evidence": "Lectures/repository/var/traces/lecture_01.json#step=276:rendering=1; question reviewed: How does chinchilla isoflop support the lecture section “Assignment 2 (systems)”?"
     },
     {
@@ -1749,25 +1751,23 @@
           "source_location": "Lectures/repository/lecture_03.pdf#page=50:semantic=hyperparameter-evidence"
         }
       ],
-      "disposition": "integrated",
-      "destination": "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
-      "destination_anchor": "decoder-hyperparameter-evidence",
+      "disposition": "source-only",
+      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+      "destination_anchor": "lecture-03-architectures-hyperparameters",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
-      "rights_status": "permission-recorded",
+      "rights_status": "link-only",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
-      "rights_scope": "Local educational preservation and later attributed textbook reuse",
-      "license_identifier": "User permission record (not a license)",
-      "license_url": "https://cs336.stanford.edu/",
-      "rights_evidence": "User confirmed open educational reuse on 2026-09-04 for local educational preservation and later attributed textbook reuse; this is a permission record, not a named license. Explicit repository license files are preserved.",
+      "rights_scope": "Link to the original lecture; local historical renderings retained. Third-party plots not republished.",
+      "rights_evidence": "The composite slides contain third-party plots. A source license covering the historical copies was not independently confirmed.",
       "parent_sha256": "20a953541b41a099bc69b8d809139a4ccdb2aefedaa13e50c766245fe4b5167e",
       "extractor_sha256": "1e8d049b33e599e0e23c7edd26601f70120aff2899e13258b4dd3b852092c48f",
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "Poppler pdftotext 26.04.0 semantic page review; pdfimages 26.04.0 raster evidence",
-      "rendered_route": "/textbook/modern-llm/decoder-block/",
-      "desktop_evidence": "All three complete evidence slides were inspected in sequence on the full route at 1440x1000; charts, legends, and captions render without clipping or missing assets.",
-      "narrow_evidence": "At 390x844 all three slides stay within the article column with scrollWidth equal to clientWidth; click-to-zoom exposes each native 1800x1014 slide.",
-      "reviewer": "Codex Task 1 review remediation",
-      "checked_at": "2026-09-06",
+      "rendered_route": "/sources/courses/stanford-cs336-spring-2026/",
+      "desktop_evidence": "The course hub retains the original Lecture 3 link. The composite slides are no longer embedded in the decoder chapter.",
+      "narrow_evidence": "The decoder chapter now uses licensed paper figures. These composite slides remain available through the original course link.",
+      "reviewer": "Bookvar source-figure review",
+      "checked_at": "2026-11-10",
       "raster_evidence": [
         {
           "page": 37,
@@ -1836,9 +1836,8 @@
           "height": 504
         }
       ],
-      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architecture/ffn-ratio-evidence-slide.png",
-      "transformation": "Three complete Stanford CS336 Lecture 3 slides rendered from pinned PDF pages 40, 46, and 50 at 180 DPI; no semantic crop or redraw.",
-      "caption": "Source slides preserve the empirical evidence for feed-forward ratio, depth-width aspect ratio, and weight-decay interactions."
+      "reason": "Keep the exact course sequence in the source archive. The decoder chapter retains its explanation and source links, with MobileLLM and Han et al. figures replacing the three composite slide renderings.",
+      "evidence": "Lecture 3, pp. 40, 46 and 50; the historical renderings remain tracked in publishing/tools/decoder-block-figures.json and the asset registry."
     },
     {
       "id": "lecture-03-visual-softmax-stability-failures",
@@ -3166,7 +3165,7 @@
           "height": 50
         }
       ],
-      "reason": "The mechanism is now integrated in the NTP training-objective chapter, with a separately licensed original Meta MTP figure and an explicit contrast to DeepSeek. This exact composite DeepSeek/EAGLE slide is preserved in the source archive, not claimed as a reused visual.",
+      "reason": "The full composite slide stays in the course archive. Its left-hand DeepSeek Figure 3 is embedded in the NTP chapter from the MIT-licensed author repository PDF, with original labels; Meta Figure 1 remains the separate comparison for independent prediction heads.",
       "evidence": "Lectures/repository/lecture_04.pdf#page=59:semantic=deepseek-mtp; question reviewed: Where does the auxiliary next-next-token prediction module attach during DeepSeek-V3 training?"
     },
     {
@@ -16442,5 +16441,5 @@
       "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#pages=15-18"
     }
   ],
-  "editorial_overlay_sha256": "c84c0d698fec824fe5e216488b5ae2612200c4b417cb90709c693d5771b405c3"
+  "editorial_overlay_sha256": "3ea5ee46d94c4807fa7e2538082edbe0e20774bd3599436e93de580d104339b4"
 }

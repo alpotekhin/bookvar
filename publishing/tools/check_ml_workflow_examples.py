@@ -9,6 +9,7 @@ from __future__ import annotations
 import copy
 import hashlib
 from html.parser import HTMLParser
+from itertools import combinations
 import json
 import random
 import re
@@ -69,7 +70,7 @@ def main():
     old_examples = re.sub(r'<!-- BEGIN REVIEW: model export 2026-10-27 -->.*?'
                           r'<!-- END REVIEW: model export 2026-10-27 -->\n\n', '', old_examples, flags=re.S)
     blocks = re.findall(r'^```python\n(.*?)^```', old_examples, re.M | re.S)
-    assert len(blocks) == 7, len(blocks)
+    assert len(blocks) == 8, len(blocks)
     ns = {'__name__': '__chapter_examples__'}
     for index, block in enumerate(blocks, 1):
         exec(compile(block, f'{CHAPTER}:block-{index}', 'exec'), ns)
@@ -155,6 +156,26 @@ def main():
     rejects(weight, [{'tp': -1, 'inclusion_probability': 1}])
     np.testing.assert_allclose(ns['weighted_recall'], 1 / 3)
     assert ns['weighted'] == {'tp': 90., 'fn': 180., 'fp': 10., 'tn': 720.}
+
+    interval = ns['fn_interval95']
+    assert interval(900, 100, 20) == (118, 258)
+    np.testing.assert_allclose(ns['recall_interval'], (90 / 348, 90 / 208))
+    coverage_cases = 0
+    for population in range(1, 10):
+        for draws in range(1, population + 1):
+            bounds = [interval(population, draws, observed) for observed in range(draws + 1)]
+            samples = list(combinations(range(population), draws))
+            for total in range(population + 1):
+                # Enumerate the actual equally likely subsets independently of the PMF.
+                covered = 0
+                for sample in samples:
+                    lo, hi = bounds[sum(item < total for item in sample)]
+                    covered += lo <= total <= hi
+                assert 20 * covered >= 19 * len(samples)
+                coverage_cases += 1
+    for args in [(0, 1, 0), (5, 0, 0), (5, 6, 1), (5, 2, 3), (5, 2, True)]:
+        rejects(interval, *args)
+    counts['exact_interval_coverage'] = coverage_cases
 
     manifest = json.loads((SOURCES / 'references.json').read_text())
     assert len(manifest['files']) == 11

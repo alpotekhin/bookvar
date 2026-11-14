@@ -5,6 +5,7 @@ from contextlib import redirect_stdout
 from functools import partial
 import hashlib
 import io
+from itertools import product
 import json
 import math
 from pathlib import Path
@@ -244,21 +245,34 @@ def rng_and_selective():
                             "selective_fresh_graph_finite_difference_max_error": max(
                                 (a - b).abs().max().item()
                                 for a, b in zip(numerical, results["selective"][1:]))}
-    seen = {}
-    for respect in (False, True):
-        shapes = []
-        def pack(t):
-            shapes.append(tuple(t.shape))
-            return t.detach()
-        contexts = partial(create_selective_checkpoint_contexts, [torch.ops.aten.mm.default])
-        a, b = x.detach().requires_grad_(), w.detach().requires_grad_()
-        with torch.autograd.graph.saved_tensors_hooks(pack, lambda t: t):
-            out = checkpoint(region, a, b, use_reentrant=False, context_fn=contexts,
-                             respect_saved_tensors_hooks=respect)
-        out.sum().backward()
-        seen[str(respect)] = shapes
-    assert (3, 5) not in seen["False"] and (3, 5) in seen["True"], seen
+    hooks, output = execute("checkpoint-sac-hooks")
+    seen = {"False": hooks["without_hooks"][0], "True": hooks["with_hooks"][0]}
+    assert seen == {"False": [(3, 4), (4, 5)],
+                    "True": [(3, 4), (4, 5), (3, 5)]}
+    cases = 0
+    for rows, width, outputs in product((1, 3, 5), (2, 4), (2, 5, 7)):
+        torch.manual_seed(7)
+        input_value = torch.randn(rows, width, dtype=torch.float64)
+        weight = torch.randn(width, outputs, dtype=torch.float64)
+        preactivation = input_value @ weight
+        # Independent closed-form chain rule,not another checkpoint implementation.
+        expected = (preactivation.sin(), preactivation.cos() @ weight.T,
+                    input_value.T @ preactivation.cos())
+        for respect in (False, True):
+            records, result = hooks["cache_hook_run"](respect, (rows, width, outputs))
+            expected_shapes = [(rows, width), (width, outputs)]
+            if respect:
+                expected_shapes.append((rows, outputs))
+            assert records == (expected_shapes, expected_shapes)
+            for actual, reference in zip(result, expected):
+                tensor_close(actual, reference)
+            cases += 1
     RESULTS["selective_saved_tensor_hooks_shapes"] = seen
+    RESULTS["selective_hook_routing"] = {
+        "actual_chapter_program": "PASS", "shape_policy_cases": cases,
+        "outputs_and_both_analytic_gradients": "PASS", "stdout": output,
+        "actual_gpu_transfer": False,
+    }
 
 
 def semantics_and_cpu_context():
@@ -349,14 +363,15 @@ def chapter_integrity():
     assert '<a id="worked-configuration"></a>' in TEXT
     assert '<a id="offload--другая-граница"></a>' in TEXT
     assert TEXT.count(FENCE) % 2 == 0
-    assert TEXT.count(FENCE + "python") == 8
+    assert TEXT.count(FENCE + "python") == 9
     figures = re.findall(r"!\[\[(.*?)\]\]", TEXT)
     assert len(figures) == 5
     for link in figures:
-        path = ROOT / link.removeprefix("02 Areas/ML & DL/")
+        path = ROOT / link.split("|", 1)[0].removeprefix("02 Areas/ML & DL/")
         assert path.is_file(), path
     RESULTS["chapter_sha256"] = hashlib.sha256(TEXT.encode()).hexdigest()
     RESULTS["figure_count"] = len(figures)
+    RESULTS["python_programs"] = 9
 
 
 if __name__ == "__main__":

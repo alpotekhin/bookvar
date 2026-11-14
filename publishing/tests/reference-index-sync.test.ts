@@ -41,7 +41,9 @@ describe('reference index follows the chapter that owns each explanation', () =>
       const page = matter(read(source));
       const terms = referenceTerms(source, page.data.reference_terms,
         parseMarkdownHeadings(page.content, true));
-      expect(terms.map(term => term.anchor)).toEqual(anchors);
+      // These six migrated terms must remain; an owner can index further
+      // mechanisms as its full chapter receives a later reading-route review.
+      expect(terms.map(term => term.anchor)).toEqual(expect.arrayContaining(anchors));
       for (const [index, english] of [
         ['01 Справочник/_index.md', false], ['en/01 Reference/_index.md', true],
       ] as const) {
@@ -56,7 +58,7 @@ describe('reference index follows the chapter that owns each explanation', () =>
     }
   });
 
-  it('keeps the reviewed English Transformer body while advancing only its metadata pin', () => {
+  it('reconstructs the metadata-only Transformer revision and pins the current bilingual update', () => {
     const canonicalSource = '00 Учебник/05 Attention и Transformer/03 Полный Transformer.md';
     const englishSource = 'en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md';
     const journal = JSON.parse(read('docs/audit/' + journalName));
@@ -68,19 +70,23 @@ describe('reference index follows the chapter that owns each explanation', () =>
         '2026-10-30-bleu-reconciliation-additions.json');
       expect(matter(current).content).toBe(matter(previous).content);
     }
-    const english = matter(read(englishSource)).data;
-    expect(english.translation_status).toBe('current');
-    expect(english.canonical_revision).toBe(canonicalRow.after_sha256);
-    expect(english.translation_reviewed).toBe('2026-10-29');
+    const historicalEnglish = matter(
+      beforeTopicConsolidation(read(englishSource), englishSource, root, journalName)).data;
+    expect(historicalEnglish.translation_status).toBe('current');
+    expect(historicalEnglish.canonical_revision).toBe(canonicalRow.after_sha256);
+    expect(historicalEnglish.translation_reviewed).toBe('2026-10-29');
     expect(englishRow.changes.map((change: { old: string }) => change.old.split(':')[0]))
       .toEqual(['canonical_revision', 'last_updated']);
+    const currentEnglish = matter(read(englishSource)).data;
+    expect(currentEnglish.translation_status).toBe('current');
+    expect(currentEnglish.canonical_revision).toBe(hash(read(canonicalSource)));
   });
 
   it('reproduces both saved indices from current chapter metadata without writing', () => {
     const output = execFileSync(resolve(root, 'publishing/node_modules/.bin/tsx'),
       [resolve(root, 'publishing/tools/sync-topic-index.ts'), '--check'],
       { cwd: root, encoding: 'utf8', timeout: 20000 });
-    expect(JSON.parse(output)).toEqual({ mode: 'check', topics: 152,
+    expect(JSON.parse(output)).toEqual({ mode: 'check', topics: 153,
       indexes: ['01 Справочник/_index.md', 'en/01 Reference/_index.md'] });
   }, 25000);
 });

@@ -2169,35 +2169,19 @@ Full Pipeline Example
 Full Pipeline Example
 
 === PHYSICAL PAGE 117 OF 126 ===
-PSL solves 25+ long-horizon robotics tasks across four benchmark
-     environment suites with greater than 85% success rates
-NVIDIA CONFIDENTIAL. DO NOT DISTRIBUTE.
+[Withheld: excluded from reuse.]
 
 === PHYSICAL PAGE 118 OF 126 ===
+[Withheld: excluded from reuse.]
 
 === PHYSICAL PAGE 119 OF 126 ===
-Generalizes to Novel Object Geometries/Categories
-
-
-
-
-                                                    8x
+[Withheld: excluded from reuse.]
 
 === PHYSICAL PAGE 120 OF 126 ===
-Manipulate novel objects with unseen receptacles
-
-
-
-
-                                                   8x
+[Withheld: excluded from reuse.]
 
 === PHYSICAL PAGE 121 OF 126 ===
-Manipulate Deformable Objects (not observed in sim!)
-
-
-
-
-                                                       8x
+[Withheld: excluded from reuse.]
 
 === PHYSICAL PAGE 122 OF 126 ===
 122

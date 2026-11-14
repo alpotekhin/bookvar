@@ -1,0 +1,79 @@
+{
+  "date": "2026-11-09",
+  "scope": "Whole MLOps chapter reading; bounded additions on sample ratio mismatch and request-weighted error budgets, seven subject links per locale, and descriptions for three unchanged SRE figures. No deployment.",
+  "files": [
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+      "before_sha256": "e7cfbc4f4fd01784dbb52ee6dc3a3636c389a796a973603fbbea16b0b00e1711",
+      "after_sha256": "3c92a8d727b9edcef9d00bbf611a724130d1ed6a138920bdc831a0b23b4b530a",
+      "changes": [
+        {
+          "old": "last_verified: 2026-10-26",
+          "new": "last_verified: 2026-10-26\nreference_terms:\n  - label: Feature store — историческое соединение на момент решения\n    label_en: Feature store — point-in-time retrieval\n    anchor: mlops-point-in-time\n  - label: Периодичность переобучения — устаревание и стоимость\n    label_en: Retraining cadence — staleness and cost\n    anchor: mlops-retraining-cadence\n  - label: Канареечный выпуск — ошибки по версиям\n    label_en: Canary rollout — errors by version\n    anchor: mlops-canary-rollout\n  - label: A/B-тест — перекос групп и потеря наблюдений (SRM)\n    label_en: A/B testing — sample ratio mismatch\n    anchor: mlops-sample-ratio-mismatch\n  - label: Бюджет ошибок — доля запросов и burn rate\n    label_en: Error budget — request counts and burn rate\n    anchor: mlops-request-budget\n  - label: Версии признаков, зависимости и пересчёт истории\n    label_en: Feature versions, lineage, and backfills\n    anchor: mlops-feature-backfill\n  - label: Стоимость запроса и полезного результата\n    label_en: Cost per request and useful result\n    anchor: mlops-useful-result-cost"
+        },
+        {
+          "old": "### Point-in-time retrieval",
+          "new": "<a id=\"mlops-point-in-time\"></a>\n\n### Point-in-time retrieval"
+        },
+        {
+          "old": "### Retraining frequency: stale predictions and update cost",
+          "new": "<a id=\"mlops-retraining-cadence\"></a>\n\n### Retraining frequency: stale predictions and update cost"
+        },
+        {
+          "old": "### Почему ошибки новой версии не видны в общей метрике",
+          "new": "<a id=\"mlops-canary-rollout\"></a>\n\n### Почему ошибки новой версии не видны в общей метрике"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mlops-review-2026-10/sre-canary-aggregate.webp]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mlops-review-2026-10/sre-canary-aggregate.webp|На общей панели доля HTTP 500 поднимается примерно до 1%, почти незаметно на шкале от 0 до 100%]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mlops-review-2026-10/sre-canary-versions.webp]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mlops-review-2026-10/sre-canary-versions.webp|HTTP-ошибки по версиям: доля ошибок растёт у кандидата, а не у контрольной версии]]"
+        },
+        {
+          "old": "A routing bug that selectively drops users can invalidate the comparison\neven when the final p-value is small.",
+          "new": "A routing bug that selectively drops users can invalidate the comparison\neven when the final p-value is small.\n\n<a id=\"mlops-sample-ratio-mismatch\"></a>\n\n#### Перекос групп в A/B-тесте\n\nПусть в опыте с ранжированием каждому пользователю независимо\nназначают A или B с вероятностью 0.5. Журнал назначения содержит\nпо 10 000 пользователей в каждой группе. После соединения с журналом\nисходов в таблицу анализа попали все пользователи A, но только 9000 из B.\nСравнивать нужно пользователей одной зрелой когорты, а не число их\nзапросов: один человек может создать десятки событий.\n\n| Где считаем пользователей | A | B |\n| --- | ---: | ---: |\n| Журнал назначения | 10 000 | 10 000 |\n| Таблица анализа | 10 000 | 9000 |\n| Потеря между этапами | 0 | 1000 |\n\nОтклонение от ожидаемой доли в таблице анализа называют\n*sample ratio mismatch*, или SRM. При случайном распределении\nбез выборочных потерь среди 19 000 наблюдений ожидалось бы по 9500.\nСтатистика Пирсона для двух групп равна\n\n$$\n\\begin{aligned}\n\\chi^2\n&=\\frac{(10000-9500)^2}{9500}\n +\\frac{(9000-9500)^2}{9500}\\\\\n&\\approx52.63.\n\\end{aligned}\n$$\n\nУ приближения с одной степенью свободы $p\\approx4.0\\cdot10^{-13}$.\nЭто тест долей групп, а не тест изменения покупок. Он не объясняет,\nпочему пользователи исчезли. При ступенчатом выпуске ожидаемые доли\nнадо брать из фактического плана назначения для каждого периода;\nтест против произвольных 50/50 даст ложный сигнал.\n\nЕсли у A зарегистрированы 500 покупок, а у оставшихся пользователей B —\n480, анализ покажет 5.00% против 5.33%. Но если выяснится, что ни один\nиз пропущенных пользователей B ничего не купил, полная доля B равна\n4.80% и направление эффекта меняется. Пока исходы неизвестны,\nдоля B может лежать между 4.80% и 14.80%: нижняя граница соответствует\nнулю покупок у пропущенных, верхняя — покупке у каждого. Это границы\nиз-за пропусков, а не доверительный интервал.\n\n~~~python\nfrom fractions import Fraction\nfrom math import erfc, isclose, sqrt\n\nexpected = Fraction(10_000 + 9_000, 2)\nchi2 = sum((count - expected)**2 / expected for count in [10_000, 9_000])\nassert chi2 == Fraction(1000, 19)\np_value = erfc(sqrt(float(chi2) / 2))\nassert isclose(p_value, 4.02367219068424e-13, rel_tol=1e-12)\ncontrol = Fraction(500, 10_000)\nselected = Fraction(480, 9_000)\nlower = Fraction(480, 10_000)\nupper = Fraction(480 + 1000, 10_000)\nassert lower < control < selected < upper\n~~~\n\nПервый шаг диагностики — найти отсутствующие ID в журнале назначения\nи выяснить, на каком переходе они пропали: доставке варианта, записи\nсобытия, соединении таблиц или отборе когорты. Дедупликация идёт по ID\nединицы назначения; отсутствие события покупки можно считать нулём\nтолько при подтверждённом наблюдении за пользователем до конца окна.\nРезультат не используют для выпуска, пока причина потери не установлена\nи анализ не повторён для допустимой выборки. Равные размеры групп тоже\nне гарантируют отсутствие смещения: обе группы могут потерять одинаковое\nчисло пользователей с разными исходами.\n\nВ [разборе Microsoft Research](https://www.microsoft.com/en-us/research/articles/diagnosing-sample-ratio-mismatch-in-a-b-testing/)\nпоказан обратный по знаку случай: более активные пользователи варианта B\nпопали под фильтр ботов, и эксперимент сперва показал ухудшение.\n[Fabijan et al., §§2.3.1, 3](https://exp-platform.com/Documents/2019_KDDFabijanGupchupFuptaOmhoverVermeerDmitriev.pdf)\nразбирают проверку долей и причины перекоса по этапам.\nЧисла в таблице выше — отдельный учебный пример."
+        },
+        {
+          "old": "### Длинное и короткое окно",
+          "new": "<a id=\"mlops-request-budget\"></a>\n\n### Доля бюджета при разном объёме трафика\n\nПусть за завершившиеся 30 дней сервис получил миллион допустимых запросов.\nПри SLO 99.9% бюджет составил 1000 ошибок. В двух часовых окнах\nдоля ошибок одинакова и равна 1%, но в тихий час пришло 1000 запросов,\nа в час нагрузки — 10 000. Первое окно дало 10 ошибок, второе — 100.\nBurn rate в обоих случаях равен 10, но потрачены соответственно\n1% и 10% полного бюджета.\n\nЕсли в окне $w$ было $N_w$ запросов и $E_w$ ошибок, а за весь период\nпришло $N_P$ запросов, доля бюджета равна\n\n$$\n\\frac{E_w}{(1-S)N_P}\n=\\frac{E_w/N_w}{1-S}\\cdot\\frac{N_w}{N_P}.\n$$\n\nПервый множитель справа — burn rate окна, второй — доля трафика за период,\nне доля часов. Для пустого окна burn rate не определён. Если календарный\nпериод ещё не завершился, точное $N_P$ неизвестно: оценку на весь период\nнадо отличать от результата по уже прошедшим запросам.\n\n~~~python\nfrom fractions import Fraction\n\nallowed_error = Fraction(1, 1000)\nperiod_requests = 1_000_000\nbudget = allowed_error * period_requests\nassert budget == 1000\nfor window_requests, errors, expected in [\n    (1_000, 10, Fraction(1, 100)),\n    (10_000, 100, Fraction(1, 10)),\n]:\n    burn = Fraction(errors, window_requests) / allowed_error\n    assert burn == 10\n    assert Fraction(errors, budget) == burn * Fraction(window_requests, period_requests)\n    assert Fraction(errors, budget) == expected\n~~~\n\nЧислитель и знаменатель берут на одних границах сервиса. Если SLI\nсчитает конечный исход пользовательского запроса, несколько попыток\nне превращают его в несколько наблюдений. Определение через количества\nсобытий и оговорка о незавершённом периоде приведены в\n[Google SRE Workbook, Implementing SLOs](https://sre.google/workbook/implementing-slos/#what-to-measure-using-slis).\n\n### Длинное и короткое окно"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mlops-review-2026-10/sre-alert-windows.webp]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mlops-review-2026-10/sre-alert-windows.webp|После восстановления пятиминутная доля ошибок падает ниже порога раньше часовой]]"
+        },
+        {
+          "old": "### Feature versions, lineage and backfills",
+          "new": "<a id=\"mlops-feature-backfill\"></a>\n\n### Feature versions, lineage and backfills"
+        },
+        {
+          "old": "### Cost per completed request and per accepted result",
+          "new": "<a id=\"mlops-useful-result-cost\"></a>\n\n### Cost per completed request and per accepted result"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "06b282d0b81002e61a1721cc0cb836bdee81d82a375cb810931a6224edfa908c",
+      "after_sha256": "25f8a4d2881ba6950ee1d96b69f2a9050e409fd6cf1d29ce3e20ba9378aaf0ab",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps|MLOps: воспроизводимость, выпуск и надёжность ML-систем]]",
+          "new": "- [[00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps|MLOps: воспроизводимость, выпуск и надёжность ML-систем]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps#mlops-point-in-time|Feature store — историческое соединение на момент решения]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps#mlops-retraining-cadence|Периодичность переобучения — устаревание и стоимость]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps#mlops-canary-rollout|Канареечный выпуск — ошибки по версиям]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps#mlops-sample-ratio-mismatch|A/B-тест — перекос групп и потеря наблюдений (SRM)]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps#mlops-request-budget|Бюджет ошибок — доля запросов и burn rate]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps#mlops-feature-backfill|Версии признаков, зависимости и пересчёт истории]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps#mlops-useful-result-cost|Стоимость запроса и полезного результата]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "14efaaa11a0ab5f6276f90150165eef955dbd6642121bdb2b749ba9674b4af5f",
+      "after_sha256": "65511d7a82c6a507c09821896d28e6fe15031060d9438c65ae1f88970f3f454b",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps|MLOps: from an artifact to an observable service]]",
+          "new": "- [[00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps|MLOps: from an artifact to an observable service]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps#mlops-point-in-time|Feature store — point-in-time retrieval]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps#mlops-retraining-cadence|Retraining cadence — staleness and cost]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps#mlops-canary-rollout|Canary rollout — errors by version]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps#mlops-sample-ratio-mismatch|A/B testing — sample ratio mismatch]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps#mlops-request-budget|Error budget — request counts and burn rate]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps#mlops-feature-backfill|Feature versions, lineage, and backfills]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps#mlops-useful-result-cost|Cost per request and useful result]]"
+        }
+      ]
+    }
+  ]
+}

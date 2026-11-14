@@ -18,10 +18,16 @@
     ]
   },
   {
-    "asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/compute-memory.png",
-    "sha256": "3292cbab86dd8504d7dec4e37b6cb08e79e8426216e71b233da0f1e8ddceeb4d",
-    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/compute-memory.png",
-    "source_asset_sha256": "3292cbab86dd8504d7dec4e37b6cb08e79e8426216e71b233da0f1e8ddceeb4d"
+    "asset": "00 Учебник/Assets/Figures/curated/gpt2-2026-10-22/gpt2-output-projection-2.png",
+    "sha256": "61a9cc4b3dedaa4924de383f45572679280e43cde0f0d4ef810da59bb6846309",
+    "source_asset": "05 Источники/Originals/gpt2-2026-10-22/gpt2-output-projection-2.png",
+    "source_asset_sha256": "61a9cc4b3dedaa4924de383f45572679280e43cde0f0d4ef810da59bb6846309"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/hardware-completion-2026-10-29/tpu-load-weights.gif",
+    "sha256": "36e7807b43e6164dca487ed5a0190b8ebcaa0d5a090de46ea0ae3e56daa3fe87",
+    "source_asset": "05 Источники/Originals/hardware-reconciliation-2026-10-29/image4_5pfb45w.gif",
+    "source_asset_sha256": "36e7807b43e6164dca487ed5a0190b8ebcaa0d5a090de46ea0ae3e56daa3fe87"
   },
   {
     "asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/jax-scaling-roofline.webp",

@@ -10,11 +10,11 @@ ROOT = Path(__file__).resolve().parents[2]
 FILE = ROOT / '00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md'
 body = FILE.read_text()
 blocks = re.findall(r'~~~python\n(.*?)\n~~~', body, re.S)
-assert len(blocks) == 6
+assert len(blocks) == 7
 ns = {}
 for block in blocks:
     exec(compile(block, str(FILE), 'exec'), ns)
-print('PASS six published blocks', hashlib.sha256(FILE.read_bytes()).hexdigest())
+print('PASS seven published blocks', hashlib.sha256(FILE.read_bytes()).hexdigest())
 
 # Independent scalar LTI unrolling, including nonzero initial state.
 rng = np.random.default_rng(73)

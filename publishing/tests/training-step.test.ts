@@ -3,10 +3,12 @@ import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {describe,expect,it} from 'vitest';
 import {parse} from 'yaml';
+import {beforeTopicConsolidation} from '../tools/topic-consolidation-baseline.mjs';
 
 const root=resolve(import.meta.dirname,'../..');
 const chapter='00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md';
-const text=readFileSync(resolve(root,chapter),'utf8');
+const text=beforeTopicConsolidation(readFileSync(resolve(root,chapter),'utf8'),chapter,root,
+  '2026-11-04-data-pipeline-additions.json');
 const source=readFileSync(resolve(root,'05 Источники/Originals/frameworks-2026-10-27/chapter-2bd97c5.qmd'),'utf8');
 const addition=text.match(/<!-- BEGIN REVIEW: training step 2026-10-27 -->\n([\s\S]*?)<!-- END REVIEW: training step 2026-10-27 -->\n\n/)!;
 

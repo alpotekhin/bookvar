@@ -1,0 +1,224 @@
+{
+  "date": "2026-11-03",
+  "scope": "Source-first GMM/EM chapter audit and original-course additions. Canonical Obsidian text, source figures and both reference indexes; no translation or remote publication.",
+  "files": [
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md",
+      "before_sha256": "c02a1bd7955b8920a1842f89d34827cd126a90400cd65e45b49e8ca933c20a3d",
+      "after_sha256": "c42cff1967b148de22cffe95401712577e6f82ee593d06935b1e734bc3712efb",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-25\nprimary_sources:",
+          "new": "last_updated: 2026-11-03\nreference_terms:\n  - label: GMM — вероятности принадлежности\n    label_en: GMM responsibilities\n    anchor: gmm-responsibilities\n  - label: EM — нижняя граница и монотонность\n    label_en: EM lower bound and monotonicity\n    anchor: em-bound\n  - label: GMM — формы ковариаций\n    label_en: GMM covariance families\n    anchor: gmm-covariance\n  - label: GMM — схлопывание ковариации\n    label_en: GMM covariance collapse\n    anchor: gmm-covariance-collapse\n  - label: GMM — инициализация и повторные запуски\n    label_en: GMM initialization and restarts\n    anchor: gmm-initialization\n  - label: GMM — компоненты и группы\n    label_en: GMM components versus clusters\n    anchor: gmm-density-components\n  - label: GMM — число компонент и AIC/BIC\n    label_en: GMM model selection and AIC/BIC\n    anchor: gmm-model-selection\n  - label: GMM — генерация через PCA\n    label_en: GMM generation through PCA\n    anchor: gmm-pca-generation\nprimary_sources:"
+        },
+        {
+          "old": "  - https://ermongroup.github.io/cs228-notes/learning/latent/\n",
+          "new": "  - https://ermongroup.github.io/cs228-notes/learning/latent/\n  - https://scikit-learn.org/stable/auto_examples/mixture/plot_gmm_init.html\n"
+        },
+        {
+          "old": "## E-step: насколько каждая компонента объясняет объект",
+          "new": "<a id=\"gmm-responsibilities\"></a>\n## E-step: насколько каждая компонента объясняет объект"
+        },
+        {
+          "old": "## Почему точный EM не уменьшает правдоподобие",
+          "new": "<a id=\"em-bound\"></a>\n## Почему точный EM не уменьшает правдоподобие"
+        },
+        {
+          "old": "## Формы ковариаций",
+          "new": "<a id=\"gmm-covariance\"></a>\n## Формы ковариаций"
+        },
+        {
+          "old": "### Схлопывание ковариации",
+          "new": "<a id=\"gmm-covariance-collapse\"></a>\n### Схлопывание ковариации"
+        },
+        {
+          "old": "### Компонента не обязательно равна кластеру",
+          "new": "<a id=\"gmm-density-components\"></a>\n### Компонента не обязательно равна кластеру"
+        },
+        {
+          "old": "## Как выбирать число компонент",
+          "new": "<a id=\"gmm-model-selection\"></a>\n## Как выбирать число компонент"
+        },
+        {
+          "old": "<a id=\"gmm-model-selection\"></a>\n## Как выбирать число компонент",
+          "new": "![[00 Учебник/Assets/Figures/curated/gmm-2026-11-03/jake-moons-generated.png|Четыреста новых точек из шестнадцатикомпонентной GMM повторяют две дуги, хотя номера компонент не являются номерами лун]]\n\n*Jake VanderPlas,\n[GMM as Density Estimation](https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html#GMM-as-Density-Estimation),\nCC BY-NC-ND 3.0 Unported. Неизменённый сохранённый PNG ячейки 34:\n400 новых точек из смеси, обученной на 200 исходных.*\n\n> Here the mixture of 16 Gaussian components serves not to find separated clusters of data, but rather to model the overall *distribution* of the input data.\n> This is a generative model of the distribution, meaning that the GMM gives us the recipe to generate new random data distributed similarly to our input.\n> For example, here are 400 new points drawn from this 16-component GMM fit to our original data (see the following figure):\n\n*Jake VanderPlas, исходный английский текст перед этим рисунком.*\n\nНа этом этапе исходные точки уже не раскрашиваются и не перераспределяются:\nмодель создаёт новые координаты. Результат позволяет сравнить форму\nпорождаемого распределения с обучающими дугами. Он не доказывает,\nчто плотность точно восстановлена между наблюдениями или в хвостах;\nдля такой проверки нужны отдельные данные и критерий.\n\n<a id=\"gmm-initialization\"></a>\n## Инициализация и повторные запуски\n\nНачальные средние определяют первые вероятности принадлежности.\nЕсли два средних попали в одно облако, обе компоненты могут поделить\nего между собой, пока другая компонента описывает сразу две группы.\nПовышение правдоподобия на каждом шаге не заставляет алгоритм\nперенести одно из средних в более удачное место.\n\n![[00 Учебник/Assets/Figures/curated/gmm-2026-11-03/sklearn-gmm-initialization.png|Четыре способа инициализации GMM: оранжевые ромбы показывают начальные средние, цветные крестики — окончательные назначения; некоторые запуски сливают две верхние группы]]\n\n*The scikit-learn developers,\n[GMM Initialization Methods](https://scikit-learn.org/stable/auto_examples/mixture/plot_gmm_init.html),\nBSD-3-Clause. Полный исходный PNG из документации 1.9, без изменений.\nДанные: 4000 точек, четыре центра, стандартное отклонение 0,60.\nВремена и числа итераций в заголовках относятся к сохранённому\nзапуску авторов, а не к измерению в Bookvar.*\n\nНа верхней левой панели начальные средние уже расположены по одному\nв каждой группе. EM уточняет их положение и разброс. На верхней правой\nдва ромба находятся в нижней левой группе. В результате эта группа\nразделена между компонентами, а две верхние получили один цвет.\nВсе четыре компоненты использованы, однако такое решение отличается\nот левого. Нижние панели показывают ещё два набора начальных средних.\n\nВ scikit-learn 1.9.1 параметр `init_params` задаёт четыре варианта:\n\n- `kmeans`: сначала выполняется один запуск K-means; жёсткие назначения\n  задают начальные взвешенные оценки средних и ковариаций.\n- `k-means++`: выбираются разнесённые начальные точки по процедуре\n  K-means++, без полного цикла K-means.\n- `random_from_data`: случайно выбираются $K$ различных наблюдений.\n  Они могут оказаться в одной содержательной группе.\n- `random`: каждой строке назначаются случайные положительные веса,\n  нормированные по компонентам. Начальные средние становятся\n  взвешенными средними всей выборки и обычно располагаются близко\n  к её общему центру.\n\nВ исходном примере есть дополнительная деталь: первый объект\n`GaussianMixture(max_iter=0)` используется только для извлечения\nначальных `means_`. Во второй объект передаются эти `means_init`;\nостальные параметры инициализируются его стандартным способом.\nТаким образом, рисунок сравнивает полученные стартовые средние,\nа не четыре полностью сохранённых начальных состояния модели.\nНулевое число итераций не означает, что смесь обучена.\n\nСледующий код повторяет именно эту постановку без построения нового\nрисунка и без измерения времени. Для каждого метода создаётся новый\nгенератор с тем же seed; затем его состояние, как в оригинале,\nпродолжается во втором обучении.\n\n```python\nfrom sklearn.datasets import make_blobs\nfrom sklearn.mixture import GaussianMixture\n\ninitialization_data, _ = make_blobs(\n    n_samples=4000, centers=4, cluster_std=0.60, random_state=0\n)\ninitialization_data = initialization_data[:, ::-1]\ninitialization_results = {}\nfor method in [\"kmeans\", \"random_from_data\", \"k-means++\", \"random\"]:\n    initialization_rng = np.random.RandomState(1234)\n    initial_model = GaussianMixture(\n        4, init_params=method, tol=1e-9, max_iter=0,\n        random_state=initialization_rng\n    ).fit(initialization_data)\n    initial_means = initial_model.means_.copy()\n    initialized_fit = GaussianMixture(\n        4, means_init=initial_means, tol=1e-9, max_iter=2000,\n        random_state=initialization_rng\n    ).fit(initialization_data)\n    if not initialized_fit.converged_:\n        raise RuntimeError(\"Initialization experiment did not converge\")\n    initialization_results[method] = {\n        \"initial_means\": initial_means,\n        \"iterations\": initialized_fit.n_iter_,\n        \"mean_log_density\": initialized_fit.score(initialization_data),\n    }\n    print(method, initialized_fit.n_iter_,\n          initialized_fit.score(initialization_data))\n```\n\nВ данном запуске `kmeans`, `k-means++` и `random` дали средний\nлогарифм плотности около −3,166742, а `random_from_data` — около\n−3,387813 после 137 итераций. Последний запуск тоже сообщил\nо сходимости, но остановился в худшем решении.\n\nЧисло итераций само по себе не выбирает лучшее решение: быстрый запуск\nможет остановиться в худшем локальном решении. Для одинакового модельного\nсемейства сравнивают конечную цель, вырожденность ковариаций и устойчивость\nрезультата. Несколько запусков с `n_init` выбирают лучшее найденное\nрешение по внутренней обучающей цели; это не заменяет валидацию\nпри выборе числа компонент и типа ковариации.\n\nПовторный вызов `fit` также не всегда означает новый независимый старт:\nпри `warm_start=True` и уже обученном объекте параметры продолжаются.\nЕсли нужны независимые запуски, создают новые объекты или явно\nуправляют этим режимом. Реализации\n[инициализации и цикла обучения](https://github.com/scikit-learn/scikit-learn/blob/866c0f51e7560ef0303cbcc5f159df5382ea9e3f/sklearn/mixture/_base.py)\nпоказывают, где именно используется генератор и выбирается лучший запуск.\n\n<a id=\"gmm-model-selection\"></a>\n## Как выбирать число компонент"
+        },
+        {
+          "old": "<a id=\"gmm-k-means-и-probabilistic-predictions\"></a>",
+          "new": "<a id=\"gmm-pca-generation\"></a>\n## Генерация изображений: PCA и смесь в пространстве координат\n\nВ примере VanderPlas смесь обучается на рукописных цифрах из Digits.\nЗдесь 1797 изображений размером $8\\times8$, каждое представлено\n64 яркостями. Вместо определения номера цифры модель должна\nпорождать новые изображения.\n\n> We just saw a simple example of using a GMM as a generative model in order to create new samples from the distribution defined by the input data.\n> Here we will run with this idea and generate *new handwritten digits* from the standard digits corpus that we have used before.\n>\n> To start with, let's load the digits data using Scikit-Learn's data tools:\n\n*Jake VanderPlas,\n[Example: GMMs for Generating New Data](https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html#Example:-GMMs-for-Generating-New-Data),\nисходный английский текст, CC BY-NC-ND 3.0 Unported.*\n\n| Обучающие изображения | Сгенерированные изображения |\n| --- | --- |\n| ![[00 Учебник/Assets/Figures/curated/gmm-2026-11-03/jake-training-digits.png|Первые пятьдесят обучающих изображений Digits: пять строк по десять цифр размером восемь на восемь пикселей]] | ![[00 Учебник/Assets/Figures/curated/gmm-2026-11-03/jake-generated-digits.png|Пятьдесят изображений после выборки из GMM в 41-мерном пространстве и обратного PCA-преобразования; часть контуров размыта или неоднозначна]] |\n\n*Jake VanderPlas,\n[Example: GMMs for Generating New Data](https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html#Example:-GMMs-for-Generating-New-Data),\nCC BY-NC-ND 3.0 Unported. Полные исходные PNG из ячеек 42 и 52,\nбез изменений. Слева — 50 исходных изображений, справа — первые 50\nиз 100 новых. В исходном `plot_digits` показан диапазон яркости 0–16.*\n\nСначала PCA сохраняет 99% обучающей дисперсии. Для этого набора\nполучается 41 координата. При `whiten=True` сохранённые координаты\nдополнительно делятся на корни из соответствующих собственных\nзначений. Используя обозначения предыдущей главы, запишем\nцентрированное изображение столбцом:\n\n$$\n\\begin{aligned}\nu&=D^{-1/2}W^\\top(x-\\mu),\\\\\n\\hat x&=\\mu+WD^{1/2}u.\n\\end{aligned}\n$$\n\nЗдесь $W$ содержит 41 ортонормированный столбец, а диагональ $D$ —\nсохранённые собственные значения ковариации. Поэтому обратный вызов\nвосстанавливает сохранённую проекцию, но не все 64 исходные координаты.\nДоля 99% относится к дисперсии; она не гарантирует сохранения каждой\nдетали, по которой человек отличает одну цифру от другой.\n\nЗатем GMM с полной ковариацией обучается на $u$. Для генерации\nвыбираются номер компоненты $k$ и случайный вектор\n$u_{\\mathrm{new}}\\sim\\mathcal N(\\mu_k,\\Sigma_k)$; обратное\nпреобразование возвращает его к пикселям. Метки цифр для этого\nобучения не используются. Номер выбранной компоненты не является\nпредсказанием «это семёрка».\n\n![[00 Учебник/Assets/Figures/curated/gmm-2026-11-03/jake-digit-aic.png|Сохранённая кривая AIC на Digits: критерий снижается при увеличении числа компонент, затем образует неглубокий минимум в районе 140]]\n\n*Jake VanderPlas,\n[Example: GMMs for Generating New Data](https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html#Example:-GMMs-for-Generating-New-Data),\nCC BY-NC-ND 3.0 Unported. Неизменённый PNG ячейки 46.\nПроверялись 50, 60, …, 200 компонент с полной ковариацией.\nЭто исторический результат исходного notebook, не повторный подбор\nв текущей версии библиотеки.*\n\nВ исходном эксперименте автор выбрал 140 компонент по AIC.\nЧисло параметров такой смеси в 41 измерении равно\n\n$$\n\\begin{aligned}\np&=139+140\\cdot41\\\\\n&\\quad+\\frac{140\\cdot41\\cdot42}{2}\\\\\n&=126\\,419.\n\\end{aligned}\n$$\n\nПонижение размерности сократило размер ковариаций, но модель\nостаётся большой по сравнению с 1797 изображениями. Поэтому\nпохожий вид сгенерированных цифр и минимум обучающего AIC\nсами по себе не показывают качество на новых данных.\n\nСледующий код проверяет всю последовательность для выбранных\n140 компонент. Он не повторяет перебор AIC и не заменяет сохранённые\nоригинальные рисунки новыми.\n\n```python\nfrom sklearn.datasets import load_digits\nfrom sklearn.decomposition import PCA\n\ndigit_pixels = load_digits().data\ndigit_projection = PCA(\n    n_components=0.99, whiten=True, svd_solver=\"full\"\n).fit(digit_pixels)\ndigit_codes = digit_projection.transform(digit_pixels)\ndigit_mixture = GaussianMixture(\n    140, covariance_type=\"full\", random_state=0,\n    n_init=1, max_iter=100, tol=1e-3, reg_covar=1e-6\n).fit(digit_codes)\nif not digit_mixture.converged_:\n    raise RuntimeError(\"Digit mixture did not converge\")\ngenerated_codes, generated_digit_components = digit_mixture.sample(100)\ngenerated_digit_pixels = digit_projection.inverse_transform(generated_codes)\nnp.testing.assert_allclose(\n    digit_projection.transform(generated_digit_pixels), generated_codes,\n    atol=1e-12\n)\nassert digit_codes.shape == (1797, 41)\nassert generated_digit_pixels.shape == (100, 64)\nassert parameter_count(140, 41, \"full\") == 126419\nprint(\"dimensions / mixture parameters:\", digit_codes.shape[1], 126419)\nprint(\"generated pixel range:\", generated_digit_pixels.min(),\n      generated_digit_pixels.max())\n```\n\nВ этом запуске сгенерированные яркости лежат приблизительно\nмежду −8,058 и 24,735, хотя обучающие пиксели имеют значения 0–16.\nГауссовское распределение не ограничивает яркости этим диапазоном.\nОбратное преобразование может дать отрицательные или слишком большие\nзначения. Исходная функция рисования показывает заданный диапазон,\nно это ограничение отображения, а не вероятностной модели.\nЕсли обрезать значения перед использованием, распределение\nизображений изменится.\n\nТакже все сгенерированные изображения лежат в одном 41-мерном\nаффинном подпространстве. Их ковариация в 64-мерном пространстве\nимеет ранг не выше 41. Полученная модель имеет плотность в пространстве\nкоординат PCA, но без дополнительной модели отброшенных направлений\nне задаёт невырожденную плотность по всем 64 пикселям.\nЧисла `score` до и после сокращения размерности нельзя напрямую\nсравнивать как плотности в одном пространстве.\n\n<a id=\"gmm-k-means-и-probabilistic-predictions\"></a>"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-uncertainty.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-uncertainty.png|Вероятности принадлежности GMM: точки возле перекрытия двух групп нарисованы мельче, потому что максимальная вероятность ниже]]"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-covariance-types.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-covariance-types.png|Диагональная, сферическая и полная ковариации: осевой эллипс, круг и повёрнутый эллипс на одном облаке]]"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/advanced-unsupervised-classical/gmm-covariances.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/advanced-unsupervised-classical/gmm-covariances.png|Четыре ограничения ковариации GMM на Iris; точки и крестики показывают обучающие и тестовые наблюдения]]"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-stretched.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-stretched.png|Четыре вытянутые компоненты GMM с полными ковариациями и вложенными контурами расстояния Махаланобиса]]"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-moons-two.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-moons-two.png|Две гауссовские компоненты пересекают две изогнутые луны и не воспроизводят их форму]]"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-moons-sixteen.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-moons-sixteen.png|Шестнадцать небольших гауссовских компонент выстраиваются вдоль двух лун, без интерпретации их номеров как классов]]"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-aic-bic.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/gmm-2026-10-25/jake-aic-bic.png|AIC и BIC на двух лунах при разном числе компонент; минимум BIC соответствует более простой смеси]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "9e3ff8a45d5d2e6d16adcde1d013d3d20261f6900f3ffb444b658a226ffe7fb4",
+      "after_sha256": "389419cb83c777cf03ed64ac31822b5a41e56e7eba821d750cf1b9045d30c947",
+      "changes": [
+        {
+          "old": "assets:\n",
+          "new": "assets:\n  - {\"id\":\"curated-gmm-20261103-4cd0f062617e\",\"asset\":\"00 Учебник/Assets/Figures/curated/gmm-2026-11-03/jake-digit-aic.png\",\"author\":\"Jake VanderPlas\",\"source_url\":\"https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.12-Gaussian-Mixtures.ipynb\",\"source_image_url\":\"https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.12-Gaussian-Mixtures.ipynb\",\"source_asset\":\"05 Источники/Originals/gmm-2026-10-25/jake-gmm.ipynb\",\"source_asset_sha256\":\"9438d483e156738ba8d581e54f150590061ff6fbe6147cb38ab56ae0449c07e6\",\"sha256\":\"4cd0f062617e44b4312d4f58413c58337b8da8649984483591e84e2eb84df6e7\",\"dimensions_px\":[391,244],\"commit\":\"d66231454ef753818dc9213c9b5942e067266966\",\"license\":\"CC BY-NC-ND 3.0 Unported\",\"license_url\":\"https://creativecommons.org/licenses/by-nc-nd/3.0/\",\"license_evidence\":\"05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-LICENSE-TEXT\",\"license_evidence_sha256\":\"d74e67958cad1ae4cb585402ef66ae41958ba546e6c5e80a93920013cb81bc2a\",\"derivation\":\"notebook-output-extraction\",\"modifications\":\"Complete original PNG, no crop, relabeling, translation, redraw or resampling. Saved notebook outputs are decoded, not regenerated.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md\"],\"source_member\":\"/cells/46/outputs/0/data/image~1png\",\"width\":391,\"height\":244,\"bytes\":9908}\n  - {\"id\":\"curated-gmm-20261103-75ce77d9c4f7\",\"asset\":\"00 Учебник/Assets/Figures/curated/gmm-2026-11-03/jake-generated-digits.png\",\"author\":\"Jake VanderPlas\",\"source_url\":\"https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.12-Gaussian-Mixtures.ipynb\",\"source_image_url\":\"https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.12-Gaussian-Mixtures.ipynb\",\"source_asset\":\"05 Источники/Originals/gmm-2026-10-25/jake-gmm.ipynb\",\"source_asset_sha256\":\"9438d483e156738ba8d581e54f150590061ff6fbe6147cb38ab56ae0449c07e6\",\"sha256\":\"75ce77d9c4f701c68c1dd1a6d6ed33977a0e692e1e7e2fcfe400db2167a3b9ba\",\"dimensions_px\":[459,231],\"commit\":\"d66231454ef753818dc9213c9b5942e067266966\",\"license\":\"CC BY-NC-ND 3.0 Unported\",\"license_url\":\"https://creativecommons.org/licenses/by-nc-nd/3.0/\",\"license_evidence\":\"05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-LICENSE-TEXT\",\"license_evidence_sha256\":\"d74e67958cad1ae4cb585402ef66ae41958ba546e6c5e80a93920013cb81bc2a\",\"derivation\":\"notebook-output-extraction\",\"modifications\":\"Complete original PNG, no crop, relabeling, translation, redraw or resampling. Saved notebook outputs are decoded, not regenerated.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md\"],\"source_member\":\"/cells/52/outputs/0/data/image~1png\",\"width\":459,\"height\":231,\"bytes\":11762}\n  - {\"id\":\"curated-gmm-20261103-32d53b5e501f\",\"asset\":\"00 Учебник/Assets/Figures/curated/gmm-2026-11-03/jake-moons-generated.png\",\"author\":\"Jake VanderPlas\",\"source_url\":\"https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.12-Gaussian-Mixtures.ipynb\",\"source_image_url\":\"https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.12-Gaussian-Mixtures.ipynb\",\"source_asset\":\"05 Источники/Originals/gmm-2026-10-25/jake-gmm.ipynb\",\"source_asset_sha256\":\"9438d483e156738ba8d581e54f150590061ff6fbe6147cb38ab56ae0449c07e6\",\"sha256\":\"32d53b5e501feb04ad7b0eee235dc73443a03a3c060cfcdf493ca363144e6806\",\"dimensions_px\":[377,244],\"commit\":\"d66231454ef753818dc9213c9b5942e067266966\",\"license\":\"CC BY-NC-ND 3.0 Unported\",\"license_url\":\"https://creativecommons.org/licenses/by-nc-nd/3.0/\",\"license_evidence\":\"05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-LICENSE-TEXT\",\"license_evidence_sha256\":\"d74e67958cad1ae4cb585402ef66ae41958ba546e6c5e80a93920013cb81bc2a\",\"derivation\":\"notebook-output-extraction\",\"modifications\":\"Complete original PNG, no crop, relabeling, translation, redraw or resampling. Saved notebook outputs are decoded, not regenerated.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md\"],\"source_member\":\"/cells/34/outputs/0/data/image~1png\",\"width\":377,\"height\":244,\"bytes\":15879}\n  - {\"id\":\"curated-gmm-20261103-7a0112379a3d\",\"asset\":\"00 Учебник/Assets/Figures/curated/gmm-2026-11-03/jake-training-digits.png\",\"author\":\"Jake VanderPlas\",\"source_url\":\"https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.12-Gaussian-Mixtures.ipynb\",\"source_image_url\":\"https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.12-Gaussian-Mixtures.ipynb\",\"source_asset\":\"05 Источники/Originals/gmm-2026-10-25/jake-gmm.ipynb\",\"source_asset_sha256\":\"9438d483e156738ba8d581e54f150590061ff6fbe6147cb38ab56ae0449c07e6\",\"sha256\":\"7a0112379a3d2ed97ce6e09b011520c9fd7eba630000a4662640bd391c4295a6\",\"dimensions_px\":[459,231],\"commit\":\"d66231454ef753818dc9213c9b5942e067266966\",\"license\":\"CC BY-NC-ND 3.0 Unported\",\"license_url\":\"https://creativecommons.org/licenses/by-nc-nd/3.0/\",\"license_evidence\":\"05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-LICENSE-TEXT\",\"license_evidence_sha256\":\"d74e67958cad1ae4cb585402ef66ae41958ba546e6c5e80a93920013cb81bc2a\",\"derivation\":\"notebook-output-extraction\",\"modifications\":\"Complete original PNG, no crop, relabeling, translation, redraw or resampling. Saved notebook outputs are decoded, not regenerated.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md\"],\"source_member\":\"/cells/42/outputs/0/data/image~1png\",\"width\":459,\"height\":231,\"bytes\":6871}\n  - {\"id\":\"curated-gmm-20261103-ab5a8bd8e440\",\"asset\":\"00 Учебник/Assets/Figures/curated/gmm-2026-11-03/sklearn-gmm-initialization.png\",\"author\":\"The scikit-learn developers\",\"source_url\":\"https://scikit-learn.org/1.9/auto_examples/mixture/plot_gmm_init.html\",\"source_image_url\":\"https://raw.githubusercontent.com/scikit-learn/scikit-learn.github.io/199d116ab37beed506c63fc9f6a74f56e228de43/1.9/_images/sphx_glr_plot_gmm_init_001.png\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/gmm-2026-11-03/sklearn-gmm-initialization.png\",\"source_asset_sha256\":\"ab5a8bd8e440a80fd83b0ce5ef7614c2d3362377fef0274176ac910951bb3707\",\"sha256\":\"ab5a8bd8e440a80fd83b0ce5ef7614c2d3362377fef0274176ac910951bb3707\",\"dimensions_px\":[800,600],\"commit\":\"199d116ab37beed506c63fc9f6a74f56e228de43\",\"license\":\"BSD-3-Clause\",\"license_url\":\"https://github.com/scikit-learn/scikit-learn/blob/866c0f51e7560ef0303cbcc5f159df5382ea9e3f/LICENSE\",\"license_evidence\":\"site/public/licenses/scikit-learn-1.9.1-BSD-3-Clause.txt\",\"license_evidence_sha256\":\"50d6a9d340f19ab355609917993114daf5f47e3161067bcf34955bbd05cd9cb0\",\"derivation\":\"source-image-copy\",\"modifications\":\"Complete original PNG, no crop, relabeling, translation, redraw or resampling. Saved notebook outputs are decoded, not regenerated.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md\"],\"width\":800,\"height\":600,\"bytes\":82435,\"source_page_snapshot\":\"05 Источники/Originals/gmm-2026-11-03/sklearn-gmm-init-1.9.1.py\",\"source_page_sha256\":\"82c5434602c464e1bdfac7483eed0b6d48cf1a41cd18f982182989f74b158731\"}\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "9d2933be7c2ebcff001d6cb17cfd78574d4d213719ad69a2c5cc29775a98aaa2",
+      "after_sha256": "dae8bde61f0b0c03f625eaeeb798206630d2fc2b3290ec5c58290f94fc82a7ab",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM|Gaussian mixture и EM — обучение со скрытой принадлежностью]]\n",
+          "new": "- [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM|Gaussian mixture и EM — обучение со скрытой принадлежностью]]\n  - [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM#gmm-responsibilities|GMM — вероятности принадлежности]]\n  - [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM#em-bound|EM — нижняя граница и монотонность]]\n  - [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM#gmm-covariance|GMM — формы ковариаций]]\n  - [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM#gmm-covariance-collapse|GMM — схлопывание ковариации]]\n  - [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM#gmm-initialization|GMM — инициализация и повторные запуски]]\n  - [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM#gmm-density-components|GMM — компоненты и группы]]\n  - [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM#gmm-model-selection|GMM — число компонент и AIC/BIC]]\n  - [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM#gmm-pca-generation|GMM — генерация через PCA]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "c8d71aa323b7a7996fd05c9087387e7bcb986a6b8f689c1ddf8854efc7df087e",
+      "after_sha256": "e805f807adc65bd79fa9bf627f2bb6a17e339d2c2efaac4a11fcb4449f5ae169",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM|Gaussian mixtures and EM]]\n",
+          "new": "- [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM|Gaussian mixtures and EM]]\n  - [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM#gmm-responsibilities|GMM responsibilities]]\n  - [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM#em-bound|EM lower bound and monotonicity]]\n  - [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM#gmm-covariance|GMM covariance families]]\n  - [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM#gmm-covariance-collapse|GMM covariance collapse]]\n  - [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM#gmm-initialization|GMM initialization and restarts]]\n  - [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM#gmm-density-components|GMM components versus clusters]]\n  - [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM#gmm-model-selection|GMM model selection and AIC/BIC]]\n  - [[00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM#gmm-pca-generation|GMM generation through PCA]]\n"
+        }
+      ]
+    }
+  ],
+  "sourceComparison": {
+    "fullyRead": [
+      {
+        "source": "05 Источники/Originals/gmm-2026-10-25/jake-gmm.ipynb",
+        "sha256": "9438d483e156738ba8d581e54f150590061ff6fbe6147cb38ab56ae0449c07e6",
+        "scope": "All 54 cells' Markdown, code and text outputs. Five selected new PNGs (four notebook outputs plus the independent official initialization figure) inspected; no claim of fresh inspection of every other source image."
+      },
+      {
+        "source": "https://ermongroup.github.io/cs228-notes/learning/latent/",
+        "scope": "Entire 150-line web-readable prose/equations, including GMM weighted M-step, variational identity and EM properties. Its third-party figures are not reproduced or claimed freshly inspected."
+      },
+      {
+        "source": "05 Источники/Originals/gmm-2026-11-03/sklearn-gmm-init-1.9.1.py",
+        "sha256": "82c5434602c464e1bdfac7483eed0b6d48cf1a41cd18f982182989f74b158731",
+        "scope": "Entire released example including prose, means-only two-fit protocol and original plotted annotation. Also complete release BaseMixture._initialize_parameters, GaussianMixture._initialize and BaseMixture.fit_predict source read."
+      }
+    ],
+    "mechanisms": [
+      {
+        "topic": "Density, posterior and M-step",
+        "sources": "VanderPlas cells 12-24; CS228 Example: Gaussian mixture models",
+        "example": "Retained Cholesky/logsumexp density, prior-shift boundary, low-density/high-confidence point, weighted mean/covariance derivatives and full four-point E/M calculation.",
+        "limits": "The joint weight times density is not itself a posterior probability. Covariance collapse, empty numerical components, regularization versus exact maximum and label symmetry retained."
+      },
+      {
+        "topic": "Monotonicity",
+        "sources": "CS228 EM as variational inference",
+        "example": "Retained ELBO/KL decomposition and checked numeric old/M/E values with 60 independent KL identities.",
+        "limits": "Monotonicity is conditional on increasing the same bound. It does not imply bounded likelihood, finite convergence, a global optimum or automatic guarantees for covariance additions."
+      },
+      {
+        "topic": "Initialization and restarts",
+        "sources": "Released scikit-learn 1.9.1 example and initialization/fit functions",
+        "example": "Four source methods, 4000 points, fresh RandomState(1234) per method, max_iter=0 mean extraction and continued generator in means_init fit. Independent random/selected-point/plus-plus mean checks. Observed converged inferior random_from_data start.",
+        "limits": "Source figure times are historical; no timing measured. Source protocol transfers means only, not full initial state. Warm starts and best internal training objective distinguished from independent runs and validation."
+      },
+      {
+        "topic": "Sampling versus component labels",
+        "sources": "VanderPlas cells 27-38",
+        "example": "Retained two-versus-sixteen-component moons and AIC/BIC, added complete original 400-sample figure and exact source English.",
+        "limits": "Component index is not a semantic moon/class; appearance alone does not establish held-out density quality."
+      },
+      {
+        "topic": "PCA-GMM image generation",
+        "sources": "VanderPlas cells 39-53; preceding PCA chapter",
+        "example": "Three original Digits/AIC/generated figures, exact source English, explicit whitening/inverse equations, full 140-component fit/sample/inverse program, 41-component threshold and 126419 parameters.",
+        "limits": "140 is a historical source AIC choice, not a current sweep. Generated pixel range -8.0575 to 24.7352 lies outside [0,16]; rendering clamps are not a distribution constraint. Affine image support rank at most 41, no nonsingular full-64D density without discarded-direction model."
+      }
+    ],
+    "exclusions": [
+      "Do not import the handbook's hard-radius description of K-means assignment; Voronoi assignment is retained.",
+      "Do not import the handbook's obsolete default covariance_type=diag; checked release default is full.",
+      "Do not repeat the handbook's claim that dimension-reducing PCA is invertible or that retained variance means almost no information loss.",
+      "Do not repeat CS228's blanket upper-bounded/global-convergence statement for unrestricted finite Gaussian mixtures.",
+      "Do not identify a Gaussian with the discrete weighted empirical distribution Q_k; the chapter uses the correct weighted moments/derivatives."
+    ],
+    "style": "No-ai-slop applied without rewriting licensed source quotations or reducing the full E/M and bound derivations to definitions.",
+    "preservation": "All eight earlier Python programs and all seven previous image assets retained; seven meaningful alt descriptions added. No earlier explanatory paragraphs removed.",
+    "reference": "Eight mechanisms indexed from canonical frontmatter in both locales; no parallel reference explanation or main course route."
+  },
+  "verification": {
+    "examples": {
+      "exit": 0,
+      "publishedBlocks": 10,
+      "chapterSha256": "c42cff1967b148de22cffe95401712577e6f82ee593d06935b1e734bc3712efb",
+      "scope": "All original checks plus three independent initialization means and covariance-eigenvalue/whitening/affine-support generation checks. Not a benchmark."
+    },
+    "originals": {
+      "files": 5,
+      "method": "Four byte-exact saved notebook PNGs and one complete immutable official documentation PNG.",
+      "exit": 0,
+      "byteEqualityFiles": 5,
+      "command": "node publishing/tools/prepare_gmm_source_figures.mjs --check"
+    },
+    "build": {
+      "exit": 0,
+      "routes": 2007,
+      "htmlFiles": 2011,
+      "brokenInternalLinks": 0,
+      "bytes": 850798699,
+      "files": 5590,
+      "headroom": 149201301
+    },
+    "reader": {
+      "evidence": "docs/audit/evidence/2026-11-03-gmm-reader",
+      "desktop": "1280x720: complete four-panel initialization viewer and Digits comparison page inspected; all 12 images loaded with nonzero native dimensions and useful alt text. Four tables 617/617, document 1265/1265, no KaTeX errors.",
+      "mobile": "390x844 override: actual document 375/375, four tables 343/343, zero display/inline-math overflow and KaTeX errors. Complete generated Digits, moons and AIC originals inspected; initialization at 2x panned to both sides so both pairs of panel headers fit. Long caption tails scrolled and read.",
+      "figures": "All five raw new originals inspected and byte-compared. Previous seven figures unchanged apart from meaningful alt descriptions; no fresh exhaustive visual audit of each prior image claimed.",
+      "navigation": "Actual RU reference -> #gmm-initialization and EN reference -> /en/ textbook #gmm-pca-generation transitions verified. EN page has 12 figures and 10 programs, explicitly labeled canonical-language fallback.",
+      "finalRead": "Complete final 1184-line chapter read in ranges 1-325, 326-650, 651-950, 951-1184 after direct caption/source links were added.",
+      "sourceCaptionDelta": "AIC and paired Digits captions now repeat the direct source link and license rather than rely on 'same example'; reader checks repeated after rebuild."
+    },
+    "published": false,
+    "registryAndPreservation": {
+      "exit": 0,
+      "files": 5,
+      "tests": 183,
+      "note": "Before two final caption-link-only additions. Registry, original image bytes, source/license bytes and all code unchanged; final current chapter/registry/index preservation rerun in HTML suite."
+    },
+    "htmlAndPreservation": {
+      "exit": 0,
+      "files": 11,
+      "tests": 221
+    },
+    "topicIndex": {
+      "exit": 0,
+      "topics": 152,
+      "locales": 2
+    }
+  }
+}

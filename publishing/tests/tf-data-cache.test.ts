@@ -3,13 +3,15 @@ import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {describe,expect,it} from 'vitest';
 import {parse} from 'yaml';
+import {beforeTopicConsolidation} from '../tools/topic-consolidation-baseline.mjs';
 
 const root=resolve(import.meta.dirname,'../..');
 const read=(path:string)=>readFileSync(resolve(root,path));
 const hash=(value:Buffer|string)=>createHash('sha256').update(value).digest('hex');
 const chapter='00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md';
 const directory='05 Источники/Originals/tf-data-2026-10-28/';
-const text=read(chapter).toString();
+const text=beforeTopicConsolidation(read(chapter).toString(),chapter,root,
+  '2026-11-04-precision-accumulation-additions.json');
 const pattern=/<!-- BEGIN REVIEW: tf.data cache 2026-10-28 -->\n([\s\S]*?)<!-- END REVIEW: tf.data cache 2026-10-28 -->\n\n/g;
 const normalize=(s:string)=>s.replace(/^> ?/gm,'').replace(/\s+/g,' ').trim();
 

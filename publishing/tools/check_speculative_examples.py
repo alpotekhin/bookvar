@@ -79,14 +79,77 @@ def check_figures(chapter):
                 ], check=True, capture_output=True)
                 assert output.read_bytes() == prefix.with_suffix(".png").read_bytes(), item["id"]
             rerenders += 1
-    embeds = re.findall(r"!\[\[([^\]]+)\]\]", chapter)
-    assert len(embeds) == 8
+    embeds = re.findall(r"!\[\[([^\]|]+)(?:\|[^\]]+)?\]\]", chapter)
+    assert len(embeds) == 11
     for embed in embeds:
         assert (ROOT / embed.removeprefix("02 Areas/ML & DL/")).is_file(), embed
     assert "figures/speculative_sampling_results_2.pdf" in json.dumps(assets)
     assert "includegraphics[width=\\columnwidth]{speculative_sampling_results_2}" in (
         SOURCES / "chen-main.tex").read_text()
     return {"figures": len(embeds), "new_assets": len(assets), "pdf_rerenders": rerenders}
+
+
+def check_eagle3_training():
+    evidence = ROOT / "05 Источники/Originals/eagle3-2026-11-09"
+    for name, expected in [
+        ("cnets.py", "71295b56d8bd5648a1c630af0995f6a23a13671c8e60fe92636fffd9ee786a9c"),
+        ("main.py", "439c4d8de398c8876f72806d7ba7e6436b5127a4751f3491505a3f51412a4eeb"),
+    ]:
+        assert digest(evidence / name) == expected
+    source = (evidence / "cnets.py").read_text()
+    for statement in [
+        "hidden_states = hidden_states_out",
+        "input_ids = padding(input_ids, left=False)",
+        "target = padding(target, left=False)",
+        "target_mask = self.t2d[target_max_token]",
+        "target_head = target_head[..., self.t2d]",
+        "target_p = nn.Softmax(dim=2)(target_head)",
+        "plogp = target_p * out_logp",
+    ]:
+        assert statement in source
+    assert "ploss_weight = [0.8 ** i" in (evidence / "main.py").read_text()
+    # The comparison uses teacher logits and the teacher argmax before truncation.
+    retained = np.array([True, True, False])
+    probs = np.array([[.15, .60, .25], [.15, .25, .60]])
+    teacher = np.log(probs)
+    masked = teacher[:, retained]
+    target = np.exp(masked) / np.exp(masked).sum(axis=-1, keepdims=True)
+    position_mask = retained[teacher.argmax(axis=-1)]
+    loss = -position_mask.astype(float) * (target * np.log([.25, .75])).sum(axis=-1)
+    np.testing.assert_allclose(target[0], [.2, .8])
+    np.testing.assert_allclose(position_mask, [True, False])
+    np.testing.assert_allclose(loss, [.5074, 0], atol=.00005)
+    np.testing.assert_allclose(-np.log(.75), .2877, atol=.00005)
+    np.testing.assert_allclose(4.40/3.16, 1.39, atol=.005)
+    # Reconstruct Figure 6, independently of the pictured red check marks.
+    # The original sequence uses its causal triangle; each unrolled group
+    # adds one key per row and no edges between branches.
+    original = ["How", "can", "I"]
+    groups = [["are", "we", "do"], ["you", "help", "it"]]
+    mask = np.concatenate([np.tri(3, dtype=bool)] + [np.eye(3, dtype=bool)] * 2, axis=1)
+    columns = original + sum(groups, [])
+    visible = [[name for name, use in zip(columns, row) if use] for row in mask]
+    assert visible == [["How", "are", "you"], ["How", "can", "we", "help"],
+                       ["How", "can", "I", "do", "it"]]
+    assert np.tri(9, dtype=bool)[6:, :][1, 2] and not mask[1, 2]
+    assert np.tri(9, dtype=bool)[6:, :][1, 3] and not mask[1, 3]
+    for file, expected in [
+        ("00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-inference-figure5.png", "1fc5aea1023b11258bcc47d75f528b4e0224364089c2bbdba20a0c0aeb0f86c1"),
+        ("00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-training-mask-figure6.svg", "91c835f7a9949fdd466d453204670652cab8174c088326f03d46ad040c3ee656"),
+        ("05 Источники/Originals/eagle3-2026-11-09/openreview-4exx1hUffq.json", "44bd391f91ae1303eeeea81ad0e961fd97cf927ef57353bf1ab14554859d6064"),
+    ]:
+        assert digest(ROOT / file) == expected
+    # Check that both printed editions describe the same quantities.
+    english = ROOT / "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md"
+    for path, expected in [
+        (CHAPTER, ["0{,}5074", "0{,}2877", "4{,}40/3{,}16", "1,38×"]),
+        (english, ["0.5074", "0.2877", "4.40/3.16", "1.38×"]),
+    ]:
+        text = path.read_text()
+        assert all(item in text for item in expected)
+    return {"masked_soft_target": target[0].tolist(), "training_losses": loss.tolist(),
+            "eagle3_figure6_third_step_visible_keys": visible,
+            "eagle3_over_eagle2": 4.40/3.16}
 
 
 def sampling_probabilities(prefix, kind):
@@ -259,7 +322,8 @@ def main():
         "displayed_python_blocks": len(blocks), "exact_sequence_probabilities": sequence_checks,
         "probability_mass_trials": len(distributions), "greedy_trials": 500,
         "tree_attention_trials": 300, "reranking_trees": 300,
-        **check_sources(chapter), **check_figures(chapter)
+        **check_sources(chapter), **check_figures(chapter),
+        **check_eagle3_training()
     }, indent=2))
 
 

@@ -1,0 +1,143 @@
+{
+  "date": "2026-11-10",
+  "scope": "Extend the Kimi generation comparison from K2.5 to K3.1 Pro without confusing Kimi Linear with K2. Add a worked report note and the original K3 diagram to the local reader route. No publication.",
+  "review": {
+    "previousGoalTurn": "Progress: integrated MoBA and QSA into the canonical long-context chapter and verified the licensed author figure, worked masks and both reader shells.",
+    "sources": "Kimi Linear v1; Kimi K3 v1 §2 and Figs. 2–5; K2.5, K2.6, K2.7-Code, Kimi Linear, K3 and K3.1 Pro official pinned configs; K3.1 Pro announcement and vLLM implementation note, 2026-11-04.",
+    "explanation": "Compared the unchanged K2 text-decoder fields and the separate Kimi Linear 20/7 stack; distinguished token-state KDA, block-depth AttnRes and channel LatentMoE, then isolated K3.1 Pro's token-level indexer.",
+    "arithmetic": "Executed exact checks for the KDA two-row update, AttnRes softmax and mixture, BF16 range at the lower decay bound, and FP8 latent/index byte counts. The last check is a logical byte-count example, not a serving benchmark.",
+    "reader": "Inspected the full author figure at 1280px and 375px, including the 375px EN shell. The entire figure fits the article with its proportions intact. In the mobile viewer, 3× zoom and horizontal scrolling expose the original labels. The FP8 example is a compact results table with calculations below it.",
+    "rights": "Kimi Team, arXiv v1 Figure 2 CC BY-NC-ND 4.0. Whole source diagram rasterized at 432 DPI, with unchanged labels, geometry and colors; surrounding prose and original caption are not baked into the PNG. The visible caption links to the full original figure and license. The inherited k1.5 figure was not reevaluated here.",
+    "limits": "English uses the existing canonical-language fallback. The note does not claim that K3.1 Pro preserves learned weights, that a larger context guarantees retrieval quality, or that theoretical payload predicts serving latency."
+  },
+  "figure": {
+    "asset": "00 Учебник/Assets/Figures/curated/kimi-k3/figure-2-architecture.png",
+    "sha256": "2b79de684af4b6ec35c18cac56b7fb57667ef620c3be09bd41cc4684bdbb9ae8",
+    "dimensions_px": [
+      2472,
+      2316
+    ],
+    "pdf": "https://arxiv.org/pdf/2607.24653v1",
+    "pdf_sha256": "936a7a3b655947b014ba96b8a790c3cdb6ea8b37eea514e4b7b52655e20af0f8",
+    "pdf_page": 3,
+    "dpi": 432,
+    "crop_pdf_points": [
+      108,
+      53,
+      520,
+      439
+    ]
+  },
+  "files": [
+    {
+      "source": "02 Атлас моделей/Семейства/Kimi.md",
+      "before_sha256": "31c59fab9bc2bcf51f75aa3e9dc7c66fe0ad0b8b426dacb3ec95ca0fd0aab807",
+      "after_sha256": "fdcb1f454e6f88277e5ff0fd018828e4db4f568ad6862fac3637ddb1a06bc569",
+      "lines": 169,
+      "changes": [
+        {
+          "old": "organization: Moonshot AI\nfirst_release: 2023\nlatest_verified_release: Kimi K2.5\nlast_verified: 2026-08-06\narchitecture_base: decoder-only Transformer; later MLA-MoE and hybrid linear attention\nmodalities: [text, image, video]\n",
+          "new": "organization: Moonshot AI\nfirst_release: 2023\nlatest_verified_release: Kimi K3.1 Pro\nlast_verified: 2026-11-10\narchitecture_base: decoder-only Transformer; later MLA-MoE and hybrid linear attention\nmodalities: [text, image, video]\n"
+        },
+        {
+          "old": "# Kimi\n\n## Место в истории\n\nУ ранней Kimi был продуктовый интерфейс с длинным контекстом, но устройство\nмодели не раскрывалось достаточно подробно для архитектурного сравнения.\nПоздние открытые работы исследуют разные задачи: Moonlight — оптимизатор\nMuon для языковых моделей, Kimi Linear — сочетание рекуррентной памяти\nи внимания, Kimi K2 — MoE с триллионом параметров для текста, кода\nи работы с инструментами. K2.5 добавляет к основе K2 зрительный вход\nи режимы instant/thinking.\n\n## Поколения\n\n| Релиз/линия | Architecture | Context / modalities | Training / post-training | Evidence |\n|---|---|---|---|---|\n| Kimi product (2023–24) | не раскрыта достаточно | заявленные 200K→2M text windows | product long-context tuning | **B; архитектура неизвестна** |\n| Moonlight (2025) | MoE: 16B параметров всего, 3B активны на токен | text | масштабирование Muon; 5.7T обучающих токенов | **A** |\n| Kimi Linear (2025) | Kimi Delta Attention + периодические MLA layers | long-context text | long-context pre-training experiments | **A** |\n| Kimi K2 (2025-07) | 1T total / 32B active; MLA; 384 routed, 8 selected + 1 shared expert | 160K vocabulary; 128K; text | 15.5T tokens; MuonClip; Base и Instruct | **A/B** |\n| Kimi K2 Thinking (2025) | тот же K2 backbone | 256K variant | long-CoT и tool-use post-training | **B** |\n| Kimi K2.5 (2026) | K2-style MLA-MoE + MoonViT vision encoder | 256K; image/video+text input | native multimodal pre-training; instant/thinking; agentic RL | **A/B** |\n\n## Неизменное ядро и diff\n\nK2/K2.5 используют причинный декодер, MLA и разреженную MoE\nиз небольших экспертов. В K2.5 добавлены зрительные признаки\nи совместное мультимодальное обучение, а при ответе доступны режимы\nс развёрнутым рассуждением и без него. Kimi Linear — отдельная\nисследовательская ветвь; её устройство нельзя приписывать всем Kimi.\n\nУ K2 61 слой, из них один с плотной FFN; используются SwiGLU\n",
+          "new": "# Kimi\n\nУ K2 каждый слой внимания читает историю через MLA. В K3 большую\nчасть таких слоёв заменили рекуррентными, развив архитектуру отдельной\nмодели Kimi Linear. В K3.1 Pro оставшиеся слои MLA тоже перестали\nчитать всю историю: сначала индексатор выбирает нужные позиции.\nЭта замена уменьшает объём чтения, но не убирает кэш.\n\n## Поколения\n\n| Релиз или работа | Архитектура | Контекст и вход | Что изменилось в обучении или поведении | Данные |\n|---|---|---|---|---|\n| Сервис Kimi (2023–24) | не раскрыта | заявленное окно выросло с 200 тысяч до 2 миллионов токенов; текст | работа с длинными документами | **B** |\n| Moonlight (2025) | MoE: 16B параметров всего, 3B активны на токен | текст | масштабирование Muon; 5,7 трлн обучающих токенов | **A** |\n| Kimi K2 (2025-07) | 1T параметров, 32B активны на токен; MLA; выбор 8 из 384 экспертов и 1 общий | 128K; текст | 15,5 трлн токенов предобучения, MuonClip; Base и Instruct | **A/B** |\n| Kimi Linear (2025-10) | Отдельная 48B-A3B модель: 20 слоёв KDA и 7 MLA | текст | эксперименты с предобучением на длинных последовательностях | **A** |\n| Kimi K2 Thinking (2025) | та же основа K2 | 256K | постобучение для длинных рассуждений и работы с инструментами | **B** |\n| Kimi K2.5 (2026) | MLA и MoE от K2, зрительный энкодер MoonViT | 256K; текст, изображения и видео | совместное предобучение на тексте и визуальных данных; режимы instant и thinking | **A/B** |\n| Kimi K2.6 и K2.7-Code (2026) | Сохранили устройство K2.5 | 256K; текст и визуальный вход | K2.6 развивает длинные рабочие сессии, K2.7-Code ориентирован на разработку | **A/B** |\n| Kimi K3 (2026-07) | 69 KDA + 24 Gated MLA; Block Attention Residuals и LatentMoE | 1 048 576 токенов по конфигурации; текст и изображения в карточке | 2.8T параметров, 104B активны на токен; отчёт отдельно описывает per-head Muon и QAT | **A/B** |\n| Kimi K3.1 Pro (веса 2026-11) | Те же 69 KDA; во всех 24 MLA-слоях появился отбор до 2048 позиций | то же заявленное окно; текст и изображения в карточке | по карточке — дальнейшее обучение с подкреплением; не новый порядок слоёв | **A/B** |\n\n## От K2 к K2.7: один текстовый декодер, разные задачи\n\nK2/K2.5 используют причинный декодер, MLA и разреженную MoE\nиз небольших экспертов. В K2.5 добавлены зрительные признаки\nи совместное мультимодальное обучение, а при ответе доступны режимы\nс развёрнутым рассуждением и без него. У K2.6 и K2.7-Code конфигурации\nтекстовой части по-прежнему задают 61 слой, ширину 7168, размер\nMLA-латента 512 и выбор восьми из 384 маршрутизируемых экспертов.\nСравнение полей и закреплённые версии файлов приведены в\n[[05 Источники/Papers/Kimi K3 и K3.1 Pro|разборе конфигураций]].\n\nУ K2 61 слой, из них один с плотной FFN; используются SwiGLU\n"
+        },
+        {
+          "old": "только оптимизатором.\n\n## Tokenizer, данные и post-training\n\nВ карточке K2 указаны словарь 160K, 15.5T токенов предобучения\n",
+          "new": "только оптимизатором.\n\n### Токенизация и постобучение\n\nВ карточке K2 указаны словарь 160K, 15.5T токенов предобучения\n"
+        },
+        {
+          "old": "не опубликованы.\n\n## Inference и serving\n\nПри 1T параметров всего и 32B активных на токен хранение всех весов\n",
+          "new": "не опубликованы.\n\n### Кэш и размещение весов\n\nПри 1T параметров всего и 32B активных на токен хранение всех весов\n"
+        },
+        {
+          "old": "по всему контексту.\n\n## Визуальный первоисточник: как устроена Kimi Linear\n\n![[00 Учебник/Assets/Figures/curated/kimi-linear/arch.jpg]]\n",
+          "new": "по всему контексту.\n\n## Kimi Linear: состояние между слоями полного внимания\n\n![[00 Учебник/Assets/Figures/curated/kimi-linear/arch.jpg]]\n"
+        },
+        {
+          "old": "*Оригинальная архитектурная схема Kimi Linear. Автор: Moonshot AI / авторы Kimi Linear. [Исходный файл](https://raw.githubusercontent.com/MoonshotAI/Kimi-Linear/8c1d85eb6b5f8fcefb15758691b0ce50b0827ce3/figures/arch.png), commit `8c1d85eb6b5f8fcefb15758691b0ce50b0827ce3`; [MIT License, Copyright (c) 2025 Moonshot AI](https://github.com/MoonshotAI/Kimi-Linear/blob/8c1d85eb6b5f8fcefb15758691b0ce50b0827ce3/LICENSE). Изображение воспроизведено без изменения байтов; локальное расширение приведено к фактическому формату JPEG.*\n\nСлева поток идёт снизу вверх: несколько блоков KDA сменяются одним блоком полного внимания MLA. В опубликованной модели отношение равно 3:1, то есть условная группа из четырёх блоков содержит три KDA и один MLA. Справа внизу раскрыт KDA: проекции входа и локальные свёртки формируют представления, а управляемые входом затворы регулируют обновление и чтение рекуррентной памяти. Эта память имеет фиксированный размер; MLA периодически возвращает возможность обратиться к отдельным позициям истории. Поэтому экономия кэша не означает полного отказа от хранения истории.\n\nСправа вверху показано независимое от этого выбора устройство MoE: общие эксперты работают для каждого токена, а маршрутизатор выбирает часть специализированных экспертов и взвешивает их выходы. Наличие MoE само по себе ничего не говорит о линейности внимания. Например, при переходе от KDA-блока к MLA-блоку меняется способ работы с историей, но полносвязная ветвь может остаться MoE. Эта схема относится именно к Kimi Linear, не к K2 или K2.5.\n",
+          "new": "*Оригинальная архитектурная схема Kimi Linear. Автор: Moonshot AI / авторы Kimi Linear. [Исходный файл](https://raw.githubusercontent.com/MoonshotAI/Kimi-Linear/8c1d85eb6b5f8fcefb15758691b0ce50b0827ce3/figures/arch.png), commit `8c1d85eb6b5f8fcefb15758691b0ce50b0827ce3`; [MIT License, Copyright (c) 2025 Moonshot AI](https://github.com/MoonshotAI/Kimi-Linear/blob/8c1d85eb6b5f8fcefb15758691b0ce50b0827ce3/LICENSE). Изображение воспроизведено без изменения байтов; локальное расширение приведено к фактическому формату JPEG.*\n\nСлева поток идёт снизу вверх: три слоя KDA сменяются слоем полного\nвнимания MLA. В конфигурации 48B-A3B MLA стоят на позициях 4, 8, …, 24\nи в последнем, 27-м слое. Справа внизу раскрыт KDA: проекции входа\nи локальные свёртки формируют запрос, ключ и значение. Затворы\nуправляют тем, какая часть рекуррентного состояния сохраняется\nи какой сигнал идёт на выход. Размер состояния не растёт с числом\nтокенов. В слоях MLA, напротив, сохраняется латент для каждой\nпозиции, поэтому к любой из них можно обратиться позже.\n\nСправа вверху показано независимое от этого выбора устройство MoE: общие эксперты работают для каждого токена, а маршрутизатор выбирает часть специализированных экспертов и взвешивает их выходы. Наличие MoE само по себе ничего не говорит о линейности внимания. Например, при переходе от KDA-блока к MLA-блоку меняется способ работы с историей, но полносвязная ветвь может остаться MoE. Эта схема относится именно к Kimi Linear, не к K2 или K2.5.\n"
+        },
+        {
+          "old": "Механизмы разобраны в главах о [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#Gated DeltaNet: забыть старое и стереть конфликтующее|delta-правиле и рекуррентной памяти]], [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#Зачем гибридным моделям слои внимания|гибридных слоях]] и [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|маршрутизации MoE]].\n\n## Визуальный первоисточник: RL — это ещё и система\n\n![[00 Учебник/Assets/Figures/curated/atlas-courses-official/kimi-k15-rl-system.png]]\n",
+          "new": "Механизмы разобраны в главах о [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#Gated DeltaNet: забыть старое и стереть конфликтующее|delta-правиле и рекуррентной памяти]], [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#Зачем гибридным моделям слои внимания|гибридных слоях]] и [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|маршрутизации MoE]].\n\n<a id=\"kimi-k3-architecture\"></a>\n\n## K3: новые слои внимания, связи по глубине и эксперты\n\n![[00 Учебник/Assets/Figures/curated/kimi-k3/figure-2-architecture.png|Устройство Kimi K3: путь от изображения к языковому декодеру, чередование KDA и MLA, связи с предыдущими блоками и ветви экспертов]]\n\n*Устройство Kimi K3. Kimi Team, [рисунок 2 технического отчёта](https://arxiv.org/html/2607.24653v1#S2.F2), [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Воспроизведён весь рисунок из PDF, с исходными подписями.*\n\nУ нижнего края схемы MoonViT-V2 преобразует изображение в признаки,\nкоторые MLP переводит в размерность языкового декодера. Дальше\nпроследите три разные операции над представлениями:\n\n- **Вдоль последовательности.** Синие слои KDA обновляют состояние\n  по мере чтения токенов. Розовые Gated MLA могут обратиться\n  к латентам отдельных токенов истории. В K3 таких слоёв 24 из 93.\n  [[05 Источники/Papers/Kimi K3 и K3.1 Pro#kimi-k3-kda|Пример обновления состояния по строкам]] показывает,\n  чем KDA отличается от Gated DeltaNet.\n- **Между слоями.** Красные линии подводят к текущему подслою\n  суммы, сохранённые на нескольких предыдущих глубинах. У каждого\n  токена получаются свои веса этих вкладов. В\n  [[05 Источники/Papers/Kimi K3 и K3.1 Pro#kimi-k3-attnres|примере Block Attention Residuals]]\n  подслой получает половину представления из законченного блока.\n- **Внутри FFN.** Вверху слева общие эксперты получают представление\n  полной ширины, а 16 выбранных экспертов работают с одной\n  проекцией вдвое меньшей ширины. В\n  [[05 Источники/Papers/Kimi K3 и K3.1 Pro#kimi-k3-latent-moe|примере LatentMoE]]\n  можно посчитать, сколько элементов нужно отправить экспертам.\n\n## K3.1 Pro: точечная замена в 24 слоях\n\nУ K3.1 Pro синие слои на рисунке остаются на своих местах. В каждом\nрозовом слое перед MLA добавлен индексатор. Он оценивает допустимые\nпозиции дешёвыми ключами, выбирает до 2048, и только их латенты\nпоступают в основное внимание. При длинном запросе это уменьшает\nчтение больших латентов, хотя хранить теперь нужно и их, и маленькие\nключи индекса. В\n[[05 Источники/Papers/Kimi K3 и K3.1 Pro#kimi-k31-sparse-mla|расчёте для 32 768 токенов]]\nвидно, почему кэш может занимать больше памяти, а один шаг внимания\nчитать меньше данных.\n\n## Как было устроено RL в Kimi k1.5\n\n![[00 Учебник/Assets/Figures/curated/atlas-courses-official/kimi-k15-rl-system.png]]\n"
+        },
+        {
+          "old": "## Опубликовано и неизвестно\n\nОпубликованы отчёт, конфигурация и веса K2, описание MuonClip, статья Kimi Linear, репозиторий и отчёт K2.5. Не раскрыты архитектура ранней закрытой Kimi, полный список обучающих данных, маршрутизация запросов публичного API и все среды RL. Вклад отдельных стадий в качество работы с инструментами установлен лишь в пределах опубликованных абляций. Архитектуру ранней Kimi нельзя восстановить по устройству поздней K2 (**C**).\n\n## Источники\n",
+          "new": "## Опубликовано и неизвестно\n\nОпубликованы конфигурации и веса K2, Kimi Linear, K3 и K3.1 Pro.\nОткрытые конфигурации показывают, какие слои и размеры использует\nконкретный checkpoint; из них нельзя вывести состав обучающих\nданных, маршрутизацию запросов в публичном API или вклад каждой\nстадии постобучения. У ранней закрытой Kimi архитектура не раскрыта\nдостаточно, чтобы сравнить её с K2 по слоям.\n\n## Источники\n"
+        },
+        {
+          "old": "- [Kimi K2 official repository and report](https://github.com/MoonshotAI/Kimi-K2) — **A/B**, Modified MIT для weights/code по repo.\n- [Kimi K2.5 official repository](https://github.com/MoonshotAI/Kimi-K2.5) — **A/B**.\n- [Kimi Linear](https://arxiv.org/abs/2510.26692) — paper, **A**.\n- [Muon is Scalable for LLM Training](https://arxiv.org/abs/2502.16982) — Moonlight experiment, **A**.\n- [Moonshot AI](https://www.moonshot.ai/) — product announcements, **B**.\n",
+          "new": "- [Kimi K2 official repository and report](https://github.com/MoonshotAI/Kimi-K2) — **A/B**, Modified MIT для weights/code по repo.\n- [Kimi K2.5 official repository](https://github.com/MoonshotAI/Kimi-K2.5) — **A/B**.\n- [K2.6](https://huggingface.co/moonshotai/Kimi-K2.6) и [K2.7-Code](https://huggingface.co/moonshotai/Kimi-K2.7-Code) — карточки и конфигурации релизов, **A/B**.\n- [Kimi Linear](https://arxiv.org/abs/2510.26692) — paper, **A**.\n- [Kimi K3](https://arxiv.org/html/2607.24653v1) — технический отчёт, **A**.\n- [Kimi K3.1 Pro](https://huggingface.co/moonshotai/Kimi-K3.1-Pro) — карточка и веса, **A/B**.\n- [Muon is Scalable for LLM Training](https://arxiv.org/abs/2502.16982) — Moonlight experiment, **A**.\n- [Moonshot AI](https://www.moonshot.ai/) — product announcements, **B**.\n"
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Timeline.md",
+      "before_sha256": "adc7f1a68dac43d147ec90aae261c5367a1647e2d16fa4174af8bdc9ef272fbe",
+      "after_sha256": "5800a77703780819cdea029e43727759838a4aa732fbc7b188936ef3dd85e2f0",
+      "lines": 171,
+      "changes": [
+        {
+          "old": "title: Хронология моделей и технологий LLM\ntype: concept\nlast_updated: 2026-10-29\nlast_verified: 2026-09-07\nstatus: active\n",
+          "new": "title: Хронология моделей и технологий LLM\ntype: concept\nlast_updated: 2026-11-10\nlast_verified: 2026-09-07\nstatus: active\n"
+        },
+        {
+          "old": "| 2025-09 (карточка) | Qwen3-Next | три слоя Gated DeltaNet на один слой полного внимания с выходным затвором | [карточка 80B-A3B](https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct), [[02 Атлас моделей/Семейства/Qwen#qwen3-next-comparison|сравнение с Qwen3]] |\n| 2025 (линия репозитория) | GLM-4.5 | MoE и совмещённые thinking/non-thinking режимы | [официальный GLM-4.5 repository](https://github.com/zai-org/GLM-4.5) |\n| 2025 (статья) | Kimi Linear | гибрид Kimi Delta Attention и полного attention как отдельная исследовательская линия | [Kimi Linear](https://arxiv.org/abs/2510.26692) |\n| 2025-12 (статья) | DeepSeek-V3.2 | DeepSeek Sparse Attention поверх MLA | [DeepSeek-V3.2](https://arxiv.org/abs/2512.02556) |\n| 2025-12 (статья о семействе; Nano — 15.12.2025) | Nemotron 3 | гибрид Mamba-2 и attention с MoE; последующий Super развивает LatentMoE, MTP и низкоточное предобучение | [Nemotron 3 overview](https://arxiv.org/abs/2512.20856), [[02 Атлас моделей/Семейства/Nemotron|карточка семейства]] |\n",
+          "new": "| 2025-09 (карточка) | Qwen3-Next | три слоя Gated DeltaNet на один слой полного внимания с выходным затвором | [карточка 80B-A3B](https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct), [[02 Атлас моделей/Семейства/Qwen#qwen3-next-comparison|сравнение с Qwen3]] |\n| 2025 (линия репозитория) | GLM-4.5 | MoE и совмещённые thinking/non-thinking режимы | [официальный GLM-4.5 repository](https://github.com/zai-org/GLM-4.5) |\n| 2025-10 (статья) | Kimi Linear | отдельная модель с рекуррентным Kimi Delta Attention и периодическими слоями полного MLA | [Kimi Linear](https://arxiv.org/abs/2510.26692), [[02 Атлас моделей/Семейства/Kimi|сравнение поколений]] |\n| 2025-12 (статья) | DeepSeek-V3.2 | DeepSeek Sparse Attention поверх MLA | [DeepSeek-V3.2](https://arxiv.org/abs/2512.02556) |\n| 2025-12 (статья о семействе; Nano — 15.12.2025) | Nemotron 3 | гибрид Mamba-2 и attention с MoE; последующий Super развивает LatentMoE, MTP и низкоточное предобучение | [Nemotron 3 overview](https://arxiv.org/abs/2512.20856), [[02 Атлас моделей/Семейства/Nemotron|карточка семейства]] |\n"
+        },
+        {
+          "old": "| 2026-04 (анонс/карточка) | Mistral Medium 3.5 | мультимодальная модель с опубликованными весами под Modified MIT; доступность весов отделяется от полного рецепта обучения | [официальная карточка v26.04](https://docs.mistral.ai/models/mistral-medium-3-5-26-04) |\n| 2026 (статья) | Baichuan-M3 | медицинская ветка; специализированный домен не означает новую универсальную архитектуру | [Baichuan-M3 report](https://arxiv.org/abs/2602.06570) |\n| 2026-08 (релиз и отчёт) | Qwen3.8-Flash-Next | сочетание Gated DeltaNet и блочного отбора позиций QSA; четыре ветви residual и отдельная таблица n-грамм | [[05 Источники/Papers/Qwen3.8-Flash-Next|разбор отчёта]], [Qwen Team, 31 августа](https://arxiv.org/html/2608.30320v1) |\n\n## Агенты, рассуждение и проверяемые траектории\n",
+          "new": "| 2026-04 (анонс/карточка) | Mistral Medium 3.5 | мультимодальная модель с опубликованными весами под Modified MIT; доступность весов отделяется от полного рецепта обучения | [официальная карточка v26.04](https://docs.mistral.ai/models/mistral-medium-3-5-26-04) |\n| 2026 (статья) | Baichuan-M3 | медицинская ветка; специализированный домен не означает новую универсальную архитектуру | [Baichuan-M3 report](https://arxiv.org/abs/2602.06570) |\n| 2026-07 (отчёт и веса) | Kimi K3 | на смену однородному MLA в K2 пришли 69 рекуррентных слоёв и 24 Gated MLA; добавлены Block Attention Residuals и LatentMoE | [отчёт Kimi Team, 27 июля](https://arxiv.org/html/2607.24653v1), [[05 Источники/Papers/Kimi K3 и K3.1 Pro|разбор конфигураций]] |\n| 2026-08 (релиз и отчёт) | Qwen3.8-Flash-Next | сочетание Gated DeltaNet и блочного отбора позиций QSA; четыре ветви residual и отдельная таблица n-грамм | [[05 Источники/Papers/Qwen3.8-Flash-Next|разбор отчёта]], [Qwen Team, 31 августа](https://arxiv.org/html/2608.30320v1) |\n| 2026-11 (веса) | Kimi K3.1 Pro | во всех 24 слоях MLA добавлен индексатор для отбора позиций; 69 рекуррентных слоёв сохранились | [карточка и веса](https://huggingface.co/moonshotai/Kimi-K3.1-Pro), [vLLM, 4 ноября](https://vllm.ai/blog/2026-11-04-kimi-k31-pro) |\n\n## Агенты, рассуждение и проверяемые траектории\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/_index.md",
+      "before_sha256": "db4f006d6d32518a3734e4a41bd9705830a8bec7aa82fed549103fe8795e4a3a",
+      "after_sha256": "fb00ad5aa53e6c7001de902dd1126a60dfe7b0614866ddc851a16bd2cc63c6a9",
+      "lines": 60,
+      "changes": [
+        {
+          "old": "type: source-note\nstatus: active\nlast_updated: 2026-10-29\n---\n\n",
+          "new": "type: source-note\nstatus: active\nlast_updated: 2026-11-10\n---\n\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/05 Источники/Papers/Gated Delta Networks|Gated Delta Networks]]\n- [[05 Источники/Papers/Qwen3.8-Flash-Next|Qwen3.8-Flash-Next — QSA, Gated Residual и таблицы n-грамм]]\n- [[02 Areas/ML & DL/05 Источники/Papers/Recall in efficient sequence models|Recall в эффективных sequence models]]\n- [[05 Источники/Papers/Mathlib Euler products|Mathlib: Euler products — исходный модуль и условия теоремы]]\n",
+          "new": "- [[02 Areas/ML & DL/05 Источники/Papers/Gated Delta Networks|Gated Delta Networks]]\n- [[05 Источники/Papers/Qwen3.8-Flash-Next|Qwen3.8-Flash-Next — QSA, Gated Residual и таблицы n-грамм]]\n- [[05 Источники/Papers/Kimi K3 и K3.1 Pro|Kimi K3 и K3.1 Pro — KDA, Attention Residuals, LatentMoE и разреженное MLA]]\n- [[02 Areas/ML & DL/05 Источники/Papers/Recall in efficient sequence models|Recall в эффективных sequence models]]\n- [[05 Источники/Papers/Mathlib Euler products|Mathlib: Euler products — исходный модуль и условия теоремы]]\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "9d620d1f39146bcc1b93bb755c6ac2551c85b8937ba3b55301b80af9289563ac",
+      "after_sha256": "ca836d0a0bcfabe84713729714abc64062d138cae9c5d5effa1d1e851a49af8c",
+      "lines": 24693,
+      "changes": [
+        {
+          "old": "    last_verified: 2026-09-28\n\n  - id: curated-moba-running-example-34861ce26910\n    asset: 00 Учебник/Assets/Figures/curated/moba/moba-running-example.png\n",
+          "new": "    last_verified: 2026-09-28\n\n  - id: curated-kimi-k3-architecture-2b79de684af4\n    asset: 00 Учебник/Assets/Figures/curated/kimi-k3/figure-2-architecture.png\n    author: Kimi Team\n    source_url: https://arxiv.org/html/2607.24653v1#S2.F2\n    source_image_url: https://arxiv.org/pdf/2607.24653v1#page=3\n    source_asset_sha256: 936a7a3b655947b014ba96b8a790c3cdb6ea8b37eea514e4b7b52655e20af0f8\n    source_page: 3\n    sha256: 2b79de684af4b6ec35c18cac56b7fb57667ef620c3be09bd41cc4684bdbb9ae8\n    dimensions_px: [2472, 2316]\n    license: CC BY-NC-ND 4.0\n    license_url: https://creativecommons.org/licenses/by-nc-nd/4.0/\n    license_evidence: https://arxiv.org/html/2607.24653v1\n    derivation: pdf-page-render-crop\n    modifications: \"Technical rasterization at 432 DPI; PDF-point box [108,53,520,439] isolates the complete illustration from surrounding page prose. All labels, arrows and colors retained. Original caption available at the linked figure. No redraw, translation or change to the illustration.\"\n    used_in:\n      - 02 Атлас моделей/Семейства/Kimi.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    last_verified: 2026-11-10\n\n  - id: curated-moba-running-example-34861ce26910\n    asset: 00 Учебник/Assets/Figures/curated/moba/moba-running-example.png\n"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "5c58c819c3a37aec8dedfa773c8286c806511c4b12d6b1e8f53a51999e9fcd24",
+      "after_sha256": "665057617787b032fba4b4a7d1072e6e7e904d1e852edf7b27a9ac5833fe89eb",
+      "lines": 2593,
+      "changes": [
+        {
+          "old": "      - source: Papers/Kimi k1.5.md\n        route: sources/papers/kimi-k1-5\n      - source: Papers/BERT.md\n        route: sources/papers/bert\n",
+          "new": "      - source: Papers/Kimi k1.5.md\n        route: sources/papers/kimi-k1-5\n      - source: 05 Источники/Papers/Kimi K3 и K3.1 Pro.md\n        route: sources/papers/kimi-k3-k31\n      - source: Papers/BERT.md\n        route: sources/papers/bert\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/Kimi K3 и K3.1 Pro.md",
+      "created": true,
+      "after_sha256": "53ca785b59620be832ce42f763d11936e0bc561866464bb974f8d4ddc2f2bdfa",
+      "lines": 223
+    }
+  ]
+}

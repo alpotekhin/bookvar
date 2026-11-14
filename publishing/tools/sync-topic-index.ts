@@ -10,7 +10,13 @@ const root = resolve(import.meta.dirname, '../..');
 const manifest = loadManifest(resolve(root, 'publishing/navigation.yml'));
 const textbook = manifest.sections.find(section => section.id === 'textbook')!;
 const englishContents = readFileSync(resolve(root, 'en/00 Textbook/_index.md'), 'utf8');
-const englishLabels = new Map([...englishContents.matchAll(/\[\[([^\]|]+)\|([^\]]+)\]\]/g)]
+const curriculumStart = englishContents.indexOf('<a id="curriculum"></a>');
+const curriculumEnd = englishContents.indexOf('<a id="другие-режимы"></a>');
+if (curriculumStart < 0 || curriculumEnd <= curriculumStart)
+  throw new Error('English contents must delimit the curriculum and specialist modules');
+// Use the chapter-list labels rather than incidental links in prose or worked examples.
+const englishCurriculum = englishContents.slice(curriculumStart, curriculumEnd);
+const englishLabels = new Map([...englishCurriculum.matchAll(/\[\[([^\]|]+)\|([^\]]+)\]\]/g)]
   .map(match => [match[1].replace(/^02 Areas\/ML & DL\//, '') + '.md', match[2]]));
 const groups: Array<[string, string, string[]]> = [
   ['Математика и основы обучения', 'Mathematics and learning foundations', ['textbook/ml-foundations/']],

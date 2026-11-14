@@ -72,6 +72,8 @@ last_verified: 2026-09-04
 
 [Оригинальная лекция с кодом и иллюстрациями](https://cs336.stanford.edu/lectures/?trace=lecture_01) · [сохранённый Python-файл](Lectures/repository/lecture_01.py)
 
+В учебнике: [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-attention-share|как ширина модели и длина контекста меняют долю FLOP внимания]] (шаг 37); [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws#scaling-metric-emergence|почему метрика может создать видимый скачок качества]] (шаг 39); [[00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention#prefill-decode-cache-states|как меняется KV-cache между prefill и decode]] (шаг 241); [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws#isoflops-experiment|как найти минимум на IsoFLOP-кривой]] (шаг 276).
+
 <a id="lecture-02-pytorch-einops-resource-accounting-flops-memory-arithmetic-intensity"></a>
 <a id="lecture-02"></a>
 ### 2. PyTorch (einops), resource accounting (FLOPs, memory, arithmetic intensity)
@@ -79,6 +81,8 @@ last_verified: 2026-09-04
 Формы тензоров, операции PyTorch и einops, градиенты и шаг оптимизатора. На этих операциях разбирается подсчёт параметров, FLOPs и памяти: важно учитывать не только веса, но и активации, градиенты и состояние оптимизатора.
 
 [Оригинальная лекция с кодом и иллюстрациями](https://cs336.stanford.edu/lectures/?trace=lecture_02) · [сохранённый Python-файл](Lectures/repository/lecture_02.py)
+
+В учебнике: [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#Именованные оси: rearrange, einsum и reduce|формы тензоров внимания в примере с двумя головами]].
 
 <a id="lecture-03-architectures-hyperparameters"></a>
 <a id="lecture-03"></a>
@@ -159,6 +163,9 @@ last_verified: 2026-09-04
 Что измеряет тест языковой модели и когда его результат можно сравнивать с другими моделями. Обсуждаются наборы задач, метрики, загрязнение тестовых данных и ограничения оценок, полученных с помощью другой языковой модели.
 
 [Оригинальная лекция с кодом и иллюстрациями](https://cs336.stanford.edu/lectures/?trace=lecture_12) · [сохранённый Python-файл](Lectures/repository/lecture_12.py)
+
+В учебнике: [[00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md#alpacaeval-length-control|почему судья предпочитает длинные ответы и как AlpacaEval оценивает сравнение при равной длине]]; оригинальные рисунки и расчёт на двух запросах.
+Также [[00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md#wildbench-checklist|разбор WildBench: критерии для отдельного запроса, WB-Score и WB-Reward]].
 
 <a id="lecture-13-data-sources-datasets"></a>
 <a id="lecture-13"></a>

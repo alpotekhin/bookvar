@@ -1,0 +1,218 @@
+{
+  "url": "http://127.0.0.1:4330/textbook/pretraining/synthetic-images-sim-to-real/",
+  "width": 1280,
+  "height": 900,
+  "figures": [
+    {
+      "index": 0,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/sim-to-real-2026-10-28/semantic_segmentation_rendering_0.jpg",
+      "alt": "Original BlenderProc RGB, depth and segmentation output, first viewpoint",
+      "natural": [
+        1039,
+        1039
+      ],
+      "display": [
+        689,
+        689
+      ],
+      "viewport": [
+        1212,
+        721
+      ],
+      "scroll": [
+        1212,
+        721
+      ],
+      "caption": "DLR-RM and BlenderProc contributors,\nSemantic Segmentation example,\nGPL-3.0. Complete original image. Upper left: RGB; upper right: depth\nvisualization; bottom: a discrete segmentation visualization. Display colours\nare not calibrated distances or a universal class-ID legend.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-sim-to-real-reader/1280-figure-00.png"
+    },
+    {
+      "index": 1,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/sim-to-real-2026-10-28/semantic_segmentation_rendering_1.jpg",
+      "alt": "Original BlenderProc RGB, depth and segmentation output, second viewpoint",
+      "natural": [
+        1039,
+        1039
+      ],
+      "display": [
+        689,
+        689
+      ],
+      "viewport": [
+        1212,
+        721
+      ],
+      "scroll": [
+        1212,
+        721
+      ],
+      "caption": "DLR-RM and BlenderProc contributors,\nSemantic Segmentation,\nGPL-3.0. The second complete output from the same example. A change of\nviewpoint changes visible surfaces and their pixel annotations. The images\nare saved author outputs, not a local Blender run.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-sim-to-real-reader/1280-figure-01.png"
+    },
+    {
+      "index": 2,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/sim-to-real-2026-10-28/material_randomizer_rendering.jpg",
+      "alt": "Original BlenderProc scene before material replacement",
+      "natural": [
+        512,
+        512
+      ],
+      "display": [
+        512,
+        512
+      ],
+      "viewport": [
+        1212,
+        721
+      ],
+      "scroll": [
+        1212,
+        721
+      ],
+      "caption": "DLR-RM and BlenderProc contributors,\nMaterial Randomization,\nGPL-3.0. Both complete original JPEGs, unchanged. Material choice varies\nappearance while the scene geometry provides the object identity.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-sim-to-real-reader/1280-figure-02.png"
+    },
+    {
+      "index": 3,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/sim-to-real-2026-10-28/material_randomizer_rendering_switched.jpg",
+      "alt": "Original BlenderProc scene after material replacement",
+      "natural": [
+        512,
+        512
+      ],
+      "display": [
+        512,
+        512
+      ],
+      "viewport": [
+        1212,
+        721
+      ],
+      "scroll": [
+        1212,
+        721
+      ],
+      "caption": "DLR-RM and BlenderProc contributors,\nMaterial Randomization,\nGPL-3.0. Both complete original JPEGs, unchanged. Material choice varies\nappearance while the scene geometry provides the object identity.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-sim-to-real-reader/1280-figure-03.png"
+    },
+    {
+      "index": 4,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/sim-to-real-2026-10-28/camera_sampling_rendering_0.jpg",
+      "alt": "Original BlenderProc sampled camera output 1",
+      "natural": [
+        1039,
+        1039
+      ],
+      "display": [
+        689,
+        689
+      ],
+      "viewport": [
+        1212,
+        721
+      ],
+      "scroll": [
+        1212,
+        721
+      ],
+      "caption": "DLR-RM and BlenderProc contributors,\nCamera sampling,\nGPL-3.0. Complete original outputs. Upper left: RGB; upper right: surface\nnormals; bottom: depth. The normal visualization encodes surface orientation,\nnot object identity. All three panels use the same scene/view configuration.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-sim-to-real-reader/1280-figure-04.png"
+    },
+    {
+      "index": 5,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/sim-to-real-2026-10-28/camera_sampling_rendering_1.jpg",
+      "alt": "Original BlenderProc sampled camera output 2",
+      "natural": [
+        1039,
+        1039
+      ],
+      "display": [
+        689,
+        689
+      ],
+      "viewport": [
+        1212,
+        721
+      ],
+      "scroll": [
+        1212,
+        721
+      ],
+      "caption": "DLR-RM and BlenderProc contributors,\nCamera sampling,\nGPL-3.0. Complete original outputs. Upper left: RGB; upper right: surface\nnormals; bottom: depth. The normal visualization encodes surface orientation,\nnot object identity. All three panels use the same scene/view configuration.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-sim-to-real-reader/1280-figure-05.png"
+    },
+    {
+      "index": 6,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/sim-to-real-2026-10-28/dann-architecture.png",
+      "alt": "Original Ganin et al. DANN architecture and gradient directions",
+      "natural": [
+        2200,
+        940
+      ],
+      "display": [
+        1180,
+        504.1796875
+      ],
+      "viewport": [
+        1212,
+        721
+      ],
+      "scroll": [
+        1212,
+        721
+      ],
+      "caption": "Yaroslav Ganin et al.,\nDomain-Adversarial Training of Neural Networks, Figure 1, p.12.\nCC-by under the JMLR publication policy.\nFull original diagram and derivative legend, extracted at 400 dpi without\nredrawing or translated labels.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-sim-to-real-reader/1280-figure-06.png"
+    }
+  ],
+  "limits": "Headless browser interactions and screenshots; requires separate human visual inspection.",
+  "layout": {
+    "page": [
+      1280,
+      1280
+    ],
+    "mathErrors": 0,
+    "formulas": [
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ]
+    ],
+    "tables": [
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ]
+    ]
+  },
+  "contextScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-sim-to-real-reader/1280-page.png"
+}

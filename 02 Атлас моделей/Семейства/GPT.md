@@ -30,20 +30,31 @@ status: active-partially-closed
 | ChatGPT (с 2022) | зависит от версии продукта; точный размер не раскрыт | Диалоговый продукт нельзя отождествлять с одним из исследовательских checkpoint InstructGPT. |
 | GPT-4 — GPT-5.6 | закрыто | Мультимодальные и reasoning-возможности известны по system cards/API; точный блок и корпус не опубликованы. GPT-5.6 Sol, Terra и Luna вышли 9 июля 2026 года. |
 
-## Архитектурная основа
+<a id="gpt-family-decoder"></a>
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/gpt-decoder-block.png]]
+## Причинный декодер
 
-*Рисунок: Jay Alammar, [The Illustrated GPT-2](https://jalammar.github.io/illustrated-gpt2/), CC BY-NC-SA 4.0; локальная копия. Иллюстрация раскрывает paper-level decoder: токены и позиции превращаются в векторы, проходят повторяемые masked self-attention и MLP-блоки, затем проецируются в logits словаря.*
+![[00 Учебник/Assets/Figures/curated/gpt-30/gpt2-transformer-block-vectors-2.png|Первый токен проходит через 12 блоков GPT-2; в первом показаны причинное внимание и полносвязная сеть]]
 
-GPT-1/2/3 используют причинный декодер Transformer. Маска закрывает
-доступ к будущим токенам при обучении предсказанию следующего токена.
-При генерации предсказанный токен добавляется к входу, и модель
-выполняется снова. GPT-1 использует post-norm; GPT-2 перенёс LayerNorm
-перед подслоями и добавил финальную нормализацию. GPT-3 увеличил
-масштаб модели и чередовал полное и локальное внимание.
+*Jay Alammar, [The Illustrated GPT-2, «A journey up the Stack»](https://jalammar.github.io/illustrated-gpt2/#a-journey-up-the-stack), [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). [Исходное изображение](https://jalammar.github.io/images/gpt2/gpt2-transformer-block-vectors-2.png) воспроизведено без изменений.*
 
-Полные объяснения обучения и применения вынесены в последовательные главы: [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1: предобучение и дообучение на задаче]], [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2: zero-shot через продолжение текста]] и [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3: примеры внутри контекста]]. Таблица выше фиксирует различия поколений, не заменяя эти разборы.
+Стрелка ведёт от вектора первого токена к выходу двенадцатого
+блока малой GPT-2. На первой позиции внимание видит только
+сам этот токен: позиции справа закрыты причинной маской. В
+более поздней позиции появляются доступные токены слева.
+FFN при этом по-прежнему преобразует вектор каждой позиции
+отдельно. Схема заканчивается выходом блока: нормализации,
+остаточные связи и проекция на словарь на ней не показаны.
+
+У [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение#gpt1-decoder-architecture|GPT-1]] LayerNorm применялась после сложения с остаточным путём.
+В [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-pre-norm|GPT-2]] нормализацию перенесли на вход подслоя и добавили
+отдельную LayerNorm на выходе стека. [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-full-local-attention|GPT-3]] сохранила этот
+порядок и стала чередовать слои полного и локального причинного
+внимания. У [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|первой LLaMA]] снова полное внимание во всех
+слоях, но вместо LayerNorm — RMSNorm, вместо обучаемой таблицы
+позиций — RoPE, а FFN использует SwiGLU. В [[00 Учебник/_index#От GPT-1 к LLaMA|оглавлении]]
+эти главы собраны в один маршрут, включая то, как менялся
+формат задачи на входе.
 
 ## Токенизация, данные и обучение
 

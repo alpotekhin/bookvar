@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-31",
+  "scope": "Correct only the unsupported identical-test-set claim in a Google MLCC illustration caption; preserve the complete generalization explanation and source figures.",
+  "files": [
+    {
+      "source": "00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md",
+      "before_sha256": "e1efdca476a16e47475fc763bc9a64c5524fdca74add685ba9d5dc8dd335e7c2",
+      "after_sha256": "6e831b99ad8d131bde8b2f271e9ec9875ccc7bb5a8342235b570b82a877fac70",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-22",
+          "new": "last_updated: 2026-10-31"
+        },
+        {
+          "old": "*На одном и том же тестовом наборе сложная граница ошибается чаще,\nчем простая. Источник: Google Machine Learning Crash Course,",
+          "new": "*В этой иллюстрации простая граница допускает меньше ошибок,\nчем сложная. Источник: Google Machine Learning Crash Course,"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "sourceFiles": [
+      "00 Учебник/Assets/Figures/curated/foundations-source-first/google-complex-model.svg",
+      "00 Учебник/Assets/Figures/curated/foundations-source-first/google-simple-model.svg"
+    ],
+    "finding": "The 49 cyan tree markers in each plot share only 48 coordinates after subtracting the respective forest origins and rounding to 0.001 source units. One marker is moved. The source is a qualitative illustration, not evidence of a numerically controlled identical-test-set comparison.",
+    "sourceBytes": "Both original SVGs fetched from Google source_image_url and matched local SHA-256 bytes on 2026-10-31."
+  }
+}

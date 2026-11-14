@@ -4,14 +4,14 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "318e040db226fabac04ba6576bf629775600e4626a03e2ac7ce0a4ec16967499"
-translation_reviewed: "2026-10-29"
+canonical_revision: "480d3ccf43e3c543f477a0adea2a298d4c6bf80dc89dfb39eb42e5ab86ca4e16"
+translation_reviewed: "2026-11-13"
 translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md"
-last_updated: 2026-10-29
+last_updated: 2026-11-13
 primary_sources:
   - https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf
   - https://github.com/openai/finetune-transformer-lm/tree/a69b5c43b0452462890bca8ff92fb75dee9290cf
-previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa]]"
+previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]"
 next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]"
 ---
 
@@ -33,6 +33,8 @@ Dai and Le and ULMFiT. Their 2018 work examines transfer from a causal
 Transformer and ways to present several task types to it
 ([paper, Sections 1–3](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf)).
 
+<a id="gpt1-decoder-architecture"></a>
+
 ## One architecture for both stages
 
 GPT-1 has twelve blocks, state width $d=768$, and twelve attention heads.
@@ -43,14 +45,6 @@ task special tokens.
 
 The model has approximately 117 million parameters
 ([CS224n, slide 48](https://web.stanford.edu/class/cs224n/slides/cs224n-spr2024-lecture09-pretraining-updated.pdf#page=48)).
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure1-block.png]]
-
-*GPT-1 block, the left panel of Figure 1 in
-[Radford et al., page 4](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=4).
-Computation proceeds upward: embeddings, twelve blocks, then one of two
-output heads. Normalization follows each residual addition. The panel
-is extracted without redrawing; the complete figure appears below.*
 
 Input $U$ of shape $[B,T]$ contains token IDs. Looking up and adding
 token-table and position-table rows gives $H_0$ of shape $[B,T,768]$:
@@ -70,18 +64,28 @@ H_\ell&=\operatorname{LN}(A_\ell+\operatorname{FFN}(A_\ell)).
 \end{aligned}
 $$
 
-This is post-norm, as in the original Transformer. GPT-2 changes the
-order; its pre-norm layout must not be projected backward onto GPT-1.
-The FFN uses GELU; there is no RMSNorm, RoPE, or SwiGLU here. In the
-code, `conv1d` with kernel size 1 is an ordinary affine transformation
+This is post-norm. In [the left panel of Figure 1](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=4),
+the residual sum goes into `Layer Norm`. GPT-2 moves LayerNorm before
+attention and the FFN. GPT-1's FFN uses GELU. In the code, `conv1d`
+with kernel size 1 is an affine transformation
 of the last axis, not a mixture of adjacent tokens
 ([`block`, `mlp`, and `conv1d`](https://github.com/openai/finetune-transformer-lm/blob/a69b5c43b0452462890bca8ff92fb75dee9290cf/train.py)).
 
-At every layer, row $t$ may read positions $0,\ldots,t$. The last
-token's state can therefore use the entire input, while the first
-cannot receive words on its right. There is no separate encoder or
-cross-attention. “Decoder-only” refers to causal blocks, not to
-receiving memory from another encoder.
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt1-pretraining-2026-11-10/bert-gpt-elmo-figure3.png|BERT reads both directions, GPT-1 reads the current position and positions to its left, and ELMo uses two separate LSTM chains.]]
+
+*Jacob Devlin, Ming-Wei Chang, Kenton Lee, Kristina Toutanova,
+[BERT, Figure 3](https://aclanthology.org/N19-1423.pdf#page=13),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+All three panels are reproduced from the paper without redrawing.*
+
+In the middle panel, input embedding $E_1$ can influence outputs
+$T_1$ and $T_2$, but no path leads from $E_2$ to $T_1$.
+BERT, on the left, has such a path. Its first position, `[CLS]`,
+can therefore collect information from the entire input. GPT-1 puts
+its classification token at the end so its state can use every earlier
+position. During language modeling, the same mask lets GPT-1 predict
+the next token without seeing it. GPT-1 has no separate encoder or
+cross-attention.
 
 For language modeling, each state is projected into the vocabulary.
 In the paper's mathematical notation, the input token table is also
@@ -130,6 +134,19 @@ The network computes them in parallel; the causal mask prevents reading
 the target from the next position. Gradients pass through the output
 projection, all blocks, and input representations.
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ntp-review-2026-10/d2l-gpt-decoder.png|Targets are shifted one token. The causal mask lets the prediction for book read this, but not book itself.]]
+
+*Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola,
+[Dive into Deep Learning, Figure 11.9.6](https://en.d2l.ai/chapter_attention-mechanisms-and-transformers/large-pretraining-transformers.html#fig-gpt-decoder-only),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+The complete [author SVG](https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/gpt-decoder-only.svg) is rendered without cropping or redrawing.*
+
+On the right, the row marked `book` is the prediction at the input
+position `this`. It can read inputs from `<bos>` through `this`;
+`book` is the target. The book uses start and end markers to illustrate
+the shift. They are not required for it: in our segment the position
+`a` predicts `cat` without a start marker.
+
 The paper writes language modeling as maximizing a sum:
 
 $$
@@ -158,22 +175,12 @@ with transferred weights.
 
 Fields of a labeled task become one or more text inputs. Special tokens
 mark boundaries and the position from which a representation is extracted.
-The figure retains the authors' names `Start`, `Delim`, and `Extract`.
-Published code calls them `_start_`, `_delimiter_`, and `_classify_`.
-
-<details>
-<summary>Complete Figure 1: the block and four task formats — click the figure to enlarge</summary>
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure1.png]]
-
-*Radford et al., [Improving Language Understanding by Generative Pre-Training,
-Figure 1, page 4](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf).
-The left shows the block and two output heads. On the right, from top
-to bottom: classification, entailment, semantic similarity, and answer
-selection. Linear denotes a learned output projection, not generation
-of a textual label. The original is preserved without redrawing.*
-
-</details>
+[Figure 1 in the OpenAI paper](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=4)
+calls these tokens `Start`, `Delim`, and `Extract`. The released code
+calls them `_start_`, `_delimiter_`, and `_classify_`. The four formats
+on the right are worked through below. In the symmetric task, two states
+are added before the `Linear` layer. For multiple choice, each
+candidate gets its own scalar from `Linear`.
 
 ### Single-text classification
 
@@ -199,7 +206,21 @@ input:  Start  A  cat sleeps Delim  An animal rests Extract
 label:  entailment
 ```
 
-State $h_8$ uses both sentences. A $[768,3]$ head produces three logits.
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt1-pretraining-2026-11-10/cs224n-decoder-classifier.png|Arrows from every input position meet at the final state h_T. Only that state goes into the linear classifier.]]
+
+*Christopher Manning, Stanford CS224N, [Lecture 9: Pretraining, slide 41](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/slides/cs224n-2023-lecture9-pretraining.pdf#page=41).
+Right-hand diagram with original labels; [course resource reuse notice](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/#logistics).*
+
+In the diagram, input $w_T$ is our `Extract` token and $h_T$ is
+the state $h_8$ above it. Arrows reach it from every input position.
+Move `Extract` to the start and the causal mask would hide both
+sentences from that position. [Slide 44](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/slides/cs224n-2023-lecture9-pretraining.pdf#page=44)
+shows this format with a different pair of sentences.
+
+The faces on the slide represent two sentiment classes. For our task,
+a $[768,3]$ head produces three logits: entailment, neutral, and
+contradiction. These are class scores, not scores for the words
+`entailment`, `neutral`, and `contradiction` in the vocabulary.
 Swapping premise and hypothesis can change the correct answer:
 “A cat sleeps” entails a resting animal, but the reverse does not
 establish that the animal is a cat.
@@ -591,17 +612,12 @@ improvement on every task.
 The LSTM comparison uses a particular single-layer network with 2048
 hidden units and the authors' training regime. It does not establish
 that every Transformer beats every recurrent network at equal budget.
-The left panel of Figure 2 shows transfer improving as more pretrained
-layers are used, so results do not arise from the initial word table alone.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure2-transfer.png]]
-
-*Radford et al., [Figure 2, left panel, page 7](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=7).
-The horizontal axis counts transferred layers. Blue lines show RACE
-against the left scale; orange lines show MultiNLI against the right.
-Solid lines are held-out results; dashed lines are training results.
-Heights of different-colored curves are not scores on one common scale.
-Both axes and the complete legend are preserved without redrawing.*
+In [Figure 2, left](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=7),
+the horizontal axis counts transferred layers. The solid blue RACE
+curve rises from about 40 to 60 on the held-out accuracy scale at left.
+It keeps rising as blocks are transferred, past the gain from transferring
+embeddings alone. Read the orange MultiNLI curve against the right-hand
+scale. Dashed lines show training-set results.
 
 The [implementation README](https://github.com/openai/finetune-transformer-lm/blob/a69b5c43b0452462890bca8ff92fb75dee9290cf/README.md)
 reports a separate Story Cloze reproduction: median accuracy over ten
@@ -630,20 +646,13 @@ $\ln0.8\approx-0.2231$ and $\ln0.7\approx-0.3567$, so the mean prefers A.
 This reduces the direct length penalty but does not itself guarantee
 correctness or comparability across every candidate type.
 
-Figure 2's right panel tracks normalized heuristic performance during
-pre-training. The authors scale between random performance and the
-then-best result; the axis is not ordinary accuracy. These observations
-must be separated from the main table, where weights and the output
-head are trained on labels.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure2-zero-shot.png]]
-
-*Radford et al., [Figure 2, right panel, page 7](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=7).
-The horizontal axis is the number of language-pretraining updates on
-a logarithmic scale. Color identifies tasks; line style distinguishes
-Transformer and LSTM. The vertical axis is a relative score between
-random performance and the then-best single-model result, not accuracy.
-The original panel retains its axes and legend.*
+In [Figure 2, right](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=7),
+solid lines are Transformer results and dashed lines are LSTM results.
+The blue Transformer sentiment curve reaches about $0.68$ at $10^6$
+pre-training updates. That is roughly two thirds of the way from random
+guessing to the best single-model result at the time, not 68% accuracy.
+The paper's main tables measure a different setup: both the head and
+the Transformer are fine-tuned for the task.
 
 ## What GPT-1 did not solve
 
@@ -660,7 +669,8 @@ states remain one-sided. Two semantic-similarity passes remove the
 final score's dependence on input order without changing visibility
 inside blocks.
 
-A new task requires labels, an output head, and parameter training.
+In GPT-1's main protocol, a new task requires labels, an output head,
+and parameter training.
 A shared initialization does not mean that one fine-tuned network
 performs all twelve tasks unchanged. Finally, selecting a plausible
 story ending measures success on that test, not the factual reliability
@@ -668,14 +678,14 @@ of arbitrary text continuations.
 
 ## Legacy and the transition to GPT-2
 
-GPT-1 combines causal language pre-training with transfer of all parameters
-to different labeled tasks. Input formats retain one Transformer, while
-heads specify the required answer: a label, similarity score, or candidate index.
-
-In [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]],
-the authors enlarge model and corpus and investigate task execution
-through a text prefix without separate supervised fine-tuning.
-That interface differs from GPT-1's trained heads described here.
+In our example, GPT-1 chooses a class from three logits above `Extract`.
+In [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-relation-prefix|the same example with GPT-2]],
+the final position is the colon in `Relation:`. The vocabulary head
+scores the next token. If a label takes two tokens, the output at the
+colon is not enough: the second token's probability depends on the
+first. GPT-1 already used this kind of scoring in its zero-shot tests.
+The GPT-2 paper studies this and other ways to express a task in text
+without separate fine-tuning.
 
 ## Sources and further reading
 
@@ -686,5 +696,5 @@ That interface differs from GPT-1's trained heads described here.
 - [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three architectural patterns]] — input visibility and training objectives.
 - [[02 Areas/ML & DL/Papers/GPT 1.0|Earlier GPT-1 note]] — additional notes, not a replacement for the primary paper.
 
-**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa, and DeBERTa]].
+**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]].
 **Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].

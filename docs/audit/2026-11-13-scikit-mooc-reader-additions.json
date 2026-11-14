@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-13",
+  "scope": "Render source-native scikit-learn MOOC slides and preserve direct access to course videos and separate Palmer Penguins artwork.",
+  "review": {
+    "slides": "The twelve Remark decks keep every source figure occurrence and fenced code block in order. The reader strips layout wrappers, turns original slide headings into page subheadings, and separates 156 speaker-note blocks. The official player remains linked for the original layout and incremental reveals. The underlying archive is unchanged.",
+    "artwork": "The two Palmer Penguins PNGs match the exact Git blobs at 8957207b78d6ccd1b4654a9dd9c9041b657478ab. The pinned art vignette expressly invites teaching use with the dataset and requires the credit included here. This permission is distinct from Inria's CC BY 4.0 course license.",
+    "browserFinding": "The encoded %3D in the cross-validation figure URI passed the filesystem link check but returned 404 from Astro. The same original SVG loads when the valid path character '=' is left literal. The browser sweep was repeated after the fix.",
+    "limits": "This audit verifies the reader conversion and rendering, not a fresh editorial acceptance of every Inria lesson, playback of the remote videos or the rights of all material in the archive."
+  },
+  "files": [
+    {
+      "source": "publishing/adapter/build.ts",
+      "before_sha256": "66ff0425c73a72e02df6d0868526219f5aef07e5a87ed2762f334ca0a8b191db",
+      "after_sha256": "d74579062b8650a829a7588c2c18025d2f16e399f273bb808968914b78711f70",
+      "changes": [
+        {
+          "old": "",
+          "new": "import { scikitMoocReaderBody } from './scikit-mooc-reader.js';\n"
+        },
+        {
+          "old": "  if (!route.startsWith('sources/courses/genai-agents/')) return body;",
+          "new": "  if (!route.startsWith('sources/courses/genai-agents/')) return scikitMoocReaderBody(route, source, body);"
+        },
+        {
+          "old": "    const href = asset.publicPath.split('/').map(encodeURIComponent).join('/');",
+          "new": "    // '=' is valid within a path segment. Astro's static server decodes paths\n    // with decodeURI, which leaves %3D encoded and fails to find such assets.\n    const href = asset.publicPath.split('/').map(segment => encodeURIComponent(segment).replace(/%3D/g, '=')).join('/');"
+        }
+      ]
+    }
+  ]
+}

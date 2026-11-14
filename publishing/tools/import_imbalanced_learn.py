@@ -28,6 +28,7 @@ LICENSE_NAME = "MIT"
 ROUTE_ROOT = "sources/imbalanced-learn/0-14-2"
 SOURCE_ROOT_RELATIVE = Path("05 Источники/imbalanced-learn/0.14.2")
 PUBLISHED_DIR = "published"
+DOCS_BASE = "https://imbalanced-learn.org/0.14/"
 
 
 def sha256(path: Path) -> str:
@@ -125,7 +126,28 @@ def _indented_block(lines: list[str], start: int) -> tuple[list[str], int]:
     return block, index
 
 
-def rst_to_markdown(raw: str) -> str:
+def load_figures(root: Path, source_root: Path) -> dict[str, dict[str, Any]]:
+    """Check the complete local figure set before emitting any reader page."""
+    manifest = json.loads((source_root / "figures.json").read_text(encoding="utf-8"))
+    if (manifest["version"], manifest["commit"], manifest["docs_base"], manifest["license"]) != (
+        VERSION, COMMIT, DOCS_BASE, LICENSE_NAME,
+    ):
+        raise RuntimeError("Figure manifest does not match the pinned source corpus")
+    notice = root / manifest["notice"]
+    if sha256(notice) != manifest["notice_sha256"] or notice.read_bytes() != (
+        source_root / "original/LICENSE"
+    ).read_bytes():
+        raise RuntimeError("Figure MIT notice differs from the pinned original")
+    figures = {}
+    for filename, figure in manifest["figures"].items():
+        asset = root / figure["asset"]
+        if not asset.resolve().is_relative_to(root) or sha256(asset) != figure["sha256"]:
+            raise RuntimeError(f"Gallery figure drift: {filename}")
+        figures[filename] = {**figure, **manifest["galleries"][figure["gallery"]]}
+    return figures
+
+
+def rst_to_markdown(raw: str, figures: dict[str, dict[str, Any]] | None = None) -> str:
     """Convert imbalanced-learn's narrative RST to portable Markdown."""
 
     lines = raw.expandtabs(4).splitlines()
@@ -136,6 +158,19 @@ def rst_to_markdown(raw: str) -> str:
     while index < len(lines):
         line = lines[index]
         stripped = line.strip()
+
+        # RST recognizes doctests without a preceding literal-block marker.
+        # Markdown would interpret an unfenced >>> prompt as nested quotes.
+        if stripped.startswith(">>> "):
+            if line != line.lstrip():
+                block, index = _indented_block(lines, index)
+            else:
+                start = index
+                while index < len(lines) and lines[index].strip():
+                    index += 1
+                block = lines[start:index]
+            output.extend(["", "```python", *block, "```", ""])
+            continue
 
         if (
             re.fullmatch(r"[=\-~^`:+*#.]{3,}", stripped)
@@ -182,23 +217,30 @@ def rst_to_markdown(raw: str) -> str:
                 output.extend(["$$", formula, "$$", ""])
             elif kind == "image":
                 image_name = Path(argument).name
-                image_url = f"https://imbalanced-learn.org/stable/_images/{image_name}"
                 target = next(
                     (
                         item.split(":target:", 1)[1].strip()
                         for item in block
                         if item.strip().startswith(":target:")
                     ),
-                    "https://imbalanced-learn.org/stable/auto_examples/index.html",
+                    "",
                 )
-                if target.startswith("./"):
-                    target = "https://imbalanced-learn.org/stable/" + target[2:]
+                figure = (figures or {}).get(image_name)
+                if figure is None or target != "./" + figure["gallery"]:
+                    raise ValueError(f"Unverified gallery figure or target: {image_name} -> {target}")
+                gallery_url = DOCS_BASE + figure["gallery"]
                 output.extend(
                     [
-                        f"[![Official imbalanced-learn figure: {image_name}]({image_url})]({target})",
+                        f"![[{figure['asset']}|{figure['alt']}]]",
+                        "",
+                        f"*{figure['author']}, [{figure['title']}]({gallery_url}), "
+                        f"imbalanced-learn {VERSION}. [Original PNG]({DOCS_BASE}_images/{image_name}) "
+                        f"· [MIT]({REPOSITORY}/blob/{COMMIT}/LICENSE). Unmodified.*",
                         "",
                     ]
                 )
+                if figure.get("reading_note"):
+                    output.extend([f"**Bookvar note.** {figure['reading_note']}", ""])
             elif kind == "bibliography":
                 output.extend(
                     [
@@ -210,7 +252,7 @@ def rst_to_markdown(raw: str) -> str:
             else:
                 label = argument or kind.replace("_", " ").title()
                 callout = "warning" if kind == "warning" else "note"
-                converted = rst_to_markdown("\n".join(block)).strip()
+                converted = rst_to_markdown("\n".join(block), figures).strip()
                 output.append(f"> [!{callout}] {inline_rst(label)}")
                 if converted:
                     output.extend(
@@ -553,6 +595,7 @@ def import_corpus(root: Path, update_routes: bool) -> list[dict[str, str]]:
     if source["version"] != VERSION or source["commit"] != COMMIT or source["license"] != LICENSE_NAME:
         raise RuntimeError("Pinned source metadata no longer matches the importer")
 
+    figures = load_figures(root, source_root)
     records: list[dict[str, str]] = []
     for item in manifest["files"]:
         original = source_root / item["path"]
@@ -568,7 +611,7 @@ def import_corpus(root: Path, update_routes: bool) -> list[dict[str, str]]:
 
         if original.suffix == ".rst":
             title = title_from_rst(raw, original.stem.replace("_", " ").title())
-            body = rst_to_markdown(raw)
+            body = rst_to_markdown(raw, figures)
         elif original.suffix == ".py":
             title, body = python_gallery_to_markdown(
                 raw, original.stem.replace("_", " ").title()

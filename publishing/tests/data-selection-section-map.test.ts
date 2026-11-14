@@ -1,4 +1,5 @@
-import { beforeReaderRouteNavigation, readBeforeReaderRouteNavigation } from '../tools/reader-route-baseline.mjs';
+import { beforeReaderRouteNavigation } from '../tools/reader-route-baseline.mjs';
+import { beforeTopicConsolidation } from '../tools/topic-consolidation-baseline.mjs';
 import {createHash} from 'node:crypto';
 import {readFileSync,existsSync} from 'node:fs';
 import {resolve} from 'node:path';
@@ -44,10 +45,14 @@ describe('Data Selection source map, not a full-unit completion claim',()=>{
     for(const [id,target] of [['label-errors','scores'],['image-dedup','dedup'],['cold-embedding-ids','recsys']]){
       const closed=map.closed_items[id],destination=map.targets[target];
       expect(closed.status).toBe('reader-explanation-reviewed');
-      expect(hash(read(destination.path))).toBe(closed.chapter_sha256);
+      const current=read(destination.path);
+      const atReview=beforeTopicConsolidation(current,destination.path,root,
+        destination.navigation_review?.split('/').at(-1));
+      expect(hash(atReview)).toBe(closed.chapter_sha256);
       expect(destination.current_sha256).toBe(closed.chapter_sha256);
       expect(existsSync(resolve(root,closed.review))).toBe(true);
-      expect(read(destination.path)).toContain(`id="${closed.anchor}"`);
+      expect(atReview).toContain(`id="${closed.anchor}"`);
+      expect(current).toContain(`id="${closed.anchor}"`);
       expect(closed.required.length).toBeGreaterThan(100);
     }
     const partial=map.sections.filter((r:any)=>r.status==='partial');

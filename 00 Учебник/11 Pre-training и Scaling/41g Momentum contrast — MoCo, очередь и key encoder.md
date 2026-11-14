@@ -3,8 +3,39 @@ title: Momentum contrast — MoCo, очередь и key encoder
 type: textbook-chapter
 status: canonical
 source_language: en
-last_updated: 2026-10-28
-last_verified: 2026-10-28
+last_updated: 2026-11-05
+last_verified: 2026-11-05
+reference_terms:
+  - anchor: dictionary
+    label: "MoCo: словарь сохранённых key vectors"
+    label_en: "MoCo: a dictionary of stored key vectors"
+  - anchor: moco-versus-simclr
+    label: "MoCo и SimCLR: кандидаты и пути градиента"
+    label_en: "MoCo versus SimCLR: candidates and gradient paths"
+  - anchor: momentum-encoder
+    label: "Momentum encoder: EMA параметров и возраст ключей"
+    label_en: "Momentum encoder: parameter EMA and key age"
+  - anchor: fifo-queue
+    label: "Кольцевая очередь MoCo и порядок замены"
+    label_en: "The MoCo ring queue and replacement order"
+  - anchor: moco-loss
+    label: "MoCo loss: положительный столбец и старые отрицательные ключи"
+    label_en: "MoCo loss: the positive column and old negative keys"
+  - anchor: queue-snapshot
+    label: "Зачем MoCo копирует очередь перед backward"
+    label_en: "Why MoCo clones the queue before backward"
+  - anchor: complete-step
+    label: "Два полных шага MoCo и обновление энкодеров"
+    label_en: "Two complete MoCo steps and encoder updates"
+  - anchor: moco-step-order
+    label: "Порядок EMA, forward и SGD в статье и коде"
+    label_en: "EMA, forward and SGD ordering in the paper and code"
+  - anchor: distributed-shuffle
+    label: "MoCo: global gather, shuffle BN и восстановление пар"
+    label_en: "MoCo: global gather, shuffle BN and restored pairs"
+  - anchor: cost-and-versions
+    label: "Память MoCo, устаревание ключей и изменения v2"
+    label_en: "MoCo memory, stale keys and v2 recipe changes"
 primary_sources:
   - https://arxiv.org/abs/1911.05722v3
   - https://arxiv.org/abs/2003.04297v1
@@ -57,6 +88,8 @@ a tokenizer vocabulary, and the columns are not stable word or class IDs.
 Nor is this a per-image memory bank containing one persistent entry for
 every image in the dataset. MoCo retains a bounded window of recently
 computed keys and replaces old entries as training proceeds.
+
+<a id="moco-versus-simclr"></a>
 
 ### What changes relative to SimCLR
 
@@ -418,6 +451,8 @@ On the second iteration, the EMA incorporates the query parameters changed
 by the first optimizer step. Each loss is computed against a different
 queue state, so comparing the two scalar losses is not a controlled
 before/after comparison on one fixed objective.
+
+<a id="moco-step-order"></a>
 
 ### Paper pseudocode and implementation timing
 

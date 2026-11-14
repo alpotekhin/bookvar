@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-13",
+  "scope": "Adapt reader media for the pinned Efficient Deep Learning Systems source archive, without changing the Obsidian source or routes.",
+  "review": {
+    "originals": "The pinned course Git tree and MIT notice match the recorded Git blobs. Vanilla and Liger traces are copied without changes. Both course FP8 panels match the pixels of the pinned Transformer Engine original, which is reused whole under Apache 2.0. The Ulysses and Liger FLCE figures are the existing CC BY 4.0 textbook copies; Liger v3 serves the same PNG as the registry's v2. Other borrowed or unverified artwork stays as source links.",
+    "workedChecks": "The pinned Liger profiling script allocates 1,024 × 128,000 BF16 logits, or 250 MiB. This accounts for the approximately 262M-byte trace. The course gives identical Git blobs for vanilla_ce.png and compiled_ce.png; the compiled command in the notebook names the output rather than the script. The reader links the actual pinned profile_compiled_ce.py and does not claim a reproduced result.",
+    "limits": "No GPU notebook cells ran. Three Imgur links returned HTTP 429 in the local check; they are kept as source references, not claimed available. The full slide decks are linked, not copied. This audit does not clear third-party material in the source archive or mark the whole course editorially accepted."
+  },
+  "files": [
+    {
+      "source": "publishing/adapter/build.ts",
+      "before_sha256": "8b67a6efabdacdde0f1bade79e4996446b5848ac1291ead7a2ee49d58b662563",
+      "after_sha256": "66ff0425c73a72e02df6d0868526219f5aef07e5a87ed2762f334ca0a8b191db",
+      "changes": [
+        {
+          "old": "",
+          "new": "import { edlsReaderMedia } from './edls-course-media.js';\n"
+        },
+        {
+          "old": "",
+          "new": "  if (route.startsWith('sources/courses/efficient-dl-systems/') &&\n      source.startsWith('05 Источники/Courses/Efficient DL Systems/')) {\n    return edlsReaderMedia(body);\n  }\n"
+        }
+      ]
+    }
+  ]
+}

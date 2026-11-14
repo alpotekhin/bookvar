@@ -1,0 +1,184 @@
+{
+  "date": "2026-11-13",
+  "scope": "Add two original figures to the existing reader explanations in both languages: the authored connector panel from InternVL3.5 and the full published Figure 2 from the Panda Act ImageBind application.",
+  "figures": [
+    {
+      "id": "curated-internvl35-connector-37ea06166d89",
+      "asset": "00 Учебник/Assets/Figures/curated/vlm-connectors-2026-11-13/internvl35-figure2c.png",
+      "title": "InternVL 3.5 and Flash connector architectures, Figure 2(c)",
+      "author": "Weiyun Wang et al.",
+      "source_url": "https://arxiv.org/html/2508.18265v1",
+      "figure_url": "https://arxiv.org/html/2508.18265v1#S2.F2",
+      "source_image_url": "https://arxiv.org/html/2508.18265v1/architecture.png",
+      "source_asset": "05 Источники/Originals/vlm-connectors-2026-11-13/internvl35-figure2.png",
+      "source_asset_sha256": "e68f7543e72cd51fd9375a21778db610ecdc99a88ad790a45a507abb923cacf4",
+      "source_dimensions_px": [
+        1739,
+        557
+      ],
+      "crop_box_px": [
+        1310,
+        0,
+        1739,
+        557
+      ],
+      "dimensions_px": [
+        429,
+        557
+      ],
+      "sha256": "37ea06166d89b9735cbf2aa3aa158e949557baab53156aea409d940760414f56",
+      "bytes": 39519,
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "05 Источники/Originals/vlm-connectors-2026-11-13/internvl35-license.html",
+      "license_evidence_sha256": "9df24c023c510b66ef2e1333d65959d464f350d7c793e6184390ba29e0352800",
+      "license_evidence_url": "https://arxiv.org/html/2508.18265v1",
+      "derivation": "source-raster-crop",
+      "modifications": "Complete panel (c) with its label. Pixel-exact crop; no resampling, redraw or relabeling. The full figure with its sample images is linked.",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-13",
+      "used_in": [
+        "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md",
+        "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md"
+      ]
+    },
+    {
+      "id": "curated-panda-act-imagebind-4c924d9c74c7",
+      "asset": "00 Учебник/Assets/Figures/curated/vlm-connectors-2026-11-13/panda-act-figure2.jpg",
+      "title": "Panda Act matching and manipulation framework, Figure 2",
+      "author": "Yifan Li, Peiyang Jiang, Chengpeng Chai, Xuyang Zhang and Chengguo Liu",
+      "source_url": "https://www.nature.com/articles/s41598-025-17015-z",
+      "figure_url": "https://www.nature.com/articles/s41598-025-17015-z#Fig2",
+      "source_image_url": "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41598-025-17015-z/MediaObjects/41598_2025_17015_Fig2_HTML.jpg",
+      "source_asset": "00 Учебник/Assets/Figures/curated/vlm-connectors-2026-11-13/panda-act-figure2.jpg",
+      "source_asset_sha256": "4c924d9c74c7fc79ff32e2737ef73e347783c0cd7618a4de85f7b2d43c5737cd",
+      "sha256": "4c924d9c74c7fc79ff32e2737ef73e347783c0cd7618a4de85f7b2d43c5737cd",
+      "bytes": 553527,
+      "dimensions_px": [
+        1902,
+        1295
+      ],
+      "license": "CC BY-NC-ND 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+      "license_evidence": "05 Источники/Originals/vlm-connectors-2026-11-13/panda-act-license.html",
+      "license_evidence_sha256": "d74e235519cac8046e5a81e73633924a24e5c5cc9f6c12bc33bf4f5990f2e4ca",
+      "license_evidence_url": "https://www.nature.com/articles/s41598-025-17015-z#rightslink",
+      "derivation": "source-image-copy",
+      "modifications": "Complete publisher full-size JPEG copied byte-for-byte; noncommercial use; no crop, redraw, or translation.",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-13",
+      "used_in": [
+        "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+        "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md"
+      ]
+    }
+  ],
+  "review": {
+    "sources": "Chen et al., InternVL 2.5 §§2.1, 3.1 and Figure 2; Wang et al., InternVL3.5 v1 §§2.1, 2.3 and Figure 2; Girdhar et al., ImageBind §§3.1–3.3 and Figure 1; Li et al., Panda Act, Figure 2, Methodology and Experiment I, Case III.",
+    "worked_cases": "The six detailed 448×448 tiles give 1536 vectors at 256 per tile; selecting 64 for two tiles gives 1152 with unchanged ViT input. The counts are illustrative, not a measured routing split. For ImageBind, rank the existing cropped candidates with one row of audio–image dot products and read the winner's location from its segmentation mask. A missing candidate cannot be retrieved.",
+    "rights": "InternVL3.5 v1 is CC BY 4.0; retained a pixel-exact 429×557 crop of the complete connector panel, excluding sample photographs and newspaper art in the other panels. The publisher grants CC BY-NC-ND 4.0 for Panda Act Figure 2; its native full-size JPEG is unchanged. Neither grant is treated as redistribution clearance for the original InternVL 2.5 or ImageBind papers.",
+    "preservation": "Both earlier retired copies remain link-only; preserved old explanations, examples, code fences, and stable links. The four input revisions match their preceding whole-reading receipts.",
+    "verification": "Astro built 2083 pages; no broken local routes, fragments, or files; 309 built-output and 207 asset-registry and topic-consolidation tests passed. Both chapter checkers ran 54 standalone/shared code executions, verified source images, and checked the token budget and ranking examples. Chrome checked the two figures in both locales at 1280 and 375 px. Inspected the source labels in the local reader; on mobile the viewer zoomed to 4× and panned on both axes. Neither locale showed KaTeX errors or page-wide overflow. This is not a pretrained model run or a whole-chapter acceptance. No commit, push or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-11-09",
+          "new": "last_updated: 2026-11-13"
+        },
+        {
+          "old": "  - https://arxiv.org/abs/2412.05271v1",
+          "new": "  - https://arxiv.org/abs/2412.05271v1\n  - https://arxiv.org/abs/2508.18265v1"
+        },
+        {
+          "old": "## 4. Native dynamic resolution",
+          "new": "<a id=\"vlm-internvl-resolution-router\"></a>\n\n### InternVL3.5-Flash: сколько векторов оставить от плитки\n\nВ [InternVL 3.5, §2.1](https://arxiv.org/html/2508.18265v1#S2.SS1)\nсохранились плитки и обзор. Верхняя часть рисунка показывает путь\nодной плитки после ViT: перестановка признаков сокращает 1024 позиции\nдо 256, затем MLP меняет ширину векторов. Внизу показана версия Flash.\nМаршрутизатор получает признаки той же плитки и выбирает одну из двух\nветвей: `High Resolution` оставляет 256 векторов, `Low Resolution` оставляет 64.\nОбе ветви ведут к проектору. Сетка плиток выбирается раньше, по размерам\nкартинки, а здесь решается, сколько признаков передать дальше.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-connectors-2026-11-13/internvl35-figure2c.png|Панель c: вверху InternVL 3.5 применяет одну схему сжатия перед MLP. Внизу маршрутизатор Flash выбирает ветвь высокого или низкого разрешения.]]\n\n*Weiyun Wang et al., [InternVL3.5, рис. 2](https://arxiv.org/html/2508.18265v1#S2.F2),\n[оригинал PNG](https://arxiv.org/html/2508.18265v1/architecture.png),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nВыделена целая панель (c); подписи и пиксели внутри неё не изменены.*\n\nВозьмём шесть детальных плиток из примера выше, не считая обзора.\nВ обычной ветви они дают $6\\cdot256=1536$ векторов. Если Flash\nвыберет 256 векторов для четырёх плиток и 64 для двух других,\nв LLM поступят $4\\cdot256+2\\cdot64=1152$ векторов. Это на четверть\nменьше при том же входе ViT. Четыре и две плитки здесь выбраны\nдля расчёта; статья не сообщает такое распределение для этой страницы.\n\nЧтобы обучить маршрутизатор, авторы [сравнивают два варианта сжатия](https://arxiv.org/html/2508.18265v1#S2.SS3)\nпо тому, насколько меняется распределение вероятностей текстового\nответа. Плитка получает метку высокого разрешения, если относительный\nрост потери согласованности превышает порог или равен ему. При выводе\nветвь выбирает сам классификатор. Поэтому экономия зависит от того,\nчто он счёл безопасным сжать. Для мелкого текста полезно проверять\nне только число токенов, но и ошибки чтения на плитках, ушедших в\nветвь с 64 векторами.\n\n## 4. Native dynamic resolution"
+        }
+      ],
+      "after_sha256": "f74fc43294becdf320a4ee262c8bada86bfadbd6ea2f58e189b0025637e41a8d",
+      "before_sha256": "36ad1356c2a79fdf0ade58459a0d2b2a2a18b0c6746ef8576cbd6cd360a1fe20"
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md",
+      "changes": [
+        {
+          "old": "canonical_revision: \"36ad1356c2a79fdf0ade58459a0d2b2a2a18b0c6746ef8576cbd6cd360a1fe20\"\ntranslation_reviewed: \"2026-11-09\"",
+          "new": "canonical_revision: \"f74fc43294becdf320a4ee262c8bada86bfadbd6ea2f58e189b0025637e41a8d\"\ntranslation_reviewed: \"2026-11-13\""
+        },
+        {
+          "old": "last_updated: 2026-11-09",
+          "new": "last_updated: 2026-11-13"
+        },
+        {
+          "old": "  - https://arxiv.org/abs/2412.05271",
+          "new": "  - https://arxiv.org/abs/2412.05271\n  - https://arxiv.org/abs/2508.18265v1"
+        },
+        {
+          "old": "<span id=\"anyres-глобальный-кадр-и-локальные-плитки\"></span>",
+          "new": "<a id=\"vlm-internvl-resolution-router\"></a>\n\n### InternVL3.5-Flash: how many vectors to keep per tile\n\n[InternVL 3.5, §2.1](https://arxiv.org/html/2508.18265v1#S2.SS1)\nretains tiling and the overview. The upper diagram follows one tile\nafter the ViT: the feature rearrangement reduces 1,024 positions\nto 256, then the MLP changes the width of each vector. The lower\ndiagram shows Flash. Its router receives features from the same tile\nand chooses one of two paths: `High Resolution` keeps 256 vectors,\nand `Low Resolution` keeps 64. Both paths lead to the projector.\nImage dimensions determine the tile grid earlier; here the router\ndetermines how many features to pass on.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-connectors-2026-11-13/internvl35-figure2c.png|Panel c: InternVL 3.5 uses fixed compression before the MLP. The Flash router selects a high- or low-resolution path.]]\n\n*Weiyun Wang et al., [InternVL3.5, Figure 2](https://arxiv.org/html/2508.18265v1#S2.F2),\n[original PNG](https://arxiv.org/html/2508.18265v1/architecture.png),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nComplete panel (c) cropped from the source; its pixels and labels are unchanged.*\n\nTake the six detailed tiles from the page above, excluding the overview.\nThe standard path produces $6\\cdot256=1536$ vectors. If Flash keeps 256\nvectors for four tiles and 64 for the other two, the LLM receives\n$4\\cdot256+2\\cdot64=1152$ vectors. That is one quarter fewer with\nthe same ViT input. The split is illustrative; the report does not\ngive routing decisions for this page.\n\nTo train the router, the authors [compare the two compression levels](https://arxiv.org/html/2508.18265v1#S2.SS3)\nby how much they change the probability distribution of the text\nanswer. A tile gets a high-resolution label if the relative increase\nin consistency loss meets the threshold. At inference time the trained\nclassifier chooses the path. The savings depend on what it decides\nto compress. For small print, check reading errors on tiles that went\nthrough the 64-vector path alongside the token count.\n\n<span id=\"anyres-глобальный-кадр-и-локальные-плитки\"></span>"
+        }
+      ],
+      "after_sha256": "11e24b9118c02a37fa105e82020ef714bcf8c0baa80ec2cd8445ff57680c81a3",
+      "before_sha256": "92cdfed919a488fe7f1577eda29f42de72308ae115c87ba218fa17182caceea9"
+    },
+    {
+      "source": "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-11-09",
+          "new": "last_updated: 2026-11-13"
+        },
+        {
+          "old": "  - https://arxiv.org/abs/2305.05665v1",
+          "new": "  - https://arxiv.org/abs/2305.05665v1\n  - https://doi.org/10.1038/s41598-025-17015-z"
+        },
+        {
+          "old": "из ImageBind.\n\n~~~python\nimport numpy as np\n\naudio = np.array([0.8, 0.6])  # Учебный нормированный вектор.",
+          "new": "из ImageBind.\n\n<a id=\"imagebind-audio-retrieval\"></a>\n\n#### Как по звуку выбрать объект на снимке\n\nВ эксперименте [Panda Act](https://www.nature.com/articles/s41598-025-17015-z#Fig2)\nзвук будильника записывают отдельно от снимка стола. Сегментатор сначала\nвыделяет на снимке объекты и вырезает их изображения. В нижней части схемы\nаудиоэнкодер получает запись, а энкодер изображений получает эти вырезки.\nДля одной записи $A_1$ читаем одну строку матрицы: $A_1\\cdot I_1$,\n$A_1\\cdot I_2$ и так далее. Самое большое сходство указывает, какую из\nвырезок взять. Координаты берут из маски выбранного объекта на снимке,\nа не из направления прихода звука. Если сегментатор пропустил будильник,\nего не будет среди кандидатов.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-connectors-2026-11-13/panda-act-figure2.jpg|Схема Panda Act. Внизу справа ImageBind сравнивает векторы звука со всеми вырезанными изображениями объектов. Слева сегментатор даёт кандидатов.]]\n\n*Yifan Li et al., [A framework for robotic manipulation tasks based on multiple zero shot models, рис. 2](https://www.nature.com/articles/s41598-025-17015-z#Fig2),\n[оригинал JPEG](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41598-025-17015-z/MediaObjects/41598_2025_17015_Fig2_HTML.jpg),\n[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).\nПолный рисунок из статьи, без изменений. ImageBind отвечает за нижнюю\nматрицу сопоставления; остальное выполняют другие модули системы.*\n\nВ примере ниже строка состоит из трёх оценок: $0.8$, $0.6$ и $-0.8$.\nЕсли первым кандидатом был будильник, выбирается он. При другом порядке\nвырезок изменился бы номер столбца, но не объект с наибольшей оценкой.\n\n~~~python\nimport numpy as np\n\naudio = np.array([0.8, 0.6])  # Учебный нормированный вектор."
+        }
+      ],
+      "after_sha256": "20e8da4205d31b66897b599e2ee40be3ed071710a009d7bb13ef87251eaa271a",
+      "before_sha256": "d15766e05d47e92e7e00bf4e4c4bf608ee1d22aedff025f875c4280880739f2c"
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md",
+      "changes": [
+        {
+          "old": "canonical_revision: \"d15766e05d47e92e7e00bf4e4c4bf608ee1d22aedff025f875c4280880739f2c\"\ntranslation_reviewed: \"2026-11-09\"",
+          "new": "canonical_revision: \"20e8da4205d31b66897b599e2ee40be3ed071710a009d7bb13ef87251eaa271a\"\ntranslation_reviewed: \"2026-11-13\""
+        },
+        {
+          "old": "last_updated: 2026-11-09",
+          "new": "last_updated: 2026-11-13"
+        },
+        {
+          "old": "  - https://arxiv.org/abs/2305.05665",
+          "new": "  - https://arxiv.org/abs/2305.05665\n  - https://doi.org/10.1038/s41598-025-17015-z"
+        },
+        {
+          "old": "ImageBind's audio embedding. The numbers below illustrate ranking\nby cosine similarity; they are not actual ImageBind embeddings.\n\n```python\nimport numpy as np\n\naudio = np.array([0.8, 0.6])",
+          "new": "ImageBind's audio embedding.\n\n<a id=\"imagebind-audio-retrieval\"></a>\n\n### Using sound to pick an object in a photo\n\nIn the [Panda Act experiment](https://www.nature.com/articles/s41598-025-17015-z#Fig2),\nthe alarm is recorded separately from the photo of the table. A segmentation\nmodel first identifies candidate objects in the photo and crops them out.\nIn the lower part of the diagram, the audio encoder takes the recording and\nthe image encoder takes those crops. For one recording $A_1$, read one row\nof the matrix: $A_1\\cdot I_1$, $A_1\\cdot I_2$, and so on. The largest\nsimilarity selects a crop. The system gets coordinates from the selected\nobject's mask in the photo, not from the direction of the sound. If the\nsegmentation model misses the clock, the clock is absent from the candidates.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-connectors-2026-11-13/panda-act-figure2.jpg|Panda Act diagram. At lower right, ImageBind compares audio vectors against vectors for candidate object crops. The segmentation model on the left supplies the crops.]]\n\n*Yifan Li et al., [A framework for robotic manipulation tasks based on multiple zero shot models, Figure 2](https://www.nature.com/articles/s41598-025-17015-z#Fig2),\n[original JPEG](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41598-025-17015-z/MediaObjects/41598_2025_17015_Fig2_HTML.jpg),\n[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).\nComplete original, unmodified. The lower matching matrix uses ImageBind;\nother components handle the rest of the system.*\n\nThe row in the example below has three scores: $0.8$, $0.6$, and $-0.8$.\nIf the alarm clock is the first candidate, it wins. Reordering the crops\nwould change the winning column number, not the object with the highest score.\n\nThe values are illustrative, not actual ImageBind embeddings.\n\n```python\nimport numpy as np\n\naudio = np.array([0.8, 0.6])"
+        }
+      ],
+      "after_sha256": "ef35b9a6171733f8fa0f949bfa412bbe3828f0bff60b6906672f4587d11fda44",
+      "before_sha256": "894a75131dcad28255de9dd7421d4022712e4d3afad0f86e2d9ffe1c02facd11"
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "changes": [
+        {
+          "old": "  - id: curated-vlm2026-internvl-figure2-e6f8f5eefb4c",
+          "new": "  - {\"id\":\"curated-internvl35-connector-37ea06166d89\",\"asset\":\"00 Учебник/Assets/Figures/curated/vlm-connectors-2026-11-13/internvl35-figure2c.png\",\"title\":\"InternVL 3.5 and Flash connector architectures, Figure 2(c)\",\"author\":\"Weiyun Wang et al.\",\"source_url\":\"https://arxiv.org/html/2508.18265v1\",\"figure_url\":\"https://arxiv.org/html/2508.18265v1#S2.F2\",\"source_image_url\":\"https://arxiv.org/html/2508.18265v1/architecture.png\",\"source_asset\":\"05 Источники/Originals/vlm-connectors-2026-11-13/internvl35-figure2.png\",\"source_asset_sha256\":\"e68f7543e72cd51fd9375a21778db610ecdc99a88ad790a45a507abb923cacf4\",\"source_dimensions_px\":[1739,557],\"crop_box_px\":[1310,0,1739,557],\"dimensions_px\":[429,557],\"sha256\":\"37ea06166d89b9735cbf2aa3aa158e949557baab53156aea409d940760414f56\",\"bytes\":39519,\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence\":\"05 Источники/Originals/vlm-connectors-2026-11-13/internvl35-license.html\",\"license_evidence_sha256\":\"9df24c023c510b66ef2e1333d65959d464f350d7c793e6184390ba29e0352800\",\"license_evidence_url\":\"https://arxiv.org/html/2508.18265v1\",\"derivation\":\"source-raster-crop\",\"modifications\":\"Complete panel (c) with its label. Pixel-exact crop; no resampling, redraw or relabeling. The full figure with its sample images is linked.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-13\",\"used_in\":[\"00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md\",\"en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md\"]}\n  - {\"id\":\"curated-panda-act-imagebind-4c924d9c74c7\",\"asset\":\"00 Учебник/Assets/Figures/curated/vlm-connectors-2026-11-13/panda-act-figure2.jpg\",\"title\":\"Panda Act matching and manipulation framework, Figure 2\",\"author\":\"Yifan Li, Peiyang Jiang, Chengpeng Chai, Xuyang Zhang and Chengguo Liu\",\"source_url\":\"https://www.nature.com/articles/s41598-025-17015-z\",\"figure_url\":\"https://www.nature.com/articles/s41598-025-17015-z#Fig2\",\"source_image_url\":\"https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41598-025-17015-z/MediaObjects/41598_2025_17015_Fig2_HTML.jpg\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/vlm-connectors-2026-11-13/panda-act-figure2.jpg\",\"source_asset_sha256\":\"4c924d9c74c7fc79ff32e2737ef73e347783c0cd7618a4de85f7b2d43c5737cd\",\"sha256\":\"4c924d9c74c7fc79ff32e2737ef73e347783c0cd7618a4de85f7b2d43c5737cd\",\"bytes\":553527,\"dimensions_px\":[1902,1295],\"license\":\"CC BY-NC-ND 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by-nc-nd/4.0/\",\"license_evidence\":\"05 Источники/Originals/vlm-connectors-2026-11-13/panda-act-license.html\",\"license_evidence_sha256\":\"d74e235519cac8046e5a81e73633924a24e5c5cc9f6c12bc33bf4f5990f2e4ca\",\"license_evidence_url\":\"https://www.nature.com/articles/s41598-025-17015-z#rightslink\",\"derivation\":\"source-image-copy\",\"modifications\":\"Complete publisher full-size JPEG copied byte-for-byte; noncommercial use; no crop, redraw, or translation.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-13\",\"used_in\":[\"00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md\",\"en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md\"]}\n  - id: curated-vlm2026-internvl-figure2-e6f8f5eefb4c"
+        }
+      ],
+      "after_sha256": "9a4aa588abcc3b9a95f0b2309dbbc439efc33f694778d9b134476e10c9c66445",
+      "before_sha256": "6978c6d197dccc36227cf6234c913e5882de667966a14537411f50ff09ea4337"
+    }
+  ]
+}

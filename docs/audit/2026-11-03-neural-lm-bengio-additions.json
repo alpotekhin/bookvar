@@ -1,0 +1,227 @@
+{
+  "date": "2026-11-03",
+  "scope": "Whole831-line neural-LM owner read; original Bengio Figure1 with caption and explanatory notation/ordering/shared-lookup example;18 canonical subject links and three descriptive source-image alt labels. Preserve existing complete logit/CE/SGD/causality/mask/WindowLM explanations.",
+  "status": "local delta verified; broader owner, course and release acceptance not claimed",
+  "files": [
+    {
+      "source": "00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction.md",
+      "before_sha256": "9e7e0016e68745cfb491d3018beb2d91b81b631a6d1995b36ad3a2e03d2ba695",
+      "after_sha256": "75035610f55f071bfa242b5dee6407dbd3b3bf33cf498d20bc55657f75279310",
+      "changes": [
+        {
+          "old": "## От биграммы к длинному контексту",
+          "new": "<a id=\"от-биграммы-к-длинному-контексту\"></a>\n\n## Логиты и окно из нескольких токенов"
+        },
+        {
+          "old": "## Минимальная реализация функции потерь",
+          "new": "<a id=\"минимальная-реализация-функции-потерь\"></a>\n\n## Функция потерь и обучение модели"
+        },
+        {
+          "old": "last_updated: 2026-10-21",
+          "new": "last_updated: 2026-11-03\nsource_language: mixed\nreference_terms:\n  - label: Авторегрессионная NLL и общие параметры\n    label_en: Autoregressive NLL and shared parameters\n    anchor: nlm-sequence-nll\n  - label: Вектор контекста, выходная проекция и logits\n    label_en: Context vector, output projection and logits\n    anchor: nlm-head\n  - label: Конкатенация embeddings и фиксированное окно\n    label_en: Concatenated embeddings and a fixed context window\n    anchor: nlm-window\n  - label: Сдвиг входов и следующих целей\n    label_en: Input-target shift\n    anchor: nlm-target-shift\n  - label: Причинность и параллельные позиции\n    label_en: Causality and parallel positions\n    anchor: nlm-causality\n  - label: Teacher forcing и собственный префикс\n    label_en: Teacher forcing and generated prefixes\n    anchor: nlm-teacher-forcing\n  - label: Cross-entropy с целевым ID токена\n    label_en: Cross-entropy for a target token ID\n    anchor: nlm-cross-entropy\n  - label: Градиент softmax и общая выходная матрица\n    label_en: Softmax gradient and shared output weights\n    anchor: nlm-vocabulary-gradient\n  - label: Устойчивый log-softmax и контракт CE\n    label_en: Stable log-softmax and the CE API contract\n    anchor: nlm-stability\n  - label: Perplexity, accuracy и протокол сравнения\n    label_en: Perplexity, accuracy and comparison protocol\n    anchor: nlm-perplexity\n  - label: Усреднение потерь по токенам и документам\n    label_en: Token-wise and document-wise loss averaging\n    anchor: nlm-loss-reduction\n  - label: Повторяющиеся контексты и нижняя граница NLL\n    label_en: Repeated contexts and the conditional NLL floor\n    anchor: nlm-entropy-floor\n  - label: Частота продолжения и истинность ответа\n    label_en: Continuation frequency and factual correctness\n    anchor: nlm-objective-limits\n  - label: In-context применение и post-training\n    label_en: In-context use and post-training\n    anchor: nlm-base-assistant\n  - label: Маска позиций при общем ID EOS и PAD\n    label_en: Positional masking when EOS and PAD share an ID\n    anchor: nlm-eos-pad-mask\n  - label: Полное обучение WindowLM на малом корпусе\n    label_en: Complete WindowLM training on a small corpus\n    anchor: nlm-window-training\n  - label: Нейронная LM Bengio — схема и обозначения\n    label_en: Bengio neural LM diagram and notation\n    anchor: nlm-bengio-architecture\n  - label: Порядок окна и общий градиент embeddings\n    label_en: Context order and accumulated embedding gradients\n    anchor: nlm-context-permutation"
+        },
+        {
+          "old": "## Вероятность последовательности",
+          "new": "<a id=\"nlm-sequence-nll\"></a>\n\n## Вероятность последовательности"
+        },
+        {
+          "old": "### Представление контекста и выходная проекция",
+          "new": "<a id=\"nlm-head\"></a>\n\n### Представление контекста и выходная проекция"
+        },
+        {
+          "old": "### Несколько предыдущих токенов",
+          "new": "<a id=\"nlm-window\"></a>\n\n### Несколько предыдущих токенов"
+        },
+        {
+          "old": "## Один текст даёт много обучающих примеров",
+          "new": "<a id=\"nlm-target-shift\"></a>\n\n## Один текст даёт много обучающих примеров"
+        },
+        {
+          "old": "### Причинность и параллельное вычисление",
+          "new": "<a id=\"nlm-causality\"></a>\n\n### Причинность и параллельное вычисление"
+        },
+        {
+          "old": "### Истинный префикс и сгенерированный префикс",
+          "new": "<a id=\"nlm-teacher-forcing\"></a>\n\n### Истинный префикс и сгенерированный префикс"
+        },
+        {
+          "old": "## Cross-entropy считается из logits",
+          "new": "<a id=\"nlm-cross-entropy\"></a>\n\n## Cross-entropy считается из logits"
+        },
+        {
+          "old": "### Градиент по всему словарю",
+          "new": "<a id=\"nlm-vocabulary-gradient\"></a>\n\n### Градиент по всему словарю"
+        },
+        {
+          "old": "### Численная устойчивость и библиотечный контракт",
+          "new": "<a id=\"nlm-stability\"></a>\n\n### Численная устойчивость и библиотечный контракт"
+        },
+        {
+          "old": "## Perplexity",
+          "new": "<a id=\"nlm-perplexity\"></a>\n\n## Perplexity"
+        },
+        {
+          "old": "## Что показывает функция потерь — и чего не показывает",
+          "new": "<a id=\"nlm-loss-reduction\"></a>\n\n## Что показывает функция потерь — и чего не показывает"
+        },
+        {
+          "old": "### Почему не всегда можно получить ноль на одном пакете",
+          "new": "<a id=\"nlm-entropy-floor\"></a>\n\n### Почему не всегда можно получить ноль на одном пакете"
+        },
+        {
+          "old": "## Что модель приобретает через простую задачу",
+          "new": "<a id=\"nlm-objective-limits\"></a>\n\n## Что модель приобретает через простую задачу"
+        },
+        {
+          "old": "## Базовая модель и assistant",
+          "new": "<a id=\"nlm-base-assistant\"></a>\n\n## Базовая модель и assistant"
+        },
+        {
+          "old": "### Маска позиций и совпадающие ID EOS/PAD",
+          "new": "<a id=\"nlm-eos-pad-mask\"></a>\n\n### Маска позиций и совпадающие ID EOS/PAD"
+        },
+        {
+          "old": "### Законченное обучение модели с окном в два токена",
+          "new": "<a id=\"nlm-window-training\"></a>\n\n### Законченное обучение модели с окном в два токена"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/neural-language-model-2026-10-21/d2l-softmaxreg.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/neural-language-model-2026-10-21/d2l-softmaxreg.svg|Полносвязная выходная проекция из четырёх признаков в три оценки]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ntp-review-2026-10/d2l-language-model-data.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ntp-review-2026-10/d2l-language-model-data.png|Посимвольные входы и цели со сдвигом на одну позицию]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ntp-review-2026-10/d2l-gpt-decoder.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ntp-review-2026-10/d2l-gpt-decoder.png|Сдвинутые цели GPT и доступные причинные зависимости]]"
+        },
+        {
+          "old": "<a id=\"nlm-target-shift\"></a>",
+          "new": "<a id=\"nlm-bengio-architecture\"></a>\n\n### The original feed-forward neural language model\n\n![[00 Учебник/Assets/Figures/curated/neural-lm-bengio-2026-11-03/bengio-original-figure1.png|Original Bengio neural language model: shared word lookup, tanh, softmax and optional direct connections]]\n\n*Yoshua Bengio, Réjean Ducharme, Pascal Vincent and Christian Jauvin,\n[Figure 1, A Neural Probabilistic Language Model](https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf#page=6),\nJMLR 3 (2003), p.1142. Complete original diagram and caption, rendered from\nthe publisher PDF; no labels redrawn. Author copyright ©2003.\n[JMLR publication policy and reuse note](/licenses/bengio03a-figure1-jmlr-policy.txt).*\n\nRead the figure from the word indices at the bottom. Each index selects\na row of the same matrix $C$; the three lookup positions do not own\nthree separate embedding tables. The selected vectors form the input to\na tanh hidden layer. The output layer produces one score per vocabulary\nword, then softmax normalizes the scores.\n\nThe dashed green paths bypass the hidden layer. In the paper's notation,\nthe unnormalized output vector is\n\n$$\ny=b+Wx+U\\tanh(d+Hx).\n$$\n\nHere $x$ concatenates the selected word vectors. The direct matrix $W$ is\noptional: setting it to zero leaves the hidden-layer route used by\n`WindowLM` below. The paper's $y$ corresponds to this chapter's\nlogits $z$, not to a target token ID. Its $W$ is also not the output\nmatrix called $W$ in our earlier bigram calculation.\n\nFor the `WindowLM` dimensions used at the end of the chapter, the\ncorrespondence is:\n\n| Paper | `WindowLM` parameter | Shape |\n|---|---|---|\n| $C$ | `embedding.weight` | $8\\times2$ |\n| $H,d$ | `network[0].weight`, `.bias` | $8\\times4$, $8$ |\n| $U,b$ | `network[2].weight`, `.bias` | $8\\times8$, $8$ |\n| Optional $W$ | No direct path in this implementation | $8\\times4$ if added |\n\nThe hidden-layer-only version has 128 parameters, as counted in the\ntraining example. Adding the direct $W$ would add 32 weights and change\nthe model. The source annotation “most computation here” concerns its\nlarge-vocabulary output layer; the diagram alone does not measure the\nruntime of our eight-token example.\n\n<a id=\"nlm-context-permutation\"></a>\n\n### Context order and repeated lookups\n\nThe paper writes its concatenation from the newest context word to the\noldest. `WindowLM` constructs windows in chronological order.\nEither fixed convention works, but the columns of the first projection\nmust follow the same ordering as the input blocks.\n\nFor the vectors already used above, `кот` is $(1,0)$ and `пёс`\nis $(1,1)$. Chronological concatenation gives $(1,0,1,1)$.\nWith projection row $(1,2,3,4)$, its pre-activation is 8.\nReversing the two vector blocks gives $(1,1,1,0)$; the corresponding\nprojection row must become $(3,4,1,2)$ to keep 8. Keeping the old row\ninstead gives 6.\n\nWhen the same word occurs twice, both lookups select one parameter row.\nFor the context `кот кот`, the projection is $(1+3)C_{\\rm cat,0}\n+(2+4)C_{\\rm cat,1}$. The gradient of this pre-activation with respect\nto the shared cat vector is therefore $(4,6)$, not two independently\nupdated vectors.\n\n```python\nimport torch\n\nsource_vectors = torch.zeros(8, 2, dtype=torch.float64)\nsource_vectors[2] = torch.tensor([1., 0.])  # кот\nsource_vectors[4] = torch.tensor([1., 1.])  # пёс\nsource_vectors.requires_grad_()\nsource_row = torch.tensor([1., 2., 3., 4.], dtype=torch.float64)\nchronological = source_vectors[[2, 4]].flatten()\nnewest_first = source_vectors[[4, 2]].flatten()\npermuted_row = source_row.reshape(2, 2).flip(0).flatten()\nassert (chronological @ source_row).item() == 8\nassert (newest_first @ permuted_row).item() == 8\nassert (newest_first @ source_row).item() == 6\n\nrepeated = source_vectors[[2, 2]].flatten()\nlookup_gradient, = torch.autograd.grad(repeated @ source_row, source_vectors)\nexpected_gradient = torch.zeros_like(source_vectors)\nexpected_gradient[2] = torch.tensor([4., 6.])\ntorch.testing.assert_close(lookup_gradient, expected_gradient)\n```\n\nThis calculation checks lookup sharing and block order. The complete\nnonlinear model, loss and optimizer are implemented below; it is not\na reproduction of the paper's corpus-scale experiment.\n\n<a id=\"nlm-target-shift\"></a>"
+        },
+        {
+          "old": "primary_sources:\n",
+          "new": "primary_sources:\n  - https://www.jmlr.org/papers/v3/bengio03a.html\n"
+        },
+        {
+          "old": "## Источники\n\n",
+          "new": "## Источники\n\n- Bengio, Ducharme, Vincent, Jauvin,\n  [A Neural Probabilistic Language Model, §2 and Figure 1](https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf#page=5):\n  shared word representations, fixed context window and optional direct connections.\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "6e442daa4ae210f314ce354997537a6624e878cc4d88a5005eb50e24523ea455",
+      "after_sha256": "36d70f678e8030c9bd733a0d77eb7b076111d236fed2e51ab7173036030fbb66",
+      "changes": [
+        {
+          "old": "  - {\"id\":\"curated-ngram-karpathy-bigram-counts-0972425d7afc\",\"asset\":\"00 Учебник/Assets/Figures/curated/ngram-makemore-2026-11-03/karpathy-bigram-counts.png\",\"author\":\"Andrej Karpathy\",\"source_url\":\"https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part1_bigrams.ipynb\",\"source_image_url\":\"https://raw.githubusercontent.com/karpathy/nn-zero-to-hero/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part1_bigrams.ipynb\",\"commit\":\"73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde\",\"source_asset\":\"05 Источники/Originals/ngram-2026-10-21/makemore-part1-bigrams.ipynb\",\"source_asset_sha256\":\"db2f139409bad2966baac06581b6ca8ec9a03668df50dd073577fd98b3be0045\",\"sha256\":\"0972425d7afc53f7d81c7da5aca31a4dd99cb664bf102f604b0e3c61cec57d39\",\"source_cell_index\":11,\"source_output_index\":0,\"source_member\":\"/cells/11/outputs/0/data/image~1png\",\"dimensions_px\":[884,884],\"bytes\":251350,\"source_page_snapshot\":\"05 Источники/Originals/ngram-2026-10-21/makemore-part1-bigrams.ipynb\",\"source_page_sha256\":\"db2f139409bad2966baac06581b6ca8ec9a03668df50dd073577fd98b3be0045\",\"source_data\":\"05 Источники/Originals/ngram-makemore-2026-11-03/names.txt\",\"source_data_sha256\":\"0a30b5557f192f32ab962680889aac5f6fda0f4cecf40a6d0b5694f58ea8cc4d\",\"source_data_url\":\"https://raw.githubusercontent.com/karpathy/makemore/8f79bd0126eaef5eb82d346c9f85ae20ea1c476a/names.txt\",\"license\":\"MIT\",\"license_url\":\"https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/LICENSE\",\"license_evidence\":\"05 Источники/Originals/normalization-course-2026-11-03/karpathy-LICENSE.txt\",\"license_evidence_sha256\":\"a59ec5cdb1c1e447e5266a014b3e7ded511f8d6e5a08931e931c87490ff821fe\",\"public_license_copy\":\"site/public/licenses/karpathy-nn-zero-to-hero-73c3fcc7-MIT.txt\",\"derivation\":\"notebook-output-extraction\",\"modifications\":\"Exact original saved PNG decoded from cell11/output0. No rerender, crop, recoloring, relabeling, resizing, redraw or translation.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель.md\"]}\n",
+          "new": "  - {\"id\":\"curated-ngram-karpathy-bigram-counts-0972425d7afc\",\"asset\":\"00 Учебник/Assets/Figures/curated/ngram-makemore-2026-11-03/karpathy-bigram-counts.png\",\"author\":\"Andrej Karpathy\",\"source_url\":\"https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part1_bigrams.ipynb\",\"source_image_url\":\"https://raw.githubusercontent.com/karpathy/nn-zero-to-hero/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part1_bigrams.ipynb\",\"commit\":\"73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde\",\"source_asset\":\"05 Источники/Originals/ngram-2026-10-21/makemore-part1-bigrams.ipynb\",\"source_asset_sha256\":\"db2f139409bad2966baac06581b6ca8ec9a03668df50dd073577fd98b3be0045\",\"sha256\":\"0972425d7afc53f7d81c7da5aca31a4dd99cb664bf102f604b0e3c61cec57d39\",\"source_cell_index\":11,\"source_output_index\":0,\"source_member\":\"/cells/11/outputs/0/data/image~1png\",\"dimensions_px\":[884,884],\"bytes\":251350,\"source_page_snapshot\":\"05 Источники/Originals/ngram-2026-10-21/makemore-part1-bigrams.ipynb\",\"source_page_sha256\":\"db2f139409bad2966baac06581b6ca8ec9a03668df50dd073577fd98b3be0045\",\"source_data\":\"05 Источники/Originals/ngram-makemore-2026-11-03/names.txt\",\"source_data_sha256\":\"0a30b5557f192f32ab962680889aac5f6fda0f4cecf40a6d0b5694f58ea8cc4d\",\"source_data_url\":\"https://raw.githubusercontent.com/karpathy/makemore/8f79bd0126eaef5eb82d346c9f85ae20ea1c476a/names.txt\",\"license\":\"MIT\",\"license_url\":\"https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/LICENSE\",\"license_evidence\":\"05 Источники/Originals/normalization-course-2026-11-03/karpathy-LICENSE.txt\",\"license_evidence_sha256\":\"a59ec5cdb1c1e447e5266a014b3e7ded511f8d6e5a08931e931c87490ff821fe\",\"public_license_copy\":\"site/public/licenses/karpathy-nn-zero-to-hero-73c3fcc7-MIT.txt\",\"derivation\":\"notebook-output-extraction\",\"modifications\":\"Exact original saved PNG decoded from cell11/output0. No rerender, crop, recoloring, relabeling, resizing, redraw or translation.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель.md\"]}\n  - {\"id\":\"curated-neural-lm-bengio-figure1-402764857919\",\"asset\":\"00 Учебник/Assets/Figures/curated/neural-lm-bengio-2026-11-03/bengio-original-figure1.png\",\"author\":\"Yoshua Bengio, Réjean Ducharme, Pascal Vincent, Christian Jauvin\",\"source_url\":\"https://www.jmlr.org/papers/v3/bengio03a.html\",\"source_image_url\":\"https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf#page=6\",\"source_asset\":\"05 Источники/Originals/neural-lm-bengio-2026-11-03/bengio03a.pdf\",\"source_asset_sha256\":\"0bddf9a608d62da449a6413d86cbf6e8b206212595efe0e0a14da0d79d5f4976\",\"sha256\":\"4027648579190044a162655b51453f816cdb98adb298d4c5a2a55bb0f6cdfcd1\",\"source_page\":6,\"source_printed_page\":1142,\"render_dpi\":240,\"render_page_size_px\":[2040,2640],\"crop_box_px\":[273,283,1780,1263],\"dimensions_px\":[1507,980],\"bytes\":94140,\"license\":\"CC BY (JMLR publication policy; version unspecified)\",\"license_url\":\"https://jmlr.org/author-info.html#publication\",\"license_evidence\":\"05 Источники/Originals/neural-lm-bengio-2026-11-03/jmlr-author-info.html\",\"license_evidence_sha256\":\"de4f2e6dee40e595e0307ab1ff40a11554ab51be6ce12f4a625f04fdf97e3924\",\"public_license_copy\":\"site/public/licenses/bengio03a-figure1-jmlr-policy.txt\",\"rights_status\":\"publisher-cc-by-policy;paper-specific-license-version-not-stated\",\"provenance_confirmation\":\"publisher-publication-policy\",\"metadata_status\":\"verified\",\"derivation\":\"source-pdf-render-crop\",\"modifications\":\"Complete original Figure1 including its original caption, rendered at240dpi from publisher PDF page6. Only surrounding page header/body removed. No diagram redraw, relabeling, recoloring or translation.\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction.md\"]}\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "f497528e90b59f6f60ae9b0d8d145f20051795232a77f4941918082c9daa2a29",
+      "after_sha256": "bc60819352f1cae6ffe0f0ac7e529fac989037d44de1d80c1b4a3ffa134839e4",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction|Вероятность текста и предсказание следующего токена]]\n",
+          "new": "- [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction|Вероятность текста и предсказание следующего токена]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-sequence-nll|Авторегрессионная NLL и общие параметры]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-head|Вектор контекста, выходная проекция и logits]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-window|Конкатенация embeddings и фиксированное окно]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-target-shift|Сдвиг входов и следующих целей]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-causality|Причинность и параллельные позиции]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-teacher-forcing|Teacher forcing и собственный префикс]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-cross-entropy|Cross-entropy с целевым ID токена]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-vocabulary-gradient|Градиент softmax и общая выходная матрица]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-stability|Устойчивый log-softmax и контракт CE]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-perplexity|Perplexity, accuracy и протокол сравнения]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-loss-reduction|Усреднение потерь по токенам и документам]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-entropy-floor|Повторяющиеся контексты и нижняя граница NLL]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-objective-limits|Частота продолжения и истинность ответа]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-base-assistant|In-context применение и post-training]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-eos-pad-mask|Маска позиций при общем ID EOS и PAD]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-window-training|Полное обучение WindowLM на малом корпусе]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-bengio-architecture|Нейронная LM Bengio — схема и обозначения]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-context-permutation|Порядок окна и общий градиент embeddings]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "f0766420784a0ba2709dc761b8779154284bbeaae491bd01710c2a571cbea6da",
+      "after_sha256": "3f4fc98b68bfd1349d51a787f233918196ee87746205340db6119456686a0758",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction|Text probability and next-token prediction]]\n",
+          "new": "- [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction|Text probability and next-token prediction]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-sequence-nll|Autoregressive NLL and shared parameters]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-head|Context vector, output projection and logits]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-window|Concatenated embeddings and a fixed context window]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-target-shift|Input-target shift]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-causality|Causality and parallel positions]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-teacher-forcing|Teacher forcing and generated prefixes]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-cross-entropy|Cross-entropy for a target token ID]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-vocabulary-gradient|Softmax gradient and shared output weights]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-stability|Stable log-softmax and the CE API contract]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-perplexity|Perplexity, accuracy and comparison protocol]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-loss-reduction|Token-wise and document-wise loss averaging]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-entropy-floor|Repeated contexts and the conditional NLL floor]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-objective-limits|Continuation frequency and factual correctness]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-base-assistant|In-context use and post-training]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-eos-pad-mask|Positional masking when EOS and PAD share an ID]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-window-training|Complete WindowLM training on a small corpus]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-bengio-architecture|Bengio neural LM diagram and notation]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-context-permutation|Context order and accumulated embedding gradients]]\n"
+        }
+      ]
+    }
+  ],
+  "sourceComparison": [
+    {
+      "source": "docs/audit/2026-10-21-neural-language-model.md",
+      "use": "Prior full selected D2L/CS336/Karpathy/API comparison explicitly reused; current831-line baseline hash9e7e0016... exactly matches that review. Entire current owner reread. No new claim of reading all these source courses."
+    },
+    {
+      "source": "https://www.jmlr.org/papers/v3/bengio03a.html",
+      "pdf": {
+        "path": "05 Источники/Originals/neural-lm-bengio-2026-11-03/bengio03a.pdf",
+        "sha": "0bddf9a608d62da449a6413d86cbf6e8b206212595efe0e0a14da0d79d5f4976",
+        "bytes": 140095
+      },
+      "read": "Fresh full Section2 on physical pages5–7, including Figure1/caption/Equation1/parameter shapes/optional direct path; Section1.1 and surrounding introductory context also read. Section3 opening/page8 observed, not full systems/experiment reread.",
+      "use": "Original full diagram plus caption rendered at240dpi. Explain lookupC, hiddenH/d, outputU/b, optionaldirectW and newest-first source concatenation vs chronological WindowLM. Own small8/8/6 projection and(4,6) repeated-lookup-gradient calculation, not paper corpus training."
+    },
+    {
+      "source": "https://jmlr.org/author-info.html#publication",
+      "snapshot": {
+        "path": "05 Источники/Originals/neural-lm-bengio-2026-11-03/jmlr-author-info.html",
+        "sha": "de4f2e6dee40e595e0307ab1ff40a11554ab51be6ce12f4a625f04fdf97e3924",
+        "bytes": 22728
+      },
+      "read": "Publisher Publication policy and PDF author-copyright notice. Current policy names public CC-by licensing without a version.",
+      "qualification": "Metadata retains publisher-policy basis and unspecified version. No CC BY4.0 or paper-specific signed2003 agreement is asserted."
+    }
+  ],
+  "verification": {
+    "chapterSha256": "75035610f55f071bfa242b5dee6407dbd3b3bf33cf498d20bc55657f75279310",
+    "wholeOwnerRead": "Complete831-line baseline and1022-line final chapter read. Final post-correction ranges1-330,331-680,681-EOF; no content changes afterwards.",
+    "style": "no-ai-slop SKILL/eval read fully. Concrete context/logit/gradient examples and caveats retained; no compression to definitions. Existing Russian prose preserved and fresh source-derived extensions remain English. Typographical placeholder in new repeated-context example corrected during final reread.",
+    "preservation": "Exact reversible chapter/registry/RU+EN-index journal restores831-line baseline9e7e0016... . All five existing runnable blocks, original display equations and three source figures/captions unchanged; four originals and six runnable blocks now published.",
+    "cpu": {
+      "exit": 0,
+      "device": "CPU",
+      "torch": "2.14.1",
+      "command": "uv run --offline --python 3.13 --with torch==2.14.1 --with numpy==2.5.4 python publishing/tools/check_neural_lm_examples.py",
+      "programs": 6,
+      "scope": "All six current standalone Python blocks executed. Existing gradient, stable-CE, shift, masking, PPL, entropy-floor and WindowLM training checks retained. Ninety independent block-permutation and accumulated-lookup-gradient cases pass. SGD loss 1.0986122886681098 -> 0.7514114860758478; WindowLM 2.14878909356697 -> 0.4258510169118908, conditional floor 0.4256482933749291. Last changes corrected prose and added source links only; program bytes unchanged. No benchmark or generalization result."
+    },
+    "sourceAsset": {
+      "prepareCheckExit": 0,
+      "pngSha256": "4027648579190044a162655b51453f816cdb98adb298d4c5a2a55bb0f6cdfcd1",
+      "dimensions": [
+        1507,
+        980
+      ],
+      "sourcePdfPage": 6,
+      "printedPage": 1142,
+      "policy": "Publisher CC-by publication policy; version unspecified. No paper-specific signed2003 agreement or CC BY4.0 assertion."
+    },
+    "tests": {
+      "sourceRegistryAndInitialDelta": "177 tests in3 files pass, including full current source-asset registry validation. Existing Poppler closepath warnings did not fail this run. Source assets and registry unchanged after that run.",
+      "finalDeltaAndIndex": "8 tests in2 files pass after final prose/source-link corrections.",
+      "builtOutput": "193 tests pass after final rebuild, including both locale routes, eighteen subject anchors, six Python blocks and four originals."
+    },
+    "build": {
+      "exit": 0,
+      "pages": 2007,
+      "pagefindHtmlFiles": 2011,
+      "durationSeconds": 26.86,
+      "links": "0 broken internal routes, fragments or files",
+      "size": {
+        "bytes": 852636430,
+        "files": 5600,
+        "limit": 1000000000,
+        "headroom": 147363570
+      }
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-03-neural-lm-reader",
+      "desktop": "1280x720: document1265/1265; all four original images loaded; zero KaTeX errors or display-math overflow. New original diagram and original caption inspected inline and in fit viewer, including shared C and dashed direct paths. Screenshot evidence saved.",
+      "mobile": "390x844: document375/375; all four originals <=343px; four tables343/343; zero KaTeX errors or display-math overflow. All four originals/captions inspected in fit viewer. Bengio at2x inspected center, left(scrollLeft0.5) and right(scrollLeft344 of359); source labels and original caption readable. D2L shift example additionally inspected at2x. No claim that all source text is legible at mobile fit or that horizontal pan reached its maximum.",
+      "navigation": "Actual RU reference -> #nlm-bengio-architecture; actual EN reference -> #nlm-context-permutation. EN complementary status explicitly says 'Canonical-language chapter.' and no separate English edition. Actual EN Next reached word2vec-glove with correct h1. Temporary viewport reset; final reader returned to RU original architecture."
+    },
+    "publication": "Local only; no staging, commit, push or deployment. Broader source/course/release requirements remain."
+  },
+  "remaining": [
+    "Current JMLR policy does not name a CC BY version; source2003 PDF carries author copyright but no named version. Preserve the qualified publisher-policy basis; paper-specific signed licensing agreement was not inspected.",
+    "This delta does not accept the full source courses,the later pretraining/MTP owner,all textbook owners or a public release."
+  ]
+}

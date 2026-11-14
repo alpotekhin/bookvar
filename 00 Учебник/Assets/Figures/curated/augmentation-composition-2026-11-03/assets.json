@@ -1,0 +1,40 @@
+[
+  {
+    "id": "curated-augmentation-d2l-composition-1ccc8d5cbf7f",
+    "asset": "00 Учебник/Assets/Figures/curated/augmentation-composition-2026-11-03/d2l-composed-transforms.svg",
+    "author": "Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola",
+    "title": "Original PyTorch gallery: horizontal reflection, ColorJitter and resized crop",
+    "source_url": "https://d2l.ai/chapter_computer-vision/image-augmentation.html#combining-multiple-image-augmentation-methods",
+    "source_image_url": "https://d2l.ai/_images/output_image-augmentation_7d0887_81_0.svg",
+    "commit": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+    "source_asset": "05 Источники/Originals/augmentation-composition-2026-11-03/d2l-pytorch-composed-transforms.svg",
+    "source_asset_sha256": "1ccc8d5cbf7f8dc340ca38e0dd2cf6aa9b915ec07c61d3d2a5be8dd7985e4c8f",
+    "sha256": "1ccc8d5cbf7f8dc340ca38e0dd2cf6aa9b915ec07c61d3d2a5be8dd7985e4c8f",
+    "bytes": 191159,
+    "source_viewbox": [
+      0,
+      0,
+      465.600016,
+      237.203471
+    ],
+    "source_page_snapshot": "05 Источники/Originals/data-augmentation-2026-10-28/d2l/web.html",
+    "source_page_sha256": "cad422db3d3ae48787b46969db565b144152653e76f79801f0c693b5c364b66a",
+    "source_evidence_location": "Archived HTML, Combining Multiple Image Augmentation Methods: PyTorch panel pytorch-17-0, output81. MXNet output84 was inspected as a separate candidate and is not the published gallery.",
+    "source_code_snapshot": "05 Источники/Originals/data-augmentation-2026-10-28/d2l/image-augmentation.md",
+    "source_code_sha256": "43a9ee3dafcaef44e3295ec81341529a2a1716d87fdcc0a548ecee91cc291357",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/data-augmentation-2026-10-28/d2l/LICENSE",
+    "license_evidence_sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+    "public_license_copy": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+    "derivation": "source-svg-copy",
+    "modifications": "None. Complete saved PyTorch output with eight embedded raster panels, copied byte-for-byte; no crop, redraw, translation, relabeling, resampling or recompression. Saved rendered output is pinned by its own bytes and archived HTML, not claimed reproduced from a code commit or local random seed.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-11-03",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований.md"
+    ]
+  }
+]

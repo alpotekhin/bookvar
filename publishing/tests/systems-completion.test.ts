@@ -4,15 +4,18 @@ import {resolve} from 'node:path';
 import {describe,it,expect} from 'vitest';
 import {beforeSystemsCompletion} from '../tools/systems-completion-baseline.mjs';
 import {beforeHardwareSourceCompletion} from '../tools/hardware-source-baseline.mjs';
+import {beforeTopicConsolidation} from '../tools/topic-consolidation-baseline.mjs';
 
 const root=resolve(import.meta.dirname,'../..');
 const read=(p:string)=>readFileSync(resolve(root,p),'utf8');
 const sha=(s:string)=>createHash('sha256').update(s).digest('hex');
 const rows=JSON.parse(read('docs/audit/2026-10-29-systems-completion-additions.json')).files;
+const atReview=(source:string)=>beforeHardwareSourceCompletion(beforeTopicConsolidation(
+  read(source),source,root,'2026-11-03-systems-timeline-additions.json'),source,root);
 describe('Systolic execution and compression additions',()=>{
   it('preserves the accepted chapters outside separately checked additions',()=>{
     for(const row of rows){
-      const text=beforeHardwareSourceCompletion(read(row.source),row.source,root);
+      const text=atReview(row.source);
       expect(sha(text)).toBe(row.after_sha256);
       expect(sha(beforeSystemsCompletion(text,row.source,root))).toBe(row.before_sha256);
       expect(()=>beforeSystemsCompletion(text.replace('<!-- systems-completion:',
@@ -22,7 +25,7 @@ describe('Systolic execution and compression additions',()=>{
     }
   });
   it('keeps the working assumptions and the source illustrations',()=>{
-    const gpu=beforeHardwareSourceCompletion(read(rows[0].source),rows[0].source,root), compression=read(rows[1].source);
+    const gpu=atReview(rows[0].source), compression=atReview(rows[1].source);
     expect(gpu.match(/<!-- checked-example: hardware-/g)).toHaveLength(2);
     expect(compression.match(/<!-- checked-example:/g)).toHaveLength(17);
     expect(compression.match(/!\[\[/g)).toHaveLength(12);

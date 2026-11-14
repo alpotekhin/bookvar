@@ -1,0 +1,225 @@
+{
+  "date": "2026-11-03",
+  "scope": "Whole N-gram owner read; add unchanged original Karpathy count matrix, exact counting/normalization cells, worked axis example and21 subject links. Preserve previous full MLE/smoothing/KN/PPL/generation explanation.",
+  "status": "scoped local source-figure and route delta verified; broader source-rights/course/release work remains",
+  "files": [
+    {
+      "source": "00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель.md",
+      "before_sha256": "032dc6d57c8399255ec427be82cf59fd2fe30885f218abe7083a5596901ef8ea",
+      "after_sha256": "80244f92f9c719c7733d59940db952735441b190ba84788a3ebef5bcef19baa0",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-21",
+          "new": "last_updated: 2026-11-03\nsource_language: mixed\nreference_terms:\n  - label: Цепное правило вероятности текста\n    label_en: Chain rule for sequence probability\n    anchor: ngram-chain-rule\n  - label: BOS, EOS, префикс и остановка\n    label_en: BOS, EOS, prefixes and termination\n    anchor: ngram-boundaries\n  - label: Марковское допущение и порядок n-граммы\n    label_en: Markov assumption and n-gram order\n    anchor: ngram-markov\n  - label: Счётчики переходов и оценка MLE\n    label_en: Transition counts and MLE\n    anchor: ngram-counts\n  - label: Вывод MLE через правдоподобие строки\n    label_en: Deriving row-wise maximum likelihood\n    anchor: ngram-mle-derivation\n  - label: Вероятность законченного текста\n    label_en: Complete-sequence probability\n    anchor: ngram-sequence-probability\n  - label: Невиданная пара и неизвестный контекст\n    label_en: Unseen events and missing histories\n    anchor: ngram-zero-events\n  - label: Add-one, add-k и неизвестные слова\n    label_en: Add-one, add-k and unknown words\n    anchor: ngram-add-k\n  - label: Интерполяция и отсутствующий порядок\n    label_en: Interpolation and unavailable orders\n    anchor: ngram-interpolation\n  - label: Нормированный backoff и остаточная масса\n    label_en: Normalized backoff and reserved mass\n    anchor: ngram-backoff\n  - label: Stupid Backoff и ненормированные оценки\n    label_en: Stupid Backoff and unnormalized scores\n    anchor: ngram-stupid-backoff\n  - label: Kneser–Ney и число разных предшественников\n    label_en: Kneser-Ney continuation distribution\n    anchor: ngram-kn-continuation\n  - label: Дисконтирование и интерполированный Kneser–Ney\n    label_en: Discounting and interpolated Kneser-Ney\n    anchor: ngram-kn-discount\n  - label: Kneser–Ney — поддержка, рекурсия и BOS\n    label_en: Kneser-Ney support, recursion and BOS\n    anchor: ngram-kn-recursion\n  - label: Log-likelihood и perplexity\n    label_en: Log-likelihood and perplexity\n    anchor: ngram-perplexity\n  - label: Корпусная perplexity и сопоставимые события\n    label_en: Corpus perplexity and comparable events\n    anchor: ngram-corpus-metrics\n  - label: Sampling, greedy и достижение EOS\n    label_en: Sampling, greedy decoding and EOS\n    anchor: ngram-generation\n  - label: Порядок модели и разреженность\n    label_en: Model order and sparsity\n    anchor: ngram-sparsity\n  - label: От таблицы переходов к нейронной LM\n    label_en: From transition tables to neural LMs\n    anchor: ngram-neural-bridge\n  - label: makemore — исходная матрица биграмм\n    label_en: makemore original bigram count matrix\n    anchor: ngram-makemore-matrix\n  - label: Нормировка строк и оси broadcasting\n    label_en: Row normalization and broadcasting axes\n    anchor: ngram-makemore-normalization"
+        },
+        {
+          "old": "## Цепное правило",
+          "new": "<a id=\"ngram-chain-rule\"></a>\n\n## Цепное правило"
+        },
+        {
+          "old": "### Начало, конец и вероятность префикса",
+          "new": "<a id=\"ngram-boundaries\"></a>\n\n### Начало, конец и вероятность префикса"
+        },
+        {
+          "old": "### Ограничение длины истории",
+          "new": "<a id=\"ngram-markov\"></a>\n\n### Ограничение длины истории"
+        },
+        {
+          "old": "## Оценка по счётчикам",
+          "new": "<a id=\"ngram-counts\"></a>\n\n## Оценка по счётчикам"
+        },
+        {
+          "old": "### Почему максимум правдоподобия даёт частоты",
+          "new": "<a id=\"ngram-mle-derivation\"></a>\n\n### Почему максимум правдоподобия даёт частоты"
+        },
+        {
+          "old": "### Вероятность целого текста",
+          "new": "<a id=\"ngram-sequence-probability\"></a>\n\n### Вероятность целого текста"
+        },
+        {
+          "old": "## Почему нулевая частота разрушает произведение",
+          "new": "<a id=\"ngram-zero-events\"></a>\n\n## Почему нулевая частота разрушает произведение"
+        },
+        {
+          "old": "### Add-one и add-k",
+          "new": "<a id=\"ngram-add-k\"></a>\n\n### Add-one и add-k"
+        },
+        {
+          "old": "### Интерполяция распределений",
+          "new": "<a id=\"ngram-interpolation\"></a>\n\n### Интерполяция распределений"
+        },
+        {
+          "old": "### Нормированный backoff",
+          "new": "<a id=\"ngram-backoff\"></a>\n\n### Нормированный backoff"
+        },
+        {
+          "old": "### Stupid Backoff не является распределением",
+          "new": "<a id=\"ngram-stupid-backoff\"></a>\n\n### Stupid Backoff не является распределением"
+        },
+        {
+          "old": "### Распределение продолжений",
+          "new": "<a id=\"ngram-kn-continuation\"></a>\n\n### Распределение продолжений"
+        },
+        {
+          "old": "### Дисконтирование и возврат массы",
+          "new": "<a id=\"ngram-kn-discount\"></a>\n\n### Дисконтирование и возврат массы"
+        },
+        {
+          "old": "### Полная поддержка и старшие порядки",
+          "new": "<a id=\"ngram-kn-recursion\"></a>\n\n### Полная поддержка и старшие порядки"
+        },
+        {
+          "old": "## Логарифмы и perplexity",
+          "new": "<a id=\"ngram-perplexity\"></a>\n\n## Логарифмы и perplexity"
+        },
+        {
+          "old": "### Усреднение по корпусу и сравнение моделей",
+          "new": "<a id=\"ngram-corpus-metrics\"></a>\n\n### Усреднение по корпусу и сравнение моделей"
+        },
+        {
+          "old": "## Генерация",
+          "new": "<a id=\"ngram-generation\"></a>\n\n## Генерация"
+        },
+        {
+          "old": "### Длина контекста и разреженность",
+          "new": "<a id=\"ngram-sparsity\"></a>\n\n### Длина контекста и разреженность"
+        },
+        {
+          "old": "## Зачем изучать N-граммы перед нейронной LM",
+          "new": "<a id=\"ngram-neural-bridge\"></a>\n\n## Зачем изучать N-граммы перед нейронной LM"
+        },
+        {
+          "old": "<a id=\"ngram-zero-events\"></a>",
+          "new": "<a id=\"ngram-makemore-matrix\"></a>\n\n### Reading makemore's original count matrix\n\nKarpathy's character model counts transitions in a list of 32,033 names.\nThe alphabet has 26 letters plus `.`, giving a $27\\times27$ matrix.\nA row identifies the current character; a column identifies its successor.\nEach cell prints both the character pair and its count. Darker blue means\na larger count, not a larger conditional probability.\n\n![[00 Учебник/Assets/Figures/curated/ngram-makemore-2026-11-03/karpathy-bigram-counts.png|Original makemore character-bigram counts, with pair labels and counts]]\n\n*Andrej Karpathy, [makemore Part 1: Bigrams](https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part1_bigrams.ipynb),\ncomplete original saved PNG from notebook cell 11, output 0; 884×884 pixels.\n[MIT license](/licenses/karpathy-nn-zero-to-hero-73c3fcc7-MIT.txt).\nThe source's colors, labels and pixels are unchanged. The dense grid can be\nopened and enlarged to read individual cells.*\n\nThe top row starts names; the leftmost column ends them. The source uses\nthe same `.` character for both roles. It adds the boundary character to\neach name separately, so no transition is counted between consecutive names.\nAt generation time, reaching `.` ends the current name; it does not\ncause another transition from the boundary row.\n\n| Cell | Count | Event counted |\n|---|---:|---|\n| `.a` | 4410 | A name starts with a |\n| `.m` | 2538 | A name starts with m |\n| `a.` | 6640 | A name ends with a |\n| `..` | 0 | An empty name |\n\nThe boundary row sums to 32,033, one first-character event per name.\nConsequently, its MLE probability for a is $4410/32033\\approx0.1377$.\nThe reverse cell `a.` has a different denominator: the a row sums to\n33,885, so its MLE probability is $6640/33885\\approx0.1960$.\nNeither count is a probability by itself. Using a column total would\ninstead condition on the following character.\n\nThe counting cells are retained below. `words` is the original\n[names.txt](https://github.com/karpathy/makemore/blob/8f79bd0126eaef5eb82d346c9f85ae20ea1c476a/names.txt)\nsplit into lines; the 26 letters determine the indices through `stoi`.\n\n```python title=\"Original makemore cells 7–10 — archival source excerpt\"\nimport torch\n\nN = torch.zeros((27, 27), dtype=torch.int32)\n\nchars = sorted(list(set(''.join(words))))\nstoi = {s:i+1 for i,s in enumerate(chars)}\nstoi['.'] = 0\nitos = {i:s for s,i in stoi.items()}\n\n\nfor w in words:\n  chs = ['.'] + list(w) + ['.']\n  for ch1, ch2 in zip(chs, chs[1:]):\n    ix1 = stoi[ch1]\n    ix2 = stoi[ch2]\n    N[ix1, ix2] += 1\n```\n\n*Original source code, unchanged apart from joining notebook cells.\nThe six word-level programs elsewhere in this chapter use the Russian\nexample corpus; this source excerpt uses the names corpus.*\n\nThe figure is a saved notebook output, not a newly rendered table.\nOther saved cells reflect later interactive state: cell 12 prints a row\nof ones, while the figure contains the counts above. Those saved outputs\nare not treated as a single clean run. The four displayed counts and row\ntotals can be checked by counting the pinned names file independently.\n\n<a id=\"ngram-zero-events\"></a>"
+        },
+        {
+          "old": "## Backoff и interpolation",
+          "new": "<a id=\"ngram-makemore-normalization\"></a>\n\n### Row normalization in makemore\n\nThe source applies add-one to the entire count matrix, then divides each\nrow by its own sum:\n\n```python title=\"Original makemore cell 23 — archival source excerpt\"\nP = (N+1).float()\nP /= P.sum(1, keepdims=True)\n```\n\n*Andrej Karpathy, [makemore Part 1, cell 23](https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part1_bigrams.ipynb),\nunchanged code; MIT. The source spelling `keepdims=True` is retained.*\n\nAdding one changes every count, including the zero count for `..`.\nFor the first-character row, the denominator becomes $32033+27=32060$;\nthe smoothed probability of a is $4411/32060$. The model now also permits\nan immediate end marker, with probability $1/32060$, even though no empty\nname occurred in the data.\n\nBefore division, `P` has shape $[27,27]$. Summing dimension 1 with the\ndimension retained gives $[27,1]$: one denominator per history.\nBroadcasting repeats that denominator across the successor columns.\nSumming dimension 0 would instead normalize each column and generally\nleave the row sums unequal to one.\n\nA smaller matrix shows the difference without reading 729 cells. Its\ncounts are $[[2,0],[1,3]]$. After adding one, the first row is $[3,1]$\nand its denominator is 4; the second row is $[2,4]$ and its denominator\nis 6. Correct row normalization gives $[3/4,1/4]$ and $[1/3,2/3]$.\nColumn normalization divides by 5 and 5 instead, giving row sums\n$4/5$ and $6/5$.\n\n```python\nimport torch\n\nsmall_counts = torch.tensor([[2, 0], [1, 3]], dtype=torch.int32)\nsmoothed_counts = (small_counts + 1).double()\nrow_denominators = smoothed_counts.sum(1, keepdim=True)\nrow_probabilities = smoothed_counts / row_denominators\ntorch.testing.assert_close(row_denominators, torch.tensor([[4.], [6.]], dtype=torch.float64))\ntorch.testing.assert_close(row_probabilities, torch.tensor(\n    [[.75, .25], [1/3, 2/3]], dtype=torch.float64))\ntorch.testing.assert_close(row_probabilities.sum(1), torch.ones(2, dtype=torch.float64))\n\ncolumn_probabilities = smoothed_counts / smoothed_counts.sum(0, keepdim=True)\ntorch.testing.assert_close(column_probabilities.sum(1),\n    torch.tensor([.8, 1.2], dtype=torch.float64))\n```\n\n## Backoff и interpolation"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-language-modeling/ngram-window.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-language-modeling/ngram-window.png|Полная история и последние два слова в триграммной модели]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-language-modeling/ngram-probability.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-language-modeling/ngram-probability.png|Отношение счётчика 4-граммы к счётчику её контекста]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-language-modeling/backoff.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-language-modeling/backoff.png|Сокращение контекста от трёх слов к униграмме при backoff]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-language-modeling/interpolation.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-language-modeling/interpolation.png|Смесь распределений четырёх порядков с весами лямбда]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "de9e47a7baa2e53ccc78c44e5776d9af4c5ee06a848451e81ced21a5d13b5c11",
+      "after_sha256": "6e442daa4ae210f314ce354997537a6624e878cc4d88a5005eb50e24523ea455",
+      "changes": [
+        {
+          "old": "  - {\"id\":\"curated-kernels-20261103-4ce8860a1230\",\"asset\":\"00 Учебник/Assets/Figures/curated/kernels-2026-11-03/sklearn-rbf-validation-grid.png\",\"author\":\"The scikit-learn developers\",\"source_url\":\"https://scikit-learn.org/1.9/auto_examples/svm/plot_rbf_parameters.html\",\"source_image_url\":\"https://raw.githubusercontent.com/scikit-learn/scikit-learn.github.io/199d116ab37beed506c63fc9f6a74f56e228de43/1.9/_images/sphx_glr_plot_rbf_parameters_002.png\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/kernels-2026-11-03/sklearn-rbf-validation-grid.png\",\"source_asset_sha256\":\"4ce8860a12309b462ae25ca56601c68daf74bbf8533d5648ee8323261cb5009a\",\"sha256\":\"4ce8860a12309b462ae25ca56601c68daf74bbf8533d5648ee8323261cb5009a\",\"dimensions_px\":[800,600],\"commit\":\"199d116ab37beed506c63fc9f6a74f56e228de43\",\"license\":\"BSD-3-Clause\",\"license_url\":\"https://github.com/scikit-learn/scikit-learn/blob/866c0f51e7560ef0303cbcc5f159df5382ea9e3f/LICENSE\",\"license_evidence\":\"site/public/licenses/scikit-learn-1.9.1-BSD-3-Clause.txt\",\"license_evidence_sha256\":\"50d6a9d340f19ab355609917993114daf5f47e3161067bcf34955bbd05cd9cb0\",\"derivation\":\"source-image-copy\",\"modifications\":\"None. Complete original PNG copied byte-for-byte; no crop, relabeling, translation, redraw or resampling.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md\"],\"width\":800,\"height\":600,\"bytes\":27749,\"source_page_snapshot\":\"05 Источники/Originals/kernels-2026-11-03/sklearn-rbf-parameters-1.9.1.py\",\"source_page_sha256\":\"396ef426d23724920dbe4ebc477493729c882e49a5cfbb3cf6f90d13a2144bec\"}\n",
+          "new": "  - {\"id\":\"curated-kernels-20261103-4ce8860a1230\",\"asset\":\"00 Учебник/Assets/Figures/curated/kernels-2026-11-03/sklearn-rbf-validation-grid.png\",\"author\":\"The scikit-learn developers\",\"source_url\":\"https://scikit-learn.org/1.9/auto_examples/svm/plot_rbf_parameters.html\",\"source_image_url\":\"https://raw.githubusercontent.com/scikit-learn/scikit-learn.github.io/199d116ab37beed506c63fc9f6a74f56e228de43/1.9/_images/sphx_glr_plot_rbf_parameters_002.png\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/kernels-2026-11-03/sklearn-rbf-validation-grid.png\",\"source_asset_sha256\":\"4ce8860a12309b462ae25ca56601c68daf74bbf8533d5648ee8323261cb5009a\",\"sha256\":\"4ce8860a12309b462ae25ca56601c68daf74bbf8533d5648ee8323261cb5009a\",\"dimensions_px\":[800,600],\"commit\":\"199d116ab37beed506c63fc9f6a74f56e228de43\",\"license\":\"BSD-3-Clause\",\"license_url\":\"https://github.com/scikit-learn/scikit-learn/blob/866c0f51e7560ef0303cbcc5f159df5382ea9e3f/LICENSE\",\"license_evidence\":\"site/public/licenses/scikit-learn-1.9.1-BSD-3-Clause.txt\",\"license_evidence_sha256\":\"50d6a9d340f19ab355609917993114daf5f47e3161067bcf34955bbd05cd9cb0\",\"derivation\":\"source-image-copy\",\"modifications\":\"None. Complete original PNG copied byte-for-byte; no crop, relabeling, translation, redraw or resampling.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md\"],\"width\":800,\"height\":600,\"bytes\":27749,\"source_page_snapshot\":\"05 Источники/Originals/kernels-2026-11-03/sklearn-rbf-parameters-1.9.1.py\",\"source_page_sha256\":\"396ef426d23724920dbe4ebc477493729c882e49a5cfbb3cf6f90d13a2144bec\"}\n  - {\"id\":\"curated-ngram-karpathy-bigram-counts-0972425d7afc\",\"asset\":\"00 Учебник/Assets/Figures/curated/ngram-makemore-2026-11-03/karpathy-bigram-counts.png\",\"author\":\"Andrej Karpathy\",\"source_url\":\"https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part1_bigrams.ipynb\",\"source_image_url\":\"https://raw.githubusercontent.com/karpathy/nn-zero-to-hero/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part1_bigrams.ipynb\",\"commit\":\"73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde\",\"source_asset\":\"05 Источники/Originals/ngram-2026-10-21/makemore-part1-bigrams.ipynb\",\"source_asset_sha256\":\"db2f139409bad2966baac06581b6ca8ec9a03668df50dd073577fd98b3be0045\",\"sha256\":\"0972425d7afc53f7d81c7da5aca31a4dd99cb664bf102f604b0e3c61cec57d39\",\"source_cell_index\":11,\"source_output_index\":0,\"source_member\":\"/cells/11/outputs/0/data/image~1png\",\"dimensions_px\":[884,884],\"bytes\":251350,\"source_page_snapshot\":\"05 Источники/Originals/ngram-2026-10-21/makemore-part1-bigrams.ipynb\",\"source_page_sha256\":\"db2f139409bad2966baac06581b6ca8ec9a03668df50dd073577fd98b3be0045\",\"source_data\":\"05 Источники/Originals/ngram-makemore-2026-11-03/names.txt\",\"source_data_sha256\":\"0a30b5557f192f32ab962680889aac5f6fda0f4cecf40a6d0b5694f58ea8cc4d\",\"source_data_url\":\"https://raw.githubusercontent.com/karpathy/makemore/8f79bd0126eaef5eb82d346c9f85ae20ea1c476a/names.txt\",\"license\":\"MIT\",\"license_url\":\"https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/LICENSE\",\"license_evidence\":\"05 Источники/Originals/normalization-course-2026-11-03/karpathy-LICENSE.txt\",\"license_evidence_sha256\":\"a59ec5cdb1c1e447e5266a014b3e7ded511f8d6e5a08931e931c87490ff821fe\",\"public_license_copy\":\"site/public/licenses/karpathy-nn-zero-to-hero-73c3fcc7-MIT.txt\",\"derivation\":\"notebook-output-extraction\",\"modifications\":\"Exact original saved PNG decoded from cell11/output0. No rerender, crop, recoloring, relabeling, resizing, redraw or translation.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель.md\"]}\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "e502ab1893116c074d4819f4664626ab9dca758f40ff7198932f556e8103e069",
+      "after_sha256": "f497528e90b59f6f60ae9b0d8d145f20051795232a77f4941918082c9daa2a29",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель|N-граммная языковая модель]]\n",
+          "new": "- [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель|N-граммная языковая модель]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-chain-rule|Цепное правило вероятности текста]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-boundaries|BOS, EOS, префикс и остановка]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-markov|Марковское допущение и порядок n-граммы]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-counts|Счётчики переходов и оценка MLE]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-mle-derivation|Вывод MLE через правдоподобие строки]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-sequence-probability|Вероятность законченного текста]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-zero-events|Невиданная пара и неизвестный контекст]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-add-k|Add-one, add-k и неизвестные слова]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-interpolation|Интерполяция и отсутствующий порядок]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-backoff|Нормированный backoff и остаточная масса]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-stupid-backoff|Stupid Backoff и ненормированные оценки]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-kn-continuation|Kneser–Ney и число разных предшественников]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-kn-discount|Дисконтирование и интерполированный Kneser–Ney]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-kn-recursion|Kneser–Ney — поддержка, рекурсия и BOS]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-perplexity|Log-likelihood и perplexity]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-corpus-metrics|Корпусная perplexity и сопоставимые события]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-generation|Sampling, greedy и достижение EOS]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-sparsity|Порядок модели и разреженность]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-neural-bridge|От таблицы переходов к нейронной LM]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-makemore-matrix|makemore — исходная матрица биграмм]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-makemore-normalization|Нормировка строк и оси broadcasting]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "78ca22daac8084190c7e539fcab26b1874b559fdddfabcf074512b6c4fe0ef8b",
+      "after_sha256": "f0766420784a0ba2709dc761b8779154284bbeaae491bd01710c2a571cbea6da",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель|N-gram language models]]\n",
+          "new": "- [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель|N-gram language models]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-chain-rule|Chain rule for sequence probability]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-boundaries|BOS, EOS, prefixes and termination]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-markov|Markov assumption and n-gram order]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-counts|Transition counts and MLE]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-mle-derivation|Deriving row-wise maximum likelihood]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-sequence-probability|Complete-sequence probability]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-zero-events|Unseen events and missing histories]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-add-k|Add-one, add-k and unknown words]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-interpolation|Interpolation and unavailable orders]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-backoff|Normalized backoff and reserved mass]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-stupid-backoff|Stupid Backoff and unnormalized scores]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-kn-continuation|Kneser-Ney continuation distribution]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-kn-discount|Discounting and interpolated Kneser-Ney]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-kn-recursion|Kneser-Ney support, recursion and BOS]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-perplexity|Log-likelihood and perplexity]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-corpus-metrics|Corpus perplexity and comparable events]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-generation|Sampling, greedy decoding and EOS]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-sparsity|Model order and sparsity]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-neural-bridge|From transition tables to neural LMs]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-makemore-matrix|makemore original bigram count matrix]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-makemore-normalization|Row normalization and broadcasting axes]]\n"
+        }
+      ]
+    }
+  ],
+  "sourceComparison": [
+    {
+      "source": "docs/audit/2026-10-21-ngram.md",
+      "use": "Explicit reuse of previous full selected SLP3/AppendixC/Voita/CS224N/Brants/Heafield comparison; preceding chapter hash032dc... exactly matches that1072-line reviewed revision. Complete owner reread this turn. Not a fresh reread of all source courses."
+    },
+    {
+      "source": "https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part1_bigrams.ipynb",
+      "sha256": "db2f139409bad2966baac06581b6ca8ec9a03668df50dd073577fd98b3be0045",
+      "read": "Original cells0–26 source and relevant saved outputs inspected, including full count/normalization code. Pinned notebook freshly retrieved via HTTP and exact hash compared without storing another copy. Cell11's unchanged884px PNG viewed; cells12/26 visibly reflect different interactive states and are not used as results of a clean counter run.",
+      "use": "One original saved PNG, exact source cells7–10 and23. Other course text/figures retained."
+    },
+    {
+      "source": "https://raw.githubusercontent.com/karpathy/makemore/8f79bd0126eaef5eb82d346c9f85ae20ea1c476a/names.txt",
+      "sha256": "0a30b5557f192f32ab962680889aac5f6fda0f4cecf40a6d0b5694f58ea8cc4d",
+      "use": "Fresh pinned data download; independently count all729 pairs from32033 names/228146 boundary-inclusive events. No image regeneration or neural-model training."
+    },
+    {
+      "source": "https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/LICENSE",
+      "use": "MIT with original copyright, public exact license already preserved. No Voita permission inferred from this license."
+    }
+  ],
+  "remaining": [
+    "Existing four Voita source PNG rights remain under their prior needs-confirmation/user permission records; this delta does not independently establish a named redistribution license for them.",
+    "No full-source-course or whole-book completeness claim. Public checkout/dev deployment remain unexecuted for local deltas."
+  ],
+  "verification": {
+    "chapterSha256": "80244f92f9c719c7733d59940db952735441b190ba84788a3ebef5bcef19baa0",
+    "wholeOwnerRead": "Complete1072-line baseline and1297-line final chapter read. Final ranges1-350,351-690,691-1000,1001-EOF. Later four alt-only edits reread in their surrounding paragraphs; no explanation/source-code/equation change after full read.",
+    "style": "no-ai-slop SKILL/eval read fully; full existing reasoning, numeric examples, caveats and sources retained. English source-derived extensions stay English; no translation pass. No synthetic figure or introductory summary replaces the source.",
+    "preservation": "Reversible exact-byte journal for chapter,registry and RU/EN indexes; previous032dc6d5... owner restored exactly. Six prior runnable examples, all original display equations, four source images/captions retained. New source PNG decoded byte-for-byte, no redraw/crop.",
+    "cpu": {
+      "exit": 0,
+      "device": "CPU",
+      "command": "uv run --offline --python 3.13 --with torch==2.14.1 python publishing/tools/check_ngram_examples.py",
+      "programs": 7,
+      "sourceExcerpts": 2,
+      "scope": "Seven current standalone program bodies executed; all previous exact probability/MLE/add-k/interpolation/backoff/KN/PPL/sampling/boundary checks pass. Both author excerpts match pinned cells; executed counting/normalization source code. All729 source pairs independently recounted from32033 names/228146 events;180 rectangular row-normalization cases. Following moves/alt edits leave all runtime/source program bytes unchanged. Not neural-model training or a benchmark.",
+      "warning": "Torch warned that NumPy was not installed in this isolated run; no NumPy-dependent operation was used and the complete checker exited0."
+    },
+    "sourceAsset": {
+      "prepareCheckExit": 0,
+      "pngSha256": "0972425d7afc53f7d81c7da5aca31a4dd99cb664bf102f604b0e3c61cec57d39",
+      "dimensions": [
+        884,
+        884
+      ],
+      "license": "MIT with exact public copyright/license copy"
+    },
+    "tests": {
+      "sourceRegistryAndInitialDelta": "177 tests in3 files pass; this includes full current source-asset registry validation. Existing Poppler closepath warnings did not fail the run; not all-source PDF visual acceptance.",
+      "finalDeltaAndIndex": "17 tests in3 files pass after final alt edits",
+      "builtOutput": "192 tests pass after final rebuild, including both locale routes,21 mechanism anchors,9 Python fences,5 originals and four descriptive alt labels"
+    },
+    "build": {
+      "exit": 0,
+      "pages": 2007,
+      "pagefindHtmlFiles": 2011,
+      "durationSeconds": 27.67,
+      "links": "0 broken internal routes,fragments or files",
+      "size": {
+        "bytes": 852445690,
+        "files": 5598,
+        "limit": 1000000000,
+        "headroom": 147554310
+      }
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-03-ngram-reader",
+      "desktop": "1280x720 final reload: document1265/1265;5 source images loaded;zero KaTeX errors/display-math overflow. New count-grid chapter context and full fit viewer/caption inspected. Grid center inspected at2x; no claim that all729 labels are legible at fit.",
+      "mobile": "390x844 final reload: document375/375;all5 inline originals<=343px;4 tables343/343;zero KaTeX errors/display-math overflow. All four unchanged Voita originals/captions freshly inspected in fit viewer. New count matrix inspected at4x center, top-left(0,0), and bottom-right(1077,811) with maximum(1077,812);labels including a.-6640 and zz-45 readable. Native source gray/blue contrast and original884px detail unchanged; no enhancement or full-grid fit-legibility claim.",
+      "navigation": "Actual RU reference -> #ngram-makemore-matrix; actual EN reference -> #ngram-makemore-normalization. EN explicitly says Canonical-language chapter; actual EN Next reaches next-token-probability and correct h1. Final reader returned to RU owner."
+    },
+    "publication": "Local only; no staging,commit,push or deployment. Existing broader release/source-rights requirements remain."
+  }
+}

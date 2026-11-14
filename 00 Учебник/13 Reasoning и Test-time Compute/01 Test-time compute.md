@@ -2,16 +2,118 @@
 title: Вычисления во время ответа
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-30
+last_updated: 2026-11-05
 last_verified: 2026-10-29
 source_language: mixed
 reference_terms:
-  - label: Tree of Thoughts — поиск по промежуточным решениям
-    label_en: Tree of Thoughts — search over partial solutions
+  - label: "Полная стоимость генерации, проверки и инструментов"
+    label_en: "Generation, scoring and tool cost"
+    anchor: ttc-budget
+  - label: "Генератор и выбор ответа"
+    label_en: "Proposal distribution and answer selection"
+    anchor: ttc-proposal-selection
+  - label: "Chain-of-thought: промежуточные шаги в контексте"
+    label_en: "Chain-of-thought and intermediate context"
+    anchor: ttc-chain-of-thought
+  - label: "Analogical prompting: родственные примеры"
+    label_en: "Analogical prompting and generated examples"
+    anchor: ttc-analogical-prompting
+  - label: "OPRO: подбор инструкции по оценкам"
+    label_en: "OPRO: instruction optimization from scores"
+    anchor: ttc-opro
+  - label: "Least-to-most и Self-Discover"
+    label_en: "Least-to-most and Self-Discover"
+    anchor: ttc-decomposition-self-discover
+  - label: "Pass@k: наличие верного решения среди попыток"
+    label_en: "Pass@k: availability of a correct candidate"
+    anchor: ttc-pass-at-k
+  - label: "Оценка pass@k по конечному набору"
+    label_en: "Finite-sample pass@k estimator"
+    anchor: ttc-finite-pass-at-k
+  - label: "Self-consistency: голосование по ответам"
+    label_en: "Self-consistency: voting over answers"
+    anchor: ttc-self-consistency
+  - label: "Нормализация ответов и ничьи"
+    label_en: "Answer normalization and ties"
+    anchor: ttc-answer-normalization
+  - label: "Когда голосование повышает точность"
+    label_en: "When voting improves accuracy"
+    anchor: ttc-voting-success
+  - label: "Universal Self-Consistency для свободного текста"
+    label_en: "Universal Self-Consistency for free-form text"
+    anchor: ttc-universal-self-consistency
+  - label: "Best-of-N: отбор оценщиком"
+    label_en: "Best-of-N: verifier-based selection"
+    anchor: ttc-best-of-n
+  - label: "ORM, PRM и взвешенное голосование"
+    label_en: "ORM, PRM and weighted voting"
+    anchor: ttc-prm-weighted-vote
+  - label: "Исполнимые проверки и фильтрация AlphaCode"
+    label_en: "Executable checks and AlphaCode filtering"
+    anchor: ttc-executable-checks
+  - label: "Ошибки оценщика при росте числа кандидатов"
+    label_en: "Verifier errors as the candidate set grows"
+    anchor: ttc-selection-overoptimization
+  - label: "Последовательное исправление ответов"
+    label_en: "Sequential answer revisions"
+    anchor: ttc-revisions
+  - label: "Самокоррекция и порча верных ответов"
+    label_en: "Self-correction and correct-to-wrong transitions"
+    anchor: ttc-self-correction
+  - label: "Chain-of-Verification, S2A и Branch-Solve-Merge"
+    label_en: "Chain-of-Verification, S2A and Branch-Solve-Merge"
+    anchor: ttc-cove-s2a-bsm
+  - label: "Faithfulness записанного рассуждения"
+    label_en: "Faithfulness of written reasoning"
+    anchor: ttc-faithfulness
+  - label: "s1: budget forcing и учёт токенов"
+    label_en: "s1: budget forcing and token accounting"
+    anchor: ttc-budget-forcing
+  - label: "Qwen3: thinking mode и внешний бюджет"
+    label_en: "Qwen3: thinking mode and external budget"
+    anchor: ttc-qwen3-thinking-budget
+  - label: "Tree of Thoughts — поиск по промежуточным решениям"
+    label_en: "Tree of Thoughts — search over partial solutions"
     anchor: tree-of-thoughts
-  - label: Coconut — непрерывные скрытые состояния
-    label_en: Coconut — continuous hidden-state feedback
+  - label: "ToT: общий отбор следующего уровня"
+    label_en: "ToT: global frontier selection"
+    anchor: ttc-tot-frontier
+  - label: "ToT: план и связный текст"
+    label_en: "ToT: plan and passage selection"
+    anchor: tot-creative-writing
+  - label: "ToT: ограничения, отсечение и возврат"
+    label_en: "ToT: constraints, pruning and backtracking"
+    anchor: tot-crossword-dfs
+  - label: "Что измеряют исходные сравнения ToT"
+    label_en: "What the original ToT comparisons measure"
+    anchor: ttc-tot-comparisons
+  - label: "Ширина поиска и стоимость lookahead"
+    label_en: "Search width and lookahead cost"
+    anchor: ttc-lookahead
+  - label: "Grokking и неявное рассуждение"
+    label_en: "Grokking and implicit reasoning"
+    anchor: ttc-grokking
+  - label: "Coconut — непрерывные скрытые состояния"
+    label_en: "Coconut — continuous hidden-state feedback"
     anchor: coconut-continuous-thought
+  - label: "Распределение бюджета вычислений"
+    label_en: "Allocating the computation budget"
+    anchor: ttc-allocation
+  - label: "Независимые начала и цепочки исправлений"
+    label_en: "Independent starts and revision chains"
+    anchor: ttc-sequential-parallel
+  - label: "Стоимость оценки сложности вопроса"
+    label_en: "Cost of estimating question difficulty"
+    anchor: ttc-difficulty-estimation
+  - label: "Бюджеты обучения и применения модели"
+    label_en: "Training versus inference budgets"
+    anchor: ttc-training-inference-budget
+  - label: "Сравнение качества, стоимости и задержки"
+    label_en: "Comparing quality, cost and latency"
+    anchor: ttc-evaluation
+  - label: "Пример: генерация, отбор и стоимость"
+    label_en: "Worked example: generation, selection and cost"
+    anchor: ttc-generator-selector-cost
 aliases:
   - Test-time compute
   - Inference-time scaling
@@ -60,6 +162,7 @@ source_unit_id:
 пользователю другую. Один длинный ответ может включать полезную проверку —
 или повторять прежнюю ошибку.
 
+<a id="ttc-budget"></a>
 ## 1. Что именно масштабируется после обучения
 
 Обычная языковая модель порождает ответ слева направо. При неизменных
@@ -112,6 +215,7 @@ $$
 [первой лекции Berkeley Advanced LLM Agents](https://rdi.berkeley.edu/adv-llm-agents/sp25).
 Ни один из этих приёмов сам по себе не требует нового блока Transformer.
 
+<a id="ttc-proposal-selection"></a>
 ## 2. Две части любого метода: предложить и выбрать
 
 В работе Charlie Snell и соавторов разделены две части системы. Генератор
@@ -121,7 +225,7 @@ $$
 его исправить. Оценщик тоже можно использовать по-разному — после завершения
 всех ответов или уже при выборе следующего шага.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/test-time-compute/snell-prm-search-methods.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/test-time-compute/snell-prm-search-methods.png|Snell: best-of-N, поиск по промежуточным оценкам и lookahead]]
 
 *Слева все ответы сначала дописываются до конца; оценщик применяется после
 генерации. В центре оценка промежуточных состояний определяет, какие ветви
@@ -143,6 +247,7 @@ $$
 Далее это различие появится в паре метрик: оракульном pass@$k$ и точности
 одного ответа, который действительно выбирает система.
 
+<a id="ttc-chain-of-thought"></a>
 ### Одна траектория: сделать ход рассуждения явным
 
 В обычном примере «вопрос — ответ» модель видит условие и итог. В примере
@@ -172,6 +277,7 @@ Kojima et al. рассуждение и извлечение краткого о
 Сравнение требует одной версии модели, одних задач и учёта токенов,
 потраченных до финального ответа.
 
+<a id="ttc-analogical-prompting"></a>
 ### Сначала построить подходящие примеры
 
 Analogical prompting предлагает модели сначала сгенерировать несколько
@@ -194,6 +300,7 @@ Analogical prompting предлагает модели сначала сгене
 вспомогательный пример от исходного условия: изменение чисел в аналоге
 не даёт права изменить их в решаемой задаче.
 
+<a id="ttc-opro"></a>
 ### Оптимизация инструкции по истории оценок
 
 При применении OPRO к prompting подбирается инструкция, с которой другая
@@ -202,7 +309,7 @@ Analogical prompting предлагает модели сначала сгене
 инструкции; модель-исполнитель отвечает на проверочные задачи с каждой из них.
 Доля правильных ответов возвращается в историю следующего шага.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/opro-loop.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/opro-loop.png|OPRO: предложение инструкции, измерение качества и обновление истории]]
 
 *Цикл OPRO: предложения модели проверяет функция оценки, после чего пары
 «предложение — оценка» попадают в следующий запрос к оптимизатору.
@@ -230,6 +337,7 @@ Chengrun Yang et al.,
 
 <a id="декомпозиция-и-выбор-reasoning-модулей"></a>
 
+<a id="ttc-decomposition-self-discover"></a>
 ### Декомпозиция и выбор структуры решения
 
 В least-to-most prompting сначала составляют список более простых подзадач,
@@ -254,7 +362,7 @@ Dynamic least-to-most дополняет этот подход подбором 
 и превращает в последовательность полей и действий (**IMPLEMENT**).
 Затем одна и та же структура используется для отдельных примеров.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/self-discover-stages.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/self-discover-stages.png|Self-Discover: построение общей структуры и решение отдельной задачи]]
 
 *Верхняя часть строит структуру на уровне класса задач, нижняя применяет её
 к отдельному примеру. Синие поля заполняются при решении; это текстовая
@@ -281,6 +389,7 @@ self-consistency, которая заново генерирует нескол�
 [разделе 3.1](https://arxiv.org/html/2402.03620v1#S3.SS1).
 [Self-Discover, §2](https://arxiv.org/html/2402.03620v1#S2).
 
+<a id="ttc-pass-at-k"></a>
 ## 3. Независимые попытки и pass@k
 
 Пусть для **одной фиксированной задачи** одна попытка успешна с вероятностью
@@ -305,7 +414,7 @@ $$
 используют общий случайно полученный черновик или каждый следующий ответ
 строится с учётом предыдущих. Тогда простой формулы может быть недостаточно.
 
-Есть и другая ловушка: вероятность успеха различается между задачами.
+Вероятность успеха различается между задачами.
 Пусть половину задач модель решает с $p=0.9$, другую половину — с $p=0.1$.
 Средняя точность одной попытки равна 0.5, но для четырёх попыток:
 
@@ -317,6 +426,7 @@ $$
 число. Усреднять нужно результаты по задачам, а не сначала их вероятности
 внутри нелинейной формулы.
 
+<a id="ttc-finite-pass-at-k"></a>
 ### Оценка по конечному набору ответов
 
 Если для одной задачи уже получены $n$ ответов и $c$ из них верны, вероятность
@@ -344,6 +454,7 @@ $1-\binom74/\binom{10}4=1-35/210=5/6$.
 Детали проверяющих программ разобраны в
 [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers|главе о RLVR]].
 
+<a id="ttc-self-consistency"></a>
 ## 4. Self-consistency
 
 Self-consistency получает несколько рассуждений и голосует по **финальному
@@ -369,7 +480,7 @@ $$
 с суммарной вероятностью 0.4. Поэтому объединение разных цепочек не
 эквивалентно выбору наиболее вероятного текста.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/self-consistency.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/self-consistency.png|Self-consistency: разные цепочки рассуждений и голосование по финальному ответу]]
 
 *В авторском примере две разные цепочки приводят к 18, третья — к 26.
 Голосование выбирает 18, не требуя совпадения промежуточных формулировок.
@@ -393,6 +504,7 @@ CC BY 4.0. Исходная схема без перерисовки.*
 а не способы записать одну формулу.
 [Wang et al., §2 и Table 1](https://arxiv.org/html/2203.11171v4#S2).
 
+<a id="ttc-answer-normalization"></a>
 ### Нормализация и ничьи
 
 Ответы `1/2` и `0.5` должны попадать в одну группу, если задача требует точного
@@ -408,6 +520,7 @@ Self-consistency обычно выбирает **наиболее частый**
 от выбора. Порядок элементов в массиве не должен незаметно становиться
 правилом разрешения ничьей.
 
+<a id="ttc-voting-success"></a>
 ### Когда голосование улучшает результат
 
 В частном бинарном случае все ошибки приводят к одному неверному ответу.
@@ -430,7 +543,7 @@ $$
 голосов. В пределе большого числа независимых попыток выбирается наиболее
 вероятный нормализованный ответ — независимо от того, верен он или нет.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p42-sample-scaling.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p42-sample-scaling.png|Self-consistency: точность голосования при увеличении числа выборок]]
 
 *На этих графиках сравниваются голосование по ответам, выбор цепочки с высокой
 логарифмической вероятностью и одна жадная генерация. Горизонтальная оранжевая
@@ -510,6 +623,7 @@ print('pass@4:', pass_at_k(10, 3, 4))
 и случаи без единственного победителя нужно учитывать отдельно. В функции
 выше `None` зарезервирован для результата отбора, а не для ошибочного ответа.
 
+<a id="ttc-universal-self-consistency"></a>
 ### Когда финальный ответ нельзя свести к одному числу
 
 Два хороших кратких пересказа документа могут не иметь ни одной одинаковой
@@ -524,7 +638,7 @@ Universal Self-Consistency (USC) передаёт сравнение самой 
 В отличие от нового раунда исправления, этот вызов не должен подменять
 отбор генерацией ещё одного, не входившего в набор ответа.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/test-time-compute-2026-10-25/usc-workflow.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/test-time-compute-2026-10-25/usc-workflow.png|Universal Self-Consistency: генерация кандидатов и выбор одного ответа моделью]]
 
 *Одна и та же LLM сначала создаёт ответы, затем сравнивает их в общем
 контексте. Выход последнего вызова указывает выбранный ответ; схема
@@ -548,6 +662,7 @@ CC BY 4.0. Полный исходный PNG без перерисовки и п
 модели замечать согласованность их не заменяет.
 [Chen et al., §4.1, §4.3–4.4](https://arxiv.org/html/2311.17311v1#S4).
 
+<a id="ttc-best-of-n"></a>
 ## 5. Best-of-N: генератор и проверяющая модель
 
 В best-of-$N$ модель порождает $N$ законченных ответов, после чего оценщик
@@ -570,6 +685,7 @@ $(0.70,0.90,0.75,0.20)$. Обычный best-of-4 выберет 8.
 тоже выберет 4. Все числа здесь учебные; они показывают, что одно название
 «отбор оценщиком» ещё не задаёт правило агрегации.
 
+<a id="ttc-prm-weighted-vote"></a>
 ### Оценка результата и оценка промежуточного шага
 
 Модель оценки результата (*outcome reward model*, ORM) получает весь ответ.
@@ -647,6 +763,7 @@ print('weighted vote:', winner, totals)
 искусственно увеличит его вес; дубликаты строк, действительно полученные
 независимой выборкой, напротив, являются частью наблюдаемой частоты.
 
+<a id="ttc-executable-checks"></a>
 ### Когда ответ можно исполнить или проверить
 
 Для программы можно запустить доступные тесты, для формального доказательства —
@@ -664,6 +781,7 @@ print('weighted vote:', winner, totals)
 эквивалентность программ, а прохождение примеров из условия не гарантирует
 прохождения закрытых тестов.
 
+<a id="ttc-selection-overoptimization"></a>
 ### Почему больше кандидатов иногда ухудшает отбор
 
 При увеличении $N$ растёт шанс найти как правильное решение, так и неверное
@@ -682,6 +800,7 @@ $1-(1-q)^N$, если такие события независимы и имею
 правильный ответ присутствовал и был отвергнут. Оценщик проверяется на
 кандидатах той модели и того режима генерации, с которыми будет работать.
 
+<a id="ttc-revisions"></a>
 ## 6. Длинное рассуждение и последовательное исправление
 
 Пусть программа, написанная моделью, не проходит тест на пустом списке.
@@ -704,7 +823,7 @@ $y_1,y_2,\ldots$ и может сравнивать их. Во втором но
 и начать другое решение до выдачи финального ответа. Оба способа требуют
 последовательных вычислений: следующая часть использует результат предыдущей.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/snell-revisions-parallel.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/snell-revisions-parallel.png|Snell: независимые попытки, последовательные исправления и их сочетание]]
 
 *Независимые ответы, одна цепочка исправлений и несколько таких цепочек.
 В цепочке последняя версия не обязательно лучшая: на схеме предусмотрен
@@ -733,6 +852,7 @@ Snell et al. изучали исправления на специально д�
 на 38 процентных пунктов.
 [Snell et al., §6.1](https://arxiv.org/html/2408.03314v1#S6.SS1).
 
+<a id="ttc-self-correction"></a>
 ### Почему самопроверка может испортить ответ
 
 Тест, сообщивший о делении на ноль, даёт новую информацию. Просьба
@@ -756,6 +876,7 @@ Snell et al. изучали исправления на специально д�
 этих проверок. Скрытый эталон нельзя использовать для решения,
 какую версию возвращать: такое сравнение измеряло бы качество оракула.
 
+<a id="ttc-cove-s2a-bsm"></a>
 ### Перепроверка, деконтекстуализация и ветвление
 
 В [Chain-of-Verification](https://arxiv.org/html/2309.11495v2)
@@ -791,6 +912,7 @@ Snell et al. изучали исправления на специально д�
 друг другу. Несколько вызовов одной модели не становятся независимыми
 экспертами только из-за разных названий ролей.
 
+<a id="ttc-faithfulness"></a>
 ### Можно ли доверять записанному рассуждению
 
 Правильный итог, корректные промежуточные шаги и полнота объяснения —
@@ -814,6 +936,7 @@ Snell et al. изучали исправления на специально д�
 полным протоколом внутренних вычислений модели.
 
 <span id="budget-forcing-заставить-траекторию-продолжиться"></span>
+<a id="ttc-budget-forcing"></a>
 ### Budget forcing в s1: продолжить мысль или перейти к ответу
 
 Управлять длиной можно извне, не обновляя веса между запросами.
@@ -828,7 +951,7 @@ Qwen2.5-32B-Instruct на тысяче примеров с рассуждени�
 токен и не результат внешней проверки. Строка предлагает модели
 пересмотреть сказанное; найти ошибку ей всё ещё нужно самой.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/s1-budget-forcing.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/s1-budget-forcing.png|s1: продолжение рассуждения строкой Wait и исправление подсчёта букв]]
 
 *В авторском примере модель сначала насчитывает две буквы r в raspberry.
 После вставки Wait она разбирает слово по буквам и получает три.
@@ -865,6 +988,7 @@ Apache-2.0.*
 budget forcing, нужно сравнить разные бюджеты и способы отбора
 на одном checkpoint.
 
+<a id="ttc-qwen3-thinking-budget"></a>
 ### Thinking mode и бюджет в исходном Qwen3
 
 В первоначальных гибридных моделях Qwen3 2025 года следует различать
@@ -904,7 +1028,7 @@ budget forcing, нужно сравнить разные бюджеты и сп�
 от неудачного направления раньше. Для этого система должна уметь
 представить частичное решение и оценить, стоит ли его продолжать.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/tot-search.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/tot-search.png|Tree of Thoughts: одна цепочка, независимые цепочки и поиск с промежуточным отбором]]
 
 *В CoT строится одна цепочка, в self-consistency — несколько законченных
 цепочек. Tree of Thoughts оценивает промежуточные состояния и продолжает
@@ -935,7 +1059,7 @@ $+,-,\times,/$ и скобок, использовав каждое исходн
 Именно это и должен распознать оценщик — до того, как система потратит
 ресурсы на полное решение.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/tot-game24.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/tot-game24.png|Tree of Thoughts: предложение и оценивание операций в Game of 24]]
 
 *Два запроса к одной LLM выполняют разную работу: Propose Prompt предлагает
 операции, Value Prompt оценивает получившиеся состояния. Зелёная ветвь
@@ -990,6 +1114,7 @@ CC BY 4.0.*
 правила переходов лучше проверять программно; запуск произвольного
 сгенерированного кода требует изоляции.
 
+<a id="ttc-tot-frontier"></a>
 ### Как общий предел ширины меняет следующий уровень
 
 Пусть после первого шага оставлены состояния A и B. Модель предлагает
@@ -1051,7 +1176,7 @@ a coherent passage. In the example below, Plan 1 moves from a handstand to
 an astronaut, then to a conversation in a bar and finally to personal identity.
 Plan 2 connects the same material through an unusual self-help book.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-creative-search.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-creative-search.png|Tree of Thoughts: сравнение планов перед генерацией связного текста]]
 
 *Shunyu Yao et al., [Tree of Thoughts, Figure 4, p. 7](https://arxiv.org/pdf/2305.10601v2#page=7),
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Complete original
@@ -1086,7 +1211,7 @@ nothing. The shared greedy BFS selection keeps the first candidate on a tie.
 These parser and tie rules belong to that implementation, rather than to
 the general definition of ToT.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-creative-results.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-creative-results.png|Tree of Thoughts: оценки связности и человеческие предпочтения в исходном опыте]]
 
 *Shunyu Yao et al., [Figure 5, p. 7](https://arxiv.org/pdf/2305.10601v2#page=7),
 CC BY 4.0. Both original panels, all axis labels and the full caption.
@@ -1117,7 +1242,7 @@ has the pattern TM___. Adding SALON at h4 changes that pattern to TM_S_.
 The evaluator must decide whether a word matching both the pattern and
 the clue “To heap” remains plausible.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-crossword-dfs.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-crossword-dfs.png|Tree of Thoughts: очередь действий, отсечение и возврат при решении кроссворда]]
 
 *Shunyu Yao et al., [Tree of Thoughts, Figure 6, p. 8](https://arxiv.org/pdf/2305.10601v2#page=8),
 CC BY 4.0. Complete original figure and English caption. The proposal queue
@@ -1223,6 +1348,7 @@ priority and crossing-letter calculations; it does not reproduce GPT-4's
 crossword results.
 [Yao et al., §4.3 and Table 3](https://arxiv.org/html/2305.10601v2#S4.SS3).
 
+<a id="ttc-tot-comparisons"></a>
 ### What the original comparisons measure
 
 The Game of 24 results use 100 games, indices 901–1,000 in the source's
@@ -1247,6 +1373,7 @@ environment, continue with [[02 Areas/ML & DL/00 Учебник/17 Tools и Agen
 A copied crossword board can be restored locally; an external action
 requires its own rollback or simulation semantics.
 
+<a id="ttc-lookahead"></a>
 ### Ширина поиска, пробные продолжения и цена оценки
 
 Пусть на уровне сохранено $b$ состояний, а для каждого создаётся
@@ -1286,6 +1413,7 @@ $M$ продолжений. Например, $N=16$, $M=4$ означает 16 
 более узкий вариант lookahead с детерминированными продолжениями.
 Его нельзя без оговорок представлять как реализацию всего MCTS.
 
+<a id="ttc-grokking"></a>
 ### Неявное рассуждение и grokking
 
 Большое число напечатанных шагов — не единственный способ выполнить
@@ -1531,6 +1659,7 @@ do not establish that hidden-state feedback is universally more accurate,
 or that printing fewer words always uses fewer FLOPs.
 
 
+<a id="ttc-allocation"></a>
 ## 8. Как распределять FLOP-бюджет между размером модели и числом попыток
 
 Лучший способ потратить дополнительные вычисления зависит от того,
@@ -1540,7 +1669,7 @@ or that printing fewer words always uses fewer FLOPs.
 Если же модель почти никогда не предлагает нужного хода, один лишь
 рост числа похожих попыток даёт мало.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/snell-budget-difficulty.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/snell-budget-difficulty.png|Snell: точность поиска при разных бюджетах и сложности задач]]
 
 *PaLM2-S\* на MATH: слева точность при разных бюджетах генерации,
 справа — те же методы по группам сложности. Цветные столбики справа
@@ -1558,6 +1687,7 @@ CC BY 4.0.*
 График характеризует PaLM2-S*, конкретный проверяющий механизм и MATH,
 а не все языковые модели и все виды поиска.
 
+<a id="ttc-sequential-parallel"></a>
 ### Сколько независимых начал оставить для исправления
 
 При бюджете 64 полных ответа можно получить 64 независимых начала,
@@ -1567,7 +1697,7 @@ CC BY 4.0.*
 Выбор между такими режимами меняет число исследованных подходов и глубину
 доработки каждого из них.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/test-time-compute-2026-10-25/snell-sequential-parallel-ratio.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/test-time-compute-2026-10-25/snell-sequential-parallel-ratio.png|Snell: соотношение последовательных исправлений и независимых цепочек]]
 
 *Слева каждая линия сохраняет общий бюджет, но меняет отношение числа
 последовательных версий к числу независимых цепочек. Справа общий бюджет
@@ -1584,6 +1714,7 @@ CC BY 4.0. Полный исходный PNG с обеими панелями, �
 обученной revision-модели и выбору ответов оценщиком; они не задают
 универсальную пропорцию вроде «всегда восемь на восемь».
 
+<a id="ttc-difficulty-estimation"></a>
 ### Откуда системе знать сложность нового вопроса
 
 «Выбрать бюджет по сложности» звучит просто, пока сложность известна
@@ -1608,6 +1739,7 @@ CC BY 4.0. Полный исходный PNG с обеими панелями, �
 и сколько ошибочных ответов начинает пропускать. При смене модели,
 температуры или типа задач эту проверку приходится повторять.
 
+<a id="ttc-training-inference-budget"></a>
 ### Меньшая модель с поиском или большая без поиска
 
 Приближение $2P$ FLOPs на токен для плотной модели с $P$ параметрами
@@ -1684,6 +1816,7 @@ print('budget multipliers:', inference_multiplier(4, Fraction(1, 10)),
       inference_multiplier(4, 10))
 ```
 
+<a id="ttc-evaluation"></a>
 ## 9. Как сравнивать методы
 
 Основная кривая связывает качество **возвращённого ответа** с полной
@@ -1779,6 +1912,7 @@ print('budget multipliers:', inference_multiplier(4, Fraction(1, 10)),
 потом выйти на плато и начать снижаться. По числу напечатанных токенов
 невозможно определить, происходило ли полезное вычисление.
 
+<a id="ttc-generator-selector-cost"></a>
 ## 11. Пример: отделить генерацию, отбор и стоимость
 
 Рассмотрим **условный**, а не опубликованный эксперимент на 100 задачах.

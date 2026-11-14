@@ -7,16 +7,18 @@ import numpy as np
 from scipy.special import logsumexp, xlogy
 from scipy.stats import multivariate_normal, norm
 from sklearn.mixture._gaussian_mixture import _estimate_gaussian_parameters
+from threadpoolctl import threadpool_limits
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md"
 contents = CHAPTER.read_bytes()
 blocks = re.findall(r"```python\n(.*?)```", contents.decode(), re.S)
-assert len(blocks) == 8
+assert len(blocks) == 10
 scope = {}
 for index, code in enumerate(blocks, 1):
     print(f"Execute actual chapter block {index}", flush=True)
-    exec(compile(code, f"{CHAPTER}:block{index}", "exec"), scope)
+    with threadpool_limits(limits=1):
+        exec(compile(code, f"{CHAPTER}:block{index}", "exec"), scope)
 
 rng = np.random.default_rng(20261025)
 logpdf = scope["gaussian_logpdf"]
@@ -143,4 +145,54 @@ for variance in [1.,.25,.01]:
     np.testing.assert_allclose(post[1],[.5,.5])
     assert post[0,0] > .98 and post[-1,0] < .02
 print("PASS actual covariance regularization, label permutation, 16 model candidates, AIC/BIC and hard-limit ties")
+# Check the plotted initialization protocol without treating source times as measurements.
+from sklearn.cluster import kmeans_plusplus
+init_X = scope["initialization_data"]
+for method in ["random_from_data", "random"]:
+    reference_rng = np.random.RandomState(1234)
+    if method == "random_from_data":
+        expected_means = init_X[reference_rng.choice(len(init_X), 4, replace=False)]
+    else:
+        resp = reference_rng.uniform(size=(len(init_X),4))
+        resp /= resp.sum(axis=1, keepdims=True)
+        expected_means = resp.T @ init_X / resp.sum(axis=0)[:,None]
+    np.testing.assert_allclose(
+        scope["initialization_results"][method]["initial_means"], expected_means, atol=1e-12
+    )
+expected_plus, _ = kmeans_plusplus(init_X, 4, random_state=np.random.RandomState(1234))
+np.testing.assert_allclose(
+    scope["initialization_results"]["k-means++"]["initial_means"], expected_plus, atol=1e-12
+)
+results = scope["initialization_results"]
+assert results["kmeans"]["mean_log_density"] > results["random_from_data"]["mean_log_density"] + .2
+for method in ["k-means++","random"]:
+    np.testing.assert_allclose(results[method]["mean_log_density"], results["kmeans"]["mean_log_density"], atol=1e-8)
+assert results["random_from_data"]["iterations"] == 137
+print("PASS independent random/random-from-data/plus-plus means and converged-but-inferior start")
+
+# Independent covariance eigenproblem, whitening, inverse map and affine support.
+pixels = scope["digit_pixels"]
+projection = scope["digit_projection"]
+eigenvalues = np.linalg.eigvalsh(np.cov(pixels, rowvar=False))[::-1]
+cumulative = np.cumsum(eigenvalues)/eigenvalues.sum()
+assert cumulative[39] < .99 <= cumulative[40]
+np.testing.assert_allclose(np.cov(scope["digit_codes"], rowvar=False),np.eye(41),atol=1e-12)
+basis = projection.components_.T
+scaled_basis = basis * np.sqrt(projection.explained_variance_)
+manual_pixels = projection.mean_ + scope["generated_codes"] @ scaled_basis.T
+np.testing.assert_allclose(manual_pixels,scope["generated_digit_pixels"],atol=1e-12)
+null_projector = np.eye(64)-basis@basis.T
+np.testing.assert_allclose((manual_pixels-projection.mean_)@null_projector,0,atol=1e-12)
+mixture = scope["digit_mixture"]
+latent_mean = mixture.weights_ @ mixture.means_
+centered_means = mixture.means_-latent_mean
+latent_covariance = np.einsum("k,kij->ij",mixture.weights_,mixture.covariances_) + (
+    centered_means.T * mixture.weights_) @ centered_means
+pixel_covariance = scaled_basis @ latent_covariance @ scaled_basis.T
+np.testing.assert_allclose(pixel_covariance @ null_projector,0,atol=1e-11)
+assert np.linalg.matrix_rank(pixel_covariance) == 41
+assert manual_pixels.min() < 0 and manual_pixels.max() > 16
+assert scope["parameter_count"](140,41,"full") == mixture._n_parameters() == 126419
+assert len(scope["generated_digit_components"]) == 100
+print("PASS 41-component threshold, whitening/inverse equations, rank-41 support and 126419 parameters")
 print("chapter_sha256", hashlib.sha256(contents).hexdigest())

@@ -3,11 +3,12 @@ import { readFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
+import { beforeTopicConsolidation } from '../tools/topic-consolidation-baseline.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const chapter = '00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md';
 const archive = '05 Источники/Originals/fleet-measurement-2026-10-26';
-const read = (path: string) => readFile(join(root, path), 'utf8');
+const read = async (path: string) => beforeTopicConsolidation(await readFile(join(root, path), 'utf8'), path, root);
 const sha = (bytes: string | Buffer) => createHash('sha256').update(bytes).digest('hex');
 const excerpt = (text: string, label: string) => text.split(`<!-- BEGIN SOURCE: ${label} -->`)[1]
   .split(`<!-- END SOURCE: ${label} -->`)[0].trim();

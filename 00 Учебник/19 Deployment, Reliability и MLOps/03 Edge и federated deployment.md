@@ -3,13 +3,44 @@ title: "Развёртывание на периферийных устройс�
 type: textbook-chapter
 status: canonical
 last_updated: 2026-10-27
-last_verified: 2026-10-27
+last_verified: 2026-11-09
+reference_terms:
+  - label: Tensor arena — память тензоров на микроконтроллере
+    label_en: Tensor arena — microcontroller tensor memory
+    anchor: edge-tensor-arena
+  - label: TinyTL — замороженные веса и память активаций
+    label_en: TinyTL — frozen weights and activation memory
+    anchor: edge-tinytl
+  - label: LiteRT — сохранение и восстановление локальных весов
+    label_en: LiteRT — saving and restoring on-device weights
+    anchor: edge-litert-checkpoint
+  - label: FedAvg — усреднение клиентских обновлений
+    label_en: FedAvg — averaging client updates
+    anchor: edge-fedavg
+  - label: Федеративное обучение — отстающие клиенты и смещение отбора
+    label_en: Federated learning — stragglers and selection bias
+    anchor: edge-client-selection
+  - label: Безопасная агрегация — маски и пересекающиеся группы
+    label_en: Secure aggregation — masks and overlapping cohorts
+    anchor: edge-secure-aggregation
+  - label: DP-FedAvg — чувствительность взвешенного обновления
+    label_en: DP-FedAvg — sensitivity of a weighted update
+    anchor: edge-weighted-dp
+  - label: FedBuff — буфер и запаздывающие обновления
+    label_en: FedBuff — buffered asynchronous aggregation
+    anchor: edge-fedbuff
+  - label: Edge — оценивание и откат модели на устройствах
+    label_en: Edge deployment — on-device evaluation and rollback
+    anchor: edge-evaluation-rollback
 primary_sources:
   - https://arxiv.org/abs/2007.11622v5
   - https://proceedings.mlr.press/v54/mcmahan17a.html
   - https://developers.google.com/edge/litert/conversion/tensorflow/build/ondevice_training
   - https://mlsysbook.ai/vol2/edge_intelligence/edge_intelligence.html
   - https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf
+  - https://proceedings.mlr.press/v151/nguyen22b.html
+  - https://ojs.aaai.org/index.php/AAAI/article/view/26177
+  - https://arxiv.org/abs/1710.06963v3
 ---
 
 # Развёртывание на периферийных устройствах и федеративное обучение
@@ -166,7 +197,7 @@ dtype and presence of each array must be specified; the label “FP16
 training” alone does not determine the memory footprint.
 <!-- END REVIEW: Harvard mixed-state memory 2026-10-26 -->
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/tinytl-memory-figure1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/tinytl-memory-figure1.png|Слева память ResNet-50 при инференсе и обучении с разными батчами; справа память параметров и активаций ResNet-50 и MobileNetV2 при обучении]]
 
 *Han Cai, Chuang Gan, Ligeng Zhu, Song Han,
 [TinyTL, Figure 1, PDF p. 2](https://arxiv.org/pdf/2007.11622v5#page=2),
@@ -203,6 +234,8 @@ $128\cdot10+10=1290$ параметров. Её четыре FP32-массива
 таких условиях, далее нужно учитывать, кто из пользователей под них попадает.
 
 <!-- BEGIN REVIEW: Micro arena 2026-10-27 -->
+<a id="edge-tensor-arena"></a>
+
 ## Microcontroller inference: planning a tensor arena
 
 A model can fit in Flash while its intermediate tensors exceed the available
@@ -226,7 +259,7 @@ fully ahead-of-time compiled C program. The application owns the arena, while
 the interpreter plans allocations inside it. Stack, application state and the
 model buffer require separate accounting.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/micro-runtime-2026-10-27/model-buffer-and-arena.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/micro-runtime-2026-10-27/model-buffer-and-arena.png|Отдельные буферы сериализованной модели и tensor arena; неизменяемые данные тензоров могут указывать в буфер модели]]
 
 *The TensorFlow Authors,
 [Pre-allocated tensors RFC, Background](https://github.com/tensorflow/tflite-micro/blob/1cc91a97b40e1dddcecd3b0fbb30b6643e52f164/tensorflow/lite/micro/docs/rfc/001_preallocated_tensors.md#background),
@@ -451,6 +484,8 @@ claim that every edge deployment supports, or forbids, training.
 
 <a id="ограничить-изменяемое-состояние"></a>
 
+<a id="edge-tinytl"></a>
+
 ## Почему замороженные веса могут уменьшить память обратного прохода
 
 TinyTL начинает объяснение с производных линейного слоя. Для одного объекта
@@ -492,7 +527,7 @@ $$
 упакует эту маску по одному биту на элемент.
 Для других нелинейностей набор сохраняемых величин также отличается.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/tinytl-activation-figure2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/tinytl-activation-figure2.png|Три блока TinyTL: полное дообучение, обучение смещений и уменьшенная остаточная ветвь. Закрашены обучаемые параметры и сохраняемые активации]]
 
 *Han Cai et al.,
 [TinyTL, Figure 2, PDF p. 4](https://arxiv.org/pdf/2007.11622v5#page=4),
@@ -531,6 +566,8 @@ CC BY 4.0. Все три части и легенда сохранены; уда
 от других объектов батча. Это не означает, что замена нормализации сохраняет
 качество любой уже обученной модели.
 
+<a id="edge-litert-checkpoint"></a>
+
 ## Локальное обучение должно переживать перезапуск приложения
 
 В руководстве LiteRT обучение на устройстве объясняется через четыре операции:
@@ -550,7 +587,7 @@ CC BY 4.0. Все три части и легенда сохранены; уда
 новый интерпретатор сначала снова содержит исходные веса; продолжить
 персонализацию позволяет вызов `restore` до следующего инференса.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/litert-checkpoint.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/litert-checkpoint.png|Логиты одного входа до и после восстановления весов из checkpoint]]
 
 *Google AI Edge,
 [On-device training with LiteRT, Restore the trained weights](https://developers.google.com/edge/litert/conversion/tensorflow/build/ondevice_training#restore_the_trained_weights),
@@ -607,6 +644,8 @@ $$
 пользователя, задают другую цель, например $\frac{1}{K}\sum_k F_k$.
 Обе цели определены содержательно; выбор между ними нельзя заменить словом
 «справедливо».
+
+<a id="edge-fedavg"></a>
 
 ### Взвешенное среднее и выпадение клиента
 
@@ -675,7 +714,7 @@ np.testing.assert_allclose(average_clients([[1, 3]], [100]), [1, 3])
 Одинаковая архитектура и размер массива ещё не означают, что координаты
 двух моделей согласованы.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/fedavg-initialization-figure1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/fedavg-initialization-figure1.png|Loss по мере усреднения параметров двух сетей: при общей инициализации провал качества между исходными моделями меньше]]
 
 *H. Brendan McMahan, Eider Moore, Daniel Ramage, Seth Hampson, Blaise Agüera y Arcas,
 [Communication-Efficient Learning of Deep Networks from Decentralized Data, Figure 1](https://proceedings.mlr.press/v54/mcmahan17a.html),
@@ -761,6 +800,8 @@ assert abs(central - 2.92125) < 1e-12
 
 <a id="система-важнее-средней-формулы"></a>
 
+<a id="edge-client-selection"></a>
+
 ## Выбор участников, задержки и сетевой обмен
 
 Межорганизационное обучение (*cross-silo*) обычно работает с небольшим числом
@@ -782,7 +823,7 @@ assert abs(central - 2.92125) < 1e-12
 результатов, и завершить раунд после первых $K$ ответов либо по сроку.
 Такой выбор ограничивает ожидание отстающих клиентов (*stragglers*).
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/harvard-stragglers.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/harvard-stragglers.svg|Сервер принимает первые K клиентских обновлений, закрывает раунд, поздний ответ остаётся за пределами раунда]]
 
 *Harvard Edge ML Systems Book contributors,
 [Edge Intelligence, Client scheduling](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/edge_intelligence/edge_intelligence.qmd#L2804-L2848),
@@ -821,6 +862,8 @@ $2\cdot100\cdot40=8000$ MB, то есть 8 GB на раунд.
 
 ## Приватность обновлений
 
+<a id="edge-secure-aggregation"></a>
+
 ### Что скрывает безопасная агрегация
 
 Если серверу нужны только сумма и общий вес, отдельные обновления можно
@@ -828,7 +871,7 @@ $2\cdot100\cdot40=8000$ MB, то есть 8 GB на раунд.
 схеме пары клиентов согласуют случайные маски: один прибавляет маску,
 другой вычитает. В сумме маски сокращаются.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/harvard-secure-agg.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/harvard-secure-agg.svg|Два клиента отправляют обновления с противоположными масками; при сложении маски сокращаются]]
 
 *Harvard Edge ML Systems Book contributors,
 [Edge Intelligence, Federated privacy](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/edge_intelligence/edge_intelligence.qmd#L3046-L3065),
@@ -876,6 +919,29 @@ assert sum(updates[:2]) % 97 == 12
 группам. Проверка формы и конечности обновления также не защищает от
 целенаправленного отравления модели. Скрытие индивидуальных обновлений
 может ограничить доступные серверу методы их проверки.
+
+Допустим, сервер трижды получает только сумму двух клиентов. В первом
+раунде участвуют клиенты 1 и 2, во втором — 2 и 3, в третьем — 1 и 3.
+Если их вклады остались равны $5$, $7$ и $-2$, сервер видит суммы $12$,
+$5$ и $3$. Из первой и третьей сумм можно вычесть вторую: вклад первого
+клиента вошёл дважды, а вклады второго и третьего сократились.
+
+$$
+u_1=\frac{s_{12}+s_{13}-s_{23}}{2}
+    =\frac{12+3-5}{2}=5.
+$$
+
+Оставшиеся вклады получаются вычитанием: $s_{12}-5=7$ и $s_{13}-5=-2$.
+Во всех трёх раундах порог в два участника выполнен. Утечку создаёт
+сочетание точных агрегатов и известных составов групп, а не нарушение
+протокола маскирования. Точное восстановление в этом примере требует
+одинакового вклада каждого клиента в разных раундах. При меняющихся
+вкладах те же три уравнения уже не дают точного решения. В
+[So et al., §§3.1–3.2](https://ojs.aaai.org/index.php/AAAI/article/download/26177/25949#page=3)
+разобрано, как составы групп влияют на то, какие вклады можно восстановить.
+Например, если двух клиентов всегда включают вместе, эта система уравнений
+не разделяет их вклады. Это ограничение конкретного способа восстановления,
+а не гарантия дифференциальной приватности.
 
 ### Дифференциальная приватность и накопление гарантии
 
@@ -941,6 +1007,36 @@ assert 2 * 2 == abs(2 - (-2))  # замена клиента при C = 2
 В частности, формула FedAvg с разными $n_k$ не получает чувствительность $C$
 только потому, что каждый вектор был обрезан до нормы $C$.
 
+<a id="edge-weighted-dp"></a>
+
+#### Чувствительность при разных весах клиентов
+
+Пусть граница нормы $C=2$, а в буфере пока один клиент: у него один
+пример и скалярное обновление $+2$. Взвешенное среднее равно $2$.
+Добавим клиента с 99 примерами и обновлением $-2$. Норма каждого обновления
+по-прежнему не больше двух, но среднее меняется:
+
+$$
+\frac{1\cdot2+99\cdot(-2)}{1+99}=-1.96.
+$$
+
+Разность равна $3.96$. Новый клиент добавил слагаемое в числитель и
+уменьшил долю прежнего клиента с $1$ до $1/100$. При неотрицательных
+весах и ненулевом знаменателе обе средние лежат в шаре радиуса $C$,
+поэтому $2C$ остаётся грубой границей; делить её на число клиентов
+по формуле для равных весов здесь нельзя.
+
+Один из вариантов DP-FedAvg ограничивает вес каждого клиента,
+например $w_k=\min(n_k/100,1)$, и делит сумму $w_k\bar u_k$ на
+заранее заданный знаменатель $D>0$. Знаменатель должен быть одинаковым
+для соседних наборов данных. При добавлении пользователя меняется только
+одно слагаемое, поэтому изменение не превышает $C/D$. При $D=2$
+первый клиент даёт $0.01$, оба вместе дают $-0.98$, а разность $0.99$
+не превышает $C/D=1$. Это оценка с фиксированным знаменателем,
+а не точное среднее по пришедшим обновлениям. Если вес выборки оказался
+меньше ожидаемого, величина шага тоже меняется. См.
+[McMahan et al., §2, Lemma 1 и Appendix A](https://arxiv.org/pdf/1710.06963v3#page=4).
+
 К результату добавляют шум, согласованный с чувствительностью и требуемой
 гарантией. Обрезка нормы без шума сама по себе DP не обеспечивает.
 При центральной DP доверенный агрегатор может видеть индивидуальные данные
@@ -988,12 +1084,52 @@ assert 2 * 2 == abs(2 - (-2))  # замена клиента при C = 2
 проверенную миграцию. Простое сохранение имени файла не подтверждает
 совместимость.
 
-Асинхронные федеративные методы допускают запаздывающие обновления по
-собственным правилам. Синхронный FedAvg не превращается в такой метод после
-удаления проверки версии. Допустимое запаздывание, вес устаревшего обновления
-и точку, относительно которой вычислена разность, задают в алгоритме.
+<a id="edge-fedbuff"></a>
+
+### FedBuff: асинхронные клиенты, обновление сервера по буферу
+
+В синхронном раунде клиенты начинают с одной модели. По мере поступления
+ответов число ещё обучающихся клиентов уменьшается. Пока сервер ждёт
+достаточно ответов, освободившееся место не обязательно используется новым
+клиентом того же раунда. В асинхронном режиме новый клиент может начать работу,
+пока другие заканчивают обучение. На рисунке это видно по числу одновременно
+работающих клиентов, а не по качеству модели.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fedbuff-2026-11-09/fedbuff-concurrency-figure2.png|При синхронных раундах число обучающихся клиентов падает во время ожидания отстающих; при асинхронном запуске остаётся около предела параллелизма]]
+
+*John Nguyen et al., [Federated Learning with Buffered Asynchronous Aggregation](https://proceedings.mlr.press/v151/nguyen22b.html),
+AISTATS 2022, PMLR 151:3581–3607, [Figure 2, PDF p. 3](https://proceedings.mlr.press/v151/nguyen22b/nguyen22b.pdf#page=3),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Схема перенесена
+из PDF без перерисовки; убраны окружающий текст и поля. Она сравнивает
+два режима допуска клиентов и не задаёт частоту серверных шагов FedBuff.*
+
+FedBuff разделяет запуск локального обучения и обновление общей модели.
+Пусть одновременно учатся три клиента, а сервер делает шаг после каждых
+$K=2$ ответов. Начальная модель $w_{17}=2$. Клиенты A и B завершают работу
+первыми с поправками $+0.4$ и $+0.2$. При простом среднем и серверном шаге
+с коэффициентом $1$ получается $w_{18}=2.3$. Клиент C ещё учится
+на версии 17. Пока он работает, клиент D начинает с версии 18.
+
+В следующий буфер приходят $-0.2$ от C и $+0.4$ от D. Перед шагом
+у C запаздывание в одну серверную версию, у D — ноль. При равных весах
+средняя поправка равна $0.1$, поэтому сервер получает $w_{19}=2.4$.
+Если вместо поправок усреднить конечные локальные параметры $1.8$ и $2.7$,
+получится $2.25$: тогда в результат попадёт и старая точка старта клиента C.
+В описании статьи знак клиентской разности выбран наоборот и сервер
+вычитает её; здесь сохранено обозначение $u_k=\theta_k-\theta^{\text{base}}$.
+
+При заметном запаздывании поправку можно ослабить. В
+[§5 статьи](https://proceedings.mlr.press/v151/nguyen22b/nguyen22b.pdf#page=6)
+предложен множитель $1/\sqrt{1+\tau}$, где $\tau$ — число прошедших
+серверных шагов, а не время в секундах. Размер буфера задаёт частоту
+серверных шагов, но не равен числу одновременно обучающихся клиентов.
+Само ожидание $K$ ответов не скрывает обновления: для этого нужен
+криптографический протокол или защищённая среда выполнения. Значение $K=2$
+здесь выбрано для расчёта, а не как рекомендация по приватности.
+[[05 Источники/Papers/Federated Learning with Buffered Asynchronous Aggregation|Статья и указатель к алгоритмам 1–2]].
 
 <a id="distributed-validation-и-rollback"></a>
+<a id="edge-evaluation-rollback"></a>
 
 ## Оценивание на устройствах и откат
 

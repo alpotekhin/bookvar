@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md"
 content = CHAPTER.read_bytes()
 blocks = re.findall(r"```python\n(.*?)```", content.decode(), re.S)
-assert len(blocks) == 14
+assert len(blocks) == 15
 scope = {}
 for number, code in enumerate(blocks, 1):
     print(f"Execute actual AE/VAE block {number}", flush=True)
@@ -175,5 +175,34 @@ collapsed_reconstruction = F.binary_cross_entropy_with_logits(
 torch.testing.assert_close(collapsed_kl, torch.zeros(2, dtype=dtype))
 torch.testing.assert_close(collapsed_reconstruction, torch.full((2,),2*math.log(2),dtype=dtype))
 print("PASS interpolation endpoints/midpoint, prior variance change and the explicit zero-KL collapse case")
+# The preceding 956-line owner is a preservation boundary, not an inferred old audit hash.
+from topic_consolidation_baseline import before_topic_consolidation
+prior_content = before_topic_consolidation(content.decode(), CHAPTER,
+    stop_before_journal="2026-11-03-seq2seq-state-additions.json")
+assert hashlib.sha256(prior_content.encode()).hexdigest() == \
+    "0fa503dade5bacee4bf88d40a4aa799474328586332fe92fc6a28538dca9b4fd"
+prior_programs = re.findall(r"```python\n(.*?)```", prior_content, re.S)
+assert len(prior_programs) == 14
+assert [b for b in blocks if "retrieval_dtype" not in b] == prior_programs
+
+retrieval_cases = 0
+for queries, corpus_size, dimension in product([1, 2, 3], [1, 4, 7], [1, 2, 5]):
+    query = torch.randn(queries, dimension, generator=gen, dtype=dtype)
+    corpus = torch.randn(corpus_size, dimension, generator=gen, dtype=dtype)
+    distances = torch.cdist(query, corpus)
+    independent = torch.stack([torch.stack([(a-b).square().sum().sqrt()
+        for b in corpus]) for a in query])
+    torch.testing.assert_close(distances, independent, atol=1e-12, rtol=1e-12)
+    top = distances.topk(min(2, corpus_size), largest=False, dim=1)
+    torch.testing.assert_close(top.values, independent.gather(1, top.indices))
+    scales = torch.linspace(.1, 10., dimension, dtype=dtype)
+    transformed = corpus * scales
+    torch.testing.assert_close(transformed / scales, corpus)
+    torch.testing.assert_close(scope["retrieval_decoder"](
+        scope["recovered_codes"]), scope["retrieval_decoder"](scope["corpus_codes"]))
+    retrieval_cases += 1
+assert scope["nearest"].tolist() == [[1, 0]]
+assert scope["new_distances"].topk(2, largest=False, dim=1).indices.tolist() == [[0, 1]]
+print(f"PASS {retrieval_cases} batched retrieval/brute-force/index cases and exact metric counterexample")
 print("TORCH", torch.__version__)
 print("CHAPTER SHA256", hashlib.sha256(content).hexdigest())

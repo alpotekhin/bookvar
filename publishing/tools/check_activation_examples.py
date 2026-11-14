@@ -15,7 +15,7 @@ import torch.nn.functional as F
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/01 Основы нейронных сетей/02 Функции активации.md"
 blocks = re.findall(r"```python\n(.*?)```", CHAPTER.read_text(), re.S)
-assert len(blocks) == 3
+assert len(blocks) == 5
 scopes = []
 for i, code in enumerate(blocks, 1):
     scope = {}
@@ -138,6 +138,109 @@ product.backward()
 np.testing.assert_allclose([product.item(), up.grad.item(), gate.grad.item()], [0, 0, 2])
 assert 2*3*12 == 3*3*8 == 72
 
+# The published Maxout uses all affine branches before reducing the piece axis.
+Maxout = scopes[2]["Maxout"]
+torch.testing.assert_close(scopes[2]["out"].detach(),
+    torch.tensor([[2.], [.5], [2.]], dtype=torch.float64))
+torch.testing.assert_close(scopes[2]["x"].grad,
+    torch.tensor([[-1.], [0.], [1.]], dtype=torch.float64))
+torch.testing.assert_close(scopes[2]["layer"].projections.weight.grad,
+    torch.tensor([[2.], [-2.], [-.25]], dtype=torch.float64))
+torch.testing.assert_close(scopes[2]["layer"].projections.bias.grad,
+    torch.ones(3, dtype=torch.float64))
+assert sum(p.numel() for p in scopes[2]["batched"].parameters()) == 18
+# The chapter's 2D example is independent of the authors' Figure 6 weights.
+plane = Maxout(2, 1, 4).double()
+with torch.no_grad():
+    plane.projections.weight.copy_(torch.tensor(
+        [[1., 0.], [-1., 0.], [0., 1.], [0., -1.]], dtype=torch.float64))
+    plane.projections.bias.zero_()
+xy = torch.tensor([[2., 1.], [1., 2.], [1., 1.]], dtype=torch.float64,
+                  requires_grad=True)
+xy_scores = plane.projections(xy)
+torch.testing.assert_close(xy_scores, torch.tensor(
+    [[2., -2., 1., -1.], [1., -1., 2., -2.], [1., -1., 1., -1.]],
+    dtype=torch.float64))
+heights = plane(xy)
+torch.testing.assert_close(heights.flatten(), torch.tensor([2., 2., 1.],
+                                                           dtype=torch.float64))
+heights[:2].sum().backward()
+torch.testing.assert_close(xy.grad[:2], torch.eye(2, dtype=torch.float64))
+step = torch.tensor([1e-5, -1e-5], dtype=torch.float64)
+left = (heights[-1] - plane(xy[-1] - step)) / step[0]
+right = (plane(xy[-1] + step) - heights[-1]) / step[0]
+torch.testing.assert_close(torch.cat([left, right]),
+                           torch.tensor([-1., 1.], dtype=torch.float64))
+for bad in [0, -1]:
+    try:
+        Maxout(2, 3, bad)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("nonpositive piece count accepted")
+
+torch.manual_seed(336)
+probe = Maxout(2, 3, 4).double()
+xx = torch.randn(2, 5, 2, dtype=torch.float64, requires_grad=True)
+weights = probe.projections.weight.detach().reshape(3, 4, 2)
+biases = probe.projections.bias.detach().reshape(3, 4)
+# Independent shape convention [output, piece, input], unlike the layer's reshape.
+scores = torch.einsum("...d,ikd->...ik", xx.detach(), weights) + biases
+manual = torch.tensor([
+    [max(float(scores[b, t, i, j]) for j in range(4))
+     for i in range(3)] for b in range(2) for t in range(5)
+], dtype=torch.float64).reshape(2, 5, 3)
+values = probe(xx)
+assert values.shape == (2, 5, 3)
+torch.testing.assert_close(values.detach(), manual)
+assert probe(torch.zeros(2, dtype=torch.float64)).shape == (3,)
+upstream = torch.randn(2, 5, 3, dtype=torch.float64)
+(values * upstream).sum().backward()
+winners = scores.argmax(-1)
+mask = F.one_hot(winners, num_classes=4).double() * upstream[..., None]
+torch.testing.assert_close(xx.grad, torch.einsum("...ik,ikd->...d", mask, weights))
+torch.testing.assert_close(probe.projections.weight.grad.reshape(3, 4, 2),
+    torch.einsum("btik,btd->ikd", mask, xx.detach()))
+torch.testing.assert_close(probe.projections.bias.grad.reshape(3, 4), mask.sum((0, 1)))
+# No equal maxima in this probe; central differences therefore test ordinary derivatives.
+ordered = scores.sort(-1).values
+assert (ordered[..., -1] - ordered[..., -2]).min() > 1e-5
+with torch.no_grad():
+    eps = 1e-6
+    for coord in [(0, 0, 0), (1, 4, 1)]:
+        plus, minus = xx.detach().clone(), xx.detach().clone()
+        plus[coord] += eps
+        minus[coord] -= eps
+        finite = ((probe(plus) - probe(minus)) * upstream).sum() / (2*eps)
+        torch.testing.assert_close(finite, xx.grad[coord], atol=1e-8, rtol=1e-8)
+
+torch.testing.assert_close(scopes[3]["first"].grad,
+    torch.tensor([[1., 0., 0.]], dtype=torch.float64))
+torch.testing.assert_close(scopes[3]["shared"].grad,
+    torch.tensor([[.5, .5, 0.]], dtype=torch.float64))
+losing = torch.tensor([[1., 0.], [-2., -3.]], requires_grad=True)
+losing.max(dim=-1).values.sum().backward()
+torch.testing.assert_close(losing.grad, torch.tensor([[1., 0.], [1., 0.]]))
+grid = np.linspace(-3, 3, 601)
+np.testing.assert_allclose(np.maximum(grid, -grid), np.abs(grid))
+for alpha in [0., .01, .2, 1.]:
+    np.testing.assert_allclose(np.maximum(alpha*grid, grid),
+        np.where(grid < 0, alpha*grid, grid))
+# Tangent construction: exact error identity and uniform compact-domain bound.
+domain = np.linspace(-1, 1, 1001)
+for count in [3, 5, 11, 33]:
+    points = np.linspace(-1, 1, count)
+    envelope = (2*domain[:, None]*points - points**2).max(1)
+    error = domain**2 - envelope
+    np.testing.assert_allclose(error, ((domain[:, None]-points)**2).min(1), atol=1e-15)
+    assert error.min() >= -1e-15 and error.max() <= (2/(count-1))**2/4 + 1e-15
+# A single maxout is convex; -abs(x) violates Jensen's inequality at -1, 1.
+u, v, theta = -.7, .8, .35
+envelope = lambda x: max(-2*x-1, 0, 2*x-1)
+assert envelope(theta*u+(1-theta)*v) <= theta*envelope(u)+(1-theta)*envelope(v)
+assert -abs(0.) > (-abs(-1.)-abs(1.))/2
+np.testing.assert_allclose([envelope(x) for x in [-1, -.5, 0, .5, 1]], [1, 0, 0, 0, 1])
+
 sym = np.array([-2., -1., 1., 2.]); relu = np.maximum(sym, 0)
 np.testing.assert_allclose([np.mean(sym**2), np.mean(relu**2), relu.mean(), relu.var()],
                            [2.5, 1.25, .75, .6875])
@@ -151,8 +254,11 @@ source_dir = ROOT / "05 Источники/Originals/activation-functions-2026-1
 for name in ["sigmoid", "sigmoid-gradient", "tanh", "tanh-gradient", "relu", "relu-gradient"]:
     figure = ROOT / f"00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-{name}.svg"
     assert figure.read_bytes() == (source_dir / f"d2l-{name}.svg").read_bytes()
-print("PASS: 3 published blocks; local chain rule vs output BCE; 10-layer chain; "
+print("PASS: 5 published blocks; local chain rule vs output BCE; 10-layer chain; "
       "7 activation values/derivatives; minima; tanh centering; dead/leaky/PReLU; ELU slopes; "
-      "GELU approximation; SwiGLU branches/matrices; moments; logits and residual; 6 source SVG copies.")
+      "GELU approximation; SwiGLU branches/matrices; Maxout values/shapes/VJP/finite differences; "
+      "2D regions and directional slopes; tie rules; never-winning branch; convexity and tangent error; "
+      "moments; logits and residual; 6 source SVG copies.")
+print("Chapter SHA256", hashlib.sha256(CHAPTER.read_bytes()).hexdigest())
 print("PyTorch", torch.__version__)
 

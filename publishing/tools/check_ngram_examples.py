@@ -12,11 +12,13 @@ CHAPTER = ROOT / "00 Учебник/03 Языковое моделировани
 text = CHAPTER.read_text()
 assert chr(0xA4) not in text
 blocks = re.findall(r"```python\n(.*?)\n```", text, flags=re.S)
-assert len(blocks) == 6, len(blocks)
+assert len(blocks) == 7, len(blocks)
+metrics_checked = 0
 for number, block in enumerate(blocks, 1):
     namespace = {}
     exec(compile(block, f"{CHAPTER}:block{number}", "exec"), namespace)
-    if number == 5:
+    if 'corpus_metrics' in namespace:
+        metrics_checked += 1
         metrics = namespace["corpus_metrics"]
         finite_loss, overflow_ppl = metrics([[1e-320]])
         assert finite_loss < inf and overflow_ppl == inf
@@ -27,6 +29,7 @@ for number, block in enumerate(blocks, 1):
             except ValueError:
                 pass
     print(f"PASS published standalone block {number}")
+assert metrics_checked == 1
 
 corpus = ["кот кот спит", "пёс спит", "кот спит бежит"]
 V = ("кот", "спит", "пёс", "бежит", "</s>", "<unk>")
@@ -136,6 +139,23 @@ alpha = leftover / lower_mass
 backoff = {w: direct[w] if w in seen else alpha * q[w] for w in V}
 assert [backoff[w] for w in V] == [F(1, 6), F(1, 2), F(1, 15), F(1, 15), F(1, 5), 0]
 assert sum(backoff.values()) == 1
+
+# Follow Heafield et al.'s Figure 1 on the stored entries of this example.
+def stored_score(ngram, probabilities, factors):
+    multiplier = F(1)
+    for start in range(len(ngram)):
+        suffix = ngram[start:]
+        if suffix in probabilities:
+            return probabilities[suffix] * multiplier
+        multiplier *= factors.get(suffix[:-1], F(1))
+    raise ValueError("No unigram fallback")
+
+stored = {(w,): q[w] for w in V} | {("кот", w): direct[w] for w in seen}
+factors = {("кот",): alpha}
+assert stored_score(("кот", "спит"), stored, factors) == F(1, 2)
+assert stored_score(("кот", "бежит"), stored, factors) == F(1, 15)
+assert stored_score(("<unk>", "кот", "бежит"), stored, factors) == F(1, 15)
+assert all(stored_score(("кот", w), stored, factors) == backoff[w] for w in V)
 assert 1 + lower_mass == F(16, 11)
 assert 1 + F(2, 5) * lower_mass == F(13, 11)
 bad_base = {w: int(w == "кот") for w in V}
@@ -157,6 +177,14 @@ def kn(row, base=continuation, discount=F(1, 2)):
 
 actual = kn(bigrams[("кот",)])
 assert list(actual.values()) == [F(1, 4), F(7, 12), F(1, 24), F(1, 24), F(1, 12), 0]
+# Match the two conditions of Moore and Quirk's Figure 1.
+def smoothing_schema(beta, gamma, lower):
+    return {w: direct[w] + beta * lower[w] if w in seen else gamma * lower[w]
+            for w in V}
+
+assert smoothing_schema(F(0), alpha, q) == backoff
+assert smoothing_schema(F(1, 3), F(1, 3), continuation) == actual
+print("PASS author figures: suffix lookup and both smoothing branches")
 for row in [*bigrams.values(), Counter()]:
     assert sum(kn(row).values()) == 1
 positive_base = {w: F(9, 10) * continuation[w] + F(1, 60) for w in V}
@@ -215,3 +243,55 @@ samples = Counter(rng.choices(["кот", "спит"], weights=[1, 2], k=50000))
 assert abs(samples["кот"] / 50000 - 1/3) < .01
 
 print("PASS boundaries/counts/MLE; Markov order; sequence/prefix/EOS; add-k/OOV; interpolation/fallback; normalized/stupid backoff; continuation/KN/full support; PPL/log bases/aggregation/underflow; sampling/greedy/termination.")
+
+# Verify the copied author cells against their pinned original, then count
+# the source names independently. The source's saved N[0] output belongs
+# to another interactive state and is not used as a counter reference.
+import hashlib
+import json
+import torch
+notebook_path = ROOT / '05 Источники/Originals/ngram-2026-10-21/makemore-part1-bigrams.ipynb'
+assert hashlib.sha256(notebook_path.read_bytes()).hexdigest() == \
+    'db2f139409bad2966baac06581b6ca8ec9a03668df50dd073577fd98b3be0045'
+notebook = json.loads(notebook_path.read_text())
+excerpts = re.findall(r'```python title=[^\n]+\n(.*?)\n```', text, re.S)
+assert len(excerpts) == 2
+cell_source = lambda n: ''.join(notebook['cells'][n]['source'])
+assert excerpts[0].rstrip() == '\n\n'.join(cell_source(i) for i in range(7, 11)).rstrip()
+assert excerpts[1] == cell_source(23)
+names_path = ROOT / '05 Источники/Originals/ngram-makemore-2026-11-03/names.txt'
+assert hashlib.sha256(names_path.read_bytes()).hexdigest() == \
+    '0a30b5557f192f32ab962680889aac5f6fda0f4cecf40a6d0b5694f58ea8cc4d'
+names = names_path.read_text().splitlines()
+assert len(names) == 32033
+source_scope = {'words': names}
+exec(compile(excerpts[0], 'original-makemore-cells7-10', 'exec'), source_scope)
+n, stoi = source_scope['N'], source_scope['stoi']
+independent_pairs = Counter()
+for name in names:
+    seq = ['.', *name, '.']
+    independent_pairs.update(zip(seq, seq[1:]))
+for left, right in __import__('itertools').product(stoi, repeat=2):
+    assert n[stoi[left], stoi[right]].item() == independent_pairs[left, right]
+assert n.shape == (27, 27) and n.sum().item() == 228146
+assert n[0].sum().item() == 32033 and n[stoi['a']].sum().item() == 33885
+for pair, count in [('.a',4410),('.m',2538),('a.',6640),('..',0),('zz',45),('xy',30)]:
+    assert n[stoi[pair[0]], stoi[pair[1]]].item() == count
+exec(compile(excerpts[1], 'original-makemore-cell23', 'exec'), source_scope)
+p = source_scope['P']
+torch.testing.assert_close(p.sum(1), torch.ones(27))
+assert isclose(p[0, stoi['a']].item(), 4411/32060, rel_tol=1e-6)
+assert isclose(p[0, 0].item(), 1/32060, rel_tol=1e-6)
+generator = torch.Generator().manual_seed(20261103)
+normalization_cases = 0
+for rows, columns, seed in __import__('itertools').product([1,2,5], [1,3,8], range(20)):
+    values = torch.randint(0, 50, (rows, columns), generator=generator)
+    state = {'N': values}
+    exec(compile(excerpts[1], 'original-makemore-cell23', 'exec'), state)
+    expected = torch.tensor([
+        [(int(values[i, j])+1)/(int(values[i].sum())+columns) for j in range(columns)]
+        for i in range(rows)])
+    torch.testing.assert_close(state['P'], expected)
+    torch.testing.assert_close(state['P'].sum(1), torch.ones(rows))
+    normalization_cases += 1
+print(f'PASS both exact source excerpts; all729 independently counted bigram cells;228146 source events;{normalization_cases} row-normalization configurations')

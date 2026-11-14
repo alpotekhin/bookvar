@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "kind": "roofline-block-additions",
+  "review_date": "2026-11-04",
+  "files": [
+    {
+      "source": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+      "before_sha256": "ee3b591a0085982c18c2ae691889e38f2f624b505cb2a414520c947c1f57323b",
+      "changes": [
+        {
+          "old": "## Почему сервис нужно проверять под нагрузкой",
+          "new": "<a id=\"perf-blocked-samples\"></a>\n\n### Blocked measurements and individual-call latency\n\nSuppose an operation takes 2 microseconds, while starting and stopping\nthe timer adds 12 microseconds per measured interval. Timing one call\nwould report 14 microseconds. Timing 1000 consecutive calls would report\n2012 microseconds in total, or 2.012 microseconds per call. These are\nassumed costs, not measurements of Python or CUDA.\n\nFor a fixed per-block overhead $h$, a block of $n$ calls of duration $t$\nhas an amortized time\n\n$$\n\\frac{nt+h}{n}=t+\\frac{h}{n}.\n$$\n\nA larger block reduces the overhead per call, but leaves fewer separately\ntimed blocks within a fixed measurement budget. PyTorch's\n[Benchmark recipe, section 4](https://docs.pytorch.org/tutorials/recipes/recipes/benchmark.html#benchmarking-with-blocked-autorange)\ndescribes how it chooses and repeats the blocks. The complete explanatory\nparagraph is retained in its original language:\n\n<!-- timing-source: blocked-autorange:start -->\n> While `timeit.Timer.autorange` takes a single continuous measurement\n> of at least 0.2 seconds, `torch.utils.benchmark.Timer.blocked_autorange`\n> takes many measurements whose times total at least 0.2 seconds (which\n> can be changed by the `min_run_time` parameter) subject to the constraint\n> that timing overhead is a small fraction of the overall measurement.\n> This is accomplished by first running with an increasing number of runs\n> per loop until the runtime is much larger than measurement overhead\n> (which also serves as a warm up), and then taking measurements until\n> the target time is reached. This has the useful properties that it wastes\n> less data and allows us to compute statistics to estimate the reliability\n> of the measurements.\n<!-- timing-source: blocked-autorange:end -->\n\n*PyTorch contributors,\n[pinned recipe source](https://github.com/pytorch/tutorials/blob/5672cd98a7671eda4d9122b10f8eec580f74d03e/recipes_source/recipes/benchmark.py#L294-L305),\n[BSD 3-Clause, complete notice](/licenses/pytorch-tutorials-5672cd98-BSD-3-Clause.txt).\nWording unchanged; reStructuredText inline-code delimiters converted to Markdown.*\n\nIn the pinned\n[Timer implementation](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/torch/utils/benchmark/utils/timer.py#L303-L382),\ncalibration selects a block size before collecting the returned samples.\nThe collection loop adds whole-block durations until their sum reaches\n`min_run_time`. Calibration and other setup add elapsed time outside that\nsum; the argument is not an upper bound on the duration of the Python call.\nA long block can also leave only one returned measurement. More calls inside\nthat block do not create more independently timed observations.\n\nThe returned `Measurement` keeps those block totals in `raw_times`, in\nseconds, and the common block size in `number_per_run`. Its `times`\nproperty divides each total by that count. Median and IQR are then\ncalculated across the normalized block times. They describe variability\nbetween amortized timings, not the distribution of the individual calls\ninside a block. The\n[Measurement source](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/torch/utils/benchmark/utils/common.py#L75-L190)\nmakes that division explicit.\n\nTwo different call sequences can produce exactly the same block totals.\nConsider ten blocks of 100 calls each:\n\n| Assumed calls within each block | Block total | Mean per call |\n|---|---:|---:|\n| 100 calls at 10 ms | 1000 ms | 10 ms |\n| 98 calls at 1 ms, two at 451 ms | 1000 ms | 10 ms |\n\nBoth sequences produce ten normalized observations of 10 ms. Yet their\nindividual-call nearest-rank p99 values are 10 ms and 451 ms respectively:\nin the second sequence, 20 of the 1000 calls take 451 ms. Once only the\nblock totals remain, there is no way to determine which sequence occurred.\n\nThe following deterministic example constructs actual PyTorch measurement\nobjects from these assumed totals. It does not run a timed operation.\n`TaskSpec` is an internal metadata type from the pinned implementation,\nused here to inspect the stored representation. Application benchmarks\nnormally obtain `Measurement` objects from `Timer` instead of constructing\nthis metadata themselves.\n\n<!-- checked-example: blocked-measurement-tail -->\n~~~python\nfrom math import ceil\nfrom torch.utils.benchmark import Measurement\nfrom torch.utils.benchmark.utils.common import TaskSpec\n\ndef nearest_rank(values, probability):\n    if not values or not 0 < probability <= 1:\n        raise ValueError(\"nonempty sample and probability in (0, 1] required\")\n    return sorted(values)[ceil(probability * len(values)) - 1]\n\ndef group_measurement(groups):\n    if not groups or not groups[0]:\n        raise ValueError(\"nonempty groups required\")\n    number = len(groups[0])\n    if any(len(group) != number for group in groups):\n        raise ValueError(\"fixed number_per_run required\")\n    # Inputs are assumed individual-call durations in milliseconds.\n    return Measurement(\n        number_per_run=number,\n        raw_times=[sum(group) / 1000 for group in groups],\n        task_spec=TaskSpec(stmt=\"assumed_call()\", setup=\"pass\", num_threads=1),\n    )\n\nuniform = [[10] * 100 for _ in range(10)]\nbursty = [[1] * 98 + [451, 451] for _ in range(10)]\nuniform_measurement = group_measurement(uniform)\nbursty_measurement = group_measurement(bursty)\nassert uniform_measurement.raw_times == bursty_measurement.raw_times == [1.] * 10\nassert uniform_measurement.times == bursty_measurement.times == [.01] * 10\nassert uniform_measurement.iqr == bursty_measurement.iqr == 0\nassert uniform_measurement.meets_confidence(.1)\nassert bursty_measurement.meets_confidence(.1)\n\nuniform_calls = [t for group in uniform for t in group]\nbursty_calls = [t for group in bursty for t in group]\nassert nearest_rank(uniform_calls, .99) == 10\nassert nearest_rank(bursty_calls, .99) == 451\nassert nearest_rank(uniform_measurement.times, .99) * 1000 == 10\nassert nearest_rank(bursty_measurement.times, .99) * 1000 == 10\nassert sum(t > 50 for t in bursty_calls) == 20\nprint(\"individual-call p99, ms:\", 10, 451)\nprint(\"normalized-block p99, ms:\", 10, 10)\n~~~\n\nThe zero IQR follows from the identical block means. In this pinned\nimplementation, `meets_confidence` checks `IQR / median < threshold`;\nthe method's name does not establish a confidence level for an\nindividual-call p99. `adaptive_autorange` uses that spread criterion\nalong with runtime and sample-count conditions. It cannot reconstruct\nthe durations discarded by block averaging.\n\nFor a microbenchmark, retain `number_per_run`, the number of returned\nblocks and their times so another reader can interpret the reported\nmedian. For request-tail latency, record each request's arrival and\ncompletion under the intended load, including the errors and timeouts.\nIncreasing the timer's repetition count cannot recover observations\nthat were never recorded.\n\n## Почему сервис нужно проверять под нагрузкой"
+        },
+        {
+          "old": "last_updated: 2026-10-26\nlast_verified: 2026-10-26",
+          "new": "last_updated: 2026-11-04\nlast_verified: 2026-11-04"
+        },
+        {
+          "old": "source_language: mixed\nsource_unit_id:",
+          "new": "source_language: mixed\nreference_terms:\n  - anchor: perf-boundary\n    label: \"Границы измерения производительности\"\n    label_en: \"Measurement boundaries\"\n  - anchor: perf-correctness\n    label: \"Корректность до измерения скорости\"\n    label_en: \"Correctness before timing\"\n  - anchor: perf-wall\n    label: \"Время до готового результата\"\n    label_en: \"Wall time to a ready result\"\n  - anchor: perf-events\n    label: \"Измерение CUDA events\"\n    label_en: \"CUDA event timing\"\n  - anchor: perf-warmup\n    label: \"Прогрев, кэш и холодный запуск\"\n    label_en: \"Warmup, cache, and cold starts\"\n  - anchor: perf-statistics\n    label: \"Разброс, квантили и неопределённость\"\n    label_en: \"Variation, quantiles, and uncertainty\"\n  - anchor: perf-blocked-samples\n    label: \"Групповые измерения и потерянный хвост задержек\"\n    label_en: \"Blocked measurements and the lost latency tail\"\n  - anchor: perf-load\n    label: \"Открытая и замкнутая нагрузка\"\n    label_en: \"Open- and closed-loop load\"\n  - anchor: perf-roofline\n    label: \"Вывод roofline и арифметическая интенсивность\"\n    label_en: \"Roofline derivation and arithmetic intensity\"\n  - anchor: perf-numeric\n    label: \"Численный пример оптимизации трафика\"\n    label_en: \"Numerical traffic-optimization example\"\n  - anchor: perf-memory\n    label: \"Многоуровневый roofline\"\n    label_en: \"Hierarchical rooflines\"\n  - anchor: perf-sequence\n    label: \"Границы времени для последовательных ядер\"\n    label_en: \"Bounds for sequential kernels\"\n  - anchor: perf-gemm\n    label: \"Идеальный трафик GEMM и размер пакета\"\n    label_en: \"Ideal GEMM traffic and batch size\"\n  - anchor: perf-shapes\n    label: \"Размеры матриц и выбор ядра\"\n    label_en: \"Matrix shapes and kernel choice\"\n  - anchor: perf-waves\n    label: \"Wave quantization: 1792 и 1793\"\n    label_en: \"Wave quantization: 1792 versus 1793\"\n  - anchor: perf-profile\n    label: \"Временная шкала и поиск причины\"\n    label_en: \"Timelines and causal profiling\"\n  - anchor: perf-replay\n    label: \"Replay, кэш и частоты при профилировании\"\n    label_en: \"Profiler replay, caches, and clocks\"\n  - anchor: fleet-mfu-scaling-and-preserved-progress\n    label: \"Эффективность полного обучения\"\n    label_en: \"Complete-job training efficiency\"\n  - anchor: perf-mfu\n    label: \"MFU и HFU\"\n    label_en: \"MFU and HFU\"\n  - anchor: perf-scaling\n    label: \"Strong scaling и weak scaling\"\n    label_en: \"Strong and weak scaling\"\n  - anchor: perf-fleet-example\n    label: \"Расчёт для 8 и 128 GPU\"\n    label_en: \"An 8-to-128-GPU calculation\"\n  - anchor: perf-aggregation\n    label: \"Объединение работы и доступной мощности\"\n    label_en: \"Aggregating work and available capacity\"\n  - anchor: perf-progress\n    label: \"Сохранённый прогресс, checkpoint и recovery\"\n    label_en: \"Preserved progress, checkpoints, and recovery\"\n  - anchor: perf-energy\n    label: \"Мощность, энергия и отчёт\"\n    label_en: \"Power, energy, and reporting\"\nsource_unit_id:"
+        },
+        {
+          "old": "  - lecture-05-roofline-performance",
+          "new": "  - pytorch-blocked-autorange-replicates\n  - pytorch-measurement-block-normalization\n  - lecture-05-roofline-performance"
+        },
+        {
+          "old": "## Что входит в измерение",
+          "new": "<a id=\"perf-boundary\"></a>\n\n## Что входит в измерение"
+        },
+        {
+          "old": "## До таймера: одинаковая задача и правильный результат",
+          "new": "<a id=\"perf-correctness\"></a>\n\n## До таймера: одинаковая задача и правильный результат"
+        },
+        {
+          "old": "### Время от вызова до готового результата",
+          "new": "<a id=\"perf-wall\"></a>\n\n### Время от вызова до готового результата"
+        },
+        {
+          "old": "### CUDA events: интервал на временной шкале устройства",
+          "new": "<a id=\"perf-events\"></a>\n\n### CUDA events: интервал на временной шкале устройства"
+        },
+        {
+          "old": "## Прогрев и кэш — разные условия опыта",
+          "new": "<a id=\"perf-warmup\"></a>\n\n## Прогрев и кэш — разные условия опыта"
+        },
+        {
+          "old": "## Разброс времени и неопределённость оценки",
+          "new": "<a id=\"perf-statistics\"></a>\n\n## Разброс времени и неопределённость оценки"
+        },
+        {
+          "old": "## Почему сервис нужно проверять под нагрузкой",
+          "new": "<a id=\"perf-load\"></a>\n\n## Почему сервис нужно проверять под нагрузкой"
+        },
+        {
+          "old": "## Roofline: сколько работы приходится на один байт",
+          "new": "<a id=\"perf-roofline\"></a>\n\n## Roofline: сколько работы приходится на один байт"
+        },
+        {
+          "old": "### Численный пример: что изменилось после оптимизации",
+          "new": "<a id=\"perf-numeric\"></a>\n\n### Численный пример: что изменилось после оптимизации"
+        },
+        {
+          "old": "### Какую память мы считаем",
+          "new": "<a id=\"perf-memory\"></a>\n\n### Какую память мы считаем"
+        },
+        {
+          "old": "### Последовательность операций: где суммировать время",
+          "new": "<a id=\"perf-sequence\"></a>\n\n### Последовательность операций: где суммировать время"
+        },
+        {
+          "old": "## Матричное умножение: размер и повторное использование",
+          "new": "<a id=\"perf-gemm\"></a>\n\n## Матричное умножение: размер и повторное использование"
+        },
+        {
+          "old": "## Почему соседние размеры дают разную скорость",
+          "new": "<a id=\"perf-shapes\"></a>\n\n## Почему соседние размеры дают разную скорость"
+        },
+        {
+          "old": "### Переход от 1792 к 1793",
+          "new": "<a id=\"perf-waves\"></a>\n\n### Переход от 1792 к 1793"
+        },
+        {
+          "old": "## От времени к причине: профилирование",
+          "new": "<a id=\"perf-profile\"></a>\n\n## От времени к причине: профилирование"
+        },
+        {
+          "old": "Профилирование может менять опыт. Для сбора счётчиков Nsight Compute",
+          "new": "<a id=\"perf-replay\"></a>\n\nПрофилирование может менять опыт. Для сбора счётчиков Nsight Compute"
+        },
+        {
+          "old": "### MFU and HFU count different work",
+          "new": "<a id=\"perf-mfu\"></a>\n\n### MFU and HFU count different work"
+        },
+        {
+          "old": "### Strong scaling and weak scaling answer different questions",
+          "new": "<a id=\"perf-scaling\"></a>\n\n### Strong scaling and weak scaling answer different questions"
+        },
+        {
+          "old": "### Reconstructing the 8-to-128-GPU calculation",
+          "new": "<a id=\"perf-fleet-example\"></a>\n\n### Reconstructing the 8-to-128-GPU calculation"
+        },
+        {
+          "old": "### Aggregate work and capacity, not percentages",
+          "new": "<a id=\"perf-aggregation\"></a>\n\n### Aggregate work and capacity, not percentages"
+        },
+        {
+          "old": "### Preserved progress, checkpointing and recovery",
+          "new": "<a id=\"perf-progress\"></a>\n\n### Preserved progress, checkpointing and recovery"
+        },
+        {
+          "old": "## Мощность, энергия и итоговый отчёт",
+          "new": "<a id=\"perf-energy\"></a>\n\n## Мощность, энергия и итоговый отчёт"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/Assets/Sources/Harvard ML Systems/vol1/benchmarking/b2b9aaeaa637a9a665f0f4e9229daeb5bc5a4f2d.svg]]",
+          "new": "![[02 Areas/ML & DL/Assets/Sources/Harvard ML Systems/vol1/benchmarking/b2b9aaeaa637a9a665f0f4e9229daeb5bc5a4f2d.svg|Harvard: границы benchmark от отдельных слоёв и модели до приложения с Non-AI Compute]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/d2l-asyncgraph.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/d2l-asyncgraph.svg|D2L: граф зависимостей x и y, затем их произведение и прибавление двух]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/d2l-threading.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/d2l-threading.svg|D2L: последовательная отправка и асинхронный frontend/backend с ожиданием перед печатью z]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/performance-review-2026-09/jax-roofline.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/performance-review-2026-09/jax-roofline.png|Roofline: два предела полосы памяти, общий вычислительный пик и алгоритмы по разные стороны ridge point]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p47.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p47.png|CS336: измеренный TFLOP/s зависит от стороны матрицы и её кратности; рядом схема выравнивания обращений]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/Assets/Sources/Harvard ML Systems/vol1/benchmarking/682e143e450db0d85ad5c608e3a125ac5176e0ba.svg]]",
+          "new": "![[02 Areas/ML & DL/Assets/Sources/Harvard ML Systems/vol1/benchmarking/682e143e450db0d85ad5c608e3a125ac5176e0ba.svg|Harvard: качественное сравнение изоляции операции и представительности полного приложения]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-nsight-trace.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-nsight-trace.png|CS336 Nsight Systems: временная шкала CUDA-ядер, вызовов PyTorch и NVTX, активности GPU, occupancy и полосы DRAM]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fleet-measurement-2026-10/megatron-weak-scaling.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fleet-measurement-2026-10/megatron-weak-scaling.png|NVIDIA Megatron: weak scaling с ростом модели и глобального пакета, логарифмические оси числа GPU и throughput]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fleet-measurement-2026-10/megatron-strong-scaling.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fleet-measurement-2026-10/megatron-strong-scaling.png|NVIDIA Megatron: strong scaling одной модели 177B с пакетом 1152 последовательности и идеальной линейной границей]]"
+        }
+      ],
+      "after_sha256": "414c655b4ff24942f6d411bf4fbcdf4b5e2d09fbf6ce11a82e943ea607daf8b4"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "bd29cf8f9aff69a5365b81cf4d4065ed93cf2aa6d9643b498402df7fc4d2e704",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline|Измерение производительности и roofline]]",
+          "new": "- [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline|Измерение производительности и roofline]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-boundary|Границы измерения производительности]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-correctness|Корректность до измерения скорости]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-wall|Время до готового результата]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-events|Измерение CUDA events]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-warmup|Прогрев, кэш и холодный запуск]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-statistics|Разброс, квантили и неопределённость]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-blocked-samples|Групповые измерения и потерянный хвост задержек]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-load|Открытая и замкнутая нагрузка]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-roofline|Вывод roofline и арифметическая интенсивность]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-numeric|Численный пример оптимизации трафика]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-memory|Многоуровневый roofline]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-sequence|Границы времени для последовательных ядер]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-gemm|Идеальный трафик GEMM и размер пакета]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-shapes|Размеры матриц и выбор ядра]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-waves|Wave quantization: 1792 и 1793]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-profile|Временная шкала и поиск причины]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-replay|Replay, кэш и частоты при профилировании]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#fleet-mfu-scaling-and-preserved-progress|Эффективность полного обучения]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-mfu|MFU и HFU]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-scaling|Strong scaling и weak scaling]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-fleet-example|Расчёт для 8 и 128 GPU]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-aggregation|Объединение работы и доступной мощности]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-progress|Сохранённый прогресс, checkpoint и recovery]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-energy|Мощность, энергия и отчёт]]"
+        }
+      ],
+      "after_sha256": "57a5f734fc159932c530aed5140012179034d7a46c477d74d8467a623b634154"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "195dccc2e17179d219771e9fc8c86a743d8a13749b6bef8170fb9f1cb768d13e",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline|Performance measurement and roofline]]",
+          "new": "- [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline|Performance measurement and roofline]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-boundary|Measurement boundaries]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-correctness|Correctness before timing]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-wall|Wall time to a ready result]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-events|CUDA event timing]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-warmup|Warmup, cache, and cold starts]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-statistics|Variation, quantiles, and uncertainty]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-blocked-samples|Blocked measurements and the lost latency tail]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-load|Open- and closed-loop load]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-roofline|Roofline derivation and arithmetic intensity]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-numeric|Numerical traffic-optimization example]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-memory|Hierarchical rooflines]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-sequence|Bounds for sequential kernels]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-gemm|Ideal GEMM traffic and batch size]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-shapes|Matrix shapes and kernel choice]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-waves|Wave quantization: 1792 versus 1793]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-profile|Timelines and causal profiling]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-replay|Profiler replay, caches, and clocks]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#fleet-mfu-scaling-and-preserved-progress|Complete-job training efficiency]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-mfu|MFU and HFU]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-scaling|Strong and weak scaling]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-fleet-example|An 8-to-128-GPU calculation]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-aggregation|Aggregating work and available capacity]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-progress|Preserved progress, checkpoints, and recovery]]\n  - [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline#perf-energy|Power, energy, and reporting]]"
+        }
+      ],
+      "after_sha256": "642b41b082034bdd74333a25d3224367901f4bccf5c661e12208bb784b8b1704"
+    }
+  ],
+  "source_manifest": "publishing/tools/roofline-timing-sources.json",
+  "verification": {
+    "date": "2026-11-04",
+    "status": "verified-local-delta",
+    "chapterSha256": "414c655b4ff24942f6d411bf4fbcdf4b5e2d09fbf6ce11a82e943ea607daf8b4",
+    "wholeOwnerRead": "Entire1105-line input read1–280,281–560,561–840,841–EOF. Entire final1363-line owner reread1–300,301–580,581–865,866–1130,1131–EOF after TaskSpec setup correction. No subsequent chapter edits.",
+    "preservation": "Three-file reversible journal restores exact accepted ee3b591a... predecessor. All six original programs,12 original display equations,seven original-language source blocks,nine image paths/bytes and captions preserved. Added complete original PyTorch explanatory paragraph,one deterministic program,one display equation,and24 subject destinations per locale. Nine alt descriptions added;no new/redrawn figure.",
+    "explanation": "Works fixed12us overhead/2us operation through1000 calls,then ties calibration and collection to pinned Timer implementation. Distinguishes raw whole-block seconds from normalized Measurement.times. Two1000-call sequences have identical10ms group means and zero IQR,but nearest-rank individual-call p99 of10/451ms. Identifies TaskSpec as internal metadata and IQR/median as a spread criterion,not a p99 confidence level.",
+    "source": "Fresh complete selected Benchmark recipe sections1–4 (1–343),Timer calibration/blocked/adaptive routines and Measurement fields/times/statistics/criterion read. Complete recipe paragraph matches pinned source exactly except inline-code delimiters. Three full source-file hashes checked. Current runtime Measurement.times body matches pinned source AST. Earlier roofline and fleet audits read fully;historical CS336/JAX/NVIDIA/D2L/Harvard comparison reused on exact restored accepted bytes,not a new whole-course/PDF audit.",
+    "style": "no-ai-slop SKILL/eval read fully and applied after whole final reread. Full explanations,derivations,examples and meaningful technical contrasts retained. English source excerpts unchanged;no translation pass.",
+    "examples": {
+      "exit": 0,
+      "command": "uv run --offline --python 3.13 --with numpy --with torch python publishing/tools/check_roofline_observations.py",
+      "parsedPrograms": 7,
+      "executedCpuPrograms": 4,
+      "cudaProgramsNotExecuted": 3,
+      "scope": "All three old CPU programs and25 rational roofline cases,108 scaling identities and table checks retained. New actual Measurement program,20 grouped-tail cases,independent CDF/rank controls,source-property AST and invalid inputs pass. No timed operation,GPU or fleet benchmark."
+    },
+    "originals": {
+      "exit": 0,
+      "command": "node publishing/tools/check_roofline_timing_sources.mjs",
+      "scope": "Three pinned source-file hashes and complete original paragraph verified;complete tutorial BSD notice hash and published PyTorch license availability checked. Existing fleet source/figure/license hashes rechecked by its4 tests. Existing CS336 p47 RGB mismatch and two Harvard upstream comparison caveats remain historical/open."
+    },
+    "tests": {
+      "exit": 0,
+      "files": 5,
+      "tests": 215,
+      "htmlTests": 200,
+      "scope": "New owner/index preservation,old fleet source contract,previous GPU journal chain,both indexes,and all built HTML tests. New both-locale output checks cover24 anchors,7 blocks,source attribution and canonical-language notice. A mistaken test-only change to the preceding capstone count was restored before the final passing suite."
+    },
+    "build": {
+      "exit": 0,
+      "pages": 2007,
+      "pagefindHtmlFiles": 2011,
+      "durationSeconds": 29.99,
+      "brokenInternalLinks": 0,
+      "bytes": 855355587,
+      "files": 5613,
+      "limit": 1000000000,
+      "headroom": 144644413
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-04-roofline-reader",
+      "desktop": "1280x900,617px content,document1265/1265. Nine original images load with native proportions;13 display equations and eight tables fit,zero KaTeX errors. All nine complete original figures and captions personally inspected in the viewer;CS336 trace additionally at2x. This is reader inspection,not a new upstream pixel comparison.",
+      "mobile": "375x812,328px content,document360/360. Nine images load and fit;13 display equations fit with zero KaTeX errors. New group-timing table fits328/328 and all six values are visible. New amortization equation personally inspected. Only the inherited first boundary table scrolls internally328/395. Original JAX roofline inspected at2x with readable region labels. Temporary viewport reset.",
+      "navigation": "Actual EN reference ->#perf-blocked-samples and Next ->arithmetic H1;actual RU reference ->same subject and Previous ->GPU/CUDA H1. Both locales retain9 images and7 code blocks;EN explicitly states no separate English edition.24 unique subject links per locale.",
+      "transient": "Stale CUA binding recovered by documented troubleshooting,session reset and rebinding same IAB3/tab1;no server restart."
+    },
+    "publication": "local-only;no stage,commit,push or deployment",
+    "remaining": [
+      "Three CUDA programs not executed;all timing values in the new example are assumed teaching data.",
+      "Inherited CS336 slide permission/RGB mismatch and Harvard upstream comparison caveats are not cleared by this reader pass.",
+      "66 owners still need this route pass. Full thematic source integration,public-checkout/Pages-base/frozen release and dev/Pages publication remain open."
+    ]
+  }
+}

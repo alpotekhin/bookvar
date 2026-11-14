@@ -2,9 +2,12 @@
 from collections import Counter
 from fractions import Fraction as Q
 from pathlib import Path
+import hashlib
+import json
 import re
 
 import numpy as np
+from topic_consolidation_baseline import before_topic_consolidation
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md"
@@ -94,11 +97,11 @@ def main():
                            rtol=1e-8, atol=1e-8)
     assert np.array_equal(scope["backward"], [1, 4, -4])
 
-    # One specified output entry, with unrelated entries set to zero for this check.
+    # Complete published 4x2 output: check every one of its 24 derivatives.
     def matrix_output(v):
-        a = np.zeros((4, 2))
-        a[2, 1] = v[1]+v[2]
-        return a
+        x1, x2, x3 = v
+        return np.array([[x1, x1+x2], [x2, x1-x3],
+                         [x3, x2+x3], [x1+x2, x1+x2+x3]])
     point3 = np.array([1., 2., 3.])
     tensor = np.stack([np.stack([
         numerical_gradient(lambda v:matrix_output(v)[i,j], point3)
@@ -107,9 +110,46 @@ def main():
         numerical_gradient(lambda v:matrix_output(v).ravel(order="F")[k], point3)
         for k in range(8)])
     assert tensor.shape == (4, 2, 3)
+    slices = (
+        [[1, 1], [0, 1], [0, 0], [1, 1]],
+        [[0, 1], [1, 0], [0, 1], [1, 1]],
+        [[0, 0], [0, -1], [1, 1], [0, 1]],
+    )
+    for k, expected in enumerate(slices):
+        assert np.allclose(tensor[:, :, k], expected, rtol=1e-8, atol=1e-8)
+    expected_j = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0],
+                           [1, 1, 0], [1, 0, -1], [0, 1, 1], [1, 1, 1]])
+    assert np.allclose(flat_jacobian, expected_j, rtol=1e-8, atol=1e-8)
+    assert np.array_equal(matrix_output(point3).ravel(order="F"),
+                          [1, 2, 3, 3, 3, -2, 5, 6])
+    for i in range(4):
+        for j in range(2):
+            assert np.allclose(flat_jacobian[i+4*j], tensor[i, j],
+                               rtol=1e-8, atol=1e-8)
+    assert not np.allclose(flat_jacobian, tensor.reshape(8, 3, order="C"))
     assert np.allclose(tensor[2, 1], [0, 1, 1])
     assert np.allclose(flat_jacobian[6], tensor[2, 1])
     assert np.allclose(flat_jacobian[6], [0, 1, 1])
+
+    # Native D2L plot: the two curves meet and have the same derivative at 1.
+    for x in (Q(0), Q(1, 2), Q(1), Q(2), Q(3)):
+        curve, tangent = 3*x*x-4*x, 2*x-3
+        assert curve-tangent == 3*(x-1)**2
+    assert np.isclose(numerical_grad(lambda x: 3*x*x-4*x, 1.), 2.,
+                      rtol=1e-8, atol=1e-8)
+
+    # The three visible paths have contributions 30, 14 and -8.
+    def path_graph(v):
+        x, y = v
+        u, vv = x+2*y, -y
+        a, b = 3*u, 4*vv
+        return 5*a+7*u+2*b
+    assert 5*3*2 + 7*2 + 2*4*(-1) == 36
+    for point in ([1., 2.], [-2., 5.], [0., 0.]):
+        x, y = point
+        assert path_graph(point) == 22*x+36*y
+        assert np.allclose(numerical_gradient(path_graph, point), [22, 36],
+                           rtol=1e-8, atol=1e-8)
 
     assert Q(1, 2)**10 == Q(1, 1024)
     assert 2**10 == 1024
@@ -136,14 +176,29 @@ def main():
     assert len(calls) == 4
     before = (ROOT / "docs/audit/snapshots/2026-10-21-derivatives-gradients.md").read_text()
     embeds = lambda s:Counter(re.findall(r"!\[\[([^\]]+)\]\]", s))
-    assert embeds(text) == embeds(before)
+    historical = before_topic_consolidation(
+        text, CHAPTER, '2026-10-30-tensor-native-geometry-additions.json')
+    assert embeds(historical) == embeds(before)
+    current_figures = embeds(text)
+    assert sum(current_figures.values()) == 4
+    for name in ('d2l-function-tangent.svg', 'd2l-chain-paths.svg',
+                 'cs231n-chain.svg', 'google-gradient-descent.png'):
+        assert sum(count for path, count in current_figures.items()
+                   if path.endswith('/'+name)) == 1
+    manifest = json.loads((ROOT / '00 Учебник/Assets/Figures/curated/'
+                          'derivative-native-2026-10-30/assets.json').read_text())
+    for row in manifest:
+        assert hashlib.sha256((ROOT / row['asset']).read_bytes()).hexdigest() == row['sha256']
     for index, line in enumerate(text.splitlines()):
         if re.match(r"^1\.\s", line):
             assert not text.splitlines()[index-1].strip(), (index+1, line)
     print("PASS: 3 sequential published snippets; rational derivative/step checks; "
           "branch accumulation; rectangular linear-map VJP and matrix-output axes; vanishing/amplification "
-          "counterexamples; finite differences and nondifferentiable point; 5 figure embeds. "
+          "counterexamples; finite differences and nondifferentiable point; "
+          "all 24 matrix-output derivatives and column-wise flattening; "
+          "native tangent and three-path examples; 4 current figure embeds. "
           "No neural-network training or upstream autograd suite executed.")
+    print('Chapter SHA-256:', hashlib.sha256(text.encode()).hexdigest())
 
 
 if __name__ == "__main__":

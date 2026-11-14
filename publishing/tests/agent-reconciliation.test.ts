@@ -60,14 +60,16 @@ describe('source-faithful agent-note reconciliation',()=>{
       expect(text).toContain(value);
   });
 
-  it('executes all five displayed programs, executor negative cases and exact original crops',()=>{
+  it('executes all six displayed programs, MCP and executor negative cases, and exact original crops',()=>{
     const result=JSON.parse(execFileSync('uv',[
       'run','--offline','--with','numpy','--with','pillow',
       'python','publishing/tools/check_tool_use_examples.py'
     ],{cwd:root,encoding:'utf8',timeout:45000,maxBuffer:1024*1024,
       env:{...process.env,LC_ALL:'C',LANG:'C'}}));
-    expect(result.code_blocks).toBe(5);
-    expect(result.standalone_and_shared_runs).toBe(10);
+    expect(result.chapter_sha256).toBe(hash(read(owner)));
+    expect(result.code_blocks).toBe(6);
+    expect(result.standalone_and_shared_runs).toBe(12);
+    expect(result.mcp_invalid_and_duplicate_responses).toBe(8);
     expect(result.original_figure_crops_verified).toBe(4);
     expect(result.json_examples_parsed).toBe(5);
     expect(result.llm_run).toBe(false);

@@ -4,6 +4,7 @@ import {resolve} from 'node:path';
 import {parse} from 'yaml';
 import {describe,expect,it} from 'vitest';
 import {beforeSelectionGapsAddition} from '../tools/selection-gaps-baseline.mjs';
+import {beforeTopicConsolidation} from '../tools/topic-consolidation-baseline.mjs';
 
 const root=resolve(import.meta.dirname,'../..');
 const read=(p:string)=>readFileSync(resolve(root,p),'utf8');
@@ -13,12 +14,16 @@ describe('Image deduplication and cold-ID explanation additions',()=>{
   it('preserves every prior chapter byte and rejects unreviewed changes',()=>{
     for(const row of journal.files){
       const current=read(row.source);
-      expect(sha(current)).toBe(row.after_sha256);
-      expect(sha(beforeSelectionGapsAddition(current,row.source))).toBe(row.before_sha256);
-      expect(()=>beforeSelectionGapsAddition(current.replace(`<!-- ${row.marker}-addition: start -->`,
+      const atReview=beforeTopicConsolidation(current,row.source,root);
+      expect(sha(atReview)).toBe(row.after_sha256);
+      expect(sha(beforeSelectionGapsAddition(atReview,row.source,root))).toBe(row.before_sha256);
+      expect(()=>beforeSelectionGapsAddition(atReview.replace(`<!-- ${row.marker}-addition: start -->`,
         `<!-- ${row.marker}-addition: start -->\nUnreviewed change.`),row.source)).toThrow();
-      expect(sha(beforeSelectionGapsAddition(current+'\nUnreviewed outside change.\n',row.source)))
+      expect(sha(beforeSelectionGapsAddition(atReview+'\nUnreviewed outside change.\n',row.source)))
         .not.toBe(row.before_sha256);
+      const changed=()=>beforeTopicConsolidation(current+'\nUnreviewed outside change.\n',row.source,root);
+      if(current!==atReview)expect(changed).toThrow();
+      else expect(sha(changed())).not.toBe(row.after_sha256);
     }
   });
   it('keeps both entire source images, licenses and provenance byte-exact',()=>{

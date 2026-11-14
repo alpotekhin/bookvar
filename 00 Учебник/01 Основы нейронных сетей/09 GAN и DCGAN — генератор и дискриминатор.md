@@ -3,8 +3,63 @@ title: GAN и DCGAN — генератор и дискриминатор
 type: textbook-chapter
 status: canonical
 source_language: en
-last_updated: 2026-10-28
-last_verified: 2026-10-28
+last_updated: 2026-11-03
+last_verified: 2026-11-03
+reference_terms:
+  - label: Генератор и общий дискриминатор
+    label_en: Generator and shared discriminator
+    anchor: gan-architecture
+  - label: Логиты, BCE и цель minimax
+    label_en: Logits, BCE and the minimax objective
+    anchor: gan-logits
+  - label: Minimax и non-saturating loss
+    label_en: Minimax and non-saturating generator losses
+    anchor: gan-nonsaturating
+  - label: Оптимальный дискриминатор и JS
+    label_en: Optimal discriminator and Jensen–Shannon divergence
+    anchor: gan-optimal-d
+  - label: GAN для двумерного Gaussian
+    label_en: A GAN for a two-dimensional Gaussian
+    anchor: gan-gaussian
+  - label: Чередование update_D и update_G
+    label_en: Alternating discriminator and generator updates
+    anchor: gan-alternating-updates
+  - label: Заморозка D, detach и no_grad
+    label_en: Frozen discriminator, detach and no_grad
+    anchor: gan-input-gradients
+  - label: Какой optimizer меняет параметры
+    label_en: Optimizer parameter ownership
+    anchor: gan-parameter-ownership
+  - label: Полный Gaussian-эксперимент
+    label_en: Complete Gaussian training experiment
+    anchor: gan-toy-training
+  - label: Потери GAN и проверка распределения
+    label_en: GAN losses and distribution checks
+    anchor: gan-training-diagnostics
+  - label: DCGAN — пять транспонированных свёрток
+    label_en: DCGAN generator shapes and five transposed convolutions
+    anchor: dcgan-generator
+  - label: DCGAN — свёртки и LeakyReLU
+    label_en: DCGAN discriminator and LeakyReLU
+    anchor: dcgan-discriminator
+  - label: BatchNorm в варианте D2L и статье DCGAN
+    label_en: BatchNorm in the D2L and original DCGAN variants
+    anchor: dcgan-bn-variant
+  - label: Полный шаг DCGAN и диапазон пикселей
+    label_en: A complete DCGAN step and pixel ranges
+    anchor: dcgan-image-step
+  - label: BatchNorm buffers при чередовании G и D
+    label_en: BatchNorm buffers during alternating updates
+    anchor: dcgan-buffers
+  - label: Генерация и eval-состояние
+    label_en: Sampling and eval state
+    anchor: gan-sampling
+  - label: Mode collapse и покрытие данных
+    label_en: Mode collapse and distribution coverage
+    anchor: gan-mode-collapse
+  - label: Unconditional GAN и метки классов
+    label_en: Unconditional GANs and class labels
+    anchor: gan-labels
 primary_sources:
   - https://d2l.ai/chapter_generative-adversarial-networks/gan.html
   - https://d2l.ai/chapter_generative-adversarial-networks/dcgan.html
@@ -20,6 +75,8 @@ generator using a second network that distinguishes generated examples from
 training data. There is no input image to reconstruct and no paired target
 image for each noise vector.
 
+<a id="gan-architecture"></a>
+
 ## A generator and a learned discriminator
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gan-dcgan-2026-10-28/gan.svg|D2L original GAN architecture: noise, generator, generated and real inputs, discriminator]]
@@ -34,6 +91,8 @@ come from the dataset; generated examples come from independent noise passed
 through the generator. The figure shows a forward computation. During training,
 a derivative through the discriminator also tells the generator how changing
 its output would change the classification loss.
+
+<a id="gan-logits"></a>
 
 The discriminator is a binary classifier to distinguish if the input $x$ is real (from real data) or fake (from the generator). Typically, the discriminator outputs a scalar prediction $o\in\mathbb R$ for input $\mathbf x$, such as using a fully connected layer with hidden size 1, and then applies sigmoid function to obtain the predicted probability $D(\mathbf x) = 1/(1+e^{-o})$. Assume the label $y$ for the true data is $1$ and $0$ for the fake data. For one labelled input, the binary cross-entropy is
 
@@ -75,6 +134,8 @@ the same direction. G changes the generated distribution to reduce the value.
 Multiplying an objective by a positive constant preserves its optima but
 rescales the gradients. A sum over a batch and a mean over that batch therefore
 need not produce the same optimizer step at the same learning rate.
+
+<a id="gan-nonsaturating"></a>
 
 ## Why the generator usually uses a different loss
 
@@ -129,6 +190,8 @@ Passing label 1 for a generated input to binary cross-entropy implements
 $-\log D(G(z))$. The label describes what the generator wants D to predict;
 it does not turn the generated example into a real dataset observation.
 The discriminator's own update still labels that example 0.
+
+<a id="gan-optimal-d"></a>
 
 ## What the idealized equilibrium establishes
 
@@ -188,6 +251,8 @@ equality by itself. An undertrained classifier can perform at chance even
 when the two distributions differ. Losses, independent samples, coverage,
 and the chosen held-out evaluation procedure need to be examined together.
 
+<a id="gan-gaussian"></a>
+
 ## Fit a two-dimensional Gaussian first
 
 Since this is going to be the world's lamest example, we simply generate data drawn from a Gaussian.
@@ -243,6 +308,8 @@ sigmoid because BCEWithLogitsLoss combines sigmoid and cross-entropy using
 stable arithmetic. Adding a sigmoid before that loss would change its input
 from logits to probabilities and apply the sigmoid twice.
 
+<a id="gan-alternating-updates"></a>
+
 ## The two source update functions
 
 The following PyTorch functions are retained from D2L without changing their
@@ -297,6 +364,105 @@ available. The source computes gradients for D in this backward pass too;
 only trainer_G.step applies a parameter update. The next discriminator call
 clears D's accumulated gradients.
 
+<a id="gan-input-gradients"></a>
+
+### Input gradients when discriminator weights are frozen
+
+Take a scalar generator $G_w(z)=wz$ and discriminator logit
+$a=vG_w(z)+b$. With $z=2$, $w=0.1$, $v=3$ and $b=-1$, the generated value
+is 0.2, the logit is $-0.4$, and $q=\sigma(a)\approx0.401312$.
+For the non-saturating generator loss $L=-\log q$, the chain rule gives
+
+$$
+\begin{aligned}
+\frac{\partial L}{\partial w}&=(q-1)vz,\\
+\frac{\partial L}{\partial v}&=(q-1)wz,\\
+\frac{\partial L}{\partial b}&=q-1.
+\end{aligned}
+$$
+
+The generator-weight derivative is approximately $-3.592126$. Computing it
+requires the input derivative of D, here $v=3$. It does not require updating
+$v$ or $b$. Setting D's parameter flags to `requires_grad=False` therefore
+preserves this generator derivative in the ordinary grad mode.
+
+Detaching $G_w(z)$ removes the connection back to $w$. D's own parameters can
+still receive derivatives, but G cannot learn from that detached input.
+Running D under `no_grad()` removes the recorded D computation as well, so
+this loss alone has no backward graph. These cases can produce the same
+numerical loss while providing different training signals.
+
+| Forward setup | G weight gradient | D weight gradient |
+| --- | --- | --- |
+| Both parameter sets trainable | −3.592126 | −0.119738 |
+| D parameters frozen | −3.592126 | None |
+| Generated input detached | None | −0.119738 |
+| D forward under no_grad | No backward graph | No backward graph |
+
+The following program constructs fresh scalar models for each row. It performs
+no optimizer step, so it isolates graph construction and gradient accumulation
+from the separate decision of which optimizer to call.
+
+```python
+import torch
+from torch import nn
+from torch.nn import functional as F
+
+frozen_routes = {}
+for route in ["ordinary", "frozen_D", "detached_fake", "no_grad_D"]:
+    scalar_G = nn.Linear(1, 1, bias=False, dtype=torch.float64)
+    scalar_D = nn.Linear(1, 1, dtype=torch.float64)
+    with torch.no_grad():
+        scalar_G.weight.fill_(.1)
+        scalar_D.weight.fill_(3.)
+        scalar_D.bias.fill_(-1.)
+    if route == "frozen_D":
+        scalar_D.requires_grad_(False)
+    scalar_noise = torch.tensor([[2.]], dtype=torch.float64)
+    scalar_fake = scalar_G(scalar_noise)
+    if route == "detached_fake":
+        scalar_fake = scalar_fake.detach()
+    if route == "no_grad_D":
+        with torch.no_grad():
+            scalar_logit = scalar_D(scalar_fake)
+    else:
+        scalar_logit = scalar_D(scalar_fake)
+    scalar_loss = F.binary_cross_entropy_with_logits(
+        scalar_logit, torch.ones_like(scalar_logit))
+    if scalar_loss.requires_grad:
+        scalar_loss.backward()
+    g_grad = None if scalar_G.weight.grad is None else scalar_G.weight.grad.item()
+    d_grad = None if scalar_D.weight.grad is None else scalar_D.weight.grad.item()
+    frozen_routes[route] = (scalar_loss.item(), g_grad, d_grad)
+
+q_scalar = torch.sigmoid(torch.tensor(-.4, dtype=torch.float64)).item()
+expected_g = (q_scalar - 1) * 3 * 2
+expected_d = (q_scalar - 1) * .1 * 2
+for route in ["ordinary", "frozen_D"]:
+    assert abs(frozen_routes[route][1] - expected_g) < 1e-12
+for route in ["ordinary", "detached_fake"]:
+    assert abs(frozen_routes[route][2] - expected_d) < 1e-12
+assert frozen_routes["frozen_D"][2] is None
+assert frozen_routes["detached_fake"][1] is None
+assert frozen_routes["no_grad_D"][1:] == (None, None)
+assert max(x[0] for x in frozen_routes.values()) - min(x[0] for x in frozen_routes.values()) < 1e-12
+print(frozen_routes)
+```
+
+In an alternating training loop, restore D's parameter flags before its next
+update if they were temporarily disabled. Changing the flags does not clear
+gradients left by an earlier backward pass. The fresh-model construction above
+avoids confusing those old values with newly computed gradients.
+
+The [PyTorch autograd notes, Setting requires_grad and Grad Modes](https://docs.pytorch.org/docs/2.14/notes/autograd.html#setting-requires-grad)
+define the recording rule: an operation in grad mode is recorded when an input
+requires gradients. Here that input can be the generated tensor, even when D's
+parameter tensors do not require them. This program uses no BatchNorm or
+Dropout. Their train/eval behaviour is a separate choice, demonstrated by the
+DCGAN state counters below; `eval()` does not itself disable autograd.
+
+<a id="gan-parameter-ownership"></a>
+
 ### Check parameter ownership in an actual alternating step
 
 
@@ -327,6 +493,8 @@ print("D/G summed losses", loss_D.item(), loss_G.item())
 
 These checks establish which optimizer changes which parameters. They do not
 establish a useful generated distribution after one step.
+
+<a id="gan-toy-training"></a>
 
 ### Run the Gaussian experiment without plotting dependencies
 
@@ -378,6 +546,8 @@ Random initialization, shuffling, and numerical versions can change the
 trajectory; the local loop prints its own moments rather than borrowing
 the book's result.
 
+<a id="gan-training-diagnostics"></a>
+
 In the executed CPU run above, the final mean was approximately $(0.925,1.812)$
 and the covariance was approximately
 
@@ -392,6 +562,8 @@ while both recorded losses were close to 0.693. The covariance still differs
 from the target. These are observations of this seeded toy run, not a claim
 that those loss values certify convergence. Different seeds and versions need
 their own sample comparison.
+
+<a id="dcgan-generator"></a>
 
 ## DCGAN: turn a noise vector into an RGB image
 
@@ -465,6 +637,8 @@ The complete generator has five transposed convolutions: four in the basic
 blocks and the output layer. Counting only the blocks would miss the final
 spatial expansion.
 
+<a id="dcgan-discriminator"></a>
+
 ## The convolutional discriminator
 
 The discriminator is a normal convolutional network except that it uses a leaky ReLU as its activation function. Given $\alpha \in[0, 1]$, its definition is
@@ -521,11 +695,15 @@ and reduces 4 to 1. The resulting shape is $[B,1,1,1]$, one logit per image,
 not a class-probability vector. There are four blocks plus that final
 convolution.
 
+<a id="dcgan-bn-variant"></a>
+
 The D2L teaching network includes BatchNorm in its first discriminator block.
 [Radford et al., §3](https://arxiv.org/html/1511.06434v2#S3) exclude BatchNorm
 at the discriminator input layer and generator output. The code above is
 therefore identified as D2L's variant, rather than presented as an exact
 reproduction of the paper architecture.
+
+<a id="dcgan-image-step"></a>
 
 ## Range, training state, and a complete image-shaped step
 
@@ -583,6 +761,8 @@ print("generator shapes", g_shapes)
 print("image-shaped D/G losses", image_loss_D.item(), image_loss_G.item())
 ```
 
+<a id="dcgan-buffers"></a>
+
 An unchanged parameter tensor does not mean an unchanged complete module state.
 During D's update, G's forward pass can still update its BatchNorm buffers,
 even though its output is detached afterward. D sees the real batch, the
@@ -597,12 +777,16 @@ for 20 epochs. Those are distinct recipes, not interchangeable measurements.
 One successful backward pass establishes neither stability over many updates
 nor realistic image generation.
 
+<a id="gan-sampling"></a>
+
 ## Sampling, coverage, and downstream labels
 
 After training, generating an image needs noise and G; it does not need D or
 a reconstruction encoder. With BatchNorm, eval mode selects the stored
 statistics and prevents sampling from changing them. The learned generator
 can still depend on its training distribution and can memorize examples.
+
+<a id="gan-mode-collapse"></a>
 
 A generator that emits only a few convincing outputs can miss most of that
 distribution. This is mode collapse, distinct from the recursive
@@ -618,6 +802,8 @@ generator is not the global distribution-matching solution. A finite,
 alternately trained discriminator may fail to supply a useful signal for
 the missing group. Checking only the appearance of a few A samples would
 not expose the missing half of the distribution.
+
+<a id="gan-labels"></a>
 
 This DCGAN is unconditional: a real/fake training target is not a semantic
 class label for each generated image. Using generated images to train a

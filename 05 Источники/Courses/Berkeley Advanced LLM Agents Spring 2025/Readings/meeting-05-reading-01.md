@@ -10,3 +10,6 @@ Metadata-only catalogue record for meeting 5: Coding Agents and AI for Vulnerabi
 - Syllabus order: 1
 - Relationship: primary source for technical claims; the lecture deck is a secondary explanation.
 - Retrieved: 2026-09-04
+- Conference version: [ICML 2025, PMLR 267](https://proceedings.mlr.press/v267/abramovich25a.html). The original lecture cites the preprint; the textbook illustrations and ablation figures use the published version.
+
+[[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#CTF: состояние, специализированные инструменты и обратная связь|Учебник: интерактивный сеанс EnIGMA, длинный вывод и проверка результата]].

@@ -1,0 +1,187 @@
+{
+  "date": "2026-11-03",
+  "scope": "Fresh whole655-line GAN/DCGAN owner read. Preserve all fourteen old programs, nine display equations, five original illustrations and original D2L English/source bodies. Add one complete scalar four-route gradient example, worked three-factor chain rule and18 subject links per locale.",
+  "status": "Local owner delta verified: complete final read,15 CPU programs, source/preservation tests, actual site build and desktop/mobile reader QA. Not whole-book or release acceptance.",
+  "verification": {
+    "chapterSha256": "e8fb96cadc936fe8e67882bb7ddba847ace1d6f6249117fbd6ac3c820b456d9d",
+    "wholeOwnerRead": "Complete current655-line baseline read in ranges1–280,281–520,521–EOF. Complete final841-line chapter reread in ranges1–285,286–565,566–EOF. No subsequent chapter edits.",
+    "preservation": "All14 old programs,9 display equations,5 original illustrations and8 complete D2L source bodies retained unchanged. Added one complete scalar program, one derivative display, four-route comparison table and18 unique subject anchors in each index. Three-file reversible journal pins the exact preceding owner and both indexes.",
+    "explanation": "The full input/parameter chain rule is worked through for G(z)=wz and D logit=vG(z)+b. Same loss0.9130152524 produces G gradient-3.5921259607 in ordinary/frozen-D routes, no G gradient after detach and no backward graph under no_grad. Old-gradient clearing, restoring D flags and BatchNorm train/eval state are separate. Existing full Gaussian and image-shaped update explanations remain.",
+    "style": "no-ai-slop skill/eval read fully; whole final text reread. Original licensed English source prose and code, numerical examples, limitations and source corrections retained. New section remains English; no translation or replacement with definitions.",
+    "source": {
+      "reviewedBaseline": "beforeReaderRouteNavigation restores current baseline30f6c8d2 exactly to previously accepted a55940b1d05c1544877d2779656b388a769edb0fdd07996f2275865f8aa86c98. Complete old audit and source-packet README read; earlier complete D2L and selected Goodfellow/Radford comparisons explicitly reused on this boundary.",
+      "fresh": "Selected pinned D2L architecture/objective/Gaussian/G/D prose and original generator block rechecked. Entire official PyTorch2.14 Locally disabling gradient computation section read, including requires_grad, all grad modes and eval. Not a new entire D2L/paper/course read.",
+      "figures": "Five existing unchanged originals: four D2L SVGs under CC BY-SA4.0 and one Dumoulin/Visin MIT animation with25 preserved frames. Current source-unit tests and new byte checks pass. No new picture, synthetic diagram, dataset or pretrained weights."
+    },
+    "cpu": {
+      "exit": 0,
+      "device": "CPU",
+      "torch": "2.14.1",
+      "programs": 15,
+      "sourceBodies": 8,
+      "command": "uv run --offline --python 3.13 --with torch==2.14.1 --with numpy==2.5.4 python publishing/tools/check_gan_dcgan_examples.py",
+      "scope": "All15 actual chapter blocks execute; all14 prior bodies retained exactly. Existing14 finite-difference cases and25 independent optimal-D grid cases pass. Complete20-epoch assigned Gaussian loop retains mean[0.925118,1.812165],covariance[[0.630935,1.363922],[1.363922,3.243126]], losses[0.693390,0.693351]; mismatch with target remains explicit. Original DCGAN full image-shaped forward/backward and optimizer ownership/BN counters pass. Added36 independent ordinary/frozen-D three-factor derivative cases. No image-quality or GPU benchmark."
+    },
+    "tests": {
+      "scoped": "16 tests in4 files pass: new delta, existing GAN/DCGAN source preservation, Autoencoder delta chain and reference sync.",
+      "builtOutput": "199 HTML tests pass after completed site build, including both GAN locale routes,18 anchors,15 programs,5 real assets,new graph-route comparison and actual diffusion next route."
+    },
+    "build": {
+      "exit": 0,
+      "pages": 2007,
+      "pagefindHtmlFiles": 2011,
+      "durationSeconds": 29.53,
+      "brokenInternalLinks": 0,
+      "bytes": 853942137,
+      "files": 5606,
+      "limit": 1000000000,
+      "headroom": 146057863,
+      "warnings": "Five existing duplicate-route warnings retained. Astro/Pagefind completed before final HTML/link/browser checks."
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-03-gan-reader",
+      "desktop": "1280x720: document1265/1265; all5 unchanged original illustrations freshly inspected inline with captions; ten display equations and both tables617/617,zero KaTeX errors. New derivative comparison read on-page and screenshot saved.",
+      "mobile": "390x844: document375/375; all5 originals freshly inspected inline, widths<=343px and native proportions. Ten equations and both tables343/343,zero KaTeX errors. Entire four-route table inspected at top257.5/bottom706.5. Original training SVG at2x inspected, with pan x188 ->228 ->344 and readable right legend. No all-viewer-endpoint claim. GIF bytes/25-frame preservation retained; selected displayed frames, not every frame freshly inspected.",
+      "navigation": "Actual RU reference ->#gan-input-gradients; actual EN reference ->same anchor,each unique. Native English owner and EN-original subject label retained; no separate translation authored. Actual EN Next ->diffusion-flow-images with correct h1. Viewport reset; RU gradient section left open.",
+      "transient": "Stale cross-goal browser context reset and same browser/tab rebound. Non-focusable body press failed during mobile scrolling; current state reobserved and normal keyboard scrolling from a visible header link used. No content/UI code modified to satisfy inspection."
+    },
+    "publication": "Local only; no staging, commit, push or deployment. Remaining owners, whole-course integration, rights/public-checkout gates and dev/Pages release remain open."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор.md",
+      "before_sha256": "30f6c8d2da4c7fcf3607ef4649eb74e077286b5e1e538c18e7cad6dee3791874",
+      "after_sha256": "e8fb96cadc936fe8e67882bb7ddba847ace1d6f6249117fbd6ac3c820b456d9d",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-28\nlast_verified: 2026-10-28\n",
+          "new": "last_updated: 2026-11-03\nlast_verified: 2026-11-03\nreference_terms:\n  - label: Генератор и общий дискриминатор\n    label_en: Generator and shared discriminator\n    anchor: gan-architecture\n  - label: Логиты, BCE и цель minimax\n    label_en: Logits, BCE and the minimax objective\n    anchor: gan-logits\n  - label: Minimax и non-saturating loss\n    label_en: Minimax and non-saturating generator losses\n    anchor: gan-nonsaturating\n  - label: Оптимальный дискриминатор и JS\n    label_en: Optimal discriminator and Jensen–Shannon divergence\n    anchor: gan-optimal-d\n  - label: GAN для двумерного Gaussian\n    label_en: A GAN for a two-dimensional Gaussian\n    anchor: gan-gaussian\n  - label: Чередование update_D и update_G\n    label_en: Alternating discriminator and generator updates\n    anchor: gan-alternating-updates\n  - label: Заморозка D, detach и no_grad\n    label_en: Frozen discriminator, detach and no_grad\n    anchor: gan-input-gradients\n  - label: Какой optimizer меняет параметры\n    label_en: Optimizer parameter ownership\n    anchor: gan-parameter-ownership\n  - label: Полный Gaussian-эксперимент\n    label_en: Complete Gaussian training experiment\n    anchor: gan-toy-training\n  - label: Потери GAN и проверка распределения\n    label_en: GAN losses and distribution checks\n    anchor: gan-training-diagnostics\n  - label: DCGAN — пять транспонированных свёрток\n    label_en: DCGAN generator shapes and five transposed convolutions\n    anchor: dcgan-generator\n  - label: DCGAN — свёртки и LeakyReLU\n    label_en: DCGAN discriminator and LeakyReLU\n    anchor: dcgan-discriminator\n  - label: BatchNorm в варианте D2L и статье DCGAN\n    label_en: BatchNorm in the D2L and original DCGAN variants\n    anchor: dcgan-bn-variant\n  - label: Полный шаг DCGAN и диапазон пикселей\n    label_en: A complete DCGAN step and pixel ranges\n    anchor: dcgan-image-step\n  - label: BatchNorm buffers при чередовании G и D\n    label_en: BatchNorm buffers during alternating updates\n    anchor: dcgan-buffers\n  - label: Генерация и eval-состояние\n    label_en: Sampling and eval state\n    anchor: gan-sampling\n  - label: Mode collapse и покрытие данных\n    label_en: Mode collapse and distribution coverage\n    anchor: gan-mode-collapse\n  - label: Unconditional GAN и метки классов\n    label_en: Unconditional GANs and class labels\n    anchor: gan-labels\n"
+        },
+        {
+          "old": "### Check parameter ownership in an actual alternating step",
+          "new": "### Input gradients when discriminator weights are frozen\n\nTake a scalar generator $G_w(z)=wz$ and discriminator logit\n$a=vG_w(z)+b$. With $z=2$, $w=0.1$, $v=3$ and $b=-1$, the generated value\nis 0.2, the logit is $-0.4$, and $q=\\sigma(a)\\approx0.401312$.\nFor the non-saturating generator loss $L=-\\log q$, the chain rule gives\n\n$$\n\\begin{aligned}\n\\frac{\\partial L}{\\partial w}&=(q-1)vz,\\\\\n\\frac{\\partial L}{\\partial v}&=(q-1)wz,\\\\\n\\frac{\\partial L}{\\partial b}&=q-1.\n\\end{aligned}\n$$\n\nThe generator-weight derivative is approximately $-3.592126$. Computing it\nrequires the input derivative of D, here $v=3$. It does not require updating\n$v$ or $b$. Setting D's parameter flags to `requires_grad=False` therefore\npreserves this generator derivative in the ordinary grad mode.\n\nDetaching $G_w(z)$ removes the connection back to $w$. D's own parameters can\nstill receive derivatives, but G cannot learn from that detached input.\nRunning D under `no_grad()` removes the recorded D computation as well, so\nthis loss alone has no backward graph. These cases can produce the same\nnumerical loss while providing different training signals.\n\n| Forward setup | G weight gradient | D weight gradient |\n| --- | --- | --- |\n| Both parameter sets trainable | −3.592126 | −0.119738 |\n| D parameters frozen | −3.592126 | None |\n| Generated input detached | None | −0.119738 |\n| D forward under no_grad | No backward graph | No backward graph |\n\nThe following program constructs fresh scalar models for each row. It performs\nno optimizer step, so it isolates graph construction and gradient accumulation\nfrom the separate decision of which optimizer to call.\n\n```python\nimport torch\nfrom torch import nn\nfrom torch.nn import functional as F\n\nfrozen_routes = {}\nfor route in [\"ordinary\", \"frozen_D\", \"detached_fake\", \"no_grad_D\"]:\n    scalar_G = nn.Linear(1, 1, bias=False, dtype=torch.float64)\n    scalar_D = nn.Linear(1, 1, dtype=torch.float64)\n    with torch.no_grad():\n        scalar_G.weight.fill_(.1)\n        scalar_D.weight.fill_(3.)\n        scalar_D.bias.fill_(-1.)\n    if route == \"frozen_D\":\n        scalar_D.requires_grad_(False)\n    scalar_noise = torch.tensor([[2.]], dtype=torch.float64)\n    scalar_fake = scalar_G(scalar_noise)\n    if route == \"detached_fake\":\n        scalar_fake = scalar_fake.detach()\n    if route == \"no_grad_D\":\n        with torch.no_grad():\n            scalar_logit = scalar_D(scalar_fake)\n    else:\n        scalar_logit = scalar_D(scalar_fake)\n    scalar_loss = F.binary_cross_entropy_with_logits(\n        scalar_logit, torch.ones_like(scalar_logit))\n    if scalar_loss.requires_grad:\n        scalar_loss.backward()\n    g_grad = None if scalar_G.weight.grad is None else scalar_G.weight.grad.item()\n    d_grad = None if scalar_D.weight.grad is None else scalar_D.weight.grad.item()\n    frozen_routes[route] = (scalar_loss.item(), g_grad, d_grad)\n\nq_scalar = torch.sigmoid(torch.tensor(-.4, dtype=torch.float64)).item()\nexpected_g = (q_scalar - 1) * 3 * 2\nexpected_d = (q_scalar - 1) * .1 * 2\nfor route in [\"ordinary\", \"frozen_D\"]:\n    assert abs(frozen_routes[route][1] - expected_g) < 1e-12\nfor route in [\"ordinary\", \"detached_fake\"]:\n    assert abs(frozen_routes[route][2] - expected_d) < 1e-12\nassert frozen_routes[\"frozen_D\"][2] is None\nassert frozen_routes[\"detached_fake\"][1] is None\nassert frozen_routes[\"no_grad_D\"][1:] == (None, None)\nassert max(x[0] for x in frozen_routes.values()) - min(x[0] for x in frozen_routes.values()) < 1e-12\nprint(frozen_routes)\n```\n\nIn an alternating training loop, restore D's parameter flags before its next\nupdate if they were temporarily disabled. Changing the flags does not clear\ngradients left by an earlier backward pass. The fresh-model construction above\navoids confusing those old values with newly computed gradients.\n\nThe [PyTorch autograd notes, Setting requires_grad and Grad Modes](https://docs.pytorch.org/docs/2.14/notes/autograd.html#setting-requires-grad)\ndefine the recording rule: an operation in grad mode is recorded when an input\nrequires gradients. Here that input can be the generated tensor, even when D's\nparameter tensors do not require them. This program uses no BatchNorm or\nDropout. Their train/eval behaviour is a separate choice, demonstrated by the\nDCGAN state counters below; `eval()` does not itself disable autograd.\n\n### Check parameter ownership in an actual alternating step"
+        },
+        {
+          "old": "## A generator and a learned discriminator",
+          "new": "<a id=\"gan-architecture\"></a>\n\n## A generator and a learned discriminator"
+        },
+        {
+          "old": "The discriminator is a binary classifier",
+          "new": "<a id=\"gan-logits\"></a>\n\nThe discriminator is a binary classifier"
+        },
+        {
+          "old": "## Why the generator usually uses a different loss",
+          "new": "<a id=\"gan-nonsaturating\"></a>\n\n## Why the generator usually uses a different loss"
+        },
+        {
+          "old": "## What the idealized equilibrium establishes",
+          "new": "<a id=\"gan-optimal-d\"></a>\n\n## What the idealized equilibrium establishes"
+        },
+        {
+          "old": "## Fit a two-dimensional Gaussian first",
+          "new": "<a id=\"gan-gaussian\"></a>\n\n## Fit a two-dimensional Gaussian first"
+        },
+        {
+          "old": "## The two source update functions",
+          "new": "<a id=\"gan-alternating-updates\"></a>\n\n## The two source update functions"
+        },
+        {
+          "old": "### Input gradients when discriminator weights are frozen",
+          "new": "<a id=\"gan-input-gradients\"></a>\n\n### Input gradients when discriminator weights are frozen"
+        },
+        {
+          "old": "### Check parameter ownership in an actual alternating step",
+          "new": "<a id=\"gan-parameter-ownership\"></a>\n\n### Check parameter ownership in an actual alternating step"
+        },
+        {
+          "old": "### Run the Gaussian experiment without plotting dependencies",
+          "new": "<a id=\"gan-toy-training\"></a>\n\n### Run the Gaussian experiment without plotting dependencies"
+        },
+        {
+          "old": "In the executed CPU run above,",
+          "new": "<a id=\"gan-training-diagnostics\"></a>\n\nIn the executed CPU run above,"
+        },
+        {
+          "old": "## DCGAN: turn a noise vector into an RGB image",
+          "new": "<a id=\"dcgan-generator\"></a>\n\n## DCGAN: turn a noise vector into an RGB image"
+        },
+        {
+          "old": "## The convolutional discriminator",
+          "new": "<a id=\"dcgan-discriminator\"></a>\n\n## The convolutional discriminator"
+        },
+        {
+          "old": "The D2L teaching network includes BatchNorm",
+          "new": "<a id=\"dcgan-bn-variant\"></a>\n\nThe D2L teaching network includes BatchNorm"
+        },
+        {
+          "old": "## Range, training state, and a complete image-shaped step",
+          "new": "<a id=\"dcgan-image-step\"></a>\n\n## Range, training state, and a complete image-shaped step"
+        },
+        {
+          "old": "An unchanged parameter tensor does not mean",
+          "new": "<a id=\"dcgan-buffers\"></a>\n\nAn unchanged parameter tensor does not mean"
+        },
+        {
+          "old": "## Sampling, coverage, and downstream labels",
+          "new": "<a id=\"gan-sampling\"></a>\n\n## Sampling, coverage, and downstream labels"
+        },
+        {
+          "old": "A generator that emits only a few convincing outputs",
+          "new": "<a id=\"gan-mode-collapse\"></a>\n\nA generator that emits only a few convincing outputs"
+        },
+        {
+          "old": "This DCGAN is unconditional:",
+          "new": "<a id=\"gan-labels\"></a>\n\nThis DCGAN is unconditional:"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "c15c6aaf940e7e843aed29156464c733255aa9363f7912615676c5d0366a601a",
+      "after_sha256": "21422e1f46564ed8b20d472daf4393b175b4eb2bf10972ca8e6e5c41e7c66406",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор|GAN и DCGAN — генератор и дискриминатор]]",
+          "new": "- [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор|GAN и DCGAN — генератор и дискриминатор]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-architecture|Генератор и общий дискриминатор]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-logits|Логиты, BCE и цель minimax]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-nonsaturating|Minimax и non-saturating loss]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-optimal-d|Оптимальный дискриминатор и JS]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-gaussian|GAN для двумерного Gaussian]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-alternating-updates|Чередование update_D и update_G]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-input-gradients|Заморозка D, detach и no_grad]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-parameter-ownership|Какой optimizer меняет параметры]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-toy-training|Полный Gaussian-эксперимент]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-training-diagnostics|Потери GAN и проверка распределения]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#dcgan-generator|DCGAN — пять транспонированных свёрток]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#dcgan-discriminator|DCGAN — свёртки и LeakyReLU]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#dcgan-bn-variant|BatchNorm в варианте D2L и статье DCGAN]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#dcgan-image-step|Полный шаг DCGAN и диапазон пикселей]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#dcgan-buffers|BatchNorm buffers при чередовании G и D]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-sampling|Генерация и eval-состояние]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-mode-collapse|Mode collapse и покрытие данных]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-labels|Unconditional GAN и метки классов]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "0be3b535ea84e595bc9c222932e8f63403f8a4f1d6fe70cbd5bc434979424404",
+      "after_sha256": "46f046086836bd2729fef8f646200367a40f223c1119ba017a3cf8793b914450",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор|GAN and DCGAN: generator and discriminator]] · **EN original**",
+          "new": "- [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор|GAN and DCGAN: generator and discriminator]] · **EN original**\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-architecture|Generator and shared discriminator]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-logits|Logits, BCE and the minimax objective]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-nonsaturating|Minimax and non-saturating generator losses]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-optimal-d|Optimal discriminator and Jensen–Shannon divergence]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-gaussian|A GAN for a two-dimensional Gaussian]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-alternating-updates|Alternating discriminator and generator updates]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-input-gradients|Frozen discriminator, detach and no_grad]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-parameter-ownership|Optimizer parameter ownership]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-toy-training|Complete Gaussian training experiment]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-training-diagnostics|GAN losses and distribution checks]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#dcgan-generator|DCGAN generator shapes and five transposed convolutions]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#dcgan-discriminator|DCGAN discriminator and LeakyReLU]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#dcgan-bn-variant|BatchNorm in the D2L and original DCGAN variants]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#dcgan-image-step|A complete DCGAN step and pixel ranges]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#dcgan-buffers|BatchNorm buffers during alternating updates]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-sampling|Sampling and eval state]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-mode-collapse|Mode collapse and distribution coverage]]\n  - [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор#gan-labels|Unconditional GANs and class labels]]"
+        }
+      ]
+    }
+  ],
+  "sourceComparison": [
+    {
+      "source": "docs/audit/2026-10-28-gan-dcgan.md",
+      "read": "Entire report and source-packet README read. Current baseline30f6c8d2 is exactly the accepted a55940b1 chapter after reversing only recorded route/math edits with beforeReaderRouteNavigation. Prior complete D2L gan.md/dcgan.md and selected Goodfellow/Radford comparisons reused on that verified boundary; not newly claimed entire-course reads."
+    },
+    {
+      "source": "05 Источники/Originals/gan-dcgan-2026-10-28/d2l/gan.md",
+      "sha256": "b21af3c808d49ccd4ee184385d31e025b9d65249802c76905d6285d222acb9f6",
+      "read": "Current selected architecture, objective, Gaussian/G/D sections freshly read through the start of training. Remaining source review reused as above. All eight complete source bodies and unchanged source assets independently checked."
+    },
+    {
+      "source": "05 Источники/Originals/gan-dcgan-2026-10-28/d2l/dcgan.md",
+      "sha256": "4288365b096d8a2713a89f79e3b6e57483f42c4684a0a97c902da27bb2b31a73",
+      "read": "Original generator introduction and full PyTorch G_block freshly inspected; rest of the source comparison reused on the exact accepted boundary. No invented claim of a new full source pass."
+    },
+    {
+      "source": "https://docs.pytorch.org/docs/2.14/notes/autograd.html#locally-disabling-gradient-computation",
+      "read": "Complete Locally disabling gradient computation section, including Setting requires_grad, Grad Modes/default/no-grad/inference and Evaluation Mode, freshly read. New scalar calculation is explicitly independent, not copied from PyTorch or D2L.",
+      "use": "Recorded operations depend on grad-requiring inputs, not solely on whether D weights are trainable. Fresh four-route example distinguishes input gradients, parameter accumulation, detach and no_grad. Stale grads and BatchNorm state caveats retained."
+    }
+  ],
+  "remaining": [
+    "This is a basic GAN/DCGAN owner, not all adversarial generative models or a complete image-training course.",
+    "Existing D2L/animation originals retained; no new source image, generated diagram, dataset or pretrained weights added.",
+    "Remaining owners, semantic course integration, public-checkout acceptance and dev/Pages release remain open."
+  ]
+}

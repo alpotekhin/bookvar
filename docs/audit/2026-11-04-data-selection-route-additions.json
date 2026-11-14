@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "kind": "data-selection-whole-owner-and-subject-review",
+  "review_date": "2026-11-04",
+  "files": [
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting.md",
+      "before_sha256": "18aa3e0c623deceaf7bd475e03f045c7a5e5e8b68ccc7921297e106fa4b04fe4",
+      "after_sha256": "c65a1d01f7ba7a5620f4ca37a2c633da5b40bb58a1f838c94bf066be1398dbc7",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29\nlast_verified: 2026-10-29\n",
+          "new": "last_updated: 2026-11-04\nlast_verified: 2026-11-04\nreference_terms:\n  - anchor: selection-problem\n    label: \"Отбор из размеченного пула и бюджет обучения\"\n    label_en: \"Labelled-pool selection and training budgets\"\n  - anchor: el2n\n    label: \"EL2N: норма ошибки и усреднение по запускам\"\n    label_en: \"EL2N: error norms and averaging across runs\"\n  - anchor: grand\n    label: \"GraNd, якобиан модели и направление градиента\"\n    label_en: \"GraNd, model Jacobians and gradient direction\"\n  - anchor: forgetting\n    label: \"Forgetting и примеры, которые не были выучены\"\n    label_en: \"Forgetting and never-learned examples\"\n  - anchor: stable-identifiers\n    label: \"Привязка оценок к ID и порядок DataLoader\"\n    label_en: \"Score IDs and DataLoader ordering\"\n  - anchor: reproduction\n    label: \"Воспроизведение Data Diet и ошибка checkpoint zero\"\n    label_en: \"Data Diet reproduction and the checkpoint-zero bug\"\n  - anchor: selection-controls\n    label: \"Шум меток, редкие классы и контроль отбора\"\n    label_en: \"Label noise, rare classes and selection controls\"\n  - anchor: confident-learning\n    label: \"Confident Learning и совместное распределение меток\"\n    label_en: \"Confident Learning and the label joint distribution\"\n  - anchor: cl-out-of-fold\n    label: \"Out-of-fold predictions без утечки разметки\"\n    label_en: \"Out-of-fold predictions without label leakage\"\n  - anchor: cl-class-thresholds\n    label: \"Пороги классов и confident counts\"\n    label_en: \"Class thresholds and confident counts\"\n  - anchor: cl-joint-calibration\n    label: \"Калибровка confident joint и условные вероятности\"\n    label_en: \"Confident-joint calibration and conditional probabilities\"\n  - anchor: cl-candidate-ranking\n    label: \"Оценка числа ошибок и порядок ручной проверки\"\n    label_en: \"Estimated error counts and review ranking\"\n  - anchor: cl-paper-software\n    label: \"Различия статьи и реализации Cleanlab\"\n    label_en: \"Differences between the paper and Cleanlab\"\n  - anchor: cl-review-decisions\n    label: \"Ошибка метки, ошибка модели и решение ревьюера\"\n    label_en: \"Label errors, model errors and review decisions\"\n  - anchor: cl-theory-evaluation\n    label: \"Гарантии Confident Learning и проверка результата\"\n    label_en: \"Confident Learning guarantees and evaluation\"\n  - anchor: selection-cost\n    label: \"Окупаемость предварительного scoring\"\n    label_en: \"Amortizing preliminary scoring costs\"\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-selection-2026-10-28/joost_train_input_norm_vs_grad_norm_sorted.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-selection-2026-10-28/joost_train_input_norm_vs_grad_norm_sorted.png|Original Data Diet reproduction plot: sorted CIFAR-10 input norms and gradient norms at initialization, with rank correlation 0.97]]\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-selection-2026-10-28/figure11_repro_cifar10_hlb.svg]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-selection-2026-10-28/figure11_repro_cifar10_hlb.svg|Original CIFAR-10 pruning curves comparing random selection, EL2N and GraNd measured at initialization or after one training epoch]]\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/confident-learning-2026-10-29/figure1-process.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/confident-learning-2026-10-29/figure1-process.png|Confident Learning Figure 1: predicted probabilities, confident counts, estimated label joint and pruning decisions]]\n"
+        },
+        {
+          "old": "### Each prediction must come from a model that did not train on that record\n",
+          "new": "<a id=\"cl-out-of-fold\"></a>\n\n### Each prediction must come from a model that did not train on that record\n"
+        },
+        {
+          "old": "### Class thresholds and the records that pass them\n",
+          "new": "<a id=\"cl-class-thresholds\"></a>\n\n### Class thresholds and the records that pass them\n"
+        },
+        {
+          "old": "### From ten counted records to an estimate for twelve\n",
+          "new": "<a id=\"cl-joint-calibration\"></a>\n\n### From ten counted records to an estimate for twelve\n"
+        },
+        {
+          "old": "### Counts, candidates, and a review order\n",
+          "new": "<a id=\"cl-candidate-ranking\"></a>\n\n### Counts, candidates, and a review order\n"
+        },
+        {
+          "old": "### Where the paper and the software differ\n",
+          "new": "<a id=\"cl-paper-software\"></a>\n\n### Where the paper and the software differ\n"
+        },
+        {
+          "old": "### What a reviewer must decide\n",
+          "new": "<a id=\"cl-review-decisions\"></a>\n\n### What a reviewer must decide\n"
+        },
+        {
+          "old": "### What the theory and experiments establish\n",
+          "new": "<a id=\"cl-theory-evaluation\"></a>\n\n### What the theory and experiments establish\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/confident-learning-2026-10-29/figure2-joint-estimation.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/confident-learning-2026-10-29/figure2-joint-estimation.png|Confident Learning Figure 2: true joint, estimated joint and absolute differences for all CIFAR-10 class pairs]]\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров.md",
+      "before_sha256": "f74660cc1515d21e0e423e2e2ee232fdb641765a7b8a43cd8aa4424dfc8c19e6",
+      "after_sha256": "b88c6ecb73e2a3a1a28c3266975213307cefdf5930b1627488615cbb4ed6130e",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-28\nlast_verified: 2026-10-28\n",
+          "new": "last_updated: 2026-11-04\nlast_verified: 2026-11-04\nreference_terms:\n  - anchor: annotation-loop\n    label: \"Пул, размеченные данные и цикл запросов\"\n    label_en: \"The pool, labelled data and query loop\"\n  - anchor: uncertainty\n    label: \"Least confidence, margin и entropy\"\n    label_en: \"Least confidence, margin and entropy\"\n  - anchor: al-score-comparison\n    label: \"Разные запросы при трёх классах\"\n    label_en: \"Different queries with three classes\"\n  - anchor: committee\n    label: \"Query-by-committee и конкурирующие гипотезы\"\n    label_en: \"Query-by-committee and competing hypotheses\"\n  - anchor: al-vote-entropy\n    label: \"Энтропия голосов комитета\"\n    label_en: \"Committee vote entropy\"\n  - anchor: al-consensus-disagreement\n    label: \"Энтропия консенсуса и расхождение участников\"\n    label_en: \"Consensus entropy and member disagreement\"\n  - anchor: expected-gradient\n    label: \"Ожидаемая длина градиента без известной метки\"\n    label_en: \"Expected gradient length without known labels\"\n  - anchor: executable-loop\n    label: \"Полный цикл active learning с ID и oracle\"\n    label_en: \"A complete active-learning loop with IDs and an oracle\"\n  - anchor: batch-and-diversity\n    label: \"Разнообразие запросов и размер пакета разметки\"\n    label_en: \"Query diversity and annotation batch size\"\n  - anchor: evaluation-and-cost\n    label: \"Оценивание active learning и стоимость разметки\"\n    label_en: \"Active-learning evaluation and annotation cost\"\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/active-learning-2026-10-28/active-learning.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/active-learning-2026-10-28/active-learning.png|Original modAL workflow from data gathering through training, uncertainty scoring, labelling and retraining]]\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/active-learning-2026-10-28/motivating-example.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/active-learning-2026-10-28/motivating-example.png|Original modAL probability regions with black unlabelled candidates and coloured labelled points]]\n"
+        },
+        {
+          "old": "### Three strategies need not select the same example\n",
+          "new": "<a id=\"al-score-comparison\"></a>\n\n### Three strategies need not select the same example\n"
+        },
+        {
+          "old": "### Vote entropy\n",
+          "new": "<a id=\"al-vote-entropy\"></a>\n\n### Vote entropy\n"
+        },
+        {
+          "old": "### Consensus entropy and disagreement with the consensus\n",
+          "new": "<a id=\"al-consensus-disagreement\"></a>\n\n### Consensus entropy and disagreement with the consensus\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding.md",
+      "before_sha256": "ed07daa1b7b286ad7e49739e8baa0c3e59223cb195062fe4240dbe4eba70e65a",
+      "after_sha256": "a00ac02115b9ca70772fdeb438b4ff5a547df5f65f3ae9732fe745a961504e61",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-28\nlast_verified: 2026-10-28\n",
+          "new": "last_updated: 2026-11-04\nlast_verified: 2026-11-04\nreference_terms:\n  - anchor: coverage-objective\n    label: \"Расстояние до множества и радиус покрытия\"\n    label_en: \"Distance to a set and covering radius\"\n  - anchor: farthest-first\n    label: \"Farthest-first и обновление ближайших расстояний\"\n    label_en: \"Farthest-first and nearest-distance updates\"\n  - anchor: coverage-trace\n    label: \"Пошаговый выбор центров на шести точках\"\n    label_en: \"A six-point centre-selection trace\"\n  - anchor: approximation-guarantee\n    label: \"Доказательство 2-аппроксимации k-center\"\n    label_en: \"The k-center 2-approximation proof\"\n  - anchor: implementation\n    label: \"Stable IDs, исключение выбранных и вырожденные случаи\"\n    label_en: \"Stable IDs, exclusion and degenerate cases\"\n  - anchor: representation-and-metric\n    label: \"Нормировка признаков, метрика и cosine distance\"\n    label_en: \"Feature normalization, metrics and cosine distance\"\n  - anchor: outliers-and-labels\n    label: \"Robust k-center и ограничения loss bound\"\n    label_en: \"Robust k-center and loss-bound assumptions\"\n  - anchor: coreset-versus-centres\n    label: \"Взвешенный coreset и семейство запросов\"\n    label_en: \"Weighted coresets and query families\"\n  - anchor: grid-compression\n    label: \"Сеточное сжатие и аддитивная ошибка покрытия\"\n    label_en: \"Grid compression and additive coverage error\"\n  - anchor: herding\n    label: \"Herding, динамические веса и сходимость среднего\"\n    label_en: \"Herding, dynamic weights and mean convergence\"\n  - anchor: mean-error\n    label: \"Herding и минимизация следующей ошибки среднего\"\n    label_en: \"Herding versus the next mean-error minimum\"\n  - anchor: geometric-selection-ledger\n    label: \"Версия признаков, геометрическая ошибка и task metric\"\n    label_en: \"Feature versions, geometric errors and task metrics\"\n"
+        },
+        {
+          "old": "For k-center in the Euclidean plane, Erickson's §J.11 gives a geometric\n",
+          "new": "<a id=\"grid-compression\"></a>\n\nFor k-center in the Euclidean plane, Erickson's §J.11 gives a geometric\n"
+        },
+        {
+          "old": "For a dataset-selection experiment, retain the feature extractor version,\n",
+          "new": "<a id=\"geometric-selection-ledger\"></a>\n\nFor a dataset-selection experiment, retain the feature extractor version,\n"
+        },
+        {
+          "old": "![[Assets/Sources/Scikit-learn MOOC/figures/clustering_quiz_kmeans_not_scaled.svg|K-means on original features]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/selection-metric-2026-11-04/mooc-kmeans-not-scaled.svg|K-means on original features]]\n"
+        },
+        {
+          "old": "![[Assets/Sources/Scikit-learn MOOC/figures/clustering_quiz_kmeans_scaled.svg|K-means on scaled features]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/selection-metric-2026-11-04/mooc-kmeans-scaled.svg|K-means on scaled features]]\n"
+        },
+        {
+          "old": "For the six-point example, all distances are absolute differences:\n\n<a id=\"coverage-trace\"></a>\n\n| Selected coordinates | $a(0)$ | $a(1)$ | $a(4)$ | $a(5)$ | $a(9)$ | $a(10)$ | Radius |\n| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n| $\\{0\\}$ | 0 | 1 | 4 | 5 | 9 | 10 | 10 |\n| $\\{0,10\\}$ | 0 | 1 | 4 | 5 | 1 | 0 | 5 |\n| $\\{0,10,5\\}$ | 0 | 1 | 1 | 0 | 1 | 0 | 1 |\n",
+          "new": "For the six-point example, all distances are absolute differences.\nEach column below gives the distances to the selected set named in its header;\nthe last row is the largest distance in that column.\n\n<a id=\"coverage-trace\"></a>\n\n| Point | $\\{0\\}$ | $\\{0,10\\}$ | $\\{0,10,5\\}$ |\n| --- | ---: | ---: | ---: |\n| 0 | 0 | 0 | 0 |\n| 1 | 1 | 1 | 1 |\n| 4 | 4 | 4 | 1 |\n| 5 | 5 | 5 | 0 |\n| 9 | 9 | 1 | 1 |\n| 10 | 10 | 0 | 0 |\n| Radius | 10 | 5 | 1 |\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "c7a38a8d74fa70663b6a3a35c020e43fdc9be56b407d9e558478a0b3a2d55612",
+      "after_sha256": "fee12124ba8a1f90e2b8ab40de69efd8cf5fad10ef0623263a5431c0f5dfbb70",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training|Данные и предобучение]]\n- [[00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса|Дедупликация, PII и контроль качества корпуса]]\n- [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws|Законы масштабирования]]\n- [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism|Конвейерное обучение]]\n- [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений|Контрастивное предобучение — SimCLR и проверка представлений]]\n- [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch|Обучение с частичной разметкой — pseudo-labeling и FixMatch]]\n- [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества|Отбор данных — стоимость, шарды и проверка качества]]\n- [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting|Отбор обучающих примеров — EL2N, GraNd и forgetting]]\n- [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration|Отказоустойчивость и управление вычислительным кластером]]\n- [[00 Учебник/11 Pre-training и Scaling/42 Next-token prediction|Предсказание следующего токена]]\n- [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP|Процессы, коллективные операции и DDP]]\n- [[00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision|Распределённое обучение и смешанная точность]]\n- [[00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных|Сбор, очистка и смеси данных]]\n- [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints|Сеть, хранилище и распределённые checkpoints]]\n- [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы|Синтетические данные и учебные программы]]\n- [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции|Синтетические изображения и перенос из симуляции]]\n- [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров|Active learning — запрос меток и выбор примеров]]\n",
+          "new": "  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#coverage-objective|Расстояние до множества и радиус покрытия]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#farthest-first|Farthest-first и обновление ближайших расстояний]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#coverage-trace|Пошаговый выбор центров на шести точках]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#approximation-guarantee|Доказательство 2-аппроксимации k-center]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#implementation|Stable IDs, исключение выбранных и вырожденные случаи]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#representation-and-metric|Нормировка признаков, метрика и cosine distance]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#outliers-and-labels|Robust k-center и ограничения loss bound]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#coreset-versus-centres|Взвешенный coreset и семейство запросов]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#grid-compression|Сеточное сжатие и аддитивная ошибка покрытия]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#herding|Herding, динамические веса и сходимость среднего]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#mean-error|Herding и минимизация следующей ошибки среднего]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#geometric-selection-ledger|Версия признаков, геометрическая ошибка и task metric]]\n- [[00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training|Данные и предобучение]]\n- [[00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса|Дедупликация, PII и контроль качества корпуса]]\n- [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws|Законы масштабирования]]\n- [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism|Конвейерное обучение]]\n- [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений|Контрастивное предобучение — SimCLR и проверка представлений]]\n- [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch|Обучение с частичной разметкой — pseudo-labeling и FixMatch]]\n- [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества|Отбор данных — стоимость, шарды и проверка качества]]\n- [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting|Отбор обучающих примеров — EL2N, GraNd и forgetting]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#selection-problem|Отбор из размеченного пула и бюджет обучения]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#el2n|EL2N: норма ошибки и усреднение по запускам]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#grand|GraNd, якобиан модели и направление градиента]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#forgetting|Forgetting и примеры, которые не были выучены]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#stable-identifiers|Привязка оценок к ID и порядок DataLoader]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#reproduction|Воспроизведение Data Diet и ошибка checkpoint zero]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#selection-controls|Шум меток, редкие классы и контроль отбора]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#confident-learning|Confident Learning и совместное распределение меток]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#cl-out-of-fold|Out-of-fold predictions без утечки разметки]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#cl-class-thresholds|Пороги классов и confident counts]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#cl-joint-calibration|Калибровка confident joint и условные вероятности]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#cl-candidate-ranking|Оценка числа ошибок и порядок ручной проверки]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#cl-paper-software|Различия статьи и реализации Cleanlab]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#cl-review-decisions|Ошибка метки, ошибка модели и решение ревьюера]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#cl-theory-evaluation|Гарантии Confident Learning и проверка результата]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#selection-cost|Окупаемость предварительного scoring]]\n- [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration|Отказоустойчивость и управление вычислительным кластером]]\n- [[00 Учебник/11 Pre-training и Scaling/42 Next-token prediction|Предсказание следующего токена]]\n- [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP|Процессы, коллективные операции и DDP]]\n- [[00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision|Распределённое обучение и смешанная точность]]\n- [[00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных|Сбор, очистка и смеси данных]]\n- [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints|Сеть, хранилище и распределённые checkpoints]]\n- [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы|Синтетические данные и учебные программы]]\n- [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции|Синтетические изображения и перенос из симуляции]]\n- [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров|Active learning — запрос меток и выбор примеров]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#annotation-loop|Пул, размеченные данные и цикл запросов]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#uncertainty|Least confidence, margin и entropy]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#al-score-comparison|Разные запросы при трёх классах]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#committee|Query-by-committee и конкурирующие гипотезы]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#al-vote-entropy|Энтропия голосов комитета]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#al-consensus-disagreement|Энтропия консенсуса и расхождение участников]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#expected-gradient|Ожидаемая длина градиента без известной метки]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#executable-loop|Полный цикл active learning с ID и oracle]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#batch-and-diversity|Разнообразие запросов и размер пакета разметки]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#evaluation-and-cost|Оценивание active learning и стоимость разметки]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "3e799e4a5447083c8381e043281a513543612ecb155e8b041edcf707512aa26e",
+      "after_sha256": "5e4a19f301e8e0fe06f17dc866835105377695c53a1fcf39dc726c884264599d",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений|Contrastive pre-training: SimCLR]] · **EN original**\n- [[00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training|Data and pre-training]]\n- [[00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных|Data collection, cleaning, and mixtures]]\n- [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества|Data selection: cost, shards, and quality checks]] · **EN original**\n- [[00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса|Deduplication, PII, and corpus quality]]\n- [[00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision|Distributed training and mixed precision]]\n- [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting|Example selection: EL2N, GraNd, and forgetting]] · **EN original**\n- [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism|Expert and hybrid parallelism]]\n- [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration|Fault tolerance and fleet orchestration]]\n- [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding|Geometric selection: k-center, coresets, and herding]] · **EN original**\n",
+          "new": "  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#annotation-loop|The pool, labelled data and query loop]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#uncertainty|Least confidence, margin and entropy]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#al-score-comparison|Different queries with three classes]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#committee|Query-by-committee and competing hypotheses]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#al-vote-entropy|Committee vote entropy]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#al-consensus-disagreement|Consensus entropy and member disagreement]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#expected-gradient|Expected gradient length without known labels]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#executable-loop|A complete active-learning loop with IDs and an oracle]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#batch-and-diversity|Query diversity and annotation batch size]]\n  - [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров#evaluation-and-cost|Active-learning evaluation and annotation cost]]\n- [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений|Contrastive pre-training: SimCLR]] · **EN original**\n- [[00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training|Data and pre-training]]\n- [[00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных|Data collection, cleaning, and mixtures]]\n- [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества|Data selection: cost, shards, and quality checks]] · **EN original**\n- [[00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса|Deduplication, PII, and corpus quality]]\n- [[00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision|Distributed training and mixed precision]]\n- [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting|Example selection: EL2N, GraNd, and forgetting]] · **EN original**\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#selection-problem|Labelled-pool selection and training budgets]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#el2n|EL2N: error norms and averaging across runs]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#grand|GraNd, model Jacobians and gradient direction]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#forgetting|Forgetting and never-learned examples]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#stable-identifiers|Score IDs and DataLoader ordering]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#reproduction|Data Diet reproduction and the checkpoint-zero bug]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#selection-controls|Label noise, rare classes and selection controls]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#confident-learning|Confident Learning and the label joint distribution]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#cl-out-of-fold|Out-of-fold predictions without label leakage]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#cl-class-thresholds|Class thresholds and confident counts]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#cl-joint-calibration|Confident-joint calibration and conditional probabilities]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#cl-candidate-ranking|Estimated error counts and review ranking]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#cl-paper-software|Differences between the paper and Cleanlab]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#cl-review-decisions|Label errors, model errors and review decisions]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#cl-theory-evaluation|Confident Learning guarantees and evaluation]]\n  - [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting#selection-cost|Amortizing preliminary scoring costs]]\n- [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism|Expert and hybrid parallelism]]\n- [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration|Fault tolerance and fleet orchestration]]\n- [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding|Geometric selection: k-center, coresets, and herding]] · **EN original**\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#coverage-objective|Distance to a set and covering radius]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#farthest-first|Farthest-first and nearest-distance updates]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#coverage-trace|A six-point centre-selection trace]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#approximation-guarantee|The k-center 2-approximation proof]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#implementation|Stable IDs, exclusion and degenerate cases]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#representation-and-metric|Feature normalization, metrics and cosine distance]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#outliers-and-labels|Robust k-center and loss-bound assumptions]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#coreset-versus-centres|Weighted coresets and query families]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#grid-compression|Grid compression and additive coverage error]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#herding|Herding, dynamic weights and mean convergence]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#mean-error|Herding versus the next mean-error minimum]]\n  - [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding#geometric-selection-ledger|Feature versions, geometric errors and task metrics]]\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "f83ce1a449ed7898a99feff383bba3d36e6d38786c21c8e9ee7ec01aaad639b4",
+      "after_sha256": "956f870e999b6ad15642a0e2b5cf0925875a43e8d223acc554c0c4adfba60359",
+      "changes": [
+        {
+          "old": "assets:\n",
+          "new": "assets:\n  - {\"id\":\"mooc-scaling-04c1dd673b6b\",\"asset\":\"00 Учебник/Assets/Figures/curated/selection-metric-2026-11-04/mooc-kmeans-not-scaled.svg\",\"title\":\"Original k-means assignments before feature scaling\",\"author\":\"INRIA, scikit-learn MOOC contributors\",\"source_url\":\"https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/jupyter-book/clustering/clustering_quiz_m4_01.md\",\"source_image_url\":\"https://raw.githubusercontent.com/INRIA/scikit-learn-mooc/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/figures/clustering_quiz_kmeans_not_scaled.svg\",\"commit\":\"0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6\",\"source_asset\":\"Assets/Sources/Scikit-learn MOOC/figures/clustering_quiz_kmeans_not_scaled.svg\",\"source_asset_sha256\":\"04c1dd673b6b7690a0bc9e7c06358a43ec7b38e64c7cac401180bb9cf37ec2c8\",\"sha256\":\"04c1dd673b6b7690a0bc9e7c06358a43ec7b38e64c7cac401180bb9cf37ec2c8\",\"source_page_snapshot\":\"05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_quiz_m4_01.md.md\",\"source_viewbox\":[0,0,375.6672,325.18365],\"license\":\"CC BY 4.0\",\"license_url\":\"https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE\",\"license_evidence\":\"site/public/licenses/scikit-learn-mooc-0cc70c41-CC-BY-4.0.txt\",\"license_evidence_sha256\":\"f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f\",\"public_license_copy\":\"site/public/licenses/scikit-learn-mooc-0cc70c41-CC-BY-4.0.txt\",\"derivation\":\"source-svg-copy\",\"modifications\":\"None. Existing full course SVG retained byte-for-byte; no crop, redraw, translation, relabeling or recompression. The k-means example illustrates changes in feature geometry, not k-center accuracy.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"pinned-upstream-repository\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-04\",\"used_in\":[\"00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding.md\"]}\n  - {\"id\":\"mooc-scaling-bd2aae6c6eca\",\"asset\":\"00 Учебник/Assets/Figures/curated/selection-metric-2026-11-04/mooc-kmeans-scaled.svg\",\"title\":\"Original k-means assignments after feature scaling\",\"author\":\"INRIA, scikit-learn MOOC contributors\",\"source_url\":\"https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/jupyter-book/clustering/clustering_quiz_m4_01.md\",\"source_image_url\":\"https://raw.githubusercontent.com/INRIA/scikit-learn-mooc/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/figures/clustering_quiz_kmeans_scaled.svg\",\"commit\":\"0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6\",\"source_asset\":\"Assets/Sources/Scikit-learn MOOC/figures/clustering_quiz_kmeans_scaled.svg\",\"source_asset_sha256\":\"bd2aae6c6eca8e5951324b268c312dc52263a697e7de1d7b3040bc3df2310694\",\"sha256\":\"bd2aae6c6eca8e5951324b268c312dc52263a697e7de1d7b3040bc3df2310694\",\"source_page_snapshot\":\"05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_quiz_m4_01.md.md\",\"source_viewbox\":[0,0,375.6672,325.18365],\"license\":\"CC BY 4.0\",\"license_url\":\"https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE\",\"license_evidence\":\"site/public/licenses/scikit-learn-mooc-0cc70c41-CC-BY-4.0.txt\",\"license_evidence_sha256\":\"f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f\",\"public_license_copy\":\"site/public/licenses/scikit-learn-mooc-0cc70c41-CC-BY-4.0.txt\",\"derivation\":\"source-svg-copy\",\"modifications\":\"None. Existing full course SVG retained byte-for-byte; no crop, redraw, translation, relabeling or recompression. The k-means example illustrates changes in feature geometry, not k-center accuracy.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"pinned-upstream-repository\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-04\",\"used_in\":[\"00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding.md\"]}\n"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "status": "verified-local-delta",
+    "verified_date": "2026-11-05",
+    "scope": "Three complete chapter-input reads; original explanations,source excerpts,19 Python programs,35 display equations and nine original figures/captions retained. Added38 subject links per locale,six descriptive alts,two byte-identical curated SVG copies with provenance and a lossless coverage-table transpose. No translation,new scientific figure,whole-course acceptance or publication.",
+    "explanation": {
+      "historical_comparisons": [
+        "docs/audit/2026-10-28-data-selection-scores.md",
+        "docs/audit/2026-10-28-active-learning.md",
+        "docs/audit/2026-10-28-geometric-coresets.md",
+        "docs/audit/2026-10-29-confident-learning.md"
+      ],
+      "reuse_boundary": "The inverse journal reconstructs each exact reviewed input. Unchanged explanations reuse the historical selected-source comparisons,not a new claim to have read all source courses. Freshly checked Erickson §§J.10–J.11 and upstream MOOC SVG/license bytes; no new extended excerpt.",
+      "new_table": "All18 nearest distances and three radii independently recomputed by the new test. Original point/set semantics preserved."
+    },
+    "tests": {
+      "scoped": {
+        "files": 8,
+        "passed": 34,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-selection-current-scoped-20261105.log"
+      },
+      "built_and_receipts": {
+        "files": 2,
+        "passed": 208,
+        "html": 206,
+        "reading_receipts": 2,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-selection-reader-final-20261104.log"
+      },
+      "registry": "Full registry run had210 passes and one inventory failure after registering source-folder paths. Corrected by byte-identical curated copies; focused inventory/current-journal checks passed19 tests. The new owner test verifies all nine file hashes and both full MOOC-license copies.",
+      "initial_failures": "Stale CL chapter hash in the historical map and old MOOC filenames in one HTML assertion were updated to the actual current artifact. No assertion removed."
+    },
+    "examples": {
+      "programs": 19,
+      "data_selection": "Eight actual chapter programs execute with NumPy2.5.4,PyTorch2.14.1,sklearn1.9.1;300 probability controls,40 linear-gradient comparisons,32 forgetting histories and stable-ID cases.",
+      "active_learning": "Five actual chapter programs execute;1001 binary ranking cases,90 committees,60 autograd EGL cases,two annotation rounds.",
+      "geometric": "Six actual programs execute with NumPy2.3.5;1272 exhaustive metric cases,288 zero optima,120 grid queries,eight herding prefixes and16 error expansions. The unchanged historical Google adapter fails scalar array-to-float conversion in NumPy2.5.4; only that adapter required the older pinned NumPy. No universal version-compatibility claim.",
+      "confident_learning": "Three retained CL programs execute with OOF/permutation/joint controls;these are included in the19 total,not19+3.",
+      "scope": "CPU correctness fixtures,not model-quality,data-pruning,annotation-cost or GPU benchmarks. Code fences unchanged after execution,checked by exact-preservation tests."
+    },
+    "provenance": {
+      "mooc_revision": "0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6",
+      "source_svg_sha256": [
+        "04c1dd673b6b7690a0bc9e7c06358a43ec7b38e64c7cac401180bb9cf37ec2c8",
+        "bd2aae6c6eca8e5951324b268c312dc52263a697e7de1d7b3040bc3df2310694"
+      ],
+      "license": "CC BY4.0;full LICENSE text read,public copy and both SVGs byte-identical to pinned upstream.",
+      "license_sha256": "f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f"
+    },
+    "build": {
+      "pages": 2009,
+      "pagefind_html": 2013,
+      "seconds": 26.71,
+      "exit": 0,
+      "log": "/var/tmp/bookvar-selection-review-build-final-20261104.log"
+    },
+    "links": {
+      "broken": 0,
+      "exit": 0,
+      "log": "/var/tmp/bookvar-selection-links-final-20261104.log"
+    },
+    "size": {
+      "bytes": 856339294,
+      "files": 5626,
+      "limit": 1000000000,
+      "headroom": 143660706
+    },
+    "reader": {
+      "evidence": "docs/audit/evidence/2026-11-04-data-selection-reader",
+      "desktop": "All nine source figures and full captions personally inspected in the viewer. All35 display equations render without KaTeX errors. Final coverage table inspected at1280x900;617px table area,617px scroll width.",
+      "mobile": "At375x812 all nine image files load and fit the content width;all35 displays render without errors or internal math overflow. Final coverage table343/343 with all six points and three radii visible. One inherited CL table scrolls internally343/371;document does not overflow. Both complete MOOC figures inspected. CL matrix inspected at3x across left,centre and right panels including colour scale. Both modAL figures inspected full and enlarged. Original white image margins were retained.",
+      "routes": "Actual RU and EN reference clicks reached CL joint calibration,committee disagreement and the coverage trace. EN Next from active learning reached geometric selection and Previous returned. Both source-native English bodies render without unavailable-language fallback. Existing Russian page titles remain unchanged;no translation pass.",
+      "viewport": "Temporary375x812 and1280x900 overrides reset after QA.",
+      "stale_evidence": "mobile-coverage-trace-left.png is the pre-fix horizontally scrolling table;mobile-coverage-trace-final.png and desktop-coverage-trace-final.png are the accepted final layout."
+    },
+    "remaining": [
+      "58 of153 canonical owners still require the selected whole-owner route pass. Reading receipts are not completed-chapter counts.",
+      "Fresh whole-course completeness,remaining source-figure gaps,public-checkout/Pages-base checks and release remain open.",
+      "No stage,commit,push or deployment in this delta."
+    ]
+  }
+}

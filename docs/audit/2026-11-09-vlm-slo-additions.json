@@ -1,0 +1,156 @@
+{
+  "date": "2026-11-09",
+  "scope": "Read both editions of VLM evaluation and serving; separate EPD's offered-rate goodput from timely/correct answer rate, and index the chapter's mechanisms without duplicating their explanations.",
+  "review": {
+    "sources": [
+      "Singh et al., PMLR 267, evaluation metrics and §4.1/Figure 5 on PDF p. 6; Appendix E.3/Table 9 on PDF p. 16. PMLR publication agreement CC BY 4.0.",
+      "Stanford CS231n, Lecture 16, slide 50, and Winoground's paper §3.1–3.2 plus gated dataset card. The class slide contains third-party photos. It is linked in both editions; the existing local PNG is preserved as retired, without inferring redistribution rights."
+    ],
+    "example": "At offered load 3, 91/100 meet TTFT and 90/100 meet TPOT but only 84/100 meet both. The highest tested rate with joint attainment >=90% is 2 requests/s, while 90 timely responses in 50 s is 1.8 responses/s. No semantic correctness is measured by Figure 5.",
+    "validation": "18 extracted programs executed independently per locale. Original Figure 5 reproduced byte-for-byte, and the curated registry and archival crop checks passed. Local build: 2023 pages; 738 publication and 230 built-output tests; no broken internal links, fragments, or files. Both subject indexes regenerate from canonical metadata. The retired Stanford PNG is absent from both generated asset directories.",
+    "reader": "Both locales inspected in Chrome at 375 and 1280 CSS pixels. Seven reference links per locale; followed Winoground, goodput, and joint-quality links. Checked inline plot, viewer zoom and pan, original Stanford slide link, no page overflow, and no KaTeX errors.",
+    "limits": "Whole input reads and exact revised-section review; not a VLM benchmark, rights clearance of other inherited slides, course completeness, public checkout, Pages verification, or release."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md",
+      "before_sha256": "7158736c550f13fbe8deca537fc369ef87c94a38586dae167fbdc78d215e625a",
+      "after_sha256": "5d7230206ba7dbee856dd6a77c2e5543d128397f54256d8ed5d682adee5b49d6",
+      "lines": 710,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-20\nlast_verified: 2026-10-20",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-11-09"
+        },
+        {
+          "old": "<span id=\"2-как-winoground-изолирует-композиционность\"></span>\n## 2. Как Winoground проверяет соответствие пар\n\nНа слайде CS231n слева показаны чашка в траве и трава в чашке. В двух подписях используются одни и те же слова, но меняются роли объектов. Совпадение набора слов с изображением не позволяет выбрать правильную подпись.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/cs231n-lecture16-winoground.png]]\n\n*Ranjay Krishna и авторы курса Stanford CS231n, [Lecture 16, слайд 50](https://cs231n.stanford.edu/slides/2025/lecture_16.pdf#page=50), 27 мая 2025. Показаны исходные примеры Winoground, CREPE и ARO. CREPE использует также замену слов, поэтому ограничение «одинаковые слова» относится здесь именно к Winoground.*",
+          "new": "<span id=\"2-как-winoground-изолирует-композиционность\"></span>\n<a id=\"vlm-eval-winoground\"></a>\n## 2. Как Winoground проверяет соответствие пар\n\nВ левой части [слайда 50 Stanford CS231n](https://cs231n.stanford.edu/slides/2025/lecture_16.pdf#page=50) показаны чашка в траве и трава в чашке. Слова в двух английских подписях одинаковы, но порядок меняет смысл. Если модель узнаёт оба предмета, но не различает, какой находится внутри какого, обе подписи ей одинаково подходят. Соседние примеры CREPE и ARO проверяют другие виды композиционных ошибок; в CREPE встречается и замена слов."
+        },
+        {
+          "old": "## 3. POPE: когда модель видит объект, которого нет",
+          "new": "<a id=\"vlm-eval-pope\"></a>\n\n## 3. POPE: когда модель видит объект, которого нет"
+        },
+        {
+          "old": "## 8. Из чего состоит TTFT",
+          "new": "<a id=\"vlm-eval-ttft\"></a>\n\n## 8. Из чего состоит TTFT"
+        },
+        {
+          "old": "## 10. Кэш и наблюдаемость",
+          "new": "<a id=\"vlm-slo-goodput\"></a>\n\n### При какой нагрузке запросы укладываются в SLO\n\nВ [эксперименте EPD, §4.1](https://proceedings.mlr.press/v267/singh25d.html) для каждого запроса проверяют два условия. TTFT, время от отправки запроса до получения первого токена, должен уложиться в свой предел. TPOT, средний интервал между последующими токенами ответа, должен уложиться в другой. Запрос засчитывается только при выполнении обоих условий. Доля таких запросов среди всех отправленных называется *SLO attainment*. На рисунке горизонтальная линия стоит на 90%. Авторы называют *goodput* наибольшую входную частоту запросов, при которой эта доля не ниже 90%.\n\n![[00 Учебник/Assets/Figures/curated/vlm-eval-2026-11-09/epd-figure5-slo.png|Шесть графиков доли запросов, выполнивших оба ограничения: три VLM, по два изображения сверху и по четыре снизу]]\n\n*Gursimran Singh et al., [Efficiently Serving Large Multimodal Models Using EPD Disaggregation](https://proceedings.mlr.press/v267/singh25d.html), [Figure 5, с. 6](https://raw.githubusercontent.com/mlresearch/v267/main/assets/singh25d/singh25d.pdf#page=6), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Исходные панели, оси и легенда извлечены из PDF без изменений.*\n\nЗа один прогон отправляли 100 запросов с пуассоновскими поступлениями; ответ ограничивали десятью выходными токенами. В верхнем ряду у каждого запроса два изображения, в нижнем четыре; каждое имеет разрешение 4032 × 3024. При 2 запросах/с точка EPD для MiniCPM‑V 2.6 находится выше линии 90% на верхнем графике и ниже на нижнем. Порог TTFT для этой модели различается: 1,40 с для двух изображений и 2,60 с для четырёх, при TPOT 0,04 с в обоих случаях ([Appendix E.3, Table 9](https://raw.githubusercontent.com/mlresearch/v267/main/assets/singh25d/singh25d.pdf#page=15)). Так что рисунок сравнивает соблюдение SLO каждой нагрузки, а не эффект числа изображений при одном пороге задержки.\n\nВ учебном журнале ниже при 3 запросах/с 91 запрос укладывается в TTFT, 90 в TPOT, но только 84 в оба предела. При 2 запросах/с оба условия выполняют ровно 90 из 100. Эта нагрузка проходит; она и даёт goodput на проверенной сетке частот. Если в этом прогоне 100 запросов отправили и учли за 50 секунд, частота своевременных ответов составит 90 / 50 = 1,8 ответа/с. Это другое число: goodput в статье относится к входной нагрузке, а не к числу ответов, прошедших фильтр.\n\n~~~python\n# Each row: both, TTFT only, TPOT only, neither.\nruns = {1: (94, 2, 2, 2), 2: (90, 4, 3, 3), 3: (84, 7, 6, 3)}\nattainment = {rate: counts[0] / sum(counts) for rate, counts in runs.items()}\nassert attainment == {1: .94, 2: .90, 3: .84}\nassert max(rate for rate, share in attainment.items() if share >= .90) == 2\nassert (runs[3][0] + runs[3][1], runs[3][0] + runs[3][2]) == (91, 90)\n~~~\n\nВ Figure 5 измеряют задержку, а не правильность содержания. Сервис может уложиться в оба предела, выдав неверный итог счёта. Для продукта с такой задачей нужна также [[#vlm-eval-joint-quality|совместная проверка правильности и срока]].\n\n<a id=\"vlm-eval-cache\"></a>\n\n## 10. Кэш и наблюдаемость"
+        },
+        {
+          "old": "### Ответ, вычисление или передача на проверку",
+          "new": "<a id=\"vlm-eval-abstention\"></a>\n\n### Ответ, вычисление или передача на проверку"
+        },
+        {
+          "old": "### Правильность и срок выполнения проверяются вместе",
+          "new": "<a id=\"vlm-eval-joint-quality\"></a>\n\n### Правильность и срок выполнения проверяются вместе"
+        },
+        {
+          "old": "В этом искусственном журнале получилось шесть годных ответов/с за 10 с наблюдения. Это определённая здесь совместная метрика качества и срока, не воспроизведение goodput из EPD. В отчёте отдельно остаются числители, все 100 запросов, ошибки и задержки по классам. Отказы и запросы, не дождавшиеся ответа, также входят в знаменатель.",
+          "new": "В этом искусственном журнале получилось шесть правильных и своевременных ответов/с за 10 с наблюдения. В отличие от [[#vlm-slo-goodput|goodput в эксперименте EPD]], здесь считается частота ответов, которые прошли проверку содержания и срока, а не максимальная входная нагрузка. В отчёте остаются оба числителя и все 100 запросов, включая отказы и запросы, не дождавшиеся ответа. Ошибки и задержки полезно сохранять и в разрезе классов нагрузки."
+        },
+        {
+          "old": "В [эксперименте EPD, §4.1](https://proceedings.mlr.press/v267/singh25d.html) для каждого запроса проверяют два условия. TTFT, время от отправки запроса до получения первого токена, должен уложиться в свой предел. TPOT, средний интервал между последующими токенами ответа, должен уложиться в другой. Запрос засчитывается только при выполнении обоих условий. Доля таких запросов среди всех отправленных называется *SLO attainment*. На рисунке горизонтальная линия стоит на 90%. Авторы называют *goodput* наибольшую входную частоту запросов, при которой эта доля не ниже 90%.",
+          "new": "В [эксперименте EPD, §4.1](https://proceedings.mlr.press/v267/singh25d.html) для каждого запроса проверяют два условия. TTFT, время от отправки запроса до получения первого токена, должен уложиться в свой предел. TPOT, среднее время на токен после первого (от первого до последнего, делённое на число интервалов), должен уложиться в другой. Запрос засчитывается только при выполнении обоих условий. Доля таких запросов среди всех отправленных называется *SLO attainment*. На рисунке горизонтальная линия стоит на 90%. Авторы называют *goodput* наибольшую входную частоту запросов, при которой эта доля не ниже 90%."
+        },
+        {
+          "old": "За один прогон отправляли 100 запросов с пуассоновскими поступлениями; ответ ограничивали десятью выходными токенами. В верхнем ряду у каждого запроса два изображения, в нижнем четыре; каждое имеет разрешение 4032 × 3024. При 2 запросах/с точка EPD для MiniCPM‑V 2.6 находится выше линии 90% на верхнем графике и ниже на нижнем. Порог TTFT для этой модели различается: 1,40 с для двух изображений и 2,60 с для четырёх, при TPOT 0,04 с в обоих случаях ([Appendix E.3, Table 9](https://raw.githubusercontent.com/mlresearch/v267/main/assets/singh25d/singh25d.pdf#page=15)). Так что рисунок сравнивает соблюдение SLO каждой нагрузки, а не эффект числа изображений при одном пороге задержки.",
+          "new": "За один прогон отправляли 100 запросов с пуассоновскими поступлениями; длина ответа была фиксированной: десять токенов. В верхнем ряду у каждого запроса два изображения, в нижнем четыре; каждое имеет разрешение 4032 × 3024. При 2 запросах/с точка EPD для MiniCPM‑V 2.6 находится выше линии 90% на верхнем графике и ниже на нижнем. Порог TTFT для этой модели различается: 1,40 с для двух изображений и 2,60 с для четырёх, при TPOT 0,04 с в обоих случаях ([Appendix E.3, Table 9](https://raw.githubusercontent.com/mlresearch/v267/main/assets/singh25d/singh25d.pdf#page=16)). Так что рисунок сравнивает соблюдение SLO каждой нагрузки, а не эффект числа изображений при одном пороге задержки."
+        },
+        {
+          "old": "last_updated: 2026-11-09\nlast_verified: 2026-11-09\nprimary_sources:",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-11-09\nreference_terms:\n  - label: Winoground — оценки текста, изображения и группы\n    label_en: Winoground — text, image, and group scores\n    anchor: vlm-eval-winoground\n  - label: POPE — проверка вымышленных объектов\n    label_en: POPE — testing object hallucination\n    anchor: vlm-eval-pope\n  - label: VLM — из чего складывается время до первого токена\n    label_en: VLMs — where time to first token goes\n    anchor: vlm-eval-ttft\n  - label: EPD — соблюдение SLO и goodput\n    label_en: EPD — joint SLO attainment and goodput\n    anchor: vlm-slo-goodput\n  - label: VLM — ключи кэша обработки, энкодера и LLM\n    label_en: VLMs — processor, encoder, and LLM cache identity\n    anchor: vlm-eval-cache\n  - label: VLM — отказ, риск и покрытие\n    label_en: VLMs — abstention, risk, and coverage\n    anchor: vlm-eval-abstention\n  - label: VLM — правильные ответы в пределах задержки\n    label_en: VLMs — answers that are correct and timely\n    anchor: vlm-eval-joint-quality\nprimary_sources:"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md",
+      "before_sha256": "6e4cfae4a2fd9c4c6d67620f80f0a907b11bb8f8c50b7f22ea080976e40b267e",
+      "after_sha256": "29a0824768b519a15a013b0d69a9b1f4f1302366ee50fde1f7fbd269174ada3c",
+      "lines": 600,
+      "changes": [
+        {
+          "old": "canonical_revision: \"7158736c550f13fbe8deca537fc369ef87c94a38586dae167fbdc78d215e625a\"\ntranslation_reviewed: \"2026-10-29\"\ntranslation_of: \"00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md\"\nlast_updated: 2026-10-29\nlast_verified: 2026-09-15",
+          "new": "canonical_revision: \"5d7230206ba7dbee856dd6a77c2e5543d128397f54256d8ed5d682adee5b49d6\"\ntranslation_reviewed: \"2026-11-09\"\ntranslation_of: \"00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md\"\nlast_updated: 2026-11-09\nlast_verified: 2026-11-09"
+        },
+        {
+          "old": "  - https://arxiv.org/abs/2502.13923",
+          "new": "  - https://proceedings.mlr.press/v267/singh25d.html"
+        },
+        {
+          "old": "One aggregate multimodal score mixes recognition, OCR, knowledge, reasoning, grounding, and response format. A useful evaluation separates those abilities and then tests whether the answer causally depends on visual evidence.",
+          "new": "An image description can name a person, a bicycle, and a road sign correctly and still invent a helmet. An invoice reader can transcribe every number correctly and return a deposit instead of the amount due. The first error concerns the presence of an object; the second concerns the role of a number. A single accuracy score does not tell you which one to fix."
+        },
+        {
+          "old": "## Composition and hallucination\n\nWinoground uses image-caption pairs with the same words and entities but different relations. It tests whether the representation preserves composition rather than a bag of concepts.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/cs231n-lecture16-winoground.png]]\n\n*Stanford CS231n 2025, [Lecture 16, slide 50](https://cs231n.stanford.edu/slides/2025/lecture_16.pdf#page=50). Winoground, CREPE, and ARO examples are shown. The same-word constraint belongs to Winoground here; CREPE also substitutes words.*",
+          "new": "## Composition and hallucination\n\n<a id=\"vlm-eval-winoground\"></a>\n\nOn the left of [Stanford CS231n, Lecture 16, slide 50](https://cs231n.stanford.edu/slides/2025/lecture_16.pdf#page=50), one image has a cup in grass and the other has grass in a cup. The captions use the same words in different orders. Recognizing both objects won't tell a model which contains the other. The adjacent CREPE and ARO examples test other kinds of compositional errors; CREPE also changes words."
+        },
+        {
+          "old": "POPE probes object hallucination with absent categories sampled randomly, by dataset frequency, or by co-occurrence with present objects. It measures one failure mode, not all hallucination: attributes, relations, counts, and OCR can also be false. “Adversarial” names the co-occurrence sampling procedure, not proof that every such question is harder for every model.",
+          "new": "<a id=\"vlm-eval-pope\"></a>\n\n### POPE asks about objects that may be absent\n\nPOPE probes object hallucination with absent categories sampled randomly, by dataset frequency, or by co-occurrence with present objects. It measures one failure mode, not all hallucination: attributes, relations, counts, and OCR can also be false. “Adversarial” names the co-occurrence sampling procedure, not proof that every such question is harder for every model."
+        },
+        {
+          "old": "### Follow the complete latency clock",
+          "new": "<a id=\"vlm-eval-ttft\"></a>\n\n### Follow the complete latency clock"
+        },
+        {
+          "old": "### Cache identity depends on the cached object",
+          "new": "<a id=\"vlm-slo-goodput\"></a>\n\n### How much load can the service handle within its SLO?\n\nThe [EPD experiment, §4.1](https://proceedings.mlr.press/v267/singh25d.html) checks two conditions on each request. Time to first token (TTFT) runs from request submission until the user receives the first token. Time per output token (TPOT) averages the intervals from the first output token to the last. Each metric has its own limit. A request counts only if it meets both limits, and *SLO attainment* is the share of submitted requests that do. The horizontal line marks 90%. The authors define *goodput* as the highest offered request rate with at least 90% attainment.\n\n![[00 Учебник/Assets/Figures/curated/vlm-eval-2026-11-09/epd-figure5-slo.png|Six plots of joint SLO attainment for three VLMs, with two images per request above and four below]]\n\n*Gursimran Singh et al., [Efficiently Serving Large Multimodal Models Using EPD Disaggregation](https://proceedings.mlr.press/v267/singh25d.html), [Figure 5, p. 6](https://raw.githubusercontent.com/mlresearch/v267/main/assets/singh25d/singh25d.pdf#page=6), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Original panels, axes, and legend extracted from the PDF without modification.*\n\nEach run sent 100 requests with Poisson arrivals and fixed every response at ten output tokens. The upper row uses two images per request; the lower uses four. Each image is 4032 × 3024 pixels. At two requests per second, the MiniCPM-V 2.6 EPD point is above the 90% line in the upper row and below it in the lower row. For this model, the TTFT limits are 1.40 s and 2.60 s respectively, with a 0.04 s TPOT limit in both rows ([Appendix E.3, Table 9](https://raw.githubusercontent.com/mlresearch/v267/main/assets/singh25d/singh25d.pdf#page=16)). The rows show how each workload meets its own SLO, not what adding images does at one fixed latency limit.\n\nIn the illustrative log below, at three requests per second, 91 requests meet the TTFT limit and 90 meet the TPOT limit. Only 84 meet both. At two requests per second, exactly 90 out of 100 meet both, so two is the goodput over the tested rates. If those 100 requests were submitted and accounted for over 50 seconds, the rate of timely answers would instead be 90 / 50 = 1.8 responses per second. The paper's goodput is an offered load, not a count of the answers that passed the filter.\n\n```python\n# Each row: both, TTFT only, TPOT only, neither.\nruns = {1: (94, 2, 2, 2), 2: (90, 4, 3, 3), 3: (84, 7, 6, 3)}\nattainment = {rate: counts[0] / sum(counts) for rate, counts in runs.items()}\nassert attainment == {1: .94, 2: .90, 3: .84}\nassert max(rate for rate, share in attainment.items() if share >= .90) == 2\nassert (runs[3][0] + runs[3][1], runs[3][0] + runs[3][2]) == (91, 90)\n```\n\nFigure 5 measures timing. A service can meet both limits and still read the wrong total from an invoice. To measure that outcome, [[#vlm-eval-joint-quality|check correctness and timing together]].\n\n<a id=\"vlm-eval-cache\"></a>\n\n### Cache identity depends on the cached object"
+        },
+        {
+          "old": "An extracted total is supported by its printed region; a computed total needs both summand regions and the operation. A crop with no established connection to the answer proves neither. When evidence is unavailable, request a clearer input or human review and measure that behavior. Rejecting every request avoids wrong outputs but solves no tasks.",
+          "new": "<a id=\"vlm-eval-abstention\"></a>\n\n### When to answer or send the case for review\n\nAn extracted total is supported by its printed region; a computed total needs both summand regions and the operation. A crop with no established connection to the answer proves neither. When evidence is unavailable, request a clearer input or human review and measure that behavior. Rejecting every request avoids wrong outputs but solves no tasks."
+        },
+        {
+          "old": "Quality and efficiency should be inspected together on photos, dense documents, multiple-image prompts, and videos. The useful result is a quality–budget–latency curve with failure slices, not one average score or a gallery of successful responses.",
+          "new": "<a id=\"vlm-eval-joint-quality\"></a>\n\n### Count answers that are both correct and timely\n\nA dense document can require more processing than a photograph and still produce a wrong answer. Report the results separately for photos, dense documents, multi-image prompts, and videos. Within each workload, count how many requests satisfy both criteria."
+        },
+        {
+          "old": "This artificial ten-second log yields six correct-and-timely responses/s. It is the joint metric defined here, not a reproduction of EPD's goodput. Keep all 100 requests, failures, abstentions, timeouts, and per-class latency/quality results in the denominator and report the separate numerators.",
+          "new": "This artificial ten-second log yields six correct and timely responses per second. Unlike [[#vlm-slo-goodput|EPD's goodput]], it counts qualifying responses per unit time rather than the maximum offered load. Keep all 100 requests in the denominator, including failures, abstentions, and timeouts. Report the correctness and timing counts separately as well as their intersection."
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "f7817ef761ee6411a2f3057ecfeb670d19ab9c002d02b5848262883f790a27ec",
+      "after_sha256": "30b92bd608b227488e4dbe0e83bb7524bf5c56e4e1f2fd72c3dc41bfa96ccc8b",
+      "lines": 1642,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Оценивание, режимы отказа и serving VLM]]",
+          "new": "- [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Оценивание, режимы отказа и serving VLM]]\n  - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-winoground|Winoground — оценки текста, изображения и группы]]\n  - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-pope|POPE — проверка вымышленных объектов]]\n  - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-ttft|VLM — из чего складывается время до первого токена]]\n  - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-slo-goodput|EPD — соблюдение SLO и goodput]]\n  - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-cache|VLM — ключи кэша обработки, энкодера и LLM]]\n  - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-abstention|VLM — отказ, риск и покрытие]]\n  - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-joint-quality|VLM — правильные ответы в пределах задержки]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "65b0199e9606c34bde41e0ff000ce25dad39a9c64c3548b793e566a167997c99",
+      "after_sha256": "1f9ae8359fe1c2abba4b6a581d17ccd06731e8f2e43179cb1e0b840d191eefd8",
+      "lines": 1644,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Evaluation, failure modes, and VLM serving]] · **EN**",
+          "new": "- [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Evaluation, failure modes, and VLM serving]] · **EN**\n  - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-winoground|Winoground — text, image, and group scores]]\n  - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-pope|POPE — testing object hallucination]]\n  - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-ttft|VLMs — where time to first token goes]]\n  - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-slo-goodput|EPD — joint SLO attainment and goodput]]\n  - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-cache|VLMs — processor, encoder, and LLM cache identity]]\n  - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-abstention|VLMs — abstention, risk, and coverage]]\n  - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-joint-quality|VLMs — answers that are correct and timely]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "2bdc8613dcc389b5f4e8b3e83edd09cb99c4c40cdfd0b88f24722ea366c3c80c",
+      "after_sha256": "c4fa9936cbb8ff158c97246c0d854b56eceb61d2d5bccd449d3f8b83a7dc2cbe",
+      "lines": 23760,
+      "changes": [
+        {
+          "old": "assets:",
+          "new": "assets:\n  - id: \"curated-vlm-eval-epd-slo-232544acc3ef\"\n    asset: \"00 Учебник/Assets/Figures/curated/vlm-eval-2026-11-09/epd-figure5-slo.png\"\n    title: \"Figure 5: SLO attainment for end-to-end inference\"\n    author: \"Gursimran Singh et al.\"\n    source_url: \"https://proceedings.mlr.press/v267/singh25d.html\"\n    source_image_url: \"https://raw.githubusercontent.com/mlresearch/v267/main/assets/singh25d/singh25d.pdf#page=6\"\n    source_asset: \"05 Источники/Originals/vlm-evaluation-serving-2026-10-20/epd-pmlr.pdf\"\n    source_asset_sha256: \"865c1b533ff1f23efecc16a01675fb8c646a79a85b23dd29ebf4715cc19fdc45\"\n    source_page: 6\n    render_dpi: 360\n    render_page_size_px: [3060,3960]\n    crop_box_px: [330,350,2670,1325]\n    dimensions_px: [2340,975]\n    sha256: \"232544acc3effd610bf8ba913e68ef9e6b7d61f43c1f840e40e92dacc90f4720\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/vlm-evaluation-serving-2026-10-20/pmlr-license-agreement.pdf\"\n    license_evidence_sha256: \"3a3eac0ebdded57660c12c59028c5429b6d2b328be2c6fde534a104438444c31\"\n    modifications: \"Original six panels, common legend, axes, and panel labels extracted from the PMLR PDF without rescaling or redrawing; running text and the original typeset caption are excluded.\"\n    derivation: \"pdf-page-render-crop\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    metadata_status: \"verified\"\n    used_in: [\"00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md\", \"en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md\"]"
+        },
+        {
+          "old": "  - id: curated-vlm2026-cs231n-winoground-d72312341628\n    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/cs231n-lecture16-winoground.png\n    author: Stanford CS231n staff; slide credited to Ranjay Krishna, PDF metadata lists Zane Durante\n    source_url: https://cs231n.stanford.edu/slides/2025/lecture_16.pdf\n    license: open course material; reuse confirmed by repository owner\n    license_url: https://cs231n.stanford.edu/slides/2025/lecture_16.pdf\n    modifications: Same slide50 examples repaired at higher resolution; full Winoground, CREPE, ARO and comparison table preserved, unrelated heading/bullet and footer excluded. Credit retained in chapter. Before/after hashes and crop in 05 Источники/Originals/vlm-evaluation-serving-2026-10-20/figure-repairs.json\n    used_in: [\"00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials",
+          "new": "  - id: curated-vlm2026-cs231n-winoground-d72312341628\n    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/cs231n-lecture16-winoground.png\n    author: Stanford CS231n staff; slide credited to Ranjay Krishna, PDF metadata lists Zane Durante\n    source_url: https://cs231n.stanford.edu/slides/2025/lecture_16.pdf\n    license: Unverified for redistribution\n    rights_evidence: https://huggingface.co/datasets/facebook/winoground/blob/main/README.md\n    rights_status: course-slide-republication-unverified\n    publication_status: retired\n    retirement_reason: Original course slide linked in both editions; permission to republish the composite slide with third-party dataset photos was not verified.\n    modifications: Same slide50 examples repaired at higher resolution; full Winoground, CREPE, ARO and comparison table preserved, unrelated heading/bullet and footer excluded. Before/after hashes and crop in 05 Источники/Originals/vlm-evaluation-serving-2026-10-20/figure-repairs.json\n    used_in: []\n    former_used_in: [\"00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md\", \"en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md\"]\n    metadata_status: verified\n    provenance_confirmation: source-linked-rights-unverified"
+        }
+      ]
+    }
+  ]
+}

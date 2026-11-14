@@ -21,20 +21,27 @@ concepts: [linear attention, delta rule, matrix state, hybrid architecture]
 
 ## Механизм
 
-Упрощённое обновление:
+В записи авторов состояние $S_t$ имеет оси «значения × ключи».
+Сначала прежняя память затухает с коэффициентом $\alpha_t$.
+По ослабленному состоянию слой оценивает значение текущего ключа
+и записывает поправку:
 
 $$
 S_t=\alpha_tS_{t-1}
-+\beta_t(v_t-S_{t-1}k_t)k_t^\top.
++\beta_t(v_t-\alpha_t S_{t-1}k_t)k_t^\top.
 $$
 
-$\alpha_t$ управляет общим сохранением состояния. Разность
-$v_t-S_{t-1}k_t$ исправляет именно ошибку текущей ассоциации.
+При единичном ключе и $\beta_t=1$ чтение по этому ключу после обновления
+даёт $v_t$. Например, если старая оценка 10, новое значение 30, а
+$\alpha_t=0.5$, ослабленная оценка равна 5. Слой добавляет $30-5=25$
+в направлении ключа, поэтому новая оценка равна 30.
+См. [§3.1, уравнение 10](https://arxiv.org/html/2412.06464v3#S3.SS1).
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/gated-deltanet-figure1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/gated-deltanet-figure1-complete.png|H1 чередует Gated DeltaNet и скользящее внимание, H2 добавляет Mamba-2. Справа показаны проекции одного блока.]]
 
-*Figure 1 показывает сам блок и два гибрида: с sliding-window attention и с
-Mamba-2.*
+*Songlin Yang, Jan Kautz и Ali Hatamizadeh,
+[Gated Delta Networks, v3, рис. 1, с. 7](https://arxiv.org/pdf/2412.06464v3#page=7),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
 
 ## Граница интерпретации
 

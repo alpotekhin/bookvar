@@ -2,11 +2,122 @@
 title: Сеть, хранилище и распределённые checkpoints
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-23
-last_verified: 2026-10-23
+last_updated: 2026-11-05
+last_verified: 2026-11-05
+reference_terms:
+  - anchor: network-data-path
+    label: "Путь тензора через GPU, NIC и сеть"
+    label_en: "The tensor path through GPU, NIC and network"
+  - anchor: network-rdma-registration
+    label: "RDMA: регистрация памяти, ключи и время жизни буфера"
+    label_en: "RDMA memory registration, keys and buffer lifetime"
+  - anchor: network-gpudirect
+    label: "GPUDirect RDMA и устранение промежуточной CPU-копии"
+    label_en: "GPUDirect RDMA and removing the CPU staging copy"
+  - anchor: network-pcie-topology
+    label: "PCIe/NUMA-топология и порядок GPU/RDMA-операций"
+    label_en: "PCIe/NUMA topology and GPU/RDMA ordering"
+  - anchor: network-ib-roce
+    label: "InfiniBand, RoCE, PFC и ECN при перегрузке"
+    label_en: "InfiniBand, RoCE, PFC and ECN under congestion"
+  - anchor: network-lossy-roce
+    label: "RoCE без PFC и границы lossless"
+    label_en: "RoCE without PFC and the limits of lossless transport"
+  - anchor: network-bits-bytes
+    label: "Gb/s и GB/s, задержка α и объём сообщения"
+    label_en: "Gb/s versus GB/s, latency α and message size"
+  - anchor: network-ring-cost
+    label: "Ring all-reduce: байты отправки и время"
+    label_en: "Ring all-reduce: sent bytes and time"
+  - anchor: network-logical-physical
+    label: "Логические отправки и счётчики физических портов"
+    label_en: "Logical sends and physical-port counters"
+  - anchor: network-oversubscription
+    label: "Oversubscription и bisection bandwidth"
+    label_en: "Oversubscription and bisection bandwidth"
+  - anchor: network-hierarchical-reduction
+    label: "Иерархический all-reduce и общий NIC узла"
+    label_en: "Hierarchical all-reduce and a shared node NIC"
+  - anchor: network-rails
+    label: "Rail-optimized сеть и реальные группы параллелизма"
+    label_en: "Rail-optimized networks and actual parallel groups"
+  - anchor: checkpoint-storage-contention
+    label: "Checkpoint, ввод данных и общие ресурсы хранилища"
+    label_en: "Checkpoint and input-data storage contention"
+  - anchor: checkpoint-consistent-state
+    label: "Согласованный снимок и состав training state"
+    label_en: "Consistent snapshots and the training state"
+  - anchor: checkpoint-loader-state
+    label: "Курсоры данных, prefetch, RNG и накопленные градиенты"
+    label_en: "Data cursors, prefetch, RNG and accumulated gradients"
+  - anchor: checkpoint-state-alias
+    label: "state_dict не замораживает живые тензоры"
+    label_en: "state_dict does not freeze live tensors"
+  - anchor: dcp-plans-resharding
+    label: "DCP: метаданные и пересечения сохранённых частей"
+    label_en: "DCP metadata and saved-shard intersections"
+  - anchor: dcp-adapters-planners
+    label: "Адаптер состояния, planner и storage backend"
+    label_en: "State adapters, planners and storage backends"
+  - anchor: dcp-compatibility
+    label: "Ключи, формы и границы совместимости DCP"
+    label_en: "DCP keys, shapes and compatibility boundaries"
+  - anchor: dcp-two-to-three
+    label: "Исполняемый DTensor resharding с двух процессов на три"
+    label_en: "Executable DTensor resharding from two ranks to three"
+  - anchor: dcp-training-state
+    label: "Stateful: модель, Adam, scheduler, RNG и курсор"
+    label_en: "Stateful model, Adam, scheduler, RNG and cursor"
+  - anchor: dcp-next-step
+    label: "Roundtrip: проверка следующего шага после восстановления"
+    label_en: "Roundtrip verification of the next training step"
+  - anchor: dcp-fsdp-target
+    label: "Подготовка FSDP2 до оптимизатора и загрузки DCP"
+    label_en: "Preparing FSDP2 before the optimizer and DCP load"
+  - anchor: dcp-rng-world-size
+    label: "RNG после изменения world size"
+    label_en: "RNG after changing world size"
+  - anchor: checkpoint-async-staging
+    label: "Асинхронное сохранение: staging и запись"
+    label_en: "Asynchronous checkpoint staging and upload"
+  - anchor: checkpoint-two-futures
+    label: "staging_completion и upload_completion"
+    label_en: "staging_completion and upload_completion"
+  - anchor: checkpoint-cpu-async
+    label: "Фоновая запись CPU-состояния и независимость копии"
+    label_en: "Background CPU-state saving and snapshot independence"
+  - anchor: checkpoint-stager-lifetime
+    label: "Владение async_stager и освобождение ресурсов"
+    label_en: "async_stager ownership and resource cleanup"
+  - anchor: checkpoint-process-group
+    label: "Отдельная процессная группа для checkpoint"
+    label_en: "A separate process group for checkpoint collectives"
+  - anchor: checkpoint-queue-backpressure
+    label: "Очередь незаписанных байтов и backpressure"
+    label_en: "Unwritten-byte queues and backpressure"
+  - anchor: checkpoint-queue-memory
+    label: "Размер очереди и память целых staging-буферов"
+    label_en: "Queue size versus whole staging-buffer memory"
+  - anchor: checkpoint-deepspeed-ucp
+    label: "DeepSpeed UCP: конвертация, resharding и отличие от DCP"
+    label_en: "DeepSpeed UCP conversion, resharding and DCP boundaries"
+  - anchor: checkpoint-filesystem-writer
+    label: "FileSystemWriter: fsync, metadata и перезапись"
+    label_en: "FileSystemWriter fsync, metadata and overwrite semantics"
+  - anchor: checkpoint-immutable-generations
+    label: "Неизменяемые поколения, manifest и latest"
+    label_en: "Immutable generations, manifests and latest pointers"
+  - anchor: checkpoint-s3-publication
+    label: "S3: отдельные ключи, условные записи и очистка"
+    label_en: "S3 keys, conditional writes and retention"
+  - anchor: checkpoint-observability
+    label: "Наблюдаемость сети, staging и восстановления"
+    label_en: "Observing the network, staging and recovery"
 ---
 
 # Сеть, хранилище и распределённые checkpoints
+
+<a id="network-data-path"></a>
 
 При передаче тензора между серверами данные читаются из памяти ускорителя,
 проходят локальное соединение и сетевой адаптер, пересекают коммутаторы,
@@ -28,7 +139,7 @@ last_verified: 2026-10-23
 другую задачу: он уменьшает потребление памяти внутри шага. Эти методы разобраны
 в [[44b Gradient checkpointing и offload|главе о пересчёте и переносе активаций]].
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/network-checkpoint-2026-10-23/jax-superpod-diagram.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/network-checkpoint-2026-10-23/jax-superpod-diagram.png|NVSwitch внутри узла и InfiniBand leaf/spine между узлами]]
 
 *Два уровня соединений: GPU внутри показанного H100-узла связаны
 через NVSwitch, а узлы — через InfiniBand leaf/spine-коммутаторы.
@@ -60,6 +171,8 @@ How to Scale Your Model,
 checkpoint. Поэтому нехватка сетевой производительности иногда начинается
 ещё до сетевого порта.
 
+<a id="network-rdma-registration"></a>
+
 **RDMA** — remote direct memory access — позволяет адаптеру выполнять операции
 с зарегистрированными областями памяти другого узла. При регистрации
 приложение и драйвер задают доступный диапазон, его отображение для DMA
@@ -76,6 +189,8 @@ checkpoint. Поэтому нехватка сетевой производит�
 в описаниях RDMA относится прежде всего к пути данных, а не к полному
 исчезновению процессора из программы.
 
+<a id="network-gpudirect"></a>
+
 **GPUDirect RDMA** расширяет этот путь на память NVIDIA GPU. При поддерживаемой
 конфигурации NIC читает и записывает её непосредственно, без обязательного
 промежуточного буфера в системной памяти. Устраняются дополнительные
@@ -83,7 +198,7 @@ checkpoint. Поэтому нехватка сетевой производит�
 Тензор всё ещё нужно прочитать, передать, принять и сделать доступным
 следующей операции на GPU.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/network-checkpoint-review-2026-10/openhackathons-gpudirect-rdma.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/network-checkpoint-review-2026-10/openhackathons-gpudirect-rdma.png|Путь GPU→CPU→NIC и прямой GPUDirect RDMA]]
 
 *Слева данные перед отправкой копируются в системную память, справа сетевой
 адаптер получает доступ к памяти GPU напрямую. Промежуточная копия исчезает,
@@ -91,6 +206,8 @@ checkpoint. Поэтому нехватка сетевой производит�
 а не схема соединений любого сервера. Источник: OpenACC-Standard.org
 совместно с NVIDIA, [N-Ways to Multi-GPU Programming — CUDA-aware MPI](https://github.com/openhackathons-org/nways_multi_gpu/blob/bc2a5887505bba17672882b3ec7a62c04ecf0d24/labs/CFD/English/C/jupyter_notebook/mpi/cuda_aware.ipynb),
 CC BY 4.0; оригинал без изменений.*
+
+<a id="network-pcie-topology"></a>
 
 ### Почему одинаковые GPU и NIC могут работать по-разному
 
@@ -120,6 +237,8 @@ GPU и NIC могут находиться за одним PCIe-коммутат
 операции на всей группе отвечает на разные вопросы. Высокая скорость первой
 проверки не подтверждает, что вторая использует тот же путь или что несколько
 потоков не делят один порт.
+
+<a id="network-ib-roce"></a>
 
 ### InfiniBand и RoCE: как сеть реагирует на перегрузку
 
@@ -154,6 +273,8 @@ PFC сдерживает поступление данных на ближайш
 что любая пауза является аварией: оценивать нужно их длительность, частоту
 и влияние на время обмена.
 
+<a id="network-lossy-roce"></a>
+
 PFC не является безусловным требованием каждого развёртывания RoCEv2.
 Например, документация Cumulus Linux 5.12 описывает и режим *lossless*
 с PFC/ECN, и режим *lossy* с ECN. Во втором случае потери и повторная передача
@@ -163,6 +284,8 @@ PFC не является безусловным требованием кажд
 [NVIDIA Cumulus: RoCE lossy и lossless](https://docs.nvidia.com/networking-ethernet-software/cumulus-linux-512/Layer-1-and-Switch-Ports/Quality-of-Service/RDMA-over-Converged-Ethernet-RoCE/)
 
 ## Задержка, пропускная способность и объём коллективной операции
+
+<a id="network-bits-bytes"></a>
 
 ### Почему 400 Gb/s — не 400 GB/s
 
@@ -195,6 +318,8 @@ $B=50$ GB/s сообщение 4 KiB передаётся примерно за 
 буфера тоже задерживает начало обмена. Оптимальный размер группы градиентов
 зависит от того, когда градиенты готовы и какая часть обмена перекрывается
 с вычислениями.
+
+<a id="network-ring-cost"></a>
 
 ### Расчёт
 
@@ -241,6 +366,8 @@ large_us = (alpha + 4 * 1024**2 / bandwidth) * 1e6
 injected_tb = ranks * sent_per_rank / 10**12
 ```
 
+<a id="network-logical-physical"></a>
+
 Суммарно все участники отправят 716.1 TB. Это сумма логических отправок,
 а не объём на каждом физическом кабеле. Если сообщение проходит несколько
 сетевых соединений, каждый из них несёт его байты; сумма счётчиков всех
@@ -261,6 +388,8 @@ NCCL может выбрать другой в зависимости от ра�
 [NCCL_ALGO](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html#nccl-algo):
 при стандартной настройке библиотека учитывает топологию узла и архитектуру.
 
+<a id="network-oversubscription"></a>
+
 ## Топология и размещение групп параллелизма
 
 Предположим, четыре сервера подключены к коммутатору портами по 400 Gb/s,
@@ -278,6 +407,8 @@ NCCL может выбрать другой в зависимости от ра�
 могут попасть на один маршрут, пока соседний остаётся свободным.
 В Clos/fat-tree несколько путей увеличивают доступную полосу; использовать
 её помогают подходящее размещение участников и маршрутизация.
+
+<a id="network-hierarchical-reduction"></a>
 
 Иерархическая коллективная операция использует различие между быстрыми
 локальными и более дорогими межузловыми соединениями. Например, внутри
@@ -313,6 +444,8 @@ $2(n-1)M/n$. Наличие восьми потоков, однако, не пр
 могут обслуживать фрагменты параллельно, если это поддерживается физическими
 соединениями и выбранным алгоритмом.
 
+<a id="network-rails"></a>
+
 В rail-optimized сети соответствующие позиции GPU в разных серверах
 подключаются к выделенным группам сетевых соединений. Такое размещение удобно,
 когда одни и те же части модели регулярно обмениваются между репликами.
@@ -328,6 +461,8 @@ all-to-all: маршрутизатор может послать разное к
 участникам. Конкретные схемы разобраны в
 [[44f Expert и hybrid parallelism|предыдущей главе]].
 [Harvard: топология и rail-optimized wiring](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/network_fabrics/network_fabrics.qmd#sec-network-fabrics-topology)
+
+<a id="checkpoint-storage-contention"></a>
 
 ## Путь к хранилищу и одновременная запись checkpoints
 
@@ -360,6 +495,8 @@ GPU начнёт ждать очередной пакет. По графику �
 согласованный план сохранения может назначить единственного писателя
 для каждого реплицированного объекта.
 
+<a id="checkpoint-consistent-state"></a>
+
 ## Что должно попасть в согласованный снимок
 
 Файл с весами достаточен для многих задач инференса, но не для точного
@@ -384,6 +521,8 @@ scheduler и очистки градиентов, но до выбора сле�
 | Позиция в данных и состояние sampler | Выбрать правильные следующие примеры, а не только восстановить номер эпохи |
 | Версия конфигурации, кода, токенизатора и данных | Проверить, что загружается совместимый эксперимент |
 
+<a id="checkpoint-loader-state"></a>
+
 Номер пакета не всегда описывает позицию в данных. У потокового датасета
 может быть несколько источников и буфер перемешивания; у загрузчика —
 несколько workers и заранее подготовленные пакеты. В таком случае сохраняют
@@ -396,6 +535,8 @@ scheduler и очистки градиентов, но до выбора сле�
 самих накопленных градиентов, номера микрошага и соответствующего положения
 в данных. Если эти данные не сохраняются, выбирать такую границу нельзя.
 DCP не может угадать отсутствующие компоненты по весам модели.
+
+<a id="checkpoint-state-alias"></a>
 
 Есть и более простая ловушка: `model.state_dict()` не создаёт независимую
 копию всех тензоров. Полученный словарь может продолжать ссылаться на те же
@@ -427,6 +568,8 @@ assert not torch.equal(frozen["weight"], model.weight)
 в долговременное хранилище.
 [PyTorch: Module.state_dict](https://docs.pytorch.org/docs/2.14/generated/torch.nn.Module.html#torch.nn.Module.state_dict)
 
+<a id="dcp-plans-resharding"></a>
+
 ## Как Distributed Checkpoint связывает части состояния
 
 В PyTorch Distributed Checkpoint, или DCP, состояние задаётся именованным
@@ -450,6 +593,8 @@ assert not torch.equal(frozen["weight"], model.weight)
 файл со старым номером. При этом DCP загружает данные в заранее подготовленные
 тензоры: модель и её новое распределение нужно создать **до** вызова загрузки.
 
+<a id="dcp-adapters-planners"></a>
+
 В процессе участвуют три разных механизма. `get_state_dict` и
 `set_state_dict` согласуют представление модели и оптимизатора: в частности,
 связывают состояние оптимизатора с полными именами параметров в модели,
@@ -458,6 +603,8 @@ assert not torch.equal(frozen["weight"], model.weight)
 и операции с ними. `StorageWriter` и `StorageReader` выполняют запись
 и чтение в конкретном хранилище. Поддержка формата разбиения не означает
 автоматической поддержки любого хранилища или любой перестройки модели.
+
+<a id="dcp-compatibility"></a>
 
 В документации PyTorch 2.14 есть несколько существенных границ применимости:
 
@@ -478,6 +625,8 @@ assert not torch.equal(frozen["weight"], model.weight)
 гибридного FSDP/TP-эксперимента.
 [PyTorch 2.14: save/load](https://docs.pytorch.org/docs/2.14/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict_loader.load)
 и [get_state_dict/set_state_dict](https://docs.pytorch.org/docs/2.14/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict)
+
+<a id="dcp-two-to-three"></a>
 
 ### Исполняемый пример изменения числа участников
 
@@ -539,6 +688,8 @@ if __name__ == "__main__":
 В многосерверном запуске путь должен быть доступен всем участвующим
 процессам через выбранный backend хранения; одинаковое имя локального
 каталога на разных серверах этого не обеспечивает.
+
+<a id="dcp-training-state"></a>
 
 ### Восстановление следующего шага, а не только весов
 
@@ -612,6 +763,8 @@ def train_step(state, batches):
     return loss.detach().clone()
 ```
 
+<a id="dcp-next-step"></a>
+
 Зададим пять пакетов без расходования training RNG и сохраним состояние
 после двух шагов. Третий шаг исходного объекта служит эталоном.
 Новый объект сначала имеет другие веса и RNG, затем DCP восстанавливает
@@ -660,6 +813,8 @@ def verify_resume(path):
 Adam, позиции в данных или scheduler. Здесь проверяются и они, и
 результат следующего шага.
 
+<a id="dcp-fsdp-target"></a>
+
 Для FSDP2 порядок подготовки целевого состояния сохраняется:
 сначала модель распределяется по новой сетке, затем создаются оптимизатор
 и scheduler. Тот же TrainingState использует get_state_dict/set_state_dict
@@ -684,6 +839,8 @@ def prepare_fsdp_training(model, mesh):
 здесь не требуется: адаптер и планировщик используют имена и размещения
 поддерживаемых тензоров.
 
+<a id="dcp-rng-world-size"></a>
+
 В этом маленьком примере один генератор CPU и один курсор. В настоящем запуске
 нужно отдельно учесть используемые CUDA-генераторы, Python/NumPy RNG,
 загрузчик и распределённое размещение состояний. Даже полный снимок
@@ -694,6 +851,8 @@ def prepare_fsdp_training(model, mesh):
 не назначает каждому токену прежнюю маску dropout.
 [PyTorch: рекомендации по воспроизводимости](https://docs.pytorch.org/docs/2.14/notes/randomness.html)
 
+<a id="checkpoint-async-staging"></a>
+
 ## Асинхронная запись: память, очередь и обратное давление
 
 Асинхронное сохранение разделяет два события. Сначала создаётся независимый
@@ -702,7 +861,7 @@ def prepare_fsdp_training(model, mesh):
 либо обучение будет лишний раз ждать диск, либо писатель прочитает уже
 изменённые параметры.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/network-checkpoint-review-2026-10/pytorch-async-checkpoint-flow.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/network-checkpoint-review-2026-10/pytorch-async-checkpoint-flow.png|Staging GPU→CPU и фоновая запись checkpoint во время обучения]]
 
 *Верхняя дорожка — обучение, нижняя — сохранение состояния. В показанном
 варианте обучение ждёт копирования GPU→CPU, а запись подготовленной копии
@@ -711,6 +870,8 @@ def prepare_fsdp_training(model, mesh):
 [PyTorch Distributed Asynchronous Checkpointing](https://pytorch.org/blog/reducing-checkpointing-times/),
 2024, BSD-3-Clause; оригинал без изменений. Схема показывает блокирующее
 копирование и фоновую запись, а не все варианты современного API.*
+
+<a id="checkpoint-two-futures"></a>
 
 В DCP 2.14 результат `async_save` зависит от используемого механизма staging.
 При синхронном staging возвращается `Future` окончания записи. При
@@ -726,6 +887,8 @@ def prepare_fsdp_training(model, mesh):
 Самое простое безопасное правило: не менять включённые в снимок данные
 до окончания их копирования. Более тонкое перекрытие возможно, если
 зависимости каждого компонента известны.
+
+<a id="checkpoint-cpu-async"></a>
 
 Для CPU-примера выше можно использовать обычный `async_save` без собственного
 stager. В проверенной реализации PyTorch 2.14.1 этот путь сначала выполняет
@@ -757,6 +920,19 @@ def save_in_background(state, path):
 [PyTorch: asynchronous checkpoint recipe](https://docs.pytorch.org/tutorials/recipes/distributed_async_checkpoint_recipe.html)
 и [реализация async_save 2.14.1](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/torch/distributed/checkpoint/state_dict_saver.py#L299-L388)
 
+<a id="checkpoint-stager-lifetime"></a>
+
+> If you provide an `async_stager`, call `close()` after the last checkpoint is saved.
+
+[PyTorch 2.14, async_save](https://docs.pytorch.org/docs/2.14/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict_saver.async_save).
+У `DefaultStager` могут оставаться кэшированные хранилища тензоров
+и пул фоновых потоков. Завершение `upload_completion` сообщает об окончании
+записи; освобождение этих ресурсов — отдельное действие. Если stager создало
+приложение, оно дожидается последнего сохранения и вызывает `close()`.
+Для stager, созданного внутри `async_save`, библиотека выполняет очистку сама.
+
+<a id="checkpoint-process-group"></a>
+
 Фоновое сохранение само использует коллективы для согласования плана
 и завершения записи. Если их порядок перемешается с коллективами
 обучения на той же группе, участники могут ждать разные операции.
@@ -764,6 +940,8 @@ def save_in_background(state, path):
 для checkpoint создают отдельную процессную группу. Она отделяет
 его коллективы от обучающих, но не отменяет согласованный порядок
 вызовов внутри каждого сохранения.
+
+<a id="checkpoint-queue-backpressure"></a>
 
 ### Когда обучение производит снимки быстрее, чем хранилище их принимает
 
@@ -813,6 +991,8 @@ full_buffer_bytes = 2 * checkpoint_bytes
 per_node_two_buffers = full_buffer_bytes / 64
 ```
 
+<a id="checkpoint-queue-memory"></a>
+
 Объём очереди и выделенная память — не одно и то же. Писатель может держать
 целый буфер до окончания записи, даже если часть байтов уже отправлена.
 Два полных снимка по 2 TB занимают 4 TB суммарно; при равномерном размещении
@@ -828,6 +1008,8 @@ per_node_two_buffers = full_buffer_bytes / 64
 потому что закончилась память очереди.
 [Harvard: checkpoint storage and staging](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/data_storage/data_storage.qmd#sec-storage-checkpointing)
 
+<a id="checkpoint-deepspeed-ucp"></a>
+
 ## Другой формат для смены разбиения: DeepSpeed Universal Checkpointing
 
 В DeepSpeed Universal Checkpointing, или UCP, штатное сохранение
@@ -838,7 +1020,7 @@ per_node_two_buffers = full_buffer_bytes / 64
 собирать в памяти одного процесса: единицей преобразования служит
 отдельный параметр с его состояниями.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/network-checkpoint-2026-10-23/deepspeed-ucp-flowchart.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/network-checkpoint-2026-10-23/deepspeed-ucp-flowchart.png|DeepSpeed UCP: сохранение, конвертация частей и продолжение обучения]]
 
 *Сохранение на шаге 600, преобразование разделённых тензоров
 и возобновление с шага 601. При преобразовании объединяются фрагменты
@@ -879,6 +1061,8 @@ $[W_0,W_1]$ восстанавливают конкатенацией по ст�
 Модель отказов нужно определить отдельно, не заменяя её полем
 `durable=true` в собственном JSON.
 
+<a id="checkpoint-filesystem-writer"></a>
+
 ### Что делает FileSystemWriter, а что остаётся приложению
 
 В реализации PyTorch 2.14.1 стандартный `FileSystemWriter` записывает данные
@@ -901,6 +1085,8 @@ $[W_0,W_1]$ восстанавливают конкатенацией по ст�
 или слой хранения. Внешний манифест с SHA-256 полезен именно как дополнительный
 протокол; это не скрытая возможность обычного `dcp.save`.
 [PyTorch 2.14.1: запись файлов и finish](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/torch/distributed/checkpoint/filesystem.py#L762-L802)
+
+<a id="checkpoint-immutable-generations"></a>
 
 ### Неизменяемые поколения и публикация указателя
 
@@ -932,6 +1118,8 @@ SHA-256. Нужны обе проверки: корректное формиро
 его сохранённого представления. Загружать произвольные недоверенные
 Python-checkpoints также небезопасно.
 
+<a id="checkpoint-s3-publication"></a>
+
 ### Почему для объектного хранилища нужен свой протокол
 
 Обычный протокол объектного хранилища работает с отдельными ключами,
@@ -956,6 +1144,8 @@ checkpoint завершено» — не одно утверждение.
 после этого удаляются ненужные данные. Очистка, выполняемая одновременно
 с восстановлением без такого соглашения, способна разрушить даже
 правильно опубликованный checkpoint.
+
+<a id="checkpoint-observability"></a>
 
 ## Наблюдаемость
 

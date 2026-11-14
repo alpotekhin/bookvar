@@ -1,0 +1,80 @@
+{
+  "date": "2026-11-13",
+  "scope": "Connect the modern decoder numerical example to cached SDPA, and correct the Mistral window description at the existing long-context owner.",
+  "review": {
+    "sources": "PyTorch SDPA documentation and tutorial (non-square causal biases); FlashAttention v2.1.0 changelog; Mistral 7B v1 §2 and Figure 3; original Llama 3 Transformer.forward mask.",
+    "workedCase": "Use the existing worked-block projections and inspect the first head on query position 1. Upper-left SDPA keeps key 0 only; explicit suffix visibility matches the block. Apply a width-2 window and verify which historical key each row loses. Count four allowed keys in every row of the original Mistral figure.",
+    "provenance": "Reuse the existing registered Mistral Figure 3 crop and original English caption, CC BY 4.0. No additional binary file, crop, or translation.",
+    "verification": "Ran all three examples and the independent decoder checker on PyTorch 2.15 CPU, including the full/suffix mask, window, lower-right bias and same-shape wrong-mask controls. Seven decoder evidence tests passed. A 2089-page build passed 335 output checks and zero broken internal links; following a link-only correction the final rebuild and both rendered links were checked, with all six affected publication checks passing. Inspected the original figure inline and at 3× with pan in both routes at widths 375 and 1280. The five preceding revisions restore exactly. No push or deployment.",
+    "scopeLimit": "Read the complete preceding decoder chapter and recheck its changed section. The existing English route displays the labeled Russian fallback; no new translation or whole-book acceptance."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
+      "before_sha256": "8625729637ee1cd07f6b3b77fad0172f6ec2fd2f38b6b9b87a2ee52f5da43a1b",
+      "after_sha256": "46df0c4802c6ee8cc5a880ea02c6ea273511b83027efa4d0cdbf108311ce2a6f",
+      "changes": [
+        {
+          "old": "type: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-10\nprevious: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual]]\"\nsource_unit_id:\n  - lecture-03-hyperparameter-evidence",
+          "new": "type: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-13\nprevious: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual]]\"\nreference_terms:\n  - label: Прямоугольная причинная маска с KV-кэшем\n    label_en: Rectangular causal masking with a KV cache\n    anchor: decoder-rectangular-mask\nsource_unit_id:\n  - lecture-03-hyperparameter-evidence"
+        },
+        {
+          "old": "  - https://github.com/meta-llama/llama3/blob/a0940f9cf7065d45bb6675660f80d305c041a754/llama/model.py\n  - https://arxiv.org/abs/2204.02311v5\n  - https://arxiv.org/abs/2001.08361v1\n  - https://arxiv.org/abs/2109.10686v2",
+          "new": "  - https://github.com/meta-llama/llama3/blob/a0940f9cf7065d45bb6675660f80d305c041a754/llama/model.py\n  - https://arxiv.org/abs/2204.02311v5\n  - https://docs.pytorch.org/tutorials/intermediate/scaled_dot_product_attention_tutorial.html\n  - https://arxiv.org/html/2310.06825v1#S2.F3\n  - https://arxiv.org/abs/2001.08361v1\n  - https://arxiv.org/abs/2109.10686v2"
+        },
+        {
+          "old": "inference-cache не заменяет вычислительный граф.\n\n### Прямоугольная маска\n",
+          "new": "inference-cache не заменяет вычислительный граф.\n\n<a id=\"decoder-rectangular-mask\"></a>\n\n### Прямоугольная маска\n"
+        },
+        {
+          "old": "относительных фазах. Размеры тензоров при этом останутся правильными.\n\n### Два блока и два кэша\n",
+          "new": "относительных фазах. Размеры тензоров при этом останутся правильными.\n\nУ [PyTorch SDPA](https://docs.pytorch.org/docs/main/generated/torch.nn.functional.scaled_dot_product_attention.html)\nфлаг `is_causal=True` строит треугольник от левого верхнего угла.\nЭто верно для полного прохода, где первая строка Q и первый столбец K\nотносятся к одной позиции. При продолжении первая строка Q относится\nк позиции 1, а первый столбец K всё ещё к позиции 0. Флаг оставит\nпервой голове только значение позиции 0, $(1.4142,0)$, вместо смеси\nзначений позиций 0 и 1, $(0.2985,1.4112)$. Форма результата не изменится.\n\nПередадим SDPA явную булеву маску, где `True` разрешает пару Q/K.\nСледующий код использует `model` и `x` из предыдущего примера.\nКлючи и значения уже содержат префикс; RoPE применён в `model`.\nСравниваем выход внимания до проекции $W_O$ и остаточного сложения.\n\n~~~python\nwith torch.no_grad():\n    _, past, _ = model(x[:, :1])\n    _, _, chunk = model(x[:, 1:], start_pos=1, cache=past)\n    q, k, v = (chunk[name] for name in (\"q\", \"k\", \"v\"))\n    repeat = model.nq // model.nkv\n    k = k.repeat_interleave(repeat, dim=1)\n    v = v.repeat_interleave(repeat, dim=1)\n    i = torch.arange(1, 3)[:, None]\n    j = torch.arange(3)[None, :]\n    visible = j <= i\n    sdpa = F.scaled_dot_product_attention\n    correct = sdpa(q, k, v, attn_mask=visible)\n    wrong = sdpa(q, k, v, is_causal=True)\n    torch.testing.assert_close(correct, chunk[\"mixed\"])\n    assert not torch.allclose(wrong, correct)\n    print(wrong[0, 0, 0], correct[0, 0, 0])\n    # tensor([1.414199, 0.000000]) tensor([0.298538, 1.411221])\n\n    # Same keys and positions, but the window includes at most two tokens.\n    local_visible = visible & (j > i - 2)\n    assert local_visible.tolist() == [[True, True, False], [False, True, True]]\n    _, _, local_chunk = model(x[:, 1:], start_pos=1, cache=past, window=2)\n    torch.testing.assert_close(\n        sdpa(q, k, v, attn_mask=local_visible), local_chunk[\"mixed\"])\n~~~\n\nДля сплошного суффикса без padding и локального окна подойдёт также\n[`causal_lower_right`](https://docs.pytorch.org/docs/main/generated/torch.nn.attention.bias.causal_lower_right.html):\nон смещает диагональ на разницу длин K и Q. У отдельной библиотеки\n[FlashAttention начиная с 2.1](https://github.com/Dao-AILab/flash-attention/blob/v2.1.0/README.md#changes-in-v21-compared-to-v20)\nфлаг `causal=True` выровнен по правому нижнему углу. Поэтому при\nзамене вызова проверяют, какие позиции видит запрос, а не только\nимя флага или размер выхода.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/long-context-2026-10-23/mistral-chunk-mask.png|Четыре строки новых запросов. В первой строке единицы стоят под тремя токенами из кэша и первым токеном новой порции; в последней разрешены все четыре новых токена и ни одного старого.]]\n\n*Albert Q. Jiang et al., [Mistral 7B, рис. 3, с. 3](https://arxiv.org/pdf/2310.06825v1#page=3).\nИсходная маска и английская подпись, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nНа рисунке окно включает четыре позиции, считая текущую.\nПервый новый `the` видит `mat`, `and`, `saw` и себя.\nПоследний новый `to` видит только четыре токена своей порции.\nЭто та же проверка $i-w<j\\le i$, что в примере с окном 2.\nЕсли перезаписать весь старый кэш новой порцией до вычисления первой\nстроки, `the` потеряет три нужных ключа. Как хранить хвост и обновлять\nего после вычисления порции, разобрано в\n[[00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание#Кольцевой кэш при обработке нескольких новых токенов|главе о длинном контексте]].\n\n### Два блока и два кэша\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "before_sha256": "870a67498cfd0050ab85e17b5d20b900afa44b31b82d45d21dc5903fcebd78f2",
+      "after_sha256": "4fcb5fa734bdc6d507faf35e555c27aaf91830c297efc3f6043481382c7d8962",
+      "changes": [
+        {
+          "old": "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), с полной английской\nподписью. Строки — новые запросы, столбцы — более ранние токены, кэш и\nтекущая порция. Размер порции и ширина окна не обязаны совпадать:\nна этой исходной маске четыре новых запроса, а в каждой строке разрешено\nпять позиций, включая текущую. В нашем примере выше окно равно четырём.*\n\nСледующая функция показывает одну уже спроецированную голову. Она хранит",
+          "new": "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), с полной английской\nподписью. Строки — новые запросы, столбцы — более ранние токены, кэш и\nтекущая порция. На рисунке четыре новых запроса, и в каждой строке\nразрешены четыре позиции, включая текущую. В общем случае размер порции\nи ширина окна могут различаться.*\n\nСледующая функция показывает одну уже спроецированную голову. Она хранит"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "bab7f5e17a117996508f810de254f4236a85795f00daff211d014837da51a642",
+      "after_sha256": "0d3596e022c4f4d8e1feb77cd76ba3e3425484b0408de66e43be96758ebc998f",
+      "changes": [
+        {
+          "old": "    provenance_confirmation: \"source-license-verified\"\n    last_verified: \"2026-10-23\"\n    used_in: [\"00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md\"]\n  - id: \"curated-long-context-cla-cache-groups-3cace99519ba\"\n    asset: \"00 Учебник/Assets/Figures/curated/long-context-2026-10-23/cla-cache-groups.png\"",
+          "new": "    provenance_confirmation: \"source-license-verified\"\n    last_verified: \"2026-10-23\"\n    used_in: [\"00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md\", \"00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md\"]\n  - id: \"curated-long-context-cla-cache-groups-3cace99519ba\"\n    asset: \"00 Учебник/Assets/Figures/curated/long-context-2026-10-23/cla-cache-groups.png\""
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "d1a70f93999cac226d8f3ee8d1d02cb00ea37b8d90f4ff6adf529b7da8bcc573",
+      "after_sha256": "c1d0874da413fb2b6518d302b217235a6234af2d818854be99545e9fbcbcef08",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-evaluation|Проверка памяти и скорости]]\n- [[00 Учебник/07 Анатомия современной LLM/02 Современный decoder block|Современный decoder block]]\n- [[00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating|Dense FFN — расширение размерности и SwiGLU]]\n- [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|LLaMA как базовая архитектура]]",
+          "new": "  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-evaluation|Проверка памяти и скорости]]\n- [[00 Учебник/07 Анатомия современной LLM/02 Современный decoder block|Современный decoder block]]\n  - [[00 Учебник/07 Анатомия современной LLM/02 Современный decoder block#decoder-rectangular-mask|Прямоугольная причинная маска с KV-кэшем]]\n- [[00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating|Dense FFN — расширение размерности и SwiGLU]]\n- [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|LLaMA как базовая архитектура]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "10c57bd8f65c05f1af352a1fe7714f723b11034c6069f3a91070272b9693adc4",
+      "after_sha256": "038ef02490f56510c1c266619db18c20b2cead7fab7f05c65a46ae002e7974ea",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/07 Анатомия современной LLM/04 RoPE|RoPE]]\n- [[00 Учебник/07 Анатомия современной LLM/02 Современный decoder block|The modern decoder block]]\n- [[00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость|Transformer from scratch: shapes, parameters, and cost]]\n",
+          "new": "- [[00 Учебник/07 Анатомия современной LLM/04 RoPE|RoPE]]\n- [[00 Учебник/07 Анатомия современной LLM/02 Современный decoder block|The modern decoder block]]\n  - [[00 Учебник/07 Анатомия современной LLM/02 Современный decoder block#decoder-rectangular-mask|Rectangular causal masking with a KV cache]]\n- [[00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость|Transformer from scratch: shapes, parameters, and cost]]\n"
+        }
+      ]
+    }
+  ]
+}

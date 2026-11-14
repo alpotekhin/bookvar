@@ -272,6 +272,57 @@ def deepseek_example():
         "compute": 10**compute_power, "batch_tokens": batch,
         "lr": lr, "sequences": batch / int(sequence)
     }
+    threshold, minimum, cutoff, included, excluded = map(number, need(
+        r"\$(1\.\d+)L_\{\\min\}\$\. Если минимум равен \$(2\{,\}\d+)\$, граница равна"
+        r"\s*\$(2\{,\}\d+)\$: результат \$(2\{,\}\d+)\$ пройдёт отбор, а \$(2\{,\}\d+)\$"
+    ).groups())
+    approx(threshold * minimum, cutoff, 0.000005)
+    assert minimum <= included <= threshold * minimum < excluded
+    coefficients, powers = [], []
+    for variable in "MD":
+        coefficient, power = map(float, need(
+            rf"{variable}_\{{\\mathrm\{{opt\}}\}}=([\d.]+)\\,C\^\{{([\d.]+)\}}"
+        ).groups())
+        coefficients.append(coefficient)
+        powers.append(power)
+    factor, model, data = map(number, need(
+        r"При росте бюджета в (\d+) раз подгонка даёт рост \$M\$ примерно в ([\d,]+) раза,"
+        r"\s*а \$D\$ — в ([\d,]+) раза"
+    ).groups())
+    factors = [factor**power for power in powers]
+    approx(sum(powers), 1, 1e-12)
+    approx(math.prod(coefficients), 1, .0002)
+    approx(factors[0], model, .005)
+    approx(factors[1], data, .005)
+    approx(math.prod(factors), factor, 1e-10)
+    RESULTS["deepseek_allocation"] = {"near_optimal_cutoff": cutoff,
+                                      "compute_multiplier": factor,
+                                      "M_and_D_multipliers": factors}
+
+
+def historical_fit_examples():
+    exponent, ratio = map(number, need(
+        r"\$10\^\{(-[\d.]+)\}\\approx(0\{,\}\d+)\$"
+    ).groups())
+    approx(10**exponent, ratio, .0005)
+    loss1, loss2, denominator, factor = map(number, need(
+        r"\$\((\d+)/([\d.]+)\)\^\{1/([\d.]+)\}\\approx(\d+\{,\}\d+)\$"
+    ).groups())
+    approx((loss1/loss2)**(1/denominator), factor, .005)
+    tied, untied = map(number, need(
+        r"это ([\d,]+) млн уникальных параметров, без связывания — ([\d,]+) млн"
+    ).groups())
+    vocab, width, vocabulary_millions = map(lambda s: number(s.replace(r"\,", "")), need(
+        r"\$(\d+\\,\d+)\\cdot(\d+)=([\d]+\{,\}[\d]+)\$ млн весов"
+    ).groups())
+    core = number(need(r"Пусть в слоях (\d+) млн линейных весов").group(1))
+    approx(vocab * width / 1e6, vocabulary_millions, 1e-12)
+    approx(core + vocabulary_millions, tied, 1e-12)
+    approx(core + 2 * vocabulary_millions, untied, 1e-12)
+    shown = number(need(r"\\text\{млн\}=(\d+\{,\}\d+)\$ млн FLOPs").group(1))
+    approx(6 * tied, shown, 1e-12)
+    RESULTS["historical_fit_ratios"] = {"dataset_10x": ratio, "critical_batch": factor,
+                                        "vocab_weights_millions": vocabulary_millions}
 
 
 def mup_examples():
@@ -322,31 +373,103 @@ def mup_examples():
 
 
 def inference_example():
-    n1, d1 = map(number, need(
-        r"модель на (\d+) млрд параметров после (\d+) млрд токенов"
+    section = TEXT.split('<a id="scaling-iso-loss-lifetime"></a>', 1)[1]
+    e, a, b, target = map(number, need(
+        r"L=(\d+)\+(\d+\{,\}\d+)/\\sqrt n\+(\d+)/\\sqrt d.*?Цель — \$(\d+\{,\}\d+)\$",
+        section
     ).groups())
-    n2, d2 = map(number, need(
-        r"модель на (\d+) млрд параметров после (\d+,\d+) трлн токенов"
-    ).groups())
-    rows = table("| Затраты |")
-    assert len(rows) == 3 and rows[0][0] == "Обучение"
-    assert "$Q=10^{12}$" in rows[1][0]
-    q_multiplier = int(need(r"Q=(\d+)\\cdot10\^\{12\}", rows[2][0]).group(1))
-    header = need(r"^\| Затраты \|[^\n]*").group(0)
-    assert [float(x) for x in re.findall(r"N=(\d+)", header)] == [n1, n2]
-    assert "Все численные значения затрат выражены в $10^{22}$ FLOPs." in TEXT
-    costs = list(zip(*[[number(x) for x in row[1:]] for row in rows]))
-    values = [(n1*1e9, d1*1e9, *costs[0]), (n2*1e9, d2*1e12, *costs[1])]
-    for n, d, training, total1, total2 in values:
-        approx(6 * n * d / 1e22, training, 0.05)
-        approx((6 * n * d + 2 * n * 1e12) / 1e22, total1, 0.05)
-        approx((6 * n * d + 2 * n * q_multiplier * 1e12) / 1e22, total2, 0.05)
-    n1, d1 = values[0][:2]
-    n2, d2 = values[1][:2]
-    breakeven = (6 * n2 * d2 - 6 * n1 * d1) / (2 * (n1 - n2))
-    coefficient = number(need(r"Q=(\d+\{,\}\d+)\\cdot10\^\{12\}").group(1))
-    approx(breakeven / 1e12, coefficient, 0.05)
-    RESULTS["inference_breakeven_tokens"] = breakeven
+    q_billions = number(need(r"и\s+(\d+) млрд токенов инференса", section).group(1))
+
+    def iso_loss_d(n):
+        remaining = target - e - a / math.sqrt(n)
+        if remaining <= 0:
+            raise ValueError("Not reachable at finite D")
+        return (b / remaining) ** 2
+
+    for unreachable in (0.5, 1):
+        try:
+            iso_loss_d(unreachable)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("Unreachable loss accepted")
+
+    candidates = []
+    for n_cell, d_cell, c_train, c_total in table("| Модель | Токены | Обучение | Всего"):
+        n = number(n_cell.split()[0])
+        d = iso_loss_d(n)
+        approx(d, number(d_cell.split()[0]), 0.005)
+        approx(e + a / math.sqrt(n) + b / math.sqrt(d), target, 1e-12)
+        train = 6*n*d/1000
+        total = train + 2*n*q_billions/1000
+        approx(train, number(c_train), 0.005)
+        approx(total, number(c_total), 0.005)
+        candidates.append((n, train, total))
+    assert min(candidates, key=lambda x: x[1])[0] == 8
+    assert min(candidates, key=lambda x: x[2])[0] == 4
+    (n1,c1,_),(n2,c2,_),_ = candidates
+    q_cross = 1000*(c1-c2)/(2*(n2-n1))
+    approx(q_cross, number(need(r"примерно при (\d+) млрд токенов инференса", section).group(1)), 0.5)
+    approx(c1-c2, number(need(r"перерасход около\s*\$(\d+\{,\}\d+)\\cdot10\^\{21\}",section).group(1)),0.0005)
+    RESULTS["inference_breakeven_tokens"] = q_cross*1e9
+    RESULTS["same_loss_candidates_billions"] = candidates
+
+
+def emergence_example():
+    section = TEXT.split('<a id="scaling-metric-emergence"></a>', 1)[1].split(
+        '<a id="train-inference-tradeoff"></a>', 1
+    )[0]
+    a, b, target, first, second = need(
+        r"умножения \$(\d+)\\cdot(\d+)\$ эталон — \x60(\d+)\x60\."
+        r"\s*Ответы \x60(\d+)\x60 и \x60(\d+)\x60", section
+    ).groups()
+    assert int(a) * int(b) == int(target)
+    assert [sum(x != y for x, y in zip(response, target, strict=True))
+            for response in (first, second, target)] == [2, 1, 0]
+    m, p1, p2, p3, s1, s2, s3, n, minimum, no_hits = need(
+        r"При \$m=(\d+)\$ значения \$p=(0\{,\}\d+);\\;(0\{,\}\d+);\\;(0\{,\}\d+)\$"
+        r" дают примерно\s*([\d,]+)%, ([\d,]+)% и ([\d,]+)% полных совпадений\."
+        r" На тесте из (\d+) независимых\s*ответов минимальный ненулевой результат — (\d+)%"
+        r".*?составляет около ([\d,]+)%", section
+    ).groups()
+    rates = [number(p) ** int(m) for p in (p1, p2, p3)]
+    for rate, displayed in zip(rates, (s1, s2, s3), strict=True):
+        approx(rate * 100, number(displayed), 0.0005)
+    assert int(minimum) == 100 / int(n)
+    zero_rate = (1 - rates[0]) ** int(n)
+    approx(zero_rate * 100, number(no_hits), 0.05)
+    RESULTS["emergence_example"] = {"exact_match": rates, "zero_matches": zero_rate}
+
+
+def isoflop_bias_example():
+    section = TEXT.split('<a id="isoflop-parabola-bias"></a>', 1)[1].split(
+        '<a id="scaling-campaign-начинается-до-регрессии">', 1)[0]
+    alpha, beta = map(number, need(
+        r"\\alpha=(0\{,\}\d+)\$ и \$\\beta=(0\{,\}\d+)\$", section).groups())
+    block = next(b for b in re.findall(FENCE + r"python\n(.*?)\n" + FENCE, TEXT, re.S)
+                 if "def three_point_minimum(" in b)
+    namespace = {}
+    with redirect_stdout(io.StringIO()):
+        exec(compile(block, str(CHAPTER), "exec"), namespace)
+    fit = namespace["three_point_minimum"]
+    def loss(x, alpha=alpha, beta=beta):
+        return math.exp(-alpha*x)/alpha + math.exp(beta*x)/beta
+    for side, shown in [(-1, .2123), (1, .1764)]:
+        approx(loss(side*math.log(2)) - loss(0), shown, .00005)
+    estimates = []
+    for cells in table("| Размеры в единицах"):
+        k = int(need(r"1/(\d+)", cells[0]).group(1))
+        positions = [1/k, 1, k]
+        measurements = [loss(math.log(size)) for size in positions]
+        assert measurements[1] < min(measurements[0], measurements[2])
+        estimate = fit(positions, measurements)
+        approx(estimate, number(cells[1]), .00005)
+        approx(1/estimate, number(cells[2]), .00005)
+        approx(fit([10*size for size in positions], measurements), 10*estimate, 1e-12)
+        approx(fit(positions, [loss(math.log(size), .3, .3) for size in positions]), 1, 1e-12)
+        estimates.append(estimate)
+    assert 1 < estimates[0] < estimates[1]
+    RESULTS["isoflop_bias_model_ratios"] = estimates
 
 
 def structure_and_assets():
@@ -358,24 +481,27 @@ def structure_and_assets():
         "learning-rate-нельзя-переносить-молча",
         "как-удешевить-кампанию-wsd",
         "как-читать-опубликованный-scaling-plot",
+        "scaling-metric-emergence",
+        "isoflop-parabola-bias",
     ]
     assert all(f'<a id="{anchor}"></a>' in TEXT for anchor in required_anchors)
     assert not re.search(r"^\$$", TEXT, re.M), "Multiline inline math remains"
     assert len(re.findall(r"^\$\$$", TEXT, re.M)) % 2 == 0
     assert len(re.findall("^" + FENCE, TEXT, re.M)) % 2 == 0
     embeds = re.findall(r"!\[\[([^]|]+)", TEXT)
-    assert len(embeds) == 26, len(embeds)
+    assert len(embeds) == len(set(embeds)) == 25, len(embeds)
     for path in embeds:
         assert (ROOT / path.removeprefix("02 Areas/ML & DL/")).is_file(), path
     records = json.loads((ASSETS / "assets.json").read_text())
     assert len(records) == 21
+    active_embeds = {path.removeprefix("02 Areas/ML & DL/") for path in embeds}
     for record in records:
         asset = ROOT / record["asset"]
         source = ROOT / record["source_asset"]
         assert hashlib.sha256(asset.read_bytes()).hexdigest() == record["sha256"]
         assert hashlib.sha256(source.read_bytes()).hexdigest() == record["source_asset_sha256"]
         assert list(struct.unpack(">II", asset.read_bytes()[16:24])) == record["dimensions"]
-        assert str(asset.relative_to(ROOT)) in "\n".join(embeds)
+        assert str(asset.relative_to(ROOT)) not in active_embeds
         left, top, right, bottom = record["crop_pixels"]
         assert record["dimensions"] == [right - left, bottom - top]
         assert 0 <= left < right <= record["source_render_dimensions"][0]
@@ -407,11 +533,15 @@ def structure_and_assets():
     assert not re.search(r'<(?:script|foreignObject)\b|\bon\w+=', svg)
     assert all(ref.startswith('#') for ref in re.findall(r'(?:xlink:)?href="([^"]+)"', svg))
     RESULTS["structure"]["new_originals"] = len(new_records)
+    final_figure = ROOT / "00 Учебник/Assets/Figures/curated/scaling-lifetime-2026-11-14/sardana24a-figure5.png"
+    assert hashlib.sha256(final_figure.read_bytes()).hexdigest() == "2eeafe50cf15461f81656df20cfbe90302b4ec97bdb09f7a1b7834892038094c"
 
 
 if __name__ == "__main__":
     for check in [mean_example, nonparametric_example, isoflop_example, fitted_examples, batch_and_wsd_examples,
-                  deepseek_example, mup_examples, inference_example, structure_and_assets]:
+                  deepseek_example, historical_fit_examples, mup_examples, inference_example,
+                  emergence_example, isoflop_bias_example,
+                  structure_and_assets]:
         check()
     print(json.dumps(RESULTS, ensure_ascii=False, indent=2))
     print("PASS: chapter code, displayed arithmetic, source tables and local assets.")

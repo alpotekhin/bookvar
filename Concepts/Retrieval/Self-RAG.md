@@ -36,8 +36,10 @@ Self-RAG расширяет словарь модели **четырьмя ти�
 
 Критический момент: модель **сама генерирует** эти токены как часть output — это не отдельная reward model или внешний классификатор. Reflection tokens — часть расширенного словаря, предсказываемые standard next-token prediction.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/self-rag/fig1.png]]
-*Сравнение классического RAG (слева) и Self-RAG (справа). Self-RAG адаптивно решает, когда извлекать, оценивает релевантность и поддержку каждого документа (источник: Asai et al., 2023)*
+![[00 Учебник/Assets/Figures/curated/self-rag/original-teaser_self_rag_v8.svg|Обычный RAG добавляет найденные документы к одному запросу. Self-RAG решает, когда искать, и сравнивает продолжения по документам.]]
+
+*Справа модель решает, нужен ли поиск, затем сравнивает продолжения,
+полученные из разных документов. Asai et al., [Self-RAG, рис. 1](https://arxiv.org/html/2310.11511v1#S1.F1), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Исходный SVG без изменений.*
 
 ## Как это работает: inference pipeline
 
@@ -99,7 +101,7 @@ $$\max_M \, \mathbb{E}_{(x,y,r) \sim D_{\text{gen}}} \log p_M(y, r | x)$$
 | Задача | Настройка | Зачем |
 |--------|-----------|-------|
 | Fact verification | Высокий вес `IsSup` | Каждое утверждение должно быть подтверждено |
-| Open-ended writing | Низкий порог `Retrieve` | Меньше retrieval, больше creativity |
+| Open-ended writing | Высокий порог `Retrieve` | Поиск запускается реже |
 | Citation-heavy QA | Высокий вес `IsSup` + `IsRel` | Точные цитаты с проверкой |
 | General QA | Balanced | Стандартный режим |
 

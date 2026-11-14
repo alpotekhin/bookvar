@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "kind": "pipeline-subject-additions",
+  "review_date": "2026-11-05",
+  "files": [
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md",
+      "before_sha256": "f622f710aff96bc0bbc4c4ae604e9a66d91db015c3c10428f35bc9c5280b0c33",
+      "after_sha256": "796cec9efadd9b4f1cbfd8c6c9878d17514bc2c816ce113904b413f721f82d9e",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-23\nlast_verified: 2026-10-23\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\nreference_terms:\n  - anchor: pp-boundaries\n    label: \"Что передают стадии: активации и производные\"\n    label_en: \"Stage boundaries: activations and input gradients\"\n  - anchor: pp-message-bytes\n    label: \"Размер PP-сообщения и время передачи\"\n    label_en: \"PP message sizes and transfer-time bounds\"\n  - anchor: gpipe-complete-p4-m4-schedule\n    label: \"GPipe: расписание четырёх стадий и микропакетов\"\n    label_en: \"GPipe: the complete four-stage/four-microbatch schedule\"\n  - anchor: pp-bubble-denominators\n    label: \"Pipeline bubble: доля шага и накладные расходы к работе\"\n    label_en: \"Pipeline bubbles: step fractions versus overhead over work\"\n  - anchor: pp-gpipe-memory\n    label: \"GPipe: накопление активаций и checkpointing\"\n    label_en: \"GPipe activation lifetimes and checkpointing\"\n  - anchor: pp-gpipe-loop\n    label: \"GPipe: порядок forward, backward и optimizer step\"\n    label_en: \"GPipe forward, backward and optimizer-step order\"\n  - anchor: pp-1f1b-schedule\n    label: \"1F1B: прогрев, чередование и опустошение\"\n    label_en: \"1F1B warmup, steady state and drain\"\n  - anchor: pp-1f1b-live\n    label: \"1F1B: живые активации на разных стадиях\"\n    label_en: \"1F1B live activation counts by stage\"\n  - anchor: pp-weight-stashing\n    label: \"Синхронный шаг, PipeDream и версии весов\"\n    label_en: \"Synchronous steps, PipeDream and weight stashing\"\n  - anchor: pp-process-autograd\n    label: \"Передача градиента между раздельными autograd-графами\"\n    label_en: \"Passing gradients between separate autograd graphs\"\n  - anchor: pp-stage-balance\n    label: \"Баланс стадий по времени и памяти\"\n    label_en: \"Balancing stage runtime and memory\"\n  - anchor: pp-layer-partition\n    label: \"Непрерывное разбиение слоёв: динамическое программирование\"\n    label_en: \"Contiguous layer partitioning with dynamic programming\"\n  - anchor: pp-microbatch-size\n    label: \"Глобальный batch, число микропакетов и размер GEMM\"\n    label_en: \"Global batch, microbatch count and GEMM sizes\"\n  - anchor: pp-interleaved-placement\n    label: \"Interleaving: несколько частей модели на GPU\"\n    label_en: \"Interleaving multiple model chunks per GPU\"\n  - anchor: pp-interleaved-bubble\n    label: \"Виртуальные стадии и оценка bubble\"\n    label_en: \"Virtual stages and the bubble estimate\"\n  - anchor: pp-interleaved-bytes\n    label: \"Цена interleaving: 12 против 28 GiB по всем связям\"\n    label_en: \"Interleaving traffic: 12 versus 28 GiB across all links\"\n  - anchor: pp-interleaved-priority\n    label: \"Depth-first, breadth-first и ограничения flex_pp\"\n    label_en: \"Depth-first, breadth-first and flex_pp constraints\"\n  - anchor: pp-zero-bubble-split\n    label: \"Zero Bubble: отдельно производные входов и весов\"\n    label_en: \"Zero Bubble: separating input and weight gradients\"\n  - anchor: pp-deferred-dw-storage\n    label: \"Отложенный dW и срок хранения X/dY\"\n    label_en: \"Deferred weight gradients and X/dY lifetimes\"\n  - anchor: pp-zb1p-zb2p\n    label: \"ZB1P/ZB2P: расписание и бюджет активаций\"\n    label_en: \"ZB1P/ZB2P schedules and activation budgets\"\n  - anchor: pp-zbv\n    label: \"ZBV: обратное размещение двух частей\"\n    label_en: \"ZBV: reverse placement of two model chunks\"\n  - anchor: pp-postvalidation\n    label: \"Post-validation: clipping, rollback и состояние оптимизатора\"\n    label_en: \"Post-validation: clipping, rollback and optimizer state\"\n  - anchor: pp-dualpipe\n    label: \"DualPipe, DualPipeV и обмены MoE\"\n    label_en: \"DualPipe, DualPipeV and MoE communication\"\n  - anchor: pp-dp-configuration\n    label: \"PP×DP: пример 48 блоков на 32 GPU\"\n    label_en: \"PP×DP: a 48-block model on 32 GPUs\"\n  - anchor: pp-tied-weights\n    label: \"Общие embedding/output-веса на разных стадиях\"\n    label_en: \"Tied embedding/output weights across stages\"\n  - anchor: pp-global-token-loss\n    label: \"Нормировка по полезным токенам всех микропакетов\"\n    label_en: \"Normalization over valid tokens across microbatches\"\n  - anchor: pp-scale-grads\n    label: \"scale_grads и повторное усреднение\"\n    label_en: \"scale_grads and repeated averaging\"\n  - anchor: pp-message-contract\n    label: \"Согласование сообщений, PP-буферов, shapes и dtype\"\n    label_en: \"Matching messages, PP buffers, shapes and dtypes\"\n  - anchor: pp-validation\n    label: \"Проверки математики, расписания и сетевого исполнения\"\n    label_en: \"Checking mathematics, schedules and distributed execution\"\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/pipeline-2026-10-23/hf-naive-pipeline.svg]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/pipeline-2026-10-23/hf-naive-pipeline.svg|Последовательный forward и backward без микропакетов]]\n"
+        },
+        {
+          "old": "## Состояние и формы на границе\n",
+          "new": "<a id=\"pp-boundaries\"></a>\n\n## Состояние и формы на границе\n"
+        },
+        {
+          "old": "При BF16, $b_\\mu=2$, $S=4096$, $D=8192$ одна передача занимает\n",
+          "new": "<a id=\"pp-message-bytes\"></a>\n\nПри BF16, $b_\\mu=2$, $S=4096$, $D=8192$ одна передача занимает\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-pipeline-gpipe.svg]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-pipeline-gpipe.svg|GPipe: прямые проходы всех микропакетов, затем обратные проходы]]\n"
+        },
+        {
+          "old": "### Откуда берётся доля простоя\n",
+          "new": "<a id=\"pp-bubble-denominators\"></a>\n\n### Откуда берётся доля простоя\n"
+        },
+        {
+          "old": "### Почему накапливаются активации\n",
+          "new": "<a id=\"pp-gpipe-memory\"></a>\n\n### Почему накапливаются активации\n"
+        },
+        {
+          "old": "### Псевдокод GPipe\n",
+          "new": "<a id=\"pp-gpipe-loop\"></a>\n\n### Псевдокод GPipe\n"
+        },
+        {
+          "old": "<a id=\"1f1b-warm-up-steady-state-и-drain\"></a>\n",
+          "new": "<a id=\"pp-1f1b-schedule\"></a>\n\n<a id=\"1f1b-warm-up-steady-state-и-drain\"></a>\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-pipeline-1f1b.svg]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-pipeline-1f1b.svg|1F1B: чередование прямых и обратных проходов по стадиям]]\n"
+        },
+        {
+          "old": "В этой модели максимум одновременно незавершённых прямых проходов равен\n",
+          "new": "<a id=\"pp-1f1b-live\"></a>\n\nВ этой модели максимум одновременно незавершённых прямых проходов равен\n"
+        },
+        {
+          "old": "Оба расписания синхронны: обновление параметров происходит после завершения\n",
+          "new": "<a id=\"pp-weight-stashing\"></a>\n\nОба расписания синхронны: обновление параметров происходит после завершения\n"
+        },
+        {
+          "old": "### Как производная пересекает границу процессов\n",
+          "new": "<a id=\"pp-process-autograd\"></a>\n\n### Как производная пересекает границу процессов\n"
+        },
+        {
+          "old": "<a id=\"stage-balance-bubble-и-память\"></a>\n",
+          "new": "<a id=\"pp-stage-balance\"></a>\n\n<a id=\"stage-balance-bubble-и-память\"></a>\n"
+        },
+        {
+          "old": "Для последовательной модели можно сначала решить более простую задачу:\n",
+          "new": "<a id=\"pp-layer-partition\"></a>\n\nДля последовательной модели можно сначала решить более простую задачу:\n"
+        },
+        {
+          "old": "Увеличение $m$ уменьшает относительный простой. При фиксированном\n",
+          "new": "<a id=\"pp-microbatch-size\"></a>\n\nУвеличение $m$ уменьшает относительный простой. При фиксированном\n"
+        },
+        {
+          "old": "## Несколько частей модели на одном GPU\n",
+          "new": "<a id=\"pp-interleaved-placement\"></a>\n\n## Несколько частей модели на одном GPU\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/pipeline-review-2026-10/hf-interleaved-1f1b.svg]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/pipeline-review-2026-10/hf-interleaved-1f1b.svg|Перемежающееся 1F1B с двумя частями модели на каждом GPU]]\n"
+        },
+        {
+          "old": "В идеализированной модели с $v$ равными частями на устройство дополнительное\n",
+          "new": "<a id=\"pp-interleaved-bubble\"></a>\n\nВ идеализированной модели с $v$ равными частями на устройство дополнительное\n"
+        },
+        {
+          "old": "Посчитаем пересылки для указанного размещения. Без перемежения один\n",
+          "new": "<a id=\"pp-interleaved-bytes\"></a>\n\nПосчитаем пересылки для указанного размещения. Без перемежения один\n"
+        },
+        {
+          "old": "Если на одном GPU одновременно готовы две части, нужно ещё выбрать,\n",
+          "new": "<a id=\"pp-interleaved-priority\"></a>\n\nЕсли на одном GPU одновременно готовы две части, нужно ещё выбрать,\n"
+        },
+        {
+          "old": "<a id=\"что-меняют-zero-bubble-и-dualpipe\"></a>\n",
+          "new": "<a id=\"pp-zero-bubble-split\"></a>\n\n<a id=\"что-меняют-zero-bubble-и-dualpipe\"></a>\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/dependency.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/dependency.png|Две ветви backward: производная входа B и производная весов W]]\n"
+        },
+        {
+          "old": "Для отдельного умножения $XW$ отложенная W-работа хранит $X$ формы\n",
+          "new": "<a id=\"pp-deferred-dw-storage\"></a>\n\nДля отдельного умножения $XW$ отложенная W-работа хранит $X$ формы\n"
+        },
+        {
+          "old": "### Как отложенная работа заполняет простой\n",
+          "new": "<a id=\"pp-zb1p-zb2p\"></a>\n\n### Как отложенная работа заполняет простой\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/zb1p.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/zb1p.png|ZB1P: отложенные W-операции в расписании четырёх устройств]]\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/zb2p.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/zb2p.png|ZB2P: дополнительные forward-операции требуют большего бюджета активаций]]\n"
+        },
+        {
+          "old": "### ZBV: две части модели с обратным размещением\n",
+          "new": "<a id=\"pp-zbv\"></a>\n\n### ZBV: две части модели с обратным размещением\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/zbv.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/zbv.png|V-образный путь одного микропакета и полное расписание ZBV]]\n"
+        },
+        {
+          "old": "### Обновление параметров и post-validation\n",
+          "new": "<a id=\"pp-postvalidation\"></a>\n\n### Обновление параметров и post-validation\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/optimizer.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/optimizer.png|Post-validation: сообщения общей проверки, шаги оптимизатора и откат]]\n"
+        },
+        {
+          "old": "### DualPipe и коммуникации MoE\n",
+          "new": "<a id=\"pp-dualpipe\"></a>\n\n### DualPipe и коммуникации MoE\n"
+        },
+        {
+          "old": "## Полная конфигурация\n",
+          "new": "<a id=\"pp-dp-configuration\"></a>\n\n## Полная конфигурация\n"
+        },
+        {
+          "old": "Если входной embedding и выходная проекция используют общие веса,\n",
+          "new": "<a id=\"pp-tied-weights\"></a>\n\nЕсли входной embedding и выходная проекция используют общие веса,\n"
+        },
+        {
+          "old": "<a id=\"trade-offs-и-верификация\"></a>\n",
+          "new": "<a id=\"pp-global-token-loss\"></a>\n\n<a id=\"trade-offs-и-верификация\"></a>\n"
+        },
+        {
+          "old": "В PyTorch 2.14 расписания `torch.distributed.pipelining` имеют параметр\n",
+          "new": "<a id=\"pp-scale-grads\"></a>\n\nВ PyTorch 2.14 расписания `torch.distributed.pipelining` имеют параметр\n"
+        },
+        {
+          "old": "Для сетевого выполнения недостаточно, чтобы соседние процессы знали\n",
+          "new": "<a id=\"pp-message-contract\"></a>\n\nДля сетевого выполнения недостаточно, чтобы соседние процессы знали\n"
+        },
+        {
+          "old": "Проверку удобно разделить на три уровня:\n",
+          "new": "<a id=\"pp-validation\"></a>\n\nПроверку удобно разделить на три уровня:\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "1a8d12ea33980f0d42911b993e8707a085954c92983e17b04e2a47fa7c854970",
+      "after_sha256": "bd943a6dc437028434c82057b3732c129e10fbd1b645e34b87c3d13e4b85cadf",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism|Конвейерное обучение]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism|Конвейерное обучение]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-boundaries|Что передают стадии: активации и производные]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-message-bytes|Размер PP-сообщения и время передачи]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#gpipe-complete-p4-m4-schedule|GPipe: расписание четырёх стадий и микропакетов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-bubble-denominators|Pipeline bubble: доля шага и накладные расходы к работе]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-gpipe-memory|GPipe: накопление активаций и checkpointing]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-gpipe-loop|GPipe: порядок forward, backward и optimizer step]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-1f1b-schedule|1F1B: прогрев, чередование и опустошение]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-1f1b-live|1F1B: живые активации на разных стадиях]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-weight-stashing|Синхронный шаг, PipeDream и версии весов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-process-autograd|Передача градиента между раздельными autograd-графами]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-stage-balance|Баланс стадий по времени и памяти]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-layer-partition|Непрерывное разбиение слоёв: динамическое программирование]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-microbatch-size|Глобальный batch, число микропакетов и размер GEMM]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-interleaved-placement|Interleaving: несколько частей модели на GPU]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-interleaved-bubble|Виртуальные стадии и оценка bubble]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-interleaved-bytes|Цена interleaving: 12 против 28 GiB по всем связям]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-interleaved-priority|Depth-first, breadth-first и ограничения flex_pp]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-zero-bubble-split|Zero Bubble: отдельно производные входов и весов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-deferred-dw-storage|Отложенный dW и срок хранения X/dY]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-zb1p-zb2p|ZB1P/ZB2P: расписание и бюджет активаций]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-zbv|ZBV: обратное размещение двух частей]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-postvalidation|Post-validation: clipping, rollback и состояние оптимизатора]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-dualpipe|DualPipe, DualPipeV и обмены MoE]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-dp-configuration|PP×DP: пример 48 блоков на 32 GPU]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-tied-weights|Общие embedding/output-веса на разных стадиях]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-global-token-loss|Нормировка по полезным токенам всех микропакетов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-scale-grads|scale_grads и повторное усреднение]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-message-contract|Согласование сообщений, PP-буферов, shapes и dtype]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-validation|Проверки математики, расписания и сетевого исполнения]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "74040429a98e564e204333d15323fc254c2fd9cc8e6f71c1cbadb7f3bac5b541",
+      "after_sha256": "94daad844befd0a49d62a271b54510bad7972b7e7dabd2f31b2c96fa72b95fec",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism|Pipeline parallelism]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism|Pipeline parallelism]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-boundaries|Stage boundaries: activations and input gradients]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-message-bytes|PP message sizes and transfer-time bounds]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#gpipe-complete-p4-m4-schedule|GPipe: the complete four-stage/four-microbatch schedule]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-bubble-denominators|Pipeline bubbles: step fractions versus overhead over work]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-gpipe-memory|GPipe activation lifetimes and checkpointing]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-gpipe-loop|GPipe forward, backward and optimizer-step order]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-1f1b-schedule|1F1B warmup, steady state and drain]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-1f1b-live|1F1B live activation counts by stage]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-weight-stashing|Synchronous steps, PipeDream and weight stashing]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-process-autograd|Passing gradients between separate autograd graphs]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-stage-balance|Balancing stage runtime and memory]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-layer-partition|Contiguous layer partitioning with dynamic programming]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-microbatch-size|Global batch, microbatch count and GEMM sizes]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-interleaved-placement|Interleaving multiple model chunks per GPU]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-interleaved-bubble|Virtual stages and the bubble estimate]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-interleaved-bytes|Interleaving traffic: 12 versus 28 GiB across all links]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-interleaved-priority|Depth-first, breadth-first and flex_pp constraints]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-zero-bubble-split|Zero Bubble: separating input and weight gradients]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-deferred-dw-storage|Deferred weight gradients and X/dY lifetimes]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-zb1p-zb2p|ZB1P/ZB2P schedules and activation budgets]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-zbv|ZBV: reverse placement of two model chunks]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-postvalidation|Post-validation: clipping, rollback and optimizer state]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-dualpipe|DualPipe, DualPipeV and MoE communication]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-dp-configuration|PP×DP: a 48-block model on 32 GPUs]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-tied-weights|Tied embedding/output weights across stages]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-global-token-loss|Normalization over valid tokens across microbatches]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-scale-grads|scale_grads and repeated averaging]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-message-contract|Matching messages, PP buffers, shapes and dtypes]]\n  - [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism#pp-validation|Checking mathematics, schedules and distributed execution]]\n"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "status": "verified-local-delta",
+    "scope": "Navigation-only alignment after a complete934-line explanation read:29 subject links per locale,nine descriptive original-figure aliases and ASCII aliases alongside existing legacy anchors. Existing prose,three Python programs,all text schedules,11 display equations,nine originals and three course IDs retained. No translation,new scientific image,whole-course/full-book acceptance or release.",
+    "explanationReview": {
+      "read": "934-line input read completely in ranges1–210,211–430,431–650,651–850,851–EOF. Final1078-line version changes only dates,reference metadata,anchor insertions and descriptive aliases;new metadata/aliases inspected in source and rendered UI. Exact inverse/content tests prove the complete explanation,code and math unchanged. This is not claimed as a second fresh full prose rewrite/read.",
+      "sources": "Complete2026-10-23-pipeline.md and2026-10-23-zero-bubble-source-visuals.md read. Current inputf622f710aff96bc0bbc4c4ae604e9a66d91db015c3c10428f35bc9c5280b0c33 exactly matches their accepted934-line edition. Earlier selected GPipe§2,Megatron§2.2,CS336L8pp31–38,EDLSWeek4pp23–38,ZeroBubble§2–4 and pinned author-Space source/figure comparisons reused only on unchanged material.",
+      "fresh": "Official PyTorch2.14 Pipeline Schedules section,including GPipe/1F1B,Interleaved1F1B/flex_pp,LoopedBFS,ZeroBubble/ZBV,PipelineScheduleSingle/Multi and scale_grads contracts freshly read. No GPU/library execution inferred from API reading.",
+      "style": "No-ai-slop checklist applied to the full existing explanation and new subject labels. Detailed examples,necessary contrasts,RNG/BatchNorm and hardware caveats preserved;no rewriting for surface uniformity."
+    },
+    "examples": {
+      "exit": 0,
+      "torch": "2.14.1",
+      "device": "CPU,single process",
+      "programs": 3,
+      "partitionOracleInputs": 6015,
+      "scheduleConfigurations": 256,
+      "log": "/var/tmp/bookvar-pp-examples-20261105.log",
+      "scope": "All three actual chapter blocks execute. Both printed schedules satisfy dependencies;ordinary1F1B checked for p1..8/m1..32. Detached-boundary forward/loss/input-and-weight-gradients/SGD match dense reference,with unequal valid counts and empty-target microbatch. Partition code matches all6015 brute-force cases;deferred dX/dW matches autograd and finite differences. BatchNorm,token-average,clipping,traffic/live-count and source-figure controls pass.",
+      "revision": "Executed on3a98f795120b02ceef828e4f6729b31fdaf6ef329218a9b22291efc0ca7d9a11;final796cec9efadd9b4f1cbfd8c6c9878d17514bc2c816ce113904b413f721f82d9e differs by one descriptive alt correction only. Exact preservation tests bind every code/table/formula body.",
+      "limits": "No distributed PP process group,CUDA/NCCL,network-timing/overlap,GPU memory measurement,full ZeroBubble optimizer rollback or benchmark."
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-05-pipeline-reader",
+      "desktop": "Default1280x720,document1265/1265. All9 original figures loaded in native proportions;11 display equations and2 tables617/617,zero KaTeX errors. GPipe,1F1B,ZB2P and post-validation originals/captions freshly inspected in viewer. Earlier all-nine original source inspections remain historical on identical bytes;no fresh all-nine zoom claim.",
+      "mobile": "375x812 override,document360/360,reader328px. All9 original images fit328px;11 displays and2 tables328/328,zero KaTeX errors. Dense ZB2P inspected at3.5x;left position0 and right portion845 show readable device/microbatch numbers and the right optimizer legend. Observed scroll metrics360/1220;no claim that845 equals the exact860 arithmetic maximum or that every viewer edge was freshly tested. Temporary viewport reset.",
+      "navigation": "Actual RU reference ->#pp-postvalidation;actual EN reference ->#pp-global-token-loss,each target unique. EN explicitly reports no separate English edition. Actual EN Next ->zero-fsdp2-devicemesh-dtensor with correct h1;Russian interface restored and ZeRO/FSDP left open."
+    },
+    "checks": {
+      "scoped": {
+        "files": 5,
+        "tests": 28,
+        "exit": 0,
+        "includesReceiptTests": 2,
+        "hashPinnedWholeReads": 105,
+        "unreadOwners": 48,
+        "log": "/var/tmp/bookvar-tp-pp-final-20261105.log"
+      },
+      "html": {
+        "tests": 211,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-pp-output-20261105.log"
+      },
+      "build": {
+        "pages": 2009,
+        "pagefindFiles": 2013,
+        "seconds": 28.71,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-pp-build-final-20261105.log"
+      },
+      "links": {
+        "brokenInternal": 0,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-pp-links-20261105.log"
+      },
+      "size": {
+        "bytes": 856609630,
+        "files": 5626,
+        "limit": 1000000000,
+        "headroom": 143390370,
+        "exit": 0
+      },
+      "topicIndex": {
+        "topics": 153,
+        "exit": 0
+      },
+      "scopedWhitespace": {
+        "exit": 0
+      }
+    },
+    "remaining": [
+      "After registering this full-owner read,48 of153 canonical owners remain unread in this route pass. Read counters are not accepted-chapter counters.",
+      "Continue ZeRO/FSDP,expert/hybrid parallelism,network/storage/checkpoints and fault tolerance.",
+      "Existing rights/figure gaps,thematic course completeness,public-checkout/Pages-base acceptance and authorized dev/Pages release remain open."
+    ]
+  }
+}

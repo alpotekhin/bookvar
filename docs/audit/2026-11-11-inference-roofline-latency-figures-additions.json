@@ -1,0 +1,244 @@
+{
+  "date": "2026-11-11",
+  "scope": "Replace unverifiable Gordić illustrations in inference physics and benchmarking, preserving all original source-library content and direct source links.",
+  "review": {
+    "source": "Harvard ML Systems vol. II, Performance Engineering: original prefill/decode roofline; vol. III, §2.8.1 and Figure 5: initial logits, first sample, client delivery, and buffered remaining tokens. Stanford CS336 Lecture 10: nominal dense-BF16 H100 SXM ceiling and bandwidth. Original Gordić article retained as a linked alternative and unchanged source-library page.",
+    "worked_cases": "H100 roofline at 128, 256 and 512 FLOP/byte gives upper bounds of 428.8, 857.6 and 989 TFLOP/s. Two four-token streams both have TTFT 200 ms, last-token E2E 380 ms, and an endpoint-normalized 60 ms/token. Observed gaps are 60/60/60 ms versus 180 ms; the second stream does not identify individual token emission times.",
+    "figure_choice": "The candidate SGLang/Datawhale course Figure 5.4 was not used: the drawing divides elapsed time after the first token by total N, while the chapter example uses N-1, and the timeline misaligns the first-token labels. Harvard's byte-identical figure distinguishes service and client and leaves the benchmark convention to the text.",
+    "preservation": "Inside vLLM.md SHA-256 remains 9662caac4b2f93ca1ea095bf473982c94dda7ab499222d4688838a03f34b070c. Old PNGs and their source links remain in the library; the two figures still have no verified republication grant there. Original JAX Appendix A and the benchmark source excerpts and code stay unchanged. No publication.",
+    "style": "Read both input chapters in each locale and reread the revised passages. The new prose follows actual chart labels, keeps source artwork unchanged, and distinguishes engine work, client-visible events and normalized averages.",
+    "verification": "Final local build: 2083 pages, zero broken internal links, 300 output tests. All 26 displayed CPU code blocks in the two editions and five hash-pinned reversals passed. Registry and public-assets suites checked; after adding the required curated ML systems manifest entry, its one initially failing coverage test passed. Both figures were inspected at 1280 and 375 px; the first-token SVG zooms and pans at 3× on mobile. The 310-page reader scan found 1214 SHA-matching figure paths and five rights flags."
+  },
+  "figure": {
+    "id": "curated-harvard-first-token-accounting-cd26640ab6da",
+    "asset": "00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg",
+    "author": "Vijay Janapa Reddi and contributors, Harvard ML Systems",
+    "title": "First-Token Accounting (Figure 5)",
+    "source_url": "https://harvard-edge.github.io/cs249r_book_dev/vol3/02_foundation_model/02_foundation_model.html#fig-vol3-first-token-accounting",
+    "figure_url": "https://harvard-edge.github.io/cs249r_book_dev/vol3/02_foundation_model/02_foundation_model.html#fig-vol3-first-token-accounting",
+    "source_image_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book_dev/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/images/svg/first_token_accounting.svg",
+    "commit": "a32512942fe30f4fa1edb51486f7de53c1318ac7",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "license_evidence": "https://raw.githubusercontent.com/harvard-edge/cs249r_book_dev/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/02_foundation_model.html",
+    "license_evidence_sha256": "9a443487058d0c9d61d2e209cf7b27003b3ac4416106afcdfb88d068f23b8481",
+    "license_evidence_url": "https://mlsysbook.ai/about/license.html",
+    "sha256": "cd26640ab6dab6e5877f70ee267584b5edb2486498d013078d32a4bfc4c1ecc5",
+    "source_asset_sha256": "cd26640ab6dab6e5877f70ee267584b5edb2486498d013078d32a4bfc4c1ecc5",
+    "bytes": 4197,
+    "source_viewbox": [
+      0,
+      0,
+      680,
+      350
+    ],
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original Harvard ML Systems Volume III static SVG, byte-for-byte. No edits, recoloring, crop, or translation.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-11-11",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+      "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md",
+      "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+      "en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md"
+    ]
+  },
+  "historical": [
+    {
+      "id": "curated-vllm-latency-a1b2c3d4e509",
+      "asset": "00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png",
+      "author": "Aleksa Gordić",
+      "source_url": "https://www.aleksagordic.com/blog/vllm",
+      "license": null,
+      "license_url": null,
+      "rights_status": "source-republication-unverified",
+      "provenance_confirmation": "source-bytes-verified",
+      "title": "Time to first token, inter-token latency, and end-to-end latency",
+      "commit": "05f81b0527e2d484c48721f9dc1c49d06849c9f3",
+      "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/latency_diagram.png",
+      "modifications": "Byte-identical to the pinned official vLLM blog asset. No grant found for the blog artwork; the engine repository license is not evidence for this separate repository.",
+      "sha256": "c4aedd158b29b99d7430e12b4f5dca1bb160abc02261cd4a8fbecab598c9d53c",
+      "bytes": 37423,
+      "dimensions_px": [
+        862,
+        396
+      ],
+      "metadata_status": "verified",
+      "last_verified": "2026-11-11",
+      "derivation": "source-raster-copy-byte-verified",
+      "source_asset_sha256": "c4aedd158b29b99d7430e12b4f5dca1bb160abc02261cd4a8fbecab598c9d53c",
+      "used_in": [
+        "05 Источники/Implementation studies/Inside vLLM.md"
+      ],
+      "former_used_in": [
+        "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+        "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md",
+        "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+        "en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md"
+      ],
+      "publication_status": "source-library-only",
+      "replacement": "00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg"
+    },
+    {
+      "id": "curated-vllm-roofline-a1b2c3d4e50a",
+      "asset": "00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png",
+      "author": "Aleksa Gordić",
+      "source_url": "https://www.aleksagordic.com/blog/vllm",
+      "license": null,
+      "license_url": null,
+      "rights_status": "source-republication-unverified",
+      "provenance_confirmation": "source-bytes-verified",
+      "title": "Memory and compute limits in the roofline model",
+      "commit": "05f81b0527e2d484c48721f9dc1c49d06849c9f3",
+      "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/roofline.png",
+      "modifications": "Byte-identical to the pinned official vLLM blog asset. No grant found for the blog artwork; the engine repository license is not evidence for this separate repository.",
+      "sha256": "137cbceb1790cd0de91db60d4a990ab2669d8ebe5bf5e675f2a24190978fe6a4",
+      "bytes": 48865,
+      "dimensions_px": [
+        579,
+        406
+      ],
+      "metadata_status": "verified",
+      "last_verified": "2026-11-11",
+      "derivation": "source-raster-copy-byte-verified",
+      "source_asset_sha256": "137cbceb1790cd0de91db60d4a990ab2669d8ebe5bf5e675f2a24190978fe6a4",
+      "used_in": [
+        "05 Источники/Implementation studies/Inside vLLM.md"
+      ],
+      "former_used_in": [
+        "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+        "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md"
+      ],
+      "publication_status": "source-library-only",
+      "replacement": "00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg"
+    }
+  ],
+  "files": [
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+      "before_sha256": "dcdc7f9712614b5342b15d03cba1beb7f641ea72b27fe6ee04730ad70fd66bdc",
+      "after_sha256": "1c76c468f45b58340647e5ed7dd8723c70081e36f398bbaa19d5a554cd4453a9",
+      "lines": 954,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-26\nlast_verified: 2026-10-26",
+          "new": "last_updated: 2026-11-11\nlast_verified: 2026-10-26"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png]]\n\n*Пределы производительности по арифметике и пропускной способности памяти.\nНиже границы остаются реализации, не достигающие этих пределов. Оригинальная схема\nAleksa Gordić из [Inside vLLM](https://www.aleksagordic.com/blog/vllm), раздел\nPerformance; те же определения используются в лекции Stanford CS336. Автор:\nAleksa Gordić; лицензия на странице явно не указана.*",
+          "new": "На наклонной части графика удвоение $I$ удваивает верхнюю границу:\nпри 128 FLOP/byte получаем $128\\cdot3{,}35=428{,}8$ TFLOP/s,\nпри 256 FLOP/byte — $857{,}6$ TFLOP/s. При 512 FLOP/byte произведение\n$I W_{\\max}$ уже больше 989 TFLOP/s, поэтому границу задаёт горизонталь.\nЭти числа рассчитаны для H100; точки на рисунке Harvard схематические.\nИзмеренная производительность ядра может быть ниже предела при той же интенсивности.\n[График в Inside vLLM](https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/roofline.png)\nпоказывает ту же зависимость."
+        },
+        {
+          "old": "запроса, prefill и первый выбор токена:\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png]]\n\n*TTFT измеряется от отправки запроса до первого токена, ITL — между\nсоседними токенами, полная задержка — до последнего токена ответа.\nСхема показывает наблюдаемые интервалы, а не внутренние этапы работы сервера.\nИсточник: Aleksa Gordić,\n[Inside vLLM](https://www.aleksagordic.com/blog/vllm), раздел Performance.\nЛицензия на странице явно не указана.*",
+          "new": "запроса, prefill, выбор первого токена и его доставка.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg|Сверху очередь, prefill и выбор первого токена, затем отдельные проходы генерации. Снизу первый токен приходит отдельно, остальные буферизуются в одном фрагменте.]]\n\n*Vijay Janapa Reddi и соавторы, [Harvard ML Systems, т. III, рис. 5: First-Token Accounting](https://harvard-edge.github.io/cs249r_book_dev/vol3/02_foundation_model/02_foundation_model.html#fig-vol3-first-token-accounting), [исходный SVG](https://raw.githubusercontent.com/harvard-edge/cs249r_book_dev/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/images/svg/first_token_accounting.svg), [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Рисунок без изменений; расстояния на схеме не соответствуют измеренным временам.*\n\nНа верхней дорожке `Prompt prefill` заканчивается начальными логитами.\nЗатем сервер выбирает токен (`Sample 1`). Клиентская скобка `Client TTFT`\nначинается ещё до очереди и заканчивается только при получении `Token 1`.\nПри обычном декодировании оставшиеся $K-1$ токенов требуют $K-1$ проходов.\nНа нижней дорожке они приходят одним фрагментом, поэтому клиент видит\nего время получения, но не время отдельных проходов. Сумму до первого\nтокена можно записать по неперекрывающимся отрезкам:"
+        },
+        {
+          "old": "её время добавляют отдельным членом. Среднее TPOT скрывает паузы отдельных итераций. Для интерактивного диалога",
+          "new": "её время добавляют отдельным членом. Для интерактивного диалога"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md",
+      "before_sha256": "d87da76554c6fe72e35b7af5b05ea375f84cae8e5930698b6750c0a483302638",
+      "after_sha256": "93912631f26d3015e4ceacbc43f2b1c66bc270410f99a35cc44c66a735b5d424",
+      "lines": 601,
+      "changes": [
+        {
+          "old": "canonical_revision: \"dcdc7f9712614b5342b15d03cba1beb7f641ea72b27fe6ee04730ad70fd66bdc\"",
+          "new": "canonical_revision: \"1c76c468f45b58340647e5ed7dd8723c70081e36f398bbaa19d5a554cd4453a9\""
+        },
+        {
+          "old": "translation_reviewed: \"2026-10-29\"",
+          "new": "translation_reviewed: \"2026-11-11\""
+        },
+        {
+          "old": "last_updated: 2026-10-29",
+          "new": "last_updated: 2026-11-11"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png]]\n\n*Arithmetic and memory-bandwidth ceilings. Implementations may operate below either ceiling. Original diagram by Aleksa Gordić, from the Performance section of [Inside vLLM](https://www.aleksagordic.com/blog/vllm); Stanford CS336 uses the same definitions. No explicit license is stated on the page.*",
+          "new": "On the sloping part of the curve, doubling $I$ doubles the bound:\n128 FLOP/byte gives $128\\cdot3.35=428.8$ TFLOP/s, and 256 FLOP/byte\ngives $857.6$ TFLOP/s. At 512 FLOP/byte, $I W_{\\max}$ already exceeds\n989 TFLOP/s, so the flat arithmetic ceiling sets the bound. These are\nH100 calculations, not values read from the schematic Harvard plot.\nA real kernel can fall below the bound at the same intensity.\nThe [plot in Inside vLLM](https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/roofline.png)\nshows the same relationship."
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png]]\n\n*Aleksa Gordić, [Inside vLLM: Performance](https://www.aleksagordic.com/blog/vllm). TTFT runs from submission to the first token, ITL between successive tokens, and complete latency to the last token. These are observed intervals, not a diagram of internal server stages. No explicit license is stated on the page.*\n\nAt least two independent quantities matter to a user. **TTFT** (*time to first token*) runs from request submission to receipt of the first token:",
+          "new": "**TTFT** (*time to first token*) runs from request submission to receipt of the first token.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg|Server queue, prefill and first-token sampling, followed by later passes. The client receives the first token separately and the rest together in a buffered chunk.]]\n\n*Vijay Janapa Reddi et al., [Harvard ML Systems, vol. III, Figure 5: First-Token Accounting](https://harvard-edge.github.io/cs249r_book_dev/vol3/02_foundation_model/02_foundation_model.html#fig-vol3-first-token-accounting), [original SVG](https://raw.githubusercontent.com/harvard-edge/cs249r_book_dev/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/images/svg/first_token_accounting.svg), [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Unmodified; distances on the diagram are not measured durations.*\n\nOn the upper track, `Prompt prefill` ends with the initial logits.\nThe server then selects the first token (`Sample 1`). The `Client TTFT`\nbracket starts before queueing and ends only when the client receives\n`Token 1`. Ordinary decoding needs $K-1$ passes to produce the remaining\n$K-1$ tokens. They arrive in one buffered chunk on the lower track,\nso the client sees when the chunk arrived, but not the timing of\neach pass. We can split TTFT into non-overlapping intervals:"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+      "before_sha256": "3a7088f10b28a96d6d32211a1c1ca1052592ab975238e82520449dd76a513893",
+      "after_sha256": "28e92f60e3467e7237d6c86bbf0f5f7adaeae6b233cc0d3d860b5a2b18acddce",
+      "lines": 935,
+      "changes": [
+        {
+          "old": "last_updated: 2026-11-10",
+          "new": "last_updated: 2026-11-11"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png]]\n\n*Aleksa Gordić, [Inside vLLM](https://www.aleksagordic.com/blog/vllm),\n[исходное изображение](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/latency_diagram.png).\nСтрелки отмечают отправку запроса и получение токенов пользователем.\nTTFT заканчивается на первом токене, ITL относится к соседним токенам.*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg|Сверху очередь, prefill и выбор первого токена, затем отдельные проходы генерации. Снизу первый токен приходит отдельно, остальные буферизуются в одном фрагменте.]]\n\n*Vijay Janapa Reddi и соавторы, [Harvard ML Systems, т. III, рис. 5: First-Token Accounting](https://harvard-edge.github.io/cs249r_book_dev/vol3/02_foundation_model/02_foundation_model.html#fig-vol3-first-token-accounting), [исходный SVG](https://raw.githubusercontent.com/harvard-edge/cs249r_book_dev/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/images/svg/first_token_accounting.svg), [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Рисунок без изменений; расстояния на схеме не соответствуют измеренным временам.*\n\nВерхняя дорожка относится к серверу, нижняя — к клиенту.\nМежду `Send` и `Token 1` проходят очередь, prefill, выбор токена\nи его доставка. Скобка `Server prefill` охватывает только вычисление\nдо начальных логитов. Остальные токены на рисунке приходят одним\nсобытием: для них нет отдельных клиентских меток. [Шкала из статьи Inside vLLM](https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/latency_diagram.png) показывает, где на клиенте начинаются и заканчиваются TTFT, ITL и E2E ([статья](https://www.aleksagordic.com/blog/vllm))."
+        },
+        {
+          "old": "### Событие потока и токен не всегда совпадают",
+          "new": "<a id=\"stream-events-vs-token-latency\"></a>\n\n### Событие потока и токен не всегда совпадают"
+        },
+        {
+          "old": "токенов. Сетевой пакет, SSE-событие и токен модели являются разными единицами.",
+          "new": "токенов. Сетевой пакет, SSE-событие и токен модели являются разными единицами.\n\nСравним два потока по четыре токена. Во втором первый токен\nприходит отдельно, как на рисунке, а остальные три — вместе.\n\n| Токенов в событии | Метки клиента, мс | Паузы между событиями, мс |\n| --- | --- | --- |\n| 1, 1, 1, 1 | 200, 260, 320, 380 | 60, 60, 60 |\n| 1, 3 | 200, 380 | 180 |\n\nУ обоих потоков TTFT равен 200 мс, E2E — 380 мс, а среднее\nна токен по двум крайним меткам составляет $(380-200)/(4-1)=60$ мс.\nПо нему нельзя отличить ровную выдачу от паузы в 180 мс. Во втором\nслучае клиент не знает, когда сервер сгенерировал три токена, и по\nодному событию не может определить, почему их доставили вместе."
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md",
+      "before_sha256": "6c0deb646049da1d2b2acc838e2c2337abe5280af7cb7c1b0093ee88908bacc1",
+      "after_sha256": "85e51a30a35c500c0f2425ca8f87e127cfddddf7cb2014de06a7c680e8fbe3c8",
+      "lines": 946,
+      "changes": [
+        {
+          "old": "canonical_revision: \"3a7088f10b28a96d6d32211a1c1ca1052592ab975238e82520449dd76a513893\"",
+          "new": "canonical_revision: \"28e92f60e3467e7237d6c86bbf0f5f7adaeae6b233cc0d3d860b5a2b18acddce\""
+        },
+        {
+          "old": "translation_reviewed: \"2026-10-29\"",
+          "new": "translation_reviewed: \"2026-11-11\""
+        },
+        {
+          "old": "last_updated: 2026-11-10",
+          "new": "last_updated: 2026-11-11"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png]]\n\n*Aleksa Gordić, [Inside vLLM](https://www.aleksagordic.com/blog/vllm),\n[original image](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/latency_diagram.png).\nThe arrows mark dispatch and client receipt of output tokens. TTFT ends at the\nfirst token; ITL measures the interval between adjacent tokens.*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg|Server queue, prefill and first-token sampling, followed by later passes. The client receives the first token separately and the rest together in a buffered chunk.]]\n\n*Vijay Janapa Reddi et al., [Harvard ML Systems, vol. III, Figure 5: First-Token Accounting](https://harvard-edge.github.io/cs249r_book_dev/vol3/02_foundation_model/02_foundation_model.html#fig-vol3-first-token-accounting), [original SVG](https://raw.githubusercontent.com/harvard-edge/cs249r_book_dev/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/images/svg/first_token_accounting.svg), [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Unmodified; distances on the diagram are not measured durations.*\n\nThe top track belongs to the server and the bottom one to the client.\nFrom `Send` to `Token 1` the request goes through queueing, prefill,\nfirst-token selection, and delivery. The `Server prefill` bracket ends\nat the initial logits. Later tokens arrive together in this example,\nso they do not have separate client timestamps."
+        },
+        {
+          "old": "### Stream events are not necessarily individual tokens",
+          "new": "<a id=\"stream-events-vs-token-latency\"></a>\n\n### Stream events are not necessarily individual tokens"
+        },
+        {
+          "old": "different units.\n\nSuppose six tokens arrive in three two-token chunks at 200, 300, and 500 ms.",
+          "new": "different units.\n\nCompare two streams of four tokens. In the second, the first token\narrives on its own and the next three arrive together, as in the figure.\n\n| Tokens per event | Client timestamps, ms | Gaps between events, ms |\n| --- | --- | --- |\n| 1, 1, 1, 1 | 200, 260, 320, 380 | 60, 60, 60 |\n| 1, 3 | 200, 380 | 180 |\n\nBoth have a TTFT of 200 ms and an E2E of 380 ms. The token-normalized\nmean from the endpoints is $(380-200)/(4-1)=60$ ms in both cases.\nThat number cannot distinguish the steady stream from the 180-ms\npause. The client cannot tell when the server generated each of the\nthree later tokens or why they arrived in one event.\n\nSuppose six tokens arrive in three two-token chunks at 200, 300, and 500 ms."
+        },
+        {
+          "old": "- NVIDIA, [AIPerf v0.13.0: Metrics Reference](https://docs.nvidia.com/aiperf/v0.13.0/reference/ai-perf-metrics-reference): TTFT, ITL, ICL, and response chunks.",
+          "new": "- Aleksa Gordić, [Inside vLLM](https://www.aleksagordic.com/blog/vllm): [original client-side latency diagram](https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/latency_diagram.png).\n- NVIDIA, [AIPerf v0.13.0: Metrics Reference](https://docs.nvidia.com/aiperf/v0.13.0/reference/ai-perf-metrics-reference): TTFT, ITL, ICL, and response chunks."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "1733ceaff11c1a2f495ded20f13a52019817afd95261884919ac46c5b4380b27",
+      "after_sha256": "43e936aed717cbda19fd0aeecd491be3f1e91bba7fd9f9eed241318ee192e636",
+      "lines": 26497,
+      "changes": [
+        {
+          "old": "  - {\"id\":\"curated-vllm-latency-a1b2c3d4e509\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"provenance_confirmation\":\"source-bytes-verified\",\"title\":\"Time to first token, inter-token latency, and end-to-end latency\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/latency_diagram.png\",\"modifications\":\"Byte-identical to the pinned official vLLM blog asset. No grant found for the blog artwork; the engine repository license is not evidence for this separate repository.\",\"sha256\":\"c4aedd158b29b99d7430e12b4f5dca1bb160abc02261cd4a8fbecab598c9d53c\",\"bytes\":37423,\"dimensions_px\":[862,396],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-byte-verified\",\"source_asset_sha256\":\"c4aedd158b29b99d7430e12b4f5dca1bb160abc02261cd4a8fbecab598c9d53c\",\"used_in\":[\"05 Источники/Implementation studies/Inside vLLM.md\",\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md\",\"00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md\",\"en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md\"]}\n  - {\"id\":\"curated-vllm-roofline-a1b2c3d4e50a\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"provenance_confirmation\":\"source-bytes-verified\",\"title\":\"Memory and compute limits in the roofline model\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/roofline.png\",\"modifications\":\"Byte-identical to the pinned official vLLM blog asset. No grant found for the blog artwork; the engine repository license is not evidence for this separate repository.\",\"sha256\":\"137cbceb1790cd0de91db60d4a990ab2669d8ebe5bf5e675f2a24190978fe6a4\",\"bytes\":48865,\"dimensions_px\":[579,406],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-byte-verified\",\"source_asset_sha256\":\"137cbceb1790cd0de91db60d4a990ab2669d8ebe5bf5e675f2a24190978fe6a4\",\"used_in\":[\"05 Источники/Implementation studies/Inside vLLM.md\",\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md\"]}",
+          "new": "  - {\"id\":\"curated-harvard-first-token-accounting-cd26640ab6da\",\"asset\":\"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg\",\"author\":\"Vijay Janapa Reddi and contributors, Harvard ML Systems\",\"title\":\"First-Token Accounting (Figure 5)\",\"source_url\":\"https://harvard-edge.github.io/cs249r_book_dev/vol3/02_foundation_model/02_foundation_model.html#fig-vol3-first-token-accounting\",\"figure_url\":\"https://harvard-edge.github.io/cs249r_book_dev/vol3/02_foundation_model/02_foundation_model.html#fig-vol3-first-token-accounting\",\"source_image_url\":\"https://raw.githubusercontent.com/harvard-edge/cs249r_book_dev/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/images/svg/first_token_accounting.svg\",\"commit\":\"a32512942fe30f4fa1edb51486f7de53c1318ac7\",\"license\":\"CC BY-NC-ND 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by-nc-nd/4.0/\",\"license_evidence\":\"https://raw.githubusercontent.com/harvard-edge/cs249r_book_dev/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/02_foundation_model.html\",\"license_evidence_sha256\":\"9a443487058d0c9d61d2e209cf7b27003b3ac4416106afcdfb88d068f23b8481\",\"license_evidence_url\":\"https://mlsysbook.ai/about/license.html\",\"sha256\":\"cd26640ab6dab6e5877f70ee267584b5edb2486498d013078d32a4bfc4c1ecc5\",\"source_asset_sha256\":\"cd26640ab6dab6e5877f70ee267584b5edb2486498d013078d32a4bfc4c1ecc5\",\"bytes\":4197,\"source_viewbox\":[0,0,680,350],\"derivation\":\"source-svg-copy\",\"modifications\":\"Complete original Harvard ML Systems Volume III static SVG, byte-for-byte. No edits, recoloring, crop, or translation.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-11\",\"used_in\":[\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md\",\"00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md\",\"en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md\"]}\n  - {\"id\":\"curated-vllm-latency-a1b2c3d4e509\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"provenance_confirmation\":\"source-bytes-verified\",\"title\":\"Time to first token, inter-token latency, and end-to-end latency\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/latency_diagram.png\",\"modifications\":\"Byte-identical to the pinned official vLLM blog asset. No grant found for the blog artwork; the engine repository license is not evidence for this separate repository.\",\"sha256\":\"c4aedd158b29b99d7430e12b4f5dca1bb160abc02261cd4a8fbecab598c9d53c\",\"bytes\":37423,\"dimensions_px\":[862,396],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-byte-verified\",\"source_asset_sha256\":\"c4aedd158b29b99d7430e12b4f5dca1bb160abc02261cd4a8fbecab598c9d53c\",\"used_in\":[\"05 Источники/Implementation studies/Inside vLLM.md\"],\"former_used_in\":[\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md\",\"00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md\",\"en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md\"],\"publication_status\":\"source-library-only\",\"replacement\":\"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg\"}\n  - {\"id\":\"curated-vllm-roofline-a1b2c3d4e50a\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"provenance_confirmation\":\"source-bytes-verified\",\"title\":\"Memory and compute limits in the roofline model\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/roofline.png\",\"modifications\":\"Byte-identical to the pinned official vLLM blog asset. No grant found for the blog artwork; the engine repository license is not evidence for this separate repository.\",\"sha256\":\"137cbceb1790cd0de91db60d4a990ab2669d8ebe5bf5e675f2a24190978fe6a4\",\"bytes\":48865,\"dimensions_px\":[579,406],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-byte-verified\",\"source_asset_sha256\":\"137cbceb1790cd0de91db60d4a990ab2669d8ebe5bf5e675f2a24190978fe6a4\",\"used_in\":[\"05 Источники/Implementation studies/Inside vLLM.md\"],\"former_used_in\":[\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md\"],\"publication_status\":\"source-library-only\",\"replacement\":\"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg\"}"
+        }
+      ]
+    }
+  ]
+}

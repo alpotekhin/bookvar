@@ -3,8 +3,57 @@ title: Отбор обучающих примеров — EL2N, GraNd и forgett
 type: textbook-chapter
 status: canonical
 source_language: en
-last_updated: 2026-10-29
-last_verified: 2026-10-29
+last_updated: 2026-11-04
+last_verified: 2026-11-04
+reference_terms:
+  - anchor: selection-problem
+    label: "Отбор из размеченного пула и бюджет обучения"
+    label_en: "Labelled-pool selection and training budgets"
+  - anchor: el2n
+    label: "EL2N: норма ошибки и усреднение по запускам"
+    label_en: "EL2N: error norms and averaging across runs"
+  - anchor: grand
+    label: "GraNd, якобиан модели и направление градиента"
+    label_en: "GraNd, model Jacobians and gradient direction"
+  - anchor: forgetting
+    label: "Forgetting и примеры, которые не были выучены"
+    label_en: "Forgetting and never-learned examples"
+  - anchor: stable-identifiers
+    label: "Привязка оценок к ID и порядок DataLoader"
+    label_en: "Score IDs and DataLoader ordering"
+  - anchor: reproduction
+    label: "Воспроизведение Data Diet и ошибка checkpoint zero"
+    label_en: "Data Diet reproduction and the checkpoint-zero bug"
+  - anchor: selection-controls
+    label: "Шум меток, редкие классы и контроль отбора"
+    label_en: "Label noise, rare classes and selection controls"
+  - anchor: confident-learning
+    label: "Confident Learning и совместное распределение меток"
+    label_en: "Confident Learning and the label joint distribution"
+  - anchor: cl-out-of-fold
+    label: "Out-of-fold predictions без утечки разметки"
+    label_en: "Out-of-fold predictions without label leakage"
+  - anchor: cl-class-thresholds
+    label: "Пороги классов и confident counts"
+    label_en: "Class thresholds and confident counts"
+  - anchor: cl-joint-calibration
+    label: "Калибровка confident joint и условные вероятности"
+    label_en: "Confident-joint calibration and conditional probabilities"
+  - anchor: cl-candidate-ranking
+    label: "Оценка числа ошибок и порядок ручной проверки"
+    label_en: "Estimated error counts and review ranking"
+  - anchor: cl-paper-software
+    label: "Различия статьи и реализации Cleanlab"
+    label_en: "Differences between the paper and Cleanlab"
+  - anchor: cl-review-decisions
+    label: "Ошибка метки, ошибка модели и решение ревьюера"
+    label_en: "Label errors, model errors and review decisions"
+  - anchor: cl-theory-evaluation
+    label: "Гарантии Confident Learning и проверка результата"
+    label_en: "Confident Learning guarantees and evaluation"
+  - anchor: selection-cost
+    label: "Окупаемость предварительного scoring"
+    label_en: "Amortizing preliminary scoring costs"
 primary_sources:
   - https://arxiv.org/abs/2107.07075v2
   - https://arxiv.org/abs/2303.14753v1
@@ -266,7 +315,7 @@ gradients; the calculation above deliberately keeps their weights fixed.
 Computing a single gradient of the averaged batch loss can hide cancellation.
 GraNd requires per-example gradients before taking their norms.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-selection-2026-10-28/joost_train_input_norm_vs_grad_norm_sorted.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-selection-2026-10-28/joost_train_input_norm_vs_grad_norm_sorted.png|Original Data Diet reproduction plot: sorted CIFAR-10 input norms and gradient norms at initialization, with rank correlation 0.97]]
 
 *Input norm and GraNd at initialization in the minimal CIFAR-10 reproduction.
 The original repository plot reports rank correlation 0.97; the vertical axis
@@ -451,7 +500,7 @@ in `inference_mode()`.
 <a id="reproduction"></a>
 ## What the reproduction establishes
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-selection-2026-10-28/figure11_repro_cifar10_hlb.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-selection-2026-10-28/figure11_repro_cifar10_hlb.svg|Original CIFAR-10 pruning curves comparing random selection, EL2N and GraNd measured at initialization or after one training epoch]]
 
 *Test accuracy after pruning CIFAR-10 in Andreas Kirsch's HLB reproduction.
 Each curve uses a different ordering of the same training pool. The horizontal
@@ -590,7 +639,7 @@ mislabel only blurred photographs or sentences with sarcasm, the error also
 depends on the input within a class. The method can still produce candidates,
 but its theoretical guarantees do not automatically extend to that situation.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/confident-learning-2026-10-29/figure1-process.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/confident-learning-2026-10-29/figure1-process.png|Confident Learning Figure 1: predicted probabilities, confident counts, estimated label joint and pruning decisions]]
 
 *Original Figure 1: predictions produce counts, the counts estimate a joint
 distribution, and a pruning rule chooses records. The matrix columns marked
@@ -604,6 +653,8 @@ Artificial Intelligence Research 70 (2021), 1373–1411,
 © 2021 AI Access Foundation. Complete figure panel rendered from the publisher's
 PDF; surrounding prose excluded, labels and geometry unchanged.
 [JAIR License Version 1.0](/licenses/confident-learning-JAIR-v1.html).*
+
+<a id="cl-out-of-fold"></a>
 
 ### Each prediction must come from a model that did not train on that record
 
@@ -659,6 +710,8 @@ assert np.all(visits == 1) and np.isfinite(oof).all()
 assert np.allclose(oof.sum(axis=1), 1.)
 print("out-of-fold rows", len(oof), "class columns", oof.shape[1])
 ```
+
+<a id="cl-class-thresholds"></a>
 
 ### Class thresholds and the records that pass them
 
@@ -730,6 +783,8 @@ following collision paragraph and Appendix Algorithm 1 use global argmax.
 The pinned Cleanlab implementation follows the latter rule. For records with
 one passing class, both rules choose that class.
 
+<a id="cl-joint-calibration"></a>
+
 ### From ten counted records to an estimate for twelve
 
 The raw table has rows for stored A, B and C labels, and columns for inferred
@@ -773,6 +828,8 @@ error pattern, that extrapolation may be wrong. A nonempty stored class with
 zero counted records cannot be normalized by this formula at all; it requires
 an explicit fallback or more evidence. Filling a diagonal cell, as software
 may do, is a policy for this case, not an observed correctly labelled record.
+
+<a id="cl-candidate-ranking"></a>
 
 ### Counts, candidates, and a review order
 
@@ -838,6 +895,8 @@ print("thresholds", t, "raw joint", C, "estimated joint", Q, sep="\n")
 print("review IDs", ids[order], "estimated noise fraction", 1. - np.trace(Q))
 ```
 
+<a id="cl-paper-software"></a>
+
 ### Where the paper and the software differ
 
 The implementation inspected here is
@@ -883,6 +942,8 @@ scaling or rounding counts does not create additional record identities. Before
 using another release, check its counting and filtering functions rather than
 assuming that a parameter named `confident_joint` always contains raw counts.
 
+<a id="cl-review-decisions"></a>
+
 ### What a reviewer must decide
 
 Suppose ID 11 is a valid but rare C example. A model trained mostly on common
@@ -916,6 +977,8 @@ precision across the whole candidate list. Random sampling within declared
 score/class groups can measure it; estimating missed errors also requires
 reviewing records outside the list.
 
+<a id="cl-theory-evaluation"></a>
+
 ### What the theory and experiments establish
 
 Theorem 1 assumes ideal predicted probabilities and a noise transition matrix
@@ -927,7 +990,7 @@ These are sufficient conditions for the result, not properties guaranteed by
 softmax or by cross-validation. On an arbitrary dataset we cannot certify them
 merely by observing the model's own probabilities.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/confident-learning-2026-10-29/figure2-joint-estimation.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/confident-learning-2026-10-29/figure2-joint-estimation.png|Confident Learning Figure 2: true joint, estimated joint and absolute differences for all CIFAR-10 class pairs]]
 
 *Original Figure 2, all three panels. Left: the joint distribution known from
 the synthetic corruption experiment. Middle: the CL estimate. Right: absolute

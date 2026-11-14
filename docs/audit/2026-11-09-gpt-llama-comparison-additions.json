@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-09",
+  "scope": "Expose the GPT-1 → GPT-2 → GPT-3 → LLaMA v1 reading route; compare training scale, decoder changes and the task interface without moving T5.",
+  "files": [
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "9f846b43101277cbc7b86f2d1995eaf211c36364aa3eedd73a7dad151d9ff3c3",
+      "after_sha256": "cd19f3a82df94028ace379a9debec8d751324ba59f6dec15add21499405e4b74",
+      "changes": [
+        {
+          "old": "От Q, K и V он ведёт через причинную маску и логиты словаря\nк предобучению и дообучению GPT-1. Дальше тот же маршрут прослеживает\n[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#Что изменилось относительно GPT-1|переход к GPT-2]], сравнение запросов в GPT-3 и изменения блока в первой LLaMA.",
+          "new": "На тех же векторах можно проследить, что происходит с вниманием,\nкогда меняются нормализация, маска и способ задать позиции.\n\n## От GPT-1 к LLaMA\n\n1. [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]]. Предобучение на книгах, затем классификационная голова и дообучение на конкретной задаче.\n2. [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]]. Нормализация перед подслоем; задачи можно задавать через текстовый префикс.\n3. [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3]]. Полные и локальные слои внимания; сравнение запросов с нулём, одним и несколькими примерами.\n4. [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|LLaMA v1]]. Сравнение четырёх поколений: объём предобучения, RMSNorm, RoPE и SwiGLU. Сюда можно перейти сразу после GPT-3; T5 в основном курсе показывает отдельную ветвь с энкодером и декодером."
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "before_sha256": "5cc166ae0023c346c1d0b54686fa771dcc41931eedc07a5d8cb9cbd2942bbc4c",
+      "after_sha256": "776f9cc4d0a292859e04058d43c8eae0d16f98237112b5cf938585322adf5d37",
+      "changes": [
+        {
+          "old": "## От GPT-3 к первой LLaMA\n\nПервая LLaMA, выпущенная в феврале 2023 года, по-прежнему предсказывает\nследующий токен в одном причинном стеке. У неё нет отдельного энкодера\nи cross-attention, как у T5. Место нормализации сохраняется таким же,\nкак в GPT-2/3, но нормализация, позиционный сигнал и FFN меняются.\n\n| Модель | Как устроен блок |\n| --- | --- |\n| [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение#gpt1-decoder-architecture|GPT-1]] | LayerNorm после сложения, обучаемые абсолютные позиции, плотное причинное внимание и FFN с GELU. |\n| [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-pre-norm|GPT-2]] | LayerNorm переносится перед подслоем; добавляется норма после стека. Позиции и тип FFN прежние. |\n| [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-full-local-attention|GPT-3]] | Pre-norm сохраняется. Полные причинные слои чередуются с локальными; окно растёт до 2048. |\n| LLaMA v1 | Pre-norm с RMSNorm. RoPE действует на Q и K, FFN использует SwiGLU. Причинное внимание снова полное во всех слоях. |\n\nВсе четыре строки относятся к базовому декодеру. Выбор задачи через\nобучаемую голову или через примеры во входе сам по себе не меняет\nпорядок операций внутри блока.",
+          "new": "<a id=\"gpt-llama-comparison\"></a>\n\n## От GPT-3 к первой LLaMA\n\nПервая LLaMA, выпущенная в феврале 2023 года, по-прежнему предсказывает\nследующий токен в одном причинном стеке. Место нормализации сохраняется\nтаким же, как в GPT-2 и GPT-3, но меняются её формула, позиционный\nсигнал и FFN. GPT-3 и LLaMA v1 обе обучались на окне в 2048 токенов;\nпереход на RoPE здесь не сопровождался увеличением окна.\n\n| Модель | Что изменилось в декодере |\n| --- | --- |\n| [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение#gpt1-decoder-architecture|GPT-1 (2018)]] | Исходная точка сравнения: LayerNorm после сложения, обучаемые абсолютные позиции, полное причинное внимание, FFN с GELU. Окно 512 токенов. |\n| [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-pre-norm|GPT-2 (2019)]] | LayerNorm переносится перед подслоем; добавляется норма после стека. Позиции и тип FFN прежние. Окно 1024 токена. |\n| [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-full-local-attention|GPT-3 (2020)]] | Pre-norm сохраняется. Полные причинные слои чередуются с локальными. Окно 2048 токенов. |\n| LLaMA v1 (2023) | RMSNorm вместо LayerNorm, RoPE на Q и K вместо абсолютной таблицы, SwiGLU вместо FFN с GELU. Во всех слоях полное причинное внимание. Окно 2048 токенов. |\n\nGPT-1 предобучали на BooksCorpus, GPT-2 — на WebText, собранном\nиз веб-страниц. Для GPT-3 к WebText2 добавили отфильтрованный Common Crawl,\nдва книжных корпуса и Wikipedia. В эксперименте все восемь размеров GPT-3\nобучили на 300 млрд токенов. Авторы LLaMA выбрали другой режим:\n7B и 13B получили по 1 трлн токенов, 33B и 65B — по 1,4 трлн.\nДлительное обучение меньшей модели увеличивает расход на предобучение\nпо сравнению с более коротким обучением той же модели, но не увеличивает\nчисло весов, которые затем нужно держать в памяти при выводе.\n[GPT-3, §2.1–2.2](https://arxiv.org/html/2005.14165v4#S2);\n[LLaMA, §1–2](https://arxiv.org/html/2302.13971v1#S1).\n\n### Где задаётся нужный ответ\n\nВозьмём ту же пару, что в начале главы о GPT-1: «A cat sleeps»\nи «An animal rests». Чтобы классифицировать отношение, GPT-1 подаёт\nобе фразы со служебными разделителями в декодер, а над состоянием\nпоследнего токена `Extract` вычисляет три логита обученной головы.\nСмысл каждой координаты этой головы задан разметкой при дообучении.\nНа [оригинальной схеме GPT-1](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=4)\nэто выход `Task Classifier`, отдельный от словарной проекции.\n\nЯзыковая модель без такой головы получает другой вход: например,\n`Premise: A cat sleeps. Hypothesis: An animal rests. Relation:`.\nТеперь нужно либо сгенерировать метку как продолжение, либо сравнить\nвероятности трёх продолжений: ` entailment`, ` contradiction` и\n` neutral`. Все они начинаются с пробела после двоеточия. Если метка\nразбивается на несколько токенов, её вероятность равна произведению\nусловных вероятностей этих токенов: второй вычисляется уже с учётом\nпервого. Так можно использовать словарный выход вместо отдельной головы.\nВ статье о GPT-2 такой способ задавать задачи текстом исследовали,\nнапример, на переводе и чтении с вопросами. Эта пара предложений\nслужит примером формата; опубликованной оценки GPT-2 для неё нет.\n\nВ режиме few-shot GPT-3 перед той же парой получает несколько\nразмеченных пар, например строку\n`Premise: The door is open. Hypothesis: The door is shut. Relation: contradiction`.\nТолько у последней пары метка оставлена пустой. Демонстрации занимают\nчасть входного окна и меняют состояния токенов при прямом проходе.\nОптимизатор при этом не запускается. Базовую LLaMA можно оценивать\nтем же способом: изменения блока влияют на вычисленные логиты,\nа формат префикса и список допустимых меток по-прежнему задаёт тот,\nкто проводит оценку. Как на практике сравнивают ответы разной длины,\nразобрано в [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-candidate-scores|главе GPT-3]]."
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "before_sha256": "3e593627705a59f32dcf8ece3279d364a2dd485f4df14fef8d66271d17bd3b12",
+      "after_sha256": "9987d4b2b70b1bbe25832a5c7ac21b27988320ffee1bb8d5e5f0766c935af6b2",
+      "changes": [
+        {
+          "old": "### Как в статье сравнивают ответы разной длины",
+          "new": "<a id=\"gpt3-candidate-scores\"></a>\n\n### Как в статье сравнивают ответы разной длины"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "before_sha256": "d9de3b82003a4dad7edfcf29ef1f6c8088ca9ff2cada28e98800dad487e53842",
+      "after_sha256": "4771f85bc67463ef68782d485b37c5120b88e82392841802f946fba15fc87ce0",
+      "changes": [
+        {
+          "old": "### How the paper compares different answer lengths",
+          "new": "<a id=\"gpt3-candidate-scores\"></a>\n\n### How the paper compares different answer lengths"
+        }
+      ]
+    }
+  ],
+  "review": {
+    "sources": "GPT-1 §§3.2–3.3, 4.1 and Figure 1; GPT-2 §§2.2–2.3 and 3.5–3.7; GPT-3 §§2.1–2.4, 3.8; LLaMA v1 §§1–3 and Llama 2 Table 1 for the original 2K training context.",
+    "example": "The same entailment pair flows through an Extract head or a fixed decoder with three candidate continuations. A labeled demonstration changes the prompt and state, not the weights. No checkpoint response is claimed.",
+    "local_checks": "2021 pages built; 721 publication and 223 built-output checks passed; 0 broken internal routes, fragments or files. Exact reversal checked for all four edited Markdown files. Read-only source-image checks passed for the GPT-1, GPT-2, GPT-3 and LLaMA asset sets.",
+    "reader": "Followed the four-model route and both entries to the comparison in Chrome at widths 375 and 1280 px; verified the same-language score anchor in the Russian and English shells. Opened five original figures with captions and used mobile zoom and pan on the wide figures. The comparison table fit the available width and the checked pages had no KaTeX errors.",
+    "limits": "Existing source figures are kept with their captions and provenance; no new redistribution permission is asserted. Local review only; no push or deployment."
+  }
+}

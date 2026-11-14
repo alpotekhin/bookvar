@@ -20,6 +20,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md"
+EN_CHAPTER = ROOT / "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md"
 SOURCES = ROOT / "05 Источники/Originals/quantization-2026-10-19"
 ASSETS = ROOT / "00 Учебник/Assets/Figures/curated/quantization-review-2026-10"
 LEGACY_H2 = ["## Действительное число заменяется кодом и масштабом","## Симметричная и асимметричная сетка","## Что именно квантуется","## PTQ: квантизация уже обученной модели","## QAT: модель видит ошибку во время обучения","## NF4 и QLoRA решают задачу дообучения","## Формат файла не равен формату вычисления","## Почему средняя perplexity недостаточна","## Проверка готового артефакта","## Практика и первоисточники"]
@@ -94,9 +95,9 @@ def check_assets(text):
             assert blob[:8] == b"\x89PNG\r\n\x1a\n"
             assert struct.unpack(">II", blob[16:24]) == (item["width"], item["height"])
     embeds = re.findall(r"!\[\[([^\]]+)\]\]", text)
-    assert len(embeds) == 6
+    assert len(embeds) == 7
     for path in embeds:
-        relative = path.removeprefix("02 Areas/ML & DL/")
+        relative = path.split("|", 1)[0].removeprefix("02 Areas/ML & DL/")
         assert (ROOT / relative).is_file(), relative
     rendering = "not run: pdftoppm unavailable"
     if shutil.which("pdftoppm"):
@@ -120,6 +121,12 @@ def main():
         text, re.S
     )
     assert len(blocks) == 6
+    en_text = EN_CHAPTER.read_text()
+    en_blocks = re.findall(
+        rf"<!-- checked-example: ([\w-]+) -->\s*{fence}python\n(.*?)\n{fence}",
+        en_text, re.S
+    )
+    assert en_blocks == blocks, "The Russian and English examples must agree"
     namespace = {"__name__": "bookvar_quantization_example"}
     for ident, code in blocks:
         exec(compile(code, f"{CHAPTER}:{ident}", "exec"), namespace)
@@ -153,6 +160,16 @@ def main():
     codes = np.clip(np.rint(weights / scale) + zero, 0, 15)
     np.testing.assert_array_equal(codes, [0, 5, 10, 15])
     np.testing.assert_allclose(scale * (codes - zero), weights)
+    # The Transformers illustration displays the scale rounded to 3.58.
+    q = np.array([-77, -23, 127], dtype=np.int8)
+    shifted = q.astype(np.int32) - (-77)
+    np.testing.assert_array_equal(shifted, [0, 54, 204])
+    np.testing.assert_allclose(3.58 * shifted[:2], [0, 193.32])
+    assert shifted[-1] > np.iinfo(np.int8).max
+    # The example searches on two calibration inputs, not on model quality.
+    losses = namespace["losses"]
+    np.testing.assert_allclose(losses[19], 0.06768391596876099)
+    assert losses[11] < losses[10] < losses[19] < losses[0]
 
     # LLM.int8 decomposition example: one exactly representable FP16 channel.
     x8, w8 = np.array([1024., 1.]), np.array([1 / 1024, 1.])
@@ -231,6 +248,7 @@ def main():
         "equivalent_transform_cases": 400, "scaling_not_universally_better": {
             "improved": int(improved), "worsened": int(worsened)},
         "ste_true_local_derivative": float(derivative), "dq_bits_per_weight": dq_cost,
+        "awq_calibration_alpha": 0.55, "awq_calibration_mse": min(losses),
         "sources": check_sources(text), "figures": check_assets(text),
         "gpu_execution": "NOT RUN", "model_quality": "NOT MEASURED", "benchmark": "NOT RUN",
     }, ensure_ascii=False, indent=2))

@@ -1,0 +1,199 @@
+{
+  "date": "2026-11-11",
+  "scope": "Preserve Stanford CS336 copies of Algorithm 2 and Table 1 and clarify the two experiments in both locales. No new measurements, translated source excerpts, or deployment.",
+  "review": {
+    "sources": "Chen et al. arXiv:2302.01318v1, Algorithm 2 (page 3), §§4.1–4.2 (pages 3–5), §5 and Table 1 (page 6), §§6.1–6.3 and Figure 1 (pages 6–7), Theorem 1 (pages 10–11); Stanford CS336 Lecture 10, lines 507–535, and the three pinned course PNGs.",
+    "rights": "The arXiv v1 record gives CC BY 4.0. All three PNGs are byte-identical to the pinned Stanford images; that correspondence is separate from visual comparison against the original PDF pages. The unpublished textbook stats copy is retained locally, while the source library keeps the independent Stanford copy and the main chapter retains the more legible original vector-source render.",
+    "workedCases": "Walk B,A,C through Algorithm 2: B is accepted; A can be replaced by B, invalidating rows 3 and 4; only full acceptance uses the fourth row. Use an immutable initial prefix index to implement both outcomes. Figure 1 reports an XSum minimum at K=3 and a curve normalized by K+1; K=0 has no proposals but emits one token. The plotted XSum progress moves from roughly 2.8 tokens in 20 ms to 3.6 in 28 ms, so emitting more tokens per cycle still means waiting longer per token. Table 1 fixes K=4; 14.1/5.73 rounds to 2.46 on HumanEval. Its nucleus XSum speedup 1.92 cannot be reproduced as 14.1/7.52, so the table and arithmetic are presented separately.",
+    "preservation": "All existing code blocks, source excerpts and EAGLE explanations are unchanged. Old heading anchors remain explicit. The in-use Stanford PNGs and existing higher-resolution Figure 1 are unchanged. The historical local legacy page still embeds the same Algorithm 2 image in Obsidian."
+  },
+  "figures": [
+    {
+      "id": "curated-spec-alg-000000000047",
+      "asset": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-algorithm.png",
+      "author": "Charlie Chen et al.",
+      "title": "Algorithm 2: speculative sampling with draft and target models",
+      "source_url": "https://arxiv.org/abs/2302.01318v1",
+      "figure_url": "https://arxiv.org/pdf/2302.01318v1#page=3",
+      "source_page": 3,
+      "source_image_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/speculative-sampling-algorithm.png",
+      "course_reference": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L507-L535",
+      "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/speculative-sampling-algorithm.png",
+      "source_asset_sha256": "c9f40f7455a5c576b4d632437a50b0d99502e1409014d40fb8ac8a4bdf634061",
+      "source_parent_asset": "05 Источники/Originals/chen-speculative-sampling-2026-11-11/chen-2302.01318v1.pdf",
+      "source_parent_sha256": "ffa03c6ae46f3122570bacd7da358cae8659b6421162bbc25088622fd4889c37",
+      "sha256": "c9f40f7455a5c576b4d632437a50b0d99502e1409014d40fb8ac8a4bdf634061",
+      "git_blob": "3b3b752c63153be27def03d52bbab5d154605720",
+      "commit": "8b59b50730766695c2ffedd1a79c50cd09b9eb91",
+      "bytes": 324583,
+      "dimensions_px": [
+        1943,
+        1376
+      ],
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "https://arxiv.org/abs/2302.01318v1",
+      "modifications": "Exact bytes of the pinned Stanford CS336 crop of the Chen et al. source; the crop itself is upstream.",
+      "derivation": "source-raster-copy",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+        "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md",
+        "00 Учебник/14 Inference и оптимизация/01 KV-cache, batching и FlashAttention.md"
+      ]
+    },
+    {
+      "id": "curated-spec-results-000000000048",
+      "asset": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-results.png",
+      "author": "Charlie Chen et al.",
+      "title": "Table 1: Chinchilla benchmarks at batch size 1 and K=4",
+      "source_url": "https://arxiv.org/abs/2302.01318v1",
+      "figure_url": "https://arxiv.org/pdf/2302.01318v1#page=6",
+      "source_page": 6,
+      "source_image_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/speculative-sampling-results.png",
+      "course_reference": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L507-L535",
+      "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/speculative-sampling-results.png",
+      "source_asset_sha256": "09e9fb30e66bf5bc0355a3ab193c89ff38037b50746054d5d0814beec409d03a",
+      "source_parent_asset": "05 Источники/Originals/chen-speculative-sampling-2026-11-11/chen-2302.01318v1.pdf",
+      "source_parent_sha256": "ffa03c6ae46f3122570bacd7da358cae8659b6421162bbc25088622fd4889c37",
+      "sha256": "09e9fb30e66bf5bc0355a3ab193c89ff38037b50746054d5d0814beec409d03a",
+      "git_blob": "1decb8413b9e96f111bdc5c72ef400ab89e81ecc",
+      "commit": "8b59b50730766695c2ffedd1a79c50cd09b9eb91",
+      "bytes": 276452,
+      "dimensions_px": [
+        1962,
+        772
+      ],
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "https://arxiv.org/abs/2302.01318v1",
+      "modifications": "Exact bytes of the pinned Stanford CS336 crop of the Chen et al. source; the crop itself is upstream.",
+      "derivation": "source-raster-copy",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+        "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md"
+      ]
+    },
+    {
+      "id": "curated-spec-stats-000000000049",
+      "asset": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-stats.png",
+      "author": "Charlie Chen et al.",
+      "title": "Figure 1: lookahead trade-off (historical textbook copy)",
+      "source_url": "https://arxiv.org/abs/2302.01318v1",
+      "figure_url": "https://arxiv.org/pdf/2302.01318v1#page=7",
+      "source_page": 7,
+      "source_image_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/speculative-sampling-stats.png",
+      "course_reference": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L507-L535",
+      "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/speculative-sampling-stats.png",
+      "source_asset_sha256": "204570d0e748506de0cdcabbd884b921d9b35a6fc76817cdc847118ab8f77c6b",
+      "source_parent_asset": "05 Источники/Originals/chen-speculative-sampling-2026-11-11/chen-2302.01318v1.pdf",
+      "source_parent_sha256": "ffa03c6ae46f3122570bacd7da358cae8659b6421162bbc25088622fd4889c37",
+      "sha256": "204570d0e748506de0cdcabbd884b921d9b35a6fc76817cdc847118ab8f77c6b",
+      "git_blob": "0508ebc1b6769f88e7ad5d0e2bf8b539824abe03",
+      "commit": "8b59b50730766695c2ffedd1a79c50cd09b9eb91",
+      "bytes": 179394,
+      "dimensions_px": [
+        1943,
+        820
+      ],
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "https://arxiv.org/abs/2302.01318v1",
+      "modifications": "Exact bytes of the pinned Stanford CS336 crop of the Chen et al. source; the crop itself is upstream.",
+      "derivation": "source-raster-copy",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [],
+      "publication_status": "retired",
+      "retirement_reason": "The textbook already uses the complete vector-source render of Figure 1; the independent Stanford course original remains in its own source namespace.",
+      "replacement": "00 Учебник/Assets/Figures/curated/speculative-review-2026-10/chen-lookahead.png"
+    }
+  ],
+  "files": [
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+      "before_sha256": "29dddc54ec1d14b6830a6c60c439e4081d3c2c68e44e28b0231bb3303deeb0a3",
+      "changes": [
+        {
+          "old": "last_updated: 2026-11-09\nlast_verified: 2026-11-09",
+          "new": "last_updated: 2026-11-11\nlast_verified: 2026-11-11"
+        },
+        {
+          "old": "## Полный алгоритм на исходном слайде\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-algorithm.png]]\n\n*Charlie Chen et al.,\n[Algorithm 2, Speculative Sampling](https://arxiv.org/abs/2302.01318v1),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/),\nтакже в [Stanford CS336 Lecture 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L507-L535).\nВерхний цикл строит черновик; далее основная модель получает K+1\nраспределений; нижний цикл принимает префикс до первого отказа.\nКод выше отдельно показывает ветвь коррекции и ветвь дополнительного токена.*\n\nПараллельно вычисляются логиты основной модели, но проверка префикса\nимеет последовательную логику. Результат следующей позиции разрешено\nиспользовать лишь после принятия всех предыдущих кандидатов.\nИначе изменится условие, при котором распределение было вычислено.",
+          "new": "<a id=\"полный-алгоритм-на-исходном-слайде\"></a>\n\n## Алгоритм 2: черновик, проверка и замена\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-algorithm.png|Псевдокод из статьи: K последовательных шагов черновика, K+1 распределений основной модели, затем проверка слева направо. При отказе выборка идёт из остатка.]]\n\n*Charlie Chen et al., [Speculative Sampling, Algorithm 2, с. 3](https://arxiv.org/pdf/2302.01318v1#page=3),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Неизменённый фрагмент статьи из\n[Stanford CS336, лекция 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/speculative-sampling-algorithm.png).*\n\nПроследим по схеме черновик B, A, C из примера выше. Первый цикл строит\nвсе три кандидата. Между циклами основная модель считает четыре\nраспределения: до B, после B, после B A и после B A C.\nВо втором цикле первую строку используют, чтобы принять B, а вторую —\nчтобы проверить A и при отказе выбрать замену. Последние две строки\nтогда отбрасывают: обе рассчитаны при условии, что A уже принят.\nЛишь если приняты все три кандидата, четвёртая строка даёт бонусный токен.\n\nДля реализации удобнее зафиксировать длину префикса в начале цикла как\n$n_0$. Тогда кандидат с номером $t$ проверяется на позиции $n_0+t$\nс учётом уже принятого префикса, а после выхода из цикла длина\nувеличивается на число выданных токенов, включая замену или бонус.\nТак код не смешивает текущую длину $n$ и номер кандидата $t$,\nкак в записи индексов в оригинальном псевдокоде."
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/speculative-review-2026-10/chen-lookahead.png]]\n\n*Chen et al.,\n[Figure 1](https://arxiv.org/abs/2302.01318v1),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nСлева — время генерации 128 токенов; в центре — указанная авторами\nэффективность принятия, число принятых токенов, делённое на K+1;\nсправа — время цикла. Центральную кривую нельзя подставлять\nкак $\\alpha$ отдельной проверки в формулу выше.\nДля XSum минимум задержки достигается около K=3.\nРендер исходного векторного файла, действительно включённого в статью,\nбез обрезки.*\n\nУже в исходной работе задачи давали разные оптимальные настройки.\nУдлинять черновик можно, пока дополнительное продвижение оправдывает\nего построение и проверку. Динамический выбор длины пытается оценивать\nэто по текущему запросу, а не держать одно K для всех случаев.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-results.png]]\n\n*Chen et al., Table 1; исходная таблица также используется в CS336.\nChinchilla 70B, черновая модель 4B, batch=1, K=4, 16 TPU v4:\nдля XSum авторы сообщают примерно 1.9–2.0×, для HumanEval — 2.46×.\nПараметры выборки указаны в таблице и статье.\nЭто результаты конкретного эксперимента, не измерения Bookvar.\n[Оригинал](https://arxiv.org/abs/2302.01318v1),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/speculative-review-2026-10/chen-lookahead.png|Три графика для K от 0 до 7: время на 128 токенов, доля использованного бюджета K+1 и время одного цикла. Для XSum минимум времени слева при K=3.]]\n\n*Chen et al., [Figure 1, с. 7](https://arxiv.org/pdf/2302.01318v1#page=7),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Полный рендер исходного векторного рисунка.*\n\nНа левом графике время генерации 128 токенов для XSum снижается до $K=3$,\nа затем растёт. На правом графике время одного цикла растёт почти линейно\nс $K$: черновик приходится строить дольше. В центре авторы делят среднее\nчисло токенов, полученных за цикл, на максимально возможные $K+1$.\nПри $K=0$ там стоит 1, хотя предложений черновика вообще нет: обычный\nшаг всё равно выдаёт один токен. Эту кривую нельзя подставить в формулу\nвыше как вероятность $\\alpha$ принять следующий кандидат.\n\nПо точкам XSum при $K=3$ цикл выдаёт примерно 2,8 токена за 20 мс,\nа при $K=7$ — 3,6 токена за 28 мс. Продвижение за цикл выросло, но\nвремя на токен тоже выросло. На HumanEval левый график продолжает\nснижаться вплоть до $K=7$; за пределами этого диапазона замеров здесь нет.\nПоэтому в системах с динамической длиной черновика $K$ подбирают по\nтекущему запросу и стоимости очередного цикла.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-results.png|Таблица экспериментов при batch size 1 и K=4. Для XSum и HumanEval сопоставлены качество, среднее время на токен и опубликованное ускорение.]]\n\n*Chen et al., [Table 1, с. 6](https://arxiv.org/pdf/2302.01318v1#page=6),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Неизменённый фрагмент статьи из\n[Stanford CS336, лекция 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/speculative-sampling-results.png).\nВ опыте использованы Chinchilla 70B, черновик 4B и 16 TPU v4.*\n\nВ таблице длина черновика уже фиксирована: $K=4$ при пакете из одного\nзапроса. Для HumanEval среднее время на токен упало с 14,1 до 5,73 мс,\nто есть $14{,}1/5{,}73\\approx2{,}46$ раза. Для XSum с nucleus\nавторы указали $1{,}92\\times$; отношение напечатанных времён\n$14{,}1/7{,}52$ даёт около $1{,}88\\times$. Это расхождение в\nопубликованной таблице, а не новый замер. Оптимум $K=3$ для XSum\nвзят с графика, а не из таблицы при $K=4$."
+        }
+      ],
+      "after_sha256": "dfbcfb894a4bb73d9e27175e5a6a7b8f99304fe763b9529cfb2c6d4d22e87a05",
+      "lines": 1027
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md",
+      "before_sha256": "9ed71d53ab0bbef484e5f7c982934cf9a7a65574d2d16857784ebbe982901db6",
+      "changes": [
+        {
+          "old": "last_updated: 2026-11-09\nlast_verified: 2026-11-09",
+          "new": "last_updated: 2026-11-11\nlast_verified: 2026-11-11"
+        },
+        {
+          "old": "canonical_revision: \"29dddc54ec1d14b6830a6c60c439e4081d3c2c68e44e28b0231bb3303deeb0a3\"\ntranslation_reviewed: \"2026-11-09\"",
+          "new": "canonical_revision: \"dfbcfb894a4bb73d9e27175e5a6a7b8f99304fe763b9529cfb2c6d4d22e87a05\"\ntranslation_reviewed: \"2026-11-11\""
+        },
+        {
+          "old": "## The full algorithm in the original slide\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-algorithm.png]]\n\n*Charlie Chen et al.,\n[Algorithm 2, Speculative Sampling](https://arxiv.org/abs/2302.01318v1),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/);\nalso in [Stanford CS336 Lecture 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L507-L535).\nThe upper loop builds the draft, the target supplies $K+1$ distributions,\nand the lower loop accepts a prefix until the first rejection. The code\nabove separates correction and bonus-token branches.*\n\nTarget logits are computed in parallel, but prefix verification is logically\nsequential. A position's distribution is valid only after all earlier\nproposals have been accepted. Otherwise its conditioning prefix changes.",
+          "new": "<a id=\"the-full-algorithm-in-the-original-slide\"></a>\n\n## Algorithm 2: drafting, verification and correction\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-algorithm.png|Paper pseudocode: K sequential draft steps, K+1 target distributions, then left-to-right verification. On rejection, sample from the residual.]]\n\n*Charlie Chen et al., [Speculative Sampling, Algorithm 2, p. 3](https://arxiv.org/pdf/2302.01318v1#page=3),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Unmodified crop from\n[Stanford CS336, Lecture 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/speculative-sampling-algorithm.png).*\n\nFollow the draft B, A, C from the worked example. The first loop produces\nall three proposals. Between the loops, the target computes four\ndistributions: before B, after B, after B A, and after B A C.\nIn the second loop, the first row accepts B; the second tests A and\nsupplies the distribution for correction if A is rejected. Discard\nthe last two rows on that branch: both assume A was accepted.\nOnly if all three proposals pass does the fourth row supply a bonus token.\n\nIn code, keep the prefix length at the start of the round as $n_0$.\nCheck candidate $t$ at position $n_0+t$, conditioned on the accepted\nprefix, then advance the length by the number of emitted tokens,\nincluding the correction or bonus. This keeps the moving length $n$\nseparate from candidate index $t$, which the original pseudocode mixes."
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/speculative-review-2026-10/chen-lookahead.png]]\n\n*Chen et al., [Figure 1](https://arxiv.org/abs/2302.01318v1),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nLeft: time to generate 128 tokens. Center: the authors' acceptance\nefficiency, accepted output divided by $K+1$. Right: cycle time.\nThe center curve is not the individual-check $\\alpha$ used above.\nXSum latency is lowest around $K=3$. Full rendering of the vector\nfigure included in the paper, uncropped.*\n\nDifferent tasks already had different optimal settings in the original\nwork. A longer draft helps only while additional progress pays for\ndrafting and verification. Dynamic lookahead estimates this per request\ninstead of fixing one $K$ for every case.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-results.png]]\n\n*Chen et al., Table 1, also used in CS336.\nChinchilla 70B, 4B draft, batch one, $K=4$, 16 TPU v4:\nreported speedups are about 1.9–2.0× on XSum and 2.46× on HumanEval.\nSampling settings are listed in the table and paper.\nThese are the authors' experiment, not Bookvar measurements.\n[Original](https://arxiv.org/abs/2302.01318v1),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/speculative-review-2026-10/chen-lookahead.png|Three panels sweep K from 0 to 7: time for 128 tokens, fraction of the K+1 token budget used, and time per cycle. XSum has its minimum on the left at K=3.]]\n\n*Chen et al., [Figure 1, p. 7](https://arxiv.org/pdf/2302.01318v1#page=7),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Full rendering of the original vector figure.*\n\nOn the left, XSum's time for 128 tokens falls through $K=3$ and then\nrises. On the right, time per cycle grows roughly linearly with $K$:\ndrafting takes longer. In the center, the authors divide mean progress\nper cycle by the maximum of $K+1$. At $K=0$ the ratio is 1 even though\nthere are no draft candidates: the ordinary step still emits one token.\nThis curve is not the probability $\\alpha$ of accepting the next proposal.\n\nReading the XSum points, a cycle emits about 2.8 tokens in 20 ms at $K=3$\nand about 3.6 in 28 ms at $K=7$. The longer draft emits more per cycle\nbut takes more time per token. The HumanEval curve on the left keeps\nfalling through $K=7$; the plot gives no measurements beyond that point.\nWith dynamic lookahead, the system chooses $K$ based on the current\nrequest and the cost of another cycle.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-results.png|Table for batch size 1 and K=4. XSum and HumanEval rows report task scores, mean time per token, and published speedup.]]\n\n*Chen et al., [Table 1, p. 6](https://arxiv.org/pdf/2302.01318v1#page=6),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Unmodified crop from\n[Stanford CS336, Lecture 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/speculative-sampling-results.png).\nThe experiment uses Chinchilla 70B, a 4B draft, and 16 TPU v4 chips.*\n\nThe table fixes the draft at $K=4$ with a one-request batch.\nFor HumanEval, mean time per token drops from 14.1 to 5.73 ms,\na ratio of $14.1/5.73\\approx2.46$. The authors report $1.92\\times$\nfor nucleus XSum, while the displayed times give $14.1/7.52\\approx1.88$.\nThis is a discrepancy in the published table, not a new measurement.\nThe XSum optimum at $K=3$ comes from the plot, not the $K=4$ table."
+        }
+      ],
+      "after_sha256": "0b7ba2a151bcdd77441552c6bc535ed85d65c9e586c8d2088d3c5d1b2b11abdd",
+      "lines": 986
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "bde823c6e272261b025268358a0a94f8840f6c1512d7b5a2cc9cadef9b7ae47a",
+      "changes": [
+        {
+          "old": "  - id: curated-spec-alg-000000000047\n    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-algorithm.png\n    author: Charlie Chen et al.\n    source_url: https://arxiv.org/abs/2302.01318\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    modifications: copied or extracted without visual modification for publication\n    used_in:\n      - 00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    source_asset: raw/papers/external/topics-53-59/speculative-sampling-algorithm.png",
+          "new": "  - id: curated-spec-alg-000000000047\n    asset: \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-algorithm.png\"\n    author: \"Charlie Chen et al.\"\n    title: \"Algorithm 2: speculative sampling with draft and target models\"\n    source_url: \"https://arxiv.org/abs/2302.01318v1\"\n    figure_url: \"https://arxiv.org/pdf/2302.01318v1#page=3\"\n    source_page: 3\n    source_image_url: \"https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/speculative-sampling-algorithm.png\"\n    course_reference: \"https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L507-L535\"\n    source_asset: \"05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/speculative-sampling-algorithm.png\"\n    source_asset_sha256: \"c9f40f7455a5c576b4d632437a50b0d99502e1409014d40fb8ac8a4bdf634061\"\n    source_parent_asset: \"05 Источники/Originals/chen-speculative-sampling-2026-11-11/chen-2302.01318v1.pdf\"\n    source_parent_sha256: \"ffa03c6ae46f3122570bacd7da358cae8659b6421162bbc25088622fd4889c37\"\n    sha256: \"c9f40f7455a5c576b4d632437a50b0d99502e1409014d40fb8ac8a4bdf634061\"\n    git_blob: \"3b3b752c63153be27def03d52bbab5d154605720\"\n    commit: \"8b59b50730766695c2ffedd1a79c50cd09b9eb91\"\n    bytes: 324583\n    dimensions_px: [1943,1376]\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"https://arxiv.org/abs/2302.01318v1\"\n    modifications: \"Exact bytes of the pinned Stanford CS336 crop of the Chen et al. source; the crop itself is upstream.\"\n    derivation: \"source-raster-copy\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md\",\"en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md\",\"00 Учебник/14 Inference и оптимизация/01 KV-cache, batching и FlashAttention.md\"]"
+        },
+        {
+          "old": "  - id: curated-spec-results-000000000048\n    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-results.png\n    author: Charlie Chen et al.\n    source_url: https://arxiv.org/abs/2302.01318\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    modifications: copied or extracted without visual modification for publication\n    used_in:\n      - 00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    source_asset: raw/papers/external/topics-53-59/speculative-sampling-results.png",
+          "new": "  - id: curated-spec-results-000000000048\n    asset: \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-results.png\"\n    author: \"Charlie Chen et al.\"\n    title: \"Table 1: Chinchilla benchmarks at batch size 1 and K=4\"\n    source_url: \"https://arxiv.org/abs/2302.01318v1\"\n    figure_url: \"https://arxiv.org/pdf/2302.01318v1#page=6\"\n    source_page: 6\n    source_image_url: \"https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/speculative-sampling-results.png\"\n    course_reference: \"https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L507-L535\"\n    source_asset: \"05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/speculative-sampling-results.png\"\n    source_asset_sha256: \"09e9fb30e66bf5bc0355a3ab193c89ff38037b50746054d5d0814beec409d03a\"\n    source_parent_asset: \"05 Источники/Originals/chen-speculative-sampling-2026-11-11/chen-2302.01318v1.pdf\"\n    source_parent_sha256: \"ffa03c6ae46f3122570bacd7da358cae8659b6421162bbc25088622fd4889c37\"\n    sha256: \"09e9fb30e66bf5bc0355a3ab193c89ff38037b50746054d5d0814beec409d03a\"\n    git_blob: \"1decb8413b9e96f111bdc5c72ef400ab89e81ecc\"\n    commit: \"8b59b50730766695c2ffedd1a79c50cd09b9eb91\"\n    bytes: 276452\n    dimensions_px: [1962,772]\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"https://arxiv.org/abs/2302.01318v1\"\n    modifications: \"Exact bytes of the pinned Stanford CS336 crop of the Chen et al. source; the crop itself is upstream.\"\n    derivation: \"source-raster-copy\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md\",\"en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md\"]"
+        },
+        {
+          "old": "  - id: curated-spec-stats-000000000049\n    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-stats.png\n    author: Charlie Chen et al.\n    source_url: https://arxiv.org/abs/2302.01318\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    modifications: copied or extracted without visual modification for publication\n    used_in:\n      - 00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    source_asset: raw/papers/external/topics-53-59/speculative-sampling-stats.png",
+          "new": "  - id: curated-spec-stats-000000000049\n    asset: \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-stats.png\"\n    author: \"Charlie Chen et al.\"\n    title: \"Figure 1: lookahead trade-off (historical textbook copy)\"\n    source_url: \"https://arxiv.org/abs/2302.01318v1\"\n    figure_url: \"https://arxiv.org/pdf/2302.01318v1#page=7\"\n    source_page: 7\n    source_image_url: \"https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/speculative-sampling-stats.png\"\n    course_reference: \"https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L507-L535\"\n    source_asset: \"05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/speculative-sampling-stats.png\"\n    source_asset_sha256: \"204570d0e748506de0cdcabbd884b921d9b35a6fc76817cdc847118ab8f77c6b\"\n    source_parent_asset: \"05 Источники/Originals/chen-speculative-sampling-2026-11-11/chen-2302.01318v1.pdf\"\n    source_parent_sha256: \"ffa03c6ae46f3122570bacd7da358cae8659b6421162bbc25088622fd4889c37\"\n    sha256: \"204570d0e748506de0cdcabbd884b921d9b35a6fc76817cdc847118ab8f77c6b\"\n    git_blob: \"0508ebc1b6769f88e7ad5d0e2bf8b539824abe03\"\n    commit: \"8b59b50730766695c2ffedd1a79c50cd09b9eb91\"\n    bytes: 179394\n    dimensions_px: [1943,820]\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"https://arxiv.org/abs/2302.01318v1\"\n    modifications: \"Exact bytes of the pinned Stanford CS336 crop of the Chen et al. source; the crop itself is upstream.\"\n    derivation: \"source-raster-copy\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    used_in: []\n    publication_status: \"retired\"\n    retirement_reason: \"The textbook already uses the complete vector-source render of Figure 1; the independent Stanford course original remains in its own source namespace.\"\n    replacement: \"00 Учебник/Assets/Figures/curated/speculative-review-2026-10/chen-lookahead.png\""
+        }
+      ],
+      "after_sha256": "22d79d799b8ace8350a39c2748077a6cd79d38105f1bd42cc0f1d2efadb5df34",
+      "lines": 26399
+    },
+    {
+      "source": "publishing/tests/fixtures/legacy-unhashed-assets.json",
+      "before_sha256": "87c095e0fc5e29322781f696677578b1951269583264fb64a5d7b2d5c79475c8",
+      "changes": [
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-algorithm.png\",\n    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-results.png\",\n    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-stats.png\",\n    \"00 Учебник/Assets/Figures/curated/training-systems-courses/41-cs336-data-composition.png\",",
+          "new": "    \"00 Учебник/Assets/Figures/curated/training-systems-courses/41-cs336-data-composition.png\","
+        }
+      ],
+      "after_sha256": "609823a0d33217c30f08f3dc442746f1eb60d6a4822e645681e8d7388aff9f51",
+      "lines": 279
+    }
+  ]
+}

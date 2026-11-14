@@ -1,0 +1,514 @@
+[
+  {
+    "chapter": "rag",
+    "width": 1280,
+    "figures": [
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/rag-review-2026-10/rag-sequence-token.png",
+        "alt": "Кодировщик запроса и MIPS находят документы. Генератор читает их по одному, затем блок Marginalize объединяет вероятности.",
+        "natural": [
+          1615,
+          485
+        ],
+        "bounds": [
+          324,
+          956,
+          632,
+          189.7890625
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-first-60-64/hf-rag-evaluation-workflow.png",
+        "alt": "Над пунктиром документы делят на фрагменты и индексируют их эмбеддинги. Под пунктиром поиск выбирает фрагменты, а reader получает вопрос и собранный контекст.",
+        "natural": [
+          2444,
+          2106
+        ],
+        "bounds": [
+          324,
+          956,
+          632,
+          544.59375
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m03-p31-hipporag-index-and-retrieval.png",
+        "alt": "Верхний ряд: извлечение троек и построение графа. Нижний ряд: связывание сущностей вопроса с вершинами и распространение веса через Personalized PageRank.",
+        "natural": [
+          1920,
+          1080
+        ],
+        "bounds": [
+          324,
+          956,
+          632,
+          355.5
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/rag-review-2026-10/lost-middle-position.png",
+        "alt": "Точность GPT-3.5 на 20 документах выше всего при источнике на первой позиции, падает к середине и растёт к концу. Пунктир показывает результат без документов.",
+        "natural": [
+          1033,
+          1016
+        ],
+        "bounds": [
+          324,
+          956,
+          632,
+          621.59375
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/rag-review-2026-10/alce-citation-evaluation.png",
+        "alt": "Для трёх утверждений ALCE проверяет поддержку всеми цитатами, затем убирает по одной цитате. На рисунке полнота 2 из 3, точность 4 из 6.",
+        "natural": [
+          1095,
+          1205
+        ],
+        "bounds": [
+          324,
+          956,
+          632,
+          695.484375
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/rag-review-2026-10/openscholar-inference.png",
+        "alt": "OpenScholar ищет и переранжирует фрагменты, пишет черновик, уточняет его после дополнительных запросов и проверяет цитаты.",
+        "natural": [
+          2025,
+          504
+        ],
+        "bounds": [
+          324,
+          956,
+          632,
+          157.296875
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/rag-review-2026-10/openscholar-training.png",
+        "alt": "OpenScholar сохраняет черновики, замечания и исправленные ответы. После фильтрации ими обучают генерации ответа, замечаний и правок.",
+        "natural": [
+          2025,
+          397
+        ],
+        "bounds": [
+          324,
+          956,
+          632,
+          123.8984375
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-first-60-64/hf-rag-settings-accuracy.png",
+        "alt": "Пять столбцов от исходного RAG с 74,6% до конфигурации с 94,8% после настройки разбиения, эмбеддингов, переранжирования и модели ответа.",
+        "natural": [
+          2114,
+          1416
+        ],
+        "bounds": [
+          324,
+          956,
+          632,
+          423.3203125
+        ]
+      }
+    ],
+    "formulaErrors": 0,
+    "scrollWidth": 1280,
+    "clientWidth": 1280
+  },
+  {
+    "chapter": "rag",
+    "width": 375,
+    "figures": [
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/rag-review-2026-10/rag-sequence-token.png",
+        "alt": "Кодировщик запроса и MIPS находят документы. Генератор читает их по одному, затем блок Marginalize объединяет вероятности.",
+        "natural": [
+          1615,
+          485
+        ],
+        "bounds": [
+          16,
+          359,
+          343,
+          103
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-first-60-64/hf-rag-evaluation-workflow.png",
+        "alt": "Над пунктиром документы делят на фрагменты и индексируют их эмбеддинги. Под пунктиром поиск выбирает фрагменты, а reader получает вопрос и собранный контекст.",
+        "natural": [
+          2444,
+          2106
+        ],
+        "bounds": [
+          16,
+          359,
+          343,
+          295.5625
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m03-p31-hipporag-index-and-retrieval.png",
+        "alt": "Верхний ряд: извлечение троек и построение графа. Нижний ряд: связывание сущностей вопроса с вершинами и распространение веса через Personalized PageRank.",
+        "natural": [
+          1920,
+          1080
+        ],
+        "bounds": [
+          16,
+          359,
+          343,
+          192.9375
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/rag-review-2026-10/lost-middle-position.png",
+        "alt": "Точность GPT-3.5 на 20 документах выше всего при источнике на первой позиции, падает к середине и растёт к концу. Пунктир показывает результат без документов.",
+        "natural": [
+          1033,
+          1016
+        ],
+        "bounds": [
+          16,
+          359,
+          343,
+          337.3515625
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/rag-review-2026-10/alce-citation-evaluation.png",
+        "alt": "Для трёх утверждений ALCE проверяет поддержку всеми цитатами, затем убирает по одной цитате. На рисунке полнота 2 из 3, точность 4 из 6.",
+        "natural": [
+          1095,
+          1205
+        ],
+        "bounds": [
+          16,
+          359,
+          343,
+          377.453125
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/rag-review-2026-10/openscholar-inference.png",
+        "alt": "OpenScholar ищет и переранжирует фрагменты, пишет черновик, уточняет его после дополнительных запросов и проверяет цитаты.",
+        "natural": [
+          2025,
+          504
+        ],
+        "bounds": [
+          16,
+          359,
+          343,
+          85.3671875
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/rag-review-2026-10/openscholar-training.png",
+        "alt": "OpenScholar сохраняет черновики, замечания и исправленные ответы. После фильтрации ими обучают генерации ответа, замечаний и правок.",
+        "natural": [
+          2025,
+          397
+        ],
+        "bounds": [
+          16,
+          359,
+          343,
+          67.2421875
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-first-60-64/hf-rag-settings-accuracy.png",
+        "alt": "Пять столбцов от исходного RAG с 74,6% до конфигурации с 94,8% после настройки разбиения, эмбеддингов, переранжирования и модели ответа.",
+        "natural": [
+          2114,
+          1416
+        ],
+        "bounds": [
+          16,
+          359,
+          343,
+          229.7421875
+        ]
+      }
+    ],
+    "formulaErrors": 0,
+    "scrollWidth": 375,
+    "clientWidth": 375
+  },
+  {
+    "chapter": "workflow",
+    "width": 1280,
+    "figures": [
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/ml-workflow-review-2026-10/google-pipes.png",
+        "alt": "Синий контур обслуживает запросы. Зелёный конвейер готовит данные, красный обучает кандидата, фиолетовый сравнивает модели и возвращает выбранную версию в serving.",
+        "natural": [
+          742,
+          906
+        ],
+        "bounds": [
+          324,
+          956,
+          632,
+          771.6796875
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/ml-workflow-review-2026-10/google-data-process.png",
+        "alt": "Из журнала приложения конвейер данных строит обучающий и проверочный наборы. Оба сохраняются в Dataset storage.",
+        "natural": [
+          622,
+          262
+        ],
+        "bounds": [
+          329,
+          951,
+          622,
+          262
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/ml-workflow-review-2026-10/google-train.png",
+        "alt": "Из Dataset storage берётся обучающий набор; Training process сохраняет обученную модель в Model storage.",
+        "natural": [
+          622,
+          262
+        ],
+        "bounds": [
+          329,
+          951,
+          622,
+          262
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/model-export-2026-10-27/onnx-runtime-providers.png",
+        "alt": "Модель ONNX поступает в Graph Partitioner. Он использует реестр execution providers, чтобы назначить поддерживаемые части графа доступным средам исполнения.",
+        "natural": [
+          1454,
+          910
+        ],
+        "bounds": [
+          324,
+          956,
+          632,
+          395.5390625
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/tensorflow-export-2026-10-27/two-layer-network.png",
+        "alt": "Граф в TensorBoard: вход проходит через MatMul, сложение и ReLU первого слоя, затем через операции второго слоя.",
+        "natural": [
+          826,
+          1003
+        ],
+        "bounds": [
+          324,
+          956,
+          632,
+          767.421875
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/ml-workflow-review-2026-10/google-offline-online.png",
+        "alt": "Слева модель считает ответ после запроса. Справа предсказания считаются заранее, а приложение читает сохранённый результат.",
+        "natural": [
+          750,
+          273
+        ],
+        "bounds": [
+          324,
+          956,
+          632,
+          230.046875
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/ml-workflow-review-2026-10/google-prediction-process.png",
+        "alt": "На входе запроса стоят проверка и подготовка признаков. После модели отдельный шаг превращает предсказание в ответ приложения.",
+        "natural": [
+          504,
+          161
+        ],
+        "bounds": [
+          388,
+          892,
+          504,
+          161
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/ml-workflow-review-2026-10/google-prediction-log.png",
+        "alt": "Журнал предсказаний сохраняет выход модели, а журнал приложения — события после ответа. Это два входа для будущей проверки и обучения.",
+        "natural": [
+          622,
+          262
+        ],
+        "bounds": [
+          329,
+          951,
+          622,
+          262
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/workflow-feedback-2026-10-26/feedback-timescales.svg",
+        "alt": "На логарифмической шкале времени сопоставлены контуры обратной связи: от минутной проверки камеры до квартального пересмотра архитектуры.",
+        "natural": [
+          97,
+          133
+        ],
+        "bounds": [
+          480,
+          800,
+          320,
+          440.1484375
+        ]
+      }
+    ],
+    "formulaErrors": 0,
+    "scrollWidth": 1280,
+    "clientWidth": 1280
+  },
+  {
+    "chapter": "workflow",
+    "width": 375,
+    "figures": [
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/ml-workflow-review-2026-10/google-pipes.png",
+        "alt": "Синий контур обслуживает запросы. Зелёный конвейер готовит данные, красный обучает кандидата, фиолетовый сравнивает модели и возвращает выбранную версию в serving.",
+        "natural": [
+          742,
+          906
+        ],
+        "bounds": [
+          16,
+          359,
+          343,
+          418.8046875
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/ml-workflow-review-2026-10/google-data-process.png",
+        "alt": "Из журнала приложения конвейер данных строит обучающий и проверочный наборы. Оба сохраняются в Dataset storage.",
+        "natural": [
+          622,
+          262
+        ],
+        "bounds": [
+          16,
+          359,
+          343,
+          144.4765625
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/ml-workflow-review-2026-10/google-train.png",
+        "alt": "Из Dataset storage берётся обучающий набор; Training process сохраняет обученную модель в Model storage.",
+        "natural": [
+          622,
+          262
+        ],
+        "bounds": [
+          16,
+          359,
+          343,
+          144.4765625
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/model-export-2026-10-27/onnx-runtime-providers.png",
+        "alt": "Модель ONNX поступает в Graph Partitioner. Он использует реестр execution providers, чтобы назначить поддерживаемые части графа доступным средам исполнения.",
+        "natural": [
+          1454,
+          910
+        ],
+        "bounds": [
+          16,
+          359,
+          343,
+          214.6640625
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/tensorflow-export-2026-10-27/two-layer-network.png",
+        "alt": "Граф в TensorBoard: вход проходит через MatMul, сложение и ReLU первого слоя, затем через операции второго слоя.",
+        "natural": [
+          826,
+          1003
+        ],
+        "bounds": [
+          16,
+          359,
+          343,
+          416.5
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/ml-workflow-review-2026-10/google-offline-online.png",
+        "alt": "Слева модель считает ответ после запроса. Справа предсказания считаются заранее, а приложение читает сохранённый результат.",
+        "natural": [
+          750,
+          273
+        ],
+        "bounds": [
+          16,
+          359,
+          343,
+          124.8515625
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/ml-workflow-review-2026-10/google-prediction-process.png",
+        "alt": "На входе запроса стоят проверка и подготовка признаков. После модели отдельный шаг превращает предсказание в ответ приложения.",
+        "natural": [
+          504,
+          161
+        ],
+        "bounds": [
+          16,
+          359,
+          343,
+          109.5625
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/ml-workflow-review-2026-10/google-prediction-log.png",
+        "alt": "Журнал предсказаний сохраняет выход модели, а журнал приложения — события после ответа. Это два входа для будущей проверки и обучения.",
+        "natural": [
+          622,
+          262
+        ],
+        "bounds": [
+          16,
+          359,
+          343,
+          144.4765625
+        ]
+      },
+      {
+        "path": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/workflow-feedback-2026-10-26/feedback-timescales.svg",
+        "alt": "На логарифмической шкале времени сопоставлены контуры обратной связи: от минутной проверки камеры до квартального пересмотра архитектуры.",
+        "natural": [
+          97,
+          133
+        ],
+        "bounds": [
+          27.5,
+          347.5,
+          320,
+          440.1484375
+        ]
+      }
+    ],
+    "formulaErrors": 0,
+    "scrollWidth": 375,
+    "clientWidth": 375
+  }
+]

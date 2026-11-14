@@ -3,6 +3,7 @@ from pathlib import Path
 from hashlib import sha256
 import ast
 import re
+from topic_consolidation_baseline import before_topic_consolidation
 
 import jax
 import jaxlib
@@ -16,7 +17,7 @@ text = chapter.read_text()
 pattern = r'<!-- BEGIN REVIEW: JAX transforms 2026-10-27 -->\n(.*?)<!-- END REVIEW: JAX transforms 2026-10-27 -->\n\n'
 addition = re.search(pattern, text, re.S)
 assert addition is not None
-baseline = text[:addition.start()] + text[addition.end():]
+baseline = re.sub(pattern, '', before_topic_consolidation(text, chapter), flags=re.S)
 assert sha256(baseline.encode()).hexdigest() == 'f4a436da9642cc59dfec871c9e2134119871e81e7993b0cc2dcd68af68d31b82'
 blocks = re.findall(r'```python\n(.*?)\n```', addition.group(1), re.S)
 assert len(blocks) == 5

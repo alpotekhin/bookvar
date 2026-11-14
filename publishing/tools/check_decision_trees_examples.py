@@ -16,7 +16,7 @@ assert sum([103, 52, 6]) == 161 and sum([4, 1, 90]) == 95
 assert 161 + 95 == 256
 np.testing.assert_array_equal(np.array([103,52,6]) + [4,1,90], [107,53,96])
 blocks = re.findall(r"```python\n(.*?)```", text, re.S)
-assert len(blocks) == 3
+assert len(blocks) == 5
 scope = {}
 for i, code in enumerate(blocks):
     exec(compile(code, f"{CHAPTER}:python-{i+1}", "exec"), scope)
@@ -53,6 +53,14 @@ assert np.mean(candidate.predict((X[:, 0] > 5.5).astype(int).reshape(-1, 1)) != 
 
 full = scope["full_tree"]
 assert full.get_depth() == 3 and full.get_n_leaves() == 4
+for n in [1, 2, 8]:
+    growth_x = np.arange(n).reshape(-1, 1)
+    growth_y = np.arange(n) % 2
+    grown = DecisionTreeClassifier(random_state=0).fit(growth_x, growth_y)
+    assert grown.get_n_leaves() == n
+    assert grown.tree_.node_count == 2 * grown.get_n_leaves() - 1
+    capped = DecisionTreeClassifier(max_depth=2, random_state=0).fit(growth_x, growth_y)
+    assert capped.get_n_leaves() <= min(n, 4)
 np.testing.assert_array_equal(full.predict(X), y)
 np.testing.assert_allclose(full.feature_importances_, [1])
 np.testing.assert_allclose(stump.feature_importances_, [1])
@@ -108,6 +116,32 @@ np.testing.assert_allclose(sse, [26/3, 1, 26/3])
 np.testing.assert_allclose(reg.tree_.value.ravel(), [3.5, 1.5, 5.5])
 np.testing.assert_allclose(reg.predict([[1], [4], [100]]), [1.5, 5.5, 5.5])
 assert np.mean((reg.predict(xr)-yr)**2) == .25
+# Extrapolation uses outer leaf means, not an endpoint observation's target.
+np.testing.assert_allclose(scope["linear_small"].coef_, [1.8])
+np.testing.assert_allclose(scope["linear_small"].intercept_, -1)
+np.testing.assert_allclose(scope["linear_small"].predict(scope["outside_x"]), [-1, 8, 179])
+np.testing.assert_allclose(reg.predict(scope["outside_x"]), [1.5, 5.5, 5.5])
+assert reg.predict([[100]])[0] != yr[-1]
+# Reproduce the MOOC's asymmetric branches; no regenerated source plot.
+asym_models = scope["asym_models"]
+assert len(asym_models) == 3
+for model, expected in zip(asym_models, [(2, 4, 3), (6, 15, 1), (4, 7, 60)]):
+    tr = model.tree_
+    leaves = np.flatnonzero(tr.children_left == -1)
+    assert (model.get_depth(), model.get_n_leaves(), tr.n_node_samples[leaves].min()) == expected
+    np.testing.assert_allclose(tr.threshold[0], 1.7642696499824524)
+for model in asym_models[:2]:
+    tr = model.tree_
+    depth = np.zeros(tr.node_count, dtype=int)
+    for node in range(tr.node_count):
+        if tr.children_left[node] != -1:
+            depth[tr.children_left[node]] = depth[node] + 1
+            depth[tr.children_right[node]] = depth[node] + 1
+    pure_at_two = np.flatnonzero((tr.children_left == -1) & (depth == 2) & (tr.impurity == 0))
+    np.testing.assert_array_equal(sorted(tr.n_node_samples[pure_at_two]), [3, 147, 159])
+    remaining = np.flatnonzero((depth == 2) & (tr.n_node_samples == 291))
+    assert remaining.size == 1
+    assert (tr.children_left[remaining[0]] == -1) == (model.get_depth() == 2)
 median_tree = DecisionTreeRegressor(criterion="absolute_error", min_samples_split=4).fit(
     [[1], [2], [3]], [1, 2, 100]
 )
@@ -165,7 +199,7 @@ changed[:, unused] = changed[::-1, unused]
 assert dup.score(changed, targets) == 1
 for before, after in zip(state_before, [dup.tree_.feature, dup.tree_.threshold, dup.tree_.value]):
     np.testing.assert_array_equal(before, after)
-assert len(re.findall(r"!\[\[", text)) == 13
-print("PASS: 3 published blocks; class order; all splits; XOR; regression; all pruned subtrees;"
-      " growth limits; feature transformations; weights; NaN; fixed-model permutation; 13 figures.")
+assert len(re.findall(r"!\[\[", text)) == 17
+print("PASS: 5 published blocks; class order; all splits; XOR; regression/extrapolation; all pruned subtrees;"
+      " asymmetric branch growth; growth limits; feature transformations; weights; NaN; fixed-model permutation; 17 figures.")
 print("chapter sha256:", hashlib.sha256(CHAPTER.read_bytes()).hexdigest())

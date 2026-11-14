@@ -1,0 +1,420 @@
+{
+  "url": "http://127.0.0.1:4330/textbook/retrieval/sparse-dense-hybrid/",
+  "width": 375,
+  "height": 812,
+  "figures": [
+    {
+      "index": 0,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-first-60-64/openqa-retriever-reader.png",
+      "alt": "DrQA: document retriever followed by extractive document reader",
+      "natural": [
+        2560,
+        1920
+      ],
+      "display": [
+        359,
+        269.25
+      ],
+      "viewport": [
+        375,
+        623
+      ],
+      "scroll": [
+        375,
+        623
+      ],
+      "caption": "Danqi Chen, ACL 2020 Open-Domain QA Tutorial, part IV,\nслайд 4; архитектура DrQA.\nDocument Retriever выбирает статьи, Document Reader извлекает ответ.\nЭто система 2017 года, не схема современного генеративного LLM.\nНажатие на рисунок открывает просмотр с увеличением и ссылкой на файл.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-00.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          470
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-00-zoom-start.png",
+        "atEnd": [
+          1077,
+          470
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-00-zoom-end.png"
+      }
+    },
+    {
+      "index": 1,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-first-60-64/openqa-tfidf-retriever.png",
+      "alt": "DrQA TF–IDF retrieval over Wikipedia articles",
+      "natural": [
+        2560,
+        1920
+      ],
+      "display": [
+        359,
+        269.25
+      ],
+      "viewport": [
+        375,
+        623
+      ],
+      "scroll": [
+        375,
+        623
+      ],
+      "caption": "Danqi Chen, тот же tutorial,\nслайд 5. На рисунке именно TF–IDF, не BM25. Документом в этой\nсистеме была целая статья Википедии; нижняя строка слайда указывает\nна отличие от поиска отдельных фрагментов.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-01.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          470
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-01-zoom-start.png",
+        "atEnd": [
+          1077,
+          470
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-01-zoom-end.png"
+      }
+    },
+    {
+      "index": 2,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/retrieval-review-2026-10/ivf-build.png",
+      "alt": "IVF construction: centroids, assignments and inverted lists",
+      "natural": [
+        2560,
+        1240
+      ],
+      "display": [
+        359,
+        173.890625
+      ],
+      "viewport": [
+        375,
+        625
+      ],
+      "scroll": [
+        375,
+        625
+      ],
+      "caption": "Milvus documentation contributors,\nIVF_FLAT — Overview,\nисходная схема.\nApache-2.0, лицензия документации.\nБез изменений. Шаги 1–2: кластеры и списки; шаг 3: выбор списка для запроса.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-02.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          87
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-02-zoom-start.png",
+        "atEnd": [
+          1077,
+          87
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-02-zoom-end.png"
+      }
+    },
+    {
+      "index": 3,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/retrieval-review-2026-10/ivf-search.png",
+      "alt": "IVF search across one or several selected lists",
+      "natural": [
+        2560,
+        832
+      ],
+      "display": [
+        359,
+        116.671875
+      ],
+      "viewport": [
+        375,
+        624
+      ],
+      "scroll": [
+        375,
+        624
+      ],
+      "caption": "Тот же источник,\nоригинальный рисунок.\nСлева сосед лежит вне выбранного кластера; справа посещаются три\nсписка, nprobe=3. Это двумерная схема источника, не наш одномерный пример.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-03.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          0
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-03-zoom-start.png",
+        "atEnd": [
+          1077,
+          0
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-03-zoom-end.png"
+      }
+    },
+    {
+      "index": 4,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/retrieval-review-2026-10/hnsw.png",
+      "alt": "HNSW search through upper layers and the base-layer graph",
+      "natural": [
+        2560,
+        1696
+      ],
+      "display": [
+        359,
+        237.8359375
+      ],
+      "viewport": [
+        375,
+        623
+      ],
+      "scroll": [
+        375,
+        623
+      ],
+      "caption": "Milvus documentation contributors,\nHNSW — Overview,\nисходная схема.\nApache-2.0; без изменений. Пунктир между жёлтыми точками связывает\nпоявления одной вершины на уровнях, стрелки показывают поиск.\nФиолетовая точка — запрос,\nа не дополнительный проиндексированный документ.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-04.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          344
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-04-zoom-start.png",
+        "atEnd": [
+          1077,
+          344.5
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-04-zoom-end.png"
+      }
+    },
+    {
+      "index": 5,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/retrieval-review-2026-10/pq-codebooks.png",
+      "alt": "Product quantization: subspaces, codebooks and vector codes",
+      "natural": [
+        2560,
+        1712
+      ],
+      "display": [
+        359,
+        240.078125
+      ],
+      "viewport": [
+        375,
+        623
+      ],
+      "scroll": [
+        375,
+        623
+      ],
+      "caption": "Milvus documentation contributors,\nIVF_PQ — PQ,\nоригинальная схема.\nApache-2.0; без изменений. Полный вектор разбивается на части,\nдля каждой сохраняется индекс выбранного представителя.\nВ формулах ниже используются MMM частей и KKK представителей\nс индексами 0,…,K−10,\\ldots,K-10,…,K−1.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-05.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          353
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-05-zoom-start.png",
+        "atEnd": [
+          1077,
+          353.5
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-05-zoom-end.png"
+      }
+    },
+    {
+      "index": 6,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/retrieval-review-2026-10/pq-search.png",
+      "alt": "PQ distance lookup tables and summed subspace distances",
+      "natural": [
+        2560,
+        2464
+      ],
+      "display": [
+        359,
+        345.53125
+      ],
+      "viewport": [
+        375,
+        623
+      ],
+      "scroll": [
+        375,
+        623
+      ],
+      "caption": "Тот же источник,\nисходная схема вычисления расстояний.\nНа рисунке в конце берётся квадратный корень для L2.\nВ нашей таблице и коде оставлен квадрат L2: он даёт тот же порядок,\nно другие численные значения.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-06.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          775
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-06-zoom-start.png",
+        "atEnd": [
+          1077,
+          775
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-06-zoom-end.png"
+      }
+    },
+    {
+      "index": 7,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/retrieval-review-2026-10/hyde-pipeline.png",
+      "alt": "HyDE: hypothetical documents used to retrieve real corpus documents",
+      "natural": [
+        1430,
+        390
+      ],
+      "display": [
+        359,
+        97.90625
+      ],
+      "viewport": [
+        375,
+        623
+      ],
+      "scroll": [
+        375,
+        623
+      ],
+      "caption": "Luyu Gao, Xueguang Ma, Jimmy Lin, Jamie Callan,\nPrecise Zero-Shot Dense Retrieval without Relevance Labels,\nрисунок 1, PDF-страница 2. CC BY 4.0.\nВырезана область рисунка с легендой; содержимое не изменено.\nЖёлтые блоки — инструкции, зелёные — запросы, оранжевые —\nвыдуманные документы, голубые — результаты поиска в корпусе.\nПримеры сгенерированных сведений на схеме не являются проверенными ответами.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-07.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          0
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-07-zoom-start.png",
+        "atEnd": [
+          1077,
+          0
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-figure-07-zoom-end.png"
+      }
+    }
+  ],
+  "limits": "Headless browser interactions and screenshots; requires separate human visual inspection.",
+  "layout": {
+    "page": [
+      375,
+      375
+    ],
+    "mathErrors": 0,
+    "formulas": [
+      [
+        343,
+        343
+      ],
+      [
+        343,
+        343
+      ],
+      [
+        343,
+        343
+      ],
+      [
+        343,
+        343
+      ],
+      [
+        343,
+        343
+      ],
+      [
+        343,
+        343
+      ],
+      [
+        343,
+        343
+      ],
+      [
+        343,
+        343
+      ]
+    ],
+    "tables": [
+      [
+        343,
+        343,
+        "visible"
+      ],
+      [
+        343,
+        343,
+        "visible"
+      ],
+      [
+        343,
+        343,
+        "visible"
+      ],
+      [
+        343,
+        343,
+        "visible"
+      ],
+      [
+        343,
+        343,
+        "visible"
+      ],
+      [
+        343,
+        343,
+        "visible"
+      ],
+      [
+        343,
+        343,
+        "visible"
+      ],
+      [
+        343,
+        343,
+        "visible"
+      ]
+    ]
+  },
+  "contextScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-reader/375-page.png"
+}

@@ -1,0 +1,294 @@
+{
+  "schema_version": 1,
+  "kind": "pretext-subject-route-additions",
+  "review_date": "2026-11-05",
+  "files": [
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md",
+      "before_sha256": "03a273d68cd2f560cdb13f08b74c090afa792076a460cc39ec04090ac6870935",
+      "after_sha256": "e7538b02946926505a6f4c0d0b71e34de1c0cf63441fee3e4d2a52f6acc9fc47",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29\nlast_verified: 2026-10-29\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\nreference_terms:\n  - anchor: pseudo-labels\n    label: \"Self-training: происхождение и отбор псевдометок\"\n    label_en: \"Self-training: pseudo-label origins and selection\"\n  - anchor: noisy-student\n    label: \"Noisy Student: учитель, шум и повторное обучение\"\n    label_en: \"Noisy Student: teacher, noise and training rounds\"\n  - anchor: noisy-targets\n    label: \"Фиксированные soft targets и градиент Noisy Student\"\n    label_en: \"Fixed soft targets and Noisy Student gradients\"\n  - anchor: noisy-filtering\n    label: \"Фильтрация, балансировка и повторная разметка пула\"\n    label_en: \"Filtering, balancing and relabelling the pool\"\n  - anchor: consistency\n    label: \"Согласованность предсказаний и допустимые аугментации\"\n    label_en: \"Prediction consistency and valid augmentations\"\n  - anchor: virtual-adversarial-training\n    label: \"VAT: локально наиболее чувствительное направление\"\n    label_en: \"VAT: the most sensitive local direction\"\n  - anchor: vat-curvature\n    label: \"Нулевой градиент KL и степенная итерация VAT\"\n    label_en: \"Zero KL gradient and VAT power iteration\"\n  - anchor: vat-step\n    label: \"Полный шаг VAT в пространстве эмбеддингов\"\n    label_en: \"A complete embedding-space VAT step\"\n  - anchor: uda\n    label: \"UDA: soft targets, confidence gate и KL\"\n    label_en: \"UDA: soft targets, confidence gates and KL\"\n  - anchor: uda-augmentation\n    label: \"Обратный перевод и TF-IDF-замены в UDA\"\n    label_en: \"Back-translation and TF-IDF replacement in UDA\"\n  - anchor: training-signal-annealing\n    label: \"Training Signal Annealing и размеченные примеры\"\n    label_en: \"Training Signal Annealing on labelled examples\"\n  - anchor: mixtext\n    label: \"MixText и TMix: интерполяция скрытых состояний\"\n    label_en: \"MixText and TMix: hidden-state interpolation\"\n  - anchor: tmix-branches\n    label: \"Общие параметры двух ветвей TMix и их градиенты\"\n    label_en: \"Shared TMix branches and their gradients\"\n  - anchor: mixtext-targets\n    label: \"MixText: усреднение предсказаний и sharpening\"\n    label_en: \"MixText: prediction averaging and sharpening\"\n  - anchor: mixtext-implementation\n    label: \"MixText: различия статьи и опубликованного кода\"\n    label_en: \"MixText: paper and released-code differences\"\n  - anchor: fixmatch\n    label: \"FixMatch: слабая ветвь, сильная ветвь и masked loss\"\n    label_en: \"FixMatch: weak targets, strong predictions and masked loss\"\n  - anchor: training-step\n    label: \"Полный шаг FixMatch с общим классификатором\"\n    label_en: \"A complete FixMatch step with a shared classifier\"\n  - anchor: confirmation-bias\n    label: \"Confirmation bias и уверенные ошибочные псевдометки\"\n    label_en: \"Confirmation bias and confidently wrong pseudo-labels\"\n  - anchor: label-propagation\n    label: \"Распространение меток по графу сходства\"\n    label_en: \"Label propagation over a similarity graph\"\n  - anchor: ssl-structural-assumptions\n    label: \"Smoothness, cluster и manifold assumptions\"\n    label_en: \"Smoothness, cluster and manifold assumptions\"\n  - anchor: harmonic-label-propagation\n    label: \"Гармоническое решение и закреплённые метки\"\n    label_en: \"Harmonic solutions and clamped labels\"\n  - anchor: published-results\n    label: \"Как читать результаты label efficiency\"\n    label_en: \"Reading label-efficiency results\"\n  - anchor: cost-accounting\n    label: \"Стоимость разметки, обучения и повторного использования\"\n    label_en: \"Label, training and reuse costs\"\n  - anchor: self-supervised-boundary\n    label: \"Псевдометки и self-supervised targets\"\n    label_en: \"Pseudo-labels versus self-supervised targets\"\n  - anchor: dai-le-sequence-pretraining\n    label: \"Dai–Le: реконструкция последовательности и перенос LSTM\"\n    label_en: \"Dai–Le: sequence reconstruction and LSTM transfer\"\n"
+        },
+        {
+          "old": "### The target remains fixed while the student changes\n",
+          "new": "<a id=\"noisy-targets\"></a>\n\n### The target remains fixed while the student changes\n"
+        },
+        {
+          "old": "### Filtering, balancing and another training round\n",
+          "new": "<a id=\"noisy-filtering\"></a>\n\n### Filtering, balancing and another training round\n"
+        },
+        {
+          "old": "### Why the gradient at the clean input cannot select a direction\n",
+          "new": "<a id=\"vat-curvature\"></a>\n\n### Why the gradient at the clean input cannot select a direction\n"
+        },
+        {
+          "old": "### A complete embedding-space VAT update\n",
+          "new": "<a id=\"vat-step\"></a>\n\n### A complete embedding-space VAT update\n"
+        },
+        {
+          "old": "### How the text augmentation is constructed\n",
+          "new": "<a id=\"uda-augmentation\"></a>\n\n### How the text augmentation is constructed\n"
+        },
+        {
+          "old": "### Where the two encoder branches meet\n",
+          "new": "<a id=\"tmix-branches\"></a>\n\n### Where the two encoder branches meet\n"
+        },
+        {
+          "old": "### Guessing a shared target for several views\n",
+          "new": "<a id=\"mixtext-targets\"></a>\n\n### Guessing a shared target for several views\n"
+        },
+        {
+          "old": "### Paper and released training code are different specifications\n",
+          "new": "<a id=\"mixtext-implementation\"></a>\n\n### Paper and released training code are different specifications\n"
+        },
+        {
+          "old": "### Harmonic label propagation\n",
+          "new": "<a id=\"harmonic-label-propagation\"></a>\n\n### Harmonic label propagation\n"
+        },
+        {
+          "old": "| Point | Available label | Class from horizontal coordinate | Class from vertical coordinate |\n",
+          "new": "| Point | Known label | Horizontal rule | Vertical rule |\n"
+        },
+        {
+          "old": "$$\n b_i=\\mathbf1[p_\\theta(y_i\\mid x_i)\\le\\eta_t],\\qquad\n \\mathcal L_s=\n \\frac{\\sum_i b_i[-\\log p_\\theta(y_i\\mid x_i)]}\n      {\\max(1,\\sum_i b_i)}.\n$$",
+          "new": "$$\n\\begin{aligned}\n b_i&=\\mathbf1[p_\\theta(y_i\\mid x_i)\\le\\eta_t],\\\\\n \\mathcal L_s&=\n \\frac{\\sum_i b_i[-\\log p_\\theta(y_i\\mid x_i)]}\n      {\\max(1,\\sum_i b_i)}.\n\\end{aligned}\n$$"
+        },
+        {
+          "old": "| Example | Weak probabilities | Pseudo-label | Accepted? | Strong $p(0)$ | Contribution before division by 4 |\n| --- | --- | ---: | --- | ---: | ---: |\n| 0 | $(0.97,0.03)$ | 0 | yes | 0.6 | $-\\log0.6$ |\n| 1 | $(0.75,0.25)$ | 0 | no | 0.4 | 0 |\n| 2 | $(0.08,0.92)$ | 1 | no | 0.8 | 0 |\n| 3 | $(0.95,0.05)$ | 0 | yes | 0.2 | $-\\log0.2$ |\n",
+          "new": "| Example | Weak probabilities | Target | Passes gate? |\n| --- | --- | ---: | --- |\n| 0 | $(0.97,0.03)$ | 0 | yes |\n| 1 | $(0.75,0.25)$ | 0 | no |\n| 2 | $(0.08,0.92)$ | 1 | no |\n| 3 | $(0.95,0.05)$ | 0 | yes |\n\nThe accepted targets supervise the strong-view predictions as follows.\nThe last column is the masked cross-entropy before division by the full\nbatch size of four:\n\n| Example | Strong $p(0)$ | Loss contribution |\n| --- | ---: | ---: |\n| 0 | 0.6 | $-\\log0.6$ |\n| 1 | 0.4 | 0 |\n| 2 | 0.8 | 0 |\n| 3 | 0.2 | $-\\log0.2$ |\n"
+        },
+        {
+          "old": "| Strong augmentation | 40 labels | 250 labels | 4,000 labels |\n| --- | ---: | ---: | ---: |\n| RandAugment | $13.81\\pm3.37$ | $5.07\\pm0.65$ | $4.26\\pm0.05$ |\n| CTAugment | $11.39\\pm3.35$ | $5.07\\pm0.33$ | $4.31\\pm0.15$ |\n",
+          "new": "| Labels | RandAugment | CTAugment |\n| ---: | ---: | ---: |\n| 40 | $13.81\\pm3.37$ | $11.39\\pm3.35$ |\n| 250 | $5.07\\pm0.65$ | $5.07\\pm0.33$ |\n| 4,000 | $4.26\\pm0.05$ | $4.31\\pm0.15$ |\n"
+        },
+        {
+          "old": "| Objective | Inputs available for predicting W | Target supplied by |\n",
+          "new": "| Objective | Context before W | Target source |\n"
+        },
+        {
+          "old": "square. The bottom-left corner is labelled 0 and the top-right corner 1.\n",
+          "new": "square, with coordinates $(x,y)$ for the horizontal and vertical axes.\nThe bottom-left corner is labelled 0 and the top-right corner 1.\n"
+        },
+        {
+          "old": "| Point | Known label | Horizontal rule | Vertical rule |\n",
+          "new": "| Point | Label | By $x$ | By $y$ |\n"
+        },
+        {
+          "old": "| Example | Weak probabilities | Target | Passes gate? |\n",
+          "new": "| Row | Weak $q$ | Target | Keep? |\n"
+        },
+        {
+          "old": "| Document classification | The document representation | Human class annotation |\n",
+          "new": "| Document classification | Encoded document | Human class annotation |\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений.md",
+      "before_sha256": "7a606b0fc23dfc68ac35130688f35dd0beea13df3fb2c6d36baffb967e566ac9",
+      "after_sha256": "741e33dc75f9438d9ea5be60d8fb3737fc11da88d7cb9afffcc07343680adcbf",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-28\nlast_verified: 2026-10-28\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\nreference_terms:\n  - anchor: two-view-encoder\n    label: \"SimCLR: два вида, общий энкодер и projection head\"\n    label_en: \"SimCLR: two views, a shared encoder and a projection head\"\n  - anchor: augmentation-task\n    label: \"SimCLR: аугментации и цветовые shortcuts\"\n    label_en: \"SimCLR: augmentations and colour shortcuts\"\n  - anchor: positive-index\n    label: \"Положительные пары и порядок видов в batch\"\n    label_en: \"Positive-pair indices and view ordering\"\n  - anchor: nt-xent\n    label: \"NT-Xent: знаменатель, self-mask и градиенты\"\n    label_en: \"NT-Xent: denominator, self-mask and gradients\"\n  - anchor: shared-training-step\n    label: \"Полный шаг SimCLR через обе ветви\"\n    label_en: \"A complete SimCLR step through both branches\"\n  - anchor: collapse-and-negatives\n    label: \"Коллапс, false negatives и gradient accumulation\"\n    label_en: \"Collapse, false negatives and gradient accumulation\"\n  - anchor: projection-versus-representation\n    label: \"Представление до и после projection head\"\n    label_en: \"Representations before and after the projection head\"\n  - anchor: linear-evaluation\n    label: \"Linear probing: замороженный энкодер и обучаемая голова\"\n    label_en: \"Linear probing: a frozen encoder and a trained head\"\n  - anchor: simclr-probe-protocol\n    label: \"Выбор checkpoint и утечка test labels в probe\"\n    label_en: \"Checkpoint selection and test-label leakage in a probe\"\n"
+        },
+        {
+          "old": "### A protocol correction when using the tutorial's results\n",
+          "new": "<a id=\"simclr-probe-protocol\"></a>\n\n### A protocol correction when using the tutorial's results\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder.md",
+      "before_sha256": "b1436d67484c43e8ab9b4cb93754c6100ce0ead0997da342e9752d318266963d",
+      "after_sha256": "d23c5af323054d9cbd84876dad0db1a539439f0c51c27a95bb55c848d9b84cd1",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-28\nlast_verified: 2026-10-28\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\nreference_terms:\n  - anchor: dictionary\n    label: \"MoCo: словарь сохранённых key vectors\"\n    label_en: \"MoCo: a dictionary of stored key vectors\"\n  - anchor: moco-versus-simclr\n    label: \"MoCo и SimCLR: кандидаты и пути градиента\"\n    label_en: \"MoCo versus SimCLR: candidates and gradient paths\"\n  - anchor: momentum-encoder\n    label: \"Momentum encoder: EMA параметров и возраст ключей\"\n    label_en: \"Momentum encoder: parameter EMA and key age\"\n  - anchor: fifo-queue\n    label: \"Кольцевая очередь MoCo и порядок замены\"\n    label_en: \"The MoCo ring queue and replacement order\"\n  - anchor: moco-loss\n    label: \"MoCo loss: положительный столбец и старые отрицательные ключи\"\n    label_en: \"MoCo loss: the positive column and old negative keys\"\n  - anchor: queue-snapshot\n    label: \"Зачем MoCo копирует очередь перед backward\"\n    label_en: \"Why MoCo clones the queue before backward\"\n  - anchor: complete-step\n    label: \"Два полных шага MoCo и обновление энкодеров\"\n    label_en: \"Two complete MoCo steps and encoder updates\"\n  - anchor: moco-step-order\n    label: \"Порядок EMA, forward и SGD в статье и коде\"\n    label_en: \"EMA, forward and SGD ordering in the paper and code\"\n  - anchor: distributed-shuffle\n    label: \"MoCo: global gather, shuffle BN и восстановление пар\"\n    label_en: \"MoCo: global gather, shuffle BN and restored pairs\"\n  - anchor: cost-and-versions\n    label: \"Память MoCo, устаревание ключей и изменения v2\"\n    label_en: \"MoCo memory, stale keys and v2 recipe changes\"\n"
+        },
+        {
+          "old": "### What changes relative to SimCLR\n",
+          "new": "<a id=\"moco-versus-simclr\"></a>\n\n### What changes relative to SimCLR\n"
+        },
+        {
+          "old": "### Paper pseudocode and implementation timing\n",
+          "new": "<a id=\"moco-step-order\"></a>\n\n### Paper pseudocode and implementation timing\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей.md",
+      "before_sha256": "fc3b1decc3a776759290e96c3253d4a0bba8c09f87239651a779313eb69d69a0",
+      "after_sha256": "11082b0c6c3c721dde8aa2547e511f74969713113242e1ed7839b16798833788",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-28\nlast_verified: 2026-10-28\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\nreference_terms:\n  - anchor: asymmetric-mae\n    label: \"MAE: короткий encoder и полный decoder\"\n    label_en: \"MAE: a short encoder and a full decoder\"\n  - anchor: patch-layout\n    label: \"Patchify и порядок RGB-координат\"\n    label_en: \"Patchify and RGB coordinate ordering\"\n  - anchor: mask-and-restore\n    label: \"MAE: выбор видимых патчей и обратная перестановка\"\n    label_en: \"MAE: visible-patch selection and inverse shuffling\"\n  - anchor: masked-pixel-loss\n    label: \"Masked pixel loss и градиенты видимого контекста\"\n    label_en: \"Masked pixel loss and visible-context gradients\"\n  - anchor: normalized-targets\n    label: \"Нормировка целей MAE и sample variance\"\n    label_en: \"MAE target normalization and sample variance\"\n  - anchor: mae-training-step\n    label: \"Полный шаг MAE через encoder и decoder\"\n    label_en: \"A complete MAE step through encoder and decoder\"\n  - anchor: reading-reconstructions\n    label: \"Реконструкция MAE: raw output и вставка видимых пикселей\"\n    label_en: \"MAE reconstructions: raw output and pasted visible pixels\"\n  - anchor: mae-gan-demo\n    label: \"Отдельный GAN-checkpoint в демонстрации MAE\"\n    label_en: \"The separate GAN checkpoint in the MAE demo\"\n  - anchor: mae-cost-and-evaluation\n    label: \"MAE: число токенов, стоимость и оценивание encoder\"\n    label_en: \"MAE: token counts, cost and encoder evaluation\"\n  - anchor: mae-alternative-targets\n    label: \"Цели MAE: пиксели, PCA и dVAE-коды\"\n    label_en: \"MAE targets: pixels, PCA and dVAE codes\"\n  - anchor: mae-masking-recipe\n    label: \"MAE: block, grid и random masking, аугментации и эпохи\"\n    label_en: \"MAE: block, grid and random masks, augmentations and epochs\"\n"
+        },
+        {
+          "old": "### The optional GAN model in the same demo\n",
+          "new": "<a id=\"mae-gan-demo\"></a>\n\n### The optional GAN model in the same demo\n"
+        },
+        {
+          "old": "### Other reconstruction targets\n",
+          "new": "<a id=\"mae-alternative-targets\"></a>\n\n### Other reconstruction targets\n"
+        },
+        {
+          "old": "### Masks, augmentations and training length\n",
+          "new": "<a id=\"mae-masking-recipe\"></a>\n\n### Masks, augmentations and training length\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "fee12124ba8a1f90e2b8ab40de69efd8cf5fad10ef0623263a5431c0f5dfbb70",
+      "after_sha256": "14ad697e26228fa79bce9651a900c9cce4d66b637cd9df8e177332db0498edaf",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch|Обучение с частичной разметкой — pseudo-labeling и FixMatch]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch|Обучение с частичной разметкой — pseudo-labeling и FixMatch]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#pseudo-labels|Self-training: происхождение и отбор псевдометок]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#noisy-student|Noisy Student: учитель, шум и повторное обучение]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#noisy-targets|Фиксированные soft targets и градиент Noisy Student]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#noisy-filtering|Фильтрация, балансировка и повторная разметка пула]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#consistency|Согласованность предсказаний и допустимые аугментации]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#virtual-adversarial-training|VAT: локально наиболее чувствительное направление]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#vat-curvature|Нулевой градиент KL и степенная итерация VAT]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#vat-step|Полный шаг VAT в пространстве эмбеддингов]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#uda|UDA: soft targets, confidence gate и KL]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#uda-augmentation|Обратный перевод и TF-IDF-замены в UDA]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#training-signal-annealing|Training Signal Annealing и размеченные примеры]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#mixtext|MixText и TMix: интерполяция скрытых состояний]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#tmix-branches|Общие параметры двух ветвей TMix и их градиенты]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#mixtext-targets|MixText: усреднение предсказаний и sharpening]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#mixtext-implementation|MixText: различия статьи и опубликованного кода]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#fixmatch|FixMatch: слабая ветвь, сильная ветвь и masked loss]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#training-step|Полный шаг FixMatch с общим классификатором]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#confirmation-bias|Confirmation bias и уверенные ошибочные псевдометки]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#label-propagation|Распространение меток по графу сходства]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#ssl-structural-assumptions|Smoothness, cluster и manifold assumptions]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#harmonic-label-propagation|Гармоническое решение и закреплённые метки]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#published-results|Как читать результаты label efficiency]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#cost-accounting|Стоимость разметки, обучения и повторного использования]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#self-supervised-boundary|Псевдометки и self-supervised targets]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#dai-le-sequence-pretraining|Dai–Le: реконструкция последовательности и перенос LSTM]]\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений|Контрастивное предобучение — SimCLR и проверка представлений]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений|Контрастивное предобучение — SimCLR и проверка представлений]]\n  - [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений#two-view-encoder|SimCLR: два вида, общий энкодер и projection head]]\n  - [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений#augmentation-task|SimCLR: аугментации и цветовые shortcuts]]\n  - [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений#positive-index|Положительные пары и порядок видов в batch]]\n  - [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений#nt-xent|NT-Xent: знаменатель, self-mask и градиенты]]\n  - [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений#shared-training-step|Полный шаг SimCLR через обе ветви]]\n  - [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений#collapse-and-negatives|Коллапс, false negatives и gradient accumulation]]\n  - [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений#projection-versus-representation|Представление до и после projection head]]\n  - [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений#linear-evaluation|Linear probing: замороженный энкодер и обучаемая голова]]\n  - [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений#simclr-probe-protocol|Выбор checkpoint и утечка test labels в probe]]\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder|Momentum contrast — MoCo, очередь и key encoder]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder|Momentum contrast — MoCo, очередь и key encoder]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#dictionary|MoCo: словарь сохранённых key vectors]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#moco-versus-simclr|MoCo и SimCLR: кандидаты и пути градиента]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#momentum-encoder|Momentum encoder: EMA параметров и возраст ключей]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#fifo-queue|Кольцевая очередь MoCo и порядок замены]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#moco-loss|MoCo loss: положительный столбец и старые отрицательные ключи]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#queue-snapshot|Зачем MoCo копирует очередь перед backward]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#complete-step|Два полных шага MoCo и обновление энкодеров]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#moco-step-order|Порядок EMA, forward и SGD в статье и коде]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#distributed-shuffle|MoCo: global gather, shuffle BN и восстановление пар]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#cost-and-versions|Память MoCo, устаревание ключей и изменения v2]]\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей|Masked autoencoders — MAE и восстановление патчей]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей|Masked autoencoders — MAE и восстановление патчей]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#asymmetric-mae|MAE: короткий encoder и полный decoder]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#patch-layout|Patchify и порядок RGB-координат]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#mask-and-restore|MAE: выбор видимых патчей и обратная перестановка]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#masked-pixel-loss|Masked pixel loss и градиенты видимого контекста]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#normalized-targets|Нормировка целей MAE и sample variance]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#mae-training-step|Полный шаг MAE через encoder и decoder]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#reading-reconstructions|Реконструкция MAE: raw output и вставка видимых пикселей]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#mae-gan-demo|Отдельный GAN-checkpoint в демонстрации MAE]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#mae-cost-and-evaluation|MAE: число токенов, стоимость и оценивание encoder]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#mae-alternative-targets|Цели MAE: пиксели, PCA и dVAE-коды]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#mae-masking-recipe|MAE: block, grid и random masking, аугментации и эпохи]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "5e4a19f301e8e0fe06f17dc866835105377695c53a1fcf39dc726c884264599d",
+      "after_sha256": "df62e3e9041430d795bbb1ba5df4e1017dab582bbdbe2773a234d093135b6e16",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch|Partial labels: pseudo-labeling and FixMatch]] · **EN original**\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch|Partial labels: pseudo-labeling and FixMatch]] · **EN original**\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#pseudo-labels|Self-training: pseudo-label origins and selection]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#noisy-student|Noisy Student: teacher, noise and training rounds]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#noisy-targets|Fixed soft targets and Noisy Student gradients]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#noisy-filtering|Filtering, balancing and relabelling the pool]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#consistency|Prediction consistency and valid augmentations]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#virtual-adversarial-training|VAT: the most sensitive local direction]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#vat-curvature|Zero KL gradient and VAT power iteration]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#vat-step|A complete embedding-space VAT step]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#uda|UDA: soft targets, confidence gates and KL]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#uda-augmentation|Back-translation and TF-IDF replacement in UDA]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#training-signal-annealing|Training Signal Annealing on labelled examples]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#mixtext|MixText and TMix: hidden-state interpolation]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#tmix-branches|Shared TMix branches and their gradients]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#mixtext-targets|MixText: prediction averaging and sharpening]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#mixtext-implementation|MixText: paper and released-code differences]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#fixmatch|FixMatch: weak targets, strong predictions and masked loss]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#training-step|A complete FixMatch step with a shared classifier]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#confirmation-bias|Confirmation bias and confidently wrong pseudo-labels]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#label-propagation|Label propagation over a similarity graph]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#ssl-structural-assumptions|Smoothness, cluster and manifold assumptions]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#harmonic-label-propagation|Harmonic solutions and clamped labels]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#published-results|Reading label-efficiency results]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#cost-accounting|Label, training and reuse costs]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#self-supervised-boundary|Pseudo-labels versus self-supervised targets]]\n  - [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch#dai-le-sequence-pretraining|Dai–Le: sequence reconstruction and LSTM transfer]]\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений|Contrastive pre-training: SimCLR]] · **EN original**\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений|Contrastive pre-training: SimCLR]] · **EN original**\n  - [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений#two-view-encoder|SimCLR: two views, a shared encoder and a projection head]]\n  - [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений#augmentation-task|SimCLR: augmentations and colour shortcuts]]\n  - [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений#positive-index|Positive-pair indices and view ordering]]\n  - [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений#nt-xent|NT-Xent: denominator, self-mask and gradients]]\n  - [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений#shared-training-step|A complete SimCLR step through both branches]]\n  - [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений#collapse-and-negatives|Collapse, false negatives and gradient accumulation]]\n  - [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений#projection-versus-representation|Representations before and after the projection head]]\n  - [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений#linear-evaluation|Linear probing: a frozen encoder and a trained head]]\n  - [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений#simclr-probe-protocol|Checkpoint selection and test-label leakage in a probe]]\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder|MoCo: the queue and momentum encoder]] · **EN original**\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder|MoCo: the queue and momentum encoder]] · **EN original**\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#dictionary|MoCo: a dictionary of stored key vectors]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#moco-versus-simclr|MoCo versus SimCLR: candidates and gradient paths]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#momentum-encoder|Momentum encoder: parameter EMA and key age]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#fifo-queue|The MoCo ring queue and replacement order]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#moco-loss|MoCo loss: the positive column and old negative keys]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#queue-snapshot|Why MoCo clones the queue before backward]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#complete-step|Two complete MoCo steps and encoder updates]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#moco-step-order|EMA, forward and SGD ordering in the paper and code]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#distributed-shuffle|MoCo: global gather, shuffle BN and restored pairs]]\n  - [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder#cost-and-versions|MoCo memory, stale keys and v2 recipe changes]]\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей|MAE: reconstructing masked patches]] · **EN original**\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей|MAE: reconstructing masked patches]] · **EN original**\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#asymmetric-mae|MAE: a short encoder and a full decoder]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#patch-layout|Patchify and RGB coordinate ordering]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#mask-and-restore|MAE: visible-patch selection and inverse shuffling]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#masked-pixel-loss|Masked pixel loss and visible-context gradients]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#normalized-targets|MAE target normalization and sample variance]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#mae-training-step|A complete MAE step through encoder and decoder]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#reading-reconstructions|MAE reconstructions: raw output and pasted visible pixels]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#mae-gan-demo|The separate GAN checkpoint in the MAE demo]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#mae-cost-and-evaluation|MAE: token counts, cost and encoder evaluation]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#mae-alternative-targets|MAE targets: pixels, PCA and dVAE codes]]\n  - [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей#mae-masking-recipe|MAE: block, grid and random masks, augmentations and epochs]]\n"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "status": "verified-local-delta",
+    "verified_date": "2026-11-05",
+    "scope": "Four complete canonical input reads,55 subject links per locale and15 subsection aliases. Preserved full original-language explanations,31 code programs,29 mathematical displays and17 original-figure placements(16 distinct files). Narrow SSL table/formula fixes retain every mathematical token,gate decision and published value. No translation,new scientific figure,full-course acceptance or publication.",
+    "chapter_sha256": [
+      {
+        "path": "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md",
+        "sha256": "e7538b02946926505a6f4c0d0b71e34de1c0cf63441fee3e4d2a52f6acc9fc47"
+      },
+      {
+        "path": "00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений.md",
+        "sha256": "741e33dc75f9438d9ea5be60d8fb3737fc11da88d7cb9afffcc07343680adcbf"
+      },
+      {
+        "path": "00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder.md",
+        "sha256": "d23c5af323054d9cbd84876dad0db1a539439f0c51c27a95bb55c848d9b84cd1"
+      },
+      {
+        "path": "00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей.md",
+        "sha256": "11082b0c6c3c721dde8aa2547e511f74969713113242e1ed7839b16798833788"
+      }
+    ],
+    "explanation": {
+      "historical_comparisons": [
+        "docs/audit/2026-10-28-semi-supervised.md",
+        "docs/audit/2026-10-29-consistency-training-verification.json",
+        "docs/audit/2026-10-29-semi-extensions-verification.json",
+        "docs/audit/2026-10-28-simclr.md",
+        "docs/audit/2026-10-28-moco.md",
+        "docs/audit/2026-10-28-mae.md"
+      ],
+      "boundary": "Entire inputs freshly read in the recorded contiguous ranges. Reused selected-source comparisons apply to exactly preserved explanations,not a newly completed source course. Inverse journals and original-method checks bind source excerpts and implementations. The source-native English and complete reasoning are not replaced by summaries.",
+      "actual_delta": "Direct subject links expose already explained mechanisms. The SSL owner additionally defines x/y for its existing square example,shortens table headers,splits the four-example FixMatch gate/loss table,transposes the six-value historical result table and reflows TSA into two aligned rows.",
+      "mathematical_controls": "All29 display formulas have identical mathematical token sequences after removing only alignment,spacing and line-break markup. Independent tests recompute all four targets/gates and keep every loss contribution and all six RandAugment/CTAugment entries."
+    },
+    "checks": {
+      "final_tests": {
+        "files": 10,
+        "passed": 249,
+        "scoped": 40,
+        "html": 207,
+        "reading_receipts": 2,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-pretext-final-tests-20261105.log"
+      },
+      "examples": {
+        "runtime": {
+          "numpy": "2.5.4",
+          "torch": "2.14.1",
+          "pymupdf": "2.1",
+          "pillow": "13.0.0"
+        },
+        "semi_supervised": "All14 actual current programs execute; nine soft-target CE equality checks,two original SemiLoss assembly branches,four stubbed BERT traversal cases,13 source files and two exact original figure extractions. Additional retained baseline checks cover36 masked gradients,64 weighted chains and one energy derivative.",
+        "consistency": "Existing AT/VAT/UDA checker passes18 independent Hessians,81 UDA gradients and45 original TSA cases plus16 source files and three figure checks. This includes three robustness-owner programs outside this delta,not additional pretext content.",
+        "simclr": "Five actual programs,108 independent loss/gradient cases,108 actual UvA-method comparisons,108 pair-preserving permutations,eight finite differences and ten invalid cases pass.",
+        "moco": "Six actual programs,243 author-class forward/loss/gradient/queue steps,158 ring cases,32 EMA histories,746 inverse permutations and a v2 MLP case pass with explicit CPU/local-gather/identity-shuffle adapters.",
+        "mae": "Six actual programs,seven original-method ASTs,12 layout roundtrips,144 mask/inverse/gradient cases,48 MSE/gradient cases and12 small source-forward/parameter-gradient comparisons pass.",
+        "revision_boundary": "SSL code execution reported f90671e9 before final table/formula-only edits. Exact-program-preservation tests pass on final e7538b02;no code changed after execution. The other three executions report their final chapter hashes.",
+        "scope": "CPU correctness/source fixtures only;no model/dataset download,translation generation,TensorFlow-1 runtime,GPU timing,distributed BN or reproduced quality benchmark.",
+        "initial_launch_failures": "Two checkers initially failed because PyMuPDF was missing;offline resolution confirmed it was not cached. Running with the explicit PDF/image dependencies then completed successfully. No failed run counted as evidence."
+      },
+      "build": {
+        "pages": 2009,
+        "pagefind_html": 2013,
+        "seconds": 29.59,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-pretext-build-final-20261105.log"
+      },
+      "links": {
+        "broken": 0,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-pretext-links-final-20261105.log"
+      },
+      "size": {
+        "bytes": 856368120,
+        "files": 5626,
+        "limit": 1000000000,
+        "headroom": 143631880
+      },
+      "topics": "Both generated indexes match153 canonical owners;check:topics exit0.",
+      "diff_check": "git diff --check exit0."
+    },
+    "reader": {
+      "evidence": "docs/audit/evidence/2026-11-05-pretext-reader",
+      "desktop": "Actual1280x900 override;1265px document client/scroll width with scrollbar,617px content. All17 image placements load with their original natural dimensions. All29 displays render without errors or overflow. Final MAE original architecture inspected inline.",
+      "mobile": "Actual375x812 override;document360/360,328px content. All17 image placements load and fit. All29 display formulas render with zero KaTeX errors and no internal display overflow. All six final SSL tables fit328/328;all four gate decisions and loss terms plus the two-line TSA formula were personally inspected. Both MAE tables fit. One inherited SimCLR table scrolls328/339;three inherited MoCo tables scroll328/385,328/436 and328/481 without document overflow.",
+      "selected_figures": "Original UDA/FixMatch two-method diagram inspected enlarged. SimCLR ten-panel augmentation source inspected at2.5x through both horizontal ends. Complete MoCo diagram inspected. MAE raw reconstruction,pasted-visible result and separate GAN checkpoint inspected without changing original files. Previous exact-source full visual audits are listed separately;not a new claim that every figure was enlarged in this delta.",
+      "subjects": "Actual RU and EN index clicks reached Noisy Student targets,probe checkpoint protocol,MoCo clone/detach and MAE subsection. All55 subjects per locale are checked in final built HTML. English bodies render source-native without unavailable-language fallback;existing Russian page titles remain.",
+      "final_ui": "Temporary viewport reset. Reader tab left on the original MAE architecture and marked deliverable."
+    },
+    "rights": {
+      "unchanged_figures": "All16 distinct source files retain their original registered hashes,captions and attribution. No new scientific image imported.",
+      "linked_gaps": "Freshly checked both arXiv abstracts' view-license links for Noisy Student and Dai–Le:they point to arXiv's nonexclusive distribution license. Their source figures remain direct links,not copied under an inferred open license."
+    },
+    "remaining": [
+      "54 of153 owners still require this selected reading-route pass;whole reads are not accepted-chapter counts.",
+      "Next:masked diffusion language models,data-selection engineering and distributed-training owners;do not restart already hash-pinned Transformer or RL work.",
+      "Full-course source completeness,remaining source-figure/reproduction gaps and public-checkout/Pages-base/release gates remain open.",
+      "No stage,commit,push or deployment in this delta."
+    ]
+  }
+}

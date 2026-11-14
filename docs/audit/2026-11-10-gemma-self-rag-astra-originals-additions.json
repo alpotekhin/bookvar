@@ -1,0 +1,230 @@
+{
+  "date": "2026-11-10",
+  "scope": "Replace seven rendered-but-unconfirmed figure copies with exact licensed originals in Gemma, Self-RAG and ASTRA. Keep old files, reader routes and prior content outside the touched passages. No publication.",
+  "review": {
+    "previousGoalTurn": "Progress: reconciled two reader atlas figures and connected GPT chapter sections.",
+    "sources": "Gemma v4 Fig. 1 and §6.3 Figs. 2–4 (CC BY 4.0). Self-RAG v1 Figs. 1, §3.2–3.3, §5.2 (CC BY 4.0). ASTRA v2 §2.1–2.2 plus standalone repository illustrations and Apache 2.0 notice at bdf6a46a130118e039aadcaeb46724d278383589.",
+    "content": "Move and explain Gemma's verbatim and approximate memorization charts; restrict conclusions to the observed assay and sampling scope. Correct Self-RAG's supervised training and the direction of the retrieval threshold; separate threshold from candidate score with a small numerical example. ASTRA captions distinguish the SFT trace collection from executable environment construction.",
+    "rights": "No paper license inferred from repository permissions. ASTRA's other four paper panels remain marked needs-confirmation. Gemma and Self-RAG use original article SVGs, not converted or recolored.",
+    "limits": "Not a fresh acceptance of the full legacy source notes, of unrelated assets or of the English edition. English route shells retain canonical Russian source notes.",
+    "reader": "All seven original figures fit at 1280px and 375px. The mobile dark theme keeps white image backgrounds; checked first figure on each page at 3× and panned to source labels. All figure captions link to the source and the applicable license. Root image scan: 64 to 57 active needs-confirmation entries, no retired embeds. Build: 2067 pages; internal links: 0 broken; output tests: 269 passed."
+  },
+  "figures": [
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/gemma/original-eval_chart.svg",
+      "page": "https://arxiv.org/html/2403.08295v4#S1.F1",
+      "direct": "https://arxiv.org/html/2403.08295v4/eval_chart.svg",
+      "sha256": "761406ee1516c24d7818a99b27507d7acb2a8c3474902e7d432ca61e44444abb",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/gemma/original-gemma_by_model_size_final.svg",
+      "page": "https://arxiv.org/html/2403.08295v4#S6.F2",
+      "direct": "https://arxiv.org/html/2403.08295v4/gemma_by_model_size_final.svg",
+      "sha256": "aa00764a64affa0f22da77a66ac36330343c68d7410f9ffc8c1b68630b7f15d9",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/gemma/original-gemma_both_by_corpus_sensitive_final.svg",
+      "page": "https://arxiv.org/html/2403.08295v4#S6.F3",
+      "direct": "https://arxiv.org/html/2403.08295v4/gemma_both_by_corpus_sensitive_final.svg",
+      "sha256": "b39474a1f82aa6284eabdb9d93c73e0b5f346becfb5a01e4ce1ebe8cc645afc6",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/gemma/original-gemma_both_by_corpus_amem_final.svg",
+      "page": "https://arxiv.org/html/2403.08295v4#S6.F4",
+      "direct": "https://arxiv.org/html/2403.08295v4/gemma_both_by_corpus_amem_final.svg",
+      "sha256": "fb25f39ef1041e46ac47b86945f4189634faccae69a8d9482a35ced3c6e80386",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/self-rag/original-teaser_self_rag_v8.svg",
+      "page": "https://arxiv.org/html/2310.11511v1#S1.F1",
+      "direct": "https://arxiv.org/html/2310.11511v1/teaser_self_rag_v8.svg",
+      "sha256": "910317861c0d471826a9d6a56f57da54ba4c5bf951430ed0794a490e90668866",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/astra/original-sft-pipeline.png",
+      "page": "https://github.com/LianjiaTech/astra/blob/bdf6a46a130118e039aadcaeb46724d278383589/assets/sft-pipeline.png",
+      "direct": "https://raw.githubusercontent.com/LianjiaTech/astra/bdf6a46a130118e039aadcaeb46724d278383589/assets/sft-pipeline.png",
+      "sha256": "716ba2c62f61115c3a7de2bafcc2c553af3f6c8f1765b7085f9911ae867c5c4c",
+      "license": "Apache-2.0",
+      "license_url": "https://github.com/LianjiaTech/astra/blob/bdf6a46a130118e039aadcaeb46724d278383589/licenses/LICENSE",
+      "commit": "bdf6a46a130118e039aadcaeb46724d278383589",
+      "public_license_copy": "site/public/licenses/astra-bdf6a46-Apache-2.0.txt",
+      "license_evidence_sha256": "895371ba24d082f99f07353739e220ae74dcf2f5aecfec59827f9bcaced974f9",
+      "dimensions_px": [
+        9656,
+        7107
+      ]
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/astra/original-env.png",
+      "page": "https://github.com/LianjiaTech/astra/blob/bdf6a46a130118e039aadcaeb46724d278383589/assets/env.png",
+      "direct": "https://raw.githubusercontent.com/LianjiaTech/astra/bdf6a46a130118e039aadcaeb46724d278383589/assets/env.png",
+      "sha256": "929831c22a277a30824114ecaf79d72d41948e878174ff1d025afbe1a99e8b58",
+      "license": "Apache-2.0",
+      "license_url": "https://github.com/LianjiaTech/astra/blob/bdf6a46a130118e039aadcaeb46724d278383589/licenses/LICENSE",
+      "commit": "bdf6a46a130118e039aadcaeb46724d278383589",
+      "public_license_copy": "site/public/licenses/astra-bdf6a46-Apache-2.0.txt",
+      "license_evidence_sha256": "895371ba24d082f99f07353739e220ae74dcf2f5aecfec59827f9bcaced974f9",
+      "dimensions_px": [
+        3646,
+        1659
+      ]
+    }
+  ],
+  "files": [
+    {
+      "source": "Papers/Gemma.md",
+      "before_sha256": "67d0fadb06e41c720de9f3ff5c269b612e233d846ecb0712087fa29c9682a0c2",
+      "after_sha256": "423f281e3dfe706a087d6b4ba9e36257a138e2a1d3c28464a216b3e05a999a74",
+      "lines": 150,
+      "changes": [
+        {
+          "old": "**URL:** https://arxiv.org/abs/2403.08295\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/fig1.png]]\n*Performance Gemma 7B по категориям задач в сравнении с LLaMA 2 и Mistral.*\n\n## TL;DR\n",
+          "new": "**URL:** https://arxiv.org/abs/2403.08295\n\n![[00 Учебник/Assets/Figures/curated/gemma/original-eval_chart.svg|Четыре группы тестов: ответы на вопросы, рассуждение, математика и естественные науки, код]]\n\n*В отчёте показатели сгруппированы по четырём типам задач. Gemma 7B\nвыше остальных показанных моделей в математике, естественных науках и коде,\nно по ответам на вопросы уступает Llama 2 13B. Gemma Team, [технический отчёт, рис. 1](https://arxiv.org/html/2403.08295v4#S1.F1), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Исходный SVG без изменений.*\n\n## TL;DR\n"
+        },
+        {
+          "old": "- Большой vocabulary (256k) от Gemini -- рассчитан на многоязычность\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/fig2.png]]\n*Сравнение rates memorization между Gemma и PaLM моделями.*\n\n### Обучение\n\n",
+          "new": "- Большой vocabulary (256k) от Gemini -- рассчитан на многоязычность\n\n### Обучение\n\n"
+        },
+        {
+          "old": "- **Instruction Following**: 61.2% win rate (7B), 45% (2B)\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/fig3.png]]\n*Rates memorization personal data по data source.*\n\n### Memorization\n\n- Exact memorization rates сопоставимы с PaLM.\n- **Нет** случаев memorization sensitive data.\n- ~50% больше данных approximate-memorized vs exact.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/fig4.png]]\n*Exact vs approximate memorization по data source.*\n\n### Safety benchmarks (Table 8)\n",
+          "new": "- **Instruction Following**: 61.2% win rate (7B), 45% (2B)\n\n### Что измеряли в тестах на запоминание\n\nАвторы подают первые 50 токенов отобранного текста и сравнивают\nследующие 50 токенов модели с оригиналом. Одно расхождение исключает\nдословное совпадение, но может пройти порог расстояния редактирования\nдля приблизительного совпадения. Это тест на воспроизведение текста\nпри заданном префиксе, а не оценка того, сколько документов можно\nизвлечь произвольным запросом. Методика описана в\n[§6.3 отчёта](https://arxiv.org/html/2403.08295v4#S6.SS3).\n\n![[00 Учебник/Assets/Figures/curated/gemma/original-gemma_by_model_size_final.svg|Частота дословного воспроизведения у Gemma 2B, Gemma 7B и PaLM 2 Small по веб-данным и по всем данным]]\n\n*На левой панели сравнивают английский веб-текст, на правой —\nоценки по всем частям предобучающего корпуса. В первом срезе Gemma\nвоспроизводит текст реже PaLM 2 Small, во втором оценки ближе.\nВертикальная ось логарифмическая. Gemma Team, [технический отчёт, рис. 2](https://arxiv.org/html/2403.08295v4#S6.F2), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Исходный SVG без изменений.*\n\n![[00 Учебник/Assets/Figures/curated/gemma/original-gemma_both_by_corpus_sensitive_final.svg|Доля воспроизведённых фрагментов с признаками персональных данных по частям обучающего корпуса]]\n\n*Авторы искали признаки персональных данных в воспроизведённых\nпродолжениях. В этой выборке детектор не нашёл совпадений высшей\nкатегории чувствительности. Это не гарантия их отсутствия в модели;\nсам детектор также допускает ложные срабатывания. Gemma Team, [технический отчёт, рис. 3](https://arxiv.org/html/2403.08295v4#S6.F3), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Исходный SVG без изменений.*\n\n![[00 Учебник/Assets/Figures/curated/gemma/original-gemma_both_by_corpus_amem_final.svg|Дословное и приблизительное запоминание по частям обучающего корпуса Gemma]]\n\n*При пороге расстояния редактирования 10% авторы насчитали примерно\nв полтора раза больше совпадений, чем при требовании полного совпадения.\nРазницу сравнивают по частям корпуса на логарифмической оси. Gemma Team, [технический отчёт, рис. 4](https://arxiv.org/html/2403.08295v4#S6.F4), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Исходный SVG без изменений.*\n\n### Safety benchmarks (Table 8)\n"
+        }
+      ]
+    },
+    {
+      "source": "Concepts/Architectures/Gemma.md",
+      "before_sha256": "af9286d8c403a417892a60e6315a29adf7434c306b6c3c69daacb32a308e0f48",
+      "after_sha256": "590d0745f8aa6f3038593ce8485c6241cfdde4129d28f6cb84c3cecc2816921e",
+      "lines": 174,
+      "changes": [
+        {
+          "old": "Gemma — **decoder-only Transformer** с архитектурными решениями, унаследованными от Gemini:\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/fig1.png]]\n*Сравнение Gemma 7B с LLaMA 2 7B, LLaMA 2 13B и Mistral 7B по четырём категориям (источник: Gemma paper)*\n\n### Параметры моделей\n\n",
+          "new": "Gemma — **decoder-only Transformer** с архитектурными решениями, унаследованными от Gemini:\n\n### Параметры моделей\n\n"
+        },
+        {
+          "old": "5. **Memorization mitigation**: минимизация proliferation sensitive outputs\n\nРезультат: exact memorization rates **сопоставимы с PaLM**, нет случаев memorization sensitive data.\n\n## Instruction Tuning: двухэтапный процесс\n",
+          "new": "5. **Memorization mitigation**: минимизация proliferation sensitive outputs\n\nПри сравнении по всему корпусу частота дословного воспроизведения\nGemma близка к PaLM 2 Small. На одном только английском веб-тексте\nоценки расходятся. В испытанной выборке не обнаружили воспроизведения\nданных высшей категории чувствительности.\n\n![[00 Учебник/Assets/Figures/curated/gemma/original-gemma_by_model_size_final.svg|Частота дословного воспроизведения у Gemma 2B, Gemma 7B и PaLM 2 Small по веб-данным и по всем данным]]\n\n*Две панели показывают, как результат меняется с выбором текстов для\nсравнения. Gemma Team, [технический отчёт, рис. 2](https://arxiv.org/html/2403.08295v4#S6.F2), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Исходный SVG без изменений.*\n\n## Instruction Tuning: двухэтапный процесс\n"
+        },
+        {
+          "old": "Gemma 7B превосходит **LLaMA 2 13B** (почти вдвое большую модель) по average score (56.9 vs 52.4).\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/fig2.png]]\n*Подробные результаты Gemma по категориям бенчмарков (источник: Gemma paper)*\n\n### Gemma 2B: on-device champion\n",
+          "new": "Gemma 7B превосходит **LLaMA 2 13B** (почти вдвое большую модель) по average score (56.9 vs 52.4).\n\n![[00 Учебник/Assets/Figures/curated/gemma/original-eval_chart.svg|Четыре группы тестов: ответы на вопросы, рассуждение, математика и естественные науки, код]]\n\n*Средние результаты по четырём группам тестов. Gemma Team, [технический отчёт, рис. 1](https://arxiv.org/html/2403.08295v4#S1.F1), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Исходный SVG без изменений.*\n\n### Gemma 2B: on-device champion\n"
+        }
+      ]
+    },
+    {
+      "source": "Papers/Self-RAG.md",
+      "before_sha256": "8c47bbd635b9473b452819033d4a3529b8658c2e4cc398e0c02da71d2561c480",
+      "after_sha256": "f769753a392eb6d8c801ab1bdb02f7656319b3b0afc01649428b33a586a98add",
+      "lines": 125,
+      "changes": [
+        {
+          "old": "Self-RAG обучает одну LLM (7B/13B) адаптивно извлекать документы **по требованию**, генерировать ответ и **критиковать собственные выходы** с помощью специальных reflection tokens. В отличие от классического RAG, который всегда извлекает фиксированное количество документов, Self-RAG сама решает, нужен ли retrieval, оценивает релевантность документов и степень поддержки ответа цитатами. Результат: Self-RAG 7B/13B превосходит ChatGPT и retrieval-augmented Llama2-chat на задачах QA, fact verification и long-form generation.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/self-rag/fig1.png]]\n*Рисунок 1: Сравнение стандартного RAG (слева) и Self-RAG (справа). Self-RAG адаптивно решает, когда извлекать, обрабатывает несколько документов параллельно и критикует качество генерации.*\n\n## Problem\n",
+          "new": "Self-RAG обучает одну LLM (7B/13B) адаптивно извлекать документы **по требованию**, генерировать ответ и **критиковать собственные выходы** с помощью специальных reflection tokens. В отличие от классического RAG, который всегда извлекает фиксированное количество документов, Self-RAG сама решает, нужен ли retrieval, оценивает релевантность документов и степень поддержки ответа цитатами. Результат: Self-RAG 7B/13B превосходит ChatGPT и retrieval-augmented Llama2-chat на задачах QA, fact verification и long-form generation.\n\n![[00 Учебник/Assets/Figures/curated/self-rag/original-teaser_self_rag_v8.svg|Обычный RAG добавляет найденные документы к одному запросу. Self-RAG решает, когда искать, и сравнивает продолжения по документам.]]\n\n*Слева три документа попадают в один запрос к генератору. Справа\nSelf-RAG строит отдельное продолжение по каждому документу и ставит\nвариант с полным подтверждением выше варианта с частичным. Для эссе\nвнизу справа модель пропускает поиск. Asai et al., [Self-RAG, рис. 1](https://arxiv.org/html/2310.11511v1#S1.F1), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Исходный SVG без изменений.*\n\n## Problem\n"
+        },
+        {
+          "old": "4. Segment-level beam search выбирает лучший вариант по взвешенной сумме critique scores\n\nКлючевое отличие от RLHF: критика вычисляется offline и вставляется в тренировочный корпус, что значительно снижает стоимость обучения по сравнению с PPO.\n\n### Кастомизация на инференсе\n\nВеса для `IsRel`, `IsSup`, `IsUse` настраиваются без переобучения:\n- Для задач с требованиями к цитированию — увеличивается вес `IsSup`\n- Для открытых задач — снижается частота retrieval через порог на `Retrieve`\n\n## Key Results\n",
+          "new": "4. Segment-level beam search выбирает лучший вариант по взвешенной сумме critique scores\n\nКритик размечает данные заранее. Генератор учится на этих метках\nкак на обычных целевых токенах, а на этапе генерации сам выдаёт\nоценки. В описанном обучении генератора нет шага PPO или обновления\nполитики по онлайн-награде.\n\n### Кастомизация на инференсе\n\nРешение искать и выбор продолжения регулируются отдельно. В\n[§3.3 и приложении A.3](https://arxiv.org/html/2310.11511v1#S3.SS3)\nпоиск запускается, если нормированная вероятность `Retrieve=Yes`\nпревышает порог. При оценке 0,3 порог 0,2 запустит поиск, а 0,5 —\nнет. Порог задаёт система, а не модель.\n\nПосле поиска ранжирование учитывает вероятность продолжения и\nоценки критики. Пусть два продолжения равны по вероятности текста,\nрелевантности и полезности, а баллы поддержки равны 0,8 и 0,5.\nПри весе поддержки 0,5 вклад первого больше на 0,15; при весе\n1,0 разница вырастет до 0,3. Это условные оценки, не результаты\nзапуска модели. Токен поддержки остаётся её предсказанием:\nдля [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-citation-metrics|проверки цитат]]\nнужно отдельно сверять утверждение с текстом источника.\n\n## Key Results\n"
+        },
+        {
+          "old": "- Retrieve top 1 (как обычный RAG) — падение на PopQA и ASQA\n- Увеличение веса `IsSup` повышает citation precision, но снижает fluency (MAUVE)\n- Emergent threshold: модель сама калибрует, когда вызывать retrieval\n\n## My notes\n",
+          "new": "- Retrieve top 1 (как обычный RAG) — падение на PopQA и ASQA\n- Увеличение веса `IsSup` повышает citation precision, но снижает fluency (MAUVE)\n- В §5.2 авторы меняют порог поиска и проверяют, как меняются точность и частота вызова.\n\n## My notes\n"
+        }
+      ]
+    },
+    {
+      "source": "Concepts/Retrieval/Self-RAG.md",
+      "before_sha256": "27ab59210e47fc3a55d0d6b21c536e6b2ead341f2b9a9b870bc87dcaec497df0",
+      "after_sha256": "012632b960a28a17cfff25d201b72a0fbadce2669d613ff24ec7f8dada29b643",
+      "lines": 167,
+      "changes": [
+        {
+          "old": "Критический момент: модель **сама генерирует** эти токены как часть output — это не отдельная reward model или внешний классификатор. Reflection tokens — часть расширенного словаря, предсказываемые standard next-token prediction.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/self-rag/fig1.png]]\n*Сравнение классического RAG (слева) и Self-RAG (справа). Self-RAG адаптивно решает, когда извлекать, оценивает релевантность и поддержку каждого документа (источник: Asai et al., 2023)*\n\n## Как это работает: inference pipeline\n",
+          "new": "Критический момент: модель **сама генерирует** эти токены как часть output — это не отдельная reward model или внешний классификатор. Reflection tokens — часть расширенного словаря, предсказываемые standard next-token prediction.\n\n![[00 Учебник/Assets/Figures/curated/self-rag/original-teaser_self_rag_v8.svg|Обычный RAG добавляет найденные документы к одному запросу. Self-RAG решает, когда искать, и сравнивает продолжения по документам.]]\n\n*Справа модель решает, нужен ли поиск, затем сравнивает продолжения,\nполученные из разных документов. Asai et al., [Self-RAG, рис. 1](https://arxiv.org/html/2310.11511v1#S1.F1), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Исходный SVG без изменений.*\n\n## Как это работает: inference pipeline\n"
+        },
+        {
+          "old": "|--------|-----------|-------|\n| Fact verification | Высокий вес `IsSup` | Каждое утверждение должно быть подтверждено |\n| Open-ended writing | Низкий порог `Retrieve` | Меньше retrieval, больше creativity |\n| Citation-heavy QA | Высокий вес `IsSup` + `IsRel` | Точные цитаты с проверкой |\n| General QA | Balanced | Стандартный режим |\n",
+          "new": "|--------|-----------|-------|\n| Fact verification | Высокий вес `IsSup` | Каждое утверждение должно быть подтверждено |\n| Open-ended writing | Высокий порог `Retrieve` | Поиск запускается реже |\n| Citation-heavy QA | Высокий вес `IsSup` + `IsRel` | Точные цитаты с проверкой |\n| General QA | Balanced | Стандартный режим |\n"
+        }
+      ]
+    },
+    {
+      "source": "Concepts/Retrieval/Retrieval-Augmented Generation.md",
+      "before_sha256": "765f8a1543b5ce1f8605c64f7fe48924792b077ce268a2ba624710b32967181b",
+      "after_sha256": "841a8abd7c1b0533bbbc3802d56062e87c0e24fffc7226dec36526b4f2bf89fe",
+      "lines": 220,
+      "changes": [
+        {
+          "old": "## Self-RAG: адаптивный retrieval\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/self-rag/fig1.png]]\n*Figure 1 из Self-RAG (Asai et al., 2023): слева — стандартный RAG всегда делает retrieval; справа — Self-RAG адаптивно решает, когда retrievить, используя специальные reflection tokens.*\n\nСтандартный RAG **всегда** делает retrieval — даже когда модель уже знает ответ (например, «Сколько будет 2+2?»). Это добавляет latency и может привести к ухудшению из-за нерелевантных документов.\n",
+          "new": "## Self-RAG: адаптивный retrieval\n\n![[00 Учебник/Assets/Figures/curated/self-rag/original-teaser_self_rag_v8.svg|Обычный RAG добавляет найденные документы к одному запросу. Self-RAG решает, когда искать, и сравнивает продолжения по документам.]]\n\n*Слева поиск выполняется до генерации. Справа Self-RAG может вызвать\nпоиск между сегментами ответа или пропустить его. Asai et al., [Self-RAG, рис. 1](https://arxiv.org/html/2310.11511v1#S1.F1), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Исходный SVG без изменений.*\n\nСтандартный RAG **всегда** делает retrieval — даже когда модель уже знает ответ (например, «Сколько будет 2+2?»). Это добавляет latency и может привести к ухудшению из-за нерелевантных документов.\n"
+        },
+        {
+          "old": "| `[IsUse]` | Полезен ли итоговый ответ? (Rating 1-5) |\n\nSelf-RAG обучается через reinforcement learning с critic-моделью, которая генерирует reflection tokens на обучающих данных. На инференсе модель сама решает: нужен retrieval или нет, и если да — критически оценивает retrieved документы.\n\n## CRAG: Corrective RAG\n",
+          "new": "| `[IsUse]` | Полезен ли итоговый ответ? (Rating 1-5) |\n\nКритик размечает обучающие данные заранее. Генератор учится предсказывать\nэти метки вместе с текстом, без обучения с подкреплением. При ответе\nего оценки помогают выбрать продолжение, но не заменяют проверку\nцитаты по источнику.\n\n## CRAG: Corrective RAG\n"
+        }
+      ]
+    },
+    {
+      "source": "Papers/ASTRA.md",
+      "before_sha256": "eff4b741b7c0f01d2120129e8e615d9000d78b6cec1e5cbf3f8e9884d331e833",
+      "after_sha256": "334f5437ccf939b37073e1e3541b0df347e81ac33f65b1e402d4abd53bbb9bcb",
+      "lines": 229,
+      "changes": [
+        {
+          "old": "## Method\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/astra/sft-pipeline.png]]\n*ASTRA SFT pipeline: 5 стадий от сбора тулов до верифицированных траекторий. Stage 5 включает 7-мерную reward system (Global + Step-wise) (источник: Tian et al., 2026)*\n\n### Компонент A: Trajectory Synthesis (для SFT)\n",
+          "new": "## Method\n\n![[00 Учебник/Assets/Figures/curated/astra/original-sft-pipeline.png|Пять этапов ASTRA: сбор инструментов, граф цепочек, постановка задач, выполнение и отбор траекторий для SFT]]\n\n*На первых трёх этапах ASTRA собирает описания инструментов,\nстроит цепочки вызовов и составляет задачи. На четвёртом модель\nрешает задачу с инструментами, на пятом проверяют и отдельные шаги,\nи итог. Tian et al., Beike Language and Intelligence,\n[схема из репозитория ASTRA](https://github.com/LianjiaTech/astra/blob/bdf6a46a130118e039aadcaeb46724d278383589/assets/sft-pipeline.png),\n[Apache 2.0](/licenses/astra-bdf6a46-Apache-2.0.txt). Изображение без изменений.*\n\n### Компонент A: Trajectory Synthesis (для SFT)\n"
+        },
+        {
+          "old": "**Шаг 4. Мерж подсред.** Функционально эквивалентные подзадачи объединяются, данные расширяются.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/astra/env-synthesis.png]]\n*Environment Synthesis: Q-A декомпозиция → Python-функции → executable arenas. Каждая подзадача становится реальным тулом с ground-truth ответом (источник: Tian et al., 2026)*\n\n### Training Pipeline\n",
+          "new": "**Шаг 4. Мерж подсред.** Функционально эквивалентные подзадачи объединяются, данные расширяются.\n\n![[00 Учебник/Assets/Figures/curated/astra/original-env.png|Слева граф вопросов и ответов, справа цикл создания и проверки инструментов в песочнице]]\n\n*Слева показано, как ответы на подзадачи связаны между собой.\nСправа из одной пары «вопрос — ответ» получают спецификацию,\nпишут код и запускают его в песочнице. Выход сверяют с ожидаемым\nответом. Синтезированные подсреды затем объединяют.\nTian et al., Beike Language and Intelligence,\n[схема из репозитория ASTRA](https://github.com/LianjiaTech/astra/blob/bdf6a46a130118e039aadcaeb46724d278383589/assets/env.png),\n[Apache 2.0](/licenses/astra-bdf6a46-Apache-2.0.txt). Изображение без изменений.*\n\n### Training Pipeline\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "79006943d91ed36f1e2d0cbd832d2cd0f91983b6e89119fcb01813436155f770",
+      "after_sha256": "0e3eab324cdf0e135890fcfb9259e797fd4f1ca78466f1baabbf896512adfdca",
+      "lines": 24831,
+      "changes": [
+        {
+          "old": "    license_url: null\n    modifications: copied without modification from the local raw source for publication packaging\n    used_in:\n      - Papers/ASTRA.md\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/astra/images/env-synthesis.png\n  - id: curated-astra-6dd44813a19c\n    asset: 00 Учебник/Assets/Figures/curated/astra/reward-ablation.png\n",
+          "new": "    license_url: null\n    modifications: copied without modification from the local raw source for publication packaging\n    used_in: []\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/astra/images/env-synthesis.png\n    publication_status: retired\n    replacement: 00 Учебник/Assets/Figures/curated/astra/original-env.png\n  - id: curated-astra-original-929831c22a27\n    asset: \"00 Учебник/Assets/Figures/curated/astra/original-env.png\"\n    author: \"Tian et al., Beike Language and Intelligence\"\n    source_url: \"https://github.com/LianjiaTech/astra/blob/bdf6a46a130118e039aadcaeb46724d278383589/assets/env.png\"\n    source_image_url: \"https://raw.githubusercontent.com/LianjiaTech/astra/bdf6a46a130118e039aadcaeb46724d278383589/assets/env.png\"\n    sha256: \"929831c22a277a30824114ecaf79d72d41948e878174ff1d025afbe1a99e8b58\"\n    license: \"Apache-2.0\"\n    license_url: \"https://github.com/LianjiaTech/astra/blob/bdf6a46a130118e039aadcaeb46724d278383589/licenses/LICENSE\"\n    license_evidence: \"site/public/licenses/astra-bdf6a46-Apache-2.0.txt\"\n    commit: \"bdf6a46a130118e039aadcaeb46724d278383589\"\n    public_license_copy: \"site/public/licenses/astra-bdf6a46-Apache-2.0.txt\"\n    license_evidence_sha256: \"895371ba24d082f99f07353739e220ae74dcf2f5aecfec59827f9bcaced974f9\"\n    dimensions_px: [3646,1659]\n    modifications: \"Original figure copied byte-for-byte; no crop, redraw, relabeling or resampling.\"\n    used_in: [\"Papers/ASTRA.md\"]\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    derivation: \"source-raster-copy\"\n    last_verified: \"2026-11-10\"\n  - id: curated-astra-6dd44813a19c\n    asset: 00 Учебник/Assets/Figures/curated/astra/reward-ablation.png\n"
+        },
+        {
+          "old": "    license_url: null\n    modifications: copied without modification from the local raw source for publication packaging\n    used_in:\n      - Papers/ASTRA.md\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/astra/images/sft-pipeline.png\n  - id: curated-astra-fa1e85bfdcb1\n    asset: 00 Учебник/Assets/Figures/curated/astra/tool-mixing-ablation.png\n",
+          "new": "    license_url: null\n    modifications: copied without modification from the local raw source for publication packaging\n    used_in: []\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/astra/images/sft-pipeline.png\n    publication_status: retired\n    replacement: 00 Учебник/Assets/Figures/curated/astra/original-sft-pipeline.png\n  - id: curated-astra-original-716ba2c62f61\n    asset: \"00 Учебник/Assets/Figures/curated/astra/original-sft-pipeline.png\"\n    author: \"Tian et al., Beike Language and Intelligence\"\n    source_url: \"https://github.com/LianjiaTech/astra/blob/bdf6a46a130118e039aadcaeb46724d278383589/assets/sft-pipeline.png\"\n    source_image_url: \"https://raw.githubusercontent.com/LianjiaTech/astra/bdf6a46a130118e039aadcaeb46724d278383589/assets/sft-pipeline.png\"\n    sha256: \"716ba2c62f61115c3a7de2bafcc2c553af3f6c8f1765b7085f9911ae867c5c4c\"\n    license: \"Apache-2.0\"\n    license_url: \"https://github.com/LianjiaTech/astra/blob/bdf6a46a130118e039aadcaeb46724d278383589/licenses/LICENSE\"\n    license_evidence: \"site/public/licenses/astra-bdf6a46-Apache-2.0.txt\"\n    commit: \"bdf6a46a130118e039aadcaeb46724d278383589\"\n    public_license_copy: \"site/public/licenses/astra-bdf6a46-Apache-2.0.txt\"\n    license_evidence_sha256: \"895371ba24d082f99f07353739e220ae74dcf2f5aecfec59827f9bcaced974f9\"\n    dimensions_px: [9656,7107]\n    modifications: \"Original figure copied byte-for-byte; no crop, redraw, relabeling or resampling.\"\n    used_in: [\"Papers/ASTRA.md\"]\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    derivation: \"source-raster-copy\"\n    last_verified: \"2026-11-10\"\n  - id: curated-astra-fa1e85bfdcb1\n    asset: 00 Учебник/Assets/Figures/curated/astra/tool-mixing-ablation.png\n"
+        },
+        {
+          "old": "    license_url: null\n    modifications: copied without modification from the local raw source for publication packaging\n    used_in:\n      - Concepts/Architectures/Gemma.md\n      - Papers/Gemma.md\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/gemma/images/fig1.png\n  - id: curated-gemma-ae702e98a76c\n    asset: 00 Учебник/Assets/Figures/curated/gemma/fig2.png\n",
+          "new": "    license_url: null\n    modifications: copied without modification from the local raw source for publication packaging\n    used_in: []\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/gemma/images/fig1.png\n    publication_status: retired\n    replacement: 00 Учебник/Assets/Figures/curated/gemma/original-eval_chart.svg\n  - id: curated-gemma-original-761406ee1516\n    asset: \"00 Учебник/Assets/Figures/curated/gemma/original-eval_chart.svg\"\n    author: \"Gemma Team / Google DeepMind\"\n    source_url: \"https://arxiv.org/html/2403.08295v4#S1.F1\"\n    source_image_url: \"https://arxiv.org/html/2403.08295v4/eval_chart.svg\"\n    sha256: \"761406ee1516c24d7818a99b27507d7acb2a8c3474902e7d432ca61e44444abb\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"https://arxiv.org/html/2403.08295v4\"\n    modifications: \"Original figure copied byte-for-byte; no crop, redraw, relabeling or resampling.\"\n    used_in: [\"Papers/Gemma.md\",\"Concepts/Architectures/Gemma.md\"]\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    derivation: \"source-svg-copy\"\n    last_verified: \"2026-11-10\"\n  - id: curated-gemma-ae702e98a76c\n    asset: 00 Учебник/Assets/Figures/curated/gemma/fig2.png\n"
+        },
+        {
+          "old": "    license_url: null\n    modifications: copied without modification from the local raw source for publication packaging\n    used_in:\n      - Concepts/Architectures/Gemma.md\n      - Papers/Gemma.md\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/gemma/images/fig2.png\n  - id: curated-gemma-a74cb8306d47\n    asset: 00 Учебник/Assets/Figures/curated/gemma/fig3.png\n",
+          "new": "    license_url: null\n    modifications: copied without modification from the local raw source for publication packaging\n    used_in: []\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/gemma/images/fig2.png\n    publication_status: retired\n    replacement: 00 Учебник/Assets/Figures/curated/gemma/original-gemma_by_model_size_final.svg\n  - id: curated-gemma-original-aa00764a64af\n    asset: \"00 Учебник/Assets/Figures/curated/gemma/original-gemma_by_model_size_final.svg\"\n    author: \"Gemma Team / Google DeepMind\"\n    source_url: \"https://arxiv.org/html/2403.08295v4#S6.F2\"\n    source_image_url: \"https://arxiv.org/html/2403.08295v4/gemma_by_model_size_final.svg\"\n    sha256: \"aa00764a64affa0f22da77a66ac36330343c68d7410f9ffc8c1b68630b7f15d9\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"https://arxiv.org/html/2403.08295v4\"\n    modifications: \"Original figure copied byte-for-byte; no crop, redraw, relabeling or resampling.\"\n    used_in: [\"Papers/Gemma.md\",\"Concepts/Architectures/Gemma.md\"]\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    derivation: \"source-svg-copy\"\n    last_verified: \"2026-11-10\"\n  - id: curated-gemma-a74cb8306d47\n    asset: 00 Учебник/Assets/Figures/curated/gemma/fig3.png\n"
+        },
+        {
+          "old": "    license_url: null\n    modifications: copied without modification from the local raw source for publication packaging\n    used_in:\n      - Papers/Gemma.md\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/gemma/images/fig3.png\n  - id: curated-gemma-610d0411d13f\n    asset: 00 Учебник/Assets/Figures/curated/gemma/fig4.png\n",
+          "new": "    license_url: null\n    modifications: copied without modification from the local raw source for publication packaging\n    used_in: []\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/gemma/images/fig3.png\n    publication_status: retired\n    replacement: 00 Учебник/Assets/Figures/curated/gemma/original-gemma_both_by_corpus_sensitive_final.svg\n  - id: curated-gemma-original-b39474a1f82a\n    asset: \"00 Учебник/Assets/Figures/curated/gemma/original-gemma_both_by_corpus_sensitive_final.svg\"\n    author: \"Gemma Team / Google DeepMind\"\n    source_url: \"https://arxiv.org/html/2403.08295v4#S6.F3\"\n    source_image_url: \"https://arxiv.org/html/2403.08295v4/gemma_both_by_corpus_sensitive_final.svg\"\n    sha256: \"b39474a1f82aa6284eabdb9d93c73e0b5f346becfb5a01e4ce1ebe8cc645afc6\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"https://arxiv.org/html/2403.08295v4\"\n    modifications: \"Original figure copied byte-for-byte; no crop, redraw, relabeling or resampling.\"\n    used_in: [\"Papers/Gemma.md\"]\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    derivation: \"source-svg-copy\"\n    last_verified: \"2026-11-10\"\n  - id: curated-gemma-610d0411d13f\n    asset: 00 Учебник/Assets/Figures/curated/gemma/fig4.png\n"
+        },
+        {
+          "old": "    license_url: null\n    modifications: copied without modification from the local raw source for publication packaging\n    used_in:\n      - Papers/Gemma.md\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/gemma/images/fig4.png\n  - id: \"curated-gpt-30-7128f23d2a59\"\n    asset: \"00 Учебник/Assets/Figures/curated/gpt-30/gpt-2-transformer-xl-bert-3.png\"\n",
+          "new": "    license_url: null\n    modifications: copied without modification from the local raw source for publication packaging\n    used_in: []\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/gemma/images/fig4.png\n    publication_status: retired\n    replacement: 00 Учебник/Assets/Figures/curated/gemma/original-gemma_both_by_corpus_amem_final.svg\n  - id: curated-gemma-original-fb25f39ef104\n    asset: \"00 Учебник/Assets/Figures/curated/gemma/original-gemma_both_by_corpus_amem_final.svg\"\n    author: \"Gemma Team / Google DeepMind\"\n    source_url: \"https://arxiv.org/html/2403.08295v4#S6.F4\"\n    source_image_url: \"https://arxiv.org/html/2403.08295v4/gemma_both_by_corpus_amem_final.svg\"\n    sha256: \"fb25f39ef1041e46ac47b86945f4189634faccae69a8d9482a35ced3c6e80386\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"https://arxiv.org/html/2403.08295v4\"\n    modifications: \"Original figure copied byte-for-byte; no crop, redraw, relabeling or resampling.\"\n    used_in: [\"Papers/Gemma.md\"]\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    derivation: \"source-svg-copy\"\n    last_verified: \"2026-11-10\"\n  - id: \"curated-gpt-30-7128f23d2a59\"\n    asset: \"00 Учебник/Assets/Figures/curated/gpt-30/gpt-2-transformer-xl-bert-3.png\"\n"
+        },
+        {
+          "old": "    license_url: null\n    modifications: copied without modification from the local raw source for publication packaging\n    used_in:\n      - Concepts/Retrieval/Retrieval-Augmented Generation.md\n      - Concepts/Retrieval/Self-RAG.md\n      - Papers/Self-RAG.md\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/self-rag/images/fig1.png\n  - id: curated-self-rag-2423616e9d57\n    asset: 00 Учебник/Assets/Figures/curated/self-rag/fig2.png\n",
+          "new": "    license_url: null\n    modifications: copied without modification from the local raw source for publication packaging\n    used_in: []\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/self-rag/images/fig1.png\n    publication_status: retired\n    replacement: 00 Учебник/Assets/Figures/curated/self-rag/original-teaser_self_rag_v8.svg\n  - id: curated-self-rag-original-910317861c0d\n    asset: \"00 Учебник/Assets/Figures/curated/self-rag/original-teaser_self_rag_v8.svg\"\n    author: \"Akari Asai et al.\"\n    source_url: \"https://arxiv.org/html/2310.11511v1#S1.F1\"\n    source_image_url: \"https://arxiv.org/html/2310.11511v1/teaser_self_rag_v8.svg\"\n    sha256: \"910317861c0d471826a9d6a56f57da54ba4c5bf951430ed0794a490e90668866\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"https://arxiv.org/html/2310.11511v1\"\n    modifications: \"Original figure copied byte-for-byte; no crop, redraw, relabeling or resampling.\"\n    used_in: [\"Papers/Self-RAG.md\",\"Concepts/Retrieval/Self-RAG.md\",\"Concepts/Retrieval/Retrieval-Augmented Generation.md\"]\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    derivation: \"source-svg-copy\"\n    last_verified: \"2026-11-10\"\n  - id: curated-self-rag-2423616e9d57\n    asset: 00 Учебник/Assets/Figures/curated/self-rag/fig2.png\n"
+        }
+      ]
+    }
+  ]
+}

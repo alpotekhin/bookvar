@@ -2,6 +2,7 @@ import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {describe,expect,it} from 'vitest';
+import {beforeTopicConsolidation} from '../tools/topic-consolidation-baseline.mjs';
 
 const root=resolve(import.meta.dirname,'../..');
 const read=(path:string)=>readFileSync(resolve(root,path));
@@ -13,7 +14,7 @@ const source=read('05 Источники/Originals/frameworks-2026-10-27/chapter
 
 describe('individual gradients through original JAX transforms',()=>{
   it('preserves every byte of the accepted AD chapter outside one addition',()=>{
-    expect(digest(text.replace(pattern,'')))
+    expect(digest(beforeTopicConsolidation(text,'00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md').replace(pattern,'')))
       .toBe('f4a436da9642cc59dfec871c9e2134119871e81e7993b0cc2dcd68af68d31b82');
     expect(text.match(/^```python/gm)).toHaveLength(20);
     expect(text.match(/!\[\[/g)).toHaveLength(7);

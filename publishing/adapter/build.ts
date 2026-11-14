@@ -8,10 +8,16 @@ import { readPage } from './frontmatter.js';
 import { convertWikiSyntax, wikiHeadingSlug } from './links.js';
 import { loadLinkAllowlist } from './link-policy.js';
 import { loadManifest } from './manifest.js';
+import { hseCatalogueEntry } from './hse-catalogue.js';
 import { readerTitle, readingNeighbours, readingPaths } from './reading-paths.js';
 import type { PublicationSidebarItem } from './manifest.js';
 import { createRouteRegistry } from './routes.js';
 import { mapMarkdownProse } from './markdown-prose.js';
+import { genaiReaderMedia, genaiSource } from './genai-course-media.js';
+import { edlsReaderMedia } from './edls-course-media.js';
+import { scikitMoocReaderBody } from './scikit-mooc-reader.js';
+import { mlcourseTopic7ReaderBody } from './mlcourse-topic7-reader.js';
+import { courseLibraryReaderMedia } from './course-library-reader.js';
 import { materializeAsset } from './materialize-asset.js';
 import { loadCoursePdfDownloads } from './course-downloads.js';
 import { prefixPublicationLinks, rewritePublicationLinks } from './publication-links.js';
@@ -54,6 +60,13 @@ function canonicalEnglishRoute(route: string): boolean {
   return route.startsWith('textbook/') || route === 'practice/inference-scheduler';
 }
 
+const editSourceBase = 'https://github.com/alpotekhin/bookvar/edit/dev/';
+
+function editableReaderRoute(route: string): boolean {
+  return /^(textbook|reference|models|research|questions|practice)\//.test(route)
+    && !route.includes('/legacy/');
+}
+
 const REFERENCE_SIDEBAR_GROUPS = [
   { label: 'Темы и механизмы', labelEn: 'Topics and mechanisms', includes: (route: string) => route.startsWith('reference/') },
   {
@@ -89,6 +102,56 @@ function normalizeProtocolRelativeHtmlUrls(markdown: string): string {
   // sites with `//host/path` URLs. Astro otherwise treats these as local
   // publication paths during static rendering.
   return markdown.replace(/\b(href|src)=(['"])\/\//gi, '$1=$2https://');
+}
+
+const GENAI_ARCHIVE_ROOT = '05 Источники/Courses/GenAI Agents/';
+const GENAI_NOTEBOOK_FIGURES = new Map([
+  ['Academic_Task_Learning_Agent_LangGraph/cell-003-markdown-01.png', 'ATLAS routes a request to one of its specialist workflows.'],
+  ['Academic_Task_Learning_Agent_LangGraph/cell-003-markdown-02.png', 'ATLAS fans out to profile, calendar and task analysis before execution.'],
+  ['Academic_Task_Learning_Agent_LangGraph/cell-055-markdown-01.png', 'Two nested ATLAS subgraphs for calendar and note analysis.'],
+  ['Weather_Disaster_Management_AI_AGENT/cell-004-markdown-01.jpg', 'Weather alerts pass through severity and human review gates before escalation.'],
+  ['database_discovery_fleet/cell-002-attachment.png', 'The agent classifies the request, then answers directly or plans and executes a database query.'],
+  ['database_discovery_fleet/cell-003-attachment.png', 'Example database schema and relationships used by the discovery agent.'],
+  ['sales_call_analyzer_agent/cell-021-markdown-01.png', 'Audio goes through transcription, analysis and report generation.'],
+  ['systematic_review_of_scientific_articles/cell-004-markdown-01.png', 'The review graph splits into queries and combines the results for synthesis.'],
+]);
+
+function readerSourceBody(route: string, source: string, body: string): string {
+  if (route.startsWith('sources/courses/efficient-dl-systems/') &&
+      source.startsWith('05 Источники/Courses/Efficient DL Systems/')) {
+    return edlsReaderMedia(body);
+  }
+  if (!route.startsWith('sources/courses/genai-agents/')) {
+    const reader = mlcourseTopic7ReaderBody(route, source, scikitMoocReaderBody(route, source, body));
+    return courseLibraryReaderMedia(route, source, reader);
+  }
+  // The upstream notebook footer loads a per-notebook view counter.
+  // Preserve the archived notebook and examples; omit the beacon from HTML.
+  return mapMarkdownProse(body, prose => {
+    const withoutCounter = genaiReaderMedia(prose.replace(
+      /^!\[\]\(https:\/\/europe-west1-genai-agents-views-tracker\.cloudfunctions\.net\/genai-agents-tracker\?notebook=[a-z0-9-]+\)[ \t]*\r?$/gm,
+      ''
+    ));
+    if (!source.startsWith(GENAI_ARCHIVE_ROOT + 'all_agents_tutorials/')) return withoutCounter;
+    const notebook = source.slice(GENAI_ARCHIVE_ROOT.length).replace(/\.md$/, '');
+    const directory = notebook.slice('all_agents_tutorials/'.length, -'.ipynb'.length);
+    return withoutCounter.replace(
+      /!\[([^\]\n]*)\]\(\/_assets\/Sources\/GenAI Agents\/all_agents_tutorials\/([^/)]+)\/(cell-\d+-(?:attachment|markdown-\d+)\.(?:png|jpg|svg))\)/g,
+      (match, _alt: string, owner: string, file: string) => {
+        if (owner !== directory) return match;
+        const cell = Number(file.match(/^cell-(\d+)-/)![1]);
+        const original = genaiSource + notebook.split('/').map(encodeURIComponent).join('/');
+        const description = GENAI_NOTEBOOK_FIGURES.get(owner + '/' + file);
+        if (!description) return `[View the screenshot in the original notebook (cell ${cell})](${original})`;
+        return [
+          '',
+          `![[Assets/Sources/GenAI Agents/all_agents_tutorials/${owner}/${file}|${description}]]`,
+          `*Nir Diamant and GenAI Agents contributors, [original notebook, cell ${cell}](${original}), [custom non-commercial license](${genaiSource}LICENSE). Unmodified image.*`,
+          '',
+        ].join('\n\n');
+      }
+    );
+  });
 }
 
 function escapeHtml(value: string): string {
@@ -394,7 +457,9 @@ function prepareAssets(rootDir: string, markdown: string): { markdown: string; a
     const description = alias?.trim();
     const alt = (description && !/^\d+(?:x\d+)?$/i.test(description)
       ? description : filename.replace(IMAGE_EXTENSION, '')).replace(/([\\[\]])/g, '\\$1');
-    const href = asset.publicPath.split('/').map(encodeURIComponent).join('/');
+    // '=' is valid within a path segment. Astro's static server decodes paths
+    // with decodeURI, which leaves %3D encoded and fails to find such assets.
+    const href = asset.publicPath.split('/').map(segment => encodeURIComponent(segment).replace(/%3D/g, '=')).join('/');
     const assetHref = `${publicationBasePath()}/assets/${href}`;
     const image = `[![${alt}](${assetHref})](${assetHref})`;
     const lineStart = markdown.lastIndexOf('\n', offset - 1) + 1;
@@ -438,6 +503,21 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     entry.source.replaceAll('\\', '/'), entry.route
   ]));
   const parsed = await Promise.all(entries.map(async (entry) => {
+    const hse = hseCatalogueEntry(entry.source, entry.route);
+    if (hse) {
+      const page: ReturnType<typeof readPage> = {
+        title: hse.title,
+        type: 'external-resource',
+        status: 'imported-source',
+        sourceFragments: [],
+        body: [
+          'Материал курса машинного обучения ВШЭ, весна 2026. Полный текст доступен на русском языке у авторов курса.',
+          `[Открыть оригинал на GitHub](${hse.href})`,
+          'На сайте Bookvar сохранена ссылка: разрешение на перепубликацию этого материала не подтверждено.',
+        ].join('\n\n') + '\n',
+      };
+      return { entry, page };
+    }
     const sourcePath = contained(rootDir, entry.source, 'Source');
     const raw = await readFile(sourcePath, 'utf8');
     const page = readPublicationPage(entry.source, raw);
@@ -575,7 +655,8 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
         : [])
   ]);
   const preparedPages = localizedPages.map(({ entry, page, source, locale }) => {
-    const linked = prepareLinkedCourseArtifacts(rootDir, source, entry.route, page.body, routeBySource, pdfDownloads);
+    const linked = prepareLinkedCourseArtifacts(rootDir, source, entry.route,
+      readerSourceBody(entry.route, source, page.body), routeBySource, pdfDownloads);
     for (const artifact of linked.artifacts) {
       const existing = linkedArtifactsByPublicPath.get(artifact.publicPath);
       if (existing && existing.source !== artifact.source) {
@@ -811,6 +892,9 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
       ];
       metadata.prev = false;
       metadata.next = false;
+    } else if (editableReaderRoute(entry.route) && !['redirect', 'legacy'].includes(page.status)) {
+      // Use the selected locale's source, never Starlight's generated file.
+      metadata.editUrl = editSourceBase + source.replaceAll('\\', '/').split('/').map(encodeURIComponent).join('/');
     }
     if (locale === 'en' && canonicalEnglishRoute(entry.route) && (entry.sourceEn || page.sourceLanguage !== 'en')) {
       const canonicalRaw = await readFile(contained(rootDir, entry.source, 'Canonical source'), 'utf8');

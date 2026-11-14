@@ -1,0 +1,344 @@
+{
+  "schema_version": 1,
+  "kind": "gpu-copy-additions",
+  "review_date": "2026-11-04",
+  "files": [
+    {
+      "source": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "before_sha256": "d700f60713f8d39ff010f0c7f7daeaa2aa3a0c1b3125ef63aad0858e29f9db1c",
+      "changes": [
+        {
+          "old": "<!-- hardware-source-completion: mapping:start -->",
+          "new": "<a id=\"gpu-copy-overlap\"></a>\n\n### Pinned memory and a second stream: inspect the device timeline\n\nVincent Moens profiles four combinations in\n[A guide on good usage of non_blocking and pin_memory() in PyTorch](https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html).\nEach run transfers a CPU tensor to the GPU and multiplies an existing GPU\ntensor, `t3_cuda`, by itself twice. The multiplication does not read the\ntransferred input. The operations may therefore overlap without violating\na data dependency. A kernel that consumes that input would have to wait\nfor its copy.\n\nThe four original traces below distinguish two questions: when the CPU can\ncontinue submitting work, and whether the copy and kernel actually occupy\noverlapping intervals on the GPU. Their horizontal scales differ, so the\nwidths of bars in different screenshots are not a speedup comparison.\nThe stream numbers identify queues in the author's run, not dedicated\nhardware copy engines. Open a figure to enlarge its labels.\n\nWith pageable CPU memory and both operations on the same stream, the device\ncopy finishes before the multiplication starts. A host API call can return\nbefore device work completes without removing that ordering.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/trace_streamed0_pinned0.png|PyTorch profiler: pageable input and one stream, with the H2D copy preceding the multiplication]]\n\n*Vincent Moens, [non_blocking and pin_memory()](https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html),\n[original PNG](https://github.com/pytorch/tutorials/blob/5672cd98a7671eda4d9122b10f8eec580f74d03e/_static/img/pinmem/trace_streamed0_pinned0.png),\n[BSD 3-Clause, full notice](/licenses/pytorch-tutorials-5672cd98-BSD-3-Clause.txt).\nComplete source screenshot, unchanged. The copy and GPU kernel are consecutive;\nthese are the author's measurements, not a Bookvar benchmark.*\n\nPinning the source removes the need for a pageable staging path, but does\nnot change the stream's order. In the second trace the source is pinned\nand the operations still run consecutively.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/trace_streamed0_pinned1.png|PyTorch profiler: pinned input on the same stream, with no overlap between the H2D copy and multiplication]]\n\n*Vincent Moens, [non_blocking and pin_memory()](https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html),\n[original PNG](https://github.com/pytorch/tutorials/blob/5672cd98a7671eda4d9122b10f8eec580f74d03e/_static/img/pinmem/trace_streamed0_pinned1.png),\n[BSD 3-Clause, full notice](/licenses/pytorch-tutorials-5672cd98-BSD-3-Clause.txt).\nComplete source screenshot, unchanged. Pinned memory alone does not make\noperations in one stream concurrent.*\n\nIn the third trace the copy uses a separate stream, but the CPU tensor is\npageable. The author's run still shows no overlap. Such a transfer can\nrequire staging through page-locked memory and can block the host during\npreparation. Creating another queue does not by itself provide a suitable\nsource buffer or guarantee concurrent device execution.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/trace_streamed1_pinned0.png|PyTorch profiler: pageable input with a separate copy stream, still without device overlap in the author's run]]\n\n*Vincent Moens, [non_blocking and pin_memory()](https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html),\n[original PNG](https://github.com/pytorch/tutorials/blob/5672cd98a7671eda4d9122b10f8eec580f74d03e/_static/img/pinmem/trace_streamed1_pinned0.png),\n[BSD 3-Clause, full notice](/licenses/pytorch-tutorials-5672cd98-BSD-3-Clause.txt).\nComplete source screenshot, unchanged. The visible intervals belong to\nthis pageable-memory experiment; they are not a portable transfer-time bound.*\n\nThe fourth run combines pinned CPU memory, a separate copy stream and\nnon-blocking submission. On the two GPU rows, the H2D interval intersects\nthe multiplication interval. The hardware in this experiment can execute\nboth at once. A busy copy engine, shared bandwidth or other work could\nreduce or eliminate the overlap on another workload.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/trace_streamed1_pinned1.png|PyTorch profiler: pinned input on a separate stream, with overlapping H2D copy and independent multiplication intervals]]\n\n*Vincent Moens, [non_blocking and pin_memory()](https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html),\n[original PNG](https://github.com/pytorch/tutorials/blob/5672cd98a7671eda4d9122b10f8eec580f74d03e/_static/img/pinmem/trace_streamed1_pinned1.png),\n[BSD 3-Clause, full notice](/licenses/pytorch-tutorials-5672cd98-BSD-3-Clause.txt).\nComplete source screenshot, unchanged. Compare the copy and kernel rows\nwithin this screenshot, rather than bar lengths across the four figures.*\n\nThe profiling function waits for completion before returning. A CPU\nevent-synchronization bar therefore appears even in the overlapping run.\nThat wait finishes outstanding device work; it does not mean the copy and\nkernel were serialized before the wait.\n\nPinning also has a preparation cost. Calling\n`pageable.pin_memory().to(\"cuda\", non_blocking=True)` first allocates pinned\nstorage and copies the CPU values into it. For a one-off transfer, that\nextra work can exceed the transfer time saved. Preparing reusable pinned\nbuffers or using a DataLoader's pinning path moves that cost elsewhere in\nthe pipeline; it must still be included in end-to-end measurements.\nThe tutorial measures pinning, transfer and their combination separately.\nIts numerical timings describe the author's machine.\n\n<a id=\"gpu-buffer-lifetimes\"></a>\n\n### Data readiness, allocation lifetime and source mutation\n\nThe [PyTorch CUDA streams documentation](https://docs.pytorch.org/docs/2.14/notes/cuda.html#cuda-streams)\nstates:\n\n> Operations inside each stream are serialized in the order they are created.\n\nAcross streams, a consumer needs an explicit dependency on its producer.\nThe corrected example in the documentation fills `A` on the default stream\nand sums it on a side stream. The source statements are retained below\ninside a CUDA-availability guard; a final synchronization makes the example\nwait before exiting.\n\n<!-- checked-example: gpu-official-stream-lifetime -->\n```python\nimport torch\n\ncuda_stream_example_executed = False\nif torch.cuda.is_available():\n    cuda = torch.device('cuda')\n    s = torch.cuda.Stream()\n    A = torch.empty((100, 100), device=cuda).normal_(0.0, 1.0)\n    s.wait_stream(torch.cuda.default_stream(cuda))\n    with torch.cuda.stream(s):\n        B = torch.sum(A)\n    A.record_stream(s)\n    s.synchronize()\n    cuda_stream_example_executed = True\nprint(\"CUDA stream example executed:\", cuda_stream_example_executed)\n```\n\n*PyTorch contributors,\n[CUDA semantics, corrected side-stream example](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/docs/source/notes/cuda.md#cuda-streams),\n[full source license](/licenses/pytorch-v2.14.1-LICENSE.txt).\nThe wrapper and final wait are Bookvar additions. With no CUDA device,\nthe example skips the device operations; that branch does not test a GPU.*\n\n`wait_stream` makes subsequently submitted work on `s` wait for work\nalready submitted to the default stream. It enqueues a device dependency\nrather than blocking the CPU until `normal_` finishes. Consequently,\n`sum(A)` sees initialized values even if the CPU submits it early.\nA host read of `B` would also have to wait for the sum.\n\n`record_stream(s)` serves a different purpose. It informs PyTorch's caching\nallocator that `A`'s storage is in use on `s`, so that storage cannot be\nrecycled for another tensor while the sum still reads it. It does not\norder the sum after initialization. Keeping a Python name alive, recording\na stream and waiting for a producer address different parts of the\nstorage and execution problem.\n\nThe documentation also shows why a new `torch.empty` allocation can\nneed a stream wait even when its old contents will not be read. The allocator\nmay return storage previously used by pending operations on the allocation\nstream. Writing the new tensor on another stream without the dependency\ncould collide with that earlier use.\n\nPinned memory has another constraint: its contents can still be modified.\nPinning prevents the operating system from paging out those pages; it does\nnot prevent Python or another CPU thread from overwriting them. A\nnon-blocking H2D copy may still be reading the source after the call returns.\nLikewise, after an asynchronous D2H copy, the CPU must wait before reading\nthe destination. The tutorial's\n[other copy directions and mutation experiments](https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html#other-copy-directions-gpu-cpu-cpu-mps)\ndemonstrate these failures.\n\nIn the earlier 3 ms copy and 7 ms kernel example, the pinned host source is\nno longer needed at 3 ms, when its H2D copy completes. The device input is\nstill needed until the kernel finishes at 10 ms. The two buffers therefore\nhave different safe reuse points:\n\n| Storage | Last reader | Reuse after |\n|---|---|---|\n| Pinned CPU input | H2D copy | 3 ms |\n| GPU input | Kernel | 10 ms |\n\nThe following CPU model makes an early overwrite visible. It divides each\nread into two halves so that an overwrite can occur between them. This is a\nteaching interleaving, not a statement about actual DMA transaction size\nor the granularity of GPU instructions.\n\n<!-- checked-example: gpu-copy-interleaving -->\n```python\ndef read_interleaving(order):\n    host = [1, 2, 3, 4]\n    device = [None] * 4\n    seen = [None] * 4\n    for operation in order:\n        if operation == \"copy_left\":\n            device[:2] = host[:2]\n        elif operation == \"copy_right\":\n            device[2:] = host[2:]\n        elif operation == \"read_left\":\n            seen[:2] = device[:2]\n        elif operation == \"read_right\":\n            seen[2:] = device[2:]\n        elif operation == \"reuse_host\":\n            host[:] = [0] * 4\n        elif operation == \"reuse_device\":\n            device[:] = [0] * 4\n        else:\n            raise ValueError(operation)\n    return seen\n\nsafe = [\"copy_left\", \"copy_right\", \"reuse_host\",\n        \"read_left\", \"read_right\", \"reuse_device\"]\nearly_host = [\"copy_left\", \"reuse_host\", \"copy_right\",\n              \"read_left\", \"read_right\", \"reuse_device\"]\nearly_device = [\"copy_left\", \"copy_right\", \"read_left\",\n                \"reuse_device\", \"read_right\", \"reuse_host\"]\nassert read_interleaving(safe) == [1, 2, 3, 4]\nassert read_interleaving(early_host) == [1, 2, 0, 0]\nassert read_interleaving(early_device) == [1, 2, 0, 0]\n```\n\nIn `early_host`, the first half reaches the device before the overwrite;\nthe second half copies the new zeros. In `early_device`, the copy finishes\ncorrectly, but the kernel's second read sees the overwritten device input.\nBoth runs return a mixture of values. Waiting only for H2D completion\nprevents the first failure and still permits the second.\n\nA reusable input pipeline must keep the host source unchanged until its\ncopy completes, delay the consumer until its device input is ready, and\ndelay the next device write until the previous consumer finishes.\nSeparate events can express these three dependencies without a global\ndevice synchronization at every step.\n\n<!-- hardware-source-completion: mapping:start -->"
+        },
+        {
+          "old": "last_updated: 2026-10-29\nlast_verified: 2026-10-23",
+          "new": "last_updated: 2026-11-04\nlast_verified: 2026-11-04"
+        },
+        {
+          "old": "source_language: mixed\nsource_unit_id:",
+          "new": "source_language: mixed\nreference_terms:\n  - anchor: gpu-grid\n    label: \"Один запуск, тысяча элементов\"\n    label_en: \"Grid, blocks, and threads\"\n  - anchor: gpu-sm\n    label: \"Размещение блоков на SM\"\n    label_en: \"Block placement on SMs\"\n  - anchor: gpu-simt\n    label: \"SIMT и расхождение ветвей\"\n    label_en: \"SIMT and branch divergence\"\n  - anchor: gpu-occupancy\n    label: \"Occupancy и волны блоков\"\n    label_en: \"Occupancy and wave quantization\"\n  - anchor: gpu-memory\n    label: \"Иерархия памяти GPU\"\n    label_en: \"GPU memory hierarchy\"\n  - anchor: gpu-coalescing\n    label: \"Coalescing и выравнивание\"\n    label_en: \"Coalescing and alignment\"\n  - anchor: gpu-banks\n    label: \"Банки shared memory\"\n    label_en: \"Shared-memory banks\"\n  - anchor: gpu-swizzle\n    label: \"XOR swizzling\"\n    label_en: \"XOR swizzling\"\n  - anchor: gpu-tiling\n    label: \"Блочное матричное умножение\"\n    label_en: \"Tiled matrix multiplication\"\n  - anchor: gpu-fringe\n    label: \"Неполные плитки и нулевое дополнение\"\n    label_en: \"Fringe tiles and zero padding\"\n  - anchor: gpu-l2\n    label: \"Повторное использование через L2\"\n    label_en: \"L2 reuse and block ordering\"\n  - anchor: gpu-tensor-cores\n    label: \"Матричные инструкции Tensor Cores\"\n    label_en: \"Tensor Core matrix instructions\"\n  - anchor: gpu-tmem\n    label: \"Tensor Memory (TMEM)\"\n    label_en: \"Tensor Memory (TMEM)\"\n  - anchor: gpu-fusion\n    label: \"Объединение ядер и промежуточные массивы\"\n    label_en: \"Kernel fusion and intermediate arrays\"\n  - anchor: torch-device-placement\n    label: \"Устройство тензора в PyTorch\"\n    label_en: \"Tensor device placement in PyTorch\"\n  - anchor: gpu-streams\n    label: \"CUDA streams и события\"\n    label_en: \"CUDA streams and events\"\n  - anchor: gpu-double-buffer\n    label: \"Двойная буферизация входа\"\n    label_en: \"Double-buffered input\"\n  - anchor: gpu-copy-overlap\n    label: \"Перекрытие передачи и вычислений: трассы\"\n    label_en: \"Copy/compute overlap in profiler traces\"\n  - anchor: gpu-buffer-lifetimes\n    label: \"Готовность данных и время жизни буферов\"\n    label_en: \"Data readiness and buffer lifetimes\"\n  - anchor: gpu-hardware-mapping\n    label: \"Отображение операции на ускоритель\"\n    label_en: \"Mapping an operation to an accelerator\"\n  - anchor: gpu-im2col\n    label: \"Свёртка как GEMM: im2col\"\n    label_en: \"Convolution as GEMM: im2col\"\n  - anchor: gpu-layout\n    label: \"Логические оси и физическое размещение\"\n    label_en: \"Logical axes and physical tensor layout\"\n  - anchor: gpu-placement\n    label: \"Размещение, выделение памяти и расписание\"\n    label_en: \"Placement, allocation, and scheduling\"\n  - anchor: gpu-unified\n    label: \"Unified Memory и размещение страниц\"\n    label_en: \"Unified Memory and page residency\"\n  - anchor: gpu-soc\n    label: \"Неоднородные процессоры и fallback\"\n    label_en: \"Heterogeneous processors and fallback\"\n  - anchor: gpu-fleet\n    label: \"Границы пакета, узла и кластера\"\n    label_en: \"Package, node, and fleet boundaries\"\n  - anchor: gpu-systolic\n    label: \"Систолический массив\"\n    label_en: \"A systolic array\"\n  - anchor: gpu-stationary\n    label: \"Weight-, output- и input-stationary\"\n    label_en: \"Weight-, output-, and input-stationary dataflows\"\nsource_unit_id:"
+        },
+        {
+          "old": "  - lecture-02-tensor-device-placement",
+          "new": "  - pytorch-pinmem-four-profiler-traces\n  - pytorch-cuda-streams-and-allocation-lifetime\n  - lecture-02-tensor-device-placement"
+        },
+        {
+          "old": "## Один запуск, тысяча элементов",
+          "new": "<a id=\"gpu-grid\"></a>\n\n## Один запуск, тысяча элементов"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/cuda-grid-cta.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/cuda-grid-cta.png|CUDA: grid, блоки CTA и потоки внутри блока]]"
+        },
+        {
+          "old": "## Как блоки попадают на вычислители",
+          "new": "<a id=\"gpu-sm\"></a>\n\n## Как блоки попадают на вычислители"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/gpu-hardware.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/gpu-hardware.png|Устройство GPU: несколько SM с регистрами и L1/shared memory, общий L2 и HBM]]"
+        },
+        {
+          "old": "### Почему ветвление внутри warp бывает дорогим",
+          "new": "<a id=\"gpu-simt\"></a>\n\n### Почему ветвление внутри warp бывает дорогим"
+        },
+        {
+          "old": "### Occupancy: сколько групп помещается, а не сколько пользы они приносят",
+          "new": "<a id=\"gpu-occupancy\"></a>\n\n### Occupancy: сколько групп помещается, а не сколько пользы они приносят"
+        },
+        {
+          "old": "## Где хранится один элемент",
+          "new": "<a id=\"gpu-memory\"></a>\n\n## Где хранится один элемент"
+        },
+        {
+          "old": "## Coalescing: сколько секторов затронул warp",
+          "new": "<a id=\"gpu-coalescing\"></a>\n\n## Coalescing: сколько секторов затронул warp"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-coalescing-4.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-coalescing-4.png|Четыре потока читают четыре соседних адреса внутри одного сегмента]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-coalescing-5.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-coalescing-5.png|Шаг адресов и невыровненное начало заставляют четыре потока затронуть два сегмента]]"
+        },
+        {
+          "old": "## Shared memory: почему соседние банки лучше одного",
+          "new": "<a id=\"gpu-banks\"></a>\n\n## Shared memory: почему соседние банки лучше одного"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/banks-stride-1.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/banks-stride-1.svg|Четыре потока и четыре банка: при шаге 1 каждый банк обслуживает одно слово]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/banks-stride-2.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/banks-stride-2.svg|При шаге 2 четыре разных слова попадают в два банка, по два обращения на банк]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/banks-stride-4.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/banks-stride-4.svg|При шаге 4 все четыре разных слова попадают в один банк]]"
+        },
+        {
+          "old": "### Swizzling: переставить элементы вместо добавления колонки",
+          "new": "<a id=\"gpu-swizzle\"></a>\n\n### Swizzling: переставить элементы вместо добавления колонки"
+        },
+        {
+          "old": "## Блочное матричное умножение",
+          "new": "<a id=\"gpu-tiling\"></a>\n\n## Блочное матричное умножение"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-6.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-6.png|Блочное умножение 4×4: загрузка первых входных плиток 2×2 из M и N]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-7.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-7.png|Блочное умножение: первые произведения и повторное использование загруженных элементов]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-8.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-8.png|Блочное умножение: вторая пара произведений из тех же входных плиток]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-9.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-gemm-step-9.png|Блочное умножение: переход ко второй паре плиток вдоль внутреннего измерения]]"
+        },
+        {
+          "old": "### Неполная плитка: что именно заполняется нулями",
+          "new": "<a id=\"gpu-fringe\"></a>\n\n### Неполная плитка: что именно заполняется нулями"
+        },
+        {
+          "old": "### Повторное использование между блоками: роль L2",
+          "new": "<a id=\"gpu-l2\"></a>\n\n### Повторное использование между блоками: роль L2"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/triton-grouped-vs-row-major.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/triton-grouped-vs-row-major.png|Triton: построчный обход девяти выходных блоков требует 90 разных входных блоков, групповой — 54]]"
+        },
+        {
+          "old": "### Tensor Cores — другая инструкция для той же алгебры",
+          "new": "<a id=\"gpu-tensor-cores\"></a>\n\n### Tensor Cores — другая инструкция для той же алгебры"
+        },
+        {
+          "old": "На архитектурах Blackwell `sm_100a`/`sm_100f` есть отдельная",
+          "new": "<a id=\"gpu-tmem\"></a>\n\nНа архитектурах Blackwell `sm_100a`/`sm_100f` есть отдельная"
+        },
+        {
+          "old": "## Объединение ядер: не записывать промежуточный массив",
+          "new": "<a id=\"gpu-fusion\"></a>\n\n## Объединение ядер: не записывать промежуточный массив"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-fusion.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-fusion.svg|Отдельные ядра передают ускорение и скорость через глобальную память, объединённое хранит промежуточные значения в регистрах]]"
+        },
+        {
+          "old": "### Очереди CUDA и зависимости",
+          "new": "<a id=\"gpu-streams\"></a>\n\n### Очереди CUDA и зависимости"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-same-stream.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-same-stream.png|Сохранение состояния симуляции: D2H-копирование и следующий расчёт в одном stream выполняются последовательно]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-two-streams.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/nvidia-two-streams.png|Отдельные streams разрешают перекрыть D2H-передачу снимка с расчётом следующего состояния]]"
+        },
+        {
+          "old": "### Три пакета и два буфера",
+          "new": "<a id=\"gpu-double-buffer\"></a>\n\n### Три пакета и два буфера"
+        },
+        {
+          "old": "## Matching an operation to the accelerator",
+          "new": "<a id=\"gpu-hardware-mapping\"></a>\n\n## Matching an operation to the accelerator"
+        },
+        {
+          "old": "### Convolution as a matrix product: the cost of forming patches",
+          "new": "<a id=\"gpu-im2col\"></a>\n\n### Convolution as a matrix product: the cost of forming patches"
+        },
+        {
+          "old": "### Logical dimensions and physical tensor layout",
+          "new": "<a id=\"gpu-layout\"></a>\n\n### Logical dimensions and physical tensor layout"
+        },
+        {
+          "old": "### Placement, buffer lifetime and execution order",
+          "new": "<a id=\"gpu-placement\"></a>\n\n### Placement, buffer lifetime and execution order"
+        },
+        {
+          "old": "### Unified Memory: a common address does not fix data residency",
+          "new": "<a id=\"gpu-unified\"></a>\n\n### Unified Memory: a common address does not fix data residency"
+        },
+        {
+          "old": "### Heterogeneous processors and unsupported operations",
+          "new": "<a id=\"gpu-soc\"></a>\n\n### Heterogeneous processors and unsupported operations"
+        },
+        {
+          "old": "### Package, node and fleet boundaries",
+          "new": "<a id=\"gpu-fleet\"></a>\n\n### Package, node and fleet boundaries"
+        },
+        {
+          "old": "### A systolic array: keep weights, pass inputs and partial sums",
+          "new": "<a id=\"gpu-systolic\"></a>\n\n### A systolic array: keep weights, pass inputs and partial sums"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/hardware-completion-2026-10-29/tpu-load-weights.gif]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/hardware-completion-2026-10-29/tpu-load-weights.gif|Google TPU: анимация загрузки параметров в элементы матричного массива]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/hardware-completion-2026-10-29/tpu-dataflow.gif]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/hardware-completion-2026-10-29/tpu-dataflow.gif|Google TPU: активации проходят через загруженный массив, частичные суммы передаются дальше]]"
+        },
+        {
+          "old": "![[Assets/Sources/Harvard ML Systems/vol1/hw_acceleration/844618e87a09fb654cbccb727a9bef56c88aabea.svg]]",
+          "new": "![[Assets/Sources/Harvard ML Systems/vol1/hw_acceleration/844618e87a09fb654cbccb727a9bef56c88aabea.svg|Harvard: систолический массив, данные движутся по строкам, частичные суммы — по столбцам к выходным буферам]]"
+        },
+        {
+          "old": "### Which operand stays local?",
+          "new": "<a id=\"gpu-stationary\"></a>\n\n### Which operand stays local?"
+        }
+      ],
+      "after_sha256": "80be46b41eb3aaf380afa261ea7fc375929024eb5650aac011768327d088c99a"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти|GPU, CUDA и иерархия памяти]]",
+          "new": "- [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти|GPU, CUDA и иерархия памяти]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-grid|Один запуск, тысяча элементов]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-sm|Размещение блоков на SM]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-simt|SIMT и расхождение ветвей]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-occupancy|Occupancy и волны блоков]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-memory|Иерархия памяти GPU]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-coalescing|Coalescing и выравнивание]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-banks|Банки shared memory]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-swizzle|XOR swizzling]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-tiling|Блочное матричное умножение]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-fringe|Неполные плитки и нулевое дополнение]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-l2|Повторное использование через L2]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-tensor-cores|Матричные инструкции Tensor Cores]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-tmem|Tensor Memory (TMEM)]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-fusion|Объединение ядер и промежуточные массивы]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#torch-device-placement|Устройство тензора в PyTorch]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-streams|CUDA streams и события]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-double-buffer|Двойная буферизация входа]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-copy-overlap|Перекрытие передачи и вычислений: трассы]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-buffer-lifetimes|Готовность данных и время жизни буферов]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-hardware-mapping|Отображение операции на ускоритель]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-im2col|Свёртка как GEMM: im2col]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-layout|Логические оси и физическое размещение]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-placement|Размещение, выделение памяти и расписание]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-unified|Unified Memory и размещение страниц]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-soc|Неоднородные процессоры и fallback]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-fleet|Границы пакета, узла и кластера]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-systolic|Систолический массив]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-stationary|Weight-, output- и input-stationary]]"
+        }
+      ],
+      "before_sha256": "a3f864149dd14c6f7109d4e5f592a631e2ec097822c1ef39880d5fe448356742",
+      "after_sha256": "bd29cf8f9aff69a5365b81cf4d4065ed93cf2aa6d9643b498402df7fc4d2e704"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти|GPUs, CUDA, and the memory hierarchy]]",
+          "new": "- [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти|GPUs, CUDA, and the memory hierarchy]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-grid|Grid, blocks, and threads]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-sm|Block placement on SMs]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-simt|SIMT and branch divergence]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-occupancy|Occupancy and wave quantization]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-memory|GPU memory hierarchy]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-coalescing|Coalescing and alignment]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-banks|Shared-memory banks]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-swizzle|XOR swizzling]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-tiling|Tiled matrix multiplication]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-fringe|Fringe tiles and zero padding]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-l2|L2 reuse and block ordering]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-tensor-cores|Tensor Core matrix instructions]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-tmem|Tensor Memory (TMEM)]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-fusion|Kernel fusion and intermediate arrays]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#torch-device-placement|Tensor device placement in PyTorch]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-streams|CUDA streams and events]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-double-buffer|Double-buffered input]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-copy-overlap|Copy/compute overlap in profiler traces]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-buffer-lifetimes|Data readiness and buffer lifetimes]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-hardware-mapping|Mapping an operation to an accelerator]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-im2col|Convolution as GEMM: im2col]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-layout|Logical axes and physical tensor layout]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-placement|Placement, allocation, and scheduling]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-unified|Unified Memory and page residency]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-soc|Heterogeneous processors and fallback]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-fleet|Package, node, and fleet boundaries]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-systolic|A systolic array]]\n  - [[00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти#gpu-stationary|Weight-, output-, and input-stationary dataflows]]"
+        }
+      ],
+      "before_sha256": "090d86a50aa731a32568e5ad5a1ad0cd437492547db2b49fffc4f2a63928897a",
+      "after_sha256": "195dccc2e17179d219771e9fc8c86a743d8a13749b6bef8170fb9f1cb768d13e"
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "b7323c8cc49675ffa739d703c2bdc4075ad5178bbe9cf0f4bcb2421a3675ad7c",
+      "changes": [
+        {
+          "old": "assets:\n",
+          "new": "assets:\n  - {\"id\":\"curated-gpu-copy-395688a4a2fe\",\"asset\":\"00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/trace_streamed0_pinned0.png\",\"author\":\"Vincent Moens; PyTorch contributors\",\"title\":\"H2D transfer and independent multiplication: streamed0, pinned0\",\"source_url\":\"https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html\",\"source_image_url\":\"https://raw.githubusercontent.com/pytorch/tutorials/5672cd98a7671eda4d9122b10f8eec580f74d03e/_static/img/pinmem/trace_streamed0_pinned0.png\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/trace_streamed0_pinned0.png\",\"source_asset_sha256\":\"395688a4a2fe4cf94708052b95fb7634f6e5ab6e124ac92a3e1a350533ad5b6e\",\"sha256\":\"395688a4a2fe4cf94708052b95fb7634f6e5ab6e124ac92a3e1a350533ad5b6e\",\"commit\":\"5672cd98a7671eda4d9122b10f8eec580f74d03e\",\"license\":\"BSD-3-Clause\",\"license_url\":\"https://github.com/pytorch/tutorials/blob/5672cd98a7671eda4d9122b10f8eec580f74d03e/LICENSE\",\"license_evidence_url\":\"https://raw.githubusercontent.com/pytorch/tutorials/5672cd98a7671eda4d9122b10f8eec580f74d03e/LICENSE\",\"license_evidence\":\"site/public/licenses/pytorch-tutorials-5672cd98-BSD-3-Clause.txt\",\"license_evidence_sha256\":\"5703fcbe2d5dfcc48d486d26e4b9d2e48255c24602e1bd0270b60b8978116f86\",\"dimensions_px\":[1889,264],\"width\":1889,\"height\":264,\"bytes\":83185,\"modifications\":\"None. Complete original PNG copied byte-for-byte; no crop, redraw, relabeling, translation or resampling.\",\"derivation\":\"source-raster-copy\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"pinned-upstream-repository\",\"last_verified\":\"2026-11-04\",\"used_in\":[\"00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md\"]}\n  - {\"id\":\"curated-gpu-copy-dc999e2a1014\",\"asset\":\"00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/trace_streamed0_pinned1.png\",\"author\":\"Vincent Moens; PyTorch contributors\",\"title\":\"H2D transfer and independent multiplication: streamed0, pinned1\",\"source_url\":\"https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html\",\"source_image_url\":\"https://raw.githubusercontent.com/pytorch/tutorials/5672cd98a7671eda4d9122b10f8eec580f74d03e/_static/img/pinmem/trace_streamed0_pinned1.png\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/trace_streamed0_pinned1.png\",\"source_asset_sha256\":\"dc999e2a1014751c3ca11d2c1b5ac92feb69286f7351af9e4e4028379c0c4e4a\",\"sha256\":\"dc999e2a1014751c3ca11d2c1b5ac92feb69286f7351af9e4e4028379c0c4e4a\",\"commit\":\"5672cd98a7671eda4d9122b10f8eec580f74d03e\",\"license\":\"BSD-3-Clause\",\"license_url\":\"https://github.com/pytorch/tutorials/blob/5672cd98a7671eda4d9122b10f8eec580f74d03e/LICENSE\",\"license_evidence_url\":\"https://raw.githubusercontent.com/pytorch/tutorials/5672cd98a7671eda4d9122b10f8eec580f74d03e/LICENSE\",\"license_evidence\":\"site/public/licenses/pytorch-tutorials-5672cd98-BSD-3-Clause.txt\",\"license_evidence_sha256\":\"5703fcbe2d5dfcc48d486d26e4b9d2e48255c24602e1bd0270b60b8978116f86\",\"dimensions_px\":[1890,290],\"width\":1890,\"height\":290,\"bytes\":83389,\"modifications\":\"None. Complete original PNG copied byte-for-byte; no crop, redraw, relabeling, translation or resampling.\",\"derivation\":\"source-raster-copy\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"pinned-upstream-repository\",\"last_verified\":\"2026-11-04\",\"used_in\":[\"00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md\"]}\n  - {\"id\":\"curated-gpu-copy-6f5021b4b7d2\",\"asset\":\"00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/trace_streamed1_pinned0.png\",\"author\":\"Vincent Moens; PyTorch contributors\",\"title\":\"H2D transfer and independent multiplication: streamed1, pinned0\",\"source_url\":\"https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html\",\"source_image_url\":\"https://raw.githubusercontent.com/pytorch/tutorials/5672cd98a7671eda4d9122b10f8eec580f74d03e/_static/img/pinmem/trace_streamed1_pinned0.png\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/trace_streamed1_pinned0.png\",\"source_asset_sha256\":\"6f5021b4b7d27480fc4a774fd5727d731de2bb5537d2419ee325984df8780830\",\"sha256\":\"6f5021b4b7d27480fc4a774fd5727d731de2bb5537d2419ee325984df8780830\",\"commit\":\"5672cd98a7671eda4d9122b10f8eec580f74d03e\",\"license\":\"BSD-3-Clause\",\"license_url\":\"https://github.com/pytorch/tutorials/blob/5672cd98a7671eda4d9122b10f8eec580f74d03e/LICENSE\",\"license_evidence_url\":\"https://raw.githubusercontent.com/pytorch/tutorials/5672cd98a7671eda4d9122b10f8eec580f74d03e/LICENSE\",\"license_evidence\":\"site/public/licenses/pytorch-tutorials-5672cd98-BSD-3-Clause.txt\",\"license_evidence_sha256\":\"5703fcbe2d5dfcc48d486d26e4b9d2e48255c24602e1bd0270b60b8978116f86\",\"dimensions_px\":[1889,308],\"width\":1889,\"height\":308,\"bytes\":87483,\"modifications\":\"None. Complete original PNG copied byte-for-byte; no crop, redraw, relabeling, translation or resampling.\",\"derivation\":\"source-raster-copy\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"pinned-upstream-repository\",\"last_verified\":\"2026-11-04\",\"used_in\":[\"00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md\"]}\n  - {\"id\":\"curated-gpu-copy-69c37ff3b3f3\",\"asset\":\"00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/trace_streamed1_pinned1.png\",\"author\":\"Vincent Moens; PyTorch contributors\",\"title\":\"H2D transfer and independent multiplication: streamed1, pinned1\",\"source_url\":\"https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html\",\"source_image_url\":\"https://raw.githubusercontent.com/pytorch/tutorials/5672cd98a7671eda4d9122b10f8eec580f74d03e/_static/img/pinmem/trace_streamed1_pinned1.png\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/trace_streamed1_pinned1.png\",\"source_asset_sha256\":\"69c37ff3b3f381224519df17ca5d0c4c90e1e216e8e4b91e3137e83aed30258a\",\"sha256\":\"69c37ff3b3f381224519df17ca5d0c4c90e1e216e8e4b91e3137e83aed30258a\",\"commit\":\"5672cd98a7671eda4d9122b10f8eec580f74d03e\",\"license\":\"BSD-3-Clause\",\"license_url\":\"https://github.com/pytorch/tutorials/blob/5672cd98a7671eda4d9122b10f8eec580f74d03e/LICENSE\",\"license_evidence_url\":\"https://raw.githubusercontent.com/pytorch/tutorials/5672cd98a7671eda4d9122b10f8eec580f74d03e/LICENSE\",\"license_evidence\":\"site/public/licenses/pytorch-tutorials-5672cd98-BSD-3-Clause.txt\",\"license_evidence_sha256\":\"5703fcbe2d5dfcc48d486d26e4b9d2e48255c24602e1bd0270b60b8978116f86\",\"dimensions_px\":[1894,309],\"width\":1894,\"height\":309,\"bytes\":92727,\"modifications\":\"None. Complete original PNG copied byte-for-byte; no crop, redraw, relabeling, translation or resampling.\",\"derivation\":\"source-raster-copy\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"pinned-upstream-repository\",\"last_verified\":\"2026-11-04\",\"used_in\":[\"00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md\"]}\n"
+        }
+      ],
+      "after_sha256": "e5d3db47ce22126d1026d7cf36d88057aa9847057c4a80d9b66c15a405c2c8f2"
+    }
+  ],
+  "source_pin": "5672cd98a7671eda4d9122b10f8eec580f74d03e",
+  "verification": {
+    "date": "2026-11-04",
+    "status": "verified-local-delta",
+    "chapterSha256": "80be46b41eb3aaf380afa261ea7fc375929024eb5650aac011768327d088c99a",
+    "wholeOwnerRead": "Entire1382-line input freshly read in this owner pass. After additions,anchors and alt descriptions,entire final1732-line owner reread in1–300,301–625,626–950,951–1250,1251–1530,1531–EOF. No subsequent chapter edits.",
+    "preservation": "Six previous Python programs,all nine display equations,18 original image paths/bytes,source quotations and complete existing captions preserved. Added two programs,four complete source PNGs with direct attribution/full BSD notice,28 actual reference destinations per locale,and descriptive aliases for all22 images. Four-file exact reversible journal includes owner,registry and both indexes.",
+    "explanation": "Distinguishes host submission from device overlap using all four pinned/pageable × same/separate-stream traces. The multiply uses pre-existing t3_cuda,not the copied tensor; device stream labels and unequal horizontal scales cannot be treated as hardware IDs or speedup comparisons. Derives separate data-readiness,allocator-reuse and host-mutation constraints. Host source reusable after3ms copy; device input after10ms consumer. Two complete early-overwrite interleavings show mixed values.",
+    "source": "Full769-line Vincent Moens tutorial read in this owner pass,including all four profiler code paths and mutation experiments; selected trace section reread after recovery. Full selected PyTorch2.14.1 asynchronous/streams section307–416 read,including incorrect/corrected and no-read-dependency examples. Existing GPU foundations audit read; historical selected CS336/NVIDIA/Harvard comparisons retained as historical,not a new whole-course/PDF reading. Original corrected CUDA statements AST-compared to exact pinned docs bytes.",
+    "style": "no-ai-slop SKILL and eval read fully. Full final chapter reread; concrete causal explanation and examples retained rather than compressed into definitions. New exposition remains English; original quotations are unchanged. No translation pass.",
+    "cpu": {
+      "exit": 0,
+      "command": "uv run --offline --python 3.13 --with numpy --with torch python publishing/tools/check_gpu_copy_lifetimes.py",
+      "programs": 8,
+      "device": "CPU",
+      "cudaExecuted": false,
+      "scope": "All8 actual chapter programs execute,with both CUDA guards reportingFalse. Existing25 independently checked tiled products,sector/bank/XOR/occupancy/traffic/two-buffer checks pass.720 finite event orders enumerated;4 satisfy all three safety edges,and removing each permits a counterexample. Exact original corrected PyTorch statements match AST. This is logical CPU validation,not real DMA/CUDA execution,race reproduction or performance measurement."
+    },
+    "originals": {
+      "exit": 0,
+      "command": "node publishing/tools/prepare_gpu_copy_source_figures.mjs --check",
+      "figures": 4,
+      "pin": "5672cd98a7671eda4d9122b10f8eec580f74d03e",
+      "sourceFilesVerified": 6,
+      "scope": "All4 complete pinned PNGs byte-equal with dimensions; full tutorial source and BSD license hashes also checked. Full1525-byte license notice published unchanged. Helper can fetch pinned source bytes without private archive; no whole-checkout readiness inferred."
+    },
+    "tests": {
+      "files": 7,
+      "tests": 392,
+      "exit": 0,
+      "scope": "Current GPU preservation/semantics/source bytes/reference anchors,old GPU foundations,prior sequence-state and system-timeline journal chains,index synchronization,174 asset-registry tests and199 built-output tests. Added narrowly scoped registry checks for two already-pinned sequence-state objects omitted from the generic validator. Altered author/source/hash/license/crop metadata rejected; original figure files/rights records unchanged.",
+      "diagnostics": "Inherited Poppler source-PDF closepath diagnostics are non-fatal; no new PDF rendering or pixel comparison claimed.",
+      "receiptFollowup": "After recording the new whole-owner receipt,21 tests in6 files pass,including all85 current chapter hashes and progress counters.71 fresh +14 reused;67 remain."
+    },
+    "build": {
+      "exit": 0,
+      "pages": 2007,
+      "pagefindHtmlFiles": 2011,
+      "durationSeconds": 38.77,
+      "brokenInternalLinks": 0,
+      "bytes": 855260269,
+      "files": 5612,
+      "limit": 1000000000,
+      "headroom": 144739731
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-04-gpu-reader",
+      "desktop": "1280x900,617px content,document1265/1265.22 images load at correct native aspect ratios; nine display equations and ten tables fit,zero KaTeX errors. Four new original profiler screenshots inspected in the reader at2x; the three non-overlap traces panned to their right-hand kernels, fourth trace also inspected whole. Complete original captions and license links remain.18 inherited images unchanged except descriptive alt text; not a fresh enlarged inspection of every inherited image.",
+      "mobile": "375x812,328px content,document360/360.22 images fit and load,nine equations fit,zero KaTeX errors. New lifetime table fits328/328 with both last-reader values visible. Six inherited tables scroll inside their328px containers,not across the document. Overlap trace inspected at6x and panned; source labels require enlargement and horizontal viewing,not readable at inline width. Smooth keyboard scroll observed after settling at540px before final capture.",
+      "navigation": "Actual EN reference ->#gpu-copy-overlap,EN Next ->roofline with correct H1,and RU reference ->#gpu-buffer-lifetimes.28 unique subject anchors and links in each index. EN explicitly reports no separate English edition and retains mixed canonical text. Previous target points to introductory systems owner; temporary viewport reset before handoff.",
+      "transient": "Stale cross-turn CUA binding reported browser.user unavailable. Followed troubleshooting and reset only the UI session,then rebound same IAB3/tab1 without server restart."
+    },
+    "publication": "local-only; no stage,commit,push or deployment",
+    "remaining": [
+      "No CUDA device execution or reproduced profiler experiment; source traces are the author's measurements.",
+      "Two inherited CS336 source-figure permission records are not upgraded to named open licenses. Earlier source/pixel limitations remain separate from new BSD figures.",
+      "67 other owners still need this route pass; whole reads are not accepted chapters. Full course integration,public-checkout/Pages-base/frozen release checks and dev/Pages publication remain open."
+    ]
+  },
+  "source_files": [
+    {
+      "name": "trace_streamed0_pinned0.png",
+      "bytes": 83185,
+      "sha256": "395688a4a2fe4cf94708052b95fb7634f6e5ab6e124ac92a3e1a350533ad5b6e",
+      "dimensions": [
+        1889,
+        264
+      ]
+    },
+    {
+      "name": "trace_streamed0_pinned1.png",
+      "bytes": 83389,
+      "sha256": "dc999e2a1014751c3ca11d2c1b5ac92feb69286f7351af9e4e4028379c0c4e4a",
+      "dimensions": [
+        1890,
+        290
+      ]
+    },
+    {
+      "name": "trace_streamed1_pinned0.png",
+      "bytes": 87483,
+      "sha256": "6f5021b4b7d27480fc4a774fd5727d731de2bb5537d2419ee325984df8780830",
+      "dimensions": [
+        1889,
+        308
+      ]
+    },
+    {
+      "name": "trace_streamed1_pinned1.png",
+      "bytes": 92727,
+      "sha256": "69c37ff3b3f381224519df17ca5d0c4c90e1e216e8e4b91e3137e83aed30258a",
+      "dimensions": [
+        1894,
+        309
+      ]
+    },
+    {
+      "name": "pinmem_nonblock.py",
+      "bytes": 31606,
+      "sha256": "c19188e197f5bccb7c26be751ce894c71091c02470164a5431f3829bad604c33",
+      "dimensions": null
+    },
+    {
+      "name": "LICENSE",
+      "bytes": 1525,
+      "sha256": "5703fcbe2d5dfcc48d486d26e4b9d2e48255c24602e1bd0270b60b8978116f86",
+      "dimensions": null
+    }
+  ]
+}

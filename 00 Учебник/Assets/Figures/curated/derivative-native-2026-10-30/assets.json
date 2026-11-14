@@ -1,0 +1,75 @@
+[
+  {
+    "id": "curated-derivative-native-tangent-fcb32c3fa058",
+    "asset": "00 Учебник/Assets/Figures/curated/derivative-native-2026-10-30/d2l-function-tangent.svg",
+    "author": "Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola",
+    "source_url": "https://d2l.ai/chapter_preliminaries/calculus.html#visualization-utilities",
+    "source_image_url": "https://d2l.ai/_images/output_calculus_7e7694_56_0.svg",
+    "source_asset": "00 Учебник/Assets/Figures/curated/derivative-native-2026-10-30/d2l-function-tangent.svg",
+    "source_asset_sha256": "fcb32c3fa05846549df55720dc958478f9260507c4d1377a4b31d3940cf9bce2",
+    "sha256": "fcb32c3fa05846549df55720dc958478f9260507c4d1377a4b31d3940cf9bce2",
+    "bytes": 36313,
+    "source_viewbox": [
+      0,
+      0,
+      324.705811,
+      244.474996
+    ],
+    "source_code": "05 Источники/Originals/derivative-native-2026-10-30/calculus.md",
+    "source_code_url": "https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_preliminaries/calculus.md",
+    "source_code_sha256": "a325c626fd77f5be37d32579cd0a5cf4a75c9179c995bce08baa487e05026419",
+    "source_code_commit": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE",
+    "license_evidence": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+    "license_evidence_sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+    "public_license_copy": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+    "derivation": "source-svg-copy",
+    "modifications": "None. Complete original SVG copied byte-for-byte; no crop, redraw, relabeling or translation.",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-30",
+    "used_in": [
+      "00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md"
+    ],
+    "source_build": "Official D2L 1.0.3 SVG output; captured SHA-256 pins the exact file, not a claimed immutable asset URL."
+  },
+  {
+    "id": "curated-derivative-native-paths-897746e112a7",
+    "asset": "00 Учебник/Assets/Figures/curated/derivative-native-2026-10-30/d2l-chain-paths.svg",
+    "author": "Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola",
+    "source_url": "https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/multivariable-calculus.html#multivariate-chain-rule",
+    "source_image_url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/chain-net2.svg",
+    "source_asset": "00 Учебник/Assets/Figures/curated/derivative-native-2026-10-30/d2l-chain-paths.svg",
+    "source_asset_sha256": "897746e112a76eb09af174d5f79fbb49a936142567029d92d29a84d602e5cda6",
+    "sha256": "897746e112a76eb09af174d5f79fbb49a936142567029d92d29a84d602e5cda6",
+    "bytes": 16271,
+    "source_viewbox": [
+      0,
+      0,
+      141,
+      52
+    ],
+    "source_code": "05 Источники/Originals/derivative-native-2026-10-30/multivariable-calculus.md",
+    "source_code_url": "https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_appendix-mathematics-for-deep-learning/multivariable-calculus.md",
+    "source_code_sha256": "2064011aea85df2626ac6fba36db283b79c5d60ebdab1090cf62a76ecee8014d",
+    "source_code_commit": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE",
+    "license_evidence": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+    "license_evidence_sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+    "public_license_copy": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+    "derivation": "source-svg-copy",
+    "modifications": "None. Complete original SVG copied byte-for-byte; no crop, redraw, relabeling or translation.",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-30",
+    "used_in": [
+      "00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md"
+    ],
+    "source_figure": "22.4.2",
+    "commit": "23d7a5aecceee57d1292c56e90cce307f183bb0a"
+  }
+]

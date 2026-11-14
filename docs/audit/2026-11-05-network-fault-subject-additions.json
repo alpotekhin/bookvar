@@ -1,0 +1,567 @@
+{
+  "schema_version": 1,
+  "kind": "network-fault-subject-additions",
+  "review_date": "2026-11-05",
+  "files": [
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md",
+      "before_sha256": "d1fb604523c2e2b84e124fca81d47aafc06f2939def36a9e07853eef85eb975a",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-23\nlast_verified: 2026-10-23\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\nreference_terms:\n  - anchor: network-data-path\n    label: \"Путь тензора через GPU, NIC и сеть\"\n    label_en: \"The tensor path through GPU, NIC and network\"\n  - anchor: network-rdma-registration\n    label: \"RDMA: регистрация памяти, ключи и время жизни буфера\"\n    label_en: \"RDMA memory registration, keys and buffer lifetime\"\n  - anchor: network-gpudirect\n    label: \"GPUDirect RDMA и устранение промежуточной CPU-копии\"\n    label_en: \"GPUDirect RDMA and removing the CPU staging copy\"\n  - anchor: network-pcie-topology\n    label: \"PCIe/NUMA-топология и порядок GPU/RDMA-операций\"\n    label_en: \"PCIe/NUMA topology and GPU/RDMA ordering\"\n  - anchor: network-ib-roce\n    label: \"InfiniBand, RoCE, PFC и ECN при перегрузке\"\n    label_en: \"InfiniBand, RoCE, PFC and ECN under congestion\"\n  - anchor: network-lossy-roce\n    label: \"RoCE без PFC и границы lossless\"\n    label_en: \"RoCE without PFC and the limits of lossless transport\"\n  - anchor: network-bits-bytes\n    label: \"Gb/s и GB/s, задержка α и объём сообщения\"\n    label_en: \"Gb/s versus GB/s, latency α and message size\"\n  - anchor: network-ring-cost\n    label: \"Ring all-reduce: байты отправки и время\"\n    label_en: \"Ring all-reduce: sent bytes and time\"\n  - anchor: network-logical-physical\n    label: \"Логические отправки и счётчики физических портов\"\n    label_en: \"Logical sends and physical-port counters\"\n  - anchor: network-oversubscription\n    label: \"Oversubscription и bisection bandwidth\"\n    label_en: \"Oversubscription and bisection bandwidth\"\n  - anchor: network-hierarchical-reduction\n    label: \"Иерархический all-reduce и общий NIC узла\"\n    label_en: \"Hierarchical all-reduce and a shared node NIC\"\n  - anchor: network-rails\n    label: \"Rail-optimized сеть и реальные группы параллелизма\"\n    label_en: \"Rail-optimized networks and actual parallel groups\"\n  - anchor: checkpoint-storage-contention\n    label: \"Checkpoint, ввод данных и общие ресурсы хранилища\"\n    label_en: \"Checkpoint and input-data storage contention\"\n  - anchor: checkpoint-consistent-state\n    label: \"Согласованный снимок и состав training state\"\n    label_en: \"Consistent snapshots and the training state\"\n  - anchor: checkpoint-loader-state\n    label: \"Курсоры данных, prefetch, RNG и накопленные градиенты\"\n    label_en: \"Data cursors, prefetch, RNG and accumulated gradients\"\n  - anchor: checkpoint-state-alias\n    label: \"state_dict не замораживает живые тензоры\"\n    label_en: \"state_dict does not freeze live tensors\"\n  - anchor: dcp-plans-resharding\n    label: \"DCP: метаданные и пересечения сохранённых частей\"\n    label_en: \"DCP metadata and saved-shard intersections\"\n  - anchor: dcp-adapters-planners\n    label: \"Адаптер состояния, planner и storage backend\"\n    label_en: \"State adapters, planners and storage backends\"\n  - anchor: dcp-compatibility\n    label: \"Ключи, формы и границы совместимости DCP\"\n    label_en: \"DCP keys, shapes and compatibility boundaries\"\n  - anchor: dcp-two-to-three\n    label: \"Исполняемый DTensor resharding с двух процессов на три\"\n    label_en: \"Executable DTensor resharding from two ranks to three\"\n  - anchor: dcp-training-state\n    label: \"Stateful: модель, Adam, scheduler, RNG и курсор\"\n    label_en: \"Stateful model, Adam, scheduler, RNG and cursor\"\n  - anchor: dcp-next-step\n    label: \"Roundtrip: проверка следующего шага после восстановления\"\n    label_en: \"Roundtrip verification of the next training step\"\n  - anchor: dcp-fsdp-target\n    label: \"Подготовка FSDP2 до оптимизатора и загрузки DCP\"\n    label_en: \"Preparing FSDP2 before the optimizer and DCP load\"\n  - anchor: dcp-rng-world-size\n    label: \"RNG после изменения world size\"\n    label_en: \"RNG after changing world size\"\n  - anchor: checkpoint-async-staging\n    label: \"Асинхронное сохранение: staging и запись\"\n    label_en: \"Asynchronous checkpoint staging and upload\"\n  - anchor: checkpoint-two-futures\n    label: \"staging_completion и upload_completion\"\n    label_en: \"staging_completion and upload_completion\"\n  - anchor: checkpoint-cpu-async\n    label: \"Фоновая запись CPU-состояния и независимость копии\"\n    label_en: \"Background CPU-state saving and snapshot independence\"\n  - anchor: checkpoint-stager-lifetime\n    label: \"Владение async_stager и освобождение ресурсов\"\n    label_en: \"async_stager ownership and resource cleanup\"\n  - anchor: checkpoint-process-group\n    label: \"Отдельная процессная группа для checkpoint\"\n    label_en: \"A separate process group for checkpoint collectives\"\n  - anchor: checkpoint-queue-backpressure\n    label: \"Очередь незаписанных байтов и backpressure\"\n    label_en: \"Unwritten-byte queues and backpressure\"\n  - anchor: checkpoint-queue-memory\n    label: \"Размер очереди и память целых staging-буферов\"\n    label_en: \"Queue size versus whole staging-buffer memory\"\n  - anchor: checkpoint-deepspeed-ucp\n    label: \"DeepSpeed UCP: конвертация, resharding и отличие от DCP\"\n    label_en: \"DeepSpeed UCP conversion, resharding and DCP boundaries\"\n  - anchor: checkpoint-filesystem-writer\n    label: \"FileSystemWriter: fsync, metadata и перезапись\"\n    label_en: \"FileSystemWriter fsync, metadata and overwrite semantics\"\n  - anchor: checkpoint-immutable-generations\n    label: \"Неизменяемые поколения, manifest и latest\"\n    label_en: \"Immutable generations, manifests and latest pointers\"\n  - anchor: checkpoint-s3-publication\n    label: \"S3: отдельные ключи, условные записи и очистка\"\n    label_en: \"S3 keys, conditional writes and retention\"\n  - anchor: checkpoint-observability\n    label: \"Наблюдаемость сети, staging и восстановления\"\n    label_en: \"Observing the network, staging and recovery\"\n"
+        },
+        {
+          "old": "При передаче тензора между серверами данные читаются из памяти ускорителя,\n",
+          "new": "<a id=\"network-data-path\"></a>\n\nПри передаче тензора между серверами данные читаются из памяти ускорителя,\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/network-checkpoint-2026-10-23/jax-superpod-diagram.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/network-checkpoint-2026-10-23/jax-superpod-diagram.png|NVSwitch внутри узла и InfiniBand leaf/spine между узлами]]"
+        },
+        {
+          "old": "**RDMA** — remote direct memory access — позволяет адаптеру выполнять операции\n",
+          "new": "<a id=\"network-rdma-registration\"></a>\n\n**RDMA** — remote direct memory access — позволяет адаптеру выполнять операции\n"
+        },
+        {
+          "old": "**GPUDirect RDMA** расширяет этот путь на память NVIDIA GPU. При поддерживаемой\n",
+          "new": "<a id=\"network-gpudirect\"></a>\n\n**GPUDirect RDMA** расширяет этот путь на память NVIDIA GPU. При поддерживаемой\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/network-checkpoint-review-2026-10/openhackathons-gpudirect-rdma.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/network-checkpoint-review-2026-10/openhackathons-gpudirect-rdma.png|Путь GPU→CPU→NIC и прямой GPUDirect RDMA]]"
+        },
+        {
+          "old": "### Почему одинаковые GPU и NIC могут работать по-разному\n",
+          "new": "<a id=\"network-pcie-topology\"></a>\n\n### Почему одинаковые GPU и NIC могут работать по-разному\n"
+        },
+        {
+          "old": "### InfiniBand и RoCE: как сеть реагирует на перегрузку\n",
+          "new": "<a id=\"network-ib-roce\"></a>\n\n### InfiniBand и RoCE: как сеть реагирует на перегрузку\n"
+        },
+        {
+          "old": "PFC не является безусловным требованием каждого развёртывания RoCEv2.\n",
+          "new": "<a id=\"network-lossy-roce\"></a>\n\nPFC не является безусловным требованием каждого развёртывания RoCEv2.\n"
+        },
+        {
+          "old": "### Почему 400 Gb/s — не 400 GB/s\n",
+          "new": "<a id=\"network-bits-bytes\"></a>\n\n### Почему 400 Gb/s — не 400 GB/s\n"
+        },
+        {
+          "old": "### Расчёт\n",
+          "new": "<a id=\"network-ring-cost\"></a>\n\n### Расчёт\n"
+        },
+        {
+          "old": "Суммарно все участники отправят 716.1 TB. Это сумма логических отправок,\n",
+          "new": "<a id=\"network-logical-physical\"></a>\n\nСуммарно все участники отправят 716.1 TB. Это сумма логических отправок,\n"
+        },
+        {
+          "old": "## Топология и размещение групп параллелизма\n",
+          "new": "<a id=\"network-oversubscription\"></a>\n\n## Топология и размещение групп параллелизма\n"
+        },
+        {
+          "old": "Иерархическая коллективная операция использует различие между быстрыми\n",
+          "new": "<a id=\"network-hierarchical-reduction\"></a>\n\nИерархическая коллективная операция использует различие между быстрыми\n"
+        },
+        {
+          "old": "В rail-optimized сети соответствующие позиции GPU в разных серверах\n",
+          "new": "<a id=\"network-rails\"></a>\n\nВ rail-optimized сети соответствующие позиции GPU в разных серверах\n"
+        },
+        {
+          "old": "## Путь к хранилищу и одновременная запись checkpoints\n",
+          "new": "<a id=\"checkpoint-storage-contention\"></a>\n\n## Путь к хранилищу и одновременная запись checkpoints\n"
+        },
+        {
+          "old": "## Что должно попасть в согласованный снимок\n",
+          "new": "<a id=\"checkpoint-consistent-state\"></a>\n\n## Что должно попасть в согласованный снимок\n"
+        },
+        {
+          "old": "Номер пакета не всегда описывает позицию в данных. У потокового датасета\n",
+          "new": "<a id=\"checkpoint-loader-state\"></a>\n\nНомер пакета не всегда описывает позицию в данных. У потокового датасета\n"
+        },
+        {
+          "old": "Есть и более простая ловушка: `model.state_dict()` не создаёт независимую\n",
+          "new": "<a id=\"checkpoint-state-alias\"></a>\n\nЕсть и более простая ловушка: `model.state_dict()` не создаёт независимую\n"
+        },
+        {
+          "old": "## Как Distributed Checkpoint связывает части состояния\n",
+          "new": "<a id=\"dcp-plans-resharding\"></a>\n\n## Как Distributed Checkpoint связывает части состояния\n"
+        },
+        {
+          "old": "В процессе участвуют три разных механизма. `get_state_dict` и\n",
+          "new": "<a id=\"dcp-adapters-planners\"></a>\n\nВ процессе участвуют три разных механизма. `get_state_dict` и\n"
+        },
+        {
+          "old": "В документации PyTorch 2.14 есть несколько существенных границ применимости:\n",
+          "new": "<a id=\"dcp-compatibility\"></a>\n\nВ документации PyTorch 2.14 есть несколько существенных границ применимости:\n"
+        },
+        {
+          "old": "### Исполняемый пример изменения числа участников\n",
+          "new": "<a id=\"dcp-two-to-three\"></a>\n\n### Исполняемый пример изменения числа участников\n"
+        },
+        {
+          "old": "### Восстановление следующего шага, а не только весов\n",
+          "new": "<a id=\"dcp-training-state\"></a>\n\n### Восстановление следующего шага, а не только весов\n"
+        },
+        {
+          "old": "Зададим пять пакетов без расходования training RNG и сохраним состояние\n",
+          "new": "<a id=\"dcp-next-step\"></a>\n\nЗададим пять пакетов без расходования training RNG и сохраним состояние\n"
+        },
+        {
+          "old": "Для FSDP2 порядок подготовки целевого состояния сохраняется:\n",
+          "new": "<a id=\"dcp-fsdp-target\"></a>\n\nДля FSDP2 порядок подготовки целевого состояния сохраняется:\n"
+        },
+        {
+          "old": "В этом маленьком примере один генератор CPU и один курсор. В настоящем запуске\n",
+          "new": "<a id=\"dcp-rng-world-size\"></a>\n\nВ этом маленьком примере один генератор CPU и один курсор. В настоящем запуске\n"
+        },
+        {
+          "old": "## Асинхронная запись: память, очередь и обратное давление\n",
+          "new": "<a id=\"checkpoint-async-staging\"></a>\n\n## Асинхронная запись: память, очередь и обратное давление\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/network-checkpoint-review-2026-10/pytorch-async-checkpoint-flow.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/network-checkpoint-review-2026-10/pytorch-async-checkpoint-flow.png|Staging GPU→CPU и фоновая запись checkpoint во время обучения]]"
+        },
+        {
+          "old": "В DCP 2.14 результат `async_save` зависит от используемого механизма staging.\n",
+          "new": "<a id=\"checkpoint-two-futures\"></a>\n\nВ DCP 2.14 результат `async_save` зависит от используемого механизма staging.\n"
+        },
+        {
+          "old": "Для CPU-примера выше можно использовать обычный `async_save` без собственного\n",
+          "new": "<a id=\"checkpoint-cpu-async\"></a>\n\nДля CPU-примера выше можно использовать обычный `async_save` без собственного\n"
+        },
+        {
+          "old": "Фоновое сохранение само использует коллективы для согласования плана\n",
+          "new": "<a id=\"checkpoint-stager-lifetime\"></a>\n\n> If you provide an `async_stager`, call `close()` after the last checkpoint is saved.\n\n[PyTorch 2.14, async_save](https://docs.pytorch.org/docs/2.14/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict_saver.async_save).\nУ `DefaultStager` могут оставаться кэшированные хранилища тензоров\nи пул фоновых потоков. Завершение `upload_completion` сообщает об окончании\nзаписи; освобождение этих ресурсов — отдельное действие. Если stager создало\nприложение, оно дожидается последнего сохранения и вызывает `close()`.\nДля stager, созданного внутри `async_save`, библиотека выполняет очистку сама.\n\n<a id=\"checkpoint-process-group\"></a>\n\nФоновое сохранение само использует коллективы для согласования плана\n"
+        },
+        {
+          "old": "### Когда обучение производит снимки быстрее, чем хранилище их принимает\n",
+          "new": "<a id=\"checkpoint-queue-backpressure\"></a>\n\n### Когда обучение производит снимки быстрее, чем хранилище их принимает\n"
+        },
+        {
+          "old": "Объём очереди и выделенная память — не одно и то же. Писатель может держать\n",
+          "new": "<a id=\"checkpoint-queue-memory\"></a>\n\nОбъём очереди и выделенная память — не одно и то же. Писатель может держать\n"
+        },
+        {
+          "old": "## Другой формат для смены разбиения: DeepSpeed Universal Checkpointing\n",
+          "new": "<a id=\"checkpoint-deepspeed-ucp\"></a>\n\n## Другой формат для смены разбиения: DeepSpeed Universal Checkpointing\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/network-checkpoint-2026-10-23/deepspeed-ucp-flowchart.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/network-checkpoint-2026-10-23/deepspeed-ucp-flowchart.png|DeepSpeed UCP: сохранение, конвертация частей и продолжение обучения]]"
+        },
+        {
+          "old": "### Что делает FileSystemWriter, а что остаётся приложению\n",
+          "new": "<a id=\"checkpoint-filesystem-writer\"></a>\n\n### Что делает FileSystemWriter, а что остаётся приложению\n"
+        },
+        {
+          "old": "### Неизменяемые поколения и публикация указателя\n",
+          "new": "<a id=\"checkpoint-immutable-generations\"></a>\n\n### Неизменяемые поколения и публикация указателя\n"
+        },
+        {
+          "old": "### Почему для объектного хранилища нужен свой протокол\n",
+          "new": "<a id=\"checkpoint-s3-publication\"></a>\n\n### Почему для объектного хранилища нужен свой протокол\n"
+        },
+        {
+          "old": "## Наблюдаемость\n",
+          "new": "<a id=\"checkpoint-observability\"></a>\n\n## Наблюдаемость\n"
+        }
+      ],
+      "after_sha256": "7ba790a651497c9757e36648485c6ee6659a7ad50918f8949c27267ea8ef39cf"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md",
+      "before_sha256": "6476737a39c6ee04ba0e578ab21c60be64c47d8f80d9946c161cea4eaceb812a",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-23\nlast_verified: 2026-10-23\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\nreference_terms:\n  - anchor: fault-group-dependency\n    label: \"Почему один отказ останавливает всю коллективную группу\"\n    label_en: \"Why one failure stops the collective group\"\n  - anchor: fault-job-mtbf\n    label: \"MTBF всего запуска и независимость отказов\"\n    label_en: \"Whole-job MTBF and independent failures\"\n  - anchor: fault-failure-domains\n    label: \"Общие причины отказов и размещение копий\"\n    label_en: \"Shared failure domains and checkpoint replicas\"\n  - anchor: fault-silent-corruption\n    label: \"Падение, зависание, NaN и silent corruption\"\n    label_en: \"Crashes, hangs, NaNs and silent corruption\"\n  - anchor: fault-checksum-limits\n    label: \"Контрольная сумма и корректность сохранённых весов\"\n    label_en: \"Checksums versus correct saved weights\"\n  - anchor: fault-progress-detection\n    label: \"Heartbeat, timeout и наблюдаемый прогресс\"\n    label_en: \"Heartbeat, timeout and observed training progress\"\n  - anchor: fault-straggler-replacement\n    label: \"Straggler: когда окупается замена участника\"\n    label_en: \"When replacing a straggler pays off\"\n  - anchor: fault-young-cost\n    label: \"Young: вывод интервала из стоимости записи и повтора\"\n    label_en: \"Deriving the Young interval from save and replay costs\"\n  - anchor: fault-young-time-denominator\n    label: \"Время вычислений и доля прошедшего времени\"\n    label_en: \"Compute time versus elapsed-time fractions\"\n  - anchor: fault-daly-interval\n    label: \"Daly: compute-only интервал и уточнённое приближение\"\n    label_en: \"Daly compute-only intervals and the higher-order estimate\"\n  - anchor: fault-async-interval-limits\n    label: \"Почему пауза async-save не равна стоимости сохранения\"\n    label_en: \"Why an async-save pause is not the whole checkpoint cost\"\n  - anchor: fault-torchrun-contract\n    label: \"Torchrun: перезапуск всех workers и нестабильные ranks\"\n    label_en: \"Torchrun full-worker restarts and unstable ranks\"\n  - anchor: fault-recovery-sequence\n    label: \"Новая попытка, защита записи и контрольный шаг\"\n    label_en: \"New attempts, writer fencing and a verification step\"\n  - anchor: fault-recovery-levels\n    label: \"Восстановить веса, алгоритм или численную траекторию\"\n    label_en: \"Restoring weights, the algorithm or the numerical trajectory\"\n  - anchor: fault-consumed-data-cursor\n    label: \"Курсор потребления данных и prefetch\"\n    label_en: \"Consumed-data cursors versus prefetch\"\n  - anchor: fault-next-step-example\n    label: \"Пример Adam/dropout: следующий шаг и пропущенное состояние\"\n    label_en: \"Adam/dropout next-step and omitted-state example\"\n  - anchor: fault-world-size-batch\n    label: \"Новый world size, глобальный batch и нормировка\"\n    label_en: \"Changed world size, global batch and normalization\"\n  - anchor: fault-launcher-test\n    label: \"Torchrun/DDP/DCP: намеренный выход и реальное восстановление\"\n    label_en: \"Torchrun/DDP/DCP injected exit and actual recovery\"\n  - anchor: fault-local-rendezvous\n    label: \"Локальный rendezvous, loopback и bootstrap TCPStore\"\n    label_en: \"Local rendezvous, loopback and bootstrap TCPStore\"\n  - anchor: fault-resource-fragmentation\n    label: \"Фрагментация GPU и совместные ограничения CPU/памяти\"\n    label_en: \"GPU fragmentation and joint CPU/memory constraints\"\n  - anchor: fault-gang-scheduling\n    label: \"Совместное выделение ресурсов и взаимное ожидание\"\n    label_en: \"Gang allocation and circular resource waits\"\n  - anchor: fault-slurm-gang-meaning\n    label: \"Gang scheduling в Slurm: другое значение термина\"\n    label_en: \"The distinct Slurm meaning of gang scheduling\"\n  - anchor: fault-backfill\n    label: \"Backfill и время освобождения ресурсов\"\n    label_en: \"Backfill and resource-release times\"\n  - anchor: fault-priority-quota-fairshare\n    label: \"Приоритет, квота и fair-share\"\n    label_en: \"Priority, quota and fair-share\"\n  - anchor: fault-preemption\n    label: \"Вытеснение и время полной записи checkpoint\"\n    label_en: \"Preemption and the full checkpoint-write deadline\"\n  - anchor: fault-topology-placement\n    label: \"Размещение групп TP/EP/PP с учётом сети\"\n    label_en: \"Network-aware placement of TP/EP/PP groups\"\n  - anchor: fault-required-preferred\n    label: \"Kueue: обязательная и предпочтительная топология\"\n    label_en: \"Kueue required and preferred topology\"\n  - anchor: fault-wait-versus-start\n    label: \"Ждать компактного размещения или стартовать сразу\"\n    label_en: \"Waiting for compact placement versus starting now\"\n  - anchor: fault-elastic-expansion\n    label: \"Окупаемость расширения с сохранением и прогревом\"\n    label_en: \"Elastic expansion including save and warmup costs\"\n  - anchor: fault-controller-training-contract\n    label: \"Планировщик, контроллер и программа обучения\"\n    label_en: \"Scheduler, controller and training-program responsibilities\"\n  - anchor: fault-recovery-runbook\n    label: \"Runbook восстановления и границы испытаний\"\n    label_en: \"Recovery runbook and test boundaries\"\n"
+        },
+        {
+          "old": "Предположим, что модель обучается на 1024 GPU. Один процесс перестал отвечать\n",
+          "new": "<a id=\"fault-group-dependency\"></a>\n\nПредположим, что модель обучается на 1024 GPU. Один процесс перестал отвечать\n"
+        },
+        {
+          "old": "## Почему большой запуск прерывается чаще\n",
+          "new": "<a id=\"fault-job-mtbf\"></a>\n\n## Почему большой запуск прерывается чаще\n"
+        },
+        {
+          "old": "## Домены отказа и silent corruption\n",
+          "new": "<a id=\"fault-failure-domains\"></a>\n\n## Домены отказа и silent corruption\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/failure-domains.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/failure-domains.svg|Общие компоненты и иерархия доменов отказа]]"
+        },
+        {
+          "old": "### Падение, зависание и неверный результат\n",
+          "new": "<a id=\"fault-silent-corruption\"></a>\n\n### Падение, зависание и неверный результат\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fault-tolerance-review-2026-10/failure-types.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fault-tolerance-review-2026-10/failure-types.svg|Остановившийся участник и участник с неверным результатом]]"
+        },
+        {
+          "old": "Если файл испортился **после** вычисления его контрольной суммы, проверка\n",
+          "new": "<a id=\"fault-checksum-limits\"></a>\n\nЕсли файл испортился **после** вычисления его контрольной суммы, проверка\n"
+        },
+        {
+          "old": "### Как обнаруживать остановку обучения\n",
+          "new": "<a id=\"fault-progress-detection\"></a>\n\n### Как обнаруживать остановку обучения\n"
+        },
+        {
+          "old": "### Медленный участник и цена его замены\n",
+          "new": "<a id=\"fault-straggler-replacement\"></a>\n\n### Медленный участник и цена его замены\n"
+        },
+        {
+          "old": "## Интервал Young–Daly\n",
+          "new": "<a id=\"fault-young-cost\"></a>\n\n## Интервал Young–Daly\n"
+        },
+        {
+          "old": "Это расходы относительно полезного времени, а не непосредственно доля\n",
+          "new": "<a id=\"fault-young-time-denominator\"></a>\n\nЭто расходы относительно полезного времени, а не непосредственно доля\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fault-tolerance-2026-10-23/harvard-checkpoint-tradeoff.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fault-tolerance-2026-10-23/harvard-checkpoint-tradeoff.png|Стоимость checkpoint и повторной работы в модели Young]]"
+        },
+        {
+          "old": "### Что уточняет Daly\n",
+          "new": "<a id=\"fault-daly-interval\"></a>\n\n### Что уточняет Daly\n"
+        },
+        {
+          "old": "### Когда этой формулы недостаточно\n",
+          "new": "<a id=\"fault-async-interval-limits\"></a>\n\n### Когда этой формулы недостаточно\n"
+        },
+        {
+          "old": "## Elastic recovery\n",
+          "new": "<a id=\"fault-torchrun-contract\"></a>\n\n## Elastic recovery\n"
+        },
+        {
+          "old": "### Последовательность восстановления\n",
+          "new": "<a id=\"fault-recovery-sequence\"></a>\n\n### Последовательность восстановления\n"
+        },
+        {
+          "old": "### Что значит «продолжить с того же места»\n",
+          "new": "<a id=\"fault-recovery-levels\"></a>\n\n### Что значит «продолжить с того же места»\n"
+        },
+        {
+          "old": "Позиция чтения тоже неоднозначна. Загрузчик мог получить несколько батчей\n",
+          "new": "<a id=\"fault-consumed-data-cursor\"></a>\n\nПозиция чтения тоже неоднозначна. Загрузчик мог получить несколько батчей\n"
+        },
+        {
+          "old": "### Небольшая проверка: восстановились веса или обучение?\n",
+          "new": "<a id=\"fault-next-step-example\"></a>\n\n### Небольшая проверка: восстановились веса или обучение?\n"
+        },
+        {
+          "old": "### Изменение числа устройств\n",
+          "new": "<a id=\"fault-world-size-batch\"></a>\n\n### Изменение числа устройств\n"
+        },
+        {
+          "old": "### Проверка перезапуска всей группы\n",
+          "new": "<a id=\"fault-launcher-test\"></a>\n\n### Проверка перезапуска всей группы\n"
+        },
+        {
+          "old": "Для однокомпьютерного теста Gloo явно выбран loopback-интерфейс:\n",
+          "new": "<a id=\"fault-local-rendezvous\"></a>\n\nДля однокомпьютерного теста Gloo явно выбран loopback-интерфейс:\n"
+        },
+        {
+          "old": "### Свободная память, свободные GPU и фрагментация\n",
+          "new": "<a id=\"fault-resource-fragmentation\"></a>\n\n### Свободная память, свободные GPU и фрагментация\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fault-tolerance-2026-10-23/harvard-cluster-fragmentation.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fault-tolerance-2026-10-23/harvard-cluster-fragmentation.png|19 свободных GPU без одного полностью свободного узла]]"
+        },
+        {
+          "old": "### Совместное выделение ресурсов\n",
+          "new": "<a id=\"fault-gang-scheduling\"></a>\n\n### Совместное выделение ресурсов\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fault-tolerance-review-2026-10/gang-deadlock.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fault-tolerance-review-2026-10/gang-deadlock.svg|Частичное удержание ресурсов и совместное выделение всей группы]]"
+        },
+        {
+          "old": "Терминология зависит от системы. В Slurm отдельный механизм *gang scheduling*\n",
+          "new": "<a id=\"fault-slurm-gang-meaning\"></a>\n\nТерминология зависит от системы. В Slurm отдельный механизм *gang scheduling*\n"
+        },
+        {
+          "old": "### Очередь, backfill и вытеснение\n",
+          "new": "<a id=\"fault-backfill\"></a>\n\n### Очередь, backfill и вытеснение\n"
+        },
+        {
+          "old": "Приоритет и квота отвечают на другие вопросы. Приоритет определяет порядок\n",
+          "new": "<a id=\"fault-priority-quota-fairshare\"></a>\n\nПриоритет и квота отвечают на другие вопросы. Приоритет определяет порядок\n"
+        },
+        {
+          "old": "Вытеснение имеет цену: потерянные шаги, запись, повторное ожидание и загрузка.\n",
+          "new": "<a id=\"fault-preemption\"></a>\n\nВытеснение имеет цену: потерянные шаги, запись, повторное ожидание и загрузка.\n"
+        },
+        {
+          "old": "### Размещение с учётом сети\n",
+          "new": "<a id=\"fault-topology-placement\"></a>\n\n### Размещение с учётом сети\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/topology-placement.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/topology-placement.svg|Распределённое и компактное размещение связанных процессов]]"
+        },
+        {
+          "old": "В Kueue Topology-Aware Scheduling различаются обязательное и предпочтительное\n",
+          "new": "<a id=\"fault-required-preferred\"></a>\n\nВ Kueue Topology-Aware Scheduling различаются обязательное и предпочтительное\n"
+        },
+        {
+          "old": "### Расчёт решения\n",
+          "new": "<a id=\"fault-wait-versus-start\"></a>\n\n### Расчёт решения\n"
+        },
+        {
+          "old": "### Когда выгодно расширять запуск\n",
+          "new": "<a id=\"fault-elastic-expansion\"></a>\n\n### Когда выгодно расширять запуск\n"
+        },
+        {
+          "old": "### Планировщик, контроллер и программа обучения\n",
+          "new": "<a id=\"fault-controller-training-contract\"></a>\n\n### Планировщик, контроллер и программа обучения\n"
+        },
+        {
+          "old": "## Runbook проверки восстановления\n",
+          "new": "<a id=\"fault-recovery-runbook\"></a>\n\n## Runbook проверки восстановления\n"
+        }
+      ],
+      "after_sha256": "e4ac30d26ccd7e02c167019fc1b09d17565c70d0f12719f1778bd7b52e1fa7ed"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "dc673c7af5a77af28b1811629a274e7db51385e075c66fa51262f3062524ae48",
+      "after_sha256": "64e76cb93d7b108597095c52b11b8f3037420505179d6a21af9f8071ebb5b058",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints|Сеть, хранилище и распределённые checkpoints]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints|Сеть, хранилище и распределённые checkpoints]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-data-path|Путь тензора через GPU, NIC и сеть]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-rdma-registration|RDMA: регистрация памяти, ключи и время жизни буфера]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-gpudirect|GPUDirect RDMA и устранение промежуточной CPU-копии]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-pcie-topology|PCIe/NUMA-топология и порядок GPU/RDMA-операций]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-ib-roce|InfiniBand, RoCE, PFC и ECN при перегрузке]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-lossy-roce|RoCE без PFC и границы lossless]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-bits-bytes|Gb/s и GB/s, задержка α и объём сообщения]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-ring-cost|Ring all-reduce: байты отправки и время]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-logical-physical|Логические отправки и счётчики физических портов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-oversubscription|Oversubscription и bisection bandwidth]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-hierarchical-reduction|Иерархический all-reduce и общий NIC узла]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-rails|Rail-optimized сеть и реальные группы параллелизма]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-storage-contention|Checkpoint, ввод данных и общие ресурсы хранилища]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-consistent-state|Согласованный снимок и состав training state]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-loader-state|Курсоры данных, prefetch, RNG и накопленные градиенты]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-state-alias|state_dict не замораживает живые тензоры]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#dcp-plans-resharding|DCP: метаданные и пересечения сохранённых частей]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#dcp-adapters-planners|Адаптер состояния, planner и storage backend]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#dcp-compatibility|Ключи, формы и границы совместимости DCP]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#dcp-two-to-three|Исполняемый DTensor resharding с двух процессов на три]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#dcp-training-state|Stateful: модель, Adam, scheduler, RNG и курсор]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#dcp-next-step|Roundtrip: проверка следующего шага после восстановления]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#dcp-fsdp-target|Подготовка FSDP2 до оптимизатора и загрузки DCP]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#dcp-rng-world-size|RNG после изменения world size]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-async-staging|Асинхронное сохранение: staging и запись]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-two-futures|staging_completion и upload_completion]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-cpu-async|Фоновая запись CPU-состояния и независимость копии]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-stager-lifetime|Владение async_stager и освобождение ресурсов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-process-group|Отдельная процессная группа для checkpoint]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-queue-backpressure|Очередь незаписанных байтов и backpressure]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-queue-memory|Размер очереди и память целых staging-буферов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-deepspeed-ucp|DeepSpeed UCP: конвертация, resharding и отличие от DCP]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-filesystem-writer|FileSystemWriter: fsync, metadata и перезапись]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-immutable-generations|Неизменяемые поколения, manifest и latest]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-s3-publication|S3: отдельные ключи, условные записи и очистка]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-observability|Наблюдаемость сети, staging и восстановления]]\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration|Отказоустойчивость и управление вычислительным кластером]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration|Отказоустойчивость и управление вычислительным кластером]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-group-dependency|Почему один отказ останавливает всю коллективную группу]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-job-mtbf|MTBF всего запуска и независимость отказов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-failure-domains|Общие причины отказов и размещение копий]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-silent-corruption|Падение, зависание, NaN и silent corruption]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-checksum-limits|Контрольная сумма и корректность сохранённых весов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-progress-detection|Heartbeat, timeout и наблюдаемый прогресс]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-straggler-replacement|Straggler: когда окупается замена участника]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-young-cost|Young: вывод интервала из стоимости записи и повтора]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-young-time-denominator|Время вычислений и доля прошедшего времени]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-daly-interval|Daly: compute-only интервал и уточнённое приближение]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-async-interval-limits|Почему пауза async-save не равна стоимости сохранения]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-torchrun-contract|Torchrun: перезапуск всех workers и нестабильные ranks]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-recovery-sequence|Новая попытка, защита записи и контрольный шаг]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-recovery-levels|Восстановить веса, алгоритм или численную траекторию]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-consumed-data-cursor|Курсор потребления данных и prefetch]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-next-step-example|Пример Adam/dropout: следующий шаг и пропущенное состояние]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-world-size-batch|Новый world size, глобальный batch и нормировка]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-launcher-test|Torchrun/DDP/DCP: намеренный выход и реальное восстановление]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-local-rendezvous|Локальный rendezvous, loopback и bootstrap TCPStore]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-resource-fragmentation|Фрагментация GPU и совместные ограничения CPU/памяти]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-gang-scheduling|Совместное выделение ресурсов и взаимное ожидание]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-slurm-gang-meaning|Gang scheduling в Slurm: другое значение термина]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-backfill|Backfill и время освобождения ресурсов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-priority-quota-fairshare|Приоритет, квота и fair-share]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-preemption|Вытеснение и время полной записи checkpoint]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-topology-placement|Размещение групп TP/EP/PP с учётом сети]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-required-preferred|Kueue: обязательная и предпочтительная топология]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-wait-versus-start|Ждать компактного размещения или стартовать сразу]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-elastic-expansion|Окупаемость расширения с сохранением и прогревом]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-controller-training-contract|Планировщик, контроллер и программа обучения]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-recovery-runbook|Runbook восстановления и границы испытаний]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "5eff849992d87b05da860a9374b07339f3fa41ca84d1dc177d6dcde4e7b5adf1",
+      "after_sha256": "8dfb4660c3f3dfb148f23ce9d89ec213d4f89dc81c0e05cb33d9575194efc7a1",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints|Networks, storage, and distributed checkpoints]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints|Networks, storage, and distributed checkpoints]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-data-path|The tensor path through GPU, NIC and network]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-rdma-registration|RDMA memory registration, keys and buffer lifetime]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-gpudirect|GPUDirect RDMA and removing the CPU staging copy]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-pcie-topology|PCIe/NUMA topology and GPU/RDMA ordering]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-ib-roce|InfiniBand, RoCE, PFC and ECN under congestion]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-lossy-roce|RoCE without PFC and the limits of lossless transport]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-bits-bytes|Gb/s versus GB/s, latency α and message size]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-ring-cost|Ring all-reduce: sent bytes and time]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-logical-physical|Logical sends and physical-port counters]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-oversubscription|Oversubscription and bisection bandwidth]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-hierarchical-reduction|Hierarchical all-reduce and a shared node NIC]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#network-rails|Rail-optimized networks and actual parallel groups]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-storage-contention|Checkpoint and input-data storage contention]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-consistent-state|Consistent snapshots and the training state]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-loader-state|Data cursors, prefetch, RNG and accumulated gradients]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-state-alias|state_dict does not freeze live tensors]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#dcp-plans-resharding|DCP metadata and saved-shard intersections]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#dcp-adapters-planners|State adapters, planners and storage backends]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#dcp-compatibility|DCP keys, shapes and compatibility boundaries]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#dcp-two-to-three|Executable DTensor resharding from two ranks to three]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#dcp-training-state|Stateful model, Adam, scheduler, RNG and cursor]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#dcp-next-step|Roundtrip verification of the next training step]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#dcp-fsdp-target|Preparing FSDP2 before the optimizer and DCP load]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#dcp-rng-world-size|RNG after changing world size]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-async-staging|Asynchronous checkpoint staging and upload]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-two-futures|staging_completion and upload_completion]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-cpu-async|Background CPU-state saving and snapshot independence]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-stager-lifetime|async_stager ownership and resource cleanup]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-process-group|A separate process group for checkpoint collectives]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-queue-backpressure|Unwritten-byte queues and backpressure]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-queue-memory|Queue size versus whole staging-buffer memory]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-deepspeed-ucp|DeepSpeed UCP conversion, resharding and DCP boundaries]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-filesystem-writer|FileSystemWriter fsync, metadata and overwrite semantics]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-immutable-generations|Immutable generations, manifests and latest pointers]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-s3-publication|S3 keys, conditional writes and retention]]\n  - [[00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints#checkpoint-observability|Observing the network, staging and recovery]]\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration|Fault tolerance and fleet orchestration]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration|Fault tolerance and fleet orchestration]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-group-dependency|Why one failure stops the collective group]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-job-mtbf|Whole-job MTBF and independent failures]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-failure-domains|Shared failure domains and checkpoint replicas]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-silent-corruption|Crashes, hangs, NaNs and silent corruption]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-checksum-limits|Checksums versus correct saved weights]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-progress-detection|Heartbeat, timeout and observed training progress]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-straggler-replacement|When replacing a straggler pays off]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-young-cost|Deriving the Young interval from save and replay costs]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-young-time-denominator|Compute time versus elapsed-time fractions]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-daly-interval|Daly compute-only intervals and the higher-order estimate]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-async-interval-limits|Why an async-save pause is not the whole checkpoint cost]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-torchrun-contract|Torchrun full-worker restarts and unstable ranks]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-recovery-sequence|New attempts, writer fencing and a verification step]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-recovery-levels|Restoring weights, the algorithm or the numerical trajectory]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-consumed-data-cursor|Consumed-data cursors versus prefetch]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-next-step-example|Adam/dropout next-step and omitted-state example]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-world-size-batch|Changed world size, global batch and normalization]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-launcher-test|Torchrun/DDP/DCP injected exit and actual recovery]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-local-rendezvous|Local rendezvous, loopback and bootstrap TCPStore]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-resource-fragmentation|GPU fragmentation and joint CPU/memory constraints]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-gang-scheduling|Gang allocation and circular resource waits]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-slurm-gang-meaning|The distinct Slurm meaning of gang scheduling]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-backfill|Backfill and resource-release times]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-priority-quota-fairshare|Priority, quota and fair-share]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-preemption|Preemption and the full checkpoint-write deadline]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-topology-placement|Network-aware placement of TP/EP/PP groups]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-required-preferred|Kueue required and preferred topology]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-wait-versus-start|Waiting for compact placement versus starting now]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-elastic-expansion|Elastic expansion including save and warmup costs]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-controller-training-contract|Scheduler, controller and training-program responsibilities]]\n  - [[00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration#fault-recovery-runbook|Recovery runbook and test boundaries]]\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "3a058e16e2d217b34cb5959a30a52457cdbd566ed589f971300c5d6f98454db4",
+      "after_sha256": "f08a3a4056a2d6e6e019f7c671527a7aa5c040d6e87b5cf8516547065a5a4b72",
+      "changes": [
+        {
+          "old": "    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/failure-domains.svg\n",
+          "new": "    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/failure-domains.svg\n    sha256: 8135ed6d8906cda90ab36202acd01a91827f617ce72a63f09956cf9eda3e062b\n"
+        },
+        {
+          "old": "    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/topology-placement.svg\n",
+          "new": "    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/topology-placement.svg\n    sha256: 239a923a5807ef0c575f6854463c7f5a4e1027610ceb22d565e342f4898e7d56\n"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "status": "verified-local-delta",
+    "scope": "Two complete canonical owners reviewed. Network/checkpoints: 36 subjects per locale and a source-backed stager-cleanup paragraph. Fault tolerance: 31 subjects per locale, navigation-only changes. All ten original figures, ten Python programs and prior explanations retained. No translation or release.",
+    "fullReads": [
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md",
+        "input": {
+          "sha256": "d1fb604523c2e2b84e124fca81d47aafc06f2939def36a9e07853eef85eb975a",
+          "lines": 1017,
+          "ranges": [
+            "1-200",
+            "201-400",
+            "401-600",
+            "601-800",
+            "801-1017"
+          ]
+        },
+        "final": {
+          "sha256": "7ba790a651497c9757e36648485c6ee6659a7ad50918f8949c27267ea8ef39cf",
+          "lines": 1207,
+          "ranges": [
+            "1-215",
+            "216-450",
+            "451-690",
+            "691-930",
+            "931-1207"
+          ]
+        }
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md",
+        "input": {
+          "sha256": "6476737a39c6ee04ba0e578ab21c60be64c47d8f80d9946c161cea4eaceb812a",
+          "lines": 846,
+          "ranges": [
+            "1-210",
+            "211-420",
+            "421-630",
+            "631-846"
+          ]
+        },
+        "final": {
+          "sha256": "e4ac30d26ccd7e02c167019fc1b09d17565c70d0f12719f1778bd7b52e1fa7ed",
+          "lines": 1002,
+          "ranges": [
+            "1-235",
+            "236-480",
+            "481-745",
+            "746-1002"
+          ]
+        }
+      }
+    ],
+    "editorial": "Full explanations and original source language preserved. Added descriptive image alternatives and exact subject anchors rather than competing short definitions. The new stager paragraph separates upload completion from cleanup and names resource ownership; final text read against no-ai-slop with project qualifications. No chapter edits after the final whole reads.",
+    "sourceComparison": {
+      "networkBaseline": "Exact input hash matches docs/audit/2026-10-23-network-checkpoints.md. Its source comparisons are reused only for unchanged content. Both October 13 and October 23 audit reports and the complete 516-line example checker reread.",
+      "faultBaseline": "Input differs from the accepted October 23 owner only by the October 29 Next-footer change. Inverting that exact footer reproduces 1d9f922994ef80300a2f796e620f1b66ad9faa80c66c97689731cdf46909900e. Both October 14 and October 23 audit reports and the complete 123-line checker reread.",
+      "fresh": [
+        {
+          "url": "https://docs.pytorch.org/docs/2.14/distributed.checkpoint.html",
+          "sections": "DCP save/load, AsyncSaveResponse, async_save, AsyncStager, DefaultStager/close, BlockingAsyncStager and Stateful. New 13-word quoted cleanup instruction attributed directly. No claim to read every line of the entire API page."
+        },
+        {
+          "url": "https://docs.pytorch.org/docs/2.14/elastic/run.html",
+          "sections": "Failure modes, membership changes and important notices: full worker-group restart, unstable ranks/WORLD_SIZE and checkpoint recovery."
+        }
+      ],
+      "registry": "Two inherited SHA fields were absent. Fetched the exact pinned Harvard SVG URLs into memory and compared complete bytes to local originals; added only the missing hashes. Attribution, source commit and CC BY-NC-SA 4.0 records retained.",
+      "pinnedAssets": [
+        {
+          "local": "00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/failure-domains.svg",
+          "url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fault_tolerance/images/svg/failure-domains.svg",
+          "sha256": "8135ed6d8906cda90ab36202acd01a91827f617ce72a63f09956cf9eda3e062b",
+          "bytes": 10227
+        },
+        {
+          "local": "00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/topology-placement.svg",
+          "url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fleet_orchestration/images/svg/topology-placement.svg",
+          "sha256": "239a923a5807ef0c575f6854463c7f5a4e1027610ceb22d565e342f4898e7d56",
+          "bytes": 11749
+        }
+      ],
+      "limits": "No fresh whole Harvard/course, Daly paper, Slurm or Kueue reread is inferred from these bounded API/source checks."
+    },
+    "examples": {
+      "network": {
+        "exit": 0,
+        "torch": "2.14.1",
+        "numpy": "2.5.4",
+        "python": "3.13",
+        "publishedPrograms": 8,
+        "executedChapterSha256": "d1fb604523c2e2b84e124fca81d47aafc06f2939def36a9e07853eef85eb975a",
+        "log": "/var/tmp/bookvar-network-examples-20261105.log",
+        "scope": "All eight actual published programs execute. Snapshot alias control; full single-CPU Adam/dropout/scheduler/RNG/cursor roundtrip with four omission controls; actual writer held until live mutation; 2-rank save to 3-rank DTensor/FSDP2 load and next-step Adam comparison; local generation-publication negative controls. FSDP2 comparison has no dropout.",
+        "limits": "CPU/Gloo only. No CUDA/NCCL/RDMA performance, multihost filesystem, power-loss durability, S3 runtime, TP/EP/HSDP/GPU resharding, DeepSpeed runtime or identical stochastic trajectory across world-size changes."
+      },
+      "fault": {
+        "exit": 0,
+        "torch": "2.14.1",
+        "publishedPrograms": 2,
+        "executedChapterSha256": "6476737a39c6ee04ba0e578ab21c60be64c47d8f80d9946c161cea4eaceb812a",
+        "log": "/var/tmp/bookvar-fault-examples-20261105.log",
+        "scope": "Actual CPU dropout/Adam/StepLR next-step program with three omission controls; Young/Daly, batch, placement, expansion and straggler arithmetic. Actual published torchrun/DDP/DCP program runs two Gloo ranks, injects rank-1 exit 23, kills/restarts the group, loads completed step 2 and verifies step 3 against FP64 reference at rtol1e-11/atol1e-12.",
+        "pids": {
+          "attempt0": [
+            26515,
+            26516
+          ],
+          "attempt1": [
+            26525,
+            26526
+          ]
+        },
+        "limits": "Local macOS loopback with isolated rendezvous bootstrap. No GPU/NCCL, multihost/node/power failure, world-size change, scheduler deployment or live Kubernetes mutation."
+      },
+      "revisionBinding": "Programs ran on the complete inputs before navigation edits. Exact-inverse tests bind every code and mathematical body to those inputs. The new prose cleanup contract is documentation-checked, not a new GPU/custom-stager runtime experiment."
+    },
+    "checks": {
+      "scopedAndRegistry": {
+        "exit": 0,
+        "files": 4,
+        "tests": 194,
+        "log": "/var/tmp/bookvar-network-fault-scoped-final-20261105.log",
+        "limits": "Includes all 178 asset-registry tests and prior EP/FSDP tests. Poppler emitted six closepath warnings; all tests passed. Do not sum overlapping suites as unique tests."
+      },
+      "build": {
+        "exit": 0,
+        "pages": 2009,
+        "pagefindFiles": 2013,
+        "seconds": 30.14,
+        "log": "/var/tmp/bookvar-network-fault-build-final-20261105.log"
+      },
+      "html": {
+        "exit": 0,
+        "tests": 214,
+        "log": "/var/tmp/bookvar-network-fault-output-20261105.log"
+      },
+      "links": {
+        "exit": 0,
+        "brokenInternal": 0,
+        "log": "/var/tmp/bookvar-network-fault-links-20261105.log"
+      },
+      "size": {
+        "exit": 0,
+        "bytes": 856735080,
+        "files": 5626,
+        "limit": 1000000000,
+        "headroom": 143264920
+      },
+      "topicIndex": {
+        "exit": 0,
+        "topics": 153,
+        "log": "/var/tmp/bookvar-network-fault-topics-20261105.log"
+      },
+      "receipt": {
+        "exit": 0,
+        "files": 4,
+        "tests": 18,
+        "receiptTests": 2,
+        "currentHashMatches": 109,
+        "unreadOwnersInRoutePass": 44,
+        "log": "/var/tmp/bookvar-network-fault-receipts-final-20261105.log",
+        "scope": "Current network/fault, prior EP/FSDP preservation and actual whole-owner receipt tests. Overlaps the earlier194-test suite."
+      },
+      "scopedWhitespace": {
+        "exit": 0,
+        "scope": "Two owners, both indexes, registry, current/root audits, baseline tools and affected tests."
+      }
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-05-network-fault-reader",
+      "network": {
+        "desktop": "Default1280x720, document1280/1280. All four original figures and complete captions personally inspected in viewer. Four display equations and three tables fit632/632; zero KaTeX errors.",
+        "mobile": "375x812, document375/375, reader343px. Four figures preserve native proportions; four displays and three tables fit343/343; zero KaTeX errors. UCP original enlarged2.5x and panned between measured22 and538.5 (client375/scroll914); no exact-edge claim. New stager paragraph inspected inline and captured separately after explicitly scrolling its quote into view.",
+        "navigation": "Actual RU reference to #checkpoint-stager-lifetime and EN reference to #dcp-two-to-three; targets unique. EN discloses no separate edition. Actual EN Next opens fault-tolerance owner."
+      },
+      "fault": {
+        "desktop": "Default1280x720. All six original figures and full captions personally inspected: failure domains, failure types, Young graph, fragmentation, gang allocation and placement. Eight display equations and three tables fit632/632; zero KaTeX errors. Nine Markdown math bodies include one inline global-batch equation.",
+        "mobile": "375x812, document375/375, reader343px. Six figures preserve proportions; eight displays and three tables fit343/343, zero KaTeX errors. Placement original inspected at2.5x at measured positions282,84 and460.5 (client375/scroll914); readable worker/leaf/spine and comparison labels. No exact-edge or all-six enlarged-mobile claim.",
+        "navigation": "Actual RU reference to #fault-launcher-test and EN reference to #fault-daly-interval; targets unique. EN fallback explicit. Actual Next Choose a module opens /en/textbook/#specialist-modules. Russian interface and normal viewport restored."
+      },
+      "recovery": "Earlier truncated image output was not counted: Young was freshly viewed and failure-types screenshot explicitly reopened. No screenshot of the unrelated adapters paragraph was reported as a stager check."
+    },
+    "remaining": [
+      "After registering these two whole-owner reads:95 fresh plus14 reused=109 of153,44 unread. Reading is not explanation/source-completeness acceptance.",
+      "Next: fine-tuning/PEFT and the remaining post-training, synthetic-data, deployment, retrieval, multimodal, agents and recommender owners. Do not restart unchanged, hash-pinned chapters.",
+      "Thematic course completeness, existing figure/rights gaps, public-checkout/Pages-base checks and the authorized dev/Pages release remain open."
+    ]
+  }
+}

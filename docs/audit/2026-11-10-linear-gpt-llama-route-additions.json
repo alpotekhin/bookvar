@@ -1,0 +1,279 @@
+{
+  "date": "2026-11-10",
+  "scope": "Connect the existing GPT-1 → GPT-2 → GPT-3 → LLaMA chapters in the canonical Russian and English reading order. Place T5 immediately before GPT-1 without moving or renaming its source or URL.",
+  "review": {
+    "preservation": "Changes are restricted to navigation and three short transitions in each locale. Code fences, figure embeds and their captions are unchanged. The original GPT-3-to-T5 cross-reference and its fragment aliases are retained.",
+    "verification": "Root build: 2073 pages, 277 built-output tests, 767 publication tests passed and 13 skipped, 153 topic owners checked, zero broken internal links. In Chrome, followed the actual Previous/Next controls across all six pages and checked the sidebar order at 1280 px in Russian and 375 px in both locales. Five representative originals loaded with unchanged aspect ratios and attributed captions; inspected screenshots of the BERT/GPT comparison, the GPT-3 prompt and the LLaMA FFN, including zoom and horizontal pan. No KaTeX error markers in the visited pages. This is navigation and visual verification, not a second whole-chapter content audit.",
+    "status": "Local reader candidate. No branch update or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+      "before_sha256": "0cce42e115bc2a8c453047ce060f7a67dac104a9eae45ed1b899a49f4d921741",
+      "after_sha256": "56cea5931a53b71e9e450565cb3bf8e0558870cf646c841b98135cc9ff73eebe",
+      "lines": 1322,
+      "changes": [
+        {
+          "old": "status: canonical\nlast_updated: 2026-10-29\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]\"\nreference_terms:\n  - label: Whole-word masking — выбор целых слов\n    label_en: Whole-word masking — grouped targets\n",
+          "new": "status: canonical\nlast_updated: 2026-10-29\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\nreference_terms:\n  - label: Whole-word masking — выбор целых слов\n    label_en: Whole-word masking — grouped targets\n"
+        },
+        {
+          "old": "и социальные смещения. Средний результат benchmark не устанавливает\nустойчивость к новому домену и не проверяет достоверность всех предсказаний.\n\nСледующая [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|глава о GPT-1]]\nразбирает причинное предобучение и дообучение на размеченных задачах.\n\n## Источники и дальнейшее чтение\n\n",
+          "new": "и социальные смещения. Средний результат benchmark не устанавливает\nустойчивость к новому домену и не проверяет достоверность всех предсказаний.\n\nВ [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]] энкодер тоже читает вход в обе стороны. Его состояния\nпередаются декодеру, который выдаёт ответ в виде текста.\n\n## Источники и дальнейшее чтение\n\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/04 Вопросы/100 вопросов по NLP|Вопросы по NLP]].\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]] ·\n**Дальше:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]\n",
+          "new": "- [[02 Areas/ML & DL/04 Вопросы/100 вопросов по NLP|Вопросы по NLP]].\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]] ·\n**Дальше:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md",
+      "before_sha256": "b7a4f3f2d0755a7b495e98fe29a85132bb3285dd9aae43bc6ba3ac85831fe7f1",
+      "after_sha256": "c2bce737a2126916fb71e0828ef85b17a9e50645882bed7cd5c00e8ad67de17e",
+      "lines": 1306,
+      "changes": [
+        {
+          "old": "status: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"0cce42e115bc2a8c453047ce060f7a67dac104a9eae45ed1b899a49f4d921741\"\ntranslation_reviewed: \"2026-10-29\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md\"\nlast_updated: 2026-10-29\n",
+          "new": "status: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"56cea5931a53b71e9e450565cb3bf8e0558870cf646c841b98135cc9ff73eebe\"\ntranslation_reviewed: \"2026-10-29\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md\"\nlast_updated: 2026-10-29\n"
+        },
+        {
+          "old": "  - https://aclanthology.org/2020.tacl-1.5/\n  - https://arxiv.org/abs/1909.11942v6\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]\"\n---\n\n# BERT, RoBERTa, and DeBERTa\n",
+          "new": "  - https://aclanthology.org/2020.tacl-1.5/\n  - https://arxiv.org/abs/1909.11942v6\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\n---\n\n# BERT, RoBERTa, and DeBERTa\n"
+        },
+        {
+          "old": "biases. A mean benchmark result does not establish robustness to a\nnew domain or the correctness of every prediction.\n\nThe [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|next chapter, GPT-1]],\nexamines causal pre-training and supervised fine-tuning.\n\n## Sources and further reading\n\n",
+          "new": "biases. A mean benchmark result does not establish robustness to a\nnew domain or the correctness of every prediction.\n\nThe encoder in [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]] also reads in both directions. Its decoder\nuses those states to generate the answer as text.\n\n## Sources and further reading\n\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/04 Вопросы/100 вопросов по NLP|NLP questions]].\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three architectural patterns]] ·\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].\n",
+          "new": "- [[02 Areas/ML & DL/04 Вопросы/100 вопросов по NLP|NLP questions]].\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three architectural patterns]] ·\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]].\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "before_sha256": "1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc",
+      "after_sha256": "c0a782f948d6f46fce8dfb29c8f06a684b2115a2fc5f182995fd74cf423a1a33",
+      "lines": 828,
+      "changes": [
+        {
+          "old": "type: textbook-chapter\nstatus: canonical\nlast_updated: 2026-10-22\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура]]\"\nprimary_sources:\n  - https://jmlr.org/papers/v21/20-074.html\n  - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4\n",
+          "new": "type: textbook-chapter\nstatus: canonical\nlast_updated: 2026-10-22\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]\"\nprimary_sources:\n  - https://jmlr.org/papers/v21/20-074.html\n  - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4\n"
+        },
+        {
+          "old": "Префикс задачи, обучение на смеси supervised задач и обобщение\nна невиданные инструкции нужно проверять как разные свойства.\n\nДалее маршрут возвращается к decoder-only моделям:\n[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|LLaMA]].\n\n## Источники и дальнейшее чтение\n\n",
+          "new": "Префикс задачи, обучение на смеси supervised задач и обобщение\nна невиданные инструкции нужно проверять как разные свойства.\n\nВ [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]] весь вход читает один причинный стек. В задаче\nклассификации его последнее состояние подают в классификатор. Тот выдаёт\nоценки классов, тогда как T5 генерирует текст метки.\n\n## Источники и дальнейшее чтение\n\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|Семейство T5]].\n- [[02 Areas/ML & DL/Papers/T5|Подробная заметка о статье и протоколах сравнения]].\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|LLaMA как базовая архитектура]].\n",
+          "new": "- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|Семейство T5]].\n- [[02 Areas/ML & DL/Papers/T5|Подробная заметка о статье и протоколах сравнения]].\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa и DeBERTa]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "before_sha256": "0e5c05aa03151e24da5ef6735bcd5525a0c4ea5029b4e9414993b190d7395192",
+      "after_sha256": "384402f08889bf31d09f7617f5c45d6e0048a34812196a624e7e29866989d316",
+      "lines": 791,
+      "changes": [
+        {
+          "old": "status: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc\"\ntranslation_reviewed: \"2026-10-29\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md\"\nlast_updated: 2026-10-29\n",
+          "new": "status: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"c0a782f948d6f46fce8dfb29c8f06a684b2115a2fc5f182995fd74cf423a1a33\"\ntranslation_reviewed: \"2026-10-29\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md\"\nlast_updated: 2026-10-29\n"
+        },
+        {
+          "old": "  - https://jmlr.org/papers/v21/20-074.html\n  - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4\n  - https://github.com/huggingface/transformers/tree/753d61104116eefc8ffc977327b441ee0c8d599f/src/transformers/models/t5\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура]]\"\n---\n\n# T5: the text-to-text Transformer\n",
+          "new": "  - https://jmlr.org/papers/v21/20-074.html\n  - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4\n  - https://github.com/huggingface/transformers/tree/753d61104116eefc8ffc977327b441ee0c8d599f/src/transformers/models/t5\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]\"\n---\n\n# T5: the text-to-text Transformer\n"
+        },
+        {
+          "old": "Task prefixes, supervised-task mixture training, and generalization\nto unseen instructions must be evaluated as distinct properties.\n\nThe reading route now returns to decoder-only models:\n[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|LLaMA]].\n\n## Sources and further reading\n\n",
+          "new": "Task prefixes, supervised-task mixture training, and generalization\nto unseen instructions must be evaluated as distinct properties.\n\nIn [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]], one causal stack reads the entire input. For\nclassification, its final state feeds a head that scores the classes.\nT5 instead generates the label as text.\n\n## Sources and further reading\n\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|T5 family]].\n- [[02 Areas/ML & DL/Papers/T5|Detailed paper and comparison-protocol note]].\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|LLaMA as a baseline architecture]].\n",
+          "new": "- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|T5 family]].\n- [[02 Areas/ML & DL/Papers/T5|Detailed paper and comparison-protocol note]].\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa, and DeBERTa]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md",
+      "before_sha256": "a5825c84a410a08fac8e5f2dd346be335ebf506dd69d238fbd4a538b3e9ff516",
+      "after_sha256": "786087b3f9493f3cbfe1a6ecf6c70948b0d24df054ddb34c0a50ec75c6af8663",
+      "lines": 726,
+      "changes": [
+        {
+          "old": "type: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-10\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"\nprimary_sources:\n  - https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf\n",
+          "new": "type: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-10\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"\nprimary_sources:\n  - https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектурных паттерна]] — видимость входа и обучающие задачи.\n- [[02 Areas/ML & DL/Papers/GPT 1.0|Старая заметка о GPT-1]] — дополнительные записи; не заменяет первичную статью.\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa и DeBERTa]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектурных паттерна]] — видимость входа и обучающие задачи.\n- [[02 Areas/ML & DL/Papers/GPT 1.0|Старая заметка о GPT-1]] — дополнительные записи; не заменяет первичную статью.\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md",
+      "before_sha256": "6baa3c19d64497c9fe2e89507e9a4b83cc18a9e05b4ec6b2d5a7b5506f29430d",
+      "after_sha256": "f951490cca20c77dc67a9de619807963166fe254062536eae6afab230aeb61ff",
+      "lines": 685,
+      "changes": [
+        {
+          "old": "status: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"a5825c84a410a08fac8e5f2dd346be335ebf506dd69d238fbd4a538b3e9ff516\"\ntranslation_reviewed: \"2026-11-10\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\"\nlast_updated: 2026-11-10\nprimary_sources:\n  - https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf\n  - https://github.com/openai/finetune-transformer-lm/tree/a69b5c43b0452462890bca8ff92fb75dee9290cf\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"\n---\n\n",
+          "new": "status: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"786087b3f9493f3cbfe1a6ecf6c70948b0d24df054ddb34c0a50ec75c6af8663\"\ntranslation_reviewed: \"2026-11-10\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\"\nlast_updated: 2026-11-10\nprimary_sources:\n  - https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf\n  - https://github.com/openai/finetune-transformer-lm/tree/a69b5c43b0452462890bca8ff92fb75dee9290cf\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"\n---\n\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three architectural patterns]] — input visibility and training objectives.\n- [[02 Areas/ML & DL/Papers/GPT 1.0|Earlier GPT-1 note]] — additional notes, not a replacement for the primary paper.\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa, and DeBERTa]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three architectural patterns]] — input visibility and training objectives.\n- [[02 Areas/ML & DL/Papers/GPT 1.0|Earlier GPT-1 note]] — additional notes, not a replacement for the primary paper.\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "before_sha256": "9848de8fb84991d6b7963763893253efd034d74a6a2d809a85aaeb4567b63ee4",
+      "after_sha256": "45989f926e1c8f4db2587d9dd95639dc43ae0675c4c93ab6c7133b0822def2d2",
+      "lines": 907,
+      "changes": [
+        {
+          "old": "status: canonical\nlast_updated: 2026-11-09\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\nprimary_sources:\n  - https://arxiv.org/abs/2005.14165v4\n  - https://github.com/openai/gpt-3/tree/d7a9bb505df6f630f9bab3b30c889e52f22eb9ea\n",
+          "new": "status: canonical\nlast_updated: 2026-11-09\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура]]\"\nprimary_sources:\n  - https://arxiv.org/abs/2005.14165v4\n  - https://github.com/openai/gpt-3/tree/d7a9bb505df6f630f9bab3b30c889e52f22eb9ea\n"
+        },
+        {
+          "old": "позиционные представления и FFN. В сравнении с GPT-3 13B у LLaMA 13B\nтот же размер окна, но больше токенов предобучения: 1 трлн против 300 млрд.\n\n[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]] вышла раньше GPT-3. В основном курсе она стоит следом для сравнения:\nэнкодер T5 читает вход в обе стороны, а декодер при генерации обращается\nк его представлениям через cross-attention.\n\nInstruction tuning и обучение по предпочтениям разбираются позднее\nв разделе post-training. Они обновляют веса и могут сочетаться\n",
+          "new": "позиционные представления и FFN. В сравнении с GPT-3 13B у LLaMA 13B\nтот же размер окна, но больше токенов предобучения: 1 трлн против 300 млрд.\n\nУ [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]] вход и ответ обрабатываются разными стеками. Энкодер читает вход\nв обе стороны, а декодер при генерации обращается к его состояниям через\ncross-attention.\n\nInstruction tuning и обучение по предпочтениям разбираются позднее\nв разделе post-training. Они обновляют веса и могут сочетаться\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/Papers/GPT 3.0|Старая заметка о GPT-3]]: дополнительные табличные сравнения; протокол каждой строки указан отдельно.\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 и text-to-text]].\n",
+          "new": "- [[02 Areas/ML & DL/Papers/GPT 3.0|Старая заметка о GPT-3]]: дополнительные табличные сравнения; протокол каждой строки указан отдельно.\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|Первая LLaMA]].\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "before_sha256": "efe88a34267fcb71b5dc81608466770fbf75af9b3672d0e8c47f74d9e6517a23",
+      "after_sha256": "50cbc5092ab0bfad4be43561b791193779c8fd9bd0727059adc0048025c86d80",
+      "lines": 874,
+      "changes": [
+        {
+          "old": "status: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"9848de8fb84991d6b7963763893253efd034d74a6a2d809a85aaeb4567b63ee4\"\ntranslation_reviewed: \"2026-11-09\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md\"\nlast_updated: 2026-11-09\n",
+          "new": "status: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"45989f926e1c8f4db2587d9dd95639dc43ae0675c4c93ab6c7133b0822def2d2\"\ntranslation_reviewed: \"2026-11-09\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md\"\nlast_updated: 2026-11-09\n"
+        },
+        {
+          "old": "  - https://stanford-cs324.github.io/winter2022/lectures/capabilities/\n  - https://jalammar.github.io/how-gpt3-works-visualizations-animations/\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\n---\n\n# GPT-3: scaling and in-context learning\n",
+          "new": "  - https://stanford-cs324.github.io/winter2022/lectures/capabilities/\n  - https://jalammar.github.io/how-gpt3-works-visualizations-animations/\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура]]\"\n---\n\n# GPT-3: scaling and in-context learning\n"
+        },
+        {
+          "old": "tokens instead of 300 billion.\n\n[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]]\npredates GPT-3. It comes next in the main curriculum as an architectural\ncomparison: T5's encoder reads the input in both directions, and its\ndecoder uses cross-attention to those states when generating.\n\nInstruction tuning and preference learning are covered later in\npost-training. They update weights and can coexist with demonstrations\n",
+          "new": "tokens instead of 300 billion.\n\n[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]]\noffers a comparison with a separate encoder and decoder. Its encoder\nreads the input in both directions, and its decoder uses cross-attention\nto those states when generating.\n\nInstruction tuning and preference learning are covered later in\npost-training. They update weights and can coexist with demonstrations\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/Papers/GPT 3.0|Earlier GPT-3 note]]: additional comparisons with each row's protocol identified separately.\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 and text-to-text]].\n",
+          "new": "- [[02 Areas/ML & DL/Papers/GPT 3.0|Earlier GPT-3 note]]: additional comparisons with each row's protocol identified separately.\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|The first LLaMA]].\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "before_sha256": "42822bc5ca618d8a1c09b754c7a51da752df59a422908f9c49da56b9a2752cee",
+      "after_sha256": "47a48f39020b93fd0ad08cab44821cfdcf76888087493a9fbaa70a8a94ada0de",
+      "lines": 1391,
+      "changes": [
+        {
+          "old": "type: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-09\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/02 Современный decoder block]]\"\nreference_terms:\n  - label: От GPT-1 к LLaMA — сравнение декодеров\n",
+          "new": "type: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-09\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/02 Современный decoder block]]\"\nreference_terms:\n  - label: От GPT-1 к LLaMA — сравнение декодеров\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/Llama|Llama в атласе]]; [[02 Areas/ML & DL/01 Справочник/Позиционные представления/RoPE|RoPE в справочнике]]; [[02 Areas/ML & DL/01 Справочник/FFN и MoE/SwiGLU|SwiGLU]].\n- [[02 Areas/ML & DL/Papers/LLaMA|Подробная заметка о LLaMA v1 и условиях бенчмарков]].\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/02 Современный decoder block|Современный decoder block]].\n",
+          "new": "- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/Llama|Llama в атласе]]; [[02 Areas/ML & DL/01 Справочник/Позиционные представления/RoPE|RoPE в справочнике]]; [[02 Areas/ML & DL/01 Справочник/FFN и MoE/SwiGLU|SwiGLU]].\n- [[02 Areas/ML & DL/Papers/LLaMA|Подробная заметка о LLaMA v1 и условиях бенчмарков]].\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/02 Современный decoder block|Современный decoder block]].\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/07 Anatomy of a modern LLM/01 LLaMA as a baseline architecture.md",
+      "before_sha256": "829a4299b8cc4a7f81379775cd6ff2a8806b5c174c7ccb23b10308b32f69b35b",
+      "after_sha256": "aa8be10abaeba863ce0a9c3413ca5a53963ceaa94e5fb624315f49fafc3abaee",
+      "lines": 1381,
+      "changes": [
+        {
+          "old": "status: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"42822bc5ca618d8a1c09b754c7a51da752df59a422908f9c49da56b9a2752cee\"\ntranslation_reviewed: \"2026-11-09\"\ntranslation_of: \"00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\"\nlast_updated: 2026-11-09\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/02 Современный decoder block]]\"\nprimary_sources:\n  - https://arxiv.org/abs/2302.13971v1\n",
+          "new": "status: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"47a48f39020b93fd0ad08cab44821cfdcf76888087493a9fbaa70a8a94ada0de\"\ntranslation_reviewed: \"2026-11-09\"\ntranslation_of: \"00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\"\nlast_updated: 2026-11-09\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/02 Современный decoder block]]\"\nprimary_sources:\n  - https://arxiv.org/abs/2302.13971v1\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/Llama|Llama in the model atlas]]; [[02 Areas/ML & DL/01 Справочник/Позиционные представления/RoPE|RoPE in the reference]]; [[02 Areas/ML & DL/01 Справочник/FFN и MoE/SwiGLU|SwiGLU in the reference]].\n- [[02 Areas/ML & DL/Papers/LLaMA|Detailed notes on LLaMA v1 and the evaluation setup]].\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/02 Современный decoder block|The modern decoder block]].\n",
+          "new": "- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/Llama|Llama in the model atlas]]; [[02 Areas/ML & DL/01 Справочник/Позиционные представления/RoPE|RoPE in the reference]]; [[02 Areas/ML & DL/01 Справочник/FFN и MoE/SwiGLU|SwiGLU in the reference]].\n- [[02 Areas/ML & DL/Papers/LLaMA|Detailed notes on LLaMA v1 and the evaluation setup]].\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/02 Современный decoder block|The modern decoder block]].\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "70dcdd2a34bb8a6bb717e46638e57f3a3d19095385fd8c6ab19ad93799288c11",
+      "after_sha256": "88d25075d1c66b341bf1cf6e499f137ce27768bc40043d11a7ffdf66820047a3",
+      "lines": 360,
+      "changes": [
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/03 Полный Transformer|Полный encoder-decoder Transformer]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектурных паттерна]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa и DeBERTa]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1 — генеративное предобучение]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2 — zero-shot через язык]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3 — in-context learning]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 — text-to-text Transformer]]\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/03 Полный Transformer|Полный encoder-decoder Transformer]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектурных паттерна]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa и DeBERTa]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 — text-to-text Transformer]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1 — генеративное предобучение]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2 — zero-shot через язык]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3 — in-context learning]]\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "7fa94029921c915cf24cc7ac4b0a390cadcf6c56c5ac69e75896257e76658550",
+      "after_sha256": "2c5f27ee814a80e244a8b81559d9b87c3cdad0bb5f5feba25651567d55c53fcf",
+      "lines": 363,
+      "changes": [
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/03 Полный Transformer|The complete encoder–decoder Transformer]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three architectural patterns]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa, and DeBERTa]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1: generative pre-training]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2: zero-shot through language]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3: in-context learning]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: the text-to-text Transformer]] · **EN**\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/03 Полный Transformer|The complete encoder–decoder Transformer]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three architectural patterns]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa, and DeBERTa]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: the text-to-text Transformer]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1: generative pre-training]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2: zero-shot through language]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3: in-context learning]] · **EN**\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n\n"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "9e569f083d1ebe653831df3690b50acc726c038b36c86d60d7ddabe69452838a",
+      "after_sha256": "d59316d87cf5f54401ef2ab1341a9621fcddc968c7aa5dda141ad14bd8f78292",
+      "lines": 2601,
+      "changes": [
+        {
+          "old": "      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md\n        route: textbook/models/bert-roberta-deberta\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md\n        route: textbook/models/gpt-1\n",
+          "new": "      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md\n        route: textbook/models/bert-roberta-deberta\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md\n        route: textbook/models/t5\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md\n        route: textbook/models/gpt-1\n"
+        },
+        {
+          "old": "      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md\n        route: textbook/models/gpt-3\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md\n        route: textbook/models/t5\n      - source: 00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\n        source_en: en/00 Textbook/07 Anatomy of a modern LLM/01 LLaMA as a baseline architecture.md\n        route: textbook/modern-llm/llama-architecture\n",
+          "new": "      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md\n        route: textbook/models/gpt-3\n      - source: 00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\n        source_en: en/00 Textbook/07 Anatomy of a modern LLM/01 LLaMA as a baseline architecture.md\n        route: textbook/modern-llm/llama-architecture\n"
+        },
+        {
+          "old": "                route: textbook/transformer/encoder-decoder-patterns\n              - label: BERT, RoBERTa и DeBERTa\n                route: textbook/models/bert-roberta-deberta\n              - label: GPT-1 — генеративное предобучение\n                route: textbook/models/gpt-1\n              - label: GPT-2 — zero-shot через язык\n                route: textbook/models/gpt-2\n              - label: GPT-3 — in-context learning\n                route: textbook/models/gpt-3\n              - label: T5 — text-to-text Transformer\n                route: textbook/models/t5\n          - label: VI. Анатомия современной LLM\n            label_en: VI. Anatomy of a modern LLM\n            items:\n",
+          "new": "                route: textbook/transformer/encoder-decoder-patterns\n              - label: BERT, RoBERTa и DeBERTa\n                route: textbook/models/bert-roberta-deberta\n              - label: T5 — text-to-text Transformer\n                route: textbook/models/t5\n              - label: GPT-1 — генеративное предобучение\n                route: textbook/models/gpt-1\n              - label: GPT-2 — zero-shot через язык\n                route: textbook/models/gpt-2\n              - label: GPT-3 — in-context learning\n                route: textbook/models/gpt-3\n          - label: VI. Анатомия современной LLM\n            label_en: VI. Anatomy of a modern LLM\n            items:\n"
+        }
+      ]
+    },
+    {
+      "source": "docs/audit/2026-10-30-reading-route-review.json",
+      "before_sha256": "9ba283e88e623b7085b029b5297d979f6a2f5cc11277bede3ed164cc4ed3d866",
+      "after_sha256": "46093e8567c52b51a06ee9d579a124d2c6cb700a7fe521f81a1751cf4643c6bd",
+      "lines": 7973,
+      "changes": [
+        {
+          "old": "    {\n      \"path\": \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md\",\n      \"route\": \"textbook/models/bert-roberta-deberta\",\n      \"sha256\": \"0cce42e115bc2a8c453047ce060f7a67dac104a9eae45ed1b899a49f4d921741\",\n      \"lines\": 1322,\n      \"read\": \"complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation\",\n      \"findings\": [\n        \"The previous architecture-pattern chapter supplies MLM versus NTP. BERT then develops input assembly, the two heads, both losses and one actual update before task-specific use.\",\n",
+          "new": "    {\n      \"path\": \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md\",\n      \"route\": \"textbook/models/bert-roberta-deberta\",\n      \"sha256\": \"56cea5931a53b71e9e450565cb3bf8e0558870cf646c841b98135cc9ff73eebe\",\n      \"lines\": 1322,\n      \"navigationDelta\": {\"before\": \"0cce42e115bc2a8c453047ce060f7a67dac104a9eae45ed1b899a49f4d921741\", \"journal\": \"2026-11-10-linear-gpt-llama-route-additions.json\"},\n      \"read\": \"complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation\",\n      \"findings\": [\n        \"The previous architecture-pattern chapter supplies MLM versus NTP. BERT then develops input assembly, the two heads, both losses and one actual update before task-specific use.\",\n"
+        },
+        {
+          "old": "    {\n      \"path\": \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\",\n      \"route\": \"textbook/models/gpt-1\",\n      \"sha256\": \"a5825c84a410a08fac8e5f2dd346be335ebf506dd69d238fbd4a538b3e9ff516\",\n      \"lines\": 726,\n      \"read\": \"Complete saved chapter read on 2026-11-10, including both examples, captions, sources and navigation. Revised sections compared with BERT Figure 3 and Appendix A.4, D2L Section 11.9.3.1 and Radford Sections 3–5.\",\n      \"findings\": [\n        \"Supervised task heads and updates are separated from heuristic zero-shot scoring. Candidate loss and token-loss normalization have worked examples.\",\n",
+          "new": "    {\n      \"path\": \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\",\n      \"route\": \"textbook/models/gpt-1\",\n      \"sha256\": \"786087b3f9493f3cbfe1a6ecf6c70948b0d24df054ddb34c0a50ec75c6af8663\",\n      \"lines\": 726,\n      \"navigationDelta\": {\"before\": \"a5825c84a410a08fac8e5f2dd346be335ebf506dd69d238fbd4a538b3e9ff516\", \"journal\": \"2026-11-10-linear-gpt-llama-route-additions.json\"},\n      \"read\": \"Complete saved chapter read on 2026-11-10, including both examples, captions, sources and navigation. Revised sections compared with BERT Figure 3 and Appendix A.4, D2L Section 11.9.3.1 and Radford Sections 3–5.\",\n      \"findings\": [\n        \"Supervised task heads and updates are separated from heuristic zero-shot scoring. Candidate loss and token-loss normalization have worked examples.\",\n"
+        },
+        {
+          "old": "    {\n      \"path\": \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md\",\n      \"route\": \"textbook/models/gpt-3\",\n      \"sha256\": \"9848de8fb84991d6b7963763893253efd034d74a6a2d809a85aaeb4567b63ee4\",\n      \"lines\": 907,\n      \"wholeReadRevision\": \"76ed87ea2ca9e9c2bc82b7926eb95de9313d0b11c8ce14ab95ab13313e19875a\",\n      \"linesAtWholeRead\": 835,\n      \"read\": \"Complete 896-line pre-edit chapter read on 2026-11-09, including both examples, figures, source links and navigation. Changed sections checked against the papers and reread on the 907-line revision.\",\n",
+          "new": "    {\n      \"path\": \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md\",\n      \"route\": \"textbook/models/gpt-3\",\n      \"sha256\": \"45989f926e1c8f4db2587d9dd95639dc43ae0675c4c93ab6c7133b0822def2d2\",\n      \"lines\": 907,\n      \"navigationDelta\": {\"before\": \"9848de8fb84991d6b7963763893253efd034d74a6a2d809a85aaeb4567b63ee4\", \"journal\": \"2026-11-10-linear-gpt-llama-route-additions.json\"},\n      \"wholeReadRevision\": \"76ed87ea2ca9e9c2bc82b7926eb95de9313d0b11c8ce14ab95ab13313e19875a\",\n      \"linesAtWholeRead\": 835,\n      \"read\": \"Complete 896-line pre-edit chapter read on 2026-11-09, including both examples, figures, source links and navigation. Changed sections checked against the papers and reread on the 907-line revision.\",\n"
+        },
+        {
+          "old": "      },\n      \"findings\": [\n        \"GPT-2 supplies prompt continuation and cache; GPT-3 develops fixed-weight demonstrations, complete candidate scoring and its protocol-dependent normalization.\",\n        \"T5 follows as an architecture comparison, not a chronological claim. The two earlier paper-image permission gaps were resolved by the subsequent figure/table delta in released 9bd4e7d; source links and all table values remain.\"\n      ]\n    },\n    {\n      \"path\": \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md\",\n      \"route\": \"textbook/models/t5\",\n      \"sha256\": \"1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc\",\n      \"lines\": 827,\n      \"read\": \"complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation\",\n      \"findings\": [\n        \"Source and target are separated before self/cross-attention, PAD-ID decoder start, label shifting and span corruption.\",\n",
+          "new": "      },\n      \"findings\": [\n        \"GPT-2 supplies prompt continuation and cache; GPT-3 develops fixed-weight demonstrations, complete candidate scoring and its protocol-dependent normalization.\",\n        \"LLaMA follows directly; T5 is still linked as an encoder–decoder comparison. The two earlier paper-image permission gaps were resolved by the subsequent figure/table delta in released 9bd4e7d; source links and all table values remain.\"\n      ]\n    },\n    {\n      \"path\": \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md\",\n      \"route\": \"textbook/models/t5\",\n      \"sha256\": \"c0a782f948d6f46fce8dfb29c8f06a684b2115a2fc5f182995fd74cf423a1a33\",\n      \"lines\": 828,\n      \"navigationDelta\": {\"before\": \"1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc\", \"journal\": \"2026-11-10-linear-gpt-llama-route-additions.json\"},\n      \"read\": \"complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation\",\n      \"findings\": [\n        \"Source and target are separated before self/cross-attention, PAD-ID decoder start, label shifting and span corruption.\",\n"
+        },
+        {
+          "old": "    {\n      \"path\": \"00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\",\n      \"route\": \"textbook/modern-llm/llama-architecture\",\n      \"sha256\": \"42822bc5ca618d8a1c09b754c7a51da752df59a422908f9c49da56b9a2752cee\",\n      \"lines\": 1391,\n      \"read\": \"complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation\",\n      \"findings\": [\n        \"The chapter explicitly connects T5's pre-norm/RMS-style operation and GPT's causal decoder to RMSNorm, RoPE and SwiGLU.\",\n",
+          "new": "    {\n      \"path\": \"00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\",\n      \"route\": \"textbook/modern-llm/llama-architecture\",\n      \"sha256\": \"47a48f39020b93fd0ad08cab44821cfdcf76888087493a9fbaa70a8a94ada0de\",\n      \"lines\": 1391,\n      \"navigationDelta\": {\"before\": \"42822bc5ca618d8a1c09b754c7a51da752df59a422908f9c49da56b9a2752cee\", \"journal\": \"2026-11-10-linear-gpt-llama-route-additions.json\"},\n      \"read\": \"complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation\",\n      \"findings\": [\n        \"The chapter explicitly connects T5's pre-norm/RMS-style operation and GPT's causal decoder to RMSNorm, RoPE and SwiGLU.\",\n"
+        }
+      ]
+    }
+  ]
+}

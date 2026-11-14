@@ -1,0 +1,257 @@
+{
+  "date": "2026-11-11",
+  "scope": "Reconcile the two historical CRFM illustrations and extend both FlashAttention editions from the FA3 mechanisms to FA4 on Blackwell.",
+  "review": {
+    "sources": "Tri Dao et al., FA1 §§2–3 and the complete original center panel of the BSD-licensed Dao-AILab banner at 1fc02211; Tri Dao, Stanford CRFM and FA2 v1 §§2.3, 3.2–3.3, Figure 3 (PDF page 9); Zadouri et al., FA4 v1 §§3.1.1–3.1.4 and §3.2.3, Table 1, Figures 1 and 3.",
+    "rights": "The CRFM blog was confirmed as the visual source, but no redistribution grant and no live byte match were established for the two archived copies. Both remain byte-identical in the repository and are retired from the site. The FA1 replacement is a complete isolated panel from a BSD-3-Clause repository asset; the pinned license is supplied. The FA4 figure is an unchanged copy of the source raster under CC BY-NC-SA 4.0, for the noncommercial textbook. The FA2 Figure 3 is linked, not republished.",
+    "workedCases": "FA1 SRAM/HBM arrows distinguish the transient score tile from the persisted output. The FA2 table gives 128 query rows and 128 keys: row 40 belongs to all four sliced-K warps but only warp 1 in sliced-Q. For FA4, trace S0H, P0H and its V0 product in parallel with S0L on one SM. The authors' cycle model is not a trace. With an old reference ln2, allowing the next score ln4 to keep that reference gives numerator 105 and denominator 3.5, the same output 30 as immediate rescaling (52.5 / 1.75). The 2-CTA paragraph describes a smaller amount of shared-memory traffic and global updates, not a disappearance of the dQ reduction.",
+    "preservation": "Both original editions were read. Existing formulas, code blocks, source excerpts, captions outside the reviewed region, route anchors and the pinned implementation snapshot were retained. The older FA2 visual remains accessible at the paper and in the linked Stanford CRFM post."
+  },
+  "figures": [
+    {
+      "id": "curated-flashattention-repo-tiling-fd63cc4fb16f",
+      "asset": "00 Учебник/Assets/Figures/curated/flashattention-editorial-2026-11-11/fa1-tiling-loops.png",
+      "sha256": "fd63cc4fb16fa1bf362f12cd35c48b2c41de8d0d5e437282e90dab45dd47d3d3",
+      "bytes": 134922,
+      "dimensions_px": [
+        1545,
+        1548
+      ],
+      "author": "Tri Dao and the FlashAttention contributors",
+      "title": "FlashAttention repository banner: original tiling panel",
+      "source_url": "https://github.com/Dao-AILab/flash-attention/blob/1fc0221183e799363001394a12dd9e78e15f5dda/assets/flashattn_banner.pdf",
+      "source_image_url": "https://raw.githubusercontent.com/Dao-AILab/flash-attention/1fc0221183e799363001394a12dd9e78e15f5dda/assets/flashattn_banner.pdf",
+      "figure_url": "https://github.com/Dao-AILab/flash-attention/blob/1fc0221183e799363001394a12dd9e78e15f5dda/assets/flashattn_banner.pdf",
+      "source_asset": "05 Источники/Originals/flashattention-editorial-2026-11-11/flashattn-banner.pdf",
+      "source_asset_sha256": "8f4df0222057bbffcd2894fbae18bbfa6304e5d0583d47e44e9ac7a97bfb75ce",
+      "commit": "1fc0221183e799363001394a12dd9e78e15f5dda",
+      "source_page": 1,
+      "render_dpi": 720,
+      "render_page_size_px": [
+        3960,
+        1548
+      ],
+      "crop_box_px": [
+        1295,
+        0,
+        2840,
+        1548
+      ],
+      "license": "BSD-3-Clause",
+      "license_url": "https://github.com/Dao-AILab/flash-attention/blob/1fc0221183e799363001394a12dd9e78e15f5dda/LICENSE",
+      "license_evidence": "site/public/licenses/flash-attention-1fc02211-BSD-3-Clause.txt",
+      "license_evidence_sha256": "8c9ccb96c065e706135b6cbad279b721da6156e51f3a5f27c6b3329af9416d73",
+      "public_license_copy": "site/public/licenses/flash-attention-1fc02211-BSD-3-Clause.txt",
+      "license_evidence_url": "https://raw.githubusercontent.com/Dao-AILab/flash-attention/1fc0221183e799363001394a12dd9e78e15f5dda/LICENSE",
+      "modifications": "Cropped the complete center panel from the original vector banner without resizing or redrawing. The adjacent memory pyramid and historical benchmark are omitted.",
+      "derivation": "pdf-page-render-crop",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+        "en/00 Textbook/14 Inference and optimization/56 FlashAttention.md"
+      ]
+    },
+    {
+      "id": "curated-flashattention4-forward-e816ae950c15",
+      "asset": "00 Учебник/Assets/Figures/curated/flashattention-editorial-2026-11-11/fa4-forward-pipeline.png",
+      "sha256": "e816ae950c158e4300e733b9d09ad75a4f9bd47d0b7edcfa9e5987431589f936",
+      "bytes": 4970787,
+      "dimensions_px": [
+        4942,
+        2732
+      ],
+      "author": "Ted Zadouri, Markus Hoehnerbach, Jay Shah, Timmy Liu, Vijay Thakkar, Tri Dao",
+      "title": "FlashAttention-4 v1, Figure 1: forward pipeline",
+      "source_url": "https://arxiv.org/html/2603.05451v1#S3.F1",
+      "source_image_url": "https://arxiv.org/html/2603.05451v1/Figures/FA4_FWD_p3.png",
+      "figure_url": "https://arxiv.org/html/2603.05451v1#S3.F1",
+      "source_asset": "05 Источники/Originals/flashattention-editorial-2026-11-11/FA4_FWD_p3.png",
+      "source_asset_sha256": "e816ae950c158e4300e733b9d09ad75a4f9bd47d0b7edcfa9e5987431589f936",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "license_evidence_url": "https://arxiv.org/abs/2603.05451v1",
+      "modifications": "Byte-identical copy of the complete authors' image; no crop or resizing.",
+      "derivation": "source-raster-copy",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+        "en/00 Textbook/14 Inference and optimization/56 FlashAttention.md"
+      ]
+    }
+  ],
+  "historical": [
+    {
+      "id": "curated-flash-tiling-000000000043",
+      "asset": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention-tiling.png",
+      "sha256": "5075e06a143990fab1917354a31b7dce8f7b5ca9b3ea5f6673d992d883165558",
+      "bytes": 814560,
+      "dimensions_px": [
+        5864,
+        2966
+      ],
+      "author": "Tri Dao, Stanford CRFM",
+      "title": "FlashAttention recap (archived blog copy)",
+      "source_url": "https://crfm.stanford.edu/2023/07/17/flash2.html",
+      "figure_url": "https://crfm.stanford.edu/2023/07/17/flash2.html",
+      "source_image_url": "https://crfm.stanford.edu/static/img/posts/2023-07-17-flash2/flash_recap_diagram.png",
+      "license": null,
+      "license_url": null,
+      "modifications": "Historical textbook copy unchanged; the source illustration was checked visually, but direct CRFM byte comparison was unavailable.",
+      "metadata_status": "needs-confirmation",
+      "provenance_confirmation": "source-linked-rights-unverified",
+      "rights_status": "blog-figure-license-unverified",
+      "publication_status": "retired",
+      "retirement_reason": "Replaced by the original tiling panel from the licensed Dao-AILab repository; the blog remains linked.",
+      "used_in": [],
+      "former_used_in": [
+        "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+        "en/00 Textbook/14 Inference and optimization/56 FlashAttention.md"
+      ],
+      "replacement": "00 Учебник/Assets/Figures/curated/flashattention-editorial-2026-11-11/fa1-tiling-loops.png"
+    },
+    {
+      "id": "curated-flash2-part-000000000044",
+      "asset": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention2-partitioning.png",
+      "sha256": "d1ac6e76e166b0fb841e8b0aeeb2876169281878020b296b65acc669f6427e4f",
+      "bytes": 238190,
+      "dimensions_px": [
+        1852,
+        680
+      ],
+      "author": "Tri Dao, Stanford CRFM",
+      "title": "FA1 versus FA2 work partitioning (archived blog copy)",
+      "source_url": "https://crfm.stanford.edu/2023/07/17/flash2.html",
+      "figure_url": "https://arxiv.org/html/2307.08691v1#S3.F3",
+      "source_image_url": "https://crfm.stanford.edu/static/img/posts/2023-07-17-flash2/flash_flash2_partitioning.png",
+      "license": null,
+      "license_url": null,
+      "modifications": "Historical textbook copy unchanged; the source illustration was checked visually, but direct CRFM byte comparison was unavailable.",
+      "metadata_status": "needs-confirmation",
+      "provenance_confirmation": "source-linked-rights-unverified",
+      "rights_status": "blog-figure-license-unverified",
+      "publication_status": "retired",
+      "retirement_reason": "Retain the historical copy locally; link to Tri Dao's original Figure 3 and explain the same layout with a worked table.",
+      "used_in": [],
+      "former_used_in": [
+        "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+        "en/00 Textbook/14 Inference and optimization/56 FlashAttention.md"
+      ]
+    }
+  ],
+  "newSourceNote": {
+    "source": "05 Источники/Papers/FlashAttention-4.md",
+    "sha256": "7119067d8b3d3c2396a5cdfe61660241b4003a96d0fc054ea750268543f29666"
+  },
+  "files": [
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "before_sha256": "15ba654d059b1ccd35bd07c6b041e405bef2f99d74ee03f672c205263b7589a1",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-19",
+          "new": "last_updated: 2026-11-11"
+        },
+        {
+          "old": "  - https://arxiv.org/html/2407.08608v1\n  - https://crfm.stanford.edu/2023/07/17/flash2.html",
+          "new": "  - https://arxiv.org/html/2407.08608v1\n  - https://arxiv.org/abs/2603.05451v1\n  - https://crfm.stanford.edu/2023/07/17/flash2.html"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention-tiling.png]]\n\n*Tri Dao, [FlashAttention-2, Stanford CRFM](https://crfm.stanford.edu/2023/07/17/flash2.html).\nКлючи и значения разделены на две части; их вклады объединяются без сохранения\nполных $S$ и $P$. На оригинальной схеме для простоты опущено вычитание максимума\nв softmax. Численно устойчивый вариант выведен ниже.*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/flashattention-editorial-2026-11-11/fa1-tiling-loops.png|Внешний цикл выбирает блок ключей и значений. Внутренний проходит по запросам. Текущая плитка scores вычисляется в SRAM; в HBM уходит обновлённый выход.]]\n\n*Tri Dao и соавторы, [FlashAttention, центральная панель оригинальной схемы](https://github.com/Dao-AILab/flash-attention/blob/1fc0221183e799363001394a12dd9e78e15f5dda/assets/flashattn_banner.pdf),\n[BSD-3-Clause](/licenses/flash-attention-1fc02211-BSD-3-Clause.txt). Обрезаны только соседние панели; стрелки обхода и подписи сохранены.*\n\nПунктир очерчивает всю матрицу $QK^\\top$, но в SRAM находится только\nтекущая плитка. Стрелка к HBM ведёт от вычисления к выходу\n$\\operatorname{softmax}(QK^\\top)V$, а не к квадратной матрице scores.\nНа [схеме Tri Dao в Stanford CRFM](https://crfm.stanford.edu/2023/07/17/flash2.html) этот же шаг показан\nдля двух блоков ключей: второй блок меняет знаменатель, поэтому\nпервый вклад масштабируют. Вычитание максимума там опущено;\nустойчивый пересчёт разбирается ниже."
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention2-partitioning.png]]\n\n*Tri Dao, [FlashAttention-2, Stanford CRFM](https://crfm.stanford.edu/2023/07/17/flash2.html).\nСлева разные warp вычисляют вклады одних и тех же выходных строк; справа\nкаждая группа получает собственные строки $Q$ и соответствующую часть выхода.\nЭто разбиение внутри блока потоков, не распределение модели между GPU.*",
+          "new": "На [рисунке 3 Tri Dao](https://arxiv.org/html/2307.08691v1#S3.F3) четыре warp делят работу внутри\nодного блока потоков. Пусть в плитке 128 запросов и 128 ключей, а индексы\nначинаются с нуля:\n\n| Для одного блока потоков | Sliced-K | Sliced-Q |\n|---|---|---|\n| Что обрабатывает warp 0 | Все 128 запросов и ключи 0–31 | Запросы 0–31 и все 128 ключей |\n| Кто вычисляет строку 40 | Все четыре warp, каждый по своим ключам | Warp 1, владелец строк 32–63 |\n| Что перед записью результата | Объединить вклады warp в одну строку | Вклад других warp для этой строки не нужен |\n\nЭто два разных уровня разбиения. Блок потоков выбирает плитку запросов,\nа warp внутри него отвечает за часть её строк. В sliced-Q у каждой\nвыходной строки один владелец; именно поэтому пропадает редукция\nмежду warp для этой строки."
+        },
+        {
+          "old": "## Реализация и номер версии",
+          "new": "<a id=\"fa4-blackwell\"></a>\n\n## FlashAttention-4: матричные операции и softmax на Blackwell\n\nНа B200 быстрее стали прежде всего матричные устройства. В\n[расчёте авторов FA4, таблица 1](https://arxiv.org/html/2603.05451v1#S3.T1)\nпри блоке $128\\times128$ и размерности головы 128 два матричных\nпроизведения занимают по модели 1024 такта, экспоненты softmax\nтоже 1024, а чтения из shared memory — 768. Это оценки времени\nна отдельных устройствах, а не измерение всего прохода. Если выполнять\nматричные операции и softmax последовательно, одни устройства\nбудут ждать другие.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/flashattention-editorial-2026-11-11/fa4-forward-pipeline.png|Слева четыре блока потоков, каждый обслуживает две группы запросов. Справа чередуются умножения Tensor Cores и softmax для двух групп, H и L.]]\n\n*Ted Zadouri, Markus Hoehnerbach, Jay Shah, Timmy Liu, Vijay Thakkar и Tri Dao,\n[FlashAttention-4, рисунок 1](https://arxiv.org/html/2603.05451v1#S3.F1), [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).\nИсходное изображение без изменений; такты на схеме расчётные.*\n\nСлева CTA 0 отвечает за блоки запросов Q0 и Q1 и проходит по блокам K/V.\nСправа проследим начало расписания одного SM: сначала Tensor Cores считают\n$S_0^H=Q^H K_0^\\top$, затем группа softmax обрабатывает эти оценки,\nпока Tensor Cores считают $S_0^L$ для другого блока запросов. Когда готовы\nвеса $P_0^H$, начинается умножение на $V_0$, а группа softmax уже\nработает над $S_0^L$. На Blackwell аккумуляторы матричных операций\nживут в отдельной памяти TMEM (*tensor memory*), а масштабированием\nнакопленного выхода занимается отдельная группа потоков.\n[§3.1.2](https://arxiv.org/html/2603.05451v1#S3.SS1.SSS2).\n\nЭкспоненты тоже распределены между двумя типами исполнительных устройств.\nДля части элементов ядро аппроксимирует $2^x$ полиномом через FMA, а\nостальные считает инструкцией MUFU.EX2. Так обе группы устройств могут\nработать одновременно. В опыте авторов выигрыш зависит от доли\nаппроксимированных элементов и числа занятых регистров; точность\nсравнивается отдельно для FP32 и BF16. [§3.1.3](https://arxiv.org/html/2603.05451v1#S3.SS1.SSS3).\n\nМожно реже масштабировать и сам выход. Вернёмся к примеру с оценками\n$0,\\log 2,\\log 4$. После первых двух ключей точка отсчёта $\\log 2$\nдаёт $\\ell=1{,}5$ и $u=25$. Если порог позволяет оставить эту точку\nотсчёта после третьего ключа, его вес будет $e^{\\log 4-\\log 2}=2$.\nПолучим $\\ell'=3{,}5$ и $u'=105$, то есть те же $105/3{,}5=30$,\nчто и при немедленном пересчёте. Числитель и знаменатель выражены\nв одной шкале. Когда максимум вырастет сильнее заданного порога,\nядро сменит точку отсчёта, чтобы экспоненты не вышли за допустимый диапазон.\n[§3.1.4](https://arxiv.org/html/2603.05451v1#S3.SS1.SSS4).\n\nВ backward для $dQ$ по-прежнему нужно объединять вклады от разных\nблоков ключей. В режиме 2-CTA соседние блоки потоков обмениваются\nчастями $dS$ через распределённую shared memory и выполняют общую\nматричную операцию с большей осью редукции. Это сокращает часть\nповторных чтений и глобальных обновлений, но не устраняет редукцию\nвкладов разных блоков. [§3.2.3, рисунок 3](https://arxiv.org/html/2603.05451v1#S3.SS2.SSS3).\n\n## Реализация и номер версии"
+        },
+        {
+          "old": "и фактически исполняемое ядро. Механизмы FA4 следует рассматривать по его\nотдельной статье, не приписывая ему устройство FA3 по сходству названий.",
+          "new": "и фактически исполняемое ядро. Разбор выше относится к расписанию FA4\nна Blackwell, а таблица — к доступным реализациям."
+        },
+        {
+          "old": "- Shah et al., [FlashAttention-3](https://arxiv.org/html/2407.08608v1): асинхронное расписание, регистровые ограничения и FP8; CC BY 4.0.",
+          "new": "- Shah et al., [FlashAttention-3](https://arxiv.org/html/2407.08608v1): асинхронное расписание, регистровые ограничения и FP8; CC BY 4.0.\n- [[05 Источники/Papers/FlashAttention-4.md|Zadouri et al. — FlashAttention-4]]: Blackwell, условное масштабирование и backward на двух CTA."
+        }
+      ],
+      "after_sha256": "123b9691c61aee75e1d39ded8c5e13903f67db59d01f645ac848263ddc626660",
+      "lines": 871
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/56 FlashAttention.md",
+      "before_sha256": "6b8db3db140edaba6e45847a03bd61961aeff4a009d8f66533bde7cf0fe4652c",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-19",
+          "new": "last_updated: 2026-11-11"
+        },
+        {
+          "old": "  - https://arxiv.org/html/2407.08608v1\n  - https://crfm.stanford.edu/2023/07/17/flash2.html",
+          "new": "  - https://arxiv.org/html/2407.08608v1\n  - https://arxiv.org/abs/2603.05451v1\n  - https://crfm.stanford.edu/2023/07/17/flash2.html"
+        },
+        {
+          "old": "canonical_revision: \"15ba654d059b1ccd35bd07c6b041e405bef2f99d74ee03f672c205263b7589a1\"\ntranslation_reviewed: \"2026-10-29\"",
+          "new": "canonical_revision: \"123b9691c61aee75e1d39ded8c5e13903f67db59d01f645ac848263ddc626660\"\ntranslation_reviewed: \"2026-11-11\""
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention-tiling.png]]\n\n*Tri Dao, [FlashAttention-2, Stanford CRFM](https://crfm.stanford.edu/2023/07/17/flash2.html).\nTwo key/value blocks contribute to one output without storing complete\n$S$ and $P$. The original diagram omits maximum subtraction for simplicity;\nthe numerically stable version is derived below.*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/flashattention-editorial-2026-11-11/fa1-tiling-loops.png|The outer loop chooses a key/value tile; the inner loop visits query tiles. SRAM holds the current score tile; HBM receives the updated output.]]\n\n*Tri Dao et al., [FlashAttention, center panel of the original diagram](https://github.com/Dao-AILab/flash-attention/blob/1fc0221183e799363001394a12dd9e78e15f5dda/assets/flashattn_banner.pdf),\n[BSD-3-Clause](/licenses/flash-attention-1fc02211-BSD-3-Clause.txt). Only the neighboring panels are omitted; the labels and loop arrows\nare unchanged.*\n\nThe dashed outline marks the full $QK^\\top$ matrix, but only the current\ntile is computed in SRAM. The arrow to HBM leads to an update of the\noutput $\\operatorname{softmax}(QK^\\top)V$, not to the square score matrix.\n[Tri Dao's Stanford CRFM diagram](https://crfm.stanford.edu/2023/07/17/flash2.html) shows the same update with\ntwo key blocks: the second changes the denominator, so the first\ncontribution is rescaled. That diagram omits maximum subtraction; the\nstable update is derived below."
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention2-partitioning.png]]\n\n*Tri Dao, [FlashAttention-2, Stanford CRFM](https://crfm.stanford.edu/2023/07/17/flash2.html).\nLeft: warps contribute to the same output rows. Right: each warp owns rows\nof $Q$ and the corresponding output. This partitions work within a thread\nblock; it does not distribute a model across GPUs.*",
+          "new": "In [Tri Dao's Figure 3](https://arxiv.org/html/2307.08691v1#S3.F3), four warps share one thread block's\nwork. Take a tile with 128 queries and 128 keys, using zero-based indices:\n\n| Within one thread block | Sliced-K | Sliced-Q |\n|---|---|---|\n| Warp 0 handles | All 128 queries, keys 0–31 | Queries 0–31, all 128 keys |\n| Who computes row 40 | All four warps, each with its own keys | Warp 1, which owns rows 32–63 |\n| Before writing the result | Combine the warp contributions to one row | No contribution from another warp is needed for that row |\n\nThese are two levels of partitioning. A thread block owns a query tile;\nthe warps within it own rows of that tile. With sliced-Q, each output row\nhas one owner, so this forward step needs no cross-warp reduction for it."
+        },
+        {
+          "old": "<a id=\"реализация-и-номер-версии\"></a>\n\n## Implementations and version numbers",
+          "new": "<a id=\"fa4-blackwell\"></a>\n\n## FlashAttention-4: matrix operations and softmax on Blackwell\n\nOn B200, matrix hardware gained more throughput than other execution units.\nIn [the FA4 paper's model, Table 1](https://arxiv.org/html/2603.05451v1#S3.T1), a\n$128\\times128$ tile with head dimension 128 takes 1024 modeled cycles for\nits two matrix products, another 1024 on the exponential unit, and 768\nfor shared-memory reads. These are resource estimates, not a measured\nforward-pass time. With serial matrix and softmax stages, one unit would\nwait for the other.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/flashattention-editorial-2026-11-11/fa4-forward-pipeline.png|Four thread blocks on the left each own two query tiles. On the right, Tensor Core products alternate with softmax for the two tiles, H and L.]]\n\n*Ted Zadouri, Markus Hoehnerbach, Jay Shah, Timmy Liu, Vijay Thakkar and Tri Dao,\n[FlashAttention-4, Figure 1](https://arxiv.org/html/2603.05451v1#S3.F1), [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).\nUnmodified source image; the cycle counts are modeled.*\n\nOn the left, CTA 0 owns Q0 and Q1 and scans the K/V tiles. Follow the first\nsteps on one SM on the right: Tensor Cores compute\n$S_0^H=Q^H K_0^\\top$, then a softmax group processes those scores while\nTensor Cores compute $S_0^L$ for the other query tile. Once $P_0^H$ is\nready, the value product can start while the softmax group works on $S_0^L$.\nBlackwell stores matrix accumulators in tensor memory (TMEM).\nA separate correction group rescales the accumulated output.\n[§3.1.2](https://arxiv.org/html/2603.05451v1#S3.SS1.SSS2).\n\nThe kernel also splits exponentials between execution units. Some entries\nuse a polynomial approximation to $2^x$ evaluated with FMA; the rest use\nMUFU.EX2. Both units can then work concurrently. The choice trades greater\nexponential throughput against register pressure, and the paper reports\nFP32 and BF16 errors separately. [§3.1.3](https://arxiv.org/html/2603.05451v1#S3.SS1.SSS3).\n\nThe kernel can also rescale less often. Return to scores $0,\\log 2,\\log 4$.\nAfter the first two keys, using $\\log 2$ as the reference gives\n$\\ell=1.5$ and $u=25$. If the threshold permits keeping that reference\nafter the third key, the new weight is $e^{\\log 4-\\log 2}=2$. This gives\n$\\ell'=3.5$ and $u'=105$: $105/3.5=30$, the same as immediate\nrescaling. Numerator and denominator use the same scale. Once the maximum\nrises beyond the threshold, the kernel updates its reference to keep the\nexponentials in range. [§3.1.4](https://arxiv.org/html/2603.05451v1#S3.SS1.SSS4).\n\nBackward still combines contributions to $dQ$ from different key tiles.\nIn 2-CTA mode, neighboring thread blocks exchange parts of $dS$ through\ndistributed shared memory, then execute a joint matrix product with a\nlarger reduction dimension. That reduces some repeated reads and global\nupdates; it does not remove the reduction across key tiles.\n[§3.2.3, Figure 3](https://arxiv.org/html/2603.05451v1#S3.SS2.SSS3).\n\n<a id=\"реализация-и-номер-версии\"></a>\n\n## Implementations and version numbers"
+        },
+        {
+          "old": "and the executed kernel. FA4 mechanisms require its own paper; a similar\nname does not establish the FA3 execution schedule.",
+          "new": "and the executed kernel. The FA4 section describes a Blackwell schedule;\nthis table describes the implementations available in the pinned README."
+        },
+        {
+          "old": "- Shah et al., [FlashAttention-3](https://arxiv.org/html/2407.08608v1): asynchronous schedules, register constraints and FP8; CC BY 4.0.",
+          "new": "- Shah et al., [FlashAttention-3](https://arxiv.org/html/2407.08608v1): asynchronous schedules, register constraints and FP8; CC BY 4.0.\n- [[05 Источники/Papers/FlashAttention-4.md|Zadouri et al. — FlashAttention-4]]: Blackwell, conditional rescaling and two-CTA backward."
+        }
+      ],
+      "after_sha256": "90bb9d5c5b4c00f47c2e341f48a3abb81ad0e147696da17e085a6a6dee322f1a",
+      "lines": 883
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "22d79d799b8ace8350a39c2748077a6cd79d38105f1bd42cc0f1d2efadb5df34",
+      "changes": [
+        {
+          "old": "  - id: curated-flash-tiling-000000000043\n    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention-tiling.png\n    author: Tri Dao and Stanford CRFM\n    source_url: https://crfm.stanford.edu/2023/07/17/flash2.html\n    license: open educational material; reuse confirmed by repository owner\n    license_url: https://crfm.stanford.edu/2023/07/17/flash2.html\n    modifications: copied or extracted without visual modification for publication\n    used_in:\n      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/topics-53-59/flashattention-tiling.png",
+          "new": "  - id: curated-flash-tiling-000000000043\n    asset: \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention-tiling.png\"\n    sha256: \"5075e06a143990fab1917354a31b7dce8f7b5ca9b3ea5f6673d992d883165558\"\n    bytes: 814560\n    dimensions_px: [5864,2966]\n    author: \"Tri Dao, Stanford CRFM\"\n    title: \"FlashAttention recap (archived blog copy)\"\n    source_url: \"https://crfm.stanford.edu/2023/07/17/flash2.html\"\n    figure_url: \"https://crfm.stanford.edu/2023/07/17/flash2.html\"\n    source_image_url: \"https://crfm.stanford.edu/static/img/posts/2023-07-17-flash2/flash_recap_diagram.png\"\n    license: null\n    license_url: null\n    modifications: \"Historical textbook copy unchanged; the source illustration was checked visually, but direct CRFM byte comparison was unavailable.\"\n    metadata_status: \"needs-confirmation\"\n    provenance_confirmation: \"source-linked-rights-unverified\"\n    rights_status: \"blog-figure-license-unverified\"\n    publication_status: \"retired\"\n    retirement_reason: \"Replaced by the original tiling panel from the licensed Dao-AILab repository; the blog remains linked.\"\n    used_in: []\n    former_used_in: [\"00 Учебник/14 Inference и оптимизация/56 FlashAttention.md\",\"en/00 Textbook/14 Inference and optimization/56 FlashAttention.md\"]\n    replacement: \"00 Учебник/Assets/Figures/curated/flashattention-editorial-2026-11-11/fa1-tiling-loops.png\"\n  - id: curated-flashattention-repo-tiling-fd63cc4fb16f\n    asset: \"00 Учебник/Assets/Figures/curated/flashattention-editorial-2026-11-11/fa1-tiling-loops.png\"\n    sha256: \"fd63cc4fb16fa1bf362f12cd35c48b2c41de8d0d5e437282e90dab45dd47d3d3\"\n    bytes: 134922\n    dimensions_px: [1545,1548]\n    author: \"Tri Dao and the FlashAttention contributors\"\n    title: \"FlashAttention repository banner: original tiling panel\"\n    source_url: \"https://github.com/Dao-AILab/flash-attention/blob/1fc0221183e799363001394a12dd9e78e15f5dda/assets/flashattn_banner.pdf\"\n    source_image_url: \"https://raw.githubusercontent.com/Dao-AILab/flash-attention/1fc0221183e799363001394a12dd9e78e15f5dda/assets/flashattn_banner.pdf\"\n    figure_url: \"https://github.com/Dao-AILab/flash-attention/blob/1fc0221183e799363001394a12dd9e78e15f5dda/assets/flashattn_banner.pdf\"\n    source_asset: \"05 Источники/Originals/flashattention-editorial-2026-11-11/flashattn-banner.pdf\"\n    source_asset_sha256: \"8f4df0222057bbffcd2894fbae18bbfa6304e5d0583d47e44e9ac7a97bfb75ce\"\n    commit: \"1fc0221183e799363001394a12dd9e78e15f5dda\"\n    source_page: 1\n    render_dpi: 720\n    render_page_size_px: [3960,1548]\n    crop_box_px: [1295,0,2840,1548]\n    license: \"BSD-3-Clause\"\n    license_url: \"https://github.com/Dao-AILab/flash-attention/blob/1fc0221183e799363001394a12dd9e78e15f5dda/LICENSE\"\n    license_evidence: \"site/public/licenses/flash-attention-1fc02211-BSD-3-Clause.txt\"\n    license_evidence_sha256: \"8c9ccb96c065e706135b6cbad279b721da6156e51f3a5f27c6b3329af9416d73\"\n    public_license_copy: \"site/public/licenses/flash-attention-1fc02211-BSD-3-Clause.txt\"\n    license_evidence_url: \"https://raw.githubusercontent.com/Dao-AILab/flash-attention/1fc0221183e799363001394a12dd9e78e15f5dda/LICENSE\"\n    modifications: \"Cropped the complete center panel from the original vector banner without resizing or redrawing. The adjacent memory pyramid and historical benchmark are omitted.\"\n    derivation: \"pdf-page-render-crop\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/56 FlashAttention.md\",\"en/00 Textbook/14 Inference and optimization/56 FlashAttention.md\"]"
+        },
+        {
+          "old": "  - id: curated-flash2-part-000000000044\n    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention2-partitioning.png\n    author: Tri Dao and Stanford CRFM\n    source_url: https://crfm.stanford.edu/2023/07/17/flash2.html\n    license: open educational material; reuse confirmed by repository owner\n    license_url: https://crfm.stanford.edu/2023/07/17/flash2.html\n    modifications: copied or extracted without visual modification for publication\n    used_in:\n      - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/topics-53-59/flashattention2-partitioning.png",
+          "new": "  - id: curated-flash2-part-000000000044\n    asset: \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention2-partitioning.png\"\n    sha256: \"d1ac6e76e166b0fb841e8b0aeeb2876169281878020b296b65acc669f6427e4f\"\n    bytes: 238190\n    dimensions_px: [1852,680]\n    author: \"Tri Dao, Stanford CRFM\"\n    title: \"FA1 versus FA2 work partitioning (archived blog copy)\"\n    source_url: \"https://crfm.stanford.edu/2023/07/17/flash2.html\"\n    figure_url: \"https://arxiv.org/html/2307.08691v1#S3.F3\"\n    source_image_url: \"https://crfm.stanford.edu/static/img/posts/2023-07-17-flash2/flash_flash2_partitioning.png\"\n    license: null\n    license_url: null\n    modifications: \"Historical textbook copy unchanged; the source illustration was checked visually, but direct CRFM byte comparison was unavailable.\"\n    metadata_status: \"needs-confirmation\"\n    provenance_confirmation: \"source-linked-rights-unverified\"\n    rights_status: \"blog-figure-license-unverified\"\n    publication_status: \"retired\"\n    retirement_reason: \"Retain the historical copy locally; link to Tri Dao's original Figure 3 and explain the same layout with a worked table.\"\n    used_in: []\n    former_used_in: [\"00 Учебник/14 Inference и оптимизация/56 FlashAttention.md\",\"en/00 Textbook/14 Inference and optimization/56 FlashAttention.md\"]\n  - id: curated-flashattention4-forward-e816ae950c15\n    asset: \"00 Учебник/Assets/Figures/curated/flashattention-editorial-2026-11-11/fa4-forward-pipeline.png\"\n    sha256: \"e816ae950c158e4300e733b9d09ad75a4f9bd47d0b7edcfa9e5987431589f936\"\n    bytes: 4970787\n    dimensions_px: [4942,2732]\n    author: \"Ted Zadouri, Markus Hoehnerbach, Jay Shah, Timmy Liu, Vijay Thakkar, Tri Dao\"\n    title: \"FlashAttention-4 v1, Figure 1: forward pipeline\"\n    source_url: \"https://arxiv.org/html/2603.05451v1#S3.F1\"\n    source_image_url: \"https://arxiv.org/html/2603.05451v1/Figures/FA4_FWD_p3.png\"\n    figure_url: \"https://arxiv.org/html/2603.05451v1#S3.F1\"\n    source_asset: \"05 Источники/Originals/flashattention-editorial-2026-11-11/FA4_FWD_p3.png\"\n    source_asset_sha256: \"e816ae950c158e4300e733b9d09ad75a4f9bd47d0b7edcfa9e5987431589f936\"\n    license: \"CC BY-NC-SA 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by-nc-sa/4.0/\"\n    license_evidence_url: \"https://arxiv.org/abs/2603.05451v1\"\n    modifications: \"Byte-identical copy of the complete authors' image; no crop or resizing.\"\n    derivation: \"source-raster-copy\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/56 FlashAttention.md\",\"en/00 Textbook/14 Inference and optimization/56 FlashAttention.md\"]"
+        }
+      ],
+      "after_sha256": "d4d2e95421e445faa45cdc8d97f471fe9ad0dca0fca12ae169e37be50ed26c5a",
+      "lines": 26468
+    },
+    {
+      "source": "publishing/tests/fixtures/legacy-unhashed-assets.json",
+      "before_sha256": "609823a0d33217c30f08f3dc442746f1eb60d6a4822e645681e8d7388aff9f51",
+      "changes": [
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention-tiling.png\",\n    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention2-partitioning.png\",\n    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/gpqa.png\",",
+          "new": "    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/gpqa.png\","
+        }
+      ],
+      "after_sha256": "18ba5db2c2a134479a1d7ef74d6a8e4c53437ae7f05aed2d39b90bb3de40c014",
+      "lines": 277
+    }
+  ]
+}

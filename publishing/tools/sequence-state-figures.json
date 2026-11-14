@@ -1,0 +1,50 @@
+[
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/sequence-state-2026-11-03/hybrid-state-update-table.png",
+    "page": 4,
+    "object": "Table 1",
+    "source": "05 Источники/Originals/sequence-state-2026-11-03/hybrid-linear-v1.pdf",
+    "source_sha256": "bfca970ee2a85ed15b7e94adfd4e246366988ff1d927a861cfffa9cd591b23f7",
+    "source_url": "https://arxiv.org/pdf/2507.06457v1#page=4",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/sequence-state-2026-11-03/hybrid-linear-v1.html",
+    "license_evidence_sha256": "3be209523c5f6fc684b06c26cf266857d989c7758ec98e7af67e2515774d3919",
+    "dpi": 300,
+    "crop_pixels": [
+      283,
+      310,
+      2271,
+      1360
+    ],
+    "dimensions": [
+      1988,
+      1050
+    ],
+    "sha256": "8c2df95aabc121417804f9bd15f3e980004a975c903eb218c23a4df40454d1dd"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/sequence-state-2026-11-03/hybrid-state-update-generations.png",
+    "page": 4,
+    "object": "Figure 1",
+    "source": "05 Источники/Originals/sequence-state-2026-11-03/hybrid-linear-v1.pdf",
+    "source_sha256": "bfca970ee2a85ed15b7e94adfd4e246366988ff1d927a861cfffa9cd591b23f7",
+    "source_url": "https://arxiv.org/pdf/2507.06457v1#page=4",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/sequence-state-2026-11-03/hybrid-linear-v1.html",
+    "license_evidence_sha256": "3be209523c5f6fc684b06c26cf266857d989c7758ec98e7af67e2515774d3919",
+    "dpi": 300,
+    "crop_pixels": [
+      283,
+      1390,
+      2271,
+      2675
+    ],
+    "dimensions": [
+      1988,
+      1285
+    ],
+    "sha256": "79a16eebd573edcd153bd81649cb754a0f17fde3690d258c32c12234f20631f4"
+  }
+]

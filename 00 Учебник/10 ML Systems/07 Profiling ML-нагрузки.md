@@ -2,9 +2,82 @@
 title: Profiling ML-нагрузки
 type: textbook-chapter
 status: draft
-last_updated: 2026-10-27
-last_verified: 2026-10-27
+last_updated: 2026-11-04
+last_verified: 2026-11-04
 source_language: mixed
+reference_terms:
+  - anchor: profile-dependencies
+    label: "Критический путь и ожидание CPU/GPU"
+    label_en: "Critical paths and CPU/GPU waits"
+  - anchor: profile-tools
+    label: "Уровни наблюдения и выбор профилировщика"
+    label_en: "Observation levels and profiler selection"
+  - anchor: profile-experiment
+    label: "Нагрузка, прогрев и окно наблюдения"
+    label_en: "Workload, warmup and capture window"
+  - anchor: pytorch-profiler
+    label: "Расписание PyTorch Profiler и метки стадий"
+    label_en: "PyTorch Profiler schedules and stage ranges"
+  - anchor: profile-aggregates
+    label: "Self CPU, CPU total и перекрытие событий"
+    label_en: "Self CPU, CPU total and event overlap"
+  - anchor: cpu-py-spy
+    label: "CPU-профиль и процессы DataLoader"
+    label_en: "CPU profiles and DataLoader workers"
+  - anchor: profile-flamegraph
+    label: "Как читать flame graph"
+    label_en: "Reading a sampled flame graph"
+  - anchor: nsight-systems
+    label: "CPU, CUDA API и ядра в Nsight Systems"
+    label_en: "CPU, CUDA API and kernels in Nsight Systems"
+  - anchor: profile-nvtx
+    label: "NVTX и границы записи CUDA-профиля"
+    label_en: "NVTX and bounded CUDA capture"
+  - anchor: profile-patterns
+    label: "Простой, короткие ядра и синхронизация"
+    label_en: "Idle gaps, short kernels and synchronization"
+  - anchor: profile-gelu
+    label: "Naive, builtin и compiled GeLU"
+    label_en: "Naive, builtin and compiled GeLU"
+  - anchor: profile-runtime
+    label: "Диспетчер, autograd и исполнение графа"
+    label_en: "Dispatcher, autograd and graph execution"
+  - anchor: profile-training-step
+    label: "Полный шаг MLP и события профилировщика"
+    label_en: "A complete MLP step and profiler events"
+  - anchor: profile-step-gradients
+    label: "Градиенты двухслойного MLP и обновление SGD"
+    label_en: "Two-layer MLP gradients and SGD updates"
+  - anchor: profile-step-products
+    label: "Формы matmul, входной градиент и FLOP"
+    label_en: "Matmul shapes, input gradients and FLOP"
+  - anchor: profile-capture
+    label: "Захват графа, graph breaks и guards"
+    label_en: "Graph capture, graph breaks and guards"
+  - anchor: profile-fusion
+    label: "Fusion, движение данных и окупаемость компиляции"
+    label_en: "Fusion, data movement and compilation break-even"
+  - anchor: profile-export
+    label: "Checkpoint, ONNX и скомпилированный engine"
+    label_en: "Checkpoint, ONNX and compiled engines"
+  - anchor: memory-snapshot
+    label: "Время жизни тензоров, allocated и reserved"
+    label_en: "Tensor lifetimes, allocated and reserved memory"
+  - anchor: profile-memory-history
+    label: "Active Memory Timeline и Allocator State History"
+    label_en: "Active Memory Timeline and Allocator State History"
+  - anchor: profile-pinned-history
+    label: "История pinned host memory и пределы memory_viz"
+    label_en: "Pinned host memory history and memory_viz limits"
+  - anchor: profile-nsight-compute
+    label: "Nsight Compute, счётчики и replay"
+    label_en: "Nsight Compute, counters and replay"
+  - anchor: profile-end-to-end
+    label: "Критический путь полного шага"
+    label_en: "The complete-step critical path"
+  - anchor: profile-reproducibility
+    label: "Проверка гипотезы и сохранение артефактов"
+    label_en: "Testing a hypothesis and recording artifacts"
 source_unit_id:
   - lecture-06-benchmark-profile-experiment
   - lecture-06-section-169-add-dim-2048
@@ -13,6 +86,7 @@ source_unit_id:
   - assignment-02-nsight-systems-trace
   - assignment-02-task-nsys-profile
   - assignment-02-task-memory-profiling
+  - py-spy-flamegraph-sample-population
 ---
 
 <a id="cs336-systems-profiling"></a>
@@ -40,6 +114,8 @@ source_unit_id:
 проходов по памяти в операции, заметной в полном шаге, а не просто заменить
 любой оператор PyTorch собственным кодом.
 
+<a id="profile-dependencies"></a>
+
 <a id="полный-диагностический-маршрут"></a>
 
 ## Время работы и зависимости
@@ -60,7 +136,7 @@ CPU в результате, ожидание просто переместит�
 причинная связь: какой CPU-вызов поставил ядро в очередь, какой stream его
 исполнил и какой результат требуется следующей операции.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/profiling-review-2026-10/pytorch-profiler-trace.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/profiling-review-2026-10/pytorch-profiler-trace.png|PyTorch trace with nested CPU operator ranges above queued kernels on CUDA stream 7]]
 
 *Оригинальный снимок из PyTorch Tutorials, Shivam Raikundalia и участники
 проекта, [«PyTorch Profiler», раздел об экспорте trace](https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html).
@@ -84,6 +160,8 @@ CPU успевает продвинуться по программе, пока 
 исследования. Оператор может иметь большое суммарное время, но исполняться
 параллельно с другим ограничивающим участком. И наоборот, несколько небольших
 ожиданий между операциями могут определять значительную часть задержки шага.
+
+<a id="profile-tools"></a>
 
 <a id="диагноз-по-уровню-стека"></a>
 
@@ -113,6 +191,8 @@ MFU отвечает на другой вопрос — какую долю ус
 [[02 Areas/ML & DL/00 Учебник/10 ML Systems/03 Измерение производительности и roofline|главе об измерениях и roofline]].
 Такое различие особенно подчёркивает Max Ryabinin в
 [Efficient DL Systems, week 2, слайды 4–8 и 33–44](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf).
+
+<a id="profile-experiment"></a>
 
 ## Подготовка наблюдаемого эксперимента
 
@@ -240,6 +320,8 @@ JSON открывают в [Perfetto](https://ui.perfetto.dev/) или совм�
 пределами этой метки, и профиль будет неполным именно там, где его хотели
 исследовать.
 
+<a id="profile-aggregates"></a>
+
 ## Как читать таблицу операторов
 
 У строки профилировщика есть имя операции, число вызовов и несколько видов
@@ -329,6 +411,75 @@ py-spy record --idle --subprocesses -o profile.svg --pid PID
 нативных стеков и определения простаивающих потоков перечислены в
 [документации py-spy](https://github.com/benfred/py-spy#frequently-asked-questions).
 
+<!-- BEGIN REVIEW: sampled flame graph 2026-11-04 -->
+<a id="profile-flamegraph"></a>
+
+### Reading a sampled flame graph
+
+A sampling profiler periodically records the call stack of a thread.
+A flame graph groups these observations by call path. A wide frame appeared
+in many retained stacks; it does not mean that the function was called
+that many times. One long invocation may appear in many samples, while
+a short invocation can occur between samples and be missed.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/profiling-2026-11-04/py-spy-flamegraph.svg|Original inverted py-spy flame graph: calculate_similar_artists branches into fit and similar_items, with argpartition and _wrapfunc nested below the similarity-score calculation]]
+
+*Ben Frederickson, [py-spy — record](https://github.com/benfred/py-spy/blob/7a7ac96e96e0f9b4ba3eee80de3f4d255698170b/README.md#record).
+Complete original SVG, 1200×182, with its original labels and sample counts.
+[MIT license](/licenses/py-spy-7a7ac96e-MIT.txt). No crop, redraw or relabeling.
+Enlarge the figure to read the frames. The original SVG's hover details and
+frame zoom are available when opening its file.*
+
+The root is at the top in this **inverted** layout; following a branch
+downwards follows nested calls. The `all` frame represents 2893 retained
+samples. At the `calculate_similar_artists` level, the location
+`lastfm.py:79` accounts for 1490 samples, or 51.50% of the total.
+The location `lastfm.py:95` accounts for 1371 samples, or 47.39%.
+The wide branches identify where to inspect the calling code; the picture
+alone does not explain why those paths dominate.
+
+The counts in the original SVG also show why parent and child widths
+cannot be added as independent work:
+
+| Nested frame | Samples |
+|---|---:|
+| `_get_similarity_score`, line 209 | 814 |
+| its `argpartition` child | 813 |
+| that child's `_wrapfunc` child | 813 |
+
+The 813 observations in `argpartition` already belong to the 814 observations
+of its parent. The same 813 stacks continue into `_wrapfunc`.
+Adding 814, 813 and 813 would count most of those observations three times.
+The source percentages are 28.14%, 28.10% and 28.10% of the same 2893 samples,
+not three disjoint shares of execution. The frame coordinates are rounded
+for drawing; use the recorded counts rather than measuring pixel widths.
+
+Horizontal position is not chronology. For an illustrative capture that
+includes idle stacks, let `D` mean decoding and `W` mean waiting.
+The observed sequences `[D,D,D,D,D,D,W,W]` and `[D,D,D,W,D,D,D,W]`
+both contain six decoding and two waiting samples. Their aggregate widths
+are identical, although the waits occur at different points.
+A flame graph cannot recover that order. A timeline retains event order
+and is needed to relate a wait to a particular missing batch or CUDA launch.
+Brendan Gregg explains this distinction in
+[Flame Graphs, Summary and Variations](https://www.brendangregg.com/flamegraphs.html#Summary).
+
+The denominator depends on what the profiler retains. With `--idle`,
+`py-spy` includes stacks it would otherwise classify as idle.
+With `--gil`, it retains only stacks holding the GIL and can omit work
+in native extensions that release it. With `--subprocesses`, worker
+processes contribute their own stacks. Compare profiles with the same
+capture options, and inspect which process or thread each branch belongs to.
+These options and their limitations are documented in the pinned
+[py-spy FAQ](https://github.com/benfred/py-spy/blob/7a7ac96e96e0f9b4ba3eee80de3f4d255698170b/README.md#frequently-asked-questions).
+
+This is the source repository's recommender-system example, not a fresh
+measurement of our model or DataLoader. Its counts establish what this
+picture contains; they do not establish a GPU bottleneck, elapsed seconds
+or an expected speedup.
+
+<!-- END REVIEW: sampled flame graph 2026-11-04 -->
+
 Широкий участок декодирования изображения в профиле рабочего процесса
 поддерживает гипотезу о дорогом преобразовании. Долгое ожидание очереди
 в главном процессе говорит лишь о том, что пакет не готов: причина может
@@ -355,7 +506,7 @@ CPU-профиль объясняет подготовку работы, а GPU-
 могут быть двумя наблюдениями одного и того же ожидания, а не двумя
 последовательными расходами времени.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-nsight-trace.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-nsight-trace.png|CS336 Nsight Systems trace with GPU metrics, CUDA kernels, NVTX ranges and successive Transformer-layer boundaries]]
 
 *Оригинальная временная шкала из Stanford CS336, авторы курса,
 [Assignment 2, Figure 1, p. 5](https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf#page=5).
@@ -372,6 +523,8 @@ NVTX-диапазоны и границы модулей PyTorch. Использ
 Наконец, узкие разрывы в дорожке ядер нужно увеличивать и связывать
 с событиями хоста. По одному этому обзорному снимку нельзя доказать ни
 конкретную причину разрыва, ни вычислительный или memory-bound режим ядра.
+
+<a id="profile-nvtx"></a>
 
 ### NVTX как связь между моделью и timeline
 
@@ -425,10 +578,12 @@ nsys profile \
 Синхронизации выше задают границы окна, но не вставляются между каждым ядром:
 иначе само измерение уничтожит исследуемое перекрытие.
 
+<a id="profile-patterns"></a>
+
 ### Типовые рисунки на временной шкале
 
 Если перед началом каждого пакета GPU простаивает, а на CPU растягивается
-получение данных, проверяют конвейер из S6: чтение, декодирование, очередь
+получение данных, проверяют конвейер подготовки данных: чтение, декодирование, очередь
 workers и формирование пакета. Если данные готовы, но перед вычислениями
 остаётся длинное H2D-копирование, исследуют передачу. `pin_memory=True`
 и `non_blocking=True` создают предпосылки для асинхронного пути, но сами
@@ -457,6 +612,8 @@ GPU добавляется ожидание коллективных опера�
 может объясняться не только сетью, но и тем, что один rank поздно подготовил
 данные. Для такого вывода одного локального trace недостаточно: сопоставляют
 согласованные окна всех участвующих процессов.
+
+<a id="profile-gelu"></a>
 
 ## Три GeLU как учебный профиль
 
@@ -494,7 +651,8 @@ compiled_gelu = torch.compile(naive_gelu)
 промежуточных данных. По одной таблице времени нельзя раздельно измерить
 вклад этих двух причин. Число запусков видно в trace, а фактический трафик
 памяти уточняется аппаратными счётчиками. Подробный разбор объединения
-и реализации на Triton продолжается в S8.
+и реализации на Triton продолжается в
+[[02 Areas/ML & DL/00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению|следующей главе]].
 
 Проверка такого изменения состоит не только в сравнении скоростей. На
 представительных входах сравнивают выходы и, для обучения, градиенты;
@@ -502,6 +660,8 @@ compiled_gelu = torch.compile(naive_gelu)
 измеряют первоначальную компиляцию и установившийся режим. Нельзя включить
 первый вызов `compiled_gelu` в одну серию, исключить инициализацию встроенной
 функции из другой и приписать всю разницу качеству ядер.
+
+<a id="profile-runtime"></a>
 
 <a id="от-python-функции-до-kernel-где-находится-framework"></a>
 
@@ -516,6 +676,8 @@ compiled_gelu = torch.compile(naive_gelu)
 может происходить без изменения математической архитектуры модели.
 
 <!-- BEGIN REVIEW: training step 2026-10-27 -->
+<a id="profile-training-step"></a>
+
 ### A complete training step: from tensors to profiler events
 
 For a two-layer MLP, the forward pass computes a hidden activation and then
@@ -523,7 +685,7 @@ class scores. The backward pass needs matrix products too, but their operands
 and shapes differ from those in the forward pass. A profiler records those
 individual operations. To identify one, follow the derivative it computes.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/training-step-2026-10-27/cs231n-two-layer.jpeg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/training-step-2026-10-27/cs231n-two-layer.jpeg|CS231n two-layer network: three input coordinates, four hidden neurons and two output neurons]]
 
 *Andrej Karpathy, Stanford CS231n,
 [Neural Networks Part 1, Layer-wise organization](https://cs231n.github.io/neural-networks-1/#layers).
@@ -559,6 +721,8 @@ loss.backward()
 # Parameter update
 optimizer.step()
 ```
+
+<a id="profile-step-gradients"></a>
 
 #### Forward values and parameter gradients
 
@@ -679,6 +843,8 @@ SGD learning rate. Before another independent step, `zero_grad` clears the
 old derivatives. Omitting it would add the new backward contributions to
 the previous ones.
 
+<a id="profile-step-products"></a>
+
 #### Match each matrix product to a recorded event
 
 With a fixed input, there are two forward matrix products and three backward
@@ -788,6 +954,8 @@ explains how changing the execution strategy can change their arrangement.
 
 <!-- END REVIEW: training step 2026-10-27 -->
 
+<a id="profile-capture"></a>
+
 <a id="capture-не-равен-optimization"></a>
 
 В eager-режиме операторы передаются на исполнение по мере работы Python.
@@ -806,6 +974,8 @@ explains how changing the execution strategy can change their arrangement.
 холодные расходы. Конкретные причины и поддержка меняются между версиями;
 их проверяют по журналам компилятора и
 [документации `torch.compile`](https://docs.pytorch.org/docs/2.14/user_guide/torch_compiler/compile/programming_model.graph_breaks_index.html).
+
+<a id="profile-fusion"></a>
 
 ### Fusion как устранение движения данных
 
@@ -836,6 +1006,8 @@ $n>C/(t_e-t_c)$ шагов. Формула предполагает отсутс
 Время каждого тёплого шага улучшилось сразу, а время всей короткой
 задачи — нет. Это расчёт с условными числами, не результат запуска
 `torch.compile` из предыдущего примера.
+
+<a id="profile-export"></a>
 
 <a id="interoperability-graph-как-контракт-с-границами"></a>
 
@@ -904,6 +1076,8 @@ $n>C/(t_e-t_c)$ шагов. Формула предполагает отсутс
 таблица не задаёт правило его округления или обещание выделить из любого
 свободного набора байт один сплошной буфер.
 
+<a id="profile-memory-history"></a>
+
 ### Запись истории и два представления одного снимка
 
 В следующем фрагменте `run_steps` обозначает исследуемые шаги после прогрева.
@@ -931,14 +1105,17 @@ finally:
 [Understanding CUDA Memory Usage, API 2.14](https://docs.pytorch.org/docs/2.14/torch_cuda_memory.html).
 Снимок открывают в [Memory Visualizer](https://pytorch.org/memory_viz/).
 
-Закреплённая CPU-память из S6 требует отдельного наблюдения. В PyTorch 2.14
+<a id="profile-pinned-history"></a>
+
+Закреплённая CPU-память, рассмотренная в главе о подготовке данных,
+требует отдельного наблюдения. В PyTorch 2.14
 опция `record_pinned_host_memory=True` включает её историю в поля
 `host_segments` и `host_traces`. Просмотрщик `memory_viz` пока не отображает
 эти поля, поэтому отсутствие CPU-буферов на его диаграмме не означает,
 что загрузчик их не создал. Поддержка и ограничение описаны в
 [Including Pinned (Host) Memory](https://docs.pytorch.org/docs/2.14/torch_cuda_memory.html#including-pinned-host-memory).
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/profiling-review-2026-10/pytorch-active-memory-timeline.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/profiling-review-2026-10/pytorch-active-memory-timeline.png|PyTorch Active Memory Timeline showing allocation sizes and lifetimes, with the selected allocation's stack below]]
 
 *PyTorch contributors, оригинальный «Active Memory Timeline» из
 [Understanding CUDA Memory Usage](https://docs.pytorch.org/docs/2.8/torch_cuda_memory.html#active-memory-timeline).
@@ -956,7 +1133,7 @@ BSD-style license репозитория PyTorch; файл не изменён.*
 жизни, объединение операций или activation checkpointing. Если пик
 вызван одним временным буфером, нужны другие действия.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/profiling-review-2026-10/pytorch-allocator-state-history.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/profiling-review-2026-10/pytorch-allocator-state-history.png|PyTorch Allocator State History with allocation and free events on the left and segment blocks at the selected event on the right]]
 
 *PyTorch contributors, оригинальный «Allocator State History» из
 [той же документации](https://docs.pytorch.org/docs/2.8/torch_cuda_memory.html#allocator-state-history).
@@ -982,6 +1159,8 @@ BSD-style license PyTorch; файл не изменён. Это состояни
 эта проверка доводится до конкретных размеров крупнейших выделений и
 стеков операций, которые их создали.
 
+<a id="profile-nsight-compute"></a>
+
 ## Когда нужен Nsight Compute
 
 К аппаратным счётчикам переходят после выбора конкретного ядра и входа.
@@ -995,7 +1174,9 @@ Nsight Compute позволяет исследовать пропускную с
 Низкая occupancy не является самостоятельной ошибкой, если доступного
 параллелизма хватает для высокой производительности. И плотная дорожка
 ядер в Systems не доказывает насыщения Tensor Cores. Счётчики помогают
-связать наблюдаемое ядро с моделью roofline и выбрать гипотезу для S8.
+связать наблюдаемое ядро с моделью roofline и выбрать изменение алгоритма
+или реализации для проверки в
+[[02 Areas/ML & DL/00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению|главе о GPU-ядрах]].
 
 Не все счётчики собираются за один проход. Nsight Compute может повторно
 исполнять ядро или приложение и восстанавливать состояние памяти;
@@ -1004,6 +1185,8 @@ Nsight Compute позволяет исследовать пропускную с
 Механизмы и ограничения описаны в
 [Nsight Compute Profiling Guide, Replay](https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#replay).
 После изменения возвращаются к полному шагу без подробного профилирования.
+
+<a id="profile-end-to-end"></a>
 
 ## Условный сквозной пример
 
@@ -1035,6 +1218,8 @@ $\max(110,18+275+17)=310$ мс. Это идеализированный орие
 измеряют непосредственно, без профилировщика, на одинаковой последовательности
 нагрузки. Помимо средней или медианы сохраняют хвост распределения:
 оптимизация обычного шага может не устранить редкие паузы чтения или компиляции.
+
+<a id="profile-reproducibility"></a>
 
 ## Воспроизводимый цикл
 

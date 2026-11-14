@@ -1,0 +1,168 @@
+{
+  "date": "2026-11-09",
+  "scope": "Restore EAGLE-3 Figures 5 and 6 in the Russian and English speculative-decoding chapter after verifying the author camera-ready license.",
+  "review": {
+    "previousGoalTurn": "Progress: the DeepSeek-V3 sequential MTP illustration and both local build variants were verified in 2026-11-09-deepseek-mtp-original-additions.json.",
+    "rights": "OpenReview public note 4exx1hUffq belongs to NeurIPS.cc/2025/Conference. The author group signs it, its invitations include Camera_Ready_Revision, its note-level license is CC BY 4.0, and content.pdf points to /pdf/0fe7af5ec1ec69cb936b30db6ec01cdec6fc5d81.pdf. OpenReview's Terms of Use distinguish the article license from comment and metadata licenses. The local evidence is the exact relevant fields returned by the official API notes/search on 2026-11-09. The arXiv deposit grant is not the source of this permission.",
+    "correspondence": "OpenReview's public indexed PDF §§3.1–3.2 explicitly contains the same Figure 5 inference chain How can → I → do → it and Figure 6 three masks. Compared the unchanged arXiv v3 artwork with that readout, the rendered arXiv PDF pages 4 and 6, and the reproductions in official vLLM Speculators docs/blog. The figure files are from arXiv HTML, not a binary copy of the OpenReview PDF; direct OpenReview PDF download returned its browser challenge. No whole-PDF equality claimed.",
+    "lesson": "Reread all 993 Russian and 948 English input chapter lines and the complete source note. The additions read the shift in the first draft step and the help row in the third training mask, separating published token labels from what is passed through the released training code. Unchanged Python programs, core derivation, earlier originals and Apache benchmark chart are preserved.",
+    "toolformer": "The actual 2023 author submission Yacmpz84TH has no article license in the public OpenReview API record. The separate record psqD4Ny7yi labels a DBLP.org bibliography import CC BY-SA 4.0; that is not evidence for the linked NeurIPS PDF artwork. Toolformer Figure 2 stays linked."
+  },
+  "verification": {
+    "numerical": "Executed all seven published Python blocks, 243 exact sequence probabilities, the existing 300 tree masks and 300 reranking trials, four original figure rerenders and independent 3×9 Figure 6 mask reconstruction. help reads How/can/we/help; cross-branch and future-prefix keys admitted by a flat triangular mask are excluded.",
+    "publication": "Local only; no commit, push or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+      "before_sha256": "2c641e7d6584590418cba788fdcecd444f52ce5740de1a843b3cf7e619dcad6d",
+      "after_sha256": "29dddc54ec1d14b6830a6c60c439e4081d3c2c68e44e28b0231bb3303deeb0a3",
+      "lines": 1012,
+      "changes": [
+        {
+          "old": "  - https://arxiv.org/html/2503.01840v3\n  - https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/eagle/traineagle3/cnets.py",
+          "new": "  - https://arxiv.org/html/2503.01840v3\n  - https://openreview.net/forum?id=4exx1hUffq\n  - https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/eagle/traineagle3/cnets.py"
+        },
+        {
+          "old": "представление a, из которого LM head получает распределение.\n\nВ примере статьи основная модель обработала «How can» и выбрала «I».\nПервый дешёвый шаг использует $g_{\\mathrm{how}},g_{\\mathrm{can}}$\nи сдвинутые эмбеддинги, выдавая представление $a_{\\mathrm I}$\nи следующий токен «do».",
+          "new": "представление a, из которого LM head получает распределение.\n\n<a id=\"eagle3-inference-figure\"></a>\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-inference-figure5.png|Слева основная модель строит признаки для How can. Справа три черновых шага: при появлении I и do черновик подставляет собственные состояния a вместо отсутствующих g.]]\n\n*Yuhui Li, Fangyun Wei, Chao Zhang и Hongyang Zhang,\n[EAGLE-3, Figure 5](https://arxiv.org/html/2503.01840v3#S3.F5). Исходный рисунок без изменений.\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), [авторская версия NeurIPS на OpenReview](https://openreview.net/forum?id=4exx1hUffq).*\n\nВ примере статьи основная модель обработала «How can» и выбрала «I».\nСлева на рисунке проекция сжимает три признака каждой входной позиции\nдо одного $g$. Шаг 1 справа начинается снизу: $g_{\\mathrm{how}}$\nобъединяют с $e_{\\mathrm{can}}$, а $g_{\\mathrm{can}}$ с $e_{\\mathrm I}$.\nИз последней пары черновой блок получает $a_{\\mathrm I}$; после LM head\nиз её распределения выбирают «do»."
+        },
+        {
+          "old": "У таких шагов своя маска внимания. Для обучающего текста «How can I»\nпредсказания «are», «we», «do» продолжают три разных префикса:",
+          "new": "<a id=\"eagle3-training-mask\"></a>\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-training-mask-figure6.svg|Три маски внимания: причинный треугольник исходного текста, затем один и два диагональных блока для продолжений отдельных префиксов.]]\n\n*Li et al., [EAGLE-3, Figure 6](https://arxiv.org/html/2503.01840v3#S3.F6).\nИсходная векторная схема без изменений.\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), [авторская версия NeurIPS на OpenReview](https://openreview.net/forum?id=4exx1hUffq).*\n\nВ левой верхней маске каждый запрос читает исходный текст до своей\nпозиции включительно. Для текста «How can I»\nпредсказания «are», «we», «do» продолжают три разных префикса:"
+        },
+        {
+          "old": "Оригинальные\n[Figure 5, схема инференса, и Figure 6, обучающие маски](https://proceedings.neurips.cc/paper_files/paper/2025/file/c7b5a35ea98b62512a869c19ea7b03cb-Paper-Conference.pdf#page=5)\nпоказывают эти шаги на одной странице опубликованной версии.\nОбозначения f, g и a в этих версиях не взаимозаменяемы:\nу EAGLE-1 предсказанный вектор привязан к признаку учителя,\nу EAGLE-3 такой регрессионной обязанности нет.",
+          "new": "В нижней маске запрос «help» видит четыре ключа: «How», «can», «we»\nи себя. «I» находится за границей исходного префикса этой ветви,\nа «are» принадлежит соседней ветви. Поэтому у двух дополнительных\nгрупп ключей по отдельному диагональному блоку. Обычная причинная\nмаска по всему плоскому массиву разрешила бы лишние связи."
+        },
+        {
+          "old": "- [[05 Источники/Papers/EAGLE-3.md|EAGLE-3: статья, обучающий код и исходный график]].",
+          "new": "- [[05 Источники/Papers/EAGLE-3.md|EAGLE-3: статья, оригинальные схемы и обучающий код]]."
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md",
+      "before_sha256": "0ff64f73949bb3ce59f5576ced9cac993f533e60f5150371543acfb6a37a2247",
+      "after_sha256": "9ed71d53ab0bbef484e5f7c982934cf9a7a65574d2d16857784ebbe982901db6",
+      "lines": 970,
+      "changes": [
+        {
+          "old": "  - https://arxiv.org/html/2503.01840v3\n  - https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/eagle/traineagle3/cnets.py",
+          "new": "  - https://arxiv.org/html/2503.01840v3\n  - https://openreview.net/forum?id=4exx1hUffq\n  - https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/eagle/traineagle3/cnets.py"
+        },
+        {
+          "old": "the LM head obtains token probabilities.\n\nIn the paper's example, the target processed “How can” and selected “I.”\nThe first cheap step uses $g_{\\mathrm{how}},g_{\\mathrm{can}}$ and shifted\nembeddings to produce $a_{\\mathrm I}$ and token “do.”",
+          "new": "the LM head obtains token probabilities.\n\n<a id=\"eagle3-inference-figure\"></a>\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-inference-figure5.png|The target processes How can. Across three draft steps, the draft's own a states stand in for unavailable target g states after I and do.]]\n\n*Yuhui Li, Fangyun Wei, Chao Zhang and Hongyang Zhang,\n[EAGLE-3, Figure 5](https://arxiv.org/html/2503.01840v3#S3.F5). Unmodified original.\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), [authors' NeurIPS version on OpenReview](https://openreview.net/forum?id=4exx1hUffq).*\n\nIn the paper's example, the target processed “How can” and selected “I.”\nOn the left, one projection compresses three features per input position\nto one $g$. At the bottom of step 1 on the right, the drafter pairs\n$g_{\\mathrm{how}}$ with $e_{\\mathrm{can}}$ and $g_{\\mathrm{can}}$ with\n$e_{\\mathrm I}$. The last pair gives $a_{\\mathrm I}$; the LM head turns\nthat state into the distribution from which “do” is drawn."
+        },
+        {
+          "old": "These steps need their own attention mask. For training text “How can I,”",
+          "new": "<a id=\"eagle3-training-mask\"></a>\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-training-mask-figure6.svg|Three attention masks: the original causal triangle, then one and two diagonal blocks for continuations of separate prefixes.]]\n\n*Li et al., [EAGLE-3, Figure 6](https://arxiv.org/html/2503.01840v3#S3.F6).\nUnmodified original vector figure.\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), [authors' NeurIPS version on OpenReview](https://openreview.net/forum?id=4exx1hUffq).*\n\nIn the upper-left mask, each query reads the original text up to its own\nposition. For training text “How can I,”"
+        },
+        {
+          "old": "Original [Figure 5, inference, and Figure 6, training masks](https://proceedings.neurips.cc/paper_files/paper/2025/file/c7b5a35ea98b62512a869c19ea7b03cb-Paper-Conference.pdf#page=5)\nshow both on one published page. Symbols $f,g,a$ are not interchangeable:\nEAGLE-1 ties its predicted vector to a teacher feature; EAGLE-3 has no\nsuch regression constraint.",
+          "new": "In the bottom mask, “help” reads four keys: “How,” “can,” “we” and\nitself. “I” is beyond that branch's original prefix; “are” belongs\nto another branch. Each of the two extra key groups therefore has\nits own diagonal block. A causal mask over the entire flattened array\nwould allow additional connections."
+        },
+        {
+          "old": "- [[05 Источники/Papers/EAGLE-3.md|EAGLE-3: paper, training code, and original chart]].",
+          "new": "- [[05 Источники/Papers/EAGLE-3.md|EAGLE-3: paper, original figures, and training code]]."
+        },
+        {
+          "old": "canonical_revision: \"2c641e7d6584590418cba788fdcecd444f52ce5740de1a843b3cf7e619dcad6d\"\ntranslation_reviewed: \"2026-11-09\"",
+          "new": "canonical_revision: \"29dddc54ec1d14b6830a6c60c439e4081d3c2c68e44e28b0231bb3303deeb0a3\"\ntranslation_reviewed: \"2026-11-09\""
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/EAGLE-3.md",
+      "before_sha256": "7bd644b88ce6d5a796076f02a9402a916108646405b55558ac6a53cab76188c1",
+      "after_sha256": "57636c96d98007ec0662d64dc2c7841d43d71286f1d440e3285cc024a8ca762f",
+      "lines": 38,
+      "changes": [
+        {
+          "old": "[Paper, arXiv v3](https://arxiv.org/html/2503.01840v3);\n[official implementation, commit `cb7e0841`](https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/README.md).",
+          "new": "[Paper, arXiv v3](https://arxiv.org/html/2503.01840v3);\n[authors' NeurIPS version on OpenReview](https://openreview.net/forum?id=4exx1hUffq);\n[official implementation, commit `cb7e0841`](https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/README.md)."
+        },
+        {
+          "old": "shows how the training mask separates continuations of different prefixes.",
+          "new": "shows how the training mask separates continuations of different prefixes.\nBoth original figures are reproduced in the textbook under\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), as recorded on the authors' OpenReview submission."
+        },
+        {
+          "old": "- [[00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md#eagle3-training-targets|Textbook: the training inputs and soft target]].",
+          "new": "- [[00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md#eagle3-inference-figure|Textbook: the three inference steps in Figure 5]].\n- [[00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md#eagle3-training-mask|Textbook: the attention masks in Figure 6]].\n- [[00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md#eagle3-training-targets|Textbook: the training inputs and soft target]]."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "fa7d848b55c42b5b3bb47a53cdf7530dfda775f5b3d668a6304fd03def636a6a",
+      "after_sha256": "ea5f87351658aeb18d957d64e8a96f6008ff191fcd4ce386512370723ace8e37",
+      "lines": 24340,
+      "changes": [
+        {
+          "old": "assets:\n  - id: \"curated-eagle3-speedup-5e404ac75809\"",
+          "new": "assets:\n  - {\"id\":\"curated-eagle3-inference-figure5-1fc5aea1023b\",\"asset\":\"00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-inference-figure5.png\",\"title\":\"EAGLE-3 inference pipeline (Figure 5)\",\"source_url\":\"https://arxiv.org/html/2503.01840v3#S3.F5\",\"source_image_url\":\"https://arxiv.org/html/2503.01840v3/method.png\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-inference-figure5.png\",\"source_asset_sha256\":\"1fc5aea1023b11258bcc47d75f528b4e0224364089c2bbdba20a0c0aeb0f86c1\",\"sha256\":\"1fc5aea1023b11258bcc47d75f528b4e0224364089c2bbdba20a0c0aeb0f86c1\",\"derivation\":\"source-png-copy\",\"dimensions_px\":[647,987],\"author\":\"Yuhui Li, Fangyun Wei, Chao Zhang and Hongyang Zhang\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence\":\"05 Источники/Originals/eagle3-2026-11-09/openreview-4exx1hUffq.json\",\"license_evidence_sha256\":\"44bd391f91ae1303eeeea81ad0e961fd97cf927ef57353bf1ab14554859d6064\",\"rights_evidence\":\"https://openreview.net/forum?id=4exx1hUffq\",\"rights_status\":\"source-license-verified\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"author-camera-ready-license\",\"last_verified\":\"2026-11-09\",\"modifications\":\"Unmodified original figure file from arXiv HTML v3; the authors publish the same figure in the CC BY 4.0 camera-ready article on OpenReview.\",\"used_in\":[\"00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md\",\"en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md\"]}\n  - {\"id\":\"curated-eagle3-mask-figure6-91c835f7a994\",\"asset\":\"00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-training-mask-figure6.svg\",\"title\":\"EAGLE-3 attention masks during training-time test (Figure 6)\",\"source_url\":\"https://arxiv.org/html/2503.01840v3#S3.F6\",\"source_image_url\":\"https://arxiv.org/html/2503.01840v3/train.svg\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-training-mask-figure6.svg\",\"source_asset_sha256\":\"91c835f7a9949fdd466d453204670652cab8174c088326f03d46ad040c3ee656\",\"sha256\":\"91c835f7a9949fdd466d453204670652cab8174c088326f03d46ad040c3ee656\",\"derivation\":\"source-svg-copy\",\"viewBox\":[0,0,919.5071,434.72798],\"author\":\"Yuhui Li, Fangyun Wei, Chao Zhang and Hongyang Zhang\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence\":\"05 Источники/Originals/eagle3-2026-11-09/openreview-4exx1hUffq.json\",\"license_evidence_sha256\":\"44bd391f91ae1303eeeea81ad0e961fd97cf927ef57353bf1ab14554859d6064\",\"rights_evidence\":\"https://openreview.net/forum?id=4exx1hUffq\",\"rights_status\":\"source-license-verified\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"author-camera-ready-license\",\"last_verified\":\"2026-11-09\",\"modifications\":\"Unmodified original figure file from arXiv HTML v3; the authors publish the same figure in the CC BY 4.0 camera-ready article on OpenReview.\",\"used_in\":[\"00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md\",\"en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md\"]}\n  - id: \"curated-eagle3-speedup-5e404ac75809\""
+        }
+      ]
+    },
+    {
+      "source": "publishing/tests/asset-registry.test.ts",
+      "before_sha256": "fd8cd3cf53cdd42a7f5f226b47d070227df18110dd3942b88b4d22046739f649",
+      "after_sha256": "493886b8a17d7d8b366161b1cfb0f35a27e97a1b2a3aa518499da6925ab8bbb7",
+      "lines": 10635,
+      "changes": [
+        {
+          "old": "function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root): void {\n  if (entry.id === 'curated-deepseek-v3-mtp-figure3-f39402216f59') {",
+          "new": "function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root): void {\n  if (/^curated-eagle3-(inference-figure5|mask-figure6)-/.test(entry.id)) {\n    const originals = [{\"id\":\"curated-eagle3-inference-figure5-1fc5aea1023b\",\"asset\":\"00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-inference-figure5.png\",\"title\":\"EAGLE-3 inference pipeline (Figure 5)\",\"source_url\":\"https://arxiv.org/html/2503.01840v3#S3.F5\",\"source_image_url\":\"https://arxiv.org/html/2503.01840v3/method.png\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-inference-figure5.png\",\"source_asset_sha256\":\"1fc5aea1023b11258bcc47d75f528b4e0224364089c2bbdba20a0c0aeb0f86c1\",\"sha256\":\"1fc5aea1023b11258bcc47d75f528b4e0224364089c2bbdba20a0c0aeb0f86c1\",\"derivation\":\"source-png-copy\",\"dimensions_px\":[647,987],\"author\":\"Yuhui Li, Fangyun Wei, Chao Zhang and Hongyang Zhang\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence\":\"05 Источники/Originals/eagle3-2026-11-09/openreview-4exx1hUffq.json\",\"license_evidence_sha256\":\"44bd391f91ae1303eeeea81ad0e961fd97cf927ef57353bf1ab14554859d6064\",\"rights_evidence\":\"https://openreview.net/forum?id=4exx1hUffq\",\"rights_status\":\"source-license-verified\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"author-camera-ready-license\",\"last_verified\":\"2026-11-09\",\"modifications\":\"Unmodified original figure file from arXiv HTML v3; the authors publish the same figure in the CC BY 4.0 camera-ready article on OpenReview.\",\"used_in\":[\"00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md\",\"en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md\"]},{\"id\":\"curated-eagle3-mask-figure6-91c835f7a994\",\"asset\":\"00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-training-mask-figure6.svg\",\"title\":\"EAGLE-3 attention masks during training-time test (Figure 6)\",\"source_url\":\"https://arxiv.org/html/2503.01840v3#S3.F6\",\"source_image_url\":\"https://arxiv.org/html/2503.01840v3/train.svg\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-training-mask-figure6.svg\",\"source_asset_sha256\":\"91c835f7a9949fdd466d453204670652cab8174c088326f03d46ad040c3ee656\",\"sha256\":\"91c835f7a9949fdd466d453204670652cab8174c088326f03d46ad040c3ee656\",\"derivation\":\"source-svg-copy\",\"viewBox\":[0,0,919.5071,434.72798],\"author\":\"Yuhui Li, Fangyun Wei, Chao Zhang and Hongyang Zhang\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence\":\"05 Источники/Originals/eagle3-2026-11-09/openreview-4exx1hUffq.json\",\"license_evidence_sha256\":\"44bd391f91ae1303eeeea81ad0e961fd97cf927ef57353bf1ab14554859d6064\",\"rights_evidence\":\"https://openreview.net/forum?id=4exx1hUffq\",\"rights_status\":\"source-license-verified\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"author-camera-ready-license\",\"last_verified\":\"2026-11-09\",\"modifications\":\"Unmodified original figure file from arXiv HTML v3; the authors publish the same figure in the CC BY 4.0 camera-ready article on OpenReview.\",\"used_in\":[\"00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md\",\"en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md\"]}];\n    const spec = originals.find(row => row.id === entry.id);\n    expect(spec).toBeDefined();\n    expect(entry).toMatchObject(spec!);\n    const asset = resolve(repositoryRoot, spec!.asset);\n    expect(sha256(asset)).toBe(spec!.sha256);\n    expectDecodableImage(asset);\n    const evidence = resolve(repositoryRoot, spec!.license_evidence);\n    if (existsSync(evidence)) {\n      expect(sha256(evidence)).toBe(spec!.license_evidence_sha256);\n      expect(JSON.parse(readFileSync(evidence, 'utf8'))).toMatchObject({\n        id: '4exx1hUffq', license: 'CC BY 4.0', domain: 'NeurIPS.cc/2025/Conference',\n        signatures: ['NeurIPS.cc/2025/Conference/Submission13079/Authors'],\n        content: { pdf: { value: '/pdf/0fe7af5ec1ec69cb936b30db6ec01cdec6fc5d81.pdf' } },\n      });\n    }\n    return;\n  }\n  if (entry.id === 'curated-deepseek-v3-mtp-figure3-f39402216f59') {"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tools/check_speculative_examples.py",
+      "before_sha256": "0a3ea9aca0a6fec2ba4139f2705ea93fb2cce7e073f2a5ebb36540bb6b097c1f",
+      "after_sha256": "2e2296c26ad2fc410a752c2b60eeb560a8c84eaf285608da7553708bca49ff5f",
+      "lines": 332,
+      "changes": [
+        {
+          "old": "    assert len(embeds) == 9",
+          "new": "    assert len(embeds) == 11"
+        },
+        {
+          "old": "    np.testing.assert_allclose(4.40/3.16, 1.39, atol=.005)",
+          "new": "    np.testing.assert_allclose(4.40/3.16, 1.39, atol=.005)\n    # Reconstruct Figure 6, independently of the pictured red check marks.\n    # The original sequence uses its causal triangle; each unrolled group\n    # adds one key per row and no edges between branches.\n    original = [\"How\", \"can\", \"I\"]\n    groups = [[\"are\", \"we\", \"do\"], [\"you\", \"help\", \"it\"]]\n    mask = np.concatenate([np.tri(3, dtype=bool)] + [np.eye(3, dtype=bool)] * 2, axis=1)\n    columns = original + sum(groups, [])\n    visible = [[name for name, use in zip(columns, row) if use] for row in mask]\n    assert visible == [[\"How\", \"are\", \"you\"], [\"How\", \"can\", \"we\", \"help\"],\n                       [\"How\", \"can\", \"I\", \"do\", \"it\"]]\n    assert np.tri(9, dtype=bool)[6:, :][1, 2] and not mask[1, 2]\n    assert np.tri(9, dtype=bool)[6:, :][1, 3] and not mask[1, 3]\n    for file, expected in [\n        (\"00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-inference-figure5.png\", \"1fc5aea1023b11258bcc47d75f528b4e0224364089c2bbdba20a0c0aeb0f86c1\"),\n        (\"00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-training-mask-figure6.svg\", \"91c835f7a9949fdd466d453204670652cab8174c088326f03d46ad040c3ee656\"),\n        (\"05 Источники/Originals/eagle3-2026-11-09/openreview-4exx1hUffq.json\", \"44bd391f91ae1303eeeea81ad0e961fd97cf927ef57353bf1ab14554859d6064\"),\n    ]:\n        assert digest(ROOT / file) == expected"
+        },
+        {
+          "old": "    return {\"masked_soft_target\": target[0].tolist(), \"training_losses\": loss.tolist(),\n            \"eagle3_over_eagle2\": 4.40/3.16}",
+          "new": "    return {\"masked_soft_target\": target[0].tolist(), \"training_losses\": loss.tolist(),\n            \"eagle3_figure6_third_step_visible_keys\": visible,\n            \"eagle3_over_eagle2\": 4.40/3.16}"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tests/site-output.test.ts",
+      "before_sha256": "3b722808a7113d2d27546d35333d4a38c58f49252983b4357d5ce047167d2f92",
+      "after_sha256": "ca9622f88b32f58326b847fa9b2b61c733a93d11da92eb2433f093e02896b07b",
+      "lines": 4926,
+      "changes": [
+        {
+          "old": "      expect(createHash('sha256').update(bytes).digest('hex')).toBe('5e404ac75809d8125e1c360c36054c2f90ebd72453a46a352609e538d91f6ba1');\n      expect(html).toContain('href=\"/' + locale + note + '\"');\n      const source = await readFile(join(distDir, locale, note, 'index.html'), 'utf8');\n      for (const anchor of ['eagle3-training-targets', 'eagle3-benchmark-reading'])\n        expect(source).toContain('href=\"/' + locale + route + '#' + anchor + '\"');",
+          "new": "      expect(createHash('sha256').update(bytes).digest('hex')).toBe('5e404ac75809d8125e1c360c36054c2f90ebd72453a46a352609e538d91f6ba1');\n      for (const [anchor, file, figure, digest] of [\n        ['eagle3-inference-figure', 'eagle3-inference-figure5.png', 'S3.F5', '1fc5aea1023b11258bcc47d75f528b4e0224364089c2bbdba20a0c0aeb0f86c1'],\n        ['eagle3-training-mask', 'eagle3-training-mask-figure6.svg', 'S3.F6', '91c835f7a9949fdd466d453204670652cab8174c088326f03d46ad040c3ee656'],\n      ]) {\n        const start = html.indexOf('id=\"' + anchor + '\"');\n        const figureHtml = html.slice(start, html.indexOf('</figcaption>', start));\n        expect(start).toBeGreaterThan(0);\n        expect(figureHtml).toContain('https://arxiv.org/html/2503.01840v3#' + figure);\n        expect(figureHtml).toContain('https://openreview.net/forum?id=4exx1hUffq');\n        expect(figureHtml).toContain('https://creativecommons.org/licenses/by/4.0/');\n        const url = [...figureHtml.matchAll(/<img[^>]* src=\"([^\"]+)\"[^>]* alt=\"[^\"]+\"/g)]\n          .map(m => m[1]).find(value => value.endsWith('/' + file));\n        expect(url).toBeDefined();\n        expect(createHash('sha256').update(await readFile(join(distDir, decodeURIComponent(url!)))).digest('hex'))\n          .toBe(digest);\n      }\n      expect(html).toContain('href=\"/' + locale + note + '\"');\n      const source = await readFile(join(distDir, locale, note, 'index.html'), 'utf8');\n      for (const anchor of ['eagle3-inference-figure', 'eagle3-training-mask', 'eagle3-training-targets', 'eagle3-benchmark-reading'])\n        expect(source).toContain('href=\"/' + locale + route + '#' + anchor + '\"');"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-inference-figure5.png",
+      "created": true,
+      "after_sha256": "1fc5aea1023b11258bcc47d75f528b4e0224364089c2bbdba20a0c0aeb0f86c1"
+    },
+    {
+      "source": "00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-training-mask-figure6.svg",
+      "created": true,
+      "after_sha256": "91c835f7a9949fdd466d453204670652cab8174c088326f03d46ad040c3ee656"
+    },
+    {
+      "source": "05 Источники/Originals/eagle3-2026-11-09/openreview-4exx1hUffq.json",
+      "created": true,
+      "after_sha256": "44bd391f91ae1303eeeea81ad0e961fd97cf927ef57353bf1ab14554859d6064"
+    }
+  ]
+}

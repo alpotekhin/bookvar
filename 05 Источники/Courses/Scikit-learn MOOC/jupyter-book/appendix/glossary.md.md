@@ -65,7 +65,9 @@ use case above.
 
 Below, we illustrate an example of binary classification.
 
-![img](https://inria.github.io/scikit-learn-mooc/figures/lin_separable.svg)
+![[Assets/Sources/Scikit-learn MOOC/figures/lin_separable.svg|Two classes of points on opposite sides of a straight decision boundary.]]
+
+*Scikit-learn MOOC contributors, [original figure](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/figures/lin_separable.svg), [CC BY 4.0](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE).*
 
 The data provided by the user contains 2
 [features](#feature-variable-attribute-descriptor-covariate), represented by
@@ -271,7 +273,9 @@ problems). Example of regression problems are:
 
 Below, we illustrate an example of regression.
 
-![img](https://inria.github.io/scikit-learn-mooc/figures/dt_fit.svg)
+![[Assets/Sources/Scikit-learn MOOC/figures/dt_fit.svg|A decision tree fits a piecewise constant function to the data points.]]
+
+*Scikit-learn MOOC contributors, [original figure](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/figures/dt_fit.svg), [CC BY 4.0](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE).*
 
 The data provided by the user contains 1
 [feature](#feature-variable-attribute-descriptor-covariate) called `x` and we
@@ -316,7 +320,9 @@ instance of the `KNeighborsClassifier` class.
 
 We can give a concrete graphical example.
 
-![img](https://inria.github.io/scikit-learn-mooc/figures/boosting0.svg)
+![[Assets/Sources/Scikit-learn MOOC/figures/boosting0.svg|Labeled points on two axes: blue circles and orange squares.]]
+
+*Scikit-learn MOOC contributors, [original figure](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/figures/boosting0.svg), [CC BY 4.0](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE).*
 
 The plot represent a [supervised](#supervised-learning)
 [classification](#classification) example. The data are composed of 2 features
@@ -364,7 +370,9 @@ performance](#generalization-performance-predictive-performance-statistical-perf
 Find ideal [model](#model) parameters given the data. Let's give a concrete
 example.
 
-![img](https://inria.github.io/scikit-learn-mooc/figures/linear_fit_red.svg)
+![[Assets/Sources/Scikit-learn MOOC/figures/linear_fit_red.svg|A fitted line and vertical residuals from the observed points to the line.]]
+
+*Scikit-learn MOOC contributors, [original figure](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/figures/linear_fit_red.svg), [CC BY 4.0](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE).*
 
 On the above figure, a linear [model](#model) (blue line) will be
 mathematically defined by `y = a*x + b`. The parameter `a` defines the slope of
@@ -377,7 +385,9 @@ possible parameters `a` and `b` fulfilling this requirement.
 
 In a more abstract manner, we can represent fitting with the following diagram:
 
-![img](https://inria.github.io/scikit-learn-mooc/_images/api_diagram-predictor.fit.svg)
+![[Assets/Sources/Scikit-learn MOOC/figures/api_diagram-predictor.fit.svg|The fit method uses X and y to learn the predictor's model state.]]
+
+*Scikit-learn MOOC contributors, [original figure](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/figures/api_diagram-predictor.fit.svg), [CC BY 4.0](https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE).*
 
 The [model state](#model-state) are indeed the parameters and the jockey wheels
 are referring to an optimization algorithm to find the best parameters.

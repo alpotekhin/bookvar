@@ -1,5 +1,30 @@
 Gaussian mixture model figures in Bookvar
 
+ADDITIONAL ORIGINAL FIGURES, 2026-11-03
+
+Jake VanderPlas, Python Data Science Handbook:
+jake-moons-generated.png, jake-training-digits.png,
+jake-digit-aic.png, jake-generated-digits.png.
+https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html
+CC BY-NC-ND 3.0 Unported; source revision
+d66231454ef753818dc9213c9b5942e067266966.
+Complete original PNG outputs from notebook cells 34, 42, 46 and 52.
+No plotting code executed to replace them; no image modifications.
+Attributed source-language paragraphs retain the same source license.
+
+The scikit-learn developers, GMM Initialization Methods:
+https://scikit-learn.org/1.9/auto_examples/mixture/plot_gmm_init.html
+sklearn-gmm-initialization.png is the complete original documentation PNG.
+Documentation revision 199d116ab37beed506c63fc9f6a74f56e228de43.
+Example source release 1.9.1, commit
+866c0f51e7560ef0303cbcc5f159df5382ea9e3f; BSD-3-Clause.
+The complete license is published alongside this notice in
+scikit-learn-1.9.1-BSD-3-Clause.txt.
+No redraw, crop, relabeling, translation or resampling.
+Its initialization timings are historical source results, not Bookvar measurements.
+
+INITIAL FIGURES, 2026-10-25
+
 Jake VanderPlas, Python Data Science Handbook,
 In Depth: Gaussian Mixture Models
 https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html

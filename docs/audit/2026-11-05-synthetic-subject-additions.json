@@ -1,0 +1,528 @@
+{
+  "date": "2026-11-05",
+  "last_verified": "2026-11-06",
+  "status": "source-runtime-reader-local-build-verified",
+  "scope": "Whole canonical synthetic-text and sim-to-real chapters read. Repair prerequisites and expose existing full mechanisms through RU/EN subject indexes; retain source-native English, original figures and every executable example. No source replacement, translation or new diagram.",
+  "files": [
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+      "before_sha256": "41629ce92425dc01f122181499ddc21b186f0902d18450b140f1a4d91e281abd",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-30\n",
+          "new": "last_updated: 2026-11-05\n"
+        },
+        {
+          "old": "last_verified: 2026-10-30\n",
+          "new": "last_verified: 2026-10-30\nsource_language: mixed\nreference_terms:\n  - label: \"Что можно синтезировать в обучающей записи\"\n    label_en: \"What can be synthesized in a training record\"\n    anchor: synthetic-transformations\n  - label: \"Генерация, оценивание и отбор данных\"\n    label_en: \"Generation, scoring and data selection\"\n    anchor: teacher-data\n  - label: \"Формат и соответствие источнику\"\n    label_en: \"Format and source fidelity\"\n    anchor: syn-format-content\n  - label: \"Как фильтр меняет распределение задач\"\n    label_en: \"How filtering changes the task distribution\"\n    anchor: syn-filter-distribution\n  - label: \"Self-Instruct: итеративный сбор инструкций\"\n    label_en: \"Self-Instruct: iterative instruction generation\"\n    anchor: syn-self-instruct\n  - label: \"Инструкция и конкретный экземпляр задачи\"\n    label_en: \"Instructions versus task instances\"\n    anchor: syn-instruction-instance\n  - label: \"Фильтры Self-Instruct и их ограничения\"\n    label_en: \"Self-Instruct filters and their limits\"\n    anchor: syn-self-instruct-filters\n  - label: \"Nemotron-CC: преобразование веб-документов\"\n    label_en: \"Nemotron-CC: transforming web documents\"\n    anchor: syn-nemotron-cc\n  - label: \"Phi: отбор кода, учебные тексты и упражнения\"\n    label_en: \"Phi: code selection, textbooks and exercises\"\n    anchor: phi-synthetic-recipes\n  - label: \"Phi-1: три набора и два этапа обучения\"\n    label_en: \"Phi-1: three datasets and two training stages\"\n    anchor: syn-phi1-datasets\n  - label: \"Phi-4: исходные материалы и обратная инструкция\"\n    label_en: \"Phi-4: seeds and instruction reversal\"\n    anchor: syn-phi4-seeds\n  - label: \"Phi-4: повторения и итоговая смесь\"\n    label_en: \"Phi-4: repetitions and the final mixture\"\n    anchor: syn-phi4-repetitions\n  - label: \"Nemotron-4: запросы, диалоги и предпочтения\"\n    label_en: \"Nemotron-4: prompts, dialogues and preferences\"\n    anchor: nemotron4-synthetic-alignment\n  - label: \"OpenThoughts: вопросы, ответы и учитель\"\n    label_en: \"OpenThoughts: questions, responses and teacher\"\n    anchor: syn-openthoughts\n  - label: \"Отбор вопросов и отбор ответов\"\n    label_en: \"Question selection versus response selection\"\n    anchor: syn-question-answer-selection\n  - label: \"Почему качество учителя проверяют обучением ученика\"\n    label_en: \"Evaluating a teacher through student training\"\n    anchor: syn-teacher-choice\n  - label: \"Программная задача, окружение и траектория\"\n    label_en: \"Coding tasks, environments and trajectories\"\n    anchor: posttraining-environments\n  - label: \"SWE-Smith: воспроизводимые мутации репозитория\"\n    label_en: \"SWE-Smith: reproducible repository mutations\"\n    anchor: syn-swe-smith\n  - label: \"SWE-Smith: частичное исправление проходит тесты\"\n    label_en: \"SWE-Smith: an incomplete repair that passes tests\"\n    anchor: syn-tests-counterexample\n  - label: \"SWE-Rebench: реальные исправления и среда\"\n    label_en: \"SWE-Rebench: real fixes and environment setup\"\n    anchor: syn-swe-rebench\n  - label: \"SWE-Zero: траектории без исполнения проекта\"\n    label_en: \"SWE-Zero: trajectories without project execution\"\n    anchor: syn-swe-zero\n  - label: \"Доли источников и эквивалентное число эпох\"\n    label_en: \"Source weights and equivalent epochs\"\n    anchor: curricula-replay\n  - label: \"Доли документов и доли токенов\"\n    label_en: \"Document shares versus token shares\"\n    anchor: syn-document-token-shares\n  - label: \"Ограничение повторений и допустимый бюджет\"\n    label_en: \"Repetition caps and budget feasibility\"\n    anchor: syn-repetition-cap\n  - label: \"Simulated epoching в малом запуске\"\n    label_en: \"Simulated epoching in a small run\"\n    anchor: syn-simulated-epoching\n  - label: \"Curriculum: порядок предъявления примеров\"\n    label_en: \"Curriculum: ordering training examples\"\n    anchor: syn-curriculum\n  - label: \"Replay и проверка забывания\"\n    label_en: \"Replay and forgetting evaluation\"\n    anchor: syn-replay\n  - label: \"Dolmino: исходные объёмы, ветки и усреднение\"\n    label_en: \"Dolmino: source pools, branches and averaging\"\n    anchor: syn-dolmino\n  - label: \"Рекурсивная генерация и model collapse\"\n    label_en: \"Recursive generation and model collapse\"\n    anchor: syn-model-collapse\n  - label: \"Исчезновение редкой категории при выборке\"\n    label_en: \"Losing a rare category through sampling\"\n    anchor: syn-rare-category\n  - label: \"Как читать эксперименты с model collapse\"\n    label_en: \"Reading the model-collapse experiments\"\n    anchor: syn-collapse-plots\n  - label: \"Замещение и накопление корпусов\"\n    label_en: \"Replacing versus accumulating datasets\"\n    anchor: syn-replacement-accumulation\n  - label: \"Как проверить пользу синтетического корпуса\"\n    label_en: \"Evaluating a synthetic corpus\"\n    anchor: synthetic-evidence\n  - label: \"Разделение по исходным объектам до генерации\"\n    label_en: \"Splitting source objects before generation\"\n    anchor: syn-source-splits\n  - label: \"Контрольные обучения и проверка фильтра\"\n    label_en: \"Training controls and filter evaluation\"\n    anchor: syn-training-controls\n  - label: \"Стоимость принятого примера\"\n    label_en: \"Cost per accepted example\"\n    anchor: syn-generation-cost\n  - label: \"Происхождение записи и журнал отклонений\"\n    label_en: \"Record provenance and rejection logs\"\n    anchor: syn-provenance\n"
+        },
+        {
+          "old": "  - \"[[02 Areas/ML & DL/00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute]]\"\n",
+          "new": "  - \"[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества]]\"\n"
+        },
+        {
+          "old": "Последнее решение не менее существенно: маленький качественный набор,\n",
+          "new": "Маленький качественный набор,\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/nvidia-generate-critique-filter.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/nvidia-generate-critique-filter.png|Generation, critique and filtering as separate synthetic-data stages]]"
+        },
+        {
+          "old": "### Почему одного балла часто недостаточно\n",
+          "new": "<a id=\"syn-format-content\"></a>\n### Почему одного балла часто недостаточно\n"
+        },
+        {
+          "old": "### Фильтр меняет состав набора\n",
+          "new": "<a id=\"syn-filter-distribution\"></a>\n### Фильтр меняет состав набора\n"
+        },
+        {
+          "old": "## Self-Instruct: от нескольких заданий к большому набору инструкций\n",
+          "new": "<a id=\"syn-self-instruct\"></a>\n## Self-Instruct: от нескольких заданий к большому набору инструкций\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sft-review-2026-09/self-instruct-pipeline.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sft-review-2026-09/self-instruct-pipeline.png|Self-Instruct: instructions, task types, instances and iterative filtering]]"
+        },
+        {
+          "old": "### Инструкция ещё не является обучающей записью\n",
+          "new": "<a id=\"syn-instruction-instance\"></a>\n### Инструкция ещё не является обучающей записью\n"
+        },
+        {
+          "old": "### Что удаляет фильтр Self-Instruct\n",
+          "new": "<a id=\"syn-self-instruct-filters\"></a>\n### Что удаляет фильтр Self-Instruct\n"
+        },
+        {
+          "old": "## Nemotron-CC: преобразование веб-документов\n",
+          "new": "<a id=\"syn-nemotron-cc\"></a>\n## Nemotron-CC: преобразование веб-документов\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/synthetic-review-2026-09/nemotron-transformations.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/synthetic-review-2026-09/nemotron-transformations.png|Nemotron-CC: quality groups, retained documents and generated transformations]]"
+        },
+        {
+          "old": "### Phi-1: three datasets, two training stages\n",
+          "new": "<a id=\"syn-phi1-datasets\"></a>\n### Phi-1: three datasets, two training stages\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/synthetic-recipes-2026-10-29/phi1-data-ablation.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/synthetic-recipes-2026-10-29/phi1-data-ablation.png|Phi-1: filtered code, synthetic textbooks and CodeExercises with different training budgets]]"
+        },
+        {
+          "old": "### Phi-4: starting from a useful seed rather than an empty prompt\n",
+          "new": "<a id=\"syn-phi4-seeds\"></a>\n### Phi-4: starting from a useful seed rather than an empty prompt\n"
+        },
+        {
+          "old": "### Reading the repetition experiment and the final mixture\n",
+          "new": "<a id=\"syn-phi4-repetitions\"></a>\n### Reading the repetition experiment and the final mixture\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/synthetic-recipes-2026-10-29/phi4-repetitions.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/synthetic-recipes-2026-10-29/phi4-repetitions.png|Phi-4: fixed-horizon comparisons with four or twelve repetitions of synthetic data]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/synthetic-recipes-2026-10-29/nemotron4-prompts.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/synthetic-recipes-2026-10-29/nemotron4-prompts.png|Nemotron-4: four prompt-generation pipelines for synthetic alignment]]"
+        },
+        {
+          "old": "## OpenThoughts: вопросы, ответы и выбор учителя\n",
+          "new": "<a id=\"syn-openthoughts\"></a>\n## OpenThoughts: вопросы, ответы и выбор учителя\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/synthetic-review-2026-09/openthoughts-pipeline.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/synthetic-review-2026-09/openthoughts-pipeline.png|OpenThoughts: question selection, domain mixture and sixteen responses per question]]"
+        },
+        {
+          "old": "### Отбор вопросов не равен отбору ответов\n",
+          "new": "<a id=\"syn-question-answer-selection\"></a>\n### Отбор вопросов не равен отбору ответов\n"
+        },
+        {
+          "old": "### Почему лучший решатель не обязательно лучший учитель\n",
+          "new": "<a id=\"syn-teacher-choice\"></a>\n### Почему лучший решатель не обязательно лучший учитель\n"
+        },
+        {
+          "old": "### SWE-Smith: сначала создать воспроизводимую ошибку\n",
+          "new": "<a id=\"syn-swe-smith\"></a>\n### SWE-Smith: сначала создать воспроизводимую ошибку\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/swe-smith.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/swe-smith.png|SWE-Smith: repository, executable environment, mutations and resulting tasks]]"
+        },
+        {
+          "old": "### Настоящий пример: частичное исправление проходит тесты\n",
+          "new": "<a id=\"syn-tests-counterexample\"></a>\n### Настоящий пример: частичное исправление проходит тесты\n"
+        },
+        {
+          "old": "### SWE-Rebench: найти реальные исправления и восстановить среду\n",
+          "new": "<a id=\"syn-swe-rebench\"></a>\n### SWE-Rebench: найти реальные исправления и восстановить среду\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/synthetic-review-2026-09/swe-rebench.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/synthetic-review-2026-09/swe-rebench.png|SWE-Rebench: issue and patch collection with iterative environment construction]]"
+        },
+        {
+          "old": "### SWE-Zero: получить траектории без полного исполнения\n",
+          "new": "<a id=\"syn-swe-zero\"></a>\n### SWE-Zero: получить траектории без полного исполнения\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/swezero-noexec.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/data-corpus/swezero-noexec.png|SWE-Zero: evaluation results with and without execution access]]"
+        },
+        {
+          "old": "### Почему доля документов не равна доле токенов\n",
+          "new": "<a id=\"syn-document-token-shares\"></a>\n### Почему доля документов не равна доле токенов\n"
+        },
+        {
+          "old": "### Ограничение повторений\n",
+          "new": "<a id=\"syn-repetition-cap\"></a>\n### Ограничение повторений\n"
+        },
+        {
+          "old": "### Как воспроизвести повторения в малом запуске\n",
+          "new": "<a id=\"syn-simulated-epoching\"></a>\n### Как воспроизвести повторения в малом запуске\n"
+        },
+        {
+          "old": "Небольшой пробный запуск тоже может ввести в заблуждение. Если обучить\nмодель на 1 млрд токенов при той же смеси 50/50, отобранный корпус\n",
+          "new": "Если обучить модель на 1 млрд токенов при той же смеси 50/50, отобранный корпус\n"
+        },
+        {
+          "old": "## Учебная программа: в каком порядке предъявлять данные\n",
+          "new": "<a id=\"syn-curriculum\"></a>\n## Учебная программа: в каком порядке предъявлять данные\n"
+        },
+        {
+          "old": "### Replay и контроль забывания\n",
+          "new": "<a id=\"syn-replay\"></a>\n### Replay и контроль забывания\n"
+        },
+        {
+          "old": "### OLMo 2: что на самом деле означает таблица Dolmino\n",
+          "new": "<a id=\"syn-dolmino\"></a>\n### OLMo 2: что на самом деле означает таблица Dolmino\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/olmo2-dolmino.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/olmo2-dolmino.png|Dolmino: available data pools rather than sampled training-token shares]]"
+        },
+        {
+          "old": "## Рекурсивная генерация и потеря разнообразия\n",
+          "new": "<a id=\"syn-model-collapse\"></a>\n## Рекурсивная генерация и потеря разнообразия\n"
+        },
+        {
+          "old": "### Как может исчезнуть редкая категория\n",
+          "new": "<a id=\"syn-rare-category\"></a>\n### Как может исчезнуть редкая категория\n"
+        },
+        {
+          "old": "### Что показывают эксперименты с языковой моделью\n",
+          "new": "<a id=\"syn-collapse-plots\"></a>\n### Что показывают эксперименты с языковой моделью\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/synthetic-review-2026-09/shumailov-collapse.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/synthetic-review-2026-09/shumailov-collapse.png|Model collapse: recursive data generation and distinct perplexity measurements]]"
+        },
+        {
+          "old": "### Замещение и накопление — разные эксперименты\n",
+          "new": "<a id=\"syn-replacement-accumulation\"></a>\n### Замещение и накопление — разные эксперименты\n"
+        },
+        {
+          "old": "### Разделение данных до генерации\n",
+          "new": "<a id=\"syn-source-splits\"></a>\n### Разделение данных до генерации\n"
+        },
+        {
+          "old": "### Сравнение обучения\n",
+          "new": "<a id=\"syn-training-controls\"></a>\n### Сравнение обучения\n"
+        },
+        {
+          "old": "### Стоимость принятого примера\n",
+          "new": "<a id=\"syn-generation-cost\"></a>\n### Стоимость принятого примера\n"
+        },
+        {
+          "old": "### Что сохранять с каждой записью\n",
+          "new": "<a id=\"syn-provenance\"></a>\n### Что сохранять с каждой записью\n"
+        }
+      ],
+      "after_sha256": "a90ffe251c2cdf543a01c38df7c573420ac479507e8f3715036a9b223fd99a2d"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции.md",
+      "before_sha256": "ffcc175ff7dcf3852f6d64ab9458033aa339bd4c30f38f55f3f87611af1cf5fc",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-28\n",
+          "new": "last_updated: 2026-11-05\n"
+        },
+        {
+          "old": "last_verified: 2026-10-28\n",
+          "new": "last_verified: 2026-10-28\nreference_terms:\n  - label: \"Из состояния сцены в изображение и разметку\"\n    label_en: \"Scene state, image and annotation\"\n    anchor: renderer-annotations\n  - label: \"Проекция точки и соглашения о координатах\"\n    label_en: \"Point projection and coordinate conventions\"\n    anchor: sim-camera-coordinates\n  - label: \"Случайные материалы и ложные зависимости\"\n    label_en: \"Randomized materials and shortcuts\"\n    anchor: randomized-scenes\n  - label: \"Выборка позиций и ориентаций камеры\"\n    label_en: \"Sampling camera positions and orientations\"\n    anchor: sim-camera-sampling\n  - label: \"Domain randomization как распределение обучения\"\n    label_en: \"Domain randomization as a training distribution\"\n    anchor: sim-randomization-objective\n  - label: \"Вероятность покрыть редкое событие\"\n    label_en: \"Probability of covering a rare event\"\n    anchor: sim-rare-coverage\n  - label: \"Сдвиг домена и взвешивание риска\"\n    label_en: \"Domain shift and importance-weighted risk\"\n    anchor: domain-shift-risk\n  - label: \"DANN: признаки и два классификатора\"\n    label_en: \"DANN: features and two predictors\"\n    anchor: domain-adversarial-learning\n  - label: \"Gradient reversal: прямой и обратный проходы\"\n    label_en: \"Gradient reversal: forward and backward rules\"\n    anchor: sim-gradient-reversal\n  - label: \"Один шаг DANN без целевых меток классов\"\n    label_en: \"One DANN update without target class labels\"\n    anchor: sim-dann-update\n  - label: \"Почему совпадения распределений недостаточно\"\n    label_en: \"Why matching marginals is insufficient\"\n    anchor: alignment-limits\n  - label: \"FID и MMD: контрпример с одинаковыми моментами\"\n    label_en: \"FID and MMD: equal-moment counterexample\"\n    anchor: sim-fid-mmd\n  - label: \"Выбор смеси по реальной валидации\"\n    label_en: \"Choosing mixtures using real validation data\"\n    anchor: synthetic-real-validation\n  - label: \"Синтетические данные и приватность\"\n    label_en: \"Synthetic data and privacy\"\n    anchor: synthetic-privacy\nprerequisites:\n  - \"[[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]]\"\n"
+        },
+        {
+          "old": "### Camera coordinates must match the target\n",
+          "new": "<a id=\"sim-camera-coordinates\"></a>\n### Camera coordinates must match the target\n"
+        },
+        {
+          "old": "Camera sampling adds another distribution over the data. The released example\n",
+          "new": "<a id=\"sim-camera-sampling\"></a>\nCamera sampling adds another distribution over the data. The released example\n"
+        },
+        {
+          "old": "### Domain randomization is a training distribution\n",
+          "new": "<a id=\"sim-randomization-objective\"></a>\n### Domain randomization is a training distribution\n"
+        },
+        {
+          "old": "More simulated samples improve coverage only relative to the chosen generator.\n",
+          "new": "<a id=\"sim-rare-coverage\"></a>\nMore simulated samples improve coverage only relative to the chosen generator.\n"
+        },
+        {
+          "old": "### Gradient reversal changes the backward rule\n",
+          "new": "<a id=\"sim-gradient-reversal\"></a>\n### Gradient reversal changes the backward rule\n"
+        },
+        {
+          "old": "### One update without target class labels\n",
+          "new": "<a id=\"sim-dann-update\"></a>\n### One update without target class labels\n"
+        },
+        {
+          "old": "### A small distance can omit the distinction the task needs\n",
+          "new": "<a id=\"sim-fid-mmd\"></a>\n### A small distance can omit the distinction the task needs\n"
+        }
+      ],
+      "after_sha256": "9d691f8fa7367444c937f9d91b6289f2d1f7555f218f1f3c936f65722853165c"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "0de7613c4b98716fef3ae70e5f7a1bbe4151be91d5db9567cd52cdcad2ab13b1",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы|Синтетические данные и учебные программы]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы|Синтетические данные и учебные программы]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#synthetic-transformations|Что можно синтезировать в обучающей записи]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#teacher-data|Генерация, оценивание и отбор данных]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-format-content|Формат и соответствие источнику]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-filter-distribution|Как фильтр меняет распределение задач]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-self-instruct|Self-Instruct: итеративный сбор инструкций]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-instruction-instance|Инструкция и конкретный экземпляр задачи]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-self-instruct-filters|Фильтры Self-Instruct и их ограничения]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-nemotron-cc|Nemotron-CC: преобразование веб-документов]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#phi-synthetic-recipes|Phi: отбор кода, учебные тексты и упражнения]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-phi1-datasets|Phi-1: три набора и два этапа обучения]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-phi4-seeds|Phi-4: исходные материалы и обратная инструкция]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-phi4-repetitions|Phi-4: повторения и итоговая смесь]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#nemotron4-synthetic-alignment|Nemotron-4: запросы, диалоги и предпочтения]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-openthoughts|OpenThoughts: вопросы, ответы и учитель]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-question-answer-selection|Отбор вопросов и отбор ответов]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-teacher-choice|Почему качество учителя проверяют обучением ученика]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#posttraining-environments|Программная задача, окружение и траектория]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-swe-smith|SWE-Smith: воспроизводимые мутации репозитория]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-tests-counterexample|SWE-Smith: частичное исправление проходит тесты]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-swe-rebench|SWE-Rebench: реальные исправления и среда]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-swe-zero|SWE-Zero: траектории без исполнения проекта]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#curricula-replay|Доли источников и эквивалентное число эпох]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-document-token-shares|Доли документов и доли токенов]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-repetition-cap|Ограничение повторений и допустимый бюджет]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-simulated-epoching|Simulated epoching в малом запуске]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-curriculum|Curriculum: порядок предъявления примеров]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-replay|Replay и проверка забывания]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-dolmino|Dolmino: исходные объёмы, ветки и усреднение]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-model-collapse|Рекурсивная генерация и model collapse]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-rare-category|Исчезновение редкой категории при выборке]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-collapse-plots|Как читать эксперименты с model collapse]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-replacement-accumulation|Замещение и накопление корпусов]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#synthetic-evidence|Как проверить пользу синтетического корпуса]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-source-splits|Разделение по исходным объектам до генерации]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-training-controls|Контрольные обучения и проверка фильтра]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-generation-cost|Стоимость принятого примера]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-provenance|Происхождение записи и журнал отклонений]]\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции|Синтетические изображения и перенос из симуляции]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции|Синтетические изображения и перенос из симуляции]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#renderer-annotations|Из состояния сцены в изображение и разметку]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#sim-camera-coordinates|Проекция точки и соглашения о координатах]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#randomized-scenes|Случайные материалы и ложные зависимости]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#sim-camera-sampling|Выборка позиций и ориентаций камеры]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#sim-randomization-objective|Domain randomization как распределение обучения]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#sim-rare-coverage|Вероятность покрыть редкое событие]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#domain-shift-risk|Сдвиг домена и взвешивание риска]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#domain-adversarial-learning|DANN: признаки и два классификатора]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#sim-gradient-reversal|Gradient reversal: прямой и обратный проходы]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#sim-dann-update|Один шаг DANN без целевых меток классов]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#alignment-limits|Почему совпадения распределений недостаточно]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#sim-fid-mmd|FID и MMD: контрпример с одинаковыми моментами]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#synthetic-real-validation|Выбор смеси по реальной валидации]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#synthetic-privacy|Синтетические данные и приватность]]\n"
+        }
+      ],
+      "after_sha256": "650d14791b82f9c04da5cc393877ad8c7e120bd5cdae79fe973d038e2ffabf21"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "ece543d079cc80b824c27942f399578df835a1f71ec178bc08b23b1bf0e2b310",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы|Synthetic data and curricula]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы|Synthetic data and curricula]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#synthetic-transformations|What can be synthesized in a training record]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#teacher-data|Generation, scoring and data selection]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-format-content|Format and source fidelity]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-filter-distribution|How filtering changes the task distribution]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-self-instruct|Self-Instruct: iterative instruction generation]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-instruction-instance|Instructions versus task instances]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-self-instruct-filters|Self-Instruct filters and their limits]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-nemotron-cc|Nemotron-CC: transforming web documents]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#phi-synthetic-recipes|Phi: code selection, textbooks and exercises]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-phi1-datasets|Phi-1: three datasets and two training stages]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-phi4-seeds|Phi-4: seeds and instruction reversal]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-phi4-repetitions|Phi-4: repetitions and the final mixture]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#nemotron4-synthetic-alignment|Nemotron-4: prompts, dialogues and preferences]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-openthoughts|OpenThoughts: questions, responses and teacher]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-question-answer-selection|Question selection versus response selection]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-teacher-choice|Evaluating a teacher through student training]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#posttraining-environments|Coding tasks, environments and trajectories]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-swe-smith|SWE-Smith: reproducible repository mutations]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-tests-counterexample|SWE-Smith: an incomplete repair that passes tests]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-swe-rebench|SWE-Rebench: real fixes and environment setup]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-swe-zero|SWE-Zero: trajectories without project execution]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#curricula-replay|Source weights and equivalent epochs]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-document-token-shares|Document shares versus token shares]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-repetition-cap|Repetition caps and budget feasibility]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-simulated-epoching|Simulated epoching in a small run]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-curriculum|Curriculum: ordering training examples]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-replay|Replay and forgetting evaluation]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-dolmino|Dolmino: source pools, branches and averaging]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-model-collapse|Recursive generation and model collapse]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-rare-category|Losing a rare category through sampling]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-collapse-plots|Reading the model-collapse experiments]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-replacement-accumulation|Replacing versus accumulating datasets]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#synthetic-evidence|Evaluating a synthetic corpus]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-source-splits|Splitting source objects before generation]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-training-controls|Training controls and filter evaluation]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-generation-cost|Cost per accepted example]]\n  - [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#syn-provenance|Record provenance and rejection logs]]\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции|Synthetic images and sim-to-real transfer]] · **EN original**\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции|Synthetic images and sim-to-real transfer]] · **EN original**\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#renderer-annotations|Scene state, image and annotation]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#sim-camera-coordinates|Point projection and coordinate conventions]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#randomized-scenes|Randomized materials and shortcuts]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#sim-camera-sampling|Sampling camera positions and orientations]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#sim-randomization-objective|Domain randomization as a training distribution]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#sim-rare-coverage|Probability of covering a rare event]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#domain-shift-risk|Domain shift and importance-weighted risk]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#domain-adversarial-learning|DANN: features and two predictors]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#sim-gradient-reversal|Gradient reversal: forward and backward rules]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#sim-dann-update|One DANN update without target class labels]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#alignment-limits|Why matching marginals is insufficient]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#sim-fid-mmd|FID and MMD: equal-moment counterexample]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#synthetic-real-validation|Choosing mixtures using real validation data]]\n  - [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции#synthetic-privacy|Synthetic data and privacy]]\n"
+        }
+      ],
+      "after_sha256": "8abebc5fc58272ecf87b8628c6f56ea433bc21f3ba345b7d2e1ffaacd956e59d"
+    }
+  ],
+  "explanationReview": {
+    "input": [
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+        "sha256": "41629ce92425dc01f122181499ddc21b186f0902d18450b140f1a4d91e281abd",
+        "lines": 1243,
+        "ranges": [
+          "1-320",
+          "225-275 recovered after truncation",
+          "321-620",
+          "621-940",
+          "941-1243"
+        ]
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции.md",
+        "sha256": "ffcc175ff7dcf3852f6d64ab9458033aa339bd4c30f38f55f3f87611af1cf5fc",
+        "lines": 587,
+        "ranges": [
+          "1-310",
+          "311-587"
+        ]
+      }
+    ],
+    "finalRead": [
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+        "sha256": "a90ffe251c2cdf543a01c38df7c573420ac479507e8f3715036a9b223fd99a2d",
+        "lines": 1385,
+        "ranges": [
+          "1-350",
+          "351-700",
+          "701-1050",
+          "1051-1385"
+        ],
+        "scope": "Whole final text read; no subsequent owner edits."
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции.md",
+        "sha256": "9d691f8fa7367444c937f9d91b6289f2d1f7555f218f1f3c936f65722853165c",
+        "lines": 640,
+        "ranges": [
+          "1-320",
+          "321-640"
+        ],
+        "scope": "Whole final text read; no subsequent owner edits."
+      }
+    ],
+    "sourceReuse": [
+      {
+        "evidence": "docs/audit/2026-10-30-synthetic-recipes-verification.json",
+        "scope": "Input main owner exactly matches41629ce9…; retain documented Self-Instruct/Nemotron/OpenThoughts/SWE/mixture/collapse source scopes plus Phi/Nemotron4 additions, not a fresh whole-course reread."
+      },
+      {
+        "evidence": "docs/audit/2026-10-28-sim-to-real.md",
+        "scope": "Current sim-to-real owner restored to accepted63368115… using the existing reader-route inverse; only the known footer navigation delta separates it from that complete explanation/figure review."
+      }
+    ],
+    "freshSources": [
+      {
+        "path": "05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/lecture_14.py",
+        "sha256": "8e0e17f868002f2e8f73afed018b2dd787c0a1b371eec599c44d8dbfe555ae9b",
+        "scope": "data_mixing and post_training_data in full,331-490/EOF. Repeat counts,simulated epoching,task/environment/trajectory distinction and original source figures compared. Preserve corrected dimensional units rather than the lecture's abbreviated UniMax inequality."
+      },
+      {
+        "url": "https://arxiv.org/html/2306.11644v2#S2",
+        "scope": "Sections2/2.1/2.2/2.3 including original Figure2.1; three datasets, sample/token budgets and two training stages. Original PNG inspected: blue bars retained despite HTML caption's colour wording."
+      },
+      {
+        "url": "https://arxiv.org/html/2412.08905v1#S3.SS1",
+        "scope": "Sections3.1-3.2,Figure2,Tables3-5: fixed horizon,4/12 repetitions,synthetic knowledge loss and unique versus sampled token counts."
+      },
+      {
+        "url": "https://github.com/DLR-RM/BlenderProc/blob/76bd8b82ee19489843578ff045298642197bf883/examples/basics/semantic_segmentation/README.md",
+        "scope": "Whole README: category/instance/name, consistency across frames,missing IDs and non-image attribute dictionary. Original code excerpts not translated or altered."
+      }
+    ],
+    "changes": "Text owner: source_language mixed; prerequisite now data selection, matching its thematic route/footer;37 subject entries and12 descriptive image alternatives; two filler leads removed. Image owner: explicit diffusion prerequisite/module exit and14 subject entries, without changing English body or source code.",
+    "style": "no-ai-slop and eval.md read completely. Minimal cuts preserve every mechanism,reasoning step,worked case,caveat,citation and figure.",
+    "preservation": {
+      "programs": [
+        2,
+        9
+      ],
+      "bashCommands": 1,
+      "sourceOnlyBlenderExcerpts": 3,
+      "figures": [
+        12,
+        7
+      ],
+      "subjectsPerLocale": [
+        37,
+        14
+      ]
+    },
+    "readerVisual": {
+      "status": "verified-local-current",
+      "evidence": [
+        "docs/audit/evidence/2026-11-06-synthetic-text-reader/1280-report.json",
+        "docs/audit/evidence/2026-11-06-synthetic-text-reader/375-report.json",
+        "docs/audit/evidence/2026-11-06-sim-to-real-reader/1280-report.json",
+        "docs/audit/evidence/2026-11-06-sim-to-real-reader/375-report.json",
+        "docs/audit/evidence/2026-11-06-synthetic-navigation/ru-text/1280-report.json",
+        "docs/audit/evidence/2026-11-06-synthetic-navigation/en-text/1280-report.json",
+        "docs/audit/evidence/2026-11-06-synthetic-navigation/ru-images/1280-report.json",
+        "docs/audit/evidence/2026-11-06-synthetic-navigation/en-images/1280-report.json"
+      ],
+      "scope": "All19 desktop and19 narrow fit views personally inspected; native open/close,4x zoom and full panning checked. All12 displayed formulas fit narrow343px; four native RU/EN reference-to-explanation transitions inspected.",
+      "remaining": "Earlier TTC/distillation pages and whole-book source-completeness/release gates remain separate."
+    }
+  },
+  "checks": {
+    "textExamples": {
+      "exit": 0,
+      "pythonPrograms": 2,
+      "bashCommands": 1,
+      "upstreamVariants": {
+        "clean": 11,
+        "mutated": 9,
+        "delimiterOnly": 11,
+        "fullyRepaired": 11
+      },
+      "testsPerVariant": 11,
+      "log": "/var/tmp/bookvar-synthetic-text-examples-20261105.log",
+      "scope": "Known mutation has two expected failing CLI tests; incomplete delimiter-only repair passes all11 while violating the extra A->B->C case. No Docker/full81-test claim."
+    },
+    "imageExamples": {
+      "exit": 0,
+      "pythonPrograms": 9,
+      "sourceOnlyBlenderExcerptsNotRun": 3,
+      "idMaps": 9,
+      "projections": 27,
+      "materialCases": 48,
+      "coverageCases": 16,
+      "weightedRisks": 54,
+      "grlGraphs": 30,
+      "metricPairs": 9,
+      "sourceFigures": 7,
+      "log": "/var/tmp/bookvar-sim-to-real-examples-20261105.log"
+    },
+    "scoped": {
+      "exit": 0,
+      "files": 4,
+      "tests": 13,
+      "log": "/var/tmp/bookvar-synthetic-subject-tests-20261105.log"
+    },
+    "build": {
+      "exit": 0,
+      "pages": 2011,
+      "pagefindFiles": 2015,
+      "seconds": 30.01,
+      "log": "/var/tmp/bookvar-synthetic-build-20261105.log"
+    },
+    "html": {
+      "exit": 0,
+      "tests": 219,
+      "log": "/var/tmp/bookvar-synthetic-test-output-20261106.log"
+    },
+    "links": {
+      "exit": 0,
+      "brokenInternal": 0,
+      "log": "/var/tmp/bookvar-synthetic-check-links-20261106.log"
+    },
+    "size": {
+      "exit": 0,
+      "bytes": 857491367,
+      "files": 5632,
+      "limit": 1000000000,
+      "headroom": 142508633
+    },
+    "topics": {
+      "exit": 0,
+      "owners": 153,
+      "log": "/var/tmp/bookvar-synthetic-check-topics-20261106.log"
+    },
+    "firstRun": {
+      "status": "resolved",
+      "scope": "text-unidecode1.3 was absent from the official-PyPI offline cache. Installed that exact dependency from official PyPI; actual example checker passed. No weights,data or Blender environment downloaded."
+    },
+    "reader": {
+      "status": "verified-local-current",
+      "tool": "publishing/tools/check_chrome_reader.mjs",
+      "toolSha256": "fb8a98a377a29053e42180a822418feb4a068f1ae180b34e7d4e00f0bab7481d",
+      "browserSession": 52818,
+      "environment": "Installed Chrome in headless mode with isolated /var/tmp/bookvar-reader-qa-20261106 profile; local4330 preview only. No user cookies/history read.",
+      "desktop": {
+        "width": 1280,
+        "height": 900,
+        "figures": 19,
+        "personallyInspected": 19,
+        "mathErrors": 0,
+        "sourceCaptionsPreserved": 19
+      },
+      "narrow": {
+        "width": 375,
+        "height": 812,
+        "figures": 19,
+        "personallyInspectedFitViews": 19,
+        "zoom": "All19 controls exercised to4x; start/end scroll extents verified to1px. Selected source labels personally inspected at enlarged positions.",
+        "pageWidths": [
+          375,
+          375
+        ],
+        "mathErrors": 0,
+        "displayFormulaWidth": 343,
+        "aspectOrEdgeFailures": 0
+      },
+      "navigation": {
+        "nativePointerClicks": 4,
+        "locales": [
+          "ru",
+          "en"
+        ],
+        "targets": [
+          "syn-simulated-epoching",
+          "sim-gradient-reversal"
+        ],
+        "status": "Exact requested chapter and anchor reached in the same locale. Four target screenshots personally inspected. Mixed EN fallback notice and source-native EN image chapter inspected; no new translation claimed."
+      },
+      "evidence": [
+        "docs/audit/evidence/2026-11-06-synthetic-text-reader/1280-report.json",
+        "docs/audit/evidence/2026-11-06-synthetic-text-reader/375-report.json",
+        "docs/audit/evidence/2026-11-06-sim-to-real-reader/1280-report.json",
+        "docs/audit/evidence/2026-11-06-sim-to-real-reader/375-report.json",
+        "docs/audit/evidence/2026-11-06-synthetic-navigation/ru-text/1280-report.json",
+        "docs/audit/evidence/2026-11-06-synthetic-navigation/en-text/1280-report.json",
+        "docs/audit/evidence/2026-11-06-synthetic-navigation/ru-images/1280-report.json",
+        "docs/audit/evidence/2026-11-06-synthetic-navigation/en-images/1280-report.json"
+      ],
+      "limits": "Local rendered inspection, not Pages release or physical touchscreen testing. Wide labels need zoom; OpenThoughts retains its pale author palette. Initial overlapping tab checks discarded; the inefficient pointer-per-zoom run was terminated, then serial checks used actual button handlers plus native-pointer open/close and source-index navigation."
+    },
+    "receipt": {
+      "exit": 0,
+      "files": 2,
+      "tests": 7,
+      "currentHashMatches": 119,
+      "unreadOwnersInRoutePass": 34,
+      "log": "/var/tmp/bookvar-synthetic-receipt-final-20261106.log",
+      "scope": "Two receipt and five preservation/subject tests rerun after registration; overlaps earlier13,not seven additional unique tests."
+    }
+  },
+  "remaining": [
+    "Previous TTC and distillation reader-visual/UI checks remain pending; the current two synthetic chapters passed local current reader checks.",
+    "Complete remaining retrieval/RAG,multimodal,agent,deployment/evaluation and recommender owners.",
+    "Full course-completeness/older rights and figure gaps/public-checkout source fixtures/Pages-base/release gates remain open."
+  ],
+  "publication": {
+    "stage": false,
+    "commit": false,
+    "push": false,
+    "deploy": false
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "date": "2026-11-03",
+  "scope": "Complete770-line Seq2Seq owner read. Preserve three old programs, seven original diagrams and full probability/training/search/attention explanation. Add explicit bidirectional-to-unidirectional state bridge and beam parent-state routing examples, one original D2L overview SVG and exact init_state excerpt, and23 RU/EN subject links.",
+  "status": "Local owner delta verified: complete final read, five CPU programs, source/asset preservation, built HTML and selected desktop/mobile reader checks. Not a whole-book or release acceptance.",
+  "verification": {
+    "chapterSha256": "0e133f5e8e8467958b5c3f0bb344e3906ade5c797b946034efda18182fe2508d",
+    "wholeOwnerRead": "Complete 770-line baseline read, then complete final 1076-line chapter reread in ranges 1–300, 301–600, 601–850 and 851–EOF. No chapter edits after that read.",
+    "preservation": "Four-file reversible journal pins chapter, registry and RU/EN indexes. All three old programs, eleven display equations and seven original diagram paths/bytes retained; five programs and eight originals now. Twenty-three unique subject anchors in both indexes.",
+    "style": "no-ai-slop skill and eval read fully. Existing explanations, calculations and caveats retained. Exact D2L excerpt remains original English; new source-derived additions remain English. No translation pass.",
+    "source": {
+      "fresh": "Entire pinned D2L Encoder–Decoder Architecture and Beam Search sources read. Official PyTorch Seq2Seq Model, Encoder and complete Simple Decoder section/code read; later tutorial sections inspected, not claimed fully read or run.",
+      "reused": "Entire previous Seq2Seq audit read and reused only on exact baseline f8f44caa2a641441cedbc99c9419de2bbb2ce2567585e2ccde65e48c5f02535b. Prior selected SLP3, CS224N, Cho, Sutskever, Voita and D2L comparisons retained; no new whole-course claim.",
+      "pin": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+      "chapterSha256": "ad89663c337fc3aed42c26fb53365bb249a33ac96e45828adfb9ae0072cd0b05",
+      "assetSha256": "bf5083530e10aff826bfc6be26b4b32ccd8ade3e7ad86cc7b7ee66dc5601ddaf",
+      "rights": "Complete original overview SVG copied byte-for-byte; exact init_state excerpt attributed. All eight diagrams are registered CC BY-SA 4.0 with pinned public license. Source errors about length normalization and max-length/EOS were not copied."
+    },
+    "cpu": {
+      "exit": 0,
+      "device": "CPU",
+      "torch": "2.14.1",
+      "programs": 5,
+      "command": "uv run --offline --python 3.13 --with torch==2.14.1 --with numpy==2.5.4 python publishing/tools/check_seq2seq_examples.py",
+      "scope": "All five actual chapter programs execute. Prior mask/packing/probability/training/gradient-channel/beam/attention checks retained. NLL 1.932506 -> 0.000583 on four memorized pairs, all ending EOS; greedy 0.24 versus beam/exact 0.36. Added 48 packed bridge forward/all-gradient cases, 72 GRU/LSTM beam-state gather cases and a two-source parent-identity fixture. Source SVG byte equality passes. No GPU or performance benchmark."
+    },
+    "tests": {
+      "scoped": "12 tests in 3 files pass: Seq2Seq additions, LSTM/GRU delta chain and reference sync. Separate targeted Seq2Seq asset tests: 2 pass, 169 skipped; not a full registry rerun.",
+      "builtOutput": "197 HTML tests pass on completed final site build, including both locale Seq2Seq routes, 23 anchors, five Python blocks, eight asset images, source excerpt and EN canonical-language notice."
+    },
+    "build": {
+      "exit": 0,
+      "pages": 2007,
+      "pagefindHtmlFiles": 2011,
+      "durationSeconds": 27.5,
+      "links": "0 broken internal routes, fragments or files",
+      "size": {
+        "bytes": 853434112,
+        "files": 5602,
+        "limit": 1000000000,
+        "headroom": 146565888
+      },
+      "warnings": "Five existing duplicate-route warnings retained.",
+      "preparedVsBuilt": "site build completed Astro and Pagefind after adapter generation. HTML and link checks ran after completion."
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-03-seq2seq-reader",
+      "desktop": "1280x720: document 1265/1265; eight original assets loaded and fit, eleven display equations and six tables fit; zero KaTeX errors. New overview, layer interface, beam tree and attention memory inspected inline with captions. Prior whole seven-image visual review retained on unchanged bytes; not claimed freshly repeated for all seven.",
+      "mobile": "390x844: document 375/375; all eight images loaded at native proportions, widths <=343px. Eleven display equations fit, zero KaTeX errors. Same four selected originals inspected inline; both new tables fit. Two old tables have contained overflow 417/343 and 425/343; keyboard scrolling reached 73.5 and 82.5 with right columns visible. Beam tree inspected at 2x with readable labels; viewer pan x188 ->228. No all-endpoints or all-images zoom claim.",
+      "navigation": "Actual RU reference -> #seq2seq-state-bridge and EN reference -> #seq2seq-beam-states, each a unique target. EN notice says Canonical-language chapter and no separate English edition. Actual EN Next -> from-seq2seq-to-transformer, h1 От Seq2Seq к Attention. Temporary viewport reset; RU Seq2Seq bridge left open."
+    },
+    "publication": "Local only. No staging, commit, push or deployment. Remaining source/course integration, public-checkout and dev/Pages release work stays open."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора.md",
+      "before_sha256": "f8f44caa2a641441cedbc99c9419de2bbb2ce2567585e2ccde65e48c5f02535b",
+      "after_sha256": "0e133f5e8e8467958b5c3f0bb344e3906ade5c797b946034efda18182fe2508d",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-21\n",
+          "new": "last_updated: 2026-11-03\nsource_language: mixed\nreference_terms:\n  - label: \"Условная вероятность перевода и EOS\"\n    label_en: \"Conditional translation probability and EOS\"\n    anchor: seq2seq-factorization\n  - label: \"Инициализация декодера и постоянный контекст\"\n    label_en: \"Decoder initialization and fixed context\"\n    anchor: seq2seq-source-context\n  - label: \"Слои, состояния и формы\"\n    label_en: \"Layers, states and tensor shapes\"\n    anchor: seq2seq-state-shapes\n  - label: \"Согласование состояний энкодера и декодера\"\n    label_en: \"Bridging encoder and decoder states\"\n    anchor: seq2seq-state-bridge\n  - label: \"Сдвиг целей и teacher forcing\"\n    label_en: \"Target shift and teacher forcing\"\n    anchor: seq2seq-teacher-forcing\n  - label: \"EOS, PAD и нормировка потери\"\n    label_en: \"EOS, PAD and loss reduction\"\n    anchor: seq2seq-loss-mask\n  - label: \"Padding источника и конечное состояние\"\n    label_en: \"Source padding and final encoder state\"\n    anchor: seq2seq-source-padding\n  - label: \"Полная двухслойная GRU-модель\"\n    label_en: \"Complete two-layer GRU model\"\n    anchor: seq2seq-complete-model\n  - label: \"Два пути градиента в энкодер\"\n    label_en: \"Two gradient paths into the encoder\"\n    anchor: seq2seq-encoder-gradients\n  - label: \"Ограничение фиксированного контекста\"\n    label_en: \"Fixed-context bottleneck\"\n    anchor: seq2seq-bottleneck\n  - label: \"Обращение источника и расстояния\"\n    label_en: \"Source reversal and dependency distances\"\n    anchor: seq2seq-source-reversal\n  - label: \"Авторегрессивный цикл и EOS\"\n    label_en: \"Autoregressive decoding and EOS\"\n    anchor: seq2seq-generation\n  - label: \"Ошибка префикса и exposure bias\"\n    label_en: \"Prefix errors and exposure bias\"\n    anchor: seq2seq-exposure-bias\n  - label: \"Локальный выбор и вероятность всего ответа\"\n    label_en: \"Local choices versus sequence probability\"\n    anchor: seq2seq-greedy\n  - label: \"Beam search и общий отбор кандидатов\"\n    label_en: \"Beam search and global candidate selection\"\n    anchor: seq2seq-beam-search\n  - label: \"Завершённые гипотезы и остановка\"\n    label_en: \"Finished hypotheses and stopping\"\n    anchor: seq2seq-beam-stop\n  - label: \"Родители гипотез и перенос состояний\"\n    label_en: \"Beam parents and state routing\"\n    anchor: seq2seq-beam-states\n  - label: \"Нормализация длины и усечение\"\n    label_en: \"Length normalization and truncation\"\n    anchor: seq2seq-length-score\n  - label: \"Контекст по всем позициям источника\"\n    label_en: \"Context over all source positions\"\n    anchor: seq2seq-attention\n  - label: \"Маска источника до softmax\"\n    label_en: \"Source mask before softmax\"\n    anchor: seq2seq-attention-mask\n  - label: \"Обучение весов внимания\"\n    label_en: \"Learning attention weights\"\n    anchor: seq2seq-attention-gradients\n  - label: \"Память и вычисления attention\"\n    label_en: \"Attention storage and computation\"\n    anchor: seq2seq-memory-cost\n  - label: \"Seq2Seq, encoder–decoder и причинность\"\n    label_en: \"Seq2Seq, encoder–decoder and causality\"\n    anchor: seq2seq-scope\n"
+        },
+        {
+          "old": "primary_sources:\n",
+          "new": "primary_sources:\n  - https://docs.pytorch.org/docs/2.14/generated/torch.nn.GRU.html\n  - https://docs.pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html\n"
+        },
+        {
+          "old": "## Условная языковая модель",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-bridge-2026-11-03/d2l-encoder-decoder.svg|Энкодер, передаваемое состояние и декодер в общей архитектуре D2L]]\n\n*The original encoder–decoder architecture from D2L. The diagram separates\nthe source encoder, the transferred state and the target decoder; it does\nnot specify a recurrent cell or require equal source and target lengths.\nSource: Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola,\n[D2L, §10.6](https://d2l.ai/chapter_recurrent-modern/encoder-decoder.html),\nCC BY-SA 4.0. Complete original SVG, without cropping or redrawing.*\n\n## Условная языковая модель"
+        },
+        {
+          "old": "### Сдвиг целей и teacher forcing",
+          "new": "<a id=\"seq2seq-state-bridge\"></a>\n\n### Bridging different state shapes\n\nD2L separates decoding from the operation that prepares its initial state:\n\n<!-- source-excerpt: d2l-decoder-init-state -->\n> In the following decoder interface,\n> we add an additional `init_state` method\n> to convert the encoder output (`enc_all_outputs`)\n> into the encoded state.\n<!-- /source-excerpt -->\n\n*Zhang, Lipton, Li, Smola,\n[D2L, §10.6, Decoder](https://d2l.ai/chapter_recurrent-modern/encoder-decoder.html#decoder),\noriginal English excerpt, CC BY-SA 4.0.*\n\nConsider a two-layer bidirectional GRU encoder with hidden width 3 and\na one-layer unidirectional GRU decoder with hidden width 4. Copying the\nencoder’s `[4,B,3]` final state into the decoder cannot satisfy its\n`[1,B,4]` state contract.\n\nOne possible bridge takes the final forward and reverse states of the\ntop encoder layer, concatenates them, and applies a learned affine map\nfollowed by tanh. This is a design choice, not an operation that the GRU\nAPI performs automatically.\n\n| Operation | Shape |\n|---|---|\n| Encoder final states | `[4,B,3]` |\n| Expose layer and direction axes | `[2,2,B,3]` |\n| Select the top layer | `[2,B,3]` |\n| Concatenate its directions for each input | `[B,6]` |\n| Apply the learned bridge and tanh | `[B,4]` |\n| Add the decoder’s layer axis | `[1,B,4]` |\n\nThe six features for each input must come from that same input. For\nexample, directly reshaping `[2,B,3]` into `[B,6]` when $B>1$\nwould mix the batch and direction axes. Concatenating the two direction\nslices avoids that error.\n\nFor a concatenated vector $(0.1,0.2,0.3,-0.1,0,0.4)$, a bridge row\n$(1,0,0,1,0,0)$ and bias 0.05 give $0.1-0.1+0.05=0.05$, then\n$\\tanh(0.05)\\approx0.049958$. Each of the decoder’s four initial-state\ncoordinates has its own learned row. The affine map has $4\\cdot6+4=28$\nparameters.\n\nThe following standalone program isolates this interface. It processes\ntwo source sequences of different lengths, constructs a correctly\nshaped initial decoder state, then checks that a loss on two decoder\nsteps reaches both the bridge and the encoder. As in the D2L-style model\nbelow, the fixed source context also accompanies every target input.\nThe target inputs here are assigned feature vectors; the next complete\nmodel adds token embeddings, vocabulary logits and the translation loss.\n\n```python\nimport torch\nfrom torch import nn\nfrom torch.nn.utils.rnn import pack_padded_sequence\n\ntorch.manual_seed(61)\ndtype = torch.float64\nB, encoder_layers, encoder_width, decoder_width = 2, 2, 3, 4\nsource_features = torch.randn(B, 3, 2, dtype=dtype, requires_grad=True)\nsource_lengths = torch.tensor([2, 3])\nencoder = nn.GRU(2, encoder_width, num_layers=encoder_layers,\n                 bidirectional=True, batch_first=True, dtype=dtype)\npacked = pack_padded_sequence(source_features, source_lengths,\n                             batch_first=True, enforce_sorted=False)\n_, encoded = encoder(packed)\nassert encoded.shape == (4, B, 3)\nby_layer = encoded.reshape(encoder_layers, 2, B, encoder_width)\ntop = by_layer[-1]\nfixed_context = torch.cat([top[0], top[1]], dim=-1)\ntorch.testing.assert_close(fixed_context, torch.cat([encoded[-2], encoded[-1]], -1))\n\nstate_bridge = nn.Linear(6, decoder_width, dtype=dtype)\ninitial_decoder = state_bridge(fixed_context).tanh()[None]\nassert initial_decoder.shape == (1, B, 4)\nassert sum(parameter.numel() for parameter in state_bridge.parameters()) == 28\ndecoder = nn.GRU(2 + 6, decoder_width, batch_first=True, dtype=dtype)\ntarget_features = torch.randn(B, 2, 2, dtype=dtype)\ndecoder_inputs = torch.cat([\n    target_features, fixed_context[:, None].expand(-1, 2, -1),\n], dim=-1)\ndecoded, final_decoder = decoder(decoder_inputs, initial_decoder)\nassert decoded.shape == (B, 2, 4) and final_decoder.shape == (1, B, 4)\ndecoded.square().mean().backward()\nassert state_bridge.weight.grad.abs().sum() > 0\nassert source_features.grad[0, :2].abs().sum() > 0\nassert source_features.grad[0, 2].count_nonzero() == 0\nassert encoder.weight_hh_l1_reverse.grad.abs().sum() > 0\n\nexample_context = torch.tensor([.1, .2, .3, -.1, 0., .4], dtype=dtype)\nexample_row = torch.tensor([1., 0., 0., 1., 0., 0.], dtype=dtype)\ntorch.testing.assert_close((example_row @ example_context + .05).tanh(),\n                           torch.tensor(.05, dtype=dtype).tanh())\n```\n\nOnly the top-layer states enter this bridge directly. Lower encoder\nlayers still influence them through the recurrent network. A different\nmodel could project all layer states or initialize several decoder\nlayers; it must define that mapping explicitly. For an LSTM decoder,\nboth $h_0$ and $c_0$ need compatible shapes, so mapping only the hidden\nstate is insufficient.\n\nThis bridge still transfers a fixed number of source coordinates.\nChanging its dimensions does not give the decoder access to individual\nsource positions. The direction/state axis ordering is specified in\n[PyTorch 2.14, GRU](https://docs.pytorch.org/docs/2.14/generated/torch.nn.GRU.html)\nand worked through in the\n[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#recurrent-bidirectional|previous chapter]].\n\n### Сдвиг целей и teacher forcing"
+        },
+        {
+          "old": "### Длина ответа и качество перевода",
+          "new": "<a id=\"seq2seq-beam-states\"></a>\n\n### Reordering states after beam selection\n\nThe global top-$B$ selection may keep two children of the same parent\nand none from another parent. Suppose the live prefixes are A and C.\nIf the selected continuations are CB and CD, both inherit the state\nafter C:\n\n| Selected prefix | Parent row | State to carry | Token to consume next |\n|---|---:|---|---|\n| CB | 1 | state after C | B |\n| CD | 1 | state after C | D |\n\nThe parent state already includes the old prefix. The selected new\ntoken is then consumed by each child to obtain its state and predict\nthe following token. Both children initially receive equal state\nvalues, but the different B and D embeddings generally make the next\nstates different.\n\nThe code below checks this one state-routing operation after selection.\nIt does not choose the beam or compute sequence probabilities; the\ncomplete finite-distribution search above handles that separate step.\n\n```python\nimport torch\nfrom torch import nn\n\ntorch.manual_seed(67)\ndtype = torch.float64\nembedding = nn.Embedding(4, 3, dtype=dtype)  # A=0, B=1, C=2, D=3\ndecoder_cell = nn.GRUCell(3 + 2, 4, dtype=dtype)\nparent_states = torch.tensor([\n    [.1, .2, .3, .4],  # state after A\n    [.5, .6, .7, .8],  # state after C\n], dtype=dtype)\nselected_parents = torch.tensor([1, 1])\nselected_tokens = torch.tensor([1, 3])  # CB and CD\nsource_context = torch.tensor([[-.2, .4]], dtype=dtype)\n\nwith torch.no_grad():\n    inherited = parent_states.index_select(0, selected_parents)\n    child_inputs = torch.cat([\n        embedding(selected_tokens), source_context.expand(2, -1),\n    ], dim=-1)\n    child_states = decoder_cell(child_inputs, inherited)\n    for child in range(2):\n        single = decoder_cell(child_inputs[child:child+1], parent_states[1:2])\n        torch.testing.assert_close(child_states[child:child+1], single)\n    assert not torch.allclose(child_states[0], child_states[1])\n    wrong_states = decoder_cell(child_inputs, parent_states)\n    assert not torch.allclose(child_states[0], wrong_states[0])\n```\n\nFor `nn.GRUCell`, beam rows occupy axis 0 of `[beam,m]`.\nFor a sequence module’s hidden state `[layers,beam,m]`, the\ncorresponding gather is on axis 1. An LSTM must reorder both hidden\nand cell states with the same parent indices. When decoding several\nsource inputs together, the indices and source contexts must also\nremain grouped by their source.\n\nAn EOS child is placed among finished hypotheses according to the\nchosen search rule; it is not fed back merely to continue that finished\nprefix. The D2L\n[beam-search tree](https://d2l.ai/chapter_recurrent-modern/beam-search.html#fig-beam-search)\nillustrates global prefix selection. The tensor example here makes the\nassociated recurrent-state routing explicit.\n\n### Длина ответа и качество перевода"
+        },
+        {
+          "old": "## Условная языковая модель",
+          "new": "<a id=\"seq2seq-factorization\"></a>\n\n## Условная языковая модель"
+        },
+        {
+          "old": "### Как источник попадает в предсказание",
+          "new": "<a id=\"seq2seq-source-context\"></a>\n\n### Как источник попадает в предсказание"
+        },
+        {
+          "old": "## Формы на одном примере",
+          "new": "<a id=\"seq2seq-state-shapes\"></a>\n\n## Формы на одном примере"
+        },
+        {
+          "old": "### Сдвиг целей и teacher forcing",
+          "new": "<a id=\"seq2seq-teacher-forcing\"></a>\n\n### Сдвиг целей и teacher forcing"
+        },
+        {
+          "old": "Если $M_{bt}$ равно единице",
+          "new": "<a id=\"seq2seq-loss-mask\"></a>\n\nЕсли $M_{bt}$ равно единице"
+        },
+        {
+          "old": "### Padding источника меняет состояние",
+          "new": "<a id=\"seq2seq-source-padding\"></a>\n\n### Padding источника меняет состояние"
+        },
+        {
+          "old": "### Полная небольшая модель",
+          "new": "<a id=\"seq2seq-complete-model\"></a>\n\n### Полная небольшая модель"
+        },
+        {
+          "old": "Обратное распространение проходит из потерь декодера",
+          "new": "<a id=\"seq2seq-encoder-gradients\"></a>\n\nОбратное распространение проходит из потерь декодера"
+        },
+        {
+          "old": "## Почему фиксированный контекст становится узким местом",
+          "new": "<a id=\"seq2seq-bottleneck\"></a>\n\n## Почему фиксированный контекст становится узким местом"
+        },
+        {
+          "old": "В [Sutskever et al., §3.3 и §3.7]",
+          "new": "<a id=\"seq2seq-source-reversal\"></a>\n\nВ [Sutskever et al., §3.3 и §3.7]"
+        },
+        {
+          "old": "## Декодирование — не обучение",
+          "new": "<a id=\"seq2seq-generation\"></a>\n\n## Декодирование — не обучение"
+        },
+        {
+          "old": "Если вместо «чёрная» модель выбрала «белая»",
+          "new": "<a id=\"seq2seq-exposure-bias\"></a>\n\nЕсли вместо «чёрная» модель выбрала «белая»"
+        },
+        {
+          "old": "### Почему локально лучший токен может проиграть",
+          "new": "<a id=\"seq2seq-greedy\"></a>\n\n### Почему локально лучший токен может проиграть"
+        },
+        {
+          "old": "### Как работает beam search",
+          "new": "<a id=\"seq2seq-beam-search\"></a>\n\n### Как работает beam search"
+        },
+        {
+          "old": "Если ранжирование использует исходную сумму логарифмов",
+          "new": "<a id=\"seq2seq-beam-stop\"></a>\n\nЕсли ранжирование использует исходную сумму логарифмов"
+        },
+        {
+          "old": "### Длина ответа и качество перевода",
+          "new": "<a id=\"seq2seq-length-score\"></a>\n\n### Длина ответа и качество перевода"
+        },
+        {
+          "old": "## Мост к attention",
+          "new": "<a id=\"seq2seq-attention\"></a>\n\n## Мост к attention"
+        },
+        {
+          "old": "Правое дополнение источника нужно исключить до softmax.",
+          "new": "<a id=\"seq2seq-attention-mask\"></a>\n\nПравое дополнение источника нужно исключить до softmax."
+        },
+        {
+          "old": "Все три действительные позиции участвуют в сумме",
+          "new": "<a id=\"seq2seq-attention-gradients\"></a>\n\nВсе три действительные позиции участвуют в сумме"
+        },
+        {
+          "old": "Теперь размер хранимой памяти",
+          "new": "<a id=\"seq2seq-memory-cost\"></a>\n\nТеперь размер хранимой памяти"
+        },
+        {
+          "old": "## Ограничения и частые смешения",
+          "new": "<a id=\"seq2seq-scope\"></a>\n\n## Ограничения и частые смешения"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/seq2seq.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/seq2seq.svg|Обучение encoder–decoder: правильные предыдущие токены и постоянный контекст]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/seq2seq-details.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/seq2seq-details.svg|Embedding, рекуррентные слои и выходной классификатор encoder–decoder]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/seq2seq-predict.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/seq2seq-predict.svg|Генерация перевода с возвратом выбранного токена в декодер]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/s2s-prob1.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/s2s-prob1.svg|Жадный путь A B C EOS и его условные распределения]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/s2s-prob2.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/s2s-prob2.svg|Другой префикс меняет распределения и повышает вероятность ответа]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/beam-search.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/beam-search.svg|Глобальный отбор двух гипотез после расширения beam]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/seq2seq-attention.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/seq2seq-attention.svg|Attention по выходам энкодера перед каждым шагом декодера]]"
+        },
+        {
+          "old": "## Источники и дальнейшее чтение\n\n",
+          "new": "## Источники и дальнейшее чтение\n\n- [PyTorch, NLP From Scratch: Translation with a Sequence to Sequence Network and Attention](https://docs.pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html), The Encoder and Simple Decoder — a second implementation of the initialization-only decoder and teacher forcing. Its fixed-length padding/attention code is not substituted for the explicit masks and packed source lengths used here.\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "2f1d1b38634902af6803bccfff82bb813ac79c59d3a9af8b87afcfeddde1cff5",
+      "after_sha256": "4876d245f99bba28c80bfe93c1addfcf50483ade0c456c475306198b63f7d4b4",
+      "changes": [
+        {
+          "old": "assets:\n",
+          "new": "assets:\n  - {\"id\":\"curated-seq2seq-interface-bf5083530e10\",\"asset\":\"00 Учебник/Assets/Figures/curated/seq2seq-bridge-2026-11-03/d2l-encoder-decoder.svg\",\"author\":\"Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola\",\"title\":\"The encoder–decoder architecture, complete original D2L diagram\",\"source_url\":\"https://d2l.ai/chapter_recurrent-modern/encoder-decoder.html\",\"source_image_url\":\"https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/encoder-decoder.svg\",\"commit\":\"23d7a5aecceee57d1292c56e90cce307f183bb0a\",\"source_asset\":\"05 Источники/Originals/seq2seq-2026-10-21/encoder-decoder.svg\",\"source_asset_sha256\":\"bf5083530e10aff826bfc6be26b4b32ccd8ade3e7ad86cc7b7ee66dc5601ddaf\",\"sha256\":\"bf5083530e10aff826bfc6be26b4b32ccd8ade3e7ad86cc7b7ee66dc5601ddaf\",\"bytes\":22369,\"source_viewbox\":[0,0,304,34],\"source_page_snapshot\":\"05 Источники/Originals/seq2seq-2026-10-21/d2l-encoder-decoder.md\",\"source_page_sha256\":\"ad89663c337fc3aed42c26fb53365bb249a33ac96e45828adfb9ae0072cd0b05\",\"license\":\"CC BY-SA 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by-sa/4.0/\",\"license_evidence\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"license_evidence_sha256\":\"a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\",\"public_license_copy\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"derivation\":\"source-svg-copy\",\"modifications\":\"None. Complete pinned original SVG, copied byte-for-byte from the earlier source packet; no crop, redraw, relabeling or recompression.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора.md\"]}\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора|Seq2Seq и bottleneck фиксированного вектора]]\n",
+          "new": "- [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора|Seq2Seq и bottleneck фиксированного вектора]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-factorization|Условная вероятность перевода и EOS]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-source-context|Инициализация декодера и постоянный контекст]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-state-shapes|Слои, состояния и формы]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-state-bridge|Согласование состояний энкодера и декодера]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-teacher-forcing|Сдвиг целей и teacher forcing]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-loss-mask|EOS, PAD и нормировка потери]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-source-padding|Padding источника и конечное состояние]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-complete-model|Полная двухслойная GRU-модель]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-encoder-gradients|Два пути градиента в энкодер]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-bottleneck|Ограничение фиксированного контекста]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-source-reversal|Обращение источника и расстояния]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-generation|Авторегрессивный цикл и EOS]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-exposure-bias|Ошибка префикса и exposure bias]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-greedy|Локальный выбор и вероятность всего ответа]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-beam-search|Beam search и общий отбор кандидатов]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-beam-stop|Завершённые гипотезы и остановка]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-beam-states|Родители гипотез и перенос состояний]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-length-score|Нормализация длины и усечение]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-attention|Контекст по всем позициям источника]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-attention-mask|Маска источника до softmax]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-attention-gradients|Обучение весов внимания]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-memory-cost|Память и вычисления attention]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-scope|Seq2Seq, encoder–decoder и причинность]]\n"
+        }
+      ],
+      "before_sha256": "2de2c3576cb73a7ff9da767d34f9d73b1200eb7a6098d882455738edff37ec06",
+      "after_sha256": "3073aa50c43a40f9d2c449e88bda55a796d1417f64b06e0839aaa6ba50e34b5d"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора|Seq2Seq and the fixed-vector bottleneck]]\n",
+          "new": "- [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора|Seq2Seq and the fixed-vector bottleneck]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-factorization|Conditional translation probability and EOS]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-source-context|Decoder initialization and fixed context]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-state-shapes|Layers, states and tensor shapes]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-state-bridge|Bridging encoder and decoder states]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-teacher-forcing|Target shift and teacher forcing]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-loss-mask|EOS, PAD and loss reduction]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-source-padding|Source padding and final encoder state]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-complete-model|Complete two-layer GRU model]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-encoder-gradients|Two gradient paths into the encoder]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-bottleneck|Fixed-context bottleneck]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-source-reversal|Source reversal and dependency distances]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-generation|Autoregressive decoding and EOS]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-exposure-bias|Prefix errors and exposure bias]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-greedy|Local choices versus sequence probability]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-beam-search|Beam search and global candidate selection]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-beam-stop|Finished hypotheses and stopping]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-beam-states|Beam parents and state routing]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-length-score|Length normalization and truncation]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-attention|Context over all source positions]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-attention-mask|Source mask before softmax]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-attention-gradients|Learning attention weights]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-memory-cost|Attention storage and computation]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-scope|Seq2Seq, encoder–decoder and causality]]\n"
+        }
+      ],
+      "before_sha256": "6e53ed8f1c7fa5380334666594daf9a1e0c7f59a9c79204f8cc9735001bca86b",
+      "after_sha256": "d6f428e5cea169b73ea32f45346a769539042a9f0b963580f31f7828808d0f35"
+    }
+  ],
+  "sourceComparison": [
+    {
+      "source": "docs/audit/2026-10-21-seq2seq.md",
+      "read": "Entire prior report read; exact baselinef8f44caa... matches prior whole-owner/source review. Current770-line owner freshly read completely. Prior selected SLP3/CS224N/Cho/Sutskever/Voita and D2L10.7/11.4 comparisons explicitly reused, not freshly claimed full-course coverage."
+    },
+    {
+      "source": "05 Источники/Originals/seq2seq-2026-10-21/d2l-encoder-decoder.md",
+      "sha256": "ad89663c337fc3aed42c26fb53365bb249a33ac96e45828adfb9ae0072cd0b05",
+      "pinnedRevision": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+      "read": "Entire8639-byte pinned Encoder–Decoder Architecture chapter read, all framework tabs, interfaces, composition, summary and exercises.",
+      "use": "Exact original init_state explanation and complete original overview SVG. Learned top-direction concatenation/6-to-4 bridge is explicitly an independent design example, not an attributed D2L default."
+    },
+    {
+      "source": "05 Источники/Originals/seq2seq-2026-10-21/d2l-beam-search.md",
+      "read": "Whole pinned source read: greedy/exhaustive/beam sections, diagrams, scores, summary and exercises.",
+      "use": "Global parent selection and the existing source tree compared. Concrete recurrent-state gathering added as an independent example; source’s incorrect length-penalty interpretation and max-length/EOS conflation are not copied."
+    },
+    {
+      "source": "https://docs.pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html",
+      "read": "The Seq2Seq Model, Encoder and complete Simple Decoder section including full code read. Attention/Training/Evaluation material inspected but not claimed a complete tutorial/data/training run.",
+      "use": "Second implementation of initialization-only decoder/teacher-forcing branch. Its historical RNN-only definition is not generalized; fixed padding and unmasked-attention code not substituted for our explicit valid lengths/masks. No source passage/code/picture copied."
+    }
+  ],
+  "remaining": [
+    "No separate English translation, entire-course completeness or external tutorial training run claimed.",
+    "Whole-book semantic course integration, remaining owners, public-checkout and dev/Pages release work stays open."
+  ]
+}

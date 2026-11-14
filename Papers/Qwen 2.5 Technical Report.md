@@ -12,70 +12,166 @@ concepts: [Scaling Laws, Data Filtering, Synthetic Data, DPO, GRPO, Reinforcemen
 ---
 # Qwen2.5 Technical Report
 
-## TL;DR
+Qwen1.5, Qwen2 и Qwen2.5 выпускались в размере 72B. На этих трёх моделях
+можно проследить два разных перехода. В Qwen2 меняются число KV-голов
+и ширина FFN; в Qwen2.5 эти размеры сохраняются, но авторы меняют объём
+и состав корпуса и рецепт дообучения.
 
-Qwen2.5 -- серия dense LLM (0.5B-72B) + MoE модели (Turbo, Plus), обученных на **18T токенов**. Ключевые улучшения: масштабирование данных (7T→18T), better synthetic data, two-stage RL (offline DPO + online GRPO), longer generation (до 8K токенов). Flagship Qwen2.5-72B-Instruct конкурирует с Llama-3-405B-Instruct при 5x меньшем размере.
+<a id="qwen-72b-architecture"></a>
 
-## Problem
+## Qwen1.5 → Qwen2 → Qwen2.5: блок на трёх конфигурациях 72B
 
-Qwen2 имел ограничения: короткая генерация (2K токенов), слабая работа со structured data, limited tool use. Нужно было улучшить quality через data scaling, расширить capabilities (long generation, structured understanding, instruction following) и выпустить модели разных размеров для разных use cases.
+У всех трёх базовых моделей 80 слоёв, размер скрытого состояния 8192 и
+64 головы запросов шириной 128. Ссылки в таблице ведут на
+конфигурации конкретных чекпойнтов.
 
-## Method
+| Базовая модель | Головы Q / KV | Ширина FFN |
+|---|---:|---:|
+| [Qwen1.5-72B](https://huggingface.co/Qwen/Qwen1.5-72B/blob/93bac0d1ae83d50c43b1793e2d74a00dc43a4c36/config.json) | 64 / 64 | 24 576 |
+| [Qwen2-72B](https://huggingface.co/Qwen/Qwen2-72B/blob/5f149cae83c11c408a953dec64b12e7e662e8cb9/config.json) | 64 / 8 | 29 568 |
+| [Qwen2.5-72B](https://huggingface.co/Qwen/Qwen2.5-72B/blob/efba10c8e54e91e0d9570ab5f7b51a958474d4cb/config.json) | 64 / 8 | 29 568 |
 
-### Архитектура
-- Dense Transformer decoder: GQA, SwiGLU, RoPE, QKV bias, RMSNorm
-- 7 размеров: 0.5B, 1.5B, 3B, 7B, 14B, 32B, 72B
-- MoE: fine-grained expert segmentation + shared experts routing (по аналогии с DeepSeek)
-- Tokenizer: BBPE, 151,643 tokens + 22 control tokens
-- Context: 32K (small) / 128K (7B+), generation: 8K tokens
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gqa/mha-gqa-mqa.png|Слева у каждой головы запроса своя пара K/V; в центре одна пара на группу запросов; справа все головы делят одну пару.]]
 
-### Pre-training Data (18T tokens)
-- **Better filtering**: Qwen2-Instruct как quality filter с multi-dimensional analysis
-- **Better math/code**: данные из Qwen2.5-Math и Qwen2.5-Coder интегрированы в pre-training
-- **Better synthetic data**: Qwen2-72B-Instruct + Qwen2-Math-72B-Instruct для генерации, reward models для фильтрации
-- **Better data mixture**: downsampling e-commerce/social media, upsampling tech/science/academic
-- Staged pre-training с разными data mixtures
+*Joshua Ainslie et al., [GQA, рис. 2](https://arxiv.org/html/2305.13245v3#S2.F2), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Оригинал без изменений; число голов на схеме условное. Для Qwen1.5-72B подходит левая панель (MHA); для Qwen2-72B и Qwen2.5-72B — средняя (GQA).*
 
-### Post-training
-**SFT** (1M+ примеров):
-1. Long-sequence generation: back-translation для queries к long-text pre-training data
-2. Math: chain-of-thought из Qwen2.5-Math, rejection sampling + reward model
-3. Code: multi-language agents, sandbox validation, 40+ languages
-4. Instruction-following: code-based verification + unit tests
-5. Structured data understanding: tables, JSON, reasoning chains
-6. Logical reasoning: 70K queries, deductive/inductive/analogical reasoning
-7. Cross-lingual transfer: translation model для low-resource languages
-8. Robust system instructions: hundreds of diverse system prompts
+В Qwen1.5-72B каждая голова запроса получает собственные ключи и значения.
+В Qwen2 восемь голов запросов обращаются к одной паре K/V, но запросы у них
+по-прежнему разные. При одинаковой длине последовательности число элементов
+KV-кэша падает в восемь раз. Например, для одной последовательности в
+32 768 токенов с BF16 и всеми 80 слоями объём равен
 
-**Two-Stage RL**:
-- **Offline RL (DPO)**: 150K training pairs на math/code/instruction-following. Evaluation through execution feedback + answer matching.
-- **Online RL (GRPO)**: reward model trained на labeling criteria (truthfulness, helpfulness, conciseness, relevance, harmlessness, debiasing). Qwen2.5-72B-Instruct как base для RM.
+$$
+2\cdot 80\cdot n_{KV}\cdot128\cdot32768\cdot 2\ \text{байта}.
+$$
 
-### Long Context
-- 4096→32K during pre-training, YARN + Dual Chunk Attention для 4x inference extension
-- Qwen2.5-Turbo: progressive extension 32K→256K, inference до 1M tokens
+Первая двойка учитывает ключи и значения, последняя — размер одного
+элемента BF16. При 64 KV-головах получается 80 GiB, при восьми — 10 GiB.
+Это только K/V: веса, служебные данные, округление до блоков и
+распределение по GPU не учитываются.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/qwen25-figure1-hq.png]]
+При той же ширине входа проекции K и V становятся меньше: каждая
+выдаёт $8\cdot128=1024$ координаты вместо 8192. У двух матриц это
+экономит около 117,4 млн весов на слой. Одновременно промежуточная
+ширина SwiGLU растёт на 4992 координаты. Две расширяющие матрицы
+и одна выходная добавляют $3\cdot8192\cdot4992\approx122{,}7$ млн
+весов. Поэтому резкое уменьшение кэша не требует заметно меньшей
+модели по числу параметров. Это подсчёт матриц, без смещений.
+Разбор самого механизма — в
+[[00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA|главе о MHA, MQA и GQA]].
 
-## Key Results
+Qwen2 и Qwen2.5 используют причинный декодер с RMSNorm, RoPE,
+SwiGLU и смещениями в проекциях Q, K и V. Числа в таблице относятся
+к плотным 72B. В открытой линейке Qwen2.5 есть семь плотных размеров
+от 0.5B до 72B; малые модели используют связанные входные и выходные
+эмбеддинги, крупные — отдельные матрицы. Закрытые Turbo и Plus в
+отчёте описаны как MoE; их нельзя получить переключателем в этих
+открытых конфигурациях. [§2 и табл. 1](https://arxiv.org/html/2412.15115v2#S2).
 
-| Benchmark | Qwen2.5-72B-Instruct | Llama-3-405B-Instruct | GPT-4o |
-|---|---|---|---|
-| MMLU-Pro | 71.1 | 73.3 | 74.0 |
-| MATH (0-shot) | 83.1 | 73.8 | -- |
-| HumanEval | 86.6 | 89.0 | 90.2 |
-| IFEval | 86.1 | 88.6 | 88.0 |
-| GPQA | 49.0 | 51.1 | 53.6 |
+<a id="qwen25-pretraining-evidence"></a>
 
-- 72B конкурирует с 405B Llama 3 при 5x меньшем размере
-- Qwen2.5-Turbo: competitive with GPT-4o-mini, поддержка 1M token context
-- 100+ моделей на HuggingFace (base + instruct + quantized)
+## Что дали данные предобучения
 
-## My notes
+[Рисунок 1 отчёта Qwen2.5](https://arxiv.org/html/2412.15115v2#S0.F1) ставит рядом три базовые 72B-модели
+и указывает 3, 7 и 18 трлн токенов. У столбцов на рисунке нет числовой
+шкалы. Для точного сравнения двух последних поколений ниже приведены
+числа из [таблицы 2](https://arxiv.org/html/2412.15115v2#S5.T2), полученные до SFT.
 
-- **Data scaling 7T→18T** -- основной драйвер improvement. Использование specialized models (Math, Coder) для генерации pre-training data -- это self-improvement loop.
-- Two-stage RL (offline DPO + online GRPO) -- pragmatic подход. DPO для задач с verifiable answers (не нужен RM), GRPO для subjective quality.
-- SFT pipeline впечатляет масштабом: 1M+ примеров, 9 capability areas, code-based verification для instruction following. Это massive engineering effort.
-- 7 размеров моделей (0.5B-72B) -- стратегия покрытия всего рынка. 3B и 14B -- underserved ниши, верное решение.
-- Scaling laws для hyperparameters (не только model size) -- полезный вклад. Позволяет предсказать optimal lr/batch size для новых архитектур.
-- YARN + DCA для 4x context extension на inference -- practical solution, но quality degradation на extreme lengths неизбежен.
+| Тест базовой модели | Qwen2-72B | Qwen2.5-72B |
+|---|---:|---:|
+| MMLU, 5-shot | 84,2 | 86,1 |
+| BBH, 3-shot | 82,4 | 86,3 |
+| MATH, 4-shot | 50,9 | 62,1 |
+| MBPP, 0-shot | 76,9 | 84,7 |
+| HumanEval, 0-shot | 64,6 | 59,1 |
+
+На MATH разница составляет 11,2 пункта, а на HumanEval результат
+снизился на 5,5 пункта. Даже внутри задач по коду разные тесты
+двигаются в разные стороны. Число токенов здесь выросло одновременно
+с изменением отбора и состава данных. Из таблицы нельзя выделить вклад
+одного только объёма корпуса.
+
+Для предыдущего перехода есть отдельная [таблица Qwen2](https://arxiv.org/html/2407.10671v3#S5.T2):
+на MATH там 34,1 у Qwen1.5-72B и 51,1 у Qwen2-72B. Значение Qwen2
+слегка отличается от 50,9 в более позднем отчёте, поэтому разницы между
+моделями считаются внутри одной таблицы, а не склеиваются через общий столбец.
+
+В Qwen2 авторы уже пробовали ослабить фильтр: так они собрали 12 трлн
+токенов, но не увидели существенного выигрыша над более строго
+отобранным корпусом на 7 трлн. Для больших плотных моделей выбрали
+меньший корпус. Qwen2-0.5B, напротив, обучали на 12 трлн, поэтому 7 трлн
+не описывают каждый чекпойнт семейства. [Qwen2, §3.1](https://arxiv.org/html/2407.10671v3#S3.SS1).
+
+Для Qwen2.5 авторы изменили отбор данных: модели Qwen2-Instruct
+оценивали и классифицировали тексты, долю шаблонного веб-контента
+уменьшили, а долю научных и технических текстов увеличили. В смесь
+добавили данные Qwen2.5-Math и Qwen2.5-Coder, а часть синтетических
+примеров от моделей Qwen2 и Qwen2-Math проверили моделями награды.
+Так получился корпус на 18 трлн токенов. Размер пакета и шаг оптимизатора
+подбирали по отдельным сериям запусков малых плотных и MoE-моделей.
+[§3.1–3.2](https://arxiv.org/html/2412.15115v2#S3).
+
+## Как получили версии Instruct
+
+На первом этапе модель учат на готовых ответах. Для длинных ответов
+авторы брали подходящий текст и строили к нему запрос; для кода
+проверяли решения тестами в песочнице, для математики отбирали
+проверенные решения. В смесь вошли задачи на таблицы и другие
+структурированные данные, логику, перенос инструкций на менее
+представленные языки и разные системные подсказки. В отчёте указано
+свыше миллиона примеров SFT. [§4.1](https://arxiv.org/html/2412.15115v2#S4.SS1).
+
+Затем SFT-модель сэмплировала ответы на новые запросы. Если запрос
+требует вернуть JSON с числом, программа может отклонить ответ,
+который добавляет текст вне JSON, даже когда в нём есть правильное
+число. Для DPO корректный ответ становится предпочтительным,
+отклонённый — вторым элементом пары для того же запроса. Пары
+составляют до оптимизации; текущая политика во время этого этапа
+не генерирует новую группу ответов на каждом шаге. В отчёте —
+около 150 тыс. пар. [§4.2](https://arxiv.org/html/2412.15115v2#S4.SS2).
+
+В следующем этапе авторы используют GRPO и обученную модель награды.
+Текущая политика генерирует восемь ответов на запрос. Оценщик
+учитывает фактическую точность, полезность, краткость, уместность и
+безопасность; оценки внутри группы служат для сравнения ответов.
+Здесь обучение использует свежие ответы текущей политики, а не
+только заранее собранные пары. [§4.3](https://arxiv.org/html/2412.15115v2#S4.SS3) ·
+[[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1|разбор GRPO]].
+
+В [Qwen2, §4.3](https://arxiv.org/html/2407.10671v3#S4.SS3) ответы тоже
+генерировали заново между раундами, но модель награды выбирала из них
+лучший и худший ответ, чтобы снова обучать по DPO. В Qwen2.5 на этой
+стадии GRPO использует оценки всей группы.
+
+В [таблице 6](https://arxiv.org/html/2412.15115v2#S5.T6) уже сравниваются версии **Instruct**.
+У Qwen2.5-72B-Instruct на MATH 83,1 против 73,8 у Llama 3.1 405B
+Instruct, а на GPQA — 49,0 против 51,1. На строгом поднаборе
+IFEval по запросам — 84,1 против 86,0. Эти числа описывают оценки
+авторов для указанных моделей, а не порядок моделей на всех задачах.
+
+## Контекст предобучения, конфигурация сервера и длина ответа
+
+В конфигурациях базовых моделей выше параметр `max_position_embeddings`
+равен 32 768 у Qwen1.5-72B и 131 072 у Qwen2-72B и Qwen2.5-72B. Это
+значения конфигураций, а не длины предобучения и не гарантия качества
+на таком контексте.
+
+Для обычных Qwen2.5 длину последовательности в конце предобучения
+увеличили с 4096 до 32 768 токенов и подняли базу RoPE до миллиона.
+Отчёт описывает экстраполяцию до 128K у более крупных моделей с
+YaRN и Dual Chunk Attention (DCA). При этом в опубликованной
+[конфигурации Qwen2.5-72B-Instruct](https://huggingface.co/Qwen/Qwen2.5-72B-Instruct/blob/495f39366efef23836d0cfae4fbe635880d2be31/config.json)
+стоит 32 768, а `rope_scaling` не задан. В [карточке весов](https://huggingface.co/Qwen/Qwen2.5-72B-Instruct/blob/495f39366efef23836d0cfae4fbe635880d2be31/README.md)
+авторы отдельно объясняют настройку YaRN для длинных входов.
+Заявленные 8192 токена генерации — ограничение ответа, а не размер окна.
+
+Отдельный Qwen2.5-Turbo обучали на всё более длинных последовательностях:
+32K → 64K → 128K → 256K, затем экстраполировали на выводе до 1M.
+Это другой вариант модели и другой режим запуска. В
+[таблице 17](https://arxiv.org/html/2412.15115v2#S5.T17) у 72B-Instruct на LV-Eval при 32K
+результат 57,5 с обеими техниками и без них. При 128K получаются
+50,9 с YaRN и DCA и 27,0 без них. Это сравнение двух настроек
+одной модели на данном тесте; отдельные вклады YaRN и DCA оно не измеряет.
+
+[[02 Атлас моделей/Семейства/Qwen|Семейство Qwen в атласе]] ·
+[[00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание|Глава о длинном контексте]].

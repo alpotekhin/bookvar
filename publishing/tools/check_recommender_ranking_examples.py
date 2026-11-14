@@ -7,8 +7,9 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели.md"
 content = CHAPTER.read_bytes()
-blocks = re.findall(r"```python\n(.*?)```", content.decode(), re.S)
-assert len(blocks) == 23
+blocks = [match[1] for match in re.findall(
+    r"^(```|~~~)python\n(.*?)^\1$", content.decode(), re.S | re.M)]
+assert len(blocks) == 24
 scope = {}
 for i, block in enumerate(blocks, 1):
     print(f"Execute actual ranking block {i}", flush=True)
@@ -44,6 +45,23 @@ for _ in range(50):
         finite_difference(lambda z: np.logaddexp(0., -z[0]@(z[1]-z[2])), params),
         expected, atol=3e-9)
 print("PASS 50 listwise and 50 MF-BPR finite-difference systems")
+
+# Check the unweighted and corrected gradients against the corresponding
+# finite-difference loss, with the negative scores (and proposal) held fixed.
+neg = scope["negative_scores"]
+proposal = scope["proposal"]
+target = scope["uniform_target"]
+positive_score = np.zeros(1)
+for weights in (proposal, target):
+    gradient = finite_difference(
+        lambda score: weights @ np.logaddexp(0., neg - score[0]),
+        positive_score,
+    )
+    np.testing.assert_allclose(gradient, weights @ scope["pair_gradients"])
+np.testing.assert_allclose(
+    proposal @ ((target / proposal) * scope["pair_gradients"]),
+    target @ scope["pair_gradients"])
+print("PASS sampled, uniform and importance-weighted BPR gradients")
 
 # Autorec: all encoder/decoder/bias coordinates, including an unobserved output.
 x = scope["auto_input"]

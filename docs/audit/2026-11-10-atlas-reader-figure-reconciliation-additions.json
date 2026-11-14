@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-10",
+  "scope": "Reconcile the original Alammar GPT-2 diagram and Moonshot k1.5 RL system illustration in the atlas. Preserve superseded assets in the working tree. No branch publication.",
+  "review": {
+    "previousGoalTurn": "Progress: extended the Kimi comparison to K3.1 Pro, with a verified report figure and worked examples.",
+    "gpt": "Alammar's original figure shows one position through 12 decoder blocks, not vocabulary projection or normalization. Atlas now links the actual GPT-1 post-norm, GPT-2 pre-norm, GPT-3 full/local and LLaMA comparison sections, plus the reading path. Did not rewrite or reaccept the four long chapters.",
+    "kimi": "Read v1 §2.6.1–2.6.2 and both panels of Fig. 3. The overview and a small budget example distinguish phased synchronous policy iteration from parallel generation, and link to the original Fig. 3b already in the textbook. The full Fig. 3a SVG is reused byte-for-byte.",
+    "open": "The four GPT-1 paper panels currently tagged needs-confirmation were not treated as MIT: the repository's MIT license covers code and model; a matching reproduction grant for the separate paper PDF was not located. The current rendered scan still finds 64 active entries tagged needs-confirmation; this change reconciles two assets previously marked verified on indirect evidence, rather than claiming that the 64 are cleared.",
+    "reader": "Inspected both panels at 1280px light and 375px dark, in both applicable route shells. Mobile viewer preserves attribution, reaches 3× and pans; no replaced legacy asset remains embedded. Followed all four GPT-to-chapter fragment links and the k1.5-to-Fig.-3b chapter link. Build: 2067 pages; links: 0 broken; output tests: 268 passed; publication tests: 745 passed and 11 skipped."
+  },
+  "figures": [
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/gpt-30/gpt2-transformer-block-vectors-2.png",
+      "upstream": "https://jalammar.github.io/images/gpt2/gpt2-transformer-block-vectors-2.png",
+      "sha256": "94d7c51658e7feffd01c66e61acd8897cb17e93989725f0a523a95ab8b771047",
+      "license": "CC BY-NC-SA 4.0"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/grpo-2026-10-24/kimi-rl-system.svg",
+      "upstream": "https://arxiv.org/html/2501.12599v1/mshrl-overview.svg",
+      "sha256": "8a3b559237567114ee58fda1be4a506049592ae23c9be4c2b1770226aa40bce3",
+      "license": "CC BY-NC-ND 4.0"
+    }
+  ],
+  "files": [
+    {
+      "source": "02 Атлас моделей/Семейства/GPT.md",
+      "before_sha256": "c8d4bf29c6e5178eec5330010554e531263d08b1f8f1d9e1fcc62e3be7e8211e",
+      "after_sha256": "449328359bdeee23dfb03b1a63ea69e4ad98f55427f4d3fff289d99580de1dad",
+      "lines": 83,
+      "changes": [
+        {
+          "old": "| GPT-4 — GPT-5.6 | закрыто | Мультимодальные и reasoning-возможности известны по system cards/API; точный блок и корпус не опубликованы. GPT-5.6 Sol, Terra и Luna вышли 9 июля 2026 года. |\n\n## Архитектурная основа\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/gpt-decoder-block.png]]\n\n*Рисунок: Jay Alammar, [The Illustrated GPT-2](https://jalammar.github.io/illustrated-gpt2/), CC BY-NC-SA 4.0; локальная копия. Иллюстрация раскрывает paper-level decoder: токены и позиции превращаются в векторы, проходят повторяемые masked self-attention и MLP-блоки, затем проецируются в logits словаря.*\n\nGPT-1/2/3 используют причинный декодер Transformer. Маска закрывает\nдоступ к будущим токенам при обучении предсказанию следующего токена.\nПри генерации предсказанный токен добавляется к входу, и модель\nвыполняется снова. GPT-1 использует post-norm; GPT-2 перенёс LayerNorm\nперед подслоями и добавил финальную нормализацию. GPT-3 увеличил\nмасштаб модели и чередовал полное и локальное внимание.\n\nПолные объяснения обучения и применения вынесены в последовательные главы: [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1: предобучение и дообучение на задаче]], [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2: zero-shot через продолжение текста]] и [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3: примеры внутри контекста]]. Таблица выше фиксирует различия поколений, не заменяя эти разборы.\n\n## Токенизация, данные и обучение\n",
+          "new": "| GPT-4 — GPT-5.6 | закрыто | Мультимодальные и reasoning-возможности известны по system cards/API; точный блок и корпус не опубликованы. GPT-5.6 Sol, Terra и Luna вышли 9 июля 2026 года. |\n\n<a id=\"gpt-family-decoder\"></a>\n\n## Причинный декодер\n\n![[00 Учебник/Assets/Figures/curated/gpt-30/gpt2-transformer-block-vectors-2.png|Первый токен проходит через 12 блоков GPT-2; в первом показаны причинное внимание и полносвязная сеть]]\n\n*Jay Alammar, [The Illustrated GPT-2, «A journey up the Stack»](https://jalammar.github.io/illustrated-gpt2/#a-journey-up-the-stack), [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). [Исходное изображение](https://jalammar.github.io/images/gpt2/gpt2-transformer-block-vectors-2.png) воспроизведено без изменений.*\n\nСтрелка ведёт от вектора первого токена к выходу двенадцатого\nблока малой GPT-2. На первой позиции внимание видит только\nсам этот токен: позиции справа закрыты причинной маской. В\nболее поздней позиции появляются доступные токены слева.\nFFN при этом по-прежнему преобразует вектор каждой позиции\nотдельно. Схема заканчивается выходом блока: нормализации,\nостаточные связи и проекция на словарь на ней не показаны.\n\nУ [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение#gpt1-decoder-architecture|GPT-1]] LayerNorm применялась после сложения с остаточным путём.\nВ [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-pre-norm|GPT-2]] нормализацию перенесли на вход подслоя и добавили\nотдельную LayerNorm на выходе стека. [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-full-local-attention|GPT-3]] сохранила этот\nпорядок и стала чередовать слои полного и локального причинного\nвнимания. У [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|первой LLaMA]] снова полное внимание во всех\nслоях, но вместо LayerNorm — RMSNorm, вместо обучаемой таблицы\nпозиций — RoPE, а FFN использует SwiGLU. В [[00 Учебник/_index#От GPT-1 к LLaMA|оглавлении]]\nэти главы собраны в один маршрут, включая то, как менялся\nформат задачи на входе.\n\n## Токенизация, данные и обучение\n"
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Kimi.md",
+      "before_sha256": "fdcb1f454e6f88277e5ff0fd018828e4db4f568ad6862fac3637ddb1a06bc569",
+      "after_sha256": "e20c8cb5282545d0e4710999031759f6d47e633f4d76a3f1e20e131fb76adc87",
+      "lines": 179,
+      "changes": [
+        {
+          "old": "## Как было устроено RL в Kimi k1.5\n\n![[00 Учебник/Assets/Figures/curated/atlas-courses-official/kimi-k15-rl-system.png]]\n\nНа схеме Kimi k1.5 отдельно показаны процессы генерации ответов, процессы\nобновления весов, модели награды и буфер примеров. Они выполняют разные этапы\nRL и обмениваются результатами; от их согласования зависит, сколько ответов\nуспевает обработать обучение и насколько устарели веса, которыми эти ответы\nсгенерированы. Схема описывает систему обучения k1.5, предшествующей K2,\nа не слои самой K2. Автор: Kimi Team / Moonshot AI. Источник: Figure 3,\n[Kimi k1.5: Scaling Reinforcement Learning with LLMs](https://arxiv.org/pdf/2501.12599).\nФайл перенесён без изменения из локальной выгрузки официального PDF; лицензия\nрисунка отдельно не указана. Проверено 2026-07-20.\n\n## Опубликовано и неизвестно\n",
+          "new": "## Как было устроено RL в Kimi k1.5\n\n![[00 Учебник/Assets/Figures/curated/grpo-2026-10-24/kimi-rl-system.svg|Система RL в Kimi k1.5: генераторы ответов, процессы обучения, модели награды, координатор и буфер траекторий]]\n\n*Kimi Team, [Kimi k1.5: Scaling Reinforcement Learning with LLMs, рис. 3a](https://arxiv.org/html/2501.12599v1#S2.F3.sf1), [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Оригинальный SVG без изменений.*\n\nНа схеме сплошные стрелки показывают передачу весов, полые —\nпередачу данных. Процессы генерации (Rollout Workers) получают\nвеса текущей политики и строят ответы. Модели награды оценивают\nрезультаты, а процессы обучения (Trainer Workers) используют\nтраектории из буфера, чтобы обновить политику. Внутри фазы\nгенерации процессы работают параллельно; сам цикл чередует\nфазы генерации и обучения.\n\nЕсли ответ не помещается в лимит фазы генерации, уже полученный\nпрефикс сохраняют, а в следующей итерации продолжают с него.\nНапример, если лимит равен 100 токенам, а ответ потребовал 140,\nвторая фаза допишет оставшиеся 40 к сохранённым 100.\nМодель между этими фазами могла обновиться. Поэтому в буфере\nможет оказаться траектория, разные участки которой сгенерированы\nразными версиями политики. [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-kimi-partial-rollouts|Разбор частичных rollout]]\nпоказывает этот переход на второй панели оригинального рисунка\nи отделяет его от функции потерь GRPO.\n\n## Опубликовано и неизвестно\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "ca836d0a0bcfabe84713729714abc64062d138cae9c5d5effa1d1e851a49af8c",
+      "after_sha256": "79006943d91ed36f1e2d0cbd832d2cd0f91983b6e89119fcb01813436155f770",
+      "lines": 24715,
+      "changes": [
+        {
+          "old": "      - \"Concepts/Architectures/GPT-3.md\"\n      - \"00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md\"\n  - id: curated-gpt-30-fb22d410edcc\n    asset: 00 Учебник/Assets/Figures/curated/gpt-30/self-attention-and-masked-self-attention.png\n",
+          "new": "      - \"Concepts/Architectures/GPT-3.md\"\n      - \"00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md\"\n      - \"02 Атлас моделей/Семейства/GPT.md\"\n  - id: curated-gpt-30-fb22d410edcc\n    asset: 00 Учебник/Assets/Figures/curated/gpt-30/self-attention-and-masked-self-attention.png\n"
+        },
+        {
+          "old": "    license_url: https://arxiv.org/abs/2501.12599\n    modifications: Figure 3 extracted from the official PDF\n    used_in:\n      - 02 Атлас моделей/Семейства/Kimi.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/kimi-k15/paper.pdf\n    derivation: pdf-page-render-crop\n  - id: curated-atlas-mistral-000000000032\n    asset: 00 Учебник/Assets/Figures/curated/atlas-courses-official/mistral-sliding-window-attention.png\n",
+          "new": "    license_url: https://arxiv.org/abs/2501.12599\n    modifications: Figure 3 extracted from the official PDF\n    used_in: []\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/kimi-k15/paper.pdf\n    derivation: pdf-page-render-crop\n    publication_status: retired\n    replacement: 00 Учебник/Assets/Figures/curated/grpo-2026-10-24/kimi-rl-system.svg\n  - id: curated-kimi-k15-rl-system-8a3b55923756\n    asset: 00 Учебник/Assets/Figures/curated/grpo-2026-10-24/kimi-rl-system.svg\n    author: Kimi Team\n    source_url: https://arxiv.org/html/2501.12599v1#S2.F3.sf1\n    source_image_url: https://arxiv.org/html/2501.12599v1/mshrl-overview.svg\n    source_page_snapshot: 05 Источники/Originals/grpo-2026-10-24/kimi-v1.html\n    source_page_sha256: c1b9c36460dd2ae8488b78e329384cb3aad4d4a94a4ce41d998193cc7201ae4a\n    sha256: 8a3b559237567114ee58fda1be4a506049592ae23c9be4c2b1770226aa40bce3\n    license: CC BY-NC-ND 4.0\n    license_url: https://creativecommons.org/licenses/by-nc-nd/4.0/\n    license_evidence: 05 Источники/Originals/grpo-2026-10-24/kimi-v1.html\n    license_evidence_sha256: c1b9c36460dd2ae8488b78e329384cb3aad4d4a94a4ce41d998193cc7201ae4a\n    modifications: \"Complete original panel (a), source SVG bytes unchanged; no redraw, crop, translation or relabeling.\"\n    used_in:\n      - 02 Атлас моделей/Семейства/Kimi.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    derivation: source-svg-copy\n    last_verified: 2026-11-10\n  - id: curated-atlas-mistral-000000000032\n    asset: 00 Учебник/Assets/Figures/curated/atlas-courses-official/mistral-sliding-window-attention.png\n"
+        },
+        {
+          "old": "    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/\n    modifications: copied without content changes\n    used_in:\n      - 02 Атлас моделей/Семейства/GPT.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/atlas-remainder/gpt-decoder-block.png\n  - id: curated-atlas-bert-000000000087\n    asset: 00 Учебник/Assets/Figures/curated/atlas-remainder-official/bert-input-output.png\n",
+          "new": "    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/\n    modifications: copied without content changes\n    used_in: []\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/atlas-remainder/gpt-decoder-block.png\n    publication_status: retired\n    replacement: 00 Учебник/Assets/Figures/curated/gpt-30/gpt2-transformer-block-vectors-2.png\n  - id: curated-atlas-bert-000000000087\n    asset: 00 Учебник/Assets/Figures/curated/atlas-remainder-official/bert-input-output.png\n"
+        }
+      ]
+    }
+  ]
+}

@@ -3,6 +3,7 @@ import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {describe,it,expect} from 'vitest';
 import {beforeHardwareSourceCompletion} from '../tools/hardware-source-baseline.mjs';
+import {beforeTopicConsolidation} from '../tools/topic-consolidation-baseline.mjs';
 
 const root=resolve(import.meta.dirname,'../..');
 const read=(path:string)=>readFileSync(resolve(root,path),'utf8');
@@ -40,10 +41,16 @@ describe('Hardware source full comparison',()=>{
   it('links to real canonical headings and registered routes',()=>{
     const nav=read('publishing/navigation.yml');
     const routes=new Map([...nav.matchAll(/source: (.+)\n(?:\s+source_en: .+\n)?\s+route: (.+)/g)].map(m=>[m[1],m[2]]));
-    for(const d of Object.values(journal.destinations) as any[]){
-      expect(routes.get(d.path),d.path).toBe(d.route);
-      const headings=[...read(d.path).matchAll(/^#{1,6} (.+)$/gm)].map(m=>m[1]);
-      expect(headings,d.path).toContain(d.heading);
+    const split=JSON.parse(read('docs/audit/2026-11-04-kernel-compiler-split.json')).moved;
+    const compilerRoute='textbook/ml-systems/graph-compilation-pytorch-jax';
+    const movedIds=new Set(['compile','donation']);
+    for(const [id,d] of Object.entries(journal.destinations) as [string,any][]){
+      const moved=movedIds.has(id);
+      if(moved)expect(d.path).toBe(split.from);
+      const path=moved?split.to:d.path;
+      expect(routes.get(path),path).toBe(moved?compilerRoute:d.route);
+      const headings=[...read(path).matchAll(/^#{1,6} (.+)$/gm)].map(m=>m[1]);
+      expect(headings,path).toContain(d.heading);
       expect(d.anchor).toBe(slug(d.heading));
       expect(d.read_ranges.length).toBeGreaterThan(0);
     }
@@ -60,12 +67,16 @@ describe('Hardware source full comparison',()=>{
   });
   it('preserves the prior parent revision byte-for-byte and rejects unreviewed edits',()=>{
     const row=journal.addition;
-    expect(sha(chapter)).toBe(row.after_sha256);
-    const before=beforeHardwareSourceCompletion(chapter,row.source,root);
+    const atReview=(text:string)=>beforeTopicConsolidation(
+      text,row.source,root,'2026-11-03-systems-timeline-additions.json');
+    const reviewed=atReview(chapter);
+    expect(sha(reviewed)).toBe(row.after_sha256);
+    const before=beforeHardwareSourceCompletion(reviewed,row.source,root);
     expect(sha(before)).toBe(row.before_sha256);
     expect(beforeHardwareSourceCompletion(before,row.source,root)).toBe(before);
-    expect(()=>beforeHardwareSourceCompletion(chapter.replace('Matching an operation','Matching any operation'),row.source,root)).toThrow();
-    expect(sha(beforeHardwareSourceCompletion(chapter+'unreviewed outside edit',row.source,root))).not.toBe(row.before_sha256);
+    expect(()=>atReview(chapter+'unreviewed outside edit')).toThrow();
+    expect(()=>beforeHardwareSourceCompletion(reviewed.replace('Matching an operation','Matching any operation'),row.source,root)).toThrow();
+    expect(sha(beforeHardwareSourceCompletion(reviewed+'unreviewed outside edit',row.source,root))).not.toBe(row.before_sha256);
     for(const id of ['hardware-im2col','hardware-layout'])expect(chapter).toContain('<!-- checked-example: '+id+' -->');
   });
   it('records actual figure treatment and source caveats without claiming hardware validation',()=>{

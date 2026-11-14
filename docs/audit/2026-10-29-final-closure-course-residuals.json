@@ -3712,7 +3712,7 @@
       "sourceDisposition": "source-only",
       "sourceLocation": "Lectures/meeting-06-slides.pages.txt#physical-pages=1-13",
       "sourceFile": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-06-slides.pages.txt",
-      "sourceSha256": "f33fbfecc2142daebde14c4cc663b66015eb351670704a6fa1b1e1aaa5cfa910",
+      "sourceSha256": "9f1199a38367d45cd1784c6ee7690f2bf5e40783e889485d3bd926d628310af4",
       "decision": "covered-overview",
       "reason": "Examples and the grounding/HTML/vision frame introduce later mechanisms, already covered in computer-use agents.",
       "canonicalOwners": [
@@ -3731,7 +3731,7 @@
       "sourceDisposition": "source-only",
       "sourceLocation": "Lectures/meeting-06-slides.pages.txt#physical-pages=118-121",
       "sourceFile": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-06-slides.pages.txt",
-      "sourceSha256": "f33fbfecc2142daebde14c4cc663b66015eb351670704a6fa1b1e1aaa5cfa910",
+      "sourceSha256": "9f1199a38367d45cd1784c6ee7690f2bf5e40783e889485d3bd926d628310af4",
       "decision": "retain-demonstration",
       "reason": "Robot manipulation demonstrations do not supply a reproducible algorithm or training recipe. Keep them in their original source context.",
       "canonicalOwners": []

@@ -9,10 +9,12 @@ from fractions import Fraction
 from hashlib import sha256
 
 import torch
+from topic_consolidation_baseline import before_topic_consolidation
 
 ROOT = Path(__file__).resolve().parents[2]
 chapter = ROOT / '00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md'
-text = chapter.read_text()
+text = before_topic_consolidation(chapter.read_text(),chapter.relative_to(ROOT).as_posix(),
+                                  "2026-11-04-data-pipeline-additions.json")
 addition_match = re.search(r'<!-- BEGIN REVIEW: training step 2026-10-27 -->\n(.*?)<!-- END REVIEW: training step 2026-10-27 -->\n\n', text, re.S)
 assert addition_match is not None
 baseline = text[:addition_match.start()] + text[addition_match.end():]

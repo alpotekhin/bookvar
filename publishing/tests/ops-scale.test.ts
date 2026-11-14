@@ -15,6 +15,9 @@ describe('Harvard operations arithmetic integrated into chapter and practice',()
     expect(report.source_helpers_executed).toHaveLength(8);
     expect(report.independent_accounting_cases).toBe(200);
     expect(report.new_python_blocks_executed).toBe(5);
+    expect(report.release_decision_examples.sample_ratio.chi_square).toBe('1000/19');
+    expect(report.release_decision_examples.sample_ratio.missing_outcome_bounds).toEqual(['6/125','37/250']);
+    expect(report.release_decision_examples.request_budget.allowed_errors).toBe(1000);
     expect(report.verbatim_source_excerpts).toBe(3);
     expect(report.availability.ok).toBe(false);
     expect(report.source_accepts_canary_past_deadline.actual).toBe('balanced');

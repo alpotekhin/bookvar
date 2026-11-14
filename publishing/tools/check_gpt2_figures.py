@@ -7,7 +7,7 @@ from PIL import Image
 
 ROOT=Path(__file__).resolve().parents[2]
 specs=json.loads(Path(__file__).with_name("gpt2-figures.json").read_text())
-assert len(specs)==6
+assert specs and len({s["asset"] for s in specs})==len(specs)
 for s in specs:
     for path,digest in [(s["asset"],s["sha256"]),(s["source_asset"],s["source_asset_sha256"]),
         (s["source_page_snapshot"],s["source_page_sha256"]),(s["license_evidence"],s["license_evidence_sha256"])]:

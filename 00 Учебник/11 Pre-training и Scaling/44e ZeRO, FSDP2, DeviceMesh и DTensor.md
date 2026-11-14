@@ -2,8 +2,87 @@
 title: ZeRO, FSDP2, DeviceMesh и DTensor
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-23
-last_verified: 2026-10-23
+last_updated: 2026-11-05
+last_verified: 2026-11-05
+reference_terms:
+  - anchor: zero-state-sharding
+    label: "Состояния P/G/O и стадии ZeRO-1/2/3"
+    label_en: "P/G/O states and ZeRO stages 1/2/3"
+  - anchor: zero-memory-formats
+    label: "16 и 12 байт на параметр: разные схемы хранения"
+    label_en: "16 versus 12 bytes per parameter: distinct storage models"
+  - anchor: zero-owned-adam
+    label: "Владельцы координат и локальные состояния Adam"
+    label_en: "Coordinate ownership and local Adam states"
+  - anchor: zero-broadcast-vs-collectives
+    label: "CS336 broadcast-оптимизатор и обмены ZeRO"
+    label_en: "CS336 broadcast-based optimizer versus ZeRO collectives"
+  - anchor: fsdp-full-parameter-lifetime
+    label: "Жизненный цикл полных весов и градиентов FSDP"
+    label_en: "FSDP full-parameter and gradient lifetimes"
+  - anchor: fsdp-communication-bytes
+    label: "Байты all-gather весов и reduce-scatter градиентов"
+    label_en: "Weight all-gather versus gradient reduce-scatter bytes"
+  - anchor: peak-memory-synchronization
+    label: "Prefetch и пик памяти: перекрытие буферов 6/8 GiB"
+    label_en: "Prefetch and memory peaks: overlapping 6/8 GiB buffers"
+  - anchor: fsdp-prefetch-contract
+    label: "Явная и неявная предзагрузка FSDP2"
+    label_en: "Explicit and implicit FSDP2 prefetch"
+  - anchor: fsdp-per-parameter-dtensor
+    label: "FSDP1 FlatParameter и отдельные DTensor в FSDP2"
+    label_en: "FSDP1 FlatParameter versus FSDP2 per-parameter DTensor"
+  - anchor: fsdp-bottom-up
+    label: "Bottom-up fully_shard и создание оптимизатора"
+    label_en: "Bottom-up fully_shard and optimizer creation"
+  - anchor: fsdp-initialization-and-hooks
+    label: "Согласованная инициализация и hooks вызова модуля"
+    label_en: "Consistent initialization and module-call hooks"
+  - anchor: fsdp-reshard-policy
+    label: "reshard_after_forward: корень, вложенные группы и int"
+    label_en: "reshard_after_forward: root, child groups and integer policy"
+  - anchor: fsdp-three-dtypes
+    label: "Исходный dtype, param_dtype и reduce_dtype"
+    label_en: "Original dtype, param_dtype and reduce_dtype"
+  - anchor: fsdp-mesh-groups
+    label: "DeviceMesh 2×2 и реальные группы процессов"
+    label_en: "DeviceMesh 2×2 and actual process groups"
+  - anchor: fsdp-dtensor-layouts
+    label: "Shard, Replicate и Partial: размещение и смысл данных"
+    label_en: "Shard, Replicate and Partial: placement and semantics"
+  - anchor: fsdp-partial-nonlinearity
+    label: "Partial перед ReLU: почему сначала нужна сумма"
+    label_en: "Partial before ReLU: why reduction must come first"
+  - anchor: fsdp-redistribution
+    label: "Преобразования размещений и необходимые коллективы"
+    label_en: "Layout redistributions and their collectives"
+  - anchor: fsdp-distribute-from-local
+    label: "distribute_tensor, from_local и collective full_tensor"
+    label_en: "distribute_tensor, from_local and collective full_tensor"
+  - anchor: fsdp-hybrid-memory
+    label: "HSDP: память по оси shard, репликация по другой оси"
+    label_en: "HSDP memory over the shard axis and replica groups"
+  - anchor: fsdp-hybrid-reduction
+    label: "HSDP: reduce-scatter по строкам и all-reduce по столбцам"
+    label_en: "HSDP row reduce-scatter and column all-reduce"
+  - anchor: fsdp-tp-composition
+    label: "FSDP×TP и DataParallelMeshDims"
+    label_en: "FSDP×TP and DataParallelMeshDims"
+  - anchor: fsdp-token-normalization
+    label: "Неравные числа токенов и глобальный знаменатель"
+    label_en: "Unequal token counts and a global denominator"
+  - anchor: fsdp-nosync-storage
+    label: "Несинхронизированные градиенты и reshard_after_backward"
+    label_en: "Unsynchronized gradients and reshard_after_backward"
+  - anchor: fsdp-hsdp-accumulation
+    label: "Накопление HSDP с reduce-scatter без каждого all-reduce"
+    label_en: "HSDP accumulation retaining reduce-scatter while deferring all-reduce"
+  - anchor: fsdp-custom-correctness
+    label: "Проверка собственного FSDP и ignored_params"
+    label_en: "Checking a custom FSDP implementation and ignored_params"
+  - anchor: fsdp-checkpoint-boundary
+    label: "Шардированные checkpoints: состояния и границы переноса"
+    label_en: "Sharded checkpoints: saved states and portability boundaries"
 source_unit_id:
   - lecture-08-zero-sharding
   - lecture-08-zero-memory-accounting
@@ -38,6 +117,8 @@ FSDP — Fully Sharded Data Parallel — использует такой спо�
 а каждый процесс применяет её к своей части батча. Для этого нужны операции
 all-gather и reduce-scatter, разобранные в [[44a Processes, collectives и DDP]].
 
+<a id="zero-state-sharding"></a>
+
 ## Что именно разделяется между устройствами
 
 Обозначим через $\Psi$ число скалярных параметров, а через $P$, $G$ и $O$ —
@@ -60,6 +141,8 @@ all-gather и reduce-scatter, разобранные в [[44a Processes, collect
 и служебные буферы. Например, после `optimizer.zero_grad(set_to_none=True)`
 градиентные тензоры могут отсутствовать; во время обратного прохода,
 наоборот, временно возникает полный градиент отдельной группы параметров.
+
+<a id="zero-memory-formats"></a>
 
 В исходной статье ZeRO рассматривается смешанная точность с 16 байтами
 на параметр: 2 байта для низкоточных весов, 2 для градиентов, 4 для основной
@@ -92,7 +175,7 @@ FP32-момента Adam, **без отдельной основной FP32-ко
 Последнее число не означает, что обучение поместится в 2 GB:
 мы пока посчитали только разделяемые состояния модели.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-2026-10-23/hf-zero-memory.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-2026-10-23/hf-zero-memory.png|Разделение параметров, градиентов и состояний оптимизатора в ZeRO-1/2/3]]
 
 *Какие состояния перестают повторяться при переходе от DDP к ZeRO-1/2/3.
 Nouamane Tazi и соавторы, Hugging Face, Ultra-Scale Playbook,
@@ -103,6 +186,8 @@ Nouamane Tazi и соавторы, Hugging Face, Ultra-Scale Playbook,
 включает FP32-веса и два момента. Отдельные узкие участки показывают
 владение разными координатами, а не уменьшение числа параметров модели.
 Рисунок приведён целиком; исходный SVG растеризован без изменения подписей.*
+
+<a id="zero-owned-adam"></a>
 
 ### Почему можно разделить состояния Adam
 
@@ -159,6 +244,8 @@ print([round(float(value), 4) for value in updated])
 При ZeRO-1/2 обновлённые части весов затем собирают на всех процессах;
 при ZeRO-3 полные веса восстанавливают только перед нужным вычислением.
 
+<a id="zero-broadcast-vs-collectives"></a>
+
 В учебном задании CS336 оптимизатор делит параметры между процессами,
 обновляет свою часть и распространяет результат с помощью broadcast.
 Это удобная первая реализация, но её сетевые обмены не следует автоматически
@@ -168,6 +255,8 @@ print([round(float(value), 4) for value in updated])
 больше не нужно сохранять на каждом процессе. ZeRO-3 аналогично отказывается
 от постоянной полной копии параметров.
 [CS336, Assignment 2, §§6–8](https://github.com/stanford-cs336/assignment2-systems/tree/ca8bc81a59b70516f7ebb2da4808daade877c736).
+
+<a id="fsdp-full-parameter-lifetime"></a>
 
 ## Время жизни полного параметра
 
@@ -182,7 +271,7 @@ FSDP обычно управляет не каждой матрицей по о�
 Такой группой может быть блок трансформера с несколькими линейными слоями.
 Она определяет, какие веса собираются и освобождаются вместе.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-review-2026-10/pytorch-fsdp-figure1-overview.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-review-2026-10/pytorch-fsdp-figure1-overview.png|Группы FSDP и сборка полных весов перед вычислением]]
 
 *Группы FSDP и сборка весов перед вычислением. На схеме `layer1` и `layer2`
 объединены в одну группу: их веса собираются вместе. Источник: Zhao, Gu,
@@ -206,7 +295,7 @@ Varma et al., [PyTorch FSDP, Figure 1, PDF p. 3](https://arxiv.org/pdf/2304.1127
 6. Оптимизатор обновляет локальную часть параметров и её состояния.
    Следующий all-gather соберёт уже обновлённые веса.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-2026-10-23/hf-fsdp-forward.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-2026-10-23/hf-fsdp-forward.png|ZeRO-3 forward: сборка весов слоя, вычисление и повторное шардирование]]
 
 *Прямой проход ZeRO-3: для очередного слоя собираются его веса, выполняется
 вычисление, затем чужие части освобождаются. Источник: Nouamane Tazi и
@@ -216,7 +305,7 @@ Apache-2.0. Каждая GPU работает со своими входами. 
 вычислений модели не разделена между ними, как при PP. Показан режим с
 освобождением полных весов; исключение корневой группы FSDP2 разобрано ниже.*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-2026-10-23/hf-fsdp-backward.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-2026-10-23/hf-fsdp-backward.png|ZeRO-3 backward: повторная сборка весов и reduce-scatter градиентов]]
 
 *Обратный проход той же схемы. Полные веса снова нужны для производных
 по входам, а reduce-scatter оставляет каждому владельцу его часть
@@ -230,6 +319,8 @@ Apache-2.0. Оба рисунка — полные растровые копии
 операции ещё не означает её завершение. Освобождённый тензор также не обязан
 немедленно уменьшать память, видимую драйверу: аллокатор может сохранить
 блок для дальнейших выделений.
+
+<a id="fsdp-communication-bytes"></a>
 
 ### Сколько данных передаётся
 
@@ -315,6 +406,8 @@ $$
 размер буфера, но повышает накладные расходы. Выбор границ блоков поэтому
 влияет и на память, и на время шага.
 
+<a id="fsdp-prefetch-contract"></a>
+
 В FSDP2 есть неявная предварительная сборка и методы
 `set_modules_to_forward_prefetch` / `set_modules_to_backward_prefetch`
 для явного задания следующих групп. Сборка нескольких будущих групп
@@ -322,6 +415,8 @@ $$
 `limit_all_gathers`, не следует механически переносить в вызов `fully_shard`:
 это разные интерфейсы.
 [PyTorch, FSDP2 tutorial](https://docs.pytorch.org/tutorials/intermediate/FSDP_tutorial.html).
+
+<a id="fsdp-per-parameter-dtensor"></a>
 
 ## FSDP2, DeviceMesh и DTensor
 
@@ -331,6 +426,8 @@ FSDP2 сохраняет отдельные параметры и предста
 и сочетание с другими видами параллелизма. Однако «отдельный DTensor
 на параметр» не означает «отдельный all-gather на каждый параметр»:
 параметры одного вызова `fully_shard` по-прежнему могут передаваться группой.
+
+<a id="fsdp-bottom-up"></a>
 
 ### Сначала группы параметров, затем оптимизатор
 
@@ -362,6 +459,8 @@ def shard_model(model, mesh, policy=None):
 получится одна большая группа: перед её прямым проходом придётся собрать
 параметры всей модели, что часто сводит на нет ожидаемое уменьшение пика.
 
+<a id="fsdp-initialization-and-hooks"></a>
+
 FSDP2 не превращает независимо инициализированные случайные модели
 в согласованную исходную модель автоматически. Для небольшого примера
 можно одинаково инициализировать полные веса на каждом процессе.
@@ -375,6 +474,8 @@ FSDP2 не превращает независимо инициализиров�
 `model.forward(inputs)`: FSDP использует механизмы перехвата вызовов модуля,
 которые должны запускаться на каждом процессе в согласованном порядке.
 [PyTorch 2.14, fully_shard](https://docs.pytorch.org/docs/2.14/distributed.fsdp.fully_shard.html).
+
+<a id="fsdp-reshard-policy"></a>
 
 ### Когда FSDP2 сохраняет полные веса
 
@@ -401,6 +502,8 @@ API также допускает целое значение: после пря
 Это отдельная настройка, а не синоним булевого `True`.
 [Описание аргумента](https://docs.pytorch.org/docs/2.14/distributed.fsdp.fully_shard.html),
 [реализация выбора поведения корня, v2.14.0](https://github.com/pytorch/pytorch/blob/v2.14.0/torch/distributed/fsdp/_fully_shard/_fsdp_state.py).
+
+<a id="fsdp-three-dtypes"></a>
 
 ### Три формата: исходные веса, вычисления и редукция
 
@@ -443,6 +546,8 @@ policy = MixedPrecisionPolicy(
 [код политики](https://github.com/pytorch/pytorch/blob/v2.14.0/torch/distributed/fsdp/_fully_shard/_fsdp_api.py)
 и [редукции градиентов](https://github.com/pytorch/pytorch/blob/v2.14.0/torch/distributed/fsdp/_fully_shard/_fsdp_collectives.py).
 
+<a id="fsdp-mesh-groups"></a>
+
 ### DeviceMesh: какие процессы участвуют в обмене
 
 `DeviceMesh` задаёт расположение номеров процессов в многомерной сетке.
@@ -474,6 +579,8 @@ replicate_group = mesh.get_group("replicate")
 вызовы коллективных операций не образуют согласованный обмен.
 [PyTorch 2.14, DeviceMesh](https://docs.pytorch.org/docs/2.14/distributed.html#devicemesh).
 
+<a id="fsdp-dtensor-layouts"></a>
+
 ### DTensor: где лежат элементы и что они означают
 
 Обычный тензор знает форму и данные на одном устройстве. `DTensor` дополнительно
@@ -482,7 +589,7 @@ replicate_group = mesh.get_group("replicate")
 а позиция этого объекта в списке размещений — **ось mesh**, между
 процессами которой выполняется деление.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-review-2026-10/edls-dtensor-layouts.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-review-2026-10/edls-dtensor-layouts.png|Один вектор при разных размещениях Shard и Replicate на mesh]]
 
 *Один вектор при трёх способах размещения. Слева четыре процесса хранят
 либо по одному элементу, либо полный вектор. Справа строки сетки содержат
@@ -504,6 +611,8 @@ $[1,2]$ и $[3,4]$, логический результат равен $[4,6]$, 
 $[1,2,3,4]$. Такие значения возникают при суммировании частичных
 результатов матричного произведения. До редукции их нельзя
 интерпретировать как обычные одинаковые реплики.
+
+<a id="fsdp-partial-nonlinearity"></a>
 
 Нелинейную функцию нельзя произвольно применить к локальным вкладам
 и затем сложить результаты. Пусть вклады равны $[1,-2]$ и $[-3,4]$.
@@ -531,6 +640,8 @@ wrong_relu = premature_relu.redistribute(placements=(Replicate(),)).to_local()
 torch.testing.assert_close(correct_relu, torch.tensor([0., 2.]))
 torch.testing.assert_close(wrong_relu, torch.tensor([1., 4.]))
 ~~~
+
+<a id="fsdp-redistribution"></a>
 
 | Переход по одной оси mesh | Что нужно сделать |
 |---|---|
@@ -562,6 +673,8 @@ assert torch.equal(restored_values, values)
 Это коллективный вызов: нельзя выполнить его только на процессе 0,
 если остальные не участвуют в требуемом обмене.
 
+<a id="fsdp-distribute-from-local"></a>
+
 `distribute_tensor` получает логический полный тензор. Напротив,
 `DTensor.from_local` трактует вход как **уже подготовленную локальную часть
 или вклад**. По умолчанию он не проверяет согласованность всех данных.
@@ -569,6 +682,8 @@ assert torch.equal(restored_values, values)
 форму и шаги индексации; библиотека не должна угадывать, какой исходный
 тензор подразумевался.
 [PyTorch 2.14, DTensor API](https://docs.pytorch.org/docs/2.14/distributed.tensor.html).
+
+<a id="fsdp-hybrid-memory"></a>
 
 ### Гибридное шардирование и сочетание с TP
 
@@ -578,7 +693,7 @@ assert torch.equal(restored_values, values)
 а такие группы повторяют $R$ раз. Всего $N=RS$ процессов, но состояния
 на одном процессе занимают примерно $(P+G+O)/S$, **не** $(P+G+O)/N$.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-review-2026-10/pytorch-fsdp-figure4-hybrid-groups.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fsdp-review-2026-10/pytorch-fsdp-figure4-hybrid-groups.png|Группы шардирования FSDP и репликация одинаковых частей между группами]]
 
 *Две группы шардирования по восемь GPU; соответствующие части повторены
 между верхней и нижней строками. Источник: Zhao, Gu, Varma et al.,
@@ -592,6 +707,8 @@ CC BY-NC-ND 4.0. Исходная схема и подпись сохранен�
 внутри строки формирует части градиента, а all-reduce между соответствующими
 частями разных строк учитывает остальные батчи. Это уменьшает объём
 межузловых сборок весов, но не устраняет межузловую синхронизацию градиентов.
+
+<a id="fsdp-hybrid-reduction"></a>
 
 Для сетки $2\times2$ из предыдущего примера проследим градиент из двух
 координат. Процессы 0, 1, 2, 3 получили локальные вклады `[1,2]`,
@@ -630,6 +747,8 @@ torch.testing.assert_close(gradient_shard, expected)
 `("replicate", "shard")`. Нельзя назвать её оси `("dp", "tp")`
 и ожидать, что вторая автоматически станет тензорным параллелизмом.
 
+<a id="fsdp-tp-composition"></a>
+
 При сочетании с TP сначала определяют, какую часть матрицы вычисляет каждый
 TP-процесс, затем шардируют эту часть по нужной оси параллелизма по данным.
 Перед вычислением FSDP восстанавливает **TP-часть матрицы**, а не обязательно
@@ -638,6 +757,8 @@ TP-процесс, затем шардируют эту часть по нужн
 в PyTorch 2.14 описание осей `DataParallelMeshDims` для общего mesh.
 Усреднение градиентов должно охватывать процессы, получившие разные данные,
 а не повторно учитывать TP-процессы, совместно обрабатывающие те же примеры.
+
+<a id="fsdp-token-normalization"></a>
 
 ## Нормировка градиентов и накопление
 
@@ -702,6 +823,8 @@ def token_normalized_step(model, optimizer, inputs, targets, data_group):
 подходящих одинаковых размерах; для последовательностей разной длины
 это часто не выполняется.
 
+<a id="fsdp-nosync-storage"></a>
+
 В FSDP2 `set_requires_gradient_sync(False)` отключает синхронизацию
 градиентов, но накопленные градиенты в этом режиме могут оставаться
 **полными**, а не разделёнными. Это меняет расход памяти. Отдельная
@@ -710,6 +833,107 @@ def token_normalized_step(model, optimizer, inputs, targets, data_group):
 отключение синхронизации. Перед последним микробатчем синхронизацию
 возвращают, а оптимизатор вызывают после завершения всего окна.
 [PyTorch 2.14, FSDPModule](https://docs.pytorch.org/docs/2.14/distributed.fsdp.fully_shard.html).
+
+<a id="fsdp-hsdp-accumulation"></a>
+
+### Накопление с двумя уровнями синхронизации HSDP
+
+В гибридной сетке есть два разных обмена градиентов. Reduce-scatter
+складывает вклады внутри группы шардирования и оставляет каждому процессу
+его координаты. All-reduce объединяет эти части с соответствующими частями
+других реплик. При накоплении можно выполнять первый обмен для каждого
+микробатча, а второй отложить до конца окна. Тогда между микробатчами
+сохраняются результаты reduce-scatter, а не полные несинхронизированные
+градиенты всех параметров.
+
+В PyTorch 2.14 для этого служит `set_requires_all_reduce(False)`.
+Документация описывает его назначение так:
+
+> This can be used to implement gradient accumulation with only reduce-scatter but not all-reduce for HSDP.
+
+Источник: [PyTorch, FSDPModule.set_requires_all_reduce](https://docs.pytorch.org/docs/2.14/distributed.fsdp.fully_shard.html#torch.distributed.fsdp.FSDPModule.set_requires_all_reduce).
+При этом `set_requires_gradient_sync` должен оставаться включённым:
+его отключение отменило бы и reduce-scatter. Настройка
+`set_reshard_after_backward` независимо управляет полными весами,
+а не этими частями градиентов.
+
+Проследим два микробатча на прежней сетке
+`[[0,1],[2,3]]`. Пусть в первом локальные градиенты равны
+`[1,2]`, `[3,4]`, `[5,6]`, `[7,8]`, а во втором каждый
+из них вдвое больше. Каждый микробатч содержит по одному примеру на
+процесс, поэтому среднее нужно взять по восьми примерам. Для наглядности
+запишем суммы без внутренних масштабирований библиотеки.
+
+После первого reduce-scatter строка 0 владеет координатами `[4]`
+и `[6]`, строка 1 — `[12]` и `[14]`.
+Второй обмен добавляет соответственно `[8]`, `[12]`,
+`[24]` и `[28]`. Накопленные части строк в совокупности представляют
+
+$$
+G_0=[12,18],\qquad G_1=[36,42].
+$$
+
+Теперь один межстрочный all-reduce для каждой координаты даёт
+`[48]` на процессах 0/2 и `[60]` на 1/3.
+После деления на восемь получаются части среднего градиента `[6]`
+и `[7.5]`. Восстановленный вектор равен `[6,7.5]`.
+Если остановиться после reduce-scatter, реплики ещё будут хранить
+разные вклады и выполнят разные обновления. Если ещё раз усреднить
+уже нормированные части, изменится целевая функция.
+
+В следующем шаге общий знаменатель вычисляется до начала окна.
+`window` — непустой список пар `(inputs, targets)`;
+все процессы HSDP-группы проходят одинаковое число микробатчей.
+Модель уже подготовлена через `fully_shard` на двумерном mesh.
+Как и в предыдущем примере, используется стандартное усреднение FSDP2,
+`data_group` включает все реплики данных, а `-100` исключает цель из loss.
+
+<!-- example: fsdp-hybrid-accumulation -->
+~~~python
+def hsdp_accumulated_step(model, optimizer, window, data_group):
+    import torch
+    import torch.distributed as dist
+    import torch.nn.functional as F
+
+    if not window:
+        raise ValueError("The accumulation window must not be empty")
+    count = sum((targets != -100).sum() for _, targets in window)
+    count = count.to(dtype=torch.int64)
+    dist.all_reduce(count, group=data_group)
+    if count.item() == 0:
+        raise ValueError("No valid targets in the global window")
+
+    scale = dist.get_world_size(data_group) / count.item()
+    optimizer.zero_grad(set_to_none=True)
+    model.set_requires_gradient_sync(True)
+    for index, (inputs, targets) in enumerate(window):
+        model.set_requires_all_reduce(index == len(window) - 1)
+        logits = model(inputs)
+        loss_sum = F.cross_entropy(
+            logits.reshape(-1, logits.size(-1)),
+            targets.reshape(-1),
+            ignore_index=-100,
+            reduction="sum",
+        )
+        (loss_sum * scale).backward()
+    optimizer.step()
+~~~
+
+На последнем микробатче `set_requires_all_reduce(True)` возвращает
+межрепличную редукцию и объединяет накопленные части до шага оптимизатора.
+Коэффициент `scale` учитывает весь знаменатель один раз; дополнительное
+деление на число микробатчей не требуется. Процесс без полезных целей
+продолжает участвовать в проходах и обменах.
+
+Отложен только all-reduce градиентов между репликами. Коллективный
+подсчёт числа целей в начале функции остаётся необходимым. Сборки весов
+тоже никуда не исчезают: ими управляют границы FSDP и политика reshard.
+Части градиентов требуют меньше хранения, чем полный несинхронизированный
+буфер той же группы, но рабочие буферы reduce-scatter и собранные веса
+по-прежнему участвуют в пике памяти. Такая схема меняет обмены и время
+жизни данных; выигрыш по времени и пик GPU-памяти проверяются отдельно.
+
+<a id="fsdp-custom-correctness"></a>
 
 <a id="контракт-корректности-custom-fsdp"></a>
 
@@ -745,6 +969,8 @@ def token_normalized_step(model, optimizer, inputs, targets, data_group):
 и выполняет небольшие многопроцессные проверки на CPU/Gloo.
 Полноценный замер GPU-памяти, времени шага и работы NCCL требует
 отдельного запуска на соответствующем оборудовании.
+
+<a id="fsdp-checkpoint-boundary"></a>
 
 ## Distributed Checkpoint
 
@@ -787,7 +1013,7 @@ def token_normalized_step(model, optimizer, inputs, targets, data_group):
 - Zhao, Gu, Varma et al., [PyTorch FSDP: Experiences on Scaling Fully Sharded Data Parallel](https://arxiv.org/abs/2304.11277v2), 2023: группы параметров, порядок вычислений, гибридное шардирование. Детали `FlatParameter` относятся к FSDP1.
 - Stanford CS336, [Lecture 8, PDF pp. 14–30](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_08.pdf) и [Assignment 2, §§6–8](https://github.com/stanford-cs336/assignment2-systems/tree/ca8bc81a59b70516f7ebb2da4808daade877c736): последовательный переход от разделения оптимизатора к FSDP и проверкам корректности.
 - Efficient Deep Learning Systems, commit `e632aa89…`: [лекция, PDF pp. 13–31 и 54–70](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week05_fsdp/lecture.pdf), [семинар, PDF pp. 5–20](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week05_fsdp/seminar.pdf).
-- PyTorch [2.14 FSDP2 API](https://docs.pytorch.org/docs/2.14/distributed.fsdp.fully_shard.html), [DTensor API](https://docs.pytorch.org/docs/2.14/distributed.tensor.html) и [FSDP2 tutorial](https://docs.pytorch.org/tutorials/intermediate/FSDP_tutorial.html): конкретные правила `fully_shard`, смешанной точности и управления временем жизни весов. Документация проверена 23 октября 2026 года.
+- PyTorch [2.14 FSDP2 API](https://docs.pytorch.org/docs/2.14/distributed.fsdp.fully_shard.html), [DTensor API](https://docs.pytorch.org/docs/2.14/distributed.tensor.html) и [FSDP2 tutorial](https://docs.pytorch.org/tutorials/intermediate/FSDP_tutorial.html): конкретные правила `fully_shard`, смешанной точности и управления временем жизни весов.
 - Harvard Edge ML Systems Book, [Distributed Training, разделы ZeRO и FSDP](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/distributed_training.qmd): дополнительное системное изложение.
 
 ← [[44d Pipeline parallelism]] · Далее: [[44f Expert и hybrid parallelism]]

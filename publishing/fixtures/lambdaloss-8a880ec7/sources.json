@@ -1,0 +1,18 @@
+{
+  "upstream": "https://github.com/huggingface/sentence-transformers",
+  "commit": "8a880ec7f1524640619fe382940ee319144f74ca",
+  "license": "Apache-2.0",
+  "last_verified": "2026-11-06",
+  "files": [
+    {
+      "file": "lambda_loss.py",
+      "sha256": "a6f07eca3e8ff14f5a335155ca1b49eff3c3fc9eb2312a8cdc8007b4d1bd84a3",
+      "url": "https://raw.githubusercontent.com/huggingface/sentence-transformers/8a880ec7f1524640619fe382940ee319144f74ca/sentence_transformers/cross_encoder/losses/lambda_loss.py"
+    },
+    {
+      "file": "LICENSE",
+      "sha256": "624b030fd62b8b989dd502d5bb6322cbc0dbb524ab9c9708f32efe33d7275735",
+      "url": "https://raw.githubusercontent.com/huggingface/sentence-transformers/8a880ec7f1524640619fe382940ee319144f74ca/LICENSE"
+    }
+  ]
+}

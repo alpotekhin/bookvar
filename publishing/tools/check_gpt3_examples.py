@@ -56,6 +56,14 @@ print('PASS answer-only scoring, shifted positions and four prompt boundaries')
 assert .18 < .32 and .18 * .9 > .32 * .1
 assert .4 > .3 and .4 < math.sqrt(.3)
 assert .4 / .5 < .3 / .05
+# Two-class PET verbalizer example. Logits are illustrative, not ALBERT output.
+pet_logits = torch.tensor([0., math.log(3)], dtype=torch.float64, requires_grad=True)
+pet_loss = torch.nn.functional.cross_entropy(pet_logits[None], torch.tensor([1]))
+pet_loss.backward()
+torch.testing.assert_close(pet_logits.softmax(0), torch.tensor([.25, .75], dtype=torch.float64))
+assert math.isclose(pet_loss.item(), -math.log(.75))
+torch.testing.assert_close(pet_logits.grad, torch.tensor([.25, -.25], dtype=torch.float64))
+print('PASS PET class softmax, cross-entropy and verbalizer-logit gradients')
 assert (2048 - 80 - 50 - 128) // 36 == 49
 assert 80 + 49 * 36 + 50 + 128 == 2022
 assert 80 + 50 * 36 + 50 + 128 == 2058

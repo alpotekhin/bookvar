@@ -1,0 +1,259 @@
+{
+  "url": "http://127.0.0.1:4330/textbook/retrieval/embeddings-metric-learning/",
+  "width": 1280,
+  "height": 900,
+  "figures": [
+    {
+      "index": 0,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/embeddings-review-2026-10/bi-cross-encoder.png",
+      "alt": "SBERT: separate bi-encoder representations and joint cross-encoder scoring",
+      "natural": [
+        479,
+        267
+      ],
+      "display": [
+        479,
+        267
+      ],
+      "viewport": [
+        1212,
+        741
+      ],
+      "scroll": [
+        1212,
+        741
+      ],
+      "caption": "Bi-encoder и cross-encoder. Nils Reimers и Sentence Transformers contributors,\nCross-Encoders,\nоригинальный PNG.\nApache-2.0; без изменений. Лицензия.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-embeddings-reader/1280-figure-00.png"
+    },
+    {
+      "index": 1,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-first-60-64/dpr-dual-encoder-and-loss.png",
+      "alt": "DPR dual encoders, dot-product scores and contrastive loss",
+      "natural": [
+        2560,
+        1920
+      ],
+      "display": [
+        918.6640625,
+        688.9921875
+      ],
+      "viewport": [
+        1212,
+        721
+      ],
+      "scroll": [
+        1212,
+        721
+      ],
+      "caption": "Danqi Chen, ACL 2020 Open-Domain QA Tutorial,\nслайд 20. Два энкодера, dot product и потеря выбора положительного passage.\nНа узком экране полный слайд прокручивается по горизонтали;\nнажатие на изображение открывает оригинал.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-embeddings-reader/1280-figure-01.png"
+    },
+    {
+      "index": 2,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-first-60-64/dpr-positive-and-negative-examples.png",
+      "alt": "DPR question with positive and BM25 negative passages",
+      "natural": [
+        2560,
+        1920
+      ],
+      "display": [
+        945.328125,
+        708.9921875
+      ],
+      "viewport": [
+        1212,
+        741
+      ],
+      "scroll": [
+        1212,
+        741
+      ],
+      "caption": "Danqi Chen,\nACL 2020 Open-Domain QA Tutorial,\nслайд 21. Источники положительных и отрицательных фрагментов в DPR.\nПолный слайд без обрезки.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-embeddings-reader/1280-figure-02.png"
+    },
+    {
+      "index": 3,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/embeddings-review-2026-10/multiple-negatives.png",
+      "alt": "Multiple-negatives ranking loss: positives and shared batch negatives",
+      "natural": [
+        558,
+        472
+      ],
+      "display": [
+        558,
+        472
+      ],
+      "viewport": [
+        1212,
+        719
+      ],
+      "scroll": [
+        1212,
+        719
+      ],
+      "caption": "Один запрос a1a_1a1​, его положительный b1b_1b1​ и кандидаты b2,…,b5b_2,\\ldots,b_5b2​,…,b5​.\nNils Reimers и Sentence Transformers contributors,\nMS MARCO: MultipleNegativesRankingLoss,\nисходный PNG.\nApache-2.0; без изменений. Связь a1a_1a1​–b1b_1b1​ положительная,\nостальные показанные пары отрицательные.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-embeddings-reader/1280-figure-03.png"
+    },
+    {
+      "index": 4,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-first-60-64/dpr-in-batch-negatives.png",
+      "alt": "DPR historical ablation of in-batch and BM25 negatives",
+      "natural": [
+        2560,
+        1920
+      ],
+      "display": [
+        945.328125,
+        708.9921875
+      ],
+      "viewport": [
+        1212,
+        741
+      ],
+      "scroll": [
+        1212,
+        741
+      ],
+      "caption": "Danqi Chen, тот же\ntutorial,\nслайд 22. Сравнение схем обучения на development split Natural Questions;\nэто результаты DPR 2020 года, не измерения нашего примера.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-embeddings-reader/1280-figure-04.png"
+    },
+    {
+      "index": 5,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/embeddings-review-2026-10/simcse.png",
+      "alt": "Unsupervised SimCSE dropout views and supervised NLI contrastive pairs",
+      "natural": [
+        3933,
+        1337
+      ],
+      "display": [
+        1180,
+        401.1328125
+      ],
+      "viewport": [
+        1212,
+        721
+      ],
+      "scroll": [
+        1212,
+        721
+      ],
+      "caption": "Tong Gao, Xingcheng Yao, Danqi Chen,\nSimCSE,\nоригинальный PNG.\nMIT; без изменений. Лицензия.\nСплошные и пунктирные стрелки различают положительные и отрицательные пары.\nНа узком экране две панели прокручиваются по горизонтали.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-embeddings-reader/1280-figure-05.png"
+    },
+    {
+      "index": 6,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/embeddings-review-2026-10/distillation.png",
+      "alt": "Sentence Transformers: cross-encoder teacher and cross-encoder student",
+      "natural": [
+        839,
+        334
+      ],
+      "display": [
+        839,
+        334
+      ],
+      "viewport": [
+        1212,
+        721
+      ],
+      "scroll": [
+        1212,
+        721
+      ],
+      "caption": "Дистилляция логитов ансамбля в компактный cross-encoder MiniLM.\nSentence Transformers contributors,\nCross Encoder Knowledge Distillation,\nисходный PNG.\nApache-2.0; без изменений. На этой схеме ученик оценивает пару совместно.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-embeddings-reader/1280-figure-06.png"
+    },
+    {
+      "index": 7,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/embeddings-review-2026-10/matryoshka-results.png",
+      "alt": "Matryoshka STSB Spearman correlation at nested embedding dimensions",
+      "natural": [
+        640,
+        640
+      ],
+      "display": [
+        640,
+        640
+      ],
+      "viewport": [
+        1212,
+        721
+      ],
+      "scroll": [
+        1212,
+        721
+      ],
+      "caption": "Tom Aarsen, Hugging Face / Sentence Transformers,\nMatryoshka Embeddings — Results,\nоригинальный PNG.\nИзображение из huggingface/documentation-images,\nCC BY-NC-SA 4.0;\nбез изменений. Верхняя панель: корреляция Спирмена на STSBenchmark.\nНижняя: отношение к максимальному результату соответствующей модели.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-embeddings-reader/1280-figure-07.png"
+    }
+  ],
+  "limits": "Headless browser interactions and screenshots; requires separate human visual inspection.",
+  "layout": {
+    "page": [
+      1280,
+      1280
+    ],
+    "mathErrors": 0,
+    "formulas": [
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ]
+    ],
+    "tables": []
+  },
+  "contextScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-embeddings-reader/1280-page.png"
+}

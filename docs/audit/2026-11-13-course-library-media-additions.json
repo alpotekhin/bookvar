@@ -1,0 +1,73 @@
+{
+  "date": "2026-11-13",
+  "scope": "Repair externally hosted media in the derived Recommenders, Machine Learning Visualized and Stanford CS230 readers. Preserve the imported source Markdown, extracted document text and existing publication routes.",
+  "archives": {
+    "Linux Foundation Recommenders": "c5057acbbf6940ed4cb710af5b21f409733228ac3a7d8ad16275216edafd0a31",
+    "Machine Learning Visualized": "eee25c6a8299ac4a99507dc9c51d940b97f629d7d32fac6f73dc5c68fabefa3d",
+    "Stanford CS230 Cheatsheets": "12cead4ef9fca184270edb71d6396d1e33e73ff01b8f4435b13001f463e9fdba"
+  },
+  "files": [
+    {
+      "source": "publishing/adapter/build.ts",
+      "before_sha256": "8919648585d77bf30f77ed4a0fb63b2f9d201a923d7372e6c5a5ba6e0d45c73b",
+      "after_sha256": "084ca4c9e07d65bcfd4b05fd022b57a6eb6dc1ec5eefb5f9c9d6c8c0fdbc0919",
+      "changes": [
+        {
+          "old": "import { mlcourseTopic7ReaderBody } from './mlcourse-topic7-reader.js';",
+          "new": "import { mlcourseTopic7ReaderBody } from './mlcourse-topic7-reader.js';\nimport { courseLibraryReaderMedia } from './course-library-reader.js';"
+        },
+        {
+          "old": "    return mlcourseTopic7ReaderBody(route, source, scikitMoocReaderBody(route, source, body));",
+          "new": "    const reader = mlcourseTopic7ReaderBody(route, source, scikitMoocReaderBody(route, source, body));\n    return courseLibraryReaderMedia(route, source, reader);"
+        }
+      ]
+    }
+  ],
+  "previews": [
+    ["site/public/source-documents/machine-learning-visualized/main-page-5.png", 5, "07886889ed4ad88033a5db500a3455dabef595d92489f9b5f57c26c6b46898f2"],
+    ["site/public/source-documents/stanford-cs230-cheatsheets/cheatsheet-convolutional-neural-networks-page-1.png", 1, "0d8331ee3f56b72185748e399cb9984581369ac9bc6bfeeafbd48d0048d4025f"],
+    ["site/public/source-documents/stanford-cs230-cheatsheets/cheatsheet-deep-learning-tips-tricks-page-1.png", 1, "aa082c6e4f55f2116381ecaf82d13b25beda7c6a59e70ec44532d46951130d18"],
+    ["site/public/source-documents/stanford-cs230-cheatsheets/cheatsheet-recurrent-neural-networks-page-1.png", 1, "b46a14a06aaef0bb8cda0ab7208a996fae9b5d1246f2381897b2c62c4845470b"],
+    ["site/public/source-documents/stanford-cs230-cheatsheets/super-cheatsheet-deep-learning-page-1.png", 1, "a9d4941e9f16201235498141c947c4f3f4092dd3f00c269fb29094ed3a3a70be"]
+  ],
+  "previewDerivation": "Full pages rendered with pdftoppm -png -scale-to 1400 -singlefile; no cropping, relabeling or redrawing. The original PDFs remain byte-identical.",
+  "sources": {
+    "recommenders": {
+      "repository": "recommenders-team/resources",
+      "revision": "e76bb39727103e45dd8011b6d0eca2f1aad3c0f7",
+      "notice": "site/public/licenses/recommenders-resources-e76bb397-MIT.txt",
+      "licenseSha256": "d7ca82f3133a25d7ddd29dfd5f64d5db36df88eb1a0adfaf376adc539f06e59a",
+      "objects": [
+        ["images/reco-arch.png", "00 Учебник/Assets/Figures/curated/linux-foundation-recommenders-architecture.png", "bc4efc99ba27e6a164767ad509840c2203ffe6ec", "9b6ce77521b28be287bc989f53f46cb3830136442cd71167b4e2141ae01cded6"],
+        ["images/sar_schema.svg", "00 Учебник/Assets/Figures/curated/recommender-mf-2026-10-25/sar-schema.svg", "32525e80a7a1ff868323a947aef3d2cb74ab538c", "10ecfb8f5fa6b62cbea24d5eca145197fddaa584b11cf0c6c1e7ddc10d71e6f6"],
+        ["images/NCF.svg", "Assets/Sources/Linux Foundation Recommenders/NCF.svg", "f8fffe1ae85ba42b35455593f12ea31da05626e2", "27e2b70e0e91c3bd2a1f3d21b7ff3998fc1d6fa5045d3039604a731173d006a0"]
+      ],
+      "underlyingNeuMfFigure": "https://arxiv.org/html/1708.05031v2#S3.F3",
+      "underlyingFigureLicense": "WWW 2017 paper front matter: CC BY 4.0, independently of the arXiv deposit terms."
+    },
+    "machineLearningVisualized": {
+      "repository": "gavinkhung/machine-learning-visualized",
+      "revision": "950f8ec4671c0790cdd867514cc114fea01f5ab0",
+      "notice": "site/public/licenses/machine-learning-visualized-950f8ec4-MIT.txt",
+      "licenseSha256": "0d8d5678512abc11248d42197ae9c80c6be8d931ae9e942bbe20539f52f39a65",
+      "objects": [
+        ["gifs/home.gif", "Assets/Sources/Machine Learning Visualized/home.gif", "eaf17097be413d732614c8f986fddcde552ff891", "8d64b36784011fe44eaa9a1026395d61eb97557326b0b71f54426afb5f27c69c"],
+        ["gifs/marimo.gif", "Assets/Sources/Machine Learning Visualized/marimo.gif", "613233a5cc911d15fdca8d7dd8059b8114aa318e", "ce8689fb53da32cc4dec3b0505e69b01bc5b496666f793f62076a7bdc5ce1fc8"],
+        ["gifs/latex.gif", "Assets/Sources/Machine Learning Visualized/latex.gif", "f51bb787b17b1fcc44ace0487951d662c281d87e", "2e1cb40815c0f7b8fd2d379adcb3e29b493d0f2172c0446bb77e4f57fbe8c730"],
+        ["book/main.pdf", "site/public/source-documents/machine-learning-visualized/main.pdf", "dc19542b29322fed274f3c300769636eceecbcf6", "735a9f9e2d06f011ce7911b11e89cac06e69c14db2f5b47b34231644f5f826bf", 55]
+      ]
+    },
+    "cs230": {
+      "repository": "afshinea/stanford-cs-230-deep-learning",
+      "revision": "4653bc01297b269edb19e844b01127ba13de59df",
+      "notice": "site/public/licenses/stanford-cs230-cheatsheets-4653bc01-MIT.txt",
+      "licenseSha256": "3f1e01d47723adf677565d806587f03b7a557020ff3a584f3165c8bb3304578a",
+      "objects": [
+        ["en/cheatsheet-convolutional-neural-networks.pdf", "site/public/source-documents/stanford-cs230-cheatsheets/cheatsheet-convolutional-neural-networks.pdf", "d8d48cf5c18cd504f86da2ad484842ddd8241257", "fa15be4c10bb03df201da4a51a788ffe408ec4a25415b4003d37f52f50f6fe08", 5],
+        ["en/cheatsheet-recurrent-neural-networks.pdf", "site/public/source-documents/stanford-cs230-cheatsheets/cheatsheet-recurrent-neural-networks.pdf", "33b2c39056d8b0d4aa2c1f03ca289cca17afae26", "4c2f929d0cbcb8dbd1e83570ec6e409e49e0f4d35b4130a68284b552feafeb1a", 5],
+        ["en/cheatsheet-deep-learning-tips-tricks.pdf", "site/public/source-documents/stanford-cs230-cheatsheets/cheatsheet-deep-learning-tips-tricks.pdf", "937c22c18b938ff977a4dfdefea8fcc4e6454d27", "b430c6910d140df2a8fa79219f7a2dc8177b3ae77c5ed13db0eacc2359286ea8", 3],
+        ["en/super-cheatsheet-deep-learning.pdf", "site/public/source-documents/stanford-cs230-cheatsheets/super-cheatsheet-deep-learning.pdf", "9dd42398c3081e7413bfc859b770b8b73965b158", "d5c7f5f63cd118a6e5508fa42dbe1b6fe6f30b3b815589ec6003acc952a4915f", 13]
+      ]
+    }
+  }
+}

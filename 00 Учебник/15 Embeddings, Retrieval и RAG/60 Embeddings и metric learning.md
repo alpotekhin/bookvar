@@ -2,15 +2,82 @@
 title: "Эмбеддинги и метрическое обучение"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-20
-last_verified: 2026-10-20
+last_updated: 2026-11-09
+last_verified: 2026-11-09
+source_language: mixed
 primary_sources:
   - https://arxiv.org/abs/1908.10084
   - https://arxiv.org/abs/2004.04906
+  - https://aclanthology.org/2021.repl4nlp-1.31/
+  - https://arxiv.org/abs/2406.12356v3
   - https://www.sbert.net/docs/sentence_transformer/loss_overview.html
   - https://github.com/princeton-nlp/SimCSE
   - https://sbert.net/examples/sentence_transformer/training/matryoshka/README.html
   - https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html
+reference_terms:
+  - label: "Mean, CLS и last-token pooling"
+    label_en: "Mean, CLS and last-token pooling"
+    anchor: emb-pooling
+  - label: "Косинус, скалярное произведение и норма"
+    label_en: "Cosine, dot product and vector norms"
+    anchor: emb-similarity
+  - label: "Инструкции, токенизация и обрезка"
+    label_en: "Instructions, tokenization and truncation"
+    anchor: emb-input-contract
+  - label: "SBERT, bi-encoder и cross-encoder"
+    label_en: "SBERT, bi-encoders and cross-encoders"
+    anchor: emb-encoders
+  - label: "Контрастивное обучение эмбеддингов"
+    label_en: "Contrastive embedding training"
+    anchor: emb-contrastive
+  - label: "Контрастивный пакет: численный пример"
+    label_en: "Contrastive batch: worked example"
+    anchor: emb-batch-example
+  - label: "Температура, градиенты и несколько positives"
+    label_en: "Temperature, gradients and multiple positives"
+    anchor: emb-positive-sets
+  - label: "Hard negatives и ложные отрицательные"
+    label_en: "Hard negatives and false negatives"
+    anchor: emb-negatives
+  - label: "In-batch negatives и накопление градиентов"
+    label_en: "In-batch negatives and gradient accumulation"
+    anchor: emb-in-batch
+  - label: "SimCSE и две dropout-маски"
+    label_en: "SimCSE and two dropout views"
+    anchor: emb-simcse
+  - label: "Pair, contrastive и triplet loss"
+    label_en: "Pair, contrastive and triplet losses"
+    anchor: emb-metric-losses
+  - label: "MarginMSE и дистилляция оценок"
+    label_en: "MarginMSE and score distillation"
+    anchor: emb-marginmse
+  - label: "Анизотропия и whitening эмбеддингов"
+    label_en: "Embedding anisotropy and whitening"
+    anchor: emb-anisotropy
+  - label: "Размерность и память векторного индекса"
+    label_en: "Dimension and vector-index memory"
+    anchor: emb-index-memory
+  - label: "Matryoshka и вложенные размерности"
+    label_en: "Matryoshka and nested dimensions"
+    anchor: emb-matryoshka
+  - label: "Совместимость энкодеров и пересчёт корпуса"
+    label_en: "Encoder compatibility and corpus re-encoding"
+    anchor: emb-compatibility
+  - label: "Релевантность, qrels, Recall и Hit"
+    label_en: "Relevance, qrels, Recall and Hit"
+    anchor: emb-qrels
+  - label: "MRR и nDCG для эмбеддингов"
+    label_en: "MRR and nDCG for embeddings"
+    anchor: emb-ranking-metrics
+  - label: "Exact search: пять документов"
+    label_en: "Exact search: five-document example"
+    anchor: emb-exact-search
+  - label: "Модель, ANN-индекс и неполная разметка"
+    label_en: "Model, ANN-index and incomplete-label errors"
+    anchor: emb-error-decomposition
+  - label: "GradCache — общий loss и повторные проходы"
+    label_en: "GradCache: joint loss and recomputation"
+    anchor: emb-gradcache
 ---
 
 # Эмбеддинги и метрическое обучение
@@ -36,6 +103,7 @@ primary_sources:
 
 ## 1. От токенных представлений к представлению последовательности
 
+<a id="emb-pooling"></a>
 ### Что усредняется
 
 Transformer обычно возвращает матрицу состояний $H\in\mathbb R^{T\times d}$:
@@ -78,6 +146,7 @@ $$
 состояние `[CLS]`. Это свойства конкретных обученных моделей,
 а не доказательство универсального превосходства одного pooling.
 
+<a id="emb-similarity"></a>
 ### Норма вектора и функция сравнения
 
 Пусть запрос $q=(1,0)$, документы $a=(1,0)$ и $b=(2,2)$.
@@ -136,6 +205,7 @@ assert np.argmax((normalize_rows(q) @ normalize_rows(docs).T)[0]) == 0
 используют косинус. Распределение оценок меняется вместе с обучением,
 языком, корпусом и форматом запроса.
 
+<a id="emb-input-contract"></a>
 ### Токенизация, инструкция и обрезка
 
 Рабочая модель включает токенизатор, специальные токены, pooling,
@@ -157,6 +227,7 @@ assert np.argmax((normalize_rows(q) @ normalize_rows(docs).T)[0]) == 0
 этому соответствует `include_prompt`; его нельзя выбирать независимо
 от принятой схемы обучения.
 
+<a id="emb-encoders"></a>
 ## 2. Почему обычный BERT не является готовой моделью предложений
 
 Усреднить состояния предобученного BERT технически можно сразу.
@@ -178,7 +249,7 @@ baseline; качество модели на других NLP-задачах н�
 можно обработать заранее, а во время запроса выполнять быстрый поиск ближайших
 соседей. Разница показана в документации Sentence Transformers:
 
-![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/bi-cross-encoder.png]]
+![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/bi-cross-encoder.png|SBERT: separate bi-encoder representations and joint cross-encoder scoring]]
 
 *Bi-encoder и cross-encoder. Nils Reimers и Sentence Transformers contributors,
 [Cross-Encoders](https://sbert.net/docs/cross_encoder/usage/usage.html),
@@ -234,6 +305,7 @@ Bi-encoder обязан сжать всё,
 
 ## 3. Контрастивная задача
 
+<a id="emb-contrastive"></a>
 ### Матрица оценок и целевой документ
 
 Пусть пакет содержит три запроса и по одному правильному документу
@@ -269,7 +341,7 @@ Softmax нормирует одну строку: правильный доку�
 температуры в формуле. Запись с $\tau$ обобщает эту схему;
 она не означает, что DPR обучался с настройками современного MNRL.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/dpr-dual-encoder-and-loss.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/dpr-dual-encoder-and-loss.png|DPR dual encoders, dot-product scores and contrastive loss]]
 
 *Danqi Chen, [ACL 2020 Open-Domain QA Tutorial](https://github.com/danqi/acl2020-openqa-tutorial/blob/3c82cf3bfa7f7f26aa4016cf4c48b83f1a4eaad0/slides/part5-dense-retriever-e2e-training.pdf#page=20),
 слайд 20. Два энкодера, dot product и потеря выбора положительного passage.
@@ -281,6 +353,7 @@ Softmax нормирует одну строку: правильный доку�
 в ORQA/REALM. Оба энкодера DPR инициализированы **предобученным BERT**.
 Читать её как обучение всей системы с нуля по небольшой QA-выборке неверно.
 
+<a id="emb-batch-example"></a>
 ### Один пакет в числах
 
 Пусть для первого запроса «Как изменить пароль?» три документа получают уже
@@ -306,6 +379,7 @@ $$
 этого запроса равна примерно 0.069. Это другой, явно заданный контракт меток,
 а не автоматическое свойство обычной диагональной CE.
 
+<a id="emb-positive-sets"></a>
 ### Почему ближайшие отрицательные получают больший градиент
 
 Для одной строки производная по **масштабированной** оценке имеет вид
@@ -374,6 +448,7 @@ assert 0.068 < multi_loss < 0.069
 
 ## 4. Пары определяют геометрию
 
+<a id="emb-negatives"></a>
 ### Откуда берутся положительные и отрицательные примеры
 
 К инструкции о смене пароля случайная страница о печати служит лёгким
@@ -390,7 +465,7 @@ assert 0.068 < multi_loss < 0.069
 - положительные passages других вопросов в том же пакете как in-batch negatives;
 - верхний результат BM25 без строки ответа как hard negative.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/dpr-positive-and-negative-examples.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/dpr-positive-and-negative-examples.png|DPR question with positive and BM25 negative passages]]
 
 *Danqi Chen,
 [ACL 2020 Open-Domain QA Tutorial](https://github.com/danqi/acl2020-openqa-tutorial/blob/3c82cf3bfa7f7f26aa4016cf4c48b83f1a4eaad0/slides/part5-dense-retriever-e2e-training.pdf#page=21),
@@ -419,6 +494,7 @@ assert 0.068 < multi_loss < 0.069
 процедуры, а не доказательство истинной нерелевантности; ошибки учителя
 тоже возможны.
 
+<a id="emb-in-batch"></a>
 ### Что даёт пакет
 
 In-batch negatives экономят вычисления: $B$ кодирований каждой стороны дают
@@ -426,7 +502,7 @@ $B^2$ оценок. Но примеры внутри пакета должны �
 несколько запросов имеют общий правильный документ или батч построен из одной
 узкой темы, предположение «всё вне диагонали отрицательно» может нарушаться.
 
-![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/multiple-negatives.png]]
+![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/multiple-negatives.png|Multiple-negatives ranking loss: positives and shared batch negatives]]
 
 *Один запрос $a_1$, его положительный $b_1$ и кандидаты $b_2,\ldots,b_5$.
 Nils Reimers и Sentence Transformers contributors,
@@ -449,7 +525,7 @@ Sentence Transformers contributors, *MS MARCO*, Apache-2.0.
 что другие 127 фрагментов действительно бесполезны. И $B^2$ оценок
 не равны $B^2$ независимо размеченным человеческим примерам.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/dpr-in-batch-negatives.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/dpr-in-batch-negatives.png|DPR historical ablation of in-batch and BM25 negatives]]
 
 *Danqi Chen, тот же
 [tutorial](https://github.com/danqi/acl2020-openqa-tutorial/blob/3c82cf3bfa7f7f26aa4016cf4c48b83f1a4eaad0/slides/part5-dense-retriever-e2e-training.pdf#page=22),
@@ -477,12 +553,194 @@ $-\log(1/2)=\log2$ на запрос: появились отрицательн�
 
 При нескольких ускорителях можно обменяться эмбеддингами и собрать
 общую матрицу. Нужно согласовать индексы положительных пар и
-передачу градиента через обмен. Cached/GradCache-подходы уменьшают
-необходимость хранить активации всей большой партии сразу, но
-требуют дополнительных проходов и аккуратного воспроизведения
-вычислений. Они не означают неограниченный batch без затрат памяти,
-сети и времени.
+передачу градиента через обмен.
 
+<a id="emb-gradcache"></a>
+### GradCache: full-batch negatives with chunked encoder passes
+
+Split four query–document pairs into two chunks, pairs 1–2 and 3–4.
+In the figure, rows are queries and columns are documents. A query's
+positive is on the diagonal; the other documents in its row are
+negatives if the labels say they are irrelevant.
+
+![[00 Учебник/Assets/Figures/curated/gradcache-comparison-2026-11-09/contaccum-figure1.png|Three panels: GradCache uses all 16 query–document scores; gradient accumulation uses only the two 2-by-2 diagonal blocks; ContAccum mixes current and detached past representations]]
+
+*Jaehee Kim, Yukyung Lee, Pilsung Kang,
+[A Gradient Accumulation Method for Dense Retriever under Memory Constraint, Figure 1](https://arxiv.org/html/2406.12356v3#S2.F1).
+[Original PNG](https://arxiv.org/html/2406.12356v3/Styles/figures/comparison-camera_ready.png), unchanged,
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+
+In **(a)** GradCache computes the row loss over all four columns.
+Query 1 has three negatives, including documents 3 and 4 in the
+other chunk. In **(b)** ordinary gradient accumulation computes
+each loss separately, over just two columns. Query 1 has only
+document 2 as a negative. The empty blocks in (b) are absent from
+the softmax; they are not zero-valued logits. For the score row
+$(1,0,0,0)$, the loss for query 1 is $\log(1+3/e)\approx0.7437$ in
+(a) and $\log(1+1/e)\approx0.3133$ in (b). Accumulating the weight
+gradients cannot put the two missing terms back into the denominator.
+
+In **(c)** [[05 Источники/Papers/ContAccum|ContAccum]] appends four saved query
+vectors and four saved document vectors to the two current pairs. A current
+query now compares its positive with five negatives. A saved document
+affects the gradient of the current query but receives no gradient
+through its old encoder pass; the hatched cells show comparisons with
+one trainable side. This changes the loss. GradCache instead
+recomputes encoder activations for the same examples and preserves
+the full-batch objective.
+
+With two training pairs, let both the query and document inputs be the rows
+of the identity matrix. A shared linear encoder starts with an identity weight
+matrix, so the score matrix is also the identity. Each query has one positive
+with score 1 and one negative with score 0. At temperature 1, the positive
+probability is about 0.7311 and the mean loss is about 0.3133.
+Splitting the two pairs into singleton losses removes both negatives:
+each softmax then has one entry and both losses are zero.
+
+GradCache keeps the two-by-two loss. It changes when the encoder's computation
+graphs are built and discarded. First, encode both queries and both documents
+without recording encoder activations. These four vectors are enough to
+calculate the contrastive loss and its derivatives with respect to the vectors.
+Then recompute each encoder chunk with autograd enabled and propagate its
+already calculated representation gradient into the encoder weights.
+
+The published paper describes the sequence as follows. The excerpt retains
+the original English; the numeric example and executable check below are
+Bookvar additions.
+
+> **Step1: Graph-less Forward** Before gradient computation, we first run an extra
+> encoder forward pass for each batch instance to get its representation.
+> Importantly, this forward pass runs without constructing the computation
+> graph. We collect and store all representations computed.
+>
+> **Step2: Representation Gradient Computation and Caching** We then compute the
+> contrastive loss for the batch based on the representation from Step1 and
+> have a corresponding computation graph constructed. Despite the mathematical
+> derivation, automatic differentiation system is used in actual implementation,
+> which automatically supports variations of contrastive loss. A backward pass
+> is then run to populate gradients for each representation. Note that the
+> encoder is not included in this gradient computation.
+>
+> **Step3: Sub-batch Gradient Accumulation** We run encoder forward one sub-batch
+> at a time to compute representations and build the corresponding computation
+> graph. We take the sub-batch’s representation gradients from the cache and
+> run back propagation through the encoder. Gradients are accumulated for
+> encoder parameters across all sub-batches.
+>
+> **Step4: Optimization** When all sub-batches are processed, we can step the
+> optimizer to update model parameters as if the full batch is processed in a
+> single forward-backward pass.
+
+*Luyu Gao, Yunyi Zhang, Jiawei Han and Jamie Callan,
+[Scaling Deep Contrastive Learning Batch Size under Memory Limited Setup, §3.3](https://aclanthology.org/2021.repl4nlp-1.31/).
+CC BY 4.0 under the [ACL Anthology policy](https://aclanthology.org/faq/copyright/).
+Selected prose paragraphs reproduced verbatim; the intervening equations and
+the sentence defining the cache symbols are omitted.*
+
+For the two-pair example, the derivative with respect to the first query
+vector is approximately $(-0.13447,0.13447)$. The first document gets the
+same derivative; the second query and document get
+$(0.13447,-0.13447)$. Each derivative includes the factor $1/2$ from the
+mean over the two queries. A cached derivative therefore already includes
+the full-batch reduction. Dividing it by the number of chunks again would
+make the parameter gradient too small.
+
+Let $h_i=f_\theta(x_i)$ be a representation and
+$g_i=\partial L/\partial h_i$ its cached gradient. The chain rule gives
+
+$$
+\begin{aligned}
+\nabla_\theta L&=\sum_i J_i^\top g_i,\\
+J_i&=\frac{\partial f_\theta(x_i)}{\partial\theta}.
+\end{aligned}
+$$
+
+Recomputing one chunk supplies its vector–Jacobian product without keeping
+all other encoder graphs alive. In code, the scalar surrogate
+$\sum_i h_i^\top\operatorname{stopgrad}(g_i)$ has the required parameter
+gradient. Its numeric value is not the original loss, so it is not a replacement
+for the loss in training logs. With shared encoder weights, query-side and
+document-side contributions accumulate into the same parameter tensors.
+
+The CPU check below uses a linear encoder, not a pretrained language model.
+It compares every weight derivative with an ordinary full-batch backward pass.
+No optimizer update happens between chunks.
+
+```python
+import torch
+from torch import nn
+from torch.nn import functional as F
+
+
+def cached_encoder_grad(model, queries, documents, chunk_size):
+    model.zero_grad(set_to_none=True)
+    with torch.no_grad():
+        q = torch.cat([model(x) for x in queries.split(chunk_size)])
+        d = torch.cat([model(x) for x in documents.split(chunk_size)])
+    q = q.detach().requires_grad_()
+    d = d.detach().requires_grad_()
+    labels = torch.arange(len(queries), device=queries.device)
+    loss = F.cross_entropy(q @ d.T, labels)
+    dq, dd = torch.autograd.grad(loss, (q, d))
+
+    for inputs, gradients in [(queries, dq), (documents, dd)]:
+        for x, g in zip(inputs.split(chunk_size), gradients.split(chunk_size)):
+            # g already contains the mean reduction over all queries.
+            (model(x) * g).sum().backward()
+    return loss.detach(), [p.grad.detach().clone() for p in model.parameters()]
+
+
+inputs = torch.eye(2, dtype=torch.float64)
+encoder = nn.Linear(2, 2, bias=False, dtype=torch.float64)
+with torch.no_grad():
+    encoder.weight.copy_(torch.eye(2, dtype=torch.float64))
+
+full_loss = F.cross_entropy(encoder(inputs) @ encoder(inputs).T, torch.arange(2))
+full_loss.backward()
+full_gradient = encoder.weight.grad.detach().clone()
+cached_loss, cached_gradients = cached_encoder_grad(encoder, inputs, inputs, 1)
+
+assert torch.allclose(cached_loss, full_loss.detach())
+assert torch.allclose(cached_gradients[0], full_gradient, atol=1e-12)
+print(round(float(cached_loss), 6))  # 0.313262
+print(full_gradient)
+# tensor([[-0.2689,  0.2689],
+#         [ 0.2689, -0.2689]], dtype=torch.float64)
+
+encoder.zero_grad(set_to_none=True)
+for x in inputs.split(1):
+    singleton_loss = F.cross_entropy(encoder(x) @ encoder(x).T, torch.zeros(1, dtype=torch.long))
+    singleton_loss.backward()
+assert torch.count_nonzero(encoder.weight.grad) == 0
+```
+
+This implementation assumes deterministic, example-independent encoder
+computations. A training-mode Transformer usually has dropout. Its recomputed
+chunk must use the same random choices as its first pass, including the separate
+query and document passes when weights are shared. Otherwise the cached
+$g_i$ belongs to one sampled representation but multiplies the Jacobian of
+another. The [authors’ implementation](https://github.com/luyug/GradCache/blob/906f03835fbc183132a9db32612a9e8f180ca3b4/src/grad_cache/grad_cache.py)
+records a [RandContext](https://github.com/luyug/GradCache/blob/906f03835fbc183132a9db32612a9e8f180ca3b4/src/grad_cache/context_managers.py)
+for each chunk and restores CPU and relevant CUDA generator states for its
+recomputation. The short example does not implement that mechanism and must
+not be used unchanged with stochastic encoders.
+
+Restoring RNG state does not restore arbitrary mutable model state.
+Training-mode BatchNorm, for example, computes statistics from the chunk;
+changing the chunk changes the function, and repeated forwards can update
+running statistics twice. Equality to a full-batch gradient requires matching
+the actual forward function, its parameters, stochastic choices and state.
+Floating-point accumulation can also change the final low-order bits.
+
+For a fixed encoder chunk size, retained encoder activations no longer grow
+with the full contrastive batch. The representation and gradient caches still
+grow as $O(Bd)$; the explicit score matrix in this example grows as $O(B^2)$.
+Its loss computation can itself become the memory bottleneck. An extra encoder
+forward pass also costs time. The paper's runtime measurements describe its
+DPR experiment, not a fixed overhead for every model and GPU.
+
+
+<a id="emb-simcse"></a>
 ### SimCSE: положительная пара без двух разных текстов
 
 Для **unsupervised SimCSE** одно предложение проходит через энкодер
@@ -494,7 +752,7 @@ $-\log(1/2)=\log2$ на запрос: появились отрицательн�
 требует устойчивости к этой случайности, а отрицательные пары
 не позволяют решить задачу одним одинаковым вектором для всех текстов.
 
-![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/simcse.png]]
+![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/simcse.png|Unsupervised SimCSE dropout views and supervised NLI contrastive pairs]]
 
 *Tong Gao, Xingcheng Yao, Danqi Chen,
 [SimCSE](https://github.com/princeton-nlp/SimCSE/tree/49fa580a853752ede55b8c76d9debf748e214d3f),
@@ -513,6 +771,7 @@ MIT; без изменений. [Лицензия](/licenses/simcse-49fa580a-MIT
 
 ## 5. Triplet, multiple-negatives и distillation
 
+<a id="emb-metric-losses"></a>
 ### Расстояние, порядок и численная оценка пары
 
 Формат разметки определяет, что можно требовать от модели.
@@ -562,6 +821,7 @@ softmax. Это другая цель, а не тот же hinge с больши
 элементов. Сравнивать методы нужно при одинаковом корпусе, метках,
 способе отбора кандидатов и бюджете, а не только по названиям loss.
 
+<a id="emb-marginmse"></a>
 ### Дистилляция оценок учителя
 
 Если сильная модель уже умеет оценивать пары, её ответы можно
@@ -569,7 +829,7 @@ softmax. Это другая цель, а не тот же hinge с больши
 cross-encoders заранее оценивает пары запрос–документ, а компактный
 оценщик учится воспроизводить эти значения:
 
-![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/distillation.png]]
+![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/distillation.png|Sentence Transformers: cross-encoder teacher and cross-encoder student]]
 
 *Дистилляция логитов ансамбля в компактный **cross-encoder** MiniLM.
 Sentence Transformers contributors,
@@ -617,6 +877,7 @@ Semantic textual similarity спрашивает, насколько
 
 ## 6. Анизотропия, pooling и размерность
 
+<a id="emb-anisotropy"></a>
 ### Общее направление и косинус
 
 Если у многих векторов есть большая общая компонента, косинусы
@@ -654,6 +915,7 @@ $(1,1),(1,-1),(-1,1),(-1,-1)$: обе дисперсии теперь равны
 UMAP-проекция не заменяет эту проверку: соседи и расстояния на
 картинке могут отличаться от соседей в исходном пространстве.
 
+<a id="emb-index-memory"></a>
 ### Сколько стоит размерность
 
 Для $N$ векторов размерности $d$ с $b$ байтами на координату
@@ -672,6 +934,7 @@ $100/101\approx0.9901$, после сохранения только первы�
 координат — нулю. Нормировать нужно уже обрезанный вектор:
 префикс единичного полного вектора в общем случае не имеет единичной нормы.
 
+<a id="emb-matryoshka"></a>
 ### Matryoshka: обучение нескольких размеров
 
 **Matryoshka Representation Learning** добавляет обучающий сигнал
@@ -695,7 +958,7 @@ MNRL по запросам и документам. Один проход энк
 Размеры $M$ и веса $\lambda_m$ задаются при обучении; произвольный
 непроверенный размер не получает гарантии качества.
 
-![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/matryoshka-results.png]]
+![[00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/matryoshka-results.png|Matryoshka STSB Spearman correlation at nested embedding dimensions]]
 
 *Tom Aarsen, Hugging Face / Sentence Transformers,
 [Matryoshka Embeddings — Results](https://sbert.net/examples/sentence_transformer/training/matryoshka/README.html#results),
@@ -724,6 +987,7 @@ Transformer по-прежнему вычисляет свои слои. Уско
 выходных векторов не равно ускорению их получения. Уменьшение числа
 слоёв, которое документация обсуждает отдельно, — другое изменение модели.
 
+<a id="emb-compatibility"></a>
 ### Когда пересчитывать корпус
 
 Если меняются encoder, pooling, обрезка, нормировка или префикс
@@ -741,6 +1005,7 @@ Transformer по-прежнему вычисляет свои слои. Уско
 
 ## 7. Как проверять эмбеддинг
 
+<a id="emb-qrels"></a>
 ### Что считать правильным результатом
 
 Оценочный набор для поиска состоит из запросов, корпуса и суждений
@@ -770,6 +1035,7 @@ $$
 Различие соответствует
 [определению полноты в Introduction to Information Retrieval](https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-unranked-retrieval-sets-1.html).
 
+<a id="emb-ranking-metrics"></a>
 ### Порядок внутри первых результатов
 
 Recall и hit не меняются при перестановке уже выбранных документов.
@@ -799,6 +1065,7 @@ IDCG — DCG первых $k$ документов при идеальной с�
 приведена в
 [Introduction to Information Retrieval, §8.4](https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html).
 
+<a id="emb-exact-search"></a>
 ### Полный пример: пять документов
 
 Пусть запрос — $(1,0)$, а пять единичных документных векторов
@@ -864,6 +1131,7 @@ assert a["recall"] == b["recall"] and b["rr"] == .5
 assert .574 < b["ndcg"] < .575
 ```
 
+<a id="emb-error-decomposition"></a>
 ### Модель, индекс и разметка дают разные ошибки
 
 Сначала полезно выполнить точный поиск по векторам, как в примере:
@@ -917,6 +1185,10 @@ assert .574 < b["ndcg"] < .575
 - [MS MARCO training](https://sbert.net/examples/sentence_transformer/training/ms_marco/README.html) —
   in-batch и явные negatives, фильтрация учителем, MarginMSE;
   оригинальное подробное объяснение на английском.
+- [[05 Источники/Papers/GradCache|GradCache]] — исходные этапы алгоритма,
+  связь с градиентом полной партии и авторская реализация повторных проходов.
+- [[05 Источники/Papers/ContAccum|ContAccum]] — рис. 1, локальные и полные наборы
+  кандидатов и роль сохранённых представлений.
 - [SimCSE](https://github.com/princeton-nlp/SimCSE) — схема двух dropout-проходов
   и отличие supervised NLI-варианта; ссылки на статью и код.
 - [Matryoshka Embeddings](https://sbert.net/examples/sentence_transformer/training/matryoshka/README.html) —

@@ -2,11 +2,68 @@
 title: Вероятность текста и предсказание следующего токена
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-21
+last_updated: 2026-11-03
+source_language: mixed
+reference_terms:
+  - label: Авторегрессионная NLL и общие параметры
+    label_en: Autoregressive NLL and shared parameters
+    anchor: nlm-sequence-nll
+  - label: Вектор контекста, выходная проекция и logits
+    label_en: Context vector, output projection and logits
+    anchor: nlm-head
+  - label: Конкатенация embeddings и фиксированное окно
+    label_en: Concatenated embeddings and a fixed context window
+    anchor: nlm-window
+  - label: Сдвиг входов и следующих целей
+    label_en: Input-target shift
+    anchor: nlm-target-shift
+  - label: Причинность и параллельные позиции
+    label_en: Causality and parallel positions
+    anchor: nlm-causality
+  - label: Teacher forcing и собственный префикс
+    label_en: Teacher forcing and generated prefixes
+    anchor: nlm-teacher-forcing
+  - label: Cross-entropy с целевым ID токена
+    label_en: Cross-entropy for a target token ID
+    anchor: nlm-cross-entropy
+  - label: Градиент softmax и общая выходная матрица
+    label_en: Softmax gradient and shared output weights
+    anchor: nlm-vocabulary-gradient
+  - label: Устойчивый log-softmax и контракт CE
+    label_en: Stable log-softmax and the CE API contract
+    anchor: nlm-stability
+  - label: Perplexity, accuracy и протокол сравнения
+    label_en: Perplexity, accuracy and comparison protocol
+    anchor: nlm-perplexity
+  - label: Усреднение потерь по токенам и документам
+    label_en: Token-wise and document-wise loss averaging
+    anchor: nlm-loss-reduction
+  - label: Повторяющиеся контексты и нижняя граница NLL
+    label_en: Repeated contexts and the conditional NLL floor
+    anchor: nlm-entropy-floor
+  - label: Частота продолжения и истинность ответа
+    label_en: Continuation frequency and factual correctness
+    anchor: nlm-objective-limits
+  - label: In-context применение и post-training
+    label_en: In-context use and post-training
+    anchor: nlm-base-assistant
+  - label: Маска позиций при общем ID EOS и PAD
+    label_en: Positional masking when EOS and PAD share an ID
+    anchor: nlm-eos-pad-mask
+  - label: Полное обучение WindowLM на малом корпусе
+    label_en: Complete WindowLM training on a small corpus
+    anchor: nlm-window-training
+  - label: Нейронная LM Bengio — схема и обозначения
+    label_en: Bengio neural LM diagram and notation
+    anchor: nlm-bengio-architecture
+  - label: Порядок окна и общий градиент embeddings
+    label_en: Context order and accumulated embedding gradients
+    anchor: nlm-context-permutation
 source_unit_id:
   - assignment-01-task-softmax
   - assignment-01-task-cross-entropy
 primary_sources:
+  - https://www.jmlr.org/papers/v3/bengio03a.html
   - https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf
   - https://d2l.ai/chapter_recurrent-neural-networks/language-model.html
   - https://d2l.ai/chapter_linear-classification/softmax-regression.html
@@ -34,6 +91,8 @@ next: "[[02 Areas/ML & DL/00 Учебник/02 Представление тек
 Для этого хватит embedding-таблицы и MLP; Transformer пока не требуется.
 
 <a id="autoregressive-objective"></a>
+
+<a id="nlm-sequence-nll"></a>
 
 ## Вероятность последовательности
 
@@ -67,7 +126,11 @@ next-token prediction (NTP), и относят к self-supervised learning:
 Но сбор, фильтрация и выбор частоты текстов всё равно влияют
 на то, какие ответы будет учить модель.
 
-## От биграммы к длинному контексту
+<a id="от-биграммы-к-длинному-контексту"></a>
+
+## Логиты и окно из нескольких токенов
+
+<a id="nlm-head"></a>
 
 ### Представление контекста и выходная проекция
 
@@ -111,7 +174,7 @@ $$
 Из неё нельзя получить вероятность делением на произвольную
 константу: логиты не обязаны быть положительными.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/neural-language-model-2026-10-21/d2l-softmaxreg.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/neural-language-model-2026-10-21/d2l-softmaxreg.svg|Полносвязная выходная проекция из четырёх признаков в три оценки]]
 
 *Zhang, Lipton, Li, Smola,
 [D2L, Softmax Regression — Linear Model](https://d2l.ai/chapter_linear-classification/softmax-regression.html#linear-model).
@@ -137,6 +200,8 @@ $$
 Входной embedding и выходная проекция пока являются разными матрицами.
 Вариант с общими весами, weight tying, будет разобран
 при изучении архитектуры декодера.
+
+<a id="nlm-window"></a>
 
 ### Несколько предыдущих токенов
 
@@ -169,6 +234,103 @@ RNN и Transformer будут по-другому вычислять $h_t$,
 в [makemore, Part 1](https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part1_bigrams.ipynb).
 В конце главы есть законченная реализация модели с окном в два токена.
 
+<a id="nlm-bengio-architecture"></a>
+
+### The original feed-forward neural language model
+
+![[00 Учебник/Assets/Figures/curated/neural-lm-bengio-2026-11-03/bengio-original-figure1.png|Original Bengio neural language model: shared word lookup, tanh, softmax and optional direct connections]]
+
+*Yoshua Bengio, Réjean Ducharme, Pascal Vincent and Christian Jauvin,
+[Figure 1, A Neural Probabilistic Language Model](https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf#page=6),
+JMLR 3 (2003), p.1142. Complete original diagram and caption, rendered from
+the publisher PDF; no labels redrawn. Author copyright ©2003.
+[JMLR publication policy and reuse note](/licenses/bengio03a-figure1-jmlr-policy.txt).*
+
+Read the figure from the word indices at the bottom. Each index selects
+a row of the same matrix $C$; the three lookup positions do not own
+three separate embedding tables. The selected vectors form the input to
+a tanh hidden layer. The output layer produces one score per vocabulary
+word, then softmax normalizes the scores.
+
+The dashed green paths bypass the hidden layer. In the paper's notation,
+the unnormalized output vector is
+
+$$
+y=b+Wx+U\tanh(d+Hx).
+$$
+
+Here $x$ concatenates the selected word vectors. The direct matrix $W$ is
+optional: setting it to zero leaves the hidden-layer route used by
+`WindowLM` below. The paper's $y$ corresponds to this chapter's
+logits $z$, not to a target token ID. Its $W$ is also not the output
+matrix called $W$ in our earlier bigram calculation.
+
+For the `WindowLM` dimensions used at the end of the chapter, the
+correspondence is:
+
+| Paper | `WindowLM` parameter | Shape |
+|---|---|---|
+| $C$ | `embedding.weight` | $8\times2$ |
+| $H,d$ | `network[0].weight`, `.bias` | $8\times4$, $8$ |
+| $U,b$ | `network[2].weight`, `.bias` | $8\times8$, $8$ |
+| Optional $W$ | No direct path in this implementation | $8\times4$ if added |
+
+The hidden-layer-only version has 128 parameters, as counted in the
+training example. Adding the direct $W$ would add 32 weights and change
+the model. The source annotation “most computation here” concerns its
+large-vocabulary output layer; the diagram alone does not measure the
+runtime of our eight-token example.
+
+<a id="nlm-context-permutation"></a>
+
+### Context order and repeated lookups
+
+The paper writes its concatenation from the newest context word to the
+oldest. `WindowLM` constructs windows in chronological order.
+Either fixed convention works, but the columns of the first projection
+must follow the same ordering as the input blocks.
+
+For the vectors already used above, `кот` is $(1,0)$ and `пёс`
+is $(1,1)$. Chronological concatenation gives $(1,0,1,1)$.
+With projection row $(1,2,3,4)$, its pre-activation is 8.
+Reversing the two vector blocks gives $(1,1,1,0)$; the corresponding
+projection row must become $(3,4,1,2)$ to keep 8. Keeping the old row
+instead gives 6.
+
+When the same word occurs twice, both lookups select one parameter row.
+For the context `кот кот`, the projection is $(1+3)C_{\rm cat,0}
++(2+4)C_{\rm cat,1}$. The gradient of this pre-activation with respect
+to the shared cat vector is therefore $(4,6)$, not two independently
+updated vectors.
+
+```python
+import torch
+
+source_vectors = torch.zeros(8, 2, dtype=torch.float64)
+source_vectors[2] = torch.tensor([1., 0.])  # кот
+source_vectors[4] = torch.tensor([1., 1.])  # пёс
+source_vectors.requires_grad_()
+source_row = torch.tensor([1., 2., 3., 4.], dtype=torch.float64)
+chronological = source_vectors[[2, 4]].flatten()
+newest_first = source_vectors[[4, 2]].flatten()
+permuted_row = source_row.reshape(2, 2).flip(0).flatten()
+assert (chronological @ source_row).item() == 8
+assert (newest_first @ permuted_row).item() == 8
+assert (newest_first @ source_row).item() == 6
+
+repeated = source_vectors[[2, 2]].flatten()
+lookup_gradient, = torch.autograd.grad(repeated @ source_row, source_vectors)
+expected_gradient = torch.zeros_like(source_vectors)
+expected_gradient[2] = torch.tensor([4., 6.])
+torch.testing.assert_close(lookup_gradient, expected_gradient)
+```
+
+This calculation checks lookup sharing and block order. The complete
+nonlinear model, loss and optimizer are implemented below; it is not
+a reproduction of the paper's corpus-scale experiment.
+
+<a id="nlm-target-shift"></a>
+
 ## Один текст даёт много обучающих примеров
 
 После чтения позиции $t$ модель предсказывает токен $x_{t+1}$.
@@ -194,7 +356,7 @@ target: кот  спит  EOS
 последний выход окажется без следующей цели.
 Тогда обрезают последний выход, а не сдвигают цели второй раз.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ntp-review-2026-10/d2l-language-model-data.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ntp-review-2026-10/d2l-language-model-data.png|Посимвольные входы и цели со сдвигом на одну позицию]]
 
 *Zhang, Lipton, Li, Smola,
 [D2L, Language Models — Partitioning Sequences](https://d2l.ai/chapter_recurrent-neural-networks/language-model.html#fig-lang-model-data).
@@ -211,6 +373,8 @@ collator копирует входные ID в labels, а модель выра�
 В нашем коде ниже вход и цели сдвигаются явно ровно один раз.
 Эти два контракта нельзя смешивать.
 
+<a id="nlm-causality"></a>
+
 ### Причинность и параллельное вычисление
 
 На обучении весь текст уже известен, поэтому можно заранее
@@ -226,7 +390,7 @@ collator копирует входные ID в labels, а модель выра�
 Слои выполняются последовательно, но позиции внутри одного слоя
 можно обрабатывать параллельно.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ntp-review-2026-10/d2l-gpt-decoder.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ntp-review-2026-10/d2l-gpt-decoder.png|Сдвинутые цели GPT и доступные причинные зависимости]]
 
 *Zhang, Lipton, Li, Smola,
 [D2L, GPT and GPT-2](https://d2l.ai/chapter_attention-mechanisms-and-transformers/large-pretraining-transformers.html#gpt-and-gpt-2).
@@ -282,6 +446,8 @@ assert not torch.allclose(wrong[:, :2], wrong_other[:, :2])
 Их реализация разобрана в
 [[02 Areas/ML & DL/00 Учебник/10 ML Systems/06 Data pipeline, padding и packing|главе об обработке пакетов]].
 
+<a id="nlm-teacher-forcing"></a>
+
 ### Истинный префикс и сгенерированный префикс
 
 При обычном NTP следующая обучающая позиция получает
@@ -305,6 +471,8 @@ assert not torch.allclose(wrong[:, :2], wrong_other[:, :2])
 параллельность временных шагов: внутри RNN они связаны рекуррентно.
 
 <a id="stable-cross-entropy"></a>
+
+<a id="nlm-cross-entropy"></a>
 
 ## Cross-entropy считается из logits
 
@@ -339,6 +507,8 @@ $$
 Это cross-entropy с целевым распределением,
 в котором вся масса сосредоточена на наблюдаемом токене.
 Операция выбора токена при генерации в эту формулу не входит.
+
+<a id="nlm-vocabulary-gradient"></a>
 
 ### Градиент по всему словарю
 
@@ -435,6 +605,8 @@ print(float(before.detach()), float(after.detach()))
 У Карпати в makemore тот же переход разобран
 от явного one-hot входа до обратного прохода и обновления матрицы.
 
+<a id="nlm-stability"></a>
+
 ### Численная устойчивость и библиотечный контракт
 
 Логиты $z$ и $z+c$ задают одно распределение:
@@ -500,6 +672,8 @@ torch.testing.assert_close(F.cross_entropy(extreme, torch.tensor([1])),
 Формы, типы целей и `ignore_index` описаны в
 [PyTorch 2.14, cross_entropy](https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.cross_entropy.html).
 
+<a id="nlm-perplexity"></a>
+
 ## Perplexity
 
 Perplexity равна $\exp L$, если $L$ — средняя NLL
@@ -527,6 +701,8 @@ Accuracy не различит такие два правильных ответ
 
 <a id="objective-evidence"></a>
 
+<a id="nlm-loss-reduction"></a>
+
 ## Что показывает функция потерь — и чего не показывает
 
 Средняя потеря описывает конкретную совокупность
@@ -551,6 +727,8 @@ $$
 Во втором случае короткий текст получил больший вес
 на один токен. Оба правила возможны как разные задачи,
 но в отчёте должно быть указано выбранное усреднение.
+
+<a id="nlm-entropy-floor"></a>
 
 ### Почему не всегда можно получить ноль на одном пакете
 
@@ -591,6 +769,8 @@ $$
 Проверять нужно соответствие модели, данных, маски и функции потерь,
 а не только форму убывающей кривой.
 
+<a id="nlm-objective-limits"></a>
+
 ## Что модель приобретает через простую задачу
 
 В нашем примере модель может научиться различать контексты
@@ -618,6 +798,8 @@ $$
 и только после этого оценивают обобщение.
 Эти проверки входят в
 [[02 Areas/ML & DL/06 Практика/20 Собрать языковую модель с нуля#Этап 3. Функция потерь, оптимизатор, данные и контрольная точка|Capstone 1]].
+
+<a id="nlm-base-assistant"></a>
 
 ## Базовая модель и assistant
 
@@ -651,7 +833,11 @@ Assistant:
 Подробности SFT и предпочтений относятся к разделу post-training,
 а здесь нужна сама вычислительная и вероятностная постановка.
 
-## Минимальная реализация функции потерь
+<a id="минимальная-реализация-функции-потерь"></a>
+
+## Функция потерь и обучение модели
+
+<a id="nlm-eos-pad-mask"></a>
 
 ### Маска позиций и совпадающие ID EOS/PAD
 
@@ -702,6 +888,8 @@ assert wrong != loss
 входной padding и, при необходимости, границы документов.
 Наш следующий MLP-пример использует только правый padding:
 он не может повлиять на окна предыдущих допустимых позиций.
+
+<a id="nlm-window-training"></a>
 
 ### Законченное обучение модели с окном в два токена
 
@@ -808,6 +996,9 @@ print("initial =", initial, "final =", final, "lower bound =", floor)
 
 ## Источники
 
+- Bengio, Ducharme, Vincent, Jauvin,
+  [A Neural Probabilistic Language Model, §2 and Figure 1](https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf#page=5):
+  shared word representations, fixed context window and optional direct connections.
 - [CS336 Assignment 1](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf),
   softmax в §3.4.4 и cross-entropy/PPL в §4.1.
 - Zhang, Lipton, Li, Smola, D2L:

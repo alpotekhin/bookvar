@@ -67,6 +67,39 @@ def main():
     assert np.linalg.norm([0, 0]) == 0
     assert np.isclose(np.linalg.norm(np.array([3., 4.])/5), 1)
 
+    # Reconstruct each 1-D matmul result with scalar arithmetic, including
+    # the axes that NumPy inserts and removes. Explicit 2-D inputs retain them.
+    vector_cases = 0
+    for width in range(1, 6):
+        left = np.arange(width, dtype=np.int64) - 2
+        right = np.arange(width, dtype=np.int64) + 1
+        dot = sum(int(a)*int(b) for a, b in zip(left, right))
+        assert (left @ right).shape == ()
+        assert left @ right == dot
+        assert np.array_equal(left[None, :] @ right[:, None], [[dot]])
+        assert left.T.shape == left.shape
+        for count in range(1, 5):
+            matrix = np.arange(count*width).reshape(count, width) - 3
+            by_rows = [sum(int(a)*int(b) for a, b in zip(row, right))
+                       for row in matrix.tolist()]
+            assert np.array_equal(matrix @ right, by_rows)
+            assert (matrix @ right).shape == (count,)
+            assert np.array_equal(matrix @ right[:, None],
+                                  [[value] for value in by_rows])
+            by_columns = [sum(int(a)*int(b) for a, b in zip(left, column))
+                          for column in matrix.tolist()]
+            assert np.array_equal(left @ matrix.T, by_columns)
+            assert (left @ matrix.T).shape == (count,)
+            assert np.array_equal(left[None, :] @ matrix.T, [by_columns])
+            vector_cases += 1
+    for operation in (lambda: x @ 2, lambda: np.matmul(2, x)):
+        try:
+            operation()
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("matmul accepted a scalar operand")
+
     # Verify the head split/permutation independently of equal-size axes.
     b, t, h, dh = 2, 3, 2, 2
     original = np.arange(b*t*h*dh).reshape(b, t, h*dh)
@@ -149,7 +182,8 @@ def main():
     assert ns["layout_slice"].nbytes == 16 and ns["span"] == 24
     assert ns["layout_copy"][0, 0] == 1
     print(f"SHA-256: {hashlib.sha256(text.encode()).hexdigest()}")
-    print(f"PASS: {len(blocks)} actual NumPy fences, {address_cases} independent "
+    print(f"PASS: {len(blocks)} actual NumPy fences, {vector_cases} vector/matrix "
+          f"shape cases, {address_cases} independent "
           "byte-address cases; explicit matmul, lookup, broadcasting, "
           "reductions, incompatible-shape errors, norms, ndarray/matrix ranks, "
           "head permutation, rectangular batched scores, semantic "

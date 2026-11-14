@@ -1,0 +1,251 @@
+{
+  "date": "2026-11-03",
+  "scope": "Whole canonical MoE owner, report versus released-Gate boundary, descriptive source-image alt text, and both generated subject indexes. No translation or remote publication.",
+  "files": [
+    {
+      "source": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "before_sha256": "9df758b69b1d720bbb8942594442f5c6e45071d70b28f740793fb57de2fd746c",
+      "after_sha256": "f0ec799a6ed486ed2882bb7d384953d998d7e10e3244dc2abcde61ee231fd552",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-23\nlast_verified: 2026-10-23",
+          "new": "last_updated: 2026-11-03\nlast_verified: 2026-11-03"
+        },
+        {
+          "old": "primary_sources:\n",
+          "new": "reference_terms:\n  - label: \"Общее и активное число параметров\"\n    label_en: \"Total and active parameters\"\n    anchor: \"moe-capacity-evidence\"\n  - label: \"Router и взвешенный top-k\"\n    label_en: \"Router and weighted top-k\"\n    anchor: \"moe-routing-mechanisms\"\n  - label: \"Token-choice и expert-choice\"\n    label_en: \"Token-choice and expert-choice\"\n    anchor: \"moe-expert-choice\"\n  - label: \"Градиенты дискретного выбора\"\n    label_en: \"Gradients through discrete selection\"\n    anchor: \"moe-task-gradients\"\n  - label: \"Группировка и обратная сборка токенов\"\n    label_en: \"Token grouping and weighted combine\"\n    anchor: \"moe-dispatch-combine\"\n  - label: \"Мелкозернистые и общие эксперты\"\n    label_en: \"Fine-grained and shared experts\"\n    anchor: \"moe-routing-evidence\"\n  - label: \"Балансировка экспертов и устройств\"\n    label_en: \"Expert and device load balance\"\n    anchor: \"moe-load-balancing\"\n  - label: \"Вспомогательная потеря Switch\"\n    label_en: \"Switch auxiliary balance loss\"\n    anchor: \"moe-balance-loss\"\n  - label: \"Балансировка смещениями DeepSeek-V3\"\n    label_en: \"DeepSeek-V3 bias-based balancing\"\n    anchor: \"moe-bias-routing\"\n  - label: \"Capacity и отбрасывание назначений\"\n    label_en: \"Capacity and dropped assignments\"\n    anchor: \"moe-systems-capacity\"\n  - label: \"Expert parallelism: dispatch и combine\"\n    label_en: \"Expert parallelism: dispatch and combine\"\n    anchor: \"moe-ep-exchange\"\n  - label: \"LatentMoE и размер сообщений\"\n    label_en: \"LatentMoE and message size\"\n    anchor: \"moe-latent\"\n  - label: \"Обучение дискретной маршрутизации\"\n    label_en: \"Training discrete routing\"\n    anchor: \"moe-training-failures\"\n  - label: \"Router z-loss и устойчивость\"\n    label_en: \"Router z-loss and numerical stability\"\n    anchor: \"moe-stability-finetuning\"\n  - label: \"Дообучение и выбор параметров\"\n    label_en: \"Fine-tuning and parameter subsets\"\n    anchor: \"moe-finetuning\"\n  - label: \"Upcycling плотного чекпойнта\"\n    label_en: \"Upcycling a dense checkpoint\"\n    anchor: \"moe-upcycling\"\n  - label: \"DeepSeekMoE, V2 и V3\"\n    label_en: \"DeepSeekMoE, V2, and V3\"\n    anchor: \"deepseek-moe-evolution\"\n  - label: \"Ограничение числа узлов\"\n    label_en: \"Node-limited routing\"\n    anchor: \"moe-node-limited\"\n  - label: \"Формула отчёта и выпущенный Gate\"\n    label_en: \"Report formula and released Gate\"\n    anchor: \"moe-report-code\"\n  - label: \"Экспертные группы при инференсе\"\n    label_en: \"Expert batches at inference\"\n    anchor: \"serving-flops-экономятся-latency-не-автоматически\"\n  - label: \"Сравнение Switch, Mixtral и DeepSeek\"\n    label_en: \"Switch, Mixtral, and DeepSeek routing\"\n    anchor: \"moe-recap\"\nprimary_sources:\n"
+        },
+        {
+          "old": "В предыдущей главе мы разобрали FFN — полносвязную сеть, которая преобразует\nсостояние каждого токена после attention.",
+          "new": "[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating|Плотная FFN]] преобразует состояние каждого токена после attention."
+        },
+        {
+          "old": "### Кто выбирает: токен или эксперт",
+          "new": "<a id=\"moe-expert-choice\"></a>\n### Кто выбирает: токен или эксперт"
+        },
+        {
+          "old": "### Почему top-1 нельзя бездумно перенормировать",
+          "new": "<a id=\"moe-task-gradients\"></a>\n### Почему top-1 нельзя бездумно перенормировать"
+        },
+        {
+          "old": "### От назначений к выходу всего слоя",
+          "new": "<a id=\"moe-dispatch-combine\"></a>\n### От назначений к выходу всего слоя"
+        },
+        {
+          "old": "### Балансирующая потеря Switch",
+          "new": "<a id=\"moe-balance-loss\"></a>\n### Балансирующая потеря Switch"
+        },
+        {
+          "old": "### Балансировка устройств и смещения выбора",
+          "new": "<a id=\"moe-bias-routing\"></a>\n### Балансировка устройств и смещения выбора"
+        },
+        {
+          "old": "## Параллелизм экспертов: dispatch и combine",
+          "new": "<a id=\"moe-ep-exchange\"></a>\n## Параллелизм экспертов: dispatch и combine"
+        },
+        {
+          "old": "### LatentMoE: обмен в меньшей размерности",
+          "new": "<a id=\"moe-latent\"></a>\n### LatentMoE: обмен в меньшей размерности"
+        },
+        {
+          "old": "### Что меняется при дообучении",
+          "new": "<a id=\"moe-finetuning\"></a>\n### Что меняется при дообучении"
+        },
+        {
+          "old": "### Ограничение числа узлов в DeepSeek-V3",
+          "new": "<a id=\"moe-node-limited\"></a>\n### Ограничение числа узлов в DeepSeek-V3"
+        },
+        {
+          "old": "def node_limited_route(scores, k, groups, allowed_groups, bias=None):\n    tokens, experts = scores.shape\n    assert experts % groups == 0 and k % allowed_groups == 0\n    per_node = experts // groups\n    q = k // allowed_groups\n    assert 1 <= q <= per_node and 1 <= allowed_groups <= groups",
+          "new": "def node_limited_route(scores, k, groups, allowed_groups, bias=None,\n                       *, group_topk=None):\n    tokens, experts = scores.shape\n    assert 1 <= allowed_groups <= groups and experts % groups == 0\n    per_node = experts // groups\n    if group_topk is None:  # report rule, for an integral k / M\n        assert k % allowed_groups == 0\n        group_topk = k // allowed_groups\n    assert 1 <= group_topk <= per_node\n    assert 1 <= k <= allowed_groups * per_node"
+        },
+        {
+          "old": "node_scores = np.sort(grouped, axis=-1)[:, :, -q:].sum(axis=-1)",
+          "new": "node_scores = np.sort(grouped, axis=-1)[:, :, -group_topk:].sum(axis=-1)"
+        },
+        {
+          "old": "print(node_weights)  # [[0.51612903, 0.48387097]]\n~~~",
+          "new": "print(node_weights)  # [[0.51612903, 0.48387097]]\n\n# Same scores, different group-scoring rules.\nthree_nodes = np.array([[.90, .02, .60, .59, .58, .57]])\nreport_ids, _ = node_limited_route(three_nodes, 2, 3, 2)\nreleased_ids, released_weights = node_limited_route(\n    three_nodes, 2, 3, 2, bias=np.zeros(6), group_topk=2\n)\nprint(report_ids + 1)     # [[1, 3]]\nprint(released_ids + 1)   # [[3, 4]]\nprint(released_weights)   # [[0.50420168, 0.49579832]]\n~~~"
+        },
+        {
+          "old": "Здесь `scores` — уже полученные sigmoid-оценки. Если заданы смещения,\nони участвуют в выборе узлов и экспертов, но веса снова берутся из исходных\n`scores`. Пример реализует этот порядок для случая, где $k$ делится на число\nдопустимых узлов; он не моделирует сеть. В исходном\n[`Gate.forward`](https://github.com/deepseek-ai/DeepSeek-V3/blob/9b4e9788e4a3a731f7567338ed15d3ec549ce03b/inference/model.py#L566)\nесть также отдельный множитель `route_scale`, применяемый после нормировки\nвесов. При воспроизведении чекпойнта его значение тоже нужно брать из\nконфигурации. Простая формула с суммой весов 1 этот множитель не учитывает.",
+          "new": "Здесь `scores` — уже полученные sigmoid-оценки. Если заданы смещения,\nони участвуют в выборе узлов и экспертов, но веса снова берутся из исходных\n`scores`. Пример не моделирует сеть и не загружает чекпойнт.\n\n<a id=\"moe-report-code\"></a>\n### Report formula and released Gate\n\nThe [report's node-limited routing paragraph](https://arxiv.org/html/2412.19437v2#S2.SS1.SSS2)\nscores each node using its best $k/M$ expert scores. The helper uses that rule\nby default and requires an integral ratio. For V3's $k=8$ and $M=4$, it sums\ntwo scores.\n\nThe pinned [`Gate.forward` implementation](https://github.com/deepseek-ai/DeepSeek-V3/blob/9b4e9788e4a3a731f7567338ed15d3ec549ce03b/inference/model.py#L566)\nhard-codes a two-score sum when its bias tensor exists; the branch without\nthat tensor uses a maximum. Thus `group_topk=2` reproduces the biased branch's\ngroup selection even when $k/M$ differs from two. Zero-valued biases still\ncount as a present tensor in that implementation.\n\nThe second input above separates these rules:\n\n| Node | Expert scores | Best one, $k/M=1$ | Best two |\n| --- | --- | ---: | ---: |\n| A | 0.90, 0.02 | 0.90 | 0.92 |\n| B | 0.60, 0.59 | 0.60 | 1.19 |\n| C | 0.58, 0.57 | 0.58 | 1.15 |\n\nThe report rule admits A and B, then selects experts 1 and 3. The released\nbiased branch admits B and C, then selects experts 3 and 4. Both selected\nexperts belong to B: $k/M$ scores nodes; it does not impose a per-node quota.\n\nAfter gathering the original sigmoid scores, `Gate` normalizes them and\nmultiplies by `route_scale`. The helper omits that last factor and uses stable\nsorting for ties; neither tie order nor full checkpoint execution is reproduced."
+        },
+        {
+          "old": "Краткое описание механизма находится в\n[[02 Areas/ML & DL/01 Справочник/FFN и MoE/Mixture of Experts|справочнике MoE]],\nа различия конкретных моделей — на страницах семейств",
+          "new": "Различия конкретных моделей — на страницах семейств"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/modern-37-40-moe/mixtral-smoe-layer.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/modern-37-40-moe/mixtral-smoe-layer.png|Mixtral sparse MoE layer: router, eight experts and weighted top-2 outputs]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/switch-scaling.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/switch-scaling.png|Switch Figure 1: test loss versus expert count and training efficiency versus T5]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-routing-families.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-routing-families.png|Token choice, expert choice and globally balanced assignment]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/deepseekmoe-fine-grained-shared.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/deepseekmoe-fine-grained-shared.png|DeepSeekMoE fine-grained routed experts and always-active shared experts]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/deepseekmoe-routing-ablation.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/deepseekmoe-routing-ablation.png|DeepSeekMoE ablations of fine-grained and shared expert designs]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-shared.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-shared.png|OLMoE shared-expert ablation: training loss, C4 loss, HellaSwag and MMLU]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-granularity.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-granularity.png|OLMoE expert-granularity ablation at fixed total and active parameter budgets]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-lbl.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-lbl.png|OLMoE balance-loss ablation: main losses and auxiliary load-balancing loss]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-lbltoks.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-lbltoks.png|OLMoE expert token fractions over training, with and without balancing]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/switch-capacity.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/switch-capacity.png|Switch Figure 3: token assignments, buffer capacity and dropped branches]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-capacity-token-dropping.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-capacity-token-dropping.png|Token permutation into expert buffers, overflow and inverse permutation]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-37-40-audit/megablocks-expert-matmuls.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-37-40-audit/megablocks-expert-matmuls.png|MegaBlocks batched, block-diagonal and block-sparse expert matrix multiplications]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/switch-parallelism.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/switch-parallelism.png|Switch Figure 9: five weight and computation layouts across sixteen cores]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-review-2026-09/standard-moe.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-review-2026-09/standard-moe.png|Standard MoE sends full hidden vectors to distributed experts]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-review-2026-09/latent-moe.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-review-2026-09/latent-moe.png|LatentMoE projects routed vectors to a smaller dimension before communication]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-zloss.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-zloss.png|OLMoE z-loss ablation: training instability, C4 loss and downstream results]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-finetuning-parameter-ablation.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-finetuning-parameter-ablation.png|ST-MoE SuperGLUE results for different subsets of fine-tuned parameters]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/sparse-upcycling-procedure.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/sparse-upcycling-procedure.png|Sparse upcycling copies a dense FFN into experts and continues training]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/minicpm-moe-upcycling-results.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/minicpm-moe-upcycling-results.png|MiniCPM-MoE results compared with dense checkpoints after continued training]]"
+        },
+        {
+          "old": "    anchor: \"serving-flops-экономятся-latency-не-автоматически\"",
+          "new": "    anchor: \"moe-serving\""
+        },
+        {
+          "old": "## Инференс: почему меньше операций не всегда означает меньшую задержку",
+          "new": "<a id=\"moe-serving\"></a>\n## Инференс: почему меньше операций не всегда означает меньшую задержку"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "21422e1f46564ed8b20d472daf4393b175b4eb2bf10972ca8e6e5c41e7c66406",
+      "after_sha256": "598c0ea7a70c3dd0c7ded672b649cc4a12c5f4878ae56de065d5ab4c635a8627",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache|MLA и сжатие KV-cache]]",
+          "new": "  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-capacity-evidence|Общее и активное число параметров]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-routing-mechanisms|Router и взвешенный top-k]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-expert-choice|Token-choice и expert-choice]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-task-gradients|Градиенты дискретного выбора]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-dispatch-combine|Группировка и обратная сборка токенов]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-routing-evidence|Мелкозернистые и общие эксперты]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-load-balancing|Балансировка экспертов и устройств]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-balance-loss|Вспомогательная потеря Switch]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-bias-routing|Балансировка смещениями DeepSeek-V3]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-systems-capacity|Capacity и отбрасывание назначений]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-ep-exchange|Expert parallelism: dispatch и combine]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-latent|LatentMoE и размер сообщений]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-training-failures|Обучение дискретной маршрутизации]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-stability-finetuning|Router z-loss и устойчивость]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-finetuning|Дообучение и выбор параметров]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-upcycling|Upcycling плотного чекпойнта]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#deepseek-moe-evolution|DeepSeekMoE, V2 и V3]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-node-limited|Ограничение числа узлов]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-report-code|Формула отчёта и выпущенный Gate]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-serving|Экспертные группы при инференсе]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-recap|Сравнение Switch, Mixtral и DeepSeek]]\n- [[00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache|MLA и сжатие KV-cache]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "46f046086836bd2729fef8f646200367a40f223c1119ba017a3cf8793b914450",
+      "after_sha256": "a9fc9fcb68034e875a5a6bbeff2e7d3457ab29875b6a36eb8bfba9492863048d",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache|MLA and KV-cache compression]]",
+          "new": "  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-capacity-evidence|Total and active parameters]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-routing-mechanisms|Router and weighted top-k]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-expert-choice|Token-choice and expert-choice]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-task-gradients|Gradients through discrete selection]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-dispatch-combine|Token grouping and weighted combine]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-routing-evidence|Fine-grained and shared experts]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-load-balancing|Expert and device load balance]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-balance-loss|Switch auxiliary balance loss]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-bias-routing|DeepSeek-V3 bias-based balancing]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-systems-capacity|Capacity and dropped assignments]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-ep-exchange|Expert parallelism: dispatch and combine]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-latent|LatentMoE and message size]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-training-failures|Training discrete routing]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-stability-finetuning|Router z-loss and numerical stability]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-finetuning|Fine-tuning and parameter subsets]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-upcycling|Upcycling a dense checkpoint]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#deepseek-moe-evolution|DeepSeekMoE, V2, and V3]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-node-limited|Node-limited routing]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-report-code|Report formula and released Gate]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-serving|Expert batches at inference]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#moe-recap|Switch, Mixtral, and DeepSeek routing]]\n- [[00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache|MLA and KV-cache compression]]"
+        }
+      ]
+    }
+  ],
+  "source_comparison": [
+    {
+      "source": "https://arxiv.org/html/2412.19437v2#S2.SS1.SSS2",
+      "read": "Complete §2.1.2 routing and balance discussion, plus §4.2 model/route settings. Report scores nodes using k/M; actual V3 uses 8/4=2."
+    },
+    {
+      "source": "https://github.com/deepseek-ai/DeepSeek-V3/blob/9b4e9788e4a3a731f7567338ed15d3ec549ce03b/inference/model.py#L566",
+      "sha256": "fdb7995bc234badbf0011b5af8cf391be94343abc51305428cb9a04452116f02",
+      "read": "Complete Gate, Expert and MoE class bodies; source Gate is executed on CPU with F.linear, without importing its GPU kernel module. Biased group score sums exactly two; absent-bias branch uses maximum."
+    },
+    {
+      "prior_audit": "docs/audit/2026-10-23-moe.md",
+      "boundary": "Prior selected-course/paper explanations and unchanged figure bytes reused, not represented as fresh full readings. New route/metadata changes restore the hash-pinned preceding chapter. Current owner is reread in full."
+    }
+  ],
+  "explanation": {
+    "preserved": "Four sequential NumPy programs, all existing worked gradients/loss/capacity/upcycling/EP reasoning, nineteen source figures and their original captions. Three preceding program bodies and all display equations unchanged.",
+    "corrected": "Explicitly separates the report generalization from the released Gate. Keeps correct report default; configurable group_topk can reproduce the released biased/unbiased group-score branches. Counterexample admits A/B versus B/C, then can choose both experts from B; no per-node quota.",
+    "navigation": "Dense FFN is a linked prerequisite, not falsely called the previous reading-path chapter. Previous long-context and next Mamba links remain. Removed circular reference claiming a separate short MoE explanation. Twenty-one subject anchors feed RU/EN indexes.",
+    "style": "Applied no-ai-slop without compressing mechanisms. Existing Russian owner retained; new source/code distinction is English, no translation pass.",
+    "unresolved": [
+      "ST-MoE fine-tuning figure remains a 438x368 exact lecture raster; a higher-resolution verified replacement remains desirable.",
+      "Existing course and MegaBlocks rights caveats are unchanged; open access is not recorded as an open license.",
+      "No full checkpoint, real GPU dispatch or performance test; no fresh complete reading of all cited papers."
+    ]
+  },
+  "verification": {
+    "status": "verified-local-delta",
+    "chapterSha256": "f0ec799a6ed486ed2882bb7d384953d998d7e10e3244dc2abcde61ee231fd552",
+    "wholeOwnerRead": "Whole1117-line baseline read. Entire final1227-line chapter reread in ranges1–320,321–640,641–960,961–EOF. No subsequent chapter changes.",
+    "cpu": {
+      "exit": 0,
+      "device": "CPU",
+      "torch": "2.14.1",
+      "numpy": "2.5.4",
+      "programs": 4,
+      "pinnedGateCases": 63,
+      "command": "uv run --offline --python 3.13 --with torch==2.14.1 --with numpy==2.5.4 python publishing/tools/check_moe_gate_reference.py",
+      "scope": "All four actual published blocks, prior independent scalar/combine/capacity/finite-gradient/storage/EP checks pass. New63 comparisons execute the unmodified pinned Gate class with CPU F.linear: seven configurations, absent/zero/random bias and three route scales. Report versus code counterexample differs as explained. This does not execute GPU kernels, a checkpoint, collectives or serving performance."
+    },
+    "tests": {
+      "scoped": "14 tests in4 files pass: MoE source/figures, report-Gate boundary, previous GAN journal chain and all82 whole-owner hash receipts.",
+      "builtOutput": "199 HTML tests pass on completed2007-page build. Additional direct HTML check confirms both locale pages, all21 anchors, all19 real assets with descriptive alt text and the new counterexample."
+    },
+    "build": {
+      "exit": 0,
+      "pages": 2007,
+      "pagefindHtmlFiles": 2011,
+      "durationSeconds": 30.48,
+      "brokenInternalLinks": 0,
+      "bytes": 853980370,
+      "files": 5606,
+      "limit": 1000000000
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-03-moe-reader",
+      "desktop": "1280x900: 617px content, new four-column counterexample table fully visible, no KaTeX errors. Original complete Switch capacity figure and all four OLMoE z-loss panels inspected in viewer with source captions; no cropping or redraw.",
+      "mobile": "375x812: 328px content; all18 display equations fit and zero KaTeX errors. Complete new table read at top389.5/bottom681.5, no column loss. OLMoE z-loss enlarged to4x, labels read and ordinary keyboard pan reached scrollLeft0 from540. Other unchanged figure/source review is explicitly reused, not claimed as all19 freshly zoomed.",
+      "navigation": "Actual RU and EN topic links reached #moe-report-code. EN canonical-language notice remains; no separate English translation claimed. Actual EN Next reached sequence-model-alternatives and its correct H1. Viewport reset; RU new section left open.",
+      "transient": "Stale cross-turn browser handle recovered by resetting the CUA session and rebinding the same IAB/tab. Smooth-scroll intermediate screenshots were reobserved before accepting the complete mobile table."
+    },
+    "publication": "local-only; no stage, commit, push or deployment",
+    "remaining": "Whole-book/source-course integration and release remain open. Existing ST-MoE resolution and course/MegaBlocks rights caveats remain recorded."
+  }
+}

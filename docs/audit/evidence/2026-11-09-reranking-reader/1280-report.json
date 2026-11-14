@@ -1,0 +1,258 @@
+{
+  "url": "http://127.0.0.1:4330/textbook/retrieval/reranking/",
+  "width": 1280,
+  "height": 900,
+  "figures": [
+    {
+      "index": 0,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/reranking-review-2026-10/retrieve-rerank.png",
+      "alt": "Retrieve and re-rank: candidate retrieval followed by cross-encoder scoring",
+      "natural": [
+        945,
+        279
+      ],
+      "display": [
+        945,
+        279
+      ],
+      "viewport": [
+        1212,
+        721
+      ],
+      "scroll": [
+        1212,
+        721
+      ],
+      "caption": "Sentence Transformers contributors,\nRetrieve & Re-Rank — Pipeline.\nИсходный рисунок,\nApache-2.0; без изменений.\nПервая ступень находит кандидатов в коллекции, вторая получает уже\nограниченный список. Рисунок можно открыть нажатием и увеличить.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-reranking-reader/1280-figure-00.png"
+    },
+    {
+      "index": 1,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-first-60-64/sbert-bi-vs-cross-encoder.png",
+      "alt": "Bi-encoder cached representations versus joint cross-encoder input",
+      "natural": [
+        479,
+        267
+      ],
+      "display": [
+        479,
+        267
+      ],
+      "viewport": [
+        1212,
+        721
+      ],
+      "scroll": [
+        1212,
+        721
+      ],
+      "caption": "Sentence Transformers contributors,\nCross-Encoder vs. Bi-Encoder,\nоригинал.\nApache-2.0; без изменений. Слева два независимых прохода и сравнение\nготовых векторов, справа один совместный вход и классификационная голова.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-reranking-reader/1280-figure-01.png"
+    },
+    {
+      "index": 2,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/reranking-review-2026-10/calibration-reliability.png",
+      "alt": "Guo et al.: CIFAR-100 confidence histograms and reliability diagrams",
+      "natural": [
+        865,
+        903
+      ],
+      "display": [
+        640.84375,
+        668.9921875
+      ],
+      "viewport": [
+        1212,
+        701
+      ],
+      "scroll": [
+        1212,
+        701
+      ],
+      "caption": "Chuan Guo, Geoff Pleiss, Yu Sun, Kilian Q. Weinberger,\nOn Calibration of Modern Neural Networks,\nPMLR 70, 2017, рисунок 1, PDF-страница 1.\nCC BY 4.0.\nВырезан весь блок четырёх графиков без изменения осей и данных.\nЭто классификация CIFAR-100, не эксперимент с поиском.\nУ ResNet справа ниже ошибка классификации, но сильнее разрыв\nмежду уверенностью и долей правильных ответов.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-reranking-reader/1280-figure-02.png"
+    },
+    {
+      "index": 3,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/reranking-review-2026-10/colbert-paradigms.png",
+      "alt": "Four neural matching paradigms, including ColBERT late interaction",
+      "natural": [
+        2130,
+        620
+      ],
+      "display": [
+        1180,
+        343.46875
+      ],
+      "viewport": [
+        1212,
+        701
+      ],
+      "scroll": [
+        1212,
+        701
+      ],
+      "caption": "Omar Khattab, Matei Zaharia,\nColBERT, SIGIR 2020,\nрисунок 2, PDF-страница 2. Сохранена исходная схема; область рисунка\nизвлечена заново без текста следующего абзаца.\n(a) сравнение свёрнутых представлений; (b) нейросеть над локальными\nсовпадениями; (c) совместное кодирование обеих сторон; (d) отдельное\nкодирование и последующее сравнение токенных векторов.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-reranking-reader/1280-figure-03.png"
+    },
+    {
+      "index": 4,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/reranking-review-2026-10/colbert-maxsim.png",
+      "alt": "ColBERT: independently encoded token vectors and MaxSim aggregation",
+      "natural": [
+        830,
+        355
+      ],
+      "display": [
+        830,
+        355
+      ],
+      "viewport": [
+        1212,
+        721
+      ],
+      "scroll": [
+        1212,
+        721
+      ],
+      "caption": "Omar Khattab, Christopher Potts, Matei Zaharia,\nRelevance-guided Supervision for OpenQA with ColBERT,\nрисунок 1(a), PDF-страница 2.\nCC BY 4.0.\nВырезана панель (a) целиком. Синие документные векторы вычисляются\nпри индексации; зелёные векторы запроса — при обращении.\nПунктир приводит документные векторы к операциям MaxSim.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-reranking-reader/1280-figure-04.png"
+    },
+    {
+      "index": 5,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/reranking-review-2026-10/colbert-supervision.png",
+      "alt": "ColBERT-QA: retrieval and weak-supervision training rounds",
+      "natural": [
+        830,
+        293
+      ],
+      "display": [
+        830,
+        293
+      ],
+      "viewport": [
+        1212,
+        721
+      ],
+      "scroll": [
+        1212,
+        721
+      ],
+      "caption": "Khattab, Potts, Zaharia, тот же\nColBERT-QA, рисунок 1(b).\nCC BY 4.0; вырезана панель (b) целиком.\nЭто схема обучения retriever ColBERT-QA, не cross-encoder\nи не схема дистилляции ColBERTv2.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-reranking-reader/1280-figure-05.png"
+    },
+    {
+      "index": 6,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/reranking-review-2026-10/rankgpt-instructions.png",
+      "alt": "RankGPT: query likelihood, relevance prediction and permutation prompts",
+      "natural": [
+        955,
+        755
+      ],
+      "display": [
+        846.2109375,
+        668.9921875
+      ],
+      "viewport": [
+        1212,
+        701
+      ],
+      "scroll": [
+        1212,
+        701
+      ],
+      "caption": "Weiwei Sun et al.,\nIs ChatGPT Good at Search? Investigating Large Language Models as Re-Ranking Agents,\nрисунок 2, PDF-страница 3.\nCC BY 4.0.\nИзвлечён весь рисунок с тремя панелями.\nВерхняя левая панель оценивает генерацию запроса по документу;\nправая — ответ о релевантности пары; нижняя — перестановку ID.\nНазвания исторических моделей в статье относятся к экспериментам 2023 года.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-reranking-reader/1280-figure-06.png"
+    },
+    {
+      "index": 7,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/reranking-review-2026-10/rankgpt-windows.png",
+      "alt": "RankGPT: three overlapping reranking windows from end to start",
+      "natural": [
+        990,
+        360
+      ],
+      "display": [
+        990,
+        360
+      ],
+      "viewport": [
+        1212,
+        741
+      ],
+      "scroll": [
+        1212,
+        741
+      ],
+      "caption": "Sun et al., тот же\nRankGPT, рисунок 3,\nPDF-страница 3, CC BY 4.0.\nВырезана только схема с полными подписями.\nЭто три локальных перестановки, не один глобальный вызов.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-reranking-reader/1280-figure-07.png"
+    }
+  ],
+  "limits": "Headless browser interactions and screenshots; requires separate human visual inspection.",
+  "layout": {
+    "page": [
+      1265,
+      1265
+    ],
+    "mathErrors": 0,
+    "formulas": [
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ]
+    ],
+    "tables": [
+      [
+        617,
+        617,
+        "visible"
+      ],
+      [
+        617,
+        617,
+        "visible"
+      ]
+    ]
+  },
+  "contextScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-reranking-reader/1280-page.png"
+}

@@ -16,31 +16,20 @@ Bookvar (Букварь) — открытый русскоязычный уче�
 
 ## Локальный запуск
 
-Требуются Node.js 22.12+ и pnpm 10.
+Используйте версию Node.js из `.nvmrc` и pnpm 10.32.1, как в CI.
 
 ```bash
 pnpm install --frozen-lockfile
 pnpm --dir site dev
 ```
 
-Проверка, эквивалентная CI:
+После правки выполните [проверки перед pull request](docs/PUBLISHING.md#проверки-перед-pull-request).
+В CI используется `test:publication`: он работает на обычном клоне и
+проверяет в том числе извлечение рисунков из PDF, для чего нужен Poppler.
+`test:unit` дополнительно читает локальные копии первоисточников из
+`05 Источники/Originals/`. Этот каталог не входит в репозиторий.
 
-```bash
-pnpm --dir publishing check:topics
-pnpm --dir publishing test:unit
-pnpm --dir site check
-pnpm --dir site build
-pnpm --dir publishing test:output
-```
-
-После сборки отдельно проверьте внутренние адреса, якоря и файлы:
-
-```bash
-pnpm --dir publishing check:links
-```
-
-Команды для обновления указателя тем, локального preview и проверки пути
-GitHub Pages приведены в [docs/PUBLISHING.md](docs/PUBLISHING.md).
+Отдельно описано, как [проверить сборку по адресу `/bookvar/`](docs/PUBLISHING.md#github-pages).
 
 ## Совместное редактирование
 

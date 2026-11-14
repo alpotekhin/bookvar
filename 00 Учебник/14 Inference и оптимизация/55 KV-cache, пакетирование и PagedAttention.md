@@ -2,13 +2,14 @@
 title: "KV-cache, пакетирование и PagedAttention"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-29
+last_updated: 2026-11-09
 last_verified: 2026-10-25
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline]]"
 next:
   - "[[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching]]"
 source_unit_id:
+  - lecture-01-figure-step-241-rendering-1
   - lecture-10-naive-versus-cached-inference
   - lecture-10-dynamic-workload-failure-mode
   - lecture-10-paged-attention-memory-sequence
@@ -40,18 +41,34 @@ KV-cache, непрерывное пакетирование и PagedAttention р
 Стоимость вычислений рассмотрена в [[55a Физика LLM inference — prefill, decode и roofline|предыдущей главе]],
 а выбор запросов для очередной итерации — в [[55b Scheduling — continuous batching, chunked prefill и prefix caching|следующей]].
 
+<a id="prefill-decode-cache-states"></a>
+
 ## Prefill и decode используют устройство по-разному
 
 Сначала сервер обрабатывает весь входной prompt — это **prefill**. Затем модель
 добавляет ответ по одному токену — это **decode**.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-review-2026-09/prefill-decode.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-review-2026-09/prefill-decode.png|Четыре прохода: входной текст даёт a, затем каждый выбранный токен поступает на вход следующего прохода, пока модель не выдаст EOS.]]
 
-*Первый проход обрабатывает Computer science is и выбирает a.
-Следующий проход получает a, добавляет его K/V и выбирает discipline.
-Baolin Li et al., рисунок 2 в
+*Baolin Li et al., рисунок 2 в
 [LLM Inference Serving: Survey of Recent Advances and Opportunities](https://arxiv.org/html/2407.12391v1#S2.F2),
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Оригинал статьи без изменений. Уменьшенная копия показана на шаге 241
+[лекции 1 CS336](https://cs336.stanford.edu/lectures/?trace=lecture_01).*
+
+На схеме запрос «Computer science is» поступает в **Iteration 1**.
+Если после токенизации в запросе $S$ позиций, первый проход записывает
+$S$ пар K/V в каждом слое. По логитам последней позиции выбирается
+первый токен ответа, `a`. Его уже можно отправить клиенту, хотя в кеше
+пока только позиции запроса.
+
+**Iteration 2** получает `a` на вход, дописывает его K/V и выбирает
+`discipline`. В кеше теперь $S+1$ позиций. **Iteration 3** обрабатывает
+`discipline` и выбирает точку, а **Iteration 4** обрабатывает точку
+и выбирает `<EOS>`. Если на этом генерация останавливается, отдельного
+прохода с `<EOS>` не будет. В кеше останется $S+3$ обработанных позиций,
+хотя модель сделала четыре выбора. Слова на рисунке обозначают условные
+токены; реальные границы зависят от токенизатора.
 
 Для prefill длины $S$ матрицы содержат много строк. Большие матричные умножения
 обычно хорошо загружают тензорные ядра, поэтому фаза часто ограничена числом
@@ -59,11 +76,6 @@ Baolin Li et al., рисунок 2 в
 запрос. Устройство снова читает параметры слоёв и историю внимания, выполняя
 относительно мало арифметики. При небольшом пакете decode чаще ограничен
 пропускной способностью памяти.
-
-Первый выходной токен выбирается по логитам последней позиции prefill. Его
-собственной пары K/V в кеше ещё нет: она появится, когда этот токен подадут
-на вход следующей итерации. Поэтому после prompt длиной 4000 сервер уже может
-отправить первый токен клиенту, имея в кеше ровно 4000 позиций, а не 4001.
 
 ## Что именно сохраняет KV-cache
 

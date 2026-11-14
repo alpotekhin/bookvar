@@ -13,13 +13,23 @@ from topic_consolidation_baseline import before_topic_consolidation
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / '00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md'
 text = CHAPTER.read_text()
-text = before_topic_consolidation(
+reviewed_text = before_topic_consolidation(
     text, CHAPTER, stop_before_journal="2026-10-29-retention-additions.json")
 assert not re.search(r'^\$$', text, re.M), 'display math needs $$ delimiters'
 # The independent memory-optimizer addition has its own executable checker.
-text = re.sub(r'<!-- BEGIN REVIEW: optimizer memory 2026-10-28 -->\n.*?'
-              r'<!-- END REVIEW: optimizer memory 2026-10-28 -->\n\n', '', text, flags=re.S)
-blocks = re.findall(r'```python\n(.*?)```', text, re.S)
+def core_programs(value):
+    for name, date in (("optimizer memory", "2026-10-28"),
+                       ("adaptive clipping", "2026-10-29")):
+        value = re.sub(r'<!-- BEGIN REVIEW: ' + name + ' ' + date + r' -->\n.*?'
+                       r'<!-- END REVIEW: ' + name + ' ' + date + r' -->\n\n',
+                       '', value, flags=re.S)
+    return re.findall(r'```python\n(.*?)```', value, re.S)
+start = '<a id="optimizer-sparse-gradients"></a>'
+end = '<a id="adamw"></a>'
+before_sparse, sparse_and_tail = text.split(start, 1)
+sparse_example, after_sparse = sparse_and_tail.split(end, 1)
+blocks = core_programs(before_sparse + end + after_sparse)
+assert blocks == core_programs(reviewed_text), 'original core programs changed without review'
 assert len(blocks) == 4
 scopes=[]
 for i,code in enumerate(blocks,1):
@@ -63,6 +73,8 @@ torch.testing.assert_close(batch.grad[2],torch.zeros(2,dtype=batch.dtype))
 assert torch.count_nonzero(batch.grad[1])==2
 full_loss=lambda x:.5*x*x+x+5
 assert full_loss(0)-full_loss(-1)==.5
+np.testing.assert_allclose([full_loss(-.4), full_loss(.2)], [4.68, 5.22])
+np.testing.assert_allclose((full_loss(-.4) + full_loss(.2)) / 2, 4.95)
 for B,expected in [(1,.05),(9,.25),(90,5/11)]:
     eta=1/(1+9/B)
     expected_decrease=eta-.5*eta*eta*(1+9/B)
@@ -93,6 +105,42 @@ for _ in range(2):
 np.testing.assert_allclose([ahead,shift,theta],[.81,-.171,.729],atol=1e-15)
 np.testing.assert_allclose(.1/math.sqrt(17),.0242535625,atol=1e-10)
 np.testing.assert_allclose(.1/math.sqrt(1.54),.0805822964,atol=1e-10)
+
+# Same last gradient, different histories. Check the table against PyTorch.
+for cls, options, expected in (
+    (torch.optim.Adagrad, {}, [.0099503719, .1]),
+    (torch.optim.RMSprop, {'alpha': .9}, [.1000011953, .3162277660]),
+    (torch.optim.Adam, {}, [.1, .0980394004]),
+):
+    param = torch.nn.Parameter(torch.zeros(2, dtype=torch.float64))
+    opt = cls([param], lr=.1, **options)
+    for t in range(1, 102):
+        param.grad = torch.tensor([1., float(t == 101)], dtype=param.dtype)
+        before = param.detach().clone()
+        opt.step()
+    np.testing.assert_allclose((before - param.detach()).numpy(), expected, atol=1e-8, rtol=0)
+
+code, = core_programs(sparse_example)
+with redirect_stdout(StringIO()) as captured:
+    exec(compile(code, f'{CHAPTER}:sparse-gradients', 'exec'), {})
+assert captured.getvalue().splitlines() == ['False -0.06701 0.09', 'True 0.0 0.1']
+for sparse, cls, moments in ((False, torch.optim.Adam, [.09, .000999]),
+                             (True, torch.optim.SparseAdam, [.1, .001])):
+    table = torch.nn.Embedding(2, 1, sparse=sparse, dtype=torch.float64)
+    opt = cls(table.parameters(), lr=.1)
+    for row in (0, 1):
+        opt.zero_grad(set_to_none=True)
+        table(torch.tensor([row])).sum().backward()
+        if sparse:
+            assert table.weight.grad.coalesce().indices().tolist() == [[row]]
+        else:
+            assert table.weight.grad.squeeze(1).tolist() == [float(row == 0), float(row == 1)]
+        opt.step()
+    state = opt.state[table.weight]
+    assert all(state[key].layout == torch.strided for key in ('exp_avg', 'exp_avg_sq'))
+    np.testing.assert_allclose([state[key][0].item() for key in ('exp_avg', 'exp_avg_sq')], moments)
+    assert state['step'] == 2
+print('PASS: 101-step rare gradient table; actual Adam and SparseAdam embedding updates, masks and moments.')
 
 # Adam scale invariance is an eps=0 statement, and large gradients do not imply smaller steps.
 for factor in (1,10,100):
@@ -155,3 +203,13 @@ print('PASS: four published blocks; original D2L trajectories; gradient noise/qu
       'momentum/Nesterov; Adagrad/RMSProp/Adam/AdamW; epsilon convention; schedules; '
       'global clipping; FP16/BF16/scaling/FP8 bounds; exact checkpoint continuation and weights-only '
       'counterexample; fixed-basis adaptation, polar vs spectral, finite Newton-Schulz. torch',torch.__version__)
+
+# Also run every actual published fence in the reader's current order. Historical
+# restoration above checks preservation; it is not execution of the current page.
+all_blocks = re.findall(r'```python\n(.*?)```', text, re.S)
+assert len(all_blocks) == 10
+namespace = {}
+for number, code in enumerate(all_blocks, 1):
+    with redirect_stdout(StringIO()):
+        exec(compile(code, f'{CHAPTER}:current-fence-{number}', 'exec'), namespace)
+print('PASS: all 10 current published programs execute in reading order, CPU only.')

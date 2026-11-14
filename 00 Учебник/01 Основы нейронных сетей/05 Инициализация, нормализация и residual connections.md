@@ -2,8 +2,65 @@
 title: Инициализация, нормализация и residual connections
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-21
+last_updated: 2026-11-09
+source_language: mixed
+reference_terms:
+  - label: "Симметрия при инициализации"
+    label_en: "Initialization symmetry"
+    anchor: initialization-symmetry
+  - label: "Ширина слоя и второй момент активаций"
+    label_en: "Fan-in and activation second moments"
+    anchor: initialization-second-moment
+  - label: "Xavier — прямой и обратный проходы"
+    label_en: "Xavier forward and backward scales"
+    anchor: xavier-initialization
+  - label: "He — второй момент после ReLU"
+    label_en: "He initialization and ReLU second moments"
+    anchor: he-initialization
+  - label: "BatchNorm и LayerNorm — оси статистик"
+    label_en: "BatchNorm and LayerNorm reduction axes"
+    anchor: normalization-axes
+  - label: "BatchNorm — train, eval и накопленные статистики"
+    label_en: "BatchNorm train, eval and running statistics"
+    anchor: batchnorm-train-eval
+  - label: "Нормализация и утечка будущих токенов"
+    label_en: "Normalization and future-token leakage"
+    anchor: normalization-causal-leakage
+  - label: "LayerNorm — нормализация токена"
+    label_en: "LayerNorm across token features"
+    anchor: token-layernorm
+  - label: "RMSNorm — формула и точность вычисления"
+    label_en: "RMSNorm formula and arithmetic precision"
+    anchor: rmsnorm-forward-precision
+  - label: "Backward LayerNorm и RMSNorm"
+    label_en: "LayerNorm and RMSNorm backward"
+    anchor: normalization-backward
+  - label: "Residual — сложение и проекция"
+    label_en: "Residual addition and projection"
+    anchor: residual-addition
+  - label: "Residual — прямой вклад в градиент"
+    label_en: "Residual identity and branch gradients"
+    anchor: residual-gradients
+  - label: "Нулевая последняя проекция ветви"
+    label_en: "Zero-initialized final residual projection"
+    anchor: residual-zero-projection
+  - label: "Pre-norm и post-norm"
+    label_en: "Pre-norm and post-norm"
+    anchor: pre-post-normalization
+  - label: "Масштаб остаточной суммы"
+    label_en: "Residual-stream variance"
+    anchor: residual-variance
+  - label: "Диагностика активаций и градиентов"
+    label_en: "Activation and gradient diagnostics"
+    anchor: normalization-diagnostics
+  - label: "BatchNorm с нуля — код и соглашение дисперсии"
+    label_en: "BatchNorm from scratch and variance conventions"
+    anchor: batchnorm-source-implementation
 primary_sources:
+  - https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb
+  - https://proceedings.mlr.press/v119/xiong20b.html
+  - https://fleuret.org/public/lbdl.pdf
+  - https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial4/Optimization_and_Initialization.html#constant-variance
   - https://d2l.ai/chapter_multilayer-perceptrons/numerical-stability-and-init.html
   - https://cs231n.github.io/neural-networks-2/
   - https://arxiv.org/abs/1502.01852
@@ -38,6 +95,7 @@ $13\,781$. В обоих случаях отклонение в одном сл�
 преобразования с его входом. Сначала разберём эти операции отдельно,
 затем соединим их в блок Transformer.
 
+<a id="initialization-symmetry"></a>
 ## Почему одинаковые веса не работают
 
 Рассмотрим два скрытых нейрона с линейной активацией:
@@ -82,6 +140,7 @@ $\partial L/\partial w_2=24$.
 
 ## Xavier и He initialization
 
+<a id="initialization-second-moment"></a>
 ### Откуда берётся зависимость от ширины
 
 Пусть один выход линейного слоя равен
@@ -125,6 +184,56 @@ $\sigma_w^2=1/n$, то есть стандартное отклонение $1/\
 поправка на ненулевое среднее после ReLU явно разобрана у
 [He et al., §2.2, equations 6–10](https://arxiv.org/pdf/1502.01852v1#page=4).
 
+<a id="activation-init-distributions"></a>
+
+### Как масштаб меняется от слоя к слою
+
+В [Tutorial 4 курса UvA](https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial4/Optimization_and_Initialization.html#constant-variance)
+линейная сеть ширины $784\to512\to256\to256\to128\to10$
+обрабатывает 1024 изображения FashionMNIST до первого обновления весов.
+Между матрицами стоит тождественная функция, поэтому виден вклад
+самого масштаба весов. Каждая панель объединяет выходы одного линейного
+слоя по всем изображениям и нейронам. По вертикали отложена плотность,
+а диапазон горизонтальной оси меняется от панели к панели.
+
+![[00 Учебник/Assets/Figures/curated/normalization-originals-2026-11-09/uva-activation-std-001.svg|UvA: при стандартном отклонении 0,01 разброс активаций уменьшается по глубине; горизонтальные шкалы панелей различаются]]
+
+*Phillip Lippe, UvA Deep Learning Course, Tutorial 4,
+[исходный график при стандартном отклонении 0,01](https://uvadlc-notebooks.readthedocs.io/en/latest/_images/tutorial_notebooks_tutorial4_Optimization_and_Initialization_27_0.svg),
+оригинальный SVG, [MIT](/licenses/uvadlc-c7d9e18f-MIT.txt).*
+
+При стандартном отклонении весов $0{,}01$ формула для первого слоя
+без смещений даёт множитель $784\cdot0{,}01^2=0{,}0784$.
+В сохранённом запуске дисперсия выхода первого слоя равна $0{,}077930$,
+а последнего — $0{,}000083$. Здесь случайными были и смещения;
+формула без них даёт оценку масштаба, а не точное значение.
+
+![[00 Учебник/Assets/Figures/curated/normalization-originals-2026-11-09/uva-activation-std-01.svg|UvA: при стандартном отклонении 0,1 разброс активаций увеличивается; горизонтальные шкалы панелей различаются]]
+
+*Phillip Lippe, UvA Deep Learning Course, Tutorial 4,
+[исходный график при стандартном отклонении 0,1](https://uvadlc-notebooks.readthedocs.io/en/latest/_images/tutorial_notebooks_tutorial4_Optimization_and_Initialization_29_0.svg),
+оригинальный SVG, [MIT](/licenses/uvadlc-c7d9e18f-MIT.txt).*
+
+При $0{,}1$ дисперсия весов в сто раз больше. Дисперсия первого выхода
+уже около $7{,}9$, а у предпоследнего достигает $262{,}5$.
+По одной высоте пика этого не увидеть: пик может выглядеть высоким
+даже при широком распределении, если панель автоматически подобрала
+свою шкалу. Сравнивать нужно деления горизонтальной оси и численные
+дисперсии.
+
+![[00 Учебник/Assets/Figures/curated/normalization-originals-2026-11-09/uva-activation-fan-in.svg|UvA: при дисперсии весов 1/fan_in выходы всех пяти линейных слоёв имеют близкий разброс]]
+
+*Phillip Lippe, UvA Deep Learning Course, Tutorial 4,
+[исходный график при дисперсии весов 1/fan_in](https://uvadlc-notebooks.readthedocs.io/en/latest/_images/tutorial_notebooks_tutorial4_Optimization_and_Initialization_32_1.svg),
+оригинальный SVG, [MIT](/licenses/uvadlc-c7d9e18f-MIT.txt).*
+
+В третьем опыте курс выбирает дисперсию $1/n_{\rm in}$ отдельно для
+каждой матрицы и обнуляет смещения. Дисперсия первого выхода около
+$1{,}02$, последнего — $0{,}87$. Этот вариант рассчитан на прямой
+проход линейной сети; при разных ширинах он отличается от Xavier,
+который учитывает и обратный проход.
+
+<a id="xavier-initialization"></a>
 ### Xavier: согласование прямого и обратного проходов
 
 Число входов одного нейрона называют `fan_in`, число выходов слоя —
@@ -164,6 +273,7 @@ $$
 Нормальный и равномерный варианты согласуют одну дисперсию,
 но остаются разными распределениями.
 
+<a id="he-initialization"></a>
 ### He: поправка на ReLU
 
 Пусть предактивация $z$ имеет симметричное распределение относительно
@@ -225,6 +335,7 @@ $2/(n_{\rm in}+n_{\rm out})$, усечённое на трёх стандарт�
 Усечение немного меняет фактическую дисперсию выборки;
 неусечённое нормальное распределение и этот рецепт не тождественны.
 
+<a id="normalization-axes"></a>
 ## Что делает normalization
 
 Инициализация применяется один раз. После обновлений весов
@@ -266,6 +377,29 @@ LayerNorm сохранила относительные значения при�
 Именно такое сравнение осей используется в
 [D2L, Residual Connection and Layer Normalization](https://d2l.ai/chapter_attention-mechanisms-and-transformers/transformer.html#residual-connection-and-layer-normalization).
 
+![[00 Учебник/Assets/Figures/curated/normalization-originals-2026-11-09/fleuret-normalization-axes.png|Флёре: слева BatchNorm считает статистики по B, H и W одного канала; справа LayerNorm считает статистики по D, H и W одного примера]]
+
+*François Fleuret, [The Little Book of Deep Learning, v1.3, рис. 4.9](https://fleuret.org/public/lbdl.pdf#page=83).
+Из PDF извлечён весь рисунок с обеими панелями и формулами.
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
+
+На схеме вход находится внизу. Синяя область показывает значения,
+из которых считают одно среднее и одну дисперсию. Слева в неё входят
+все примеры и пространственные позиции одного канала $d$.
+Справа — все каналы и пространственные позиции одного примера $b$.
+Красная область наверху показывает другую группировку: какие выходы
+получают одну и ту же пару обучаемых коэффициентов $\gamma,\beta$.
+У BatchNorm это весь канал; у показанной LayerNorm — одна координата
+$(d,h,w)$ во всех примерах.
+
+Например, при форме $(B,D,H,W)=(2,3,2,2)$ BatchNorm в обучении берёт
+по $2\cdot2\cdot2=8$ чисел для каждого из трёх каналов.
+LayerNorm по $(D,H,W)$ берёт по $3\cdot2\cdot2=12$ чисел для
+каждого из двух примеров. В Transformer нормализация по признакам
+токена использует более узкий срез: фиксирует и пример $b$, и
+позицию $t$, оставляя только ось $D$.
+
+<a id="batchnorm-train-eval"></a>
 ### BatchNorm в train и eval
 
 Для каждого признака BatchNorm вычисляет среднее $\mu_B$
@@ -354,6 +488,8 @@ $(B,C,H,W)$ одна оценка использует $BHW$ значений.
 что статистика посчитана по единственному числу.
 На форме $(B,C)$ при $B=1$ такого дополнительного набора нет.
 
+<a id="normalization-causal-leakage"></a>
+
 Для авторегрессионного текста нормализация по времени создаёт
 другую проблему. `BatchNorm1d` на форме $(B,C,T)$
 использует также все $T$ позиций. В последовательности $(1,5,3)$
@@ -364,6 +500,7 @@ $-1{,}2247$. Если заменить будущую вторую позици�
 даже при правильно замаскированном attention.
 Токенная LayerNorm такую зависимость не вводит.
 
+<a id="token-layernorm"></a>
 ### LayerNorm по признакам одного токена
 
 Пусть скрытый вектор одного токена $x\in\mathbb R^d$.
@@ -407,6 +544,7 @@ $\gamma,\beta$ общие для всех позиций и примеров.
 точные оси `normalized_shape` описаны в
 [LayerNorm, PyTorch 2.14](https://docs.pytorch.org/docs/2.14/generated/torch.nn.LayerNorm.html).
 
+<a id="rmsnorm-forward-precision"></a>
 ### RMSNorm: нормирование без вычитания среднего
 
 RMS — корень из среднего квадрата.
@@ -479,6 +617,7 @@ assert torch.isinf(large.square()).all()
 torch.testing.assert_close(rmsnorm(large, torch.ones(2)), torch.ones_like(large))
 ```
 
+<a id="normalization-backward"></a>
 ### Почему backward нормализации связывает признаки
 
 Среднее и масштаб зависят от всего нормализуемого вектора.
@@ -541,6 +680,7 @@ $\partial L/\partial\beta=g$.
 а градиент входа равен $(5,-5)$.
 Разница между координатами делится на $s=0{,}1$.
 
+<a id="residual-addition"></a>
 ## Residual connection учит поправку
 
 Допустим, к уже работающей сети добавили ещё один блок.
@@ -558,7 +698,7 @@ $$
 ветвь $F$ обучается приближать разницу $H(x)-x$.
 Отсюда название residual — остаток.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/initialization-normalization-2026-10-21/d2l-residual-block.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/initialization-normalization-2026-10-21/d2l-residual-block.svg|D2L: обычная ветвь и остаточная ветвь с обходным путём]]
 
 *Слева обучаемые слои вычисляют требуемое преобразование целиком.
 Справа вход дополнительно проходит по обходному пути к сложению.
@@ -592,7 +732,7 @@ $$
 y=P(x)+F(x).
 $$
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/initialization-normalization-2026-10-21/d2l-resnet-block.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/initialization-normalization-2026-10-21/d2l-resnet-block.svg|D2L: остаточные блоки с тождественным обходом и проекцией 1×1]]
 
 *Два варианта блока ResNet из
 [D2L, Residual Blocks](https://d2l.ai/chapter_convolutional-modern/resnet.html#residual-blocks).
@@ -609,6 +749,7 @@ $(B,64,32,32)$ в $(B,128,16,16)$.
 примере иногда позволит сложение, но это само по себе
 ещё не делает его задуманным остаточным соединением.
 
+<a id="residual-gradients"></a>
 ### Как складываются градиенты
 
 У блока без последующей активации якобиан равен
@@ -632,6 +773,7 @@ Residual connection даёт прямой путь,
 Поэтому положение операций относительно сложения влияет
 на распространение градиента.
 
+<a id="residual-zero-projection"></a>
 ### Нулевая последняя матрица не обнуляет обучение всей сети
 
 Возьмём скалярную ветвь
@@ -655,6 +797,7 @@ $\partial L/\partial w_1=-1\cdot0\cdot1=0$.
 Рецепт «обнулить последнюю проекцию» требует работающих
 внутренних представлений; он не означает «обнулить всю ветвь».
 
+<a id="pre-post-normalization"></a>
 ## Pre-norm и post-norm
 
 В блоке Transformer остаточное сложение и нормализацию
@@ -680,7 +823,7 @@ $$
 Можно построить pre-LayerNorm и pre-RMSNorm;
 это не одно и то же архитектурное решение.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/initialization-normalization-2026-10-21/cs336-prenorm-block.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/initialization-normalization-2026-10-21/cs336-prenorm-block.png|CS336: полный pre-norm блок с двумя остаточными соединениями]]
 
 *Pre-norm блок из Stanford CS336, Assignment 1, Figure 2, p. 13.
 Вход проходит по двум остаточным соединениям.
@@ -688,6 +831,17 @@ Norm стоит перед self-attention и перед FFN,
 но не после каждого сложения.
 [Закреплённая версия задания](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf),
 Stanford University, [MIT notice](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
+
+![[00 Учебник/Assets/Figures/curated/norm-gating-2026-10-22/xiong-pre-post-norm.png|Xiong et al.: полный блок Transformer с post-LN слева и pre-LN справа]]
+
+*Ruibin Xiong et al., [On Layer Normalization in the Transformer Architecture, Figure 1, p. 2](https://proceedings.mlr.press/v119/xiong20b/xiong20b.pdf#page=2),
+CC BY 4.0. Обе исходные схемы и полная английская подпись сохранены;
+переиспользован точный PDF-crop без изменений.*
+
+Слева каждый обходной путь проходит через Layer Norm после сложения.
+Справа нормализация находится только внутри обучаемой ветви.
+Стрелки показывают порядок обеих операций для attention и FFN;
+это не сравнение LayerNorm с RMSNorm.
 
 На схеме два подслоя, и у каждого своя нормализация и остаточная ветвь.
 Для понимания порядка пока достаточно считать self-attention
@@ -734,6 +888,7 @@ $(0{,}2041,-0{,}4082,0{,}2041)$.
 ветвей, но не следует из определения pre-norm как математическая
 необходимость.
 
+<a id="residual-variance"></a>
 ### Масштаб остаточной суммы всё ещё может расти
 
 Нормализация входа ветви не нормализует сумму $x+F(N(x))$.
@@ -792,6 +947,7 @@ expected = torch.tensor([1., -2., 1.], dtype=x.dtype) / (6. * (2./3.)**0.5)
 torch.testing.assert_close(x.grad, expected)
 ```
 
+<a id="normalization-diagnostics"></a>
 ## Диагностика
 
 Маленький запуск на одном фиксированном батче позволяет проверить
@@ -827,6 +983,46 @@ $\|\Delta W\|/\|W\|$ после реального шага оптимизато
 всего обучения, но позволяют обнаружить перепутанные оси,
 переполнение и грубо неверный масштаб до полного запуска.
 
+### Saved distributions from makemore
+
+In Andrej Karpathy's [makemore, part 3](https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb),
+five hidden stages contain Linear, BatchNorm and Tanh. The saved debug loop
+runs iterations 0 through 1000. The following figures use the retained
+forward and backward values from its final iteration, not fresh measurements
+of an untrained model. Indices 2, 5, 8, 11 and 14 count all layer objects;
+they name the five Tanh outputs, not hidden-layer depths 2 through 14.
+
+![[00 Учебник/Assets/Figures/curated/normalization-course-2026-11-03/karpathy-activation-distribution.png|Karpathy makemore: сохранённые распределения выходов пяти Tanh-слоёв]]
+
+*Andrej Karpathy, makemore part 3, zero-based cell 15, original saved PNG
+output. [Source notebook](https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb),
+[MIT License](/licenses/karpathy-nn-zero-to-hero-73c3fcc7-MIT.txt).
+The complete original image is unchanged; no plot was rerun or redrawn.*
+
+The horizontal axis contains activation values; the vertical axis is a
+histogram density, not a count of neurons. The source prints standard
+deviations from 0.63 to 0.65 and counts activations with absolute value
+above 0.97 as saturated. That fraction ranges from 1.69% to 2.78% in
+this saved pass. Tanh's derivative is $1-h^2$, so at $|h|=0.97$ it is
+0.0591. The threshold is a diagnostic convention, not a discontinuity
+in the function or a guarantee of a useful gradient.
+
+![[00 Учебник/Assets/Figures/curated/normalization-course-2026-11-03/karpathy-gradient-distribution.png|Karpathy makemore: сохранённые градиенты по выходам пяти Tanh-слоёв]]
+
+*Andrej Karpathy, makemore part 3, zero-based cell 16, original saved PNG
+output. [Source notebook](https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb),
+[MIT License](/licenses/karpathy-nn-zero-to-hero-73c3fcc7-MIT.txt).
+The complete image, axes and legend are unchanged.*
+
+Here the horizontal axis contains the incoming gradients of those saved
+Tanh outputs. Their source-reported standard deviations range from
+$1.952382\cdot10^{-3}$ to $2.640702\cdot10^{-3}$. A narrow gradient
+histogram cannot be interpreted without its horizontal scale, the loss
+reduction and the gradients at other layers. These two figures describe
+one BatchNorm/Tanh run; they are not a controlled comparison against a
+network without normalization, and they do not establish generalization
+or long-run training stability.
+
 ## Краткие итоги
 
 При чтении конкретной архитектуры нужно отдельно установить
@@ -838,8 +1034,112 @@ $\|\Delta W\|/\|W\|$ после реального шага оптимизато
 У ResNet с проекцией обходной путь тоже обучаемый;
 считать его единичной матрицей нельзя.
 
+Следующая глава: [[00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация|Dropout и регуляризация]].
+
+<a id="batchnorm-source-implementation"></a>
+## BatchNorm from scratch: parameters, buffers and variance
+
+The following class is reproduced from Andrej Karpathy's
+[makemore notebook, cell 13](https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb), MIT.
+The class's logic and comments are unchanged; spaces on empty lines were removed.
+The import and the comparison after the class are Bookvar additions.
+`gamma` and `beta` are optimized parameters. The two running-statistic
+tensors are buffers: the forward call updates them under `no_grad`,
+using the current batch rather than a loss gradient.
+
+For a matrix shaped `(batch, features)`, `mean(0)` and `var(0)` reduce
+the batch axis. In PyTorch 2.14, the unqualified `var` call uses correction
+1, dividing by $B-1$. The class uses that estimate for both normalization
+and its running buffer. Native PyTorch BatchNorm instead uses division
+by $B$ for the training output and correction 1 for `running_var`.
+The earlier two-example matrix makes the difference visible: a variance
+of 8 gives training outputs close to $\pm1/\sqrt2$ in this class,
+whereas native BatchNorm uses 4 and gives outputs close to $\pm1$.
+
+```python
+import torch
+
+class BatchNorm1d:
+
+  def __init__(self, dim, eps=1e-5, momentum=0.1):
+    self.eps = eps
+    self.momentum = momentum
+    self.training = True
+    # parameters (trained with backprop)
+    self.gamma = torch.ones(dim)
+    self.beta = torch.zeros(dim)
+    # buffers (trained with a running 'momentum update')
+    self.running_mean = torch.zeros(dim)
+    self.running_var = torch.ones(dim)
+
+  def __call__(self, x):
+    # calculate the forward pass
+    if self.training:
+      xmean = x.mean(0, keepdim=True) # batch mean
+      xvar = x.var(0, keepdim=True) # batch variance
+    else:
+      xmean = self.running_mean
+      xvar = self.running_var
+    xhat = (x - xmean) / torch.sqrt(xvar + self.eps) # normalize to unit variance
+    self.out = self.gamma * xhat + self.beta
+    # update the buffers
+    if self.training:
+      with torch.no_grad():
+        self.running_mean = (1 - self.momentum) * self.running_mean + self.momentum * xmean
+        self.running_var = (1 - self.momentum) * self.running_var + self.momentum * xvar
+    return self.out
+
+  def parameters(self):
+    return [self.gamma, self.beta]
+
+# Bookvar comparison: same data and epsilon, different variance contracts.
+source_x = torch.tensor([[1., 3.], [5., 7.]], dtype=torch.float64)
+source_bn = BatchNorm1d(2, eps=1e-5, momentum=1.)
+source_y = source_bn(source_x)
+signs = torch.tensor([[-1., -1.], [1., 1.]], dtype=source_x.dtype)
+torch.testing.assert_close(source_y, signs * 2. / (8. + 1e-5)**.5)
+torch.testing.assert_close(source_bn.running_mean, source_x.mean(0, keepdim=True))
+torch.testing.assert_close(source_bn.running_var, source_x.var(0, keepdim=True))
+
+native_bn = torch.nn.BatchNorm1d(2, affine=False, momentum=1., eps=1e-5).double()
+native_y = native_bn(source_x)
+torch.testing.assert_close(native_y, signs * 2. / (4. + 1e-5)**.5)
+assert not torch.allclose(source_y, native_y)
+
+source_bn.training = False
+native_bn.eval()
+torch.testing.assert_close(source_bn(source_x), native_bn(source_x))
+# After this one batch, both eval paths use the same running estimates.
+print('source train:', source_y, 'native train:', native_y)
+```
+
+With `momentum=1`, both implementations retain the same mean and
+correction-1 variance after this batch, so their evaluation outputs agree.
+Agreement in evaluation does not make the training functions identical.
+The class also has a different tensor-layout contract from native
+`BatchNorm1d` on `(B,C,T)`: its axis 0 reduction does not include the
+time axis. It is a two-dimensional teaching implementation, not an
+interchangeable replacement for every PyTorch BatchNorm call.
+
+This class does not inherit `nn.Module`. Its `parameters()` returns a
+Python list, and its buffers do not acquire automatic `state_dict` or
+`.to(device)` handling. A training program using it must manage those
+objects explicitly. The source notebook shows the surrounding optimizer
+and evaluation loop; the CPU comparison above tests the normalization
+and state conventions without rerunning its name-generation training.
+
 ## Источники
 
+- Andrej Karpathy, [makemore, part 3](https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb),
+  cells 13–16: исходный класс BatchNorm, debug loop, сохранённые распределения
+  активаций и градиентов; MIT. Вычисления текущей главы не выданы за повторное обучение из курса.
+- François Fleuret, [The Little Book of Deep Learning, v1.3, §4.6, Figure 4.9](https://fleuret.org/public/lbdl.pdf#page=83):
+  оси статистик и обучаемых параметров BatchNorm/LayerNorm; CC BY-NC-SA 4.0.
+- Phillip Lippe, UvA Deep Learning Course, [Tutorial 4, Initialization](https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial4/Optimization_and_Initialization.html#initialization):
+  три сохранённых распределения из [закреплённого ноутбука](https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial4/Optimization_and_Initialization.ipynb),
+  ячейки 27, 29 и 32 при отсчёте с нуля; MIT.
+- Ruibin Xiong et al., [On Layer Normalization in the Transformer Architecture](https://proceedings.mlr.press/v119/xiong20b.html),
+  §2 и Figure 1: исходное сравнение post-LN и pre-LN; CC BY 4.0.
 - D2L, [Numerical Stability and Initialization](https://d2l.ai/chapter_multilayer-perceptrons/numerical-stability-and-init.html):
   произведения производных, симметрия, вывод Xavier.
 - Stanford CS231n, [Neural Networks Part 2, Weight Initialization](https://cs231n.github.io/neural-networks-2/#weight-initialization):
@@ -865,8 +1165,8 @@ $\|\Delta W\|/\|W\|$ после реального шага оптимизато
   [initialization](https://docs.pytorch.org/docs/2.14/nn.init.html):
   соглашения библиотечного API; параметры $\epsilon$ в примерах заданы явно.
 
-Формулы для быстрого обращения:
-[[02 Areas/ML & DL/01 Справочник/Математика и DL/Нормализация|Нормализация в Transformer]].
+Применение этих операций в современных языковых моделях, QK-нормализация
+и SwiGLU разобраны в [[00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual|главе о нормализации и gating в LLM]].
 
 **Предыдущая глава:** [[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения|SGD, Momentum, Adam и schedules]].
 

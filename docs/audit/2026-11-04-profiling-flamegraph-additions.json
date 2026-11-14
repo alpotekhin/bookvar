@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "kind": "profiling-flamegraph-and-subject-additions",
+  "review_date": "2026-11-04",
+  "files": [
+    {
+      "source": "00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md",
+      "before_sha256": "f6fdc8028d115f4026643fc090bc843f2fdd8ddfc97207332681bca22e672a80",
+      "after_sha256": "19a074b94c9c9a08badc77d7f5faa552da57636337c9fcb8e6eb053072afae4a",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-27\nlast_verified: 2026-10-27\nsource_language: mixed",
+          "new": "last_updated: 2026-11-04\nlast_verified: 2026-11-04\nsource_language: mixed\nreference_terms:\n  - anchor: profile-dependencies\n    label: \"Критический путь и ожидание CPU/GPU\"\n    label_en: \"Critical paths and CPU/GPU waits\"\n  - anchor: profile-tools\n    label: \"Уровни наблюдения и выбор профилировщика\"\n    label_en: \"Observation levels and profiler selection\"\n  - anchor: profile-experiment\n    label: \"Нагрузка, прогрев и окно наблюдения\"\n    label_en: \"Workload, warmup and capture window\"\n  - anchor: pytorch-profiler\n    label: \"Расписание PyTorch Profiler и метки стадий\"\n    label_en: \"PyTorch Profiler schedules and stage ranges\"\n  - anchor: profile-aggregates\n    label: \"Self CPU, CPU total и перекрытие событий\"\n    label_en: \"Self CPU, CPU total and event overlap\"\n  - anchor: cpu-py-spy\n    label: \"CPU-профиль и процессы DataLoader\"\n    label_en: \"CPU profiles and DataLoader workers\"\n  - anchor: profile-flamegraph\n    label: \"Как читать flame graph\"\n    label_en: \"Reading a sampled flame graph\"\n  - anchor: nsight-systems\n    label: \"CPU, CUDA API и ядра в Nsight Systems\"\n    label_en: \"CPU, CUDA API and kernels in Nsight Systems\"\n  - anchor: profile-nvtx\n    label: \"NVTX и границы записи CUDA-профиля\"\n    label_en: \"NVTX and bounded CUDA capture\"\n  - anchor: profile-patterns\n    label: \"Простой, короткие ядра и синхронизация\"\n    label_en: \"Idle gaps, short kernels and synchronization\"\n  - anchor: profile-gelu\n    label: \"Naive, builtin и compiled GeLU\"\n    label_en: \"Naive, builtin and compiled GeLU\"\n  - anchor: profile-runtime\n    label: \"Диспетчер, autograd и исполнение графа\"\n    label_en: \"Dispatcher, autograd and graph execution\"\n  - anchor: profile-training-step\n    label: \"Полный шаг MLP и события профилировщика\"\n    label_en: \"A complete MLP step and profiler events\"\n  - anchor: profile-step-gradients\n    label: \"Градиенты двухслойного MLP и обновление SGD\"\n    label_en: \"Two-layer MLP gradients and SGD updates\"\n  - anchor: profile-step-products\n    label: \"Формы matmul, входной градиент и FLOP\"\n    label_en: \"Matmul shapes, input gradients and FLOP\"\n  - anchor: profile-capture\n    label: \"Захват графа, graph breaks и guards\"\n    label_en: \"Graph capture, graph breaks and guards\"\n  - anchor: profile-fusion\n    label: \"Fusion, движение данных и окупаемость компиляции\"\n    label_en: \"Fusion, data movement and compilation break-even\"\n  - anchor: profile-export\n    label: \"Checkpoint, ONNX и скомпилированный engine\"\n    label_en: \"Checkpoint, ONNX and compiled engines\"\n  - anchor: memory-snapshot\n    label: \"Время жизни тензоров, allocated и reserved\"\n    label_en: \"Tensor lifetimes, allocated and reserved memory\"\n  - anchor: profile-memory-history\n    label: \"Active Memory Timeline и Allocator State History\"\n    label_en: \"Active Memory Timeline and Allocator State History\"\n  - anchor: profile-pinned-history\n    label: \"История pinned host memory и пределы memory_viz\"\n    label_en: \"Pinned host memory history and memory_viz limits\"\n  - anchor: profile-nsight-compute\n    label: \"Nsight Compute, счётчики и replay\"\n    label_en: \"Nsight Compute, counters and replay\"\n  - anchor: profile-end-to-end\n    label: \"Критический путь полного шага\"\n    label_en: \"The complete-step critical path\"\n  - anchor: profile-reproducibility\n    label: \"Проверка гипотезы и сохранение артефактов\"\n    label_en: \"Testing a hypothesis and recording artifacts\""
+        },
+        {
+          "old": "  - assignment-02-task-memory-profiling\n",
+          "new": "  - assignment-02-task-memory-profiling\n  - py-spy-flamegraph-sample-population\n"
+        },
+        {
+          "old": "<a id=\"полный-диагностический-маршрут\"></a>",
+          "new": "<a id=\"profile-dependencies\"></a>\n\n<a id=\"полный-диагностический-маршрут\"></a>"
+        },
+        {
+          "old": "<a id=\"диагноз-по-уровню-стека\"></a>",
+          "new": "<a id=\"profile-tools\"></a>\n\n<a id=\"диагноз-по-уровню-стека\"></a>"
+        },
+        {
+          "old": "\n## Подготовка наблюдаемого эксперимента\n",
+          "new": "\n<a id=\"profile-experiment\"></a>\n\n## Подготовка наблюдаемого эксперимента\n"
+        },
+        {
+          "old": "\n## Как читать таблицу операторов\n",
+          "new": "\n<a id=\"profile-aggregates\"></a>\n\n## Как читать таблицу операторов\n"
+        },
+        {
+          "old": "\n### NVTX как связь между моделью и timeline\n",
+          "new": "\n<a id=\"profile-nvtx\"></a>\n\n### NVTX как связь между моделью и timeline\n"
+        },
+        {
+          "old": "\n### Типовые рисунки на временной шкале\n",
+          "new": "\n<a id=\"profile-patterns\"></a>\n\n### Типовые рисунки на временной шкале\n"
+        },
+        {
+          "old": "\n## Три GeLU как учебный профиль\n",
+          "new": "\n<a id=\"profile-gelu\"></a>\n\n## Три GeLU как учебный профиль\n"
+        },
+        {
+          "old": "<a id=\"от-python-функции-до-kernel-где-находится-framework\"></a>",
+          "new": "<a id=\"profile-runtime\"></a>\n\n<a id=\"от-python-функции-до-kernel-где-находится-framework\"></a>"
+        },
+        {
+          "old": "\n### A complete training step: from tensors to profiler events\n",
+          "new": "\n<a id=\"profile-training-step\"></a>\n\n### A complete training step: from tensors to profiler events\n"
+        },
+        {
+          "old": "\n#### Forward values and parameter gradients\n",
+          "new": "\n<a id=\"profile-step-gradients\"></a>\n\n#### Forward values and parameter gradients\n"
+        },
+        {
+          "old": "\n#### Match each matrix product to a recorded event\n",
+          "new": "\n<a id=\"profile-step-products\"></a>\n\n#### Match each matrix product to a recorded event\n"
+        },
+        {
+          "old": "<a id=\"capture-не-равен-optimization\"></a>",
+          "new": "<a id=\"profile-capture\"></a>\n\n<a id=\"capture-не-равен-optimization\"></a>"
+        },
+        {
+          "old": "\n### Fusion как устранение движения данных\n",
+          "new": "\n<a id=\"profile-fusion\"></a>\n\n### Fusion как устранение движения данных\n"
+        },
+        {
+          "old": "<a id=\"interoperability-graph-как-контракт-с-границами\"></a>",
+          "new": "<a id=\"profile-export\"></a>\n\n<a id=\"interoperability-graph-как-контракт-с-границами\"></a>"
+        },
+        {
+          "old": "\n### Запись истории и два представления одного снимка\n",
+          "new": "\n<a id=\"profile-memory-history\"></a>\n\n### Запись истории и два представления одного снимка\n"
+        },
+        {
+          "old": "\n## Когда нужен Nsight Compute\n",
+          "new": "\n<a id=\"profile-nsight-compute\"></a>\n\n## Когда нужен Nsight Compute\n"
+        },
+        {
+          "old": "\n## Условный сквозной пример\n",
+          "new": "\n<a id=\"profile-end-to-end\"></a>\n\n## Условный сквозной пример\n"
+        },
+        {
+          "old": "\n## Воспроизводимый цикл\n",
+          "new": "\n<a id=\"profile-reproducibility\"></a>\n\n## Воспроизводимый цикл\n"
+        },
+        {
+          "old": "Закреплённая CPU-память из S6 требует отдельного наблюдения.",
+          "new": "<a id=\"profile-pinned-history\"></a>\n\nЗакреплённая CPU-память, рассмотренная в главе о подготовке данных,\nтребует отдельного наблюдения."
+        },
+        {
+          "old": "получение данных, проверяют конвейер из S6: чтение, декодирование, очередь",
+          "new": "получение данных, проверяют конвейер подготовки данных: чтение, декодирование, очередь"
+        },
+        {
+          "old": "и реализации на Triton продолжается в S8.",
+          "new": "и реализации на Triton продолжается в\n[[02 Areas/ML & DL/00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению|следующей главе]]."
+        },
+        {
+          "old": "связать наблюдаемое ядро с моделью roofline и выбрать гипотезу для S8.",
+          "new": "связать наблюдаемое ядро с моделью roofline и выбрать изменение алгоритма\nили реализации для проверки в\n[[02 Areas/ML & DL/00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению|главе о GPU-ядрах]]."
+        },
+        {
+          "old": "Широкий участок декодирования изображения в профиле рабочего процесса",
+          "new": "<!-- BEGIN REVIEW: sampled flame graph 2026-11-04 -->\n<a id=\"profile-flamegraph\"></a>\n\n### Reading a sampled flame graph\n\nA sampling profiler periodically records the call stack of a thread.\nA flame graph groups these observations by call path. A wide frame appeared\nin many retained stacks; it does not mean that the function was called\nthat many times. One long invocation may appear in many samples, while\na short invocation can occur between samples and be missed.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/profiling-2026-11-04/py-spy-flamegraph.svg|Original inverted py-spy flame graph: calculate_similar_artists branches into fit and similar_items, with argpartition and _wrapfunc nested below the similarity-score calculation]]\n\n*Ben Frederickson, [py-spy — record](https://github.com/benfred/py-spy/blob/7a7ac96e96e0f9b4ba3eee80de3f4d255698170b/README.md#record).\nComplete original SVG, 1200×182, with its original labels and sample counts.\n[MIT license](/licenses/py-spy-7a7ac96e-MIT.txt). No crop, redraw or relabeling.\nEnlarge the figure to read the frames. The original SVG's hover details and\nframe zoom are available when opening its file.*\n\nThe root is at the top in this **inverted** layout; following a branch\ndownwards follows nested calls. The `all` frame represents 2893 retained\nsamples. At the `calculate_similar_artists` level, the location\n`lastfm.py:79` accounts for 1490 samples, or 51.50% of the total.\nThe location `lastfm.py:95` accounts for 1371 samples, or 47.39%.\nThe wide branches identify where to inspect the calling code; the picture\nalone does not explain why those paths dominate.\n\nThe counts in the original SVG also show why parent and child widths\ncannot be added as independent work:\n\n| Nested frame | Samples |\n|---|---:|\n| `_get_similarity_score`, line 209 | 814 |\n| its `argpartition` child | 813 |\n| that child's `_wrapfunc` child | 813 |\n\nThe 813 observations in `argpartition` already belong to the 814 observations\nof its parent. The same 813 stacks continue into `_wrapfunc`.\nAdding 814, 813 and 813 would count most of those observations three times.\nThe source percentages are 28.14%, 28.10% and 28.10% of the same 2893 samples,\nnot three disjoint shares of execution. The frame coordinates are rounded\nfor drawing; use the recorded counts rather than measuring pixel widths.\n\nHorizontal position is not chronology. For an illustrative capture that\nincludes idle stacks, let `D` mean decoding and `W` mean waiting.\nThe observed sequences `[D,D,D,D,D,D,W,W]` and `[D,D,D,W,D,D,D,W]`\nboth contain six decoding and two waiting samples. Their aggregate widths\nare identical, although the waits occur at different points.\nA flame graph cannot recover that order. A timeline retains event order\nand is needed to relate a wait to a particular missing batch or CUDA launch.\nBrendan Gregg explains this distinction in\n[Flame Graphs, Summary and Variations](https://www.brendangregg.com/flamegraphs.html#Summary).\n\nThe denominator depends on what the profiler retains. With `--idle`,\n`py-spy` includes stacks it would otherwise classify as idle.\nWith `--gil`, it retains only stacks holding the GIL and can omit work\nin native extensions that release it. With `--subprocesses`, worker\nprocesses contribute their own stacks. Compare profiles with the same\ncapture options, and inspect which process or thread each branch belongs to.\nThese options and their limitations are documented in the pinned\n[py-spy FAQ](https://github.com/benfred/py-spy/blob/7a7ac96e96e0f9b4ba3eee80de3f4d255698170b/README.md#frequently-asked-questions).\n\nThis is the source repository's recommender-system example, not a fresh\nmeasurement of our model or DataLoader. Its counts establish what this\npicture contains; they do not establish a GPU bottleneck, elapsed seconds\nor an expected speedup.\n\n<!-- END REVIEW: sampled flame graph 2026-11-04 -->\n\nШирокий участок декодирования изображения в профиле рабочего процесса"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/profiling-review-2026-10/pytorch-profiler-trace.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/profiling-review-2026-10/pytorch-profiler-trace.png|PyTorch trace with nested CPU operator ranges above queued kernels on CUDA stream 7]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-nsight-trace.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-nsight-trace.png|CS336 Nsight Systems trace with GPU metrics, CUDA kernels, NVTX ranges and successive Transformer-layer boundaries]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/training-step-2026-10-27/cs231n-two-layer.jpeg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/training-step-2026-10-27/cs231n-two-layer.jpeg|CS231n two-layer network: three input coordinates, four hidden neurons and two output neurons]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/profiling-review-2026-10/pytorch-active-memory-timeline.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/profiling-review-2026-10/pytorch-active-memory-timeline.png|PyTorch Active Memory Timeline showing allocation sizes and lifetimes, with the selected allocation's stack below]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/profiling-review-2026-10/pytorch-allocator-state-history.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/profiling-review-2026-10/pytorch-allocator-state-history.png|PyTorch Allocator State History with allocation and free events on the left and segment blocks at the selected event on the right]]"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "66334263a3396dda122f93f13b15e8f18d3a8ac30b917ff1faabb7ee7e3e2412",
+      "after_sha256": "447e2e07561d5cf37a4e673ec4e9ad55cb8c4ea918c8a5e56d93371da5c28ef5",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки|Profiling ML-нагрузки]]",
+          "new": "- [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки|Profiling ML-нагрузки]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-dependencies|Критический путь и ожидание CPU/GPU]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-tools|Уровни наблюдения и выбор профилировщика]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-experiment|Нагрузка, прогрев и окно наблюдения]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#pytorch-profiler|Расписание PyTorch Profiler и метки стадий]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-aggregates|Self CPU, CPU total и перекрытие событий]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#cpu-py-spy|CPU-профиль и процессы DataLoader]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-flamegraph|Как читать flame graph]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#nsight-systems|CPU, CUDA API и ядра в Nsight Systems]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-nvtx|NVTX и границы записи CUDA-профиля]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-patterns|Простой, короткие ядра и синхронизация]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-gelu|Naive, builtin и compiled GeLU]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-runtime|Диспетчер, autograd и исполнение графа]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-training-step|Полный шаг MLP и события профилировщика]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-step-gradients|Градиенты двухслойного MLP и обновление SGD]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-step-products|Формы matmul, входной градиент и FLOP]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-capture|Захват графа, graph breaks и guards]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-fusion|Fusion, движение данных и окупаемость компиляции]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-export|Checkpoint, ONNX и скомпилированный engine]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#memory-snapshot|Время жизни тензоров, allocated и reserved]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-memory-history|Active Memory Timeline и Allocator State History]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-pinned-history|История pinned host memory и пределы memory_viz]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-nsight-compute|Nsight Compute, счётчики и replay]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-end-to-end|Критический путь полного шага]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-reproducibility|Проверка гипотезы и сохранение артефактов]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "330e3f5e1e7c8f4d54682ea2c15352bb8fd334510248007bde04c07060fa4c52",
+      "after_sha256": "4e214c97074a130eca8131dfe48ae0848710ae0aa85fcd3e49bc96514bc86ede",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки|Profiling ML workloads]]",
+          "new": "- [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки|Profiling ML workloads]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-dependencies|Critical paths and CPU/GPU waits]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-tools|Observation levels and profiler selection]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-experiment|Workload, warmup and capture window]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#pytorch-profiler|PyTorch Profiler schedules and stage ranges]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-aggregates|Self CPU, CPU total and event overlap]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#cpu-py-spy|CPU profiles and DataLoader workers]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-flamegraph|Reading a sampled flame graph]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#nsight-systems|CPU, CUDA API and kernels in Nsight Systems]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-nvtx|NVTX and bounded CUDA capture]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-patterns|Idle gaps, short kernels and synchronization]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-gelu|Naive, builtin and compiled GeLU]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-runtime|Dispatcher, autograd and graph execution]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-training-step|A complete MLP step and profiler events]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-step-gradients|Two-layer MLP gradients and SGD updates]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-step-products|Matmul shapes, input gradients and FLOP]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-capture|Graph capture, graph breaks and guards]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-fusion|Fusion, data movement and compilation break-even]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-export|Checkpoint, ONNX and compiled engines]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#memory-snapshot|Tensor lifetimes, allocated and reserved memory]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-memory-history|Active Memory Timeline and Allocator State History]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-pinned-history|Pinned host memory history and memory_viz limits]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-nsight-compute|Nsight Compute, counters and replay]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-end-to-end|The complete-step critical path]]\n  - [[00 Учебник/10 ML Systems/07 Profiling ML-нагрузки#profile-reproducibility|Testing a hypothesis and recording artifacts]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "05dd7bd49146d152e156a19f9924c576c94e614830fd4d19c3f7a091de9e094e",
+      "after_sha256": "31c80e64f82cb7b8e8e29b31fdb986f7de7ed34e36ef8523b8d6909daf9864fa",
+      "changes": [
+        {
+          "old": "assets:\n",
+          "new": "assets:\n  - {\"id\":\"curated-py-spy-flamegraph-592970e72ed1\",\"asset\":\"00 Учебник/Assets/Figures/curated/profiling-2026-11-04/py-spy-flamegraph.svg\",\"author\":\"Ben Frederickson\",\"title\":\"Original inverted sampled py-spy flame graph\",\"source_url\":\"https://github.com/benfred/py-spy/blob/7a7ac96e96e0f9b4ba3eee80de3f4d255698170b/README.md#record\",\"source_image_url\":\"https://raw.githubusercontent.com/benfred/py-spy/7a7ac96e96e0f9b4ba3eee80de3f4d255698170b/images/flamegraph.svg\",\"commit\":\"7a7ac96e96e0f9b4ba3eee80de3f4d255698170b\",\"source_asset\":\"publishing/fixtures/profiling-originals/py-spy-flamegraph.svg\",\"source_asset_sha256\":\"592970e72ed1c0f0f6e026a63187ffef3e91eab45d0c5457ca6649388aa3de9a\",\"sha256\":\"592970e72ed1c0f0f6e026a63187ffef3e91eab45d0c5457ca6649388aa3de9a\",\"source_page_snapshot\":\"publishing/fixtures/profiling-originals/py-spy-README.md\",\"source_page_sha256\":\"b94fab51768821fca5fdea943a80d799fd046d9bfa3cb21623cffd900f57567f\",\"license\":\"MIT\",\"license_url\":\"https://github.com/benfred/py-spy/blob/7a7ac96e96e0f9b4ba3eee80de3f4d255698170b/LICENSE\",\"license_evidence\":\"site/public/licenses/py-spy-7a7ac96e-MIT.txt\",\"license_evidence_sha256\":\"80bbb8731db59cd835f59fcd06f127953804bb511c8487fd265d96c7c702cd00\",\"source_viewbox\":[0,0,1200,182],\"derivation\":\"source-svg-copy\",\"modifications\":\"Entire original SVG copied byte-for-byte, including original frame titles, counts, colors, FlameGraph attribution comment and native interactive code. No crop, redraw, relabeling, script removal or resizing. Embedded as an inert image; standalone source retains its native controls.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"pinned-upstream-repository\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-04\",\"used_in\":[\"00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md\"]}\n"
+        }
+      ]
+    }
+  ],
+  "created": [
+    "publishing/fixtures/profiling-originals/py-spy-flamegraph.svg",
+    "publishing/fixtures/profiling-originals/py-spy-README.md",
+    "site/public/licenses/py-spy-7a7ac96e-MIT.txt",
+    "00 Учебник/Assets/Figures/curated/profiling-2026-11-04/py-spy-flamegraph.svg"
+  ],
+  "verification": {
+    "date": "2026-11-04",
+    "status": "verified-local-delta",
+    "chapterSha256": "19a074b94c9c9a08badc77d7f5faa552da57636337c9fcb8e6eb053072afae4a",
+    "wholeOwnerRead": "Entire1105-line input freshly read in1–245,246–515,516–800,801–965,966–EOF. Final1290-line owner reread in1–215,216–465,466–715,716–965,966–EOF; the last long response was truncated and its memory/Nsight middle was recovered in1100–1195. Final two Russian subject-label refinements reread in22–43. No subsequent chapter edits.",
+    "preservation": "Four-file exact reversible journal restores accepted1105-linef6fdc802… owner,both indexes and registry. All11 Python and two Bash fences, two display equations, five previous original figures, full captions and all legacy anchors retained. Added one complete original source flame graph, one worked sample table and24 subject destinations per locale. Replaced four opaque S6/S8 references with descriptive wording or actual links; no original excerpt/code rewritten.",
+    "explanation": "Read the actual inverted source graph from root2893 samples to its1490/1371 branches, then814 parent→813 argpartition→813 wrapfunc. Counts, source percentages,frame containment and depth verified. Explained inclusive counts versus call counts,rounded pixel widths,stack-sampling population, idle/GIL/subprocess capture choices and loss of chronology. Two different eight-observation orders produce the same6/2 aggregate; overlapping sample sets have union814 versus sum2440. Source graph is not misrepresented as our workload or GPU measurement.",
+    "sources": "Complete pinned py-spy README304 lines,original307-line SVG including native script,full MIT license read. Brendan Gregg Flame Graphs Summary and Variations read; no copying of its images or long quotations. Full earlier2026-10-23 profiling audit and2026-10-27 training-step audit read. Their bounded CS336/EDLS/Harvard/PyTorch comparisons are reused only on exact restored accepted bodies,not claimed as new whole-course audits.",
+    "style": "no-ai-slop SKILL and eval read fully and checked separately from explanation/source review. Existing detailed mechanisms,original English Harvard fragment and source quotations retained. New explanation remains English; no translation pass. Russian labels simplified to natural reader-facing terminology.",
+    "examples": {
+      "exit": 0,
+      "command": "uv run --offline --python 3.13 --with numpy --with torch python publishing/tools/check_profiling_examples.py",
+      "log": "/var/tmp/bookvar-profiling-examples-final-20261104.log",
+      "runtime": "PyTorch2.14.1 CPU,CUDA False",
+      "scope": "All11 actual Python fences parse. Standalone CPU profiler exports one temporary step-5.json with767 events,three ranges per forward/backward/optimizer and ProfilerStep#2/#3/#4; temporary files removed. Six GeLU forward/gradient cases pass; torch.compile wrapper only,not its optimizing backend. Five complete Harvard-derived CPU fences execute; exact unmodified incomplete source fragment separately checked,integer randint size rejected,loss2.644112→2.476242,all parameter derivatives/SGD updates,5/6 CPU mm events and FLOP totals,eight independent gradient cases pass. Previous nesting/overlap,compile break-even,allocator table and420/310/293 controls retained; memory-history cleanup mocked for success/failure. Pinned source9/1/1 launch counts verified,not fresh device measurements. No live py-spy attachment,NVTX,CUDA-memory or Nsight run."
+    },
+    "originals": {
+      "exit": 0,
+      "command": "node publishing/tools/check_profiling_flamegraph_sources.mjs --upstream",
+      "sourceFiles": 3,
+      "figureSha256": "592970e72ed1c0f0f6e026a63187ffef3e91eab45d0c5457ca6649388aa3de9a",
+      "scope": "All three tracked source/license files match pinned upstream. Entire1200×182 SVG retains original labels,count titles,colors,FlameGraph attribution comment and native hover/zoom script. Script read in full; no external I/O/storage mechanism found. Initial patch copy added a final newline that the source lacks; hash check rejected it. Exact mechanical source copy restored byte identity instead of weakening expected hash. Six current owner figures also hash-match their central registry entries."
+    },
+    "tests": {
+      "exit": 0,
+      "files": 5,
+      "tests": 218,
+      "htmlTests": 204,
+      "scope": "Final built HTML, exact four-file preservation, original Harvard program contract, prior data-pipeline journal boundary and synchronized indexes pass. Two targeted py-spy/DALI provenance-and-drift cases pass,175 unrelated cases skipped. Initial source check/provenance case correctly rejected the added newline,then passed after exact source-byte restoration. No whole asset-suite or GPU-test claim."
+    },
+    "build": {
+      "exit": 0,
+      "pages": 2007,
+      "pagefindHtmlFiles": 2011,
+      "durationSeconds": 28.04,
+      "brokenInternalLinks": 0,
+      "bytes": 855678786,
+      "files": 5619,
+      "limit": 1000000000,
+      "headroom": 144321214
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-04-profiling-reader",
+      "desktop": "1280×900,document1280/1280,632px reading column. All six source figures/captions personally inspected in viewer; native3–4–2 diagram remains511×350. Both display formulas and all six tables632/632,zero KaTeX errors. New graph inspected inline and full,then actual File link opened standalone SVG: clicking argpartition activated native frame zoom,showed Reset Zoom and all ancestor/child sample titles814/813/813. Native tooltip/details text visible; temporary source tab closed.",
+      "mobile": "375×812,document375/375,343px column. Both formulas and all six tables343/343; source sample table personally inspected top150/bottom330 with all814/813/813 rows visible. All six original diagrams personally inspected whole at narrow width. New flame graph also inspected at3.5× with both pan endpoints; fine labels require zoom,not claimed readable at tiny inline width. No image crop/redraw or geometry alteration.",
+      "navigation": "Actual RU subject link→#profile-flamegraph; actual EN subject link→same canonical-language text with explicit no-separate-English-edition notice. Actual EN Next→Triton H1; RU Previous→data-pipeline H1.24 subject anchors checked in both interfaces. Temporary viewport reset; RU flame-graph section left open.",
+      "transient": "Stale prior-goal CUA binding recovered with documented troubleshooting/session reset and same browser3/tab1. One screenshot captured the start of smooth anchor scrolling; fresh state confirmed headingtop88 and proof screenshot overwritten after settling. No reader code changed to satisfy inspection."
+    },
+    "publication": "Local only; no staging,commit,push or deployment.",
+    "remaining": [
+      "62 of152 canonical owners still need this route pass. The remaining ML Systems owner is GPU kernels/Triton; then data/pretraining and specialist owners.",
+      "Whole Harvard Frameworks/Performance Engineering/TinyTorch thematic transfer remains partial; this selected addition and whole-owner read do not establish course or whole-book completeness.",
+      "No CUDA/Nsight/live py-spy experiment or optimized-compiler speedup measurement. Source figure fine text requires viewer zoom on narrow screens.",
+      "Existing permissions/crop issues,full scoped release diff,public-checkout/Pages-base/frozen release checks and authorized dev/Pages publication remain open."
+    ]
+  }
+}

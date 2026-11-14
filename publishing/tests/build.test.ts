@@ -1,4 +1,4 @@
-import { existsSync, mkdtempSync, mkdirSync, readFileSync, symlinkSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { createHash } from 'node:crypto';
@@ -77,6 +77,77 @@ function fixture(
 }
 
 describe('buildPublication', () => {
+  it('builds the same HSE catalogue without reading or requiring the archive', async () => {
+    const body = '## Private archive\n\n![[Assets/Figures/chart.svg]]\n\nNotebook archive body.';
+    const options = fixture(body);
+    const source = '05 Источники/Courses/HSE ML course/ml1-2026-spring/семинар.ipynb.md';
+    const route = 'sources/courses/hse-ml-course/ml1-2026-spring/seminar';
+    const original = readFileSync(options.sourcePath, 'utf8');
+    write(join(options.rootDir, source), original);
+    write(options.manifestPath, readFileSync(options.manifestPath, 'utf8')
+      .replace('id: textbook', 'id: sources')
+      .replace('Notes/Page A.md', source).replace('nested/page-a', route));
+    await buildPublication(options);
+    const output = readFileSync(join(options.outputDir, route + '.md'), 'utf8');
+    expect(output).toContain('https://github.com/esokolov/ml-course-hse/blob/4b21051531fb72dc9eef58632332ad971c92d006/ml1-2026-spring/%D1%81%D0%B5%D0%BC%D0%B8%D0%BD%D0%B0%D1%80.ipynb');
+    expect(output).not.toContain('Notebook archive body.');
+    expect(matter(output).data.title).toBe('Семинар');
+    expect(existsSync(join(options.rootDir, 'site/public/assets/Figures/chart.svg'))).toBe(false);
+    expect(readFileSync(join(options.rootDir, source), 'utf8')).toBe(original);
+    expect(readFileSync(join(options.outputDir, 'en', route + '.md'), 'utf8'))
+      .toContain('0;url=' + publicationBase + '/' + route + '/');
+    rmSync(join(options.rootDir, source));
+    await buildPublication(options);
+    expect(readFileSync(join(options.outputDir, route + '.md'), 'utf8')).toBe(output);
+    expect(existsSync(join(options.rootDir, source))).toBe(false);
+  });
+  it('rejects HSE archive inputs outside the catalogue, invalid entries and path traversal', async () => {
+    const source = '05 Источники/Courses/HSE ML course/ml1-2026-spring/seminar.ipynb.md';
+    const route = 'sources/courses/hse-ml-course/ml1-2026-spring/seminar';
+    const options = fixture();
+    const original = readFileSync(options.manifestPath, 'utf8');
+    write(join(options.rootDir, source), readFileSync(options.sourcePath, 'utf8'));
+    for (const [path, address, section, error] of [
+      [source, 'nested/page-a', 'sources', /must use the HSE catalogue route/],
+      ['Notes/Page A.md', route, 'sources', /must use the HSE catalogue route/],
+      [source, route, 'textbook', /belong to sources/],
+      [source.replace('/seminar', '/../seminar'), route, 'sources', /Invalid HSE catalogue source path/],
+      [source.replace('ipynb.md', 'png.md'), route, 'sources', /Invalid HSE catalogue source path/],
+    ] as const) {
+      write(options.manifestPath, original.replace('id: textbook', 'id: ' + section)
+        .replace('Notes/Page A.md', path).replace('nested/page-a', address));
+      await expect(buildPublication(options)).rejects.toThrow(error);
+    }
+  });
+  it('replaces GenAI remote media in reader prose and preserves archived notebooks and code', async () => {
+    const beacon = '![](https://europe-west1-genai-agents-views-tracker.cloudfunctions.net/genai-agents-tracker?notebook=example)';
+    const figure = '![Tool flow](https://example.org/diagram.svg)';
+    const pin = 'bd681451b254ac1a790e947b581d3997ab35013d';
+    const repo = 'https://github.com/NirDiamant/GenAI_Agents/';
+    const svg = repo + 'raw/' + pin + '/images/ainsight_langgraph.svg';
+    const wrapped = '<div>\n<img src="' + svg + '" alt="Original alt">\n</div>';
+    const badge = '[![Colab](https://example.org/badge.svg)](https://example.org/notebook)';
+    const code = ['```markdown', beacon, wrapped, figure, badge, '```'].join('\n');
+    const options = fixture([beacon, figure, wrapped, badge, code].join('\n\n'), beacon);
+    write(join(options.rootDir, 'Assets/Sources/GenAI Agents/repository-figures/ainsight_langgraph.svg'), '<svg>fixture</svg>');
+    const before = readFileSync(options.sourcePath, 'utf8');
+    const route = 'sources/courses/genai-agents/example';
+    write(options.manifestPath, readFileSync(options.manifestPath, 'utf8').replace('nested/page-a', route));
+    await buildPublication(options);
+    const output = readFileSync(join(options.outputDir, route + '.md'), 'utf8');
+    expect(output).toContain('[Tool flow: open original image](https://example.org/diagram.svg)');
+    expect(output).toContain('[Colab](https://example.org/notebook)');
+    expect(output).toContain('![Three agents search news, summarize it, and format the results for publication.');
+    expect(output).toContain('/assets/Sources/GenAI%20Agents/repository-figures/ainsight_langgraph.svg');
+    expect(output).toContain(repo + 'blob/' + pin + '/images/ainsight_langgraph.svg');
+    expect(output).toContain('External stylesheet reference omitted; drawing and labels unchanged.');
+    expect(output.split(figure)).toHaveLength(2);
+    expect(output.split(badge)).toHaveLength(2);
+    expect(output).toContain(code);
+    expect(output.split(beacon)).toHaveLength(2);
+    expect(readFileSync(options.sourcePath, 'utf8')).toBe(before);
+    expect(readFileSync(join(options.outputDir, 'page-b.md'), 'utf8')).toContain(beacon);
+  });
   it('prefixes real local publication URLs without changing examples or external URLs', () => {
     const input = [
       '[License](/licenses/original.txt)', '![Image](/assets/image.png)',
@@ -108,6 +179,7 @@ describe('buildPublication', () => {
     for (const locale of ['', 'en/']) {
       const page = matter(readFileSync(join(options.outputDir, `${locale}textbook/page-a.md`), 'utf8'));
       expect(page.data.sourceLanguage).toBe('en');
+      expect(page.data.editUrl).toBe('https://github.com/alpotekhin/bookvar/edit/dev/Notes/Page%20A.md');
       expect(page.data.translationStatus).toBeUndefined();
       expect(page.content).toContain('Original English body.');
       expect(page.content).toContain(`${publicationBase}/${locale}textbook/page-b/#section`);
@@ -115,8 +187,33 @@ describe('buildPublication', () => {
     expect(readFileSync(options.sourcePath, 'utf8')).toBe(original);
     const fallback = matter(readFileSync(join(options.outputDir, 'en/textbook/page-b.md'), 'utf8'));
     expect(fallback.data.translationStatus).toBe('canonical');
+    expect(fallback.data.editUrl).toBe('https://github.com/alpotekhin/bookvar/edit/dev/Notes/Page%20B.md');
     expect(fallback.data.canonicalHref).toBe(publicationBase + '/textbook/page-b/');
     expect(fallback.content).toContain('Canonical target');
+  });
+  it('links each authored edition to its own Markdown and omits edit links on redirects', async () => {
+    const options = fixture('Original text.', 'Full target.');
+    const englishSource = 'en/Notes/Chapter #1 & 100%.md';
+    write(join(options.rootDir, englishSource), [
+      '---', 'title: English edition', 'type: textbook-chapter', 'status: stable', '---', 'English text.'
+    ].join('\n'));
+    write(join(options.rootDir, 'Notes/Page B.md'), [
+      '---', 'title: Old reference', 'type: concept', 'status: redirect',
+      'canonical_topic: Notes/Page A.md', '---', 'See [[Page A]].'
+    ].join('\n'));
+    write(options.manifestPath, [
+      'site_title: Fixture', 'sections:', '  - id: textbook', '    title: Book', '    pages:',
+      '      - source: Notes/Page A.md', '        route: textbook/page-a',
+      `        source_en: "${englishSource}"`,
+      '      - source: Notes/Page B.md', '        route: reference/old'
+    ].join('\n'));
+    await buildPublication(options);
+    const editUrl = (route: string) =>
+      matter(readFileSync(join(options.outputDir, route + '.md'), 'utf8')).data.editUrl;
+    expect(editUrl('textbook/page-a')).toBe('https://github.com/alpotekhin/bookvar/edit/dev/Notes/Page%20A.md');
+    expect(editUrl('en/textbook/page-a'))
+      .toBe('https://github.com/alpotekhin/bookvar/edit/dev/en/Notes/Chapter%20%231%20%26%20100%25.md');
+    expect(editUrl('reference/old')).toBeUndefined();
   });
   it.each(['ru', 'mixed', undefined] as const)(
     'keeps %s canonical-language textbook links inside EN without claiming a translation', async (language) => {

@@ -3,7 +3,7 @@ title: "Выравнивание: RLHF → DPO → RLVR"
 type: research-line
 status: active
 started: 2017
-last_updated: 2026-10-29
+last_updated: 2026-11-10
 last_verified: 2026-08-06
 key_concepts: [SFT, Reward Model, PPO, RLHF, DPO, GRPO, RLVR]
 key_models: [InstructGPT, DeepSeek-R1]
@@ -44,20 +44,26 @@ instruction-following: демонстрации для SFT, сравнения �
 
 ## Две схемы обучения по предпочтениям
 
-Схемы InstructGPT и DPO сопоставляют устройство обучающего цикла:
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/rlhf-basic.png|Одна ветвь после SFT обучает модель награды на человеческих сравнениях, другая обновляет политику через PPO]]
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/chatgpt-training-pipeline.png]]
+*Nathan Lambert, [RLHF and Post-Training, Training Overview, рис. 5](https://rlhfbook.com/c/03-training-overview#fig:rlhf-basic-repeat),
+[оригинал PNG](https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/rlhf-basic.png), [MIT](/licenses/rlhf-book-MIT.txt).
+Верхняя линия — последовательность состояний модели. Нижняя ветвь
+учит оценщик по человеческим сравнениям. PPO меняет политику,
+полученную после SFT, а не превращает сам оценщик в помощника.*
 
-*Figure 2 из InstructGPT показывает классическую последовательность: SFT на
-демонстрациях, обучение reward model на сравнениях и PPO по её оценке. Источник:
-Long Ouyang et al., [Training language models to follow instructions with human
-feedback](https://arxiv.org/abs/2203.02155).*
+В [InstructGPT, табл. 6](https://arxiv.org/html/2203.02155v1#A1.T6), для SFT
+указано 12 725 обучающих запросов с демонстрациями, для модели награды —
+33 207 запросов с ранжированиями, для PPO — 31 144 запроса без человеческих
+меток. Это числа запросов, не пар: одно ранжирование четырёх ответов
+даёт шесть сравнений. Округлённые числа и подпись о повторном
+использовании запросов на схеме не описывают точное разбиение этого
+эксперимента. Общую схему с отдельным предобучением показывает
+[Chip Huyen](https://huyenchip.com/2023/05/02/rlhf.html#rlhf-overview).
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo/dpo-pipeline.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo/fig1.png|Слева пары предпочтений обучают модель награды, которая оценивает новые ответы политики; справа пары идут прямо в функцию потерь DPO.]]
 
-*Figure 1 из статьи DPO сопоставляет этот трёхступенчатый процесс с прямой
-оптимизацией по парам preferred/rejected. Источник: Rafael Rafailov et al.,
-[Direct Preference Optimization](https://arxiv.org/abs/2305.18290).*
+*Rafael Rafailov et al., [Direct Preference Optimization, рис. 1](https://arxiv.org/html/2305.18290v3#S1.F1), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Обе панели начинаются с готового сравнения двух ответов. Слева модель награды оценивает новые ответы политики; справа функция потерь DPO использует уже размеченную пару. Способ собрать эту пару на схеме не показан.*
 
 Эти две схемы нельзя читать как хронологию, в которой новый метод отменяет
 предыдущий. Они показывают разные способы превратить предпочтения в обучающий

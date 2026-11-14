@@ -4,11 +4,11 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "7219c5e6fdef1ca9cd3fa92c50097cfe77a6ad664afa3ac43e9e6d8c117d7625"
-translation_reviewed: "2026-10-29"
+canonical_revision: "6c5496f244246742373d8ea58b247579a2e98a0710e7e6bacf9310787c1617e3"
+translation_reviewed: "2026-11-11"
 translation_of: "00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md"
-last_updated: 2026-10-29
-last_verified: 2026-07-23
+last_updated: 2026-11-11
+last_verified: 2026-11-11
 primary_sources:
   - https://jax-ml.github.io/scaling-book/sharding/
   - https://jax-ml.github.io/scaling-book/inference/
@@ -84,12 +84,11 @@ must be selected explicitly.
 
 ### AllGather: shards become complete copies
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allgather.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allgather.png|Each rank contributes one block. Every rank receives the same four blocks in source-rank order.]]
 
-*Official NVIDIA NCCL diagram: every rank contributes a fragment and receives
-their concatenation in rank order. Source:
-[Collective Operations](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html),
-BSD-licensed documentation.*
+*NVIDIA, [NCCL Collective Operations: AllGather](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#allgather),
+[source license](/licenses/nvidia-nccl-bbc3d605-LICENSE.txt). Block `in2` comes third in every `out`.
+Its position is determined by the sender's rank, not the receiver's.*
 
 Suppose rank 0 stores [1, 2] and rank 1 stores [3, 4]. Both receive
 [1, 2, 3, 4]. No values are added: the fragments occupy different positions in
@@ -103,10 +102,12 @@ buffer also belongs in the peak-memory calculation.
 
 ### ReduceScatter: sum and keep the result sharded
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-reducescatter.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-reducescatter.png|Each of the four inputs contains four blocks. Each receiver gets the reduction of the input blocks matching its rank.]]
 
-*ReduceScatter reduces matching elements and leaves one output shard on each
-rank. Source: official [NCCL documentation](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html).*
+*NVIDIA, [NCCL Collective Operations: ReduceScatter](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#reducescatter),
+[source license](/licenses/nvidia-nccl-bbc3d605-LICENSE.txt). To get `out2`, add the third blocks of all
+four inputs. That block stays on rank 2; the other ranks receive
+different parts of the sum.*
 
 Now rank 0 supplies [1, 2, 3, 4] and rank 1 supplies [10, 20, 30, 40].
 The elementwise sum is [11, 22, 33, 44]. ReduceScatter leaves [11, 22] on
@@ -118,11 +119,12 @@ the complete result.
 
 ### AllReduce: the complete reduction on every rank
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allreduce.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allreduce.png|Four arrays of the same shape enter the operation. Each output contains the complete elementwise sum.]]
 
-*AllReduce returns the reduced result to every rank. ReduceScatter followed by
-AllGather has the same result; the library need not use that implementation.
-Source: official [NCCL documentation](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html).*
+*NVIDIA, [NCCL Collective Operations: AllReduce](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#allreduce),
+[source license](/licenses/nvidia-nccl-bbc3d605-LICENSE.txt). There are four identical `out` buffers instead
+of separate `out0` through `out3`: each receiver has the sum at every
+position, rather than one block of it.*
 
 For the same inputs, AllReduce returns [11, 22, 33, 44] to both processes.
 Classic Megatron TP uses it to add partial linear outputs before the residual
@@ -183,10 +185,13 @@ layer in this arrangement.
 
 ### AllToAll: a different fragment for each destination
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-alltoall.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-alltoall.png|Input blocks are ordered by destination; output blocks are ordered by source. No values are added.]]
 
-*Each rank sends a distinct fragment to each destination and receives one from
-each source. Source: official [NCCL documentation](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html).*
+*NVIDIA, [NCCL Collective Operations: AlltoAll](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#alltoall),
+[source license](/licenses/nvidia-nccl-bbc3d605-LICENSE.txt). Each input buffer is arranged by destination:
+rank 1 takes the second block from each of the four senders. Its `out1`
+then contains those blocks in source order. The `ncclAlltoAll` call shown
+uses the same `count` for each pair of ranks.*
 
 Suppose rank 0 prepares 10 for itself and 11 for rank 1, while rank 1 prepares
 20 for rank 0 and 21 for itself. Rank 0 receives [10, 20]; rank 1 receives
@@ -500,19 +505,27 @@ all permitted keys, including remote ones. The implementation must exchange
 K/V blocks or combine attention results from different key partitions.
 Causal masks and global positions must remain correct regardless of transfer order.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/megatron-context-parallel-overview.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/megatron-context-parallel-overview.png|GPU0 and GPU1 split heads for one context shard, GPU2 and GPU3 for the other. K/V pass between GPU0 and GPU2, and between GPU1 and GPU3.]]
 
-*NVIDIA,
-[Megatron Core Context Parallelism](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/features/context_parallel.html),
-Figure 1. GPU0/1 process one sequence shard with TP2; GPU2/3 process the other.
-CP connects GPU0↔GPU2 and GPU1↔GPU3. Yellow AG/RS belong to TP/SP, blue operations
-to CP attention. Slash-separated labels describe forward/backward training;
-inference executes the forward path.*
+*NVIDIA, [Megatron Core: Context Parallelism, Figure 1](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/features/context_parallel.html),
+[pinned original](https://github.com/NVIDIA/Megatron-LM/blob/0b13c98fb4d33de7080cab08aeaaed810b2de50a/docs/images/context_parallel/CP_overview.png),
+[source license](/licenses/nvidia-megatron-0b13c98f-LICENSE.txt). In a label such as `AG/RS`, the first operation
+belongs to forward and the second to backward. The `/AG` block after
+attention does nothing in the forward pass.*
 
-Megatron's documented CP implementation can exchange blocks through ring
-point-to-point transfers. Blue AG here means obtaining K/V from other context
-shards, not gathering all weights. A collective name alone does not make this
-equivalent to FSDP.
+Megatron's example splits an 8192-token sequence into two 4096-token shards.
+Follow GPU0. The first `AG`, before `QKV`, gathers rows of its context shard
+across GPU0 and GPU1. GPU0 computes Q, K, and V for its share of the heads at
+those 4096 positions. Before `Attn`, it needs K/V for the same heads from the
+other context shard. GPU2 computed those, so the second `AG` involves GPU0 and
+GPU2. GPU1 and GPU3 pair up for the other heads. Queries stay local, and the
+causal mask determines which received keys a query can use.
+
+The two gathers move different data: the first collects activation rows
+within a context shard; the second obtains K/V from other shards. Megatron can
+implement the latter with point-to-point ring transfers rather than keeping a
+permanent copy of all K/V on every GPU. This example follows sharded prefill;
+the next example instead uses one query during decode.
 
 <span id="как-объединить-attention-по-двум-частям-kv"></span>
 

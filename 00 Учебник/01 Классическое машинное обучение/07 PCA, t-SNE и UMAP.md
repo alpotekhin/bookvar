@@ -2,7 +2,32 @@
 title: PCA, t-SNE и UMAP — что именно сохраняет проекция
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-25
+last_updated: 2026-11-03
+reference_terms:
+  - label: PCA — базисные изображения
+    label_en: PCA image basis
+    anchor: pca-image-basis
+  - label: PCA — накопленная дисперсия
+    label_en: PCA cumulative explained variance
+    anchor: pca-cumulative-variance
+  - label: PCA — фильтрация шума
+    label_en: PCA noise filtering
+    anchor: pca-noise-filtering
+  - label: Whitening
+    label_en: PCA whitening
+    anchor: pca-whitening
+  - label: t-SNE — perplexity
+    label_en: t-SNE perplexity
+    anchor: tsne-perplexity
+  - label: t-SNE — расстояния и ложные группы
+    label_en: t-SNE map interpretation
+    anchor: tsne-map-interpretation
+  - label: UMAP — n_neighbors и min_dist
+    label_en: UMAP neighborhood and packing parameters
+    anchor: umap-neighbors-min-dist
+  - label: Trustworthiness — ложные соседи
+    label_en: Trustworthiness and false neighbors
+    anchor: trustworthiness
 primary_sources:
   - https://mml-book.com/
   - https://distill.pub/2016/misread-tsne/
@@ -187,6 +212,7 @@ print("sample variance:", pca.explained_variance_[0])
 значение выборочной ковариации с делителем $n-1=3$. Среднее не было
 потеряно и вернулось при `inverse_transform`.
 
+<a id="pca-whitening"></a>
 ### Whitening меняет масштаб компонент
 
 Обычный PCA даёт некоррелированные координаты с дисперсиями
@@ -228,7 +254,181 @@ print(np.round(white_codes, 6))
 Обе компоненты сохранены, поэтому в последнем примере реконструкция
 точная. Whitening не восстанавливает направления, которые ранее были отброшены.
 
-![[00 Учебник/Assets/Figures/curated/advanced-unsupervised-classical/pca-iris.png]]
+<a id="pca-image-basis"></a>
+### Как главные направления выглядят на изображении
+
+Изображение цифры размером $8\times8$ можно записать как вектор из
+64 яркостей. В пиксельном базисе каждый базисный вектор содержит единицу
+ровно в одной позиции. Сохранить восемь таких координат означает
+сохранить восемь пикселей; остальные части изображения будут потеряны.
+
+![[00 Учебник/Assets/Figures/curated/dimensionality-2026-11-03/jake-pixel-basis.png|Пиксельный базис: восемь отдельных пикселей в верхнем ряду и их последовательная сумма в нижнем; восстановлена только верхняя полоса цифры]]
+
+*Jake VanderPlas,
+[What Do the Components Mean?](https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html#What-Do-the-Components-Mean?),
+Python Data Science Handbook, CC BY-NC-ND 3.0 Unported.
+Полный исходный PNG без изменений.*
+
+Слева показана исходная цифра, справа — приближение. В верхнем ряду
+между ними расположены базисные изображения, в нижнем складываются их
+взвешенные вклады. На этом рисунке первые восемь координат относятся
+к верхней строке пикселей, поэтому нижние строки цифры восстановить нечем.
+
+Для PCA каждый столбец $w_r$ матрицы $W$ тоже можно вернуть в форму
+$8\times8$. Но теперь это целое базисное изображение: один коэффициент
+меняет сразу много пикселей. Восстановление принимает вид
+
+$$
+\hat x=\mu+\sum_{r=1}^m z_rw_r.
+$$
+
+![[00 Учебник/Assets/Figures/curated/dimensionality-2026-11-03/jake-pca-basis.png|Базис PCA: среднее изображение, восемь главных направлений и накопленное восстановление той же цифры]]
+
+*Jake VanderPlas, тот же
+[раздел о базисных изображениях](https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html#What-Do-the-Components-Mean?),
+CC BY-NC-ND 3.0 Unported. Исходные подписи, коэффициенты и оба ряда
+сохранены; файл не изменён.*
+
+В обозначениях рисунка $c_1,\ldots,c_8$ — базисные изображения,
+соответствующие нашим $w_1,\ldots,w_8$; числа перед ними — координаты
+$z_r$. Сначала берётся среднее $\mu$, затем к нему прибавляются
+$11{,}22c_1$, $16{,}92c_2$ и следующие вклады. Отрицательный коэффициент
+вычитает соответствующее изменение из среднего.
+После восьми направлений уже виден общий контур цифры, хотя отдельные
+детали отличаются от оригинала.
+
+PCA не выбрала восемь удачных пикселей. Она выбрала восемь линейных
+сочетаний всех 64 пикселей, ориентируясь на всю обучающую выборку.
+Базисные изображения общие для набора, а коэффициенты в их сумме
+различаются от объекта к объекту.
+
+<a id="pca-cumulative-variance"></a>
+### Накопленная дисперсия и число компонент
+
+![[00 Учебник/Assets/Figures/curated/dimensionality-2026-11-03/jake-cumulative-variance.png|Накопленная объяснённая дисперсия PCA на Digits: быстрый рост в начале и приближение к единице при сохранении почти всех компонент]]
+
+*Jake VanderPlas,
+[Choosing the Number of Components](https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html#Choosing-the-Number-of-Components),
+CC BY-NC-ND 3.0 Unported. Неизменённый сохранённый результат ячейки 34
+исходного notebook.*
+
+Кривая показывает $R_m=\sum_{r=1}^m\sigma_r^2/\sum_r\sigma_r^2$.
+Каждая следующая компонента добавляет неотрицательную долю, поэтому
+$R_m$ не убывает. На этом наборе десять компонент сохраняют примерно
+74% суммарной дисперсии, двадцать — около 89%; для уровня 90% нужна
+двадцать первая компонента. Две координаты удобны для рисунка,
+но на них приходится гораздо меньше исходной дисперсии.
+
+В исходном коде по горизонтальной оси не задан отдельный массив:
+рисуется `np.cumsum(pca.explained_variance_ratio_)`.
+Поэтому точка с индексом 0 уже соответствует первой компоненте,
+индекс 9 — десяти компонентам. Эта особенность исходной подписи
+не меняет саму кривую, но учитывается при чтении числа компонент.
+
+<a id="pca-noise-filtering"></a>
+### Когда проекция убирает шум
+
+В примере VanderPlas к каждой яркости добавлен независимый нормальный
+шум со стандартным отклонением 4. Затем PCA обучается на зашумлённых
+изображениях; сохраняется столько направлений, сколько нужно для
+50% дисперсии именно этого зашумлённого набора.
+
+| Зашумлённые изображения | После обратного преобразования |
+| --- | --- |
+| ![[00 Учебник/Assets/Figures/curated/dimensionality-2026-11-03/jake-noisy-digits.png|Сорок изображений Digits с добавленным нормальным шумом, стандартное отклонение 4]] | ![[00 Учебник/Assets/Figures/curated/dimensionality-2026-11-03/jake-filtered-digits.png|Те же сорок изображений после восстановления из двенадцати компонент PCA: шум ослаблен, контуры сглажены]] |
+
+*Jake VanderPlas,
+[PCA as Noise Filtering](https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html#PCA-as-Noise-Filtering),
+CC BY-NC-ND 3.0 Unported. Полные исходные PNG из сохранённых результатов
+ячеек 40 и 44, без изменения пикселей или расположения изображений.*
+
+> Here 50% of the variance amounts to 12 principal components, out of the 64 original features.
+
+*Jake VanderPlas, исходное пояснение к этому примеру.*
+
+Число 12 относится к конкретному набору и уровню шума. Одинаковые 50%
+на другом наборе не обязаны дать ту же размерность. После восстановления
+у цифр менее заметны случайные перепады яркости, но одновременно
+сглаживаются тонкие детали. Ниже отдельно вычисляются доли дисперсии
+и воспроизводится расчёт фильтрации без построения новых рисунков.
+
+```python
+from sklearn.datasets import load_digits
+
+digit_data = load_digits().data
+digit_pca = PCA(svd_solver="full").fit(digit_data)
+cumulative_variance = np.cumsum(digit_pca.explained_variance_ratio_)
+print("retained at 10/20 components:", cumulative_variance[[9, 19]])
+print("components for 90%:", np.searchsorted(cumulative_variance, 0.90) + 1)
+
+digit_noise_rng = np.random.default_rng(42)
+noisy_digit_data = digit_noise_rng.normal(digit_data, 4)
+digit_denoiser = PCA(n_components=0.50, svd_solver="full").fit(noisy_digit_data)
+filtered_digit_data = digit_denoiser.inverse_transform(
+    digit_denoiser.transform(noisy_digit_data)
+)
+print("denoising components:", digit_denoiser.n_components_)
+print("noisy/filtered MSE:",
+      np.mean((noisy_digit_data - digit_data) ** 2),
+      np.mean((filtered_digit_data - digit_data) ** 2))
+```
+
+В этом запуске ошибка по пикселям уменьшилась приблизительно с 16,112
+до 7,269. PCA обучается и проверяется на одном зашумлённом наборе,
+как в исходном иллюстративном примере. Чистые изображения известны,
+потому что шум добавлен искусственно; поэтому можно вычислить ошибку
+относительно них. Полученное число не является оценкой фильтрации
+новых изображений. Для такой оценки базис нужно обучить отдельно.
+
+Условия, при которых сжатие помогает, можно увидеть и без изображений.
+Пусть чистая центрированная матрица $S$ наблюдается с шумом $E$.
+Зафиксируем ортогональный проектор $\Pi=WW^\top$ ранга $m$ независимо
+от нового шума. После проекции ошибка равна
+
+$$
+S-(S+E)\Pi=S(I-\Pi)-E\Pi.
+$$
+
+Две части справа ортогональны: первая лежит в отброшенном
+подпространстве, вторая — в сохранённом. Если элементы шума имеют
+нулевое среднее, одинаковую дисперсию $\tau^2$ и не коррелируют,
+то для $n$ наблюдений в $d$ измерениях
+
+$$
+\begin{aligned}
+\mathbb E\|S-(S+E)\Pi\|_F^2
+&=\|S(I-\Pi)\|_F^2\\
+&\quad+nm\tau^2.
+\end{aligned}
+$$
+
+Без фильтрации ожидаемая ошибка равна $nd\tau^2$. Проекция уменьшает
+число шумовых направлений с $d$ до $m$, но добавляет ошибку
+отброшенного сигнала. Для четырёх точек из численного примера выше
+$d=2$, $m=1$, $\|S(I-\Pi)\|_F^2=2$.
+При $\tau=1$ получаются ошибки 8 без фильтра и 6 после него.
+При $\tau=0{,}1$ — соответственно 0,08 и 2,04: при слабом шуме
+потеря сигнала оказывается дороже.
+
+```python
+fixed_projector = W @ W.T  # Направление из первого четырёхточечного примера.
+signal_bias = np.sum((Xc - Xc @ fixed_projector) ** 2)
+noise_tradeoff = {}
+for noise_std in [0.1, 1.0, 2.0]:
+    raw_error = Xc.size * noise_std ** 2
+    projected_error = signal_bias + len(Xc) * W.shape[1] * noise_std ** 2
+    noise_tradeoff[noise_std] = (raw_error, projected_error)
+    print(noise_std, round(raw_error, 6), round(projected_error, 6))
+```
+
+Формула предполагает заранее фиксированный базис. Если обучать PCA
+на той же новой реализации шума, зависимость $\Pi$ от $E$ нужно
+учитывать отдельно. Также PCA не умеет сама различать сигнал и шум:
+выброс или высокодисперсный шум может занять одно из первых направлений,
+а полезная слабая деталь — попасть в отброшенные. Выбор числа компонент
+проверяют по задаче, для которой строится представление.
+
+![[00 Учебник/Assets/Figures/curated/advanced-unsupervised-classical/pca-iris.png|Попарные диаграммы четырёх исходных признаков Iris до PCA]]
 
 *Попарные диаграммы четырёх исходных признаков Iris, до PCA.
 На осях указаны длина и ширина чашелистика и лепестка в сантиметрах;
@@ -269,6 +469,7 @@ print(np.round(white_codes, 6))
 
 ## t-SNE: вероятности локального соседства
 
+<a id="tsne-perplexity"></a>
 ### Как расстояния становятся вероятностями
 
 Для каждой точки $x_i$ t-SNE задаёт вероятности выбора соседа:
@@ -471,7 +672,7 @@ $KL(\alpha P\|Q)$: такая подстановка усилила бы и ча
 
 | Исходные точки | t-SNE, perplexity = 30 |
 | --- | --- |
-| ![[00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/distill-cluster-sizes-input.png]] | ![[00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/distill-cluster-sizes-tsne30.png]] |
+| ![[00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/distill-cluster-sizes-input.png|Две исходные группы с одинаковой численностью, но разным разбросом: широкая слева и компактная справа]] | ![[00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/distill-cluster-sizes-tsne30.png|После t-SNE две группы занимают сопоставимую площадь, хотя их исходные дисперсии различались]] |
 
 *Martin Wattenberg, Fernanda Viégas, Ian Johnson,
 [How to Use t-SNE Effectively, §2](https://distill.pub/2016/misread-tsne/),
@@ -487,7 +688,7 @@ Distill, 2016, CC BY 2.0. Исходные рисунки без изменен�
 даже без уменьшения числа координат. Из карты нельзя заключить, что
 дисперсии двух исходных групп одинаковы.
 
-![[00 Учебник/Assets/Figures/curated/advanced-unsupervised-classical/tsne-perplexity.png]]
+![[00 Учебник/Assets/Figures/curated/advanced-unsupervised-classical/tsne-perplexity.png|Результаты t-SNE на одних и тех же синтетических наборах при разных значениях perplexity]]
 
 *Одинаковые синтетические множества при разных perplexity. Изменение карты
 вызвано не изменением данных, а масштабом соседства. Изображение получено
@@ -496,6 +697,72 @@ Distill, 2016, CC BY 2.0. Исходные рисунки без изменен�
 BSD-3-Clause; постановка эксперимента следует статье Distill
 [How to Use t-SNE Effectively](https://distill.pub/2016/misread-tsne/),
 CC BY 2.0.*
+
+<a id="tsne-map-interpretation"></a>
+### Почему расстояния между группами зависят от числа точек
+
+В следующем опыте Distill три группы имеют одинаковый разброс, но
+расстояния между их центрами различаются. Для каждой строки справа
+используется perplexity 50; меняется число наблюдений в каждой группе.
+
+| Исходное пространство | t-SNE, perplexity 50 |
+| --- | --- |
+| ![[00 Учебник/Assets/Figures/curated/dimensionality-2026-11-03/distill-global-150-input.png|Три группы по 50 точек: две соседние слева и одна далеко справа]] | ![[00 Учебник/Assets/Figures/curated/dimensionality-2026-11-03/distill-global-150-p50.png|Три группы по 50 точек после t-SNE: ближняя пара внизу, удалённая группа сверху слева]] |
+| ![[00 Учебник/Assets/Figures/curated/dimensionality-2026-11-03/distill-global-600-input.png|Три группы по 200 точек с тем же соотношением межгрупповых расстояний]] | ![[00 Учебник/Assets/Figures/curated/dimensionality-2026-11-03/distill-global-600-p50.png|Три группы по 200 точек после t-SNE: группы размещены почти равносторонним треугольником]] |
+
+*Martin Wattenberg, Fernanda Viégas, Ian Johnson,
+[How to Use t-SNE Effectively, §3](https://distill.pub/2016/misread-tsne/),
+CC BY 2.0. Полные исходные PNG: примеры 04 и 05, вариант 04.
+В верхней строке всего 150 точек, в нижней — 600; 5000 итераций,
+шаг `epsilon=10`. Положение и размеры рисунков внутри файлов не менялись.*
+
+В верхней строке карта сохраняет различие между ближней парой групп
+и третьей, удалённой. В нижней все три межгрупповых промежутка стали
+сопоставимыми. Поэтому удачное значение perplexity нельзя выбирать
+независимо от размера выборки.
+
+Когда в группе около 50 объектов, окрестность с эффективным размером
+50 уже требует учитывать связи за её пределами. Если в той же группе
+200 объектов, такой масштаб может описывать преимущественно внутреннее
+соседство. В результате матрица $P$ связывает разные группы иначе,
+хотя параметр perplexity остался прежним. На реальных данных группы
+обычно имеют неодинаковую численность, и одного глобального параметра
+может не хватить для всех масштабов.
+
+Авторы описывают результат увеличения выборки так:
+
+> Sadly, no. If we add more points to each cluster, the perplexity has to increase to compensate.
+> Here are the t-SNE diagrams for three Gaussian clusters with 200 points each, instead of 50.
+> Now none of the trial perplexity values gives a good result.
+
+*Wattenberg, Viégas и Johnson, §3, исходный английский текст.
+В статье сравниваются perplexity 2, 5, 30, 50 и 100; здесь показан
+одинаковый вариант 50, а полный набор остаётся доступен в оригинале.*
+
+### Ложные группы в случайном облаке
+
+| Первые две исходные координаты | t-SNE, perplexity 2 |
+| --- | --- |
+| ![[00 Учебник/Assets/Figures/curated/dimensionality-2026-11-03/distill-noise-input.png|Проекция 500 точек из одного 100-мерного нормального распределения: одно округлое облако]] | ![[00 Учебник/Assets/Figures/curated/dimensionality-2026-11-03/distill-noise-p2.png|Те же случайные точки после t-SNE с perplexity 2: множество небольших плотных фрагментов]] |
+
+*Martin Wattenberg, Fernanda Viégas, Ian Johnson,
+[How to Use t-SNE Effectively, §4](https://distill.pub/2016/misread-tsne/),
+CC BY 2.0. Исходные PNG примера 06, без изменений.
+Сгенерированы 500 точек из одного стандартного нормального распределения
+в 100 измерениях; справа 5000 итераций, `epsilon=10`.*
+
+В генераторе нет смеси распределений или скрытых классов. Тем не менее
+карта с малой perplexity разбивается на плотные фрагменты.
+Локальные случайные различия расстояний влияют на выбор ближайших
+соседей, а оптимизация укладывает эти очень малые окрестности
+с отталкиванием между ними. Пустые промежутки на плоскости поэтому
+не устанавливают разрывы в исходной плотности.
+
+Это не означает, что любое разделение на карте ложно. Проверять
+нужно исходные объекты и соседства, устойчивость к масштабу
+и начальным координатам. Подбирать perplexity только ради появления
+отчётливых островов означало бы выбирать желаемый вид результата,
+а не проверять гипотезу о данных.
 
 ### Практический протокол t-SNE
 
@@ -522,7 +789,7 @@ CC BY 2.0.*
 получит множество связей, а разреженный может распасться. В официальном
 объяснении UMAP это показано на точках вдоль изогнутой линии.
 
-![[00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/umap-open-cover.png]]
+![[00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/umap-open-cover.png|Окрестности постоянного радиуса перекрываются в плотных участках и оставляют разрыв в разреженной части цепочки]]
 
 *Leland McInnes и участники проекта UMAP,
 [How UMAP Works — Topological Data Analysis and Simplicial Complexes](https://umap-learn.readthedocs.io/en/latest/how_umap_works.html#topological-data-analysis-and-simplicial-complexes),
@@ -534,7 +801,7 @@ BSD-3-Clause. Исходный рисунок без изменений.*
 Выбор ближайших соседей вместо одного абсолютного радиуса даёт больший
 пространственный охват в разреженной области.
 
-![[00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/umap-adaptive-cover.png]]
+![[00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/umap-adaptive-cover.png|Адаптивные радиусы увеличиваются в разреженной области и связывают её с остальной цепочкой]]
 
 *Те же авторы,
 [Adapting to Real World Data](https://umap-learn.readthedocs.io/en/latest/how_umap_works.html#adapting-to-real-world-data),
@@ -573,7 +840,7 @@ $\rho_i$ оставляет для сравнения превышение на�
 $e^{-2}\approx0{,}135$. Один и тот же абсолютный разрыв в плотной и разреженной
 областях получает разный смысл благодаря локальному $\sigma_i$.
 
-Масштаб не выбирают произвольно. В `umap-learn` 0.5.8 при обычном
+Масштаб не выбирают произвольно. В `umap-learn` 0.5.12 при обычном
 обучении список длины $K=\texttt{n\_neighbors}$ включает саму точку
 с расстоянием 0. В калибровочной сумме она пропускается; по остальным
 элементам бинарным поиском подбирают $\sigma_i$ так, чтобы
@@ -635,7 +902,7 @@ $$
 измерений расстояния. Направления могут иметь разные веса потому,
 что используют разные локальные масштабы.
 
-![[00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/umap-fuzzy-graph.png]]
+![[00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/umap-fuzzy-graph.png|Разреженный граф соседства UMAP с неодинаковыми весами рёбер]]
 
 *Leland McInnes и участники проекта UMAP,
 [Adapting to Real World Data — Graph with combined edge weights](https://umap-learn.readthedocs.io/en/latest/how_umap_works.html#adapting-to-real-world-data),
@@ -764,6 +1031,81 @@ $d_i m_-/(2n)$ стоит $1-w_{ij}$. Общий множитель 2 связа
 - `n_components` не обязан равняться двум: UMAP можно использовать как
   преобразование признаков, если вся модель проверяется на отложенных данных.
 
+<a id="umap-neighbors-min-dist"></a>
+### Что показывают `n_neighbors` и `min_dist` на одних данных
+
+В руководстве UMAP используются 800 случайных векторов из
+четырёхмерного куба. Каждому вектору $(R,G,B,\alpha)$ соответствует
+его собственный цвет и прозрачность на рисунке. Цвет здесь кодирует
+исходные координаты, а не заданные классы. Небольшие сгустки
+возникают уже при случайном выборе точек; отдельные острова не следует
+принимать за размеченные категории.
+
+| `n_neighbors=2` | `n_neighbors=200` |
+| --- | --- |
+| ![[00 Учебник/Assets/Figures/curated/dimensionality-2026-11-03/umap-neighbors-2.png|UMAP с двумя соседями: отдельные пары и короткие локальные фрагменты разбросаны по плоскости]] | ![[00 Учебник/Assets/Figures/curated/dimensionality-2026-11-03/umap-neighbors-200.png|UMAP с двумястами соседями: более широкие связные области и плавные переходы между исходными цветами]] |
+
+*Leland McInnes и участники проекта UMAP,
+[Basic UMAP Parameters — n_neighbors](https://umap-learn.readthedocs.io/en/latest/parameters.html#n-neighbors),
+материал на основе работы Philippe Rivière, BSD-3-Clause.
+Неизменённые исходные PNG `parameters_13_1.png` и `parameters_13_7.png`
+из закреплённой версии руководства.*
+
+В руководстве связь параметра с масштабом графа объясняется так:
+
+> This parameter controls how UMAP balances local versus global structure
+> in the data. It does this by constraining the size of the local
+> neighborhood UMAP will look at when attempting to learn the manifold
+> structure of the data. This means that low values of `n_neighbors`
+> will force UMAP to concentrate on very local structure (potentially to
+> the detriment of the big picture), while large values will push UMAP to
+> look at larger neighborhoods of each point when estimating the manifold
+> structure of the data, losing fine detail structure for the sake of
+> getting the broader of the data.
+
+*UMAP Parameters, исходный английский текст раздела `n_neighbors`,
+BSD-3-Clause.*
+
+Слева у каждой точки слишком мало связей, чтобы согласовать положение
+более крупных участков. Справа граф учитывает более широкие окрестности,
+но часть различий между ближайшими оттенками уже не отражается
+непосредственным соседством. Число 200 не является «лучшей» настройкой:
+оно задаёт другой масштаб описания того же набора.
+
+`min_dist` действует на другом этапе. При заданном входном графе
+он меняет форму низкоразмерного сходства через $a,b$, а не количество
+соседей, найденных в исходном пространстве.
+
+| `min_dist=0.0` | `min_dist=0.99` |
+| --- | --- |
+| ![[00 Учебник/Assets/Figures/curated/dimensionality-2026-11-03/umap-min-dist-0.png|UMAP с min_dist 0: плотные цепочки и небольшие сгустки точек]] | ![[00 Учебник/Assets/Figures/curated/dimensionality-2026-11-03/umap-min-dist-099.png|UMAP с min_dist 0,99: точки размещены свободнее, локальные цепочки менее выражены]] |
+
+*Те же авторы,
+[Basic UMAP Parameters — min_dist](https://umap-learn.readthedocs.io/en/latest/parameters.html#min-dist),
+BSD-3-Clause. Полные исходные PNG `parameters_16_1.png` и
+`parameters_16_6.png`, без кадрирования, замены подписей или пересчёта.*
+
+> Here we see that with `min_dist=0.0` UMAP manages to find small
+> connected components, clumps and strings in the data, and emphasises
+> these features in the resulting embedding. As `min_dist` is increased
+> these structures are pushed apart into softer more general features,
+> providing a better overarching view of the data at the loss of the more
+> detailed topological structure.
+
+*UMAP Parameters, исходное пояснение к этим рисункам, BSD-3-Clause.*
+
+Сравнение показывает степень уплотнения, но не универсально лучший вид
+карты. В исходной функции `draw_umap` не фиксируется отдельный
+`random_state` для каждого запуска, поэтому эти сохранённые иллюстрации
+не являются парным экспериментом, изолирующим только один параметр.
+Для своего сравнения следует зафиксировать данные, исходную метрику,
+версии и начальные состояния.
+
+Фраза руководства о минимальном допустимом расстоянии — не буквальное
+ограничение оптимизатора. Как показано выше, `min_dist` участвует
+в подборе гладкой кривой сходства. В ней нет операции, которая
+запрещала бы точкам оказаться ближе заданного порога.
+
 В отличие от классического t-SNE, обученный UMAP поддерживает `transform`
 новых объектов. Повторное обучение с другой выборкой, начальным состоянием
 или параметрами способно повернуть и перестроить карту.
@@ -786,6 +1128,7 @@ $d_i m_-/(2n)$ стоит $1-w_{ij}$. Общий множитель 2 связа
 | t-SNE | Оптимизация KL между распределениями пар. Подходит для исследования локальных соседств данной выборки. Классический алгоритм не обучает преобразование новых объектов; площади и промежутки между группами нельзя читать как исходные расстояния. |
 | UMAP | Разреженный взвешенный граф и его размещение с положительными и отрицательными обновлениями. Поддерживает приближённое размещение новых объектов. Геометрия карты зависит от масштаба соседства и соотношения сил; площадь группы не оценивает исходную плотность. |
 
+<a id="trustworthiness"></a>
 ### Диагностика, обязательная для любой карты
 
 Численно оценить ложных соседей позволяет *trustworthiness*.
@@ -877,6 +1220,30 @@ print("UMAP neighbors:", trustworthiness(train_codes, umap_coordinates, n_neighb
 
 ## Практика и первоисточники
 
+<details>
+<summary>Версии для запуска примеров</summary>
+
+Примеры используют Python 3.13, NumPy 2.5.4, SciPy 1.18.1,
+scikit-learn 1.9.1, UMAP 0.5.12 и Numba 0.68.1.
+Команда проверки всех блоков из этой главы:
+
+```bash
+uv run --python 3.13 \
+  --with numpy==2.5.4 --with scipy==1.18.1 \
+  --with scikit-learn==1.9.1 --with umap-learn==0.5.12 \
+  --with numba==0.68.1 \
+  python publishing/tools/check_dimensionality_examples.py
+```
+
+В UMAP 0.5.8 сочетание `fastmath` и бесконечной верхней границы
+в JIT-калибровке могло возвращать бесконечный масштаб.
+В [официальном исправлении](https://github.com/lmcinnes/umap/commit/69278069a6d4ef16513501b8839f4eb836c7b231)
+убрана небезопасная оптимизация, а граница заменена конечным числом.
+Здесь используется исправленный релиз; Python-реализация не подставляется
+вместо реального JIT-ядра.
+
+</details>
+
 - MML, [Chapter 10: Dimensionality Reduction with PCA](https://mml-book.com/).
 - Jake VanderPlas,
   [In Depth: Principal Component Analysis](https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html),
@@ -891,8 +1258,8 @@ print("UMAP neighbors:", trustworthiness(train_codes, umap_coordinates, n_neighb
   [Visualizing Data using t-SNE, §2–3](https://www.jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf).
 - UMAP, [How UMAP Works](https://umap-learn.readthedocs.io/en/latest/how_umap_works.html),
   построение соседств и объединение весов; исходная реализация
-  [`smooth_knn_dist`](https://github.com/lmcinnes/umap/blob/release-0.5.8/umap/umap_.py)
-  и [`layouts.py`](https://github.com/lmcinnes/umap/blob/release-0.5.8/umap/layouts.py).
+  [`smooth_knn_dist`](https://github.com/lmcinnes/umap/blob/cdb0eeb236f5d6759e0c3dd1fe132aef4db9e7b1/umap/umap_.py)
+  и [`layouts.py`](https://github.com/lmcinnes/umap/blob/cdb0eeb236f5d6759e0c3dd1fe132aef4db9e7b1/umap/layouts.py).
 - Sebastian Damrich, Fred A. Hamprecht,
   [On UMAP's True Loss Function, §3 и §5](https://arxiv.org/abs/2103.14608v2),
   различие полной цели и ожидаемых обновлений.

@@ -2,10 +2,108 @@
 title: Арифметика Transformer и MoE
 type: textbook-chapter
 status: draft
-last_updated: 2026-10-23
-last_verified: 2026-10-23
+last_updated: 2026-11-09
+last_verified: 2026-11-04
 source_language: mixed
+reference_terms:
+  - anchor: arith-shapes
+    label: "Формы тензоров и число параметров"
+    label_en: "Tensor shapes and parameter counts"
+  - anchor: arith-attention
+    label: "Параметры MHA и GQA"
+    label_en: "MHA and GQA parameter counts"
+  - anchor: arith-swiglu
+    label: "Три матрицы SwiGLU"
+    label_en: "The three SwiGLU matrices"
+  - anchor: arith-llama
+    label: "Точный расчёт LLaMA 7B"
+    label_en: "An exact LLaMA 7B calculation"
+  - anchor: arith-linear-gradients
+    label: "Стоимость forward, dX и dW"
+    label_en: "The cost of forward, dX, and dW"
+  - anchor: arith-sixp
+    label: "Вывод и ограничения оценки 6P"
+    label_en: "Deriving the 6P approximation and its limits"
+  - anchor: arith-attention-length
+    label: "Длина контекста и FLOP внимания"
+    label_en: "Context length and attention FLOPs"
+  - anchor: arith-attention-share
+    label: "Доля FLOP внимания: ширина модели и длина контекста"
+    label_en: "Attention's FLOP share: model width and context length"
+  - anchor: arith-states
+    label: "Память параметров, градиентов и Adam"
+    label_en: "Parameter, gradient, and Adam memory"
+  - anchor: arith-activations
+    label: "Активации и пиковая память"
+    label_en: "Activations and peak memory"
+  - anchor: arith-checkpointing
+    label: "Память и FLOP при checkpointing"
+    label_en: "Checkpointing memory and FLOPs"
+  - anchor: arith-mfu-hfu
+    label: "MFU и HFU при пересчёте"
+    label_en: "MFU and HFU with recomputation"
+  - anchor: arith-kv
+    label: "Расчёт KV-кеша MHA и GQA"
+    label_en: "MHA and GQA KV-cache calculation"
+  - anchor: arith-collectives
+    label: "Байты AllGather, ReduceScatter и AllReduce"
+    label_en: "AllGather, ReduceScatter, and AllReduce bytes"
+  - anchor: arith-ddp
+    label: "Данные и состояния в DDP"
+    label_en: "DDP data and model states"
+  - anchor: arith-zero
+    label: "Память ZeRO-1, ZeRO-2 и ZeRO-3"
+    label_en: "ZeRO-1, ZeRO-2, and ZeRO-3 memory"
+  - anchor: arith-fsdp
+    label: "FSDP: время жизни полных весов"
+    label_en: "FSDP and the lifetime of full weights"
+  - anchor: arith-fsdp-unit
+    label: "Гранулярность FSDP и временный полный слой"
+    label_en: "FSDP granularity and temporary full layers"
+  - anchor: arith-tp
+    label: "Разбиение SwiGLU при TP"
+    label_en: "SwiGLU tensor partitioning"
+  - anchor: arith-fsdp-tp
+    label: "Формы тензоров FSDP × TP"
+    label_en: "FSDP × TP tensor shapes"
+  - anchor: arith-strong-scaling
+    label: "Границы сильного масштабирования DP, FSDP и TP"
+    label_en: "DP, FSDP, and TP strong-scaling limits"
+  - anchor: arith-shared-network
+    label: "Две оси параллелизма при общей полосе"
+    label_en: "Two parallelism axes sharing bandwidth"
+  - anchor: arith-moe
+    label: "Хранимые и активные параметры MoE"
+    label_en: "Stored and active MoE parameters"
+  - anchor: arith-tp-ep-work
+    label: "TP и EP: одинаковая работа, разные формы"
+    label_en: "TP and EP: equal work, different shapes"
+  - anchor: arith-tp-ep-traffic
+    label: "Расчёт трафика TP и EP"
+    label_en: "Calculating TP and EP traffic"
+  - anchor: arith-qwen3
+    label: "Параметры блока Qwen3-235B-A22B"
+    label_en: "Qwen3-235B-A22B block parameters"
+  - anchor: arith-deepseek
+    label: "Параметры блока DeepSeek-V3"
+    label_en: "DeepSeek-V3 block parameters"
+  - anchor: arith-pipeline
+    label: "Трафик между стадиями PP"
+    label_en: "Pipeline-stage traffic"
+  - anchor: arith-microbatches
+    label: "GPipe, 1F1B и доля простоя"
+    label_en: "GPipe, 1F1B, and the bubble fraction"
+  - anchor: arith-zero-bubble
+    label: "Zero Bubble: зависимости dX и dW"
+    label_en: "Zero Bubble: dX and dW dependencies"
+  - anchor: arith-dualpipe
+    label: "DualPipe и DualPipeV"
+    label_en: "DualPipe and DualPipeV"
+  - anchor: arith-budget
+    label: "Память, обмены и критический путь"
+    label_en: "Memory, communication, and the critical path"
 source_unit_id:
+  - lecture-01-figure-step-37-rendering-1
   - lecture-02-section-251-model-flops-utilization-mfu
   - lecture-08-zero-memory-accounting
   - assignment-02-task-data-parallel-calcs
@@ -28,6 +126,8 @@ source_unit_id:
 байт. Число операций обозначается FLOP, а скорость их выполнения — FLOP/s.
 Умножение с накоплением считаем за две операции.
 
+<a id="arith-shapes"></a>
+
 ## 1. От схемы блока к числу параметров
 
 На вход блока поступает по одному вектору на каждый токен. Если в микропакете
@@ -49,7 +149,7 @@ $B$ последовательностей длины $S$, их можно пр�
 $N_{\text{global}}$ и число токенов на одном устройстве. Умножать или делить
 нагрузку на $p$ без этого уточнения нельзя.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/jax-transformer.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/jax-transformer.png|Блок Transformer: обучаемые матрицы и матричные произведения]]
 
 *Рисунок 1. Матрицы одного блока Transformer. JAX Scaling Book —
 [оригинал](https://github.com/jax-ml/scaling-book/blob/9e2bbee091bf0919a28211a2c6bc5e5d42851dbd/assets/img/transformer-diagram.png), MIT.*
@@ -59,6 +159,8 @@ $N_{\text{global}}$ и число токенов на одном устройс�
 $F$ — нашему $I$, $H$ — нашему $d$, $N$ и $K$ — числу голов $n_h$ и $n_{kv}$.
 На рисунке используется GELU в gated FFN; в расчёте SwiGLU ниже — SiLU.
 Число и размеры трёх матриц FFN от этой замены не меняются.
+
+<a id="arith-attention"></a>
 
 ### Проекции внимания
 
@@ -87,6 +189,8 @@ $H=4096$, а $n_hd=64\cdot128=8192$. Подстановка $H$ вместо ш�
 дала бы неверный результат. Поэтому исходная формула через размеры матриц
 надёжнее запомненного коэффициента перед $H^2$.
 
+<a id="arith-swiglu"></a>
+
 ### Три матрицы SwiGLU
 
 В SwiGLU вход обрабатывают две независимые проекции:
@@ -112,6 +216,8 @@ $$
 нужно вернуть в сумму. Подробное объяснение самого механизма есть в главе
 [[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating|Dense FFN]].
 
+<a id="arith-llama"></a>
+
 ### Полный расчёт исходной LLaMA 7B
 
 Возьмём архитектуру LLaMA 2023 года: $H=4096$, $I=11008$, $L=32$,
@@ -135,6 +241,8 @@ $V=32000$, $n_h=n_{kv}=32$, $d=128$. Входные эмбеддинги и вы
 посчитать только две матрицы SwiGLU, результат уже не сойдётся с моделью.
 
 ## 2. Сколько операций выполняет блок
+
+<a id="arith-linear-gradients"></a>
 
 ### Прямой и обратный проход линейного слоя
 
@@ -217,6 +325,8 @@ print(loss(X, W), dW[0, 1])  # 13.0 5.0
 Вывод через два матричных произведения и сверка с autograd есть в
 [CS336, Lecture 2, `gradients_flops`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_02.py#L502-L556).
 
+<a id="arith-sixp"></a>
+
 ### Откуда берётся оценка 6P
 
 Если сложить только линейные матрицы блоков и выходную проекцию в словарь,
@@ -242,6 +352,8 @@ $[H,V]$. Выходная проекция, напротив, действите
 подставлять все хранимые параметры: на токене работают только выбранные
 эксперты. Этот вывод и подсчёт матриц подробно разобраны в
 [лекции 2 CS336](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_02.py#L502-L556).
+
+<a id="arith-attention-length"></a>
 
 ### Внимание добавляет зависимость от квадрата длины
 
@@ -286,6 +398,71 @@ $$
 Это арифметические нижние оценки, не результаты измерения: здесь ещё нет
 обращений к памяти, поэлементных операций и неполной загрузки GPU.
 
+<a id="arith-attention-share"></a>
+
+### Как ширина модели меняет долю внимания
+
+У OPT-350M и OPT-1.3B по 24 блока, но ширина состояния $H$ у второй
+модели вдвое больше. Сравним один блок на одной последовательности
+из 2048 токенов ($B=1$).
+Проекции Q/K/V/O и две матрицы FFN растут по обеим осям: число
+операций увеличивается вчетверо. У произведений $QK^\top$ и $AV$
+($A$ — веса внимания после softmax) число пар позиций прежнее.
+Суммарная ширина голов удвоилась, поэтому операций стало вдвое больше.
+
+Для обычного MHA и FFN с двумя матрицами, где $I=4H$, линейные
+проекции стоят $8BSH^2+4BSHI=24BSH^2$. Если ядро пропускает все пары,
+запрещённые причинной маской, доля двух произведений между токенами
+в сумме этих матричных операций равна
+
+$$
+f_{\text{mix}}=
+\frac{2BS(S+1)H}{24BSH^2+2BS(S+1)H}
+=\frac{S+1}{12H+S+1}.
+$$
+
+| Модель и длина входа | Проекции и FFN, GFLOP | $QK^\top$ и $AV$, GFLOP | Доля $f_{\text{mix}}$ |
+| --- | ---: | ---: | ---: |
+| OPT-350M, 2048 | 51,54 | 8,59 | 14,29% |
+| OPT-1.3B, 2048 | 206,16 | 17,19 | 7,70% |
+| OPT-350M, 1024 | 25,77 | 2,15 | 7,70% |
+
+В первых двух строках доля уменьшается, хотя абсолютное число FLOP
+внимания растёт. Первая и третья строки показывают обратный эффект:
+если оставить модель прежней и удлинить вход, доля растёт. При одинаковых
+блоках их число сокращается из отношения. Выходная проекция в словарь,
+softmax и поэлементные операции сюда не входят.
+Размеры взяты из [статьи OPT, таблица 1 и §2.2](https://arxiv.org/html/2205.01068v4#S2.T1)
+и выпущенных конфигураций [350M](https://huggingface.co/facebook/opt-350m/blob/08ab08cc4b72ff5593870b5d527cf4230323703c/config.json)
+и [1.3B](https://huggingface.co/facebook/opt-1.3b/blob/3f5c25d0bc631cb57ac65913f76e22c2dfb61d62/config.json).
+На шаге 37 [лекции 1 CS336](https://cs336.stanford.edu/lectures/?trace=lecture_01)
+сравнивают доли операций на шаге обучения нескольких OPT.
+Здесь расчёт относится к прямому проходу одного блока, поэтому числа
+не обязаны совпадать с таблицей из лекции.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-attention-share-2026-11-09/prefilling_seq_length_impact.svg|Слева расчётная доля FLOP внимания на prefill для Qwen 7B–72B: 40% на 16K, 68% на 64K, 80% на 128K. Справа расчётный выигрыш от разреживания внимания при тех же длинах.]]
+
+*Piotr Nawrot et al., [The Sparse Frontier, Figure 12](https://arxiv.org/html/2504.17768v2#A2.F12),
+[исходный SVG](https://arxiv.org/html/2504.17768v2/prefilling_seq_length_impact.svg), без изменений,
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+
+На левом графике доля внимания растёт с 40% на 16K токенов до 80% на
+128K. Столбцы усреднены по Qwen 2.5 от 7B до 72B, вертикальные отрезки
+показывают разброс между размерами. Авторы считают полный prefill:
+в знаменателе есть в том числе выход в словарь, а в статье операции
+проекций входят в член внимания. Поэтому эти проценты нельзя подставлять
+в формулу для одного блока OPT. Справа по той же модели затрат оценён
+выигрыш при разреживании: от примерно $1{,}5\times$ на 16K до $2{,}8\times$
+на 128K. Ось Speedup здесь выражает отношение оценок FLOP, а не замер
+времени на GPU.
+
+Если оптимизация уменьшает в пять раз работу, занимавшую 40 из
+100 условных FLOP, остаётся $60+40/5=68$; если она занимала 80,
+остаётся $20+80/5=36$. В разреженном внимании можно пропустить часть
+пар позиций, но проекции по-прежнему нужны. Стоимость выбора пар,
+пропускную способность памяти и загрузку устройства нужно проверять
+отдельно. См. [[05 Источники/Papers/The Sparse Frontier.md|методику расчёта Nawrot et al.]].
+
 ## 3. Почему памяти нужно больше, чем занимают веса
 
 Память модели удобно разделить по времени жизни. Параметры и состояния
@@ -297,6 +474,8 @@ $$
 максимумы из разных моментов времени столь же неправильно, как считать,
 что все временные тензоры обязательно освобождаются до начала следующего
 вычисления.
+
+<a id="arith-states"></a>
 
 ### Параметры, градиенты и Adam
 
@@ -329,6 +508,8 @@ FP32-градиенты и два FP32-момента, а пониженная �
 Для последнего сравнения нужны ещё размер пакета, активации и рабочие
 буферы.
 
+<a id="arith-activations"></a>
+
 ### Активации: что понадобится для производной
 
 В формуле $\partial\mathcal L/\partial W=X^\top G$ участвует исходный
@@ -358,7 +539,7 @@ FlashAttention не сохраняет полную матрицу $S\times S$ �
 произведения. Уменьшение памяти с квадратичного до линейного порядка нельзя
 выдавать за такое же уменьшение числа операций.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-training-memory.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-training-memory.svg|Профиль памяти четырёх шагов обучения Llama 1B с активациями, градиентами и Adam]]
 
 *Рисунок 2. Как меняется память в течение четырёх шагов обучения Llama 1B.
 Hugging Face, Ultra-Scale Playbook —
@@ -371,6 +552,8 @@ Hugging Face, Ultra-Scale Playbook —
 первого шага отличается от последующих. Это профиль конкретного запуска
 из Playbook, а не оценка для LLaMA 7B из нашего примера; численные значения
 с графика нельзя переносить между моделями и настройками.
+
+<a id="arith-checkpointing"></a>
 
 ### Что сохранять, а что пересчитывать
 
@@ -394,7 +577,7 @@ $8NP_{\text{block}}$. Это только часть с обучаемыми м�
 произведения, но не хранить выход нескольких поэлементных преобразований.
 Выбор делают по реальному времени операций и занимаемой ими памяти.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/nemo-checkpointing-detail.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/nemo-checkpointing-detail.png|Первые два блока при полном и избирательном пересчёте активаций]]
 
 *Рисунок 3. Полный и избирательный пересчёт, первые два блока. NVIDIA NeMo —
 [оригинал](https://github.com/NVIDIA/NeMo/releases/download/v2.0.0rc0/asset-post-activation-recomputation-exampe-2.jpg), Apache-2.0.*
@@ -415,6 +598,8 @@ $8NP_{\text{block}}$. Это только часть с обучаемыми м�
 Это экономия за счёт изменения порядка вычислений, а не изменения функции
 потерь. Совместимость с нужной моделью и точность градиентов проверяются
 для выбранной реализации.
+
+<a id="arith-mfu-hfu"></a>
 
 ### MFU и HFU при пересчёте активаций
 
@@ -468,6 +653,8 @@ $N_{\rm global}$ токенов, то $F_{\rm model}=fN_{\rm global}$.
 из-за checkpointing включает повторную работу в MFU. Пик для разреженных
 FP8-инструкций также не подходит для плотных BF16-произведений.
 
+<a id="arith-kv"></a>
+
 ### На инференсе появляется другой долгоживущий объект
 
 При генерации не нужны градиенты и состояния Adam. Зато ключи и значения
@@ -489,6 +676,8 @@ $$
 накопленный KV-кеш. Поэтому одинаковая модель может быть ограничена
 вычислениями на длинном входе и пропускной способностью памяти при небольшом
 пакете генерации. Подробный разбор продолжен в разделе об инференсе.
+
+<a id="arith-collectives"></a>
 
 ## 4. Что передаётся между GPU
 
@@ -523,6 +712,8 @@ AllGather собирает его целиком на каждом устрой�
 
 ## 5. Параллелизм по данным и разделение состояний
 
+<a id="arith-ddp"></a>
+
 ### DDP: разные данные, одинаковая модель
 
 В Distributed Data Parallel каждая GPU хранит свою копию модели и
@@ -535,6 +726,8 @@ AllGather собирает его целиком на каждом устрой�
 Для корректного сравнения нужно также следить за нормировкой функции потерь.
 Среднее по устройствам совпадает со средним по токенам лишь при одинаковом
 числе учитываемых токенов или при соответствующем взвешивании.
+
+<a id="arith-zero"></a>
 
 ### ZeRO: хранить по одной части вместо одинаковых копий
 
@@ -555,6 +748,8 @@ AllGather собирает его целиком на каждом устрой�
 расположение состояний и порядок обмена, а не устраняют необходимость
 согласованного шага оптимизатора.
 
+<a id="arith-fsdp"></a>
+
 ### FSDP: полный слой нужен временно
 
 Fully Sharded Data Parallel реализует разделение состояний с временным
@@ -568,7 +763,7 @@ Fully Sharded Data Parallel реализует разделение состоя
 каждой GPU сначала объединяются в полную матрицу, затем снова остаётся
 только собственный отрезок.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-fsdp-forward.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-fsdp-forward.svg|FSDP forward: AllGather весов, вычисление и освобождение полной копии]]
 
 *Рисунок 4. Прямой проход с разделёнными параметрами.
 Hugging Face, Ultra-Scale Playbook —
@@ -579,7 +774,7 @@ Hugging Face, Ultra-Scale Playbook —
 ReduceScatter суммирует градиенты и оставляет на каждой GPU только её часть.
 Оптимизатор обновляет эту часть параметров.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-fsdp-backward.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-fsdp-backward.svg|FSDP backward: повторный AllGather весов и ReduceScatter градиентов]]
 
 *Рисунок 5. Обратный проход: сборка весов и разделение суммы градиентов.
 Hugging Face, Ultra-Scale Playbook —
@@ -624,6 +819,8 @@ ReduceScatter BF16-градиентов дают 5,312 мс суммарного
 загрузка уменьшает ожидание сети и увеличивает пик памяти; более поздняя
 делает обратное. Измерять нужно оба результата.
 
+<a id="arith-fsdp-unit"></a>
+
 ### Почему деление на число GPU иногда не помогает
 
 У Llama 2 70B $H=8192$, $I=28672$, $n_h=64$, $n_{kv}=8$, $d=128$.
@@ -640,6 +837,8 @@ GPU, временный собранный блок всё равно остаё
 Таким образом, FSDP устраняет многократное постоянное хранение модели,
 но не делит само матричное произведение слоя между GPU. Для этого нужен
 другой способ распределения.
+
+<a id="arith-tp"></a>
 
 ## 6. Tensor parallelism: разделить матричное произведение
 
@@ -667,7 +866,7 @@ $$
 Сборка после каждой из трёх проекций FFN не нужна: правильное согласование
 разбиений позволяет обойтись без промежуточного обмена.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/edls-tp.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/edls-tp.png|TP: на каждой GPU хранятся части всех экспертов]]
 
 *Рисунок 6. Тензорный параллелизм: части каждого эксперта на каждой GPU.
 Михаил Хрущёв, Efficient DL Systems,
@@ -678,6 +877,8 @@ MIT.*
 а не последовательные слои. AllGather доставляет входные токены.
 Схема показывает начало прямого прохода; последующее суммирование
 частичных выходов разобрано выше.
+
+<a id="arith-fsdp-tp"></a>
 
 ### FSDP и TP можно совместить, но нельзя смешивать их делители
 
@@ -694,6 +895,8 @@ $p_{\text{F}}$; участники TP совместно работают с т�
 Именно поэтому формула «все размеры разделить на общее число GPU» неверна.
 Подробная задача на такую сетку есть в
 [CS336 Assignment 2, с. 45–46](https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf#page=45).
+
+<a id="arith-strong-scaling"></a>
 
 ### Сколько устройств можно загрузить при неизменном пакете
 
@@ -774,6 +977,8 @@ GPU; собирать градиенты частей весов для этог
 форму $[N_{\rm global},H]$. Соответствующая граница — $p-1\le6IW/(bR)$.
 Другие варианты TP/SP имеют другой состав обменов и требуют своего счёта.
 
+<a id="arith-shared-network"></a>
+
 ### Две оси: отдельные соединения или общая сеть
 
 Для сетки FSDP × TP введём
@@ -834,6 +1039,8 @@ $a_{\rm F}a_{\rm T}$. Вывод следует постановке
 [CS336 Assignment 2, §8.2–8.5](https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf#page=41).
 Это модель одного FFN, не оценка масштабируемости целой LLM.
 
+<a id="arith-moe"></a>
+
 ## 7. MoE: хранить экспертов или передавать к ним токены
 
 У разреженного MoE-блока число хранимых параметров и число используемых
@@ -859,7 +1066,7 @@ $$
 Параллелизм по экспертам, или EP, таким образом меняет объект передачи:
 вместо сборки весов экспертов передаются входы и выходы их вычислений.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/edls-ep.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/edls-ep.png|EP: на каждой GPU хранятся целые эксперты, токены доставляются Dispatch]]
 
 *Рисунок 7. Экспертный параллелизм: целые эксперты на разных GPU.
 Михаил Хрущёв, Efficient DL Systems,
@@ -870,6 +1077,8 @@ MIT.*
 эксперт, а операция Dispatch доставляет только назначенные ему токены.
 Обратная доставка результатов, combine, на этой странице не показана;
 она необходима дополнительно.
+
+<a id="arith-tp-ep-work"></a>
 
 ### Одинаковые FLOP не означают одинаковое выполнение
 
@@ -903,6 +1112,8 @@ TP делит матрицы, EP — набор экспертов. При ид�
 **одной** проекции. Наш пример использует 8192 токена **во всей группе**
 и считает **три** проекции. Эти результаты нельзя непосредственно
 сравнивать, не приведя их к одинаковому объёму работы.
+
+<a id="arith-tp-ep-traffic"></a>
 
 ### Посчитаем трафик обеих схем
 
@@ -964,6 +1175,8 @@ EP **не гарантирует меньше сетевых байт**.
 разобраны в главе
 [[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|Mixture of Experts]].
 
+<a id="arith-qwen3"></a>
+
 ### Qwen3-235B-A22B: размер одного блока
 
 Для исходного Qwen3-235B-A22B возьмём
@@ -991,6 +1204,8 @@ $H=4096$, $I_e=1536$, $E=128$, $k=8$, $n_h=64$, $n_{kv}=4$, $d=128$.
 при 200 GB/s уже требует порядка 25 мс; для кольцевого AllGather
 уточнение даёт множитель $(p-1)/p$. EP позволяет оставить экспертов
 на месте, но его выигрыш зависит от стоимости доставки токенов.
+
+<a id="arith-deepseek"></a>
 
 ### DeepSeek-V3: 21 GiB — это ещё не полный блок
 
@@ -1021,6 +1236,8 @@ MLA, маршрутизатор, нормализации и вектор поп
 Кроме того, первые три блока DeepSeek-V3 — плотные, остальные 58 — MoE.
 Деление общего числа параметров на число блоков скрывает эти различия.
 
+<a id="arith-pipeline"></a>
+
 ## 8. Конвейер: распределить последовательные слои
 
 Pipeline parallelism, или PP, размещает последовательные участки модели
@@ -1034,6 +1251,8 @@ Pipeline parallelism, или PP, размещает последовательн
 Реальное время определяется не только объёмом: следующая стадия не может
 начать работу до получения входа.
 
+<a id="arith-microbatches"></a>
+
 ### Зачем разбивать пакет на микропакеты
 
 Если пропустить через весь конвейер один большой пакет, почти все GPU
@@ -1046,7 +1265,7 @@ Pipeline parallelism, или PP, размещает последовательн
 завершения всего пакета. Это простое расписание требует хранить много
 активаций: к концу прямого прохода они накоплены для всех $m$ микропакетов.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-pipeline-gpipe.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-pipeline-gpipe.svg|GPipe: прямые проходы всех микропакетов перед обратными]]
 
 *Рисунок 8. Фрагмент расписания GPipe: сначала прямые, затем обратные проходы.
 Hugging Face, Ultra-Scale Playbook —
@@ -1064,7 +1283,7 @@ Hugging Face, Ultra-Scale Playbook —
 микропакета раньше. Одновременно ожидающих обратного прохода микропакетов
 на стадии становится порядка глубины конвейера, а не общего $m$.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-pipeline-1f1b.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-pipeline-1f1b.svg|1F1B: чередование прямых и обратных проходов после заполнения]]
 
 *Рисунок 9. Фрагмент расписания 1F1B в том же масштабе и обозначениях.
 Hugging Face, Ultra-Scale Playbook —
@@ -1100,6 +1319,8 @@ $$
 начало вычислений и могут увеличить простой. Их время нужно измерять
 для конкретной сети и размера передаваемых тензоров.
 
+<a id="arith-zero-bubble"></a>
+
 ### Zero Bubble: разделить два вида градиентов
 
 Вернёмся к двум матричным произведениям обратного прохода. Градиент входа
@@ -1120,6 +1341,8 @@ $dX$ нужен предыдущей стадии,
 обновлением могут сами создавать паузы. Поэтому «нулевые пузыри»
 достигаются при условиях конкретного расписания и достаточной памяти,
 а не автоматически при любом количестве устройств.
+
+<a id="arith-dualpipe"></a>
 
 ### DualPipe и DualPipeV
 
@@ -1147,6 +1370,8 @@ DualPipeV — другой вариант, с V-образным размеще�
 GPU и размещение виртуальных стадий: две части модели на одном устройстве
 нельзя сравнивать с одной, не пересчитав память.
 Источник — [репозиторий DualPipe](https://github.com/deepseek-ai/DualPipe/tree/030ce4325f4ebeb437da4ebc6d00a70469dd58ae).
+
+<a id="arith-budget"></a>
 
 ## 9. Как составить расчёт перед запуском
 

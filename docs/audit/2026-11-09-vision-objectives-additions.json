@@ -1,0 +1,177 @@
+{
+  "date": "2026-11-09",
+  "scope": "Explain multiple positives and pairwise sigmoid gradients in the ViT and CLIP chapter; add five index links in both reader editions; replace two embedded course copies with complete original licensed figures. Local only.",
+  "files": [
+    {
+      "source": "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-20\nprerequisites:",
+          "new": "last_updated: 2026-11-09\nreference_terms:\n  - label: ViT — участки изображения и линейная проекция\n    label_en: ViT — image patches and linear projection\n    anchor: vlm-patch-projection\n  - label: CLIP — симметричная контрастивная потеря\n    label_en: CLIP — symmetric contrastive loss\n    anchor: vlm-clip-objective\n  - label: Контрастивное обучение — несколько правильных подписей\n    label_en: Contrastive learning — multiple valid captions\n    anchor: vlm-multi-positive\n  - label: SigLIP — вычисление потерь блоками\n    label_en: SigLIP — blockwise loss computation\n    anchor: vlm-siglip-blocks\n  - label: Winoground — проверка сопоставления в обе стороны\n    label_en: Winoground — checking both matching directions\n    anchor: vlm-winoground\nprerequisites:"
+        },
+        {
+          "old": "  - https://cs231n.stanford.edu/slides/2025/lecture_16.pdf",
+          "new": "  - https://cs231n.stanford.edu/slides/2025/lecture_16.pdf\n  - https://arxiv.org/abs/1912.06430\n  - https://arxiv.org/html/2004.11362v5#S3.SS2.SSS2"
+        },
+        {
+          "old": "## 1. Изображение как тензор",
+          "new": "<a id=\"vlm-patch-projection\"></a>\n\n## 1. Изображение как тензор"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/vlm-2026/clip-figure1-training-and-zero-shot.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/vision-objectives-2026-11-09/clip-figure1-training-and-zero-shot.png|Слева матрица сходств для обучения CLIP. Справа текстовые векторы классов сравниваются с одним новым изображением.]]"
+        },
+        {
+          "old": "[Learning Transferable Visual Models From Natural Language Supervision](https://proceedings.mlr.press/v139/radford21a.html),\nрисунок 1 в исходной копии Stanford CS336.\nСлева — все соответствия изображений и текстов внутри пакета;\nсправа — получение нового классификатора из описаний категорий.*",
+          "new": "[CLIP, PMLR 139](https://proceedings.mlr.press/v139/radford21a.html),\n[рис. 1, с. 2](https://proceedings.mlr.press/v139/radford21a/radford21a.pdf#page=2),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nСлева все пары изображений и текстов из обучающего пакета.\nСправа текстовый кодировщик строит векторы классов; для нового\nизображения нужен уже не квадрат всех пар, а одна строка сравнений.*"
+        },
+        {
+          "old": "### Пакет пар и симметричная функция потерь",
+          "new": "<a id=\"vlm-clip-objective\"></a>\n\n### Пакет пар и симметричная функция потерь"
+        },
+        {
+          "old": "как полезные трудные сравнения, так и неоднозначные пары.\n\n### Почему задача выбора пары отличается от генерации подписи",
+          "new": "как полезные трудные сравнения, так и неоднозначные пары.\n\n<a id=\"vlm-multi-positive\"></a>\n\n### Если к изображению подходят две подписи\n\nУ фотографии собаки на снегу есть две подходящие подписи:\n«собака на снегу» и «пёс бежит по заснеженной тропе». Третья\nподпись, «человек на велосипеде», ей не подходит. Пусть для\nэтой строки softmax даёт $(0.8,0.1,0.1)$. Если разметка оставляет\nположительной только первую подпись, градиент потери по логиту\nвторой равен $0.1-0=0.1$. Градиентный шаг по одному этому логиту\nуменьшил бы его, хотя подпись подходит.\n\nОбозначим две положительные позиции через $P=\\{1,2\\}$,\nа вероятность позиции $j$ по softmax всей строки через $p_j$.\nДальше возможны две цели:\n\n$$\n\\begin{aligned}\n\\ell_{\\mathrm{any}}&=-\\log\\!\\left(\\sum_{j\\in P}p_j\\right),\\\\\n\\ell_{\\mathrm{each}}&=-\\frac{1}{|P|}\\sum_{j\\in P}\\log p_j.\n\\end{aligned}\n$$\n\nПервая увеличивает суммарную вероятность положительных подписей.\nПри тех же логитах она даёт $-\\log(0.9)\\approx0.1054$.\nВторая усредняет потери по каждой из правильных подписей:\n$-\\tfrac12(\\log 0.8+\\log 0.1)\\approx1.2629$.\nЗдесь у обеих подписей целевой вес $1/2$, поэтому большая\nвероятность первой не компенсирует слишком низкую вероятность второй.\n\n| Цель | Потеря | Градиент по второму логиту |\n| --- | ---: | ---: |\n| Только первая подпись | 0.2231 | $+0.1000$ |\n| Любая из двух | 0.1054 | $-0.0111$ |\n| Обе по отдельности | 1.2629 | $-0.4000$ |\n\nДля первой многоположительной цели второй градиент равен\n$p_2-p_2/(p_1+p_2)=0.1-0.1/0.9$: собственный вес второй\nподписи внутри множества положительных мал. Для второй он равен\n$p_2-1/2$. Знаки описывают вклад одной строки; реальные параметры\nкодировщиков общие, и их шаг зависит также от других строк и столбцов.\nЧисла потерь сравнивать как качество модели нельзя: цели различаются.\n\nСумму под логарифмом используют, например, в\n[MIL-NCE, формула (1) и §3.2](https://openaccess.thecvf.com/content_CVPR_2020/papers/Miech_End-to-End_Learning_of_Visual_Representations_From_Uncurated_Instructional_Videos_CVPR_2020_paper.pdf):\nтам несколько соседних фрагментов речи служат кандидатами для одного\nвидеоклипа, и не каждый из них описывает кадр. Усреднение снаружи\nсоответствует одной строке цели из\n[SupCon, §3.2.2](https://arxiv.org/html/2004.11362v5#S3.SS2.SSS2),\nгде принадлежность к одному классу известна. Ни одна из этих формул\nне подставляется в CLIP автоматически: нужно сначала установить,\nкакие пары считать положительными. Для симметричной потери наборы\nположительных пар учитывают и по столбцам.\n\n### Почему задача выбора пары отличается от генерации подписи"
+        },
+        {
+          "old": "### Блочное и распределённое вычисление",
+          "new": "<a id=\"vlm-siglip-blocks\"></a>\n\n### Блочное и распределённое вычисление"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/siglip-parallelism.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/vision-objectives-2026-11-09/siglip-parallelism.png|Четыре панели SigLIP: локальные представления, первые блоки 4 на 4, обмен текстами, последний обмен и сумма по устройствам.]]"
+        },
+        {
+          "old": "*Xiaohua Zhai et al., [Sigmoid Loss for Language Image Pre-Training](https://arxiv.org/abs/2303.15343v4),\nрисунок 1 в исходной копии Stanford CS336.\nТри устройства держат по четыре изображения и текста.\nСначала вычисляются локальные пары; затем текстовые\nпредставления передаются между устройствами. После полного\nобхода обработаны все сочетания изображений и текстов,\nа суммы потерь объединены.*",
+          "new": "*Xiaohua Zhai et al., [SigLIP v4](https://arxiv.org/abs/2303.15343v4),\n[рис. 1, с. 3](https://arxiv.org/pdf/2303.15343v4#page=3),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nЧетыре панели и их оригинальные пояснения. Устройство 1 оставляет\nу себя изображения $I_{1:4}$, но получает тексты сначала из одного\nсоседнего блока, затем из другого. После трёх вычислений его\nчетыре изображения сравнены со всеми 12 текстами.*"
+        },
+        {
+          "old": "SigLIP также не устраняет ложные отрицательные пары:\nодинаковые или взаимозаменяемые подписи всё ещё могут\nполучить противоположные метки. Смена функции потерь\nне заменяет подготовку корпуса.",
+          "new": "SigLIP также не устраняет ложные отрицательные пары:\nодинаковые или взаимозаменяемые подписи всё ещё могут\nполучить противоположные метки. Для пары с логитом $z=0$\nградиент отдельного бинарного слагаемого равен $+0.5$, если\nпара помечена отрицательной, и $-0.5$, если положительной\n(до деления на $B$). Сигмоида убирает общий знаменатель,\nно исправление такой пары всё равно требует другой метки."
+        },
+        {
+          "old": "## 7. Диагностические проверки",
+          "new": "<a id=\"vlm-winoground\"></a>\n\n## 7. Диагностические проверки"
+        },
+        {
+          "old": "Для первой многоположительной цели второй градиент равен",
+          "new": "Для цели «любая из двух» градиент по второму логиту равен"
+        },
+        {
+          "old": "| Цель | Потеря | Градиент по второму логиту |",
+          "new": "| Цель | Потеря | Градиент |"
+        },
+        {
+          "old": "Изображению может соответствовать несколько корректных текстов.\nОдна подпись называет объект, другая — его действие, третья —\nместо съёмки. Для генеративной цели требуется предсказывать\nконкретную последовательность слов. Контрастивная цель требует\nотличить наблюдавшуюся подпись от остальных кандидатов пакета.\nЭто разные обучающие сигналы.",
+          "new": "При обучении генератора на подписи «собака на снегу» ошибка считается\nпо токенам этой фразы: после «собака на» модель должна предсказать\nследующий токен подписи. Контрастивная модель получает обе\nпоследовательности целиком и оценивает их соответствие. Ей не нужно\nвычислять распределение по словарю для каждого слова подписи."
+        }
+      ],
+      "before_sha256": "26464f4cb33c2b281c72e63e1870157e0a41a23807c4eca7c2b79f542000608d",
+      "after_sha256": "8d013d93864cb436131ce75d9a24fee009c80b946e9985470863aad4667edcac"
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64 Multimodal models.md",
+      "changes": [
+        {
+          "old": "canonical_revision: \"26464f4cb33c2b281c72e63e1870157e0a41a23807c4eca7c2b79f542000608d\"\ntranslation_reviewed: \"2026-10-29\"\ntranslation_of: \"00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md\"\nlast_updated: 2026-10-29",
+          "new": "canonical_revision: \"cd935bceed111d633d844a58e40d5b5f381d60fc197a9c4dc779bd5419ad6697\"\ntranslation_reviewed: \"2026-11-09\"\ntranslation_of: \"00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md\"\nlast_updated: 2026-11-09"
+        },
+        {
+          "old": "  - https://cs231n.stanford.edu/slides/2025/lecture_16.pdf",
+          "new": "  - https://cs231n.stanford.edu/slides/2025/lecture_16.pdf\n  - https://arxiv.org/abs/1912.06430\n  - https://arxiv.org/html/2004.11362v5#S3.SS2.SSS2"
+        },
+        {
+          "old": "<span id=\"1-изображение-как-тензор\"></span>",
+          "new": "<span id=\"1-изображение-как-тензор\"></span>\n<a id=\"vlm-patch-projection\"></a>"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/clip-figure1-training-and-zero-shot.png]]\n\n*Figure 1 from Radford et al., [Learning Transferable Visual Models From Natural Language Supervision](https://arxiv.org/abs/2103.00020), PDF p. 2. The left half shows contrastive batch training; the right half shows text-derived zero-shot classifier weights.*",
+          "new": "![[00 Учебник/Assets/Figures/curated/vision-objectives-2026-11-09/clip-figure1-training-and-zero-shot.png|CLIP trains on a matrix of image-caption similarities. At inference a new image is scored against text-derived class vectors.]]\n\n*Alec Radford et al., [CLIP, PMLR 139](https://proceedings.mlr.press/v139/radford21a.html),\n[Figure 1, p. 2](https://proceedings.mlr.press/v139/radford21a/radford21a.pdf#page=2),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nThe left panel compares every image-caption pair in the training batch.\nOn the right, the text encoder builds class vectors. A new image needs\none row of comparisons against those vectors.*"
+        },
+        {
+          "old": "### Two directions of the same loss",
+          "new": "<a id=\"vlm-clip-objective\"></a>\n\n### Two directions of the same loss"
+        },
+        {
+          "old": "loss; changing an individual competitor affects both directions.\n\nAn image may also have several correct captions describing different",
+          "new": "loss; changing an individual competitor affects both directions.\n\n<a id=\"vlm-multi-positive\"></a>\n\n### When two captions are valid\n\nTwo captions describe the same photo: “a dog in the snow” and “a dog\nrunning down a snowy trail.” A third caption, “a person on a bicycle,”\ndoes not fit. Suppose the row softmax is $(0.8,0.1,0.1)$. If the\ntraining label marks only the first caption as positive, the gradient\nwith respect to the second logit is $0.1-0=0.1$. A gradient step on that\nlogit alone lowers the score of a valid caption.\n\nLet $P=\\{1,2\\}$ be the valid caption indices and let $p_j$ be the\nsoftmax probability of caption $j$ over the full row. Two objectives\nuse the same positive set:\n\n$$\n\\begin{aligned}\n\\ell_{\\mathrm{any}}&=-\\log\\!\\left(\\sum_{j\\in P}p_j\\right),\\\\\n\\ell_{\\mathrm{each}}&=-\\frac{1}{|P|}\\sum_{j\\in P}\\log p_j.\n\\end{aligned}\n$$\n\nThe first increases the total probability assigned to valid captions.\nHere its loss is $-\\log(0.9)\\approx0.1054$. The second averages the\nloss for each valid caption: $-\\tfrac12(\\log 0.8+\\log 0.1)\\approx1.2629$.\nEach caption has target weight $1/2$, so the high probability of the first\ndoes not make up for a very low probability on the second.\n\n| Objective | Loss | Gradient on second logit |\n| --- | ---: | ---: |\n| First caption only | 0.2231 | $+0.1000$ |\n| Either valid caption | 0.1054 | $-0.0111$ |\n| Each valid caption | 1.2629 | $-0.4000$ |\n\nFor the pooled objective, the second gradient is\n$p_2-p_2/(p_1+p_2)=0.1-0.1/0.9$: the second caption has little\nweight within the positive set. For the per-caption objective, it is\n$p_2-1/2$. These are contributions from one row, not predictions of\nthe full update of the shared encoder weights. The loss values score\ndifferent targets and cannot rank models across these objectives.\n\n[MIL-NCE, equation (1) and §3.2](https://openaccess.thecvf.com/content_CVPR_2020/papers/Miech_End-to-End_Learning_of_Visual_Representations_From_Uncurated_Instructional_Videos_CVPR_2020_paper.pdf)\npools nearby narration candidates for a video clip; some of them need\nnot describe that clip. The per-caption average has the form of one row\nof [SupCon, §3.2.2](https://arxiv.org/html/2004.11362v5#S3.SS2.SSS2),\nwhere same-class membership is known. Using either with CLIP-style scores\nrequires a positive-pair policy. A symmetric objective needs those\npositive sets for columns as well as rows.\n\nAn image may also have several correct captions describing different"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/siglip-parallelism.png]]\n\n*Stanford CS336, Lecture 17, illustration of distributed pair blocks based on Zhai et al., [Sigmoid Loss for Language Image Pre-Training](https://arxiv.org/abs/2303.15343). Follow one local block; independent pair losses simplify accumulation, not eliminate all communication.*",
+          "new": "<a id=\"vlm-siglip-blocks\"></a>\n\n![[00 Учебник/Assets/Figures/curated/vision-objectives-2026-11-09/siglip-parallelism.png|Four panels show local features, local 4-by-4 blocks, exchange of text features and the final cross-device sum.]]\n\n*Xiaohua Zhai et al., [SigLIP v4](https://arxiv.org/abs/2303.15343v4),\n[Figure 1, p. 3](https://arxiv.org/pdf/2303.15343v4#page=3),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nThe four panels and their original explanations are preserved.\nDevice 1 keeps images $I_{1:4}$ and receives two blocks of remote text\nfeatures. After three computations its four images have been compared\nwith all 12 texts.*"
+        },
+        {
+          "old": "negatives when interchangeable captions receive opposing labels.*",
+          "new": "negatives when interchangeable captions receive opposing labels.*\n\nFor a pair at logit $z=0$, the derivative of its binary loss is\n$+0.5$ with a negative label and $-0.5$ with a positive label, before\ndivision by $B$. Pairwise sigmoid removes the shared denominator;\nit does not correct a wrong target."
+        },
+        {
+          "old": "### Winoground checks both matching directions",
+          "new": "<a id=\"vlm-winoground\"></a>\n\n### Winoground checks both matching directions"
+        },
+        {
+          "old": "| Objective | Loss | Gradient on second logit |",
+          "new": "| Objective | Loss | Gradient |"
+        },
+        {
+          "old": "An image may also have several correct captions describing different\ndetails. Caption generation predicts one particular word sequence, whereas\ncontrastive training distinguishes the observed caption from batch rivals.",
+          "new": "### Contrastive training and caption generation\n\nWhen training a caption generator on “a dog in the snow,” the model\npredicts the next caption token after “a dog in the.” The contrastive\nmodel receives the complete image and caption, then scores the pair.\nIt does not predict a vocabulary distribution at each caption position."
+        },
+        {
+          "old": "canonical_revision: \"cd935bceed111d633d844a58e40d5b5f381d60fc197a9c4dc779bd5419ad6697\"",
+          "new": "canonical_revision: \"8d013d93864cb436131ce75d9a24fee009c80b946e9985470863aad4667edcac\""
+        }
+      ],
+      "before_sha256": "3e13eee9fec248a67604c7cf97897a088975a93d7f6031e0c4a86aaa22c7b4ab",
+      "after_sha256": "db7ad9678e54e442cd91bd7cb796598050989569db1bbf85797921f2959121cb"
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "changes": [
+        {
+          "old": "  - id: \"curated-gender-shades-figure3-3c0aed571f22\"",
+          "new": "  - id: \"curated-clip-paper-figure1-351759e7ee8b\"\n    asset: \"00 Учебник/Assets/Figures/curated/vision-objectives-2026-11-09/clip-figure1-training-and-zero-shot.png\"\n    author: \"Alec Radford et al.\"\n    source_url: \"https://proceedings.mlr.press/v139/radford21a.html\"\n    source_image_url: \"https://proceedings.mlr.press/v139/radford21a/radford21a.pdf#page=2\"\n    source_figure_label: \"Figure 1, PDF p. 2\"\n    source_asset: \"05 Источники/Originals/vision-encoders-2026-10-20/clip.pdf\"\n    source_asset_sha256: \"2a4952960f350e50a3a4a847371b80b8aaa09ba82d1c2a8f6b30450e392a1fe4\"\n    sha256: \"351759e7ee8bd134f865e7e9575af9f68a7f9c8b9bb9beb2fc1279c49db5419a\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/edge-2026-10-20/pmlr-license.html\"\n    license_evidence_sha256: \"1c8123a6c840ca2752e383f0924fa23ba38552140a2cc54f69ea9df5acfcdd3d\"\n    rights_status: \"source-license-verified\"\n    provenance_confirmation: \"licensed-paper-figure\"\n    metadata_status: \"verified\"\n    derivation: \"pdf-page-render-crop\"\n    modifications: \"Original three-panel figure rendered from the published PMLR PDF. Cropped to the complete figure; page text and the general caption are outside the crop.\"\n    used_in: [\"00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md\", \"en/00 Textbook/16 Multimodal Models/64 Multimodal models.md\"]\n    last_verified: \"2026-11-09\"\n    source_page: 2\n    render_dpi: 360\n    render_page_size_px: [3060,3960]\n    crop_box_px: [265,324,2725,1213]\n  - id: \"curated-siglip-paper-figure1-6e373e662574\"\n    asset: \"00 Учебник/Assets/Figures/curated/vision-objectives-2026-11-09/siglip-parallelism.png\"\n    author: \"Xiaohua Zhai, Basil Mustafa, Alexander Kolesnikov, Lucas Beyer\"\n    source_url: \"https://arxiv.org/abs/2303.15343v4\"\n    source_image_url: \"https://arxiv.org/pdf/2303.15343v4#page=3\"\n    source_figure_label: \"Figure 1, PDF p. 3\"\n    source_asset: \"05 Источники/Originals/vision-encoders-2026-10-20/siglip.pdf\"\n    source_asset_sha256: \"2efade8de3baeffe9eba759aab9f510ea8f8ac3c365f02f0da75d9baf9ffa2db\"\n    sha256: \"6e373e66257439d1ad7adb36b6b71c77d55b7f6562f620c3f41953873e679aa1\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/vision-encoders-2026-10-20/siglip-abstract.html\"\n    license_evidence_sha256: \"bb4246ec588170bc529126b69c34c98320cf1ca31109db74433e4401cf3fdcb7\"\n    rights_status: \"source-license-verified\"\n    provenance_confirmation: \"licensed-paper-figure\"\n    metadata_status: \"verified\"\n    derivation: \"pdf-page-render-crop\"\n    modifications: \"Original four panels and their English explanations rendered from the PDF. Cropped without redrawing, omitting the surrounding page text and the general caption.\"\n    used_in: [\"00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md\", \"en/00 Textbook/16 Multimodal Models/64 Multimodal models.md\"]\n    last_verified: \"2026-11-09\"\n    source_page: 3\n    render_dpi: 360\n    render_page_size_px: [3060,3960]\n    crop_box_px: [235,342,2745,1461]\n  - id: \"curated-gender-shades-figure3-3c0aed571f22\""
+        },
+        {
+          "old": "    sha256: ac050e1cf247f6ba792ebcd7cb9253d3e4ff284a164f21a02a7da9f767a95e4f\n    license: User permission record (not a named license)\n    license_url: https://cs336.stanford.edu/\n    modifications: byte-for-byte copy of the pinned course asset; replaces the lower-resolution rendering at the same canonical path\n    used_in:\n      - 00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md\n      - en/00 Textbook/16 Multimodal Models/64 Multimodal models.md",
+          "new": "    sha256: ac050e1cf247f6ba792ebcd7cb9253d3e4ff284a164f21a02a7da9f767a95e4f\n    license: User permission record (not a named license)\n    license_url: https://cs336.stanford.edu/\n    modifications: byte-for-byte copy of the pinned course asset; replaces the lower-resolution rendering at the same canonical path\n    used_in: []\n    publication_status: retired\n    retirement_reason: Both reader editions use the verified PMLR paper figure; the course copy is preserved."
+        },
+        {
+          "old": "    sha256: 21fbe73a2d339804e9edd8c11600d117bf79923215588a64e4f19d170bcf4f04\n    license: User permission record (not a named license)\n    license_url: https://cs336.stanford.edu/\n    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging\n    used_in:\n      - 00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+          "new": "    sha256: 21fbe73a2d339804e9edd8c11600d117bf79923215588a64e4f19d170bcf4f04\n    license: User permission record (not a named license)\n    license_url: https://cs336.stanford.edu/\n    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging\n    used_in: []\n    publication_status: retired\n    retirement_reason: Both reader editions use the verified original arXiv v4 figure; the course copy is preserved."
+        }
+      ],
+      "before_sha256": "a6e43a8008250622f507aa7ef9cd4e228d57a5c4065fce31a101114611105f77",
+      "after_sha256": "086601d412baf28930e7cdece91f16c0ef8cc472e54402d7049806534a078722"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели|От изображения к визуальным токенам: ViT и CLIP]]",
+          "new": "- [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели|От изображения к визуальным токенам: ViT и CLIP]]\n  - [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели#vlm-patch-projection|ViT — участки изображения и линейная проекция]]\n  - [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели#vlm-clip-objective|CLIP — симметричная контрастивная потеря]]\n  - [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели#vlm-multi-positive|Контрастивное обучение — несколько правильных подписей]]\n  - [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели#vlm-siglip-blocks|SigLIP — вычисление потерь блоками]]\n  - [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели#vlm-winoground|Winoground — проверка сопоставления в обе стороны]]"
+        }
+      ],
+      "before_sha256": "30c4d63eac50c0c89e7620aa02c270837153658165a56639307df14377489f9f",
+      "after_sha256": "6ae7748208fbe72669a880200cbc27d37273ec9d2d4832118ecf4ec7a7ccbe3a"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели|Multimodal models]] · **EN**",
+          "new": "- [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели|Multimodal models]] · **EN**\n  - [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели#vlm-patch-projection|ViT — image patches and linear projection]]\n  - [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели#vlm-clip-objective|CLIP — symmetric contrastive loss]]\n  - [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели#vlm-multi-positive|Contrastive learning — multiple valid captions]]\n  - [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели#vlm-siglip-blocks|SigLIP — blockwise loss computation]]\n  - [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели#vlm-winoground|Winoground — checking both matching directions]]"
+        }
+      ],
+      "before_sha256": "06e570a27e6a0d4606501649ab5e333af0f007088c04a657ffaf5083ddaddcc0",
+      "after_sha256": "249efbabe5744aa09750c2f01b2468f21a669d99cb97e4d7e785b6a7cf83a4e6"
+    }
+  ],
+  "review": {
+    "sources": "Dosovitskiy et al. ViT v2 §3.1 and Figure 1; Radford et al. CLIP §§2.3–2.4, 3.1.4 and Figures 1–2; Zhai et al. SigLIP v4 §§3.1–3.3 and Figure 1; Miech et al. MIL-NCE §3.2 Eq. 1; Khosla et al. SupCon §3.2.2 Eqs. 2–3.",
+    "example": "For logits [log(8),0,0], central finite differences recover +0.1, −1/90 and −0.4 for the second score across the one-label, pooled-positive and mean-per-positive objectives. A pairwise sigmoid term at zero has gradient +0.5 or −0.5 before division by batch size. This is a small arithmetic check, not a checkpoint evaluation.",
+    "source_figures": "Rendered the complete three CLIP panels from PMLR PDF page 2 and the four SigLIP panels with their labels from arXiv v4 PDF page 3. Both full original PDF pages and resulting figures were inspected. Replaying the 360 DPI crops matched both binaries byte for byte. Both rights records are CC BY 4.0. The retired course copies remain in the archive.",
+    "reader": "In Chrome at 375 and 1280 px followed the same-locale subject link into the worked comparison. Both editions had five reference links, no KaTeX errors, and all three columns visible without horizontal overflow. Both original figure files opened with captions in each edition; checked zoom and pan on narrow screens.",
+    "local_checks": "2023 pages built; 730 publication tests (including the two arithmetic checks), 226 built-output tests and two focused asset evidence checks passed. Zero broken internal routes, fragments or files.",
+    "limits": "Does not resolve the inherited ViT course figure's reproduction grant or establish whole-book source coverage. No deployment."
+  }
+}

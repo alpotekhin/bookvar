@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-09",
+  "scope": "Complete the GPT-1 → GPT-2 → GPT-3 → LLaMA v1 comparison with an explicit lifetime compute calculation; preserve the original chapter order and local-only delivery.",
+  "review": {
+    "sources": [
+      "Brown et al. GPT-3 v4 §1 Figure 1.2 and §2.1 Table 2.1: effect of demonstrations at different parameter counts and the fixed training token count.",
+      "Touvron et al. LLaMA v1 §1, §2.2 and Figure 1: inference motivation, decoder components and training loss curves.",
+      "Sardana et al. PMLR 235, Figure 1 and §2, and §6 for separate dollar-cost estimation. Use the official proceedings Figure 1 under the PMLR publication agreement, not the arXiv copy under the arXiv nonexclusive license."
+    ],
+    "calculation": "Using the rounded published panel values, 7B spends 7e21 more FLOPs on pretraining; per-token saving 12e9 gives a crossover of 5.833e11 processed tokens. At 2e12 tokens total compute is 8e22 vs 9.7e22 FLOPs. This is a same-target-loss illustration, not a comparison of checkpoints or dollars.",
+    "validation": "Source crop reproduced byte-for-byte from the PMLR PDF; independent arithmetic check passed. The local build produced 2023 pages; 736 publication checks, 230 built-output checks and the whole curated-asset registry integration check passed. No broken internal routes, fragments or files.",
+    "reader": "Followed all three in-article transitions from the textbook contents in Chrome at 375 and 1280 CSS pixels. Verified the original image on each GPT chapter, the bidirectional jump to the LLaMA training curve, and no horizontal page overflow or KaTeX errors. Inspected the new figure inline and in the viewer; the three original panels are readable in the desktop viewer and can be zoomed and panned on mobile.",
+    "limits": "The English LLaMA URL uses the existing labeled fallback. No content translation, push or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "changes": [
+        {
+          "old": "status: canonical\nlast_updated: 2026-10-22",
+          "new": "status: canonical\nlast_updated: 2026-11-09"
+        },
+        {
+          "old": "| [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-full-local-attention|GPT-3 (2020)]] | Pre-norm сохраняется. Полные причинные слои чередуются с локальными. Окно 2048 токенов. |\n| LLaMA v1 (2023) | RMSNorm вместо LayerNorm, RoPE на Q и K вместо абсолютной таблицы, SwiGLU вместо FFN с GELU. Во всех слоях полное причинное внимание. Окно 2048 токенов. |\n\nGPT-1 предобучали на BooksCorpus, GPT-2 — на WebText, собранном",
+          "new": "| [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-full-local-attention|GPT-3 (2020)]] | Pre-norm сохраняется. Полные причинные слои чередуются с локальными. Окно 2048 токенов. |\n| LLaMA v1 (2023) | RMSNorm вместо LayerNorm, RoPE на Q и K вместо абсолютной таблицы, SwiGLU вместо FFN с GELU. Во всех слоях полное причинное внимание. Окно 2048 токенов. |\n\nРазмер крупнейшей GPT-2 — около 1,56 млрд параметров; у GPT-3\nэто 175 млрд. Но в работе о GPT-3 было восемь моделей: самая маленькая,\n125M, близка по размеру к GPT-1 и младшей GPT-2. Поэтому в статье можно\nпроследить, как меняется эффект демонстраций при росте модели,\nа не только сравнить два релиза\n([GPT-3, Table 2.1 и Figure 1.2](https://arxiv.org/html/2005.14165v4#S2.SS1)).\n\nGPT-1 предобучали на BooksCorpus, GPT-2 — на WebText, собранном"
+        },
+        {
+          "old": "([GPT-3, Table 2.1 и Figure 1.2](https://arxiv.org/html/2005.14165v4#S2.SS1)).",
+          "new": "([GPT-3, Table 2.1](https://arxiv.org/html/2005.14165v4#S2.SS1) и\n[Figure 1.2](https://arxiv.org/html/2005.14165v4#S1))."
+        },
+        {
+          "old": "<span id=\"сначала-вся-модель-на-одной-странице\"></span>",
+          "new": "<a id=\"training-and-inference-budget\"></a>\n\n### Бюджет обучения и бюджет вывода\n\nВ серии GPT-3 исследователи фиксировали число токенов и меняли размер\nмодели. В первой LLaMA вопрос поставили иначе: если меньшую модель\nобучать дольше, какого качества она достигнет и сколько будет стоить её\nзапуск после обучения? На [графике предобучения LLaMA](#данные-и-объём-предобучения)\nпотеря 7B продолжает снижаться к триллиону токенов. Этот график показывает,\nчто дополнительные шаги ещё приносят пользу, но по нему нельзя определить,\nпри какой нагрузке они окупятся.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/llama-scaling-2026-11-09/sardana24a-figure1.png|Три панели: 7B требует больше вычислений на обучение до той же потери, меньше вычислений на вывод и меньше всего при двух триллионах токенов вывода]]\n\n*Nikhil Sardana, Jacob Portes, Sasha Doubov и Jonathan Frankle,\n[Beyond Chinchilla-Optimal, PMLR 235 (2024)](https://proceedings.mlr.press/v235/sardana24a.html),\n[Figure 1, с. 2](https://raw.githubusercontent.com/mlresearch/v235/main/assets/sardana24a/sardana24a.pdf#page=2).\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Все три панели\nиз оригинала, без перерисовки.*\n\nВ примере Sardana et al. горизонтальный пунктир на панели **(a)** задаёт\nодну и ту же целевую потерю. Модели 13B и 7B достигают её при\n$4.5\\cdot10^{22}$ и $5.2\\cdot10^{22}$ FLOP соответственно.\nДо первого запроса у 7B уже есть перерасход $0.7\\cdot10^{22}$ FLOP.\nПанель **(b)** показывает, как он компенсируется. В приближении авторов\nстоимость прямого прохода на токен равна $2N$ FLOP для модели с $N$\nпараметрами. На каждом токене запроса или ответа 7B экономит\n$2(13-7)\\cdot10^9=12\\cdot10^9$ FLOP. Значит, из округлённых чисел\nна рисунке получается порог примерно в 580 млрд токенов:\n\n$$\nT_*=\\frac{0.7\\cdot10^{22}}{12\\cdot10^9}\\approx5.8\\cdot10^{11}.\n$$\n\nПри двух триллионах токенов обслуживания 7B тратит на вывод\n$2.8\\cdot10^{22}$ FLOP, а 13B — $5.2\\cdot10^{22}$.\nПосле сложения с затратами на обучение получаются $8.0\\cdot10^{22}$\nи $9.7\\cdot10^{22}$ FLOP: именно эти суммы показаны на панели **(c)**.\nЭто расчёт при равной целевой потере, а не замер двух выпущенных LLaMA.\nДаже равная потеря не гарантирует равного качества на вашей задаче.\nДля сравнения стоимости в деньгах нужны ещё длины запросов и ответов,\nпропускная способность на выбранном оборудовании и цена ресурсов\n([§2 и §6](https://arxiv.org/html/2401.00448v3#S2)).\n\n<span id=\"сначала-вся-модель-на-одной-странице\"></span>"
+        },
+        {
+          "old": "улучшения каждой downstream-задачи. Мотив работы состоит в том,\nчтобы потратить больше на предобучение небольшой модели,\nа затем многократно использовать её с прежним числом параметров.\nБез фиксированного качества и условий вывода график не позволяет\nвычислить, какая модель окажется дешевле в конкретном сервисе.",
+          "new": "улучшения каждой downstream-задачи. Чтобы оценить\n[[#training-and-inference-budget|окупаемость дополнительного обучения]],\nнужно сначала выбрать качество, при котором сравниваются модели,\nи оценить число токенов, которое они обработают в сервисе."
+        },
+        {
+          "old": "- [Touvron et al., LLaMA v1](https://arxiv.org/abs/2302.13971v1): §1 — бюджет вывода; §2 — данные, архитектура и обучение; §3–4 — условия оценки и отдельное instruction fine-tuning.",
+          "new": "- [Touvron et al., LLaMA v1](https://arxiv.org/abs/2302.13971v1): §1 — бюджет вывода; §2 — данные, архитектура и обучение; §3–4 — условия оценки и отдельное instruction fine-tuning.\n- [Sardana et al., Beyond Chinchilla-Optimal](https://proceedings.mlr.press/v235/sardana24a.html): Figure 1 и §2 — сравнение затрат при заданной потере; §6 — оценка денежных затрат."
+        },
+        {
+          "old": "запуск после обучения? На [графике предобучения LLaMA](#данные-и-объём-предобучения)",
+          "new": "запуск после обучения? На [[#llama-pretraining-data|графике предобучения LLaMA]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/llama-scaling-2026-11-09/sardana24a-figure1.png|Три панели: 7B требует больше вычислений на обучение до той же потери, меньше вычислений на вывод и меньше всего при двух триллионах токенов вывода]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/llama-scaling-2026-11-09/sardana24a-figure1.png|Три панели сравнивают 7B и 13B: обучение до одной потери, вывод и суммарные затраты при двух триллионах токенов вывода]]"
+        },
+        {
+          "old": "([§2 и §6](https://arxiv.org/html/2401.00448v3#S2)).",
+          "new": "([§2](https://arxiv.org/html/2401.00448v3#S2),\n[§6](https://arxiv.org/html/2401.00448v3#S6))."
+        },
+        {
+          "old": "## Данные и объём предобучения",
+          "new": "<a id=\"llama-pretraining-data\"></a>\n\n## Данные и объём предобучения"
+        }
+      ],
+      "after_sha256": "e663ed657de49de26a444bfa5a282ce56bd1116e81eff6d2f39d87db03ab6769",
+      "before_sha256": "776f9cc4d0a292859e04058d43c8eae0d16f98237112b5cf938585322adf5d37"
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "changes": [
+        {
+          "old": "  - id: \"curated-llama-downstream-9bef2893d15c\"",
+          "new": "  - id: \"curated-llama-inference-scaling-1110a08cd813\"\n    asset: \"00 Учебник/Assets/Figures/curated/llama-scaling-2026-11-09/sardana24a-figure1.png\"\n    sha256: \"1110a08cd8130238e33fe0ac40a6d1ff46cdf34836b7fb149fe881ddd8969d3d\"\n    author: \"Nikhil Sardana, Jacob Portes, Sasha Doubov and Jonathan Frankle\"\n    source_url: \"https://proceedings.mlr.press/v235/sardana24a.html\"\n    source_image_url: \"https://raw.githubusercontent.com/mlresearch/v235/main/assets/sardana24a/sardana24a.pdf#page=2\"\n    source_asset: \"05 Источники/Originals/llama-scaling-2026-11-09/sardana24a.pdf\"\n    source_asset_sha256: \"cd66b62454f51dcee723ba98746f7ae37e5ff0c7dce2441b9fe3d6decd188952\"\n    source_page_snapshot: \"05 Источники/Originals/llama-scaling-2026-11-09/sardana24a.html\"\n    source_page_sha256: \"b0c22186efaceb19009cac30662bc815a4cd97eebc5c0a25438a746401429179\"\n    source_page: 2\n    source_printed_page: 2\n    render_dpi: 360\n    render_page_size_px: [3060, 3960]\n    crop_box_px: [260, 340, 2700, 1090]\n    dimensions_px: [2440, 750]\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/llama-scaling-2026-11-09/pmlr-license.html\"\n    license_evidence_sha256: \"13c6fe60205573585fbcb97c5ca6579c50cce9d412af96ad68a1d0db96dfd35a\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    derivation: \"pdf-page-render-crop\"\n    modifications: \"Figure 1 from the PMLR edition, all three panels, axes, annotations and panel letters. Only the outer page and typeset caption were excluded.\"\n    used_in: [\"00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\"]\n  - id: \"curated-llama-downstream-9bef2893d15c\""
+        }
+      ],
+      "after_sha256": "97bdaf65f98b4cb4fdb47eb6b80ebd15ba52544ad71a0cfedda3c03e84e5ccad",
+      "before_sha256": "269dc92b34a746379de35473855abf8981af3f1bf03fca124cd05400e503efc0"
+    }
+  ]
+}

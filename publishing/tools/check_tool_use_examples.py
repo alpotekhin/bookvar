@@ -24,12 +24,15 @@ def sha(path):
 
 def main():
     text = CHAPTER.read_text()
+    refs = json.loads((ARCHIVE / "references.json").read_text())
+    preceding = before_topic_consolidation(text, CHAPTER)
+    assert hashlib.sha256(preceding.encode()).hexdigest() == refs["chapter_sha256"], "Unreviewed chapter change"
     json_blocks = re.findall(r"^(~~~|```)json\n(.*?)^\1", text, re.M | re.S)
     assert len(json_blocks) == 5
     for _, block in json_blocks:
         assert isinstance(json.loads(block), dict)
     blocks = re.findall(r"^~~~python\n(.*?)^~~~", text, re.M | re.S)
-    assert len(blocks) == 5
+    assert len(blocks) == 6
     scopes, shared = [], {}
     for index, block in enumerate(blocks):
         namespace = {}
@@ -38,7 +41,31 @@ def main():
         exec(compiled, shared)
         scopes.append(namespace)
 
-    losses, sampling, voting, writing, episode = scopes
+    losses, sampling, mcp, voting, writing, episode = scopes
+    correlate, rpc, pending = mcp["correlate_response"], mcp["rpc"], mcp["pending"]
+    assert not pending
+    pending.update({17: "current-read", 18: "failed-read"})
+    invalid_responses = [
+        {"id": 17, "result": {}},
+        rpc(True, result={}),
+        rpc(999, result={}),
+        rpc(17),
+        rpc(17, result={}, error={}),
+        rpc(17, result="not an object"),
+        rpc(17, result={"isError": 1}),
+    ]
+    for response in invalid_responses:
+        assert correlate(response) is None
+        assert pending == {17: "current-read", 18: "failed-read"}
+    unavailable = {"code": -32602, "message": "Unknown tool"}
+    assert correlate(rpc(18, error=unavailable)) == {
+        "call_id": "failed-read", "kind": "rpc_error", "payload": unavailable,
+    }
+    result = {"structuredContent": {"lines": ["timeout=30"]}}
+    assert correlate(rpc(17, result=result)) == {
+        "call_id": "current-read", "kind": "tool_result", "payload": result,
+    }
+    assert correlate(rpc(17, result=result)) is None and not pending
     assert sampling["insertion_sites"]([.01, .08, .07, .04, .06, .03], .05, 2) == [1, 2]
     assert sampling["api_start_allowed"](["x", "[API]"], 2)
     assert not sampling["api_start_allowed"](["x", "[API]"], 2, calls_already_made=1)
@@ -111,9 +138,6 @@ def main():
     assert not run([{"kind": "unexpected", "call_id": "x"}])[0]
     assert not run([], max_steps=0)[0]
 
-    refs = json.loads((ARCHIVE / "references.json").read_text())
-    preceding = before_topic_consolidation(text, CHAPTER)
-    assert hashlib.sha256(preceding.encode()).hexdigest() == refs["chapter_sha256"], "Unreviewed chapter change"
     for row in refs["downloaded"] + refs["reused"] + refs["derived"]:
         assert sha(ROOT / row["path"]) == row["sha256"], row["path"]
     assert len(refs["figures"]) == 2
@@ -155,6 +179,7 @@ def main():
         "toolformer_irrelevant_delta": irrelevant_delta,
         "schema_policy_and_missing_cases": len(rejected) + 1,
         "additional_rejected_final_observations": 5,
+        "mcp_invalid_and_duplicate_responses": len(invalid_responses) + 1,
         "source_downloads_verified": len(refs["downloaded"]),
         "reused_course_objects_verified": len(refs["reused"]),
         "original_figure_crops_verified": len(refs["figures"]) + len(new_figures),

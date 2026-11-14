@@ -1,5 +1,7 @@
+import {beforeTopicConsolidation} from '../../tools/topic-consolidation-baseline.mjs';
+
 export function withoutAutodiffAdditions(text: string): string {
-  return text.replace(/<!-- BEGIN REVIEW: JAX transforms 2026-10-27 -->\n[\s\S]*?<!-- END REVIEW: JAX transforms 2026-10-27 -->\n\n/,'')
+  return beforeTopicConsolidation(text,'00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md').replace(/<!-- BEGIN REVIEW: JAX transforms 2026-10-27 -->\n[\s\S]*?<!-- END REVIEW: JAX transforms 2026-10-27 -->\n\n/,'')
     .replace(/<!-- BEGIN REVIEW: (forward mode|custom backward) 2026-10-27 -->\n[\s\S]*?<!-- END REVIEW: \1 2026-10-27 -->\n\n/g,'')
     .replace('last_updated: 2026-10-27','last_updated: 2026-10-21')
     .replace(String.raw`\begin{aligned}

@@ -1,0 +1,307 @@
+{
+  "date": "2026-11-03",
+  "scope": "Whole sequence-alternatives owner and chunkwise gated-delta explanation; original source figures, provenance and bilingual subject indexes. Local-only; no translation.",
+  "files": [
+    {
+      "source": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "before_sha256": "783cab0ddb3b947eecd310c420898a0acf1ff6a7088e45f98ef1176de4ba4aea",
+      "after_sha256": "b591831cf3036d4fbf078b465556d014974ecb7cdd22d06e2e06b6ef11550d3a",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29\nlast_verified: 2026-10-23",
+          "new": "last_updated: 2026-11-03\nlast_verified: 2026-11-03"
+        },
+        {
+          "old": "primary_sources:\n",
+          "new": "reference_terms:\n  - label: \"Адресуемая и сжатая память\"\n    label_en: \"Addressable and compressed memory\"\n    anchor: \"seq-memory\"\n  - label: \"Prefill, decode и асимптотика\"\n    label_en: \"Prefill, decode, and complexity\"\n    anchor: \"seq-complexity\"\n  - label: \"Непрерывная и дискретная SSM\"\n    label_en: \"Continuous and discrete SSMs\"\n    anchor: \"seq-ssm\"\n  - label: \"LTI: рекурсия и свёртка\"\n    label_en: \"LTI recurrence and convolution\"\n    anchor: \"seq-lti-convolution\"\n  - label: \"Ассоциативное сканирование\"\n    label_en: \"Associative affine scan\"\n    anchor: \"seq-affine-scan\"\n  - label: \"Селективная SSM Mamba-1\"\n    label_en: \"Mamba-1 selective SSM\"\n    anchor: \"seq-mamba1\"\n  - label: \"Форма состояния и проекции Mamba-1\"\n    label_en: \"Mamba-1 state shape and projections\"\n    anchor: \"seq-mamba1-state\"\n  - label: \"Селективное сканирование на GPU\"\n    label_en: \"Hardware-aware selective scan\"\n    anchor: \"seq-selective-scan\"\n  - label: \"RWKV-4 и матричная память RWKV-7\"\n    label_en: \"RWKV-4 and RWKV-7 matrix memory\"\n    anchor: \"seq-rwkv\"\n  - label: \"Три формы retention\"\n    label_en: \"Three retention forms\"\n    anchor: \"seq-retnet\"\n  - label: \"Вращения и относительные позиции RetNet\"\n    label_en: \"RetNet rotations and relative positions\"\n    anchor: \"seq-retention-positions\"\n  - label: \"Состояние на границе блока RetNet\"\n    label_en: \"RetNet block-boundary state\"\n    anchor: \"seq-retention-blocks\"\n  - label: \"Mamba-2 и двойственность SSD\"\n    label_en: \"Mamba-2 and SSD duality\"\n    anchor: \"seq-mamba2\"\n  - label: \"Блочный алгоритм SSD\"\n    label_en: \"SSD block algorithm\"\n    anchor: \"seq-ssd-blocks\"\n  - label: \"Mamba-3: дискретизация, вращения и MIMO\"\n    label_en: \"Mamba-3 discretization, rotations, and MIMO\"\n    anchor: \"seq-mamba3\"\n  - label: \"Нормированное линейное внимание\"\n    label_en: \"Normalized linear attention\"\n    anchor: \"linear-attention-recurrent-state\"\n  - label: \"Delta rule и Gated DeltaNet\"\n    label_en: \"Delta rule and Gated DeltaNet\"\n    anchor: \"seq-delta-rule\"\n  - label: \"Блочное вычисление Gated DeltaNet\"\n    label_en: \"Gated DeltaNet chunkwise computation\"\n    anchor: \"seq-delta-chunks\"\n  - label: \"Быстрые веса и TTT-layer\"\n    label_en: \"Fast weights and TTT layers\"\n    anchor: \"seq-ttt\"\n  - label: \"TTT-E2E и обновление модели\"\n    label_en: \"TTT-E2E model updates\"\n    anchor: \"seq-ttt-e2e\"\n  - label: \"Гибриды attention и рекуррентной памяти\"\n    label_en: \"Attention-recurrence hybrids\"\n    anchor: \"hybrid-sequence-models\"\n  - label: \"Чередование слоёв и параллельные ветви\"\n    label_en: \"Interleaved layers and parallel branches\"\n    anchor: \"seq-hybrid-layouts\"\n  - label: \"Память запроса в гибриде\"\n    label_en: \"Per-request hybrid memory\"\n    anchor: \"seq-hybrid-memory\"\n  - label: \"Phonebook и пределы сжатого состояния\"\n    label_en: \"Phonebook recall and compressed-state limits\"\n    anchor: \"seq-recall-limits\"\n  - label: \"Снимки, ветвление и откат состояния\"\n    label_en: \"State snapshots, branching, and rollback\"\n    anchor: \"seq-state-serving\"\n  - label: \"Точность и изоляция состояния\"\n    label_en: \"State precision and isolation\"\n    anchor: \"seq-state-precision\"\n  - label: \"Проверка памяти и скорости\"\n    label_en: \"Evaluating recall and speed\"\n    anchor: \"seq-evaluation\"\nprimary_sources:\n  - https://arxiv.org/abs/2507.06457v1\n"
+        },
+        {
+          "old": "## Два способа помнить прошлое",
+          "new": "<a id=\"seq-memory\"></a>\n## Два способа помнить прошлое"
+        },
+        {
+          "old": "## Почему недостаточно сказать «Transformer квадратичен»",
+          "new": "<a id=\"seq-complexity\"></a>\n## Почему недостаточно сказать «Transformer квадратичен»"
+        },
+        {
+          "old": "## От динамической системы к SSM",
+          "new": "<a id=\"seq-ssm\"></a>\n## От динамической системы к SSM"
+        },
+        {
+          "old": "## Откуда берётся параллельная форма вычисления",
+          "new": "<a id=\"seq-lti-convolution\"></a>\n## Откуда берётся параллельная форма вычисления"
+        },
+        {
+          "old": "## Параллельное сканирование рекуррентных переходов",
+          "new": "<a id=\"seq-affine-scan\"></a>\n## Параллельное сканирование рекуррентных переходов"
+        },
+        {
+          "old": "## Mamba: избирательная модель пространства состояний",
+          "new": "<a id=\"seq-mamba1\"></a>\n## Mamba: избирательная модель пространства состояний"
+        },
+        {
+          "old": "### Каковы размеры состояния и параметров",
+          "new": "<a id=\"seq-mamba1-state\"></a>\n### Каковы размеры состояния и параметров"
+        },
+        {
+          "old": "## Почему Mamba уже нельзя вычислить одной обычной свёрткой",
+          "new": "<a id=\"seq-selective-scan\"></a>\n## Почему Mamba уже нельзя вычислить одной обычной свёрткой"
+        },
+        {
+          "old": "## RWKV: взвешенное чтение рекуррентной памяти",
+          "new": "<a id=\"seq-rwkv\"></a>\n## RWKV: взвешенное чтение рекуррентной памяти"
+        },
+        {
+          "old": "## RetNet: три эквивалентных формы retention",
+          "new": "<a id=\"seq-retnet\"></a>\n## RetNet: три эквивалентных формы retention"
+        },
+        {
+          "old": "### Позиции: от вращения к относительному расстоянию",
+          "new": "<a id=\"seq-retention-positions\"></a>\n### Позиции: от вращения к относительному расстоянию"
+        },
+        {
+          "old": "### Граница блока: что именно передаётся дальше",
+          "new": "<a id=\"seq-retention-blocks\"></a>\n### Граница блока: что именно передаётся дальше"
+        },
+        {
+          "old": "### Mamba-2 и Structured State Space Duality",
+          "new": "<a id=\"seq-mamba2\"></a>\n### Mamba-2 и Structured State Space Duality"
+        },
+        {
+          "old": "### От состояния к матрице взаимодействий",
+          "new": "<a id=\"seq-ssd-blocks\"></a>\n### От состояния к матрице взаимодействий"
+        },
+        {
+          "old": "### Mamba-3: дискретизация, вращение и несколько входов",
+          "new": "<a id=\"seq-mamba3\"></a>\n### Mamba-3: дискретизация, вращение и несколько входов"
+        },
+        {
+          "old": "## Delta rule: не только записать, но и исправить",
+          "new": "<a id=\"seq-delta-rule\"></a>\n## Delta rule: не только записать, но и исправить"
+        },
+        {
+          "old": "## Test-Time Training: состоянием становится модель",
+          "new": "<a id=\"seq-ttt\"></a>\n## Test-Time Training: состоянием становится модель"
+        },
+        {
+          "old": "## TTT-E2E: тот же термин, другой механизм",
+          "new": "<a id=\"seq-ttt-e2e\"></a>\n## TTT-E2E: тот же термин, другой механизм"
+        },
+        {
+          "old": "### Чередование слоёв и параллельные ветви",
+          "new": "<a id=\"seq-hybrid-layouts\"></a>\n### Чередование слоёв и параллельные ветви"
+        },
+        {
+          "old": "## Из чего складывается память одного запроса",
+          "new": "<a id=\"seq-hybrid-memory\"></a>\n## Из чего складывается память одного запроса"
+        },
+        {
+          "old": "## Ограничения сжатой памяти",
+          "new": "<a id=\"seq-recall-limits\"></a>\n## Ограничения сжатой памяти"
+        },
+        {
+          "old": "## Как сервер хранит и восстанавливает состояние",
+          "new": "<a id=\"seq-state-serving\"></a>\n## Как сервер хранит и восстанавливает состояние"
+        },
+        {
+          "old": "### Точность состояния",
+          "new": "<a id=\"seq-state-precision\"></a>\n### Точность состояния"
+        },
+        {
+          "old": "## Как сравнивать качество памяти и скорость",
+          "new": "<a id=\"seq-evaluation\"></a>\n## Как сравнивать качество памяти и скорость"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/recurrent-update-rule-comparison.png]]\n\n*Сравнение правил обновления показывает общую матричную память linear attention,\nMamba-2, RetNet и семейства delta rule. Источник изображения: Stanford CS336\nSpring 2026, [Lecture 4, p. 11](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=11); в слайде сохранена таблица из обзора гибридных линейных моделей.*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sequence-state-2026-11-03/hybrid-state-update-table.png|Original comparison of nine recurrent update rules, grouped by vector state, outer-product state and delta rule]]\n\n*Dustin Wang et al., [A Systematic Analysis of Hybrid Linear Attention,\nv1, Table 1, p. 4](https://arxiv.org/pdf/2507.06457v1#page=4),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nComplete table and original English caption rendered directly from the PDF at\n300 dpi, replacing the 766-pixel lecture copy. The source uses value-by-key\nstates, transposed relative to the key-by-value convention of our examples.\nThese are memory-update formulas, not complete block specifications.*"
+        },
+        {
+          "old": "Простое затухание умножает всё состояние на один коэффициент.",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sequence-state-2026-11-03/hybrid-state-update-generations.png|Three original panels compare gated vector memory, decayed outer-product memory and key-directed delta updates]]\n\n*Wang et al., [A Systematic Analysis of Hybrid Linear Attention, v1,\nFigure 1, p. 4](https://arxiv.org/pdf/2507.06457v1#page=4), CC BY 4.0.\nAll three panels, state shapes, operation counts and the full English caption\nare retained. “Generations” is the authors' grouping, not a guarantee of\nbetter recall for every model. The erase factor is an orthogonal projector\nonly in the unit-key, full-replacement case $\\beta=1$.*\n\nПростое затухание умножает всё состояние на один коэффициент."
+        },
+        {
+          "old": "are retained. “Generations” is the authors' grouping, not a guarantee of\nbetter recall for every model. The erase factor is an orthogonal projector\nonly in the unit-key, full-replacement case $\\beta=1$.*",
+          "new": "are retained. “Generations” is the authors' grouping, not a guarantee of\nbetter recall for every model. For a unit key, full replacement $\\beta=1$\nmakes the erase factor an orthogonal projector; intermediate values give\npartial correction.*"
+        },
+        {
+          "old": "<a id=\"seq-ttt\"></a>\n## Test-Time Training: состоянием становится модель",
+          "new": "<a id=\"seq-delta-chunks\"></a>\n### Computing a Gated DeltaNet block\n\nThe token loop first decays the state, then predicts the current value and\nwrites a correction. Computing every correction from the same block-start\nstate would omit earlier writes. Unlike the TTT mini-batch rule below, the\nchunkwise Gated DeltaNet operator preserves the token-by-token update.\n\nWithin one block, number positions $r=1,\\ldots,b$ and let $S_0$ be the incoming\nkey-by-value state. Write the correction as a value vector $u_r$:\n\n$$\n\\begin{aligned}\nu_r&=\\beta_r(v_r-\\gamma_rS_{r-1}^{\\top}k_r),\\\\\nS_r&=\\gamma_rS_{r-1}+k_ru_r^{\\top}.\n\\end{aligned}\n$$\n\nDefine $\\lambda_r=\\prod_{j=1}^r\\gamma_j$ and\n$D_{ri}=\\prod_{j=i+1}^r\\gamma_j$ for $i\\le r$, with zero entries above the\ndiagonal. Expanding the state in the prediction gives\n\n$$\n\\begin{aligned}\nu_r={}&\\beta_r(v_r-\\lambda_rS_0^{\\top}k_r)\\\\\n &-\\beta_r\\sum_{i<r}D_{ri}(k_r^{\\top}k_i)u_i.\n\\end{aligned}\n$$\n\nEach correction depends only on earlier corrections. Stack the row vectors\n$u_r^\\top$ into $U$, and the token rows into $Q,K,V$. Then\n\n$$\n\\begin{aligned}\nR&=\\operatorname{Diag}(\\beta)\n   (V-\\operatorname{Diag}(\\lambda)KS_0),\\\\\nL_{ri}&=\\beta_rD_{ri}(k_r^\\top k_i),\\quad i<r,\\\\\n(I+L)U&=R.\n\\end{aligned}\n$$\n\n$L$ is strictly lower triangular, so $I+L$ has unit diagonal and can be solved\nby forward substitution. Once $U$ is known, output and outgoing state use\nmatrix products:\n\n$$\n\\begin{aligned}\nY={}&\\operatorname{Diag}(\\lambda)QS_0\\\\\n   &+((QK^\\top)\\odot D)U,\\\\\nS_b={}&\\lambda_bS_0\\\\\n   &+K^\\top\\operatorname{Diag}(D_{b,:})U.\n\\end{aligned}\n$$\n\nFor $S_0=(2,4)^\\top$, unit keys $k_1=(1,0)^\\top$, $k_2=(0.6,0.8)^\\top$,\nvalues $(10,20)$, both decays 0.5 and both write gates 1, the first decayed\nstate is $(1,2)^\\top$. Its prediction is 1, so $u_1=9$ and $S_1=(10,2)^\\top$.\n\nAt the second token the decayed state is $(5,1)^\\top$, which predicts 3.8.\nThus $u_2=16.2$ and $S_2=(14.72,13.96)^\\top$. Reading with $q_2=k_2$ gives 20.\nThe block calculation obtains the same correction from\n$u_2=18.9-0.3u_1$. Ignoring the lower-triangular coupling would use 18.9\ninstead, producing the wrong second output 22.7.\n\n~~~python\ndef gated_delta_chunked(q, k, v, gamma, beta, chunk_size, initial=None):\n    if chunk_size < 1:\n        raise ValueError(\"chunk_size must be positive\")\n    S = np.zeros((k.shape[1], v.shape[1])) if initial is None else initial.copy()\n    outputs = []\n    for start in range(0, len(q), chunk_size):\n        stop = start + chunk_size\n        Q, K, V = q[start:stop], k[start:stop], v[start:stop]\n        g, write = gamma[start:stop], beta[start:stop]\n        decay = decay_matrix(g)\n        carried = np.cumprod(g)\n        coupling = write[:, None] * np.tril((K @ K.T) * decay, -1)\n        rhs = write[:, None] * (V - carried[:, None] * (K @ S))\n        corrections = np.linalg.solve(np.eye(len(Q)) + coupling, rhs)\n        outputs.append(\n            carried[:, None] * (Q @ S) + ((Q @ K.T) * decay) @ corrections\n        )\n        S = carried[-1] * S + K.T @ (decay[-1, :, None] * corrections)\n    return np.concatenate(outputs), S\n\nkeys_block = np.array([[1., 0.], [.6, .8]])\nvalues_block = np.array([[10.], [20.]])\ng_block, b_block = np.full(2, .5), np.ones(2)\ninitial_block = np.array([[2.], [4.]])\ny_block, state_block = gated_delta_chunked(\n    keys_block, keys_block, values_block, g_block, b_block, 2, initial_block\n)\nnp.testing.assert_allclose(y_block[:, 0], [10., 20.])\nnp.testing.assert_allclose(state_block[:, 0], [14.72, 13.96])\ncorrections_block = np.linalg.solve(\n    np.array([[1., 0.], [.3, 1.]]), np.array([[9.], [18.9]])\n)\nnp.testing.assert_allclose(corrections_block[:, 0], [9., 16.2])\n~~~\n\nThis is a direct derivation of the memory recurrence, with supplied projections\nand gates. It excludes short convolutions, normalization and the output gate.\nThe paper's [`3.2 chunkwise algorithm and UT transform](https://arxiv.org/html/2412.06464v1#S3.SS2)\nuse compact WY/UT factors to organize the work for accelerator matrix\nmultiplication. Their intermediate variables differ from our correction\nvectors. This small `np.linalg.solve` program checks the algebra; it is not\ntheir GPU kernel or a speed comparison. Direct decay products also need\nnumerical care on long, low-precision sequences.\n\n<a id=\"seq-ttt\"></a>\n## Test-Time Training: состоянием становится модель"
+        },
+        {
+          "old": "Complete table and original English caption rendered directly from the PDF at\n300 dpi, replacing the 766-pixel lecture copy. The source uses value-by-key",
+          "new": "Complete table and original English caption rendered directly from the PDF at\n300 dpi. The source uses value-by-key"
+        },
+        {
+          "old": "$L$ is strictly lower triangular, so $I+L$ has unit diagonal and can be solved\nby forward substitution. Once $U$ is known, output and outgoing state use\nmatrix products:",
+          "new": "$L$ is strictly lower triangular, so $I+L$ has unit diagonal and can be solved\nby forward substitution. One matrix product $KK^\\top$ builds all within-block\nkey interactions. The solve is confined to a short block; once $U$ is known,\nreadout and state construction process its positions together through matrix\nproducts. Only the final state crosses the block boundary:"
+        },
+        {
+          "old": "The paper's [`3.2 chunkwise algorithm and UT transform](https://arxiv.org/html/2412.06464v1#S3.SS2)",
+          "new": "The paper's [Section 3.2 chunkwise algorithm and UT transform](https://arxiv.org/html/2412.06464v1#S3.SS2)"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "9a66ad91d9a38a6ef7367392e851f75d118b5d5a2984c0c51ddfd3b7233e6881",
+      "after_sha256": "b7323c8cc49675ffa739d703c2bdc4075ad5178bbe9cf0f4bcb2421a3675ad7c",
+      "changes": [
+        {
+          "old": "  - id: curated-stanford-cs336-architectures-recurrent-update-rule-comparison-08593308f807\n    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/recurrent-update-rule-comparison.png\n    author: Stanford CS336 staff\n    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=11\n    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91\n    sha256: 08593308f807ce57aeb5c0ae6a8f4b7fd4a6625622317a550ffcd9addb678a37\n    license: User permission record (not a named license)\n    license_url: https://cs336.stanford.edu/\n    modifications: exact embedded raster extracted from PDF page 11; no redraw or semantic crop beyond the source image boundary\n    used_in:\n    - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\n    metadata_status: verified\n    provenance_confirmation: pinned-upstream-repository\n    derivation: pdf-embedded-raster-extraction\n\n",
+          "new": "  - id: curated-stanford-cs336-architectures-recurrent-update-rule-comparison-08593308f807\n    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/recurrent-update-rule-comparison.png\n    author: Stanford CS336 staff\n    source_url: https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=11\n    commit: 8b59b50730766695c2ffedd1a79c50cd09b9eb91\n    sha256: 08593308f807ce57aeb5c0ae6a8f4b7fd4a6625622317a550ffcd9addb678a37\n    license: User permission record (not a named license)\n    license_url: https://cs336.stanford.edu/\n    modifications: exact embedded raster extracted from PDF page 11; no redraw or semantic crop beyond the source image boundary\n    used_in: []\n    metadata_status: verified\n    provenance_confirmation: pinned-upstream-repository\n    derivation: pdf-embedded-raster-extraction\n\n  - id: curated-sequence-state-table-8c2df95aabc1\n    asset: 00 Учебник/Assets/Figures/curated/sequence-state-2026-11-03/hybrid-state-update-table.png\n    author: Dustin Wang et al.\n    source_url: https://arxiv.org/pdf/2507.06457v1#page=4\n    source_asset: 05 Источники/Originals/sequence-state-2026-11-03/hybrid-linear-v1.pdf\n    source_sha256: bfca970ee2a85ed15b7e94adfd4e246366988ff1d927a861cfffa9cd591b23f7\n    source_page: 4\n    source_object: \"Table 1\"\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    license_evidence: 05 Источники/Originals/sequence-state-2026-11-03/hybrid-linear-v1.html\n    license_evidence_sha256: 3be209523c5f6fc684b06c26cf266857d989c7758ec98e7af67e2515774d3919\n    sha256: 8c2df95aabc121417804f9bd15f3e980004a975c903eb218c23a4df40454d1dd\n    dimensions_px: [1988, 1050]\n    dpi: 300\n    crop_box_px: [283, 310, 2271, 1360]\n    derivation: pdf-page-render-crop\n    modifications: Complete source object and full original English caption; 300 dpi raster extraction, no redraw or re-typesetting\n    metadata_status: verified\n    rights_status: verified-open-license\n    provenance_confirmation: pinned-versioned-arxiv-pdf-and-license-page\n    used_in:\n      - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\n\n  - id: curated-sequence-state-generations-79a16eebd573\n    asset: 00 Учебник/Assets/Figures/curated/sequence-state-2026-11-03/hybrid-state-update-generations.png\n    author: Dustin Wang et al.\n    source_url: https://arxiv.org/pdf/2507.06457v1#page=4\n    source_asset: 05 Источники/Originals/sequence-state-2026-11-03/hybrid-linear-v1.pdf\n    source_sha256: bfca970ee2a85ed15b7e94adfd4e246366988ff1d927a861cfffa9cd591b23f7\n    source_page: 4\n    source_object: \"Figure 1\"\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    license_evidence: 05 Источники/Originals/sequence-state-2026-11-03/hybrid-linear-v1.html\n    license_evidence_sha256: 3be209523c5f6fc684b06c26cf266857d989c7758ec98e7af67e2515774d3919\n    sha256: 79a16eebd573edcd153bd81649cb754a0f17fde3690d258c32c12234f20631f4\n    dimensions_px: [1988, 1285]\n    dpi: 300\n    crop_box_px: [283, 1390, 2271, 2675]\n    derivation: pdf-page-render-crop\n    modifications: Complete source object and full original English caption; 300 dpi raster extraction, no redraw or re-typesetting\n    metadata_status: verified\n    rights_status: verified-open-license\n    provenance_confirmation: pinned-versioned-arxiv-pdf-and-license-page\n    used_in:\n      - 00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\n\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "598c0ea7a70c3dd0c7ded672b649cc4a12c5f4878ae56de065d5ab4c635a8627",
+      "after_sha256": "8b86312668dc9494b8762da0dc0de0ea13377b279a25bfc8d6c1fd7e101433af",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/07 Анатомия современной LLM/02 Современный decoder block|Современный decoder block]]",
+          "new": "  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-memory|Адресуемая и сжатая память]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-complexity|Prefill, decode и асимптотика]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-ssm|Непрерывная и дискретная SSM]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-lti-convolution|LTI: рекурсия и свёртка]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-affine-scan|Ассоциативное сканирование]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-mamba1|Селективная SSM Mamba-1]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-mamba1-state|Форма состояния и проекции Mamba-1]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-selective-scan|Селективное сканирование на GPU]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-rwkv|RWKV-4 и матричная память RWKV-7]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-retnet|Три формы retention]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-retention-positions|Вращения и относительные позиции RetNet]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-retention-blocks|Состояние на границе блока RetNet]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-mamba2|Mamba-2 и двойственность SSD]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-ssd-blocks|Блочный алгоритм SSD]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-mamba3|Mamba-3: дискретизация, вращения и MIMO]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#linear-attention-recurrent-state|Нормированное линейное внимание]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-delta-rule|Delta rule и Gated DeltaNet]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-delta-chunks|Блочное вычисление Gated DeltaNet]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-ttt|Быстрые веса и TTT-layer]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-ttt-e2e|TTT-E2E и обновление модели]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#hybrid-sequence-models|Гибриды attention и рекуррентной памяти]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-hybrid-layouts|Чередование слоёв и параллельные ветви]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-hybrid-memory|Память запроса в гибриде]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-recall-limits|Phonebook и пределы сжатого состояния]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-state-serving|Снимки, ветвление и откат состояния]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-state-precision|Точность и изоляция состояния]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-evaluation|Проверка памяти и скорости]]\n- [[00 Учебник/07 Анатомия современной LLM/02 Современный decoder block|Современный decoder block]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "a9fc9fcb68034e875a5a6bbeff2e7d3457ab29875b6a36eb8bfba9492863048d",
+      "after_sha256": "5731835caf518681d92a2338bf1d277380bdfca32abfec2e81d3b70dbb6701f3",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA|MHA, MQA, and GQA]]",
+          "new": "  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-memory|Addressable and compressed memory]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-complexity|Prefill, decode, and complexity]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-ssm|Continuous and discrete SSMs]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-lti-convolution|LTI recurrence and convolution]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-affine-scan|Associative affine scan]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-mamba1|Mamba-1 selective SSM]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-mamba1-state|Mamba-1 state shape and projections]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-selective-scan|Hardware-aware selective scan]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-rwkv|RWKV-4 and RWKV-7 matrix memory]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-retnet|Three retention forms]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-retention-positions|RetNet rotations and relative positions]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-retention-blocks|RetNet block-boundary state]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-mamba2|Mamba-2 and SSD duality]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-ssd-blocks|SSD block algorithm]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-mamba3|Mamba-3 discretization, rotations, and MIMO]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#linear-attention-recurrent-state|Normalized linear attention]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-delta-rule|Delta rule and Gated DeltaNet]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-delta-chunks|Gated DeltaNet chunkwise computation]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-ttt|Fast weights and TTT layers]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-ttt-e2e|TTT-E2E model updates]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#hybrid-sequence-models|Attention-recurrence hybrids]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-hybrid-layouts|Interleaved layers and parallel branches]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-hybrid-memory|Per-request hybrid memory]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-recall-limits|Phonebook recall and compressed-state limits]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-state-serving|State snapshots, branching, and rollback]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-state-precision|State precision and isolation]]\n  - [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#seq-evaluation|Evaluating recall and speed]]\n- [[00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA|MHA, MQA, and GQA]]"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "source": "https://arxiv.org/html/2412.06464v1#S3.SS2",
+      "read": "Complete selected PDF pages4–6, including §2.3, §3.1, §3.2 with WY/UT factors and speed limits, §3.3 and Figure1. The new correction-variable triangular solve is derived directly from Eq8, not copied as the paper variable names or a GPU implementation."
+    },
+    {
+      "source": "https://arxiv.org/html/2507.06457v1#S3",
+      "read": "Selected §§3.1–3.4, complete original Table1 and Figure1. Versioned licence page confirms CC BY4.0. The source groupings and simplified formulas are not described as guarantees or full block specifications.",
+      "asset_manifest": "publishing/tools/sequence-state-figures.json"
+    },
+    {
+      "source": "https://arxiv.org/html/2307.08621v4#S2.SS1",
+      "read": "Full §2.1–2.2 selected derivation, three representations, pseudocode and normalization explanation. Local canonical source PDF page4 and current Figure3 visually compared. Existing figure is already clean; old surrounding-text finding is stale. No new RetNet copying or rights upgrade."
+    },
+    {
+      "prior": "docs/audit/2026-10-23-sequence-alternatives.md",
+      "boundary": "Current1867-line input restores the exact accepted4f78170b76... revision with beforeReaderRouteNavigation. Prior selected Mamba/SSD/RWKV/TTT/linear-attention source comparison reused only on that boundary. No claim of a fresh entire-course or all-paper reading."
+    }
+  ],
+  "figures": [
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/sequence-state-2026-11-03/hybrid-state-update-table.png",
+      "page": 4,
+      "object": "Table 1",
+      "source": "05 Источники/Originals/sequence-state-2026-11-03/hybrid-linear-v1.pdf",
+      "source_sha256": "bfca970ee2a85ed15b7e94adfd4e246366988ff1d927a861cfffa9cd591b23f7",
+      "source_url": "https://arxiv.org/pdf/2507.06457v1#page=4",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "05 Источники/Originals/sequence-state-2026-11-03/hybrid-linear-v1.html",
+      "license_evidence_sha256": "3be209523c5f6fc684b06c26cf266857d989c7758ec98e7af67e2515774d3919",
+      "dpi": 300,
+      "crop_pixels": [
+        283,
+        310,
+        2271,
+        1360
+      ],
+      "dimensions": [
+        1988,
+        1050
+      ],
+      "sha256": "8c2df95aabc121417804f9bd15f3e980004a975c903eb218c23a4df40454d1dd"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/sequence-state-2026-11-03/hybrid-state-update-generations.png",
+      "page": 4,
+      "object": "Figure 1",
+      "source": "05 Источники/Originals/sequence-state-2026-11-03/hybrid-linear-v1.pdf",
+      "source_sha256": "bfca970ee2a85ed15b7e94adfd4e246366988ff1d927a861cfffa9cd591b23f7",
+      "source_url": "https://arxiv.org/pdf/2507.06457v1#page=4",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "05 Источники/Originals/sequence-state-2026-11-03/hybrid-linear-v1.html",
+      "license_evidence_sha256": "3be209523c5f6fc684b06c26cf266857d989c7758ec98e7af67e2515774d3919",
+      "dpi": 300,
+      "crop_pixels": [
+        283,
+        1390,
+        2271,
+        2675
+      ],
+      "dimensions": [
+        1988,
+        1285
+      ],
+      "sha256": "79a16eebd573edcd153bd81649cb754a0f17fde3690d258c32c12234f20631f4"
+    }
+  ],
+  "explanation": {
+    "preserved": "All six prior NumPy programs and existing display equations, complete reasoning/examples/limitations and31 unchanged source images. The766-pixel course table is replaced by the same original Table1 at1988px with full caption; source Figure1 is added. Total33 figures.",
+    "new": "Correction vectors depend causally on previous writes; a strictly lower-triangular system solves those dependencies. Numerical two-key example, incoming state, local/carried output and outgoing state are explicit. Unlike TTT mini-batching, chunk length does not change the recurrence.",
+    "navigation": "Twenty-seven unique subject entries in both indexes. Core RNN/attention derivations remain owned by their existing chapters; no separate source-course reading route or English translation is created.",
+    "style": "no-ai-slop/eval read in full and applied without compressing source explanations. New technical explanation/captions stay English; existing Russian owner is not translated.",
+    "remaining": [
+      "Thirty-one unchanged figures were not all freshly pixel-compared upstream in this pass; prior selected visual/source evidence remains bounded.",
+      "Existing rights caveats for course/RetNet/blog material remain. New source objects alone have verified CC BY4.0 evidence.",
+      "No trained checkpoint, real GPU kernel or serving benchmark. Whole-book and source-course integration/release remain open."
+    ]
+  },
+  "verification": {
+    "status": "verified-local-delta",
+    "chapterSha256": "b591831cf3036d4fbf078b465556d014974ecb7cdd22d06e2e06b6ef11550d3a",
+    "wholeOwnerRead": "Entire1867-line input read in ranges1–250,251–520,521–800,801–1080,1081–1355,1356–1620,1621–EOF. Entire revised2097-line text reread in ranges1–350,351–700,701–1050,1051–1400,1401–1750,1751–EOF, with final tail read after two-line clarification. Final2099-line revision includes bounded caption/link/KK-transpose clarification rechecks at1230–1255,1348–1365,1404–1417; no subsequent chapter changes.",
+    "preservation": "All six old NumPy program bodies and34 old display equations remain unchanged. Thirty-one earlier image paths/bytes retained; the small course table is replaced by the same original at1988px and a complete original comparison figure added. Current seven programs,38 equations and33 images. Four-file reversible journal pins chapter, registry and both indexes.",
+    "explanation": "Derived a causal triangular correction solve for chunkwise Gated DeltaNet, including nonzero incoming state, intra-block key interactions, readouts and outgoing state. Worked two-key example gives corrections[9,16.2], outputs[10,20], state[14.72,13.96]. Independently computed block-start corrections give wrong second output22.7. Distinguishes recurrence-preserving chunks from TTT mini-batching and teaching NumPy algebra from the paper's GPU WY/UT kernels.",
+    "style": "no-ai-slop skill/eval read in full; whole-owner source explanation, examples, limitations and original-language material retained. New technical exposition remains English. No translation pass or synthetic teaching diagram.",
+    "source": "Earlier selected Mamba/SSD/RWKV/TTT/linear-attention comparison reused only on exact restored accepted4f78170b76... bytes. Fresh complete selected Gated DeltaNet PDF pages4–6 (§2.3,§3.1–3.3,Figure1); comparison-source §§3.1–3.4,Table1/Figure1; RetNet §§2.1–2.2 and Figure3. Not new entire-paper/course reading.",
+    "figures": {
+      "newObjects": 2,
+      "currentChapterObjects": 33,
+      "sourcePdfSha256": "bfca970ee2a85ed15b7e94adfd4e246366988ff1d927a861cfffa9cd591b23f7",
+      "method": "Exact300dpi source-raster crops of complete Table1(1988x1050) and Figure1(1988x1285), all rows/panels and full English captions. Native-resolution source/output visual comparison and pixel-exact preparation --check pass. Versionedv1 HTML licence evidence confirms CC BY4.0; no upscaling or redrawing.",
+      "retnet": "Existing1320x650 Figure3 already contains clean complete figure and caption. Canonical source PDF page4 compared; stale old surrounding-text finding not repeated. PNG unchanged; no new open-license claim.",
+      "remaining": "Thirty-one unchanged figures not all freshly compared upstream; previous evidence reused with its bounds. Earlier course/blog/RetNet rights and resolution caveats remain."
+    },
+    "cpu": {
+      "exit": 0,
+      "device": "CPU",
+      "numpy": "2.5.4",
+      "programs": 7,
+      "command": "uv run --offline --python 3.13 --with numpy==2.5.4 python publishing/tools/check_sequence_state_examples.py",
+      "scope": "All seven actual published blocks and earlier independent sequence checks pass. Added96 chunk-size comparisons,768 stream partitions,72 future perturbation controls, nonzero initial state, zero-decay/zero-write/unit-write boundaries, independent transition expansion and wrong-independent/wrong-sign controls. No checkpoint, GPU implementation or performance benchmark."
+    },
+    "tests": {
+      "scoped": "13 tests in4 files pass: new sequence-state delta/preservation, existing sequence alternatives, preceding MoE journal chain and all83 current whole-owner hash receipts. Both topic indexes synchronize152 canonical topics.",
+      "builtOutput": "199 HTML tests pass on completed final build. Direct both-locale HTML check verifies27 unique subject anchors and reference links,33 actual assets,38 display equations, corrected source link, new program/counterexample and explicit EN canonical-language notice."
+    },
+    "build": {
+      "exit": 0,
+      "pages": 2007,
+      "pagefindHtmlFiles": 2011,
+      "durationSeconds": 28.12,
+      "brokenInternalLinks": 0,
+      "bytes": 854635327,
+      "files": 5607,
+      "limit": 1000000000,
+      "headroom": 145364673
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-03-sequence-state-reader",
+      "desktop": "1280x900,617px content: all33 image loads have nonzero native dimensions;38 display equations fit,zero KaTeX errors. New derivation and complete new source table/three-panel diagram inspected; clean existing RetNet Figure3 inspected enlarged. Not all31 old originals freshly zoomed.",
+      "mobile": "375x812,328px content,document360px:38 display equations fit,zero KaTeX errors. New derivation read. Diagram enlarged3x and panned from center to right; table enlarged2.5x and read at center,left0,right501(of516px). Full labels/formulas/captions accessible by ordinary viewer scrolling; no all-endpoint claim. Temporary override reset.",
+      "navigation": "Actual RU reference ->#seq-delta-chunks and actual RU Next ->advanced-module hub. Actual EN reference ->same unique anchor with no-separate-English-edition notice; actual EN Previous ->MoE correct H1. RU new section left open.",
+      "transient": "Reload during active build briefly returned404; after completed build current route rendered normally without route changes/restart. A heading locator used unsupported level filtering; fresh h1 locator resolved observation. One direct-HTML diagnostic first omitted vault-prefix normalization; corrected check passes on real derived asset paths."
+    },
+    "publication": "local-only; no stage, commit, push or deployment",
+    "remaining": "Whole-book/source-course integration, existing figure-rights gaps, public-checkout/frozen release checks and approved dev/Pages release remain open."
+  }
+}

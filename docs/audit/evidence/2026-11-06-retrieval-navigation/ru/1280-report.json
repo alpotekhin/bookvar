@@ -1,0 +1,98 @@
+{
+  "url": "http://127.0.0.1:4330/textbook/retrieval/sparse-dense-hybrid/",
+  "width": 1280,
+  "height": 900,
+  "navigation": {
+    "from": "/reference/",
+    "href": "http://127.0.0.1:4330/textbook/retrieval/sparse-dense-hybrid/#ret-hnsw-queue",
+    "text": "HNSW: очереди, efSearch и остановка",
+    "arrived": "http://127.0.0.1:4330/textbook/retrieval/sparse-dense-hybrid/#ret-hnsw-queue",
+    "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-navigation/ru/1280-reference-target.png"
+  },
+  "figures": [],
+  "limits": "Headless browser interactions and screenshots; requires separate human visual inspection.",
+  "layout": {
+    "page": [
+      1265,
+      1265
+    ],
+    "mathErrors": 0,
+    "formulas": [
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ]
+    ],
+    "tables": [
+      [
+        617,
+        617,
+        "visible"
+      ],
+      [
+        617,
+        617,
+        "visible"
+      ],
+      [
+        617,
+        617,
+        "visible"
+      ],
+      [
+        617,
+        617,
+        "visible"
+      ],
+      [
+        617,
+        617,
+        "visible"
+      ],
+      [
+        617,
+        617,
+        "visible"
+      ],
+      [
+        617,
+        617,
+        "visible"
+      ],
+      [
+        617,
+        617,
+        "visible"
+      ]
+    ]
+  },
+  "contextScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-retrieval-navigation/ru/1280-page.png"
+}

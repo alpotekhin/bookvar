@@ -1,0 +1,98 @@
+{
+  "date": "2026-11-09",
+  "scope": "Repair the stateful evaluation example, explain AppWorld's original task generator, and distinguish missing evidence from agent failure. Local only.",
+  "review": {
+    "sources": [
+      "Trivedi et al., AppWorld, arXiv v1 §§3.1–3.3 and Figure 3; state diff includes required changes and excludes changes outside the permitted set.",
+      "AISI Inspect AI, Scoring Policy: scored, error, unscored; coverage after epoch reduction."
+    ],
+    "reading": "Read the full 795-line input and reread the final 912-line chapter in ranges 1–304, 305–610, and 611–912. The journal restores all six previous file hashes.",
+    "evidence": "Original task-generator.png and arXiv license snapshot are hash-pinned in the asset registry. Ran all four published Python blocks, checked the 27 combinations of independent calendar, mail and authorization verdicts, and rejected three invalid starting fixtures.",
+    "verification": "Local Astro build: 2027 pages. Passed 738 publication and 233 built-output checks, curated asset-registry and topic-index checks, and zero broken internal routes, fragments or files. Reviewed the original figure at 375 and 1280 CSS pixels, with mobile zoom and panning. Verified all three reference links, the note round trip and the labeled Russian fallback in the English reader.",
+    "limits": "No evaluated agents, live calendars, email services, model measurements, branch publication or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md",
+      "before_sha256": "27435c20a65d7883cf34b5c1afa93041af49ce7e8f6a37ee0c8bfb280cf72791",
+      "after_sha256": "afc8379daf1effe1533b4be61cb4c712dc291892b28e5fc79ccecf859116e470",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-30\nlast_verified: 2026-10-20\nprimary_sources:\n  - https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-11-09\nreference_terms:\n  - label: Оценка агента — состояние и побочные эффекты\n    label_en: Agent evaluation — state and side effects\n    anchor: agent-eval-state-side-effects\n  - label: AppWorld — проверка изменений состояния\n    label_en: AppWorld — checking state changes\n    anchor: agent-eval-appworld\n  - label: Оценка агента — покрытие и неоценённые запуски\n    label_en: Agent evaluation — coverage and unscored runs\n    anchor: agent-eval-coverage\nprimary_sources:\n  - https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents\n  - https://arxiv.org/abs/2407.18901v1\n  - https://inspect.aisi.org.uk/scoring-policy.html"
+        },
+        {
+          "old": "Условие «забронировать аудиторию» приходится уточнить до проверяемого задания:\nдля семинара 42 должна существовать ровно одна подтверждённая бронь аудитории\n204 на 9 октября 2026 года, 19:00, UTC+3. Если предварительного разрешения\nна запись нет, допустимым результатом будет запрос разрешения, а не бронь.\nТакой сценарий нужно оформить отдельной задачей: иначе проверяющая программа\nбудет наказывать агента за соблюдение ограничений.\n\nСледующая функция показывает два независимых критерия для сценария, где\nбронирование уже разрешено. Она работает с заранее заданными данными, а не\nс настоящим календарём. Поле `authorized` в журнале записывает доверенная\nоболочка исполнения; текстовое заявление агента таким свидетельством не служит.\n\n~~~python\ndef grade_booking(state, trace):\n    bookings = [row for row in state[\"bookings\"]\n                if row[\"seminar_id\"] == \"seminar-42\"]\n    expected = {\"seminar_id\": \"seminar-42\", \"room\": \"204\",\n                \"start\": \"2026-10-09T19:00:00+03:00\", \"status\": \"confirmed\"}\n    outcome = len(bookings) == 1 and bookings[0] == expected\n    policy = all(event[\"authorized\"] for event in trace if event[\"kind\"] == \"write\")\n    return {\"outcome\": outcome, \"policy\": policy, \"success\": outcome and policy}\n\nbooking = {\"seminar_id\": \"seminar-42\", \"room\": \"204\",\n           \"start\": \"2026-10-09T19:00:00+03:00\", \"status\": \"confirmed\"}\nallowed = [{\"kind\": \"write\", \"authorized\": True}]\nassert grade_booking({\"bookings\": [booking]}, allowed)[\"success\"]\nduplicate = grade_booking({\"bookings\": [booking, dict(booking)]}, allowed)\nassert not duplicate[\"outcome\"]\nwithout_approval = grade_booking({\"bookings\": [booking]},\n                                [{\"kind\": \"write\", \"authorized\": False}])\nassert without_approval[\"outcome\"] and not without_approval[\"success\"]\n~~~\n\nПроверка существования одной подходящей строки приняла бы обе брони;\nпроверка только конечного состояния приняла бы запись без разрешения.\nНо и приведённая функция покрывает лишь перечисленные условия: она не\nпроверяет рассылку, сохранность чужих событий, полноту журнала или подлинность\nсогласия. Для каждого из этих требований нужен свой наблюдаемый признак.\nСам проверяющий код и его исходные данные должны быть недоступны агенту для\nизменения. Иначе он сможет получить высокий балл, изменив проверку.",
+          "new": "<a id=\"agent-eval-state-side-effects\"></a>\n\n### Перенос семинара: что должно измениться\n\nСеминар 42 забронирован на четверг, 8 октября, в 19:00. Задание разрешает\nперенести его на пятницу, 9 октября, в 19:00 в ту же аудиторию 204 (UTC+3)\nи один раз отправить приглашение участнику с новым временем. Прочие брони\nдолжны остаться прежними. Если в другом задании разрешения нет, успешным\nисходом может быть запрос подтверждения; это отдельный сценарий с другим\nкритерием.\n\nПроверяющая программа читает два снимка календаря, журнал почтового\nсервиса и журнал проверок разрешений. В календаре ожидается та же совокупность\nзаписей, только с заменой четверга на пятницу. Порядок строк не важен,\nно повтор одной строки имеет значение, поэтому в коде используется\n`Counter`. В почтовом журнале ожидается ровно одна отправка с нужными\nполями. Он хранится отдельно от календаря: удаление записи о встрече\nне может отменить уже отправленное письмо.\n\n~~~python\nfrom collections import Counter\n\nthursday = \"2026-10-08T19:00:00+03:00\"\nfriday = \"2026-10-09T19:00:00+03:00\"\nold = (\"seminar-42\", \"204\", thursday, \"confirmed\")\nnew = (\"seminar-42\", \"204\", friday, \"confirmed\")\nother = (\"seminar-43\", \"205\", friday, \"confirmed\")\nrecipient = \"attendee@example.org\"\ninvite = (recipient, \"seminar-42\", \"204\", friday)\n\ncalendar_write = (\"calendar-write\", \"seminar-42\")\nmail_send = (\"mail-send\", recipient)\nrequired_actions = {calendar_write, mail_send}\n\ndef grade_booking(before, after, sent, audit):\n    # Fixtures and evidence are supplied by the evaluator, not by the agent.\n    original = Counter(before)\n    if original[old] != 1 or sum(\n        count for row, count in original.items() if row[0] == \"seminar-42\"\n    ) != 1:\n        raise ValueError(\"invalid starting snapshot\")\n    expected = original - Counter([old]) + Counter([new])\n\n    verdicts = {\n        \"calendar\": None if after is None else Counter(after) == expected,\n        \"mail\": None if sent is None else list(sent) == [invite],\n        \"policy\": None,\n    }\n    if audit is not None:\n        observed = {(kind, target) for kind, target, _ in audit}\n        denied = any(not allowed for _, _, allowed in audit)\n        if denied or observed - required_actions:\n            verdicts[\"policy\"] = False\n        elif required_actions <= observed:\n            verdicts[\"policy\"] = True\n\n    if False in verdicts.values():\n        return \"incorrect\", verdicts\n    if None in verdicts.values():\n        return \"unscored\", verdicts\n    return \"correct\", verdicts\n\nbefore = [old, other]\nafter = [other, new]\naudit = [(*calendar_write, True), (*mail_send, True)]\nassert grade_booking(before, after, [invite], audit)[0] == \"correct\"\nassert grade_booking(before, after, [invite], [audit[0], *audit])[0] == \"correct\"\nassert grade_booking(before, [*after, old], [invite], audit)[0] == \"incorrect\"\nassert grade_booking(before, [new], [invite], audit)[0] == \"incorrect\"\nassert grade_booking(before, after, [invite, invite], None) == (\n    \"incorrect\", {\"calendar\": True, \"mail\": False, \"policy\": None})\nassert grade_booking(before, after, [invite], [*audit, (*mail_send, False)]) == (\n    \"incorrect\", {\"calendar\": True, \"mail\": True, \"policy\": False})\nfor missing_audit in (None, []):\n    assert grade_booking(before, after, [invite], missing_audit)[0] == \"unscored\"\nassert grade_booking(before, after, None, audit)[0] == \"unscored\"\n~~~\n\nВ первой проверке два допустимых действия дают три положительных вердикта.\nДва изменения в календаре вместо одного тоже допустимы: можно удалить старую\nбронь и создать новую. Совпадать должен результат, а не порядок вызовов.\nЕсли почтовый сервис зарегистрировал две отправки, попытка провалена, даже\nесли снимок календаря верен, а журнал разрешений потерян. Запрещённый вызов\nздесь тоже считается нарушением, даже если шлюз его отклонил.\n\n`None` означает, что доверенного свидетельства нет; пустой список означает\nполученный журнал без событий. Если бронь перенесена и письмо отправлено,\nно в журнале разрешений нет ни одной из этих операций, подтвердить их\nразрешение нельзя. Такая попытка получает `unscored`, а расхождение в\nисточниках требует проверки. Полноту журнала проверяет оболочка оценивания:\nнапример, она связывает все записи с идентификатором попытки и проверяет\nзавершение сбора. Агент не может менять снимки, записи проверок разрешений\nили код оценивания. Код выше работает только с учебными данными.\n\n<a id=\"agent-eval-appworld\"></a>\n\n### AppWorld: как проверяют изменения базы\n\nВ [AppWorld, §3.1–3.3](https://arxiv.org/html/2407.18901v1#S3)\nисходное состояние готовят отдельно для каждого задания, а проверяющая\nпрограмма сравнивает его с состоянием после действий агента.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/agent-evaluation-2026-11-09/appworld-task-generator.png|AppWorld: Setup формирует задание и начальную базу; Validation Solution проверяет выполнимость; Evaluation сравнивает начальное и конечное состояния]]\n\n*Harsh Trivedi et al., [AppWorld, Figure 3](https://arxiv.org/html/2407.18901v1#S3.F3).\n[Оригинальный PNG](https://arxiv.org/html/2407.18901v1/task-generator.png)\nбез изменений, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nНа рисунке Алиса хочет повторить покупку футболки, предпочитая синий цвет.\nВ исходной базе есть её заказ красной футболки и доступный синий вариант.\nБоб даёт ту же по форме инструкцию про свитер и предпочитает розовый, но\nподходящего розового нет, поэтому он получит свитер прежнего, зелёного\nцвета. В левой нижней части рисунка у задач разные исходные состояния и\nожидания. Справа `Validation Solution` выполняет задание через API и\nпроверяет, что проверяющая программа принимает рабочее решение.\n\nПри оценке требуется, чтобы разность снимков содержала все обязательные\nизменения и не содержала изменений вне разрешённых. Например, покупка\nправильной футболки не оправдывает удаление списка желаний. Варианты,\nразличающиеся допустимым побочным состоянием (авторы приводят пустую\nкорзину и корзину, восстановленную до исходного вида), могут пройти оба.\nСнимки сами по себе не доказывают, что между ними не было временного\nизменения или внешней отправки. В примере с календарём поэтому нужен\nотдельный журнал почты и проверок разрешений."
+        },
+        {
+          "old": "Например, запланировано 100 испытаний; в двух среда не подготовилась,",
+          "new": "<a id=\"agent-eval-coverage\"></a>\n\nНапример, запланировано 100 испытаний; в двух среда не подготовилась,"
+        },
+        {
+          "old": "«ошибка среды».",
+          "new": "«ошибка среды».\n\nВозможен другой случай: все 100 запусков начались, но у двух потерян\nпочтовый журнал, а остальные проверки этих двух не обнаружили нарушения.\nЕсли из 98 оценённых запусков 70 успешны, доля успеха среди оценённых\nснова $70/98$. Теперь 98% означает покрытие оцениванием, а не долю\nисправных запусков среды. Среди всех запусков подтверждено 70 успехов;\nесли две неизвестные попытки обе были успешны, их было бы 72. Диапазон\n70–72% описывает неизвестные исходы в этой серии, а не статистический\nинтервал для новых задач.\n\n[Inspect AI](https://inspect.aisi.org.uk/scoring-policy.html#the-three-outcomes)\nотдельно хранит выставленный балл, ошибку исполнения проверки и\nрезультат без вердикта (`Score.unscored()`). Неверный формат ответа\nоцениваемого агента может быть обычным неуспехом; сбой программы проверки\nне равен такому ответу. При нескольких повторах одной задачи агрегатор\nможет скрыть пропущенный вердикт за результатом другого повтора, поэтому\nдля диагностики сохраняют причины и на уровне отдельных запусков."
+        },
+        {
+          "old": "- [Anthropic: Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents) — outcomes, trajectories, trials и rubric design.",
+          "new": "- [Anthropic: Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents) — outcomes, trajectories, trials и rubric design.\n- [[05 Источники/Papers/AppWorld|AppWorld]] — исполняемая среда, начальное и конечное состояния, обязательные и допустимые изменения.\n- [Inspect AI: Scoring Policy](https://inspect.aisi.org.uk/scoring-policy.html) — балл, ошибка проверки, отсутствие вердикта и покрытие."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "ceccfe6dfde507ebeea17e033211b75edfe9f84937469a2bf80aff76fa9f6f43",
+      "after_sha256": "9e55d57b952da3b1fca53c4b7158e0e4686295a93bdc47d06ffeb2ce846a8687",
+      "changes": [
+        {
+          "old": "assets:",
+          "new": "assets:\n  - id: \"curated-agent-eval-appworld-adf402174f3a\"\n    asset: \"00 Учебник/Assets/Figures/curated/agent-evaluation-2026-11-09/appworld-task-generator.png\"\n    title: \"AppWorld, Figure 3: task generator for a task scenario\"\n    author: \"Harsh Trivedi et al.\"\n    source_url: \"https://arxiv.org/abs/2407.18901v1\"\n    source_image_url: \"https://arxiv.org/html/2407.18901v1/task-generator.png\"\n    source_asset: \"00 Учебник/Assets/Figures/curated/agent-evaluation-2026-11-09/appworld-task-generator.png\"\n    source_asset_sha256: \"adf402174f3a3f2689768d6f791b773bdd91bf3a21418828e2253ef09eab9904\"\n    source_page_snapshot: \"publishing/fixtures/appworld-v1/arxiv-license.html\"\n    source_page_sha256: \"bc43429708bf4a64461f7fb354f3f1e40f71005f64b9cd169897aa50a57fec9e\"\n    sha256: \"adf402174f3a3f2689768d6f791b773bdd91bf3a21418828e2253ef09eab9904\"\n    dimensions_px: [1117,472]\n    bytes: 151294\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"publishing/fixtures/appworld-v1/arxiv-license.html\"\n    license_evidence_sha256: \"bc43429708bf4a64461f7fb354f3f1e40f71005f64b9cd169897aa50a57fec9e\"\n    modifications: \"Complete author PNG from arXiv HTML v1, copied byte-for-byte. No crop, translation, or redraw.\"\n    derivation: \"source-raster-copy\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    metadata_status: \"verified\"\n    last_verified: \"2026-11-09\"\n    used_in: [\"00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md\"]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/_index.md",
+      "before_sha256": "95fc36bbc26340ef3716756624c326c73b9dc9693d64b9ae9a31e9f8ae483d62",
+      "after_sha256": "e654ca89234671f3043d6d9f67af7157f584be641c661ea7153c5640fc28c603",
+      "changes": [
+        {
+          "old": "- [[05 Источники/Papers/The Complexity Trap|The Complexity Trap — observation masking and LLM summarization]]",
+          "new": "- [[05 Источники/Papers/The Complexity Trap|The Complexity Trap — observation masking and LLM summarization]]\n- [[05 Источники/Papers/AppWorld|AppWorld — state-based evaluation of interactive agents]]"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "2763501f1d34090d510638c1130e40a3d49c24780409caa8b16a837b3db08820",
+      "after_sha256": "049a73ecdb31d827f7b7bd3789ff3d0bbd41e2617ff1d2416013d8811fb6820f",
+      "changes": [
+        {
+          "old": "      - source: 05 Источники/Papers/The Complexity Trap.md\n        route: sources/papers/complexity-trap-context-management",
+          "new": "      - source: 05 Источники/Papers/The Complexity Trap.md\n        route: sources/papers/complexity-trap-context-management\n      - source: 05 Источники/Papers/AppWorld.md\n        route: sources/papers/appworld"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "75984dd7654647e3e48e3b30aaaf49bfdb4e7b0d69b77d5b4eb9356a602a09c1",
+      "after_sha256": "db15b701916d00259b05c3429eb4e7180764d99b97dfb9b848395c4b0da58a87",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем|Оценивание агентных систем]]",
+          "new": "- [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем|Оценивание агентных систем]]\n  - [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем#agent-eval-state-side-effects|Оценка агента — состояние и побочные эффекты]]\n  - [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем#agent-eval-appworld|AppWorld — проверка изменений состояния]]\n  - [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем#agent-eval-coverage|Оценка агента — покрытие и неоценённые запуски]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "67ef33f17da98f4726630ef21247753ca0fa83a933e218b867be74c5b719a201",
+      "after_sha256": "e62055a04397eea3e5cbb06c026d4443214148e9c769ac03831393be4cb0b248",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем|Evaluating agent systems]]",
+          "new": "- [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем|Evaluating agent systems]]\n  - [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем#agent-eval-state-side-effects|Agent evaluation — state and side effects]]\n  - [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем#agent-eval-appworld|AppWorld — checking state changes]]\n  - [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем#agent-eval-coverage|Agent evaluation — coverage and unscored runs]]"
+        }
+      ]
+    }
+  ]
+}

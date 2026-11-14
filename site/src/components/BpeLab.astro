@@ -1,0 +1,210 @@
+---
+import { bpeDefaults, bpeMaxInputLength, bpeMaxMerges, showBpeBytes, trainBpeLab } from '../lib/bpe-lab';
+const { lang, heading } = Astro.props as { lang: 'ru' | 'en'; heading: string };
+const ru = lang === 'ru';
+const label = ru ? {
+  intro: 'Обучайте BPE на первой строке, а вторую кодируйте теми же правилами. При равной частоте выигрывает пара, которая встретилась первой.',
+  train: 'Обучающая строка', probe: 'Строка для проверки', limit: 'Лимит объединений',
+  back: 'Назад', next: 'Объединить пару', reset: 'Вернуть пример',
+  trainIds: 'Токены обучающей строки', pair: 'Пара (ID)', count: 'Вхождения',
+  probeIds: 'Кодирование второй строки', decoded: 'После декодирования',
+  note: '␠ обозначает пробел; ⟦…⟧ показывает байты в hex, когда фрагмент нельзя вывести как обычный текст. Ввод обрабатывается в браузере.',
+  noscript: 'Для шагов нужен JavaScript. Ниже приведён тот же расчёт в тексте.',
+} : {
+  intro: 'Train BPE on the first string and encode the second with the same rules. When counts tie, the pair that appeared first wins.',
+  train: 'Training string', probe: 'Test string', limit: 'Merge limit',
+  back: 'Back', next: 'Merge pair', reset: 'Restore example',
+  trainIds: 'Training tokens', pair: 'Pair (IDs)', count: 'Occurrences',
+  probeIds: 'Encoding the second string', decoded: 'Decoded string',
+  note: '␠ denotes a space. ⟦…⟧ shows bytes in hex when a piece cannot be displayed as ordinary text. Input is processed in your browser.',
+  noscript: 'Enable JavaScript to step through the merges. The worked example below is available without it.',
+};
+const initial = trainBpeLab(bpeDefaults.training, 0);
+const baseIds = initial.frames[0].ids;
+---
+
+<section class="bpe-lab" data-bpe-lab={lang} aria-labelledby="bpe-lab">
+  <h2 id="bpe-lab">{heading}</h2>
+  <p>{label.intro}</p>
+  <div class="inputs">
+    <label for="bpe-training">{label.train}
+      <input id="bpe-training" value={bpeDefaults.training} maxlength={bpeMaxInputLength} autocomplete="off" spellcheck="false" disabled />
+    </label>
+    <label for="bpe-probe">{label.probe}
+      <input id="bpe-probe" value={bpeDefaults.probe} maxlength={bpeMaxInputLength} autocomplete="off" spellcheck="false" disabled />
+    </label>
+    <label for="bpe-limit">{label.limit}
+      <select id="bpe-limit" disabled>
+        {Array.from({ length: bpeMaxMerges + 1 }, (_, i) =>
+          <option value={i} selected={i === bpeDefaults.limit}>{i}</option>)}
+      </select>
+    </label>
+  </div>
+  <div class="controls">
+    <button type="button" id="bpe-back" disabled>{label.back}</button>
+    <button type="button" id="bpe-next" disabled>{label.next}</button>
+    <button type="button" id="bpe-reset" disabled>{label.reset}</button>
+  </div>
+  <p id="bpe-state" class="state" role="status" aria-live="polite">
+    {ru ? 'Шаг 0 · 11 токенов · 256 элементов в словаре' : 'Step 0 · 11 tokens · 256 vocabulary entries'}
+  </p>
+  <div class="panels">
+    <div class="panel">
+      <h3>{label.trainIds}</h3>
+      <ul class="tokens" role="list" id="bpe-training-ids">
+        {baseIds.map(id => <li><code>{showBpeBytes(initial.vocab[id])}</code><small>{id}</small></li>)}
+      </ul>
+      <p class="detail" id="bpe-rule"></p>
+      <table id="bpe-pairs">
+        <thead><tr><th scope="col">{label.pair}</th><th scope="col">{label.count}</th></tr></thead>
+        <tbody>{initial.frames[0].pairs.slice(0, 6).map(({ left, right, count }, i) =>
+          <tr class:list={{ selected: i === 0 }}><td><code>{left} + {right}</code></td><td>{count}</td></tr>)}</tbody>
+      </table>
+      <p class="detail" id="bpe-candidates"></p>
+    </div>
+    <div class="panel">
+      <h3>{label.probeIds}</h3>
+      <ul class="tokens" role="list" id="bpe-probe-ids">
+        {[...new TextEncoder().encode(bpeDefaults.probe)].map(id => <li><code>{showBpeBytes(initial.vocab[id])}</code><small>{id}</small></li>)}
+      </ul>
+      <p class="detail" id="bpe-probe-count"></p>
+      <h3>{label.decoded}</h3>
+      <pre id="bpe-decoded">{bpeDefaults.probe}</pre>
+      <p class="detail" id="bpe-roundtrip"></p>
+    </div>
+  </div>
+  <p class="detail">{label.note}</p>
+  <noscript><p>{label.noscript}</p></noscript>
+</section>
+
+<script>
+  import { bpeDefaults, decodeBpeLab, encodeBpeLab, showBpeBytes, trainBpeLab } from '../lib/bpe-lab';
+
+  function initBpeLab() {
+    const lab = document.querySelector<HTMLElement>('[data-bpe-lab]');
+    if (!lab || lab.dataset.initialized) return;
+    lab.dataset.initialized = 'true';
+    const ru = lab.dataset.bpeLab === 'ru';
+    const byId = <T extends HTMLElement = HTMLElement>(id: string) => lab.querySelector<T>('#bpe-' + id)!;
+    const training = byId<HTMLInputElement>('training');
+    const probe = byId<HTMLInputElement>('probe');
+    const limit = byId<HTMLSelectElement>('limit');
+    const next = byId<HTMLButtonElement>('next');
+    const back = byId<HTMLButtonElement>('back');
+    const reset = byId<HTMLButtonElement>('reset');
+    let trace = trainBpeLab(training.value, Number(limit.value));
+    let step = 0;
+
+    function tokens(id: string, values: number[]) {
+      byId(id).replaceChildren(...values.map(id => {
+        const li = document.createElement('li');
+        const text = document.createElement('code');
+        const label = document.createElement('small');
+        text.textContent = showBpeBytes(trace.vocab[id]);
+        label.textContent = String(id);
+        li.append(text, label);
+        return li;
+      }));
+    }
+    function render() {
+      const { ids, pairs } = trace.frames[step];
+      const last = trace.merges[step - 1];
+      const best = pairs[0];
+      const tied = best ? pairs.filter(pair => pair.count === best.count).length : 0;
+      next.disabled = step >= trace.merges.length;
+      back.disabled = step === 0;
+      byId('state').textContent = ru
+        ? `Шаг ${step} из ${trace.merges.length} · токенов: ${ids.length} · словарь: ${256 + step}`
+        : `Step ${step} of ${trace.merges.length} · tokens: ${ids.length} · vocabulary: ${256 + step}`;
+      byId('rule').textContent = last ? (ru
+        ? `Правило ${last.left} + ${last.right} → ${last.id}. Вхождений пары: ${last.count}; замен без перекрытий: ${last.replacements}.`
+        : `Rule ${last.left} + ${last.right} → ${last.id}. Counted ${last.count} occurrences; replaced ${last.replacements} without overlap.`) : '';
+      byId('candidates').textContent = !best
+        ? (ru ? 'Соседних пар больше нет.' : 'No adjacent pairs left.')
+        : next.disabled
+          ? (ru ? 'Достигнут лимит объединений.' : 'Merge limit reached.')
+          : ru
+            ? `Следующая пара: ${best.left} + ${best.right}.${tied > 1 ? ' При равной частоте выбрана первая.' : ''}${pairs.length > 6 ? ` Показаны 6 из ${pairs.length} пар.` : ''}`
+            : `Next pair: ${best.left} + ${best.right}.${tied > 1 ? ' A tie goes to the first occurrence.' : ''}${pairs.length > 6 ? ` Showing 6 of ${pairs.length} pairs.` : ''}`;
+      const table = byId<HTMLTableElement>('pairs');
+      table.hidden = pairs.length === 0;
+      table.tBodies[0].replaceChildren(...pairs.slice(0, 6).map(({ left, right, count }, i) => {
+        const row = document.createElement('tr');
+        if (i === 0 && !next.disabled) row.className = 'selected';
+        const pair = row.insertCell();
+        pair.textContent = `${left} + ${right}`;
+        row.insertCell().textContent = String(count);
+        return row;
+      }));
+      tokens('training-ids', ids);
+      const encoded = encodeBpeLab(probe.value, trace.merges.slice(0, step));
+      const decoded = decodeBpeLab(encoded, trace.vocab);
+      tokens('probe-ids', encoded);
+      const bytes = new TextEncoder().encode(probe.value).length;
+      byId('probe-count').textContent = ru
+        ? `Байт UTF-8: ${bytes} · токенов: ${encoded.length}`
+        : `UTF-8 bytes: ${bytes} · tokens: ${encoded.length}`;
+      byId('decoded').textContent = decoded || (ru ? '(пустая строка)' : '(empty string)');
+      byId('roundtrip').textContent = decoded === probe.value
+        ? (ru ? 'Исходная строка восстановлена.' : 'Original string recovered.')
+        : (ru ? 'Непарный суррогат UTF-16 заменён символом U+FFFD.' : 'An unpaired UTF-16 surrogate was replaced with U+FFFD.');
+    }
+    function retrain() {
+      trace = trainBpeLab(training.value, Number(limit.value));
+      step = 0;
+      render();
+    }
+    for (const control of [training, probe, limit, reset]) control.disabled = false;
+    training.addEventListener('input', retrain);
+    limit.addEventListener('change', retrain);
+    probe.addEventListener('input', render);
+    next.addEventListener('click', () => { if (step < trace.merges.length) step++; render(); });
+    back.addEventListener('click', () => { if (step > 0) step--; render(); });
+    reset.addEventListener('click', () => {
+      training.value = bpeDefaults.training;
+      probe.value = bpeDefaults.probe;
+      limit.value = String(bpeDefaults.limit);
+      retrain();
+    });
+    render();
+  }
+  initBpeLab();
+  document.addEventListener('astro:page-load', initBpeLab);
+</script>
+
+<style>
+  .bpe-lab { margin-block: 1rem 2rem; }
+  .bpe-lab h2 { margin-top: 0; }
+  .inputs, .controls, .panels { display: flex; flex-wrap: wrap; gap: .65rem; margin-block: .75rem; }
+  .inputs { align-items: end; }
+  .inputs label { display: grid; gap: .2rem; flex: 1 1 10rem; font-weight: 600; min-width: 0; }
+  .inputs label:last-child { flex: 0 1 9rem; }
+  .inputs label, .inputs :is(input, select), .controls button, .panels .panel { margin: 0; }
+  input, select, button {
+    font: inherit;
+    color: var(--sl-color-text);
+    background: var(--sl-color-bg);
+    border: 1px solid var(--sl-color-gray-4);
+    border-radius: .4rem;
+    min-height: 2.5rem;
+    padding: .25rem .55rem;
+  }
+  input, select { width: 100%; display: block; }
+  button:enabled { cursor: pointer; }
+  button:disabled { opacity: .55; }
+  #bpe-next:enabled { background: var(--sl-color-accent); color: var(--sl-color-black); }
+  :is(input, select, button):focus-visible { outline: 2px solid var(--sl-color-accent-high); outline-offset: 2px; }
+  .state { font-weight: 600; }
+  .panel { flex: 1 1 15rem; min-width: 0; border: 1px solid var(--sl-color-gray-5); border-radius: .5rem; padding: .65rem; }
+  .panel h3 { font-size: 1rem; margin: 0 0 .45rem; }
+  .tokens { display: flex; flex-wrap: wrap; gap: .25rem; list-style: none; margin: 0 0 .55rem; padding: 0; }
+  .tokens :global(li) { margin: 0; text-align: center; border: 1px solid var(--sl-color-gray-5); border-radius: .3rem; padding: .2rem .3rem; min-width: 1.75rem; max-width: 100%; line-height: 1.3; }
+  .tokens :global(code), pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .tokens :global(small) { display: block; margin: .15rem 0 0; color: var(--sl-color-gray-2); font-variant-numeric: tabular-nums; }
+  .detail { font-size: .85rem; }
+  .detail:empty { display: none; }
+  table { width: 100%; margin: .5rem 0; border-collapse: collapse; }
+  table :global(th), table :global(td) { text-align: start; padding: .25rem; border-bottom: 1px solid var(--sl-color-gray-5); }
+  table :global(.selected) { font-weight: 700; background: var(--sl-color-accent-low); }
+  pre { margin: 0; }
+</style>

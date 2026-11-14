@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import publication from '../vitest.publication.config';
 import evidence from '../vitest.evidence.config';
+import unit, { sourceArchiveTag } from '../vitest.config';
 
 const root = resolve(import.meta.dirname, '..');
 const catalog = JSON.parse(readFileSync(resolve(root, 'tests/source-evidence-suites.json'), 'utf8'));
@@ -22,7 +23,19 @@ describe('explicit publication and source-evidence scopes', () => {
       return row.file;
     });
     expect(new Set(sourceFiles).size).toBe(sourceFiles.length);
-    expect(evidence.test?.include).toEqual(sourceFiles);
+    const mixed: string[] = catalog.mixedSuites;
+    expect(new Set(mixed).size).toBe(mixed.length);
+    expect(evidence.test?.include).toEqual([...sourceFiles, ...mixed]);
+    expect(publication.test?.tagsFilter).toEqual(['!' + sourceArchiveTag]);
+    expect(unit.test?.tagsFilter).toBeUndefined();
+    expect(evidence.test?.tagsFilter).toBeUndefined();
+    const tagged = files.filter(file => readFileSync(resolve(root, file), 'utf8')
+      .includes("{ tags: ['" + sourceArchiveTag + "'] }"));
+    expect([...tagged].sort()).toEqual([...mixed].sort());
+    for (const file of mixed) {
+      expect(publication.test?.exclude).not.toContain(file);
+      expect(sourceFiles).not.toContain(file);
+    }
     for (const file of sourceFiles) expect(publication.test?.exclude).toContain(file);
     const publicFiles = files.filter(file => !sourceFiles.includes(file));
     expect(publicFiles.length).toBeGreaterThan(50);

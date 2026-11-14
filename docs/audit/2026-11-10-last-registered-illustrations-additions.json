@@ -1,0 +1,187 @@
+{
+  "date": "2026-11-10",
+  "scope": "Replace the last three active image paths flagged needs-confirmation in the then-current exact local registry scan. Keep the earlier figure bytes and source links; preserve chapter code, equations and route structure. No permission inference for other assets.",
+  "review": {
+    "reading": "Read all five prior note/chapter texts. Compare the scope of TensorFlow Word embeddings / One-hot encodings and CC BY 4.0 footer, the full four-tier Wikimedia original and its CC BY-SA 4.0 attribution, and Nathan Lambert's chapter 3 Figure 5, author-produced diagram description and pinned README license scope. Cross-check Ouyang et al. v1 §3.1, §3.2 and Table 6. The English URLs still use their existing content fallback.",
+    "explanation": "TensorFlow's vocabulary is five columns and uses a separate row for each shown token; our ID 2 corresponds to the third position in a six-word vocabulary. The SVD figure shows an exact compact factorization and a distinct approximate rank-one truncation; connect U and V* to Q and R^T for real word-context data. The RLHF overview distinguishes the separate reward model from the policy being optimized. Table 6 records 12,725 SFT prompts, 33,207 RM prompts, and 31,144 PPO prompts in training; for four ranked answers there are six pairs. The schematic numbers do not describe exact sample counts or a required prompt-reuse rule.",
+    "preservation": "Only the figure and surrounding explanation are replaced. Existing programs, worked examples and source excerpts are unchanged. The retired archive is not a grant to redistribute those copies.",
+    "status": "Local only. No commit, push or deployment."
+  },
+  "sourceFigures": [
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/tensorflow-one-hot.png",
+      "sha256": "0309948602d54e32de834032a266fe02179f5a6432bb6aaf0dd396cf9084373a",
+      "license": "CC BY 4.0",
+      "source_url": "https://www.tensorflow.org/text/guide/word_embeddings#one-hot_encodings"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/reduced-svd.svg",
+      "sha256": "f170f19edaaa8de49b840393e548e1ecb70d2eb4be7ca6f525a737c61065eec8",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Reduced_Singular_Value_Decompositions.svg"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/rlhf-basic.png",
+      "sha256": "67705f0e237d4eff26e2b1b49e16fdd6aac007aa986336f661ef9cb04eb906cc",
+      "license": "MIT",
+      "source_url": "https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/rlhf-basic.png"
+    }
+  ],
+  "retiredFigures": [
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/instructgpt/chatgpt-training-pipeline.png",
+      "figure_url": "https://huyenchip.com/2023/05/02/rlhf.html#rlhf-overview",
+      "sha256": "ffb549dc81ca08e62ae8d936d2313f41711ef5def80e834e89ced8926f4c8724",
+      "former_used_in": [
+        "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+        "Concepts/Training/RLHF.md",
+        "03 Исследовательские линии/RLHF → DPO → RLVR.md"
+      ],
+      "replacement": "00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/rlhf-basic.png"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/voita-word-embeddings/one-hot.png",
+      "figure_url": "https://lena-voita.github.io/nlp_course/word_embeddings.html#one_hot_vectors",
+      "sha256": "b1284449dfd787afc529b313bb3f95d08b5dfa8649034a57e370efc8a7239272",
+      "former_used_in": [
+        "00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md"
+      ],
+      "replacement": "00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/tensorflow-one-hot.png"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/voita-word-embeddings/count-based-idea.png",
+      "figure_url": "https://lena-voita.github.io/nlp_course/word_embeddings.html#pre_neural",
+      "sha256": "bdd6d2fcd48116d0fe055e6fceaa051a4b95128c4367d5c591102f5ee0dcbd05",
+      "former_used_in": [
+        "00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md"
+      ],
+      "replacement": "00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/reduced-svd.svg"
+    }
+  ],
+  "files": [
+    {
+      "source": "00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md",
+      "before_sha256": "18b73c24f2ee4a9b7a014cd2bc2b5480797b642bc76741de0eb9b2dce90ae985",
+      "after_sha256": "9be324f36c922dc7e4f8b5966bbe8e4a9e47b26efa74902d6f670dca4647f951",
+      "lines": 813,
+      "changes": [
+        {
+          "old": "В такой геометрии `кот` столь же далёк от `пёс`, как от `спит`.\nГеометрия ещё не содержит сведений об употреблении слов.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-word-embeddings/one-hot.png]]\n\n*В каждом векторе одна ненулевая координата; её положение задаётся\nсловарём. На рисунке dog, cat и table имеют разные координаты,\nно одинаковую длину вектора. Lena Voita,\n[Represent as Discrete Symbols: One-hot Vectors](https://lena-voita.github.io/nlp_course/word_embeddings.html#one_hot_vectors).\nОригинальное изображение без изменений.*\n\nИз этого не следует, что one-hot непригоден для обучения.\nЛинейная модель может обучить отдельный вес для каждой категории,\n",
+          "new": "В такой геометрии `кот` столь же далёк от `пёс`, как от `спит`.\nГеометрия ещё не содержит сведений об употреблении слов.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/tensorflow-one-hot.png|Словарь из пяти слов; в строках the, cat и sat единица стоит в пятой, первой и четвёртой колонке соответственно]]\n\n*Команда TensorFlow, [Word embeddings: One-hot encodings](https://www.tensorflow.org/text/guide/word_embeddings#one-hot_encodings).\nВ словаре на рисунке пять столбцов. Строка `cat` содержит единицу\nв первом, строка `the` — в пятом: векторы различаются только положением\nединицы. В нашем словаре шесть столбцов, и у слова `кот` единица стоит\nв третьем, потому что отсчёт ID начинается с нуля. Полный исходный PNG;\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nУ [Лены Войты](https://lena-voita.github.io/nlp_course/word_embeddings.html#one_hot_vectors)\nна другом примере показано то же свойство: по one-hot-векторам нельзя\nсказать, какие два слова похожи по смыслу.\n\nИз этого не следует, что one-hot непригоден для обучения.\nЛинейная модель может обучить отдельный вес для каждой категории,\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md",
+      "before_sha256": "d1b38eed70667ad52069f5769a341f78a1a1ffa2e54aa7e45252480abb747366",
+      "after_sha256": "6ec6c55f564b2bb98cf988239cb36d63e72808e41fc6cb1d05a73539e7884e72",
+      "lines": 1462,
+      "changes": [
+        {
+          "old": "Можно выбрать и другое распределение масштаба;\nпри одинаковом произведении геометрия отдельных таблиц может измениться.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-word-embeddings/count-based-idea.png|Разложение матрицы слово–контекст на низкоразмерные множители]]\n\n*Lena Voita,\n[Count-Based Methods](https://lena-voita.github.io/nlp_course/word_embeddings.html).\nПолная исходная схема усечённого SVD: слева матрица «слово × контекст»,\nсправа две низкоразмерные таблицы и диагональная матрица.\nВ оригинале левый множитель назван $V_d$, правый — $U_d^\\top$;\nв формулах главы им соответствуют $Q_d$ и $R_d^\\top$.*\n\nВ нашем примере четыре сингулярных значения PPMI\nпримерно равны $1{,}440848$, $1{,}440848$, $0{,}943693$, $0{,}943693$.\n",
+          "new": "Можно выбрать и другое распределение масштаба;\nпри одинаковом произведении геометрия отдельных таблиц может измениться.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/reduced-svd.svg|Полное, тонкое, компактное и усечённое SVD матрицы 4 на 3. В нижней строке остаётся один столбец U, одно сингулярное значение и одна строка V*]]\n\n*Mercurysheet, по работе Cmglee,\n[Reduced Singular Value Decompositions](https://commons.wikimedia.org/wiki/File:Reduced_Singular_Value_Decompositions.svg),\n[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).\nПолный SVG без изменений. В третьей строке убрали нулевое\nсингулярное значение: произведение по-прежнему восстанавливает\nматрицу. В нижней строке оставили только одну из двух ненулевых\nкомпонент. У $U$ остался один столбец, у $V^*$ — одна строка;\nих произведение с оставшимся значением даёт приближение ранга 1.*\n\nВ обозначениях главы $U_d$ с рисунка соответствует $Q_d$,\nа $V_d^*$ для вещественной матрицы — $R_d^\\top$. В\n[схеме Лены Войты](https://lena-voita.github.io/nlp_course/word_embeddings.html#pre_neural)\nматрица слева — именно «слово × контекст». После усечения строка\nлевого множителя даёт координаты слова, а столбец правого —\nкоординаты контекста. В формулах выше оба вектора дополнительно\nмасштабированы через $\\Sigma_d^{1/2}$.\n\nВ нашем примере четыре сингулярных значения PPMI\nпримерно равны $1{,}440848$, $1{,}440848$, $0{,}943693$, $0{,}943693$.\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+      "before_sha256": "efecdcaba7edd624415ebc10cccb36bc2db67fa7d6b537dba20ae70088355780",
+      "after_sha256": "52b6da909a17f216600da10a88a509482138005076d93ff7fabdd7c5aaf8ba02",
+      "lines": 858,
+      "changes": [
+        {
+          "old": "title: SFT и инструктивные данные\ntype: textbook-chapter\nstatus: canonical\nlast_updated: 2026-10-30\nlast_verified: 2026-10-23\naliases: [Instruction tuning, Supervised fine-tuning]\nprimary_sources:\n",
+          "new": "title: SFT и инструктивные данные\ntype: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-10\nlast_verified: 2026-10-23\naliases: [Instruction tuning, Supervised fine-tuning]\nprimary_sources:\n"
+        },
+        {
+          "old": "функцию потерь. Поэтому SFT обучает не только содержанию ответа, но и тому, где\nответ начинается, как оформляется и когда заканчивается.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/chatgpt-training-pipeline.png]]\n\n*SFT занимает второй столбец: из демонстраций получают модель, обученную отвечать\nна запросы. Следующие два столбца показывают обучение модели награды и\nоптимизацию ответов по её оценке. Источник: Chip Huyen,\n[RLHF: Reinforcement Learning from Human Feedback](https://huyenchip.com/2023/05/02/rlhf.html).\nРазмеры наборов и примеры моделей внизу относятся к обзору мая 2023 года,\nа не к рекомендуемым объёмам для любого современного проекта.*\n\n## Сквозной пример\n\n",
+          "new": "функцию потерь. Поэтому SFT обучает не только содержанию ответа, но и тому, где\nответ начинается, как оформляется и когда заканчивается.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/rlhf-basic.png|Базовая модель дообучается на демонстрациях; после SFT одна ветвь обучает модель награды, другая обновляет политику через PPO]]\n\n*Nathan Lambert, [RLHF and Post-Training, Training Overview, рис. 5](https://rlhfbook.com/c/03-training-overview#fig:rlhf-basic-repeat),\n[оригинал PNG](https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/rlhf-basic.png), [MIT](/licenses/rlhf-book-MIT.txt).\nНа первой стрелке люди пишут ответы для SFT. На нижней ветви они\nсравнивают уже сгенерированные ответы: из сравнений обучают модель\nнаграды. Верхняя стрелка после SFT обозначает обновление политики\nпо этой награде. Числа на схеме условные; фактические размеры трёх\nобучающих выборок InstructGPT приведены в [табл. 6](https://arxiv.org/html/2203.02155v1#A1.T6).*\n\n## Сквозной пример\n\n"
+        }
+      ]
+    },
+    {
+      "source": "03 Исследовательские линии/RLHF → DPO → RLVR.md",
+      "before_sha256": "a96567e8c137816fbec4e34aa3269cbc84898fafd788bc374e029b287eda52d8",
+      "after_sha256": "0f12db8463b7046e336e18baf4fcf454a34aa78a32368c4b68db703bf9f52ecf",
+      "lines": 175,
+      "changes": [
+        {
+          "old": "type: research-line\nstatus: active\nstarted: 2017\nlast_updated: 2026-10-29\nlast_verified: 2026-08-06\nkey_concepts: [SFT, Reward Model, PPO, RLHF, DPO, GRPO, RLVR]\nkey_models: [InstructGPT, DeepSeek-R1]\n",
+          "new": "type: research-line\nstatus: active\nstarted: 2017\nlast_updated: 2026-11-10\nlast_verified: 2026-08-06\nkey_concepts: [SFT, Reward Model, PPO, RLHF, DPO, GRPO, RLVR]\nkey_models: [InstructGPT, DeepSeek-R1]\n"
+        },
+        {
+          "old": "\n## Две схемы обучения по предпочтениям\n\nНа обзорной схеме показано, как предобученную модель превращают в помощника. Рисунок из статьи DPO сравнивает два способа использовать размеченные предпочтения:\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/chatgpt-training-pipeline.png|Четыре столбца: предобучение, дообучение на демонстрациях, модель награды и оптимизация политики.]]\n\n*Chip Huyen, [RLHF: Reinforcement Learning from Human Feedback, обзорная схема](https://huyenchip.com/2023/05/02/rlhf.html#rlhf-overview). Столбцы различают предобучение на тексте, SFT на демонстрациях, обучение модели награды на сравнениях и оптимизацию политики. Примеры моделей и объёмы данных внизу относятся к маю 2023 года. Конкретный эксперимент с PPO описан отдельно в [статье InstructGPT, рис. 2](https://arxiv.org/pdf/2203.02155#page=3).*\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo/fig1.png|Слева пары предпочтений обучают модель награды, которая оценивает новые ответы политики; справа пары идут прямо в функцию потерь DPO.]]\n\n",
+          "new": "\n## Две схемы обучения по предпочтениям\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/rlhf-basic.png|Одна ветвь после SFT обучает модель награды на человеческих сравнениях, другая обновляет политику через PPO]]\n\n*Nathan Lambert, [RLHF and Post-Training, Training Overview, рис. 5](https://rlhfbook.com/c/03-training-overview#fig:rlhf-basic-repeat),\n[оригинал PNG](https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/rlhf-basic.png), [MIT](/licenses/rlhf-book-MIT.txt).\nВерхняя линия — последовательность состояний модели. Нижняя ветвь\nучит оценщик по человеческим сравнениям. PPO меняет политику,\nполученную после SFT, а не превращает сам оценщик в помощника.*\n\nВ [InstructGPT, табл. 6](https://arxiv.org/html/2203.02155v1#A1.T6), для SFT\nуказано 12 725 обучающих запросов с демонстрациями, для модели награды —\n33 207 запросов с ранжированиями, для PPO — 31 144 запроса без человеческих\nметок. Это числа запросов, не пар: одно ранжирование четырёх ответов\nдаёт шесть сравнений. Округлённые числа и подпись о повторном\nиспользовании запросов на схеме не описывают точное разбиение этого\nэксперимента. Общую схему с отдельным предобучением показывает\n[Chip Huyen](https://huyenchip.com/2023/05/02/rlhf.html#rlhf-overview).\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo/fig1.png|Слева пары предпочтений обучают модель награды, которая оценивает новые ответы политики; справа пары идут прямо в функцию потерь DPO.]]\n\n"
+        }
+      ]
+    },
+    {
+      "source": "Concepts/Training/RLHF.md",
+      "before_sha256": "0780e7493e215c01d98a1bf0674432c8b0fdf9f4f07309c8fda0f13f9155710e",
+      "after_sha256": "882c93cd219df377a2992dd0542be3a1797131fd34ef9dd0e0187808956f835e",
+      "lines": 189,
+      "changes": [
+        {
+          "old": "\nRLHF pipeline состоит из трёх последовательных этапов. Каждый следующий строится на результатах предыдущего.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/chatgpt-training-pipeline.png]]\n*Полный pipeline обучения ChatGPT/InstructGPT: SFT на демонстрациях → обучение Reward Model на сравнениях → оптимизация через PPO (источник: Chip Huyen)*\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo/fig1.png]]\n*Figure 1 из DPO (Rafailov et al., 2023): сравнение RLHF pipeline (слева) и DPO (справа). RLHF требует отдельной Reward Model + RL (PPO); DPO оптимизирует предпочтения напрямую*\n",
+          "new": "\nRLHF pipeline состоит из трёх последовательных этапов. Каждый следующий строится на результатах предыдущего.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/rlhf-basic.png|SFT на демонстрациях, обучение модели награды на предпочтениях и обновление политики через PPO]]\n\n*Nathan Lambert, [Training Overview, рис. 5](https://rlhfbook.com/c/03-training-overview#fig:rlhf-basic-repeat),\n[оригинал PNG](https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/rlhf-basic.png), [MIT](/licenses/rlhf-book-MIT.txt).\nСхема показывает ранний рецепт RLHF. Числа в конкретном опыте\nInstructGPT см. в [табл. 6](https://arxiv.org/html/2203.02155v1#A1.T6); схема не описывает весь\nпроцесс обучения ChatGPT.*\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo/fig1.png]]\n*Figure 1 из DPO (Rafailov et al., 2023): сравнение RLHF pipeline (слева) и DPO (справа). RLHF требует отдельной Reward Model + RL (PPO); DPO оптимизирует предпочтения напрямую*\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "c24ee626659835ac7525caf56620e656e026680126430b28fa2253db03394ed4",
+      "after_sha256": "e4228a6f50c9740b0c334d2192b375ad13d0c82ddb4d806964074c6182945d02",
+      "lines": 25376,
+      "changes": [
+        {
+          "old": "    license: null\n    license_url: null\n    modifications: copied without modification from the local raw source for publication packaging\n    used_in:\n      - 00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md\n      - Concepts/Training/RLHF.md\n      - 03 Исследовательские линии/RLHF → DPO → RLVR.md\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/instructgpt/images/chatgpt-training-pipeline.png\n    provenance_note: Source raster matched byte-for-byte on 2026-11-09; the image is Chip Huyen's overview, not the InstructGPT paper figure. Reuse license not established.\n  - id: curated-instructgpt-c9039445d6f7\n",
+          "new": "    license: null\n    license_url: null\n    modifications: copied without modification from the local raw source for publication packaging\n    used_in: []\n    former_used_in: [\"00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md\",\"Concepts/Training/RLHF.md\",\"03 Исследовательские линии/RLHF → DPO → RLVR.md\"]\n    figure_url: https://huyenchip.com/2023/05/02/rlhf.html#rlhf-overview\n    publication_status: retired\n    replacement: 00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/rlhf-basic.png\n    retirement_reason: Reuse permission for the local copy is not independently established; the original remains linked.\n    metadata_status: needs-confirmation\n    provenance_confirmation: third-party-figure-origin-verified\n    rights_status: needs-confirmation\n    sha256: ffb549dc81ca08e62ae8d936d2313f41711ef5def80e834e89ced8926f4c8724\n    source_asset: raw/papers/instructgpt/images/chatgpt-training-pipeline.png\n    provenance_note: Source raster matched byte-for-byte on 2026-11-09; the image is Chip Huyen's overview, not the InstructGPT paper figure. Reuse license not established.\n  - id: curated-instructgpt-c9039445d6f7\n"
+        },
+        {
+          "old": "    license_url: null\n    rights_status: source-verified; third-party-rights-not-independently-verified\n    modifications: existing curated image retained unchanged and byte-matched to the official source on 2026-10-21\n    used_in:\n      - 00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n  - id: curated-voita-counts-000000000017\n",
+          "new": "    license_url: null\n    rights_status: source-verified; third-party-rights-not-independently-verified\n    modifications: existing curated image retained unchanged and byte-matched to the official source on 2026-10-21\n    used_in: []\n    former_used_in: [\"00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md\"]\n    figure_url: https://lena-voita.github.io/nlp_course/word_embeddings.html#one_hot_vectors\n    publication_status: retired\n    replacement: 00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/tensorflow-one-hot.png\n    retirement_reason: Reuse permission for the local copy is not independently established; the original remains linked.\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n  - id: curated-voita-counts-000000000017\n"
+        },
+        {
+          "old": "    license: User permission record (not a named license)\n    license_url: null\n    modifications: Existing complete PNG retained unchanged and byte-matched to the official course.\n    used_in:\n      - 00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md\n    metadata_status: needs-confirmation\n    provenance_confirmation: word-embeddings-source-snapshot\n    derivation: source-raster-copy\n",
+          "new": "    license: User permission record (not a named license)\n    license_url: null\n    modifications: Existing complete PNG retained unchanged and byte-matched to the official course.\n    used_in: []\n    former_used_in: [\"00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md\"]\n    figure_url: https://lena-voita.github.io/nlp_course/word_embeddings.html#pre_neural\n    publication_status: retired\n    replacement: 00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/reduced-svd.svg\n    retirement_reason: Reuse permission for the local copy is not independently established; the original remains linked.\n    metadata_status: needs-confirmation\n    provenance_confirmation: word-embeddings-source-snapshot\n    derivation: source-raster-copy\n"
+        },
+        {
+          "old": "    source_page_sha256: 4f48bf06590077126727cca905cd503cc7dc3b9174f44072194ac09a37b2327e\n    rights_status: source-verified; third-party-rights-not-independently-verified\n    last_verified: 2026-10-21\n  - id: curated-voita-w2v-intro-000000000018\n    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/word2vec-intro.png\n    author: Lena Voita\n",
+          "new": "    source_page_sha256: 4f48bf06590077126727cca905cd503cc7dc3b9174f44072194ac09a37b2327e\n    rights_status: source-verified; third-party-rights-not-independently-verified\n    last_verified: 2026-10-21\n  - {\"id\":\"curated-tensorflow-one-hot-0309948602d5\",\"author\":\"TensorFlow documentation authors\",\"title\":\"Word embeddings: One-hot encodings\",\"source_url\":\"https://www.tensorflow.org/text/guide/word_embeddings#one-hot_encodings\",\"source_image_url\":\"https://www.tensorflow.org/static/text/guide/images/one-hot.png\",\"license_evidence_url\":\"https://www.tensorflow.org/text/guide/word_embeddings\",\"source_page_snapshot\":\"05 Источники/Originals/reviewed-source-figures-2026-11-10/tensorflow-guide.html\",\"source_page_sha256\":\"cbc5b9594bb53b2cc1aedb66d41bdf11e51e276e13e51f4823dc6290a4938cc7\",\"sha256\":\"0309948602d54e32de834032a266fe02179f5a6432bb6aaf0dd396cf9084373a\",\"dimensions_px\":[638,522],\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"derivation\":\"source-raster-copy\",\"used_in\":[\"00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md\"],\"asset\":\"00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/tensorflow-one-hot.png\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/tensorflow-one-hot.png\",\"source_asset_sha256\":\"0309948602d54e32de834032a266fe02179f5a6432bb6aaf0dd396cf9084373a\",\"modifications\":\"Original file copied byte-for-byte; no crop, redraw, or resizing.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-10\"}\n  - {\"id\":\"curated-mercurysheet-svd-f170f19edaaa\",\"author\":\"Mercurysheet, adapted from Cmglee\",\"title\":\"Reduced Singular Value Decompositions\",\"source_url\":\"https://commons.wikimedia.org/wiki/File:Reduced_Singular_Value_Decompositions.svg\",\"source_image_url\":\"https://upload.wikimedia.org/wikipedia/commons/c/c4/Reduced_Singular_Value_Decompositions.svg\",\"source_file_sha1\":\"09d791ce9350505608a65ddfa4671eb8d0b8a8ba\",\"license_evidence_url\":\"https://commons.wikimedia.org/w/index.php?title=File:Reduced_Singular_Value_Decompositions.svg&oldid=1024634772\",\"source_page_snapshot\":\"05 Источники/Originals/reviewed-source-figures-2026-11-10/commons-svd.html\",\"source_page_sha256\":\"54f52b925f53d3a242135ffdc5efaaed043c8b5576b720bb153452cac266f3bb\",\"sha256\":\"f170f19edaaa8de49b840393e548e1ecb70d2eb4be7ca6f525a737c61065eec8\",\"license\":\"CC BY-SA 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by-sa/4.0/\",\"derivation\":\"source-svg-copy\",\"used_in\":[\"00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md\"],\"asset\":\"00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/reduced-svd.svg\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/reduced-svd.svg\",\"source_asset_sha256\":\"f170f19edaaa8de49b840393e548e1ecb70d2eb4be7ca6f525a737c61065eec8\",\"modifications\":\"Original file copied byte-for-byte; no crop, redraw, or resizing.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-10\"}\n  - {\"id\":\"curated-lambert-rlhf-basic-67705f0e237d\",\"author\":\"Nathan Lambert\",\"title\":\"Training Overview, Figure 5: early RLHF\",\"source_url\":\"https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/rlhf-basic.png\",\"source_image_url\":\"https://raw.githubusercontent.com/natolambert/rlhf-book/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/rlhf-basic.png\",\"figure_url\":\"https://rlhfbook.com/c/03-training-overview#fig:rlhf-basic-repeat\",\"license_evidence_url\":\"https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/README.md#license\",\"source_page_snapshot\":\"05 Источники/Originals/reviewed-source-figures-2026-11-10/lambert-chapter.md\",\"source_page_sha256\":\"bbf587036cf9931038fc00d4928021dad05abaaa482fd31b8625e04495543f83\",\"license_evidence\":\"05 Источники/Originals/reviewed-source-figures-2026-11-10/lambert-readme.md\",\"license_evidence_sha256\":\"2faf557d3cbd6d114c6e29112f50dc01abdb0a0def136dde34b021f50d37b0f9\",\"license_notice\":\"site/public/licenses/rlhf-book-MIT.txt\",\"license_notice_sha256\":\"a312d5db1e63cf298985a9989069ce7d6a7a35ac237572276ab3222e5af42d4d\",\"commit\":\"3f573487c58548c16a548cd5fb8979a0189384c7\",\"sha256\":\"67705f0e237d4eff26e2b1b49e16fdd6aac007aa986336f661ef9cb04eb906cc\",\"dimensions_px\":[4018,1185],\"license\":\"MIT\",\"license_url\":\"https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/LICENSE-CODE\",\"derivation\":\"source-raster-copy\",\"used_in\":[\"00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md\",\"03 Исследовательские линии/RLHF → DPO → RLVR.md\",\"Concepts/Training/RLHF.md\"],\"asset\":\"00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/rlhf-basic.png\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/rlhf-basic.png\",\"source_asset_sha256\":\"67705f0e237d4eff26e2b1b49e16fdd6aac007aa986336f661ef9cb04eb906cc\",\"modifications\":\"Original file copied byte-for-byte; no crop, redraw, or resizing.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-10\"}\n  - id: curated-voita-w2v-intro-000000000018\n    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/word2vec-intro.png\n    author: Lena Voita\n"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tests/fixtures/legacy-unhashed-assets.json",
+      "before_sha256": "ec52e748ac32dee36c56e2afa9f292af35d93f180d7bb209416e043aeeb5c709",
+      "after_sha256": "750f579132267af30709884f011bba6950b19976394dc7eb7778db0d85cebc91",
+      "lines": 334,
+      "changes": [
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt3.png\",\n    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png\",\n    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-server_setup.png\",\n    \"00 Учебник/Assets/Figures/curated/instructgpt/chatgpt-training-pipeline.png\",\n    \"00 Учебник/Assets/Figures/curated/instructgpt/pretraining-hf.png\",\n    \"00 Учебник/Assets/Figures/curated/instructgpt/rlhf-pipeline-hf.png\",\n    \"00 Учебник/Assets/Figures/curated/jamba/fig1.png\",\n",
+          "new": "    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt3.png\",\n    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png\",\n    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-server_setup.png\",\n    \"00 Учебник/Assets/Figures/curated/instructgpt/pretraining-hf.png\",\n    \"00 Учебник/Assets/Figures/curated/instructgpt/rlhf-pipeline-hf.png\",\n    \"00 Учебник/Assets/Figures/curated/jamba/fig1.png\",\n"
+        }
+      ]
+    },
+    {
+      "source": "docs/audit/2026-10-30-reading-route-review.json",
+      "before_sha256": "33b97ee84a859e5e2ae35a25c9569af800ca8b47204f96360fae5f9f4c1ebc9e",
+      "after_sha256": "c909e9dcd952f0520eb37f3c11b1bdb10c4eaef870cedc3ea65586ae838111a2",
+      "lines": 7996,
+      "changes": [
+        {
+          "old": "    {\n      \"path\": \"00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md\",\n      \"route\": \"textbook/text-representation/numerical-representation\",\n      \"sha256\": \"18b73c24f2ee4a9b7a014cd2bc2b5480797b642bc76741de0eb9b2dce90ae985\",\n      \"lines\": 808,\n      \"read\": \"complete saved chapter, frontmatter through sources and final navigation\",\n      \"findings\": [\n        \"Unicode/bytes/token IDs → lookup → shared-row gradient → padded batch → bag of words/TF–IDF → contextual states\",\n",
+          "new": "    {\n      \"path\": \"00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md\",\n      \"route\": \"textbook/text-representation/numerical-representation\",\n      \"sha256\": \"9be324f36c922dc7e4f8b5966bbe8e4a9e47b26efa74902d6f670dca4647f951\",\n      \"lines\": 813,\n      \"lastFigureReview20261110\": {\n        \"journal\": \"docs/audit/2026-11-10-last-registered-illustrations-additions.json\",\n        \"scope\": \"Complete prior owner reread and exact current figure and explanation delta; no whole-source or translation acceptance.\",\n        \"evidence\": \"TensorFlow original CC BY 4.0; Voita figure linked. All five chapter examples executed.\"\n      },\n      \"read\": \"complete saved chapter, frontmatter through sources and final navigation\",\n      \"findings\": [\n        \"Unicode/bytes/token IDs → lookup → shared-row gradient → padded batch → bag of words/TF–IDF → contextual states\",\n"
+        },
+        {
+          "old": "    {\n      \"path\": \"00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md\",\n      \"route\": \"textbook/post-training/sft-instruction-data\",\n      \"sha256\": \"efecdcaba7edd624415ebc10cccb36bc2db67fa7d6b537dba20ae70088355780\",\n      \"lines\": 857,\n      \"read\": \"complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation\",\n      \"findings\": [\n        \"The full 857-line chapter was read before its metadata-only navigation repair: task example, masking, shifted loss, token/answer weighting, one Llama update, packing, data construction and mixtures.\",\n",
+          "new": "    {\n      \"path\": \"00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md\",\n      \"route\": \"textbook/post-training/sft-instruction-data\",\n      \"sha256\": \"52b6da909a17f216600da10a88a509482138005076d93ff7fabdd7c5aaf8ba02\",\n      \"lines\": 858,\n      \"lastFigureReview20261110\": {\n        \"journal\": \"docs/audit/2026-11-10-last-registered-illustrations-additions.json\",\n        \"scope\": \"Complete prior owner reread and exact current figure and explanation delta; no whole-source or translation acceptance.\",\n        \"evidence\": \"Lambert Figure 5 original MIT; actual InstructGPT data counts linked to Table 6. All three dependent CPU examples executed.\"\n      },\n      \"read\": \"complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation\",\n      \"findings\": [\n        \"The full 857-line chapter was read before its metadata-only navigation repair: task example, masking, shifted loss, token/answer weighting, one Llama update, packing, data construction and mixtures.\",\n"
+        },
+        {
+          "old": "    {\n      \"path\": \"00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md\",\n      \"route\": \"textbook/text-representation/word2vec-glove\",\n      \"sha256\": \"d1b38eed70667ad52069f5769a341f78a1a1ffa2e54aa7e45252480abb747366\",\n      \"lines\": 1452,\n      \"read\": \"Complete1116-line baseline and full1429-line edited chapter read in bounded ranges1-380,381-750,751-1100,1101-EOF. Truncated1101-1225 output explicitly reread separately. Final math-only two-line reflow and surrounding508-524 reread; current chapter1431lines. No substantive content changes after the whole read. Final bounded clarification of source fixture ratios4/2 and2/3 reread with the full labels/masks subsection; all prior prose/code/figures unchanged. Current chapter1435lines.\",\n      \"findings\": [\n        \"Existing full1116-line explanation already covers count-based vectors, predictive objectives, fastText, contextual states and tying; preserved rather than replaced with an overview.\",\n",
+          "new": "    {\n      \"path\": \"00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md\",\n      \"route\": \"textbook/text-representation/word2vec-glove\",\n      \"sha256\": \"6ec6c55f564b2bb98cf988239cb36d63e72808e41fc6cb1d05a73539e7884e72\",\n      \"lines\": 1462,\n      \"lastFigureReview20261110\": {\n        \"journal\": \"docs/audit/2026-11-10-last-registered-illustrations-additions.json\",\n        \"scope\": \"Complete prior owner reread and exact current figure and explanation delta; no whole-source or translation acceptance.\",\n        \"evidence\": \"Mercurysheet/Cmglee original CC BY-SA 4.0; exact compact and approximate truncated cases distinguished. All seven chapter examples executed.\"\n      },\n      \"read\": \"Complete1116-line baseline and full1429-line edited chapter read in bounded ranges1-380,381-750,751-1100,1101-EOF. Truncated1101-1225 output explicitly reread separately. Final math-only two-line reflow and surrounding508-524 reread; current chapter1431lines. No substantive content changes after the whole read. Final bounded clarification of source fixture ratios4/2 and2/3 reread with the full labels/masks subsection; all prior prose/code/figures unchanged. Current chapter1435lines.\",\n      \"findings\": [\n        \"Existing full1116-line explanation already covers count-based vectors, predictive objectives, fastText, contextual states and tying; preserved rather than replaced with an overview.\",\n"
+        }
+      ]
+    }
+  ]
+}

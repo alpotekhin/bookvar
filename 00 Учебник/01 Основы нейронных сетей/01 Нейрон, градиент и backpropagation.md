@@ -2,12 +2,67 @@
 title: Вычислительный граф и backpropagation
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-27
+last_updated: 2026-11-03
+reference_terms:
+  - label: "Backpropagation — локальная и конечная производные"
+    label_en: "Backpropagation local and final derivatives"
+    anchor: backprop-chain-rule
+  - label: "Backpropagation — общие узлы и сумма вкладов"
+    label_en: "Backpropagation shared nodes and accumulation"
+    anchor: backprop-shared-nodes
+  - label: "Матричный слой — обратный проход и broadcasting"
+    label_en: "Affine-layer backward and broadcast reduction"
+    anchor: affine-layer-backward
+  - label: "Micrograd — топологический порядок обратного прохода"
+    label_en: "Micrograd reverse topological order"
+    anchor: micrograd-topological-backward
+  - label: "Backward и step — градиент и обновление параметров"
+    label_en: "Backward gradients and optimizer step"
+    anchor: backward-versus-step
+  - label: "Накопление градиентов — неравные мини-батчи"
+    label_en: "Gradient accumulation with unequal microbatches"
+    anchor: gradient-accumulation-weighted
+  - label: "VJP — входящая производная векторного выхода"
+    label_en: "VJP and vector-output seeds"
+    anchor: reverse-vjp
+  - label: "Autograd — затухание, взрыв и clipping"
+    label_en: "Autograd vanishing, exploding gradients and clipping"
+    anchor: autograd-gradient-stability
+  - label: "Autograd — NaN и маскирование после операции"
+    label_en: "Autograd NaNs and masking after invalid operations"
+    anchor: autograd-invalid-operations
+  - label: "Autograd — detach, no_grad и сохранённые значения"
+    label_en: "Autograd detach, no_grad and saved-value versions"
+    anchor: autograd-recorded-graph
+  - label: "Gradcheck — численные разности и точки излома"
+    label_en: "Gradcheck finite differences and nondifferentiable points"
+    anchor: finite-difference-gradcheck
+  - label: "JVP — прямой режим и двойственные числа"
+    label_en: "JVP forward mode and dual numbers"
+    anchor: forward-jvp-dual
+  - label: "Прямой и обратный режим — пошаговые таблицы"
+    label_en: "Forward and reverse differentiation traces"
+    anchor: forward-reverse-traces
+  - label: "HVP — произведение гессиана на вектор"
+    label_en: "Hessian-vector products"
+    anchor: hessian-vector-product
+  - label: "Grad и vmap — индивидуальные и средние градиенты"
+    label_en: "Grad and vmap individual and mean gradients"
+    anchor: gradient-function-transforms
+  - label: "Custom backward — производная по каждому входу"
+    label_en: "Custom backward incoming-derivative contract"
+    anchor: custom-backward-contract
+  - label: "Custom autograd — JVP, broadcasting и torch.func"
+    label_en: "Custom autograd JVP, broadcasting and torch.func"
+    anchor: custom-forward-transform-rules
 primary_sources:
   - https://cs231n.github.io/optimization-2/
   - https://github.com/karpathy/micrograd
   - https://colah.github.io/posts/2015-08-Backprop/
   - https://docs.pytorch.org/docs/2.14/notes/autograd.html
+  - https://github.com/harvard-edge/cs249r_book/blob/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/frameworks/frameworks.qmd
+  - https://jmlr.org/papers/v18/17-468.html
+  - https://github.com/jax-ml/jax/blob/dc4af684446e65ee98eee8090e1ff6f8211473fb/docs/101/transformations.md
 ---
 
 # Вычислительный граф и обратное распространение ошибки
@@ -41,12 +96,13 @@ $$
 скалярной величины $L$ по значению узла $v$. Это не то же самое, что
 локальная производная отдельной операции.
 
+<a id="backprop-chain-rule"></a>
 ## 2. Один вычислительный граф
 
 В примере Stanford CS231n вычисляется $L=(x+y)z$. Положим
 $x=-2$, $y=5$, $z=-4$ и введём промежуточное значение $q=x+y$.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/backpropagation-2026-10-21/cs231n-chain.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/backpropagation-2026-10-21/cs231n-chain.svg|Схема CS231n для (x + y)z: значения прямого прохода и конечные производные у каждой связи]]
 
 *Исходная схема Stanford CS231n,
 [Compound expressions with chain rule](https://cs231n.github.io/optimization-2/#backprop).
@@ -132,6 +188,7 @@ $$
 
 <span id="4-правило-цепочки-в-одной-строке"></span>
 
+<a id="backprop-shared-nodes"></a>
 ## 4. Правило цепочки и разветвлённый граф
 
 Для $L=f(g(x))$ правило цепочки даёт
@@ -175,7 +232,7 @@ $$
 
 ### Сложение, умножение и выбор максимума
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/backpropagation-2026-10-21/cs231n-gates.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/backpropagation-2026-10-21/cs231n-gates.svg|CS231n: сложение передаёт градиент обоим входам, умножение масштабирует его, max выбирает один вход]]
 
 *Stanford CS231n,
 [Patterns in backward flow](https://cs231n.github.io/optimization-2/#patterns).
@@ -277,7 +334,7 @@ $$
 и дифференцировать каждую из них. Достаточно знать производную целой
 функции. CS231n показывает это для сигмоидального нейрона.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/backpropagation-2026-10-21/cs231n-sigmoid.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/backpropagation-2026-10-21/cs231n-sigmoid.svg|Сигмоидальный нейрон CS231n: цепочка взвешенной суммы, отрицания, экспоненты и обратной величины с численными производными]]
 
 *Stanford CS231n,
 [Modularity: Sigmoid example](https://cs231n.github.io/optimization-2/#sigmoid).
@@ -296,6 +353,7 @@ $p(1-p)\approx0{,}196612$. На рисунке она получена чере�
 Если добавить функцию потерь, все эти производные нужно домножить
 на производную потерь по выходу нейрона.
 
+<a id="affine-layer-backward"></a>
 ### Обратный проход матричного слоя
 
 В главе об MLP примеры записаны строками:
@@ -395,6 +453,7 @@ torch.testing.assert_close(b.grad, G.sum(dim=0))
 print(Z.detach(), W.grad, X.grad, b.grad, sep="\n")
 ```
 
+<a id="micrograd-topological-backward"></a>
 ## 6. Что хранит micrograd
 
 `micrograd` Андрея Карпати реализует эти правила для скалярных чисел.
@@ -449,7 +508,7 @@ $a,b,c,d,L$; обратный — $L,d,c,b,a$. К моменту обработ�
 уже учтены обе ветви. `visited` не даёт обходить общий узел повторно,
 но локальные операции всё равно добавляют каждый свой вклад.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/micrograd/computational-graph.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/micrograd/computational-graph.svg|Оригинальный граф micrograd: входы, веса и операции ReLU-нейрона с отдельными полями data и grad]]
 
 *Исходный граф из [micrograd](https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/gout.svg),
 Andrej Karpathy, [MIT License](/licenses/micrograd-MIT.txt).
@@ -474,6 +533,7 @@ PyTorch применяет обратный режим к тензорным о�
 
 <span id="7-из-градиента-получается-обучение"></span>
 
+<a id="backward-versus-step"></a>
 ## 7. Один шаг градиентного спуска
 
 Вернёмся к tanh-нейрону. При скорости обучения $\eta=0{,}1$
@@ -556,6 +616,7 @@ assert w_acc.grad.item() == 3
 пропустить параметр с `grad=None`, тогда как нулевой градиент не обязательно
 означает отсутствие обновления, например при momentum или weight decay.
 
+<a id="gradient-accumulation-weighted"></a>
 ### Накопление по нескольким мини-батчам
 
 Пусть средняя функция потерь задана по пяти независимым примерам,
@@ -578,6 +639,7 @@ BatchNorm меняет статистики при разбиении батча
 могут дать другие реализации случайности. Совпадение накопленной суммы
 градиентов само по себе не устраняет эти различия.
 
+<a id="reverse-vjp"></a>
 ## 9. Автоматическое дифференцирование в обратном режиме
 
 До сих пор конечный результат был скаляром. Если функция возвращает вектор,
@@ -616,7 +678,148 @@ assert u.grad.item() == 10
 их влияние на скалярные потери. Поэтому ему достаточно передать $G$,
 а не полную матрицу Якоби.
 
+<span id="10-что-может-пойти-не-так"></span>
+
+<a id="autograd-gradient-stability"></a>
+## 10. Ошибки и нестабильность обратного прохода
+
+### Исчезающие градиенты
+
+Для цепочки $h_{k+1}=0{,}5h_k$ производная после двадцати звеньев равна
+$0{,}5^{20}\approx9{,}54\cdot10^{-7}$.
+При единичной производной на конце до первого входа дойдёт именно это число.
+В нелинейной сети вместо одного коэффициента появляются производные
+активаций и матрицы весов. Насыщенная активация может уменьшить один из
+множителей почти до нуля; в матричном случае разные направления
+могут затухать с разной скоростью.
+
+Поэтому ограниченность выхода активации сама по себе не означает
+устойчивый градиент. Важны её производная в текущих точках, веса
+и пути через граф. Подробные примеры насыщения есть в
+[[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/02 Функции активации|главе об активациях]].
+
+### Взрывающиеся градиенты
+
+В цепочке $h_{k+1}=2h_k$ за двадцать звеньев получается множитель
+$2^{20}=1\,048\,576$. В многомерном случае большие нормы произведений
+матриц Якоби могут усиливать некоторые направления.
+При ограничении нормы градиент $g$ заменяют на
+
+$$
+g_{\text{clip}}=
+g\min\left(1,\frac{c}{\lVert g\rVert_2}\right)
+$$
+
+для ненулевого $g$; нулевой оставляют нулевым.
+Например, $(6,8)$ имеет норму $10$ и при пороге $c=5$
+превращается в $(3,4)$. Направление сохраняется, длина ограничивается.
+Это уменьшает возможный размер обновления SGD, но не исправляет
+ошибку графа, переполнение или неподходящую инициализацию.
+
+<a id="autograd-invalid-operations"></a>
+### NaN
+
+Даже конечное значение потерь не гарантирует конечных производных.
+В примере из документации PyTorch деление
+$(1,1)/(0,1)$ даёт $(\infty,1)$.
+Если после деления выбрать только второй элемент, потери равны единице,
+но обратная формула для первого элемента всё ещё может вычислять
+$0/0$ и вернуть NaN.
+
+Безопасный вариант сначала выбирает допустимые элементы,
+а затем делит: `(x[mask] / divisor[mask]).sum()`.
+Недопустимое деление тогда вообще не попадает в граф.
+Поиск первой нечисловой операции полезнее, чем замена всех NaN нулями;
+`torch.autograd.detect_anomaly()` помогает связать ошибку обратного
+прохода с операцией прямого.
+
+<a id="autograd-recorded-graph"></a>
+### Неверный граф
+
+`detach()` сохраняет численное значение, но обрывает путь производной.
+При $x=2$ выражение $x\cdot x$ даёт производную $4$,
+а `x * x.detach()` даёт $2$: второй множитель считается константой.
+Значение обоих выражений равно четырём.
+
+`torch.no_grad()` не записывает операции блока в обратный граф.
+`model.eval()` решает другую задачу: переключает поведение слоёв
+вроде Dropout и BatchNorm и не отключает autograd.
+Замороженные веса с `requires_grad=False` тоже не обязательно обрывают
+путь к входу. В $y=wx$ при фиксированном $w=3$ производная по
+обучаемому $x$ по-прежнему равна трём.
+
+Изменение сохранённого значения на месте может сделать обратный проход
+неверным. Если для $y=x^2$ сохранён $x=2$, а до `backward` его заменить
+на три, формула $2x$ уже не относится к выполненному прямому проходу.
+PyTorch проверяет версии сохранённых тензоров и в таких случаях
+выдаёт ошибку. Обходить проверку через `.data` не следует.
+
+Эти случаи разобраны в разделах
+[Autograd mechanics](https://docs.pytorch.org/docs/2.14/notes/autograd.html)
+о сохранённых тензорах, делении на ноль, режимах градиентов и in-place
+операциях.
+
+<a id="finite-difference-gradcheck"></a>
+## 11. Как проверить собственный обратный проход
+
+Для небольшой гладкой функции сравнивают вычисленный градиент
+с центральной разностью:
+
+$$
+\frac{\partial L}{\partial\theta_i}
+\approx
+\frac{L(\theta+\varepsilon e_i)-L(\theta-\varepsilon e_i)}
+{2\varepsilon}.
+$$
+
+В примере $L=(a+b)(b+1)$ при $(a,b)=(2,1)$ ожидаются производные $(2,5)$.
+Следующий код отдельно меняет каждую координату, а затем проверяет тот же
+результат autograd.
+
+```python
+import torch
+
+def scalar_loss(a, b):
+    return (a + b) * (b + 1)
+
+point = [2., 1.]
+eps = 1e-6
+numeric = []
+for i in range(2):
+    plus, minus = point.copy(), point.copy()
+    plus[i] += eps
+    minus[i] -= eps
+    numeric.append((scalar_loss(*plus) - scalar_loss(*minus)) / (2 * eps))
+
+a_check = torch.tensor(2., dtype=torch.float64, requires_grad=True)
+b_check = torch.tensor(1., dtype=torch.float64, requires_grad=True)
+scalar_loss(a_check, b_check).backward()
+analytic = torch.stack((a_check.grad, b_check.grad))
+torch.testing.assert_close(torch.tensor(numeric, dtype=torch.float64), analytic)
+print(numeric, analytic.tolist())
+```
+
+Слишком большое $\varepsilon$ измеряет уже не локальное изменение,
+а слишком маленькое усиливает ошибки округления при вычитании близких чисел.
+Для новых операций удобно начинать с `float64` и нескольких разумных
+приращений. Встроенная проверка `torch.autograd.gradcheck` сравнивает
+производные численно и по обратной формуле; её стандартные допуски рассчитаны
+на двойную точность.
+
+Проверять нужно вдали от точек излома. Для ReLU в нуле центральная разность
+равна $1/2$, а PyTorch выбирает производную $0$; это не доказывает ошибку
+реализации. При проверке также фиксируют случайность и изменяемые состояния,
+чтобы оба прямых прохода вычисляли одну функцию.
+Если несколько индексов входа ссылаются на одну область памяти, например
+после `expand`, перед проверкой нужен независимый клон: изменение одной
+координаты иначе затрагивает несколько логических элементов.
+
+Далее по основному курсу: [[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения|оптимизаторы и расписания шага]].
+
+## 12. Прямой режим и преобразования функций
+
 <!-- BEGIN REVIEW: forward mode 2026-10-27 -->
+<a id="forward-jvp-dual"></a>
 ### Forward mode: carrying a value and its derivative
 
 Let the input move along $x(t)=x+t h$. Each intermediate value $v$ then has
@@ -692,6 +895,7 @@ for direction in (1., 3., -2.):
     torch.testing.assert_close(tangent, ad_x.new_tensor(manual_derivative * direction))
 ```
 
+<a id="forward-reverse-traces"></a>
 ### The same graph in forward and reverse mode
 
 Baydin, Pearlmutter, Radul and Siskind use a two-input example in
@@ -701,7 +905,7 @@ $$
 F(x_1,x_2)=\ln x_1+x_1x_2-\sin x_2.
 $$
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/autodiff-2026-10-27/baydin-figure4-graph.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/autodiff-2026-10-27/baydin-figure4-graph.png|Baydin, Figure 4: полный граф log(x1) + x1 x2 − sin(x2), включая входы, промежуточные узлы и исходную подпись]]
 
 *Baydin et al., Figure 4, p. 9, CC BY 4.0. Complete original graph and
 English caption, rendered from the vector PDF. The node names are defined
@@ -714,7 +918,7 @@ in radians. In the forward trace, seed $(1,0)$ changes $x_1$ while holding
 $x_2$ fixed. The logarithm contributes $1/2$, the product contributes 5,
 and the sine contributes zero. The output tangent is $5.5$.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/autodiff-2026-10-27/baydin-table2-forward.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/autodiff-2026-10-27/baydin-table2-forward.png|Baydin, Table 2: значения узлов и прямые производные для направления (1, 0), итог 5,5 и полная подпись]]
 
 *Baydin et al., Table 2, p. 10, CC BY 4.0. Complete original table and
 English caption. Both columns run downward; the right column carries
@@ -730,7 +934,7 @@ $$
 \nabla F(2,5)=\bigl(5.5,\ 2-\cos5\bigr).
 $$
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/autodiff-2026-10-27/baydin-table3-reverse.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/autodiff-2026-10-27/baydin-table3-reverse.png|Baydin, Table 3: прямые значения и обратные производные, накопление 5,5 и 1,716 в двух входах, полная подпись]]
 
 *Baydin et al., Table 3, p. 13, CC BY 4.0. Complete original table and
 English caption. The primal column runs down and the adjoint column runs
@@ -780,6 +984,7 @@ does not follow from the definition. Nor is the tangent computation always
 exactly twice the primal arithmetic: multiplication uses a product rule,
 while other operations use different derivative formulas.
 
+<a id="hessian-vector-product"></a>
 ### A Hessian–vector product without the Hessian
 
 The two modes can be composed. For
@@ -829,6 +1034,7 @@ strategy.
 <!-- END REVIEW: forward mode 2026-10-27 -->
 
 <!-- BEGIN REVIEW: JAX transforms 2026-10-27 -->
+<a id="gradient-function-transforms"></a>
 ### Gradients as functions: grad, vmap and jit
 
 A function can compute a derivative without accumulating it in a tensor's
@@ -1001,139 +1207,8 @@ a backward rule does not automatically supply batching and forward-mode rules.
 
 <!-- END REVIEW: JAX transforms 2026-10-27 -->
 
-<span id="10-что-может-пойти-не-так"></span>
-
-## 10. Ошибки и нестабильность обратного прохода
-
-### Исчезающие градиенты
-
-Для цепочки $h_{k+1}=0{,}5h_k$ производная после двадцати звеньев равна
-$0{,}5^{20}\approx9{,}54\cdot10^{-7}$.
-При единичной производной на конце до первого входа дойдёт именно это число.
-В нелинейной сети вместо одного коэффициента появляются производные
-активаций и матрицы весов. Насыщенная активация может уменьшить один из
-множителей почти до нуля; в матричном случае разные направления
-могут затухать с разной скоростью.
-
-Поэтому ограниченность выхода активации сама по себе не означает
-устойчивый градиент. Важны её производная в текущих точках, веса
-и пути через граф. Подробные примеры насыщения есть в
-[[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/02 Функции активации|главе об активациях]].
-
-### Взрывающиеся градиенты
-
-В цепочке $h_{k+1}=2h_k$ за двадцать звеньев получается множитель
-$2^{20}=1\,048\,576$. В многомерном случае большие нормы произведений
-матриц Якоби могут усиливать некоторые направления.
-При ограничении нормы градиент $g$ заменяют на
-
-$$
-g_{\text{clip}}=
-g\min\left(1,\frac{c}{\lVert g\rVert_2}\right)
-$$
-
-для ненулевого $g$; нулевой оставляют нулевым.
-Например, $(6,8)$ имеет норму $10$ и при пороге $c=5$
-превращается в $(3,4)$. Направление сохраняется, длина ограничивается.
-Это уменьшает возможный размер обновления SGD, но не исправляет
-ошибку графа, переполнение или неподходящую инициализацию.
-
-### NaN
-
-Даже конечное значение потерь не гарантирует конечных производных.
-В примере из документации PyTorch деление
-$(1,1)/(0,1)$ даёт $(\infty,1)$.
-Если после деления выбрать только второй элемент, потери равны единице,
-но обратная формула для первого элемента всё ещё может вычислять
-$0/0$ и вернуть NaN.
-
-Безопасный вариант сначала выбирает допустимые элементы,
-а затем делит: `(x[mask] / divisor[mask]).sum()`.
-Недопустимое деление тогда вообще не попадает в граф.
-Поиск первой нечисловой операции полезнее, чем замена всех NaN нулями;
-`torch.autograd.detect_anomaly()` помогает связать ошибку обратного
-прохода с операцией прямого.
-
-### Неверный граф
-
-`detach()` сохраняет численное значение, но обрывает путь производной.
-При $x=2$ выражение $x\cdot x$ даёт производную $4$,
-а `x * x.detach()` даёт $2$: второй множитель считается константой.
-Значение обоих выражений равно четырём.
-
-`torch.no_grad()` не записывает операции блока в обратный граф.
-`model.eval()` решает другую задачу: переключает поведение слоёв
-вроде Dropout и BatchNorm и не отключает autograd.
-Замороженные веса с `requires_grad=False` тоже не обязательно обрывают
-путь к входу. В $y=wx$ при фиксированном $w=3$ производная по
-обучаемому $x$ по-прежнему равна трём.
-
-Изменение сохранённого значения на месте может сделать обратный проход
-неверным. Если для $y=x^2$ сохранён $x=2$, а до `backward` его заменить
-на три, формула $2x$ уже не относится к выполненному прямому проходу.
-PyTorch проверяет версии сохранённых тензоров и в таких случаях
-выдаёт ошибку. Обходить проверку через `.data` не следует.
-
-Эти случаи разобраны в разделах
-[Autograd mechanics](https://docs.pytorch.org/docs/2.14/notes/autograd.html)
-о сохранённых тензорах, делении на ноль, режимах градиентов и in-place
-операциях.
-
-## 11. Как проверить собственный обратный проход
-
-Для небольшой гладкой функции сравнивают вычисленный градиент
-с центральной разностью:
-
-$$
-\frac{\partial L}{\partial\theta_i}
-\approx
-\frac{L(\theta+\varepsilon e_i)-L(\theta-\varepsilon e_i)}
-{2\varepsilon}.
-$$
-
-В примере $L=(a+b)(b+1)$ при $(a,b)=(2,1)$ ожидаются производные $(2,5)$.
-Следующий код отдельно меняет каждую координату, а затем проверяет тот же
-результат autograd.
-
-```python
-import torch
-
-def scalar_loss(a, b):
-    return (a + b) * (b + 1)
-
-point = [2., 1.]
-eps = 1e-6
-numeric = []
-for i in range(2):
-    plus, minus = point.copy(), point.copy()
-    plus[i] += eps
-    minus[i] -= eps
-    numeric.append((scalar_loss(*plus) - scalar_loss(*minus)) / (2 * eps))
-
-a_check = torch.tensor(2., dtype=torch.float64, requires_grad=True)
-b_check = torch.tensor(1., dtype=torch.float64, requires_grad=True)
-scalar_loss(a_check, b_check).backward()
-analytic = torch.stack((a_check.grad, b_check.grad))
-torch.testing.assert_close(torch.tensor(numeric, dtype=torch.float64), analytic)
-print(numeric, analytic.tolist())
-```
-
-Слишком большое $\varepsilon$ измеряет уже не локальное изменение,
-а слишком маленькое усиливает ошибки округления при вычитании близких чисел.
-Для новых операций удобно начинать с `float64` и нескольких разумных
-приращений. Встроенная проверка `torch.autograd.gradcheck` сравнивает
-производные численно и по обратной формуле; её стандартные допуски рассчитаны
-на двойную точность.
-
-Проверять нужно вдали от точек излома. Для ReLU в нуле центральная разность
-равна $1/2$, а PyTorch выбирает производную $0$; это не доказывает ошибку
-реализации. При проверке также фиксируют случайность и изменяемые состояния,
-чтобы оба прямых прохода вычисляли одну функцию.
-Если несколько индексов входа ссылаются на одну область памяти, например
-после `expand`, перед проверкой нужен независимый клон: изменение одной
-координаты иначе затрагивает несколько логических элементов.
-
 <!-- BEGIN REVIEW: custom backward 2026-10-27 -->
+<a id="custom-backward-contract"></a>
 ### A custom backward returns an incoming derivative to each input
 
 For $o=xy+z$, a later loss $L$ supplies $g=\partial L/\partial o$.
@@ -1222,6 +1297,7 @@ class is useful here for exposing the contract; it is not needed to train
 this expression. A custom kernel or an operation from another system needs
 an appropriate differentiation rule and separate correctness checks.
 
+<a id="custom-forward-transform-rules"></a>
 ### Adding a forward rule and torch.func support
 
 The combined `forward(ctx,...)` interface above works with ordinary
@@ -1361,6 +1437,12 @@ Both classes pass the shown broadcast reverse-gradient checks in PyTorch
   граф исполнения, сохранённые значения, накопление и входящая производная.
 - [[02 Areas/ML & DL/Courses/Stanford CS224N/Lecture 03 — Backpropagation and Neural Networks|Stanford CS224N — Backpropagation]].
 - [[05 Источники/Courses/Stanford CS230 Cheatsheets/en/super-cheatsheet-deep-learning.pdf|Stanford CS230 — Complete Deep Learning Cheatsheet]].
+- [Baydin et al. — Automatic Differentiation in Machine Learning: a Survey](https://jmlr.org/papers/v18/17-468.html), §3.1–3.2:
+  полный граф и пошаговые таблицы прямого и обратного режимов; Figure 4, Tables 2–3.
+- [Harvard ML Systems — ML Frameworks](https://github.com/harvard-edge/cs249r_book/blob/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/frameworks/frameworks.qmd):
+  исходные примеры Forward Mode AD, JAX Function Transformations и Custom Autograd Function.
+- [JAX — Function transformations](https://github.com/jax-ml/jax/blob/dc4af684446e65ee98eee8090e1ff6f8211473fb/docs/101/transformations.md):
+  композиция `grad`, `vmap` и `jit`; закреплена версия документации JAX 0.12.0.1.
 
 **Назад:** [[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/02 Функции активации|Функции активации]].
 **Дальше:** [[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения|SGD, Momentum, Adam и schedules]].

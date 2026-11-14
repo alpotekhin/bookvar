@@ -100,6 +100,12 @@ def main():
     after = Image.open(ROOT/repair["asset"]).convert("RGB")
     assert list(before.size) == repair["source_raster_size_px"]
     assert ImageChops.difference(before.crop(repair["crop_box_px"]), after).getbbox() is None
+    assert repair["asset"] not in chapter
+    assert "https://arxiv.org/pdf/2204.14198v2#page=4" in chapter
+    pheye = json.loads((ROOT/"docs/audit/2026-11-13-flamingo-molmo-figure-additions.json").read_text())["figure"]
+    assert pheye["asset"] in chapter and pheye["figure_url"] in chapter
+    assert sha(ROOT/pheye["asset"]) == pheye["sha256"]
+    assert sha(ROOT/pheye["license_evidence"]) == pheye["license_evidence_sha256"]
 
     pinned = ROOT/"05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images"
     base = ROOT/"00 Учебник/Assets/Figures/curated"
@@ -115,6 +121,7 @@ def main():
         "qformer_mask_sizes":mask_cases, "resampler_permutations":24,
         "gate_gradient_samples":50, "visual_kv_mib":kv_mib,
         "pixel_identical_new_crops":3, "pixel_identical_existing_figure_repairs":1,
+        "native_pheye_figure":pheye["sha256"],
         "unchanged_pinned_course_figures":3,
         "pretrained_model_run":False
     }, indent=2))

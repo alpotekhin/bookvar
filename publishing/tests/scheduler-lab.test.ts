@@ -46,12 +46,14 @@ describe('interactive scheduler is a published canonical exercise', () => {
     const journal = JSON.parse(read('docs/audit/2026-10-30-scheduler-practice-link-additions.json'));
     for (const row of journal.files) {
       const current = read(row.source);
+      const atLinkReview = beforeTopicConsolidation(current, row.source, root,
+        '2026-10-30-scheduler-practice-link-additions.json');
       const restored = beforeTopicConsolidation(current, row.source, root,
         '2026-10-30-decoding-prerequisites-additions.json');
-      expect(hash(current)).toBe(row.after_sha256);
+      expect(hash(atLinkReview)).toBe(row.after_sha256);
       expect(hash(restored)).toBe(row.before_sha256);
       for (const pattern of [/^```[\s\S]*?^```$/gm, /\$\$[\s\S]*?\$\$/g, /^!\[\[.*\]\]$/gm])
-        expect(current.match(pattern)).toEqual(restored.match(pattern));
+        expect(atLinkReview.match(pattern)).toEqual(restored.match(pattern));
       expect(() => beforeTopicConsolidation(current + '\nUnreviewed change.\n', row.source, root,
         '2026-10-30-decoding-prerequisites-additions.json')).toThrow();
     }

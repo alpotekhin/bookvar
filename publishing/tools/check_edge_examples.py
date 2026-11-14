@@ -38,10 +38,8 @@ def rejects(function, *args):
 
 def main():
     chapter = CHAPTER.read_text()
-    chapter = re.sub(r'<!-- BEGIN REVIEW: Micro arena 2026-10-27 -->\n.*?'
-                     r'<!-- END REVIEW: Micro arena 2026-10-27 -->\n\n', '', chapter, flags=re.S)
     blocks = re.findall(r'^```python\n(.*?)^```', chapter, re.M | re.S)
-    assert len(blocks) == 5
+    assert len(blocks) == 7
     ns = {'__name__': '__chapter_examples__'}
     for index, block in enumerate(blocks, 1):
         exec(compile(block, f'{CHAPTER}:block-{index}', 'exec'), ns)
@@ -162,6 +160,25 @@ def main():
     assert 2 * 100 * (100_000 * 4) * 100 == 8_000_000_000
     assert 120 / 200 == .6 and 120 / 10_000 == .012
 
+    # So et al. §3.2: recover fixed per-client updates from the three exact sums.
+    sums = np.array([12, 5, 3])
+    participation = np.array([[1, 1, 0], [0, 1, 1], [1, 0, 1]])
+    recovered = np.linalg.solve(participation, sums)
+    np.testing.assert_array_equal(recovered, [5, 7, -2])
+    # McMahan et al. §2: data-dependent versus fixed denominator.
+    f = Fraction
+    before, after = 2, f(2 - 99 * 2, 100)
+    fixed_before, fixed_after = f(2, 100) / 2, f(2 - 99 * 2, 100) / 2
+    assert after == f(-196, 100) and before - after == f(396, 100)
+    assert (fixed_before, fixed_after) == (f(1, 100), f(-98, 100))
+    assert fixed_before - fixed_after == f(99, 100) < 1
+    # Two illustrative FedBuff server steps using deltas from different versions.
+    w17 = f(2)
+    w18 = w17 + (f(4, 10) + f(2, 10)) / 2
+    w19 = w18 + (f(-2, 10) + f(4, 10)) / 2
+    wrong_mean = ((w17 - f(2, 10)) + (w18 + f(4, 10))) / 2
+    assert (w18, w19, wrong_mean) == (f(23, 10), f(24, 10), f(225, 100))
+
     manifest = json.loads((SOURCES / 'references.json').read_text())
     assert len(manifest['files']) == 16
     for entry in manifest['files']:
@@ -221,6 +238,21 @@ def main():
     assert 'creativecommons.org/licenses/by/4.0' in (SOURCES / 'tinytl-arxiv.html').read_text()
     assert 'creativecommons.org/licenses/by/4.0' in (SOURCES / 'pmlr-license.html').read_text()
     assert 'Assets/Sources/Harvard ML Systems/' not in chapter
+    fedbuff_pdf = ROOT / '05 Источники/Originals/fedbuff-2026-11-09/nguyen22b.pdf'
+    fedbuff_figure = ROOT / '00 Учебник/Assets/Figures/curated/fedbuff-2026-11-09/fedbuff-concurrency-figure2.png'
+    assert digest(fedbuff_pdf) == '3c2764067cecb4727fc33dc9de9c3a73f31d2794cb7f557457506faf470a474b'
+    assert digest(fedbuff_figure) == 'f9457ab23f9d443a7b4805da9e0cc278ab2d0a1c48cb2139f6b292aa5ce8333b'
+    with Image.open(fedbuff_figure) as im:
+        assert im.size == (1820, 750)
+        dimensions[fedbuff_figure.name] = im.size
+    with tempfile.TemporaryDirectory() as tmp:
+        prefix = str(Path(tmp) / 'fedbuff')
+        subprocess.run(['pdftoppm', '-f', '3', '-l', '3', '-scale-to', '6000',
+                        '-x', '455', '-y', '2090', '-W', '1820', '-H', '750',
+                        '-singlefile', '-png', str(fedbuff_pdf), prefix],
+                       check=True, capture_output=True)
+        assert digest(Path(prefix + '.png')) == digest(fedbuff_figure)
+    reproduced.append(fedbuff_figure.name)
     anchors = ['сначала-выбрать-где-находится-вычисление-и-состояние',
                'ресурсная-модель-периферийного-устройства', 'ограничить-изменяемое-состояние',
                'федеративное-обучение-как-протокол', 'система-важнее-средней-формулы',
@@ -231,7 +263,7 @@ def main():
     built = (ROOT / 'site/dist/textbook/deployment/edge-federated/index.html').read_text()
     assert 'BOOKVARPROTECTED' not in built
     assert '[[02 Areas/ML &amp; DL/' not in built
-    assert built.count('class="expressive-code"') == 5
+    assert built.count('class="expressive-code"') == 10
     for anchor in anchors:
         assert f'id="{anchor}"' in built, anchor
     assert '← [[02 MLOps]] · Далее:' in chapter
@@ -241,6 +273,9 @@ def main():
         'original_figures': dimensions, 'reproduced_pdf_crops': reproduced,
         'exact_english_excerpts': len(manifest['excerpts']),
         'retained_built_anchors': len(anchors),
+        'overlap_recovery': recovered.tolist(),
+        'weighted_sensitivity_example': [str(before - after), str(fixed_before - fixed_after)],
+        'fedbuff_server_versions': [str(w17), str(w18), str(w19)],
         'scope': 'Arithmetic, derivatives and source identity only; not Android, FL deployment, crypto or DP-accountant validation'
     }, ensure_ascii=False, indent=2))
 

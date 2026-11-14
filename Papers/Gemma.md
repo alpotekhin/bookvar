@@ -22,8 +22,11 @@ concepts:
 **Published:** 2024 (arXiv:2403.08295v4, Apr 2024)
 **URL:** https://arxiv.org/abs/2403.08295
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/fig1.png]]
-*Performance Gemma 7B по категориям задач в сравнении с LLaMA 2 и Mistral.*
+![[00 Учебник/Assets/Figures/curated/gemma/original-eval_chart.svg|Четыре группы тестов: ответы на вопросы, рассуждение, математика и естественные науки, код]]
+
+*В отчёте показатели сгруппированы по четырём типам задач. Gemma 7B
+выше остальных показанных моделей в математике, естественных науках и коде,
+но по ответам на вопросы уступает Llama 2 13B. Gemma Team, [технический отчёт, рис. 1](https://arxiv.org/html/2403.08295v4#S1.F1), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Исходный SVG без изменений.*
 
 ## TL;DR
 
@@ -59,9 +62,6 @@ Transformer decoder, context length 8192 токенов.
 - **RMSNorm** для стабилизации обучения
 - Shared input/output embeddings для уменьшения размера модели
 - Большой vocabulary (256k) от Gemini -- рассчитан на многоязычность
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/fig2.png]]
-*Сравнение rates memorization между Gemma и PaLM моделями.*
 
 ### Обучение
 
@@ -113,17 +113,35 @@ Gemma 7B: 63.8 average vs Mistral 7B: 61.0. Наибольшее преимущ�
 - **Safety**: 63.5% win rate (7B), 60.1% (2B)
 - **Instruction Following**: 61.2% win rate (7B), 45% (2B)
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/fig3.png]]
-*Rates memorization personal data по data source.*
+### Что измеряли в тестах на запоминание
 
-### Memorization
+Авторы подают первые 50 токенов отобранного текста и сравнивают
+следующие 50 токенов модели с оригиналом. Одно расхождение исключает
+дословное совпадение, но может пройти порог расстояния редактирования
+для приблизительного совпадения. Это тест на воспроизведение текста
+при заданном префиксе, а не оценка того, сколько документов можно
+извлечь произвольным запросом. Методика описана в
+[§6.3 отчёта](https://arxiv.org/html/2403.08295v4#S6.SS3).
 
-- Exact memorization rates сопоставимы с PaLM.
-- **Нет** случаев memorization sensitive data.
-- ~50% больше данных approximate-memorized vs exact.
+![[00 Учебник/Assets/Figures/curated/gemma/original-gemma_by_model_size_final.svg|Частота дословного воспроизведения у Gemma 2B, Gemma 7B и PaLM 2 Small по веб-данным и по всем данным]]
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/fig4.png]]
-*Exact vs approximate memorization по data source.*
+*На левой панели сравнивают английский веб-текст, на правой —
+оценки по всем частям предобучающего корпуса. В первом срезе Gemma
+воспроизводит текст реже PaLM 2 Small, во втором оценки ближе.
+Вертикальная ось логарифмическая. Gemma Team, [технический отчёт, рис. 2](https://arxiv.org/html/2403.08295v4#S6.F2), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Исходный SVG без изменений.*
+
+![[00 Учебник/Assets/Figures/curated/gemma/original-gemma_both_by_corpus_sensitive_final.svg|Доля воспроизведённых фрагментов с признаками персональных данных по частям обучающего корпуса]]
+
+*Авторы искали признаки персональных данных в воспроизведённых
+продолжениях. В этой выборке детектор не нашёл совпадений высшей
+категории чувствительности. Это не гарантия их отсутствия в модели;
+сам детектор также допускает ложные срабатывания. Gemma Team, [технический отчёт, рис. 3](https://arxiv.org/html/2403.08295v4#S6.F3), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Исходный SVG без изменений.*
+
+![[00 Учебник/Assets/Figures/curated/gemma/original-gemma_both_by_corpus_amem_final.svg|Дословное и приблизительное запоминание по частям обучающего корпуса Gemma]]
+
+*При пороге расстояния редактирования 10% авторы насчитали примерно
+в полтора раза больше совпадений, чем при требовании полного совпадения.
+Разницу сравнивают по частям корпуса на логарифмической оси. Gemma Team, [технический отчёт, рис. 4](https://arxiv.org/html/2403.08295v4#S6.F4), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Исходный SVG без изменений.*
 
 ### Safety benchmarks (Table 8)
 

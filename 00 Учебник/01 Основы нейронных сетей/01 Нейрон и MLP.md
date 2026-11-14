@@ -2,7 +2,32 @@
 title: Нейрон и многослойный перцептрон
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-27
+last_updated: 2026-11-03
+reference_terms:
+  - label: Нейрон — взвешенная сумма и активация
+    label_en: "Neuron: affine map and activation"
+    anchor: neuron-affine-activation
+  - label: MLP — формы слоёв и пакета
+    label_en: MLP layer and batch shapes
+    anchor: mlp-batch-shapes
+  - label: MLP — нелинейность и XOR
+    label_en: MLP nonlinearity and XOR
+    anchor: mlp-xor
+  - label: MLP — логиты, loss и шаг обучения
+    label_en: MLP logits, loss and training step
+    anchor: mlp-training-step
+  - label: MLP — ширина, глубина и параметры
+    label_en: MLP width, depth and parameter count
+    anchor: mlp-width-depth-parameters
+  - label: FFN — общий MLP для позиций
+    label_en: Positionwise FFN and shared MLP
+    anchor: mlp-positionwise-ffn
+  - label: PyTorch — параметры и состояние модуля
+    label_en: PyTorch module parameters and state
+    anchor: pytorch-module-state
+  - label: PyTorch — forward и backward hooks
+    label_en: PyTorch forward and backward hooks
+    anchor: pytorch-module-hooks
 primary_sources:
   - https://d2l.ai/chapter_multilayer-perceptrons/mlp.html
   - https://cs231n.github.io/neural-networks-1/
@@ -29,6 +54,7 @@ $(0,1)$ и $(1,0)$ должны относиться к одному класс�
 Производные понадобятся в разделе с одним шагом обучения; подробный обратный
 проход разобран в [[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation|главе о backpropagation]].
 
+<a id="neuron-affine-activation"></a>
 ## Один нейрон
 
 Пусть объект имеет два признака, а нейрон вычисляет взвешенную сумму
@@ -69,6 +95,7 @@ $\sigma(z)=1/(1+e^{-z})$ и интерпретировать результат 
 нелинейной. Утверждение относится к такому правилу классификации с монотонной
 сигмоидой, а не к произвольной функции $\phi$.
 
+<a id="mlp-batch-shapes"></a>
 ## Слой считает много нейронов одновременно
 
 Один скрытый нейрон вычисляет один промежуточный признак. Чтобы получить
@@ -134,14 +161,15 @@ $$
 не зависит от остальных объектов пакета. Операции вроде BatchNorm могут
 добавить такую зависимость, но в этом примере их нет.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-mlp-layered.jpeg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-mlp-layered.jpeg|Сеть с тремя входами, двумя скрытыми слоями по четыре нейрона и одним выходом; стрелки показывают отдельные веса]]
 
 *Три входа, два скрытых слоя по четыре нейрона и один выход. Это трёхслойная
 сеть: входные координаты не считаются обучаемым слоем. Каждая стрелка —
 отдельный вес; смещения на рисунке не показаны. Источник: Stanford CS231n,
 [Neural Networks Part 1, Layer-wise organization](https://cs231n.github.io/neural-networks-1/#layers),
 [оригинальное изображение](https://cs231n.github.io/assets/nn1/neural_net2.jpeg),
-без изменений.*
+без изменений. MIT License;
+[текст лицензии](/licenses/cs231n-MIT.txt).*
 
 ## Зачем нужна нелинейность
 
@@ -180,7 +208,7 @@ $xw+b=0$. В последующих слоях его вход уже завис
 При пересечении границы области меняется формула этой функции.
 Поэтому ReLU-сеть задаёт кусочно-аффинное отображение.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/micrograd/moon-mlp.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/micrograd/moon-mlp.png|Граница трёхслойной ReLU-сети micrograd разделяет два полумесяца; ступени растра зависят от шага сетки визуализации]]
 
 *Пример из Andrej Karpathy, [micrograd](https://github.com/karpathy/micrograd):
 сеть с двумя скрытыми слоями по 16 ReLU-нейронов разделяет данные
@@ -200,6 +228,7 @@ $xw+b=0$. В последующих слоях его вход уже завис
 В примерах этой главы используется такое же соглашение: объекты лежат
 в строках, веса умножаются справа.
 
+<a id="mlp-xor"></a>
 ## XOR как минимальный контрпример линейной модели
 
 Обозначим линейный балл через $s=w_1x_1+w_2x_2+b$ и будем выбирать класс 1
@@ -268,6 +297,7 @@ print(o_xor)
 весов выходного слоя не меняют предсказание. Поэтому смысл отдельной
 координаты нельзя определить только по её номеру.
 
+<a id="mlp-training-step"></a>
 ## Что именно обучается
 
 Вернёмся к пакету $X$ и скрытым активациям $H$ из раздела о слоях.
@@ -417,9 +447,145 @@ ReLU в этой точке нет; PyTorch использует в обратн
 классификации есть и вариант с одним логитом и `BCEWithLogitsLoss`.
 Выбор выхода определяется задачей, а не самим названием MLP.
 
+<a id="mlp-width-depth-parameters"></a>
+## Ширина, глубина и число параметров
+
+Сеть из примера имеет два обучаемых слоя: скрытый и выходной. Входные
+координаты не выполняют преобразование и в этот счёт не входят.
+Ширина скрытого слоя равна 3. Увеличить ширину означает вычислять больше
+признаков на одном уровне; увеличить глубину — добавить ещё одно
+последовательное преобразование.
+
+У слоя из $d$ входов и $m$ выходов $dm$ весов и $m$ смещений.
+Для нашего MLP:
+
+| Слой | Веса | Смещения | Всего |
+|---|---:|---:|---:|
+| $2\to3$ | $2\cdot3=6$ | 3 | 9 |
+| $3\to2$ | $3\cdot2=6$ | 2 | 8 |
+| Сеть | 12 | 5 | 17 |
+
+В общем случае одного скрытого слоя
+
+$$
+N_{\text{params}}=d_{\text{in}}m+m+md_{\text{out}}+d_{\text{out}}.
+$$
+
+На первой схеме CS231n архитектура $3\to4\to4\to1$ содержит
+$(12+4)+(16+4)+(4+1)=41$ параметр. Схема показывает рёбра с весами;
+если посчитать только рёбра, смещения потеряются.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-depth-width.jpeg|Три сети одинаковой глубины с 3, 6 и 20 скрытыми нейронами строят всё более подробные области решений]]
+
+*Три сети с одним скрытым слоем ширины 3, 6 и 20. Глубина одинакова;
+сравнивается именно ширина. Точки — обучающие объекты, заливка —
+предсказанные классы. У широкой сети видны небольшие отдельные области
+вокруг некоторых точек. Источник: Stanford CS231n,
+[Setting number of layers and their sizes](https://cs231n.github.io/neural-networks-1/#arch),
+[оригинальное изображение](https://cs231n.github.io/assets/nn1/layer_sizes.jpeg),
+без изменений. MIT License;
+[текст лицензии](/licenses/cs231n-MIT.txt).*
+
+Сеть с большим числом нейронов может провести более сложную границу,
+но этот рисунок не содержит тестовой выборки. По нему нельзя заключить,
+какая из трёх сетей лучше предсказывает новые объекты. Отдельные области
+могут соответствовать как закономерности, так и шуму.
+
+При фиксированной ширине поведение зависит и от регуляризации:
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-decision-regions.jpeg|Три сети с 20 скрытыми нейронами при L2-штрафах 0,001, 0,01 и 0,1: увеличение штрафа сглаживает границу в этом опыте]]
+
+*Во всех трёх сетях по 20 скрытых нейронов, а коэффициент L2-штрафа
+последовательно равен $0{,}001$, $0{,}01$ и $0{,}1$.
+В этом опыте при большем штрафе граница становится менее извилистой.
+Источник: Stanford CS231n,
+[Setting number of layers and their sizes](https://cs231n.github.io/neural-networks-1/#arch),
+[оригинальное изображение](https://cs231n.github.io/assets/nn1/reg_strengths.jpeg),
+без изменений. MIT License;
+[текст лицензии](/licenses/cs231n-MIT.txt).*
+
+L2-штраф добавляет к функции ошибки слагаемое, зависящее от квадратов
+весов. Коэффициент определяет его вклад в оптимизацию. Сглаживание
+границы на этих трёх картинках — результат конкретного опыта, а не
+теорема о монотонном изменении формы границы при любом запуске обучения.
+Ширину, глубину и силу регуляризации выбирают по валидации; обучение
+и проверка должны использовать одно и то же преобразование признаков.
+
+Теоремы об универсальной аппроксимации описывают выразительность сети.
+Например, непрерывную функцию на компактной области можно с любой заданной
+точностью приблизить сетью с одним достаточно широким скрытым слоем
+и подходящей нелинейностью. Теорема не задаёт доступную на практике ширину,
+не выбирает веса и не гарантирует их нахождение градиентным спуском.
+Тем более она не гарантирует качество на неизвестном распределении данных.
+Наглядное объяснение условий и конструкции:
+[Michael Nielsen, Chapter 4](http://neuralnetworksanddeeplearning.com/chap4.html).
+
+<a id="mlp-positionwise-ffn"></a>
+## MLP внутри Transformer
+
+В Transformer у объекта есть ещё одна ось: позиция токена.
+Пакет представлений имеет форму $[B,T,d_{\text{model}}]$.
+Обычный FFN, или feed-forward-подслой, применяет один MLP к последней оси:
+
+$$
+\begin{aligned}
+h_{b,t}&=\phi(x_{b,t}W_{\text{up}}+b_{\text{up}}),\\
+\operatorname{FFN}(x_{b,t})&=h_{b,t}W_{\text{down}}+b_{\text{down}}.
+\end{aligned}
+$$
+
+Для каждой пары $(b,t)$ берётся отдельный входной вектор, но одни и те же
+матрицы $W_{\text{up}},W_{\text{down}}$. При $B=2$, $T=3$,
+$d_{\text{model}}=2$ и $d_{\text{ff}}=3$ формы будут
+
+$$
+[2,3,2]\ \longrightarrow\ [2,3,3]\ \longrightarrow\ [2,3,2].
+$$
+
+Наш скрытый слой $2\to3$ уже подходит для первого перехода; выход $3\to2$
+возвращает прежнюю ширину представления. Для шести позиций остаются те же
+17 параметров, а не шесть копий по 17. Если изменить вход только одной
+позиции, этот FFN изменит результат только в ней. Сам по себе он не читает
+соседние позиции. Связь между токенами появляется в attention, который
+изучается далее. Вход FFN после attention уже может содержать сведения
+о доступном контексте.
+
+Для одной последовательности из трёх векторов исходные веса примера
+(до шага SGD) дадут:
+
+| Позиция | Вход FFN | Выход FFN |
+|---|---|---|
+| 1 | $(1,2)$ | $(1{,}2;\,-0{,}8)$ |
+| 2 | $(2,-1)$ | $(-1,1)$ |
+| 3 | $(1,2)$ | $(1{,}2;\,-0{,}8)$ |
+
+Одинаковые входы в позициях 1 и 3 дают одинаковые выходы. Если заменить
+только второй вход на $(1,2)$, изменится только вторая строка результата:
+она тоже станет $(1{,}2;\,-0{,}8)$. Номер позиции не входит в формулу FFN.
+
+Такое применение одной сети ко всем позициям показано в
+[Dive into Deep Learning, §11.7.2 Positionwise Feed-Forward Networks](https://d2l.ai/chapter_attention-mechanisms-and-transformers/transformer.html#positionwise-feed-forward-networks).
+
+Выход FFN в таком блоке — новый вектор признаков, а не вероятности токенов
+словаря. Поэтому softmax из примера классификации внутрь FFN не добавляется.
+Предсказание следующего токена использует отдельный выходной слой языковой
+модели.
+
+В современных декодерах, включая LLaMA, встречается
+[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual|SwiGLU]]:
+две входные проекции образуют ветви, их результаты перемножаются,
+а третья проекция возвращает размер $d_{\text{model}}$.
+Это уже другая параметризация FFN; к ней вернёмся после attention,
+residual-соединений и нормализации.
+
+Продолжение основного курса: [[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/02 Функции активации|функции активации]].
+
+## Дополнение: параметры, состояние и hooks в PyTorch
+
 <!-- BEGIN REVIEW: Module state 2026-10-27 -->
 
-## Model state: parameters, buffers, and submodules
+<a id="pytorch-module-state"></a>
+### Model state: parameters, buffers, and submodules
 
 The training example passes `model.parameters()` to SGD. The optimizer receives
 four tensors: `fc1.weight`, `fc1.bias`, `fc2.weight`, and `fc2.bias`. It does not
@@ -451,7 +617,7 @@ two uses in the computation graph, not a second set of weights. Conversely,
 a registered child can remain unused in a particular forward pass. The module
 hierarchy and the graph of executed operations answer different questions.
 
-### Registration does not depend on a gradient
+#### Registration does not depend on a gradient
 
 The following code is the complete **Parameter Registration** example from
 [Harvard ML Systems, ML Frameworks — Automatic parameter discovery](https://mlsysbook.ai/contents/vol1/frameworks/frameworks.html#sec-ml-frameworks-nn-module-parameter-discovery-4a91),
@@ -564,7 +730,7 @@ can still act on that tensor. In the example, the bias is frozen before its
 first backward pass. Freezing and gradient accumulation are developed further
 in the [[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation|backpropagation chapter]].
 
-### A list of layers must register its contents
+#### A list of layers must register its contents
 
 PyTorch's [Modules as Building Blocks](https://docs.pytorch.org/docs/2.14/notes/modules.html#modules-as-building-blocks)
 describes the recursive rule:
@@ -617,7 +783,7 @@ Parameter count and number of state entries count different objects.
 The test deliberately shares the two layer objects between containers;
 updating them through one container also affects the other.
 
-### Saving values and rebuilding the computation
+#### Saving values and rebuilding the computation
 
 `state_dict()` returns named parameters and persistent buffers, including those
 of registered children. The dotted key `blocks.0.weight` identifies the weight
@@ -660,7 +826,7 @@ checkpoint needs optimizer state and other run state as well; the
 [[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения|optimization chapter]]
 contains a complete save/resume example.
 
-### Evaluation mode and gradient recording
+#### Evaluation mode and gradient recording
 
 Calling `.eval()` recursively sets the registered modules' `training` flags
 to `False`. Layers that use this flag can then select evaluation behavior;
@@ -688,7 +854,8 @@ documentation. The PyTorch excerpt above is reproduced under its
 <!-- END REVIEW: Module state 2026-10-27 -->
 
 <!-- BEGIN REVIEW: Module hooks 2026-10-27 -->
-## Observing a layer: forward and backward hooks
+<a id="pytorch-module-hooks"></a>
+### Observing a layer: forward and backward hooks
 
 A forward hook receives a layer's inputs and computed output. A full backward
 hook receives derivatives with respect to its inputs and outputs. The weights
@@ -745,7 +912,7 @@ first layer's weight gradient. The mean and standard deviation likewise
 summarize all entries of that layer's output, mixing batch and feature axes.
 Those two statistics cannot establish how each individual feature behaves.
 
-### One layer, three different derivatives
+#### One layer, three different derivatives
 
 Use the same two-input, two-output weights as the state example above,
 before its SGD update. PyTorch stores the weight rows as
@@ -826,7 +993,7 @@ torch.testing.assert_close(observed_layer.bias.grad, observed_input.new_tensor([
 torch.testing.assert_close(observed_input.grad, backward_record["input_gradient"])
 ```
 
-### When the backward hook fires
+#### When the backward hook fires
 
 In the original Harvard example the input does not require gradients, but
 the layer's parameters do. Its output therefore participates in autograd,
@@ -901,133 +1068,6 @@ work and can change memory use or timing. These CPU examples establish what
 is observed; they are not a low-overhead profiler or a compiler/GPU benchmark.
 
 <!-- END REVIEW: Module hooks 2026-10-27 -->
-
-## Ширина, глубина и число параметров
-
-Сеть из примера имеет два обучаемых слоя: скрытый и выходной. Входные
-координаты не выполняют преобразование и в этот счёт не входят.
-Ширина скрытого слоя равна 3. Увеличить ширину означает вычислять больше
-признаков на одном уровне; увеличить глубину — добавить ещё одно
-последовательное преобразование.
-
-У слоя из $d$ входов и $m$ выходов $dm$ весов и $m$ смещений.
-Для нашего MLP:
-
-| Слой | Веса | Смещения | Всего |
-|---|---:|---:|---:|
-| $2\to3$ | $2\cdot3=6$ | 3 | 9 |
-| $3\to2$ | $3\cdot2=6$ | 2 | 8 |
-| Сеть | 12 | 5 | 17 |
-
-В общем случае одного скрытого слоя
-
-$$
-N_{\text{params}}=d_{\text{in}}m+m+md_{\text{out}}+d_{\text{out}}.
-$$
-
-На первой схеме CS231n архитектура $3\to4\to4\to1$ содержит
-$(12+4)+(16+4)+(4+1)=41$ параметр. Схема показывает рёбра с весами;
-если посчитать только рёбра, смещения потеряются.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-depth-width.jpeg]]
-
-*Три сети с одним скрытым слоем ширины 3, 6 и 20. Глубина одинакова;
-сравнивается именно ширина. Точки — обучающие объекты, заливка —
-предсказанные классы. У широкой сети видны небольшие отдельные области
-вокруг некоторых точек. Источник: Stanford CS231n,
-[Setting number of layers and their sizes](https://cs231n.github.io/neural-networks-1/#arch),
-[оригинальное изображение](https://cs231n.github.io/assets/nn1/layer_sizes.jpeg),
-без изменений.*
-
-Сеть с большим числом нейронов может провести более сложную границу,
-но этот рисунок не содержит тестовой выборки. По нему нельзя заключить,
-какая из трёх сетей лучше предсказывает новые объекты. Отдельные области
-могут соответствовать как закономерности, так и шуму.
-
-При фиксированной ширине поведение зависит и от регуляризации:
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-decision-regions.jpeg]]
-
-*Во всех трёх сетях по 20 скрытых нейронов, а коэффициент L2-штрафа
-последовательно равен $0{,}001$, $0{,}01$ и $0{,}1$.
-В этом опыте при большем штрафе граница становится менее извилистой.
-Источник: Stanford CS231n,
-[Setting number of layers and their sizes](https://cs231n.github.io/neural-networks-1/#arch),
-[оригинальное изображение](https://cs231n.github.io/assets/nn1/reg_strengths.jpeg),
-без изменений.*
-
-L2-штраф добавляет к функции ошибки слагаемое, зависящее от квадратов
-весов. Коэффициент определяет его вклад в оптимизацию. Сглаживание
-границы на этих трёх картинках — результат конкретного опыта, а не
-теорема о монотонном изменении формы границы при любом запуске обучения.
-Ширину, глубину и силу регуляризации выбирают по валидации; обучение
-и проверка должны использовать одно и то же преобразование признаков.
-
-Теоремы об универсальной аппроксимации описывают выразительность сети.
-Например, непрерывную функцию на компактной области можно с любой заданной
-точностью приблизить сетью с одним достаточно широким скрытым слоем
-и подходящей нелинейностью. Теорема не задаёт доступную на практике ширину,
-не выбирает веса и не гарантирует их нахождение градиентным спуском.
-Тем более она не гарантирует качество на неизвестном распределении данных.
-Наглядное объяснение условий и конструкции:
-[Michael Nielsen, Chapter 4](http://neuralnetworksanddeeplearning.com/chap4.html).
-
-## MLP внутри Transformer
-
-В Transformer у объекта есть ещё одна ось: позиция токена.
-Пакет представлений имеет форму $[B,T,d_{\text{model}}]$.
-Обычный FFN, или feed-forward-подслой, применяет один MLP к последней оси:
-
-$$
-\begin{aligned}
-h_{b,t}&=\phi(x_{b,t}W_{\text{up}}+b_{\text{up}}),\\
-\operatorname{FFN}(x_{b,t})&=h_{b,t}W_{\text{down}}+b_{\text{down}}.
-\end{aligned}
-$$
-
-Для каждой пары $(b,t)$ берётся отдельный входной вектор, но одни и те же
-матрицы $W_{\text{up}},W_{\text{down}}$. При $B=2$, $T=3$,
-$d_{\text{model}}=2$ и $d_{\text{ff}}=3$ формы будут
-
-$$
-[2,3,2]\ \longrightarrow\ [2,3,3]\ \longrightarrow\ [2,3,2].
-$$
-
-Наш скрытый слой $2\to3$ уже подходит для первого перехода; выход $3\to2$
-возвращает прежнюю ширину представления. Для шести позиций остаются те же
-17 параметров, а не шесть копий по 17. Если изменить вход только одной
-позиции, этот FFN изменит результат только в ней. Сам по себе он не читает
-соседние позиции. Связь между токенами появляется в attention, который
-изучается далее. Вход FFN после attention уже может содержать сведения
-о доступном контексте.
-
-Для одной последовательности из трёх векторов исходные веса примера
-(до шага SGD) дадут:
-
-| Позиция | Вход FFN | Выход FFN |
-|---|---|---|
-| 1 | $(1,2)$ | $(1{,}2;\,-0{,}8)$ |
-| 2 | $(2,-1)$ | $(-1,1)$ |
-| 3 | $(1,2)$ | $(1{,}2;\,-0{,}8)$ |
-
-Одинаковые входы в позициях 1 и 3 дают одинаковые выходы. Если заменить
-только второй вход на $(1,2)$, изменится только вторая строка результата:
-она тоже станет $(1{,}2;\,-0{,}8)$. Номер позиции не входит в формулу FFN.
-
-Такое применение одной сети ко всем позициям показано в
-[Dive into Deep Learning, §11.7.2 Positionwise Feed-Forward Networks](https://d2l.ai/chapter_attention-mechanisms-and-transformers/transformer.html#positionwise-feed-forward-networks).
-
-Выход FFN в таком блоке — новый вектор признаков, а не вероятности токенов
-словаря. Поэтому softmax из примера классификации внутрь FFN не добавляется.
-Предсказание следующего токена использует отдельный выходной слой языковой
-модели.
-
-В современных декодерах, включая LLaMA, встречается
-[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual|SwiGLU]]:
-две входные проекции образуют ветви, их результаты перемножаются,
-а третья проекция возвращает размер $d_{\text{model}}$.
-Это уже другая параметризация FFN; к ней вернёмся после attention,
-residual-соединений и нормализации.
 
 <span id="краткие-итоги"></span>
 

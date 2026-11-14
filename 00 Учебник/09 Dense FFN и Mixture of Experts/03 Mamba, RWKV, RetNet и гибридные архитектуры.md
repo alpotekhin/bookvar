@@ -2,15 +2,98 @@
 title: "После полного внимания: SSM, Mamba, linear attention, TTT и гибриды"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-29
-last_verified: 2026-10-23
+last_updated: 2026-11-11
+last_verified: 2026-11-10
 previous: "[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving]]"
 next: "[[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]]"
 source_unit_id:
   - lecture-04-attention-alternatives-overview
   - lecture-04-linear-attention-recurrence
   - lecture-04-hybrid-sequence-models
+reference_terms:
+  - label: "Адресуемая и сжатая память"
+    label_en: "Addressable and compressed memory"
+    anchor: "seq-memory"
+  - label: "Prefill, decode и асимптотика"
+    label_en: "Prefill, decode, and complexity"
+    anchor: "seq-complexity"
+  - label: "Непрерывная и дискретная SSM"
+    label_en: "Continuous and discrete SSMs"
+    anchor: "seq-ssm"
+  - label: "LTI: рекурсия и свёртка"
+    label_en: "LTI recurrence and convolution"
+    anchor: "seq-lti-convolution"
+  - label: "Ассоциативное сканирование"
+    label_en: "Associative affine scan"
+    anchor: "seq-affine-scan"
+  - label: "Селективная SSM Mamba-1"
+    label_en: "Mamba-1 selective SSM"
+    anchor: "seq-mamba1"
+  - label: "Форма состояния и проекции Mamba-1"
+    label_en: "Mamba-1 state shape and projections"
+    anchor: "seq-mamba1-state"
+  - label: "Селективное сканирование на GPU"
+    label_en: "Hardware-aware selective scan"
+    anchor: "seq-selective-scan"
+  - label: "RWKV-4 и матричная память RWKV-7"
+    label_en: "RWKV-4 and RWKV-7 matrix memory"
+    anchor: "seq-rwkv"
+  - label: "Три формы retention"
+    label_en: "Three retention forms"
+    anchor: "seq-retnet"
+  - label: "Вращения и относительные позиции RetNet"
+    label_en: "RetNet rotations and relative positions"
+    anchor: "seq-retention-positions"
+  - label: "Состояние на границе блока RetNet"
+    label_en: "RetNet block-boundary state"
+    anchor: "seq-retention-blocks"
+  - label: "Mamba-2 и двойственность SSD"
+    label_en: "Mamba-2 and SSD duality"
+    anchor: "seq-mamba2"
+  - label: "Блочный алгоритм SSD"
+    label_en: "SSD block algorithm"
+    anchor: "seq-ssd-blocks"
+  - label: "Mamba-3: дискретизация, вращения и MIMO"
+    label_en: "Mamba-3 discretization, rotations, and MIMO"
+    anchor: "seq-mamba3"
+  - label: "Нормированное линейное внимание"
+    label_en: "Normalized linear attention"
+    anchor: "linear-attention-recurrent-state"
+  - label: "Delta rule и Gated DeltaNet"
+    label_en: "Delta rule and Gated DeltaNet"
+    anchor: "seq-delta-rule"
+  - label: "Блочное вычисление Gated DeltaNet"
+    label_en: "Gated DeltaNet chunkwise computation"
+    anchor: "seq-delta-chunks"
+  - label: "Быстрые веса и TTT-layer"
+    label_en: "Fast weights and TTT layers"
+    anchor: "seq-ttt"
+  - label: "TTT-E2E и обновление модели"
+    label_en: "TTT-E2E model updates"
+    anchor: "seq-ttt-e2e"
+  - label: "Гибриды attention и рекуррентной памяти"
+    label_en: "Attention-recurrence hybrids"
+    anchor: "hybrid-sequence-models"
+  - label: "Чередование слоёв и параллельные ветви"
+    label_en: "Interleaved layers and parallel branches"
+    anchor: "seq-hybrid-layouts"
+  - label: "Память запроса в гибриде"
+    label_en: "Per-request hybrid memory"
+    anchor: "seq-hybrid-memory"
+  - label: "Phonebook и пределы сжатого состояния"
+    label_en: "Phonebook recall and compressed-state limits"
+    anchor: "seq-recall-limits"
+  - label: "Снимки, ветвление и откат состояния"
+    label_en: "State snapshots, branching, and rollback"
+    anchor: "seq-state-serving"
+  - label: "Точность и изоляция состояния"
+    label_en: "State precision and isolation"
+    anchor: "seq-state-precision"
+  - label: "Проверка памяти и скорости"
+    label_en: "Evaluating recall and speed"
+    anchor: "seq-evaluation"
 primary_sources:
+  - https://arxiv.org/abs/2507.06457v1
   - https://arxiv.org/abs/2312.00752
   - https://arxiv.org/abs/2006.16236
   - https://arxiv.org/abs/2405.21060
@@ -76,10 +159,16 @@ $$
 полезный сигнал находится от текущего шага, тем через большее число одинаковых
 переходов он должен пройти.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/stanford-cs230-rnn-unrolled.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/unfolded-rnn.svg|Слева рекуррентная связь показана петлёй, справа видны отдельные шаги, между которыми передаётся скрытое состояние.]]
 
-*RNN, развёрнутая по шагам последовательности. Источник: Shervine Amidi, Afshine Amidi,
-[Stanford CS230 — Recurrent Neural Networks cheatsheet](https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-recurrent-neural-networks/).*
+*Aston Zhang, Zachary C. Lipton, Mu Li и Alexander J. Smola,
+[Dive into Deep Learning, Recurrent Neural Networks](https://en.d2l.ai/chapter_recurrent-neural-networks/rnn.html),
+[исходный SVG](https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/unfolded-rnn.svg),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+
+Петля слева на правой схеме превращается в цепочку. Первый вход влияет
+на третий выход через состояния первых двух шагов. Матрица $W_h$ при
+этом общая: стрелки между соседними состояниями не означают разные веса.
 
 При обратном распространении ошибки во времени (backpropagation through time)
 градиент многократно умножается на матрицу перехода и производные нелинейности. Если соответствующие
@@ -106,10 +195,19 @@ $$
 фиксированного состояния, но превращает память из побочного эффекта RNN в
 управляемый механизм записи и забывания.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/stanford-cs230-lstm.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lstm-gru-author-2026-11-10/d2l-lstm-2.svg|Новое состояние ячейки LSTM складывается из прежней памяти после вентиля забывания и записи после входного вентиля.]]
 
-*Ячейка LSTM: вентили забывания, записи и выхода управляют отдельной линией памяти.
-Источник: [Stanford CS230 — Recurrent Neural Networks cheatsheet](https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-recurrent-neural-networks/).*
+*Zhang et al., [Dive into Deep Learning, рис. 10.1.3](https://en.d2l.ai/chapter_recurrent-modern/lstm.html#memory-cell-internal-state),
+[исходный SVG](https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/lstm-2.svg),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+
+Для одной координаты пусть $c_{t-1}=2$, $f_t=0.75$, $i_t=0.25$,
+а кандидат записи равен $-1$. Верхняя ветвь переносит $1.5$,
+нижняя добавляет $-0.25$, и в ячейке остаётся $1.25$. Справа
+виден выходной вентиль $O_t$, но его умножение на $\tanh(c_t)$
+не показано. Этот шаг вычисляет $h_t$, не меняя $c_t$.
+Полная ячейка с тремя вентилями
+показана в [памятке Шервина и Афшина Амиди к Stanford CS230](https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-recurrent-neural-networks/).
 
 <a id="seq2seq-вся-исходная-фраза-не-помещается-в-один-context-vector"></a>
 ### Seq2Seq: ограничение одного вектора контекста
@@ -121,13 +219,19 @@ $$
 начать перевод, энкодер должен был сжать все имена, числа, синтаксические связи и
 порядок слов в один вектор.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/berkeley-seq2seq-bottleneck.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-attention-bridge-2026-11-10/d2l-seq2seq-state.svg|Энкодер и декодер связаны только блоком State; отдельных связей между исходными и целевыми позициями нет.]]
 
-*Последнее состояние энкодера должно представить всю исходную последовательность.
-Источник: Berkeley CS288, [Lecture 6 — Sequence-to-Sequence Models](https://cal-cs288.github.io/sp26/assets/slides/CS288_sp26_06_Seq2seq.pdf), slide 51.*
+*Zhang et al., [Dive into Deep Learning, рис. 11.4.1](https://en.d2l.ai/chapter_attention-mechanisms-and-transformers/bahdanau-attention.html#fig-s2s-attention-state),
+[исходный SVG](https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/seq2seq-state.svg),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+
+Единственная стрелка слева направо проходит через `State`.
+В начале генерации декодер получит это состояние и токен `<bos>`.
+Если в состоянии не сохранился номер из начала исходной фразы,
+декодер уже не сможет обратиться к той позиции напрямую.
 
 Механизм внимания Bahdanau позволяет отложить выбор информации до очередного
-шага перевода. Декодер сопоставляет своё текущее состояние со всеми состояниями
+шага перевода. Декодер сопоставляет своё предыдущее состояние со всеми состояниями
 энкодера, нормирует оценки соответствия и собирает новый вектор контекста:
 
 $$
@@ -143,10 +247,19 @@ $$
 следующего слова. Декодеру не требуется знать будущий ответ, чтобы выбрать
 полезную часть входа.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/berkeley-bahdanau-attention.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/seq2seq-attention.svg|Блок Attention получает все состояния энкодера и предыдущее состояние декодера, а затем передаёт вычисленный контекст на очередной шаг.]]
 
-*Пошаговое чтение состояний энкодера механизмом внимания. Источник: Berkeley
-CS288, [Lecture 6 — Sequence-to-Sequence Models](https://cal-cs288.github.io/sp26/assets/slides/CS288_sp26_06_Seq2seq.pdf), slide 60; на слайде указан автор схемы Abigail See.*
+*Zhang et al., [Dive into Deep Learning, рис. 11.4.2](https://en.d2l.ai/chapter_attention-mechanisms-and-transformers/bahdanau-attention.html#model),
+[исходный SVG](https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/seq2seq-details-attention.svg),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+
+Теперь стрелка из энкодера в `Attention` обозначает весь набор состояний,
+а не только последнее.
+Пусть в двух состояниях есть признаки $(1,0)$ и $(0,1)$. Если на одном
+шаге веса внимания равны $(0.75,0.25)$, контекст имеет те же координаты.
+На следующем шаге запрос другой: при весах $(0.25,0.75)$ контекст
+меняется, хотя энкодер повторно не запускается. Схемы с одним состоянием
+и с вниманием также сопоставлены в [Berkeley CS288, лекция 6, слайды 51 и 60](https://cal-cs288.github.io/sp26/assets/slides/CS288_sp26_06_Seq2seq.pdf#page=51).
 
 <a id="transformer-адресуемая-память-становится-основным-mixer"></a>
 ### Transformer: прямой доступ к прошлым позициям
@@ -159,19 +272,25 @@ CS288, [Lecture 6 — Sequence-to-Sequence Models](https://cal-cs288.github.io/s
 нужные пары ключ–значение. Вместо одного сжатого состояния хранятся отдельные
 записи, число которых растёт вместе с контекстом.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/berkeley-transformer-language-model.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ntp-review-2026-10/d2l-gpt-decoder-original.svg|Слева входы и цели языковой модели сдвинуты на один токен, справа причинная маска декодера.]]
 
-*Transformer для языкового моделирования: внимание объединяет информацию
-разных позиций, FFN преобразует представление каждой позиции отдельно,
-а остаточные связи передают его следующим слоям. Источник: Berkeley CS288,
-[Lecture 5 — Sequence Models](https://cal-cs288.github.io/sp26/assets/slides/CS288_sp26_05_Sequence_Models.pdf).*
+*Zhang et al., [Dive into Deep Learning, рис. 11.9.6](https://en.d2l.ai/chapter_attention-mechanisms-and-transformers/large-pretraining-transformers.html#fig-gpt-decoder-only),
+[исходный SVG](https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/gpt-decoder-only.svg),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
 
-Таким образом, внимание снимает ограничение одного вектора контекста, но
-увеличивает расход памяти и вычислений. SSM, Mamba, RWKV, линейное внимание и
-TTT возвращаются к рекуррентному состоянию. В отличие от ранних RNN, эти методы
-используют правила обновления, допускающие эффективное параллельное вычисление
-при обучении.
+У позиции `this` целевой токен — `book`. Поэтому её строка
+в правой матрице подписана `book`. Она открыта до входа `this`
+включительно; столбец `book` закрыт.
+Так модель считает потери сразу для нескольких позиций, не подсматривая
+их цели. Внимание смешивает позиции; FFN, наоборот, обрабатывает каждую
+из них отдельно. Развёртка обоих подслоёв показана в
+[Berkeley CS288, лекция 5](https://cal-cs288.github.io/sp26/assets/slides/CS288_sp26_05_Sequence_Models.pdf).
 
+SSM, RWKV и TTT возвращаются к сжатому состоянию. Ниже разберём,
+какие правила обновления позволяют вычислять его параллельно,
+не открывая позиции доступ к будущему.
+
+<a id="seq-memory"></a>
 ## Два способа помнить прошлое
 
 ### Внимание: архив с доступом по содержанию
@@ -204,6 +323,7 @@ $$
 Линейная вычислительная сложность сама по себе не говорит, насколько хорошо
 модель умеет точно извлекать сведения по их содержанию.
 
+<a id="seq-complexity"></a>
 ## Почему недостаточно сказать «Transformer квадратичен»
 
 При обработке уже известного входа — **prefill** — полное внимание сравнивает
@@ -229,6 +349,7 @@ $O(T^2)$ пар позиций. FlashAttention уменьшает обмен с 
 асимптотику проверяют отдельно при обработке входа и генерации, для разных
 размеров пакета и конкретного ускорителя.
 
+<a id="seq-ssm"></a>
 ## От динамической системы к SSM
 
 Линейная модель пространства состояний в непрерывном времени задаётся
@@ -256,12 +377,16 @@ $$
 записывает в него вход, $C$ преобразует состояние в выход, а $D$ создаёт прямой
 путь от входа к выходу.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mamba/ssm-three-views.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mamba/s4-representations-original.png|Слева непрерывная система, в центре структура матрицы A, справа дискретная рекурсия и свёртка.]]
 
-*Пути сигнала в SSM: $B$ записывает вход в состояние, $A$ задаёт его динамику,
-$C$ формирует выход, а $D$ добавляет прямой вклад входа. Иллюстрация: Maarten Grootendorst,
-[A Visual Guide to Mamba and State Space Models](https://www.maartengrootendorst.com/blog/mamba/#what-is-a-state-space-model).*
+*На рисунке $u$ — вход, а $x$ — состояние (в тексте выше это $x$ и $h$).
+Справа два способа посчитать выход дискретной системы: обновлять состояние
+на каждом шаге или свернуть вход с ядром $\bar K$. Ниже выведем эту свёртку
+для постоянных коэффициентов и нулевого начального состояния.
+[Оригинал из репозитория авторов S4](https://github.com/state-spaces/s4/blob/e757cef57d89e448c413de7325ed5601aceaac13/assets/s4.png),
+[Apache 2.0](/licenses/s4-e757cef5-Apache-2.0.txt).*
 
+<a id="seq-lti-convolution"></a>
 ## Откуда берётся параллельная форма вычисления
 
 Пронумеруем токены начиная с 1; $h_0$ — состояние до первого токена.
@@ -339,6 +464,7 @@ np.testing.assert_allclose(y_conv, y_lti)
 способ решать, какую информацию записывать.
 
 <a id="parallel-scan-почему-recurrence-можно-обучать-параллельно"></a>
+<a id="seq-affine-scan"></a>
 ## Параллельное сканирование рекуррентных переходов
 
 Переход можно представить парой $(A_t,b_t)$, задающей аффинное преобразование
@@ -366,6 +492,7 @@ $(a_{3:4}a_{1:2},\,a_{3:4}b_{1:2}+b_{3:4})$.
 Её можно применить к любому начальному состоянию. При ненулевом $h_0$
 нельзя забывать слагаемое $a_{1:4}h_0$: одна свёртка входов его не содержит.
 
+<a id="seq-mamba1"></a>
 ## Mamba: избирательная модель пространства состояний
 
 В Mamba параметры $\Delta$, $B$ и $C$ становятся функциями текущего токена:
@@ -395,12 +522,15 @@ $\bar B_t=\int_0^{\Delta_t}\exp(sA)B_t\,ds$.
 различать. Роль $\Delta$ разобрана в
 [Mamba, §3.5](https://arxiv.org/html/2312.00752v2#S3.SS5).
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/mamba-selective-copying.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mamba/mamba-v1-selective-copying.svg|Три задачи: копирование с фиксированным сдвигом, выборочное копирование и извлечение ассоциации по повторившемуся ключу.]]
 
-*В обычном copying одна и та же динамика применяется ко всем символам; в
-selective copying модель должна распознать маркеры, записать только выбранные
-токены и сохранить их через отвлекающий участок. Источник: Gu & Dao,
-[Mamba](https://arxiv.org/abs/2312.00752), Figure 2.*
+*Слева каждый символ надо повторить через одно и то же число шагов: достаточно
+фиксированной задержки. Справа вверху цветные символы разделены разным числом
+пустых позиций, а вывести их надо подряд. Справа внизу чёрный символ
+повторяется. За первым чёрным шёл синий, поэтому на месте вопросительного
+знака нужно предсказать синий.
+Albert Gu и Tri Dao, [Mamba, рис. 2](https://arxiv.org/html/2312.00752v2#S3.F2),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Оригинальный SVG без изменений.*
 
 Теперь модель может:
 
@@ -408,11 +538,8 @@ selective copying модель должна распознать маркеры,
 - почти не менять его на проходном фрагменте;
 - читать разные компоненты состояния в зависимости от текущего входа.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mamba/selective-ssm.png]]
-
-*Синие стрелки показывают вычисление $B_t$, $C_t$ и $\Delta_t$ из текущего
-входа; оранжевые — перенос расширенного состояния. Источник: Albert Gu и
-Tri Dao, [Mamba, Figure 1](https://arxiv.org/html/2312.00752v2#S1.F1).*
+Путь от проекций входа до чтения состояния показан на
+[[#seq-selective-scan|рисунке авторов о селективном сканировании]].
 
 ### Сквозной пример
 
@@ -434,6 +561,7 @@ Tri Dao, [Mamba, Figure 1](https://arxiv.org/html/2312.00752v2#S1.F1).*
 состояние и не затереть его последующим текстом. Это два принципиально разных
 пути к одному ответу.
 
+<a id="seq-mamba1-state"></a>
 ### Каковы размеры состояния и параметров
 
 У одного запроса состояние Mamba-1 имеет форму $[D,N]$: для каждого из $D$
@@ -472,42 +600,63 @@ np.testing.assert_allclose(h_sel[1, 0], [.1*np.exp(-.3), .9])
 np.testing.assert_allclose(y_sel[1, 0], 1.687040911, atol=1e-9)
 ~~~
 
-Формы тензоров соответствуют Algorithm 2 статьи; запись $\Delta Bx$
-сопоставлена с закреплённой выше реализацией. В полном блоке перед этим
-вычисляются проекции и короткая свёртка, а после — вентиль и выходная проекция.
-Кроме SSM-состояния сервер хранит буфер свёртки: одного последнего $h$ для
-продолжения полного блока недостаточно.
+Формы тензоров соответствуют алгоритму 2 статьи; запись $\Delta Bx$
+используется в реализации.
 
+### От H3 и MLP к блоку Mamba-1
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mamba/mamba-v1-architecture.svg|H3, Mamba и gated MLP рядом: у Mamba слева свёртка и SSM, справа ветвь выходного вентиля.]]
+
+*Сравните ветви снизу вверх. В H3 перед SSM стоит поэлементное умножение
+двух ветвей. В Mamba на этом месте функция активации; умножение остаётся
+на выходе. От gated MLP в центре блок Mamba отличается тем, что в основной
+ветви есть короткая свёртка и SSM. Albert Gu и Tri Dao,
+[Mamba, рис. 3](https://arxiv.org/html/2312.00752v2#S3.F3),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Оригинальный SVG без изменений.*
+
+В [коде авторов](https://github.com/state-spaces/mamba/blob/e9594ce1c732d97440f0332fdc43170a2294dbfa/mamba_ssm/modules/mamba_simple.py#L162-L203)
+`in_proj` даёт две ветви. Первая проходит короткую каузальную свёртку и SiLU.
+Обозначим результат $x_t$: из него вычисляются $B_t$, $C_t$ и $\Delta_t$, а
+затем состояние и выход $y_t$, как в примере выше. Вторая ветвь даёт $z_t$.
+Она не участвует в записи состояния: перед `out_proj` результат
+$y_t$ умножается поэлементно на $\operatorname{SiLU}(z_t)$.
+
+Вернёмся ко второму токену примера. Если $z_{2,0}=0$, то выход первого канала
+перед `out_proj` равен нулю вместо $1.68704$, но в состоянии по-прежнему
+хранится $(0.07408,0.9)$. Следующий токен может прочитать эту запись.
+Для его обработки серверу также нужен буфер короткой свёртки: одного
+последнего $h$ недостаточно.
+
+<a id="seq-selective-scan"></a>
 ## Почему Mamba уже нельзя вычислить одной обычной свёрткой
 
 Когда $B_t$, $C_t$ и $\Delta_t$ зависят от входа, ядро перестаёт быть
 стационарным. Одну заранее вычисленную свёртку уже нельзя применить ко всем
 примерам.
 
-Поэтому Mamba использует селективное сканирование, спроектированное с учётом
-устройства ускорителя:
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mamba/mamba-v2-figure1.svg|Из текущего входа получаются B, C и шаг дискретизации; схема отделяет расширенное состояние от входа и выхода слоя.]]
 
-- объём работы остаётся линейным по длине последовательности;
-- ассоциативная структура обновлений позволяет выполнять часть работы
-  параллельно;
-- расширенное внутреннее состояние по возможности не записывается многократно
-  в медленную внешнюю память ускорителя;
-- объединение вычислительных ядер и повторное вычисление промежуточных величин
-  становятся частью алгоритма.
+*Albert Gu и Tri Dao, [Mamba, рис. 1](https://arxiv.org/html/2312.00752v2#S1.F1),
+[исходный SVG](https://arxiv.org/html/2312.00752v2/selection.svg),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/mamba-selective-scan-course.png]]
+Синие стрелки связывают текущий вход с $B_t$, $C_t$ и $\Delta_t$.
+В оранжевой ветви переносится состояние с $N$ координатами на каждый
+из $D$ каналов; после чтения через $C_t$ на выходе остаётся по одному
+значению на канал. Пирамида справа различает быструю память на кристалле
+(SRAM) и внешнюю память GPU (HBM). Если сохранить каждое промежуточное состояние
+для $T=4096$, $D=512$ и $N=16$, только массив состояний занял бы
+$4096\cdot512\cdot16\cdot2$ байт, то есть 64 МиБ при BF16.
+Это оценка размера одного массива, не замер пиковой памяти ядра.
 
-*Когда параметры зависят от входа, стационарное свёрточное ядро нельзя
-подготовить один раз. Mamba использует селективное сканирование, учитывающее
-устройство памяти GPU. Источник:
-CMU 10-423/623/723, [State Space Models and Hybrid Models](https://www.cs.cmu.edu/~mgormley/courses/10423/slides/lecture21-ssm.pdf), slide 30.*
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mamba/mamba-block.png]]
-
-*Блок Mamba: короткая свёртка связывает соседние позиции, селективная SSM
-обновляет долговременное состояние, а правая ветвь управляет выходом через
-поэлементное умножение. Иллюстрация: Maarten Grootendorst,
-[A Visual Guide to Mamba and State Space Models — The Mamba Block](https://www.maartengrootendorst.com/blog/mamba/#the-mamba-block).*
+В [алгоритме авторов, §3.3.2 и приложение D](https://arxiv.org/html/2312.00752v2#S3.SS3.SSS2)
+дискретизацию, ассоциативное сканирование и чтение через $C_t$ объединяют
+в одном ядре. Оно считает промежуточные величины в памяти на кристалле
+и пишет выход в HBM, не сохраняя там тензор всех состояний.
+Если последовательность не помещается целиком, обработка идёт порциями,
+а между ними передаётся состояние сканирования. Для обратного прохода
+необходимые состояния вычисляют заново. Путь данных по уровням памяти
+показан также в [CMU 10‑423/623/723, лекция 21, слайд 30](https://www.cs.cmu.edu/~mgormley/courses/10423/slides/lecture21-ssm.pdf#page=30).
 
 ## Вычислительная стоимость и память
 
@@ -529,6 +678,7 @@ CMU 10-423/623/723, [State Space Models and Hybrid Models](https://www.cs.cmu.ed
 коротких последовательностях медленнее хорошо оптимизированного внимания.
 
 <a id="rwkv-attention-подобное-смешивание-как-recurrence"></a>
+<a id="seq-rwkv"></a>
 ## RWKV: взвешенное чтение рекуррентной памяти
 
 Название RWKV раскрывается как Receptance Weighted Key Value. Блок сочетает:
@@ -618,20 +768,12 @@ RWKV-7 — опубликованное правило
 распределённого инференса следует проверять для конкретной реализации RWKV;
 их нельзя переносить с Llama-подобных Transformer по аналогии.
 
+<a id="seq-retnet"></a>
 ## RetNet: три эквивалентных формы retention
 
-Механизм retention в RetNet можно вычислять тремя способами:
-
-1. параллельно — при обучении;
-2. рекуррентно — при генерации по одному токену;
-3. рекуррентно по блокам — при работе с длинными последовательностями.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/retnet-dual-form.png]]
-
-*Две формы вычисления retention: параллельная слева и рекуррентная справа.
-Источник: Yutao Sun et al., [Retentive Network, Figure 3](https://arxiv.org/abs/2307.08621).*
-
-В упрощённой записи рекуррентное состояние — матрица накопленных внешних произведений:
+На каждом шаге RetNet умножает накопленную матрицу на коэффициент
+затухания и прибавляет запись текущего токена. Запрос читает уже
+обновлённую матрицу:
 
 $$
 S_t=\gamma S_{t-1}+k_t^\top v_t,\qquad y_t=q_tS_t.
@@ -645,6 +787,29 @@ $y_1=2$, $y_2=5$, $y_3=10.5$. В отличие от WKV выше, в этом �
 текущей позиции. Полный RetNet дополнительно содержит позиционное преобразование,
 нормировку и вентиль; этот расчёт сравнивает только оператор памяти.
 
+За третий выход в рекурсии отвечает $S_3=0.5(0.5\cdot2+4)+8=10.5$.
+Параллельная форма сразу складывает $0.25\cdot2+0.5\cdot4+1\cdot8$.
+Три коэффициента образуют третью строку матрицы затухания $D$:
+первая запись успела затухнуть дважды, вторая один раз, текущая
+ещё не затухла. Обе формы считают один оператор с теми же весами.
+На [рис. 3 в статье Sun et al.](https://arxiv.org/pdf/2307.08621v4#page=4)
+слева эту работу выполняет матрица $D$, справа между шагами
+передаётся $S_n$. Третий способ считает позиции внутри блока
+параллельно и передаёт состояние между блоками; его разберём ниже.
+
+<a id="seq-state-update-diagram"></a>
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sequence-state-2026-11-03/hybrid-state-update-generations.png|В средней панели матрица памяти сначала затухает, затем к ней прибавляют внешнее произведение значения и ключа.]]
+
+*Dustin Wang et al., [A Systematic Analysis of Hybrid Linear Attention,
+v1, рис. 1, с. 4](https://arxiv.org/pdf/2507.06457v1#page=4),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Оригинальный
+рисунок сравнивает три правила обновления. RetNet соответствует средней
+панели с одним фиксированным $\gamma$ на голову вместо вектора затуханий.
+Авторы хранят состояние в порядке «значения × ключи», поэтому у них
+запись выглядит как $v_t k_t^\top$, транспонированно к формуле выше.*
+
+<a id="seq-retention-positions"></a>
 ### Позиции: от вращения к относительному расстоянию
 
 В упрощённой формуле выше позиционные преобразования опущены. В
@@ -686,6 +851,7 @@ $\tfrac12\cos(\pi/2)\cdot4=0$, текущей — 8. Выход равен 7.5, 
 из примера без вращений. Вес retention может быть отрицательным:
 это не вероятность после softmax.
 
+<a id="seq-retention-blocks"></a>
 ### Граница блока: что именно передаётся дальше
 
 Пусть блок начинается после позиции $a$ и содержит $b$ токенов.
@@ -805,6 +971,7 @@ CC BY 4.0; полный рисунок с английской подписью,
 структурированных матриц. Полное внимание по-прежнему хранит отдельные K/V, а
 SSD переносит сжатое состояние.
 
+<a id="seq-mamba2"></a>
 ### Mamba-2 и Structured State Space Duality
 
 Для одной головы Mamba-2 введём состояние $S_t\in\mathbb R^{N\times P}$,
@@ -839,6 +1006,7 @@ $P$, применяемый поэлементно к $v_t$.
 2–8 раз для исследованных конфигураций. Это результат конкретной реализации, а
 не обещание такого же ускорения всей языковой модели.
 
+<a id="seq-ssd-blocks"></a>
 ### От состояния к матрице взаимодействий
 
 Если раскрыть рекуррентную формулу при $S_0=0$, вклад записи $j$ в выход $t$
@@ -926,6 +1094,7 @@ np.testing.assert_allclose(final_chunks, final_ssd)
 Исходный алгоритм, разложение блоков и полный PyTorch-код:
 [Mamba-2, §§5–6 и Listing 1](https://arxiv.org/html/2405.21060v1#S6).
 
+<a id="seq-mamba3"></a>
 ### Mamba-3: дискретизация, вращение и несколько входов
 
 Mamba-3 меняет способ записи в состояние. Вместо одного текущего вклада
@@ -968,12 +1137,12 @@ $R$ внешних произведений. Растут арифметика �
 генерации. Это измеренный режим работы ядра, а не отсутствие дополнительных
 вычислений и не гарантия ускорения при любом размере пакета.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/mamba3-figure2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/mamba3-figure2.png|В блоке Mamba-2 слева есть короткая свёртка; у Mamba-3 справа — зависящее от входа вращение и необязательные проекции MIMO.]]
 
-*Сравнение блоков Mamba-2 и Mamba-3. Источник: Lahoti et al.,
-[Mamba-3, Figure 2](https://arxiv.org/abs/2603.15569). Результаты статьи получены
-на моделях до 1.5B параметров. Они не подтверждают перенос тех же преимуществ
-на существенно более крупные модели или готовность к эксплуатации в сервисе.*
+*Aakash Lahoti et al., [Mamba-3, v1, рис. 2, с. 11](https://arxiv.org/pdf/2603.15569v1#page=11),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Обе панели и легенда
+из статьи. Результаты получены на моделях до 1,5 млрд параметров; по ним
+нельзя оценить выигрыш у более крупных моделей или при нагрузке сервиса.*
 
 Актуальный официальный указатель:
 [state-spaces/mamba](https://github.com/state-spaces/mamba). На 2026 год он уже
@@ -1043,16 +1212,6 @@ $$
 не гарантируют устойчивую нормировку.
 Источник: [Katharopoulos et al., §3.2–3.3](https://arxiv.org/html/2006.16236v3#S3.SS2).
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/cmu-linear-attention.png]]
-
-*Линейное внимание допускает рекуррентную запись с матричным
-состоянием: сначала обновляется $S_t$, затем текущий запрос читает его.
-На слайде принята транспонированная относительно нашего вывода память:
-$S_t\in\mathbb R^{d_v\times d_k}$ и $y_t=S_tq_t$; это тот же оператор.
-Источник:
-CMU 10-423/623/723, [State Space Models and Hybrid Models](https://www.cs.cmu.edu/~mgormley/courses/10423/slides/lecture21-ssm.pdf), slide 34.*
-
-
 Ключ задаёт направление записи в матрице, а запрос выбирает комбинацию
 сохранённых значений. Это можно проверить на небольшом примере без обучения.
 Пусть $\phi$ — тождественное преобразование, значения скалярны, а ключи двух
@@ -1065,14 +1224,33 @@ $S_2=(10,20)^\top$ и $z_2=(1,1)^\top$.
 Теперь запишем значение 30 с прежним ключом $(1,0)^\top$.
 Получатся $S_3=(40,20)^\top$ и $z_3=(2,1)^\top$.
 Повторный запрос первого ключа вернёт $40/2=20$, а не последнее значение 30.
-Обычное суммирование сохраняет оба вклада и не умеет само заменить старую
-ассоциацию новой. Это подводит к следующему правилу обновления.
+Обычное суммирование сохраняет оба вклада. На
+[слайде 34 лекции CMU](https://www.cs.cmu.edu/~mgormley/courses/10423/slides/lecture21-ssm.pdf#page=34)
+та же запись и чтение показаны для ненормированного оператора с
+транспонированным состоянием.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sequence-course-figures-2026-11-10/katharopoulos-figure1.png|Графики времени и пиковой памяти прямого и обратного проходов: линейное внимание, обычный softmax и три конфигурации Reformer.]]
+
+*Angelos Katharopoulos, Apoorv Vyas, Nikolaos Pappas и François Fleuret,
+[Transformers are RNNs, PMLR 119](https://proceedings.mlr.press/v119/katharopoulos20a.html),
+[рис. 1 на шестой странице PDF](https://proceedings.mlr.press/v119/katharopoulos20a/katharopoulos20a.pdf#page=6).
+Обе панели оригинала, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+
+На левой панели при переходе от $2^{11}$ к $2^{12}$ токенов
+время линейного варианта примерно удваивается; у реализации
+softmax в этом опыте оно вырастает примерно вчетверо.
+На правой панели красная кривая заканчивается там же, при 4096 токенах:
+более длинный вход для этой реализации не поместился на GTX 1080 Ti.
+Авторы измеряли прямой и обратный проходы на синтетических входах
+и приводили результат на один пример в пакете. Это сравнение
+реализаций из статьи 2020 года, без FlashAttention.
 
 > [!warning] Linear attention — не просто «убрали softmax»
 > Практические варианты различаются преобразованием признаков, нормировкой, вентилями, затуханием,
 > локальной свёрткой и правилом обновления. Перестановка скобок объясняет
 > источник линейности, но не является спецификацией любой современной модели.
 
+<a id="seq-delta-rule"></a>
 ## Delta rule: не только записать, но и исправить
 
 ### Gated DeltaNet: забыть старое и стереть конфликтующее
@@ -1091,6 +1269,12 @@ $k(30-10)=(20,0)^\top$. Новое состояние — $(30,20)^\top$:
 первая запись заменена, вторая сохранилась. Если ключи не ортогональны,
 поправка затронет и другие ассоциации. Правило не превращает матрицу
 фиксированного размера в словарь неограниченной ёмкости.
+
+На [[#seq-state-update-diagram|схеме Wang et al.]] правая панель
+показывает направленное стирание. При единичном ключе и $\beta=1$
+множитель $I-k_tk_t^\top$ проецирует память на подпространство,
+ортогональное ключу; при $0<\beta<1$ прежняя запись ослабляется
+только частично.
 
 Простое затухание умножает всё состояние на один коэффициент. Оно умеет быстро
 забывать, но не умеет заменить запись, связанную с конкретным ключом. Delta rule
@@ -1119,17 +1303,24 @@ Gated DeltaNet объединяет два независимых действи
 не может позже обратиться к произвольной исходной позиции с точностью полного
 внимания.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/recurrent-update-rule-comparison.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sequence-state-2026-11-03/hybrid-state-update-table.png|Original comparison of nine recurrent update rules, grouped by vector state, outer-product state and delta rule]]
 
-*Сравнение правил обновления показывает общую матричную память linear attention,
-Mamba-2, RetNet и семейства delta rule. Источник изображения: Stanford CS336
-Spring 2026, [Lecture 4, p. 11](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=11); в слайде сохранена таблица из обзора гибридных линейных моделей.*
+*Dustin Wang et al., [A Systematic Analysis of Hybrid Linear Attention,
+v1, Table 1, p. 4](https://arxiv.org/pdf/2507.06457v1#page=4),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Complete table and original English caption rendered directly from the PDF at
+300 dpi. The source uses value-by-key
+states, transposed relative to the key-by-value convention of our examples.
+These are memory-update formulas, not complete block specifications.*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/gated-deltanet-figure1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/gated-deltanet-figure1-complete.png|Слева Gated DeltaNet чередуется со скользящим вниманием. В центре к повторяющейся группе добавляется Mamba-2. Справа показаны входы и выход слоя Gated DeltaNet.]]
 
-*Два гибридных варианта и устройство Gated DeltaNet. Источник: Yang, Kautz &
-Hatamizadeh, [Gated Delta Networks, Figure 1](https://arxiv.org/abs/2412.06464),
-ICLR 2025.*
+*Songlin Yang, Jan Kautz и Ali Hatamizadeh,
+[Gated Delta Networks, v3, рис. 1, с. 7](https://arxiv.org/pdf/2412.06464v3#page=7),
+ICLR 2025, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+В H1 чередуются Gated DeltaNet и внимание в скользящем окне (SWA);
+в H2 перед ними стоит Mamba-2. Справа $\alpha$ задаёт затухание
+(выше оно обозначено $\gamma_t$), а $\beta$ управляет записью.*
 
 Mamba и Gated DeltaNet решают похожую системную задачу — переносят компактное
 состояние, — но не являются одним механизмом. Mamba исходит из управляемой
@@ -1190,6 +1381,118 @@ np.testing.assert_allclose(mixed_state[:, 0], [30., 10.])
 Источник правила с общим затуханием:
 [Gated Delta Networks, §3.1, Eq. 8](https://arxiv.org/html/2412.06464v1#S3.SS1).
 
+<a id="seq-delta-chunks"></a>
+### Computing a Gated DeltaNet block
+
+The token loop first decays the state, then predicts the current value and
+writes a correction. Computing every correction from the same block-start
+state would omit earlier writes. Unlike the TTT mini-batch rule below, the
+chunkwise Gated DeltaNet operator preserves the token-by-token update.
+
+Within one block, number positions $r=1,\ldots,b$ and let $S_0$ be the incoming
+key-by-value state. Write the correction as a value vector $u_r$:
+
+$$
+\begin{aligned}
+u_r&=\beta_r(v_r-\gamma_rS_{r-1}^{\top}k_r),\\
+S_r&=\gamma_rS_{r-1}+k_ru_r^{\top}.
+\end{aligned}
+$$
+
+Define $\lambda_r=\prod_{j=1}^r\gamma_j$ and
+$D_{ri}=\prod_{j=i+1}^r\gamma_j$ for $i\le r$, with zero entries above the
+diagonal. Expanding the state in the prediction gives
+
+$$
+\begin{aligned}
+u_r={}&\beta_r(v_r-\lambda_rS_0^{\top}k_r)\\
+ &-\beta_r\sum_{i<r}D_{ri}(k_r^{\top}k_i)u_i.
+\end{aligned}
+$$
+
+Each correction depends only on earlier corrections. Stack the row vectors
+$u_r^\top$ into $U$, and the token rows into $Q,K,V$. Then
+
+$$
+\begin{aligned}
+R&=\operatorname{Diag}(\beta)
+   (V-\operatorname{Diag}(\lambda)KS_0),\\
+L_{ri}&=\beta_rD_{ri}(k_r^\top k_i),\quad i<r,\\
+(I+L)U&=R.
+\end{aligned}
+$$
+
+$L$ is strictly lower triangular, so $I+L$ has unit diagonal and can be solved
+by forward substitution. One matrix product $KK^\top$ builds all within-block
+key interactions. The solve is confined to a short block; once $U$ is known,
+readout and state construction process its positions together through matrix
+products. Only the final state crosses the block boundary:
+
+$$
+\begin{aligned}
+Y={}&\operatorname{Diag}(\lambda)QS_0\\
+   &+((QK^\top)\odot D)U,\\
+S_b={}&\lambda_bS_0\\
+   &+K^\top\operatorname{Diag}(D_{b,:})U.
+\end{aligned}
+$$
+
+For $S_0=(2,4)^\top$, unit keys $k_1=(1,0)^\top$, $k_2=(0.6,0.8)^\top$,
+values $(10,20)$, both decays 0.5 and both write gates 1, the first decayed
+state is $(1,2)^\top$. Its prediction is 1, so $u_1=9$ and $S_1=(10,2)^\top$.
+
+At the second token the decayed state is $(5,1)^\top$, which predicts 3.8.
+Thus $u_2=16.2$ and $S_2=(14.72,13.96)^\top$. Reading with $q_2=k_2$ gives 20.
+The block calculation obtains the same correction from
+$u_2=18.9-0.3u_1$. Ignoring the lower-triangular coupling would use 18.9
+instead, producing the wrong second output 22.7.
+
+~~~python
+def gated_delta_chunked(q, k, v, gamma, beta, chunk_size, initial=None):
+    if chunk_size < 1:
+        raise ValueError("chunk_size must be positive")
+    S = np.zeros((k.shape[1], v.shape[1])) if initial is None else initial.copy()
+    outputs = []
+    for start in range(0, len(q), chunk_size):
+        stop = start + chunk_size
+        Q, K, V = q[start:stop], k[start:stop], v[start:stop]
+        g, write = gamma[start:stop], beta[start:stop]
+        decay = decay_matrix(g)
+        carried = np.cumprod(g)
+        coupling = write[:, None] * np.tril((K @ K.T) * decay, -1)
+        rhs = write[:, None] * (V - carried[:, None] * (K @ S))
+        corrections = np.linalg.solve(np.eye(len(Q)) + coupling, rhs)
+        outputs.append(
+            carried[:, None] * (Q @ S) + ((Q @ K.T) * decay) @ corrections
+        )
+        S = carried[-1] * S + K.T @ (decay[-1, :, None] * corrections)
+    return np.concatenate(outputs), S
+
+keys_block = np.array([[1., 0.], [.6, .8]])
+values_block = np.array([[10.], [20.]])
+g_block, b_block = np.full(2, .5), np.ones(2)
+initial_block = np.array([[2.], [4.]])
+y_block, state_block = gated_delta_chunked(
+    keys_block, keys_block, values_block, g_block, b_block, 2, initial_block
+)
+np.testing.assert_allclose(y_block[:, 0], [10., 20.])
+np.testing.assert_allclose(state_block[:, 0], [14.72, 13.96])
+corrections_block = np.linalg.solve(
+    np.array([[1., 0.], [.3, 1.]]), np.array([[9.], [18.9]])
+)
+np.testing.assert_allclose(corrections_block[:, 0], [9., 16.2])
+~~~
+
+This is a direct derivation of the memory recurrence, with supplied projections
+and gates. It excludes short convolutions, normalization and the output gate.
+The paper's [Section 3.2 chunkwise algorithm and UT transform](https://arxiv.org/html/2412.06464v1#S3.SS2)
+use compact WY/UT factors to organize the work for accelerator matrix
+multiplication. Their intermediate variables differ from our correction
+vectors. This small `np.linalg.solve` program checks the algebra; it is not
+their GPU kernel or a speed comparison. Direct decay products also need
+numerical care on long, low-precision sequences.
+
+<a id="seq-ttt"></a>
 ## Test-Time Training: состоянием становится модель
 
 Словосочетание *test-time training* употребляется для разных процессов. Их
@@ -1226,11 +1529,14 @@ $$
 y_t=f(q_t;W_t).
 $$
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/ttt-figure3.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/ttt-v1-figure4.png|Верхняя схема разделяет обновление состояния и получение выхода. В таблице сравниваются вектор RNN, список K/V и быстрые веса TTT.]]
 
-*RNN хранит вектор, self-attention — список K/V, а TTT — параметры внутренней
-модели. Источник: Sun et al.,
-[Learning to (Learn at Test Time), v1, Figure 4](https://arxiv.org/html/2407.04620v1#S1.F4).*
+*Yu Sun et al.,
+[Learning to (Learn at Test Time), v1, рис. 4, с. 4](https://arxiv.org/pdf/2407.04620v1#page=4),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Верхняя схема
+показывает один шаг, а таблица сравнивает три способа хранить прошлое.
+$O(1)$ у TTT относится к стоимости шага по мере роста контекста при
+фиксированном размере внутренней модели.*
 
 TTT-Linear использует линейную внутреннюю модель, TTT-MLP — небольшой MLP. Чем
 выразительнее внутренняя модель, тем сложнее могут быть сохраняемые зависимости,
@@ -1306,6 +1612,7 @@ TTT-layer не означает, что вся большая LLM дообуча
 Это также не reasoning test-time compute: модель не генерирует дополнительные
 шаги рассуждения, а меняет память о прочитанном.
 
+<a id="seq-ttt-e2e"></a>
 ## TTT-E2E: тот же термин, другой механизм
 
 End-to-End TTT использует чтение длинного документа для последовательного
@@ -1314,12 +1621,13 @@ End-to-End TTT использует чтение длинного докумен
 а начальные параметры заранее обучаются так, чтобы эти обновления улучшали
 предсказания в последующей части того же документа.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/ttt-e2e-figure3.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/ttt-e2e-figure3.png|Слева ошибка предсказания второго токена обновляет MLP в верхних блоках перед предсказанием третьего. Справа авторы приводят для сравнения упрощённый TTT-KVB.]]
 
-*При чтении документа градиент обновляет часть параметров модели
-с вниманием в скользящем окне.
-Источник: Tandon et al., [End-to-End Test-Time Training,
-Figure 3](https://arxiv.org/abs/2512.23675).*
+*Arnuv Tandon et al., [End-to-End Test-Time Training, v2, рис. 3, с. 6](https://arxiv.org/pdf/2512.23675v2#page=6),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). На левой панели
+$x_2$ уже известен: ошибка его предсказания обновляет MLP перед расчётом
+распределения для ещё неизвестного $x_3$. Нижние три четверти блоков
+не получают этот внутренний градиент. Справа показан другой метод.*
 
 | Подход | Что является памятью | Базовая архитектура |
 |---|---|---|
@@ -1344,32 +1652,23 @@ Figure 3](https://arxiv.org/abs/2512.23675).*
 Mamba → Mamba → Attention → Mamba → Mamba → Attention → ...
 ```
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/cmu-hybrid-models.png]]
-
-*Варианты расположения слоёв внимания и рекуррентных слоёв. От их чередования
-зависят размер KV-кэша и глубина, на которой модель может прочитать отдельные
-позиции контекста. Источник: CMU 10-423/623/723,
-[State Space Models and Hybrid Models](https://www.cs.cmu.edu/~mgormley/courses/10423/slides/lecture21-ssm.pdf), slide 38.*
-
 ### Jamba
 
-Jamba объединяет три независимо настраиваемые идеи:
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/course-follow-through/jamba-architecture.svg|Слева группа из восьми слоёв Jamba; справа показано, как слои внимания или Mamba сочетаются с обычной FFN или MoE.]]
 
-- слои обычного внимания Transformer;
-- слои Mamba;
-- MoE в части слоёв.
+*Opher Lieber et al., [Jamba, рис. 1](https://arxiv.org/html/2403.19887v2#S2.F1),
+оригинальный SVG, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/course-follow-through/jamba-architecture.svg]]
-
-*Оригинальная схема Jamba: чередование Mamba и attention независимо от
-выбора dense FFN или MoE. Источник: Lieber et al.,
-[Jamba, Figure 1](https://arxiv.org/abs/2403.19887); векторный оригинал без обрезки.*
-
-Слои внимания дают прямой путь извлечения сведений из прошлых позиций, слои
-Mamba уменьшают среднюю стоимость длинного контекста, а MoE увеличивает ёмкость
-модели без пропорционального роста вычислений на токен.
+На левой панели посчитайте слои: на один слой внимания приходится
+семь слоёв Mamba. Растущий KV-кэш нужен только первому типу.
+На правой панели выбор другой: после смешивания токенов можно
+поставить обычную FFN или MoE. В показанной конфигурации MoE стоит
+через слой и меняет число активных параметров, но не определяет,
+нужен ли в этом слое KV-кэш. Другие варианты расстановки разобраны
+в [CMU 10‑423/623/723, лекция 21, слайд 38](https://www.cs.cmu.edu/~mgormley/courses/10423/slides/lecture21-ssm.pdf#page=38).
 
 <a id="три-паттерна-гибридизации"></a>
+<a id="seq-hybrid-layouts"></a>
 ### Чередование слоёв и параллельные ветви
 
 **Чередование слоёв** помещает разные способы обработки последовательности на разной глубине. Jamba —
@@ -1432,10 +1731,20 @@ Stanford CS336 Spring 2026,
 каждом таком блоке. Увеличиваются и требования к реализации: обе ветви должны
 эффективно работать при обработке входа и пошаговой генерации.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/falcon-h1-architecture.webp]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/falcon-h1-report-figure1.png|После общей входной проекции данные идут в SSM и Attention. Блок Concat соединяет их выходы перед общей выходной проекцией.]]
 
-*Параллельные ветви Falcon-H1. Источник: Technology Innovation Institute,
-[Falcon-H1 technical report and release materials](https://huggingface.co/tiiuae/Falcon-H1-34B-Base).*
+*Technology Innovation Institute,
+[Falcon-H1 Technical Report, v1, рис. 1, с. 5](https://arxiv.org/pdf/2507.22448v1#page=5),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Стрелки идут снизу
+вверх: SSM и внимание читают одну позицию, их выходы соединяются по каналам
+перед общей выходной проекцией.*
+
+В [Falcon-H1 34B, табл. 1 и §2.1](https://arxiv.org/html/2507.22448v1#S2.SS1)
+20 голов запросов по 128 координат дают 2560 выходных каналов внимания,
+32 головы SSM той же ширины — ещё 4096. После `Concat` для одного токена
+получается 6656 каналов. Выходная проекция возвращает их к ширине 5120,
+чтобы результат можно было сложить со входом блока. Четыре KV-головы
+определяют размер кэша, но не число выходных каналов ветви внимания.
 
 ### Qwen3-Next: большинство слоёв — Gated DeltaNet
 
@@ -1445,17 +1754,22 @@ Gated DeltaNet, затем один слой gated attention. В итоге 36 �
 attention означает дополнительный выходной вентиль; оно не превращает этот слой
 в линейный по длине.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/qwen-next-hybrid-architecture.jpg]]
+На [оригинальной схеме в карточке Qwen3-Next](https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct#model-overview)
+видно, что за обоими типами смешивания токенов следует MoE. В ветви
+полного внимания [реализация](https://github.com/huggingface/transformers/blob/v4.57.1/src/transformers/models/qwen3_next/modeling_qwen3_next.py#L363-L398)
+разделяет выход `q_proj` на запрос и вектор вентиля. Запрос читает K/V;
+результат умножается на сигмоиду вентиля перед выходной проекцией.
+Этот вентиль не удаляет ключи и значения из кэша.
 
-*Схема Qwen3-Next из лекции показывает чередование Gated DeltaNet и полного
-attention. Источник изображения: Stanford CS336 Spring 2026,
-[Lecture 4, p. 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=10). Точная раскладка 12 × (3 GDN + 1 attention):
-[официальная карточка Qwen3-Next](https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct).*
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/berkeley-qwen3-next-gdn.png]]
-
-*Qwen3-Next 80B-A3B: чередование Gated DeltaNet и gated attention. Источник:
-Berkeley CS288, [Lecture 14 — Advanced Architectures](https://cal-cs288.github.io/sp26/assets/slides/CS288_sp26_14_Advanced_Architectures.pdf), slide 38.*
+Для одной последовательности на 32 768 позиций и двух KV-голов ширины
+256 в 12 слоях получаем
+$2\cdot12\cdot32768\cdot2\cdot256\cdot2=805306368$ байт,
+или 768 МиБ при BF16. Здесь первый множитель 2 считает массивы K и V,
+а последний — байты на элемент. Это только часть памяти: остаются
+рекуррентные состояния и буферы свёрток, веса и временные тензоры.
+Лекции, в которых сопоставляют эти архитектуры:
+[Stanford CS336, слайд 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=10)
+и [Berkeley CS288, слайд 38](https://cal-cs288.github.io/sp26/assets/slides/CS288_sp26_14_Advanced_Architectures.pdf#page=38).
 
 <a id="deepseek-давление-на-full-attention-без-рекуррентной-ssm"></a>
 ### DeepSeek: сжатие KV-кэша без рекуррентного состояния
@@ -1466,10 +1780,9 @@ Berkeley CS288, [Lecture 14 — Advanced Architectures](https://cal-cs288.github
 Запрос может обратиться к отдельной прошлой позиции: уменьшается размер
 хранимой записи, но история не сводится к одному рекуррентному состоянию.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/deepseek-v3-architecture.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-originals-2026-11-09/v3-figure2-block.png|Блок DeepSeek-V3: слева две остаточные ветви с RMSNorm, справа общие и выбираемые эксперты и кэшируемые компоненты MLA.]]
 
-*DeepSeek-V3 остаётся decoder-only Transformer с MLA и MoE. Источник: DeepSeek-AI,
-[DeepSeek-V3 Technical Report](https://arxiv.org/abs/2412.19437), Figure 2.*
+*DeepSeek-V3 остаётся decoder-only Transformer с MLA и MoE. DeepSeek-AI, [DeepSeek-V3 Technical Report, рис. 2, с. 7](https://raw.githubusercontent.com/deepseek-ai/DeepSeek-V3/d5c08b384b4d4096e494d61ba7d329f593116872/DeepSeek_V3.pdf#page=7), [MIT](/licenses/deepseek-v3-d5c08b3-MIT.txt).*
 
 <a id="minimax-m2-отрицательный-результат-масштабирования"></a>
 ### MiniMax M2: ограничения предварительных оценок
@@ -1496,12 +1809,8 @@ M2 вышел с полным вниманием, а исследования э
 полного attention зависит от задачи: точное извлечение нескольких ключей и
 обычное языковое моделирование реагируют на сжатие истории по-разному.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/hybrid-ratio-ruler-ablation.jpg]]
-
-*Абляция на подзадачах RULER показывает, что увеличение доли линейных слоёв
-влияет на задачи неодинаково, а полностью линейный вариант часто теряет качество
-точного извлечения. Источник изображения: Stanford CS336 Spring 2026,
-[Lecture 4, p. 11](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=11). Пунктир — результат Transformer в той же постановке.*
+Ниже [[#seq-hybrid-recall|сравним доли слоёв в одной серии опытов]]
+и посмотрим, как они меняют точность извлечения одного и нескольких ключей.
 
 | Модель или семейство | Рекуррентный механизм | Где остаётся внимание | Устройство гибрида |
 |---|---|---|---|
@@ -1529,6 +1838,7 @@ KV-голов и размер головы в слоях внимания, фо�
 они определяют стоимость полносвязной ветви, но не заменяют параметры памяти.
 
 <a id="честное-сравнение-памяти"></a>
+<a id="seq-hybrid-memory"></a>
 ## Из чего складывается память одного запроса
 
 | Тип модели | Память состояния одного запроса, без весов и временных активаций |
@@ -1542,6 +1852,7 @@ KV-голов и размер головы в слоях внимания, фо�
 имеет количественный характер: гибрид уменьшает кэш, а не устраняет его.
 
 <a id="где-recurrent-compression-проигрывает"></a>
+<a id="seq-recall-limits"></a>
 ## Ограничения сжатой памяти
 
 Phonebook и multi-query associative recall проверяют случай, где контекст
@@ -1550,17 +1861,37 @@ Phonebook и multi-query associative recall проверяют случай, г�
 появления запроса. Модель с фиксированным состоянием должна вместить все
 потенциально полезные пары. При росте их числа записи начинают мешать друг другу.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-pure-figure3.png]]
+В опыте Jelassi et al. модели получали список случайных имён и номеров,
+примеры ответов и вопрос о номере одного из людей в списке. Задача
+выполнена, если модель воспроизвела весь номер. По горизонтали на
+графике отложено число записей, не число токенов. При 100 записях
+Pythia 410M выдаёт точный ответ примерно в трёх случаях из четырёх,
+а Mamba 2.8B — примерно в одном из семи. Сравниваются готовые модели;
+разница в точности не выделяет эффект архитектуры при одинаковом предобучении.
 
-*Чистые Mamba/Mamba-2 теряют точность phonebook раньше Transformer. Источник:
-Waleffe et al., [An Empirical Study of Mamba-based Language Models,
-Phonebook experiments](https://arxiv.org/abs/2406.07887), в продолжение линии
-Jelassi et al., [Repeat After Me](https://arxiv.org/abs/2402.01032).*
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sequence-recall-2026-11-11/jelassi-figure1c.png|Точность поиска номера по имени для трёх размеров Pythia и трёх размеров Mamba. С ростом числа записей линии Mamba падают быстрее.]]
 
-График не доказывает, что SSM «не понимает длинный текст». Состояние может хорошо
-переносить тему, стиль, локальную динамику и повторяющиеся факты. Слабое место
-конкретнее: произвольное точное извлечение информационно плотной редкой детали,
-полезность которой стала известна только в будущем.
+*Samy Jelassi, David Brandfonbrener, Sham M. Kakade и Eran Malach,
+[Repeat After Me, ICML 2024](https://proceedings.mlr.press/v235/jelassi24a.html),
+[рис. 1c, v2, с. 2](https://arxiv.org/pdf/2402.01032v2#page=2),
+[CC BY 4.0](https://arxiv.org/html/2402.01032v2). Панель авторов с осями
+и легендой, без перерисовки. Протокол поиска описан в
+[§4.3](https://arxiv.org/html/2402.01032v2#S4.SS3).*
+
+У Waleffe et al. сравнение устроено иначе: модели на 8 млрд параметров
+предобучали на общих данных, в этом опыте по 1,1 трлн токенов.
+В [рис. 3, §3.3.3](https://arxiv.org/pdf/2406.07887v1#page=8)
+Transformer выдаёт почти все номера верно до 4096 токенов входа.
+У Mamba и Mamba-2 ошибки появляются примерно после 500 токенов.
+Средняя панель считает совпавшие токены на тех же ответах: номер
+может быть похож на правильный, хотя по точному совпадению это ошибка.
+На правой панели имя называют перед списком. Обе SSM справляются
+лучше, но точность всё равно снижается до границы 4096 токенов.
+Порядок запроса меняет сведения, доступные модели в момент записи.
+
+Эти опыты проверяют, удаётся ли скопировать одну конкретную запись
+из плотного списка. Они ничего не говорят о том, насколько хорошо
+модель сохранит тему документа или его основные факты.
 
 Ограничения сжатого состояния также обнаруживают задачи, где нужно:
 
@@ -1575,24 +1906,48 @@ Jelassi et al., [Repeat After Me](https://arxiv.org/abs/2402.01032).*
 номер среди тысяч обычных токенов. Проверка должна воспроизводить тот вид памяти,
 который нужен приложению.
 
+<a id="seq-hybrid-recall"></a>
 ### Почему редкое внимание помогает
 
 Добавленные слои внимания сохраняют отдельные записи для прошлых позиций.
 Рекуррентные слои продолжают обновлять сжатое состояние, а внимание даёт модели
 возможность обратиться к конкретной записи после появления вопроса.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-hybrid-figure7.png]]
+В [рис. 7 Waleffe et al.](https://arxiv.org/pdf/2406.07887v1#page=14)
+сравниваются модели на 8 млрд параметров после 3,5 трлн токенов и их
+версии с увеличенным контекстом. Слева, у моделей с исходным окном 4K,
+чистая Mamba-2 начинает ошибаться на входах длиннее примерно 1000
+токенов. Гибрид Mamba-2 с четырьмя слоями внимания, как и Transformer,
+даёт почти 100% до 4096 токенов; гибрид сохраняет 100% примерно до
+5500. На двух других панелях показаны версии, продолжившие предобучение
+на последовательностях 16K и 32K. У версии 16K точность Transformer
+падает до нуля примерно на 18 тысячах токенов, а гибрид сохраняет
+около 100% почти до 24 тысяч. В LongBench на вопросах по нескольким
+документам гибрид, напротив, уступил Transformer. Извлечь один номер
+и собрать ответ из нескольких источников — разные задачи.
 
-*Mamba-2-Hybrid значительно дольше сохраняет точность phonebook при контекстах
-4K, 16K и 32K. Источник: Waleffe et al.,
-[An Empirical Study of Mamba-based Language Models](https://arxiv.org/abs/2406.07887),
-Figure 7.*
+Wang et al. меняли пропорцию линейных слоёв и слоёв полного внимания
+и проверяли их на подзадачах RULER. Здесь `3-1` означает три линейных
+слоя на один полный; `pure` означает, что полного внимания нет.
 
-Это эмпирический результат, а не гарантия. Если адресуемый слой встречается
-слишком поздно, полезная деталь могла уже исчезнуть из промежуточного
-представления. Если слоёв внимания слишком мало, модели может не хватить глубины
-для нескольких связанных обращений к контексту. Доля и расположение этих слоёв являются
-параметрами задачи, а не универсальным рецептом.
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sequence-recall-2026-11-11/wang-v2-ruler-figure5.png|Четыре графика RULER: точность для одного ключа, нескольких ключей, вопросов и извлечения слов при разных долях полного внимания. Пунктир показывает Transformer.]]
+
+*Dustin Wang et al., [A Systematic Analysis of Hybrid Linear Attention,
+v2, рис. 5 и табл. 5](https://arxiv.org/html/2507.06457v2#A3.F5),
+[оригинальный PNG](https://arxiv.org/html/2507.06457v2/Figures/trend_graphs_2x2.png),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Все четыре панели
+с общей легендой. Более ранняя версия этого рисунка есть на
+[слайде 11 Stanford CS336](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=11).*
+
+Посмотрим на одну конфигурацию Gated DeltaNet 3:1. При извлечении
+по одному ключу она получила 87,5% против 55,9% у Transformer.
+На панели нескольких ключей результат той же конфигурации ниже
+базовой линии: 29,3% против 33,2%. На панели извлечения обычных
+и частых слов общей зависимости от пропорции не видно. Авторы
+не показали кривые RetNet и HGRN, у которых результаты поиска
+были низкими. Ни одна из этих панелей не измеряет Phonebook:
+это отдельная серия опытов, которая показывает, почему долю внимания
+нельзя подбирать по одному тесту на извлечение.
 
 ## Текст, аудио и геномные последовательности
 
@@ -1627,6 +1982,7 @@ Figure 7.*
 [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64 Мультимодальные модели]].
 
 <a id="stateful-serving-меняется-не-только-kernel"></a>
+<a id="seq-state-serving"></a>
 ## Как сервер хранит и восстанавливает состояние
 
 При обычном декодировании Transformer дописывает ключи и значения новой
@@ -1691,6 +2047,7 @@ $2.25\to3.125\to4.5625\to6.28125$.
 согласованного протокола.
 
 <a id="traininference-mismatch-и-состояние"></a>
+<a id="seq-state-precision"></a>
 ### Точность состояния
 
 Параллельная и рекуррентная формы должны быть численно эквивалентны в пределах
@@ -1716,6 +2073,7 @@ $2.25\to3.125\to4.5625\to6.28125$.
 [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode|P/D disaggregation]].
 
 <a id="как-оценивать-архитектуры-честно"></a>
+<a id="seq-evaluation"></a>
 ## Как сравнивать качество памяти и скорость
 
 Для качества памяти нужны разные задачи:

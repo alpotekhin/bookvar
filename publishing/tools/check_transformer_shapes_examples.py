@@ -10,7 +10,7 @@ ROOT=Path(__file__).resolve().parents[2]
 CHAPTER=ROOT/'00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md'
 body=CHAPTER.read_text()
 blocks=re.findall(r'~~~python\n(.*?)\n~~~',body,re.S)
-assert len(blocks)==6
+assert len(blocks)==7
 torch.set_num_threads(1)
 ns={}
 for i,code in enumerate(blocks,1):
@@ -24,6 +24,24 @@ assert sum(p.numel() for p in ns['untied'].parameters())==22696448
 assert sum(p.numel() for p in ns['tied'].parameters())==17576448
 assert sum(p.numel() for p in ns['tied'].state_dict().values())==22696448
 assert ns['tied'].head.weight is ns['tied'].embedding.weight
+assert ns['inputs'].tolist()==[[0,1]] and ns['targets'].tolist()==[[1,2]]
+expected_losses=[math.log(sum(math.exp(k) for k in (2,1,-2)))-1,
+                 math.log(sum(math.exp(k) for k in (1,2,-1)))+1]
+assert np.allclose(ns['token_nll'].tolist(),[expected_losses],rtol=0,atol=1e-12)
+assert math.isclose(ns['loss'].item(),sum(expected_losses)/2,abs_tol=1e-12)
+assert ns['next_logits'].tolist()==[[1,2,-1]]
+assert np.allclose(ns['shared_grad'][2].tolist(),[-.4692275995665407,-.9582745295637655],
+                   rtol=0,atol=1e-12)
+assert np.linalg.norm(ns['input_grad'][0].tolist())>0
+print('PASS shifted targets, manual cross-entropy, last row and weight-tying gradient')
+assert sum(p.numel() for p in layout(50257,1600,4288,48).parameters())==1640452800
+assert 50257*1600+1024*1600+48*(12*1600**2+13*1600)+2*1600==1557611200
+for t,total,attention in [(1024,3516769894400,322122547200),
+                          (16384,133577729638400,82463372083200)]:
+    xl=cost(1,t,50257,1600,4288,48)
+    assert sum(xl.values())==total and xl['attention']==attention
+    assert f'{total/1e12:.3f}' in body and f'{attention/total:.1%}' in body
+print('PASS A1/GPT-2 XL inventories and full-square resource table')
 assert ns['forward_flops']==9265217536
 assert ns['training_flops']==27795652608
 for key in ('projections','ffn','attention'):

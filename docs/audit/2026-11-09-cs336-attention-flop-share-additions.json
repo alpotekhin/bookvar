@@ -1,0 +1,211 @@
+{
+  "date": "2026-11-09",
+  "scope": "Explain CS336 lecture 1 step 37 in the existing arithmetic chapter. Distinguish width from sequence length and operation counts from runtime. Keep the unverified screenshot source-only.",
+  "review": {
+    "previousGoalTurn": "Progress: the last turn connected lecture 1 step 241 to the already licensed prefill figure, both chapter editions and the two actual CPU EOS cases.",
+    "sources": [
+      "CS336 Lecture 1, source lines 94–101 and step 37, repository commit 8b59b50730766695c2ffedd1a79c50cd09b9eb91; Stephen Roller's dated OPT table retained, not transcribed as a measured result.",
+      "Zhang et al., OPT arXiv:2205.01068v4 §§2.1–2.2 and Table 1; pinned official configs 08ab08cc4b72ff5593870b5d527cf4230323703c (350M) and 3f5c25d0bc631cb57ac65913f76e22c2dfb61d62 (1.3B) both confirm 24 layers, MHA, I=4H and context limit 2048.",
+      "Nawrot et al., The Sparse Frontier arXiv:2504.17768v2 Appendix B.1–B.3 and Figure 12; complete standalone CC BY 4.0 SVG, byte-for-byte."
+    ],
+    "explanation": "Full 1383-line input read in contiguous ranges. Reread the changed section and transitions. The calculation keeps fixed sequence length when width changes, and fixed width when context length changes. Distinguish the pairwise attention numerator from the wider attention term in the paper and keep the right panel analytical. No claims about original Roller code, reproduced benchmark, deployment latency, or sparse-attention quality.",
+    "runtime": "Independently enumerated causal pairs and matrix shapes; computed and matched every entry in three displayed rows. All previous arithmetic checks still pass. CPU arithmetic, not a model or hardware benchmark."
+  },
+  "verification": {
+    "course": "Deterministic CS336 snapshot passed with 902 artifacts, 811 coverage and 159 visual rows. Step 37's concept points to the exact chapter anchor; the screenshot and heterogeneous steps 26–39 remain source-only. Dated 206-row residual report still passes.",
+    "reader": "Followed the RU course link, EN reference topic and source-note backlink in Chrome. At 375 and 1280 px all 10 chapter figures loaded with no document overflow or KaTeX errors. Both intact panels and their legends were visually inspected; 3× mobile zoom pans to either panel and retains author and CC BY links. EN is a labeled canonical-language fallback, not a new translation.",
+    "local": "Final build: 2055 pages, 250 output tests, zero broken internal routes/fragments. 19 targeted navigation/receipt/policy/residual tests and the new focused figure provenance test passed. Topic-index and course-ingestion checks passed. Direct cmp and built asset digest match the source SVG.",
+    "release": "Local only, no commit, push or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md",
+      "before_sha256": "f0b4f724a87958426982ab167638ab9a9d6d9d7fd2ed2f88c2ed72c26e213b87",
+      "after_sha256": "771fedd9b0c35cdd03a5c12a45510698f98e6447a01e624b3d40a743d7287eb9",
+      "lines": 1452,
+      "changes": [
+        {
+          "old": "last_updated: 2026-11-04",
+          "new": "last_updated: 2026-11-09"
+        },
+        {
+          "old": "  - anchor: arith-attention-length\n    label: \"Длина контекста и FLOP внимания\"\n    label_en: \"Context length and attention FLOPs\"",
+          "new": "  - anchor: arith-attention-length\n    label: \"Длина контекста и FLOP внимания\"\n    label_en: \"Context length and attention FLOPs\"\n  - anchor: arith-attention-share\n    label: \"Доля FLOP внимания: ширина модели и длина контекста\"\n    label_en: \"Attention's FLOP share: model width and context length\""
+        },
+        {
+          "old": "source_unit_id:\n  - lecture-02-section-251-model-flops-utilization-mfu",
+          "new": "source_unit_id:\n  - lecture-01-figure-step-37-rendering-1\n  - lecture-02-section-251-model-flops-utilization-mfu"
+        },
+        {
+          "old": "обращений к памяти, поэлементных операций и неполной загрузки GPU.\n\n## 3. Почему памяти нужно больше, чем занимают веса",
+          "new": "обращений к памяти, поэлементных операций и неполной загрузки GPU.\n\n<a id=\"arith-attention-share\"></a>\n\n### Как ширина модели меняет долю внимания\n\nУ OPT-350M и OPT-1.3B по 24 блока, но ширина состояния $H$ у второй\nмодели вдвое больше. Сравним один блок на входе из 2048 токенов.\nПроекции Q/K/V/O и две матрицы FFN растут по обеим осям: число\nопераций увеличивается вчетверо. У произведений $QK^\\top$ и $AV$\nчисло пар позиций прежнее, а суммарная ширина голов удвоилась,\nпоэтому операций стало только вдвое больше.\n\nДля обычного MHA и FFN с двумя матрицами, где $I=4H$, линейные\nпроекции стоят $8BSH^2+4BSHI=24BSH^2$. При идеальном пропуске\nпричинного треугольника доля двух произведений между токенами\nв сумме этих матричных операций равна\n\n$$\nf_{\\text{mix}}=\n\\frac{2BS(S+1)H}{24BSH^2+2BS(S+1)H}\n=\\frac{S+1}{12H+S+1}.\n$$\n\n| Модель и длина входа | Проекции и FFN, GFLOP | $QK^\\top$ и $AV$, GFLOP | Доля $f_{\\text{mix}}$ |\n| --- | ---: | ---: | ---: |\n| OPT-350M, 2048 | 51,54 | 8,59 | 14,29% |\n| OPT-1.3B, 2048 | 206,16 | 17,19 | 7,70% |\n| OPT-350M, 1024 | 25,77 | 2,15 | 7,70% |\n\nВ первых двух строках доля уменьшается, хотя абсолютное число FLOP\nвнимания растёт. Первая и третья строки показывают обратный эффект:\nесли оставить модель прежней и удлинить вход, доля растёт. При одинаковых\nблоках их число сокращается из отношения. Выходная проекция в словарь,\nsoftmax и поэлементные операции сюда не входят.\nРазмеры взяты из [статьи OPT, таблица 1 и §2.2](https://arxiv.org/html/2205.01068v4#S2.T1)\nи выпущенных конфигураций [350M](https://huggingface.co/facebook/opt-350m/blob/08ab08cc4b72ff5593870b5d527cf4230323703c/config.json)\nи [1.3B](https://huggingface.co/facebook/opt-1.3b/blob/3f5c25d0bc631cb57ac65913f76e22c2dfb61d62/config.json).\nНа шаге 37 [лекции 1 CS336](https://cs336.stanford.edu/lectures/?trace=lecture_01)\nсравнивают доли операций на шаге обучения нескольких OPT.\nЗдесь расчёт относится к прямому проходу одного блока, поэтому числа\nне обязаны совпадать с таблицей из лекции.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-attention-share-2026-11-09/prefilling_seq_length_impact.svg|Слева расчётная доля FLOP внимания на prefill для Qwen 7B–72B: 40% на 16K, 68% на 64K, 80% на 128K. Справа расчётный выигрыш от разреживания внимания при тех же длинах.]]\n\n*Piotr Nawrot et al., [The Sparse Frontier, Figure 12](https://arxiv.org/html/2504.17768v2#A2.F12),\n[исходный SVG](https://arxiv.org/html/2504.17768v2/prefilling_seq_length_impact.svg), без изменений,\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nНа левом графике доля внимания растёт с 40% на 16K токенов до 80% на\n128K. Столбцы усреднены по Qwen 2.5 от 7B до 72B, вертикальные отрезки\nпоказывают разброс между размерами. Авторы считают полный prefill:\nв знаменателе есть в том числе выход в словарь, а в статье операции\nпроекций входят в член внимания. Поэтому эти проценты нельзя подставлять\nв формулу для одного блока OPT. Справа по той же модели затрат оценён\nвыигрыш при разреживании: от примерно $1{,}5\\times$ на 16K до $2{,}8\\times$\nна 128K. Ось Speedup здесь выражает отношение оценок FLOP, а не замер\nвремени на GPU.\n\nЕсли оптимизация уменьшает в пять раз работу, занимавшую 40 из\n100 условных FLOP, остаётся $60+40/5=68$; если она занимала 80,\nостаётся $20+80/5=36$. В разреженном внимании можно пропустить часть\nпар позиций, но проекции по-прежнему нужны. Стоимость выбора пар,\nпропускную способность памяти и загрузку устройства нужно проверять\nотдельно. См. [[05 Источники/Papers/The Sparse Frontier.md|методику расчёта Nawrot et al.]].\n\n## 3. Почему памяти нужно больше, чем занимают веса"
+        },
+        {
+          "old": "модели вдвое больше. Сравним один блок на входе из 2048 токенов.",
+          "new": "модели вдвое больше. Сравним один блок на одной последовательности\nиз 2048 токенов ($B=1$)."
+        },
+        {
+          "old": "операций увеличивается вчетверо. У произведений $QK^\\top$ и $AV$\nчисло пар позиций прежнее, а суммарная ширина голов удвоилась,\nпоэтому операций стало только вдвое больше.",
+          "new": "операций увеличивается вчетверо. У произведений $QK^\\top$ и $AV$\n($A$ — веса внимания после softmax) число пар позиций прежнее.\nСуммарная ширина голов удвоилась, поэтому операций стало вдвое больше."
+        },
+        {
+          "old": "проекции стоят $8BSH^2+4BSHI=24BSH^2$. При идеальном пропуске\nпричинного треугольника доля двух произведений между токенами",
+          "new": "проекции стоят $8BSH^2+4BSHI=24BSH^2$. Если ядро пропускает все пары,\nзапрещённые причинной маской, доля двух произведений между токенами"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "f6dcff328eb6576e56060f8ff73c4953108e8dd2c74f9fbc76adfdbc190a992b",
+      "after_sha256": "cbdbead98352c77287dbb5e819b82034e9a7f12ac3a589b4542abf2b0ffe410a",
+      "lines": 2580,
+      "changes": [
+        {
+          "old": "      - source: 05 Источники/Papers/Are Emergent Abilities of Large Language Models a Mirage.md\n        route: sources/papers/emergent-abilities-metric-mirage",
+          "new": "      - source: 05 Источники/Papers/Are Emergent Abilities of Large Language Models a Mirage.md\n        route: sources/papers/emergent-abilities-metric-mirage\n      - source: 05 Источники/Papers/The Sparse Frontier.md\n        route: sources/papers/the-sparse-frontier"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "04e37cc1be8b118be0d815d06d7b5ae2ae928d3f51a8153da60ad38299842de2",
+      "after_sha256": "05ae0d5445264ede0b1d1d042e30ee51ad1ec4fdb754517fae3fbf649a541833",
+      "lines": 24180,
+      "changes": [
+        {
+          "old": "  - {\"id\":\"curated-scaling-emergence-wei-d905d44f12c6\",\"asset\":\"00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/wei-emergence-figure2.png\",\"author\":\"Jason Wei, Yi Tay, Rishi Bommasani et al.\",\"source_url\":\"https://arxiv.org/html/2206.07682v2#S3.F2\",\"source_image_url\":\"https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/wei-emergence-plot.png\",\"source_asset\":\"05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/wei-emergence-plot.png\",\"commit\":\"8b59b50730766695c2ffedd1a79c50cd09b9eb91\",\"source_asset_sha256\":\"d905d44f12c6861f6e1febd0af3e7ab446f1ccf1531a1702c43dd4b977dd453b\",\"sha256\":\"d905d44f12c6861f6e1febd0af3e7ab446f1ccf1531a1702c43dd4b977dd453b\",\"dimensions_px\":[777,549],\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"rights_evidence\":\"https://arxiv.org/html/2206.07682v2\",\"derivation\":\"source-raster-copy\",\"modifications\":\"Complete Wei et al. Figure 2 as shown in CS336 Lecture 1 step 39, unchanged from the pinned course PNG; all eight plots and legend.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-09\",\"used_in\":[\"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\"]}",
+          "new": "  - {\"id\":\"curated-arithmetic-sparse-frontier-e309c11191da\",\"asset\":\"00 Учебник/Assets/Figures/curated/arithmetic-attention-share-2026-11-09/prefilling_seq_length_impact.svg\",\"author\":\"Piotr Nawrot, Robert Li, Renjie Huang, Sebastian Ruder, Kelly Marchisio and Edoardo M. Ponti\",\"source_url\":\"https://arxiv.org/html/2504.17768v2#A2.F12\",\"source_image_url\":\"https://arxiv.org/html/2504.17768v2/prefilling_seq_length_impact.svg\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/arithmetic-attention-share-2026-11-09/prefilling_seq_length_impact.svg\",\"source_asset_sha256\":\"e309c11191da88331f9302fdb3983f75c68e6c8afe119b1721f98c3d11cfeef6\",\"sha256\":\"e309c11191da88331f9302fdb3983f75c68e6c8afe119b1721f98c3d11cfeef6\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"rights_evidence\":\"https://arxiv.org/html/2504.17768v2\",\"derivation\":\"source-svg-copy\",\"modifications\":\"Exact standalone Figure 12 SVG from arXiv v2. Both panels and all labels retained.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-09\",\"used_in\":[\"00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md\"]}\n  - {\"id\":\"curated-scaling-emergence-wei-d905d44f12c6\",\"asset\":\"00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/wei-emergence-figure2.png\",\"author\":\"Jason Wei, Yi Tay, Rishi Bommasani et al.\",\"source_url\":\"https://arxiv.org/html/2206.07682v2#S3.F2\",\"source_image_url\":\"https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/wei-emergence-plot.png\",\"source_asset\":\"05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/wei-emergence-plot.png\",\"commit\":\"8b59b50730766695c2ffedd1a79c50cd09b9eb91\",\"source_asset_sha256\":\"d905d44f12c6861f6e1febd0af3e7ab446f1ccf1531a1702c43dd4b977dd453b\",\"sha256\":\"d905d44f12c6861f6e1febd0af3e7ab446f1ccf1531a1702c43dd4b977dd453b\",\"dimensions_px\":[777,549],\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"rights_evidence\":\"https://arxiv.org/html/2206.07682v2\",\"derivation\":\"source-raster-copy\",\"modifications\":\"Complete Wei et al. Figure 2 as shown in CS336 Lecture 1 step 39, unchanged from the pinned course PNG; all eight plots and legend.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-09\",\"used_in\":[\"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\"]}"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/editorial-map.yml",
+      "before_sha256": "f861d5f79e78b261d8b64e1a44b0c16b907b687758a8fc19b89beb8f6fa5021b",
+      "after_sha256": "17708ba6a6da9a98317db39a9915e79822970f15270e36f9dc728e935594b351",
+      "lines": 5468,
+      "changes": [
+        {
+          "old": "    \"lecture-01-figure-step-37-rendering-1\": {\n      \"disposition\": \"source-only\",\n      \"reason\": \"Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.\",\n      \"evidence\": \"Lectures/repository/var/traces/lecture_01.json#step=37:rendering=1; reviewed title: roller flops\"",
+          "new": "    \"lecture-01-figure-step-37-rendering-1\": {\n      \"disposition\": \"integrated\",\n      \"destination\": \"00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md\",\n      \"destination_anchor\": \"arith-attention-share\",\n      \"evidence\": \"Step 37 contrasts attention and FFN FLOP shares for OPT. Chapter uses controlled forward counts from pinned OPT configurations and a separate original prefill FLOP breakdown; it does not reproduce the screenshot's training fractions.\""
+        },
+        {
+          "old": "    \"lecture-01-visual-figure-step-37-rendering-1\": {\n      \"disposition\": \"source-only\",\n      \"reason\": \"Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.\",\n      \"evidence\": \"Lectures/repository/var/traces/lecture_01.json#step=37:rendering=1; question reviewed: How does roller flops support the lecture section “The industrialization of language models”?\"",
+          "new": "    \"lecture-01-visual-figure-step-37-rendering-1\": {\n      \"disposition\": \"source-only\",\n      \"reason\": \"Stephen Roller's social-post screenshot remains in the archive. Independent permission to republish it was not verified; the chapter embeds a different licensed original, Nawrot et al. Figure 12.\",\n      \"evidence\": \"Lectures/repository/var/traces/lecture_01.json#step=37:rendering=1; original post https://x.com/stephenroller/status/1579993017234382849.\""
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+      "before_sha256": "eb9a2822483cb5e183ad9b412971d53f52b2fc0babc21162dd03265872440f6f",
+      "after_sha256": "f8244829bd1afd23ebffc762cd4862641659ff8cb55889f5f59c5932fceac791",
+      "lines": 309,
+      "changes": [
+        {
+          "old": "В учебнике: [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws#scaling-metric-emergence|почему метрика может создать видимый скачок качества]] (шаг 39); [[00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention#prefill-decode-cache-states|как меняется KV-cache между prefill и decode]] (шаг 241).",
+          "new": "В учебнике: [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-attention-share|как ширина модели и длина контекста меняют долю FLOP внимания]] (шаг 37); [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws#scaling-metric-emergence|почему метрика может создать видимый скачок качества]] (шаг 39); [[00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention#prefill-decode-cache-states|как меняется KV-cache между prefill и decode]] (шаг 241)."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Курсы.md",
+      "before_sha256": "8b1290596e2df04300a5bd9dcdbc35f273189ff50d8332a3eafc8d66f8d24e0a",
+      "after_sha256": "0657f37b9e9be45ca8db8bdb4776507de68e287ad6b3cd67922b5878110389f5",
+      "lines": 400,
+      "changes": [
+        {
+          "old": "Из 811 записей покрытия 558 имеют статус `integrated`, 28 — `covered-existing`,\n21 — `contract-only`, 148 — `source-only`, 56 — `excluded`. В числе 558",
+          "new": "Из 811 записей покрытия 559 имеют статус `integrated`, 28 — `covered-existing`,\n21 — `contract-only`, 147 — `source-only`, 56 — `excluded`. В числе 559"
+        }
+      ]
+    },
+    {
+      "source": "en/05 Sources/Courses.md",
+      "before_sha256": "08279de5a5139598024e87313877dd021c6a5d4f00e9ef054b02db1407056f7e",
+      "after_sha256": "e652330990b8940cf0ac4d012b13728487016f7eb1d63c95b27ce65b74f3c147",
+      "lines": 151,
+      "changes": [
+        {
+          "old": "The coverage ledger contains 811 semantic units: 558 integrated, 28 already\ncovered, 21 assignment-contract-only, 148 source-only, and 56 excluded.\nOf the 558 integrated units, 373 come from assignment material and 185 from",
+          "new": "The coverage ledger contains 811 semantic units: 559 integrated, 28 already\ncovered, 21 assignment-contract-only, 147 source-only, and 56 excluded.\nOf the 559 integrated units, 373 come from assignment material and 186 from"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/coverage.yml",
+      "before_sha256": "67ad96a100d93207d1792960294cecfe7a33a00cb4221fef610430b752c8b585",
+      "after_sha256": "c34dbf4c1384fcacec91ad309acb60dacfccbdf3d533af18b5ed500a1554de49",
+      "lines": 11686,
+      "changes": [
+        {
+          "old": "      \"primary_sources\": [\n        \"lecture-01\"\n      ],\n      \"disposition\": \"source-only\",\n      \"destination\": \"05 Источники/Courses/Stanford CS336 Spring 2026/_index.md\",\n      \"destination_anchor\": \"lecture-01\",\n      \"reason\": \"Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.\",\n      \"evidence\": \"Lectures/repository/var/traces/lecture_01.json#step=37:rendering=1; reviewed title: roller flops\"\n    },\n    {\n      \"id\": \"coverage-lecture-01-figure-step-39-rendering-1\",",
+          "new": "      \"primary_sources\": [\n        \"lecture-01\"\n      ],\n      \"disposition\": \"integrated\",\n      \"destination\": \"00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md\",\n      \"destination_anchor\": \"arith-attention-share\",\n      \"evidence\": \"Step 37 contrasts attention and FFN FLOP shares for OPT. Chapter uses controlled forward counts from pinned OPT configurations and a separate original prefill FLOP breakdown; it does not reproduce the screenshot's training fractions.\"\n    },\n    {\n      \"id\": \"coverage-lecture-01-figure-step-39-rendering-1\","
+        },
+        {
+          "old": "      \"evidence\": \"Assignments/assignment5-alignment/tests/test_data.py#L55\"\n    }\n  ],\n  \"editorial_overlay_sha256\": \"2b340bf6579f06fc0b27c6d71e3309f94345477572111f53ae3a892ff89808e7\"\n}",
+          "new": "      \"evidence\": \"Assignments/assignment5-alignment/tests/test_data.py#L55\"\n    }\n  ],\n  \"editorial_overlay_sha256\": \"71e735d6874bb6f5162472e456e26a81b74f99587455b9e998e6f8f76dc1ebc6\"\n}"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/visuals.yml",
+      "before_sha256": "9f3487aaaea05815f216249b842cded0a62088d13dd83e77a0a7bdf9596ba0c9",
+      "after_sha256": "10361faba7b355a37ef8e2a67002f95f488a97141f6fb1005ffde5d658b36b1f",
+      "lines": 16448,
+      "changes": [
+        {
+          "old": "      \"checked_at\": \"2026-09-04\",\n      \"source_parent_sha256\": \"a7d47339eab889679010e926db8beb79f475a0596243f19bb15dbd69223f67e6\",\n      \"asset_url\": \"https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/roller-flops.png\",\n      \"reason\": \"Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.\",\n      \"evidence\": \"Lectures/repository/var/traces/lecture_01.json#step=37:rendering=1; question reviewed: How does roller flops support the lecture section “The industrialization of language models”?\"\n    },\n    {\n      \"id\": \"lecture-01-visual-figure-step-39-rendering-1\",",
+          "new": "      \"checked_at\": \"2026-09-04\",\n      \"source_parent_sha256\": \"a7d47339eab889679010e926db8beb79f475a0596243f19bb15dbd69223f67e6\",\n      \"asset_url\": \"https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/roller-flops.png\",\n      \"reason\": \"Stephen Roller's social-post screenshot remains in the archive. Independent permission to republish it was not verified; the chapter embeds a different licensed original, Nawrot et al. Figure 12.\",\n      \"evidence\": \"Lectures/repository/var/traces/lecture_01.json#step=37:rendering=1; original post https://x.com/stephenroller/status/1579993017234382849.\"\n    },\n    {\n      \"id\": \"lecture-01-visual-figure-step-39-rendering-1\","
+        },
+        {
+          "old": "      \"evidence\": \"Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#pages=15-18\"\n    }\n  ],\n  \"editorial_overlay_sha256\": \"2b340bf6579f06fc0b27c6d71e3309f94345477572111f53ae3a892ff89808e7\"\n}",
+          "new": "      \"evidence\": \"Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#pages=15-18\"\n    }\n  ],\n  \"editorial_overlay_sha256\": \"71e735d6874bb6f5162472e456e26a81b74f99587455b9e998e6f8f76dc1ebc6\"\n}"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/snapshot-lock.json",
+      "before_sha256": "2e7a368fe4a9bc907c355bf8ffc1f2250a5a1698d60bdcf01d837f71c9b69d67",
+      "after_sha256": "225c648c87fbd69297a79ff08eeb46a507060bbb0d24ffd740211e536376d053",
+      "lines": 116,
+      "changes": [
+        {
+          "old": "    \"extractor_revision\": \"stanford-cs336-semantic-audit-v3\",\n    \"extractor_sha256\": \"1e8d049b33e599e0e23c7edd26601f70120aff2899e13258b4dd3b852092c48f\",\n    \"semantic_review_sha256\": \"250bd1d1a7f73d26ce805846d506b4cf6c87aeef045d5c373699f199d958ccc1\",\n    \"editorial_overlay_sha256\": \"2b340bf6579f06fc0b27c6d71e3309f94345477572111f53ae3a892ff89808e7\",\n    \"tool_versions\": {\n      \"edtrace\": \"0.1.15\",\n      \"pdfinfo\": \"26.04.0\",",
+          "new": "    \"extractor_revision\": \"stanford-cs336-semantic-audit-v3\",\n    \"extractor_sha256\": \"1e8d049b33e599e0e23c7edd26601f70120aff2899e13258b4dd3b852092c48f\",\n    \"semantic_review_sha256\": \"250bd1d1a7f73d26ce805846d506b4cf6c87aeef045d5c373699f199d958ccc1\",\n    \"editorial_overlay_sha256\": \"71e735d6874bb6f5162472e456e26a81b74f99587455b9e998e6f8f76dc1ebc6\",\n    \"tool_versions\": {\n      \"edtrace\": \"0.1.15\",\n      \"pdfinfo\": \"26.04.0\","
+        },
+        {
+          "old": "        \"records\": 811\n      },\n      \"coverage.yml\": {\n        \"sha256\": \"67ad96a100d93207d1792960294cecfe7a33a00cb4221fef610430b752c8b585\",\n        \"records\": 811\n      },\n      \"visuals.yml\": {\n        \"sha256\": \"9f3487aaaea05815f216249b842cded0a62088d13dd83e77a0a7bdf9596ba0c9\",\n        \"records\": 159\n      }\n    }",
+          "new": "        \"records\": 811\n      },\n      \"coverage.yml\": {\n        \"sha256\": \"c34dbf4c1384fcacec91ad309acb60dacfccbdf3d533af18b5ed500a1554de49\",\n        \"records\": 811\n      },\n      \"visuals.yml\": {\n        \"sha256\": \"10361faba7b355a37ef8e2a67002f95f488a97141f6fb1005ffde5d658b36b1f\",\n        \"records\": 159\n      }\n    }"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "e84787090cdaa31e678616017295957a6bfa2ad328375880b26d5b7df4351b19",
+      "after_sha256": "bfbeae83fa842fc58552442242829fe4835272cd5e8f83b17401ccdaac3433f7",
+      "lines": 1700,
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-attention-length|Длина контекста и FLOP внимания]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-states|Память параметров, градиентов и Adam]]",
+          "new": "  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-attention-length|Длина контекста и FLOP внимания]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-attention-share|Доля FLOP внимания: ширина модели и длина контекста]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-states|Память параметров, градиентов и Adam]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "00898fc96c53ce2dbf0137d04fa635f718439bca0bacc4d3273c22c5c3937a58",
+      "after_sha256": "8f8dcf37faff868d23f9e7547e6fa3aa752c97b93db38c7a31e9b8d42670c68d",
+      "lines": 1702,
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-attention-length|Context length and attention FLOPs]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-states|Parameter, gradient, and Adam memory]]",
+          "new": "  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-attention-length|Context length and attention FLOPs]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-attention-share|Attention's FLOP share: model width and context length]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-states|Parameter, gradient, and Adam memory]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/The Sparse Frontier.md",
+      "created": true,
+      "after_sha256": "fff6f7f01666924fe01d79cbe3baf99394dd278ed326bbf775bb950925a629e3"
+    }
+  ]
+}

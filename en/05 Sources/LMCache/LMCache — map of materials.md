@@ -4,6 +4,7 @@ type: source-note
 status: active
 locale: en
 translation_of: "05 Источники/LMCache/LMCache — карта материалов.md"
+last_updated: 2026-11-11
 last_verified: 2026-09-15
 ---
 
@@ -98,9 +99,11 @@ consequences. Cache failures and Python runtime work do not have to share the
 engine process; CPU cache capacity can scale independently of GPU allocation;
 and several engines can reuse a common node-local cache.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-mode-architecture.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lmcache-paper-2026-11-11/lmcache-figure2-overview.png|The inference engine exchanges KV with the storage backend through LMCache.]]
 
-The figure is best read as two cooperating planes:
+*Yihua Cheng et al., [LMCache, Figure 2](https://arxiv.org/html/2510.09665v1#S3.F2), [original PNG](https://arxiv.org/html/2510.09665v1/lmcache-arch.png), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). This paper overview shows the engine/storage boundary, not the MP process or transport layout.*
+
+In MP mode, the connector and the separate server have distinct responsibilities:
 
 1. **The engine-facing data path.** An LMCache connector participates in the
    engine's paged-KV lifecycle. It asks whether prompt chunks exist, retrieves
@@ -236,16 +239,29 @@ and networks prefer larger transfers. LMCache therefore gathers or exposes
 engine blocks, moves chunk-sized objects, and scatters retrieved data into the
 destination pages.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-transfer-paths.png]]
+The [system paper, §4.1](https://arxiv.org/html/2510.09665v1#S4.SS1) distinguishes engine
+pages from storage chunks. In its 16-token-page, 256-token-chunk example,
+one chunk spans 16 pages in each layer. For a 32-layer model with 128 KiB
+of KV per token across all layers, that is 512 layer pages of 64 KiB each,
+or 32 MiB per chunk. During retrieval, the destination engine supplies
+its own page addresses; it need not place the returned KV at the source
+worker's addresses.
 
-The MP implementation supports distinct local transfer strategies:
+[Chen and Lin's June 2026 guide](https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/) follows three concrete store
+paths in [the original diagram](https://blog.lmcache.ai/wp-content/uploads/2026/06/3pathsUpdate-1-edited.png):
 
-| Path | Mechanism | Strength | Constraint |
-|---|---|---|---|
-| LMCache-driven GPU path | CUDA IPC exposes device allocations; the server performs the transfer | Avoids serializing tensor payloads through RPC | Requires compatible local GPU/IPC setup and careful allocation lifetime |
-| Engine-driven path | Worker gathers/scatters and participates in `PREPARE`/`COMMIT` | Works when the server cannot directly operate on engine device memory | More work remains in the engine-side process |
-| POSIX shared memory | Non-GPU payload passes through shared memory | Avoids copying large payloads through ZMQ | Requires shared IPC namespace and managed slots |
-| Pickle fallback | Serialized bytes travel through the protocol | Portable and simple for fallback/testing | Additional copies and serialization overhead |
+| Transport in that guide | Store path | Payload crossing the RPC channel |
+|---|---|---|
+| CUDA IPC | GPU pages → GPU staging buffer → server CPU L1 | Handle and metadata only |
+| POSIX shared memory | Worker gathers into a buffer mapped by both processes | Control messages only |
+| Pickle | Worker gathers and serializes; server deserializes and writes private L1 | Serialized KV bytes |
+
+CUDA IPC lets the server address the worker's allocation; it does not
+eliminate gather or the device-to-host copy. The guide counts one SHM copy
+with device-specific C operations and an extra staging copy with the Python
+fallback. Those are counts of operations on the payload, not estimates of
+PCIe traffic or total memory-controller traffic. For the 32 MiB chunk above,
+a 24 GB/s device-to-host link gives a 1.40 ms lower bound for that copy alone.
 
 The official [configuration reference](https://docs.lmcache.ai/mp/configuration.html)
 distinguishes `lmcache_driven`, `engine_driven`, and `auto` routing. The choice

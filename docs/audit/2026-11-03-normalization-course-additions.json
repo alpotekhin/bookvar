@@ -1,0 +1,248 @@
+{
+  "date": "2026-11-03",
+  "scope": "Initialization/normalization/residual chapter: source-code explanation and source figures, reference terms; no translation or publication.",
+  "status": "local delta verified; two source-figure gaps remain; unpublished",
+  "explanation": {
+    "wholeBeforeRead": "Entire873-line baseline read in ranges1-340,341-680,681-EOF.",
+    "findings": [
+      "Only3 figures, all for residual/pre-norm: initialization and normalization axes lacked originals.",
+      "Detailed existing derivations remain intact; no synthetic replacement or compression.",
+      "Missing reference terms and an indirect redirect link labelled quick formulas.",
+      "Karpathy's actual BatchNorm class offers a full implementation and a concrete estimator-contract comparison, not just a technology definition."
+    ],
+    "freshSourceReads": [
+      "Karpathy makemore_part3_bn.ipynb at73c3fcc7: all25 cells including source, saved text and image outputs read. Complete BatchNorm class logic/comments retained; spaces on three otherwise empty lines removed for repository whitespace validation. No training rerun.",
+      "CS231n saved Weight Initialization section read entirely.",
+      "Fleuret v1.3 §4.6, pp82-86, complete online text and Figure4.9 caption; final-pageCC BY-NC-SA4.0 statement. Source PDF download failed repeatedly; no raster copied or claimed.",
+      "Xiong Figure1 actual saved image inspected against its caption; PMLR author/title/year checked online. Prior detailed theory comparison reused, not fresh full paper read."
+    ],
+    "reusedEvidence": [
+      "docs/audit/2026-10-21-initialization-normalization.md",
+      "docs/audit/2026-10-22-norm-gating.md"
+    ],
+    "changes": [
+      "17 subject terms indexed in RU/EN, with source code and new source discussion kept English; no English-edition translation.",
+      "All3 old programs/figures and all equations retained; one complete source class plus executable comparison added.",
+      "2 original PNG outputs extracted byte-for-byte from pinned notebook; existing complete Xiong pre/post Figure1 reused.",
+      "Six total figures. Original captions/licenses/provenance retained; no diagram redrawn.",
+      "Debug figure conditions include1001 iterations, saved final forward/backward values and density axes, not an untrained network or controlled BatchNorm ablation.",
+      "The exact source notebook retains original bytes. Published source-class formatting differs only by spaces on empty lines; this normalization is explicit in prose and checked narrowly."
+    ]
+  },
+  "remaining": [
+    "Fleuret Figure4.9 selected for normalization-axis visualization, but original PDF transfer failed via curl/HTTP1.1/www/Node/browser. Direct link retained; inline original remains pending.",
+    "No new original initialization-distribution comparison was licensed and imported in this turn; existing complete derivation retained. Not a claim of full-course/whole-book completion."
+  ],
+  "verification": {
+    "chapterSha256": "740c73f3b02b3cee1033a2de568b0269e92d2c00980967f51ead14c99d46a5ca",
+    "wholeBeforeRead": true,
+    "wholeFinalRead": true,
+    "style": "no-ai-slop skill/eval read in full; new prose reviewed, source English/comments preserved; no translation.",
+    "examples": {
+      "exit": 0,
+      "publishedFences": 4,
+      "runnableFences": 4,
+      "torch": "2.14.1",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "device": "CPU",
+      "command": "uv run --python 3.13 --with torch==2.14.1 --with numpy==2.5.4 --with scipy==1.18.1 python publishing/tools/check_norm_examples.py",
+      "scope": "All four current published programs executed; independent symmetry, initialization moments/API/quadrature, BatchNorm states/modes/future leakage, LayerNorm/RMSNorm affine/invariance/VJP/finite difference/FP16 overflow and residual projection/Jacobian/variance checks. Source BatchNorm variance-contract comparison and saturation derivative checked. Not source training rerun or GPU benchmark."
+    },
+    "reader": {
+      "evidence": "docs/audit/evidence/2026-11-03-normalization-reader",
+      "desktop": "1280x720: all six source figures opened and visually inspected with full original captions. Document1265/1265, zero KaTeX errors or display-math overflow.",
+      "mobile": "390x844: document375/375, table343/343, six inline originals fit<=343px. Both Karpathy histograms inspected at4x across center and both edges; source axes and legends visible. Both Xiong blocks inspected at2x, including full operation paths. No redraw/crop of imported PNG outputs.",
+      "navigation": "Actual RU reference -> #batchnorm-train-eval; actual EN reference -> #batchnorm-source-implementation. EN retains four programs, six source images and explicit Canonical-language chapter notice. Actual core continuation reaches Dropout. Temporary viewport reset.",
+      "finalRead": "Whole baseline873-line and final1098-line owner covered. Final content read in ranges1-390,391-790,791-EOF; subsequent source-class blank-line whitespace/provenance annotation edits confined to appendix, which was reread950-EOF. No chapter edits after final build."
+    },
+    "htmlAndPreservation": {
+      "exit": 0,
+      "files": 6,
+      "tests": 207
+    },
+    "build": {
+      "exit": 0,
+      "routes": 2007,
+      "htmlFiles": 2011,
+      "bytes": 851779958,
+      "files": 5595,
+      "headroom": 148220042,
+      "brokenInternalLinks": 0,
+      "linkEvidence": "Full emitted-route/fragment/file validation in the passing post-build site-output suite. Premature run during Pagefind rebuild excluded."
+    },
+    "figureChecks": [
+      "prepare_normalization_course_figures.mjs --check: both PNGs byte-identical to saved notebook outputs and MIT license matches",
+      "prepare_norm_source_figures.py --check: exact original SVGs and source-page pixel match",
+      "prepare_norm_gating_figures.py --check: existing Xiong crop matches pinned PDF"
+    ],
+    "topicIndex": {
+      "topics": 152,
+      "locales": 2,
+      "newTerms": 17
+    },
+    "published": false
+  },
+  "files": [
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md",
+      "before_sha256": "019c8f6a0270bcdb4f282ade039108c289f5d7d391dde779e664fd046fa61435",
+      "after_sha256": "740c73f3b02b3cee1033a2de568b0269e92d2c00980967f51ead14c99d46a5ca",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-21\n",
+          "new": "last_updated: 2026-11-03\nsource_language: mixed\nreference_terms:\n  - label: \"Симметрия при инициализации\"\n    label_en: \"Initialization symmetry\"\n    anchor: initialization-symmetry\n  - label: \"Ширина слоя и второй момент активаций\"\n    label_en: \"Fan-in and activation second moments\"\n    anchor: initialization-second-moment\n  - label: \"Xavier — прямой и обратный проходы\"\n    label_en: \"Xavier forward and backward scales\"\n    anchor: xavier-initialization\n  - label: \"He — второй момент после ReLU\"\n    label_en: \"He initialization and ReLU second moments\"\n    anchor: he-initialization\n  - label: \"BatchNorm и LayerNorm — оси статистик\"\n    label_en: \"BatchNorm and LayerNorm reduction axes\"\n    anchor: normalization-axes\n  - label: \"BatchNorm — train, eval и накопленные статистики\"\n    label_en: \"BatchNorm train, eval and running statistics\"\n    anchor: batchnorm-train-eval\n  - label: \"Нормализация и утечка будущих токенов\"\n    label_en: \"Normalization and future-token leakage\"\n    anchor: normalization-causal-leakage\n  - label: \"LayerNorm — нормализация токена\"\n    label_en: \"LayerNorm across token features\"\n    anchor: token-layernorm\n  - label: \"RMSNorm — формула и точность вычисления\"\n    label_en: \"RMSNorm formula and arithmetic precision\"\n    anchor: rmsnorm-forward-precision\n  - label: \"Backward LayerNorm и RMSNorm\"\n    label_en: \"LayerNorm and RMSNorm backward\"\n    anchor: normalization-backward\n  - label: \"Residual — сложение и проекция\"\n    label_en: \"Residual addition and projection\"\n    anchor: residual-addition\n  - label: \"Residual — прямой вклад в градиент\"\n    label_en: \"Residual identity and branch gradients\"\n    anchor: residual-gradients\n  - label: \"Нулевая последняя проекция ветви\"\n    label_en: \"Zero-initialized final residual projection\"\n    anchor: residual-zero-projection\n  - label: \"Pre-norm и post-norm\"\n    label_en: \"Pre-norm and post-norm\"\n    anchor: pre-post-normalization\n  - label: \"Масштаб остаточной суммы\"\n    label_en: \"Residual-stream variance\"\n    anchor: residual-variance\n  - label: \"Диагностика активаций и градиентов\"\n    label_en: \"Activation and gradient diagnostics\"\n    anchor: normalization-diagnostics\n  - label: \"BatchNorm с нуля — код и соглашение дисперсии\"\n    label_en: \"BatchNorm from scratch and variance conventions\"\n    anchor: batchnorm-source-implementation\n"
+        },
+        {
+          "old": "primary_sources:\n",
+          "new": "primary_sources:\n  - https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb\n  - https://proceedings.mlr.press/v119/xiong20b.html\n  - https://fleuret.org/public/lbdl.pdf\n"
+        },
+        {
+          "old": "## Почему одинаковые веса не работают\n",
+          "new": "<a id=\"initialization-symmetry\"></a>\n## Почему одинаковые веса не работают\n"
+        },
+        {
+          "old": "### Откуда берётся зависимость от ширины\n",
+          "new": "<a id=\"initialization-second-moment\"></a>\n### Откуда берётся зависимость от ширины\n"
+        },
+        {
+          "old": "### Xavier: согласование прямого и обратного проходов\n",
+          "new": "<a id=\"xavier-initialization\"></a>\n### Xavier: согласование прямого и обратного проходов\n"
+        },
+        {
+          "old": "### He: поправка на ReLU\n",
+          "new": "<a id=\"he-initialization\"></a>\n### He: поправка на ReLU\n"
+        },
+        {
+          "old": "## Что делает normalization\n",
+          "new": "<a id=\"normalization-axes\"></a>\n## Что делает normalization\n"
+        },
+        {
+          "old": "### BatchNorm в train и eval\n",
+          "new": "<a id=\"batchnorm-train-eval\"></a>\n### BatchNorm в train и eval\n"
+        },
+        {
+          "old": "### LayerNorm по признакам одного токена\n",
+          "new": "<a id=\"token-layernorm\"></a>\n### LayerNorm по признакам одного токена\n"
+        },
+        {
+          "old": "### RMSNorm: нормирование без вычитания среднего\n",
+          "new": "<a id=\"rmsnorm-forward-precision\"></a>\n### RMSNorm: нормирование без вычитания среднего\n"
+        },
+        {
+          "old": "### Почему backward нормализации связывает признаки\n",
+          "new": "<a id=\"normalization-backward\"></a>\n### Почему backward нормализации связывает признаки\n"
+        },
+        {
+          "old": "## Residual connection учит поправку\n",
+          "new": "<a id=\"residual-addition\"></a>\n## Residual connection учит поправку\n"
+        },
+        {
+          "old": "### Как складываются градиенты\n",
+          "new": "<a id=\"residual-gradients\"></a>\n### Как складываются градиенты\n"
+        },
+        {
+          "old": "### Нулевая последняя матрица не обнуляет обучение всей сети\n",
+          "new": "<a id=\"residual-zero-projection\"></a>\n### Нулевая последняя матрица не обнуляет обучение всей сети\n"
+        },
+        {
+          "old": "## Pre-norm и post-norm\n",
+          "new": "<a id=\"pre-post-normalization\"></a>\n## Pre-norm и post-norm\n"
+        },
+        {
+          "old": "### Масштаб остаточной суммы всё ещё может расти\n",
+          "new": "<a id=\"residual-variance\"></a>\n### Масштаб остаточной суммы всё ещё может расти\n"
+        },
+        {
+          "old": "## Диагностика\n",
+          "new": "<a id=\"normalization-diagnostics\"></a>\n## Диагностика\n"
+        },
+        {
+          "old": "Для авторегрессионного текста нормализация по времени создаёт\n",
+          "new": "<a id=\"normalization-causal-leakage\"></a>\n\nДля авторегрессионного текста нормализация по времени создаёт\n"
+        },
+        {
+          "old": "На схеме два подслоя, и у каждого своя нормализация и остаточная ветвь.\n",
+          "new": "![[00 Учебник/Assets/Figures/curated/norm-gating-2026-10-22/xiong-pre-post-norm.png|Xiong et al.: полный блок Transformer с post-LN слева и pre-LN справа]]\n\n*Ruibin Xiong et al., [On Layer Normalization in the Transformer Architecture, Figure 1, p. 2](https://proceedings.mlr.press/v119/xiong20b/xiong20b.pdf#page=2),\nCC BY 4.0. Обе исходные схемы и полная английская подпись сохранены;\nпереиспользован точный PDF-crop без изменений.*\n\nСлева каждый обходной путь проходит через Layer Norm после сложения.\nСправа нормализация находится только внутри обучаемой ветви.\nСтрелки показывают порядок обеих операций для attention и FFN;\nэто не сравнение LayerNorm с RMSNorm.\n\nНа схеме два подслоя, и у каждого своя нормализация и остаточная ветвь.\n"
+        },
+        {
+          "old": "## Краткие итоги\n",
+          "new": "### Saved distributions from makemore\n\nIn Andrej Karpathy's [makemore, part 3](https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb),\nfive hidden stages contain Linear, BatchNorm and Tanh. The saved debug loop\nruns iterations 0 through 1000. The following figures use the retained\nforward and backward values from its final iteration, not fresh measurements\nof an untrained model. Indices 2, 5, 8, 11 and 14 count all layer objects;\nthey name the five Tanh outputs, not hidden-layer depths 2 through 14.\n\n![[00 Учебник/Assets/Figures/curated/normalization-course-2026-11-03/karpathy-activation-distribution.png|Karpathy makemore: сохранённые распределения выходов пяти Tanh-слоёв]]\n\n*Andrej Karpathy, makemore part 3, zero-based cell 15, original saved PNG\noutput. [Source notebook](https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb),\n[MIT License](/licenses/karpathy-nn-zero-to-hero-73c3fcc7-MIT.txt).\nThe complete original image is unchanged; no plot was rerun or redrawn.*\n\nThe horizontal axis contains activation values; the vertical axis is a\nhistogram density, not a count of neurons. The source prints standard\ndeviations from 0.63 to 0.65 and counts activations with absolute value\nabove 0.97 as saturated. That fraction ranges from 1.69% to 2.78% in\nthis saved pass. Tanh's derivative is $1-h^2$, so at $|h|=0.97$ it is\n0.0591. The threshold is a diagnostic convention, not a discontinuity\nin the function or a guarantee of a useful gradient.\n\n![[00 Учебник/Assets/Figures/curated/normalization-course-2026-11-03/karpathy-gradient-distribution.png|Karpathy makemore: сохранённые градиенты по выходам пяти Tanh-слоёв]]\n\n*Andrej Karpathy, makemore part 3, zero-based cell 16, original saved PNG\noutput. [Source notebook](https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb),\n[MIT License](/licenses/karpathy-nn-zero-to-hero-73c3fcc7-MIT.txt).\nThe complete image, axes and legend are unchanged.*\n\nHere the horizontal axis contains the incoming gradients of those saved\nTanh outputs. Their source-reported standard deviations range from\n$1.952382\\cdot10^{-3}$ to $2.640702\\cdot10^{-3}$. A narrow gradient\nhistogram cannot be interpreted without its horizontal scale, the loss\nreduction and the gradients at other layers. These two figures describe\none BatchNorm/Tanh run; they are not a controlled comparison against a\nnetwork without normalization, and they do not establish generalization\nor long-run training stability.\n\n## Краткие итоги\n"
+        },
+        {
+          "old": "## Источники\n",
+          "new": "Следующая глава: [[00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация|Dropout и регуляризация]].\n\n<a id=\"batchnorm-source-implementation\"></a>\n## BatchNorm from scratch: parameters, buffers and variance\n\nThe following class is copied unchanged from Andrej Karpathy's\n[makemore notebook, cell 13](https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb), MIT.\nOnly the import and the comparison after the class are Bookvar additions.\n`gamma` and `beta` are optimized parameters. The two running-statistic\ntensors are buffers: the forward call updates them under `no_grad`,\nusing the current batch rather than a loss gradient.\n\nFor a matrix shaped `(batch, features)`, `mean(0)` and `var(0)` reduce\nthe batch axis. In PyTorch 2.14, the unqualified `var` call uses correction\n1, dividing by $B-1$. The class uses that estimate for both normalization\nand its running buffer. Native PyTorch BatchNorm instead uses division\nby $B$ for the training output and correction 1 for `running_var`.\nThe earlier two-example matrix makes the difference visible: a variance\nof 8 gives training outputs close to $\\pm1/\\sqrt2$ in this class,\nwhereas native BatchNorm uses 4 and gives outputs close to $\\pm1$.\n\n```python\nimport torch\n\nclass BatchNorm1d:\n  \n  def __init__(self, dim, eps=1e-5, momentum=0.1):\n    self.eps = eps\n    self.momentum = momentum\n    self.training = True\n    # parameters (trained with backprop)\n    self.gamma = torch.ones(dim)\n    self.beta = torch.zeros(dim)\n    # buffers (trained with a running 'momentum update')\n    self.running_mean = torch.zeros(dim)\n    self.running_var = torch.ones(dim)\n  \n  def __call__(self, x):\n    # calculate the forward pass\n    if self.training:\n      xmean = x.mean(0, keepdim=True) # batch mean\n      xvar = x.var(0, keepdim=True) # batch variance\n    else:\n      xmean = self.running_mean\n      xvar = self.running_var\n    xhat = (x - xmean) / torch.sqrt(xvar + self.eps) # normalize to unit variance\n    self.out = self.gamma * xhat + self.beta\n    # update the buffers\n    if self.training:\n      with torch.no_grad():\n        self.running_mean = (1 - self.momentum) * self.running_mean + self.momentum * xmean\n        self.running_var = (1 - self.momentum) * self.running_var + self.momentum * xvar\n    return self.out\n  \n  def parameters(self):\n    return [self.gamma, self.beta]\n\n# Bookvar comparison: same data and epsilon, different variance contracts.\nsource_x = torch.tensor([[1., 3.], [5., 7.]], dtype=torch.float64)\nsource_bn = BatchNorm1d(2, eps=1e-5, momentum=1.)\nsource_y = source_bn(source_x)\nsigns = torch.tensor([[-1., -1.], [1., 1.]], dtype=source_x.dtype)\ntorch.testing.assert_close(source_y, signs * 2. / (8. + 1e-5)**.5)\ntorch.testing.assert_close(source_bn.running_mean, source_x.mean(0, keepdim=True))\ntorch.testing.assert_close(source_bn.running_var, source_x.var(0, keepdim=True))\n\nnative_bn = torch.nn.BatchNorm1d(2, affine=False, momentum=1., eps=1e-5).double()\nnative_y = native_bn(source_x)\ntorch.testing.assert_close(native_y, signs * 2. / (4. + 1e-5)**.5)\nassert not torch.allclose(source_y, native_y)\n\nsource_bn.training = False\nnative_bn.eval()\ntorch.testing.assert_close(source_bn(source_x), native_bn(source_x))\n# After this one batch, both eval paths use the same running estimates.\nprint('source train:', source_y, 'native train:', native_y)\n```\n\nWith `momentum=1`, both implementations retain the same mean and\ncorrection-1 variance after this batch, so their evaluation outputs agree.\nAgreement in evaluation does not make the training functions identical.\nThe class also has a different tensor-layout contract from native\n`BatchNorm1d` on `(B,C,T)`: its axis 0 reduction does not include the\ntime axis. It is a two-dimensional teaching implementation, not an\ninterchangeable replacement for every PyTorch BatchNorm call.\n\nThis class does not inherit `nn.Module`. Its `parameters()` returns a\nPython list, and its buffers do not acquire automatic `state_dict` or\n`.to(device)` handling. A training program using it must manage those\nobjects explicitly. The source notebook shows the surrounding optimizer\nand evaluation loop; the CPU comparison above tests the normalization\nand state conventions without rerunning its name-generation training.\n\n## Источники\n"
+        },
+        {
+          "old": "Формулы для быстрого обращения:\n[[02 Areas/ML & DL/01 Справочник/Математика и DL/Нормализация|Нормализация в Transformer]].",
+          "new": "Применение этих операций в современных языковых моделях, QK-нормализация\nи SwiGLU разобраны в [[00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual|главе о нормализации и gating в LLM]]."
+        },
+        {
+          "old": "## Источники\n\n",
+          "new": "## Источники\n\n- Andrej Karpathy, [makemore, part 3](https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb),\n  cells 13–16: исходный класс BatchNorm, debug loop, сохранённые распределения\n  активаций и градиентов; MIT. Вычисления текущей главы не выданы за повторное обучение из курса.\n- François Fleuret, [The Little Book of Deep Learning, v1.3, §4.6, Figure 4.9](https://fleuret.org/public/lbdl.pdf#page=83):\n  оси статистик и обучаемых параметров BatchNorm/LayerNorm; CC BY-NC-SA 4.0.\n- Ruibin Xiong et al., [On Layer Normalization in the Transformer Architecture](https://proceedings.mlr.press/v119/xiong20b.html),\n  §2 и Figure 1: исходное сравнение post-LN и pre-LN; CC BY 4.0.\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/initialization-normalization-2026-10-21/d2l-residual-block.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/initialization-normalization-2026-10-21/d2l-residual-block.svg|D2L: обычная ветвь и остаточная ветвь с обходным путём]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/initialization-normalization-2026-10-21/d2l-resnet-block.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/initialization-normalization-2026-10-21/d2l-resnet-block.svg|D2L: остаточные блоки с тождественным обходом и проекцией 1×1]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/initialization-normalization-2026-10-21/cs336-prenorm-block.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/initialization-normalization-2026-10-21/cs336-prenorm-block.png|CS336: полный pre-norm блок с двумя остаточными соединениями]]"
+        },
+        {
+          "old": "class BatchNorm1d:\n  \n  def __init__(self, dim, eps=1e-5, momentum=0.1):\n    self.eps = eps\n    self.momentum = momentum\n    self.training = True\n    # parameters (trained with backprop)\n    self.gamma = torch.ones(dim)\n    self.beta = torch.zeros(dim)\n    # buffers (trained with a running 'momentum update')\n    self.running_mean = torch.zeros(dim)\n    self.running_var = torch.ones(dim)\n  \n  def __call__(self, x):\n    # calculate the forward pass\n    if self.training:\n      xmean = x.mean(0, keepdim=True) # batch mean\n      xvar = x.var(0, keepdim=True) # batch variance\n    else:\n      xmean = self.running_mean\n      xvar = self.running_var\n    xhat = (x - xmean) / torch.sqrt(xvar + self.eps) # normalize to unit variance\n    self.out = self.gamma * xhat + self.beta\n    # update the buffers\n    if self.training:\n      with torch.no_grad():\n        self.running_mean = (1 - self.momentum) * self.running_mean + self.momentum * xmean\n        self.running_var = (1 - self.momentum) * self.running_var + self.momentum * xvar\n    return self.out\n  \n  def parameters(self):\n    return [self.gamma, self.beta]",
+          "new": "class BatchNorm1d:\n\n  def __init__(self, dim, eps=1e-5, momentum=0.1):\n    self.eps = eps\n    self.momentum = momentum\n    self.training = True\n    # parameters (trained with backprop)\n    self.gamma = torch.ones(dim)\n    self.beta = torch.zeros(dim)\n    # buffers (trained with a running 'momentum update')\n    self.running_mean = torch.zeros(dim)\n    self.running_var = torch.ones(dim)\n\n  def __call__(self, x):\n    # calculate the forward pass\n    if self.training:\n      xmean = x.mean(0, keepdim=True) # batch mean\n      xvar = x.var(0, keepdim=True) # batch variance\n    else:\n      xmean = self.running_mean\n      xvar = self.running_var\n    xhat = (x - xmean) / torch.sqrt(xvar + self.eps) # normalize to unit variance\n    self.out = self.gamma * xhat + self.beta\n    # update the buffers\n    if self.training:\n      with torch.no_grad():\n        self.running_mean = (1 - self.momentum) * self.running_mean + self.momentum * xmean\n        self.running_var = (1 - self.momentum) * self.running_var + self.momentum * xvar\n    return self.out\n\n  def parameters(self):\n    return [self.gamma, self.beta]"
+        },
+        {
+          "old": "The following class is copied unchanged from Andrej Karpathy's\n",
+          "new": "The following class is reproduced from Andrej Karpathy's\n"
+        },
+        {
+          "old": "Only the import and the comparison after the class are Bookvar additions.\n",
+          "new": "The class's logic and comments are unchanged; spaces on empty lines were removed.\nThe import and the comparison after the class are Bookvar additions.\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "2da678d6021376853b0048056e40986c37307c9bb30638e50d9f655979137fbd",
+      "after_sha256": "01189a8e25f8f53d51252f6ccdbe7d4b1b6d593225a02f3d0da183d889c091d3",
+      "changes": [
+        {
+          "old": "assets:\n",
+          "new": "assets:\n  - {\"id\":\"curated-normalization-karpathy-activation-21dcfd9131f7\",\"asset\":\"00 Учебник/Assets/Figures/curated/normalization-course-2026-11-03/karpathy-activation-distribution.png\",\"author\":\"Andrej Karpathy\",\"source_url\":\"https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb\",\"source_image_url\":\"https://raw.githubusercontent.com/karpathy/nn-zero-to-hero/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb\",\"commit\":\"73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde\",\"source_asset\":\"05 Источники/Originals/normalization-course-2026-11-03/makemore_part3_bn.ipynb\",\"source_asset_sha256\":\"464c959353b5e929bf0f922c0e7547823fb514fa2f672f30a065a9d403c641e4\",\"sha256\":\"21dcfd9131f72a10d06f33777b2261a881bf6ce1312cbada0ba824354349fc98\",\"source_cell_index\":15,\"source_output_index\":2,\"dimensions_px\":[1153,264],\"source_page_snapshot\":\"05 Источники/Originals/normalization-course-2026-11-03/makemore_part3_bn.ipynb\",\"source_page_sha256\":\"464c959353b5e929bf0f922c0e7547823fb514fa2f672f30a065a9d403c641e4\",\"license\":\"MIT\",\"license_url\":\"https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/LICENSE\",\"license_evidence\":\"05 Источники/Originals/normalization-course-2026-11-03/karpathy-LICENSE.txt\",\"license_evidence_sha256\":\"a59ec5cdb1c1e447e5266a014b3e7ded511f8d6e5a08931e931c87490ff821fe\",\"public_license_copy\":\"site/public/licenses/karpathy-nn-zero-to-hero-73c3fcc7-MIT.txt\",\"derivation\":\"notebook-output-extraction\",\"modifications\":\"Exact decoded original saved PNG output, no training rerun, crop, relabeling, resizing, redraw or translation.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md\"]}\n  - {\"id\":\"curated-normalization-karpathy-gradient-64f71cfb1523\",\"asset\":\"00 Учебник/Assets/Figures/curated/normalization-course-2026-11-03/karpathy-gradient-distribution.png\",\"author\":\"Andrej Karpathy\",\"source_url\":\"https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb\",\"source_image_url\":\"https://raw.githubusercontent.com/karpathy/nn-zero-to-hero/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb\",\"commit\":\"73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde\",\"source_asset\":\"05 Источники/Originals/normalization-course-2026-11-03/makemore_part3_bn.ipynb\",\"source_asset_sha256\":\"464c959353b5e929bf0f922c0e7547823fb514fa2f672f30a065a9d403c641e4\",\"sha256\":\"64f71cfb15237a19c1c592734d3d1570a9e897a982a7afb9f38f825a0dd8784a\",\"source_cell_index\":16,\"source_output_index\":2,\"dimensions_px\":[1156,264],\"source_page_snapshot\":\"05 Источники/Originals/normalization-course-2026-11-03/makemore_part3_bn.ipynb\",\"source_page_sha256\":\"464c959353b5e929bf0f922c0e7547823fb514fa2f672f30a065a9d403c641e4\",\"license\":\"MIT\",\"license_url\":\"https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/LICENSE\",\"license_evidence\":\"05 Источники/Originals/normalization-course-2026-11-03/karpathy-LICENSE.txt\",\"license_evidence_sha256\":\"a59ec5cdb1c1e447e5266a014b3e7ded511f8d6e5a08931e931c87490ff821fe\",\"public_license_copy\":\"site/public/licenses/karpathy-nn-zero-to-hero-73c3fcc7-MIT.txt\",\"derivation\":\"notebook-output-extraction\",\"modifications\":\"Exact decoded original saved PNG output, no training rerun, crop, relabeling, resizing, redraw or translation.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md\"]}\n"
+        },
+        {
+          "old": "    used_in: [\"00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md\"]\n    derivation: pdf-page-render-crop\n    provenance_confirmation: source-license-verified\n    metadata_status: verified\n  - id: curated-norm-gating-gradients-0b409086dc5b",
+          "new": "    used_in: [\"00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md\", \"00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md\"]\n    derivation: pdf-page-render-crop\n    provenance_confirmation: source-license-verified\n    metadata_status: verified\n  - id: curated-norm-gating-gradients-0b409086dc5b"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "06293d868ab29bb6faf4e26fd44df73ba17ed13dc8b7ef9c0ee6b27171318c7b",
+      "after_sha256": "f22b5b1cc79ad78496cdb6ea0cf2416f23a45fa254d5b79ad2740893810baf19",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections|Инициализация, нормализация и residual connections]]",
+          "new": "- [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections|Инициализация, нормализация и residual connections]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#initialization-symmetry|Симметрия при инициализации]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#initialization-second-moment|Ширина слоя и второй момент активаций]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#xavier-initialization|Xavier — прямой и обратный проходы]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#he-initialization|He — второй момент после ReLU]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#normalization-axes|BatchNorm и LayerNorm — оси статистик]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#batchnorm-train-eval|BatchNorm — train, eval и накопленные статистики]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#normalization-causal-leakage|Нормализация и утечка будущих токенов]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#token-layernorm|LayerNorm — нормализация токена]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#rmsnorm-forward-precision|RMSNorm — формула и точность вычисления]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#normalization-backward|Backward LayerNorm и RMSNorm]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#residual-addition|Residual — сложение и проекция]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#residual-gradients|Residual — прямой вклад в градиент]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#residual-zero-projection|Нулевая последняя проекция ветви]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#pre-post-normalization|Pre-norm и post-norm]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#residual-variance|Масштаб остаточной суммы]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#normalization-diagnostics|Диагностика активаций и градиентов]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#batchnorm-source-implementation|BatchNorm с нуля — код и соглашение дисперсии]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "b9eb2b10aa4f6b97f05312d30c221b855396cec50b599597baaee6e6cb8da73a",
+      "after_sha256": "8ecebce1ac132a5c2f7ab74dd0a76ededcc5c84d91c18dc5bb2436fd506f9803",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections|Initialization, normalization, and residual connections]]",
+          "new": "- [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections|Initialization, normalization, and residual connections]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#initialization-symmetry|Initialization symmetry]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#initialization-second-moment|Fan-in and activation second moments]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#xavier-initialization|Xavier forward and backward scales]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#he-initialization|He initialization and ReLU second moments]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#normalization-axes|BatchNorm and LayerNorm reduction axes]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#batchnorm-train-eval|BatchNorm train, eval and running statistics]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#normalization-causal-leakage|Normalization and future-token leakage]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#token-layernorm|LayerNorm across token features]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#rmsnorm-forward-precision|RMSNorm formula and arithmetic precision]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#normalization-backward|LayerNorm and RMSNorm backward]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#residual-addition|Residual addition and projection]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#residual-gradients|Residual identity and branch gradients]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#residual-zero-projection|Zero-initialized final residual projection]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#pre-post-normalization|Pre-norm and post-norm]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#residual-variance|Residual-stream variance]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#normalization-diagnostics|Activation and gradient diagnostics]]\n  - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#batchnorm-source-implementation|BatchNorm from scratch and variance conventions]]"
+        }
+      ]
+    }
+  ]
+}

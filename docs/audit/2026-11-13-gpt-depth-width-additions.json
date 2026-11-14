@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-13",
+  "scope": "Add a worked depth, width, and parameter comparison to the illustrated GPT-1 → GPT-2 → GPT-3 → LLaMA route in both locales.",
+  "review": {
+    "sources": "Alammar, The Illustrated GPT-2, Transformers for Language Modeling; OpenAI GPT-2 released model.py and corrected README; Brown et al. §2.1 and Table 2.1; Touvron et al. §2.2 and Table 2, with the pinned original model.py for the FFN width.",
+    "example": "Count four square attention projections and two 4× expansion matrices. Compare the Small and Extra Large GPT-2 stacks with the full-model counts, apply the stack count to the GPT-3 175B dimensions, then substitute three FFN matrices of width 11,008 for LLaMA-7B.",
+    "provenance": "Existing unmodified CC BY-NC-SA 4.0 original by Jay Alammar, 1440×682. The source snapshot, registered asset, and built image have the same SHA-256; no new drawing or crop.",
+    "verification": "Local build: 2089 pages; 336 built-output tests and 798 publication tests passed (13 skipped); no broken internal links; both topic indices unchanged and valid. In Chrome, the four chapter images and all three Next links were checked in each locale at 375 and 1280 CSS px. The new figure fits at both widths and opens with 3× zoom and horizontal pan; mobile labels require zoom, and the main dimensions are also given in the text. The three preceding source revisions restore byte for byte.",
+    "scopeLimit": "Localized route addition, not a claim of whole-chapter acceptance or newly executed model inference. No publication."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "de2ff70aee8ca35fddfca05d65c21811bf7661fc2141d2ba1c071664f590bef4",
+      "after_sha256": "99a1ac426f773b4387e105a211ecbad6697e8e05f7cffb17dc028f0405de2a77",
+      "changes": [
+        {
+          "old": "[[#gpt-decoder-route-architecture|Схемы декодеров]] ·\n[[#gpt-decoder-route-cache|Память при генерации]] ·\n",
+          "new": "[[#gpt-decoder-route-architecture|Схемы декодеров]] ·\n[[#gpt-decoder-route-depth-width|Глубина, ширина и число весов]] ·\n[[#gpt-decoder-route-cache|Память при генерации]] ·\n"
+        },
+        {
+          "old": "\n<a id=\"gpt-decoder-route-cache\"></a>\n",
+          "new": "\n<a id=\"gpt-decoder-route-depth-width\"></a>\n\n### Откуда берутся миллиарды параметров\n\nНа рисунке Аламмара число у верхнего блока показывает глубину стека:\nу GPT-2 Small 12 блоков, у Extra Large 48. Число под стеком — ширина\nсостояния одного токена, 768 или 1600. Обе модели принимают до 1024\nтокенов. Более высокий стек означает, что состояние проходит через\nбольшее число блоков, а не что модель читает более длинный текст.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt2-sizes-hyperparameters-3.png|Четыре стека GPT-2: 12, 24, 36 и 48 блоков. Под ними подписана ширина состояния токена: 768, 1024, 1280 и 1600.]]\n\n*Jay Alammar, [The Illustrated GPT-2, «Transformers for Language Modeling»](https://jalammar.github.io/illustrated-gpt2/#transformers-for-language-modeling), [оригинал PNG](https://jalammar.github.io/images/gpt2/gpt2-sizes-hyperparameters-3.png), [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). Рисунок без изменений.*\n\nПусть $d$ — ширина состояния. В блоке GPT-2 три проекции для $Q$, $K$ и\n$V$ и одна выходная проекция внимания дают $4d^2$ весов. FFN сначала\nрасширяет состояние с $d$ до $4d$, а затем возвращает к $d$: ещё $8d^2$.\nЕсли считать только эти матрицы, стек из $L$ блоков содержит $12Ld^2$\nвесов. При переходе от Small к Extra Large блоков становится вчетверо\nбольше, а каждая матрица растёт в обеих размерностях. Получается\nоколо 85 млн весов против 1,47 млрд, разница в 17,4 раза. Для всей модели\nразница меньше, около 12,5 раза: токенная таблица растёт только с $d$,\nа число строк словаря остаётся прежним.\n[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#Что изменилось относительно GPT-1|Полный подсчёт GPT-2]]\nучитывает также позиции, смещения и нормы.\n\nУ GPT-1, GPT-2 Small и GPT-3 Small по 12 блоков ширины 768.\nПри переходе от GPT-1 к GPT-2 Small прибавку в весах\n[[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-parameter-budget|в основном даёт словарь]], а у GPT-3 175B по сравнению с GPT-3 Small\nрастёт сам стек: 96 блоков ширины 12 288. Только матрицы стека дают\nоколо 174 млрд весов. Локальная маска меняет допустимые пары запроса\nи ключа, но не размеры этих матриц. Окно у обеих GPT-3 одинаковое,\n2048 токенов ([§2.1 и табл. 2.1](https://arxiv.org/html/2005.14165v4#S2.SS1)).\nВ LLaMA-7B в FFN три матрицы вместо двух, и внутренний вектор имеет\n11 008 координат. На блок приходится $4d^2+3d\\cdot11008$ весов\nв этих матрицах и проекциях внимания, около 202 млн при $d=4096$\n([[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#Формы и параметры исходных моделей|подсчёт по формам LLaMA]]).\n\n<a id=\"gpt-decoder-route-cache\"></a>\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "b52e64116588181173bd7141af59d545abecc1c7f6f8ad9850c87cca47783cda",
+      "after_sha256": "a2bb3bda110a1e8e54cace9275055131cf5fc142f3acf7f295d91935bd6145bc",
+      "changes": [
+        {
+          "old": "translation_status: current\ncanonical_revision: \"de2ff70aee8ca35fddfca05d65c21811bf7661fc2141d2ba1c071664f590bef4\"\ntranslation_reviewed: \"2026-11-13\"\n",
+          "new": "translation_status: current\ncanonical_revision: \"99a1ac426f773b4387e105a211ecbad6697e8e05f7cffb17dc028f0405de2a77\"\ntranslation_reviewed: \"2026-11-13\"\n"
+        },
+        {
+          "old": "[[#gpt-decoder-route-architecture|Decoder diagrams]] ·\n[[#gpt-decoder-route-cache|Memory during generation]] ·\n",
+          "new": "[[#gpt-decoder-route-architecture|Decoder diagrams]] ·\n[[#gpt-decoder-route-depth-width|Depth, width, and parameter count]] ·\n[[#gpt-decoder-route-cache|Memory during generation]] ·\n"
+        },
+        {
+          "old": "\n<a id=\"gpt-decoder-route-cache\"></a>\n",
+          "new": "\n<a id=\"gpt-decoder-route-depth-width\"></a>\n\n### Where the billions of parameters come from\n\nIn Alammar's figure, the number next to the top block gives the depth:\n12 blocks for GPT-2 Small and 48 for Extra Large. The number under each\nstack is the width of a single token state, 768 or 1,600. Both models\naccept up to 1,024 tokens. A taller stack takes the state through more\nblocks; it does not let the model read more text.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt2-sizes-hyperparameters-3.png|Four GPT-2 stacks with 12, 24, 36, and 48 blocks. The token-state widths underneath are 768, 1,024, 1,280, and 1,600.]]\n\n*Jay Alammar, [The Illustrated GPT-2, “Transformers for Language Modeling”](https://jalammar.github.io/illustrated-gpt2/#transformers-for-language-modeling), [original PNG](https://jalammar.github.io/images/gpt2/gpt2-sizes-hyperparameters-3.png), [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). Unmodified figure.*\n\nLet $d$ be the state width. A GPT-2 block uses three projections for\n$Q$, $K$, and $V$, plus the attention output projection, for $4d^2$\nweights. The FFN projects from $d$ to $4d$ and back, adding $8d^2$.\nCounting only those matrices gives $12Ld^2$ weights for $L$ blocks.\nExtra Large has four times as many blocks as Small, and its matrices\ngrow along both dimensions. That takes the stack from about 85 million\nweights to 1.47 billion, a factor of 17.4. The full parameter count\ngrows by a smaller factor, about 12.5: the token table grows only with\n$d$ because the vocabulary size stays fixed.\nThe [[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language#What changed from GPT-1|full GPT-2 count]]\nalso includes positions, biases, and normalization.\n\nGPT-1, GPT-2 Small, and GPT-3 Small all have 12 blocks of width 768.\nMost of the difference between GPT-1 and GPT-2 Small comes from\n[[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-parameter-budget|the larger vocabulary]].\nGPT-3 175B increases the stack to 96 blocks of width 12,288.\nThe stack matrices alone account for about 174 billion weights.\nThe local mask changes which queries can see which keys but does not\nchange the size of the matrices. Both GPT-3 models have the same\n2,048-token window ([§2.1 and Table 2.1](https://arxiv.org/html/2005.14165v4#S2.SS1)).\nThe LLaMA-7B FFN has three matrices instead of two, with an inner\nwidth of 11,008. Together with the attention projections they give\n$4d^2+3d\\cdot11008$ weights per block, about 202 million at $d=4096$\n([[en/00 Textbook/07 Anatomy of a modern LLM/01 LLaMA as a baseline architecture#Shapes and parameters of the original models|LLaMA parameter count]]).\n\n<a id=\"gpt-decoder-route-cache\"></a>\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "0d3596e022c4f4d8e1feb77cd76ba3e3425484b0408de66e43be96758ebc998f",
+      "after_sha256": "5f4d1b471b3274182e26c2cc2a9e9a261cd6f5034078328928f30759d46ef225",
+      "changes": [
+        {
+          "old": "      - \"Concepts/Architectures/GPT-3.md\"\n  - id: curated-gpt-30-c356d842c1c0\n",
+          "new": "      - \"Concepts/Architectures/GPT-3.md\"\n      - \"00 Учебник/_index.md\"\n      - \"en/00 Textbook/_index.md\"\n  - id: curated-gpt-30-c356d842c1c0\n"
+        }
+      ]
+    }
+  ]
+}

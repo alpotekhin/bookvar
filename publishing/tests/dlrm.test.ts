@@ -4,6 +4,7 @@ import {resolve} from 'node:path';
 import {describe,expect,it} from 'vitest';
 import {parse} from 'yaml';
 import {beforeSelectionGapsAddition} from '../tools/selection-gaps-baseline.mjs';
+import {beforeTopicConsolidation} from '../tools/topic-consolidation-baseline.mjs';
 
 const root=resolve(import.meta.dirname,'../..');
 const page='00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели.md';
@@ -12,10 +13,11 @@ const hash=(data:Buffer|string)=>createHash('sha256').update(data).digest('hex')
 describe('DLRM integration into the existing ranking chapter',()=>{
   it('preserves all accepted BPR, AutoRec, NCF, FM and DeepFM explanations',()=>{
     const chapter=readFileSync(resolve(root,page),'utf8');
-    const restored=beforeSelectionGapsAddition(chapter,page).replace(/<!-- dlrm 2026-10-26 -->\n[\s\S]*?<!-- \/dlrm -->\n\n/,'')
+    const atReview=beforeTopicConsolidation(chapter,page,root);
+    const restored=beforeSelectionGapsAddition(atReview,page,root).replace(/<!-- dlrm 2026-10-26 -->\n[\s\S]*?<!-- \/dlrm -->\n\n/,'')
       .replace('last_updated: 2026-10-26','last_updated: 2026-10-25');
     expect(hash(restored)).toBe('ecec78266fddd5dcfa2463d9c448f013ae63e7101e8f50052fe4e3895c092f25');
-    expect(chapter.match(/^```python$/gm)).toHaveLength(23);
+    expect(atReview.match(/^```python$/gm)).toHaveLength(23);
     const normalize=(text:string)=>text.replace(/`/g,'').replace(/\s+/g,' ');
     for(const [name,file] of [['torchrec-pooling','torchrec-high-level-arch.rst'],
       ['torchrec-communication','torchrec-concepts.rst']]) {

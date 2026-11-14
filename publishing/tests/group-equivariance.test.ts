@@ -14,7 +14,7 @@ describe('source-original rotation-equivariance extension',()=>{
     const chapter=readFileSync(resolve(root,page),'utf8');
     const restored=withoutNativeWindowExample(chapter).replace(/<!-- group-equivariance 2026-10-26 -->\n[\s\S]*?<!-- \/group-equivariance -->\n\n/,'');
     expect(hash(restored)).toBe('c6cceb20910882ae1408dc7013c286ce77c3e00b0ab32070505e7df6b6bf5355');
-    expect(chapter.match(/^```python$/gm)).toHaveLength(21);
+    expect(chapter.match(/^```python$/gm)).toHaveLength(22);
     const original=readFileSync(resolve(root,'05 Источники/Originals/group-equivariance-2026-10-26/escnn-README.md'),'utf8');
     for(const name of ['escnn-feature-fields','escnn-demo']) {
       const excerpt=chapter.split('<!-- source-excerpt: '+name+' -->\n')[1].split('\n<!-- /source-excerpt -->')[0]

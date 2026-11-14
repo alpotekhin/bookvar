@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-30",
+  "scope": "Expand class-weighted cross-entropy from the versioned PyTorch contract: distinct index/probability target mean denominators, a complete two-example calculation, weight-rescaling and weighted-logit gradient. Preserve all earlier explanatory paragraphs, five programs and nine source images.",
+  "files": [
+    {
+      "source": "00 Учебник/00 Математические и ML-основания/04 Функции потерь.md",
+      "before_sha256": "801ed9e1eb605d4ffe25cfbf8347734fea8963c05bc0c044c0d41071ad152531",
+      "after_sha256": "035c06668da0dc3135216748c06259b6adec877651faa1cbb8f349e7d25badca",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29",
+          "new": "last_updated: 2026-10-30"
+        },
+        {
+          "old": "## Mean squared error",
+          "new": "### Class weights and the meaning of mean\n\nPyTorch 2.14 uses different denominators for class-index targets and\nclass-probability targets. Consider two examples with two classes,\nclass weights $w=(1,3)$, no label smoothing and no ignored targets:\n\n| Quantity | A | B |\n|---|---:|---:|\n| Probabilities | $(0.8,0.2)$ | $(0.25,0.75)$ |\n| Correct class | 0 | 1 |\n| Class weight | 1 | 3 |\n| $-\\log p_y$ | $\\approx0.223144$ | $\\approx0.287682$ |\n\nFor class indices, the unreduced loss is\n$\\ell_n=-w_{y_n}\\log p_{n,y_n}$. With `reduction=\"mean\"`,\nPyTorch divides its sum by the sum of target weights:\n\n$$\n\\begin{aligned}\nL_{\\mathrm{index}}\n&=\\frac{\\sum_n\\ell_n}{\\sum_n w_{y_n}}\\\\\n&=\\frac{-\\log0.8-3\\log0.75}{1+3}\\\\\n&\\approx0.271547.\n\\end{aligned}\n$$\n\nNow supply the same labels as probability vectors,\n$q_A=(1,0)$ and $q_B=(0,1)$. The unreduced losses are unchanged.\nFor class probabilities, however, the mean divides by the number\nof examples, $N=2$:\n\n$$\n\\begin{aligned}\n\\ell_n&=-\\sum_k w_kq_{nk}\\log p_{nk},\\\\\nL_{\\mathrm{prob}}\n&=\\frac1N\\sum_n\\ell_n\\\\\n&=\\frac{-\\log0.8-3\\log0.75}{2}\\\\\n&\\approx0.543095.\n\\end{aligned}\n$$\n\nChanging the target representation has doubled the loss and its gradient\nin this batch. Multiplying every class weight by ten leaves\n$L_{\\mathrm{index}}$ unchanged, because both numerator and denominator\nscale by ten. It multiplies $L_{\\mathrm{prob}}$ by ten.\n\nThe gradient of a weighted soft-target loss also needs the weights.\nFor one example, write $r_k=w_kq_k$ and $S=\\sum_k r_k$. Then\n\n$$\n\\begin{aligned}\n\\ell\n&=S\\log\\sum_j e^{z_j}-\\sum_k r_kz_k,\\\\\n\\frac{\\partial\\ell}{\\partial z_j}\n&=S\\,p_j-r_j.\n\\end{aligned}\n$$\n\nA batch reduction subsequently divides this gradient by its denominator.\nThe earlier $p-q$ formula is the case of unit class weights and\nnormalized $q$.\n\nThe following NumPy calculation evaluates the two documented reductions;\nit does not invoke the PyTorch API.\n\n```python\nclass_weights = np.array([1., 3.])\nweighted_logits = np.log([[.8, .2], [.25, .75]])\nclass_ids = np.array([0, 1])\nprobability_targets = np.eye(2)[class_ids]\nweighted_log_p = log_softmax(weighted_logits)\nnll = -weighted_log_p[np.arange(2), class_ids]\ntarget_weights = class_weights[class_ids]\nweighted_elements = -(probability_targets * class_weights * weighted_log_p).sum(axis=-1)\n\nindex_mean = np.sum(target_weights * nll) / target_weights.sum()\nprobability_mean = weighted_elements.mean()\nassert np.allclose(weighted_elements, target_weights * nll)\nassert np.isclose(index_mean, 0.27154744216738813)\nassert np.isclose(probability_mean, 0.5430948843347763)\nassert np.isclose(probability_mean, 2 * index_mean)\n\nscaled_index_mean = np.sum(10 * target_weights * nll) / (10 * target_weights).sum()\nscaled_probability_mean = (10 * weighted_elements).mean()\nassert np.isclose(scaled_index_mean, index_mean)\nassert np.isclose(scaled_probability_mean, 10 * probability_mean)\n```\n\nTo use another weighting rule, request unreduced losses and explicitly\napply the desired mask, weights and denominator. When comparing runs,\nrecord the target representation as well as class weights and reduction.\n\nSource: [PyTorch 2.14, CrossEntropyLoss](https://docs.pytorch.org/docs/2.14/generated/torch.nn.CrossEntropyLoss.html),\nthe separate equations for index and probability targets. The numerical\nexample and gradient calculation expand those equations.\n\n## Mean squared error"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.CrossEntropyLoss.html",
+      "read": "Complete criterion definition, both target/reduction equations, weight/ignore_index/label_smoothing parameters and input/target shapes. The new NumPy example evaluates those equations; no PyTorch runtime execution is claimed."
+    }
+  ]
+}

@@ -36,25 +36,39 @@ def main():
         scopes.append(scope)
     booking, metric, paired, rubric = scopes
     grade = booking['grade_booking']
-    state = {'bookings': [deepcopy(booking['booking'])]}
-    trace = deepcopy(booking['allowed'])
-    before = deepcopy((state, trace))
-    assert grade(state, trace) == {'outcome': True, 'policy': True, 'success': True}
-    assert (state, trace) == before
-    assert not grade({'bookings': []}, trace)['outcome']
-    assert not grade({'bookings': state['bookings'] * 2}, trace)['outcome']
-    wrong = deepcopy(state)
-    wrong['bookings'][0]['start'] = '2026-10-09T18:00:00+03:00'
-    assert not grade(wrong, trace)['outcome']
-    assert grade(state, [{'kind': 'write', 'authorized': False}]) == {
-        'outcome': True, 'policy': False, 'success': False}
-    # Deliberate limitations described in prose: complete logs and other events
-    # are not checked by this tiny fixture, and no real calendar is contacted.
-    assert grade(state, [])['success']
-    extra = deepcopy(state)
-    extra['bookings'].append({'seminar_id': 'other-event'})
-    assert grade(extra, trace)['success']
-    assert 'полноту журнала' in text
+    old, new, other, invite, audit = (
+        booking[name] for name in ('old', 'new', 'other', 'invite', 'audit'))
+    start, after, sent = [old, other], [other, new], [invite]
+    saved = deepcopy((start, after, sent, audit))
+    correct = "correct", {"calendar": True, "mail": True, "policy": True}
+    assert grade(start, after, sent, audit) == correct
+    assert (start, after, sent, audit) == saved
+    assert grade(start, list(reversed(after)), sent, [*audit, audit[0]]) == correct
+    wrong = (new[0], new[1], "2026-10-09T18:00:00+03:00", new[3])
+    for calendar in ([], [other, wrong], [new], [*after, old], [*after, other]):
+        assert grade(start, calendar, sent, audit) == (
+            "incorrect", {"calendar": False, "mail": True, "policy": True})
+    assert grade(start, after, [invite, invite], None) == (
+        "incorrect", {"calendar": True, "mail": False, "policy": None})
+    denied = (*booking['mail_send'], False)
+    assert grade(start, after, sent, [*audit, denied]) == (
+        "incorrect", {"calendar": True, "mail": True, "policy": False})
+    assert grade(start, after, sent, [*audit, ("mail-send", "other@example.org", True)]) == (
+        "incorrect", {"calendar": True, "mail": True, "policy": False})
+    for partial_audit in (None, [], [audit[0]]):
+        assert grade(start, after, sent, partial_audit) == (
+            "unscored", {"calendar": True, "mail": True, "policy": None})
+    assert grade(start, after, None, audit) == (
+        "unscored", {"calendar": True, "mail": None, "policy": True})
+    assert grade(start, None, sent, audit) == (
+        "unscored", {"calendar": None, "mail": True, "policy": True})
+    try:
+        grade([*start, old], after, sent, audit)
+    except ValueError as error:
+        assert str(error) == "invalid starting snapshot"
+    else:
+        raise AssertionError("duplicate starting booking was accepted")
+    assert 'Полноту журнала проверяет оболочка оценивания' in text
 
     source = (ARCHIVE / 'human-eval-evaluation.py').read_text()
     original = next(node for node in ast.parse(source).body

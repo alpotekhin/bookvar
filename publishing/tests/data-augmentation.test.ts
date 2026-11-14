@@ -28,7 +28,8 @@ describe('data augmentation source reader',()=>{
   });
 
   it('retains source excerpts alongside complete coordinate, loss and policy examples',()=>{
-    const text=read(chapter);
+    const text=beforeTopicConsolidation(read(chapter),chapter,root,
+      '2026-11-03-dropout-route-additions.json');
     expect(text).toContain('source_language: en');
     expect(text.match(/^```python$/gm)).toHaveLength(9);
     expect(text.match(/^```python title=/gm)).toHaveLength(2);

@@ -1,0 +1,122 @@
+{
+  "revision": "bd681451b254ac1a790e947b581d3997ab35013d",
+  "license": {
+    "blob": "c3130d97e64bacdef4c33ac60e94e0b719dbf42e",
+    "sha256": "c9877e4d8788a0bb97502348dca8fbd78a6eaa73db0638221b3cb67422d30177"
+  },
+  "figures": {
+    "ainsight_langgraph.svg": {
+      "description": "Three agents search news, summarize it, and format the results for publication.",
+      "blob": "36baf0be3794297557a4077394b89fa22b3c34de",
+      "sourceSha256": "1ba95218a1340deba6402e43e562212172f490097287aed4e1c4832ad3a266e0",
+      "sha256": "c647570b1882cd6e164ef9800932e3f1d3b929ba8449ae68e3f634b7ed5907a2",
+      "stylesheetOmitted": true
+    },
+    "car_buyer_agent_langgraph.png": {
+      "description": "The buyer agent asks for requirements, builds filters, searches listings and can fetch more details.",
+      "blob": "ee327029842f3ce50320353d3bbeb55fefa7a43b",
+      "sourceSha256": "719da6ef2ed9032b8a34cf145b1bf247dac3568c64cb08632db136789f965af2",
+      "sha256": "719da6ef2ed9032b8a34cf145b1bf247dac3568c64cb08632db136789f965af2",
+      "stylesheetOmitted": false
+    },
+    "chiron.svg": {
+      "description": "The learning agent generates checkpoints and verifies each learner answer before advancing.",
+      "blob": "5e7f93ed473edff8147a15ec1b66e7158a15135a",
+      "sourceSha256": "0178e598bf80889e6dc51128030ed1998bcaec50cbff89afc62276aa58c7f0b8",
+      "sha256": "52648f3474f70a4f9d7d9ca1fe3bdea046b0415a21097658741591ebf6417dd3",
+      "stylesheetOmitted": true
+    },
+    "contentIntelli.svg": {
+      "description": "Summary and research feed the intent-matching node, which routes to platform-specific generators.",
+      "blob": "ff194fa42902275fd4dd56df3883236c81eb86a2",
+      "sourceSha256": "0c634d0c903fdf90eae3413825622363650e31cedb11250a26d586aa58c8af63",
+      "sha256": "a7d7b70aea8beb358d7a480addc893532bc3819cf7d7408a94877c7e3c8d0c8e",
+      "stylesheetOmitted": true
+    },
+    "contextual_quoting_graph.svg": {
+      "description": "The entry router chooses quoting or underwriting, with retrieval and tool calls inside each branch.",
+      "blob": "535d935a9aff66f3a7d6d15cd3a97484900b8ec2",
+      "sourceSha256": "5a4355360dc56f825ccf83afaf5f70b60661f0d7b2c934680375190d5170b79c",
+      "sha256": "3ef655ce7701399c11294ad62adcebc7ed39205457e570d3550fcbc181e8c104",
+      "stylesheetOmitted": true,
+      "staticViewport": true
+    },
+    "essay_grading_system_langgraph.svg": {
+      "description": "The grading graph checks relevance, grammar, structure and depth before assigning a grade.",
+      "blob": "97f9d2fa1f93d9f1715ffe592dfd1e0bafe2db28",
+      "sourceSha256": "131107e0f828915a855a0e3945ddf75fefb7f38d8b89e92b955eb8da9978c01b",
+      "sha256": "f1c9821b58dfbea1d60f2d1e3752791b4c2c098b55441155be4b132bb1d997bd",
+      "stylesheetOmitted": true
+    },
+    "graph_inspector_system_langgraph.svg": {
+      "description": "Static inspection comes before descriptions, generated test cases, execution and result analysis.",
+      "blob": "a884783c8efcc45777c37c29df40c85ff9e413b8",
+      "sourceSha256": "ab9daf6acecd7636c6653301c828343becf28924b2413767e82adb4dde0c7bb8",
+      "sha256": "f2835bfe245a7b4ae5c40975cadcea1ae24519d1576f9e7b03d2fb318f01808d",
+      "stylesheetOmitted": true
+    },
+    "journalism_focused_ai_assistant_langgraph.png": {
+      "description": "The category node selects fact checking, grammar and bias review, quote extraction, summarization or tone analysis.",
+      "blob": "b1662e5110fc4ee168748ec0d8da4dcee9e7a7f5",
+      "sourceSha256": "1d09956604fbb363f4bb4511a7cef0d358e41e6e89b514abf66b6d6a21af2561",
+      "sha256": "1d09956604fbb363f4bb4511a7cef0d358e41e6e89b514abf66b6d6a21af2561",
+      "stylesheetOmitted": false
+    },
+    "mcp_architecture.png": {
+      "description": "The MCP host connects to separate servers. Some read local sources; another calls a remote service.",
+      "blob": "31375138e8565ad1ce964f2127d2779d1e54021c",
+      "sourceSha256": "86491814b4919a86041d08304aa89b05bbcca08e06458d4e64298284bd44a616",
+      "sha256": "86491814b4919a86041d08304aa89b05bbcca08e06458d4e64298284bd44a616",
+      "stylesheetOmitted": false
+    },
+    "customized_mcp_host.png": {
+      "description": "The host either returns a direct response or calls an MCP server and formats the tool result.",
+      "blob": "6d9f33f35a4c91e9f510a2ef472580fb3c8bff78",
+      "sourceSha256": "6241e71a9759b88aeeca556bdc485bd63f9ad1225ef62062fd82847f3455173a",
+      "sha256": "6241e71a9759b88aeeca556bdc485bd63f9ad1225ef62062fd82847f3455173a",
+      "stylesheetOmitted": false
+    },
+    "memory-enhanced-email-agent.svg": {
+      "description": "The email agent triages the message and draws on episodic, semantic and procedural memory before responding.",
+      "blob": "4b89ad1646d180016c59e3ac91e796e3e3ac1eee",
+      "sourceSha256": "f83aa62114d9e58d144f779fdbdb1a1d2c73b68b58923116ca034e79c48c47fe",
+      "sha256": "5f6ae0fba3456fd1c277d37c64a406ef2792a93ec48429dd7e595868a1b8e927",
+      "stylesheetOmitted": true
+    },
+    "music_composer_agent_langgraph.svg": {
+      "description": "The composition graph combines melody, harmony, rhythm and style before MIDI conversion.",
+      "blob": "4013397ad2cd17bbf692720a06461a9a9815ccbf",
+      "sourceSha256": "6091fd8b9c5d85363452c1d9072253f05a3f955ad5272c4f0027b80025726023",
+      "sha256": "5475e1abed3c1df63a478a64fa7a81b7aca28a00bb6584b7185d9ce7ea0ebc03",
+      "stylesheetOmitted": true
+    },
+    "podcast_generating_system_langgraph.jpg": {
+      "description": "Research and a host–expert exchange feed a script; introduction, report and conclusion join at finalization.",
+      "blob": "25219abe0fa7c90cc9b91f8a1d29d7923a5966c5",
+      "sourceSha256": "8c59c17ab5aebaf6f2ff46676ce61e9df3e564a37580b434fa5fe852771f0ca9",
+      "sha256": "8c59c17ab5aebaf6f2ff46676ce61e9df3e564a37580b434fa5fe852771f0ca9",
+      "stylesheetOmitted": false
+    },
+    "project_manager_assistant_agent.svg": {
+      "description": "Project planning proceeds through tasks, dependencies, scheduling, allocation and risk analysis.",
+      "blob": "32c23bfbe4ea519476de6449ec802930b6b189fc",
+      "sourceSha256": "30c065554ffe34a09733b58ea47944ac82f987be3b34f68283cd316e7f107ed2",
+      "sha256": "c2e8a5ea1a3a58a4acda62726939c8e6178bd4ec23301bf827d8011578ef08e8",
+      "stylesheetOmitted": true
+    },
+    "self_healing_code.png": {
+      "description": "After a local code run fails, the workflow searches memory, proposes a patch and reruns the code.",
+      "blob": "ae558e0f633762acd27e5db782424e6796ea2a93",
+      "sourceSha256": "8a1ec6e4edc5663a2dfa874a9c57f7b7e1df11191377da5e68537cf46e407a16",
+      "sha256": "8a1ec6e4edc5663a2dfa874a9c57f7b7e1df11191377da5e68537cf46e407a16",
+      "stylesheetOmitted": false
+    },
+    "tts_poem_generator_agent_langgraph.svg": {
+      "description": "A classifier chooses a content branch; each branch passes its text to speech synthesis.",
+      "blob": "8e55b4a18e1772a61fceaa01fdcbcc5263bc2ce7",
+      "sourceSha256": "686a32db29980dc608c594472ee887412479f334c08d68b1410029389e72be8d",
+      "sha256": "2c5ab198b95c13d0125828f47a30874048f420152e7ad279dfe3a7a3f3c4740c",
+      "stylesheetOmitted": true
+    }
+  }
+}

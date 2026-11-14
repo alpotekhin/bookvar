@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, realpathSync } from 'node:fs';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import { parse } from 'yaml';
+import { hseCatalogueEntry } from './hse-catalogue.js';
 
 const SECTION_IDS = ['textbook', 'models', 'sources', 'questions', 'practice'] as const;
 const SECTION_ID_SET = new Set<string>(SECTION_IDS);
@@ -131,8 +132,12 @@ export function loadManifest(path: string): PublicationManifest {
       if (!ASCII_ROUTE.test(route)) throw new Error(`Route must be stable lowercase ASCII: ${route}`);
       if (routes.has(route)) throw new Error(`Duplicate route: ${route}`);
       if (sources.has(source)) throw new Error(`Duplicate source: ${source}`);
-      if (!existsSync(sourcePath)) throw new Error(`Missing source: ${source}`);
-      if (existsSync(rawRoot) && isInside(realpathSync(rawRoot), realpathSync(sourcePath))) {
+      const hseEntry = hseCatalogueEntry(normalizedSource, route);
+      if (hseEntry && (id !== 'sources' || sourceEn)) {
+        throw new Error('HSE catalogue entries belong to sources and use one canonical address: ' + source);
+      }
+      if (!hseEntry && !existsSync(sourcePath)) throw new Error(`Missing source: ${source}`);
+      if (!hseEntry && existsSync(rawRoot) && isInside(realpathSync(rawRoot), realpathSync(sourcePath))) {
         throw new Error(`Manifest source must not reference ignored raw content: ${source}`);
       }
 
@@ -143,6 +148,9 @@ export function loadManifest(path: string): PublicationManifest {
         const sourceEnPath = resolveContained(root, normalizedSourceEn);
         if (isInside(rawRoot, sourceEnPath)) {
           throw new Error(`Manifest source must not reference ignored raw content: ${sourceEn}`);
+        }
+        if (hseCatalogueEntry(normalizedSourceEn, route)) {
+          throw new Error('HSE archive entries cannot be used as translations: ' + sourceEn);
         }
         if (sources.has(sourceEn)) throw new Error(`Duplicate source: ${sourceEn}`);
         if (!existsSync(sourceEnPath)) throw new Error(`Missing source: ${sourceEn}`);

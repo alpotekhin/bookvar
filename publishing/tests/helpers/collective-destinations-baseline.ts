@@ -1,3 +1,5 @@
+import { beforeTopicConsolidation } from '../../tools/topic-consolidation-baseline.mjs';
+
 export const collectiveStart = '<!-- BEGIN REVIEW: collective destinations 2026-10-27 -->';
 export const collectiveEnd = '<!-- END REVIEW: collective destinations 2026-10-27 -->';
 export const collectiveSources = [
@@ -6,6 +8,9 @@ export const collectiveSources = [
 ];
 
 export function withoutCollectiveDestinations(text: string): string {
+  // Restore the exact reviewed boundary,including the later kernel/compiler link move.
+  // Unrecorded changes are still rejected by the hash-pinned journal chain.
+  text = beforeTopicConsolidation(text, '00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md');
   const addition = text.split(collectiveStart)[1].split(collectiveEnd)[0];
   let baseline = text.replace(collectiveStart + addition + collectiveEnd + '\n\n', '');
   for (const url of collectiveSources) baseline = baseline.replace(`  - ${url}\n`, '');

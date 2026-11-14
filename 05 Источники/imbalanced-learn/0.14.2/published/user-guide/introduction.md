@@ -82,7 +82,9 @@ refers to the difference in the number of samples across different classes.
 We demonstrate the effect of training a [Logistic Regression classifier](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)
 with varying levels of class balancing by adjusting their weights.
 
-[![Official imbalanced-learn figure: sphx_glr_plot_comparison_over_sampling_001.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_comparison_over_sampling_001.png)](https://imbalanced-learn.org/stable/auto_examples/over-sampling/plot_comparison_over_sampling.html)
+![[00 Учебник/Assets/Figures/imbalanced-learning/plot_comparison_over_sampling.png|Decision function of LogisticRegression, weight=(0.01, 0.01, 0.98), weight=(0.01, 0.05, 0.94), weight=(0.2, 0.1, 0.7), weight=(0.33, 0.33, 0.33)]]
+
+*Guillaume Lemaitre, [Compare over-sampling samplers](https://imbalanced-learn.org/0.14/auto_examples/over-sampling/plot_comparison_over_sampling.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_comparison_over_sampling_001.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 As expected, the decision function of the Logistic Regression classifier varies significantly
 depending on how imbalanced the data is. With a greater imbalance ratio, the decision function

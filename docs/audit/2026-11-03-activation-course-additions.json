@@ -1,0 +1,278 @@
+{
+  "date": "2026-11-03",
+  "scope": "Complete activation chapter reread; Maxout worked mechanism and twelve reference anchors. Preserve previous explanations, all3 programs and8 original figures. Local only; no translation.",
+  "files": [
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/02 Функции активации.md",
+      "before_sha256": "467efffdbfaad2a74bb9e31ff86fed9553cc0478664407efd34d2c678e4b7696",
+      "after_sha256": "97fab7ff329b196454c259b16be3c4e3d30ccbded7a07b3a63c2b3390351d8fa",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-21\n",
+          "new": "last_updated: 2026-11-03\nreference_terms:\n  - label: Активация — правило цепочки\n    label_en: Activation and the chain rule\n    anchor: activation-chain-rule\n  - label: Sigmoid — насыщение и градиент\n    label_en: Sigmoid saturation and gradients\n    anchor: sigmoid-saturation\n  - label: Sigmoid и binary cross-entropy\n    label_en: Sigmoid and binary cross-entropy\n    anchor: sigmoid-bce-logits\n  - label: Tanh — симметрия и среднее\n    label_en: Tanh symmetry and output mean\n    anchor: tanh-centering\n  - label: ReLU, Leaky ReLU и PReLU\n    label_en: ReLU, Leaky ReLU and PReLU\n    anchor: relu-inactive-leaky\n  - label: ELU — производная в нуле\n    label_en: ELU one-sided slopes at zero\n    anchor: elu-slopes\n  - label: GELU — точная функция и приближение\n    label_en: Exact and approximate GELU\n    anchor: gelu-exact-approximation\n  - label: SiLU и параметр Swish\n    label_en: SiLU and the Swish parameter\n    anchor: silu-swish\n  - label: SwiGLU — ветви и их производные\n    label_en: SwiGLU branches and derivatives\n    anchor: swiglu-branch-gradients\n  - label: Maxout — обучаемые линейные ветви\n    label_en: Maxout learned affine branches\n    anchor: maxout-affine-branches\n  - label: Активация — второй момент и дисперсия\n    label_en: Activation second moment and variance\n    anchor: activation-moments\n  - label: Активация выходного слоя и логиты\n    label_en: Output activations and logits\n    anchor: activation-output-logits\n"
+        },
+        {
+          "old": "  - https://github.com/stanford-cs336/assignment1-basics\n",
+          "new": "  - https://github.com/stanford-cs336/assignment1-basics\n  - https://proceedings.mlr.press/v28/goodfellow13.html\n"
+        },
+        {
+          "old": "# Функции активации\n\n",
+          "new": "# Функции активации\n\n<a id=\"activation-chain-rule\"></a>\n\n"
+        },
+        {
+          "old": "Функции ниже применяются поэлементно: к каждому числу вектора или тензора\nотдельно. Они сохраняют его форму. Значения и производные будем сравнивать\nпри одинаковых входах, а затем свяжем их с обучением сети.\n",
+          "new": "Sigmoid, tanh, ReLU, ELU, GELU и SiLU применяются поэлементно: к каждому\nчислу вектора или тензора отдельно, с сохранением формы. Значения и\nпроизводные будем сравнивать при одинаковых входах. Затем разберём\nконструкции SwiGLU и Maxout, которые объединяют несколько обучаемых проекций.\n"
+        },
+        {
+          "old": "## Sigmoid\n",
+          "new": "<a id=\"sigmoid-saturation\"></a>\n## Sigmoid\n"
+        },
+        {
+          "old": "### Сигмоида на выходе с cross-entropy\n",
+          "new": "<a id=\"sigmoid-bce-logits\"></a>\n### Сигмоида на выходе с cross-entropy\n"
+        },
+        {
+          "old": "## Tanh\n",
+          "new": "<a id=\"tanh-centering\"></a>\n## Tanh\n"
+        },
+        {
+          "old": "## ReLU\n",
+          "new": "<a id=\"relu-inactive-leaky\"></a>\n## ReLU\n"
+        },
+        {
+          "old": "## ELU\n",
+          "new": "<a id=\"elu-slopes\"></a>\n## ELU\n"
+        },
+        {
+          "old": "## GELU\n",
+          "new": "<a id=\"gelu-exact-approximation\"></a>\n## GELU\n"
+        },
+        {
+          "old": "## SiLU / Swish\n",
+          "new": "<a id=\"silu-swish\"></a>\n## SiLU / Swish\n"
+        },
+        {
+          "old": "### От SiLU к SwiGLU\n",
+          "new": "<a id=\"swiglu-branch-gradients\"></a>\n### От SiLU к SwiGLU\n"
+        },
+        {
+          "old": "## Активация и инициализация связаны\n",
+          "new": "<a id=\"activation-moments\"></a>\n## Активация и инициализация связаны\n"
+        },
+        {
+          "old": "## Где активация не нужна\n",
+          "new": "<a id=\"activation-output-logits\"></a>\n## Где активация не нужна\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sigmoid.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sigmoid.svg|Сигмоида: при росте входа от минус 8 до 8 выход приближается от нуля к единице]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sigmoid-gradient.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-sigmoid-gradient.svg|Производная сигмоиды: максимум 0,25 в нуле и затухание в обоих хвостах]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-tanh.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-tanh.svg|Гиперболический тангенс: нечётная кривая между минус единицей и единицей]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-tanh-gradient.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-tanh-gradient.svg|Производная tanh: максимум 1 в нуле и затухание по обе стороны]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-relu.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-relu.svg|ReLU: нулевой выход при отрицательном входе и прямая с наклоном 1 при положительном]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-relu-gradient.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/d2l-relu-gradient.svg|Производная ReLU: 0 слева от нуля и 1 справа, значение в нуле задаётся соглашением]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-1-18/gelu-figure-1.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-1-18/gelu-figure-1.png|Оригинальный рисунок GELU: сравнение GELU, ReLU и ELU с исходной подписью]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-32-34/cs336-silu-vs-relu.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-32-34/cs336-silu-vs-relu.png|График Stanford CS336: SiLU, ReLU и тождественная функция на общих осях]]"
+        },
+        {
+          "old": "## Сравнение по поведению\n",
+          "new": "<a id=\"maxout-affine-branches\"></a>\n## Maxout: максимум между обучаемыми ветвями\n\nУ нейрона с ReLU сначала вычисляется одна взвешенная сумма, затем к ней\nприменяется фиксированная функция. Maxout вычисляет несколько взвешенных\nсумм для одного выходного признака и выбирает наибольшую. Меняются веса\nветвей, вместе с ними меняются наклоны и места изломов получившейся функции.\n\n[CS231n, Maxout](https://cs231n.github.io/neural-networks-1/#actfun)\nсопоставляет такой нейрон с обычным нейроном $f(w^\\top x+b)$:\n\n> Other types of units have been proposed that do not have the functional form\n> $f(w^Tx + b)$ where a non-linearity is applied on the dot product between the\n> weights and the data.\n\nAndrej Karpathy and Stanford CS231n course staff,\n[оригинальный текст](https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/neural-networks-1.md),\n[MIT License](/licenses/cs231n-MIT.txt). Формула оформлена как математика;\nязык и формулировка цитаты сохранены.\n\nДля скалярного входа возьмём три ветви: $z_1=x$, $z_2=-x$, $z_3=0{,}5$.\nТогда\n\n$$\nh(x)=\\max(x,-x,0{,}5)=\\max(|x|,0{,}5).\n$$\n\n| $x$ | $z_1=x$ | $z_2=-x$ | $z_3=0{,}5$ | Выбранная ветвь | $h(x)$ |\n|---:|---:|---:|---:|---|---:|\n| $-2$ | $-2$ | $2$ | $0{,}5$ | $-x$ | $2$ |\n| $-0{,}25$ | $-0{,}25$ | $0{,}25$ | $0{,}5$ | $0{,}5$ | $0{,}5$ |\n| $2$ | $2$ | $-2$ | $0{,}5$ | $x$ | $2$ |\n\nСлева от $-0{,}5$ наклон равен $-1$, между $-0{,}5$ и $0{,}5$ он\nнулевой, справа равен 1. При смене выбранной ветви возникает излом.\nReLU получается при выборе ветвей $0$ и $x$, модуль — при выборе\n$x$ и $-x$, Leaky ReLU с $0\\leq\\alpha\\leq1$ — при выборе\n$\\alpha x$ и $x$. Это конкретные значения параметров Maxout.\nЕсли обучать все параметры свободно, эти равенства не обязаны сохраняться.\n\nВ [Goodfellow et al., Maxout Networks, `3, Figure 1](https://proceedings.mlr.press/v28/goodfellow13.pdf#page=2)\nпоказаны три случая: ReLU, модуль и кусочно-линейное приближение квадратичной\nфункции. На каждом графике изображён один скалярный вход; наклоны относятся\nк разным аффинным ветвям. В уже приведённом графике ReLU такими ветвями служат\nгоризонтальная прямая $0$ и прямая $x$.\n\n### Размерности и число параметров\n\nДля вектора $x\\in\\mathbb R^d$ один выход имеет вид\n$h_i(x)=\\max_{1\\leq j\\leq k}(w_{ij}^{\\top}x+b_{ij})$.\nЗдесь $i$ нумерует $m$ выходных признаков, $j$ — $k$ ветвей каждого признака.\nКаждая ветвь содержит $d$ весов и одно смещение, поэтому весь слой содержит\n\n$$\nN_{\\text{params}}=mk(d+1).\n$$\n\nПри $d=2$, $m=3$, $k=2$ это $3\\cdot2\\cdot3=18$ параметров.\nУ обычного `Linear(2, 3)` с ReLU их $3\\cdot3=9$.\nСначала вычисляются все $mk$ взвешенных сумм, затем выбираются $m$ максимумов.\nВыбор одной ветви в результате не избавляет прямой проход от вычисления остальных.\n\nРеализация ниже объединяет ветви в выходы одного `Linear`.\nОперация `reshape` выделяет последние оси `[m, k]`, а максимум берётся\nпо оси ветвей `k`. Оси пакета, позиций или других независимых объектов\nсохраняются.\n\n```python\nimport torch\nfrom torch import nn\n\nclass Maxout(nn.Module):\n    def __init__(self, d_in, d_out, pieces):\n        super().__init__()\n        if pieces < 1:\n            raise ValueError(\"pieces must be positive\")\n        self.d_out = d_out\n        self.pieces = pieces\n        self.projections = nn.Linear(d_in, d_out * pieces)\n\n    def forward(self, x):\n        scores = self.projections(x)\n        scores = scores.reshape(*scores.shape[:-1], self.d_out, self.pieces)\n        return scores.max(dim=-1).values\n\nlayer = Maxout(1, 1, pieces=3).double()\nwith torch.no_grad():\n    layer.projections.weight.copy_(\n        torch.tensor([[1.], [-1.], [0.]], dtype=torch.float64))\n    layer.projections.bias.copy_(\n        torch.tensor([0., 0., .5], dtype=torch.float64))\nx = torch.tensor([[-2.], [-.25], [2.]], dtype=torch.float64,\n                 requires_grad=True)\nout = layer(x)\nout.sum().backward()\nprint(out.detach().flatten())  # tensor([2.0000, 0.5000, 2.0000])\nprint(x.grad.flatten())        # tensor([-1., 0., 1.])\n\nbatched = Maxout(2, 3, pieces=2)\nprint(batched(torch.zeros(2, 4, 2)).shape)  # torch.Size([2, 4, 3])\nprint(sum(p.numel() for p in batched.parameters()))  # 18\n```\n\n### Обратный проход и равные максимумы\n\nПусть максимум единственный и его дала ветвь $j_*$. В некоторой окрестности\nвхода эта же ветвь остаётся наибольшей, поэтому производные равны\n\n$$\n\\frac{\\partial h_i}{\\partial x}=w_{ij_*},\n\\qquad\n\\frac{\\partial h_i}{\\partial w_{ij}}=\n\\begin{cases}x,&j=j_*,\\\\0,&j\\ne j_*,\\end{cases}\n\\qquad\n\\frac{\\partial h_i}{\\partial b_{ij}}=\n\\begin{cases}1,&j=j_*,\\\\0,&j\\ne j_*.\\end{cases}\n$$\n\nПри входящей производной $g_i$ эти величины умножаются на $g_i$.\nВ примере `out.sum()` даёт $g_i=1$ для каждого объекта. На входе $-2$\nвыбрана вторая ветвь, её производная по весу равна $-2$, по смещению — 1,\nа производная по входу равна её весу $-1$.\nОбъект $-0{,}25$ обновляет третью ветвь, объект 2 — первую.\nПосле суммирования градиенты трёх весов равны $(2,-2,-0{,}25)$,\nградиенты смещений — $(1,1,1)$.\n\nЕсли несколько ветвей дают одинаковый максимум, обычной производной\nпо всем входным оценкам в этой точке нет. Библиотека выбирает правило\nобратного прохода. Согласно\n[PyTorch 2.14: torch.max](https://docs.pytorch.org/docs/2.14/generated/torch.max.html),\n`max(dim=-1)` передаёт производную первому максимальному элементу,\nа `amax(dim=-1)` делит её поровну между равными максимальными элементами:\n\n```python\nimport torch\n\nfirst = torch.tensor([[.5, .5, -1.]], dtype=torch.float64,\n                     requires_grad=True)\nshared = first.detach().clone().requires_grad_()\nfirst.max(dim=-1).values.sum().backward()\nshared.amax(dim=-1).sum().backward()\nprint(first.grad)   # tensor([[1., 0., 0.]])\nprint(shared.grad)  # tensor([[0.5, 0.5, 0.0]])\n```\n\nЗначения прямого прохода совпадают; правила распределения производной\nна совпавших ветвях различаются. Ветвь, которая ни разу не дала максимум\nна обучающих объектах, вообще не получает от них градиента.\nНапример, у $h(x)=\\max(x,x-1)$ вторая ветвь проигрывает при любом $x$.\nВозможность обучать наклоны сама по себе не обеспечивает обучения каждой ветви.\n\n### Кусочно-линейное приближение кривой\n\nМаксимум аффинных функций выпуклый. Поэтому один Maxout может точно\nпредставить $|x|$, но не $-|x|$. Для выпуклой параболы $x^2$ можно взять\nкасательные в точках $a$:\n\n$$\n\\ell_a(x)=2ax-a^2,\n\\qquad\nx^2-\\ell_a(x)=(x-a)^2\\geq0.\n$$\n\nКаждая касательная лежит не выше параболы. Если взять множество точек\n$A=\\{-1,0,1\\}$, получится Maxout из трёх ветвей:\n\n$$\nq_A(x)=\\max_{a\\in A}(2ax-a^2)=\\max(-2x-1,0,2x-1).\n$$\n\nВ точках $-1$, $0$, $1$ он совпадает с $x^2$.\nПри $x=0{,}5$ ветви дают $(-2,0,0)$: максимум равен 0,\nтогда как $x^2=0{,}25$. Ошибка равна квадрату расстояния\nдо ближайшей точки касания:\n\n$$\nx^2-q_A(x)=\\min_{a\\in A}(x-a)^2.\n$$\n\nЕсли точки $A$ равномерно покрывают $[-1,1]$, включают концы и находятся\nна расстоянии $\\Delta$ друг от друга, ближайшая точка не дальше\n$\\Delta/2$. Ошибка на этом отрезке не превышает $\\Delta^2/4$.\nДобавление ветвей уменьшает эту границу; конечное число прямых не превращается\nв точную параболу на всём отрезке.\n\nОграничение выпуклостью относится к одному выходу Maxout.\nСледующий линейный слой может вычесть один такой выход из другого.\nВ [`4 Maxout Networks](https://proceedings.mlr.press/v28/goodfellow13.pdf#page=3)\nуниверсальная аппроксимация строится именно через разность двух выпуклых\nкусочно-линейных функций. Число ветвей при этом разрешено увеличивать:\nдля любой непрерывной функции на компакте и любой положительной точности\nсуществуют подходящие параметры. Это утверждение о представимости,\nа не гарантия, что SGD найдёт параметры, и не утверждение о двух\nветвях с фиксированным числом весов.\n\n## Сравнение по поведению\n"
+        },
+        {
+          "old": "  насыщение, знак градиента по весам и неактивные ReLU.\n",
+          "new": "  насыщение, знак градиента по весам, неактивные ReLU и Maxout.\n- Ian Goodfellow et al.,\n  [Maxout Networks](https://proceedings.mlr.press/v28/goodfellow13.html), §3–4:\n  максимум аффинных ветвей, выпуклость и условия универсальной аппроксимации.\n"
+        },
+        {
+          "old": "В [Goodfellow et al., Maxout Networks, `3, Figure 1](https://proceedings.mlr.press/v28/goodfellow13.pdf#page=2)",
+          "new": "В [Goodfellow et al., Maxout Networks, §3, Figure 1](https://proceedings.mlr.press/v28/goodfellow13.pdf#page=2)"
+        },
+        {
+          "old": "В [`4 Maxout Networks](https://proceedings.mlr.press/v28/goodfellow13.pdf#page=3)",
+          "new": "В [§4 Maxout Networks](https://proceedings.mlr.press/v28/goodfellow13.pdf#page=3)"
+        },
+        {
+          "old": "| $x$ | $z_1=x$ | $z_2=-x$ | $z_3=0{,}5$ | Выбранная ветвь | $h(x)$ |\n|---:|---:|---:|---:|---|---:|\n| $-2$ | $-2$ | $2$ | $0{,}5$ | $-x$ | $2$ |\n| $-0{,}25$ | $-0{,}25$ | $0{,}25$ | $0{,}5$ | $0{,}5$ | $0{,}5$ |\n| $2$ | $2$ | $-2$ | $0{,}5$ | $x$ | $2$ |",
+          "new": "| $x$ | Значения $(z_1,z_2,z_3)$ | $h(x)$ |\n|---:|---|---:|\n| $-2$ | $(-2;\\,2;\\,0{,}5)$ | $2$ |\n| $-0{,}25$ | $(-0{,}25;\\,0{,}25;\\,0{,}5)$ | $0{,}5$ |\n| $2$ | $(2;\\,-2;\\,0{,}5)$ | $2$ |"
+        },
+        {
+          "old": "\\frac{\\partial h_i}{\\partial x}=w_{ij_*},\n\\qquad\n\\frac{\\partial h_i}{\\partial w_{ij}}=\n\\begin{cases}x,&j=j_*,\\\\0,&j\\ne j_*,\\end{cases}\n\\qquad\n\\frac{\\partial h_i}{\\partial b_{ij}}=\n\\begin{cases}1,&j=j_*,\\\\0,&j\\ne j_*.\\end{cases}",
+          "new": "\\begin{aligned}\n\\frac{\\partial h_i}{\\partial x}&=w_{ij_*},\\\\[4pt]\n\\frac{\\partial h_i}{\\partial w_{ij}}&=\n\\begin{cases}x,&j=j_*,\\\\0,&j\\ne j_*,\\end{cases}\\\\[4pt]\n\\frac{\\partial h_i}{\\partial b_{ij}}&=\n\\begin{cases}1,&j=j_*,\\\\0,&j\\ne j_*.\\end{cases}\n\\end{aligned}"
+        },
+        {
+          "old": "\\ell_a(x)=2ax-a^2,\n\\qquad\nx^2-\\ell_a(x)=(x-a)^2\\geq0.",
+          "new": "\\begin{aligned}\n\\ell_a(x)&=2ax-a^2,\\\\\nx^2-\\ell_a(x)&=(x-a)^2\\geq0.\n\\end{aligned}"
+        },
+        {
+          "old": "q_A(x)=\\max_{a\\in A}(2ax-a^2)=\\max(-2x-1,0,2x-1).",
+          "new": "\\begin{aligned}\nq_A(x)&=\\max_{a\\in A}(2ax-a^2)\\\\\n&=\\max(-2x-1,0,2x-1).\n\\end{aligned}"
+        },
+        {
+          "old": "[MIT License](/licenses/cs231n-MIT.txt). Формула оформлена как математика;\nязык и формулировка цитаты сохранены.\n",
+          "new": "[MIT License](/licenses/cs231n-MIT.txt).\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "389a978171515f9eb6e02ca4ee1cedb6d60ca842d6d5da7d320672fd0a333f64",
+      "after_sha256": "23dfb215078f267f892bea50bd57d1e0901748c15fa13ada2c7e87195074fd57",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/01 Основы нейронных сетей/02 Функции активации|Функции активации]]",
+          "new": "- [[00 Учебник/01 Основы нейронных сетей/02 Функции активации|Функции активации]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#activation-chain-rule|Активация — правило цепочки]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#sigmoid-saturation|Sigmoid — насыщение и градиент]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#sigmoid-bce-logits|Sigmoid и binary cross-entropy]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#tanh-centering|Tanh — симметрия и среднее]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#relu-inactive-leaky|ReLU, Leaky ReLU и PReLU]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#elu-slopes|ELU — производная в нуле]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#gelu-exact-approximation|GELU — точная функция и приближение]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#silu-swish|SiLU и параметр Swish]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#swiglu-branch-gradients|SwiGLU — ветви и их производные]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#maxout-affine-branches|Maxout — обучаемые линейные ветви]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#activation-moments|Активация — второй момент и дисперсия]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#activation-output-logits|Активация выходного слоя и логиты]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "d35028cbfc193b750656ef8ce6fedd696472598dccdb6490ffebebd609364c10",
+      "after_sha256": "db5717bbd85e9ff42116f26c019e085c2d60dc706e3af6d23cff6ca8d09144c7",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/01 Основы нейронных сетей/02 Функции активации|Activation functions]]",
+          "new": "- [[00 Учебник/01 Основы нейронных сетей/02 Функции активации|Activation functions]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#activation-chain-rule|Activation and the chain rule]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#sigmoid-saturation|Sigmoid saturation and gradients]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#sigmoid-bce-logits|Sigmoid and binary cross-entropy]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#tanh-centering|Tanh symmetry and output mean]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#relu-inactive-leaky|ReLU, Leaky ReLU and PReLU]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#elu-slopes|ELU one-sided slopes at zero]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#gelu-exact-approximation|Exact and approximate GELU]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#silu-swish|SiLU and the Swish parameter]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#swiglu-branch-gradients|SwiGLU branches and derivatives]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#maxout-affine-branches|Maxout learned affine branches]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#activation-moments|Activation second moment and variance]]\n  - [[00 Учебник/01 Основы нейронных сетей/02 Функции активации#activation-output-logits|Output activations and logits]]"
+        }
+      ]
+    }
+  ],
+  "sourceComparison": {
+    "fullyRead": [
+      {
+        "source": "05 Источники/Originals/neuron-mlp-2026-10-21/d2l-mlp.md",
+        "scope": "Entire Activation Functions section, Summary/Discussion, Exercises, all platform examples and discussion links, lines295-659. Original six function/gradient figures retained."
+      },
+      {
+        "source": "05 Источники/Originals/neuron-mlp-2026-10-21/cs231n-neural-networks-1.md",
+        "scope": "Complete Commonly used activation functions section through TLDR. One original English sentence with pinned MIT attribution; blanket recommendations excluded."
+      },
+      {
+        "source": "https://proceedings.mlr.press/v28/goodfellow13.pdf",
+        "scope": "Complete sections3-4, physicalpages2-3 and Figure1/3 captions. Physicalpage2 rendered locally and visually inspected; scalar ReLU/absolute/quadratic panels. No claim of full-paper/experiment review."
+      },
+      {
+        "source": "https://docs.pytorch.org/docs/2.14/generated/torch.max.html",
+        "scope": "Complete API body: no-dim/dim reductions, keepdim/examples, first argmax and amax tie-gradient behavior."
+      }
+    ],
+    "reusedComparisons": [
+      {
+        "evidence": "docs/audit/2026-10-21-activation-functions.md",
+        "scope": "Selected GELU, Swish, GLU and CS336 source comparison retained for unchanged mechanisms. No fresh whole-paper read claimed. Actual programs and PDF crops rerun."
+      }
+    ],
+    "mechanisms": [
+      {
+        "topic": "Pointwise activations",
+        "example": "Upstream3 chain rule, ten-sigmoid attenuation, batch sign counterexample, BCE p-y cancellation, tanh data mean, dead/Leaky/PReLU gradients, ELU zero slopes, GELU/SiLU minima and signed derivatives retained."
+      },
+      {
+        "topic": "SwiGLU",
+        "example": "Both branch derivatives, zero product with nonzero gate gradient, three-matrix forward and matched72-parameter example preserved."
+      },
+      {
+        "topic": "Maxout",
+        "example": "Three affine branches max(x,-x,.5), all intermediate scores, three input rows, input/weight/bias gradients, batch/position axes and18 versus9 parameters. Every branch evaluated before max; no conditional-forward savings."
+      },
+      {
+        "topic": "Maxout ties and inactive branches",
+        "example": "max(dim=-1) versus amax gives [1,0,0] versus [.5,.5,0]. max(x,x-1) counterexample prevents importing unconditional no-dead-branch claim."
+      },
+      {
+        "topic": "Approximation",
+        "example": "Convexity; tangents2ax-a²; x=.5 gives .25 error. Exact squared-nearest-point identity and Delta²/4 bound on[-1,1]. Two-hidden-unit theorem requires arbitrarily many affine pieces, continuous target on compact domain; no SGD guarantee."
+      }
+    ],
+    "exclusions": [
+      "No unconditional never-use-sigmoid/always-tanh, universal ReLU speed, irreversible-death or no-dead-Maxout claims.",
+      "Maxout Figure1 reproduction grant not verified. Original direct link retained; no unsupported copy or self-drawn substitute."
+    ],
+    "style": "Full no-ai-slop skill/eval applied. Existing substantive calculations and caveats retained; original English quotation not translated. New mechanism includes inputs/intermediates/derivatives and limitations.",
+    "preservation": "All3 previous programs unchanged and ordered;8 original image paths/bytes/captions and prior equations preserved. Scope sentence, metadata, source details, alt text and stable anchors updated; exact reversible journal.",
+    "reference": "Twelve canonical mechanisms generated in both locale indexes; no independent parallel explanation."
+  },
+  "verification": {
+    "chapterSha256": "97fab7ff329b196454c259b16be3c4e3d30ccbded7a07b3a63c2b3390351d8fa",
+    "examples": {
+      "exit": 0,
+      "publishedBlocks": 5,
+      "torch": "2.14.1",
+      "command": "uv run --python 3.13 --with torch==2.14.1 --with numpy==2.5.4 --with scipy==1.18.1 python publishing/tools/check_activation_examples.py",
+      "scope": "All5 actual programs, prior independent tests, Maxout random batch VJP/weight/bias gradients, central differences, ties, losing branch, counts and tangent-error bounds."
+    },
+    "sourceFigures": {
+      "exit": 0,
+      "svgCopies": 6,
+      "pdfPixelCrops": 2,
+      "command": "uv run --python 3.13 --with pillow python publishing/tools/prepare_activation_source_panels.py --check",
+      "scope": "Six D2L source SVGs byte-equal; two original PDF crops rerendered240dpi and compared pixel-for-pixel. No changed image asset."
+    },
+    "reader": {
+      "evidence": "docs/audit/evidence/2026-11-03-activation-reader",
+      "desktop": "1280x720: all8 original figures opened and visually inspected, including both raster originals with complete axes/legend/source captions. Document1265/1265,3 tables617/617,zero KaTeX errors/display overflow. Final Maxout worked table inspected.",
+      "mobile": "390x844: all8 images loaded at343px; GELU and CS336 originals inspected in fit viewer, GELU2x zoom inspected. Maxout table and stacked derivative formulas inspected. Document375/375,3 tables343/343,zero display/inline-math overflow or KaTeX errors. Not an exhaustive zoom/pan audit of each unchanged SVG on mobile.",
+      "navigation": "Actual RU reference -> #maxout-affine-branches and EN reference -> /en/ same anchor verified. EN has8 images,5 programs and explicit Canonical-language chapter notice. No translation created.",
+      "finalRead": "Entire current chapter read, final ranges1-450 and451-896 with truncated middle recovered330-575. Removed one editorial comment after citation; bounded attribution-only delta reread. No explanation, program or figure omitted."
+    },
+    "build": {
+      "exit": 0,
+      "routes": 2007,
+      "htmlFiles": 2011,
+      "brokenInternalLinks": 0,
+      "bytes": 851439684,
+      "files": 5592,
+      "headroom": 148560316
+    },
+    "published": false,
+    "finalRead": "Entire current chapter read, final ranges1-450 and451-896 with truncated middle recovered330-575. Removed one editorial comment after citation; bounded attribution-only delta reread. No explanation, program or figure omitted.",
+    "renderCorrections": "Actual390px QA exposed3 overflowing new displays and a6-column Maxout table. Displays were split into aligned lines and table regrouped to3 columns with all scores/results retained; final390px metrics show zero display/inline overflow and3 tables343/343.",
+    "htmlAndPreservation": {
+      "exit": 0,
+      "files": 5,
+      "tests": 205
+    },
+    "topicIndex": {
+      "exit": 0,
+      "topics": 152,
+      "locales": 2
+    },
+    "transientFailures": "Initial Maxout checker accidentally stacked Python floats; fixed to a float64 tensor and independent checks pass. Full final read caught two source-link section marks changed by a drafting placeholder; corrected. Actual mobile QA exposed3 wide formulas and one6-column table, corrected without removing intermediates. Browser stale handle reset and existing IAB tab reused.",
+    "readReceipts": {
+      "exit": 0,
+      "owners": 67,
+      "unread": 85,
+      "scope": "All53 fresh and14 reused current hashes validated; all67 distinct sources belong to152-owner manifest. Dynamic test rejects stale hashes/counters.",
+      "command": "pnpm --dir publishing exec vitest run tests/reading-route-receipts.test.ts tests/activation-course-additions.test.ts tests/mlp-route-additions.test.ts tests/topic-consolidation.test.ts",
+      "files": 4,
+      "tests": 15
+    }
+  },
+  "remaining": [
+    {
+      "type": "source-figure-permission",
+      "location": "Maxout Figure1",
+      "status": "linked-not-reproduced",
+      "needed": "Verify specific author/publisher reproduction permission before hosting original Maxout figure; no local Maxout illustration accepted."
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "date": "2026-11-09",
+  "scope": "Whole-owner reading of collaborative filtering and ranking, with an exact ALS catalog-mask update and a BPR sampler correction. Local only.",
+  "review": {
+    "sources": [
+      "Hu, Koren, Volinsky §§3–5 and Conclusion: explicit comparison, weight 1 for unknown pairs, sparse Gram rewrite, and availability as a possible refinement.",
+      "He et al. SIGIR 2016 §§4.1–4.2 and Algorithm 1: item-specific missing-pair weights and shared weighted Gram for coordinate updates.",
+      "Rendle et al. UAI 2009 §§4.1–4.2: preference triples, pairwise objective and bootstrap learning; Zhang et al. SIGIR 2013 §3.1 Algorithms 1–2: score-based selection from a sampled pool.",
+      "Google Matrix Factorization and D2L Personalized Ranking figures were already published; the new passages link to the original diagrams and interpret their empty cell/comparison column."
+    ],
+    "examples": [
+      "All 12 CF blocks and the independent regression suite executed. Removing q2 from the weighted system is equivalent to removing its row from the least-squares design; fixed remaining scores differ from filtering after fit. Fifty seeded item-weighted Gram identities match dense computation.",
+      "All 24 ranking blocks and the independent regression suite executed. Enumerated all four two-draw outcomes, compared the unweighted and importance-corrected gradients with finite differences, and kept the existing PyTorch CPU interaction and sharding checks."
+    ],
+    "prose": "Read both input chapters in full, checked the changes against the complete passages and retained the source-native DLRM material and the original course visuals. The new examples do not imply that availability fixes exposure bias, that negative sampling estimates a calibrated click probability, or that fixed-proposal correction can recover an item outside its support.",
+    "reader": "Chrome at 375 and 1280 CSS px: both RU and EN reference paths open the right example, both equations render within the article, the Google and D2L originals fit and open in the mobile viewer, and the source note links back to the same locale. The EN textbook routes label their Russian fallback.",
+    "verification": "2039 pages built; 738 publication tests, 239 built-output tests, topic-index, current read receipts and the two course-ingestion ledgers passed; no broken internal route, fragment or asset."
+  },
+  "files": [
+    {
+      "source": "05 Источники/_index.md",
+      "before_sha256": "38151e9d2adbab16f2c271f66c4cf30fd72ba6a3e95303b4ee188826297b27f9",
+      "after_sha256": "3e5aa3d3ca81019a60aed9751ba8db61ad00de9b11aea46a5c98c5ab4100b351",
+      "lines": 54,
+      "changes": [
+        {
+          "old": "- [[05 Источники/Papers/Delayed conversion feedback|Delayed conversion feedback — conversion delay and observation time]]",
+          "new": "- [[05 Источники/Papers/Delayed conversion feedback|Delayed conversion feedback — conversion delay and observation time]]\n- [[05 Источники/Papers/Implicit feedback weights and negative sampling|Implicit feedback — confidence weights and negative sampling]]"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "4eeda89240f41772b0b38591b31db31fed247dcd4ccd622d288e2d8d220dd519",
+      "after_sha256": "ad43b888328c01e27b42301c06812be5fa11812d0fe75ab1a29dc3e9bf02cd0a",
+      "lines": 2564,
+      "changes": [
+        {
+          "old": "      - source: 05 Источники/Papers/Delayed conversion feedback.md\n        route: sources/papers/delayed-conversion-feedback",
+          "new": "      - source: 05 Источники/Papers/Delayed conversion feedback.md\n        route: sources/papers/delayed-conversion-feedback\n      - source: 05 Источники/Papers/Implicit feedback weights and negative sampling.md\n        route: sources/papers/implicit-feedback-weights-sampling"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/02 Рекомендательные системы/02 Collaborative filtering и matrix factorization.md",
+      "before_sha256": "992403d10e0fd4bba8e1fb36ecce40414f6bcae1e89d1548c4f38cdc203874dd",
+      "after_sha256": "2a279628a014d6f2f18ccff86a96b89f0042da22aa9c5bd1f29129dbb774ff0b",
+      "lines": 968,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-25",
+          "new": "last_updated: 2026-11-09\nreference_terms:\n  - label: ALS — веса неизвестных пар и доступность каталога\n    label_en: ALS — missing-pair weights and catalog availability\n    anchor: als-availability-weights"
+        },
+        {
+          "old": "Совместная задача по $P,Q$ не выпукла: это не доказательство глобального\nминимума или единственного предела самих факторов.\n\n### Объяснение рекомендации через прошлые взаимодействия",
+          "new": "Совместная задача по $P,Q$ не выпукла: это не доказательство глобального\nминимума или единственного предела самих факторов.\n\n<a id=\"als-availability-weights\"></a>\n\n### Если объект не мог быть доступен пользователю\n\nВернёмся к истории $(3,0,1)$. Второй объект мог быть доступен, но его\nне купили, либо он вообще не продавался в регионе пользователя.\nВ обоих случаях счётчик равен нулю. В исходной цели Hu, Koren и Volinsky\nобе пары получили бы вес 1. В конце статьи авторы отдельно называют\nдоступность причиной различать такие нули.\n\nДопустим, для обучения мы исключаем пары, в которых объект был\nнедоступен в течение всего рассматриваемого окна. У второго объекта\nуже есть вектор $q_2=(0;1)$, обученный по другим пользователям.\nДля нашей строки заменим только его вес с 1 на 0. В схеме Google\nвыше это изменение веса пустой клетки, а не её целевого значения.\nПравая часть системы не меняется: бинарная цель этой пары и прежде\nбыла нулём. Из левой части вычитается $q_2q_2^\\top$. Получаем\n\n$$\n\\begin{pmatrix}11&3\\\\3&4\\end{pmatrix}p_u\n=\\begin{pmatrix}10\\\\3\\end{pmatrix},\n\\qquad p_u=(31/35;\\,3/35).\n$$\n\nРаньше первая координата была $41/46$. Это оценка первого объекта,\nкоторый оставался доступен. Поэтому фильтрация второго объекта после\nобучения и исключение его из функции потерь — разные операции:\nфильтр выдачи не меняет ни $p_u$, ни оценки остальных объектов.\n\n~~~python\n# Same fixed item factors and positives as in the preceding ALS example.\nals_weights = 1 + 2 * counts_one\nals_rhs = Q_als.T @ (als_weights * (counts_one > 0))\nals_system = Q_als.T @ (als_weights[:, None] * Q_als) + np.eye(2)\nals_removed_item = Q_als[1]\nals_without_unavailable = np.linalg.solve(\n    als_system - np.outer(als_removed_item, als_removed_item), als_rhs\n)\nnp.testing.assert_allclose(als_without_unavailable, [31/35, 3/35])\nallowed = np.array([True, False, True])\nnp.testing.assert_allclose(\n    als_without_unavailable,\n    implicit_user_update(Q_als[allowed], counts_one[allowed])\n)\nassert not np.allclose(Q_als[allowed] @ p_als,\n                       Q_als[allowed] @ als_without_unavailable)\n~~~\n\nОбщую матрицу можно сохранить, если базовый вес неизвестной пары $w_i$\nзависит только от объекта. Например, при общем наборе товаров для всех\nпользователей $w_i$ может зависеть от популярности. Тогда до обновления\nпользователей вычисляют $\\sum_i w_iq_iq_i^\\top$, а для наблюдаемых пар\nдобавляют поправки $(c_{ui}-w_i)q_iq_i^\\top$.\n[He et al., §4.1–4.2](https://hexiangnan.github.io/papers/sigir16-eals-cm.pdf#page=4)\nиспользуют эту идею в eALS, где обновляют по одной координате.\n\nЕсли набор доступных объектов различается по регионам, для обновления\nпользовательских строк можно заранее посчитать отдельную матрицу на каждый\nобщий каталог. Для произвольной маски доступности у каждого пользователя\nодной общей матрицы без поправок уже недостаточно. А если неизвестно,\nчто человек видел, вес 0 или 1 остаётся допущением. Запись о показе и\n[[00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline#recommendation-delayed-labels|полная метка отклика]]\nдают другой тип свидетельства. В\n[[05 Источники/Papers/Implicit feedback weights and negative sampling|заметке об источниках]]\nсобраны работы об изменении веса неизвестных пар и об их отборе для BPR.\n\n### Объяснение рекомендации через прошлые взаимодействия"
+        },
+        {
+          "old": "Для нашей строки заменим только его вес с 1 на 0. В схеме Google\nвыше это изменение веса пустой клетки, а не её целевого значения.",
+          "new": "Для нашей строки заменим только его вес с 1 на 0. На\n[[#implicit-feedback-ноль-состоит-из-разных-причин|схеме Google]]\nэто изменение веса пустой клетки; её целевое значение остаётся нулём."
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели.md",
+      "before_sha256": "50a59283ee0867710665f414954291080304333961a107b6418e360e3f759bf1",
+      "after_sha256": "c366edf3c6f2b15c82d4b22fa2e1de215b13d88c6e60ab57c5bf7df2905b9676",
+      "lines": 1653,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29",
+          "new": "last_updated: 2026-11-09\nreference_terms:\n  - label: BPR — трудные отрицательные примеры и взвешивание\n    label_en: BPR — hard negatives and importance weights\n    anchor: bpr-hard-negative-probabilities"
+        },
+        {
+          "old": "Hard-negative sampling чаще подаёт объекты с высокими scores.\nОни могут давать больший градиент, но одновременно меняют распределение\nзадачи и могут оказаться интересными пользователю. Если требуется\nоценивать исходную сумму по всем тройкам, вероятность выбора входит\nв importance weighting; без такой поправки не следует называть любое\nsampling равномерной оптимизацией исходной суммы.",
+          "new": "<a id=\"bpr-hard-negative-probabilities\"></a>\n\n### Как отбор трудных пар меняет градиент\n\nВозьмём покупку книги A и две ненаблюдаемые книги B и C.\nЭто две обучающие пары с общим положительным объектом, как два\nплюса в одном столбце на схеме D2L выше. Пусть текущие оценки\n$s_A=0$, $s_B=2$ и $s_C=-2$. При сравнении с B порядок неверный,\nпри сравнении с C верный. Из таблицы производных выше получаем\nдва градиента по $s_A$: $g_B\\approx-0{,}8808$ и $g_C\\approx-0{,}1192$.\n\nПри равномерном отборе отрицательной книги средний градиент равен\n$(g_B+g_C)/2=-0{,}5$. Теперь дважды независимо выберем книгу из $\\{B,C\\}$\nс возвращением и оставим ту, у которой выше оценка.\nИз четырёх равновероятных исходов только $(C,C)$ даёт C.\nПоэтому вероятности отбора равны $3/4$ и $1/4$, а средний градиент\n$3g_B/4+g_C/4\\approx-0{,}6904$. Функция потерь не менялась;\nмодель просто чаще получает сравнение, где ошибается сильнее.\nЭтот отбор — частный случай идеи\n[Zhang et al., алгоритмы 1–2](https://wnzhang.net/papers/lambdarankcf-sigir.pdf#page=3):\nрасставить оценки для небольшой случайной группы, а не для всего каталога.\n\nЕсли цель осталась прежней, средний градиент по равномерно выбранной\nкниге можно восстановить. Обозначим целевую вероятность через $\\pi(j)$,\nфактическую вероятность выбора через $q(j)$ и умножим градиент\nпопавшейся пары на $\\pi(j)/q(j)$:\n\n$$\n\\mathbb E_{j\\sim q}\\!\\left[\\frac{\\pi(j)}{q(j)}g_j\\right]\n=\\sum_{j:q(j)>0}\\pi(j)g_j.\n$$\n\nДля B множитель равен $2/3$, для C — $2$. После взвешивания среднее\nснова равно $-0{,}5$. Это равенство для одного шага при текущих\nоценках и известных вероятностях выбора; отдельный шаг всё ещё случаен.\nЕсли всегда брать B как максимум по всему каталогу, $q(C)=0$.\nВ этом случае восстановить вклад C одним перевзвешиванием нельзя.\n\n~~~python\nfrom itertools import product\n\nnegative_scores = np.array([2.0, -2.0])  # B, C\npair_gradients = -np.exp(-np.logaddexp(0.0, -negative_scores))\nwinners = [i if negative_scores[i] >= negative_scores[j] else j\n           for i, j in product(range(2), repeat=2)]\nproposal = np.bincount(winners, minlength=2) / len(winners)\nuniform_target = np.array([0.5, 0.5])\nnp.testing.assert_allclose(proposal, [0.75, 0.25])\nnp.testing.assert_allclose(uniform_target @ pair_gradients, -0.5)\nnp.testing.assert_allclose(proposal @ pair_gradients, -0.69039853898894)\nnp.testing.assert_allclose(\n    proposal @ ((uniform_target / proposal) * pair_gradients), -0.5\n)\n~~~\n\nПеревзвешивание исправляет частоту сравнений, но оставляет их метки\nпрежними. Если B ещё не купили только потому, что окно не закрылось,\nбольшой градиент может сильнее понизить оценку будущей покупки.\nОтбор неизвестных пар, оценка задержки и выбор функции потерь\nрешают разные задачи. Оригинальные постановки и границы сравнения\nсобраны в [[05 Источники/Papers/Implicit feedback weights and negative sampling|заметке об источниках]]."
+        },
+        {
+          "old": "Это две обучающие пары с общим положительным объектом, как два\nплюса в одном столбце на схеме D2L выше. Пусть текущие оценки",
+          "new": "Это две обучающие пары с общим положительным объектом, как два\nплюса в одном столбце на [[#Bayesian Personalized Ranking|схеме D2L]].\nПусть текущие оценки"
+        },
+        {
+          "old": "Если всегда брать B как максимум по всему каталогу, $q(C)=0$.",
+          "new": "Если всегда брать B как максимум среди ненаблюдаемых объектов, $q(C)=0$."
+        },
+        {
+          "old": "Перевзвешивание исправляет частоту сравнений, но оставляет их метки\nпрежними. Если B ещё не купили только потому, что окно не закрылось,\nбольшой градиент может сильнее понизить оценку будущей покупки.\nОтбор неизвестных пар, оценка задержки и выбор функции потерь\nрешают разные задачи. Оригинальные постановки и границы сравнения\nсобраны в [[05 Источники/Papers/Implicit feedback weights and negative sampling|заметке об источниках]].",
+          "new": "Перевзвешивание исправляет частоту сравнений, но оставляет их метки\nпрежними. Книга B может оказаться будущей покупкой: её\n[[00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline#recommendation-delayed-labels|окно отклика]]\nмогло ещё не закрыться. Тогда отбор трудных пар чаще будет понижать\nеё оценку по ошибочному предположению. Оригинальные постановки\nсобраны в [[05 Источники/Papers/Implicit feedback weights and negative sampling|заметке об источниках]]."
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "2a783e717086ab2999ac667bb8a05dc86f1f2d411c14bfb936d73cc36dd508f6",
+      "after_sha256": "11eac632e5bf528925da91fdfa1c52309f9fde1fc01f80efc6cb1bfd6f4788b7",
+      "lines": 1695,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели|Ранжирование и нейронные рекомендательные модели]]",
+          "new": "- [[00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели|Ранжирование и нейронные рекомендательные модели]]\n  - [[00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели#bpr-hard-negative-probabilities|BPR — трудные отрицательные примеры и взвешивание]]"
+        },
+        {
+          "old": "- [[00 Учебник/02 Рекомендательные системы/02 Collaborative filtering и matrix factorization|Совместная фильтрация и факторизация матрицы]]",
+          "new": "- [[00 Учебник/02 Рекомендательные системы/02 Collaborative filtering и matrix factorization|Совместная фильтрация и факторизация матрицы]]\n  - [[00 Учебник/02 Рекомендательные системы/02 Collaborative filtering и matrix factorization#als-availability-weights|ALS — веса неизвестных пар и доступность каталога]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "29a058231dd1217ddcf2f61723cbe0a91e80a5beb9d1bc0329535b34c1ace20b",
+      "after_sha256": "d528650edd53c51ce9c2af451bdd9335123d3799101242c19087bbf3166a3294",
+      "lines": 1697,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/02 Рекомендательные системы/02 Collaborative filtering и matrix factorization|Collaborative filtering and matrix factorization]]",
+          "new": "- [[00 Учебник/02 Рекомендательные системы/02 Collaborative filtering и matrix factorization|Collaborative filtering and matrix factorization]]\n  - [[00 Учебник/02 Рекомендательные системы/02 Collaborative filtering и matrix factorization#als-availability-weights|ALS — missing-pair weights and catalog availability]]"
+        },
+        {
+          "old": "- [[00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели|Ranking and neural models]]",
+          "new": "- [[00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели|Ranking and neural models]]\n  - [[00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели#bpr-hard-negative-probabilities|BPR — hard negatives and importance weights]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/Implicit feedback weights and negative sampling.md",
+      "created": true,
+      "after_sha256": "23bae2dcf1b21bde63f7d60f72a854178e8cd79171d38b2e09e436aa19698b63"
+    }
+  ]
+}

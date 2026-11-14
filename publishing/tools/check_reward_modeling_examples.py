@@ -25,7 +25,7 @@ CHAPTER = ROOT / "00 Учебник/12 Post-training и Alignment/03 Reward mode
 def main():
     text = CHAPTER.read_text()
     blocks = re.findall(r"^\x60{3}python\n(.*?)^\x60{3}\s*$", text, re.M | re.S)
-    assert len(blocks) == 6, "execute every published Python fence"
+    assert len(blocks) == 7, "execute every published Python fence"
     ns, output = {}, io.StringIO()
     with contextlib.redirect_stdout(output):
         for i, code in enumerate(blocks):
@@ -120,6 +120,30 @@ def main():
                       -.8*math.log(.99)-.2*math.log(.01)], dtype=torch.float64))
     assert math.isclose(1-.99**64, .47440351247443794)
 
+    # PRM boundary classification: only annotated positions contribute.
+    prm_loss = ns["labeled_step_loss"]
+    step_logits, targets, label_mask = [ns[k] for k in (
+        "prm_step_logits", "prm_step_targets", "prm_label_mask")]
+    assert label_mask.sum().item() == 5
+    assert (~label_mask).sum().item() == 3
+    assert math.isclose(ns["prm_step_loss"].item(), math.log(3))
+    assert ns["prm_step_loss_after"] < ns["prm_step_loss"]
+    altered = step_logits.detach().clone()
+    altered[~label_mask] = torch.tensor([200., -300., 50.], dtype=altered.dtype)
+    torch.testing.assert_close(prm_loss(altered, targets), prm_loss(step_logits, targets))
+    copied = step_logits.detach().clone().requires_grad_()
+    per_slot = F.cross_entropy(copied.reshape(-1, 3), targets.reshape(-1),
+                              ignore_index=-100, reduction="none")
+    correct_gradient = torch.autograd.grad(per_slot.sum()/5, copied, retain_graph=True)[0]
+    wrong_gradient = torch.autograd.grad(per_slot.mean(), copied)[0]
+    torch.testing.assert_close(wrong_gradient, correct_gradient * (5/8))
+    try:
+        prm_loss(step_logits, torch.full_like(targets, -100))
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("an empty annotation mask was accepted")
+
     print(json.dumps({
         "published_python_fences": len(blocks), "torch": torch.__version__,
         "transformers": transformers.__version__, "device": "cpu",
@@ -130,6 +154,14 @@ def main():
         "pl_probability": ns["pl_loss"].neg().exp().item(),
         "pair_probability_product": ns["pair_losses"].sum().neg().exp().item(),
         "calibration_loss": ns["calibration_loss"].tolist(),
+        "prm_boundaries": {
+            "labeled": 5, "ignored": 3,
+            "loss_before": ns["prm_step_loss"].item(),
+            "loss_after": ns["prm_step_loss_after"].item(),
+            "ignored_logits_do_not_change_loss": True,
+            "wrong_slot_mean_gradient_factor": 5/8,
+            "scope": "Three-class boundary logits, not a full PRM language-model training run",
+        },
         "example_stdout": output.getvalue().splitlines(),
         "chapter_sha256": hashlib.sha256(text.encode()).hexdigest(),
     }, indent=2))

@@ -1631,15 +1631,15 @@
       "destination": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
       "destination_anchor": "swe-agent-модель-управляет-циклом-через-aci",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m05-p17-react-aci.png"
+        "00 Учебник/Assets/Figures/curated/computer-agents-2026-11-09/swe-agent-overview.png"
       ],
-      "transformation": "Exact full physical PDF page render at 144 DPI; no crop, redraw, or semantic content change.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about SWE-agent interaction loop?",
+      "transformation": "Replaced the course frame with the complete original SWE-agent v3 Figure 1 (CC BY 4.0), copied byte-for-byte; lecture page remains linked.",
+      "caption": "The upper arrow carries ACI commands into the computer; the lower arrow returns environment feedback.",
       "rendered_route": "/textbook/agents/coding-web-computer-use/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07"
+      "desktop_evidence": "Original two-arrow figure and source attribution at desktop content width.",
+      "narrow_evidence": "Original figure and zoom viewer preserve both arrows and the complete English labels.",
+      "reviewer": "Bookvar source and browser review",
+      "checked_at": "2026-11-09"
     },
     "meeting-05-slides-visual-coding-agent-design-comparisons": {
       "disposition": "integrated",
@@ -1841,15 +1841,15 @@
       "destination": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
       "destination_anchor": "osworld-resettable-vm-executable-action-and-final-state-grader",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p11-osworld-contract.png"
+        "00 Учебник/Assets/Figures/curated/computer-agents-2026-11-09/osworld-task-environment.png"
       ],
-      "transformation": "Exact full physical PDF page rendered at 144 DPI; no crop, redraw, or semantic content change.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about OSWorld environment and evaluation?",
+      "transformation": "Replaced the course frame with the complete original OSWorld v1 Figure 2 (CC BY 4.0), copied byte-for-byte; lecture page remains linked.",
+      "caption": "Setup prepares the VM, while postprocessing, retrieval and evaluation act on the final spreadsheet after the agent stops.",
       "rendered_route": "/textbook/agents/coding-web-computer-use/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07"
+      "desktop_evidence": "Original configuration and VM diagram at desktop content width; dense JSON also has a worked prose explanation.",
+      "narrow_evidence": "Original PNG opens in the zoom viewer; the configuration and the evaluation path can be read by panning.",
+      "reviewer": "Bookvar source and browser review",
+      "checked_at": "2026-11-09"
     },
     "meeting-07-slides-visual-meeting-07-outline-a": {
       "disposition": "excluded",

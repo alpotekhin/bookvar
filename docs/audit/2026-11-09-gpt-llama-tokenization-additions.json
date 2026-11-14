@@ -1,0 +1,119 @@
+{
+  "date": "2026-11-09",
+  "scope": "Extend the GPT-1 → GPT-2 → GPT-3 → LLaMA v1 reading route with a checked example of what the token budget counts. Keep T5 in the main sequence and do not publish.",
+  "review": {
+    "sources": [
+      "OpenAI GPT-1 public release a69b5c43b0452462890bca8ff92fb75dee9290cf: text_utils.py and the matching 40,478-entry vocabulary/merges. Uses word boundaries and lowercasing.",
+      "OpenAI GPT-2 §2.2 and public encoder 9b63575ef42771a015060c964af2c3da4cf7c8ab; Brown et al. v4 §2.1 describes retaining GPT-2's reversible tokenization.",
+      "Touvron et al. v1 §2.1 and original Meta tokenizer.py: SentencePiece BPE, digit splitting, byte fallback, optional BOS/EOS. For the local run the 499,723-byte tokenizer fixture matched the original-release checksum posted at https://github.com/meta-llama/llama/pull/87: 9e556afd44213b6bd1be2b850ebbbd98f5481437a8021afaf58ee7fb1818d347. No fixture was added to the publication."
+    ],
+    "example": "A cat sleeps 123: GPT-1 [246,3387,18157,39,11768], GPT-2 [32,3797,44263,17031], LLaMA [319,6635,12844,8961,29871,29896,29906,29941]. OpenAI GPT-2 encoder and r50k_base agreed; GPT-2 and LLaMA round-tripped the exact string. GPT-1 used the pinned original normalization, BPE and vocabulary; the English token boundaries for this ASCII example were confirmed using the current spaCy English tokenizer, not the historical English model. No GPT-3 checkpoint run.",
+    "asset": "Original Jay Alammar Token Embeddings (wte), CC BY-NC-SA 4.0. Existing curated PNG compared byte-for-byte with the author-hosted image. Corrected the registry's previously incorrect attribution to the GPT-3 paper. SHA-256 c356d842c1c04784f35afacf0090511d687c8f52f9c9548338a30115dc646d89.",
+    "verification": "Local build: 2027 pages; 738 publication tests and 234 built-output tests passed; topic-index, curated asset registry and seven Alammar-original fixture checks passed; zero broken internal routes, fragments or files.",
+    "reader": "In Chrome at 375 and 1280 CSS pixels, verified both index paths, all table rows without horizontal scroll, and the uncropped original in the reader and in the zoom viewer. The English path marks the Russian chapter as fallback.",
+    "release": "Local changes only. No commit, push or deploy."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "before_sha256": "44f12b9a7f375b0eef7259a724526360ad5394b463e467914943ed0c1d2364a5",
+      "after_sha256": "fac6a35661056754fc7c22a4f4dde9f26e07683c8bd505a5a4265d13b522ebf6",
+      "changes": [
+        {
+          "old": "  - label: От GPT-1 к LLaMA — сравнение декодеров\n    label_en: GPT-1 to LLaMA — decoder comparison\n    anchor: gpt-llama-comparison",
+          "new": "  - label: От GPT-1 к LLaMA — сравнение декодеров\n    label_en: GPT-1 to LLaMA — decoder comparison\n    anchor: gpt-llama-comparison\n  - label: Токенизация и размер окна от GPT-1 до LLaMA\n    label_en: Tokenization and context length from GPT-1 to LLaMA\n    anchor: gpt-llama-tokenization"
+        },
+        {
+          "old": "Во всех четырёх поколениях базовая модель получает последовательность\nтокенов и предсказывает следующий. Если подать ей `a cat`, позиция\n`cat` может прочитать себя и `a`, а её выход даёт оценки для продолжения,\nнапример ` sleeps`. У GPT-1, GPT-2, GPT-3 и LLaMA этот выход вычисляется\nпо-разному, но смысл его остаётся прежним. Менялось и то, как этим\nвыходом пользовались: в опытах GPT-1 над декодером обучали отдельную\nголову под задачу, а в GPT-2 и GPT-3 ответ искали в словаре самой модели.",
+          "new": "Во всех четырёх поколениях базовая модель получает последовательность\nтокенов и предсказывает следующий. Если подать ей `a cat`, модель\nсчитает вероятности продолжений по состоянию последней позиции,\nкоторая уже учитывает оба слова. В GPT-2 слово `sleeps` с пробелом\nможно дописать одним токеном, а в LLaMA оно разбито на два.\nМенялось и то, как пользовались выходом модели: в основных опытах GPT-1\nнад декодером обучали отдельную голову под задачу, а в GPT-2 и GPT-3\nответ искали в словаре самой модели."
+        },
+        {
+          "old": "Окно предобучения осталось 2048 токенов, как у GPT-3.\n\n### Размер модели и объём предобучения",
+          "new": "Окно предобучения осталось 2048 токенов, как у GPT-3.\n\n<a id=\"gpt-llama-tokenization\"></a>\n\n### Сколько позиций занимает одна и та же строка\n\nВозьмём `A cat sleeps 123`. В выпущенном коде GPT-1 подготовка текста\nубирает различие между `A` и `a`: после предварительного разбиения\nслова переводятся в нижний регистр, а BPE работает внутри них.\n`</w>` отмечает конец слова. GPT-2 начинает с байтов UTF-8.\nРегистр и пробелы сохраняются, а начальный пробел может войти\nв тот же токен, что и следующие буквы или цифры. GPT-3 сохранила\nобратимый токенизатор GPT-2. В первой LLaMA используется BPE из\nSentencePiece с отдельным токеном для каждой цифры.\nСм. [код GPT-1](https://github.com/openai/finetune-transformer-lm/blob/a69b5c43b0452462890bca8ff92fb75dee9290cf/text_utils.py),\n[GPT-2, §2.2](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=4),\n[GPT-3, §2.1](https://arxiv.org/html/2005.14165v4#S2.SS1)\nи [LLaMA, §2.1](https://arxiv.org/html/2302.13971v1#S2.SS1).\n\n| Токенизатор | Фрагменты для `A cat sleeps 123` | Позиций без служебных токенов |\n| --- | --- | ---: |\n| GPT-1 | `a</w>` · `cat</w>` · `sleeps</w>` · `1` · `23</w>` | 5 |\n| GPT-2 / GPT-3 | `A` · `␠cat` · `␠sleeps` · `␠123` | 4 |\n| LLaMA v1 | `▁A` · `▁cat` · `▁sle` · `eps` · `▁` · `1` · `2` · `3` | 8 |\n\nВ строке GPT-2 знак `␠` показывает настоящий пробел внутри токена.\nВ строке LLaMA показаны записи из словаря SentencePiece:\n`▁` обозначает пробел, а перед первым словом кодировщик добавляет\nслужебный маркер начала слова, который при обратном преобразовании\nне превращается в лишний пробел. Это не токен BOS: если отдельно\nдобавить BOS, он займёт ещё одну позицию.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt2-token-embeddings-wte-2.png|Токенная таблица GPT-2: 50 257 строк словаря и ширина вектора 768, 1024, 1280 или 1600]]\n\n*Jay Alammar, [The Illustrated GPT-2](https://jalammar.github.io/illustrated-gpt2/),\n[исходный рисунок Token Embeddings (wte)](https://jalammar.github.io/images/gpt2/gpt2-token-embeddings-wte-2.png),\n[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/),\nбез изменений. Слова справа подписаны для примера: по их положению\nна схеме нельзя прочитать настоящие ID.*\n\nВ GPT-2 фрагмент `␠cat` имеет ID 3797. Из таблицы на рисунке\nвыбирается строка 3797, а в малой GPT-2 в ней 768 координат.\nВ LLaMA `▁cat` имеет ID 6635, и у 7B соответствующая строка\nуже шириной 4096. У двух моделей свои словари и веса, поэтому\nподменить один токенизатор другим при тех же весах нельзя.\n\nОкно на 2048 позиций ограничивает число токенов после кодирования\nвсего запроса. В GPT-3 число `123` вместе с пробелом заняло одну\nпозицию; у LLaMA тот же хвост занял четыре. Это свойство данного\nпримера, не оценка вместимости окна на всём корпусе. Считая, сколько\nпримеров поместится в запрос, нужно токенизировать сам запрос вместе\nс разделителями и оставить место для ответа.\n\n### Размер модели и объём предобучения"
+        },
+        {
+          "old": "LLaMA предобучают предсказывать следующий токен по предыдущим.\nТокенизатор — BPE из SentencePiece, с разбиением чисел на отдельные\nцифры и byte fallback для неизвестных UTF-8-символов.\nЭто не Unigram только потому, что выбран инструмент SentencePiece.\nОбщий с Llama 2 словарь содержит 32K токенов; это подтверждено",
+          "new": "LLaMA предобучают предсказывать следующий токен по предыдущим.\nПомимо [[#gpt-llama-tokenization|разбиения чисел на отдельные цифры]],\nв BPE-токенизаторе предусмотрено разбиение на байты UTF-8 для\nнеизвестных символов. Общий с Llama 2 словарь содержит 32 000 токенов;\nэто подтверждено"
+        },
+        {
+          "old": "| Токенизатор | Фрагменты для `A cat sleeps 123` | Позиций без служебных токенов |\n| --- | --- | ---: |\n| GPT-1 | `a</w>` · `cat</w>` · `sleeps</w>` · `1` · `23</w>` | 5 |\n| GPT-2 / GPT-3 | `A` · `␠cat` · `␠sleeps` · `␠123` | 4 |\n| LLaMA v1 | `▁A` · `▁cat` · `▁sle` · `eps` · `▁` · `1` · `2` · `3` | 8 |",
+          "new": "В таблице посчитаны только токены строки, без служебных.\n\n| Модель | Токенов | Фрагменты |\n| --- | ---: | --- |\n| GPT-1 | 5 | `a</w>` · `cat</w>` · `sleeps</w>` · `1` · `23</w>` |\n| GPT-2 / GPT-3 | 4 | `A` · `␠cat` · `␠sleeps` · `␠123` |\n| LLaMA v1 | 8 | `▁A` · `▁cat` · `▁sle` · `eps` · `▁` · `1` · `2` · `3` |"
+        },
+        {
+          "old": "В строке GPT-2 знак `␠` показывает настоящий пробел внутри токена.\nВ строке LLaMA показаны записи из словаря SentencePiece:\n`▁` обозначает пробел, а перед первым словом кодировщик добавляет\nслужебный маркер начала слова, который при обратном преобразовании\nне превращается в лишний пробел. Это не токен BOS: если отдельно\nдобавить BOS, он займёт ещё одну позицию.",
+          "new": "В строке GPT-2 знак `␠` показывает настоящий пробел внутри токена.\nВ строке LLaMA показаны записи из словаря SentencePiece:\n`▁` обозначает пробел. В начале строки кодировщик добавляет условный\nпробел, который при обратном преобразовании убирается.\nЭто не токен BOS: если отдельно\nдобавить BOS, он займёт ещё одну позицию."
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "3a1c0d43cd2e4b4200e7c6b123c38fd197b9f6d85b776288bb9a0bcbef4ed3b7",
+      "after_sha256": "3942b071d8c0fb3c11b2faa1e8983e6844b5af4cd0d8bc840123d46ad041fe10",
+      "changes": [
+        {
+          "old": "4. [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|LLaMA v1]]. Сравнение четырёх декодеров и разбор экспериментов с ответами без поиска. Сюда можно перейти сразу после GPT-3; T5 в основном курсе показывает отдельную ветвь с энкодером и декодером.",
+          "new": "4. [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|LLaMA v1]]. Сравнение четырёх декодеров и разбор экспериментов с ответами без поиска. Сюда можно перейти сразу после GPT-3; T5 в основном курсе показывает отдельную ветвь с энкодером и декодером.\n\n[[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-tokenization|Тот же текст в трёх токенизаторах]]: как менялись разбиение на токены и вместимость окна."
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "bb6c113d7fd6720ee3a946dcc9e3ff5e8e7b3b8f440031ab9fa29fe22ee80e8b",
+      "after_sha256": "40ca7548cb709f353ebf6f850bdd9b0f45005a72b43594595bc317fc8fd8dc37",
+      "changes": [
+        {
+          "old": "4. [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|LLaMA v1 (Russian)]]. A comparison of the four decoders, including how the papers evaluated closed-book question answering. This route goes directly from GPT-3 to LLaMA; T5 stays in the core course.",
+          "new": "4. [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|LLaMA v1 (Russian)]]. A comparison of the four decoders, including how the papers evaluated closed-book question answering. This route goes directly from GPT-3 to LLaMA; T5 stays in the core course.\n\n[[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-tokenization|One string, three tokenizers (Russian)]]: how token boundaries and usable context changed across the four models."
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "6f4e68b77544dab18fa7f48c614d6937c0ccba7862c400cbf5de59aa1df5848d",
+      "after_sha256": "eaaab1afdd6f437b5803ee314128c20efade54e2950f483d485aacee8b636009",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|От GPT-1 к LLaMA — сравнение декодеров]]\n  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#natural-questions-gpt-llama|Natural Questions — ответы без поиска от GPT-2 до LLaMA]]",
+          "new": "  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|От GPT-1 к LLaMA — сравнение декодеров]]\n  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-tokenization|Токенизация и размер окна от GPT-1 до LLaMA]]\n  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#natural-questions-gpt-llama|Natural Questions — ответы без поиска от GPT-2 до LLaMA]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "cd1d9959afffad2b92ec3bc8c10e30183100b7753afd6d6d2adf1289f8b2fdf1",
+      "after_sha256": "910141c0e3d59ab70adf35856e47ba12231bd0a1b2cc749539e60934cacf2124",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|GPT-1 to LLaMA — decoder comparison]]\n  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#natural-questions-gpt-llama|Natural Questions — closed-book QA from GPT-2 to LLaMA]]",
+          "new": "  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|GPT-1 to LLaMA — decoder comparison]]\n  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-tokenization|Tokenization and context length from GPT-1 to LLaMA]]\n  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#natural-questions-gpt-llama|Natural Questions — closed-book QA from GPT-2 to LLaMA]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "1e63982bd7f3782bd8d4386ac341b80bde1aa031b9b481833d2164e974b671ec",
+      "after_sha256": "a255b627e1d3533e494fb92d3186ca10995f3e99ab442e70625d8e2d9e829716",
+      "changes": [
+        {
+          "old": "  - id: curated-gpt-30-c356d842c1c0\n    asset: 00 Учебник/Assets/Figures/curated/gpt-30/gpt2-token-embeddings-wte-2.png\n    author: null\n    source_url: https://arxiv.org/abs/2005.14165\n    license: null\n    license_url: null\n    modifications: copied without modification from the local raw source for publication packaging\n    used_in:\n      - Concepts/Architectures/GPT-3.md\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/gpt-30/images/gpt2-token-embeddings-wte-2.png",
+          "new": "  - id: curated-gpt-30-c356d842c1c0\n    asset: 00 Учебник/Assets/Figures/curated/gpt-30/gpt2-token-embeddings-wte-2.png\n    sha256: c356d842c1c04784f35afacf0090511d687c8f52f9c9548338a30115dc646d89\n    title: \"The Illustrated GPT-2 — Token Embeddings (wte)\"\n    author: Jay Alammar\n    source_url: https://jalammar.github.io/illustrated-gpt2/\n    source_image_url: https://jalammar.github.io/images/gpt2/gpt2-token-embeddings-wte-2.png\n    source_page_snapshot: \"05 Источники/Originals/gpt2-2026-10-22/illustrated-gpt2.html\"\n    source_page_sha256: 4e74bc829c6d067038346fe92240c6f4f2eb42b58f28c966dfe6381bceb31dd0\n    license: CC BY-NC-SA 4.0\n    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/\n    license_evidence: \"05 Источники/Originals/gpt2-2026-10-22/illustrated-gpt2.html\"\n    license_evidence_sha256: 4e74bc829c6d067038346fe92240c6f4f2eb42b58f28c966dfe6381bceb31dd0\n    modifications: \"Byte-for-byte match to the upstream figure; no crop, relabeling, or redraw.\"\n    derivation: source-raster-copy\n    used_in:\n      - Concepts/Architectures/GPT-3.md\n      - \"00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\"\n    metadata_status: verified\n    provenance_confirmation: gpt2-source-snapshot\n    last_verified: 2026-11-09"
+        },
+        {
+          "old": "    title: \"The Illustrated GPT-2 — Token Embeddings (wte)\"\n    author: Jay Alammar\n    source_url: https://jalammar.github.io/illustrated-gpt2/\n    source_image_url: https://jalammar.github.io/images/gpt2/gpt2-token-embeddings-wte-2.png\n    source_page_snapshot: \"05 Источники/Originals/gpt2-2026-10-22/illustrated-gpt2.html\"",
+          "new": "    title: \"The Illustrated GPT-2 — Token Embeddings (wte)\"\n    author: Jay Alammar\n    source_url: https://jalammar.github.io/illustrated-gpt2/\n    source_image_url: https://jalammar.github.io/images/gpt2/gpt2-token-embeddings-wte-2.png\n    source_asset: \"05 Источники/Originals/gpt2-2026-10-22/gpt2-token-embeddings-wte-2.png\"\n    source_asset_sha256: c356d842c1c04784f35afacf0090511d687c8f52f9c9548338a30115dc646d89\n    source_page_snapshot: \"05 Источники/Originals/gpt2-2026-10-22/illustrated-gpt2.html\""
+        }
+      ]
+    },
+    {
+      "source": "publishing/tests/fixtures/legacy-unhashed-assets.json",
+      "before_sha256": "1aad3a6937d378efc7f7188cd00481bf125a4ac7006c228362d53c4538737ae3",
+      "after_sha256": "5ca91e982b9c5f71408e662ac2507b09982fd7bdc74d6404ea29bafc40eeebfc",
+      "changes": [
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/gemma/fig4.png\",\n    \"00 Учебник/Assets/Figures/curated/gpt-30/gpt2-token-embeddings-wte-2.png\",\n    \"00 Учебник/Assets/Figures/curated/gpt-30/self-attention-and-masked-self-attention.png\",",
+          "new": "    \"00 Учебник/Assets/Figures/curated/gemma/fig4.png\",\n    \"00 Учебник/Assets/Figures/curated/gpt-30/self-attention-and-masked-self-attention.png\","
+        }
+      ]
+    }
+  ]
+}

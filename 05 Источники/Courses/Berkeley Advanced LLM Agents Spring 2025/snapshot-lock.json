@@ -13,13 +13,13 @@
   "generated_audit": {
     "semantic_review_sha256": "4f3cdc494aa011875c2d978aeeba22dcaab4094643dc6fb8494a94d6e7bf7072",
     "audit_contract_sha256": "8b3a6f5d9e416b90f9681731a80d30fd069bc6e830a5053aa4acc7457fed4ba4",
-    "editorial_overlay_sha256": "89dddff5fda630727b0dec644b2c7d59d03e086620604af801ee794c4c5f3712",
-    "importer_sha256": "ddb05e2c7582a189f6ae38fa1c975045b3217f604ed17acc21f7af3344a6d2c8",
+    "editorial_overlay_sha256": "9ea19f6e563e2e226268a6410602a31563ffd1c620205827cf73c7e538fff6f3",
+    "importer_sha256": "c9cf67d8497aa09dbfee94088d18d6c4a1f32f30136ae9d5068aea82383f3fdc",
     "extractor_revision": "berkeley-advanced-llm-agents-semantic-audit-v2",
     "page_index_tool": "pdftotext -layout (Poppler 26.04.0)",
     "ledgers": {
       "source-manifest.yml": {
-        "sha256": "c80a5c28c2d92b76bf387963162b6f5a86d085aa56305d0a1d8d3cd511eeabaa",
+        "sha256": "793feaef318778526c73a8d3be4ec05d654219cf489fe509cbcd437a15c19c09",
         "records": 64
       },
       "source-units.yml": {
@@ -27,11 +27,11 @@
         "records": 212
       },
       "coverage.yml": {
-        "sha256": "129cb699353db9a8fa63cbd91efe43a1f704577e4f966864c6bc0bc73f2dfcc3",
+        "sha256": "82f5f630de741594dcdafe1aaa6a09834f76fbb95ddb439e2fef3f8197360550",
         "records": 212
       },
       "visuals.yml": {
-        "sha256": "b776150cf3d17c55a25442a4871da746ac3ad2b6e0446c9f476cd942dfc10f25",
+        "sha256": "8674b381c4771eb341374357fc32865fe9888bbfb93e7eb2f1b33317ac3536b8",
         "records": 161
       }
     }
@@ -54,8 +54,8 @@
     },
     {
       "path": "publishing/tools/import_berkeley_agents.py",
-      "bytes": 109460,
-      "sha256": "ddb05e2c7582a189f6ae38fa1c975045b3217f604ed17acc21f7af3344a6d2c8"
+      "bytes": 110817,
+      "sha256": "c9cf67d8497aa09dbfee94088d18d6c4a1f32f30136ae9d5068aea82383f3fdc"
     },
     {
       "path": "Lectures/meeting-01-intro.pdf",
@@ -124,8 +124,8 @@
     },
     {
       "path": "Lectures/meeting-06-slides.pages.txt",
-      "bytes": 74656,
-      "sha256": "f33fbfecc2142daebde14c4cc663b66015eb351670704a6fa1b1e1aaa5cfa910"
+      "bytes": 74325,
+      "sha256": "9f1199a38367d45cd1784c6ee7690f2bf5e40783e889485d3bd926d628310af4"
     },
     {
       "path": "Lectures/meeting-07-slides.pdf",
@@ -249,8 +249,8 @@
     },
     {
       "path": "Readings/meeting-05-reading-01.md",
-      "bytes": 853,
-      "sha256": "01cac231765cbcb71d02e8edffbb49699a4dd5a14c834a68d53e2b632f490f16"
+      "bytes": 1395,
+      "sha256": "9b6452de3aa7bf9b667f6b2297037b594488d5c885a00a9a14b0624c3c4ec926"
     },
     {
       "path": "Readings/meeting-05-reading-02.md",

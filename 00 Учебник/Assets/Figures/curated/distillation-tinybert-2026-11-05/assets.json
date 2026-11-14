@@ -1,0 +1,65 @@
+[
+  {
+    "id": "curated-tinybert-overview-3144c0d6af96",
+    "asset": "00 Учебник/Assets/Figures/curated/distillation-tinybert-2026-11-05/tinybert-overview.png",
+    "sha256": "3144c0d6af96614ffded2e4097b9d0b7af2743115598fe0d580c05347a00038b",
+    "dimensions_px": [
+      1229,
+      320
+    ],
+    "source_image_url": "https://raw.githubusercontent.com/huawei-noah/Pretrained-Language-Model/0598f02d7fc4eaa7b4cbc1e9d7ab18bc875c24f9/TinyBERT/tinybert_overview.png",
+    "commit": "0598f02d7fc4eaa7b4cbc1e9d7ab18bc875c24f9",
+    "source_figure": "Figure 1",
+    "title": "Figure 1 from TinyBERT",
+    "author": "Xiaoqi Jiao, Yichun Yin, Lifeng Shang, Xin Jiang, Xiao Chen, Linlin Li, Fang Wang and Qun Liu",
+    "source_url": "https://aclanthology.org/2020.findings-emnlp.372/",
+    "source_asset": "publishing/fixtures/tinybert-0598f02d/tinybert-overview.png",
+    "source_asset_sha256": "3144c0d6af96614ffded2e4097b9d0b7af2743115598fe0d580c05347a00038b",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "publishing/fixtures/tinybert-0598f02d/acl-copyright.html",
+    "license_evidence_sha256": "d27a4182ffd579b137abf42dab46c7cb836610a616196395dd66b60284b2c237",
+    "public_license_copy": "site/public/licenses/tinybert-figures-CC-BY-4.0.txt",
+    "license_scope": "The author-created illustration as published in ACL Findings 2020 is covered by the Anthology policy for ACL materials published in 2016 or later. The Apache-2.0 notices on implementation files are not the figure-reuse basis; this is not a license claim for the entire arXiv manuscript.",
+    "derivation": "source-raster-copy",
+    "modifications": "None: complete original PNG copied byte-for-byte; no crop, redraw, resize, translation, relabeling or recompression.",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-11-05",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md"
+    ]
+  },
+  {
+    "id": "curated-tinybert-layer-detail-c3022bd5d1fa",
+    "asset": "00 Учебник/Assets/Figures/curated/distillation-tinybert-2026-11-05/tinybert-layer-detail.png",
+    "sha256": "c3022bd5d1fad3c9d79cea56c4f99e4aa8f42c5d7a44d03b7e14c6eb1e932f33",
+    "dimensions_px": [
+      745,
+      820
+    ],
+    "source_image_url": "https://arxiv.org/html/1909.10351v5/transformer_layer_detail.png",
+    "source_figure": "Figure 2 layer-detail illustration",
+    "title": "Figure 2 layer-detail illustration from TinyBERT",
+    "author": "Xiaoqi Jiao, Yichun Yin, Lifeng Shang, Xin Jiang, Xiao Chen, Linlin Li, Fang Wang and Qun Liu",
+    "source_url": "https://aclanthology.org/2020.findings-emnlp.372/",
+    "source_asset": "publishing/fixtures/tinybert-0598f02d/tinybert-layer-detail.png",
+    "source_asset_sha256": "c3022bd5d1fad3c9d79cea56c4f99e4aa8f42c5d7a44d03b7e14c6eb1e932f33",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "publishing/fixtures/tinybert-0598f02d/acl-copyright.html",
+    "license_evidence_sha256": "d27a4182ffd579b137abf42dab46c7cb836610a616196395dd66b60284b2c237",
+    "public_license_copy": "site/public/licenses/tinybert-figures-CC-BY-4.0.txt",
+    "license_scope": "The author-created illustration as published in ACL Findings 2020 is covered by the Anthology policy for ACL materials published in 2016 or later. The Apache-2.0 notices on implementation files are not the figure-reuse basis; this is not a license claim for the entire arXiv manuscript.",
+    "derivation": "source-raster-copy",
+    "modifications": "None: complete original PNG copied byte-for-byte; no crop, redraw, resize, translation, relabeling or recompression.",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-11-05",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md"
+    ]
+  }
+]

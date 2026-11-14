@@ -4,32 +4,31 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "ce717410045dd566b798820440ef49db532c1204d6d0bed6b54cfec1247f6c8d"
-translation_reviewed: "2026-10-29"
+canonical_revision: "6c867e54c9af5e97ac099b56c573675db07c89e0676885e5a9b275dc8b1e73a3"
+translation_reviewed: "2026-11-13"
 translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md"
-last_updated: 2026-10-29
+last_updated: 2026-11-13
 primary_sources:
   - https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf
   - https://github.com/openai/gpt-2/tree/9b63575ef42771a015060c964af2c3da4cf7c8ab
   - https://jalammar.github.io/illustrated-gpt2/
+  - https://aclanthology.org/Q19-1016/
+  - https://aclanthology.org/P16-1144/
+  - https://arxiv.org/html/2005.14165v4#S3.SS6
 previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]"
 next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning]]"
 ---
 
 # GPT-2: zero-shot through language
 
-After `The cat sleeps. =`, a model might continue in English, write a
-translation, or reproduce part of a program. Preceding it with several
-English–French sentence pairs makes a French continuation a more
-specific task. GPT-2 studies which tasks can be performed this way
-while keeping language-model weights fixed.
-
-[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]]'s
-main results followed training of a head and all model parameters on
-task-specific labels. GPT-2 experiments instead return tokens or
-probability scores for supplied continuations. Translation, summaries,
-and answers use one vocabulary projection. Prefix preparation and
-interpretation of outputs are specified externally.
+In the [[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training#Textual entailment|GPT-1 example]],
+the task is to decide whether “An animal rests” follows from “A cat
+sleeps.” GPT-1 reads the final special token's state and gets three scores
+from a head trained on labeled pairs. GPT-2 experiments use the pretrained
+vocabulary output. A prefix can end with an unfinished answer, a sentence
+to translate, or a `TL;DR:` marker. For the same entailment task,
+[[#gpt2-relation-prefix|write each label as a possible continuation]]
+and compare its probability with those of the other two labels.
 
 The pre-training objective is unchanged:
 
@@ -50,6 +49,11 @@ GPT-2 retains causal self-attention, an FFN with GELU, learned positional
 representations, and tied input/output token weights. Context grows
 from 512 to 1024 tokens; the vocabulary contains 50,257 entries.
 Depth, width, and normalization placement change.
+
+The smallest GPT-2 still has 12 blocks, 12 heads, and width 768, like
+GPT-1. Its vocabulary and position table grow, and the block computes
+its operations in a different order. The larger GPT-2 variants also
+increase depth and width.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt2-sizes-hyperparameters-3.png]]
 
@@ -86,6 +90,8 @@ parameters. A separate $[d,V]$ output matrix must not be added again:
 it is the transposed token table. The other configurations give
 354,823,168; 774,030,080; and 1,557,611,200 parameters.
 
+<a id="gpt2-pre-norm"></a>
+
 ### Pre-norm and residual paths
 
 GPT-1 applied LayerNorm after residual addition. In GPT-2, each sublayer
@@ -100,6 +106,16 @@ A_\ell&=H_{\ell-1}+\operatorname{Attention}(\widehat H_{\ell-1}),\\
 H_\ell&=A_\ell+\operatorname{FFN}(\widehat A_\ell).
 \end{aligned}
 $$
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/norm-gating-2026-10-22/xiong-pre-post-norm.png|Xiong et al.: post-LN after addition on the left; pre-LN before attention and FFN on the right]]
+
+*Ruibin Xiong et al., [On Layer Normalization in the Transformer Architecture](https://proceedings.mlr.press/v119/xiong20b.html),
+[Figure 1](https://proceedings.mlr.press/v119/xiong20b/xiong20b.pdf#page=2),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Read both panels from bottom to top. In post-LN, LayerNorm follows
+the addition. In pre-LN, the residual stream bypasses LayerNorm,
+which instead precedes attention or the FFN. This is one block;
+the final norm of the stack is not shown.*
 
 Another LayerNorm follows the final block. Changing operation order
 also changes the direct derivative path: `x + sublayer(LN(x))`
@@ -132,6 +148,24 @@ This initialization belongs to the report's training description.
 Released `model.py` primarily defines the network for weight loading
 and generation; its default initializers do not by themselves reproduce
 the complete historical training recipe.
+
+### One query before and after moving LayerNorm
+
+Reuse the tokens `a cat sleeps` and the
+[[en/00 Textbook/05 Attention and Transformer/02 Self-Attention — Q, K, V#4. A numerical example by hand|projection matrices from the Q, K and V example]].
+Set positional additions to zero. With GPT-1's operation order,
+the query at `cat` is projected from $x=(0,1,0)$ and equals $(0,1)$.
+LayerNorm is applied later, after adding the attention output to $x$.
+
+With GPT-2's order, LayerNorm maps $x$ to
+$(-0.7071,1.4142,-0.7071)$ first, using unit scale, zero bias and
+$\epsilon=10^{-5}$. The same projection now produces
+$q_{\text{cat}}\approx(-1.4142,0.7071)$. The keys are also projected
+from normalized rows. After scaling by $1/\sqrt{2}$, the scores for
+`a` and `cat` are about $-1.4141$ and $1.7677$. The weight of `cat`
+changes from $0.6698$ to $0.9601$. The mask still excludes `sleeps`;
+the scores differ because the projections received different inputs.
+This calculation uses the same toy weights, not the trained models.
 
 ## WebText and byte-level BPE
 
@@ -497,9 +531,40 @@ cannot silently be reset to zero. The teaching code does not implement
 right padding, dropout, variable-length batched generation, or loading
 actual weights.
 
+<a id="gpt2-relation-prefix"></a>
+
+### From a classification head to a label in text
+
+Write the same pair as a prefix that ends just before the label. There
+is no `Extract` token and there are no completed demonstrations.
+
+~~~text
+Premise: A cat sleeps.
+Hypothesis: An animal rests.
+Relation:
+~~~
+
+The final position scores all 50,257 vocabulary entries. For a closed
+set of three labels, specify their spelling and compare the probabilities
+of the complete strings. After this prefix, GPT-2 tokenizes
+` entailment` as two tokens (39793, 434), and ` contradiction` and
+` neutral` as one each (25741 and 8500). To score the first label,
+feed 39793 and obtain the probability of 434 conditional on it.
+
+Suppose the first fragment of ` entailment` has probability 0.4 and the
+second has conditional probability 0.5. The whole label scores
+$0.4\cdot0.5=0.2$. If ` neutral` has probability 0.25 and
+` contradiction` 0.1, full-string scoring selects ` neutral` even though
+` entailment` had the most likely initial fragment among the three.
+These numbers illustrate scoring, not a measured GPT-2 entailment
+result. The [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-relation-shots|GPT-3 chapter]]
+adds labeled pairs to this prompt without changing the scoring rule.
+
+<a id="gpt2-translation-prefix"></a>
+
 ### Translation and answers through prefixes
 
-Report Section 3.7 specifies translation using pairs
+[Section 3.7 of the report](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=6) specifies translation using pairs
 `english sentence = french sentence` followed by an unfinished pair.
 This teaching prompt follows that format:
 
@@ -509,27 +574,106 @@ The dog runs. = Le chien court.
 The bird sings. =
 ```
 
-Two complete pairs establish direction and formatting. The third line
-provides a new source. Translation is generated after `=`;
-`L'oiseau chante.` would be the intended continuation here, not a
-measured GPT-2 output. The authors use greedy decoding and retain
-the first sentence.
+In the first two lines, English is on the left of `=` and French is
+on the right. The right side of the third line is empty. The
+[GPT-2 tokenizer](https://github.com/openai/gpt-2/blob/9b63575ef42771a015060c964af2c3da4cf7c8ab/src/encoder.py)
+encodes all three lines as 27 tokens, including two newlines. The last
+token, ` =` (ID 796), sits at zero-based position 26. Its output gives
+the distribution for the first translation token. If it selects
+` L` (ID 406), the next pass takes that token as input and scores,
+among other tokens, the apostrophe (ID 6). The string
+` L'oiseau chante.` takes seven tokens: `[406, 6, 25678, 559, 442, 12427, 13]`.
+These are the token IDs of the intended translation, not a GPT-2
+generation. In the experiment, the authors chose each token greedily
+and kept the first generated sentence.
+
+Translation pairs also occur in the training text. In
+[Table 1](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=3), the authors show WebText passages where
+a French quotation is followed by its English translation. During
+pre-training, the model predicts words of that translation from the
+preceding text, including the quotation. GPT-2 was not fine-tuned on
+a separate parallel corpus, but WebText did contain translations.
+The authors estimated its French text at about 10 MB. On WMT-14, GPT-2
+scored 5 BLEU from English to French and 11.5 in the reverse direction.
+That is consistent with the predominance of English in WebText,
+but comparing directions does not isolate the effect of the corpus mix.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-coqa-2026-11-11/liu22-figure3-translation-prefix.png|Three pairs of English and German expressions form the context. The translation after mountain == is blank on the fourth line.]]
+
+*Jiachang Liu et al., [What Makes Good In-Context Examples for GPT-3?, Figure 3, p. 111](https://aclanthology.org/2022.deelio-1.10.pdf#page=12),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Original diagram from Appendix A.*
+
+In Liu et al.'s diagram, the first three lines are already in the prompt.
+The model continues only the fourth, after `mountain ==`; the dots mark
+the blank and are not input. This illustration translates into German
+and stops at a newline. It shows a GPT-3 prompt format, not the result
+of GPT-2's French translation experiment.
 
 In the report, zero-shot transfer means no training of weights on the
 downstream task. Translation and Natural Questions nevertheless use
 demonstrations inside the prompt. In modern terminology, this teaching
 prompt is two-shot. Demonstration count and gradient fine-tuning must
 be tracked separately.
-
-For CoQA, the prefix includes the document, previous dialogue questions
-and answers, the new question, and `A:`. Subsequent tokens form the
-answer. For a “Why?” question, history helps identify which event is
-being discussed. The marker supports the dialogue format; no separate
-span-start/end extraction head is added.
+The [[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning#Translation: direction and parallel examples|GPT-3 chapter]]
+shows the same sentence with zero, one, and two completed pairs; the
+paper compares zero, one, and 64 pairs.
 
 Summarization appends `TL;DR:` to an article. The reported experiment
 generates 100 tokens with top-k at $k=2$ and takes the first three
 sentences. Results therefore depend on the marker, decoding, and truncation.
+
+<a id="gpt2-gpt3-coqa"></a>
+
+### CoQA: dialogue history and demonstrations
+
+In [CoQA's first example](https://arxiv.org/html/1808.07042v2#S1.F1), three
+people are coming to Jessica's birthday. The questions establish whether
+she expects visitors and how many, then the fifth question asks only
+`Who?` The earlier turns tell you who to look for; the passage supplies
+the visitors' names.
+
+To ask the fifth question, give the model the passage and the four
+previous questions with their reference answers. End the prompt with
+`Q: Who?` and a blank `A:`. The fifth reference answer and the evidence
+spans marked by CoQA's annotators are withheld. In the
+[GPT-2 experiment, §3.5](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=6),
+the model decoded greedily after `A:`. For the earlier “how many” question,
+it could produce `Three` even though the word does not appear in the passage.
+The answer need not be a contiguous span.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-coqa-2026-11-11/coqa-figure4-conversation-flow.png|Ten columns show the first ten turns. Early answers draw more evidence from the beginning of the passage; later answers draw more from the end. Bands show transitions between parts of the passage.]]
+
+*Siva Reddy, Danqi Chen, and Christopher D. Manning,
+[CoQA: A Conversational Question Answering Challenge, Figure 4](https://aclanthology.org/Q19-1016.pdf#page=8).
+Full plot from the authors' copy of the paper, not redrawn;
+[CC BY 4.0](https://transacl.org/ojs/index.php/tacl/article/view/1572).*
+
+Each column shows ten equal parts of the passage in order, from top to
+bottom. The thick band linking the top blocks of columns one and two
+means both early questions often use evidence from the beginning.
+By turn ten, the bottom blocks are taller: answers draw on the end
+more often. The plot summarizes spans selected by annotators. It does
+not show GPT's attention weights.
+
+In the [GPT-3 experiment](https://arxiv.org/html/2005.14165v4#A7.F18),
+earlier turns about the same passage remain part of the input even in
+zero-shot. One-shot prepends a completed example about a different
+passage, and few-shot uses five such examples on CoQA. The weights stay
+fixed. These are the word-overlap F1 scores on the development set
+from [GPT-3 Table H.1](https://arxiv.org/html/2005.14165v4#A8.T1):
+
+| Model | No separate examples | 1 example | 5 examples |
+| --- | ---: | ---: | ---: |
+| GPT-2 1.5B | 55 | — | — |
+| GPT-3 350M | 55.0 | 52.1 | 52.0 |
+| GPT-3 175B | 81.5 | 84.0 | 85.0 |
+
+Five examples add 3.5 F1 points for GPT-3 175B over its own zero-shot
+score but cost GPT-3 350M three points. The difference between the
+generations cannot be attributed to parameter count: the training data,
+window, and prompt format also differ. The
+[[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-relation-shots|worked classification prompt]]
+shows exactly which lines a demonstration adds.
 
 ### Selecting a candidate by text probability
 
@@ -552,6 +696,8 @@ remains causal.
 Unlike GPT-1's classifier, the language model itself supplies the score.
 CBT's rule must not silently be replaced by length averaging or transferred
 to another task without specifying the protocol.
+The [[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning#gpt-llama-completion-scoring|comparison with GPT-3 and LLaMA]]
+shows how normalizing by tokens or by characters can select different endings.
 
 Winograd Schema compares full and partial scoring from
 [Trinh and Le, Section 3](https://arxiv.org/abs/1806.02847v2).
@@ -597,12 +743,6 @@ Numbers and protocols come from Sections 3.2–3.8 and Tables 3–4.
 Rows use different metrics and datasets; they do not form one
 general-intelligence scale.
 
-In LAMBADA, the model often predicts a grammatical continuation that
-does not fit as the sentence's final word. An additional filter raises
-accuracy from 52.66% to 63.24%. Restricting answers to words in context,
-useful for an earlier system, hurts GPT-2: 19% of correct answers do
-not occur in context.
-
 The summarization table shows the method's limits: ROUGE-AVG is 21.40
 with `TL;DR:`, 15.03 without it, 20.98 for Random-3, and 31.55 for
 Lede-3. The model responds to a task marker but still trails simply
@@ -614,6 +754,60 @@ Natural Questions' overall 4.1% exact match differs from 63.1% on the
 a small confident subset does not give 63.1% over the full dataset.
 Table 5 includes confident wrong answers. String probability and
 factual correctness remain different quantities.
+
+<a id="gpt2-gpt3-lambada"></a>
+
+### LAMBADA: choosing the last word
+
+LAMBADA removes the last word from a passage. In building the dataset,
+[Paperno et al., §3.1](https://aclanthology.org/P16-1144.pdf#page=4)
+kept a passage if two readers recovered the word from the full passage
+and none of ten other readers guessed it from the final sentence alone.
+“In the morning he rode away on his…” leaves open what Anton rode.
+An earlier sentence mentioning his bicycle gives the reader a clue.
+A plausible answer still counts as wrong if it does not match the
+original word.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-lambada-2026-11-13/paperno-lambada-figure2a.png|Two stacked bars. The light segment shows that the target word occurred earlier in over 80% of LAMBADA passages and under 15% of passages sampled before human filtering.]]
+
+*Denis Paperno et al., [The LAMBADA dataset, Figure 2(a)](https://aclanthology.org/P16-1144.pdf#page=6),
+[CC BY 4.0](https://aclanthology.org/faq/copyright/). Original panel, not redrawn.*
+
+Compare the light portions of the bars. The target word occurs
+earlier in over 80% of LAMBADA passages. The bar labeled `input`
+represents 5,000 randomly sampled passages shown to readers before
+filtering on their answers. There, the share is under 15%. The figure
+shows how filtering changed the dataset, not how accurately a model
+can find the right word among the words it has read. If the answer
+does not appear earlier, a copy-only rule rules it out entirely.
+In the GPT-2 report this affected 19% of answers, and restricting
+candidates to words in the passage lowered accuracy.
+
+There is a separate problem: the language model does not know that
+the next word must end the sentence. Give it this prefix:
+
+~~~text
+Anton left his bicycle outside. In the morning he rode away on his
+~~~
+
+Suppose `very` has probability 0.50, `bicycle` 0.30, and `scooter` 0.20.
+Unrestricted selection can pick `very` and go on to write `very old bicycle`.
+In LAMBADA, `very` is wrong: the missing word was `bicycle`. If the
+selection rule excluded `very`, `bicycle` would win without changing
+the scores the model produced. These numbers are for illustration,
+not a GPT-2 run, and the example does not reproduce OpenAI's list.
+
+In the [GPT-2 report, §3.3](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=5),
+the authors exclude stop words as an approximation to the final-word
+constraint. Accuracy rises from 52.66% to 63.24%. That filter does
+not check whether every remaining word can end a sentence. The
+[[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning#lambada-gpt3-fill-blank|GPT-3 experiment with demonstrations]]
+instead changes the input: the same passage can be written with a blank,
+with a completed blank-and-answer pair above it. GPT-3 175B scores 76.2%
+on plain continuation and 86.4% with 15 fill-in-the-blank examples.
+Between those two results, both the format and the number of examples
+change. Compared with GPT-2's 63.24%, the model and answer-selection
+procedure also differ.
 
 ## Generation, memorization, and model release
 
@@ -663,8 +857,13 @@ GPT-2 already uses demonstrations in some experiments, but does not
 systematically compare zero-, one-, and few-shot settings across sizes.
 [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3]]
 makes that comparison an explicit part of its experimental design.
+[[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning#Translation: direction and parallel examples|Compare the three conditions on the same translation task]].
 
 ## Sources and further reading
+
+The [[06 Практика/20 Собрать языковую модель с нуля#nanogpt-worked-reference|worked nanoGPT example]]
+shows the training path for a similar model. The original nanoGPT
+sampler recomputes a cropped context without the OpenAI K/V cache.
 
 - [Radford et al., Language Models are Unsupervised Multitask Learners](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf), 2019. Section 2: data, representation, and model; Section 3: task protocols; Section 4: data overlap.
 - [OpenAI GPT-2, commit 9b63575e](https://github.com/openai/gpt-2/tree/9b63575ef42771a015060c964af2c3da4cf7c8ab). `model.py`: pre-norm, positions, cache; `encoder.py`: byte-level BPE; `sample.py`: generation; README and model card: corrected sizes and limitations.

@@ -37,7 +37,7 @@ def main():
     torch.set_num_threads(1)
     text = CHAPTER.read_text()
     blocks = re.findall(r"^```python\n(.*?)^```\s*$", text, re.M | re.S)
-    assert len(blocks) == 8, "execute all actual chapter fences"
+    assert len(blocks) == 9, "execute all actual chapter fences"
     ns, stdout = {}, io.StringIO()
     with contextlib.redirect_stdout(stdout):
         for i, code in enumerate(blocks):
@@ -187,6 +187,86 @@ def main():
         assert parameter.grad is None and not parameter.requires_grad
         assert torch.equal(parameter, ns["gkd_teacher_before"][name])
 
+    # TinyBERT: actual chapter scores, then the pinned upstream loss branch.
+    assert ns["tinybert_same_probabilities"]
+    assert ns["tinybert_score_loss"].item() == 17.
+    assert ns["tinybert_padded_loss"].item() == 4.25
+    assert ns["tinybert_teacher_scores"].grad is None
+    torch.testing.assert_close(ns["tinybert_student_scores"].grad,
+        torch.tensor([[[[2.5, 2.5], [-1.5, -1.5]]]], dtype=torch.float64))
+    tinybert_source = ROOT / "publishing/fixtures/tinybert-0598f02d/task_distill.py"
+    tinybert_bytes = tinybert_source.read_bytes()
+    assert hashlib.sha256(tinybert_bytes).hexdigest() == "21c7b70d270cefb50ec05f116554f7af6df3df516d344414c5caafd3142618a3"
+    tinybert_tree = ast.parse(tinybert_bytes)
+    branch = next(node for node in ast.walk(tinybert_tree)
+        if isinstance(node, ast.If) and isinstance(node.test, ast.UnaryOp)
+        and isinstance(node.test.op, ast.Not)
+        and isinstance(node.test.operand, ast.Attribute)
+        and node.test.operand.attr == "pred_distill"
+        and any(isinstance(s, ast.Assign) and any(
+            isinstance(t, ast.Name) and t.id == "teacher_layer_num" for t in s.targets)
+                for s in node.body))
+    teacher_atts = [ns["tinybert_teacher_scores"].detach()+i for i in range(12)]
+    teacher_reps = [torch.full((1, 2, 3), float(i), dtype=torch.float64) for i in range(13)]
+    def original_tinybert_branch(padded=False):
+        student_atts = [(teacher_atts[i]+ns["tinybert_row_offsets"]).requires_grad_()
+                        for i in (2, 5, 8, 11)]
+        frozen_atts = teacher_atts
+        if padded:
+            student_atts = [F.pad(a, (0, 2, 0, 2), value=-10000.) for a in student_atts]
+            frozen_atts = [F.pad(a, (0, 2, 0, 2), value=-10000.) for a in teacher_atts]
+        fixture = dict(torch=torch, device=torch.device("cpu"), loss_mse=torch.nn.MSELoss(),
+            teacher_atts=frozen_atts, student_atts=student_atts,
+            teacher_reps=teacher_reps,
+            student_reps=[teacher_reps[i].clone() for i in (0, 3, 6, 9, 12)],
+            att_loss=0., rep_loss=0., tr_att_loss=0., tr_rep_loss=0.)
+        module = ast.fix_missing_locations(ast.Module(body=copy.deepcopy(branch.body), type_ignores=[]))
+        exec(compile(module, str(tinybert_source)+":intermediate-loss-only", "exec"), fixture)
+        assert fixture["rep_loss"].item() == 0.
+        assert fixture["loss"].item() == (17. if padded else 68.)
+        if not padded:
+            assert all(torch.equal(x, teacher_atts[i]) for x, i in
+                       zip(fixture["new_teacher_atts"], (2, 5, 8, 11)))
+        gradients = torch.autograd.grad(fixture["loss"], student_atts)
+        expected_gradient = torch.tensor([[[[2.5, 2.5], [-1.5, -1.5]]]], dtype=torch.float64)
+        if padded:
+            expected_gradient = F.pad(expected_gradient/4, (0, 2, 0, 2))
+        for gradient in gradients:
+            torch.testing.assert_close(gradient, expected_gradient)
+        assert all(torch.equal(x, teacher_reps[i]) for x, i in
+                   zip(fixture["new_teacher_reps"], (0, 3, 6, 9, 12)))
+        return fixture
+    original_tinybert_branch()
+    original_tinybert_branch(padded=True)
+    helper = copy.deepcopy(next(node for node in ast.walk(tinybert_tree)
+        if isinstance(node, ast.FunctionDef) and node.name == "soft_cross_entropy"))
+    helper.decorator_list = []
+    scope = {"torch": torch}
+    exec(compile(ast.fix_missing_locations(ast.Module(body=[helper], type_ignores=[])),
+                 str(tinybert_source)+":soft-cross-entropy-only", "exec"), scope)
+    for classes in (2, 3, 7):
+        scores = torch.arange(float(classes), dtype=torch.float64).reshape(1, -1).requires_grad_()
+        target_scores = scores.detach().flip(-1)
+        standard = -(target_scores.softmax(-1)*scores.log_softmax(-1)).sum(-1).mean()
+        actual = scope["soft_cross_entropy"](scores, target_scores)
+        torch.testing.assert_close(actual, standard/classes)
+        actual_grad, = torch.autograd.grad(actual, scores, retain_graph=True)
+        standard_grad, = torch.autograd.grad(standard, scores)
+        torch.testing.assert_close(actual_grad, standard_grad/classes)
+    model_source = ROOT / "publishing/fixtures/tinybert-0598f02d/modeling.py"
+    model_bytes = model_source.read_bytes()
+    assert hashlib.sha256(model_bytes).hexdigest() == "16a7947c21bb72b51458b54953227fa4a404fbc849d8b9f6b158359456307bb2"
+    model_tree = ast.parse(model_bytes)
+    student_class = next(n for n in model_tree.body if isinstance(n, ast.ClassDef)
+                         and n.name == "TinyBertForSequenceClassification")
+    projection = [n for n in ast.walk(student_class) if isinstance(n, ast.Assign)
+                  and any(isinstance(t, ast.Attribute) and t.attr == "fit_dense" for t in n.targets)]
+    assert len(projection) == 1
+    assert isinstance(projection[0].value, ast.Call)
+    assert projection[0].value.func.attr == "Linear"
+    assert not any(k.arg == "bias" for k in projection[0].value.keywords)
+    assert torch.nn.Linear(2, 3).bias is not None
+
     assert sum((395285, 211129, 10124, 10395, 177812)) == 804745
     assert math.isclose(1-(1-.9)**4, .9999)
     assert math.isclose(1-(1-.1)**4, .3439)
@@ -196,7 +276,9 @@ def main():
 
     print(json.dumps({"python_fences": len(blocks), "device": "cpu", "torch": torch.__version__,
         "transformers": importlib.metadata.version("transformers"), "temperature_reductions": checks,
-        "upstream_jsd_beta_cases": 5, "example_stdout": stdout.getvalue().splitlines(),
+        "upstream_jsd_beta_cases": 5, "tinybert_layer_pairs": 4,
+        "tinybert_source_loss_cases": 2, "tinybert_class_mean_cases": 3,
+        "example_stdout": stdout.getvalue().splitlines(),
         "chapter_sha256": hashlib.sha256(text.encode()).hexdigest()}, indent=2))
     print("PASS actual distillation fences, math, isolated upstream loss and tiny Llama step; not a full training run")
 

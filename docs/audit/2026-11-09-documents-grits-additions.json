@@ -1,0 +1,141 @@
+{
+  "date": "2026-11-09",
+  "scope": "Read both document-understanding editions. Explain table alignment and merged-header structure with two original GriTS figures and a worked score. Expose six same-language subject links.",
+  "files": [
+    {
+      "source": "00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-20\nlast_verified: 2026-10-20\nprimary_sources:",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-10-20\nreference_terms:\n  - label: LayoutLMv3 — текст, координаты и изображение\n    label_en: LayoutLMv3 — text, boxes, and image patches\n    anchor: doc-layoutlm\n  - label: Donut — извлечение полей без внешнего OCR\n    label_en: Donut — field extraction without external OCR\n    anchor: doc-donut\n  - label: Visual grounding — обратное преобразование координат\n    label_en: Visual grounding — mapping coordinates back to the source\n    anchor: doc-coordinates\n  - label: DocVQA — ANLS и точность полей\n    label_en: DocVQA — ANLS and exact field values\n    anchor: doc-anls\n  - label: GriTS и TEDS — оценка структуры таблиц\n    label_en: GriTS and TEDS — evaluating table structure\n    anchor: doc-grits\n  - label: Документы — проверка ответа с изменением изображения\n    label_en: Document understanding — testing answers with image interventions\n    anchor: doc-interventions\nprimary_sources:"
+        },
+        {
+          "old": "  - https://www.docvqa.org/challenges/2020",
+          "new": "  - https://www.docvqa.org/challenges/2020\n  - https://arxiv.org/abs/2203.12555v3"
+        },
+        {
+          "old": "### LayoutLMv3: текст, расположение и изображение",
+          "new": "<a id=\"doc-layoutlm\"></a>\n\n### LayoutLMv3: текст, расположение и изображение"
+        },
+        {
+          "old": "### Donut: от изображения к последовательности полей",
+          "new": "<a id=\"doc-donut\"></a>\n\n### Donut: от изображения к последовательности полей"
+        },
+        {
+          "old": "## 7. Возврат координат в оригинал",
+          "new": "<a id=\"doc-coordinates\"></a>\n\n## 7. Возврат координат в оригинал"
+        },
+        {
+          "old": "### ANLS для текстового ответа",
+          "new": "<a id=\"doc-anls\"></a>\n\n### ANLS для текстового ответа"
+        },
+        {
+          "old": "Для таблиц отдельно оценивают текст ячеек и структуру, включая объединения и соответствие заголовкам. Для многостраничного QA проверяют выбранную страницу, текст ответа и его локализацию. Результаты разбивают по языку, размеру текста, числу колонок, повороту, качеству скана и наличию рукописных фрагментов: среднее по крупным печатным полям может скрыть провал на мелких реквизитах.\n\n## 9. Диагностические вмешательства",
+          "new": "Для многостраничного QA проверяют выбранную страницу, текст ответа и его локализацию. Результаты разбивают по языку, размеру текста, числу колонок, повороту, качеству скана и наличию рукописных фрагментов: среднее по крупным печатным полям может скрыть провал на мелких реквизитах.\n\n<a id=\"doc-grits\"></a>\n\n### Как оценить восстановление таблицы: GriTS и TEDS\n\nВернёмся к заголовку «2025» над столбцами «Выручка» и «Расходы». В эталоне\nпервая строка содержит одну ячейку с `colspan=2`. Распознаватель таблицы\nможет вернуть две ячейки: «2025» над выручкой и пустую над расходами.\nЕсли выписать только видимый текст, в обоих случаях получится\n«2025 Выручка Расходы». Ошибка возникает при чтении таблицы: из предсказания\nуже не следует, что «Расходы» тоже относятся к 2025 году.\n\n[GriTS, §3](https://arxiv.org/html/2203.12555v3#S3) сначала сопоставляет\nстроки и столбцы двух сеток, сохраняя их порядок. Лишнюю строку можно\nпропустить, чтобы она не сдвинула все последующие соответствия. Пропуск\nвсё равно снижает оценку: в знаменателе остаются размеры обеих исходных\nсеток. На рисунке у $A$ пропущена третья строка, у $B$ — третий и\nчетвёртый столбцы. Из оставшихся частей получаются две сетки $4\\times3$.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/documents-2026-11-09/grits-figure1-alignment.png|В матрице A пропущена строка, в B два столбца; выделенные клетки сопоставлены в двух сетках четыре на три]]\n\n*Brandon Smock, Rohith Pesala и Robin Abraham,\n[GriTS, рис. 1, с. 2](https://arxiv.org/pdf/2203.12555v3#page=2),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nИсходный рисунок без изменений.*\n\nБаллы сопоставленных позиций зависят от того, что сравнивается.\nВ $\\mathrm{GriTS}_{\\mathrm{Top}}$ в каждой позиции хранится прямоугольник\nвсей занимающей её ячейки, в единицах сетки и относительно этой позиции.\nУ обычной ячейки он равен $[0,0,1,1]$. В $\\mathrm{GriTS}_{\\mathrm{Loc}}$\nсравниваются рамки в координатах документа. В $\\mathrm{GriTS}_{\\mathrm{Con}}$\nсравнивается текст; текст объединённой ячейки повторяется во всех\nзанятых ею позициях. Поэтому балл за содержимое зависит и от структуры.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/documents-2026-11-09/grits-figure2-representations.png|Таблица PubTables-1M с объединёнными заголовками и её матрицы текста, относительных размеров ячеек и рамок]]\n\n*Smock, Pesala и Abraham, [GriTS, рис. 2, с. 8](https://arxiv.org/pdf/2203.12555v3#page=8),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nЗаголовок Sequence of Administration занимает три столбца: в (b) его\nтекст повторяется, в (c) рамка записана относительно каждого столбца,\nа в (d) одна и та же рамка записана в координатах документа.*\n\nДля примера с 2025 годом возьмём сетку $2\\times2$: сверху год,\nснизу два названия столбцов. В верхнем ряду эталона относительные\nрамки равны $[0,0,2,1]$ слева и $[-1,0,1,1]$ справа. Минус единица\nозначает, что из правой позиции объединённая ячейка тянется на один\nстолбец влево. В предсказании обе верхние рамки единичные: каждая\nсовпадает с половиной соответствующей рамки эталона, поэтому IoU\nравен $1/2$. Нижние позиции совпадают и дают по единице.\n\nСумма баллов равна трём. Сопоставление без пропусков здесь лучше любого\nс пропуском: после удаления строки или столбца остаются не более двух\nпар, и каждая даёт не более единицы. Нормировка из статьи даёт:\n\n$$\n\\mathrm{GriTS}_{\\mathrm{Top}}\n=\\frac{2(1/2+1/2+1+1)}{4+4}\n=0.75.\n$$\n\nВ общем случае поиск наилучшего двумерного сопоставления труден;\n[реализация авторов](https://github.com/microsoft/table-transformer/blob/16d124f616109746b7785f03085100f1f6247575/src/grits.py)\nиспользует приближение из §3.4. В нашем примере она тоже возвращает\n0.75. Для проверки роли заголовка нужен отдельный тест: правильно ли\nсистема связывает «Расходы» одновременно со своим столбцом и с годом?\n\nЕсли система выдаёт HTML, [TEDS, §5](https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123660562.pdf#page=7)\nсравнивает деревья тегов. При разделении заголовка меняется атрибут\n`colspan` и появляется новый узел пустой ячейки. Обе операции стоят\nненулевой балл редактирования даже при безошибочном OCR. В варианте\n`structure_only` текст ячеек не участвует в сравнении; при сверке\nс результатами работы нужно использовать тот же вариант и обработку HTML.\n\n<a id=\"doc-interventions\"></a>\n\n## 9. Диагностические вмешательства"
+        },
+        {
+          "old": "- [DocVQA 2020 — evaluation](https://www.docvqa.org/challenges/2020); Ali Furkan Biten et al., [Scene Text Visual Question Answering](https://openaccess.thecvf.com/content_ICCV_2019/papers/Biten_Scene_Text_Visual_Question_Answering_ICCV_2019_paper.pdf), §3.4: ANLS.",
+          "new": "- [DocVQA 2020 — evaluation](https://www.docvqa.org/challenges/2020); Ali Furkan Biten et al., [Scene Text Visual Question Answering](https://openaccess.thecvf.com/content_ICCV_2019/papers/Biten_Scene_Text_Visual_Question_Answering_ICCV_2019_paper.pdf), §3.4: ANLS.\n- [GriTS](https://arxiv.org/html/2203.12555v3#S3), §3.1–3.4: сетки, сопоставление и три варианта метрики; [Zhong et al., PubTabNet](https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123660562.pdf#page=7), §5: TEDS."
+        },
+        {
+          "old": "сравнивает деревья тегов. При разделении заголовка меняется атрибут\n`colspan` и появляется новый узел пустой ячейки. Обе операции стоят\nненулевой балл редактирования даже при безошибочном OCR. В варианте",
+          "new": "сравнивает деревья тегов. При разделении заголовка меняется атрибут\n`colspan` и появляется узел пустой ячейки. Обе операции увеличивают\nрасстояние между деревьями даже при безошибочном OCR. В варианте"
+        }
+      ],
+      "after_sha256": "0294ef46fb9b10f1dbba0b3efd1b9841f2671be4bea8d004bfdf27fc65315d22",
+      "lines": 700,
+      "before_sha256": "b2e3e923347babfafb3344252e55952c999287fe9fc51a19ad11965d4933f259"
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md",
+      "changes": [
+        {
+          "old": "canonical_revision: \"b2e3e923347babfafb3344252e55952c999287fe9fc51a19ad11965d4933f259\"\ntranslation_reviewed: \"2026-10-29\"",
+          "new": "canonical_revision: \"0294ef46fb9b10f1dbba0b3efd1b9841f2671be4bea8d004bfdf27fc65315d22\"\ntranslation_reviewed: \"2026-11-09\""
+        },
+        {
+          "old": "last_updated: 2026-10-29",
+          "new": "last_updated: 2026-11-09"
+        },
+        {
+          "old": "  - https://arxiv.org/abs/2409.17146",
+          "new": "  - https://arxiv.org/abs/2409.17146\n  - https://arxiv.org/abs/2203.12555v3"
+        },
+        {
+          "old": "### LayoutLMv3: three pretraining targets",
+          "new": "<a id=\"doc-layoutlm\"></a>\n\n### LayoutLMv3: three pretraining targets"
+        },
+        {
+          "old": "### Donut: serialize fields and then parse them",
+          "new": "<a id=\"doc-donut\"></a>\n\n### Donut: serialize fields and then parse them"
+        },
+        {
+          "old": "| Pinned model/report | Coordinate convention |",
+          "new": "<a id=\"doc-coordinates\"></a>\n\n### Map coordinates back to the source\n\n| Pinned model/report | Coordinate convention |"
+        },
+        {
+          "old": "### ANLS and exact field values",
+          "new": "<a id=\"doc-anls\"></a>\n\n### ANLS and exact field values"
+        },
+        {
+          "old": "Define a field match as a name plus exact value, optionally also page and a localization threshold. With five reference fields, four predicted fields, and three exact matches, precision is 0.75, recall 0.6, and F1 $2\\cdot3/(4+5)=2/3$. Matching names alone would miss wrong values. Evaluate table text separately from cell structure and merged headers; for multipage QA, evaluate page selection, answer text, and location separately. Slice by language, small print, columns, rotation, scan quality, and handwriting.\n\n### Interventions need the right expected behavior",
+          "new": "Define a field match as a name plus exact value, optionally also page and a localization threshold. With five reference fields, four predicted fields, and three exact matches, precision is 0.75, recall 0.6, and F1 $2\\cdot3/(4+5)=2/3$. Matching names alone would miss wrong values. For multipage QA, evaluate page selection, answer text, and location separately. Report separate results for language, small print, columns, rotation, scan quality, and handwriting.\n\n<a id=\"doc-grits\"></a>\n\n### Evaluate table structure with GriTS and TEDS\n\nSuppose a header, “2025,” spans the Revenue and Expenses columns. The\nreference has one header cell with `colspan=2`; the predicted table has\n“2025” above Revenue and an empty cell above Expenses. Reading only the\nvisible text gives “2025 Revenue Expenses” in both cases. The predicted\nstructure no longer says that Expenses belongs to 2025.\n\n[GriTS, §3](https://arxiv.org/html/2203.12555v3#S3) aligns rows and columns\nfrom two grids while preserving their order. It can skip an extra row\nwithout shifting every later match. The skipped row still affects the score\nbecause the denominator includes both original grid sizes. Figure 1 skips\nthe third row of $A$ and columns three and four of $B$, leaving two $4\\times3$\nsubgrids to compare.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/documents-2026-11-09/grits-figure1-alignment.png|Skipping one row of A and two columns of B aligns two four-by-three subgrids]]\n\n*Brandon Smock, Rohith Pesala, and Robin Abraham,\n[GriTS, Figure 1, p. 2](https://arxiv.org/pdf/2203.12555v3#page=2),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nOriginal figure, unchanged.*\n\nIn $\\mathrm{GriTS}_{\\mathrm{Top}}$, each grid position stores the bounding\nrectangle of the cell that covers it, relative to that position and\nmeasured in grid units. An unmerged cell is $[0,0,1,1]$.\n$\\mathrm{GriTS}_{\\mathrm{Loc}}$ compares boxes in document coordinates.\n$\\mathrm{GriTS}_{\\mathrm{Con}}$ compares cell text, which repeats at every\nposition covered by a merged cell. Its score therefore reflects structure\nas well as recognition.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/documents-2026-11-09/grits-figure2-representations.png|A PubTables-1M table with merged headers and its text, relative spans, and document-space boxes]]\n\n*Smock, Pesala, and Abraham, [GriTS, Figure 2, p. 8](https://arxiv.org/pdf/2203.12555v3#page=8),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\n“Sequence of Administration” spans three columns. Panel (b) repeats its\ntext; (c) expresses the span relative to each column; (d) repeats the same\nbox in document coordinates.*\n\nIn the 2025 example the grid is $2\\times2$: the year goes on top and the\ntwo column labels below. The top reference rectangles are $[0,0,2,1]$\non the left and $[-1,0,1,1]$ on the right. The negative coordinate means\nthe merged cell extends one column to the left of the right grid position.\nBoth predicted top rectangles are unit rectangles. Each covers half of\nits reference rectangle, so the two IoUs are $1/2$. The bottom row matches\nand contributes one point per position.\n\nThe total reward is three. Skipping any row or column leaves at most two\npairs, each worth at most one point. The best alignment therefore keeps\nall four positions:\n\n$$\n\\mathrm{GriTS}_{\\mathrm{Top}}\n=\\frac{2(1/2+1/2+1+1)}{4+4}\n=0.75.\n$$\n\nFor larger grids, finding the best two-dimensional alignment is hard.\nThe [authors' implementation](https://github.com/microsoft/table-transformer/blob/16d124f616109746b7785f03085100f1f6247575/src/grits.py)\nuses the approximation in §3.4 and returns 0.75 on this example too.\nTest the header relationship separately if the application depends on it:\ndoes the system associate Expenses with both the correct column and year?\n\nFor HTML output, [TEDS, §5](https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123660562.pdf#page=7)\ncompares the tag trees. Splitting the header changes a `colspan` attribute\nand inserts an empty cell node. Both edits increase the tree distance\neven when the OCR is perfect. The `structure_only` setting excludes\ncell text. Use the same setting and HTML processing when comparing with\npublished results.\n\n<a id=\"doc-interventions\"></a>\n\n### Interventions need the right expected behavior"
+        },
+        {
+          "old": "- [DocVQA 2020 evaluation](https://www.docvqa.org/challenges/2020) and [Scene Text VQA §3.4](https://openaccess.thecvf.com/content_ICCV_2019/papers/Biten_Scene_Text_Visual_Question_Answering_ICCV_2019_paper.pdf) specify the ANLS basis.",
+          "new": "- [DocVQA 2020 evaluation](https://www.docvqa.org/challenges/2020) and [Scene Text VQA §3.4](https://openaccess.thecvf.com/content_ICCV_2019/papers/Biten_Scene_Text_Visual_Question_Answering_ICCV_2019_paper.pdf) specify the ANLS basis.\n- [GriTS](https://arxiv.org/html/2203.12555v3#S3), §3.1–3.4: grid alignment and its three metrics; [Zhong et al., PubTabNet](https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123660562.pdf#page=7), §5: TEDS."
+        }
+      ],
+      "after_sha256": "6afe9c513944348683a001fd6df63daa17a9767407339fdbd9a8ba3bea2ff39e",
+      "lines": 570,
+      "before_sha256": "843a0776cafc3d9ed8c49acbb8a2ae654a9846c154dfdbf43cc2e338d5b44ee3"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Документы, OCR и visual grounding]]",
+          "new": "- [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Документы, OCR и visual grounding]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-layoutlm|LayoutLMv3 — текст, координаты и изображение]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-donut|Donut — извлечение полей без внешнего OCR]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-coordinates|Visual grounding — обратное преобразование координат]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-anls|DocVQA — ANLS и точность полей]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-grits|GriTS и TEDS — оценка структуры таблиц]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-interventions|Документы — проверка ответа с изменением изображения]]"
+        }
+      ],
+      "after_sha256": "a95e690319f02fecbccd2864238672b85bfb84d696313cc9d8d3c91c70bc4b2c",
+      "lines": 1629,
+      "before_sha256": "54c57abfbe6fa9776dc6d268989c58d8712754754eabee8e137428c06c572428"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Documents, OCR, and visual grounding]] · **EN**",
+          "new": "- [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Documents, OCR, and visual grounding]] · **EN**\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-layoutlm|LayoutLMv3 — text, boxes, and image patches]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-donut|Donut — field extraction without external OCR]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-coordinates|Visual grounding — mapping coordinates back to the source]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-anls|DocVQA — ANLS and exact field values]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-grits|GriTS and TEDS — evaluating table structure]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-interventions|Document understanding — testing answers with image interventions]]"
+        }
+      ],
+      "after_sha256": "32f009d8ee564732e768639d0d084ee9113837e9343642befa2119604e58d004",
+      "lines": 1631,
+      "before_sha256": "b31685000bc0a1a9dbf6e2488aa7e68b34c9d7435804febd9e8a55c280f55871"
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "changes": [
+        {
+          "old": "  - id: \"curated-documents-pix2struct-variable-resolution-e8802a312313\"",
+          "new": "  - id: \"curated-grits-alignment-399ca36b14f9\"\n    asset: \"00 Учебник/Assets/Figures/curated/documents-2026-11-09/grits-figure1-alignment.png\"\n    sha256: \"399ca36b14f9ed4bb0f6eb1d2e76113ee2154eb20ac367689839afcf47937b66\"\n    author: \"Brandon Smock, Rohith Pesala, and Robin Abraham\"\n    source_url: \"https://arxiv.org/abs/2203.12555v3\"\n    source_image_url: \"https://arxiv.org/pdf/2203.12555v3#page=2\"\n    source_asset: \"05 Источники/Originals/documents-2026-11-09/grits.pdf\"\n    source_asset_sha256: \"324a7eb16379be36dda255cd8bd06c30fbe2cc38957440a8f70cd8e8ea7d438a\"\n    source_page: 2\n    source_printed_page: 2\n    render_dpi: 360\n    render_page_size_px: [3060, 3960]\n    crop_box_px: [735, 570, 2355, 1210]\n    dimensions_px: [1620, 640]\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/documents-2026-11-09/grits-arxiv.html\"\n    license_evidence_sha256: \"c7cac4168e2fbfa6bbf2af3dcad9161f536d09f7e01d946714d54fcb2e29fb62\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    derivation: \"pdf-page-render-crop\"\n    modifications: \"Complete original Figure 1 with all four matrices, dashed correspondence lines and labels; outer page and caption excluded.\"\n    used_in: [\"00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md\", \"en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md\"]\n  - id: \"curated-grits-representations-59af38e599af\"\n    asset: \"00 Учебник/Assets/Figures/curated/documents-2026-11-09/grits-figure2-representations.png\"\n    sha256: \"59af38e599af2f5dfc2bce357aefcce471cbcb8983f8872bfe45ca35ded3f047\"\n    author: \"Brandon Smock, Rohith Pesala, and Robin Abraham\"\n    source_url: \"https://arxiv.org/abs/2203.12555v3\"\n    source_image_url: \"https://arxiv.org/pdf/2203.12555v3#page=8\"\n    source_asset: \"05 Источники/Originals/documents-2026-11-09/grits.pdf\"\n    source_asset_sha256: \"324a7eb16379be36dda255cd8bd06c30fbe2cc38957440a8f70cd8e8ea7d438a\"\n    source_page: 8\n    source_printed_page: 8\n    render_dpi: 360\n    render_page_size_px: [3060, 3960]\n    crop_box_px: [685, 620, 2390, 1990]\n    dimensions_px: [1705, 1370]\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/documents-2026-11-09/grits-arxiv.html\"\n    license_evidence_sha256: \"c7cac4168e2fbfa6bbf2af3dcad9161f536d09f7e01d946714d54fcb2e29fb62\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    derivation: \"pdf-page-render-crop\"\n    modifications: \"Complete original Figure 2 with the input and all three matrix panels and labels; outer page and main caption excluded.\"\n    used_in: [\"00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md\", \"en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md\"]\n  - id: \"curated-documents-pix2struct-variable-resolution-e8802a312313\""
+        }
+      ],
+      "after_sha256": "81df198503f7b45271453d4c9a34b3240634db6bd5749475c664ec66caadef1f",
+      "lines": 23684,
+      "before_sha256": "97bdaf65f98b4cb4fdb47eb6b80ebd15ba52544ad71a0cfedda3c03e84e5ccad"
+    }
+  ],
+  "review": {
+    "sources": [
+      "Smock, Pesala, Abraham, GriTS v3, §§2.1, 3.1–3.4, Eq. 6, Figures 1 and 2. Both PNGs are exact Poppler crops of the CC BY 4.0 source PDF.",
+      "Zhong et al., PubTabNet, §5, and the authors' PubTabNet metric.py: tree edit, span attributes and the structure-only switch.",
+      "Microsoft table-transformer src/grits.py at 16d124f616109746b7785f03085100f1f6247575; source SHA-256 75c13031657252c251f5d0b483aca2601e229a06d46e60d0aa3c739418f543d7."
+    ],
+    "workedExample": "Same nonempty text; wrong two-column merge. Rewards (1/2, 1/2, 1, 1) sum to three and GriTS_Top = 0.75. A skipped row/column leaves at most two unit rewards. The official HTML evaluator also returns Top=0.75, upper bound=0.75 and Con=0.75. The installed PyMuPDF 1.26.7 requires converting the NumPy coordinate arrays to lists at the rectangle API boundary; original scoring code and arithmetic unchanged.",
+    "validation": "All 12 executable Python blocks in each locale passed. Both new image crops reproduced byte-for-byte; the complete curated registry check passed. Local site built 2023 pages, 737 publication checks and 230 output checks passed; 0 broken internal links.",
+    "reader": "At 375 and 1280 CSS px, verified the six reference destinations per locale and clicked the GriTS, coordinate and intervention subjects from each locale's reference index. Both figures opened with source captions in both locales. Inspected the complete desktop images, mobile 2.5× horizontal panning and the mobile text. No viewport overflow or KaTeX errors on the checked pages.",
+    "limits": "No retraining, model benchmark, rights clearance for inherited figures or publication."
+  }
+}

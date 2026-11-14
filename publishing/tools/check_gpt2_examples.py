@@ -119,6 +119,18 @@ assert encoder.encoder["<|endoftext|>"]==50256 and encoder.decode([140])=="\ufff
 assert len(module.bytes_to_unicode())==len(set(module.bytes_to_unicode().values()))==256
 print("PASS actual original tokenizer IDs/round trips, byte bijection and incomplete UTF-8")
 
+translation = re.search(
+    r'<a id="gpt2-translation-prefix"></a>.*?\x60\x60\x60text\n(.*?)\n\x60\x60\x60', body, re.S
+)[1]
+prefix_ids = encoder.encode(translation)
+assert len(prefix_ids) == 27 and prefix_ids.count(198) == 2 and prefix_ids[26] == 796
+answer = " L'oiseau chante."
+answer_ids = [406, 6, 25678, 559, 442, 12427, 13]
+assert encoder.encode(translation + answer) == prefix_ids + answer_ids
+assert encoder.decode(answer_ids) == answer
+assert encoder.decode(answer_ids[:1]) == " L" and encoder.decode(answer_ids[1:2]) == "'"
+print("PASS GPT-2 translation prompt and reference continuation with the pinned tokenizer")
+
 source=(SOURCE/"model.py").read_text()
 excerpt=re.search(r'\x60\x60\x60python title="Original implementation — Modified MIT"\n(.*?)\n\x60\x60\x60',body,re.S)[1]
 assert excerpt in source

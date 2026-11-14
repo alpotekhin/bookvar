@@ -58,7 +58,9 @@ LogisticRegression(...)
 In the figure below, we compare the decision functions of a classifier trained
 using the over-sampled data set and the original data set.
 
-[![Official imbalanced-learn figure: sphx_glr_plot_comparison_over_sampling_002.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_comparison_over_sampling_002.png)](https://imbalanced-learn.org/stable/auto_examples/over-sampling/plot_comparison_over_sampling.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_over_sampling_002.png|Decision function of LogisticRegression, Without resampling, Using RandomOverSampler]]
+
+*Guillaume Lemaitre, [Compare over-sampling samplers](https://imbalanced-learn.org/0.14/auto_examples/over-sampling/plot_comparison_over_sampling.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_comparison_over_sampling_002.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 As a result, the majority class does not take over the other classes during the
 training process. Consequently, all classes are represented by the decision
@@ -99,7 +101,9 @@ once using a smoothed bootstrap. This ways of generating smoothed bootstrap is
 also known a Random Over-Sampling Examples
 (ROSE) [torelli2014rose](/sources/imbalanced-learn/0-14-2/user-guide/bibliography/#torelli2014rose).
 
-[![Official imbalanced-learn figure: sphx_glr_plot_comparison_over_sampling_003.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_comparison_over_sampling_003.png)](https://imbalanced-learn.org/stable/auto_examples/over-sampling/plot_comparison_over_sampling.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_over_sampling_003.png|Resampling with RandomOverSampler, Normal bootstrap, Smoothed bootstrap]]
+
+*Guillaume Lemaitre, [Compare over-sampling samplers](https://imbalanced-learn.org/0.14/auto_examples/over-sampling/plot_comparison_over_sampling.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_comparison_over_sampling_003.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 ### From random over-sampling to SMOTE and ADASYN
 
@@ -123,7 +127,9 @@ the same manner:
 The figure below illustrates the major difference of the different
 over-sampling methods.
 
-[![Official imbalanced-learn figure: sphx_glr_plot_comparison_over_sampling_004.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_comparison_over_sampling_004.png)](https://imbalanced-learn.org/stable/auto_examples/over-sampling/plot_comparison_over_sampling.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_over_sampling_004.png|Original dataset, Resampling with RandomOverSampler, Resampling with SMOTE, Resampling with ADASYN]]
+
+*Guillaume Lemaitre, [Compare over-sampling samplers](https://imbalanced-learn.org/0.14/auto_examples/over-sampling/plot_comparison_over_sampling.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_comparison_over_sampling_004.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 ### Ill-posed examples
 
@@ -137,12 +143,16 @@ implementation of `SMOTE` will not make any distinction between easy and
 hard samples to be classified using the nearest neighbors rule. Therefore, the
 decision function found during training will be different among the algorithms.
 
-[![Official imbalanced-learn figure: sphx_glr_plot_comparison_over_sampling_005.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_comparison_over_sampling_005.png)](https://imbalanced-learn.org/stable/auto_examples/over-sampling/plot_comparison_over_sampling.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_over_sampling_005.png|Decision function using a LogisticRegression, Without sampler, ADASYN sampler, SMOTE sampler]]
+
+*Guillaume Lemaitre, [Compare over-sampling samplers](https://imbalanced-learn.org/0.14/auto_examples/over-sampling/plot_comparison_over_sampling.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_comparison_over_sampling_005.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 The sampling particularities of these two algorithms can lead to some peculiar
 behavior as shown below.
 
-[![Official imbalanced-learn figure: sphx_glr_plot_comparison_over_sampling_006.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_comparison_over_sampling_006.png)](https://imbalanced-learn.org/stable/auto_examples/over-sampling/plot_comparison_over_sampling.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_over_sampling_006.png|Particularities of over-sampling with SMOTE and ADASYN, Decision function with SMOTE, Resampling with SMOTE, Decision function with ADASYN, Resampling with ADASYN]]
+
+*Guillaume Lemaitre, [Compare over-sampling samplers](https://imbalanced-learn.org/0.14/auto_examples/over-sampling/plot_comparison_over_sampling.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_comparison_over_sampling_006.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 ### SMOTE variants
 
@@ -153,7 +163,9 @@ samples. Those methods focus on samples near the border of the optimal
 decision function and will generate samples in the opposite direction of the
 nearest neighbors class. Those variants are presented in the figure below.
 
-[![Official imbalanced-learn figure: sphx_glr_plot_comparison_over_sampling_007.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_comparison_over_sampling_007.png)](https://imbalanced-learn.org/stable/auto_examples/over-sampling/plot_comparison_over_sampling.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_over_sampling_007.png|Decision function and resampling using SMOTE variants, Decision function for SMOTE, Resampling with SMOTE, Decision function for BorderlineSMOTE, Resampling with BorderlineSMOTE, Decision function for BorderlineSMOTE, Resampling with BorderlineSMOTE, Decision function for KMeansSMOTE, Resampling with KMeansSMOTE, Decision function for SVMSMOTE, Resampling with SVMSMOTE]]
+
+*Guillaume Lemaitre, [Compare over-sampling samplers](https://imbalanced-learn.org/0.14/auto_examples/over-sampling/plot_comparison_over_sampling.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_comparison_over_sampling_007.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 The `BorderlineSMOTE` [han2005borderline](/sources/imbalanced-learn/0-14-2/user-guide/bibliography/#han2005borderline),
 `SVMSMOTE` [nguyen2009borderline](/sources/imbalanced-learn/0-14-2/user-guide/bibliography/#nguyen2009borderline), and
@@ -268,7 +280,9 @@ where $\lambda$ is a random number in the range $[0, 1]$. This
 interpolation will create a sample on the line between $x_{i}$ and
 $x_{zi}$ as illustrated in the image below:
 
-[![Official imbalanced-learn figure: sphx_glr_plot_illustration_generation_sample_001.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_illustration_generation_sample_001.png)](https://imbalanced-learn.org/stable/auto_examples/over-sampling/plot_illustration_generation_sample.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_illustration_generation_sample_001.png|SMOTE places a synthetic sample on the line from a minority sample to its minority neighbor]]
+
+*Guillaume Lemaitre, [Sample generator used in SMOTE-like samplers](https://imbalanced-learn.org/0.14/auto_examples/over-sampling/plot_illustration_generation_sample.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_illustration_generation_sample_001.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 SMOTE-NC slightly change the way a new sample is generated by performing
 something specific for the categorical features. In fact, the categories of a

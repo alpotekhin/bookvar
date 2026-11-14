@@ -1,0 +1,69 @@
+{
+  "date": "2026-11-11",
+  "scope": "Compare GPT-2 and GPT-3 on CoQA without conflating the evaluated dialogue history and separate demonstrations, in both versions of the existing GPT-2 chapter.",
+  "review": {
+    "source_sections": "Reddy, Chen and Manning TACL 2019, §§2, 4.4, 5, 6.2 and Figures 1 and 4; Radford et al. (2019), §3.5; Brown et al. v4, §2, §3.6, Figure G.18 and Table H.1.",
+    "worked_example": "In Figure 1, the fifth question refers to Jessica’s visitors. The passage and the four earlier gold question-answer turns are inputs; the answer for the current turn and rationale spans are withheld. The first four turns are not four in-context demonstrations. Five demonstrations change 350M by −3.0 F1 and 175B by +3.5 F1 in Brown et al. on dev. Radford et al.’s 55 F1 comes from their own paper, not a new measurement or a controlled comparison.",
+    "figure": "Figure 4 crops a complete plot with both axes from page 8 of the author-hosted TACL PDF at 480 dpi. A second extraction from the archived PDF produced byte-identical PNG data. Published article CC BY 4.0; there is no third-party passage in the reproduced graphic.",
+    "preservation": "Existing code blocks, figures and their captions, related links and both locale routes remain intact. Local changes; no Git ref update or deployment.",
+    "verification": "Final Astro build rendered 2079 pages; 295 output checks, 772 publication tests and 197 asset-registry tests passed, with zero broken built internal links. In both locales, followed the rendered Next buttons from GPT-1 to LLaMA. Inspected the chart, its caption and source link at 1280 and 375 px; the figure fits inline and supports 6× zoom with horizontal pan on mobile. The served image SHA-256 matches the repeatable PDF extraction. The journal restores all three listed text files to their previous exact SHA-256."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md",
+      "before_sha256": "4ece2887ac6b20384e291c6c3abcd6c5ab73671807c99a0e68d5963af9a12bac",
+      "after_sha256": "b801c952b31094d69e3d9dc1bd9424f915b42910a116c99a9b6581902b2f2752",
+      "lines": 809,
+      "changes": [
+        {
+          "old": "last_updated: 2026-11-10\n",
+          "new": "last_updated: 2026-11-11\n"
+        },
+        {
+          "old": "  - https://jalammar.github.io/illustrated-gpt2/\n",
+          "new": "  - https://jalammar.github.io/illustrated-gpt2/\n  - https://aclanthology.org/Q19-1016/\n  - https://arxiv.org/html/2005.14165v4#S3.SS6\n"
+        },
+        {
+          "old": "Для CoQA префикс содержит документ, предыдущие вопросы и ответы диалога,\nновый вопрос и `A:`. Последующие токены образуют ответ. При вопросе\n«Почему?» история нужна, чтобы восстановить, о каком событии идёт речь.\nСлужебный маркер помогает воспроизвести формат диалога; отдельная\nголова для извлечения начала и конца фрагмента не добавляется.\n\nДля суммаризации за статьёй ставят `TL;DR:`.\nВ конкретном опыте генерировали 100 токенов с top-k при $k=2$\nи брали первые три предложения. Результат поэтому зависит\nи от маркера, и от правила генерации и обрезки.\n\n",
+          "new": "Для суммаризации за статьёй ставят `TL;DR:`.\nВ конкретном опыте генерировали 100 токенов с top-k при $k=2$\nи брали первые три предложения. Результат поэтому зависит\nи от маркера, и от правила генерации и обрезки.\n\n<a id=\"gpt2-gpt3-coqa\"></a>\n\n### CoQA: история диалога и демонстрации\n\nВ [первом примере CoQA](https://arxiv.org/html/1808.07042v2#S1.F1) к Джессике\nна день рождения собираются трое гостей. Первые реплики уточняют, ждёт ли\nона гостей и сколько их. Пятый вопрос состоит из одного слова:\n`Who?` Без предыдущих реплик непонятно, о ком спрашивают. По ним можно\nустановить, что речь о гостях, а по отрывку — найти их имена.\n\nТак устроен вход для пятого вопроса: сначала отрывок, затем четыре\nпредыдущих вопроса с эталонными ответами, в конце `Q: Who?` и пустое\n`A:`. Эталон пятого ответа и размеченные фрагменты текста, которыми\nавторы CoQA обосновывают ответы, во вход не входят. В\n[опыте GPT-2, §3.5](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=6)\nмодель жадно продолжала текст после `A:`. Для ответа на «сколько?»\nона могла сгенерировать `Three`, даже если в документе этого слова нет:\nне нужно выбирать границы непрерывного фрагмента.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-coqa-2026-11-11/coqa-figure4-conversation-flow.png|Десять колонок для первых десяти вопросов. В первых колонках больше всего ответов опираются на начало документа; в поздних заметно растёт доля ответов с опорой на конец. Полосы показывают переходы между частями документа.]]\n\n*Siva Reddy, Danqi Chen и Christopher D. Manning,\n[CoQA: A Conversational Question Answering Challenge, рис. 4](https://aclanthology.org/Q19-1016.pdf#page=8).\nГрафик целиком из авторской копии статьи, без перерисовки;\n[CC BY 4.0](https://transacl.org/ojs/index.php/tacl/article/view/1572).*\n\nВ каждой колонке сверху вниз идут десять равных частей отрывка.\nТолстая полоса между верхними блоками первой и второй колонок\nозначает, что ответы на два первых вопроса часто опираются на\nначало текста. К десятому вопросу нижние блоки становятся выше:\nответы чаще требуют сведений из конца отрывка. Это статистика\nпо фрагментам, отмеченным разметчиками, а не карта внимания GPT.\n\nВ [опыте GPT-3](https://arxiv.org/html/2005.14165v4#A7.F18) прошлые\nреплики по тому же документу остаются частью задачи даже в zero-shot.\nВ one-shot к ним добавляют готовый пример из другого документа,\nв few-shot на CoQA таких примеров пять. Веса остаются прежними.\nНа development-наборе [таблица H.1 GPT-3](https://arxiv.org/html/2005.14165v4#A8.T1)\nдаёт такие значения F1 по совпадающим словам в ответе:\n\n| Модель | Без отдельных примеров | 1 пример | 5 примеров |\n| --- | ---: | ---: | ---: |\n| GPT-2 1.5B | 55 | — | — |\n| GPT-3 350M | 55,0 | 52,1 | 52,0 |\n| GPT-3 175B | 81,5 | 84,0 | 85,0 |\n\nУ GPT-3 175B пять примеров добавили 3,5 пункта F1 по сравнению с её же\nzero-shot результатом. У GPT-3 350M тот же переход отнял 3 пункта.\nА разницу между двумя поколениями нельзя целиком отнести к числу\nпараметров: кроме размера, менялись данные обучения, окно и шаблон.\n[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-relation-shots|На примере классификации]]\nможно проследить, какие строки добавляются в префикс.\n\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md",
+      "before_sha256": "89f04d0dcec977bb0caef5dbf881c6adb096cc71c1be1149048eef4d91265aad",
+      "after_sha256": "99de3421910882475de43109a107a0948dec579f7409aefa817760835fb84c98",
+      "lines": 794,
+      "changes": [
+        {
+          "old": "last_updated: 2026-11-10\n",
+          "new": "last_updated: 2026-11-11\n"
+        },
+        {
+          "old": "  - https://jalammar.github.io/illustrated-gpt2/\n",
+          "new": "  - https://jalammar.github.io/illustrated-gpt2/\n  - https://aclanthology.org/Q19-1016/\n  - https://arxiv.org/html/2005.14165v4#S3.SS6\n"
+        },
+        {
+          "old": "For CoQA, the prefix includes the document, previous dialogue questions\nand answers, the new question, and `A:`. Subsequent tokens form the\nanswer. For a “Why?” question, history helps identify which event is\nbeing discussed. The marker supports the dialogue format; no separate\nspan-start/end extraction head is added.\n\nSummarization appends `TL;DR:` to an article. The reported experiment\ngenerates 100 tokens with top-k at $k=2$ and takes the first three\nsentences. Results therefore depend on the marker, decoding, and truncation.\n\n",
+          "new": "Summarization appends `TL;DR:` to an article. The reported experiment\ngenerates 100 tokens with top-k at $k=2$ and takes the first three\nsentences. Results therefore depend on the marker, decoding, and truncation.\n\n<a id=\"gpt2-gpt3-coqa\"></a>\n\n### CoQA: dialogue history and demonstrations\n\nIn [CoQA's first example](https://arxiv.org/html/1808.07042v2#S1.F1), three\npeople are coming to Jessica's birthday. The questions establish whether\nshe expects visitors and how many, then the fifth question asks only\n`Who?` The earlier turns tell you who to look for; the passage supplies\nthe visitors' names.\n\nTo ask the fifth question, give the model the passage and the four\nprevious questions with their reference answers. End the prompt with\n`Q: Who?` and a blank `A:`. The fifth reference answer and the evidence\nspans marked by CoQA's annotators are withheld. In the\n[GPT-2 experiment, §3.5](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=6),\nthe model decoded greedily after `A:`. For the earlier “how many” question,\nit could produce `Three` even though the word does not appear in the passage.\nThe answer need not be a contiguous span.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-coqa-2026-11-11/coqa-figure4-conversation-flow.png|Ten columns show the first ten turns. Early answers draw more evidence from the beginning of the passage; later answers draw more from the end. Bands show transitions between parts of the passage.]]\n\n*Siva Reddy, Danqi Chen, and Christopher D. Manning,\n[CoQA: A Conversational Question Answering Challenge, Figure 4](https://aclanthology.org/Q19-1016.pdf#page=8).\nFull plot from the authors' copy of the paper, not redrawn;\n[CC BY 4.0](https://transacl.org/ojs/index.php/tacl/article/view/1572).*\n\nEach column shows ten equal parts of the passage in order, from top to\nbottom. The thick band linking the top blocks of columns one and two\nmeans both early questions often use evidence from the beginning.\nBy turn ten, the bottom blocks are taller: answers draw on the end\nmore often. The plot summarizes spans selected by annotators. It does\nnot show GPT's attention weights.\n\nIn the [GPT-3 experiment](https://arxiv.org/html/2005.14165v4#A7.F18),\nearlier turns about the same passage remain part of the input even in\nzero-shot. One-shot prepends a completed example about a different\npassage, and few-shot uses five such examples on CoQA. The weights stay\nfixed. These are the word-overlap F1 scores on the development set\nfrom [GPT-3 Table H.1](https://arxiv.org/html/2005.14165v4#A8.T1):\n\n| Model | No separate examples | 1 example | 5 examples |\n| --- | ---: | ---: | ---: |\n| GPT-2 1.5B | 55 | — | — |\n| GPT-3 350M | 55.0 | 52.1 | 52.0 |\n| GPT-3 175B | 81.5 | 84.0 | 85.0 |\n\nFive examples add 3.5 F1 points for GPT-3 175B over its own zero-shot\nscore but cost GPT-3 350M three points. The difference between the\ngenerations cannot be attributed to parameter count: the training data,\nwindow, and prompt format also differ. The\n[[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-relation-shots|worked classification prompt]]\nshows exactly which lines a demonstration adds.\n\n"
+        },
+        {
+          "old": "canonical_revision: \"4ece2887ac6b20384e291c6c3abcd6c5ab73671807c99a0e68d5963af9a12bac\"\ntranslation_reviewed: \"2026-11-10\"\n",
+          "new": "canonical_revision: \"b801c952b31094d69e3d9dc1bd9424f915b42910a116c99a9b6581902b2f2752\"\ntranslation_reviewed: \"2026-11-11\"\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "f8d75a2ac97c69cb7cd6a5b842ad0432d88762df5ca83fa7a7a1b2270ddfe329",
+      "after_sha256": "a140e86820e81fa5942b70cff53bc664af4c43edc7e5f00c80240d486f9a67e5",
+      "lines": 26113,
+      "changes": [
+        {
+          "old": "  - id: curated-gpt3-hellaswag-adversarial-filtering-9c9eebd504eb\n",
+          "new": "  - id: curated-gpt2-coqa-conversation-flow-b606973444a2\n    asset: 00 Учебник/Assets/Figures/curated/gpt-coqa-2026-11-11/coqa-figure4-conversation-flow.png\n    title: \"CoQA, Figure 4: Chunks of interest as a conversation progresses\"\n    author: Siva Reddy, Danqi Chen, Christopher D. Manning\n    source_url: https://aclanthology.org/Q19-1016/\n    figure_url: https://aclanthology.org/Q19-1016.pdf#page=8\n    source_image_url: https://www.cs.princeton.edu/~danqic/papers/tacl2019.pdf#page=8\n    source_asset: 05 Источники/Originals/gpt-coqa-2026-11-11/Q19-1016-princeton.pdf\n    source_asset_sha256: 3fbe59390978f57cdcf07c3a63db830b5ec852822c5985e567950d2baa8bdc4a\n    source_page: 8\n    render_dpi: 480\n    render_page_size_px: [3969, 5613]\n    crop_box_px: [2025, 358, 3525, 1398]\n    dimensions_px: [1500, 1040]\n    sha256: b606973444a2a603b531303badc254705ca922b7ac3e838bce21e35fac9feba4\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    license_evidence_url: https://transacl.org/ojs/index.php/tacl/article/view/1572\n    modifications: Extracted the complete author plot and axis labels from the TACL paper at 480 dpi without redrawing or resizing. Surrounding page prose and printed caption were excluded.\n    derivation: pdf-page-render-crop\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: 2026-11-11\n    used_in:\n      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md\n      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md\n  - id: curated-gpt3-hellaswag-adversarial-filtering-9c9eebd504eb\n"
+        }
+      ]
+    }
+  ]
+}

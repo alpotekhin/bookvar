@@ -10,6 +10,7 @@ from types import SimpleNamespace
 import numpy as np
 from PIL import Image, ImageChops
 import torch
+from topic_consolidation_baseline import before_topic_consolidation
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md"
@@ -173,13 +174,33 @@ def main():
         assert sha(ROOT/row["asset"]) == row["sha256"]
         if "stanford-cs336-2026" in row["asset"]:
             assert sha(pinned/Path(row["asset"]).name) == row["sha256"]
-    assert len(re.findall(r"!\[\[", chapter)) == 8
+    def embedded_figures(text):
+        return sorted(path.removeprefix("02 Areas/ML & DL/") for path in
+                      re.findall(r"^!\[\[([^|\]\n]+)", text, re.M))
+
+    # Keep the reviewed inventory except for the two audited replacements.
+    prior = before_topic_consolidation(
+        chapter, CHAPTER, "2026-11-09-vlm-training-additions.json")
+    expected = embedded_figures(prior)
+    for filename, journal in [
+        ("internvl25-figure4-training-pipeline.png", "2026-11-13-internvl-training-figure-additions.json"),
+        ("molmo-figure1-data-and-capabilities.png", "2026-11-13-pixmo-data-figure-additions.json"),
+    ]:
+        review = json.loads((ROOT/"docs/audit"/journal).read_text())
+        figure = review["figure"]
+        retired = next(row["asset"] for row in repairs if Path(row["asset"]).name == filename)
+        expected.remove(retired)
+        expected.append(figure["asset"])
+        assert sha(ROOT/figure["asset"]) == figure["sha256"]
+        assert list(Image.open(ROOT/figure["asset"]).size) == figure["dimensions_px"]
+    assert embedded_figures(chapter) == sorted(expected)
     print(json.dumps({
         "chapter_sha256": sha(CHAPTER), "standalone_and_shared_code_runs": 16,
         "packing_mask_sizes": mask_cases, "pinned_internvl_losses": actual_losses,
         "source_pack_boundaries": [0, 6, 24], "iou_property_cases": 100,
         "kl_nonnegativity_cases": 100, "repaired_original_figures": 2,
-        "unchanged_pinned_course_figures": 6, "pretrained_model_run": False,
+        "unchanged_pinned_course_figures": 6, "verified_reader_figures": len(expected),
+        "pretrained_model_run": False,
     }, indent=2))
 
 

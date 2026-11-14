@@ -277,6 +277,18 @@ assets:
     modified: false
     used_in:
       - 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
+  - file: harvard/performance/first-token-accounting.svg
+    author: Harvard ML Systems Book contributors
+    source_url: https://github.com/harvard-edge/cs249r_book_dev/blob/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/images/svg/first_token_accounting.svg
+    commit: a32512942fe30f4fa1edb51486f7de53c1318ac7
+    license: CC BY-NC-ND 4.0
+    modified: false
+    sha256: cd26640ab6dab6e5877f70ee267584b5edb2486498d013078d32a4bfc4c1ecc5
+    used_in:
+      - 00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md
+      - en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md
+      - 00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md
+      - en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md
   - file: harvard/performance/prefill-vs-decode-roofline.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/prefill-vs-decode-roofline.svg

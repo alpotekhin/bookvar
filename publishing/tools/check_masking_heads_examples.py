@@ -203,6 +203,26 @@ assert torch.count_nonzero(w.triu(1))==0
 assert torch.count_nonzero(n["x"].grad[~valid])==0
 torch.testing.assert_close(n["toy_out"][0,0],torch.tensor([32.,-6.],dtype=dtype))
 torch.testing.assert_close(torch.tensor([6.,6.],dtype=dtype)@n["WO"],torch.tensor([24.,6.],dtype=dtype))
+toy = n["toy"]
+eye = torch.eye(2, dtype=dtype)[None]
+q0, k0, v0 = [projection(eye)[0] for projection in
+              (toy.q_proj, toy.k_proj, toy.v_proj)]
+torch.testing.assert_close(q0, torch.ones(2, 2, dtype=dtype))
+torch.testing.assert_close(k0, torch.diag(torch.tensor([math.log(3)] * 2, dtype=dtype)))
+torch.testing.assert_close(v0, torch.tensor([[0., 4.], [8., 12.]], dtype=dtype))
+heads = torch.einsum("hk,kh->h", n["toy_weights"][0, :, 0], v0)
+torch.testing.assert_close(heads, torch.tensor([2., 10.], dtype=dtype))
+# Matching the first coordinate with a shared weight cannot match the second.
+p = (heads[0] - v0[0, 0]) / (v0[1, 0] - v0[0, 0])
+shared = (1 - p) * v0[0] + p * v0[1]
+torch.testing.assert_close(shared, torch.tensor([2., 6.], dtype=dtype))
+assert not torch.allclose(shared, heads)
+causal_out, causal_weights = toy(eye, causal=True)
+torch.testing.assert_close(causal_weights[0, :, 0],
+                           torch.tensor([[1., 0.], [1., 0.]], dtype=dtype))
+torch.testing.assert_close(causal_weights[0, :, 1], n["toy_weights"][0, :, 1])
+torch.testing.assert_close(causal_out[0], torch.tensor([[12., -4.], [32., -6.]], dtype=dtype))
+print("PASS two-head trace: X to Q/K/V, distinct mixtures, and exact causal-mask change")
 for bad in [valid.long(),valid[:,:3]]:
     try: model(x,bad)
     except ValueError: pass

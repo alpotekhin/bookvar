@@ -27,7 +27,8 @@
     "rights_status": "source-license-verified",
     "last_verified": "2026-10-29",
     "used_in": [
-      "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md"
+      "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md"
     ],
     "visual_review": "Pending integrated page review by parent; byte identity, format, dimensions and frame count checked separately."
   },

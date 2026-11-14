@@ -1,0 +1,132 @@
+{
+  "date": "2026-11-13",
+  "scope": "Connect the illustrated GPT chronology, the GPT-2 and GPT-3 task explanations and both generated reference indices without adding a second account of the same mechanisms.",
+  "review": {
+    "sources": "Radford et al. (2019) §3.3; Brown et al. (2020) §§2.4, 3.1.2–3.1.3; Touvron et al. (2023) §§3, 3.1 and Table 3.",
+    "examples": "The LAMBADA round trip connects the unfiltered and stop-word-filtered results to the separate infilling prompt. The HellaSwag anchor explains per-token versus per-character normalization, an extra difference between the published comparisons.",
+    "verification": "Exact restoration of all eight preceding Markdown files. Both subject indices regenerate for 153 owners. Root build: 2089 pages; 798 publication tests passed (13 skipped), 333 built-output tests passed, and no broken internal links. Followed 36 reader links across RU/EN at widths 375 and 1280, including the LAMBADA round trip. The separate /bookvar build has 2089 pages and 890742598 bytes; all internal paths and the figure prefix pass. No publication.",
+    "scopeLimit": "Section navigation, method labels and unchanged source illustrations, not new whole-chapter acceptance."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md",
+      "before_sha256": "ee32c516eaed5af2697689257b6545d1af233ee8a8bd493cd3dd9d0492150c1c",
+      "after_sha256": "6c867e54c9af5e97ac099b56c573675db07c89e0676885e5a9b275dc8b1e73a3",
+      "changes": [
+        {
+          "old": "previous: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning]]\"\nprimary_sources:\n  - https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf",
+          "new": "previous: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning]]\"\nreference_terms:\n  - label: LAMBADA — последнее слово и фильтр GPT-2\n    label_en: LAMBADA — the last word and GPT-2's filter\n    anchor: gpt2-gpt3-lambada\n  - label: CoQA — история диалога и отдельные демонстрации\n    label_en: CoQA — dialogue history and separate demonstrations\n    anchor: gpt2-gpt3-coqa\nprimary_sources:\n  - https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf"
+        },
+        {
+          "old": "стоп-слова. Точность выросла с 52,66% до 63,24%. Такой фильтр не\nпроверяет, что любое оставшееся слово годится для конца предложения.\nВ [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#LAMBADA: указать, что нужен ровно один ответ|опыте GPT-3 с демонстрациями]]\nпоменяли вход: тот же пример можно оформить как пропуск и показать\nвыше готовую пару «пропуск → слово». У GPT-3 175B было 76,2% на",
+          "new": "стоп-слова. Точность выросла с 52,66% до 63,24%. Такой фильтр не\nпроверяет, что любое оставшееся слово годится для конца предложения.\nВ [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#lambada-gpt3-fill-blank|опыте GPT-3 с демонстрациями]]\nпоменяли вход: тот же пример можно оформить как пропуск и показать\nвыше готовую пару «пропуск → слово». У GPT-3 175B было 76,2% на"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md",
+      "before_sha256": "1b7d101d5e366ea7764a35f5f6c034a0477b9849e77fd345c00cf21dd217c71d",
+      "after_sha256": "6e94d50e2b3c27d795a5b61acd9ca7d7be0dca1de825670591e0e1f30ec09377",
+      "changes": [
+        {
+          "old": "locale: en\ntranslation_status: current\ncanonical_revision: \"ee32c516eaed5af2697689257b6545d1af233ee8a8bd493cd3dd9d0492150c1c\"\ntranslation_reviewed: \"2026-11-13\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md\"",
+          "new": "locale: en\ntranslation_status: current\ncanonical_revision: \"6c867e54c9af5e97ac099b56c573675db07c89e0676885e5a9b275dc8b1e73a3\"\ntranslation_reviewed: \"2026-11-13\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md\""
+        },
+        {
+          "old": "constraint. Accuracy rises from 52.66% to 63.24%. That filter does\nnot check whether every remaining word can end a sentence. The\n[[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning#LAMBADA: specifying exactly one answer|GPT-3 experiment with demonstrations]]\ninstead changes the input: the same passage can be written with a blank,\nwith a completed blank-and-answer pair above it. GPT-3 175B scores 76.2%",
+          "new": "constraint. Accuracy rises from 52.66% to 63.24%. That filter does\nnot check whether every remaining word can end a sentence. The\n[[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning#lambada-gpt3-fill-blank|GPT-3 experiment with demonstrations]]\ninstead changes the input: the same passage can be written with a blank,\nwith a completed blank-and-answer pair above it. GPT-3 175B scores 76.2%"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "before_sha256": "082c1e0dbd2457e36a38c2ec1188cd776bde72d0decdd0ecb28e864378e7ef5c",
+      "after_sha256": "be4628d08c30b6997e31a2fc4106a4cc0c3af0c18fc330b73697075de7143de1",
+      "changes": [
+        {
+          "old": "previous: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура]]\"\nprimary_sources:\n  - https://arxiv.org/abs/2005.14165v4",
+          "new": "previous: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура]]\"\nreference_terms:\n  - label: LAMBADA — заполнение пропуска в GPT-3\n    label_en: LAMBADA — filling in a blank with GPT-3\n    anchor: lambada-gpt3-fill-blank\n  - label: HellaSwag — выбор продолжения в GPT-3 и LLaMA\n    label_en: HellaSwag — scoring continuations with GPT-3 and LLaMA\n    anchor: gpt-llama-completion-scoring\n  - label: Surface form competition — оценка вариантов ответа с PMI\n    label_en: Surface form competition — scoring answers with PMI\n    anchor: gpt3-surface-form-competition\nprimary_sources:\n  - https://arxiv.org/abs/2005.14165v4"
+        },
+        {
+          "old": "метрику выбирают по задаче: F1, BLEU или exact match.\n\n### LAMBADA: указать, что нужен ровно один ответ\n",
+          "new": "метрику выбирают по задаче: F1, BLEU или exact match.\n\n<a id=\"lambada-gpt3-fill-blank\"></a>\n\n### LAMBADA: указать, что нужен ровно один ответ\n"
+        },
+        {
+          "old": "Если просто оборвать абзац перед этим словом, модель распределяет\nвероятность и по продолжениям, которые оставляют предложение открытым.\nВ few-shot формате перед ней ставят примеры с пропуском и отдельным\nответом. Тогда демонстрации показывают, что нужно заполнить пропуск.\n\nНиже собственный короткий пример этого формата; слова выбраны",
+          "new": "Если просто оборвать абзац перед этим словом, модель распределяет\nвероятность и по продолжениям, которые оставляют предложение открытым.\nВ [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-gpt3-lambada|опыте GPT-2]] часть таких\nпродолжений убирал фильтр стоп-слов. Для few-shot в опыте GPT-3\nсначала показывают текст с пропуском и готовым ответом, а затем\nтекст с пропуском, который предстоит заполнить.\n\nНиже собственный короткий пример этого формата; слова выбраны"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "before_sha256": "c82b5e8b72b711a8eb477541fefea33a581b05790cb6dd276380dc32b1f3e67c",
+      "after_sha256": "9db85dcab34346068a89d172fa50779860a7217f93e1e0763d394d433bbf07b0",
+      "changes": [
+        {
+          "old": "locale: en\ntranslation_status: current\ncanonical_revision: \"082c1e0dbd2457e36a38c2ec1188cd776bde72d0decdd0ecb28e864378e7ef5c\"\ntranslation_reviewed: \"2026-11-13\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md\"",
+          "new": "locale: en\ntranslation_status: current\ncanonical_revision: \"be4628d08c30b6997e31a2fc4106a4cc0c3af0c18fc330b73697075de7143de1\"\ntranslation_reviewed: \"2026-11-13\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md\""
+        },
+        {
+          "old": "the task: F1, BLEU, or exact match.\n\n### LAMBADA: specifying exactly one answer\n\nLAMBADA asks for a paragraph's final word. Simply truncating before\nthat word also assigns probability to continuations that leave the\nsentence open. Few-shot formatting supplies examples with a blank\nand a separate answer, demonstrating an infilling task.\n\nThis short example illustrates the format; its words are not from",
+          "new": "the task: F1, BLEU, or exact match.\n\n<a id=\"lambada-gpt3-fill-blank\"></a>\n\n### LAMBADA: specifying exactly one answer\n\nLAMBADA asks for a paragraph's final word. Simply truncating before\nthat word also assigns probability to continuations that leave the\nsentence open. In the [[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language#gpt2-gpt3-lambada|GPT-2 experiment]],\na stop-word filter excluded some such continuations. In the GPT-3\nfew-shot format, the prompt first gives passages with blanks and\ncompleted answers, then a passage whose blank remains unanswered.\n\nThis short example illustrates the format; its words are not from"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "41d41ed32f7e8c1998458599014a377594d6258637efd63e99fc0507fe436c4c",
+      "after_sha256": "de2ff70aee8ca35fddfca05d65c21811bf7661fc2141d2ba1c071664f590bef4",
+      "changes": [
+        {
+          "old": "52,66% без фильтра и 63,24% после исключения стоп-слов\n([§3.3](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=5)).\nУ GPT-3 175B получилось 76,2% с обычным продолжением и 86,4% с\n15 размеченными примерами. В последнем случае авторы также сменили\nформат: вместо дописывания отрывка модель заполняла пропуск.\nС одним примером в этом формате получилось 72,5%: меньше, чем при\nобычном продолжении. Поэтому разность 86,4 и 76,2 включает эффект",
+          "new": "52,66% без фильтра и 63,24% после исключения стоп-слов\n([§3.3](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=5)).\nВ [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-gpt3-lambada|разборе GPT-2]]\nна одном отрывке видно, какое слово убирает фильтр и почему выбор\nтолько из слов самого отрывка был бы другим ограничением.\nУ GPT-3 175B получилось 76,2% с обычным продолжением и 86,4% с\n15 размеченными примерами. В последнем случае авторы также сменили\nформат: вместо дописывания отрывка модель\n[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#lambada-gpt3-fill-blank|заполняла пропуск]].\nС одним примером в этом формате получилось 72,5%: меньше, чем при\nобычном продолжении. Поэтому разность 86,4 и 76,2 включает эффект"
+        },
+        {
+          "old": "задачи, порядок обратный: 81,0% и 80,1%. Это результаты из\nпубликаций, а не эксперимент, в котором меняли только размер модели.\nНапример, из разницы в 0,3 пункта на HellaSwag нельзя выделить вклад RoPE.\n\nРазмеры моделей при этом различаются примерно в 13,5 раза.",
+          "new": "задачи, порядок обратный: 81,0% и 80,1%. Это результаты из\nпубликаций, а не эксперимент, в котором меняли только размер модели.\nНа HellaSwag различалось даже [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt-llama-completion-scoring|правило ранжирования концовок]]:\nGPT-3 нормировала оценку по токенам, LLaMA — по символам.\nИз разницы в 0,3 пункта нельзя выделить вклад RoPE.\n\nРазмеры моделей при этом различаются примерно в 13,5 раза."
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "3314f261038502a8da6d33a5a6272d0ee3ad06a6d30ec961d6cc4d689cb4308b",
+      "after_sha256": "b52e64116588181173bd7141af59d545abecc1c7f6f8ad9850c87cca47783cda",
+      "changes": [
+        {
+          "old": "locale: en\ntranslation_status: current\ncanonical_revision: \"41d41ed32f7e8c1998458599014a377594d6258637efd63e99fc0507fe436c4c\"\ntranslation_reviewed: \"2026-11-13\"\ntranslation_of: \"00 Учебник/_index.md\"",
+          "new": "locale: en\ntranslation_status: current\ncanonical_revision: \"de2ff70aee8ca35fddfca05d65c21811bf7661fc2141d2ba1c071664f590bef4\"\ntranslation_reviewed: \"2026-11-13\"\ntranslation_of: \"00 Учебник/_index.md\""
+        },
+        {
+          "old": "52.66% without filtering and 63.24% with a stop-word filter\n([§3.3](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=5)).\nGPT-3 175B scored 76.2% with plain continuation and 86.4% with\n15 demonstrations. In the latter setting the authors also changed\nthe format, from completing a passage to filling in a blank.\nOne demonstration in the new format scored 72.5%, below plain\ncontinuation. The gap between 86.4% and 76.2% therefore includes the",
+          "new": "52.66% without filtering and 63.24% with a stop-word filter\n([§3.3](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=5)).\nThe [[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language#gpt2-gpt3-lambada|GPT-2 example]]\nshows which candidate the filter removes and why restricting answers\nto words from the passage is a different rule.\nGPT-3 175B scored 76.2% with plain continuation and 86.4% with\n15 demonstrations. In the latter setting the authors also changed\nthe format, from completing a passage to\n[[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning#lambada-gpt3-fill-blank|filling in a blank]].\nOne demonstration in the new format scored 72.5%, below plain\ncontinuation. The gap between 86.4% and 76.2% therefore includes the"
+        },
+        {
+          "old": "physical problem, the order reverses: 81.0% and 80.1%. These are\nreported results, not an experiment that varies only model size.\nThe 0.3-point HellaSwag gap does not isolate the effect of RoPE.\n\nThe models differ in size by about 13.5 times. The rough pretraining",
+          "new": "physical problem, the order reverses: 81.0% and 80.1%. These are\nreported results, not an experiment that varies only model size.\nEven the [[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning#gpt-llama-completion-scoring|rule for ranking HellaSwag endings]]\ndiffers: GPT-3 normalizes scores by tokens, LLaMA by characters.\nThe 0.3-point gap does not isolate the effect of RoPE.\n\nThe models differ in size by about 13.5 times. The rough pretraining"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "c47e657c63717be54b2a572370e0d821b0ccffb5d691996182817459d8278ea6",
+      "after_sha256": "186c657a37c784057e0c4112ea5e2d4f47735b2d19767aead5406db0343b0805",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1 — генеративное предобучение]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2 — zero-shot через язык]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3 — масштабирование и in-context learning]]\n- [[00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V|Self-Attention изнутри — Q, K, V]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 — text-to-text Transformer]]",
+          "new": "- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1 — генеративное предобучение]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2 — zero-shot через язык]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-gpt3-lambada|LAMBADA — последнее слово и фильтр GPT-2]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-gpt3-coqa|CoQA — история диалога и отдельные демонстрации]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3 — масштабирование и in-context learning]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#lambada-gpt3-fill-blank|LAMBADA — заполнение пропуска в GPT-3]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt-llama-completion-scoring|HellaSwag — выбор продолжения в GPT-3 и LLaMA]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-surface-form-competition|Surface form competition — оценка вариантов ответа с PMI]]\n- [[00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V|Self-Attention изнутри — Q, K, V]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 — text-to-text Transformer]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "8e005dcddd2fb97510337aa703373f8c56ca1ce8cfa7ba1b853888d6fd79cc7b",
+      "after_sha256": "d938b696dffb0e94ae3aaa14ac2d68372a46e7ea15cf2ad2da36b8429ea85d2c",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1: generative pre-training]] · **EN**\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2: zero-shot through language]] · **EN**\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3: in-context learning]] · **EN**\n- [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|Masking, heads, and tensor shapes]] · **EN**\n  - [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#causal-mask-shifted-targets|Causal mask — token visibility and shifted targets]]",
+          "new": "- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1: generative pre-training]] · **EN**\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2: zero-shot through language]] · **EN**\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-gpt3-lambada|LAMBADA — the last word and GPT-2's filter]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-gpt3-coqa|CoQA — dialogue history and separate demonstrations]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3: in-context learning]] · **EN**\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#lambada-gpt3-fill-blank|LAMBADA — filling in a blank with GPT-3]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt-llama-completion-scoring|HellaSwag — scoring continuations with GPT-3 and LLaMA]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-surface-form-competition|Surface form competition — scoring answers with PMI]]\n- [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|Masking, heads, and tensor shapes]] · **EN**\n  - [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#causal-mask-shifted-targets|Causal mask — token visibility and shifted targets]]"
+        }
+      ]
+    }
+  ]
+}

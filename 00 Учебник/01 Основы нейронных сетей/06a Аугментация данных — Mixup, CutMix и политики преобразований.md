@@ -3,8 +3,57 @@ title: Аугментация данных — Mixup, CutMix и политики
 type: textbook-chapter
 status: canonical
 source_language: en
-last_updated: 2026-10-28
-last_verified: 2026-10-28
+reference_terms:
+  - label: Аугментация входа и разметки
+    label_en: Joint input and target augmentation
+    anchor: augmentation-target
+  - label: Crop — площадь, масштаб и интерполяция
+    label_en: Crop area, scale and interpolation
+    anchor: augmentation-crop-scale
+  - label: Ожидаемая функция потерь при аугментации
+    label_en: Expected augmentation objective
+    anchor: augmentation-objective
+  - label: Cutout и фотометрические преобразования
+    label_en: Cutout and photometric transformations
+    anchor: augmentation-views
+  - label: Значение заполнения до и после нормализации
+    label_en: Fill values before and after normalization
+    anchor: augmentation-fill-units
+  - label: Mixup — мягкая метка и градиент
+    label_en: Mixup soft targets and gradients
+    anchor: mixup
+  - label: Mixup — Beta-распределение и пары примеров
+    label_en: Mixup Beta sampling and example pairing
+    anchor: mixup-beta
+  - label: CutMix — фактическая площадь вставки
+    label_en: CutMix actual patch area
+    anchor: cutmix
+  - label: Шаг оптимизатора с CutMix
+    label_en: One optimizer step with CutMix
+    anchor: cutmix-full-step
+  - label: Compose — последовательность случайных преобразований
+    label_en: Compose and sampled transform sequences
+    anchor: augmentation-composition
+  - label: AutoAugment — поиск политики
+    label_en: AutoAugment policy search
+    anchor: autoaugment-controller
+  - label: RandAugment — N и M
+    label_en: RandAugment N and M
+    anchor: randaugment-n-m
+  - label: Аугментация текста и back-translation
+    label_en: Text augmentation and back-translation
+    anchor: text-audio-augmentation
+  - label: Исходные записи и разбиение данных
+    label_en: Original recordings and data splits
+    anchor: augmentation-parent-split
+  - label: Аугментация при обучении и проверке
+    label_en: Training and evaluation augmentation
+    anchor: augmentation-evaluation
+  - label: TTA — усреднение вероятностей и логитов
+    label_en: TTA probability and logit averaging
+    anchor: tta-averaging
+last_updated: 2026-11-03
+last_verified: 2026-11-03
 primary_sources:
   - https://d2l.ai/chapter_computer-vision/image-augmentation.html
   - https://arxiv.org/html/1710.09412v2
@@ -85,6 +134,8 @@ to the retained region. Some objects disappear entirely. A classification crop
 can similarly remove the object that justified the original label. A policy
 must decide which crops are admissible, rather than treating every valid array
 shape as a valid labelled example.
+
+<a id="augmentation-crop-scale"></a>
 
 ### Crop size, scale, and interpolation
 
@@ -202,6 +253,8 @@ target. It asks a classifier to use evidence outside the removed region.
 This is different from independently dropping hidden activations: the location,
 correlation, and stage of the mask differ.
 
+<a id="augmentation-fill-units"></a>
+
 The fill value has units. For a normalized channel
 $z=(x-\mu)/\sigma$, setting $z$ to zero inserts the raw-space mean $\mu$.
 Setting raw $x$ to zero instead gives $z=-\mu/\sigma$.
@@ -300,6 +353,8 @@ assert hard_loss > soft_loss
 print("input", mixed_input, "target", q)
 print("soft loss", soft_loss.item(), "argmax loss", hard_loss.item())
 ```
+
+<a id="mixup-beta"></a>
 
 The paper samples $\lambda\sim\operatorname{Beta}(\alpha,\alpha)$.
 At $\alpha=1$ the distribution is uniform. Smaller positive $\alpha$ places
@@ -430,6 +485,8 @@ establish an exact physical correspondence between area and semantic evidence.
 For detection or segmentation, copying patches requires rules for those
 annotations rather than mechanically mixing image-level one-hot labels.
 
+<a id="cutmix-full-step"></a>
+
 ### One optimizer step with the mixed target
 
 Using `cutmix_batch` from the preceding program, the following complete
@@ -486,6 +543,47 @@ determines their order, probability, strength, and whether choices are shared
 across a batch. Rotating then cropping need not produce the same image as
 cropping then rotating.
 
+<a id="augmentation-composition"></a>
+
+### Compose applies the selected operations in order
+
+> In practice, we will combine multiple image augmentation methods.
+
+[D2L, Combining Multiple Image Augmentation Methods](https://d2l.ai/chapter_computer-vision/image-augmentation.html#combining-multiple-image-augmentation-methods),
+CC BY-SA 4.0. The following original PyTorch excerpts use the earlier
+`apply` helper, `shape_aug`, the source photograph `img`, and `torchvision`.
+
+```python title="D2L source excerpts: colour transform and composition"
+color_aug = torchvision.transforms.ColorJitter(
+    brightness=0.5, contrast=0.5, saturation=0.5, hue=0.5)
+augs = torchvision.transforms.Compose([
+    torchvision.transforms.RandomHorizontalFlip(), color_aug, shape_aug])
+apply(img, augs)
+```
+
+![[00 Учебник/Assets/Figures/curated/augmentation-composition-2026-11-03/d2l-composed-transforms.svg|Original D2L PyTorch gallery of reflection, colour jitter and resized crop]]
+
+*Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola,
+[D2L, Combining Multiple Image Augmentation Methods](https://d2l.ai/chapter_computer-vision/image-augmentation.html#combining-multiple-image-augmentation-methods),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+Complete original eight-panel PyTorch output, unchanged. This saved gallery
+shows repeated calls to the fixed composition above; it is not an
+AutoAugment search result or a local recognition experiment.*
+
+The pipeline first samples horizontal reflection, then colour changes,
+then a crop that is resized to the output dimensions. Each panel comes
+from the same list of operations, with new random choices. In the final
+panel, only a small part of the cat remains; a valid output size does not
+ensure that the original class is still recognizable.
+
+`Compose` specifies how to apply this list. Choosing the list and its
+parameters is still a separate task. AutoAugment searches over such choices,
+while RandAugment restricts which policy parameters are tuned.
+
+<a id="autoaugment-controller"></a>
+
+### AutoAugment separates policy search from final training
+
 In [AutoAugment, §3](https://arxiv.org/html/1805.09501v3#S3), a candidate
 policy contains five sub-policies. Each sub-policy contains two ordered
 operations, with an application probability and magnitude for each.
@@ -506,6 +604,10 @@ The probability that neither operation is called is
 $0.5(0.2\cdot0.5)+0.5(0.7\cdot0.9)=0.365$.
 Not calling an operation is different from calling an operation whose chosen
 magnitude happens to leave an image unchanged.
+
+<a id="randaugment-n-m"></a>
+
+### RandAugment tunes the operation count and shared magnitude
 
 [RandAugment, §3](https://arxiv.org/html/1909.13719v2#S3) uses a uniform
 sampler over a pool of 14 operations and two main hyperparameters:
@@ -579,6 +681,8 @@ These sentences specify the sides of the training pair, not a new local
 translation-model result. Translation errors on the synthetic side and
 overlap with evaluation material still need checking.
 
+<a id="augmentation-parent-split"></a>
+
 ### Count original recordings, not only augmented files
 
 [Harvard ML Systems, Data Selection](https://github.com/harvard-edge/cs249r_book/blob/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/data_selection/data_selection.qmd)
@@ -632,6 +736,8 @@ Test-time augmentation runs the model on several transformed views and
 combines their predictions. For image classification, the views must refer
 to the same class space. Spatial predictions such as masks or keypoints
 must be transformed back into a common coordinate system before aggregation.
+
+<a id="tta-averaging"></a>
 
 Averaging probabilities and averaging logits give different predictors.
 Take two views with class probabilities $(0.9,0.1)$ and $(0.6,0.4)$.
@@ -693,5 +799,5 @@ and [RandAugment, §3](https://arxiv.org/html/1909.13719v2#S3);
 Sennrich, Haddow and Birch,
 [Improving Neural Machine Translation Models with Monolingual Data, §3](https://arxiv.org/html/1511.06709v4#S3).
 Run the nine CPU examples in reading order; the full-step block uses the
-preceding CutMix helper. The two labelled source excerpts retain their
+preceding CutMix helper. The three labelled source excerpts retain their
 authors' code and require the dependencies of the original books or scripts.

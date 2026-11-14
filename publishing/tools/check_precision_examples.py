@@ -9,10 +9,11 @@ from pathlib import Path
 import re
 import struct
 import numpy as np
+from topic_consolidation_baseline import before_topic_consolidation
 
 root = Path(__file__).resolve().parents[2]
 path = root / '00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md'
-body = path.read_text()
+body = before_topic_consolidation(path.read_text(), str(path.relative_to(root)))
 blocks = re.findall(r'(?:```|~~~)python\n(.*?)\n(?:```|~~~)', body, re.S)
 assert len(blocks) == 2
 for block in blocks:

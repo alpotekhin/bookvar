@@ -59,4 +59,40 @@ describe('OLMo original recipe and corpus attribution correction', () => {
     expect(sha('05 Источники/Originals/olmo-pretraining-2026-10-26/article.html')).toBe(
       '68e5fd8ffb899793b8c517770f9e8611946bb12a2a23c84e3641615c3a4d67d0');
   });
+
+  it('uses both intact OLMo 2 curves and the registered C4 comparison', () => {
+    const body = read(intro).toString();
+    const registry = parse(read('05 Источники/asset-registry.yml').toString(), { merge: true });
+    const originals = [
+      ['olmo2-learning-rates-figure11.svg','2dd46b19085462128b6c9b07c7570ee024a74e5d824cd46396100cfa50e4877e','learningrates.svg'],
+      ['olmo2-learning-rate-anneals-figure11.svg','c71adccb050848fc64d2173bf7de366c181c1bf6a83e36229d680c3a9eec9a59','learningrateanneals.svg'],
+      ['lee-dedup-perplexity-figure2.png','65fcd935279cee348ffbeee9d203abf559b7cc6f4cd610c412e50da066744376',null],
+    ];
+    for (const [name, digest, original] of originals) {
+      const row = registry.assets.find((candidate: any) => candidate.asset.endsWith('/'+name));
+      expect(row.used_in).toContain(intro);
+      expect(sha(row.asset)).toBe(digest);
+      expect(body).toContain(row.asset + '|');
+      expect(row.license).toBe('CC BY 4.0');
+      if (original) {
+        expect(row.derivation).toBe('source-svg-copy');
+        expect(row.source_asset_sha256).toBe(digest);
+        expect(row.source_image_url).toBe('https://arxiv.org/html/2501.00656v1/'+original);
+        expect(sha(row.source_page_snapshot)).toBe(row.source_page_sha256);
+        expect(body).toContain(row.source_image_url);
+      }
+    }
+  });
+
+  it('separates source fraction, repeated tokens, masked labels and test overlap', () => {
+    const body = read(intro).toString();
+    expect(752 * .0323).toBeCloseTo(24.29, 2);
+    expect(4 * 1.26 / 300 * 100).toBeCloseTo(1.68, 9);
+    expect(526 + 1312).toBe(1838);
+    expect((526 * 89.9 + 1312 * 79.3)/1838).toBeCloseTo(82.3, 1);
+    for (const s of ['24{,}29','1{,}68','4095 её целей','3,0 процентных пункта',
+      'https://arxiv.org/html/2005.14165v4#A3.T1',
+      '796de603b53b677ff58f9c4bfe7ee25da89a86a5/olmo/train.py#L705-L718'])
+      expect(body).toContain(s);
+  });
 });

@@ -12,7 +12,7 @@ CHAPTER = ROOT / "00 Учебник/03 Языковое моделировани
 text = CHAPTER.read_text()
 assert chr(0xA4) not in text
 blocks = re.findall(r"```python\n(.*?)\n```", text, flags=re.S)
-assert len(blocks) == 5, len(blocks)
+assert len(blocks) == 6, len(blocks)
 namespaces = []
 for number, block in enumerate(blocks, 1):
     namespace = {}
@@ -20,7 +20,30 @@ for number, block in enumerate(blocks, 1):
     namespaces.append(namespace)
     print(f"PASS published standalone block {number}")
 
-n = namespaces[1]
+# The source diagram's lookup sharing and input-block ordering.
+source = namespaces[0]
+torch.testing.assert_close(source['lookup_gradient'][2], torch.tensor([4.,6.],dtype=torch.float64))
+generator = torch.Generator().manual_seed(20261103)
+sharing_cases = 0
+for nwords in [3,7]:
+    for width in [1,2,4]:
+        for window in [2,3,5]:
+            for _ in range(5):
+                table = torch.randn(nwords,width,generator=generator,dtype=torch.float64,requires_grad=True)
+                ids = torch.randint(0,nwords,(window,),generator=generator)
+                row = torch.randn(window,width,generator=generator,dtype=torch.float64)
+                chronological = (table[ids]*row).sum()
+                reversed_order = (table[ids.flip(0)]*row.flip(0)).sum()
+                torch.testing.assert_close(chronological,reversed_order)
+                actual, = torch.autograd.grad(chronological,table)
+                expected = torch.zeros_like(table)
+                for position,token in enumerate(ids.tolist()):
+                    expected[token] += row[position]
+                torch.testing.assert_close(actual,expected)
+                sharing_cases += 1
+print(f'PASS {sharing_cases} input-block permutation and independently accumulated lookup-gradient cases')
+
+n = namespaces[2]
 E, W = n["E"], n["W"]
 p = torch.tensor([1/12, 1/12, 1/6, 1/3, 1/12, 1/12, 1/12, 1/12], dtype=torch.float64)
 g = p.clone()
@@ -61,7 +84,7 @@ assert not isclose(17/11, (1+3+1)/3)
 assert 3*log(.75)+log(.25) > 3*log(.9)+log(.1)
 print("PASS CE/PPL, invalid logits, same argmax, token weighting, conditional MLE")
 
-mask = namespaces[3]
+mask = namespaces[4]
 assert mask["keep"].tolist() == [[True, True, False]]
 assert mask["targets"][mask["keep"]].tolist() == [2, 7]
 assert torch.isfinite(mask["loss"])
@@ -88,7 +111,7 @@ assert rows[("кот", "спит")] == {"EOS": 1, "бежит": 1}
 bound = -sum(count * log(count/sum(row.values())) for row in rows.values()
              for count in row.values()) / 11
 assert isclose(bound, .4256482933749291, rel_tol=1e-12)
-n = namespaces[4]
+n = namespaces[5]
 model, inputs, keep = n["model"], n["inputs"], n["keep"]
 assert sum(p.numel() for p in model.parameters()) == 128
 assert model(inputs).shape == (3, 4, 8)

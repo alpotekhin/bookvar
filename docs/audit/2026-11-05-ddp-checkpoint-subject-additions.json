@@ -1,0 +1,491 @@
+{
+  "schema_version": 1,
+  "kind": "ddp-checkpoint-subject-additions",
+  "review_date": "2026-11-05",
+  "files": [
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "before_sha256": "6af6bf28b773147e4b17726aa3ef12f8425aea91b984acd4a4e1d9fa199f4e4b",
+      "after_sha256": "329f92d8ee713d18d34372cb6613cc59d0caa9fe05d08a8abf71e8c7e34ffbc4",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-27\nlast_verified: 2026-10-27\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\nreference_terms:\n  - anchor: ddp-process-ranks\n    label: \"Global rank, local rank и выбор устройства\"\n    label_en: \"Global rank, local rank and device selection\"\n  - anchor: ddp-process-groups\n    label: \"Группы процессов и согласованный new_group\"\n    label_en: \"Process groups and consistent new_group creation\"\n  - anchor: ddp-launch\n    label: \"Запуск torchrun и инициализация DDP\"\n    label_en: \"torchrun launch and DDP initialization\"\n  - anchor: ddp-collective-results\n    label: \"Коллективные операции: результат и владельцы тензора\"\n    label_en: \"Collective operations: results and tensor ownership\"\n  - anchor: collective-destinations-gather-scatter-all-to-all\n    label: \"Scatter, gather и all-gather: получатели результата\"\n    label_en: \"Scatter, gather and all-gather: result destinations\"\n  - anchor: ddp-all-to-all\n    label: \"All-to-all: отдельная часть каждому получателю\"\n    label_en: \"All-to-all: a separate part for each destination\"\n  - anchor: ddp-uneven-all-to-all\n    label: \"Неравные all-to-all: send counts и receive counts\"\n    label_en: \"Uneven all-to-all: send counts and receive counts\"\n  - anchor: ddp-collective-order\n    label: \"Совпадение порядка и смысла collective-операций\"\n    label_en: \"Matching collective order and meaning\"\n  - anchor: ddp-replica-state\n    label: \"Согласованность весов, Adam и буферов реплик\"\n    label_en: \"Consistency of replica weights, Adam and buffers\"\n  - anchor: ddp-loss-reduction\n    label: \"Среднее по процессам и нормировка по токенам\"\n    label_en: \"Process means versus token-normalized gradients\"\n  - anchor: ddp-sampler\n    label: \"DistributedSampler, set_epoch и повторные индексы\"\n    label_en: \"DistributedSampler, set_epoch and repeated indices\"\n  - anchor: ddp-join\n    label: \"DDP join: неравные входы и состояние оптимизатора\"\n    label_en: \"DDP join: uneven inputs and optimizer state\"\n  - anchor: ddp-accumulation\n    label: \"Накопление градиентов и область no_sync\"\n    label_en: \"Gradient accumulation and the no_sync region\"\n  - anchor: ddp-token-window\n    label: \"Общий знаменатель токенов за окно накопления\"\n    label_en: \"A global token denominator over the accumulation window\"\n  - anchor: ddp-flat-gradients\n    label: \"Объединение и обратное размещение градиентов\"\n    label_en: \"Flattening and restoring gradients\"\n  - anchor: ddp-bucket-size\n    label: \"Размер buckets и момент начала обмена\"\n    label_en: \"Bucket sizes and communication release times\"\n  - anchor: ddp-unused-parameters\n    label: \"Порядок редукции и неиспользованные параметры\"\n    label_en: \"Reduction order and unused parameters\"\n  - anchor: ddp-overlap-readiness-streams-compilation\n    label: \"Готовность buckets на всех rank и хвост обмена\"\n    label_en: \"Bucket readiness on every rank and the exposed tail\"\n  - anchor: ddp-stream-lifetime\n    label: \"Порядок CUDA streams и срок жизни хранилища\"\n    label_en: \"CUDA stream ordering and allocation lifetime\"\n  - anchor: ddp-compiled-backward\n    label: \"Компиляция backward и готовность autograd hooks\"\n    label_en: \"Backward compilation and autograd-hook readiness\"\n  - anchor: ddp-resource-contention\n    label: \"Конкуренция вычислений и обмена за ресурсы\"\n    label_en: \"Resource contention between compute and communication\"\n  - anchor: ddp-ring-cost\n    label: \"Кольцевой all-reduce: раунды, байты и задержки\"\n    label_en: \"Ring all-reduce: rounds, bytes and latency\"\n  - anchor: ddp-ring-trace\n    label: \"Reduce-scatter и all-gather по шагам кольца\"\n    label_en: \"Step-by-step ring reduce-scatter and all-gather\"\n  - anchor: ddp-alternate-ring\n    label: \"Кольцо с целыми тензорами и с разбиением\"\n    label_en: \"Whole-tensor rings versus chunked rings\"\n  - anchor: ddp-capacity-bound\n    label: \"Предел data parallelism при фиксированном батче\"\n    label_en: \"The data-parallel limit at a fixed global batch\"\n  - anchor: ddp-scaling-efficiency\n    label: \"Скрытое время обмена и ускорение полного шага\"\n    label_en: \"Hidden communication and full-step speedup\"\n  - anchor: ddp-gossip\n    label: \"Gossip: сохранение среднего и согласие реплик\"\n    label_en: \"Gossip: mean preservation and replica consensus\"\n  - anchor: ddp-error-feedback\n    label: \"Error feedback и состояние остатка\"\n    label_en: \"Error feedback and residual state\"\n  - anchor: ddp-powersgd\n    label: \"PowerSGD: низкоранговое сжатие и его цена\"\n    label_en: \"PowerSGD: low-rank compression and its costs\"\n  - anchor: ddp-powersgd-steps\n    label: \"Согласование факторов PowerSGD двумя редукциями\"\n    label_en: \"Coordinating PowerSGD factors through two reductions\"\n  - anchor: ddp-failures\n    label: \"Диагностика остановившегося или разошедшегося rank\"\n    label_en: \"Diagnosing a stopped or divergent rank\"\n  - anchor: ddp-correctness-validation\n    label: \"Сверка DDP с однопроцессным обучением\"\n    label_en: \"Comparing DDP with single-process training\"\n  - anchor: ddp-bandwidth\n    label: \"Algorithm bandwidth и bus bandwidth\"\n    label_en: \"Algorithm bandwidth and bus bandwidth\"\n"
+        },
+        {
+          "old": "## Процесс, устройство и группа процессов\n",
+          "new": "<a id=\"ddp-process-ranks\"></a>\n\n## Процесс, устройство и группа процессов\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-rank-topology.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-rank-topology.png|Глобальные и локальные номера восьми процессов на двух машинах]]"
+        },
+        {
+          "old": "Коллективная операция выполняется не обязательно всеми процессами запуска,\n",
+          "new": "<a id=\"ddp-process-groups\"></a>\n\nКоллективная операция выполняется не обязательно всеми процессами запуска,\n"
+        },
+        {
+          "old": "Для запуска одной копии процесса на каждой из четырёх GPU одной машины\n",
+          "new": "<a id=\"ddp-launch\"></a>\n\nДля запуска одной копии процесса на каждой из четырёх GPU одной машины\n"
+        },
+        {
+          "old": "## От сообщений к коллективным операциям\n",
+          "new": "<a id=\"ddp-collective-results\"></a>\n\n## От сообщений к коллективным операциям\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/collective-primitives-overview.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/collective-primitives-overview.svg|Входы, выходы и размещение результатов четырёх коллективных операций]]"
+        },
+        {
+          "old": "### All-to-all sends a different part to each destination\n",
+          "new": "<a id=\"ddp-all-to-all\"></a>\n\n### All-to-all sends a different part to each destination\n"
+        },
+        {
+          "old": "### Uneven all-to-all: send counts become receive counts\n",
+          "new": "<a id=\"ddp-uneven-all-to-all\"></a>\n\n### Uneven all-to-all: send counts become receive counts\n"
+        },
+        {
+          "old": "Коллективные операции требуют согласованного участия процессов: совпадающих\n",
+          "new": "<a id=\"ddp-collective-order\"></a>\n\nКоллективные операции требуют согласованного участия процессов: совпадающих\n"
+        },
+        {
+          "old": "<a id=\"ddp-как-replicated-state-machine\"></a>\n",
+          "new": "<a id=\"ddp-replica-state\"></a>\n\n<a id=\"ddp-как-replicated-state-machine\"></a>\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/data-parallel-flow.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/data-parallel-flow.svg|Четыре полные реплики модели с разными данными и общей редукцией градиентов]]"
+        },
+        {
+          "old": "### Среднее по процессам и среднее по данным\n",
+          "new": "<a id=\"ddp-loss-reduction\"></a>\n\n### Среднее по процессам и среднее по данным\n"
+        },
+        {
+          "old": "## Как разделить данные: DistributedSampler\n",
+          "new": "<a id=\"ddp-sampler\"></a>\n\n## Как разделить данные: DistributedSampler\n"
+        },
+        {
+          "old": "### Что делает join с закончившим работу процессом\n",
+          "new": "<a id=\"ddp-join\"></a>\n\n### Что делает join с закончившим работу процессом\n"
+        },
+        {
+          "old": "## Накопление градиентов и no_sync\n",
+          "new": "<a id=\"ddp-accumulation\"></a>\n\n## Накопление градиентов и no_sync\n"
+        },
+        {
+          "old": "```python\n# Каждый labels содержит уже выровненные целевые токены.\n",
+          "new": "<a id=\"ddp-token-window\"></a>\n\n```python\n# Каждый labels содержит уже выровненные целевые токены.\n"
+        },
+        {
+          "old": "<a id=\"от-корректного-ddp-к-перекрытию-communication\"></a>\n",
+          "new": "<a id=\"ddp-flat-gradients\"></a>\n\n<a id=\"от-корректного-ddp-к-перекрытию-communication\"></a>\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ddp-review-2026-09/pytorch-ddp-fig4-gradient-reduction.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ddp-review-2026-09/pytorch-ddp-fig4-gradient-reduction.png|Autograd двух реплик, упаковка градиентов в buckets и обмен]]"
+        },
+        {
+          "old": "Размер группы градиентов задаёт компромисс. Очень маленькие группы позволяют\n",
+          "new": "<a id=\"ddp-bucket-size\"></a>\n\nРазмер группы градиентов задаёт компромисс. Очень маленькие группы позволяют\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-overview-2026-10-23/hf-ddp-sequential.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-overview-2026-10-23/hf-ddp-sequential.svg|Последовательные backward и редукция всех градиентов]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-overview-2026-10-23/hf-ddp-overlap.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-overview-2026-10-23/hf-ddp-overlap.svg|Передачи градиентов слоёв перекрываются с оставшимся backward]]"
+        },
+        {
+          "old": "### Порядок операций и неиспользованные параметры\n",
+          "new": "<a id=\"ddp-unused-parameters\"></a>\n\n### Порядок операций и неиспользованные параметры\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ddp-review-2026-09/pytorch-ddp-fig3-order-and-unused-gradients.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ddp-review-2026-09/pytorch-ddp-fig3-order-and-unused-gradients.png|Неверный порядок редукций и bucket с отсутствующим градиентом]]"
+        },
+        {
+          "old": "### Stream ordering and allocation lifetime\n",
+          "new": "<a id=\"ddp-stream-lifetime\"></a>\n\n### Stream ordering and allocation lifetime\n"
+        },
+        {
+          "old": "### Compiling backward can change when hooks become ready\n",
+          "new": "<a id=\"ddp-compiled-backward\"></a>\n\n### Compiling backward can change when hooks become ready\n"
+        },
+        {
+          "old": "### Resource contention is outside the readiness-only model\n",
+          "new": "<a id=\"ddp-resource-contention\"></a>\n\n### Resource contention is outside the readiness-only model\n"
+        },
+        {
+          "old": "## Сколько стоит all-reduce\n",
+          "new": "<a id=\"ddp-ring-cost\"></a>\n\n## Сколько стоит all-reduce\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/ring-allreduce.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/ring-allreduce.svg|Фазы reduce-scatter и all-gather кольцевого all-reduce]]"
+        },
+        {
+          "old": "### Один фрагмент на четырёх процессах\n",
+          "new": "<a id=\"ddp-ring-trace\"></a>\n\n### Один фрагмент на четырёх процессах\n"
+        },
+        {
+          "old": "В [задаче `alternate_ring_all_reduce`, CS336 Assignment 2, §8.1](https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf#page=41)\n",
+          "new": "<a id=\"ddp-alternate-ring\"></a>\n\nВ [задаче `alternate_ring_all_reduce`, CS336 Assignment 2, §8.1](https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf#page=41)\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p6.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p6.png|Пути связи GPU через NVLink, NVSwitch, PCIe и сетевые адаптеры]]"
+        },
+        {
+          "old": "### Где возникает предел параллелизма по данным\n",
+          "new": "<a id=\"ddp-capacity-bound\"></a>\n\n### Где возникает предел параллелизма по данным\n"
+        },
+        {
+          "old": "### Полезность масштабирования\n",
+          "new": "<a id=\"ddp-scaling-efficiency\"></a>\n\n### Полезность масштабирования\n"
+        },
+        {
+          "old": "При *gossip*-обмене каждый участник усредняет значения только с соседями\n",
+          "new": "<a id=\"ddp-gossip\"></a>\n\nПри *gossip*-обмене каждый участник усредняет значения только с соседями\n"
+        },
+        {
+          "old": "При сжатии градиентов часть информации теряется. Например, если каждый раз\n",
+          "new": "<a id=\"ddp-error-feedback\"></a>\n\nПри сжатии градиентов часть информации теряется. Например, если каждый раз\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ddp-2026-10-23/edls-error-feedback.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ddp-2026-10-23/edls-error-feedback.png|Сжатие градиента с сохранением неотправленного остатка для следующего шага]]"
+        },
+        {
+          "old": "PowerSGD использует низкоранговое приближение матрицы градиента\n",
+          "new": "<a id=\"ddp-powersgd\"></a>\n\nPowerSGD использует низкоранговое приближение матрицы градиента\n"
+        },
+        {
+          "old": "### Как согласовать низкоранговое приближение\n",
+          "new": "<a id=\"ddp-powersgd-steps\"></a>\n\n### Как согласовать низкоранговое приближение\n"
+        },
+        {
+          "old": "## Если один процесс остановился или пошёл по другой ветви\n",
+          "new": "<a id=\"ddp-failures\"></a>\n\n## Если один процесс остановился или пошёл по другой ветви\n"
+        },
+        {
+          "old": "## Проверка\n",
+          "new": "<a id=\"ddp-correctness-validation\"></a>\n\n## Проверка\n"
+        },
+        {
+          "old": "Наконец, указывать просто «пропускная способность» недостаточно.\n",
+          "new": "<a id=\"ddp-bandwidth\"></a>\n\nНаконец, указывать просто «пропускная способность» недостаточно.\n"
+        },
+        {
+          "old": "| Source rank | To rank 0 | To rank 1 | To rank 2 | To rank 3 | Total sent |\n| --- | ---: | ---: | ---: | ---: | ---: |\n| 0 | 2 | 2 | 1 | 1 | 6 |\n| 1 | 3 | 2 | 2 | 2 | 9 |\n| 2 | 2 | 1 | 1 | 1 | 5 |\n| 3 | 2 | 2 | 2 | 1 | 7 |\n| Total received | 9 | 7 | 6 | 5 | 27 |\n",
+          "new": "The numbered columns name destination ranks. The last column and row\ncontain the sent and received totals, respectively.\n\n| Source | To 0 | To 1 | To 2 | To 3 | Sent |\n| --- | ---: | ---: | ---: | ---: | ---: |\n| 0 | 2 | 2 | 1 | 1 | 6 |\n| 1 | 3 | 2 | 2 | 2 | 9 |\n| 2 | 2 | 1 | 1 | 1 | 5 |\n| 3 | 2 | 2 | 2 | 1 | 7 |\n| Total | 9 | 7 | 6 | 5 | 27 |\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md",
+      "before_sha256": "3fe01a82c9a8f60a417d7e3eacce59dac608cd767944af5d85db5ab549be1f5e",
+      "after_sha256": "6336e90f80065963b42565926803e714626f1e856fbfce91cd7e0f73f6988ad4",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-23\nlast_verified: 2026-10-23\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\nreference_terms:\n  - anchor: checkpoint-memory-states\n    label: \"Параметры, градиенты, активации и временные буферы\"\n    label_en: \"Parameters, gradients, activations and temporary buffers\"\n  - anchor: checkpoint-saved-inputs\n    label: \"Зачем autograd сохраняет входы операций\"\n    label_en: \"Why autograd saves operation inputs\"\n  - anchor: checkpoint-storage-hooks\n    label: \"Saved-tensor hooks и учёт общей памяти\"\n    label_en: \"Saved-tensor hooks and shared-storage accounting\"\n  - anchor: checkpoint-storage-views\n    label: \"Маленький view и большое хранилище\"\n    label_en: \"A small view retaining large storage\"\n  - anchor: checkpoint-recomputation\n    label: \"Восстановление активаций из входа сегмента\"\n    label_en: \"Reconstructing activations from segment inputs\"\n  - anchor: checkpoint-segment-size\n    label: \"Размер checkpoint-сегмента и пик активаций\"\n    label_en: \"Checkpoint segment size and activation peaks\"\n  - anchor: checkpoint-recursive\n    label: \"Вложенный пересчёт и восстановление префиксов\"\n    label_en: \"Nested recomputation and prefix replay\"\n  - anchor: checkpoint-variants\n    label: \"Non-reentrant checkpointing, early_stop и побочные эффекты\"\n    label_en: \"Non-reentrant checkpointing, early_stop and side effects\"\n  - anchor: checkpoint-dropout-rng\n    label: \"Dropout и восстановление RNG при пересчёте\"\n    label_en: \"Dropout and RNG preservation during recomputation\"\n  - anchor: checkpoint-selective\n    label: \"Selective checkpointing: сохранить дорогой GEMM\"\n    label_en: \"Selective checkpointing: retaining an expensive GEMM\"\n  - anchor: checkpoint-memory-budget\n    label: \"Выбор сохранений, min-cut и memory budget\"\n    label_en: \"Save-policy selection, min-cut and memory budgets\"\n  - anchor: checkpoint-kernel-dependence\n    label: \"Сохранения RMSNorm и FlashAttention зависят от ядра\"\n    label_en: \"Kernel-dependent saved tensors in RMSNorm and FlashAttention\"\n  - anchor: checkpoint-memory-traffic\n    label: \"Пересчёт, fusion и обращения к HBM\"\n    label_en: \"Recomputation, fusion and HBM traffic\"\n  - anchor: checkpoint-offload-types\n    label: \"Activation, parameter и optimizer offload\"\n    label_en: \"Activation, parameter and optimizer offload\"\n  - anchor: checkpoint-save-on-cpu\n    label: \"save_on_cpu и сохранённые веса\"\n    label_en: \"save_on_cpu and retained weights\"\n  - anchor: checkpoint-sac-hooks\n    label: \"Selective-кеш, saved-tensor hooks и offload\"\n    label_en: \"The selective cache, saved-tensor hooks and offload\"\n  - anchor: checkpoint-transfer-time\n    label: \"Стоимость D2H/H2D и два направления передачи\"\n    label_en: \"D2H/H2D costs and both transfer directions\"\n  - anchor: checkpoint-prefetch\n    label: \"Предзагрузка, pinned memory и двойные буферы\"\n    label_en: \"Prefetch, pinned memory and double buffering\"\n  - anchor: worked-configuration\n    label: \"Совместный бюджет пересчёта и offload\"\n    label_en: \"A joint recomputation/offload memory budget\"\n  - anchor: checkpoint-optimizer-offload\n    label: \"Перенос Adam, параметров и уровень NVMe\"\n    label_en: \"Adam offload, parameter offload and the NVMe tier\"\n  - anchor: checkpoint-validation\n    label: \"Проверка градиентов, пика памяти и полного шага\"\n    label_en: \"Checking gradients, memory peaks and full steps\"\n"
+        },
+        {
+          "old": "## Что именно занимает память\n",
+          "new": "<a id=\"checkpoint-memory-states\"></a>\n\n## Что именно занимает память\n"
+        },
+        {
+          "old": "### Почему autograd сохраняет входы операций\n",
+          "new": "<a id=\"checkpoint-saved-inputs\"></a>\n\n### Почему autograd сохраняет входы операций\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/checkpoint-2026-10-23/pytorch-eager-saved-tensors.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/checkpoint-2026-10-23/pytorch-eager-saved-tensors.png|Операции forward и backward, соединённые сохранёнными для производных тензорами]]"
+        },
+        {
+          "old": "## Как увидеть saved tensors, а не угадывать их\n",
+          "new": "<a id=\"checkpoint-storage-hooks\"></a>\n\n## Как увидеть saved tensors, а не угадывать их\n"
+        },
+        {
+          "old": "### Почему один элемент может удерживать большой буфер\n",
+          "new": "<a id=\"checkpoint-storage-views\"></a>\n\n### Почему один элемент может удерживать большой буфер\n"
+        },
+        {
+          "old": "### Сохранить вход, восстановить внутренние значения\n",
+          "new": "<a id=\"checkpoint-recomputation\"></a>\n\n### Сохранить вход, восстановить внутренние значения\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/pytorch-checkpoint.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/pytorch-checkpoint.png|Сохранение промежуточных тензоров и восстановление checkpoint-области из входа]]"
+        },
+        {
+          "old": "### Как выбрать размер сегмента\n",
+          "new": "<a id=\"checkpoint-segment-size\"></a>\n\n### Как выбрать размер сегмента\n"
+        },
+        {
+          "old": "### Вложенные области пересчёта\n",
+          "new": "<a id=\"checkpoint-recursive\"></a>\n\n### Вложенные области пересчёта\n"
+        },
+        {
+          "old": "### Повторяется не обязательно весь Python-код\n",
+          "new": "<a id=\"checkpoint-variants\"></a>\n\n### Повторяется не обязательно весь Python-код\n"
+        },
+        {
+          "old": "### Dropout: одинаковый forward ещё не доказывает правильный backward\n",
+          "new": "<a id=\"checkpoint-dropout-rng\"></a>\n\n### Dropout: одинаковый forward ещё не доказывает правильный backward\n"
+        },
+        {
+          "old": "### Выборочное сохранение: не повторять дорогую матрицу\n",
+          "new": "<a id=\"checkpoint-selective\"></a>\n\n### Выборочное сохранение: не повторять дорогую матрицу\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/pytorch-selective-checkpoint.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/pytorch-selective-checkpoint.png|Полный пересчёт и selective checkpointing с сохранённым дорогим результатом]]"
+        },
+        {
+          "old": "### Как выбирать сохранения при ограничении памяти\n",
+          "new": "<a id=\"checkpoint-memory-budget\"></a>\n\n### Как выбирать сохранения при ограничении памяти\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/checkpoint-2026-10-23/pytorch-memory-budget-pareto.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/checkpoint-2026-10-23/pytorch-memory-budget-pareto.png|Граница Парето для selective-политик и ограничение памяти сохранений]]"
+        },
+        {
+          "old": "### Что зависит от реализации attention и нормализации\n",
+          "new": "<a id=\"checkpoint-kernel-dependence\"></a>\n\n### Что зависит от реализации attention и нормализации\n"
+        },
+        {
+          "old": "### Когда пересчёт уменьшает обращения к памяти\n",
+          "new": "<a id=\"checkpoint-memory-traffic\"></a>\n\n### Когда пересчёт уменьшает обращения к памяти\n"
+        },
+        {
+          "old": "<a id=\"offload--другая-граница\"></a>\n",
+          "new": "<a id=\"checkpoint-offload-types\"></a>\n\n<a id=\"offload--другая-граница\"></a>\n"
+        },
+        {
+          "old": "### Перенос сохранённых тензоров в PyTorch\n",
+          "new": "<a id=\"checkpoint-save-on-cpu\"></a>\n\n### Перенос сохранённых тензоров в PyTorch\n"
+        },
+        {
+          "old": "### Сколько времени занимает передача\n",
+          "new": "<a id=\"checkpoint-sac-hooks\"></a>\n### Какие сохранения увидят пользовательские hooks\n\nSelective checkpointing хранит выбранные результаты в собственном кеше,\nотдельно от сохранений autograd. Если `pack` вызывается только при\nсохранении входов checkpoint-области, это ещё не означает, что через него\nпрошли результаты дорогих операций внутри неё. Для сочетания selective\ncheckpointing с offload нужно охватить и этот кеш.\n\nРассмотрим `sin(x @ w)`, где `x` имеет форму `[3,4]`, а `w` —\n`[4,5]`. Политика сохраняет результат `mm` формы `[3,5]`, чтобы\nне повторять умножение. В PyTorch 2.14.1 при\n`respect_saved_tensors_hooks=False` внешний hook видит входы `[3,4]`\nи `[4,5]`, но кеш самостоятельно удерживает результат `[3,5]`.\nПри `True` результат тоже передаётся в `pack`, а перед использованием\nв восстановленном проходе — в `unpack`.\n\n<!-- example:checkpoint-sac-hooks -->\n\n```python\nimport torch\nfrom functools import partial\nfrom torch.utils.checkpoint import checkpoint, create_selective_checkpoint_contexts\n\ndef cache_hook_run(respect, shape=(3, 4, 5)):\n    torch.manual_seed(7)\n    rows, width, outputs = shape\n    x = torch.randn(rows, width, dtype=torch.float64, requires_grad=True)\n    w = torch.randn(width, outputs, dtype=torch.float64, requires_grad=True)\n    packed, unpacked = [], []\n\n    def pack(tensor):\n        packed.append(tuple(tensor.shape))\n        return tensor.detach()\n\n    def unpack(tensor):\n        unpacked.append(tuple(tensor.shape))\n        return tensor\n\n    def region(x, w):\n        return torch.sin(torch.mm(x, w))\n\n    contexts = partial(\n        create_selective_checkpoint_contexts, [torch.ops.aten.mm.default]\n    )\n    with torch.autograd.graph.saved_tensors_hooks(pack, unpack):\n        y = checkpoint(\n            region, x, w, use_reentrant=False, context_fn=contexts,\n            respect_saved_tensors_hooks=respect,\n        )\n    y.sum().backward()\n    return (packed, unpacked), (y.detach(), x.grad.clone(), w.grad.clone())\n\nwithout_hooks, baseline = cache_hook_run(False)\nwith_hooks, routed = cache_hook_run(True)\nassert without_hooks == ([(3, 4), (4, 5)], [(3, 4), (4, 5)])\nassert with_hooks == ([(3, 4), (4, 5), (3, 5)], [(3, 4), (4, 5), (3, 5)])\nfor actual, expected in zip(routed, baseline):\n    torch.testing.assert_close(actual, expected, rtol=1e-12, atol=1e-12)\nprint(\"pack/unpack without SAC routing:\", without_hooks)\nprint(\"pack/unpack with SAC routing:\", with_hooks)\n```\n\nВ этом примере `pack` записывает форму и возвращает `detach()`: данные\nостаются в том же хранилище. Поэтому совпадение выходов и градиентов\nпроверяет маршрут сохранения, но не экономию GPU-памяти. Дополнительные\n15 значений FP64 в результате `mm` — 120 байт данных; сумма таких\nсобытий по-прежнему не равна пику памяти шага.\n\n`save_on_cpu` использует тот же механизм hooks для копирования сохранений.\nФлаг `True` позволяет ему обработать и результаты из selective-кеша;\nисходные параметры и другие живые ссылки при этом могут оставаться на GPU.\nПо умолчанию `None` в этой версии сохраняет прежнее поведение и выдаёт\nпредупреждение, если внешний hook активен. Явный `False` выбирает прежний\nмаршрут без предупреждения. Эти правила относятся к non-reentrant\ncheckpointing с selective-политикой, а не к любому кешу компилятора.\n\nИсточник: [PyTorch 2.14, параметр `respect_saved_tensors_hooks`](https://docs.pytorch.org/docs/2.14/checkpoint.html#torch.utils.checkpoint.checkpoint)\nи [реализация selective-кеша в v2.14.1](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/torch/utils/checkpoint.py#L1545-L1651).\nПример добавлен для разбора этого механизма; он исполняется на CPU без\nCUDA-передач и не измеряет пользу offload.\n\n<a id=\"checkpoint-transfer-time\"></a>\n\n### Сколько времени занимает передача\n"
+        },
+        {
+          "old": "### Предзагрузка и двойная буферизация\n",
+          "new": "<a id=\"checkpoint-prefetch\"></a>\n\n### Предзагрузка и двойная буферизация\n"
+        },
+        {
+          "old": "### Offload оптимизатора и параметров\n",
+          "new": "<a id=\"checkpoint-optimizer-offload\"></a>\n\n### Offload оптимизатора и параметров\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/checkpoint-offload-review-2026-10/deepspeed-optimizer-offload.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/checkpoint-offload-review-2026-10/deepspeed-optimizer-offload.png|Размещение весов, градиентов и состояния Adam на CPU или GPU]]"
+        },
+        {
+          "old": "## Инженерный выбор\n",
+          "new": "<a id=\"checkpoint-validation\"></a>\n\n## Инженерный выбор\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "0888ae3665c5d3c495567332773ef92138e4417aa8f36456850ca5c41b310d69",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP|Процессы, коллективные операции и DDP]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP|Процессы, коллективные операции и DDP]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-process-ranks|Global rank, local rank и выбор устройства]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-process-groups|Группы процессов и согласованный new_group]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-launch|Запуск torchrun и инициализация DDP]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-collective-results|Коллективные операции: результат и владельцы тензора]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#collective-destinations-gather-scatter-all-to-all|Scatter, gather и all-gather: получатели результата]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-all-to-all|All-to-all: отдельная часть каждому получателю]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-uneven-all-to-all|Неравные all-to-all: send counts и receive counts]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-collective-order|Совпадение порядка и смысла collective-операций]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-replica-state|Согласованность весов, Adam и буферов реплик]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-loss-reduction|Среднее по процессам и нормировка по токенам]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-sampler|DistributedSampler, set_epoch и повторные индексы]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-join|DDP join: неравные входы и состояние оптимизатора]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-accumulation|Накопление градиентов и область no_sync]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-token-window|Общий знаменатель токенов за окно накопления]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-flat-gradients|Объединение и обратное размещение градиентов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-bucket-size|Размер buckets и момент начала обмена]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-unused-parameters|Порядок редукции и неиспользованные параметры]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-overlap-readiness-streams-compilation|Готовность buckets на всех rank и хвост обмена]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-stream-lifetime|Порядок CUDA streams и срок жизни хранилища]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-compiled-backward|Компиляция backward и готовность autograd hooks]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-resource-contention|Конкуренция вычислений и обмена за ресурсы]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-ring-cost|Кольцевой all-reduce: раунды, байты и задержки]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-ring-trace|Reduce-scatter и all-gather по шагам кольца]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-alternate-ring|Кольцо с целыми тензорами и с разбиением]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-capacity-bound|Предел data parallelism при фиксированном батче]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-scaling-efficiency|Скрытое время обмена и ускорение полного шага]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-gossip|Gossip: сохранение среднего и согласие реплик]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-error-feedback|Error feedback и состояние остатка]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-powersgd|PowerSGD: низкоранговое сжатие и его цена]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-powersgd-steps|Согласование факторов PowerSGD двумя редукциями]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-failures|Диагностика остановившегося или разошедшегося rank]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-correctness-validation|Сверка DDP с однопроцессным обучением]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-bandwidth|Algorithm bandwidth и bus bandwidth]]\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload|Gradient checkpointing и offload]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload|Gradient checkpointing и offload]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-memory-states|Параметры, градиенты, активации и временные буферы]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-saved-inputs|Зачем autograd сохраняет входы операций]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-storage-hooks|Saved-tensor hooks и учёт общей памяти]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-storage-views|Маленький view и большое хранилище]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-recomputation|Восстановление активаций из входа сегмента]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-segment-size|Размер checkpoint-сегмента и пик активаций]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-recursive|Вложенный пересчёт и восстановление префиксов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-variants|Non-reentrant checkpointing, early_stop и побочные эффекты]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-dropout-rng|Dropout и восстановление RNG при пересчёте]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-selective|Selective checkpointing: сохранить дорогой GEMM]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-memory-budget|Выбор сохранений, min-cut и memory budget]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-kernel-dependence|Сохранения RMSNorm и FlashAttention зависят от ядра]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-memory-traffic|Пересчёт, fusion и обращения к HBM]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-offload-types|Activation, parameter и optimizer offload]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-save-on-cpu|save_on_cpu и сохранённые веса]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-sac-hooks|Selective-кеш, saved-tensor hooks и offload]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-transfer-time|Стоимость D2H/H2D и два направления передачи]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-prefetch|Предзагрузка, pinned memory и двойные буферы]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#worked-configuration|Совместный бюджет пересчёта и offload]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-optimizer-offload|Перенос Adam, параметров и уровень NVMe]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-validation|Проверка градиентов, пика памяти и полного шага]]\n"
+        }
+      ],
+      "after_sha256": "0120ad90a721f47da62b901a77878efdf0d5ec2564d04c522a726fc2e1830ddd"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "45213b1f6740c2673470ad73d9d98521e02363a6891fb8d766cc8da3104cb0e2",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP|Processes, collectives, and DDP]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP|Processes, collectives, and DDP]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-process-ranks|Global rank, local rank and device selection]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-process-groups|Process groups and consistent new_group creation]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-launch|torchrun launch and DDP initialization]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-collective-results|Collective operations: results and tensor ownership]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#collective-destinations-gather-scatter-all-to-all|Scatter, gather and all-gather: result destinations]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-all-to-all|All-to-all: a separate part for each destination]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-uneven-all-to-all|Uneven all-to-all: send counts and receive counts]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-collective-order|Matching collective order and meaning]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-replica-state|Consistency of replica weights, Adam and buffers]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-loss-reduction|Process means versus token-normalized gradients]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-sampler|DistributedSampler, set_epoch and repeated indices]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-join|DDP join: uneven inputs and optimizer state]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-accumulation|Gradient accumulation and the no_sync region]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-token-window|A global token denominator over the accumulation window]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-flat-gradients|Flattening and restoring gradients]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-bucket-size|Bucket sizes and communication release times]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-unused-parameters|Reduction order and unused parameters]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-overlap-readiness-streams-compilation|Bucket readiness on every rank and the exposed tail]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-stream-lifetime|CUDA stream ordering and allocation lifetime]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-compiled-backward|Backward compilation and autograd-hook readiness]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-resource-contention|Resource contention between compute and communication]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-ring-cost|Ring all-reduce: rounds, bytes and latency]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-ring-trace|Step-by-step ring reduce-scatter and all-gather]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-alternate-ring|Whole-tensor rings versus chunked rings]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-capacity-bound|The data-parallel limit at a fixed global batch]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-scaling-efficiency|Hidden communication and full-step speedup]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-gossip|Gossip: mean preservation and replica consensus]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-error-feedback|Error feedback and residual state]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-powersgd|PowerSGD: low-rank compression and its costs]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-powersgd-steps|Coordinating PowerSGD factors through two reductions]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-failures|Diagnosing a stopped or divergent rank]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-correctness-validation|Comparing DDP with single-process training]]\n  - [[00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP#ddp-bandwidth|Algorithm bandwidth and bus bandwidth]]\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload|Gradient checkpointing and offload]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload|Gradient checkpointing and offload]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-memory-states|Parameters, gradients, activations and temporary buffers]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-saved-inputs|Why autograd saves operation inputs]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-storage-hooks|Saved-tensor hooks and shared-storage accounting]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-storage-views|A small view retaining large storage]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-recomputation|Reconstructing activations from segment inputs]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-segment-size|Checkpoint segment size and activation peaks]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-recursive|Nested recomputation and prefix replay]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-variants|Non-reentrant checkpointing, early_stop and side effects]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-dropout-rng|Dropout and RNG preservation during recomputation]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-selective|Selective checkpointing: retaining an expensive GEMM]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-memory-budget|Save-policy selection, min-cut and memory budgets]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-kernel-dependence|Kernel-dependent saved tensors in RMSNorm and FlashAttention]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-memory-traffic|Recomputation, fusion and HBM traffic]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-offload-types|Activation, parameter and optimizer offload]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-save-on-cpu|save_on_cpu and retained weights]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-sac-hooks|The selective cache, saved-tensor hooks and offload]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-transfer-time|D2H/H2D costs and both transfer directions]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-prefetch|Prefetch, pinned memory and double buffering]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#worked-configuration|A joint recomputation/offload memory budget]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-optimizer-offload|Adam offload, parameter offload and the NVMe tier]]\n  - [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload#checkpoint-validation|Checking gradients, memory peaks and full steps]]\n"
+        }
+      ],
+      "after_sha256": "80c5b6135747621cc7d41f4fd4ab7af3333fa73fe7e51f7594b6dc5fc15fc7f3"
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "956f870e999b6ad15642a0e2b5cf0925875a43e8d223acc554c0c4adfba60359",
+      "after_sha256": "a43c66752dc637ff15af5ff587f12246470a6abfdd395f53e290dd5f645a5f13",
+      "changes": [
+        {
+          "old": "    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/collective-primitives-overview.svg\n",
+          "new": "    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/collective-primitives-overview.svg\n    sha256: 283afe55e4c7fe66e5c7de6393c892b63c1c19eaf68ead7b8dde1457ffcfae38\n"
+        },
+        {
+          "old": "    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/ring-allreduce.svg\n",
+          "new": "    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/ring-allreduce.svg\n    sha256: 9e91a5336390108897bd817acb5aa50145738180ae17fb9066011705d5de4948\n"
+        },
+        {
+          "old": "    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/data-parallel-flow.svg\n",
+          "new": "    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/data-parallel-flow.svg\n    sha256: ec06a0fce8f5f6df36f4e0cf45eefcf32533597f9f690965384782e35af14805\n"
+        },
+        {
+          "old": "  - {\"id\":\"mooc-scaling-04c1dd673b6b\",\"asset\":\"00 Учебник/Assets/Figures/curated/selection-metric-2026-11-04/mooc-kmeans-not-scaled.svg\",\"title\":\"Original k-means assignments before feature scaling\",\"author\":\"INRIA, scikit-learn MOOC contributors\",\"source_url\":\"https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/jupyter-book/clustering/clustering_quiz_m4_01.md\",\"source_image_url\":\"https://raw.githubusercontent.com/INRIA/scikit-learn-mooc/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/figures/clustering_quiz_kmeans_not_scaled.svg\",\"commit\":\"0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6\",\"source_asset\":\"Assets/Sources/Scikit-learn MOOC/figures/clustering_quiz_kmeans_not_scaled.svg\",\"source_asset_sha256\":\"04c1dd673b6b7690a0bc9e7c06358a43ec7b38e64c7cac401180bb9cf37ec2c8\",\"sha256\":\"04c1dd673b6b7690a0bc9e7c06358a43ec7b38e64c7cac401180bb9cf37ec2c8\",\"source_page_snapshot\":\"05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_quiz_m4_01.md.md\",\"source_viewbox\":[0,0,375.6672,325.18365],\"license\":\"CC BY 4.0\",\"license_url\":\"https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE\",\"license_evidence\":\"site/public/licenses/scikit-learn-mooc-0cc70c41-CC-BY-4.0.txt\",\"license_evidence_sha256\":\"f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f\",\"public_license_copy\":\"site/public/licenses/scikit-learn-mooc-0cc70c41-CC-BY-4.0.txt\",\"derivation\":\"source-svg-copy\",\"modifications\":\"None. Existing full course SVG retained byte-for-byte; no crop, redraw, translation, relabeling or recompression. The k-means example illustrates changes in feature geometry, not k-center accuracy.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"pinned-upstream-repository\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-04\",\"used_in\":[\"00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding.md\"]}\n",
+          "new": "  - {\"id\":\"curated-mooc-scaling-04c1dd673b6b\",\"asset\":\"00 Учебник/Assets/Figures/curated/selection-metric-2026-11-04/mooc-kmeans-not-scaled.svg\",\"title\":\"Original k-means assignments before feature scaling\",\"author\":\"INRIA, scikit-learn MOOC contributors\",\"source_url\":\"https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/jupyter-book/clustering/clustering_quiz_m4_01.md\",\"source_image_url\":\"https://raw.githubusercontent.com/INRIA/scikit-learn-mooc/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/figures/clustering_quiz_kmeans_not_scaled.svg\",\"commit\":\"0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6\",\"source_asset\":\"Assets/Sources/Scikit-learn MOOC/figures/clustering_quiz_kmeans_not_scaled.svg\",\"source_asset_sha256\":\"04c1dd673b6b7690a0bc9e7c06358a43ec7b38e64c7cac401180bb9cf37ec2c8\",\"sha256\":\"04c1dd673b6b7690a0bc9e7c06358a43ec7b38e64c7cac401180bb9cf37ec2c8\",\"source_page_snapshot\":\"05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_quiz_m4_01.md.md\",\"source_viewbox\":[0,0,375.6672,325.18365],\"license\":\"CC BY 4.0\",\"license_url\":\"https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE\",\"license_evidence\":\"site/public/licenses/scikit-learn-mooc-0cc70c41-CC-BY-4.0.txt\",\"license_evidence_sha256\":\"f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f\",\"public_license_copy\":\"site/public/licenses/scikit-learn-mooc-0cc70c41-CC-BY-4.0.txt\",\"derivation\":\"source-svg-copy\",\"modifications\":\"None. Existing full course SVG retained byte-for-byte; no crop, redraw, translation, relabeling or recompression. The k-means example illustrates changes in feature geometry, not k-center accuracy.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"pinned-upstream-repository\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-04\",\"used_in\":[\"00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding.md\"]}\n"
+        },
+        {
+          "old": "  - {\"id\":\"mooc-scaling-bd2aae6c6eca\",\"asset\":\"00 Учебник/Assets/Figures/curated/selection-metric-2026-11-04/mooc-kmeans-scaled.svg\",\"title\":\"Original k-means assignments after feature scaling\",\"author\":\"INRIA, scikit-learn MOOC contributors\",\"source_url\":\"https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/jupyter-book/clustering/clustering_quiz_m4_01.md\",\"source_image_url\":\"https://raw.githubusercontent.com/INRIA/scikit-learn-mooc/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/figures/clustering_quiz_kmeans_scaled.svg\",\"commit\":\"0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6\",\"source_asset\":\"Assets/Sources/Scikit-learn MOOC/figures/clustering_quiz_kmeans_scaled.svg\",\"source_asset_sha256\":\"bd2aae6c6eca8e5951324b268c312dc52263a697e7de1d7b3040bc3df2310694\",\"sha256\":\"bd2aae6c6eca8e5951324b268c312dc52263a697e7de1d7b3040bc3df2310694\",\"source_page_snapshot\":\"05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_quiz_m4_01.md.md\",\"source_viewbox\":[0,0,375.6672,325.18365],\"license\":\"CC BY 4.0\",\"license_url\":\"https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE\",\"license_evidence\":\"site/public/licenses/scikit-learn-mooc-0cc70c41-CC-BY-4.0.txt\",\"license_evidence_sha256\":\"f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f\",\"public_license_copy\":\"site/public/licenses/scikit-learn-mooc-0cc70c41-CC-BY-4.0.txt\",\"derivation\":\"source-svg-copy\",\"modifications\":\"None. Existing full course SVG retained byte-for-byte; no crop, redraw, translation, relabeling or recompression. The k-means example illustrates changes in feature geometry, not k-center accuracy.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"pinned-upstream-repository\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-04\",\"used_in\":[\"00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding.md\"]}\n",
+          "new": "  - {\"id\":\"curated-mooc-scaling-bd2aae6c6eca\",\"asset\":\"00 Учебник/Assets/Figures/curated/selection-metric-2026-11-04/mooc-kmeans-scaled.svg\",\"title\":\"Original k-means assignments after feature scaling\",\"author\":\"INRIA, scikit-learn MOOC contributors\",\"source_url\":\"https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/jupyter-book/clustering/clustering_quiz_m4_01.md\",\"source_image_url\":\"https://raw.githubusercontent.com/INRIA/scikit-learn-mooc/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/figures/clustering_quiz_kmeans_scaled.svg\",\"commit\":\"0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6\",\"source_asset\":\"Assets/Sources/Scikit-learn MOOC/figures/clustering_quiz_kmeans_scaled.svg\",\"source_asset_sha256\":\"bd2aae6c6eca8e5951324b268c312dc52263a697e7de1d7b3040bc3df2310694\",\"sha256\":\"bd2aae6c6eca8e5951324b268c312dc52263a697e7de1d7b3040bc3df2310694\",\"source_page_snapshot\":\"05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_quiz_m4_01.md.md\",\"source_viewbox\":[0,0,375.6672,325.18365],\"license\":\"CC BY 4.0\",\"license_url\":\"https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE\",\"license_evidence\":\"site/public/licenses/scikit-learn-mooc-0cc70c41-CC-BY-4.0.txt\",\"license_evidence_sha256\":\"f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f\",\"public_license_copy\":\"site/public/licenses/scikit-learn-mooc-0cc70c41-CC-BY-4.0.txt\",\"derivation\":\"source-svg-copy\",\"modifications\":\"None. Existing full course SVG retained byte-for-byte; no crop, redraw, translation, relabeling or recompression. The k-means example illustrates changes in feature geometry, not k-center accuracy.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"pinned-upstream-repository\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-04\",\"used_in\":[\"00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding.md\"]}\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/Assets/Figures/curated/selection-metric-2026-11-04/assets.json",
+      "before_sha256": "34b1465bd593004a05ed10b0f9911897d3e342b9d9a36b74d7aca154f2969eff",
+      "after_sha256": "b0956d728cc7e8c381ca21abd9aeca1dd94b7550d6afc06212653de87370fb25",
+      "changes": [
+        {
+          "old": "    \"id\": \"mooc-scaling-04c1dd673b6b\",\n",
+          "new": "    \"id\": \"curated-mooc-scaling-04c1dd673b6b\",\n"
+        },
+        {
+          "old": "    \"id\": \"mooc-scaling-bd2aae6c6eca\",\n",
+          "new": "    \"id\": \"curated-mooc-scaling-bd2aae6c6eca\",\n"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "status": "verified-local-delta",
+    "scope": "Two complete owner reads,54 subject links per locale,15 descriptive alt aliases,and a worked selective-checkpointing saved-tensor-hook example. Prior explanations,code,math,source excerpts and19 original figure placements retained. One narrow all-to-all table reflow preserves every count and total. No translation,new scientific image,whole-course acceptance or release.",
+    "sourceComparison": {
+      "fresh": [
+        "Official PyTorch2.14 DDP design note: complete main design text,including historical-v1.4 caveat,bucket order,autograd hooks and DDPOptimizer.",
+        "Official activation-checkpointing article: complete main article and existing figures3,5,8,12.",
+        "PyTorch2.14 checkpoint API: relevant RNG,non-reentrant/reentrant,early_stop,policy/context and respect_saved_tensors_hooks sections.",
+        "Installed torch2.14.1 _CachingTorchDispatchMode and _CachedTorchDispatchMode source inspected; entire checkpoint.py byte-identical to pinned official5c4886908584029761b579af026dcfb627c84070 file,sha25686a3d3ce928f5e302996e5a4f185dd47d42bdfe55021355cec90c37259b89887."
+      ],
+      "reused": "Prior source/mechanism comparisons in2026-10-23-ddp,2026-10-26-ddp-overlap-integration,2026-10-27-collective-destinations and2026-10-23-checkpoint-offload were read. Reuse is bounded by exact reversible baselines and unchanged examples/figures,not a fresh complete Stanford/EDLS/Harvard course acceptance.",
+      "addendum": "Worked sin(x@w),x[3,4],w[4,5] distinguishes autograd saves from SAC-cache saves. respect_saved_tensors_hooks routes the retained[3,5] matrix through both pack and unpack; detached CPU tensors are not claimed as CUDA offload or memory savings."
+    },
+    "explanationReview": {
+      "ddp": "Entire1632-line input and1797-line final explanation read in ordered ranges. After the final full read,one descriptive alt alias corrected from six to four collective operations against the visible original; no explanation,code or formula changed. Final owner329f92d8ee713d18d34372cb6613cc59d0caa9fe05d08a8abf71e8c7e34ffbc4.",
+      "checkpoint": "Entire926-line input and1110-line final chapter read. Final6336e90f80065963b42565926803e714626f1e856fbfce91cd7e0f73f6988ad4.",
+      "style": "Complete explanations preserved,including original English passages. New hook section checks the concrete shapes and both gradient paths; no new generic introductory or promotional prose. This editorial checklist is not proof of whole-course completeness."
+    },
+    "examples": {
+      "device": "CPU",
+      "torch": "2.14.1",
+      "exit": 0,
+      "ddp": "Eight of15 published Python fences execute across main,collective-destination and readiness checkers. Real two-worker and four-worker Gloo runs verify subgroup ranks,flat gradients,SGD/Adam references,token-normalized accumulation,no_sync,join,even/uneven collectives and zero-sized splits. Two readiness models match1000 independent max-plus cases plus5 invalid inputs. Seven CUDA/API/setup fragments are syntax-only. Subsequent changes were metadata,alts and a numeric table only; preservation tests bind all original code bodies.",
+      "checkpoint": "All9 published Python programs execute. Added36 hook shape/policy cases compare pack/unpack shapes,outputs and both independent analytic gradients. Prior105 budget cases,RNG,SAC3/4/3 matmuls,finite-difference,frozen-weight and44-call prefix-replay controls retained.",
+      "logs": [
+        "/var/tmp/bookvar-ddp-current-20261105.log",
+        "/var/tmp/bookvar-ddp-destinations-final-20261105.log",
+        "/var/tmp/bookvar-ddp-overlap-final-20261105.log",
+        "/var/tmp/bookvar-checkpoint-hooks-final-20261105.log"
+      ],
+      "limits": "No CUDA/NCCL execution,DDPOptimizer execution,GPU-memory/offload timing,network-failure experiment or performance benchmark."
+    },
+    "provenance": {
+      "figurePlacements": 19,
+      "newImages": 0,
+      "note": "Three inherited Harvard SVG hashes added after fresh pinned-upstream byte equality. Two earlier MOOC scaling IDs corrected consistently in central and per-folder records; original SVG bytes,license,source and geometry unchanged. New strict source/pin/hash/license/viewBox checks include26 invalid-metadata controls."
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-05-ddp-checkpoint-reader",
+      "desktop": "Default1280x720,document1265/1265. All14 DDP and5 checkpoint figures loaded and fit in native proportions. Selected full Harvard collective-primitives and PyTorch activation-checkpointing originals/captions personally inspected in viewer; prior unchanged-source figure inspections remain historical,not a fresh all19 zoom claim. New SAC explanation read inline.",
+      "mobile": "375x812 override,document360/360,reader328px. All14+5 images loaded and fit;16+6 display equations have zero KaTeX errors. DDP5 and checkpoint7 tables fit328/328 after final matrix header reflow. Complete four-rank matrix inspected with all16 counts,totals andgrand27 visible. Ring original inspected fitted and at2.5x with readable central labels; no all-pan-endpoint claim. New SAC text inspected. Temporary viewport reset.",
+      "navigation": "Actual RU index ->#ddp-process-groups and#checkpoint-sac-hooks; actual EN index ->#ddp-ring-cost and#checkpoint-sac-hooks,each target unique. Both EN pages explicitly disclose canonical-language fallback. Actual EN Next ->tensor-sequence-parallelism with correct h1. Russian interface restored; TP/SP left open.",
+      "transient": "A ref-page404 occurred during concurrent dev/content/static generation and disappeared on reload after completed build; no persistent broken-route claim. Locator mismatches were reobserved and retargeted by actual displayed names. No UI/source workaround."
+    },
+    "checks": {
+      "assetRegistry": {
+        "files": 1,
+        "tests": 178,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-ddp-checkpoint-regression-20261105.log"
+      },
+      "scoped": {
+        "files": 5,
+        "tests": 34,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-ddp-checkpoint-scoped-final-20261105.log"
+      },
+      "receipts": {
+        "files": 1,
+        "tests": 2,
+        "exit": 0,
+        "hashPinnedWholeReads": 103,
+        "unreadOwners": 50,
+        "log": "/var/tmp/bookvar-ddp-checkpoint-receipts-final-20261105.log"
+      },
+      "html": {
+        "tests": 209,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-ddp-checkpoint-output-final3-20261105.log"
+      },
+      "build": {
+        "pages": 2009,
+        "pagefindFiles": 2013,
+        "seconds": 30.21,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-ddp-checkpoint-site-final-20261105.log"
+      },
+      "links": {
+        "brokenInternal": 0,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-ddp-checkpoint-links-final3-20261105.log"
+      },
+      "size": {
+        "bytes": 856512961,
+        "files": 5626,
+        "limit": 1000000000,
+        "headroom": 143487039,
+        "exit": 0
+      },
+      "topicIndex": {
+        "topics": 153,
+        "exit": 0
+      }
+    },
+    "remaining": [
+      "Fifty of153 canonical owners still unread after recording these two reads;read counts are not accepted-chapter counts.",
+      "Continue TP/SP,PP,ZeRO/FSDP,expert/hybrid parallelism,network/storage/checkpoints and fault tolerance.",
+      "Existing rights/figure gaps,thematic course integration,public-checkout/Pages-base acceptance and authorized dev/Pages release remain open."
+    ],
+    "upstreamFigureByteChecks": [
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/collective-primitives-overview.svg",
+        "url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/collective_communication/images/svg/collective-primitives-overview.svg",
+        "upstreamSha256": "283afe55e4c7fe66e5c7de6393c892b63c1c19eaf68ead7b8dde1457ffcfae38",
+        "localSha256": "283afe55e4c7fe66e5c7de6393c892b63c1c19eaf68ead7b8dde1457ffcfae38",
+        "byteIdentical": true,
+        "bytes": 15052
+      },
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/data-parallel-flow.svg",
+        "url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/data-parallel-flow.svg",
+        "upstreamSha256": "ec06a0fce8f5f6df36f4e0cf45eefcf32533597f9f690965384782e35af14805",
+        "localSha256": "ec06a0fce8f5f6df36f4e0cf45eefcf32533597f9f690965384782e35af14805",
+        "byteIdentical": true,
+        "bytes": 15275
+      },
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/ring-allreduce.svg",
+        "url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/collective_communication/images/svg/ring-allreduce.svg",
+        "upstreamSha256": "9e91a5336390108897bd817acb5aa50145738180ae17fb9066011705d5de4948",
+        "localSha256": "9e91a5336390108897bd817acb5aa50145738180ae17fb9066011705d5de4948",
+        "byteIdentical": true,
+        "bytes": 11636
+      }
+    ]
+  }
+}

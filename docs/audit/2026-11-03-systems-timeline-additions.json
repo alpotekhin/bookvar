@@ -1,0 +1,214 @@
+{
+  "date": "2026-11-03",
+  "kind": "systems-timeline-additions",
+  "scope": "Whole-owner review of model-as-part-of-system; preserve the full explanation and six original figures. Add executable stage-dependency/deadline/population reasoning and15 subject destinations. No translation or source-course duplicate route.",
+  "files": [
+    {
+      "source": "00 Учебник/10 ML Systems/01 Модель как часть системы.md",
+      "before_sha256": "eb51bcc5c98e9e2dc9ce0afed7f14315965a8abcdff0e176e6094d5943d40764",
+      "after_sha256": "7a1627ed5bb22aa3b1b7df8911515752f992eccc9100d731a5f3e2d1b95faf61",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-26\nlast_verified: 2026-10-23\nsource_language: ru\n",
+          "new": "last_updated: 2026-11-03\nlast_verified: 2026-11-03\nsource_language: ru\nreference_terms:\n  - anchor: sys-requirements\n    label: \"Требования к ML-системе\"\n    label_en: \"ML-system requirements\"\n  - anchor: sys-latency\n    label: \"Полная задержка запроса\"\n    label_en: \"End-to-end request latency\"\n  - anchor: sys-amdahl\n    label: \"Закон Амдала\"\n    label_en: \"Amdahl's law\"\n  - anchor: sys-pipeline\n    label: \"Задержка и пропускная способность конвейера\"\n    label_en: \"Pipeline latency and throughput\"\n  - anchor: sys-bursts\n    label: \"Всплески нагрузки и сроки\"\n    label_en: \"Bursts and deadlines\"\n  - anchor: sys-timeline\n    label: \"Расчёт расписания по стадиям\"\n    label_en: \"Stage-by-stage timeline\"\n  - anchor: sys-admission\n    label: \"Отказ от заведомо поздней работы\"\n    label_en: \"Deadline admission and dropped work\"\n  - anchor: sys-little\n    label: \"Закон Литтла: среднее число запросов\"\n    label_en: \"Little's law and mean population\"\n  - anchor: sys-dam\n    label: \"Данные, алгоритм и оборудование\"\n    label_en: \"Data, algorithm, and machine\"\n  - anchor: sys-cost\n    label: \"Оценка операций и передачи данных\"\n    label_en: \"Compute and data-transfer estimates\"\n  - anchor: sys-data-movement\n    label: \"Повторное использование данных\"\n    label_en: \"Data movement and reuse\"\n  - anchor: sys-energy\n    label: \"Мощность и энергия системы\"\n    label_en: \"System power and energy\"\n  - anchor: sys-placement\n    label: \"Размещение: cloud, edge и TinyML\"\n    label_en: \"Cloud, edge, and TinyML placement\"\n  - anchor: sys-artifacts\n    label: \"Версия модели и воспроизводимость\"\n    label_en: \"Model artifacts and reproducibility\"\n  - anchor: sys-feedback\n    label: \"Обратная связь и смещение выборки\"\n    label_en: \"Production feedback and selection bias\"\n"
+        },
+        {
+          "old": "## Что именно должно работать",
+          "new": "<a id=\"sys-requirements\"></a>\n\n## Что именно должно работать"
+        },
+        {
+          "old": "## Из чего складывается время ответа",
+          "new": "<a id=\"sys-latency\"></a>\n\n## Из чего складывается время ответа"
+        },
+        {
+          "old": "Если ускорить модель вдвое, её участок сократится с 20 до 10 мс, а весь",
+          "new": "<a id=\"sys-amdahl\"></a>\n\nЕсли ускорить модель вдвое, её участок сократится с 20 до 10 мс, а весь"
+        },
+        {
+          "old": "### Задержка одного кадра и скорость потока",
+          "new": "<a id=\"sys-pipeline\"></a>\n\n### Задержка одного кадра и скорость потока"
+        },
+        {
+          "old": "### Почему средней скорости недостаточно",
+          "new": "<a id=\"sys-bursts\"></a>\n\n### Почему средней скорости недостаточно"
+        },
+        {
+          "old": "## Данные, алгоритм и оборудование",
+          "new": "<a id=\"sys-dam\"></a>\n\n## Данные, алгоритм и оборудование"
+        },
+        {
+          "old": "### Байты, операции и неизбежные задержки",
+          "new": "<a id=\"sys-cost\"></a>\n\n### Байты, операции и неизбежные задержки"
+        },
+        {
+          "old": "## Почему данные приходится перемещать",
+          "new": "<a id=\"sys-data-movement\"></a>\n\n## Почему данные приходится перемещать"
+        },
+        {
+          "old": "Мощность и энергия — разные величины. Если **всё измеряемое устройство**",
+          "new": "<a id=\"sys-energy\"></a>\n\nМощность и энергия — разные величины. Если **всё измеряемое устройство**"
+        },
+        {
+          "old": "## Где выполнять модель",
+          "new": "<a id=\"sys-placement\"></a>\n\n## Где выполнять модель"
+        },
+        {
+          "old": "## Что сохранять вместе с весами",
+          "new": "<a id=\"sys-artifacts\"></a>\n\n## Что сохранять вместе с весами"
+        },
+        {
+          "old": "## Что меняется после выпуска",
+          "new": "<a id=\"sys-feedback\"></a>\n\n## Что меняется после выпуска"
+        },
+        {
+          "old": "<a id=\"sys-dam\"></a>\n\n## Данные, алгоритм и оборудование",
+          "new": "\n<a id=\"sys-timeline\"></a>\n\n### Computing the schedule\n\nFor the second frame, the first CPU stage cannot start at its arrival time\nof 1 ms: that resource remains occupied until 8 ms. After preparation ends\nat 16 ms, copying ends at 20 ms, but the GPU is still processing the first\nframe until 32 ms. The second frame therefore runs on the GPU from 32 to\n52 ms and leaves postprocessing at 55 ms. Its 54 ms response time consists\nof 35 ms of service and 19 ms of waiting.\n\nAll entries in this table are milliseconds measured from the first arrival:\n\n| Arrival | CPU | Copy | GPU | Command |\n|---:|---:|---:|---:|---:|\n| 0 | 8 | 12 | 32 | 35 |\n| 1 | 16 | 20 | 52 | 55 |\n| 2 | 24 | 28 | 72 | 75 |\n\nEach resource handles one frame at a time in arrival order. The CPU,\ncopy engine, GPU and command stage are assumed independent, with unlimited\nbuffers between stages. A stage can start when its input has arrived\n**and** its previous frame has finished. With arrival time $a_i$, service\nduration $s_j$, start time $B_{i,j}$ and finish time $C_{i,j}$:\n\n$$\n\\begin{aligned}\nC_{i,-1}&=a_i,\\qquad C_{-1,j}=0,\\\\\nB_{i,j}&=\\max(C_{i,j-1},C_{i-1,j}),\\\\\nC_{i,j}&=B_{i,j}+s_j.\n\\end{aligned}\n$$\n\nThe two arguments of the maximum represent different dependencies:\nthe same frame at the preceding stage, and the preceding frame at the\nsame stage. There is no clock forcing every stage to take 20 ms.\nThis differs from the synchronous digital circuit in the MIT diagram:\nthe diagram explains overlap and frame identity, while the recurrence\nbelow schedules variable-duration stages as soon as both dependencies\npermit them to run.\n\n~~~python\nfrom math import isfinite\n\ndef stage_timeline(arrivals, services):\n    arrivals, services = list(arrivals), list(services)\n    if (not services\n        or any(not isfinite(x) or x <= 0 for x in services)\n        or any(not isfinite(x) or x < 0 for x in arrivals)\n        or any(a > b for a, b in zip(arrivals, arrivals[1:]))):\n        raise ValueError(\"sorted nonnegative arrivals and positive service times required\")\n    available = [0] * len(services)\n    finishes = []\n    for arrival in arrivals:\n        ready = arrival\n        row = []\n        for j, service in enumerate(services):\n            start = max(ready, available[j])\n            ready = start + service\n            available[j] = ready\n            row.append(ready)\n        finishes.append(row)\n    return finishes\n\narrivals = [0, 1, 2]\nserial = stage_timeline(arrivals, [35])\npipelined = stage_timeline(arrivals, [8, 4, 20, 3])\nassert serial == [[35], [70], [105]]\nassert pipelined == [[8, 12, 32, 35],\n                     [16, 20, 52, 55],\n                     [24, 28, 72, 75]]\nserial_latency = [row[-1] - a for a, row in zip(arrivals, serial)]\npipeline_latency = [row[-1] - a for a, row in zip(arrivals, pipelined)]\nassert serial_latency == [35, 69, 103]\nassert pipeline_latency == [35, 54, 73]\nprint(\"serial:\", serial_latency, \"pipeline:\", pipeline_latency)\n~~~\n\nThis is a deterministic teaching calculation, not a CUDA benchmark.\nSharing a CPU between preparation and command dispatch would introduce\nanother resource dependency. A copy engine that cannot overlap with\nthe kernel would also invalidate the four-independent-resource assumption.\nActual stage times and permitted overlap must come from the implementation;\nthe recurrence cannot establish them.\n\n<a id=\"sys-admission\"></a>\n\n### Rejecting work that will miss its deadline\n\nConsider the serial implementation again. When the second frame arrives\nat 1 ms, 34 ms of the first frame's service remain. Accepting the new\nframe would produce a result at 70 ms, beyond its absolute deadline\nof $1+50=51$ ms. In this fixed-service example the server can detect\nthat failure before doing the work.\n\nA simple admission rule accepts a frame only when its predicted finish\nis no later than its arrival plus 50 ms. Rejection leaves the already\naccepted work unchanged:\n\n~~~python\ndef admit_serial(arrivals, service, budget):\n    # Validate the same arrival/service assumptions as stage_timeline.\n    stage_timeline(arrivals, [service])\n    if not isfinite(budget) or budget < 0:\n        raise ValueError(\"nonnegative finite deadline budget required\")\n    available = 0\n    accepted, rejected = [], []\n    for i, arrival in enumerate(arrivals):\n        predicted_finish = max(arrival, available) + service\n        if predicted_finish > arrival + budget:\n            rejected.append(i)\n        else:\n            available = predicted_finish\n            accepted.append((i, predicted_finish))\n    return accepted, rejected\n\naccepted, rejected = admit_serial(arrivals, service=35, budget=50)\nassert accepted == [(0, 35)]\nassert rejected == [1, 2]\nprint(\"accepted:\", accepted, \"rejected:\", rejected)\n~~~\n\nThe accepted responses now have a mean latency of 35 ms instead of 69 ms.\nThat does not mean all three frames were handled better: two received\nno model result. Over the repeating 120 ms period, total input remains\n25 frames/s but on-time model completions are only $1/0.12\\approx8.33$\nframes/s. Without rejection the serial server also produces just one\non-time result per period, although it spends time completing the other\ntwo after their deadlines.\n\nFor the factory, rejection must therefore trigger a defined action,\nsuch as routing the part to manual inspection. That action has its own\nlatency and capacity limit; neither is modeled by this program.\nReport accepted, late, rejected and fallback-handled work against the\noriginal input count. A latency percentile calculated only over successful\nresponses hides the rejected population.\n\nThe rule also relies on knowing the remaining service time. An estimate\nfrom past measurements is not a hard upper bound. Variable image sizes,\nother workloads and thermal throttling can make an admitted frame late.\nDeadline-aware admission and bounded queues are discussed in\n[Google SRE, Handling Overload](https://sre.google/sre-book/handling-overload/);\nhere they are applied only to the fully specified deterministic example.\n\n<a id=\"sys-little\"></a>\n\n### Mean response time and frames in flight\n\nCount every frame from arrival until completion, including both queueing\nand processing. In one 120 ms period of the original serial example,\nthe first frame contributes 35 frame-ms to that count, the second 69,\nand the third 103. The system is empty before the next period starts.\nConsequently its time-averaged population is\n\n$$\n\\overline N=\\frac{35+69+103}{120}=1.725.\n$$\n\nThe mean response time is 69 ms and the input rate is $3/120=0.025$\nframes/ms. Their product gives the same answer:\n\n$$\n\\overline N=\\lambda\\overline W\n           =0.025\\cdot69=1.725.\n$$\n\nThis is Little's law, applied to a period with no unfinished work at\nits boundaries. The area under the frame-count curve is also the sum\nof the three response times: each frame contributes one unit of population\nfor its entire residence. Repeating the identical period makes this\nfinite accounting an exact long-run average. For general traffic,\nthe relation requires consistent measurement boundaries and well-defined\nlong-run averages; no Poisson or exponential assumption is needed.\nSee [Harvard Model Serving, Little's Law](https://mlsysbook.ai/vol1/13_model_serving/13_model_serving.html).\n\n~~~python\nperiod_ms = 120\nrate_per_ms = len(arrivals) / period_ms\nfor latencies, expected_population in [\n    (serial_latency, 1.725), (pipeline_latency, 1.35)\n]:\n    mean_latency_ms = sum(latencies) / len(latencies)\n    area_population = sum(latencies) / period_ms\n    assert abs(area_population - rate_per_ms * mean_latency_ms) < 1e-12\n    assert abs(area_population - expected_population) < 1e-12\n    print(\"mean latency:\", mean_latency_ms, \"mean population:\", area_population)\n~~~\n\nFor the four-stage pipeline, the mean response time is 54 ms and the\nmean population is 1.35. Both systems still reach a population of three\nafter the third arrival. An average below two does not imply that two\nbuffers suffice, and it says nothing about the 50 ms deadline.\nThe population includes waiting frames; it is not the GPU batch size.\n\nAfter admission control, the accepted population has its own rate,\n$1/120$ frames/ms, and mean residence time of 35 ms. Multiplying\nthe original input rate by the accepted-only mean mixes different\npopulations. Little's law does not repair a mismatched measurement.\nQueueing distributions, capacity planning and tail-latency models continue\nin [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning|Queueing and capacity planning]].\n\n<a id=\"sys-dam\"></a>\n\n## Данные, алгоритм и оборудование"
+        },
+        {
+          "old": "def admit_serial(arrivals, service, budget):\n    # Validate the same arrival/service assumptions as stage_timeline.\n    stage_timeline(arrivals, [service])",
+          "new": "def admit_serial(arrivals, service, budget):\n    # Validate the same arrival/service assumptions as stage_timeline.\n    arrivals = list(arrivals)\n    stage_timeline(arrivals, [service])"
+        },
+        {
+          "old": "[Google SRE, Handling Overload](https://sre.google/sre-book/handling-overload/);",
+          "new": "[Google SRE, Addressing Cascading Failures](https://sre.google/sre-book/addressing-cascading-failures/),\nin its Queue Management and Latency and Deadlines sections;"
+        },
+        {
+          "old": "**and** its previous frame has finished. With arrival time $a_i$, service",
+          "new": "and its previous frame has finished. With arrival time $a_i$, service"
+        },
+        {
+          "old": "after the third arrival. An average below two does not imply that two\nbuffers suffice, and it says nothing about the 50 ms deadline.",
+          "new": "after the third arrival. An average below two does not bound the peak\nresident population by two, and it says nothing about the 50 ms deadline."
+        },
+        {
+          "old": "populations. Little's law does not repair a mismatched measurement.\nQueueing distributions, capacity planning and tail-latency models continue",
+          "new": "populations. Here the accepted-only mean population is\n$35/120\\approx0.292$, not $3\\cdot35/120=0.875$.\nQueueing distributions, capacity planning and tail-latency models continue"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/ml-lifecycle.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/ml-lifecycle.png|Жизненный цикл ML-системы: сбор данных, подготовка, обучение, оценка, выпуск и мониторинг с обратными связями]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/Assets/Sources/Harvard ML Systems/vol1/model_serving/2f10e92057738ef1e4a50e524fddf5389d61d795.svg]]",
+          "new": "![[02 Areas/ML & DL/Assets/Sources/Harvard ML Systems/vol1/model_serving/2f10e92057738ef1e4a50e524fddf5389d61d795.svg|Путь запроса: входные данные, подготовка, нейронная сеть, обработка выхода и итоговое предсказание]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/mit-amdahl.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/mit-amdahl.png|Закон Амдала: неизменяемая доля времени и ускоряемая часть до и после оптимизации]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/mit-pipeline.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/mit-pipeline.png|Две стадии конвейера: F и G, затем H; обработка соседних входов в соседних тактах]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/Assets/Sources/Harvard ML Systems/vol1/ml_systems/c491ee41569a92f002bf915150731598e0d64e26.svg]]",
+          "new": "![[02 Areas/ML & DL/Assets/Sources/Harvard ML Systems/vol1/ml_systems/c491ee41569a92f002bf915150731598e0d64e26.svg|Гибридное размещение ML-системы: обучение на сервере, доставка весов и потоки данных от устройств]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/Assets/Sources/Harvard ML Systems/vol1/ml_workflow/3b022a3ffa6f028fe2c2c3165c292a16a3a9e0ff.svg]]",
+          "new": "![[02 Areas/ML & DL/Assets/Sources/Harvard ML Systems/vol1/ml_workflow/3b022a3ffa6f028fe2c2c3165c292a16a3a9e0ff.svg|Два связанных процесса ML: сбор, валидация и подготовка данных; обучение, оценка и выпуск модели]]"
+        },
+        {
+          "old": "All entries in this table are milliseconds measured from the first arrival:\n\n| Arrival | CPU | Copy | GPU | Command |",
+          "new": "All entries are times in milliseconds from the first arrival.\n“In” marks arrival; “Done” marks delivery of the command:\n\n| In | CPU | Copy | GPU | Done |"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "8b86312668dc9494b8762da0dc0de0ea13377b279a25bfc8d6c1fd7e101433af",
+      "after_sha256": "a3f864149dd14c6f7109d4e5f592a631e2ec097822c1ef39880d5fe448356742",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/10 ML Systems/01 Модель как часть системы|Модель как часть системы]]",
+          "new": "- [[00 Учебник/10 ML Systems/01 Модель как часть системы|Модель как часть системы]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-requirements|Требования к ML-системе]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-latency|Полная задержка запроса]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-amdahl|Закон Амдала]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-pipeline|Задержка и пропускная способность конвейера]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-bursts|Всплески нагрузки и сроки]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-timeline|Расчёт расписания по стадиям]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-admission|Отказ от заведомо поздней работы]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-little|Закон Литтла: среднее число запросов]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-dam|Данные, алгоритм и оборудование]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-cost|Оценка операций и передачи данных]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-data-movement|Повторное использование данных]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-energy|Мощность и энергия системы]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-placement|Размещение: cloud, edge и TinyML]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-artifacts|Версия модели и воспроизводимость]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-feedback|Обратная связь и смещение выборки]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "5731835caf518681d92a2338bf1d277380bdfca32abfec2e81d3b70dbb6701f3",
+      "after_sha256": "090d86a50aa731a32568e5ad5a1ad0cd437492547db2b49fffc4f2a63928897a",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/10 ML Systems/01 Модель как часть системы|The model as part of a system]]",
+          "new": "- [[00 Учебник/10 ML Systems/01 Модель как часть системы|The model as part of a system]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-requirements|ML-system requirements]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-latency|End-to-end request latency]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-amdahl|Amdahl's law]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-pipeline|Pipeline latency and throughput]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-bursts|Bursts and deadlines]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-timeline|Stage-by-stage timeline]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-admission|Deadline admission and dropped work]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-little|Little's law and mean population]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-dam|Data, algorithm, and machine]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-cost|Compute and data-transfer estimates]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-data-movement|Data movement and reuse]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-energy|System power and energy]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-placement|Cloud, edge, and TinyML placement]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-artifacts|Model artifacts and reproducibility]]\n  - [[00 Учебник/10 ML Systems/01 Модель как часть системы#sys-feedback|Production feedback and selection bias]]"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "source": "docs/audit/2026-10-23-system-foundations.md",
+      "read": "Entire prior review. Current navigation restoration gives c958fbd61b17...; removing only the independently reviewed26October practice link and date exactly restores accepted3d256f7a2bc9... bytes. Earlier selected Harvard D·A·M/Iron Law/Hybrid source comparison reused on that exact boundary; current416-line owner freshly read."
+    },
+    {
+      "source": "https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c21/c21s1/",
+      "read": "Full selected Amdahl's Law and Amdahl's Law and Parallelism explanations and existing slide, including baseline elapsed-time fraction, infinite-enhancement ceiling and fixed-work assumptions."
+    },
+    {
+      "source": "https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c7/c7s1/",
+      "read": "Full selected Pipelined Circuits, Pipeline Diagrams and Pipeline Conventions text. Synchronous circuit has a clocked latency; new camera schedule is explicitly asynchronous and variable-duration, not a literal reproduction of that circuit's timing."
+    },
+    {
+      "source": "05 Источники/Originals/inference-queueing-2026-10-20/harvard-model-serving.qmd",
+      "sha256": "a6cc04b99d552108f8fa7ad5e148c3c3d7fbaeac649cd6ad6d104e412bca9428",
+      "read": "Read2148–2315, including the complete Little's Law section and all its examples; next batching callout not claimed as integrated. Current published §13.4.1 also read. Mean population includes queue and running requests, requires matched populations and does not prescribe GPU batch size or p99."
+    },
+    {
+      "source": "https://sre.google/sre-book/addressing-cascading-failures/",
+      "read": "Full Queue Management, Load Shedding and Graceful Degradation, and Latency and Deadlines through cancellation/bimodal examples. Deterministic admission rule is a Bookvar example, not verbatim SRE code. Initial Handling Overload citation replaced after comparison showed deadline sections are in chapter22."
+    }
+  ],
+  "preservation": {
+    "chapterInputSha256": "eb51bcc5c98e9e2dc9ce0afed7f14315965a8abcdff0e176e6094d5943d40764",
+    "figures": 6,
+    "figurePolicy": "All six original file paths/bytes and complete author captions/licenses retained; descriptive accessibility aliases added. No new figure, redraw or upscale. Three historical Harvard SVG upstream pixel-comparison caveats remain open; source-byte tests alone do not close them.",
+    "translation": "New explanatory sections are English; source_language remains ru, no separate English edition authored. Existing Russian explanation unchanged apart from reference anchors and dates."
+  },
+  "verification": {
+    "date": "2026-11-04",
+    "status": "verified-local-delta",
+    "chapterSha256": "7a1627ed5bb22aa3b1b7df8911515752f992eccc9100d731a5f3e2d1b95faf61",
+    "wholeOwnerRead": "Entire416-line input freshly read in1–200 and201–EOF. After explanations, alt descriptions and mobile table fixes, the entire final692-line chapter reread in1–350 and351–EOF. No subsequent chapter edits.",
+    "preservation": "All existing Russian explanatory paragraphs, two display equations, six original image paths/bytes and complete author captions retained. Added three complete Python programs, three display equations, a full per-stage completion table, descriptive aliases for all six images and15 subject destinations in both indexes. Three-file reversible journal pins exact predecessor and both indexes.",
+    "explanation": "Works through second-frame CPU/copy/GPU/command dependencies, distinguishes asynchronous camera stages from the synchronous MIT circuit, and derives the max recurrence. Admission accepts one frame and rejects two; accepted-only35ms does not replace the original69ms all-input mean or improve8.33/s on-time model goodput. Finite-period population-area derivation yields1.725 and1.35 with peak3; the accepted-only population35/120 differs from the mismatched0.875. Source assumptions, unmodeled fallback and full queueing owner remain explicit.",
+    "style": "no-ai-slop SKILL/eval read in full; complete final chapter reread. Preserved strong existing explanation and original source figures/captions. New technical sections remain English; no translation or summary-only replacement.",
+    "source": "Entire prior source review read. Navigation restoration and removal only of reviewed practice link/date reproduce accepted3d256f7a2bc9... bytes exactly. Earlier selected Harvard D·A·M/Iron Law/Hybrid comparison reused on that boundary. Fresh full selected MIT Amdahl/Pipelined Circuits/Pipeline Diagrams/Pipeline Conventions, pinned Harvard Little's Law including examples, current §13.4.1 and selected complete SRE queue/deadline sections read. Not a new whole-course/book read.",
+    "cpu": {
+      "exit": 0,
+      "device": "CPU",
+      "programs": 3,
+      "command": "uv run --offline --python 3.13 python publishing/tools/check_system_intro_timeline.py",
+      "scope": "All three actual chapter programs execute.800 schedules match independent discrete-tick FIFO queues with future-prefix controls;320 admission cases match independent accepted-set rescheduling. Eight periods reproduce all24 finishes and16 deadline misses for each implementation. Event-sweep areas, means, peak3, inclusive deadline and wrong-denominator/invalid-input controls pass. Standard-library arithmetic only; no CUDA/camera execution, learned model or performance benchmark."
+    },
+    "tests": {
+      "scoped": "12 tests in4 files pass: current system timeline/preservation, existing six-source-image/arithmetic tests, prior sequence-state journal chain and all84 current whole-owner hash receipts. Both topic indexes synchronize152 topics.",
+      "builtOutput": "199 HTML tests pass on completed final build. Direct both-locale HTML check confirms15 unique anchors/reference links, six actual assets with descriptive alt text, all15 cells in the new five-column table, five display equations, code/examples and EN canonical-language notice. One diagnostic expected attribute-free th tags; corrected to inspect real aligned header/cell markup without changing production output."
+    },
+    "build": {
+      "exit": 0,
+      "pages": 2007,
+      "pagefindHtmlFiles": 2011,
+      "durationSeconds": 30.24,
+      "brokenInternalLinks": 0,
+      "bytes": 854805415,
+      "files": 5607,
+      "limit": 1000000000,
+      "headroom": 145194585
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-04-system-intro-reader",
+      "desktop": "1280x900,617px content,document1265/1265: six originals load and fit, five display equations and all five tables fit, zero KaTeX errors. Complete lifecycle, request path, Amdahl, MIT timing, hybrid deployment and dual-pipeline originals inspected enlarged with source captions; unchanged MIT timing viewed before alias-only refresh, other five on refreshed output.",
+      "mobile": "375x812,328px content,document360/360: six images fit at native proportions; five equations fit,zero KaTeX errors. New stage table initially362px; shortened and explicitly defined In/Done labels now give328/328, all15 values visible. New recurrence read at top340.7/bottom415.3. MIT timing viewed2x with readable state labels; not every figure freshly zoomed on mobile. Existing placement table scrolls internally328/519, not document overflow. Temporary viewport reset.",
+      "navigation": "Actual RU reference ->#sys-timeline and EN reference ->#sys-little, each unique. EN explicitly reports no separate English edition. Actual EN Next ->GPU/CUDA with correct H1; actual RU Previous ->advanced-module hub. RU new explanation left open.",
+      "transient": "Cross-goal SDK binding reported browser.user unavailable. Same-tab rebind failed; documented troubleshooting followed, CUA session reset and same IAB3/tab1 rebound without server restart. An intermediate PageDown screenshot did not yet show the formula; renamed as intermediate and final settled narrow formula inspected separately."
+    },
+    "publication": "local-only; no stage, commit, push or deployment",
+    "remaining": [
+      "Three historical Harvard SVGs retain the upstream pixel-comparison caveat; present byte/reader checks do not clear it or establish identity with today's rewritten public figures.",
+      "This is an introductory deterministic worked example, not a production admission controller, fallback-capacity test or GPU benchmark.",
+      "Other owners, full thematic course integration, rights/public-checkout/frozen release gates and dev/Pages publication remain open."
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "pin": "7a7ac96e96e0f9b4ba3eee80de3f4d255698170b",
+  "chapter": "00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md",
+  "figure": "00 Учебник/Assets/Figures/curated/profiling-2026-11-04/py-spy-flamegraph.svg",
+  "figure_sha256": "592970e72ed1c0f0f6e026a63187ffef3e91eab45d0c5457ca6649388aa3de9a",
+  "sources": [
+    {
+      "path": "publishing/fixtures/profiling-originals/py-spy-flamegraph.svg",
+      "url": "https://raw.githubusercontent.com/benfred/py-spy/7a7ac96e96e0f9b4ba3eee80de3f4d255698170b/images/flamegraph.svg",
+      "sha256": "592970e72ed1c0f0f6e026a63187ffef3e91eab45d0c5457ca6649388aa3de9a"
+    },
+    {
+      "path": "publishing/fixtures/profiling-originals/py-spy-README.md",
+      "url": "https://raw.githubusercontent.com/benfred/py-spy/7a7ac96e96e0f9b4ba3eee80de3f4d255698170b/README.md",
+      "sha256": "b94fab51768821fca5fdea943a80d799fd046d9bfa3cb21623cffd900f57567f"
+    },
+    {
+      "path": "site/public/licenses/py-spy-7a7ac96e-MIT.txt",
+      "url": "https://raw.githubusercontent.com/benfred/py-spy/7a7ac96e96e0f9b4ba3eee80de3f4d255698170b/LICENSE",
+      "sha256": "80bbb8731db59cd835f59fcd06f127953804bb511c8487fd265d96c7c702cd00"
+    }
+  ],
+  "sample_counts": {
+    "all": 2893,
+    "caller79": 1490,
+    "caller95": 1371,
+    "score209": 814,
+    "argpartition": 813,
+    "wrapfunc": 813
+  }
+}

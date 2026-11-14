@@ -2,13 +2,88 @@
 title: Autoencoder и variational autoencoder
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-26
+last_updated: 2026-11-10
+source_language: mixed
+reference_terms:
+  - label: Обучение автоэнкодера по реконструкции
+    label_en: Autoencoder reconstruction objective
+    anchor: ae-objective
+  - label: Линейный автоэнкодер и PCA
+    label_en: Linear autoencoders and PCA
+    anchor: ae-linear-pca
+  - label: Шаг SGD в линейном автоэнкодере
+    label_en: A linear autoencoder SGD step
+    anchor: ae-learning-step
+  - label: Denoising autoencoder
+    label_en: Denoising autoencoders
+    anchor: ae-denoising
+  - label: Свёрточный автоэнкодер
+    label_en: Convolutional autoencoders
+    anchor: ae-convolutional
+  - label: Транспонированная свёртка и output_padding
+    label_en: Transposed convolution and output_padding
+    anchor: ae-transpose
+  - label: Encoder и decoder из курса UvA
+    label_en: Original UvA encoder and decoder
+    anchor: ae-uva-model
+  - label: MSE и размытые восстановления
+    label_en: MSE and blurred reconstructions
+    anchor: ae-mse
+  - label: Размерность кода и ошибка восстановления
+    label_en: Latent width and reconstruction error
+    anchor: ae-latent-width
+  - label: Восстановление входов вне обучающего распределения
+    label_en: Out-of-distribution reconstruction
+    anchor: ae-ood
+  - label: Поиск соседей в кодах автоэнкодера
+    label_en: Image retrieval and latent-space distance
+    anchor: ae-retrieval
+  - label: Почему реконструкция не задаёт генерацию
+    label_en: Why reconstruction does not define generation
+    anchor: ae-generative-gap
+  - label: Prior, likelihood и энкодер VAE
+    label_en: VAE prior, likelihood and inference model
+    anchor: vae-generative-model
+  - label: ELBO и два разных KL
+    label_en: ELBO and its two KL divergences
+    anchor: vae-elbo
+  - label: Точный posterior и зазор ELBO
+    label_en: Exact posterior and the ELBO gap
+    anchor: vae-exact-posterior
+  - label: Likelihood декодера и аналитический KL
+    label_en: Decoder likelihood and analytical Gaussian KL
+    anchor: vae-likelihood
+  - label: Репараметризация нормального кода
+    label_en: Gaussian reparameterization
+    anchor: vae-reparameterization
+  - label: Градиент при фиксированном шуме
+    label_en: Fixed-noise pathwise gradients
+    anchor: vae-pathwise-gradient
+  - label: Полный шаг обучения VAE
+    label_en: A complete VAE training step
+    anchor: vae-training
+  - label: VAE из PyTorch examples
+    label_en: Original PyTorch VAE example
+    anchor: vae-source-model
+  - label: Генерация из prior и наблюдение декодера
+    label_en: Prior generation and decoder observations
+    anchor: vae-generation
+  - label: Случайность VAE в eval
+    label_en: VAE randomness in eval mode
+    anchor: vae-eval
+  - label: Интерполяция и распределение кодов
+    label_en: Interpolation and the code distribution
+    anchor: vae-interpolation
+  - label: β-VAE и posterior collapse
+    label_en: Beta-VAE and posterior collapse
+    anchor: vae-beta-collapse
 primary_sources:
   - https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial9/AE_CIFAR10.html
   - https://lilianweng.github.io/posts/2018-08-12-vae/
   - https://arxiv.org/abs/1312.6114
   - https://arxiv.org/abs/1606.05908
   - https://github.com/pytorch/examples/tree/main/vae
+  - https://github.com/udlbook/udlbook/releases/download/v5.0.3/UnderstandingDeepLearning_02_09_26_C.pdf#page=351
 ---
 
 # Autoencoder и variational autoencoder
@@ -25,6 +100,8 @@ primary_sources:
 восстановить распределение возможных $z$. Для генерации нового объекта
 направление вычислений обратное: сначала выбирают $z$, затем получают $x$
 из декодера.
+
+<a id="ae-objective"></a>
 
 ## Обычный autoencoder
 
@@ -45,11 +122,11 @@ $$
 пакета. Производные проходят от ошибки восстановления через декодер
 к энкодеру. Никакой отдельной разметки «правильного кода» $z$ здесь нет.
 
-![[00 Учебник/Assets/Figures/curated/source-first-7-14/weng-autoencoder.png|Энкодер, узкое место и восстановление входа]]
+![[00 Учебник/Assets/Figures/curated/autoencoder-dropout-primary-2026-11-10/chervinskii-autoencoder.png|Слева вход X, посередине узкий код z, справа восстановление X′.]]
 
-*Вход и восстановление сравниваются непосредственно; код в узком месте
-обучается через эту ошибку. Lilian Weng,
-[From Autoencoder to Beta-VAE, Autoencoder](https://lilianweng.github.io/posts/2018-08-12-vae/#autoencoder).*
+*Chervinskii, [Autoencoder structure](https://commons.wikimedia.org/wiki/File:Autoencoder_structure.png), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Авторский рисунок без изменений. Слева $X$ соответствует $x$ из формулы, справа $X'$ соответствует $\hat x$. В середине один общий вектор $z$: это выход энкодера и одновременно вход декодера.*
+
+<a id="ae-linear-pca"></a>
 
 ### Пример с одной скрытой координатой
 
@@ -87,6 +164,8 @@ print(line_codes.flatten())
 Подробнее геометрия разобрана в
 [[00 Учебник/01 Классическое машинное обучение/07 PCA, t-SNE и UMAP|главе о PCA]].
 
+<a id="ae-learning-step"></a>
+
 ### Один шаг обучения
 
 Теперь начнём с весов энкодера $(0{,}1,0{,}1)$, а декодера — $(1,1)$.
@@ -121,6 +200,8 @@ print(linear_loss.item(), updated_linear_loss.item())
 конечный обучающий набор. Проверять нужно восстановление на отложенных данных
 и пригодность кода для нужной задачи, а не только его размер.
 
+<a id="ae-denoising"></a>
+
 ### Повреждённый вход и чистая цель
 
 Denoising autoencoder получает повреждённый объект $\tilde x$, но сравнивает
@@ -143,6 +224,8 @@ $\lambda\sum_j|z_j|$ поощряет разреженные активации,
 [Lilian Weng](https://lilianweng.github.io/posts/2018-08-12-vae/#sparse-autoencoder);
 они не превращают обычный автоэнкодер в VAE автоматически.
 
+<a id="ae-convolutional"></a>
+
 ## Свёрточный автоэнкодер
 
 Для изображения энкодер может использовать свёртки с шагом 2, как в
@@ -158,6 +241,8 @@ Phillip Lippe разбирает сеть для RGB-изображений $32\
 [UvA Deep Learning Tutorials, Building the autoencoder](https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial9/AE_CIFAR10.html#Building-the-autoencoder),
 [MIT](https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/LICENSE.md).
 Авторский SVG сохранён без изменений.*
+
+<a id="ae-transpose"></a>
 
 ### Transposed convolution не обращает свёртку
 
@@ -220,6 +305,8 @@ print(length3, length4)
 восстанавливать характерные для данных структуры из сохранённого кода.
 Для увеличения карты можно использовать и другие операции, например
 интерполяцию с последующей обычной свёрткой.
+
+<a id="ae-uva-model"></a>
 
 ### Исходные encoder и decoder UvA
 
@@ -321,6 +408,8 @@ print(image_codes.shape, image_reconstruction.shape)
 а не обязательная вероятностная модель наблюдений. Здесь выполнен только
 прямой проход случайно инициализированной сети, не обучение на CIFAR10.
 
+<a id="ae-mse"></a>
+
 ### Почему MSE может давать размытое восстановление
 
 Если один код совместим с несколькими исходными изображениями, декодер
@@ -336,7 +425,171 @@ print(image_codes.shape, image_reconstruction.shape)
 потерь сравнивает признаки выбранной сети вместо исходных пикселей и тем
 самым задаёт другой критерий сходства; её выбор не следует из MSE автоматически.
 
+<a id="ae-latent-width"></a>
+
+### Choosing the latent width
+
+The same image can be reconstructed through codes of different widths. In the
+UvA experiment, the input has $32\cdot32\cdot3=3072$ scalar values; separate
+models use 64, 128, 256 or 384 latent coordinates. Each model is evaluated on
+the validation split using the sum of squared pixel errors per image, averaged
+over images.
+
+![[00 Учебник/Assets/Figures/curated/autoencoder-course-2026-11-03/uva-latent-width.svg|Validation reconstruction error for 64, 128, 256 and 384 UvA latent coordinates]]
+
+*Original validation-loss plot from Phillip Lippe,
+[UvA, Comparing latent dimensionality](https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial9/AE_CIFAR10.html#Comparing-latent-dimensionality).
+The horizontal axis is logarithmic; the vertical axis uses the summed pixel
+error, not the error of one pixel. Notebook cell 26, complete original SVG;
+[MIT](/licenses/uva-c7d9e18f-MIT.txt).*
+
+Increasing the code width lowers the measured validation error in this
+experiment. A plotted point compares separately trained models, rather than
+turning a single trained model's width knob at inference time. The curve does
+not establish a universal scaling law or show that every larger model will
+generalize better.
+
+A width of 64 gives 48 times fewer scalar coordinates than the input:
+$3072/64=48$. That is not a measured 48-fold file compression ratio. Storage
+also depends on the precision of each coordinate, quantization, entropy coding
+and how the model parameters are stored. A real compression system must count
+bits and evaluate distortion after encoding and decoding those bits.
+
+<a id="ae-ood"></a>
+
+### Reconstruction outside the training distribution
+
+A small training loss only constrains the model on the distribution used for
+training. The UvA notebook also passes random noise and hand-constructed
+patterns through the CIFAR10 autoencoder. These inputs need no class labels,
+but they test a different question from reconstruction of held-out natural
+images.
+
+![[00 Учебник/Assets/Figures/curated/autoencoder-course-2026-11-03/uva-noise-reconstruction.svg|Two noise inputs and their reconstructions through the 256-coordinate UvA autoencoder]]
+
+*Phillip Lippe,
+[UvA, Out-of-distribution images](https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial9/AE_CIFAR10.html#Out-of-distribution-images).
+Each adjacent pair contains the input followed by its reconstruction. Here the
+inputs are independently generated noise, not CIFAR10 photographs. Notebook
+cell 32, complete original SVG;
+[MIT](/licenses/uva-c7d9e18f-MIT.txt).*
+
+The decoder produces broad coloured regions in place of the input's
+pixel-to-pixel variation. The learned bottleneck and decoder have not preserved
+the particular noise realization. This example does not prove that every
+autoencoder rejects noise, or that reconstruction error is a calibrated
+out-of-distribution detector.
+
+![[00 Учебник/Assets/Figures/curated/autoencoder-course-2026-11-03/uva-pattern-reconstruction.svg|Constant fields, block patterns and colour ramps before and after UvA reconstruction]]
+
+*Phillip Lippe,
+[UvA, Out-of-distribution images](https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial9/AE_CIFAR10.html#Out-of-distribution-images).
+Input/reconstruction pairs are placed consecutively, four tiles per row.
+The inputs are synthetic constant fields, a piecewise-constant block pattern
+and a two-channel colour ramp. Notebook cell 34, complete original SVG;
+[MIT](/licenses/uva-c7d9e18f-MIT.txt).*
+
+The block boundaries and smooth ramps probe different spatial changes. Reading
+the pairs requires comparing the same input with its reconstruction, not
+comparing two unrelated tiles. Together with the loss curve, these examples
+separate three checks: error on held-out data, preservation of a chosen visual
+detail, and behaviour on inputs outside the training distribution.
+
+<a id="ae-retrieval"></a>
+
+## Image retrieval from autoencoder codes
+
+An encoder also supplies a vector for image search. The UvA
+[Finding visually similar images](https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial9/AE_CIFAR10.html#Finding-visually-similar-images)
+section encodes a search corpus once and encodes each query with the same
+model. It then ranks corpus vectors by Euclidean distance. No decoder is
+needed during that ranking.
+
+Let the query code be $u=(0,0)$ and three corpus codes be
+$a=(0.1,2)$, $b=(1,0.1)$ and $c=(3,3)$. Their distances from the query are
+approximately 2.0025, 1.0050 and 4.2426. The nearest result is $b$, followed
+by $a$. Squaring these distances preserves their order, so an implementation
+can avoid the square root when only the ranking is needed.
+
+For a query batch of shape $[Q,d]$ and a corpus of shape $[N,d]$,
+`torch.cdist` produces a $[Q,N]$ distance matrix. Selecting the smallest $k$
+entries in each row gives indices into the corpus. Those indices must remain
+aligned with image IDs when loading data in batches or shuffling it. The
+example below checks the ranking against a direct coordinate-wise calculation.
+
+Reconstruction training does not fix the units of the code coordinates.
+Apply an invertible map $A$ to every code and undo it at the decoder input:
+
+$$
+\begin{aligned}
+g'(x)&=A\,g(x),\\
+f'(u)&=f(A^{-1}u).
+\end{aligned}
+$$
+
+The decoded output is unchanged for every input. For Euclidean search,
+however, the squared distance becomes
+
+$$
+\|A(z_i-z_j)\|^2
+=(z_i-z_j)^{\mathsf T}A^{\mathsf T}A(z_i-z_j).
+$$
+
+With $A=\operatorname{diag}(10,0.1)$, the first coordinate counts much more
+and the second counts much less. The transformed codes are
+$a'=(1,0.2)$, $b'=(10,0.01)$ and $c'=(30,0.3)$.
+Now $a'$ is nearest: its distance is about 1.0198, while $b'$ is about 10.
+The reconstruction function can remain exactly the same even though the
+retrieval order changes.
+
+This numerical example illustrates the coordinate ambiguity already encountered
+in the linear autoencoder/PCA discussion. It is a separate worked calculation,
+not a result from training the UvA models.
+
+```python
+import torch
+
+retrieval_dtype = torch.float64
+query_code = torch.tensor([[0., 0.]], dtype=retrieval_dtype)
+corpus_codes = torch.tensor([[.1, 2.], [1., .1], [3., 3.]], dtype=retrieval_dtype)
+distances = torch.cdist(query_code, corpus_codes)
+manual_distances = (query_code[:, None, :] - corpus_codes[None, :, :]).square().sum(-1).sqrt()
+torch.testing.assert_close(distances, manual_distances)
+nearest = distances.topk(2, largest=False, dim=1).indices
+assert nearest.tolist() == [[1, 0]]
+
+coordinate_map = torch.diag(torch.tensor([10., .1], dtype=retrieval_dtype))
+new_query = query_code @ coordinate_map.T
+new_corpus = corpus_codes @ coordinate_map.T
+new_distances = torch.cdist(new_query, new_corpus)
+assert new_distances.topk(2, largest=False, dim=1).indices.tolist() == [[0, 1]]
+
+def retrieval_decoder(z):
+    return torch.stack((z[..., 0].square(), z[..., 1], z[..., 0] + z[..., 1]), dim=-1)
+
+recovered_codes = new_corpus @ torch.linalg.inv(coordinate_map).T
+torch.testing.assert_close(recovered_codes, corpus_codes)
+torch.testing.assert_close(retrieval_decoder(recovered_codes), retrieval_decoder(corpus_codes))
+print(distances, new_distances, nearest)
+```
+
+To evaluate an image-search system, choose queries and relevance judgments for
+the task, then inspect or measure the returned neighbours. A reconstruction loss
+does not supply those judgments. Pixel reconstruction may preserve background
+colour that occupies much of an image, whereas a search task may care about
+the depicted object. Normalizing vectors or switching to cosine similarity
+changes the search metric; neither operation follows automatically from the
+autoencoder objective.
+
+An exhaustive distance matrix needs $QN$ entries and $O(QNd)$ arithmetic.
+Large corpora need batching or a suitable nearest-neighbour index. Those search
+methods are developed in
+[[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid|the retrieval chapter]];
+the representation still has to be evaluated for the intended queries.
+
 <a id="почему-обычный-latent-space-неудобен-для-генерации"></a>
+
+<a id="ae-generative-gap"></a>
 
 ## Почему реконструкции недостаточно для генерации
 
@@ -351,6 +604,22 @@ print(image_codes.shape, image_reconstruction.shape)
 Даже хорошая реконструкция отложенных объектов не доказывает, что случайный
 код даст правдоподобное изображение. В UvA этот разрыв проверяется отдельно
 от восстановления входов.
+
+![[00 Учебник/Assets/Figures/curated/autoencoder-course-2026-11-03/uva-random-codes.svg|Eight outputs of the ordinary UvA decoder from independent standard-normal codes]]
+
+*Phillip Lippe,
+[UvA, Generating new images](https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial9/AE_CIFAR10.html#Generating-new-images).
+Eight independent standard-normal vectors are sent directly to the
+256-coordinate ordinary decoder; no input image is encoded. Notebook cell 37,
+complete original SVG; [MIT](/licenses/uva-c7d9e18f-MIT.txt).*
+
+These are the source notebook's outputs, not samples from a VAE and not a local
+training result. The broad colour patterns illustrate why a chosen sampling
+distribution must be checked separately from reconstruction. They do not prove
+that an ordinary autoencoder can never be combined with a learned model of its
+code distribution.
+
+<a id="vae-generative-model"></a>
 
 ## Encoder VAE выдаёт распределение
 
@@ -376,21 +645,24 @@ $p_\theta(z\mid x)=p_\theta(x,z)/p_\theta(x)$.
 Энкодер $q_\phi(z\mid x)$ приближает это распределение одной сетью для всех
 объектов. Такое переиспользование процедуры вывода называют amortized inference.
 
-![[00 Учебник/Assets/Figures/curated/source-first-7-14/weng-vae-graphical-model.png|Генеративное направление и приближённый вывод в одной схеме VAE]]
-
-*Сплошная стрелка $z\to x$ относится к генеративному декодеру.
-Пунктирная $x\to z$ показывает приближённый вывод $q_\phi(z\mid x)$.
-Это одна схема с двумя направлениями вычислений. На рисунке использована
-общая запись prior $p_\theta(z)$; в разбираемой модели $p(z)=\mathcal N(0,I)$
-фиксирован. Lilian Weng,
-[From Autoencoder to Beta-VAE, VAE](https://lilianweng.github.io/posts/2018-08-12-vae/#vae-variational-autoencoder).*
-
 Часто выбирают диагональное нормальное приближение:
 
 $$
 q_\phi(z\mid x)=\mathcal N(\mu_\phi(x),
 \operatorname{diag}(\sigma_\phi^2(x))).
 $$
+
+Это ограничение на то, какой posterior может выдать энкодер.
+Например, при $x\mid z\sim\mathcal N(z^2,0{,}1)$ наблюдение $x=1$
+хорошо объясняют два разных кода, около $-1$ и $1$. Стандартный
+нормальный prior симметричен и не даёт преимущества одному знаку.
+У истинного posterior получаются два пика; одна нормальная плотность
+не может повторить их оба. В [[#vae-exact-posterior|примере с линейным декодером]]
+ниже точный posterior, наоборот, сам нормальный.
+
+![[00 Учебник/Assets/Figures/curated/autoencoder-dropout-primary-2026-11-10/prince-vae-posterior-figure17-8.png|Два истинных posterior и их нормальные приближения. Слева обе кривые с одним пиком. Справа у истинной плотности два пика, у приближения один.]]
+
+*Simon J. D. Prince, [Understanding Deep Learning, рис. 17.8, с. 337](https://github.com/udlbook/udlbook/releases/download/v5.0.3/UnderstandingDeepLearning_02_09_26_C.pdf#page=351), © MIT Press, [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Полный отдельный рисунок автора, PDF преобразован в PNG без обрезки. Сравниваются истинный posterior $Pr(z\mid x^*,\phi)$ и приближение $q(z\mid x^*,\theta)$ при одном и том же наблюдении. В обозначениях Принса $\theta$ относится к энкодеру, $\phi$ к декодеру; в этой главе наоборот. Рисунок показывает форму плотностей, а не численные значения из примера выше.*
 
 Энкодер выдаёт по $d$ средних и log-variance для $d$ латентных координат.
 Логарифм дисперсии может принимать любое действительное значение;
@@ -410,6 +682,8 @@ $\epsilon$ здесь не нарисован. wikipedia + sebastian nguyen,
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
 
 <a id="elbo-reconstruction-и-regularization-latent-space"></a>
+
+<a id="vae-elbo"></a>
 
 ## ELBO и два разных KL
 
@@ -458,6 +732,8 @@ $K$ штрафует отличие распределения кода от pri
 $K$ — вычисляемая часть обучающей цели, сравнивающая $q$ с prior.
 Они не взаимозаменяемы. Вывод и алгоритм приведены у
 [Kingma и Welling, §§2.2–2.3](https://arxiv.org/html/1312.6114v11#S2.SS2).
+
+<a id="vae-exact-posterior"></a>
 
 ### Модель, где оба KL можно посчитать точно
 
@@ -523,6 +799,8 @@ print(log_evidence, elbo_cases)
 обучает общую сеть приближённого вывода. Поэтому переносить равенство
 границы и log-likelihood из точного E-step на произвольный VAE нельзя.
 
+<a id="vae-likelihood"></a>
+
 ## Likelihood декодера и ошибка восстановления
 
 Для бинарного $x_i$ декодер может задавать независимые при фиксированном $z$
@@ -587,6 +865,8 @@ print(binary_rec, binary_kl)
 координатам каждого объекта, сложить reconstruction и KL, затем усреднить
 по объектам. Другие соглашения допустимы, но их коэффициенты нужно пересчитать.
 
+<a id="vae-reparameterization"></a>
+
 ## Reparameterization trick
 
 В реконструкционный член входит ожидание по $q_\phi(z\mid x)$, которое само
@@ -606,13 +886,17 @@ $$
 $\epsilon\mapsto z$ дифференцируется по $\mu$ и $\ell$.
 При фиксированном $\epsilon$ это обычный вычислительный граф.
 
-![[00 Учебник/Assets/Figures/curated/source-first-7-14/weng-reparameterization.png|Источник случайности до и после репараметризации]]
+![[00 Учебник/Assets/Figures/curated/autoencoder-dropout-primary-2026-11-10/prince-vae-reparameterization-figure17-11.png|Шум ε поступает снизу, параметры μ и Σ приходят от энкодера слева. Вместе они дают код z, который читает декодер. Вверху показаны два вклада в ELBO.]]
 
-*Справа случайным узлом остаётся $\epsilon$, а $z$ вычисляется через параметры.
-По атрибуции Lilian Weng, схема — слайд 12 доклада Diederik P. Kingma на
-NIPS 2015 workshop; [публикация Weng с источником](https://lilianweng.github.io/posts/2018-08-12-vae/#reparameterization-trick).
-Ромбы обозначают детерминированные узлы, синие круги — случайные.
-Здесь $f$ — функция выбранного $z$, а $g$ — преобразование шума в $z$.*
+*Simon J. D. Prince, [Understanding Deep Learning, рис. 17.11, с. 339](https://github.com/udlbook/udlbook/releases/download/v5.0.3/UnderstandingDeepLearning_02_09_26_C.pdf#page=353), © MIT Press, [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Полный отдельный рисунок автора, PDF преобразован в PNG без обрезки. При диагональной $\Sigma$ произведение $\Sigma^{1/2}\epsilon^*$ на рисунке равно поэлементному $\exp(\ell/2)\odot\epsilon$ в формуле главы.*
+
+Для обратного прохода начнём с правой ветви: оценка наблюдения декодером
+зависит от $z^*$, а этот код зависит от $\mu$ и $\Sigma$. Шум $\epsilon^*$
+для данного прохода уже выбран, поэтому градиент идёт через сумму и
+умножение в середине схемы. Левая пунктирная ветвь добавляет производную
+отдельного KL к prior; для неё выбирать $z^*$ не нужно.
+
+<a id="vae-pathwise-gradient"></a>
 
 ### Числовой путь производной
 
@@ -657,6 +941,8 @@ print(fixed_loss.item(), fixed_gradients)
 строит его явно. Возможны и другие оценки градиента ожидания, поэтому
 «любое сэмплирование делает обучение невозможным» — слишком сильное утверждение.
 
+<a id="vae-training"></a>
+
 ### Полный шаг маленького VAE
 
 В следующем пакете два бинарных признака и одна латентная координата.
@@ -692,6 +978,8 @@ print(rec.detach(), kl.detach(), loss.item())
 изменение параметров и качество на отложенных данных. Для устойчивой
 арифметики logits передаются в `binary_cross_entropy_with_logits` напрямую:
 дополнительная sigmoid перед этой функцией не нужна.
+
+<a id="vae-source-model"></a>
 
 ## Исходный VAE из PyTorch examples
 
@@ -772,6 +1060,8 @@ BCE принимает такие мягкие цели, но распредел
 [BSD 3-Clause](/licenses/pytorch-examples-acc295dc-BSD-3-Clause.txt).
 Классы UvA — под [MIT](/licenses/uva-c7d9e18f-MIT.txt).
 
+<a id="vae-generation"></a>
+
 ## Генерация и интерполяция
 
 При реконструкции сначала используется энкодер данного объекта.
@@ -789,6 +1079,8 @@ assert samples.shape == (4, 2)
 `probabilities` содержит условные средние, а `samples` — бинарные наблюдения.
 После одного учебного шага ни то ни другое ещё не доказывает хорошего
 приближения распределения данных.
+
+<a id="vae-eval"></a>
 
 ### Eval не отключает случайный код автоматически
 
@@ -811,6 +1103,8 @@ print(mean_reconstruction.shape)
 
 Декодирование среднего кода $f_\theta(\mathbb E[z])$ в нелинейной сети не равно
 в общем случае среднему восстановлению $\mathbb E[f_\theta(z)]$.
+
+<a id="vae-interpolation"></a>
 
 ### Интерполяция между двумя кодами
 
@@ -857,6 +1151,8 @@ $\mathcal N(0,I)$, их середина имеет распределение $
 При усреднении независимых величин дисперсии складываются с квадратами
 коэффициентов: $1/4+1/4=1/2$. Поэтому интерполяция не заменяет проверку
 генерации из исходного prior.
+
+<a id="vae-beta-collapse"></a>
 
 ## Вес KL, β-VAE и потеря информации о входе
 
@@ -945,6 +1241,7 @@ KL равен нулю, но оба входа восстанавливаютс�
 - Kingma, Welling, [Auto-Encoding Variational Bayes](https://arxiv.org/abs/1312.6114):
   §§2.1–2.4 и Appendix B.
 - Carl Doersch, [Tutorial on Variational Autoencoders](https://arxiv.org/abs/1606.05908).
+- Simon J. D. Prince, [Understanding Deep Learning, §§17.5–17.7](https://github.com/udlbook/udlbook/releases/download/v5.0.3/UnderstandingDeepLearning_02_09_26_C.pdf#page=351): приближение posterior, архитектура VAE и репараметризация.
 - [PyTorch examples, VAE](https://github.com/pytorch/examples/blob/acc295dc7b90714f1bf47f06004fc19a7fe235c4/vae/main.py),
   [полная BSD 3-Clause license](/licenses/pytorch-examples-acc295dc-BSD-3-Clause.txt).
 - Dumoulin, Visin, [A guide to convolution arithmetic](https://github.com/vdumoulin/conv_arithmetic),

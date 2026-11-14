@@ -1,0 +1,99 @@
+[
+  {
+    "id": "curated-cs231n-mlp-00000000008a",
+    "asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-mlp-layered.jpeg",
+    "author": "Andrej Karpathy and Stanford CS231n course staff",
+    "source_url": "https://cs231n.github.io/neural-networks-1/#layers",
+    "license": "MIT",
+    "license_url": "https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/LICENSE",
+    "modifications": "None. Complete original JPEG copied byte-for-byte; no crop, relabeling, redraw, translation or resampling.",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md",
+      "05 Источники/Courses/Harvard ML Systems/vol1/nn_architectures.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "source_asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-mlp-layered.jpeg",
+    "source_image_url": "https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/nn1/neural_net2.jpeg",
+    "license_evidence": "site/public/licenses/cs231n-MIT.txt",
+    "license_evidence_sha256": "85b365f07b4cfc5d678c548bc41965bc3bc782106b8903bd3b876d9d49a4270d",
+    "public_license_copy": "site/public/licenses/cs231n-MIT.txt",
+    "rights_status": "source-license-verified",
+    "source_asset_sha256": "649d51c291077a114e32cdbd282b49841124383ff63a91d612a4d0d2310641c8",
+    "sha256": "649d51c291077a114e32cdbd282b49841124383ff63a91d612a4d0d2310641c8",
+    "source_page_snapshot": "05 Источники/Originals/neuron-mlp-2026-10-21/cs231n-neural-networks-1.md",
+    "source_page_sha256": "28196e335053230ac9f1fff728c8baa089e05814982d950ffc6339462828f0f3",
+    "commit": "8ec57ccfc32379ae4b37c45de949af359673f92f",
+    "derivation": "source-image-copy",
+    "dimensions_px": [
+      791,
+      388
+    ],
+    "bytes": 68873,
+    "last_verified": "2026-11-03"
+  },
+  {
+    "id": "curated-cs231n-depth-00000000008b",
+    "asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-depth-width.jpeg",
+    "author": "Andrej Karpathy and Stanford CS231n course staff",
+    "source_url": "https://cs231n.github.io/neural-networks-1/#arch",
+    "license": "MIT",
+    "license_url": "https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/LICENSE",
+    "modifications": "None. Complete original JPEG copied byte-for-byte; no crop, relabeling, redraw, translation or resampling.",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "source_asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-depth-width.jpeg",
+    "source_image_url": "https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/nn1/layer_sizes.jpeg",
+    "license_evidence": "site/public/licenses/cs231n-MIT.txt",
+    "license_evidence_sha256": "85b365f07b4cfc5d678c548bc41965bc3bc782106b8903bd3b876d9d49a4270d",
+    "public_license_copy": "site/public/licenses/cs231n-MIT.txt",
+    "rights_status": "source-license-verified",
+    "source_asset_sha256": "ce7b76035580f3b6d87aac3089ba87967f29423d1e762b04a1cbd463d5d6b6e5",
+    "sha256": "ce7b76035580f3b6d87aac3089ba87967f29423d1e762b04a1cbd463d5d6b6e5",
+    "source_page_snapshot": "05 Источники/Originals/neuron-mlp-2026-10-21/cs231n-neural-networks-1.md",
+    "source_page_sha256": "28196e335053230ac9f1fff728c8baa089e05814982d950ffc6339462828f0f3",
+    "commit": "8ec57ccfc32379ae4b37c45de949af359673f92f",
+    "derivation": "source-image-copy",
+    "dimensions_px": [
+      1031,
+      366
+    ],
+    "bytes": 56394,
+    "last_verified": "2026-11-03"
+  },
+  {
+    "id": "curated-cs231n-regions-00000000008c",
+    "asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-decision-regions.jpeg",
+    "author": "Andrej Karpathy and Stanford CS231n course staff",
+    "source_url": "https://cs231n.github.io/neural-networks-1/#arch",
+    "license": "MIT",
+    "license_url": "https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/LICENSE",
+    "modifications": "None. Complete original JPEG copied byte-for-byte; no crop, relabeling, redraw, translation or resampling.",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "source_asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-decision-regions.jpeg",
+    "source_image_url": "https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/nn1/reg_strengths.jpeg",
+    "license_evidence": "site/public/licenses/cs231n-MIT.txt",
+    "license_evidence_sha256": "85b365f07b4cfc5d678c548bc41965bc3bc782106b8903bd3b876d9d49a4270d",
+    "public_license_copy": "site/public/licenses/cs231n-MIT.txt",
+    "rights_status": "source-license-verified",
+    "source_asset_sha256": "94aadb3b92581a7155ee44b0e17552d0c4c40ec671e1b92b6884f05b1e5ba501",
+    "sha256": "94aadb3b92581a7155ee44b0e17552d0c4c40ec671e1b92b6884f05b1e5ba501",
+    "source_page_snapshot": "05 Источники/Originals/neuron-mlp-2026-10-21/cs231n-neural-networks-1.md",
+    "source_page_sha256": "28196e335053230ac9f1fff728c8baa089e05814982d950ffc6339462828f0f3",
+    "commit": "8ec57ccfc32379ae4b37c45de949af359673f92f",
+    "derivation": "source-image-copy",
+    "dimensions_px": [
+      1077,
+      394
+    ],
+    "bytes": 49964,
+    "last_verified": "2026-11-03"
+  }
+]

@@ -2,8 +2,9 @@
 title: "Retrieval: от BM25 до плотного и гибридного поиска"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-20
-last_verified: 2026-10-20
+last_updated: 2026-11-06
+last_verified: 2026-11-06
+source_language: mixed
 primary_sources:
   - https://web.stanford.edu/~jurafsky/slp3/11.pdf
   - https://github.com/danqi/acl2020-openqa-tutorial
@@ -13,6 +14,89 @@ primary_sources:
   - https://milvus.io/docs/ivf-pq.md
   - https://aclanthology.org/2023.acl-long.99/
   - https://github.com/castorini/anserini/blob/07d380635f1719736c6042c6e971fd7d08ee125e/docs/experiments-beir-fusion.md
+  - https://github.com/nmslib/hnswlib/tree/3f3429661187e4c24a490a0f148fc6bc89042b3d
+reference_terms:
+  - label: "Полнота кандидатов и покрытие сведений"
+    label_en: "Candidate recall and evidence coverage"
+    anchor: ret-recall
+  - label: "Retriever, reader и бюджеты кандидатов"
+    label_en: "Retriever, reader and candidate budgets"
+    anchor: ret-reader
+  - label: "Инвертированный индекс и postings"
+    label_en: "Inverted indexes and postings"
+    anchor: ret-postings
+  - label: "TF–IDF: частота и редкость"
+    label_en: "TF–IDF: frequency and rarity"
+    anchor: ret-tfidf
+  - label: "BM25: насыщение и длина документа"
+    label_en: "BM25: saturation and document length"
+    anchor: ret-bm25
+  - label: "BM25: численный пример"
+    label_en: "BM25: worked example"
+    anchor: ret-bm25-example
+  - label: "Flat search, IP, L2 и косинус"
+    label_en: "Flat search, IP, L2 and cosine"
+    anchor: ret-flat
+  - label: "ANN recall и качество поиска"
+    label_en: "ANN recall and retrieval quality"
+    anchor: ret-ann
+  - label: "IVF: списки, центры и nprobe"
+    label_en: "IVF: lists, centroids and nprobe"
+    anchor: ret-ivf
+  - label: "HNSW: уровни, M и ширина поиска"
+    label_en: "HNSW: layers, M and search breadth"
+    anchor: ret-hnsw
+  - label: "PQ, ADC, остатки и OPQ"
+    label_en: "PQ, ADC, residuals and OPQ"
+    anchor: ret-pq
+  - label: "Faiss: train, add и search"
+    label_en: "Faiss: train, add and search"
+    anchor: ret-faiss
+  - label: "Chunking: границы и перекрытие"
+    label_en: "Chunking: boundaries and overlap"
+    anchor: ret-chunking
+  - label: "Структурное и child–parent retrieval"
+    label_en: "Structured and child–parent retrieval"
+    anchor: ret-parent
+  - label: "Происхождение фрагмента и смещения"
+    label_en: "Chunk provenance and offsets"
+    anchor: ret-provenance
+  - label: "Декомпозиция, multi-query и ограничения запроса"
+    label_en: "Decomposition, multi-query and query constraints"
+    anchor: ret-query
+  - label: "HyDE: гипотетический документ и реальные источники"
+    label_en: "HyDE: hypothetical documents and real sources"
+    anchor: ret-hyde
+  - label: "Pre-/post-filtering и проверка доступа"
+    label_en: "Pre-/post-filtering and authorization"
+    anchor: ret-filtering
+  - label: "Масштабы оценок при гибридном поиске"
+    label_en: "Score scales in hybrid retrieval"
+    anchor: ret-score-scale
+  - label: "RRF: ранги, веса и глубина выдачи"
+    label_en: "RRF: ranks, weights and retrieval depth"
+    anchor: ret-rrf
+  - label: "Union recall и потери после fusion"
+    label_en: "Union recall and post-fusion losses"
+    anchor: ret-fusion-limits
+  - label: "Версионирование корпуса, модели и индекса"
+    label_en: "Corpus, model and index versioning"
+    anchor: ret-version
+  - label: "Смена индекса, кэши и отзыв доступа"
+    label_en: "Index cutover, caches and access revocation"
+    anchor: ret-cutover
+  - label: "Трасса потерянного ответа"
+    label_en: "Tracing a lost answer"
+    anchor: ret-trace
+  - label: "Раздельная оценка каналов, ANN и fusion"
+    label_en: "Separate evaluation of channels, ANN and fusion"
+    anchor: ret-evaluation
+  - label: "HNSW: очереди, efSearch и остановка"
+    label_en: "HNSW: queues, efSearch and stopping"
+    anchor: ret-hnsw-queue
+  - label: "HNSW: выбор связей при построении"
+    label_en: "HNSW: construction neighbor selection"
+    anchor: ret-hnsw-links
 ---
 
 # Retrieval: от BM25 до плотного и гибридного поиска
@@ -29,6 +113,7 @@ primary_sources:
 и векторам, объединить результаты и понять, на каком этапе потерялся ответ.
 Повторное ранжирование подробно рассматривается в следующей главе.
 
+<a id="ret-recall"></a>
 ## 1. Формальная постановка
 
 Пусть $D$ — корпус, $q$ — запрос. Поиск возвращает упорядоченный список
@@ -54,13 +139,14 @@ $$
 доказательства. Можно отдельно размечать группы достаточных источников
 или обязательные факты и проверять, представлены ли они в выдаче.
 
+<a id="ret-reader"></a>
 ### Поиск кандидатов и чтение
 
 Один из ранних примеров такого разделения — DrQA. Система сначала
 находила статьи Википедии, затем нейронный reader извлекал ответ
 из отобранного текста:
 
-![[00 Учебник/Assets/Figures/curated/source-first-60-64/openqa-retriever-reader.png]]
+![[00 Учебник/Assets/Figures/curated/source-first-60-64/openqa-retriever-reader.png|DrQA: document retriever followed by extractive document reader]]
 
 *Danqi Chen, [ACL 2020 Open-Domain QA Tutorial, part IV](https://github.com/danqi/acl2020-openqa-tutorial/blob/3c82cf3bfa7f7f26aa4016cf4c48b83f1a4eaad0/slides/part4-retriever-reader.pdf#page=4),
 слайд 4; архитектура [DrQA](https://arxiv.org/abs/1704.00051).
@@ -84,6 +170,7 @@ Document Retriever выбирает статьи, Document Reader извлека
 
 ## 2. Инвертированный индекс и BM25
 
+<a id="ret-postings"></a>
 ### От термина к списку документов
 
 Пусть небольшой корпус после выбранной токенизации имеет вид:
@@ -123,6 +210,7 @@ Document Retriever выбирает статьи, Document Reader извлека
 Обычно текстовые поля и идентификаторы обрабатывают раздельно.
 Исходную строку сохраняют для проверки точных совпадений.
 
+<a id="ret-tfidf"></a>
 ### TF–IDF: частота и редкость
 
 В разреженном представлении координаты соответствуют терминам словаря.
@@ -139,7 +227,7 @@ Document Retriever выбирает статьи, Document Reader извлека
 Частоту часто ослабляют логарифмом, затем сравнивают нормированные
 TF–IDF-векторы по косинусу. У DrQA использовались униграммы и биграммы:
 
-![[00 Учебник/Assets/Figures/curated/source-first-60-64/openqa-tfidf-retriever.png]]
+![[00 Учебник/Assets/Figures/curated/source-first-60-64/openqa-tfidf-retriever.png|DrQA TF–IDF retrieval over Wikipedia articles]]
 
 *Danqi Chen, [тот же tutorial](https://github.com/danqi/acl2020-openqa-tutorial/blob/3c82cf3bfa7f7f26aa4016cf4c48b83f1a4eaad0/slides/part4-retriever-reader.pdf#page=5),
 слайд 5. На рисунке именно TF–IDF, **не BM25**. Документом в этой
@@ -152,6 +240,7 @@ TF–IDF-векторы по косинусу. У DrQA использовали�
 «векторы → веса → оценки → индекс» есть в
 [Jurafsky & Martin, SLP3, §11.1](https://web.stanford.edu/~jurafsky/slp3/11.pdf).
 
+<a id="ret-bm25"></a>
 ### BM25: насыщение частоты и длина
 
 Слово, повторённое десять раз, не обязательно делает документ
@@ -205,6 +294,7 @@ $$
 Встречаются другие варианты IDF и общие множители оценок; при переносе
 порогов и сравнении реализаций формулу нужно фиксировать.
 
+<a id="ret-bm25-example"></a>
 ### Один термин в числах
 
 Пусть $N=1000$, $n_t=10$, $f=3$, $|d|=200$,
@@ -275,6 +365,7 @@ BM25 не обучает отношение между перефразиров�
 
 ## 3. Плотный поиск
 
+<a id="ret-flat"></a>
 ### Что остаётся после вычисления эмбеддингов
 
 Документный энкодер заранее вычисляет $e_d(d)$; при поступлении
@@ -305,6 +396,7 @@ $$
 в IP вместо L2 может изменить порядок. Название индекса не исправляет
 неверно выбранную метрику.
 
+<a id="ret-ann"></a>
 ### Где возникает приближение
 
 При большом корпусе можно проверять не все векторы либо хранить
@@ -335,6 +427,7 @@ ANN recall $=1$ без полезного ответа.
 Результаты с такими разными определениями нельзя сравнивать по
 одному названию «recall».
 
+<a id="ret-ivf"></a>
 ### IVF: сначала список, затем векторы
 
 **Inverted File index** группирует векторы по ближайшим центроидам.
@@ -343,7 +436,7 @@ ANN recall $=1$ без полезного ответа.
 При запросе сначала выбирают несколько близких центров, затем
 оценивают только содержимое их списков:
 
-![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/ivf-build.png]]
+![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/ivf-build.png|IVF construction: centroids, assignments and inverted lists]]
 
 *Milvus documentation contributors,
 [IVF_FLAT — Overview](https://milvus.io/docs/ivf-flat.md),
@@ -370,7 +463,7 @@ Apache-2.0, [лицензия документации](/licenses/milvus-docs-9a
 Однако настоящий ближайший — $B$ на расстоянии 0.2, по другую
 сторону границы.
 
-![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/ivf-search.png]]
+![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/ivf-search.png|IVF search across one or several selected lists]]
 
 *Тот же источник,
 [оригинальный рисунок](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF-FLAT-workflow-2.png).
@@ -420,6 +513,7 @@ $N\cdot\text{nprobe}/\text{nlist}$ векторов, дополнительно 
 но может потребовать большего `nprobe` для прежней полноты.
 Фиксированного «правильного» `nlist` для всех корпусов нет.
 
+<a id="ret-hnsw"></a>
 ### HNSW: поиск по графу
 
 В **Hierarchical Navigable Small World** вершина соответствует вектору,
@@ -428,13 +522,14 @@ $N\cdot\text{nprobe}/\text{nlist}$ векторов, дополнительно 
 поиск быстро приближается к нужной области, затем продолжает с найденной
 вершины уровнем ниже:
 
-![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/hnsw.png]]
+![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/hnsw.png|HNSW search through upper layers and the base-layer graph]]
 
 *Milvus documentation contributors,
 [HNSW — Overview](https://milvus.io/docs/hnsw.md),
 [исходная схема](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hnsw.png).
-Apache-2.0; без изменений. Пунктир связывает появления одной вершины
-на уровнях, стрелки показывают поиск. Фиолетовая точка — запрос,
+Apache-2.0; без изменений. Пунктир между жёлтыми точками связывает
+появления одной вершины на уровнях, стрелки показывают поиск.
+Фиолетовая точка — запрос,
 а не дополнительный проиндексированный документ.*
 
 На верхних уровнях используется жадное продвижение: перейти к соседу,
@@ -473,6 +568,137 @@ HNSW обязательно имеет такую цепочку.
 [The Faiss Library, §5.2](https://arxiv.org/abs/2401.08281);
 исходный алгоритм — [Malkov & Yashunin](https://arxiv.org/abs/1603.09320).
 
+<a id="ret-hnsw-queue"></a>
+#### Candidate queues and the stopping rule
+
+The authors distinguish the result count from the search width:
+
+> ```ef``` - the size of the dynamic list for the nearest neighbors (used during the search). Higher ```ef```
+> leads to more accurate but slower search. ```ef``` cannot be set lower than the number of queried nearest neighbors
+> ```k```. The value ```ef``` of can be anything between ```k``` and the size of the dataset.
+
+*hnswlib authors, [HNSW algorithm parameters, v0.8.0](https://github.com/nmslib/hnswlib/blob/3f3429661187e4c24a490a0f148fc6bc89042b3d/ALGO_PARAMS.md).
+Original English retained; [Apache-2.0](/licenses/hnswlib-3f342966-Apache-2.0.txt).*
+
+At the base layer, keep two priority queues. The frontier contains vertices
+whose adjacency lists may still be inspected, with the closest vertex first.
+The result queue retains at most `ef` current best vertices, with the farthest
+one available for removal. A visited set prevents repeated distance calculations
+for vertices reached through several edges.
+
+Start both queues with the entry vertex. Pop the closest frontier candidate
+and inspect its previously unseen neighbors. A neighbor enters the queues if
+the result queue is not full or it is closer than the current worst result.
+If the result queue grows beyond `ef`, remove its farthest member.
+The two queues serve different purposes: a vertex removed from the results
+can still have a pending frontier entry.
+
+For the unfiltered, no-deletion search used here, stop when the closest remaining
+frontier candidate is farther than the worst retained result and the result
+queue is full. This is an approximate stopping rule. A far frontier vertex can
+still have an edge to a very close, unseen vertex; its own distance is not
+a lower bound on all vertices reachable through it.
+
+Return to the chain above and use squared L2 distances. From query 0,
+the distances to A, B and C are 16, 25 and 0.01.
+
+| Width / expansion | Result queue and next step |
+| --- | --- |
+| `ef=1`, A | A: 16. Reject B: 25; the frontier becomes empty. |
+| `ef=2`, A | A: 16, B: 25. Keep B because the result queue has space. |
+| `ef=2`, B | C: 0.01, A: 16. Discover C and remove B from results. |
+| `ef=2`, C | C: 0.01, A: 16. No unseen neighbors; return C for `k=1`. |
+
+The wider search expands three vertices even though `ef=2`.
+The width limits retained results, not the total number of distance calculations
+or expansions. The final response can still contain just one neighbor.
+
+The implementation below follows the two-queue logic in
+[hnswlib `searchBaseLayerST`](https://github.com/nmslib/hnswlib/blob/3f3429661187e4c24a490a0f148fc6bc89042b3d/hnswlib/hnswalg.h#L311).
+It uses a supplied one-dimensional graph to expose the search steps.
+It does not implement insertion, upper layers, deletion, filtering or the
+optimized memory layout of hnswlib. The Python code and worked graph are
+Bookvar teaching additions, not a performance measurement of the library.
+
+```python
+import heapq
+import math
+
+
+def search_layer_demo(points, graph, query, entry, ef, k=1):
+    if (not isinstance(ef, int) or isinstance(ef, bool)
+            or not isinstance(k, int) or isinstance(k, bool) or not 1 <= k <= ef):
+        raise ValueError("need integer 1 <= k <= ef")
+    if entry not in points or set(points) != set(graph):
+        raise ValueError("need an entry and an adjacency list for every vertex")
+    if not math.isfinite(query) or any(not math.isfinite(x) for x in points.values()):
+        raise ValueError("need finite one-dimensional coordinates")
+    if any(v not in points for neighbors in graph.values() for v in neighbors):
+        raise ValueError("every edge must point to a known vertex")
+
+    distance = lambda v: (points[v] - query) ** 2
+    frontier = [(distance(entry), entry)]       # nearest unexpanded first
+    best = [(-distance(entry), entry)]          # farthest retained first
+    visited, expanded = {entry}, []
+    while frontier:
+        d, vertex = heapq.heappop(frontier)
+        if len(best) == ef and d > -best[0][0]:
+            break
+        expanded.append(vertex)
+        for neighbor in graph[vertex]:
+            if neighbor in visited:
+                continue
+            visited.add(neighbor)
+            dn = distance(neighbor)
+            if len(best) < ef or dn < -best[0][0]:
+                heapq.heappush(frontier, (dn, neighbor))
+                heapq.heappush(best, (-dn, neighbor))
+                if len(best) > ef:
+                    heapq.heappop(best)
+    return sorted((-d, v) for d, v in best)[:k], visited, expanded
+
+
+points = {"A": 4., "B": 5., "C": .1}
+graph = {"A": ["B"], "B": ["A", "C"], "C": ["B"]}
+narrow, _, _ = search_layer_demo(points, graph, 0., "A", ef=1)
+wide, visited, expanded = search_layer_demo(points, graph, 0., "A", ef=2)
+assert narrow[0][1] == "A" and wide[0][1] == "C"
+assert visited == set(points) and expanded == ["A", "B", "C"]
+assert len(expanded) > 2  # ef is not a hard limit on graph expansions
+assert math.isclose(wide[0][0], .01)
+```
+
+Increasing the width cannot create a missing graph connection. If a component
+containing the true nearest neighbor is unreachable from the entry, even a
+width equal to the whole database cannot reach it. The graph structure and
+entry selection therefore affect recall separately from the query-time width.
+Returning to all IVF lists has a different property:
+with IVFFlat it explicitly visits the complete database.
+
+<a id="ret-hnsw-links"></a>
+#### Why construction does not keep only the closest links
+
+In hnswlib, [getNeighborsByHeuristic2](https://github.com/nmslib/hnswlib/blob/3f3429661187e4c24a490a0f148fc6bc89042b3d/hnswlib/hnswalg.h#L443)
+considers candidate neighbors in increasing distance from the new vertex.
+After accepting a neighbor, it can reject another candidate that is closer
+to an already accepted neighbor than to the new vertex. The candidate may
+provide a redundant route through the same nearby region.
+
+For a new vertex at 0 and candidates A=1, B=1.1 and C=−1.2, the two closest
+candidates are A and B. With a two-link budget, the heuristic first accepts A.
+It rejects B because the A–B distance is 0.1, smaller than B's distance 1.1
+from the new vertex. It then accepts C: the A–C distance 2.2 exceeds C's
+distance 1.2 from the new vertex. The two links point to opposite sides
+rather than the same tight group.
+
+The actual code compares the configured distance function; squared L2 gives
+the same decisions in this example. This local heuristic does not guarantee
+a globally optimal graph or complete connectivity. `efConstruction` controls
+the candidate search used while adding vertices; `M` limits the retained
+connections. A wide construction search and a large connection budget change
+different parts of the graph-building procedure.
+
+<a id="ret-pq"></a>
 ### Product quantization: код вместо координат
 
 В обычном векторном квантовании каждый полный вектор заменяют
@@ -482,7 +708,7 @@ HNSW обязательно имеет такую цепочку.
 отдельную небольшую книгу для каждой части. При восстановлении
 выбранные подвекторы соединяются обратно.
 
-![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/pq-codebooks.png]]
+![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/pq-codebooks.png|Product quantization: subspaces, codebooks and vector codes]]
 
 *Milvus documentation contributors,
 [IVF_PQ — PQ](https://milvus.io/docs/ivf-pq.md),
@@ -537,7 +763,7 @@ $$
 Yusuke Matsui, [nanopq tutorial](https://nanopq.readthedocs.io/en/latest/source/tutorial.html),
 [MIT](/licenses/nanopq-898fad82-MIT.txt). В обозначениях главы эта таблица — $T$.
 
-![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/pq-search.png]]
+![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/pq-search.png|PQ distance lookup tables and summed subspace distances]]
 
 *Тот же источник,
 [исходная схема вычисления расстояний](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ivf-pq-2.png).
@@ -590,6 +816,7 @@ assert np.allclose(approximate, ((reconstructed - query) ** 2).sum(axis=1))
 в [учебном tutorial Yusuke Matsui](https://nanopq.readthedocs.io/en/latest/source/tutorial.html)
 и [Faiss, §4.1–4.2](https://arxiv.org/abs/2401.08281).
 
+<a id="ret-faiss"></a>
 ### Проверка настоящего индекса Faiss
 
 В учебном примере ниже нет языковой модели: используются 512
@@ -633,6 +860,7 @@ ID и удаления нужен соответствующий интерфе�
 
 ## 4. Что именно индексировать
 
+<a id="ret-chunking"></a>
 ### Границы фрагмента меняют доступную информацию
 
 Документ, раздел, абзац, предложение и ячейка таблицы дают разные
@@ -694,6 +922,7 @@ assert len(tokens) == 12
 на границах нет полного повторения. Это оценка дублирования данных,
 не обещание такого же изменения задержки.
 
+<a id="ret-parent"></a>
 ### Структура вместо одного размера окна
 
 Если документ уже содержит заголовки, абзацы, таблицы или функции
@@ -721,6 +950,7 @@ assert len(tokens) == 12
 его с прямым поиском по фрагментам при сопоставимом бюджете,
 а не считать иерархию бесплатным улучшением.
 
+<a id="ret-provenance"></a>
 ### Происхождение фрагмента
 
 Для цитирования и обновлений одного текста недостаточно. Хранят
@@ -738,6 +968,7 @@ assert len(tokens) == 12
 
 ## 5. Query processing
 
+<a id="ret-query"></a>
 ### Сохранить условие запроса
 
 В запросе «не использовать версию 1.2» отрицание и номер версии
@@ -759,6 +990,7 @@ assert len(tokens) == 12
 перефразировками одной потребности. У каждого канала сохраняют,
 какой вариант привёл к документу, и объединяют повторные ID.
 
+<a id="ret-hyde"></a>
 ### HyDE: искать по гипотетическому документу
 
 HyDE сначала просит генеративную модель написать предполагаемый
@@ -766,7 +998,7 @@ HyDE сначала просит генеративную модель напи�
 Полученный вектор используется для поиска **реальных** документов
 корпуса. Гипотетический текст не становится источником фактов:
 
-![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/hyde-pipeline.png]]
+![[00 Учебник/Assets/Figures/curated/retrieval-review-2026-10/hyde-pipeline.png|HyDE: hypothetical documents used to retrieve real corpus documents]]
 
 *Luyu Gao, Xueguang Ma, Jimmy Lin, Jamie Callan,
 [Precise Zero-Shot Dense Retrieval without Relevance Labels](https://aclanthology.org/2023.acl-long.99/),
@@ -803,6 +1035,7 @@ $$
 Сохранение исходного поискового канала — один из проверяемых вариантов,
 а не обязательная часть оригинального алгоритма HyDE.
 
+<a id="ret-filtering"></a>
 ### Фильтр до и после top-k
 
 Пусть четыре документа имеют оценки 0.95, 0.90, 0.80, 0.70,
@@ -826,6 +1059,7 @@ $$
 
 ## 6. Гибридная выдача
 
+<a id="ret-score-scale"></a>
 ### Почему сумма оценок зависит от масштаба
 
 Пусть BM25 поставил документам $A,B$ оценки 20 и 10, а dense-поиск —
@@ -841,6 +1075,7 @@ Min–max по текущей выдаче тоже имеет ограниче�
 максимум минус минимум равен нулю. Нормированное число всё равно
 не становится вероятностью релевантности.
 
+<a id="ret-rrf"></a>
 ### Два списка и одно решение
 
 **Reciprocal Rank Fusion, RRF** использует позиции, а не исходные оценки:
@@ -907,6 +1142,7 @@ RRF отбрасывает информацию о величине разрыв
 независимыми свидетельствами. Число каналов, варианты запросов,
 веса, $c$ и глубины списков фиксируют вместе с результатом.
 
+<a id="ret-fusion-limits"></a>
 ### Когда объединение помогает, а когда мешает
 
 Если sparse-only top-2 равен $A,B$, dense-only top-2 — $C,B$,
@@ -930,6 +1166,7 @@ RRF не выигрывает у лучшего одиночного канал�
 
 ## 7. Обновления и версии индекса
 
+<a id="ret-version"></a>
 ### Что именно версионировать
 
 Индекс зависит от снимка корпуса, парсера, разбиения, токенизатора
@@ -950,6 +1187,7 @@ RRF не выигрывает у лучшего одиночного канал�
 требует пересчёта затронутых представлений. Совпадение размерности
 старого и нового векторов не означает совместимости пространств.
 
+<a id="ret-cutover"></a>
 ### Переход на новую версию
 
 Новый индекс можно построить рядом со старым. Проверяют наличие
@@ -975,6 +1213,7 @@ RRF не выигрывает у лучшего одиночного канал�
 
 ## 8. Диагностика retrieval
 
+<a id="ret-trace"></a>
 ### Проследить один потерянный ответ
 
 Пусть достаточный источник имеет ID `policy-v2#access`.
@@ -1010,6 +1249,7 @@ RRF не выигрывает у лучшего одиночного канал�
 только потому, что это отладка. Объём, доступ и срок хранения
 диагностических данных определяют отдельно.
 
+<a id="ret-evaluation"></a>
 ### Разделить проверки
 
 Сначала на фиксированном корпусе сравнивают лексический и точный

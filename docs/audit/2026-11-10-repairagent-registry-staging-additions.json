@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-10",
+  "scope": "Exact earlier RepairAgent registry insertion, recorded separately because it precedes the GPT corpus journal and must be reversed after it. The chapter changes are recorded in the later external-figure review.",
+  "files": [
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "7494f99f3ca9815ea0a1db9742062f46607fb809caa545e41529556c71789178",
+      "after_sha256": "dc067f3c8be150eb91393cbb9970e1e921b786ea29c88ba1fa2d75f01f4dd20c",
+      "lines": 25528,
+      "changes": [
+        {
+          "old": "    metadata_status: verified\n    provenance_confirmation: source-license-verified\n  - id: curated-jamba-vector-5ee975e76a73\n    asset: 00 Учебник/Assets/Figures/curated/course-follow-through/jamba-architecture.svg\n",
+          "new": "    metadata_status: verified\n    provenance_confirmation: source-license-verified\n  - {\"id\":\"curated-repairagent-figure2-8c81df177e7f\",\"asset\":\"00 Учебник/Assets/Figures/curated/external-figure-review-2026-11-10/repairagent-figure2.svg\",\"author\":\"Islem Bouzenia, Premkumar Devanbu, Michael Pradel\",\"title\":\"RepairAgent Figure 2: finite-state machine\",\"source_url\":\"https://arxiv.org/html/2403.17134v2#S3.F2\",\"source_image_url\":\"https://arxiv.org/html/2403.17134v2/states_diagram2.drawio.svg\",\"source_asset_sha256\":\"8c81df177e7f97bed18d45bd0df30de6edd5d73a2928699278bdff4dd703dea1\",\"sha256\":\"8c81df177e7f97bed18d45bd0df30de6edd5d73a2928699278bdff4dd703dea1\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence\":\"https://arxiv.org/html/2403.17134v2\",\"derivation\":\"source-svg-copy\",\"modifications\":\"Complete author SVG copied byte-for-byte. No crop, redraw, sanitization, or visual edit.\",\"metadata_status\":\"verified\",\"rights_status\":\"source-license-verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-10\",\"used_in\":[\"00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md\"]}\n  - id: curated-jamba-vector-5ee975e76a73\n    asset: 00 Учебник/Assets/Figures/curated/course-follow-through/jamba-architecture.svg\n"
+        }
+      ]
+    }
+  ]
+}

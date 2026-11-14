@@ -96,6 +96,23 @@ def main():
     assert math.isclose(math.exp(manual), 2.3207944168, abs_tol=1e-10)
     assert math.isclose((2 * 0.5 + 8 * 1.5) / 10, 1.3)
     assert math.isclose((0.5 + 1.5) / 2, 1.0)
+
+    # The same targets and weights, with the five answer tokens split 2 + 3.
+    # Compare gradients before any optimizer step, including the failure control.
+    short_mask, long_mask = am.clone(), am.clone()
+    short_mask[:, 7:] = 0
+    long_mask[:, :7] = 0
+    assert (short_mask.sum().item(), long_mask.sum().item()) == (2, 3)
+    param = model.get_output_embeddings().weight
+    full_grad, = torch.autograd.grad(loss_fn(model, ids, am, attn), param)
+    micro_grad = [
+        torch.autograd.grad(loss_fn(model, ids, mask, attn), param)[0]
+        for mask in (short_mask, long_mask)
+    ]
+    correct = (2 * micro_grad[0] + 3 * micro_grad[1]) / 5
+    naive = (micro_grad[0] + micro_grad[1]) / 2
+    torch.testing.assert_close(full_grad, correct, rtol=1e-5, atol=1e-7)
+    assert (full_grad - naive).abs().max().item() > 1e-4
     assert 9000 * 100 == 1000 * 900 == 900000
     def token_share(q):
         total = q[0] * 100 + q[1] * 900
@@ -119,6 +136,8 @@ def main():
         "prompt_embedding_gradient_norm": prompt_gradient,
         "packing_max_error": packing_error, "ordinary_attention_change": leak,
         "nll": manual, "perplexity": math.exp(manual),
+        "accumulation_max_error": (full_grad - correct).abs().max().item(),
+        "mean_of_means_max_error": (full_grad - naive).abs().max().item(),
     }, indent=2))
     print("PASS published SFT loss/update/packing; EOS, padding, empty targets, prompt gradients, mixture arithmetic")
 

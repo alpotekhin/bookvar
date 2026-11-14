@@ -1,0 +1,261 @@
+{
+  "date": "2026-11-10",
+  "scope": "Replace the published DistServe crop in both benchmarking chapters with its licensed arXiv original, and record the exact source-attribution guidance for existing Lena Voita artwork without clearing unsupported permission.",
+  "review": {
+    "previousGoalTurn": "Progress: completed the Gemma 1–4 architecture comparison and verified the local reader.",
+    "read": "Read the complete preceding RU and EN chapters and the existing figure notice. Re-read and reconciled the changed caption and both plot interpretations.",
+    "distserve": "arXiv v3 §1, Figure 1 and caption. The arXiv article explicitly identifies CC BY-SA 4.0. Only the unchanged arXiv source asset is linked to that license; no assertion that it licenses the earlier USENIX crop.",
+    "examples": "All eight Python blocks in each locale are unchanged and execute in order in uv with NumPy. No GPU test was run.",
+    "voita": "The three course chapters embed all fourteen matched files. The landing page gives the course citation for reuse of materials such as figures. This is attribution guidance, not an explicit named license or clearance of a specific public redistribution. The thirteen author-figure records retain needs-confirmation. The Bahdanau et al. heatmap is independently matched but not covered by the course attribution record; arXiv v7 states a non-exclusive arXiv deposit license.",
+    "limits": "No chapter examples were changed, and no new copy of Voita artwork was made. Publication remains unauthorized; the rest of the public-release inventory is open.",
+    "reader": "Root build: 2069 pages. 272 built-output tests, zero broken links, and 751 publication tests passed (11 skipped). Chromium checked the two DistServe pages and five chapters using the Voita figures at 1280 px and 375 px: 32 successful image load, aspect ratio, fit and attribution observations. Inspected the new chart and its 3× zoom and horizontal pan in both locales.",
+    "inventory": "Scanned the current built HTML for distinct local image paths. 56 active paths have registry status needs-confirmation, one fewer than before this substitution; 45 are linked from textbook routes. No retired image was referenced. The retired DistServe file is absent from the static output. This is a metadata count, not a conclusion about unregistered images or public release.",
+    "registry": "The full curated registry and reader-route figure suites passed 200 tests. The validator covers exact publisher HTML figures, declared arXiv versions, rendered PDF figure sources, pinned author files and archived Qwen crop status. Negative cases reject a different arXiv version, an invented license, a false hash and crop metadata on the unchanged SVG. Rechecked the ASTRA and MoBA files against the pinned author repositories; MoBA's public MIT notice adds only a final newline."
+  },
+  "distserve": {
+    "asset": "00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/distserve-original-teaser.svg",
+    "sha256": "bae5d6fba7ac2a797877f64ce30e1901b0e1140e4f24fc45a21e9c170f50e937",
+    "source": "https://arxiv.org/html/2401.09670v3#S1.F1",
+    "image": "https://arxiv.org/html/2401.09670v3/teaser.svg",
+    "license": "CC BY-SA 4.0"
+  },
+  "voita": {
+    "course": "https://lena-voita.github.io/nlp_course.html",
+    "livePageSha256": "0a70704a31b606e56fb22857b311aec303906395ceed57a85c11e9ac0341c2a8",
+    "repositoryRevision": "6f2442dbb507571ac185c01ae5d5d006cf51a4c2",
+    "pinnedPageSha256": "b9432f102fcf574dfde1775a0137d25e424cc865c969116d91dc7cc65cf770e4",
+    "figures": [
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/bahdanau_examples-min.png",
+        "author": "Dzmitry Bahdanau, Kyunghyun Cho, Yoshua Bengio (figure); Lena Voita (course reproduction)",
+        "source": "https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html",
+        "image": "https://lena-voita.github.io/resources/lectures/seq2seq/attention/bahdanau_examples-min.png",
+        "sha256": "6c66971d0df00e5535298faddda0c1bb00fd141d905a4f820d030674682728d5",
+        "bytesMatched": true
+      },
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/bottleneck-min.png",
+        "author": "Lena Voita",
+        "source": "https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html",
+        "image": "https://lena-voita.github.io/resources/lectures/seq2seq/attention/bottleneck-min.png",
+        "sha256": "4e357db2d637f8bc0782974e00cf1b35bb56b5bcac67b35e84115b8c9ef64e82",
+        "bytesMatched": true
+      },
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/voita-language-modeling/ngram-window.png",
+        "author": "Lena Voita",
+        "source": "https://lena-voita.github.io/nlp_course/language_modeling.html",
+        "image": "https://lena-voita.github.io/resources/lectures/lang_models/ngram/example_cut_3gram-min.png",
+        "sha256": "bd5268c1c9371ce464870486b478c24b2672b918410c5406e99c2510f96fa44b",
+        "bytesMatched": true
+      },
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/voita-language-modeling/ngram-probability.png",
+        "author": "Lena Voita",
+        "source": "https://lena-voita.github.io/nlp_course/language_modeling.html",
+        "image": "https://lena-voita.github.io/resources/lectures/lang_models/ngram/prob_cat_on_a_mat-min.png",
+        "sha256": "7e5287bdbb84ab8d31ade52b06e7eba9846c998f374e295f41c310a67748029a",
+        "bytesMatched": true
+      },
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/voita-language-modeling/backoff.png",
+        "author": "Lena Voita",
+        "source": "https://lena-voita.github.io/nlp_course/language_modeling.html",
+        "image": "https://lena-voita.github.io/resources/lectures/lang_models/ngram/backoff-min.png",
+        "sha256": "e9822923c163b072533515cf82cb0e899d7af0913c50449c4a0417a62d698b05",
+        "bytesMatched": true
+      },
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/voita-language-modeling/interpolation.png",
+        "author": "Lena Voita",
+        "source": "https://lena-voita.github.io/nlp_course/language_modeling.html",
+        "image": "https://lena-voita.github.io/resources/lectures/lang_models/ngram/interpolation-min.png",
+        "sha256": "87ac856c87e342264e639ad4b133f53d5439502e2f558f9fff2e3140b067ec54",
+        "bytesMatched": true
+      },
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/voita-word-embeddings/lookup-table.gif",
+        "author": "Lena Voita",
+        "source": "https://lena-voita.github.io/nlp_course/word_embeddings.html",
+        "image": "https://lena-voita.github.io/resources/lectures/word_emb/lookup_table.gif",
+        "sha256": "578a20d48490a7c42a4bb4c93cd7acfe0b5e96d3922c0384f452dee91708f0e0",
+        "bytesMatched": true
+      },
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/voita-word-embeddings/one-hot.png",
+        "author": "Lena Voita",
+        "source": "https://lena-voita.github.io/nlp_course/word_embeddings.html",
+        "image": "https://lena-voita.github.io/resources/lectures/word_emb/one_hot-min.png",
+        "sha256": "b1284449dfd787afc529b313bb3f95d08b5dfa8649034a57e370efc8a7239272",
+        "bytesMatched": true
+      },
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/voita-word-embeddings/count-based-idea.png",
+        "author": "Lena Voita",
+        "source": "https://lena-voita.github.io/nlp_course/word_embeddings.html",
+        "image": "https://lena-voita.github.io/resources/lectures/word_emb/preneural/idea-min.png",
+        "sha256": "bdd6d2fcd48116d0fe055e6fceaa051a4b95128c4367d5c591102f5ee0dcbd05",
+        "bytesMatched": true
+      },
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/voita-word-embeddings/cbow-skipgram.png",
+        "author": "Lena Voita",
+        "source": "https://lena-voita.github.io/nlp_course/word_embeddings.html",
+        "image": "https://lena-voita.github.io/resources/lectures/word_emb/w2v/cbow_skip-min.png",
+        "sha256": "5b9be7c43242ffc141a99b3f16df429a9c893dcf0c7b85a627f7475ae9b4585f",
+        "bytesMatched": true
+      },
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/voita-word-embeddings/negative-sampling.png",
+        "author": "Lena Voita",
+        "source": "https://lena-voita.github.io/nlp_course/word_embeddings.html",
+        "image": "https://lena-voita.github.io/resources/lectures/word_emb/w2v/negative_sampling-min.png",
+        "sha256": "8563b306dab2b8ea5453dc05f94447ba31d02dfcb71ba16046b07ad39108430c",
+        "bytesMatched": true
+      },
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/voita-word-embeddings/glove-idea.png",
+        "author": "Lena Voita",
+        "source": "https://lena-voita.github.io/nlp_course/word_embeddings.html",
+        "image": "https://lena-voita.github.io/resources/lectures/word_emb/glove/idea-min.png",
+        "sha256": "1d189da12c2023582b347ff563b24d77ee9bc6cb33339f051eb67217bb2bfed3",
+        "bytesMatched": true
+      },
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/voita-word-embeddings/glove-loss.png",
+        "author": "Lena Voita",
+        "source": "https://lena-voita.github.io/nlp_course/word_embeddings.html",
+        "image": "https://lena-voita.github.io/resources/lectures/word_emb/glove/glove_loss-min.png",
+        "sha256": "516f291039ad5aedf0a046e6d9eb56464c4c88947c774e54b65a6f8f6a936d5d",
+        "bytesMatched": true
+      },
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/source-audit-15-24/qkv-for-heads.png",
+        "author": "Elena Voita",
+        "source": "https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html#multi_head_attention",
+        "image": "https://lena-voita.github.io/resources/lectures/seq2seq/transformer/qkv_for_heads-min.png",
+        "sha256": "aa8c7d8d37b41a40eb4463ad904dcead83470c901fc2bfdc7eda64d2f38776f8",
+        "bytesMatched": true
+      }
+    ],
+    "thirdPartyOriginal": "https://arxiv.org/html/1409.0473v7#S4.F3"
+  },
+  "files": [
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+      "before_sha256": "1d453c6e9f77e4aee10c81305bc406fe0bf3a50e69fc4edd22748a555e5a0b9c",
+      "after_sha256": "3a7088f10b28a96d6d32211a1c1ca1052592ab975238e82520449dd76a513893",
+      "lines": 916,
+      "changes": [
+        {
+          "old": "---\ntitle: \"Benchmarking, SLO и эксплуатация LLM inference\"\ntype: textbook-chapter\nstatus: canonical\nlast_updated: 2026-10-20\nlast_verified: 2026-10-20\nsource_unit_id:\n  - lecture-10-section-4-understanding-the-inference-workload\n  - lecture-10-dynamic-workload-failure-mode\n",
+          "new": "---\ntitle: \"Benchmarking, SLO и эксплуатация LLM inference\"\ntype: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-10\nlast_verified: 2026-10-20\nsource_unit_id:\n  - lecture-10-section-4-understanding-the-inference-workload\n  - lecture-10-dynamic-workload-failure-mode\n"
+        },
+        {
+          "old": "  - https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/benchmarking/benchmarking.qmd\n  - https://github.com/vllm-project/vllm/blob/b8e9001bf9568c801985889deff34d3b9fe6d0b0/vllm/benchmarks/serve.py\n  - https://docs.nvidia.com/aiperf/v0.13.0/reference/ai-perf-metrics-reference\n  - https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf\n  - https://sre.google/workbook/alerting-on-slos/\n---\n\n# Benchmarking, SLO и эксплуатация LLM inference\n",
+          "new": "  - https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/benchmarking/benchmarking.qmd\n  - https://github.com/vllm-project/vllm/blob/b8e9001bf9568c801985889deff34d3b9fe6d0b0/vllm/benchmarks/serve.py\n  - https://docs.nvidia.com/aiperf/v0.13.0/reference/ai-perf-metrics-reference\n  - https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf\n  - https://arxiv.org/html/2401.09670v3#S1.F1\n  - https://sre.google/workbook/alerting-on-slos/\n---\n\n# Benchmarking, SLO и эксплуатация LLM inference\n"
+        },
+        {
+          "old": "а не число прошедших запросов в секунду в произвольной точке. Поэтому\n`request_goodput` конкретного запуска и максимальную допустимую частоту\nDistServe нельзя без пояснения подставлять друг вместо друга.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/distserve-figure1-original.png]]\n\n*Yinmin Zhong et al., [DistServe, Figure 1, PDF p.2](https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf#page=2).\nОригинальные панели и подпись из PDF. Нагрузка авторов: 13B-модель,\nA100 80GB, вход 512 и выход 64 токена. Пунктирные границы относятся к P90\nTTFT 0.4 s и TPOT 0.04 s. Это историческое измерение, не результат Bookvar.*\n\nСиняя кривая общего исполнения пересекает ограничение TPOT примерно при\n1.6 запроса/с, раньше ограничения TTFT. Оранжевая и зелёная кривые относятся\nк отдельным фазам; из них нельзя получить производительность полной\n",
+          "new": "а не число прошедших запросов в секунду в произвольной точке. Поэтому\n`request_goodput` конкретного запуска и максимальную допустимую частоту\nDistServe нельзя без пояснения подставлять друг вместо друга.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/distserve-original-teaser.svg|DistServe: P90 TTFT и TPOT при совместном и раздельном исполнении фаз]]\n\n*Yinmin Zhong et al., [DistServe, рис. 1](https://arxiv.org/html/2401.09670v3#S1.F1),\n[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).\nАвторский SVG без изменений. В опыте модель 13B обслуживала на одной\nA100 80 GB запросы с 512 входными и 64 выходными токенами. Сверху P90 TTFT\nс границей 0,4 с, снизу P90 TPOT с границей 0,04 с.*\n\nСиняя кривая общего исполнения пересекает ограничение TPOT примерно при\n1.6 запроса/с, раньше ограничения TTFT. Оранжевая и зелёная кривые относятся\nк отдельным фазам; из них нельзя получить производительность полной\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md",
+      "before_sha256": "bceaa1e5f7ce1f6463baaac8772ce9cb831ce21e6e19a2afd6a7b31c5b9d6fb4",
+      "after_sha256": "6c0deb646049da1d2b2acc838e2c2337abe5280af7cb7c1b0093ee88908bacc1",
+      "lines": 926,
+      "changes": [
+        {
+          "old": "type: textbook-chapter\nstatus: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"1d453c6e9f77e4aee10c81305bc406fe0bf3a50e69fc4edd22748a555e5a0b9c\"\ntranslation_reviewed: \"2026-10-29\"\ntranslation_of: \"00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md\"\nlast_updated: 2026-10-29\nlast_verified: 2026-09-15\nsource_unit_id:\n  - lecture-10-section-4-understanding-the-inference-workload\n  - lecture-10-dynamic-workload-failure-mode\n",
+          "new": "type: textbook-chapter\nstatus: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"3a7088f10b28a96d6d32211a1c1ca1052592ab975238e82520449dd76a513893\"\ntranslation_reviewed: \"2026-10-29\"\ntranslation_of: \"00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md\"\nlast_updated: 2026-11-10\nlast_verified: 2026-09-15\nsource_unit_id:\n  - lecture-10-section-4-understanding-the-inference-workload\n  - lecture-10-dynamic-workload-failure-mode\n"
+        },
+        {
+          "old": "  - https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/benchmarking/benchmarking.qmd\n  - https://github.com/vllm-project/vllm/blob/b8e9001bf9568c801985889deff34d3b9fe6d0b0/vllm/benchmarks/serve.py\n  - https://docs.nvidia.com/aiperf/v0.13.0/reference/ai-perf-metrics-reference\n  - https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf\n  - https://sre.google/workbook/alerting-on-slos/\n---\n\n# Benchmarking, SLOs, and LLM inference operations\n",
+          "new": "  - https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/benchmarking/benchmarking.qmd\n  - https://github.com/vllm-project/vllm/blob/b8e9001bf9568c801985889deff34d3b9fe6d0b0/vllm/benchmarks/serve.py\n  - https://docs.nvidia.com/aiperf/v0.13.0/reference/ai-perf-metrics-reference\n  - https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf\n  - https://arxiv.org/html/2401.09670v3#S1.F1\n  - https://sre.google/workbook/alerting-on-slos/\n---\n\n# Benchmarking, SLOs, and LLM inference operations\n"
+        },
+        {
+          "old": "of a load experiment, not the number of passing requests per second at an\narbitrary operating point. Label the run's `request_goodput` separately from\nDistServe's sustainable-rate metric.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/distserve-figure1-original.png]]\n\n*Yinmin Zhong et al., [DistServe, Figure 1, PDF p. 2](https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf#page=2).\nOriginal panels and caption. The authors use a 13B model, A100 80GB, 512 input\ntokens, and 64 output tokens. Dashed limits concern P90 TTFT 0.4 s and\nTPOT 0.04 s. These are historical measurements, not Bookvar results.*\n\nThe blue colocated curve crosses the TPOT limit around 1.6 requests/s,\nbefore crossing the TTFT limit. Orange and green describe isolated phases.\nChoosing the larger of their rates does not predict throughput for a complete\n",
+          "new": "of a load experiment, not the number of passing requests per second at an\narbitrary operating point. Label the run's `request_goodput` separately from\nDistServe's sustainable-rate metric.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/distserve-original-teaser.svg|DistServe: P90 TTFT and TPOT for colocated and isolated phases]]\n\n*Yinmin Zhong et al., [DistServe, Figure 1](https://arxiv.org/html/2401.09670v3#S1.F1),\n[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).\nUnchanged author SVG. The authors ran a 13B model on one A100 80 GB with\n512 input and 64 output tokens per request. The top panel shows P90 TTFT\nagainst a 0.4 s limit; the bottom shows P90 TPOT against a 0.04 s limit.*\n\nThe blue colocated curve crosses the TPOT limit around 1.6 requests/s,\nbefore crossing the TTFT limit. Orange and green describe isolated phases.\nChoosing the larger of their rates does not predict throughput for a complete\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "5982c06d06265441e7fceb6472cf6ac839a07406ed99e0f01dde2a7cc5f75f32",
+      "after_sha256": "38c223f96a8dc1353421683c8b5574911b922bfcb928645011b553955fa14621",
+      "lines": 24926,
+      "changes": [
+        {
+          "old": "  - id: curated-attention-is-all-you-need-4e357db2d637\n    asset: 00 Учебник/Assets/Figures/curated/attention-is-all-you-need/bottleneck-min.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html\n    source_image_url: https://lena-voita.github.io/resources/lectures/seq2seq/attention/bottleneck-min.png\n    source_asset: 05 Источники/Originals/attention-translation-2026-10-21/voita-bottleneck-min.png\n    source_asset_sha256: 4e357db2d637f8bc0782974e00cf1b35bb56b5bcac67b35e84115b8c9ef64e82\n    sha256: 4e357db2d637f8bc0782974e00cf1b35bb56b5bcac67b35e84115b8c9ef64e82\n",
+          "new": "  - id: curated-attention-is-all-you-need-4e357db2d637\n    asset: 00 Учебник/Assets/Figures/curated/attention-is-all-you-need/bottleneck-min.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html\n    attribution_guidance_url: \"https://lena-voita.github.io/nlp_course.html\"\n    attribution_guidance_evidence: \"https://github.com/lena-voita/lena-voita.github.io/blob/6f2442dbb507571ac185c01ae5d5d006cf51a4c2/nlp_course.html#L226-L240\"\n    source_image_url: https://lena-voita.github.io/resources/lectures/seq2seq/attention/bottleneck-min.png\n    source_asset: 05 Источники/Originals/attention-translation-2026-10-21/voita-bottleneck-min.png\n    source_asset_sha256: 4e357db2d637f8bc0782974e00cf1b35bb56b5bcac67b35e84115b8c9ef64e82\n    sha256: 4e357db2d637f8bc0782974e00cf1b35bb56b5bcac67b35e84115b8c9ef64e82\n"
+        },
+        {
+          "old": "  - id: curated-voita-ngram-window-000000000011\n    asset: 00 Учебник/Assets/Figures/curated/voita-language-modeling/ngram-window.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/language_modeling.html\n    source_image_url: https://lena-voita.github.io/resources/lectures/lang_models/ngram/example_cut_3gram-min.png\n    sha256: bd5268c1c9371ce464870486b478c24b2672b918410c5406e99c2510f96fa44b\n    license: User permission record (not a named license)\n    license_url: null\n",
+          "new": "  - id: curated-voita-ngram-window-000000000011\n    asset: 00 Учебник/Assets/Figures/curated/voita-language-modeling/ngram-window.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/language_modeling.html\n    attribution_guidance_url: \"https://lena-voita.github.io/nlp_course.html\"\n    attribution_guidance_evidence: \"https://github.com/lena-voita/lena-voita.github.io/blob/6f2442dbb507571ac185c01ae5d5d006cf51a4c2/nlp_course.html#L226-L240\"\n    source_image_url: https://lena-voita.github.io/resources/lectures/lang_models/ngram/example_cut_3gram-min.png\n    sha256: bd5268c1c9371ce464870486b478c24b2672b918410c5406e99c2510f96fa44b\n    license: User permission record (not a named license)\n    license_url: null\n"
+        },
+        {
+          "old": "  - id: curated-voita-ngram-prob-000000000012\n    asset: 00 Учебник/Assets/Figures/curated/voita-language-modeling/ngram-probability.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/language_modeling.html\n    source_image_url: https://lena-voita.github.io/resources/lectures/lang_models/ngram/prob_cat_on_a_mat-min.png\n    sha256: 7e5287bdbb84ab8d31ade52b06e7eba9846c998f374e295f41c310a67748029a\n    license: User permission record (not a named license)\n    license_url: null\n",
+          "new": "  - id: curated-voita-ngram-prob-000000000012\n    asset: 00 Учебник/Assets/Figures/curated/voita-language-modeling/ngram-probability.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/language_modeling.html\n    attribution_guidance_url: \"https://lena-voita.github.io/nlp_course.html\"\n    attribution_guidance_evidence: \"https://github.com/lena-voita/lena-voita.github.io/blob/6f2442dbb507571ac185c01ae5d5d006cf51a4c2/nlp_course.html#L226-L240\"\n    source_image_url: https://lena-voita.github.io/resources/lectures/lang_models/ngram/prob_cat_on_a_mat-min.png\n    sha256: 7e5287bdbb84ab8d31ade52b06e7eba9846c998f374e295f41c310a67748029a\n    license: User permission record (not a named license)\n    license_url: null\n"
+        },
+        {
+          "old": "  - id: curated-voita-ngram-backoff-000000000013\n    asset: 00 Учебник/Assets/Figures/curated/voita-language-modeling/backoff.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/language_modeling.html\n    source_image_url: https://lena-voita.github.io/resources/lectures/lang_models/ngram/backoff-min.png\n    sha256: e9822923c163b072533515cf82cb0e899d7af0913c50449c4a0417a62d698b05\n    license: User permission record (not a named license)\n    license_url: null\n",
+          "new": "  - id: curated-voita-ngram-backoff-000000000013\n    asset: 00 Учебник/Assets/Figures/curated/voita-language-modeling/backoff.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/language_modeling.html\n    attribution_guidance_url: \"https://lena-voita.github.io/nlp_course.html\"\n    attribution_guidance_evidence: \"https://github.com/lena-voita/lena-voita.github.io/blob/6f2442dbb507571ac185c01ae5d5d006cf51a4c2/nlp_course.html#L226-L240\"\n    source_image_url: https://lena-voita.github.io/resources/lectures/lang_models/ngram/backoff-min.png\n    sha256: e9822923c163b072533515cf82cb0e899d7af0913c50449c4a0417a62d698b05\n    license: User permission record (not a named license)\n    license_url: null\n"
+        },
+        {
+          "old": "  - id: curated-voita-ngram-interp-000000000014\n    asset: 00 Учебник/Assets/Figures/curated/voita-language-modeling/interpolation.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/language_modeling.html\n    source_image_url: https://lena-voita.github.io/resources/lectures/lang_models/ngram/interpolation-min.png\n    sha256: 87ac856c87e342264e639ad4b133f53d5439502e2f558f9fff2e3140b067ec54\n    license: User permission record (not a named license)\n    license_url: null\n",
+          "new": "  - id: curated-voita-ngram-interp-000000000014\n    asset: 00 Учебник/Assets/Figures/curated/voita-language-modeling/interpolation.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/language_modeling.html\n    attribution_guidance_url: \"https://lena-voita.github.io/nlp_course.html\"\n    attribution_guidance_evidence: \"https://github.com/lena-voita/lena-voita.github.io/blob/6f2442dbb507571ac185c01ae5d5d006cf51a4c2/nlp_course.html#L226-L240\"\n    source_image_url: https://lena-voita.github.io/resources/lectures/lang_models/ngram/interpolation-min.png\n    sha256: 87ac856c87e342264e639ad4b133f53d5439502e2f558f9fff2e3140b067ec54\n    license: User permission record (not a named license)\n    license_url: null\n"
+        },
+        {
+          "old": "  - id: curated-voita-lookup-000000000015\n    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/lookup-table.gif\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html\n    source_image_url: https://lena-voita.github.io/resources/lectures/word_emb/lookup_table.gif\n    sha256: 578a20d48490a7c42a4bb4c93cd7acfe0b5e96d3922c0384f452dee91708f0e0\n    source_asset: 05 Источники/Originals/text-representation-2026-10-21/voita-lookup-table.gif\n    source_asset_sha256: 578a20d48490a7c42a4bb4c93cd7acfe0b5e96d3922c0384f452dee91708f0e0\n",
+          "new": "  - id: curated-voita-lookup-000000000015\n    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/lookup-table.gif\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html\n    attribution_guidance_url: \"https://lena-voita.github.io/nlp_course.html\"\n    attribution_guidance_evidence: \"https://github.com/lena-voita/lena-voita.github.io/blob/6f2442dbb507571ac185c01ae5d5d006cf51a4c2/nlp_course.html#L226-L240\"\n    source_image_url: https://lena-voita.github.io/resources/lectures/word_emb/lookup_table.gif\n    sha256: 578a20d48490a7c42a4bb4c93cd7acfe0b5e96d3922c0384f452dee91708f0e0\n    source_asset: 05 Источники/Originals/text-representation-2026-10-21/voita-lookup-table.gif\n    source_asset_sha256: 578a20d48490a7c42a4bb4c93cd7acfe0b5e96d3922c0384f452dee91708f0e0\n"
+        },
+        {
+          "old": "  - id: curated-voita-one-hot-000000000016\n    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/one-hot.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html\n    source_image_url: https://lena-voita.github.io/resources/lectures/word_emb/one_hot-min.png\n    sha256: b1284449dfd787afc529b313bb3f95d08b5dfa8649034a57e370efc8a7239272\n    source_asset: 05 Источники/Originals/text-representation-2026-10-21/voita-one-hot.png\n    source_asset_sha256: b1284449dfd787afc529b313bb3f95d08b5dfa8649034a57e370efc8a7239272\n",
+          "new": "  - id: curated-voita-one-hot-000000000016\n    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/one-hot.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html\n    attribution_guidance_url: \"https://lena-voita.github.io/nlp_course.html\"\n    attribution_guidance_evidence: \"https://github.com/lena-voita/lena-voita.github.io/blob/6f2442dbb507571ac185c01ae5d5d006cf51a4c2/nlp_course.html#L226-L240\"\n    source_image_url: https://lena-voita.github.io/resources/lectures/word_emb/one_hot-min.png\n    sha256: b1284449dfd787afc529b313bb3f95d08b5dfa8649034a57e370efc8a7239272\n    source_asset: 05 Источники/Originals/text-representation-2026-10-21/voita-one-hot.png\n    source_asset_sha256: b1284449dfd787afc529b313bb3f95d08b5dfa8649034a57e370efc8a7239272\n"
+        },
+        {
+          "old": "  - id: curated-voita-counts-000000000017\n    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/count-based-idea.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html\n    license: User permission record (not a named license)\n    license_url: null\n    modifications: Existing complete PNG retained unchanged and byte-matched to the official course.\n    used_in:\n",
+          "new": "  - id: curated-voita-counts-000000000017\n    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/count-based-idea.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html\n    attribution_guidance_url: \"https://lena-voita.github.io/nlp_course.html\"\n    attribution_guidance_evidence: \"https://github.com/lena-voita/lena-voita.github.io/blob/6f2442dbb507571ac185c01ae5d5d006cf51a4c2/nlp_course.html#L226-L240\"\n    license: User permission record (not a named license)\n    license_url: null\n    modifications: Existing complete PNG retained unchanged and byte-matched to the official course.\n    used_in:\n"
+        },
+        {
+          "old": "  - id: curated-voita-cbow-skip-000000000019\n    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/cbow-skipgram.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html\n    license: User permission record (not a named license)\n    license_url: null\n    modifications: Existing complete PNG retained unchanged and byte-matched to the official course.\n    used_in:\n",
+          "new": "  - id: curated-voita-cbow-skip-000000000019\n    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/cbow-skipgram.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html\n    attribution_guidance_url: \"https://lena-voita.github.io/nlp_course.html\"\n    attribution_guidance_evidence: \"https://github.com/lena-voita/lena-voita.github.io/blob/6f2442dbb507571ac185c01ae5d5d006cf51a4c2/nlp_course.html#L226-L240\"\n    license: User permission record (not a named license)\n    license_url: null\n    modifications: Existing complete PNG retained unchanged and byte-matched to the official course.\n    used_in:\n"
+        },
+        {
+          "old": "  - id: curated-voita-negative-00000000001a\n    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/negative-sampling.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html\n    license: User permission record (not a named license)\n    license_url: null\n    modifications: Existing complete PNG retained unchanged and byte-matched to the official course.\n    used_in:\n",
+          "new": "  - id: curated-voita-negative-00000000001a\n    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/negative-sampling.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html\n    attribution_guidance_url: \"https://lena-voita.github.io/nlp_course.html\"\n    attribution_guidance_evidence: \"https://github.com/lena-voita/lena-voita.github.io/blob/6f2442dbb507571ac185c01ae5d5d006cf51a4c2/nlp_course.html#L226-L240\"\n    license: User permission record (not a named license)\n    license_url: null\n    modifications: Existing complete PNG retained unchanged and byte-matched to the official course.\n    used_in:\n"
+        },
+        {
+          "old": "  - id: curated-voita-glove-idea-00000000001b\n    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/glove-idea.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html\n    license: User permission record (not a named license)\n    license_url: null\n    modifications: Existing complete PNG retained unchanged and byte-matched to the official course.\n    used_in:\n",
+          "new": "  - id: curated-voita-glove-idea-00000000001b\n    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/glove-idea.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html\n    attribution_guidance_url: \"https://lena-voita.github.io/nlp_course.html\"\n    attribution_guidance_evidence: \"https://github.com/lena-voita/lena-voita.github.io/blob/6f2442dbb507571ac185c01ae5d5d006cf51a4c2/nlp_course.html#L226-L240\"\n    license: User permission record (not a named license)\n    license_url: null\n    modifications: Existing complete PNG retained unchanged and byte-matched to the official course.\n    used_in:\n"
+        },
+        {
+          "old": "  - id: curated-voita-glove-loss-00000000001c\n    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/glove-loss.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html\n    license: User permission record (not a named license)\n    license_url: null\n    modifications: Existing complete PNG retained unchanged and byte-matched to the official course.\n    used_in:\n",
+          "new": "  - id: curated-voita-glove-loss-00000000001c\n    asset: 00 Учебник/Assets/Figures/curated/voita-word-embeddings/glove-loss.png\n    author: Lena Voita\n    source_url: https://lena-voita.github.io/nlp_course/word_embeddings.html\n    attribution_guidance_url: \"https://lena-voita.github.io/nlp_course.html\"\n    attribution_guidance_evidence: \"https://github.com/lena-voita/lena-voita.github.io/blob/6f2442dbb507571ac185c01ae5d5d006cf51a4c2/nlp_course.html#L226-L240\"\n    license: User permission record (not a named license)\n    license_url: null\n    modifications: Existing complete PNG retained unchanged and byte-matched to the official course.\n    used_in:\n"
+        },
+        {
+          "old": "  - id: curated-voita-qkv-heads-0000000000c2\n    asset: \"00 Учебник/Assets/Figures/curated/source-audit-15-24/qkv-for-heads.png\"\n    author: \"Elena Voita\"\n    source_url: \"https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html#multi_head_attention\"\n    source_image_url: \"https://lena-voita.github.io/resources/lectures/seq2seq/transformer/qkv_for_heads-min.png\"\n    license: \"User permission record (not a named license)\"\n    license_url: null\n    source_asset: \"05 Источники/Originals/masking-heads-2026-10-21/voita-qkv_for_heads-min.png\"\n",
+          "new": "  - id: curated-voita-qkv-heads-0000000000c2\n    asset: \"00 Учебник/Assets/Figures/curated/source-audit-15-24/qkv-for-heads.png\"\n    author: \"Elena Voita\"\n    source_url: \"https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html#multi_head_attention\"\n    attribution_guidance_url: \"https://lena-voita.github.io/nlp_course.html\"\n    attribution_guidance_evidence: \"https://github.com/lena-voita/lena-voita.github.io/blob/6f2442dbb507571ac185c01ae5d5d006cf51a4c2/nlp_course.html#L226-L240\"\n    source_image_url: \"https://lena-voita.github.io/resources/lectures/seq2seq/transformer/qkv_for_heads-min.png\"\n    license: \"User permission record (not a named license)\"\n    license_url: null\n    source_asset: \"05 Источники/Originals/masking-heads-2026-10-21/voita-qkv_for_heads-min.png\"\n"
+        },
+        {
+          "old": "    metadata_status: \"needs-confirmation\"\n    modifications: \"Complete original Figure 1 and caption re-extracted from the same previously approved source PDF. Old local plot differed in points/layout; it is not deleted or relabeled as original. No source curves, text, labels or scales changed.\"\n    id: \"curated-inference-benchmark-distserve-figure1-original-9ebd5bf8cc5b\"\n    sha256: \"9ebd5bf8cc5b228be15450a8895fea21eb48caa24e1305f2e6bfe3e8315cc795\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md\"]\n    last_verified: \"2026-10-20\"\n  - id: curated-vllm-latency-a1b2c3d4e509\n    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png\n    author: Aleksa Gordić\n    source_url: https://www.aleksagordic.com/blog/vllm\n",
+          "new": "    metadata_status: \"needs-confirmation\"\n    modifications: \"Complete original Figure 1 and caption re-extracted from the same previously approved source PDF. Old local plot differed in points/layout; it is not deleted or relabeled as original. No source curves, text, labels or scales changed.\"\n    id: \"curated-inference-benchmark-distserve-figure1-original-9ebd5bf8cc5b\"\n    sha256: \"9ebd5bf8cc5b228be15450a8895fea21eb48caa24e1305f2e6bfe3e8315cc795\"\n    used_in: []\n    publication_status: retired\n    replacement: \"00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/distserve-original-teaser.svg\"\n    last_verified: \"2026-10-20\"\n  - id: curated-distserve-arxiv-teaser-bae5d6fba7ac\n    asset: \"00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/distserve-original-teaser.svg\"\n    author: \"Yinmin Zhong et al.\"\n    source_url: \"https://arxiv.org/html/2401.09670v3#S1.F1\"\n    source_image_url: \"https://arxiv.org/html/2401.09670v3/teaser.svg\"\n    sha256: \"bae5d6fba7ac2a797877f64ce30e1901b0e1140e4f24fc45a21e9c170f50e937\"\n    license: \"CC BY-SA 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by-sa/4.0/\"\n    license_evidence: \"https://arxiv.org/html/2401.09670v3\"\n    modifications: \"Both figure panels retained byte-for-byte as published in arXiv HTML. No crop, redraw or relabeling.\"\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    derivation: source-svg-copy\n    last_verified: \"2026-11-10\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md\", \"en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md\"]\n  - id: curated-vllm-latency-a1b2c3d4e509\n    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png\n    author: Aleksa Gordić\n    source_url: https://www.aleksagordic.com/blog/vllm\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/NOTICE.md",
+      "before_sha256": "07e90d3c1442ec67c7d3ae6cb1a35de5ec00114fb19905920295c54b0ac6fc99",
+      "after_sha256": "f39bf5039f41a8f722611a3346e60a63c6bfc5a3f7c24327c5b4b818b4e18055",
+      "lines": 19,
+      "changes": [
+        {
+          "old": "## DistServe\n\nYinmin Zhong et al., *DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving*, OSDI 2024: https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf\n\n`distserve-figure1-original.png` retains both original Figure 1 panels and its source caption from PDF page 2. Page margins and neighboring article text are excluded; no plot points, curves, labels or scales are changed. It replaces a non-matching legacy local plot in this chapter, without deleting that legacy file. Source and render metadata are in assets.json. The existing reproduction-permission record is preserved; no new named license or fresh rights clearance is asserted.\n",
+          "new": "## DistServe\n\nYinmin Zhong et al., *DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving*, OSDI 2024: https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf\n\n`distserve-original-teaser.svg` is the unchanged [Figure 1 file](https://arxiv.org/html/2401.09670v3/teaser.svg) from [arXiv v3](https://arxiv.org/html/2401.09670v3#S1.F1), which declares [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Both panels are included. The USENIX PDF crop `distserve-figure1-original.png` is retained as a historical asset and is not used by the chapter. Its historical extraction metadata remains in assets.json.\n"
+        }
+      ]
+    }
+  ]
+}

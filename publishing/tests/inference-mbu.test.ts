@@ -15,7 +15,7 @@ const sha = (bytes: string | Buffer) => createHash('sha256').update(bytes).diges
 
 describe('Inference MBU explanation', () => {
   it('preserves the full accepted chapter outside the bounded addition', async () => {
-    let text = beforeMathReflow(await read(chapter), chapter);
+    let text = beforeMathReflow(beforeTopicConsolidation(await read(chapter), chapter, root), chapter);
     text = text.replace(/<!-- BEGIN REVIEW: MBU 2026-10-26 -->[\s\S]*?<!-- END REVIEW: MBU 2026-10-26 -->\n\n/, '')
       .replace('last_updated: 2026-10-26', 'last_updated: 2026-10-14')
       .replace('last_verified: 2026-10-26', 'last_verified: 2026-10-14')

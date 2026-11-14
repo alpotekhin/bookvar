@@ -1,0 +1,125 @@
+{
+  "date": "2026-11-09",
+  "scope": "Add original Gender Shades composition plot, historical subgroup weighting, sharp observed-data TPR bounds and bilingual subject navigation to the canonical Responsible ML chapter.",
+  "files": [
+    {
+      "source": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+      "before_sha256": "b0f72ba4a3322be3f20efdb35950fecb65482cd4fdea8e414d5947ab46f72ce5",
+      "after_sha256": "50da8b3ad9eb27c7c95f59adc8a1db8c05e3ccafffd0455e2df97ca774dfcd5b",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29\nlast_verified: 2026-10-20\nprimary_sources:",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-10-20\nreference_terms:\n  - label: Групповые метрики — равенство решений, TPR и FPR\n    label_en: Group metrics — decision parity, TPR, and FPR\n    anchor: responsible-group-metrics\n  - label: Пересечения групп — аудит Gender Shades\n    label_en: Intersectional evaluation — Gender Shades\n    anchor: responsible-intersectional-audit\n  - label: Выборочные исходы — границы групповой полноты\n    label_en: Selective outcomes — bounds on group recall\n    anchor: responsible-selective-labels-bounds\n  - label: SHAP — вклады признаков в отдельный прогноз\n    label_en: SHAP — feature contributions to one prediction\n    anchor: responsible-shap-attribution\n  - label: Machine unlearning — переобучение частей SISA\n    label_en: Machine unlearning — retraining SISA shards\n    anchor: responsible-unlearning-sisa\n  - label: Энергия и выбросы — границы учёта и PUE\n    label_en: Energy and emissions — accounting boundaries and PUE\n    anchor: responsible-energy-carbon\n  - label: Безопасность LLM — покрытие рисков и бюджет атак\n    label_en: LLM safety — risk coverage and attack budgets\n    anchor: responsible-safety-audit\nprimary_sources:"
+        },
+        {
+          "old": "  - https://opacus.ai/docs/faq",
+          "new": "  - https://opacus.ai/docs/faq\n  - https://proceedings.mlr.press/v81/buolamwini18a.html\n  - https://www.cs.cornell.edu/home/kleinber/kdd17-selective.pdf"
+        },
+        {
+          "old": "## Почему средняя точность скрывает вред\n\n### Одна выборка, три критерия",
+          "new": "## Почему средняя точность скрывает вред\n\n<a id=\"responsible-group-metrics\"></a>\n\n### Одна выборка, три критерия"
+        },
+        {
+          "old": "### Пересечения групп и неопределённость",
+          "new": "<a id=\"responsible-intersectional-audit\"></a>\n\n### Пересечения групп и неопределённость"
+        },
+        {
+          "old": "связанные с возможным вредом, а не только удобные одномерные срезы.\n\nУ маленьких групп широкая статистическая неопределённость. Девять верных",
+          "new": "связанные с возможным вредом, а не только удобные одномерные срезы.\n\nВ аудите *Gender Shades* проверяли коммерческие классификаторы по четырём\nпересечениям разметки пола и тона кожи. В IJB-A на группу DF (*darker female*)\nприходилось 4.4% из 500 человек, то есть 22 человека. Для нового набора\nPPB авторы подобрали фотографии 1270 парламентариев из шести стран;\nдоля DF выросла до 21.3%. Это сделало сравнение по пересечениям\nинформативнее, но не превратило выборку в случайную выборку населения.\n\n![[00 Учебник/Assets/Figures/curated/responsible-audit-2026-11-09/gender-shades-figure3.png|Доли четырёх пересечений разметки пола и тона кожи в Adience, IJB-A и PPB. Доля DF соответственно 7.4, 4.4 и 21.3 процента.]]\n\n*Joy Buolamwini, Timnit Gebru, [Gender Shades, PMLR 81](https://proceedings.mlr.press/v81/buolamwini18a.html),\n[Figure 3, с. 6 PDF](https://proceedings.mlr.press/v81/buolamwini18a/buolamwini18a.pdf#page=6),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nОригинальный график с полной легендой, выделенный со страницы без перерисовки.\nВ подписи статьи 4.4% ошибочно отнесены к Adience; на самом графике и в §3.5\nони относятся к IJB-A. Для Adience на графике указано 7.4%.*\n\nНа PPB доля ошибок IBM по всему набору составляла 12.1%, в группе DF —\n34.7%, а в группе LM (*lighter male*) — 0.3%\n([Table 4](https://proceedings.mlr.press/v81/buolamwini18a/buolamwini18a.pdf#page=9)).\nВзвесив ошибку DF по доле этой группы, получаем\n$0.213\\cdot0.347\\approx0.074$. То есть около 7.4 процентного пункта\nиз общих 12.1 приходится на одно пересечение. Сам график показывает\nсостав наборов; частоты ошибок берутся из отдельного эксперимента.\nРезультаты относятся к версиям API из исследования 2018 года. Классификаторы\nвозвращали две метки по фотографии, поэтому этот аудит не измеряет\nгендерную идентичность человека и не оценивает современные версии систем.\n\nУ маленьких групп широкая статистическая неопределённость. Девять верных"
+        },
+        {
+          "old": "в данных группа может снова получать меньше одобрений, а значит, ещё\nменьше новых наблюдаемых исходов.\n\nУ рекомендательной системы аналогичный отбор происходит при показе:",
+          "new": "в данных группа может снова получать меньше одобрений, а значит, ещё\nменьше новых наблюдаемых исходов.\n\n<a id=\"responsible-selective-labels-bounds\"></a>\n\n### Что можно сказать о полноте без исходов отказов\n\nРассмотрим две крайние ситуации для группы A. Если никто из 20\nотказанных не вернул бы кредит, одобрили всех платёжеспособных:\n$\\mathrm{TPR}_A=72/72=1$. Если вернули бы все 20, одобрили\n$72/(72+20)\\approx0.783$ платёжеспособных. И в том и в другом случае\nв журнале останутся те же 72 возврата из 80 одобрений.\n\nПусть $u_g$ — число отказов в группе $g$, $r_g$ — сколько из этих\nзаявителей вернули бы кредит на тех же условиях, а $t_g$ — число\nнаблюдаемых возвратов среди одобренных. При $t_g>0$:\n\n$$\n0\\leq r_g\\leq u_g,\\qquad\n\\frac{t_g}{t_g+u_g}\n\\leq \\mathrm{TPR}_g=\\frac{t_g}{t_g+r_g}\n\\leq 1.\n$$\n\n| Группа | Возвраты среди одобренных | Границы TPR |\n| --- | ---: | ---: |\n| A | 72 из 80 | 78.3–100% |\n| B | 18 из 20 | 18.4–100% |\n\nПри $r_A=20$ и $r_B=0$ полнота выше у B; при $r_A=0$ и $r_B=80$ —\nу A. Для разности $\\mathrm{TPR}_A-\\mathrm{TPR}_B$ нижняя граница\nравна $72/92-1\\approx-0.217$, верхняя — $1-18/98\\approx0.816$.\nОбе достигаются при указанных конфигурациях. Журнал не определяет\nдаже знак разницы. Это границы совместимости с наблюдаемыми данными,\nа не доверительный интервал. Если собрать больше записей по той же\nполитике, но так и не увидеть исходов отказов, сам пробел сохранится.\n\n[Lakkaraju et al., §3](https://www.cs.cornell.edu/home/kleinber/kdd17-selective.pdf)\nформулируют проблему выборочных исходов. В\n[[00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация#imbalance-selective-labels|примере с аудитом операций]]\nпроверка обнаруживает уже случившееся событие, поэтому случайная\nвыборка вне очереди помогает оценить число пропусков. У отказанного\nзаявителя можно перепроверить анкету, но из неё не станет известно,\nвернул бы он кредит, которого не было. Для сужения границ нужны\nдополнительные данные или обоснованные предпосылки о таких исходах.\n\nУ рекомендательной системы аналогичный отбор происходит при показе:"
+        },
+        {
+          "old": "### SHAP: разложение конкретного прогноза",
+          "new": "<a id=\"responsible-shap-attribution\"></a>\n\n### SHAP: разложение конкретного прогноза"
+        },
+        {
+          "old": "### Удаление данных и machine unlearning",
+          "new": "<a id=\"responsible-unlearning-sisa\"></a>\n\n### Удаление данных и machine unlearning"
+        },
+        {
+          "old": "### Операционные выбросы и жизненный цикл",
+          "new": "<a id=\"responsible-energy-carbon\"></a>\n\n### Операционные выбросы и жизненный цикл"
+        },
+        {
+          "old": "## От перечня рисков к адаптивной проверке безопасности",
+          "new": "<a id=\"responsible-safety-audit\"></a>\n\n## От перечня рисков к адаптивной проверке безопасности"
+        },
+        {
+          "old": "## Практика и первоисточники\n\n- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/responsible_engr|Responsible Engineering]].",
+          "new": "## Практика и первоисточники\n\n- [[05 Источники/Papers/Gender Shades and selective labels|Gender Shades и выборочные исходы]]: источники и указатели на два разбора выше.\n- [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/responsible_engr|Responsible Engineering]]."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "a13977e4b2ccc79dc6903e5275e686c4ec4ee86d9fd356e67f33221b87a80046",
+      "after_sha256": "a6e43a8008250622f507aa7ef9cd4e228d57a5c4065fce31a101114611105f77",
+      "changes": [
+        {
+          "old": "  - id: \"curated-cohen-smoothing-figure1-08827e2c532a\"",
+          "new": "  - id: \"curated-gender-shades-figure3-3c0aed571f22\"\n    asset: \"00 Учебник/Assets/Figures/curated/responsible-audit-2026-11-09/gender-shades-figure3.png\"\n    author: \"Joy Buolamwini, Timnit Gebru\"\n    source_url: \"https://proceedings.mlr.press/v81/buolamwini18a.html\"\n    source_image_url: \"https://proceedings.mlr.press/v81/buolamwini18a/buolamwini18a.pdf#page=6\"\n    source_figure_label: \"Figure 3, PDF p. 6\"\n    source_asset: \"05 Источники/Originals/responsible-2026-10-20/buolamwini18a.pdf\"\n    source_asset_sha256: \"e9e6d944715d14b03c383b1e1e2f4f7aa7ffaa9bd610708bd06645f03c64e7fa\"\n    sha256: \"3c0aed571f22a84f1c1171acf44a46fdf56636855af75fcbb094c1e28821543f\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/edge-2026-10-20/pmlr-license.html\"\n    license_evidence_sha256: \"1c8123a6c840ca2752e383f0924fa23ba38552140a2cc54f69ea9df5acfcdd3d\"\n    derivation: \"pdf-page-render-crop\"\n    provenance_confirmation: \"licensed-paper-figure\"\n    rights_status: \"source-license-verified\"\n    metadata_status: \"verified\"\n    modifications: \"Original plot, labels, and legend rendered from the PDF and cropped. Surrounding prose and the printed caption are not part of the crop; the caption typo is documented beside the figure.\"\n    used_in: [\"00 Учебник/18 Evaluation и методология/59a Responsible systems.md\"]\n    last_verified: \"2026-11-09\"\n    source_page: 6\n    render_dpi: 360\n    render_page_size_px: [3060,3960]\n    crop_box_px: [1544,445,2621,825]\n  - id: \"curated-cohen-smoothing-figure1-08827e2c532a\""
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/_index.md",
+      "before_sha256": "6acc3ef118b69813ae883c5857a7fe4d34fb13e32b38523d3aec595505218b48",
+      "after_sha256": "61281e27cc6efb222249b90c80f921067075d5d870ed5e647ab93ebacd6a8e9f",
+      "changes": [
+        {
+          "old": "- [[05 Источники/Papers/Label shift and certified robustness|Label shift and certified robustness — BBSE and randomized smoothing]]",
+          "new": "- [[05 Источники/Papers/Label shift and certified robustness|Label shift and certified robustness — BBSE and randomized smoothing]]\n- [[05 Источники/Papers/Gender Shades and selective labels|Gender Shades and selective labels — subgroup evaluation and missing outcomes]]"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "92af1ef287a473b97c23727de9a243b91f2aceaaf454b070b87a38494145cdd8",
+      "after_sha256": "054fae440a4f540198270692395047b5eeb83bdd50de9231f6bf8444f0c50233",
+      "changes": [
+        {
+          "old": "      - source: 05 Источники/Papers/Label shift and certified robustness.md\n        route: sources/papers/label-shift-certified-robustness",
+          "new": "      - source: 05 Источники/Papers/Label shift and certified robustness.md\n        route: sources/papers/label-shift-certified-robustness\n      - source: 05 Источники/Papers/Gender Shades and selective labels.md\n        route: sources/papers/gender-shades-selective-labels"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "e456ddf83ee0dc8040e57c60eb4192db35ff2f3055a53bd0ae042cfecfa0aab8",
+      "after_sha256": "30c4d63eac50c0c89e7620aa02c270837153658165a56639307df14377489f9f",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/18 Evaluation и методология/59a Responsible systems|Ответственные ML-системы]]",
+          "new": "- [[00 Учебник/18 Evaluation и методология/59a Responsible systems|Ответственные ML-системы]]\n  - [[00 Учебник/18 Evaluation и методология/59a Responsible systems#responsible-group-metrics|Групповые метрики — равенство решений, TPR и FPR]]\n  - [[00 Учебник/18 Evaluation и методология/59a Responsible systems#responsible-intersectional-audit|Пересечения групп — аудит Gender Shades]]\n  - [[00 Учебник/18 Evaluation и методология/59a Responsible systems#responsible-selective-labels-bounds|Выборочные исходы — границы групповой полноты]]\n  - [[00 Учебник/18 Evaluation и методология/59a Responsible systems#responsible-shap-attribution|SHAP — вклады признаков в отдельный прогноз]]\n  - [[00 Учебник/18 Evaluation и методология/59a Responsible systems#responsible-unlearning-sisa|Machine unlearning — переобучение частей SISA]]\n  - [[00 Учебник/18 Evaluation и методология/59a Responsible systems#responsible-energy-carbon|Энергия и выбросы — границы учёта и PUE]]\n  - [[00 Учебник/18 Evaluation и методология/59a Responsible systems#responsible-safety-audit|Безопасность LLM — покрытие рисков и бюджет атак]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "05eb2b9d51577457118e5913baaaebb3f71672a1eb88ca44aa243048775f9076",
+      "after_sha256": "06e570a27e6a0d4606501649ab5e333af0f007088c04a657ffaf5083ddaddcc0",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/18 Evaluation и методология/59a Responsible systems|Responsible ML systems]]",
+          "new": "- [[00 Учебник/18 Evaluation и методология/59a Responsible systems|Responsible ML systems]]\n  - [[00 Учебник/18 Evaluation и методология/59a Responsible systems#responsible-group-metrics|Group metrics — decision parity, TPR, and FPR]]\n  - [[00 Учебник/18 Evaluation и методология/59a Responsible systems#responsible-intersectional-audit|Intersectional evaluation — Gender Shades]]\n  - [[00 Учебник/18 Evaluation и методология/59a Responsible systems#responsible-selective-labels-bounds|Selective outcomes — bounds on group recall]]\n  - [[00 Учебник/18 Evaluation и методология/59a Responsible systems#responsible-shap-attribution|SHAP — feature contributions to one prediction]]\n  - [[00 Учебник/18 Evaluation и методология/59a Responsible systems#responsible-unlearning-sisa|Machine unlearning — retraining SISA shards]]\n  - [[00 Учебник/18 Evaluation и методология/59a Responsible systems#responsible-energy-carbon|Energy and emissions — accounting boundaries and PUE]]\n  - [[00 Учебник/18 Evaluation и методология/59a Responsible systems#responsible-safety-audit|LLM safety — risk coverage and attack budgets]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/Gender Shades and selective labels.md",
+      "created": true,
+      "after_sha256": "38a32af4f0e1c6450850533345c65e87c1b9c85953c01246efad81920f690326"
+    }
+  ],
+  "review": {
+    "sources": "Buolamwini and Gebru §§3.3–3.5, 4.1–4.4, Figure 3 and Table 4; the figure caption typo was checked against the bars and §3.5. Lakkaraju et al. §3 and Figure 1 identify selective outcome observation. The sharp-bound example is a separate calculation, not their contraction method.",
+    "example": "Hold the 72/80 and 18/20 approved repayment counts fixed. Vary hypothetical repayment among 20 and 80 denied applicants; the gap TPR_A−TPR_B has extrema −0.217391 and +0.816327. Recover the historical 12.1% IBM PPB error from the four rounded weights and rates.",
+    "figures": "Gender Shades Figure 3: original plot with axis, percentages and legend, PDF page 6 rendered at 360 dpi and cropped. PMLR CC BY 4.0. Compared the full PDF page and crop and reproduced exact PNG bytes from the archived PDF.",
+    "local_checks": "2023 pages built; 727 publication and 225 built-output checks passed; 0 broken internal links. Both the focused Gender Shades provenance test and the all-curated-binaries registration test passed. Re-render of the archived PDF produced the identical figure bytes.",
+    "reader": "At 375 and 1280 px followed the new reference, note and preceding-chapter links in both reader shells and opened all 13 figures with captions. Inspected the bounds and Figure 3 inline and in the viewer; legend readable with mobile zoom and pan. No page overflow or KaTeX errors; the bounds table has no hidden columns.",
+    "limits": "No causal identification, live commercial audit, English translation, or deployment. Existing GCG montage remains under its recorded limited-quotation status; no new rights assertion."
+  }
+}

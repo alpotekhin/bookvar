@@ -2,10 +2,85 @@
 title: Измерение производительности и roofline
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-26
-last_verified: 2026-10-26
+last_updated: 2026-11-04
+last_verified: 2026-11-04
 source_language: mixed
+reference_terms:
+  - anchor: perf-boundary
+    label: "Границы измерения производительности"
+    label_en: "Measurement boundaries"
+  - anchor: perf-correctness
+    label: "Корректность до измерения скорости"
+    label_en: "Correctness before timing"
+  - anchor: perf-wall
+    label: "Время до готового результата"
+    label_en: "Wall time to a ready result"
+  - anchor: perf-events
+    label: "Измерение CUDA events"
+    label_en: "CUDA event timing"
+  - anchor: perf-warmup
+    label: "Прогрев, кэш и холодный запуск"
+    label_en: "Warmup, cache, and cold starts"
+  - anchor: perf-statistics
+    label: "Разброс, квантили и неопределённость"
+    label_en: "Variation, quantiles, and uncertainty"
+  - anchor: perf-blocked-samples
+    label: "Групповые измерения и потерянный хвост задержек"
+    label_en: "Blocked measurements and the lost latency tail"
+  - anchor: perf-load
+    label: "Открытая и замкнутая нагрузка"
+    label_en: "Open- and closed-loop load"
+  - anchor: perf-roofline
+    label: "Вывод roofline и арифметическая интенсивность"
+    label_en: "Roofline derivation and arithmetic intensity"
+  - anchor: perf-numeric
+    label: "Численный пример оптимизации трафика"
+    label_en: "Numerical traffic-optimization example"
+  - anchor: perf-memory
+    label: "Многоуровневый roofline"
+    label_en: "Hierarchical rooflines"
+  - anchor: perf-sequence
+    label: "Границы времени для последовательных ядер"
+    label_en: "Bounds for sequential kernels"
+  - anchor: perf-gemm
+    label: "Идеальный трафик GEMM и размер пакета"
+    label_en: "Ideal GEMM traffic and batch size"
+  - anchor: perf-shapes
+    label: "Размеры матриц и выбор ядра"
+    label_en: "Matrix shapes and kernel choice"
+  - anchor: perf-waves
+    label: "Wave quantization: 1792 и 1793"
+    label_en: "Wave quantization: 1792 versus 1793"
+  - anchor: perf-profile
+    label: "Временная шкала и поиск причины"
+    label_en: "Timelines and causal profiling"
+  - anchor: perf-replay
+    label: "Replay, кэш и частоты при профилировании"
+    label_en: "Profiler replay, caches, and clocks"
+  - anchor: fleet-mfu-scaling-and-preserved-progress
+    label: "Эффективность полного обучения"
+    label_en: "Complete-job training efficiency"
+  - anchor: perf-mfu
+    label: "MFU и HFU"
+    label_en: "MFU and HFU"
+  - anchor: perf-scaling
+    label: "Strong scaling и weak scaling"
+    label_en: "Strong and weak scaling"
+  - anchor: perf-fleet-example
+    label: "Расчёт для 8 и 128 GPU"
+    label_en: "An 8-to-128-GPU calculation"
+  - anchor: perf-aggregation
+    label: "Объединение работы и доступной мощности"
+    label_en: "Aggregating work and available capacity"
+  - anchor: perf-progress
+    label: "Сохранённый прогресс, checkpoint и recovery"
+    label_en: "Preserved progress, checkpoints, and recovery"
+  - anchor: perf-energy
+    label: "Мощность, энергия и отчёт"
+    label_en: "Power, energy, and reporting"
 source_unit_id:
+  - pytorch-blocked-autorange-replicates
+  - pytorch-measurement-block-normalization
   - lecture-05-roofline-performance
   - lecture-05-matrix-mystery
   - lecture-05-performance-recap-transition
@@ -33,6 +108,8 @@ CPU мог только поставить работу в очередь. Ну�
 слишком мало блоков, а CPU — не успевать отправлять очередную работу.
 Одного процента «загрузки GPU» недостаточно, чтобы различить эти причины.
 
+<a id="perf-boundary"></a>
+
 ## Что входит в измерение
 
 Пусть приложение получает текст, токенизирует его, передаёт тензоры на GPU,
@@ -40,7 +117,7 @@ CPU мог только поставить работу в очередь. Ну�
 и задержка приложения относятся к разным участкам этой последовательности.
 Оба числа полезны, но отвечают на разные вопросы.
 
-![[02 Areas/ML & DL/Assets/Sources/Harvard ML Systems/vol1/benchmarking/b2b9aaeaa637a9a665f0f4e9229daeb5bc5a4f2d.svg]]
+![[02 Areas/ML & DL/Assets/Sources/Harvard ML Systems/vol1/benchmarking/b2b9aaeaa637a9a665f0f4e9229daeb5bc5a4f2d.svg|Harvard: границы benchmark от отдельных слоёв и модели до приложения с Non-AI Compute]]
 
 *Harvard ML Systems, [Benchmarking Granularity](https://mlsysbook.ai/vol1/benchmarking/benchmarking.html#fig-granularity),
 Harvard Edge ML Systems Book contributors,
@@ -72,6 +149,8 @@ $$
 Остальные 80% работы сохранились. При перекрытии операций вместо простой
 суммы нужно рассматривать зависимости и критический путь — самую длинную
 по времени цепочку зависимых операций, определяющую готовность результата.
+
+<a id="perf-correctness"></a>
 
 ## До таймера: одинаковая задача и правильный результат
 
@@ -105,7 +184,7 @@ $$
 Рассмотрим $z=x\odot y+2$, где x и y — два тензора из единиц,
 а $\odot$ обозначает поэлементное умножение.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/d2l-asyncgraph.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/d2l-asyncgraph.svg|D2L: граф зависимостей x и y, затем их произведение и прибавление двух]]
 
 *Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola,
 [Dive into Deep Learning — Asynchronous Computation, fig. 13.2.2](https://d2l.ai/chapter_computational-performance/async-computation.html#fig-asyncgraph),
@@ -117,7 +196,7 @@ $$
 можно раньше, чем завершится последняя из них. Однако получить численное
 значение z до окончания этих зависимостей нельзя.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/d2l-threading.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/systems-visuals-2026-09/d2l-threading.svg|D2L: последовательная отправка и асинхронный frontend/backend с ожиданием перед печатью z]]
 
 *Те же авторы, [D2L, fig. 13.2.3 — Interactions of the frontend and backend](https://d2l.ai/chapter_computational-performance/async-computation.html#fig-threading),
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), оригинальный SVG без изменений.*
@@ -128,6 +207,8 @@ Frontend быстро выдаёт задания, а Backend продолжае
 а не трасса конкретной реализации PyTorch: её смысл — показать, почему
 возврат управления и готовность результата происходят в разные моменты.
 Таймер, остановленный после отправки последнего задания, пропустит это ожидание.
+
+<a id="perf-wall"></a>
 
 ### Время от вызова до готового результата
 
@@ -158,6 +239,8 @@ wall_ms = 1000 * (time.perf_counter() - t0)
 Поэтому измерение проводят без такой нагрузки. Для нескольких GPU
 нужно охватить завершение работы каждого участвующего устройства;
 одного ожидания на случайно выбранном GPU недостаточно.
+
+<a id="perf-events"></a>
 
 ### CUDA events: интервал на временной шкале устройства
 
@@ -240,6 +323,8 @@ print("Median group-average time, ms:", statistics.median(samples))
 тоже входят в условия опыта. Пример выше нужен, чтобы понимать, что
 измеряет такой инструмент; результаты запуска на GPU здесь не приводятся.
 
+<a id="perf-warmup"></a>
+
 ## Прогрев и кэш — разные условия опыта
 
 Первое выполнение может включать инициализацию CUDA, загрузку библиотек,
@@ -267,6 +352,8 @@ print("Median group-average time, ms:", statistics.median(samples))
 которое редко просыпается ради одного запроса, он может быть главным
 показателем. Его просто измеряют отдельным сценарием, не смешивая
 инициализацию с многократным выполнением уже подготовленной модели.
+
+<a id="perf-statistics"></a>
 
 ## Разброс времени и неопределённость оценки
 
@@ -315,6 +402,147 @@ $\lceil0.99N\rceil$ в отсортированной выборке. Библи
 эффекта. Переход 10 → 7 мс означает уменьшение времени на 30%, но
 ускорение в $10/7\approx1.43$ раза; эти две формулировки не взаимозаменяемы.
 
+<a id="perf-blocked-samples"></a>
+
+### Blocked measurements and individual-call latency
+
+Suppose an operation takes 2 microseconds, while starting and stopping
+the timer adds 12 microseconds per measured interval. Timing one call
+would report 14 microseconds. Timing 1000 consecutive calls would report
+2012 microseconds in total, or 2.012 microseconds per call. These are
+assumed costs, not measurements of Python or CUDA.
+
+For a fixed per-block overhead $h$, a block of $n$ calls of duration $t$
+has an amortized time
+
+$$
+\frac{nt+h}{n}=t+\frac{h}{n}.
+$$
+
+A larger block reduces the overhead per call, but leaves fewer separately
+timed blocks within a fixed measurement budget. PyTorch's
+[Benchmark recipe, section 4](https://docs.pytorch.org/tutorials/recipes/recipes/benchmark.html#benchmarking-with-blocked-autorange)
+describes how it chooses and repeats the blocks. The complete explanatory
+paragraph is retained in its original language:
+
+<!-- timing-source: blocked-autorange:start -->
+> While `timeit.Timer.autorange` takes a single continuous measurement
+> of at least 0.2 seconds, `torch.utils.benchmark.Timer.blocked_autorange`
+> takes many measurements whose times total at least 0.2 seconds (which
+> can be changed by the `min_run_time` parameter) subject to the constraint
+> that timing overhead is a small fraction of the overall measurement.
+> This is accomplished by first running with an increasing number of runs
+> per loop until the runtime is much larger than measurement overhead
+> (which also serves as a warm up), and then taking measurements until
+> the target time is reached. This has the useful properties that it wastes
+> less data and allows us to compute statistics to estimate the reliability
+> of the measurements.
+<!-- timing-source: blocked-autorange:end -->
+
+*PyTorch contributors,
+[pinned recipe source](https://github.com/pytorch/tutorials/blob/5672cd98a7671eda4d9122b10f8eec580f74d03e/recipes_source/recipes/benchmark.py#L294-L305),
+[BSD 3-Clause, complete notice](/licenses/pytorch-tutorials-5672cd98-BSD-3-Clause.txt).
+Wording unchanged; reStructuredText inline-code delimiters converted to Markdown.*
+
+In the pinned
+[Timer implementation](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/torch/utils/benchmark/utils/timer.py#L303-L382),
+calibration selects a block size before collecting the returned samples.
+The collection loop adds whole-block durations until their sum reaches
+`min_run_time`. Calibration and other setup add elapsed time outside that
+sum; the argument is not an upper bound on the duration of the Python call.
+A long block can also leave only one returned measurement. More calls inside
+that block do not create more independently timed observations.
+
+The returned `Measurement` keeps those block totals in `raw_times`, in
+seconds, and the common block size in `number_per_run`. Its `times`
+property divides each total by that count. Median and IQR are then
+calculated across the normalized block times. They describe variability
+between amortized timings, not the distribution of the individual calls
+inside a block. The
+[Measurement source](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/torch/utils/benchmark/utils/common.py#L75-L190)
+makes that division explicit.
+
+Two different call sequences can produce exactly the same block totals.
+Consider ten blocks of 100 calls each:
+
+| Assumed calls within each block | Block total | Mean per call |
+|---|---:|---:|
+| 100 calls at 10 ms | 1000 ms | 10 ms |
+| 98 calls at 1 ms, two at 451 ms | 1000 ms | 10 ms |
+
+Both sequences produce ten normalized observations of 10 ms. Yet their
+individual-call nearest-rank p99 values are 10 ms and 451 ms respectively:
+in the second sequence, 20 of the 1000 calls take 451 ms. Once only the
+block totals remain, there is no way to determine which sequence occurred.
+
+The following deterministic example constructs actual PyTorch measurement
+objects from these assumed totals. It does not run a timed operation.
+`TaskSpec` is an internal metadata type from the pinned implementation,
+used here to inspect the stored representation. Application benchmarks
+normally obtain `Measurement` objects from `Timer` instead of constructing
+this metadata themselves.
+
+<!-- checked-example: blocked-measurement-tail -->
+~~~python
+from math import ceil
+from torch.utils.benchmark import Measurement
+from torch.utils.benchmark.utils.common import TaskSpec
+
+def nearest_rank(values, probability):
+    if not values or not 0 < probability <= 1:
+        raise ValueError("nonempty sample and probability in (0, 1] required")
+    return sorted(values)[ceil(probability * len(values)) - 1]
+
+def group_measurement(groups):
+    if not groups or not groups[0]:
+        raise ValueError("nonempty groups required")
+    number = len(groups[0])
+    if any(len(group) != number for group in groups):
+        raise ValueError("fixed number_per_run required")
+    # Inputs are assumed individual-call durations in milliseconds.
+    return Measurement(
+        number_per_run=number,
+        raw_times=[sum(group) / 1000 for group in groups],
+        task_spec=TaskSpec(stmt="assumed_call()", setup="pass", num_threads=1),
+    )
+
+uniform = [[10] * 100 for _ in range(10)]
+bursty = [[1] * 98 + [451, 451] for _ in range(10)]
+uniform_measurement = group_measurement(uniform)
+bursty_measurement = group_measurement(bursty)
+assert uniform_measurement.raw_times == bursty_measurement.raw_times == [1.] * 10
+assert uniform_measurement.times == bursty_measurement.times == [.01] * 10
+assert uniform_measurement.iqr == bursty_measurement.iqr == 0
+assert uniform_measurement.meets_confidence(.1)
+assert bursty_measurement.meets_confidence(.1)
+
+uniform_calls = [t for group in uniform for t in group]
+bursty_calls = [t for group in bursty for t in group]
+assert nearest_rank(uniform_calls, .99) == 10
+assert nearest_rank(bursty_calls, .99) == 451
+assert nearest_rank(uniform_measurement.times, .99) * 1000 == 10
+assert nearest_rank(bursty_measurement.times, .99) * 1000 == 10
+assert sum(t > 50 for t in bursty_calls) == 20
+print("individual-call p99, ms:", 10, 451)
+print("normalized-block p99, ms:", 10, 10)
+~~~
+
+The zero IQR follows from the identical block means. In this pinned
+implementation, `meets_confidence` checks `IQR / median < threshold`;
+the method's name does not establish a confidence level for an
+individual-call p99. `adaptive_autorange` uses that spread criterion
+along with runtime and sample-count conditions. It cannot reconstruct
+the durations discarded by block averaging.
+
+For a microbenchmark, retain `number_per_run`, the number of returned
+blocks and their times so another reader can interpret the reported
+median. For request-tail latency, record each request's arrival and
+completion under the intended load, including the errors and timeouts.
+Increasing the timer's repetition count cannot recover observations
+that were never recorded.
+
+<a id="perf-load"></a>
+
 ## Почему сервис нужно проверять под нагрузкой
 
 Одиночный запрос на свободном GPU почти ничего не говорит об очереди.
@@ -338,6 +566,8 @@ $\lceil0.99N\rceil$ в отсортированной выборке. Библи
 TTFT, межтокенные задержки и время полного ответа измеряют отдельно.
 Подробный протокол относится к главе
 [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference|об измерении inference]].
+
+<a id="perf-roofline"></a>
 
 ## Roofline: сколько работы приходится на один байт
 
@@ -365,7 +595,7 @@ $$
 данные. Один FMA — умножение с накоплением — принято считать двумя FLOP;
 тот же способ подсчёта должен использоваться и для пика устройства.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/performance-review-2026-09/jax-roofline.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/performance-review-2026-09/jax-roofline.png|Roofline: два предела полосы памяти, общий вычислительный пик и алгоритмы по разные стороны ridge point]]
 
 *Оригинальная схема Jacob Austin и соавторов,
 [How To Scale Your Model — Visualizing Rooflines](https://jax-ml.github.io/scaling-book/roofline/#visualizing-rooflines),
@@ -395,6 +625,8 @@ Roofline — название этой ломаной, похожей на ли�
 Она полезна именно как ограничение и способ поставить следующий опыт,
 а не как обещание достичь паспортной скорости.
 
+<a id="perf-numeric"></a>
+
 ### Численный пример: что изменилось после оптимизации
 
 Возьмём **условное** устройство с пиком 120 TFLOP/s в выбранном формате
@@ -421,6 +653,8 @@ Roofline — название этой ломаной, похожей на ли�
 обмена. Оставшийся разрыв нельзя объяснить одним словом «эффективность»:
 нужно выяснить, сколько времени заняли инструкции, ожидания и неполная
 загрузка устройства.
+
+<a id="perf-memory"></a>
 
 ### Какую память мы считаем
 
@@ -463,6 +697,8 @@ $T\ge0.8$ мс, а $P\le90$ TFLOP/s. Если ошибочно поделить 
 обычные или матричные инструкции, плотные или поддерживаемые разреженные
 вычисления. Нельзя сравнивать обычное FP32-сложение с FP8-пиком Tensor Cores
 и трактовать получившийся процент как качество реализации.
+
+<a id="perf-sequence"></a>
 
 ### Последовательность операций: где суммировать время
 
@@ -523,6 +759,8 @@ print(round(pooled_ms, 1))               # 3.0
 областям перекрытия. Здесь расписание задано явно, чтобы различить две
 границы на конкретных числах.
 
+<a id="perf-gemm"></a>
+
 ## Матричное умножение: размер и повторное использование
 
 Для $C=AB$, где формы равны $M\times K$ и $K\times N$,
@@ -576,6 +814,8 @@ $C\leftarrow\alpha AB+\beta C$ при ненулевом $\beta$ потребу�
 Подробный учёт модели продолжится в
 [[04 Арифметика Transformer и MoE|следующей главе]].
 
+<a id="perf-shapes"></a>
+
 ## Почему соседние размеры дают разную скорость
 
 В формуле $2N^3$ для квадратного умножения нет резких скачков, а на графике
@@ -583,7 +823,7 @@ $C\leftarrow\alpha AB+\beta C$ при ненулевом $\beta$ потребу�
 он ограничивает скорость сверху, но не описывает каждый выбор библиотечного
 ядра и размещение работы на SM.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p47.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p47.png|CS336: измеренный TFLOP/s зависит от стороны матрицы и её кратности; рядом схема выравнивания обращений]]
 
 *Stanford CS336, [Lecture 5, слайд 47](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf),
 по разбору Horace He,
@@ -599,6 +839,8 @@ $C\leftarrow\alpha AB+\beta C$ при ненулевом $\beta$ потребу�
 неполные крайние блоки тоже требуют выполнения. Число блоков
 может перестать помещаться в прежнее число волн исполнения.
 Наконец, сама библиотека может выбрать для новой формы другое ядро.
+
+<a id="perf-waves"></a>
 
 ### Переход от 1792 к 1793
 
@@ -635,9 +877,11 @@ $8\cdot15=120$. Число полезных FLOP выросло лишь при�
 близких форм, в том числе $N-1$, $N$ и $N+1$, сохраняя точность,
 размещение данных и условия прогрева.
 
+<a id="perf-profile"></a>
+
 ## От времени к причине: профилирование
 
-![[02 Areas/ML & DL/Assets/Sources/Harvard ML Systems/vol1/benchmarking/682e143e450db0d85ad5c608e3a125ac5176e0ba.svg]]
+![[02 Areas/ML & DL/Assets/Sources/Harvard ML Systems/vol1/benchmarking/682e143e450db0d85ad5c608e3a125ac5176e0ba.svg|Harvard: качественное сравнение изоляции операции и представительности полного приложения]]
 
 *Harvard ML Systems, [Isolation vs. Representativeness](https://mlsysbook.ai/vol1/benchmarking/benchmarking.html#fig-benchmark-tradeoffs),
 Harvard Edge ML Systems Book contributors,
@@ -658,7 +902,7 @@ Harvard Edge ML Systems Book contributors,
 какой участник ждёт другого. Для этого используют PyTorch Profiler или
 Nsight Systems. Затем отдельное дорогое ядро изучают подробнее в Nsight Compute.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-nsight-trace.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-nsight-trace.png|CS336 Nsight Systems: временная шкала CUDA-ядер, вызовов PyTorch и NVTX, активности GPU, occupancy и полосы DRAM]]
 
 *Stanford CS336 course staff, [Assignment 2 — Nsight Systems, с. 5](https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf#page=5),
 [MIT](https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/LICENSE).
@@ -685,6 +929,8 @@ GPU Active ещё не говорит, что каждый слой выполн
 инструкций, ожидание памяти или ограничения размещения блоков.
 Изолированный процент occupancy не заменяет эту последовательность проверок.
 
+<a id="perf-replay"></a>
+
 Профилирование может менять опыт. Для сбора счётчиков Nsight Compute
 способен повторять ядро, управлять частотами и очищать кэши между повторами.
 Поэтому нельзя без проверки соединять время из прогретого обычного запуска
@@ -707,6 +953,8 @@ recomputing activations or waiting inside communication kernels. A short
 profile can also omit checkpoint saves and restarts. To compare training
 systems, first specify the model work being counted, the devices available
 to do that work, and the interval over which progress is measured.
+
+<a id="perf-mfu"></a>
 
 ### MFU and HFU count different work
 
@@ -783,6 +1031,8 @@ tokens per second and time to the quality target should accompany the ratio.
 The [[02 Areas/ML & DL/00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#Почему после смены формата меняется знаменатель MFU|mixed-precision chapter]]
 returns to this denominator when changing formats.
 
+<a id="perf-scaling"></a>
+
 ### Strong scaling and weak scaling answer different questions
 
 In **strong scaling**, keep the model and global batch fixed and increase
@@ -823,7 +1073,7 @@ Our codebase is capable of efficiently training large language models (i.e., mod
 Our weak scaled results show superlinear scaling (MFU increases from 41% for the smallest model considered to 47-48% for the largest models); this is because larger GEMMs have higher arithmetic intensity and are consequently more efficient to execute.
 <!-- END SOURCE: Megatron weak scaling -->
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fleet-measurement-2026-10/megatron-weak-scaling.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fleet-measurement-2026-10/megatron-weak-scaling.png|NVIDIA Megatron: weak scaling с ростом модели и глобального пакета, логарифмические оси числа GPU и throughput]]
 
 *NVIDIA, [original weak-scaling PNG](https://github.com/NVIDIA/Megatron-LM/blob/73a28a1078a8da8e6062199f7f1079a52173ab77/images/weak_scaling.png),
 copied in full without changes, 4737 × 2125;
@@ -842,7 +1092,7 @@ the earlier arithmetic-intensity example.
 We also strong scaled the standard GPT-3 model (our version has slightly more than 175 billion parameters due to larger vocabulary size) from 96 H100 GPUs to 4608 GPUs, using the same batch size of 1152 sequences throughout. Communication becomes more exposed at larger scale, leading to a reduction in MFU from 47% to 42%.
 <!-- END SOURCE: Megatron strong scaling -->
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fleet-measurement-2026-10/megatron-strong-scaling.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fleet-measurement-2026-10/megatron-strong-scaling.png|NVIDIA Megatron: strong scaling одной модели 177B с пакетом 1152 последовательности и идеальной линейной границей]]
 
 *NVIDIA, [original strong-scaling PNG](https://github.com/NVIDIA/Megatron-LM/blob/73a28a1078a8da8e6062199f7f1079a52173ab77/images/strong_scaling.png),
 copied in full without changes, 4737 × 2125, same BSD-3-Clause terms.
@@ -864,6 +1114,8 @@ $$
 This identity does not apply unchanged to the first plot, where model size
 changes. Nor does it make falling MFU a universal law: a new device count
 can enable a different partition, remove memory pressure, or change kernels.
+
+<a id="perf-fleet-example"></a>
 
 ### Reconstructing the 8-to-128-GPU calculation
 
@@ -914,6 +1166,8 @@ a cause. The [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44a
 shows why a late rank can extend a communication interval even when the
 network itself has not slowed down.
 
+<a id="perf-aggregation"></a>
+
 ### Aggregate work and capacity, not percentages
 
 For a resource pool observed over a window, add the non-duplicated model
@@ -941,6 +1195,8 @@ Duration matters too. On an unchanged allocation, 80% for ten seconds and
 20% for ninety seconds give $(0.8\cdot10+0.2\cdot90)/100=26\%$.
 A mean of the two dashboard percentages would again report 50%.
 Preserve the work, capacity and duration needed to reconstruct the aggregate.
+
+<a id="perf-progress"></a>
 
 ### Preserved progress, checkpointing and recovery
 
@@ -1045,6 +1301,8 @@ different checkpoint and monitoring requirements, but there is no universal
 Measure those expenses over the intended workload and reporting window.
 
 <!-- END REVIEW: fleet measurement 2026-10-26 -->
+
+<a id="perf-energy"></a>
 
 ## Мощность, энергия и итоговый отчёт
 

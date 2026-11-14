@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-09",
+  "scope": "Use the original CC BY mask diagram to separate full and local causal attention from RoPE in the GPT-1 to LLaMA route. No deployment.",
+  "review": {
+    "sources": [
+      "Brown et al., Language Models are Few-Shot Learners v4, §2.1: alternating dense and locally banded sparse layers; no window size stated.",
+      "Jiang et al., Mistral 7B v1, §2 and Figure 1: full causal mask, local causal mask and receptive field across local layers; arXiv links to CC BY 4.0.",
+      "Touvron et al., LLaMA v1, §§2.2 and 2.4, and first model.py: rotary Q/K and full causal attention; Llama 2 Table 1 documents first LLaMA context length."
+    ],
+    "example": "For row on, the four visible keys in the full causal mask become three in the local mask. The removed The key can still influence a later layer via cat from the preceding full layer. RoPE changes allowed QK scores while preserving the mask.",
+    "asset": "Existing original PNG from https://arxiv.org/html/2310.06825v1/swa.png; live bytes compared with cmp; SHA-256 2c0f0d17c4d9e06d3f3f6c52d3a2e64603a81dfac1399bc8d12996a2bae0c50e. Reuse existing registry entry rather than adding a second file.",
+    "verification": "Local build produced 2025 pages. Passed 738 publication and 232 output checks, the curated asset registry check, the topic index check, and the link check (zero broken routes, fragments or files). Ran the four published chapter example checkers on CPU.",
+    "reader": "Followed the four model links from the local textbook index in Chrome at 375 and 1280 CSS pixels. The new original figure renders without clipping; its small labels can be read through the mobile figure viewer. Also checked the link and caption on the labeled English fallback.",
+    "limits": "The CPU programs verify the teaching examples, not released model quality. No publication or permission audit of pre-existing figures."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "before_sha256": "636e5052ae0611a46a3dabe0bdd5b4033c7c587ff28f2817ed347cfa335a8fd3",
+      "after_sha256": "44f12b9a7f375b0eef7259a724526360ad5394b463e467914943ed0c1d2364a5",
+      "changes": [
+        {
+          "old": "Разреженность GPT-3 и RoPE LLaMA решают разные задачи. Представим\nзапрос в позиции 100 и ключ в позиции 10. В полном слое GPT-3\nони могут взаимодействовать; в локальном это зависит от ширины\nполосы внимания. В LLaMA v1 эта связь разрешена во всех слоях,\nа RoPE меняет само скалярное произведение Q и K. Обе модели\nпредобучались на окне в 2048 токенов: замена позиционных эмбеддингов\nна RoPE в первой LLaMA не сопровождалась увеличением окна.",
+          "new": "### Какие токены читает один слой\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/long-context-review-2026-09/mistral-sliding-window.png|Слева полная причинная маска, в центре причинная маска с окном на три позиции, справа передача информации через несколько локальных слоёв]]\n\n*Albert Q. Jiang et al., [Mistral 7B, Figure 1](https://arxiv.org/html/2310.06825v1#S2.F1).\n[Оригинал](https://arxiv.org/html/2310.06825v1/swa.png), без изменений,\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nДве маски на рисунке показывают принцип, а не конфигурацию GPT-3.*\n\nСтрока `on` показывает, какие ключи доступны запросу из этой позиции.\nНа левой матрице он читает `The`, `cat`, `sat` и себя. В центре\nиз этого набора исчезает `The`: окно на рисунке включает только три\nпозиции вместе с текущей. Последнее `the` справа от запроса недоступно\nв обоих случаях. Единицы обозначают разрешённые связи, а не веса softmax.\n\nВ GPT-1, GPT-2 и первой LLaMA маска устроена как слева во всех слоях.\nВ GPT-3 полные слои чередуются с локальными. Если в полном слое\n`cat` уже прочитал `The`, то следующий локальный слой может получить\nсведения о `The` через состояние `cat`, хотя прямой связи у `on` нет.\nПравая панель показывает другой случай: несколько локальных слоёв\nподряд, как у Mistral на рисунке. Ширину полосы GPT-3 авторы не приводят.\nВ [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-full-local-attention|численном примере GPT-3]]\nсравниваются веса одного запроса до и после исключения дальнего ключа.\n\nRoPE в LLaMA меняет скалярное произведение Q и K для разрешённых\nпозиций, не список этих позиций. Поэтому у `on` связь с `The`\nостаётся в каждом слое, а связь с последним `the` не появляется.\nОкно предобучения осталось 2048 токенов, как у GPT-3.\n\n### Размер модели и объём предобучения"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "c70c582b73780e76d81f6a5e4765d85d0e83eb5b078579017f7729b1f552825c",
+      "after_sha256": "ceccfe6dfde507ebeea17e033211b75edfe9f84937469a2bf80aff76fa9f6f43",
+      "changes": [
+        {
+          "old": "    modifications: \"Original Figure 1 copied unchanged; no crop, redraw, or translation.\"\n    used_in:\n      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    last_verified: 2026-09-28",
+          "new": "    modifications: \"Original Figure 1 copied unchanged; no crop, redraw, or translation.\"\n    used_in:\n      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md\n      - 00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    last_verified: 2026-09-28"
+        }
+      ]
+    }
+  ]
+}

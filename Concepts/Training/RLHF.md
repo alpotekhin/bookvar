@@ -30,8 +30,13 @@ Pre-trained LLM оптимизирована на **next token prediction** — 
 
 RLHF pipeline состоит из трёх последовательных этапов. Каждый следующий строится на результатах предыдущего.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/chatgpt-training-pipeline.png]]
-*Полный pipeline обучения ChatGPT/InstructGPT: SFT на демонстрациях → обучение Reward Model на сравнениях → оптимизация через PPO (источник: Chip Huyen)*
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/rlhf-basic.png|SFT на демонстрациях, обучение модели награды на предпочтениях и обновление политики через PPO]]
+
+*Nathan Lambert, [Training Overview, рис. 5](https://rlhfbook.com/c/03-training-overview#fig:rlhf-basic-repeat),
+[оригинал PNG](https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/rlhf-basic.png), [MIT](/licenses/rlhf-book-MIT.txt).
+Схема показывает ранний рецепт RLHF. Числа в конкретном опыте
+InstructGPT см. в [табл. 6](https://arxiv.org/html/2203.02155v1#A1.T6); схема не описывает весь
+процесс обучения ChatGPT.*
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo/fig1.png]]
 *Figure 1 из DPO (Rafailov et al., 2023): сравнение RLHF pipeline (слева) и DPO (справа). RLHF требует отдельной Reward Model + RL (PPO); DPO оптимизирует предпочтения напрямую*

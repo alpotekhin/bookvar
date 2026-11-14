@@ -33,4 +33,4 @@ for row in rows:
     if row.get('sha256'):
         assert digest==row['sha256']
     print('PASS original pixels/bytes',target.name,digest)
-print('PASS four main source images and ten complete original assignment pages')
+print('PASS all main source figures and ten complete original assignment pages')

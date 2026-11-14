@@ -1,0 +1,135 @@
+{
+  "date": "2026-11-09",
+  "scope": "Whole-owner reading of Tool use and a bounded source-grounded addition on MCP architecture, response correlation, and retries. No publication.",
+  "review": {
+    "previousGoalTurn": "Progress, verified from the current worktree: the GPT-1 to LLaMA turn added the Natural Questions comparison, original Figure 3 panel and index navigation; retained checks in 2026-11-09-gpt-llama-natural-questions-additions.json.",
+    "sources": [
+      "MCP 2025-11-25 Architecture/Core Components: the host creates the clients and enforces authorization, each client maintains a separate server session.",
+      "MCP 2025-11-25 Base Protocol/Messages: client request ID is a non-null string/integer, unique to the requester within the session, and echoed in the response where available.",
+      "MCP 2025-11-25 Server Features/Tools: tools/list, tools/call, outputSchema, structuredContent, error versus result.isError, and the trust boundary for annotations.",
+      "AWS Builders' Library, Making retries safe with idempotent APIs: client request tokens, same-intent retries, and parameter mismatch."
+    ],
+    "visual": {
+      "commit": "27ab2419191334dd288b05343e3a622ed615913d",
+      "faqSha256": "c8c63cf0ddd8d7ac9168835cce436cdbe6c98df99ee9451c9737490837f56dcd",
+      "imageSha256": "fefd5ea7eeb7289f1d9f00552ce798f2298b1f588a8733a79b9ee4c10512e7c2",
+      "licenseSha256": "346e57dc40801e3d58165e97f64d45b42c4571a68a76ecb10c3c12858acecb3f",
+      "notes": "MIT license at that exact revision covers the associated documentation. Original PNG is 3840×1500, copied byte-for-byte; the complete MIT notice is packaged."
+    },
+    "example": "Two real-shaped response objects and a protocol-error variant exercise reverse arrival, result.isError, JSON-RPC error, malformed response, unmatched ID and duplicate delivery. The earlier write fixture exercises a lost response and changed parameters under a reused key.",
+    "locale": "Seven stable subject links in both reference indices; the en chapter is still the existing labeled Russian fallback.",
+    "validation": "All six Python examples ran locally. Fresh final build: 2023 pages, 231 rendered-output checks, zero broken internal routes, fragments or files. The 738 publication checks and complete curated registry check passed before the final compact-table wording; rechecked both receipt tests, rendered outputs, and all four reversals against the final version. Original PNG and license matched the pinned upstream bytes.",
+    "reader": "Followed the two MCP anchors from both reference indexes at 375 and 1280 CSS px. All seven subject links appear once per locale; no whole-page or new-table overflow and no KaTeX errors. Inspected the original image, attribution, mobile zoom/pan, and the revised table in screenshots.",
+    "limits": "The executable examples are local fixtures, not a network integration test or a security audit. No commit, push or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+      "before_sha256": "00eb6118373a4992444bc27376567cd10a83209d090c2a82b2c6425ca65dc01e",
+      "after_sha256": "83a8a6e45eb56a15ce51d2450a81e0ea94ee5c813f6f3cecaee644c523eb03ca",
+      "lines": 1186,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-30\nlast_verified: 2026-10-20\nprimary_sources:",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-11-09\nreference_terms:\n  - label: Вызов инструмента — схема, права и проверка результата\n    label_en: Tool calls — schema, permissions, and result verification\n    anchor: tool-call-contract\n  - label: Toolformer — отбор вызовов и оценивание\n    label_en: Toolformer — call selection and evaluation\n    anchor: toolformer-curation-evaluation\n  - label: MCP — клиент, сервер и границы протокола\n    label_en: MCP — client, server, and protocol boundaries\n    anchor: mcp-host-client-server\n  - label: MCP — сопоставление ответов и два вида ошибок\n    label_en: MCP — response correlation and two kinds of error\n    anchor: mcp-response-correlation\n  - label: ReAct — prompting, запасная стратегия и обучение\n    label_en: ReAct — prompting, fallback, and fine-tuning\n    anchor: react-prompting-learning\n  - label: Идемпотентность — повтор после потерянного ответа\n    label_en: Idempotency — retries after a lost response\n    anchor: tool-retry-idempotency\n  - label: Вызов инструмента — проверяемое завершение эпизода\n    label_en: Tool use — verifying episode completion\n    anchor: tool-use-verification\nprimary_sources:"
+        },
+        {
+          "old": "  - https://rdi.berkeley.edu/adv-llm-agents/sp25\n  - https://modelcontextprotocol.io/specification/2025-11-25/server/tools",
+          "new": "  - https://rdi.berkeley.edu/adv-llm-agents/sp25\n  - https://modelcontextprotocol.io/specification/2025-11-25/basic\n  - https://modelcontextprotocol.io/specification/2025-11-25/architecture\n  - https://modelcontextprotocol.io/specification/2025-11-25/server/tools"
+        },
+        {
+          "old": "### Один запрос через схему, ошибку и проверку",
+          "new": "<a id=\"tool-call-contract\"></a>\n\n### Один запрос через схему, ошибку и проверку"
+        },
+        {
+          "old": "### Где здесь MCP\n\nFunction calling описывает, как приложение получает предложенное моделью\nдействие. MCP задаёт другой участок взаимодействия: как приложение-клиент\nобнаруживает инструменты сервера и вызывает их. В спецификации\n[2025-11-25, Tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)\nклиент использует `tools/list`, получает имя, описание и `inputSchema`,\nа затем отправляет `tools/call`. Выбор инструмента моделью и проверка\nправ в приложении не исчезают из-за наличия стандартного протокола.",
+          "new": "<a id=\"mcp-host-client-server\"></a>\n\n### Где здесь MCP\n\nМодель предлагает `read_file`, а приложение должно найти и вызвать программу,\nкоторая умеет читать файл. Если это внешний MCP-сервер, приложение (host)\nиспользует свой MCP-клиент: через `tools/list` клиент получает имя, описание и\n`inputSchema`, а через `tools/call` передаёт проверенные аргументы.\nСервер выполняет чтение и возвращает результат клиенту. Решение о том, какие\nинструменты показать модели и при каких условиях вызвать, остаётся у приложения.\n\n![[00 Учебник/Assets/Figures/curated/tool-use-2026-11-09/mcp-simple-diagram.png|Слева приложения, справа источники данных и инструменты; MCP обозначает протокол обмена между ними]]\n\n*Anthropic и участники проекта Model Context Protocol,\n[FAQ, «How does MCP work?»](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/27ab2419191334dd288b05343e3a622ed615913d/docs/faqs.mdx#how-does-mcp-work),\n[оригинальная схема](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/27ab2419191334dd288b05343e3a622ed615913d/docs/images/mcp-simple-diagram.png),\n[MIT](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/27ab2419191334dd288b05343e3a622ed615913d/LICENSE).*\n\nIDE слева на рисунке может обратиться к файловой системе или к Git справа.\nОна открывает отдельное клиентское соединение с каждым сервером.\nЦентральная плашка `MCP` обозначает общий формат обмена, а не третий\nпроцесс, через который проходят все запросы. Сами данные приложение\nпередаёт модели отдельно. Роли участников описаны в\n[Architecture](https://modelcontextprotocol.io/specification/2025-11-25/architecture#core-components),\nа формат `tools/list` и `tools/call` — в\n[Tools, 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)."
+        },
+        {
+          "old": "annotations недоверенными, если серверу нельзя доверять.\n\n## 4. Наблюдение должно отвечать на следующий вопрос",
+          "new": "annotations недоверенными, если серверу нельзя доверять.\n\n<a id=\"mcp-response-correlation\"></a>\n\n### Если ответы приходят не по порядку\n\nМодель просит одновременно прочитать `notes.txt` и `settings.txt`.\nПриложение отправляет два отдельных запроса в одной MCP-сессии. Перед\nотправкой оно записывает, какому вызову модели соответствует каждый\nJSON-RPC `id`. В этой сессии запрашивающая сторона не использует\nодин и тот же идентификатор дважды.\n[MCP 2025-11-25, Messages](https://modelcontextprotocol.io/specification/2025-11-25/basic#messages).\n\n| Вызов модели | JSON-RPC `id` | Что произошло | Ответ пришёл |\n| --- | ---: | --- | ---: |\n| `c2`: прочитать `notes.txt` | 17 | Прочитаны `timeout=30` и `retries=2` | 2 |\n| `c3`: прочитать `settings.txt` | 18 | Инструмент вернул `isError: true`: файла нет | 1 |\n\nЕсли раздать ответы по порядку отправки, модель получит «файла нет»\nдля `notes.txt` и припишет `timeout=30` файлу `settings.txt`.\nСопоставление по `id` сохраняет обе связи. В случае `18` внешняя\nоболочка всё равно содержит `result`: JSON-RPC-запрос обработан,\nно чтение не удалось. Если клиент отправит устаревшее имя инструмента,\nнапример `read_old_file`, сервер может вернуть `error` в самой оболочке.\nПриложению нужно отличить неисправный вызов от результата чтения.\n\nВ этом примере JSON уже разобран, а ответы принадлежат одному соединению.\nФункция возвращает внутреннюю запись для приложения. Она сохраняет\nполезную нагрузку обеих ошибок, а неизвестный или повторный `id`\nне превращает в наблюдение. Разбор JSON и полная проверка схем остаются\nза пределами примера.\n\n~~~python\npending = {17: \"c2\", 18: \"c3\", 19: \"c4\"}\n\ndef correlate_response(message):\n    rpc_id = message.get(\"id\")\n    if (message.get(\"jsonrpc\") != \"2.0\"\n            or type(rpc_id) not in (str, int) or rpc_id not in pending):\n        return None\n    if (\"error\" in message) == (\"result\" in message):\n        return None\n    if \"error\" in message:\n        kind, payload = \"rpc_error\", message[\"error\"]\n    else:\n        payload = message[\"result\"]\n        if not isinstance(payload, dict):\n            return None\n        is_error = payload.get(\"isError\", False)\n        if type(is_error) is not bool:\n            return None\n        kind = \"tool_error\" if is_error else \"tool_result\"\n    return {\"call_id\": pending.pop(rpc_id), \"kind\": kind, \"payload\": payload}\n\ndef rpc(rpc_id, **body):\n    return {\"jsonrpc\": \"2.0\", \"id\": rpc_id, **body}\n\nmissing = rpc(18, result={\n    \"isError\": True,\n    \"content\": [{\"type\": \"text\", \"text\": \"settings.txt not found\"}],\n})\ndata = {\"path\": \"notes.txt\", \"lines\": [\"timeout=30\", \"retries=2\"]}\nreading = rpc(17, result={\"content\": [], \"structuredContent\": data})\nstale = rpc(19, error={\"code\": -32602, \"message\": \"Unknown tool: read_old_file\"})\n\nassert correlate_response(rpc(999, result={})) is None\nassert correlate_response(rpc(17, result={}, error={})) is None\nreceived = [correlate_response(msg) for msg in (missing, reading, stale)]\nassert [(item[\"call_id\"], item[\"kind\"]) for item in received] == [\n    (\"c3\", \"tool_error\"), (\"c2\", \"tool_result\"), (\"c4\", \"rpc_error\"),\n]\nassert received[0][\"payload\"][\"content\"][0][\"text\"] == \"settings.txt not found\"\nassert received[1][\"payload\"][\"structuredContent\"] == data\nassert received[2][\"payload\"][\"code\"] == -32602\nassert not pending and correlate_response(reading) is None\n~~~\n\nВ журнале первым появится `c3`, но подтверждённые строки относятся к\n`c2`. При нескольких соединениях приложение ведёт отдельный список\nожидающих ответов для каждого: `id: 17` на двух разных соединениях не\nозначает один запрос. Для чтения этого сопоставления достаточно, чтобы\nнайти нужный вызов. При записи нужен ещё\n[[#tool-retry-idempotency|устойчивый ключ операции]]: если ответ потерялся,\nповтор получает новый JSON-RPC `id`, но сохраняет ключ намерения.\n\n## 4. Наблюдение должно отвечать на следующий вопрос"
+        },
+        {
+          "old": "При нескольких вызовах результат связывают с конкретным идентификатором\nвызова, а не с порядком прихода ответов. Два независимых чтения можно выполнять\nпараллельно. Поиск идентификатора и чтение найденного документа зависимы:",
+          "new": "[[#mcp-response-correlation|Сопоставление по идентификатору]] позволяет\nобрабатывать ответы в любом порядке. Два независимых чтения можно выполнять\nпараллельно. Поиск идентификатора и чтение найденного документа зависимы:"
+        },
+        {
+          "old": "### Потерянный ответ после записи",
+          "new": "<a id=\"tool-retry-idempotency\"></a>\n\n### Потерянный ответ после записи"
+        },
+        {
+          "old": "### Полный учебный эпизод с проверяемым завершением",
+          "new": "<a id=\"tool-use-verification\"></a>\n\n### Полный учебный эпизод с проверяемым завершением"
+        },
+        {
+          "old": "- [Model Context Protocol, Tools, 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) — обнаружение, вызовы и два уровня ошибок.",
+          "new": "- Model Context Protocol 2025-11-25: [Architecture](https://modelcontextprotocol.io/specification/2025-11-25/architecture) — роли приложения, клиента и сервера; [Messages](https://modelcontextprotocol.io/specification/2025-11-25/basic#messages) — идентификаторы запросов; [Tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) — обнаружение, вызовы и два уровня ошибок."
+        },
+        {
+          "old": "Протокольная ошибка и ошибка исполняемого инструмента тоже различаются.\nНеизвестный инструмент или некорректный JSON-RPC запрос могут дать\n`error` на уровне протокола. Ошибка значения аргумента или внешнего API\nможет вернуться внутри результата с `isError: true`.\nПриложение должно сохранить эту информацию, а не передать модели только\n`content` и потерять флаг ошибки. Подсказка `readOnlyHint` в\nописании инструмента не заменяет проверку прав: сама спецификация считает\nannotations недоверенными, если серверу нельзя доверять.",
+          "new": "Подсказка `readOnlyHint` в описании инструмента не заменяет проверку прав.\nСпецификация требует считать такие аннотации недоверенными, если они\nпришли от сервера, которому приложение не доверяет."
+        },
+        {
+          "old": "В этом примере JSON уже разобран, а ответы принадлежат одному соединению.\nФункция возвращает внутреннюю запись для приложения. Она сохраняет\nполезную нагрузку обеих ошибок, а неизвестный или повторный `id`\nне превращает в наблюдение. Разбор JSON и полная проверка схем остаются\nза пределами примера.",
+          "new": "Функция ниже принимает уже разобранный ответ из одной сессии и возвращает\nзапись для журнала приложения. Она сохраняет данные обеих ошибок и не\nотносит неизвестный или уже обработанный `id` ни к одному вызову модели.\nПолную проверку входного сообщения выполняет слой MCP-клиента."
+        },
+        {
+          "old": "~~~python\npending = {17: \"c2\", 18: \"c3\", 19: \"c4\"}",
+          "new": "~~~python\nimport json\n\npending = {17: \"c2\", 18: \"c3\", 19: \"c4\"}"
+        },
+        {
+          "old": "data = {\"path\": \"notes.txt\", \"lines\": [\"timeout=30\", \"retries=2\"]}\nreading = rpc(17, result={\"content\": [], \"structuredContent\": data})",
+          "new": "data = {\"path\": \"notes.txt\", \"lines\": [\"timeout=30\", \"retries=2\"]}\nreading = rpc(17, result={\n    \"content\": [{\"type\": \"text\", \"text\": json.dumps(data)}],\n    \"structuredContent\": data,\n})"
+        },
+        {
+          "old": "assert received[0][\"payload\"][\"content\"][0][\"text\"] == \"settings.txt not found\"\nassert received[1][\"payload\"][\"structuredContent\"] == data\nassert received[2][\"payload\"][\"code\"] == -32602",
+          "new": "assert received[0][\"payload\"][\"content\"][0][\"text\"] == \"settings.txt not found\"\nassert received[1][\"payload\"][\"structuredContent\"] == data\nassert json.loads(received[1][\"payload\"][\"content\"][0][\"text\"]) == data\nassert received[2][\"payload\"][\"code\"] == -32602"
+        },
+        {
+          "old": "В журнале первым появится `c3`, но подтверждённые строки относятся к\n`c2`. При нескольких соединениях приложение ведёт отдельный список\nожидающих ответов для каждого: `id: 17` на двух разных соединениях не\nозначает один запрос. Для чтения этого сопоставления достаточно, чтобы\nнайти нужный вызов. При записи нужен ещё\n[[#tool-retry-idempotency|устойчивый ключ операции]]: если ответ потерялся,\nповтор получает новый JSON-RPC `id`, но сохраняет ключ намерения.",
+          "new": "В журнале первым появится `c3`, но прочитанные строки относятся к\n`c2`. Приложение ведёт таблицу ожидающих ответов отдельно для каждой\nсессии: `id: 17` в двух сессиях может обозначать разные вызовы.\nПри записи сопоставление не защищает от повтора действия. Для этого нужен\n[[#tool-retry-idempotency|устойчивый ключ операции]]: если ответ потерялся,\nповтор получает новый JSON-RPC `id`, но сохраняет ключ намерения."
+        },
+        {
+          "old": "| Вызов модели | JSON-RPC `id` | Что произошло | Ответ пришёл |\n| --- | ---: | --- | ---: |\n| `c2`: прочитать `notes.txt` | 17 | Прочитаны `timeout=30` и `retries=2` | 2 |\n| `c3`: прочитать `settings.txt` | 18 | Инструмент вернул `isError: true`: файла нет | 1 |",
+          "new": "| Порядок | JSON-RPC → вызов модели | Ответ |\n| ---: | --- | --- |\n| 1 | `18` → `c3` | Файла нет, `isError: true` |\n| 2 | `17` → `c2` | `timeout=30`, `retries=2` |"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "f91f16c894ac5970d8203673db4bd4323621499af7458209b66dd49ceb0506cb",
+      "after_sha256": "a99792cb29d02bd0f57cd73c2a191953126a5faf6dab3cbbca77fe9037453166",
+      "lines": 1670,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию|Tool use — от вызова функции к действию]]",
+          "new": "- [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию|Tool use — от вызова функции к действию]]\n  - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#tool-call-contract|Вызов инструмента — схема, права и проверка результата]]\n  - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#toolformer-curation-evaluation|Toolformer — отбор вызовов и оценивание]]\n  - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#mcp-host-client-server|MCP — клиент, сервер и границы протокола]]\n  - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#mcp-response-correlation|MCP — сопоставление ответов и два вида ошибок]]\n  - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#react-prompting-learning|ReAct — prompting, запасная стратегия и обучение]]\n  - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#tool-retry-idempotency|Идемпотентность — повтор после потерянного ответа]]\n  - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#tool-use-verification|Вызов инструмента — проверяемое завершение эпизода]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "d8cf39ed15d50175d986c6d55ebe9556c46e34acacada4222feb9fddaa65abd4",
+      "after_sha256": "dc2a0ae51d8b6e956653aecbd27bb1049a8e09febef3eb9444802b9981621c72",
+      "lines": 1672,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию|Tool use: from a function call to an action]]",
+          "new": "- [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию|Tool use: from a function call to an action]]\n  - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#tool-call-contract|Tool calls — schema, permissions, and result verification]]\n  - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#toolformer-curation-evaluation|Toolformer — call selection and evaluation]]\n  - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#mcp-host-client-server|MCP — client, server, and protocol boundaries]]\n  - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#mcp-response-correlation|MCP — response correlation and two kinds of error]]\n  - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#react-prompting-learning|ReAct — prompting, fallback, and fine-tuning]]\n  - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#tool-retry-idempotency|Idempotency — retries after a lost response]]\n  - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#tool-use-verification|Tool use — verifying episode completion]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "8605f39693fc62a364543ecf6d8e62cb1ff7c9a6414f05d654f02f076d32e4e1",
+      "after_sha256": "04b17ad35e2862209b6beb62df9954382e94fb325e720c0b984a2fb202ed49f3",
+      "lines": 23856,
+      "changes": [
+        {
+          "old": "assets:",
+          "new": "assets:\n  - id: \"curated-mcp-faq-fefd5ea7eeb7\"\n    asset: \"00 Учебник/Assets/Figures/curated/tool-use-2026-11-09/mcp-simple-diagram.png\"\n    author: \"Anthropic, PBC and Model Context Protocol contributors\"\n    title: \"MCP FAQ: How does MCP work?\"\n    source_url: \"https://github.com/modelcontextprotocol/modelcontextprotocol/blob/27ab2419191334dd288b05343e3a622ed615913d/docs/faqs.mdx\"\n    source_image_url: \"https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/27ab2419191334dd288b05343e3a622ed615913d/docs/images/mcp-simple-diagram.png\"\n    commit: \"27ab2419191334dd288b05343e3a622ed615913d\"\n    source_asset: \"00 Учебник/Assets/Figures/curated/tool-use-2026-11-09/mcp-simple-diagram.png\"\n    source_asset_sha256: \"fefd5ea7eeb7289f1d9f00552ce798f2298b1f588a8733a79b9ee4c10512e7c2\"\n    sha256: \"fefd5ea7eeb7289f1d9f00552ce798f2298b1f588a8733a79b9ee4c10512e7c2\"\n    dimensions_px: [3840,1500]\n    bytes: 162342\n    license: \"MIT\"\n    license_url: \"https://github.com/modelcontextprotocol/modelcontextprotocol/blob/27ab2419191334dd288b05343e3a622ed615913d/LICENSE\"\n    license_evidence: \"site/public/licenses/mcp-27ab2419-MIT.txt\"\n    license_evidence_sha256: \"346e57dc40801e3d58165e97f64d45b42c4571a68a76ecb10c3c12858acecb3f\"\n    public_license_copy: \"site/public/licenses/mcp-27ab2419-MIT.txt\"\n    modifications: \"Original 3840×1500 PNG copied byte-for-byte, with all English labels and padding retained.\"\n    derivation: \"source-raster-copy\"\n    provenance_confirmation: \"pinned-upstream-repository\"\n    rights_status: \"source-license-verified\"\n    metadata_status: \"verified\"\n    last_verified: \"2026-11-09\"\n    used_in: [\"00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md\"]"
+        }
+      ]
+    }
+  ]
+}

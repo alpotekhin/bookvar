@@ -2,8 +2,64 @@
 title: "Жизненный цикл ML-системы: от постановки задачи до эксплуатации"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-27
+last_updated: 2026-11-09
 last_verified: 2026-10-27
+source_language: mixed
+reference_terms:
+  - label: "Контур предсказания и контур обновления"
+    label_en: "Prediction and update loops"
+    anchor: workflow-contours
+  - label: "Цена ошибок и загрузка инженеров"
+    label_en: "Error costs and engineer capacity"
+    anchor: workflow-error-cost
+  - label: "Признаки на момент предсказания"
+    label_en: "Point-in-time features"
+    anchor: workflow-point-in-time
+  - label: "Горизонт метки и разбиение данных"
+    label_en: "Label horizon and data splits"
+    anchor: workflow-label-horizon
+  - label: "Идентификатор выпуска и зависимости"
+    label_en: "Release identity and dependencies"
+    anchor: workflow-release-id
+  - label: "Бюджет полезных экспериментов"
+    label_en: "Useful experiment budget"
+    anchor: workflow-iteration-budget
+  - label: "Экспорт графа в ONNX"
+    label_en: "Exporting a graph to ONNX"
+    anchor: workflow-onnx-graph
+  - label: "Провайдеры ONNX Runtime и разбиение графа"
+    label_en: "ONNX Runtime providers and graph partitioning"
+    anchor: workflow-execution-provider
+  - label: "Проверка входного контракта ONNX"
+    label_en: "Validating the ONNX input contract"
+    anchor: workflow-input-contract
+  - label: "Граф без зарегистрированного ядра"
+    label_en: "A graph without a registered kernel"
+    anchor: workflow-missing-kernel
+  - label: "SavedModel: граф, переменные и сигнатуры"
+    label_en: "SavedModel graphs, variables and signatures"
+    anchor: workflow-savedmodel
+  - label: "Преобразование SavedModel для другой среды"
+    label_en: "Converting SavedModel for another runtime"
+    anchor: workflow-target-conversion
+  - label: "Проверки перед выпуском модели"
+    label_en: "Model release checks"
+    anchor: workflow-release-validation
+  - label: "Предсказание по запросу и заранее"
+    label_en: "Online and precomputed inference"
+    anchor: workflow-inference-modes
+  - label: "Выборочная разметка и взвешенный recall"
+    label_en: "Selective labeling and weighted recall"
+    anchor: workflow-selective-labels
+  - label: "Интервал recall при выборочной разметке"
+    label_en: "Recall interval under selective labeling"
+    anchor: workflow-recall-interval
+  - label: "Разная задержка обратной связи"
+    label_en: "Feedback on different timescales"
+    anchor: workflow-feedback-clocks
+  - label: "Что передаётся между стадиями"
+    label_en: "What each stage hands off"
+    anchor: workflow-stage-contract
 primary_sources:
   - https://developers.google.com/machine-learning/managing-ml-projects/pipelines
   - https://developers.google.com/machine-learning/guides/rules-of-ml
@@ -31,6 +87,7 @@ primary_sources:
 
 <a id="два-параллельных-контура"></a>
 
+<a id="workflow-contours"></a>
 ## Контур предсказания и контур обновления
 
 У работающей системы есть два разных вида работы. Первый выполняется
@@ -44,7 +101,7 @@ primary_sources:
 проверку кандидата. Между ними передаются не только файлы весов,
 но и наборы данных, предсказания и версии артефактов.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-pipes.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-pipes.png|Синий контур обслуживает запросы. Зелёный конвейер готовит данные, красный обучает кандидата, фиолетовый сравнивает модели и возвращает выбранную версию в serving.]]
 
 *Google, [ML pipelines, Figure 4](https://developers.google.com/machine-learning/managing-ml-projects/pipelines),
 CC BY 4.0. Полная исходная схема без изменений. Serving обслуживает запросы;
@@ -114,6 +171,7 @@ Data, Training и Validation готовят и проверяют новую в�
 Допустим, для учебного расчёта первая ошибка стоит пять условных единиц,
 вторая одну. Это выбранная модель затрат, а не универсальные коэффициенты.
 
+<a id="workflow-error-cost"></a>
 ### Accuracy, стоимость ошибок и жёсткое ограничение
 
 На validation-наборе из 10 000 обращений 1000 действительно требуют инженера.
@@ -181,7 +239,7 @@ assert c['cost'] == b['cost'] == 1200
 и проверки. Выгрузка таблицы обращений сама по себе ещё не задаёт обучающий
 пример: нужно выбрать состояние переписки, признаки, метку и время их доступности.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-data-process.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-data-process.png|Из журнала приложения конвейер данных строит обучающий и проверочный наборы. Оба сохраняются в Dataset storage.]]
 
 *Google, [ML pipelines, Figure 8](https://developers.google.com/machine-learning/managing-ml-projects/pipelines),
 CC BY 4.0. Исходник без изменений. Из журнала приложения строятся
@@ -199,6 +257,7 @@ CC BY 4.0. Исходник без изменений. Из журнала пр�
 содержат информацию о результате. Они могут участвовать в создании метки,
 но не во входе классификатора первого сообщения.
 
+<a id="workflow-point-in-time"></a>
 ### Временная корректность признаков
 
 Допустим, признак показывает число прошлых обращений пользователя.
@@ -248,6 +307,7 @@ assert feature_as_of(history, 12) == 4
 правил доступа и хранения; воспроизводимость не требует сохранять все
 персональные тексты без ограничений.
 
+<a id="workflow-label-horizon"></a>
 ### Метки, разбиение и исключённые примеры
 
 Пусть метка определяется по работе с обращением в первые 72 часа.
@@ -285,7 +345,7 @@ assert feature_as_of(history, 12) == 4
 инициализация. Смена сразу нескольких компонентов не позволяет приписать
 результат одному из них.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-train.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-train.png|Из Dataset storage берётся обучающий набор. Model training получает этот набор и выдаёт обученную модель.]]
 
 *Google, [ML pipelines, Figure 9](https://developers.google.com/machine-learning/managing-ml-projects/pipelines),
 CC BY 4.0. Исходник без изменений. Входом обучения служит версия
@@ -304,6 +364,7 @@ CC BY 4.0. Исходник без изменений. Входом обучен
 его чисел в заданных условиях и устойчивость вывода на нескольких запусках.
 Версия окружения помогает исследовать расхождения, но сама их не устраняет.
 
+<a id="workflow-release-id"></a>
 ### Идентификатор выпуска включает больше, чем веса
 
 В демонстрационном manifest ниже веса одинаковы, а порог меняется.
@@ -347,6 +408,7 @@ commit или контрольные суммы содержимого. Хеш m
 контекста. Неизменные веса не означают неизменную систему ответов.
 
 <!-- BEGIN REVIEW: workflow iteration 2026-10-26 -->
+<a id="workflow-iteration-budget"></a>
 ## How many useful experiments fit in the development window?
 
 An experiment finishes when its result can guide the next decision. Training
@@ -471,6 +533,7 @@ within the chosen tolerance? Does the complete application meet its resource
 and quality requirements? Passing an earlier check does not answer the later
 ones.
 
+<a id="workflow-onnx-graph"></a>
 ### From PyTorch operations to an ONNX graph
 
 The PyTorch documentation describes what its `torch.export`-based exporter
@@ -499,9 +562,9 @@ The graph's shape metadata also needs inspection. A symbolic batch dimension
 can permit different batch sizes without preserving every range constraint from
 the originating `ExportedProgram`. The example below checks this boundary rather
 than assuming that a captured constraint becomes a runtime input validator.
-Data-dependent Python branches and graph capture failures have a separate
-worked treatment in [[02 Areas/ML & DL/00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению|the kernels and compilation chapter]].
+The [[02 Areas/ML & DL/00 Учебник/10 ML Systems/09 Компиляция графов — PyTorch, JAX и CUDA Graphs#compile-tracing-a-data-dependent-branch|worked graph-capture example]] shows how a data-dependent Python branch can fail during export.
 
+<a id="workflow-execution-provider"></a>
 ### Which provider executes each part?
 
 ONNX Runtime assigns supported parts of a graph to execution providers. The
@@ -521,7 +584,7 @@ converts the model graph into its in-memory graph representation.
 [MIT](/licenses/onnxruntime-e3d000e3-MIT.txt).
 Complete original sequence; only the relative link is resolved.*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/model-export-2026-10-27/onnx-runtime-providers.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/model-export-2026-10-27/onnx-runtime-providers.png|Модель ONNX поступает в Graph Partitioner. Он использует реестр execution providers, чтобы назначить поддерживаемые части графа доступным средам исполнения.]]
 
 *Microsoft and ONNX Runtime contributors, [Execution Providers, GetCapability diagram](https://github.com/microsoft/onnxruntime/blob/e3d000e3fe1b113c4153e6250dd605c2d03da3f0/docs/execution-providers/index.md),
 [MIT](/licenses/onnxruntime-e3d000e3-MIT.txt). Complete original PNG, 1454×910,
@@ -544,6 +607,7 @@ that graph; it does not establish CUDA, TensorRT or mobile-delegate compatibilit
 The diagram's hardware choices are possible backends, not measured equivalent
 performance results.
 
+<a id="workflow-input-contract"></a>
 ### A complete CPU export with a checked input contract
 
 Consider a two-feature model with two outputs:
@@ -655,6 +719,7 @@ long reductions or another provider. A changed precision or backend requires
 new numerical and task-level checks. Neither these comparisons nor the
 checker prove equivalence for every possible input.
 
+<a id="workflow-missing-kernel"></a>
 ### A valid graph can still have no executable kernel
 
 An ONNX file may refer to a custom operator in its own domain. In this example,
@@ -701,6 +766,7 @@ Those components still need their own compatible model implementation.
 <!-- END REVIEW: model export 2026-10-27 -->
 
 <!-- BEGIN REVIEW: TensorFlow SavedModel 2026-10-27 -->
+<a id="workflow-savedmodel"></a>
 ## TensorFlow: saved graphs, variables and callable signatures
 
 TensorFlow 2 executes operations eagerly by default. A `tf.function` can capture
@@ -715,7 +781,7 @@ The TensorFlow guide describes the graph representation directly:
 Graphs are data structures that contain a set of `tf.Operation` objects, which represent units of computation; and `tf.Tensor` objects, which represent the units of data that flow between operations. They are defined in a `tf.Graph` context. Since these graphs are data structures, they can be saved, run, and restored all without the original Python code.
 <!-- END SOURCE: TensorFlow graph definition -->
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensorflow-export-2026-10-27/two-layer-network.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensorflow-export-2026-10-27/two-layer-network.png|Граф в TensorBoard: вход проходит через MatMul, сложение и ReLU первого слоя, затем через операции второго слоя.]]
 
 *The TensorFlow Authors, [Introduction to graphs and tf.function, What are graphs?](https://github.com/tensorflow/docs/blob/9beed83c5fe8e4ccb742762394b084cd9e2bf2e0/site/en/guide/intro_to_graphs.ipynb),
 [Apache-2.0](/licenses/tensorflow-docs-9beed83c-Apache-2.0.txt).
@@ -964,6 +1030,7 @@ The official on-disk format section identifies these parts of the directory:
 *Based on the complete [The SavedModel format on disk](https://github.com/tensorflow/docs/blob/9beed83c5fe8e4ccb742762394b084cd9e2bf2e0/site/en/guide/saved_model.ipynb)
 section, cells 23–29. The table is an editorial description, not a new graph.*
 
+<a id="workflow-target-conversion"></a>
 ### Conversion to a smaller runtime is another checked boundary
 
 A SavedModel is an input to conversion; it is not a universal binary for every
@@ -1072,6 +1139,7 @@ savedmodel_temporary.cleanup()
 
 <a id="4-оценивание-валидация-и-готовность-к-развёртыванию"></a>
 
+<a id="workflow-release-validation"></a>
 ## От качества кандидата к разрешению на выпуск
 
 Кандидат C из примера проходит два условия на validation-наборе.
@@ -1123,6 +1191,7 @@ CC BY 4.0. Оригинальный текст, без перевода.*
 
 <a id="5-от-функции-к-сервису"></a>
 
+<a id="workflow-inference-modes"></a>
 ## Где выполняется предсказание и что делает приложение
 
 Частота обучения и способ получения ответа независимы.
@@ -1130,7 +1199,7 @@ CC BY 4.0. Оригинальный текст, без перевода.*
 сообщения. Можно обучать ежедневно, а результаты для каталога
 считать заранее и отдавать из хранилища.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-offline-online.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-offline-online.png|Слева модель считает ответ после запроса. Справа предсказания считаются заранее, а приложение читает сохранённый результат.]]
 
 *Google, [ML pipelines, Figure 5](https://developers.google.com/machine-learning/managing-ml-projects/pipelines),
 CC BY 4.0. Исходник без изменений. Слева предсказание вычисляется
@@ -1153,7 +1222,7 @@ CC BY 4.0. Исходник без изменений. Слева предска
 Класс с максимальной вероятностью не обязан непосредственно становиться
 пользовательским ответом.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-prediction-process.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-prediction-process.png|До вызова модели обрабатываются данные приложения и вычисляются признаки. После модели отдельно обрабатывается предсказание.]]
 
 *Google, [ML pipelines, Figure 6](https://developers.google.com/machine-learning/managing-ml-projects/pipelines),
 CC BY 4.0. Исходник без изменений. Зелёная точка обозначает подготовку
@@ -1190,7 +1259,7 @@ HTTP 200 сам по себе не подтверждает правильнос
 и храниться в другом источнике. Для объединения нужен устойчивый
 идентификатор обращения и определённая политика работы с версиями.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-prediction-log.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-prediction-log.png|В Prediction logging попадают выходы модели, в App logging — данные приложения. Стрелки ведут к двум разным журналам.]]
 
 *Google, [ML pipelines, Figure 7](https://developers.google.com/machine-learning/managing-ml-projects/pipelines),
 CC BY 4.0. Исходник без изменений. `Prediction logging` сохраняет
@@ -1209,6 +1278,7 @@ CC BY 4.0. Исходник без изменений. `Prediction logging` со
 отправила инженерам. Если считать такую выборку всем трафиком,
 качество и следующее обучение получат смещение.
 
+<a id="workflow-selective-labels"></a>
 ### Пример выборочной разметки
 
 Из 1000 обращений модель отправила инженерам 100.
@@ -1265,6 +1335,78 @@ assert np.isclose(sum(weighted.values()), 1000.)
 Следующее обучение на собственных маршрутах способно закрепить
 прежние решения, даже если новая модель точнее воспроизводит эти метки.
 
+<a id="workflow-recall-interval"></a>
+### Как оценить неопределённость recall
+
+Из 900 обращений первой линии случайно выбрали ровно 100 без возвращения
+и среди них нашли 20 пропущенных сбоев. Число сбоев во всей группе, $K$,
+неизвестно. Если бы $K$ было равно 117, получить не меньше 20 пропусков
+в такой выборке удалось бы примерно в 2,43% повторных аудитов. При $K=259$
+уже противоположный исход редок: не больше 20 пропусков наблюдалось бы
+примерно в 2,37% аудитов. Так наблюдение ограничивает $K$ с двух сторон.
+
+При фиксированном $K$ число пропусков $X$ в случайной выборке из $n$
+обращений имеет гипергеометрическое распределение. Чтобы получить $x$
+пропусков, нужно выбрать $x$ из $K$ и $n-x$ из остальных $N-K$ обращений:
+
+$$
+\Pr_K(X=x)=\frac{\binom Kx\binom{N-K}{n-x}}{\binom Nn}.
+$$
+
+Для двустороннего 95%-го интервала оставляем те $K$, для которых
+$\Pr_K(X\ge 20)>0.025$ и $\Pr_K(X\le 20)>0.025$.
+Каждый хвост исключает истинное $K$ с вероятностью не более 2,5%;
+значит, в повторных выборках интервал содержит истинное $K$
+не реже чем в 95% случаев. Из-за целочисленных счётчиков покрытие
+может быть выше. Метод вывода односторонних границ разобран в
+[Berkeley STAT 159, Hypergeometric confidence bounds](https://ucb-stat-159-s21.github.io/site/Notes/binom.html#hypergeometric-confidence-bounds).
+Здесь мы применяем его к двум хвостам примера со службой поддержки.
+
+Получаем от 118 до 258 пропущенных сбоев. Число верно направленных
+сбоев известно: все 100 обращений инженерной группы были разобраны,
+из них 90 — TP. Поэтому recall равен $90/(90+K)$ и убывает с ростом $K$.
+Подставляем 258 для нижней границы и 118 для верхней:
+95%-й интервал recall составляет примерно 25,9–43,3% при оценке 33,3%.
+
+```python
+from math import comb
+
+def fn_interval95(population, draws, observed):
+    counts = (population, draws, observed)
+    if any(type(value) is not int for value in counts):
+        raise ValueError("counts must be integers")
+    if not 0 < draws <= population or not 0 <= observed <= draws:
+        raise ValueError("require 0 < draws <= population and 0 <= observed <= draws")
+    denominator = comb(population, draws)
+    accepted = []
+    for total in range(observed, population - draws + observed + 1):
+        lo = max(0, draws - (population - total))
+        hi = min(draws, total)
+        left = right = 0
+        for seen in range(lo, hi + 1):
+            weight = comb(total, seen) * comb(population - total, draws - seen)
+            if seen <= observed:
+                left += weight
+            if seen >= observed:
+                right += weight
+        # 2.5% = 1/40; compare integer counts without rounding.
+        if 40 * left > denominator and 40 * right > denominator:
+            accepted.append(total)
+    return accepted[0], accepted[-1]
+
+fn_low, fn_high = fn_interval95(900, 100, 20)
+assert (fn_low, fn_high) == (118, 258)
+recall_interval = (90 / (90 + fn_high), 90 / (90 + fn_low))
+assert tuple(round(100 * bound, 1) for bound in recall_interval) == (25.9, 43.3)
+assert fn_interval95(100, 100, 20) == (20, 20)
+```
+
+Этот расчёт учитывает только случайный отбор в группе первой линии.
+Если оператор выбирает самые трудные сообщения или часть выбранных
+обращений остаётся без метки, гипергеометрическая модель такого аудита
+уже не подходит. Интервал также ничего не говорит о новом трафике,
+если меняются пользователи или критерий технического сбоя.
+
 ### Какое наблюдение требует какого изменения
 
 Рост ошибок сервиса сначала требует проверки входного пути,
@@ -1282,6 +1424,7 @@ assert np.isclose(sum(weighted.values()), 1000.)
 «переобучать раз в сутки».
 
 <!-- BEGIN REVIEW: workflow feedback 2026-10-26 -->
+<a id="workflow-feedback-clocks"></a>
 ## Feedback loops do not share one clock
 
 A failed request can be visible immediately, while its final task outcome may
@@ -1299,7 +1442,7 @@ CC BY-NC-SA 4.0. Original English paragraph; only the index markup is removed.
 These cadences belong to the source's illustrative scenario, not prescribed
 clinical or operational intervals.*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/workflow-feedback-2026-10-26/feedback-timescales.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/workflow-feedback-2026-10-26/feedback-timescales.svg|На логарифмической шкале времени сопоставлены контуры обратной связи: от минутной проверки камеры до квартального пересмотра архитектуры.]]
 
 *Vijay Janapa Reddi and contributors, ML Workflow, complete original
 [feedback-timescales SVG](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/ml_workflow/images/svg/ml_workflow_feedback_timescales.svg),
@@ -1380,6 +1523,7 @@ missing task outcomes.
 
 <a id="минимальный-контракт-между-стадиями"></a>
 
+<a id="workflow-stage-contract"></a>
 ## Что передаётся следующей стадии
 
 Воспроизводимый цикл передаёт артефакт вместе с условиями,

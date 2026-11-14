@@ -1,0 +1,66 @@
+[
+  {
+    "id": "curated-kernels-20261103-32d1c64d0053",
+    "asset": "00 Учебник/Assets/Figures/curated/kernels-2026-11-03/sklearn-rbf-decision-grid.png",
+    "author": "The scikit-learn developers",
+    "source_url": "https://scikit-learn.org/1.9/auto_examples/svm/plot_rbf_parameters.html",
+    "source_image_url": "https://raw.githubusercontent.com/scikit-learn/scikit-learn.github.io/199d116ab37beed506c63fc9f6a74f56e228de43/1.9/_images/sphx_glr_plot_rbf_parameters_001.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/kernels-2026-11-03/sklearn-rbf-decision-grid.png",
+    "source_asset_sha256": "32d1c64d0053c29dce038e18e28b6b203617bc6c6eabebd3ca2a8965556ba33b",
+    "sha256": "32d1c64d0053c29dce038e18e28b6b203617bc6c6eabebd3ca2a8965556ba33b",
+    "dimensions_px": [
+      800,
+      600
+    ],
+    "commit": "199d116ab37beed506c63fc9f6a74f56e228de43",
+    "license": "BSD-3-Clause",
+    "license_url": "https://github.com/scikit-learn/scikit-learn/blob/866c0f51e7560ef0303cbcc5f159df5382ea9e3f/LICENSE",
+    "license_evidence": "site/public/licenses/scikit-learn-1.9.1-BSD-3-Clause.txt",
+    "license_evidence_sha256": "50d6a9d340f19ab355609917993114daf5f47e3161067bcf34955bbd05cd9cb0",
+    "derivation": "source-image-copy",
+    "modifications": "None. Complete original PNG copied byte-for-byte; no crop, relabeling, translation, redraw or resampling.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-11-03",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md"
+    ],
+    "width": 800,
+    "height": 600,
+    "bytes": 185339,
+    "source_page_snapshot": "05 Источники/Originals/kernels-2026-11-03/sklearn-rbf-parameters-1.9.1.py",
+    "source_page_sha256": "396ef426d23724920dbe4ebc477493729c882e49a5cfbb3cf6f90d13a2144bec"
+  },
+  {
+    "id": "curated-kernels-20261103-4ce8860a1230",
+    "asset": "00 Учебник/Assets/Figures/curated/kernels-2026-11-03/sklearn-rbf-validation-grid.png",
+    "author": "The scikit-learn developers",
+    "source_url": "https://scikit-learn.org/1.9/auto_examples/svm/plot_rbf_parameters.html",
+    "source_image_url": "https://raw.githubusercontent.com/scikit-learn/scikit-learn.github.io/199d116ab37beed506c63fc9f6a74f56e228de43/1.9/_images/sphx_glr_plot_rbf_parameters_002.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/kernels-2026-11-03/sklearn-rbf-validation-grid.png",
+    "source_asset_sha256": "4ce8860a12309b462ae25ca56601c68daf74bbf8533d5648ee8323261cb5009a",
+    "sha256": "4ce8860a12309b462ae25ca56601c68daf74bbf8533d5648ee8323261cb5009a",
+    "dimensions_px": [
+      800,
+      600
+    ],
+    "commit": "199d116ab37beed506c63fc9f6a74f56e228de43",
+    "license": "BSD-3-Clause",
+    "license_url": "https://github.com/scikit-learn/scikit-learn/blob/866c0f51e7560ef0303cbcc5f159df5382ea9e3f/LICENSE",
+    "license_evidence": "site/public/licenses/scikit-learn-1.9.1-BSD-3-Clause.txt",
+    "license_evidence_sha256": "50d6a9d340f19ab355609917993114daf5f47e3161067bcf34955bbd05cd9cb0",
+    "derivation": "source-image-copy",
+    "modifications": "None. Complete original PNG copied byte-for-byte; no crop, relabeling, translation, redraw or resampling.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-11-03",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md"
+    ],
+    "width": 800,
+    "height": 600,
+    "bytes": 27749,
+    "source_page_snapshot": "05 Источники/Originals/kernels-2026-11-03/sklearn-rbf-parameters-1.9.1.py",
+    "source_page_sha256": "396ef426d23724920dbe4ebc477493729c882e49a5cfbb3cf6f90d13a2144bec"
+  }
+]

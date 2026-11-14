@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "kind": "precision-accumulation-and-orientation-additions",
+  "source_manifest": "publishing/tools/precision-accumulation-sources.json",
+  "verification": {
+    "date": "2026-11-04",
+    "status": "verified-local-delta",
+    "chapterSha256": "9ba11a3d71afc7953e0c6c28582295b3e5cf749df46f91f2c2132f3eb89f411f",
+    "wholeOwnerRead": "All 421 input lines freshly read in 1–230 and 231–EOF. Full final explanation reread in 1–225, 226–465 and 466–EOF; the middle range was reread after inline math conversion and the end after removing the false separate-card promise. The last mobile-only table-header delta was reread in 594–612. Final file: 700 lines. No subsequent chapter edits.",
+    "preservation": "Five-file exact reversible journal restores the accepted 421-line 9a72e3c1… owner, both indexes, registry and illustration notice. Original two programs, nine display equations, six source-image paths/bytes and complete captions retained. Added two CPU programs, one display equation, one complete original figure, six existing alt aliases and 21 subject links per locale. One inaccurate finite-check sentence corrected and one self-returning reference-card promise removed; the old compatibility redirect remains intact.",
+    "explanation": "A full effective batch derives gradients 0.5+7.5=8, scaled buffer64+960=1024 and SGD parameter1→-1. Actual CPU GradScaler demonstrates early unscale producing960.5; a second unscale raises and step does not divide twice. Different scales give544, then8.5/4.25. Norm clipping derives the1/S threshold error for a nonzero gradient. A32×32 MX example places one2^20 outlier in row0/column0 and shows62 differing rowwise/columnwise cells,31 zeros in different positions; quantization is independently repeated from high precision.",
+    "source": "Input hash exactly matches the earlier accepted 2026-10-23 numerical-formats audit, which was read fully. Its bounded CS336/EDLS/PaLM/paper comparisons remain historical on unchanged content, not a new whole-course audit. Fresh PyTorch amp_examples.md typical training, full clipping/unscale and gradient accumulation sections read; GradScaler methods302–562 read including custom optimizer branch. Complete pinned TE mxfp8.rst read, including orientation and later implementation notes. Six source/license files byte-compared with pinned upstream; actual unscale_/step/update AST matches after docstring indentation normalization only.",
+    "style": "no-ai-slop SKILL and eval read fully; applied with local academic exceptions. Existing prose and source explanations preserved, new worked explanations left English without a translation pass. Original quotations, identifiers and figures not rewritten for style. Full explanation/source review is separate from the stylistic checklist.",
+    "examples": {
+      "exit": 0,
+      "command": "uv run --offline --python 3.13 --with numpy --with torch python publishing/tools/check_precision_accumulation.py",
+      "runtime": "PyTorch2.14.1, CPU",
+      "programs": 4,
+      "executedCpuPrograms": 3,
+      "cudaProgramsNotExecuted": 1,
+      "scope": "Actual three published CPU programs execute. All old BF16/FP16, master-weight,127 finite E4M3FN code and126 midpoint controls retained. Added actual early-unscale, duplicate-call rejection, six clipping scales, skipped update on Inf, no fresh finite check after post-unscale mutation, all1024 orientation cells and506 signed native E4M3 cast controls. Not a CUDA/Blackwell GEMM or performance experiment."
+    },
+    "originals": {
+      "command": "node publishing/tools/check_precision_sources.mjs --upstream",
+      "exit": 0,
+      "figureSha256": "603a59f25341ddbc04c0c9820cc3ebe054a0c713f95ddc89b88b4a63dccb21b0",
+      "scope": "Six full pinned source/license hashes matched upstream. The exact21-word PyTorch quotation matched its source. New complete650×450 SVG equals upstream plus unchanged stylesheet and an explicit modification notice; no crop or redraw. Original SVG/CSS are tracked public fixtures, not new private-archive test dependencies. Full TE Apache notice verified and PyTorch notice present."
+    },
+    "tests": {
+      "exit": 0,
+      "files": 5,
+      "tests": 214,
+      "htmlTests": 202,
+      "scope": "Final precision preservation/semantics, earlier arithmetic and roofline journal chains, both indexes and current built HTML. Earlier combined run passed all175 asset-registry cases but failed one arithmetic test that still read raw newer index bytes; corrected that test to restore its exact journal boundary, then all214 follow-up tests passed. Two exact source-style-bundle contracts rerun:2 pass,173 skipped. No whole-suite green claim for the initially failed command."
+    },
+    "build": {
+      "exit": 0,
+      "pages": 2007,
+      "pagefindHtmlFiles": 2011,
+      "durationSeconds": 28.72,
+      "brokenInternalLinks": 0,
+      "bytes": 855545570,
+      "files": 5615,
+      "limit": 1000000000,
+      "headroom": 144454430
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-04-precision-reader",
+      "desktop": "1280×900,document1280/1280,632px content. All seven complete original figures and captions personally inspected in the viewer: bit fields,two HF graphs,master weights,current/delayed scaling,block scales and new row/column layout. All10 display equations and seven tables fit;zero KaTeX errors.",
+      "mobile": "375×812,document375/375,343px content. All seven figures loaded and fit; all10 display formulas fit. New clipping derivation and numerical trace personally inspected. Initial MX table had internal376px width; first shorter labels did not fix it. Final Position/Input/By row/By column header retains every value and all seven tables now fit343/343. New complete SVG inspected whole and at1.5× with panning; temporary viewport reset.",
+      "navigation": "Actual RU reference clipping link -> exact anchor with visible derivation. Actual EN reference row/column link -> exact EN anchor and explicit canonical-language notice. EN Next ->data-pipeline H1; RU Previous ->arithmetic H1 and Back ->new MX section.21 destination anchors and all new material present in both interfaces; no separate English translation claimed.",
+      "transient": "Stale CUA binding recovered by documented troubleshooting,session reset and rebinding the same browser3/tab1. After a viewport change one direct hash navigation retained a stale scroll offset; actual reference navigation and later same-document hash navigation both reached the correct heading. No global navigation-fix claim."
+    },
+    "publication": "Local only; no staging, commit, push or deployment.",
+    "remaining": [
+      "64 of152 canonical owners still need this route pass. Next three ML Systems owners:data pipeline,profiling and Triton.",
+      "This does not claim complete thematic transfer of all CS336/EDLS/Harvard/NVIDIA source units. FP4/NVFP4 and MX scale-swizzle implementation coverage remain separate quantization/kernel integration work.",
+      "One CUDA AMP example is only syntax-checked. No CUDA underflow run,Blackwell kernel run,training-quality experiment or speedup measurement was performed.",
+      "Whole-book explanation/source closure,existing figure-rights caveats,public-checkout/Pages-base/frozen release checks and authorized dev/Pages publication remain pending."
+    ]
+  },
+  "review_date": "2026-11-04",
+  "files": [
+    {
+      "source": "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+      "before_sha256": "9a72e3c171518af749c26271e183bf35c55d2f98f76a146cf93c8d8404efa02d",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-23\nlast_verified: 2026-10-23",
+          "new": "last_updated: 2026-11-04\nlast_verified: 2026-11-04"
+        },
+        {
+          "old": "source_language: mixed\nsource_unit_id:",
+          "new": "source_language: mixed\nreference_terms:\n  - anchor: precision-bits\n    label: \"Представление числа с плавающей точкой\"\n    label_en: \"Floating-point representation\"\n  - anchor: precision-range\n    label: \"Диапазон и шаг FP32, FP16 и BF16\"\n    label_en: \"FP32, FP16, and BF16 range and spacing\"\n  - anchor: precision-subnormals\n    label: \"Субнормальные числа и underflow\"\n    label_en: \"Subnormal values and underflow\"\n  - anchor: precision-sums\n    label: \"Форматы входа, накопителя и результата\"\n    label_en: \"Input, accumulator, and output formats\"\n  - anchor: precision-input-error\n    label: \"Ошибка входа против ошибки накопления\"\n    label_en: \"Input error versus accumulation error\"\n  - anchor: precision-tf32\n    label: \"TF32 и политика FP32 matmul\"\n    label_en: \"TF32 and FP32 matmul policy\"\n  - anchor: precision-autocast\n    label: \"Политика autocast для разных операций\"\n    label_en: \"Operation-specific autocast policy\"\n  - anchor: precision-master\n    label: \"Малые обновления и master weights\"\n    label_en: \"Small updates and master weights\"\n  - anchor: precision-loss-scaling\n    label: \"Loss scaling, underflow и overflow\"\n    label_en: \"Loss scaling, underflow, and overflow\"\n  - anchor: precision-amp-step\n    label: \"Порядок одного AMP-шага\"\n    label_en: \"The order of an AMP step\"\n  - anchor: precision-accumulation\n    label: \"Накопление и вес токенов микропакета\"\n    label_en: \"Accumulation and microbatch token weights\"\n  - anchor: precision-accumulation-order\n    label: \"Полный шаг с накоплением и ошибки масштаба\"\n    label_en: \"A complete accumulated step and mixed scales\"\n  - anchor: precision-clipping-order\n    label: \"Почему clipping выполняют после unscale\"\n    label_en: \"Why clipping follows unscale\"\n  - anchor: precision-memory\n    label: \"Память Adam и native AMP\"\n    label_en: \"Adam and native AMP memory\"\n  - anchor: precision-bandwidth\n    label: \"Размер формата и нижняя граница времени\"\n    label_en: \"Format size and the memory-time bound\"\n  - anchor: precision-fp8\n    label: \"E4M3, E5M2 и масштаб тензора\"\n    label_en: \"E4M3, E5M2, and tensor scales\"\n  - anchor: precision-scaling-history\n    label: \"Current и delayed scaling\"\n    label_en: \"Current and delayed scaling\"\n  - anchor: precision-mxfp8\n    label: \"MXFP8 и локальные выбросы\"\n    label_en: \"MXFP8 and local outliers\"\n  - anchor: precision-mxfp8-orientation\n    label: \"MXFP8 по строкам и столбцам\"\n    label_en: \"Rowwise and columnwise MXFP8\"\n  - anchor: precision-validation\n    label: \"Проверка точности и скорости\"\n    label_en: \"Validating accuracy and speed\"\n  - anchor: precision-mfu\n    label: \"Выбор вычислительного пика для MFU\"\n    label_en: \"Choosing the compute peak for MFU\"\nsource_unit_id:\n  - pytorch-amp-effective-batch-order\n  - te-mxfp8-row-column-quantization"
+        },
+        {
+          "old": "## Сколько памяти и времени можно сэкономить",
+          "new": "\n<a id=\"precision-accumulation-order\"></a>\n\n### A complete accumulated step and two incorrect orders\n\nFor a scalar parameter $\\theta$, let two microbatches contain two and six\ntokens. Give every token in the first microbatch the loss $2\\theta$, and\nevery token in the second the loss $10\\theta$. The mean loss over all\neight tokens is $8\\theta$, so its gradient is 8. The two microbatches\ncontribute $2\\cdot2/8=0.5$ and $6\\cdot10/8=7.5$.\n\nWith a fixed loss scale $S=128$, the first backward pass writes 64 to\nthe gradient buffer. The second adds 960. The accumulated buffer is 1024;\none division by 128 recovers 8. Neither backward pass should clear the\nbuffer. The division by eight in each loss supplies token weighting;\nthe multiplication by 128 supplies loss scaling. These are separate operations.\n\n| Point in the step | Gradient buffer |\n|---|---:|\n| After the first scaled backward | 64 |\n| After the second scaled backward | 1024 |\n| After one unscale | 8 |\n| Parameter after SGD with learning rate 0.25, starting at 1 | -1 |\n\nPyTorch's [gradient accumulation instructions](https://docs.pytorch.org/docs/2.14/notes/amp_examples.html#gradient-accumulation)\nstate:\n\n> Also, grads should remain scaled, and the scale factor should remain constant, while grads for a given effective batch are accumulated.\n\nThe following example uses the actual CPU `GradScaler` API and autograd.\nIt deliberately uses FP32 scalar arithmetic without `autocast`: its purpose\nis to verify accumulation and optimizer ordering, not FP16 underflow or\nCUDA execution.\n\n~~~python\nimport torch\n\ntheta = torch.nn.Parameter(torch.tensor(1.0))\noptimizer = torch.optim.SGD([theta], lr=0.25)\nscaler = torch.amp.GradScaler(\"cpu\", init_scale=128.0)\noptimizer.zero_grad(set_to_none=True)\n\nfor count, slope in [(2, 2.0), (6, 10.0)]:\n    token_slopes = torch.full((count,), slope)\n    loss = (theta * token_slopes).sum() / 8\n    scaler.scale(loss).backward()\n\nassert theta.grad.item() == 1024.0\nscaler.unscale_(optimizer)\nassert theta.grad.item() == 8.0\nscaler.step(optimizer)\nscaler.update()\nassert theta.item() == -1.0\nprint(theta.grad.item(), theta.item())  # 8.0 -1.0\n~~~\n\nUnscaling after only the first microbatch changes 64 into 0.5. A subsequent\nscaled backward then adds 960, leaving 960.5. The buffer now mixes units.\nCalling `unscale_` a second time is not a repair: this API rejects a second\nunscale of the same optimizer before the next update. Calling `step`\nwithout that second call is also wrong. The scaler remembers the earlier\nunscale and does not divide again; ordinary SGD would use 960.5 as the\ngradient.\n\nChanging scales between microbatches causes a different mixture. Scaling\nthe first contribution by 128 and the second by 64 gives\n$64+480=544$. Dividing by 64 gives 8.5, while dividing by 128 gives\n4.25. A common final division cannot restore the desired sum 8 from\nthese differently scaled contributions.\n\n<a id=\"precision-clipping-order\"></a>\n\n### Clipping before unscale changes the threshold\n\nConsider an unscaled two-parameter gradient $g=(3,4)$, whose norm is 5.\nFor a norm threshold of 1, ideal norm clipping gives\n$g_{\\mathrm{clip}}=(0.6,0.8)$. With $S=8$, the scaled gradient is\n$(24,32)$, with norm 40. Clipping that vector to norm 1 also produces\n$(0.6,0.8)$, but a subsequent division by eight shrinks it to\n$(0.075,0.1)$, with norm 0.125. The intended threshold of 1 has become\n$1/S$ in unscaled units.\n\nFor nonzero $g$, positive $S$ and a nonnegative threshold $c$, the two orders are\n\n$$\n\\begin{aligned}\n\\operatorname{clip}(Sg,c)/S\n&=g\\min\\!\\left(1,\\frac{c}{S\\|g\\|}\\right),\\\\\n\\operatorname{clip}(g,c)\n&=g\\min\\!\\left(1,\\frac{c}{\\|g\\|}\\right).\n\\end{aligned}\n$$\n\nUnscale first, then clip the complete accumulated gradient. The displayed\nnumbers use the ideal norm formula; `clip_grad_norm_` adds a small\ndenominator epsilon, so its floating-point result is approximately\n$(0.6,0.8)$. The API ordering follows\n[PyTorch's clipping example](https://docs.pytorch.org/docs/2.14/notes/amp_examples.html#gradient-clipping);\nthe pinned [implementation of `unscale_` and `step`](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/torch/amp/grad_scaler.py#L302-L480)\nalso records the per-optimizer state that prevents a second automatic\ndivision. The source quotation is covered by the published\n[PyTorch license](/licenses/pytorch-v2.14.1-LICENSE.txt).\n\n## Сколько памяти и времени можно сэкономить"
+        },
+        {
+          "old": "## Как проверить, что ускорение не испортило обучение",
+          "new": "\n<a id=\"precision-mxfp8-orientation\"></a>\n\n### Rowwise and columnwise quantization retain different values\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-2026-11/te-mxfp8-row-column.svg|MXFP8: блоки 1×32 по строкам и 32×1 по столбцам с отдельными масштабами]]\n\n*Figure 2. MXFP8 rowwise vs columnwise quantization layout. NVIDIA Transformer\nEngine documentation contributors,\n[original SVG](https://github.com/NVIDIA/TransformerEngine/blob/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/docs/features/low_precision_training/mxfp8/img/mxfp8_row_col.svg),\n[Apache-2.0](/licenses/nvidia-transformer-engine-Apache-2.0.txt).\nThe complete 650×450 diagram, labels and geometry are retained. The unchanged\nupstream stylesheet is embedded for standalone display.*\n\nEach blue horizontal rectangle in the upper half is one group of 32\nelements along a row. The lower half groups 32 elements along a column.\nEach orange scale belongs to its own group. Turning the stored array\ndoes not recalculate these scales from the original high-precision values.\n\nFor a numerical example, fill a 32×32 matrix with ones and put $2^{20}$\nat position $(0,0)$. Use E4M3 values and the smallest power-of-two\nrestoration scale that keeps each group's maximum at or below 448.\nThe row containing the outlier needs $s=4096$; every other row needs\n$s=2^{-8}$. Thus rowwise quantization loses the other 31 ones in row\nzero. Columnwise quantization instead loses the other 31 ones in column\nzero. These are different positions:\n\n| Position | Input | By row | By column |\n|---|---:|---:|---:|\n| $(0,0)$ | $2^{20}$ | $2^{20}$ | $2^{20}$ |\n| $(0,1)$ | 1 | 0 | 1 |\n| $(1,0)$ | 1 | 1 | 0 |\n| $(1,1)$ | 1 | 1 | 1 |\n\nThe following CPU calculation casts normalized values to real E4M3FN,\nthen restores FP32 values. Its scale arrays contain powers of two but\nare stored in FP32 for inspection. It does not construct a hardware-packed\nMXFP8 tensor, swizzle scales or launch a Blackwell GEMM.\n\n~~~python\nimport torch\n\nvalues = torch.ones((32, 32), dtype=torch.float32)\nvalues[0, 0] = 2**20\n\ndef rowwise_roundtrip(matrix):\n    amax = matrix.abs().amax(dim=1, keepdim=True)\n    scale = torch.pow(2.0, torch.ceil(torch.log2(amax / 448.0)))\n    normalized = matrix / scale\n    restored = normalized.to(torch.float8_e4m3fn).float() * scale\n    return restored, scale\n\nrowwise, row_scale = rowwise_roundtrip(values)\ncolumnwise_t, column_scale = rowwise_roundtrip(values.T)\ncolumnwise = columnwise_t.T\n\nassert row_scale[0, 0].item() == 4096.0\nassert row_scale[1, 0].item() == 2**-8\nassert rowwise[0, 1].item() == 0.0\nassert columnwise[0, 1].item() == 1.0\nassert rowwise[1, 0].item() == 1.0\nassert columnwise[1, 0].item() == 0.0\nassert not torch.equal(rowwise.T, columnwise_t)\nprint(int((rowwise == 0).sum()), int((columnwise == 0).sum()))  # 31 31\n~~~\n\nHere `rowwise_roundtrip` assumes nonzero finite groups. A general quantizer\nalso needs policies for zero groups, nonfinite values and the available\nscale range. The example isolates the orientation error without those\ncases. Once the 31 small values have disappeared, a transpose cannot\nrecover them. To prepare the other orientation, quantize the high-precision\nsource again. This is the constraint in NVIDIA's\n[Handling transposes](https://docs.nvidia.com/deeplearning/transformer-engine/features/low_precision_training/mxfp8/mxfp8.html#handling-transposes);\nit does not mean every columnwise GEMM must physically transpose its inputs.\n\n## Как проверить, что ускорение не испортило обучение"
+        },
+        {
+          "old": "## Как биты превращаются в число",
+          "new": "<a id=\"precision-bits\"></a>\n\n## Как биты превращаются в число"
+        },
+        {
+          "old": "### Диапазон и точность — разные свойства",
+          "new": "<a id=\"precision-range\"></a>\n\n### Диапазон и точность — разные свойства"
+        },
+        {
+          "old": "### Что происходит около нуля",
+          "new": "<a id=\"precision-subnormals\"></a>\n\n### Что происходит около нуля"
+        },
+        {
+          "old": "## Почему длинные суммы требуют отдельного внимания",
+          "new": "<a id=\"precision-sums\"></a>\n\n## Почему длинные суммы требуют отдельного внимания"
+        },
+        {
+          "old": "### Ошибка входа и ошибка накопления",
+          "new": "<a id=\"precision-input-error\"></a>\n\n### Ошибка входа и ошибка накопления"
+        },
+        {
+          "old": "### TF32: хранение FP32, вычисление с меньшей точностью",
+          "new": "<a id=\"precision-tf32\"></a>\n\n### TF32: хранение FP32, вычисление с меньшей точностью"
+        },
+        {
+          "old": "### Какие операции оставляют более точными",
+          "new": "<a id=\"precision-autocast\"></a>\n\n### Какие операции оставляют более точными"
+        },
+        {
+          "old": "## Как сохранить маленькое обновление веса",
+          "new": "<a id=\"precision-master\"></a>\n\n## Как сохранить маленькое обновление веса"
+        },
+        {
+          "old": "## Loss scaling: как не потерять малый градиент",
+          "new": "<a id=\"precision-loss-scaling\"></a>\n\n## Loss scaling: как не потерять малый градиент"
+        },
+        {
+          "old": "### Один шаг AMP в PyTorch",
+          "new": "<a id=\"precision-amp-step\"></a>\n\n### Один шаг AMP в PyTorch"
+        },
+        {
+          "old": "### Накопление градиентов по микропакетам",
+          "new": "<a id=\"precision-accumulation\"></a>\n\n### Накопление градиентов по микропакетам"
+        },
+        {
+          "old": "## Сколько памяти и времени можно сэкономить",
+          "new": "<a id=\"precision-memory\"></a>\n\n## Сколько памяти и времени можно сэкономить"
+        },
+        {
+          "old": "### Пример операции, ограниченной пропускной способностью памяти",
+          "new": "<a id=\"precision-bandwidth\"></a>\n\n### Пример операции, ограниченной пропускной способностью памяти"
+        },
+        {
+          "old": "## FP8: зачем тензору собственный масштаб",
+          "new": "<a id=\"precision-fp8\"></a>\n\n## FP8: зачем тензору собственный масштаб"
+        },
+        {
+          "old": "### Текущий масштаб и масштаб по истории",
+          "new": "<a id=\"precision-scaling-history\"></a>\n\n### Текущий масштаб и масштаб по истории"
+        },
+        {
+          "old": "## MXFP8: один масштаб на небольшой блок",
+          "new": "<a id=\"precision-mxfp8\"></a>\n\n## MXFP8: один масштаб на небольшой блок"
+        },
+        {
+          "old": "## Как проверить, что ускорение не испортило обучение",
+          "new": "<a id=\"precision-validation\"></a>\n\n## Как проверить, что ускорение не испортило обучение"
+        },
+        {
+          "old": "### Почему после смены формата меняется знаменатель MFU",
+          "new": "<a id=\"precision-mfu\"></a>\n\n### Почему после смены формата меняется знаменатель MFU"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-float-bits.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-float-bits.png|Биты знака, экспоненты и дробной части в FP16, BF16 и двух форматах FP8]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/hf-format-ranges.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/hf-format-ranges.png|Диапазоны положительных нормальных значений FP32, FP16 и BF16]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/hf-format-resolution.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/hf-format-resolution.png|Округление выборки значений от 1 до 2 в FP32, FP16 и BF16]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-master-weights.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-master-weights.svg|Две организации FP32-параметров и рабочих весов пониженной точности]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-current-delayed-scaling.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-current-delayed-scaling.svg|Current scaling с текущим amax и delayed scaling с историей максимумов]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-mxfp8-blocks.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-mxfp8-blocks.png|Общий масштаб FP8 и отдельные масштабы блоков MXFP8]]"
+        },
+        {
+          "old": "`autocast` охватывает прямой проход и вычисление loss. Обратный проход выполняется вне этого контекста: он использует типы, выбранные соответствующими операциями прямого прохода. Перед ограничением нормы градиента вызывается `unscale_`, иначе порог ограничения будет применён к увеличенному в $S$ раз градиенту. `scaler.step` проверяет нечисловые значения и при необходимости пропускает шаг оптимизатора.",
+          "new": "`autocast` охватывает прямой проход и вычисление loss. Обратный проход выполняется вне этого контекста: он использует типы, выбранные соответствующими операциями прямого прохода. Перед ограничением нормы градиента вызывается `unscale_`, иначе порог ограничения будет применён к увеличенному в $S$ раз градиенту. `unscale_` также проверяет градиенты на `Inf` и `NaN`; `scaler.step` использует результат этой проверки и при необходимости пропускает обновление. После явного `unscale_` он не проверяет произвольно изменённые градиенты повторно."
+        },
+        {
+          "old": "- [NVIDIA Transformer Engine — FP8 primer](https://docs.nvidia.com/deeplearning/transformer-engine/examples/fp8_primer.html): рецепты низкой точности; источник рисунков о форматах, весах и MXFP8.\n- [[02 Areas/ML & DL/Concepts/Training/Mixed Precision Training|Mixed Precision Training — справочная карточка]]: краткое сопоставление AMP, loss scaling и форматов.",
+          "new": "- [NVIDIA Transformer Engine — FP8 primer](https://docs.nvidia.com/deeplearning/transformer-engine/examples/fp8_primer.html): рецепты низкой точности; источник рисунков о форматах, весах и MXFP8."
+        }
+      ],
+      "after_sha256": "9ba11a3d71afc7953e0c6c28582295b3e5cf749df46f91f2c2132f3eb89f411f"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "ce03e991f13338d2ec19d92444c44714bc0254325c6e830b9c9cd8b9073beb19",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision|Численные форматы и mixed precision]]",
+          "new": "- [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision|Численные форматы и mixed precision]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-bits|Представление числа с плавающей точкой]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-range|Диапазон и шаг FP32, FP16 и BF16]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-subnormals|Субнормальные числа и underflow]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-sums|Форматы входа, накопителя и результата]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-input-error|Ошибка входа против ошибки накопления]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-tf32|TF32 и политика FP32 matmul]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-autocast|Политика autocast для разных операций]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-master|Малые обновления и master weights]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-loss-scaling|Loss scaling, underflow и overflow]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-amp-step|Порядок одного AMP-шага]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-accumulation|Накопление и вес токенов микропакета]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-accumulation-order|Полный шаг с накоплением и ошибки масштаба]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-clipping-order|Почему clipping выполняют после unscale]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-memory|Память Adam и native AMP]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-bandwidth|Размер формата и нижняя граница времени]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-fp8|E4M3, E5M2 и масштаб тензора]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-scaling-history|Current и delayed scaling]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-mxfp8|MXFP8 и локальные выбросы]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-mxfp8-orientation|MXFP8 по строкам и столбцам]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-validation|Проверка точности и скорости]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-mfu|Выбор вычислительного пика для MFU]]"
+        }
+      ],
+      "after_sha256": "99f7d47d07300ad8fd1ccb9dfe4485e8acba38438d1db28f4948201860a6f08e"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "c73ab01cc74b14d25b5dc6553e3bbbba18f043cbeab14506cde78164020ecf71",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision|Numerical formats and mixed precision]]",
+          "new": "- [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision|Numerical formats and mixed precision]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-bits|Floating-point representation]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-range|FP32, FP16, and BF16 range and spacing]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-subnormals|Subnormal values and underflow]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-sums|Input, accumulator, and output formats]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-input-error|Input error versus accumulation error]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-tf32|TF32 and FP32 matmul policy]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-autocast|Operation-specific autocast policy]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-master|Small updates and master weights]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-loss-scaling|Loss scaling, underflow, and overflow]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-amp-step|The order of an AMP step]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-accumulation|Accumulation and microbatch token weights]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-accumulation-order|A complete accumulated step and mixed scales]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-clipping-order|Why clipping follows unscale]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-memory|Adam and native AMP memory]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-bandwidth|Format size and the memory-time bound]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-fp8|E4M3, E5M2, and tensor scales]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-scaling-history|Current and delayed scaling]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-mxfp8|MXFP8 and local outliers]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-mxfp8-orientation|Rowwise and columnwise MXFP8]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-validation|Validating accuracy and speed]]\n  - [[00 Учебник/10 ML Systems/05 Численные форматы и mixed precision#precision-mfu|Choosing the compute peak for MFU]]"
+        }
+      ],
+      "after_sha256": "197e9a92dcca1915278024661e6a9e68bb5ee2436597c32eda896d7f4b987220"
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "e5d3db47ce22126d1026d7cf36d88057aa9847057c4a80d9b66c15a405c2c8f2",
+      "changes": [
+        {
+          "old": "  - id: curated-precision-te-current-delayed-a40da6563f7f",
+          "new": "  - id: curated-precision-te-row-column-603a59f25341\n    asset: 00 Учебник/Assets/Figures/curated/precision-2026-11/te-mxfp8-row-column.svg\n    author: NVIDIA Transformer Engine documentation contributors\n    source_url: https://github.com/NVIDIA/TransformerEngine/blob/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/docs/features/low_precision_training/mxfp8/img/mxfp8_row_col.svg\n    source_image_url: https://raw.githubusercontent.com/NVIDIA/TransformerEngine/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/docs/features/low_precision_training/mxfp8/img/mxfp8_row_col.svg\n    commit: eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc\n    source_asset: publishing/fixtures/precision-originals/mxfp8_row_col.svg\n    source_asset_sha256: cdc2c974507032f145af51b9a4be128a63419a9cd22515b6a31e81a2005bc337\n    source_stylesheet_asset: publishing/fixtures/precision-originals/diagram-colors.css\n    source_stylesheet_url: https://raw.githubusercontent.com/NVIDIA/TransformerEngine/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/docs/_static/css/diagram-colors.css\n    source_stylesheet_sha256: ee997e774be6887f4a6ed2f26a14702386ef71e60e7aca4071464bcf650c3c5f\n    sha256: 603a59f25341ddbc04c0c9820cc3ebe054a0c713f95ddc89b88b4a63dccb21b0\n    license: Apache-2.0\n    license_url: https://github.com/NVIDIA/TransformerEngine/blob/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/LICENSE\n    derivation: source-svg-style-bundle\n    modifications: \"Unchanged upstream stylesheet embedded with a modification notice. Complete 650x450 diagram, viewBox, geometry and English labels retained. No crop, translated labels or redrawing. Original SVG/CSS are retained as tracked verification fixtures.\"\n    used_in:\n      - 00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md\n    metadata_status: verified\n    provenance_confirmation: pinned-upstream-repository\n    last_verified: 2026-11-04\n\n  - id: curated-precision-te-current-delayed-a40da6563f7f"
+        }
+      ],
+      "after_sha256": "7562cda0c0305a21feed235b4405ebebceb2febf56af080be9dbdbfcedb21840"
+    },
+    {
+      "source": "site/public/licenses/precision-visuals-NOTICE.txt",
+      "before_sha256": "401cc81009cdf2812e1cf9693093884d51e7218d8ca4d230332a4a029eb55335",
+      "changes": [
+        {
+          "old": "Precision chapter illustration notices",
+          "new": "Precision chapter illustration notices\n\nte-mxfp8-row-column.svg retains the complete MXFP8 rowwise/columnwise SVG\nfrom NVIDIA Transformer Engine revision eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc.\nThe unchanged upstream stylesheet is embedded for standalone display; a\nmodification notice is inside the SVG. Full geometry and English labels are\nunchanged. Original SVG/CSS are tracked in publishing/fixtures/precision-originals.\nApache-2.0 is reproduced in nvidia-transformer-engine-Apache-2.0.txt.\n"
+        }
+      ],
+      "after_sha256": "8b3272d5a6c8f263f84e8431c96de334d60fe12b32aa3c7d486df908032ada46"
+    }
+  ],
+  "created": [
+    "publishing/fixtures/precision-originals/mxfp8_row_col.svg",
+    "publishing/fixtures/precision-originals/diagram-colors.css",
+    "00 Учебник/Assets/Figures/curated/precision-2026-11/te-mxfp8-row-column.svg"
+  ]
+}

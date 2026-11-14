@@ -1,0 +1,164 @@
+{
+  "date": "2026-11-03",
+  "scope": "Whole augmentation-owner reading review, source-faithful composition gallery/excerpt and sixteen reference terms; no translation or publication.",
+  "status": "local augmentation delta verified; whole-book/course/release work remains",
+  "explanation": {
+    "wholeBeforeRead": "Entire697-line baseline read; ranges1-320,321-399,400-560,561-EOF cover the full owner.",
+    "freshSourceReads": [
+      "Entire464-line pinned D2L Image Augmentation Markdown, both framework variants and all selected examples/training/exercises.",
+      "Archived D2L HTML composition section, both PyTorch and MXNet panels. Chosen original is PyTorch output81, not MXNet output84.",
+      "Full archived CC BY-SA4.0 license read. Compose official documentation checked; raw source gallery visually inspected before import."
+    ],
+    "reusedSourceComparisons": [
+      "docs/audit/2026-10-28-data-augmentation.md: Mixup/CutMix, policy search, back-translation, KWS identities and TTA mechanisms compared with specific primary sections. These earlier full-paper-section comparisons are reused, not claimed freshly reread."
+    ],
+    "findings": [
+      "Detailed existing explanation is retained; no wholesale rewrite needed.",
+      "No chapter reference_terms: sixteen core mechanisms were not individually reachable from the subject index.",
+      "Composition had code-level description but no own source gallery connecting repeated random calls to policy selection."
+    ],
+    "changes": [
+      "One unchanged original D2L PyTorch composition gallery and original colour/Compose excerpts added, with complete attribution and run/algorithm boundaries.",
+      "Sixteen subject terms in RU/EN generated from chapter metadata; body remains its original English.",
+      "All nine runnable programs, both old archival excerpts, all displayed derivations and all three old originals/captions retained. One new archival excerpt and one original gallery added."
+    ],
+    "style": "no-ai-slop skill/eval read; source quotes/code preserved. New prose explains operation order, sampling and label semantics without synthetic overview."
+  },
+  "remaining": [
+    "This bounded chapter delta does not close Harvard source-unit gaps for simulator generation, domain randomization/adaptation, privacy, distillation or all course integration.",
+    "AutoAugment/RandAugment source papers were located, but this turn establishes no new reproduction license for their figures. D2L composition gallery is not mislabelled as a search-controller diagram."
+  ],
+  "files": [
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований.md",
+      "before_sha256": "d35a256a67948d010ba6a0e3feae9a3d3d2c7856d47be695f9570c8750d3ddd7",
+      "after_sha256": "a152a674e2852ff85127dc5f2cd2fe12298b7b663666ad5114a357172127ca5b",
+      "changes": [
+        {
+          "old": "source_language: en\n",
+          "new": "source_language: en\nreference_terms:\n  - label: Аугментация входа и разметки\n    label_en: Joint input and target augmentation\n    anchor: augmentation-target\n  - label: Crop — площадь, масштаб и интерполяция\n    label_en: Crop area, scale and interpolation\n    anchor: augmentation-crop-scale\n  - label: Ожидаемая функция потерь при аугментации\n    label_en: Expected augmentation objective\n    anchor: augmentation-objective\n  - label: Cutout и фотометрические преобразования\n    label_en: Cutout and photometric transformations\n    anchor: augmentation-views\n  - label: Значение заполнения до и после нормализации\n    label_en: Fill values before and after normalization\n    anchor: augmentation-fill-units\n  - label: Mixup — мягкая метка и градиент\n    label_en: Mixup soft targets and gradients\n    anchor: mixup\n  - label: Mixup — Beta-распределение и пары примеров\n    label_en: Mixup Beta sampling and example pairing\n    anchor: mixup-beta\n  - label: CutMix — фактическая площадь вставки\n    label_en: CutMix actual patch area\n    anchor: cutmix\n  - label: Шаг оптимизатора с CutMix\n    label_en: One optimizer step with CutMix\n    anchor: cutmix-full-step\n  - label: Compose — последовательность случайных преобразований\n    label_en: Compose and sampled transform sequences\n    anchor: augmentation-composition\n  - label: AutoAugment — поиск политики\n    label_en: AutoAugment policy search\n    anchor: autoaugment-controller\n  - label: RandAugment — N и M\n    label_en: RandAugment N and M\n    anchor: randaugment-n-m\n  - label: Аугментация текста и back-translation\n    label_en: Text augmentation and back-translation\n    anchor: text-audio-augmentation\n  - label: Исходные записи и разбиение данных\n    label_en: Original recordings and data splits\n    anchor: augmentation-parent-split\n  - label: Аугментация при обучении и проверке\n    label_en: Training and evaluation augmentation\n    anchor: augmentation-evaluation\n  - label: TTA — усреднение вероятностей и логитов\n    label_en: TTA probability and logit averaging\n    anchor: tta-averaging\n"
+        },
+        {
+          "old": "last_updated: 2026-10-28\nlast_verified: 2026-10-28",
+          "new": "last_updated: 2026-11-03\nlast_verified: 2026-11-03"
+        },
+        {
+          "old": "### Crop size, scale, and interpolation",
+          "new": "<a id=\"augmentation-crop-scale\"></a>\n\n### Crop size, scale, and interpolation"
+        },
+        {
+          "old": "The fill value has units.",
+          "new": "<a id=\"augmentation-fill-units\"></a>\n\nThe fill value has units."
+        },
+        {
+          "old": "The paper samples $\\lambda\\sim\\operatorname{Beta}(\\alpha,\\alpha)$.",
+          "new": "<a id=\"mixup-beta\"></a>\n\nThe paper samples $\\lambda\\sim\\operatorname{Beta}(\\alpha,\\alpha)$."
+        },
+        {
+          "old": "### One optimizer step with the mixed target",
+          "new": "<a id=\"cutmix-full-step\"></a>\n\n### One optimizer step with the mixed target"
+        },
+        {
+          "old": "### Count original recordings, not only augmented files",
+          "new": "<a id=\"augmentation-parent-split\"></a>\n\n### Count original recordings, not only augmented files"
+        },
+        {
+          "old": "Averaging probabilities and averaging logits give different predictors.",
+          "new": "<a id=\"tta-averaging\"></a>\n\nAveraging probabilities and averaging logits give different predictors."
+        },
+        {
+          "old": "In [AutoAugment, §3]",
+          "new": "<a id=\"augmentation-composition\"></a>\n\n### Compose applies the selected operations in order\n\n> In practice, we will combine multiple image augmentation methods.\n\n[D2L, Combining Multiple Image Augmentation Methods](https://d2l.ai/chapter_computer-vision/image-augmentation.html#combining-multiple-image-augmentation-methods),\nCC BY-SA 4.0. The following original PyTorch excerpts use the earlier\n`apply` helper, `shape_aug`, the source photograph `img`, and `torchvision`.\n\n```python title=\"D2L source excerpts: colour transform and composition\"\ncolor_aug = torchvision.transforms.ColorJitter(\n    brightness=0.5, contrast=0.5, saturation=0.5, hue=0.5)\naugs = torchvision.transforms.Compose([\n    torchvision.transforms.RandomHorizontalFlip(), color_aug, shape_aug])\napply(img, augs)\n```\n\n![[00 Учебник/Assets/Figures/curated/augmentation-composition-2026-11-03/d2l-composed-transforms.svg|Original D2L PyTorch gallery of reflection, colour jitter and resized crop]]\n\n*Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola,\n[D2L, Combining Multiple Image Augmentation Methods](https://d2l.ai/chapter_computer-vision/image-augmentation.html#combining-multiple-image-augmentation-methods),\n[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).\nComplete original eight-panel PyTorch output, unchanged. This saved gallery\nshows repeated calls to the fixed composition above; it is not an\nAutoAugment search result or a local recognition experiment.*\n\nThe pipeline first samples horizontal reflection, then colour changes,\nthen a crop that is resized to the output dimensions. Each panel comes\nfrom the same list of operations, with new random choices. In the final\npanel, only a small part of the cat remains; a valid output size does not\nensure that the original class is still recognizable.\n\n`Compose` specifies how to apply this list. Choosing the list and its\nparameters is still a separate task. AutoAugment searches over such choices,\nwhile RandAugment restricts which policy parameters are tuned.\n\n<a id=\"autoaugment-controller\"></a>\n\n### AutoAugment separates policy search from final training\n\nIn [AutoAugment, §3]"
+        },
+        {
+          "old": "[RandAugment, §3](https://arxiv.org/html/1909.13719v2#S3) uses",
+          "new": "<a id=\"randaugment-n-m\"></a>\n\n### RandAugment tunes the operation count and shared magnitude\n\n[RandAugment, §3](https://arxiv.org/html/1909.13719v2#S3) uses"
+        },
+        {
+          "old": "The two labelled source excerpts retain their",
+          "new": "The three labelled source excerpts retain their"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "01189a8e25f8f53d51252f6ccdbe7d4b1b6d593225a02f3d0da183d889c091d3",
+      "after_sha256": "de9e47a7baa2e53ccc78c44e5776d9af4c5ee06a848451e81ced21a5d13b5c11",
+      "changes": [
+        {
+          "old": "assets:\n",
+          "new": "assets:\n  - {\"id\":\"curated-augmentation-d2l-composition-1ccc8d5cbf7f\",\"asset\":\"00 Учебник/Assets/Figures/curated/augmentation-composition-2026-11-03/d2l-composed-transforms.svg\",\"author\":\"Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola\",\"title\":\"Original PyTorch gallery: horizontal reflection, ColorJitter and resized crop\",\"source_url\":\"https://d2l.ai/chapter_computer-vision/image-augmentation.html#combining-multiple-image-augmentation-methods\",\"source_image_url\":\"https://d2l.ai/_images/output_image-augmentation_7d0887_81_0.svg\",\"commit\":\"23d7a5aecceee57d1292c56e90cce307f183bb0a\",\"source_asset\":\"05 Источники/Originals/augmentation-composition-2026-11-03/d2l-pytorch-composed-transforms.svg\",\"source_asset_sha256\":\"1ccc8d5cbf7f8dc340ca38e0dd2cf6aa9b915ec07c61d3d2a5be8dd7985e4c8f\",\"sha256\":\"1ccc8d5cbf7f8dc340ca38e0dd2cf6aa9b915ec07c61d3d2a5be8dd7985e4c8f\",\"bytes\":191159,\"source_viewbox\":[0,0,465.600016,237.203471],\"source_page_snapshot\":\"05 Источники/Originals/data-augmentation-2026-10-28/d2l/web.html\",\"source_page_sha256\":\"cad422db3d3ae48787b46969db565b144152653e76f79801f0c693b5c364b66a\",\"source_evidence_location\":\"Archived HTML, Combining Multiple Image Augmentation Methods: PyTorch panel pytorch-17-0, output81. MXNet output84 was inspected as a separate candidate and is not the published gallery.\",\"source_code_snapshot\":\"05 Источники/Originals/data-augmentation-2026-10-28/d2l/image-augmentation.md\",\"source_code_sha256\":\"43a9ee3dafcaef44e3295ec81341529a2a1716d87fdcc0a548ecee91cc291357\",\"license\":\"CC BY-SA 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by-sa/4.0/\",\"license_evidence\":\"05 Источники/Originals/data-augmentation-2026-10-28/d2l/LICENSE\",\"license_evidence_sha256\":\"a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\",\"public_license_copy\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"derivation\":\"source-svg-copy\",\"modifications\":\"None. Complete saved PyTorch output with eight embedded raster panels, copied byte-for-byte; no crop, redraw, translation, relabeling, resampling or recompression. Saved rendered output is pinned by its own bytes and archived HTML, not claimed reproduced from a code commit or local random seed.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований.md\"]}\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "573b9877cde575996872a0f06dc53e9c9c269a155f39dc6bcb9a86ccd888e166",
+      "after_sha256": "4926d6cafbf86d275c371fab2479c47a974e2f55c3adf90254f182dca39a6382",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований|Аугментация данных — Mixup, CutMix и политики преобразований]]",
+          "new": "- [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований|Аугментация данных — Mixup, CutMix и политики преобразований]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#augmentation-target|Аугментация входа и разметки]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#augmentation-crop-scale|Crop — площадь, масштаб и интерполяция]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#augmentation-objective|Ожидаемая функция потерь при аугментации]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#augmentation-views|Cutout и фотометрические преобразования]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#augmentation-fill-units|Значение заполнения до и после нормализации]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#mixup|Mixup — мягкая метка и градиент]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#mixup-beta|Mixup — Beta-распределение и пары примеров]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#cutmix|CutMix — фактическая площадь вставки]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#cutmix-full-step|Шаг оптимизатора с CutMix]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#augmentation-composition|Compose — последовательность случайных преобразований]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#autoaugment-controller|AutoAugment — поиск политики]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#randaugment-n-m|RandAugment — N и M]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#text-audio-augmentation|Аугментация текста и back-translation]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#augmentation-parent-split|Исходные записи и разбиение данных]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#augmentation-evaluation|Аугментация при обучении и проверке]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#tta-averaging|TTA — усреднение вероятностей и логитов]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "c38c73e19c52d9d3d801f10ca4a23b57928796b4048766d3564bdd81f2d61862",
+      "after_sha256": "d4746cb14e2223f45b55a98b6b9989c8c9517ff1bfda3f3fd7c5641db4cd6754",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований|Data augmentation: Mixup, CutMix, and transformation policies]] · **EN original**",
+          "new": "- [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований|Data augmentation: Mixup, CutMix, and transformation policies]] · **EN original**\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#augmentation-target|Joint input and target augmentation]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#augmentation-crop-scale|Crop area, scale and interpolation]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#augmentation-objective|Expected augmentation objective]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#augmentation-views|Cutout and photometric transformations]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#augmentation-fill-units|Fill values before and after normalization]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#mixup|Mixup soft targets and gradients]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#mixup-beta|Mixup Beta sampling and example pairing]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#cutmix|CutMix actual patch area]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#cutmix-full-step|One optimizer step with CutMix]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#augmentation-composition|Compose and sampled transform sequences]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#autoaugment-controller|AutoAugment policy search]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#randaugment-n-m|RandAugment N and M]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#text-audio-augmentation|Text augmentation and back-translation]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#augmentation-parent-split|Original recordings and data splits]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#augmentation-evaluation|Training and evaluation augmentation]]\n  - [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований#tta-averaging|TTA probability and logit averaging]]"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "chapterSha256": "a152a674e2852ff85127dc5f2cd2fe12298b7b663666ad5114a357172127ca5b",
+    "wholeBeforeRead": true,
+    "wholeFinalRead": true,
+    "examples": {
+      "exit": 0,
+      "publishedFences": 12,
+      "runnableFences": 9,
+      "archivalExcerpts": 3,
+      "torch": "2.14.1",
+      "numpy": "2.5.4",
+      "device": "CPU",
+      "command": "uv run --offline --python 3.13 --with torch==2.14.1 --with numpy==2.5.4 python publishing/tools/check_data_augmentation_examples.py",
+      "scope": "All nine actual current CPU programs run in page order;630 box cases,12 augmented objectives,372 Mixup CE/gradient cases,405 CutMix cases,8 policy outcomes,9 TTA cases. Three labelled source excerpts remain archival; no source image-pipeline rerun, CIFAR/Fashion-MNIST download, recognition experiment or GPU benchmark."
+    },
+    "reader": {
+      "evidence": "docs/audit/evidence/2026-11-03-augmentation-reader",
+      "desktop": "Confirmed1280x720: all four complete originals and full adjacent captions inspected in viewer; source composition excerpt/gallery also inspected inline. Document1265/1265; zero KaTeX errors/display-math overflow.",
+      "mobile": "All four full originals and captions inspected at actual381px narrow width; initial screenshots relabelled narrow381, not misreported as desktop. At390x844 document375/375, four inline originals343px, zero KaTeX errors/display-math overflow. SimCLR at2.5x center/left/right with operation labels readable. CutMix at2x left and right content; observed pan1..344px of359px, all label/metric columns visible across views. Full new eight-panel composition gallery inspected in390px fit. Natural source raster detail is unchanged, not enhanced.",
+      "navigation": "Actual RU reference -> #augmentation-composition; EN reference -> #randaugment-n-m. EN retains all twelve code fences/four originals and native English body, without a false translation/fallback warning. Actual EN previous/next main-route clicks reach Dropout/CNN, confirmed h1 and /en/ URLs. Temporary source tab closed and viewport reset.",
+      "finalRead": "Entire803-line final owner covered by1-290,291-560,561-EOF; output-truncated archival CutMix lines418-449 separately reread. No chapter edit after final read/build."
+    },
+    "htmlAndPreservation": {
+      "exit": 0,
+      "files": 7,
+      "tests": 378
+    },
+    "build": {
+      "exit": 0,
+      "routes": 2007,
+      "bytes": 852008378,
+      "files": 5596,
+      "htmlFiles": 2011,
+      "headroom": 147991622,
+      "brokenInternalLinks": 0,
+      "linkEvidence": "Complete emitted route/fragment/file validation in final passing site-output suite."
+    },
+    "sourceOriginalCheck": "prepare_augmentation_composition_figures.mjs --check passed: public SVG equals original PyTorch output81 byte-for-byte, eight embedded panels, no external image references, archived HTML/code/license hashes and public license copy match.",
+    "crossChapterIntegration": "Broader asset registration check exposed missing support for the prior normalization notebook-derived figures. Added an exact notebook-output/PNG/license validation branch, not a generic exemption. Final full seven-file run passes.",
+    "consoleWarnings": "Existing source-PDF Poppler closepath warnings occurred during asset validation; the check exited0. They are not a claim of visual acceptance of every historical PDF.",
+    "topicIndex": {
+      "topics": 152,
+      "locales": 2,
+      "terms": 16
+    },
+    "published": false
+  }
+}

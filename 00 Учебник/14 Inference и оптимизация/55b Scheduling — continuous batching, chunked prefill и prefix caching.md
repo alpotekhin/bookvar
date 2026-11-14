@@ -2,7 +2,7 @@
 title: "Scheduling: continuous batching, chunked prefill и prefix caching"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-30
+last_updated: 2026-11-11
 last_verified: 2026-10-25
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention]]"
@@ -24,6 +24,8 @@ primary_sources:
   - https://github.com/sgl-project/sglang/blob/bab9c81fea62c2d20b646736c918c88fea54b7a2/python/sglang/srt/managers/schedule_policy.py
   - https://www.aleksagordic.com/blog/vllm
   - https://huggingface.co/blog/continuous_batching
+  - https://arxiv.org/html/2401.08671v1#S3.F3
+  - https://huggingface.co/blog/faster-transformers#continuous-batching--paged-attention
 ---
 
 # Scheduling: continuous batching, chunked prefill и prefix caching
@@ -66,12 +68,21 @@ $20/32=62{,}5\%$.
 в пакет до завершения всей группы. При фиксированных формах тензоров возникают
 и лишние вычисления над строками завершённых запросов.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/anyscale-static-batching.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scheduling-source-2026-11-11/hf-static-batching.png|Пять запросов в фиксированном пакете. У второй последовательности после EOS в позиции t4 остаются три пустые ячейки, пока длинные последовательности продолжаются.]]
 
-*После завершения коротких последовательностей справа от `END` остаются
-незаполненные места. Это схема фиксированной группы, а не трасса GPU-ядер.
-Иллюстрация Anyscale, включённая в [Stanford CS336, Lecture 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L553);
-[исходная статья](https://www.anyscale.com/blog/continuous-batching-llm-inference).*
+*Aritra Roy Gosthipaty и соавторы, Hugging Face,
+[Tricks from OpenAI gpt-oss, рис. 8](https://huggingface.co/blog/faster-transformers#continuous-batching--paged-attention),
+[исходный PNG](https://huggingface.co/datasets/huggingface/documentation-images/blob/c8c3cf72b3b724ce734259e4a086d30618a9198b/blog/faster-transformers/static-batching.png).
+Рисунок без изменений, [CC BY-NC-SA 4.0](https://huggingface.co/datasets/huggingface/documentation-images/blob/c8c3cf72b3b724ce734259e4a086d30618a9198b/README.md).*
+
+На второй строке два входных токена, затем два токена ответа и розовый
+`EOS` в позиции `t4`. Три ячейки справа пусты, а в третьей строке ответ
+ещё продолжается. При фиксированном составе пакета на место второй строки
+нельзя принять новый запрос. Метки `t0`–`t7` на рисунке обозначают позиции
+внутри последовательности, а не общие такты GPU.
+[Схема из лекции CS336](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L553)
+и [оригинал Anyscale](https://www.anyscale.com/blog/continuous-batching-llm-inference)
+показывают ту же проблему на шкале итераций.
 
 Добавим в очередь E и F, каждому из которых нужны ещё два шага. При статическом
 пакетировании они начнут работать только после шага 8 и закончат на шаге 10.
@@ -408,12 +419,29 @@ Chunked prefill разбивает ещё не обработанную част
 После каждого фрагмента его K и V остаются в кеше, а планировщик получает
 возможность перераспределить работу следующего шага.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-advanced/physics-scheduling/gordic-chunked-prefill.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scheduling-source-2026-11-11/deepspeed-paper-figure3.png|Три расписания. В верхней строке длинные проходы без выдачи токена, в средней выдача после длинного смешанного прохода, в нижней более равномерные проходы со стрелками выдачи.]]
 
-*На оригинальной схеме Aleksa Gordić показаны первые два фрагмента по 8 токенов
-из входа длиной 18. После второго прохода заполнены четыре блока; последние
-2 токена требуют ещё одного прохода. Схема показывает накопление кеша, а не
-расписание соседних запросов. Источник: [Inside vLLM, Chunked prefill](https://www.aleksagordic.com/blog/vllm).*
+*Connor Holmes и соавторы, [DeepSpeed-FastGen, рис. 3](https://arxiv.org/html/2401.08671v1#S3.F3),
+[исходный PNG](https://arxiv.org/html/2401.08671v1/figures/fastgen-overview-light.png), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Все три строки без изменений.*
+
+Прямоугольник обозначает проход модели, стрелка под ним — выдачу хотя
+бы одного токена. В верхней строке два длинных прохода prefill прерывают
+выдачу. Это ранний vLLM, который авторы сравнивали в 2024 году. В строке
+Orca новый вход помещается в один проход вместе с decode, поэтому
+стрелка есть и после длинного прямоугольника, но её приходится ждать.
+В нижней строке DeepSpeed разбивает вход и дополняет очередной decode
+частью prefill. Проходы показаны более равномерными; на рисунке нет
+масштаба времени, и стрелка не гарантирует токен каждому запросу.
+Порядок заполнения пакета описан в
+[[05 Источники/Papers/DeepSpeed-FastGen|заметке о Dynamic SplitFuse]].
+
+Разбиение меняет и то, когда появляются блоки KV. Для входа из 18 токенов
+с размером фрагмента 8 и размером блока 4 первые два прохода заполняют
+по два блока. Третий обрабатывает оставшиеся два токена и занимает
+половину пятого блока. Первый токен ответа выбирается только после
+этого прохода. [Исходная схема Гордича](https://www.aleksagordic.com/blog/vllm#chunked-prefill)
+показывает первые два состояния кеша.
 
 Если после повторного использования кеша осталось $S_{\mathrm{new}}$ входных токенов
 и каждому проходу доступен фрагмент размера $C$, потребуется

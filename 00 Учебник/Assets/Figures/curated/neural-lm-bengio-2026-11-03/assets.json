@@ -1,0 +1,44 @@
+[
+  {
+    "id": "curated-neural-lm-bengio-figure1-402764857919",
+    "asset": "00 Учебник/Assets/Figures/curated/neural-lm-bengio-2026-11-03/bengio-original-figure1.png",
+    "author": "Yoshua Bengio, Réjean Ducharme, Pascal Vincent, Christian Jauvin",
+    "source_url": "https://www.jmlr.org/papers/v3/bengio03a.html",
+    "source_image_url": "https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf#page=6",
+    "source_asset": "05 Источники/Originals/neural-lm-bengio-2026-11-03/bengio03a.pdf",
+    "source_asset_sha256": "0bddf9a608d62da449a6413d86cbf6e8b206212595efe0e0a14da0d79d5f4976",
+    "sha256": "4027648579190044a162655b51453f816cdb98adb298d4c5a2a55bb0f6cdfcd1",
+    "source_page": 6,
+    "source_printed_page": 1142,
+    "render_dpi": 240,
+    "render_page_size_px": [
+      2040,
+      2640
+    ],
+    "crop_box_px": [
+      273,
+      283,
+      1780,
+      1263
+    ],
+    "dimensions_px": [
+      1507,
+      980
+    ],
+    "bytes": 94140,
+    "license": "CC BY (JMLR publication policy; version unspecified)",
+    "license_url": "https://jmlr.org/author-info.html#publication",
+    "license_evidence": "05 Источники/Originals/neural-lm-bengio-2026-11-03/jmlr-author-info.html",
+    "license_evidence_sha256": "de4f2e6dee40e595e0307ab1ff40a11554ab51be6ce12f4a625f04fdf97e3924",
+    "public_license_copy": "site/public/licenses/bengio03a-figure1-jmlr-policy.txt",
+    "rights_status": "publisher-cc-by-policy;paper-specific-license-version-not-stated",
+    "provenance_confirmation": "publisher-publication-policy",
+    "metadata_status": "verified",
+    "derivation": "source-pdf-render-crop",
+    "modifications": "Complete original Figure1 including its original caption, rendered at240dpi from publisher PDF page6. Only surrounding page header/body removed. No diagram redraw, relabeling, recoloring or translation.",
+    "last_verified": "2026-11-03",
+    "used_in": [
+      "00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction.md"
+    ]
+  }
+]

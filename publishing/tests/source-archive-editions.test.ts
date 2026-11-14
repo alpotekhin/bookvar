@@ -32,12 +32,14 @@ describe('one complete source-language course original', () => {
         const original = readFileSync(join(options.outputDir, `${route}.md`), 'utf8');
         const alias = readFileSync(join(options.outputDir, `en/${route}.md`), 'utf8');
         expect(original).toContain('FULL ORIGINAL EXPLANATION');
+        expect(original).not.toContain('editUrl:');
         expect(original).toContain(`url = "/en/${route}/"`);
         expect(original).toContain(`[Section](${base}/${route}/#part)`);
         expect(original).toContain(`${base}/assets/chart.svg`);
         expect(readFileSync(join(rootDir, 'site/public/assets/chart.svg'), 'utf8')).toContain('<svg');
         expect(alias).toContain(`0;url=${base}/${route}/`);
         expect(alias).toContain('template: splash');
+        expect(alias).toContain('editUrl: false');
         expect(alias).toContain('pagefind: false');
         expect(alias).toContain('id="part"');
         expect(alias).toContain('location.search + location.hash');

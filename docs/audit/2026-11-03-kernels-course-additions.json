@@ -1,0 +1,242 @@
+{
+  "date": "2026-11-03",
+  "scope": "Full kernel/SVM/RFF chapter reread; source-first C/gamma and parameter-unit explanation with two original course figures. Canonical text and both reference indexes, no translation or remote publication.",
+  "files": [
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md",
+      "before_sha256": "99280edf9b5259f46e5f8d797410aad56da0bf726be38c54ac5a404fc375811f",
+      "after_sha256": "c21099955d6d293585a768949d2a43171d071cbb005ca5c04478b5ba44b77084",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-26\nprimary_sources:",
+          "new": "last_updated: 2026-11-03\nreference_terms:\n  - label: Ядро и матрица Грама\n    label_en: Kernel and Gram matrix\n    anchor: kernel-gram\n  - label: SVM — геометрический отступ\n    label_en: SVM geometric margin\n    anchor: svm-geometric-margin\n  - label: SVM — двойственная задача и KKT\n    label_en: SVM dual problem and KKT\n    anchor: svm-dual-kkt\n  - label: SVM — предсказание и цена ядра\n    label_en: Kernel SVM prediction and cost\n    anchor: kernel-prediction-cost\n  - label: Random Fourier features\n    label_en: Random Fourier features\n    anchor: random-fourier-features\n  - label: RFF — ошибка случайной карты\n    label_en: RFF approximation variance\n    anchor: rff-approximation-variance\n  - label: Nyström — проекция на опоры\n    label_en: Nyström anchor projection\n    anchor: nystrom-anchor-projection\n  - label: RBF — совместный выбор C и gamma\n    label_en: RBF C and gamma selection\n    anchor: rbf-c-gamma\n  - label: RFF — фиксированная карта и gamma scale\n    label_en: RFF fixed map and gamma scale\n    anchor: rff-fixed-map-scale\nprimary_sources:"
+        },
+        {
+          "old": "  - https://scikit-learn.org/stable/auto_examples/miscellaneous/plot_kernel_approximation.html\n",
+          "new": "  - https://scikit-learn.org/stable/auto_examples/miscellaneous/plot_kernel_approximation.html\n  - https://scikit-learn.org/stable/auto_examples/svm/plot_rbf_parameters.html\n"
+        },
+        {
+          "old": "## Ядро как скалярное произведение",
+          "new": "<a id=\"kernel-gram\"></a>\n## Ядро как скалярное произведение"
+        },
+        {
+          "old": "### Линейно разделимый случай",
+          "new": "<a id=\"svm-geometric-margin\"></a>\n### Линейно разделимый случай"
+        },
+        {
+          "old": "## Двойственная задача и опорные векторы",
+          "new": "<a id=\"svm-dual-kkt\"></a>\n## Двойственная задача и опорные векторы"
+        },
+        {
+          "old": "### Цена точного ядра",
+          "new": "<a id=\"kernel-prediction-cost\"></a>\n### Цена точного ядра"
+        },
+        {
+          "old": "## Random Fourier features: явное приближение RBF",
+          "new": "<a id=\"random-fourier-features\"></a>\n## Random Fourier features: явное приближение RBF"
+        },
+        {
+          "old": "### Как число признаков влияет на ошибку",
+          "new": "<a id=\"rff-approximation-variance\"></a>\n### Как число признаков влияет на ошибку"
+        },
+        {
+          "old": "## Nyström: признаки по опорным объектам",
+          "new": "<a id=\"nystrom-anchor-projection\"></a>\n## Nyström: признаки по опорным объектам"
+        },
+        {
+          "old": "При фиксированном числовом $\\gamma$ и одинаковом типе данных",
+          "new": "<a id=\"rff-fixed-map-scale\"></a>\nПри фиксированном числовом $\\gamma$ и одинаковом типе данных"
+        },
+        {
+          "old": "<a id=\"совместная-роль-ccc-и-γgammaγ\"></a>\n",
+          "new": "<a id=\"совместная-роль-ccc-и-γgammaγ\"></a>\n<a id=\"rbf-c-gamma\"></a>\n\n### Совместный выбор C и gamma\n"
+        },
+        {
+          "old": "<a id=\"случайность-rff\"></a>",
+          "new": "### Радиус влияния и вид разделяющей функции\n\nДля фиксированного уровня сходства $k(x,x')=e^{-1}$ расстояние равно\n$r=1/\\sqrt{\\gamma}$. При $\\gamma=0{,}1$, $1$ и $10$ получаются\nрадиусы примерно $3{,}16$, $1$ и $0{,}316$ в текущих единицах признаков.\nПараметр $C$ не меняет эту зависимость: он меняет цену нарушений\nотступа при уже заданных значениях ядра.\n\n![[00 Учебник/Assets/Figures/curated/kernels-2026-11-03/sklearn-rbf-decision-grid.png|Девять разделяющих функций RBF SVM: по строкам C равно 0,01, 1 и 100, по столбцам gamma равно 0,1, 1 и 10; справа влияние наблюдений становится локальным]]\n\n*The scikit-learn developers,\n[RBF SVM parameters](https://scikit-learn.org/stable/auto_examples/svm/plot_rbf_parameters.html),\nBSD-3-Clause. Полный исходный PNG из документации 1.9, без изменений.\nДля этих девяти панелей взяты два признака и два класса Iris:\n100 наблюдений после стандартизации.*\n\nНа каждой строке $C$ фиксирован, а слева направо увеличивается\n$\\gamma$. При малой $\\gamma$ цвет фона меняется плавно на большой\nобласти; при большой возникают локальные области около отдельных\nнаблюдений. В каждом столбце фиксирована $\\gamma$: увеличение $C$\nменяет решение в пользу меньшей суммарной hinge loss.\n\nКрасный и синий фон показывают знак `decision_function`,\nнасыщенность — её значение. Белая область соответствует значениям\nоколо нуля. Это не карта вероятности класса. Точки окрашены по\nизвестным меткам; они использовались при обучении, поэтому рисунок\nпоказывает форму найденного решения, а не проверку на новых объектах.\n\nСнижение $C$ может привести к слабому разделению даже на обучающих\nточках. Оно не заменяет локальное ядро более широким. Поэтому\nсначала рассматривают обе оси параметров, а затем проверяют качество\nнайденной конфигурации на отложенных данных.\n\n### Карта качества на сетке параметров\n\n![[00 Учебник/Assets/Figures/curated/kernels-2026-11-03/sklearn-rbf-validation-grid.png|Карта средней кросс-валидационной accuracy RBF SVM: C меняется по вертикали, gamma по горизонтали; хорошие значения образуют диагональную область]]\n\n*The scikit-learn developers,\n[RBF SVM parameters — Validation accuracy](https://scikit-learn.org/stable/auto_examples/svm/plot_rbf_parameters.html),\nBSD-3-Clause. Второй полный исходный PNG без изменений.\nЗдесь уже использованы все 150 наблюдений Iris, четыре признака\nи три класса; это другая постановка, чем на девяти панелях выше.\nОценки и цветовая шкала относятся к сохранённому запуску источника.*\n\nКаждая ячейка соответствует одной паре $(C,\\gamma)$.\nВ исходном скрипте проверяются 13 значений $C$ от $10^{-2}$ до $10^{10}$\nи 13 значений $\\gamma$ от $10^{-9}$ до $10^3$.\nДля каждой из 169 пар усредняются оценки по пяти стратифицированным\nразбиениям: 80% объектов используются для обучения, 20% — для проверки.\n\nСветлая диагональная область показывает, почему один параметр нельзя\nподбирать независимо от другого. Для более широкого ядра в этом\nэксперименте хорошими оказались большие $C$; при более локальном\nдостаточны меньшие. Авторы объясняют эту область так:\n\n> For intermediate values, we can see on the second plot that good models can\n> be found on a diagonal of `C` and `gamma`. Smooth models (lower `gamma`\n> values) can be made more complex by increasing the importance of classifying\n> each point correctly (larger `C` values) hence the diagonal of good\n> performing models.\n\n*The scikit-learn developers, исходный английский текст, BSD-3-Clause.*\n\nЭта диагональ относится к данным и их масштабу. Цветовая шкала\nнелинейна: её середина расположена около accuracy 0,92, чтобы\nлучше различать близкие хорошие значения. Одинаковая разница в цвете\nне означает одинаковую разницу в качестве. Кроме того, оценки\nразных ячеек получены на общих разбиениях и не являются независимыми\nэкспериментами.\n\nВ исходном примере стандартизатор обучается до кросс-валидации.\nТакой рисунок полезен для чтения параметров, но эту деталь протокола\nнельзя переносить в оценку собственного классификатора.\nНиже стандартизация находится внутри `Pipeline` и переобучается\nна обучающей части каждого разбиения. Сетка сокращена до девяти пар;\nкод не воспроизводит историческую карту из 169 ячеек.\n\n### Масштаб признаков и воспроизводимый подбор\n\nПри общем изменении единиц $x'=sx$ расстояние в квадрате умножается\nна $s^2$. То же ядро получится при $\\gamma'=\\gamma/s^2$:\n\n$$\ne^{-\\gamma'\\|sx-sx'\\|^2}\n=e^{-\\gamma\\|x-x'\\|^2}.\n$$\n\nНапример, умножение всех координат на 5 требует заменить $\\gamma=2$\nна $0{,}08$. Матрица Грама и задача C-SVM тогда сохраняются при том же\n$C$. При разных множителях по координатам одна скалярная $\\gamma$\nне компенсирует изменение метрики: изменяются относительные вклады\nразных направлений.\n\n```python\nfrom sklearn.datasets import load_iris\nfrom sklearn.model_selection import GridSearchCV, StratifiedShuffleSplit\n\nunit_scale = 5.0\nrescaled_gamma = kernel_gamma / unit_scale**2\nrescaled_gram = rbf_kernel(X_ring * unit_scale, gamma=rescaled_gamma)\nnp.testing.assert_allclose(rescaled_gram, K_ring, atol=1e-14)\nrescaled_svm = SVC(\n    kernel=\"rbf\", gamma=rescaled_gamma, C=10., tol=1e-9\n).fit(X_ring * unit_scale, y_ring)\nnp.testing.assert_allclose(\n    rescaled_svm.decision_function(query * unit_scale),\n    kernel_model.decision_function(query), atol=1e-6\n)\n\niris_search_X, iris_search_y = load_iris(return_X_y=True)\nrbf_cv = StratifiedShuffleSplit(\n    n_splits=5, test_size=0.2, random_state=42\n)\nrbf_folds = list(rbf_cv.split(iris_search_X, iris_search_y))\nrbf_search = GridSearchCV(\n    Pipeline([(\"scale\", StandardScaler()), (\"svc\", SVC())]),\n    {\"svc__C\": [0.01, 1., 100.], \"svc__gamma\": [0.1, 1., 10.]},\n    cv=rbf_folds\n).fit(iris_search_X, iris_search_y)\nprint(\"selected C/gamma:\", rbf_search.best_params_)\nprint(\"selection CV accuracy:\", rbf_search.best_score_)\n```\n\n`best_score_` — оценка, по которой выбиралась пара параметров,\nа не независимая итоговая оценка выбранной модели.\nПосле подбора `GridSearchCV` по умолчанию обучает лучший конвейер\nзаново на всех переданных данных. Для проверки его обобщения\nнужна отдельная тестовая часть или внешний цикл кросс-валидации.\n\nЕсли лучшие параметры оказались на краю проверенной сетки, сначала\nрасширяют сетку в этом направлении, а не объявляют крайнее значение\nсвойством данных. На малой выборке стоит также смотреть разброс\nоценок между разбиениями: небольшая разница средних может зависеть\nот того, какие наблюдения попали в проверочную часть.\n\n### Независимые карты и стоимость применения\n\n<a id=\"случайность-rff\"></a>"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-separators.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-separators.png|Три прямые без ошибок разделяют обучающие точки, но дают разные метки объекту, отмеченному крестиком]]"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-support-vectors.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-support-vectors.png|Линейная граница SVM, две пунктирные границы отступа и три обведённые опорные точки]]"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-support-invariance.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-support-invariance.png|Одинаковая разделяющая прямая и три опорные точки на первых 60 и 120 наблюдениях]]"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-soft-margin.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-soft-margin.png|Линейный SVM на одинаковых данных при C 10 и 0,1: при меньшем C полоса шире и опорных точек больше]]"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-circles-linear.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-circles-linear.png|Линейный SVM не отделяет центральное облако от окружающего кольца в исходных двух координатах]]"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-circles-rbf.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-circles-rbf.png|RBF SVM строит замкнутую разделяющую границу между центральным облаком и кольцом]]"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-radial-lift.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-radial-lift.png|Дополнительная координата r равна экспоненте минус квадрата радиуса: центральные точки подняты над кольцом]]"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/advanced-unsupervised-classical/kernel-approximation.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/advanced-unsupervised-classical/kernel-approximation.png|Классификация Digits точным RBF SVM, линейным SVM и RFF/Nyström: качество и время в сохранённом исходном эксперименте]]"
+        },
+        {
+          "old": "Красный и синий фон показывают знак `decision_function`,\nнасыщенность — её значение. Белая область соответствует значениям\nоколо нуля. Это не карта вероятности класса. Точки окрашены по\nизвестным меткам; они использовались при обучении, поэтому рисунок\nпоказывает форму найденного решения, а не проверку на новых объектах.",
+          "new": "Цвет фона кодирует значение `decision_function`. Знак этой функции\nопределяет предсказанный класс, а её модуль не является вероятностью.\nВ исходном коде цветовая шкала настраивается отдельно для каждой панели,\nпричём её середина не закреплена в нуле. Поэтому белая полоса не обязана\nсовпадать с границей $f(x)=0$, а одинаковый цвет на разных панелях\nне означает одинаковое значение функции.\n\nТочки окрашены по известным меткам; они использовались при обучении.\nРисунок показывает форму найденного решения, а не проверку\nна новых объектах."
+        },
+        {
+          "old": "При общем изменении единиц $x'=sx$ расстояние в квадрате умножается\nна $s^2$. То же ядро получится при $\\gamma'=\\gamma/s^2$:\n\n$$\ne^{-\\gamma'\\|sx-sx'\\|^2}\n=e^{-\\gamma\\|x-x'\\|^2}.\n$$",
+          "new": "При общем изменении единиц оба объекта $u,v$ заменяются на $su,sv$,\nа расстояние в квадрате умножается на $s^2$. То же ядро получится\nпри $\\gamma'=\\gamma/s^2$:\n\n$$\ne^{-\\gamma'\\|su-sv\\|^2}\n=e^{-\\gamma\\|u-v\\|^2}.\n$$"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "389419cb83c777cf03ed64ac31822b5a41e56e7eba821d750cf1b9045d30c947",
+      "after_sha256": "7cde93bd515446c2dd5da366b1d713840313c814bfd046334c137254f26c75ba",
+      "changes": [
+        {
+          "old": "  - {\"id\":\"curated-cai-revisions-a5cd3aae0031\",\"asset\":\"00 Учебник/Assets/Figures/curated/constitutional-ai-2026-10-29/revisions-tradeoff.png\",\"author\":\"Yuntao Bai et al.\",\"title\":\"Constitutional AI Figure 5: revision scores and the helpfulness trade-off\",\"source_url\":\"https://arxiv.org/abs/2212.08073v1\",\"source_image_url\":\"https://arxiv.org/pdf/2212.08073v1#page=9\",\"source_asset\":\"05 Источники/Originals/constitutional-ai-2026-10-29/bai-v1.pdf\",\"source_asset_sha256\":\"9a456a07ad346e3372f9867d346f69f5b0f68b4c65f060aca0b8a13fa9d98e83\",\"source_page\":9,\"source_page_snapshot\":\"05 Источники/Originals/training-consolidation-2026-10-29/cai-arxiv-v1.html\",\"source_page_sha256\":\"2f175dac8902db65a5c0a7cd280109fa91e0d3c1d129e49edb9ab439edc3c97d\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence\":\"05 Источники/Originals/training-consolidation-2026-10-29/cai-arxiv-v1.html\",\"license_evidence_sha256\":\"2f175dac8902db65a5c0a7cd280109fa91e0d3c1d129e49edb9ab439edc3c97d\",\"derivation\":\"pdf-page-render-crop\",\"render_dpi\":288,\"render_page_size_px\":[2448,3168],\"crop_box_px\":[340,280,2120,1030],\"modifications\":\"Complete Figure 5 with all three panels, axes, parameter colour scale and full original English caption. Only surrounding page material removed. No redraw, translated labels, resampling or panel rearrangement.\",\"dimensions_px\":[1780,750],\"width\":1780,\"height\":750,\"bytes\":180321,\"sha256\":\"a5cd3aae003155f2e5d0fb01cb66ef4080568f010bf8eb22938e69d91327f479\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-10-29\",\"used_in\":[\"00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md\"]}\n",
+          "new": "  - {\"id\":\"curated-cai-revisions-a5cd3aae0031\",\"asset\":\"00 Учебник/Assets/Figures/curated/constitutional-ai-2026-10-29/revisions-tradeoff.png\",\"author\":\"Yuntao Bai et al.\",\"title\":\"Constitutional AI Figure 5: revision scores and the helpfulness trade-off\",\"source_url\":\"https://arxiv.org/abs/2212.08073v1\",\"source_image_url\":\"https://arxiv.org/pdf/2212.08073v1#page=9\",\"source_asset\":\"05 Источники/Originals/constitutional-ai-2026-10-29/bai-v1.pdf\",\"source_asset_sha256\":\"9a456a07ad346e3372f9867d346f69f5b0f68b4c65f060aca0b8a13fa9d98e83\",\"source_page\":9,\"source_page_snapshot\":\"05 Источники/Originals/training-consolidation-2026-10-29/cai-arxiv-v1.html\",\"source_page_sha256\":\"2f175dac8902db65a5c0a7cd280109fa91e0d3c1d129e49edb9ab439edc3c97d\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence\":\"05 Источники/Originals/training-consolidation-2026-10-29/cai-arxiv-v1.html\",\"license_evidence_sha256\":\"2f175dac8902db65a5c0a7cd280109fa91e0d3c1d129e49edb9ab439edc3c97d\",\"derivation\":\"pdf-page-render-crop\",\"render_dpi\":288,\"render_page_size_px\":[2448,3168],\"crop_box_px\":[340,280,2120,1030],\"modifications\":\"Complete Figure 5 with all three panels, axes, parameter colour scale and full original English caption. Only surrounding page material removed. No redraw, translated labels, resampling or panel rearrangement.\",\"dimensions_px\":[1780,750],\"width\":1780,\"height\":750,\"bytes\":180321,\"sha256\":\"a5cd3aae003155f2e5d0fb01cb66ef4080568f010bf8eb22938e69d91327f479\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-10-29\",\"used_in\":[\"00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md\"]}\n  - {\"id\":\"curated-kernels-20261103-32d1c64d0053\",\"asset\":\"00 Учебник/Assets/Figures/curated/kernels-2026-11-03/sklearn-rbf-decision-grid.png\",\"author\":\"The scikit-learn developers\",\"source_url\":\"https://scikit-learn.org/1.9/auto_examples/svm/plot_rbf_parameters.html\",\"source_image_url\":\"https://raw.githubusercontent.com/scikit-learn/scikit-learn.github.io/199d116ab37beed506c63fc9f6a74f56e228de43/1.9/_images/sphx_glr_plot_rbf_parameters_001.png\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/kernels-2026-11-03/sklearn-rbf-decision-grid.png\",\"source_asset_sha256\":\"32d1c64d0053c29dce038e18e28b6b203617bc6c6eabebd3ca2a8965556ba33b\",\"sha256\":\"32d1c64d0053c29dce038e18e28b6b203617bc6c6eabebd3ca2a8965556ba33b\",\"dimensions_px\":[800,600],\"commit\":\"199d116ab37beed506c63fc9f6a74f56e228de43\",\"license\":\"BSD-3-Clause\",\"license_url\":\"https://github.com/scikit-learn/scikit-learn/blob/866c0f51e7560ef0303cbcc5f159df5382ea9e3f/LICENSE\",\"license_evidence\":\"site/public/licenses/scikit-learn-1.9.1-BSD-3-Clause.txt\",\"license_evidence_sha256\":\"50d6a9d340f19ab355609917993114daf5f47e3161067bcf34955bbd05cd9cb0\",\"derivation\":\"source-image-copy\",\"modifications\":\"None. Complete original PNG copied byte-for-byte; no crop, relabeling, translation, redraw or resampling.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md\"],\"width\":800,\"height\":600,\"bytes\":185339,\"source_page_snapshot\":\"05 Источники/Originals/kernels-2026-11-03/sklearn-rbf-parameters-1.9.1.py\",\"source_page_sha256\":\"396ef426d23724920dbe4ebc477493729c882e49a5cfbb3cf6f90d13a2144bec\"}\n  - {\"id\":\"curated-kernels-20261103-4ce8860a1230\",\"asset\":\"00 Учебник/Assets/Figures/curated/kernels-2026-11-03/sklearn-rbf-validation-grid.png\",\"author\":\"The scikit-learn developers\",\"source_url\":\"https://scikit-learn.org/1.9/auto_examples/svm/plot_rbf_parameters.html\",\"source_image_url\":\"https://raw.githubusercontent.com/scikit-learn/scikit-learn.github.io/199d116ab37beed506c63fc9f6a74f56e228de43/1.9/_images/sphx_glr_plot_rbf_parameters_002.png\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/kernels-2026-11-03/sklearn-rbf-validation-grid.png\",\"source_asset_sha256\":\"4ce8860a12309b462ae25ca56601c68daf74bbf8533d5648ee8323261cb5009a\",\"sha256\":\"4ce8860a12309b462ae25ca56601c68daf74bbf8533d5648ee8323261cb5009a\",\"dimensions_px\":[800,600],\"commit\":\"199d116ab37beed506c63fc9f6a74f56e228de43\",\"license\":\"BSD-3-Clause\",\"license_url\":\"https://github.com/scikit-learn/scikit-learn/blob/866c0f51e7560ef0303cbcc5f159df5382ea9e3f/LICENSE\",\"license_evidence\":\"site/public/licenses/scikit-learn-1.9.1-BSD-3-Clause.txt\",\"license_evidence_sha256\":\"50d6a9d340f19ab355609917993114daf5f47e3161067bcf34955bbd05cd9cb0\",\"derivation\":\"source-image-copy\",\"modifications\":\"None. Complete original PNG copied byte-for-byte; no crop, relabeling, translation, redraw or resampling.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md\"],\"width\":800,\"height\":600,\"bytes\":27749,\"source_page_snapshot\":\"05 Источники/Originals/kernels-2026-11-03/sklearn-rbf-parameters-1.9.1.py\",\"source_page_sha256\":\"396ef426d23724920dbe4ebc477493729c882e49a5cfbb3cf6f90d13a2144bec\"}\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "dae8bde61f0b0c03f625eaeeb798206630d2fc2b3290ec5c58290f94fc82a7ab",
+      "after_sha256": "4594f277fc876bf69e2e20fac6ada2c6e50c703e779956f0419f85fd434e86c6",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features|Kernels, SVM и random Fourier features]]",
+          "new": "- [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features|Kernels, SVM и random Fourier features]]\n  - [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features#kernel-gram|Ядро и матрица Грама]]\n  - [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features#svm-geometric-margin|SVM — геометрический отступ]]\n  - [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features#svm-dual-kkt|SVM — двойственная задача и KKT]]\n  - [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features#kernel-prediction-cost|SVM — предсказание и цена ядра]]\n  - [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features#random-fourier-features|Random Fourier features]]\n  - [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features#rff-approximation-variance|RFF — ошибка случайной карты]]\n  - [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features#nystrom-anchor-projection|Nyström — проекция на опоры]]\n  - [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features#rbf-c-gamma|RBF — совместный выбор C и gamma]]\n  - [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features#rff-fixed-map-scale|RFF — фиксированная карта и gamma scale]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "e805f807adc65bd79fa9bf627f2bb6a17e339d2c2efaac4a11fcb4449f5ae169",
+      "after_sha256": "3b1e468366aaad0d8c9b3764f3bc35c432234e6f05d5c2fadcde3c706b16406d",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features|Kernels, SVMs, and random Fourier features]]",
+          "new": "- [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features|Kernels, SVMs, and random Fourier features]]\n  - [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features#kernel-gram|Kernel and Gram matrix]]\n  - [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features#svm-geometric-margin|SVM geometric margin]]\n  - [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features#svm-dual-kkt|SVM dual problem and KKT]]\n  - [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features#kernel-prediction-cost|Kernel SVM prediction and cost]]\n  - [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features#random-fourier-features|Random Fourier features]]\n  - [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features#rff-approximation-variance|RFF approximation variance]]\n  - [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features#nystrom-anchor-projection|Nyström anchor projection]]\n  - [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features#rbf-c-gamma|RBF C and gamma selection]]\n  - [[00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features#rff-fixed-map-scale|RFF fixed map and gamma scale]]"
+        }
+      ]
+    }
+  ],
+  "sourceComparison": {
+    "fullyRead": [
+      {
+        "source": "05 Источники/Originals/kernels-svm-rff-2026-10-25/jake-svm.ipynb",
+        "sha256": "8f01bffbe7f86c160fcbe89f4549b1650d262adc0e76b354719c41eec15af0a6",
+        "scope": "All 60 cells' Markdown, code and text outputs, including face recognition and summary; seven retained native PNGs have prior source-extraction evidence. Face photographs not copied."
+      },
+      {
+        "source": "05 Источники/Courses/Advanced Unsupervised and Classical ML/sklearn-kernel-approximation.py.md",
+        "scope": "Entire saved source wrapper and Python example pinned to b9530aa1fa5b00d933a8f258a094befea41aa86c. First existing timing/accuracy figure retained with train/test leakage and different-loss caveats; the mislabeled second figure excluded."
+      },
+      {
+        "source": "05 Источники/Originals/kernels-2026-11-03/sklearn-rbf-parameters-1.9.1.py",
+        "sha256": "396ef426d23724920dbe4ebc477493729c882e49a5cfbb3cf6f90d13a2144bec",
+        "scope": "Entire released explanatory docstring and code, both originals inspected, all plotting/data/split/color-normalization settings compared to the chapter."
+      }
+    ],
+    "historicalSourceComparison": "docs/audit/2026-10-25-kernels-svm-rff.md records the earlier selected MML 12.1-12.2.5/12.3.1/12.4 and Rahimi-Recht §3/Algorithm 1 comparison. Their PDF sections were not freshly reread in this delta; detailed explanations and all nine programs remain unchanged.",
+    "mechanisms": [
+      {
+        "topic": "Kernel and Gram matrix",
+        "example": "Explicit quadratic feature map including sqrt(2), three-point Gram and negative PSD counterexample retained; 25 independent maps/projections checked."
+      },
+      {
+        "topic": "Hard/soft SVM and KKT",
+        "example": "Four scalar points, normalization, moved support, hinge and bounded multipliers, bias interval and independently minimized objectives retained."
+      },
+      {
+        "topic": "Prediction and cost",
+        "example": "Binary ordinary/precomputed SVM and manual support sum; 31 independent query scores and invalid test-by-test shape checked. Full n^2 Gram memory distinguished from bounded LIBSVM cache."
+      },
+      {
+        "topic": "RFF and Nyström",
+        "example": "Bochner-to-Gaussian-frequency derivation, paired and phased maps, variance experiment, fixed-map API, normalized anchor map and explicit feature projector retained; negative entries/rank/duplicates/nonmonotonic approximation cases checked."
+      },
+      {
+        "topic": "C/gamma interaction",
+        "source": "Released RBF SVM parameters example, both figure sections",
+        "example": "Radius of k=e^-1, exact nine-panel 100-object/two-feature/two-class task versus 150-object/four-feature/three-class CV heatmap, full original English diagonal paragraph and nonlinear colorbar explained.",
+        "limits": "Figure train-only panels are not held-out quality. Each decision panel normalizes its own color range, not centered at f=0. Shared validation folds and nonlinear heatmap colors do not measure independent or linear quality differences."
+      },
+      {
+        "topic": "Units and valid selection",
+        "example": "Nine new uniform-scale Gram checks and three actual SVM decision checks; all nine configurations/five train120-validation30 folds independently reconstructed with fold-only scalers and explicit final refit.",
+        "limits": "New 9-pair Pipeline run is not a rerun of the historical 169-cell heatmap. Selected CV score 0.9733333 is not an independent final test estimate; no timing benchmark."
+      }
+    ],
+    "exclusions": [
+      "Do not equate a raw row of kernel similarities with the exact feature coordinates; its full-map Gram is K^2 without normalization.",
+      "Do not import blanket large-C hard-margin/no-errors claims or compact/fast SVM claims independent of the support count.",
+      "Do not reproduce the saved kernel-approximation example's second decision-surface figure: model names/order are swapped, titles say 100 features while final fitted dimension is 270, and LinearSVC is titled SVC.",
+      "Do not import the source's gamma=inverse radius shortcut: a fixed-level RBF radius scales as 1/sqrt(gamma).",
+      "Do not import the source's blanket statement that no C can prevent overfitting for large gamma.",
+      "Do not equate white in uncentered independent decision-function color maps with the exact f=0 contour; new independent check verifies a nonzero source-panel midpoint.",
+      "Do not copy the source's globally fitted scaler into the new CV selection program."
+    ],
+    "style": "No-ai-slop applied to the full chapter. Required mathematical distinctions, source quotations, full derivations, examples, caveats and source captions retained.",
+    "preservation": "All nine prior executable programs and eight prior image paths preserved. Meaningful alt descriptions and nine stable reference anchors added.",
+    "reference": "Nine mechanisms indexed from canonical chapter frontmatter in both locales. No second reference explanation or parallel course reading route."
+  },
+  "verification": {
+    "examples": {
+      "exit": 0,
+      "publishedBlocks": 10,
+      "chapterSha256": "c21099955d6d293585a768949d2a43171d071cbb005ca5c04478b5ba44b77084",
+      "scope": "All earlier checks plus RBF scale/radius, selected fold-only scaler/refit and source color-map counterexample."
+    },
+    "originals": {
+      "exit": 0,
+      "files": 2,
+      "method": "Two complete immutable original PNGs compared byte-for-byte; released source Python also compared.",
+      "command": "node publishing/tools/prepare_kernel_source_figures.mjs --check"
+    },
+    "reader": {
+      "evidence": "docs/audit/evidence/2026-11-03-kernels-reader",
+      "desktop": "1280x720: both complete new originals inspected in viewers, including all nine panel headers, heatmap axes/colorbar and captions. Document 1265/1265, four tables 617/617, no KaTeX errors/display overflow.",
+      "mobile": "390x844: document 375/375, four tables 343/343, no KaTeX errors or display/inline-math overflow. Both originals zoomed to 2x; all three decision-grid columns, heatmap left/right axes and nonlinear colorbar inspected. Caption scrolled to final sentence; unit/gamma formula inspected.",
+      "allImages": "All ten images loaded with nonzero dimensions and meaningful alt text. Both new raw originals separately inspected and byte-compared; no exhaustive fresh visual audit of every older unchanged figure claimed.",
+      "navigation": "Actual RU reference -> #rbf-c-gamma and EN reference -> /en/ textbook #rff-fixed-map-scale verified. EN page has ten images, ten programs and explicit canonical-language fallback notice. No translation created.",
+      "finalRead": "Complete final 1185-line chapter reread in ranges 1-400, 401-800, 801-1185 after color-normalization and u/v notation corrections. No chapter or code changes after verified build."
+    },
+    "build": {
+      "exit": 0,
+      "routes": 2007,
+      "htmlFiles": 2011,
+      "brokenInternalLinks": 0,
+      "bytes": 851147409,
+      "files": 5592,
+      "headroom": 148852591
+    },
+    "published": false,
+    "registryAndPreservation": {
+      "exit": 0,
+      "files": 5,
+      "tests": 184
+    },
+    "htmlAndPreservation": {
+      "exit": 0,
+      "files": 11,
+      "tests": 221
+    },
+    "topicIndex": {
+      "exit": 0,
+      "topics": 152,
+      "locales": 2
+    },
+    "transientFailures": "Oversized metadata captures discarded; bounded captures used. Out-of-order chapter patch failed without changes, then ordered retry succeeded. No assertion or tolerance removed. Fresh IAB inventory identified changed browser ID 3 with the same tab."
+  }
+}

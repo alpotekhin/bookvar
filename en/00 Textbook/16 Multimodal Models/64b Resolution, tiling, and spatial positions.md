@@ -4,15 +4,16 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "aa23f1104f3a83d91bc759f207ab809ebf018b9946f44a022c761fc3e9e81258"
-translation_reviewed: "2026-10-29"
+canonical_revision: "3efdeb743e3782ca8e320534a48ca9a7cfda3695fbb4f8065545826ce69257f3"
+translation_reviewed: "2026-11-13"
 translation_of: "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md"
-last_updated: 2026-10-29
+last_updated: 2026-11-13
 last_verified: 2026-09-15
 primary_sources:
   - https://arxiv.org/abs/2408.03326
   - https://arxiv.org/abs/2409.17146
   - https://arxiv.org/abs/2412.05271
+  - https://arxiv.org/abs/2508.18265v1
   - https://arxiv.org/abs/2409.12191
   - https://arxiv.org/abs/2511.21631
   - https://cs336.stanford.edu/
@@ -21,6 +22,10 @@ primary_sources:
 # Resolution, tiling, and spatial positions
 
 A photograph can survive aggressive downsampling; a contract may lose the digits that determine its meaning. Fixed classification-era resolutions are therefore a central VLM limitation. The model must allocate enough visual tokens and preserve coordinates through resize, padding, crops, and merging.
+
+<a id="vlm-pixel-budget"></a>
+
+## Visual token budget
 
 For patch size $P$, $N=HW/P^2$. Doubling both dimensions creates four times as many patches. Compute is governed by the post-preprocessing token count, not the JPEG file size.
 
@@ -41,15 +46,29 @@ Consider a page 1600 pixels wide and 1000 high. Stretching it to $336\times336$ 
 
 ## Global overview plus detailed crops
 
+<a id="vlm-molmo-overlap"></a>
+
+### Molmo: overlapping crops and grid assembly
+
 Molmo combines a low-resolution view of the full image with overlapping high-resolution crops. The overview preserves composition; crops preserve fine detail; overlap prevents boundary objects from losing context. Special image and row/column tokens record the final layout.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/molmo-figure5-image-tokenization.png]]
-
-*Figure 5 from Deitke et al., [Molmo and PixMo](https://arxiv.org/abs/2409.17146), PDF p. 9. The figure traces an image through low- and high-resolution crops into a token sequence.*
+In [Molmo, Figure 5, p. 9](https://arxiv.org/pdf/2409.17146v2#page=9),
+the left side shows the overview and four overlapping crops. On the
+right, the first token block represents the overview and the second
+represents the assembled high-resolution grid. The same part of the
+gate appears at both scales. Those two representations are distinct
+from duplicated margins within the high-resolution grid.
 
 The drawn $6\times6$ grids are schematic. Molmo's CLIP-L/14 variant uses $336\times336$ crops, or $24\times24$ patches, combines features from two ViT layers along channels, then attention-pools each $2\times2$ group to a $12\times12$ grid. The mean of the four features supplies the query; the four features supply keys and values. The result is an attention-weighted sum, not arithmetic averaging. Learned padding embeddings distinguish fully visible, partly padded, and entirely padded patches.
 
 Overlap supplies context for features near crop edges. Duplicate internal margins are removed after encoding, and the retained features are assembled row by row into one high-resolution grid. The [pinned processor](https://github.com/allenai/molmo/blob/793fa387edfd6fd0f5b21eb8e0a7620a1f3799e1/olmo/data/model_preprocessor.py#L386-L553) uses `overlap_margins=(4,4)`: four patches on each side. With 24-patch crops, the stride is $24-4-4=16$ patches, or 224 pixels. Neighboring 336-pixel inputs therefore overlap by 112 pixels. The paper's 56-pixel margin refers to one margin, not that whole overlap.
+
+Horizontally, the first crop spans patches 0–23 and the second spans
+16–39. Both encoder passes see patches 16–23. When assembling the
+grid, keep features for 0–19 from the first crop and 20–39 from the
+second. For example, the ViT can see patches 20–23 when it encodes
+patch 19 in the left crop. Only the left crop contributes patch 19
+to the assembled grid.
 
 For a $2\times2$ crop layout, retaining external edges and removing duplicated internal margins leaves $10\times10$ pooled vectors per crop. Together these form a $20\times20$ grid. Add the $12\times12$ overview: there are $400+144=544$ visual vectors. A `<im_col>` marker follows each row, despite its name; 20 high-resolution rows, 12 overview rows, and two pairs of boundary markers make $544+32+4=580$ LLM positions.
 
@@ -75,9 +94,14 @@ The overview comes first, followed by rows of the assembled grid, not all tokens
 
 InternVL chooses a grid of $448\times448$ tiles according to aspect ratio. Pixel unshuffle reduces 1,024 patch features per tile to 256 visual tokens. Training and inference impose maximum tile counts; accepting a longer sequence technically does not prove quality beyond the training distribution.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure2-dynamic-tiles.png]]
-
-*Figure 2 from Zhe Chen et al., [InternVL 2.5](https://arxiv.org/abs/2412.05271), PDF p. 3. Dynamic tiling feeds a ViT–MLP–LLM stack for images, multiple images, and video.*
+In [Figure 2 of Zhe Chen et al.](https://arxiv.org/pdf/2412.05271v5#page=3), an
+$800\times1300$ page is resized to $896\times1344$ and cut into two
+columns by three rows of $448\times448$ tiles. A seventh square shows
+the whole page: small letters are harder to read, but their locations
+on the page remain visible. After the ViT, pixel unshuffle packs every
+four neighboring positions into one wider vector. The MLP projects
+those vectors to the LLM width. Seven squares contribute
+$7\cdot256=1792$ visual vectors before special tokens.
 
 ### Aspect ratio does not determine tile count by itself
 
@@ -133,15 +157,58 @@ restored = restored.copy().reshape(x.shape)
 assert np.array_equal(restored, x)
 ```
 
+<a id="vlm-internvl-resolution-router"></a>
+
+### InternVL3.5-Flash: how many vectors to keep per tile
+
+[InternVL 3.5, §2.1](https://arxiv.org/html/2508.18265v1#S2.SS1)
+retains tiling and the overview. The upper diagram follows one tile
+after the ViT: the feature rearrangement reduces 1,024 positions
+to 256, then the MLP changes the width of each vector. The lower
+diagram shows Flash. Its router receives features from the same tile
+and chooses one of two paths: `High Resolution` keeps 256 vectors,
+and `Low Resolution` keeps 64. Both paths lead to the projector.
+Image dimensions determine the tile grid earlier; here the router
+determines how many features to pass on.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-connectors-2026-11-13/internvl35-figure2c.png|Panel c: InternVL 3.5 uses fixed compression before the MLP. The Flash router selects a high- or low-resolution path.]]
+
+*Weiyun Wang et al., [InternVL3.5, Figure 2](https://arxiv.org/html/2508.18265v1#S2.F2),
+[original PNG](https://arxiv.org/html/2508.18265v1/architecture.png),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Complete panel (c) cropped from the source; its pixels and labels are unchanged.*
+
+Take the six detailed tiles from the page above, excluding the overview.
+The standard path produces $6\cdot256=1536$ vectors. If Flash keeps 256
+vectors for four tiles and 64 for the other two, the LLM receives
+$4\cdot256+2\cdot64=1152$ vectors. That is one quarter fewer with
+the same ViT input. The split is illustrative; the report does not
+give routing decisions for this page.
+
+To train the router, the authors [compare the two compression levels](https://arxiv.org/html/2508.18265v1#S2.SS3)
+by how much they change the probability distribution of the text
+answer. A tile gets a high-resolution label if the relative increase
+in consistency loss meets the threshold. At inference time the trained
+classifier chooses the path. The savings depend on what it decides
+to compress. For small print, check reading errors on tiles that went
+through the 64-vector path alongside the token count.
+
 <span id="anyres-глобальный-кадр-и-локальные-плитки"></span>
+
+<a id="vlm-anyres"></a>
 
 ### AnyRes: restore detail without discarding the overview
 
 LLaVA-NeXT/OneVision chooses among allowed grids of encoder-sized tiles. The low-resolution whole-image view preserves context; local tiles preserve detail. Encoded tile features are arranged back into their spatial grid before flattening, with feature interpolation when needed to enforce a token budget.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-anyres.png]]
+![[00 Учебник/Assets/Figures/curated/resolution-2026-11-09/llava-onevision-anyres.png|The top panel encodes detailed tiles before feature interpolation. The bottom resizes the image before splitting it. Each panel includes a separate global view.]]
 
-*Stanford CS336, Lecture 17, AnyRes illustration based on [LLaVA-OneVision](https://arxiv.org/abs/2408.03326). Follow grid choice, independent views, and the assembled feature grid; each stage can preserve or lose different information.*
+*Bo Li et al., [LLaVA-OneVision v1, Figure 2](https://arxiv.org/html/2408.03326v1#S3.F2),
+[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).
+In (a), the ViT encodes smaller, more detailed tiles before interpolation
+reduces the feature grid. In (b), the original AnyRes resizes the image
+before splitting it. The purple block in each panel is the whole-page view.
+Both panels are reproduced unchanged.*
 
 The overview cannot add fine resolution to a crop, but tells the model where that crop belongs. A large letter may be legible locally while its column heading is visible only globally. Increasing tile count helps only if layout markers and positions keep these sources distinguishable and later compression does not remove the regained detail.
 
@@ -228,6 +295,8 @@ assert (h // 28) * (w // 28) == 1260
 
 These are explicitly chosen processor parameters, not universal defaults. Qwen2-VL's patch embedding also spans two temporal samples. For a still image, the processor repeats the frame, giving `grid_t=1`, not twice as many visual tokens.
 
+<a id="vlm-pixtral-packing"></a>
+
 ### Pixtral: packing images without cross-image leakage
 
 ![[00 Учебник/Assets/Figures/curated/resolution-review-2026-10/pixtral-vision-packing.png]]
@@ -313,13 +382,26 @@ assert rope_delta == -3
 
 The difference −3 is what [`get_rope_index`](https://github.com/huggingface/transformers/blob/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/models/qwen2_vl/modeling_qwen2_vl.py#L925-L1082) records as `mrope_position_deltas`. Subsequent generated text continues with this offset. Changing grid shape can change the offset without changing image count.
 
+<a id="vlm-mrope-frequencies"></a>
+
+### Which frequencies each axis uses
+
 For one rotary pair and frequency $\omega$,
 
 $$
 R(p\omega)=\begin{pmatrix}\cos(p\omega)&-\sin(p\omega)\\\sin(p\omega)&\cos(p\omega)\end{pmatrix}.
 $$
 
-The rotated dot product is $q^\top R((p_k-p_q)\omega)k$. MRoPE assigns different pairs to differences in time, height, and width. Horizontal neighbors differ only in width coordinates; vertical neighbors differ in height. A shared coordinate shift leaves this dot product unchanged for fixed $q$ and $k$. That algebraic property does not make the entire image network translation-invariant:
+The dot product after both rotations is
+
+$$
+q^\top R((p_k-p_q)\omega)k.
+$$
+
+MRoPE assigns different pairs to differences in time, height, and width.
+Horizontal neighbors differ only in width; vertical neighbors differ in
+height. A shared shift leaves this dot product unchanged for fixed $q$
+and $k$. The full image network need not be translation-invariant:
 
 ```python
 import numpy as np
@@ -346,9 +428,27 @@ Qwen2.5-VL scales temporal position IDs with physical time. [Qwen3-VL replaces t
 
 Interleaving does not mean repeating `t,h,w` uniformly over every pair. For example, `mrope_section=[24,20,20]` in [Qwen3-VL's pinned implementation](https://github.com/huggingface/transformers/blob/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/models/qwen3_vl/modeling_qwen3_vl.py#L297-L314) assigns 24 frequency pairs to time and 20 each to height and width. Pixtral's RoPE-2D instead alternates height and width within vision attention; it does not imply multidimensional rotary positions in that model's language decoder.
 
+Consider a smaller head with eight frequencies, numbered 0 through 7
+in descending order, and an allocation of four, two, and two pairs.
+Contiguous blocks give `T T T T H H W W`. The interleaving code starts
+with all `T`, sets indices `1, 4` to `H`, and sets `2, 5` to `W`.
+The result is `T H W T H W T T`. The counts are unchanged, but width
+uses $\omega_2$ and $\omega_5$ instead of $\omega_6$ and $\omega_7$.
+
+Horizontal neighbors differ by one in width. With $q=k=(1,0)$
+in one width pair, that pair contributes $\cos\omega_j$ to the dot
+product. The contribution is about 0.8776 for $\omega_2=0.5$ and
+0.9988 for $\omega_6=0.05$. These are selected frequencies for one
+pair, not a prediction of the trained model's full attention logit.
+
 ## Returning coordinates to the original image
 
-A box predicted inside a tile must be offset by the crop origin, corrected for overlap and padding, and divided by resize scale. Preprocessing metadata must therefore travel with the tensor. Inverting coordinates does not restore pixels lost to downsampling or cropping; it only maps locations within the retained region. When both overview and crops contain the same object, the training format must unambiguously state which coordinate system the target uses.
+A box predicted inside a tile must be offset by the crop origin,
+corrected for padding, and divided by resize scale. Preprocessing
+metadata must travel with the tensor. Inverting coordinates maps
+locations within the retained region; it does not restore lost pixels.
+When the overview and crops contain the same object, the target
+format must specify which coordinate system it uses.
 
 For example, resize a $1600\times1000$ page by $s=0.5$, then add 12 pixels of left padding and 6 of top padding. A prepared-image box $(112,56,312,156)$ maps back to
 
@@ -388,7 +488,32 @@ b = to_original([32, 16, 232, 116], [.5, .5], [12, 6], [80, 40])
 assert np.allclose(a, expected) and np.allclose(b, expected)
 ```
 
-Coordinates here are continuous rectangle boundaries, without the `+1` used by some discrete formats. If a crop clipped the object, inversion returns only the visible box, not the missing part. Map detections from different tiles into a common coordinate system before comparing IoU; equal tile-local numbers can refer to different places. Confidence alone does not establish that two boxes describe one object.
+Coordinates here are continuous rectangle boundaries, without the `+1` used by some discrete formats. If a crop clipped the object, inversion returns only the visible box, not the missing part.
+
+<a id="vlm-tile-boxes"></a>
+
+### Boxes from overlapping tiles
+
+Keep tile A at origin $(80,40)$ and add tile B at $(96,48)$,
+with the same scale and padding. When the full object fits in both,
+the local boxes are $(32,16,232,116)$ and $(16,8,216,108)$.
+Both map to $(200,100,600,300)$, so their IoU is 1.
+Comparing the local numbers directly gives about 0.7337 even
+though both predictions are exact. No separate overlap correction
+is needed; the tile origins already account for the difference.
+
+Now let tile B end at local $u=128$. Its visible box ends at 128
+rather than 216; that edge maps to $x=(128+96-12)/0.5=424$.
+With unchanged height, the intersection with the full box covers
+224 of its 400 pixels in width, for an IoU of 0.56. A threshold
+of 0.7 would leave two detections for the same object. Lowering
+the threshold can also merge adjacent objects of the same class.
+
+[SAHI, §3](https://arxiv.org/html/2202.06934v5#S3) applies this
+sequence to an object detector: predict on each tile, return the
+boxes to the image coordinate system, then match them.
+That is post-processing of tile predictions, not the assembly of
+an input feature grid before an LLM as in AnyRes.
 
 <span id="где-теряется-информация-crop-tiling-merge-и-фиксированный-budget"></span>
 

@@ -1,0 +1,39 @@
+[
+  {
+    "id": "curated-ngram-karpathy-bigram-counts-0972425d7afc",
+    "asset": "00 Учебник/Assets/Figures/curated/ngram-makemore-2026-11-03/karpathy-bigram-counts.png",
+    "author": "Andrej Karpathy",
+    "source_url": "https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part1_bigrams.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/karpathy/nn-zero-to-hero/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part1_bigrams.ipynb",
+    "commit": "73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde",
+    "source_asset": "05 Источники/Originals/ngram-2026-10-21/makemore-part1-bigrams.ipynb",
+    "source_asset_sha256": "db2f139409bad2966baac06581b6ca8ec9a03668df50dd073577fd98b3be0045",
+    "sha256": "0972425d7afc53f7d81c7da5aca31a4dd99cb664bf102f604b0e3c61cec57d39",
+    "source_cell_index": 11,
+    "source_output_index": 0,
+    "source_member": "/cells/11/outputs/0/data/image~1png",
+    "dimensions_px": [
+      884,
+      884
+    ],
+    "bytes": 251350,
+    "source_page_snapshot": "05 Источники/Originals/ngram-2026-10-21/makemore-part1-bigrams.ipynb",
+    "source_page_sha256": "db2f139409bad2966baac06581b6ca8ec9a03668df50dd073577fd98b3be0045",
+    "source_data": "05 Источники/Originals/ngram-makemore-2026-11-03/names.txt",
+    "source_data_sha256": "0a30b5557f192f32ab962680889aac5f6fda0f4cecf40a6d0b5694f58ea8cc4d",
+    "source_data_url": "https://raw.githubusercontent.com/karpathy/makemore/8f79bd0126eaef5eb82d346c9f85ae20ea1c476a/names.txt",
+    "license": "MIT",
+    "license_url": "https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/LICENSE",
+    "license_evidence": "05 Источники/Originals/normalization-course-2026-11-03/karpathy-LICENSE.txt",
+    "license_evidence_sha256": "a59ec5cdb1c1e447e5266a014b3e7ded511f8d6e5a08931e931c87490ff821fe",
+    "public_license_copy": "site/public/licenses/karpathy-nn-zero-to-hero-73c3fcc7-MIT.txt",
+    "derivation": "notebook-output-extraction",
+    "modifications": "Exact original saved PNG decoded from cell11/output0. No rerender, crop, recoloring, relabeling, resizing, redraw or translation.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-11-03",
+    "used_in": [
+      "00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель.md"
+    ]
+  }
+]

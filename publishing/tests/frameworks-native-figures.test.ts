@@ -4,6 +4,7 @@ import {resolve,basename} from 'node:path';
 import {describe,expect,it} from 'vitest';
 import {parse} from 'yaml';
 import {withoutTensorStorageAddition} from './helpers/tensor-storage-baseline.js';
+import {beforeTopicConsolidation} from '../tools/topic-consolidation-baseline.mjs';
 
 const root=resolve(import.meta.dirname,'../..');
 const read=(path:string)=>readFileSync(resolve(root,path));
@@ -13,9 +14,9 @@ const chapter='00 Учебник/00 Математические и ML-осно�
 
 describe('Frameworks figure inventory and tensor-storage integration',()=>{
   it('preserves and accounts for all 21 actual chapter objects, in order',()=>{
-    expect(hash(read(report.source))).toBe(report.source_sha256);
+    const source=beforeTopicConsolidation(read(report.source).toString(),report.source,root);
+    expect(hash(source)).toBe(report.source_sha256);
     expect(hash(read(report.source_code))).toBe(report.source_code_sha256);
-    const source=read(report.source).toString();
     const images=Array.from(source.matchAll(/!\[\[(Assets\/Sources\/Harvard ML Systems\/vol1\/frameworks\/[^\]|]+)(?:\|[^\]]*)?\]\]/g),m=>m[1]);
     expect(images).toHaveLength(21);
     expect(report.figures.map((r:{asset:string})=>r.asset)).toEqual(images);
@@ -90,7 +91,10 @@ describe('Frameworks figure inventory and tensor-storage integration',()=>{
       [entry.source_asset,entry.source_asset_sha256],
       [entry.source_page_snapshot,entry.source_page_sha256],
       [entry.source_code,entry.source_code_sha256],
-      [entry.license_evidence,entry.license_evidence_sha256]]) expect(hash(read(path))).toBe(sha);
+      [entry.license_evidence,entry.license_evidence_sha256]]) {
+      const bytes=read(path);
+      expect(hash(path===report.source ? beforeTopicConsolidation(bytes.toString(),path,root) : bytes),path).toBe(sha);
+    }
     expect(entry.license).toBe('CC BY-NC-SA 4.0');
     expect(entry.derivation).toBe('source-svg-copy');
     expect(entry.crop_box_px).toBeUndefined();

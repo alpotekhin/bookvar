@@ -12,3 +12,17 @@ https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc921
 No crop, redrawing, relabeling, translation or pixel resampling.
 The notebook was not executed to create replacement figures.
 Figures remain separate works under their original terms.
+
+Additional originals: RBF SVM parameters
+The scikit-learn developers
+https://scikit-learn.org/1.9/auto_examples/svm/plot_rbf_parameters.html
+BSD-3-Clause. Full copyright notice, conditions and disclaimer:
+scikit-learn-1.9.1-BSD-3-Clause.txt
+https://github.com/scikit-learn/scikit-learn/blob/866c0f51e7560ef0303cbcc5f159df5382ea9e3f/LICENSE
+
+Two complete original PNGs, no crop, redraw, relabeling or resampling:
+sklearn-rbf-decision-grid.png and sklearn-rbf-validation-grid.png
+https://github.com/scikit-learn/scikit-learn.github.io/tree/199d116ab37beed506c63fc9f6a74f56e228de43/1.9/_images
+Source example pinned to release commit 866c0f51e7560ef0303cbcc5f159df5382ea9e3f.
+The source figure's globally fitted scaler is identified in the chapter.
+The separate chapter program puts scaling inside each cross-validation fold.

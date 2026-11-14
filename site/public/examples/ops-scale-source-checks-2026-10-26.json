@@ -301,12 +301,25 @@
     }
   },
   "independent_accounting_cases": 200,
-  "chapter_sha256": "e7cfbc4f4fd01784dbb52ee6dc3a3636c389a796a973603fbbea16b0b00e1711",
+  "chapter_sha256": "3c92a8d727b9edcef9d00bbf611a724130d1ed6a138920bdc831a0b23b4b530a",
   "practice_sha256": "36116beffe2e9348124f27228fb6209b53282d095e114c6ac253b9abc3301c4a",
-  "checker_sha256": "2dde6c17c12b11fdd2067a2b9b289c977d2b48e7a438dd4b707754353fac593b",
+  "checker_sha256": "03510a1db836e75e8a0d98b25205c24dfd4f0b389d09598ea6a79c263844f308",
   "accepted_2240_chapter_lines_preserved": true,
   "accepted_645_practice_lines_preserved": true,
   "new_python_blocks_executed": 5,
+  "release_decision_examples": {
+    "sample_ratio": {
+      "chi_square": "1000/19",
+      "p_value": 4.02367219068424e-13,
+      "missing_outcome_bounds": [
+        "6/125",
+        "37/250"
+      ]
+    },
+    "request_budget": {
+      "allowed_errors": 1000
+    }
+  },
   "verbatim_source_excerpts": 3,
   "scope": "CPU arithmetic from eight AST-extracted pure functions and printed examples; no Marimo UI, prediction gates, ledger write, model, traffic, Docker or deployment"
 }

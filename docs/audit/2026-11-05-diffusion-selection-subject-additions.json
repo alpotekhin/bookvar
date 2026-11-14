@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "kind": "diffusion-selection-subject-additions",
+  "review_date": "2026-11-05",
+  "files": [
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA.md",
+      "before_sha256": "401aacb0a16c68950e0b68d7ed130b8d8412c750d43d75c679f32f4d9d66f278",
+      "changes": [
+        {
+          "old": "reference_terms:\n  - label: Block Diffusion — блочная генерация и KV-cache\n    label_en: Block Diffusion — block generation and KV caching\n    anchor: block-diffusion-and-kv\n  - label: ReMDM — повторное маскирование\n    label_en: ReMDM — remasking and refinement\n    anchor: remasking-and-refinement\nlast_updated: 2026-10-29\nlast_verified: 2026-10-29\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\nreference_terms:\n  - anchor: masking-process\n    label: \"MDLM: поглощающее маскирование и обучающий вход\"\n    label_en: \"MDLM: absorbing masking and the training input\"\n  - anchor: weighted-mask-loss\n    label: \"SUBS и взвешенная ошибка masked diffusion\"\n    label_en: \"SUBS and the weighted masked-diffusion loss\"\n  - anchor: diffusion-bert-boundary\n    label: \"BERT и генеративная модель с маскированием\"\n    label_en: \"BERT versus a generative masking model\"\n  - anchor: reverse-transition\n    label: \"Обратный переход: вероятность токена и вероятность раскрытия\"\n    label_en: \"Reverse transitions: token probability and reveal probability\"\n  - anchor: complete-toy-sampler\n    label: \"Полный sampler с точными условными распределениями\"\n    label_en: \"A complete sampler with exact conditional distributions\"\n  - anchor: diffusion-pair-factorization\n    label: \"Ошибка независимой генерации зависимых токенов\"\n    label_en: \"Independent sampling of dependent tokens\"\n  - anchor: llada-training-and-selection\n    label: \"LLaDA: pre-training, SFT, EOS и выбор позиций\"\n    label_en: \"LLaDA: pre-training, SFT, EOS and position selection\"\n  - anchor: block-diffusion-and-kv\n    label: \"Block Diffusion — блочная генерация и KV-cache\"\n    label_en: \"Block Diffusion — block generation and KV caching\"\n  - anchor: diffusion-stream-leakage\n    label: \"Block Diffusion: чистый и зашумлённый потоки без утечки targets\"\n    label_en: \"Block Diffusion: clean/noisy streams without target leakage\"\n  - anchor: remasking-and-refinement\n    label: \"ReMDM — повторное маскирование\"\n    label_en: \"ReMDM — remasking and refinement\"\n  - anchor: remdm-loop\n    label: \"ReMDM-loop: доработка при постоянном уровне шума\"\n    label_en: \"ReMDM-loop: refinement at a fixed noise level\"\n  - anchor: likelihood-and-serving\n    label: \"NELBO, perplexity и стоимость диффузионной генерации\"\n    label_en: \"NELBO, perplexity and diffusion-serving cost\"\n  - anchor: diffusion-prediction-reuse\n    label: \"Повторное использование прогноза и prefix KV-cache\"\n    label_en: \"Prediction reuse versus prefix KV caching\"\n"
+        },
+        {
+          "old": "BERT also learns to predict missing tokens, but its original corruption\n",
+          "new": "<a id=\"diffusion-bert-boundary\"></a>\n\nBERT also learns to predict missing tokens, but its original corruption\n"
+        },
+        {
+          "old": "For a linear schedule with $T$ equally spaced reverse steps, each position\n",
+          "new": "<a id=\"diffusion-pair-factorization\"></a>\n\nFor a linear schedule with $T$ equally spaced reverse steps, each position\n"
+        },
+        {
+          "old": "Training must also prevent target leakage. To denoise block $b$, the\n",
+          "new": "<a id=\"diffusion-stream-leakage\"></a>\n\nTraining must also prevent target leakage. To denoise block $b$, the\n"
+        },
+        {
+          "old": "In ReMDM-loop, ordinary unmasking first creates a partial candidate.\n",
+          "new": "<a id=\"remdm-loop\"></a>\n\nIn ReMDM-loop, ordinary unmasking first creates a partial candidate.\n"
+        },
+        {
+          "old": "MDLM §4.1 describes another form of reuse: when a step reveals no tokens,\n",
+          "new": "<a id=\"diffusion-prediction-reuse\"></a>\n\nMDLM §4.1 describes another form of reuse: when a step reveals no tokens,\n"
+        },
+        {
+          "old": "| Reverse-process state | Position 1 | Position 2 | Position 3 | Position 4 |\n|---|---|---|---|---|\n| Initial | `[MASK]` | `[MASK]` | `[MASK]` | `[MASK]` |\n| One possible step | `[MASK]` | `[MASK]` | `sleeps` | `[MASK]` |\n| Later | `The` | `[MASK]` | `sleeps` | `here` |\n| Complete | `The` | `cat` | `sleeps` | `here` |\n",
+          "new": "| Reverse-process state | Sequence (positions 1–4) |\n|---|---|\n| Initial | `[MASK]` `[MASK]` `[MASK]` `[MASK]` |\n| One possible step | `[MASK]` `[MASK]` `sleeps` `[MASK]` |\n| Later | `The` `[MASK]` `sleeps` `here` |\n| Complete | `The` `cat` `sleeps` `here` |\n"
+        }
+      ],
+      "after_sha256": "df3bdf229fcf5198f3615983358f67f697299578e0bc1a72db5e0909f0d11e00"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества.md",
+      "before_sha256": "1a5082192c91d9da9d8b69faf39de8beeddb224e7446b6b09b7061bb72619e2c",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-28\nlast_verified: 2026-10-28\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\nreference_terms:\n  - anchor: selection-method-choice\n    label: \"Отбор данных: предпосылки выбора метода\"\n    label_en: \"Data selection: method prerequisites\"\n  - anchor: selection-quality-feasibility\n    label: \"Выбор процедуры с ограничениями на качество\"\n    label_en: \"Choosing a procedure under quality constraints\"\n  - anchor: selection-time-budget\n    label: \"Полная стоимость отбора и частота пересчёта оценок\"\n    label_en: \"End-to-end selection cost and rescoring frequency\"\n  - anchor: selection-epoch-budget\n    label: \"Меньший набор данных, эпохи и число шагов\"\n    label_en: \"Smaller datasets, epochs and optimizer steps\"\n  - anchor: selection-lifecycle-cost\n    label: \"Разметка, амортизация и повторные запуски\"\n    label_en: \"Annotation, amortization and repeated runs\"\n  - anchor: selection-storage-access\n    label: \"Последовательное чтение, случайный доступ и компактные шарды\"\n    label_en: \"Sequential reads, random access and compact shards\"\n  - anchor: distributed-selection\n    label: \"Распределённый scoring и объём передаваемых данных\"\n    label_en: \"Distributed scoring and payload sizes\"\n  - anchor: selection-global-topk\n    label: \"Локальные квоты и точный глобальный top-k\"\n    label_en: \"Local quotas versus exact global top-k\"\n  - anchor: selection-score-identity\n    label: \"Версии оценок, свежесть и дубли между шардами\"\n    label_en: \"Score identity, freshness and cross-shard duplicates\"\n  - anchor: selection-distributed-overhead\n    label: \"Накладные расходы распределённого отбора\"\n    label_en: \"Distributed selection overhead\"\n  - anchor: data-echoing\n    label: \"Data echoing: повторное использование подготовленных данных\"\n    label_en: \"Data echoing: reusing prepared data\"\n  - anchor: selection-fresh-presentations\n    label: \"Fresh visits и presentations: разные бюджеты обучения\"\n    label_en: \"Fresh visits versus presentations: different training budgets\"\n  - anchor: echoed-optimizer-updates\n    label: \"Echoing и gradient accumulation: разные обновления параметров\"\n    label_en: \"Echoing versus gradient accumulation: different parameter updates\"\n  - anchor: selection-quality-measurement\n    label: \"Кривые качества при заданных бюджетах\"\n    label_en: \"Learning curves under declared budgets\"\n  - anchor: selection-ppd\n    label: \"Performance-per-data и начальный уровень качества\"\n    label_en: \"Performance-per-data and the initial quality\"\n  - anchor: selection-aulc\n    label: \"AULC: интерполяция, площадь и нормировка\"\n    label_en: \"AULC: interpolation, area and normalization\"\n  - anchor: selection-dcr\n    label: \"Сжатие данных при фиксированном качестве — DCR\"\n    label_en: \"Data compression at fixed quality: DCR\"\n  - anchor: selection-icr-proxy\n    label: \"Information-Compute Ratio и границы proxy-оценок\"\n    label_en: \"Information-Compute Ratio and proxy limits\"\n  - anchor: selection-subgroup-quality\n    label: \"Среднее качество и редкие группы\"\n    label_en: \"Average quality and rare groups\"\n  - anchor: selection-cross-layer-effects\n    label: \"Отбор корпуса, обучение и стоимость serving\"\n    label_en: \"Corpus selection, training and serving cost\"\n"
+        },
+        {
+          "old": "  - https://arxiv.org/html/1907.05550v3\n",
+          "new": "  - https://arxiv.org/html/1907.05550v3\n  - https://research.google/blog/speeding-up-neural-network-training-with-data-echoing/\n"
+        },
+        {
+          "old": "### Apply the quality requirements before choosing the cheapest run\n",
+          "new": "<a id=\"selection-quality-feasibility\"></a>\n\n### Apply the quality requirements before choosing the cheapest run\n"
+        },
+        {
+          "old": "### Fewer examples do not specify the training schedule\n",
+          "new": "<a id=\"selection-epoch-budget\"></a>\n\n### Fewer examples do not specify the training schedule\n"
+        },
+        {
+          "old": "### Local quotas and global top-k\n",
+          "new": "<a id=\"selection-global-topk\"></a>\n\n### Local quotas and global top-k\n"
+        },
+        {
+          "old": "### Score identity, freshness, and cross-shard duplicates\n",
+          "new": "<a id=\"selection-score-identity\"></a>\n\n### Score identity, freshness, and cross-shard duplicates\n"
+        },
+        {
+          "old": "### The overhead of a distributed selection pass\n",
+          "new": "<a id=\"selection-distributed-overhead\"></a>\n\n### The overhead of a distributed selection pass\n"
+        },
+        {
+          "old": "At a fixed budget of 115.2 million downstream presentations, factors 1 and 2\n",
+          "new": "<a id=\"selection-fresh-presentations\"></a>\n\nAt a fixed budget of 115.2 million downstream presentations, factors 1 and 2\n"
+        },
+        {
+          "old": "Choi et al., [Data Echoing, §2 and §3.2](https://arxiv.org/html/1907.05550v3#S2),\n",
+          "new": "<a id=\"echoed-optimizer-updates\"></a>\n### Echoed updates and gradient accumulation\n\nWith batch echoing, the optimizer updates its parameters and then evaluates\nthe same batch again. Gradient accumulation evaluates several microbatches\nbefore the next optimizer update. Even when both procedures use the same\nexamples twice, their second gradient need not be the same.\n\nFor a scalar parameter, take the loss\n$L(\\theta)=\\tfrac12(\\theta-1)^2$, whose gradient is $\\theta-1$.\nStart at $\\theta_0=0$ and use plain SGD with learning rate $\\eta=0.5$.\nThe first echoed update has gradient $-1$ and moves the parameter to $0.5$.\nThe next evaluation of the same example has gradient $-0.5$ and moves it\nto $0.75$. If two identical microbatches are instead evaluated at the\nunchanged initial parameter, their mean gradient is still $-1$;\none update reaches $0.5$, not $0.75$.\n\n```python\ndef echoed_sgd(initial, learning_rate, presentations):\n    parameter = initial\n    trace = []\n    for _ in range(presentations):\n        gradient = parameter - 1\n        parameter -= learning_rate * gradient\n        trace.append((gradient, parameter))\n    return parameter, trace\n\nechoed, trace = echoed_sgd(0., .5, 2)\naccumulated_mean_gradient = ((0. - 1.) + (0. - 1.)) / 2\naccumulated = 0. - .5 * accumulated_mean_gradient\nassert trace == [(-1., .5), (-.5, .75)]\nassert echoed == .75 and accumulated == .5\nprint(\"echoed updates\", trace, \"one averaged-gradient update\", accumulated)\n```\n\nThis comparison uses two presentations in both cases, but two optimizer\nupdates for echoing and one for accumulation. Summing instead of averaging\nthe accumulated gradients would change the gradient scale again. With\nmomentum, adaptive optimizer state or a learning-rate schedule, update\nordering also changes that state. Echo factor, optimizer-step budget and\nloss reduction therefore need to be specified separately.\n\nChoi and Dahl's [illustrated walkthrough](https://research.google/blog/speeding-up-neural-network-training-with-data-echoing/)\nshows the original pipeline and idle-time diagrams, and distinguishes\nexample echoing from batch echoing. Echoing before stochastic augmentation\ncan create a new view on each presentation; echoing an already augmented\nbatch reuses that transformed input. Neither arrangement is equivalent to\nobtaining new independent labelled examples.\n\nChoi et al., [Data Echoing, §2 and §3.2](https://arxiv.org/html/1907.05550v3#S2),\n"
+        },
+        {
+          "old": "Harvard introduces three summaries of the quality-versus-data curve.\n",
+          "new": "<a id=\"selection-ppd\"></a>\n\nHarvard introduces three summaries of the quality-versus-data curve.\n"
+        },
+        {
+          "old": "The area under the learning curve summarizes a whole budget interval:\n",
+          "new": "<a id=\"selection-aulc\"></a>\n\nThe area under the learning curve summarizes a whole budget interval:\n"
+        },
+        {
+          "old": "The data compression ratio at a specified target is\n",
+          "new": "<a id=\"selection-dcr\"></a>\n\nThe data compression ratio at a specified target is\n"
+        },
+        {
+          "old": "### Coverage can disagree with average quality\n",
+          "new": "<a id=\"selection-subgroup-quality\"></a>\n\n### Coverage can disagree with average quality\n"
+        }
+      ],
+      "after_sha256": "4dba4d68eadd42d65042689cde2ce7ad1155ff29ef3aba79dea5c066c449cc42"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "14ad697e26228fa79bce9651a900c9cce4d66b637cd9df8e177332db0498edaf",
+      "after_sha256": "0888ae3665c5d3c495567332773ef92138e4417aa8f36456850ca5c41b310d69",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA|Masked diffusion — MDLM, LLaDA and block generation]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#block-diffusion-and-kv|Block Diffusion — блочная генерация и KV-cache]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#remasking-and-refinement|ReMDM — повторное маскирование]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA|Masked diffusion — MDLM, LLaDA and block generation]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#masking-process|MDLM: поглощающее маскирование и обучающий вход]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#weighted-mask-loss|SUBS и взвешенная ошибка masked diffusion]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#diffusion-bert-boundary|BERT и генеративная модель с маскированием]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#reverse-transition|Обратный переход: вероятность токена и вероятность раскрытия]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#complete-toy-sampler|Полный sampler с точными условными распределениями]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#diffusion-pair-factorization|Ошибка независимой генерации зависимых токенов]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#llada-training-and-selection|LLaDA: pre-training, SFT, EOS и выбор позиций]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#block-diffusion-and-kv|Block Diffusion — блочная генерация и KV-cache]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#diffusion-stream-leakage|Block Diffusion: чистый и зашумлённый потоки без утечки targets]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#remasking-and-refinement|ReMDM — повторное маскирование]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#remdm-loop|ReMDM-loop: доработка при постоянном уровне шума]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#likelihood-and-serving|NELBO, perplexity и стоимость диффузионной генерации]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#diffusion-prediction-reuse|Повторное использование прогноза и prefix KV-cache]]\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества|Отбор данных — стоимость, шарды и проверка качества]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества|Отбор данных — стоимость, шарды и проверка качества]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-method-choice|Отбор данных: предпосылки выбора метода]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-quality-feasibility|Выбор процедуры с ограничениями на качество]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-time-budget|Полная стоимость отбора и частота пересчёта оценок]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-epoch-budget|Меньший набор данных, эпохи и число шагов]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-lifecycle-cost|Разметка, амортизация и повторные запуски]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-storage-access|Последовательное чтение, случайный доступ и компактные шарды]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#distributed-selection|Распределённый scoring и объём передаваемых данных]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-global-topk|Локальные квоты и точный глобальный top-k]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-score-identity|Версии оценок, свежесть и дубли между шардами]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-distributed-overhead|Накладные расходы распределённого отбора]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#data-echoing|Data echoing: повторное использование подготовленных данных]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-fresh-presentations|Fresh visits и presentations: разные бюджеты обучения]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#echoed-optimizer-updates|Echoing и gradient accumulation: разные обновления параметров]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-quality-measurement|Кривые качества при заданных бюджетах]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-ppd|Performance-per-data и начальный уровень качества]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-aulc|AULC: интерполяция, площадь и нормировка]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-dcr|Сжатие данных при фиксированном качестве — DCR]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-icr-proxy|Information-Compute Ratio и границы proxy-оценок]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-subgroup-quality|Среднее качество и редкие группы]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-cross-layer-effects|Отбор корпуса, обучение и стоимость serving]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "df62e3e9041430d795bbb1ba5df4e1017dab582bbdbe2773a234d093135b6e16",
+      "after_sha256": "45213b1f6740c2673470ad73d9d98521e02363a6891fb8d766cc8da3104cb0e2",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA|Masked diffusion: MDLM and LLaDA]] · **EN original**\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#block-diffusion-and-kv|Block Diffusion — block generation and KV caching]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#remasking-and-refinement|ReMDM — remasking and refinement]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA|Masked diffusion: MDLM and LLaDA]] · **EN original**\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#masking-process|MDLM: absorbing masking and the training input]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#weighted-mask-loss|SUBS and the weighted masked-diffusion loss]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#diffusion-bert-boundary|BERT versus a generative masking model]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#reverse-transition|Reverse transitions: token probability and reveal probability]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#complete-toy-sampler|A complete sampler with exact conditional distributions]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#diffusion-pair-factorization|Independent sampling of dependent tokens]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#llada-training-and-selection|LLaDA: pre-training, SFT, EOS and position selection]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#block-diffusion-and-kv|Block Diffusion — block generation and KV caching]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#diffusion-stream-leakage|Block Diffusion: clean/noisy streams without target leakage]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#remasking-and-refinement|ReMDM — remasking and refinement]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#remdm-loop|ReMDM-loop: refinement at a fixed noise level]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#likelihood-and-serving|NELBO, perplexity and diffusion-serving cost]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#diffusion-prediction-reuse|Prediction reuse versus prefix KV caching]]\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества|Data selection: cost, shards, and quality checks]] · **EN original**\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества|Data selection: cost, shards, and quality checks]] · **EN original**\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-method-choice|Data selection: method prerequisites]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-quality-feasibility|Choosing a procedure under quality constraints]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-time-budget|End-to-end selection cost and rescoring frequency]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-epoch-budget|Smaller datasets, epochs and optimizer steps]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-lifecycle-cost|Annotation, amortization and repeated runs]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-storage-access|Sequential reads, random access and compact shards]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#distributed-selection|Distributed scoring and payload sizes]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-global-topk|Local quotas versus exact global top-k]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-score-identity|Score identity, freshness and cross-shard duplicates]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-distributed-overhead|Distributed selection overhead]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#data-echoing|Data echoing: reusing prepared data]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-fresh-presentations|Fresh visits versus presentations: different training budgets]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#echoed-optimizer-updates|Echoing versus gradient accumulation: different parameter updates]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-quality-measurement|Learning curves under declared budgets]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-ppd|Performance-per-data and the initial quality]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-aulc|AULC: interpolation, area and normalization]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-dcr|Data compression at fixed quality: DCR]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-icr-proxy|Information-Compute Ratio and proxy limits]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-subgroup-quality|Average quality and rare groups]]\n  - [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества#selection-cross-layer-effects|Corpus selection, training and serving cost]]\n"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "status": "verified-local-delta",
+    "date": "2026-11-05",
+    "scope": "Two whole-owner reviews;33 subject links per locale(31 new),one new worked optimizer example,and one lossless narrow-table reflow. Original English,existing explanations,programs,equations and nine source figures retained. No translation,new source image,whole-course acceptance or release.",
+    "wholeReads": [
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA.md",
+        "inputLines": 579,
+        "inputSha256": "401aacb0a16c68950e0b68d7ed130b8d8412c750d43d75c679f32f4d9d66f278",
+        "finalLines": 622,
+        "finalSha256": "df3bdf229fcf5198f3615983358f67f697299578e0bc1a72db5e0909f0d11e00",
+        "read": "Complete input1–220,221–440,441–EOF;complete final1–210,211–425,426–EOF after the final table reflow."
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества.md",
+        "inputLines": 844,
+        "inputSha256": "1a5082192c91d9da9d8b69faf39de8beeddb224e7446b6b09b7061bb72619e2c",
+        "finalLines": 975,
+        "finalSha256": "4dba4d68eadd42d65042689cde2ce7ad1155ff29ef3aba79dea5c066c449cc42",
+        "read": "Complete input1–220,221–440,441–660,661–EOF;complete final1–235,236–470,471–705,706–EOF."
+      }
+    ],
+    "explanation": "MDLM retains absorbing corruption,SUBS,loss weighting,reverse probabilities,finite-step pair dependence,LLaDA SFT/EOS,block-causal cache invariance,target-leakage control,ReMDM marginals/refinement and NELBO/serving limits. Selection retains feasibility,total/recurring costs,update budgets,I/O,exact top-k,identity/freshness,echo throughput,quality curves and subgroup constraints. New scalar SGD trace explains gradients-1→-.5 and parameter0→.5→.75 versus one averaged-gradient update to.5;optimizer-step and presentation budgets remain separate.",
+    "sourceComparison": "The full earlier MDLM and selection-engineering audits were read and are reused only on their exact restored input revisions,not as a new complete-course comparison. Fresh official Choi/Dahl illustrated data-echoing walkthrough read in full;its pipeline placement and example/batch distinctions support the new link. New SGD calculation is an explicitly worked derivation,not an author experiment. No fresh full-paper/whole-course claim for partial HTML opens.",
+    "style": "no-ai-slop SKILL/eval read fully;minimum edits preserve the substantive original-English reasoning and all quotations/captions. Full final owners reread separately from mechanical tests;no shortening into definitions.",
+    "preservation": "Four-file exact inverse restores both input owners and indexes. All4 MDLM programs,all9 prior selection programs,16 display equations,nine figure placements and complete existing explanations/captions remain;the only new program is the echoed-SGD example. Four trajectory states and all16 ordered tokens retained.",
+    "examples": {
+      "device": "CPU,Python standard library",
+      "pythonPrograms": 14,
+      "selection": {
+        "exit": 0,
+        "programs": 10,
+        "qualityPrerequisiteChoices": 108,
+        "refreshCases": 450,
+        "breakEvenCases": 12,
+        "topkCases": 360,
+        "finiteEchoSchedules": 48,
+        "echoedSgdFractionCases": 120,
+        "metricCases": 24,
+        "originalFigures": 5,
+        "log": "/var/tmp/bookvar-diffusion-selection-examples-final-20261105.log"
+      },
+      "diffusion": {
+        "exit": 0,
+        "programs": 4,
+        "exactFiniteStateCases": 7,
+        "remaskingMarginalCases": 120,
+        "negativeControls": 6,
+        "targetLeakageControl": true,
+        "log": "/var/tmp/bookvar-diffusion-examples-final-20261105.log"
+      },
+      "scope": "Actual chapter programs and independent arithmetic/probability controls execute. No neural training,GPU/distributed run,latency/IOPS measurement or language-quality benchmark."
+    },
+    "tests": {
+      "exit": 0,
+      "scopedTests": 37,
+      "htmlTests": 208,
+      "readingReceiptTests": 2,
+      "totalDistinctTests": 247,
+      "scope": "Final exact inverse,program/formula/figure preservation,33 real subject anchors and both indexes,original asset hashes,SGD and trajectory semantics;208 final built-output tests and2 final root reading-receipt tests pass."
+    },
+    "build": {
+      "exit": 0,
+      "pages": 2009,
+      "pagefindHtmlFiles": 2013,
+      "durationSeconds": 27.89,
+      "brokenInternalLinks": 0,
+      "bytes": 856426288,
+      "files": 5626,
+      "limit": 1000000000
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-05-diffusion-selection-reader",
+      "desktop": "1280×900 override;document1265/1265,reader617px. All9 originals loaded at native proportions;all16 displays and5tables fit617/617. MDLM original inspected inline;all5 Harvard originals personally inspected full in the viewer with captions.",
+      "mobile": "375×812 override;document360/360,reader328px. All9 originals loaded and fit;all16 displays and5tables now fit328/328,zero KaTeX errors. Opening trajectory previously scrolled442/328;final two-column table retains every state/token and was personally inspected. New SGD explanation inspected on-page. All4 MDLM originals inspected in viewer;selected zoom1.5–2×. Harvard decision tree at2.5× and artifact flow at2× inspected. Labels readable with zoom;keyboard panning verified for Block Diffusion and Harvard decision tree. No all-image/all-pan-endpoint claim.",
+      "navigation": "Actual RU reference→MDLM weighted loss and echoed SGD;actual EN reference→clean/noisy-stream leakage and echoed SGD. All four arrive at their unique subject target near88px below viewport top. Source-native English has no translation fallback;no separate translation authored.",
+      "transient": "A preview request during dist replacement returned404;after the completed build reload served the correct page. First hash reload retained top position;actual subject-link navigation verified correct scrolling. Temporary viewport reset before handoff."
+    },
+    "publication": "Local only;no stage,commit,push or deployment.",
+    "remaining": [
+      "Dedicated original data-echoing pipeline/timing figures remain link-only. The official Google walkthrough shows them;the fetched HTML gives no explicit reuse grant,OpenReview presents verification and the API attempt returned403. No copied figure or synthetic replacement.",
+      "52 of153 owners remain unread in this route pass after the two new whole-owner receipts. Whole reads are not accepted-chapter counts. Next:distributed training,beginning with processes/collectives/DDP.",
+      "Whole-book explanation/source completeness,remaining figure rights/visual gaps,public-checkout/Pages-base checks and authorized dev/Pages release remain open."
+    ]
+  }
+}

@@ -2,9 +2,75 @@
 title: Data pipeline, padding и packing
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-28
-last_verified: 2026-10-28
+last_updated: 2026-11-04
+last_verified: 2026-11-04
 source_language: mixed
+reference_terms:
+  - anchor: data-storage
+    label: "Шарды, mmap и описание корпуса"
+    label_en: "Shards, mmap and corpus metadata"
+  - anchor: data-decoding
+    label: "Декодирование изображений и DALI"
+    label_en: "Image decoding and DALI"
+  - anchor: data-dali-graph
+    label: "Операторы и DataNode в DALI"
+    label_en: "DALI operators and DataNodes"
+  - anchor: data-loader
+    label: "Dataset, sampler и DataLoader"
+    label_en: "Dataset, sampler and DataLoader"
+  - anchor: cache-placement-and-epoch-state
+    label: "Кэширование между эпохами"
+    label_en: "Caching across epochs"
+  - anchor: data-cache-counts
+    label: "Подсчёт выполненных преобразований"
+    label_en: "Counting executed transformations"
+  - anchor: data-cache-randomness
+    label: "Случайные преобразования после кэша"
+    label_en: "Random transforms after the cache"
+  - anchor: data-cache-completion
+    label: "Заполнение конечного кэша"
+    label_en: "Completing a finite cache"
+  - anchor: data-cache-identity
+    label: "Версия и память файлового кэша"
+    label_en: "Persistent cache identity and memory"
+  - anchor: data-h2d
+    label: "Pinned memory и перекрытие H2D"
+    label_en: "Pinned memory and H2D overlap"
+  - anchor: data-padding
+    label: "Dynamic padding и число позиций"
+    label_en: "Dynamic padding and position counts"
+  - anchor: data-pad-eos
+    label: "Маска длины при PAD = EOS"
+    label_en: "Length masks when PAD equals EOS"
+  - anchor: data-bucketing
+    label: "Bucketing и порядок примеров"
+    label_en: "Bucketing and sample order"
+  - anchor: data-packing
+    label: "Packing и cu_seqlens"
+    label_en: "Packing and cu_seqlens"
+  - anchor: data-document-isolation
+    label: "Границы документов и сдвиг целей"
+    label_en: "Document boundaries and shifted targets"
+  - anchor: data-sdpa-isolation
+    label: "Проверка изоляции документов в SDPA"
+    label_en: "Testing document isolation with SDPA"
+  - anchor: data-loss-normalization
+    label: "Нормировка loss по целевым токенам"
+    label_en: "Loss normalization over target tokens"
+  - anchor: data-ddp-weighting
+    label: "Нормировка токенов между DDP-процессами"
+    label_en: "Token weighting across DDP ranks"
+  - anchor: data-loader-loop
+    label: "Цикл загрузки без доказанного overlap"
+    label_en: "Loader loop without demonstrated overlap"
+  - anchor: data-sharding-resume
+    label: "Sharding и восстановление shuffle-буфера"
+    label_en: "Sharding and shuffle-buffer recovery"
+  - anchor: data-throughput
+    label: "Токены, цели и шаги в измерениях"
+    label_en: "Measuring input tokens, targets and steps"
+source_unit_id:
+  - dali-processing-graph-two-readers
 ---
 
 # Data pipeline, padding и packing
@@ -26,6 +92,8 @@ GPU может большую часть шага обрабатывать не 
 ускорение не должно менять обучающую задачу: перемешивание, границы документов,
 маска внимания и вклад каждого токена в функцию потерь остаются частью
 алгоритма обучения.
+
+<a id="data-storage"></a>
 
 ## Что хранить
 
@@ -63,6 +131,8 @@ BOS/EOS. Например, `uint16` подходит только тогда, к
 идентификаторы, включая специальные токены, помещаются в диапазон 0–65535.
 Сам файл с числами не позволяет восстановить словарь или узнать, было ли
 между документами добавлено EOS.
+
+<a id="data-decoding"></a>
 
 ## Декодирование изображений и DALI
 
@@ -104,6 +174,71 @@ BOS/EOS. Например, `uint16` подходит только тогда, к
 к CPU-потокам DALI, `device_id` выбирает GPU. Эти параметры не равны
 `num_workers` обычного `DataLoader`.
 
+<!-- BEGIN REVIEW: DALI graph 2026-11-04 -->
+<a id="data-dali-graph"></a>
+
+### Operators, data nodes, and pipeline outputs
+
+The DALI example below reads an image and its mask through two branches.
+Each reader produces encoded files and labels; each decoder consumes the encoded
+files. The first reader's labels bypass the decoder and become a separate
+pipeline output. The second reader's labels are unused. The diagram distinguishes
+operators, which perform work, from `DataNode` objects, which connect an operator's
+output to another operator's input.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dali-2026-11-04/two_readers.svg|Two DALI FileReaders feed two ImageDecoders; decoded images, masks and the first reader's labels become pipeline outputs, while the second reader's labels are discarded]]
+
+*NVIDIA DALI, [Pipeline and processing graph — Data Processing Graphs](https://github.com/NVIDIA/DALI/blob/5b33fee1968ba069a9ed04965fd2af5f0025de7e/docs/pipeline.rst).
+Complete original vector, copied without cropping, relabeling or redrawing.
+[Apache-2.0 license](/licenses/nvidia-dali-5b33fee1-Apache-2.0.txt).*
+
+Original example, with the source's variable names and spacing:
+
+```python
+@pipeline_def  # create a pipeline with processing graph defined by the function below
+def my_pipeline():
+    """ Create a pipeline which reads images and masks, decodes the images and
+        returns them. """
+    img_files, labels = fn.readers.file(file_root="image_dir", seed=1)
+    mask_files, _ = fn.readers.file(file_root="mask_dir", seed=1)
+    images = fn.decoders.image(img_files, device="mixed")
+    masks  = fn.decoders.image(mask_files, device="mixed")
+    return images, masks, labels
+
+pipe = my_pipeline(batch_size=4, num_threads=2, device_id=0)
+```
+
+Calling `my_pipeline(batch_size=4, num_threads=2, device_id=0)` creates
+the pipeline object with those batch, thread and device settings. When DALI
+builds the graph, it executes the definition function once to connect data nodes;
+it does not decode the entire dataset. Running the pipeline produces successive
+batches through those connections. Returning `images, masks, labels` selects
+three outputs. DALI prunes subgraphs that do not contribute to an output,
+as described in [Current Pipeline](https://github.com/NVIDIA/DALI/blob/5b33fee1968ba069a9ed04965fd2af5f0025de7e/docs/pipeline.rst#current-pipeline).
+
+This is the documentation's file-reader example, not the preceding EDLS
+LMDB example. The image and mask directories must describe corresponding
+samples. The two `seed=1` arguments are not a validation of that correspondence:
+a missing mask or a different file order still requires a data check before
+training.
+
+The same graph also explains device placement. A CPU operator accepts CPU
+data and returns CPU data. A `mixed` operator accepts CPU inputs and returns
+GPU outputs, so both decoded image branches are already on the GPU.
+A GPU operator can consume those outputs without copying the decoded images
+back to the host. Named argument inputs may still come from CPU operators:
+the next example in [Processing Graph Structure](https://github.com/NVIDIA/DALI/blob/5b33fee1968ba069a9ed04965fd2af5f0025de7e/docs/pipeline.rst#processing-graph-structure)
+uses a CPU coin flip as the `horizontal` argument of a GPU `fn.flip`.
+To return the reader's labels on the GPU as well, that example explicitly
+returns `labels.gpu()`.
+
+The code requires NVIDIA DALI and the two input directories. It is reproduced
+to explain the graph; it was syntax-checked, not executed on a GPU.
+The figure supplies no timing result and does not establish that this pipeline
+is faster than a PyTorch loader.
+
+<!-- END REVIEW: DALI graph 2026-11-04 -->
+
 Место изменения размера влияет и на объём передачи. Порция из 32 RGB-изображений
 640 × 640 в `uint8` занимает 37.5 МиБ без учёта служебной памяти.
 Если сначала на CPU получить изображения 224 × 224 и оставить `uint8`,
@@ -121,6 +256,8 @@ CPU и устройством; его обмен зависит от форма�
 и случайных преобразований. Профиль должен показать, сократилось ли ожидание
 данных и не выросло ли время модели. Запуск галереи преобразований из
 семинара сам по себе такого сравнения не даёт.
+
+<a id="data-loader"></a>
 
 <a id="storage-и-dataloader-как-система"></a>
 
@@ -206,7 +343,7 @@ ordering and random choices become part of the stored data.
 > This will save some operations (like file opening and data reading) from being executed during each epoch.
 <!-- END SOURCE: TensorFlow caching intro -->
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tf-data-2026-10-28/cached-dataset.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tf-data-2026-10-28/cached-dataset.svg|TensorFlow cache timeline: the first pass reads and maps elements; later passes reuse cached results while training continues]]
 
 *Scroll horizontally, or open the figure to inspect the full timeline.
 The TensorFlow Authors, [Better performance with the tf.data API, Caching](https://www.tensorflow.org/guide/data_performance#caching);
@@ -231,6 +368,8 @@ operations. Caching therefore differs from prefetching: prefetching overlaps
 work that is still performed, while a completed cache reuses stored elements.
 A cache can also sit before a prefetch buffer; the two mechanisms have separate
 memory costs.
+
+<a id="data-cache-counts"></a>
 
 ### Count executed transformations
 
@@ -281,6 +420,8 @@ to fill the cache and zero times on the second pass. In the second, the cache
 contains raw IDs, so `prepare` runs on every pass: eight executions in total.
 The counters establish reuse, without timing an integer multiplication or
 claiming that a particular real tokenizer becomes twice as fast.
+
+<a id="data-cache-randomness"></a>
 
 ### Keep epoch-dependent work after the cache
 
@@ -345,6 +486,8 @@ epochs have distinct orders. The buffer contains all eight items here. With
 a smaller buffer, the shuffle is local to that buffer, as in the streaming
 example later in this chapter.
 
+<a id="data-cache-completion"></a>
+
 ### Finish filling a finite cache
 
 Receiving the last item requested by a training loop need not exhaust the
@@ -389,6 +532,8 @@ repeating it when that is the intended dataset. A training loop with a fixed
 `steps_per_epoch` must still establish whether the cache's input was exhausted;
 the loop's epoch counter alone does not establish this.
 
+<a id="data-cache-identity"></a>
+
 ### Persistent cache identity and memory
 
 A file cache can survive the process that created it. Its filename is part of
@@ -424,6 +569,8 @@ allocator overhead and the model still require separate memory. An in-memory
 dataset cache is also distinct from the operating system's file-page cache.
 <!-- END REVIEW: tf.data cache 2026-10-28 -->
 
+<a id="data-h2d"></a>
+
 ## Передача из RAM в память GPU
 
 Обычная оперативная память процесса допускает подкачку страниц. Для передачи
@@ -433,7 +580,7 @@ dataset cache is also distinct from the operating system's file-page cache.
 промежуточная закреплённая область. Это отдельная работа, а не часть
 матричного умножения модели.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-pipeline-review-2026-10/pinmem.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-pipeline-review-2026-10/pinmem.png|PyTorch memory diagram showing pageable host memory, a pinned staging area and transfer to GPU memory]]
 
 *Vincent Moens, [PyTorch: A guide on good usage of non_blocking and pin_memory](https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html),
 BSD-3-Clause. Голубая стрелка обозначает закрепление CPU-тензора, оранжевая —
@@ -455,14 +602,14 @@ BSD-3-Clause. Голубая стрелка обозначает закрепл�
 перезаписывать, пока асинхронное чтение из него ещё не закончено; время жизни
 GPU-буферов также нужно согласовать с потоками и аллокатором.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-pipeline-review-2026-10/same-stream.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-pipeline-review-2026-10/same-stream.png|CUDA trace with copy and computation on the same stream: the operations remain sequential]]
 
 *PyTorch, Vincent Moens, [тот же эксперимент: pinned=True, streamed=False](https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html#asynchronous-vs-synchronous-operations-with-non-blocking-true-cuda-cudamemcpyasync),
 BSD-3-Clause. На GPU копирование и арифметика находятся в одном потоке и идут
 последовательно. Верхняя CPU-дорожка сама по себе этого не объясняет: нужно
 смотреть нижние дорожки устройства. Это исходный снимок эксперимента автора.*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-pipeline-review-2026-10/separate-stream.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-pipeline-review-2026-10/separate-stream.png|CUDA trace with copy and computation on separate streams: pinned host input enables overlap in the source experiment]]
 
 *Тот же источник, pinned=True, streamed=True. На дорожке Stream 13 находится
 `Memcpy HtoD`, а на Stream 7 — независимая арифметика. Их интервалы пересекаются
@@ -470,6 +617,8 @@ BSD-3-Clause. На GPU копирование и арифметика наход
 ядро не читает ещё не скопированный вход. Снимок демонстрирует возможность
 перекрытия, а не универсальную величину ускорения. Оба снимка можно открыть
 в исходном размере.*
+
+<a id="data-padding"></a>
 
 ## Dynamic padding
 
@@ -507,6 +656,8 @@ $l(l+1)/2$; для четырёх документов получается 555 
 не фактически выполненные FLOP: ядро может вычислять полные плитки
 и лишь затем маскировать часть результатов. Число входных токенов
 и число пар внимания поэтому описывают разные составляющие нагрузки.
+
+<a id="data-pad-eos"></a>
 
 ### Маска определяется длиной, а не значением токена
 
@@ -550,6 +701,8 @@ assert batch["labels"].tolist() == [[11, 12, 2], [21, 2, -100]]
 добавляют правила для префикса и реплик пользователя; их нельзя восстановить
 из одной лишь длины текста.
 
+<a id="data-bucketing"></a>
+
 ## Bucketing
 
 Динамическое дополнение мало помогает, если короткие тексты постоянно
@@ -566,7 +719,7 @@ assert batch["labels"].tolist() == [[11, 12, 2], [21, 2, -100]]
 данных и то же число порций. Отношение 464/282 описывает изменение числа
 позиций, но ещё не является измеренным ускорением модели.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/edls/optimal-sequence-processing.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/edls/optimal-sequence-processing.png|EDLS slide comparing dynamic padding and grouping sequences by length]]
 
 *Max Ryabinin, [Efficient DL Systems, слайд 31](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf#page=31).
 Слева показаны последовательности с заполнителями; справа — две порции,
@@ -586,6 +739,8 @@ $\sum_i l_i\le T_{\text{budget}}$ ограничивает только числ
 а для плотного внимания — оценка члена $B L_{\max}^2$. Иначе один длинный
 текст может вызвать нехватку памяти, хотя сумма длин укладывается в бюджет.
 
+<a id="data-packing"></a>
+
 ## Packing
 
 Вместо дополнения каждой последовательности можно хранить настоящие токены
@@ -595,7 +750,7 @@ $\sum_i l_i\le T_{\text{budget}}$ ограничивает только числ
 каждая последовательность. В реализациях attention такой массив часто
 называется `cu_seqlens`.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-pipeline-review-2026-10/padding-packing.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-pipeline-review-2026-10/padding-packing.png|Original comparison of padded batches and packed variable-length sequences]]
 
 *Angel Li, [PyTorch: Using Variable Length Attention](https://docs.pytorch.org/tutorials/intermediate/variable_length_attention_tutorial.html),
 BSD-3-Clause. Слева четыре строки с padding, справа те же токены без
@@ -615,6 +770,8 @@ mask запрещает смотреть в будущее, но начало д
 документ A. Для непрерывного потока предобучения это может быть сознательным
 выбором. Для независимых примеров, например разных диалогов SFT, нужен другой
 режим.
+
+<a id="data-document-isolation"></a>
 
 <a id="packing-без-leakage"></a>
 
@@ -692,6 +849,8 @@ assert allow[5].nonzero().flatten().tolist() == [3, 4, 5]
 пределах численного допуска. Если меняются, граница документа где-то потеряна.
 Такой тест проверяет весь путь, а не только правильность нарисованной маски.
 
+<a id="data-sdpa-isolation"></a>
+
 ### Проверка на одном операторе внимания
 
 Пусть все запросы и ключи равны
@@ -749,6 +908,8 @@ $(101+102+103+10)/4=79$. Сравнение с отдельными вызова
 дополнительно должна охватывать эмбеддинги, позиции, маски потерь
 и обратный проход; плотная CPU-маска не заменяет быстрое varlen-ядро.
 
+<a id="data-loss-normalization"></a>
+
 ## Как нормировать функцию потерь
 
 После изменения группировки в разных порциях может оказаться разное число
@@ -775,6 +936,8 @@ $$
 потерь, делённой на общий знаменатель. При распределённом обучении нужно
 согласовать этот знаменатель с усреднением градиентов между процессами;
 локальное среднее каждого процесса не равно глобальному при разных длинах.
+
+<a id="data-ddp-weighting"></a>
 
 ### Нормировка при усреднении градиентов DDP
 
@@ -814,6 +977,8 @@ $N$ считают по реально участвующим целям пос�
 от отдельных примеров к packing. В [[02 Areas/ML & DL/00 Учебник/10 ML Systems/05 Численные форматы и mixed precision|главе о mixed precision]]
 эта же нормировка сочетается с накоплением градиентов и loss scaling.
 
+<a id="data-loader-loop"></a>
+
 <a id="базовый-путь-загрузки-без-доказанного-перекрытия"></a>
 
 ## Базовый цикл загрузки
@@ -852,6 +1017,8 @@ for cpu_batch in loader:
 поэтому перекрытие H2D с вычислениями не заявляется. Двойная буферизация и
 зависимости потоков разобраны в
 [[02 Areas/ML & DL/00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти|главе о GPU и CUDA]].
+
+<a id="data-sharding-resume"></a>
 
 ## Разделение данных и возобновление обучения
 
@@ -928,6 +1095,8 @@ validation: их нельзя получать независимыми `take` �
 случайными выборами.
 Если система гарантирует только приблизительное продолжение,
 это следует отличать от точного воспроизведения порядка примеров.
+
+<a id="data-throughput"></a>
 
 <a id="проверка-throughput"></a>
 

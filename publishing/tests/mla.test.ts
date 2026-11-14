@@ -7,6 +7,7 @@ const file='00 Учебник/08 Эффективный Attention и длинн�
 const body=readFileSync(resolve(root,file),'utf8');
 const fm=YAML.parse(body.split('---')[1]);
 const specs=JSON.parse(readFileSync(resolve(root,'publishing/tools/mla-figures.json'),'utf8'));
+const originals=JSON.parse(readFileSync(resolve(root,'publishing/tools/deepseek-v2-mla-originals.json'),'utf8'));
 const assets=YAML.parse(readFileSync(resolve(root,'05 Источники/asset-registry.yml'),'utf8')).assets;
 describe('MLA chapter explanation and scope',()=>{
   it('includes the numerical obstruction, normalized cache and complete two-mode example',()=>{
@@ -18,12 +19,24 @@ describe('MLA chapter explanation and scope',()=>{
     expect(body).toContain('не воспроизводит скорость');
     expect(body).toContain('веса FP8');
     expect(body).toContain('8 H800');
-    expect(body).toContain('420B');
+    for(const s of ['420 млрд','1,33 трлн','34{,}6/860{,}2','4,0 процентного пункта',
+      'Таблица не показывает, какой','позиционный ключ на этой упрощённой схеме не показан'])
+      expect(body).toContain(s);
   });
   it('keeps five originals, preserves historical assets and does not reintroduce the disputed operation plot',()=>{
-    const embeds=[...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^\]]+)\]\]/g)].map(m=>m[1]);
+    const embeds=[...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^\]|]+)(?:\|[^\]]+)?\]\]/g)].map(m=>m[1]);
     expect(embeds).toHaveLength(5);
-    expect(new Set(embeds)).toEqual(new Set(specs.map((s:any)=>s.asset)));
+    const historical=specs.filter((s:any)=>s.rights_status==='paper-figure-license-unverified');
+    expect(historical).toHaveLength(3);
+    for(const {asset} of historical){
+      expect(assets.find((a:any)=>a.asset===asset)).toMatchObject({
+        publication_status:'retired', used_in:[], rights_status:'paper-figure-license-unverified',
+      });
+      expect(existsSync(resolve(root,asset))).toBe(true);
+    }
+    expect(new Set(embeds)).toEqual(new Set([
+      ...specs.filter((s:any)=>!historical.includes(s)), ...originals,
+    ].map((s:any)=>s.asset)));
     expect(new Set(assets.filter((a:any)=>a.used_in?.includes(file)).map((a:any)=>a.asset))).toEqual(new Set(embeds));
     const previous=assets.find((a:any)=>a.asset==='00 Учебник/Assets/Figures/deepseek-v2-figure2-hq.png');
     expect(previous.used_in).toEqual([]);

@@ -11,6 +11,7 @@ import re
 
 import torch
 import torch.nn.functional as F
+from topic_consolidation_baseline import before_topic_consolidation
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -18,7 +19,8 @@ CHAPTER = ROOT / "00 Учебник/10 ML Systems/06 Data pipeline, padding и p
 
 
 def main():
-    text = CHAPTER.read_text()
+    text = before_topic_consolidation(CHAPTER.read_text(), CHAPTER.relative_to(ROOT).as_posix(),
+                                      "2026-11-04-precision-accumulation-additions.json")
     # The independent tf.data addition is executed by its TensorFlow checker.
     # Preserve every prior PyTorch/packing check below, without importing TF.
     text = re.sub(

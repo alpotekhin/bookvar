@@ -3,8 +3,84 @@ title: Обучение с частичной разметкой — pseudo-labe
 type: textbook-chapter
 status: canonical
 source_language: en
-last_updated: 2026-10-29
-last_verified: 2026-10-29
+last_updated: 2026-11-05
+last_verified: 2026-11-05
+reference_terms:
+  - anchor: pseudo-labels
+    label: "Self-training: происхождение и отбор псевдометок"
+    label_en: "Self-training: pseudo-label origins and selection"
+  - anchor: noisy-student
+    label: "Noisy Student: учитель, шум и повторное обучение"
+    label_en: "Noisy Student: teacher, noise and training rounds"
+  - anchor: noisy-targets
+    label: "Фиксированные soft targets и градиент Noisy Student"
+    label_en: "Fixed soft targets and Noisy Student gradients"
+  - anchor: noisy-filtering
+    label: "Фильтрация, балансировка и повторная разметка пула"
+    label_en: "Filtering, balancing and relabelling the pool"
+  - anchor: consistency
+    label: "Согласованность предсказаний и допустимые аугментации"
+    label_en: "Prediction consistency and valid augmentations"
+  - anchor: virtual-adversarial-training
+    label: "VAT: локально наиболее чувствительное направление"
+    label_en: "VAT: the most sensitive local direction"
+  - anchor: vat-curvature
+    label: "Нулевой градиент KL и степенная итерация VAT"
+    label_en: "Zero KL gradient and VAT power iteration"
+  - anchor: vat-step
+    label: "Полный шаг VAT в пространстве эмбеддингов"
+    label_en: "A complete embedding-space VAT step"
+  - anchor: uda
+    label: "UDA: soft targets, confidence gate и KL"
+    label_en: "UDA: soft targets, confidence gates and KL"
+  - anchor: uda-augmentation
+    label: "Обратный перевод и TF-IDF-замены в UDA"
+    label_en: "Back-translation and TF-IDF replacement in UDA"
+  - anchor: training-signal-annealing
+    label: "Training Signal Annealing и размеченные примеры"
+    label_en: "Training Signal Annealing on labelled examples"
+  - anchor: mixtext
+    label: "MixText и TMix: интерполяция скрытых состояний"
+    label_en: "MixText and TMix: hidden-state interpolation"
+  - anchor: tmix-branches
+    label: "Общие параметры двух ветвей TMix и их градиенты"
+    label_en: "Shared TMix branches and their gradients"
+  - anchor: mixtext-targets
+    label: "MixText: усреднение предсказаний и sharpening"
+    label_en: "MixText: prediction averaging and sharpening"
+  - anchor: mixtext-implementation
+    label: "MixText: различия статьи и опубликованного кода"
+    label_en: "MixText: paper and released-code differences"
+  - anchor: fixmatch
+    label: "FixMatch: слабая ветвь, сильная ветвь и masked loss"
+    label_en: "FixMatch: weak targets, strong predictions and masked loss"
+  - anchor: training-step
+    label: "Полный шаг FixMatch с общим классификатором"
+    label_en: "A complete FixMatch step with a shared classifier"
+  - anchor: confirmation-bias
+    label: "Confirmation bias и уверенные ошибочные псевдометки"
+    label_en: "Confirmation bias and confidently wrong pseudo-labels"
+  - anchor: label-propagation
+    label: "Распространение меток по графу сходства"
+    label_en: "Label propagation over a similarity graph"
+  - anchor: ssl-structural-assumptions
+    label: "Smoothness, cluster и manifold assumptions"
+    label_en: "Smoothness, cluster and manifold assumptions"
+  - anchor: harmonic-label-propagation
+    label: "Гармоническое решение и закреплённые метки"
+    label_en: "Harmonic solutions and clamped labels"
+  - anchor: published-results
+    label: "Как читать результаты label efficiency"
+    label_en: "Reading label-efficiency results"
+  - anchor: cost-accounting
+    label: "Стоимость разметки, обучения и повторного использования"
+    label_en: "Label, training and reuse costs"
+  - anchor: self-supervised-boundary
+    label: "Псевдометки и self-supervised targets"
+    label_en: "Pseudo-labels versus self-supervised targets"
+  - anchor: dai-le-sequence-pretraining
+    label: "Dai–Le: реконструкция последовательности и перенос LSTM"
+    label_en: "Dai–Le: sequence reconstruction and LSTM transfer"
 primary_sources:
   - https://arxiv.org/abs/2001.07685v2
   - https://github.com/google-research/fixmatch/tree/d4985a158065947dba803e626ee9a6721709c570
@@ -32,11 +108,12 @@ examples during training, without obtaining a human target for each new input.
 
 The unlabelled inputs reveal their distribution, but that distribution does
 not specify the intended classes. Consider four points at the corners of a
-square. The bottom-left corner is labelled 0 and the top-right corner 1.
+square, with coordinates $(x,y)$ for the horizontal and vertical axes.
+The bottom-left corner is labelled 0 and the top-right corner 1.
 Both the rule “classify by the horizontal coordinate” and the rule “classify
 by the vertical coordinate” agree with those labels:
 
-| Point | Available label | Class from horizontal coordinate | Class from vertical coordinate |
+| Point | Label | By $x$ | By $y$ |
 | --- | --- | ---: | ---: |
 | $(-1,-1)$ | 0 | 0 | 0 |
 | $(-1,1)$ | unknown | 0 | 1 |
@@ -115,6 +192,8 @@ to or larger than the teacher; being smaller is not the method's purpose.
 A larger architecture provides capacity, not a guarantee that the student
 will improve. The new teacher is obtained after a training round, rather
 than by updating an EMA teacher at every minibatch.
+
+<a id="noisy-targets"></a>
 
 ### The target remains fixed while the student changes
 
@@ -196,6 +275,8 @@ decay. At $r=2$, this is three times the mean over one labelled and two
 unlabelled examples. The relative supervision weight and overall gradient
 scale must both be specified. The program uses that reduction and omits
 the implementation's label smoothing and weight decay.
+
+<a id="noisy-filtering"></a>
 
 ### Filtering, balancing and another training round
 
@@ -308,6 +389,8 @@ anchors; the surrounding points also affect consistency without receiving
 human labels. This synthetic two-dimensional illustration does not measure
 the accuracy of a text classifier.*
 
+<a id="vat-curvature"></a>
+
 ### Why the gradient at the clean input cannot select a direction
 
 At $r=0$, the two distributions agree, so $D(0)=0$. KL is nonnegative.
@@ -398,6 +481,8 @@ The probe radius $\xi$, perturbation radius $\varepsilon$,
 regularizer weight and number of iterations have different roles.
 An experiment that fixes some of them has not eliminated them from the
 algorithm.
+
+<a id="vat-step"></a>
 
 ### A complete embedding-space VAT update
 
@@ -580,6 +665,8 @@ torch.testing.assert_close(cross_entropy, entropy + per_example.detach())
 print("accepted", mask.tolist(), "KL", loss.item(), "gradient", aug_logits.grad.tolist())
 ```
 
+<a id="uda-augmentation"></a>
+
 ### How the text augmentation is constructed
 
 UDA uses English–French and French–English translation models to obtain
@@ -660,10 +747,12 @@ $p_\theta(y_i\mid x_i)\le\eta_t$ and normalizes over the **kept labelled
 examples**:
 
 $$
- b_i=\mathbf1[p_\theta(y_i\mid x_i)\le\eta_t],\qquad
- \mathcal L_s=
+\begin{aligned}
+ b_i&=\mathbf1[p_\theta(y_i\mid x_i)\le\eta_t],\\
+ \mathcal L_s&=
  \frac{\sum_i b_i[-\log p_\theta(y_i\mid x_i)]}
       {\max(1,\sum_i b_i)}.
+\end{aligned}
 $$
 
 This is the opposite selection pressure from unlabelled confidence
@@ -761,6 +850,8 @@ branch continues through the upper layers. Complete original figure
 and caption, rendered at 240 dpi. The PDF's embedded diagram is not
 enlarged beyond its native pixel dimensions.*
 
+<a id="tmix-branches"></a>
+
 ### Where the two encoder branches meet
 
 Run both inputs through the same first $m$ layers, obtaining
@@ -839,6 +930,8 @@ sequence. It creates all-ones attention masks when none are supplied.
 That implementation choice should not be mistaken for a proof that
 padding can be ignored, or that positions in two unrelated sentences
 have a token-by-token semantic alignment.
+
+<a id="mixtext-targets"></a>
 
 ### Guessing a shared target for several views
 
@@ -922,6 +1015,8 @@ Uniform logits are stationary by symmetry even when this penalty is
 positive; confidence regularization alone does not resolve which class
 is correct. Human labels and the remaining objective supply information
 missing from that symmetric case.
+
+<a id="mixtext-implementation"></a>
 
 ### Paper and released training code are different specifications
 
@@ -1026,12 +1121,23 @@ gradient is zero. No division by $K$ is required.
 For four weak predictions, take $\tau=0.95$ and the following strong-view
 probability of class 0:
 
-| Example | Weak probabilities | Pseudo-label | Accepted? | Strong $p(0)$ | Contribution before division by 4 |
-| --- | --- | ---: | --- | ---: | ---: |
-| 0 | $(0.97,0.03)$ | 0 | yes | 0.6 | $-\log0.6$ |
-| 1 | $(0.75,0.25)$ | 0 | no | 0.4 | 0 |
-| 2 | $(0.08,0.92)$ | 1 | no | 0.8 | 0 |
-| 3 | $(0.95,0.05)$ | 0 | yes | 0.2 | $-\log0.2$ |
+| Row | Weak $q$ | Target | Keep? |
+| --- | --- | ---: | --- |
+| 0 | $(0.97,0.03)$ | 0 | yes |
+| 1 | $(0.75,0.25)$ | 0 | no |
+| 2 | $(0.08,0.92)$ | 1 | no |
+| 3 | $(0.95,0.05)$ | 0 | yes |
+
+The accepted targets supervise the strong-view predictions as follows.
+The last column is the masked cross-entropy before division by the full
+batch size of four:
+
+| Example | Strong $p(0)$ | Loss contribution |
+| --- | ---: | ---: |
+| 0 | 0.6 | $-\log0.6$ |
+| 1 | 0.4 | 0 |
+| 2 | 0.8 | 0 |
+| 3 | 0.2 | $-\log0.2$ |
 
 Equality at the threshold is accepted. The unlabelled loss is
 $(-\log0.6-\log0.2)/4\approx0.530066$; averaging over the two accepted
@@ -1226,6 +1332,8 @@ and available labels must support the chosen smoothness constraint.
 
 <!-- END REVIEW: SSL structural assumptions 2026-10-29 -->
 
+<a id="harmonic-label-propagation"></a>
+
 ### Harmonic label propagation
 
 A hard-clamped harmonic version makes this assumption explicit. Let
@@ -1330,10 +1438,11 @@ in Table 2 of [v2](https://arxiv.org/abs/2001.07685v2). The two rows differ
 in the strong-augmentation method; they must not be combined into one
 unspecified configuration.
 
-| Strong augmentation | 40 labels | 250 labels | 4,000 labels |
-| --- | ---: | ---: | ---: |
-| RandAugment | $13.81\pm3.37$ | $5.07\pm0.65$ | $4.26\pm0.05$ |
-| CTAugment | $11.39\pm3.35$ | $5.07\pm0.33$ | $4.31\pm0.15$ |
+| Labels | RandAugment | CTAugment |
+| ---: | ---: | ---: |
+| 40 | $13.81\pm3.37$ | $11.39\pm3.35$ |
+| 250 | $5.07\pm0.65$ | $5.07\pm0.33$ |
+| 4,000 | $4.26\pm0.05$ | $4.31\pm0.15$ |
 
 The entries are retained as reported across five labelled-data folds;
 the $\pm$ values are not relabelled here as confidence intervals. The
@@ -1463,11 +1572,11 @@ The reconstruction must use the finite-dimensional recurrent state;
 this architecture has no attention path that can retrieve every encoder
 position directly.
 
-| Objective | Inputs available for predicting W | Target supplied by |
+| Objective | Context before W | Target source |
 | --- | --- | --- |
 | Constructed next-token LM with a start marker | Start marker only | First stored token W |
 | Sequence reconstruction | W, X, Y, Z and the end marker | First stored token W |
-| Document classification | The document representation | Human class annotation |
+| Document classification | Encoded document | Human class annotation |
 
 For a sequence $x$, the two unsupervised losses can be written as
 

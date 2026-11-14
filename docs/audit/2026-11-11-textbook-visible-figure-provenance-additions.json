@@ -1,0 +1,365 @@
+{
+  "date": "2026-11-11",
+  "scope": "Reconcile the nine rendered canonical textbook figure paths without recorded checksums in the previous root preview. Keep the actual reader images, paths, and source articles unchanged.",
+  "review": {
+    "provenance": "Eight local files are byte-identical to the downloaded publisher/course copies. GPQA and HLE additionally match the contents of the separately pinned licensed author figures. The SFT slide matches the pinned lecture source and PDF page 11 in text and code, but the current PDF renders with different fonts and wrapping.",
+    "rights": "GPQA v1 and HLE v12: CC BY 4.0 on the papers. Lambert lecture source: MIT per the pinned project README, which places only book/chapters under CC BY-NC-SA. Six other byte-identical copies are explicitly unverified for redistribution; no rights inferred from visibility, the vLLM engine code license, or the user’s noncommercial intent.",
+    "lessonCheck": "GPQA figure shows the first expert’s wrong blind answer, post-hoc agreement, author revision, second expert’s correct answer and the Diamond criterion. HLE v12 shows 2,500 public questions, compared with 3,000 in v1 and 2,700 in v3. In SFT, the separate rendered template is a model-specific text prefix and the last assistant marker is not an assistant answer.",
+    "preservation": "Textbook chapters, figures and the Gordić source note are not edited. This is a provenance reconciliation, not a whole-chapter approval or permission to deploy.",
+    "validation": "Astro built 2081 pages with zero broken internal routes, fragments or files. All 297 built-output and 204 registry, public-asset and reading-receipt tests passed. The 310 canonical locale pages expose 1215 distinct local figure paths, all matching a registry digest, including 44 byte-identical path aliases. In Chrome, all nine reconciled figures decoded and fit on the seven affected chapters at 375 and 1280 px in both locales (English fallback where no translation exists). The three licensed figures also zoomed and panned on mobile."
+  },
+  "records": [
+    {
+      "id": "curated-gpqa-00000000004a",
+      "asset": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/gpqa.png",
+      "author": "David Rein et al.",
+      "source_url": "https://arxiv.org/html/2311.12022v1",
+      "title": "GPQA, Figure 1: question writing, revision, and expert validation",
+      "figure_url": "https://arxiv.org/html/2311.12022v1#S1.F1",
+      "source_image_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/gpqa.png",
+      "commit": "8b59b50730766695c2ffedd1a79c50cd09b9eb91",
+      "upstream_source_url": "https://arxiv.org/html/2311.12022v1/fig1.png",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence_url": "https://arxiv.org/html/2311.12022v1",
+      "rights_status": "source-license-verified",
+      "provenance_confirmation": "source-license-verified",
+      "modifications": "Unchanged 1630×1278 CS336 raster of the complete author figure; all panels and wording match the separately pinned lower-resolution arXiv copy.",
+      "sha256": "6e4937a7987541c13f0d53c2a55f164d2e410087d09829a173eb2d36d2c7dd8b",
+      "bytes": 628919,
+      "dimensions_px": [
+        1630,
+        1278
+      ],
+      "metadata_status": "verified",
+      "last_verified": "2026-11-11",
+      "derivation": "source-raster-copy-with-visual-paper-match",
+      "source_asset_sha256": "6e4937a7987541c13f0d53c2a55f164d2e410087d09829a173eb2d36d2c7dd8b",
+      "upstream_sha256": "ab08a3d234403d687378cb71ff742cb24bae8b6c2b551570792f1d0c9ec57d9c",
+      "used_in": [
+        "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md"
+      ]
+    },
+    {
+      "id": "curated-hle-00000000004b",
+      "asset": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hle-pipeline.png",
+      "author": "Long Phan et al.",
+      "source_url": "https://arxiv.org/html/2501.14249v12",
+      "title": "Humanity’s Last Exam, Figure 4: dataset creation pipeline",
+      "figure_url": "https://arxiv.org/html/2501.14249v12#S3.F4",
+      "source_image_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/hle-pipeline.png",
+      "commit": "8b59b50730766695c2ffedd1a79c50cd09b9eb91",
+      "upstream_source_url": "https://arxiv.org/html/2501.14249v12/pipeline.svg",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence_url": "https://arxiv.org/html/2501.14249v12",
+      "rights_status": "source-license-verified",
+      "provenance_confirmation": "source-license-verified",
+      "modifications": "Unchanged 2239×642 CS336 raster. Its panels and 70,000 / 13,000 / 6,000 / 2,500 labels match the blue 2,500-question author figure, not the 3,000-question v1 or 2,700-question v3 figure.",
+      "sha256": "90a9c5e67e55ae315451ff8677b4702145a0c6289a6e47e00135853522acc907",
+      "bytes": 154408,
+      "dimensions_px": [
+        2239,
+        642
+      ],
+      "metadata_status": "verified",
+      "last_verified": "2026-11-11",
+      "derivation": "source-raster-copy-with-visual-paper-match",
+      "source_asset_sha256": "90a9c5e67e55ae315451ff8677b4702145a0c6289a6e47e00135853522acc907",
+      "upstream_sha256": "659055ca0bd31e114b67324c9a023ef7972338069257151596e11132427da4a2",
+      "used_in": [
+        "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md"
+      ]
+    },
+    {
+      "id": "curated-vllm-latency-a1b2c3d4e509",
+      "asset": "00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png",
+      "author": "Aleksa Gordić",
+      "source_url": "https://www.aleksagordic.com/blog/vllm",
+      "license": null,
+      "license_url": null,
+      "rights_status": "source-republication-unverified",
+      "provenance_confirmation": "source-bytes-verified",
+      "title": "Time to first token, inter-token latency, and end-to-end latency",
+      "commit": "05f81b0527e2d484c48721f9dc1c49d06849c9f3",
+      "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/latency_diagram.png",
+      "modifications": "Byte-identical to the pinned official vLLM blog asset. No grant found for the blog artwork; the engine repository license is not evidence for this separate repository.",
+      "sha256": "c4aedd158b29b99d7430e12b4f5dca1bb160abc02261cd4a8fbecab598c9d53c",
+      "bytes": 37423,
+      "dimensions_px": [
+        862,
+        396
+      ],
+      "metadata_status": "verified",
+      "last_verified": "2026-11-11",
+      "derivation": "source-raster-copy-byte-verified",
+      "source_asset_sha256": "c4aedd158b29b99d7430e12b4f5dca1bb160abc02261cd4a8fbecab598c9d53c",
+      "used_in": [
+        "05 Источники/Implementation studies/Inside vLLM.md",
+        "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+        "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md",
+        "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+        "en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md"
+      ]
+    },
+    {
+      "id": "curated-vllm-roofline-a1b2c3d4e50a",
+      "asset": "00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png",
+      "author": "Aleksa Gordić",
+      "source_url": "https://www.aleksagordic.com/blog/vllm",
+      "license": null,
+      "license_url": null,
+      "rights_status": "source-republication-unverified",
+      "provenance_confirmation": "source-bytes-verified",
+      "title": "Memory and compute limits in the roofline model",
+      "commit": "05f81b0527e2d484c48721f9dc1c49d06849c9f3",
+      "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/roofline.png",
+      "modifications": "Byte-identical to the pinned official vLLM blog asset. No grant found for the blog artwork; the engine repository license is not evidence for this separate repository.",
+      "sha256": "137cbceb1790cd0de91db60d4a990ab2669d8ebe5bf5e675f2a24190978fe6a4",
+      "bytes": 48865,
+      "dimensions_px": [
+        579,
+        406
+      ],
+      "metadata_status": "verified",
+      "last_verified": "2026-11-11",
+      "derivation": "source-raster-copy-byte-verified",
+      "source_asset_sha256": "137cbceb1790cd0de91db60d4a990ab2669d8ebe5bf5e675f2a24190978fe6a4",
+      "used_in": [
+        "05 Источники/Implementation studies/Inside vLLM.md",
+        "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+        "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md"
+      ]
+    },
+    {
+      "id": "curated-gordic-chunked-prefill-7e3a09d84c21",
+      "asset": "00 Учебник/Assets/Figures/curated/inference-advanced/physics-scheduling/gordic-chunked-prefill.png",
+      "author": "Aleksa Gordić",
+      "source_url": "https://www.aleksagordic.com/blog/vllm",
+      "license": null,
+      "license_url": null,
+      "rights_status": "source-republication-unverified",
+      "provenance_confirmation": "source-bytes-verified",
+      "title": "Scheduling a chunk of prefill with decode requests",
+      "commit": "05f81b0527e2d484c48721f9dc1c49d06849c9f3",
+      "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/chunked_pt1.png",
+      "modifications": "Byte-identical to the pinned official vLLM blog asset. No grant found for the blog artwork; the engine repository license is not evidence for this separate repository.",
+      "sha256": "5988dc983eb22c8068b0ca2700108fc11d50389e20c078682b3ecc9249d96b31",
+      "bytes": 210509,
+      "dimensions_px": [
+        901,
+        2020
+      ],
+      "metadata_status": "verified",
+      "last_verified": "2026-11-11",
+      "derivation": "source-raster-copy-byte-verified",
+      "source_asset_sha256": "5988dc983eb22c8068b0ca2700108fc11d50389e20c078682b3ecc9249d96b31",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+        "en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md"
+      ]
+    },
+    {
+      "id": "curated-anyscale-batching-00000000003f",
+      "asset": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/anyscale-static-batching.png",
+      "author": "Anyscale",
+      "source_url": "https://www.anyscale.com/blog/continuous-batching-llm-inference",
+      "license": null,
+      "license_url": null,
+      "rights_status": "source-republication-unverified",
+      "provenance_confirmation": "source-bytes-verified",
+      "title": "Static batching timeline",
+      "source_image_url": "https://images.ctfassets.net/xjan103pcp94/1LJioEsEdQQpDCxYNWirU6/82b9fbfc5b78b10c1d4508b60e72fdcf/cb_02_diagram-static-batching.png",
+      "modifications": "Byte-identical to the image served by the Anyscale article; no redistribution grant verified.",
+      "sha256": "a4b1963edf5361606005f9986c8577492b874e5fb6aa65004989d8203c9a8acb",
+      "bytes": 1620320,
+      "dimensions_px": [
+        3844,
+        896
+      ],
+      "metadata_status": "verified",
+      "last_verified": "2026-11-11",
+      "derivation": "source-raster-copy-byte-verified",
+      "source_asset_sha256": "a4b1963edf5361606005f9986c8577492b874e5fb6aa65004989d8203c9a8acb",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+        "en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md"
+      ]
+    },
+    {
+      "id": "curated-lmcache-blog-mp-transfer-paths-7e921ffbdc92",
+      "asset": "00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-transfer-paths.png",
+      "author": "Jiayue Chen, Tony Lin, and LMCache Team",
+      "source_url": "https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/",
+      "license": null,
+      "license_url": null,
+      "rights_status": "source-republication-unverified",
+      "provenance_confirmation": "source-bytes-verified",
+      "title": "LMCache multi-process store paths: CUDA IPC, shared memory, and pickle",
+      "source_image_url": "https://blog.lmcache.ai/wp-content/uploads/2026/06/3pathsUpdate-1-edited.png",
+      "modifications": "Byte-identical to the official WordPress upload. The blog artwork has no verified reuse grant.",
+      "sha256": "7e921ffbdc9272f81970bdae02f315c93598f071b09b6e672b75cab49521c552",
+      "bytes": 424557,
+      "dimensions_px": [
+        2356,
+        1480
+      ],
+      "metadata_status": "verified",
+      "last_verified": "2026-11-11",
+      "derivation": "source-raster-copy-byte-verified",
+      "source_asset_sha256": "7e921ffbdc9272f81970bdae02f315c93598f071b09b6e672b75cab49521c552",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md",
+        "en/05 Sources/LMCache/LMCache — map of materials.md"
+      ]
+    },
+    {
+      "id": "curated-cs231n-opt-000000000095",
+      "asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif",
+      "author": "Alec Radford",
+      "source_url": "https://cs231n.github.io/neural-networks-3/",
+      "license": null,
+      "license_url": null,
+      "rights_status": "source-republication-unverified",
+      "provenance_confirmation": "source-bytes-verified",
+      "title": "Optimizer trajectories near a saddle point",
+      "commit": "8ec57ccfc32379ae4b37c45de949af359673f92f",
+      "source_image_url": "https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/nn3/opt1.gif",
+      "modifications": "Unchanged GIF, byte-identical to opt1.gif in the pinned CS231n course repository. The course credits Alec Radford; a grant for the GIF was not verified.",
+      "sha256": "a3d84d671ff120170146dbae76456ac9c2ab5ad15f50ac828791752451173b29",
+      "bytes": 731184,
+      "dimensions_px": [
+        620,
+        480
+      ],
+      "metadata_status": "verified",
+      "last_verified": "2026-11-11",
+      "derivation": "source-raster-copy-byte-verified",
+      "source_asset_sha256": "a3d84d671ff120170146dbae76456ac9c2ab5ad15f50ac828791752451173b29",
+      "used_in": [
+        "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md"
+      ]
+    },
+    {
+      "id": "curated-posttraining-sft-chat-000000000052",
+      "asset": "00 Учебник/Assets/Figures/curated/post-training-courses/sft-chat-template.png",
+      "author": "Nathan Lambert",
+      "source_url": "https://github.com/natolambert/rlhf-book/blob/929727f29b6ef6d9d5d9d1611574a8e3fd1afa36/teach/course/lec2-chap4-5-9.md#L217",
+      "title": "A conversation gets rendered into template text",
+      "source_image_url": "https://rlhfbook.com/teach/course/lec2-chap4-5-9/slides.pdf#page=11",
+      "source_page": 11,
+      "render_dpi": 150,
+      "commit": "929727f29b6ef6d9d5d9d1611574a8e3fd1afa36",
+      "license": "MIT",
+      "license_url": "https://github.com/natolambert/rlhf-book/blob/929727f29b6ef6d9d5d9d1611574a8e3fd1afa36/LICENSE-CODE",
+      "license_evidence": "site/public/licenses/rlhf-book-929727f2-MIT.txt",
+      "public_license_copy": "site/public/licenses/rlhf-book-929727f2-MIT.txt",
+      "license_evidence_url": "https://github.com/natolambert/rlhf-book/blob/929727f29b6ef6d9d5d9d1611574a8e3fd1afa36/README.md#license",
+      "rights_status": "source-license-verified",
+      "provenance_confirmation": "source-license-verified",
+      "modifications": "Existing full-slide raster retained. The author Markdown and current PDF page 11 match content and code; fonts and line breaks differ in the current PDF, so its render is not asserted to be byte- or pixel-identical.",
+      "sha256": "0ae042ab4e38b609c5dd0e0de5217e3e4dd25fd3cc79afc0ce080a9c127d124a",
+      "bytes": 178569,
+      "dimensions_px": [
+        2000,
+        1125
+      ],
+      "metadata_status": "verified",
+      "last_verified": "2026-11-11",
+      "derivation": "source-slide-raster-content-match",
+      "source_parent_sha256": "de9970b5ee0ecec7b5d369ae0aceb169e0713a241044d0bbe22a1ef58c512a3d",
+      "source_text_sha256": "8d6faf222d7d7a4e92c413fd8fdb83dab8fd1639ce7cf490e517ddc237a91c13",
+      "comparison_render_sha256": "2c5e73e903967078ca7bf213b41edaaf30c3082a81179e90d7290ed9fd8b739a",
+      "license_evidence_sha256": "a312d5db1e63cf298985a9989069ce7d6a7a35ac237572276ab3222e5af42d4d",
+      "used_in": [
+        "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "270c82140f900564003f949385957b8233712fd930cda8964869d8e06b9c77c6",
+      "after_sha256": "dc9e18bbf0ed6dd4eaf929b184a4606b0d234eb14a8dc2cc982f426e03793fe7",
+      "lines": 26492,
+      "changes": [
+        {
+          "old": "  - id: curated-anyscale-batching-00000000003f\n    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/anyscale-static-batching.png\n    author: Anyscale\n    source_url: https://www.anyscale.com/blog/continuous-batching-llm-inference\n    license: open educational material; reuse confirmed by repository owner\n    license_url: https://www.anyscale.com/blog/continuous-batching-llm-inference\n    modifications: copied or extracted without visual modification for publication\n    used_in:\n      [\"00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md\",\"00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/topics-53-59/anyscale-static-batching.png",
+          "new": "  - {\"id\":\"curated-anyscale-batching-00000000003f\",\"asset\":\"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/anyscale-static-batching.png\",\"author\":\"Anyscale\",\"source_url\":\"https://www.anyscale.com/blog/continuous-batching-llm-inference\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"provenance_confirmation\":\"source-bytes-verified\",\"title\":\"Static batching timeline\",\"source_image_url\":\"https://images.ctfassets.net/xjan103pcp94/1LJioEsEdQQpDCxYNWirU6/82b9fbfc5b78b10c1d4508b60e72fdcf/cb_02_diagram-static-batching.png\",\"modifications\":\"Byte-identical to the image served by the Anyscale article; no redistribution grant verified.\",\"sha256\":\"a4b1963edf5361606005f9986c8577492b874e5fb6aa65004989d8203c9a8acb\",\"bytes\":1620320,\"dimensions_px\":[3844,896],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-byte-verified\",\"source_asset_sha256\":\"a4b1963edf5361606005f9986c8577492b874e5fb6aa65004989d8203c9a8acb\",\"used_in\":[\"00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md\",\"en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md\"]}"
+        },
+        {
+          "old": "  - id: curated-gpqa-00000000004a\n    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/gpqa.png\n    author: David Rein et al.\n    source_url: https://arxiv.org/abs/2311.12022\n    license: open educational material; reuse confirmed by repository owner\n    license_url: https://arxiv.org/abs/2311.12022\n    modifications: copied or extracted without visual modification for publication\n    used_in:\n      - 00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/topics-53-59/gpqa.png",
+          "new": "  - {\"id\":\"curated-gpqa-00000000004a\",\"asset\":\"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/gpqa.png\",\"author\":\"David Rein et al.\",\"source_url\":\"https://arxiv.org/html/2311.12022v1\",\"title\":\"GPQA, Figure 1: question writing, revision, and expert validation\",\"figure_url\":\"https://arxiv.org/html/2311.12022v1#S1.F1\",\"source_image_url\":\"https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/gpqa.png\",\"commit\":\"8b59b50730766695c2ffedd1a79c50cd09b9eb91\",\"upstream_source_url\":\"https://arxiv.org/html/2311.12022v1/fig1.png\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence_url\":\"https://arxiv.org/html/2311.12022v1\",\"rights_status\":\"source-license-verified\",\"provenance_confirmation\":\"source-license-verified\",\"modifications\":\"Unchanged 1630×1278 CS336 raster of the complete author figure; all panels and wording match the separately pinned lower-resolution arXiv copy.\",\"sha256\":\"6e4937a7987541c13f0d53c2a55f164d2e410087d09829a173eb2d36d2c7dd8b\",\"bytes\":628919,\"dimensions_px\":[1630,1278],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-with-visual-paper-match\",\"source_asset_sha256\":\"6e4937a7987541c13f0d53c2a55f164d2e410087d09829a173eb2d36d2c7dd8b\",\"upstream_sha256\":\"ab08a3d234403d687378cb71ff742cb24bae8b6c2b551570792f1d0c9ec57d9c\",\"used_in\":[\"00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md\"]}"
+        },
+        {
+          "old": "  - id: curated-hle-00000000004b\n    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hle-pipeline.png\n    author: Long Phan et al.\n    source_url: https://arxiv.org/abs/2501.14249\n    license: open educational material; reuse confirmed by repository owner\n    license_url: https://arxiv.org/abs/2501.14249\n    modifications: copied or extracted without visual modification for publication\n    used_in:\n      - 00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/topics-53-59/hle-pipeline.png",
+          "new": "  - {\"id\":\"curated-hle-00000000004b\",\"asset\":\"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hle-pipeline.png\",\"author\":\"Long Phan et al.\",\"source_url\":\"https://arxiv.org/html/2501.14249v12\",\"title\":\"Humanity’s Last Exam, Figure 4: dataset creation pipeline\",\"figure_url\":\"https://arxiv.org/html/2501.14249v12#S3.F4\",\"source_image_url\":\"https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/hle-pipeline.png\",\"commit\":\"8b59b50730766695c2ffedd1a79c50cd09b9eb91\",\"upstream_source_url\":\"https://arxiv.org/html/2501.14249v12/pipeline.svg\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence_url\":\"https://arxiv.org/html/2501.14249v12\",\"rights_status\":\"source-license-verified\",\"provenance_confirmation\":\"source-license-verified\",\"modifications\":\"Unchanged 2239×642 CS336 raster. Its panels and 70,000 / 13,000 / 6,000 / 2,500 labels match the blue 2,500-question author figure, not the 3,000-question v1 or 2,700-question v3 figure.\",\"sha256\":\"90a9c5e67e55ae315451ff8677b4702145a0c6289a6e47e00135853522acc907\",\"bytes\":154408,\"dimensions_px\":[2239,642],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-with-visual-paper-match\",\"source_asset_sha256\":\"90a9c5e67e55ae315451ff8677b4702145a0c6289a6e47e00135853522acc907\",\"upstream_sha256\":\"659055ca0bd31e114b67324c9a023ef7972338069257151596e11132427da4a2\",\"used_in\":[\"00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md\"]}"
+        },
+        {
+          "old": "  - id: curated-posttraining-sft-chat-000000000052\n    asset: 00 Учебник/Assets/Figures/curated/post-training-courses/sft-chat-template.png\n    author: Nathan Lambert\n    source_url: https://rlhfbook.com/teach/course/lec2-chap4-5-9/slides.pdf#page=11\n    license: open-course-material; reuse confirmed by repository owner\n    license_url: https://rlhfbook.com/teach/course/\n    modifications: full PDF slide rendered at 150 dpi without content changes\n    used_in:\n      - 00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/rlhfbook/sft-chat-template.pdf\n    derivation: pdf-page-render-crop",
+          "new": "  - {\"id\":\"curated-posttraining-sft-chat-000000000052\",\"asset\":\"00 Учебник/Assets/Figures/curated/post-training-courses/sft-chat-template.png\",\"author\":\"Nathan Lambert\",\"source_url\":\"https://github.com/natolambert/rlhf-book/blob/929727f29b6ef6d9d5d9d1611574a8e3fd1afa36/teach/course/lec2-chap4-5-9.md#L217\",\"title\":\"A conversation gets rendered into template text\",\"source_image_url\":\"https://rlhfbook.com/teach/course/lec2-chap4-5-9/slides.pdf#page=11\",\"source_page\":11,\"render_dpi\":150,\"commit\":\"929727f29b6ef6d9d5d9d1611574a8e3fd1afa36\",\"license\":\"MIT\",\"license_url\":\"https://github.com/natolambert/rlhf-book/blob/929727f29b6ef6d9d5d9d1611574a8e3fd1afa36/LICENSE-CODE\",\"license_evidence\":\"site/public/licenses/rlhf-book-929727f2-MIT.txt\",\"public_license_copy\":\"site/public/licenses/rlhf-book-929727f2-MIT.txt\",\"license_evidence_url\":\"https://github.com/natolambert/rlhf-book/blob/929727f29b6ef6d9d5d9d1611574a8e3fd1afa36/README.md#license\",\"rights_status\":\"source-license-verified\",\"provenance_confirmation\":\"source-license-verified\",\"modifications\":\"Existing full-slide raster retained. The author Markdown and current PDF page 11 match content and code; fonts and line breaks differ in the current PDF, so its render is not asserted to be byte- or pixel-identical.\",\"sha256\":\"0ae042ab4e38b609c5dd0e0de5217e3e4dd25fd3cc79afc0ce080a9c127d124a\",\"bytes\":178569,\"dimensions_px\":[2000,1125],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-slide-raster-content-match\",\"source_parent_sha256\":\"de9970b5ee0ecec7b5d369ae0aceb169e0713a241044d0bbe22a1ef58c512a3d\",\"source_text_sha256\":\"8d6faf222d7d7a4e92c413fd8fdb83dab8fd1639ce7cf490e517ddc237a91c13\",\"comparison_render_sha256\":\"2c5e73e903967078ca7bf213b41edaaf30c3082a81179e90d7290ed9fd8b739a\",\"license_evidence_sha256\":\"a312d5db1e63cf298985a9989069ce7d6a7a35ac237572276ab3222e5af42d4d\",\"used_in\":[\"00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md\"]}"
+        },
+        {
+          "old": "  - id: curated-cs231n-opt-000000000095\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif\n    author: Stanford CS231n course staff\n    source_url: https://cs231n.github.io/neural-networks-3/\n    license: open-course-material; reuse confirmed by repository owner\n    license_url: https://cs231n.github.io/neural-networks-3/\n    modifications: copied without modification; path changed for tracked publication packaging\n    used_in:\n      - 00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/source-first-7-14/cs231n-optimizer-trajectories.gif",
+          "new": "  - {\"id\":\"curated-cs231n-opt-000000000095\",\"asset\":\"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif\",\"author\":\"Alec Radford\",\"source_url\":\"https://cs231n.github.io/neural-networks-3/\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"provenance_confirmation\":\"source-bytes-verified\",\"title\":\"Optimizer trajectories near a saddle point\",\"commit\":\"8ec57ccfc32379ae4b37c45de949af359673f92f\",\"source_image_url\":\"https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/nn3/opt1.gif\",\"modifications\":\"Unchanged GIF, byte-identical to opt1.gif in the pinned CS231n course repository. The course credits Alec Radford; a grant for the GIF was not verified.\",\"sha256\":\"a3d84d671ff120170146dbae76456ac9c2ab5ad15f50ac828791752451173b29\",\"bytes\":731184,\"dimensions_px\":[620,480],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-byte-verified\",\"source_asset_sha256\":\"a3d84d671ff120170146dbae76456ac9c2ab5ad15f50ac828791752451173b29\",\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md\"]}"
+        },
+        {
+          "old": "  - id: curated-vllm-latency-a1b2c3d4e509\n    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png\n    author: Aleksa Gordić\n    source_url: https://www.aleksagordic.com/blog/vllm\n    license: open educational web material; reuse confirmed by repository owner\n    license_url: https://www.aleksagordic.com/blog/vllm\n    modifications: copied without visual modification from the official vLLM blog repository\n    used_in:\n      [\"05 Источники/Implementation studies/Inside vLLM.md\",\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/inference-serving/vllm/latency_diagram.png",
+          "new": "  - {\"id\":\"curated-vllm-latency-a1b2c3d4e509\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"provenance_confirmation\":\"source-bytes-verified\",\"title\":\"Time to first token, inter-token latency, and end-to-end latency\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/latency_diagram.png\",\"modifications\":\"Byte-identical to the pinned official vLLM blog asset. No grant found for the blog artwork; the engine repository license is not evidence for this separate repository.\",\"sha256\":\"c4aedd158b29b99d7430e12b4f5dca1bb160abc02261cd4a8fbecab598c9d53c\",\"bytes\":37423,\"dimensions_px\":[862,396],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-byte-verified\",\"source_asset_sha256\":\"c4aedd158b29b99d7430e12b4f5dca1bb160abc02261cd4a8fbecab598c9d53c\",\"used_in\":[\"05 Источники/Implementation studies/Inside vLLM.md\",\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md\",\"00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md\",\"en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md\"]}"
+        },
+        {
+          "old": "  - id: curated-vllm-roofline-a1b2c3d4e50a\n    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png\n    author: Aleksa Gordić\n    source_url: https://www.aleksagordic.com/blog/vllm\n    license: open educational web material; reuse confirmed by repository owner\n    license_url: https://www.aleksagordic.com/blog/vllm\n    modifications: copied without visual modification from the official vLLM blog repository\n    used_in:\n      [\"05 Источники/Implementation studies/Inside vLLM.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/inference-serving/vllm/roofline.png",
+          "new": "  - {\"id\":\"curated-vllm-roofline-a1b2c3d4e50a\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"provenance_confirmation\":\"source-bytes-verified\",\"title\":\"Memory and compute limits in the roofline model\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/roofline.png\",\"modifications\":\"Byte-identical to the pinned official vLLM blog asset. No grant found for the blog artwork; the engine repository license is not evidence for this separate repository.\",\"sha256\":\"137cbceb1790cd0de91db60d4a990ab2669d8ebe5bf5e675f2a24190978fe6a4\",\"bytes\":48865,\"dimensions_px\":[579,406],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-byte-verified\",\"source_asset_sha256\":\"137cbceb1790cd0de91db60d4a990ab2669d8ebe5bf5e675f2a24190978fe6a4\",\"used_in\":[\"05 Источники/Implementation studies/Inside vLLM.md\",\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md\"]}"
+        },
+        {
+          "old": "  - id: curated-gordic-chunked-prefill-7e3a09d84c21\n    asset: 00 Учебник/Assets/Figures/curated/inference-advanced/physics-scheduling/gordic-chunked-prefill.png\n    author: Aleksa Gordić\n    source_url: https://www.aleksagordic.com/blog/vllm\n    license: open educational web material; reuse confirmed by repository owner\n    license_url: https://www.aleksagordic.com/blog/vllm\n    modifications: copied without visual modification from the official vLLM blog repository\n    used_in:\n      - 00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/inference-serving/vllm/chunked_pt1.png",
+          "new": "  - {\"id\":\"curated-gordic-chunked-prefill-7e3a09d84c21\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-advanced/physics-scheduling/gordic-chunked-prefill.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"provenance_confirmation\":\"source-bytes-verified\",\"title\":\"Scheduling a chunk of prefill with decode requests\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/chunked_pt1.png\",\"modifications\":\"Byte-identical to the pinned official vLLM blog asset. No grant found for the blog artwork; the engine repository license is not evidence for this separate repository.\",\"sha256\":\"5988dc983eb22c8068b0ca2700108fc11d50389e20c078682b3ecc9249d96b31\",\"bytes\":210509,\"dimensions_px\":[901,2020],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-byte-verified\",\"source_asset_sha256\":\"5988dc983eb22c8068b0ca2700108fc11d50389e20c078682b3ecc9249d96b31\",\"used_in\":[\"00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md\",\"en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md\"]}"
+        },
+        {
+          "old": "  - id: curated-lmcache-blog-mp-transfer-paths-7e921ffbdc92\n    asset: 00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-transfer-paths.png\n    author: Jiayue Chen, Tony Lin, and LMCache Team\n    source_url: https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/\n    license: open educational material; reuse confirmed by repository owner\n    license_url: https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/\n    modifications: copied from the official article without visual modification\n    used_in:\n      - en/05 Sources/LMCache/LMCache — map of materials.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/lmcache-blog-2026/3pathsUpdate-1-edited.png",
+          "new": "  - {\"id\":\"curated-lmcache-blog-mp-transfer-paths-7e921ffbdc92\",\"asset\":\"00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-transfer-paths.png\",\"author\":\"Jiayue Chen, Tony Lin, and LMCache Team\",\"source_url\":\"https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"provenance_confirmation\":\"source-bytes-verified\",\"title\":\"LMCache multi-process store paths: CUDA IPC, shared memory, and pickle\",\"source_image_url\":\"https://blog.lmcache.ai/wp-content/uploads/2026/06/3pathsUpdate-1-edited.png\",\"modifications\":\"Byte-identical to the official WordPress upload. The blog artwork has no verified reuse grant.\",\"sha256\":\"7e921ffbdc9272f81970bdae02f315c93598f071b09b6e672b75cab49521c552\",\"bytes\":424557,\"dimensions_px\":[2356,1480],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-byte-verified\",\"source_asset_sha256\":\"7e921ffbdc9272f81970bdae02f315c93598f071b09b6e672b75cab49521c552\",\"used_in\":[\"00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md\",\"en/05 Sources/LMCache/LMCache — map of materials.md\"]}"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tests/fixtures/legacy-unhashed-assets.json",
+      "before_sha256": "221f838fbf638a40ed18c66fc1073550e27654fc3923d7e62780b66ee524f94f",
+      "after_sha256": "010db7be044b6da336284c976c67ace96786a3b8ddda978835321103926eb528",
+      "lines": 266,
+      "changes": [
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/inference-advanced/physics-scheduling/gordic-chunked-prefill.png\",\n    \"00 Учебник/Assets/Figures/curated/inference-serving/sglang-program-figure2.png\",",
+          "new": "    \"00 Учебник/Assets/Figures/curated/inference-serving/sglang-program-figure2.png\","
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png\",\n    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-multiprocexecutor.png\",",
+          "new": "    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-multiprocexecutor.png\","
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png\",\n    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-server_setup.png\",",
+          "new": "    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-server_setup.png\","
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-transfer-paths.png\",\n    \"00 Учебник/Assets/Figures/curated/lstm/lstm-chain.png\",",
+          "new": "    \"00 Учебник/Assets/Figures/curated/lstm/lstm-chain.png\","
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/post-training-courses/sft-chat-template.png\",\n    \"00 Учебник/Assets/Figures/curated/post-training-courses/sft-prompt-masking.png\",",
+          "new": "    \"00 Учебник/Assets/Figures/curated/post-training-courses/sft-prompt-masking.png\","
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif\",\n    \"00 Учебник/Assets/Figures/curated/t5/encoder-decoder-architecture.png\",",
+          "new": "    \"00 Учебник/Assets/Figures/curated/t5/encoder-decoder-architecture.png\","
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/anyscale-static-batching.png\",\n    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/contamination-exchangeability.png\",",
+          "new": "    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/contamination-exchangeability.png\","
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/gpqa.png\",\n    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hle-pipeline.png\",\n    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/ifeval-categories.png\",",
+          "new": "    \"00 Учебник/Assets/Figures/curated/topics-53-59-source-first/ifeval-categories.png\","
+        }
+      ]
+    }
+  ]
+}

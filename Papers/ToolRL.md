@@ -1,7 +1,7 @@
 ---
 title: "ToolRL: Reward is All Tool Learning Needs"
 url: https://arxiv.org/abs/2504.13958
-authors: [Cheng Qian, Emanuele La Malfa, Suyu Ge, Michael Backes, Yang Zhang, Huan Sun]
+authors: [Cheng Qian, Emre Can Acikgoz, Qi He, Hongru Wang, Xiusi Chen, Dilek Hakkani-Tür, Gokhan Tur, Heng Ji]
 year: 2025
 date_reviewed: 2026-04-12
 type: source-note
@@ -13,7 +13,7 @@ tags:
   - GRPO
   - RLVR
   - reward-design
-Organization: OSU / CISPA / Oxford
+Organization: University of Illinois Urbana-Champaign
 concepts:
   - "[[02 Areas/ML & DL/Concepts/Training/GRPO|GRPO]]"
   - "[[02 Areas/ML & DL/Concepts/Training/RLVR|RLVR]]"
@@ -23,20 +23,28 @@ concepts:
 
 # ToolRL: Reward is All Tool Learning Needs
 
-**Authors:** Cheng Qian et al. (Ohio State, CISPA, Oxford)
-**Published:** April 2025 (arXiv:2504.13958)
-**URL:** https://arxiv.org/abs/2504.13958
+**Авторы:** Cheng Qian, Emre Can Acikgoz, Qi He, Hongru Wang, Xiusi Chen,
+Dilek Hakkani-Tür, Gokhan Tur и Heng Ji (University of Illinois Urbana-Champaign).
+**Публикация:** [NeurIPS 2025](https://proceedings.neurips.cc/paper_files/paper/2025/hash/97c5b2707228e7e3fb67e4ecc2e0e607-Abstract-Conference.html);
+номера рисунков и таблиц ниже относятся к [препринту v1](https://arxiv.org/html/2504.13958v1).
 
 ## TL;DR
 
-Систематическое исследование reward design для tool-use RL. Главный результат: **cold-start [[02 Areas/ML & DL/Concepts/Training/GRPO|GRPO]] без SFT превосходит SFT→RL** на 10% на BFCL (58.38% vs 39.25% для Qwen-2.5-7B). Step-level granular rewards (decomposed по tool name, param names, param values) лучше binary rewards. SFT вызывает memorization, которая мешает последующему RL.
+ToolRL даёт частичную награду за правильное имя функции, ключи
+и значения аргументов. На BFCL v3 Qwen2.5-7B-Instruct с
+[[02 Areas/ML & DL/Concepts/Training/GRPO|GRPO]] набрала 58,38% при
+запуске с исходного instruct-чекпойнта и 39,25% после дополнительного
+SFT на 400 демонстрациях. Разница в 19,13 процентного пункта относится
+к этому сравнению, а не к SFT вообще.
 
 ## Problem
 
-Существующие подходы к tool-use RL (Search-R1, TORL) ограничены узкими доменами (search, code). Нет систематического анализа: какой reward design оптимален? Нужен ли SFT warm-start? Как масштабируется RL на general tool-use?
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/toolrl/introduction.png]]
-*ToolRL overview: GRPO с granular reward для tool-use. Cold-start RL consistently outperforms SFT+RL (источник: Qian et al., 2025)*
+В [примере авторов, рис. 1](https://arxiv.org/html/2504.13958v1#S1.F1)
+пользователь спрашивает расстояние между Сан-Франциско и Лос-Анджелесом.
+В сигнатуре доступной функции есть два места и единица измерения,
+но функция возвращает разницу во времени. Корректное решение —
+не вызывать эту функцию. Проверка одной лишь структуры вызова пропустила
+бы ошибку: имена аргументов подходят, назначение функции — нет.
 
 ## Method
 
@@ -44,74 +52,114 @@ concepts:
 - **Base:** Qwen-2.5-Instruct (1.5B, 3B, 7B) + Llama-3.2-Instruct (3B)
 - **RL:** GRPO (primary) + PPO (baseline comparison)
 - **Бенчмарки:** BFCL-v3, API-Bank, Bamboogle
-- **Single-turn** tool calling (не multi-turn как в [[02 Areas/ML & DL/Papers/ASTRA|ASTRA]])
+- Для обучения длинные диалоги разбивают на отдельные решения. Модель получает
+  предыдущие ходы как контекст; в одном выходе возможны несколько вызовов.
+  При оценке есть и многоходовые задачи. Это другой протокол обучения,
+  чем сбор полной исполняемой траектории в [[02 Areas/ML & DL/Papers/ASTRA|ASTRA]].
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/toolrl/reward-design.png]]
-*Reward design: format reward (binary) + correctness reward (granular по tool name, param names, param values). Step-level decomposition даёт fine-grained gradient signal (источник: Qian et al., 2025)*
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/toolrl/reward-design.png|Верхняя часть показывает разбор ответа модели и проверку формата; нижняя сравнивает имена и аргументы вызовов у двух вариантов ответа]]
 
-### Reward Design (ключевой вклад)
+*Cheng Qian et al., [схема ToolRL из репозитория авторов](https://github.com/qiancheng0/ToolRL/blob/8cee13ec0ca72f0461da372a93a6fd8140dbb840/assets/reward.png),
+[Apache 2.0](/licenses/toolrl-8cee13ec-Apache-2.0.txt).
+Сверху выход модели разбирают на два вызова и проверяют формат.
+Снизу сравнивают два варианта ответа: в первом пропущен аргумент,
+во втором выбрана неверная функция. Частичные совпадения входят в
+одну награду за ответ.*
 
-Двухкомпонентный reward:
+### Как считается награда
 
-**Format Reward (binary):**
-- Правильный порядок `<think>`, `<tool_call>`, `<response>` → 1, иначе 0
+В [разделе 3.3](https://arxiv.org/html/2504.13958v1#S3.SS3) проверка формата
+даёт 1 балл за наличие и порядок нужных блоков ответа и 0 иначе.
+Например, для задачи без подходящего инструмента в эталоне есть блок
+`<response>` вместо `<tool_call>`. Выпущенный код в этом случае выставляет
+ноль за правильность вызовов и проверяет формат ответа.
+Для оценки вызовов авторы отдельно сравнивают наборы имён функций,
+ключи аргументов у сопоставленных вызовов и число точно совпавших
+значений. Для имён и ключей используется сходство Жаккара. По
+значениям считают совпадения по каждому ключу, а не Жаккар по набору
+значений. Пусть $G$ — список эталонных вызовов, а $s$ — сумма этих
+трёх оценок. Тогда
 
-**Correctness Reward (granular, -3..+3):**
-- **Tool name matching** — Jaccard similarity между predicted и ground-truth
-- **Parameter name matching** — Jaccard по именам параметров
-- **Parameter value matching** — Jaccard по значениям
+$$
+S_{\max}=1+|G|+\sum_{g\in G}|\operatorname{keys}(g)|,\qquad
+R_{\text{correct}}=6\frac{s}{S_{\max}}-3.
+$$
 
-Каждый компонент ∈ {-1, 0, +1}. Итого: -3..+3 на шаг.
+Например, ожидается `lookup(city="Kazan", units="metric")`, а модель
+вызывает `lookup(city="Kazan", units="imperial")`. Имя и ключи
+совпадают, верно одно из двух значений. Поэтому $s=1+1+1=3$ при
+$S_{\max}=4$, и $R_{\text{correct}}=1{,}5$. При правильной структуре
+ответа итоговая награда равна $2{,}5$; при полностью правильном
+вызове и формате она равна 4.
 
-Это **step-level** reward — каждый tool call получает свой score. В отличие от [[02 Areas/ML & DL/Papers/ASTRA|ASTRA]], где reward trajectory-level (один F1 на всю цепочку).
+В статье описан поиск оптимального сопоставления вызовов. В
+[выпущенном коде](https://github.com/qiancheng0/ToolRL/blob/8cee13ec0ca72f0461da372a93a6fd8140dbb840/verl/utils/reward_score/rlla.py#L131-L198)
+эталонные вызовы перебираются по очереди: для каждого берут лучший
+ещё не занятый вызов с тем же именем. При нескольких вызовах одной
+функции это жадное правило может дать другой результат.
+[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-toolrl|Разбор проверяющего кода в учебнике]]
+показывает такой случай. GRPO сравнивает полные оценки нескольких
+ответов на один запрос; отдельного advantage на каждый инструмент нет.
 
-### Три инсайта по reward design
+### Что изменили в абляциях
 
-1. **Length ≠ quality.** Длинные reasoning traces не обязательно лучше. Length rewards деградируют performance, особенно на маленьких моделях.
-2. **Dynamic scaling.** Постепенный сдвиг акцента: format adherence → correctness. Лучше чем фиксированные веса.
-3. **Granularity matters.** Fine-grained decomposition (name + params + values) > binary correctness. Больше gradient signal → лучше обучение.
+Награда за длину не улучшила результат в опытах
+[раздела 5.1](https://arxiv.org/html/2504.13958v1#S5.SS1). Плавное изменение
+веса формата и правильности дало разные результаты в зависимости от
+модели: у Qwen2.5-1.5B итог BFCL снизился с 46,20 до 45,71%, у
+Llama-3.2-3B вырос с 44,10 до 46,85%
+([табл. 6](https://arxiv.org/html/2504.13958v1#S5.T6)).
+В [рис. 11](https://arxiv.org/html/2504.13958v1#S5.F11) авторы меняют
+гранулярность проверки, а не инициализацию модели. Более строгий
+вариант Coarse требует полного совпадения вызовов. На BFCL v3 для
+Qwen2.5-1.5B это 36,72% против 46,20% у исходной награды
+([табл. 7](https://arxiv.org/html/2504.13958v1#S5.T7)).
 
 ## Key Results
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/toolrl/cold-start-comparison.png]]
-*Cold-start GRPO vs SFT+GRPO: cold-start consistently wins. SFT causes memorization that undermines subsequent RL exploration (источник: Qian et al., 2025)*
 
 ### Cold-Start RL vs SFT+RL
 
 | Setup | BFCL (Qwen-2.5-7B) |
 |---|---|
-| Base (no training) | ~35% |
-| SFT only | ~42% |
-| SFT → GRPO | 39.25% |
-| **GRPO cold-start** | **58.38%** |
+| Исходная instruct-модель | 41,97% |
+| SFT на 400 примерах | 34,08% |
+| SFT на 4 000 примерах | 36,53% |
+| SFT на 400 примерах → GRPO | 39,25% |
+| GRPO от исходного instruct-чекпойнта | 58,38% |
 
-**SFT вредит последующему RL:** "SFT initialization leads to memorization and overfitting, which reduces the impact of GRPO's effectiveness." SFT-модель получает выше training reward (distributional alignment), но хуже generализирует.
-
-### Общий gain
-
-ToolRL достигает +17% над base и +15% над SFT на BFCL.
+Источник: [табл. 1](https://arxiv.org/html/2504.13958v1#S4.T1).
+На [рис. 5](https://arxiv.org/html/2504.13958v1#S4.F5) другая модель,
+Qwen2.5-3B-Instruct, после SFT получает более высокую награду в ходе
+обучения, хотя на отложенных бенчмарках лучше выступает вариант без
+дополнительного SFT. Авторы предполагают переобучение на демонстрациях;
+кривые награды сами по себе причину не устанавливают.
 
 ## My notes
 
 ### Противоречие с ASTRA
 
-ASTRA утверждает SFT необходим. ToolRL утверждает обратное. Возможные объяснения:
-- **Scale:** ToolRL ≤7B, ASTRA 14B-32B. На больших моделях SFT может быть полезнее.
-- **Horizon:** ToolRL = single-turn, ASTRA = multi-turn (до 32 ходов). Для длинных горизонтов cold-start RL может быть нестабилен — модель должна сначала выучить формат остановки.
-- **Reward type:** ToolRL step-level, ASTRA trajectory-level. Step-level даёт достаточно сигнала для cold-start. Trajectory-level sparse reward может быть недостаточен без SFT warm-start.
-
-Без прямого сравнения на одних моделях/бенчмарках — вопрос открыт.
+В ASTRA авторы сравнивают последовательные стадии SFT и RL, но не
+показывают тот же многоходовый запуск без SFT. У ToolRL такое
+сравнение есть, но на других моделях и с другим протоколом: учат
+отдельное решение по истории, а не последовательность решений в одной
+исполняемой среде. Чтобы проверить, нужен ли SFT в режиме ASTRA,
+нужны два запуска с одинаковыми средами и наградой, различающиеся
+только инициализацией.
 
 ### Step-level vs Trajectory-level reward
 
-ToolRL (step-level): каждый tool call знает свой score. Точный credit assignment, но может быть greedy — оптимизирует шаги по отдельности, теряет глобальный план.
-
-[[02 Areas/ML & DL/Papers/ASTRA|ASTRA]] (trajectory-level F1): один reward на всю цепочку. Размытый credit assignment, но учит стратегию целиком.
-
-Идеально: комбинация обоих. Ни одна из работ этого не делает.
+ToolRL собирает оценку ответа из совпадений с размеченными вызовами.
+[[02 Areas/ML & DL/Papers/ASTRA|ASTRA]] оценивает, какие подзадачи
+удалось решить к концу траектории и сколько было вызовов. Первый
+сигнал требует эталонных вызовов; второй допускает разные
+последовательности, если они приводят к проверяемым результатам.
+У F1 остаётся вопрос назначения награды: по одному числу нельзя
+узнать, какой из вызовов привёл к ошибке.
 
 ### Ограничения
 
-- Single-turn only — не показано как работает на multi-turn
+- В BFCL v3 есть категория Multi Turn, но основной результат в таблице
+  объединяет разные категории. У Qwen2.5-7B-Instruct с GRPO без дополнительного SFT в ней 18,12%, а
+  общий результат — 58,38%.
 - Маленькие модели (≤7B) — scaling behavior неизвестен
 - Нет сравнения с ASTRA, Tool-N1, APIGen-MT в одной таблице

@@ -1,0 +1,203 @@
+{
+  "date": "2026-11-09",
+  "scope": "Close the precise CS336 lecture 1 step 241 mapping without republishing the lecture raster. Explain the entire original figure in both existing textbook editions; retain the broader Inference course segment.",
+  "review": {
+    "previousGoalTurn": "Progress: the preceding turn integrated the Wei Figure 2 into Scaling laws with two fixed-output contrast graphs, checked arithmetic, reader evidence and consistent course counts.",
+    "sources": [
+      "Stanford CS336 Spring 2026 Lecture 1 lines 352–362, pinned 8b59b50730766695c2ffedd1a79c50cd09b9eb91, step 241.",
+      "Baolin Li, Yankai Jiang, Vijay Gadepally and Devesh Tiwari, arXiv:2407.12391v1 §II-B and Figure 2 (CC BY 4.0)."
+    ],
+    "chapterRead": "Read both existing editions in full (RU 710 lines, EN 760 lines). Reread the revised section and checked both transitions. The five programs, quantitative examples and remaining figures are identical on exact delta reversal.",
+    "explanation": "Iteration 1 caches S prompt positions and selects a; iteration 2 processes a and selects discipline; iteration 3 processes discipline and selects the period; iteration 4 processes the period and selects EOS. When EOS stops generation it is never an input to a further pass. The labels are illustrative and are not a tokenizer measurement. The later executable cache-length table is preserved.",
+    "sourceImage": "Compared the pinned CS336 647×248 image with the 899×344 upstream article PNG. They show the same four states and arrows; the chapter uses the original version without a crop. Compared the bytes to a fresh fetch of arXiv v1 llm_inference.png; SHA-256 947a70b7cef4d1875d295692731cd4216f189daaf5ac7b586106fc542626e3a6. Did not copy the separate unlicensed Roller screenshot or reclassify the full lecture Inference range.",
+    "runtime": "Ran the five CPU examples using torch 2.14.1 and transformers 4.57.1. Forced EOS as the first and fourth outputs of the small two-layer model and verified the cache counts prompt length and prompt length plus three respectively. Not a checkpoint or throughput benchmark."
+  },
+  "verification": {
+    "chapter": "Both locales render their full chapter, all six images and the same exact original PNG. Followed the link from the RU archived lecture and the EN course overview at widths 375 and 1280 px, without page overflow or KaTeX errors. At 375 px the 2.5× viewer pans to the last two iterations and retains source and license links.",
+    "course": "The deterministic source snapshot check passed with 902 artifacts, 811 coverage and 159 visual records. The two step-241 records now use covered-existing at the exact chapter anchor. The separate lecture Inference range remains source-only. The historical 206-row audit is unchanged; the two current overviews reflect the new counts.",
+    "build": "2053 pages built, 249 output checks passed, zero broken internal routes, fragments or files. The 17 targeted receipt, course-residual and publication-policy tests passed.",
+    "release": "Local working copy only; no commit, push or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "before_sha256": "42438233617da20ba81611806b40ed450beaf6506e90ec181e2d43ac92580832",
+      "after_sha256": "f52796e71a65dc3d2347c8bb0ee1fab1dbbab1e2e977bbe8c3ecaa97125451e5",
+      "lines": 722,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29",
+          "new": "last_updated: 2026-11-09"
+        },
+        {
+          "old": "source_unit_id:\n  - lecture-10-naive-versus-cached-inference",
+          "new": "source_unit_id:\n  - lecture-01-figure-step-241-rendering-1\n  - lecture-10-naive-versus-cached-inference"
+        },
+        {
+          "old": "## Prefill и decode используют устройство по-разному",
+          "new": "<a id=\"prefill-decode-cache-states\"></a>\n\n## Prefill и decode используют устройство по-разному"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-review-2026-09/prefill-decode.png]]\n\n*Первый проход обрабатывает Computer science is и выбирает a.\nСледующий проход получает a, добавляет его K/V и выбирает discipline.\nBaolin Li et al., рисунок 2 в\n[LLM Inference Serving: Survey of Recent Advances and Opportunities](https://arxiv.org/html/2407.12391v1#S2.F2),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-review-2026-09/prefill-decode.png|Четыре прохода: входной текст даёт a, затем каждый выбранный токен поступает на вход следующего прохода, пока модель не выдаст EOS.]]\n\n*Baolin Li et al., рисунок 2 в\n[LLM Inference Serving: Survey of Recent Advances and Opportunities](https://arxiv.org/html/2407.12391v1#S2.F2),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nОригинал статьи без изменений. Уменьшенная копия показана на шаге 241\n[лекции 1 CS336](https://cs336.stanford.edu/lectures/?trace=lecture_01).*\n\nНа схеме запрос «Computer science is» поступает в **Iteration 1**.\nЕсли после токенизации в запросе $S$ позиций, первый проход записывает\n$S$ пар K/V в каждом слое. По логитам последней позиции выбирается\nпервый токен ответа, `a`. Его уже можно отправить клиенту, хотя в кеше\nпока только позиции запроса.\n\n**Iteration 2** получает `a` на вход, дописывает его K/V и выбирает\n`discipline`. В кеше теперь $S+1$ позиций. **Iteration 3** обрабатывает\n`discipline` и выбирает точку, а **Iteration 4** обрабатывает точку\nи выбирает `<EOS>`. Если на этом генерация останавливается, отдельного\nпрохода с `<EOS>` не будет. В кеше останется $S+3$ обработанных позиций,\nхотя модель сделала четыре выбора. Слова на рисунке обозначают условные\nтокены; реальные границы зависят от токенизатора."
+        },
+        {
+          "old": "Первый выходной токен выбирается по логитам последней позиции prefill. Его\nсобственной пары K/V в кеше ещё нет: она появится, когда этот токен подадут\nна вход следующей итерации. Поэтому после prompt длиной 4000 сервер уже может\nотправить первый токен клиенту, имея в кеше ровно 4000 позиций, а не 4001.\n\n## Что именно сохраняет KV-cache",
+          "new": "## Что именно сохраняет KV-cache"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/55 KV cache batching and PagedAttention.md",
+      "before_sha256": "9a9325ba453932424faf0f55ccf07f6e05658ad40ca3c14bc7c14797877710f8",
+      "after_sha256": "92e2e14cdc98e9c3335107af121501ac0ea9c0307cc6aba944d00c7c01233d36",
+      "lines": 771,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29",
+          "new": "last_updated: 2026-11-09"
+        },
+        {
+          "old": "source_unit_id:\n  - lecture-10-naive-versus-cached-inference",
+          "new": "source_unit_id:\n  - lecture-01-figure-step-241-rendering-1\n  - lecture-10-naive-versus-cached-inference"
+        },
+        {
+          "old": "canonical_revision: \"42438233617da20ba81611806b40ed450beaf6506e90ec181e2d43ac92580832\"\ntranslation_reviewed: \"2026-10-29\"",
+          "new": "canonical_revision: \"f52796e71a65dc3d2347c8bb0ee1fab1dbbab1e2e977bbe8c3ecaa97125451e5\"\ntranslation_reviewed: \"2026-11-09\""
+        },
+        {
+          "old": "<a id=\"prefill-и-decode-используют-устройство-по-разному\"></a>",
+          "new": "<a id=\"prefill-и-decode-используют-устройство-по-разному\"></a>\n<a id=\"prefill-decode-cache-states\"></a>"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-review-2026-09/prefill-decode.png]]\n\n*The first call processes Computer science is and selects a. The next\nreceives a, appends its K/V and selects discipline. Baolin Li et al.,\nFigure 2 in [LLM Inference Serving: Survey of Recent Advances and Opportunities](https://arxiv.org/html/2407.12391v1#S2.F2),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-review-2026-09/prefill-decode.png|Four calls: the prompt produces a, then each selected token enters the next forward pass until the model emits EOS.]]\n\n*Baolin Li et al., Figure 2 in\n[LLM Inference Serving: Survey of Recent Advances and Opportunities](https://arxiv.org/html/2407.12391v1#S2.F2),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nThe paper's original, unchanged. A lower-resolution copy appears at\nstep 241 of [CS336 Lecture 1](https://cs336.stanford.edu/lectures/?trace=lecture_01).*\n\nIn the figure, “Computer science is” enters **Iteration 1**.\nIf the prompt has $S$ positions after tokenization, the first call\nstores $S$ K/V pairs in each layer. The logits at the final prompt\nposition produce the first answer token, `a`. The server can send it\nto the client while the cache still holds only the prompt positions.\n\n**Iteration 2** takes `a` as input, appends its K/V and selects\n`discipline`. The cache now covers $S+1$ positions. **Iteration 3**\nprocesses `discipline` and selects the period. **Iteration 4**\nprocesses the period and selects `<EOS>`. If generation stops there,\n`<EOS>` never enters a forward pass. The cache covers $S+3$ processed\npositions even though the model made four selections. The words in the\ndiagram stand for tokens; actual token boundaries depend on the tokenizer."
+        },
+        {
+          "old": "The first output token is selected from logits at the final prefill\nposition. Its own K/V is not yet in the cache: it is computed when\nthat token enters the next iteration. After a 4,000-token prompt,\nthe server can therefore send the first answer token while the cache\ncontains exactly 4,000 positions, not 4,001.\n\n<a id=\"что-именно-сохраняет-kv-cache\"></a>",
+          "new": "<a id=\"что-именно-сохраняет-kv-cache\"></a>"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/editorial-map.yml",
+      "before_sha256": "98677295cffb4d26cd4da246919f01f4b035a80069f68f1e4c604237ff181781",
+      "after_sha256": "f861d5f79e78b261d8b64e1a44b0c16b907b687758a8fc19b89beb8f6fa5021b",
+      "lines": 5467,
+      "changes": [
+        {
+          "old": "    \"lecture-01-figure-step-241-rendering-1\": {\n      \"disposition\": \"source-only\",\n      \"reason\": \"Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.\",\n      \"evidence\": \"Lectures/repository/var/traces/lecture_01.json#step=241:rendering=1; reviewed title: prefill decode\"",
+          "new": "    \"lecture-01-figure-step-241-rendering-1\": {\n      \"disposition\": \"covered-existing\",\n      \"destination\": \"00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md\",\n      \"destination_anchor\": \"prefill-decode-cache-states\",\n      \"evidence\": \"Step 241 uses Li et al. Figure 2. Both textbook editions already retain the original; the explanation now traces four forward calls and distinguishes selected IDs from cached positions.\""
+        },
+        {
+          "old": "    \"lecture-01-visual-figure-step-241-rendering-1\": {\n      \"disposition\": \"source-only\",\n      \"reason\": \"Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.\",\n      \"evidence\": \"Lectures/repository/var/traces/lecture_01.json#step=241:rendering=1; question reviewed: How does prefill decode support the lecture section “Inference”?\"",
+          "new": "    \"lecture-01-visual-figure-step-241-rendering-1\": {\n      \"disposition\": \"covered-existing\",\n      \"destination\": \"00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md\",\n      \"destination_anchor\": \"prefill-decode-cache-states\",\n      \"local_file\": \"00 Учебник/Assets/Figures/curated/attention-review-2026-09/prefill-decode.png\",\n      \"transformation\": \"Chapter retains Li et al., arXiv:2407.12391v1 Figure 2, exact 899×344 original PNG, CC BY 4.0, SHA-256 947a70b7cef4d1875d295692731cd4216f189daaf5ac7b586106fc542626e3a6. The 647×248 course version is kept in the archive, not embedded a second time.\",\n      \"caption\": \"Prompt prefill emits a; each subsequent call appends K/V for its input and selects the next token. The final selected EOS does not require another call.\",\n      \"rendered_route\": \"/textbook/inference/kv-cache-batching-pagedattention/#prefill-decode-cache-states\",\n      \"desktop_evidence\": \"Exact upstream PNG and placement inspected; browser evidence pinned in the chapter journal.\",\n      \"narrow_evidence\": \"Original PNG remains unmodified for expansion in the viewer; narrow evidence pinned in the chapter journal.\",\n      \"reviewer\": \"Bookvar editorial review\",\n      \"checked_at\": \"2026-11-09\""
+        },
+        {
+          "old": "    \"lecture-01-visual-figure-step-276-rendering-1\": {",
+          "new": "    \"lecture-01-visual-figure-step-276-rendering-1\": {"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+      "before_sha256": "ea235552dfcd7c4c70a87b6211b8346eeb042813f03cff5843d80dbe69d41005",
+      "after_sha256": "eb9a2822483cb5e183ad9b412971d53f52b2fc0babc21162dd03265872440f6f",
+      "lines": 309,
+      "changes": [
+        {
+          "old": "В учебнике: [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws#scaling-metric-emergence|почему метрика может создать видимый скачок качества]] (шаг 39).",
+          "new": "В учебнике: [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws#scaling-metric-emergence|почему метрика может создать видимый скачок качества]] (шаг 39); [[00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention#prefill-decode-cache-states|как меняется KV-cache между prefill и decode]] (шаг 241)."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Курсы.md",
+      "before_sha256": "9ca950f3693a91d2231f5c08a1a46c64a7ce7338cfd36342b015b28c7010c923",
+      "after_sha256": "8b1290596e2df04300a5bd9dcdbc35f273189ff50d8332a3eafc8d66f8d24e0a",
+      "lines": 400,
+      "changes": [
+        {
+          "old": "Из 811 записей покрытия 558 имеют статус `integrated`, 27 — `covered-existing`,\n21 — `contract-only`, 149 — `source-only`, 56 — `excluded`. В числе 558",
+          "new": "Из 811 записей покрытия 558 имеют статус `integrated`, 28 — `covered-existing`,\n21 — `contract-only`, 148 — `source-only`, 56 — `excluded`. В числе 558"
+        },
+        {
+          "old": "9 `covered-existing`, 47 `source-only`, 32 `excluded`.",
+          "new": "10 `covered-existing`, 46 `source-only`, 32 `excluded`."
+        }
+      ]
+    },
+    {
+      "source": "en/05 Sources/Courses.md",
+      "before_sha256": "406150a527d5acfa04f396bfbc2b03520f04eb93671c33f9ceec185f3fb91973",
+      "after_sha256": "08279de5a5139598024e87313877dd021c6a5d4f00e9ef054b02db1407056f7e",
+      "lines": 151,
+      "changes": [
+        {
+          "old": "The coverage ledger contains 811 semantic units: 558 integrated, 27 already\ncovered, 21 assignment-contract-only, 149 source-only, and 56 excluded.",
+          "new": "The coverage ledger contains 811 semantic units: 558 integrated, 28 already\ncovered, 21 assignment-contract-only, 148 source-only, and 56 excluded."
+        },
+        {
+          "old": "9 already covered, 47 source-only, and 32 excluded. These are bookkeeping",
+          "new": "10 already covered, 46 source-only, and 32 excluded. These are bookkeeping"
+        },
+        {
+          "old": "categories, not a count of fully reviewed chapters or individual figures.\n\nMulti-token prediction is now integrated into the",
+          "new": "categories, not a count of fully reviewed chapters or individual figures.\n\nLecture 1 shows the first four calls of a decoding loop. The\n[[00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention#prefill-decode-cache-states|prefill and decode walkthrough]]\nfollows the same diagram and counts the positions in the cache after each call.\n\nMulti-token prediction is now integrated into the"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/coverage.yml",
+      "before_sha256": "c400006e9f534a018e8662c99241c71ebacc72a7649392554ed47765e6a89610",
+      "after_sha256": "67ad96a100d93207d1792960294cecfe7a33a00cb4221fef610430b752c8b585",
+      "lines": 11687,
+      "changes": [
+        {
+          "old": "      \"primary_sources\": [\n        \"lecture-01\"\n      ],\n      \"disposition\": \"source-only\",\n      \"destination\": \"05 Источники/Courses/Stanford CS336 Spring 2026/_index.md\",\n      \"destination_anchor\": \"lecture-01\",\n      \"reason\": \"Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.\",\n      \"evidence\": \"Lectures/repository/var/traces/lecture_01.json#step=241:rendering=1; reviewed title: prefill decode\"\n    },\n    {\n      \"id\": \"coverage-lecture-01-administrative-assignment-2-systems\",",
+          "new": "      \"primary_sources\": [\n        \"lecture-01\"\n      ],\n      \"disposition\": \"covered-existing\",\n      \"destination\": \"00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md\",\n      \"destination_anchor\": \"prefill-decode-cache-states\",\n      \"evidence\": \"Step 241 uses Li et al. Figure 2. Both textbook editions already retain the original; the explanation now traces four forward calls and distinguishes selected IDs from cached positions.\"\n    },\n    {\n      \"id\": \"coverage-lecture-01-administrative-assignment-2-systems\","
+        },
+        {
+          "old": "      \"evidence\": \"Assignments/assignment5-alignment/tests/test_data.py#L55\"\n    }\n  ],\n  \"editorial_overlay_sha256\": \"41095c26c858eb15d035ab140b97b7d0231daab8070aeee7f7e313a93ab3fe64\"\n}",
+          "new": "      \"evidence\": \"Assignments/assignment5-alignment/tests/test_data.py#L55\"\n    }\n  ],\n  \"editorial_overlay_sha256\": \"2b340bf6579f06fc0b27c6d71e3309f94345477572111f53ae3a892ff89808e7\"\n}"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/visuals.yml",
+      "before_sha256": "dd6bf389a97d4dd79fb554b45b5603033c51e0307b01b844a08598d79c98c925",
+      "after_sha256": "9f3487aaaea05815f216249b842cded0a62088d13dd83e77a0a7bdf9596ba0c9",
+      "lines": 16448,
+      "changes": [
+        {
+          "old": "          \"source_location\": \"Lectures/repository/var/traces/lecture_01.json#step=241:rendering=1\"\n        }\n      ],\n      \"disposition\": \"source-only\",\n      \"destination\": \"05 Источники/Courses/Stanford CS336 Spring 2026/_index.md\",\n      \"destination_anchor\": \"lecture-01\",\n      \"attribution\": \"Stanford CS336 staff, Language Modeling from Scratch, Spring 2026\",\n      \"rights_status\": \"permission-recorded\",\n      \"rights_holder\": \"Stanford CS336 source authors and identified upstream asset owners\",",
+          "new": "          \"source_location\": \"Lectures/repository/var/traces/lecture_01.json#step=241:rendering=1\"\n        }\n      ],\n      \"disposition\": \"covered-existing\",\n      \"destination\": \"00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md\",\n      \"destination_anchor\": \"prefill-decode-cache-states\",\n      \"attribution\": \"Stanford CS336 staff, Language Modeling from Scratch, Spring 2026\",\n      \"rights_status\": \"permission-recorded\",\n      \"rights_holder\": \"Stanford CS336 source authors and identified upstream asset owners\","
+        },
+        {
+          "old": "      \"extractor_sha256\": \"1e8d049b33e599e0e23c7edd26601f70120aff2899e13258b4dd3b852092c48f\",\n      \"extractor_revision\": \"stanford-cs336-semantic-audit-v3\",\n      \"extraction_tool\": \"edtrace 0.1.15 archived image rendering\",\n      \"rendered_route\": \"/sources/courses/stanford-cs336-spring-2026/\",\n      \"desktop_evidence\": \"pending editorial integration; source archive inspected\",\n      \"narrow_evidence\": \"pending editorial integration; source archive inspected\",\n      \"reviewer\": \"Codex source audit\",\n      \"checked_at\": \"2026-09-04\",\n      \"source_parent_sha256\": \"a7d47339eab889679010e926db8beb79f475a0596243f19bb15dbd69223f67e6\",\n      \"asset_url\": \"https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/prefill-decode.png\",\n      \"reason\": \"Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.\",\n      \"evidence\": \"Lectures/repository/var/traces/lecture_01.json#step=241:rendering=1; question reviewed: How does prefill decode support the lecture section “Inference”?\"\n    },\n    {\n      \"id\": \"lecture-01-visual-figure-step-276-rendering-1\",",
+          "new": "      \"extractor_sha256\": \"1e8d049b33e599e0e23c7edd26601f70120aff2899e13258b4dd3b852092c48f\",\n      \"extractor_revision\": \"stanford-cs336-semantic-audit-v3\",\n      \"extraction_tool\": \"edtrace 0.1.15 archived image rendering\",\n      \"rendered_route\": \"/textbook/inference/kv-cache-batching-pagedattention/#prefill-decode-cache-states\",\n      \"desktop_evidence\": \"Exact upstream PNG and placement inspected; browser evidence pinned in the chapter journal.\",\n      \"narrow_evidence\": \"Original PNG remains unmodified for expansion in the viewer; narrow evidence pinned in the chapter journal.\",\n      \"reviewer\": \"Bookvar editorial review\",\n      \"checked_at\": \"2026-11-09\",\n      \"source_parent_sha256\": \"a7d47339eab889679010e926db8beb79f475a0596243f19bb15dbd69223f67e6\",\n      \"asset_url\": \"https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/prefill-decode.png\",\n      \"local_file\": \"00 Учебник/Assets/Figures/curated/attention-review-2026-09/prefill-decode.png\",\n      \"transformation\": \"Chapter retains Li et al., arXiv:2407.12391v1 Figure 2, exact 899×344 original PNG, CC BY 4.0, SHA-256 947a70b7cef4d1875d295692731cd4216f189daaf5ac7b586106fc542626e3a6. The 647×248 course version is kept in the archive, not embedded a second time.\",\n      \"caption\": \"Prompt prefill emits a; each subsequent call appends K/V for its input and selects the next token. The final selected EOS does not require another call.\"\n    },\n    {\n      \"id\": \"lecture-01-visual-figure-step-276-rendering-1\","
+        },
+        {
+          "old": "      \"evidence\": \"Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#pages=15-18\"\n    }\n  ],\n  \"editorial_overlay_sha256\": \"41095c26c858eb15d035ab140b97b7d0231daab8070aeee7f7e313a93ab3fe64\"\n}",
+          "new": "      \"evidence\": \"Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#pages=15-18\"\n    }\n  ],\n  \"editorial_overlay_sha256\": \"2b340bf6579f06fc0b27c6d71e3309f94345477572111f53ae3a892ff89808e7\"\n}"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/snapshot-lock.json",
+      "before_sha256": "b8c59b80a38fc8af5a7481a64e17aa5ec1edb217f3f2acb90fa1d01b36756a61",
+      "after_sha256": "2e7a368fe4a9bc907c355bf8ffc1f2250a5a1698d60bdcf01d837f71c9b69d67",
+      "lines": 116,
+      "changes": [
+        {
+          "old": "    \"extractor_revision\": \"stanford-cs336-semantic-audit-v3\",\n    \"extractor_sha256\": \"1e8d049b33e599e0e23c7edd26601f70120aff2899e13258b4dd3b852092c48f\",\n    \"semantic_review_sha256\": \"250bd1d1a7f73d26ce805846d506b4cf6c87aeef045d5c373699f199d958ccc1\",\n    \"editorial_overlay_sha256\": \"41095c26c858eb15d035ab140b97b7d0231daab8070aeee7f7e313a93ab3fe64\",\n    \"tool_versions\": {\n      \"edtrace\": \"0.1.15\",\n      \"pdfinfo\": \"26.04.0\",",
+          "new": "    \"extractor_revision\": \"stanford-cs336-semantic-audit-v3\",\n    \"extractor_sha256\": \"1e8d049b33e599e0e23c7edd26601f70120aff2899e13258b4dd3b852092c48f\",\n    \"semantic_review_sha256\": \"250bd1d1a7f73d26ce805846d506b4cf6c87aeef045d5c373699f199d958ccc1\",\n    \"editorial_overlay_sha256\": \"2b340bf6579f06fc0b27c6d71e3309f94345477572111f53ae3a892ff89808e7\",\n    \"tool_versions\": {\n      \"edtrace\": \"0.1.15\",\n      \"pdfinfo\": \"26.04.0\","
+        },
+        {
+          "old": "        \"records\": 811\n      },\n      \"coverage.yml\": {\n        \"sha256\": \"c400006e9f534a018e8662c99241c71ebacc72a7649392554ed47765e6a89610\",\n        \"records\": 811\n      },\n      \"visuals.yml\": {\n        \"sha256\": \"dd6bf389a97d4dd79fb554b45b5603033c51e0307b01b844a08598d79c98c925\",\n        \"records\": 159\n      }\n    }",
+          "new": "        \"records\": 811\n      },\n      \"coverage.yml\": {\n        \"sha256\": \"67ad96a100d93207d1792960294cecfe7a33a00cb4221fef610430b752c8b585\",\n        \"records\": 811\n      },\n      \"visuals.yml\": {\n        \"sha256\": \"9f3487aaaea05815f216249b842cded0a62088d13dd83e77a0a7bdf9596ba0c9\",\n        \"records\": 159\n      }\n    }"
+        }
+      ]
+    }
+  ]
+}

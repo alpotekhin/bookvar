@@ -52,7 +52,7 @@ describe('model as part of a system', () => {
   });
 
   it('keeps all six original images and matches the recorded publication bytes', () => {
-    const images = [...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^\]]+)\]\]/g)].map(row => row[1]);
+    const images = [...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^\]|]+)(?:\|[^\]]*)?\]\]/g)].map(row => row[1]);
     expect(images).toHaveLength(6);
     const checks = {
       '00 Учебник/Assets/Figures/curated/systems-foundations-review-2026-09/ml-lifecycle.png': '05fdb7e3a7c16485cc708f34393073ad6079f5d933aefbb9b129f9edb33adf37',

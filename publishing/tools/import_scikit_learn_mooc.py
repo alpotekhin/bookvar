@@ -19,6 +19,19 @@ from pathlib import Path, PurePosixPath
 REPOSITORY = "https://github.com/INRIA/scikit-learn-mooc"
 LICENSE_NAME = "CC BY 4.0"
 OUTPUT_NAME = "Scikit-learn MOOC"
+GLOSSARY_FIGURES = {
+    "figures/lin_separable.svg": "Two classes of points on opposite sides of a straight decision boundary.",
+    "figures/dt_fit.svg": "A decision tree fits a piecewise constant function to the data points.",
+    "figures/boosting0.svg": "Labeled points on two axes: blue circles and orange squares.",
+    "figures/linear_fit_red.svg": "A fitted line and vertical residuals from the observed points to the line.",
+    "_images/api_diagram-predictor.fit.svg": "The fit method uses X and y to learn the predictor's model state.",
+}
+PENGUIN_ART_REPO = "https://github.com/allisonhorst/palmerpenguins"
+PENGUIN_ART_COMMIT = "8957207b78d6ccd1b4654a9dd9c9041b657478ab"
+PENGUIN_ART = {
+    "lter_penguins.png": ("Adelie, Chinstrap and Gentoo penguins", "meet-the-palmer-penguins"),
+    "culmen_depth.png": ("Bill length and bill depth measured along and across the bill", "culmen-measurements"),
+}
 
 
 def sha256(path: Path) -> str:
@@ -85,8 +98,35 @@ def resolve_source_target(source_path: str, target: str) -> str:
 def rewrite_links(text: str, source_path: str, commit: str) -> str:
     """Localize figures and pin other relative links to upstream."""
 
+    def original_figure(target: str) -> str | None:
+        if source_path == "jupyter-book/appendix/glossary.md":
+            path = target.removeprefix("https://inria.github.io/scikit-learn-mooc/")
+            if path != target and path in GLOSSARY_FIGURES:
+                original = "figures/" + PurePosixPath(path).name
+                return (
+                    f"![[Assets/Sources/{OUTPUT_NAME}/{original}|{GLOSSARY_FIGURES[path]}]]\n\n"
+                    f"*Scikit-learn MOOC contributors, [original figure]({REPOSITORY}/blob/"
+                    f"{commit}/{original}), [CC BY 4.0]({REPOSITORY}/blob/{commit}/LICENSE).*"
+                )
+        if source_path == "python_scripts/trees_dataset.py":
+            prefix = f"{PENGUIN_ART_REPO}/raw/main/man/figures/"
+            name = target.removeprefix(prefix)
+            if target.startswith(prefix) and name in PENGUIN_ART:
+                description, anchor = PENGUIN_ART[name]
+                return (
+                    f"![{description}](https://raw.githubusercontent.com/allisonhorst/"
+                    f"palmerpenguins/{PENGUIN_ART_COMMIT}/man/figures/{name})\n\n"
+                    "*Artwork by @allison_horst. "
+                    f"[Palmer Penguins teaching artwork]"
+                    f"(https://allisonhorst.github.io/palmerpenguins/articles/art.html#{anchor}).*"
+                )
+        return None
+
     def image(match: re.Match[str]) -> str:
         alt, target = match.group(1), match.group(2)
+        original = original_figure(target)
+        if original is not None:
+            return original
         if re.match(r"^[a-z][a-z0-9+.-]*:", target, flags=re.I):
             return match.group(0)
         resolved = resolve_source_target(source_path, target)
@@ -98,6 +138,9 @@ def rewrite_links(text: str, source_path: str, commit: str) -> str:
 
     def html_image(match: re.Match[str]) -> str:
         target = match.group(1)
+        original = original_figure(target)
+        if original is not None:
+            return original
         if re.match(r"^[a-z][a-z0-9+.-]*:", target, flags=re.I):
             return match.group(0)
         resolved = resolve_source_target(source_path, target)

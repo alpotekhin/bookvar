@@ -2,8 +2,86 @@
 title: Word2Vec, GloVe и распределительные представления
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-22
+last_updated: 2026-11-10
+source_language: mixed
+reference_terms:
+  - label: "Таблица embeddings и обучающий сигнал"
+    label_en: "Embedding lookup and its training signal"
+    anchor: emb-lookup
+  - label: "Контекстное сходство и соседство"
+    label_en: "Context similarity versus co-occurrence"
+    anchor: emb-contexts
+  - label: "Направленные пары и матрица соседств"
+    label_en: "Directed pairs and co-occurrence counts"
+    anchor: emb-counts
+  - label: "PMI, PPMI и редкие пары"
+    label_en: "PMI, PPMI and rare pairs"
+    anchor: emb-pmi
+  - label: "Усечённый SVD и ошибка восстановления"
+    label_en: "Truncated SVD and reconstruction error"
+    anchor: emb-svd
+  - label: "Skip-gram, полный softmax и градиенты"
+    label_en: "Skip-gram, full softmax and gradients"
+    anchor: emb-skipgram
+  - label: "CBOW, среднее и повторные ID"
+    label_en: "CBOW, averaging and repeated IDs"
+    anchor: emb-cbow
+  - label: "Случайный радиус окна и вес расстояния"
+    label_en: "Random context radius and distance weighting"
+    anchor: emb-dynamic-window
+  - label: "SGNS и бинарная цель"
+    label_en: "SGNS and its binary objective"
+    anchor: emb-sgns
+  - label: "SGNS: обновление обеих таблиц"
+    label_en: "SGNS update of both parameter tables"
+    anchor: emb-sgns-step
+  - label: "Шум в степени 3/4 и subsampling"
+    label_en: "Three-quarter noise weights and subsampling"
+    anchor: emb-noise
+  - label: "Отбрасывание контекстных слов из шума"
+    label_en: "Context-dependent rejection of noise words"
+    anchor: emb-filtered-noise
+  - label: "Оптимум SGNS и сдвинутая PMI"
+    label_en: "SGNS optimum and shifted PMI"
+    anchor: emb-sgns-pmi
+  - label: "Hierarchical softmax и вероятности путей"
+    label_en: "Hierarchical softmax and path probabilities"
+    anchor: emb-hierarchical
+  - label: "Бинарные метки, padding и усреднение"
+    label_en: "Binary labels, padding and reduction"
+    anchor: emb-batch-masks
+  - label: "GloVe: отношения вероятностей и log-count"
+    label_en: "GloVe probability ratios and log-counts"
+    anchor: emb-glove-ratios
+  - label: "GloVe: веса, смещения и градиенты"
+    label_en: "GloVe weights, biases and gradients"
+    anchor: emb-glove-loss
+  - label: "Косинус, аналогии и неединственность геометрии"
+    label_en: "Cosine, analogies and non-unique geometry"
+    anchor: emb-geometry
+  - label: "Intrinsic и extrinsic оценка embeddings"
+    label_en: "Intrinsic and extrinsic embedding evaluation"
+    anchor: emb-evaluation
+  - label: "Многозначность статических embeddings"
+    label_en: "Polysemy in static embeddings"
+    anchor: emb-polysemy
+  - label: "fastText, фрагменты и OOV"
+    label_en: "fastText subwords and out-of-vocabulary words"
+    anchor: emb-fasttext
+  - label: "Контекстные состояния и слои BERT"
+    label_en: "Contextual states and BERT layers"
+    anchor: emb-contextual
+  - label: "Weight tying и экономия параметров"
+    label_en: "Weight tying and parameter counts"
+    anchor: emb-tying
+  - label: "Два пути градиента общей таблицы"
+    label_en: "Two gradient paths through tied embeddings"
+    anchor: emb-tying-gradient
+  - label: "Почему поисковый embedding требует отдельного обучения"
+    label_en: "Why retrieval embeddings need their own training"
+    anchor: emb-retrieval
 primary_sources:
+  - https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_natural-language-processing-pretraining/word-embedding-dataset.md
   - https://arxiv.org/abs/1301.3781
   - https://arxiv.org/abs/1310.4546
   - https://aclanthology.org/D14-1162/
@@ -28,6 +106,8 @@ next: "[[02 Areas/ML & DL/00 Учебник/02 Представление тек
 дают разные обучающие наблюдения.
 Полученный вектор описывает выбранную статистику употребления;
 он не является единственным возможным представлением значения.
+
+<a id="emb-lookup"></a>
 
 ## 1. Почему номера слов недостаточно
 
@@ -56,6 +136,8 @@ $$
 Word2Vec использует другую задачу: предсказание слов локального окружения,
 в том числе справа от центра.
 
+<a id="emb-contexts"></a>
+
 ## 2. Значение видно по окружению
 
 Дистрибутивная гипотеза связывает сходство слов
@@ -82,6 +164,8 @@ Word2Vec использует другую задачу: предсказани�
 Позднейшее увеличение размерности векторов её не восстановит.
 
 ## 3. Самый прямой способ — посчитать соседей
+
+<a id="emb-counts"></a>
 
 ### От текста к матрице
 
@@ -120,6 +204,8 @@ Word2Vec использует другую задачу: предсказани�
 Строки `кот` и `спит` ортогональны,
 хотя соответствующая ячейка совместного счётчика равна 2.
 Так матрица различает общих соседей и непосредственное соседство.
+
+<a id="emb-pmi"></a>
 
 ### Поправка на частоту: PMI и PPMI
 
@@ -168,6 +254,8 @@ PMI может сильно выделять случайные редкие п�
 Большое значение на одном наблюдении не доказывает устойчивой связи.
 Выбор корпуса, минимальной частоты и сглаживания остаётся частью метода.
 
+<a id="emb-svd"></a>
+
 ### Сжатие матрицы
 
 При словаре из $100\,000$ слов полная матрица имеет $10^{10}$ ячеек.
@@ -193,14 +281,24 @@ $\Sigma_d$ — $d$ сохранённых сингулярных значени�
 Можно выбрать и другое распределение масштаба;
 при одинаковом произведении геометрия отдельных таблиц может измениться.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-word-embeddings/count-based-idea.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/reduced-svd.svg|Полное, тонкое, компактное и усечённое SVD матрицы 4 на 3. В нижней строке остаётся один столбец U, одно сингулярное значение и одна строка V*]]
 
-*Lena Voita,
-[Count-Based Methods](https://lena-voita.github.io/nlp_course/word_embeddings.html).
-Полная исходная схема усечённого SVD: слева матрица «слово × контекст»,
-справа две низкоразмерные таблицы и диагональная матрица.
-В оригинале левый множитель назван $V_d$, правый — $U_d^\top$;
-в формулах главы им соответствуют $Q_d$ и $R_d^\top$.*
+*Mercurysheet, по работе Cmglee,
+[Reduced Singular Value Decompositions](https://commons.wikimedia.org/wiki/File:Reduced_Singular_Value_Decompositions.svg),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+Полный SVG без изменений. В третьей строке убрали нулевое
+сингулярное значение: произведение по-прежнему восстанавливает
+матрицу. В нижней строке оставили только одну из двух ненулевых
+компонент. У $U$ остался один столбец, у $V^*$ — одна строка;
+их произведение с оставшимся значением даёт приближение ранга 1.*
+
+В обозначениях главы $U_d$ с рисунка соответствует $Q_d$,
+а $V_d^*$ для вещественной матрицы — $R_d^\top$. В
+[схеме Лены Войты](https://lena-voita.github.io/nlp_course/word_embeddings.html#pre_neural)
+матрица слева — именно «слово × контекст». После усечения строка
+левого множителя даёт координаты слова, а столбец правого —
+координаты контекста. В формулах выше оба вектора дополнительно
+масштабированы через $\Sigma_d^{1/2}$.
 
 В нашем примере четыре сингулярных значения PPMI
 примерно равны $1{,}440848$, $1{,}440848$, $0{,}943693$, $0{,}943693$.
@@ -252,6 +350,8 @@ print("reconstruction error =", np.linalg.norm(ppmi - reconstruction))
 
 ## 4. Word2Vec: выучим векторы через простую задачу
 
+<a id="emb-skipgram"></a>
+
 ### Skip-gram: один центр, несколько целей
 
 В последовательности `кот спит бежит` при радиусе 1 центр `спит`
@@ -259,6 +359,13 @@ print("reconstruction error =", np.linalg.norm(ppmi - reconstruction))
 В отличие от next-token prediction, целью может быть и левый сосед.
 Для разных позиций окна используется одно распределение;
 порядок соседей стандартный Skip-gram не различает.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/embedding-author-figures-2026-11-10/d2l-skip-gram.svg|Четыре стрелки от центра loves к контекстным словам the, man, his, son]]
+
+*Zhang, Lipton, Li, Smola, [D2L, The Skip-Gram Model, рис. 15.1.1](https://en.d2l.ai/chapter_natural-language-processing-pretraining/word2vec.html#the-skip-gram-model).
+При радиусе 2 у центра `loves` четыре цели: `the`, `man`, `his`, `son`.
+Каждая стрелка даёт отдельное слагаемое потерь.
+Исходный SVG без изменений; [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
 
 Пусть $v_w$ — входной вектор центрального слова,
 $u_c$ — выходной вектор контекстного слова.
@@ -302,6 +409,8 @@ $$
 каждое встреченное соседство создаёт собственный положительный пример.
 Суммарная задача учитывает частоты всех пар.
 
+<a id="emb-cbow"></a>
+
 ### CBOW: окружение как вход
 
 CBOW предсказывает центральное слово по всему окну.
@@ -330,15 +439,16 @@ $m$ — фактическое число доступных соседей, а 
 получает $g/m$.
 При повторе одного слова его строка получает сумму всех этих вкладов.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-word-embeddings/cbow-skipgram.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/embedding-author-figures-2026-11-10/d2l-cbow.svg|Четыре контекстных слова the, man, his, son сходятся к одной цели loves]]
 
-*Lena Voita,
-[Skip-Gram and CBOW](https://lena-voita.github.io/nlp_course/word_embeddings.html).
-Слева cat по отдельности предсказывает cute, grey, playing, in.
-Справа их векторы суммируются для предсказания cat.
-На правой части оригинала входы обозначены $u$, выход — $v$;
-в тексте главы обозначения закреплены за ролями входа и выхода.
-Схема использует сумму, наш числовой пример — среднее.*
+*Zhang, Lipton, Li, Smola, [D2L, The Continuous Bag of Words Model, рис. 15.1.2](https://en.d2l.ai/chapter_natural-language-processing-pretraining/word2vec.html#the-continuous-bag-of-words-cbow-model).
+Предложение и окно те же, но теперь четыре соседних вектора образуют
+один средний вектор $h$, и потерю считают по одной цели, `loves`.
+Исходный SVG без изменений; [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+
+На [сравнительном рисунке Лены Войты](https://lena-voita.github.io/nlp_course/word_embeddings.html#w2v_skipgram_cbow)
+у CBOW записана сумма, а не среднее. Направление предсказания то же;
+масштаб перед softmax отличается в $m$ раз.
 
 ```python
 import torch
@@ -368,7 +478,81 @@ print("logits =", logits.detach(), "loss =", loss.detach())
 Какую таблицу сохранять для дальнейшей задачи, нужно указать:
 обычно используют входные векторы, но можно исследовать и их комбинации.
 
+<a id="emb-dynamic-window"></a>
+
+### Random context windows
+
+The examples above use a fixed radius. In
+[D2L, Extracting Center Words and Context Words](https://d2l.ai/chapter_natural-language-processing-pretraining/word-embedding-dataset.html#extracting-center-words-and-context-words),
+each center draws an integer radius uniformly from 1 to `max_window_size`.
+The original function below is unchanged; `import random` supplies the
+module imported at the start of the source chapter.
+
+```python
+import random
+
+def get_centers_and_contexts(corpus, max_window_size):
+    """Return center words and context words in skip-gram."""
+    centers, contexts = [], []
+    for line in corpus:
+        # To form a "center word--context word" pair, each sentence needs to
+        # have at least 2 words
+        if len(line) < 2:
+            continue
+        centers += line
+        for i in range(len(line)):  # Context window centered at `i`
+            window_size = random.randint(1, max_window_size)
+            indices = list(range(max(0, i - window_size),
+                                 min(len(line), i + 1 + window_size)))
+            # Exclude the center word from the context words
+            indices.remove(i)
+            contexts.append([line[idx] for idx in indices])
+    return centers, contexts
+
+random.seed(7)
+tiny_dataset = [list(range(7)), list(range(7, 10))]
+centers, contexts = get_centers_and_contexts(tiny_dataset, 3)
+assert len(centers) == len(contexts) == 10
+assert all(center not in context for center, context in zip(centers, contexts))
+assert all((neighbor < 7) == (center < 7)
+           for center, context in zip(centers, contexts) for neighbor in context)
+```
+
+*Zhang, Lipton, Li, Smola, D2L,
+[`get_centers_and_contexts`, revision 23d7a5a](https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_natural-language-processing-pretraining/word-embedding-dataset.md#extracting-center-words-and-context-words).
+Original function body; the import and assertions are added here.
+[CC BY-SA 4.0](/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt).*
+
+For the center at position 3 in `[0,1,2,3,4,5,6]`, radius 1
+selects `[2,4]`; radius 2 selects `[1,2,4,5]`; radius 3 selects
+`[0,1,2,4,5,6]`. Every immediate neighbor is included. A neighbor
+two positions away appears for two of the three radii; a neighbor
+three positions away appears only for radius 3.
+For a maximum radius $M$ and an existing neighbor at distance $r$,
+
+$$
+\begin{gathered}
+P(\text{pair included})=P(R\ge r)=\frac{M-r+1}{M},\\
+1\le r\le M.
+\end{gathered}
+$$
+
+This probability decreases linearly with distance. It is neither the
+fixed-window counter used in our first calculation nor GloVe’s $1/r$
+contribution. At a sentence boundary there are fewer available neighbors,
+but no synthetic neighbors are added to fill the window.
+
+The function receives the corpus after subsampling. For example, removing
+`the` from `[A,the,B]` makes `A` and `B` immediate neighbors in that input.
+Their distance is measured in the retained sequence, not in the original
+text. With repeated word IDs, exclusion removes the center position only:
+another occurrence of the same ID can still be a context word.
+The assertions use distinct IDs; they do not claim that equal IDs are
+forbidden from forming a pair.
+
 ## 5. Почему нужна выборка отрицательных примеров
+
+<a id="emb-sgns"></a>
 
 ### Другая функция потерь
 
@@ -406,17 +590,21 @@ SGNS не даёт perplexity обычной языковой модели бе�
 Отбрасывание совпадений меняет распределение выборки;
 его нельзя молча совмещать с выводом для независимого $q$.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-word-embeddings/negative-sampling.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/embedding-author-figures-2026-11-10/alammar-word2vec-lookup-embeddings.png|SGNS выбирает одну строку центра из входной таблицы и три строки из контекстной]]
 
-*Lena Voita,
-[Negative Sampling](https://lena-voita.github.io/nlp_course/word_embeddings.html).
-Слева полный softmax затрагивает все выходные строки;
-справа SGNS использует положительный контекст и выбранные шумовые строки.
-Надписи increase/decrease показывают локальный сигнал по оценкам,
-а не гарантируют изменение всех скалярных произведений
-после произвольного одновременного обновления параметров.
-$K+2$ — число обращений к векторам при разных выбранных словах;
-совпадения уменьшают число уникальных строк.*
+*Jay Alammar, [The Illustrated Word2vec, Word2vec Training Process](https://jalammar.github.io/illustrated-word2vec/#word2vec-training-process).
+Из входной таблицы берут `not`, из выходной — наблюдаемого соседа
+`thou` и два шумовых слова, `aaron` и `taco`.
+Для трёх пар считают три скалярных произведения с одним и тем же
+вектором `not`. Остальные строки выходной таблицы в этом шаге не читают.
+Оригинал без изменений; [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
+
+При полном softmax для того же центра пришлось бы прочитать
+всю выходную таблицу: даже слово, которое не попало в окно,
+входит в знаменатель. Это различие отдельно показано
+в [сравнении Лены Войты](https://lena-voita.github.io/nlp_course/word_embeddings.html#w2v_negative_sampling).
+
+<a id="emb-sgns-step"></a>
 
 ### Один шаг обеих таблиц
 
@@ -475,6 +663,8 @@ print("before =", before, "after =", after)
 Стоимость оценки и градиентов выбранных пар порядка $(K+1)d$.
 Хранить две таблицы по $Vd$ параметров всё равно нужно.
 
+<a id="emb-noise"></a>
+
 ### Распределение шума и частые слова
 
 В [Mikolov et al., §2.2](https://arxiv.org/html/1310.4546v1#S2.SS2)
@@ -502,6 +692,47 @@ $$
 Реализации могут использовать другой рецепт;
 числа нужно сопоставлять с конкретной формулой.
 Удаление до построения окон также меняет, какие слова станут соседями.
+
+<a id="emb-filtered-noise"></a>
+
+### Rejecting context words changes the noise distribution
+
+D2L’s
+[`get_negatives`](https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_natural-language-processing-pretraining/word-embedding-dataset.md#negative-sampling)
+draws from frequency-based weights, then accepts a draw only if
+`neg not in contexts`. This excludes every ID in the current context list,
+not only one positive target. Duplicates among the accepted negatives
+are still allowed.
+
+Let $C$ be the set of excluded context IDs and let $q$ be the normalized
+proposal distribution over eligible vocabulary IDs. If $q(C)<1$,
+the distribution of accepted draws is
+
+$$
+\begin{gathered}
+q_C(n)=\frac{q(n)\mathbf1[n\notin C]}{1-q(C)},\\
+q(C)=\sum_{c\in C}q(c).
+\end{gathered}
+$$
+
+For four IDs with proposal probabilities $(0.4,0.3,0.2,0.1)$
+and $C=\{2,3\}$, half the proposal mass is rejected.
+The accepted probabilities for IDs 1 and 4 are $0.8$ and $0.2$;
+IDs 2 and 3 receive zero. Repeating ID 2 in the context list
+does not remove its mass twice: $C$ is a set for this calculation.
+
+If the context list has $m$ positions, the source requests $Km$ accepted
+negative samples. Repeated context positions increase that count even
+when the excluded set is unchanged. If all proposal mass is excluded,
+the source rejection loop cannot fill its output; a usable sampler needs
+at least one eligible ID with positive mass.
+
+The independent-noise SGNS derivation below uses $q(c)$, without this
+context-dependent rejection step. Its optimum cannot be applied unchanged
+to a sampler whose accepted distribution is $q_C$. The course implementation
+and the independent-draw mathematical objective specify different choices.
+
+<a id="emb-sgns-pmi"></a>
 
 ### Связь с PMI
 
@@ -547,6 +778,8 @@ $A=1$, $B=2\cdot2\cdot(1/8)=1/2$,
 Эти ограничения разобраны у
 [Levy и Goldberg, §2–3.1](https://papers.neurips.cc/paper/5477-neural-word-embedding-as-implicit-matrix-factorization.pdf).
 
+<a id="emb-hierarchical"></a>
+
 ### Hierarchical softmax
 
 Hierarchical softmax сохраняет нормированное распределение,
@@ -557,7 +790,7 @@ Hierarchical softmax сохраняет нормированное распре�
 равна $\sigma(a_n^\top v_w)$, правого — её дополнению.
 Вероятность листа равна произведению переходов по его пути.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/word-embeddings-2026-10-21/d2l-hi-softmax.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/word-embeddings-2026-10-21/d2l-hi-softmax.svg|Путь по внутренним узлам дерева к слову w3 в hierarchical softmax]]
 
 *Zhang, Lipton, Li, Smola,
 [D2L, Hierarchical Softmax](https://d2l.ai/chapter_natural-language-processing-pretraining/approx-training.html#hierarchical-softmax).
@@ -595,7 +828,91 @@ $0{,}6-0=0{,}6$ и $0{,}25-1=-0{,}75$.
 Это другая параметризация выходного распределения,
 а не способ получить точно те же вероятности, что у произвольного плоского softmax.
 
+<a id="emb-batch-masks"></a>
+
+### Positive labels and padding masks are separate arrays
+
+A context window can contain a different number of words for each center.
+D2L concatenates the positive context IDs and sampled negative IDs, then
+pads rows to one batch width. Its `labels` array answers whether a pair
+is positive. Its `masks` array answers whether the position belongs to
+the training example at all.
+
+The source’s two examples are `(1,[2,2],[3,3,3,3])` and
+`(1,[2,2,2],[3,3])`: center ID, positive IDs, negative IDs.
+They produce
+
+| Array | First center | Second center |
+|---|---|---|
+| Pair IDs | `2 2 3 3 3 3` | `2 2 2 3 3 0` |
+| Labels | `1 1 0 0 0 0` | `1 1 1 0 0 0` |
+| Masks | `1 1 1 1 1 1` | `1 1 1 1 1 0` |
+
+These two rows are a batching fixture. Their negative-to-positive ratios
+are $4/2$ and $2/3$, so they are not output from `get_negatives`
+with one shared integer $K$. The fixture isolates padding and labels.
+
+The final zero label of the second row is padding, not a sixth negative
+example. A zero label alone cannot tell these cases apart.
+There are five positive positions, six negative positions and one padding
+position. Repeated ID 2 remains a repeated observation.
+
+```python
+import torch
+import torch.nn.functional as F
+
+def batchify(data):
+    """Return a minibatch of examples for skip-gram with negative sampling."""
+    max_len = max(len(c) + len(n) for _, c, n in data)
+    centers, contexts_negatives, masks, labels = [], [], [], []
+    for center, context, negative in data:
+        cur_len = len(context) + len(negative)
+        centers += [center]
+        contexts_negatives += [context + negative + [0] * (max_len - cur_len)]
+        masks += [[1] * cur_len + [0] * (max_len - cur_len)]
+        labels += [[1] * len(context) + [0] * (max_len - len(context))]
+    return (torch.tensor(centers).reshape((-1, 1)), torch.tensor(
+        contexts_negatives), torch.tensor(masks), torch.tensor(labels))
+
+x_1 = (1, [2, 2], [3, 3, 3, 3])
+x_2 = (1, [2, 2, 2], [3, 3])
+centers, contexts_negatives, masks, labels = batchify((x_1, x_2))
+keep = masks.bool()
+assert centers.shape == (2, 1)
+assert contexts_negatives.shape == labels.shape == masks.shape == (2, 6)
+assert keep.sum().item() == 11 and labels[keep].sum().item() == 5
+
+logits = torch.zeros((2, 6), dtype=torch.float64)
+logits[1, 5] = 1000.  # A padding score must not become a negative example.
+logits.requires_grad_()
+loss = F.binary_cross_entropy_with_logits(logits[keep], labels[keep].double())
+torch.testing.assert_close(loss, torch.tensor(2.).double().log())
+loss.backward()
+assert logits.grad[1, 5].item() == 0
+wrong = F.binary_cross_entropy_with_logits(logits.detach(), labels.double())
+assert wrong.item() > 10
+```
+
+*Zhang, Lipton, Li, Smola, D2L,
+[`batchify` and the two-example fixture](https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_natural-language-processing-pretraining/word-embedding-dataset.md#loading-training-examples-in-minibatches).
+The function uses the source’s tensor construction, with `d2l.tensor`
+and `d2l.reshape` replaced by their PyTorch equivalents; the loss and
+assertions are added here.
+[CC BY-SA 4.0](/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt).*
+
+The displayed loss averages over all 11 valid binary decisions.
+Averaging each center’s loss first and then averaging the two centers
+assigns a different weight to their decisions. If the first center’s
+six decisions each have loss 1 and the second center’s five each have
+loss 2, the global mean is $16/11$, while the mean of the two center
+means is $1.5$. These are specified losses for illustrating the weights,
+not the zero-logit output above.
+The batching code specifies IDs, labels and masks; the reduction must
+also be specified when implementing the optimizer step.
+
 ## 6. GloVe: аппроксимация логарифма совместных частот
+
+<a id="emb-glove-ratios"></a>
 
 ### От отношений вероятностей к логарифмам счётчиков
 
@@ -605,15 +922,23 @@ GloVe тоже использует пары из контекстных око�
 в исходной статье пара на расстоянии $r$ добавляет $1/r$.
 Наша таблица с радиусом 1 уже соответствует этому правилу.
 
-Авторы начинают со сравнения `ice` и `steam`.
-Контекст `solid` существенно вероятнее рядом с `ice`,
-`gas` — рядом с `steam`.
-Контексты, связанные с обоими словами либо ни с одним,
-дают менее различительные отношения.
-Отношения из Table 1 примерно равны 8,9 для solid,
-0,085 для gas, 1,36 для water и 0,96 для fashion.
-Исходные вероятности в таблице округлены;
-повторное деление округлённых чисел не обязано точно дать строку отношений.
+Авторы сравнивают контексты `ice` и `steam` на корпусе из 6 млрд токенов.
+У `water` обе вероятности больше, чем у `solid` или `gas`,
+но их отношение всего $1{,}36$: вода часто упоминается рядом и со льдом,
+и с паром. У `solid` отношение равно $8{,}9$ в пользу `ice`;
+для `gas` оно равно $0{,}085$, и связь выражена в обратную сторону.
+`Fashion` редко встречается и со льдом, и с паром; для него
+отношение тоже близко к 1.
+Деление округлённых чисел из первых двух строк не обязано точно
+воспроизвести опубликованную строку отношений.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/embedding-author-figures-2026-11-10/glove-table1-ratios.png|Исходная таблица GloVe: отношения вероятностей для solid, gas, water и fashion равны 8,9; 0,085; 1,36 и 0,96]]
+
+*Pennington, Socher, Manning, [GloVe, таблица 1](https://aclanthology.org/D14-1162.pdf#page=3).
+Первые две строки — вероятности одного и того же контекстного слова
+при разных центрах. Последняя — результат деления первой строки на вторую
+в каждом столбце. Таблица извлечена из PDF без перерисовки;
+[CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/).*
 
 Логарифм отношения превращает сравнение в разность:
 
@@ -622,14 +947,18 @@ $$
 =\log p(c\mid i)-\log p(c\mid j).
 $$
 
-Если моделировать такие разности линейной функцией
-векторной разности $v_i-v_j$,
-получается связь со скалярными произведениями.
-Из $p(c\mid i)=X_{ic}/X_{i\cdot}$ следует
-$\log p(c\mid i)=\log X_{ic}-\log X_{i\cdot}$.
-Слагаемое, зависящее только от центрального слова,
-можно поглотить его смещением.
-Дополнительное контекстное смещение даёт симметричную форму
+Авторы предлагают представить этот логарифм скалярным произведением
+$(v_i-v_j)^\top u_c$. Для `solid` оно должно быть положительным,
+для `gas` — отрицательным. В исходной шкале отношение моделирует
+$\exp((v_i-v_j)^\top u_c)$: разность оценок становится отношением
+их экспонент.
+
+Для одной пары $\log p(c\mid i)=\log X_{ic}-\log X_{i\cdot}$.
+Второе слагаемое одинаково для всей строки $i$, поэтому вместо
+его явного вычисления можно ввести смещение $b_i$ для центра.
+Авторы добавляют такое же смещение $\tilde b_c$ для контекстной
+стороны: при транспонировании $X$ две таблицы и их смещения
+меняются местами, а форма оценки сохраняется.
 
 $$
 v_i^\top u_c+b_i+\tilde b_c\approx\log X_{ic}.
@@ -640,15 +969,14 @@ $$
 Полный ход выбора функции приведён в
 [GloVe, §3](https://aclanthology.org/D14-1162.pdf).
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-word-embeddings/glove-idea.png]]
+При одинаковых окнах пары Skip-gram можно сгруппировать по тем же
+счётчикам. В полном softmax $X_{ic}$ тогда определяет, сколько раз
+учитывается потеря $-\log p(c\mid i)$; в GloVe из него получают цель
+$\log X_{ic}$ и вес ошибки $f(X_{ic})$. Сравнение есть
+в [§3.1 статьи](https://aclanthology.org/D14-1162.pdf#page=4)
+и в [схеме Лены Войты](https://lena-voita.github.io/nlp_course/word_embeddings.html#glove).
 
-*Lena Voita,
-[GloVe](https://lena-voita.github.io/nlp_course/word_embeddings.html).
-Схема сопоставляет предварительную агрегацию статистики
-и обучение векторов градиентным методом.
-Граница между count-based и predictive не означает
-разных исходных данных: повторяющиеся Skip-gram пары
-тоже можно сгруппировать по счётчикам.*
+<a id="emb-glove-loss"></a>
 
 ### Взвешенная ошибка и один шаг
 
@@ -683,6 +1011,14 @@ $$
 Вес пары после порога не растёт,
 но её целевой $\log X$ продолжает изменяться.
 Функция не приравнивает счётчики 100 и 1000.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/embedding-author-figures-2026-11-10/glove-figure1-weighting.png|Функция веса GloVe растёт до x_max и после порога равна единице]]
+
+*Pennington, Socher, Manning, [GloVe, рис. 1](https://aclanthology.org/D14-1162.pdf#page=4).
+По горизонтали отложен счётчик $X_{ij}$, по вертикали — множитель
+квадрата ошибки. За пунктиром вес постоянен, хотя целевое значение
+$\log X_{ij}$ продолжает расти. График извлечён из PDF без перерисовки;
+[CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/).*
 
 Для `кот — спит` имеем $X=2$.
 Пусть $v=1$, $u=0$, оба смещения равны нулю.
@@ -731,16 +1067,6 @@ assert objective() < before
 print("weight =", weight, "before =", before, "after =", objective().detach())
 ```
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-word-embeddings/glove-loss.png]]
-
-*Lena Voita,
-[GloVe objective](https://lena-voita.github.io/nlp_course/word_embeddings.html).
-Подписаны две таблицы, два смещения и вес пары.
-Penalize rare events здесь означает уменьшить влияние редких наблюдений,
-а не увеличить их штраф. Нижний график схематичен:
-при $\alpha=3/4$ до порога идёт степенная кривая,
-не прямая линия. Точная функция приведена в формуле выше.*
-
 В GloVe нулевая ячейка не создаёт отрицательного примера,
 тогда как SGNS регулярно получает шумовые пары
 и для ненаблюдавшихся сочетаний.
@@ -754,6 +1080,8 @@ Penalize rare events здесь означает уменьшить влияни
 а не дополнительное условие равенства таблиц.
 
 ## 7. Что появилось в пространстве
+
+<a id="emb-geometry"></a>
 
 ### Близость и проверка аналогий
 
@@ -789,6 +1117,8 @@ $v'=Av$, $u'=A^{-\top}u$ с обратимой $A$.
 Следовательно, обучающая цель по парам
 сама по себе не определяет единственную геометрию входной таблицы.
 
+<a id="emb-evaluation"></a>
+
 ### Как оценивать результат
 
 Проверка на ближайших словах помогает найти ошибки,
@@ -808,6 +1138,8 @@ $v'=Av$, $u'=A^{-\top}u$ с обратимой $A$.
 Эти два вида проверки сопоставлены в
 [Voita, Evaluation](https://lena-voita.github.io/nlp_course/word_embeddings.html).
 
+<a id="emb-polysemy"></a>
+
 ## 8. Один вектор не справляется с многозначностью
 
 У статического Word2Vec слово `bank` имеет одну входную строку
@@ -822,6 +1154,8 @@ $v'=Av$, $u'=A^{-\top}u$ с обратимой $A$.
 Обычный Word2Vec также не умеет построить отдельную строку
 для слова, которого не было в словаре;
 подмена его UNK объединяет все такие слова.
+
+<a id="emb-fasttext"></a>
 
 ### fastText и символьные фрагменты
 
@@ -878,6 +1212,8 @@ fastText представляет слово через общие символ�
 Этот следующий шаг разобран в
 [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram|следующей главе]].
 
+<a id="emb-contextual"></a>
+
 ## 9. Контекстные представления
 
 У контекстной модели после lookup работают слои,
@@ -898,7 +1234,7 @@ BERT использует двунаправленный Transformer-энкод�
 Сумма сохраняет размерность, конкатенация увеличивает её:
 четыре вектора размерности $d$ дадут вектор размерности $4d$.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-feature-extraction-contextualized-embeddings.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-feature-extraction-contextualized-embeddings.png|Способы объединения слоёв BERT и Dev F1 на CoNLL-2003 NER]]
 
 *Jay Alammar,
 [The Illustrated BERT — BERT for feature extraction](https://jalammar.github.io/illustrated-bert/#bert-for-feature-extraction).
@@ -912,6 +1248,8 @@ BERT использует двунаправленный Transformer-энкод�
 «Embedding» без этого уточнения может означать входную строку,
 контекстное состояние токена либо вектор всего текста.
 Это разные объекты с разными способами получения.
+
+<a id="emb-tying"></a>
 
 ## 10. Входные embeddings и выходная матрица языковой модели
 
@@ -935,7 +1273,7 @@ Word2Vec выше использует независимые таблицы.
 Их нельзя отождествлять только потому,
 что в обоих случаях встречаются слова «вход» и «выход».
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt2-2026-10-22/gpt2-output-projection-2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt2-2026-10-22/gpt2-output-projection-2.png|Выход GPT-2 через транспонированную входную таблицу токенов]]
 
 *Jay Alammar,
 [The Illustrated GPT-2, Model Output](https://jalammar.github.io/illustrated-gpt2/).
@@ -945,6 +1283,8 @@ Word2Vec выше использует независимые таблицы.
 Обозначение `<s>` условное: в GPT-2 используется `<|endoftext|>`.
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/);
 оригинальное изображение без изменений.*
+
+<a id="emb-tying-gradient"></a>
 
 ### Два вклада в градиент общей таблицы
 
@@ -1026,6 +1366,8 @@ assert after < loss.detach()
 для логитов, но между этими операциями стоят все блоки Transformer.
 Обратный проход через них даёт входной вклад уже по цепочке их производных.
 
+<a id="emb-retrieval"></a>
+
 ## 11. Векторные представления для поиска — отдельная задача
 
 Контекстное состояние слова не является автоматически
@@ -1052,9 +1394,10 @@ assert after < loss.detach()
 
 ## Практический эксперимент
 
-Пять исполняемых блоков выше проверяют конкретные механизмы:
+Семь исполняемых блоков выше проверяют конкретные механизмы:
 составление пар и PPMI/SVD, CBOW и градиенты среднего,
-один SGNS-шаг, один GloVe-шаг и оба вклада в градиент общей таблицы.
+случайное окно и маски пар, один SGNS-шаг, один GloVe-шаг
+и оба вклада в градиент общей таблицы.
 Все они используют маленькие данные,
 по которым нельзя оценить семантическое качество метода.
 
@@ -1084,6 +1427,9 @@ assert after < loss.detach()
 
 ## Источники
 
+- Zhang, Lipton, Li, Smola,
+  [D2L, The Dataset for Pretraining Word Embeddings](https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_natural-language-processing-pretraining/word-embedding-dataset.md):
+  random context radius, rejection sampling, positive labels and padding masks.
 - [Lena Voita, Word Embeddings](https://lena-voita.github.io/nlp_course/word_embeddings.html):
   Distributional Semantics, Count-Based Methods, Word2Vec, GloVe и Evaluation.
 - [D2L, Word Embedding](https://d2l.ai/chapter_natural-language-processing-pretraining/word2vec.html);

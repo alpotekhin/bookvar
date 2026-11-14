@@ -1,0 +1,236 @@
+{
+  "date": "2026-11-03",
+  "scope": "Source-faithful spectral chapter additions; no translation or publication.",
+  "files": [
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian.md",
+      "before_sha256": "6184d698155c4e8571f256ffbc4f013d91cf1e5451d67db9109ccb5643d27b34",
+      "after_sha256": "b0b642640f4e87cfc2476d5a18a522642890f29fb2c4be69f2e9f3434bf48786",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-25",
+          "new": "last_updated: 2026-11-03"
+        },
+        {
+          "old": "## Численный пример: слабый мост между двумя группами\n",
+          "new": "### Связный граф: что остаётся до полного выравнивания\n\n![[00 Учебник/Assets/Figures/curated/spectral-2026-10-31/wiskott-connected-heat.png|Связная цепочка C–E–G–B–D–F–A: начальные температуры, медленное выравнивание и порядок на оси h]]\n\n*Laurenz Wiskott и Fabian Schönfeld,\n[Laplacian Matrix for Dimensionality Reduction and Clustering, §1.1](https://www.ini.rub.de/PEOPLE/wiskott/Teaching/UnsupervisedLearning/PublicWeb/LaplacianMatrix-L0-LectureNotes-PublicWeb.pdf#page=5),\nFigure 1.1, CC BY-SA 4.0. Сохранены все три кадра, ось $h$ и исходная\nанглийская подпись.*\n\nЗдесь те же семь вершин соединены в одну цепочку\n$C-E-G-B-D-F-A$. На плоскости она выглядит запутанной, но по рёбрам можно\nоднозначно пройти от $C$ до $A$. Буквы на нижней оси идут именно в этом\nпорядке. Правый кадр показывает поздний момент выравнивания: у одного\nконца цепочки температура ещё немного выше, чем у другого.\n\nПри $t\\to\\infty$ температуры всех семи вершин станут одинаковыми.\nДля связного графа сохраняется только постоянный нулевой вектор,\nи такое конечное состояние уже не различает вершины. Чтобы получить\nодномерное представление, рассматривают отклонение от средней температуры\nдо его полного затухания. Если $\\lambda_2<\\lambda_3$ и $c_2\\ne0$, то\n\n$$\nh(t)-\\bar h\\mathbf1\n=c_2e^{-\\lambda_2t}v_2+\n\\sum_{r=3}^n c_re^{-\\lambda_rt}v_r.\n$$\n\nОтношение каждого следующего коэффициента к первому убывает с множителем\n$e^{-(\\lambda_r-\\lambda_2)t}$. Поэтому направление центрированного вектора\nтемператур приближается к $v_2$, хотя его длина стремится к нулю.\nЕсли $c_2=0$, это направление не появится; при кратном собственном\nзначении нужно рассматривать всё соответствующее подпространство.\n\nВ конце §1.1 авторы связывают физическую модель с вычислением представления:\n\n> This is essentially how the Laplacian eigenmaps algorithm works, except that one does not really\n> use heat diffusion but finds the resulting heat distribution analytically in a more efficient and robust\n> way. It is also possible to map the points into a 2D or even higher-dimensional space by taking more than\n> one heat diffusion mode into account.\n\n*Wiskott и Schönfeld, §1.1, исходный английский текст, CC BY-SA 4.0.*\n\nДля расчёта возьмём рёбра этой цепочки с единичными весами и зададим\nтемпературу 7 в вершине $A$, ноль в остальных. Это отдельный численный\nпример: конкретные температуры цветных вершин исходного рисунка не заданы.\nСредняя температура равна 1 и сохраняется при передаче тепла.\nУ цепочки $\\lambda_2=2-2\\cos(\\pi/7)\\approx0{,}198062$.\n\n```python\nimport numpy as np\nfrom scipy.linalg import expm\n\nchain_order = [2, 4, 6, 1, 3, 5, 0]  # C, E, G, B, D, F, A; индексы A...G.\nW_chain = np.zeros((7, 7))\nfor left, right in zip(chain_order[:-1], chain_order[1:]):\n    W_chain[left, right] = W_chain[right, left] = 1\nL_chain = np.diag(W_chain.sum(axis=1)) - W_chain\nchain_values, chain_vectors = np.linalg.eigh(L_chain)\nh_chain = np.zeros(7)\nh_chain[0] = 7\n\nfor time in [0, 10, 50]:\n    h_time = expm(-time * L_chain) @ h_chain\n    print(time, np.round(h_time[chain_order], 6))\n\nlate_heat = expm(-10 * L_chain) @ h_chain\ncentered_heat = late_heat - late_heat.mean()\nalignment = abs(centered_heat @ chain_vectors[:, 1]) / np.linalg.norm(centered_heat)\nprint(\"alignment:\", round(alignment, 6))\nnp.testing.assert_allclose(late_heat.sum(), 7, atol=1e-12)\nnp.testing.assert_allclose(chain_values[1], 2 - 2 * np.cos(np.pi / 7))\n```\n\nПри $t=10$ температуры в порядке $C,E,G,B,D,F,A$ равны приблизительно\n$(0{,}738569;\\ 0{,}789865;\\ 0{,}882662;\\ 0{,}999033;\\\n1{,}116132;\\ 1{,}210565;\\ 1{,}263173)$. Косинус угла центрированного\nсостояния со вторым собственным вектором по модулю равен $0{,}999994$.\nПри $t=50$ крайние температуры уже около $0{,}999905$ и $1{,}000095$.\nПорядок ещё различим математически, но температурные различия почти исчезли.\nВычисление собственного вектора позволяет сразу получить направление,\nне выбирая время наблюдения и не вычитая почти равные числа.\n\n## Численный пример: слабый мост между двумя группами\n"
+        },
+        {
+          "old": "### Случайное блуждание и вероятность выхода из группы\n",
+          "new": "### Геометрия взвешенной нормы\n\n![[00 Учебник/Assets/Figures/curated/spectral-2026-10-31/wiskott-weighted-constraint.png|Пунктирные линии уровня энергии, штриховая окружность обычной нормы и сплошной эллипс взвешенной нормы]]\n\n*Laurenz Wiskott и Fabian Schönfeld,\n[Laplacian Matrix for Dimensionality Reduction and Clustering, §2.4](https://www.ini.rub.de/PEOPLE/wiskott/Teaching/UnsupervisedLearning/PublicWeb/LaplacianMatrix-L0-LectureNotes-PublicWeb.pdf#page=15),\nFigure 2.2, CC BY-SA 4.0. Полный рисунок с оригинальной подписью; номера\nформул в ней относятся к исходному конспекту.*\n\nНа рисунке показана смена ограничения при сохранении одной и той же\nквадратичной цели. Мелкий пунктир обозначает её линии уровня.\nШтриховая окружность соответствует обычной единичной норме, сплошной\nэллипс — взвешенной. Различить их можно и без цвета.\nСтрелки указывают точки, в которых соответствующая допустимая кривая\nкасается наименьшего достижимого уровня цели.\n\nВ обозначениях источника обычные векторы названы $u_\\alpha$,\nобобщённые — $w_\\alpha$. Авторы объясняют форму ограничения так:\n\n> For the term $w_iD_{ii}w_i$ to have the same effect size in the constraint, a\n> component $w_i$ with large $D_{ii}$ must be smaller than one with a small $D_{ii}$.\n> This is illustrated in Figure 2.2 by the green solid ellipse vs the blue dashed circle.\n> The latter is the set of points with $u_\\alpha^\\top u_\\alpha=1$, the former\n> the set with $w_\\alpha^\\top Dw_\\alpha=1$ with large $D_{ii}$ and small $D_{jj}$.\n\n*Wiskott и Schönfeld, §2.4, исходный английский текст с математической\nвёрсткой обозначений, CC BY-SA 4.0.*\n\nНапример, при $D=\\operatorname{diag}(4,1/4)$ условие взвешенной нормы\nзаписывается как $4f_1^2+f_2^2/4=1$. Допустимые точки на координатных осях\nравны $(\\pm1/2,0)$ и $(0,\\pm2)$; у обычной единичной окружности\nэто $(\\pm1,0)$ и $(0,\\pm1)$. Одна и та же величина $f_i$ расходует больше\nединичной нормы при большей степени $d_i$.\n\nЭто двумерная схема геометрии ограничения, а не изображение нашего\nчетырёхвершинного графа. В спектральной задаче дополнительно действует\nусловие ортогональности нулевому направлению. Положение минимума зависит\nи от энергии, и от ограничения; по одному значению степени нельзя заключить,\nчто соответствующая координата собственного вектора обязательно увеличится.\nИменно эту взвешенную задачу подстановка $u=D^{1/2}f$ выше переводит\nв обычную задачу для $L_{\\mathrm{sym}}$.\n\n### Случайное блуждание и вероятность выхода из группы\n"
+        },
+        {
+          "old": "### Зачем Ng–Jordan–Weiss нормирует строки\n",
+          "new": "### Сколько шагов занимает путь туда и обратно\n\nВероятность выхода за один шаг описывает границу группы. Можно поставить\nдругой вопрос: сколько шагов случайное блуждание в среднем делает,\nпрежде чем впервые достигнет вершины $j$ из $i$ и затем вернётся в $i$?\nСумма двух ожидаемых времён первого достижения называется *commute time*:\n$c_{ij}=H_{ij}+H_{ji}$. Считаются шаги дискретного блуждания с матрицей\n$P=D^{-1}W$, не физическое время теплопроводности.\n\nВ нашем четырёхвершинном графе из вершины 2 переход в 1 имеет вероятность\n$10/11$, а переход через мост в 3 — $1/11$. До первого достижения 3\nожидаемые времена удовлетворяют\n\n$$\n\\begin{aligned}\nH_{13}&=1+H_{23},\\\\\nH_{23}&=1+\\frac{10}{11}H_{13}+\\frac1{11}\\,0.\n\\end{aligned}\n$$\n\nЕдиница учитывает сделанный шаг. После перехода в целевую вершину\nдополнительных шагов нет, откуда $H_{23}=21$ и $H_{13}=22$.\nИз симметрии графа $H_{32}=21$, поэтому $c_{23}=42$:\nдаже соседние вершины по разные стороны слабого моста могут быть далеки\nпо времени блуждания.\n\nСвязь со спектром выводится через псевдообратную матрицу лапласиана.\nНа связном графе с $n>1$ первая собственная величина равна нулю,\nостальные положительны. Обычной обратной матрицы нет; в псевдообратной\nнулевое направление оставляют нулевым, а положительные значения обращают:\n\n$$\nL^\\dagger=\\sum_{r=2}^n\\frac1{\\lambda_r}v_rv_r^\\top.\n$$\n\nСогласно Proposition 6 в §6\n[von Luxburg](https://arxiv.org/abs/0711.0189v1),\n\n$$\nc_{ij}=\\operatorname{vol}(V)\n(e_i-e_j)^\\top L^\\dagger(e_i-e_j),\n$$\n\nгде $e_i$ — единичный вектор координаты $i$.\nКвадратичная форма без множителя $\\operatorname{vol}(V)$ равна\nэффективному электрическому сопротивлению между вершинами,\nесли вес ребра трактовать как проводимость. В нашем графе есть только\nодин путь между каждой парой. Сопротивления рёбер равны $1,10,1$\nи складываются вдоль пути. При $\\operatorname{vol}(V)=4{,}2$\nполучаем $c_{12}=4{,}2$, $c_{23}=42$, $c_{14}=50{,}4$.\n\n```python\npositive_values, positive_vectors = eigenvalues[1:], V[:, 1:]\nL_pinv = (positive_vectors / positive_values) @ positive_vectors.T\ncommute_embedding = positive_vectors / np.sqrt(positive_values)\ncommute_values = {}\nfor left, right in [(0, 1), (1, 2), (0, 3)]:\n    difference = np.eye(4)[left] - np.eye(4)[right]\n    commute = d.sum() * (difference @ L_pinv @ difference)\n    embedded_distance = np.sum(\n        (commute_embedding[left] - commute_embedding[right]) ** 2\n    )\n    np.testing.assert_allclose(commute, d.sum() * embedded_distance)\n    commute_values[left, right] = commute\n    print(left + 1, right + 1, round(commute, 6))\n```\n\nСтроки матрицы $Z=[v_2/\\sqrt{\\lambda_2},\\ldots,v_n/\\sqrt{\\lambda_n}]$\nзадают представления вершин, для которых\n$c_{ij}=\\operatorname{vol}(V)\\|z_i-z_j\\|^2$.\nСледовательно, обычным евклидовым расстоянием становится\n$\\sqrt{c_{ij}/\\operatorname{vol}(V)}$, а не само время $c_{ij}$.\n\nУ ненормированной спектральной кластеризации используются первые $K$\nсобственных векторов без такого масштабирования. Здесь же нужны все\nположительные направления с множителями $1/\\sqrt{\\lambda_r}$.\nДва представления связаны одним лапласианом, но не тождественны.\nФормула времени предполагает связный граф: между разными компонентами\nблуждание не проходит и ожидаемое время бесконечно, хотя формально\nвычисленная квадратичная форма псевдообратной может оказаться конечной.\n\n### Зачем Ng–Jordan–Weiss нормирует строки\n"
+        },
+        {
+          "old": "  §1.1 и §1.4 связывают рисунок выравнивания температур с собственными\n  векторами. Текст и авторские рисунки — CC BY-SA 4.0; для сторонних\n",
+          "new": "  §1.1 и §1.4 связывают рисунки выравнивания температур с собственными\n  векторами; §2.4–2.6 объясняют взвешенную норму и нормированные лапласианы.\n  Текст и авторские рисунки — CC BY-SA 4.0; для сторонних\n"
+        },
+        {
+          "old": "температур приближается к $v_2$, хотя его длина стремится к нулю.",
+          "new": "температур приближается к направлению второго собственного вектора,\nхотя его длина стремится к нулю."
+        },
+        {
+          "old": "При $t=10$ температуры в порядке $C,E,G,B,D,F,A$ равны приблизительно\n$(0{,}738569;\\ 0{,}789865;\\ 0{,}882662;\\ 0{,}999033;\\\n1{,}116132;\\ 1{,}210565;\\ 1{,}263173)$. Косинус угла центрированного",
+          "new": "При $t=10$ температуры в порядке $C,E,G,B,D,F,A$ равны приблизительно\n0,738569; 0,789865; 0,882662; 0,999033; 1,116132; 1,210565; 1,263173.\nКосинус угла центрированного"
+        },
+        {
+          "old": "это $(\\pm1,0)$ и $(0,\\pm1)$. Одна и та же величина $f_i$ расходует больше\nединичной нормы при большей степени $d_i$.",
+          "new": "это $(\\pm1,0)$ и $(0,\\pm1)$. Одна и та же величина $f_i$ вносит больший\nвклад во взвешенную норму при большей степени $d_i$."
+        },
+        {
+          "old": "На связном графе с $n>1$ первая собственная величина равна нулю,",
+          "new": "На связном графе с $n>1$ наименьшее собственное значение равно нулю,"
+        },
+        {
+          "old": "Нормы строк до деления — $(0{,}5;0{,}707107;0{,}5;0{,}707107;0{,}707107)$.",
+          "new": "Нормы пяти строк до деления равны 0,5; 0,707107; 0,5; 0,707107; 0,707107."
+        },
+        {
+          "old": "last_updated: 2026-11-03\nprimary_sources:",
+          "new": "last_updated: 2026-11-03\nreference_terms:\n  - label: Ncut — нормированный разрез\n    label_en: Normalized cut (Ncut)\n    anchor: normalized-cut\n  - label: Взвешенная норма и нормировка по степени\n    label_en: Degree-weighted unit-norm constraint\n    anchor: degree-weighted-constraint\n  - label: Commute time — время прохода туда и обратно\n    label_en: Commute time and the Laplacian pseudoinverse\n    anchor: commute-time\n  - label: Ng–Jordan–Weiss — нормировка строк\n    label_en: Ng–Jordan–Weiss row normalization\n    anchor: njw-row-normalization\nprimary_sources:"
+        },
+        {
+          "old": "### Объём группы и Normalized Cut",
+          "new": "<a id=\"normalized-cut\"></a>\n### Объём группы и Normalized Cut"
+        },
+        {
+          "old": "### Геометрия взвешенной нормы",
+          "new": "<a id=\"degree-weighted-constraint\"></a>\n### Геометрия взвешенной нормы"
+        },
+        {
+          "old": "### Сколько шагов занимает путь туда и обратно",
+          "new": "<a id=\"commute-time\"></a>\n### Сколько шагов занимает путь туда и обратно"
+        },
+        {
+          "old": "### Зачем Ng–Jordan–Weiss нормирует строки",
+          "new": "<a id=\"njw-row-normalization\"></a>\n### Зачем Ng–Jordan–Weiss нормирует строки"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "28506207ccfca05a7f27afa441c1c03f8a972f4f5776262a749b7690b0515dbf",
+      "after_sha256": "80bac96a84819c9f9fc50e197653b3f484b3069921db2e40bf0b483c485ec375",
+      "changes": [
+        {
+          "old": "assets:\n",
+          "new": "assets:\n  - {\"id\":\"curated-spectral-wiskott-a5060cb9bdda\",\"asset\":\"00 Учебник/Assets/Figures/curated/spectral-2026-10-31/wiskott-connected-heat.png\",\"author\":\"Laurenz Wiskott and Fabian Schönfeld\",\"title\":\"Heat diffusion on the connected chain and its one-dimensional ordering\",\"source_url\":\"https://www.ini.rub.de/PEOPLE/wiskott/Teaching/UnsupervisedLearning/PublicWeb/LaplacianMatrix-L0-LectureNotes-PublicWeb.pdf#page=5\",\"source_asset\":\"05 Источники/Originals/spectral-2026-10-25/wiskott-laplacian.pdf\",\"source_asset_sha256\":\"cb2ff89dff43e1bdcd9d3f77dea73b2b8a926a805665b28ef07fa6f6f84933fc\",\"source_page\":5,\"source_printed_page\":5,\"source_figure\":\"1.1\",\"render_dpi\":300,\"render_page_size_px\":[2550,3300],\"crop_box_px\":[280,980,2280,1860],\"sha256\":\"a5060cb9bddaaea7d3f45bfa43e25e52e9180aff0137ea2e59f75af611d2659e\",\"width\":2000,\"height\":880,\"dimensions_px\":[2000,880],\"bytes\":119615,\"license\":\"CC BY-SA 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by-sa/4.0/\",\"license_evidence\":\"05 Источники/Originals/spectral-2026-10-25/wiskott-laplacian.pdf\",\"license_evidence_sha256\":\"cb2ff89dff43e1bdcd9d3f77dea73b2b8a926a805665b28ef07fa6f6f84933fc\",\"modifications\":\"Complete original Figure 1.1 and its English caption cropped from a 300 dpi page render. Only surrounding page text removed; no redraw, relabeling, translation or resampling.\",\"derivation\":\"source-pdf-figure-crop\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian.md\"]}\n  - {\"id\":\"curated-spectral-wiskott-4615778b7c70\",\"asset\":\"00 Учебник/Assets/Figures/curated/spectral-2026-10-31/wiskott-weighted-constraint.png\",\"author\":\"Laurenz Wiskott and Fabian Schönfeld\",\"title\":\"Ordinary versus degree-weighted unit-norm constraint\",\"source_url\":\"https://www.ini.rub.de/PEOPLE/wiskott/Teaching/UnsupervisedLearning/PublicWeb/LaplacianMatrix-L0-LectureNotes-PublicWeb.pdf#page=15\",\"source_asset\":\"05 Источники/Originals/spectral-2026-10-25/wiskott-laplacian.pdf\",\"source_asset_sha256\":\"cb2ff89dff43e1bdcd9d3f77dea73b2b8a926a805665b28ef07fa6f6f84933fc\",\"source_page\":15,\"source_printed_page\":15,\"source_figure\":\"2.2\",\"render_dpi\":300,\"render_page_size_px\":[2550,3300],\"crop_box_px\":[280,300,2280,1390],\"sha256\":\"4615778b7c706d94775f2c2f0fc5c08ebf8e5fd12fc132879f1602500d6c3416\",\"width\":2000,\"height\":1090,\"dimensions_px\":[2000,1090],\"bytes\":161839,\"license\":\"CC BY-SA 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by-sa/4.0/\",\"license_evidence\":\"05 Источники/Originals/spectral-2026-10-25/wiskott-laplacian.pdf\",\"license_evidence_sha256\":\"cb2ff89dff43e1bdcd9d3f77dea73b2b8a926a805665b28ef07fa6f6f84933fc\",\"modifications\":\"Complete original Figure 2.2 and its English caption cropped from a 300 dpi page render. Only surrounding page text removed; no redraw, relabeling, translation or resampling.\",\"derivation\":\"source-pdf-figure-crop\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian.md\"]}\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "190c7d3b35daa28a8903567d597bc9d69712708f852d107b349d0a25ed6e1ef6",
+      "after_sha256": "ed1bf5c2582b1f4c821867d2aab5b2144ce039f8150c28cb5b25cf0c62538290",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian|Спектральная кластеризация и лапласиан графа]]\n",
+          "new": "- [[00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian|Спектральная кластеризация и лапласиан графа]]\n  - [[00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian#normalized-cut|Ncut — нормированный разрез]]\n  - [[00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian#degree-weighted-constraint|Взвешенная норма и нормировка по степени]]\n  - [[00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian#commute-time|Commute time — время прохода туда и обратно]]\n  - [[00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian#njw-row-normalization|Ng–Jordan–Weiss — нормировка строк]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "0c5222b2c8ef4f9e227e04013ac60a9ad74c0c25cd479ace082947949a9da384",
+      "after_sha256": "22bb43d462a8637ec68ea94a6c6387632edf30ce5edef5c8742a6cb503964c5e",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian|Spectral clustering and the graph Laplacian]]\n",
+          "new": "- [[00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian|Spectral clustering and the graph Laplacian]]\n  - [[00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian#normalized-cut|Normalized cut (Ncut)]]\n  - [[00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian#degree-weighted-constraint|Degree-weighted unit-norm constraint]]\n  - [[00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian#commute-time|Commute time and the Laplacian pseudoinverse]]\n  - [[00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian#njw-row-normalization|Ng–Jordan–Weiss row normalization]]\n"
+        }
+      ]
+    }
+  ],
+  "sourceComparison": {
+    "fullyRead": [
+      {
+        "source": "05 Источники/Courses/HSE ML course/ml2-2026-spring/seminars/sem03-graph-clustering.pdf",
+        "sections": "All four pages, printed Seminar 17. Laplacian identity, binary and K-way RatioCut relaxation. Existing chapter's consistent factor convention retained rather than importing the source's inconsistent 1/2."
+      },
+      {
+        "source": "05 Источники/Originals/spectral-2026-10-25/wiskott-laplacian.pdf",
+        "sha256": "cb2ff89dff43e1bdcd9d3f77dea73b2b8a926a805665b28ef07fa6f6f84933fc",
+        "sections": "Complete license/title page 1; PDF pages 5-9 (Sections 1.1-1.4); pages 14-17 (end of 2.3 and complete 2.4-2.6). Not a whole-book read."
+      },
+      {
+        "source": ".cache/spectral-route-2026-10-31/luxburg-0711.0189v1.pdf",
+        "sections": "Entire Section 6 including both propositions and the commute-embedding caveats. Prior source reads of Sections 2-5 are not counted as new reads here; no new reproduced figure or long quote from this source."
+      }
+    ],
+    "mechanisms": [
+      {
+        "topic": "Connected versus disconnected heat flow",
+        "source": "Wiskott Sections 1.1-1.4, Figures 1.1 and 1.2",
+        "example": "Unit-weight path C-E-G-B-D-F-A, initial A=7 and others zero. Full temperatures at 0,10,50; eigenmode projection; limit at t=500 checked.",
+        "limitations": "Connected equilibrium is constant, not an ordering. A nonzero coefficient and eigenvalue separation are needed for one slow direction."
+      },
+      {
+        "topic": "Degree-weighted constraint",
+        "source": "Wiskott Section 2.4, Figure 2.2; 2.5-2.6",
+        "example": "D=diag(4,1/4), unit ellipse intercepts checked independently; full existing four-node generalized eigenproblem retained.",
+        "limitations": "Figure is schematic constraint geometry, not the actual four-node graph. Orthogonality and the objective also affect the minimizing direction."
+      },
+      {
+        "topic": "Commute time and pseudoinverse",
+        "source": "von Luxburg Section 6, Proposition 6",
+        "example": "First-step equations H23=21, H13=22, H32=21; commute values 4.2,42,50.4 independently verified. Independent hitting-time systems for 35 connected weighted graphs.",
+        "limitations": "Discrete steps differ from heat-flow time. Euclidean distance is the square root of the scaled commute time. All positive modes weighted by inverse square roots differ from a truncated unscaled spectral embedding; disconnected pairs have infinite hitting times."
+      }
+    ],
+    "style": "No-ai-slop applied without compressing mechanisms, source excerpts, formulas or old examples. New English source passages attributed and retained in their language. Final whole-chapter reread clarified eigenvector direction/sign and terminology; reader check found two overlong inline numeric arrays, now ordinary wrapping numeric lists without changing values.",
+    "figures": "Two complete source-PDF figure crops with original captions. Fresh 300 dpi crop equality checked over all RGBA channels; source PDF hash and CC BY-SA 4.0 verified.",
+    "preservation": "All four earlier Python programs and all four earlier embeds retained verbatim; all prior explanatory sections retained.",
+    "navigation": "Four reference terms are owned by canonical chapter metadata and link to stable explicit anchors. Both RU/EN indexes contain the same owner links; no parallel reference explanation created."
+  },
+  "verification": {
+    "examples": {
+      "exit": 0,
+      "publishedBlocks": 6,
+      "partitions": 2964,
+      "independentCommuteGraphs": 35,
+      "nullspaceRotations": 100,
+      "chapterSha256": "b0b642640f4e87cfc2476d5a18a522642890f29fb2c4be69f2e9f3434bf48786"
+    },
+    "pixelCheck": {
+      "exit": 0,
+      "figures": 2,
+      "dpi": 300
+    },
+    "build": {
+      "exit": 0,
+      "routes": 2007,
+      "htmlFiles": 2011,
+      "brokenInternalLinks": 0,
+      "bytes": 849487515,
+      "files": 5569,
+      "headroom": 150512485
+    },
+    "reader": {
+      "evidence": "docs/audit/evidence/2026-11-03-spectral-reader",
+      "desktop": "1280x720: both new full originals inspected on the reader page and in fitted viewers; complete original source captions visible.",
+      "mobile": "360x800: both new originals inspected on-page, chain at 2x, weighted constraint at 3x with horizontal panning to both edges; attribution/caption scroll checked.",
+      "documentClientScroll": [
+        345,
+        345
+      ],
+      "tables": [
+        [
+          313,
+          314
+        ],
+        [
+          313,
+          313
+        ],
+        [
+          313,
+          313
+        ]
+      ],
+      "mathErrors": 0,
+      "displayOverflow": 0,
+      "inlineOverflow": 0,
+      "corrections": "Two overlong inline numeric arrays reflowed into plain numeric lists without altering the values; first table has a one-pixel rounding difference, no clipped cell text.",
+      "english": "Canonical-language fallback explicitly labeled. Six images and six programs retained; actual EN reference -> #commute-time transition stays in /en/. No translation claimed.",
+      "referenceNavigation": "Actual root reference -> #degree-weighted-constraint and EN reference -> #commute-time transitions verified.",
+      "priorFigureVisualScope": "Four earlier images are unchanged; their earlier complete visual review is historical. Six current images loaded with original nonzero dimensions."
+    },
+    "published": false,
+    "registryAndPreservation": {
+      "exit": 0,
+      "files": 3,
+      "tests": 171,
+      "note": "Before final prose/layout corrections; registry, images, source rights and code unchanged. Final preservation/HTML rerun follows."
+    },
+    "firstHtml": {
+      "exit": 0,
+      "files": 8,
+      "tests": 208,
+      "note": "Before final reader corrections; superseded by final HTML check."
+    },
+    "finalHtmlAndPreservation": {
+      "exit": 0,
+      "files": 9,
+      "tests": 213,
+      "htmlTests": 187,
+      "otherTests": 26
+    },
+    "topicIndex": {
+      "exit": 0,
+      "topics": 152,
+      "locales": 2
+    },
+    "finalWholeRead": {
+      "lines": 982,
+      "sha256": "b0b642640f4e87cfc2476d5a18a522642890f29fb2c4be69f2e9f3434bf48786",
+      "ranges": [
+        "1-360",
+        "361-700",
+        "701-982"
+      ],
+      "scope": "All final canonical text, code, formulas, figures, attribution, sources and reading neighbours; no chapter text changed after this read."
+    }
+  }
+}

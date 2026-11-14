@@ -1,0 +1,147 @@
+{
+  "date": "2026-11-10",
+  "scope": "Extend the Qwen architecture progression to the released Qwen3.8-Flash-Next checkpoint. Add a primary-source note and entry points from family atlas, timeline, architectural map and source library; do not publish.",
+  "review": {
+    "previousGoalTurn": "Progress: Qwen3 → Qwen3-Next cache and gating comparison completed with two original MIT attention maps and verified reader output.",
+    "sources": "Qwen3.8-Next report v1 sections 2.1.2, 2.2, 2.3, 3.1 and 4; figures 1, 3 and 6; tables 3, 4, 9 and 11. Qwen HF config at 812d96e10a0dd82b69d749e68693698cf6c36daa and SGLang Day-0 write-up sections QSA, MTP, HC and PLE. Engram v1 §2.5 and Figure 2.",
+    "explanation": "Three separate mechanisms worked on explicit examples. QSA block ranking with a masked incomplete tail, then token-level K/V and softmax. Gated residual elementwise read, 1/4 average and per-branch scalar write. Deterministic bigram and trigram addressing, followed by context-dependent injection and host prefetch. Mechanism, benchmark, checkpoint and API scope are distinct.",
+    "figure": "Engram original SVG copied byte-for-byte with paper CC BY 4.0 attribution. Only the offload dataflow is reused as a comparison, not as a Qwen block diagram. Qwen report v1 declares the arXiv nonexclusive license; the SGLang blog did not expose separate figure terms. Linked the architecture and QSA originals rather than mirroring them.",
+    "reader": "Followed the atlas link in Chrome. Read the worked QSA table, the three-line GR equation, and the original SVG at widths 375 and 1280; checked EN fallback in dark theme, 3× zoom and panning, and retained attribution. Built-link check and 265 rendered-output checks passed on the final revision; publication suite passed 742 checks with 11 configured skips before the final line wrap.",
+    "limits": "The Qwen source figures remain link-only; no E2E timing, full architecture claims about the closed API, new English translation, or push."
+  },
+  "checkpoint": {
+    "model": "Qwen/Qwen3.8-Flash-Next",
+    "commit": "812d96e10a0dd82b69d749e68693698cf6c36daa",
+    "configSha256": "889658f2508e8c61d409b02e70e0d78d8d4452ec65aaafbe129805d213d2e74b"
+  },
+  "workedChecks": {
+    "selected": [
+      0,
+      1,
+      2,
+      3,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "attn": 12,
+    "linear": 36,
+    "bytesKV": 805306368,
+    "index": 25165824,
+    "state": 113246208,
+    "x": [
+      0.25,
+      0.05
+    ],
+    "rows": 16,
+    "bytesPLE": 5120
+  },
+  "files": [
+    {
+      "source": "02 Атлас моделей/Семейства/Qwen.md",
+      "before_sha256": "0b778de9e3442d784ce39cc9caa4564ad5a1493806f134f2f8a28a04606ebb02",
+      "after_sha256": "b13acb8bb079408a83b7b2541db42280f37714e79a283b3e5cd0e84e29c18173",
+      "lines": 255,
+      "changes": [
+        {
+          "old": "organization: Alibaba Qwen Team\nfirst_release: 2023-08\nlatest_verified_release: Qwen3.6 (scope of this card)\nlast_verified: 2026-08-06\narchitecture_base: decoder-only Transformer; later sparse MoE and hybrid linear attention\nmodalities: [text, image, audio]\n",
+          "new": "organization: Alibaba Qwen Team\nfirst_release: 2023-08\nlatest_verified_release: Qwen3.8-Flash-Next (scope of this card)\nlast_verified: 2026-11-10\narchitecture_base: decoder-only Transformer; later sparse MoE and hybrid linear attention\nmodalities: [text, image, audio]\n"
+        },
+        {
+          "old": "программирования с инструментами.\n\nЗдесь рассмотрены поколения до Qwen3.6 и отдельные архитектурные ветви; это не исчерпывающий список всех последующих релизов.\n\n## Неизменное ядро\n",
+          "new": "программирования с инструментами.\n\nВ Qwen3.8-Flash-Next периодические слои внимания выбирают блоки\nистории перед чтением. Остаточный поток делится на четыре ветви,\nа отдельная таблица добавляет признаки коротких последовательностей\nтокенов. Карточка описывает эту модель, а не все варианты с именем Qwen3.8.\n\n## Неизменное ядро\n"
+        },
+        {
+          "old": "| Qwen3-Next / 3.5 (2025–26) | hybrid Gated DeltaNet + periodic GQA; MoE у Next, dense и MoE у 3.5; multimodal early fusion у 3.5 | long context; text+image/video variants | scaling и agentic/tool post-training | **B/A для опубликованного report/code** |\n| Qwen3.6 (2026) | продолжает hybrid sparse-MoE backbone | multimodal family | thinking preservation в agentic coding workflows | **B** |\n\n## Архитектура по слоям\n",
+          "new": "| Qwen3-Next / 3.5 (2025–26) | hybrid Gated DeltaNet + periodic GQA; MoE у Next, dense и MoE у 3.5; multimodal early fusion у 3.5 | long context; text+image/video variants | scaling и agentic/tool post-training | **B/A для опубликованного report/code** |\n| Qwen3.6 (2026) | продолжает hybrid sparse-MoE backbone | multimodal family | thinking preservation в agentic coding workflows | **B** |\n| Qwen3.8-Flash-Next (2026-08) | 36 Gated DeltaNet, 12 QSA; четыре ветви residual; таблицы n-грамм | 262 144 в конфигурации; до 1M с YaRN; текст, изображения и видео | QSA введено на продолжении предобучения; Muon на части матриц | **A/B** |\n\n## Архитектура по слоям\n"
+        },
+        {
+          "old": "тип FFN определяет, какие веса обрабатывают его после этого.\n\n## Tokenizer, context и modalities\n\n",
+          "new": "тип FFN определяет, какие веса обрабатывают его после этого.\n\n<a id=\"qwen38-flash-next\"></a>\n\n## Qwen3.8-Flash-Next: разреженное чтение истории\n\nУ Next‑80B и Flash‑Next одинаковый ритм 3:1 и по 48 слоёв. В первом\nкаждый четвёртый слой читает весь доступный контекст. Во втором\nиндексатор предварительно выбирает группы по четыре позиции, а\nвнимание получает исходные K/V только этих позиций и неполного хвоста.\nОбъём чтения за один шаг падает, но все записи могут понадобиться\nдругим запросам к этой истории. Поэтому кэш 12 слоёв остаётся\nпропорциональным длине последовательности.\n\nМежду слоями теперь передаются четыре остаточных вектора на токен,\nа во втором слое к ним добавляются признаки из таблиц биграмм и\nтриграмм. Веса таблиц (около 51 млрд) авторы считают отдельно от\n125 млрд параметров основной модели. Их можно держать в памяти\nхоста и заранее читать нужные строки по ID токенов.\n[[05 Источники/Papers/Qwen3.8-Flash-Next#qsa-block-selection|Расчёт QSA на одном запросе]] ·\n[[05 Источники/Papers/Qwen3.8-Flash-Next#qwen-gated-residual|Пример чтения и записи residual]] ·\n[[05 Источники/Papers/Qwen3.8-Flash-Next#qwen-ngram-lookup|N-gram embeddings и схема Engram]].\n\n## Tokenizer, context и modalities\n\n"
+        },
+        {
+          "old": "## Опубликовано и неизвестно\n\nОпубликованы отчёты Qwen/Qwen2/Qwen2.5, конфигурации и веса, официальные репозитории и описания Qwen3/Next/3.5/3.6. Полный состав корпусов, доли синтетических данных и данных дистилляции, все задачи RL и устройство закрытых вариантов Max/API неизвестны. Результат на бенчмарке сам по себе не позволяет установить, какие слои или стадии обучения изменились (**C**).\n\n## Источники\n",
+          "new": "## Опубликовано и неизвестно\n\nДля описанных поколений доступны отчёты, конфигурации или карточки весов.\nПолный состав корпусов, все задачи RL и устройство закрытых вариантов\nMax/API неизвестны. Результаты опубликованных весов Flash-Next не описывают\nконфигурацию или производительность облачного Qwen3.8-Flash.\n\n## Источники\n"
+        },
+        {
+          "old": "- [QwenLM GitHub organization](https://github.com/QwenLM) и [Hugging Face Qwen docs](https://huggingface.co/docs/transformers/model_doc/qwen3) — official code **A/B**, serving docs **C**.\n- [Qwen3.6 repository](https://github.com/QwenLM/Qwen3.6) — current official release evidence, **B**.\n\n← [[02 Areas/ML & DL/02 Атлас моделей/_index|К атласу]]\n",
+          "new": "- [QwenLM GitHub organization](https://github.com/QwenLM) и [Hugging Face Qwen docs](https://huggingface.co/docs/transformers/model_doc/qwen3) — official code **A/B**, serving docs **C**.\n- [Qwen3.6 repository](https://github.com/QwenLM/Qwen3.6) — current official release evidence, **B**.\n- [Qwen3.8-Flash-Next technical report](https://arxiv.org/html/2608.30320v1) — архитектура, оптимизация и абляции, **A**.\n\n← [[02 Areas/ML & DL/02 Атлас моделей/_index|К атласу]]\n"
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Timeline.md",
+      "before_sha256": "5a8daa46227b3599523b721bf4e17dd7e2f12ff052eb25bef3f1b2e71054fd15",
+      "after_sha256": "adc7f1a68dac43d147ec90aae261c5367a1647e2d16fa4174af8bdc9ef272fbe",
+      "lines": 169,
+      "changes": [
+        {
+          "old": "| 2025-04 (анонс/карточка) | Qwen3 | dense/MoE семейство и единый переключаемый режим thinking; режим относится прежде всего к постобучению | [Qwen3 release](https://qwenlm.github.io/blog/qwen3/) |\n| 2025-07 (линия репозитория) | Kimi K2 | 1T/32B-active MLA-MoE и MuonClip | [официальный Kimi K2 repository/report](https://github.com/MoonshotAI/Kimi-K2) |\n| 2025 (линия репозитория) | GLM-4.5 | MoE и совмещённые thinking/non-thinking режимы | [официальный GLM-4.5 repository](https://github.com/zai-org/GLM-4.5) |\n| 2025 (статья) | Kimi Linear | гибрид Kimi Delta Attention и полного attention как отдельная исследовательская линия | [Kimi Linear](https://arxiv.org/abs/2510.26692) |\n",
+          "new": "| 2025-04 (анонс/карточка) | Qwen3 | dense/MoE семейство и единый переключаемый режим thinking; режим относится прежде всего к постобучению | [Qwen3 release](https://qwenlm.github.io/blog/qwen3/) |\n| 2025-07 (линия репозитория) | Kimi K2 | 1T/32B-active MLA-MoE и MuonClip | [официальный Kimi K2 repository/report](https://github.com/MoonshotAI/Kimi-K2) |\n| 2025-09 (карточка) | Qwen3-Next | три слоя Gated DeltaNet на один слой полного внимания с выходным затвором | [карточка 80B-A3B](https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct), [[02 Атлас моделей/Семейства/Qwen#qwen3-next-comparison|сравнение с Qwen3]] |\n| 2025 (линия репозитория) | GLM-4.5 | MoE и совмещённые thinking/non-thinking режимы | [официальный GLM-4.5 repository](https://github.com/zai-org/GLM-4.5) |\n| 2025 (статья) | Kimi Linear | гибрид Kimi Delta Attention и полного attention как отдельная исследовательская линия | [Kimi Linear](https://arxiv.org/abs/2510.26692) |\n"
+        },
+        {
+          "old": "| 2026-04 (анонс/карточка) | Mistral Medium 3.5 | мультимодальная модель с опубликованными весами под Modified MIT; доступность весов отделяется от полного рецепта обучения | [официальная карточка v26.04](https://docs.mistral.ai/models/mistral-medium-3-5-26-04) |\n| 2026 (статья) | Baichuan-M3 | медицинская ветка; специализированный домен не означает новую универсальную архитектуру | [Baichuan-M3 report](https://arxiv.org/abs/2602.06570) |\n\n## Агенты, рассуждение и проверяемые траектории\n",
+          "new": "| 2026-04 (анонс/карточка) | Mistral Medium 3.5 | мультимодальная модель с опубликованными весами под Modified MIT; доступность весов отделяется от полного рецепта обучения | [официальная карточка v26.04](https://docs.mistral.ai/models/mistral-medium-3-5-26-04) |\n| 2026 (статья) | Baichuan-M3 | медицинская ветка; специализированный домен не означает новую универсальную архитектуру | [Baichuan-M3 report](https://arxiv.org/abs/2602.06570) |\n| 2026-08 (релиз и отчёт) | Qwen3.8-Flash-Next | сочетание Gated DeltaNet и блочного отбора позиций QSA; четыре ветви residual и отдельная таблица n-грамм | [[05 Источники/Papers/Qwen3.8-Flash-Next|разбор отчёта]], [Qwen Team, 31 августа](https://arxiv.org/html/2608.30320v1) |\n\n## Агенты, рассуждение и проверяемые траектории\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/_index.md",
+      "before_sha256": "64629bc505888849050ade444554fa3ca83bdac819edc21db621a445eb49058e",
+      "after_sha256": "db4f006d6d32518a3734e4a41bd9705830a8bec7aa82fed549103fe8795e4a3a",
+      "lines": 59,
+      "changes": [
+        {
+          "old": "- [[02 Areas/ML & DL/05 Источники/Papers/End-to-End Test-Time Training|End-to-End TTT]]\n- [[02 Areas/ML & DL/05 Источники/Papers/Gated Delta Networks|Gated Delta Networks]]\n- [[02 Areas/ML & DL/05 Источники/Papers/Recall in efficient sequence models|Recall в эффективных sequence models]]\n- [[05 Источники/Papers/Mathlib Euler products|Mathlib: Euler products — исходный модуль и условия теоремы]]\n",
+          "new": "- [[02 Areas/ML & DL/05 Источники/Papers/End-to-End Test-Time Training|End-to-End TTT]]\n- [[02 Areas/ML & DL/05 Источники/Papers/Gated Delta Networks|Gated Delta Networks]]\n- [[05 Источники/Papers/Qwen3.8-Flash-Next|Qwen3.8-Flash-Next — QSA, Gated Residual и таблицы n-грамм]]\n- [[02 Areas/ML & DL/05 Источники/Papers/Recall in efficient sequence models|Recall в эффективных sequence models]]\n- [[05 Источники/Papers/Mathlib Euler products|Mathlib: Euler products — исходный модуль и условия теоремы]]\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "779372eeb0b2c3d8a63b4cf93e3e160d9dc67bf1c8174c5795b80844f722a5fd",
+      "after_sha256": "7843f84de0bd58bb37804c16bc2573920cdf1a28a94ab83cc7af3167f76a15a0",
+      "lines": 24654,
+      "changes": [
+        {
+          "old": "    derivation: source-image-copy\n\n  - id: curated-stanford-cs336-architectures-recurrent-update-rule-comparison-08593308f807\n    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/recurrent-update-rule-comparison.png\n",
+          "new": "    derivation: source-image-copy\n\n  - id: curated-engram-system-055e55679d06\n    asset: 00 Учебник/Assets/Figures/curated/engram/engram-system.svg\n    author: Cheng et al.\n    source_url: https://arxiv.org/html/2601.07372v1#S2.F2\n    source_image_url: https://arxiv.org/html/2601.07372v1/Engram_system.svg\n    revision: arXiv:2601.07372v1\n    sha256: 055e55679d06de5b5841535daf793b145f9717788fe3d6ad506b53d0604c4e78\n    viewBox: [0, 0, 476.87998, 291.12]\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    modifications: Exact original SVG from the arXiv HTML version; no redraw, crop or re-encoding\n    used_in:\n      - 05 Источники/Papers/Qwen3.8-Flash-Next.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    derivation: source-svg-copy\n\n  - id: curated-stanford-cs336-architectures-recurrent-update-rule-comparison-08593308f807\n    asset: 00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/recurrent-update-rule-comparison.png\n"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "58bf9175a59b410ec8dca66d62dca562078dd6d9e544ff12930103fbf06f72e0",
+      "after_sha256": "5c58c819c3a37aec8dedfa773c8286c806511c4b12d6b1e8f53a51999e9fcd24",
+      "lines": 2591,
+      "changes": [
+        {
+          "old": "      - source: Papers/Qwen3.md\n        route: sources/papers/qwen3\n      - source: Papers/Adversarial Training Methods for Semi-Supervised Text Classification.md\n        route: sources/papers/adversarial-training-methods-for-semi-supervised-text-classification\n",
+          "new": "      - source: Papers/Qwen3.md\n        route: sources/papers/qwen3\n      - source: 05 Источники/Papers/Qwen3.8-Flash-Next.md\n        route: sources/papers/qwen3-8-flash-next\n      - source: Papers/Adversarial Training Methods for Semi-Supervised Text Classification.md\n        route: sources/papers/adversarial-training-methods-for-semi-supervised-text-classification\n"
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Сравнения/Карта архитектурных линий.md",
+      "before_sha256": "813446439e642dcab5ea332a99c8b42ede90999894c08af9d9494b51ae13f6df",
+      "after_sha256": "e437b95407f86959430a6f987b576cab54e67ab6bc2cc3c6cc32a3e3db28d854",
+      "lines": 75,
+      "changes": [
+        {
+          "old": "[Jamba v2, Figure 6 и §2](https://arxiv.org/html/2403.19887v2#S6.F6).*\n\n## Три независимые оси\n\n",
+          "new": "[Jamba v2, Figure 6 и §2](https://arxiv.org/html/2403.19887v2#S6.F6).*\n\nВ [[02 Атлас моделей/Семейства/Qwen#qwen38-flash-next|Qwen3.8-Flash-Next]]\nтри рекуррентных слоя по-прежнему чередуются с одним слоем внимания,\nно последний больше не читает все позиции. В\n[[05 Источники/Papers/Qwen3.8-Flash-Next#qsa-block-selection|примере QSA]]\nвидно, что блочный отбор меняет объём чтения K/V, а рекуррентные слои —\nчисло слоёв, которым вообще нужен растущий кэш.\n\n## Три независимые оси\n\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/Qwen3.8-Flash-Next.md",
+      "created": true,
+      "after_sha256": "eb618f872466a2e215884bc3a7d14e5d313851567cebf72ca29841f813aaeee5",
+      "lines": 225
+    }
+  ]
+}

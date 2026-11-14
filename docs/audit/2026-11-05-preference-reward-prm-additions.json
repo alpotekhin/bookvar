@@ -1,0 +1,383 @@
+{
+  "schema_version": 1,
+  "kind": "preference-reward-prm-additions",
+  "review_date": "2026-11-05",
+  "files": [
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/02 Preference data.md",
+      "before_sha256": "e24409a09129f2b7ba6f01d6a85f45879f1cbab2dec4c099267c5e11d934dffa",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-23\nlast_verified: 2026-10-23\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\nreference_terms:\n  - anchor: pref-comparison-record\n    label: \"Что хранить вместе с chosen/rejected\"\n    label_en: \"What to store with chosen/rejected\"\n  - anchor: pref-sampling-distribution\n    label: \"Генератор ответов и on-policy/offline данные\"\n    label_en: \"Response generators and on-policy/offline data\"\n  - anchor: pref-dialogue-history\n    label: \"Общая история многоходового диалога\"\n    label_en: \"Shared history in multi-turn comparisons\"\n  - anchor: pref-rating-scales\n    label: \"Абсолютная оценка и сила предпочтения\"\n    label_en: \"Ratings and preference strength\"\n  - anchor: pref-rankings\n    label: \"Полные ранжирования и группы ничьих\"\n    label_en: \"Full rankings and tied groups\"\n  - anchor: pref-ranking-weights\n    label: \"Вес запроса после разворачивания в пары\"\n    label_en: \"Prompt weights after pair expansion\"\n  - anchor: pref-bt-observation\n    label: \"Брэдли—Терри, голоса и циклы большинства\"\n    label_en: \"Bradley–Terry observations and majority cycles\"\n  - anchor: pref-rubrics-and-ties\n    label: \"Критерии, ничья и отказ от оценки\"\n    label_en: \"Rubrics, ties and abstentions\"\n  - anchor: pref-verifier-pairs\n    label: \"Пары из программно проверяемых ограничений\"\n    label_en: \"Pairs from verifiable constraints\"\n  - anchor: pref-position-swap\n    label: \"Перестановка ответов и восстановление ID\"\n    label_en: \"Candidate swaps and verdict normalization\"\n  - anchor: pref-verbosity-style\n    label: \"Смещения длины, оформления и согласия\"\n    label_en: \"Length, presentation and sycophancy biases\"\n  - anchor: pref-judge-provenance\n    label: \"Версия судьи, шаблон и ошибки разбора\"\n    label_en: \"Judge provenance, templates and parsing failures\"\n  - anchor: pref-cohen-kappa\n    label: \"Согласие разметчиков и κ Коэна\"\n    label_en: \"Annotator agreement and Cohen's kappa\"\n  - anchor: pref-group-splits\n    label: \"Разбиение по группам до построения пар\"\n    label_en: \"Group splits before pair construction\"\n  - anchor: pref-published-hh-row\n    label: \"Исходная строка HH-RLHF и смысл выбранного ответа\"\n    label_en: \"An original HH-RLHF row and the meaning of chosen\"\n"
+        },
+        {
+          "old": "## Сквозной пример сравнения\n",
+          "new": "<a id=\"pref-comparison-record\"></a>\n\n## Сквозной пример сравнения\n"
+        },
+        {
+          "old": "## 1. Откуда берутся ответы для сравнения\n",
+          "new": "<a id=\"pref-sampling-distribution\"></a>\n\n## 1. Откуда берутся ответы для сравнения\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/preference-2026-10-23/hh-workflow.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/preference-2026-10-23/hh-workflow.png|Сбор сравнений и обновление генератора в HH-RLHF]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/preference-2026-10-23/hh-data-distributions.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/preference-2026-10-23/hh-data-distributions.png|Распределения оценок и расхождение с человеческими сравнениями]]"
+        },
+        {
+          "old": "### Общая история многоходового диалога\n",
+          "new": "<a id=\"pref-dialogue-history\"></a>\n\n### Общая история многоходового диалога\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/preference-2026-10-23/hh-feedback-interface.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/preference-2026-10-23/hh-feedback-interface.png|Интерфейс HH-RLHF с восемью кнопками предпочтения]]"
+        },
+        {
+          "old": "### Абсолютная оценка\n",
+          "new": "<a id=\"pref-rating-scales\"></a>\n\n### Абсолютная оценка\n"
+        },
+        {
+          "old": "<a id=\"ранжирование-kkk-ответов\"></a>\n",
+          "new": "<a id=\"pref-rankings\"></a>\n\n<a id=\"ранжирование-kkk-ответов\"></a>\n"
+        },
+        {
+          "old": "### Почему число пар меняет вес запроса\n",
+          "new": "<a id=\"pref-ranking-weights\"></a>\n\n### Почему число пар меняет вес запроса\n"
+        },
+        {
+          "old": "## 3. Как предпочтение превращается в вероятность\n",
+          "new": "<a id=\"pref-bt-observation\"></a>\n\n## 3. Как предпочтение превращается в вероятность\n"
+        },
+        {
+          "old": "## 4. Критерии: что именно означает «лучше»\n",
+          "new": "<a id=\"pref-rubrics-and-ties\"></a>\n\n## 4. Критерии: что именно означает «лучше»\n"
+        },
+        {
+          "old": "### Пары из программной проверки\n",
+          "new": "<a id=\"pref-verifier-pairs\"></a>\n\n### Пары из программной проверки\n"
+        },
+        {
+          "old": "### Влияние позиции\n",
+          "new": "<a id=\"pref-position-swap\"></a>\n\n### Влияние позиции\n"
+        },
+        {
+          "old": "### Предпочтение многословия\n",
+          "new": "<a id=\"pref-verbosity-style\"></a>\n\n### Предпочтение многословия\n"
+        },
+        {
+          "old": "### Смещения модели-судьи\n",
+          "new": "<a id=\"pref-judge-provenance\"></a>\n\n### Смещения модели-судьи\n"
+        },
+        {
+          "old": "## 6. Измерение согласия\n",
+          "new": "<a id=\"pref-cohen-kappa\"></a>\n\n## 6. Измерение согласия\n"
+        },
+        {
+          "old": "## 7. Преобразование ранжирования в пары без утечки\n",
+          "new": "<a id=\"pref-group-splits\"></a>\n\n## 7. Преобразование ранжирования в пары без утечки\n"
+        },
+        {
+          "old": "### Строка из опубликованного HH-RLHF\n",
+          "new": "<a id=\"pref-published-hh-row\"></a>\n\n### Строка из опубликованного HH-RLHF\n"
+        }
+      ],
+      "after_sha256": "3c5c27789d5a9e879dfae24498827329613d01db5437bac5a780bf0fae9f25bb"
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+      "before_sha256": "ae8ad7536eb7463667bbe8a5983fc54008e92079e775ea49ca481a12d3bb570e",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-23\nlast_verified: 2026-10-23\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\nreference_terms:\n  - anchor: preference-to-reward\n    label: \"От сравнений к оценке новых ответов\"\n    label_en: \"Generalizing comparisons to new responses\"\n  - anchor: rm-scalar-eos\n    label: \"Скалярная голова и выбор EOS\"\n    label_en: \"Scalar heads and EOS pooling\"\n  - anchor: bradley-terry\n    label: \"Парная потеря, градиенты, сдвиг и масштаб\"\n    label_en: \"Pairwise loss, gradients, shifts and scaling\"\n  - anchor: rm-soft-labels\n    label: \"Мягкие метки и моделирование ничьей\"\n    label_en: \"Soft labels and tie modeling\"\n  - anchor: rm-eos-padding\n    label: \"Исполняемый Llama-оценщик, PAD/EOS и позиции\"\n    label_en: \"Executable Llama scorer, PAD/EOS and positions\"\n  - anchor: rm-listwise-pl\n    label: \"Групповое усреднение и Плакетт—Льюс\"\n    label_en: \"Group averaging and Plackett–Luce rankings\"\n  - anchor: rm-orm\n    label: \"ORM: надзор по итоговому результату\"\n    label_en: \"ORM: outcome supervision\"\n  - anchor: rm-prm\n    label: \"PRM: метки шагов и агрегация оценок\"\n    label_en: \"PRM: step labels and score aggregation\"\n  - anchor: prm-boundary-loss\n    label: \"PRM: границы шагов, маска меток и градиенты\"\n    label_en: \"PRM boundaries, label masks and gradients\"\n  - anchor: rm-verifiable\n    label: \"Программная награда и её отличие от RL\"\n    label_en: \"Verifiable rewards versus RL training\"\n  - anchor: rm-generative-judge\n    label: \"Генеративный судья и извлечение вердикта\"\n    label_en: \"Generative judges and verdict extraction\"\n  - anchor: rm-value-vs-reward\n    label: \"Модель награды и критик PPO\"\n    label_en: \"Reward models versus PPO critics\"\n  - anchor: rm-self-rewarding\n    label: \"Self-Rewarding: общие веса генератора и судьи\"\n    label_en: \"Self-Rewarding with shared generator/judge weights\"\n  - anchor: rm-selfreward-results\n    label: \"Self-Rewarding: метрики и насыщение итераций\"\n    label_en: \"Self-Rewarding evaluation and saturation\"\n  - anchor: rm-tpo\n    label: \"TPO: сравнение ответов обучает рассуждение\"\n    label_en: \"TPO: answer preferences train preceding thoughts\"\n  - anchor: rm-meta-rewarding\n    label: \"Meta-Rewarding: пары оценочных суждений\"\n    label_en: \"Meta-Rewarding pairs of judgments\"\n  - anchor: rm-evalplanner\n    label: \"EvalPlanner: обучение плану и выполнению проверки\"\n    label_en: \"EvalPlanner training of plans and executions\"\n  - anchor: rm-validation\n    label: \"Проверка оценщика до PPO\"\n    label_en: \"Evaluating a reward model before PPO\"\n  - anchor: rm-calibration\n    label: \"Точность порядка и калибровка вероятностей\"\n    label_en: \"Ranking accuracy versus probability calibration\"\n  - anchor: annotator-effects\n    label: \"Протокол разметки и зависимость ошибок\"\n    label_en: \"Annotation protocols and correlated errors\"\n  - anchor: reward-overoptimization\n    label: \"Best-of-N и эксплуатация награды\"\n    label_en: \"Best-of-N and reward overoptimization\"\n"
+        },
+        {
+          "old": "## 1. Архитектура модели награды для целого ответа\n",
+          "new": "<a id=\"rm-scalar-eos\"></a>\n\n## 1. Архитектура модели награды для целого ответа\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/reward-model-hf.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/reward-model-hf.png|От ранжирования ответов к обучению модели награды]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/preference-rm-training.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/preference-rm-training.png|Скалярные оценки выбранного и отклонённого ответов в EOS]]"
+        },
+        {
+          "old": "### Ничьи и мягкие метки\n",
+          "new": "<a id=\"rm-soft-labels\"></a>\n\n### Ничьи и мягкие метки\n"
+        },
+        {
+          "old": "## 3. Один пакет в коде\n",
+          "new": "<a id=\"rm-eos-padding\"></a>\n\n## 3. Один пакет в коде\n"
+        },
+        {
+          "old": "## 4. От ранжирования к функции потерь\n",
+          "new": "<a id=\"rm-listwise-pl\"></a>\n\n## 4. От ранжирования к функции потерь\n"
+        },
+        {
+          "old": "### Оценка полного ответа (ORM)\n",
+          "new": "<a id=\"rm-orm\"></a>\n\n### Оценка полного ответа (ORM)\n"
+        },
+        {
+          "old": "### Оценка шагов решения (PRM)\n",
+          "new": "<a id=\"rm-prm\"></a>\n\n### Оценка шагов решения (PRM)\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/prm-step-supervision.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/prm-step-supervision.png|Пошаговые метки при обучении PRM и оценки нового решения]]"
+        },
+        {
+          "old": "### Проверяемая награда\n",
+          "new": "<a id=\"prm-boundary-loss\"></a>\n#### Как метка шага входит в функцию потерь\n\nУ PRM метка относится к префиксу, заканчивающемуся конкретным шагом.\nВ [Lightman et al., §2.6 и Appendix F.1](https://arxiv.org/html/2305.20050v1#S2.SS6)\nмодель предсказывает токен метки после последнего токена шага.\nАвторы размечают решение только до первой ошибки включительно.\nНеоценённое продолжение после неё не получает автоматически отрицательные\nметки. При обучении позиции без метки исключают из функции потерь.\n\nВозьмём два условных решения с четырьмя местами для шагов. Первое имеет\nметки «положительный, нейтральный, отрицательный, не размечен», второе —\n«положительный, отрицательный» и два пустых места. Для проверки расчёта\nзададим по три логита на границе шага: классы 0, 1 и 2 соответствуют\nположительной, нейтральной и отрицательной меткам. Это отдельная\nтрёхклассовая голова, а не воспроизведение языковой головы из статьи.\n\nПри нулевых логитах каждый класс имеет вероятность $1/3$. Сумма пяти\nразмеченных потерь равна $5\\log3$, средняя — $\\log3\\approx1.0986$.\nНа каждом размеченном шаге производная по логиту целевого класса равна\n$(1/3-1)/5=-2/15$, по двум остальным — $1/15$.\nУ трёх исключённых позиций производная равна нулю.\n\n```python\nprm_step_logits = torch.nn.Parameter(torch.zeros(2, 4, 3, dtype=torch.float64))\nprm_step_targets = torch.tensor([[0, 1, 2, -100], [0, 2, -100, -100]])\nprm_label_mask = prm_step_targets != -100\nprm_step_optimizer = torch.optim.SGD([prm_step_logits], lr=.1)\n\ndef labeled_step_loss(logits, targets):\n    count = (targets != -100).sum()\n    if count.item() == 0:\n        raise ValueError(\"No labeled steps\")\n    return F.cross_entropy(\n        logits.reshape(-1, 3), targets.reshape(-1),\n        ignore_index=-100, reduction=\"sum\",\n    ) / count\n\nprm_step_loss = labeled_step_loss(prm_step_logits, prm_step_targets)\ntorch.testing.assert_close(\n    prm_step_loss, torch.tensor(3., dtype=torch.float64).log()\n)\nprm_step_loss.backward()\nassert prm_label_mask.sum().item() == 5\ntorch.testing.assert_close(\n    prm_step_logits.grad[~prm_label_mask],\n    torch.zeros(3, 3, dtype=torch.float64),\n)\nfor grad, target_class in zip(\n    prm_step_logits.grad[prm_label_mask], prm_step_targets[prm_label_mask]\n):\n    expected_grad = torch.full((3,), 1 / 15, dtype=torch.float64)\n    expected_grad[target_class] = -2 / 15\n    torch.testing.assert_close(grad, expected_grad)\n\nprm_step_optimizer.step()\nprm_step_loss_after = labeled_step_loss(prm_step_logits, prm_step_targets)\nassert prm_step_loss_after < prm_step_loss\n```\n\nУсреднение по всем восьми местам вместо пяти размеченных уменьшило бы\nградиенты в $5/8$ раза. Среднее по шагам и среднее сначала внутри каждого\nрешения также задают разные веса: здесь решения вносят три и два слагаемых.\n\nМаска обучающих меток не заменяет маску шагов при оценивании нового решения:\nу нового решения человеческих меток вообще нет. Для него PRM предсказывает\nраспределение на каждой настоящей границе шага. Правило «нейтральный считать\nположительным» в Appendix F.2 складывает вероятности положительного и\nнейтрального классов при оценивании; при обучении они остаются разными\nметками. Следующий отбор по произведению или минимуму использует уже эти\nпошаговые оценки.\n\n<a id=\"rm-verifiable\"></a>\n\n### Проверяемая награда\n"
+        },
+        {
+          "old": "### Генеративный оценщик, или LLM-судья\n",
+          "new": "<a id=\"rm-generative-judge\"></a>\n\n### Генеративный оценщик, или LLM-судья\n"
+        },
+        {
+          "old": "### Модель награды и функция ценности — не одно и то же\n",
+          "new": "<a id=\"rm-value-vs-reward\"></a>\n\n### Модель награды и функция ценности — не одно и то же\n"
+        },
+        {
+          "old": "> При первом чтении можно перейти к разделу 7: для проверки модели награды\n",
+          "new": "> При первом чтении можно перейти к [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-validation|разделу 7]]: для проверки модели награды\n"
+        },
+        {
+          "old": "<span id=\"одна-модель-как-actor-и-judge\"></span>\n",
+          "new": "<a id=\"rm-self-rewarding\"></a>\n\n<span id=\"одна-модель-как-actor-и-judge\"></span>\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/self-rewarding-loop.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/self-rewarding-loop.png|Self-Rewarding: генерация ответов, оценивание и DPO]]"
+        },
+        {
+          "old": "### Что показали итерации и где наступило насыщение\n",
+          "new": "<a id=\"rm-selfreward-results\"></a>\n\n### Что показали итерации и где наступило насыщение\n"
+        },
+        {
+          "old": "<span id=\"обучение-рассуждать-над-общей-задачей-оценки\"></span>\n",
+          "new": "<a id=\"rm-tpo\"></a>\n\n<span id=\"обучение-рассуждать-над-общей-задачей-оценки\"></span>\n"
+        },
+        {
+          "old": "### Meta-judge: кто оценивает оценщика\n",
+          "new": "<a id=\"rm-meta-rewarding\"></a>\n\n### Meta-judge: кто оценивает оценщика\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p89-meta-rewarding-loop.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p89-meta-rewarding-loop.png|Meta-Rewarding: пары ответов и оценочных суждений]]"
+        },
+        {
+          "old": "### Планирование проверки перед вердиктом\n",
+          "new": "<a id=\"rm-evalplanner\"></a>\n\n### Планирование проверки перед вердиктом\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/evalplanner-plan-execution-loop.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/evalplanner-plan-execution-loop.png|EvalPlanner: план проверки, выполнение и вердикт]]"
+        },
+        {
+          "old": "### Калибровка: что означает разрыв оценок\n",
+          "new": "<a id=\"rm-calibration\"></a>\n\n### Калибровка: что означает разрыв оценок\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/reward-modeling-2026-10-23/hh-calibration.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/reward-modeling-2026-10-23/hh-calibration.png|Калибровка HH-RLHF на смеси и на helpfulness-данных]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/reward-overoptimization-best-of-n.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/reward-overoptimization-best-of-n.png|Рост proxy-награды и ухудшение gold-награды при best-of-N]]"
+        }
+      ],
+      "after_sha256": "ae67b9f3c4cfc3e8ac1ba877b93275f8afec30cc03aaad8a016d444d2f055e75"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "d7519a84850d7e69e8221a059415a902573c609d007de5d2490953f144078180",
+      "after_sha256": "9b6eb55f2c457ed84ac5b044822df48d6a497d9606e877f139464c291a00a027",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/12 Post-training и Alignment/02 Preference data|Данные предпочтений]]\n",
+          "new": "- [[00 Учебник/12 Post-training и Alignment/02 Preference data|Данные предпочтений]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-comparison-record|Что хранить вместе с chosen/rejected]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-sampling-distribution|Генератор ответов и on-policy/offline данные]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-dialogue-history|Общая история многоходового диалога]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-rating-scales|Абсолютная оценка и сила предпочтения]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-rankings|Полные ранжирования и группы ничьих]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-ranking-weights|Вес запроса после разворачивания в пары]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-bt-observation|Брэдли—Терри, голоса и циклы большинства]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-rubrics-and-ties|Критерии, ничья и отказ от оценки]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-verifier-pairs|Пары из программно проверяемых ограничений]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-position-swap|Перестановка ответов и восстановление ID]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-verbosity-style|Смещения длины, оформления и согласия]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-judge-provenance|Версия судьи, шаблон и ошибки разбора]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-cohen-kappa|Согласие разметчиков и κ Коэна]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-group-splits|Разбиение по группам до построения пар]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-published-hh-row|Исходная строка HH-RLHF и смысл выбранного ответа]]\n"
+        },
+        {
+          "old": "- [[00 Учебник/12 Post-training и Alignment/03 Reward modeling|Модель награды]]\n",
+          "new": "- [[00 Учебник/12 Post-training и Alignment/03 Reward modeling|Модель награды]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#preference-to-reward|От сравнений к оценке новых ответов]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-scalar-eos|Скалярная голова и выбор EOS]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#bradley-terry|Парная потеря, градиенты, сдвиг и масштаб]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-soft-labels|Мягкие метки и моделирование ничьей]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-eos-padding|Исполняемый Llama-оценщик, PAD/EOS и позиции]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-listwise-pl|Групповое усреднение и Плакетт—Льюс]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-orm|ORM: надзор по итоговому результату]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-prm|PRM: метки шагов и агрегация оценок]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#prm-boundary-loss|PRM: границы шагов, маска меток и градиенты]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-verifiable|Программная награда и её отличие от RL]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-generative-judge|Генеративный судья и извлечение вердикта]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-value-vs-reward|Модель награды и критик PPO]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-self-rewarding|Self-Rewarding: общие веса генератора и судьи]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-selfreward-results|Self-Rewarding: метрики и насыщение итераций]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-tpo|TPO: сравнение ответов обучает рассуждение]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-meta-rewarding|Meta-Rewarding: пары оценочных суждений]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-evalplanner|EvalPlanner: обучение плану и выполнению проверки]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-validation|Проверка оценщика до PPO]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-calibration|Точность порядка и калибровка вероятностей]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#annotator-effects|Протокол разметки и зависимость ошибок]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#reward-overoptimization|Best-of-N и эксплуатация награды]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "f5b4e6af637cf6c79e4623b5ab7d4e945589c1c56dd655a2aab5cd3edc629b4c",
+      "after_sha256": "40861d543ac9a6c5f11df5c64f725f3ccce476ae7087b987477ee1ab79b28ec3",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/12 Post-training и Alignment/02 Preference data|Preference data]]\n",
+          "new": "- [[00 Учебник/12 Post-training и Alignment/02 Preference data|Preference data]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-comparison-record|What to store with chosen/rejected]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-sampling-distribution|Response generators and on-policy/offline data]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-dialogue-history|Shared history in multi-turn comparisons]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-rating-scales|Ratings and preference strength]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-rankings|Full rankings and tied groups]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-ranking-weights|Prompt weights after pair expansion]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-bt-observation|Bradley–Terry observations and majority cycles]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-rubrics-and-ties|Rubrics, ties and abstentions]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-verifier-pairs|Pairs from verifiable constraints]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-position-swap|Candidate swaps and verdict normalization]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-verbosity-style|Length, presentation and sycophancy biases]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-judge-provenance|Judge provenance, templates and parsing failures]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-cohen-kappa|Annotator agreement and Cohen's kappa]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-group-splits|Group splits before pair construction]]\n  - [[00 Учебник/12 Post-training и Alignment/02 Preference data#pref-published-hh-row|An original HH-RLHF row and the meaning of chosen]]\n"
+        },
+        {
+          "old": "- [[00 Учебник/12 Post-training и Alignment/03 Reward modeling|Reward modeling]]\n",
+          "new": "- [[00 Учебник/12 Post-training и Alignment/03 Reward modeling|Reward modeling]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#preference-to-reward|Generalizing comparisons to new responses]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-scalar-eos|Scalar heads and EOS pooling]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#bradley-terry|Pairwise loss, gradients, shifts and scaling]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-soft-labels|Soft labels and tie modeling]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-eos-padding|Executable Llama scorer, PAD/EOS and positions]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-listwise-pl|Group averaging and Plackett–Luce rankings]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-orm|ORM: outcome supervision]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-prm|PRM: step labels and score aggregation]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#prm-boundary-loss|PRM boundaries, label masks and gradients]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-verifiable|Verifiable rewards versus RL training]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-generative-judge|Generative judges and verdict extraction]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-value-vs-reward|Reward models versus PPO critics]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-self-rewarding|Self-Rewarding with shared generator/judge weights]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-selfreward-results|Self-Rewarding evaluation and saturation]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-tpo|TPO: answer preferences train preceding thoughts]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-meta-rewarding|Meta-Rewarding pairs of judgments]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-evalplanner|EvalPlanner training of plans and executions]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-validation|Evaluating a reward model before PPO]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-calibration|Ranking accuracy versus probability calibration]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#annotator-effects|Annotation protocols and correlated errors]]\n  - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#reward-overoptimization|Best-of-N and reward overoptimization]]\n"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tools/check_reward_modeling_examples.py",
+      "before_sha256": "197b2d7e5685c25b3824a27e120e3be41058070271ed9ddb489afc61e269ef2d",
+      "after_sha256": "5fcbd0d78d20944af42faf7a85c10e51b48a25ece85f2857bdc4121d1aa1ff52",
+      "changes": [
+        {
+          "old": "    assert len(blocks) == 6, \"execute every published Python fence\"\n",
+          "new": "    assert len(blocks) == 7, \"execute every published Python fence\"\n"
+        },
+        {
+          "old": "    print(json.dumps({\n",
+          "new": "    # PRM boundary classification: only annotated positions contribute.\n    prm_loss = ns[\"labeled_step_loss\"]\n    step_logits, targets, label_mask = [ns[k] for k in (\n        \"prm_step_logits\", \"prm_step_targets\", \"prm_label_mask\")]\n    assert label_mask.sum().item() == 5\n    assert (~label_mask).sum().item() == 3\n    assert math.isclose(ns[\"prm_step_loss\"].item(), math.log(3))\n    assert ns[\"prm_step_loss_after\"] < ns[\"prm_step_loss\"]\n    altered = step_logits.detach().clone()\n    altered[~label_mask] = torch.tensor([200., -300., 50.], dtype=altered.dtype)\n    torch.testing.assert_close(prm_loss(altered, targets), prm_loss(step_logits, targets))\n    copied = step_logits.detach().clone().requires_grad_()\n    per_slot = F.cross_entropy(copied.reshape(-1, 3), targets.reshape(-1),\n                              ignore_index=-100, reduction=\"none\")\n    correct_gradient = torch.autograd.grad(per_slot.sum()/5, copied, retain_graph=True)[0]\n    wrong_gradient = torch.autograd.grad(per_slot.mean(), copied)[0]\n    torch.testing.assert_close(wrong_gradient, correct_gradient * (5/8))\n    try:\n        prm_loss(step_logits, torch.full_like(targets, -100))\n    except ValueError:\n        pass\n    else:\n        raise AssertionError(\"an empty annotation mask was accepted\")\n\n    print(json.dumps({\n"
+        },
+        {
+          "old": "        \"example_stdout\": output.getvalue().splitlines(),\n",
+          "new": "        \"prm_boundaries\": {\n            \"labeled\": 5, \"ignored\": 3,\n            \"loss_before\": ns[\"prm_step_loss\"].item(),\n            \"loss_after\": ns[\"prm_step_loss_after\"].item(),\n            \"ignored_logits_do_not_change_loss\": True,\n            \"wrong_slot_mean_gradient_factor\": 5/8,\n            \"scope\": \"Three-class boundary logits, not a full PRM language-model training run\",\n        },\n        \"example_stdout\": output.getvalue().splitlines(),\n"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "status": "verified-local-delta",
+    "scope": "Two complete inputs and final chapters read. Preserve all preceding explanations/programs and eleven original figures; align15/21 subject terms per locale. Added a bounded PRM boundary-label/masking loss example. Local verification is not full-course or whole-book acceptance.",
+    "chapters": [
+      {
+        "source": "00 Учебник/12 Post-training и Alignment/02 Preference data.md",
+        "inputSha256": "e24409a09129f2b7ba6f01d6a85f45879f1cbab2dec4c099267c5e11d934dffa",
+        "inputLines": 859,
+        "finalSha256": "3c5c27789d5a9e879dfae24498827329613d01db5437bac5a780bf0fae9f25bb",
+        "finalLines": 935,
+        "wholeRead": "Input1-260,261-540,541-859; final1-340,341-680,681-935. No subsequent chapter edits."
+      },
+      {
+        "source": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+        "inputSha256": "ae8ad7536eb7463667bbe8a5983fc54008e92079e775ea49ca481a12d3bb570e",
+        "inputLines": 1076,
+        "finalSha256": "ae67b9f3c4cfc3e8ac1ba877b93275f8afec30cc03aaad8a016d444d2f055e75",
+        "finalLines": 1242,
+        "wholeRead": "Input1-280,281-560,561-840,841-1076; final1-350,351-700,701-1050,1051-1242. No subsequent chapter edits."
+      }
+    ],
+    "explanation": {
+      "preserved": "Preference chapter retains comparison records, generators/common history, ratings/strength/ties, prompt weights, probabilistic cycles, rubrics/verifiers, position/style/judge bias, kappa and grouped split explanation. Reward chapter retains EOS/head, BT and soft labels, executable scorer, grouped/listwise PL, ORM/PRM, generator/judge variants, calibration and overoptimization. No definition-only overview substituted.",
+      "newPrm": "Source labels are assigned after a step and stop at the first incorrect step inclusive. Missing annotations are excluded, not assigned negative labels. Two4-slot sequences contain five labels and three ignored positions. Uniform3-class logits give mean log3; target gradient-2/15, other gradients1/15, ignored gradients0. An SGD step lowers loss. A wrong mean over all eight slots scales gradients by5/8. Per-sequence versus per-step weights and inference aggregation are separated.",
+      "sourceComparisonReuse": "Exact input hashes match accepted October23 chapters. Complete mechanism maps in docs/audit/2026-10-23-preference-data.md and docs/audit/2026-10-23-reward-modeling.md reread; unchanged source comparisons reused only on those exact bytes. No fresh whole Berkeley/CS336 course read claimed.",
+      "freshSourceRead": [
+        {
+          "url": "https://arxiv.org/html/2305.20050v1#S2.SS6",
+          "sections": "Complete sections2.1-2.6 and AppendixD/E/F.1/F.2, including first-incorrect stopping, three labels, ORM/PRM supervision, product/min and neutral inference treatment. New code uses an explicitly separate three-class toy head."
+        },
+        {
+          "url": "https://arxiv.org/html/2204.05862v1#S2",
+          "sections": "Complete sections2.1-2.3 and3.3 freshly read: common histories, harmlessness direction, comparison strength, generator distributions and calibration scope."
+        }
+      ],
+      "style": "Both complete final texts reread with no-ai-slop and local academic qualifications. Retained source language, equations, full causal explanations, examples and caveats; no translation pass."
+    },
+    "examples": [
+      {
+        "source": "00 Учебник/12 Post-training и Alignment/02 Preference data.md",
+        "executedChapterSha256": "3c5c27789d5a9e879dfae24498827329613d01db5437bac5a780bf0fae9f25bb",
+        "exit": 0,
+        "publishedPrograms": 5,
+        "log": "/var/tmp/bookvar-preference-final-examples-20261105.log",
+        "scope": "All five actual programs execute; rankings/ties, pair expansion, weights, shared histories, strict verdict parsing, group splits, Cohen kappa and original HH-RLHF row checked, including negative controls. No actual LLM judge or human annotation experiment."
+      },
+      {
+        "source": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+        "executedChapterSha256": "ae67b9f3c4cfc3e8ac1ba877b93275f8afec30cc03aaad8a016d444d2f055e75",
+        "exit": 0,
+        "publishedPrograms": 7,
+        "torch": "2.14.1",
+        "transformers": "4.57.1",
+        "device": "CPU",
+        "log": "/var/tmp/bookvar-reward-prm-final-examples-20261105.log",
+        "scope": "All seven actual programs execute. Random tiny Llama scorer has3136 parameters; loss .7038449048995972→.5182136297225952;24 padding comparisons max error5.960464477539063e-8. PL/BT/soft-label/calibration and PRM product/min checks retained.",
+        "prm": {
+          "labeled": 5,
+          "ignored": 3,
+          "lossBefore": 1.0986122886681098,
+          "lossAfter": 1.0853234980475388,
+          "ignoredLogitsInvariant": true,
+          "wrongSlotMeanGradientFactor": 0.625,
+          "emptyLabelMaskRejected": true
+        },
+        "limits": "CPU toy algebra/autograd only. No pretrained weights/dataset download, full PRM LM training, actual judge API, GPU training or benchmark."
+      }
+    ],
+    "checks": {
+      "scoped": {
+        "exit": 0,
+        "files": 5,
+        "tests": 25,
+        "log": "/var/tmp/bookvar-preference-reward-scoped-20261105.log"
+      },
+      "build": {
+        "exit": 0,
+        "pages": 2009,
+        "pagefindFiles": 2013,
+        "seconds": 30.22,
+        "log": "/var/tmp/bookvar-preference-reward-build-20261105.log"
+      },
+      "html": {
+        "exit": 0,
+        "tests": 215,
+        "log": "/var/tmp/bookvar-preference-reward-output-20261105.log"
+      },
+      "links": {
+        "exit": 0,
+        "brokenInternal": 0,
+        "log": "/var/tmp/bookvar-preference-reward-links-20261105.log"
+      },
+      "topicIndex": {
+        "exit": 0,
+        "topics": 153,
+        "termsInOwners": [
+          15,
+          21
+        ],
+        "log": "/var/tmp/bookvar-preference-reward-topics-20261105.log"
+      },
+      "size": {
+        "exit": 0,
+        "bytes": 856910141,
+        "files": 5626,
+        "limit": 1000000000,
+        "headroom": 143089859
+      },
+      "receipt": {
+        "exit": 0,
+        "files": 6,
+        "tests": 27,
+        "receiptTests": 2,
+        "currentHashMatches": 112,
+        "unreadOwnersInRoutePass": 41,
+        "log": "/var/tmp/bookvar-preference-reward-receipts-final-20261105.log",
+        "scope": "Current preservation/source and reading-receipt suite. Overlaps preceding25 tests; not27 additional unique tests."
+      },
+      "scopedWhitespace": {
+        "exit": 0,
+        "scope": "Changed chapters, indexes, checker, baseline tools, HTML tests and root audit."
+      }
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-05-preference-reward-reader",
+      "desktop": "Default 1280x720. All eleven original figures and their captions personally inspected in the viewer: three preference figures and eight reward figures. Page width 1280/1280; zero KaTeX errors. The full HH-RLHF captions, calibration panels, EOS/PRM strips, three self/judge loops and proxy/gold graph remain visible without destructive crops.",
+      "mobile": "375x812 override. Both documents remain 375/375 with 343px reading width; six preference and eight reward display formulas fit 343/343 and have overflow-x:auto. Four reward tables fit343/343. All five preference tables have width632/632 on desktop; no page overflow on mobile. Preference interface at2.5x and PRM strip at3.5x inspected with actual horizontal arrow panning (PRM470→572.5, maximum898); no exact-edge or all-eleven mobile-enlargement claim. New PRM paragraph and its source link inspected inline on desktop/mobile. Viewport reset.",
+      "navigation": "Actual RU reference links reach #pref-ranking-weights and #prm-boundary-loss; EN links reach #pref-position-swap and #rm-evalplanner. Real skip link reaches #rm-validation. RU preference Next reaches reward-modeling; actual RU/EN reward Next reaches PPO. EN pages explicitly disclose no separate English edition; no new translation claimed. Russian interface restored and PRM worked example left open.",
+      "recovery": "Cross-turn stale CUA binding recovered using documented same-browser reset/rebind. A language control lookup initially used its Russian label on an English page; fresh DOM showed Select language and the action then succeeded. No unrelated apps or user tabs modified."
+    },
+    "materials": "All eleven existing figure paths and bytes retained and checked against current registry. The old October23 HF needs-confirmation note is historical: current October29 provenance record verifies CC BY-NC-SA4.0 against pinned Hugging Face documentation. No new image or rights grant inferred from open access; no registry edits this pass.",
+    "remaining": [
+      "98 fresh plus14 reused=112 whole-owner reads out of153;41 unread. These counters are not accepted-chapter counts.",
+      "Next: DPO, RLVR, GRPO, reasoning distillation and test-time compute, followed by remaining synthetic-data, deployment, retrieval, multimodal, agent and recommender owners. Preserve unchanged hash-pinned PPO and other completed reads.",
+      "Thematic course completeness, existing figure/rights gaps, public-checkout/Pages-base checks and authorized dev/Pages release remain open. No staging, commit, push or deployment in this pass."
+    ]
+  }
+}

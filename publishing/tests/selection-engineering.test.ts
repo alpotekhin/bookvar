@@ -30,7 +30,7 @@ describe('selection engineering reader',()=>{
   it('preserves worked accounting, distributed selection, echoing and evaluation explanations',()=>{
     const text=read(chapter);
     expect(text).toContain('source_language: en');
-    expect(text.match(/^```python$/gm)).toHaveLength(9);
+    expect(text.match(/^```python$/gm)).toHaveLength(10);
     expect(text.match(/^!\[\[/gm)).toHaveLength(5);
     for(const anchor of ['selection-method-choice','selection-time-budget','selection-lifecycle-cost',
       'selection-storage-access','distributed-selection','data-echoing',

@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-09",
+  "scope": "Make the rights registry explicit about the already-retired Winoground slide. License URL is null because no redistribution grant was established. The file, attribution, source, stated rights evidence, retirement and absence of published uses are unchanged.",
+  "verification": {
+    "reproduction": "Focused evidence run: 202 tests, 7 failed in agent-reconciliation, asset-registry, data-selection-section-map, dlrm, micro-arena, nanogpt-reference and selection-gaps.",
+    "historicalChecks": "Reconstruct recorded chapter revisions before comparing their full SHA-256 and original counts. Keep current anchor and source checks. No chapter text, examples or historical hashes were changed.",
+    "currentExecution": "The current tool-use chapter executes all six Python examples independently and together; the MCP control rejects seven invalid responses without consuming pending calls, rejects a duplicate, and distinguishes successful output from a JSON-RPC error. All four historical ReAct crop checks remain.",
+    "nanoGPT": "Offline CPU execution on Python 3.13.12 with the original exact dependency versions passed. Python 3.14.3 could not resolve the pinned Torch from the local cache. No change to model code, corpus, checkpoint assertions or saved historical benchmark record.",
+    "finalFullRun": {
+      "files": 223,
+      "passed": 1256,
+      "failed": 0,
+      "log": "/tmp/bookvar-evidence-seven.nEPbEZ/verified-full.json"
+    },
+    "archiveFreePublication": "738 tests passed on the same previously verified archive-free projection after syncing the registry and test changes; the 11 archive-only checks remain in the full local run.",
+    "reader": {
+      "distillation": {"sha256":"60aef7df562274a7ea5af19fff925f1a942918ed9aeb4fc08f48358f06ccefda","subjectLinksPerLocale":37,"figures":8,"displayFormulas":16,"programs":9},
+      "testTimeCompute": {"sha256":"1dad000d5064bf360091ca3f41d5b2a8b37d5024aa823ace5c2193df1e6e25c6","subjectLinksPerLocale":36,"figures":16,"displayFormulas":13,"programs":7},
+      "checks": "Both locale reference routes clicked at 375 and 1280 pixels; all subject IDs present. All 24 figures checked inline and in full-fit and zoomed viewer in each locale/width; no KaTeX errors or page overflow. Inspected TinyBERT, Coconut and Snell screenshots and checked the left and right pan extents at 3x on mobile. The English pages are explicit Russian fallbacks, not complete English translations.",
+      "scope": "Closes the two pending reader checks only. No claim of source-level acceptance for the full textbook."
+    },
+    "published": false
+  },
+  "files": [
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "568557bc59eda79c3611408b32c1765dfe53fd41d426f5f6f83b7a156cf59207",
+      "after_sha256": "8194b606ad91f732802b65a2e06d6a207c21a43f0ef2e45ecc1275d973e4a439",
+      "lines": 24124,
+      "changes": [
+        {
+          "old": "    source_url: https://cs231n.stanford.edu/slides/2025/lecture_16.pdf\n    license: Unverified for redistribution\n    rights_evidence: https://huggingface.co/datasets/facebook/winoground/blob/main/README.md",
+          "new": "    source_url: https://cs231n.stanford.edu/slides/2025/lecture_16.pdf\n    license: Unverified for redistribution\n    license_url: null\n    rights_evidence: https://huggingface.co/datasets/facebook/winoground/blob/main/README.md"
+        }
+      ]
+    }
+  ]
+}

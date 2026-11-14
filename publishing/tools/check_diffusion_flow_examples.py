@@ -20,7 +20,7 @@ def sha(path):
 def main():
     text = CHAPTER.read_text()
     blocks = re.findall(r"^~~~python\n(.*?)^~~~", text, re.M | re.S)
-    assert len(blocks) == 20, len(blocks)
+    assert len(blocks) == 21, len(blocks)
     shared, spaces = {}, []
     for i, block in enumerate(blocks, 1):
         code = compile(block, f"{CHAPTER}:example-{i}", "exec")

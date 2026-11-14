@@ -2,8 +2,99 @@
 title: RLVR — обучение по проверяемой награде
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-29
-last_verified: 2026-10-29
+last_updated: 2026-11-05
+last_verified: 2026-11-05
+reference_terms:
+  - anchor: rlvr-contract
+    label: "Проверяемая награда и исходная способность решать задачи"
+    label_en: "Verifiable rewards and initial task competence"
+  - anchor: verifiable-reward
+    label: "Источник награды и алгоритм обновления"
+    label_en: "Reward sources versus update algorithms"
+  - anchor: rlvr-equation-example
+    label: "Четыре ответа на уравнение и компоненты награды"
+    label_en: "Four equation answers and reward components"
+  - anchor: rlvr-reward-components
+    label: "Награда за правильность и за формат"
+    label_en: "Correctness and format rewards"
+  - anchor: rlvr-task-records
+    label: "Запись задачи, закрытые тесты и разбиение данных"
+    label_en: "Task records, hidden tests and data splits"
+  - anchor: rlvr-rollout-records
+    label: "Версия стратегии и вероятности сгенерированного ответа"
+    label_en: "Policy revisions and rollout log probabilities"
+  - anchor: rlvr-objective
+    label: "Ожидаемая награда и KL-регуляризация"
+    label_en: "Expected rewards and KL regularization"
+  - anchor: rlvr-score-function
+    label: "Градиент при недифференцируемой проверке"
+    label_en: "Learning from a nondifferentiable verifier"
+  - anchor: rlvr-reward-scale
+    label: "Масштаб награды относительно KL"
+    label_en: "Reward scaling relative to KL"
+  - anchor: parser-vs-verifier
+    label: "Извлечение ответа и проверка результата"
+    label_en: "Answer extraction versus result verification"
+  - anchor: rlvr-reward-gradient
+    label: "От строк и наград к обновлению вероятностей"
+    label_en: "From response strings to reward gradients"
+  - anchor: rlvr-symbolic-verification
+    label: "Эквивалентность выражений, допуски и Math-Verify"
+    label_en: "Expression equivalence, tolerances and Math-Verify"
+  - anchor: rlvr-program-tests
+    label: "Покрытие тестов, частичная награда и изоляция кода"
+    label_en: "Test coverage, partial credit and code isolation"
+  - anchor: rlvr-agent-final-state
+    label: "Конечное состояние и допустимость действий агента"
+    label_en: "Agent final states and permitted actions"
+  - anchor: rlvr-formal-proofs
+    label: "Формальное утверждение, аксиомы и доказательство"
+    label_en: "Formal statements, axioms and proofs"
+  - anchor: agent-reward-design
+    label: "Совпадение вызова и выполнение задачи"
+    label_en: "Tool-call matching versus task completion"
+  - anchor: rlvr-toolrl
+    label: "ToolRL: частичные оценки имени и аргументов"
+    label_en: "ToolRL partial function and argument scores"
+  - anchor: rlvr-tooln1
+    label: "Tool-N1: бинарная проверка и single-step данные"
+    label_en: "Tool-N1 binary checks and single-step data"
+  - anchor: rlvr-completion-efficiency
+    label: "ASTRA: полнота, число вызовов и F1"
+    label_en: "ASTRA completion, call counts and F1"
+  - anchor: rlvr-refusal-filtering
+    label: "Отказ, недостающая информация и фильтрация групп"
+    label_en: "Refusal, missing information and group filtering"
+  - anchor: rlvr-process-vs-outcome
+    label: "Награда за результат и за промежуточные шаги"
+    label_en: "Outcome rewards versus step feedback"
+  - anchor: rlvr-curriculum
+    label: "Смешанные группы и оценка доступной сложности"
+    label_en: "Mixed-reward groups and task difficulty"
+  - anchor: verifier-audit
+    label: "Аудит оценщика, шаблоны и остановка генерации"
+    label_en: "Grader audits, prompt formats and stopping"
+  - anchor: rlvr-false-acceptance
+    label: "Редкие ложные принятия и загрязнение награды"
+    label_en: "False accepts and contaminated reward signals"
+  - anchor: rlvr-metrics
+    label: "Метрики разбора, проверки, обучения и обобщения"
+    label_en: "Parsing, verification, learning and generalization metrics"
+  - anchor: rlvr-pass-at-k
+    label: "Pass@k, неоднородность задач и несмещённая оценка"
+    label_en: "Pass@k, task heterogeneity and unbiased estimation"
+  - anchor: rlvr-tulu-experiment
+    label: "Tülu 3: награда, KL, длина и перенос"
+    label_en: "Tülu 3 rewards, KL, length and transfer"
+  - anchor: rlvr-tulu-value-model
+    label: "Функция ценности, награда RM и параметры PPO"
+    label_en: "Value models, RM scores and PPO settings"
+  - anchor: rlvr-rollout-learner-workers
+    label: "Rollout workers, learner и устаревшие данные"
+    label_en: "Rollout workers, learners and stale data"
+  - anchor: rlvr-failures
+    label: "Open-R1 и контракты открытых реализаций"
+    label_en: "Open-R1 and implementation contracts"
 source_language: mixed
 aliases:
   - Reinforcement learning with verifiable rewards
@@ -18,6 +109,8 @@ primary_sources:
   - https://arxiv.org/abs/2110.14168
   - https://arxiv.org/abs/2305.20050
   - https://arxiv.org/abs/2411.15124
+  - https://arxiv.org/abs/2504.13837v5
+  - https://arxiv.org/abs/2505.24864v1
   - https://arxiv.org/abs/2107.03374
   - https://github.com/huggingface/open-r1
 source_unit_id:
@@ -67,7 +160,7 @@ RLVR критерий правильности задан вне обучаем�
 что оценка непогрешима: точность математического сравнения, полнота тестов и
 соответствие спецификации всё равно требуют отдельного анализа.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-rlvr-loop.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-rlvr-loop.png|Цикл Tülu 3: генерация, проверяемая награда и обновление PPO]]
 
 *Модель получает запрос, генерирует ответ и получает награду только после
 проверки. Затем её параметры обновляются, и следующий набор ответов уже
@@ -85,6 +178,8 @@ Nathan Lambert et al.,
 обновления весов. После обучения модель должна чаще находить успешное решение
 сама, в том числе на новых задачах. Смешивать эти два эффекта нельзя: увеличение
 числа попыток при проверке не доказывает, что улучшилась сама модель.
+
+<a id="rlvr-equation-example"></a>
 
 ## Сквозной пример: линейное уравнение
 
@@ -122,6 +217,8 @@ $r_c$, а соблюдение формата через $r_f$. Это учеб�
 | $y_3$: `FINAL: 4.0` | 4.0 | (1,1) |
 | $y_4$: `FINAL: 12` | 12 | (0,1) |
 
+<a id="rlvr-reward-components"></a>
+
 ### Ручной расчёт награды
 
 Пусть правильность служит основным сигналом, а соблюдение формата даёт лишь
@@ -155,6 +252,8 @@ $y_1$ и $y_3$, но получает положительную награду 
 
 ## От записи данных к функции оптимизации
 
+<a id="rlvr-task-records"></a>
+
 ### 1. Формат набора данных
 
 Минимально нужны:
@@ -169,6 +268,8 @@ $y_1$ и $y_3$, но получает положительную награду 
 Закрытые тесты нельзя помещать в поля, доступные модели вместе с запросом. Для
 задач программирования открытые примеры и закрытый комплект тестов следует
 хранить раздельно.
+
+<a id="rlvr-rollout-records"></a>
 
 ### 2. Запись о сгенерированном ответе
 
@@ -199,6 +300,8 @@ $y_1$ и $y_3$, но получает положительную награду 
 зафиксированным весам этой версии. Вероятности у уже обновлённой модели не
 являются равноценной заменой.
 
+<a id="rlvr-objective"></a>
+
 ### 3. Целевая функция обучения
 
 Проверяющая программа задаёт итоговую награду $R(x,y)$. Общая цель имеет вид
@@ -223,6 +326,8 @@ $\pi_\theta$ — распределение ответов обучаемой м
 $\pi_{\mathrm{ref}}$ фиксирует поведение до данного этапа обучения. Штраф KL
 ограничивает изменения относительно неё. Это распространённый вариант, в том
 числе в Tülu 3, но не определение RLVR: возможны запуски без такого штрафа.
+
+<a id="rlvr-score-function"></a>
 
 ### Почему можно учиться на недифференцируемой проверке
 
@@ -253,6 +358,8 @@ $\sum_t\log\pi_\theta(y_t|x,y_{<t})$. Поэтому одна итоговая �
 разделяет полезные и бесполезные шаги *внутри одного успешного ответа*.
 Случайно сопутствующие фразы тоже попадают в обновление. Это одна из причин высокой
 дисперсии, а не свидетельство того, что каждый поощрённый шаг был правильным.
+
+<a id="rlvr-reward-scale"></a>
 
 ### Масштаб награды меняет задачу
 
@@ -359,6 +466,8 @@ assert numeric_reward("FINAL: 12", Decimal("4")) == {
 вместе с новой спецификацией формата и тестами. Иначе одна и та же строка может
 получать разную награду до и после незаметного изменения программы.
 
+<a id="rlvr-reward-gradient"></a>
+
 ### Как награда меняет вероятности ответов
 
 Вернёмся к четырём ответам на уравнение. Пусть пока каждый из них выбирается
@@ -424,6 +533,8 @@ print(f"expected reward: {mean_reward.item():.6f} -> {updated_reward.item():.6f}
 
 ## Виды проверяющих программ
 
+<a id="rlvr-symbolic-verification"></a>
+
 ### Точная и символьная проверка математики
 
 Точное сравнение строк ненадёжно: `1/2`, `0.5` и $\frac12$ эквивалентны.
@@ -459,6 +570,8 @@ $|\hat a-a^*|\le\varepsilon_{\mathrm{abs}}+
 упрощение выполняют с ограничениями времени и ресурсов: сложное выражение
 может надолго занять проверяющий процесс даже без исполнения произвольного кода.
 
+<a id="rlvr-program-tests"></a>
+
 ### Программный код
 
 Успешная компиляция или выполнение без исключения ещё не доказывают
@@ -492,6 +605,8 @@ $|\hat a-a^*|\le\varepsilon_{\mathrm{abs}}+
 доказательством, что ответ неверен. Об опасности исполнения модельного кода
 прямо предупреждает [официальный репозиторий HumanEval](https://github.com/openai/human-eval#usage).
 
+<a id="rlvr-agent-final-state"></a>
+
 ### Инструменты и агенты
 
 Синтаксически правильный вызов инструмента — лишь промежуточное действие.
@@ -505,6 +620,8 @@ $|\hat a-a^*|\le\varepsilon_{\mathrm{abs}}+
 при произвольном взвешивании модель иногда предпочтет ничего не делать,
 поскольку это самый дешёвый способ избежать штрафа. Условия обязательного
 успеха и допустимые компромиссы нужно различать в самой постановке награды.
+
+<a id="rlvr-formal-proofs"></a>
 
 ### Формальные доказательства
 
@@ -529,9 +646,11 @@ right departure airport, but asks about the wrong destination. An exact-match
 reward treats it like a completely unrelated call. A decomposed reward can
 credit the fields that match while still withholding full credit.
 
+<a id="rlvr-toolrl"></a>
+
 ### ToolRL: compare the function and its arguments
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/toolrl/reward-design.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/toolrl/reward-design.png|ToolRL: формат, имена функций, ключи и значения аргументов]]
 
 *Cheng Qian et al., ToolRL.
 [Original repository illustration](https://github.com/qiancheng0/ToolRL/blob/8cee13ec0ca72f0461da372a93a6fd8140dbb840/assets/reward.png),
@@ -622,6 +741,8 @@ cannot establish compliance with a requirement that the annotation omitted.
 For state-changing tasks, final-state checks and action-policy checks remain
 necessary.
 
+<a id="rlvr-tooln1"></a>
+
 Binary matching is another choice. In
 [Tool-N1 §4.1–4.3](https://arxiv.org/html/2505.00024v2#S4.SS3), an answer earns
 1 only when the required tags and the function's name and argument-value
@@ -637,6 +758,8 @@ the 5,518-instance comparison reports averages of 83.17 for SFT followed by
 RL and 83.24 for RL alone under its data allocations. This small reported
 difference does not establish that SFT generally harms tool learning.
 Both recipes start from an already instruction-tuned model.
+
+<a id="rlvr-completion-efficiency"></a>
 
 ### Partial completion and unnecessary calls
 
@@ -695,6 +818,8 @@ assumption and could make the quantity called precision exceed 1. The
 subtask accounting and permitted tool semantics must therefore be specified
 before using the formula.
 
+<a id="rlvr-refusal-filtering"></a>
+
 ### Refusal, missing information and group filtering
 
 A task need not have one unique accepted answer. A verifier can accept
@@ -726,6 +851,8 @@ The availability of a training-time verifier also says nothing about which
 checks will be available when a deployed agent answers a new request.
 
 <!-- END REVIEW: tool rewards 2026-10-29 -->
+
+<a id="rlvr-process-vs-outcome"></a>
 
 ## Проверка результата и проверка хода решения
 
@@ -759,6 +886,8 @@ GSM8K. Она не тождественна детерминированной �
 одинаково, появится стимул удлинять такие цепочки. Локальная корректность,
 полезность шага и успех всего решения — разные свойства; их нельзя заменить
 одной оценкой без дополнительных предположений.
+
+<a id="rlvr-curriculum"></a>
 
 ## Учебная программа и доступная сложность
 
@@ -888,6 +1017,8 @@ XML и не свойство RLVR. Для `question_only` используетс
 правильных ответах с испорченным форматом, задержках выполнения, исчерпании
 ресурсов, внедрённых в условие инструкциях и попытках получить закрытые тесты.
 
+<a id="rlvr-false-acceptance"></a>
+
 ### Почему редкие ложные принятия опасны
 
 Пусть модель действительно решает 10% задач. Проверяющая программа принимает
@@ -913,6 +1044,8 @@ $$
 не описывают новую ситуацию. Повторная ручная проверка свежих принятых ответов
 нужна на протяжении обучения, а не только до первого обновления.
 
+<a id="rlvr-metrics"></a>
+
 ## Метрики
 
 Средняя награда характеризует обучающую среду, но не служит итоговой оценкой
@@ -930,6 +1063,8 @@ $$
 
 При сравнении pass@1 до и после обучения нужно зафиксировать шаблон
 запроса, температуру, предел длины и версию проверяющей программы.
+
+<a id="rlvr-pass-at-k"></a>
 
 ### Одна попытка и несколько попыток
 
@@ -998,6 +1133,75 @@ $1-(1-c/n)^k$ смещено. В нашем примере оно даёт $1-0.
 итоговую строку с ответом в уже почти законченном решении. Такой эффект
 отличается и от ошибки рассуждения, и от ошибки программы извлечения.
 
+<a id="rlvr-pass-k-crossover"></a>
+
+### Почему кривые pass@k могут пересечься
+
+Пусть на двух задачах базовая модель даёт верный ответ с вероятностями 0,4
+и 0,1. После RL первая вероятность выросла до 0,8, а вторая упала до 0,005.
+В среднем за одну попытку дообученная модель выигрывает:
+$(0.8+0.005)/2=0.4025$ против $(0.4+0.1)/2=0.25$. Теперь дадим обеим моделям по 16 независимых
+попыток на каждую задачу. На первой они обе почти наверняка найдут ответ.
+На второй вероятность успеха базовой модели вырастет до
+$1-0.9^{16}\approx0.815$, а дообученной лишь до $1-0.995^{16}\approx0.077$.
+После усреднения по двум задачам получается 90,7% у базовой и 53,9% у
+дообученной. Преимущество на первой задаче практически исчезло, когда обе
+вероятности приблизились к единице, а разница на второй сохранилась.
+Это расчёт с заданными вероятностями, а не результаты запуска модели.
+
+В [эксперименте Yue et al., §3.1](https://arxiv.org/html/2504.13837v5#S3.SS1)
+сравнивали базовые модели с их версиями после GRPO. Дообучение начиналось
+с весов базовой модели, без промежуточного SFT. При оценке обе версии
+получали одинаковый запрос без демонстраций; температура 0,6, top-p 0,95
+и предел в 16 384 новых токена тоже совпадали. Для MATH500 и Minerva
+на каждую задачу собрали по 128 ответов от каждой версии. Точки левее 128
+вычисляли из тех же ответов по комбинаторной формуле выше, а не запускали
+новый опыт для каждого $k$
+([приложение A.2](https://arxiv.org/html/2504.13837v5#A1.SS2)).
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-pass-k-2026-11-14/yue-figure-2.svg|Четыре ряда математических тестов и четыре столбца моделей. В панели Minerva для Qwen2.5-32B линия RL выше при одной попытке, а линия Base выше при 128.]]
+
+*Yang Yue et al., [Does Reinforcement Learning Really Incentivize Reasoning
+Capacity in LLMs Beyond the Base Model?, рис. 2](https://arxiv.org/html/2504.13837v5#S2.F2),
+[оригинальный SVG](https://arxiv.org/html/2504.13837v5/simpleRL_coverage_main.svg),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Все 16 панелей
+сохранены без изменений.*
+
+В третьем ряду, Minerva, и третьем столбце, Qwen2.5-32B, при $k=1$
+оценка RL составляет около 0,43 против 0,27 у Base. К правой границе,
+$k=128$, порядок обратный: около 0,58 против 0,67. Это приближённое
+чтение графика. Обе кривые растут: если разрешить ещё одну попытку,
+найденный ответ не исчезнет. Но у базовой модели оценка растёт быстрее.
+
+По одним кривым нельзя узнать, на каких задачах совпали успехи. В
+[таблице 2](https://arxiv.org/html/2504.13837v5#S4.T2) авторы сравнили
+ответы Qwen2.5-7B до и после RL на одних и тех же задачах. На MATH500
+при 128 попытках обе версии хотя бы раз решили 462 задачи из 500.
+Ещё 18 решила только базовая версия, 5 только дообученная, 15 не решила ни
+одна. Итого 480 против 467. Формулировка «в испытании не встретилось
+правильного ответа» здесь точнее, чем «модель не умеет решать задачу»:
+при вероятности успеха 1% шанс увидеть 128 неудач подряд всё ещё около 28%.
+И наоборот, совпавший конечный ответ сам по себе не доказывает правильность
+хода решения; [ручная проверка в §3.1](https://arxiv.org/html/2504.13837v5#S3.SS1)
+охватывала отдельные задачи GSM8K и AIME24, а не все ответы на графике.
+
+Пересечение не обязательно. В [ProRL, §4.2–4.3](https://arxiv.org/html/2505.24864v1#S4.SS3)
+отправной точкой служила уже дистиллированная модель 1,5B. При длительном
+RL на смеси задач у некоторых тестов pass@128 падал, а на задаче
+координации перемещений `boxnet`, которой не было в обучающей смеси,
+конечная версия опережала промежуточную на всём показанном диапазоне $k$.
+Это другой старт, другие данные и другой режим обучения. По двум работам
+нельзя выделить вклад длительности отдельно от остальных изменений.
+
+Для сравнения версий имеет смысл фиксировать и число попыток, и расход
+токенов: 128 коротких ответов и 128 длинных стоят по-разному даже при
+одинаковом пределе длины. Если система показывает пользователю один ответ,
+надо отдельно измерить, как часто её собственное правило выбора находит
+верный вариант. Методы такого выбора разобраны в
+[[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute|главе о вычислениях во время вывода]].
+
+<a id="rlvr-tulu-experiment"></a>
+
 ## Что показывает кривая RLVR, а чего она не доказывает
 
 <!-- source_unit_id: meeting-04-slides-rlvr-results -->
@@ -1019,7 +1223,7 @@ $1-(1-c/n)^k$ смещено. В нашем примере оно даёт $1-0.
 [Tülu 3 v5 от 14 апреля 2025 года](https://arxiv.org/abs/2411.15124v5).
 Эти настройки относятся к экспериментам Tülu 3, а не к RLVR вообще.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-2026-10-24/tulu-rlvr-full-figure19.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-2026-10-24/tulu-rlvr-full-figure19.png|Tülu 3: все двенадцать панелей награды, KL, длины и тестовых оценок]]
 
 *Три независимых семейства запусков: GSM8K, MATH и инструкции с проверяемыми
 ограничениями. В каждом ряду слева показана обучающая награда, в центре — KL к
@@ -1043,7 +1247,7 @@ KL-штраф ($\beta=0.01$) сопровождается самой высок�
 обучающих запросах. Сам по себе он не показывает ни переноса на новые задачи, ни
 сохранения общих способностей, ни корректности промежуточного рассуждения.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-ifeval-kl-and-generalization.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-ifeval-kl-and-generalization.png|Целевая IFEval-оценка и среднее качество при разном KL]]
 
 *Для инструкций с ограничениями целевая оценка IFEval остаётся приблизительно
 на одном уровне, тогда как средняя оценка по задачам ухудшается при большем KL.
@@ -1058,6 +1262,8 @@ CC BY 4.0. Исходный файл рисунка без изменений.*
 выполняют формальные ограничения, но теряют осмысленное содержание. Такие
 примеры демонстрируют неполноту выбранного критерия: проверка числа пунктов
 не обязана оценивать полезность написанного.
+
+<a id="rlvr-tulu-value-model"></a>
 
 ### Модель награды может исчезнуть, а функция ценности — остаться
 
@@ -1078,7 +1284,7 @@ $-10$ за отсутствие EOS. Поэтому средняя обучаю�
 Это настройки [Tülu 3, §6.2 и Table 21](https://arxiv.org/html/2411.15124v5#S6.SS2),
 а не обязательные компоненты любого RLVR.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-value-initialization.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-value-initialization.png|Инициализация функции ценности из RM и SFT]]
 
 *Сравнение инициализации функции ценности из SFT-модели и из модели награды.
 Сплошные кривые показывают качество GSM8K по левой шкале, пунктирные — среднее
@@ -1096,7 +1302,7 @@ CC BY 4.0. Оригинал без изменений.*
 В другой абляции к проверяемой награде добавляли оценки RM. Это отдельное
 изменение: начальные веса функции ценности из RM использовали в обоих случаях.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-2026-10-24/tulu-rlvr-reward-mixing.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-2026-10-24/tulu-rlvr-reward-mixing.png|Проверяемая награда отдельно и вместе с оценками RM]]
 
 *Треугольники — только проверяемая награда; квадраты и ромбы — добавление
 оценки RM. Сплошные линии и левая шкала показывают GSM8K, пунктир и правая
@@ -1144,6 +1350,32 @@ CC BY 4.0. Оригинал без изменений.*
 исходные веса, распределение запросов, версия проверяющей программы, алгоритм
 оптимизации и набор отложенных оценок. Совпадение одного названия RLVR не
 делает эксперименты сопоставимыми.
+
+<a id="rlvr-rollout-learner-workers"></a>
+## Rollout workers and learner workers
+
+Tülu 3 separates generation from parameter updates. Rollout workers run a
+policy copy with vLLM and PagedAttention; learner workers update the policy
+and value models. The reference policy provides the KL comparison and is
+not trained. ZeRO Stage 3 partitions training states so that the models fit
+across devices.
+
+With a synchronous schedule, generation waits while the learner updates,
+then the learner waits for fresh responses. Dedicated worker pools can
+overlap these phases: while one batch is being consumed, rollout workers
+prepare another. This improves utilization without making the two phases
+equally fast. Queued responses may come from older policy weights.
+
+The paper uses the second-latest inference batch to control this lag.
+A bounded lag does not guarantee on-policy data. Their sampling-policy
+revision and log probabilities must remain attached to them; replacing
+those probabilities with scores from the updated learner changes the
+PPO ratio. The [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#offpolicy-ratios|next chapter’s ratio analysis]]
+explains this distinction.
+
+These are the implementation choices in
+[Tülu 3, §6.3](https://arxiv.org/html/2411.15124v5#S6.SS3), not requirements
+of every RLVR algorithm.
 
 <a id="rlvr-failures"></a>
 

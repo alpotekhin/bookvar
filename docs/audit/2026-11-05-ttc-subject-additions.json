@@ -1,0 +1,378 @@
+{
+  "date": "2026-11-05",
+  "status": "source-runtime-publication-verified-reader-visual-pending",
+  "scope": "Read the complete1850-line canonical TTC input. Expand the subject index from2 to36 explanations in both locales; add precise figure alt text without altering source bytes. Preserve source-native English and all reasoning, examples, formulas and captions. No new translation or new infographic.",
+  "files": [
+    {
+      "source": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+      "before_sha256": "0828f31f6c72d7d7f37692d171e1a9214f72865e9d0e8bb02420cf399687af03",
+      "after_sha256": "1dad000d5064bf360091ca3f41d5b2a8b37d5024aa823ace5c2193df1e6e25c6",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-30\n",
+          "new": "last_updated: 2026-11-05\n"
+        },
+        {
+          "old": "reference_terms:\n  - label: Tree of Thoughts — поиск по промежуточным решениям\n    label_en: Tree of Thoughts — search over partial solutions\n    anchor: tree-of-thoughts\n  - label: Coconut — непрерывные скрытые состояния\n    label_en: Coconut — continuous hidden-state feedback\n    anchor: coconut-continuous-thought\n",
+          "new": "reference_terms:\n  - label: \"Полная стоимость генерации, проверки и инструментов\"\n    label_en: \"Generation, scoring and tool cost\"\n    anchor: ttc-budget\n  - label: \"Генератор и выбор ответа\"\n    label_en: \"Proposal distribution and answer selection\"\n    anchor: ttc-proposal-selection\n  - label: \"Chain-of-thought: промежуточные шаги в контексте\"\n    label_en: \"Chain-of-thought and intermediate context\"\n    anchor: ttc-chain-of-thought\n  - label: \"Analogical prompting: родственные примеры\"\n    label_en: \"Analogical prompting and generated examples\"\n    anchor: ttc-analogical-prompting\n  - label: \"OPRO: подбор инструкции по оценкам\"\n    label_en: \"OPRO: instruction optimization from scores\"\n    anchor: ttc-opro\n  - label: \"Least-to-most и Self-Discover\"\n    label_en: \"Least-to-most and Self-Discover\"\n    anchor: ttc-decomposition-self-discover\n  - label: \"Pass@k: наличие верного решения среди попыток\"\n    label_en: \"Pass@k: availability of a correct candidate\"\n    anchor: ttc-pass-at-k\n  - label: \"Оценка pass@k по конечному набору\"\n    label_en: \"Finite-sample pass@k estimator\"\n    anchor: ttc-finite-pass-at-k\n  - label: \"Self-consistency: голосование по ответам\"\n    label_en: \"Self-consistency: voting over answers\"\n    anchor: ttc-self-consistency\n  - label: \"Нормализация ответов и ничьи\"\n    label_en: \"Answer normalization and ties\"\n    anchor: ttc-answer-normalization\n  - label: \"Когда голосование повышает точность\"\n    label_en: \"When voting improves accuracy\"\n    anchor: ttc-voting-success\n  - label: \"Universal Self-Consistency для свободного текста\"\n    label_en: \"Universal Self-Consistency for free-form text\"\n    anchor: ttc-universal-self-consistency\n  - label: \"Best-of-N: отбор оценщиком\"\n    label_en: \"Best-of-N: verifier-based selection\"\n    anchor: ttc-best-of-n\n  - label: \"ORM, PRM и взвешенное голосование\"\n    label_en: \"ORM, PRM and weighted voting\"\n    anchor: ttc-prm-weighted-vote\n  - label: \"Исполнимые проверки и фильтрация AlphaCode\"\n    label_en: \"Executable checks and AlphaCode filtering\"\n    anchor: ttc-executable-checks\n  - label: \"Ошибки оценщика при росте числа кандидатов\"\n    label_en: \"Verifier errors as the candidate set grows\"\n    anchor: ttc-selection-overoptimization\n  - label: \"Последовательное исправление ответов\"\n    label_en: \"Sequential answer revisions\"\n    anchor: ttc-revisions\n  - label: \"Самокоррекция и порча верных ответов\"\n    label_en: \"Self-correction and correct-to-wrong transitions\"\n    anchor: ttc-self-correction\n  - label: \"Chain-of-Verification, S2A и Branch-Solve-Merge\"\n    label_en: \"Chain-of-Verification, S2A and Branch-Solve-Merge\"\n    anchor: ttc-cove-s2a-bsm\n  - label: \"Faithfulness записанного рассуждения\"\n    label_en: \"Faithfulness of written reasoning\"\n    anchor: ttc-faithfulness\n  - label: \"s1: budget forcing и учёт токенов\"\n    label_en: \"s1: budget forcing and token accounting\"\n    anchor: ttc-budget-forcing\n  - label: \"Qwen3: thinking mode и внешний бюджет\"\n    label_en: \"Qwen3: thinking mode and external budget\"\n    anchor: ttc-qwen3-thinking-budget\n  - label: \"Tree of Thoughts — поиск по промежуточным решениям\"\n    label_en: \"Tree of Thoughts — search over partial solutions\"\n    anchor: tree-of-thoughts\n  - label: \"ToT: общий отбор следующего уровня\"\n    label_en: \"ToT: global frontier selection\"\n    anchor: ttc-tot-frontier\n  - label: \"ToT: план и связный текст\"\n    label_en: \"ToT: plan and passage selection\"\n    anchor: tot-creative-writing\n  - label: \"ToT: ограничения, отсечение и возврат\"\n    label_en: \"ToT: constraints, pruning and backtracking\"\n    anchor: tot-crossword-dfs\n  - label: \"Что измеряют исходные сравнения ToT\"\n    label_en: \"What the original ToT comparisons measure\"\n    anchor: ttc-tot-comparisons\n  - label: \"Ширина поиска и стоимость lookahead\"\n    label_en: \"Search width and lookahead cost\"\n    anchor: ttc-lookahead\n  - label: \"Grokking и неявное рассуждение\"\n    label_en: \"Grokking and implicit reasoning\"\n    anchor: ttc-grokking\n  - label: \"Coconut — непрерывные скрытые состояния\"\n    label_en: \"Coconut — continuous hidden-state feedback\"\n    anchor: coconut-continuous-thought\n  - label: \"Распределение бюджета вычислений\"\n    label_en: \"Allocating the computation budget\"\n    anchor: ttc-allocation\n  - label: \"Независимые начала и цепочки исправлений\"\n    label_en: \"Independent starts and revision chains\"\n    anchor: ttc-sequential-parallel\n  - label: \"Стоимость оценки сложности вопроса\"\n    label_en: \"Cost of estimating question difficulty\"\n    anchor: ttc-difficulty-estimation\n  - label: \"Бюджеты обучения и применения модели\"\n    label_en: \"Training versus inference budgets\"\n    anchor: ttc-training-inference-budget\n  - label: \"Сравнение качества, стоимости и задержки\"\n    label_en: \"Comparing quality, cost and latency\"\n    anchor: ttc-evaluation\n  - label: \"Пример: генерация, отбор и стоимость\"\n    label_en: \"Worked example: generation, selection and cost\"\n    anchor: ttc-generator-selector-cost\n"
+        },
+        {
+          "old": "## 1. Что именно масштабируется после обучения\n",
+          "new": "<a id=\"ttc-budget\"></a>\n## 1. Что именно масштабируется после обучения\n"
+        },
+        {
+          "old": "## 2. Две части любого метода: предложить и выбрать\n",
+          "new": "<a id=\"ttc-proposal-selection\"></a>\n## 2. Две части любого метода: предложить и выбрать\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/test-time-compute/snell-prm-search-methods.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/test-time-compute/snell-prm-search-methods.png|Snell: best-of-N, поиск по промежуточным оценкам и lookahead]]"
+        },
+        {
+          "old": "### Одна траектория: сделать ход рассуждения явным\n",
+          "new": "<a id=\"ttc-chain-of-thought\"></a>\n### Одна траектория: сделать ход рассуждения явным\n"
+        },
+        {
+          "old": "### Сначала построить подходящие примеры\n",
+          "new": "<a id=\"ttc-analogical-prompting\"></a>\n### Сначала построить подходящие примеры\n"
+        },
+        {
+          "old": "### Оптимизация инструкции по истории оценок\n",
+          "new": "<a id=\"ttc-opro\"></a>\n### Оптимизация инструкции по истории оценок\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/opro-loop.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/opro-loop.png|OPRO: предложение инструкции, измерение качества и обновление истории]]"
+        },
+        {
+          "old": "### Декомпозиция и выбор структуры решения\n",
+          "new": "<a id=\"ttc-decomposition-self-discover\"></a>\n### Декомпозиция и выбор структуры решения\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/self-discover-stages.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/self-discover-stages.png|Self-Discover: построение общей структуры и решение отдельной задачи]]"
+        },
+        {
+          "old": "## 3. Независимые попытки и pass@k\n",
+          "new": "<a id=\"ttc-pass-at-k\"></a>\n## 3. Независимые попытки и pass@k\n"
+        },
+        {
+          "old": "Есть и другая ловушка: вероятность успеха различается между задачами.\n",
+          "new": "Вероятность успеха различается между задачами.\n"
+        },
+        {
+          "old": "### Оценка по конечному набору ответов\n",
+          "new": "<a id=\"ttc-finite-pass-at-k\"></a>\n### Оценка по конечному набору ответов\n"
+        },
+        {
+          "old": "## 4. Self-consistency\n",
+          "new": "<a id=\"ttc-self-consistency\"></a>\n## 4. Self-consistency\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/self-consistency.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/self-consistency.png|Self-consistency: разные цепочки рассуждений и голосование по финальному ответу]]"
+        },
+        {
+          "old": "### Нормализация и ничьи\n",
+          "new": "<a id=\"ttc-answer-normalization\"></a>\n### Нормализация и ничьи\n"
+        },
+        {
+          "old": "### Когда голосование улучшает результат\n",
+          "new": "<a id=\"ttc-voting-success\"></a>\n### Когда голосование улучшает результат\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p42-sample-scaling.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m01-p42-sample-scaling.png|Self-consistency: точность голосования при увеличении числа выборок]]"
+        },
+        {
+          "old": "### Когда финальный ответ нельзя свести к одному числу\n",
+          "new": "<a id=\"ttc-universal-self-consistency\"></a>\n### Когда финальный ответ нельзя свести к одному числу\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/test-time-compute-2026-10-25/usc-workflow.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/test-time-compute-2026-10-25/usc-workflow.png|Universal Self-Consistency: генерация кандидатов и выбор одного ответа моделью]]"
+        },
+        {
+          "old": "## 5. Best-of-N: генератор и проверяющая модель\n",
+          "new": "<a id=\"ttc-best-of-n\"></a>\n## 5. Best-of-N: генератор и проверяющая модель\n"
+        },
+        {
+          "old": "### Оценка результата и оценка промежуточного шага\n",
+          "new": "<a id=\"ttc-prm-weighted-vote\"></a>\n### Оценка результата и оценка промежуточного шага\n"
+        },
+        {
+          "old": "### Когда ответ можно исполнить или проверить\n",
+          "new": "<a id=\"ttc-executable-checks\"></a>\n### Когда ответ можно исполнить или проверить\n"
+        },
+        {
+          "old": "### Почему больше кандидатов иногда ухудшает отбор\n",
+          "new": "<a id=\"ttc-selection-overoptimization\"></a>\n### Почему больше кандидатов иногда ухудшает отбор\n"
+        },
+        {
+          "old": "## 6. Длинное рассуждение и последовательное исправление\n",
+          "new": "<a id=\"ttc-revisions\"></a>\n## 6. Длинное рассуждение и последовательное исправление\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/snell-revisions-parallel.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/snell-revisions-parallel.png|Snell: независимые попытки, последовательные исправления и их сочетание]]"
+        },
+        {
+          "old": "### Почему самопроверка может испортить ответ\n",
+          "new": "<a id=\"ttc-self-correction\"></a>\n### Почему самопроверка может испортить ответ\n"
+        },
+        {
+          "old": "### Перепроверка, деконтекстуализация и ветвление\n",
+          "new": "<a id=\"ttc-cove-s2a-bsm\"></a>\n### Перепроверка, деконтекстуализация и ветвление\n"
+        },
+        {
+          "old": "### Можно ли доверять записанному рассуждению\n",
+          "new": "<a id=\"ttc-faithfulness\"></a>\n### Можно ли доверять записанному рассуждению\n"
+        },
+        {
+          "old": "### Budget forcing в s1: продолжить мысль или перейти к ответу\n",
+          "new": "<a id=\"ttc-budget-forcing\"></a>\n### Budget forcing в s1: продолжить мысль или перейти к ответу\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/s1-budget-forcing.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/s1-budget-forcing.png|s1: продолжение рассуждения строкой Wait и исправление подсчёта букв]]"
+        },
+        {
+          "old": "### Thinking mode и бюджет в исходном Qwen3\n",
+          "new": "<a id=\"ttc-qwen3-thinking-budget\"></a>\n### Thinking mode и бюджет в исходном Qwen3\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/tot-search.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/tot-search.png|Tree of Thoughts: одна цепочка, независимые цепочки и поиск с промежуточным отбором]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/tot-game24.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/tot-game24.png|Tree of Thoughts: предложение и оценивание операций в Game of 24]]"
+        },
+        {
+          "old": "### Как общий предел ширины меняет следующий уровень\n",
+          "new": "<a id=\"ttc-tot-frontier\"></a>\n### Как общий предел ширины меняет следующий уровень\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-creative-search.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-creative-search.png|Tree of Thoughts: сравнение планов перед генерацией связного текста]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-creative-results.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-creative-results.png|Tree of Thoughts: оценки связности и человеческие предпочтения в исходном опыте]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-crossword-dfs.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-crossword-dfs.png|Tree of Thoughts: очередь действий, отсечение и возврат при решении кроссворда]]"
+        },
+        {
+          "old": "### What the original comparisons measure\n",
+          "new": "<a id=\"ttc-tot-comparisons\"></a>\n### What the original comparisons measure\n"
+        },
+        {
+          "old": "### Ширина поиска, пробные продолжения и цена оценки\n",
+          "new": "<a id=\"ttc-lookahead\"></a>\n### Ширина поиска, пробные продолжения и цена оценки\n"
+        },
+        {
+          "old": "### Неявное рассуждение и grokking\n",
+          "new": "<a id=\"ttc-grokking\"></a>\n### Неявное рассуждение и grokking\n"
+        },
+        {
+          "old": "## 8. Как распределять FLOP-бюджет между размером модели и числом попыток\n",
+          "new": "<a id=\"ttc-allocation\"></a>\n## 8. Как распределять FLOP-бюджет между размером модели и числом попыток\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/snell-budget-difficulty.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ttc-review-2026-09/snell-budget-difficulty.png|Snell: точность поиска при разных бюджетах и сложности задач]]"
+        },
+        {
+          "old": "### Сколько независимых начал оставить для исправления\n",
+          "new": "<a id=\"ttc-sequential-parallel\"></a>\n### Сколько независимых начал оставить для исправления\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/test-time-compute-2026-10-25/snell-sequential-parallel-ratio.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/test-time-compute-2026-10-25/snell-sequential-parallel-ratio.png|Snell: соотношение последовательных исправлений и независимых цепочек]]"
+        },
+        {
+          "old": "### Откуда системе знать сложность нового вопроса\n",
+          "new": "<a id=\"ttc-difficulty-estimation\"></a>\n### Откуда системе знать сложность нового вопроса\n"
+        },
+        {
+          "old": "### Меньшая модель с поиском или большая без поиска\n",
+          "new": "<a id=\"ttc-training-inference-budget\"></a>\n### Меньшая модель с поиском или большая без поиска\n"
+        },
+        {
+          "old": "## 9. Как сравнивать методы\n",
+          "new": "<a id=\"ttc-evaluation\"></a>\n## 9. Как сравнивать методы\n"
+        },
+        {
+          "old": "## 11. Пример: отделить генерацию, отбор и стоимость\n",
+          "new": "<a id=\"ttc-generator-selector-cost\"></a>\n## 11. Пример: отделить генерацию, отбор и стоимость\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "5d2808867c3e07b1cd277a604a6c35d02d5f94f3115fd572d0027da325bcd345",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute|Вычисления во время ответа]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#tree-of-thoughts|Tree of Thoughts — поиск по промежуточным решениям]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#coconut-continuous-thought|Coconut — непрерывные скрытые состояния]]\n",
+          "new": "- [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute|Вычисления во время ответа]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-budget|Полная стоимость генерации, проверки и инструментов]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-proposal-selection|Генератор и выбор ответа]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-chain-of-thought|Chain-of-thought: промежуточные шаги в контексте]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-analogical-prompting|Analogical prompting: родственные примеры]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-opro|OPRO: подбор инструкции по оценкам]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-decomposition-self-discover|Least-to-most и Self-Discover]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-pass-at-k|Pass@k: наличие верного решения среди попыток]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-finite-pass-at-k|Оценка pass@k по конечному набору]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-self-consistency|Self-consistency: голосование по ответам]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-answer-normalization|Нормализация ответов и ничьи]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-voting-success|Когда голосование повышает точность]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-universal-self-consistency|Universal Self-Consistency для свободного текста]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-best-of-n|Best-of-N: отбор оценщиком]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-prm-weighted-vote|ORM, PRM и взвешенное голосование]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-executable-checks|Исполнимые проверки и фильтрация AlphaCode]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-selection-overoptimization|Ошибки оценщика при росте числа кандидатов]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-revisions|Последовательное исправление ответов]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-self-correction|Самокоррекция и порча верных ответов]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-cove-s2a-bsm|Chain-of-Verification, S2A и Branch-Solve-Merge]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-faithfulness|Faithfulness записанного рассуждения]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-budget-forcing|s1: budget forcing и учёт токенов]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-qwen3-thinking-budget|Qwen3: thinking mode и внешний бюджет]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#tree-of-thoughts|Tree of Thoughts — поиск по промежуточным решениям]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-tot-frontier|ToT: общий отбор следующего уровня]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#tot-creative-writing|ToT: план и связный текст]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#tot-crossword-dfs|ToT: ограничения, отсечение и возврат]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-tot-comparisons|Что измеряют исходные сравнения ToT]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-lookahead|Ширина поиска и стоимость lookahead]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-grokking|Grokking и неявное рассуждение]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#coconut-continuous-thought|Coconut — непрерывные скрытые состояния]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-allocation|Распределение бюджета вычислений]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-sequential-parallel|Независимые начала и цепочки исправлений]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-difficulty-estimation|Стоимость оценки сложности вопроса]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-training-inference-budget|Бюджеты обучения и применения модели]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-evaluation|Сравнение качества, стоимости и задержки]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-generator-selector-cost|Пример: генерация, отбор и стоимость]]\n"
+        }
+      ],
+      "after_sha256": "0de7613c4b98716fef3ae70e5f7a1bbe4151be91d5db9567cd52cdcad2ab13b1"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "e7c3f3ea5ab229cd47d9297a60f80f76056df04c634eed80d8fd87122d8c4355",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute|Test-time compute]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#tree-of-thoughts|Tree of Thoughts — search over partial solutions]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#coconut-continuous-thought|Coconut — continuous hidden-state feedback]]\n",
+          "new": "- [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute|Test-time compute]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-budget|Generation, scoring and tool cost]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-proposal-selection|Proposal distribution and answer selection]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-chain-of-thought|Chain-of-thought and intermediate context]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-analogical-prompting|Analogical prompting and generated examples]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-opro|OPRO: instruction optimization from scores]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-decomposition-self-discover|Least-to-most and Self-Discover]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-pass-at-k|Pass@k: availability of a correct candidate]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-finite-pass-at-k|Finite-sample pass@k estimator]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-self-consistency|Self-consistency: voting over answers]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-answer-normalization|Answer normalization and ties]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-voting-success|When voting improves accuracy]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-universal-self-consistency|Universal Self-Consistency for free-form text]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-best-of-n|Best-of-N: verifier-based selection]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-prm-weighted-vote|ORM, PRM and weighted voting]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-executable-checks|Executable checks and AlphaCode filtering]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-selection-overoptimization|Verifier errors as the candidate set grows]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-revisions|Sequential answer revisions]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-self-correction|Self-correction and correct-to-wrong transitions]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-cove-s2a-bsm|Chain-of-Verification, S2A and Branch-Solve-Merge]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-faithfulness|Faithfulness of written reasoning]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-budget-forcing|s1: budget forcing and token accounting]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-qwen3-thinking-budget|Qwen3: thinking mode and external budget]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#tree-of-thoughts|Tree of Thoughts — search over partial solutions]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-tot-frontier|ToT: global frontier selection]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#tot-creative-writing|ToT: plan and passage selection]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#tot-crossword-dfs|ToT: constraints, pruning and backtracking]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-tot-comparisons|What the original ToT comparisons measure]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-lookahead|Search width and lookahead cost]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-grokking|Grokking and implicit reasoning]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#coconut-continuous-thought|Coconut — continuous hidden-state feedback]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-allocation|Allocating the computation budget]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-sequential-parallel|Independent starts and revision chains]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-difficulty-estimation|Cost of estimating question difficulty]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-training-inference-budget|Training versus inference budgets]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-evaluation|Comparing quality, cost and latency]]\n  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-generator-selector-cost|Worked example: generation, selection and cost]]\n"
+        }
+      ],
+      "after_sha256": "ece543d079cc80b824c27942f399578df835a1f71ec178bc08b23b1bf0e2b310"
+    }
+  ],
+  "explanationReview": {
+    "input": {
+      "lines": 1850,
+      "sha256": "0828f31f6c72d7d7f37692d171e1a9214f72865e9d0e8bb02420cf399687af03",
+      "ranges": [
+        "1-340",
+        "341-650",
+        "651-970",
+        "971-1280",
+        "1281-1580",
+        "1581-1850"
+      ]
+    },
+    "finalRead": {
+      "lines": 1984,
+      "sha256": "1dad000d5064bf360091ca3f41d5b2a8b37d5024aa823ace5c2193df1e6e25c6",
+      "ranges": [
+        "1-220",
+        "221-560",
+        "561-905",
+        "906-1250",
+        "1251-1610",
+        "1611-1984"
+      ],
+      "scope": "Whole final text read after all chapter edits; no later owner changes."
+    },
+    "sourceReuse": [
+      {
+        "evidence": "docs/audit/2026-10-25-test-time-compute.md",
+        "scope": "Existing Berkeley meeting1, SC/USC, Snell, CoVe/S2A/BSM, corrections/faithfulness, s1/Qwen3 and grokking source comparisons; not claimed as a fresh whole-source/course reread."
+      },
+      {
+        "evidence": "docs/audit/2026-10-29-coconut-additions.json",
+        "scope": "Exact Coconut addition remains unchanged apart from new subject indexing/alt descriptions elsewhere."
+      },
+      {
+        "evidence": "docs/audit/2026-10-30-tot-reconciliation-verification.json",
+        "scope": "Exact three-task ToT explanation and original captions retained; historical desktop/mobile evidence is not current UI acceptance."
+      }
+    ],
+    "freshSourceChecks": [
+      {
+        "url": "https://arxiv.org/html/2305.10601v2#S3",
+        "scope": "Section3 incl.Algorithms1/2 and4.1 setup/table: generation/value/vote choices, global frontier width, DFS and separation of oracle coverage from selection."
+      },
+      {
+        "url": "https://arxiv.org/html/2408.03314v1#S5.SS1",
+        "scope": "Sections5.1-5.2: rollout value estimates, final-step PRM score, sum across identical answers, N/M retained prefixes and40 expansion rounds."
+      },
+      {
+        "url": "https://arxiv.org/html/2412.06769v3#S3",
+        "scope": "Method overview/training/inference: previous hidden-state feedback, final normalization, curriculum, masked token loss,n+1 forwards and fixed latent length."
+      }
+    ],
+    "preservation": "Seven Python fences,thirteen display equations,sixteen original figure paths/bytes and captions,all source-native English passages,compatibility anchors and fifteen source units preserved. Exact inverse and source-byte tests pass.",
+    "style": "Applied no-ai-slop with academic qualifications. Removed one faux-reveal lead before the existing task-heterogeneity example; no compressed replacement or synthetic introduction.",
+    "subjectsPerLocale": 36,
+    "readerVisual": {
+      "status": "pending",
+      "reason": "Current browser-control tool unavailable. Historical screenshots and file/hash checks are not current rendered desktop/mobile and navigation QA."
+    }
+  },
+  "checks": {
+    "scoped": {
+      "exit": 0,
+      "files": 4,
+      "tests": 12,
+      "log": "/var/tmp/bookvar-ttc-subject-tests-final-20261105.log",
+      "scope": "Runs all seven actual chapter programs; independent probability/feedback controls and native ToT replay. Two receipt tests precede registration and will be rerun after it."
+    },
+    "firstRun": {
+      "status": "resolved",
+      "issues": [
+        "New caption-preservation regex mistook a bold paragraph for a caption; corrected to single-asterisk paragraphs and asserted all16 captions.",
+        "The native ToT replay lacked Pillow in the offline environment. Installed Pillow13.0.0 from official PyPI,4.6MiB; rerun with UV_DEFAULT_INDEX=https://pypi.org/simple passed. No source assertion removed."
+      ]
+    },
+    "build": {
+      "exit": 0,
+      "pages": 2011,
+      "pagefindFiles": 2015,
+      "seconds": 30.02,
+      "log": "/var/tmp/bookvar-ttc-build-20261105.log"
+    },
+    "html": {
+      "exit": 0,
+      "tests": 219,
+      "log": "/var/tmp/bookvar-ttc-test-output-20261105.log"
+    },
+    "links": {
+      "exit": 0,
+      "brokenInternal": 0,
+      "log": "/var/tmp/bookvar-ttc-check-links-20261105.log"
+    },
+    "size": {
+      "exit": 0,
+      "bytes": 857468155,
+      "files": 5632,
+      "limit": 1000000000,
+      "headroom": 142531845
+    },
+    "topics": {
+      "exit": 0,
+      "owners": 153,
+      "log": "/var/tmp/bookvar-ttc-check-topics-20261105.log"
+    },
+    "receipt": {
+      "exit": 0,
+      "files": 2,
+      "tests": 6,
+      "currentHashMatches": 117,
+      "unreadOwnersInRoutePass": 36,
+      "log": "/var/tmp/bookvar-ttc-receipt-final-20261105.log",
+      "scope": "Four subject-preservation tests and two current-read receipt tests rerun after registration; overlaps the first12, not six additional unique tests."
+    },
+    "preview": {
+      "status": 200,
+      "routes": [
+        "textbook/reasoning/test-time-compute/",
+        "en/textbook/reasoning/test-time-compute/",
+        "reference/",
+        "en/reference/"
+      ],
+      "scope": "Current built HTML served by local4330 preview. New budget anchors and both reference links are present. Not visual inspection or browser-navigation proof."
+    },
+    "whitespace": {
+      "trackedExit": 0,
+      "scope": "Only owner,indexes,baseline helpers and root audit checked."
+    }
+  },
+  "remaining": [
+    "Current TTC and distillation desktop/mobile figure-viewer and RU/EN reader navigation checks are still pending.",
+    "Do not count the whole-owner read as chapter acceptance or full-course transfer.",
+    "Continue synthetic-data, deployment/evaluation, retrieval/RAG, multimodal, agent and recommender owners.",
+    "Resolve recorded older figure/permission gaps and public-checkout source-fixture dependencies; complete Pages-base/release validation before the authorized dev/Pages update."
+  ],
+  "publication": {
+    "stage": false,
+    "commit": false,
+    "push": false,
+    "deploy": false
+  }
+}

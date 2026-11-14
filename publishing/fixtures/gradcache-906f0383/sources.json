@@ -1,0 +1,23 @@
+{
+  "upstream": "https://github.com/luyug/GradCache",
+  "commit": "906f03835fbc183132a9db32612a9e8f180ca3b4",
+  "license": "Apache-2.0",
+  "last_verified": "2026-11-06",
+  "files": [
+    {
+      "file": "grad_cache.py",
+      "sha256": "0f89cb2acb22b071b1d7b7f14a1937917801f53fc2684327b078f8a8f4eaf45d",
+      "url": "https://raw.githubusercontent.com/luyug/GradCache/906f03835fbc183132a9db32612a9e8f180ca3b4/src/grad_cache/grad_cache.py"
+    },
+    {
+      "file": "context_managers.py",
+      "sha256": "23cf8db78a5cff485b2ecef3cb670d0df7591618d9d6005902e466536b88788f",
+      "url": "https://raw.githubusercontent.com/luyug/GradCache/906f03835fbc183132a9db32612a9e8f180ca3b4/src/grad_cache/context_managers.py"
+    },
+    {
+      "file": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "url": "https://raw.githubusercontent.com/luyug/GradCache/906f03835fbc183132a9db32612a9e8f180ca3b4/LICENSE"
+    }
+  ]
+}

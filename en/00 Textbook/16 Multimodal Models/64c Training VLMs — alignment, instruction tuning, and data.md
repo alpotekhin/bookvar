@@ -4,10 +4,10 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "12e614a8be23e31ed608433c64be1f4b049c39af27cb9d4092080576a902921d"
-translation_reviewed: "2026-10-29"
+canonical_revision: "193ef8aa5367ea1fdb233a7968a9b5216b55c7aa639589bd2db3dc4303dbef2e"
+translation_reviewed: "2026-11-13"
 translation_of: "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md"
-last_updated: 2026-10-29
+last_updated: 2026-11-13
 last_verified: 2026-09-15
 primary_sources:
   - https://arxiv.org/abs/2103.00020
@@ -17,7 +17,10 @@ primary_sources:
   - https://arxiv.org/abs/2308.12966
   - https://arxiv.org/abs/2511.21631
   - https://arxiv.org/abs/2412.05271
+  - https://arxiv.org/abs/2504.10479v1
+  - https://arxiv.org/abs/2508.18265v1
   - https://arxiv.org/abs/2409.17146
+  - https://proceedings.mlr.press/v235/karamcheti24a.html
   - https://cs336.stanford.edu/
 ---
 
@@ -95,15 +98,120 @@ This tests one conditional token and a linear output head, not visual color reco
 
 Connector-only training leaves the original vision and language weights unchanged and avoids their weight gradients and optimizer state. It can still require LLM activations for input gradients. If the encoder output lacks the information needed for OCR, the projector cannot invent it; unfreezing vision allows those features to change. Changing the LLM can adapt how it uses visual inputs, but may degrade previous abilities. Retention must be measured on text-only and other preserved tasks, not inferred from the freeze schedule.
 
-InternVL makes the schedule explicit: warm up the MLP with frozen backbones, optionally adapt the ViT, then perform full-model instruction tuning.
+<a id="vlm-internvl25-stages"></a>
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure4-training-pipeline.png]]
+### InternVL 2.5: transferring the vision encoder
 
-*Figure 4 from Zhe Chen et al., [InternVL 2.5](https://arxiv.org/abs/2412.05271), PDF p. 6. Panel (a) shows the trainable components; panel (b) transfers an adapted InternViT to a larger LLM and trains a new projector.*
+[InternVL 2.5, §3.2 and Table 3](https://arxiv.org/html/2412.05271v1#S3.SS2)
+uses the same pre-training mixture in stages 1 and 1.5. What changes
+is which weights the next-token prediction loss can update. Stage 2
+switches to curated multimodal instructions.
 
-Stage 1.5 trains vision and projector while freezing the LLM; its optional use concerns reuse of an already adapted vision encoder, not arbitrary removal of perception training. Moving that encoder from a smaller to a larger language model requires realigning the connector to the new width and input space.
+| Stage | Updated | Frozen |
+| --- | --- | --- |
+| 1. Warmup | MLP | ViT, LLM |
+| 1.5. ViT | ViT, MLP | LLM |
+| 2. SFT | ViT, MLP, LLM | — |
 
-Molmo makes a different choice: [§4](https://arxiv.org/abs/2409.17146v2) omits a connector-only warmup and trains all components directly on PixMo-Cap. The connector uses learning rate $2\cdot10^{-4}$ with 200 warmup steps, the ViT $6\cdot10^{-6}$ and LLM $2\cdot10^{-5}$ with 2000 warmup steps each. InternVL 2.5 instead uses one learning rate across the model during full instruction tuning. Neither recipe can be reconstructed from the general advice to update pretrained components more slowly.
+Take the car-color question again. In stage 1 the error on the answer
+backpropagates through the LLM to the projector: it can change the
+vectors the LLM receives, but not the features computed by the ViT.
+In stage 1.5, the ViT features can change too. The authors used that
+stage to adapt vision to domains such as multilingual OCR and charts
+without updating the language model.
+
+InternVL2.5-26B includes stage 1.5; 78B skips it. In
+[§3.3](https://arxiv.org/html/2412.05271v1#S3.SS3), the authors describe
+the transfer with 20B and 72B language models: adapt InternViT with the
+smaller LLM, then reuse those vision weights with the larger one. The
+new pair still needs stage 1 to fit the projector to the new LLM's
+input space. There is no separate encoder adaptation stage, but its
+weights are trainable again in stage 2. In
+[Zhe Chen et al., original Figure 4(b)](https://arxiv.org/pdf/2412.05271v1#page=6),
+the `shared weights` arrow starts at the ViT, not the projector.
+
+Molmo [§4](https://arxiv.org/abs/2409.17146v2) skips connector-only
+warmup and trains all components directly on PixMo-Cap. The connector
+uses learning rate $2\cdot10^{-4}$ with 200 warmup steps, the ViT
+$6\cdot10^{-6}$ and the LLM $2\cdot10^{-5}$ with 2000 warmup steps
+each. InternVL 2.5 instead uses one learning rate across the model in
+stage 2. The freeze schedule and the learning rates are separate choices.
+
+<a id="vlm-internvl-native-training"></a>
+
+### InternVL 3 and 3.5: joint updates from the first stage
+
+[InternVL 3, §2.2](https://arxiv.org/html/2504.10479v1#S2.SS2)
+updates the ViT, projector and LLM together from the start of
+multimodal pre-training. Its mixture includes both text-only and
+multimodal examples. [InternVL 3.5, §§2.1–2.2](https://arxiv.org/html/2508.18265v1#S2.SS2)
+keeps this schedule. Both the vision encoder and language model
+start from pretrained weights. Here `native` describes when
+joint training starts, not random initialization.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-training-2026-11-13/internvl35-training-process.png|Left to right: joint pre-training, SFT, and Cascade RL. The Flash variant adds ViCO to support different levels of visual compression.]]
+
+*Weiyun Wang et al., [InternVL3.5, Figure 3](https://arxiv.org/html/2508.18265v1#S2.F3),
+[original PNG](https://arxiv.org/html/2508.18265v1/training_process.png),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Unmodified.*
+
+In the first block, the error on the car-color answer can already
+update all three components. Visual vectors still act as inputs.
+The model predicts text and, in dialogue examples, loss is applied
+to response tokens. In the second block, SFT keeps that objective
+and switches to curated conversations. The labels `250B tokens`
+and `130B tokens` count tokens at those two stages; Cascade RL's
+`270K samples` counts examples. The final ViCO block is for
+[[en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions#vlm-internvl-resolution-router|the Flash variant with a resolution router]].
+
+In the [InternVL 3 ablation, §3.14 and Figure 3](https://arxiv.org/html/2504.10479v1#S3.SS14),
+the authors kept the architecture, initialization, and training data
+of InternVL2-8B fixed and replaced MLP-only warmup with joint
+pre-training. On most of the benchmarks shown, pre-training alone
+gave results comparable to the full two-stage baseline. Instruction
+tuning improved them further. The ablation compares schedules
+for InternVL2-8B, not the performance of releases 2.5 and 3.5.
+
+<a id="vlm-training-freeze"></a>
+
+### What changed with the same starting checkpoints
+
+In [Prismatic VLMs, §4.1](https://proceedings.mlr.press/v235/karamcheti24a.html), the authors reproduce
+the two-stage LLaVA-1.5 recipe and then remove the projector-only stage.
+The single-stage model still trains the projector, now together with
+the LLM on instruction data. The ViT stays frozen.
+
+![[00 Учебник/Assets/Figures/curated/vlm-training-2026-11-09/prismatic-figure4.png|Two charts compare the published, reproduced, and single-stage LLaVA results for 7B and 13B. The panel on the right gives training times on eight A100s.]]
+
+*Siddharth Karamcheti et al., [Prismatic VLMs, Figure 4, p. 5](https://raw.githubusercontent.com/mlresearch/v235/main/assets/karamcheti24a/karamcheti24a.pdf#page=5),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Compare orange with green on a given axis: that matches the single-stage
+run against the reproduced two-stage run. The gray part of each bar
+on the right is the time spent on the removed stage.*
+
+For 7B, skipping the first stage reduces time on eight A100s from
+$2.72+8.56=11.28$ to 8.56 hours, about 24%. In Table 2,
+VizWiz rises from 51.26 to 54.33; TextVQA without OCR prompts falls
+from 46.44 to 44.45. The authors aggregate normalized scores over 12
+benchmarks, not the area of the radar plot.
+
+In a separate ablation they freeze the ViT or train it alongside
+the projector and LLM. For single-stage training, unfreezing takes
+RefCOCO accuracy from 64.08 to 42.56 under the protocol's 0.5 IoU
+threshold. VizWiz changes from 54.33 to 55.26 (Tables 2–3).
+The two tasks move in opposite directions.
+
+![[00 Учебник/Assets/Figures/curated/vlm-training-2026-11-09/prismatic-figure5.png|The orange line shows a frozen ViT. The dashed gray line shows a fine-tuned ViT under the same single-stage schedule. The largest differences are on localization tasks.]]
+
+*Karamcheti et al., [Figure 5, p. 5](https://raw.githubusercontent.com/mlresearch/v235/main/assets/karamcheti24a/karamcheti24a.pdf#page=5),
+CC BY 4.0. To compare freezing and unfreezing within one schedule,
+use the orange and dashed curves.*
+
+These results hold for the data, checkpoints and settings in Prismatic.
+The InternVL and Molmo recipes change both data and schedules, so
+they are not counterexamples to this comparison.
+
+<a id="vlm-training-targets"></a>
 
 ## Loss masks are not attention masks
 
@@ -150,6 +258,8 @@ assert abs(loss.item() - 1.21300757) < 1e-7
 
 Zero gradient on an ignored row's logits does not imply zero gradient on its input embedding in a Transformer: later answers can use that input through attention. Original LLaVA supervises answer terminators. Qwen-VL §3.3 supervises answers and designated special tokens, but not role names or user questions. The chat template determines exact boundaries; “assistant-only loss” does not specify them completely.
 
+<a id="vlm-training-packing"></a>
+
 ### Independent packed samples and shared-image branches
 
 For independent sequences of lengths five and four, packed boundaries are `[0,5,9]` and positions restart at each sequence. A plain causal mask would let the second dialogue read the first one's answer, so attention must also respect sample identity. Image indexing, target boundaries, and loss denominators must follow the same separation.
@@ -185,11 +295,10 @@ The second mask models Molmo's shared-image prefix with independent annotations.
 
 Web captions name salient objects but omit detail. Dense captions cover background, attributes, and relations. OCR and document data require literal accuracy and layout. Grounding pairs language with points or boxes. Interleaved documents teach correspondence across several images and text spans.
 
-Molmo’s PixMo collection connects separate human-collected datasets to dense captioning, question answering, pointing, and grounded counting.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/molmo-figure1-data-and-capabilities.png]]
-
-*Figure 1 from Deitke et al., [Molmo and PixMo](https://arxiv.org/abs/2409.17146), PDF p. 2. Different data collections support different model capabilities.*
+[Figure 1 of Molmo and PixMo](https://arxiv.org/pdf/2409.17146v2#page=2)
+shows how annotations are obtained on the left and the resulting tasks on
+the right. A person supplies the coordinates in PixMo-Points; in
+PixMo-Clocks, the time is set before the clock face is drawn.
 
 PixMo's dense descriptions were collected by asking people to speak about an image and transcribing that speech. Point annotations provide a different supervision channel: the output location can be checked, and grounded counting can be audited by inspecting the individual points. The annotation interface therefore shapes what the model learns, not only how quickly examples are collected.
 
@@ -197,13 +306,49 @@ Initially PixMo-Cap requested at least a minute of speech; later collection used
 
 In PixMo-AskModelAnything, a person selected an image and asked a question. A language model received OCR and a detailed caption, proposed an answer, and the person accepted or corrected it against the image. The human saw pixels; the text assistant depended on the supplied evidence. PixMo-Points uses human point annotations. Counting examples list points before the count, allowing inspection of the counted objects, but valid coordinates alone do not prove that every object was found or that none was counted twice.
 
-PixMo-Docs renders generated code into tables and diagrams; that code supplies values and structure for questions. PixMo-Clocks fixes the time when constructing a clock face. PixMo-Count relies on detections, and PixMo-CapQA on captions. The latter annotations inherit the detector's or caption's errors, unlike a generator-defined value. Task/style tags distinguish benchmark-specific short answers from open conversation; otherwise strict extraction format can become an unwanted default for all requests.
+PixMo-Docs renders generated code into tables and diagrams; that code
+supplies values and structure for questions. PixMo-Clocks fixes the time
+when constructing a clock face. PixMo-Count relies on detections, and
+PixMo-CapQA on captions, so their annotations can inherit errors from
+the detector or the caption.
 
-Synthetic data scales strict formats but inherits teacher errors. Provenance matters: a confident wrong OCR label from a proprietary teacher can be distilled into an open-weight student.
+<a id="vlm-pixmo-code-guided"></a>
+
+Code can also supply the geometry of an interface. In the later
+**MolmoPoint-GUISyn** dataset, an LLM writes HTML to imitate an AutoCAD
+window. A browser renders it, and a Playwright script extracts bounding
+boxes for the visible elements. Follow the `Measure` button in the figure:
+its location is already known when the text model writes an instruction
+about what to do with it, such as measuring a length. In the training
+example the VLM receives the image and the instruction, and the center
+of that bounding box is the target point.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-training-2026-11-13/molmopoint-guisyn-figure3.png|An LLM writes HTML for a simulated AutoCAD interface. The browser renders the interface and a script extracts bounding boxes. The Measure, Add Pick Points, and Cancel boxes are paired with natural-language intents.]]
+
+*Christopher Clark et al., [MolmoPoint, Figure 3](https://arxiv.org/html/2603.28069v1#S4.F3),
+[§4.4 and Appendix 10](https://arxiv.org/html/2603.28069v1#S10),
+[original PNG](https://arxiv.org/html/2603.28069v1/MolmoPSyn_overview.png),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Unmodified figure.*
+
+The authors generated 36,000 screenshots and 2 million points, with five
+instructions per element. The script obtains locations without inferring
+them from pixels. It does not check what an instruction means: if two
+buttons can measure a length, a correct bounding-box center still leaves
+the task ambiguous.
+
+Task or style tags distinguish short benchmark answers from open
+conversation; without that distinction, a strict extraction format can
+become the default for all requests.
+
+A confident but wrong OCR label from a proprietary teacher can still
+be distilled into an open-weight student.
 
 ## Instruction and preference tuning
 
-LLaVA used GPT-4 over captions and symbolic descriptions to produce conversations, detailed descriptions, and reasoning prompts. GPT-4 did not inspect the original image, so generated instructions could contain only information already present in those inputs.
+LLaVA used GPT-4 over captions and symbolic descriptions to produce
+conversations, detailed descriptions, and reasoning prompts. Those inputs
+were its only evidence about the image. The teacher could still invent
+details that the captions and boxes did not support.
 
 A description such as “people loading luggage into a black SUV” supports a question about vehicle type, but not its license plate. A plausible plate generated from that description is not verified OCR data. OneVision instead used LLaVA-NeXT-34B for recaptioning and GPT-4V for some data. Pixel access distinguishes those teachers from original LLaVA's text-only teacher, but does not guarantee correctness. Record teacher version, input evidence, and answer-validation procedure.
 
@@ -216,6 +361,8 @@ Check image–question correspondence, source page, object identity, and whether
 Instruction loss is normally applied to assistant tokens, with image and user tokens acting as conditions. Packing and masks must prevent future answers from leaking across examples. Multimodal preference pairs should differ in visual correctness, not merely style; otherwise preference optimization rewards fluent language without better grounding.
 
 Verifiable rewards are useful for points, boxes, OCR, and GUI actions. Open descriptions still require human audits because an automatic judge may reward verbosity while missing a visual error.
+
+<a id="vlm-training-mix"></a>
 
 ## Sampling mixtures changes both learning and cost
 
@@ -275,6 +422,35 @@ assert np.isclose(length_weighted_loss(.5), 4 / 3)
 ```
 
 [`len2weight`](https://github.com/OpenGVLab/InternVL/blob/2410d1dbf208f0e799459aff9376e5747dbf41a2/internvl_chat/internvl/train/internvl_chat_finetune.py#L786-L795) constructs weights, and the [packed collator](https://github.com/OpenGVLab/InternVL/blob/2410d1dbf208f0e799459aff9376e5747dbf41a2/internvl_chat/internvl/train/dataset_packed.py#L517-L545) counts targets within original examples before zeroing ignored weights. Gradient accumulation must aggregate compatible denominators: averaging two already normalized microbatch losses need not equal normalization over all targets in the step. The precise formula here is verified for InternVL; the phrase “square-root reweighting” alone does not establish identical implementation details in Qwen3-VL.
+
+<a id="vlm-training-reduction"></a>
+
+### One optimizer step across several microbatches
+
+Put the four-token and sixteen-token answers in separate microbatches.
+The mean of their local losses is $(2+1)/2=1.5$. To weight all
+supervised tokens equally, add $8+16=24$ first, then divide
+by $4+16=20$, giving 1.2. Splitting the same batch should
+not change the objective.
+
+The mistake can reverse the update. Suppose the average derivatives
+on one parameter are $+1$ and $-0.75$ in the two microbatches.
+Their unweighted mean is $+0.125$. Giving each token the same weight
+yields $(4-12)/20=-0.4$. Under square averaging, the example
+weights are 2 and 4, and the derivative is $(2-3)/6=-1/6$.
+
+Keep the sum of weighted errors $S$ and the sum of target weights $W$.
+Add the numerators across the step and divide by the global $W$.
+If standard DDP averages gradients from $R$ replicas and the trainer
+does not apply additional divisors, scale each replica's numerator
+by $R/W$. This cancels the factor $1/R$ in gradient synchronization.
+Count all microbatches and replicas in $W$ and exclude positions
+without a target. If $W=0$ for the entire step, all replicas skip it.
+
+[The Transformers team's write-up](https://huggingface.co/blog/gradient_accumulation)
+shows the same bug for unweighted causal LM loss: sum losses with
+`ignore_index` and divide by the global target count, rather
+than averaging the local means.
 
 <span id="llava-и-onevision-как-два-конкретных-curriculum"></span>
 
@@ -362,6 +538,27 @@ Post-training then includes SFT, strong-to-weak distillation, and RL. SFT itself
 
 If every car-color question in training has answer “red,” low loss can come from answer frequency without reading the car. Change the image while keeping the question fixed and check whether the answer changes appropriately. A correct answer after replacing the image with an irrelevant one can indicate a text shortcut or leakage.
 
+<a id="vlm-training-image-control"></a>
+
+### Scoring paired image tests
+
+Take four image pairs with the same color question. The car is
+red in the first image of each pair and blue in the second.
+Suppose the model gets the first images right in pairs 1, 2 and 3,
+and the second images right in pairs 2, 3 and 4. It gets six of
+eight images right (75%), but only pairs 2 and 3 have two correct
+answers (50%). A model that always says “red” scores 50% per image
+and 0% per pair.
+
+[MMVP](https://arxiv.org/abs/2401.06209) also credits a pair only
+when both answers are correct. Its images and questions cover
+more differences than this toy color test. For a local test, shuffle
+the choices and check that file names, backgrounds and prompt templates
+do not give away answers. The paired score describes behavior
+on these visual contrasts, not proof of grounding on unrelated tasks.
+
+### A reward for object localization
+
 For a box target $[0,0,2,2]$, the exact box has IoU 1; $[1,0,3,2]$ has IoU $1/3$; a non-overlapping box has IoU 0. An illustrative reward threshold of 0.5 accepts only the first:
 
 ```python
@@ -433,5 +630,7 @@ Save example exposures and consumed tokens, not just downloaded corpus size. Ret
 ## Sources and next chapter
 
 - [Visual Instruction Tuning](https://arxiv.org/abs/2304.08485), [BLIP-2](https://arxiv.org/abs/2301.12597), [InternVL 2.5](https://arxiv.org/abs/2412.05271), and [Molmo and PixMo](https://arxiv.org/abs/2409.17146).
+- Jinguo Zhu et al., [InternVL 3](https://arxiv.org/abs/2504.10479v1), §§2.2 and 3.14;
+  Weiyun Wang et al., [InternVL 3.5](https://arxiv.org/abs/2508.18265v1), §§2.1–2.3.
 - Detailed recipes: [LLaVA §3–4.2](https://arxiv.org/abs/2304.08485v2), [InternVL §3.2–3.4 and §4.2–4.5](https://arxiv.org/abs/2412.05271v1), [Molmo §2–4](https://arxiv.org/abs/2409.17146v2), [OneVision §4–5 and Table 1](https://arxiv.org/abs/2408.03326v1), [Qwen-VL §3.1–3.3](https://arxiv.org/abs/2308.12966v1), [Qwen3-VL §3.1 and §4](https://arxiv.org/abs/2511.21631v1).
 - Previous: [[en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions|Resolution and spatial positions]]. Next: [[en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding|Documents, OCR, and grounding]].

@@ -2,8 +2,8 @@
 title: BPE, WordPiece и Unigram
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-22
-last_verified: 2026-10-22
+last_updated: 2026-11-10
+last_verified: 2026-11-10
 source_unit_id:
   - lecture-01-section-164-tokenization
   - lecture-01-figure-step-167-rendering-1
@@ -26,6 +26,7 @@ primary_sources:
   - https://arxiv.org/abs/1508.07909
   - https://arxiv.org/abs/1808.06226
   - https://aclanthology.org/P18-1007/
+  - https://aclanthology.org/2023.findings-acl.38/
   - https://github.com/google/sentencepiece/blob/v0.2.1/doc/normalization.md
   - https://github.com/openai/gpt-2/blob/e5c5054474f583d6d9499624649353995d63c70a/src/encoder.py
   - https://github.com/openai/gpt-2/blob/e5c5054474f583d6d9499624649353995d63c70a/src/model.py
@@ -148,6 +149,10 @@ aaabdaaabac
 `11 → 9 → 7 → 5`. Правила раскрываются как `Z=aa`, `Y=aaa`, `X=aaab`, поэтому
 декодирование `X d X a c` восстанавливает исходную строку. Ни одна пара не
 выбирается по статистике предыдущего состояния.
+
+В [[02 Areas/ML & DL/06 Практика/01a Обучить BPE на двух строках|интерактивной практике]]
+можно менять строку, шагать по этим объединениям и наблюдать, как те же правила
+действуют на другом тексте. Счётчик пары и число фактических замен показаны отдельно.
 
 С каждым объединением словарь увеличивается на один элемент, а представление
 обучающего текста обычно становится короче. BPE не ищет
@@ -390,6 +395,23 @@ assert decode(encode(text, merges), vocab) == text
 Это пример с заданными правилами, не результат запуска словаря GPT-2.
 Различие двух способов кодирования разбирает также
 [курс Hugging Face, Tokenization algorithm](https://huggingface.co/learn/llm-course/chapter6/5#tokenization-algorithm).
+
+### Из каких байтов собрался токен
+
+В примере Zouhar и соавторов к строке `abaabacbcb` последовательно применяют
+четыре **заданных** правила. Первые два создают `ab` и `cb`, третье склеивает
+`ab + a` в `aba`. Четвёртое объединяет соседние `aba + cb`.
+Для первого `aba` это правило неприменимо: справа стоит другое `aba`,
+а не `cb`. В результате остаются три токена: `aba · abacb · cb`.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bpe-author-2026-11-10/zouhar-bpe-figure1.png|Три дерева объединений BPE: aba, abacb и cb; у среднего корень μ₄]]
+
+*Zouhar et al., [A Formal Perspective on Byte-Pair Encoding, §2.2, рис. 1](https://aclanthology.org/2023.findings-acl.38v1.pdf#page=3).
+Поднимитесь от листьев среднего дерева к корню: $\mu_1$ строит `ab`,
+$\mu_3$ добавляет `a`, а $\mu_4$ присоединяет результат $\mu_2$ (`cb`).
+При декодировании достаточно прочитать листья слева направо. На практике
+декодер может взять уже сохранённые байты по ID, не обходя дерево.
+Оригинал извлечён из PDF без перерисовки; [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
 
 ## 7. WordPiece
 
@@ -800,6 +822,7 @@ Findings of NAACL 2024. Изображение извлечено из стат�
 - [Stanford CS336 Spring 2026 — Lecture 1, pinned source](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_01.py)
 - [Stanford CS336 Spring 2026 — Assignment 1, pinned handout](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf)
 - [Sennrich et al. — Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/abs/1508.07909)
+- [Zouhar et al. — A Formal Perspective on Byte-Pair Encoding, §2.1–2.2](https://aclanthology.org/2023.findings-acl.38/): перекрывающиеся вхождения и деревья объединений.
 - [Kudo — Subword Regularization](https://arxiv.org/abs/1804.10959)
 - [Kudo & Richardson — SentencePiece](https://arxiv.org/abs/1808.06226)
 - [Hugging Face — Summary of tokenization algorithms](https://huggingface.co/docs/transformers/tokenizer_summary)

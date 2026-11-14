@@ -23,7 +23,7 @@ CHAPTER = ROOT / "00 Учебник/12 Post-training и Alignment/01a Fine-tunin
 def main():
     text = CHAPTER.read_text()
     blocks = re.findall(r"^\x60{3}python\n(.*?)^\x60{3}\s*$", text, re.M | re.S)
-    assert len(blocks) == 18, "execute every published Python fence"
+    assert len(blocks) == 19, "execute every published Python fence"
     ns = {}
     with contextlib.redirect_stdout(io.StringIO()):
         for number, block in enumerate(blocks, 1):
@@ -81,6 +81,18 @@ def main():
     assert 2400 // 32 * 3 == 225
     assert math.isclose(ns["scale_bits"], .126953125)
 
+    # The published quantized-base example updates only its LoRA factors.
+    torch.testing.assert_close(ns["q_codes"], ns["q_codes_before"])
+    torch.testing.assert_close(ns["q_base"], torch.diag(torch.tensor([1., 2.], dtype=dtype)))
+    torch.testing.assert_close(ns["q_x"].grad, ns["q_base"].T @ ns["q_initial"].detach())
+    original_gradient = ns["q_original"].T @ (ns["q_original"] @ ns["q_x"].detach())
+    assert not torch.allclose(ns["q_x"].grad, original_gradient)
+    assert not ns["q_base"].requires_grad and not ns["q_scale"].requires_grad
+    assert ns["q_codes"].dtype == torch.int8
+    assert {id(p) for group in ns["q_optimizer"].param_groups for p in group["params"]} == {
+        id(ns["q_a"]), id(ns["q_b"])
+    }
+
     assert math.isclose(ns["failed_loss"].item(), math.log(2))
     assert math.isclose(ns["fitted_loss"].item(), -math.log(.99))
     assert 0 < ns["lower_weight"].grad.item() < 1e-7
@@ -116,6 +128,15 @@ def main():
         "soft_prompt_output": ns["soft_output"].detach().tolist(),
         "prefix_output": ns["prefix_output"].detach().tolist(),
         "adapter_parameters": ns["adapter_parameters"],
+        "quantized_base": {
+            "codes": ns["q_codes"].tolist(),
+            "initial_output": ns["q_initial"].detach().tolist(),
+            "input_gradient": ns["q_x"].grad.tolist(),
+            "initial_loss": ns["q_loss"].item(),
+            "updated_loss": (.5 * ns["quantized_adapter_output"]().square().sum()).item(),
+            "codes_unchanged": torch.equal(ns["q_codes"], ns["q_codes_before"]),
+            "scope": "Uniform signed-four-bit codes stored in int8; FP64 computation, not NF4 or a packed GPU kernel",
+        },
         "saved_scale_gb_65b": ns["saved_gb_65b"],
         "small_data": {
             "trivial_binary_loss": ns["failed_loss"].item(),

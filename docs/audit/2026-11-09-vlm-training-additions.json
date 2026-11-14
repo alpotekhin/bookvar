@@ -1,0 +1,150 @@
+{
+  "date": "2026-11-09",
+  "scope": "Whole read of both VLM training editions. Add original, licensed evidence for optimization and unfreezing; explain gradient accumulation with variable target counts and paired checks with different images. Expose six subject anchors per locale. Local only.",
+  "files": [
+    {
+      "source": "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-20",
+          "new": "last_updated: 2026-11-09\nreference_terms:\n  - label: VLM — заморозка и обучение зрительного энкодера\n    label_en: VLMs — freezing and fine-tuning the vision encoder\n    anchor: vlm-training-freeze\n  - label: VLM — маска целей и сдвиг токенов\n    label_en: VLMs — target masking and token shifting\n    anchor: vlm-training-targets\n  - label: VLM — упаковка диалогов и общий префикс\n    label_en: VLMs — packed dialogues and shared prefixes\n    anchor: vlm-training-packing\n  - label: VLM — смесь обучающих наборов\n    label_en: VLMs — mixing training datasets\n    anchor: vlm-training-mix\n  - label: VLM — нормировка при накоплении градиента\n    label_en: VLMs — loss normalization across microbatches\n    anchor: vlm-training-reduction\n  - label: VLM — парная проверка с заменой изображения\n    label_en: VLMs — paired tests with image replacement\n    anchor: vlm-training-image-control"
+        },
+        {
+          "old": "  - https://arxiv.org/abs/2409.17146v2",
+          "new": "  - https://arxiv.org/abs/2409.17146v2\n  - https://proceedings.mlr.press/v235/karamcheti24a.html"
+        },
+        {
+          "old": "восстановить параметры чужого эксперимента.",
+          "new": "восстановить параметры чужого эксперимента.\n\n<a id=\"vlm-training-freeze\"></a>\n\n### Что показало сравнение при одинаковых исходных моделях\n\nВ [Prismatic VLMs, §4.1](https://proceedings.mlr.press/v235/karamcheti24a.html) авторы воспроизвели\nдвухэтапный рецепт LLaVA-1.5, затем убрали этап, на котором\nобучался только проектор. В одностадийном варианте проектор\nи LLM обучаются вместе на инструкциях; ViT остаётся замороженным.\nЭта абляция проверяет, нужен ли отдельный разогрев проектора,\nа не можно ли обойтись без обучения самого проектора.\n\n![[00 Учебник/Assets/Figures/curated/vlm-training-2026-11-09/prismatic-figure4.png|Две диаграммы сравнивают опубликованный, воспроизведённый и одностадийный варианты LLaVA для 7B и 13B. Справа указано время двух этапов на восьми A100.]]\n\n*Siddharth Karamcheti et al., [Prismatic VLMs, рис. 4, с. 5](https://raw.githubusercontent.com/mlresearch/v235/main/assets/karamcheti24a/karamcheti24a.pdf#page=5),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nСравнивайте оранжевую линию с зелёной на одной оси: так одностадийный\nзапуск сопоставляется с воспроизведённым двухэтапным. Справа серый\nотрезок — время исключённого этапа.*\n\nДля 7B удаление первого этапа сокращает время с $2.72+8.56=11.28$\nдо 8.56 часа на восьми A100, примерно на 24%. По таблице 2,\nVizWiz повышается с 51.26 до 54.33, а TextVQA без подсказок OCR\nснижается с 46.44 до 44.45. Средний результат авторы считают\nпо нормированным оценкам 12 задач, а не по площади диаграммы.\n\nВо второй абляции авторы сравнивают варианты, где ViT\nзамораживают или обучают вместе с проектором и LLM.\nВ одностадийном варианте размораживание снижает точность RefCOCO\nс 64.08 до 42.56; правильной считается рамка при IoU не ниже 0.5\nпо протоколу задачи. VizWiz при этом меняется с 54.33 до 55.26\n(таблицы 2–3). Прирост в ответах на вопросы не гарантирует\nулучшения локализации.\n\n![[00 Учебник/Assets/Figures/curated/vlm-training-2026-11-09/prismatic-figure5.png|Оранжевая кривая соответствует замороженному ViT; пунктирная серая — обучаемому ViT в одностадийном запуске. Различия особенно заметны на задачах локализации.]]\n\n*Karamcheti et al., [рис. 5, с. 5](https://raw.githubusercontent.com/mlresearch/v235/main/assets/karamcheti24a/karamcheti24a.pdf#page=5),\nCC BY 4.0. Чтобы проверить влияние заморозки в одном режиме\nобучения, сопоставьте оранжевую и пунктирную кривые.*\n\nЭти опыты относятся к конкретным данным, исходным весам\nи настройкам Prismatic. У InternVL и Molmo меняются и данные,\nи расписание, поэтому их рецепты не опровергают этот результат."
+        },
+        {
+          "old": "## 4. Как устроен loss mask в диалоге",
+          "new": "<a id=\"vlm-training-targets\"></a>\n\n## 4. Как устроен loss mask в диалоге"
+        },
+        {
+          "old": "### Packing и несколько разметок одного изображения",
+          "new": "<a id=\"vlm-training-packing\"></a>\n\n### Packing и несколько разметок одного изображения"
+        },
+        {
+          "old": "## 6. Как смешивать неодинаковые наборы",
+          "new": "<a id=\"vlm-training-mix\"></a>\n\n## 6. Как смешивать неодинаковые наборы"
+        },
+        {
+          "old": "этого приёма.",
+          "new": "этого приёма.\n\n<a id=\"vlm-training-reduction\"></a>\n\n### Один шаг оптимизатора из нескольких микробатчей\n\nПусть ответы длиной 4 и 16 токенов попали в разные микробатчи.\nСреднее двух локальных потерь равно $(2+1)/2=1.5$.\nДля обычного усреднения по токенам нужен другой расчёт:\nсначала сложить $8+16=24$ и только затем поделить на $4+16=20$.\nПолучается 1.2. Разное разбиение одного батча не должно\nменять заданную функцию потерь.\n\nОшибка может изменить даже направление шага. Пусть средние\nпроизводные по одному параметру в этих двух микробатчах\nравны $+1$ и $-0.75$. Если усреднить их как два равных числа,\nполучится $+0.125$. Если дать каждому токену одинаковый вес,\nпроизводная равна $(4-12)/20=-0.4$. При square averaging\nзнаменатель тоже берётся для всего шага, но весами\nпримеров будут 2 и 4: производная равна $(2-3)/6=-1/6$.\n\nУдобно хранить две величины: сумму взвешенных ошибок $S$\nи сумму весов targets $W$. Для всего шага берут сумму всех $S$\nи делят на общий $W$. Для обычного DDP, усредняющего градиенты\n$R$ реплик, локальный числитель каждой реплики масштабируют\nна $R/W$, если дополнительные делители не применяет сам trainer.\nЭто компенсирует деление на $R$ при синхронизации. Знаменатель\nсчитают по всем микробатчам шага и всем репликам; позициям\nбез target вес не добавляют. Если весь шаг имеет $W=0$, его\nпропускают согласованно на всех репликах.\n\nВ [разборе Transformers](https://huggingface.co/blog/gradient_accumulation)\nпоказан тот же сбой для невзвешенной causal LM: сумма потерь\nс маской `ignore_index` и общий счётчик targets вместо среднего\nиз локальных средних."
+        },
+        {
+          "old": "Проверка требует примеров с тем же вопросом и другими\nизображениями, где правильный ответ меняется.",
+          "new": "Проверка требует примеров с тем же вопросом и другими\nизображениями, где правильный ответ меняется.\n\n<a id=\"vlm-training-image-control\"></a>\n\n### Как считать результат на парах\n\nВозьмём четыре пары изображений с одним вопросом о цвете.\nВ первой картинке каждой пары машина красная, во второй синяя.\nПусть модель верна на первых картинках в парах 1, 2, 3,\nна вторых — в парах 2, 3, 4. По отдельным картинкам это\n6 из 8, или 75%. На обеих картинках правильно отвечены только\nпары 2 и 3: парная точность равна 2 из 4, или 50%.\nМодель, всегда отвечающая «красная», получит 50% по картинкам\nи 0% по парам.\n\n[MMVP](https://arxiv.org/abs/2401.06209) также засчитывает пару\nпри двух правильных ответах. В самом бенчмарке вопросы и визуальные\nразличия разнообразнее этого примера. Для своей проверки стоит\nперемешать порядок вариантов и исключить подсказки из имён файлов,\nфона и шаблона. Парная оценка показывает поведение на проверенных\nразличиях, но не доказывает, что модель будет опираться на изображение\nв любой другой задаче."
+        },
+        {
+          "old": "с 64.08 до 42.56; правильной считается рамка при IoU не ниже 0.5\nпо протоколу задачи. VizWiz при этом меняется с 54.33 до 55.26",
+          "new": "с 64.08 до 42.56 по протоколу с порогом IoU 0.5.\nVizWiz при этом меняется с 54.33 до 55.26"
+        },
+        {
+          "old": "Для координатного задания можно вычислить IoU предсказанной",
+          "new": "### Награда за локализацию объекта\n\nДля координатного задания можно вычислить IoU предсказанной"
+        }
+      ],
+      "before_sha256": "12e614a8be23e31ed608433c64be1f4b049c39af27cb9d4092080576a902921d",
+      "after_sha256": "c650c998643abcb73c94b7b8ee23c844846e501ed1fb32be2c91ed7c89aada48",
+      "lines": 992
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data.md",
+      "changes": [
+        {
+          "old": "canonical_revision: \"12e614a8be23e31ed608433c64be1f4b049c39af27cb9d4092080576a902921d\"\ntranslation_reviewed: \"2026-10-29\"",
+          "new": "canonical_revision: \"551579c6e0e664a8bc003ac99a2b14789f65b2f5e1375ae16fb136a5562a69a6\"\ntranslation_reviewed: \"2026-11-09\""
+        },
+        {
+          "old": "last_updated: 2026-10-29",
+          "new": "last_updated: 2026-11-09"
+        },
+        {
+          "old": "  - https://arxiv.org/abs/2409.17146",
+          "new": "  - https://arxiv.org/abs/2409.17146\n  - https://proceedings.mlr.press/v235/karamcheti24a.html"
+        },
+        {
+          "old": "## Loss masks are not attention masks",
+          "new": "<a id=\"vlm-training-freeze\"></a>\n\n### What changed with the same starting checkpoints\n\nIn [Prismatic VLMs, §4.1](https://proceedings.mlr.press/v235/karamcheti24a.html), the authors reproduce\nthe two-stage LLaVA-1.5 recipe and then remove the projector-only stage.\nThe single-stage model still trains the projector, now together with\nthe LLM on instruction data. The ViT stays frozen.\n\n![[00 Учебник/Assets/Figures/curated/vlm-training-2026-11-09/prismatic-figure4.png|Two charts compare the published, reproduced, and single-stage LLaVA results for 7B and 13B. The panel on the right gives training times on eight A100s.]]\n\n*Siddharth Karamcheti et al., [Prismatic VLMs, Figure 4, p. 5](https://raw.githubusercontent.com/mlresearch/v235/main/assets/karamcheti24a/karamcheti24a.pdf#page=5),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nCompare orange with green on a given axis: that matches the single-stage\nrun against the reproduced two-stage run. The gray part of each bar\non the right is the time spent on the removed stage.*\n\nFor 7B, skipping the first stage reduces time on eight A100s from\n$2.72+8.56=11.28$ to 8.56 hours, about 24%. In Table 2,\nVizWiz rises from 51.26 to 54.33; TextVQA without OCR prompts falls\nfrom 46.44 to 44.45. The authors aggregate normalized scores over 12\nbenchmarks, not the area of the radar plot.\n\nIn a separate ablation they freeze the ViT or train it alongside\nthe projector and LLM. For single-stage training, unfreezing takes\nRefCOCO accuracy from 64.08 to 42.56 under the protocol's 0.5 IoU\nthreshold. VizWiz changes from 54.33 to 55.26 (Tables 2–3).\nThe two tasks move in opposite directions.\n\n![[00 Учебник/Assets/Figures/curated/vlm-training-2026-11-09/prismatic-figure5.png|The orange line shows a frozen ViT. The dashed gray line shows a fine-tuned ViT under the same single-stage schedule. The largest differences are on localization tasks.]]\n\n*Karamcheti et al., [Figure 5, p. 5](https://raw.githubusercontent.com/mlresearch/v235/main/assets/karamcheti24a/karamcheti24a.pdf#page=5),\nCC BY 4.0. To compare freezing and unfreezing within one schedule,\nuse the orange and dashed curves.*\n\nThese results hold for the data, checkpoints and settings in Prismatic.\nThe InternVL and Molmo recipes change both data and schedules, so\nthey are not counterexamples to this comparison.\n\n<a id=\"vlm-training-targets\"></a>\n\n## Loss masks are not attention masks"
+        },
+        {
+          "old": "### Independent packed samples and shared-image branches",
+          "new": "<a id=\"vlm-training-packing\"></a>\n\n### Independent packed samples and shared-image branches"
+        },
+        {
+          "old": "LLaVA used GPT-4 over captions and symbolic descriptions to produce conversations, detailed descriptions, and reasoning prompts. GPT-4 did not inspect the original image, so generated instructions could contain only information already present in those inputs.",
+          "new": "LLaVA used GPT-4 over captions and symbolic descriptions to produce\nconversations, detailed descriptions, and reasoning prompts. Those inputs\nwere its only evidence about the image. The teacher could still invent\ndetails that the captions and boxes did not support."
+        },
+        {
+          "old": "## Sampling mixtures changes both learning and cost",
+          "new": "<a id=\"vlm-training-mix\"></a>\n\n## Sampling mixtures changes both learning and cost"
+        },
+        {
+          "old": "[`len2weight`](https://github.com/OpenGVLab/InternVL/blob/2410d1dbf208f0e799459aff9376e5747dbf41a2/internvl_chat/internvl/train/internvl_chat_finetune.py#L786-L795) constructs weights, and the [packed collator](https://github.com/OpenGVLab/InternVL/blob/2410d1dbf208f0e799459aff9376e5747dbf41a2/internvl_chat/internvl/train/dataset_packed.py#L517-L545) counts targets within original examples before zeroing ignored weights. Gradient accumulation must aggregate compatible denominators: averaging two already normalized microbatch losses need not equal normalization over all targets in the step. The precise formula here is verified for InternVL; the phrase “square-root reweighting” alone does not establish identical implementation details in Qwen3-VL.",
+          "new": "[`len2weight`](https://github.com/OpenGVLab/InternVL/blob/2410d1dbf208f0e799459aff9376e5747dbf41a2/internvl_chat/internvl/train/internvl_chat_finetune.py#L786-L795) constructs weights, and the [packed collator](https://github.com/OpenGVLab/InternVL/blob/2410d1dbf208f0e799459aff9376e5747dbf41a2/internvl_chat/internvl/train/dataset_packed.py#L517-L545) counts targets within original examples before zeroing ignored weights. Gradient accumulation must aggregate compatible denominators: averaging two already normalized microbatch losses need not equal normalization over all targets in the step. The precise formula here is verified for InternVL; the phrase “square-root reweighting” alone does not establish identical implementation details in Qwen3-VL.\n\n<a id=\"vlm-training-reduction\"></a>\n\n### One optimizer step across several microbatches\n\nPut the four-token and sixteen-token answers in separate microbatches.\nThe mean of their local losses is $(2+1)/2=1.5$. To weight all\nsupervised tokens equally, add $8+16=24$ first, then divide\nby $4+16=20$, giving 1.2. Splitting the same batch should\nnot change the objective.\n\nThe mistake can reverse the update. Suppose the average derivatives\non one parameter are $+1$ and $-0.75$ in the two microbatches.\nTheir unweighted mean is $+0.125$. Giving each token the same weight\nyields $(4-12)/20=-0.4$. Under square averaging, the example\nweights are 2 and 4, and the derivative is $(2-3)/6=-1/6$.\n\nKeep the sum of weighted errors $S$ and the sum of target weights $W$.\nAdd the numerators across the step and divide by the global $W$.\nIf standard DDP averages gradients from $R$ replicas and the trainer\ndoes not apply additional divisors, scale each replica's numerator\nby $R/W$. This cancels the factor $1/R$ in gradient synchronization.\nCount all microbatches and replicas in $W$ and exclude positions\nwithout a target. If $W=0$ for the entire step, all replicas skip it.\n\n[The Transformers team's write-up](https://huggingface.co/blog/gradient_accumulation)\nshows the same bug for unweighted causal LM loss: sum losses with\n`ignore_index` and divide by the global target count, rather\nthan averaging the local means."
+        },
+        {
+          "old": "For a box target $[0,0,2,2]$, the exact box has IoU 1; $[1,0,3,2]$ has IoU $1/3$; a non-overlapping box has IoU 0. An illustrative reward threshold of 0.5 accepts only the first:",
+          "new": "<a id=\"vlm-training-image-control\"></a>\n\n### Scoring paired image tests\n\nTake four image pairs with the same color question. The car is\nred in the first image of each pair and blue in the second.\nSuppose the model gets the first images right in pairs 1, 2 and 3,\nand the second images right in pairs 2, 3 and 4. It gets six of\neight images right (75%), but only pairs 2 and 3 have two correct\nanswers (50%). A model that always says “red” scores 50% per image\nand 0% per pair.\n\n[MMVP](https://arxiv.org/abs/2401.06209) also credits a pair only\nwhen both answers are correct. Its images and questions cover\nmore differences than this toy color test. For a local test, shuffle\nthe choices and check that file names, backgrounds and prompt templates\ndo not give away answers. The paired score describes behavior\non these visual contrasts, not proof of grounding on unrelated tasks.\n\nFor a box target $[0,0,2,2]$, the exact box has IoU 1; $[1,0,3,2]$ has IoU $1/3$; a non-overlapping box has IoU 0. An illustrative reward threshold of 0.5 accepts only the first:"
+        },
+        {
+          "old": "For a box target $[0,0,2,2]$, the exact box has IoU 1; $[1,0,3,2]$ has IoU $1/3$; a non-overlapping box has IoU 0. An illustrative reward threshold of 0.5 accepts only the first:",
+          "new": "### A reward for object localization\n\nFor a box target $[0,0,2,2]$, the exact box has IoU 1; $[1,0,3,2]$ has IoU $1/3$; a non-overlapping box has IoU 0. An illustrative reward threshold of 0.5 accepts only the first:"
+        },
+        {
+          "old": "canonical_revision: \"551579c6e0e664a8bc003ac99a2b14789f65b2f5e1375ae16fb136a5562a69a6\"",
+          "new": "canonical_revision: \"c650c998643abcb73c94b7b8ee23c844846e501ed1fb32be2c91ed7c89aada48\""
+        }
+      ],
+      "before_sha256": "03af54d2d4fbce4863a67e2072d4e00dd888be0c2c092bb724f030acd0adbaa4",
+      "after_sha256": "edb5f9cbbc38920a56caab59e4fbb94db5b894ef809698292344f5a592d193a1",
+      "lines": 536
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Обучение VLM: alignment, instruction tuning и данные]]",
+          "new": "- [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Обучение VLM: alignment, instruction tuning и данные]]\n  - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-freeze|VLM — заморозка и обучение зрительного энкодера]]\n  - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-targets|VLM — маска целей и сдвиг токенов]]\n  - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-packing|VLM — упаковка диалогов и общий префикс]]\n  - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-mix|VLM — смесь обучающих наборов]]\n  - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-reduction|VLM — нормировка при накоплении градиента]]\n  - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-image-control|VLM — парная проверка с заменой изображения]]"
+        }
+      ],
+      "before_sha256": "589f2fcc3837b2bd816dd76d890d18ffbe4ed038d88d2b3791f6d9e1474af6c9",
+      "after_sha256": "54c57abfbe6fa9776dc6d268989c58d8712754754eabee8e137428c06c572428",
+      "lines": 1623
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Training VLMs: alignment, instruction tuning, and data]] · **EN**",
+          "new": "- [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Training VLMs: alignment, instruction tuning, and data]] · **EN**\n  - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-freeze|VLMs — freezing and fine-tuning the vision encoder]]\n  - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-targets|VLMs — target masking and token shifting]]\n  - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-packing|VLMs — packed dialogues and shared prefixes]]\n  - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-mix|VLMs — mixing training datasets]]\n  - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-reduction|VLMs — loss normalization across microbatches]]\n  - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-image-control|VLMs — paired tests with image replacement]]"
+        }
+      ],
+      "before_sha256": "b87fadb4ea3b12b8dcb80389324a5f3064934e09a3b04c538636e09165df314a",
+      "after_sha256": "b31685000bc0a1a9dbf6e2488aa7e68b34c9d7435804febd9e8a55c280f55871",
+      "lines": 1625
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "changes": [
+        {
+          "old": "  - id: \"curated-onevision-higher-anyres-db33ded7e7e6\"",
+          "new": "  - id: \"curated-prismatic-stage-ablation-49aca74ebdc0\"\n    asset: \"00 Учебник/Assets/Figures/curated/vlm-training-2026-11-09/prismatic-figure4.png\"\n    author: \"Siddharth Karamcheti, Suraj Nair, Ashwin Balakrishna, Percy Liang, Thomas Kollar, Dorsa Sadigh\"\n    source_url: \"https://proceedings.mlr.press/v235/karamcheti24a.html\"\n    source_image_url: \"https://raw.githubusercontent.com/mlresearch/v235/main/assets/karamcheti24a/karamcheti24a.pdf#page=5\"\n    source_figure_label: \"Figure 4, PDF p. 5\"\n    source_asset: \"05 Источники/Originals/vlm-training-2026-10-20/karamcheti24a.pdf\"\n    source_asset_sha256: \"5b19876fd49109700321a90abf00025227b17d82131d052919645ea7b2245003\"\n    sha256: \"49aca74ebdc08c0627538ce329c7bad8fc32e280cfd64691095126852bcdcbe2\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/edge-2026-10-20/pmlr-license.html\"\n    license_evidence_sha256: \"1c8123a6c840ca2752e383f0924fa23ba38552140a2cc54f69ea9df5acfcdd3d\"\n    rights_status: \"source-license-verified\"\n    provenance_confirmation: \"licensed-paper-figure\"\n    metadata_status: \"verified\"\n    derivation: \"pdf-page-render-crop\"\n    modifications: \"Whole Figure 4 with original panels, labels and legend, rendered from publisher PDF. Only surrounding text and the separate caption were omitted.\"\n    used_in: [\"00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md\", \"en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data.md\"]\n    last_verified: \"2026-11-09\"\n    source_page: 5\n    render_dpi: 360\n    render_page_size_px: [3060,3960]\n    crop_box_px: [270,310,2718,1165]\n  - id: \"curated-prismatic-vision-ablation-aa5f932da538\"\n    asset: \"00 Учебник/Assets/Figures/curated/vlm-training-2026-11-09/prismatic-figure5.png\"\n    author: \"Siddharth Karamcheti, Suraj Nair, Ashwin Balakrishna, Percy Liang, Thomas Kollar, Dorsa Sadigh\"\n    source_url: \"https://proceedings.mlr.press/v235/karamcheti24a.html\"\n    source_image_url: \"https://raw.githubusercontent.com/mlresearch/v235/main/assets/karamcheti24a/karamcheti24a.pdf#page=5\"\n    source_figure_label: \"Figure 5, PDF p. 5\"\n    source_asset: \"05 Источники/Originals/vlm-training-2026-10-20/karamcheti24a.pdf\"\n    source_asset_sha256: \"5b19876fd49109700321a90abf00025227b17d82131d052919645ea7b2245003\"\n    sha256: \"aa5f932da53815588fae3af294f178148e3c321ac45969424c7639d9fb4decfb\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/edge-2026-10-20/pmlr-license.html\"\n    license_evidence_sha256: \"1c8123a6c840ca2752e383f0924fa23ba38552140a2cc54f69ea9df5acfcdd3d\"\n    rights_status: \"source-license-verified\"\n    provenance_confirmation: \"licensed-paper-figure\"\n    metadata_status: \"verified\"\n    derivation: \"pdf-page-render-crop\"\n    modifications: \"Whole Figure 5 with original panels, labels and legend, rendered from publisher PDF. Only surrounding text and the separate caption were omitted.\"\n    used_in: [\"00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md\", \"en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data.md\"]\n    last_verified: \"2026-11-09\"\n    source_page: 5\n    render_dpi: 360\n    render_page_size_px: [3060,3960]\n    crop_box_px: [351,1465,1449,2465]\n  - id: \"curated-onevision-higher-anyres-db33ded7e7e6\""
+        }
+      ],
+      "before_sha256": "253bab150925c12723e81f83d291d20ab86b396737e5290f8f398d94e9dd6dc2",
+      "after_sha256": "269dc92b34a746379de35473855abf8981af3f1bf03fca124cd05400e503efc0",
+      "lines": 23610
+    }
+  ],
+  "review": {
+    "sources": "Karamcheti et al., Prismatic VLMs §4.1, Figures 4–5, Appendix B.1–B.2 and Tables 2–3; InternVL 2.5 §3.4 and pinned len2weight/packed-collator excerpts; Transformers Fixing Gradient Accumulation; Tong et al., MMVP §§2.2–2.3.",
+    "examples": "Stage-one removal for 7B saves 2.72/11.28 of the reported training time; VizWiz and TextVQA move in opposite directions. For frozen vs trainable ViT under single-stage training, RefCOCO and VizWiz also move in opposite directions. With four and sixteen supervised targets, equal microbatch averaging gives gradient +0.125, token weighting −0.4, and square weighting −1/6. Four image pairs give 75% item accuracy and 50% pair accuracy; a constant response gives 50% and 0%.",
+    "figures": "Original PMLR PDF p. 5 checked visually, including the complete plots and legends. Both 360 DPI crops replayed byte-for-byte, use CC BY 4.0, and link directly to the source PDF. No recoloring, redrawing or label changes.",
+    "reader": "At 375 and 1280 px in both languages, six subject links resolve, ten figures load, and the three worked sections open without KaTeX errors or document overflow. Opened the two Prismatic figures with captions and inspected zoom and pan on mobile.",
+    "local_checks": "2023 pages built; 736 publication tests, 229 built-output tests, two asset evidence tests and all eight Python examples per edition passed. Zero broken internal routes, fragments or files.",
+    "limits": "Does not resolve inherited course image rights or establish general superiority of one training schedule. No GPU benchmark, model run or deployment."
+  }
+}

@@ -1,0 +1,299 @@
+---
+import { llama31Experiment, llama31MaxDistance, ropeLabDefaults as defaults, ropeLabHeadings, rotationExperiment } from '../lib/rope-lab';
+
+const { lang = 'ru' } = Astro.props as { lang?: 'ru' | 'en' };
+const copy = lang === 'en' ? {
+  intro: 'Move both positions by the same amount. The arrows turn, but their dot product stays fixed. Move only the key to change the relative angle.',
+  controls: 'Token positions', query: 'Query position m', key: 'Key position n', shift: 'Shift both positions',
+  vectorPlot: 'The rotated query and key in the same coordinate plane', position: 'position',
+  direct: 'Dot product after rotation', relative: 'Dot product using n − m', difference: 'Offset n − m',
+  scaleIntro: 'Pair 0 keeps its frequency. Pair 32 is in the transition band, and pair 40 is divided by eight. Use the slider to inspect any of the 64 pairs.',
+  frequencyControls: 'Frequency and distance', pair: 'Coordinate pair j', distance: 'Distance between tokens',
+  invalid: 'Enter a whole number from 0 to 131071.',
+  unchanged: 'Unchanged', blend: 'Transition', slow: 'Divided by eight', band: 'Band',
+  period: 'Original period, positions', ratio: 'Frequency ratio',
+  quantity: 'Quantity', before: 'Original', after: 'Llama 3.1',
+  frequency: 'Frequency, rad/token', phase: 'Relative angle, rad', score: 'Dot product for (1, 0) · (1, 0)',
+  reset: 'Reset both experiments',
+  limits: 'The lab computes a dot product before masking and softmax. It does not run a checkpoint or measure long-context quality.',
+  noJS: 'JavaScript is off. The initial values and the worked calculations below are still available.',
+} : {
+  intro: 'Сдвиньте обе позиции на одно и то же число. Стрелки повернутся, а скалярное произведение не изменится. Затем сдвиньте только ключ.',
+  controls: 'Позиции токенов', query: 'Позиция запроса m', key: 'Позиция ключа n', shift: 'Сдвиг обеих позиций',
+  vectorPlot: 'Запрос и ключ после поворота в одной плоскости', position: 'позиция',
+  direct: 'Произведение после поворотов', relative: 'Произведение через n − m', difference: 'Разность n − m',
+  scaleIntro: 'У пары 0 частота не меняется. Пара 32 лежит в переходном диапазоне, а у пары 40 частота делится на восемь. Ползунок позволяет выбрать любую из 64 пар.',
+  frequencyControls: 'Частота и расстояние', pair: 'Пара координат j', distance: 'Расстояние между токенами',
+  invalid: 'Введите целое число от 0 до 131071.',
+  unchanged: 'Без изменений', blend: 'Переход', slow: 'Деление на восемь', band: 'Диапазон',
+  period: 'Исходный период, позиций', ratio: 'Отношение частот',
+  quantity: 'Величина', before: 'Исходная', after: 'Llama 3.1',
+  frequency: 'Частота, рад/токен', phase: 'Относительный угол, рад', score: 'Произведение для q = k = (1, 0)',
+  reset: 'Сбросить оба опыта',
+  limits: 'Стенд считает скалярное произведение до маски и softmax. Он не запускает модель и не измеряет качество на длинном контексте.',
+  noJS: 'JavaScript отключён. Начальные значения и разбор вычислений доступны ниже.',
+};
+const [rotationTitle, frequencyTitle] = ropeLabHeadings[lang];
+const initial = rotationExperiment(defaults.queryPosition, defaults.keyPosition, defaults.shift);
+const scaled = llama31Experiment(defaults.pair, defaults.distance);
+const decimal = (x: number, digits: number) => x.toFixed(digits).replace('.', lang === 'ru' ? ',' : '.');
+const frequency = (x: number) => x.toPrecision(5).replace('.', lang === 'ru' ? ',' : '.');
+const vectorLabel = (xy: readonly [number, number], pos: number) =>
+  `${copy.position} ${pos} · (${decimal(xy[0], 3)}; ${decimal(xy[1], 3)})`;
+---
+
+<div class="rope-lab" data-rope-lab data-lang={lang} data-position={copy.position}
+  data-unchanged={copy.unchanged} data-blend={copy.blend} data-slow={copy.slow}>
+  <section aria-labelledby="rope-rotation-lab">
+    <h2 id="rope-rotation-lab">{rotationTitle}</h2>
+    <p>{copy.intro}</p>
+    <div class="rotation-layout">
+      <fieldset data-controls disabled>
+        <legend>{copy.controls}</legend>
+        <label for="rope-query">{copy.query}<output id="rope-query-value" for="rope-query">{defaults.queryPosition}</output>
+          <input id="rope-query" type="range" min="0" max="12" value={defaults.queryPosition} />
+        </label>
+        <label for="rope-key">{copy.key}<output id="rope-key-value" for="rope-key">{defaults.keyPosition}</output>
+          <input id="rope-key" type="range" min="0" max="12" value={defaults.keyPosition} />
+        </label>
+        <label for="rope-shift">{copy.shift}<output id="rope-shift-value" for="rope-shift">{defaults.shift}</output>
+          <input id="rope-shift" type="range" min="0" max="12" value={defaults.shift} />
+        </label>
+      </fieldset>
+      <div class="vector-plot">
+        <svg viewBox="0 0 250 250" role="img" aria-label={copy.vectorPlot}>
+          <defs>
+            <marker id="rope-q-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+              <path class="q-color" d="M0 0 L9 4.5 L0 9 Z" />
+            </marker>
+            <marker id="rope-k-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+              <path class="k-color" d="M0 0 L9 4.5 L0 9 Z" />
+            </marker>
+          </defs>
+          <circle class="grid-guide" cx="125" cy="125" r="95" />
+          <circle class="grid-guide" cx="125" cy="125" r="57" />
+          <path class="axes" d="M14 125 H236 M125 14 V236" />
+          <text x="236" y="117">x</text><text x="132" y="20">y</text>
+          <line id="rope-q-line" class="q-vector" x1="125" y1="125"
+            x2={125 + 19 * initial.rotatedQuery[0]} y2={125 - 19 * initial.rotatedQuery[1]}
+            marker-end="url(#rope-q-arrow)" />
+          <line id="rope-k-line" class="k-vector" x1="125" y1="125"
+            x2={125 + 19 * initial.rotatedKey[0]} y2={125 - 19 * initial.rotatedKey[1]}
+            marker-end="url(#rope-k-arrow)" />
+          <circle class="origin" cx="125" cy="125" r="2.8" />
+        </svg>
+        <dl class="vector-labels">
+          <div><dt class="q-label">Q′</dt><dd id="rope-q-label">{vectorLabel(initial.rotatedQuery, initial.query)}</dd></div>
+          <div><dt class="k-label">K′</dt><dd id="rope-k-label">{vectorLabel(initial.rotatedKey, initial.key)}</dd></div>
+        </dl>
+      </div>
+      <div class="metrics rotation-metrics">
+        <div><span>{copy.difference}</span><output id="rope-delta" for="rope-query rope-key rope-shift">{initial.delta}</output></div>
+        <div><span>{copy.direct}</span><output id="rope-dot" for="rope-query rope-key rope-shift">{decimal(initial.absoluteDot, 4)}</output></div>
+        <div><span>{copy.relative}</span><output id="rope-relative-dot" for="rope-query rope-key rope-shift">{decimal(initial.relativeDot, 4)}</output></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="frequency-section" aria-labelledby="rope-frequency-lab">
+    <h2 id="rope-frequency-lab">{frequencyTitle}</h2>
+    <p>{copy.scaleIntro}</p>
+    <fieldset data-controls class="frequency-controls" disabled>
+      <legend>{copy.frequencyControls}</legend>
+      <label for="rope-pair">{copy.pair}<output id="rope-pair-value" for="rope-pair">{defaults.pair}</output>
+        <input id="rope-pair" type="range" min="0" max="63" value={defaults.pair} />
+      </label>
+      <div class="presets">
+        {[0, 32, 40].map(pair => <button type="button" data-pair={pair} aria-label={`${copy.pair} = ${pair}`} aria-pressed={pair === defaults.pair}>j = {pair}</button>)}
+      </div>
+      <label for="rope-distance">{copy.distance}
+        <input id="rope-distance" type="number" min="0" max={llama31MaxDistance} step="1" value={defaults.distance} required />
+      </label>
+    </fieldset>
+    <div class="spectrum" aria-hidden="true">
+      <span class="fast"></span><span class="blend"></span><span class="slow"></span>
+      <span id="rope-marker" class="marker" style={`left:${(defaults.pair + .5) / 64 * 100}%`}></span>
+    </div>
+    <ul class="band-legend">
+      <li><i class="fast" aria-hidden="true"></i> 0–28: {copy.unchanged}</li>
+      <li><i class="blend" aria-hidden="true"></i> 29–34: {copy.blend}</li>
+      <li><i class="slow" aria-hidden="true"></i> 35–63: {copy.slow}</li>
+    </ul>
+    <p id="rope-input-error" class="input-error" role="status" hidden>{copy.invalid}</p>
+    <div id="rope-frequency-result">
+      <div class="metrics">
+        <div><span>{copy.band}</span><output id="rope-band" for="rope-pair">{copy[scaled.band]}</output></div>
+        <div><span>{copy.period}</span><output id="rope-period" for="rope-pair">{decimal(scaled.period, 2)}</output></div>
+        <div><span>{copy.ratio}</span><output id="rope-ratio" for="rope-pair">{decimal(scaled.ratio, 5)}</output></div>
+      </div>
+      <table class="frequency-table" aria-label={frequencyTitle}>
+        <thead><tr><th scope="col">{copy.quantity}</th><th scope="col">{copy.before}</th><th scope="col">{copy.after}</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">{copy.frequency}</th><td id="rope-before-frequency">{frequency(scaled.original)}</td><td id="rope-after-frequency">{frequency(scaled.scaled)}</td></tr>
+          <tr><th scope="row">{copy.phase}</th><td id="rope-before-angle">{decimal(scaled.phase, 5)}</td><td id="rope-after-angle">{decimal(scaled.scaledPhase, 5)}</td></tr>
+          <tr><th scope="row">{copy.score}</th><td id="rope-before-score">{decimal(scaled.unitDot, 5)}</td><td id="rope-after-score">{decimal(scaled.scaledUnitDot, 5)}</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <button id="rope-reset" class="reset" type="button" disabled>{copy.reset}</button>
+  <p class="limits">{copy.limits}</p>
+  <noscript><p>{copy.noJS}</p></noscript>
+</div>
+
+<script>
+  import { llama31Experiment, llama31PairCount, ropeLabDefaults as defaults, rotationExperiment } from '../lib/rope-lab';
+
+  const root = document.querySelector<HTMLElement>('[data-rope-lab]');
+  if (root) {
+    const { dataset } = root;
+    const node = <T extends Element>(id: string) => root.querySelector<T>('#rope-' + id)!;
+    const input = (id: string) => node<HTMLInputElement>(id);
+    const [query, key, shift, pair, distance] = ['query', 'key', 'shift', 'pair', 'distance'].map(input);
+    const reset = node<HTMLButtonElement>('reset');
+    const presets = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-pair]'));
+    const separator = dataset.lang === 'ru' ? ',' : '.';
+    const number = (x: number, digits: number) => {
+      const adjusted = Math.abs(x) < 0.5 * 10 ** -digits ? 0 : x;
+      return adjusted.toFixed(digits).replace('.', separator);
+    };
+    const frequency = (x: number) => x.toPrecision(5).replace('.', separator);
+    const write = (id: string, value: number | string) => {
+      node<HTMLElement>(id).textContent = String(value);
+    };
+
+    function renderRotation() {
+      const current = rotationExperiment(query.valueAsNumber, key.valueAsNumber, shift.valueAsNumber);
+      write('query-value', query.value);
+      write('key-value', key.value);
+      write('shift-value', shift.value);
+      write('delta', current.delta);
+      write('dot', number(current.absoluteDot, 4));
+      write('relative-dot', number(current.relativeDot, 4));
+      for (const [name, [x, y], pos] of [
+        ['q', current.rotatedQuery, current.query], ['k', current.rotatedKey, current.key],
+      ] as const) {
+        const line = node<SVGLineElement>(name + '-line');
+        line.setAttribute('x2', String(125 + 19 * x));
+        line.setAttribute('y2', String(125 - 19 * y));
+        write(name + '-label', `${dataset.position} ${pos} · (${number(x, 3)}; ${number(y, 3)})`);
+      }
+    }
+
+    function renderFrequencies() {
+      const j = pair.valueAsNumber;
+      write('pair-value', j);
+      node<HTMLElement>('marker').style.left = (j + .5) / llama31PairCount * 100 + '%';
+      for (const button of presets) button.setAttribute('aria-pressed', String(Number(button.dataset.pair) === j));
+      const valid = distance.validity.valid;
+      distance.setAttribute('aria-invalid', String(!valid));
+      node<HTMLElement>('input-error').hidden = valid;
+      node<HTMLElement>('frequency-result').hidden = !valid;
+      if (!valid) return;
+      const current = llama31Experiment(j, distance.valueAsNumber);
+      write('band', dataset[current.band]!);
+      write('period', number(current.period, 2));
+      write('ratio', number(current.ratio, 5));
+      write('before-frequency', frequency(current.original));
+      write('after-frequency', frequency(current.scaled));
+      write('before-angle', number(current.phase, 5));
+      write('after-angle', number(current.scaledPhase, 5));
+      write('before-score', number(current.unitDot, 5));
+      write('after-score', number(current.scaledUnitDot, 5));
+    }
+
+    for (const control of [query, key, shift]) control.addEventListener('input', renderRotation);
+    for (const control of [pair, distance]) control.addEventListener('input', renderFrequencies);
+    for (const button of presets) button.addEventListener('click', () => {
+      pair.value = button.dataset.pair!;
+      renderFrequencies();
+    });
+    reset.addEventListener('click', () => {
+      [query.value, key.value, shift.value, pair.value, distance.value] =
+        [defaults.queryPosition, defaults.keyPosition, defaults.shift, defaults.pair, defaults.distance].map(String);
+      renderRotation();
+      renderFrequencies();
+    });
+    renderRotation();
+    renderFrequencies();
+    for (const group of root.querySelectorAll<HTMLFieldSetElement>('[data-controls]')) group.disabled = false;
+    reset.disabled = false;
+  }
+</script>
+
+<style>
+  .rope-lab { --q: var(--sl-color-accent-high); --k: #9b4b0a; margin: 1.5rem 0 2.5rem; }
+  :global([data-theme="dark"]) .rope-lab { --k: #ffc480; }
+  .rope-lab section { margin: 0; padding: clamp(.85rem, 2vw, 1.3rem); border: 1px solid var(--sl-color-gray-5); border-radius: .9rem; }
+  .rope-lab h2 { margin: 0 0 .4rem; font-size: clamp(1.18rem, 3vw, 1.55rem); }
+  .rope-lab p { margin: .6rem 0 1rem; }
+  .rope-lab [hidden] { display: none; }
+  .rope-lab .frequency-section { margin-top: 1rem; }
+  .rotation-layout, .frequency-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem; align-items: center; }
+  .rotation-layout { grid-template-areas: "controls plot" "scores scores"; }
+  .rotation-layout fieldset { grid-area: controls; }
+  .rotation-layout .vector-plot { grid-area: plot; margin: 0; }
+  .rotation-layout .rotation-metrics { grid-area: scores; margin: 0; }
+  fieldset { min-inline-size: 0; margin: 0; border: 1px solid var(--sl-color-gray-5); border-radius: .65rem; padding: .7rem .85rem; }
+  legend { padding-inline: .3rem; font-size: .84rem; color: var(--sl-color-gray-2); }
+  label { display: grid; grid-template-columns: 1fr auto; gap: .15rem .45rem; margin: 0 0 .7rem; font-weight: 600; font-size: .86rem; }
+  label:last-child { margin-bottom: 0; }
+  input { grid-column: 1 / -1; width: 100%; margin: 0; accent-color: var(--sl-color-accent); font: inherit; }
+  input[type="range"] { min-height: 1.7rem; }
+  input[type="number"] { margin-top: .25rem; padding: .35rem .5rem; border: 1px solid var(--sl-color-gray-4); border-radius: .4rem; color: var(--sl-color-white); background: var(--sl-color-bg); }
+  button { cursor: pointer; padding: .38rem .58rem; border: 1px solid var(--sl-color-gray-4); border-radius: .42rem; color: var(--sl-color-white); background: var(--sl-color-bg); font: inherit; }
+  button:disabled { cursor: default; }
+  button[aria-pressed="true"] { border-color: var(--sl-color-accent-high); background: var(--sl-color-accent-low); }
+  :is(button, input):focus-visible { outline: 2px solid var(--sl-color-accent-high); outline-offset: 3px; }
+  output, .frequency-table td, .vector-labels dd { font-variant-numeric: tabular-nums; }
+  .vector-plot { min-width: 0; }
+  .vector-plot svg { display: block; width: min(100%, 15rem); margin-inline: auto; overflow: visible; }
+  .vector-plot text, .origin { fill: var(--sl-color-gray-2); font-size: 10px; }
+  .grid-guide { stroke: var(--sl-color-gray-5); fill: none; }
+  .axes { stroke: var(--sl-color-gray-4); fill: none; }
+  .q-vector, .k-vector { stroke-width: 3.1; }
+  .q-vector { stroke: var(--q); }
+  .k-vector { stroke: var(--k); stroke-dasharray: 6 3; }
+  .q-color { fill: var(--q); }
+  .k-color { fill: var(--k); }
+  .q-label { color: var(--q); }
+  .k-label { color: var(--k); }
+  .vector-labels { margin: .25rem 0 0; font-size: .82rem; }
+  .rope-lab .vector-labels div { display: flex; gap: .5rem; align-items: baseline; margin: .2rem 0 0; }
+  .vector-labels dt { flex: 0 0 2.6rem; font-weight: 700; }
+  .vector-labels dd { margin: 0; }
+  .vector-labels dt::before { display: inline-block; width: .75rem; margin-inline-end: .25rem; vertical-align: .2em; border-top: 2px solid currentColor; content: ""; }
+  .vector-labels .k-label::before { border-top-style: dashed; }
+  .metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .45rem; margin: .85rem 0 0; }
+  .rope-lab .metrics div { margin: 0; padding: .45rem .52rem; border-radius: .55rem; background: var(--sl-color-gray-6); min-width: 0; }
+  .metrics span, .metrics output { display: block; margin: 0; }
+  .metrics span { font-size: .76rem; }
+  .metrics output { font-size: .97rem; font-weight: 650; overflow-wrap: anywhere; }
+  .frequency-controls { grid-template-columns: minmax(0, 1fr) auto; }
+  .frequency-controls label { margin: 0; }
+  .frequency-controls label:last-child { grid-column: 1 / -1; max-width: 19rem; }
+  .presets { display: flex; flex-wrap: wrap; gap: .3rem; font-size: .79rem; }
+  .rope-lab .presets button { margin: 0; min-height: 2.5rem; }
+  .spectrum { display: grid; grid-template-columns: 29fr 6fr 29fr; position: relative; height: .6rem; margin-top: .9rem; gap: 2px; }
+  .spectrum span { margin: 0; border-radius: 2px; }
+  .fast { background: var(--sl-color-accent-high); }
+  .blend { background: repeating-linear-gradient(135deg,var(--sl-color-gray-3) 0 2px,var(--sl-color-gray-6) 2px 4px); }
+  .slow { background: var(--k); }
+  .spectrum .marker { position: absolute; top: -.2rem; bottom: -.2rem; width: 2px; margin: 0; background: var(--sl-color-white); box-shadow: 0 0 0 1px var(--sl-color-bg); }
+  .band-legend { display: flex; flex-wrap: wrap; gap: .2rem .7rem; padding: 0; margin: .35rem 0 0; list-style: none; font-size: .76rem; }
+  .rope-lab .band-legend li { display: inline-flex; align-items: center; gap: .25rem; margin: 0; }
+  .rope-lab .band-legend i { display: inline-block; width: .7rem; height: .55rem; border-radius: .12rem; margin: 0; }
+  .rope-lab .frequency-table { display: table; width: 100%; margin: .85rem 0 0; font-size: .82rem; }
+  .frequency-table :is(th, td) { padding: .36rem .32rem; }
+  .frequency-table td { text-align: right; }
+  .input-error { color: var(--sl-color-orange-high); }
+  .reset { margin-top: .85rem; }
+  .rope-lab .limits { font-size: .84rem; color: var(--sl-color-gray-2); margin: .5rem 0 0; }
+  @media (max-width: 39rem) {
+    .rotation-layout, .frequency-controls { grid-template-columns: minmax(0, 1fr); }
+    .rotation-layout { grid-template-areas: "controls" "scores" "plot"; }
+    .vector-plot svg { width: min(100%, 11rem); }
+    .rope-lab .frequency-table { font-size: .75rem; }
+    .frequency-table :is(th, td) { padding-inline: .2rem; }
+  }
+</style>

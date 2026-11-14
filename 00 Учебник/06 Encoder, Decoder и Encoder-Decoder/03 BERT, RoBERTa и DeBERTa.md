@@ -2,9 +2,9 @@
 title: BERT, RoBERTa и DeBERTa
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-29
+last_updated: 2026-11-13
 previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]"
-next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]"
+next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]"
 reference_terms:
   - label: Whole-word masking — выбор целых слов
     label_en: Whole-word masking — grouped targets
@@ -18,12 +18,20 @@ reference_terms:
   - label: ALBERT и Sentence Order Prediction
     label_en: ALBERT and sentence-order prediction
     anchor: sentence-order-prediction
+  - label: ELECTRA и обнаружение подменённых токенов
+    label_en: ELECTRA and replaced-token detection
+    anchor: electra-replaced-token-detection
+  - label: DeBERTaV3 и разделение градиентов эмбеддингов
+    label_en: DeBERTaV3 and gradient-disentangled embedding sharing
+    anchor: debertav3-gradient-disentangling
 primary_sources:
   - https://aclanthology.org/N19-1423/
   - https://arxiv.org/abs/1907.11692v1
   - https://arxiv.org/abs/2006.03654v6
   - https://aclanthology.org/2020.tacl-1.5/
   - https://arxiv.org/abs/1909.11942v6
+  - https://arxiv.org/abs/2003.10555v1
+  - https://arxiv.org/abs/2111.09543v4
 ---
 
 # BERT, RoBERTa и DeBERTa
@@ -1272,10 +1280,185 @@ SuperGLUE-протоколу 1.5B-модели, а не ко всем языко
 [Официальный репозиторий](https://github.com/microsoft/DeBERTa)
 отдельно описывает V2: новый SentencePiece-словарь 128K, дополнительную
 свёртку, общие проекции содержания/позиций и относительные buckets.
-V3 меняет предобучение на ELECTRA-style распознавание заменённых токенов
-и gradient-disentangled embedding sharing.
-Приведённые выше формулы и шаг MLM описывают исходный вариант:
-они не являются полным рецептом V3.
+V3 меняет цель предобучения и способ обновления эмбеддингов.
+
+<a id="electra-replaced-token-detection"></a>
+
+## ELECTRA: какие токены были подменены
+
+В BERT энкодер вычисляет состояния для всего текста, а словарная
+голова получает метки только в выбранных позициях. В ELECTRA эти позиции
+нужны, чтобы приготовить испорченный текст. Основной энкодер получает
+по одной бинарной метке на каждую действительную позицию: остался ли
+здесь исходный токен. Такой предобученный энкодер можно затем дообучить
+для той же классификации или разметки, что и BERT.
+
+Сначала небольшой генератор решает знакомую задачу MLM. Пусть исходная
+строка — `She cooked rice and washed dishes` и для генератора скрыты
+`cooked` и `dishes`. Генератор выдаёт два распределения по словарю
+и получает две цели: исходные `cooked` и `dishes`. Из распределений
+берут по одной случайной выборке. В нашем случае выпали `ate` и `dishes`.
+Вторая выборка вернула исходный токен, поэтому на вход дискриминатора
+поступает `She ate rice and washed dishes` с метками $(0,1,0,0,0,0)$,
+где 1 означает фактическую подмену. Позиция `dishes` участвовала в MLM,
+но её RTD-метка равна нулю.
+
+Пусть $x_i$ — исходный токен, $\hat{x}_i$ — токен на входе
+дискриминатора, а $\mathcal V$ — множество учитываемых позиций
+без padding. Для $y_i=\mathbb 1[\hat{x}_i\ne x_i]$ и логита $s_i$ из
+состояния дискриминатора положим $p_i=\sigma(s_i)$. Тогда
+
+$$
+L_{\mathrm{RTD}}=-\frac{1}{|\mathcal V|}
+\sum_{i\in\mathcal V}\big[y_i\log p_i+(1-y_i)\log(1-p_i)\big].
+$$
+
+Здесь $p_i$ — вероятность подмены, а в формуле оригинальной статьи
+$D$ обозначает вероятность того, что токен остался исходным.
+Классы противоположны, бинарная потеря та же. Если дискриминатор даёт
+$p_i=0.8$ для `ate` и $p_i=0.2$ для пяти исходных токенов,
+каждая правильная метка получает вероятность $0.8$, а средняя
+потеря равна $-\log 0.8\approx0.2231$.
+
+По сравнению с MLM основной энкодер получает больше прямых целей на
+одной строке, но предобучение требует ещё и вычислений генератора.
+Подмены берутся из его распределения, чтобы дискриминатору приходилось
+сопоставлять слово с контекстом. Генератор обучается восстанавливать текст,
+а не обманывать дискриминатор: бинарная потеря не дифференцируется через
+дискретную выборку токена. Если у сетей общая таблица эмбеддингов, у этой
+потери остаётся другой путь к общим параметрам. В
+[схеме ELECTRA, рис. 2](https://arxiv.org/html/2003.10555v1#S2.F2)
+можно проследить всю цепочку от маски до меток.
+
+<a id="debertav3-gradient-disentangling"></a>
+
+## DeBERTaV3: общие значения, раздельные градиенты
+
+DeBERTaV3 сохраняет внимание DeBERTa, в котором содержание и относительные
+позиции входят в оценку разными слагаемыми. Во время предобучения основной энкодер
+становится дискриминатором RTD; MLM остаётся у вспомогательного
+генератора. На рисунке авторов верхние стрелки показывают передачу
+токенов, нижние — пути градиента. $\theta_G$ и $\theta_D$ обозначают
+параметры двух сетей помимо показанных таблиц эмбеддингов.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/debertav3-2026-11-13/debertav3-figure1-sharing.png|Три способа связать таблицы генератора и дискриминатора: ES, NES и GDES]]
+
+*Pengcheng He, Jianfeng Gao и Weizhu Chen, [DeBERTaV3, рис. 1, с. 5](https://arxiv.org/pdf/2111.09543v4#page=5),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Все три панели и английская подпись сохранены; убраны только поля и соседние материалы страницы.*
+
+В панели (a), ES, одна таблица $E$ получает сумму градиентов
+$L_{\mathrm{MLM}}$ и $\lambda L_{\mathrm{RTD}}$. Если для некоторой
+координаты первый градиент отрицателен, а второй положителен, они
+частично компенсируются. В панели (b), NES, у каждой сети своя
+таблица: обновление $E_G$ уже не меняет $E_D$. Так исчезает конфликт
+на общем параметре, но дискриминатор больше не читает значения,
+которые выучил генератор.
+
+В панели (c), GDES, таблица дискриминатора строится на каждом
+прямом проходе из двух частей:
+
+$$
+E_D=\operatorname{stopgrad}(E_G)+E_\Delta.
+$$
+
+$E_\Delta$ начинают с нуля, поэтому сначала обе сети читают одинаковые
+строки. При вычислении производной $\operatorname{stopgrad}$ сохраняет
+значение $E_G$, но обрывает путь градиента к нему. RTD обновляет
+$E_\Delta$ и параметры дискриминатора; MLM обновляет $E_G$ и параметры
+генератора. После шага MLM значение $E_D$ тоже меняется, потому что
+дискриминатор в следующий раз прочитает новое $E_G$.
+В [закреплённом коде Microsoft](https://github.com/microsoft/DeBERTa/blob/4d7fe0bd4fb3c7d4f4005a7cafabde9800372098/DeBERTa/apps/tasks/rtd_task.py#L99-L131)
+этот разрыв реализован через `.detach()` и для выборки токенов, и
+отдельно для общего слагаемого таблицы.
+
+Рассмотрим одну координату эмбеддинга вместо всей таблицы. Заменим
+MLM и RTD квадратичными функциями, чтобы видеть градиенты по отдельности.
+Пусть они стремятся приблизить координату к 3 и к 0 соответственно,
+начальное значение равно 1, $\lambda=2$, скорость SGD — $0.1$.
+При ES производные равны $1-3=-2$ и $2(1-0)=2$: общий параметр
+останется равен 1. При NES генератор сдвинет своё значение до $1.2$,
+а дискриминатор своё — до $0.8$. При GDES сначала MLM сдвигает
+$E_G$ до $1.2$. Затем дискриминатор читает $1.2+0$ и даёт градиент
+$2.4$ только по $E_\Delta$. Поправка становится $-0.24$,
+поэтому после обоих обновлений $E_D=1.2-0.24=0.96$, а $E_G=1.2$.
+Числа показывают устройство одного шага, а не траекторию обучения
+на реальном корпусе.
+
+```python
+import math
+import torch
+import torch.nn.functional as F
+
+# One fixed outcome of sampling: cooked -> ate, dishes -> dishes.
+original = torch.tensor([1, 2, 3, 4, 5, 6, 0])  # 0 is PAD
+chosen = torch.tensor([1, 5])
+sampled = torch.tensor([7, 6])
+valid = original.ne(0)
+masked = original.clone()
+masked[chosen] = 8  # MASK
+corrupted = original.clone()
+corrupted[chosen] = sampled
+replaced = corrupted.ne(original)
+assert masked.tolist() == [1, 8, 3, 4, 5, 8, 0]
+assert original[chosen].tolist() == [2, 6]  # generator's two MLM labels
+assert replaced[valid].int().tolist() == [0, 1, 0, 0, 0, 0]
+
+# Supplied RTD logits give the true label probability 0.8 at each position.
+logits = torch.where(replaced, math.log(4), -math.log(4)).double()
+rtd = F.binary_cross_entropy_with_logits(logits[valid], replaced[valid].double())
+assert math.isclose(rtd.item(), -math.log(.8), abs_tol=1e-8)
+
+# Scalar losses isolate gradient flow; they are not MLM or RTD losses.
+def scalar(value):
+    return torch.tensor(value, dtype=torch.float64, requires_grad=True)
+
+lr, weight = .1, 2.
+e = scalar(1.)
+loss_es = .5 * (e - 3).square() + weight * .5 * e.square()
+grad_es, = torch.autograd.grad(loss_es, e)
+assert grad_es.item() == 0.
+
+g, delta, d = scalar(1.), scalar(0.), scalar(1.)
+grad_g, = torch.autograd.grad(.5 * (g - 3).square(), g)
+g_next = (g - lr * grad_g).detach().requires_grad_()
+grad_d, = torch.autograd.grad(weight * .5 * d.square(), d)
+d_nes = d - lr * grad_d
+
+d_gdes = g_next.detach() + delta
+grad_g_from_rtd, grad_delta = torch.autograd.grad(
+    weight * .5 * d_gdes.square(), (g_next, delta), allow_unused=True
+)
+assert grad_g_from_rtd is None
+assert math.isclose(grad_delta.item(), 2.4)
+delta_next = delta - lr * grad_delta
+exported = g_next.detach() + delta_next.detach()
+assert math.isclose(g_next.item(), 1.2)
+assert math.isclose(d_nes.item(), .8)
+assert math.isclose(exported.item(), .96)
+```
+
+Авторы сравнивают три варианта на одном Base-рецепте. На рисунке 2
+отложена MLM-потеря **генератора** по шагам, а не точность
+дискриминатора и не время обучения. Кривые NES и GDES близки и в
+этом опыте лежат ниже ES после начального спада.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/debertav3-2026-11-13/debertav3-figure2-mlm-loss.png|MLM-потеря генератора по шагам для ES, NES и GDES]]
+
+*He, Gao и Chen, [DeBERTaV3, рис. 2, с. 6](https://arxiv.org/pdf/2111.09543v4#page=6),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Сохранены исходный график, логарифмическая ось потери и английская подпись.*
+
+Отдельно [таблица 2, с. 5](https://arxiv.org/pdf/2111.09543v4#page=5)
+сравнивает качество после дообучения: на MNLI-m получено 88.8 для ES,
+88.3 для NES и 89.3 для GDES; на SQuAD 2.0 F1 — 86.3, 85.3 и 87.2.
+В этом опыте NES быстрее снизил MLM-потерю, но уступил ES на обеих
+прикладных задачах. Для итоговой линейки V3 в §4.1 меняется и
+рецепт обучения, поэтому её результаты нельзя приписать только GDES.
+
+Для применения сохраняют дискриминатор с готовой суммой
+$E_G+E_\Delta$. Генератор и RTD-голова не нужны, когда энкодер
+дообучают, например, для поиска начала и конца ответа.
 
 ## Ограничения и наследие
 
@@ -1300,14 +1483,16 @@ BERT выбирает запуски по dev, RoBERTa в репликацион
 и социальные смещения. Средний результат benchmark не устанавливает
 устойчивость к новому домену и не проверяет достоверность всех предсказаний.
 
-Следующая [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|глава о GPT-1]]
-разбирает причинное предобучение и дообучение на размеченных задачах.
+В [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]] энкодер тоже читает вход в обе стороны. Его состояния
+передаются декодеру, который выдаёт ответ в виде текста.
 
 ## Источники и дальнейшее чтение
 
 - Jacob Devlin et al., [BERT, §§3–5, приложения A.1–A.5 и C.2](https://aclanthology.org/N19-1423/).
 - Yinhan Liu et al., [RoBERTa v1, §§3–5, таблицы 1–7](https://arxiv.org/abs/1907.11692v1).
 - Pengcheng He et al., [DeBERTa v6, §§3–5, приложения A.7–A.8](https://arxiv.org/abs/2006.03654v6).
+- Kevin Clark et al., [ELECTRA, §2 и рис. 2](https://arxiv.org/html/2003.10555v1#S2), и [объяснение авторов в Google Research](https://research.google/blog/more-efficient-nlp-model-pre-training-with-electra/).
+- Pengcheng He, Jianfeng Gao и Weizhu Chen, [DeBERTaV3, §§2.3 и 3–4.1](https://arxiv.org/pdf/2111.09543v4): цель RTD, три способа обновления таблиц, рис. 1–2 и таблица 2.
 - Google Research, [BERT Whole Word Masking release and generator](https://github.com/google-research/bert/blob/eedf5716ce1268e56f0a50264a88cafad334ac61/README.md#L74-L118), Apache-2.0. The original explanation is quoted above; the reduced selector and budget examples are added. [Full license](/licenses/google-bert-eedf5716-Apache-2.0.txt).
 - Mandar Joshi et al., [SpanBERT, sections 3, 4.2–4.3 and 6, Figures 1–2, Tables 6–7](https://aclanthology.org/2020.tacl-1.5/), CC BY 4.0. Original figures/captions and the boundary-input passage retain their language. The equations use $h$ for contextual states; the small PyTorch module and probability calculations are added.
 - Zhenzhong Lan et al., [ALBERT v6, sections 3.1 and 4.6, Table 5](https://arxiv.org/abs/1909.11942v6). Pair construction and legacy feature naming are also checked against [the pinned original generator](https://github.com/google-research/albert/blob/b772393d3dae115b493258ce8e37c17b2cc62100/create_pretraining_data.py), Copyright 2019 The Google Research Authors, Apache-2.0. The swap excerpt is unchanged; the door example and supplied-logit calculation are added. [Full code license](/licenses/google-albert-b772393d-Apache-2.0.txt).
@@ -1319,4 +1504,4 @@ BERT выбирает запуски по dev, RoBERTa в репликацион
 - [[02 Areas/ML & DL/04 Вопросы/100 вопросов по NLP|Вопросы по NLP]].
 
 **Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]] ·
-**Дальше:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]
+**Дальше:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]

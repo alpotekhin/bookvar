@@ -5,6 +5,7 @@ import { extname, resolve } from 'node:path';
 import { deflateSync, inflateSync } from 'node:zlib';
 import { parse } from 'yaml';
 import { describe, expect, it } from 'vitest';
+import { beforeTopicConsolidation } from '../tools/topic-consolidation-baseline.mjs';
 
 const root = resolve(import.meta.dirname, '../..');
 const fullTransformerFigures = JSON.parse(readFileSync(resolve(root,
@@ -45,12 +46,18 @@ type CuratedAsset = {
   id?: string;
   author?: string;
   license?: string;
-  license_url?: string;
+  license_url?: string | null;
   asset: string;
   derivation?: string;
   provenance_confirmation?: string;
   source_asset?: string;
   source_asset_sha256?: string;
+  source_archive_member?: string;
+  source_archive_sha256?: string;
+  source_parent_sha256?: string;
+  figure_url?: string;
+  publication_status?: string;
+  retirement_reason?: string;
   permission_asset?: string;
   permission_asset_sha256?: string;
   source_stylesheet_asset?: string;
@@ -58,23 +65,30 @@ type CuratedAsset = {
   source_stylesheet_sha256?: string;
   license_evidence?: string;
   license_evidence_sha256?: string;
+  license_evidence_url?: string;
   source_member?: string;
   source_member_sha256?: string;
   source_cell?: number;
+  source_cell_index?: number;
+  source_output_index?: number;
   source_page?: number;
   source_pdf_object?: number;
   source_printed_page?: number;
   render_dpi?: number;
+  render_scale_to_px?: number;
   crop_box_px?: unknown;
   render_page_size_px?: unknown;
   rights_status?: string;
   source_url?: string;
   source_image_url?: string;
+  source_blob_sha1?: string;
   source_code?: string;
   source_code_url?: string;
   source_code_sha256?: string;
   source_page_snapshot?: string;
   source_page_sha256?: string;
+  source_viewbox?: number[];
+  public_license_copy?: string;
   commit?: string;
   metadata_status?: string;
   modifications?: string;
@@ -83,6 +97,7 @@ type CuratedAsset = {
   frames?: number;
   bytes?: number;
   used_in?: string[];
+  former_used_in?: string[];
 };
 
 function requireNonEmptyString(value: unknown, field: string): string {
@@ -130,6 +145,15 @@ function validateSystemsManifest(assets: SystemsAsset[]): void {
 
 function sha256(path: string): string {
   return createHash('sha256').update(readFileSync(path)).digest('hex');
+}
+
+function sourceSnapshotSha256(repositoryRoot: string, path: string): string {
+  const absolute = resolve(repositoryRoot, path);
+  if (!/^05 Источники\/Courses\/Harvard ML Systems\/vol1\/(frameworks|nn_architectures)\.md$/.test(path))
+    return sha256(absolute);
+  const source = readFileSync(absolute, 'utf8');
+  const archived = beforeTopicConsolidation(source, path, repositoryRoot);
+  return createHash('sha256').update(archived).digest('hex');
 }
 
 function expectViewportOnlySvgCrop(original: string, cropped: string): void {
@@ -342,6 +366,36 @@ const rnnBpttFigures = {
 } as const;
 
 const lstmGruFigures = {
+  "00 Учебник/Assets/Figures/curated/lstm-gru-author-2026-11-10/d2l-lstm-1.svg": {
+    "id": "curated-d2l-lstm-1-82974021e95b",
+    "path": "lstm-gru-author-2026-11-10/d2l-lstm-1.svg",
+    "member": "d2l-lstm-1.svg",
+    "sourceName": "lstm-1",
+    "hash": "82974021e95bc18104f6fafff70c1621914fbea87cae579a2a84088bd7a3e720",
+    "kind": "d2l",
+    "page": "lstm",
+    "viewBox": "0 0 327 208"
+  },
+  "00 Учебник/Assets/Figures/curated/lstm-gru-author-2026-11-10/d2l-lstm-2.svg": {
+    "id": "curated-d2l-lstm-2-1e42c97a7ca5",
+    "path": "lstm-gru-author-2026-11-10/d2l-lstm-2.svg",
+    "member": "d2l-lstm-2.svg",
+    "sourceName": "lstm-2",
+    "hash": "1e42c97a7ca5c296db3888f93de979d45ad5ee5cf79f3b1d09d72ab5a5492883",
+    "kind": "d2l",
+    "page": "lstm",
+    "viewBox": "0 0 414 214"
+  },
+  "00 Учебник/Assets/Figures/curated/lstm-gru-author-2026-11-10/d2l-gru-2.svg": {
+    "id": "curated-d2l-gru-2-1cdd63f71aa7",
+    "path": "lstm-gru-author-2026-11-10/d2l-gru-2.svg",
+    "member": "d2l-gru-2.svg",
+    "sourceName": "gru-2",
+    "hash": "1cdd63f71aa7e75993d7fd314b4ad30d62e680ef13444330d21220d73d635eae",
+    "kind": "d2l",
+    "page": "gru",
+    "viewBox": "0 0 414 212"
+  },
   "00 Учебник/Assets/Figures/curated/d2l-recurrent/lstm-gates.svg": {
     "id": "curated-d2l-lstm-gates-00000000000c",
     "path": "d2l-recurrent/lstm-gates.svg",
@@ -1110,7 +1164,2226 @@ const positionalFigures = {
   }
 } as const;
 
+const originalScalingMetricFigures = [
+    {"id":"curated-scaling-emergence-wei-d905d44f12c6","asset":"00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/wei-emergence-figure2.png","author":"Jason Wei, Yi Tay, Rishi Bommasani et al.","source_url":"https://arxiv.org/html/2206.07682v2#S3.F2","source_image_url":"https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/wei-emergence-plot.png","source_asset":"05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/wei-emergence-plot.png","commit":"8b59b50730766695c2ffedd1a79c50cd09b9eb91","sha256":"d905d44f12c6861f6e1febd0af3e7ab446f1ccf1531a1702c43dd4b977dd453b","dimensions_px":[777,549],"license":"CC BY 4.0","license_url":"https://creativecommons.org/licenses/by/4.0/","rights_evidence":"https://arxiv.org/html/2206.07682v2","derivation":"source-raster-copy"},
+    {"id":"curated-scaling-emergence-schaeffer-19c9799140b9","asset":"00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/schaeffer-multiplication-exact-match.svg","author":"Rylan Schaeffer, Brando Miranda and Sanmi Koyejo","source_url":"https://arxiv.org/html/2304.15004v2#S3.F3","source_image_url":"https://arxiv.org/html/2304.15004v2/multiplication_acc_vs_model_size_by_temp_by_target_str_len.svg","source_asset":"00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/schaeffer-multiplication-exact-match.svg","sha256":"19c9799140b911f3d7d6eb8a8f0194f154b12800ca89012c6336aac166d77054","license":"CC BY-NC-ND 4.0","license_url":"https://creativecommons.org/licenses/by-nc-nd/4.0/","rights_evidence":"https://arxiv.org/html/2304.15004v2","derivation":"source-svg-copy"},
+    {"id":"curated-scaling-emergence-schaeffer-19ed0bcfe5a8","asset":"00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/schaeffer-multiplication-token-edits.svg","author":"Rylan Schaeffer, Brando Miranda and Sanmi Koyejo","source_url":"https://arxiv.org/html/2304.15004v2#S3.F3","source_image_url":"https://arxiv.org/html/2304.15004v2/multiplication_neg_token_edit_dist_vs_model_size_by_temp_by_target_str_len.svg","source_asset":"00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/schaeffer-multiplication-token-edits.svg","sha256":"19ed0bcfe5a86739ae0c656e516fdc28c242156c5d23b60ca2aed548c40f9aab","license":"CC BY-NC-ND 4.0","license_url":"https://creativecommons.org/licenses/by-nc-nd/4.0/","rights_evidence":"https://arxiv.org/html/2304.15004v2","derivation":"source-svg-copy"},
+];
+
+const isoflopOriginalDir = '00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09';
+const isoflopOriginals = [
+  ["happy_path.svg","0ac01e9299c3c92fc3705dc0a2482e1979e9d721dcff70935adf2efdb45df8ad","https://arxiv.org/html/2603.22339v1#S4.F3","https://arxiv.org/html/2603.22339v1/happy_path.svg"],
+  ["asymmetric.svg","6df85f0b6ddf5d8be2486e2ea614d6aa37d60076e0f30072ab53b14c34fa8ebc","https://arxiv.org/html/2603.22339v1#S5.F4","https://arxiv.org/html/2603.22339v1/asymmetric.svg"],
+  ["training_flop_vs_model_size.png","3fbaefa50fa091f9dc58136ae9772a1d27123bf9399751bc8be0c919a2be7841","https://arxiv.org/html/2404.10102v2#S2.F2","https://arxiv.org/html/2404.10102v2/training_flop_vs_model_size.png"],
+  ["distributions.svg","98769023cbf1cd7193d454cab36051328d71182d12bb0a9895c2e4d8df6bd1e5","https://arxiv.org/html/2404.10102v2#S3.F3","https://arxiv.org/html/2404.10102v2/distributions.svg"],
+  ["tokens_to_params_ratio_plot.svg","c550efc1565c868ac3ebb095a2f46a14f8fdd0ceb16246dcbab7d67028461cd6","https://arxiv.org/html/2404.10102v2#S3.F5","https://arxiv.org/html/2404.10102v2/tokens_to_params_ratio_plot.svg"],
+] as const;
+
+const seq2seqAttentionBridge = [
+  {"asset":"00 Учебник/Assets/Figures/curated/seq2seq-attention-bridge-2026-11-10/d2l-seq2seq-state.svg","sha256":"02a4827cfcdbdde12e6c2c4af95357b0c66342f4fded2c020883e7c8d34e5ff6","source_url":"https://en.d2l.ai/chapter_attention-mechanisms-and-transformers/bahdanau-attention.html#fig-s2s-attention-state","source_image_url":"https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/seq2seq-state.svg","source_asset":"05 Источники/Originals/seq2seq-2026-10-21/seq2seq-state.svg","source_asset_sha256":"02a4827cfcdbdde12e6c2c4af95357b0c66342f4fded2c020883e7c8d34e5ff6","source_page_snapshot":"05 Источники/Originals/seq2seq-attention-bridge-2026-11-10/d2l-bahdanau.html","source_page_sha256":"ca248f2e2102f9dadc9ca2828327529c57e2f2f3837ef542a5470d021b0f8ae9","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0/","license_evidence":"05 Источники/Originals/neural-language-model-2026-10-21/d2l-LICENSE.txt","license_evidence_sha256":"a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c","rights_status":"source-license-verified","metadata_status":"verified","derivation":"source-svg-copy","viewBox":[0,0,304,136],"commit":"23d7a5aecceee57d1292c56e90cce307f183bb0a","used_in":["00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer.md"]},
+  {"asset":"00 Учебник/Assets/Figures/curated/seq2seq-attention-bridge-2026-11-10/d2l-bahdanau-pytorch-weights.svg","sha256":"e4e45f9cff346aabba76206352c3d45afb87c1630a9189b116ebca7a79cf41b3","source_url":"https://en.d2l.ai/chapter_attention-mechanisms-and-transformers/bahdanau-attention.html#training","source_image_url":"https://en.d2l.ai/_images/output_bahdanau-attention_dd4710_90_0.svg","source_asset":"05 Источники/Originals/seq2seq-attention-bridge-2026-11-10/d2l-bahdanau-pytorch-weights.svg","source_asset_sha256":"e4e45f9cff346aabba76206352c3d45afb87c1630a9189b116ebca7a79cf41b3","source_page_snapshot":"05 Источники/Originals/seq2seq-attention-bridge-2026-11-10/d2l-bahdanau.html","source_page_sha256":"ca248f2e2102f9dadc9ca2828327529c57e2f2f3837ef542a5470d021b0f8ae9","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0/","license_evidence":"05 Источники/Originals/neural-language-model-2026-10-21/d2l-LICENSE.txt","license_evidence_sha256":"a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c","rights_status":"source-license-verified","metadata_status":"verified","derivation":"source-svg-copy","viewBox":[0,0,191.25234,244.474996],"used_in":["00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer.md"]},
+  {"asset":"00 Учебник/Assets/Figures/curated/seq2seq-attention-bridge-2026-11-10/cho-2014-figure4.png","sha256":"c597003c56432847b54db6fabec8d1da7de043adc96e367aa2a58fbf090a7e5a","source_url":"https://aclanthology.org/W14-4012/","source_image_url":"https://aclanthology.org/W14-4012.pdf#page=7","source_asset":"05 Источники/Originals/seq2seq-attention-bridge-2026-11-10/cho-w14-4012.pdf","source_asset_sha256":"f86daf916fcd28b24e8493545925421b925a7b60ee0a73c2e1e72f634a580226","license":"CC BY-NC-SA 3.0","license_url":"https://creativecommons.org/licenses/by-nc-sa/3.0/","license_evidence":"05 Источники/Originals/architecture-patterns-2026-10-21/acl-copyright.html","license_evidence_sha256":"88d644d2e21542ef1cc6c304c264ce7543d81e87c9599aff7e1c68e7a6df9558","rights_status":"source-license-verified","metadata_status":"verified","derivation":"pdf-page-render-crop","crop_box_px":[335,325,2595,935],"render_dpi":360,"source_page":7,"used_in":["00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора.md"]},
+] as const;
+
+const multiheadOriginals = [
+  {"asset":"00 Учебник/Assets/Figures/curated/multihead-2026-11-10/vaswani-multihead-figure2.png","sha256":"ba8a3ede5d40183ce8c18de249be60bec692646d53db108a3df51797a3c8634a","source_url":"https://arxiv.org/html/1706.03762v7#S3.F2.g2","source_image_url":"https://arxiv.org/html/1706.03762v7/Figures/ModalNet-20.png","source_asset":"05 Источники/Originals/multihead-2026-11-10/ModalNet-20.png","source_asset_sha256":"ba8a3ede5d40183ce8c18de249be60bec692646d53db108a3df51797a3c8634a","source_page_snapshot":"05 Источники/Originals/transformer-gpt-bridge-2026-11-10/vaswani-v7.html","source_page_sha256":"fe1288e9c6f8322156429ab44bf5ced203155f8ecc7ea9fe6cfd125872c72a3b","license":"Google permission for attributed scholarly or journalistic figure reuse","license_url":"https://arxiv.org/html/1706.03762v7#p1.1","license_evidence":"05 Источники/Originals/transformer-gpt-bridge-2026-11-10/vaswani-v7.html","license_evidence_sha256":"fe1288e9c6f8322156429ab44bf5ced203155f8ecc7ea9fe6cfd125872c72a3b","derivation":"source-png-copy","metadata_status":"verified","rights_status":"source-license-verified","dimensions_px":[835,1282],"used_in":["00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md","en/00 Textbook/05 Attention and Transformer/03 Masking, multi-head attention, and tensor shapes.md"]},
+  {"asset":"00 Учебник/Assets/Figures/curated/multihead-2026-11-10/voita-trained-heads-figure1.png","sha256":"27e4f18a5ebe6f806b82025c21b63278aa89a899fef61141e31d783cca86ee25","source_url":"https://aclanthology.org/P19-1580/","source_image_url":"https://aclanthology.org/P19-1580.pdf#page=3","source_asset":"05 Источники/Originals/multihead-2026-11-10/P19-1580.pdf","source_asset_sha256":"9726037ea63f0d500e724fbf9d387bc46c71b5f50626d63538f1172f132c0827","license":"CC BY 4.0","license_url":"https://creativecommons.org/licenses/by/4.0/","license_evidence":"05 Источники/Originals/architecture-patterns-2026-10-21/acl-copyright.html","license_evidence_sha256":"88d644d2e21542ef1cc6c304c264ce7543d81e87c9599aff7e1c68e7a6df9558","derivation":"pdf-page-render-crop","metadata_status":"verified","rights_status":"source-license-verified","dimensions_px":[2110,570],"source_page":3,"render_dpi":360,"crop_box_px":[450,300,2560,870],"used_in":["00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md","en/00 Textbook/05 Attention and Transformer/03 Masking, multi-head attention, and tensor shapes.md"]},
+] as const;
+
+const foundationsFigurePath = '00 Учебник/Assets/Figures/curated/autoencoder-dropout-primary-2026-11-10/';
+const princeSourcePath = '05 Источники/Originals/autoencoder-dropout-primary-2026-11-10/';
+const princeCommit = '4caea9b63ee7217ac6568e62394fc6c179fc91ac';
+const princeFigures = {
+  'prince-dropout-figure9-9.png': [9, 163, 'RegDropout.pdf', 609,
+    '3292c1d01a093336f45ee273c186c034dc6f708bdd06b5b743b0ac51edf0abd4',
+    '0b62f33819a80d7ce2a6542b5b177a52d90003cdc8ac6061c9ea8fd0f64e32f7'],
+  'prince-vae-posterior-figure17-8.png': [17, 351, 'VAEVariational.pdf', 719,
+    '391c9e2cc3dd55adff8ea686fca69e239a490c73fea5bf946a433cafc59b0591',
+    'f4058a4208cc3fb23c342e0c5f84be10ce1a8ddf252277318a1772dc2a1d8479'],
+  'prince-vae-reparameterization-figure17-11.png': [17, 353, 'VAEReparam.pdf', 613,
+    '297b43063daceb35ece2be386230cac43236f441653ebf7c7228c1cd744ad5f7',
+    'b2b33aa33e16135bf77e89374250ff4536316cac82b92a062f7862aa68c17854'],
+} as const;
+
+function validateFoundationsFigure(entry: CuratedAsset, repositoryRoot: string): void {
+  const name = entry.asset.slice(foundationsFigurePath.length);
+  const target = resolve(repositoryRoot, entry.asset);
+  expect(entry.metadata_status).toBe('verified');
+  expect(entry.rights_status).toBe('source-license-verified');
+  expect(entry.provenance_confirmation).toBe('source-license-verified');
+  expect(entry.crop_box_px).toBeUndefined();
+  expect(entry.source_member).toBeUndefined();
+  if (name === 'chervinskii-autoencoder.png') {
+    expect(entry.used_in).toEqual([
+      '00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md',
+      '05 Источники/Courses/Harvard ML Systems/vol2/robust_ai.md',
+    ]);
+    expect(entry).toMatchObject({
+      author: 'Chervinskii', derivation: 'source-raster-copy', source_asset: entry.asset,
+      source_url: 'https://commons.wikimedia.org/wiki/File:Autoencoder_structure.png',
+      source_image_url: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Autoencoder_structure.png',
+      license_evidence_url: 'https://commons.wikimedia.org/w/index.php?title=File:Autoencoder_structure.png&oldid=808656750',
+      license: 'CC BY-SA 4.0', license_url: 'https://creativecommons.org/licenses/by-sa/4.0/',
+      dimensions_px: [677, 506], source_asset_sha256: entry.sha256,
+      sha256: '36bda1536cc36e02b56ee438834566fb659525e0752aa13377f5d4ea8f65f9af',
+    });
+    expect(createHash('sha1').update(readFileSync(target)).digest('hex')).toBe('0926f68e96701ef3edf0e4c577bea1a36e366cbb');
+  } else {
+    expect(entry.used_in).toHaveLength(1);
+    expect(Object.hasOwn(princeFigures, name)).toBe(true);
+    const [chapter, page, member, height, sourceHash, outputHash] = princeFigures[name as keyof typeof princeFigures];
+    expect(entry).toMatchObject({
+      author: 'Simon J. D. Prince', copyright: 'MIT Press', commit: princeCommit,
+      source_url: 'https://udlbook.github.io/udlbook/',
+      figure_url: `https://github.com/udlbook/udlbook/releases/download/v5.0.3/UnderstandingDeepLearning_02_09_26_C.pdf#page=${page}`,
+      source_image_url: `https://raw.githubusercontent.com/udlbook/udlbook/${princeCommit}/PDFFigures/UDLChap${chapter}PDF.zip`,
+      source_archive_member: member,
+      source_archive_sha256: chapter === 9
+        ? '037d9d0a84fedc556c6dc3d178c6513c09bc23cec6087b293584202d2fae5e5d'
+        : '498f254ee41053f80593d6527a61a14ae707fc34e5906987e2c730847032d03b',
+      source_asset: princeSourcePath + member, source_asset_sha256: sourceHash,
+      source_page: 1, derivation: 'pdf-page-render', sha256: outputHash,
+      render_scale_to_px: 1900, render_page_size_px: [1900, height], dimensions_px: [1900, height],
+      license: 'CC BY-NC-ND 4.0', license_url: 'https://creativecommons.org/licenses/by-nc-nd/4.0/',
+      license_evidence: princeSourcePath + 'udl-figures-LICENSE.txt',
+      license_evidence_url: `https://github.com/udlbook/udlbook/blob/${princeCommit}/LICENSE`,
+      license_evidence_sha256: '162cd1bd77ae1b548c505840fa24c0926a886a97f37fc6a14eb40a8e115b5eb9',
+    });
+    // Public checkouts have the pinned renders; the ignored source copies
+    // allow an additional full-page pixel check when they are available.
+    const pdf = resolve(repositoryRoot, entry.source_asset!);
+    if (existsSync(pdf)) {
+      expect(sha256(pdf)).toBe(sourceHash);
+      const rendered = execFileSync(process.env.PDFTOPPM ?? 'pdftoppm', [
+        '-f', '1', '-l', '1', '-scale-to', '1900', '-singlefile', '-png', pdf,
+      ], { env: { ...process.env, LC_ALL: 'C', LANG: 'C' }, maxBuffer: 1024 * 1024 });
+      expect(readFileSync(target)).toEqual(rendered);
+    }
+    const policy = resolve(repositoryRoot, entry.license_evidence!);
+    if (existsSync(policy)) expect(sha256(policy)).toBe(entry.license_evidence_sha256);
+  }
+  expect(sha256(target)).toBe(entry.sha256);
+  expect(pngDimensions(target)).toEqual(entry.dimensions_px);
+  expectDecodableImage(target);
+}
+
+const archivedAgentPaperFigures = [
+   {
+     "asset": "00 Учебник/Assets/Figures/curated/astra/reward-ablation.png",
+     "owner": "ASTRA",
+     "figure_url": "https://arxiv.org/html/2601.21558v2#S4.F7",
+     "sha256": "6dd44813a19c201bdfcc24b3786f79319659785afc8f67eb32b9f64338761899"
+   },
+   {
+     "asset": "00 Учебник/Assets/Figures/curated/astra/rl-pipeline.png",
+     "owner": "ASTRA",
+     "figure_url": "https://arxiv.org/html/2601.21558v2#S3.F4",
+     "sha256": "4df3e411875831c94bad8f2f04b8fadb2254012c68caef34fd67c848ab47ec37"
+   },
+   {
+     "asset": "00 Учебник/Assets/Figures/curated/astra/tool-mixing-ablation.png",
+     "owner": "ASTRA",
+     "figure_url": "https://arxiv.org/html/2601.21558v2#S4.F6",
+     "sha256": "fa1e85bfdcb100d58f079d5e1618cf381e5b511baa5f80d140b0f0cfa59f03ab"
+   },
+   {
+     "asset": "00 Учебник/Assets/Figures/curated/astra/turn-distribution.png",
+     "owner": "ASTRA",
+     "figure_url": "https://arxiv.org/html/2601.21558v2#S4.F8",
+     "sha256": "ece15cda113d0b95d195375341ada78096a6da7b46e5d93517384a3db844e480"
+   },
+   {
+     "asset": "00 Учебник/Assets/Figures/curated/toolrl/cold-start-comparison.png",
+     "owner": "ToolRL",
+     "figure_url": "https://arxiv.org/html/2504.13958v1#S5.F11",
+     "sha256": "99fcb5fe026f97224fb6e06109d67ea5a7687005691b3d2b25fc9bd5ec6a82df"
+   },
+   {
+     "asset": "00 Учебник/Assets/Figures/curated/toolrl/introduction.png",
+     "owner": "ToolRL",
+     "figure_url": "https://arxiv.org/html/2504.13958v1#S1.F1",
+     "sha256": "7c80d3359f7dc2903ca0255bf12b1e33ebf6099fca17c24b79b02dbb7a7e3993"
+   }
+ ] as const;
+
+const finalSourceFigures = [
+   {
+     "author": "TensorFlow documentation authors",
+     "title": "Word embeddings: One-hot encodings",
+     "source_url": "https://www.tensorflow.org/text/guide/word_embeddings#one-hot_encodings",
+     "source_image_url": "https://www.tensorflow.org/static/text/guide/images/one-hot.png",
+     "license_evidence_url": "https://www.tensorflow.org/text/guide/word_embeddings",
+     "source_page_snapshot": "05 Источники/Originals/reviewed-source-figures-2026-11-10/tensorflow-guide.html",
+     "source_page_sha256": "cbc5b9594bb53b2cc1aedb66d41bdf11e51e276e13e51f4823dc6290a4938cc7",
+     "sha256": "0309948602d54e32de834032a266fe02179f5a6432bb6aaf0dd396cf9084373a",
+     "dimensions_px": [
+       638,
+       522
+     ],
+     "license": "CC BY 4.0",
+     "license_url": "https://creativecommons.org/licenses/by/4.0/",
+     "derivation": "source-raster-copy",
+     "used_in": [
+       "00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md"
+     ],
+     "asset": "00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/tensorflow-one-hot.png",
+     "source_asset": "00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/tensorflow-one-hot.png",
+     "source_asset_sha256": "0309948602d54e32de834032a266fe02179f5a6432bb6aaf0dd396cf9084373a",
+     "metadata_status": "verified",
+     "provenance_confirmation": "source-license-verified",
+     "rights_status": "source-license-verified"
+   },
+   {
+     "author": "Mercurysheet, adapted from Cmglee",
+     "title": "Reduced Singular Value Decompositions",
+     "source_url": "https://commons.wikimedia.org/wiki/File:Reduced_Singular_Value_Decompositions.svg",
+     "source_image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Reduced_Singular_Value_Decompositions.svg",
+     "license_evidence_url": "https://commons.wikimedia.org/w/index.php?title=File:Reduced_Singular_Value_Decompositions.svg&oldid=1024634772",
+     "source_page_snapshot": "05 Источники/Originals/reviewed-source-figures-2026-11-10/commons-svd.html",
+     "source_page_sha256": "54f52b925f53d3a242135ffdc5efaaed043c8b5576b720bb153452cac266f3bb",
+     "sha256": "f170f19edaaa8de49b840393e548e1ecb70d2eb4be7ca6f525a737c61065eec8",
+     "license": "CC BY-SA 4.0",
+     "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "derivation": "source-svg-copy",
+     "used_in": [
+       "00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md"
+     ],
+     "asset": "00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/reduced-svd.svg",
+     "source_asset": "00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/reduced-svd.svg",
+     "source_asset_sha256": "f170f19edaaa8de49b840393e548e1ecb70d2eb4be7ca6f525a737c61065eec8",
+     "metadata_status": "verified",
+     "provenance_confirmation": "source-license-verified",
+     "rights_status": "source-license-verified"
+   },
+   {
+     "author": "Nathan Lambert",
+     "title": "Training Overview, Figure 5: early RLHF",
+     "source_url": "https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/rlhf-basic.png",
+     "source_image_url": "https://raw.githubusercontent.com/natolambert/rlhf-book/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/rlhf-basic.png",
+     "figure_url": "https://rlhfbook.com/c/03-training-overview#fig:rlhf-basic-repeat",
+     "license_evidence_url": "https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/README.md#license",
+     "source_page_snapshot": "05 Источники/Originals/reviewed-source-figures-2026-11-10/lambert-chapter.md",
+     "source_page_sha256": "bbf587036cf9931038fc00d4928021dad05abaaa482fd31b8625e04495543f83",
+     "license_evidence": "05 Источники/Originals/reviewed-source-figures-2026-11-10/lambert-readme.md",
+     "license_evidence_sha256": "2faf557d3cbd6d114c6e29112f50dc01abdb0a0def136dde34b021f50d37b0f9",
+     "license_notice": "site/public/licenses/rlhf-book-MIT.txt",
+     "license_notice_sha256": "a312d5db1e63cf298985a9989069ce7d6a7a35ac237572276ab3222e5af42d4d",
+     "commit": "3f573487c58548c16a548cd5fb8979a0189384c7",
+     "sha256": "67705f0e237d4eff26e2b1b49e16fdd6aac007aa986336f661ef9cb04eb906cc",
+     "dimensions_px": [
+       4018,
+       1185
+     ],
+     "license": "MIT",
+     "license_url": "https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/LICENSE-CODE",
+     "derivation": "source-raster-copy",
+     "used_in": [
+       "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+       "03 Исследовательские линии/RLHF → DPO → RLVR.md",
+       "Concepts/Training/RLHF.md"
+     ],
+     "asset": "00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/rlhf-basic.png",
+     "source_asset": "00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/rlhf-basic.png",
+     "source_asset_sha256": "67705f0e237d4eff26e2b1b49e16fdd6aac007aa986336f661ef9cb04eb906cc",
+     "metadata_status": "verified",
+     "provenance_confirmation": "source-license-verified",
+     "rights_status": "source-license-verified"
+   }
+ ] as const;
+const finalRetiredFigures = [
+   {
+     "asset": "00 Учебник/Assets/Figures/curated/instructgpt/chatgpt-training-pipeline.png",
+     "figure_url": "https://huyenchip.com/2023/05/02/rlhf.html#rlhf-overview",
+     "sha256": "ffb549dc81ca08e62ae8d936d2313f41711ef5def80e834e89ced8926f4c8724",
+     "former_used_in": [
+       "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+       "Concepts/Training/RLHF.md",
+       "03 Исследовательские линии/RLHF → DPO → RLVR.md"
+     ],
+     "replacement": "00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/rlhf-basic.png"
+   },
+   {
+     "asset": "00 Учебник/Assets/Figures/curated/voita-word-embeddings/one-hot.png",
+     "figure_url": "https://lena-voita.github.io/nlp_course/word_embeddings.html#one_hot_vectors",
+     "sha256": "b1284449dfd787afc529b313bb3f95d08b5dfa8649034a57e370efc8a7239272",
+     "former_used_in": [
+       "00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md"
+     ],
+     "replacement": "00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/tensorflow-one-hot.png"
+   },
+   {
+     "asset": "00 Учебник/Assets/Figures/curated/voita-word-embeddings/count-based-idea.png",
+     "figure_url": "https://lena-voita.github.io/nlp_course/word_embeddings.html#pre_neural",
+     "sha256": "bdd6d2fcd48116d0fe055e6fceaa051a4b95128c4367d5c591102f5ee0dcbd05",
+     "former_used_in": [
+       "00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md"
+     ],
+     "replacement": "00 Учебник/Assets/Figures/curated/reviewed-source-figures-2026-11-10/reduced-svd.svg"
+   }
+ ] as const;
+
+function validateFinalSourceFigure(entry: CuratedAsset, repositoryRoot: string): boolean {
+  const expected = finalSourceFigures.find(row => row.asset === entry.asset);
+  if (!expected) return false;
+  expect(entry).toMatchObject(expected);
+  expect(entry.crop_box_px).toBeUndefined();
+  const file = resolve(repositoryRoot, entry.asset);
+  expect(sha256(file)).toBe(expected.sha256);
+  expectDecodableImage(file);
+  if ('dimensions_px' in expected) expect(pngDimensions(file)).toEqual(expected.dimensions_px);
+  const snapshot = resolve(repositoryRoot, expected.source_page_snapshot);
+  if (existsSync(snapshot)) expect(sha256(snapshot)).toBe(expected.source_page_sha256);
+  if (entry.asset.endsWith('/reduced-svd.svg')) {
+    const bytes = readFileSync(file);
+    expect(createHash('sha1').update(bytes).digest('hex')).toBe('09d791ce9350505608a65ddfa4671eb8d0b8a8ba');
+    expect(bytes.toString('utf8')).not.toMatch(/<script\b|\b(?:xlink:)?href=["'](?!#)/i);
+  }
+  if ('license_notice' in expected) {
+    expect(sha256(resolve(repositoryRoot, expected.license_notice))).toBe(expected.license_notice_sha256);
+    const evidence = resolve(repositoryRoot, expected.license_evidence);
+    if (existsSync(evidence)) {
+      expect(sha256(evidence)).toBe(expected.license_evidence_sha256);
+      expect(readFileSync(evidence, 'utf8')).toContain('some images in `book/images/` are unlicensed photos or screenshots');
+    }
+  }
+  return true;
+}
+
+const retiredFigureRightsReview = [
+  ["atlas-courses-official/llama3-architecture.png","eb052d751a0112841986dd77ed3ff5c6c2b6478210548735c29b884386a02db8","paper-figure-license-unverified"],
+  ["source-first-65-68/react-patterns.png","d5754118adcab0d07293244257d15f6cbc4558610329be370d1a38972d848d2f","project-figure-license-unverified"],
+  ["stanford-cs336-2026/architectures/qwen-next-hybrid-architecture.jpg","3c277992cb4615d4a55ac55ffb328af633e4d597e51f90019103ce670cb122ad","third-party-figure-license-unverified"],
+  ["alternatives-transformer-2026/berkeley-bahdanau-attention.png","0f7dcd9e44c7de2fbaa140865f0187501269c461a3d33b638fb87bb204b609d4","course-figure-license-unverified"],
+  ["alternatives-transformer-2026/berkeley-qwen3-next-gdn.png","59568094fe677afd653bb0a87b3bf31f98ad20cb5251ecd28860e9bcd196585b","course-figure-license-unverified"],
+  ["alternatives-transformer-2026/berkeley-seq2seq-bottleneck.png","bd6343369f276d03c52db5929c7fdff00a5cc379f220c91348f56148ee563ace","course-figure-license-unverified"],
+  ["alternatives-transformer-2026/berkeley-transformer-language-model.png","8b990ac363185fbc43608da8b96870fa495eaf6a81107e4f45a9c5ae1c0b24b5","course-figure-license-unverified"],
+  ["alternatives-transformer-2026/cmu-hybrid-models.png","0f6632a6d1cc4905b2ab81f495a145514b147fb9ccf54fae5953243d4c788bc9","course-figure-license-unverified"],
+  ["alternatives-transformer-2026/cmu-linear-attention.png","b38daa75f7ae1fcc2ebdc10f2660275ccc69797bf0e8bdbd8c73e8c78e678c95","course-figure-license-unverified"],
+  ["alternatives-transformer-2026/mamba-selective-scan-course.png","d7c5864a4f82f22781a756d203bdceec64852fae3e883dc30199c20d6a3f2ee6","course-figure-license-unverified"],
+  ["alternatives-transformer-2026/stanford-cs230-lstm.png","0d785e115dbdda9e33a1ec2dbf0f6951ab125811d1b74a6de22b0a17de7f6021","course-figure-license-unverified"],
+  ["alternatives-transformer-2026/stanford-cs230-rnn-unrolled.png","8683c721faf9012f6b07cc84adc5242e4ff4723cb30b2f3bdf140562c234bb25","course-figure-license-unverified"],
+] as const;
+
+const d2lLegacyOriginals = [
+  ["d2l/lenet.svg","66dc7de32432aebb461dd1845fae53880f07328c03040009f55dd4a0cacbbd11","https://raw.githubusercontent.com/d2l-ai/d2l-en/b2e2ae30898a9d0126a9699ae7e441de3e272715/img/lenet-vert.svg"],
+  ["d2l/resnet18.svg","2ffaf03da85439f7796dfe5f0ff6113479bdd8c5248740fdf7ca7fa37ffe7883","https://raw.githubusercontent.com/d2l-ai/d2l-en/b2e2ae30898a9d0126a9699ae7e441de3e272715/img/resnet18.svg"],
+  ["source-first-7-14/d2l-sigmoid.svg","919f4d5fe95251b8a8337fb90f5e4c5869eb58cccdf890af3bba5afc2c072776","/_images/output_mlp_76f463_48_0.svg"],
+  ["source-first-7-14/d2l-sigmoid-gradient.svg","308927d0b768f063a7760142d0233be44090340f8dc9b916a1d36409dc548368","/_images/output_mlp_76f463_63_0.svg"],
+  ["source-first-7-14/d2l-tanh.svg","b31896fdf836337c92d40d9506c29d9a7129f4221b4e9bf9531201ddf9572b0f","/_images/output_mlp_76f463_78_0.svg"],
+  ["source-first-7-14/d2l-tanh-gradient.svg","a0b8373b2d090121895b6a85dcd43d6af0afab3c2d7ae52bb3bbf0e0f03c29db","/_images/output_mlp_76f463_93_0.svg"],
+  ["source-first-7-14/d2l-relu.svg","350dfd434b6c4210d608a1d55f58a69f07ee28958a14978d17495e60fb59c53c","/_images/output_mlp_76f463_18_0.svg"],
+  ["source-first-7-14/d2l-relu-gradient.svg","1c56cdc4b9c5092bf165e96df001cda87a432b60a9e24494a3d5675bf15b7810","/_images/output_mlp_76f463_33_0.svg"],
+  ["source-first-7-14/d2l-sgd-anisotropic.svg","d3dc77b38a500a85574e5df17e800dd08cd938a23ced8311046229a7f9d5676c","/_images/output_momentum_e3683f_3_1.svg"],
+  ["source-first-7-14/d2l-momentum-anisotropic.svg","8e68f49a0ffdaa64da9daeabc2065e48476154d5fdb8d79a1a3f97d39ac291cc","/_images/output_momentum_e3683f_27_1.svg"],
+  ["d2l/dropout.svg","ad463729d07aa97f9f48d136b2aa205504444720eea02cdb9b8a94eef145aa19","/_images/dropout2.svg"],
+  ["source-first-7-14/d2l-cross-correlation.svg","a29e9c6b51db35de2e2c68e60177eaa116050ea11c397e0f8715cf64f6b898be","/_images/correlation.svg"],
+] as const;
+
+type ReviewedLegacySource = {
+  asset: string;
+  route: string;
+  sha256: string;
+  bytes: number;
+  sourceImage: string;
+  sourceAsset: string;
+  license: string;
+  licenseUrl: string;
+  licenseEvidence: string;
+  licenseEvidenceSha256?: string;
+  publicNotice?: string;
+  publicNoticeSha256?: string;
+  commit?: string;
+  dimensions?: number[];
+  viewBox?: number[];
+};
+const reviewedLegacySources = JSON.parse(readFileSync(resolve(root,
+  'docs/audit/2026-11-10-legacy-textbook-source-copies-additions.json'), 'utf8')).verifiedOriginals as ReviewedLegacySource[];
+
+const stableDiffusionAlammarFigures: Record<string, {
+  sha256: string; blob: string; dimensions: number[]; section: string;
+}> = {
+  'stable-diffusion-text-dataset-v2.png': {
+    sha256: 'c599107951905474b4aa6d3aaf9b96c8499f51c0918021d21f2648df4b6a0569',
+    blob: '6bcadf1a27c304d34e1aa4adae5229b22e21b694',
+    dimensions: [2352, 1406],
+    section: 'feeding-text-information-into-the-image-generation-process',
+  },
+  'stable-diffusion-components-and-tensors.png': {
+    sha256: '329cc9d2251837e26578f1330aee55feba5bd2307934105a48ca7eaee9ee6b1e',
+    blob: '43d349e75e7c6001ab6fcaaa648d9526185ab4e9',
+    dimensions: [1440, 553],
+    section: 'the-components-of-stable-diffusion',
+  },
+};
+
+const legacyPdfFigureEvidence = (JSON.parse(readFileSync(resolve(
+  root, 'docs/audit/2026-11-11-legacy-pdf-figure-evidence-additions.json'
+), 'utf8')) as { proofs: { record: CuratedAsset; comparison: string }[] }).proofs;
+
+const retiredVlmFigures = (JSON.parse(readFileSync(resolve(
+  root, 'docs/audit/2026-11-11-vlm-reader-figure-resolution-additions.json'
+), 'utf8')) as { retired: CuratedAsset[] }).retired;
+
+type ServingRepositoryOriginal = {
+  asset: string; sha256: string; source_asset: string; source_asset_sha256: string;
+  git_commit: string; git_blob: string; upstream_url: string; license_url: string;
+  license_file: string; license_sha256: string;
+};
+const servingRepositoryReview = JSON.parse(readFileSync(resolve(root,
+  'docs/audit/2026-11-11-mooncake-dynamo-originals-additions.json'), 'utf8')) as {
+    figures: ServingRepositoryOriginal[];
+    archivedDynamoOverview: ServingRepositoryOriginal;
+  };
+const servingRepositoryOriginals = [
+  ...servingRepositoryReview.figures, servingRepositoryReview.archivedDynamoOverview,
+];
+
+const sequenceFigureReview = JSON.parse(readFileSync(resolve(root,
+  'docs/audit/2026-11-11-sequence-architecture-figures-additions.json'), 'utf8')) as {
+    figures: CuratedAsset[];
+    historical: (CuratedAsset & { replacement: string; former_used_in: string[] })[];
+  };
+const sequenceRecallReview = JSON.parse(readFileSync(resolve(root,
+  'docs/audit/2026-11-11-sequence-recall-licensed-figures-additions.json'), 'utf8')) as {
+    figures: CuratedAsset[];
+    retired: (CuratedAsset & { replacement: string; former_used_in: string[] })[];
+  };
+const optimizerCurvatureReview = JSON.parse(readFileSync(resolve(root,
+  'docs/audit/2026-11-11-optimizer-curvature-source-figures-additions.json'), 'utf8')) as {
+    figures: CuratedAsset[];
+    retired: CuratedAsset & { replacement: string; former_used_in: string[] };
+  };
+const optimizerCurvatureAssets = [...optimizerCurvatureReview.figures, optimizerCurvatureReview.retired];
+const vllmSourceLibrary = JSON.parse(readFileSync(resolve(root,
+  'docs/audit/2026-11-11-vllm-source-library-figure-reconciliation-additions.json'), 'utf8')) as {
+    figures: CuratedAsset[];
+    retired: (CuratedAsset & { git_blob: string; bytes: number; former_used_in: string[] })[];
+  };
+
+const distributedNvidiaFigures = (JSON.parse(readFileSync(resolve(root,
+  'docs/audit/2026-11-11-distributed-nvidia-source-figures-additions.json'), 'utf8')) as {
+    figures: (CuratedAsset & {
+      sha256: string; bytes: number; git_blob: string; dimensions_px: [number, number];
+      source_asset: string; license_evidence: string; license_evidence_sha256: string;
+    })[];
+  }).figures;
+
+const chenSourceFigures = (JSON.parse(readFileSync(resolve(root,
+  'docs/audit/2026-11-11-chen-speculative-source-figures-additions.json'), 'utf8')) as {
+    figures: (CuratedAsset & {
+      source_asset: string; source_parent_asset: string; source_parent_sha256: string;
+      sha256: string; git_blob: string; bytes: number; dimensions_px: [number, number];
+      replacement?: string;
+    })[];
+  }).figures;
+
+const flashSourceReview = JSON.parse(readFileSync(resolve(root,
+  'docs/audit/2026-11-11-flashattention-source-figures-additions.json'), 'utf8')) as {
+    figures: CuratedAsset[];
+    historical: (CuratedAsset & { replacement?: string })[];
+  };
+const gptRouteFigure = (JSON.parse(readFileSync(resolve(root,
+  'docs/audit/2026-11-11-gpt-route-experimental-evidence-additions.json'), 'utf8')) as {
+    figure: CuratedAsset;
+  }).figure;
+const reconciledReaderFigures = (JSON.parse(readFileSync(resolve(root,
+  'docs/audit/2026-11-11-textbook-visible-figure-provenance-additions.json'), 'utf8')) as { records: CuratedAsset[] }).records;
+const schedulingSourceReview = JSON.parse(readFileSync(resolve(root,
+  'docs/audit/2026-11-11-scheduling-originals-additions.json'), 'utf8')) as {
+    figures: CuratedAsset[];
+    retired: (CuratedAsset & { replacement: string })[];
+  };
+const lmcacheTransferReview = JSON.parse(readFileSync(resolve(root,
+  'docs/audit/2026-11-11-lmcache-transfer-source-figures-additions.json'), 'utf8')) as {
+    figures: CuratedAsset[];
+    retired: (CuratedAsset & { replacements: string[] })[];
+  };
+const inferenceTimelineReview = JSON.parse(readFileSync(resolve(root,
+  'docs/audit/2026-11-11-inference-roofline-latency-figures-additions.json'), 'utf8')) as {
+    figure: CuratedAsset;
+    historical: (CuratedAsset & { replacement: string })[];
+  };
+const quantSourceReview = JSON.parse(readFileSync(resolve(root,
+  'docs/audit/2026-11-11-quantization-source-figures-additions.json'), 'utf8')) as {
+    figures: CuratedAsset[];
+    historical: (CuratedAsset & { replacements: string[] })[];
+  };
+
 function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root): void {
+  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/distill-rlvr-2026-11-14/')) {
+    const paper = 'https://arxiv.org/html/2506.14245v2';
+    const originals = {
+      'wen-figure6a.svg': ['S6.F6.sf1', 'wxm_comp_sft_data_pass1.svg', 'cc9b9f8cfe64c75936bb20b99ab979363fd1628eb9225a48c91a729bdc4a8241', [0, 0, 1085.1714, 1084.7913]],
+      'wen-figure6b.svg': ['S6.F6.sf2', 'wxm_comp_sft_rlvr_passk.svg', '48cb10349731a10ef465b97f63d3be5f5e1349cd4ee46cc8510cb2ed8599bada', [0, 0, 1086.3856, 1085.6488]],
+    } as const;
+    const name = entry.asset.split('/').at(-1)! as keyof typeof originals;
+    const [anchor, image, digest, viewBox] = originals[name];
+    expect(entry).toMatchObject({
+      author: 'Xumeng Wen et al.', source_url: paper + '#' + anchor,
+      source_image_url: paper + '/' + image, rights_evidence: paper,
+      license: 'CC BY 4.0', license_url: 'https://creativecommons.org/licenses/by/4.0/',
+      derivation: 'source-svg-copy', source_asset: entry.asset, sha256: digest,
+      source_asset_sha256: digest, viewBox, metadata_status: 'verified',
+      rights_status: 'source-license-verified', provenance_confirmation: 'source-license-verified',
+      used_in: ['00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md'],
+    });
+    expect(entry.crop_box_px).toBeUndefined();
+    const file = resolve(repositoryRoot, entry.asset);
+    expect(sha256(file)).toBe(digest);
+    expect(readFileSync(file, 'utf8').split('\n')[0]).toContain(`viewBox="${viewBox.join(' ')}"`);
+    return;
+  }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/grpo-dapo-2026-11-14/wen-figure4.svg') {
+    const paper = 'https://arxiv.org/html/2506.14245v2';
+    const digest = '98db9ba58301c872a6dfbb5d01b4117e884ecbe870a2544d584ec3ccfef70c33';
+    expect(entry).toMatchObject({
+      author: 'Xumeng Wen et al.', source_url: paper + '#S5.F4',
+      source_image_url: paper + '/rollout_verify_easy.svg', rights_evidence: paper,
+      license: 'CC BY 4.0', license_url: 'https://creativecommons.org/licenses/by/4.0/',
+      derivation: 'source-svg-copy', source_asset: entry.asset, sha256: digest,
+      source_asset_sha256: digest, viewBox: [0, 0, 1040.2282, 309.38648],
+      metadata_status: 'verified', rights_status: 'source-license-verified',
+      provenance_confirmation: 'source-license-verified',
+      used_in: ['00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md'],
+    });
+    expect(entry.crop_box_px).toBeUndefined();
+    const file = resolve(repositoryRoot, entry.asset);
+    expect(sha256(file)).toBe(digest);
+    expect(readFileSync(file, 'utf8').split('\n')[0]).toContain('viewBox="0 0 1040.2282 309.38648"');
+    return;
+  }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/rlvr-pass-k-2026-11-14/yue-figure-2.svg') {
+    const paper = 'https://arxiv.org/html/2504.13837v5';
+    const digest = '408381de34bfbf22e1119f58b395236629996be0ebb1648c4848b56730b873c2';
+    expect(entry).toMatchObject({
+      author: 'Yang Yue et al.', source_url: paper + '#S2.F2',
+      source_image_url: paper + '/simpleRL_coverage_main.svg',
+      rights_evidence: paper, license: 'CC BY 4.0',
+      license_url: 'https://creativecommons.org/licenses/by/4.0/',
+      derivation: 'source-svg-copy', source_asset: entry.asset,
+      sha256: digest, source_asset_sha256: digest, viewBox: [0, 0, 3025.5, 2825.25],
+      metadata_status: 'verified', rights_status: 'source-license-verified',
+      provenance_confirmation: 'source-license-verified',
+      used_in: ['00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md'],
+    });
+    expect(entry.crop_box_px).toBeUndefined();
+    const file = resolve(repositoryRoot, entry.asset);
+    expect(sha256(file)).toBe(digest);
+    expect(readFileSync(file, 'utf8').split('\n')[0]).toContain('viewBox="0 0 3025.5 2825.25"');
+    return;
+  }
+  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/dpo-ivison-2026-11-14/')) {
+    const paper = 'https://arxiv.org/html/2406.09279v2';
+    const evidence = '05 Источники/Originals/dpo-ivison-2026-11-14/ivison-v2.html';
+    expect(entry).toMatchObject({
+      author: 'Hamish Ivison et al.', license: 'CC BY 4.0',
+      license_url: 'https://creativecommons.org/licenses/by/4.0/',
+      rights_evidence: paper, license_evidence: evidence,
+      license_evidence_sha256: 'c7c71b459385a4f8f154c5bb207d237f61666d4b6826b22cdb030a871d943b4d',
+      metadata_status: 'verified', rights_status: 'source-license-verified',
+      provenance_confirmation: 'source-license-verified',
+      used_in: ['00 Учебник/12 Post-training и Alignment/05 DPO.md'],
+    });
+    const html = resolve(repositoryRoot, evidence);
+    expect(sha256(html)).toBe(entry.license_evidence_sha256);
+    expect(readFileSync(html, 'utf8')).toContain('License: CC BY 4.0');
+    const path = resolve(repositoryRoot, entry.asset);
+    if (entry.asset === '00 Учебник/Assets/Figures/curated/dpo-ivison-2026-11-14/paired-results.png') {
+      expect(entry).toMatchObject({
+        source_url: paper + '#S3.T2',
+        source_image_url: 'https://arxiv.org/pdf/2406.09279v2#page=5',
+        source_asset: '05 Источники/Originals/dpo-ivison-2026-11-14/ivison-v2.pdf',
+        source_asset_sha256: '5c49b1fa8f90514e9c740da81129a4344b363d8744fbef8bfc48f08777146237',
+        sha256: '55b8b339b4c7355e898713cc555d413140605f5627e1b26838fb5474b802fdd8', derivation: 'pdf-page-render-crop',
+        source_page: 5, render_dpi: 260, crop_box_px: [372, 1094, 1862, 1732],
+        dimensions_px: [1490, 638],
+      });
+      expect(validateRenderedPngBytes(readFileSync(path))).toEqual([1490, 638]);
+    } else {
+      expect(entry.asset).toBe('00 Учебник/Assets/Figures/curated/dpo-ivison-2026-11-14/math-prompts.svg');
+      expect(entry).toMatchObject({
+        source_url: paper + '#S3.F3', source_image_url: paper + '/math_prompts.svg',
+        source_asset: entry.asset,
+        sha256: '790ebf009562bff524e4a781349d30ddf2853f47ac9174af7221f05b1a1aba87',
+        source_asset_sha256: '790ebf009562bff524e4a781349d30ddf2853f47ac9174af7221f05b1a1aba87',
+        derivation: 'source-svg-copy', viewBox: [0,0,576,432],
+      });
+      expect(readFileSync(path, 'utf8').slice(0, 200)).toContain('viewBox="0 0 576 432"');
+    }
+    expect(sha256(resolve(repositoryRoot, entry.source_asset!))).toBe(entry.source_asset_sha256);
+    expect(sha256(path)).toBe(entry.sha256);
+    return;
+  }
+  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/cai-evaluation-2026-11-14/')) {
+    const paper = 'https://arxiv.org/html/2212.08073v1';
+    const evidence = '05 Источники/Originals/training-consolidation-2026-10-29/cai-arxiv-v1.html';
+    const pinned = {
+      'human-elo-frontier.png': ['S1.F2', 'Constitutional.png', '9fd352f1052c8b0120cc32838c63b00057cc80f766b84509e59a3da36204f353'],
+      'absolute-harmfulness.svg': ['S4.F10', 'HScore.svg', '313cdeac089920b6fb62109e5f99c481ac6b28d6d6dcc940e6df0eb6b9df9ce3'],
+    } as const;
+    const name = entry.asset.split('/').at(-1)! as keyof typeof pinned;
+    expect(pinned[name]).toBeDefined();
+    const [anchor, original, digest] = pinned[name];
+    expect(entry).toMatchObject({
+      author: 'Yuntao Bai et al.', source_url: paper + '#' + anchor,
+      source_image_url: paper + '/' + original, source_asset: entry.asset,
+      rights_evidence: paper, license: 'CC BY 4.0',
+      license_url: 'https://creativecommons.org/licenses/by/4.0/',
+      license_evidence: evidence,
+      license_evidence_sha256: '2f175dac8902db65a5c0a7cd280109fa91e0d3c1d129e49edb9ab439edc3c97d',
+      sha256: digest, source_asset_sha256: digest,
+      metadata_status: 'verified', provenance_confirmation: 'source-license-verified',
+      rights_status: 'source-license-verified', used_in: ['00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md'],
+    });
+    expect(sha256(resolve(repositoryRoot, evidence))).toBe(entry.license_evidence_sha256);
+    expect(readFileSync(resolve(repositoryRoot, evidence), 'utf8')).toContain('creativecommons.org/licenses/by/4.0/');
+    expect(entry.crop_box_px).toBeUndefined();
+    const bytes = readFileSync(resolve(repositoryRoot, entry.asset));
+    expect(createHash('sha256').update(bytes).digest('hex')).toBe(digest);
+    if (name.endsWith('.png')) {
+      expect(entry).toMatchObject({ derivation: 'source-png-copy', dimensions_px: [1140, 652] });
+      expect(validateRenderedPngBytes(bytes)).toEqual([1140, 652]);
+    } else {
+      expect(entry).toMatchObject({ derivation: 'source-svg-copy', viewBox: [0, 0, 385.77815, 266.50376] });
+      expect(bytes.toString().slice(0, 250)).toContain('viewBox="0 0 385.77815 266.50376"');
+    }
+    return;
+  }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/ppo-areal-2026-11-14/areal-interruptible-timeline.png') {
+    const edition = 'https://arxiv.org/html/2505.24298v5';
+    const digest = '5744061bb43d2cf1a0da26864a1791c72c2754f9f6aa995fc415a9af71a920e4';
+    expect(entry).toMatchObject({
+      author: 'Wei Fu et al.', source_url: edition + '#S4.F3',
+      source_image_url: edition + '/figures/interruptible-gen-timeline.png',
+      rights_evidence: edition, license: 'CC BY-NC-ND 4.0',
+      license_url: 'https://creativecommons.org/licenses/by-nc-nd/4.0/',
+      derivation: 'source-png-copy', source_asset: entry.asset,
+      sha256: digest, source_asset_sha256: digest, dimensions_px: [3332, 639],
+      metadata_status: 'verified', rights_status: 'source-license-verified',
+      provenance_confirmation: 'source-license-verified',
+      used_in: ['00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md'],
+    });
+    expect(entry.crop_box_px).toBeUndefined();
+    const path = resolve(repositoryRoot, entry.asset);
+    expect(sha256(path)).toBe(digest);
+    expect(validateRenderedPngBytes(readFileSync(path))).toEqual([3332, 639]);
+    return;
+  }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/gpt-route-2026-11-14/cs224n-vocabulary-head.png') {
+    const course = 'https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/';
+    const slide = course + 'slides/cs224n-2023-lecture9-pretraining.pdf#page=42';
+    expect(entry).toMatchObject({
+      author: 'John Hewitt, Stanford CS224N',
+      license: 'Stanford CS224N course resource reuse notice',
+      license_url: course + '#logistics', license_evidence_url: course + '#logistics',
+      source_url: slide, source_image_url: slide,
+      source_asset: '05 Источники/Originals/t5-2026-10-22/cs224n-2023-pretraining.pdf',
+      source_asset_sha256: 'e29d1700e74468e811000a2ae2d8aadc63b1b0638d553dbc08102d0e3ff0e771',
+      sha256: 'f9a668f5be174151f5d2464540ca58f4f85217c01687e62d949ae93862246154',
+      source_page: 42, render_dpi: 240, crop_box_px: [1920, 612, 3012, 1402],
+      dimensions_px: [1092, 790], derivation: 'pdf-page-render-crop',
+      metadata_status: 'verified', rights_status: 'source-permission-verified',
+      provenance_confirmation: 'cs224n-2023-course-permission',
+      used_in: ['00 Учебник/_index.md', 'en/00 Textbook/_index.md'],
+    });
+    const path = resolve(repositoryRoot, entry.asset);
+    expect(sha256(path)).toBe(entry.sha256);
+    expect(pngDimensions(path)).toEqual(entry.dimensions_px);
+    const source = resolve(repositoryRoot, entry.source_asset);
+    if (existsSync(source)) expect(sha256(source)).toBe(entry.source_asset_sha256);
+    for (const owner of entry.used_in!) {
+      const body = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+      expect(body).toContain(entry.asset + '|');
+      expect(body).toContain(slide);
+      expect(body).toContain(course + '#logistics');
+    }
+    return;
+  }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/gpt1-pretraining-2026-11-10/cs224n-decoder-classifier.png') {
+    const course = 'https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/';
+    const slide = course + 'slides/cs224n-2023-lecture9-pretraining.pdf#page=41';
+    expect(entry).toMatchObject({
+      author: 'Christopher Manning, Stanford CS224N',
+      license: 'Stanford CS224N course resource reuse notice',
+      license_url: course + '#logistics', license_evidence_url: course + '#logistics',
+      source_url: slide, source_image_url: slide,
+      source_asset: '05 Источники/Originals/t5-2026-10-22/cs224n-2023-pretraining.pdf',
+      source_asset_sha256: 'e29d1700e74468e811000a2ae2d8aadc63b1b0638d553dbc08102d0e3ff0e771',
+      sha256: 'c68a1e607ec6d776d8070a1025ed768c60c5cfeeb3b71ace3d230a9a626a196f',
+      source_page: 41, render_dpi: 240, crop_box_px: [1835, 399, 2910, 1319],
+      dimensions_px: [1075, 920], derivation: 'pdf-page-render-crop',
+      metadata_status: 'verified', rights_status: 'source-permission-verified',
+      provenance_confirmation: 'cs224n-2023-course-permission',
+      used_in: [
+        '00 Учебник/_index.md',
+        'en/00 Textbook/_index.md',
+        '00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md',
+        'en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md',
+      ],
+    });
+    const path = resolve(repositoryRoot, entry.asset);
+    expect(sha256(path)).toBe(entry.sha256);
+    expect(pngDimensions(path)).toEqual(entry.dimensions_px);
+    const source = resolve(repositoryRoot, entry.source_asset);
+    if (existsSync(source)) expect(sha256(source)).toBe(entry.source_asset_sha256);
+    for (const owner of entry.used_in!) {
+      const body = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+      expect(body).toContain(entry.asset + '|');
+      expect(body).toContain(slide);
+      expect(body).toContain(course + '#logistics');
+    }
+    return;
+  }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/vlm-2026/qwen25omni-figure3-tmrope.png') {
+    const archive = '05 Источники/Originals/omni-2026-10-20/';
+    expect(entry).toMatchObject({
+      license: 'CC BY 4.0', license_url: 'https://creativecommons.org/licenses/by/4.0/',
+      provenance_confirmation: 'source-license-verified', rights_status: 'source-license-verified',
+      figure_url: 'https://arxiv.org/pdf/2503.20215v1#page=4', source_page: 4,
+      source_asset: archive + 'qwen25omni.pdf', derivation: 'pdf-page-render-crop',
+      license_evidence: archive + 'qwen25omni-abstract.html',
+      license_evidence_sha256: 'cc7374fb27c3e71bd8fe280483821873e8bfe0263100c895f8eabdd3cb8e9b5c',
+      sha256: 'c0db3d7a142bc4e61ce52a93e55951c362b30cc06049252fd657db879b457d25',
+      dimensions_px: [1745, 475], crop_box_px: [260, 350, 2005, 825],
+    });
+    const path = resolve(repositoryRoot, entry.asset);
+    expect(sha256(path)).toBe(entry.sha256);
+    expect(pngDimensions(path)).toEqual(entry.dimensions_px);
+    const evidence = resolve(repositoryRoot, entry.license_evidence!);
+    if (existsSync(evidence)) {
+      expect(sha256(evidence)).toBe(entry.license_evidence_sha256);
+      expect(readFileSync(evidence, 'utf8')).toContain('creativecommons.org/licenses/by/4.0/');
+    }
+    expect(entry.used_in).toHaveLength(2);
+    for (const owner of entry.used_in!)
+      expect(readFileSync(resolve(repositoryRoot, owner), 'utf8')).toContain(entry.asset);
+    return;
+  }
+  const nativeVlmFigure = {
+    '00 Учебник/Assets/Figures/curated/vlm-training-2026-11-13/internvl35-training-process.png': {
+      journal: '2026-11-13-internvl-training-figure-additions.json', anchor: 'S2.F3',
+      image: '2508.18265v1/training_process.png', size: [1252, 317],
+      sha: '5234140e21251cbfe871417a995edf37f8ee968b44586f2b49253c433ebb14db',
+    },
+    '00 Учебник/Assets/Figures/curated/vlm-training-2026-11-13/molmopoint-guisyn-figure3.png': {
+      journal: '2026-11-13-pixmo-data-figure-additions.json', anchor: 'S4.F3',
+      image: '2603.28069v1/MolmoPSyn_overview.png', size: [1536, 456],
+      sha: 'dcb476acd4a19140b49e2ef0d9d69611e88833f402dd25f7789451d6ea9aad6d',
+    },
+    '00 Учебник/Assets/Figures/curated/vlm-eval-2026-11-13/mm-detect-contamination-figure1.png': {
+      journal: '2026-11-13-vlm-evaluation-contamination-additions.json', anchor: 'S1.F1',
+      image: '2411.03823v3/fig1_arr.png', size: [551, 354],
+      sha: '26bb5ad1fbe11732b8b742269fe9d983d66dc5984d2a8c7da6ce23a1cae6ccf8',
+    },
+    '00 Учебник/Assets/Figures/curated/vlm-connectors-2026-11-13/pheye-dense-cross-attention.png': {
+      journal: '2026-11-13-flamingo-molmo-figure-additions.json', anchor: 'S2.F2',
+      image: '2501.02584v1/Images/cross-dense.png', size: [819, 480],
+      sha: 'f74aaed3c0c517217b2449ad8ae4b2f89c2bff39981908a6310243e1a68e4bfc',
+    },
+  } as Record<string, {journal: string; anchor: string; image: string; size: number[]; sha: string}>;
+  if (Object.hasOwn(nativeVlmFigure, entry.asset)) {
+    const { journal, anchor, image, size, sha } = nativeVlmFigure[entry.asset]!;
+    const review = JSON.parse(readFileSync(resolve(repositoryRoot,
+      'docs/audit', journal), 'utf8')) as { figure: CuratedAsset };
+    expect(entry).toEqual(review.figure);
+    expect(entry).toMatchObject({
+      license: 'CC BY 4.0', rights_status: 'source-license-verified',
+      derivation: 'source-raster-copy', dimensions_px: size,
+      source_image_url: 'https://arxiv.org/html/' + image,
+      sha256: sha,
+    });
+    const file = resolve(repositoryRoot, entry.asset);
+    expect(entry.source_asset).toBe(entry.asset);
+    expect(sha256(file)).toBe(entry.sha256);
+    expect(entry.source_asset_sha256).toBe(entry.sha256);
+    expect(validateRenderedPngBytes(readFileSync(file))).toEqual(size);
+    const license = resolve(repositoryRoot, entry.license_evidence!);
+    if (existsSync(license)) {
+      expect(sha256(license)).toBe(entry.license_evidence_sha256);
+      const page = readFileSync(license, 'utf8');
+      expect(page).toContain('License: CC BY 4.0');
+      expect(page).toContain('id="' + anchor + '"');
+      expect(page).toContain(image);
+    }
+    expect(entry.used_in).toHaveLength(2);
+    for (const owner of entry.used_in!) {
+      const chapter = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+      expect(chapter).toContain(entry.asset);
+      expect(chapter).toContain(entry.figure_url);
+    }
+    return;
+  }
+  const archivedVlmFigure = {
+    '00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure4-training-pipeline.png': {
+      figure_url: 'https://arxiv.org/pdf/2412.05271v1#page=6',
+      sha256: '5a869f582997e2f30df66ed7181a256ae1deb9d4e9fb89bdfa931a11dff2086c',
+    },
+    '00 Учебник/Assets/Figures/curated/vlm-2026/molmo-figure1-data-and-capabilities.png': {
+      figure_url: 'https://arxiv.org/pdf/2409.17146v2#page=2',
+      sha256: 'ff9247d31cc79ef048a409009c92894d1418f494814032aa4103871f13188b57',
+    },
+    '00 Учебник/Assets/Figures/curated/vlm-2026/molmo-figure11-openness.png': {
+      figure_url: 'https://arxiv.org/pdf/2409.17146v2#page=19',
+      sha256: 'a269b7cc10ee0eb9f7000baccda8d6bd9e513b5785fdf4c8b9af60bcaae5d209',
+    },
+    '00 Учебник/Assets/Figures/curated/vlm-2026/pix2struct-figure1-tasks.png': {
+      figure_url: 'https://proceedings.mlr.press/v202/lee23g/lee23g.pdf#page=2',
+      sha256: '888e2dc92f2dbba77850b8619ebbfafa3e2f5bb1608098c41a2d765f613edc52',
+    },
+    '00 Учебник/Assets/Figures/curated/vlm-2026/flamingo-figure3-architecture.png': {
+      figure_url: 'https://arxiv.org/pdf/2204.14198v2#page=4',
+      sha256: '87ac37b661368027927a867c8d4a173cd76e0ed988d6a1a9aebcb4b62c0c1d09',
+    },
+    '00 Учебник/Assets/Figures/curated/atlas-remainder-official/flamingo-architecture.png': {
+      figure_url: 'https://arxiv.org/pdf/2204.14198v2#page=4',
+      sha256: 'b0b7947d6d74f1441bd162e5d87307b4c32e2c5145774667f5f42c8df761914d',
+    },
+    '00 Учебник/Assets/Figures/curated/vlm-2026/molmo-figure5-image-tokenization.png': {
+      figure_url: 'https://arxiv.org/pdf/2409.17146v2#page=9',
+      sha256: '92d1f84d843ecd54ff46226df8ef6f424d285ed4c9a217882c5a8653df5c659e',
+    },
+  } as Record<string, {figure_url: string; sha256: string}>;
+  if (Object.hasOwn(archivedVlmFigure, entry.asset)) {
+    expect(entry).toMatchObject({
+      publication_status: 'retired', rights_status: 'needs-confirmation', license: null,
+      license_url: null, used_in: [], derivation: 'pdf-page-render-crop',
+      ...archivedVlmFigure[entry.asset],
+    });
+    expect(sha256(resolve(repositoryRoot, entry.asset))).toBe(entry.sha256);
+    expectDecodableImage(resolve(repositoryRoot, entry.asset));
+    return;
+  }
+  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/vlm-connectors-2026-11-13/')) {
+    const review = JSON.parse(readFileSync(resolve(repositoryRoot,
+      'docs/audit/2026-11-13-internvl-imagebind-figures-additions.json'), 'utf8')) as {figures: CuratedAsset[]};
+    const pinned = review.figures.find(figure => figure.asset === entry.asset);
+    expect(pinned).toBeDefined();
+    expect(entry).toEqual(pinned);
+    const figurePath = resolve(repositoryRoot, entry.asset);
+    expect(sha256(figurePath)).toBe(entry.sha256);
+    expectDecodableImage(figurePath);
+    const internvl = entry.asset.endsWith('internvl35-figure2c.png');
+    if (internvl) {
+      expect(entry.license).toBe('CC BY 4.0');
+      expect(entry.crop_box_px).toEqual([1310, 0, 1739, 557]);
+      expect(entry.derivation).toBe('source-raster-crop');
+      expect(validateRenderedPngBytes(readFileSync(figurePath))).toEqual([429, 557]);
+    } else {
+      expect(entry.asset.endsWith('panda-act-figure2.jpg')).toBe(true);
+      expect(entry.license).toBe('CC BY-NC-ND 4.0');
+      expect(entry.derivation).toBe('source-image-copy');
+      expect(entry.source_asset).toBe(entry.asset);
+      expect(entry.source_asset_sha256).toBe(entry.sha256);
+      expect(entry.crop_box_px).toBeUndefined();
+    }
+    for (const [file, hash] of [[entry.source_asset, entry.source_asset_sha256],
+      [entry.license_evidence, entry.license_evidence_sha256]]) {
+      const path = resolve(repositoryRoot, file!);
+      if (existsSync(path)) expect(sha256(path)).toBe(hash);
+    }
+    for (const owner of entry.used_in ?? []) {
+      expect(readFileSync(resolve(repositoryRoot, owner), 'utf8')).toContain(entry.asset);
+    }
+    return;
+  }
+  if (entry.id === 'curated-prokudin-gorskii-rgb-927a674c0a18') {
+    const pin = '927a674c0a18d2e5701f9e80d0cd968adbd9627cb4ff84d10e19aef45171a513';
+    expect(entry).toMatchObject({
+      asset: '00 Учебник/Assets/Figures/curated/harvard-credits-2026-11-11/prokudin-gorsky-rgb.jpg',
+      author: 'Sergei Prokudin-Gorskii; composite by Wikimedia Commons contributor Mdd4696',
+      source_url: 'https://commons.wikimedia.org/w/index.php?title=File:Alleia_Hamerops_composite.jpg&oldid=1130485549',
+      source_image_url: 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Alleia_Hamerops_composite.jpg',
+      sha256: pin, source_asset_sha256: pin, source_asset: entry.asset,
+      bytes: 156688, dimensions_px: [1000, 250], derivation: 'source-raster-copy',
+      license: 'Public domain (PDM 1.0)', license_url: 'https://creativecommons.org/publicdomain/mark/1.0/',
+      license_evidence: '05 Источники/Originals/harvard-credits-2026-11-11/rgb-license.html',
+      license_evidence_sha256: 'd472ebe6dd28092f64fdd820e623e30db0630239700e78fb7d2d52b78bab5088',
+      metadata_status: 'verified', rights_status: 'source-license-verified',
+      provenance_confirmation: 'author-archive-and-commons-file-history',
+      used_in: ['05 Источники/Courses/Harvard ML Systems/vol1/frameworks.md'],
+    });
+    const file = resolve(repositoryRoot, entry.asset);
+    expect(sha256(file)).toBe(pin);
+    expectDecodableImage(file);
+    const licenseSnapshot = resolve(repositoryRoot, entry.license_evidence!);
+    if (existsSync(licenseSnapshot)) {
+      expect(sha256(licenseSnapshot)).toBe(entry.license_evidence_sha256);
+      expect(readFileSync(licenseSnapshot, 'utf8')).toContain(entry.license_url);
+    }
+    return;
+  }
+  const vllmArchive = vllmSourceLibrary.retired.find(row => row.asset === entry.asset);
+  if (vllmArchive) {
+    expect(entry).toMatchObject(vllmArchive);
+    expect(entry.publication_status).toBe('retired');
+    expect(entry.used_in).toEqual([]);
+    const target = resolve(repositoryRoot, entry.asset);
+    const bytes = readFileSync(target);
+    expect(bytes.length).toBe(vllmArchive.bytes);
+    expect(sha256(target)).toBe(vllmArchive.sha256);
+    expect(createHash('sha1').update('blob '+bytes.length+'\0').update(bytes).digest('hex'))
+      .toBe(vllmArchive.git_blob);
+    expectDecodableImage(target);
+    const owner = readFileSync(resolve(repositoryRoot, '05 Источники/Implementation studies/Inside vLLM.md'), 'utf8');
+    expect(owner).not.toContain(entry.asset);
+    expect(owner).toContain(vllmArchive.figure_url!);
+    return;
+  }
+  const curvature = optimizerCurvatureAssets.find(row => row.asset === entry.asset);
+  if (curvature) {
+    expect(entry).toMatchObject(curvature);
+    const image = resolve(repositoryRoot, curvature.asset);
+    expect(sha256(image)).toBe(curvature.sha256);
+    expectDecodableImage(image);
+    if (curvature === optimizerCurvatureReview.retired) {
+      expect(entry.used_in).toEqual([]);
+      for (const owner of optimizerCurvatureReview.retired.former_used_in) {
+        const chapter = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+        expect(chapter).not.toContain(entry.asset);
+        expect(chapter).toContain('https://cs231n.github.io/assets/nn3/opt1.gif');
+      }
+    } else {
+      const source = resolve(repositoryRoot, curvature.source_asset!);
+      expect(sha256(source)).toBe(curvature.source_asset_sha256);
+      const evidence = resolve(repositoryRoot, curvature.license_evidence!);
+      expect(sha256(evidence)).toBe(curvature.license_evidence_sha256);
+      expect(readFileSync(evidence, 'utf8')).toContain('Creative Commons Attribution');
+      if (curvature.derivation === 'source-svg-copy') {
+        expect(sha256(source)).toBe(curvature.sha256);
+      } else {
+        expect(pngDimensions(image)).toEqual(curvature.dimensions_px);
+      }
+      for (const owner of curvature.used_in!) {
+        const chapter = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+        expect(chapter).toContain(curvature.asset + '|');
+        expect(chapter).toContain(curvature.source_image_url!);
+      }
+    }
+    return;
+  }
+  const recall = sequenceRecallReview.figures.find(row => row.asset === entry.asset);
+  const retiredRecall = sequenceRecallReview.retired.find(row => row.asset === entry.asset);
+  if (recall || retiredRecall) {
+    const spec = (recall ?? retiredRecall)!;
+    expect({ ...entry, figure_url: entry.figure_url ?? entry.source_url }).toMatchObject(spec);
+    const image = resolve(repositoryRoot, spec.asset);
+    expect(sha256(image)).toBe(spec.sha256);
+    expectDecodableImage(image);
+    if (recall) {
+      expect(pngDimensions(image)).toEqual(recall.dimensions_px);
+      const evidence = resolve(repositoryRoot, recall.license_evidence!);
+      expect(sha256(evidence)).toBe(recall.license_evidence_sha256);
+      expect(readFileSync(evidence, 'utf8')).toContain('License: CC BY 4.0');
+      if (recall.source_asset)
+        expect(sha256(resolve(repositoryRoot, recall.source_asset))).toBe(recall.source_asset_sha256);
+      for (const owner of recall.used_in!) {
+        const text = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+        expect(text).toContain(recall.asset + '|');
+        expect(text).toContain(recall.figure_url!);
+      }
+    } else {
+      expect(entry.used_in).toEqual([]);
+      for (const owner of retiredRecall!.former_used_in) {
+        const text = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+        expect(text).not.toContain(entry.asset);
+        expect(text).toContain(retiredRecall!.figure_url!);
+      }
+    }
+    return;
+  }
+  const lmcache = [...lmcacheTransferReview.figures, ...lmcacheTransferReview.retired]
+    .find(row => row.asset === entry.asset);
+  if (lmcache) {
+    expect(entry).toMatchObject(lmcache);
+    const path = resolve(repositoryRoot, entry.asset);
+    expect(sha256(path)).toBe(lmcache.sha256);
+    expect(pngDimensions(path)).toEqual(lmcache.dimensions_px);
+    expectDecodableImage(path);
+    if ('replacements' in lmcache) {
+      expect(entry.publication_status).toBe('retired');
+      expect(entry.used_in).toEqual([]);
+      expect(entry.rights_status).toBe('source-republication-unverified');
+      for (const [i, owner] of lmcache.former_used_in!.entries()) {
+        const text = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+        expect(text).not.toContain(entry.asset);
+        expect(text).toContain(lmcache.replacements[i]);
+        expect(text).toContain(entry.source_url!);
+      }
+    } else {
+      expect(entry.license).toBe('CC BY 4.0');
+      expect(entry.source_asset_sha256).toBe(entry.sha256);
+      expect(entry.rights_status).toBe('source-license-verified');
+      for (const owner of lmcache.used_in!) {
+        const text = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+        expect(text).toContain(entry.asset + '|');
+        expect(text).toContain(entry.figure_url!);
+      }
+    }
+    return;
+  }
+  const inferenceFigure = [inferenceTimelineReview.figure, ...inferenceTimelineReview.historical]
+    .find(row => row.asset === entry.asset);
+  if (inferenceFigure) {
+    const reuse = vllmSourceLibrary.figures.find(row => row.asset === entry.asset);
+    expect(entry).toMatchObject({ ...inferenceFigure, ...(reuse && { used_in: reuse.used_in }) });
+    const path = resolve(repositoryRoot, entry.asset);
+    expect(sha256(path)).toBe(inferenceFigure.sha256);
+    expectDecodableImage(path);
+    for (const owner of inferenceFigure.used_in!)
+      expect(readFileSync(resolve(repositoryRoot, owner), 'utf8')).toContain(entry.asset);
+    if ('replacement' in inferenceFigure) {
+      expect(entry.publication_status).toBe('source-library-only');
+      expect(entry.rights_status).toBe('source-republication-unverified');
+      for (const owner of inferenceFigure.former_used_in!) {
+        const text = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+        expect(text).not.toContain(entry.asset);
+        expect(text).toContain(inferenceFigure.replacement);
+        expect(text).toContain(entry.source_url!);
+      }
+    } else {
+      expect(entry.license).toBe('CC BY-NC-ND 4.0');
+      expect(entry.rights_status).toBe('source-license-verified');
+      expect(entry.source_asset_sha256).toBe(entry.sha256);
+      expect(readFileSync(path, 'utf8')).toContain('viewBox="0 0 680 350"');
+    }
+    return;
+  }
+  const scheduling = [...schedulingSourceReview.figures, ...schedulingSourceReview.retired]
+    .find(row => row.asset === entry.asset);
+  if (scheduling) {
+    expect(entry).toMatchObject(scheduling);
+    const path = resolve(repositoryRoot, entry.asset);
+    expect(sha256(path)).toBe(scheduling.sha256);
+    expect(pngDimensions(path)).toEqual(scheduling.dimensions_px);
+    if (entry.publication_status === 'retired') {
+      expect(entry.used_in).toEqual([]);
+      expect(entry.rights_status).toBe('source-republication-unverified');
+      for (const note of entry.former_used_in!) {
+        const body = readFileSync(resolve(repositoryRoot, note), 'utf8');
+        expect(body).not.toContain(entry.asset);
+        expect(body).toContain(entry.source_url);
+      }
+    } else {
+      expect(entry.rights_status).toBe('source-license-verified');
+      expectDecodableImage(path);
+      if (entry.license_evidence) {
+        const license = resolve(repositoryRoot, entry.license_evidence);
+        if (existsSync(license)) {
+          expect(sha256(license)).toBe(entry.license_evidence_sha256);
+          expect(readFileSync(license, 'utf8')).toContain('license: cc-by-nc-sa-4.0');
+        }
+      }
+      for (const note of entry.used_in!)
+        expect(readFileSync(resolve(repositoryRoot, note), 'utf8')).toContain(entry.asset + '|');
+    }
+    return;
+  }
+  const reconciled = reconciledReaderFigures.find(row => row.asset === entry.asset);
+  if (reconciled) {
+    expect(entry).toMatchObject(reconciled);
+    const target = resolve(repositoryRoot, entry.asset);
+    expect(sha256(target)).toBe(reconciled.sha256);
+    expectDecodableImage(target);
+    for (const note of reconciled.used_in!)
+      expect(readFileSync(resolve(repositoryRoot, note), 'utf8')).toContain(entry.asset);
+    if (reconciled.public_license_copy)
+      expect(sha256(resolve(repositoryRoot, reconciled.public_license_copy))).toBe(reconciled.license_evidence_sha256);
+    return;
+  }
+  const retiredQuant = quantSourceReview.historical.find(row => row.asset === entry.asset);
+  if (retiredQuant) {
+    expect(entry).toMatchObject(retiredQuant);
+    expect(entry.publication_status).toBe('retired');
+    expect(entry.used_in).toEqual([]);
+    expect(sha256(resolve(repositoryRoot, entry.asset))).toBe(retiredQuant.sha256);
+    for (const owner of retiredQuant.former_used_in!) {
+      const text = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+      expect(text).not.toContain(entry.asset);
+      expect(text).toContain(retiredQuant.figure_url!);
+      for (const replacement of retiredQuant.replacements) expect(text).toContain(replacement + '|');
+    }
+    return;
+  }
+  const quantFigure = quantSourceReview.figures.find(row => row.asset === entry.asset);
+  if (quantFigure) {
+    expect(entry).toMatchObject(quantFigure);
+    const target = resolve(repositoryRoot, entry.asset);
+    expect(sha256(target)).toBe(quantFigure.sha256);
+    expect(pngDimensions(target)).toEqual(quantFigure.dimensions_px);
+    expectDecodableImage(target);
+    for (const [path, digest] of [
+      [quantFigure.license_evidence, quantFigure.license_evidence_sha256],
+      [quantFigure.source_code, quantFigure.source_code_sha256],
+    ]) {
+      if (!path) continue;
+      const snapshot = resolve(repositoryRoot, path);
+      if (existsSync(snapshot) || path === quantFigure.public_license_copy)
+        expect(sha256(snapshot)).toBe(digest);
+    }
+    for (const owner of quantFigure.used_in!) {
+      const text = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+      expect(text).toContain(quantFigure.asset + '|');
+      expect(text).toContain(quantFigure.figure_url!);
+      expect(text).toContain(quantFigure.public_license_copy?.replace('site/public', '') ?? quantFigure.license_url!);
+    }
+    return;
+  }
+  const archivedFlash = flashSourceReview.historical.find(row => row.asset === entry.asset);
+  if (archivedFlash) {
+    const formerOwners = archivedFlash.replacement
+      ? [...archivedFlash.former_used_in!, '03 Исследовательские линии/Эффективный attention.md']
+      : archivedFlash.former_used_in!;
+    expect(entry).toMatchObject({ ...archivedFlash, former_used_in: formerOwners });
+    expect(entry.publication_status).toBe('retired');
+    expect(entry.used_in).toEqual([]);
+    expect(sha256(resolve(repositoryRoot, entry.asset))).toBe(archivedFlash.sha256);
+    for (const owner of formerOwners) {
+      const body = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+      expect(body).not.toContain(entry.asset);
+      if (archivedFlash.replacement) expect(body).toContain(archivedFlash.replacement);
+      else expect(body).toContain(archivedFlash.figure_url!);
+    }
+    return;
+  }
+  const flash = flashSourceReview.figures.find(row => row.asset === entry.asset);
+  const sourceFigure = flash ?? (entry.asset === gptRouteFigure.asset ? gptRouteFigure : undefined);
+  if (sourceFigure) {
+    const owners = sourceFigure.asset.endsWith('/fa1-tiling-loops.png')
+      ? [...sourceFigure.used_in!, '03 Исследовательские линии/Эффективный attention.md']
+      : sourceFigure.used_in!;
+    expect(entry).toMatchObject({ ...sourceFigure, used_in: owners });
+    const target = resolve(repositoryRoot, sourceFigure.asset);
+    const source = resolve(repositoryRoot, sourceFigure.source_asset!);
+    expect(sha256(target)).toBe(sourceFigure.sha256);
+    expect(pngDimensions(target)).toEqual(sourceFigure.dimensions_px);
+    expectDecodableImage(target);
+    if (existsSync(source)) expect(sha256(source)).toBe(sourceFigure.source_asset_sha256);
+    if (sourceFigure.license_evidence) {
+      const evidence = resolve(repositoryRoot, sourceFigure.license_evidence);
+      if (existsSync(evidence)) expect(sha256(evidence)).toBe(sourceFigure.license_evidence_sha256);
+    }
+    for (const owner of owners) {
+      const body = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+      expect(body).toContain(sourceFigure.asset + '|');
+      expect(body).toContain(sourceFigure === gptRouteFigure ? sourceFigure.source_image_url! : sourceFigure.figure_url!);
+      expect(body).toContain(sourceFigure.public_license_copy?.replace('site/public', '') ?? sourceFigure.license_url!);
+    }
+    return;
+  }
+  const chen = chenSourceFigures.find(row => row.asset === entry.asset);
+  if (chen) {
+    expect(entry).toMatchObject(chen);
+    const file = resolve(repositoryRoot, entry.asset);
+    const bytes = readFileSync(file);
+    expect(bytes.length).toBe(chen.bytes);
+    expect(sha256(file)).toBe(chen.sha256);
+    expect(createHash('sha1').update('blob ' + bytes.length + '\0').update(bytes).digest('hex'))
+      .toBe(chen.git_blob);
+    expect(validateRenderedPngBytes(bytes)).toEqual(chen.dimensions_px);
+    expect(readFileSync(resolve(repositoryRoot, chen.source_asset))).toEqual(bytes);
+    const paper = resolve(repositoryRoot, chen.source_parent_asset);
+    if (existsSync(paper)) expect(sha256(paper)).toBe(chen.source_parent_sha256);
+    if (chen.publication_status === 'retired') {
+      expect(entry.used_in).toEqual([]);
+      expect(chen.replacement).toBeDefined();
+      for (const owner of chenSourceFigures[1].used_in!) {
+        const body = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+        expect(body).not.toContain(entry.asset);
+        expect(body).toContain(chen.replacement!);
+      }
+    } else {
+      expect(chen.used_in?.length).toBeGreaterThanOrEqual(2);
+      for (const owner of chen.used_in!) {
+        const body = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+        expect(body).toContain(entry.asset);
+      }
+    }
+    return;
+  }
+  const nvidia = distributedNvidiaFigures.find(row => row.asset === entry.asset);
+  if (nvidia) {
+    expect(entry).toMatchObject(nvidia);
+    const file = resolve(repositoryRoot, entry.asset);
+    const bytes = readFileSync(file);
+    expect(bytes.byteLength).toBe(nvidia.bytes);
+    expect(sha256(file)).toBe(nvidia.sha256);
+    expect(createHash('sha1').update('blob ' + bytes.length + '\0').update(bytes).digest('hex'))
+      .toBe(nvidia.git_blob);
+    if (bytes[28] === 1) {
+      // NCCL's originals use Adam7; the PDF-crop decoder only handles
+      // non-interlaced PNGs. Check the pinned bytes and original PNG layout.
+      expect(pngDimensions(file)).toEqual(nvidia.dimensions_px);
+      expectDecodableImage(file);
+    } else {
+      expect(validateRenderedPngBytes(bytes)).toEqual(nvidia.dimensions_px);
+    }
+    expect(sha256(resolve(repositoryRoot, nvidia.license_evidence))).toBe(nvidia.license_evidence_sha256);
+    const source = resolve(repositoryRoot, nvidia.source_asset);
+    if (existsSync(source)) expect(readFileSync(source)).toEqual(bytes);
+    expect(nvidia.used_in).toHaveLength(2);
+    for (const owner of nvidia.used_in!) {
+      const body = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+      expect(body).toContain(entry.asset + '|');
+      expect(body).toContain(nvidia.license_evidence.replace('site/public', ''));
+    }
+    return;
+  }
+  const activeSequence = sequenceFigureReview.figures.find(row => row.asset === entry.asset);
+  const retiredSequence = sequenceFigureReview.historical.find(row => row.asset === entry.asset);
+  const sequence = activeSequence ?? retiredSequence;
+  if (sequence) {
+    expect(entry).toMatchObject(sequence);
+    const file = resolve(repositoryRoot, entry.asset);
+    expect(sha256(file)).toBe(sequence.sha256);
+    expectDecodableImage(file);
+    if (sequence.dimensions_px) expect(pngDimensions(file)).toEqual(sequence.dimensions_px);
+    if (sequence.source_asset && sequence.source_asset_sha256) {
+      const source = resolve(repositoryRoot, sequence.source_asset);
+      if (existsSync(source)) expect(sha256(source)).toBe(sequence.source_asset_sha256);
+    }
+    if (retiredSequence) {
+      expect(entry).toMatchObject({ publication_status: 'retired', used_in: [] });
+      for (const former of retiredSequence.former_used_in) {
+        const note = readFileSync(resolve(repositoryRoot, former), 'utf8');
+        expect(note).not.toContain(entry.asset);
+        expect(note).toContain(retiredSequence.replacement);
+      }
+    } else {
+      expect(sequence.used_in?.length).toBeGreaterThan(0);
+      for (const owner of sequence.used_in!)
+        expect(readFileSync(resolve(repositoryRoot, owner), 'utf8')).toContain(entry.asset);
+    }
+    return;
+  }
+  const original = servingRepositoryOriginals.find(row => row.asset === entry.asset);
+  if (original) {
+    const bytes = readFileSync(resolve(repositoryRoot, entry.asset));
+    expect(createHash('sha256').update(bytes).digest('hex')).toBe(original.sha256);
+    expect(createHash('sha1').update('blob ' + bytes.length + '\0').update(bytes).digest('hex'))
+      .toBe(original.git_blob);
+    expect(entry).toMatchObject({
+      sha256: original.sha256, source_asset: original.source_asset,
+      source_asset_sha256: original.source_asset_sha256, commit: original.git_commit,
+      license: 'Apache-2.0', license_url: original.license_url,
+      rights_status: 'source-license-verified', provenance_confirmation: 'source-license-verified',
+    });
+    const snapshot = resolve(repositoryRoot, original.source_asset);
+    if (existsSync(snapshot)) expect(readFileSync(snapshot)).toEqual(bytes);
+    expect(sha256(resolve(repositoryRoot, original.license_file))).toBe(original.license_sha256);
+    if (original === servingRepositoryReview.archivedDynamoOverview) {
+      expect(entry).toMatchObject({
+        source_url: original.upstream_url, publication_status: 'retired', used_in: [],
+      });
+      expect(entry).toHaveProperty('replacement', servingRepositoryReview.figures[1].asset);
+    } else {
+      expect(entry).toMatchObject({
+        source_image_url: original.upstream_url, git_blob: original.git_blob,
+        license_evidence: original.license_file, license_evidence_sha256: original.license_sha256,
+        metadata_status: 'verified',
+      });
+      expect(entry.used_in).toHaveLength(2);
+      for (const owner of entry.used_in!) {
+        const chapter = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+        expect(chapter).toContain(entry.asset + '|');
+        expect(chapter).toContain(original.license_file.replace('site/public', ''));
+      }
+    }
+    return;
+  }
+  if (entry.id === 'curated-pp-doclayout-v2-reading-order-f02cc9356b2a') {
+    const version = 'https://arxiv.org/html/2510.14528v1';
+    const digest = 'f02cc9356b2a659757ed83f1477881a0cd95b17e9408588daf0ade82811643e0';
+    expect(entry).toMatchObject({
+      asset: '00 Учебник/Assets/Figures/curated/paddleocr-vl-2026-11-11/pp-doclayout-v2-reading-order.png',
+      author: 'Cheng Cui et al., PaddlePaddle Team, Baidu',
+      source_url: version + '#S2.F3',
+      source_image_url: version + '/images/PP-DocLayoutV2.png',
+      license: 'CC BY 4.0',
+      license_url: 'https://creativecommons.org/licenses/by/4.0/',
+      license_evidence: version,
+      provenance_confirmation: 'source-license-verified',
+      rights_status: 'source-license-verified',
+      metadata_status: 'verified',
+      derivation: 'source-raster-copy',
+      source_asset_sha256: digest,
+      sha256: digest,
+      dimensions_px: [1440, 436],
+      bytes: 177984,
+    });
+    expect(entry.crop_box_px).toBeUndefined();
+    const bytes = readFileSync(resolve(repositoryRoot, entry.asset));
+    expect(bytes.length).toBe(177984);
+    expect(createHash('sha256').update(bytes).digest('hex')).toBe(digest);
+    expect(validateRenderedPngBytes(bytes)).toEqual([1440, 436]);
+    expect(entry.used_in).toHaveLength(2);
+    for (const owner of entry.used_in!)
+      expect(readFileSync(resolve(repositoryRoot, owner), 'utf8')).toContain(entry.asset);
+    return;
+  }
+  const retiredVlm = retiredVlmFigures.find(row => row.asset === entry.asset);
+  if (retiredVlm) {
+    expect(entry).toMatchObject(retiredVlm);
+    expect(entry).toMatchObject({
+      publication_status: 'retired', rights_status: 'needs-confirmation', license: null, used_in: [],
+    });
+    const file = resolve(repositoryRoot, entry.asset);
+    expect(sha256(file)).toBe(retiredVlm.sha256);
+    expect(pngDimensions(file)).toEqual(retiredVlm.dimensions_px);
+    expectDecodableImage(file);
+    for (const former of retiredVlm.former_used_in ?? []) {
+      const reader = readFileSync(resolve(repositoryRoot, former), 'utf8');
+      expect(reader).not.toContain(entry.asset);
+      expect(reader).toContain(retiredVlm.figure_url);
+    }
+    return;
+  }
+  const pdfEvidence = legacyPdfFigureEvidence.find(({ record }) => record.asset === entry.asset);
+  if (pdfEvidence) {
+    const expected = pdfEvidence.record;
+    expect(entry).toMatchObject(expected);
+    const file = resolve(repositoryRoot, entry.asset);
+    expect(sha256(file)).toBe(expected.sha256);
+    expect(pngDimensions(file)).toEqual(expected.dimensions_px);
+    expectDecodableImage(file);
+    if (expected.source_asset_sha256 && expected.source_asset) {
+      const pdf = resolve(repositoryRoot, expected.source_asset);
+      if (existsSync(pdf)) expect(sha256(pdf)).toBe(expected.source_asset_sha256);
+    }
+    for (const owner of expected.used_in ?? [])
+      expect(readFileSync(resolve(repositoryRoot, owner), 'utf8')).toContain(entry.asset);
+    return;
+  }
+  if (validateFinalSourceFigure(entry, repositoryRoot)) return;
+  const alammarDirectory = '00 Учебник/Assets/Figures/curated/diffusion-alammar-2026-11-11/';
+  if (entry.asset.startsWith(alammarDirectory)) {
+    const name = entry.asset.slice(alammarDirectory.length);
+    const original = stableDiffusionAlammarFigures[name];
+    expect(original, name).toBeDefined();
+    const article = 'https://jalammar.github.io/illustrated-stable-diffusion/';
+    const evidence = 'publishing/fixtures/alammar-stable-diffusion-license.txt';
+    expect(entry).toMatchObject({
+      author: 'Jay Alammar',
+      source_url: article + '#' + original.section,
+      source_image_url: 'https://jalammar.github.io/images/stable-diffusion/' + name,
+      source_blob_sha1: original.blob,
+      source_asset_sha256: original.sha256, sha256: original.sha256,
+      dimensions_px: original.dimensions,
+      derivation: 'source-raster-copy', metadata_status: 'verified',
+      rights_status: 'source-license-verified', provenance_confirmation: 'source-license-verified',
+      license: 'CC BY-NC-SA 4.0', license_url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/',
+      license_evidence: evidence, license_evidence_url: article,
+      license_evidence_sha256: '728fee3c0dafb1193b31bbee494c93327cb8a1c90699f50c2d47942f4b7ddc7c',
+    });
+    expect(entry.crop_box_px).toBeUndefined();
+    expect(sha256(resolve(repositoryRoot, evidence))).toBe(entry.license_evidence_sha256);
+    const bytes = readFileSync(resolve(repositoryRoot, entry.asset));
+    expect(createHash('sha256').update(bytes).digest('hex')).toBe(original.sha256);
+    expect(createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex')).toBe(original.blob);
+    expect(validateRenderedPngBytes(bytes)).toEqual(original.dimensions);
+    return;
+  }
+  const reviewed = reviewedLegacySources.find(row => row.asset === entry.asset);
+  if (reviewed) {
+    expect(entry).toMatchObject({
+      source_image_url: reviewed.sourceImage, source_asset: reviewed.sourceAsset,
+      source_asset_sha256: reviewed.sha256, sha256: reviewed.sha256, bytes: reviewed.bytes,
+      license: reviewed.license, license_url: reviewed.licenseUrl, license_evidence: reviewed.licenseEvidence,
+      metadata_status: 'verified', provenance_confirmation: 'source-license-verified',
+      rights_status: 'source-license-verified', derivation: reviewed.viewBox ? 'source-svg-copy' : 'source-raster-copy',
+    });
+    expect(entry.crop_box_px).toBeUndefined();
+    if (reviewed.commit) {
+      expect(entry.commit).toBe(reviewed.commit);
+      expect(entry.source_image_url).toContain('/' + reviewed.commit + '/');
+    }
+    const file = resolve(repositoryRoot, entry.asset);
+    expect(sha256(file)).toBe(reviewed.sha256);
+    expect(readFileSync(file).byteLength).toBe(reviewed.bytes);
+    expect(sha256(resolve(repositoryRoot, reviewed.sourceAsset))).toBe(reviewed.sha256);
+    expectDecodableImage(file);
+    if (reviewed.dimensions) {
+      expect(entry.dimensions_px).toEqual(reviewed.dimensions);
+      if (file.endsWith('.png')) expect(pngDimensions(file)).toEqual(reviewed.dimensions);
+    }
+    if (reviewed.viewBox) {
+      expect(entry.source_viewbox).toEqual(reviewed.viewBox);
+      const viewBox = readFileSync(file, 'utf8').match(/<svg\b[^>]*\bviewBox=["']([^"']+)/)?.[1];
+      expect(viewBox?.trim().split(/[\s,]+/).map(Number)).toEqual(reviewed.viewBox);
+    }
+    if (reviewed.licenseEvidenceSha256) {
+      expect(entry.license_evidence_sha256).toBe(reviewed.licenseEvidenceSha256);
+      if (!reviewed.licenseEvidence.startsWith('https://'))
+        expect(sha256(resolve(repositoryRoot, reviewed.licenseEvidence))).toBe(reviewed.licenseEvidenceSha256);
+    }
+    if (reviewed.publicNotice) {
+      expect(entry.public_license_copy).toBe(reviewed.publicNotice);
+      expect(sha256(resolve(repositoryRoot, reviewed.publicNotice))).toBe(reviewed.publicNoticeSha256);
+    }
+    return;
+  }
+  const relativeAsset = entry.asset.replace(/^00 Учебник\/Assets\/Figures\/curated\//, '');
+  const retired = retiredFigureRightsReview.find(([asset]) => asset === relativeAsset);
+  if (retired) {
+    expect(entry).toMatchObject({
+      publication_status: 'retired', metadata_status: 'needs-confirmation',
+      rights_status: retired[2], used_in: [], sha256: retired[1],
+    });
+    requireNonEmptyString(entry.retirement_reason, 'retirement_reason');
+    expect(entry.source_url).toMatch(/^https:\/\//);
+    const file = resolve(repositoryRoot, entry.asset);
+    expect(sha256(file)).toBe(retired[1]);
+    expectDecodableImage(file);
+    return;
+  }
+  const d2l = d2lLegacyOriginals.find(([asset]) => asset === relativeAsset);
+  if (d2l) {
+    const license = '05 Источники/Originals/neural-language-model-2026-10-21/d2l-LICENSE.txt';
+    expect(entry).toMatchObject({
+      source_image_url: d2l[2].startsWith('/') ? 'https://d2l.ai' + d2l[2] : d2l[2],
+      sha256: d2l[1], source_asset_sha256: d2l[1],
+      derivation: 'source-svg-copy', metadata_status: 'verified',
+      license: 'CC BY-SA 4.0', license_url: 'https://creativecommons.org/licenses/by-sa/4.0/',
+      license_evidence: license, rights_status: 'source-license-verified',
+      license_evidence_sha256: 'a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c',
+    });
+    expect(sha256(resolve(repositoryRoot, license))).toBe(entry.license_evidence_sha256);
+    const file = resolve(repositoryRoot, entry.asset);
+    expect(sha256(file)).toBe(d2l[1]);
+    expectDecodableImage(file);
+    return;
+  }
+  const chipHuyen = finalRetiredFigures[0];
+  if (entry.asset === chipHuyen.asset) {
+    expect(entry).toMatchObject({
+      ...chipHuyen, author: 'Chip Huyen', license: null, license_url: null,
+      source_url: 'https://huyenchip.com/2023/05/02/rlhf.html',
+      source_image_url: 'https://huyenchip.com/assets/pics/rlhf/1-chatgpt-training.png',
+      publication_status: 'retired', used_in: [], metadata_status: 'needs-confirmation',
+      rights_status: 'needs-confirmation', provenance_confirmation: 'third-party-figure-origin-verified',
+    });
+    const file = resolve(repositoryRoot, entry.asset);
+    expect(sha256(file)).toBe(chipHuyen.sha256);
+    expectDecodableImage(file);
+    return;
+  }
+  const agentPaperFigure = archivedAgentPaperFigures.find(row => row.asset === entry.asset);
+  if (agentPaperFigure) {
+    expect(entry).toMatchObject({
+      source_url: agentPaperFigure.figure_url.split('#')[0].replace('/html/', '/abs/'),
+      figure_url: agentPaperFigure.figure_url, sha256: agentPaperFigure.sha256,
+      license: null, license_url: null,
+      license_evidence_url: 'https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html',
+      publication_status: 'retired', used_in: [],
+      former_used_in: [`Papers/${agentPaperFigure.owner}.md`],
+      metadata_status: 'needs-confirmation', rights_status: 'needs-confirmation',
+      provenance_confirmation: 'third-party-figure-origin-verified',
+    });
+    requireNonEmptyString(entry.retirement_reason, 'retirement_reason');
+    const file = resolve(repositoryRoot, entry.asset);
+    expect(sha256(file)).toBe(agentPaperFigure.sha256);
+    expectDecodableImage(file);
+    return;
+  }
+  if (entry.asset.startsWith(foundationsFigurePath)) {
+    validateFoundationsFigure(entry, repositoryRoot);
+    return;
+  }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/source-first-37-40-audit/longformer-attention-patterns.png') {
+    expect(entry).toMatchObject({
+      source_asset: 'raw/papers/external/2004.05150.pdf',
+      source_url: 'https://arxiv.org/abs/2004.05150v2',
+      figure_url: 'https://arxiv.org/html/2004.05150v2#S1.F2',
+      license_url: null,
+      license_evidence_url: 'https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html',
+      derivation: 'pdf-page-render-crop', publication_status: 'retired', used_in: [],
+      provenance_confirmation: 'third-party-figure-origin-verified',
+      rights_status: 'needs-confirmation', metadata_status: 'needs-confirmation',
+      sha256: 'f4ada49a4a88b0d324d4fba47ca41ad6acffc44f7aa4c5aac07b2fbd82d5b533',
+    });
+    requireNonEmptyString(entry.retirement_reason, 'retirement_reason');
+    expect(sha256(resolve(repositoryRoot, entry.asset))).toBe(entry.sha256);
+    expectDecodableImage(resolve(repositoryRoot, entry.asset));
+    return;
+  }
+  const originalHeadFigure = multiheadOriginals.find(row => row.asset === entry.asset);
+  if (originalHeadFigure) {
+    expect(entry).toMatchObject(originalHeadFigure);
+    const output = resolve(repositoryRoot, entry.asset);
+    const source = resolve(repositoryRoot, originalHeadFigure.source_asset);
+    const policy = resolve(repositoryRoot, originalHeadFigure.license_evidence);
+    expect(sha256(output)).toBe(originalHeadFigure.sha256);
+    expect(sha256(source)).toBe(originalHeadFigure.source_asset_sha256);
+    expect(sha256(policy)).toBe(originalHeadFigure.license_evidence_sha256);
+    expect(pngDimensions(output)).toEqual(originalHeadFigure.dimensions_px);
+    if ('crop_box_px' in originalHeadFigure) {
+      expect(readFileSync(policy,'utf8')).toContain('creativecommons.org/licenses/by/4.0/');
+      const [x,y,right,bottom]=originalHeadFigure.crop_box_px;
+      const expected=execFileSync(process.env.PDFTOPPM ?? 'pdftoppm',[
+        '-f','3','-l','3','-r','360','-singlefile',
+        '-x',String(x),'-y',String(y),'-W',String(right-x),'-H',String(bottom-y),'-png',source,
+      ],{env:{...process.env,LC_ALL:'C',LANG:'C'},maxBuffer:1024*1024});
+      expect(readFileSync(output)).toEqual(expected);
+    } else {
+      expect(readFileSync(policy,'utf8')).toContain('src="1706.03762v7/Figures/ModalNet-20.png" id="S3.F2.g2"');
+      expect(readFileSync(policy,'utf8')).toContain('solely for use in journalistic or scholarly works');
+      expect(readFileSync(output)).toEqual(readFileSync(source));
+    }
+    return;
+  }
+  if (entry.asset === "00 Учебник/Assets/Figures/curated/transformer-gpt-bridge-2026-11-10/vaswani-transformer-figure1.png") {
+    const expected = {
+      asset: "00 Учебник/Assets/Figures/curated/transformer-gpt-bridge-2026-11-10/vaswani-transformer-figure1.png",
+      source_url: "https://arxiv.org/html/1706.03762v7#S3.F1",
+      source_image_url: "https://arxiv.org/html/1706.03762v7/Figures/ModalNet-21.png",
+      source_asset: "05 Источники/Originals/transformer-gpt-bridge-2026-11-10/ModalNet-21.png",
+      source_asset_sha256: "56d69ccc192b90c3b93e5e285ff892f74753f970103939b40291945e106e9f79",
+      sha256: "56d69ccc192b90c3b93e5e285ff892f74753f970103939b40291945e106e9f79",
+      source_page_snapshot: "05 Источники/Originals/transformer-gpt-bridge-2026-11-10/vaswani-v7.html",
+      source_page_sha256: "fe1288e9c6f8322156429ab44bf5ced203155f8ecc7ea9fe6cfd125872c72a3b",
+      license: "Google permission for attributed scholarly or journalistic figure reuse",
+      license_url: "https://arxiv.org/html/1706.03762v7#p1.1",
+      license_evidence: "05 Источники/Originals/transformer-gpt-bridge-2026-11-10/vaswani-v7.html",
+      license_evidence_sha256: "fe1288e9c6f8322156429ab44bf5ced203155f8ecc7ea9fe6cfd125872c72a3b",
+      derivation: "source-png-copy",
+      metadata_status: "verified",
+      rights_status: "source-license-verified",
+      used_in: ["00 Учебник/05 Attention и Transformer/03 Полный Transformer.md","en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md"],
+    };
+    expect(entry).toMatchObject(expected);
+    const image = resolve(repositoryRoot, entry.asset);
+    const original = resolve(repositoryRoot, expected.source_asset);
+    const page = resolve(repositoryRoot, expected.source_page_snapshot);
+    expect(sha256(image)).toBe(expected.sha256);
+    expect(readFileSync(image)).toEqual(readFileSync(original));
+    expect(sha256(page)).toBe(expected.source_page_sha256);
+    expect(readFileSync(page, 'utf8')).toContain('src="1706.03762v7/Figures/ModalNet-21.png" id="S3.F1.g1"');
+    expect(readFileSync(page, 'utf8')).toContain('solely for use in journalistic or scholarly works');
+    expect(pngDimensions(image)).toEqual([1520,2239]);
+    return;
+  }
+  const bridge = seq2seqAttentionBridge.find(row => row.asset === entry.asset);
+  if (bridge) {
+    const used_in = bridge.asset.endsWith('/d2l-seq2seq-state.svg')
+      ? [...bridge.used_in, '00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md']
+      : bridge.used_in;
+    expect(entry).toMatchObject({ ...bridge, used_in });
+    const original = resolve(repositoryRoot, bridge.source_asset);
+    const output = resolve(repositoryRoot, entry.asset);
+    const policy = resolve(repositoryRoot, bridge.license_evidence);
+    expect(sha256(original)).toBe(bridge.source_asset_sha256);
+    expect(sha256(output)).toBe(bridge.sha256);
+    expect(sha256(policy)).toBe(bridge.license_evidence_sha256);
+    if ('viewBox' in bridge) {
+      const page = resolve(repositoryRoot, bridge.source_page_snapshot);
+      const marker = bridge.source_image_url.split('/').at(-1)!;
+      expect(sha256(page)).toBe(bridge.source_page_sha256);
+      expect(readFileSync(page, 'utf8')).toContain('/' + marker + '"');
+      expect(readFileSync(output, 'utf8')).toContain('viewBox="' + bridge.viewBox.join(' ') + '"');
+      expect(readFileSync(output)).toEqual(readFileSync(original));
+    } else {
+      expect(readFileSync(policy, 'utf8')).toContain('creativecommons.org/licenses/by-nc-sa/3.0/');
+      const [x, y, right, bottom] = bridge.crop_box_px;
+      const expected = execFileSync(process.env.PDFTOPPM ?? 'pdftoppm', [
+        '-f','7','-l','7','-r','360','-singlefile',
+        '-x',String(x),'-y',String(y),'-W',String(right-x),'-H',String(bottom-y),'-png',original,
+      ], { env: {...process.env, LC_ALL:'C', LANG:'C'}, maxBuffer:1024*1024 });
+      expect(readFileSync(output)).toEqual(expected);
+      expect(pngDimensions(output)).toEqual([2260,610]);
+    }
+    return;
+  }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/lstm-gru-author-2026-11-10/cho-gru-figure2.png') {
+    expect(entry).toMatchObject({
+      source_url: 'https://aclanthology.org/D14-1179/',
+      source_image_url: 'https://aclanthology.org/D14-1179.pdf#page=3',
+      source_asset: '05 Источники/Originals/lstm-gru-2026-10-21/cho-2014.pdf',
+      source_asset_sha256: 'c948d89ccd33da2a48421b45445f1c30f5fe677a829af9e5e1b6f9ff75a14a81',
+      sha256: '394298380b6a5a1176228d7d019f9bc5c60868e2fed2ca839e9e039b7863dba9',
+      derivation: 'pdf-page-render-crop', source_page: 3, source_printed_page: 1726,
+      render_dpi: 360, crop_box_px: [1676,290,2486,725], dimensions_px: [810,435],
+      license: 'CC BY-NC-SA 3.0', license_url: 'https://creativecommons.org/licenses/by-nc-sa/3.0/',
+      license_evidence_url: 'https://aclanthology.org/faq/copyright/',
+      license_evidence: '05 Источники/Originals/architecture-patterns-2026-10-21/acl-copyright.html',
+      license_evidence_sha256: '88d644d2e21542ef1cc6c304c264ce7543d81e87c9599aff7e1c68e7a6df9558',
+      metadata_status: 'verified', rights_status: 'source-license-verified',
+    });
+    const source = resolve(repositoryRoot, entry.source_asset!);
+    const image = resolve(repositoryRoot, entry.asset);
+    const policy = resolve(repositoryRoot, entry.license_evidence!);
+    expect(sha256(source)).toBe(entry.source_asset_sha256);
+    expect(sha256(image)).toBe(entry.sha256);
+    expect(sha256(policy)).toBe(entry.license_evidence_sha256);
+    expect(readFileSync(policy, 'utf8')).toContain('creativecommons.org/licenses/by-nc-sa/3.0/');
+    const expected = execFileSync(process.env.PDFTOPPM ?? 'pdftoppm', [
+      '-f','3','-l','3','-r','360','-singlefile','-x','1676','-y','290','-W','810','-H','435','-png',source,
+    ], { env: {...process.env, LC_ALL:'C', LANG:'C'}, maxBuffer:1024*1024 });
+    expect(readFileSync(image)).toEqual(expected);
+    expect(pngDimensions(image)).toEqual([810,435]);
+    return;
+  }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/bpe-author-2026-11-10/zouhar-bpe-figure1.png') {
+    expect(entry).toMatchObject({
+      source_url: 'https://aclanthology.org/2023.findings-acl.38/',
+      source_image_url: 'https://aclanthology.org/2023.findings-acl.38v1.pdf#page=3',
+      source_asset: '05 Источники/Originals/bpe-author-2026-11-10/zouhar-acl-v1.pdf',
+      source_asset_sha256: 'fe26d0d23fa838b083b16df808694d22402021bcf047cf606366578e270637b9',
+      sha256: '6f5fee35e162629529c6856640a1ac6b0d646963820d40e198a6a95289a0f1fd',
+      license: 'CC BY 4.0', license_url: 'https://creativecommons.org/licenses/by/4.0/',
+      license_evidence_url: 'https://aclanthology.org/faq/copyright/',
+      license_evidence: '05 Источники/Originals/architecture-patterns-2026-10-21/acl-copyright.html',
+      license_evidence_sha256: '88d644d2e21542ef1cc6c304c264ce7543d81e87c9599aff7e1c68e7a6df9558',
+      derivation: 'pdf-page-render-crop', source_page: 3, source_printed_page: 600,
+      render_dpi: 360, crop_box_px: [1555,1756,2605,2286], dimensions_px: [1050,530],
+      metadata_status: 'verified', rights_status: 'source-license-verified',
+    });
+    const source = resolve(repositoryRoot, entry.source_asset!);
+    const image = resolve(repositoryRoot, entry.asset);
+    const policy = resolve(repositoryRoot, entry.license_evidence!);
+    expect(sha256(source)).toBe(entry.source_asset_sha256);
+    expect(sha256(image)).toBe(entry.sha256);
+    expect(sha256(policy)).toBe(entry.license_evidence_sha256);
+    expect(readFileSync(policy, 'utf8')).toContain('https://creativecommons.org/licenses/by/4.0/');
+    const expected = execFileSync(process.env.PDFTOPPM ?? 'pdftoppm', [
+      '-f','3','-l','3','-r','360','-singlefile','-x','1555','-y','1756','-W','1050','-H','530','-png',source,
+    ], { env: {...process.env, LC_ALL:'C', LANG:'C'}, maxBuffer:1024*1024 });
+    expect(readFileSync(image)).toEqual(expected);
+    expect(pngDimensions(image)).toEqual([1050,530]);
+    return;
+  }
+  const embeddingFigures = '00 Учебник/Assets/Figures/curated/embedding-author-figures-2026-11-10/';
+  if (entry.asset.startsWith(embeddingFigures)) {
+    const packet = '05 Источники/Originals/embedding-author-figures-2026-11-10/';
+    const member = entry.asset.slice(embeddingFigures.length);
+    const digests: Record<string, string> = {
+      'd2l-skip-gram.svg': '30ec5c85ee6e49d9f68673c45e3915f9642d13f02127622ecea024ed4f453b8a',
+      'd2l-cbow.svg': 'eb0a0cacb7c7bfe38f573511ee5d426f4ee3b24e32b0ce3e8ca37b3d9d586811',
+      'alammar-word2vec-lookup-embeddings.png': 'cef0f9dd8bc6bcc5a2bab1301e2337202ef88539c233111b7fd021d34c5d9759',
+      'glove-table1-ratios.png': '934cb328deaced4f89024b53a92f2a5e138aeb518df69735b25c3c9d0e1c0783',
+      'glove-figure1-weighting.png': '4f2c6d394cf411cee74f2420368fea2b3c2f34549de071b66bdd9f15e71af220',
+    };
+    expect(digests[member]).toBeDefined();
+    const image = resolve(repositoryRoot, entry.asset);
+    expect(entry.metadata_status).toBe('verified');
+    expect(entry.rights_status).toBe('source-license-verified');
+    expect(entry.provenance_confirmation).toBe('source-license-verified');
+    expect(entry.sha256).toBe(digests[member]);
+    expect(sha256(image)).toBe(digests[member]);
+    const checkedSource = resolve(repositoryRoot, entry.source_asset!);
+    expect(sha256(checkedSource)).toBe(entry.source_asset_sha256);
+    expect(sha256(resolve(repositoryRoot, entry.license_evidence!))).toBe(entry.license_evidence_sha256);
+    const evidence = readFileSync(resolve(repositoryRoot, entry.license_evidence!), 'utf8');
+    if (member.startsWith('d2l-')) {
+      const kind = member === 'd2l-cbow.svg' ? 'cbow' : 'skip-gram';
+      const anchor = kind === 'cbow' ? 'the-continuous-bag-of-words-cbow-model' : 'the-skip-gram-model';
+      expect(entry.commit).toBe(d2lCommit);
+      expect(entry.source_url).toBe('https://en.d2l.ai/chapter_natural-language-processing-pretraining/word2vec.html#' + anchor);
+      expect(entry.source_image_url).toBe('https://raw.githubusercontent.com/d2l-ai/d2l-en/' + d2lCommit + '/img/' + kind + '.svg');
+      expect(entry.source_asset).toBe(packet + member);
+      expect(entry.source_page_snapshot).toBe('05 Источники/Originals/word-embeddings-2026-10-21/d2l-word2vec.md');
+      const sourcePage = resolve(repositoryRoot, entry.source_page_snapshot!);
+      expect(sha256(sourcePage)).toBe(entry.source_page_sha256);
+      expect(readFileSync(sourcePage, 'utf8')).toContain('../img/' + kind + '.svg');
+      expect(entry.source_asset_sha256).toBe(entry.sha256);
+      expect(entry.derivation).toBe('source-svg-copy');
+      expect(entry.license_evidence).toBe(packet + 'd2l-license');
+      expect(evidence).toContain('Creative Commons Attribution-ShareAlike 4.0 International License');
+      expect(entry.license).toBe('CC BY-SA 4.0');
+      expect(entry.license_url).toBe('https://creativecommons.org/licenses/by-sa/4.0/');
+      expect(readFileSync(image, 'utf8')).toContain('viewBox="0 0 178 117"');
+    } else if (member.startsWith('alammar-')) {
+      expect(entry.source_url).toBe('https://jalammar.github.io/illustrated-word2vec/#word2vec-training-process');
+      expect(entry.source_image_url).toBe('https://jalammar.github.io/images/word2vec/word2vec-lookup-embeddings.png');
+      expect(entry.source_asset).toBe(packet + member);
+      expect(entry.source_page_snapshot).toBe(packet + 'illustrated-word2vec.html');
+      expect(entry.source_page_snapshot).toBe(entry.license_evidence);
+      expect(entry.source_page_sha256).toBe(entry.license_evidence_sha256);
+      expect(evidence).toContain('/images/word2vec/word2vec-lookup-embeddings.png');
+      expect(evidence).toContain('creativecommons.org/licenses/by-nc-sa/4.0/');
+      expect(entry.source_asset_sha256).toBe(entry.sha256);
+      expect(entry.derivation).toBe('source-raster-copy');
+      expect(entry.license).toBe('CC BY-NC-SA 4.0');
+      expect(entry.license_url).toBe('https://creativecommons.org/licenses/by-nc-sa/4.0/');
+      expect(pngDimensions(image)).toEqual([1431,628]);
+    } else {
+      const isTable = member === 'glove-table1-ratios.png';
+      const page = isTable ? 3 : 4;
+      const [x, y, right, bottom] = isTable ? [614,626,2348,1008] : [1565,300,2565,790];
+      expect(entry.source_url).toBe('https://aclanthology.org/D14-1162/');
+      expect(entry.source_image_url).toBe('https://aclanthology.org/D14-1162.pdf#page=' + page);
+      expect(entry.source_asset).toBe(packet + 'glove-author.pdf');
+      expect(entry.source_asset_sha256).toBe('6631a1719122a89b3941d851a55ecf38c55971c36b30ae9c0cec617124056adf');
+      expect(entry.derivation).toBe('pdf-page-render-crop');
+      expect(entry.source_page).toBe(page);
+      expect(entry.source_printed_page).toBe(1531 + page);
+      expect(entry.crop_box_px).toEqual([x,y,right,bottom]);
+      expect(entry.render_dpi).toBe(360);
+      expect(entry.render_page_size_px).toEqual([2977,4210]);
+      expect(entry.license).toBe('CC BY-NC-SA 3.0');
+      expect(entry.license_url).toBe('https://creativecommons.org/licenses/by-nc-sa/3.0/');
+      expect(entry.license_evidence_url).toBe('https://aclanthology.org/faq/copyright/');
+      expect(evidence).toContain('creativecommons.org/licenses/by-nc-sa/3.0/');
+      const crop = execFileSync(process.env.PDFTOPPM ?? 'pdftoppm', [
+        '-f', String(page), '-l', String(page), '-r', '360', '-singlefile',
+        '-x', String(x), '-y', String(y), '-W', String(right - x), '-H', String(bottom - y),
+        '-png', checkedSource,
+      ], {env: {...process.env, LC_ALL: 'C', LANG: 'C'}, maxBuffer: 1024 * 1024});
+      expect(readFileSync(image)).toEqual(crop);
+      expect(pngDimensions(image)).toEqual([right-x,bottom-y]);
+    }
+    expectDecodableImage(image);
+    return;
+  }
+  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/deepseek-v2-mla-2026-11-09/')) {
+    const specs = JSON.parse(readFileSync(resolve(repositoryRoot, 'publishing/tools/deepseek-v2-mla-originals.json'), 'utf8')) as CuratedAsset[];
+    const spec = specs.find(row => row.asset === entry.asset);
+    expect(spec).toBeDefined();
+    expect(entry).toMatchObject(spec!);
+    const path = resolve(repositoryRoot, entry.asset);
+    expect(sha256(path)).toBe(spec!.sha256);
+    expect(pngDimensions(path)).toEqual(spec!.dimensions_px);
+    expect(sha256(resolve(repositoryRoot, spec!.license_evidence!))).toBe(spec!.license_evidence_sha256);
+    expectDecodableImage(path);
+    return;
+  }
+  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/deepseek-originals-2026-11-09/')) {
+    const sources = [
+      {
+        "id": "curated-deepseek-v3-benchmarks-d2d6b339d6eb",
+        "asset": "00 Учебник/Assets/Figures/curated/deepseek-originals-2026-11-09/v3-figure1-benchmarks.png",
+        "source_url": "https://github.com/deepseek-ai/DeepSeek-V3/blob/d5c08b384b4d4096e494d61ba7d329f593116872/DeepSeek_V3.pdf",
+        "source_image_url": "https://raw.githubusercontent.com/deepseek-ai/DeepSeek-V3/d5c08b384b4d4096e494d61ba7d329f593116872/DeepSeek_V3.pdf#page=1",
+        "sha256": "d2d6b339d6ebaafdaa8f9ff381c4128ca6e82654f55136f6de4028135569f1c6",
+        "dimensions_px": [
+          2285,
+          1340
+        ],
+        "source_page": 1,
+        "crop_box_px": [
+          345,
+          2310,
+          2630,
+          3650
+        ],
+        "license": "MIT",
+        "derivation": "pdf-page-render-crop",
+        "source_asset_sha256": "1392807ef6297deefc421cea6633af0b819e15a0b7a4a6b0adba4bccdf0ab273",
+        "license_evidence": "site/public/licenses/deepseek-v3-d5c08b3-MIT.txt"
+      },
+      {
+        "id": "curated-deepseek-v3-block-ad55ce4f20f2",
+        "asset": "00 Учебник/Assets/Figures/curated/deepseek-originals-2026-11-09/v3-figure2-block.png",
+        "source_url": "https://github.com/deepseek-ai/DeepSeek-V3/blob/d5c08b384b4d4096e494d61ba7d329f593116872/DeepSeek_V3.pdf",
+        "source_image_url": "https://raw.githubusercontent.com/deepseek-ai/DeepSeek-V3/d5c08b384b4d4096e494d61ba7d329f593116872/DeepSeek_V3.pdf#page=7",
+        "sha256": "ad55ce4f20f25e0f04fa439b3fb733557d254062df7d9f97d406f52915a4e809",
+        "dimensions_px": [
+          2285,
+          1845
+        ],
+        "source_page": 7,
+        "crop_box_px": [
+          345,
+          405,
+          2630,
+          2250
+        ],
+        "license": "MIT",
+        "derivation": "pdf-page-render-crop",
+        "source_asset_sha256": "1392807ef6297deefc421cea6633af0b819e15a0b7a4a6b0adba4bccdf0ab273",
+        "license_evidence": "site/public/licenses/deepseek-v3-d5c08b3-MIT.txt"
+      },
+      {
+        "id": "curated-deepseek-r1-zero-nature-f79140c320e1",
+        "asset": "00 Учебник/Assets/Figures/curated/deepseek-originals-2026-11-09/r1-zero-nature-figure1.png",
+        "source_url": "https://www.nature.com/articles/s41586-025-09422-z/figures/1",
+        "source_image_url": "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-025-09422-z/MediaObjects/41586_2025_9422_Fig1_HTML.png",
+        "sha256": "f79140c320e139280b30a7aeda5e886226ebaa06227742cf374507b03b8d0bcb",
+        "dimensions_px": [
+          1799,
+          782
+        ],
+        "license": "CC BY 4.0",
+        "derivation": "source-raster-copy",
+        "source_asset_sha256": "f79140c320e139280b30a7aeda5e886226ebaa06227742cf374507b03b8d0bcb",
+        "license_evidence": "https://www.nature.com/articles/s41586-025-09422-z#rightslink"
+      },
+      {
+        "id": "curated-deepseek-v2-author-architecture-69910543d224",
+        "asset": "00 Учебник/Assets/Figures/curated/deepseek-originals-2026-11-09/v2-author-architecture.png",
+        "source_url": "https://github.com/deepseek-ai/DeepSeek-V2/blob/ec98ee3cbffc32104cd55dba8af884b3d772602a/figures/architecture.png",
+        "source_image_url": "https://raw.githubusercontent.com/deepseek-ai/DeepSeek-V2/ec98ee3cbffc32104cd55dba8af884b3d772602a/figures/architecture.png",
+        "sha256": "69910543d2248eb7d201a3aa164278fc24f886f86e5acd0273dc70fa5e9a728c",
+        "dimensions_px": [
+          1139,
+          918
+        ],
+        "license": "MIT",
+        "derivation": "source-raster-copy",
+        "source_asset_sha256": "69910543d2248eb7d201a3aa164278fc24f886f86e5acd0273dc70fa5e9a728c",
+        "license_evidence": "site/public/licenses/deepseek-v2-ec98ee3c-MIT.txt"
+      }
+    ];
+    const source = sources.find(candidate => candidate.id === entry.id);
+    expect(source).toBeDefined();
+    expect(entry).toMatchObject({ ...source, metadata_status: 'verified', rights_status: 'source-license-verified' });
+    const path = resolve(repositoryRoot, entry.asset);
+    expect(sha256(path)).toBe(source!.sha256);
+    const png = readFileSync(path);
+    expect([png.readUInt32BE(16), png.readUInt32BE(20)]).toEqual(source!.dimensions_px);
+    if (source!.license === 'MIT') {
+      expect(sha256(resolve(repositoryRoot, source!.license_evidence))).toBe('6e4c38e1172f42fdbff13edf9a7a017679fb82b0fde415a3e8b3c31c6ed4a4e4');
+    }
+    expectDecodableImage(path);
+    return;
+  }
+  if (/^curated-enigma-icml-figure[13]-/.test(entry.id)) {
+    const crops = {
+      'curated-enigma-icml-figure1-7d8da45c3b89': { page: 2, box: [208, 250, 2184, 702], name: 'enigma-figure1.png', hash: '7d8da45c3b8931b52c69df0b278ffae800e788b154083f997e6f258a52066d5f' },
+      'curated-enigma-icml-figure3-09dee15a783d': { page: 5, box: [208, 250, 2232, 1092], name: 'enigma-figure3.png', hash: '09dee15a783dbd937c8fd325bdb68a03a940d0beb6afad4ea7214848aa880ad0' },
+    };
+    const crop = crops[entry.id as keyof typeof crops];
+    expect(crop).toBeDefined();
+    const asset = '00 Учебник/Assets/Figures/curated/computer-agents-2026-11-09/' + crop.name;
+    const source = '05 Источники/Originals/enigma-2026-11-09/abramovich25a.pdf';
+    const sourceHash = 'ef4914f8452197ab3123d4d014a5c7e618476cfca552f628b613f8fdb71d5b89';
+    expect(entry).toMatchObject({
+      asset, source_asset: source, source_asset_sha256: sourceHash, source_page: crop.page,
+      author: 'Talor Abramovich et al.',
+      source_url: 'https://proceedings.mlr.press/v267/abramovich25a.html',
+      source_image_url: 'https://raw.githubusercontent.com/mlresearch/v267/7914d3407046b308db90001490534e422dab7d87/assets/abramovich25a/abramovich25a.pdf#page=' + crop.page,
+      license: 'CC BY 4.0', license_url: 'https://creativecommons.org/licenses/by/4.0/',
+      license_evidence: 'https://proceedings.mlr.press/pmlr-license-agreement.html',
+      rights_evidence: 'https://icml.cc/Conferences/2025/AuthorInstructions',
+      metadata_status: 'verified', provenance_confirmation: 'source-license-verified',
+      derivation: 'pdf-page-render-crop', render_dpi: 288,
+      crop_box_px: crop.box, render_page_size_px: [2448, 3168],
+      sha256: crop.hash, used_in: ['00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md'],
+    });
+    const path = resolve(repositoryRoot, asset);
+    expect(sha256(path)).toBe(crop.hash);
+    expect(pngDimensions(path)).toEqual([crop.box[2] - crop.box[0], crop.box[3] - crop.box[1]]);
+    expectDecodableImage(path);
+    const archived = resolve(repositoryRoot, source);
+    if (existsSync(archived)) expect(sha256(archived)).toBe(sourceHash);
+    return;
+  }
+  if (/^curated-eagle3-(inference-figure5|mask-figure6)-/.test(entry.id)) {
+    const originals = [{"id":"curated-eagle3-inference-figure5-1fc5aea1023b","asset":"00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-inference-figure5.png","title":"EAGLE-3 inference pipeline (Figure 5)","source_url":"https://arxiv.org/html/2503.01840v3#S3.F5","source_image_url":"https://arxiv.org/html/2503.01840v3/method.png","source_asset":"00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-inference-figure5.png","source_asset_sha256":"1fc5aea1023b11258bcc47d75f528b4e0224364089c2bbdba20a0c0aeb0f86c1","sha256":"1fc5aea1023b11258bcc47d75f528b4e0224364089c2bbdba20a0c0aeb0f86c1","derivation":"source-png-copy","dimensions_px":[647,987],"author":"Yuhui Li, Fangyun Wei, Chao Zhang and Hongyang Zhang","license":"CC BY 4.0","license_url":"https://creativecommons.org/licenses/by/4.0/","license_evidence":"05 Источники/Originals/eagle3-2026-11-09/openreview-4exx1hUffq.json","license_evidence_sha256":"44bd391f91ae1303eeeea81ad0e961fd97cf927ef57353bf1ab14554859d6064","rights_evidence":"https://openreview.net/forum?id=4exx1hUffq","rights_status":"source-license-verified","metadata_status":"verified","provenance_confirmation":"author-camera-ready-license","last_verified":"2026-11-09","modifications":"Unmodified original figure file from arXiv HTML v3; the authors publish the same figure in the CC BY 4.0 camera-ready article on OpenReview.","used_in":["00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md","en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md"]},{"id":"curated-eagle3-mask-figure6-91c835f7a994","asset":"00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-training-mask-figure6.svg","title":"EAGLE-3 attention masks during training-time test (Figure 6)","source_url":"https://arxiv.org/html/2503.01840v3#S3.F6","source_image_url":"https://arxiv.org/html/2503.01840v3/train.svg","source_asset":"00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3-training-mask-figure6.svg","source_asset_sha256":"91c835f7a9949fdd466d453204670652cab8174c088326f03d46ad040c3ee656","sha256":"91c835f7a9949fdd466d453204670652cab8174c088326f03d46ad040c3ee656","derivation":"source-svg-copy","viewBox":[0,0,919.5071,434.72798],"author":"Yuhui Li, Fangyun Wei, Chao Zhang and Hongyang Zhang","license":"CC BY 4.0","license_url":"https://creativecommons.org/licenses/by/4.0/","license_evidence":"05 Источники/Originals/eagle3-2026-11-09/openreview-4exx1hUffq.json","license_evidence_sha256":"44bd391f91ae1303eeeea81ad0e961fd97cf927ef57353bf1ab14554859d6064","rights_evidence":"https://openreview.net/forum?id=4exx1hUffq","rights_status":"source-license-verified","metadata_status":"verified","provenance_confirmation":"author-camera-ready-license","last_verified":"2026-11-09","modifications":"Unmodified original figure file from arXiv HTML v3; the authors publish the same figure in the CC BY 4.0 camera-ready article on OpenReview.","used_in":["00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md","en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md"]}];
+    const spec = originals.find(row => row.id === entry.id);
+    expect(spec).toBeDefined();
+    expect(entry).toMatchObject(spec!);
+    const asset = resolve(repositoryRoot, spec!.asset);
+    expect(sha256(asset)).toBe(spec!.sha256);
+    expectDecodableImage(asset);
+    const evidence = resolve(repositoryRoot, spec!.license_evidence);
+    if (existsSync(evidence)) {
+      expect(sha256(evidence)).toBe(spec!.license_evidence_sha256);
+      expect(JSON.parse(readFileSync(evidence, 'utf8'))).toMatchObject({
+        id: '4exx1hUffq', license: 'CC BY 4.0', domain: 'NeurIPS.cc/2025/Conference',
+        signatures: ['NeurIPS.cc/2025/Conference/Submission13079/Authors'],
+        content: { pdf: { value: '/pdf/0fe7af5ec1ec69cb936b30db6ec01cdec6fc5d81.pdf' } },
+      });
+    }
+    return;
+  }
+  if (entry.id === 'curated-deepseek-v3-mtp-figure3-f39402216f59') {
+    const commit = 'd5c08b384b4d4096e494d61ba7d329f593116872';
+    const upstream = 'https://github.com/deepseek-ai/DeepSeek-V3/blob/' + commit;
+    const raw = 'https://raw.githubusercontent.com/deepseek-ai/DeepSeek-V3/' + commit;
+    const asset = '00 Учебник/Assets/Figures/curated/ntp-2026-10-23/deepseek-v3-mtp-figure3.png';
+    const notice = 'site/public/licenses/deepseek-v3-d5c08b3-MIT.txt';
+    const digest = 'f39402216f591abb5928bbe867be30c7c3f9a6ffcfbc88ba6b34a228e3317903';
+    expect(entry).toMatchObject({
+      asset, commit, source_url: upstream + '/DeepSeek_V3.pdf',
+      source_image_url: raw + '/DeepSeek_V3.pdf#page=10',
+      source_asset_sha256: '1392807ef6297deefc421cea6633af0b819e15a0b7a4a6b0adba4bccdf0ab273',
+      source_page: 10, render_dpi: 360, crop_box_px: [340, 400, 2640, 1445],
+      dimensions_px: [2300, 1045], license: 'MIT', license_url: upstream + '/LICENSE-CODE',
+      license_evidence: notice, public_license_copy: notice, sha256: digest,
+      rights_status: 'source-license-verified', derivation: 'pdf-page-render-crop',
+      used_in: ['00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md'],
+    });
+    const path = resolve(repositoryRoot, asset);
+    expect(sha256(path)).toBe(digest);
+    const png = readFileSync(path);
+    expect([png.readUInt32BE(16), png.readUInt32BE(20)]).toEqual([2300, 1045]);
+    expect(sha256(resolve(repositoryRoot, notice))).toBe('6e4c38e1172f42fdbff13edf9a7a017679fb82b0fde415a3e8b3c31c6ed4a4e4');
+    expectDecodableImage(path);
+    return;
+  }
+  if (entry.id === 'curated-eagle3-speedup-5e404ac75809') {
+    const expected = {"id":"curated-eagle3-speedup-5e404ac75809","asset":"00 Учебник/Assets/Figures/curated/eagle3-2026-11-09/eagle3r.jpg","title":"EAGLE-3 greedy speedup across four target models","author":"Yuhui Li, Fangyun Wei, Chao Zhang and Hongyang Zhang","source_url":"https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/figs/eagle3r.jpg","source_image_url":"https://raw.githubusercontent.com/SafeAILab/EAGLE/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/figs/eagle3r.jpg","commit":"cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b","license":"Apache-2.0","license_url":"https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/LICENSE","license_copy":"site/public/licenses/eagle-cb7e0841-Apache-2.0.txt","license_copy_sha256":"2c042313b4fb4350fa09f81aabf6b77686855e1071a8af07845684e9cba6d3c7","source_page_snapshot":"05 Источники/Originals/eagle3-2026-11-09/README.md","source_page_sha256":"a59962f5c3b938b73252953119557cbeebfd4f13a1553e5f2fb4fe9358578a88","sha256":"5e404ac75809d8125e1c360c36054c2f90ebd72453a46a352609e538d91f6ba1","dimensions_px":[5862,1535],"derivation":"source-raster-copy","metadata_status":"verified","provenance_confirmation":"pinned-upstream-repository","last_verified":"2026-11-09","modifications":"Unmodified complete JPEG copied from the authors' official repository; it is not a crop of the arXiv Figure 2.","used_in":["00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md","en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md"]};
+    expect(entry).toMatchObject(expected);
+    expect(entry.crop_box_px).toBeUndefined();
+    const file = resolve(repositoryRoot, expected.asset);
+    expect(sha256(file)).toBe(expected.sha256);
+    expect(sha256(resolve(repositoryRoot, expected.license_copy))).toBe(expected.license_copy_sha256);
+    const readme = resolve(repositoryRoot, expected.source_page_snapshot);
+    if (existsSync(readme)) {
+      expect(sha256(readme)).toBe(expected.source_page_sha256);
+      expect(readFileSync(readme, 'utf8')).toContain('./figs/eagle3r.jpg');
+    }
+    expectDecodableImage(file);
+    return;
+  }
+  if (entry.asset.startsWith(isoflopOriginalDir + '/')) {
+    const original = isoflopOriginals.find(([name]) => entry.asset === isoflopOriginalDir + '/' + name);
+    expect(original).toBeDefined();
+    const [name, digest, figure, source] = original!;
+    const owners = ['00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md'];
+    if (name === 'training_flop_vs_model_size.png')
+      owners.push('00 Учебник/_index.md', 'en/00 Textbook/_index.md');
+    expect(entry).toMatchObject({
+      source_asset: entry.asset, source_asset_sha256: digest, sha256: digest,
+      source_url: figure, source_image_url: source, rights_evidence: figure.split('#')[0],
+      license: 'CC BY 4.0', license_url: 'https://creativecommons.org/licenses/by/4.0/',
+      metadata_status: 'verified', provenance_confirmation: 'source-license-verified',
+      rights_status: 'source-license-verified', used_in: owners,
+      derivation: name.endsWith('.svg') ? 'source-svg-copy' : 'source-png-copy',
+    });
+    expect(entry.crop_box_px).toBeUndefined();
+    const target = resolve(repositoryRoot, entry.asset);
+    expect(sha256(target)).toBe(digest);
+    expectDecodableImage(target);
+    return;
+  }
+  if (entry.id === 'curated-arithmetic-sparse-frontier-e309c11191da') {
+    const original = {"asset":"00 Учебник/Assets/Figures/curated/arithmetic-attention-share-2026-11-09/prefilling_seq_length_impact.svg","author":"Piotr Nawrot, Robert Li, Renjie Huang, Sebastian Ruder, Kelly Marchisio and Edoardo M. Ponti","source_url":"https://arxiv.org/html/2504.17768v2#A2.F12","source_image_url":"https://arxiv.org/html/2504.17768v2/prefilling_seq_length_impact.svg","source_asset":"00 Учебник/Assets/Figures/curated/arithmetic-attention-share-2026-11-09/prefilling_seq_length_impact.svg","source_asset_sha256":"e309c11191da88331f9302fdb3983f75c68e6c8afe119b1721f98c3d11cfeef6","sha256":"e309c11191da88331f9302fdb3983f75c68e6c8afe119b1721f98c3d11cfeef6","license":"CC BY 4.0","license_url":"https://creativecommons.org/licenses/by/4.0/","rights_evidence":"https://arxiv.org/html/2504.17768v2","derivation":"source-svg-copy","metadata_status":"verified","provenance_confirmation":"source-license-verified","rights_status":"source-license-verified","used_in":["00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md"]};
+    expect(entry).toMatchObject(original);
+    const path = resolve(repositoryRoot, original.asset);
+    expect(sha256(path)).toBe(original.sha256);
+    expect(entry.crop_box_px).toBeUndefined();
+    expectDecodableImage(path);
+    return;
+  }
+  const scalingFigure = originalScalingMetricFigures.find(spec => spec.id === entry.id);
+  if (scalingFigure) {
+    expect(entry).toMatchObject({
+      ...scalingFigure, source_asset_sha256: scalingFigure.sha256,
+      rights_status: 'source-license-verified', provenance_confirmation: 'source-license-verified',
+      metadata_status: 'verified', used_in: ['00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md'],
+    });
+    const asset = resolve(repositoryRoot, scalingFigure.asset);
+    expect(sha256(asset)).toBe(scalingFigure.sha256);
+    expect(sha256(resolve(repositoryRoot, scalingFigure.source_asset))).toBe(scalingFigure.sha256);
+    expect(entry.crop_box_px).toBeUndefined();
+    if (scalingFigure.dimensions_px) expect(pngDimensions(asset)).toEqual(scalingFigure.dimensions_px);
+    expectDecodableImage(asset);
+    return;
+  }
+  if (entry.id === 'curated-google-softmax-multiclass-7b0f01cc61b9') {
+    const asset = '00 Учебник/Assets/Figures/curated/foundations-source-first/google-softmax-multiclass.png';
+    const digest = '7b0f01cc61b917b9c76a698af949c21acce117dad1d46247f1fe028555f3ad2c';
+    expect(entry).toMatchObject({
+      asset, source_asset: asset, author: 'Google', sha256: digest, source_asset_sha256: digest,
+      dimensions_px: [1850, 834],
+      source_url: 'https://developers.google.com/machine-learning/crash-course/neural-networks/multi-class',
+      source_image_url: 'https://developers.google.com/static/machine-learning/crash-course/neural-networks/images/one_vs_one_neural_net.png',
+      rights_evidence: 'https://developers.google.com/machine-learning/crash-course/neural-networks/multi-class#one-versus-one-softmax',
+      license: 'CC BY 4.0', license_url: 'https://creativecommons.org/licenses/by/4.0/',
+      rights_status: 'source-license-verified', provenance_confirmation: 'source-license-verified',
+      derivation: 'source-raster-copy', metadata_status: 'verified', used_in: ['00 Учебник/00 Математические и ML-основания/04 Функции потерь.md'],
+    });
+    expect(sha256(resolve(repositoryRoot, asset))).toBe(digest);
+    expect(pngDimensions(resolve(repositoryRoot, asset))).toEqual([1850, 834]);
+    expect(entry.crop_box_px).toBeUndefined();
+    expectDecodableImage(resolve(repositoryRoot, asset));
+    return;
+  }
+  if (entry.id === 'curated-cs229-bias-variance-0000000000ac') {
+    const asset = '00 Учебник/Assets/Figures/curated/foundations-source-first/cs229-bias-variance-decomposition.png';
+    expect(entry).toMatchObject({
+      asset, author: 'Anand Avati, Stanford CS229',
+      source_url: 'https://cs229.stanford.edu/summer2023/BiasVarianceAnalysis.pdf',
+      source_page: 7, derivation: 'pdf-page-render-crop', publication_status: 'retired', used_in: [],
+      former_used_in: ['00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md'],
+      license: 'Unverified for redistribution', license_url: null,
+      provenance_confirmation: 'source-linked-rights-unverified',
+      rights_status: 'course-note-republication-unverified',
+      sha256: '244d71e359d9a099496b02fa305b4fccffdaf968281dd411274f2782c3b7d493',
+    });
+    expect(sha256(resolve(repositoryRoot, asset))).toBe(entry.sha256);
+    expectDecodableImage(resolve(repositoryRoot, asset));
+    return;
+  }
+  if (entry.id === 'curated-sklearn-tree-bagging-8fa36b8ac57a') {
+    const asset = '00 Учебник/Assets/Figures/curated/foundations-source-first/sklearn-tree-bagging-bias-variance.png';
+    const commit = '199d116ab37beed506c63fc9f6a74f56e228de43';
+    const digest = '8fa36b8ac57a9fdfa12f7856d4d55fb70f82dc09d62f8b1a70604473e06a3a08';
+    const license = 'site/public/licenses/scikit-learn-1.9.1-BSD-3-Clause.txt';
+    expect(entry).toMatchObject({
+      asset, source_asset: asset, commit,
+      author: 'The scikit-learn developers',
+      source_url: 'https://scikit-learn.org/1.9/auto_examples/ensemble/plot_bias_variance.html',
+      source_image_url: 'https://raw.githubusercontent.com/scikit-learn/scikit-learn.github.io/' +
+        commit + '/1.9/_images/sphx_glr_plot_bias_variance_001.png',
+      sha256: digest, source_asset_sha256: digest, dimensions_px: [1000, 800],
+      license: 'BSD-3-Clause',
+      license_url: 'https://github.com/scikit-learn/scikit-learn/blob/866c0f51e7560ef0303cbcc5f159df5382ea9e3f/COPYING',
+      license_evidence: license, public_license_copy: license,
+      license_evidence_sha256: '50d6a9d340f19ab355609917993114daf5f47e3161067bcf34955bbd05cd9cb0',
+      provenance_confirmation: 'source-license-verified', rights_status: 'source-license-verified',
+      metadata_status: 'verified', derivation: 'source-raster-copy',
+      used_in: ['00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md'],
+    });
+    expect(sha256(resolve(repositoryRoot, asset))).toBe(digest);
+    expect(sha256(resolve(repositoryRoot, license))).toBe(entry.license_evidence_sha256);
+    expect(pngDimensions(resolve(repositoryRoot, asset))).toEqual([1000, 800]);
+    expect(entry.crop_box_px).toBeUndefined();
+    expectDecodableImage(resolve(repositoryRoot, asset));
+    return;
+  }
+  if (entry.id === 'curated-mcp-faq-fefd5ea7eeb7') {
+    const pin = '27ab2419191334dd288b05343e3a622ed615913d';
+    const github = 'https://github.com/modelcontextprotocol/modelcontextprotocol/blob/' + pin + '/';
+    const original = 'https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/' + pin + '/';
+    const asset = '00 Учебник/Assets/Figures/curated/tool-use-2026-11-09/mcp-simple-diagram.png';
+    const license = 'site/public/licenses/mcp-27ab2419-MIT.txt';
+    const digest = 'fefd5ea7eeb7289f1d9f00552ce798f2298b1f588a8733a79b9ee4c10512e7c2';
+    expect(entry).toMatchObject({
+      asset, source_asset: asset, commit: pin,
+      source_url: github + 'docs/faqs.mdx',
+      source_image_url: original + 'docs/images/mcp-simple-diagram.png',
+      sha256: digest, source_asset_sha256: digest, dimensions_px: [3840, 1500],
+      license: 'MIT', license_url: github + 'LICENSE', license_evidence: license,
+      license_evidence_sha256: '346e57dc40801e3d58165e97f64d45b42c4571a68a76ecb10c3c12858acecb3f',
+      public_license_copy: license, derivation: 'source-raster-copy',
+      provenance_confirmation: 'pinned-upstream-repository',
+      rights_status: 'source-license-verified', metadata_status: 'verified',
+    });
+    expect(sha256(resolve(repositoryRoot, asset))).toBe(digest);
+    expect(sha256(resolve(repositoryRoot, license))).toBe(entry.license_evidence_sha256);
+    expect(pngDimensions(resolve(repositoryRoot, asset))).toEqual([3840, 1500]);
+    expect(entry.crop_box_px).toBeUndefined();
+    expectDecodableImage(resolve(repositoryRoot, asset));
+    return;
+  }
+  if (entry.id === 'curated-vlm2026-cs231n-winoground-d72312341628') {
+    expect(entry).toMatchObject({
+      asset: '00 Учебник/Assets/Figures/curated/vlm-2026/cs231n-lecture16-winoground.png',
+      publication_status: 'retired', used_in: [],
+      license: 'Unverified for redistribution', license_url: null,
+      provenance_confirmation: 'source-linked-rights-unverified',
+      rights_status: 'course-slide-republication-unverified',
+      sha256: '421bc90192b099809f93bbc97de2bbaf5948b747d1ecba83cfccd66e233e7e93',
+    });
+    expect(sha256(resolve(repositoryRoot, entry.asset))).toBe(entry.sha256);
+    expectDecodableImage(resolve(repositoryRoot, entry.asset));
+    return;
+  }
+  const metricPrefix = '00 Учебник/Assets/Figures/curated/selection-metric-2026-11-04/';
+  if (entry.asset.startsWith(metricPrefix)) {
+    const cases = [
+      ['mooc-kmeans-not-scaled.svg', 'clustering_quiz_kmeans_not_scaled.svg',
+        '04c1dd673b6b7690a0bc9e7c06358a43ec7b38e64c7cac401180bb9cf37ec2c8'],
+      ['mooc-kmeans-scaled.svg', 'clustering_quiz_kmeans_scaled.svg',
+        'bd2aae6c6eca8e5951324b268c312dc52263a697e7de1d7b3040bc3df2310694'],
+    ];
+    const selected = cases.find(([file]) => entry.asset === metricPrefix + file);
+    expect(selected).toBeDefined();
+    const [, original, digest] = selected!;
+    const pin = '0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6';
+    const upstream = 'https://github.com/INRIA/scikit-learn-mooc/blob/' + pin + '/';
+    const page = 'jupyter-book/clustering/clustering_quiz_m4_01.md';
+    const license = 'site/public/licenses/scikit-learn-mooc-0cc70c41-CC-BY-4.0.txt';
+    const licenseHash = 'f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f';
+    expect(entry.id).toBe('curated-mooc-scaling-' + digest.slice(0, 12));
+    expect(entry.author).toBe('INRIA, scikit-learn MOOC contributors');
+    expect(entry.commit).toBe(pin);
+    expect(entry.source_url).toBe(upstream + page);
+    expect(entry.source_image_url).toBe('https://raw.githubusercontent.com/INRIA/scikit-learn-mooc/' + pin + '/figures/' + original);
+    expect(entry.source_asset).toBe('Assets/Sources/Scikit-learn MOOC/figures/' + original);
+    expect(entry.source_page_snapshot).toBe('05 Источники/Courses/Scikit-learn MOOC/' + page + '.md');
+    expect(entry.license).toBe('CC BY 4.0');
+    expect(entry.license_url).toBe(upstream + 'LICENSE');
+    expect(entry.license_evidence).toBe(license);
+    expect(entry.public_license_copy).toBe(license);
+    expect(entry.license_evidence_sha256).toBe(licenseHash);
+    expect(sha256(resolve(repositoryRoot, license))).toBe(licenseHash);
+    expect(entry.derivation).toBe('source-svg-copy');
+    expect(entry.provenance_confirmation).toBe('pinned-upstream-repository');
+    expect(entry.rights_status).toBe('source-license-verified');
+    expect(entry.metadata_status).toBe('verified');
+    expect(entry.source_asset_sha256).toBe(digest);
+    expect(entry.sha256).toBe(digest);
+    expect(entry.source_viewbox).toEqual([0, 0, 375.6672, 325.18365]);
+    expect(entry.crop_box_px).toBeUndefined();
+    requireNonEmptyString(entry.modifications, 'modifications');
+    for (const file of [entry.asset, entry.source_asset!])
+      expect(sha256(resolve(repositoryRoot, file))).toBe(digest);
+    const svg = readFileSync(resolve(repositoryRoot, entry.asset), 'utf8');
+    expect(svg).toContain('viewBox="0 0 375.6672 325.18365"');
+    expect(readFileSync(resolve(repositoryRoot, entry.source_page_snapshot!), 'utf8')).toContain(original);
+    return;
+  }
+  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/sequence-state-2026-11-03/')) {
+    const figures=JSON.parse(readFileSync(resolve(repositoryRoot,
+      'publishing/tools/sequence-state-figures.json'),'utf8'));
+    const spec=figures.find((x:{asset:string})=>x.asset===entry.asset);
+    expect(spec).toBeDefined();
+    const expected={
+      author:'Dustin Wang et al.', source_url:spec.source_url,
+      source_asset:spec.source,source_sha256:spec.source_sha256,
+      source_page:spec.page,source_object:spec.object,license:spec.license,
+      license_url:spec.license_url,license_evidence:spec.license_evidence,
+      license_evidence_sha256:spec.license_evidence_sha256,sha256:spec.sha256,
+      dimensions_px:spec.dimensions,dpi:spec.dpi,crop_box_px:spec.crop_pixels,
+      derivation:'pdf-page-render-crop',metadata_status:'verified',
+      rights_status:'verified-open-license',
+      provenance_confirmation:'pinned-versioned-arxiv-pdf-and-license-page',
+    };
+    for(const [key,value] of Object.entries(expected))
+      expect((entry as unknown as Record<string,unknown>)[key]).toEqual(value);
+    for(const [path,hash] of [[spec.source,spec.source_sha256],
+      [spec.license_evidence,spec.license_evidence_sha256],[spec.asset,spec.sha256]])
+      expect(sha256(resolve(repositoryRoot,path))).toBe(hash);
+    expect(pngDimensions(resolve(repositoryRoot,entry.asset))).toEqual(spec.dimensions);
+    expectDecodableImage(resolve(repositoryRoot,entry.asset));
+    return;
+  }
+  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/')) {
+    const manifest=JSON.parse(readFileSync(resolve(repositoryRoot,
+      'publishing/tools/gpu-copy-source-figures.json'),'utf8'));
+    expect(manifest.pin).toBe('5672cd98a7671eda4d9122b10f8eec580f74d03e');
+    const file=entry.asset.split('/').at(-1)!;
+    const spec=manifest.files.find((x:{name:string;dimensions:number[]|null})=>x.name===file&&x.dimensions);
+    expect(spec).toBeDefined();
+    expect(entry.id).toBe('curated-gpu-copy-'+spec.sha256.slice(0,12));
+    expect(entry.sha256).toBe(spec.sha256);
+    expect(entry.source_asset_sha256).toBe(spec.sha256);
+    expect(entry.source_asset).toBe(entry.asset);
+    expect(entry.author).toBe('Vincent Moens; PyTorch contributors');
+    expect(entry.source_url).toBe('https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html');
+    expect(entry.source_image_url).toBe('https://raw.githubusercontent.com/pytorch/tutorials/'+manifest.pin+'/_static/img/pinmem/'+file);
+    expect(entry.commit).toBe(manifest.pin);
+    expect(entry.license).toBe('BSD-3-Clause');
+    expect(entry.license_url).toBe('https://github.com/pytorch/tutorials/blob/'+manifest.pin+'/LICENSE');
+    expect(entry.license_evidence).toBe('site/public/licenses/pytorch-tutorials-5672cd98-BSD-3-Clause.txt');
+    expect(entry.license_evidence_sha256).toBe('5703fcbe2d5dfcc48d486d26e4b9d2e48255c24602e1bd0270b60b8978116f86');
+    expect(sha256(resolve(repositoryRoot,entry.license_evidence!))).toBe(entry.license_evidence_sha256);
+    expect(entry.metadata_status).toBe('verified');
+    expect(entry.provenance_confirmation).toBe('pinned-upstream-repository');
+    expect(entry.derivation).toBe('source-raster-copy');
+    expect(entry.crop_box_px).toBeUndefined();
+    expect(entry.dimensions_px).toEqual(spec.dimensions);
+    expect(sha256(resolve(repositoryRoot,entry.asset))).toBe(spec.sha256);
+    expect(pngDimensions(resolve(repositoryRoot,entry.asset))).toEqual(spec.dimensions);
+    expectDecodableImage(resolve(repositoryRoot,entry.asset));
+    return;
+  }
+  if (/^curated-cs231n-(mlp|depth|regions)-00000000008[abc]$/.test(entry.id ?? '')) {
+    const rows=JSON.parse(readFileSync(resolve(repositoryRoot,
+      '00 Учебник/Assets/Figures/curated/mlp-2026-11-03/assets.json'),'utf8')) as CuratedAsset[];
+    expect(entry).toEqual(rows.find(row=>row.id===entry.id));
+    const specs = {
+      'cs231n-mlp-layered.jpeg':['649d51c291077a114e32cdbd282b49841124383ff63a91d612a4d0d2310641c8','neural_net2.jpeg',791,388],
+      'cs231n-depth-width.jpeg':['ce7b76035580f3b6d87aac3089ba87967f29423d1e762b04a1cbd463d5d6b6e5','layer_sizes.jpeg',1031,366],
+      'cs231n-decision-regions.jpeg':['94aadb3b92581a7155ee44b0e17552d0c4c40ec671e1b92b6884f05b1e5ba501','reg_strengths.jpeg',1077,394],
+    } as Record<string,[string,string,number,number]>;
+    const spec=specs[entry.asset.split('/').at(-1)!];
+    expect(spec).toBeDefined();
+    expect(entry.sha256).toBe(spec[0]);
+    expect(entry.source_asset).toBe(entry.asset);
+    expect(entry.source_asset_sha256).toBe(spec[0]);
+    expect(entry.source_image_url).toBe('https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/nn1/'+spec[1]);
+    expect(entry.commit).toBe('8ec57ccfc32379ae4b37c45de949af359673f92f');
+    expect(entry.license).toBe('MIT');
+    expect(entry.license_evidence_sha256).toBe('85b365f07b4cfc5d678c548bc41965bc3bc782106b8903bd3b876d9d49a4270d');
+    expect(entry.source_page_sha256).toBe('28196e335053230ac9f1fff728c8baa089e05814982d950ffc6339462828f0f3');
+    expect(entry.dimensions_px).toEqual([spec[2],spec[3]]);
+    expect(entry.crop_box_px).toBeUndefined();
+    expect(entry.derivation).toBe('source-image-copy');
+    for(const [path,hash] of [[entry.asset,spec[0]],
+      [entry.license_evidence!,entry.license_evidence_sha256!],
+      [entry.source_page_snapshot!,entry.source_page_sha256!]])
+      expect(sha256(resolve(repositoryRoot,path))).toBe(hash);
+    expectDecodableImage(resolve(repositoryRoot,entry.asset));
+    return;
+  }
+  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/')) {
+    const rows = JSON.parse(readFileSync(resolve(repositoryRoot,
+      '00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/assets.json'), 'utf8'));
+    expect(rows).toHaveLength(2);
+    expect(entry).toEqual(rows.find((row: CuratedAsset) => row.asset === entry.asset));
+    const specs: Record<string, string> = {
+      'd2l-density-interval.svg': '35d85344b8bd9faf7cda96b89bfd235754990ec381f3fdb0ca9d30a812bac27f',
+      'd2l-marginal.svg': 'cda896c59fd8dfb81f4d5d03fd392142da25b331378e1da668a0088cbd44dd51'
+    };
+    const file = entry.asset.split('/').at(-1)!;
+    expect(specs[file]).toBeDefined();
+    expect(entry.sha256).toBe(specs[file]);
+    expect(entry.source_asset).toBe(entry.asset);
+    expect(entry.source_asset_sha256).toBe(entry.sha256);
+    expect(entry.source_code_commit).toBe('23d7a5aecceee57d1292c56e90cce307f183bb0a');
+    expect(entry.source_code_sha256).toBe('506e48d177d6753b65a671702f4e85422d0501496a085728960799ec4bd1e43f');
+    expect(entry.license).toBe('CC BY-SA 4.0');
+    expect(entry.derivation).toBe('source-svg-copy');
+    expect(entry.rights_status).toBe('source-license-verified');
+    expect(entry.crop_box_px).toBeUndefined();
+    for (const [path, digest] of [[entry.asset, specs[file]],
+      [entry.source_code, entry.source_code_sha256],
+      [entry.license_evidence, 'a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c']])
+      expect(sha256(resolve(repositoryRoot, path!))).toBe(digest);
+    expectDecodableImage(resolve(repositoryRoot, entry.asset));
+    return;
+  }
+  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/derivative-native-2026-10-30/')) {
+    const rows = JSON.parse(readFileSync(resolve(repositoryRoot,
+      '00 Учебник/Assets/Figures/curated/derivative-native-2026-10-30/assets.json'), 'utf8'));
+    expect(rows).toHaveLength(2);
+    expect(entry).toEqual(rows.find((row: CuratedAsset) => row.asset === entry.asset));
+    const specs: Record<string, [string, string]> = {
+      'd2l-function-tangent.svg': [
+        'fcb32c3fa05846549df55720dc958478f9260507c4d1377a4b31d3940cf9bce2',
+        'a325c626fd77f5be37d32579cd0a5cf4a75c9179c995bce08baa487e05026419'],
+      'd2l-chain-paths.svg': [
+        '897746e112a76eb09af174d5f79fbb49a936142567029d92d29a84d602e5cda6',
+        '2064011aea85df2626ac6fba36db283b79c5d60ebdab1090cf62a76ecee8014d']
+    };
+    const file = entry.asset.split('/').at(-1)!;
+    expect(specs[file]).toBeDefined();
+    expect(entry.sha256).toBe(specs[file][0]);
+    expect(entry.source_code_sha256).toBe(specs[file][1]);
+    expect(entry.source_asset).toBe(entry.asset);
+    expect(entry.source_asset_sha256).toBe(entry.sha256);
+    expect(entry.license).toBe('CC BY-SA 4.0');
+    expect(entry.derivation).toBe('source-svg-copy');
+    expect(entry.rights_status).toBe('source-license-verified');
+    expect(entry.crop_box_px).toBeUndefined();
+    for (const [path, digest] of [[entry.asset, specs[file][0]],
+      [entry.source_code, specs[file][1]],
+      [entry.license_evidence, 'a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c']])
+      expect(sha256(resolve(repositoryRoot, path!))).toBe(digest);
+    expectDecodableImage(resolve(repositoryRoot, entry.asset));
+    return;
+  }
+  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/tensor-native-geometry-2026-10-30/')) {
+    const rows = JSON.parse(readFileSync(resolve(repositoryRoot,
+      '00 Учебник/Assets/Figures/curated/tensor-native-geometry-2026-10-30/assets.json'), 'utf8'));
+    expect(rows).toHaveLength(2);
+    expect(entry).toEqual(rows.find((row: CuratedAsset) => row.asset === entry.asset));
+    const specs: Record<string, string> = {
+      'vec-add.svg': 'c4cafd62fbe2eaff376fb6142f4bbd78d2cb5cfc90448042db61a91a1267f384',
+      'vec-angle.svg': '46cda699171505338dbd063fd66b0cbacecd95eb8db16b5bc89a7456380e9c3f'
+    };
+    const file = entry.asset.split('/').at(-1)!;
+    expect(specs[file]).toBeDefined();
+    expect(entry.sha256).toBe(specs[file]);
+    expect(entry.source_asset).toBe(entry.asset);
+    expect(entry.source_asset_sha256).toBe(entry.sha256);
+    expect(entry.commit).toBe('23d7a5aecceee57d1292c56e90cce307f183bb0a');
+    expect(entry.source_image_url).toBe(`https://raw.githubusercontent.com/d2l-ai/d2l-en/${entry.commit}/img/${file}`);
+    expect(entry.license).toBe('CC BY-SA 4.0');
+    expect(entry.metadata_status).toBe('verified');
+    expect(entry.rights_status).toBe('source-license-verified');
+    expect(entry.derivation).toBe('source-svg-copy');
+    expect(entry.crop_box_px).toBeUndefined();
+    for (const [path, digest] of [[entry.asset, entry.sha256],
+      [entry.source_code, '066c856e5860ea00a7cd49542250e4c97dc810c0a9bfbe3c1e4bf2e66d7c356e'],
+      [entry.license_evidence, 'a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c']])
+      expect(sha256(resolve(repositoryRoot, path!))).toBe(digest);
+    expectDecodableImage(resolve(repositoryRoot, entry.asset));
+    return;
+  }
   if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/bleu-reconciliation-2026-10-30/')) {
     const rows=JSON.parse(readFileSync(resolve(repositoryRoot,
       '00 Учебник/Assets/Figures/curated/bleu-reconciliation-2026-10-30/assets.json'),'utf8')) as CuratedAsset[];
@@ -1660,6 +3933,115 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
     expect(svg).not.toMatch(/(?:href|src)="https?:\/\//);
     return;
   }
+  if(entry.asset.startsWith('00 Учебник/Assets/Figures/curated/neural-lm-bengio-2026-11-03/')){
+    const prefix='00 Учебник/Assets/Figures/curated/neural-lm-bengio-2026-11-03/';
+    const [spec]=JSON.parse(readFileSync(resolve(repositoryRoot,prefix+'assets.json'),'utf8'));
+    expect(entry).toEqual(spec);
+    expect(entry.asset).toBe(prefix+'bengio-original-figure1.png');
+    expect(entry.source_asset_sha256).toBe('0bddf9a608d62da449a6413d86cbf6e8b206212595efe0e0a14da0d79d5f4976');
+    expect(entry.sha256).toBe('4027648579190044a162655b51453f816cdb98adb298d4c5a2a55bb0f6cdfcd1');
+    expect(entry.license).toBe('CC BY (JMLR publication policy; version unspecified)');
+    expect(entry.provenance_confirmation).toBe('publisher-publication-policy');
+    expect(entry.derivation).toBe('source-pdf-render-crop');
+    expect(entry.source_page).toBe(6);
+    expect(entry.source_printed_page).toBe(1142);
+    expect(entry.render_dpi).toBe(240);
+    expect(entry.render_page_size_px).toEqual([2040,2640]);
+    expect(entry.crop_box_px).toEqual([273,283,1780,1263]);
+    for(const [p,h]of [[entry.asset,entry.sha256],[entry.source_asset,entry.source_asset_sha256],
+      [entry.license_evidence,entry.license_evidence_sha256]])expect(sha256(resolve(repositoryRoot,p!))).toBe(h);
+    const policy=readFileSync(resolve(repositoryRoot,entry.license_evidence!),'utf8');
+    expect(policy).toMatch(/granting a CC-by\s+license to the public/);
+    expect(readFileSync(resolve(repositoryRoot,spec.public_license_copy),'utf8')).toContain('No version is inferred here.');
+    const bytes=execFileSync(process.env.PDFTOPPM??'pdftoppm',
+      ['-f','6','-l','6','-singlefile','-r','240','-x','273','-y','283','-W','1507','-H','980',
+        '-png',resolve(repositoryRoot,entry.source_asset!)],
+      {env:{...process.env,LC_ALL:'C',LANG:'C'},maxBuffer:4*1024*1024});
+    expect(readFileSync(resolve(repositoryRoot,entry.asset))).toEqual(bytes);
+    expect(validateRenderedPngBytes(bytes)).toEqual([1507,980]);
+    return;
+  }
+  if(entry.asset.startsWith('00 Учебник/Assets/Figures/curated/ngram-makemore-2026-11-03/')){
+    const prefix='00 Учебник/Assets/Figures/curated/ngram-makemore-2026-11-03/';
+    const [spec]=JSON.parse(readFileSync(resolve(repositoryRoot,prefix+'assets.json'),'utf8'));
+    expect(entry).toEqual(spec);
+    expect(entry.asset).toBe(prefix+'karpathy-bigram-counts.png');
+    expect(entry.derivation).toBe('notebook-output-extraction');
+    expect(entry.license).toBe('MIT');
+    expect(entry.commit).toBe('73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde');
+    expect(entry.source_asset_sha256).toBe('db2f139409bad2966baac06581b6ca8ec9a03668df50dd073577fd98b3be0045');
+    expect(entry.sha256).toBe('0972425d7afc53f7d81c7da5aca31a4dd99cb664bf102f604b0e3c61cec57d39');
+    for(const [path,digest]of [[entry.asset,entry.sha256],
+      [entry.source_asset,entry.source_asset_sha256],
+      [entry.source_page_snapshot,entry.source_page_sha256],
+      [entry.license_evidence,entry.license_evidence_sha256],
+      [spec.source_data,spec.source_data_sha256]]) expect(sha256(resolve(repositoryRoot,path!))).toBe(digest);
+    expect(spec.source_cell_index).toBe(11);
+    expect(spec.source_output_index).toBe(0);
+    expect(entry.source_member).toBe('/cells/11/outputs/0/data/image~1png');
+    const notebook=JSON.parse(readFileSync(resolve(repositoryRoot,entry.source_asset!),'utf8'));
+    const encoded=notebook.cells[11].outputs[0].data['image/png'];
+    const bytes=readFileSync(resolve(repositoryRoot,entry.asset));
+    expect(bytes).toEqual(Buffer.from(Array.isArray(encoded)?encoded.join(''):encoded,'base64'));
+    expect(validateRenderedPngBytes(bytes)).toEqual([884,884]);
+    expect(readFileSync(resolve(repositoryRoot,spec.public_license_copy)))
+      .toEqual(readFileSync(resolve(repositoryRoot,spec.license_evidence)));
+    expect(spec.license_evidence_sha256).toBe('a59ec5cdb1c1e447e5266a014b3e7ded511f8d6e5a08931e931c87490ff821fe');
+    expect(spec.source_data_url).toContain('/8f79bd0126eaef5eb82d346c9f85ae20ea1c476a/names.txt');
+    expect(entry.crop_box_px).toBeUndefined();
+    return;
+  }
+  if(entry.asset.startsWith('00 Учебник/Assets/Figures/curated/normalization-course-2026-11-03/')){
+    const prefix='00 Учебник/Assets/Figures/curated/normalization-course-2026-11-03/';
+    const specs=JSON.parse(readFileSync(resolve(repositoryRoot,prefix+'assets.json'),'utf8'));
+    const spec=specs.find((a:CuratedAsset)=>a.asset===entry.asset);
+    expect(spec).toBeDefined();
+    expect(entry).toEqual(spec);
+    expect(entry.derivation).toBe('notebook-output-extraction');
+    expect(entry.license).toBe('MIT');
+    expect(entry.source_asset_sha256).toBe('464c959353b5e929bf0f922c0e7547823fb514fa2f672f30a065a9d403c641e4');
+    expect(sha256(resolve(repositoryRoot,entry.source_asset!))).toBe(entry.source_asset_sha256);
+    expect(sha256(resolve(repositoryRoot,entry.asset))).toBe(entry.sha256);
+    const notebook=JSON.parse(readFileSync(resolve(repositoryRoot,entry.source_asset!),'utf8'));
+    expect([15,16]).toContain(spec.source_cell_index);
+    expect(spec.source_output_index).toBe(2);
+    const encoded=notebook.cells[spec.source_cell_index].outputs[spec.source_output_index].data['image/png'];
+    expect(readFileSync(resolve(repositoryRoot,entry.asset)))
+      .toEqual(Buffer.from(Array.isArray(encoded)?encoded.join(''):encoded,'base64'));
+    expect(pngDimensions(resolve(repositoryRoot,entry.asset))).toEqual(spec.dimensions_px);
+    expect(spec.license_evidence_sha256).toBe('a59ec5cdb1c1e447e5266a014b3e7ded511f8d6e5a08931e931c87490ff821fe');
+    expect(sha256(resolve(repositoryRoot,spec.license_evidence))).toBe(spec.license_evidence_sha256);
+    expect(readFileSync(resolve(repositoryRoot,spec.public_license_copy)))
+      .toEqual(readFileSync(resolve(repositoryRoot,spec.license_evidence)));
+    return;
+  }
+  if(entry.asset.startsWith('00 Учебник/Assets/Figures/curated/augmentation-composition-2026-11-03/')){
+    const prefix='00 Учебник/Assets/Figures/curated/augmentation-composition-2026-11-03/';
+    const [spec]=JSON.parse(readFileSync(resolve(repositoryRoot,prefix+'assets.json'),'utf8'));
+    expect(entry.asset).toBe(prefix+'d2l-composed-transforms.svg');
+    expect(entry).toEqual(spec);
+    expect(entry.derivation).toBe('source-svg-copy');
+    expect(entry.license).toBe('CC BY-SA 4.0');
+    expect(entry.source_image_url).toBe('https://d2l.ai/_images/output_image-augmentation_7d0887_81_0.svg');
+    expect(entry.sha256).toBe('1ccc8d5cbf7f8dc340ca38e0dd2cf6aa9b915ec07c61d3d2a5be8dd7985e4c8f');
+    for(const [pathKey,hashKey]of [
+      ['source_asset','source_asset_sha256'],['source_page_snapshot','source_page_sha256'],
+      ['source_code_snapshot','source_code_sha256'],['license_evidence','license_evidence_sha256']])
+      expect(sha256(resolve(repositoryRoot,spec[pathKey]))).toBe(spec[hashKey]);
+    const image=readFileSync(resolve(repositoryRoot,entry.asset));
+    expect(sha256(resolve(repositoryRoot,entry.asset))).toBe(entry.sha256);
+    expect(image).toEqual(readFileSync(resolve(repositoryRoot,entry.source_asset!)));
+    const svg=image.toString();
+    expect(svg.match(/<image\b/g)).toHaveLength(8);
+    expect(svg).not.toMatch(/(?:href|src)="https?:/);
+    expect(svg).toContain('viewBox="0 0 465.600016 237.203471"');
+    expect(readFileSync(resolve(repositoryRoot,spec.public_license_copy)))
+      .toEqual(readFileSync(resolve(repositoryRoot,spec.license_evidence)));
+    const html=readFileSync(resolve(repositoryRoot,spec.source_page_snapshot),'utf8');
+    expect(html.split('id="pytorch-17-0"')[1].split('id="mxnet-17-1"')[0])
+      .toContain('output_image-augmentation_7d0887_81_0.svg');
+    return;
+  }
   if(entry.asset.startsWith('00 Учебник/Assets/Figures/curated/data-augmentation-2026-10-28/')) {
     const prefix='00 Учебник/Assets/Figures/curated/data-augmentation-2026-10-28/';
     const packet='05 Источники/Originals/data-augmentation-2026-10-28/';
@@ -2100,7 +4482,7 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
       [entry.source_code,entry.source_code_sha256],
       [entry.source_page_snapshot,entry.source_page_sha256],
       [entry.license_evidence,entry.license_evidence_sha256]])
-      expect(sha256(resolve(repositoryRoot,path!))).toBe(hash);
+      expect(sourceSnapshotSha256(repositoryRoot,path!)).toBe(hash);
     expectDecodableImage(resolve(repositoryRoot,entry.asset));
     expect(entry.crop_box_px).toBeUndefined();
     if(entry.source_asset) {
@@ -2171,6 +4553,27 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
     }
     return;
   }
+  if(entry.asset.startsWith('00 Учебник/Assets/Figures/curated/autoencoder-course-2026-11-03/')){
+    const specs=[{"id":"curated-uva-autoencoder-output-472ec692b4af","asset":"00 Учебник/Assets/Figures/curated/autoencoder-course-2026-11-03/uva-latent-width.svg","author":"Phillip Lippe","title":"Validation reconstruction error over latent dimensionality","source_url":"https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial9/AE_CIFAR10.ipynb","source_image_url":"https://raw.githubusercontent.com/phlippe/uvadlc_notebooks/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial9/AE_CIFAR10.ipynb","source_asset":"05 Источники/Originals/autoencoder-2026-10-26/uva-ae.ipynb","source_asset_sha256":"ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be","source_page_snapshot":"05 Источники/Originals/autoencoder-2026-10-26/uva-ae.ipynb","source_page_sha256":"ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be","source_cell":26,"source_member":"cells/26/outputs/0/data/image/svg+xml","source_member_sha256":"472ec692b4afb5b51012b78d61ac8cd8ae827303b105fb7cd3a3172ad188bee3","commit":"c7d9e18f42fee53bc8925f08ec2358371b1e9200","license":"MIT","license_url":"https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/LICENSE.md","license_evidence":"site/public/licenses/uva-c7d9e18f-MIT.txt","license_evidence_sha256":"bc760ea73079016ab58ddb9ade0ea6e822dc1ba801b8e26c9d0eadb68e564735","derivation":"notebook-svg-output-copy","modifications":"Complete original SVG output copied byte-for-byte, including any embedded raster. No plotting, crop, redraw, relabeling, resizing or recompression.","metadata_status":"verified","provenance_confirmation":"source-license-verified","last_verified":"2026-11-03","sha256":"472ec692b4afb5b51012b78d61ac8cd8ae827303b105fb7cd3a3172ad188bee3","bytes":31342,"viewBox":[0,0,392.025469,282.535781],"used_in":["00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md"]},{"id":"curated-uva-autoencoder-output-5fefe3cd0a33","asset":"00 Учебник/Assets/Figures/curated/autoencoder-course-2026-11-03/uva-noise-reconstruction.svg","author":"Phillip Lippe","title":"Reconstruction of independently generated noise","source_url":"https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial9/AE_CIFAR10.ipynb","source_image_url":"https://raw.githubusercontent.com/phlippe/uvadlc_notebooks/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial9/AE_CIFAR10.ipynb","source_asset":"05 Источники/Originals/autoencoder-2026-10-26/uva-ae.ipynb","source_asset_sha256":"ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be","source_page_snapshot":"05 Источники/Originals/autoencoder-2026-10-26/uva-ae.ipynb","source_page_sha256":"ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be","source_cell":32,"source_member":"cells/32/outputs/0/data/image/svg+xml","source_member_sha256":"5fefe3cd0a33955b020f7343acd2d3da9dffa004df4f773f1c657d0ac089cc13","commit":"c7d9e18f42fee53bc8925f08ec2358371b1e9200","license":"MIT","license_url":"https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/LICENSE.md","license_evidence":"site/public/licenses/uva-c7d9e18f-MIT.txt","license_evidence_sha256":"bc760ea73079016ab58ddb9ade0ea6e822dc1ba801b8e26c9d0eadb68e564735","derivation":"notebook-svg-output-copy","modifications":"Complete original SVG output copied byte-for-byte, including any embedded raster. No plotting, crop, redraw, relabeling, resizing or recompression.","metadata_status":"verified","provenance_confirmation":"source-license-verified","last_verified":"2026-11-03","sha256":"5fefe3cd0a33955b020f7343acd2d3da9dffa004df4f773f1c657d0ac089cc13","bytes":119845,"viewBox":[0,0,405,130.885027],"used_in":["00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md"]},{"id":"curated-uva-autoencoder-output-f0f5ef6a8dec","asset":"00 Учебник/Assets/Figures/curated/autoencoder-course-2026-11-03/uva-pattern-reconstruction.svg","author":"Phillip Lippe","title":"Reconstruction of synthetic fields, blocks and ramps","source_url":"https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial9/AE_CIFAR10.ipynb","source_image_url":"https://raw.githubusercontent.com/phlippe/uvadlc_notebooks/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial9/AE_CIFAR10.ipynb","source_asset":"05 Источники/Originals/autoencoder-2026-10-26/uva-ae.ipynb","source_asset_sha256":"ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be","source_page_snapshot":"05 Источники/Originals/autoencoder-2026-10-26/uva-ae.ipynb","source_page_sha256":"ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be","source_cell":34,"source_member":"cells/34/outputs/0/data/image/svg+xml","source_member_sha256":"f0f5ef6a8decb6a29fd2975f70cd5d7918d0b483431486cd1ccba4140a06d63e","commit":"c7d9e18f42fee53bc8925f08ec2358371b1e9200","license":"MIT","license_url":"https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/LICENSE.md","license_evidence":"site/public/licenses/uva-c7d9e18f-MIT.txt","license_evidence_sha256":"bc760ea73079016ab58ddb9ade0ea6e822dc1ba801b8e26c9d0eadb68e564735","derivation":"notebook-svg-output-copy","modifications":"Complete original SVG output copied byte-for-byte, including any embedded raster. No plotting, crop, redraw, relabeling, resizing or recompression.","metadata_status":"verified","provenance_confirmation":"source-license-verified","last_verified":"2026-11-03","sha256":"f0f5ef6a8decb6a29fd2975f70cd5d7918d0b483431486cd1ccba4140a06d63e","bytes":58332,"viewBox":[0,0,405,227.11981],"used_in":["00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md"]},{"id":"curated-uva-autoencoder-output-94bd5c7d9898","asset":"00 Учебник/Assets/Figures/curated/autoencoder-course-2026-11-03/uva-random-codes.svg","author":"Phillip Lippe","title":"Ordinary decoder outputs from standard-normal codes","source_url":"https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial9/AE_CIFAR10.ipynb","source_image_url":"https://raw.githubusercontent.com/phlippe/uvadlc_notebooks/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial9/AE_CIFAR10.ipynb","source_asset":"05 Источники/Originals/autoencoder-2026-10-26/uva-ae.ipynb","source_asset_sha256":"ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be","source_page_snapshot":"05 Источники/Originals/autoencoder-2026-10-26/uva-ae.ipynb","source_page_sha256":"ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be","source_cell":37,"source_member":"cells/37/outputs/0/data/image/svg+xml","source_member_sha256":"94bd5c7d9898dbc7483f254e77a2b7d032e7efbe995a0cac7803aeefa1968722","commit":"c7d9e18f42fee53bc8925f08ec2358371b1e9200","license":"MIT","license_url":"https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/LICENSE.md","license_evidence":"site/public/licenses/uva-c7d9e18f-MIT.txt","license_evidence_sha256":"bc760ea73079016ab58ddb9ade0ea6e822dc1ba801b8e26c9d0eadb68e564735","derivation":"notebook-svg-output-copy","modifications":"Complete original SVG output copied byte-for-byte, including any embedded raster. No plotting, crop, redraw, relabeling, resizing or recompression.","metadata_status":"verified","provenance_confirmation":"source-license-verified","last_verified":"2026-11-03","sha256":"94bd5c7d9898dbc7483f254e77a2b7d032e7efbe995a0cac7803aeefa1968722","bytes":43514,"viewBox":[0,0,460.8,240.834783],"used_in":["00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md"]}];
+    const spec=specs.find(x=>x.asset===entry.asset);
+    expect(spec,entry.asset).toBeTruthy();
+    expect(entry).toEqual(spec);
+    for(const[path,hash]of [[entry.source_asset,entry.source_asset_sha256],
+      [entry.license_evidence,entry.license_evidence_sha256]])
+      expect(sha256(resolve(repositoryRoot,path!))).toBe(hash);
+    const notebook=JSON.parse(readFileSync(resolve(repositoryRoot,entry.source_asset!),'utf8'));
+    const data=notebook.cells[entry.source_cell!].outputs[0].data['image/svg+xml'];
+    const original=Buffer.from(Array.isArray(data)?data.join(''):data,'utf8');
+    const published=readFileSync(resolve(repositoryRoot,entry.asset));
+    expect(published).toEqual(original);
+    expect(createHash('sha256').update(published).digest('hex')).toBe(entry.sha256);
+    const svg=published.toString();
+    expect(svg).toContain('viewBox="'+spec!.viewBox.join(' ')+'"');
+    expect(svg).not.toContain('<script');
+    expect(svg).not.toMatch(/<image[^>]+(?:href|xlink:href)="https?:/);
+    expectDecodableImage(resolve(repositoryRoot,entry.asset));
+    return;
+  }
   const evaluationArchitecture = entry.asset === '00 Учебник/Assets/Figures/curated/linux-foundation-recommenders-architecture.png';
   if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/hardware-completion-2026-10-29/') ||
       entry.asset.startsWith('00 Учебник/Assets/Figures/curated/serving-operations-2026-10-29/') ||
@@ -2211,7 +4614,7 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
       [entry.source_asset,entry.source_asset_sha256],
       [entry.license_evidence,entry.license_evidence_sha256],
       [entry.source_page_snapshot,entry.source_page_sha256]])
-      expect(sha256(resolve(repositoryRoot,path!))).toBe(hash);
+      expect(sourceSnapshotSha256(repositoryRoot,path!)).toBe(hash);
     expect(readFileSync(resolve(repositoryRoot,entry.asset))
       .equals(readFileSync(resolve(repositoryRoot,entry.source_asset!)))).toBe(true);
     expect(entry.crop_box_px).toBeUndefined();
@@ -2227,6 +4630,71 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
     } else {
       expect(entry.derivation).toBe('source-svg-copy');
       expectDecodableImage(resolve(repositoryRoot,entry.asset));
+    }
+    return;
+  }
+  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/kernels-2026-11-03/')) {
+    const folder = '00 Учебник/Assets/Figures/curated/kernels-2026-11-03/';
+    const rows = JSON.parse(readFileSync(resolve(repositoryRoot,folder+'assets.json'),'utf8')) as CuratedAsset[];
+    expect(entry).toEqual(rows.find(row=>row.asset===entry.asset));
+    const pins = {
+      'sklearn-rbf-decision-grid.png':'32d1c64d0053c29dce038e18e28b6b203617bc6c6eabebd3ca2a8965556ba33b',
+      'sklearn-rbf-validation-grid.png':'4ce8860a12309b462ae25ca56601c68daf74bbf8533d5648ee8323261cb5009a',
+    } as Record<string,string>;
+    const name = entry.asset.slice(folder.length);
+    expect(pins[name]).toBeDefined();
+    expect(entry.sha256).toBe(pins[name]);
+    expect(entry.license).toBe('BSD-3-Clause');
+    expect(entry.commit).toBe('199d116ab37beed506c63fc9f6a74f56e228de43');
+    expect(entry.derivation).toBe('source-image-copy');
+    expect(entry.source_asset).toBe(entry.asset);
+    expect(entry.source_asset_sha256).toBe(entry.sha256);
+    expect(entry.source_url).toBe('https://scikit-learn.org/1.9/auto_examples/svm/plot_rbf_parameters.html');
+    const suffix=name==='sklearn-rbf-decision-grid.png'?'001':'002';
+    expect(entry.source_image_url).toBe('https://raw.githubusercontent.com/scikit-learn/scikit-learn.github.io/199d116ab37beed506c63fc9f6a74f56e228de43/1.9/_images/sphx_glr_plot_rbf_parameters_'+suffix+'.png');
+    expect(entry.crop_box_px).toBeUndefined();
+    expect(entry.source_page_sha256).toBe('396ef426d23724920dbe4ebc477493729c882e49a5cfbb3cf6f90d13a2144bec');
+    expect(entry.license_evidence_sha256).toBe('50d6a9d340f19ab355609917993114daf5f47e3161067bcf34955bbd05cd9cb0');
+    expect(sha256(resolve(repositoryRoot,entry.asset))).toBe(entry.sha256);
+    expect(sha256(resolve(repositoryRoot,entry.source_page_snapshot!))).toBe(entry.source_page_sha256);
+    expect(sha256(resolve(repositoryRoot,entry.license_evidence!))).toBe(entry.license_evidence_sha256);
+    expect(validateRenderedPngBytes(readFileSync(resolve(repositoryRoot,entry.asset)))).toEqual([800,600]);
+    expect(entry.dimensions_px).toEqual([800,600]);
+    return;
+  }
+  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/gmm-2026-11-03/')) {
+    const folder = '00 Учебник/Assets/Figures/curated/gmm-2026-11-03/';
+    const rows = JSON.parse(readFileSync(resolve(repositoryRoot,folder+'assets.json'),'utf8')) as CuratedAsset[];
+    expect(entry).toEqual(rows.find(row=>row.asset===entry.asset));
+    const pins = {"jake-digit-aic.png":"4cd0f062617e44b4312d4f58413c58337b8da8649984483591e84e2eb84df6e7","jake-generated-digits.png":"75ce77d9c4f701c68c1dd1a6d6ed33977a0e692e1e7e2fcfe400db2167a3b9ba","jake-moons-generated.png":"32d53b5e501feb04ad7b0eee235dc73443a03a3c060cfcdf493ca363144e6806","jake-training-digits.png":"7a0112379a3d2ed97ce6e09b011520c9fd7eba630000a4662640bd391c4295a6","sklearn-gmm-initialization.png":"ab5a8bd8e440a80fd83b0ce5ef7614c2d3362377fef0274176ac910951bb3707"} as Record<string,string>;
+    const name = entry.asset.slice(folder.length);
+    expect(entry.sha256).toBe(pins[name]);
+    expect(pins[name]).toBeDefined();
+    expect(entry.crop_box_px).toBeUndefined();
+    expect(sha256(resolve(repositoryRoot,entry.asset))).toBe(entry.sha256);
+    expect(validateRenderedPngBytes(readFileSync(resolve(repositoryRoot,entry.asset)))).toEqual(entry.dimensions_px);
+    expect(sha256(resolve(repositoryRoot,entry.source_asset!))).toBe(entry.source_asset_sha256);
+    expect(sha256(resolve(repositoryRoot,entry.license_evidence!))).toBe(entry.license_evidence_sha256);
+    if (name.startsWith('jake-')) {
+      expect(entry.license).toBe('CC BY-NC-ND 3.0 Unported');
+      expect(entry.commit).toBe('d66231454ef753818dc9213c9b5942e067266966');
+      expect(entry.source_asset_sha256).toBe('9438d483e156738ba8d581e54f150590061ff6fbe6147cb38ab56ae0449c07e6');
+      expect(entry.source_image_url).toBe('https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.12-Gaussian-Mixtures.ipynb');
+      const cells = {'jake-moons-generated.png':34,'jake-training-digits.png':42,
+        'jake-digit-aic.png':46,'jake-generated-digits.png':52} as Record<string,number>;
+      expect(entry.source_member).toBe('/cells/'+cells[name]+'/outputs/0/data/image~1png');
+      const notebook = JSON.parse(readFileSync(resolve(repositoryRoot,entry.source_asset!),'utf8'));
+      const data = notebook.cells[cells[name]].outputs[0].data['image/png'];
+      expect(readFileSync(resolve(repositoryRoot,entry.asset)))
+        .toEqual(Buffer.from(Array.isArray(data)?data.join(''):data,'base64'));
+    } else {
+      expect(name).toBe('sklearn-gmm-initialization.png');
+      expect(entry.license).toBe('BSD-3-Clause');
+      expect(entry.commit).toBe('199d116ab37beed506c63fc9f6a74f56e228de43');
+      expect(entry.source_image_url).toBe('https://raw.githubusercontent.com/scikit-learn/scikit-learn.github.io/199d116ab37beed506c63fc9f6a74f56e228de43/1.9/_images/sphx_glr_plot_gmm_init_001.png');
+      expect(entry.source_asset_sha256).toBe(entry.sha256);
+      expect(entry.source_page_sha256).toBe('82c5434602c464e1bdfac7483eed0b6d48cf1a41cd18f982182989f74b158731');
+      expect(sha256(resolve(repositoryRoot,entry.source_page_snapshot!))).toBe(entry.source_page_sha256);
     }
     return;
   }
@@ -2252,6 +4720,140 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
     } else expect(entry.source_asset_sha256).toBe(entry.sha256);
     return;
   }
+  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/dimensionality-2026-11-03/')) {
+    const rows = JSON.parse(readFileSync(resolve(repositoryRoot,
+      '00 Учебник/Assets/Figures/curated/dimensionality-2026-11-03/assets.json'), 'utf8')) as CuratedAsset[];
+    const expected = rows.find(row => row.asset === entry.asset);
+    expect(expected).toBeDefined();
+    expect(entry).toEqual(expected);
+    const specifications = {
+      "distill-global-150-input.png": {
+        "sha256": "b4350204c7d3d88f96a01afe78eccb18d8773e3d10d1e35d5378f024cc6a8e48",
+        "url": "https://raw.githubusercontent.com/distillpub/post--misread-tsne/f2492b469bec8aaa7aa83cc828081e14a295414d/public/assets/figure_04_original.png",
+        "commit": "f2492b469bec8aaa7aa83cc828081e14a295414d",
+        "license": "CC BY 2.0"
+      },
+      "distill-global-150-p50.png": {
+        "sha256": "e9e0e405874f92faaf2fa22cec7a6e126adae0dd03a48c432aa02430577c740e",
+        "url": "https://raw.githubusercontent.com/distillpub/post--misread-tsne/f2492b469bec8aaa7aa83cc828081e14a295414d/public/assets/figure_04_04.png",
+        "commit": "f2492b469bec8aaa7aa83cc828081e14a295414d",
+        "license": "CC BY 2.0"
+      },
+      "distill-global-600-input.png": {
+        "sha256": "ce91aa4f8ccff0a2ebcb2f3ab62be8ddf05e18a5e46899ab873300a44aeba291",
+        "url": "https://raw.githubusercontent.com/distillpub/post--misread-tsne/f2492b469bec8aaa7aa83cc828081e14a295414d/public/assets/figure_05_original.png",
+        "commit": "f2492b469bec8aaa7aa83cc828081e14a295414d",
+        "license": "CC BY 2.0"
+      },
+      "distill-global-600-p50.png": {
+        "sha256": "803c7b39126c84a62fe451da36e3acd479f2e4486670a0be44293424b87d5ab5",
+        "url": "https://raw.githubusercontent.com/distillpub/post--misread-tsne/f2492b469bec8aaa7aa83cc828081e14a295414d/public/assets/figure_05_04.png",
+        "commit": "f2492b469bec8aaa7aa83cc828081e14a295414d",
+        "license": "CC BY 2.0"
+      },
+      "distill-noise-input.png": {
+        "sha256": "e3a26c8184a057c63c6672f5fd35f72494d287417573693e3cc4a34cafb20003",
+        "url": "https://raw.githubusercontent.com/distillpub/post--misread-tsne/f2492b469bec8aaa7aa83cc828081e14a295414d/public/assets/figure_06_original.png",
+        "commit": "f2492b469bec8aaa7aa83cc828081e14a295414d",
+        "license": "CC BY 2.0"
+      },
+      "distill-noise-p2.png": {
+        "sha256": "082a23937b9e57009dd54838518174fccf8129e7dd34b90624a978787f5b727f",
+        "url": "https://raw.githubusercontent.com/distillpub/post--misread-tsne/f2492b469bec8aaa7aa83cc828081e14a295414d/public/assets/figure_06_01.png",
+        "commit": "f2492b469bec8aaa7aa83cc828081e14a295414d",
+        "license": "CC BY 2.0"
+      },
+      "jake-cumulative-variance.png": {
+        "sha256": "d4d3e7cfd9e49d4163e13f68195609e3fe4c506751dd19d7f3e39b8949cb97d8",
+        "url": "https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.09-Principal-Component-Analysis.ipynb",
+        "commit": "d66231454ef753818dc9213c9b5942e067266966",
+        "license": "CC BY-NC-ND 3.0 Unported"
+      },
+      "jake-filtered-digits.png": {
+        "sha256": "148dad1d7b80f6884fd851af3c78341520534d119b02b3ea1886eeba0a8a024f",
+        "url": "https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.09-Principal-Component-Analysis.ipynb",
+        "commit": "d66231454ef753818dc9213c9b5942e067266966",
+        "license": "CC BY-NC-ND 3.0 Unported"
+      },
+      "jake-noisy-digits.png": {
+        "sha256": "2edc8f1965a03a4a1798c0470604cda70d312ea2bba28989ac62278ec702f5d7",
+        "url": "https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.09-Principal-Component-Analysis.ipynb",
+        "commit": "d66231454ef753818dc9213c9b5942e067266966",
+        "license": "CC BY-NC-ND 3.0 Unported"
+      },
+      "jake-pca-basis.png": {
+        "sha256": "958095b63e56048b75dc27dfb86cf1b8c52acee3eb9ded5861130a9633065165",
+        "url": "https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/figures/05.09-digits-pca-components.png",
+        "commit": "d66231454ef753818dc9213c9b5942e067266966",
+        "license": "CC BY-NC-ND 3.0 Unported"
+      },
+      "jake-pixel-basis.png": {
+        "sha256": "4acc90b29b21efc0abbbc268edd2a688d4a1ae9405eaaa668a1ecaa765564601",
+        "url": "https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/figures/05.09-digits-pixel-components.png",
+        "commit": "d66231454ef753818dc9213c9b5942e067266966",
+        "license": "CC BY-NC-ND 3.0 Unported"
+      },
+      "umap-min-dist-0.png": {
+        "sha256": "dd65544c4d359197ef7775eabf5e0d0c385a43b04445b5836675eb43539ed02f",
+        "url": "https://raw.githubusercontent.com/lmcinnes/umap/e82ed0d457b566b043ef44f4007a7149b0daca74/doc/images/parameters_16_1.png",
+        "commit": "e82ed0d457b566b043ef44f4007a7149b0daca74",
+        "license": "BSD-3-Clause"
+      },
+      "umap-min-dist-099.png": {
+        "sha256": "446232790fc3ef130beb93c7494f9a99392c0b4bad32dc2087054cc9661ff365",
+        "url": "https://raw.githubusercontent.com/lmcinnes/umap/e82ed0d457b566b043ef44f4007a7149b0daca74/doc/images/parameters_16_6.png",
+        "commit": "e82ed0d457b566b043ef44f4007a7149b0daca74",
+        "license": "BSD-3-Clause"
+      },
+      "umap-neighbors-2.png": {
+        "sha256": "3bb46192a616c782c0bd6bd0ee8eb42a54565ed1f29fec940fa417bb24442ba7",
+        "url": "https://raw.githubusercontent.com/lmcinnes/umap/e82ed0d457b566b043ef44f4007a7149b0daca74/doc/images/parameters_13_1.png",
+        "commit": "e82ed0d457b566b043ef44f4007a7149b0daca74",
+        "license": "BSD-3-Clause"
+      },
+      "umap-neighbors-200.png": {
+        "sha256": "2cfa44a1a1057a4eac86e2a62eb12b56a32fcbe0322120a3b130d90e49b46e57",
+        "url": "https://raw.githubusercontent.com/lmcinnes/umap/e82ed0d457b566b043ef44f4007a7149b0daca74/doc/images/parameters_13_7.png",
+        "commit": "e82ed0d457b566b043ef44f4007a7149b0daca74",
+        "license": "BSD-3-Clause"
+      }
+    };
+    const name = entry.asset.split('/').at(-1)! as keyof typeof specifications;
+    expect(specifications[name]).toBeDefined();
+    const specification = specifications[name];
+    expect(entry.sha256).toBe(specification.sha256);
+    expect(entry.source_image_url).toBe(specification.url);
+    expect(entry.commit).toBe(specification.commit);
+    expect(entry.license).toBe(specification.license);
+    expect(entry.source_url).toBe(specification.url
+      .replace('raw.githubusercontent.com/', 'github.com/')
+      .replace('/'+specification.commit+'/', '/blob/'+specification.commit+'/'));
+    expect(entry.metadata_status).toBe('verified');
+    expect(entry.provenance_confirmation).toBe('source-license-verified');
+    expect(entry.crop_box_px).toBeUndefined();
+    for (const [path, digest] of [[entry.asset,entry.sha256],
+      [entry.source_asset,entry.source_asset_sha256],
+      [entry.license_evidence,entry.license_evidence_sha256],
+      [entry.source_code,entry.source_code_sha256],
+      [entry.source_page_snapshot,entry.source_page_sha256]])
+      if (path) expect(sha256(resolve(repositoryRoot,path))).toBe(digest);
+    expect(validateRenderedPngBytes(readFileSync(resolve(repositoryRoot,entry.asset))))
+      .toEqual(entry.dimensions_px);
+    if (entry.derivation === 'notebook-output-extraction') {
+      expect(entry.source_asset_sha256).toBe('fa00993593486ca2d2445bf4781eba2ea79bb07f3360fa9456d67f573b9da9f2');
+      const members: Record<string,number> = {'jake-cumulative-variance.png':34,
+        'jake-noisy-digits.png':40, 'jake-filtered-digits.png':44};
+      expect(entry.source_member).toBe('/cells/'+members[name]+'/outputs/0/data/image~1png');
+      const notebook = JSON.parse(readFileSync(resolve(repositoryRoot,entry.source_asset!), 'utf8'));
+      const data = notebook.cells[members[name]].outputs[0].data['image/png'];
+      expect(readFileSync(resolve(repositoryRoot,entry.asset)))
+        .toEqual(Buffer.from(Array.isArray(data)?data.join(''):data,'base64'));
+    } else {
+      expect(entry.derivation).toBe('source-image-copy');
+      expect(entry.source_asset_sha256).toBe(entry.sha256);
+    }
+    return;
+  }
   if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/')) {
     const rows=JSON.parse(readFileSync(resolve(repositoryRoot,
       '00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/assets.json'),'utf8')) as CuratedAsset[];
@@ -2273,6 +4875,40 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
       expect(readFileSync(resolve(repositoryRoot,entry.asset))).toEqual(original);
       expect(entry.source_member).toBe('/cells/18/outputs/0/data/image~1png');
     } else expect(entry.source_asset_sha256).toBe(entry.sha256);
+    return;
+  }
+  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/spectral-2026-10-31/')) {
+    const rows = JSON.parse(readFileSync(resolve(repositoryRoot,
+      '00 Учебник/Assets/Figures/curated/spectral-2026-10-31/assets.json'), 'utf8')) as CuratedAsset[];
+    const index = rows.findIndex(row => row.asset === entry.asset);
+    expect(index).toBeGreaterThanOrEqual(0);
+    expect(entry).toEqual(rows[index]);
+    expect(entry.sha256).toBe([
+      'a5060cb9bddaaea7d3f45bfa43e25e52e9180aff0137ea2e59f75af611d2659e',
+      '4615778b7c706d94775f2c2f0fc5c08ebf8e5fd12fc132879f1602500d6c3416',
+    ][index]);
+    expect(entry.author).toBe('Laurenz Wiskott and Fabian Schönfeld');
+    expect(entry.source_asset).toBe('05 Источники/Originals/spectral-2026-10-25/wiskott-laplacian.pdf');
+    expect(entry.source_asset_sha256).toBe('cb2ff89dff43e1bdcd9d3f77dea73b2b8a926a805665b28ef07fa6f6f84933fc');
+    expect(entry.source_page).toBe([5, 15][index]);
+    expect(entry.source_printed_page).toBe(entry.source_page);
+    expect(entry.source_figure).toBe(['1.1', '2.2'][index]);
+    expect(entry.render_dpi).toBe(300);
+    expect(entry.render_page_size_px).toEqual([2550, 3300]);
+    expect(entry.crop_box_px).toEqual([[280,980,2280,1860], [280,300,2280,1390]][index]);
+    expect(entry.source_url).toBe('https://www.ini.rub.de/PEOPLE/wiskott/Teaching/UnsupervisedLearning/PublicWeb/LaplacianMatrix-L0-LectureNotes-PublicWeb.pdf#page=' + entry.source_page);
+    expect(entry.license).toBe('CC BY-SA 4.0');
+    expect(entry.license_url).toBe('https://creativecommons.org/licenses/by-sa/4.0/');
+    expect(entry.license_evidence).toBe(entry.source_asset);
+    expect(entry.license_evidence_sha256).toBe(entry.source_asset_sha256);
+    expect(entry.derivation).toBe('source-pdf-figure-crop');
+    expect(entry.metadata_status).toBe('verified');
+    expect(entry.provenance_confirmation).toBe('source-license-verified');
+    for (const [path, digest] of [[entry.asset, entry.sha256],
+      [entry.source_asset, entry.source_asset_sha256]])
+      expect(sha256(resolve(repositoryRoot, path!))).toBe(digest);
+    expect(validateRenderedPngBytes(readFileSync(resolve(repositoryRoot, entry.asset))))
+      .toEqual([[2000, 880], [2000, 1090]][index]);
     return;
   }
   if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/spectral-2026-10-25/')) {
@@ -2379,7 +5015,7 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
     }
     return;
   }
-  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/preference-2026-10-23/')
+  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/preference-2026-10-23/hh-')
     || entry.asset.startsWith('00 Учебник/Assets/Figures/curated/reward-modeling-2026-10-23/')) {
     const rows = JSON.parse(readFileSync(resolve(repositoryRoot,
       entry.asset.slice(0, entry.asset.lastIndexOf('/')) + '/assets.json'), 'utf8')) as CuratedAsset[];
@@ -2796,8 +5432,8 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
     expectDecodableImage(resolve(repositoryRoot,entry.asset));
     return;
   }
-  // Original PDF recovered and both full-page RGB renders independently reproduced.
-  // Provenance is verified; the source slide license remains unverified.
+  // The source PDF and full-slide pixels are verified. Copies are retained
+  // locally for that check, but are no longer used by the published chapter.
   const pendingSlidePrefix = '00 Учебник/Assets/Figures/curated/foundations-source-first/';
   const pendingSlides: Record<string, {id: string; hash: string; page: number; printed: number}> = {
     'cs231n-softmax-cross-entropy.png': {
@@ -2824,7 +5460,11 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
     expect(sha256(resolve(repositoryRoot,entry.source_asset!))).toBe(entry.source_asset_sha256);
     expect(entry.metadata_status).toBe('verified');
     expect(entry.derivation).toBe('pdf-full-slide-render-verified');
-    expect(entry.rights_status).toBe('named-lecture-slide-license-unverified');
+    expect(entry).toMatchObject({
+      publication_status: 'retired', license: 'Unverified for redistribution', license_url: null,
+      rights_status: 'course-slide-republication-unverified', used_in: [],
+      former_used_in: ['00 Учебник/00 Математические и ML-основания/04 Функции потерь.md'],
+    });
     expect(entry.provenance_confirmation).toBe('source-pixels-verified');
     expect(entry.render_dpi).toBe(160);
     const receipt=JSON.parse(readFileSync(resolve(repositoryRoot,'docs/audit/2026-10-29-cs231n-source-pixels.json'),'utf8'));
@@ -2882,6 +5522,81 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
       expect(entry.metadata_status).toBe('needs-confirmation');
     }
     expectDecodableImage(resolve(repositoryRoot,entry.asset));
+    return;
+  }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/agent-approval-2026-11-09/microsoft-transactional-outbox.svg') {
+    expect(entry.id).toBe('curated-microsoft-transactional-outbox-36bdda0a5038');
+    expect(entry.author).toBe('Microsoft Azure Architecture Center');
+    expect(entry.source_url).toBe('https://github.com/MicrosoftDocs/architecture-center/blob/629acf25fc1ab4096cfa102367a569867899b79e/docs/databases/guide/_images/out-box-pattern.svg');
+    expect(entry.source_image_url).toBe('https://raw.githubusercontent.com/MicrosoftDocs/architecture-center/629acf25fc1ab4096cfa102367a569867899b79e/docs/databases/guide/_images/out-box-pattern.svg');
+    expect(entry.commit).toBe('629acf25fc1ab4096cfa102367a569867899b79e');
+    expect(entry.license).toBe('CC BY 4.0');
+    expect(entry.license_url).toBe('https://creativecommons.org/licenses/by/4.0/');
+    expect(entry.derivation).toBe('source-svg-copy');
+    expect(entry.provenance_confirmation).toBe('pinned-upstream-repository');
+    expect(entry.metadata_status).toBe('verified');
+    expect(entry.source_asset).toBe(entry.asset);
+    expect(entry.sha256).toBe('36bdda0a5038eb48682f6b0057141e21b2963a0379b1025d46834b2e7af7262a');
+    expect(entry.source_asset_sha256).toBe(entry.sha256);
+    expect(entry.source_page_snapshot).toBe('05 Источники/Originals/agent-approval-2026-11-09/outbox.md');
+    expect(entry.source_page_sha256).toBe('a2864017a09d8559659f5b4407aafc303c1248477fc55f6ebcf8d6843d969bf9');
+    expect(entry.license_evidence).toBe('05 Источники/Originals/agent-approval-2026-11-09/MicrosoftDocs-CC-BY-4.0.txt');
+    expect(entry.license_evidence_sha256).toBe('7183ef9749eb9b75e710a81a4c812a9405cc184f087500581a973e5929ac3f5e');
+    for (const [file, hash] of [[entry.asset, entry.sha256],
+      [entry.source_page_snapshot, entry.source_page_sha256],
+      [entry.license_evidence, entry.license_evidence_sha256]])
+      expect(sha256(resolve(repositoryRoot, file!))).toBe(hash);
+    expect(entry.source_viewbox).toEqual([0, 0, 628.563, 515.106]);
+    expect(entry.crop_box_px).toBeUndefined();
+    const svg = readFileSync(resolve(repositoryRoot, entry.asset), 'utf8');
+    expect(svg).toContain('viewBox="0 0 628.563 515.106"');
+    expect(svg).toContain('Commit transaction');
+    expect(svg).toContain('Publish events');
+    return;
+  }
+  const natureFigure = {
+    '00 Учебник/Assets/Figures/curated/alphaproof-nature/figure-4-search-vs-ttrl.png': {
+      id: 'curated-alphaproof-nature-e0474a1f3a96',
+      url: 'https://www.nature.com/articles/s41586-025-09833-y/figures/4',
+      image: 'https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-025-09833-y/MediaObjects/41586_2025_9833_Fig4_HTML.png',
+      author: 'Thomas Hubert, Rishi Mehta, Laurent Sartran et al.',
+      sha: 'e0474a1f3a96dd82346cb66f8761da69b9357299c72b6d04e0c673069f86e1cc',
+      evidence: '05 Источники/Originals/alphaproof-nature/pmc12999475.xml',
+      evidenceSha: '70799ee4b8c683b592583357d1d349d4e6827474c08c04dead02d6af482c5870',
+      size: [1766, 646],
+    },
+    '00 Учебник/Assets/Figures/curated/program-search-2026-11-09/funsearch-figure-1.png': {
+      id: 'curated-funsearch-program-search-72cf2e2bcf47',
+      url: 'https://www.nature.com/articles/s41586-023-06924-6/figures/1',
+      image: 'https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-023-06924-6/MediaObjects/41586_2023_6924_Fig1_HTML.png',
+      author: 'Bernardino Romera-Paredes, Mohammadamin Barekatain, Alexander Novikov et al.',
+      sha: '72cf2e2bcf4723c455d001ed30e062402356434e93d98c0637aaa513e34f7bb1',
+      evidence: '05 Источники/Originals/program-search-2026-11-09/funsearch.xml',
+      evidenceSha: '6c512b475e85a5f9be1208478934b38facef6d0f20e285a72b02eedfad2e4f81',
+      size: [1327, 687],
+    },
+  }[entry.asset];
+  if (natureFigure) {
+    expect(entry.id).toBe(natureFigure.id);
+    expect(entry.source_url).toBe(natureFigure.url);
+    expect(entry.source_image_url).toBe(natureFigure.image);
+    expect(entry.author).toBe(natureFigure.author);
+    expect(entry.derivation).toBe('source-raster-copy');
+    expect(entry.provenance_confirmation).toBe('source-license-verified');
+    expect(entry.metadata_status).toBe('verified');
+    expect(entry.license).toBe('CC BY 4.0');
+    expect(entry.license_url).toBe('https://creativecommons.org/licenses/by/4.0/');
+    expect(entry.source_asset).toBe(entry.asset);
+    expect(entry.sha256).toBe(natureFigure.sha);
+    expect(entry.source_asset_sha256).toBe(entry.sha256);
+    expect(sha256(resolve(repositoryRoot, entry.asset))).toBe(entry.sha256);
+    expect(pngDimensions(resolve(repositoryRoot, entry.asset))).toEqual(natureFigure.size);
+    expect(entry.crop_box_px).toBeUndefined();
+    expect(entry.license_evidence).toBe(natureFigure.evidence);
+    expect(entry.license_evidence_sha256).toBe(natureFigure.evidenceSha);
+    expect(sha256(resolve(repositoryRoot, entry.license_evidence!))).toBe(entry.license_evidence_sha256);
+    expect(readFileSync(resolve(repositoryRoot, entry.license_evidence!), 'utf8')).toContain('https://creativecommons.org/licenses/by/4.0/');
+    expectDecodableImage(resolve(repositoryRoot, entry.asset));
     return;
   }
   const gpt2Spec=gpt2Figures.find((s:{asset:string})=>s.asset===entry.asset);
@@ -3054,6 +5769,51 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
     expectDecodableImage(resolve(repositoryRoot, entry.asset));
     return;
   }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/seq2seq-bridge-2026-11-03/d2l-encoder-decoder.svg') {
+    const expected = {
+      "id": "curated-seq2seq-interface-bf5083530e10",
+      "asset": "00 Учебник/Assets/Figures/curated/seq2seq-bridge-2026-11-03/d2l-encoder-decoder.svg",
+      "author": "Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola",
+      "title": "The encoder–decoder architecture, complete original D2L diagram",
+      "source_url": "https://d2l.ai/chapter_recurrent-modern/encoder-decoder.html",
+      "source_image_url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/encoder-decoder.svg",
+      "commit": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+      "source_asset": "05 Источники/Originals/seq2seq-2026-10-21/encoder-decoder.svg",
+      "source_asset_sha256": "bf5083530e10aff826bfc6be26b4b32ccd8ade3e7ad86cc7b7ee66dc5601ddaf",
+      "sha256": "bf5083530e10aff826bfc6be26b4b32ccd8ade3e7ad86cc7b7ee66dc5601ddaf",
+      "bytes": 22369,
+      "source_viewbox": [
+        0,
+        0,
+        304,
+        34
+      ],
+      "source_page_snapshot": "05 Источники/Originals/seq2seq-2026-10-21/d2l-encoder-decoder.md",
+      "source_page_sha256": "ad89663c337fc3aed42c26fb53365bb249a33ac96e45828adfb9ae0072cd0b05",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "license_evidence": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+      "license_evidence_sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+      "public_license_copy": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+      "derivation": "source-svg-copy",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "used_in": [
+        "00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора.md"
+      ]
+    };
+    for(const [field,value] of Object.entries(expected))
+      expect((entry as unknown as Record<string,unknown>)[field],field).toEqual(value);
+    for(const [path,hash] of [[entry.asset,entry.sha256],
+      [entry.source_asset,entry.source_asset_sha256],
+      [entry.source_page_snapshot,entry.source_page_sha256],
+      [entry.license_evidence,entry.license_evidence_sha256]])
+      expect(sha256(resolve(repositoryRoot,path!))).toBe(hash);
+    expect(readFileSync(resolve(repositoryRoot,entry.asset),'utf8')).toContain('viewBox="0 0 304 34"');
+    expectDecodableImage(resolve(repositoryRoot,entry.asset));
+    return;
+  }
   if (Object.hasOwn(seq2seqFigures, entry.asset)) {
     const s = seq2seqFigures[entry.asset as keyof typeof seq2seqFigures];
     const prefix = '05 Источники/Originals/seq2seq-2026-10-21/';
@@ -3080,6 +5840,38 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
     expect(entry.metadata_status).toBe('verified');
     expect(readFileSync(resolve(repositoryRoot, entry.asset), 'utf8')).toContain('viewBox="' + s.viewBox + '"');
     expectDecodableImage(resolve(repositoryRoot, entry.asset));
+    return;
+  }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/lstm-gru-contracts-2026-11-03/d2l-birnn.svg') {
+    const expected = {
+      "id": "curated-lstm-gru-bidirectional-aa4e678afa0e",
+      "author": "Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola",
+      "commit": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+      "source_url": "https://d2l.ai/chapter_recurrent-modern/bi-rnn.html",
+      "source_image_url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/birnn.svg",
+      "source_asset": "05 Источники/Originals/lstm-gru-contracts-2026-11-03/d2l-birnn.svg",
+      "source_asset_sha256": "aa4e678afa0e31c160374974709512d4d7e0121eeab7a1af1ad7725403afc018",
+      "sha256": "aa4e678afa0e31c160374974709512d4d7e0121eeab7a1af1ad7725403afc018",
+      "source_page_snapshot": "05 Источники/Originals/lstm-gru-contracts-2026-11-03/d2l-bi-rnn.md",
+      "source_page_sha256": "6de8c8124497b0c69703ba3805559d51eb57c96d93096b70e2d5b6e133373975",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "license_evidence": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+      "license_evidence_sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+      "public_license_copy": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+      "derivation": "source-svg-copy",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified"
+    };
+    for (const [field,value] of Object.entries(expected))
+      expect((entry as unknown as Record<string,unknown>)[field],field).toEqual(value);
+    for (const [path,hash] of [[entry.asset,entry.sha256],
+      [entry.source_asset,entry.source_asset_sha256],
+      [entry.source_page_snapshot,entry.source_page_sha256],
+      [entry.license_evidence,entry.license_evidence_sha256]])
+      expect(sha256(resolve(repositoryRoot,path!))).toBe(hash);
+    expect(readFileSync(resolve(repositoryRoot,entry.asset),'utf8')).toContain('viewBox="0 0 240 141"');
+    expectDecodableImage(resolve(repositoryRoot,entry.asset));
     return;
   }
   if (Object.hasOwn(lstmGruFigures, entry.asset)) {
@@ -3507,6 +6299,33 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
     expect(svg).not.toMatch(/<script\b|<foreignObject\b|on(?:load|error)\s*=/i);
     return;
   }
+  const clusteringCourseOutput = [
+    ['mooc-news-external-metrics.png', '712206c5a2610cac4dc2010e563719e91af6d217784fea59941e2a53a4f16f1b', 'clustering_supervised_metrics', 611, 879],
+    ['mooc-news-silhouette.png', '5604f75c9275f74e35b7679a4980af1f46372513ede60f273859d48cddcbca84', 'clustering_supervised_metrics', 615, 491],
+    ['mooc-rfm-quantile-layers.png', 'cfa0c2204e8cb75cd4039771c841ab49d814bc10bd48fc555ca77eeefad574ef', 'clustering_sol_01', 766, 766],
+  ].find(([name]) => entry.asset === '00 Учебник/Assets/Figures/curated/classical-ml-clustering/' + name);
+  if (clusteringCourseOutput) {
+    const [, hash, page, width, height] = clusteringCourseOutput;
+    const pin = '93840904e26a215ecddf1a30e9a5eb920284fb29';
+    expect(entry.sha256).toBe(hash);
+    expect(sha256(resolve(repositoryRoot, entry.asset))).toBe(hash);
+    expect(entry.commit).toBe(pin);
+    expect(entry.source_url).toBe('https://github.com/INRIA/scikit-learn-mooc/blob/' + pin + '/python_scripts/' + page + '.html');
+    expect(entry.source_image_url).toBe('https://raw.githubusercontent.com/INRIA/scikit-learn-mooc/' + pin + '/_images/' + hash + '.png');
+    expect(entry.author).toBe('INRIA, scikit-learn MOOC contributors');
+    expect(entry.license).toBe('CC BY 4.0');
+    expect(entry.license_url).toBe('https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE');
+    expect(entry.license_evidence).toBe('05 Источники/Originals/train-validation-test-2026-10-21/mooc-LICENSE.txt');
+    expect(entry.license_evidence_sha256).toBe('f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f');
+    expect(sha256(resolve(repositoryRoot, entry.license_evidence!))).toBe(entry.license_evidence_sha256);
+    expect(entry.derivation).toBe('source-raster-copy');
+    expect(entry.provenance_confirmation).toBe('pinned-upstream-repository');
+    expect(entry.metadata_status).toBe('verified');
+    expect(entry.crop_box_px).toBeUndefined();
+    expect(pngDimensions(resolve(repositoryRoot, entry.asset))).toEqual([width, height]);
+    expectDecodableImage(resolve(repositoryRoot, entry.asset));
+    return;
+  }
   if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/classical-ml-clustering/')) {
     const cases = [["elbow.png","e80edba3e4de8072dc41b696461815d7c4a531a7bf119b4488dbd6efbdc553e9","kmeans",""],["silhouette.png","d2b3f06031a118d871972f35e3d65dfbd06edaf47a90bc71aa89ed60aee3b8de","kmeans",""],["shapes-kmeans.png","b0e37de75e80cd7cab5dfc9981f8490ec2b77d61ca268377322cccd4444fbb4f","density",""],["shapes-hdbscan.png","21622047b9935ff74be9967cad95862a43e1272044fa613d765dbcac493358d4","density",""],["dbscan-core-border.png","6fbc56c13ca9ce3e0ef4632374378a2417fa86f2891c119ddb41abe27c7070cd","dbscan","sphx_glr_plot_dbscan_002.png"],["hdbscan-mst.png","769261ea803560add0ee71441b4085fde4d86e2d5c40922d64a8b1873aa789a6","hdb","how_hdbscan_works_10_1.png"],["hdbscan-condensed-selected.png","65613bb03af4ddfedaa948d2ab12df7af72d2a7117fe72bf136ab554b6e57a6d","hdb","how_hdbscan_works_18_1.png"],["hdbscan-mutual-reachability.svg","c6b8a7267e7e5a2346b2f0167ed7c3ae9234df6575e7aa483f007d5691d5dca5","hdb","distance4a.svg"]] as const;
     const groups = {"kmeans":{"url":"https://inria.github.io/scikit-learn-mooc/python_scripts/clustering_kmeans.html","page":"05 Источники/Originals/clustering-2026-10-21/kmeans-page.html","hash":"4fd9942bb6f2c21ec2b31fd017829199228b76addc3cbfde6c6c82bef1b9e224"},"density":{"url":"https://inria.github.io/scikit-learn-mooc/python_scripts/clustering_hdbscan.html","page":"05 Источники/Originals/clustering-2026-10-21/density-page.html","hash":"98ee391e575fea90a90b63592ba7bd4172e25dc890dae1b262ea57b3c11ebbc6"},"dbscan":{"url":"https://scikit-learn.org/stable/modules/clustering.html#dbscan","page":"05 Источники/Originals/clustering-2026-10-21/sklearn-guide.html","hash":"3c8d5481d8092e86fe47ff269e134510dedd006360aeaf30b9b982c91a01de1c"},"hdb":{"url":"https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html","page":"05 Источники/Originals/clustering-2026-10-21/hdbscan-how.rst","hash":"ddd3ac9417127b4509844b8ff4e967259f60802ed29d4a5d3a145724ee0d8f26"}} as const;
@@ -3598,6 +6417,28 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
     expect(entry.crop_box_px).toBeUndefined();
     expect(entry.metadata_status).toBe('verified');
     expect(pngDimensions(resolve(repositoryRoot, entry.asset))).toEqual([600, 300]);
+    expectDecodableImage(resolve(repositoryRoot, entry.asset));
+    return;
+  }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/classical-ml-evaluation/regression-transformed-target.png') {
+    const hash = '42c821c57965432baa2d5f05d48516ebf94f928f0fabdc42497b7dc019373d9d';
+    const pin = '93840904e26a215ecddf1a30e9a5eb920284fb29';
+    expect(entry.sha256).toBe(hash);
+    expect(sha256(resolve(repositoryRoot, entry.asset))).toBe(hash);
+    expect(entry.commit).toBe(pin);
+    expect(entry.source_url).toBe('https://github.com/INRIA/scikit-learn-mooc/blob/' + pin + '/python_scripts/metrics_regression.html');
+    expect(entry.source_image_url).toBe('https://raw.githubusercontent.com/INRIA/scikit-learn-mooc/' + pin + '/_images/' + hash + '.png');
+    expect(entry.author).toBe('INRIA, scikit-learn MOOC contributors');
+    expect(entry.license).toBe('CC BY 4.0');
+    expect(entry.license_url).toBe('https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE');
+    expect(entry.license_evidence).toBe('05 Источники/Originals/train-validation-test-2026-10-21/mooc-LICENSE.txt');
+    expect(entry.license_evidence_sha256).toBe('f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f');
+    expect(sha256(resolve(repositoryRoot, entry.license_evidence!))).toBe(entry.license_evidence_sha256);
+    expect(entry.derivation).toBe('source-raster-copy');
+    expect(entry.provenance_confirmation).toBe('pinned-upstream-repository');
+    expect(entry.metadata_status).toBe('verified');
+    expect(entry.crop_box_px).toBeUndefined();
+    expect(pngDimensions(resolve(repositoryRoot, entry.asset))).toEqual([1079, 585]);
     expectDecodableImage(resolve(repositoryRoot, entry.asset));
     return;
   }
@@ -4792,6 +7633,199 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
     }
     return;
   }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/resolution-2026-11-09/llava-onevision-anyres.png') {
+    const source = '05 Источники/Originals/resolution-2026-10-20/onevision-v1-higher_res.png';
+    const abstract = '05 Источники/Originals/resolution-2026-10-20/onevision-v1-abstract.html';
+    const hash = 'db33ded7e7e6fb072235d58b79df115555753d29606ede070df2ac0365c79b1f';
+    expect(entry).toMatchObject({
+      author: 'Bo Li et al.', source_url: 'https://arxiv.org/html/2408.03326v1#S3.F2', source_image_url: 'https://arxiv.org/html/2408.03326v1/higher_res.png',
+      source_figure_label: 'Figure 2, both panels', source_asset: source, source_asset_sha256: hash,
+      sha256: hash, bytes: 361765, dimensions_px: [1899, 1319], license: 'CC BY-NC-ND 4.0',
+      license_url: 'https://creativecommons.org/licenses/by-nc-nd/4.0/',
+      license_evidence: abstract, license_evidence_sha256: 'e57b651eb1e0d03510ed23de758743cdfc3f8c4ce9d8746a397d45bb8495785d',
+      derivation: 'source-raster-copy', rights_status: 'source-license-verified',
+      provenance_confirmation: 'licensed-paper-figure', metadata_status: 'verified',
+      used_in: ['00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md', 'en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md'],
+    });
+    expect(entry.crop_box_px).toBeUndefined();
+    const path = resolve(repositoryRoot, entry.asset);
+    const png = readFileSync(path);
+    expect(sha256(path)).toBe(hash);
+    expect(validateRenderedPngBytes(png)).toEqual([1899, 1319]);
+    expect(png.length).toBe(361765);
+    if (existsSync(resolve(repositoryRoot, source)))
+      expect(png.equals(readFileSync(resolve(repositoryRoot, source)))).toBe(true);
+    if (existsSync(resolve(repositoryRoot, abstract)))
+      expect(sha256(resolve(repositoryRoot, abstract))).toBe(entry.license_evidence_sha256);
+    return;
+  }
+  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/vlm-training-2026-11-09/')) {
+    const figures = {
+      'prismatic-figure4.png': { number: 4, hash: '49aca74ebdc08c0627538ce329c7bad8fc32e280cfd64691095126852bcdcbe2', crop: [270, 310, 2718, 1165] },
+      'prismatic-figure5.png': { number: 5, hash: 'aa5f932da53815588fae3af294f178148e3c321ac45969424c7639d9fb4decfb', crop: [351, 1465, 1449, 2465] },
+    };
+    const spec = figures[entry.asset.split('/').at(-1)! as keyof typeof figures];
+    expect(spec).toBeDefined();
+    const source = '05 Источники/Originals/vlm-training-2026-10-20/karamcheti24a.pdf';
+    const license = '05 Источники/Originals/edge-2026-10-20/pmlr-license.html';
+    expect(entry).toMatchObject({
+      author: 'Siddharth Karamcheti, Suraj Nair, Ashwin Balakrishna, Percy Liang, Thomas Kollar, Dorsa Sadigh',
+      source_url: 'https://proceedings.mlr.press/v235/karamcheti24a.html',
+      source_image_url: 'https://raw.githubusercontent.com/mlresearch/v235/main/assets/karamcheti24a/karamcheti24a.pdf#page=5',
+      source_figure_label: `Figure ${spec.number}, PDF p. 5`,
+      source_asset: source, source_asset_sha256: '5b19876fd49109700321a90abf00025227b17d82131d052919645ea7b2245003', sha256: spec.hash,
+      license: 'CC BY 4.0', license_url: 'https://creativecommons.org/licenses/by/4.0/',
+      license_evidence: license, license_evidence_sha256: '1c8123a6c840ca2752e383f0924fa23ba38552140a2cc54f69ea9df5acfcdd3d',
+      derivation: 'pdf-page-render-crop', rights_status: 'source-license-verified',
+      provenance_confirmation: 'licensed-paper-figure', metadata_status: 'verified',
+      source_page: 5, render_dpi: 360, render_page_size_px: [3060, 3960], crop_box_px: spec.crop,
+      used_in: ['00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md', 'en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data.md'],
+    });
+    const path = resolve(repositoryRoot, entry.asset);
+    const [x0, y0, x1, y1] = spec.crop;
+    expect(sha256(path)).toBe(spec.hash);
+    expect(validateRenderedPngBytes(readFileSync(path))).toEqual([x1 - x0, y1 - y0]);
+    for (const [path, hash] of [[source, entry.source_asset_sha256], [license, entry.license_evidence_sha256]]) {
+      const file = resolve(repositoryRoot, path);
+      if (existsSync(file)) expect(sha256(file)).toBe(hash);
+    }
+    return;
+  }
+  const connectorPaper = entry.asset === '00 Учебник/Assets/Figures/curated/connectors-2026-11-09/llava-figure1-projector.png';
+  if (connectorPaper || entry.asset.startsWith('00 Учебник/Assets/Figures/curated/vision-objectives-2026-11-09/')) {
+    const figures = {
+      'llava-figure1-projector.png': {
+        author: 'Haotian Liu, Chunyuan Li, Qingyang Wu, Yong Jae Lee',
+        paper: 'https://arxiv.org/abs/2304.08485v2',
+        figure: 'https://arxiv.org/pdf/2304.08485v2#page=4',
+        pdf: '05 Источники/Originals/connectors-2026-10-20/llava.pdf',
+        pdfHash: 'dc8bace378a282ea78caa9b5959306202fbfa3b8cedaf8a66541a9af18f4d3bf',
+        pngHash: '310746447f5ad4ae00a2e54407bed5845795221ca7b863779edacb3b86d80f44',
+        evidence: '05 Источники/Originals/connectors-2026-10-20/llava-v2-abstract.html',
+        evidenceHash: 'ca833da8c03d0b5c3d8be5bb004e9e49c94f4ac8f5161efdb1297f68fa5f903c',
+        page: 4, crop: [804, 1416, 2258, 1912],
+      },
+      'clip-figure1-training-and-zero-shot.png': {
+        author: 'Alec Radford et al.',
+        paper: 'https://proceedings.mlr.press/v139/radford21a.html',
+        figure: 'https://proceedings.mlr.press/v139/radford21a/radford21a.pdf#page=2',
+        pdf: '05 Источники/Originals/vision-encoders-2026-10-20/clip.pdf',
+        pdfHash: '2a4952960f350e50a3a4a847371b80b8aaa09ba82d1c2a8f6b30450e392a1fe4',
+        pngHash: '351759e7ee8bd134f865e7e9575af9f68a7f9c8b9bb9beb2fc1279c49db5419a',
+        evidence: '05 Источники/Originals/edge-2026-10-20/pmlr-license.html',
+        evidenceHash: '1c8123a6c840ca2752e383f0924fa23ba38552140a2cc54f69ea9df5acfcdd3d',
+        page: 2, crop: [265, 324, 2725, 1213],
+      },
+      'siglip-parallelism.png': {
+        author: 'Xiaohua Zhai, Basil Mustafa, Alexander Kolesnikov, Lucas Beyer',
+        paper: 'https://arxiv.org/abs/2303.15343v4',
+        figure: 'https://arxiv.org/pdf/2303.15343v4#page=3',
+        pdf: '05 Источники/Originals/vision-encoders-2026-10-20/siglip.pdf',
+        pdfHash: '2efade8de3baeffe9eba759aab9f510ea8f8ac3c365f02f0da75d9baf9ffa2db',
+        pngHash: '6e373e66257439d1ad7adb36b6b71c77d55b7f6562f620c3f41953873e679aa1',
+        evidence: '05 Источники/Originals/vision-encoders-2026-10-20/siglip-abstract.html',
+        evidenceHash: 'bb4246ec588170bc529126b69c34c98320cf1ca31109db74433e4401cf3fdcb7',
+        page: 3, crop: [235, 342, 2745, 1461],
+      },
+    };
+    const name = entry.asset.split('/').at(-1)!;
+    const spec = figures[name as keyof typeof figures];
+    expect(spec).toBeDefined();
+    expect(entry).toMatchObject({
+      author: spec.author, source_url: spec.paper, source_image_url: spec.figure,
+      source_asset: spec.pdf, source_asset_sha256: spec.pdfHash, sha256: spec.pngHash,
+      license_evidence: spec.evidence, license_evidence_sha256: spec.evidenceHash,
+      license: 'CC BY 4.0', license_url: 'https://creativecommons.org/licenses/by/4.0/',
+      rights_status: 'source-license-verified', metadata_status: 'verified',
+      provenance_confirmation: 'licensed-paper-figure', derivation: 'pdf-page-render-crop',
+      source_figure_label: `Figure 1, PDF p. ${spec.page}`,
+      source_page: spec.page, render_dpi: 360, render_page_size_px: [3060, 3960],
+      crop_box_px: spec.crop,
+      used_in: connectorPaper ? ['00 Учебник/16 Multimodal Models/64a Connectors и fusion.md',
+        'en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md'] : ['00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md',
+        'en/00 Textbook/16 Multimodal Models/64 Multimodal models.md'],
+    });
+    const image = resolve(repositoryRoot, entry.asset);
+    const [x0, y0, x1, y1] = spec.crop;
+    expect(sha256(image)).toBe(spec.pngHash);
+    expect(validateRenderedPngBytes(readFileSync(image))).toEqual([x1 - x0, y1 - y0]);
+    for (const [path, digest] of [[spec.pdf, spec.pdfHash], [spec.evidence, spec.evidenceHash]]) {
+      const original = resolve(repositoryRoot, path);
+      if (existsSync(original)) expect(sha256(original)).toBe(digest);
+    }
+    return;
+  }
+  const smoothingFigure = entry.asset.startsWith('00 Учебник/Assets/Figures/curated/robustness-smoothing-2026-11-09/');
+  const genderShadesFigure = entry.asset === '00 Учебник/Assets/Figures/curated/responsible-audit-2026-11-09/gender-shades-figure3.png';
+  if (smoothingFigure || genderShadesFigure
+    || entry.asset === '00 Учебник/Assets/Figures/curated/fedbuff-2026-11-09/fedbuff-concurrency-figure2.png'
+    || entry.asset === '00 Учебник/Assets/Figures/curated/privacy-audit-2026-11-09/rmia-low-fpr-figure1.png') {
+    const smoothing: Record<string, {page: number; crop: number[]; pngHash: string}> = {
+      'smoothing-votes-figure1.png': {page: 1, crop: [2305, 1300, 4135, 2345],
+        pngHash: '08827e2c532a088188b2e79d63707212155d7be685e88b47fa14882d2d76b5e2'},
+      'smoothing-halfspace-figure3.png': {page: 5, crop: [430, 500, 2190, 1375],
+        pngHash: 'fa280ef5297f4e3151189001eb4932651800838a183634f263936b988813c17b'},
+    };
+    const spec = smoothingFigure ? {
+      author: 'Jeremy Cohen, Elan Rosenfeld, J. Zico Kolter',
+      url: 'https://proceedings.mlr.press/v97/cohen19c.html',
+      pdf: '05 Источники/Originals/robustness-smoothing-2026-11-09/cohen19c.pdf',
+      pdfHash: '409715d2ae1cd52d39b0a78ed1227edbdaa575be76dd40ab66b9869e97de4551',
+      ...smoothing[entry.asset.split('/').at(-1)!],
+    } : entry.asset.endsWith('fedbuff-concurrency-figure2.png') ? {
+      author: 'John Nguyen, Kshitiz Malik, Hongyuan Zhan, Ashkan Yousefpour, Mike Rabbat, Mani Malek, Dzmitry Huba',
+      url: 'https://proceedings.mlr.press/v151/nguyen22b.html',
+      pdf: '05 Источники/Originals/fedbuff-2026-11-09/nguyen22b.pdf',
+      pdfHash: '3c2764067cecb4727fc33dc9de9c3a73f31d2794cb7f557457506faf470a474b',
+      pngHash: 'f9457ab23f9d443a7b4805da9e0cc278ab2d0a1c48cb2139f6b292aa5ce8333b',
+      page: 3, crop: [455, 2090, 2275, 2840],
+    } : genderShadesFigure ? {
+      author: 'Joy Buolamwini, Timnit Gebru',
+      url: 'https://proceedings.mlr.press/v81/buolamwini18a.html',
+      pdf: '05 Источники/Originals/responsible-2026-10-20/buolamwini18a.pdf',
+      pdfHash: 'e9e6d944715d14b03c383b1e1e2f4f7aa7ffaa9bd610708bd06645f03c64e7fa',
+      pngHash: '3c0aed571f22a84f1c1171acf44a46fdf56636855af75fcbb094c1e28821543f',
+      page: 6, crop: [1544, 445, 2621, 825],
+    } : {
+      author: 'Sajjad Zarifzadeh, Philippe Liu, Reza Shokri',
+      url: 'https://proceedings.mlr.press/v235/zarifzadeh24a.html',
+      pdf: '05 Источники/Originals/privacy-audit-2026-11-09/zarifzadeh24a.pdf',
+      pdfHash: 'd026d8b77211e614d6ea803fb3908f2890daf64835b03b8ce89a969d4a8e6c87',
+      pngHash: '518fa5500bd0d38d58d5b595a408bf23ea6a46908adc0cc0d7162e48a77e9646',
+      page: 2, crop: [665, 480, 1940, 1650],
+    };
+    expect(entry.author).toBe(spec.author);
+    expect(entry.source_url).toBe(spec.url);
+    expect(entry.source_asset).toBe(spec.pdf);
+    expect(entry.source_asset_sha256).toBe(spec.pdfHash);
+    expect(entry.license_evidence).toBe('05 Источники/Originals/edge-2026-10-20/pmlr-license.html');
+    expect(entry.license_evidence_sha256).toBe('1c8123a6c840ca2752e383f0924fa23ba38552140a2cc54f69ea9df5acfcdd3d');
+    expect(entry.license).toBe('CC BY 4.0');
+    expect(entry.license_url).toBe('https://creativecommons.org/licenses/by/4.0/');
+    expect(entry.derivation).toBe('pdf-page-render-crop');
+    expect(entry.provenance_confirmation).toBe('licensed-paper-figure');
+    expect(entry.metadata_status).toBe('verified');
+    expect(entry.source_page).toBe(spec.page);
+    expect(entry.crop_box_px).toEqual(spec.crop);
+    expect(entry.render_page_size_px).toEqual(genderShadesFigure ? [3060, 3960] : [4637, 6000]);
+    if (genderShadesFigure) {
+      expect(entry.render_dpi).toBe(360);
+      expect(entry.source_image_url).toBe('https://proceedings.mlr.press/v81/buolamwini18a/buolamwini18a.pdf#page=6');
+      expect(entry.rights_status).toBe('source-license-verified');
+    }
+    const image = resolve(repositoryRoot, entry.asset);
+    expect(sha256(image)).toBe(spec.pngHash);
+    expect(sha256(image)).toBe(entry.sha256);
+    const [x0, y0, x1, y1] = spec.crop;
+    expect(validateRenderedPngBytes(readFileSync(image))).toEqual([x1 - x0, y1 - y0]);
+    // The local checker also re-renders the original; the archive is not a
+    // prerequisite for checking this image and its provenance in a checkout.
+    const source = resolve(repositoryRoot, entry.source_asset!);
+    if (existsSync(source)) expect(sha256(source)).toBe(entry.source_asset_sha256);
+    const agreement = resolve(repositoryRoot, entry.license_evidence!);
+    if (existsSync(agreement)) expect(sha256(agreement)).toBe(entry.license_evidence_sha256);
+    return;
+  }
   if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/mlops-review-2026-10/')) {
     const prefix = '05 Источники/Originals/mlops-2026-10-20/';
     const name = entry.asset.split('/').at(-1)!;
@@ -5473,6 +8507,186 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
     expectDecodableImage(resolve(repositoryRoot, entry.asset));
     return;
   }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/harvard-robustness-2026-11-09/fgsm-geometry.svg') {
+    const source = 'c6861733e4dd4202ae4a396c96e3abe87ae103c7';
+    const release = '7367c67c2afd6cbb42b9b2ac98cc673d2f5bba37';
+    const hash = 'a27bd92b8a2649abed8e2913ace4d3f8bcb61ac0f5195aa1f1966444604c633b';
+    const repo = 'https://github.com/harvard-edge/cs249r_book/blob/';
+    const raw = 'https://raw.githubusercontent.com/harvard-edge/cs249r_book/';
+    expect(entry).toMatchObject({
+      commit: source, source_render_commit: release, sha256: hash, source_asset_sha256: hash,
+      source_url: repo + source + '/books/vol2/14_robust_ai/14_robust_ai.qmd#L1232',
+      source_image_url: raw + source + '/books/vol2/14_robust_ai/images/svg/gradient-attack.svg',
+      source_published_image_url: raw + release + '/vol2/14_robust_ai/images/svg/gradient-attack.svg',
+      license_evidence: repo + source + '/books/vol2/tex/copyright.tex',
+      license: 'CC BY-NC-ND 4.0', license_url: 'https://creativecommons.org/licenses/by-nc-nd/4.0/',
+      derivation: 'source-svg-copy', metadata_status: 'verified', provenance_confirmation: 'source-license-verified',
+    });
+    expect(entry.crop_box_px).toBeUndefined();
+    expect(sha256(resolve(repositoryRoot, entry.asset))).toBe(hash);
+    expectDecodableImage(resolve(repositoryRoot, entry.asset));
+    return;
+  }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/scaling-lifetime-2026-11-14/sardana24a-figure5.png') {
+    // Figure 5 is the RGB image object in the paper, not a screenshot of a lecture.
+    expect(entry).toMatchObject({
+      source_url: 'https://proceedings.mlr.press/v235/sardana24a.html',
+      source_image_url: 'https://raw.githubusercontent.com/mlresearch/v235/main/assets/sardana24a/sardana24a.pdf#page=6',
+      source_asset: '05 Источники/Originals/llama-scaling-2026-11-09/sardana24a.pdf',
+      source_asset_sha256: 'cd66b62454f51dcee723ba98746f7ae37e5ff0c7dce2441b9fe3d6decd188952',
+      source_page: 6, source_pdf_object: 32, dimensions_px: [1710, 1314],
+      sha256: '2eeafe50cf15461f81656df20cfbe90302b4ec97bdb09f7a1b7834892038094c',
+      license: 'CC BY 4.0', license_url: 'https://creativecommons.org/licenses/by/4.0/',
+      license_evidence_url: 'https://proceedings.mlr.press/pmlr-license-agreement.html',
+      derivation: 'pdf-embedded-raster-extraction', rights_status: 'source-license-verified',
+      provenance_confirmation: 'source-license-verified', metadata_status: 'verified',
+      used_in: ['00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md'],
+    });
+    expect(entry.crop_box_px).toBeUndefined();
+    expect(entry.render_dpi).toBeUndefined();
+    const source = resolve(repositoryRoot, entry.source_asset!);
+    if (existsSync(source)) expect(sha256(source)).toBe(entry.source_asset_sha256);
+    const target = resolve(repositoryRoot, entry.asset);
+    const png = readFileSync(target);
+    expect(png.length).toBe(entry.bytes);
+    expect(sha256(target)).toBe(entry.sha256);
+    expect(validateRenderedPngBytes(png)).toEqual(entry.dimensions_px);
+    const chapter = readFileSync(resolve(repositoryRoot, entry.used_in![0]!), 'utf8');
+    for (const reference of [entry.asset + '|', entry.source_image_url, entry.license_url])
+      expect(chapter).toContain(reference);
+    return;
+  }
+  const aclPaper = entry.source_url?.match(/^https:\/\/aclanthology\.org\/\d{4}\.[\w-]+\.\d+\/$/);
+  const htmlLocation = aclPaper && entry.derivation === 'source-svg-copy' ? entry.figure_url : entry.source_url;
+  const htmlPaper = htmlLocation?.match(/^https:\/\/arxiv\.org\/html\/(\d{4}\.\d{4,5}v[1-9]\d*)(?:#([\w.:-]+))?$/);
+  if (!entry.source_asset && htmlPaper && entry.provenance_confirmation === 'source-license-verified') {
+    // The canonical copy may be the downloaded HTML figure, rather than
+    // a second local copy. Bind the figure and evidence to this paper version.
+    const paper = htmlPaper[1]!;
+    const article = 'https://arxiv.org/html/' + paper;
+    const image = entry.source_image_url ?? '';
+    const target = resolve(repositoryRoot, entry.asset);
+    requireNonEmptyString(entry.author, 'author');
+    requireNonEmptyString(entry.modifications, 'modifications');
+    const cc = entry.license?.match(/^CC (BY(?:-NC)?(?:-SA|-ND)?) 4\.0$/);
+    expect(cc, entry.asset).toBeTruthy();
+    expect(entry.license_url).toBe('https://creativecommons.org/licenses/' + cc![1]!.toLowerCase() + '/4.0/');
+    expect(entry.metadata_status).toBe('verified');
+    const evidence = entry.license_evidence ?? entry.license_evidence_url ?? article;
+    if (evidence.startsWith('https://')) {
+      expect(aclPaper
+        ? [article, 'https://arxiv.org/abs/' + paper]
+        : [article]).toContain(evidence);
+    } else {
+      expect(entry.license_evidence_sha256).toMatch(/^[a-f0-9]{64}$/);
+      if (entry.source_page_snapshot) {
+        expect(evidence).toBe(entry.source_page_snapshot);
+        expect(sha256(resolve(repositoryRoot, evidence))).toBe(entry.license_evidence_sha256);
+      } else {
+        // An independently archived HTML license page need not duplicate the
+        // source-page field. Public clones may not have the local archive.
+        expect(evidence).toMatch(/^05 Источники\/Originals\/[\w-]+\/[\w.-]+\.html?$/);
+        const snapshot = resolve(repositoryRoot, evidence);
+        if (existsSync(snapshot)) {
+          expect(sha256(snapshot)).toBe(entry.license_evidence_sha256);
+          const html = readFileSync(snapshot, 'utf8');
+          expect(html).toContain('License: ' + entry.license);
+          expect(html).toContain('id="' + htmlPaper[2] + '"');
+          expect(html).toContain(image.slice('https://arxiv.org/html/'.length));
+        }
+      }
+    }
+    if (['source-svg-copy', 'source-raster-copy'].includes(entry.derivation ?? '')) {
+      const file = image.slice(article.length + 1);
+      const extension = entry.derivation === 'source-svg-copy' ? 'svg' : '(png|jpg|jpeg|webp)';
+      const stem = extension === 'svg' ? '[a-zA-Z0-9_-]+(?:\\.[a-zA-Z0-9_-]+)*' : '[a-zA-Z0-9_-]+';
+      expect(image.startsWith(article + '/')).toBe(true);
+      expect(file).toMatch(new RegExp(`^(?:[a-zA-Z0-9_-]+/)*${stem}\\.${extension}$`));
+      expect(entry.asset).toMatch(new RegExp(`\\.${extension}$`));
+      if (entry.source_asset_sha256) expect(entry.sha256).toBe(entry.source_asset_sha256);
+      expect(entry.crop_box_px).toBeUndefined();
+    } else {
+      expect(entry.source_asset_sha256).toMatch(/^[a-f0-9]{64}$/);
+      expect(entry.asset).toMatch(/\.png$/);
+      expect(pngDimensions(target)).toEqual(entry.dimensions_px);
+      if (entry.derivation === 'source-pdf-render') {
+        expect(image).toBe('https://arxiv.org/src/' + paper);
+        expect(entry.source_archive_member).toMatch(/^(?:[a-zA-Z0-9_-]+\/)*[a-zA-Z0-9_-]+\.pdf$/);
+        expect(entry.render_dpi).toBeGreaterThan(0);
+        expect(entry.crop_box_px).toBeUndefined();
+      } else {
+        expect(entry.derivation).toBe('pdf-page-render-crop');
+        expect(entry.source_page).toBeGreaterThan(0);
+        expect(image).toBe('https://arxiv.org/pdf/' + paper + '#page=' + entry.source_page);
+      }
+    }
+    expect(entry.sha256).toMatch(/^[a-f0-9]{64}$/);
+    expect(sha256(target)).toBe(entry.sha256);
+    expectDecodableImage(target);
+    if (entry.derivation === 'source-svg-copy' && entry.bytes !== undefined && htmlPaper[2]) {
+      const svg = readFileSync(target, 'utf8');
+      expect(Buffer.byteLength(svg)).toBe(entry.bytes);
+      expect(entry.source_asset_sha256).toBe(entry.sha256);
+      expect(svg).not.toMatch(/<\s*(?:script|foreignObject)[\s>]|[\s]on[a-z]+\s*=/i);
+      if (entry.source_viewbox) {
+        const viewBox = svg.match(/<svg\b[^>]*\bviewBox="([^"]+)"/s)?.[1]?.split(/[\s,]+/).map(Number);
+        expect(viewBox).toEqual(entry.source_viewbox);
+      }
+      for (const owner of entry.used_in ?? []) {
+        const chapter = readFileSync(resolve(repositoryRoot, owner), 'utf8');
+        for (const reference of [entry.asset + '|', htmlLocation, image, entry.license_url])
+          expect(chapter).toContain(reference);
+      }
+    }
+    return;
+  }
+  if (/\/curated\/astra\/original-(?:env|sft-pipeline)\.png$/.test(entry.asset)) {
+    const commit = 'bdf6a46a130118e039aadcaeb46724d278383589';
+    const name = entry.asset.split('/').at(-1)!.replace('original-', '');
+    const repo = 'https://github.com/LianjiaTech/astra/blob/' + commit;
+    const notice = 'site/public/licenses/astra-bdf6a46-Apache-2.0.txt';
+    expect(entry).toMatchObject({
+      commit, source_url: repo + '/assets/' + name,
+      source_image_url: 'https://raw.githubusercontent.com/LianjiaTech/astra/' + commit + '/assets/' + name,
+      license: 'Apache-2.0', license_url: repo + '/licenses/LICENSE',
+      license_evidence: notice, public_license_copy: notice,
+      metadata_status: 'verified', provenance_confirmation: 'source-license-verified',
+      derivation: 'source-raster-copy',
+    });
+    expect(sha256(resolve(repositoryRoot, notice))).toBe(entry.license_evidence_sha256);
+    expect(sha256(resolve(repositoryRoot, entry.asset))).toBe(entry.sha256);
+    expect(pngDimensions(resolve(repositoryRoot, entry.asset))).toEqual(entry.dimensions_px);
+    return;
+  }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/atlas-courses-official/qwen3-post-training-pipeline.png') {
+    // Preserve the historical crop without treating the source paper as reuse permission.
+    expect(entry).toMatchObject({
+      source_url: 'https://arxiv.org/pdf/2505.09388',
+      source_asset: 'raw/papers/qwen3/paper.pdf',
+      provenance_confirmation: 'original-paper-figure',
+      publication_status: 'retired', used_in: [],
+      rights_status: 'paper-figure-license-unverified', metadata_status: 'needs-confirmation',
+      derivation: 'pdf-page-render-crop',
+    });
+    expectDecodableImage(resolve(repositoryRoot, entry.asset));
+    return;
+  }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/moba/moba-running-example.png') {
+    const commit = 'b5d58363311d3ca946f1ec444182727c15e338b5';
+    const notice = 'site/public/licenses/moonshot-moba-b5d58363-MIT.txt';
+    // Figure explanation is in the paper; the image and its license are in the author repository.
+    expect(entry).toMatchObject({
+      commit, source_url: 'https://arxiv.org/html/2502.13189v1#S2.F1',
+      source_image_url: 'https://raw.githubusercontent.com/MoonshotAI/MoBA/' + commit + '/figures/running_example.png',
+      license: 'MIT', license_url: 'https://github.com/MoonshotAI/MoBA/blob/' + commit + '/LICENSE',
+      license_evidence: notice, metadata_status: 'verified',
+      provenance_confirmation: 'pinned-upstream-repository', derivation: 'source-image-copy',
+    });
+    expect(sha256(resolve(repositoryRoot, notice))).toBe(entry.license_evidence_sha256);
+    expect(sha256(resolve(repositoryRoot, entry.asset))).toBe(entry.sha256);
+    expect(pngDimensions(resolve(repositoryRoot, entry.asset))).toEqual(entry.dimensions_px);
+    return;
+  }
   if (entry.provenance_confirmation === 'source-license-verified'
     && (!entry.source_asset || ((entry.source_asset.startsWith('05 Источники/Originals/')
       || entry.source_asset === entry.asset)
@@ -5524,6 +8738,68 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
     validateRenderedPngBytes(readFileSync(resolve(repositoryRoot, entry.asset)));
     return;
   }
+
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/profiling-2026-11-04/py-spy-flamegraph.svg') {
+    const pin='7a7ac96e96e0f9b4ba3eee80de3f4d255698170b';
+    const expected={
+      author:'Ben Frederickson',license:'MIT',commit:pin,derivation:'source-svg-copy',
+      source_url:`https://github.com/benfred/py-spy/blob/${pin}/README.md#record`,
+      source_image_url:`https://raw.githubusercontent.com/benfred/py-spy/${pin}/images/flamegraph.svg`,
+      source_asset:'publishing/fixtures/profiling-originals/py-spy-flamegraph.svg',
+      source_asset_sha256:'592970e72ed1c0f0f6e026a63187ffef3e91eab45d0c5457ca6649388aa3de9a',
+      sha256:'592970e72ed1c0f0f6e026a63187ffef3e91eab45d0c5457ca6649388aa3de9a',
+      source_page_snapshot:'publishing/fixtures/profiling-originals/py-spy-README.md',
+      source_page_sha256:'b94fab51768821fca5fdea943a80d799fd046d9bfa3cb21623cffd900f57567f',
+      license_url:`https://github.com/benfred/py-spy/blob/${pin}/LICENSE`,
+      license_evidence:'site/public/licenses/py-spy-7a7ac96e-MIT.txt',
+      license_evidence_sha256:'80bbb8731db59cd835f59fcd06f127953804bb511c8487fd265d96c7c702cd00',
+      metadata_status:'verified',provenance_confirmation:'pinned-upstream-repository'
+    };
+    for(const [key,value]of Object.entries(expected))
+      expect((entry as unknown as Record<string,unknown>)[key]).toBe(value);
+    for(const [file,digest]of [[entry.asset,entry.sha256],[entry.source_asset,entry.source_asset_sha256],
+      [entry.source_page_snapshot,entry.source_page_sha256],[entry.license_evidence,entry.license_evidence_sha256]])
+      expect(sha256(resolve(repositoryRoot,file!))).toBe(digest);
+    expect(readFileSync(resolve(repositoryRoot,entry.asset))).toEqual(
+      readFileSync(resolve(repositoryRoot,entry.source_asset!)));
+    expect(entry.crop_box_px).toBeUndefined();
+    expect(entry.source_viewbox).toEqual([0,0,1200,182]);
+    expectDecodableImage(resolve(repositoryRoot,entry.asset));
+    return;
+  }
+  if (entry.asset === '00 Учебник/Assets/Figures/curated/dali-2026-11-04/two_readers.svg') {
+    const pin = '5b33fee1968ba069a9ed04965fd2af5f0025de7e';
+    const packet = 'publishing/fixtures/dali-originals/';
+    const expected = {
+      source_url: `https://github.com/NVIDIA/DALI/blob/${pin}/docs/pipeline.rst`,
+      source_image_url: `https://raw.githubusercontent.com/NVIDIA/DALI/${pin}/docs/images/two_readers.svg`,
+      commit: pin, derivation: 'source-svg-copy', license: 'Apache-2.0',
+      author: 'NVIDIA DALI contributors',
+      source_asset: packet + 'two_readers.svg',
+      source_asset_sha256: '3a04306186cc2d4c1800a1c9e9b2bd7051646ec35c4054ace1cac1225da17214',
+      sha256: '3a04306186cc2d4c1800a1c9e9b2bd7051646ec35c4054ace1cac1225da17214',
+      source_page_snapshot: packet + 'pipeline.rst',
+      source_page_sha256: '3ca2cc06792e49f6f9280bf9f745a85938c603d53bb01b44743d1414eff04be3',
+      license_url: `https://github.com/NVIDIA/DALI/blob/${pin}/LICENSE`,
+      license_evidence: 'site/public/licenses/nvidia-dali-5b33fee1-Apache-2.0.txt',
+      license_evidence_sha256: 'bea1b4266f1499fa4bbb16d6e7577e6b5b53d1ef010835a9d460876022cc8722',
+      metadata_status: 'verified', provenance_confirmation: 'pinned-upstream-repository'
+    };
+    for (const [key,value] of Object.entries(expected))
+      expect((entry as unknown as Record<string,unknown>)[key]).toBe(value);
+    for (const [file,digest] of [[entry.asset,entry.sha256],
+      [entry.source_asset,entry.source_asset_sha256],
+      [entry.source_page_snapshot,entry.source_page_sha256],
+      [entry.license_evidence,entry.license_evidence_sha256]])
+      expect(sha256(resolve(repositoryRoot,file!))).toBe(digest);
+    expect(readFileSync(resolve(repositoryRoot,entry.asset))).toEqual(
+      readFileSync(resolve(repositoryRoot,entry.source_asset!)));
+    expect(entry.crop_box_px).toBeUndefined();
+    expect(entry.source_viewbox).toEqual([0,0,143.99135,87.982686]);
+    expectDecodableImage(resolve(repositoryRoot,entry.asset));
+    return;
+  }
+
   // A raster copied from a pinned repository can retain its original tracked
   // binary as well as the published copy, without pretending to be a PDF render.
   if (entry.provenance_confirmation === 'pinned-upstream-repository'
@@ -5557,15 +8833,29 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
   }
   if (entry.derivation === 'source-svg-style-bundle') {
     const pin = 'eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc';
-    const sourcePath = 'docs/features/low_precision_training/fp8_delayed_scaling/img/scaling_comparison.svg';
+    const originals: Record<string, { path: string; svg: string; css: string }> = {
+      '00 Учебник/Assets/Figures/curated/precision-review-2026-09/te-current-delayed-scaling.svg': {
+        path: 'docs/features/low_precision_training/fp8_delayed_scaling/img/scaling_comparison.svg',
+        svg: '05 Источники/Originals/precision-2026-10-23/scaling_comparison.svg',
+        css: '05 Источники/Originals/precision-2026-10-23/diagram-colors.css'
+      },
+      '00 Учебник/Assets/Figures/curated/precision-2026-11/te-mxfp8-row-column.svg': {
+        path: 'docs/features/low_precision_training/mxfp8/img/mxfp8_row_col.svg',
+        svg: 'publishing/fixtures/precision-originals/mxfp8_row_col.svg',
+        css: 'publishing/fixtures/precision-originals/diagram-colors.css'
+      }
+    };
+    expect(originals[entry.asset], 'Only the two reviewed complete TE diagrams are allowed').toBeDefined();
+    const original = originals[entry.asset]!;
+    const sourcePath = original.path;
     expect(entry.provenance_confirmation).toBe('pinned-upstream-repository');
     expect(entry.commit).toBe(pin);
     expect(entry.license).toBe('Apache-2.0');
     expect(entry.license_url).toBe(`https://github.com/NVIDIA/TransformerEngine/blob/${pin}/LICENSE`);
     expect(entry.source_url).toBe(`https://github.com/NVIDIA/TransformerEngine/blob/${pin}/${sourcePath}`);
     expect(entry.source_image_url).toBe(`https://raw.githubusercontent.com/NVIDIA/TransformerEngine/${pin}/${sourcePath}`);
-    expect(entry.source_asset).toBe('05 Источники/Originals/precision-2026-10-23/scaling_comparison.svg');
-    expect(entry.source_stylesheet_asset).toBe('05 Источники/Originals/precision-2026-10-23/diagram-colors.css');
+    expect(entry.source_asset).toBe(original.svg);
+    expect(entry.source_stylesheet_asset).toBe(original.css);
     expect(entry.source_stylesheet_url).toBe(`https://raw.githubusercontent.com/NVIDIA/TransformerEngine/${pin}/docs/_static/css/diagram-colors.css`);
     expect(entry.metadata_status).toBe('verified');
     requireNonEmptyString(entry.author, 'author');
@@ -5612,7 +8902,30 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
     expect(sourceMatch, `Curated upstream source must be a pinned GitHub blob: ${entry.asset}`).toBeTruthy();
     expect(entry.commit).toMatch(/^[0-9a-f]{40}$/);
     expect(sourceMatch?.[1]).toBe(entry.commit);
-    expect(entry.metadata_status).toBe('verified');
+    const archivedScaling = {
+      'deepseek-hyperparameter-fits.png': [21, 'bcd69487081eb1c26301854526a8982da361088371ff57828fed1d4f23bad23a',
+        [1230, 475], 'https://arxiv.org/html/2401.02954v1#S3.F3'],
+      'optimizer-extrapolation-failure.png': [41, '2e831ffa5d05d077fd951acdac3b8989e71e30e4850991bd29de2691cd5dc572',
+        [890, 450], 'https://openathena.ai/blog/delphi/#delphi-attempt-1-how-can-scaling-laws-go-wrong'],
+    } as const;
+    const scalingPath = '00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/';
+    const scalingName = entry.asset.slice(scalingPath.length);
+    if (entry.asset.startsWith(scalingPath) && Object.hasOwn(archivedScaling, scalingName)) {
+      const [page, hash, size, figure] = archivedScaling[scalingName as keyof typeof archivedScaling];
+      expect(entry).toMatchObject({
+        source_url: `https://github.com/stanford-cs336/lectures/blob/${cs336Commit}/lecture_11.pdf#page=${page}`,
+        source_parent_sha256: 'b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890',
+        figure_url: figure, sha256: hash, derivation: 'pdf-page-crop', used_in: [],
+        publication_status: 'retired', metadata_status: 'needs-confirmation',
+        rights_status: 'existing-local-reformat; third-party-rights-unverified',
+      });
+      requireNonEmptyString(entry.retirement_reason, 'retirement_reason');
+      const path = resolve(repositoryRoot, entry.asset);
+      expect(sha256(path)).toBe(hash);
+      expect(pngDimensions(path)).toEqual(size);
+    } else {
+      expect(entry.metadata_status).toBe('verified');
+    }
     return;
   }
 
@@ -5752,6 +9065,104 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
     return;
   }
 
+  // Public TinyBERT fixtures preserve the two author rasters independently
+  // of their curated copies. Figure rights come from ACL, not Apache code.
+  if (entry.derivation === 'source-raster-copy'
+    && entry.source_asset.startsWith('publishing/fixtures/tinybert-0598f02d/')) {
+    const filename=entry.source_asset.split('/').at(-1)!;
+    const known: Record<string,{sha:string; dimensions:number[]; url:string}> = {
+      'tinybert-overview.png': {
+        sha:'3144c0d6af96614ffded2e4097b9d0b7af2743115598fe0d580c05347a00038b',
+        dimensions:[1229,320],
+        url:'https://raw.githubusercontent.com/huawei-noah/Pretrained-Language-Model/0598f02d7fc4eaa7b4cbc1e9d7ab18bc875c24f9/TinyBERT/tinybert_overview.png',
+      },
+      'tinybert-layer-detail.png': {
+        sha:'c3022bd5d1fad3c9d79cea56c4f99e4aa8f42c5d7a44d03b7e14c6eb1e932f33',
+        dimensions:[745,820],
+        url:'https://arxiv.org/html/1909.10351v5/transformer_layer_detail.png',
+      },
+    };
+    const expected=known[filename];
+    expect(expected,filename).toBeDefined();
+    expect(entry.asset).toBe('00 Учебник/Assets/Figures/curated/distillation-tinybert-2026-11-05/'+filename);
+    expect(entry.source_image_url).toBe(expected.url);
+    expect(entry.source_asset_sha256).toBe(expected.sha);
+    expect(entry.sha256).toBe(expected.sha);
+    expect(entry.dimensions_px).toEqual(expected.dimensions);
+    expect(entry.license).toBe('CC BY 4.0');
+    expect(entry.provenance_confirmation).toBe('source-license-verified');
+    expect(entry.license_evidence).toBe('publishing/fixtures/tinybert-0598f02d/acl-copyright.html');
+    expect(entry.license_evidence_sha256).toBe('d27a4182ffd579b137abf42dab46c7cb836610a616196395dd66b60284b2c237');
+    expect(sha256(resolve(repositoryRoot,entry.license_evidence!))).toBe(entry.license_evidence_sha256);
+    expect(sha256(resolve(repositoryRoot,entry.source_asset))).toBe(expected.sha);
+    expect(sha256(resolve(repositoryRoot,entry.asset))).toBe(expected.sha);
+    expect(readFileSync(resolve(repositoryRoot,entry.source_asset)).equals(
+      readFileSync(resolve(repositoryRoot,entry.asset)))).toBe(true);
+    expect(entry.crop_box_px).toBeUndefined();
+    expectDecodableImage(resolve(repositoryRoot,entry.asset));
+    return;
+  }
+
+  if (entry.asset.startsWith('00 Учебник/Assets/Figures/curated/normalization-originals-2026-11-09/')) {
+    const original = '05 Источники/Originals/normalization-originals-2026-11-09/';
+    const name = entry.asset.split('/').at(-1)!;
+    expect(entry.provenance_confirmation).toBe('source-license-verified');
+    expect(entry.rights_status).toBe('source-license-verified');
+    expect(entry.metadata_status).toBe('verified');
+    const path = resolve(repositoryRoot, entry.asset);
+    if (name === 'fleuret-normalization-axes.png') {
+      expect(entry.source_asset).toBe(original + 'lbdl-v1.3.pdf');
+      expect(entry.source_asset_sha256).toBe('a5dcbff3eb090dc55bd05d969f610c97a63983d6c07bd736c06d24132019e5e6');
+      expect(entry.source_image_url).toBe('https://fleuret.org/public/lbdl.pdf#page=83');
+      expect(entry.license_evidence_url).toBe('https://fleuret.org/public/lbdl.pdf#page=189');
+      expect(entry.license).toBe('CC BY-NC-SA 4.0');
+      expect(entry.derivation).toBe('pdf-page-render-crop');
+      expect(entry.source_page).toBe(83);
+      expect(entry.render_dpi).toBe(420);
+      expect(entry.crop_box_px).toEqual([61, 42, 1179, 1683]);
+      expect(pngDimensions(path)).toEqual([1118, 1641]);
+      expect(entry.sha256).toBe('4b6f95a13bb31e5e4f73f2c7d7a6e3270c5cae714d396c804191094692d443db');
+    } else {
+      const known: Record<string, [number, number, string]> = {
+        'uva-activation-std-001.svg': [27, 0, '62cce2bdb87c36b292b81a48a4cd8943af2ed274cbc962a4efb3961982c3e978'],
+        'uva-activation-std-01.svg': [29, 0, '6861d8e8ed28675a19c76469b7cf06fddd2ce48bcebefa6ca5a7a27499226099'],
+        'uva-activation-fan-in.svg': [32, 1, '8f34fc231bdf4d1dad776001aecfc2d8405bcdd3e551a46216d7f36a9fb47357'],
+      };
+      expect(known[name], name).toBeDefined();
+      const [cell, output, digest] = known[name];
+      const pin = 'c7d9e18f42fee53bc8925f08ec2358371b1e9200';
+      const repo = 'https://github.com/phlippe/uvadlc_notebooks/blob/' + pin;
+      expect(entry.commit).toBe(pin);
+      expect(entry.source_url).toBe(repo + '/docs/tutorial_notebooks/tutorial4/Optimization_and_Initialization.ipynb');
+      expect(entry.source_asset).toBe(original + 'uva-tutorial4.ipynb');
+      expect(entry.source_asset_sha256).toBe('89517153cf67fb903e8a5a18230ae0bc6c027b7d299f53f5181d6d527b422a84');
+      expect(entry.source_cell_index).toBe(cell);
+      expect(entry.source_output_index).toBe(output);
+      expect(entry.source_image_url).toBe('https://uvadlc-notebooks.readthedocs.io/en/latest/_images/tutorial_notebooks_tutorial4_Optimization_and_Initialization_' + cell + '_' + output + '.svg');
+      expect(entry.derivation).toBe('notebook-output-extraction');
+      expect(entry.crop_box_px).toBeUndefined();
+      expect(entry.sha256).toBe(digest);
+      expect(entry.license).toBe('MIT');
+      expect(entry.license_url).toBe(repo + '/LICENSE.md');
+      expect(entry.public_license_copy).toBe('site/public/licenses/uvadlc-c7d9e18f-MIT.txt');
+      expect(sha256(resolve(repositoryRoot, entry.public_license_copy!)))
+        .toBe('bc760ea73079016ab58ddb9ade0ea6e822dc1ba801b8e26c9d0eadb68e564735');
+    }
+    expect(sha256(path)).toBe(entry.sha256);
+    expectDecodableImage(path);
+    // The curated copies and license notice ship; larger source archives do not.
+    const source = resolve(repositoryRoot, entry.source_asset!);
+    if (existsSync(source)) {
+      expect(sha256(source)).toBe(entry.source_asset_sha256);
+      if (entry.derivation === 'notebook-output-extraction') {
+        const notebook = JSON.parse(readFileSync(source, 'utf8'));
+        const svg = notebook.cells[entry.source_cell_index!].outputs[entry.source_output_index!].data['image/svg+xml'];
+        expect(readFileSync(path, 'utf8')).toBe(Array.isArray(svg) ? svg.join('') : svg);
+      }
+    }
+    return;
+  }
+
   // Licensed figures can come from tracked paper/assignment/lecture PDFs,
   // including a pinned paper in an Originals packet, or the
   // original raster cache of an executable lecture.
@@ -5761,6 +9172,20 @@ function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root):
       expect(entry.source_asset).toMatch(/^05 Источники\/(?:Courses\/[^/]+\/(?:Assignments\/[^/]+|Lectures)|Papers\/Source PDFs|Originals\/[^/]+)\/[^/]+\.pdf$/);
       expect(Number.isInteger(entry.source_page) && Number(entry.source_page) > 0).toBe(true);
       requireNonEmptyString(entry.modifications, 'crop description');
+    } else if (entry.source_asset === '05 Источники/Originals/ngram-author-figures-2026-11-10/bjc-this-is-a-sentence.png') {
+      expect(entry.asset).toBe('00 Учебник/Assets/Figures/curated/ngram-author-figures-2026-11-10/bjc-this-is-a-sentence.png');
+      expect(entry.commit).toBe('cb95da139e17ccfb4a4719c15e56bcddcef0e008');
+      expect(entry.source_url).toBe('https://bjc.edc.org/bjc-r/sparks/student-pages/U4/L4/04-setting-up-n-grams.html');
+      expect(entry.source_image_url).toBe('https://raw.githubusercontent.com/bjc-edc/bjc-r/cb95da139e17ccfb4a4719c15e56bcddcef0e008/sparks/img/U4/lab04/this-is-a-sentence.png');
+      expect(entry.source_page_snapshot).toBe('05 Источники/Originals/ngram-author-figures-2026-11-10/bjc-ngram.html');
+      expect(sha256(resolve(repositoryRoot, entry.source_page_snapshot!))).toBe(entry.source_page_sha256);
+      expect(readFileSync(resolve(repositoryRoot, entry.source_page_snapshot!), 'utf8')).toContain('/bjc-r/sparks/img/U4/lab04/this-is-a-sentence.png');
+      expect(entry.license).toBe('CC BY-NC-SA 4.0');
+      expect(entry.license_evidence).toBe('05 Источники/Originals/ngram-author-figures-2026-11-10/bjc-sparks.html');
+      expect(sha256(resolve(repositoryRoot, entry.license_evidence!))).toBe(entry.license_evidence_sha256);
+      expect(readFileSync(resolve(repositoryRoot, entry.license_evidence!), 'utf8')).toContain('rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"');
+      expect(pngDimensions(resolve(repositoryRoot, entry.asset))).toEqual([432,195]);
+      expect(entry.crop_box_px).toBeUndefined();
     } else if (entry.source_asset === '05 Источники/Originals/gradient-clipping-2026-10-29/autoclip-mi.gif') {
       const packet = '05 Источники/Originals/gradient-clipping-2026-10-29/';
       expect(entry.asset).toBe('00 Учебник/Assets/Figures/curated/gradient-clipping-2026-10-29/autoclip-mi.gif');
@@ -5861,6 +9286,197 @@ function expectDecodableImage(path: string): void {
 }
 
 describe('publication asset registry', () => {
+  it('keeps the credited Harvard editions as archived bytes and the replacements attributed', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'),
+      { merge: true }) as { assets: CuratedAsset[] };
+    const audit = JSON.parse(readFileSync(resolve(root,
+      'docs/audit/2026-11-11-harvard-credited-illustrations-additions.json'), 'utf8')) as {
+        retired: (CuratedAsset & { bytes: number; git_blob_sha1: string })[];
+        figures: CuratedAsset[];
+        newFigure: CuratedAsset;
+      };
+    expect(audit.retired).toHaveLength(6);
+    expect(audit.figures).toHaveLength(4);
+    for (const spec of audit.retired) {
+      expect(registry.assets.find(row => row.asset === spec.asset)).toMatchObject(spec);
+      expect(spec.used_in).toEqual([]);
+      expect(spec.publication_status).toBe('retired');
+      const path = resolve(root, spec.asset);
+      const bytes = readFileSync(path);
+      expect(bytes.length).toBe(spec.bytes);
+      expect(sha256(path)).toBe(spec.sha256);
+      expect(createHash('sha1').update('blob ' + bytes.length + '\0').update(bytes).digest('hex'))
+        .toBe(spec.git_blob_sha1);
+    }
+    for (const spec of audit.figures) {
+      expect(registry.assets.find(row => row.asset === spec.asset)).toMatchObject(spec);
+      const path = resolve(root, spec.asset);
+      expectDecodableImage(path);
+      expect(sha256(path)).toBe(spec.sha256);
+      for (const owner of spec.used_in!) {
+        expect(readFileSync(resolve(root, owner), 'utf8')).toContain(spec.asset);
+      }
+    }
+    const evidence = resolve(root, audit.newFigure.license_evidence!);
+    expect(audit.newFigure.license_url).toBe('https://creativecommons.org/publicdomain/mark/1.0/');
+    if (existsSync(evidence)) {
+      expect(sha256(evidence)).toBe(audit.newFigure.license_evidence_sha256);
+      expect(readFileSync(evidence, 'utf8')).toContain('Creative Commons Public Domain Mark 1.0');
+    }
+  });
+  it('matches the vLLM source study figures to the same licensed bytes and owners', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'),
+      { merge: true }) as { assets: CuratedAsset[] };
+    const owner = readFileSync(resolve(root, '05 Источники/Implementation studies/Inside vLLM.md'), 'utf8');
+    for (const spec of vllmSourceLibrary.figures) {
+      const entry = registry.assets.find(asset => asset.asset === spec.asset);
+      expect(entry).toMatchObject(spec);
+      expect(sha256(resolve(root, spec.asset))).toBe(spec.sha256);
+      expect(owner).toContain(spec.asset + '|');
+    }
+  });
+  it('pins the EAGLE-3 repository original and license in both editions', () => {
+    const { assets } = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')) as { assets: CuratedAsset[] };
+    const row = assets.find(asset => asset.id === 'curated-eagle3-speedup-5e404ac75809');
+    expect(row).toBeDefined();
+    validateCuratedSourceAsset(row!);
+    for (const source of row!.used_in ?? [])
+      expect(readFileSync(resolve(root, source), 'utf8')).toContain(row!.asset);
+    for (const drift of [{ license: 'CC BY 4.0' }, { crop_box_px: [0, 0, 600, 900] }])
+      expect(() => validateCuratedSourceAsset({ ...row!, ...drift })).toThrow();
+  });
+  it('keeps the five versioned IsoFLOP originals and retires the earlier slide crops', () => {
+    const { assets } = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')) as { assets: CuratedAsset[] };
+    const rows = assets.filter(row => row.asset.startsWith('00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/'));
+    expect(rows).toHaveLength(5);
+    const chapter = '00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md';
+    const prose = readFileSync(resolve(root, chapter), 'utf8');
+    for (const [name, , figure] of isoflopOriginals) {
+      const path = isoflopOriginalDir + '/' + name;
+      const row = rows.find(asset => asset.asset === path);
+      expect(row).toBeDefined();
+      validateCuratedSourceAsset(row!);
+      for (const owner of row!.used_in!)
+        expect(readFileSync(resolve(root, owner), 'utf8')).toContain('![[02 Areas/ML & DL/' + path);
+      for (const drift of [{license: 'public access'}, {crop_box_px: [0, 0, 1, 1]}])
+        expect(() => validateCuratedSourceAsset({ ...row!, ...drift })).toThrow();
+      expect(prose).toContain(path);
+      const snapshot = resolve(root, row!.source_page_snapshot!);
+      if (existsSync(snapshot)) {
+        expect(sha256(snapshot)).toBe(row!.source_page_sha256);
+        const html = readFileSync(snapshot, 'utf8');
+        expect(html).toContain('License: CC BY 4.0');
+        const panel = html.split('<figure id="' + figure.split('#')[1] + '"')[1]?.split('</figure>')[0];
+        expect(panel).toContain('/' + name + '"');
+      }
+    }
+    for (const part of ['lower-envelope', 'isoflops', 'joint-fit', 'residuals']) {
+      const name = 'chinchilla-' + part + '-chart.png';
+      expect(prose).not.toContain(name);
+      const old = assets.find(asset => asset.asset.endsWith('/scaling-review-2026-10/' + name));
+      expect(old).toMatchObject({ publication_status: 'retired', used_in: [], former_used_in: [chapter] });
+      expect(sha256(resolve(root, old!.asset))).toBe(old!.sha256);
+    }
+  });
+  it('keeps the complete Sparse Frontier prefill figure and version-specific license', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')) as { assets: CuratedAsset[] };
+    const entry = registry.assets.find(row => row.id === 'curated-arithmetic-sparse-frontier-e309c11191da');
+    expect(entry).toBeDefined();
+    validateCuratedSourceAsset(entry!);
+    for (const invalid of [{ license: 'open access' }, { sha256: '0'.repeat(64) },
+      { source_image_url: 'https://example.org/other.svg' }, { crop_box_px: [0, 0, 20, 20] }]) {
+      expect(() => validateCuratedSourceAsset({ ...entry!, ...invalid })).toThrow();
+    }
+  });
+  it('preserves the complete Google MLCC softmax figure and its page-level rights', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')) as { assets: CuratedAsset[] };
+    const entry = registry.assets.find(row => row.id === 'curated-google-softmax-multiclass-7b0f01cc61b9')!;
+    validateCuratedSourceAsset(entry);
+    for (const invalid of [{ license: 'open access' }, { source_image_url: 'https://example.org/img.png' },
+      { crop_box_px: [0, 0, 100, 100] }])
+      expect(() => validateCuratedSourceAsset({ ...entry, ...invalid })).toThrow();
+  });
+  it('preserves the licensed bagging original and retires only the CS229 raster', () => {
+    const { assets } = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')) as { assets: CuratedAsset[] };
+    const active = assets.find(row => row.id === 'curated-sklearn-tree-bagging-8fa36b8ac57a')!;
+    validateCuratedSourceAsset(active);
+    for (const drift of [{ license: 'MIT' }, { source_image_url: 'https://example.org/other.png' }, { crop_box_px: [0, 0, 300, 400] }])
+      expect(() => validateCuratedSourceAsset({ ...active, ...drift })).toThrow();
+
+    const retired = assets.find(row => row.id === 'curated-cs229-bias-variance-0000000000ac')!;
+    validateCuratedSourceAsset(retired);
+    expect(() => validateCuratedSourceAsset({ ...retired, license_url: 'https://cs229.stanford.edu/' })).toThrow();
+    expect(() => validateCuratedSourceAsset({ ...retired, used_in: active.used_in })).toThrow();
+  });
+  it('retains both complete MOOC scaling SVGs and rejects changed provenance', () => {
+    const prefix = '00 Учебник/Assets/Figures/curated/selection-metric-2026-11-04/';
+    const rows = JSON.parse(readFileSync(resolve(root, prefix + 'assets.json'), 'utf8')) as CuratedAsset[];
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')).assets as CuratedAsset[];
+    expect(rows).toHaveLength(2);
+    for (const row of rows) {
+      validateCuratedSourceAsset(row);
+      expect(registry.find(asset => asset.id === row.id)).toEqual(row);
+      for (const change of [{id: row.id!.replace('curated-', '')}, {sha256: '0'.repeat(64)},
+        {source_asset_sha256: '0'.repeat(64)}, {commit: '0'.repeat(40)}, {license: 'CC0'},
+        {license_evidence_sha256: '0'.repeat(64)}, {public_license_copy: 'LICENSE'},
+        {source_image_url: 'https://example.org/figure.svg'}, {source_viewbox: [0, 0, 1, 1]},
+        {derivation: 'source-svg-crop'}, {crop_box_px: [0, 0, 1, 1]},
+        {provenance_confirmation: 'user-confirmed-open-materials'}, {rights_status: 'unverified'}])
+        expect(() => validateCuratedSourceAsset({...row, ...change})).toThrow();
+    }
+  });
+  it('preserves the complete py-spy source graph and rejects provenance drift',()=>{
+    const registry=parse(readFileSync(resolve(root,'05 Источники/asset-registry.yml'),'utf8'),{merge:true}) as {assets:CuratedAsset[]};
+    const rows=registry.assets.filter(row=>row.id==='curated-py-spy-flamegraph-592970e72ed1');
+    expect(rows).toHaveLength(1);
+    validateCuratedSourceAsset(rows[0]);
+    for(const invalid of [
+      {author:'Unknown'},{license:'public-domain'},{commit:'0'.repeat(40)},
+      {source_image_url:'https://example.org/a.svg'},{source_asset:'untracked.svg'},
+      {source_asset_sha256:'0'.repeat(64)},{source_page_sha256:'0'.repeat(64)},
+      {sha256:'0'.repeat(64)},{license_evidence_sha256:'0'.repeat(64)},
+      {derivation:'redraw'},{provenance_confirmation:'unverified'}
+    ])expect(()=>validateCuratedSourceAsset({...rows[0],...invalid})).toThrow();
+  });
+  it('preserves the complete DALI source graph and rejects provenance drift',()=>{
+    const registry=parse(readFileSync(resolve(root,'05 Источники/asset-registry.yml'),'utf8'),{merge:true}) as {assets:CuratedAsset[]};
+    const rows=registry.assets.filter(row=>row.id==='curated-dali-two-readers-3a04306186cc');
+    expect(rows).toHaveLength(1);
+    validateCuratedSourceAsset(rows[0]);
+    for(const invalid of [
+      {author:'Unknown'}, {license:'public-domain'}, {commit:'0'.repeat(40)},
+      {source_image_url:'https://example.org/a.svg'}, {source_asset:'untracked.svg'},
+      {source_asset_sha256:'0'.repeat(64)}, {source_page_sha256:'0'.repeat(64)},
+      {sha256:'0'.repeat(64)}, {license_evidence_sha256:'0'.repeat(64)},
+      {derivation:'redraw'}, {provenance_confirmation:'unverified'}
+    ])expect(()=>validateCuratedSourceAsset({...rows[0],...invalid})).toThrow();
+  });
+  it('preserves the four former derivative originals and exact native source code', () => {
+    const packet = JSON.parse(readFileSync(resolve(root,
+      '05 Источники/Originals/mml-source-2026-10-30/retired-derivative-figures.json'), 'utf8'));
+    expect(packet.figures).toHaveLength(4);
+    for (const row of packet.figures) {
+      expect(existsSync(resolve(root, row.from))).toBe(false);
+      expect(sha256(resolve(root, row.to))).toBe(row.sha256);
+      expect(row.original_registry_record.asset).toBe(row.from);
+    }
+    const assets = JSON.parse(readFileSync(resolve(root,
+      '00 Учебник/Assets/Figures/curated/derivative-native-2026-10-30/assets.json'), 'utf8'));
+    for (const row of assets) {
+      expect(sha256(resolve(root, row.source_code))).toBe(row.source_code_sha256);
+      expect(sha256(resolve(root, row.license_evidence))).toBe(row.license_evidence_sha256);
+    }
+  });
+  it('preserves the retired MML source privately without treating personal use as a public grant', () => {
+    const packet = JSON.parse(readFileSync(resolve(root,
+      '05 Источники/Originals/mml-source-2026-10-30/retired-figures.json'), 'utf8'));
+    expect(sha256(resolve(root, packet.retained_asset)))
+      .toBe('33959e0d35b9d53bec9aa488780a44bb6b5426c39e84818b7c0e5ffc86ba79d1');
+    expect(sha256(resolve(root, packet.source_pdf)))
+      .toBe('3f87b70c64a35d30ec4e565b4d5cfd18fe913002d3b3bed44691c7d0838911bc');
+    expect([packet.pdf_page, packet.printed_page]).toEqual([23, 17]);
+    expect(existsSync(resolve(root, packet.original_registry_record.asset))).toBe(false);
+  });
   it('binds six newly confirmed legacy figures to exact primary originals and named grants', () => {
     const manifest = JSON.parse(readFileSync(resolve(root, '05 Источники/Originals/publication-asset-provenance-2026-10-29/verified-assets.json'), 'utf8'));
     const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as { assets: CuratedAsset[] };
@@ -5974,6 +9590,11 @@ describe('publication asset registry', () => {
     rows.forEach((row, index) => {
       validateCuratedSourceAsset(row);
       expect(registry.find(asset => asset.id === row.id)).toEqual(row);
+      for (const owner of row.used_in) {
+        const chapter = readFileSync(resolve(root, owner), 'utf8');
+        expect(chapter).toContain(row.asset + '|');
+        expect(chapter).toContain(row.source_url);
+      }
       expect(row.license).toBe('CC BY 4.0');
       expect(row.source_url).toBe('https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm');
       expect(row.source_image_url).toBe('https://docs.cloud.google.com/static/tpu/docs/images/' +
@@ -6034,6 +9655,19 @@ describe('publication asset registry', () => {
       {sha256:'0'.repeat(64)},{crop_box_px:[0,0,1,1]},{author:''}])
       expect(()=>validateCuratedSourceAsset({...row,...change})).toThrow();
   });
+  it('preserves four complete original UvA SVG notebook outputs and rejects provenance drift',()=>{
+    const rows=parse(readFileSync(resolve(root,'05 Источники/asset-registry.yml'),'utf8')).assets
+      .filter((x:CuratedAsset)=>x.asset.includes('/autoencoder-course-2026-11-03/')) as CuratedAsset[];
+    expect(rows).toHaveLength(4);
+    for(const row of rows){
+      validateCuratedSourceAsset(row);
+      for(const change of [{license:'CC0'},{sha256:'0'.repeat(64)},
+        {source_cell:0},{source_member_sha256:'0'.repeat(64)},
+        {source_asset_sha256:'0'.repeat(64)},{source_url:'https://example.org'},
+        {crop_box_px:[0,0,1,1]},{provenance_confirmation:'user-confirmed-open-materials'}])
+        expect(()=>validateCuratedSourceAsset({...row,...change})).toThrow();
+    }
+  });
   it('preserves original AE source SVG and all GIF frames with pinned source permissions', () => {
     const prefix = '00 Учебник/Assets/Figures/curated/autoencoder-2026-10-26/';
     const rows = JSON.parse(readFileSync(resolve(root, prefix + 'assets.json'), 'utf8')) as CuratedAsset[];
@@ -6058,6 +9692,8 @@ describe('publication asset registry', () => {
       expect(row.metadata_status).toBe('needs-confirmation');
       expect(row.rights_status).toBe('permission-unconfirmed');
       expect(row.license).not.toBe('MIT');
+      expect(row.publication_status).toBe('retired');
+      expect(row.used_in).toEqual([]);
     }
     expect(registry.find(entry=>entry.asset.endsWith('/weng-reparameterization.png'))!.author).toContain('Kingma');
   });
@@ -6101,8 +9737,25 @@ describe('publication asset registry', () => {
     expect(figure.source_url).toBe('https://jmlr.org/papers/v15/srivastava14a.html');
     expect(figure.license).not.toBe('MIT');
     expect(figure.metadata_status).toBe('needs-confirmation');
+    expect(figure.publication_status).toBe('retired');
+    expect(figure.used_in).toEqual([]);
     // Legacy raw is ignored and absent from public checkouts; preserve tracked artwork bytes.
     expect(sha256(resolve(root, figure.asset))).toBe('9c5d66c1cfa60f53b7cd36454f2a600b8c5cb82665d16157ba79400090331009');
+  });
+  it('pins complete author figures for dropout and AE/VAE with distinct reuse licenses', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')).assets as CuratedAsset[];
+    const rows = registry.filter(entry => entry.asset.startsWith(foundationsFigurePath));
+    expect(rows.map(row => row.asset.slice(foundationsFigurePath.length)).sort())
+      .toEqual([...Object.keys(princeFigures), 'chervinskii-autoencoder.png'].sort());
+    for (const row of rows) {
+      validateCuratedSourceAsset(row);
+      for (const alteration of [
+        { crop_box_px: [0, 0, 1, 1] },
+        { sha256: '0'.repeat(64) },
+        { license: 'MIT' },
+        { source_archive_member: '../wrong.pdf', source_member: '../wrong.pdf' },
+      ]) expect(() => validateCuratedSourceAsset({ ...row, ...alteration })).toThrow();
+    }
   });
   it('preserves the complete original SAR and weighted-objectives SVGs with source licenses', () => {
     const rows=JSON.parse(readFileSync(resolve(root,
@@ -6197,6 +9850,43 @@ describe('publication asset registry', () => {
     expect(notice).toContain('Jake VanderPlas');
     expect(notice).toContain('https://creativecommons.org/licenses/by-nc-nd/3.0/');
   });
+  it('preserves both complete original RBF parameter grids and their source protocol',()=>{
+    const rows=JSON.parse(readFileSync(resolve(root,
+      '00 Учебник/Assets/Figures/curated/kernels-2026-11-03/assets.json'),'utf8')) as CuratedAsset[];
+    const registry=parse(readFileSync(resolve(root,'05 Источники/asset-registry.yml'),'utf8')).assets as CuratedAsset[];
+    expect(rows).toHaveLength(2);
+    for(const row of rows){
+      validateCuratedSourceAsset(row);
+      expect(registry.find(entry=>entry.id===row.id)).toEqual(row);
+      for(const change of [{sha256:'0'.repeat(64)},{license:'CC0'},{commit:'unreviewed'},
+        {source_asset_sha256:'0'.repeat(64)},{source_page_sha256:'0'.repeat(64)},
+        {license_evidence_sha256:'0'.repeat(64)},{crop_box_px:[0,0,20,20]},
+        {source_image_url:'https://example.invalid/figure'}, {dimensions_px:[10,10]}])
+        expect(()=>validateCuratedSourceAsset({...row,...change})).toThrow();
+    }
+    const notice=readFileSync(resolve(root,'site/public/licenses/kernels-visuals-NOTICE.txt'),'utf8');
+    expect(notice).toContain('RBF SVM parameters');
+    expect(notice).toContain('scikit-learn-1.9.1-BSD-3-Clause.txt');
+    expect(notice).toContain('199d116ab37beed506c63fc9f6a74f56e228de43');
+  });
+  it('preserves five full GMM generation and initialization originals',()=>{
+    const rows=JSON.parse(readFileSync(resolve(root,
+      '00 Учебник/Assets/Figures/curated/gmm-2026-11-03/assets.json'),'utf8')) as CuratedAsset[];
+    const registry=parse(readFileSync(resolve(root,'05 Источники/asset-registry.yml'),'utf8')).assets as CuratedAsset[];
+    expect(rows).toHaveLength(5);
+    for(const row of rows){
+      validateCuratedSourceAsset(row);
+      expect(registry.find(entry=>entry.id===row.id)).toEqual(row);
+      for(const change of [{sha256:'0'.repeat(64)},{license:'CC0'},{commit:'unreviewed'},
+        {source_asset_sha256:'0'.repeat(64)},{crop_box_px:[0,0,20,20]},
+        {source_image_url:'https://example.invalid/figure'}])
+        expect(()=>validateCuratedSourceAsset({...row,...change})).toThrow();
+    }
+    const notice=readFileSync(resolve(root,'site/public/licenses/gmm-visuals-NOTICE.txt'),'utf8');
+    expect(notice).toContain('cells 34, 42, 46 and 52');
+    expect(notice).toContain('199d116ab37beed506c63fc9f6a74f56e228de43');
+    expect(notice).toContain('scikit-learn-1.9.1-BSD-3-Clause.txt');
+  });
   it('preserves six unmodified Gaussian-mixture originals and their exact notebook output pointers', () => {
     const rows=JSON.parse(readFileSync(resolve(root,
       '00 Учебник/Assets/Figures/curated/gmm-2026-10-25/assets.json'),'utf8')) as CuratedAsset[];
@@ -6259,6 +9949,38 @@ describe('publication asset registry', () => {
     const notice=readFileSync(resolve(root,'site/public/licenses/dimensionality-reduction-NOTICE.txt'),'utf8');
     expect(notice).toContain(readFileSync(resolve(root,archive+'umap-LICENSE.txt'),'utf8').trim());
     expect(notice).toContain('https://creativecommons.org/licenses/by-nc-nd/3.0/');
+  });
+  it('preserves fifteen complete original PCA, Distill and UMAP additions', () => {
+    const rows = JSON.parse(readFileSync(resolve(root,
+      '00 Учебник/Assets/Figures/curated/dimensionality-2026-11-03/assets.json'), 'utf8')) as CuratedAsset[];
+    const registry = parse(readFileSync(resolve(root,'05 Источники/asset-registry.yml'),'utf8')).assets as CuratedAsset[];
+    expect(rows).toHaveLength(15);
+    for (const row of rows) {
+      validateCuratedSourceAsset(row);
+      expect(registry.find(entry => entry.id === row.id)).toEqual(row);
+      for (const change of [{sha256:'0'.repeat(64)}, {license:'CC0'},
+        {source_asset_sha256:'0'.repeat(64)}, {crop_box_px:[0,0,20,20]},
+        {source_image_url:'https://example.invalid/image.png'}, {commit:'unreviewed'}])
+        expect(() => validateCuratedSourceAsset({...row,...change})).toThrow();
+    }
+  });
+  it('preserves the connected heat and weighted-constraint figures with exact provenance', () => {
+    const rows = JSON.parse(readFileSync(resolve(root,
+      '00 Учебник/Assets/Figures/curated/spectral-2026-10-31/assets.json'), 'utf8')) as CuratedAsset[];
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')).assets as CuratedAsset[];
+    expect(rows).toHaveLength(2);
+    for (const row of rows) {
+      validateCuratedSourceAsset(row);
+      expect(registry.find(entry => entry.id === row.id)).toEqual(row);
+      for (const change of [{sha256:'0'.repeat(64)}, {license:'CC0'},
+        {source_page:6}, {source_figure:'1.2'}, {crop_box_px:[0,0,20,20]},
+        {source_asset_sha256:'0'.repeat(64)}, {render_dpi:144},
+        {source_url:'https://example.invalid/figure'}])
+        expect(() => validateCuratedSourceAsset({...row, ...change})).toThrow();
+    }
+    const notice = readFileSync(resolve(root, 'site/public/licenses/spectral-visuals-NOTICE.txt'), 'utf8');
+    expect(notice).toContain('wiskott-connected-heat.png (Figure 1.1, PDF page 5)');
+    expect(notice).toContain('wiskott-weighted-constraint.png (Figure 2.2, PDF page 15)');
   });
   it('preserves the complete spectral-clustering source figure and unmodified segmentation originals', () => {
     const rows = JSON.parse(readFileSync(resolve(root,
@@ -6585,7 +10307,7 @@ describe('publication asset registry', () => {
         expect(()=>validateCuratedSourceAsset({...row,...mutation})).toThrow();
     }
   });
-  it('checks all five MLA originals and rejects false rights or changed source metadata',()=>{
+  it('checks the MLA originals and historical copies and rejects false rights or changed source metadata',()=>{
     const specs=JSON.parse(readFileSync(resolve(root,'publishing/tools/mla-figures.json'),'utf8'));
     const rows=(parse(readFileSync(resolve(root,'05 Источники/asset-registry.yml'),'utf8')) as {assets:CuratedAsset[]}).assets;
     expect(specs).toHaveLength(5);
@@ -6602,6 +10324,15 @@ describe('publication asset registry', () => {
           expect(()=>validateCuratedSourceAsset({...row,...mutation})).toThrow();
       }else if(spec.rights_status==='paper-figure-license-unverified')
         expect(()=>validateCuratedSourceAsset({...row,license:'MIT'})).toThrow();
+    }
+    const originals=JSON.parse(readFileSync(resolve(root,'publishing/tools/deepseek-v2-mla-originals.json'),'utf8')) as CuratedAsset[];
+    expect(originals.map(row=>row.source_page)).toEqual([7,32,32]);
+    for(const original of originals){
+      const row=rows.find(r=>r.asset===original.asset)!;
+      validateCuratedSourceAsset(row);
+      for(const mutation of [{license:'CC0'},{source_url:'https://example.org/'},
+        {source_page:1},{crop_box_px:[0,0,1,1]},{sha256:'0'.repeat(64)},{author:'Unknown'}])
+        expect(()=>validateCuratedSourceAsset({...row,...mutation})).toThrow();
     }
   });
   it('checks four complete GQA results against ACL source, geometry and actual reuse license',()=>{
@@ -6935,7 +10666,18 @@ describe('publication asset registry', () => {
     }
   });
 
-  it('verifies eleven LSTM/GRU source figures and separates source proof from unconfirmed rights', () => {
+  it('pins the complete bidirectional SVG and rejects changed provenance',()=>{
+    const registry=parse(readFileSync(resolve(root,'05 Источники/asset-registry.yml'),'utf8')) as {assets:CuratedAsset[]};
+    const entry=registry.assets.find(x=>x.asset==='00 Учебник/Assets/Figures/curated/lstm-gru-contracts-2026-11-03/d2l-birnn.svg')!;
+    expect(()=>validateCuratedSourceAsset(entry)).not.toThrow();
+    for(const invalid of [{author:'Unknown'},{commit:'main'},{license:'CC0'},
+      {sha256:'0'.repeat(64)},{source_asset_sha256:'0'.repeat(64)},
+      {source_page_sha256:'0'.repeat(64)},{license_evidence_sha256:'0'.repeat(64)},
+      {source_image_url:'https://example.org/a.svg'},{derivation:'source-raster-copy'}])
+      expect(()=>validateCuratedSourceAsset({...entry,...invalid})).toThrow();
+  });
+
+  it('verifies LSTM/GRU source figures and separates source proof from unconfirmed rights', () => {
     const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')) as { assets: CuratedAsset[] };
     for (const asset of Object.keys(lstmGruFigures)) {
       const entry = registry.assets.find(row => row.asset === asset)!;
@@ -7316,7 +11058,7 @@ describe('publication asset registry', () => {
     expect(notice).toContain('THE SOFTWARE IS PROVIDED "AS IS"');
   });
 
-  it('attributes the three speculative-sampling figures to Chen with the published license', () => {
+  it('pins the three Stanford crops to Chen v1 and keeps the duplicate stats crop retired', () => {
     const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as { assets: CuratedAsset[] };
     const ids = ['curated-spec-alg-000000000047', 'curated-spec-results-000000000048', 'curated-spec-stats-000000000049'];
     for (const id of ids) {
@@ -7324,12 +11066,14 @@ describe('publication asset registry', () => {
       expect(entry).toBeTruthy();
       if (!entry) continue;
       expect(entry.author).toBe('Charlie Chen et al.');
-      expect(entry.source_url).toBe('https://arxiv.org/abs/2302.01318');
+      expect(entry.source_url).toBe('https://arxiv.org/abs/2302.01318v1');
       expect(entry.license).toBe('CC BY 4.0');
       expect(entry.license_url).toBe('https://creativecommons.org/licenses/by/4.0/');
       validateCuratedSourceAsset(entry);
       expect(() => validateCuratedSourceAsset({ ...entry, license: '' })).toThrow();
       expect(() => validateCuratedSourceAsset({ ...entry, license_url: undefined })).toThrow();
+      expect(() => validateCuratedSourceAsset({ ...entry, source_page: 1 })).toThrow();
+      expect(() => validateCuratedSourceAsset({ ...entry, commit: '0'.repeat(40) })).toThrow();
     }
   });
 
@@ -7403,9 +11147,14 @@ describe('publication asset registry', () => {
       .sort();
 
     expect(paths).toHaveLength(new Set(paths).size);
-    expect(paths.toSorted()).toEqual(files);
+    // Imported course images have their own namespace and public registry checks.
+    // Compare the complete textbook figure directory to its own registry rows.
+    const textbookAssets = registry.assets.filter(asset =>
+      typeof asset.asset === 'string' && asset.asset.startsWith('00 Учебник/Assets/Figures/'));
+    expect(textbookAssets.map(asset => asset.asset).toSorted()).toEqual(files);
+    for (const path of paths) expect(path).toMatch(/^(?:00 Учебник\/Assets\/Figures|Assets\/Sources)\//);
     expect(paths).toContain('00 Учебник/Assets/Figures/attention/transformer_self_attention_vectors.png');
-    for (const asset of registry.assets) {
+    for (const asset of textbookAssets) {
       expect(typeof asset.asset).toBe('string');
       expect(asset.author === null || typeof asset.author === 'string').toBe(true);
       expect(asset.source_url === null || typeof asset.source_url === 'string').toBe(true);
@@ -7422,13 +11171,46 @@ describe('publication asset registry', () => {
       if (asset.metadata_status === 'verified') {
         expect(typeof asset.author).toBe('string');
         expect(typeof asset.source_url).toBe('string');
+        if (vllmSourceLibrary.retired.some(row => row.asset === asset.asset) ||
+            optimizerCurvatureAssets.some(row => row.asset === asset.asset) ||
+            [...sequenceRecallReview.figures, ...sequenceRecallReview.retired].some(row => row.asset === asset.asset)) {
+          validateCuratedSourceAsset(asset);
+          continue;
+        }
+        const pendingSequence = sequenceFigureReview.figures.find(row =>
+          row.asset === asset.asset && row.rights_status === 'paper-figure-license-unverified');
+        if (pendingSequence) {
+          expect(asset).toMatchObject({
+            license: null, license_url: null, rights_status: 'paper-figure-license-unverified',
+            provenance_confirmation: 'original-pdf-pixels-verified',
+          });
+          continue;
+        }
+        if (lmcacheTransferReview.figures.some(row => row.asset === asset.asset) ||
+            lmcacheTransferReview.retired.some(row => row.asset === asset.asset) ||
+            asset.asset === inferenceTimelineReview.figure.asset ||
+            reconciledReaderFigures.some(row => row.asset === asset.asset)) {
+          validateCuratedSourceAsset(asset);
+          continue;
+        }
         expect(typeof asset.license).toBe('string');
         if (asset.license_url === null) {
           // Verified source bytes do not imply a verified redistribution license.
-          // These three attributed figure quotations explicitly assert none.
-          expect(asset.id).toMatch(/^curated-cs336-arc[123]-/);
-          expect(asset.rights_status).toMatch(/^limited-educational-quotation/);
-          expect(asset.provenance_confirmation).toBe('cs336-source-snapshot; figure-discussed-in-text');
+          if (asset.publication_status === 'retired') {
+            expect(asset.used_in).toEqual([]);
+            expect(asset.retirement_reason).toEqual(expect.any(String));
+            expect(asset.license).toBe('Unverified for redistribution');
+            expect(asset.rights_status).toBe(asset.id === 'curated-cs229-bias-variance-0000000000ac'
+              ? 'course-note-republication-unverified' : 'course-slide-republication-unverified');
+            const archivedLecture2 = asset.id === 'curated-cs231n-softmax-ce-0000000000a6'
+              || asset.id === 'curated-cs231n-boundaries-0000000000a7';
+            expect(asset.provenance_confirmation).toBe(archivedLecture2
+              ? 'source-pixels-verified' : 'source-linked-rights-unverified');
+          } else {
+            expect(asset.id).toMatch(/^curated-cs336-arc[123]-/);
+            expect(asset.rights_status).toMatch(/^limited-educational-quotation/);
+            expect(asset.provenance_confirmation).toBe('cs336-source-snapshot; figure-discussed-in-text');
+          }
         } else expect(typeof asset.license_url).toBe('string');
       }
     }
@@ -7445,10 +11227,9 @@ describe('publication asset registry', () => {
     const deepseekR1 = registry.assets.find((asset) =>
       asset.asset === '00 Учебник/Assets/Figures/deepseek-r1-figure1-hq.png'
     );
-    expect(deepseekR1?.used_in).toEqual([
-      '00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока.md',
-      'Papers/DeepSeek-R1 Reasoning via RL.md'
-    ]);
+    expect(deepseekR1).toMatchObject({ used_in: [], publication_status: 'retired' });
+    expect(registry.assets.find(asset => asset.asset.endsWith('/r1-zero-nature-figure1.png'))?.used_in)
+      .toContain('Papers/DeepSeek-R1 Reasoning via RL.md');
     const deepseekPipeline = registry.assets.find((asset) =>
       asset.asset === '00 Учебник/Assets/Figures/curated/deepseek-r1/figure2-pipeline.png'
     );
@@ -7535,6 +11316,16 @@ describe('publication asset registry', () => {
         expect(() => validateCuratedSourceAsset({ ...entry, crop_box_px: [0, 0, 100, 100] })).toThrow();
       }
     }
+  });
+
+  it('pins the Gender Shades PDF crop and its publication grant', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as { assets: CuratedAsset[] };
+    const entry = registry.assets.find(asset => asset.id === 'curated-gender-shades-figure3-3c0aed571f22')!;
+    expect(entry).toBeDefined();
+    expect(() => validateCuratedSourceAsset(entry)).not.toThrow();
+    for (const invalid of [{ source_page: 9 }, { render_dpi: 72 }, { license: 'unverified' },
+      { crop_box_px: [1544, 445, 2621, 826] }, { source_asset_sha256: '0'.repeat(64) }])
+      expect(() => validateCuratedSourceAsset({ ...entry, ...invalid })).toThrow();
   });
 
   it('checks original SHAP and AIR-Bench figures and rejects provenance drift', () => {
@@ -7658,6 +11449,25 @@ describe('publication asset registry', () => {
     }
   });
 
+  it('pins all three unmodified CS231n MLP originals to their actual repository license',()=>{
+    const rows=JSON.parse(readFileSync(resolve(root,
+      '00 Учебник/Assets/Figures/curated/mlp-2026-11-03/assets.json'),'utf8')) as CuratedAsset[];
+    const registry=parse(readFileSync(resolve(root,'05 Источники/asset-registry.yml'),'utf8')).assets as CuratedAsset[];
+    expect(rows).toHaveLength(3);
+    for(const row of rows){
+      validateCuratedSourceAsset(row);
+      expect(registry.find(x=>x.id===row.id)).toEqual(row);
+      for(const change of [{license:'open-course-material'},{sha256:'0'.repeat(64)},
+        {source_asset_sha256:'0'.repeat(64)},{source_page_sha256:'0'.repeat(64)},
+        {license_evidence_sha256:'0'.repeat(64)},{commit:'master'},
+        {source_image_url:'https://example.invalid/figure'},
+        {provenance_confirmation:'user-confirmed-open-materials'},
+        {dimensions_px:[1,1]},{crop_box_px:[0,0,20,20]}])
+        expect(()=>validateCuratedSourceAsset({...row,...change})).toThrow();
+    }
+    expect(readFileSync(resolve(root,'site/public/licenses/cs231n-MIT.txt'),'utf8'))
+      .toContain('Copyright (c) 2015 Andrej Karpathy');
+  });
   it('keeps complete CS231n loss diagrams pinned without borrowing the license for slide PDFs', () => {
     const registry=parse(readFileSync(resolve(root,'05 Источники/asset-registry.yml'),'utf8')) as {assets:CuratedAsset[]};
     const rows=registry.assets.filter(row=>row.asset.includes('/losses-2026-10-23/'));
@@ -7900,6 +11710,9 @@ describe('publication asset registry', () => {
 
   it('protects the visually reviewed MML crops including axes, input and parameter labels', () => {
     const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')) as { assets: CuratedAsset[] };
+    const archivedFigures = ['retired-derivative-figures.json', 'retired-probability-figures.json']
+      .flatMap(name => JSON.parse(readFileSync(resolve(root,
+        '05 Источники/Originals/mml-source-2026-10-30/' + name), 'utf8')).figures);
     const prefix = '00 Учебник/Assets/Figures/curated/foundations-source-first/';
     const cases = [
       ['mml-matrix-gradient-shape.png', 161, 155, [560, 486, 1460, 1560],
@@ -7912,9 +11725,11 @@ describe('publication asset registry', () => {
         '49e803f4c725f14a81ee4475450f2ea94fe5d6427779db14e914918907d48dd0']
     ] as const;
     for (const [name, physical, printed, box, hash] of cases) {
-      const row = registry.assets.find(entry => entry.asset === prefix + name)!;
+      const archived = archivedFigures.find((item: { from: string }) => item.from === prefix + name);
+      const row = archived?.original_registry_record;
       expect(row).toBeDefined();
-      validateCuratedSourceAsset(row);
+      expect(registry.assets.some(entry => entry.asset === prefix + name)).toBe(false);
+      expect(existsSync(resolve(root, prefix + name))).toBe(false);
       expect(row.source_page).toBe(physical);
       expect(row.source_printed_page).toBe(printed);
       expect(row.render_dpi).toBe(300);
@@ -7922,8 +11737,9 @@ describe('publication asset registry', () => {
       expect(row.crop_box_px).toEqual(box);
       expect(row.source_asset_sha256).toBe('3f87b70c64a35d30ec4e565b4d5cfd18fe913002d3b3bed44691c7d0838911bc');
       expect(row.sha256).toBe(hash);
-      expect(sha256(resolve(root, row.asset))).toBe(hash);
-      expect(pngDimensions(resolve(root, row.asset))).toEqual([box[2]-box[0], box[3]-box[1]]);
+      const retainedPath = archived.to;
+      expect(sha256(resolve(root, retainedPath))).toBe(hash);
+      expect(pngDimensions(resolve(root, retainedPath))).toEqual([box[2]-box[0], box[3]-box[1]]);
     }
   });
 
@@ -7948,12 +11764,13 @@ describe('publication asset registry', () => {
       expect(entry.metadata_status).toBe('verified');
       expect(entry.derivation).toBe('pdf-full-slide-render-verified');
       expect(entry.source_asset).toContain('cs231n-provenance-2026-10-29/lecture_2.pdf');
-      expect(entry.rights_status).toBe('named-lecture-slide-license-unverified');
+      expect(entry.rights_status).toBe('course-slide-republication-unverified');
       expect(sha256(resolve(root, entry.asset))).toBe(entry.sha256);
       validateCuratedSourceAsset(entry);
       for (const invalid of [
         {metadata_status: 'needs-confirmation'}, {source_asset: 'missing-source.pdf'},
         {sha256: '0'.repeat(64)}, {rights_status: 'source-license-verified'},
+        {license_url: 'https://cs231n.stanford.edu/'}, {used_in: ['00 Учебник/00 Математические и ML-основания/04 Функции потерь.md']},
         {author: 'Fei-Fei Li; Ranjay Krishna; Danfei Xu'},
         {source_url: 'https://example.org/slide.pdf'}
       ]) expect(() => validateCuratedSourceAsset({...entry,...invalid})).toThrow();
@@ -8046,6 +11863,28 @@ describe('publication asset registry', () => {
         {crop_box_px: [0,0,10,10]}, {license_evidence_sha256: '0'.repeat(64)}])
         expect(() => validateCuratedSourceAsset({...row, ...invalid})).toThrow();
     }
+  });
+
+  it('pins the original news-metric and RFM course figures and rejects metadata drift', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), {merge:true}) as {assets:CuratedAsset[]};
+    for (const name of ['mooc-news-external-metrics.png', 'mooc-news-silhouette.png', 'mooc-rfm-quantile-layers.png']) {
+      const row = registry.assets.find(entry => entry.asset.endsWith('/' + name))!;
+      expect(() => validateCuratedSourceAsset(row)).not.toThrow();
+      for (const mutation of [{sha256:'0'.repeat(64)}, {commit:'main'}, {license:'unverified'},
+        {source_image_url:'https://example.org/image.png'}, {crop_box_px:[0,0,10,10]},
+        {license_evidence_sha256:'0'.repeat(64)}, {metadata_status:'needs-confirmation'}])
+        expect(() => validateCuratedSourceAsset({...row,...mutation})).toThrow();
+    }
+  });
+
+  it('pins the post-transform regression original and rejects metadata drift', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), {merge:true}) as {assets:CuratedAsset[]};
+    const row = registry.assets.find(entry => entry.asset.endsWith('/regression-transformed-target.png'))!;
+    expect(() => validateCuratedSourceAsset(row)).not.toThrow();
+    for (const mutation of [{sha256:'0'.repeat(64)}, {commit:'main'}, {license:'unverified'},
+      {source_image_url:'https://example.org/image.png'}, {crop_box_px:[0,0,10,10]},
+      {license_evidence_sha256:'0'.repeat(64)}, {metadata_status:'needs-confirmation'}])
+      expect(() => validateCuratedSourceAsset({...row,...mutation})).toThrow();
   });
 
   it('keeps ensemble illustrations tied to their actual algorithms and source pixels', () => {
@@ -8200,6 +12039,78 @@ describe('publication asset registry', () => {
     expect(readFileSync(resolve(root, row.license_evidence!), 'utf8')).toContain('Copyright (c) 2015 Andrej Karpathy');
   });
 
+  it('pins CLIP and SigLIP paper Figure 1 and keeps the former course copies out of the site', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')) as { assets: CuratedAsset[] };
+    const current = registry.assets.filter((row: CuratedAsset) =>
+      row.asset.startsWith('00 Учебник/Assets/Figures/curated/vision-objectives-2026-11-09/'));
+    expect(current.map((row: CuratedAsset) => row.id).sort()).toEqual([
+      'curated-clip-paper-figure1-351759e7ee8b',
+      'curated-siglip-paper-figure1-6e373e662574',
+    ]);
+    for (const row of current) validateCuratedSourceAsset(row, root);
+    for (const id of ['curated-stanford-cs336-multimodal-siglip-parallelism-21fbe73a2d33',
+      'curated-vlm2026-clip-figure1-ac050e1cf247']) {
+      const previous = registry.assets.find((row: CuratedAsset) => row.id === id);
+      expect(previous).toMatchObject({ publication_status: 'retired', used_in: [] });
+      expect(sha256(resolve(root, previous.asset))).toBe(previous.sha256);
+    }
+  });
+
+  it('pins the original LLaVA paper Figure 1 and retires the course copy', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')) as { assets: CuratedAsset[] };
+    const row = registry.assets.find(entry => entry.id === 'curated-llava-paper-figure1-310746447f5a')!;
+    validateCuratedSourceAsset(row);
+    const previous = registry.assets.find(entry => entry.id === 'curated-vlm2026-llava-figure1-27391332e106')!;
+    expect(previous).toMatchObject({ publication_status: 'retired', used_in: [] });
+    expect(sha256(resolve(root, previous.asset))).toBe(previous.sha256);
+  });
+
+  it('pins the complete unmodified OneVision AnyRes original and retains the course copy in the archive', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')) as { assets: CuratedAsset[] };
+    validateCuratedSourceAsset(registry.assets.find(entry => entry.id === 'curated-onevision-higher-anyres-db33ded7e7e6')!);
+    const previous = registry.assets.find(entry => entry.id === 'curated-stanford-cs336-multimodal-llava-anyres-ba1d449afcd3')!;
+    expect(previous).toMatchObject({ publication_status: 'retired', used_in: [] });
+    expect(sha256(resolve(root, previous.asset))).toBe(previous.sha256);
+  });
+
+  it('pins both original Prismatic training-ablation figures from the PMLR PDF', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')) as { assets: CuratedAsset[] };
+    for (const id of ['curated-prismatic-stage-ablation-49aca74ebdc0', 'curated-prismatic-vision-ablation-aa5f932da538'])
+      validateCuratedSourceAsset(registry.assets.find(entry => entry.id === id)!);
+  });
+
+  it('preserves the reviewed source figures and keeps the three superseded copies archival', () => {
+    const rows = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')).assets as CuratedAsset[];
+    for (const spec of finalSourceFigures) {
+      const row = rows.find(candidate => candidate.asset === spec.asset)!;
+      validateCuratedSourceAsset(row);
+      expect(() => validateCuratedSourceAsset({ ...row, license: 'Unverified' })).toThrow();
+      expect(() => validateCuratedSourceAsset({ ...row, crop_box_px: [0, 0, 2, 2] })).toThrow();
+    }
+    for (const spec of finalRetiredFigures) {
+      const row = rows.find(candidate => candidate.asset === spec.asset)!;
+      expect(row).toMatchObject({ ...spec, used_in: [], publication_status: 'retired', metadata_status: 'needs-confirmation' });
+      expect(sha256(resolve(root, spec.asset))).toBe(spec.sha256);
+      for (const note of spec.former_used_in) {
+        const body = readFileSync(resolve(root, note), 'utf8');
+        expect(body).not.toContain(spec.asset);
+        expect(body).toContain(spec.replacement);
+      }
+      expect(spec.former_used_in.some(note => readFileSync(resolve(root, note), 'utf8').includes(spec.figure_url))).toBe(true);
+    }
+  });
+  it('links all six retired ASTRA and ToolRL figures to the correct source panels', () => {
+    const assets = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')).assets as CuratedAsset[];
+    for (const spec of archivedAgentPaperFigures) {
+      const row = assets.find(candidate => candidate.asset === spec.asset)!;
+      validateCuratedSourceAsset(row);
+      const body = readFileSync(resolve(root, `Papers/${spec.owner}.md`), 'utf8');
+      expect(body).toContain(spec.figure_url);
+      expect(body).not.toContain(spec.asset);
+      expect(() => validateCuratedSourceAsset({ ...row, used_in: [`Papers/${spec.owner}.md`] })).toThrow();
+      expect(() => validateCuratedSourceAsset({ ...row, license: 'Apache-2.0' })).toThrow();
+    }
+  });
   it('keeps the three retired paper copies unverified and byte-pinned', () => {
     const rows=(parse(readFileSync(resolve(root,'05 Источники/asset-registry.yml'),'utf8')) as {assets:CuratedAsset[]}).assets;
     expect(retiredFigureCopies).toHaveLength(3);
@@ -8218,6 +12129,139 @@ describe('publication asset registry', () => {
   // every curated figure. Observed local runs take 24 s in isolation and 36 s
   // after a full build. This is a content-integrity check, not a speed benchmark;
   // keep every assertion and give only this integration case a 60 s budget.
+  it('integrates both already-pinned sequence-state objects without weakening source checks',()=>{
+    const entries=(parse(readFileSync(resolve(root,'05 Источники/asset-registry.yml'),'utf8'),{merge:true}) as {assets:CuratedAsset[]}).assets
+      .filter(x=>x.asset.startsWith('00 Учебник/Assets/Figures/curated/sequence-state-2026-11-03/'));
+    expect(entries).toHaveLength(2);
+    for(const entry of entries){
+      expect(()=>validateCuratedSourceAsset(entry)).not.toThrow();
+      for(const mutation of [{author:'Unknown'},{sha256:'0'.repeat(64)},
+        {source_sha256:'0'.repeat(64)},{source_page:1},{license:'MIT'},
+        {license_evidence_sha256:'0'.repeat(64)},{crop_box_px:[0,0,10,10]},
+        {dimensions_px:[1,1]}])
+        expect(()=>validateCuratedSourceAsset({...entry,...mutation})).toThrow();
+    }
+  });
+
+  it('rejects altered bytes, source identity, license and crop metadata for PyTorch copy traces',()=>{
+    const entries=(parse(readFileSync(resolve(root,'05 Источники/asset-registry.yml'),'utf8'),{merge:true}) as {assets:CuratedAsset[]}).assets
+      .filter(x=>x.asset.startsWith('00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/'));
+    expect(entries).toHaveLength(4);
+    for(const entry of entries){
+      expect(()=>validateCuratedSourceAsset(entry)).not.toThrow();
+      for(const mutation of [{author:'Unknown'},{sha256:'0'.repeat(64)},
+        {source_asset_sha256:'0'.repeat(64)},{commit:'main'},{license:'MIT'},
+        {source_image_url:'https://example.org/trace.png'},
+        {license_evidence_sha256:'0'.repeat(64)},{crop_box_px:[0,0,10,10]},
+        {dimensions_px:[1,1]},{metadata_status:'unverified'}])
+        expect(()=>validateCuratedSourceAsset({...entry,...mutation})).toThrow();
+    }
+  });
+
+  it('pins the Harvard archive figure inventory without licensing the retired adaptation', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }).assets;
+    const historical = JSON.parse(readFileSync(resolve(root, 'docs/audit/2026-11-09-release-readiness.json'), 'utf8'))
+      .courseImageReconciliation.pendingHarvardFileAndSHA256 as [string, string][];
+    expect(historical).toHaveLength(34);
+    for (const [file, hash] of historical) {
+      const path = 'Assets/' + file;
+      const entries = registry.filter((row: CuratedAsset) => row.asset === path);
+      expect(entries).toHaveLength(1);
+      const [row] = entries;
+      expect(row).toMatchObject({ sha256: hash, source_asset_sha256: hash,
+        source_render_commit: 'c1c8e803d61c7c4f96bd1424ec5a0501f20f7730' });
+      expect(sha256(resolve(root, path))).toBe(hash);
+      expect(row.source_image_url).toContain('/' + row.source_render_commit + '/');
+      if (file.endsWith('/gradient-attack.svg')) {
+        expect(row).toMatchObject({ license: null, rights_status: 'needs-confirmation', publication_status: 'retired', used_in: [] });
+      } else {
+        expect(row).toMatchObject({ license: 'CC BY-NC-SA 4.0', rights_status: 'source-license-verified' });
+        expect(row.used_in).toHaveLength(2);
+      }
+    }
+    const asset = '00 Учебник/Assets/Figures/curated/harvard-robustness-2026-11-09/fgsm-geometry.svg';
+    expect(registry.find((row: CuratedAsset) => row.asset === asset)).toMatchObject({
+      sha256: sha256(resolve(root, asset)), license: 'CC BY-NC-ND 4.0', derivation: 'source-svg-copy',
+    });
+  });
+
+  it('pins four legacy paper crops without treating visual provenance as a reuse license', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as {
+      assets: CuratedAsset[];
+    };
+    expect(legacyPdfFigureEvidence).toHaveLength(4);
+    expect(legacyPdfFigureEvidence.filter(({ record }) => record.license === 'CC BY 4.0')).toHaveLength(2);
+    const pending = legacyPdfFigureEvidence.filter(({ record }) => record.rights_status === 'needs-confirmation');
+    expect(pending).toHaveLength(2);
+    for (const { record } of legacyPdfFigureEvidence) {
+      const entry = registry.assets.find(asset => asset.asset === record.asset)!;
+      expect(() => validateCuratedSourceAsset(entry)).not.toThrow();
+      expect(() => validateCuratedSourceAsset({ ...entry, sha256: '0'.repeat(64) })).toThrow();
+      expect(() => validateCuratedSourceAsset({ ...entry, source_page: 999 })).toThrow();
+    }
+    for (const { record } of pending) {
+      expect(record.license).toBeNull();
+      expect(() => validateCuratedSourceAsset({
+        ...record, license: 'CC BY 4.0', rights_status: 'source-license-verified',
+      })).toThrow();
+    }
+  });
+
+  it('keeps the three archived VLM originals out of their former reader chapters', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as {
+      assets: CuratedAsset[];
+    };
+    expect(retiredVlmFigures).toHaveLength(3);
+    for (const expected of retiredVlmFigures) {
+      const row = registry.assets.find(asset => asset.asset === expected.asset)!;
+      expect(() => validateCuratedSourceAsset(row)).not.toThrow();
+      expect(() => validateCuratedSourceAsset({ ...row, publication_status: 'active' })).toThrow();
+      expect(() => validateCuratedSourceAsset({ ...row, sha256: '0'.repeat(64) })).toThrow();
+    }
+  });
+
+  it('verifies the complete licensed PP-DocLayoutV2 figure in both textbook editions', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as {
+      assets: CuratedAsset[];
+    };
+    const row = registry.assets.find(asset => asset.id === 'curated-pp-doclayout-v2-reading-order-f02cc9356b2a')!;
+    expect(() => validateCuratedSourceAsset(row)).not.toThrow();
+    for (const changed of [
+      { license: 'Apache-2.0' }, { source_image_url: row.source_image_url!.replace('v1/', '/') },
+      { sha256: '0'.repeat(64) }, { crop_box_px: [0, 0, 1440, 436] },
+    ]) expect(() => validateCuratedSourceAsset({ ...row, ...changed })).toThrow();
+  });
+
+  it('pins the Mooncake and Dynamo originals and rejects source, license, and retirement drift', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as {
+      assets: CuratedAsset[];
+    };
+    for (const original of servingRepositoryOriginals) {
+      const row = registry.assets.find(asset => asset.asset === original.asset)!;
+      expect(() => validateCuratedSourceAsset(row)).not.toThrow();
+      expect(() => validateCuratedSourceAsset({ ...row, commit: '0'.repeat(40) })).toThrow();
+      expect(() => validateCuratedSourceAsset({ ...row, license_url: 'https://example.com/LICENSE' })).toThrow();
+    }
+    const archived = registry.assets.find(asset => asset.asset === servingRepositoryReview.archivedDynamoOverview.asset)!;
+    expect(() => validateCuratedSourceAsset({ ...archived, publication_status: 'active' })).toThrow();
+  });
+
+  it('pins the original NCCL and Megatron figures and the licenses of the selected revisions', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as {
+      assets: CuratedAsset[];
+    };
+    expect(distributedNvidiaFigures.map(row => row.license)).toEqual([
+      'Apache-2.0', 'Apache-2.0', 'Apache-2.0', 'Apache-2.0', 'BSD-3-Clause',
+    ]);
+    for (const original of distributedNvidiaFigures) {
+      const rows = registry.assets.filter(row => row.asset === original.asset);
+      expect(rows).toHaveLength(1);
+      expect(() => validateCuratedSourceAsset(rows[0])).not.toThrow();
+      expect(() => validateCuratedSourceAsset({ ...rows[0], commit: '0'.repeat(40) })).toThrow();
+      expect(() => validateCuratedSourceAsset({ ...rows[0], license_url: 'https://example.com/LICENSE' })).toThrow();
+    }
+  });
+
   it('registers every tracked curated binary exactly once', () => {
     const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as {
       assets: CuratedAsset[];
@@ -8240,12 +12284,58 @@ describe('publication asset registry', () => {
       asset.startsWith('00 Учебник/Assets/Figures/curated/')
     );
     expect(new Set(curatedEntries.map(({ id }) => id)).size).toBe(curatedEntries.length);
+    const invalid: string[] = [];
     for (const entry of curatedEntries) {
       expect(entry.id).toMatch(/^curated-[a-z0-9-]+-[a-f0-9]{12}$/);
-      validateCuratedSourceAsset(entry);
+      try {
+        validateCuratedSourceAsset(entry);
+      } catch (cause) {
+        invalid.push(entry.asset + ': ' + (cause instanceof Error ? cause.message : String(cause)));
+      }
     }
+    expect(invalid).toEqual([]);
   }, 60_000);
 
+  it('rejects source drift for native SVG plots and embedded paper rasters', () => {
+    const {assets} = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')) as {
+      assets: CuratedAsset[];
+    };
+    const ids = [
+      'curated-dolma-figure31-c4-f3ebc96ef6ea', 'curated-c4-figure5-pmi-f75800b58acb',
+      'curated-peft-qlora-fig2-6690d5f00e17', 'curated-peft-qlora-fig6-cc100be66d62',
+      'curated-sft-tulu-figure5-6cda6319b36a', 'curated-posttraining-tulu-figure23-d1aa186a4c2c',
+      'curated-scaling-sardana-figure5-2eeafe50cf15',
+    ];
+    for (const id of ids) {
+      const row = assets.find(asset => asset.id === id)!;
+      expect(row, id).toBeDefined();
+      validateCuratedSourceAsset(row);
+      for (const drift of [
+        { source_image_url: row.source_image_url!.replace(/v[125]\//, '/').replace('#page=6', '#page=7') },
+        { sha256: '0'.repeat(64) },
+        { license: 'MIT' },
+        { crop_box_px: [0, 0, 10, 10] },
+      ]) expect(() => validateCuratedSourceAsset({...row, ...drift})).toThrow();
+    }
+    const sardana = assets.find(asset => asset.id === ids.at(-1))!;
+    expect(() => validateCuratedSourceAsset({...sardana, source_pdf_object: 33})).toThrow();
+    const dolma = assets.find(asset => asset.id === ids[0])!;
+    expect(() => validateCuratedSourceAsset({...dolma, source_viewbox: [0, 0, 100, 100]})).toThrow();
+  });
+
+  it('binds versioned arXiv originals to their publisher asset and license evidence', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')) as { assets: CuratedAsset[] };
+    const row = registry.assets.find(entry => entry.id === 'curated-distserve-arxiv-teaser-bae5d6fba7ac')!;
+    expect(() => validateCuratedSourceAsset(row)).not.toThrow();
+    for (const mutation of [
+      { source_image_url: 'https://arxiv.org/html/2401.09670v2/teaser.svg' },
+      { source_url: 'https://arxiv.org/html/2401.09670#S1.F1' },
+      { license_evidence: 'https://arxiv.org/html/2401.09670v2' },
+      { license: 'MIT' },
+      { sha256: '0'.repeat(64) },
+      { crop_box_px: [0, 0, 40, 40] },
+    ]) expect(() => validateCuratedSourceAsset({ ...row, ...mutation })).toThrow();
+  });
   it('validates the complete original BERTScore image and rejects altered source/license metadata', () => {
     const registry=parse(readFileSync(resolve(root,'05 Источники/asset-registry.yml'),'utf8'),{merge:true}) as {assets:CuratedAsset[]};
     const entry=registry.assets.find(row=>row.id==='curated-bertscore-recall-d917184b34ff')!;
@@ -8296,6 +12386,23 @@ describe('publication asset registry', () => {
       { source_stylesheet_sha256: '0'.repeat(64) }, { commit: 'main' }, { license: 'MIT' }]) {
       expect(() => validateCuratedSourceAsset({ ...row, ...edit })).toThrow();
     }
+  });
+
+  it('retains the complete MXFP8 row/column source diagram and rejects altered provenance', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as { assets: CuratedAsset[] };
+    const row = registry.assets.find(entry => entry.id === 'curated-precision-te-row-column-603a59f25341')!;
+    expect(() => validateCuratedSourceAsset(row)).not.toThrow();
+    for (const edit of [{ sha256: '0'.repeat(64) }, { source_asset_sha256: '0'.repeat(64) },
+      { source_stylesheet_sha256: '0'.repeat(64) }, { commit: 'main' }, { license: 'MIT' },
+      { source_asset: 'publishing/fixtures/../mxfp8_row_col.svg' },
+      { source_url: row.source_url!.replace('mxfp8_row_col.svg', 'unreviewed.svg') },
+      { asset: row.asset.replace('te-mxfp8-row-column.svg', 'unreviewed.svg') }]) {
+      expect(() => validateCuratedSourceAsset({ ...row, ...edit })).toThrow();
+    }
+    const svg = readFileSync(resolve(root, row.asset), 'utf8');
+    expect(svg).toContain('viewBox="0 0 650 450"');
+    expect(svg).toContain('Rowwise (1x32 blocks)');
+    expect(svg).toContain('Columnwise (32x1 blocks)');
   });
 
   it('accepts archived viewport-only SVG crops but rejects content edits and invalid bounds', () => {
@@ -8421,7 +12528,21 @@ describe('publication asset registry', () => {
   });
 
   it('decodes the original indexed HF KV illustration without recompressing it', () => {
-    const path = resolve(root, '00 Учебник/Assets/Figures/curated/edls-neural-kv-2026-10-26/hf-kv-cache.png');
+    const asset = '00 Учебник/Assets/Figures/curated/edls-neural-kv-2026-10-26/hf-kv-cache.png';
+    const path = resolve(root, asset);
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'),
+      { merge: true }) as { assets: CuratedAsset[] };
+    const entry = registry.assets.find(row => row.asset === asset);
+    expect(entry).toBeDefined();
+    validateCuratedSourceAsset(entry!);
+    expect(entry!.used_in).toEqual([
+      '06 Практика/14 Собрать минимальный inference engine.md',
+      '00 Учебник/_index.md',
+      'en/00 Textbook/_index.md',
+      '00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md',
+    ]);
+    for (const owner of entry!.used_in!)
+      expect(readFileSync(resolve(root, owner), 'utf8')).toContain('![[02 Areas/ML & DL/' + asset);
     const bytes = readFileSync(path);
     expect(bytes[25]).toBe(3); // indexed-colour PNG, not a rewritten RGB copy
     expect(validateRenderedPngBytes(bytes)).toEqual([1348, 466]);
@@ -8486,8 +12607,12 @@ describe('publication asset registry', () => {
       expect(readFileSync(resolve(root, entry.public_license_copy!))).toEqual(
         readFileSync(resolve(root, entry.license_copy!))
       );
-      expect(entry.used_in).toHaveLength(1);
-      expect(readFileSync(resolve(root, entry.used_in[0]), 'utf8')).toContain(entry.asset);
+      const studyUse = vllmSourceLibrary.figures.find(figure => figure.asset === entry.asset);
+      if (studyUse) expect(entry.used_in).toEqual(studyUse.used_in);
+      else expect(entry.used_in).toHaveLength(1);
+      for (const owner of entry.used_in) {
+        expect(readFileSync(resolve(root, owner), 'utf8')).toContain(entry.asset);
+      }
     }
   });
 
@@ -8590,6 +12715,17 @@ describe('publication asset registry', () => {
     }
   });
 
+  it('pins the seq2seq encoder interface original and rejects changed provenance',()=>{
+    const registry=parse(readFileSync(resolve(root,'05 Источники/asset-registry.yml'),'utf8')) as {assets:CuratedAsset[]};
+    const entry=registry.assets.find(x=>x.asset==='00 Учебник/Assets/Figures/curated/seq2seq-bridge-2026-11-03/d2l-encoder-decoder.svg')!;
+    expect(()=>validateCuratedSourceAsset(entry)).not.toThrow();
+    for(const invalid of [{author:'Unknown'},{commit:'main'},{license:'CC0'},
+      {sha256:'0'.repeat(64)},{source_asset_sha256:'0'.repeat(64)},
+      {source_page_sha256:'0'.repeat(64)},{license_evidence_sha256:'0'.repeat(64)},
+      {source_image_url:'https://example.org/a.svg'},{derivation:'source-raster-copy'}])
+      expect(()=>validateCuratedSourceAsset({...entry,...invalid})).toThrow();
+  });
+
   it('preserves all seven seq2seq source figures and rejects provenance drift', () => {
     const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as { assets: CuratedAsset[] };
     const rows = registry.assets.filter(row => Object.hasOwn(seq2seqFigures, row.asset));
@@ -8676,8 +12812,19 @@ describe('publication asset registry', () => {
     for (const repair of refs.repairs) {
       const row = registry.assets.find(entry => entry.asset === repair.asset)!;
       expect(row.sha256).toBe(repair.sha256);
-      expect(row.provenance_confirmation).toBe('user-confirmed-open-materials');
-      expect(row.source_asset).toMatch(/^raw\/papers\/external\/vlm-2026\//);
+      validateCuratedSourceAsset(row);
+      if (row.asset.endsWith('/molmo-figure11-openness.png')) {
+        expect(row.source_asset).toBe(repair.source_asset);
+        expect(row.source_asset_sha256).toBe(repair.source_asset_sha256);
+        expect(row.former_used_in).toHaveLength(2);
+        for (const owner of row.former_used_in!) {
+          const chapter = readFileSync(resolve(root, owner), 'utf8');
+          expect(chapter).toContain(row.figure_url);
+          expect(chapter).not.toContain(row.asset);
+        }
+      } else {
+        expect(row.source_asset).toMatch(/^raw\/papers\/external\/vlm-2026\//);
+      }
       expect(row.modifications).toContain(archive + 'figure-repairs.json');
       for (const [file, hash] of [[repair.asset, repair.sha256],
         [repair.source_asset, repair.source_asset_sha256], [repair.source_page_snapshot, repair.source_page_sha256],
@@ -8713,8 +12860,11 @@ describe('publication asset registry', () => {
     const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as { assets: CuratedAsset[] };
     const row = registry.assets.find(entry => entry.asset === repair.asset)!;
     expect(row.sha256).toBe(repair.sha256);
-    expect(row.provenance_confirmation).toBe('user-confirmed-open-materials');
-    expect(row.source_asset).toBe('raw/papers/external/vlm-2026/2503.20215.pdf');
+    validateCuratedSourceAsset(row);
+    expect(row.source_asset).toBe(repair.source_asset);
+    expect(row.source_asset_sha256).toBe(repair.source_asset_sha256);
+    expect(row.source_page_snapshot).toBe(repair.source_page_snapshot);
+    expect(row.source_page_sha256).toBe(repair.source_page_sha256);
     expect(row.modifications).toContain(archive + 'figure-repairs.json');
     for (const [file, hash] of [[repair.asset, repair.sha256],
       [repair.source_asset, repair.source_asset_sha256], [repair.source_page_snapshot, repair.source_page_sha256],
@@ -8722,6 +12872,20 @@ describe('publication asset registry', () => {
       expect(sha256(resolve(root, file!))).toBe(hash);
     expect(pngDimensions(resolve(root, repair.asset))).toEqual([1745, 475]);
     expect(pngDimensions(resolve(root, repair.source_raster))).toEqual([1423, 290]);
+  });
+
+  it('pins the archived Pix2Struct composite without publishing third-party screenshots', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as { assets: CuratedAsset[] };
+    const row = registry.assets.find(entry => entry.id === 'curated-vlm2026-pix2struct-figure1-30034161ebd2')!;
+    validateCuratedSourceAsset(row);
+    expect(row.source_asset).toBe('05 Источники/Originals/documents-2026-10-20/pix2struct.pdf');
+    expect(row.source_asset_sha256).toBe('b899b3beba7723f60cf55f9715e9e02cf409b7ecd3a648156c238bf09f0b58a4');
+    expect(row.former_used_in).toHaveLength(2);
+    for (const owner of row.former_used_in!) {
+      const chapter = readFileSync(resolve(root, owner), 'utf8');
+      expect(chapter).toContain(row.figure_url);
+      expect(chapter).not.toContain(row.asset);
+    }
   });
 
   it('preserves document-source figures and rejects license, crop and pin drift', () => {
@@ -8740,7 +12904,7 @@ describe('publication asset registry', () => {
   });
 
 
-  it('keeps repaired Molmo data and InternVL training figures tied to archived PDF crops', () => {
+  it('keeps both retired VLM training rasters tied to their archived PDF crops', () => {
     const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as { assets: CuratedAsset[] };
     const prefix = '05 Источники/Originals/vlm-training-2026-10-20/';
     const repairs = JSON.parse(readFileSync(resolve(root, prefix + 'figure-repairs.json'), 'utf8')) as Array<{
@@ -8754,8 +12918,21 @@ describe('publication asset registry', () => {
       const entry = registry.assets.find(row => row.asset === repair.asset);
       expect(entry).toBeDefined();
       expect(entry!.sha256).toBe(repair.sha256);
-      expect(entry!.provenance_confirmation).toBe('user-confirmed-open-materials');
-      expect(entry!.license).toBe('open paper material; reuse confirmed by repository owner');
+      const figureUrl = repair.asset.endsWith('/internvl25-figure4-training-pipeline.png')
+        ? 'https://arxiv.org/pdf/2412.05271v1#page=6'
+        : 'https://arxiv.org/pdf/2409.17146v2#page=2';
+      expect(entry).toMatchObject({
+        publication_status: 'retired', rights_status: 'needs-confirmation',
+        used_in: [], license: null, license_url: null,
+        source_asset: repair.source_asset, source_asset_sha256: repair.source_asset_sha256,
+        figure_url: figureUrl,
+      });
+      expect(entry!.former_used_in).toHaveLength(2);
+      for (const owner of entry!.former_used_in!) {
+        const chapter = readFileSync(resolve(root, owner), 'utf8');
+        expect(chapter).toContain(entry!.figure_url);
+        expect(chapter).not.toContain(repair.asset);
+      }
       expect(entry!.modifications).toContain(prefix + 'figure-repairs.json');
       for (const [path, hash] of [
         [repair.asset, repair.sha256], [repair.source_raster, repair.source_raster_sha256],
@@ -8766,6 +12943,34 @@ describe('publication asset registry', () => {
       const [x1, y1, x2, y2] = repair.crop_box_px;
       expect(pngDimensions(resolve(root, repair.asset))).toEqual([x2!-x1!, y2!-y1!]);
       expectDecodableImage(resolve(root, repair.asset));
+    }
+  });
+
+  it.each(['curated-internvl35-training-5234140e2125', 'curated-molmopoint-guisyn-dcb476acd4a1',
+    'curated-mm-detect-figure1-26bb5ad1fbe1', 'curated-pheye-dense-cross-attention-f74aaed3c0c5'])('pins the original CC BY VLM figure %s in both locales', id => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as { assets: CuratedAsset[] };
+    const entry = registry.assets.find(row => row.id === id);
+    expect(entry).toBeDefined();
+    validateCuratedSourceAsset(entry!);
+    expect(() => validateCuratedSourceAsset({...entry!, license: 'public-domain'})).toThrow();
+    expect(() => validateCuratedSourceAsset({...entry!, sha256: '0'.repeat(64)})).toThrow();
+  });
+
+  it('keeps the two Flamingo copies and Molmo tokenization figure archived and linked', () => {
+    const registry = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8'), { merge: true }) as { assets: CuratedAsset[] };
+    for (const [id, formerUseCount] of [
+      ['curated-vlm2026-flamingo-figure3-764e83c6d558', 2],
+      ['curated-atlas-multimodal-000000000089', 1],
+      ['curated-vlm2026-molmo-figure5-35fde220b09c', 3],
+    ] as const) {
+      const row = registry.assets.find(entry => entry.id === id)!;
+      validateCuratedSourceAsset(row);
+      expect(row.former_used_in).toHaveLength(formerUseCount);
+      for (const owner of row.former_used_in!) {
+        const chapter = readFileSync(resolve(root, owner), 'utf8');
+        expect(chapter).toContain(row.figure_url);
+        expect(chapter).not.toContain(row.asset);
+      }
     }
   });
 

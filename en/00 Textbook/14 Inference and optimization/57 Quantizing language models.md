@@ -2,7 +2,7 @@
 title: "Quantizing language models"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-29
+last_updated: 2026-11-11
 last_verified: 2026-10-19
 source_unit_id:
   - lecture-02-fp4-block-scaling
@@ -20,8 +20,8 @@ primary_sources:
   - https://github.com/huggingface/transformers/blob/1d9654e78a23fb167ef539cbd699dfbd3e4830cf/docs/source/en/quantization/concept_guide.md
 locale: en
 translation_status: current
-canonical_revision: "70bd3d2b286af4c5b04150e0a27bf527bd18de4ac6f829d2b7eaeb437f010d17"
-translation_reviewed: "2026-10-29"
+canonical_revision: "dc984a95ab2117c1c23c8d75023030e7a54a1cdc3665a9950b78a5e9e43265df"
+translation_reviewed: "2026-11-11"
 translation_of: "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md"
 ---
 
@@ -74,13 +74,11 @@ container can also hold $-128$. The symmetric grid represents zero exactly.
 Other implementations use every container code; their rounding and
 saturation rules must be checked separately.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-quantization-rounding.png]]
-
-*Tim Dettmers and Hugging Face,
-[Making LLMs even more accessible with bitsandbytes](https://huggingface.co/blog/hf-bitsandbytes-integration).
-The figure calculates $\alpha=127/\max|w_i|$, multiplies by $\alpha$, then
-rounds. Our scale is $s=1/\alpha$. Bottom-row labels are themselves rounded;
-apparent agreement with the top row does not imply zero reconstruction error.*
+In the [bitsandbytes article's absmax example](https://github.com/huggingface/blog/blob/ee25167d3361425b25144de793a629343d5efc08/assets/96_hf_bitsandbytes_integration/quant-freeze.png),
+the largest magnitude is 5.4. The figure uses a multiplier
+$\alpha=127/5.4$, the reciprocal of our step $s=5.4/127$. The weight
+$-4.3$ maps to code $-101$, which reconstructs to $-101s\approx-4.2945$.
+The figure prints both values to one decimal place, hiding that error.
 
 Adding a weight of magnitude ten to the group changes the step to $10/3$.
 All four earlier weights now round to zero. They have not become less
@@ -165,6 +163,29 @@ z&=\operatorname{clip}\bigl(\operatorname{round}(q_{\min}-a/s),\\
 &\qquad{}q_{\min},q_{\max}\bigr).
 \end{aligned}
 $$
+
+In the Transformers diagram, the upper line is the real-valued range
+and the lower line is the integer code range. The middle arrow pairs
+real zero with code $z$. In our $[-1,2]$ example that is code 5,
+even though the lowest code is 0.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/hf-affine-range.png|The lower integer range corresponds to the upper real range. Code z is paired with real zero, but need not itself be zero.]]
+
+*Hugging Face, [Quantization concepts: Affine quantization](https://github.com/huggingface/transformers/blob/1d9654e78a23fb167ef539cbd699dfbd3e4830cf/docs/source/en/quantization/concept_guide.md#affine-quantization),
+[original image](https://huggingface.co/datasets/huggingface/documentation-images/blob/3630f7a2763c93cf7b70fb403dfe669b9f0d27b1/transformers/quant_visual.png), [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+Unmodified.*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/hf-affine-dequant.png|An INT8 code matrix shares scale 3.58 and zero point −77. The bottom-left code −77 reconstructs to zero.]]
+
+*Hugging Face, [Quantization concepts: Affine quantization](https://github.com/huggingface/transformers/blob/1d9654e78a23fb167ef539cbd699dfbd3e4830cf/docs/source/en/quantization/concept_guide.md#affine-quantization),
+[original reconstruction figure](https://huggingface.co/datasets/huggingface/documentation-images/blob/3630f7a2763c93cf7b70fb403dfe669b9f0d27b1/transformers/dequant.png), [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+Unmodified. The nonzero reconstructions are approximate.*
+
+In the second figure, $z=-77$, so the bottom-left code $-77$ reconstructs
+to exactly zero. The top-left cell exposes the rounding error:
+code $-23$ gives $3.58(-23+77)=193.32$, not the original $191.6$.
+Widen the integer type before subtracting the zero point: $127-(-77)=204$
+does not fit in signed INT8.
 
 An asymmetric grid stores and applies $z$. Matrix multiplication therefore
 requires corrections: $\sum q_xq_w$ becomes
@@ -412,13 +433,19 @@ retained a small portion of associated weights in FP16. Quality improved,
 but scattered FP16 values inside an INT3 matrix are inconvenient for a
 dense kernel.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/awq-schema.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/quantization-editorial-2026-11-11/awq-overview.png|The left panel rounds every weight to INT3. The middle keeps the second input channel's weight row in FP16. The right scales that channel while storing all weights in INT3.]]
 
-*Ji Lin et al., [AWQ, Figure 2](https://arxiv.org/abs/2306.00978).
-Left: ordinary INT3 rounding. Center: the diagnostic that keeps 1% of weights
-in FP16. Right: AWQ scaling with uniform low-bit weight storage.
-The center improves perplexity but complicates dense execution.
-Also discussed in [Stanford CS336 Lecture 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L480-L487).*
+*Ji Lin et al., [AWQ, Figure 2](https://arxiv.org/html/2306.00978v5#S1.F2);
+[original figure from the authors' repository](https://github.com/mit-han-lab/llm-awq/blob/d6e797a42b9ef7778de8ee2352116e0f48a78d61/figures/overview.png),
+[MIT](/licenses/awq-d6e797a4-MIT.txt). All three panels are intact.
+The PPL values are for the figure's OPT-6.7B experiment with INT3
+and groups of 128 weights, not for the small matrices in the drawing.*
+
+In the middle panel, column two of $X$ pairs with row two of $W$:
+those entries multiply under $Y=XW$. This panel keeps that row in FP16.
+In the right panel, AWQ uses each input column's mean absolute activation
+to set the corresponding weight-row scale. The highlighted row no longer
+needs separate FP16 storage.
 
 AWQ itself retains a uniform low-bit format. It enlarges weights of selected
 input channels and inversely scales the activations. Before quantization,
@@ -431,9 +458,11 @@ D=\operatorname{diag}(s_1,\ldots,s_d),\quad s_j>0.
 \end{gathered}
 $$
 
-After rounding it becomes $(XD^{-1})Q(DW)$. A sensitive channel gains a finer
-effective step after inverse scaling. Enlarging weights can also raise the
-group maximum and worsen other channels' rounding, so scales must be selected.
+After rounding it becomes $(XD^{-1})Q(DW)$. If the transformed group uses
+step $\Delta_g$, the effective step for input channel $j$ is $\Delta_g/s_j$
+in the original coordinates. Increasing $s_j$ can also raise the group
+maximum and coarsen $\Delta_g$ for every weight in the group. AWQ chooses
+scales by output error rather than by the resolution of one coordinate.
 
 Take $X=(10,1)$ and $w=(0.14,1.75)^\top$, with output $3.15$.
 Symmetric INT4 has step $1.75/7=0.25$, rounds the weights to $(0.25,1.75)$,
@@ -444,6 +473,36 @@ $X'=(5,1)$, $w'=(0.28,1.75)^\top$. The maximum and step remain unchanged.
 Rounding still gives $(0.25,1.75)$, but the transformed input yields
 $5\cdot0.25+1.75=3$. Absolute error falls from $1.10$ to $0.15$ without
 a separate FP16 weight.
+
+<a id="awq-calibration-grid"></a>
+
+#### How AWQ selects a scale on calibration inputs
+
+The factor two above was chosen by hand. Add a second calibration
+input $(2,3)$: the mean absolute inputs are $(6,2)$ and the unquantized
+outputs are $(3.15,5.53)$. In [AWQ, §3, Equation 5](https://arxiv.org/html/2306.00978v5#S3),
+the channel factors are proportional to these means raised to $\alpha$.
+For this calculation only the ratio matters, so we can leave the
+second factor at one and set the first to $3^\alpha$.
+
+| $\alpha$ | Scale ratio | Weight codes | Mean squared error over both outputs |
+|---:|---:|---:|---:|
+| 0 | 1 | $(1,7)$ | 0.6292 |
+| 0.50 | 1.732 | $(1,7)$ | 0.000978 |
+| 0.55 | 1.830 | $(1,7)$ | 0.000593 |
+| 0.95 | 2.840 | $(2,7)$ | 0.067684 |
+
+At $\alpha=0.55$, the first scaled weight is about 0.256. The step is
+still 0.25, so its code is one and the effective weight after reversing
+the scale is about 0.137 instead of 0.14. At $\alpha=0.95$, it crosses
+a rounding boundary and gets code two. The output error grows again.
+
+The [authors' code](https://github.com/mit-han-lab/llm-awq/blob/d6e797a42b9ef7778de8ee2352116e0f48a78d61/awq/quantize/auto_scale.py#L108-L154) tries twenty candidates from 0 to
+0.95 in steps of 0.05. For each candidate it reconstructs the trial
+weights, compares the output with the original, and restores the
+parameters before the next candidate. Its loss can cover a module
+with several projections. The code below checks the principle on one
+output with our symmetric grid, without packing or running a GPU kernel.
 
 <!-- checked-example: quant-awq-step -->
 ```python
@@ -456,13 +515,30 @@ np.testing.assert_allclose(awq_x @ awq_w, 3.15)
 np.testing.assert_allclose(awq_x @ plain_w, 4.25)
 np.testing.assert_allclose((awq_x / channel_scale) @ scaled_w, 3.0)
 
+calibration = np.array([[10.0, 1.0], [2.0, 3.0]])
+reference = calibration @ awq_w
+mean_abs = np.abs(calibration).mean(axis=0)
+candidates = np.arange(20) / 20
+losses = []
+for alpha in candidates:
+    channel_factors = mean_abs ** alpha
+    channel_factors /= np.sqrt(channel_factors.max() * channel_factors.min())
+    recovered = np.array(symmetric_quantize(awq_w * channel_factors, 4)[2])
+    estimate = (calibration / channel_factors) @ recovered
+    losses.append(np.mean((estimate - reference) ** 2))
+np.testing.assert_allclose(reference, [3.15, 5.53])
+np.testing.assert_allclose(losses[0], 0.6292)
+np.testing.assert_allclose(losses[10], 0.00097835348309554)
+np.testing.assert_allclose(candidates[np.argmin(losses)], 0.55)
+np.testing.assert_allclose(min(losses), 0.00059306982672653)
+
 ```
 
-The factor two was chosen manually for this example. AWQ constructs
-candidates from activation statistics and selects scaling strength by
-calibration output error. It searches for a transformation rather than
-fine-tuning original weights by gradient descent. The name alone does
-not specify group size, packing or inference kernel.
+The selected $\alpha=0.55$ applies only to these two inputs and this layer.
+In a full decoder, inverse input scales can often be folded into the
+preceding operation. The chosen scales still need evaluation on other
+inputs. Group size, packing, and kernel choice are separate deployment
+decisions.
 
 <a id="выбросы-активаций-и-llmint8"></a>
 

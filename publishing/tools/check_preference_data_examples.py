@@ -102,6 +102,18 @@ def main():
     assert math.isclose(pair_mean, .6941176470588236)
     assert group_mean == .5 and not math.isclose(pair_mean, group_mean)
     assert r"L_{\mathrm{pairs}}" in text and r"L_{\mathrm{groups}}" in text
+    tulu_section = text.split('id="pref-tulu-rating-to-pair"', 1)[1].split(
+        '### Попарное сравнение', 1)[0]
+    criteria = {}
+    for answer, scores, printed in re.findall(
+            r"^\| ([A-D]) \| ([1-5](?:, [1-5]){3}) \| (\d,\d{2}) \|$", tulu_section, re.M):
+        score = sum(map(int, scores.split(", "))) / 4
+        assert score == float(printed.replace(",", "."))
+        criteria[answer] = score
+    assert sorted(criteria, key=criteria.get, reverse=True) == ["A", "D", "C", "B"]
+    assert criteria["A"] - criteria["D"] == .5
+    assert criteria["A"] - criteria["B"] == 1.75
+    assert "chosen=A" in tulu_section and "rejected=D" in tulu_section
     cycle = ns["cycle_probability"]
     assert math.isclose(cycle, .09453439083199781)
     probability_of = ns["preference_probability"]
@@ -131,6 +143,7 @@ def main():
                       "bradley_terry_probability": probability, "kappa": kappa,
                       "independent_cycle_probability": cycle,
                       "pair_weighted_loss": pair_mean, "group_weighted_loss": group_mean,
+                      "tulu_example_means": criteria,
                       "majority_cycle_votes": [2, 2, 2],
                       "example_stdout": example_stdout}, indent=2))
     print("PASS actual preference-data examples; ranking, ties, grouping, histories, verdicts, original source row, arithmetic")

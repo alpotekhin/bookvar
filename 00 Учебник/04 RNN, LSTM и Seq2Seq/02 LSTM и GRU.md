@@ -2,10 +2,78 @@
 title: LSTM и GRU
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-21
+last_updated: 2026-11-10
+source_language: mixed
+reference_terms:
+  - label: "Память c и скрытое состояние h"
+    label_en: "Cell memory c and hidden state h"
+    anchor: lstm-two-states
+  - label: "Вентиль забывания"
+    label_en: "Forget gate"
+    anchor: lstm-forget
+  - label: "Входной вентиль и кандидат"
+    label_en: "Input gate and candidate"
+    anchor: lstm-write
+  - label: "Выходной вентиль и чтение памяти"
+    label_en: "Output gate and memory readout"
+    anchor: lstm-output
+  - label: "Численный проход LSTM"
+    label_en: "Scalar LSTM forward pass"
+    anchor: lstm-scalar
+  - label: "Производные вентилей и полный BPTT"
+    label_en: "Gate derivatives and full BPTT"
+    anchor: lstm-gate-gradients
+  - label: "Прямой путь, забывание и полный якобиан"
+    label_en: "Direct path, retention and full Jacobian"
+    anchor: lstm-gradient-path
+  - label: "Совмещённая матрица и порядок i/f/g/o"
+    label_en: "Fused weights and i/f/g/o ordering"
+    anchor: lstm-cell-weights
+  - label: "Исходная LSTM и добавление forget gate"
+    label_en: "Original LSTM and the added forget gate"
+    anchor: lstm-history
+  - label: "Связанные вентили и peephole"
+    label_en: "Coupled gates and peepholes"
+    anchor: lstm-variants
+  - label: "Единое состояние GRU"
+    label_en: "Single GRU state"
+    anchor: gru-state
+  - label: "Reset gate и кандидат GRU"
+    label_en: "GRU reset gate and candidate"
+    anchor: gru-reset
+  - label: "Update gate и выпуклая смесь"
+    label_en: "Update gate and convex mixing"
+    anchor: gru-update
+  - label: "Соглашения z и порядок reset"
+    label_en: "z conventions and reset placement"
+    anchor: gru-conventions
+  - label: "Почему смещения кандидата GRU не складываются"
+    label_en: "Why GRU candidate biases do not merge"
+    anchor: gru-candidate-biases
+  - label: "Состояния и число параметров"
+    label_en: "Recurrent states and parameter counts"
+    anchor: recurrent-parameter-counts
+  - label: "Слои, направления и формы тензоров"
+    label_en: "Layers, directions and tensor shapes"
+    anchor: recurrent-sequence-shapes
+  - label: "Два направления и конечные состояния"
+    label_en: "Two directions and final states"
+    anchor: recurrent-bidirectional
+  - label: "Проекция внутри рекуррентного состояния"
+    label_en: "Projection inside recurrent state"
+    anchor: lstm-projection
+  - label: "Реальные длины LSTM/GRU и padding"
+    label_en: "True LSTM/GRU lengths and padding"
+    anchor: gated-packed-sequences
+  - label: "Перенос и отсоединение обоих состояний"
+    label_en: "Carrying and detaching both states"
+    anchor: gated-state-carry
 previous: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT]]"
 next: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора]]"
 primary_sources:
+  - https://d2l.ai/chapter_recurrent-modern/bi-rnn.html
+  - https://docs.pytorch.org/docs/2.14/generated/torch.nn.LSTM.html
+  - https://docs.pytorch.org/docs/2.14/generated/torch.nn.GRU.html
   - https://www.bioinf.jku.at/publications/older/2604.pdf
   - https://doi.org/10.1162/089976600300015015
   - https://aclanthology.org/D14-1179/
@@ -32,20 +100,23 @@ LSTM, long short-term memory, вводит два вектора: состоян
 сохранением, новой записью и чтением памяти. Это непрерывные обучаемые
 операции; отдельные координаты не обязаны иметь понятный человеку смысл.
 
+<a id="lstm-two-states"></a>
+
 ## LSTM: память и три решения
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-chain.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/lstm-hidden-state.svg|Один шаг LSTM: обновление памяти C и чтение в скрытое состояние H]]
 
-*Три последовательных шага LSTM у Chris Olah. Верхняя горизонтальная
-ветвь передаёт состояние ячейки; нижняя передаёт скрытое состояние.
-В середине раскрыты вычисления одного шага.
-Источник: [Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/).*
+*Zhang, Lipton, Li, Smola, [D2L, Hidden State, рис. 10.1.4](https://en.d2l.ai/chapter_recurrent-modern/lstm.html#hidden-state).
+Прежняя память $C_{t-1}$ входит сверху слева. В верхней ветви она
+обновляется до $C_t$; справа из неё получают $H_t$ через tanh и выходной
+вентиль $O_t$. Заглавные буквы у D2L обозначают пакеты векторов.
+Полный исходный SVG; [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
 
-На схеме каждая линия переносит вектор. Жёлтый прямоугольник обозначает
-обучаемое аффинное преобразование с указанной активацией; кружки обозначают
-поэлементные операции. Разветвление копирует значение, слияние входных
-линий перед слоем означает конкатенацию. Один блок повторяется с теми же
-параметрами на всех шагах.
+Одна и та же ячейка с теми же весами работает на каждом шаге.
+Пара $(h_t,c_t)$ становится входным состоянием для шага $t+1$,
+который также получает новый $x_{t+1}$. На
+[развёрнутой схеме Chris Olah](https://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-chain.png)
+это две отдельные линии между соседними ячейками.
 
 Пусть $x_t\in\mathbb R^d$, а $h_{t-1},c_{t-1}\in\mathbb R^m$.
 Состояния в формулах считаются столбцами. Обозначим объединённый вход
@@ -55,6 +126,8 @@ $u_t=[h_{t-1};x_t]\in\mathbb R^{m+d}$. Описываем обычную LSTM
 $m\times(m+d)$, смещение имеет длину $m$.
 Все три вентиля и кандидат вычисляются из одного $u_t$;
 для их расчёта не нужно ждать результатов друг друга.
+
+<a id="lstm-forget"></a>
 
 ### Сколько прежней памяти сохранить
 
@@ -69,12 +142,13 @@ $$
 а коэффициент 0.1 превращает её в 0.2.
 В разных координатах коэффициенты могут быть разными.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-f.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/lstm-gates.svg|Три вентиля LSTM получают прежнее скрытое состояние и текущий вход]]
 
-*Выделены расчёт $f_t$ из $[h_{t-1},x_t]$ и умножение прежнего $C_{t-1}$
-на этот вектор. Заглавное $C$ на рисунке соответствует нашему $c$.
-Источник: Chris Olah,
-[Understanding LSTM Networks, Step-by-Step LSTM Walk Through](https://colah.github.io/posts/2015-08-Understanding-LSTMs/).*
+*Zhang et al., [D2L, Input Gate, Forget Gate, and Output Gate, рис. 10.1.1](https://en.d2l.ai/chapter_recurrent-modern/lstm.html#input-gate-forget-gate-and-output-gate).
+Из одних и тех же $X_t,H_{t-1}$ три слоя с разными весами вычисляют
+$I_t,F_t,O_t$. Само умножение $F_t\odot C_{t-1}$ происходит позже,
+на верхней ветви полной схемы. Исходный SVG;
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
 
 После смены подлежащего прежнее число и род могут перестать быть
 полезными для дальнейшего согласования. Вентиль позволяет уменьшить
@@ -87,6 +161,8 @@ $h$. Но ему не сообщают отдельной меткой «сей�
 При конечных вещественных аргументах $\sigma$ принимает значения строго
 между 0 и 1. Значения 0 и 1 ниже используются как предельные режимы;
 в вычислениях с конечной точностью насыщение также может дать эти значения.
+
+<a id="lstm-write"></a>
 
 ### Что добавить к памяти
 
@@ -101,18 +177,18 @@ $$
 a_t^g=W_gu_t+b_g,\qquad g_t=\tanh(a_t^g).
 $$
 
-На рисунках Олаха кандидат обозначен $\tilde C_t$.
+На рисунках D2L кандидат обозначен $\tilde C_t$.
 Его координаты находятся между $-1$ и 1 и могут быть отрицательными.
 Вентиль $i_t$ не меняет знак кандидата, а уменьшает или почти сохраняет
 его величину. При $i_t=0.2$ кандидат $-0.5$ даёт запись $-0.1$.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-i.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lstm-gru-author-2026-11-10/d2l-lstm-1.svg|Кандидат LSTM вычисляется отдельным слоем с tanh]]
 
-*Две разные обучаемые ветви: сигмоида вычисляет масштаб записи $i_t$,
-а tanh вычисляет сам кандидат $\tilde C_t$. Их произведение попадёт
-в состояние ячейки.
-Источник: Chris Olah,
-[Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/).*
+*Zhang et al., [D2L, Input Node, рис. 10.1.2](https://en.d2l.ai/chapter_recurrent-modern/lstm.html#input-node).
+Четыре слоя получают $X_t,H_{t-1}$. Три используют сигмоиду,
+а ветвь с tanh даёт кандидат $\tilde C_t$, то есть наш $g_t$.
+На этом рисунке вентиль ещё не умножил кандидат. Исходный SVG;
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
 
 Новое состояние получается сложением двух вкладов:
 
@@ -127,13 +203,14 @@ $$
 условия $i_t+f_t=1$ в стандартной LSTM нет. Поэтому сеть может
 и сохранять старое значение, и добавлять к нему новое.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-C.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lstm-gru-author-2026-11-10/d2l-lstm-2.svg|Память LSTM складывается из двух поэлементных произведений]]
 
-*Обновление $C_t$: слева умножение старого состояния на $f_t$, затем
-сложение с $i_t\odot\tilde C_t$. Знаки «×» и «+» обозначают
-поэлементные операции над векторами.
-Источник: Chris Olah,
-[Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/).*
+*Zhang et al., [D2L, Memory Cell Internal State, рис. 10.1.3](https://en.d2l.ai/chapter_recurrent-modern/lstm.html#memory-cell-internal-state).
+К верхнему плюсу сходятся $F_t\odot C_{t-1}$ и $I_t\odot\tilde C_t$.
+Выходной вентиль $O_t$ не входит в это сложение. Исходный SVG;
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+
+<a id="lstm-output"></a>
 
 ### Что передать в скрытое состояние
 
@@ -152,13 +229,6 @@ $$
 текущий $h_t$ почти не показывает содержимое памяти, но сама память
 не обнуляется. Позже вентиль может открыться.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-o.png]]
-
-*Память $C_t$ проходит через tanh и умножается на $o_t$.
-Верхняя ветвь $C_t$ продолжается независимо от полученного $h_t$.
-Источник: Chris Olah,
-[Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/).*
-
 Например, для одного $c_t=1.7$ выходные коэффициенты 0.01 и 0.7
 дадут $h_t\approx0.009354$ и $h_t\approx0.654786$ соответственно.
 Память при этом остаётся равной 1.7. В обычной LSTM вентили следующего
@@ -169,27 +239,7 @@ $$
 слов, что и в предыдущей главе: логиты $Ah_t+b$, затем softmax.
 Вектор $h_t$ сам по себе не является распределением следующего токена.
 
-<details>
-<summary>Те же операции в обозначениях D2L</summary>
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/lstm-gates.svg]]
-
-*Только расчёт трёх вентилей $F_t,I_t,O_t$ из текущего входа $X_t$
-и прежнего скрытого состояния $H_{t-1}$. Кандидат и обновление памяти
-здесь ещё не показаны. Источник: Zhang, Lipton, Li, Smola,
-[D2L, §10.1.1.2](https://d2l.ai/chapter_recurrent-modern/lstm.html),
-CC BY-SA 4.0.*
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/lstm-hidden-state.svg]]
-
-*Полная ячейка D2L: вверху обновление $C$, справа чтение через tanh
-и выходной вентиль. Кандидат обозначен $\tilde C_t$.
-Заглавные буквы в D2L соответствуют пакету объектов, а не одному столбцу.
-Источник: те же авторы,
-[D2L, §10.1.1.5](https://d2l.ai/chapter_recurrent-modern/lstm.html),
-CC BY-SA 4.0.*
-
-</details>
+<a id="lstm-scalar"></a>
 
 ## Вычислимый пример одной координаты
 
@@ -209,6 +259,25 @@ $g_t=-0.5$, $o_t=0.7$. Последовательность вычислений
 в исполняемом примере, можно задать аргументы сигмоид
 $\operatorname{logit}(p)=\ln(p/(1-p))$, а для кандидата задать
 $\operatorname{atanh}(-0.5)$.
+
+Теперь изменим только $o_t$ с $0.7$ на $0.01$. Память $c_t=1.7$
+останется прежней, хотя $h_t$ уменьшится до $0.009354$. На следующем
+шаге возьмём $f_{t+1}=0.99$, $g_{t+1}=0$, $o_{t+1}=0.7$.
+Кандидат равен нулю, поэтому новой записи нет:
+
+$$
+\begin{aligned}
+c_{t+1}&=0.99\cdot1.7=1.683,\\
+h_{t+1}&=0.7\tanh(1.683)\approx0.653275.
+\end{aligned}
+$$
+
+Второй выход снова заметно отличается от нуля. Он получился из
+сохранённого $c_t$, а не из почти закрытого $h_t$. Эти значения
+вентилей заданы для примера. В сети они могут различаться между
+шагами при тех же весах: меняются $x_t$ и предыдущее $h$.
+
+<a id="lstm-gate-gradients"></a>
 
 ### Как обучаются вентили
 
@@ -314,14 +383,13 @@ $dL/dW=\sum_t\delta_tu_t^\top$ и $dL/db=\sum_t\delta_t$.
 LSTM по-прежнему обучается BPTT; в развёрнутом графе стало больше
 ветвей, но правило цепочки не изменилось.
 
+<a id="lstm-gradient-path"></a>
+
 ### Как далеко проходит производная
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-C-line.png]]
-
-*Выделена прямая ветвь $C_{t-1}\to C_t$, включающая умножение
-и сложение. Нелинейные ветви расчёта вентилей затенены, но остаются
-частью полной сети. Источник: Chris Olah,
-[Understanding LSTM Networks, The Core Idea Behind LSTMs](https://colah.github.io/posts/2015-08-Understanding-LSTMs/).*
+На [схеме прямой ветви у Олаха](https://colah.github.io/posts/2015-08-Understanding-LSTMs/#the-core-idea-behind-lstms)
+выделен путь от $c_{t-1}$ через умножение и сложение к $c_t$.
+Он не проходит через tanh, который нужен для чтения $h_t$.
 
 Если $h_{t-1}$ считать независимым входом ячейки и зафиксировать его,
 в обычной LSTM вентили не зависят от $c_{t-1}$. Частная производная
@@ -400,6 +468,8 @@ print("direct branch:", f.item(), "all paths:", full_derivative.item())
 при достаточно большом значении почти насытилось бы.
 LSTM облегчает перенос по одной ветви, но не устраняет все
 причины малых или больших градиентов.
+
+<a id="lstm-cell-weights"></a>
 
 ### Полная ячейка и порядок весов
 
@@ -489,10 +559,14 @@ print("loss:", before, "->", after)
 После независимого обновления двух bias-векторов совпадение
 с обновлением одного bias-вектора не следует автоматически.
 
+<a id="lstm-history"></a>
+
 Историческая LSTM 1997 года и показанная современная ячейка различаются.
 В исходной конструкции использовался постоянный прямой перенос памяти;
 вентиль забывания добавили Gers, Schmidhuber и Cummins в
 [Learning to Forget](https://doi.org/10.1162/089976600300015015), 2000.
+
+<a id="lstm-variants"></a>
 
 Есть и варианты современной ячейки. В coupled input–forget gate
 полагают $i_t=1-f_t$. Тогда при $c_{t-1}=2$, $f_t=0.9$, $g_t=-0.5$
@@ -510,6 +584,8 @@ Peephole connections добавляют в расчёт вентилей пря�
 по $c_{t-1}$ уже не ограничивается одной прямой ветвью.
 Иллюстрации вариантов приведены в
 [разделе Olah «Variants on Long Short Term Memory»](https://colah.github.io/posts/2015-08-Understanding-LSTMs/).
+
+<a id="gru-state"></a>
 
 ## GRU: объединить память и выход
 
@@ -529,13 +605,15 @@ $$
 z_t=\sigma(W_zx_t+U_zh_{t-1}+b_z).
 $$
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/gru.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/gru.svg|Расчёт reset и update gate в GRU]]
 
 *Расчёт только reset gate $R_t$ и update gate $Z_t$ из $X_t,H_{t-1}$.
 Кандидат и смешивание состояний на этой схеме не показаны.
 Источник: Zhang, Lipton, Li, Smola,
 [D2L, §10.2.1](https://d2l.ai/chapter_recurrent-modern/gru.html),
 CC BY-SA 4.0.*
+
+<a id="gru-reset"></a>
 
 ### Reset gate и кандидат
 
@@ -548,10 +626,20 @@ W_hx_t+U_h(r_t\odot h_{t-1})+b_h
 \right).
 $$
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lstm-gru-author-2026-11-10/d2l-gru-2.svg|Reset gate масштабирует старое состояние до рекуррентной матрицы кандидата GRU]]
+
+*Zhang et al., [D2L, Candidate Hidden State, рис. 10.2.2](https://en.d2l.ai/chapter_recurrent-modern/gru.html#candidate-hidden-state).
+Следите за ветвью $H_{t-1}$: сначала поэлементное умножение на $R_t$,
+затем линейное преобразование в слое кандидата. $Z_t$ уже вычислен,
+но применяется только при смешивании, на следующем рисунке.
+Исходный SVG; [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+
 Если $r_t$ близок к нулю во всех координатах, кандидат почти не использует
 прежнее состояние. Но это ещё не означает, что новое $h_t$ станет нулём:
 кандидат зависит от текущего входа, а окончательный результат зависит
 также от update gate.
+
+<a id="gru-update"></a>
 
 ### Update gate и новое состояние
 
@@ -579,7 +667,7 @@ $$
 в итоговый результат. Поэтому reset gate нельзя отождествлять
 со сбросом всего $h$ в ноль.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lstm-gru-2026-10-21/d2l-gru-3.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lstm-gru-2026-10-21/d2l-gru-3.svg|Кандидат GRU и смешивание старого и нового состояний]]
 
 *Полный граф GRU. Reset gate действует перед вычислением кандидата.
 Верхняя ветвь умножает прежнее состояние на $Z_t$, другая умножает
@@ -596,28 +684,33 @@ $\operatorname{diag}(z_t)$. При фиксированных вентиле и 
 Как и у LSTM, короткая прямая ветвь помогает переносу, но не делает
 весь обратный проход тождественным копированием.
 
+<a id="gru-conventions"></a>
+
 ### Почему схемы могут выглядеть противоречиво
 
-У Олаха в формуле смешивания $z_t$ обозначает долю нового кандидата:
+В [формуле (7) Cho et al.](https://aclanthology.org/D14-1179.pdf#page=3)
+$z_t$ умножается на прежнее состояние.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lstm-gru-author-2026-11-10/cho-gru-figure2.png|Ранняя схема GRU: reset r на ветви к кандидату и update z на ветви к новому состоянию]]
+
+*Cho et al., [Learning Phrase Representations, §2.3, рис. 2](https://aclanthology.org/D14-1179.pdf#page=3).
+Внизу $r$ стоит на ветви от $h$ к кандидату $\tilde h$; вход $x$
+поступает в кандидат отдельно. Вверху $z$ смешивает прежнее
+состояние с кандидатом. Переключатели на рисунке условны: по формулам
+(5)–(8) это непрерывные коэффициенты, причём $z$ взвешивает прошлое.
+Оригинал извлечён из PDF; [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/).*
+
+В [схеме GRU у Олаха](https://colah.github.io/posts/2015-08-Understanding-LSTMs/#variants-on-long-short-term-memory)
+той же буквой обозначена доля нового кандидата:
 
 $$
 h_t=(1-z_t)\odot h_{t-1}+z_t\odot\tilde h_t.
 $$
 
 Чтобы получить наш результат 0.4, в этом обозначении нужно взять
-$z_t=0.25$, а не 0.75. Если вместе с переименованием заменить
-аргумент сигмоиды на противоположный, равенство
-$\sigma(-a)=1-\sigma(a)$ даст тот же переход.
-Это изменение соглашения, а не новая архитектура.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-var-GRU.png]]
-
-*На этой схеме коэффициент $z_t$ относится к новой записи, а $1-z_t$
-к старому состоянию. По сравнению с D2L смысл символа $z$ обратный.
-Reset gate по-прежнему действует на прежнее состояние до линейного
-преобразования кандидата.
-Источник: Chris Olah,
-[Understanding LSTM Networks, Variants on Long Short Term Memory](https://colah.github.io/posts/2015-08-Understanding-LSTMs/).*
+$z_t=0.25$, а не 0.75. Если заменить аргумент сигмоиды на противоположный,
+$\sigma(-a)=1-\sigma(a)$ даст тот же переход. Здесь изменилось
+обозначение коэффициента; следующий пример меняет сами вычисления.
 
 Есть и содержательное различие реализаций.
 В `torch.nn.GRU` reset gate применяется после рекуррентного
@@ -698,6 +791,65 @@ print("manual equals nn.GRUCell; max variant difference:",
 
 </details>
 
+<a id="gru-candidate-biases"></a>
+
+### Why the candidate biases cannot be merged
+
+In the PyTorch candidate, the input bias is outside the reset product
+and the recurrent bias is inside it. Their contribution before tanh is
+$b_{in}+r_t\odot b_{hn}$. In the RNN and LSTM branches above, both biases
+are added with coefficient one and the forward pass depends on their
+sum. The GRU candidate has a different dependence on the two biases.
+
+Take one coordinate with $b_{in}=0.1$ and $b_{hn}=0.8$. At reset values
+0.25 and 0.75, their contributions are 0.3 and 0.7. Replacing the pair
+with $b_{in}=0.9$, $b_{hn}=0$ preserves the sum of the parameters, but
+gives 0.9 in both cases. A single constant bias cannot reproduce both
+values. The reset and update branches do allow the two biases to be
+summed; this obstruction concerns the candidate branch.
+
+The example isolates those offsets. Only the input weight of the reset
+gate is nonzero. It turns the two supplied log-odds into reset values
+0.25 and 0.75; the update gate is 0.5 and the previous state is zero.
+
+```python
+from copy import deepcopy
+import torch
+
+dtype = torch.float64
+biased_gru = torch.nn.GRUCell(1, 1, dtype=dtype)
+with torch.no_grad():
+    for parameter in biased_gru.parameters():
+        parameter.zero_()
+    biased_gru.weight_ih[0, 0] = 1.  # PyTorch gate order: r, z, n
+    biased_gru.bias_ih[2] = .1
+    biased_gru.bias_hh[2] = .8
+
+reset_values = torch.tensor([[.25], [.75]], dtype=dtype)
+inputs = torch.logit(reset_values)
+initial = torch.zeros_like(inputs)
+separate_output = biased_gru(inputs, initial)
+expected_output = .5 * (.1 + .8 * reset_values).tanh()
+torch.testing.assert_close(separate_output, expected_output)
+
+merged_gru = deepcopy(biased_gru)
+with torch.no_grad():
+    merged_gru.bias_ih[2] = .9
+    merged_gru.bias_hh[2] = 0.
+merged_output = merged_gru(inputs, initial)
+torch.testing.assert_close(merged_output, .5 * torch.full_like(inputs, .9).tanh())
+assert not torch.allclose(separate_output, merged_output)
+print("separate candidate biases:", separate_output[:, 0].tolist())
+print("same bias sum, different output:", merged_output[:, 0].tolist())
+```
+
+This follows from the candidate equation in
+[PyTorch 2.14, GRU](https://docs.pytorch.org/docs/2.14/generated/torch.nn.GRU.html).
+It also limits weight conversion between implementations: the reset
+placement and recurrent candidate bias must both be matched.
+
+<a id="recurrent-parameter-counts"></a>
+
 ## Что выбирать
 
 У стандартных однослойных ячеек без проекций различаются число состояний
@@ -722,6 +874,8 @@ PyTorch хранит два bias-вектора на каждую ветвь, п
 информацию в $c$, слабо показывая её через $h$; GRU переносит один
 вектор и использует его и для выхода, и для следующего обновления.
 
+<a id="recurrent-sequence-shapes"></a>
+
 ### Последовательности, слои и формы тензоров
 
 Одна ячейка обрабатывает один шаг. `nn.LSTM` и `nn.GRU`
@@ -739,6 +893,10 @@ PyTorch хранит два bias-вектора на каждую ветвь, п
 слоями, кроме последнего. Оно не означает автоматического dropout
 на всей временной ветви $c$; при одном слое межслойного перехода нет.
 
+<a id="recurrent-bidirectional"></a>
+
+### Two directions and two sequence endpoints
+
 Двунаправленная сеть обрабатывает текст и слева направо, и справа налево.
 Её выход имеет $2m$ признаков на позицию и использует будущие токены.
 Такой слой пригоден для кодирования полностью доступного исходного текста,
@@ -746,6 +904,104 @@ PyTorch хранит два bias-вектора на каждую ветвь, п
 Конечное обратное состояние нельзя получить, взяв просто последний
 элемент двунаправленного `output`: обратный проход заканчивается
 у начала исходной последовательности.
+
+
+<!-- source-excerpt: d2l-bidirectional-order -->
+> For the first RNN layer,
+> the first input is $\mathbf{x}_1$
+> and the last input is $\mathbf{x}_T$,
+> but for the second RNN layer,
+> the first input is $\mathbf{x}_T$
+> and the last input is $\mathbf{x}_1$.
+> To produce the output of this bidirectional RNN layer,
+> we simply concatenate together the corresponding outputs
+> of the two underlying unidirectional RNN layers.
+<!-- /source-excerpt -->
+
+*Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola,
+[D2L, Bidirectional Recurrent Neural Networks](https://d2l.ai/chapter_recurrent-modern/bi-rnn.html),
+original English excerpt, CC BY-SA 4.0.*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lstm-gru-contracts-2026-11-03/d2l-birnn.svg|Два независимых направления RNN и объединение состояний одной позиции]]
+
+*Original D2L bidirectional RNN, Fig. 10.4.1. The two hidden-state rows
+have opposite temporal arrows and separate parameters. Both states at
+position $t$ feed that position’s output. The diagram shows generic
+recurrent cells; using LSTM changes each cell’s internal operations and
+adds its carried $c$, not the direction of these arrows.
+Source: Zhang et al.,
+[D2L](https://d2l.ai/chapter_recurrent-modern/bi-rnn.html#fig-birnn),
+CC BY-SA 4.0. Complete pinned SVG, without cropping or redrawing.*
+
+For inputs $x_0,x_1,x_2$, the forward recurrence visits positions
+0, 1, 2. The reverse recurrence visits 2, 1, 0. The library aligns both
+sets of outputs to the original position axis:
+
+| Original position | Forward state has read | Reverse state has read |
+|---:|---|---|
+| 0 | $x_0$ | $x_2,x_1,x_0$ |
+| 1 | $x_0,x_1$ | $x_2,x_1$ |
+| 2 | $x_0,x_1,x_2$ | $x_2$ |
+
+Thus `output[:, -1]` combines a complete forward pass with the
+first computed reverse state. The complete reverse pass appears at
+`output[:, 0, m:]`. For one unprojected layer, `h_n[0]` and
+`h_n[1]` are the final forward and reverse states. With $L$ layers,
+`h_n.reshape(L, 2, B, m)[-1]` selects the top layer’s pair.
+
+The following program copies each direction into a separate one-step
+LSTM cell and visits the positions explicitly. This verifies every
+aligned output and both final memory states, not just the tensor shapes.
+
+```python
+import torch
+from torch import nn
+
+torch.manual_seed(47)
+dtype = torch.float64
+B, T, d, m = 1, 3, 1, 2
+sequence = torch.tensor([[[1.], [2.], [3.]]], dtype=dtype)
+bidirectional_lstm = nn.LSTM(d, m, bidirectional=True,
+                             batch_first=True, dtype=dtype)
+combined, (final_h, final_c) = bidirectional_lstm(sequence)
+
+def trace_direction(reverse):
+    cell = nn.LSTMCell(d, m, dtype=dtype)
+    suffix = "_reverse" if reverse else ""
+    with torch.no_grad():
+        for name in ["weight_ih", "weight_hh", "bias_ih", "bias_hh"]:
+            getattr(cell, name).copy_(getattr(bidirectional_lstm, name + "_l0" + suffix))
+    h = torch.zeros(B, m, dtype=dtype)
+    c = torch.zeros_like(h)
+    aligned = [None] * T
+    positions = range(T-1, -1, -1) if reverse else range(T)
+    for position in positions:
+        h, c = cell(sequence[:, position], (h, c))
+        aligned[position] = h
+    return torch.stack(aligned, dim=1), h, c
+
+forward, forward_h, forward_c = trace_direction(False)
+reverse, reverse_h, reverse_c = trace_direction(True)
+torch.testing.assert_close(combined, torch.cat([forward, reverse], dim=-1))
+torch.testing.assert_close(final_h, torch.stack([forward_h, reverse_h]))
+torch.testing.assert_close(final_c, torch.stack([forward_c, reverse_c]))
+torch.testing.assert_close(combined[:, -1, :m], final_h[0])
+torch.testing.assert_close(combined[:, 0, m:], final_h[1])
+assert not torch.allclose(combined[:, -1, m:], final_h[1])
+```
+
+The reverse output at position 0 depends on all three inputs, so it
+cannot be used as a causal state after reading only $x_0$. When
+sequences have different lengths, the reversal must stop at each
+sequence’s actual boundary. Running backward over right-padding first
+would allow PAD transitions to affect the valid reverse states.
+Packing supplies those boundaries; a zero loss on PAD does not.
+The endpoint contract is also documented in
+[PyTorch 2.14, LSTM](https://docs.pytorch.org/docs/2.14/generated/torch.nn.LSTM.html).
+
+<a id="lstm-projection"></a>
+
+### Projection inside the recurrent state
 
 У LSTM с проекцией сначала вычисляется $m$-мерный выход ячейки,
 затем он умножается на матрицу $P\in\mathbb R^{p\times m}$.
@@ -755,6 +1011,83 @@ PyTorch хранит два bias-вектора на каждую ветвь, п
 и утверждение «$h$ и $c$ одной формы» к этому варианту не относятся.
 Например, при $d=2,m=3,p=2$ один слой PyTorch имеет
 $4m(d+p+2)+pm=78$ параметров.
+
+
+Write the unprojected readout as $\widehat h_t=o_t\odot\tanh(c_t)$.
+The projected state is $h_t=P\widehat h_t$. On the next step, the
+four gates receive this $p$-dimensional $h_t$, so the recurrent matrix
+has $4m$ rows and $p$ columns. The projection participates in the
+recurrence; applying a smaller classifier only after an ordinary LSTM
+would leave a different recurrent state.
+
+For the $d=2,m=3,p=2$ example, the parameter count separates into
+
+| Parameter group | Shape | Count |
+|---|---|---:|
+| Input weights | `[12,2]` | 24 |
+| Recurrent weights | `[12,2]` | 24 |
+| Two bias vectors | two `[12]` | 24 |
+| Projection | `[2,3]` | 6 |
+
+The sum is 78. In the corresponding unprojected library LSTM it is 84.
+For general $d,m,p$, subtracting the unprojected one-layer count from
+the projected count gives $m(5p-4m)$. Therefore $p<m$ alone does not
+guarantee fewer parameters: $m=6,p=5,d=2$ gives 246 rather than 240.
+This comparison concerns parameter counts, not execution time.
+
+The full forward calculation below uses nonzero initial $h$ and $c$.
+It checks the projection at every step and compares gradients with the
+library implementation.
+
+```python
+import torch
+import torch.nn.functional as F
+
+torch.manual_seed(53)
+dtype = torch.float64
+B, T, d, m, p = 2, 3, 2, 3, 2
+projected_lstm = torch.nn.LSTM(d, m, proj_size=p, batch_first=True, dtype=dtype)
+features = torch.randn(B, T, d, dtype=dtype, requires_grad=True)
+h0 = torch.randn(1, B, p, dtype=dtype, requires_grad=True)
+c0 = torch.randn(1, B, m, dtype=dtype, requires_grad=True)
+library_output, (library_h, library_c) = projected_lstm(features, (h0, c0))
+
+h, c = h0[0], c0[0]
+history = []
+for time in range(T):
+    gates = (F.linear(features[:, time], projected_lstm.weight_ih_l0,
+                      projected_lstm.bias_ih_l0)
+             + F.linear(h, projected_lstm.weight_hh_l0, projected_lstm.bias_hh_l0))
+    ai, af, ag, ao = gates.chunk(4, dim=-1)
+    c = af.sigmoid() * c + ai.sigmoid() * ag.tanh()
+    unprojected_h = ao.sigmoid() * c.tanh()
+    h = F.linear(unprojected_h, projected_lstm.weight_hr_l0)
+    history.append(h)
+manual_output = torch.stack(history, dim=1)
+torch.testing.assert_close(manual_output, library_output)
+torch.testing.assert_close(h[None], library_h)
+torch.testing.assert_close(c[None], library_c)
+assert library_output.shape == (B, T, p)
+assert library_h.shape == (1, B, p) and library_c.shape == (1, B, m)
+assert sum(parameter.numel() for parameter in projected_lstm.parameters()) == 78
+
+leaves = (features, h0, c0, *projected_lstm.parameters())
+manual_loss = manual_output.square().sum() + .3 * c.square().sum()
+library_loss = library_output.square().sum() + .3 * library_c.square().sum()
+manual_gradients = torch.autograd.grad(manual_loss, leaves)
+library_gradients = torch.autograd.grad(library_loss, leaves)
+for manual, reference in zip(manual_gradients, library_gradients):
+    torch.testing.assert_close(manual, reference)
+```
+
+The $c$-state still has three coordinates throughout this example.
+A projection neither truncates the time graph nor resets the memory.
+Its matrix receives gradients through both the outputs and later gate
+calculations. Parameter names, shapes and the projection definition are
+specified in
+[PyTorch 2.14, LSTM](https://docs.pytorch.org/docs/2.14/generated/torch.nn.LSTM.html).
+
+<a id="gated-packed-sequences"></a>
 
 ### Разная длина текстов и перенос состояния
 
@@ -806,6 +1139,8 @@ for factory in [nn.LSTM, nn.GRU]:
           "padding difference:", (h[:, 1]-plain_h[:, 1]).abs().max().item())
 ```
 
+<a id="gated-state-carry"></a>
+
 Между независимыми текстами начальное состояние задаётся заново.
 При продолжении одного потока передаётся конечное состояние:
 у LSTM нужно перенести оба вектора $(h,c)$.
@@ -824,9 +1159,10 @@ for factory in [nn.LSTM, nn.GRU]:
 
 ## Источники и дальнейшее чтение
 
-- Zhang, Lipton, Li, Smola, [D2L, §10.1: Long Short-Term Memory](https://d2l.ai/chapter_recurrent-modern/lstm.html) — состояние ячейки, три вентиля, кандидат и реализация с нуля. Два исходных SVG сохранены с CC BY-SA 4.0.
-- Те же авторы, [D2L, §10.2: Gated Recurrent Units](https://d2l.ai/chapter_recurrent-modern/gru.html) — reset, кандидат и update; $z$ означает сохранённое прошлое. Два исходных SVG в главе имеют CC BY-SA 4.0.
-- Chris Olah, [Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/), 2015 — последовательное визуальное объяснение LSTM и варианты. Сохранены семь оригинальных иллюстраций; в схеме GRU у автора $z$ означает новую запись.
+- Zhang, Lipton, Li, Smola, [D2L, §10.4: Bidirectional Recurrent Neural Networks](https://d2l.ai/chapter_recurrent-modern/bi-rnn.html) — original English explanation and complete source SVG, CC BY-SA 4.0. The endpoint trace here uses LSTM cells and checks both h and c.
+- Zhang, Lipton, Li, Smola, [D2L, §10.1: Long Short-Term Memory](https://d2l.ai/chapter_recurrent-modern/lstm.html) — состояние ячейки, три вентиля, кандидат и реализация с нуля. Четыре исходных SVG, CC BY-SA 4.0.
+- Те же авторы, [D2L, §10.2: Gated Recurrent Units](https://d2l.ai/chapter_recurrent-modern/gru.html) — reset, кандидат и update; $z$ означает сохранённое прошлое. Три исходных SVG, CC BY-SA 4.0.
+- Chris Olah, [Understanding LSTM Networks, Step-by-Step Walk Through](https://colah.github.io/posts/2015-08-Understanding-LSTMs/#step-by-step-lstm-walk-through), 2015 — четыре крупные схемы, от вентиля забывания до чтения памяти.
 - Jurafsky, Martin, [SLP3, §14.5: The LSTM](https://web.stanford.edu/~jurafsky/slp3/14.pdf) — разделение переноса контекста и текущего выхода; проверена редакция 19 августа 2026 года.
 - [Stanford CS224N, Notes 5, §3–4](https://web.stanford.edu/class/cs224n/readings/cs224n-2019-notes05-LM_RNN.pdf) — формулы и схема GRU/LSTM. В GRU этих заметок reset стоит после рекуррентной матрицы, а не как в D2L.
 - Hochreiter, Schmidhuber, [Long Short-Term Memory](https://www.bioinf.jku.at/publications/older/2604.pdf), 1997 — исходная архитектура.

@@ -2,9 +2,13 @@
 title: Pre-norm, RMSNorm, SwiGLU и residual stream
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-27
+last_updated: 2026-11-13
 previous: "[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/02 Современный decoder block]]"
 next: "[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/04 RoPE]]"
+reference_terms:
+  - label: Gemma 2 — RMSNorm до и после каждого подслоя
+    label_en: Gemma 2 — RMSNorm before and after each sublayer
+    anchor: gemma2-sandwich-norm
 source_unit_id:
   - lecture-03-normalization-stability
   - lecture-03-rmsnorm-validation
@@ -17,6 +21,9 @@ primary_sources:
   - https://arxiv.org/abs/1910.07467v1
   - https://arxiv.org/abs/2002.05202v1
   - https://arxiv.org/abs/2405.09818v2
+  - https://arxiv.org/abs/2408.00118v1
+  - https://arxiv.org/abs/2408.05147v2
+  - https://github.com/google/gemma_pytorch/blob/014acb7ac4563a5f77c76d7ff98f31b568c16508/gemma/model.py#L394-L458
   - https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf
   - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf
 ---
@@ -72,12 +79,13 @@ $I+J_F$; их произведение тоже может уменьшать и
 
 ## Почему место нормализации меняет обучение
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/norm-gating-2026-10-22/xiong-pre-post-norm.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/norm-gating-2026-10-22/xiong-pre-post-norm.png|В post-LN слева норма применяется к сумме. В pre-LN справа прямая ветвь обходит норму и соединяется с выходом подслоя в Add.]]
 
 *Xiong et al., [On Layer Normalization in the Transformer Architecture,
 Figure 1, PMLR 119, с. 10525](https://proceedings.mlr.press/v119/xiong20b.html).
 Слева post-LN, справа pre-LN. Оригинальная схема с полной подписью,
-CC BY 4.0; названия и положение операций не изменены.*
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/);
+[рисунок в PDF, с. 2](https://proceedings.mlr.press/v119/xiong20b/xiong20b.pdf#page=2).*
 
 В post-norm нормализация применяется после остаточного сложения:
 
@@ -153,12 +161,12 @@ for name, operation in [("pre", pre), ("post", post)]:
 
 ### Что показали эксперименты с warm-up
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/norm-gating-2026-10-22/xiong-gradient-norms.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/norm-gating-2026-10-22/xiong-gradient-norms.png|Слева нормы градиентов весов FFN по слоям, справа норма градиента последней FFN при разных глубинах. У post-LN начальный градиент больше в верхних слоях.]]
 
 *Xiong et al., [Figure 3, PMLR 119, с. 10530](https://proceedings.mlr.press/v119/xiong20b/xiong20b.pdf#page=7).
 Слева — нормы градиентов FFN по слоям; справа — последняя FFN
 при разной глубине. Все четыре панели и английская подпись сохранены,
-CC BY 4.0.*
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
 
 В [§3.3–3.4](https://proceedings.mlr.press/v119/xiong20b.html)
 авторы исследуют градиенты около инициализации. На левых панелях
@@ -170,11 +178,31 @@ CC BY 4.0.*
 в рассмотренном диапазоне.
 
 Большой начальный градиент вместе с большой скоростью обучения
-может дать слишком большое первое обновление. Warm-up сначала
-ограничивает размер таких обновлений. В экспериментах §3.2
-с post-LN переводчиком IWSLT14, Adam и SGD отказ от warm-up
-резко ухудшал обучение. Для pre-LN авторы проверили обучение
-без warm-up на переводе и BERT.
+может дать слишком большое первое обновление. При разогреве
+(warm-up) скорость обучения сначала мала и растёт до заданного
+максимума. На следующем рисунке авторы сравнивают длину разогрева
+у post-LN Transformer для перевода с немецкого на английский (IWSLT14).
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/norm-gating-2026-10-22/xiong-warmup.png|Четыре панели: проверочная потеря и BLEU по эпохам для Adam и SGD. У Adam разогрев на 4000 шагов даёт около 34 BLEU, без разогрева лучший результат около 8,45.]]
+
+*Ruibin Xiong et al., [On Layer Normalization in the Transformer Architecture, PMLR 119](https://proceedings.mlr.press/v119/xiong20b.html),
+[рис. 2, с. 4 PDF](https://proceedings.mlr.press/v119/xiong20b/xiong20b.pdf#page=4),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Все четыре
+панели, легенды и исходная подпись извлечены из PDF без перерисовки.*
+
+Левая пара панелей относится к Adam. При одинаковом пике скорости
+$10^{-3}$ зелёная кривая с разогревом на 4000 шагов заканчивается
+около 34 BLEU, синяя без разогрева — на 8,45. Достаточность
+разогрева зависит и от его длительности, и от выбранного пика:
+при 500 шагах авторы получили 31,16 BLEU с пиком $5\cdot10^{-4}$,
+но только 2,77 с пиком $10^{-3}$. Справа, у SGD, без разогрева
+обе кривые к 15-й эпохе остаются чуть выше нуля.
+
+На всех четырёх панелях архитектура post-LN. Отдельно, в §4,
+авторы проверили обучение pre-LN без разогрева на двух задачах
+перевода и при предобучении BERT. Это другое сравнение:
+рисунок 2 показывает чувствительность post-LN к расписанию,
+а не разницу качества между pre-LN и post-LN.
 
 Теоретический анализ использует упрощённую инициализацию:
 одну голову, квадратные матрицы и нулевые Q/K, дающие равномерное
@@ -392,21 +420,41 @@ $$
 
 Здесь смещения опущены, как в реализации LLaMA.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-32-34/cs336-silu-vs-relu.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-32-34/cs336-silu-vs-relu.png|ReLU равна нулю слева от нуля. SiLU на отрицательной полуоси даёт отрицательные значения и плавно переходит к почти линейному росту справа.]]
 
 *Stanford CS336 Staff, [Assignment 1, Figure 3, с. 21](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=21),
-MIT. Оригинальный график SiLU, ReLU и тождественной функции;
+[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).
+Оригинальный график SiLU, ReLU и тождественной функции;
 оси, легенда и английские обозначения сохранены.*
 
 На положительной полуоси SiLU приближается к тождественной функции,
 а на отрицательной выдаёт небольшие отрицательные значения.
 Это отличается от ReLU, которая зануляет всю отрицательную полуось.
-В произведении SwiGLU одна линейная проекция умножается на
-нелинейно преобразованную другую проекцию.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/tajima-figure1-ffn.svg|Слева двухматричная FFN с GELU; в центре SwiGLU с двумя входными матрицами и поэлементным произведением перед выходной проекцией. Справа отдельный вариант SwiMGLU.]]
+
+*Yukito Tajima, Nakamasa Inoue, Yusuke Sekikawa, Ikuro Sato и Rio Yokota,
+[Masked Gated Linear Unit, рис. 1](https://arxiv.org/html/2506.23225v1#S1.F1),
+[оригинал SVG](https://arxiv.org/html/2506.23225v1/fig_swimlu_v2.svg),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Рисунок без изменений.*
+
+На средней панели один вход $x$ идёт в две матрицы. Ветвь $W_g$
+вычисляет множители, а ветвь $W_v$ даёт значения, которые на них
+умножаются. Только после поэлементного произведения $W_o$ смешивает
+координаты. Слева, у двухматричной FFN, умножения двух ветвей нет.
+Правая панель показывает отдельный метод авторов, не блок LLaMA.
 
 Для $g=(1,-1)$ и $v=(2,3)$ получим
 $\operatorname{SiLU}(g)\approx(0.7311,-0.2689)$, затем
-$(1.4621,-0.8068)$. Проекция $W_{\rm down}$ смешивает уже эти числа.
+$(1.4621,-0.8068)$. Если $W_{\rm down}$ тождественна, эти два
+числа становятся выходом. При обратном проходе от первой выходной
+координаты $p_1=\operatorname{SiLU}(g_1)v_1$ градиент расходится
+по обеим ветвям. При $g_1=1$, $v_1=2$ имеем
+$\partial p_1/\partial v_1\approx0.7311$ и
+$\partial p_1/\partial g_1=2\operatorname{SiLU}'(1)\approx1.8553$,
+где $\operatorname{SiLU}'(t)=\sigma(t)+t\sigma(t)(1-\sigma(t))$.
+Эти числа относятся к входам произведения, до обратного прохода
+через $W_g$ и $W_v$.
 В отличие от sigmoid исходной GLU, SiLU не ограничена интервалом
 $[0,1]$: «затвор» может менять знак и усиливать значение.
 Полный шестикоординатный пример находится в предыдущей главе.
@@ -678,6 +726,71 @@ dropout и z-loss; для 34B использовали перестановку 
 отдельные проблемы. Модель 34B обучалась с 4000 шагами warm-up:
 переход к другой позиции норм не равен автоматической отмене warm-up.
 
+<a id="gemma2-sandwich-norm"></a>
+
+### Gemma 2: две нормы в каждой ветви
+
+В первой LLaMA на каждой ветви стоит одна RMSNorm, перед вниманием или
+FFN. Gemma 2 сохраняет её и добавляет вторую перед тем, как вернуть
+выход ветви в остаточный поток. Поэтому в [таблице 1 отчёта Gemma 2](https://arxiv.org/html/2408.00118v1#S2)
+стоят обе отметки, Pre-norm и Post-norm. В
+[реализации Google](https://github.com/google/gemma_pytorch/blob/014acb7ac4563a5f77c76d7ff98f31b568c16508/gemma/model.py#L427-L458)
+имя `post_attention_layernorm` указывает, что норма стоит после внимания.
+Строка `residual + hidden_states` идёт следом: саму сумму эта норма
+не затрагивает. У MLP такой же порядок, хотя вместо SwiGLU из LLaMA
+Gemma 2 использует GeGLU.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma2-norm-2026-11-13/gemma-scope-figure1.svg|Схема читается снизу вверх. Слева прямой остаточный путь и два сложения. Справа в каждой из ветвей, внимания и MLP, есть RMSNorm перед вычислением и после него, но до сложения.]]
+
+*Tom Lieberum et al., [Gemma Scope, рис. 1](https://arxiv.org/html/2408.05147v2#S3.F1),
+[оригинал SVG](https://arxiv.org/html/2408.05147v2/sae_location_diagram.svg),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Рисунок без изменений.*
+
+Нижнее сложение получает исходное состояние слева, а справа — выход
+внимания после проекции $W_O$ и второй RMSNorm. Верхнее сложение
+повторяет этот порядок для MLP. Блоки с пометкой SAE показывают места,
+откуда авторы Gemma Scope берут активации для разреженных автоэнкодеров.
+При обычном проходе Gemma 2 эти автоэнкодеры не вычисляются.
+
+$$
+\begin{aligned}
+H &= X + R_{\mathrm{attn,out}}\bigl(\operatorname{Attention}(R_{\mathrm{attn,in}}(X))\bigr),\\
+Y &= H + R_{\mathrm{ffn,out}}\bigl(\operatorname{FFN}(R_{\mathrm{ffn,in}}(H))\bigr).
+\end{aligned}
+$$
+
+У четырёх норм свои обучаемые коэффициенты. Чтобы сравнить только
+порядок операций, возьмём одну ветвь, поставим все коэффициенты равными
+единице и положим $\varepsilon=0$. Пусть $x=(3,4,0,0)$,
+$F(z)=(0,0,z_1/10,0.4)$, где $z_1$ — первая координата.
+Тогда $R(x)=(1.2,1.6,0,0)$, $F(x)=(0,0,0.3,0.4)$, а
+$F(R(x))=(0,0,0.12,0.4)$.
+
+| Где стоит норма | Результат |
+| --- | --- |
+| Только на входе, как в LLaMA: $x+F(R(x))$ | $(3,4,0.12,0.4)$ |
+| Только на выходе ветви, как в Chameleon: $x+R(F(x))$ | $(3,4,1.2,1.6)$ |
+| На входе и выходе ветви, как в Gemma 2: $x+R(F(R(x)))$ | $\approx(3,4,0.575,1.916)$ |
+| После остаточного сложения: $R(x+F(x))$ | $\approx(1.194,1.592,0.119,0.159)$ |
+
+В третьей строке RMS выходного вектора ветви равен примерно $0.2088$.
+На него делятся $0.12$ и $0.4$, но не $3$ и $4$: последние две
+величины пришли по прямой ветви. В четвёртой строке норма получает
+всю сумму $(3,4,0.3,0.4)$ и меняет все её ненулевые координаты.
+Пример показывает разницу между операторами; сам по себе он ничего
+не говорит о том, какой порядок даст меньшую потерю при обучении.
+
+Gemma 2 отдельно применяет soft-capping к логитам. В конфигурациях
+[2B, 9B и 27B](https://github.com/google/gemma_pytorch/blob/014acb7ac4563a5f77c76d7ff98f31b568c16508/gemma/config.py#L118-L173)
+порог внимания равен 50, порог на выходе в словарь — 30.
+При входном значении 100 это примерно $48.20$ и $29.92$ соответственно.
+В [ветви внимания](https://github.com/google/gemma_pytorch/blob/014acb7ac4563a5f77c76d7ff98f31b568c16508/gemma/model.py#L314-L330)
+маску добавляют после ограничения. В примере выше для неё использовалось
+$-\infty$; [код Google](https://github.com/google/gemma_pytorch/blob/014acb7ac4563a5f77c76d7ff98f31b568c16508/gemma/model.py#L669-L676)
+использует большое отрицательное число. В обоих случаях вклад запрещённого
+ключа в softmax равен нулю в точности вычисления. RMSNorm меняет векторы
+внутри ветвей; soft-capping меняет скалярные оценки перед softmax.
+
 <a id="normalization-evidence"></a>
 
 ## Ошибки и границы применимости
@@ -708,7 +821,8 @@ dropout и z-loss; для 34B использовали перестановку 
 - [Zhang & Sennrich, RMSNorm, §§3–6.1](https://arxiv.org/abs/1910.07467v1): формулы, инвариантность, градиенты, pRMSNorm и Table 4.
 - [Shazeer, GLU Variants, §§2–3](https://arxiv.org/abs/2002.05202v1): произведение ветвей и сравнение при согласованном бюджете.
 - [Chameleon Team, §2.3](https://arxiv.org/abs/2405.09818v2): QK-norm, z-loss, перестановка норм и их абляции в мультимодальной модели.
-- [Jurafsky & Martin, гл. 8](https://web.stanford.edu/~jurafsky/slp3/8.pdf) и [D2L, Residual Networks](https://d2l.ai/chapter_convolutional-modern/resnet.html): дополнительные объяснения LayerNorm, FFN и остаточных соединений.
+- [Gemma Team, Gemma 2, §2](https://arxiv.org/html/2408.00118v1#S2): нормы в ветвях, ограничения логитов и чередование локального и полного внимания.
+- [Jurafsky & Martin, гл. 7, §7.2, редакция от 19 августа 2026](https://web.stanford.edu/~jurafsky/slp3/7.pdf#page=8) и [D2L, Residual Networks](https://d2l.ai/chapter_convolutional-modern/resnet.html): остаточный поток, FFN и нормализация.
 - [Karpathy, nanoGPT](https://github.com/karpathy/nanoGPT/blob/master/model.py): компактный pre-norm GPT-2 с LayerNorm и GELU; RMSNorm/SwiGLU в этой реализации нет.
 
 **Назад:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/02 Современный decoder block|Современный decoder block]].

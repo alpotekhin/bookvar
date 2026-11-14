@@ -1,0 +1,84 @@
+{
+  "url": "http://127.0.0.1:4330/en/textbook/deployment/ml-workflow/",
+  "width": 1280,
+  "height": 900,
+  "navigation": {
+    "from": "/en/reference/",
+    "href": "http://127.0.0.1:4330/en/textbook/deployment/ml-workflow/#workflow-recall-interval",
+    "text": "Recall interval under selective labeling",
+    "arrived": "http://127.0.0.1:4330/en/textbook/deployment/ml-workflow/#workflow-recall-interval",
+    "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-workflow-interval/en/1280-reference-target.png"
+  },
+  "figures": [],
+  "limits": "Headless browser interactions and screenshots; requires separate human visual inspection.",
+  "layout": {
+    "page": [
+      1280,
+      1280
+    ],
+    "mathErrors": 0,
+    "formulas": [
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ]
+    ],
+    "tables": [
+      [
+        632,
+        640,
+        "visible"
+      ],
+      [
+        632,
+        640,
+        "visible"
+      ],
+      [
+        632,
+        640,
+        "visible"
+      ],
+      [
+        632,
+        640,
+        "visible"
+      ],
+      [
+        632,
+        640,
+        "visible"
+      ],
+      [
+        632,
+        640,
+        "visible"
+      ],
+      [
+        632,
+        640,
+        "visible"
+      ],
+      [
+        632,
+        640,
+        "visible"
+      ],
+      [
+        632,
+        640,
+        "visible"
+      ],
+      [
+        632,
+        640,
+        "visible"
+      ]
+    ]
+  },
+  "contextScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-workflow-interval/en/1280-page.png"
+}

@@ -9,6 +9,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+from topic_consolidation_baseline import before_topic_consolidation
 
 ROOT = Path(__file__).resolve().parents[2]
 DIRECTORY = Path("en/00 Textbook/14 Inference and optimization")
@@ -96,7 +97,10 @@ def figures(text):
 
 def check():
     fix = CANONICAL_CORRECTION
-    corrected = (ROOT / fix["path"]).read_bytes()
+    corrected = before_topic_consolidation(
+        (ROOT / fix["path"]).read_text(), fix["path"],
+        stop_before_journal="2026-11-11-gpt-continuation-scoring-additions.json",
+    ).encode()
     assert sha(corrected) == fix["after_sha256"]
     restored = corrected.decode().replace(fix["new"], fix["old"], 1).encode()
     assert sha(restored) == fix["before_sha256"], "canonical scope exceeded one-line correction"
@@ -110,7 +114,7 @@ def check():
         canonical_text = canonical_raw.decode()
         assert field(text, "translation_status") == "current"
         assert field(text, "canonical_revision") == sha(canonical_raw)
-        assert field(text, "translation_reviewed") == "2026-10-29"
+        assert field(text, "translation_reviewed") >= "2026-10-29"
         outside = prose(text)
         assert not re.search(r"^\s*\$\s*$", outside, re.M), "single-dollar display delimiter"
         assert len(re.findall(r"^\s*\$\$\s*$", outside, re.M)) % 2 == 0

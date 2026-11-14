@@ -1,0 +1,143 @@
+{
+  "date": "2026-11-09",
+  "scope": "Read the canonical security/privacy chapter and add worked membership-inference and canary-audit examples, one original ROC plot, a source note and eight subject links per locale. Local only.",
+  "review": {
+    "sources": [
+      "Carlini et al. (IEEE S&P 2022), III-A/B and IV-A–C: membership game, balanced accuracy vs low-FPR TPR, per-record IN/OUT distributions and LiRA.",
+      "Zarifzadeh, Liu, Shokri (ICML 2024), PDF p. 2, §2 and Figure 1: compare log-log ROC at the same FPR under one-reference CIFAR-100 setup. Figure reproduced under PMLR CC BY 4.0.",
+      "Carlini et al. (USENIX Security 2019), arXiv v3, §§4–5: total log probability, ties in rank, exposure and controlled insertion. Section 8 distinguishes extraction.",
+      "The two arXiv licenses grant distribution to arXiv; their figures are linked, not copied. Five inherited Harvard SVGs retained unchanged."
+    ],
+    "local_checks": "2019 pages built; 718 publication, 221 output and 178 asset-registry tests passed. Zero broken internal routes, fragments or files. Source PDF crop reproduced byte-for-byte; exact reversal restored the six previous artifacts.",
+    "reader": "At 375 and 1280 px, checked eight subject anchors per locale, followed both new explanations in both shells, and opened all six figures. Verified mobile zoom/pan and inspected the original ROC figure and canary section. The four-column threshold table fits at 375 px without horizontal scrolling.",
+    "limits": "Calculations are illustrative and do not estimate a specific released model's privacy or demonstrate extraction. EN chapter remains a canonical fallback; no translation or live publication."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29\nlast_verified: 2026-10-29\nprimary_sources:",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-11-09\nreference_terms:\n  - label: Модель угроз для ML — актив, доступ и ущерб\n    label_en: ML threat modeling — assets, access, and impact\n    anchor: security-threat-model\n  - label: Извлечение модели через API предсказаний\n    label_en: Model extraction through prediction APIs\n    anchor: security-model-extraction\n  - label: Membership inference — порог, TPR и редкие ложные срабатывания\n    label_en: Membership inference — thresholds, TPR, and low FPR\n    anchor: security-membership-audit\n  - label: Canary exposure — аудит запоминания контрольных строк\n    label_en: Canary exposure — measuring memorization\n    anchor: security-canary-exposure\n  - label: Отравление данных, закладки и атаки на вход\n    label_en: Data poisoning, backdoors, and evasion\n    anchor: security-poisoning\n  - label: Подпись артефакта, разграничение прав и реагирование\n    label_en: Artifact signing, least privilege, and response\n    anchor: security-defense\n  - label: Дифференциальная приватность — гарантия и последующая обработка\n    label_en: Differential privacy — guarantees and post-processing\n    anchor: security-dp-guarantee\n  - label: Проверка безопасности ML перед выпуском\n    label_en: ML security review before release\n    anchor: security-release-check\nprimary_sources:"
+        },
+        {
+          "old": "  - https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf",
+          "new": "  - https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf\n  - https://arxiv.org/abs/2112.03570v2\n  - https://proceedings.mlr.press/v235/zarifzadeh24a.html\n  - https://arxiv.org/abs/1802.08232v3"
+        },
+        {
+          "old": "![[Assets/Sources/Harvard ML Systems/vol2/security_privacy/attack-surface-taxonomy.svg]]",
+          "new": "![[Assets/Sources/Harvard ML Systems/vol2/security_privacy/attack-surface-taxonomy.svg|Поверхности атаки ML-системы: данные, модель, инфраструктура и цепочка поставки]]"
+        },
+        {
+          "old": "## Модель угроз: актив, доступ и наблюдаемый ущерб",
+          "new": "<a id=\"security-threat-model\"></a>\n\n## Модель угроз: актив, доступ и наблюдаемый ущерб"
+        },
+        {
+          "old": "![[Assets/Sources/Harvard ML Systems/vol2/security_privacy/threat-prioritization-matrix.svg]]",
+          "new": "![[Assets/Sources/Harvard ML Systems/vol2/security_privacy/threat-prioritization-matrix.svg|Матрица сопоставляет вероятность угрозы и тяжесть её последствий]]"
+        },
+        {
+          "old": "### Извлечение модели и кража весов",
+          "new": "<a id=\"security-model-extraction\"></a>\n\n### Извлечение модели и кража весов"
+        },
+        {
+          "old": "Для проверки ищут дословные воспроизведения редких последовательностей,\nпроводят атаки на участие записей в обучении и оценивают воспроизведение\nспециально внесённых контрольных строк (canary exposure).\nНеудача этих атак сама по себе не устанавливает формальную гарантию приватности.",
+          "new": "Аудитор может проверить, выдаёт ли модель дословный фрагмент, угадывает ли\nатака участие записи в обучении и поднимается ли специально вставленная\nконтрольная строка в ранжировании продолжений. Каждый тест измеряет\nсвой эффект; отрицательный результат не устанавливает формальную\nгарантию приватности."
+        },
+        {
+          "old": "![[Assets/Sources/Harvard ML Systems/vol2/security_privacy/security_privacy_output_leakage_ladder.svg]]",
+          "new": "![[Assets/Sources/Harvard ML Systems/vol2/security_privacy/security_privacy_output_leakage_ladder.svg|При переходе от полного вектора оценок к top-5 API возвращает меньше значений]]"
+        },
+        {
+          "old": "### Отравление обучения и атака на готовую модель",
+          "new": "<a id=\"security-membership-audit\"></a>\n\n#### Проверка участия записи при низкой FPR\n\nПусть аудитор знает, какие обращения вошли в обучение классификатора,\nа какие оставлены для проверки. Простейшая атака использует потерю\n$-\\ln p_\\theta(y\\mid x)$: она помечает запись как обучающую, если\nпотеря ниже порога. Мягкий порог захватывает и записи, которые\nклассификатор уверенно распознаёт без обучения на них. Поэтому\nсчитают две доли: TPR среди обучающих записей и FPR среди записей,\nкоторых модель не видела.\n\nДопустим, среди проверяемых записей 100 обучающих и 10 000 остальных.\nДля двух порогов посчитаем верно помеченные записи (TP) и ложные\nсрабатывания (FP).\n\n| Порог | TP | FP | Precision |\n| --- | ---: | ---: | ---: |\n| Мягкий | 80 | 100 | 44,4% |\n| Строгий | 30 | 10 | 75% |\n\nСтрогий порог уменьшил TPR с 80% до 30%, а FPR — с 1% до 0,1%.\nИз 40 помеченных записей 30 действительно были в обучении. Если взять\nпоровну обучающих и необучающих записей и сохранить те же TPR и FPR,\nверными окажутся уже около 99,7% положительных решений. Изменился\nсостав проверяемой выборки, а не атака.\n\nПри доле обучающих записей $\\pi$ доля верных положительных решений\n(precision) равна\n\n$$\n\\Pr(\\text{в обучении}\\mid\\text{помечен})\n=\\frac{\\pi\\,\\mathrm{TPR}}\n{\\pi\\,\\mathrm{TPR}+(1-\\pi)\\,\\mathrm{FPR}}.\n$$\n\nКаждая точка ROC-кривой показывает TPR и FPR при некотором пороге.\nЕсли допускается FPR не выше 0,1%, найдите $10^{-3}$ по горизонтали\nи сравните кривые на этой вертикали. AUC учитывает и эту область,\nи пороги, при которых ошибочно помечается большая доля записей.\nПо одной AUC нельзя узнать TPR при выбранной FPR.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/privacy-audit-2026-11-09/rmia-low-fpr-figure1.png|Логарифмические ROC-кривые четырёх атак на CIFAR-100 и диагональ случайного угадывания; при FPR 0,1% кривые дают разные TPR]]\n\n*Sajjad Zarifzadeh, Philippe Liu, Reza Shokri,\n[Low-Cost High-Power Membership Inference Attacks](https://proceedings.mlr.press/v235/zarifzadeh24a.html),\nICML 2024, PMLR 235:58244–58282, Figure 1 (PDF, с. 2),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Из исходного PDF\nвырезан график целиком. Авторы использовали CIFAR-100 и одну вспомогательную\nмодель; обе оси логарифмические. Пунктир соответствует\n$\\mathrm{TPR}=\\mathrm{FPR}$. В таблице выше учебные числа, не точки с графика.*\n\nПусть фиксированный порог не дал ложных срабатываний на 1000 независимых\nпримерах, не входивших в обучение. При истинной FPR $q$ вероятность увидеть\nноль ошибок равна $(1-q)^{1000}$. Приравняв её к $0.05$, получаем\nодностороннюю 95%-ю верхнюю границу $1-0.05^{1/1000}\\approx0.003$.\nЭто около 0,3%, а не ноль. Порог подбирают отдельно от данных,\nна которых считают эту границу. Непопавшие в обучение записи берут из\nсопоставимой популяции: различие в источнике или периоде может выдать\nпринадлежность к выборке и без запоминания записи.\n\nОбщий порог по потере не различает лёгкие и трудные записи. LiRA\nсравнивает ответ модели с двумя распределениями для той же записи.\nВспомогательные модели обучают на наборах с этой записью (IN) и без\nнеё (OUT). По их ответам оценивают распределения логита уверенности\n$z=\\ln[p_\\theta(y\\mid x)/(1-p_\\theta(y\\mid x))]$. Оценка атаки\nв варианте с двумя распределениями — отношение плотностей\n$p_{\\mathrm{IN}}(z)/p_{\\mathrm{OUT}}(z)$.\n\nПусть две записи получили один и тот же логит $z=2$. Для первой средние\nOUT и IN равны 2 и 2,25; для второй — 0,5 и 2. Если все четыре\nраспределения нормальные со стандартным отклонением $\\sigma=0.5$,\nв логарифме отношения плотностей остаётся разность квадратов:\n\n$$\n\\ln\\frac{p_{\\mathrm{IN}}(z)}{p_{\\mathrm{OUT}}(z)}\n=\\frac{(z-\\mu_{\\mathrm{OUT}})^2-(z-\\mu_{\\mathrm{IN}})^2}{2\\sigma^2}.\n$$\n\nПодстановка даёт $-0.125$ для первой записи и $4.5$ для второй.\nОтношения плотностей равны примерно $0.88$ и $90$.\nПервый ответ обычен и без этой записи в обучении,\nвторой гораздо правдоподобнее при её включении. Число 90 — отношение\nплотностей, не вероятность участия. Условия эксперимента, выбор\nстатистики и варианты LiRA приведены в\n[Carlini et al., §§III-B и IV](https://arxiv.org/html/2112.03570v2#S3.SS2).\n\n<a id=\"security-canary-exposure\"></a>\n\n#### Проверка запоминания контрольной строки\n\nДля языковой модели можно провести опыт с известным происхождением строки.\nДо обучения выбирают случайный шестизначный код и добавляют в тестовую\nкопию обучающего корпуса строку «Код учебного примера: 038241».\nКод синтетический, не взятый из пользовательских данных. После обучения\nдля точного ранга нужно оценить все $10^6$ вариантов от 000000 до 999999\nпри одном и том же префиксе. Для каждого варианта складывают отрицательные\nлогарифмы условных вероятностей его токенов: меньшая сумма означает\nболее вероятное продолжение.\n\nЕсли 19 других вариантов получили меньшую или равную потерю, у\nвставленной строки ранг $r=20$. Он включает саму строку, а при\nравенстве потерь учитывает всех кандидатов с тем же значением.\nПоказатель экспозиции (exposure) равен\n\n$$\n\\operatorname{exposure}\n=\\log_2|\\mathcal{R}|-\\log_2 r\n=\\log_2(10^6/20)\\approx15.61\\ \\text{бита}.\n$$\n\nЗдесь $\\mathcal{R}$ — множество кандидатов. Двадцать из миллиона\nозначает, что только один из 50 000 равномерно выбранных вариантов\nполучает оценку не хуже. Если в контрольном обучении без вставки\nтот же код оказался на месте 20 000, его экспозиция составила бы\nоколо 5,64 бита. Сравнение проводят на одинаковом множестве кандидатов\nи по одной схеме расчёта вероятности. Чтобы сравнить режимы обучения,\nиспользуют несколько контрольных строк и повторов.\n\nВысокая экспозиция помогает сужать поиск, но не означает, что\ngreedy-декодирование вернёт всю строку или что через API можно получить\nоценки всех кандидатов. Поиск строки через тот интерфейс, который видит\nпротивник, проверяют отдельно. При слишком большом множестве кандидатов\nоценивают хвост распределения: отсутствие совпадений в малой случайной\nвыборке ещё не даёт оценку ранга.\n[Carlini et al., The Secret Sharer, §§4–5](https://arxiv.org/html/1802.08232v3#S4)\nописывают протокол вставки и способы приближённой оценки экспозиции.\n\n<a id=\"security-poisoning\"></a>\n\n### Отравление обучения и атака на готовую модель"
+        },
+        {
+          "old": "## Многоуровневая защита и реагирование",
+          "new": "<a id=\"security-defense\"></a>\n\n## Многоуровневая защита и реагирование"
+        },
+        {
+          "old": "![[Assets/Sources/Harvard ML Systems/vol2/security_privacy/defense-stack.svg]]",
+          "new": "![[Assets/Sources/Harvard ML Systems/vol2/security_privacy/defense-stack.svg|Слои защиты от данных и модели до развёртывания, исполнения и оборудования]]"
+        },
+        {
+          "old": "## Что именно гарантирует приватность",
+          "new": "<a id=\"security-dp-guarantee\"></a>\n\n## Что именно гарантирует приватность"
+        },
+        {
+          "old": "![[Assets/Sources/Harvard ML Systems/vol2/security_privacy/71393fab82f7333b27d3df80508ecbcfeca4b822.svg]]",
+          "new": "![[Assets/Sources/Harvard ML Systems/vol2/security_privacy/71393fab82f7333b27d3df80508ecbcfeca4b822.svg|Две кривые распределения результатов одного механизма на соседних наборах данных]]"
+        },
+        {
+          "old": "[[02 Areas/ML & DL/00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment|предыдущей главе о федеративном обучении и развёртывании на устройствах]]\nи Harvard [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/security_privacy#Gradient leakage and privacy-preserving computation|Gradient leakage and privacy-preserving computation]].",
+          "new": "предыдущей главе на двух примерах:\n[[02 Areas/ML & DL/00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-secure-aggregation|пересекающиеся группы в безопасной агрегации]] и\n[[02 Areas/ML & DL/00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-weighted-dp|чувствительность взвешенного обновления]]. Дополнительные способы защиты обновлений описаны в разделе Harvard\n[[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/security_privacy#Gradient leakage and privacy-preserving computation|Gradient leakage and privacy-preserving computation]]."
+        },
+        {
+          "old": "## Проверка безопасности перед выпуском",
+          "new": "<a id=\"security-release-check\"></a>\n\n## Проверка безопасности перед выпуском"
+        },
+        {
+          "old": "сохранён в библиотеке на английском. В этой адаптации используются пять\nисходных иллюстраций без перерисовки; их подписи уточняют, что именно показано.",
+          "new": "сохранён в библиотеке на английском. Пять рисунков Harvard перенесены\nбез перерисовки. Для проверки утечек дополнительно использованы\n[[05 Источники/Papers/Membership inference and memorization audits|статьи о membership inference и canary exposure]]."
+        }
+      ],
+      "before_sha256": "b9dc519d8a0c8c04c157f4e96a4ad4c0dc1549273588d9b4d0d54cf282603131",
+      "after_sha256": "31a61c26455a082e90784269d8073c7cf0949b42e52b9ae6df22b1bf6e6927b1"
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "changes": [
+        {
+          "old": "        route: sources/papers/fedbuff",
+          "new": "        route: sources/papers/fedbuff\n      - source: 05 Источники/Papers/Membership inference and memorization audits.md\n        route: sources/papers/membership-memorization-audits"
+        }
+      ],
+      "before_sha256": "7ea5a248ee74ae47e177f2ae7536be18702ecce3bdf203c644e2a776aedb9950",
+      "after_sha256": "77bbe7a16206513856d4e23e834e22d1f7cf40a35875139d83ae97000a554b2f"
+    },
+    {
+      "source": "05 Источники/_index.md",
+      "changes": [
+        {
+          "old": "- [[05 Источники/Papers/Federated Learning with Buffered Asynchronous Aggregation|FedBuff — buffered asynchronous federated learning]]",
+          "new": "- [[05 Источники/Papers/Federated Learning with Buffered Asynchronous Aggregation|FedBuff — buffered asynchronous federated learning]]\n- [[05 Источники/Papers/Membership inference and memorization audits|Membership inference and memorization audits — LiRA, RMIA, and canaries]]"
+        }
+      ],
+      "before_sha256": "92d2784c74e129a0dbde4d68e6452e08fa2d8720275da61c97ff2c76bbd05940",
+      "after_sha256": "8fc9eb16cc9a7661f3abd580726e6b67f28ca4255be4e32cb4a479f5bb5fcaad"
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "changes": [
+        {
+          "old": "    render_options: {\"scale_to\":6000,\"x\":455,\"y\":2090,\"width\":1820,\"height\":750}",
+          "new": "    render_options: {\"scale_to\":6000,\"x\":455,\"y\":2090,\"width\":1820,\"height\":750}\n  - id: \"curated-privacy-rmia-low-fpr-figure1-518fa5500bd0\"\n    asset: \"00 Учебник/Assets/Figures/curated/privacy-audit-2026-11-09/rmia-low-fpr-figure1.png\"\n    author: \"Sajjad Zarifzadeh, Philippe Liu, Reza Shokri\"\n    source_url: \"https://proceedings.mlr.press/v235/zarifzadeh24a.html\"\n    source_figure_label: \"Figure 1, PDF p. 2\"\n    source_asset: \"05 Источники/Originals/privacy-audit-2026-11-09/zarifzadeh24a.pdf\"\n    source_asset_sha256: \"d026d8b77211e614d6ea803fb3908f2890daf64835b03b8ce89a969d4a8e6c87\"\n    sha256: \"518fa5500bd0d38d58d5b595a408bf23ea6a46908adc0cc0d7162e48a77e9646\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/edge-2026-10-20/pmlr-license.html\"\n    license_evidence_sha256: \"1c8123a6c840ca2752e383f0924fa23ba38552140a2cc54f69ea9df5acfcdd3d\"\n    derivation: \"pdf-page-render-crop\"\n    provenance_confirmation: \"licensed-paper-figure\"\n    metadata_status: \"verified\"\n    modifications: \"Direct source PDF render and rectangular crop. Only surrounding text and page margins were removed.\"\n    used_in: [\"00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md\"]\n    last_verified: \"2026-11-09\"\n    source_page: 2\n    crop_box_px: [665,480,1940,1650]\n    render_page_size_px: [4637,6000]\n    render_options: {\"scale_to\":6000,\"x\":665,\"y\":480,\"width\":1275,\"height\":1170}"
+        }
+      ],
+      "before_sha256": "e966ae104bb6fe6b45b4566afac20fe3e3ce876d50276b0287def08e9e17cc4b",
+      "after_sha256": "73c8f1468bf9fbf2dc390c86fb0099c320f24e2c191302a98df27178c327ecaf"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем|Безопасность и приватность ML-систем]]",
+          "new": "- [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем|Безопасность и приватность ML-систем]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем#security-threat-model|Модель угроз для ML — актив, доступ и ущерб]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем#security-model-extraction|Извлечение модели через API предсказаний]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем#security-membership-audit|Membership inference — порог, TPR и редкие ложные срабатывания]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем#security-canary-exposure|Canary exposure — аудит запоминания контрольных строк]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем#security-poisoning|Отравление данных, закладки и атаки на вход]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем#security-defense|Подпись артефакта, разграничение прав и реагирование]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем#security-dp-guarantee|Дифференциальная приватность — гарантия и последующая обработка]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем#security-release-check|Проверка безопасности ML перед выпуском]]"
+        }
+      ],
+      "before_sha256": "fd5fa30c77bd8c36001a7269c335bd08991a0cb09779aa3386eba6300eeb1ff1",
+      "after_sha256": "969f6f9bcf8b3e43707f4ad50466ee2955981644b97b81a4708172364e1b5b4e"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем|Security and privacy of ML systems]]",
+          "new": "- [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем|Security and privacy of ML systems]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем#security-threat-model|ML threat modeling — assets, access, and impact]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем#security-model-extraction|Model extraction through prediction APIs]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем#security-membership-audit|Membership inference — thresholds, TPR, and low FPR]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем#security-canary-exposure|Canary exposure — measuring memorization]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем#security-poisoning|Data poisoning, backdoors, and evasion]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем#security-defense|Artifact signing, least privilege, and response]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем#security-dp-guarantee|Differential privacy — guarantees and post-processing]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем#security-release-check|ML security review before release]]"
+        }
+      ],
+      "before_sha256": "24a3c142deeb51ac22e38e080073e1a4f41662f30dcb94e2a62d0e584e4a0949",
+      "after_sha256": "dcdde600a6691462272e4f33b375c5c703ec44eb052152aff6b7c70a306690e2"
+    }
+  ]
+}

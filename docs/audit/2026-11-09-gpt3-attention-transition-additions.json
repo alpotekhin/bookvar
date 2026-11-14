@@ -1,0 +1,98 @@
+{
+  "date": "2026-11-09",
+  "scope": "Make the GPT-2 to GPT-3 mask change readable in the GPT-3 chapter and expose the direct LLaMA path without removing T5 from the main course. Local only.",
+  "sources": [
+    {
+      "work": "Brown et al., Language Models are Few-Shot Learners, v4",
+      "sections": "§2, Figure 2.1 and §2.1",
+      "url": "https://arxiv.org/html/2005.14165v4#S2",
+      "notes": "GPT-2 architecture retained with alternating dense and locally banded attention; paper does not specify a band width."
+    },
+    {
+      "work": "Jiang et al., Mistral 7B, v1",
+      "sections": "§2 and Figure 1",
+      "url": "https://arxiv.org/html/2310.06825v1#S2.F1",
+      "notes": "Reuse unchanged CC BY 4.0 figure for the two causal masks; third panel depicts Mistral, not GPT-3. Upstream source-image SHA-256 matches the registered PNG."
+    },
+    {
+      "work": "Touvron et al., LLaMA, v1",
+      "sections": "§2.2–2.4 and Table 2",
+      "url": "https://arxiv.org/html/2302.13971v1#S2.SS2",
+      "notes": "LLaMA 13B uses 1T training tokens, full causal attention, RMSNorm, SwiGLU and RoPE."
+    }
+  ],
+  "explanation": "Read both existing GPT-3 editions in full. In the source figure, the query 'on' can use four keys in the full mask and three in the local mask; the last 'the' is excluded by causality in both cases. This establishes which logits reach softmax before the existing three-token numerical example. No new measurements with released weights.",
+  "editorial": "Keep the original Alammar visuals and exact source table data. Put LLaMA first in the historical exit, preserve the T5 main-course link and both existing legacy fragments.",
+  "verification": {
+    "reasoning": "Checked the original Figure 1 row against both captions, and independently recomputed the three-token softmax values and 36/21/57 allowed-pair counts. Read the changed prose in both editions after editing.",
+    "build": "2063 pages built; 256 built-output tests, 24 chapter and receipt tests, and the curated-registry exactly-once test passed. The built link check found no broken internal routes, fragments, or files.",
+    "reader": "Followed the actual links from the contents through GPT-1, GPT-2, GPT-3 and LLaMA in both locales at 375 and 1280 pixels. All 33 figures and 27 display equations loaded on each pass, with no KaTeX errors or page overflow. Inspected the unchanged 1790 × 667 Mistral PNG in the reader and verified that the mobile viewer can zoom and pan to its right edge.",
+    "publication": "Local only. HEAD and the local origin/dev ref remain at 9bd4e7d9e8fba571c3e2467f7388f10874367c97; no commit, push, or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "before_sha256": "9987d4b2b70b1bbe25832a5c7ac21b27988320ffee1bb8d5e5f0766c935af6b2",
+      "after_sha256": "9848de8fb84991d6b7963763893253efd034d74a6a2d809a85aaeb4567b63ee4",
+      "lines": 907,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-30",
+          "new": "last_updated: 2026-11-09"
+        },
+        {
+          "old": "В полном причинном attention позиция $i$ использует все позиции $j\\le i$.\nВ локальном слое разрешённая область сужается до полосы рядом с $i$.\nНапример, в учебной полосе ширины 3 позиция 7 обращалась бы к позициям\n5, 6 и 7, тогда как в полном слое — к 0–7. Это иллюстрация локальной\nмаски, не опубликованная конфигурация GPT-3: точная ширина полосы\nв §2.1 не указана.",
+          "new": "В GPT-2 запрос из позиции $i$ мог читать ключи из всех позиций $j\\le i$\nна каждом слое. В GPT-3 полные слои сохранились, но теперь они чередуются\nсо слоями, в которых запрос видит только ближайшие позиции слева и себя.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/long-context-review-2026-09/mistral-sliding-window.png|Две маски для последовательности The cat sat on the; в строке on ключ The доступен в полной маске и закрыт в локальной]]\n\n*Albert Q. Jiang et al., [Mistral 7B, рис. 1](https://arxiv.org/html/2310.06825v1#S2.F1).\n[Оригинал без изменений](https://arxiv.org/html/2310.06825v1/swa.png),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nНа правой панели показан стек локальных слоёв Mistral, а не чередование\nслоёв в GPT-3.*\n\nСтрока `on` соответствует запросу, столбцы — ключам. Слева стоят единицы\nпод `The`, `cat`, `sat` и `on`. В средней панели окно содержит три позиции\nвместе с текущей, поэтому `The` выпадает. Последнее `the` находится справа\nот запроса и закрыто в обеих масках. Единица разрешает включить оценку\nв softmax, но не задаёт её вес. Точную ширину полосы GPT-3 авторы\n[в §2.1](https://arxiv.org/html/2005.14165v4#S2.SS1) не указали."
+        },
+        {
+          "old": "<span id=\"наследие-и-следующий-переход\"></span>\n\n## Переход к T5\n\nВ GPT-3 разные задачи используют одно авторегрессионное продолжение\nобщей последовательности. Примеры и вопрос занимают её префикс,\nответ дописывается справа. Веса при оценке остаются неизменными.\nУ [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]]\nвход и выход тоже текстовые, но архитектура разделяет их: encoder\nстроит двунаправленные представления входа, decoder генерирует ответ\nс cross-attention к ним. Разбор T5 продолжает сравнение архитектур,\nа не хронологию публикаций: T5 появилась раньше GPT-3.\n\n[[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#От GPT-3 к первой LLaMA|Продолжить по причинным декодерам: первая LLaMA]] —\nполное причинное внимание, RMSNorm, RoPE и SwiGLU в том же цикле\nпредсказания следующего токена.",
+          "new": "<span id=\"наследие-и-следующий-переход\"></span>\n<a id=\"переход-к-t5\"></a>\n<a id=\"gpt3-next-models\"></a>\n\n## После GPT-3: LLaMA и T5\n\n[[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|Первая LLaMA]] продолжает линию причинных декодеров. Запрос и ответ\nпо-прежнему занимают одну последовательность. Все слои снова используют\nполное причинное внимание; внутри блока меняются нормализация,\nпозиционные представления и FFN. В сравнении с GPT-3 13B у LLaMA 13B\nтот же размер окна, но больше токенов предобучения: 1 трлн против 300 млрд.\n\n[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]] вышла раньше GPT-3. В основном курсе она стоит следом для сравнения:\nэнкодер T5 читает вход в обе стороны, а декодер при генерации обращается\nк его представлениям через cross-attention."
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "before_sha256": "d4ad19d131bb1d5bb95f296b57cfaadc5dcf95067f736e6383a4c1264e4703be",
+      "after_sha256": "7d51cfefd051c08dee0b6ccce17bf359fc8a96e6ec5a15eb768c1c62d23e178f",
+      "lines": 855,
+      "changes": [
+        {
+          "old": "canonical_revision: \"3cd49ae19d8bc01c4c68d05a823ffd5c1fd7fee1106332a9a53843491566b0a2\"",
+          "new": "canonical_revision: \"9848de8fb84991d6b7963763893253efd034d74a6a2d809a85aaeb4567b63ee4\""
+        },
+        {
+          "old": "translation_reviewed: \"2026-10-30\"",
+          "new": "translation_reviewed: \"2026-11-09\""
+        },
+        {
+          "old": "last_updated: 2026-10-30",
+          "new": "last_updated: 2026-11-09"
+        },
+        {
+          "old": "permits. GPT-3 fine-tuning is outside this study.",
+          "new": "permits. GPT-3 fine-tuning is outside this study.\n\nThe [[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language#Translation and answers through prefixes|GPT-2 translation experiment]]\nalready put completed pairs before the new sentence. In the GPT-2 paper,\n“zero-shot transfer” meant no task-specific weight updates. GPT-3\ncounts completed examples separately: the same weights can be evaluated\nwith zero, one, or several demonstrations."
+        },
+        {
+          "old": "Full causal attention at $i$ uses every $j\\le i$. A local layer\nrestricts the allowed region to a band near $i$. With teaching band\nwidth 3, position 7 would read 5, 6, and 7 instead of 0–7.\nThis illustrates a local mask, not a published GPT-3 configuration:\nSection 2.1 does not specify exact band width.",
+          "new": "In GPT-2, the query at position $i$ could read keys at every $j\\le i$\nin every layer. GPT-3 keeps full layers and alternates them with layers\nthat restrict each query to its own position and a band immediately to\nits left.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/long-context-review-2026-09/mistral-sliding-window.png|Two masks for The cat sat on the; in the on row, the full mask allows The and the local mask excludes it]]\n\n*Albert Q. Jiang et al., [Mistral 7B, Figure 1](https://arxiv.org/html/2310.06825v1#S2.F1).\n[Unmodified original](https://arxiv.org/html/2310.06825v1/swa.png),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nThe right panel shows a stack of local layers in Mistral, not GPT-3's\nalternating pattern.*\n\nIn the `on` row, each column is a key. The full mask allows `The`,\n`cat`, `sat`, and `on`. The middle panel's window holds three positions\nincluding the query itself, so `The` drops out. The final `the` is to\nthe right of the query and stays masked in both panels. A one admits\nthe score to softmax; it does not specify its weight. The GPT-3 paper\ndoes not give the exact band width in [Section 2.1](https://arxiv.org/html/2005.14165v4#S2.SS1)."
+        },
+        {
+          "old": "<a id=\"transition-to-t5\"></a>\n\n## Two paths after GPT-3\n\nGPT-3 tasks use one autoregressive continuation of a shared sequence.\nExamples and question form its prefix; the answer is appended on\nthe right, with fixed weights during evaluation.\n\n[[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|Continue from GPT-3 to the first LLaMA]]\nto see how a decoder-only model changes its normalization, positions,\nFFN, and training budget while keeping next-token prediction.\n\n[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]]\nalso uses textual inputs and outputs but separates them architecturally:\nan encoder builds bidirectional input states, and a decoder generates\nan answer with cross-attention to them. The next chapter continues\nan architectural comparison, not publication chronology: T5 preceded GPT-3.",
+          "new": "<a id=\"transition-to-t5\"></a>\n<a id=\"gpt3-next-models\"></a>\n\n## Two paths after GPT-3\n\n[[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|The first LLaMA]] continues the causal-decoder line. The prompt and answer\nstill occupy a single sequence. Every layer returns to full causal\nattention, while the block changes its normalization, positions, and FFN.\nLLaMA 13B keeps the context length of GPT-3 13B, but trains on 1 trillion\ntokens instead of 300 billion.\n\n[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]]\npredates GPT-3. It comes next in the main curriculum as an architectural\ncomparison: T5's encoder reads the input in both directions, and its\ndecoder uses cross-attention to those states when generating."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "9c152e636ef558891038a3ab3ef99b9b154c39c9b24e56888dfa4bae6abb435c",
+      "after_sha256": "bd8935cfba430a9cb02e4f03acb58d4c29306ca3858334f66f2c94cf79855503",
+      "lines": 24439,
+      "changes": [
+        {
+          "old": "      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md\n      - 00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\n      - \"en/00 Textbook/07 Anatomy of a modern LLM/01 LLaMA as a baseline architecture.md\"",
+          "new": "      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md\n      - 00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\n      - \"en/00 Textbook/07 Anatomy of a modern LLM/01 LLaMA as a baseline architecture.md\"\n      - \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md\"\n      - \"en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md\""
+        }
+      ]
+    }
+  ]
+}

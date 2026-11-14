@@ -24,9 +24,6 @@ Gemma (февраль 2024) — **первая открытая модель о�
 
 Gemma — **decoder-only Transformer** с архитектурными решениями, унаследованными от Gemini:
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/fig1.png]]
-*Сравнение Gemma 7B с LLaMA 2 7B, LLaMA 2 13B и Mistral 7B по четырём категориям (источник: Gemma paper)*
-
 ### Параметры моделей
 
 | Параметр | Gemma 2B | Gemma 7B |
@@ -81,7 +78,15 @@ Google применила многоуровневую фильтрацию pre-
 4. **Evaluation set removal**: все evaluation sets **явно удалены** из pre-training data для предотвращения contamination
 5. **Memorization mitigation**: минимизация proliferation sensitive outputs
 
-Результат: exact memorization rates **сопоставимы с PaLM**, нет случаев memorization sensitive data.
+При сравнении по всему корпусу частота дословного воспроизведения
+Gemma близка к PaLM 2 Small. На одном только английском веб-тексте
+оценки расходятся. В испытанной выборке не обнаружили воспроизведения
+данных высшей категории чувствительности.
+
+![[00 Учебник/Assets/Figures/curated/gemma/original-gemma_by_model_size_final.svg|Частота дословного воспроизведения у Gemma 2B, Gemma 7B и PaLM 2 Small по веб-данным и по всем данным]]
+
+*Две панели показывают, как результат меняется с выбором текстов для
+сравнения. Gemma Team, [технический отчёт, рис. 2](https://arxiv.org/html/2403.08295v4#S6.F2), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Исходный SVG без изменений.*
 
 ## Instruction Tuning: двухэтапный процесс
 
@@ -108,8 +113,9 @@ Google применила многоуровневую фильтрацию pre-
 
 Gemma 7B превосходит **LLaMA 2 13B** (почти вдвое большую модель) по average score (56.9 vs 52.4).
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/fig2.png]]
-*Подробные результаты Gemma по категориям бенчмарков (источник: Gemma paper)*
+![[00 Учебник/Assets/Figures/curated/gemma/original-eval_chart.svg|Четыре группы тестов: ответы на вопросы, рассуждение, математика и естественные науки, код]]
+
+*Средние результаты по четырём группам тестов. Gemma Team, [технический отчёт, рис. 1](https://arxiv.org/html/2403.08295v4#S1.F1), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Исходный SVG без изменений.*
 
 ### Gemma 2B: on-device champion
 

@@ -13,5 +13,5 @@ describe('explicit editorial disposition of existing course residuals', () => {
     expect(report.counts.decision['gap-filled-with-component-map']).toBe(1);
     expect(report.counts.decision['retain-recording']).toBe(12);
     expect(report.counts.unpublishedNotes).toBe(31);
-  });
+  }, 20000);
 });

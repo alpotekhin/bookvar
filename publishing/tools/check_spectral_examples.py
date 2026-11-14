@@ -1,4 +1,4 @@
-"""Execute the four chapter fences, then check the graph-cut derivations independently."""
+"""Execute all six chapter fences and independently check graph cuts and random walks."""
 
 from pathlib import Path
 from itertools import product
@@ -14,13 +14,29 @@ ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian.md"
 chapter_bytes = CHAPTER.read_bytes()
 blocks = re.findall(r"```python\n(.*?)```", chapter_bytes.decode(), re.S)
-assert len(blocks) == 4
+assert len(blocks) == 6
 scope = {}
 for index, code in enumerate(blocks, 1):
     exec(compile(code, f"{CHAPTER}:block{index}", "exec"), scope)
 
 W, D, L = (scope[name] for name in ["W", "D", "L"])
 d = np.diag(D)
+
+# Connected source-figure chain: independently known path spectrum and heat mean.
+chain_lap = scope["L_chain"]
+path_spectrum = 2 - 2 * np.cos(np.arange(7) * np.pi / 7)
+np.testing.assert_allclose(scope["chain_values"], path_spectrum, atol=1e-14)
+np.testing.assert_allclose(scope["alignment"], .9999935414458716, atol=1e-12)
+np.testing.assert_allclose(scope["late_heat"][scope["chain_order"]],
+    [.738569, .789865, .882662, .999033, 1.116132, 1.210565, 1.263173], atol=5e-7)
+np.testing.assert_allclose(expm(-500 * chain_lap) @ scope["h_chain"], np.ones(7), atol=1e-11)
+np.testing.assert_allclose(expm(-10 * chain_lap) @ np.ones(7), np.ones(7), atol=1e-13)
+np.testing.assert_allclose(scope["h_time"][scope["chain_order"]][[0, -1]],
+    [.999905, 1.000095], atol=5e-7)
+constraint_degree = np.diag([4., .25])
+for point in [[.5, 0], [-.5, 0], [0, 2], [0, -2]]:
+    np.testing.assert_allclose(np.array(point) @ constraint_degree @ point, 1)
+print("PASS connected-chain heat trajectory, slow direction, equilibrium and weighted ellipse")
 np.testing.assert_allclose(scope["trial"] @ D @ scope["trial"], 4.2)
 np.testing.assert_allclose((scope["trial"] @ L @ scope["trial"])/4.2, 2/21)
 np.testing.assert_allclose(scope["eigenvalues"], [0, 1.1-np.sqrt(1.01), 2, 1.1+np.sqrt(1.01)], atol=1e-14)
@@ -79,6 +95,33 @@ print(f"PASS {cases} discrete partitions: RatioCut/Ncut identities, constraints 
 # Same four-node state: stationary-conditioned exit versus uniform initialization.
 P = W / d[:, None]
 pi = d / d.sum()
+
+# First-step hitting-time equations, independent of the pseudoinverse identity.
+def hitting_times(transition, target):
+    keep = np.arange(len(transition)) != target
+    times = np.zeros(len(transition))
+    times[keep] = np.linalg.solve(np.eye(keep.sum()) - transition[np.ix_(keep, keep)],
+                                  np.ones(keep.sum()))
+    return times
+
+hits = np.column_stack([hitting_times(P, target) for target in range(4)])
+np.testing.assert_allclose(hits[[1, 0, 2], [2, 2, 1]], [21, 22, 21])
+for (left, right), expected in [((0, 1), 4.2), ((1, 2), 42), ((0, 3), 50.4)]:
+    np.testing.assert_allclose(scope["commute_values"][left, right], expected)
+    np.testing.assert_allclose(hits[left, right] + hits[right, left], expected)
+np.testing.assert_allclose(L @ scope["L_pinv"], np.eye(4) - np.ones((4, 4))/4, atol=1e-13)
+for n in range(2, 9):
+    for _ in range(5):
+        upper = np.triu(rng.uniform(.1, 2, (n, n)), 1)
+        graph = upper + upper.T
+        degrees = graph.sum(axis=1)
+        lap = np.diag(degrees) - graph
+        pinv = np.linalg.pinv(lap, hermitian=True)
+        expected = degrees.sum() * (np.diag(pinv)[:, None] + np.diag(pinv)[None, :] - 2*pinv)
+        transition = graph / degrees[:, None]
+        first_passages = np.column_stack([hitting_times(transition, target) for target in range(n)])
+        np.testing.assert_allclose(expected, first_passages + first_passages.T, atol=1e-11)
+print("PASS commute times from independent first-step systems on the example and 35 connected graphs")
 np.testing.assert_allclose(P.sum(axis=1), 1)
 np.testing.assert_allclose(pi @ P, pi)
 np.testing.assert_allclose(pi[:, None] * P, pi[None, :] * P.T)
@@ -142,5 +185,5 @@ self_graph = scope["kneighbors_graph"](scope["X"], n_neighbors=30,
 np.testing.assert_allclose(native.affinity_matrix_.toarray(), ((self_graph+self_graph.T)*.5).toarray())
 np.testing.assert_allclose(native.affinity_matrix_.diagonal(), 1)
 np.testing.assert_allclose(directed.diagonal(), 0)
-print("PASS all four chapter fences; moons graph parameters affect the partition")
+print("PASS all six chapter fences; moons graph parameters affect the partition")
 print("chapter_sha256", hashlib.sha256(chapter_bytes).hexdigest())

@@ -525,7 +525,7 @@ Jouppi, Norm, George Kurian, Sheng Li, Peter Ma, Rahul Nagarajan, Lifeng Nai, Ni
 
 The physical reality of PFLOP/s-scale compute is visible in the infrastructure itself: a single facility floor houses thousands of accelerator chips organized into rows of liquid-cooled racks, each rack consuming kilowatts of power to sustain the aggregate throughput that no individual device can approach.
 
-![[Assets/Sources/Harvard ML Systems/vol1/ml_systems/cloud_ml_tpu.jpeg]]
+[Archived Figure 4: Cloud Data Center Scale](https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/ml_systems/images/jpg/cloud_ml_tpu.jpeg)
 
 Figure 4: **Cloud Data Center Scale**: Rows of server racks illuminated by blue LEDs extend across a Google Cloud TPU data center floor. Image source: ([Google DeepMind 2024](https://mlsysbook.ai/vol1/ml_systems/ml_systems.html#ref-google2024gemini)).
 

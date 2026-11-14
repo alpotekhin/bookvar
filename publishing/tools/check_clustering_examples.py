@@ -1,4 +1,4 @@
-"""Check the chapter's mechanisms, three code blocks and preprocessing isolation."""
+"""Check the chapter's mechanisms, four code blocks and preprocessing isolation."""
 from pathlib import Path
 from itertools import product, permutations
 import hashlib
@@ -20,7 +20,7 @@ from sklearn.preprocessing import StandardScaler, RobustScaler
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/01 Классическое машинное обучение/06 Кластеризация и её ограничения.md"
 blocks = re.findall(r"```python\n(.*?)```", CHAPTER.read_text(), re.S)
-assert len(blocks) == 3
+assert len(blocks) == 4
 scope = {}
 for i,code in enumerate(blocks[:2]):
     exec(compile(code,str(CHAPTER)+f":block{i+1}","exec"),scope)
@@ -210,7 +210,16 @@ common=sorted(first.keys()&second.keys())
 assert common==["A","C"]
 assert [first[i] for i in common]==[0,1] and [second[i] for i in common]==[8,3]
 
-# Third published block: observe preprocessing and center-fitting boundaries.
+# Third published block: nonlinear quantile geometry and preserved ties.
+exec(compile(blocks[2], str(CHAPTER) + ":block3", "exec"), scope)
+qmap = scope["quantile_map"]
+np.testing.assert_allclose(qmap.quantiles_.ravel(), [0, 1, 1, 2, 100])
+np.testing.assert_allclose(qmap.references_, np.linspace(0, 1, 5))
+np.testing.assert_allclose(scope["count_positions"], [0, .375, .375, .75, 1])
+np.testing.assert_allclose(np.diff(qmap.transform([[1.], [2.], [100.]]).ravel()), [.375, .25])
+assert len(np.unique(scope["count_positions"])) == len(np.unique(scope["purchase_counts"])) == 4
+
+# Fourth published block: observe preprocessing and center-fitting boundaries.
 scaler_fits=[]; kmeans_fits=[]
 original_scaler=StandardScaler.fit; original_kmeans=KMeans.fit
 def capture_scaler(self,X,y=None,sample_weight=None):
@@ -221,7 +230,7 @@ def capture_kmeans(self,X,y=None,sample_weight=None):
     return original_kmeans(self,X,y,sample_weight=sample_weight)
 StandardScaler.fit=capture_scaler; KMeans.fit=capture_kmeans
 try:
-    exec(compile(blocks[2],str(CHAPTER)+":block3","exec"),scope)
+    exec(compile(blocks[3],str(CHAPTER)+":block4","exec"),scope)
 finally:
     StandardScaler.fit=original_scaler; KMeans.fit=original_kmeans
 assert len(scaler_fits)==3 and len(kmeans_fits)==4
@@ -237,7 +246,8 @@ dist_features=scope["km"].transform(query)
 np.testing.assert_allclose(dist_features@np.array([1,-1]),[-8,-8,0,8,8])
 coef=np.linalg.lstsq(np.c_[query,np.ones(5)],dist_features@np.array([1,-1]),rcond=None)[0]
 assert np.sum((np.c_[query,np.ones(5)]@coef-dist_features@np.array([1,-1]))**2)>0
-print("PASS: 3 published blocks; Lloyd/local optimum/seeding/scaling;"
+print("PASS: 4 published blocks; Lloyd/local optimum/seeding/scaling;"
       " unit observations versus normalized centers; DBSCAN boundaries;"
-      " reachability and MST; EOM; silhouette/ARI/AMI; all CV scaler and center fits")
+      " reachability and MST; EOM; silhouette/ARI/AMI; quantile ranks/ties/changed distances;"
+      " all CV scaler and center fits")
 print(f"Chapter SHA-256: {hashlib.sha256(CHAPTER.read_bytes()).hexdigest()}")

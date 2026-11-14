@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT/"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md"
 body = CHAPTER.read_text()
 blocks = re.findall(r"\x60\x60\x60python\n(.*?)\n\x60\x60\x60",body,re.S)
-assert len(blocks)==8
+assert len(blocks)==9
 spaces=[]
 torch.set_num_threads(1)
 for i,block in enumerate(blocks,1):
@@ -235,6 +235,20 @@ sop_excerpt = re.search(r'```python title="Original ALBERT pair swap — Apache-
     body, re.S)[1]
 assert sop_excerpt in sop_source
 assert "sentence_order_label = 1 if instance.is_random_next else 0" in sop_source
+
+rtd = next(ns for ns in spaces if "grad_g_from_rtd" in ns)
+assert rtd["replaced"][rtd["chosen"]].tolist() == [True, False]
+assert rtd["logits"][rtd["valid"]].numel() == 6
+assert rtd["grad_g_from_rtd"] is None
+torch.testing.assert_close(rtd["exported"], torch.tensor(.96, dtype=torch.float64))
+snapshots = ROOT / "05 Источники/Originals/debertav3-2026-11-13"
+rtd_source = (snapshots / "rtd_task.py").read_bytes()
+label_source = (snapshots / "replaced_token_detection_model.py").read_bytes()
+assert hashlib.sha256(rtd_source).hexdigest() == "628054b78343f10b0454ddfc8674b4f9d6733d3aea4512fe662196bcdd9eff10"
+assert hashlib.sha256(label_source).hexdigest() == "d147c49654ca19b4cd8d75e92710df6931f1a86f57f6df6e307e417935be2e88"
+assert b"g_w_ebd.weight.detach() + d_w_ebd._weight" in rtd_source
+assert b"((lm_labels>0) & (lm_labels!=input_ids))" in label_source
+print("PASS actual replacement labels, both gradient paths and the folded GDES table")
 for published, archived in [
     ("google-bert-eedf5716-Apache-2.0.txt", "bert-LICENSE"),
     ("google-albert-b772393d-Apache-2.0.txt", "albert-LICENSE"),

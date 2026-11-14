@@ -1,0 +1,131 @@
+{
+  "date": "2026-11-09",
+  "scope": "Whole-owner agent security reading; version-bound approval, a single queue record and a source figure for the delivery boundary. Local only.",
+  "review": {
+    "previousTurn": "Progress: scientific discovery chapter, two original figures and exact verification of two published witnesses.",
+    "input": "Read the complete 804-line input at SHA 4e02810a117d85f34c408737e0a9cdfed1fe356015b02277163f80cda9470b59 across ranges 1–170, 171–413, 414–635 and 636–804. The unchanged text is preserved by exact reversal; reviewed the edited material against primary sources and executable results.",
+    "sources": [
+      "RFC 9110 §§13.1.1 and 13.2: a strong entity tag check applies before acting on the selected representation.",
+      "SQLite Language Reference, Transactions: BEGIN IMMEDIATE acquires a write transaction up front and can return SQLITE_BUSY.",
+      "Microsoft Azure Architecture Center, Solution: order and OrderCreated event are committed together; publication by the background worker happens afterward.",
+      "AWS Builders’ Library, Making retries safe with idempotent APIs: preserve intent identity, check request parameters, and account for late retries."
+    ],
+    "asset": {
+      "file": "00 Учебник/Assets/Figures/curated/agent-approval-2026-11-09/microsoft-transactional-outbox.svg",
+      "source": "https://raw.githubusercontent.com/MicrosoftDocs/architecture-center/629acf25fc1ab4096cfa102367a569867899b79e/docs/databases/guide/_images/out-box-pattern.svg",
+      "sha256": "36bdda0a5038eb48682f6b0057141e21b2963a0379b1025d46834b2e7af7262a",
+      "license": "CC BY 4.0",
+      "licenseSnapshotSha256": "7183ef9749eb9b75e710a81a4c812a9405cc184f087500581a973e5929ac3f5e",
+      "markdownSnapshotSha256": "a2864017a09d8559659f5b4407aafc303c1248477fc55f6ebcf8d6843d969bf9",
+      "viewBox": [
+        0,
+        0,
+        628.563,
+        515.106
+      ],
+      "changes": "none; byte-for-byte source SVG"
+    },
+    "runtime": "Ran all four Python examples. In the SQLite case, changed recipient/body/attachment and wrong actor fail before writing; a stale draft fails on first use; a simulated pre-commit fault rolls back; the post-commit timeout leaves one correct outbox record; exact replay does not duplicate it; revocation and grant reissue block new calls, while only the owner can read the prior receipt. No external service or production concurrency/load test.",
+    "lockCheck": "Python 3.13.7 / SQLite 3.51.1: a separate two-connection temporary database test confirmed SQLITE_BUSY for a competing draft write while the first BEGIN IMMEDIATE transaction was open. The update worked after commit and left the queued version unchanged.",
+    "verification": "Final local build: 2035 pages. Passed 738 publication tests, 237 built-output tests, both topic indexes, both course ledgers and the curated asset registry. No broken internal routes, fragments or files. The emitted SVG is byte-identical to the pinned source.",
+    "reader": "Chrome at 375 and 1280 CSS pixels in both locale routes: checked navigation, executable-example rendering, full diagram with the Message bus lane on desktop, and mobile zoom and panning. No page overflow or KaTeX errors; EN explicitly marks the canonical-language fallback.",
+    "release": "Local only; no commit, push or deployment. Whole-owner reading 147/153; six recommender owners remain. Not an overall acceptance count."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
+      "before_sha256": "4e02810a117d85f34c408737e0a9cdfed1fe356015b02277163f80cda9470b59",
+      "after_sha256": "5b8c39e1059300af1c39f8c2663fc21ab9fc27e9cda7da835fb3a1dc64297b9d",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-21\nlast_verified: 2026-10-21",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-10-21\nreference_terms:\n  - label: Подтверждение действия — версия письма и полномочия\n    label_en: Action approval — mail version and permissions\n    anchor: agent-security-bound-approval\n  - label: Transactional outbox — запись в очереди и доставка\n    label_en: Transactional outbox — queue entry and delivery\n    anchor: agent-security-transactional-outbox"
+        },
+        {
+          "old": "  - https://web.mit.edu/Saltzer/www/publications/protection/Basic.html",
+          "new": "  - https://web.mit.edu/Saltzer/www/publications/protection/Basic.html\n  - https://www.rfc-editor.org/rfc/rfc9110.html#name-if-match\n  - https://www.sqlite.org/lang_transaction.html\n  - https://learn.microsoft.com/en-us/azure/architecture/databases/guide/transactional-out-box-cosmos#solution"
+        },
+        {
+          "old": "<span id=\"разделение-привилегий-опасная-операция-живёт-в-меньшем-компоненте\"></span>",
+          "new": "<a id=\"agent-security-bound-approval\"></a>\n\n### Согласие на конкретную версию письма\n\nПользователь видит черновик `d7` версии 4: отправителя, адресата, текст\nи версию вложения. При подтверждении интерфейс сохраняет этот снимок\nкак `a4`. Агент может сослаться на `a4`, но не может создавать\nподтверждения от имени пользователя. Само имя пользователя берётся\nиз сеанса, а не из аргументов, придуманных моделью.\n\nПроверок две. Если агент подменит адресата, переданное письмо перестанет\nсовпадать с `a4`. Если письмо в аргументах прежнее, но текущий черновик\nуже перешёл к версии 5, совпадение с `a4` сохранится; не пройдёт проверка\nсостояния в базе. Похожую проверку версии в HTTP задаёт\n[`If-Match`, RFC 9110 §13.1.1](https://www.rfc-editor.org/rfc/rfc9110.html#name-if-match):\nсервер сравнивает сильную метку представления ресурса до выполнения\nоперации. Наличие такого заголовка не даёт права отправки, а конкретный\nAPI должен сам поддерживать условную операцию над нужным ресурсом.\n\nВ примере все изменения черновика и полномочий проходят через одну базу\nSQLite. [`BEGIN IMMEDIATE`](https://www.sqlite.org/lang_transaction.html)\nоткрывает транзакцию записи до чтения этих строк. Между проверкой\nи добавлением в очередь другой писатель той же базы не может вклиниться.\nЕсли база занята, транзакция может не открыться; это не успешная постановка\nв очередь. Сетевая отправка в эту транзакцию не входит.\n\n~~~python\nimport json\nimport sqlite3\nfrom typing import NamedTuple\n\nclass Mail(NamedTuple):\n    draft: str\n    version: int\n    sender: str\n    recipient: str\n    body: str\n    attachment_revision: str\n\ndef snapshot(mail):\n    return json.dumps(mail, ensure_ascii=False, separators=(\",\", \":\"))\n\ndb = sqlite3.connect(\":memory:\", isolation_level=None)\ndb.executescript(\"\"\"\n    CREATE TABLE drafts (id TEXT PRIMARY KEY, snapshot TEXT NOT NULL);\n    CREATE TABLE grants (actor TEXT PRIMARY KEY, epoch INTEGER NOT NULL);\n    CREATE TABLE approvals (\n        id TEXT PRIMARY KEY, actor TEXT NOT NULL,\n        epoch INTEGER NOT NULL, snapshot TEXT NOT NULL\n    );\n    CREATE TABLE outbox (\n        approval TEXT PRIMARY KEY, snapshot TEXT NOT NULL\n    );\n\"\"\")\n\ndef one(sql, *params):\n    return db.execute(sql, params).fetchone()\n\ndef receipt(actor, approval):\n    row = one(\n        \"SELECT o.approval FROM outbox o JOIN approvals a ON a.id = o.approval \"\n        \"WHERE a.actor = ? AND a.id = ?\", actor, approval,\n    )\n    return (\"queued\", row[0]) if row else None\n\ndef enqueue(actor, approval, mail, fault=None):\n    # actor comes from the authenticated session, not the tool arguments.\n    payload = snapshot(mail)\n    db.execute(\"BEGIN IMMEDIATE\")\n    with db:\n        approved = one(\n            \"SELECT epoch, snapshot FROM approvals WHERE id = ? AND actor = ?\",\n            approval, actor,\n        )\n        if not approved or approved[1] != payload:\n            return \"approval_mismatch\"\n        if one(\"SELECT epoch FROM grants WHERE actor = ?\", actor) != (approved[0],):\n            return \"grant_changed\"\n        previous = receipt(actor, approval)\n        if previous:\n            return previous\n        if one(\"SELECT snapshot FROM drafts WHERE id = ?\", mail.draft) != (payload,):\n            return \"draft_changed\"\n        db.execute(\"INSERT INTO outbox VALUES (?, ?)\", (approval, payload))\n        if fault == \"before_commit\":\n            raise RuntimeError(\"before commit\")\n    if fault == \"after_commit\":\n        raise TimeoutError(\"reply lost\")\n    return (\"queued\", approval)\n\nv4 = Mail(\"d7\", 4, \"me@example.invalid\", \"team@example.invalid\",\n          \"quarterly summary\", \"report-7@sha256:fixture-v4\")\nv5 = v4._replace(version=5, body=\"corrected quarterly summary\")\ndb.execute(\"INSERT INTO drafts VALUES (?, ?)\", (\"d7\", snapshot(v4)))\ndb.execute(\"INSERT INTO grants VALUES (?, ?)\", (\"alice\", 1))\n\ndef confirm_for_test(key, mail):\n    # Test fixture: the trusted UI, not the agent, creates approval rows.\n    db.execute(\"INSERT INTO approvals VALUES (?, ?, ?, ?)\",\n               (key, \"alice\", 1, snapshot(mail)))\n\nconfirm_for_test(\"a4\", v4)\ntampered = v4._replace(recipient=\"other@example.invalid\")\nassert enqueue(\"alice\", \"a4\", tampered) == \"approval_mismatch\"\nassert enqueue(\"bob\", \"a4\", v4) == \"approval_mismatch\"\ndb.execute(\"UPDATE drafts SET snapshot = ? WHERE id = ?\", (snapshot(v5), \"d7\"))\nassert enqueue(\"alice\", \"a4\", v4) == \"draft_changed\"\nassert one(\"SELECT COUNT(*) FROM outbox\") == (0,)\n\nconfirm_for_test(\"a5\", v5)\ntry:\n    enqueue(\"alice\", \"a5\", v5, fault=\"before_commit\")\nexcept RuntimeError:\n    assert receipt(\"alice\", \"a5\") is None\nelse:\n    raise AssertionError(\"expected rollback\")\ntry:\n    enqueue(\"alice\", \"a5\", v5, fault=\"after_commit\")\nexcept TimeoutError:\n    pass\nelse:\n    raise AssertionError(\"expected lost response\")\nassert receipt(\"alice\", \"a5\") == (\"queued\", \"a5\")\nassert enqueue(\"alice\", \"a5\", v5) == (\"queued\", \"a5\")\nassert one(\"SELECT COUNT(*) FROM outbox\") == (1,)\n\ndb.execute(\"DELETE FROM grants WHERE actor = ?\", (\"alice\",))\nassert enqueue(\"alice\", \"a5\", v5) == \"grant_changed\"\ndb.execute(\"INSERT INTO grants VALUES (?, ?)\", (\"alice\", 2))\nassert enqueue(\"alice\", \"a5\", v5) == \"grant_changed\"\nassert receipt(\"alice\", \"a5\") == (\"queued\", \"a5\")\nassert receipt(\"bob\", \"a5\") is None\nassert one(\"SELECT COUNT(*) FROM outbox\") == (1,)\n~~~\n\nПосле обновления черновика `a4` не ставит старое письмо в очередь.\nПользователь отдельно подтверждает версию 5, получая `a5`. Сбой до\nфиксации откатывает запись. При потере ответа после фиксации чтение\nквитанции показывает `queued`; повтор с `a5` не создаёт вторую запись.\nЗдесь один идентификатор подтверждения означает одно намерение отправить:\nон же служит уникальным ключом очереди. Для намеренного повторного\nписьма нужно отдельное подтверждение. Общий контракт повторов разобран\nв [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#tool-retry-idempotency|примере с потерянным ответом]].\n\nВ `a5` записан номер выдачи полномочия. Отзыв блокирует новый вызов,\nа новая выдача с номером 2 не восстанавливает старое согласие.\nВ этой учебной политике владелец всё ещё может прочитать квитанцию:\nправо узнать исход предыдущего действия отделено от права поставить\nписьмо в очередь. Отзыв не удаляет запись, которая уже зафиксирована.\nИдентификатор версии вложения в примере условный; в рабочей системе\nон должен ссылаться на неизменяемое содержимое, а не на файл,\nкоторый можно перезаписать по тому же пути.\n\n<a id=\"agent-security-transactional-outbox\"></a>\n\n### Запись в очереди и отправка письма\n\nНа схеме Microsoft сервис сохраняет заказ и событие `OrderCreated`\nмежду началом и фиксацией одной транзакции. В ответ клиент получает\nID заказа. Отдельный процесс читает таблицу исходящих событий,\nпубликует событие в шину и только потом отмечает его обработанным.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/agent-approval-2026-11-09/microsoft-transactional-outbox.svg|Транзакционная исходящая очередь: заказ и событие записываются вместе; фоновый процесс публикует событие после фиксации транзакции]]\n\n*Microsoft Azure Architecture Center,\n[Implement the Transactional Outbox pattern, Solution](https://learn.microsoft.com/en-us/azure/architecture/databases/guide/transactional-out-box-cosmos#solution).\n[Оригинальный SVG](https://github.com/MicrosoftDocs/architecture-center/blob/629acf25fc1ab4096cfa102367a569867899b79e/docs/databases/guide/_images/out-box-pattern.svg),\nбез обрезки и изменений,\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nВ примере с письмом одна запись одновременно хранит снимок для отправки\nи подтверждает постановку в очередь. Она не подтверждает, что почтовый\nсервер принял письмо. Если фоновый процесс передал письмо провайдеру,\nно упал до отметки об отправке, он может попытаться передать его снова.\nДля защиты от второй фактической отправки нужен контракт дедупликации\nна этой границе и известный срок его действия. Если провайдер не даёт\nтакого контракта и сверить результат нельзя, исход остаётся неизвестным.\nУчебный код проверяет ровно одну запись в локальной очереди; он не запускает\nпочтовый сервис и не обещает доставку ровно один раз.\n\n<span id=\"разделение-привилегий-опасная-операция-живёт-в-меньшем-компоненте\"></span>"
+        },
+        {
+          "old": "- David Brumley и Dawn Song, [Privtrans](https://www.usenix.org/legacy/publications/library/proceedings/sec04/tech/full_papers/brumley/brumley_html/index.html), USENIX Security 2004, §2. Разделение адресных пространств, RPC, хранение привилегированного состояния и прикладная политика.",
+          "new": "- David Brumley и Dawn Song, [Privtrans](https://www.usenix.org/legacy/publications/library/proceedings/sec04/tech/full_papers/brumley/brumley_html/index.html), USENIX Security 2004, §2. Разделение адресных пространств, RPC, хранение привилегированного состояния и прикладная политика.\n- [[05 Источники/Implementation studies/Conditional actions and transactional outbox|Условные действия и transactional outbox]]: RFC 9110, транзакции SQLite и исходная схема Microsoft."
+        },
+        {
+          "old": "Проверок две. Если агент подменит адресата, переданное письмо перестанет\nсовпадать с `a4`. Если письмо в аргументах прежнее, но текущий черновик\nуже перешёл к версии 5, совпадение с `a4` сохранится; не пройдёт проверка\nсостояния в базе. Похожую проверку версии в HTTP задаёт",
+          "new": "Проверок две. Если агент подменит адресата, переданное письмо перестанет\nсовпадать с `a4`. Если письмо в аргументах прежнее, но текущий черновик\nуже перешёл к версии 5, совпадение с `a4` сохранится. Первую постановку\nв очередь остановит проверка текущего состояния. Похожую проверку версии в HTTP задаёт"
+        },
+        {
+          "old": "confirm_for_test(\"a4\", v4)\ntampered = v4._replace(recipient=\"other@example.invalid\")\nassert enqueue(\"alice\", \"a4\", tampered) == \"approval_mismatch\"\nassert enqueue(\"bob\", \"a4\", v4) == \"approval_mismatch\"",
+          "new": "confirm_for_test(\"a4\", v4)\ntampered = v4._replace(recipient=\"other@example.invalid\")\nassert enqueue(\"alice\", \"a4\", tampered) == \"approval_mismatch\"\nassert enqueue(\"alice\", \"a4\", v4._replace(body=\"changed\")) == \"approval_mismatch\"\nassert enqueue(\"alice\", \"a4\", v4._replace(\n    attachment_revision=\"other-report\")) == \"approval_mismatch\"\nassert enqueue(\"bob\", \"a4\", v4) == \"approval_mismatch\""
+        },
+        {
+          "old": "assert receipt(\"alice\", \"a5\") == (\"queued\", \"a5\")\nassert enqueue(\"alice\", \"a5\", v5) == (\"queued\", \"a5\")\nassert one(\"SELECT COUNT(*) FROM outbox\") == (1,)",
+          "new": "assert receipt(\"alice\", \"a5\") == (\"queued\", \"a5\")\nassert enqueue(\"alice\", \"a5\", v5) == (\"queued\", \"a5\")\nassert one(\"SELECT snapshot FROM outbox WHERE approval = ?\", \"a5\") == (snapshot(v5),)\nassert one(\"SELECT COUNT(*) FROM outbox\") == (1,)"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "970f65ae755217f00177f15a9e0468acdf49927d65b9c1586cf3df18c9456bab",
+      "after_sha256": "214a214a6060cd3c65ac88591a88d1fb1fa75958898024a717463a9638c086dd",
+      "changes": [
+        {
+          "old": "      - source: 05 Источники/Implementation studies/Triton GPU kernels.md\n        route: sources/implementations/triton\n      - source: 05 Источники/Papers/TTT layers.md",
+          "new": "      - source: 05 Источники/Implementation studies/Triton GPU kernels.md\n        route: sources/implementations/triton\n      - source: 05 Источники/Implementation studies/Conditional actions and transactional outbox.md\n        route: sources/implementations/conditional-actions-outbox\n      - source: 05 Источники/Papers/TTT layers.md"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/_index.md",
+      "before_sha256": "140113c589e6967a901d7de28a40444002bf02c9247c0109dbfb46f8ee24d0df",
+      "after_sha256": "748818c1af3851fefacfac33dec594ceb4655cfa27b5b95bfbe418e0f48f1aba",
+      "changes": [
+        {
+          "old": "- [[05 Источники/Implementation studies/Triton GPU kernels|Triton — разбор оригинальных GPU tutorials]]",
+          "new": "- [[05 Источники/Implementation studies/Triton GPU kernels|Triton — разбор оригинальных GPU tutorials]]\n- [[05 Источники/Implementation studies/Conditional actions and transactional outbox|Условные действия и transactional outbox — фиксация операции и её доставка]]"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "71c9ced44323d20c143e76726f2e657133a03729a3ac7f804ae8774f0f64681d",
+      "after_sha256": "e17389de7417de96a0f2ba22bda1a78a7b8370253562b70cbf290fea5b390538",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем|Безопасность агентных систем]]\n- [[00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля|Инструменты и агенты]]",
+          "new": "- [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем|Безопасность агентных систем]]\n  - [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#agent-security-bound-approval|Подтверждение действия — версия письма и полномочия]]\n  - [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#agent-security-transactional-outbox|Transactional outbox — запись в очереди и доставка]]\n- [[00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля|Инструменты и агенты]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "493b7c9d92030b98cf706413b5633ea24af5efe2f97ed4eb750ca68773e5514b",
+      "after_sha256": "80ce9b70709f1f5fa3b0c5f799de37ac942b7ac322b51620fb8f43b3e903e7e2",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем|Agent-system security]]\n- [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|Coding, web, and computer-use agents]]",
+          "new": "- [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем|Agent-system security]]\n  - [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#agent-security-bound-approval|Action approval — mail version and permissions]]\n  - [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#agent-security-transactional-outbox|Transactional outbox — queue entry and delivery]]\n- [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|Coding, web, and computer-use agents]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "6deb347e56ba53e767848d6a3c38a0927f1d1e561651a5aff2ca6752c95d8ea3",
+      "after_sha256": "d6ba2a9690eca2a423ef6a215cc8fbac5886fc6895bd3a634e81f4b568137b9e",
+      "changes": [
+        {
+          "old": "  - id: \"curated-llama-downstream-9bef2893d15c\"",
+          "new": "  - id: curated-microsoft-transactional-outbox-36bdda0a5038\n    asset: \"00 Учебник/Assets/Figures/curated/agent-approval-2026-11-09/microsoft-transactional-outbox.svg\"\n    title: \"Transactional Outbox pattern: order, event and background relay\"\n    author: \"Microsoft Azure Architecture Center\"\n    source_url: \"https://github.com/MicrosoftDocs/architecture-center/blob/629acf25fc1ab4096cfa102367a569867899b79e/docs/databases/guide/_images/out-box-pattern.svg\"\n    source_image_url: \"https://raw.githubusercontent.com/MicrosoftDocs/architecture-center/629acf25fc1ab4096cfa102367a569867899b79e/docs/databases/guide/_images/out-box-pattern.svg\"\n    commit: 629acf25fc1ab4096cfa102367a569867899b79e\n    sha256: 36bdda0a5038eb48682f6b0057141e21b2963a0379b1025d46834b2e7af7262a\n    source_asset: \"00 Учебник/Assets/Figures/curated/agent-approval-2026-11-09/microsoft-transactional-outbox.svg\"\n    source_asset_sha256: 36bdda0a5038eb48682f6b0057141e21b2963a0379b1025d46834b2e7af7262a\n    source_page_snapshot: \"05 Источники/Originals/agent-approval-2026-11-09/outbox.md\"\n    source_page_sha256: a2864017a09d8559659f5b4407aafc303c1248477fc55f6ebcf8d6843d969bf9\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    license_evidence: \"05 Источники/Originals/agent-approval-2026-11-09/MicrosoftDocs-CC-BY-4.0.txt\"\n    license_evidence_sha256: 7183ef9749eb9b75e710a81a4c812a9405cc184f087500581a973e5929ac3f5e\n    source_viewbox: [0, 0, 628.563, 515.106]\n    metadata_status: verified\n    provenance_confirmation: pinned-upstream-repository\n    rights_status: source-license-verified\n    derivation: source-svg-copy\n    modifications: \"Complete MicrosoftDocs sequence diagram copied byte-for-byte; no crop, redraw or relabeling.\"\n    used_in: [\"00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md\"]\n  - id: \"curated-llama-downstream-9bef2893d15c\""
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Implementation studies/Conditional actions and transactional outbox.md",
+      "created": true,
+      "after_sha256": "b1c3919ccb8f097d88e13b09274fa8536cadd638d5b41d1b37f69a81f911fd39"
+    }
+  ]
+}

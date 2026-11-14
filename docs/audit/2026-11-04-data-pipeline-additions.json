@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "kind": "data-pipeline-dali-graph-and-subject-additions",
+  "review_date": "2026-11-04",
+  "files": [
+    {
+      "source": "00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md",
+      "before_sha256": "5f2a58816bfc82f2ccb0e43cea2a4bdbae1d22d8aae17d0fb36f82a2baac2917",
+      "after_sha256": "cbbfe63a1160a84e7403d1aef8e39fe8388ed0555860d9ab2209fde4a9e8432e",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-28\nlast_verified: 2026-10-28\nsource_language: mixed",
+          "new": "last_updated: 2026-11-04\nlast_verified: 2026-11-04\nsource_language: mixed\nreference_terms:\n  - anchor: data-storage\n    label: \"Шарды, mmap и описание корпуса\"\n    label_en: \"Shards, mmap and corpus metadata\"\n  - anchor: data-decoding\n    label: \"Декодирование изображений и DALI\"\n    label_en: \"Image decoding and DALI\"\n  - anchor: data-dali-graph\n    label: \"Операторы и DataNode в DALI\"\n    label_en: \"DALI operators and DataNodes\"\n  - anchor: data-loader\n    label: \"Dataset, sampler и DataLoader\"\n    label_en: \"Dataset, sampler and DataLoader\"\n  - anchor: cache-placement-and-epoch-state\n    label: \"Кэширование между эпохами\"\n    label_en: \"Caching across epochs\"\n  - anchor: data-cache-counts\n    label: \"Подсчёт выполненных преобразований\"\n    label_en: \"Counting executed transformations\"\n  - anchor: data-cache-randomness\n    label: \"Случайные преобразования после кэша\"\n    label_en: \"Random transforms after the cache\"\n  - anchor: data-cache-completion\n    label: \"Заполнение конечного кэша\"\n    label_en: \"Completing a finite cache\"\n  - anchor: data-cache-identity\n    label: \"Версия и память файлового кэша\"\n    label_en: \"Persistent cache identity and memory\"\n  - anchor: data-h2d\n    label: \"Pinned memory и перекрытие H2D\"\n    label_en: \"Pinned memory and H2D overlap\"\n  - anchor: data-padding\n    label: \"Dynamic padding и число позиций\"\n    label_en: \"Dynamic padding and position counts\"\n  - anchor: data-pad-eos\n    label: \"Маска длины при PAD = EOS\"\n    label_en: \"Length masks when PAD equals EOS\"\n  - anchor: data-bucketing\n    label: \"Bucketing и порядок примеров\"\n    label_en: \"Bucketing and sample order\"\n  - anchor: data-packing\n    label: \"Packing и cu_seqlens\"\n    label_en: \"Packing and cu_seqlens\"\n  - anchor: data-document-isolation\n    label: \"Границы документов и сдвиг целей\"\n    label_en: \"Document boundaries and shifted targets\"\n  - anchor: data-sdpa-isolation\n    label: \"Проверка изоляции документов в SDPA\"\n    label_en: \"Testing document isolation with SDPA\"\n  - anchor: data-loss-normalization\n    label: \"Нормировка loss по целевым токенам\"\n    label_en: \"Loss normalization over target tokens\"\n  - anchor: data-ddp-weighting\n    label: \"Нормировка токенов между DDP-процессами\"\n    label_en: \"Token weighting across DDP ranks\"\n  - anchor: data-loader-loop\n    label: \"Цикл загрузки без доказанного overlap\"\n    label_en: \"Loader loop without demonstrated overlap\"\n  - anchor: data-sharding-resume\n    label: \"Sharding и восстановление shuffle-буфера\"\n    label_en: \"Sharding and shuffle-buffer recovery\"\n  - anchor: data-throughput\n    label: \"Токены, цели и шаги в измерениях\"\n    label_en: \"Measuring input tokens, targets and steps\"\nsource_unit_id:\n  - dali-processing-graph-two-readers"
+        },
+        {
+          "old": "\n## Что хранить\n",
+          "new": "\n<a id=\"data-storage\"></a>\n\n## Что хранить\n"
+        },
+        {
+          "old": "\n## Декодирование изображений и DALI\n",
+          "new": "\n<a id=\"data-decoding\"></a>\n\n## Декодирование изображений и DALI\n"
+        },
+        {
+          "old": "\n### Count executed transformations\n",
+          "new": "\n<a id=\"data-cache-counts\"></a>\n\n### Count executed transformations\n"
+        },
+        {
+          "old": "\n### Keep epoch-dependent work after the cache\n",
+          "new": "\n<a id=\"data-cache-randomness\"></a>\n\n### Keep epoch-dependent work after the cache\n"
+        },
+        {
+          "old": "\n### Finish filling a finite cache\n",
+          "new": "\n<a id=\"data-cache-completion\"></a>\n\n### Finish filling a finite cache\n"
+        },
+        {
+          "old": "\n### Persistent cache identity and memory\n",
+          "new": "\n<a id=\"data-cache-identity\"></a>\n\n### Persistent cache identity and memory\n"
+        },
+        {
+          "old": "\n## Передача из RAM в память GPU\n",
+          "new": "\n<a id=\"data-h2d\"></a>\n\n## Передача из RAM в память GPU\n"
+        },
+        {
+          "old": "\n## Dynamic padding\n",
+          "new": "\n<a id=\"data-padding\"></a>\n\n## Dynamic padding\n"
+        },
+        {
+          "old": "\n### Маска определяется длиной, а не значением токена\n",
+          "new": "\n<a id=\"data-pad-eos\"></a>\n\n### Маска определяется длиной, а не значением токена\n"
+        },
+        {
+          "old": "\n## Bucketing\n",
+          "new": "\n<a id=\"data-bucketing\"></a>\n\n## Bucketing\n"
+        },
+        {
+          "old": "\n## Packing\n",
+          "new": "\n<a id=\"data-packing\"></a>\n\n## Packing\n"
+        },
+        {
+          "old": "\n### Проверка на одном операторе внимания\n",
+          "new": "\n<a id=\"data-sdpa-isolation\"></a>\n\n### Проверка на одном операторе внимания\n"
+        },
+        {
+          "old": "\n## Как нормировать функцию потерь\n",
+          "new": "\n<a id=\"data-loss-normalization\"></a>\n\n## Как нормировать функцию потерь\n"
+        },
+        {
+          "old": "\n### Нормировка при усреднении градиентов DDP\n",
+          "new": "\n<a id=\"data-ddp-weighting\"></a>\n\n### Нормировка при усреднении градиентов DDP\n"
+        },
+        {
+          "old": "\n## Разделение данных и возобновление обучения\n",
+          "new": "\n<a id=\"data-sharding-resume\"></a>\n\n## Разделение данных и возобновление обучения\n"
+        },
+        {
+          "old": "Место изменения размера влияет и на объём передачи.",
+          "new": "<!-- BEGIN REVIEW: DALI graph 2026-11-04 -->\n<a id=\"data-dali-graph\"></a>\n\n### Operators, data nodes, and pipeline outputs\n\nThe DALI example below reads an image and its mask through two branches.\nEach reader produces encoded files and labels; each decoder consumes the encoded\nfiles. The first reader's labels bypass the decoder and become a separate\npipeline output. The second reader's labels are unused. The diagram distinguishes\noperators, which perform work, from `DataNode` objects, which connect an operator's\noutput to another operator's input.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dali-2026-11-04/two_readers.svg|Two DALI FileReaders feed two ImageDecoders; decoded images, masks and the first reader's labels become pipeline outputs, while the second reader's labels are discarded]]\n\n*NVIDIA DALI, [Pipeline and processing graph — Data Processing Graphs](https://github.com/NVIDIA/DALI/blob/5b33fee1968ba069a9ed04965fd2af5f0025de7e/docs/pipeline.rst).\nComplete original vector, copied without cropping, relabeling or redrawing.\n[Apache-2.0 license](/licenses/nvidia-dali-5b33fee1-Apache-2.0.txt).*\n\nOriginal example, with the source's variable names and spacing:\n\n```python\n@pipeline_def  # create a pipeline with processing graph defined by the function below\ndef my_pipeline():\n    \"\"\" Create a pipeline which reads images and masks, decodes the images and\n        returns them. \"\"\"\n    img_files, labels = fn.readers.file(file_root=\"image_dir\", seed=1)\n    mask_files, _ = fn.readers.file(file_root=\"mask_dir\", seed=1)\n    images = fn.decoders.image(img_files, device=\"mixed\")\n    masks  = fn.decoders.image(mask_files, device=\"mixed\")\n    return images, masks, labels\n\npipe = my_pipeline(batch_size=4, num_threads=2, device_id=0)\n```\n\nCalling `my_pipeline(batch_size=4, num_threads=2, device_id=0)` creates\nthe pipeline object with those batch, thread and device settings. When DALI\nbuilds the graph, it executes the definition function once to connect data nodes;\nit does not decode the entire dataset. Running the pipeline produces successive\nbatches through those connections. Returning `images, masks, labels` selects\nthree outputs. DALI prunes subgraphs that do not contribute to an output,\nas described in [Current Pipeline](https://github.com/NVIDIA/DALI/blob/5b33fee1968ba069a9ed04965fd2af5f0025de7e/docs/pipeline.rst#current-pipeline).\n\nThis is the documentation's file-reader example, not the preceding EDLS\nLMDB example. The image and mask directories must describe corresponding\nsamples. The two `seed=1` arguments are not a validation of that correspondence:\na missing mask or a different file order still requires a data check before\ntraining.\n\nThe same graph also explains device placement. A CPU operator accepts CPU\ndata and returns CPU data. A `mixed` operator accepts CPU inputs and returns\nGPU outputs, so both decoded image branches are already on the GPU.\nA GPU operator can consume those outputs without copying the decoded images\nback to the host. Named argument inputs may still come from CPU operators:\nthe next example in [Processing Graph Structure](https://github.com/NVIDIA/DALI/blob/5b33fee1968ba069a9ed04965fd2af5f0025de7e/docs/pipeline.rst#processing-graph-structure)\nuses a CPU coin flip as the `horizontal` argument of a GPU `fn.flip`.\nTo return the reader's labels on the GPU as well, that example explicitly\nreturns `labels.gpu()`.\n\nThe code requires NVIDIA DALI and the two input directories. It is reproduced\nto explain the graph; it was syntax-checked, not executed on a GPU.\nThe figure supplies no timing result and does not establish that this pipeline\nis faster than a PyTorch loader.\n\n<!-- END REVIEW: DALI graph 2026-11-04 -->\n\nМесто изменения размера влияет и на объём передачи."
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tf-data-2026-10-28/cached-dataset.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tf-data-2026-10-28/cached-dataset.svg|TensorFlow cache timeline: the first pass reads and maps elements; later passes reuse cached results while training continues]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-pipeline-review-2026-10/pinmem.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-pipeline-review-2026-10/pinmem.png|PyTorch memory diagram showing pageable host memory, a pinned staging area and transfer to GPU memory]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-pipeline-review-2026-10/same-stream.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-pipeline-review-2026-10/same-stream.png|CUDA trace with copy and computation on the same stream: the operations remain sequential]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-pipeline-review-2026-10/separate-stream.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-pipeline-review-2026-10/separate-stream.png|CUDA trace with copy and computation on separate streams: pinned host input enables overlap in the source experiment]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/edls/optimal-sequence-processing.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/edls/optimal-sequence-processing.png|EDLS slide comparing dynamic padding and grouping sequences by length]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-pipeline-review-2026-10/padding-packing.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-pipeline-review-2026-10/padding-packing.png|Original comparison of padded batches and packed variable-length sequences]]"
+        },
+        {
+          "old": "<a id=\"storage-и-dataloader-как-система\"></a>",
+          "new": "<a id=\"data-loader\"></a>\n\n<a id=\"storage-и-dataloader-как-система\"></a>"
+        },
+        {
+          "old": "<a id=\"packing-без-leakage\"></a>",
+          "new": "<a id=\"data-document-isolation\"></a>\n\n<a id=\"packing-без-leakage\"></a>"
+        },
+        {
+          "old": "<a id=\"базовый-путь-загрузки-без-доказанного-перекрытия\"></a>",
+          "new": "<a id=\"data-loader-loop\"></a>\n\n<a id=\"базовый-путь-загрузки-без-доказанного-перекрытия\"></a>"
+        },
+        {
+          "old": "<a id=\"проверка-throughput\"></a>",
+          "new": "<a id=\"data-throughput\"></a>\n\n<a id=\"проверка-throughput\"></a>"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "99f7d47d07300ad8fd1ccb9dfe4485e8acba38438d1db28f4948201860a6f08e",
+      "after_sha256": "66334263a3396dda122f93f13b15e8f18d3a8ac30b917ff1faabb7ee7e3e2412",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing|Data pipeline, padding и packing]]",
+          "new": "- [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing|Data pipeline, padding и packing]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-storage|Шарды, mmap и описание корпуса]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-decoding|Декодирование изображений и DALI]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-dali-graph|Операторы и DataNode в DALI]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-loader|Dataset, sampler и DataLoader]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#cache-placement-and-epoch-state|Кэширование между эпохами]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-cache-counts|Подсчёт выполненных преобразований]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-cache-randomness|Случайные преобразования после кэша]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-cache-completion|Заполнение конечного кэша]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-cache-identity|Версия и память файлового кэша]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-h2d|Pinned memory и перекрытие H2D]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-padding|Dynamic padding и число позиций]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-pad-eos|Маска длины при PAD = EOS]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-bucketing|Bucketing и порядок примеров]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-packing|Packing и cu_seqlens]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-document-isolation|Границы документов и сдвиг целей]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-sdpa-isolation|Проверка изоляции документов в SDPA]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-loss-normalization|Нормировка loss по целевым токенам]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-ddp-weighting|Нормировка токенов между DDP-процессами]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-loader-loop|Цикл загрузки без доказанного overlap]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-sharding-resume|Sharding и восстановление shuffle-буфера]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-throughput|Токены, цели и шаги в измерениях]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "197e9a92dcca1915278024661e6a9e68bb5ee2436597c32eda896d7f4b987220",
+      "after_sha256": "330e3f5e1e7c8f4d54682ea2c15352bb8fd334510248007bde04c07060fa4c52",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing|Data pipelines, padding, and packing]]",
+          "new": "- [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing|Data pipelines, padding, and packing]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-storage|Shards, mmap and corpus metadata]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-decoding|Image decoding and DALI]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-dali-graph|DALI operators and DataNodes]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-loader|Dataset, sampler and DataLoader]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#cache-placement-and-epoch-state|Caching across epochs]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-cache-counts|Counting executed transformations]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-cache-randomness|Random transforms after the cache]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-cache-completion|Completing a finite cache]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-cache-identity|Persistent cache identity and memory]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-h2d|Pinned memory and H2D overlap]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-padding|Dynamic padding and position counts]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-pad-eos|Length masks when PAD equals EOS]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-bucketing|Bucketing and sample order]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-packing|Packing and cu_seqlens]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-document-isolation|Document boundaries and shifted targets]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-sdpa-isolation|Testing document isolation with SDPA]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-loss-normalization|Loss normalization over target tokens]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-ddp-weighting|Token weighting across DDP ranks]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-loader-loop|Loader loop without demonstrated overlap]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-sharding-resume|Sharding and shuffle-buffer recovery]]\n  - [[00 Учебник/10 ML Systems/06 Data pipeline, padding и packing#data-throughput|Measuring input tokens, targets and steps]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "7562cda0c0305a21feed235b4405ebebceb2febf56af080be9dbdbfcedb21840",
+      "after_sha256": "05dd7bd49146d152e156a19f9924c576c94e614830fd4d19c3f7a091de9e094e",
+      "changes": [
+        {
+          "old": "assets:\n",
+          "new": "assets:\n  - {\"id\":\"curated-dali-two-readers-3a04306186cc\",\"asset\":\"00 Учебник/Assets/Figures/curated/dali-2026-11-04/two_readers.svg\",\"author\":\"NVIDIA DALI contributors\",\"title\":\"Two file readers, decoders and pipeline outputs\",\"source_url\":\"https://github.com/NVIDIA/DALI/blob/5b33fee1968ba069a9ed04965fd2af5f0025de7e/docs/pipeline.rst\",\"source_image_url\":\"https://raw.githubusercontent.com/NVIDIA/DALI/5b33fee1968ba069a9ed04965fd2af5f0025de7e/docs/images/two_readers.svg\",\"commit\":\"5b33fee1968ba069a9ed04965fd2af5f0025de7e\",\"source_asset\":\"publishing/fixtures/dali-originals/two_readers.svg\",\"source_asset_sha256\":\"3a04306186cc2d4c1800a1c9e9b2bd7051646ec35c4054ace1cac1225da17214\",\"sha256\":\"3a04306186cc2d4c1800a1c9e9b2bd7051646ec35c4054ace1cac1225da17214\",\"source_page_snapshot\":\"publishing/fixtures/dali-originals/pipeline.rst\",\"source_page_sha256\":\"3ca2cc06792e49f6f9280bf9f745a85938c603d53bb01b44743d1414eff04be3\",\"license\":\"Apache-2.0\",\"license_url\":\"https://github.com/NVIDIA/DALI/blob/5b33fee1968ba069a9ed04965fd2af5f0025de7e/LICENSE\",\"license_evidence\":\"site/public/licenses/nvidia-dali-5b33fee1-Apache-2.0.txt\",\"license_evidence_sha256\":\"bea1b4266f1499fa4bbb16d6e7577e6b5b53d1ef010835a9d460876022cc8722\",\"public_license_copy\":\"site/public/licenses/nvidia-dali-5b33fee1-Apache-2.0.txt\",\"source_viewbox\":[0,0,143.99135,87.982686],\"derivation\":\"source-svg-copy\",\"modifications\":\"Complete original SVG copied byte-for-byte. No crop, redraw, relabeling, font replacement or color change. Retained original source and full Apache license in tracked files; no new private-archive test dependency.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"pinned-upstream-repository\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-04\",\"used_in\":[\"00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md\"]}\n"
+        }
+      ]
+    }
+  ],
+  "created": [
+    "publishing/fixtures/dali-originals/pipeline.rst",
+    "publishing/fixtures/dali-originals/two_readers.svg",
+    "site/public/licenses/nvidia-dali-5b33fee1-Apache-2.0.txt",
+    "00 Учебник/Assets/Figures/curated/dali-2026-11-04/two_readers.svg"
+  ],
+  "verification": {
+    "date": "2026-11-04",
+    "status": "verified-local-delta",
+    "chapterSha256": "cbbfe63a1160a84e7403d1aef8e39fe8388ed0555860d9ab2209fde4a9e8432e",
+    "wholeOwnerRead": "All964 input lines freshly read in1–250,251–490,491–730,731–EOF. Entire final explanation reread in1–260,261–535,536–825,826–EOF; the final ASCII metadata/legacy-anchor aliases and corrected memory-diagram alt were reread separately. Final1133 lines. No subsequent chapter edits.",
+    "preservation": "Exact four-file reversible journal restores accepted964-line5f2a5881… owner, both subject indexes and registry. All nine prior Python programs, eight display equations, six original figure paths/bytes and full captions retained. Added one11-line original DALI example, one complete vector,21 subject links per locale, six alt aliases and four additional ASCII anchors; old Cyrillic links remain.",
+    "explanation": "Original code and complete source graph show two file readers, two mixed decoders and three returned outputs. Followed encoded-file inputs through each branch, label bypass and discarded labels. Distinguished graph definition from batch execution, CPU/mixed/GPU data placement, CPU argument inputs to GPU operations and dataset-pair validation. Existing packing example independently reproduces4/79 leakage controls and separate/packed forward/backward equivalence. Token normalization, DDP and loader/shuffle state remain full worked explanations.",
+    "source": "Fresh complete pinned NVIDIA pipeline.rst read including Data Processing Graphs, Processing Graph Structure, Current Pipeline and later conditional-execution material. Apache license read fully; upstream root NOTICE returns404. Three source/license files match pinned upstream exactly. Entire2026-10-23 data-pipeline audit and2026-10-28 cache audit/source README read. Their bounded EDLS/PyTorch/TensorFlow source comparisons are reused only on exact restored accepted bodies, not a new whole-course audit. Current variable-length tutorial version differs from the pinned PyTorch runtime; no new API-version claim.",
+    "style": "no-ai-slop SKILL and eval read fully. Existing detailed prose, original English source excerpts and quotations preserved. New graph explanation and exact source example left English; no translation pass. Source limits and graph execution states checked separately from style.",
+    "examples": {
+      "exit": 0,
+      "command": "uv run --offline --python 3.13 --with numpy --with torch python publishing/tools/check_data_pipeline_examples.py",
+      "runtime": "PyTorch2.14.1 CPU",
+      "executedCpuPrograms": 3,
+      "syntaxOnlyPrograms": 2,
+      "scope": "Actual published collator, block mask and SDPA programs run; real EOS preserved when PAD=EOS,4/79 leakage controls, five nonuniform-score forward/backward partitions, packed-label boundaries, token-weighted accumulation, DDP algebra, sampler/drop_last, four-reader sharding, two-stage timing and RGB byte counts pass. Existing CUDA loader loop and new DALI example syntax-checked only. No GPU/DALI execution or throughput benchmark.",
+      "tensorflow": "Five published TensorFlow2.21.0 CPU programs and33 accepted independent cases retain exact bodies and historical execution log /var/tmp/bookvar-tf-data-examples-accepted.log. TensorFlow runtime is no longer cached; no fresh TensorFlow run claimed and no package stack redownloaded. Four-file/current-body preservation and original cache tests pass."
+    },
+    "originals": {
+      "exit": 0,
+      "command": "node publishing/tools/check_dali_data_sources.mjs --upstream",
+      "sourceFiles": 3,
+      "figureSha256": "3a04306186cc2d4c1800a1c9e9b2bd7051646ec35c4054ace1cac1225da17214",
+      "scope": "Entire original SVG copied byte-for-byte with native labels, colors, legend and viewBox. Source RST, original SVG and full Apache license are tracked, not new private-archive test dependencies. Exact original11-line example compared with the pinned source; no redraw or crop."
+    },
+    "tests": {
+      "exit": 0,
+      "files": 5,
+      "tests": 217,
+      "htmlTests": 203,
+      "scope": "Final built-output, exact data preservation, unchanged cache explanation, previous precision journal boundary and synchronized indexes pass. Initial combined run failed one index test because reused Cyrillic anchors are not permitted reference-term keys; added ASCII aliases while retaining old anchors. Initial HTML run exposed obsolete9-program/6-image counts; updated those exact counts and added explicit DALI/source/21-anchor checks in both locales, then final217 tests passed. Initial combined run's176 asset cases passed; one focused DALI provenance/drift case rerun successfully on final source metadata. No whole-suite green claim for the initial failing commands."
+    },
+    "build": {
+      "exit": 0,
+      "pages": 2007,
+      "pagefindHtmlFiles": 2011,
+      "durationSeconds": 28.98,
+      "brokenInternalLinks": 0,
+      "bytes": 855632334,
+      "files": 5617,
+      "limit": 1000000000,
+      "headroom": 144367666
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-04-data-pipeline-reader",
+      "desktop": "1280×900; document1280/1280,632px text column. Seven complete original diagrams and captions personally inspected in the viewer. New DALI diagram544×333 fits inline. All eight display formulas and four tables632/632;zero KaTeX errors.",
+      "mobile": "375×812; document375/375,343px column. All eight displays and four tables343/343. All seven original diagrams personally inspected at narrow width. DALI vector inspected whole and1.5× with both pan endpoints; thin CUDA trace inspected whole and3.5× at its left tracks. TF inline timeline remains its intentional1224×360 scroll surface: both endpoints personally inspected, scroll0→883 within341px without widening the document. Existing full-slide/trace labels require viewer zoom at phone width; no artificial crop or unreadable shrink introduced.",
+      "navigation": "Actual RU reference→DALI anchor and cache anchor; actual EN reference→same canonical-language chapter with explicit no-separate-English-edition notice. Actual EN Next→profiling H1; RU Previous→precision H1. All21 subjects validated in both interfaces. Temporary viewport reset; RU DALI section left open.",
+      "transient": "Stale browser binding recovered with documented troubleshooting/reset and same browser3/tab1. One reload during static build returned404; final reload after build completed returned the correct chapter. Accessible Next name differed from concatenated DOM text; actual next href with visible Next content used. No reader-navigation defect inferred."
+    },
+    "publication": "Local only; no staging, commit, push or deployment.",
+    "remaining": [
+      "63 of152 canonical owners still need this route pass. Next two ML Systems owners:profiling and Triton.",
+      "Whole-course transfer and whole-book explanation/source acceptance remain open. The full Harvard Data Engineering/TinyTorch coverage audit is not implied by this DALI addition.",
+      "Five unchanged TF programs retain previous execution evidence rather than a fresh run. No DALI/GPU/CUDA performance or quality measurement.",
+      "Existing permissions/crop gaps, scoped release diff, public-checkout/Pages-base/frozen release checks and authorized dev/Pages publication remain pending."
+    ]
+  }
+}

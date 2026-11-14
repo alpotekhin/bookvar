@@ -6,6 +6,7 @@ from pathlib import Path
 import re
 
 import torch
+from topic_consolidation_baseline import before_topic_consolidation
 
 ROOT = Path(__file__).resolve().parents[2]
 chapter = ROOT / '00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md'
@@ -13,7 +14,9 @@ text = chapter.read_text()
 pattern = r'<!-- BEGIN REVIEW: Module hooks 2026-10-27 -->\n(.*?)<!-- END REVIEW: Module hooks 2026-10-27 -->\n\n'
 addition = re.search(pattern, text, re.S)
 assert addition is not None
-baseline = text[:addition.start()] + text[addition.end():]
+historical = before_topic_consolidation(text, chapter,
+    stop_before_journal='2026-11-03-kernels-course-additions.json')
+baseline = re.sub(pattern, '', historical, flags=re.S)
 assert sha256(baseline.encode()).hexdigest() == '5e7aa6cd8ffc7af8ff995943582f13cbcc59c784ae2399801c16b0ee4f7547e0'
 blocks = re.findall(r'```python\n(.*?)\n```', addition.group(1), re.S)
 assert len(blocks) == 4

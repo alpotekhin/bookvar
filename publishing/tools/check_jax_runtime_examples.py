@@ -8,15 +8,19 @@ import hashlib
 import os
 from pathlib import Path
 import re
+from kernel_split_baseline import kernels_before_graph_split
 
 os.environ['JAX_PLATFORMS'] = 'cpu'
 ROOT = Path(__file__).resolve().parents[2]
-chapter = ROOT / '00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md'
+chapter = ROOT / '00 Учебник/10 ML Systems/09 Компиляция графов — PyTorch, JAX и CUDA Graphs.md'
 text = chapter.read_text()
 pattern = r'<!-- BEGIN REVIEW: JAX runtime 2026-10-27 -->\n(.*?)<!-- END REVIEW: JAX runtime 2026-10-27 -->\n\n'
 match = re.search(pattern, text, re.S)
 assert match
-baseline = text[:match.start()] + text[match.end():]
+historical = kernels_before_graph_split()
+historical_match = re.search(pattern, historical, re.S)
+assert historical_match
+baseline = historical[:historical_match.start()] + historical[historical_match.end():]
 assert hashlib.sha256(baseline.encode()).hexdigest() == \
     '4fab5d0025274bd232fb3122c1152dc939cf8529a41389401c3d261e1db94a23'
 blocks = re.findall(r'```python\n(.*?)\n```', match.group(1), re.S)

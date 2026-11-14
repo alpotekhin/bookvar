@@ -2,8 +2,103 @@
 title: Tensor, sequence и context parallelism
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-23
-last_verified: 2026-10-23
+last_updated: 2026-11-05
+last_verified: 2026-11-05
+source_language: mixed
+reference_terms:
+  - anchor: tp-matrix-cuts
+    label: "Разрез по столбцам и по строкам: конкатенация или сумма"
+    label_en: "Column and row splits: concatenation versus summation"
+  - anchor: tp-paired-projections
+    label: "Парные проекции MLP и положение нелинейности"
+    label_en: "Paired MLP projections and nonlinearity placement"
+  - anchor: tp-backward
+    label: "Backward TP: локальные веса и сумма dX"
+    label_en: "TP backward: local weight shards and summed input gradients"
+  - anchor: tp-swiglu
+    label: "SwiGLU: согласованные разрезы gate, up и down"
+    label_en: "SwiGLU: aligned gate, up and down partitions"
+  - anchor: tp-attention-heads
+    label: "Целые головы внимания и выходная проекция"
+    label_en: "Whole attention heads and the output projection"
+  - anchor: tp-gqa-replication
+    label: "GQA/MQA: репликация KV-голов и их градиенты"
+    label_en: "GQA/MQA: KV-head replication and gradient ownership"
+  - anchor: tp-vocabulary
+    label: "Vocabulary-parallel embedding и связанные веса"
+    label_en: "Vocabulary-parallel embeddings and tied weights"
+  - anchor: tp-vocab-ce
+    label: "Cross-entropy по разделённому словарю без all-gather logits"
+    label_en: "Vocabulary-parallel cross-entropy without gathering logits"
+  - anchor: tp-loss-parallel-contract
+    label: "loss_parallel: target, reduction и padding"
+    label_en: "loss_parallel: targets, reductions and padding"
+  - anchor: sp-full-feature-rows
+    label: "SP: полная ширина токена при разделённых строках"
+    label_en: "SP: full token width with partitioned rows"
+  - anchor: sp-boundaries
+    label: "Границы SP/TP: all-gather и reduce-scatter"
+    label_en: "SP/TP boundaries: all-gather and reduce-scatter"
+  - anchor: sp-backward-regather
+    label: "Обратные операции и повторная сборка входа для dW"
+    label_en: "Adjoint collectives and input regather for weight gradients"
+  - anchor: sp-norm-gradients
+    label: "Градиенты нормализации и согласованный dropout при SP"
+    label_en: "Normalization gradients and consistent dropout under SP"
+  - anchor: sp-activation-memory
+    label: "Локальные активации и временный полный all-gather"
+    label_en: "Local activations and transient full all-gathers"
+  - anchor: tp-activation-accounting
+    label: "Сохранения 34sbh и квадратичная часть внимания"
+    label_en: "The 34sbh activation model and quadratic attention storage"
+  - anchor: tp-sp-memory-example
+    label: "TP, SP и selective recomputation: 3648/736/456/136 MiB"
+    label_en: "TP, SP and selective recomputation: 3648/736/456/136 MiB"
+  - anchor: tp-sp-traffic
+    label: "Байты обменов TP/SP и дополнительный regather"
+    label_en: "TP/SP communication bytes and the extra regather"
+  - anchor: tp-scaling-limit
+    label: "Цена TP: времена SwiGLU и границы 25/49"
+    label_en: "TP costs: SwiGLU timings and the 25/49 bounds"
+  - anchor: cp-ulysses
+    label: "Ulysses: перестановка между позициями и головами"
+    label_en: "Ulysses: sequence-to-head redistribution"
+  - anchor: cp-ulysses-traffic
+    label: "Объём all-to-all Ulysses и ограничения GQA"
+    label_en: "Ulysses all-to-all volume and GQA constraints"
+  - anchor: cp-ring
+    label: "Ring Attention: локальные Q и циркуляция K/V"
+    label_en: "Ring Attention: local queries and circulating keys/values"
+  - anchor: cp-online-softmax
+    label: "Общая нормировка softmax по KV-блокам"
+    label_en: "A shared softmax normalization across KV blocks"
+  - anchor: cp-global-mask
+    label: "Глобальная причинная маска и zigzag-разбиение"
+    label_en: "Global causal masks and zigzag partitioning"
+  - anchor: cp-ring-overlap
+    label: "Ring: размер блока и условие перекрытия обмена"
+    label_en: "Ring block size and the communication-overlap bound"
+  - anchor: cp-byte-comparison
+    label: "Ulysses и Ring: пример 112 против 448 MiB"
+    label_en: "Ulysses versus Ring: a 112 versus 448 MiB example"
+  - anchor: cp-parameter-gradients
+    label: "CP: сумма градиентов параметров и нормировка loss"
+    label_en: "CP parameter-gradient sums and loss normalization"
+  - anchor: tp-sp-cp-mesh
+    label: "Совместные оси TP, SP, CP и ограничения голов"
+    label_en: "Combining TP, SP and CP with head-count constraints"
+  - anchor: tp-fsdp-mesh
+    label: "FSDP×TP: собрать свою часть, а не всю матрицу"
+    label_en: "FSDP×TP: gathering the TP-local part, not the full matrix"
+  - anchor: tp-validation
+    label: "Выбор размещения и проверка численной эквивалентности"
+    label_en: "Layout selection and numerical-equivalence checks"
+  - anchor: tp-pytorch-contract
+    label: "ColwiseParallel, RowwiseParallel и SequenceParallel"
+    label_en: "ColwiseParallel, RowwiseParallel and SequenceParallel"
+  - anchor: tp-edls-distributed-mlp
+    label: "EDLS Llama MLP: реальные редукции и ограничения backward"
+    label_en: "EDLS Llama MLP: real reductions and backward limitations"
 source_unit_id:
   - lecture-07-parallelism-strategy-comparison
   - lecture-08-width-parallelism
@@ -48,6 +143,8 @@ Sequence parallelism (SP) разделяет по позициям нормал�
 
 ## Tensor parallelism для MLP
 
+<a id="tp-matrix-cuts"></a>
+
 ### Два разреза одной матрицы
 
 Для линейного слоя используем запись $Z=XW$, где строки $X$ — токены,
@@ -74,7 +171,7 @@ all-gather стоит только тогда, когда следующей о�
 выходную ширину, но содержит лишь часть суммы. Их сложение даёт $[1,2,4,3]$.
 Чтобы полный ответ оказался на каждом процессе, выполняют all-reduce.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/tensor-parallel-split.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/tensor-parallel-split.svg|Разрез весов по выходным признакам и по суммируемым входным признакам]]
 
 *Слева процессы вычисляют разные выходные признаки; справа — вклады в одни
 и те же выходные признаки. Поэтому слева нужна конкатенация, справа — сумма.
@@ -88,6 +185,8 @@ $XW$. У `torch.nn.Linear` вес хранится как `[out_features, in_fea
 а вычисление имеет вид `X @ weight.T`. Поэтому разрез по столбцам $W$
 соответствует разрезу **первой** оси `Linear.weight`. Перепутать эти соглашения
 легко: проверять нужно форму входа и выхода, а не только название оси.
+
+<a id="tp-paired-projections"></a>
 
 ### Почему первую проекцию делят по столбцам, а вторую — по строкам
 
@@ -141,6 +240,8 @@ $x$; иначе совпадение отдельных форм скрыло б
 процесс прибавит полный $b$ к своему $Y_r$ до all-reduce, получится
 $\sum_rY_r+pb$, а не требуемое $\sum_rY_r+b$.
 
+<a id="tp-backward"></a>
+
 ### Обратный проход: что суммируется, а что остаётся локальным
 
 Обозначим входящий градиент по выходу через $G=\partial\mathcal L/\partial Y$.
@@ -175,6 +276,8 @@ $dU_1=[2,1]$, а вклады по входу равны $dX_0=[1,1]$ и $dX_1=[
 границы. Если ещё раз сложить уже одинаковые копии $G$, градиент ошибочно
 увеличится в $p$ раз. Устройство распределённого autodiff должно учитывать,
 является тензор копией, отдельной частью или частичной суммой.
+
+<a id="tp-swiglu"></a>
 
 <a id="shape-ledger-для-swiglu"></a>
 ### Тот же разрез для SwiGLU
@@ -226,6 +329,8 @@ $$
 другая операция. Такой backward для трёх проекций разбирается в
 [CS336 Assignment 2, §8.4](https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf#page=44).
 
+<a id="tp-attention-heads"></a>
+
 <a id="attention-tp-heads-qkv-и-output"></a>
 ## Тензорный параллелизм во внимании
 
@@ -244,7 +349,7 @@ $C_r:[B_\mu,S,D/p]$. Соответствующие строки выходно�
 дают вклад $C_rW_{o,r}:[B_\mu,S,D]$, после чего снова нужна сумма.
 Связь между головами возникает в выходной проекции, а не в softmax.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-review-2026-10/hf-attention-tp.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-review-2026-10/hf-attention-tp.png|Разделение целых голов внимания и суммирование выходных проекций]]
 
 *Внутри каждого пунктирного блока — своя группа голов. Операция AllReduce
 собирает вклады выходной проекции, а не матрицы attention scores. Dropout
@@ -261,6 +366,8 @@ Apache-2.0; оригинальный PNG без обрезки.*
 в сумме получаются две редукции в forward и две в backward.
 Речь о границах этих двух модулей: embedding, loss и синхронизация
 реплицированных параметров учитываются отдельно.
+
+<a id="tp-gqa-replication"></a>
 
 GQA меняет эту картину: несколько query-голов пользуются одной парой
 KV-голов. Например, при $h_q=64$, $h_{kv}=8$ и $p=8$ каждый процесс может
@@ -282,6 +389,8 @@ $h_{kv}=4$ равномерно разделить KV между восемью 
 Обычный разрез Megatron по целым головам не следует автоматически переносить
 на такую конфигурацию.
 
+<a id="tp-vocabulary"></a>
+
 ## Разделение словаря: embedding и cross-entropy
 
 Размер словаря $V$ может быть гораздо больше скрытой ширины $D$.
@@ -296,6 +405,8 @@ $h_{kv}=4$ равномерно разделить KV между восемью 
 embedding: ненулевой вклад принадлежит ровно одному владельцу токена.
 Градиент строки остаётся у этого владельца. Если входная и выходная
 таблицы связаны общими весами, разбиение их словаря должно совпадать.
+
+<a id="tp-vocab-ce"></a>
 
 В выходной проекции каждый процесс вычисляет только свои логиты
 $Z_r=XW_r$, где $W_r:[D,V/p]$. Собрать все $[T,V]$ значений через
@@ -373,6 +484,8 @@ print(round(loss, 6))
 print(gradients)
 ```
 
+<a id="tp-loss-parallel-contract"></a>
+
 Код имитирует редукции массивами одного процесса. В PyTorch аналогичный
 режим задаётся контекстом [loss_parallel](https://docs.pytorch.org/docs/2.14/distributed.tensor.parallel.html#torch.distributed.tensor.parallel.loss_parallel):
 в него входят и вычисление cross-entropy, и backward; входные логиты
@@ -397,6 +510,8 @@ DeviceMesh. При дополнительных осях DP/CP использу�
 <a id="megatron-sequence-parallelism--не-attention-parallelism"></a>
 ## Sequence parallelism в Megatron
 
+<a id="sp-full-feature-rows"></a>
+
 ### Какие активации всё ещё повторяются
 
 TP уменьшил промежуточную ширину MLP и число локальных голов, но после
@@ -420,6 +535,8 @@ $[B_\mu,S/p,D]$ знаменатель считается локально и о
 и дисперсию по полной ширине токена. Dropout и сложение residual ещё проще:
 их можно выполнять поэлементно над согласованными частями.
 
+<a id="sp-boundaries"></a>
+
 ### Границы между SP и TP
 
 После нормализации каждый процесс владеет полными признаками только части
@@ -434,7 +551,7 @@ $[B_\mu,S/p,D]$ знаменатель считается локально и о
 Таким образом, полная реплицированная активация не остаётся на всей области
 нормализации и residual.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-review-2026-10/hf-tp-sp-regions.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-review-2026-10/hf-tp-sp-regions.png|Реплицированные области TP и разделённые по позициям области TP со SP]]
 
 *Слева области между TP-блоками реплицированы. Справа они разделены по
 позициям: $g$ собирает строки перед TP, $g^*$ суммирует и распределяет их
@@ -451,6 +568,8 @@ Apache-2.0; сохранены оба варианта целиком. Симв�
 | SP → TP, $g$ | Forward: all-gather строк. Backward: reduce-scatter вкладов градиента по строкам. |
 | TP → SP, $g^*$ | Forward: reduce-scatter частичных выходов. Backward: all-gather строк градиента выхода. |
 
+<a id="sp-backward-regather"></a>
+
 В обратном проходе reduce-scatter на входной границе одновременно складывает
 вклады всех TP-частей и возвращает каждому процессу производную именно его
 входных строк. Градиент весов первой проекции по-прежнему использует все
@@ -459,6 +578,8 @@ Apache-2.0; сохранены оба варианта целиком. Симв�
 Этот дополнительный all-gather описан в
 [Korthikanti и соавторы, §4.2](https://arxiv.org/html/2205.05198v1#S4.SS2).
 Его можно перекрывать вычислениями, но от этого переданные байты не исчезают.
+
+<a id="sp-norm-gradients"></a>
 
 Параметры нормализации $\gamma$ и $\beta$ при SP обычно реплицированы.
 Однако теперь разные процессы нормируют разные токены и получают разные
@@ -482,6 +603,8 @@ $$
 При сравнении с неразделённым запуском маску удобно задавать по глобальным
 координатам токена и признака, а не по локальному номеру элемента.
 
+<a id="sp-activation-memory"></a>
+
 ### Память и объём обменов
 
 При $B_\mu=2$, $S=32768$, $D=8192$ одна полная BF16-активация занимает
@@ -497,6 +620,8 @@ $2\cdot32768\cdot8192\cdot2=1\ \text{GiB}$. При SP на восьми проц
 $s=S$ — длина последовательности, $b=B_\mu$ — размер микропакета,
 $h=D$ — скрытая ширина, $a$ — число голов, $t=p$ — степень TP.
 Активации занимают два байта на элемент, dropout-маски — один.
+
+<a id="tp-activation-accounting"></a>
 
 MLP хранит вход первой проекции ($2sbh$), её расширенный выход для
 второй проекции и GELU ($8sbh$ каждый), а также маску выходного dropout
@@ -527,6 +652,8 @@ M_{\mathrm{act,TP+SP}}=
 \frac{sbh}{t}\left(34+\frac{5as}{h}\right).
 $$
 
+<a id="tp-sp-memory-example"></a>
+
 Для одного слоя из этой модели возьмём $s=2048$, $b=2$, $h=8192$,
 $a=64$ и $t=8$. Здесь используется обычный MHA и MLP ширины $4h$,
 а не SwiGLU из расчёта времени ниже. Произведение $sbh=33\,554\,432$ элементов,
@@ -549,6 +676,8 @@ $a=64$ и $t=8$. Здесь используется обычный MHA и MLP �
 в принятой модели, а не замер пика или инструкция просто вычесть
 320 MiB из памяти любого FlashAttention-ядра.
 
+<a id="tp-sp-traffic"></a>
+
 Пусть полный передаваемый тензор имеет размер $N$ байтов. Для идеального
 кольцевого алгоритма один процесс отправляет $2(p-1)N/p$ байтов за
 all-reduce и $(p-1)N/p$ за all-gather или reduce-scatter.
@@ -568,6 +697,8 @@ all-reduce и $(p-1)N/p$ за all-gather или reduce-scatter.
 отправки и приёма. Уменьшение размера матриц при росте $p$ также может снизить
 эффективность локальных GEMM. Поэтому степень TP выбирают с учётом скорости
 соединения и измеренного времени шага, а не только делимости размеров.
+
+<a id="tp-scaling-limit"></a>
 
 ### Когда увеличение TP перестаёт сокращать время
 
@@ -632,6 +763,8 @@ for p in (16, 32):
 означает, что один обмен полностью перекрывается работой того же MLP:
 часть его результатов нужна следующей операции.
 
+<a id="cp-ulysses"></a>
+
 ## Context parallelism: Ulysses
 
 SP распределил нормализацию и dropout, но перед вниманием снова собрал
@@ -659,7 +792,7 @@ all-to-all возвращает выход к разрезу по позиция
 не приближение attention. Исходная схема приведена в
 [DeepSpeed Ulysses, §3 и рисунок 2](https://arxiv.org/html/2309.14509v2#S3).
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-2026-10-23/ulysses-design.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-2026-10-23/ulysses-design.png|Два all-to-all меняют размещение последовательности и голов в Ulysses]]
 
 *Полный рисунок 2 из DeepSpeed-Ulysses. До первой красной стрелки локальны
 строки последовательности; внутри голубой области процесс хранит все
@@ -672,6 +805,8 @@ $P$ — число процессов; показан частный случа�
 [DeepSpeed Ulysses, Figure 2](https://arxiv.org/html/2309.14509v2#S3.F2),
 оригинал без обрезки и изменения подписей,
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+
+<a id="cp-ulysses-traffic"></a>
 
 При равномерном MHA каждый процесс до первого обмена имеет
 $3B_\mu Shd_h/c$ элементов QKV и отправляет долю $(c-1)/c$ другим участникам.
@@ -696,6 +831,8 @@ query-голов само по себе не гарантирует допуст
 Репликация K/V или сочетание с другим методом меняют память и объём обменов,
 поэтому формулу MHA нельзя без изменений использовать для MQA.
 
+<a id="cp-ring"></a>
+
 ## Context parallelism: Ring Attention
 
 Ring Attention оставляет запросы локальными, а блоки ключей и значений
@@ -705,7 +842,7 @@ Ring Attention оставляет запросы локальными, а бло
 передач; собственный блок доступен без передачи. Порядок обработки блоков
 не обязан совпадать с порядком токенов.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-2026-10-23/hf-ring-attention.gif]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-2026-10-23/hf-ring-attention.gif|Неподвижные локальные запросы и три пересылки блоков K/V по четырём GPU]]
 
 *Исходная анимация Hugging Face для четырёх GPU. Запрос $Q_i$ остаётся
 на своём GPU, пары K/V переходят к следующему участнику; цвет и индекс
@@ -722,6 +859,8 @@ Nouamane Tazi и соавторы, [The Ultra-Scale Playbook, Ring Attention](ht
 блокам. Например, для двух скалярных значений $v_1=0,v_2=10$ с оценками
 $z_1=0,z_2=\log3$ правильный ответ равен $7{,}5$. Среднее двух локальных
 ответов было бы $5$: оно потеряло относительные вероятности между блоками.
+
+<a id="cp-online-softmax"></a>
 
 Как в FlashAttention, для каждой строки запроса достаточно поддерживать
 текущий максимум $m$, сумму экспонент $\ell$ и взвешенную сумму значений $o$.
@@ -748,13 +887,15 @@ $$
 деление даёт те же 7.5. Если пропустить изменение масштаба старых сумм,
 получится неправильная нормировка даже при правильном локальном softmax.
 
+<a id="cp-global-mask"></a>
+
 Причинная маска проверяет **глобальные** позиции: ключ с номером $j$
 разрешён запросу $i$ только при $j\leq i$. После перестановки блоков
 нельзя заменять эти номера локальными. То же относится к RoPE, позиционным
 смещениям и маскам границ документов. Ранние запросы имеют меньше допустимых
 ключей, поэтому последовательное назначение блоков создаёт дисбаланс работы.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-review-2026-10/hf-causal-zigzag.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-review-2026-10/hf-causal-zigzag.svg|Zigzag-распределение причинной маски с 34 разрешёнными парами на процесс]]
 
 *При зигзагообразном назначении каждый процесс получает ранние и поздние
 позиции. На рисунке GPU 1 обрабатывает строки 1–2 и 15–16, GPU 2 — 3–4
@@ -778,6 +919,8 @@ $$
 обучения недостаточно. Если следующий KV-блок успевает прийти во время
 обработки текущего, часть обмена скрывается. Маленький блок, медленная сеть
 или дисбаланс могут разрушить такое перекрытие.
+
+<a id="cp-ring-overlap"></a>
 
 В модели равных MHA-блоков это условие можно оценить численно.
 Пусть блок содержит $u$ токенов, а $D$ — суммарная ширина всех голов.
@@ -809,6 +952,8 @@ Ring не требует делить число голов на $c$: голов
 не устраняют квадратичное число пар query–key для полного внимания; они
 распределяют вычисление и меняют требования к памяти и обменам.
 
+<a id="cp-byte-comparison"></a>
+
 Для численного сравнения возьмём обычный MHA с $B_\mu=1$, $S=32768$,
 $h=32$, $d_h=128$, BF16 и $c=8$, без дополнительного TP. Один полный
 тензор Q, K или V занимает $N=256$ MiB. В Ulysses первая перестановка
@@ -822,6 +967,8 @@ $2N(c-1)/c=448$ MiB на процесс. Оба числа исключают п
 требования к сети. При GQA объём Ring уменьшается вместе с числом
 KV-голов, тогда как простой Ulysses может потребовать их репликации.
 Сравнение одного MHA-примера не переносится на любую GQA-конфигурацию.
+
+<a id="cp-parameter-gradients"></a>
 
 ### Градиенты параметров при CP
 
@@ -840,6 +987,8 @@ $dK,dV$ внутри Ring не заменяют эту синхронизаци�
 деления на общее число токенов ещё раз усреднить вклады CP, получится 1.
 Нормировку по полезным токенам задают один раз для глобальной функции
 потерь; её сочетание с DP сверяют отдельно.
+
+<a id="tp-sp-cp-mesh"></a>
 
 ## Полная конфигурация
 
@@ -862,6 +1011,8 @@ $8\times8=64$ процесса до DP и PP. Сначала CP разделяе
 ограничения. Для MHA с 64 KV-головами тот же TP оставил бы восемь локальных
 KV-голов, и равномерный Ulysses-разрез был бы возможен. Выбор CP нельзя
 делать независимо от уже выбранного TP и устройства GQA.
+
+<a id="tp-fsdp-mesh"></a>
 
 В FSDP×TP у каждой TP-координаты есть своя группа FSDP: она собирает
 **локальную TP-часть** весов, а не всю исходную матрицу. Эти группы должны
@@ -895,6 +1046,8 @@ TP-координаты. TP all-reduce складывает вклады по ш
 двух осей разобрано в [[44 Distributed training и mixed precision|главе 44]]
 по задаче о FSDP×TP из CS336.
 
+<a id="tp-validation"></a>
+
 <a id="trade-offs-и-проверка"></a>
 ## Как выбрать разрез и проверить реализацию
 
@@ -912,6 +1065,8 @@ TP, длины выбранной области — на SP/CP, а при Ulyss
 операциям. Условия конкретного ядра могут быть строже математических:
 например, из-за выравнивания матричных блоков. Добавленные токены или признаки
 не должны попасть в полезную потерю или изменить softmax.
+
+<a id="tp-pytorch-contract"></a>
 
 В PyTorch эти размещения выражаются через `ColwiseParallel`,
 `RowwiseParallel`, `SequenceParallel` и преобразования `DTensor`.
@@ -977,6 +1132,126 @@ softmax в Ring с причинной маской.
 выходы и градиенты, порядок коллективных операций, реальные байты и пик
 памяти. CPU-пример не измеряет NCCL, скорость GPU или возможность перекрыть
 обмены. Даже численно правильное размещение может оказаться медленным.
+
+<a id="tp-edls-distributed-mlp"></a>
+
+## От математики к распределённому MLP
+
+В практике [EDLS Week 4, Part 2](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_large_models/practice_part2.ipynb)
+разбирается MLP Llama с теми же тремя проекциями. Ниже сохранены исходные
+классы практикума: локальный SwiGLU, граница с двумя редукциями
+и модуль-обёртка. Код и английские комментарии не изменены.
+Авторы Efficient Deep Learning Systems; [полный текст MIT License](/licenses/edls-e632aa89-MIT.txt).
+
+<!-- BEGIN SOURCE: EDLS tensor-parallel Llama MLP -->
+<!-- example:tp-edls-mlp -->
+
+```python
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.distributed as dist
+
+
+class LlamaMLP(nn.Module):  #  based on llama 3.1 8B configuration
+    def __init__(self, hidden_size: int = 4096, intermediate_size: int = 14336):
+        super().__init__()
+        self.gate_proj = nn.Linear(hidden_size, intermediate_size, bias=False)
+        self.up_proj = nn.Linear(hidden_size, intermediate_size, bias=False)
+        self.down_proj = nn.Linear(intermediate_size, hidden_size, bias=False)
+
+    def forward(self, input):
+        return self.down_proj(F.silu(self.gate_proj(input)) * self.up_proj(input))
+
+
+class ComputeWithAllReduce(torch.autograd.Function):
+    @staticmethod  # fun fact: torch.distributed.nn has differentiable all_reduce!
+    def forward(ctx, tp_shard: nn.Module, input: torch.Tensor):
+        input = input.detach().requires_grad_(input.requires_grad)
+        ctx.save_for_backward(input)
+        ctx._tp_shard = tp_shard
+        output = tp_shard(input)
+        dist.all_reduce(output)
+        return output
+    @staticmethod
+    def backward(ctx, grad_output: torch.Tensor):
+        with torch.enable_grad():
+          output = ctx._tp_shard(ctx.saved_tensors[0])
+          output.backward(grad_output)
+        dist.all_reduce(ctx.saved_tensors[0].grad)
+        return None, ctx.saved_tensors[0].grad
+
+
+class AllReduceModule(nn.Sequential):
+    def forward(self, input: torch.Tensor):
+        return ComputeWithAllReduce.apply(super().forward, input)
+```
+
+<!-- END SOURCE: EDLS tensor-parallel Llama MLP -->
+
+Распределяется промежуточная ширина `intermediate_size`. Например,
+для входа `[3,4]`, полной ширины 12 и двух процессов каждый экземпляр
+`LlamaMLP(hidden_size=4, intermediate_size=6)` хранит веса
+`gate_proj.weight:[6,4]`, `up_proj.weight:[6,4]`
+и `down_proj.weight:[4,6]`. Первые две матрицы получают соответствующие
+строки полных весов `nn.Linear`, последняя — соответствующие столбцы.
+Её выход `[3,4]` содержит вклад шести промежуточных признаков.
+`dist.all_reduce(output)` складывает два таких вклада и возвращает
+полный выход MLP на обоих процессах. Здесь используется группа процессов
+по умолчанию; при нескольких осях параллелизма граница должна работать
+именно с TP-группой.
+
+Вход в `ComputeWithAllReduce` отделяется от внешнего графа через
+`detach()`, но не копируется в новое хранилище. Снаружи связь восстанавливает
+собственный `backward` класса. Операции внутри `forward` пользовательской
+`autograd.Function` не образуют обычный граф для автоматического backward:
+шаблон сохраняет вход и повторно вызывает локальный MLP внутри
+`torch.enable_grad()`. Поэтому локальный MLP исполняется дважды.
+Это конкретная форма checkpointing из предыдущей главы, а не свойство,
+необходимое самому тензорному параллелизму.
+
+На обоих процессах `grad_output` — одна и та же производная по полному
+выходу. Повторный локальный проход даёт градиенты своих трёх матриц
+и локальный вклад по входу. Вызов `output.backward(grad_output)` записывает
+градиенты параметров в их `.grad`; последующая редукция складывает только
+вклады по входу. Возвращаемый `None` относится к аргументу
+`tp_shard`, который не является тензором. Уже одинаковый
+`grad_output` повторно не суммируется, а разные части весов не смешиваются.
+
+У этой реализации есть ограничения, которые видны из её графа.
+Параметры локального MLP переданы через Python-объект, а не как
+тензорные аргументы `Function.apply`. Если вход имеет
+`requires_grad=False`, выход этой границы тоже не требует градиента,
+даже когда внутренние веса обучаемы. Обычный `nn.Linear` с тем же входом
+продолжал бы обучать веса. В исходном примере перед MLP стоит обучаемый
+RMSNorm, поэтому его выход требует градиента. Заморозка нормализации
+и предшествующих слоёв меняет это условие. Применять шаблон к такому
+случаю без изменения границы нельзя.
+
+При повторном вычислении также нужно восстановить тот же dropout
+и другие случайные операции. Этот код не сохраняет состояние RNG.
+Если добавить dropout внутрь обёртки, backward может использовать другую
+маску и вычислить производную не того forward, который дал выход.
+Побочные изменения состояния внутри локального модуля тоже повторятся.
+Оригинальный `LlamaMLP` содержит детерминированные линейные операции
+и SiLU; отсутствие этих проблем в нём не делает обёртку универсальной.
+
+RMSNorm перед обёрткой в обычном TP получает одинаковые входы и уже
+просуммированные производные по ним. При одинаковых параметрах его
+градиент полный и одинаковый на обоих процессах. Ещё одна TP-сумма
+умножила бы его на два. Это отличается от SP, где процессы нормируют
+разные строки и действительно должны сложить разные части градиента
+параметров нормализации. При независимой оси DP остаётся отдельная
+синхронизация между репликами данных.
+
+Для проверки этих свойств не требуется загружать Llama или выделять
+матрицы исходной конфигурации 8B. Можно оставить те же классы, уменьшить
+размерности и сверить с полным модулем выход, производную по входу
+и градиенты всех трёх матриц и RMSNorm. Проверка должна также показать,
+что замороженный вход и новый dropout нарушают предпосылки шаблона.
+Это проверка учебной реализации; для библиотечного размещения параметров
+используются описанные выше стили PyTorch, с собственным контрактом
+распределённого autograd.
 
 ## Практика и первоисточники
 

@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-09",
+  "scope": "Keep both Stanford CS231n slides as source links, replace the embedded softmax slide with the unchanged Google MLCC Figure 9, and explain the boundary of the existing classifier in a worked example. No deployment.",
+  "review": {
+    "source": "Compared Google MLCC multi-class classification, the official page's CC BY 4.0 notice and its complete Figure 9 with CS231n Lecture 2 slides 63 and 77 and the separate MIT Karpathy linear classifier notes. Google calls this 'one-vs.-one'; the chapter describes the actual joint softmax, not pairwise classification.",
+    "originals": "The 1850×834 Google PNG is copied byte-for-byte. The independent MIT pixelspace image stays in place. Both local lecture-2 slides were rerendered from the retained PDF at 160 dpi and had zero RGB pixel difference. This proves source identity, not rights to redistribute the entire slides.",
+    "examples": "The cat logits, probabilities, numerical stability, gradient and full parameter update remain. The new pear example yields −ln(0.63) = 0.462035… nats. For the same W with zero bias, (0.1, −1) gives a maximal tie at 1.3; (−0.1, 1) gives a tie at −1.3 below the frog score 0.75.",
+    "editorial": "Read all 1163 previous and 1181 final lines. Applied the prose checklist to the figure, source links and the two geometric cases. Kept the six Python blocks and seven unaffected illustrations verbatim.",
+    "reader": "Compared both current illustrations at 375/1280 CSS px in Russian and the labelled English fallback. At mobile width the entire figure fits inline at 343 px; the 3× viewer reaches both horizontal ends, including the four probability labels. Attribution and both external slide links remain. No page-width overflow or KaTeX errors."
+  },
+  "verification": {
+    "localUnit": {"files": 223, "passed": 1258, "failed": 0},
+    "rootBuild": 2049,
+    "siteOutputTestsPassed": 247,
+    "brokenInternalLinks": 0,
+    "archiveFreePublication": {"passed": 738, "archiveOnlySkipped": 11, "scope": "Existing temporary projection refreshed with both foundations deltas; no local Originals or raw source directory. Tests only, not a fresh Pages build."},
+    "courseLedgers": ["Stanford CS336 Spring 2026", "Berkeley Advanced LLM Agents Spring 2025"],
+    "published": false
+  },
+  "files": [
+    {
+      "source": "00 Учебник/00 Математические и ML-основания/04 Функции потерь.md",
+      "before_sha256": "035c06668da0dc3135216748c06259b6adec877651faa1cbb8f349e7d25badca",
+      "after_sha256": "af279723f18d7e7ec8d0a2ea11b8122cce7ef7e439b437b092d080d80dfde784",
+      "lines": 1181,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-30",
+          "new": "last_updated: 2026-11-09"
+        },
+        {
+          "old": "  - https://developers.google.com/machine-learning/crash-course/linear-regression/loss",
+          "new": "  - https://developers.google.com/machine-learning/crash-course/linear-regression/loss\n  - https://developers.google.com/machine-learning/crash-course/neural-networks/multi-class"
+        },
+        {
+          "old": "сразу по логитам.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/foundations-source-first/cs231n-softmax-cross-entropy.png]]\n\n*Экспоненты, нормировка и отрицательный логарифм вероятности кошки.\nStanford CS231n; лекцию 3 апреля 2025 года читает Ehsan Adeli\n([расписание курса](https://cs231n.stanford.edu/2025/schedule.html)).\n[Stanford CS231n, Lecture 2, слайд 77](https://cs231n.stanford.edu/slides/2025/lecture_2.pdf#page=75).\nНа слайде числа округлены: 0,00 у лягушки не означает точный ноль.*",
+          "new": "сразу по логитам.\n\nЭти же логиты разбирает Ehsan Adeli на\n[слайде 77 лекции CS231n](https://cs231n.stanford.edu/slides/2025/lecture_2.pdf#page=75).\nВероятность лягушки на слайде округлена до 0,00."
+        },
+        {
+          "old": "означает маленькую вероятность правильного класса и большой штраф.\n\nОбщая формула допускает и мягкую цель: например, $q=(0{,}6;\\;0{,}4)$.",
+          "new": "означает маленькую вероятность правильного класса и большой штраф.\n\nНа рисунке Google ML Crash Course сеть выбирает один из четырёх\nвидов фруктов. Softmax нормирует четыре логита, поэтому вероятности\n$(0{,}19;\\;0{,}12;\\;0{,}63;\\;0{,}06)$ складываются в единицу.\nПравильный класс «груша» стоит третьим. Для этой метки\ncross-entropy равна $-\\ln0{,}63\\approx0{,}4620$ ната. В формулу\nподставляется третья вероятность; при её вычислении знаменатель\nsoftmax зависит от всех четырёх логитов.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/foundations-source-first/google-softmax-multiclass.png|Одна фотография груши и четыре выхода softmax: яблоко 0,19, апельсин 0,12, груша 0,63, виноград 0,06]]\n\n*Google ML Crash Course,\n[Multi-class classification, Figure 9](https://developers.google.com/machine-learning/crash-course/neural-networks/multi-class#one-versus-one-softmax).\n[Оригинальный рисунок](https://developers.google.com/static/machine-learning/crash-course/neural-networks/images/one_vs_one_neural_net.png), без изменений.\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nОбщая формула допускает и мягкую цель: например, $q=(0{,}6;\\;0{,}4)$."
+        },
+        {
+          "old": "<details>\n<summary>Слайд курса с тем же рисунком и поверхностями оценок</summary>\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/foundations-source-first/cs231n-linear-decision-boundaries.png]]\n\n*Дополнительные представления линейного классификатора.\nStanford CS231n; лектор Ehsan Adeli\n([расписание курса](https://cs231n.stanford.edu/2025/schedule.html)).\n[Stanford CS231n, Lecture 2, слайд 63](https://cs231n.stanford.edu/slides/2025/lecture_2.pdf#page=61).*\n\n</details>",
+          "new": "На [слайде 63 лекции CS231n](https://cs231n.stanford.edu/slides/2025/lecture_2.pdf#page=61)\nрядом с этой схемой показаны наклонные плоскости оценок. Высота\nкаждой плоскости в точке $\\mathbf x$ равна логиту своего класса.\nМодель выбирает класс, чья плоскость в этой точке выше остальных."
+        },
+        {
+          "old": "(W_a-W_b)\\mathbf x+(b_a-b_b)=0.\n$$\n\nДля одного и того же argmax вероятности могут различаться.",
+          "new": "(W_a-W_b)\\mathbf x+(b_a-b_b)=0.\n$$\n\nПодставим исходные веса из примера выше. Для кошки и машины\nразность логитов равна $-x_1-0{,}1x_2$. При $x_2=-1$ она\nобращается в ноль при $x_1=0{,}1$. Обе оценки равны 1,3,\nвыше оценки лягушки $-0{,}75$. При $x_1=0$ побеждает кошка,\nа при $x_1=0{,}2$ уже машина: между этими точками проходит\nграница предсказаний.\n\nПри $x_2=1$ равенство получается в другой точке, $x_1=-0{,}1$.\nОбе оценки теперь равны $-1{,}3$, а у лягушки $0{,}75$.\nЕсли немного сдвинуть вход в любую сторону от этой точки,\nпобедитель не меняется. Линия равенства двух логитов сама по себе\nещё не является границей предсказаний.\n\nДля одного и того же argmax вероятности могут различаться."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "6d838d61dd80134bf4e6ac2c2fbcc039925cdfddac326517e2989ee0758129ea",
+      "after_sha256": "3ac746efb4f62eaaad5c239362bc71121fe7fa00b3247454c61e9d751c3c90f2",
+      "lines": 24176,
+      "changes": [
+        {
+          "old": "  - id: curated-cs231n-softmax-ce-0000000000a6\n    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/cs231n-softmax-cross-entropy.png\n    author: Stanford CS231n; Ehsan Adeli (lecturer, 2025-04-03)\n    author_evidence_url: https://cs231n.stanford.edu/2025/schedule.html\n    source_url: https://cs231n.stanford.edu/slides/2025/lecture_2.pdf\n    license: open-course-material; reuse confirmed by repository owner\n    license_url: https://cs231n.stanford.edu/\n    modifications: Existing complete-slide PNG retained unchanged; exact RGB pixel identity to a fresh full-page pdftoppm render of the verified source PDF. Source and physical page verified; no redistribution license inferred.\n    used_in:\n      - 00 Учебник/00 Математические и ML-основания/04 Функции потерь.md",
+          "new": "  - id: curated-cs231n-softmax-ce-0000000000a6\n    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/cs231n-softmax-cross-entropy.png\n    author: Stanford CS231n; Ehsan Adeli (lecturer, 2025-04-03)\n    author_evidence_url: https://cs231n.stanford.edu/2025/schedule.html\n    source_url: https://cs231n.stanford.edu/slides/2025/lecture_2.pdf\n    license: Unverified for redistribution\n    license_url: null\n    publication_status: retired\n    retirement_reason: The chapter keeps the link to printed slide 77 and its numerical example; the embedded visual is now the licensed Google MLCC original.\n    modifications: Existing complete-slide PNG retained unchanged; exact RGB pixel identity to a fresh full-page pdftoppm render of the verified source PDF. Source and physical page verified; no redistribution license inferred.\n    used_in: []\n    former_used_in:\n      - 00 Учебник/00 Математические и ML-основания/04 Функции потерь.md"
+        },
+        {
+          "old": "    sha256: 48e8acfe3a1c34d5b8bc5efbe89fa57cb0a8d9aa07cab18acc902be9d2ffcecb\n    derivation: pdf-full-slide-render-verified\n    rights_status: named-lecture-slide-license-unverified\n  - id: curated-cs231n-boundaries-0000000000a7\n    # Full-slide copy retained as an optional source view in the chapter.\n    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/cs231n-linear-decision-boundaries.png\n    author: Stanford CS231n; Ehsan Adeli (lecturer, 2025-04-03)\n    author_evidence_url: https://cs231n.stanford.edu/2025/schedule.html\n    source_url: https://cs231n.stanford.edu/slides/2025/lecture_2.pdf\n    license: open-course-material; reuse confirmed by repository owner\n    license_url: https://cs231n.stanford.edu/\n    modifications: Existing complete-slide PNG retained unchanged; exact RGB pixel identity to a fresh full-page pdftoppm render of the verified source PDF. Source and physical page verified; no redistribution license inferred.\n    used_in:\n      - 00 Учебник/00 Математические и ML-основания/04 Функции потерь.md",
+          "new": "    sha256: 48e8acfe3a1c34d5b8bc5efbe89fa57cb0a8d9aa07cab18acc902be9d2ffcecb\n    derivation: pdf-full-slide-render-verified\n    rights_status: course-slide-republication-unverified\n  - id: curated-cs231n-boundaries-0000000000a7\n    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/cs231n-linear-decision-boundaries.png\n    author: Stanford CS231n; Ehsan Adeli (lecturer, 2025-04-03)\n    author_evidence_url: https://cs231n.stanford.edu/2025/schedule.html\n    source_url: https://cs231n.stanford.edu/slides/2025/lecture_2.pdf\n    license: Unverified for redistribution\n    license_url: null\n    publication_status: retired\n    retirement_reason: The chapter links to printed slide 63 and embeds the separately licensed pixelspace original from the CS231n notes.\n    modifications: Existing complete-slide PNG retained unchanged; exact RGB pixel identity to a fresh full-page pdftoppm render of the verified source PDF. Source and physical page verified; no redistribution license inferred.\n    used_in: []\n    former_used_in:\n      - 00 Учебник/00 Математические и ML-основания/04 Функции потерь.md"
+        },
+        {
+          "old": "    sha256: 1c5ac40bbb84b0d962ef5ed15a6e3c63097fd8f6ccd3535a20f2cf9d4a33b7e6\n    derivation: pdf-full-slide-render-verified\n    rights_status: named-lecture-slide-license-unverified\n  - id: curated-cs231n-pixelspace-original-311ed25c3a87",
+          "new": "    sha256: 1c5ac40bbb84b0d962ef5ed15a6e3c63097fd8f6ccd3535a20f2cf9d4a33b7e6\n    derivation: pdf-full-slide-render-verified\n    rights_status: course-slide-republication-unverified\n  - id: curated-google-softmax-multiclass-7b0f01cc61b9\n    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/google-softmax-multiclass.png\n    author: Google\n    source_url: https://developers.google.com/machine-learning/crash-course/neural-networks/multi-class\n    source_image_url: https://developers.google.com/static/machine-learning/crash-course/neural-networks/images/one_vs_one_neural_net.png\n    source_asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/google-softmax-multiclass.png\n    source_asset_sha256: 7b0f01cc61b917b9c76a698af949c21acce117dad1d46247f1fe028555f3ad2c\n    sha256: 7b0f01cc61b917b9c76a698af949c21acce117dad1d46247f1fe028555f3ad2c\n    dimensions_px: [1850, 834]\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    rights_evidence: https://developers.google.com/machine-learning/crash-course/neural-networks/multi-class#one-versus-one-softmax\n    rights_status: source-license-verified\n    provenance_confirmation: source-license-verified\n    metadata_status: verified\n    derivation: source-raster-copy\n    modifications: Complete Figure 9 published PNG, byte-for-byte with labels and original aspect ratio.\n    last_verified: 2026-11-09\n    used_in:\n      - 00 Учебник/00 Математические и ML-основания/04 Функции потерь.md\n  - id: curated-cs231n-pixelspace-original-311ed25c3a87"
+        }
+      ]
+    }
+  ]
+}

@@ -2,8 +2,124 @@
 title: Дистилляция моделей рассуждения
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-29
-last_verified: 2026-10-25
+last_updated: 2026-11-05
+last_verified: 2026-11-05
+source_language: mixed
+reference_terms:
+  - anchor: distillation-targets
+    label: "Дистилляция: цели и источник префиксов"
+    label_en: "Distillation: targets and prefix sources"
+  - anchor: distillation-sequence-example
+    label: "Отбор решений учителя: сквозной пример"
+    label_en: "Selecting teacher solutions: a worked example"
+  - anchor: sequence-distillation
+    label: "Дистилляция последовательностей как SFT"
+    label_en: "Sequence distillation as SFT"
+  - anchor: sequence-distribution-vs-mode
+    label: "Распределение целых ответов, выборка и beam search"
+    label_en: "Full-sequence distributions, sampling, and beam search"
+  - anchor: distillation-generation-records
+    label: "Происхождение генераций и демонстраций SFT"
+    label_en: "Provenance of generations and SFT demonstrations"
+  - anchor: distillation-sequence-loss
+    label: "Сумма токеновых потерь, перплексия и маски"
+    label_en: "Token losses, perplexity, and response masks"
+  - anchor: distillation-sequence-code
+    label: "Причинный сдвиг и нормировка последовательностной потери"
+    label_en: "Causal shift and sequence-loss reduction"
+  - anchor: openr1-reasoning-data
+    label: "Open-R1: создание и фильтрация данных рассуждений"
+    label_en: "Open-R1: reasoning-data generation and filtering"
+  - anchor: r1-distill-students-data
+    label: "R1-Distill: данные, исходные ученики и параметры SFT"
+    label_en: "R1-Distill: data, initial students, and SFT settings"
+  - anchor: distillation-vs-direct-rl
+    label: "Дистилляция или прямой RL: сравнения на Qwen2.5-32B"
+    label_en: "Distillation versus direct RL on Qwen2.5-32B"
+  - anchor: s1-selection-funnel
+    label: "s1K: качество, трудность, разнообразие и деконтаминация"
+    label_en: "s1K: quality, difficulty, diversity, and decontamination"
+  - anchor: selection-bias
+    label: "Смещение распределения задач после отбора"
+    label_en: "Task-distribution bias after selection"
+  - anchor: distillation-logits
+    label: "Дистилляция логитов и мягкие цели"
+    label_en: "Logit distillation and soft targets"
+  - anchor: distillation-temperature-gradient
+    label: "Температура, множитель τ² и градиент KD"
+    label_en: "Temperature, the τ² factor, and the KD gradient"
+  - anchor: distillation-hard-soft-mixture
+    label: "Смешивание жёстких и мягких целей"
+    label_en: "Mixing hard and soft targets"
+  - anchor: distillation-high-temperature
+    label: "Большая температура и центрированные логиты"
+    label_en: "High temperature and centered logits"
+  - anchor: distillation-kd-code
+    label: "Реализация KL: detach, маски и единица усреднения"
+    label_en: "KL implementation: detach, masks, and reduction units"
+  - anchor: distillation-vocabulary-memory
+    label: "Общий словарь, разные токенизаторы и память логитов"
+    label_en: "Shared vocabularies, tokenizer mismatch, and logit memory"
+  - anchor: feature-distillation
+    label: "Дистилляция скрытых представлений и обучаемая проекция"
+    label_en: "Hidden-state distillation and learned projections"
+  - anchor: tinybert-transformer-distillation
+    label: "TinyBERT: дистилляция слоёв Transformer"
+    label_en: "TinyBERT: Transformer-layer distillation"
+  - anchor: tinybert-layer-mapping
+    label: "TinyBERT: сопоставление слоёв и размеров тензоров"
+    label_en: "TinyBERT: layer correspondence and tensor shapes"
+  - anchor: tinybert-attention-scores
+    label: "TinyBERT: attention scores, softmax и нормировка MSE"
+    label_en: "TinyBERT: attention scores, softmax, and MSE reduction"
+  - anchor: tinybert-training-stages
+    label: "TinyBERT: общая и task-specific дистилляция"
+    label_en: "TinyBERT: general and task-specific distillation"
+  - anchor: distillation-vs-rft
+    label: "GKD: обучение на собственных ошибках ученика"
+    label_en: "GKD: learning from the student's own mistakes"
+  - anchor: gkd-prefix-mixture
+    label: "GKD: источник последовательностей и stop-gradient"
+    label_en: "GKD: sequence sources and stop-gradient"
+  - anchor: gkd-forward-reverse-kl
+    label: "Прямой и обратный KL при ограниченной ёмкости ученика"
+    label_en: "Forward and reverse KL under limited student capacity"
+  - anchor: gkd-generalized-jsd
+    label: "Обобщённая JS-дивергенция и предельные значения β"
+    label_en: "Generalized JSD and limiting beta values"
+  - anchor: gkd-tiny-llama-step
+    label: "Исполняемый шаг GKD на генерациях маленького Llama"
+    label_en: "An executable GKD step on tiny Llama generations"
+  - anchor: gkd-experiment-scope
+    label: "Эксперименты GKD: модели, задачи и границы выводов"
+    label_en: "GKD experiments: models, tasks, and limits"
+  - anchor: gkd-rft-rlvr
+    label: "Различия RLVR, RFT и GKD на одних ответах"
+    label_en: "RLVR, RFT, and GKD on the same responses"
+  - anchor: gkd-joint-rl
+    label: "Совместное обучение RL и on-policy GKD"
+    label_en: "Joint RL and on-policy GKD"
+  - anchor: gkd-trl-implementation
+    label: "TRL: параметры GKDTrainer и DistillationTrainer"
+    label_en: "TRL: GKDTrainer and DistillationTrainer settings"
+  - anchor: reasoning-recipes
+    label: "Выбор способа дистилляции по доступу к учителю"
+    label_en: "Choosing distillation by teacher access"
+  - anchor: distillation-internal-algorithms
+    label: "Почему дистилляция не копирует внутренний алгоритм"
+    label_en: "Why distillation does not copy internal algorithms"
+  - anchor: distillation-evaluation
+    label: "Разбиение данных и аудит фильтров дистилляции"
+    label_en: "Data splits and distillation-filter audits"
+  - anchor: distillation-training-checks
+    label: "Проверки обучения: EOS, усечение, packing и свежесть данных"
+    label_en: "Training checks: EOS, truncation, packing, and fresh data"
+  - anchor: evaluation
+    label: "Оценка качества и стоимости дистилляции"
+    label_en: "Evaluating distillation quality and cost"
+  - anchor: openr1-reproducible-recipe
+    label: "Закреплённый рецепт Open-R1 и границы воспроизводимости"
+    label_en: "A pinned Open-R1 recipe and reproduction limits"
 aliases:
   - Дистилляция reasoning models
 prerequisites:
@@ -13,9 +129,11 @@ next:
 primary_sources:
   - https://arxiv.org/abs/1503.02531
   - https://arxiv.org/abs/2501.12948v2
+  - https://arxiv.org/abs/2506.14245v2
   - https://arxiv.org/abs/2306.13649v3
   - https://arxiv.org/abs/2501.19393v3
   - https://aclanthology.org/D16-1139/
+  - https://aclanthology.org/2020.findings-emnlp.372/
 source_unit_id:
   - meeting-04-slides-s1k-data
 ---
@@ -37,6 +155,8 @@ source_unit_id:
 [Hinton, Vinyals и Dean (2015)](https://arxiv.org/abs/1503.02531), а обучение
 авторегрессионной модели на целых ответах учителя подробно разобрано у
 [Kim и Rush (2016)](https://aclanthology.org/D16-1139/).
+
+<a id="distillation-targets"></a>
 
 <a id="три-разных-объекта-под-одним-названием"></a>
 ## Что передаёт учитель и кто порождает ответы
@@ -63,7 +183,7 @@ source_unit_id:
 форму передаваемого знания. Именно такое разделение лежит в основе
 [Generalized Knowledge Distillation, GKD](https://arxiv.org/abs/2306.13649v3).
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-2026-10-25/kim-rush-three-approaches.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-2026-10-25/kim-rush-three-approaches.png|Kim and Rush: word-level, sequence-level, and interpolated distillation]]
 
 *Слева ученик получает распределения учителя на префиксах эталонного ответа
 `ECD`; в центре учится на выбранном учителем целом ответе `ACF`. Справа
@@ -71,6 +191,8 @@ source_unit_id:
 Жёлтые столбцы обозначают распределения, чёрные ячейки — жёсткие метки.
 Yoon Kim и Alexander M. Rush, [Figure 1, §2.2–3.3](https://aclanthology.org/D16-1139.pdf#page=3),
 CC BY 4.0. Сохранены все три панели и исходная английская подпись.*
+
+<a id="distillation-sequence-example"></a>
 
 ## Сквозной пример
 
@@ -102,7 +224,7 @@ FINAL: 4
 
 <a id="sequence-distillation"></a>
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-review-2026-09/sequence-distillation.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-review-2026-09/sequence-distillation.png|Sequence distillation: teacher responses become student training data]]
 
 *Запросы $x_i$ поступают учителю; его ответы $y_i$ вместе с запросами образуют
 данные для обучения ученика. Стрелка к набору данных не означает, что любой
@@ -116,6 +238,8 @@ Nathan Lambert, [Synthetic Data & Distillation](https://rlhfbook.com/c/12-synthe
 нет ни сравнения наград нескольких свежих ответов, ни оценки преимущества.
 Проверяющая программа могла использоваться **при отборе данных**, но это само
 по себе не превращает последующий SFT в RLVR.
+
+<a id="sequence-distribution-vs-mode"></a>
 
 ### От распределения целых ответов к одному тексту
 
@@ -172,6 +296,8 @@ print(seq_full_gradient.tolist(), seq_mode_gradient.tolist())
 правильность: два верных решения могут использовать разные преобразования.
 [Kim–Rush, §3.2–3.3](https://aclanthology.org/D16-1139.pdf#page=4).
 
+<a id="distillation-generation-records"></a>
+
 ### Запись исходной генерации
 
 Ниже условная запись, иллюстрирующая происхождение данных, а не журнал
@@ -205,6 +331,8 @@ print(seq_full_gradient.tolist(), seq_mode_gradient.tolist())
 }
 ```
 
+<a id="distillation-sequence-loss"></a>
+
 ### Целевая функция и ручной расчёт
 
 Пусть $x$ — запрос, а $y^T$ — сохранённый ответ учителя. Маска $m_t$ равна единице
@@ -234,6 +362,8 @@ $$
 становится образцом, включая ненужное повторение, ошибочную промежуточную
 арифметику или проверку, которая случайно привела к правильному ответу. Поэтому
 отбор по финальному числу и контроль качества рассуждения решают разные задачи.
+
+<a id="distillation-sequence-code"></a>
 
 ### Минимальный код
 
@@ -278,6 +408,8 @@ def sequence_distillation_loss(logits, input_ids, answer_mask):
 При использовании ChatML в Open-R1 конец ответа обозначается `<|im_end|>`;
 подмена его другим EOS меняет то, когда модель учится останавливаться.
 
+<a id="openr1-reasoning-data"></a>
+
 ## Как Open-R1 создавал данные рассуждений
 
 Для OpenR1-Math-220k авторы взяли 400 тысяч задач NuminaMath 1.5 и получили
@@ -310,6 +442,8 @@ Qwen2.5-Math-RM-72B. Из ответа предварительно удалял
 ответа. Этот опыт показывает, почему название «модель награды» не гарантирует
 полезный отбор: оценщик должен видеть именно ту часть примера, качество которой
 важно для будущего обучения.
+
+<a id="r1-distill-students-data"></a>
 
 ### Что именно передано в DeepSeek-R1-Distill
 
@@ -362,12 +496,86 @@ Llama-8B — с Llama-3.1-8B, а Llama-70B — с **Llama-3.3-70B-Instruct**.
 приветствие или краткий фактический вопрос в длинное решение. В данном случае
 это задаётся подбором демонстраций в общей SFT-смеси.
 
+<a id="distillation-vs-direct-rl"></a>
+
+### Что получает ученик от уже обученного учителя
+
+DeepSeek сравнила два способа дообучить Qwen2.5-32B-Base. В первом
+модель сама порождает решения и получает награду за результат: так
+обучили Qwen2.5-32B-Zero за более чем 10 тысяч шагов RL. Во втором
+модели уже показывают отобранные решения более крупного учителя и
+увеличивают вероятность их токенов с помощью SFT: так получилась
+DeepSeek-R1-Distill-Qwen-32B. Если исходная модель редко доходит
+до правильного преобразования, в первом случае его ещё нужно встретить
+при генерации, а во втором оно может сразу появиться в учебном примере.
+
+| Версия Qwen2.5-32B | AIME 2024, pass@1 | AIME 2024, cons@64 | MATH, pass@1 | GPQA Diamond, pass@1 |
+|---|---:|---:|---:|---:|
+| Zero, прямой RL | 47,0 | 60,0 | 91,6 | 55,0 |
+| R1-Distill, SFT на отобранных решениях | 72,6 | 83,3 | 94,3 | 62,1 |
+
+*Результаты в процентах. Источник: [DeepSeek-R1 v2, таблица 16 и §F.1](https://arxiv.org/html/2501.12948v2#A6.T16).*
+
+На AIME разница при одной попытке составляет 25,6 процентного пункта.
+Столбец cons@64 измеряет, верен ли ответ, выбранный голосованием среди
+64 генераций. Pass@1 у авторов тоже оценён по этим генерациям: для
+каждой задачи берут долю правильных ответов, а не результат голосования
+([протокол, §D.1](https://arxiv.org/html/2501.12948v2#A4.SS1)).
+И обе оценки отличаются от pass@64: редкий правильный ответ может проиграть
+голосование. Исходная модель одна,
+но данные, способ обновления и затраты различаются. В частности, SFT
+использует результаты уже оплаченного обучения и генерации учителя.
+По этой таблице нельзя сказать, что SFT сам по себе лучше RL при
+одинаковых данных или общем бюджете.
+
+В [опыте Wen et al., §6](https://arxiv.org/html/2506.14245v2#S6)
+поставили более узкий вопрос: как меняется результат SFT, если ученик
+и исходный набор задач те же, а решения берутся у учителя на разных
+стадиях RL? Каждый раз ученик начинает с Qwen2.5-32B-Base. По
+горизонтали в первой части рисунка меняется источник его учебных
+решений: базовая модель, ранняя и промежуточная точки обучения учителя,
+затем DAPO-Qwen-32B. Надпись `Steps(180~200)` относится к учителю,
+а не к числу шагов SFT ученика.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distill-rlvr-2026-11-14/wen-figure6a.svg|AIME 2024 и 2025: точность ученика после SFT растёт по мере перехода от решений базовой модели к ответам более поздних стадий DAPO.]]
+
+*Xumeng Wen et al., [Reinforcement Learning with Verifiable Rewards Implicitly
+Incentivizes Correct Reasoning in Base LLMs, рис. 6(a)](https://arxiv.org/html/2506.14245v2#S6.F6.sf1).
+[Оригинальный SVG](https://arxiv.org/html/2506.14245v2/wxm_comp_sft_data_pass1.svg),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), обе панели без изменений.*
+
+Верхняя панель показывает AIME 2024, нижняя — AIME 2025. Например, на
+AIME 2024 серия `SFT on all CoTs` растёт примерно с 0,15 до 0,50,
+почти достигая пунктирной линии учителя. Отдельные серии означают
+отбор рассуждений по вердикту оценщика: только принятые, только
+отклонённые и все. Даже серия с отклонёнными рассуждениями улучшается
+от ранних к поздним решениям. По этому графику нельзя узнать,
+какие именно фрагменты отклонённых решений помогли ученику и какие
+он мог повторить с ошибкой.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distill-rlvr-2026-11-14/wen-figure6b.svg|Четыре кривые на AIME 2024 и 2025: базовая модель, SFT на её собственных решениях, SFT на решениях DAPO и сама DAPO. Слева pass@k, справа требуется ещё верный ход решения.]]
+
+*Wen et al., [рис. 6(b)](https://arxiv.org/html/2506.14245v2#S6.F6.sf2),
+[оригинальный SVG](https://arxiv.org/html/2506.14245v2/wxm_comp_sft_rlvr_passk.svg),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), все четыре панели без изменений.*
+
+Во второй части слева достаточно, чтобы хотя бы один из $k$ ответов
+был правильным. Справа ту же попытку засчитывают, только если оценщик
+принял ещё и её рассуждение. Ученик на решениях DAPO остаётся близок
+к учителю, но отдельные кривые не совпадают. Полосы справа отражают
+разные правила объединения вердиктов одного модельного оценщика,
+а не доверительный интервал точности. Поэтому близость кривых
+показывает перенос качества на этих тестах и при этой проверке,
+но не доказывает, что ученик воспроизводит ход рассуждения учителя.
+
+<a id="s1-selection-funnel"></a>
+
 <span id="s1-59-тысяч-1-тысяча"></span>
 ## s1: 59 тысяч → 1 тысяча
 
 <!-- source_unit_id: meeting-04-slides-s1k-data -->
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p128-s1-data-funnel.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p128-s1-data-funnel.png|Berkeley: s1K selection through quality, difficulty, and diversity filters]]
 
 *Слайд показывает последовательное сокращение исходного набора. Это упрощённая
 схема: она округляет числа и не показывает отдельно 384 примера, выбранных
@@ -469,6 +677,8 @@ $p=0.1$ — с вероятностью $0.3439$. При одинаковом ч
 многословие получит необоснованное преимущество. Разнообразие методов решения
 нужно оценивать отдельно от длины и финальной правильности.
 
+<a id="distillation-logits"></a>
+
 ## Дистилляция логитов
 
 При обучении на готовом ответе ученик узнаёт только то, какой токен был выбран.
@@ -478,7 +688,7 @@ $0.99$. Первый отводит альтернативам почти пол
 Дистилляция распределений сохраняет это различие: ученик приближает все
 вероятности учителя, а не только увеличивает вероятность выбранной метки.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-review-2026-09/token-distributions.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-review-2026-09/token-distributions.png|Logit distillation: teacher and student distributions with a frozen teacher]]
 
 *Обе модели получают один вход; их логиты преобразуются в вероятности с одной
 температурой. Потеря сравнивает распределения, но градиент проходит только
@@ -510,6 +720,8 @@ $$
 $\tau$ распределение приближается к равномерному и слабее различает токены.
 Объяснение мягких целей и множителя $\tau^2$ дано в
 [Hinton et al., §2](https://arxiv.org/abs/1503.02531).
+
+<a id="distillation-temperature-gradient"></a>
 
 Множитель имеет значение для градиента. При фиксированном учителе производная
 по логиту ученика равна
@@ -550,6 +762,8 @@ $$
 альтернативу, хотя учитель не считает её невозможной. Именно эту дополнительную
 информацию теряет единственная текстовая демонстрация.
 
+<a id="distillation-hard-soft-mixture"></a>
+
 Когда известен и правильный целевой токен, Hinton et al. смешивают две потери:
 
 $$
@@ -563,6 +777,8 @@ $\tau^2$. Так эталон может поправить ошибку учи�
 градиентами. Этот $\alpha$ смешивает **функции потерь**; он не определяет,
 кто генерирует префиксы.
 
+<a id="distillation-high-temperature"></a>
+
 В §2.1 Hinton рассматривают и предел большой температуры. Если логиты каждой
 модели отдельно центрированы по словарю, градиент масштабированной мягкой
 потери приближается к $(z_S(v)-z_T(v))/V$. Поэтому в этом пределе она ведёт себя
@@ -570,6 +786,8 @@ $\tau^2$. Так эталон может поправить ошибку учи�
 логитов, отличающиеся общей константой, давали бы ненулевую квадратичную ошибку
 при совершенно одинаковом softmax. При конечной температуре это лишь
 приближение, а не взаимозаменяемость MSE и KL.
+
+<a id="distillation-kd-code"></a>
 
 ### Маска и нормировка потери
 
@@ -652,6 +870,8 @@ print(f"mixed loss={mixed_loss.item():.6f}; gradient={mixed_gradient.tolist()}")
 не извлекают вероятность только фактически выбранного токена: сравнивается
 весь словарь в каждой оставленной позиции.
 
+<a id="distillation-vocabulary-memory"></a>
+
 ### Ограничения
 
 Прямой KL требует общего пространства токенов. Если индекс 42 у учителя
@@ -714,6 +934,155 @@ assert feature_teacher.grad is None
 потеря сравнивает только выбранные векторы, а не все вычисления модели.
 <!-- END CONSOLIDATION: feature-distillation 2026-10-29 -->
 
+<a id="tinybert-transformer-distillation"></a>
+## Transformer-layer distillation: TinyBERT
+
+An encoder can give the correct class label while representing the sentence
+differently from its teacher. TinyBERT supervises intermediate computations as
+well as the final prediction. Both networks read the same tokenized input;
+the student fits selected embedding, hidden-state and attention tensors.
+This is encoder compression, not SFT on generated chains of reasoning.
+The objectives are described in
+[Jiao et al., §3.1–3.2](https://aclanthology.org/2020.findings-emnlp.372.pdf#page=3)
+and the [official implementation](https://github.com/huawei-noah/Pretrained-Language-Model/tree/0598f02d7fc4eaa7b4cbc1e9d7ab18bc875c24f9/TinyBERT).
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-tinybert-2026-11-05/tinybert-layer-detail.png|TinyBERT: attention-score and hidden-state matching between teacher and student layers]]
+
+*Xiaoqi Jiao et al., [TinyBERT, Figure 2](https://aclanthology.org/2020.findings-emnlp.372.pdf#page=3).
+Complete author-supplied [layer-detail PNG](https://arxiv.org/html/1909.10351v5/transformer_layer_detail.png),
+unchanged. The upper comparison fits attention scores; the lower one fits
+hidden states after projecting the student's width.
+The published ACL illustration is covered by
+[CC BY 4.0](https://aclanthology.org/faq/copyright/).*
+
+<a id="tinybert-layer-mapping"></a>
+### Which layers and tensors are compared
+
+For a four-layer student and a twelve-layer teacher, the paper uses
+$g(m)=3m$: student layers 1, 2, 3 and 4 match teacher layers 3, 6, 9 and 12.
+The embedding output is a separate match at index 0. The four-layer model has
+hidden width 312 rather than 768, but both networks have twelve attention
+heads. Their per-head score matrices therefore have the same $L\times L$
+shape for an input of length $L$, even though their head dimensions differ.
+These sizes and the layer mapping are specified in
+[the model settings, §4.2](https://aclanthology.org/2020.findings-emnlp.372.pdf#page=5).
+
+For a matched layer, the paper defines
+
+$$
+\begin{aligned}
+L_{\mathrm{attn}}
+&=\frac1h\sum_{i=1}^{h}
+  \operatorname{MSE}(A_i^S,A_i^T),\\
+L_{\mathrm{hidn}}
+&=\operatorname{MSE}(H^S W_h,H^T).
+\end{aligned}
+$$
+
+Here $H^S$ has shape $L\times312$, $H^T$ has shape $L\times768$, and
+$W_h$ maps 312 coordinates to 768. Embeddings use an analogous projection.
+The teacher is fixed; gradients update the student and its projection.
+The classification output can be trained against the teacher's class
+distribution using soft cross-entropy. These targets constrain different
+tensors; matching one does not establish that the others match.
+
+<a id="tinybert-attention-scores"></a>
+### Attention scores are not attention probabilities
+
+TinyBERT's $A=QK^\top/\sqrt{d_k}$ is the matrix before softmax.
+Adding a constant to every entry in one row leaves its attention probabilities
+unchanged, but changes the score-matching loss. For example, take two rows
+$(0,1)$ and $(2,0)$, then add 5 to the first and subtract 3 from the second.
+The resulting probabilities are identical. The mean squared score difference is
+
+$$
+L_{\mathrm{attn}}=\frac{25+25+9+9}{4}=17.
+$$
+
+Its gradient with respect to the four student scores is
+$(2.5,2.5,-1.5,-1.5)$, so this loss still changes the student.
+It imposes a stronger condition than matching softmax probabilities.
+The paper reports better convergence for its score-based target; the arithmetic
+above explains the difference between objectives, not a universal advantage.
+
+The pinned training loop replaces scores at or below $-100$ with zero before
+MSE, removing large masking sentinels. This threshold does not inspect a
+separate validity mask: an unmasked score below it would also be zeroed.
+The loop then averages over the resulting
+tensor, including those zeroed cells. Padding can therefore change the
+denominator. In the same example, padding both matrices to $4\times4$ and
+zeroing masked cells reduces the global mean from 17 to 4.25; the mean over
+the original valid pairs remains 17.
+
+```python
+tinybert_teacher_scores = torch.tensor(
+    [[[[0., 1.], [2., 0.]]]], dtype=torch.float64, requires_grad=True)
+tinybert_row_offsets = torch.tensor([[[[5.], [-3.]]]], dtype=torch.float64)
+tinybert_student_scores = (
+    tinybert_teacher_scores.detach() + tinybert_row_offsets).requires_grad_()
+tinybert_score_loss = F.mse_loss(
+    tinybert_student_scores, tinybert_teacher_scores.detach())
+tinybert_score_loss.backward()
+tinybert_same_probabilities = torch.allclose(
+    tinybert_student_scores.softmax(-1),
+    tinybert_teacher_scores.detach().softmax(-1))
+tinybert_padded_s = F.pad(
+    tinybert_student_scores.detach(), (0, 2, 0, 2), value=-10000.)
+tinybert_padded_t = F.pad(
+    tinybert_teacher_scores.detach(), (0, 2, 0, 2), value=-10000.)
+tinybert_padded_s = torch.where(
+    tinybert_padded_s <= -100, 0., tinybert_padded_s)
+tinybert_padded_t = torch.where(
+    tinybert_padded_t <= -100, 0., tinybert_padded_t)
+tinybert_padded_loss = F.mse_loss(tinybert_padded_s, tinybert_padded_t)
+assert tinybert_teacher_scores.grad is None
+print("same probabilities:", tinybert_same_probabilities)
+print("score MSE:", tinybert_score_loss.item())
+print("score gradient:", tinybert_student_scores.grad.tolist())
+print("padded global MSE:", tinybert_padded_loss.item())
+```
+
+This is a tensor calculation, not a TinyBERT training run. It uses one head
+and two valid tokens, without a tokenizer or dataset.
+The actual [loss branch](https://github.com/huawei-noah/Pretrained-Language-Model/blob/0598f02d7fc4eaa7b4cbc1e9d7ab18bc875c24f9/TinyBERT/task_distill.py#L935-L976)
+also fixes the layer correspondence. Its zero-based attention indices are
+$2,5,8,11$, whereas the representation list includes embeddings and selects
+$0,3,6,9,12$. Confusing these lists introduces an off-by-one layer match.
+
+The [student class](https://github.com/huawei-noah/Pretrained-Language-Model/blob/0598f02d7fc4eaa7b4cbc1e9d7ab18bc875c24f9/TinyBERT/transformer/modeling.py#L1119-L1142)
+shares one `fit_dense` projection across its embedding and layer outputs;
+`nn.Linear` includes a bias. Do not infer one independently trained projection
+per layer from the paper's compact notation.
+The classification helper also uses `.mean()` over classes as well as
+examples. For $C$ classes this adds a factor $1/C$ relative to the usual
+class-summed soft cross-entropy; a new implementation must choose its
+normalization explicitly.
+
+<a id="tinybert-training-stages"></a>
+### General and task-specific distillation
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-tinybert-2026-11-05/tinybert-overview.png|TinyBERT: general distillation followed by task-specific distillation on augmented data]]
+
+*Xiaoqi Jiao et al., [TinyBERT, Figure 1](https://aclanthology.org/2020.findings-emnlp.372.pdf#page=2).
+[Complete original PNG](https://github.com/huawei-noah/Pretrained-Language-Model/blob/0598f02d7fc4eaa7b4cbc1e9d7ab18bc875c24f9/TinyBERT/tinybert_overview.png);
+no redraw, crop or translation. CC BY 4.0 for the published ACL illustration.*
+
+The first stage uses a pretrained, not task-fine-tuned, BERT teacher on a
+general text corpus. It trains intermediate representations and embeddings,
+without prediction-layer distillation. The resulting student initializes the
+task-specific stage. Here the teacher is a BERT already fine-tuned for that
+task. The task data are augmented using BERT word predictions for single-piece
+words and GloVe neighbors for multi-piece words.
+
+The official recipe first fits intermediate tensors, then runs prediction
+distillation with `--pred_distill`. The paper's combined notation does not mean
+every loss is active in every training phase.
+[The original README](https://github.com/huawei-noah/Pretrained-Language-Model/blob/0598f02d7fc4eaa7b4cbc1e9d7ab18bc875c24f9/TinyBERT/README.md)
+documents that sequence. These encoder experiments use sentence-level tasks;
+they do not establish transfer of autoregressive reasoning or identical
+internal algorithms. A reduced student still needs evaluation on the intended
+tasks, with the tokenizer, layer mapping and loss reductions recorded.
+
 ## Дистилляция на собственных генерациях ученика
 
 <a id="distillation-vs-rft"></a>
@@ -737,6 +1106,8 @@ assert feature_teacher.grad is None
 использовать. В частности, токен с ошибкой не объявляется правильной меткой:
 целью служит распределение учителя, а не сам токен, выбранный учеником.
 [Agarwal et al., §3.1, алгоритм 1](https://arxiv.org/abs/2306.13649v3).
+
+<a id="gkd-prefix-mixture"></a>
 
 ### Две настройки GKD: последовательности и расхождение
 
@@ -779,6 +1150,8 @@ $$
 коэффициент смешивания жёстких меток и KL: на обоих типах последовательностей
 GKD может использовать одну и ту же мягкую потерю.
 
+<a id="gkd-forward-reverse-kl"></a>
+
 Второй независимый выбор — расхождение $D$. При прямом KL
 $D_{KL}(\pi_T\|\pi_\theta)$ существенны токены, которым учитель отводит
 заметную вероятность. Если ученик почти исключает один из таких токенов,
@@ -787,7 +1160,7 @@ $D_{KL}(\pi_\theta\|\pi_T)$ большее внимание получают о�
 размещает вероятность. Это может помочь небольшой модели сосредоточиться
 на части допустимых продолжений, но также уменьшить разнообразие.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-2026-10-25/gkd-forward-reverse-kl.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-2026-10-25/gkd-forward-reverse-kl.svg|GKD: forward and reverse KL for a capacity-limited Gaussian approximation]]
 
 *На каждой панели чёрная линия — исходное распределение $P$, красный штриховой
 график — приближение одним гауссовым распределением по прямому KL, зелёный
@@ -825,6 +1198,8 @@ print("forward KL, reverse KL:", div_results)
 обратный — 0.903919 и 0.623486 соответственно. Поэтому два направления
 по-разному ранжируют одни и те же допустимые приближения.
 
+<a id="gkd-generalized-jsd"></a>
+
 GKD исследует и обобщённую дивергенцию Йенсена — Шеннона. Пусть
 $M=\beta P+(1-\beta)Q$, где $0<\beta<1$. Тогда
 
@@ -841,6 +1216,8 @@ $D_{JS,\beta}/(1-\beta)$ — к обратному. Поэтому важны н
 потерь, но и их масштаб: ненормированная JS сама стремится к нулю на обоих
 концах. Ни одна из дивергенций не является обязательным признаком
 *on-policy*: это название относится к источнику последовательностей.
+
+<a id="gkd-tiny-llama-step"></a>
 
 ### Один шаг на генерациях ученика
 
@@ -910,9 +1287,11 @@ assert all(p.grad is None and torch.equal(p, gkd_teacher_before[name])
 учителя остались неизменны. Для следующей on-policy итерации ответы нужно сгенерировать заново уже
 обновлённым учеником. Падение этой учебной потери не измеряет качество ответов.
 
+<a id="gkd-experiment-scope"></a>
+
 ### Что показывает эксперимент GKD
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-review-2026-09/gkd-task-comparison.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-review-2026-09/gkd-task-comparison.png|GKD: task-specific distillation comparisons across T5 student sizes]]
 
 *Сравнение SFT, дистилляции распределений на фиксированных данных, дистилляции
 последовательностей и GKD на генерациях ученика. Каждая панель — отдельная
@@ -941,6 +1320,8 @@ GSM8K **с калькулятором**, а не универсальная сп
 В самой работе оптимальный выбор дивергенции зависит от задачи и способа
 генерации при оценивании.
 
+<a id="gkd-rft-rlvr"></a>
+
 ### Где заканчивается online RL и начинается новый датасет
 
 Одни и те же ответы можно использовать по-разному. Допустим, ученик породил
@@ -964,6 +1345,8 @@ GSM8K **с калькулятором**, а не универсальная сп
 его не следует смешивать с градиентом GKD или PPO только потому, что в нём тоже
 есть свежая генерация.
 
+<a id="gkd-joint-rl"></a>
+
 GKD можно применять и одновременно с RL, как в §3.2 исходной статьи.
 На тех же генерациях ученика получают скалярную награду для RL и распределения
 учителя для дистилляции. Если $\mathcal L_{RL}$ уже записана со знаком для
@@ -981,6 +1364,8 @@ $$
 $\lambda$ — источник последовательностей, $\beta$ — выбранную JS-дивергенцию;
 это три разные настройки.
 [GKD, §3.2](https://arxiv.org/html/2306.13649v3#S3.SS2).
+
+<a id="gkd-trl-implementation"></a>
 
 ### Практическая реализация
 
@@ -1037,6 +1422,8 @@ $\lambda$ — источник последовательностей, $\beta$ �
 SFT, затем перейти к дистилляции на его собственных генерациях или к RLVR на
 задачах, где он уже получает ненулевую награду.
 
+<a id="distillation-internal-algorithms"></a>
+
 ## Дистилляция не копирует внутренний алгоритм
 
 Функция потерь ограничивает только наблюдаемое поведение на встретившихся
@@ -1063,6 +1450,8 @@ SFT, затем перейти к дистилляции на его собст�
 и длине. Если после проверки исчезла большая часть геометрии или выросла доля
 коротких алгебраических примеров, ученик увидит другое распределение задач.
 Одного числа «оставлено 90% данных» недостаточно, чтобы оценить этот сдвиг.
+
+<a id="distillation-training-checks"></a>
 
 ### Обучение
 
@@ -1105,6 +1494,8 @@ SFT, затем перейти к дистилляции на его собст�
 не только фактические ошибки, но и перенос необязательных привычек учителя:
 постоянная самопроверка, смешение языков или длинное рассуждение там, где оно
 не помогает.
+
+<a id="openr1-reproducible-recipe"></a>
 
 ## Воспроизводимая схема Open-R1
 
@@ -1170,6 +1561,10 @@ assert teacher.grad is None
   [Distilling the Knowledge in a Neural Network](https://arxiv.org/abs/1503.02531).
 
 ### Первоисточники
+
+- Jiao et al., 2020 — [[05 Источники/Papers/TinyBERT|TinyBERT]]: сопоставление
+  слоёв encoder, attention scores и скрытых состояний; оригинальные рисунки
+  и закреплённая реализация разобраны выше.
 
 - Hinton et al., 2015 — [Distilling the Knowledge in a Neural Network](https://arxiv.org/abs/1503.02531).
 - Kim и Rush, 2016 — [Sequence-Level Knowledge Distillation](https://aclanthology.org/D16-1139/):

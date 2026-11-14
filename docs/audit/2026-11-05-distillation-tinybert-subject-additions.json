@@ -1,0 +1,457 @@
+{
+  "schema_version": 1,
+  "kind": "distillation-tinybert-source-and-subject-additions",
+  "review_date": "2026-11-05",
+  "files": [
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md",
+      "before_sha256": "94becb658274ac9476ba8bb06c904b25ec6a71d5fe60e3453cb2884f186ad7b4",
+      "after_sha256": "60aef7df562274a7ea5af19fff925f1a942918ed9aeb4fc08f48358f06ccefda",
+      "changes": [
+        {
+          "old": "",
+          "new": "\n- Jiao et al., 2020 — [[05 Источники/Papers/TinyBERT|TinyBERT]]: сопоставление\n  слоёв encoder, attention scores и скрытых состояний; оригинальные рисунки\n  и закреплённая реализация разобраны выше.\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-review-2026-09/gkd-task-comparison.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-review-2026-09/gkd-task-comparison.png|GKD: task-specific distillation comparisons across T5 student sizes]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-2026-10-25/gkd-forward-reverse-kl.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-2026-10-25/gkd-forward-reverse-kl.svg|GKD: forward and reverse KL for a capacity-limited Gaussian approximation]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-review-2026-09/token-distributions.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-review-2026-09/token-distributions.png|Logit distillation: teacher and student distributions with a frozen teacher]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p128-s1-data-funnel.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m04-p128-s1-data-funnel.png|Berkeley: s1K selection through quality, difficulty, and diversity filters]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-review-2026-09/sequence-distillation.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-review-2026-09/sequence-distillation.png|Sequence distillation: teacher responses become student training data]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-2026-10-25/kim-rush-three-approaches.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-2026-10-25/kim-rush-three-approaches.png|Kim and Rush: word-level, sequence-level, and interpolated distillation]]"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"openr1-reproducible-recipe\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"distillation-training-checks\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"distillation-internal-algorithms\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"gkd-trl-implementation\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"gkd-joint-rl\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"gkd-rft-rlvr\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"gkd-experiment-scope\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"gkd-tiny-llama-step\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"gkd-generalized-jsd\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"gkd-forward-reverse-kl\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"gkd-prefix-mixture\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"distillation-vocabulary-memory\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"distillation-kd-code\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"distillation-high-temperature\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"distillation-hard-soft-mixture\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"distillation-temperature-gradient\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"distillation-logits\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"s1-selection-funnel\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"r1-distill-students-data\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"openr1-reasoning-data\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"distillation-sequence-code\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"distillation-sequence-loss\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"distillation-generation-records\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"sequence-distribution-vs-mode\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"distillation-sequence-example\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"distillation-targets\"></a>\n\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"tinybert-transformer-distillation\"></a>\n## Transformer-layer distillation: TinyBERT\n\nAn encoder can give the correct class label while representing the sentence\ndifferently from its teacher. TinyBERT supervises intermediate computations as\nwell as the final prediction. Both networks read the same tokenized input;\nthe student fits selected embedding, hidden-state and attention tensors.\nThis is encoder compression, not SFT on generated chains of reasoning.\nThe objectives are described in\n[Jiao et al., §3.1–3.2](https://aclanthology.org/2020.findings-emnlp.372.pdf#page=3)\nand the [official implementation](https://github.com/huawei-noah/Pretrained-Language-Model/tree/0598f02d7fc4eaa7b4cbc1e9d7ab18bc875c24f9/TinyBERT).\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-tinybert-2026-11-05/tinybert-layer-detail.png|TinyBERT: attention-score and hidden-state matching between teacher and student layers]]\n\n*Xiaoqi Jiao et al., [TinyBERT, Figure 2](https://aclanthology.org/2020.findings-emnlp.372.pdf#page=3).\nComplete author-supplied [layer-detail PNG](https://arxiv.org/html/1909.10351v5/transformer_layer_detail.png),\nunchanged. The upper comparison fits attention scores; the lower one fits\nhidden states after projecting the student's width.\nThe published ACL illustration is covered by\n[CC BY 4.0](https://aclanthology.org/faq/copyright/).*\n\n<a id=\"tinybert-layer-mapping\"></a>\n### Which layers and tensors are compared\n\nFor a four-layer student and a twelve-layer teacher, the paper uses\n$g(m)=3m$: student layers 1, 2, 3 and 4 match teacher layers 3, 6, 9 and 12.\nThe embedding output is a separate match at index 0. The four-layer model has\nhidden width 312 rather than 768, but both networks have twelve attention\nheads. Their per-head score matrices therefore have the same $L\\times L$\nshape for an input of length $L$, even though their head dimensions differ.\nThese sizes and the layer mapping are specified in\n[the model settings, §4.2](https://aclanthology.org/2020.findings-emnlp.372.pdf#page=5).\n\nFor a matched layer, the paper defines\n\n$$\n\\begin{aligned}\nL_{\\mathrm{attn}}\n&=\\frac1h\\sum_{i=1}^{h}\n  \\operatorname{MSE}(A_i^S,A_i^T),\\\\\nL_{\\mathrm{hidn}}\n&=\\operatorname{MSE}(H^S W_h,H^T).\n\\end{aligned}\n$$\n\nHere $H^S$ has shape $L\\times312$, $H^T$ has shape $L\\times768$, and\n$W_h$ maps 312 coordinates to 768. Embeddings use an analogous projection.\nThe teacher is fixed; gradients update the student and its projection.\nThe classification output can be trained against the teacher's class\ndistribution using soft cross-entropy. These targets constrain different\ntensors; matching one does not establish that the others match.\n\n<a id=\"tinybert-attention-scores\"></a>\n### Attention scores are not attention probabilities\n\nTinyBERT's $A=QK^\\top/\\sqrt{d_k}$ is the matrix before softmax.\nAdding a constant to every entry in one row leaves its attention probabilities\nunchanged, but changes the score-matching loss. For example, take two rows\n$(0,1)$ and $(2,0)$, then add 5 to the first and subtract 3 from the second.\nThe resulting probabilities are identical. The mean squared score difference is\n\n$$\nL_{\\mathrm{attn}}=\\frac{25+25+9+9}{4}=17.\n$$\n\nIts gradient with respect to the four student scores is\n$(2.5,2.5,-1.5,-1.5)$, so this loss still changes the student.\nIt imposes a stronger condition than matching softmax probabilities.\nThe paper reports better convergence for its score-based target; the arithmetic\nabove explains the difference between objectives, not a universal advantage.\n\nThe pinned training loop replaces scores at or below $-100$ with zero before\nMSE, removing large masking sentinels. This threshold does not inspect a\nseparate validity mask: an unmasked score below it would also be zeroed.\nThe loop then averages over the resulting\ntensor, including those zeroed cells. Padding can therefore change the\ndenominator. In the same example, padding both matrices to $4\\times4$ and\nzeroing masked cells reduces the global mean from 17 to 4.25; the mean over\nthe original valid pairs remains 17.\n\n```python\ntinybert_teacher_scores = torch.tensor(\n    [[[[0., 1.], [2., 0.]]]], dtype=torch.float64, requires_grad=True)\ntinybert_row_offsets = torch.tensor([[[[5.], [-3.]]]], dtype=torch.float64)\ntinybert_student_scores = (\n    tinybert_teacher_scores.detach() + tinybert_row_offsets).requires_grad_()\ntinybert_score_loss = F.mse_loss(\n    tinybert_student_scores, tinybert_teacher_scores.detach())\ntinybert_score_loss.backward()\ntinybert_same_probabilities = torch.allclose(\n    tinybert_student_scores.softmax(-1),\n    tinybert_teacher_scores.detach().softmax(-1))\ntinybert_padded_s = F.pad(\n    tinybert_student_scores.detach(), (0, 2, 0, 2), value=-10000.)\ntinybert_padded_t = F.pad(\n    tinybert_teacher_scores.detach(), (0, 2, 0, 2), value=-10000.)\ntinybert_padded_s = torch.where(\n    tinybert_padded_s <= -100, 0., tinybert_padded_s)\ntinybert_padded_t = torch.where(\n    tinybert_padded_t <= -100, 0., tinybert_padded_t)\ntinybert_padded_loss = F.mse_loss(tinybert_padded_s, tinybert_padded_t)\nassert tinybert_teacher_scores.grad is None\nprint(\"same probabilities:\", tinybert_same_probabilities)\nprint(\"score MSE:\", tinybert_score_loss.item())\nprint(\"score gradient:\", tinybert_student_scores.grad.tolist())\nprint(\"padded global MSE:\", tinybert_padded_loss.item())\n```\n\nThis is a tensor calculation, not a TinyBERT training run. It uses one head\nand two valid tokens, without a tokenizer or dataset.\nThe actual [loss branch](https://github.com/huawei-noah/Pretrained-Language-Model/blob/0598f02d7fc4eaa7b4cbc1e9d7ab18bc875c24f9/TinyBERT/task_distill.py#L935-L976)\nalso fixes the layer correspondence. Its zero-based attention indices are\n$2,5,8,11$, whereas the representation list includes embeddings and selects\n$0,3,6,9,12$. Confusing these lists introduces an off-by-one layer match.\n\nThe [student class](https://github.com/huawei-noah/Pretrained-Language-Model/blob/0598f02d7fc4eaa7b4cbc1e9d7ab18bc875c24f9/TinyBERT/transformer/modeling.py#L1119-L1142)\nshares one `fit_dense` projection across its embedding and layer outputs;\n`nn.Linear` includes a bias. Do not infer one independently trained projection\nper layer from the paper's compact notation.\nThe classification helper also uses `.mean()` over classes as well as\nexamples. For $C$ classes this adds a factor $1/C$ relative to the usual\nclass-summed soft cross-entropy; a new implementation must choose its\nnormalization explicitly.\n\n<a id=\"tinybert-training-stages\"></a>\n### General and task-specific distillation\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distillation-tinybert-2026-11-05/tinybert-overview.png|TinyBERT: general distillation followed by task-specific distillation on augmented data]]\n\n*Xiaoqi Jiao et al., [TinyBERT, Figure 1](https://aclanthology.org/2020.findings-emnlp.372.pdf#page=2).\n[Complete original PNG](https://github.com/huawei-noah/Pretrained-Language-Model/blob/0598f02d7fc4eaa7b4cbc1e9d7ab18bc875c24f9/TinyBERT/tinybert_overview.png);\nno redraw, crop or translation. CC BY 4.0 for the published ACL illustration.*\n\nThe first stage uses a pretrained, not task-fine-tuned, BERT teacher on a\ngeneral text corpus. It trains intermediate representations and embeddings,\nwithout prediction-layer distillation. The resulting student initializes the\ntask-specific stage. Here the teacher is a BERT already fine-tuned for that\ntask. The task data are augmented using BERT word predictions for single-piece\nwords and GloVe neighbors for multi-piece words.\n\nThe official recipe first fits intermediate tensors, then runs prediction\ndistillation with `--pred_distill`. The paper's combined notation does not mean\nevery loss is active in every training phase.\n[The original README](https://github.com/huawei-noah/Pretrained-Language-Model/blob/0598f02d7fc4eaa7b4cbc1e9d7ab18bc875c24f9/TinyBERT/README.md)\ndocuments that sequence. These encoder experiments use sentence-level tasks;\nthey do not establish transfer of autoregressive reasoning or identical\ninternal algorithms. A reduced student still needs evaluation on the intended\ntasks, with the tokenizer, layer mapping and loss reductions recorded.\n\n"
+        },
+        {
+          "old": "",
+          "new": "  - https://aclanthology.org/2020.findings-emnlp.372/\n"
+        },
+        {
+          "old": "last_updated: 2026-10-29\nlast_verified: 2026-10-25",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05"
+        },
+        {
+          "old": "",
+          "new": "source_language: mixed\n"
+        },
+        {
+          "old": "",
+          "new": "reference_terms:\n  - anchor: distillation-targets\n    label: \"Дистилляция: цели и источник префиксов\"\n    label_en: \"Distillation: targets and prefix sources\"\n  - anchor: distillation-sequence-example\n    label: \"Отбор решений учителя: сквозной пример\"\n    label_en: \"Selecting teacher solutions: a worked example\"\n  - anchor: sequence-distillation\n    label: \"Дистилляция последовательностей как SFT\"\n    label_en: \"Sequence distillation as SFT\"\n  - anchor: sequence-distribution-vs-mode\n    label: \"Распределение целых ответов, выборка и beam search\"\n    label_en: \"Full-sequence distributions, sampling, and beam search\"\n  - anchor: distillation-generation-records\n    label: \"Происхождение генераций и демонстраций SFT\"\n    label_en: \"Provenance of generations and SFT demonstrations\"\n  - anchor: distillation-sequence-loss\n    label: \"Сумма токеновых потерь, перплексия и маски\"\n    label_en: \"Token losses, perplexity, and response masks\"\n  - anchor: distillation-sequence-code\n    label: \"Причинный сдвиг и нормировка последовательностной потери\"\n    label_en: \"Causal shift and sequence-loss reduction\"\n  - anchor: openr1-reasoning-data\n    label: \"Open-R1: создание и фильтрация данных рассуждений\"\n    label_en: \"Open-R1: reasoning-data generation and filtering\"\n  - anchor: r1-distill-students-data\n    label: \"R1-Distill: данные, исходные ученики и параметры SFT\"\n    label_en: \"R1-Distill: data, initial students, and SFT settings\"\n  - anchor: s1-selection-funnel\n    label: \"s1K: качество, трудность, разнообразие и деконтаминация\"\n    label_en: \"s1K: quality, difficulty, diversity, and decontamination\"\n  - anchor: selection-bias\n    label: \"Смещение распределения задач после отбора\"\n    label_en: \"Task-distribution bias after selection\"\n  - anchor: distillation-logits\n    label: \"Дистилляция логитов и мягкие цели\"\n    label_en: \"Logit distillation and soft targets\"\n  - anchor: distillation-temperature-gradient\n    label: \"Температура, множитель τ² и градиент KD\"\n    label_en: \"Temperature, the τ² factor, and the KD gradient\"\n  - anchor: distillation-hard-soft-mixture\n    label: \"Смешивание жёстких и мягких целей\"\n    label_en: \"Mixing hard and soft targets\"\n  - anchor: distillation-high-temperature\n    label: \"Большая температура и центрированные логиты\"\n    label_en: \"High temperature and centered logits\"\n  - anchor: distillation-kd-code\n    label: \"Реализация KL: detach, маски и единица усреднения\"\n    label_en: \"KL implementation: detach, masks, and reduction units\"\n  - anchor: distillation-vocabulary-memory\n    label: \"Общий словарь, разные токенизаторы и память логитов\"\n    label_en: \"Shared vocabularies, tokenizer mismatch, and logit memory\"\n  - anchor: feature-distillation\n    label: \"Дистилляция скрытых представлений и обучаемая проекция\"\n    label_en: \"Hidden-state distillation and learned projections\"\n  - anchor: tinybert-transformer-distillation\n    label: \"TinyBERT: дистилляция слоёв Transformer\"\n    label_en: \"TinyBERT: Transformer-layer distillation\"\n  - anchor: tinybert-layer-mapping\n    label: \"TinyBERT: сопоставление слоёв и размеров тензоров\"\n    label_en: \"TinyBERT: layer correspondence and tensor shapes\"\n  - anchor: tinybert-attention-scores\n    label: \"TinyBERT: attention scores, softmax и нормировка MSE\"\n    label_en: \"TinyBERT: attention scores, softmax, and MSE reduction\"\n  - anchor: tinybert-training-stages\n    label: \"TinyBERT: общая и task-specific дистилляция\"\n    label_en: \"TinyBERT: general and task-specific distillation\"\n  - anchor: distillation-vs-rft\n    label: \"GKD: обучение на собственных ошибках ученика\"\n    label_en: \"GKD: learning from the student's own mistakes\"\n  - anchor: gkd-prefix-mixture\n    label: \"GKD: источник последовательностей и stop-gradient\"\n    label_en: \"GKD: sequence sources and stop-gradient\"\n  - anchor: gkd-forward-reverse-kl\n    label: \"Прямой и обратный KL при ограниченной ёмкости ученика\"\n    label_en: \"Forward and reverse KL under limited student capacity\"\n  - anchor: gkd-generalized-jsd\n    label: \"Обобщённая JS-дивергенция и предельные значения β\"\n    label_en: \"Generalized JSD and limiting beta values\"\n  - anchor: gkd-tiny-llama-step\n    label: \"Исполняемый шаг GKD на генерациях маленького Llama\"\n    label_en: \"An executable GKD step on tiny Llama generations\"\n  - anchor: gkd-experiment-scope\n    label: \"Эксперименты GKD: модели, задачи и границы выводов\"\n    label_en: \"GKD experiments: models, tasks, and limits\"\n  - anchor: gkd-rft-rlvr\n    label: \"Различия RLVR, RFT и GKD на одних ответах\"\n    label_en: \"RLVR, RFT, and GKD on the same responses\"\n  - anchor: gkd-joint-rl\n    label: \"Совместное обучение RL и on-policy GKD\"\n    label_en: \"Joint RL and on-policy GKD\"\n  - anchor: gkd-trl-implementation\n    label: \"TRL: параметры GKDTrainer и DistillationTrainer\"\n    label_en: \"TRL: GKDTrainer and DistillationTrainer settings\"\n  - anchor: reasoning-recipes\n    label: \"Выбор способа дистилляции по доступу к учителю\"\n    label_en: \"Choosing distillation by teacher access\"\n  - anchor: distillation-internal-algorithms\n    label: \"Почему дистилляция не копирует внутренний алгоритм\"\n    label_en: \"Why distillation does not copy internal algorithms\"\n  - anchor: distillation-evaluation\n    label: \"Разбиение данных и аудит фильтров дистилляции\"\n    label_en: \"Data splits and distillation-filter audits\"\n  - anchor: distillation-training-checks\n    label: \"Проверки обучения: EOS, усечение, packing и свежесть данных\"\n    label_en: \"Training checks: EOS, truncation, packing, and fresh data\"\n  - anchor: evaluation\n    label: \"Оценка качества и стоимости дистилляции\"\n    label_en: \"Evaluating distillation quality and cost\"\n  - anchor: openr1-reproducible-recipe\n    label: \"Закреплённый рецепт Open-R1 и границы воспроизводимости\"\n    label_en: \"A pinned Open-R1 recipe and reproduction limits\"\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "865be33967779c6cb677aead0675d3217545213d9d00cdaf634629ec0bb5d0ce",
+      "after_sha256": "5d2808867c3e07b1cd277a604a6c35d02d5f94f3115fd572d0027da325bcd345",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation|Дистилляция моделей рассуждения]]",
+          "new": "- [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation|Дистилляция моделей рассуждения]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-targets|Дистилляция: цели и источник префиксов]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-sequence-example|Отбор решений учителя: сквозной пример]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#sequence-distillation|Дистилляция последовательностей как SFT]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#sequence-distribution-vs-mode|Распределение целых ответов, выборка и beam search]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-generation-records|Происхождение генераций и демонстраций SFT]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-sequence-loss|Сумма токеновых потерь, перплексия и маски]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-sequence-code|Причинный сдвиг и нормировка последовательностной потери]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#openr1-reasoning-data|Open-R1: создание и фильтрация данных рассуждений]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#r1-distill-students-data|R1-Distill: данные, исходные ученики и параметры SFT]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#s1-selection-funnel|s1K: качество, трудность, разнообразие и деконтаминация]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#selection-bias|Смещение распределения задач после отбора]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-logits|Дистилляция логитов и мягкие цели]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-temperature-gradient|Температура, множитель τ² и градиент KD]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-hard-soft-mixture|Смешивание жёстких и мягких целей]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-high-temperature|Большая температура и центрированные логиты]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-kd-code|Реализация KL: detach, маски и единица усреднения]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-vocabulary-memory|Общий словарь, разные токенизаторы и память логитов]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#feature-distillation|Дистилляция скрытых представлений и обучаемая проекция]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#tinybert-transformer-distillation|TinyBERT: дистилляция слоёв Transformer]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#tinybert-layer-mapping|TinyBERT: сопоставление слоёв и размеров тензоров]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#tinybert-attention-scores|TinyBERT: attention scores, softmax и нормировка MSE]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#tinybert-training-stages|TinyBERT: общая и task-specific дистилляция]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-vs-rft|GKD: обучение на собственных ошибках ученика]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#gkd-prefix-mixture|GKD: источник последовательностей и stop-gradient]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#gkd-forward-reverse-kl|Прямой и обратный KL при ограниченной ёмкости ученика]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#gkd-generalized-jsd|Обобщённая JS-дивергенция и предельные значения β]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#gkd-tiny-llama-step|Исполняемый шаг GKD на генерациях маленького Llama]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#gkd-experiment-scope|Эксперименты GKD: модели, задачи и границы выводов]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#gkd-rft-rlvr|Различия RLVR, RFT и GKD на одних ответах]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#gkd-joint-rl|Совместное обучение RL и on-policy GKD]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#gkd-trl-implementation|TRL: параметры GKDTrainer и DistillationTrainer]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#reasoning-recipes|Выбор способа дистилляции по доступу к учителю]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-internal-algorithms|Почему дистилляция не копирует внутренний алгоритм]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-evaluation|Разбиение данных и аудит фильтров дистилляции]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-training-checks|Проверки обучения: EOS, усечение, packing и свежесть данных]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#evaluation|Оценка качества и стоимости дистилляции]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#openr1-reproducible-recipe|Закреплённый рецепт Open-R1 и границы воспроизводимости]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "7b56e98e74174c8af90ea33aa49ca31071f8563c932e3baa29563ab7bccd751f",
+      "after_sha256": "e7c3f3ea5ab229cd47d9297a60f80f76056df04c634eed80d8fd87122d8c4355",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation|Reasoning distillation]]",
+          "new": "- [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation|Reasoning distillation]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-targets|Distillation: targets and prefix sources]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-sequence-example|Selecting teacher solutions: a worked example]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#sequence-distillation|Sequence distillation as SFT]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#sequence-distribution-vs-mode|Full-sequence distributions, sampling, and beam search]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-generation-records|Provenance of generations and SFT demonstrations]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-sequence-loss|Token losses, perplexity, and response masks]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-sequence-code|Causal shift and sequence-loss reduction]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#openr1-reasoning-data|Open-R1: reasoning-data generation and filtering]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#r1-distill-students-data|R1-Distill: data, initial students, and SFT settings]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#s1-selection-funnel|s1K: quality, difficulty, diversity, and decontamination]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#selection-bias|Task-distribution bias after selection]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-logits|Logit distillation and soft targets]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-temperature-gradient|Temperature, the τ² factor, and the KD gradient]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-hard-soft-mixture|Mixing hard and soft targets]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-high-temperature|High temperature and centered logits]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-kd-code|KL implementation: detach, masks, and reduction units]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-vocabulary-memory|Shared vocabularies, tokenizer mismatch, and logit memory]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#feature-distillation|Hidden-state distillation and learned projections]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#tinybert-transformer-distillation|TinyBERT: Transformer-layer distillation]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#tinybert-layer-mapping|TinyBERT: layer correspondence and tensor shapes]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#tinybert-attention-scores|TinyBERT: attention scores, softmax, and MSE reduction]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#tinybert-training-stages|TinyBERT: general and task-specific distillation]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-vs-rft|GKD: learning from the student's own mistakes]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#gkd-prefix-mixture|GKD: sequence sources and stop-gradient]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#gkd-forward-reverse-kl|Forward and reverse KL under limited student capacity]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#gkd-generalized-jsd|Generalized JSD and limiting beta values]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#gkd-tiny-llama-step|An executable GKD step on tiny Llama generations]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#gkd-experiment-scope|GKD experiments: models, tasks, and limits]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#gkd-rft-rlvr|RLVR, RFT, and GKD on the same responses]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#gkd-joint-rl|Joint RL and on-policy GKD]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#gkd-trl-implementation|TRL: GKDTrainer and DistillationTrainer settings]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#reasoning-recipes|Choosing distillation by teacher access]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-internal-algorithms|Why distillation does not copy internal algorithms]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-evaluation|Data splits and distillation-filter audits]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#distillation-training-checks|Training checks: EOS, truncation, packing, and fresh data]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#evaluation|Evaluating distillation quality and cost]]\n  - [[00 Учебник/12 Post-training и Alignment/08 Reasoning distillation#openr1-reproducible-recipe|A pinned Open-R1 recipe and reproduction limits]]"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tools/check_distillation_examples.py",
+      "before_sha256": "4055fe038310e140523f19bad6cec0ed19a5a380e5e7d8f3f217fded6e07414c",
+      "after_sha256": "e7bf908449184f343552046cc41da3e82b9e2b230172d582097ca443a2a94234",
+      "changes": [
+        {
+          "old": "        \"upstream_jsd_beta_cases\": 5, \"example_stdout\": stdout.getvalue().splitlines(),\n",
+          "new": "        \"upstream_jsd_beta_cases\": 5, \"tinybert_layer_pairs\": 4,\n        \"tinybert_source_loss_cases\": 2, \"tinybert_class_mean_cases\": 3,\n        \"example_stdout\": stdout.getvalue().splitlines(),\n"
+        },
+        {
+          "old": "",
+          "new": "    # TinyBERT: actual chapter scores, then the pinned upstream loss branch.\n    assert ns[\"tinybert_same_probabilities\"]\n    assert ns[\"tinybert_score_loss\"].item() == 17.\n    assert ns[\"tinybert_padded_loss\"].item() == 4.25\n    assert ns[\"tinybert_teacher_scores\"].grad is None\n    torch.testing.assert_close(ns[\"tinybert_student_scores\"].grad,\n        torch.tensor([[[[2.5, 2.5], [-1.5, -1.5]]]], dtype=torch.float64))\n    tinybert_source = ROOT / \"publishing/fixtures/tinybert-0598f02d/task_distill.py\"\n    tinybert_bytes = tinybert_source.read_bytes()\n    assert hashlib.sha256(tinybert_bytes).hexdigest() == \"21c7b70d270cefb50ec05f116554f7af6df3df516d344414c5caafd3142618a3\"\n    tinybert_tree = ast.parse(tinybert_bytes)\n    branch = next(node for node in ast.walk(tinybert_tree)\n        if isinstance(node, ast.If) and isinstance(node.test, ast.UnaryOp)\n        and isinstance(node.test.op, ast.Not)\n        and isinstance(node.test.operand, ast.Attribute)\n        and node.test.operand.attr == \"pred_distill\"\n        and any(isinstance(s, ast.Assign) and any(\n            isinstance(t, ast.Name) and t.id == \"teacher_layer_num\" for t in s.targets)\n                for s in node.body))\n    teacher_atts = [ns[\"tinybert_teacher_scores\"].detach()+i for i in range(12)]\n    teacher_reps = [torch.full((1, 2, 3), float(i), dtype=torch.float64) for i in range(13)]\n    def original_tinybert_branch(padded=False):\n        student_atts = [(teacher_atts[i]+ns[\"tinybert_row_offsets\"]).requires_grad_()\n                        for i in (2, 5, 8, 11)]\n        frozen_atts = teacher_atts\n        if padded:\n            student_atts = [F.pad(a, (0, 2, 0, 2), value=-10000.) for a in student_atts]\n            frozen_atts = [F.pad(a, (0, 2, 0, 2), value=-10000.) for a in teacher_atts]\n        fixture = dict(torch=torch, device=torch.device(\"cpu\"), loss_mse=torch.nn.MSELoss(),\n            teacher_atts=frozen_atts, student_atts=student_atts,\n            teacher_reps=teacher_reps,\n            student_reps=[teacher_reps[i].clone() for i in (0, 3, 6, 9, 12)],\n            att_loss=0., rep_loss=0., tr_att_loss=0., tr_rep_loss=0.)\n        module = ast.fix_missing_locations(ast.Module(body=copy.deepcopy(branch.body), type_ignores=[]))\n        exec(compile(module, str(tinybert_source)+\":intermediate-loss-only\", \"exec\"), fixture)\n        assert fixture[\"rep_loss\"].item() == 0.\n        assert fixture[\"loss\"].item() == (17. if padded else 68.)\n        if not padded:\n            assert all(torch.equal(x, teacher_atts[i]) for x, i in\n                       zip(fixture[\"new_teacher_atts\"], (2, 5, 8, 11)))\n        gradients = torch.autograd.grad(fixture[\"loss\"], student_atts)\n        expected_gradient = torch.tensor([[[[2.5, 2.5], [-1.5, -1.5]]]], dtype=torch.float64)\n        if padded:\n            expected_gradient = F.pad(expected_gradient/4, (0, 2, 0, 2))\n        for gradient in gradients:\n            torch.testing.assert_close(gradient, expected_gradient)\n        assert all(torch.equal(x, teacher_reps[i]) for x, i in\n                   zip(fixture[\"new_teacher_reps\"], (0, 3, 6, 9, 12)))\n        return fixture\n    original_tinybert_branch()\n    original_tinybert_branch(padded=True)\n    helper = copy.deepcopy(next(node for node in ast.walk(tinybert_tree)\n        if isinstance(node, ast.FunctionDef) and node.name == \"soft_cross_entropy\"))\n    helper.decorator_list = []\n    scope = {\"torch\": torch}\n    exec(compile(ast.fix_missing_locations(ast.Module(body=[helper], type_ignores=[])),\n                 str(tinybert_source)+\":soft-cross-entropy-only\", \"exec\"), scope)\n    for classes in (2, 3, 7):\n        scores = torch.arange(float(classes), dtype=torch.float64).reshape(1, -1).requires_grad_()\n        target_scores = scores.detach().flip(-1)\n        standard = -(target_scores.softmax(-1)*scores.log_softmax(-1)).sum(-1).mean()\n        actual = scope[\"soft_cross_entropy\"](scores, target_scores)\n        torch.testing.assert_close(actual, standard/classes)\n        actual_grad, = torch.autograd.grad(actual, scores, retain_graph=True)\n        standard_grad, = torch.autograd.grad(standard, scores)\n        torch.testing.assert_close(actual_grad, standard_grad/classes)\n    model_source = ROOT / \"publishing/fixtures/tinybert-0598f02d/modeling.py\"\n    model_bytes = model_source.read_bytes()\n    assert hashlib.sha256(model_bytes).hexdigest() == \"16a7947c21bb72b51458b54953227fa4a404fbc849d8b9f6b158359456307bb2\"\n    model_tree = ast.parse(model_bytes)\n    student_class = next(n for n in model_tree.body if isinstance(n, ast.ClassDef)\n                         and n.name == \"TinyBertForSequenceClassification\")\n    projection = [n for n in ast.walk(student_class) if isinstance(n, ast.Assign)\n                  and any(isinstance(t, ast.Attribute) and t.attr == \"fit_dense\" for t in n.targets)]\n    assert len(projection) == 1\n    assert isinstance(projection[0].value, ast.Call)\n    assert projection[0].value.func.attr == \"Linear\"\n    assert not any(k.arg == \"bias\" for k in projection[0].value.keywords)\n    assert torch.nn.Linear(2, 3).bias is not None\n\n"
+        },
+        {
+          "old": "    assert len(blocks) == 8, \"execute all actual chapter fences\"",
+          "new": "    assert len(blocks) == 9, \"execute all actual chapter fences\""
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/_index.md",
+      "before_sha256": "eca40ce7038d8eb868d7895da64a06c2e237ba905cea0ce4ded51e063cbd40b1",
+      "after_sha256": "1674045258453e082ba39b18fc3bcb983d56a170db4a68efac74f3cb505c301b",
+      "changes": [
+        {
+          "old": "",
+          "new": "- [[05 Источники/Papers/TinyBERT|TinyBERT — дистилляция слоёв Transformer и исходная реализация]]\n"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "bcb39d1ad484318c9f6e608fae516bf797b1ebe033f71312a9be3d6403373afc",
+      "after_sha256": "66786ca0b4f11a8de594fcc4ad514031f27ae2aa4c6fcb5a399b8df54671413d",
+      "changes": [
+        {
+          "old": "",
+          "new": "      - source: 05 Источники/Papers/TinyBERT.md\n        route: sources/papers/tinybert\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "f08a3a4056a2d6e6e019f7c671527a7aa5c040d6e87b5cf8516547065a5a4b72",
+      "after_sha256": "8a4700ad38cae587ec22a032e042e075dec004da8b49f616644760bfdc2bd650",
+      "changes": [
+        {
+          "old": "assets:\n",
+          "new": "assets:\n  - {\"id\":\"curated-tinybert-overview-3144c0d6af96\",\"asset\":\"00 Учебник/Assets/Figures/curated/distillation-tinybert-2026-11-05/tinybert-overview.png\",\"sha256\":\"3144c0d6af96614ffded2e4097b9d0b7af2743115598fe0d580c05347a00038b\",\"dimensions_px\":[1229,320],\"source_image_url\":\"https://raw.githubusercontent.com/huawei-noah/Pretrained-Language-Model/0598f02d7fc4eaa7b4cbc1e9d7ab18bc875c24f9/TinyBERT/tinybert_overview.png\",\"commit\":\"0598f02d7fc4eaa7b4cbc1e9d7ab18bc875c24f9\",\"source_figure\":\"Figure 1\",\"title\":\"Figure 1 from TinyBERT\",\"author\":\"Xiaoqi Jiao, Yichun Yin, Lifeng Shang, Xin Jiang, Xiao Chen, Linlin Li, Fang Wang and Qun Liu\",\"source_url\":\"https://aclanthology.org/2020.findings-emnlp.372/\",\"source_asset\":\"publishing/fixtures/tinybert-0598f02d/tinybert-overview.png\",\"source_asset_sha256\":\"3144c0d6af96614ffded2e4097b9d0b7af2743115598fe0d580c05347a00038b\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence\":\"publishing/fixtures/tinybert-0598f02d/acl-copyright.html\",\"license_evidence_sha256\":\"d27a4182ffd579b137abf42dab46c7cb836610a616196395dd66b60284b2c237\",\"public_license_copy\":\"site/public/licenses/tinybert-figures-CC-BY-4.0.txt\",\"license_scope\":\"The author-created illustration as published in ACL Findings 2020 is covered by the Anthology policy for ACL materials published in 2016 or later. The Apache-2.0 notices on implementation files are not the figure-reuse basis; this is not a license claim for the entire arXiv manuscript.\",\"derivation\":\"source-raster-copy\",\"modifications\":\"None: complete original PNG copied byte-for-byte; no crop, redraw, resize, translation, relabeling or recompression.\",\"metadata_status\":\"verified\",\"rights_status\":\"source-license-verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-05\",\"used_in\":[\"00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md\"]}\n  - {\"id\":\"curated-tinybert-layer-detail-c3022bd5d1fa\",\"asset\":\"00 Учебник/Assets/Figures/curated/distillation-tinybert-2026-11-05/tinybert-layer-detail.png\",\"sha256\":\"c3022bd5d1fad3c9d79cea56c4f99e4aa8f42c5d7a44d03b7e14c6eb1e932f33\",\"dimensions_px\":[745,820],\"source_image_url\":\"https://arxiv.org/html/1909.10351v5/transformer_layer_detail.png\",\"source_figure\":\"Figure 2 layer-detail illustration\",\"title\":\"Figure 2 layer-detail illustration from TinyBERT\",\"author\":\"Xiaoqi Jiao, Yichun Yin, Lifeng Shang, Xin Jiang, Xiao Chen, Linlin Li, Fang Wang and Qun Liu\",\"source_url\":\"https://aclanthology.org/2020.findings-emnlp.372/\",\"source_asset\":\"publishing/fixtures/tinybert-0598f02d/tinybert-layer-detail.png\",\"source_asset_sha256\":\"c3022bd5d1fad3c9d79cea56c4f99e4aa8f42c5d7a44d03b7e14c6eb1e932f33\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence\":\"publishing/fixtures/tinybert-0598f02d/acl-copyright.html\",\"license_evidence_sha256\":\"d27a4182ffd579b137abf42dab46c7cb836610a616196395dd66b60284b2c237\",\"public_license_copy\":\"site/public/licenses/tinybert-figures-CC-BY-4.0.txt\",\"license_scope\":\"The author-created illustration as published in ACL Findings 2020 is covered by the Anthology policy for ACL materials published in 2016 or later. The Apache-2.0 notices on implementation files are not the figure-reuse basis; this is not a license claim for the entire arXiv manuscript.\",\"derivation\":\"source-raster-copy\",\"modifications\":\"None: complete original PNG copied byte-for-byte; no crop, redraw, resize, translation, relabeling or recompression.\",\"metadata_status\":\"verified\",\"rights_status\":\"source-license-verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-05\",\"used_in\":[\"00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md\"]}\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/Sequence-Level Knowledge Distillation.md",
+      "before_sha256": "f381c15ed469f8a6e8bcca392d648abdb20e9f0dc0340218215463b31681fea1",
+      "after_sha256": "71c023b41a403c45e7f8eb9551c3d44aa5addece8b55372830c6c425a097fdc4",
+      "changes": [
+        {
+          "old": "Рисунки статьи в учебник не переносились.",
+          "new": "Figure 1 перенесён целиком, со всеми тремя панелями и английской подписью;\nон находится в той же главе. Атрибуция, источник рендера и CC BY 4.0\nуказаны рядом с рисунком и в реестре иллюстраций."
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "status": "source-runtime-publication-verified-reader-visual-pending",
+    "chapter": {
+      "source": "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md",
+      "inputSha256": "94becb658274ac9476ba8bb06c904b25ec6a71d5fe60e3453cb2884f186ad7b4",
+      "inputLines": 1188,
+      "finalSha256": "60aef7df562274a7ea5af19fff925f1a942918ed9aeb4fc08f48358f06ccefda",
+      "finalLines": 1507,
+      "wholeRead": "Full input1-350,351-700,701-990,991-1188 read. Full final1-430,431-865,866-1195,1196-1507 read; no subsequent chapter edits."
+    },
+    "explanation": {
+      "preserved": "All preceding eight programs, fourteen display derivations, six original figures, source-unit ID, legacy anchors and complete SeqKD/KD/GKD/R1/s1/feature-distillation explanations retained. New content is English, not a translation replacement.",
+      "added": "TinyBERT explains why intermediate tensors are supervised; twelve-to-four layer correspondence; same attention-head count despite different hidden widths; learned projections; pre-softmax scores versus probabilities; row-offset counterexample; padding-dependent MSE denominator and threshold caveat; shared biased fit_dense and class-mean scaling in code; separate general/intermediate/prediction training phases.",
+      "sourceComparison": {
+        "fresh": [
+          {
+            "url": "https://arxiv.org/html/2306.13649v3#S3",
+            "sections": "GKD §3.1-3.2, Algorithm1, with frozen generated sequences, lambda/divergence choices and RL mixture."
+          },
+          {
+            "url": "https://arxiv.org/html/1412.6550v4#S2.SS2",
+            "sections": "FitNets §2.2-2.3, Equation3 and staged hint/output training; no new FitNets figure copied."
+          },
+          {
+            "url": "https://aclanthology.org/2020.findings-emnlp.372/",
+            "sections": "TinyBERT §2.1-3.2, Figures1/2, equations7-11, and model/training settings §4.2. Author arXiv v5 PDF pages2/3 rendered and inspected; selected method text read through page5 and the versioned HTML."
+          },
+          {
+            "url": "https://github.com/huawei-noah/Pretrained-Language-Model/tree/0598f02d7fc4eaa7b4cbc1e9d7ab18bc875c24f9/TinyBERT",
+            "sections": "Whole README, intermediate/prediction branches in task_distill.py and selected attention/projection code in modeling.py. Not a whole-repository review."
+          }
+        ],
+        "reused": {
+          "evidence": [
+            "docs/audit/2026-10-25-distillation.md",
+            "docs/audit/2026-10-29-training-consolidation-additions.json"
+          ],
+          "acceptedSha256": "e7ea39b04663903565f4e9796adc5718ab1f7c3a23dee13d0c768faaba3bba4c",
+          "condition": "Current input exactly matches the Oct29 after-hash. Its feature-KD insertion is freshly reviewed against FitNets; remaining source mappings are reused only for unchanged explanations. New deltas invert exactly to the1188-line input."
+        }
+      },
+      "style": "Applied no-ai-slop without compressing explanations or rewriting quotations/source captions. Reviewed the entire final chapter. No translation pass.",
+      "limits": "Selected-source comparison is not proof of full course coverage or acceptance of all153 owners."
+    },
+    "reference": {
+      "subjectsPerLocale": 37,
+      "explicitEnglishChapter": false,
+      "sourceCardRoute": "sources/papers/tinybert",
+      "sourceNativeEnglishCards": 17,
+      "kimRushNoteCorrection": "Removed stale claim that no paper figures were imported; Figure1 is already present with all three panels and source caption."
+    },
+    "examples": {
+      "exit": 0,
+      "pythonFences": 9,
+      "device": "cpu",
+      "torch": "2.14.1",
+      "transformers": "4.57.1",
+      "numpy": "2.5.4",
+      "temperatureReductions": 8,
+      "upstreamJsdBetaCases": 5,
+      "tinybert": {
+        "matchedLayers": 4,
+        "sourceLossCases": 2,
+        "classMeanCases": 3,
+        "perLayerRawMse": 17,
+        "perLayerPaddedGlobalMse": 4.25,
+        "sourceFourLayerTotals": [
+          68,
+          17
+        ],
+        "scoreGradient": [
+          2.5,
+          2.5,
+          -1.5,
+          -1.5
+        ],
+        "probabilitiesUnchanged": true,
+        "teacherGradientAbsent": true
+      },
+      "gkdFixedBatchKl": [
+        0.00644196,
+        0.00554519
+      ],
+      "log": "/var/tmp/bookvar-distillation-final-examples-20261105.log",
+      "limits": "All actual fences execute, including a randomly initialized tiny Llama CPU step. Only isolated pinned Huawei/TRL losses and selected AST structure are checked; no full Trainer, pretrained weights, tokenizer, training data, GPU, TinyBERT training or reasoning-quality evaluation."
+    },
+    "figures": {
+      "total": 8,
+      "precedingPreserved": 6,
+      "newOriginals": [
+        {
+          "id": "curated-tinybert-overview-3144c0d6af96",
+          "asset": "00 Учебник/Assets/Figures/curated/distillation-tinybert-2026-11-05/tinybert-overview.png",
+          "sha256": "3144c0d6af96614ffded2e4097b9d0b7af2743115598fe0d580c05347a00038b",
+          "source": "publishing/fixtures/tinybert-0598f02d/tinybert-overview.png",
+          "dimensions": [
+            1229,
+            320
+          ]
+        },
+        {
+          "id": "curated-tinybert-layer-detail-c3022bd5d1fa",
+          "asset": "00 Учебник/Assets/Figures/curated/distillation-tinybert-2026-11-05/tinybert-layer-detail.png",
+          "sha256": "c3022bd5d1fad3c9d79cea56c4f99e4aa8f42c5d7a44d03b7e14c6eb1e932f33",
+          "source": "publishing/fixtures/tinybert-0598f02d/tinybert-layer-detail.png",
+          "dimensions": [
+            745,
+            820
+          ]
+        }
+      ],
+      "newBytes": 93917,
+      "rights": "Both new author-created published ACL figures use the verified post2016 CC BY4.0 policy. Complete original PNGs copied byte-for-byte, not cropped/redrawn/translated. Independent public source copies, policy snapshot and Apache notices/full license for code are preserved. Rights of the six preceding figures are not freshly re-audited by this addition.",
+      "localInspection": "Both new PNG originals and source PDF pages2/3 personally inspected outside the website.",
+      "currentReaderVerification": "NOT RUN: computer/browser automation namespace became unavailable after interruption. Need actual current desktop/mobile page inspection, zoom/panning, math/table geometry and RU/EN subject/Next navigation. HTML assertions and old screenshots do not close this gap."
+    },
+    "checks": {
+      "scopedAndAssets": {
+        "exit": 0,
+        "files": 4,
+        "tests": 190,
+        "registryTests": 178,
+        "log": "/var/tmp/bookvar-distillation-scoped-assets-20261105.log",
+        "warnings": "Poppler emitted closepath warnings while checking inherited PDF assets; assertions passed. New TinyBERT figures use byte-exact source PNGs, not those PDF crops."
+      },
+      "build": {
+        "exit": 0,
+        "pages": 2011,
+        "pagefindFiles": 2015,
+        "seconds": 28.86,
+        "log": "/var/tmp/bookvar-distillation-build-20261105.log"
+      },
+      "html": {
+        "exit": 0,
+        "tests": 219,
+        "log": "/var/tmp/bookvar-distillation-test-output-20261105.log"
+      },
+      "links": {
+        "exit": 0,
+        "brokenInternal": 0,
+        "log": "/var/tmp/bookvar-distillation-check-links-20261105.log"
+      },
+      "size": {
+        "exit": 0,
+        "bytes": 857450475,
+        "files": 5632,
+        "limit": 1000000000,
+        "headroom": 142549525
+      },
+      "topicIndex": {
+        "exit": 0,
+        "topics": 153,
+        "log": "/var/tmp/bookvar-distillation-check-topics-20261105.log"
+      },
+      "sourceCoverage": {
+        "exit": 0,
+        "log": "/var/tmp/bookvar-distillation-check-source-coverage-20261105.log",
+        "scope": "Structural mapping and assets only, not full transfer of course knowledge."
+      },
+      "courseLedgers": {
+        "exit": 0,
+        "courses": [
+          "Stanford CS336 Spring2026",
+          "Berkeley Advanced LLM Agents Spring2025"
+        ],
+        "log": "/var/tmp/bookvar-distillation-check-course-ingestion-20261105.log"
+      },
+      "receipt": {
+        "exit": 0,
+        "files": 3,
+        "tests": 12,
+        "receiptTests": 2,
+        "currentHashMatches": 116,
+        "unreadOwnersInRoutePass": 37,
+        "log": "/var/tmp/bookvar-distillation-receipts-final-20261105.log",
+        "scope": "Overlaps the12 scoped tests within the earlier190; rerun only after registering the new whole-owner read."
+      },
+      "localPreview": {
+        "status": "running",
+        "url": "http://127.0.0.1:4330/textbook/post-training/reasoning-distillation/#tinybert-transformer-distillation",
+        "sessionId": 49838,
+        "mode": "Astro preview of the current complete build",
+        "startup": "ready in20ms",
+        "http": {
+          "exit": 0,
+          "routes": [
+            "textbook/post-training/reasoning-distillation/",
+            "en/textbook/post-training/reasoning-distillation/",
+            "sources/papers/tinybert/"
+          ],
+          "status": 200
+        },
+        "limits": "The dev/watch server failed its30s startup deadline; static preview succeeded. HTTP/source checks do not prove visual layout or interaction."
+      },
+      "scopedWhitespace": {
+        "trackedExit": 0,
+        "newAuthoredFiles": "No whitespace diagnostics; git diff --no-index --check returns difference exit1 for new files. Byte-preserved upstream fixtures are not reformatted."
+      }
+    },
+    "remaining": [
+      "Current distillation page still needs actual rendered desktop/mobile and RU/EN navigation verification; chapter is not visually accepted.",
+      "102 fresh plus14 reused=116 whole-owner reads out of153 after registration;37 remain unread. Whole reads are not accepted-chapter counts.",
+      "Continue test-time compute, synthetic data, deployment/evaluation, retrieval/RAG, multimodal, agents and recommender owners.",
+      "Full course-completeness audit, previous figure/rights gaps, public-checkout/Pages-base checks and authorized dev/Pages release remain open. No translation,stage,commit,push or deploy."
+    ]
+  }
+}

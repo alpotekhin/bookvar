@@ -2,8 +2,30 @@
 title: "Ответственные ML-системы"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-29
+last_updated: 2026-11-09
 last_verified: 2026-10-20
+reference_terms:
+  - label: Групповые метрики — равенство решений, TPR и FPR
+    label_en: Group metrics — decision parity, TPR, and FPR
+    anchor: responsible-group-metrics
+  - label: Пересечения групп — аудит Gender Shades
+    label_en: Intersectional evaluation — Gender Shades
+    anchor: responsible-intersectional-audit
+  - label: Выборочные исходы — границы групповой полноты
+    label_en: Selective outcomes — bounds on group recall
+    anchor: responsible-selective-labels-bounds
+  - label: SHAP — вклады признаков в отдельный прогноз
+    label_en: SHAP — feature contributions to one prediction
+    anchor: responsible-shap-attribution
+  - label: Machine unlearning — переобучение частей SISA
+    label_en: Machine unlearning — retraining SISA shards
+    anchor: responsible-unlearning-sisa
+  - label: Энергия и выбросы — границы учёта и PUE
+    label_en: Energy and emissions — accounting boundaries and PUE
+    anchor: responsible-energy-carbon
+  - label: Безопасность LLM — покрытие рисков и бюджет атак
+    label_en: LLM safety — risk coverage and attack budgets
+    anchor: responsible-safety-audit
 primary_sources:
   - https://mlsysbook.ai/vol1/responsible_engr/responsible_engr.html
   - https://mlsysbook.ai/vol2/responsible_ai/responsible_ai.html
@@ -11,6 +33,8 @@ primary_sources:
   - https://shap.readthedocs.io/en/latest/example_notebooks/api_examples/plots/waterfall.html
   - https://programming-dp.com/chapter3/
   - https://opacus.ai/docs/faq
+  - https://proceedings.mlr.press/v81/buolamwini18a.html
+  - https://www.cs.cornell.edu/home/kleinber/kdd17-selective.pdf
 ---
 
 # Ответственные ML-системы
@@ -82,6 +106,8 @@ primary_sources:
 порог и последующую бизнес-логику наряду с весами.
 
 ## Почему средняя точность скрывает вред
+
+<a id="responsible-group-metrics"></a>
 
 ### Одна выборка, три критерия
 
@@ -279,6 +305,8 @@ COMPAS 2016 года (Broward County, двухлетнее наблюдение)
 Выбор метрики требует знания последствий и обсуждения с затронутыми людьми;
 он не выводится из функции потерь автоматически.
 
+<a id="responsible-intersectional-audit"></a>
+
 ### Пересечения групп и неопределённость
 
 Пусть два группирующих признака имеют по два значения. В каждой из четырёх
@@ -296,6 +324,33 @@ COMPAS 2016 года (Broward County, двухлетнее наблюдение)
 о том, какие объекты модель классифицировала неверно. Поэтому сохраняют
 исходные групповые признаки для разрешённого аудита и считают пересечения,
 связанные с возможным вредом, а не только удобные одномерные срезы.
+
+В аудите *Gender Shades* проверяли коммерческие классификаторы по четырём
+пересечениям разметки пола и тона кожи. В IJB-A на группу DF (*darker female*)
+приходилось 4.4% из 500 человек, то есть 22 человека. Для нового набора
+PPB авторы подобрали фотографии 1270 парламентариев из шести стран;
+доля DF выросла до 21.3%. Это сделало сравнение по пересечениям
+информативнее, но не превратило выборку в случайную выборку населения.
+
+![[00 Учебник/Assets/Figures/curated/responsible-audit-2026-11-09/gender-shades-figure3.png|Доли четырёх пересечений разметки пола и тона кожи в Adience, IJB-A и PPB. Доля DF соответственно 7.4, 4.4 и 21.3 процента.]]
+
+*Joy Buolamwini, Timnit Gebru, [Gender Shades, PMLR 81](https://proceedings.mlr.press/v81/buolamwini18a.html),
+[Figure 3, с. 6 PDF](https://proceedings.mlr.press/v81/buolamwini18a/buolamwini18a.pdf#page=6),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Оригинальный график с полной легендой, выделенный со страницы без перерисовки.
+В подписи статьи 4.4% ошибочно отнесены к Adience; на самом графике и в §3.5
+они относятся к IJB-A. Для Adience на графике указано 7.4%.*
+
+На PPB доля ошибок IBM по всему набору составляла 12.1%, в группе DF —
+34.7%, а в группе LM (*lighter male*) — 0.3%
+([Table 4](https://proceedings.mlr.press/v81/buolamwini18a/buolamwini18a.pdf#page=9)).
+Взвесив ошибку DF по доле этой группы, получаем
+$0.213\cdot0.347\approx0.074$. То есть около 7.4 процентного пункта
+из общих 12.1 приходится на одно пересечение. Сам график показывает
+состав наборов; частоты ошибок берутся из отдельного эксперимента.
+Результаты относятся к версиям API из исследования 2018 года. Классификаторы
+возвращали две метки по фотографии, поэтому этот аудит не измеряет
+гендерную идентичность человека и не оценивает современные версии систем.
 
 У маленьких групп широкая статистическая неопределённость. Девять верных
 ответов из десяти и 90 из 100 дают одну точечную accuracy 90%, но
@@ -349,6 +404,49 @@ assert wilson(90, 100)[0] > 0.82
 в данных группа может снова получать меньше одобрений, а значит, ещё
 меньше новых наблюдаемых исходов.
 
+<a id="responsible-selective-labels-bounds"></a>
+
+### Что можно сказать о полноте без исходов отказов
+
+Рассмотрим две крайние ситуации для группы A. Если никто из 20
+отказанных не вернул бы кредит, одобрили всех платёжеспособных:
+$\mathrm{TPR}_A=72/72=1$. Если вернули бы все 20, одобрили
+$72/(72+20)\approx0.783$ платёжеспособных. И в том и в другом случае
+в журнале останутся те же 72 возврата из 80 одобрений.
+
+Пусть $u_g$ — число отказов в группе $g$, $r_g$ — сколько из этих
+заявителей вернули бы кредит на тех же условиях, а $t_g$ — число
+наблюдаемых возвратов среди одобренных. При $t_g>0$:
+
+$$
+0\leq r_g\leq u_g,\qquad
+\frac{t_g}{t_g+u_g}
+\leq \mathrm{TPR}_g=\frac{t_g}{t_g+r_g}
+\leq 1.
+$$
+
+| Группа | Возвраты среди одобренных | Границы TPR |
+| --- | ---: | ---: |
+| A | 72 из 80 | 78.3–100% |
+| B | 18 из 20 | 18.4–100% |
+
+При $r_A=20$ и $r_B=0$ полнота выше у B; при $r_A=0$ и $r_B=80$ —
+у A. Для разности $\mathrm{TPR}_A-\mathrm{TPR}_B$ нижняя граница
+равна $72/92-1\approx-0.217$, верхняя — $1-18/98\approx0.816$.
+Обе достигаются при указанных конфигурациях. Журнал не определяет
+даже знак разницы. Это границы совместимости с наблюдаемыми данными,
+а не доверительный интервал. Если собрать больше записей по той же
+политике, но так и не увидеть исходов отказов, сам пробел сохранится.
+
+[Lakkaraju et al., §3](https://www.cs.cornell.edu/home/kleinber/kdd17-selective.pdf)
+формулируют проблему выборочных исходов. В
+[[00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация#imbalance-selective-labels|примере с аудитом операций]]
+проверка обнаруживает уже случившееся событие, поэтому случайная
+выборка вне очереди помогает оценить число пропусков. У отказанного
+заявителя можно перепроверить анкету, но из неё не станет известно,
+вернул бы он кредит, которого не было. Для сужения границ нужны
+дополнительные данные или обоснованные предпосылки о таких исходах.
+
 У рекомендательной системы аналогичный отбор происходит при показе:
 клики собираются на показанном контенте. Поэтому вместе с откликом
 сохраняют политику показа и, если она известна, вероятность выбора.
@@ -385,6 +483,8 @@ FPR нельзя честно сравнить с FPR полностью раз�
 ошибочные данные и кто отвечает за пересмотр. Для аудитора нужны версия модели,
 набор данных, порог, журнал запроса и обоснование выбора метрики. Для инженера —
 история происхождения от исходной записи до признака и артефакта модели.
+
+<a id="responsible-shap-attribution"></a>
 
 ### SHAP: разложение конкретного прогноза
 
@@ -736,6 +836,8 @@ $\varepsilon$-приватным. Нужны схема соседства, пр
 анализ механизма. Аналогично DP не заменяет контроль доступа,
 сроки хранения и минимизацию исходных данных.
 
+<a id="responsible-unlearning-sisa"></a>
+
 ### Удаление данных и machine unlearning
 
 Пусть из корпуса нужно удалить `record-17`. Сначала по lineage находят
@@ -845,6 +947,8 @@ $6000-200\cdot20=2000$ Дж, или 20 Дж/запрос. Это другой п
 область, позволяет брать разность до и после работы. Подходы и границы
 счётчиков перечислены в
 [Energy measurement techniques](https://mlsysbook.ai/vol2/sustainable_ai/sustainable_ai.html#sec-sustainable-ai-energy-measurement-techniques-590e-techniques-590e).
+
+<a id="responsible-energy-carbon"></a>
 
 ### Операционные выбросы и жизненный цикл
 
@@ -974,6 +1078,8 @@ Prefill обрабатывает сразу много позиций и час�
 оборудования или генерации электричества. Расход и потребление
 воды также не тождественны. Без определения границы и региона
 число «литров на ответ» нельзя переносить на другой сервис.
+
+<a id="responsible-safety-audit"></a>
 
 ## От перечня рисков к адаптивной проверке безопасности
 
@@ -1166,6 +1272,7 @@ $1-(1-p)^k$. При $p=0.1$ и $k=10$ это около 65.1%, а не 10%.
 
 ## Практика и первоисточники
 
+- [[05 Источники/Papers/Gender Shades and selective labels|Gender Shades и выборочные исходы]]: источники и указатели на два разбора выше.
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol1/responsible_engr|Responsible Engineering]].
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/responsible_ai|Responsible AI]].
 - [[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/sustainable_ai|Sustainable AI]].

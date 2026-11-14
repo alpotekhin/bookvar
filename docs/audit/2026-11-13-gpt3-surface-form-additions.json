@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-13",
+  "scope": "Extend the existing GPT-3 answer-scoring explanation in both editions. Preserve all prior examples, headings, figures and evaluation protocols.",
+  "review": {
+    "sources": "Brown et al. §2.4; Holtzman et al., arXiv v9, §1 and Figure 1, §§3.1–3.3, §4.3 and Table 1, §§5.1–5.2, Figure 3 and Table 5, and §6 failure cases. v9 license is CC BY 4.0.",
+    "example": "The previous toy scores rank A > B under string likelihood (.4 vs .3) and B > A under ratio scoring (.8 vs 6). Holtzman’s measurements on the COPA wording change are separate: approximate log probabilities -16 and -20, with a fixed ending about -12 under either paraphrase in COPA Flipped. Table 1 COPA 175B: LM 85.2, Avg 82.8, PMI_DC 89.2; HellaSwag Avg 77.2, PMI_DC 53.5.",
+    "editorial": "Read both GPT-3 chapter bodies before editing and reread the changed section with its surrounding explanation. The inserted passage follows the existing ratio equation, distinguishes three scoring protocols, explains both halves of the original figure, and preserves empirical counterevidence. No new checkpoint run and no whole-book or release acceptance.",
+    "verification": "The original v9 PDF and complete Figure 3 crop match the registered SHA-256. Candidate-score arithmetic and Table 1 rows checked independently. Reversible journal restores the exact five preceding files. Local build: 2089 pages; 798 publication tests passed (13 skipped); 331 built-output tests passed; zero broken links; 887170722 bytes. At 375 and 1280 CSS px in both editions, Chromium decoded the 2315-pixel image without page overflow, found six rendered inline equations and no KaTeX errors in the new section. The article note links back in each locale. No commit, push or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "before_sha256": "45fd46ce39e3eea9879e8b97bb4597be35ce408852d3e59c86f6891d9fd86f35",
+      "after_sha256": "082c1e0dbd2457e36a38c2ec1188cd776bde72d0decdd0ecb28e864378e7ef5c",
+      "changes": [
+        {
+          "old": "<span id=\"архитектура-знакомый-блок-в-новом-масштабе\"></span>",
+          "new": "<a id=\"gpt3-surface-form-competition\"></a>\n\n### Когда ответ теряет баллы из-за формулировки\n\nВ [примере Holtzman et al. из CommonsenseQA](https://arxiv.org/pdf/2104.08315v9#page=1)\nчеловек выбирает `Whirlpool bath` из четырёх вариантов. Языковая модель\nможет продолжить вопрос и строкой `Bathtub`, которой в списке нет.\nДоля вероятности, отданная этой строке, не засчитывается варианту\n`Whirlpool bath`. Авторы называют это конкуренцией формулировок\n(*surface form competition*). Деление на число токенов меняет штраф\nза длину, но не объединяет ответы с одним смыслом.\n\nВ примере с баром из COPA полный префикс $x$ заканчивается на\n`because`. Для фонового префикса $a_0$ авторы оставляют только\n`because`, чтобы модель по-прежнему продолжала фразу причиной,\nно не знала, что закрылся бар. Каждое продолжение оценивают дважды:\nс полным префиксом и с фоновым. Разность логарифмов из формулы выше\nравна логарифму отношения; Holtzman et al. называют эту оценку\n*domain-conditional PMI*. При условных вероятностях из предыдущего\nпримера первая строка становится менее вероятной после уточнения\nсобытия ($0.8$ от фона), а вторая в шесть раз вероятнее.\nМалый знаменатель сам по себе может сильно поднять редкую строку.\nПоэтому фон нужно выбирать для задачи, а эффект проверять на отложенных примерах.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt3-surface-form-2026-11-13/holtzman-figure3.png|Слева одна и та же фраза о закрытии бара и два окончания. Справа меняется начало, а оцениваемое окончание о закрытии бара одинаково.]]\n\n*Ari Holtzman, Peter West, Vered Shwartz, Yejin Choi и Luke Zettlemoyer,\n[Surface Form Competition, рис. 3, §5](https://arxiv.org/pdf/2104.08315v9#page=8),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Оригинальная схема целиком, без перерисовки.*\n\nСлева модель оценивает два разных продолжения после одного префикса:\n`it was crowded.` и `it was 3 AM.` Справа авторы поменяли порядок\nпричины и следствия и заменили `because` на `so`. Теперь модель\nдважды оценивает одну строку `the bar closed.`: сначала после\n`It was crowded so`, затем после `It was 3 AM so`.\nНа правой стороне длина и формулировка оцениваемого текста уже\nне различаются. Это два обычных прямых прохода причинного декодера:\nсобытие перенесено в конец, модель не читает справа налево.\n\nНижняя строка схемы проверяет ещё одну формулировку. При прямой оценке\nлогарифм вероятности падает примерно с $-16$ до $-20$, когда время\nменяется с 3:00 на 3:30. В обратной постановке обе причины дают\nодному и тому же следствию логарифм около $-12$. Это числа для одного\nпримера из §5.2, а не оценка точности. Перестановка не всегда сохраняет\nестественность фразы, поэтому авторы не считают её общим способом\nпреобразовать произвольную задачу.\n\nВ [таблице 1](https://arxiv.org/pdf/2104.08315v9#page=6) авторы\nсравнили правила оценки на одних и тех же весах GPT‑3 175B без\nдемонстраций. На COPA полная вероятность дала 85,2% точности,\nсреднее по токенам — 82,8%, поправка на фон — 89,2%.\nНа HellaSwag среднее по токенам дало 77,2%, поправка — 53,5%.\nЭто протокол Holtzman et al., а не результаты из статьи Brown et al.\n[[05 Источники/Papers/Holtzman et al. — Surface Form Competition.md|Разметка эксперимента и источники]].\n\n<span id=\"архитектура-знакомый-блок-в-новом-масштабе\"></span>"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "before_sha256": "e0420419aeac7ffa14cade7b589e9c834d966a9d17d0afededc9c239aa2280f8",
+      "after_sha256": "c82b5e8b72b711a8eb477541fefea33a581b05790cb6dd276380dc32b1f3e67c",
+      "changes": [
+        {
+          "old": "<span id=\"архитектура-знакомый-блок-в-новом-масштабе\"></span>",
+          "new": "<a id=\"gpt3-surface-form-competition\"></a>\n\n### When wording changes the winning answer\n\nIn [Holtzman et al.'s CommonsenseQA example](https://arxiv.org/pdf/2104.08315v9#page=1),\na person chooses `Whirlpool bath` from four options. A language model\ncan also continue with `Bathtub`, which is missing from the list.\nProbability assigned to that string does not count toward\n`Whirlpool bath`. The authors call this *surface form competition*.\nDividing by token count changes the penalty for length; it does\nnot pool different phrasings of the same answer.\n\nIn the COPA example about a bar, the full prefix $x$ ends in\n`because`. For the background prefix $a_0$, the authors keep only\n`because`. The model still has to produce a cause, but it no longer\nknows that the bar closed. They score each answer twice, with the\nfull and background prefixes. The difference of logs above is\nthe log of the ratio, which Holtzman et al. call *domain-conditional\nPMI*. With the illustrative probabilities above, adding the event\nmakes the first answer less likely ($0.8$ times its background\nprobability) and the second six times as likely. A tiny denominator\ncan also boost a rare answer, so choose the background for the task\nand test the rule on held-out examples.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt3-surface-form-2026-11-13/holtzman-figure3.png|Left: the same prefix about the bar and two different endings. Right: the prefixes change but the scored ending about the bar closing is the same.]]\n\n*Ari Holtzman, Peter West, Vered Shwartz, Yejin Choi, and Luke Zettlemoyer,\n[Surface Form Competition, Figure 3, §5](https://arxiv.org/pdf/2104.08315v9#page=8),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Complete original figure, not redrawn.*\n\nOn the left, the model scores two different endings after one prefix:\n`it was crowded.` and `it was 3 AM.` On the right, the authors put\nthe cause first and replace `because` with `so`. The model scores\nthe same ending, `the bar closed.`, after two prefixes:\n`It was crowded so` and `It was 3 AM so`. The wording and length\nof the scored string on the right are now fixed. Both evaluations\nare ordinary forward passes of the causal decoder. The event moves\nto the end; the model never reads from right to left.\n\nThe row below the dotted line tests another wording. In the original\nsetup, changing the time from 3:00 to 3:30 lowers the answer's log\nprobability from about $-16$ to $-20$. With the order reversed, both\ncauses give the same effect a log probability of about $-12$.\nThese are scores for one example in §5.2, not accuracy figures.\nReversing the clauses can change how natural the sentence sounds,\nso the authors do not present it as a general transformation for every task.\n\nIn [Table 1](https://arxiv.org/pdf/2104.08315v9#page=6), the authors\ncompare scoring rules on the same GPT‑3 175B weights with no demonstrations.\nOn COPA, full-string probability scores 85.2%, the mean per token\nscores 82.8%, and the background correction scores 89.2%. On HellaSwag,\nthe mean scores 77.2% and the correction drops to 53.5%. These are\nHoltzman et al.'s results, not Brown et al.'s.\n[[05 Источники/Papers/Holtzman et al. — Surface Form Competition.md|Experimental setup and sources]].\n\n<span id=\"архитектура-знакомый-блок-в-новом-масштабе\"></span>"
+        },
+        {
+          "old": "canonical_revision: \"45fd46ce39e3eea9879e8b97bb4597be35ce408852d3e59c86f6891d9fd86f35\"",
+          "new": "canonical_revision: \"082c1e0dbd2457e36a38c2ec1188cd776bde72d0decdd0ecb28e864378e7ef5c\""
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "22c97198118052e54ed3a2d2d2c9b9f0b41a3b6b4a14b65e979188eb7723e8ec",
+      "after_sha256": "2f693c186b3ae103ad9ef68b09232384afa5534118e256779a5751f7062fe9c1",
+      "changes": [
+        {
+          "old": "  - id: curated-gpt3-schick-pet-figure1-c36efbcf63b3",
+          "new": "  - {\"id\":\"curated-gpt3-holtzman-copa-65312423131c\",\"asset\":\"00 Учебник/Assets/Figures/curated/gpt3-surface-form-2026-11-13/holtzman-figure3.png\",\"title\":\"COPA and COPA Flipped (Figure 3)\",\"author\":\"Ari Holtzman, Peter West, Vered Shwartz, Yejin Choi, Luke Zettlemoyer\",\"source_url\":\"https://arxiv.org/abs/2104.08315v9\",\"source_image_url\":\"https://arxiv.org/pdf/2104.08315v9#page=8\",\"source_asset\":\"05 Источники/Papers/Source PDFs/holtzman-2104.08315v9.pdf\",\"source_asset_sha256\":\"810c26ceec851aff7b478bab82f09aaf09bd592650f1931869ecaac325974566\",\"source_page\":8,\"render_dpi\":360,\"render_page_size_px\":[2977,4210],\"crop_box_px\":[337,330,2652,1277],\"dimensions_px\":[2315,947],\"sha256\":\"65312423131c60e94a6d32d433d15f1db00ea339a153263fad2613c2dd9edf1e\",\"bytes\":265108,\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence_url\":\"https://arxiv.org/abs/2104.08315v9\",\"derivation\":\"pdf-page-render-crop\",\"modifications\":\"Complete original diagram with both columns and the extra row below the dotted line; surrounding caption and prose excluded. No rescaling, relabeling, or redraw.\",\"metadata_status\":\"verified\",\"rights_status\":\"source-license-verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-13\",\"used_in\":[\"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md\",\"en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md\"]}\n  - id: curated-gpt3-schick-pet-figure1-c36efbcf63b3"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "a313ad19411363312f43a03e81fa8454ac3c0ad9805da09b337a565bbfe918df",
+      "after_sha256": "294ae35ee9ae067734482e26cfabb9a816b179a070c696aabacfe67c2aa9fd45",
+      "changes": [
+        {
+          "old": "        route: sources/papers/few-shot-pet",
+          "new": "        route: sources/papers/few-shot-pet\n      - source: 05 Источники/Papers/Holtzman et al. — Surface Form Competition.md\n        route: sources/papers/surface-form-competition"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/_index.md",
+      "before_sha256": "6938f292eb52edcde445256250502b3f41d90abce4d0de6a775fe898d5673995",
+      "after_sha256": "7e14b14495e72971c4b3d099652c1e453da0b8cbbfc7ea9413197fb975865666",
+      "changes": [
+        {
+          "old": "- [[05 Источники/Papers/Pan et al. 2023 — What in-context learning learns|What In-Context Learning “Learns” — выбор и подмена меток в демонстрациях]]",
+          "new": "- [[05 Источники/Papers/Pan et al. 2023 — What in-context learning learns|What In-Context Learning “Learns” — выбор и подмена меток в демонстрациях]]\n- [[05 Источники/Papers/Holtzman et al. — Surface Form Competition|Surface Form Competition — как формулировка ответа меняет оценку]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/Holtzman et al. — Surface Form Competition.md",
+      "after_sha256": "041a26dede63349a84cb7ac596a7ff3b5b9897a5384b65d5e23dce6c63aba7de",
+      "created": true
+    }
+  ]
+}

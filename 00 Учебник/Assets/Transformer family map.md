@@ -12,4 +12,4 @@ redirect_to: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encode
 канонических материалах:
 
 - [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектурных паттерна]];
-- [[02 Areas/ML & DL/00 Учебник/10 Атлас современных архитектур/01 Llama, Qwen и DeepSeek как эволюция блока|Llama, Qwen и DeepSeek как эволюция блока]].
+- [[02 Атлас моделей/Сравнения/Сравнение семейств#llama-qwen-deepseek-worked-comparison|Llama, Qwen и DeepSeek: кэш и FFN на токен]].

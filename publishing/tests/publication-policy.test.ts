@@ -5,6 +5,7 @@ import YAML from 'yaml';
 
 import { loadManifest, type PublicationSidebarItem } from '../adapter/manifest.js';
 import { wikiHeadingSlug } from '../adapter/links.js';
+import { createRouteRegistry } from '../adapter/routes.js';
 
 const root = resolve(import.meta.dirname, '../..');
 
@@ -143,7 +144,9 @@ describe('publication workflow policy', () => {
   it('offers one textbook, a topic reference and a library; course hubs put reading before audit details', () => {
     const homepage = readFileSync(resolve(root, 'site/src/content/docs/index.md'), 'utf8');
     const manifest = loadManifest(resolve(root, 'publishing/navigation.yml'));
-    const publishedSources = new Set(manifest.sections.flatMap((section) => section.pages.map((page) => page.source)));
+    const routes = createRouteRegistry(manifest.sections.flatMap(section =>
+      section.pages.map(page => ({ sourcePath: page.source, route: page.route, title: page.source }))),
+    { allowAmbiguousBasenames: true });
     const courses = [
       ['Stanford CS336', 'stanford-cs336-spring-2026', 'Stanford CS336 Spring 2026'],
       ['Berkeley Advanced LLM Agents', 'berkeley-advanced-llm-agents-spring-2025', 'Berkeley Advanced LLM Agents Spring 2025']
@@ -160,8 +163,8 @@ describe('publication workflow policy', () => {
       expect(hub.indexOf('<details>')).toBeGreaterThan(hub.indexOf('## Где читать тему'));
       const readerText = hub.split('<details>')[0];
       expect(readerText).not.toMatch(/dependency closure|semantic extraction|Visual ledger|pinned revisions|source layer/i);
-      for (const match of readerText.matchAll(/\[\[([^\]|#]+)(?:[^\]]*)\]\]/g)) {
-        expect(publishedSources.has(`${match[1]}.md`), `${name}: ${match[1]}`).toBe(true);
+      for (const match of readerText.matchAll(/(?<!!)\[\[([^\]|#]+)(?:[^\]]*)\]\]/g)) {
+        expect(routes.routeForWikiTarget(match[1]), `${name}: ${match[1]}`).toBeDefined();
       }
     }
     const berkeley = readFileSync(resolve(root, `05 Источники/Courses/${courses[1][2]}/_index.md`), 'utf8');

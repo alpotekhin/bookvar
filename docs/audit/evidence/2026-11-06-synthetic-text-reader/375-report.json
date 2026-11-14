@@ -1,0 +1,595 @@
+{
+  "url": "http://127.0.0.1:4330/textbook/pretraining/synthetic-data-curricula/",
+  "width": 375,
+  "height": 812,
+  "figures": [
+    {
+      "index": 0,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/nvidia-generate-critique-filter.png",
+      "alt": "Generation, critique and filtering as separate synthetic-data stages",
+      "natural": [
+        1999,
+        1215
+      ],
+      "display": [
+        359,
+        218.1953125
+      ],
+      "viewport": [
+        375,
+        623
+      ],
+      "scroll": [
+        375,
+        623
+      ],
+      "caption": "На схеме NVIDIA три стадии отделены друг от друга. Обратная стрелка позволяет\nповторить генерацию с учётом замечаний; это не означает, что исправленный\nответ автоматически верен. Источник: Amit Bleiweiss и Nicole Luo,\nMastering LLM Techniques: Text Data Processing, Figure 2.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-00.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          266
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-00-zoom-start.png",
+        "atEnd": [
+          1077,
+          266
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-00-zoom-end.png"
+      }
+    },
+    {
+      "index": 1,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/sft-review-2026-09/self-instruct-pipeline.png",
+      "alt": "Self-Instruct: instructions, task types, instances and iterative filtering",
+      "natural": [
+        1810,
+        790
+      ],
+      "display": [
+        359,
+        156.6875
+      ],
+      "viewport": [
+        375,
+        623
+      ],
+      "scroll": [
+        375,
+        623
+      ],
+      "caption": "На оригинальной Figure 2 генерация инструкции, определение типа задачи,\nсоздание конкретных входов и ответов, затем фильтрация показаны отдельными\nэтапами. Возврат к пулу задач объясняет, как принятые инструкции участвуют\nв следующих итерациях. Источник: Yizhong Wang et al.,\nSelf-Instruct, ACL 2023.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-01.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          20
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-01-zoom-start.png",
+        "atEnd": [
+          1077,
+          20
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-01-zoom-end.png"
+      }
+    },
+    {
+      "index": 2,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/synthetic-review-2026-09/nemotron-transformations.png",
+      "alt": "Nemotron-CC: quality groups, retained documents and generated transformations",
+      "natural": [
+        1450,
+        1460
+      ],
+      "display": [
+        359,
+        361.46875
+      ],
+      "viewport": [
+        375,
+        623
+      ],
+      "scroll": [
+        375,
+        623
+      ],
+      "caption": "После общего отбора документы разделяются на группы качества. Из низкой\nи высокой групп получают синтетические тексты; исходные документы тоже\nпоступают в итоговый корпус. Высококачественная ветка обходит эвристические\nфильтры. Источник: Dan Su et al., Nemotron-CC, ACL 2025, Figure 3,\nCC BY 4.0.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-02.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          839
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-02-zoom-start.png",
+        "atEnd": [
+          1077,
+          839
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-02-zoom-end.png"
+      }
+    },
+    {
+      "index": 3,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/synthetic-recipes-2026-10-29/phi1-data-ablation.png",
+      "alt": "Phi-1: filtered code, synthetic textbooks and CodeExercises with different training budgets",
+      "natural": [
+        1730,
+        956
+      ],
+      "display": [
+        359,
+        198.3828125
+      ],
+      "viewport": [
+        375,
+        643
+      ],
+      "scroll": [
+        375,
+        643
+      ],
+      "caption": "Original Figure 2.1, Suriya Gunasekar et al.,\nTextbooks Are All You Need,\nCC BY 4.0. Complete original PNG, unchanged.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-03.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          167
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-03-zoom-start.png",
+        "atEnd": [
+          1077,
+          166.5
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-03-zoom-end.png"
+      }
+    },
+    {
+      "index": 4,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/synthetic-recipes-2026-10-29/phi4-repetitions.png",
+      "alt": "Phi-4: fixed-horizon comparisons with four or twelve repetitions of synthetic data",
+      "natural": [
+        1814,
+        900
+      ],
+      "display": [
+        359,
+        178.109375
+      ],
+      "viewport": [
+        375,
+        662
+      ],
+      "scroll": [
+        375,
+        662
+      ],
+      "caption": "Original Figure 2, Marah Abdin et al.,\nPhi-4 Technical Report,\nCC BY 4.0. Complete original PNG, unchanged.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-04.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          66
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-04-zoom-start.png",
+        "atEnd": [
+          1077,
+          67
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-04-zoom-end.png"
+      }
+    },
+    {
+      "index": 5,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/synthetic-recipes-2026-10-29/nemotron4-prompts.png",
+      "alt": "Nemotron-4: four prompt-generation pipelines for synthetic alignment",
+      "natural": [
+        1178,
+        311
+      ],
+      "display": [
+        359,
+        94.7734375
+      ],
+      "viewport": [
+        375,
+        623
+      ],
+      "scroll": [
+        375,
+        623
+      ],
+      "caption": "Original Figure 2, NVIDIA,\nNemotron-4 340B Technical Report,\nCC BY 4.0. The four complete pipelines generate open Q&A, writing,\ndocument-grounded Q&A, and math/code prompts, respectively.\nOriginal PNG copied without alteration.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-05.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          0
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-05-zoom-start.png",
+        "atEnd": [
+          1077,
+          0
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-05-zoom-end.png"
+      }
+    },
+    {
+      "index": 6,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/synthetic-review-2026-09/openthoughts-pipeline.png",
+      "alt": "OpenThoughts: question selection, domain mixture and sixteen responses per question",
+      "natural": [
+        2260,
+        1080
+      ],
+      "display": [
+        359,
+        171.5546875
+      ],
+      "viewport": [
+        375,
+        623
+      ],
+      "scroll": [
+        375,
+        623
+      ],
+      "caption": "Слева сокращаются исходные пулы вопросов, затем из них выбираются доменные\nдоли. Только справа происходит генерация ответов. Около 75 тысяч записей с вопросами\nпри 16 ответах дают 1,2 млн записей, но не 1,2 млн разных задач.\nИсточник: Etash Guha et al., OpenThoughts, Figure 4,\nCC BY 4.0.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-06.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          79
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-06-zoom-start.png",
+        "atEnd": [
+          1077,
+          79
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-06-zoom-end.png"
+      }
+    },
+    {
+      "index": 7,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/data-corpus/swe-smith.png",
+      "alt": "SWE-Smith: repository, executable environment, mutations and resulting tasks",
+      "natural": [
+        1372,
+        405
+      ],
+      "display": [
+        359,
+        105.96875
+      ],
+      "viewport": [
+        375,
+        623
+      ],
+      "scroll": [
+        375,
+        623
+      ],
+      "caption": "Четыре стадии SWE-Smith: репозиторий, подготовка окружения, способы внесения\nошибок, полученные задачи. Красные и зелёные тесты относятся к состоянию\nрепозитория после внесения ошибки, а не к ещё не собранным решениям ученика.\nИсточник: John Yang et al., SWE-Smith,\nрисунок из материалов CS336.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-07.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          0
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-07-zoom-start.png",
+        "atEnd": [
+          1077,
+          0
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-07-zoom-end.png"
+      }
+    },
+    {
+      "index": 8,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/synthetic-review-2026-09/swe-rebench.png",
+      "alt": "SWE-Rebench: issue and patch collection with iterative environment construction",
+      "natural": [
+        2420,
+        1294
+      ],
+      "display": [
+        359,
+        191.9609375
+      ],
+      "viewport": [
+        375,
+        623
+      ],
+      "scroll": [
+        375,
+        623
+      ],
+      "caption": "Средний блок SWE-Rebench содержит цикл: модель предлагает установку\nзависимостей, система пробует выполнить её и возвращает результат.\nПоследующее оценивание пригодности задачи не заменяет этот запуск.\nИсточник: SWE-Rebench, Figure 1,\nCC BY 4.0.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-08.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          161
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-08-zoom-start.png",
+        "atEnd": [
+          1077,
+          161
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-08-zoom-end.png"
+      }
+    },
+    {
+      "index": 9,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/data-corpus/swezero-noexec.png",
+      "alt": "SWE-Zero: evaluation results with and without execution access",
+      "natural": [
+        947,
+        299
+      ],
+      "display": [
+        359,
+        113.34375
+      ],
+      "viewport": [
+        375,
+        623
+      ],
+      "scroll": [
+        375,
+        623
+      ],
+      "caption": "Execution в этой таблице означает доступ к исполнению при оценке\nмоделей. Внутри каждой пары строк меняется режим решения оценочных задач.\nТаблица не сравнивает два одинаковых обучающих запуска с разным способом\nсбора данных. Источник: SWE-Zero,\nтаблица из CS336.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-09.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          0
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-09-zoom-start.png",
+        "atEnd": [
+          1077,
+          0
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-09-zoom-end.png"
+      }
+    },
+    {
+      "index": 10,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/olmo2-dolmino.png",
+      "alt": "Dolmino: available data pools rather than sampled training-token shares",
+      "natural": [
+        1219,
+        1214
+      ],
+      "display": [
+        359,
+        357.5234375
+      ],
+      "viewport": [
+        375,
+        623
+      ],
+      "scroll": [
+        375,
+        623
+      ],
+      "caption": "В таблице перечислены доступные исходные данные: 832,6 млрд токенов\nобщей качественной части и 10,7 млрд математической. Это не длина\nобучающего запуска и не пропорция фактически предъявленных токенов.\nИсточник: Team OLMo, 2 OLMo 2 Furious,\nтаблица Dolmino, используемая в CS336.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-10.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          823
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-10-zoom-start.png",
+        "atEnd": [
+          1077,
+          823
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-10-zoom-end.png"
+      }
+    },
+    {
+      "index": 11,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/synthetic-review-2026-09/shumailov-collapse.png",
+      "alt": "Model collapse: recursive data generation and distinct perplexity measurements",
+      "natural": [
+        1770,
+        1860
+      ],
+      "display": [
+        359,
+        377.25
+      ],
+      "viewport": [
+        375,
+        623
+      ],
+      "scroll": [
+        375,
+        623
+      ],
+      "caption": "Рекурсивное обучение OPT-125M на WikiText-2. Панель a показывает передачу\nданных между поколениями; b — режим без сохранения исходных данных,\nc — с их 10%-ной примесью. Источник: Ilia Shumailov et al.,\nAI models collapse when trained on recursively generated data, Figure 1,\nCC BY 4.0; использована исправленная версия PDF.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-11.png",
+      "zoom": {
+        "scale": "4×",
+        "atStart": [
+          0,
+          0
+        ],
+        "extent": [
+          1077,
+          902
+        ],
+        "startScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-11-zoom-start.png",
+        "atEnd": [
+          1077,
+          902
+        ],
+        "endScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-figure-11-zoom-end.png"
+      }
+    }
+  ],
+  "limits": "Headless browser interactions and screenshots; requires separate human visual inspection.",
+  "layout": {
+    "page": [
+      375,
+      375
+    ],
+    "mathErrors": 0,
+    "formulas": [
+      [
+        343,
+        343
+      ],
+      [
+        343,
+        343
+      ],
+      [
+        343,
+        343
+      ],
+      [
+        343,
+        343
+      ],
+      [
+        343,
+        343
+      ],
+      [
+        343,
+        343
+      ],
+      [
+        343,
+        343
+      ]
+    ],
+    "tables": [
+      [
+        343,
+        343,
+        "visible"
+      ],
+      [
+        343,
+        343,
+        "visible"
+      ],
+      [
+        343,
+        343,
+        "visible"
+      ],
+      [
+        343,
+        343,
+        "visible"
+      ],
+      [
+        343,
+        343,
+        "visible"
+      ],
+      [
+        343,
+        343,
+        "visible"
+      ],
+      [
+        343,
+        343,
+        "visible"
+      ],
+      [
+        343,
+        343,
+        "visible"
+      ],
+      [
+        343,
+        343,
+        "visible"
+      ],
+      [
+        343,
+        343,
+        "visible"
+      ],
+      [
+        343,
+        343,
+        "visible"
+      ]
+    ]
+  },
+  "contextScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-text-reader/375-page.png"
+}

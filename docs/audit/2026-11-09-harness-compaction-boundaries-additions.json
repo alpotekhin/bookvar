@@ -1,0 +1,151 @@
+{
+  "date": "2026-11-09",
+  "scope": "Whole-owner review of Agent harness and a source-first explanation of observation masking versus summarization and of legal compaction cuts. Keep the original chapter route and publish nothing.",
+  "review": {
+    "previousGoalTurn": "Progress verified on the current worktree: Tool use gained a byte-identical licensed MCP diagram, reversed-reply fixture and seven canonical subject links.",
+    "sourceChecks": [
+      "Lindenbauer et al., The Complexity Trap v3 §3.1–3.2 and Figure 3: raw trajectory vs observation masking vs LLM summary, M=1 in the figure, M=10/N=21 in main experiments.",
+      "v3 §4 and Table 1 (Qwen3-Coder 480B: 53.4/54.8/53.8 percent and 1.29/0.61/0.64 dollars), Appendix C.1 Table 4 (paired against raw), §5.1 retuning OpenHands, §5.2 overhead.",
+      "OpenHands SDK 0996c33916c2a977ea9fe38deee660ff0e1389f2: ToolCallMatchingProperty.manipulation_indices and enforce, BatchAtomicityProperty, ToolLoopAtomicityProperty, ManipulationIndices.find_next, LLMSummarizingCondenser._get_forgotten_events and RollingCondenser.condense."
+    ],
+    "workedExample": "Two calls share one model response; results are reversed. A planned cut at 9 is unsafe, cut 11 is safe, and [2:11] is the selection. If the last result is missing, no candidate >= 9 remains. Executed the original AST functions with explicit mock event/view boundaries, not a complete SDK integration.",
+    "figure": {
+      "url": "https://arxiv.org/html/2508.21433v3/data/management-strategies.png",
+      "sha256": "59b404609294146c8d826968048c2020aaa380f31dc49feab93973150bebb68d",
+      "license": "CC BY 4.0",
+      "license_sha256": "5aaa9c99dbdaf4e85c7aceae3dedbf1e5946960004ed347d6aa6ed7d45184a4b",
+      "modification": "None. Complete PNG including alpha and original labels."
+    },
+    "locale": "Nine topic links in both reference indexes. The existing Russian fallback remains explicitly labeled on the English chapter route. The source note is English.",
+    "sourceNote": "05 Источники/Papers/The Complexity Trap.md, SHA-256 7afec609ac5afb269b9686d5989bf63b6e510721b79624a30bd87bf4c83a04d2.",
+    "validation": "Six local Python chapter blocks passed; the pinned OpenHands methods passed the boundary, orphan, and missing-result cases with mock events. The source raster and versioned CC BY license evidence match upstream. Final local build: 2025 pages, 232 output checks and no broken internal links; checked receipt hashes and six reversible edits on the final version. The 738 publication checks and curated asset registry check passed before the final table-heading correction.",
+    "reader": "Chrome at 375 and 1280 CSS px, Russian and labeled canonical fallback: followed the reference links to both new sections and the chapter/source-note round trip. The actual tables and PNG fit; no page overflow or KaTeX errors. Inspected the original figure inline and zoomed on mobile, with attribution.",
+    "limits": "No rerun of the coding-agent benchmark, real model requests, commit, push or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md",
+      "before_sha256": "b1dc2ab03d0cd12acfa3c66ff0060800299b10846cb962767c7ec51f0a1a1e49",
+      "after_sha256": "2131c49a1489df48348dd55869eee6d41733dbe10e6f4c8c0adc94db2128409f",
+      "lines": 1020,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-20\nlast_verified: 2026-10-20\nprimary_sources:",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-11-09\nreference_terms:\n  - label: Цикл агента — вызов модели, исполнение и проверка\n    label_en: Agent loop — model call, execution, and verification\n    anchor: harness-loop\n  - label: Контекст агента — расчёт бюджета\n    label_en: Agent context — token budget\n    anchor: harness-context-budget\n  - label: Кеш префикса в агентном цикле\n    label_en: Prefix caching in the agent loop\n    anchor: harness-prompt-prefix\n  - label: Журнал, рабочий контекст и состояние задачи\n    label_en: Event log, active context, and task state\n    anchor: harness-authoritative-state\n  - label: Маскирование наблюдений и суммаризация истории\n    label_en: Observation masking and history summarization\n    anchor: harness-observation-masking\n  - label: Compaction — границы между вызовами и наблюдениями\n    label_en: Compaction — boundaries around calls and observations\n    anchor: harness-compaction-boundaries\n  - label: Handoff после операции с неизвестным исходом\n    label_en: Handoff after an operation with an unknown outcome\n    anchor: harness-handoff-unknown\n  - label: Reminder tokens — событие, напоминание и проверка\n    label_en: Reminder tokens — triggers, reminders, and checks\n    anchor: harness-reminder-tokens\n  - label: Завершение агента — проверка текущей ревизии\n    label_en: Agent completion — verifying the current revision\n    anchor: harness-verified-completion\nprimary_sources:"
+        },
+        {
+          "old": "  - https://docs.openhands.dev/sdk/guides/context-condenser",
+          "new": "  - https://docs.openhands.dev/sdk/guides/context-condenser\n  - https://arxiv.org/abs/2508.21433v3\n  - https://github.com/OpenHands/software-agent-sdk/blob/0996c33916c2a977ea9fe38deee660ff0e1389f2/openhands-sdk/openhands/sdk/context/view/properties/tool_call_matching.py"
+        },
+        {
+          "old": "## 1. Из чего состоит один шаг",
+          "new": "<a id=\"harness-loop\"></a>\n\n## 1. Из чего состоит один шаг"
+        },
+        {
+          "old": "### Бюджет одного входа",
+          "new": "<a id=\"harness-context-budget\"></a>\n\n### Бюджет одного входа"
+        },
+        {
+          "old": "## 3. Стабильный префикс и динамический суффикс",
+          "new": "<a id=\"harness-prompt-prefix\"></a>\n\n## 3. Стабильный префикс и динамический суффикс"
+        },
+        {
+          "old": "## 4. Состояние не равно стенограмме",
+          "new": "<a id=\"harness-authoritative-state\"></a>\n\n## 4. Состояние не равно стенограмме"
+        },
+        {
+          "old": "строке нельзя восстановить их текст. Если прежний вывод снова нужен,\nего получают из сохранённого журнала или выполняют допустимое новое чтение.\n\n<span id=\"6-compaction-как-преобразование-состояния\"></span>",
+          "new": "строке нельзя восстановить их текст. Если прежний вывод снова нужен,\nего получают из сохранённого журнала или выполняют допустимое новое чтение.\n\n<a id=\"harness-observation-masking\"></a>\n\n### Сократить вывод или пересказать ход работы\n\nАгент нашёл нужный файл, прочитал его и запустил тест. Два первых\nвывода длинные, а следующий шаг зависит от свежей ошибки теста.\nПри маскировании старых наблюдений в истории останутся команды поиска\nи чтения, но вместо их результатов будут короткие заглушки. Если позже\nпонадобится строка из файла, её придётся найти в журнале или прочитать заново.\nСуммаризация может перенести эту строку в краткий пересказ, но может и\nпропустить её: модель-суммаризатор не знает наверняка, что понадобится дальше.\n\n![[00 Учебник/Assets/Figures/curated/harness-context-2026-11-09/management-strategies.png|Три входа для одного агента: полная история слева, заглушки вместо старых наблюдений в центре и сводка старых шагов справа]]\n\n*Tobias Lindenbauer, Igor Slinko, Ludwig Felder, Egor Bogomolov и Yaroslav Zharov,\n[The Complexity Trap, Figure 3](https://arxiv.org/html/2508.21433v3#S3.F3).\nОригинальный рисунок без изменений, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nВ средней колонке рисунка `Mask 1` и `Mask 2` заменяют только вывод\nинструментов: шаги `Reasoning` и `Action` остаются. В правой колонке\n`Summary 1` заменяет оба старых шага целиком. Последний шаг в обоих вариантах\nсохраняется полностью. Рисунок показывает окно в один шаг; в основных\nопытах окно было десять шагов. В варианте с суммаризацией первый пересказ\nпоявлялся после 31 шага: 21 для пересказа, десять без изменений.\nМаскирование сокращает каждый старый вывод, но не останавливает рост\nистории: оставшиеся рассуждения, действия и заглушки продолжают накапливаться.\n\nВ [опытах SWE-agent на 500 задачах SWE-bench Verified](https://arxiv.org/html/2508.21433v3#S4.T1)\nс Qwen3-Coder 480B получились следующие средние:\n\n| История | Решено | Долл. на задачу |\n| --- | ---: | ---: |\n| Полная | 53,4% | 1,29 |\n| Маскирование | 54,8% | 0,61 |\n| Суммаризация | 53,8% | 0,64 |\n\nПо округлённым числам маскирование снизило среднюю стоимость на\n$(1{,}29-0{,}61)/1{,}29\\approx53\\%$. Это затраты на всю попытку,\nа не на один вход. Отдельные вызовы для пересказа тоже входят в расчёт;\nдля этой модели авторы отнесли к ним около 7% стоимости варианта с пересказом.\nВ [парном сравнении с полной историей](https://arxiv.org/html/2508.21433v3#A3.T4)\nинтервал для прибавки решённых задач при маскировании составляет\nот −1,6 до +4,4 процентного пункта. Из таблицы нельзя заключить, что\nмаскирование повысило долю решённых задач или доказано равно суммаризации.\nС Gemini 2.5 Flash в режиме thinking сокращение истории снизило\nи расходы, и долю решённых задач. В дополнительном опыте с OpenHands\nперенос окна из SWE-agent без настройки тоже ухудшил результат.\nУсловия опытов и исходные данные собраны в\n[[05 Источники/Papers/The Complexity Trap|заметке к статье]].\n\n<span id=\"6-compaction-как-преобразование-состояния\"></span>"
+        },
+        {
+          "old": "само имя «condenser» не задаёт единой политики.\n\n### Handoff после записи с неизвестным исходом",
+          "new": "само имя «condenser» не задаёт единой политики.\n\n<a id=\"harness-compaction-boundaries\"></a>\n\n### Почему нельзя сжать вызов отдельно от ответа\n\nВернёмся к [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#mcp-response-correlation|двум чтениям из предыдущей главы]].\nВ активной истории OpenHands стоят два действия из одного ответа модели,\nзатем два наблюдения. Первым пришёл результат `c3`, вторым — `c2`.\nВ примере ниже начальные события 0 и 1 защищены, а события 2–6 не содержат\nвызовов. При `max_size=10` и 11 событиях расчёт без учёта связей дал бы\nграницу 9: в сводку ушли бы оба действия, а два результата остались бы\nв хвосте без соответствующих вызовов.\n\n| Индекс | Событие | Какие ответы ещё ждём |\n| ---: | --- | --- |\n| 7 | Вызов `c2` | `c2` |\n| 8 | Вызов `c3` | `c2`, `c3` |\n| 9 | Результат `c3` | `c2` |\n| 10 | Результат `c2` | — |\n\nВ [`ToolCallMatchingProperty.manipulation_indices`](https://github.com/OpenHands/software-agent-sdk/blob/0996c33916c2a977ea9fe38deee660ff0e1389f2/openhands-sdk/openhands/sdk/context/view/properties/tool_call_matching.py#L61-L95)\nграница после события разрешена, только если нет ожидающих ответов.\nПосле события 8 остаются два незакрытых вызова; после события 9 — один.\nПервый допустимый индекс не меньше 9 — это 11, сразу после результата\n`c2`. Поэтому в сводку уходят события `[2:11]`, и от этих двух вызовов\nне остаётся необработанных результатов в хвосте. Плановые два события\nв хвосте здесь не сохраняются: целостность важнее планового числа.\nИсходные события по-прежнему принадлежат журналу, а число токенов\nнового входа нужно проверить отдельно.\n\nСледующий код воспроизводит выбор границы для этой истории. Это расчёт\nдля учебных событий, не запуск OpenHands и не генерация резюме.\n\n~~~python\ndef safe_cuts(events):\n    cuts, pending = [0], set()\n    for after, (kind, call_id) in enumerate(events, start=1):\n        if kind == \"call\":\n            pending.add(call_id)\n        elif kind == \"result\":\n            pending.discard(call_id)\n        if not pending:\n            cuts.append(after)\n    return cuts\n\nevents = [(\"message\", None)] * 7 + [\n    (\"call\", \"c2\"), (\"call\", \"c3\"),\n    (\"result\", \"c3\"), (\"result\", \"c2\"),\n]\nkeep_first, max_size = 2, 10\ntail = max_size // 2 - keep_first - 1\nnaive_end = len(events) - tail\ncuts = safe_cuts(events)\nassert (tail, naive_end) == (2, 9)\nassert cuts == [0, 1, 2, 3, 4, 5, 6, 7, 11]\nend = next(cut for cut in cuts if cut >= naive_end)\nassert events[keep_first:end][-4:] == events[7:]\nassert end == 11 and events[end:] == []\n\n# Пока c2 не ответил, за границей 9 нет допустимого разреза.\nassert all(cut < naive_end for cut in safe_cuts(events[:-1]))\n~~~\n\nВ закреплённой версии OpenHands\n[`_get_forgotten_events`](https://github.com/OpenHands/software-agent-sdk/blob/0996c33916c2a977ea9fe38deee660ff0e1389f2/openhands-sdk/openhands/sdk/context/condenser/llm_summarizing_condenser.py#L327-L352)\nсдвигает обе границы к следующим допустимым индексам. В полном\nпредставлении есть и другие ограничения:\n[`BatchAtomicityProperty`](https://github.com/OpenHands/software-agent-sdk/blob/0996c33916c2a977ea9fe38deee660ff0e1389f2/openhands-sdk/openhands/sdk/context/view/properties/batch_atomicity.py#L49-L76)\nзащищает пакет действий из одного ответа модели,\n[`ToolLoopAtomicityProperty`](https://github.com/OpenHands/software-agent-sdk/blob/0996c33916c2a977ea9fe38deee660ff0e1389f2/openhands-sdk/openhands/sdk/context/view/properties/tool_loop_atomicity.py#L95-L126)\nможет защищать целый цикл, начатый действием с thinking-блоком.\nЕсли обычный разрез недоступен, мягкий запрос может оставить представление\nпрежним. Для жёсткого запроса код пробует восстановление или возвращает\nошибку. Ни одно из этих действий не подтверждает завершение инструмента.\n\n<a id=\"harness-handoff-unknown\"></a>\n\n### Handoff после записи с неизвестным исходом"
+        },
+        {
+          "old": "в [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#Потерянный ответ после записи|главе 65]].",
+          "new": "в [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#tool-retry-idempotency|разборе потерянного ответа после записи]]."
+        },
+        {
+          "old": "<span id=\"7-reminder-tokens--не-особый-вид-токена\"></span>\n## 7. Текстовые напоминания: reminder tokens",
+          "new": "<span id=\"7-reminder-tokens--не-особый-вид-токена\"></span>\n<a id=\"harness-reminder-tokens\"></a>\n\n## 7. Текстовые напоминания: reminder tokens"
+        },
+        {
+          "old": "## 10. Наблюдаемость и доказательство завершения",
+          "new": "<a id=\"harness-verified-completion\"></a>\n\n## 10. Наблюдаемость и доказательство завершения"
+        },
+        {
+          "old": "- [OpenHands Context Condenser](https://docs.openhands.dev/sdk/guides/context-condenser) — проверяемая реализация keep-first, recent history и summarization.",
+          "new": "- [OpenHands Context Condenser](https://docs.openhands.dev/sdk/guides/context-condenser) — проверяемая реализация keep-first, recent history и summarization.\n- [[05 Источники/Papers/The Complexity Trap|Lindenbauer et al., The Complexity Trap]] — маскирование наблюдений, суммаризация и их стоимость на SWE-bench Verified."
+        },
+        {
+          "old": "интервал для прибавки решённых задач при маскировании составляет\nот −1,6 до +4,4 процентного пункта. Из таблицы нельзя заключить, что\nмаскирование повысило долю решённых задач или доказано равно суммаризации.",
+          "new": "интервал для разницы в доле решённых задач при маскировании составляет\nот −1,6 до +4,4 процентного пункта. Эти результаты не доказывают ни\nвыигрыша по качеству от маскирования, ни его равенства суммаризации."
+        },
+        {
+          "old": "| Индекс | Событие | Какие ответы ещё ждём |",
+          "new": "| Индекс | Событие | Ждём ответ |"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "a99792cb29d02bd0f57cd73c2a191953126a5faf6dab3cbbca77fe9037453166",
+      "after_sha256": "75984dd7654647e3e48e3b30aaaf49bfdb4e7b0d69b77d5b4eb9356a602a09c1",
+      "lines": 1679,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering|Agent harness и context engineering]]",
+          "new": "- [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering|Agent harness и context engineering]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-loop|Цикл агента — вызов модели, исполнение и проверка]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-context-budget|Контекст агента — расчёт бюджета]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-prompt-prefix|Кеш префикса в агентном цикле]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-authoritative-state|Журнал, рабочий контекст и состояние задачи]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-observation-masking|Маскирование наблюдений и суммаризация истории]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-compaction-boundaries|Compaction — границы между вызовами и наблюдениями]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-handoff-unknown|Handoff после операции с неизвестным исходом]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-reminder-tokens|Reminder tokens — событие, напоминание и проверка]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-verified-completion|Завершение агента — проверка текущей ревизии]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "dc2a0ae51d8b6e956653aecbd27bb1049a8e09febef3eb9444802b9981621c72",
+      "after_sha256": "67ef33f17da98f4726630ef21247753ca0fa83a933e218b867be74c5b719a201",
+      "lines": 1681,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering|Agent harnesses and context engineering]]",
+          "new": "- [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering|Agent harnesses and context engineering]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-loop|Agent loop — model call, execution, and verification]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-context-budget|Agent context — token budget]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-prompt-prefix|Prefix caching in the agent loop]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-authoritative-state|Event log, active context, and task state]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-observation-masking|Observation masking and history summarization]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-compaction-boundaries|Compaction — boundaries around calls and observations]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-handoff-unknown|Handoff after an operation with an unknown outcome]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-reminder-tokens|Reminder tokens — triggers, reminders, and checks]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-verified-completion|Agent completion — verifying the current revision]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/_index.md",
+      "before_sha256": "61281e27cc6efb222249b90c80f921067075d5d870ed5e647ab93ebacd6a8e9f",
+      "after_sha256": "95fc36bbc26340ef3716756624c326c73b9dc9693d64b9ae9a31e9f8ae483d62",
+      "lines": 47,
+      "changes": [
+        {
+          "old": "- [[05 Источники/Papers/LambdaRank and LambdaLoss|LambdaRank and LambdaLoss — nDCG pair weights and cutoff conventions]]",
+          "new": "- [[05 Источники/Papers/LambdaRank and LambdaLoss|LambdaRank and LambdaLoss — nDCG pair weights and cutoff conventions]]\n- [[05 Источники/Papers/The Complexity Trap|The Complexity Trap — observation masking and LLM summarization]]"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "054fae440a4f540198270692395047b5eeb83bdd50de9231f6bf8444f0c50233",
+      "after_sha256": "2763501f1d34090d510638c1130e40a3d49c24780409caa8b16a837b3db08820",
+      "lines": 2550,
+      "changes": [
+        {
+          "old": "      - source: 05 Источники/Papers/LambdaRank and LambdaLoss.md\n        route: sources/papers/lambdarank-lambdaloss",
+          "new": "      - source: 05 Источники/Papers/LambdaRank and LambdaLoss.md\n        route: sources/papers/lambdarank-lambdaloss\n      - source: 05 Источники/Papers/The Complexity Trap.md\n        route: sources/papers/complexity-trap-context-management"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "04b17ad35e2862209b6beb62df9954382e94fb325e720c0b984a2fb202ed49f3",
+      "after_sha256": "c70c582b73780e76d81f6a5e4765d85d0e83eb5b078579017f7729b1f552825c",
+      "lines": 23880,
+      "changes": [
+        {
+          "old": "assets:",
+          "new": "assets:\n  - id: \"curated-harness-context-strategies-59b404609294\"\n    asset: \"00 Учебник/Assets/Figures/curated/harness-context-2026-11-09/management-strategies.png\"\n    title: \"The Complexity Trap, Figure 3: context management strategies\"\n    author: \"Tobias Lindenbauer, Igor Slinko, Ludwig Felder, Egor Bogomolov and Yaroslav Zharov\"\n    source_url: \"https://arxiv.org/abs/2508.21433v3\"\n    source_image_url: \"https://arxiv.org/html/2508.21433v3/data/management-strategies.png\"\n    source_asset: \"00 Учебник/Assets/Figures/curated/harness-context-2026-11-09/management-strategies.png\"\n    source_asset_sha256: \"59b404609294146c8d826968048c2020aaa380f31dc49feab93973150bebb68d\"\n    source_page_snapshot: \"publishing/fixtures/context-management-v3/arxiv-license.html\"\n    source_page_sha256: \"5aaa9c99dbdaf4e85c7aceae3dedbf1e5946960004ed347d6aa6ed7d45184a4b\"\n    sha256: \"59b404609294146c8d826968048c2020aaa380f31dc49feab93973150bebb68d\"\n    dimensions_px: [1748,1580]\n    bytes: 308946\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"publishing/fixtures/context-management-v3/arxiv-license.html\"\n    license_evidence_sha256: \"5aaa9c99dbdaf4e85c7aceae3dedbf1e5946960004ed347d6aa6ed7d45184a4b\"\n    modifications: \"Complete author PNG from arXiv HTML v3, copied byte-for-byte with alpha, all labels and all panels. No crop, translation, or redraw.\"\n    derivation: \"source-raster-copy\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    metadata_status: \"verified\"\n    last_verified: \"2026-11-09\"\n    used_in: [\"00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md\"]"
+        }
+      ]
+    }
+  ]
+}

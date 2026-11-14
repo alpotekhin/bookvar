@@ -1,5 +1,18 @@
 SPECTRAL CLUSTERING FIGURES
 
+wiskott-connected-heat.png (Figure 1.1, PDF page 5)
+wiskott-weighted-constraint.png (Figure 2.2, PDF page 15)
+Laurenz Wiskott and Fabian Schönfeld,
+Laplacian Matrix for Dimensionality Reduction and Clustering, 26 May 2022.
+Copyright 2017-2019 Laurenz Wiskott.
+Source: https://www.ini.rub.de/PEOPLE/wiskott/Teaching/UnsupervisedLearning/PublicWeb/LaplacianMatrix-L0-LectureNotes-PublicWeb.pdf
+CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/
+Both complete figures and their English captions extracted from 300 dpi page renders.
+No redraw, relabeling, translation, resampling or omission of diagram elements.
+The chapter also quotes attributed English passages from Sections 1.1 and 2.4.
+These figures and excerpts retain CC BY-SA 4.0; unrelated Bookvar material
+is not relicensed by this notice.
+
 wiskott-heat-components.png
 Laurenz Wiskott and Fabian Schönfeld,
 Laplacian Matrix for Dimensionality Reduction and Clustering, Figure 1.2.

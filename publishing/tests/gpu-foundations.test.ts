@@ -3,11 +3,12 @@ import { resolve } from 'node:path';
 import YAML from 'yaml';
 import { describe, expect, it } from 'vitest';
 import { beforeSystemsCompletion } from '../tools/systems-completion-baseline.mjs';
+import { beforeTopicConsolidation } from '../tools/topic-consolidation-baseline.mjs';
 
 const root = resolve(import.meta.dirname, '../..');
 const file = '00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md';
 // The additive systolic explanation has its own exact-revision checks.
-const body = beforeSystemsCompletion(readFileSync(resolve(root, file), 'utf8'), file, root);
+const body = beforeSystemsCompletion(beforeTopicConsolidation(readFileSync(resolve(root, file), 'utf8'), file, root), file, root);
 
 describe('GPU foundations explanation', () => {
   it('spells out the actual XOR bank map and its diagonal limitation', () => {

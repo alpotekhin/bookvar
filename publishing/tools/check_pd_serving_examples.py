@@ -16,6 +16,8 @@ ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / '00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md'
 SOURCES = ROOT / '05 Источники/Originals/pd-serving-2026-10-20'
 ASSETS = ROOT / '00 Учебник/Assets/Figures/curated/pd-serving-review-2026-10'
+DIST_SERVE_FIGURES = ROOT / 'docs/audit/2026-11-11-distserve-original-figures-additions.json'
+SERVING_SOURCE_FILES = ROOT / 'docs/audit/2026-11-11-mooncake-dynamo-originals-additions.json'
 
 
 def dense_attention_layer(x, weights):
@@ -213,25 +215,44 @@ def main():
         actual = actual.split(f'<!-- source-excerpt: {marker}:end -->')[0]
         actual = '\n'.join(re.sub(r'^> ?', '', line) for line in actual.strip().splitlines())
         assert ' '.join(actual.split()) == ' '.join(raw.split())
-    embeds = [p.removeprefix('02 Areas/ML & DL/') for p in re.findall(r'!\[\[([^\]]+)\]\]', chapter)]
-    assert set(embeds) == {a['asset'] for a in manifest['figures']} and len(embeds) == 6
+    distserve = json.loads(DIST_SERVE_FIGURES.read_text())['figures']
+    source_files = json.loads(SERVING_SOURCE_FILES.read_text())['figures']
+    new_figures = distserve + source_files
+    replacements = {row['replaces']: row for row in new_figures if row['replaces']}
+    assert replacements.keys() <= {a['asset'] for a in manifest['figures']}
+    current_figures = [replacements.get(a['asset'], a) for a in manifest['figures']]
+    current_figures += [row for row in new_figures if not row['replaces']]
+    embeds = [p.removeprefix('02 Areas/ML & DL/') for p in re.findall(r'!\[\[([^|\]]+)', chapter)]
+    assert set(embeds) == {a['asset'] for a in current_figures} and len(embeds) == len(current_figures)
     for asset in manifest['figures']:
         assert hashlib.sha256((ROOT / asset['asset']).read_bytes()).hexdigest() == asset['sha256']
+    for asset in new_figures:
+        assert hashlib.sha256((ROOT / asset['asset']).read_bytes()).hexdigest() == asset['sha256']
+    for asset in source_files:
+        snapshot = (ROOT / asset['source_asset']).read_bytes()
+        assert snapshot == (ROOT / asset['asset']).read_bytes()
+        assert hashlib.sha256(snapshot).hexdigest() == asset['source_asset_sha256']
+        blob = f'blob {len(snapshot)}\0'.encode() + snapshot
+        assert hashlib.sha1(blob).hexdigest() == asset['git_blob']
+        assert hashlib.sha256((ROOT / asset['license_file']).read_bytes()).hexdigest() == asset['license_sha256']
 
-    records = json.loads((ASSETS / 'assets.json').read_text())
+    records = json.loads((ASSETS / 'assets.json').read_text()) + distserve
     with tempfile.TemporaryDirectory(prefix='bookvar-pd-figures-') as temporary:
         rendered = {}
         for record in records:
             pdf = ROOT / record['source_asset']
             assert hashlib.sha256(pdf.read_bytes()).hexdigest() == record['source_asset_sha256']
             page = record['source_page']
-            if page not in rendered:
-                target = Path(temporary) / f'page-{page}'
+            resolution = ('-r', record['render_dpi']) if 'render_dpi' in record else (
+                '-scale-to', record['render_scale_to'])
+            key = (pdf, page, resolution)
+            if key not in rendered:
+                target = Path(temporary) / f'page-{len(rendered)}'
                 subprocess.run(['pdftoppm', '-f', str(page), '-l', str(page), '-singlefile',
-                                '-scale-to', str(record['render_scale_to']), '-png', str(pdf), str(target)],
+                                resolution[0], str(resolution[1]), '-png', str(pdf), str(target)],
                                check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
-                rendered[page] = Image.open(target.with_suffix('.png')).convert('RGB')
-            source = rendered[page]
+                rendered[key] = Image.open(target.with_suffix('.png')).convert('RGB')
+            source = rendered[key]
             assert list(source.size) == record['render_page_size_px']
             expected = np.asarray(source.crop(record['crop_box_px']))
             actual = np.asarray(Image.open(ROOT / record['asset']).convert('RGB'))

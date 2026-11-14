@@ -1,0 +1,129 @@
+[
+  {
+    "id": "curated-deepseek-v2-figure3-attention-f1457699df16",
+    "asset": "00 Учебник/Assets/Figures/curated/deepseek-v2-mla-2026-11-09/v2-figure3-attention.png",
+    "title": "MHA, GQA, MQA and MLA cache layouts (Figure 3)",
+    "author": "DeepSeek-AI",
+    "source_url": "https://github.com/deepseek-ai/DeepSeek-V2/blob/ec98ee3cbffc32104cd55dba8af884b3d772602a/deepseek-v2-tech-report.pdf",
+    "source_asset_sha256": "aedf0bf55b21049cd0f3a4a8b1807814ed4f5f418b75b4a4a06aa2006a494e63",
+    "commit": "ec98ee3cbffc32104cd55dba8af884b3d772602a",
+    "render_dpi": 360,
+    "render_page_size_px": [
+      2977,
+      4210
+    ],
+    "license": "MIT",
+    "license_url": "https://github.com/deepseek-ai/DeepSeek-V2/blob/ec98ee3cbffc32104cd55dba8af884b3d772602a/LICENSE-CODE",
+    "license_evidence": "site/public/licenses/deepseek-v2-ec98ee3c-MIT.txt",
+    "license_evidence_sha256": "6e4c38e1172f42fdbff13edf9a7a017679fb82b0fde415a3e8b3c31c6ed4a4e4",
+    "public_license_copy": "site/public/licenses/deepseek-v2-ec98ee3c-MIT.txt",
+    "derivation": "pdf-page-render-crop",
+    "metadata_status": "verified",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-11-09",
+    "source_page": 7,
+    "source_image_url": "https://raw.githubusercontent.com/deepseek-ai/DeepSeek-V2/ec98ee3cbffc32104cd55dba8af884b3d772602a/deepseek-v2-tech-report.pdf#page=7",
+    "crop_box_px": [
+      350,
+      405,
+      2630,
+      1045
+    ],
+    "dimensions_px": [
+      2280,
+      640
+    ],
+    "sha256": "f1457699df16b148d9a69a47d2884d6628912dba292376fc1bb73c0ffc57fa42",
+    "modifications": "Complete original artwork, including all four panels, labels and legend, extracted from the pinned author PDF. Running text and paper caption excluded; no redraw.",
+    "used_in": [
+      "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+      "00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md",
+      "02 Атлас моделей/Сравнения/Карта архитектурных линий.md",
+      "03 Исследовательские линии/Эффективный attention.md",
+      "02 Атлас моделей/Сравнения/Сравнение семейств.md"
+    ]
+  },
+  {
+    "id": "curated-deepseek-v2-table8-dense-ablation-78f2be40eb61",
+    "asset": "00 Учебник/Assets/Figures/curated/deepseek-v2-mla-2026-11-09/v2-table8-dense-ablation.png",
+    "title": "Dense 7B ablation: MQA, GQA and MHA (Table 8)",
+    "author": "DeepSeek-AI",
+    "source_url": "https://github.com/deepseek-ai/DeepSeek-V2/blob/ec98ee3cbffc32104cd55dba8af884b3d772602a/deepseek-v2-tech-report.pdf",
+    "source_asset_sha256": "aedf0bf55b21049cd0f3a4a8b1807814ed4f5f418b75b4a4a06aa2006a494e63",
+    "commit": "ec98ee3cbffc32104cd55dba8af884b3d772602a",
+    "render_dpi": 360,
+    "render_page_size_px": [
+      2977,
+      4210
+    ],
+    "license": "MIT",
+    "license_url": "https://github.com/deepseek-ai/DeepSeek-V2/blob/ec98ee3cbffc32104cd55dba8af884b3d772602a/LICENSE-CODE",
+    "license_evidence": "site/public/licenses/deepseek-v2-ec98ee3c-MIT.txt",
+    "license_evidence_sha256": "6e4c38e1172f42fdbff13edf9a7a017679fb82b0fde415a3e8b3c31c6ed4a4e4",
+    "public_license_copy": "site/public/licenses/deepseek-v2-ec98ee3c-MIT.txt",
+    "derivation": "pdf-page-render-crop",
+    "metadata_status": "verified",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-11-09",
+    "source_page": 32,
+    "source_image_url": "https://raw.githubusercontent.com/deepseek-ai/DeepSeek-V2/ec98ee3cbffc32104cd55dba8af884b3d772602a/deepseek-v2-tech-report.pdf#page=32",
+    "crop_box_px": [
+      535,
+      400,
+      2445,
+      1005
+    ],
+    "dimensions_px": [
+      1910,
+      605
+    ],
+    "sha256": "78f2be40eb6146ae3f7615ea0f72d8ebccd73d1342953229f5a96956db93bfc7",
+    "modifications": "Complete original table with all rows, columns and headers, extracted from the pinned author PDF. Running text and paper caption excluded; no redraw.",
+    "used_in": [
+      "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md"
+    ]
+  },
+  {
+    "id": "curated-deepseek-v2-table9-mla-ablation-f553a18efc11",
+    "asset": "00 Учебник/Assets/Figures/curated/deepseek-v2-mla-2026-11-09/v2-table9-mla-ablation.png",
+    "title": "Small and large MoE ablations: MHA versus MLA (Table 9)",
+    "author": "DeepSeek-AI",
+    "source_url": "https://github.com/deepseek-ai/DeepSeek-V2/blob/ec98ee3cbffc32104cd55dba8af884b3d772602a/deepseek-v2-tech-report.pdf",
+    "source_asset_sha256": "aedf0bf55b21049cd0f3a4a8b1807814ed4f5f418b75b4a4a06aa2006a494e63",
+    "commit": "ec98ee3cbffc32104cd55dba8af884b3d772602a",
+    "render_dpi": 360,
+    "render_page_size_px": [
+      2977,
+      4210
+    ],
+    "license": "MIT",
+    "license_url": "https://github.com/deepseek-ai/DeepSeek-V2/blob/ec98ee3cbffc32104cd55dba8af884b3d772602a/LICENSE-CODE",
+    "license_evidence": "site/public/licenses/deepseek-v2-ec98ee3c-MIT.txt",
+    "license_evidence_sha256": "6e4c38e1172f42fdbff13edf9a7a017679fb82b0fde415a3e8b3c31c6ed4a4e4",
+    "public_license_copy": "site/public/licenses/deepseek-v2-ec98ee3c-MIT.txt",
+    "derivation": "pdf-page-render-crop",
+    "metadata_status": "verified",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-11-09",
+    "source_page": 32,
+    "source_image_url": "https://raw.githubusercontent.com/deepseek-ai/DeepSeek-V2/ec98ee3cbffc32104cd55dba8af884b3d772602a/deepseek-v2-tech-report.pdf#page=32",
+    "crop_box_px": [
+      345,
+      1210,
+      2640,
+      1945
+    ],
+    "dimensions_px": [
+      2295,
+      735
+    ],
+    "sha256": "f553a18efc11a4ca502d2bcfc6713befbc54beef28300f781490d938716e0c49",
+    "modifications": "Complete original table with all rows, columns and headers, extracted from the pinned author PDF. Running text and paper caption excluded; no redraw.",
+    "used_in": [
+      "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md"
+    ]
+  }
+]

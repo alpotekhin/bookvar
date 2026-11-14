@@ -310,6 +310,123 @@ with torch.device("meta"):
     parts.append(module.RMSNorm(4096))
 count = sum(p.numel() for part in parts for p in part.parameters())
 assert count == 2*32000*4096+32*(4*4096**2+3*4096*11008+2*4096)+4096 == 6738415616
+
+# Compare matched layer shapes without loading either gated checkpoint.
+with torch.device("meta"):
+    vocab3 = nn.ModuleList([nn.Embedding(128256,4096),nn.Linear(4096,128256,bias=False)])
+    kv3 = nn.ModuleList([nn.Linear(4096,8*128,bias=False) for _ in range(2)])
+    ffn3 = nn.ModuleList([nn.Linear(4096,14336,bias=False) for _ in range(2)]
+                         + [nn.Linear(14336,4096,bias=False)])
+def num_params(modules):
+    return sum(p.numel() for p in modules.parameters())
+change_kv = 32 * (num_params(kv3) - 2*4096*4096)
+change_ffn = 32 * (num_params(ffn3) - 3*4096*11008)
+change_vocab = num_params(vocab3) - 2*32000*4096
+assert (change_kv, change_ffn, change_vocab) == (-805306368,1308622848,788529152)
+assert change_kv + change_ffn + change_vocab == 1291845632
+assert count + change_kv + change_ffn + change_vocab == 8030261248
+assert [(2*32*kv*128*2*length)//2**30 for kv,length in [(32,4096),(8,8192),(8,131072)]] == [2,1,16]
+assert [2*32*kv*128*2 for kv in [32,8]] == [512*1024,128*1024]
+print("PASS Llama 2 7B to Llama 3 8B weight delta and 4K/8K/128K BF16 cache arithmetic")
+pair_counts = [length * (length + 1) // 2 for length in (8192, 131072)]
+assert pair_counts == [33_558_528, 8_590_000_128]
+assert 255.9 < pair_counts[1] / pair_counts[0] < 256
+assert 131072 // 8192 == 16
+assert [5_000_000_000 * share // 100 for share in (60, 40)] == [3_000_000_000, 2_000_000_000]
+print("PASS long-context pair counts and fixed-budget ProLong mixture arithmetic")
+
+# Run the pinned Llama 3 attention path on CPU without its CUDA constructor
+# or checkpoint. Check cache writes separately from the expanded read.
+llama3_source = ROOT/"05 Источники/Originals/llama-2026-10-22/llama3-model.py"
+llama3_bytes = llama3_source.read_bytes()
+assert hashlib.sha256(llama3_bytes).hexdigest() == "20d93de2fdb2c98fff085a1f1026d20cc4172e40809a0891e384d5c10bbb6965"
+llama3_tree = ast.parse(llama3_bytes)
+llama3_defs = [node for node in llama3_tree.body if getattr(node, "name", None) in
+               {"precompute_freqs_cis", "reshape_for_broadcast", "apply_rotary_emb", "repeat_kv", "Attention"}]
+llama3_env = dict(torch=torch, nn=nn, math=math, F=F, Optional=Optional, Tuple=Tuple, ModelArgs=object)
+exec(compile(ast.Module(body=llama3_defs, type_ignores=[]), str(llama3_source), "exec"), llama3_env)
+rng = torch.Generator().manual_seed(318)
+qkv = [torch.randn(1, 6, heads, 128, generator=rng) for heads in (32, 8, 8)]
+q, k, v = qkv
+angles = llama3_env["precompute_freqs_cis"](128, 6, theta=500000)
+cache = SimpleNamespace(
+    n_local_heads=32, n_local_kv_heads=8, n_rep=4, head_dim=128,
+    cache_k=torch.zeros(1, 6, 8, 128), cache_v=torch.zeros(1, 6, 8, 128),
+    wo=lambda x: x,
+)
+forward = llama3_env["Attention"].forward
+for start, length in [(0, 4), (4, 1), (5, 1)]:
+    stop = start + length
+    cache.wq, cache.wk, cache.wv = [
+        lambda _, tensor=tensor: tensor[:, start:stop].reshape(1, length, -1)
+        for tensor in qkv
+    ]
+    mask = torch.full((4, 4), -float("inf")).triu(1) if start == 0 else None
+    result = forward(cache, torch.zeros(1, length, 4096), start, angles[start:stop], mask)
+    if start == 0:
+        continue
+    q_rot, k_rot = llama3_env["apply_rotary_emb"](q[:, :stop], k[:, :stop], angles[:stop])
+    torch.testing.assert_close(cache.cache_k[:, :stop], k_rot)
+    torch.testing.assert_close(cache.cache_v[:, :stop], v[:, :stop])
+    assert cache.cache_k.shape == cache.cache_v.shape == (1, 6, 8, 128)
+    for data in (cache.cache_k, cache.cache_v):
+        sliced = data[:, :stop]
+        repeated = llama3_env["repeat_kv"](sliced, 4)
+        assert repeated.shape == (1, stop, 32, 128)
+        torch.testing.assert_close(repeated, sliced.repeat_interleave(4, dim=2))
+    expected = []
+    for head in range(32):
+        group = head // 4
+        query = q_rot[0, start, head]
+        scores = (k_rot[0, :, group] @ query) / math.sqrt(128)
+        expected.append(scores.softmax(dim=0) @ v[0, :stop, group])
+    torch.testing.assert_close(result.reshape(32, 128), torch.stack(expected), atol=2e-6, rtol=2e-6)
+    assert not torch.allclose(result.reshape(32, 128)[0], result.reshape(32, 128)[3])
+assert 8 * (8 // 8) == 8 * 1  # TP=8: distinct GQA heads vs replicated MQA head.
+print("PASS pinned Llama 3 GQA: 4 → 5 → 6 positions, eight heads cached, 32 head outputs")
+
+# Execute the pinned Meta serializer with a reversible tokenizer stub.
+# This checks the actual assembly/order and whitespace, not BPE IDs.
+tokenizer_source = ROOT/"05 Источники/Originals/llama-2026-10-22/llama3-tokenizer.py"
+chat_tree = ast.parse(tokenizer_source.read_text())
+chat_class = next(node for node in chat_tree.body if isinstance(node, ast.ClassDef) and node.name=="ChatFormat")
+class TraceTokenizer:
+    names = ["<|begin_of_text|>", "<|start_header_id|>", "<|end_header_id|>", "<|eot_id|>"]
+    special_tokens = {name: i for i,name in enumerate(names)}
+    def encode(self, text, *, bos, eos):
+        assert not bos and not eos
+        return [len(self.names)+ord(c) for c in text]
+    def decode(self, ids):
+        return ''.join(self.names[i] if i<len(self.names) else chr(i-len(self.names)) for i in ids)
+chat_env = {"Tokenizer": TraceTokenizer, "Message":dict, "Dialog":list, "List":list}
+exec(compile(ast.Module(body=[chat_class],type_ignores=[]),str(tokenizer_source),"exec"),chat_env)
+trace = TraceTokenizer()
+body = chapter.read_text()
+published_prompt = re.search(r'```text title="Llama 3 Instruct"\n([\s\S]*?)```',body).group(1)
+message = 'Does “An animal rests” follow from “A cat sleeps”?'
+assert trace.decode(chat_env["ChatFormat"](trace).encode_dialog_prompt(
+    [{"role":"user","content":"  "+message+"  "}])) == published_prompt
+assert f"<s>[INST] {message} [/INST]\n" in body
+print("PASS pinned Meta ChatFormat matches the published role headers, message end and two newlines")
+
+# Count unique vocabulary parameters and the GPT-1 to GPT-2 table delta.
+with torch.device("meta"):
+    gpt1_vocab = nn.Embedding(40478, 768)
+    gpt1_positions = nn.Embedding(512, 768)
+    gpt2_vocab = nn.Embedding(50257, 768)
+    gpt2_positions = nn.Embedding(1024, 768)
+    gpt2_head = nn.Linear(768, 50257, bias=False)
+    gpt2_head.weight = gpt2_vocab.weight
+    gpt3_positions = nn.Embedding(2048, 768)
+    gpt2_final_norm = nn.LayerNorm(768)
+assert gpt2_vocab.weight.numel() - gpt1_vocab.weight.numel() == 7510272
+assert gpt2_positions.weight.numel() - gpt1_positions.weight.numel() == 393216
+assert gpt3_positions.weight.numel() - gpt2_positions.weight.numel() == 786432
+assert sum(p.numel() for p in gpt2_final_norm.parameters()) == 1536
+assert sum(p.numel() for p in nn.ModuleList([gpt2_vocab, gpt2_head]).parameters()) == 38597376
+assert sum(p.numel() for p in nn.ModuleList(parts[:2]).parameters()) == 262144000
+print("PASS vocabulary tying, additional position rows and final-norm parameters")
+
 assert abs(count*2/2**30-12.551277160644531) < 1e-10
 assert 2*32*2048*32*128*2 == 2**30
 assert (2*32*2048*8*128*2)/(2*32*2048*32*128*2) == .25

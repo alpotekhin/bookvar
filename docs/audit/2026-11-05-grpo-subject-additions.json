@@ -1,0 +1,374 @@
+{
+  "schema_version": 1,
+  "kind": "grpo-subject-navigation-preservation",
+  "review_date": "2026-11-05",
+  "files": [
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "before_sha256": "11087f7fbb1f65127313d6ba9a640079ace6002235bff2420e5dca41bb3ea217",
+      "after_sha256": "a22e5ef6631becc62bf8190aedf3e5a8318f6b80b25eb74b2b0d4e4762b9d3db",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-30\nlast_verified: 2026-10-25",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05"
+        },
+        {
+          "old": "aliases:\n  - Group Relative Policy Optimization",
+          "new": "reference_terms:\n  - label: \"GRPO: сравнение ответов на один запрос\"\n    label_en: \"GRPO: comparing responses to one prompt\"\n    anchor: grpo-overview\n  - label: \"Расчёт группового преимущества и однородные группы\"\n    label_en: \"Group advantages and uniform-reward groups\"\n    anchor: grpo-group-example\n  - label: \"От награды за ответ к токеновому градиенту\"\n    label_en: \"From outcome rewards to token gradients\"\n    anchor: grpo-estimator\n  - label: \"Clipping при положительном и отрицательном преимуществе\"\n    label_en: \"Clipping with positive and negative advantages\"\n    anchor: grpo-signed-clipping\n  - label: \"Целевая функция GRPO\"\n    label_en: \"The GRPO objective\"\n    anchor: grpo-objective\n  - label: \"Оценка KL и различие её градиентов\"\n    label_en: \"The KL estimator and its different gradients\"\n    anchor: grpo-kl-estimator\n  - label: \"Текущая, старая и опорная модели\"\n    label_en: \"Current, old, and reference policies\"\n    anchor: grpo-policy-versions\n  - label: \"Реализация групповой оценки и маскирования\"\n    label_en: \"Group estimation and response masking\"\n    anchor: grpo-implementation\n  - label: \"Процессные награды и суммы будущих оценок\"\n    label_en: \"Process rewards and future-step sums\"\n    anchor: grpo-process-rewards\n  - label: \"Нормировка наград по сложности запроса\"\n    label_en: \"Reward normalization and prompt difficulty\"\n    anchor: grpo-normalizations\n  - label: \"Нормировка по длине и накопление градиента\"\n    label_en: \"Length normalization and gradient accumulation\"\n    anchor: grpo-length-normalization\n  - label: \"Взвешивание данных в GRPO, Dr. GRPO, RFT и MaxRL\"\n    label_en: \"Data weighting in GRPO, Dr. GRPO, RFT, and MaxRL\"\n    anchor: drgrpo-rft-maxrl\n  - label: \"Смещение группового среднего и leave-one-out\"\n    label_en: \"Group-mean bias and leave-one-out baselines\"\n    anchor: grpo-baseline-bias\n  - label: \"Dr. GRPO: отказ от двух нормировок\"\n    label_en: \"Dr. GRPO: removing two normalizations\"\n    anchor: grpo-dr-grpo\n  - label: \"Rejection fine-tuning: обучение на отобранных решениях\"\n    label_en: \"Rejection fine-tuning: learning from selected solutions\"\n    anchor: grpo-rft\n  - label: \"MaxRL: популяционные веса и конечная группа\"\n    label_en: \"MaxRL: population weights and finite groups\"\n    anchor: grpo-maxrl\n  - label: \"MaxRL и пропуск полностью неуспешных групп\"\n    label_en: \"MaxRL and skipped all-failure groups\"\n    anchor: grpo-maxrl-zero-groups\n  - label: \"Контролируемое сравнение RL-методов\"\n    label_en: \"Controlled comparisons of RL methods\"\n    anchor: grpo-controlled-ablation\n  - label: \"KL, варианты функции потерь и настройки TRL\"\n    label_en: \"KL, loss variants, and TRL settings\"\n    anchor: grpo-kl-settings\n  - label: \"Проверяемая конфигурация GRPOConfig\"\n    label_en: \"A checkable GRPOConfig configuration\"\n    anchor: grpo-trl-config\n  - label: \"Расхождение генерации и обучения, температура и support\"\n    label_en: \"Inference/training mismatch, temperature, and support\"\n    anchor: grpo-sampling-mismatch\n  - label: \"Устаревшие генерации: токеновое и полное перевзвешивание\"\n    label_en: \"Stale rollouts: token and full-trajectory reweighting\"\n    anchor: offpolicy-ratios\n  - label: \"GSPO: геометрическое среднее и последовательностный clipping\"\n    label_en: \"GSPO: geometric means and sequence-level clipping\"\n    anchor: gspo\n  - label: \"Различия R1-Zero и полного R1\"\n    label_en: \"R1-Zero versus the full R1 pipeline\"\n    anchor: reasoning-case-studies\n  - label: \"R1-Zero: генерации, обновления и смена reference\"\n    label_en: \"R1-Zero: rollouts, updates, and reference refreshes\"\n    anchor: grpo-r1-zero\n  - label: \"DeepSeek-R1: cold start, RL, отбор данных и повторный SFT\"\n    label_en: \"DeepSeek-R1: cold start, RL, data selection, and a second SFT\"\n    anchor: grpo-r1-pipeline\n  - label: \"Kimi k1.5: partial rollouts, replay и маски\"\n    label_en: \"Kimi k1.5: partial rollouts, replay, and masks\"\n    anchor: grpo-kimi-partial-rollouts\n  - label: \"Квадратичная цель Kimi k1.5\"\n    label_en: \"Kimi k1.5's quadratic objective\"\n    anchor: grpo-kimi-objective\n  - label: \"Kimi k1.5: бонус за длину и неверные ответы\"\n    label_en: \"Kimi k1.5: length rewards and incorrect answers\"\n    anchor: grpo-kimi-length-reward\n  - label: \"Qwen3: четыре стадии и режимы think/no_think\"\n    label_en: \"Qwen3: four stages and think/no_think modes\"\n    anchor: grpo-qwen3-stages\n  - label: \"Самокоррекция: наблюдаемый текст и границы выводов\"\n    label_en: \"Self-correction: observed text and limits of inference\"\n    anchor: grpo-self-correction\n  - label: \"Сбои GRPO и диагностические показатели\"\n    label_en: \"GRPO failures and diagnostic metrics\"\n    anchor: grpo-failures\n  - label: \"Открытые реализации GRPO и границы воспроизведения\"\n    label_en: \"Open GRPO implementations and reproduction limits\"\n    anchor: grpo-open-implementations\naliases:\n  - Group Relative Policy Optimization"
+        },
+        {
+          "old": "## Где находится GRPO",
+          "new": "<a id=\"grpo-overview\"></a>\n\n## Где находится GRPO"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ppo-2026-10-24/ppo-framework.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ppo-2026-10-24/ppo-framework.png|PPO: policy and value models, frozen reference and reward models, and GAE]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-review-2026-09/group-advantages.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-review-2026-09/group-advantages.png|GRPO: rewards and group-relative advantages without a value model]]"
+        },
+        {
+          "old": "## Сквозной численный пример",
+          "new": "<a id=\"grpo-group-example\"></a>\n\n## Сквозной численный пример"
+        },
+        {
+          "old": "### Ручной расчёт ограничения",
+          "new": "<a id=\"grpo-signed-clipping\"></a>\n\n### Ручной расчёт ограничения"
+        },
+        {
+          "old": "## Полная целевая функция",
+          "new": "<a id=\"grpo-objective\"></a>\n\n## Полная целевая функция"
+        },
+        {
+          "old": "В DeepSeekMath используется не полный перебор словаря, а неотрицательная оценка",
+          "new": "<a id=\"grpo-kl-estimator\"></a>\n\nВ DeepSeekMath используется не полный перебор словаря, а неотрицательная оценка"
+        },
+        {
+          "old": "Здесь участвуют **три разные версии модели**:",
+          "new": "<a id=\"grpo-policy-versions\"></a>\n\nЗдесь участвуют **три разные версии модели**:"
+        },
+        {
+          "old": "## Минимальная реализация математики",
+          "new": "<a id=\"grpo-implementation\"></a>\n\n## Минимальная реализация математики"
+        },
+        {
+          "old": "### Когда награда дана за отдельные шаги",
+          "new": "<a id=\"grpo-process-rewards\"></a>\n\n### Когда награда дана за отдельные шаги"
+        },
+        {
+          "old": "## Нормировка по длине",
+          "new": "<a id=\"grpo-length-normalization\"></a>\n\n## Нормировка по длине"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-review-2026-09/length-difficulty-bias.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-review-2026-09/length-difficulty-bias.png|Dr. GRPO: token weights under length and difficulty normalization]]"
+        },
+        {
+          "old": "Есть и более тонкая деталь. Среднее группы $\\mu_i$ вычислено с участием того же",
+          "new": "<a id=\"grpo-baseline-bias\"></a>\n\nСреднее группы $\\mu_i$ вычислено с участием того же"
+        },
+        {
+          "old": "### Dr. GRPO",
+          "new": "<a id=\"grpo-dr-grpo\"></a>\n\n### Dr. GRPO"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-review-2026-09/length-and-accuracy-ablation.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-review-2026-09/length-and-accuracy-ablation.png|Dr. GRPO: response length and accuracy in the normalization ablation]]"
+        },
+        {
+          "old": "### Rejection fine-tuning, или обучение на отобранных решениях",
+          "new": "<a id=\"grpo-rft\"></a>\n\n### Rejection fine-tuning, или обучение на отобранных решениях"
+        },
+        {
+          "old": "### MaxRL",
+          "new": "<a id=\"grpo-maxrl\"></a>\n\n### MaxRL"
+        },
+        {
+          "old": "У статьи MaxRL есть также различие между теоретической оценкой и практическим",
+          "new": "<a id=\"grpo-maxrl-zero-groups\"></a>\n\nУ статьи MaxRL есть также различие между теоретической оценкой и практическим"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-2026-10-24/maxrl-weight-functions.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-2026-10-24/maxrl-weight-functions.svg|MaxRL: task weights as a function of success probability and finite order]]"
+        },
+        {
+          "old": "<a id=\"что-сравнивает-честная-абляция\"></a>",
+          "new": "<a id=\"grpo-controlled-ablation\"></a>\n\n<a id=\"что-сравнивает-честная-абляция\"></a>"
+        },
+        {
+          "old": "## Штраф по KL не определяется одним названием GRPO",
+          "new": "<a id=\"grpo-kl-settings\"></a>\n\n## Штраф по KL не определяется одним названием GRPO"
+        },
+        {
+          "old": "<a id=\"минимальный-пример-запуска-в-trl\"></a>",
+          "new": "<a id=\"grpo-trl-config\"></a>\n\n<a id=\"минимальный-пример-запуска-в-trl\"></a>"
+        },
+        {
+          "old": "## Несовпадение моделей генерации и обучения",
+          "new": "<a id=\"grpo-sampling-mismatch\"></a>\n\n## Несовпадение моделей генерации и обучения"
+        },
+        {
+          "old": "### DeepSeek-R1-Zero",
+          "new": "<a id=\"grpo-r1-zero\"></a>\n\n### DeepSeek-R1-Zero"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-review-2026-09/r1-zero-training-dynamics.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-review-2026-09/r1-zero-training-dynamics.png|R1-Zero: training dynamics of accuracy and response length]]"
+        },
+        {
+          "old": "### Полный DeepSeek-R1",
+          "new": "<a id=\"grpo-r1-pipeline\"></a>\n\n### Полный DeepSeek-R1"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-r1/figure2-pipeline.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-r1/figure2-pipeline.png|DeepSeek-R1: cold start, reinforcement learning, data selection, and a second SFT]]"
+        },
+        {
+          "old": "<a id=\"kimi-k15-rl-требует-не-только-objective-но-и-производственного-контура\"></a>",
+          "new": "<a id=\"grpo-kimi-partial-rollouts\"></a>\n\n<a id=\"kimi-k15-rl-требует-не-только-objective-но-и-производственного-контура\"></a>"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-2026-10-24/kimi-partial-rollouts.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/grpo-2026-10-24/kimi-partial-rollouts.svg|Kimi k1.5: partial rollouts and replayed response segments]]"
+        },
+        {
+          "old": "Алгоритм Kimi k1.5 тоже не совпадает с формулой GRPO выше. В §2.3.2 авторы",
+          "new": "<a id=\"grpo-kimi-objective\"></a>\n\nАлгоритм Kimi k1.5 тоже не совпадает с формулой GRPO выше. В §2.3.2 авторы"
+        },
+        {
+          "old": "Управление длиной влияет и на награду. В Kimi k1.5 короткое правильное решение",
+          "new": "<a id=\"grpo-kimi-length-reward\"></a>\n\nУправление длиной влияет и на награду. В Kimi k1.5 короткое правильное решение"
+        },
+        {
+          "old": "<a id=\"qwen3-несколько-стадий-вместо-одной-кнопки-reasoning\"></a>",
+          "new": "<a id=\"grpo-qwen3-stages\"></a>\n\n<a id=\"qwen3-несколько-стадий-вместо-одной-кнопки-reasoning\"></a>"
+        },
+        {
+          "old": "## Что означает наблюдаемый момент самокоррекции",
+          "new": "<a id=\"grpo-self-correction\"></a>\n\n## Что означает наблюдаемый момент самокоррекции"
+        },
+        {
+          "old": "## Характерные сбои и наблюдаемые показатели",
+          "new": "<a id=\"grpo-failures\"></a>\n\n## Характерные сбои и наблюдаемые показатели"
+        },
+        {
+          "old": "## Открытые реализации",
+          "new": "<a id=\"grpo-open-implementations\"></a>\n\n## Открытые реализации"
+        },
+        {
+          "old": "В Open-R1 следует учитывать важную деталь: шаблон диалога дистиллированных\nмоделей DeepSeek заранее добавляет `<think>` и может скрывать начало блока",
+          "new": "В Open-R1 шаблон диалога дистиллированных моделей DeepSeek заранее добавляет\n`<think>` и может скрывать начало блока"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "63eb96ae5281c7efd9b5786a871a917adacb45be380d092e71bbb2f044ec5121",
+      "after_sha256": "865be33967779c6cb677aead0675d3217545213d9d00cdaf634629ec0bb5d0ce",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1|GRPO и DeepSeek-R1]]",
+          "new": "- [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1|GRPO и DeepSeek-R1]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-overview|GRPO: сравнение ответов на один запрос]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-group-example|Расчёт группового преимущества и однородные группы]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-estimator|От награды за ответ к токеновому градиенту]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-signed-clipping|Clipping при положительном и отрицательном преимуществе]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-objective|Целевая функция GRPO]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-kl-estimator|Оценка KL и различие её градиентов]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-policy-versions|Текущая, старая и опорная модели]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-implementation|Реализация групповой оценки и маскирования]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-process-rewards|Процессные награды и суммы будущих оценок]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-normalizations|Нормировка наград по сложности запроса]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-length-normalization|Нормировка по длине и накопление градиента]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#drgrpo-rft-maxrl|Взвешивание данных в GRPO, Dr. GRPO, RFT и MaxRL]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-baseline-bias|Смещение группового среднего и leave-one-out]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-dr-grpo|Dr. GRPO: отказ от двух нормировок]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-rft|Rejection fine-tuning: обучение на отобранных решениях]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-maxrl|MaxRL: популяционные веса и конечная группа]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-maxrl-zero-groups|MaxRL и пропуск полностью неуспешных групп]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-controlled-ablation|Контролируемое сравнение RL-методов]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-kl-settings|KL, варианты функции потерь и настройки TRL]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-trl-config|Проверяемая конфигурация GRPOConfig]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-sampling-mismatch|Расхождение генерации и обучения, температура и support]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#offpolicy-ratios|Устаревшие генерации: токеновое и полное перевзвешивание]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#gspo|GSPO: геометрическое среднее и последовательностный clipping]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#reasoning-case-studies|Различия R1-Zero и полного R1]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-r1-zero|R1-Zero: генерации, обновления и смена reference]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-r1-pipeline|DeepSeek-R1: cold start, RL, отбор данных и повторный SFT]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-kimi-partial-rollouts|Kimi k1.5: partial rollouts, replay и маски]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-kimi-objective|Квадратичная цель Kimi k1.5]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-kimi-length-reward|Kimi k1.5: бонус за длину и неверные ответы]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-qwen3-stages|Qwen3: четыре стадии и режимы think/no_think]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-self-correction|Самокоррекция: наблюдаемый текст и границы выводов]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-failures|Сбои GRPO и диагностические показатели]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-open-implementations|Открытые реализации GRPO и границы воспроизведения]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "dab94494faec8d98a15cb007a6bf065b472926fa472bb881c6bda769919e501c",
+      "after_sha256": "7b56e98e74174c8af90ea33aa49ca31071f8563c932e3baa29563ab7bccd751f",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1|GRPO and DeepSeek-R1]]",
+          "new": "- [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1|GRPO and DeepSeek-R1]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-overview|GRPO: comparing responses to one prompt]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-group-example|Group advantages and uniform-reward groups]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-estimator|From outcome rewards to token gradients]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-signed-clipping|Clipping with positive and negative advantages]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-objective|The GRPO objective]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-kl-estimator|The KL estimator and its different gradients]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-policy-versions|Current, old, and reference policies]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-implementation|Group estimation and response masking]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-process-rewards|Process rewards and future-step sums]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-normalizations|Reward normalization and prompt difficulty]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-length-normalization|Length normalization and gradient accumulation]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#drgrpo-rft-maxrl|Data weighting in GRPO, Dr. GRPO, RFT, and MaxRL]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-baseline-bias|Group-mean bias and leave-one-out baselines]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-dr-grpo|Dr. GRPO: removing two normalizations]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-rft|Rejection fine-tuning: learning from selected solutions]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-maxrl|MaxRL: population weights and finite groups]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-maxrl-zero-groups|MaxRL and skipped all-failure groups]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-controlled-ablation|Controlled comparisons of RL methods]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-kl-settings|KL, loss variants, and TRL settings]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-trl-config|A checkable GRPOConfig configuration]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-sampling-mismatch|Inference/training mismatch, temperature, and support]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#offpolicy-ratios|Stale rollouts: token and full-trajectory reweighting]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#gspo|GSPO: geometric means and sequence-level clipping]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#reasoning-case-studies|R1-Zero versus the full R1 pipeline]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-r1-zero|R1-Zero: rollouts, updates, and reference refreshes]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-r1-pipeline|DeepSeek-R1: cold start, RL, data selection, and a second SFT]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-kimi-partial-rollouts|Kimi k1.5: partial rollouts, replay, and masks]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-kimi-objective|Kimi k1.5's quadratic objective]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-kimi-length-reward|Kimi k1.5: length rewards and incorrect answers]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-qwen3-stages|Qwen3: four stages and think/no_think modes]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-self-correction|Self-correction: observed text and limits of inference]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-failures|GRPO failures and diagnostic metrics]]\n  - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-open-implementations|Open GRPO implementations and reproduction limits]]"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "status": "verified-local-delta",
+    "chapter": {
+      "source": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "inputSha256": "11087f7fbb1f65127313d6ba9a640079ace6002235bff2420e5dca41bb3ea217",
+      "inputLines": 1350,
+      "finalSha256": "a22e5ef6631becc62bf8190aedf3e5a8318f6b80b25eb74b2b0d4e4762b9d3db",
+      "finalLines": 1504,
+      "wholeRead": "Complete input read1-335,336-680,681-1030,1031-1350 with1230-1350 recovered separately. Final1-490,491-990,991-1504 read, with1226-1295 recovered after truncated output. The two subsequently edited filler clauses and their full paragraphs were reread; no later chapter changes."
+    },
+    "explanation": {
+      "scope": "Added33 subject links per locale,27 explicit anchors and eight descriptive image alternatives. Removed two authorial filler clauses without changing the explanations. All eleven programs,23 display derivations,30 source-unit identifiers, legacy anchors, original-source captions and eight figures retained.",
+      "mechanismReview": "Whole explanation reviewed: within-prompt groups and uniform groups; signed clipping; k3 KL expectation versus semigradient; current/old/reference policies; response masks; process-step rewards and future sums; reward/length normalizations and unequal microbatches; group-mean bias/leave-one-out; Dr.GRPO/RFT/MaxRL population-versus-finite-group estimators and skipped failures; controlled ablations; pinned TRL configuration; sampling/support and stale rollouts; token/full-trajectory ratios; GSPO; R1-Zero/full R1 stages; Kimi partial rollouts, quadratic objective and length reward; Qwen3 stages; self-correction and diagnostics.",
+      "freshSourceRead": {
+        "url": "https://arxiv.org/html/2402.03300v3#S4.SS1",
+        "sections": "DeepSeekMath v3 §4.1.1-4.1.4, Algorithm1 and §4.2; distinguishes outcome/process supervision, direct KL penalty, old/reference roles and10% RM replay."
+      },
+      "reusedSourceReview": {
+        "evidence": [
+          "docs/audit/2026-10-25-grpo.md",
+          "docs/audit/2026-10-29-legacy-grpo-rlvr-verification.json",
+          "docs/audit/2026-10-30-figure-replacements-additions.json"
+        ],
+        "acceptedSha256": "7173f3bbdb587d32f8d2f04c5663164c132563b6966ce7543ccc613f4e007e1a",
+        "condition": "The exact three Oct30 changes invert current input to the accepted hash; current navigation/style changes also invert exactly. Reuse is limited to unchanged explanations, equations, source sections and original figure provenance. The historical DeepSeekMath Figure4 permission warning is resolved by the Oct30 MIT RLHF Book replacement, not by borrowing another asset's license."
+      },
+      "limits": "This navigation/re-reading pass does not prove full CS336/Berkeley coverage or all153 chapters' acceptance; no new algorithm or course expansion was claimed."
+    },
+    "style": {
+      "skill": "no-ai-slop",
+      "result": "Removed 'Есть и более тонкая деталь' and 'следует учитывать важную деталь'. Kept derivations, meaningful technical contrasts, numeric examples, caveats and source-native English. No translation pass."
+    },
+    "reference": {
+      "subjectsPerLocale": 33,
+      "indexes": [
+        {
+          "source": "01 Справочник/_index.md",
+          "sha256": "865be33967779c6cb677aead0675d3217545213d9d00cdaf634629ec0bb5d0ce"
+        },
+        {
+          "source": "en/01 Reference/_index.md",
+          "sha256": "7b56e98e74174c8af90ea33aa49ca31071f8563c932e3baa29563ab7bccd751f"
+        }
+      ],
+      "newEnglishEdition": false
+    },
+    "examples": {
+      "exit": 0,
+      "pythonFences": 11,
+      "device": "cpu",
+      "torch": "2.14.1",
+      "trl": "0.24.0",
+      "transformers": "4.57.1",
+      "numpy": "2.5.4",
+      "clippingCases": 6,
+      "finiteGroupCases": 1740,
+      "values": {
+        "kl": 0.020136,
+        "exactKlGradient": 0.097312,
+        "fixedSampleEstimatorGradient": 0.1,
+        "groupMeanGradient": 0.08,
+        "reinforceAndLooGradient": 0.16,
+        "maxrlTheoretical": 0.288,
+        "maxrlSkipFailures": 0.16,
+        "offpolicyUnweighted": 0.032,
+        "offpolicyToken": 0.096,
+        "offpolicySequence": 0.288,
+        "grpoGradient": [
+          0,
+          -0.3
+        ],
+        "gspoGradient": [
+          -0.474341649,
+          -0.474341649
+        ],
+        "kimiLossGradient": [
+          -0.2,
+          0.2
+        ]
+      },
+      "log": "/var/tmp/bookvar-grpo-final-examples-20261105.log",
+      "environment": "First offline resolution failed because TRL was absent; pinned packages restored through the official PyPI registry. That step downloaded pandas10.7MiB and pyarrow35.6MiB plus runtime dependencies. Final command succeeded offline. No model weights, tokenizer, dataset, Trainer, GPU training or benchmark."
+    },
+    "figures": {
+      "count": 8,
+      "bytes": "All eight match their existing central-registry SHA256 values; no assets or licenses changed.",
+      "desktop": "All eight originals opened and personally inspected with source captions in1280x720 viewer.",
+      "mobile": {
+        "viewport": [
+          375,
+          812
+        ],
+        "pageScrollWidth": 375,
+        "displayMath": 23,
+        "mathWidth": 343,
+        "tables": 3,
+        "tableWidth": 343,
+        "katexErrors": 0,
+        "kimi": {
+          "zoom": 4,
+          "upperLeft": [
+            0,
+            0
+          ],
+          "lowerRight": [
+            1077,
+            168.5
+          ],
+          "maxX": 1077,
+          "maxYRounded": 168,
+          "scope": "Replayed segments, stop/cut/repeat legend and both axes' edges inspected."
+        },
+        "difficultyFigure": {
+          "zoom": 5,
+          "left": 0,
+          "right": 1436,
+          "maxX": 1436,
+          "maxY": 0,
+          "scope": "Token groups and normalization formula/legend inspected at opposite horizontal edges."
+        },
+        "limits": "Not all eight figures individually enlarged on mobile; all eight viewed on desktop and two complex originals enlarged/panned on mobile."
+      },
+      "evidenceDirectory": "docs/audit/evidence/2026-11-05-grpo-reader",
+      "viewportOverrideReset": true
+    },
+    "navigation": {
+      "rendered": "All33 subject anchors and links checked in both built locale routes.",
+      "actual": "RU reference -> group-mean/leave-one-out explanation; EN reference -> Kimi quadratic objective; actual Next -> reasoning distillation in each locale. English canonical-language notice verified, not counted as a new English chapter. RU restored; deliverable tab retained."
+    },
+    "checks": {
+      "scoped": {
+        "exit": 0,
+        "files": 4,
+        "tests": 17,
+        "log": "/var/tmp/bookvar-grpo-scoped-20261105.log"
+      },
+      "build": {
+        "exit": 0,
+        "pages": 2009,
+        "pagefindFiles": 2013,
+        "seconds": 30.38,
+        "log": "/var/tmp/bookvar-grpo-build-20261105.log"
+      },
+      "html": {
+        "exit": 0,
+        "tests": 218,
+        "log": "/var/tmp/bookvar-grpo-test-output-20261105.log"
+      },
+      "links": {
+        "exit": 0,
+        "brokenInternal": 0,
+        "log": "/var/tmp/bookvar-grpo-check-links-20261105.log"
+      },
+      "topicIndex": {
+        "exit": 0,
+        "topics": 153,
+        "log": "/var/tmp/bookvar-grpo-check-topics-20261105.log"
+      },
+      "size": {
+        "exit": 0,
+        "bytes": 857026132,
+        "files": 5626,
+        "limit": 1000000000,
+        "headroom": 142973868
+      },
+      "receipt": {
+        "exit": 0,
+        "files": 4,
+        "tests": 17,
+        "receiptTests": 2,
+        "currentHashMatches": 115,
+        "unreadOwnersInRoutePass": 38,
+        "log": "/var/tmp/bookvar-grpo-receipts-final-20261105.log",
+        "scope": "Current GRPO, RLVR and DPO preservation plus whole-owner receipts; overlaps the earlier17 scoped tests."
+      },
+      "scopedWhitespace": {
+        "trackedExit": 0,
+        "newFiles": "No whitespace diagnostics; git diff --no-index --check returned difference exit1 for each new file."
+      }
+    },
+    "remaining": [
+      "101 fresh plus14 reused=115 whole-owner reads out of153;38 owners unread after this registration. Whole reads are not accepted-chapter counts.",
+      "Next:reasoning distillation,test-time compute and remaining synthetic-data,deployment,retrieval,multimodal,agent and recommender owners.",
+      "Full course-completeness comparison, existing figure/rights gaps, public-checkout/Pages-base checks and authorized dev/Pages release remain open. No translation,stage,commit,push or deploy in this pass."
+    ]
+  }
+}

@@ -122,11 +122,6 @@ body {
   margin-inline: auto;
 }
 
-/* A tall source panel should not grow to the full article width. */
-.sl-markdown-content img[src$='/gpt1-figure1-block.png'] {
-  width: min(100%, 20rem);
-}
-
 /* Keep words intact in headings; long formulas and identifiers may still wrap. */
 .sl-markdown-content :is(h2, h3, h4) {
   hyphens: none;
@@ -149,9 +144,19 @@ body {
 /* Paper figures often have transparent backgrounds and black labels/arrows.
    Preserve the source artwork, including in the site's dark theme. */
 .sl-markdown-content img[src*='/Assets/Figures/'],
+img[src*='/assets/Sources/imbalanced-learn/'],
+img[src*='/Assets/Figures/imbalanced-learning/'],
 .sl-markdown-content img[src$='/2f10e92057738ef1e4a50e524fddf5389d61d795.svg'],
 .sl-markdown-content img[src$='/3b022a3ffa6f028fe2c2c3165c292a16a3a9e0ff.svg'] {
   background-color: #fff;
+}
+
+/* These source SVGs were exported with light arrows and text on a transparent
+   background. Match the original dark canvas in the page and zoom viewer. */
+img[src*='/repository-figures/'][src$='/contextual_quoting_graph.svg'],
+img[src*='/repository-figures/'][src$='/contentIntelli.svg'],
+img[src*='/repository-figures/'][src$='/chiron.svg'] {
+  background-color: #1f2020;
 }
 
 .sl-markdown-content figure {
@@ -270,6 +275,16 @@ body {
 }
 
 /* Keep tall source diagrams readable without enlarging them past the page view. */
+.sl-markdown-content img[src$='/vaswani-transformer-figure1.png'],
+.sl-markdown-content img[src$='/vaswani-multihead-figure2.png'] {
+  width: min(100%, 27rem);
+}
+
+/* Keep both residual additions in view on the tall Gemma Scope figure. */
+.sl-markdown-content img[src$='/gemma-scope-figure1.svg'] {
+  width: min(100%, 25rem);
+}
+
 .sl-markdown-content img[src$='/llama-2026-10-22/cs336-model-overview.png'],
 .sl-markdown-content img[src$='/llama-2026-10-22/cs336-prenorm-block.png'],
 .sl-markdown-content:has(img[src$='/llama-2026-10-22/cs336-model-overview.png'])

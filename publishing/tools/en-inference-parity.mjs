@@ -13,12 +13,52 @@ const figures = (text) => [...text.matchAll(/^!\[\[([^\]|]+).*$/gm)]
   .map((m) => normalizePath(m[1]));
 const headings = (text) => [...withoutCode(text).matchAll(/^(#{1,6}) (.+)$/gm)]
   .map((m) => ({ level: m[1].length, title: m[2] }));
+const explicitIds = (text) => [...withoutCode(text).matchAll(/<(?:a|span) id="([^"]+)"/g)].map((m) => m[1]);
+const sectionKeys = (rows) => rows.map(({ level, title }) => ({ level, title }));
+
+// The Chen figure replacement renamed one heading in each edition. The
+// historical receipt still describes the old headings; both old URLs must
+// survive as explicit aliases where they used to be generated.
+const speculativeRenames = {
+  ru: {
+    oldAnchor: 'полный-алгоритм-на-исходном-слайде',
+    title: 'Алгоритм 2: черновик, проверка и замена',
+    anchor: 'алгоритм-2-черновик-проверка-и-замена',
+  },
+  en: {
+    oldAnchor: 'the-full-algorithm-in-the-original-slide',
+    title: 'Algorithm 2: drafting, verification and correction',
+    anchor: 'algorithm-2-drafting-verification-and-correction',
+  },
+};
+const currentBaseline = (rows, rename) => rows.map(row =>
+  rename && row.anchor === rename.oldAnchor ? { ...row, title: rename.title, anchor: rename.anchor } : row);
+const preservedAnchor = (ids, rename, path) => {
+  if (!rename) return [];
+  assert.equal(ids.filter(id => id === rename.oldAnchor).length, 1,
+    `Missing or duplicate legacy fragment: ${path}#${rename.oldAnchor}`);
+  return [rename.oldAnchor];
+};
+const addedLevels = (current, baseline, path) => {
+  let next = 0;
+  const added = [];
+  for (const section of current) {
+    const previous = baseline[next];
+    if (previous && previous.title === section.title && previous.level === section.level) next += 1;
+    else added.push(section.level);
+  }
+  assert.equal(next, baseline.length,
+    `A reviewed section was renamed, removed or reordered: ${path} (${baseline[next]?.title})`);
+  return added;
+};
 const urls = (text) => [...new Set([...text.matchAll(/https?:\/\/[^\s<>\])]+/g)].map((m) => m[0]))];
 const wikiTargets = (text) => [...new Set([...text.matchAll(/(?<!!)\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g)]
   .map((m) => normalizePath(m[1])))];
 const maths = (text) => [...withoutCode(text).matchAll(/\$\$([\s\S]*?)\$\$/g)].map((m) => m[1]
   .replaceAll('бит/вес', 'bits/weight').replaceAll('на заданной сетке', 'on the chosen grid')
-  .replaceAll('мс', 'ms').replaceAll('{,}', '.').replace(/\s+/g, ''));
+  .replaceAll('мс', 'ms').replaceAll('{,}', '.').replace(/\s+/g, '')
+  // A full stop at the end of a display is sentence punctuation.
+  .replace(/\.$/, ''));
 const code = (text) => [...text.matchAll(fencePattern)].map((m) => m[0].trimEnd());
 
 // The existing English packed-attention example already translated these
@@ -73,8 +113,8 @@ export function inspectEnInferenceParity(root) {
   for (const chapter of report.chapters) {
     const canonical = readFileSync(resolve(root, chapter.source), 'utf8');
     const english = readFileSync(resolve(root, chapter.path), 'utf8');
-    // Keep the receipt's exact reviewed hashes. Reverse only the recorded
-    // prerequisite and practice-navigation deltas; compare current bodies below.
+    // The receipt describes a historical revision. Reverse the exact journals
+    // for that revision, then check that the published editions still agree.
     const receiptRevision = (text, source) => beforeTopicConsolidation(text, source, root,
       '2026-10-30-reader-provenance-additions.json');
     const reviewedCanonical = receiptRevision(canonical, chapter.source);
@@ -88,8 +128,13 @@ export function inspectEnInferenceParity(root) {
       canonicalSha256: sha(canonical), englishSha256: sha(english),
       receiptCanonicalSha256: chapter.source_sha256, receiptEnglishSha256: chapter.after_sha256 });
     assert.ok(english.includes('translation_status: current'));
-    assert.deepEqual(headings(canonical), chapter.source_sections.map(({ level, title }) => ({ level, title })));
-    assert.deepEqual(headings(english), chapter.english_sections.map(({ level, title }) => ({ level, title })));
+    assert.deepEqual(headings(reviewedCanonical), sectionKeys(chapter.source_sections));
+    assert.deepEqual(headings(reviewedEnglish), sectionKeys(chapter.english_sections));
+    const renames = chapter.path.endsWith('/58 Speculative decoding.md') ? speculativeRenames : {};
+    const canonicalBaseline = currentBaseline(chapter.source_sections, renames.ru);
+    const englishBaseline = currentBaseline(chapter.english_sections, renames.en);
+    assert.deepEqual(addedLevels(headings(english), englishBaseline, chapter.path),
+      addedLevels(headings(canonical), canonicalBaseline, chapter.source), `New section hierarchy: ${chapter.path}`);
     assert.deepEqual(maths(english), maths(canonical), `Display mathematics: ${chapter.path}`);
     assert.deepEqual(code(english).map(normalizeCode), code(canonical).map(normalizeCode),
       `Protected code: ${chapter.path}`);
@@ -97,20 +142,28 @@ export function inspectEnInferenceParity(root) {
     for (const figure of chapter.figures) assert.equal(sha(readFileSync(resolve(root, figure.path))), figure.sha256);
     for (const url of urls(canonical)) assert.ok(urls(english).includes(url), `Missing source URL: ${url}`);
     for (const target of wikiTargets(canonical)) assert.ok(wikiTargets(english).includes(target), `Missing wiki target: ${target}`);
-    const aliases = [...withoutCode(english).matchAll(/<(?:a|span) id="([^"]+)"/g)].map((m) => m[1]);
-    assert.deepEqual(aliases, chapter.retained_aliases);
-    const ids = [...aliases, ...chapter.english_sections.map((h) => h.anchor)];
+    assert.deepEqual(explicitIds(reviewedEnglish), chapter.retained_aliases);
+    assert.deepEqual(explicitIds(reviewedCanonical), chapter.source_explicit_aliases);
+    const aliases = explicitIds(english);
+    const canonicalAliases = explicitIds(canonical);
+    assert.deepEqual(aliases.filter(id => chapter.retained_aliases.includes(id)), chapter.retained_aliases);
+    assert.deepEqual(canonicalAliases.filter(id => chapter.source_explicit_aliases.includes(id)), chapter.source_explicit_aliases);
+    const englishPreserved = [...chapter.retained_aliases, ...preservedAnchor(aliases, renames.en, chapter.path)];
+    const canonicalPreserved = [...chapter.source_explicit_aliases, ...preservedAnchor(canonicalAliases, renames.ru, chapter.source)];
+    assert.deepEqual(aliases.filter(id => !englishPreserved.includes(id)),
+      canonicalAliases.filter(id => !canonicalPreserved.includes(id)), `New shared anchors: ${chapter.path}`);
+    const ids = [...aliases, ...englishBaseline.map((h) => h.anchor)];
     assert.equal(new Set(ids).size, ids.length, `Duplicate IDs: ${chapter.path}`);
     for (const id of [...chapter.source_sections.map((h) => h.anchor), ...chapter.source_explicit_aliases]) {
       assert.ok(ids.includes(id), `Missing canonical fragment: ${id}`);
     }
     assert.ok(!/^\s*\$\s*$/m.test(withoutCode(english)), `Broken display delimiter: ${chapter.path}`);
     assert.ok(!/@@(?:CODE|MATH|FIG|EXCERPT)/.test(english), `Unexpanded editing placeholder: ${chapter.path}`);
-    totals.figures += chapter.figures.length;
+    totals.figures += figures(english).length;
     totals.displayMath += maths(english).length;
     totals.codeFences += code(english).length;
     totals.originalExcerpts += checkOriginalExcerpts(canonical, english);
-    totals.canonicalSections += chapter.source_sections.length;
+    totals.canonicalSections += headings(canonical).length;
     totals.aliases += aliases.length;
   }
   return { report, totals, revisions };

@@ -4,18 +4,20 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "b2e3e923347babfafb3344252e55952c999287fe9fc51a19ad11965d4933f259"
-translation_reviewed: "2026-10-29"
+canonical_revision: "b089c53b33c4fb95c2f406be3780c6414bf50f52d46dfcb9a61aa0784a1c9857"
+translation_reviewed: "2026-11-11"
 translation_of: "00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md"
-last_updated: 2026-10-29
+last_updated: 2026-11-11
 last_verified: 2026-09-15
 primary_sources:
   - https://arxiv.org/abs/2409.12191
   - https://arxiv.org/abs/2502.13923
   - https://arxiv.org/abs/2210.03347
   - https://arxiv.org/abs/2111.15664
+  - https://arxiv.org/abs/2510.14528v1
   - https://arxiv.org/abs/2204.08387
   - https://arxiv.org/abs/2409.17146
+  - https://arxiv.org/abs/2203.12555v3
 ---
 
 # Documents, OCR, and visual grounding
@@ -26,11 +28,17 @@ Consider an invoice question: “What is the total, and where is it shown?” A 
 
 High resolution is essential because characters disappear during downsampling. Qwen2-VL’s dynamic resolution and Qwen2.5-VL’s document-oriented training treat dense OCR as an explicit capability.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/qwen2vl-figure11-dense-ocr.png]]
+In [Figure 11 of Peng Wang et al.](https://arxiv.org/pdf/2409.12191v1#page=29), Qwen2-VL reads
+a page of dense Chinese text and returns an English translation.
+To measure character error rate, we would need a transcription in
+the original language and a reference to compare it with.
 
-*Figure 11 in Wang et al., [Qwen2-VL](https://arxiv.org/abs/2409.12191v1), PDF p. 29. The requested output translates dense Chinese text into English. It is a qualitative reading-and-translation example, not literal transcription or a CER measurement.*
-
-A fluent translation may omit a word or number. It does not establish reliable extraction of account details or monetary amounts; those require reference source characters and field-value checks. In the running invoice example, subtotal 11,000 plus tax 1,480 equals total 12,480. Arithmetic consistency helps detect reading mistakes but does not by itself establish which row the user requested: another invoice may show a deposit below the total.
+In the invoice example, reading `12480` as `12840` adds 360 to the
+total. Both numbers look plausible on their own. Keep the page region
+with the extracted field and compare the amount with the reference.
+The subtotal of 11,000 plus tax of 1,480 is another check, but it
+cannot identify the requested row by itself: an invoice can also show
+a deposit below the total.
 
 ## Cascaded and end-to-end systems
 
@@ -43,6 +51,8 @@ Sorting words by vertical position mixes the two columns of a page. A table, cap
 ### Two specialist alternatives
 
 A layout-aware model makes geometry explicit. [LayoutLMv3](https://arxiv.org/abs/2204.08387) combines OCR text, two-dimensional positions, and image patches. An OCR-free model instead predicts structure directly from pixels: [Donut](https://arxiv.org/abs/2111.15664) avoids a separate OCR stage, while [Pix2Struct](https://arxiv.org/abs/2210.03347) learns screenshot-to-structure conversion through simplified HTML targets.
+
+<a id="doc-layoutlm"></a>
 
 ### LayoutLMv3: three pretraining targets
 
@@ -67,6 +77,8 @@ assert 224 // 16 * (224 // 16) == 196
 
 These are illustrative probabilities, not measured LayoutLMv3 predictions. Real batches have their own selected positions and reductions. Downstream heads can label text tokens or choose answer-span endpoints. An extractive head cannot select a sum absent from the OCR text, unlike an unconstrained decoder that could generate a new string.
 
+<a id="doc-donut"></a>
+
 ### Donut: serialize fields and then parse them
 
 Donut uses a Swin image encoder and an autoregressive BART-based decoder initialized with multilingual weights. Cross-attention reads visual states; a task prefix selects classification, VQA, or field parsing.
@@ -89,11 +101,24 @@ The target is simplified visible HTML structure, not full HTML with styles and s
 
 In the example, Python is hidden, C++ remains visible, and Java is partly hidden. The model reconstructs all three entries and their nesting, not merely missing letters. Reading visible C++, inferring hidden Python from remaining evidence, and producing `img_alt` descriptions contribute distinct signals to one output sequence. A preceding reading curriculum on synthetic text images gives the decoder character-reading practice before screenshot parsing.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/pix2struct-figure1-tasks.png]]
+<a id="doc-pix2struct-transfer"></a>
 
-*Lee et al., [Pix2Struct, Figure 1](https://arxiv.org/abs/2210.03347). Screenshot parsing supplies a pixel-to-structure objective that transfers to diagrams, interfaces, and documents.*
+Fine-tuning changes what the decoder must write. In
+[Lee et al., Figure 1](https://proceedings.mlr.press/v202/lee23g/lee23g.pdf#page=2),
+AI2D prints the question and choices above a food-web diagram; the
+answer `carnivore` comes from its top tier. Screen2Words supplies no
+question: the task is to describe what the app screen is for, rather
+than transcribe every video title. In DocVQA, the question is printed
+above the scan and the answer is the name on the High Chancellor
+line. Pix2Struct receives both the question and the page as pixels.
+That is a choice of input format, not a requirement of OCR-free models.
 
-For VQA, Pix2Struct renders the question above the image, so question and document both enter visually. That is a Pix2Struct interface choice, not a requirement of all OCR-free models. For UI candidate selection, a candidate box is drawn on the image and candidates are scored; the task need not directly generate coordinates.
+For [RefExp, §2.5](https://arxiv.org/html/2210.03347v2#S2.SS5), each
+candidate box is drawn on its own copy of the screenshot, with the
+referring expression. The decoder learns to output `true` for a box
+that matches the expression and `false` otherwise. At inference it
+chooses among the supplied candidates. If none marks the right
+button, this procedure cannot return that button's box.
 
 General VLMs need corresponding document supervision. Qwen2.5-VL §2.2 uses HTML targets retaining text, tables, formulas, order, and regions. Qwen3-VL §3.2.3 prepares real-document labels with a layout model followed by Qwen2.5-VL-72B region recognition and layout-preserving assembly. QwenVL-HTML includes element boxes; QwenVL-Markdown localizes images and tables, expressing tables in LaTeX. It does not establish a box for every text line in that second format.
 
@@ -104,18 +129,57 @@ General VLMs need corresponding document supervision. Qwen2.5-VL §2.2 uses HTML
 | OCR-free specialist | pixels | no fixed OCR boundary | character and structural errors can be intertwined |
 | General VLM | media and instruction | broad interface | language priors can conceal perception errors |
 
+<a id="doc-paddleocr-reading-order"></a>
+
+### PaddleOCR-VL: order the regions before recognizing them
+
+[PaddleOCR-VL v1, §2.1](https://arxiv.org/html/2510.14528v1#S2.SS1)
+first locates text, tables, formulas, and charts on the page.
+PP-DocLayoutV2 takes the full page image. Its RT-DETR detector proposes
+boxes and classes; the next network scores which region in each pair
+should come first. It uses the region coordinates and classes before
+any text has been recognized.
+
+![[00 Учебник/Assets/Figures/curated/paddleocr-vl-2026-11-11/pp-doclayout-v2-reading-order.png|RT-DETR detects regions on the left; pairwise scores and sorting recover order 3, 5, 4, 1, 2 on the right.]]
+
+*Cheng Cui et al., [PaddleOCR-VL v1, Figure 3](https://arxiv.org/html/2510.14528v1#S2.F3).
+[Original PNG](https://arxiv.org/html/2510.14528v1/images/PP-DocLayoutV2.png),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+
+The lower-right panel shows five regions. A one in cell $(i,j)$ means
+$i$ precedes $j$. A column sum counts how many regions come before $j$.
+Columns 1–5 sum to $(3,4,0,2,1)$, so sorting gives $3,5,4,1,2$.
+Map those IDs to the invoice heading, subtotal, tax, total, and footnote.
+The footnote comes last even if it sits higher than the total in another
+column. This uses the figure's scores in a worked example, not model
+output on the invoice. The
+[Transformers implementation](https://github.com/huggingface/transformers/blob/v5.14.0/src/transformers/models/pp_doclayout_v2/image_processing_pp_doclayout_v2.py#L85-L111)
+sums probabilities rather than binary decisions. Sorting still returns
+an order when pairwise estimates disagree, but that order can violate
+some of those estimates.
+
+The system then crops the regions. PaddleOCR-VL-0.9B uses the same vision
+encoder and ERNIE-4.5-0.3B decoder for multiple region types, with an OCR
+instruction for text and a table recognition instruction for tables.
+Postprocessing assembles the results in reading order. If the detector
+misses the total, the recognizer never gets that crop. If it reads
+`12840` instead of `12480` in the right region, inspect the crop and the
+recognition step. Correct strings in the wrong order point to a
+different stage.
+
 ### Trace the invoice request
 
 First rasterize the document page at a known resolution, retaining the transform between PDF coordinates and image pixels. Tile the image if small print would otherwise disappear; keep scale, padding, and crop origins. Locate candidates such as “Subtotal: 11,000 RUB” and “Total: 12,480 RUB.” Use layout and labels to select the requested field, not merely the closest number.
 
-An illustrative result is:
+For the pixel box traced below, the application could return:
 
 ```json
 {
   "value": "12 480 RUB",
   "page": 1,
-  "box": [0.68, 0.82, 0.91, 0.87],
-  "coordinate_system": "normalized_original_page"
+  "box": [700, 1140, 910, 1180],
+  "page_size": [1000, 1400],
+  "coordinate_system": "page_pixels"
 }
 ```
 
@@ -234,6 +298,10 @@ assert instances_hit(regions, []) == []
 ```
 
 These non-overlapping reference rectangles make instance membership explicit; proximity alone would not establish that two points hit the same object. A plausible box next to a correct amount also does not prove causal use of that region; image interventions test that separately.
+
+<a id="doc-coordinates"></a>
+
+### Map coordinates back to the source
 
 | Pinned model/report | Coordinate convention |
 |---|---|
@@ -368,6 +436,8 @@ assert isclose(cer_no_spaces, 0.1) and isclose(wer, 0.5)
 assert edit_distance("12", "12345") / len("12") == 1.5
 ```
 
+<a id="doc-anls"></a>
+
 ### ANLS and exact field values
 
 [DocVQA 2020](https://www.docvqa.org/challenges/2020) uses Average Normalized Levenshtein Similarity. Normalize edit distance by the larger of reference and prediction lengths. If the normalized distance is strictly below 0.5, score $1-d$; otherwise score zero. Choose the highest score among accepted references, then average over questions. `12480` versus `1248О` scores 0.8 but remains an incorrect monetary amount:
@@ -426,7 +496,80 @@ assert box_iou((0, 0, 10, 10), (20, 0, 30, 10)) == 0.0
 assert box_iou((0, 0, 10, 10), (0, 0, 10, 10)) == 1.0
 ```
 
-Define a field match as a name plus exact value, optionally also page and a localization threshold. With five reference fields, four predicted fields, and three exact matches, precision is 0.75, recall 0.6, and F1 $2\cdot3/(4+5)=2/3$. Matching names alone would miss wrong values. Evaluate table text separately from cell structure and merged headers; for multipage QA, evaluate page selection, answer text, and location separately. Slice by language, small print, columns, rotation, scan quality, and handwriting.
+Define a field match as a name plus exact value, optionally also page and a localization threshold. With five reference fields, four predicted fields, and three exact matches, precision is 0.75, recall 0.6, and F1 $2\cdot3/(4+5)=2/3$. Matching names alone would miss wrong values. For multipage QA, evaluate page selection, answer text, and location separately. Report separate results for language, small print, columns, rotation, scan quality, and handwriting.
+
+<a id="doc-grits"></a>
+
+### Evaluate table structure with GriTS and TEDS
+
+Suppose a header, “2025,” spans the Revenue and Expenses columns. The
+reference has one header cell with `colspan=2`; the predicted table has
+“2025” above Revenue and an empty cell above Expenses. Reading only the
+visible text gives “2025 Revenue Expenses” in both cases. The predicted
+structure no longer says that Expenses belongs to 2025.
+
+[GriTS, §3](https://arxiv.org/html/2203.12555v3#S3) aligns rows and columns
+from two grids while preserving their order. It can skip an extra row
+without shifting every later match. The skipped row still affects the score
+because the denominator includes both original grid sizes. Figure 1 skips
+the third row of $A$ and columns three and four of $B$, leaving two $4\times3$
+subgrids to compare.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/documents-2026-11-09/grits-figure1-alignment.png|Skipping one row of A and two columns of B aligns two four-by-three subgrids]]
+
+*Brandon Smock, Rohith Pesala, and Robin Abraham,
+[GriTS, Figure 1, p. 2](https://arxiv.org/pdf/2203.12555v3#page=2),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Original figure, unchanged.*
+
+In $\mathrm{GriTS}_{\mathrm{Top}}$, each grid position stores the bounding
+rectangle of the cell that covers it, relative to that position and
+measured in grid units. An unmerged cell is $[0,0,1,1]$.
+$\mathrm{GriTS}_{\mathrm{Loc}}$ compares boxes in document coordinates.
+$\mathrm{GriTS}_{\mathrm{Con}}$ compares cell text, which repeats at every
+position covered by a merged cell. Its score therefore reflects structure
+as well as recognition.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/documents-2026-11-09/grits-figure2-representations.png|A PubTables-1M table with merged headers and its text, relative spans, and document-space boxes]]
+
+*Smock, Pesala, and Abraham, [GriTS, Figure 2, p. 8](https://arxiv.org/pdf/2203.12555v3#page=8),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+“Sequence of Administration” spans three columns. Panel (b) repeats its
+text; (c) expresses the span relative to each column; (d) repeats the same
+box in document coordinates.*
+
+In the 2025 example the grid is $2\times2$: the year goes on top and the
+two column labels below. The top reference rectangles are $[0,0,2,1]$
+on the left and $[-1,0,1,1]$ on the right. The negative coordinate means
+the merged cell extends one column to the left of the right grid position.
+Both predicted top rectangles are unit rectangles. Each covers half of
+its reference rectangle, so the two IoUs are $1/2$. The bottom row matches
+and contributes one point per position.
+
+The total reward is three. Skipping any row or column leaves at most two
+pairs, each worth at most one point. The best alignment therefore keeps
+all four positions:
+
+$$
+\mathrm{GriTS}_{\mathrm{Top}}
+=\frac{2(1/2+1/2+1+1)}{4+4}
+=0.75.
+$$
+
+For larger grids, finding the best two-dimensional alignment is hard.
+The [authors' implementation](https://github.com/microsoft/table-transformer/blob/16d124f616109746b7785f03085100f1f6247575/src/grits.py)
+uses the approximation in §3.4 and returns 0.75 on this example too.
+Test the header relationship separately if the application depends on it:
+does the system associate Expenses with both the correct column and year?
+
+For HTML output, [TEDS, §5](https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123660562.pdf#page=7)
+compares the tag trees. Splitting the header changes a `colspan` attribute
+and inserts an empty cell node. Both edits increase the tree distance
+even when the OCR is perfect. The `structure_only` setting excludes
+cell text. Use the same setting and HTML processing when comparing with
+published results.
+
+<a id="doc-interventions"></a>
 
 ### Interventions need the right expected behavior
 
@@ -481,5 +624,7 @@ For ambiguous headers, missing pages, or recognizer disagreement, return the spe
 
 - [Qwen2-VL](https://arxiv.org/abs/2409.12191), [Qwen2.5-VL](https://arxiv.org/abs/2502.13923), and [Molmo and PixMo](https://arxiv.org/abs/2409.17146).
 - [LayoutLMv3 §2.1–2.2, §3.1](https://arxiv.org/abs/2204.08387v3); [Donut §2](https://arxiv.org/abs/2111.15664v5); [Pix2Struct §2.2–2.5](https://proceedings.mlr.press/v202/lee23g.html); [Qwen3-VL document and grounding data, §3.2.3–3.2.4](https://arxiv.org/abs/2511.21631v1).
+- Cheng Cui et al., [[05 Источники/Papers/PaddleOCR-VL v1|PaddleOCR-VL v1]], §2.1: layout regions, reading order, and crop recognition.
 - [DocVQA 2020 evaluation](https://www.docvqa.org/challenges/2020) and [Scene Text VQA §3.4](https://openaccess.thecvf.com/content_ICCV_2019/papers/Biten_Scene_Text_Visual_Question_Answering_ICCV_2019_paper.pdf) specify the ANLS basis.
+- [GriTS](https://arxiv.org/html/2203.12555v3#S3), §3.1–3.4: grid alignment and its three metrics; [Zhong et al., PubTabNet](https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123660562.pdf#page=7), §5: TEDS.
 - Previous: [[en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data|Training VLMs]]. Next: [[en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models|Video, audio, and omni models]].

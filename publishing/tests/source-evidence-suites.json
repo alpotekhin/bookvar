@@ -1,6 +1,20 @@
 {
   "date": "2026-10-30",
-  "scope": "Explicit source-evidence suite classification; no test is deleted or conditionally skipped. test:unit retains the complete suite.",
+  "scope": "Explicit source-evidence classification by file or source-archive test tag. No test depends on checking whether an archive is present. test:unit retains the complete suite.",
+  "mixedSuites": [
+    "tests/augmentation-composition-additions.test.ts",
+    "tests/autoencoder-course-additions.test.ts",
+    "tests/decoder-block.test.ts",
+    "tests/gmm-course-additions.test.ts",
+    "tests/kernels-course-additions.test.ts",
+    "tests/lstm-gru-contract-additions.test.ts",
+    "tests/neural-lm-bengio-additions.test.ts",
+    "tests/ngram-makemore-additions.test.ts",
+    "tests/normalization-course-additions.test.ts",
+    "tests/seq2seq-state-additions.test.ts",
+    "tests/spectral-source-additions.test.ts",
+    "tests/word-embeddings-data-additions.test.ts"
+  ],
   "suites": [
     {
       "file": "tests/active-learning.test.ts",

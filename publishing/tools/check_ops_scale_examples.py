@@ -173,12 +173,30 @@ def main(output=None):
     assert 'sre-canary-versions.webp]]' in practice_part
     assert '| Wearable syncs | 30,000 | 2,500 | 2,500 | 3,000 | No: too much exposure |' in practice_part
     assert '| Vehicle live miles | 1,200 | 3,000 | 120 | 120 | No: too little evidence |' in practice_part
+    decision_examples = {}
+    for name in ['mlops-sample-ratio-mismatch', 'mlops-request-budget']:
+        match = re.search(r'<a id="' + name + r'"></a>\n(?:(?!^#+ ).)*'
+                          r'^#+ [^\n]+\n(?:(?!^#+ ).)*?^~~~python\n(.*?)^~~~',
+                          chapter, re.M | re.S)
+        assert match, name
+        env = {}
+        exec(compile(match[1], name, 'exec'), env)
+        if name.endswith('mismatch'):
+            assert env['lower'] < env['control'] < env['selected'] < env['upper']
+            decision_examples['sample_ratio'] = {
+                'chi_square': str(env['chi2']), 'p_value': env['p_value'],
+                'missing_outcome_bounds': [str(env['lower']), str(env['upper'])],
+            }
+        else:
+            assert env['budget'] == 1000
+            decision_examples['request_budget'] = {'allowed_errors': int(env['budget'])}
     report.update({
         'chapter_sha256': sha(chapter.encode()), 'practice_sha256': sha(practice.encode()),
         'checker_sha256': sha(Path(__file__).read_bytes()),
         'accepted_2240_chapter_lines_preserved': True,
         'accepted_645_practice_lines_preserved': True,
         'new_python_blocks_executed': sum(printed),
+        'release_decision_examples': decision_examples,
         'verbatim_source_excerpts': len(excerpts),
         'scope': 'CPU arithmetic from eight AST-extracted pure functions and printed examples; '
                  'no Marimo UI, prediction gates, ledger write, model, traffic, Docker or deployment',

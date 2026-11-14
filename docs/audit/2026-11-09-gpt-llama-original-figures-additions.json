@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-09",
+  "scope": "Illustrate the existing GPT-1 → GPT-2 → GPT-3 → LLaMA v1 comparison inside the canonical LLaMA chapter. Preserve the primary textbook sequence and the legacy GPT-3 comparison fragment.",
+  "review": {
+    "sources": [
+      "Radford et al. GPT-1 §§3.1–3.3 and Figure 1; GPT-2 §2.3 and pinned block implementation; Brown et al. GPT-3 v4 §2.1; Touvron et al. LLaMA v1 §2.2 and Llama 2 Table 1.",
+      "Xiong et al., PMLR 119 §2 and Figure 1: pre-LN and post-LN residual paths. Stanford CS336 Assignment 1 Figure 2: RMSNorm in a pre-norm decoder block.",
+      "Zhao et al., PMLR 139 §§2–4 and Figure 2: same GPT-3 2.7B, same task, accuracy across permutations within each SST-2 demonstration set. The plot shows ten sets, each of size four. PMLR publication agreement licenses the paper CC BY 4.0."
+    ],
+    "example": "The token cat cannot attend to a future token in any of the models. For positions 100 and 10 the GPT-3 local attention mask may exclude a key altogether; LLaMA v1 full causal attention allows it and RoPE changes the score. For GPT-3 2.7B, the first plotted SST-2 demonstration set spans roughly 54% to 93% across permutations.",
+    "verification": "Built 2023 pages locally; 738 publication checks and 230 built-output checks passed; no broken internal routes, fragments, or files. Curated asset registry check passed, and the Zhao Figure 2 crop reproduced byte-for-byte from the PMLR PDF.",
+    "rendered": "Followed the four-model route in Chrome at 375 and 1280 CSS pixels. Inspected the two comparison images and the linked CS336 decoder block. Confirmed image expansion, mobile zoom/pan, working old and new comparison fragments, and no horizontal page overflow or KaTeX errors on the four checked pages.",
+    "limits": "Only the existing canonical comparison changed. The English LLaMA URL retains its labeled fallback. No checkpoint benchmark, branch publication or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "before_sha256": "e663ed657de49de26a444bfa5a282ce56bd1116e81eff6d2f39d87db03ab6769",
+      "after_sha256": "ebf6a9c00b3e3a41a0c718955c2967faf7a525a6ae4e453f7b67e78a9a20ee62",
+      "changes": [
+        {
+          "old": "## От GPT-3 к первой LLaMA\n\nПервая LLaMA, выпущенная в феврале 2023 года, по-прежнему предсказывает\nследующий токен в одном причинном стеке. Место нормализации сохраняется\nтаким же, как в GPT-2 и GPT-3, но меняются её формула, позиционный\nсигнал и FFN. GPT-3 и LLaMA v1 обе обучались на окне в 2048 токенов;\nпереход на RoPE здесь не сопровождался увеличением окна.",
+          "new": "## От GPT-3 к первой LLaMA\n\nВо всех четырёх поколениях базовая модель получает последовательность\nтокенов и предсказывает следующий. Если подать ей `a cat`, позиция\n`cat` может прочитать себя и `a`, а её выход даёт оценки для продолжения,\nнапример ` sleeps`. У GPT-1, GPT-2, GPT-3 и LLaMA этот выход вычисляется\nпо-разному, но смысл его остаётся прежним. Менялось и то, как этим\nвыходом пользовались: в опытах GPT-1 над декодером обучали отдельную\nголову под задачу, а в GPT-2 и GPT-3 ответ искали в словаре самой модели."
+        },
+        {
+          "old": "| [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-full-local-attention|GPT-3 (2020)]] | Pre-norm сохраняется. Полные причинные слои чередуются с локальными. Окно 2048 токенов. |\n| LLaMA v1 (2023) | RMSNorm вместо LayerNorm, RoPE на Q и K вместо абсолютной таблицы, SwiGLU вместо FFN с GELU. Во всех слоях полное причинное внимание. Окно 2048 токенов. |\n\nРазмер крупнейшей GPT-2 — около 1,56 млрд параметров; у GPT-3",
+          "new": "| [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-full-local-attention|GPT-3 (2020)]] | Pre-norm сохраняется. Полные причинные слои чередуются с локальными. Окно 2048 токенов. |\n| LLaMA v1 (2023) | RMSNorm вместо LayerNorm, RoPE на Q и K вместо абсолютной таблицы, SwiGLU вместо FFN с GELU. Во всех слоях полное причинное внимание. Окно 2048 токенов. |\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/norm-gating-2026-10-22/xiong-pre-post-norm.png|Рисунок Xiong et al.: слева LayerNorm после остаточного сложения, справа перед вниманием и FFN]]\n\n*Ruibin Xiong et al.,\n[On Layer Normalization in the Transformer Architecture](https://proceedings.mlr.press/v119/xiong20b.html),\n[рис. 1, с. 2](https://proceedings.mlr.press/v119/xiong20b/xiong20b.pdf#page=2),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Схема сравнивает\nрасположение LayerNorm; размеры и другие детали GPT на ней не показаны.*\n\nНа рисунке можно проследить нижнюю обходную ветвь. В порядке GPT-1\n(слева) вход обходит внимание, но сумма всё равно проходит через\nLayerNorm. В порядке GPT-2 (справа) вход идёт прямо в сумму, а\nLayerNorm готовит данные для внимания. Этот порядок остаётся\nв GPT-3 и [[#Pre-norm и остаточные связи|на схеме CS336 для блока LLaMA]].\nУ LLaMA меняется то, что стоит на месте `Layer Norm`: RMSNorm\nмасштабирует вход без вычитания среднего.\n\nРазреженность GPT-3 и RoPE LLaMA решают разные задачи. Представим\nзапрос в позиции 100 и ключ в позиции 10. В полном слое GPT-3\nони могут взаимодействовать; в локальном это зависит от ширины\nполосы внимания. В LLaMA v1 эта связь разрешена во всех слоях,\nа RoPE меняет само скалярное произведение Q и K. Обе модели\nпредобучались на окне в 2048 токенов: замена позиционных эмбеддингов\nна RoPE в первой LLaMA не сопровождалась увеличением окна.\n\nРазмер крупнейшей GPT-2 — около 1,56 млрд параметров; у GPT-3"
+        },
+        {
+          "old": "В режиме few-shot GPT-3 перед той же парой получает несколько\nразмеченных пар, например строку\n`Premise: The door is open. Hypothesis: The door is shut. Relation: contradiction`.\nТолько у последней пары метка оставлена пустой. Демонстрации занимают\nчасть входного окна и меняют состояния токенов при прямом проходе.\nОптимизатор при этом не запускается. Базовую LLaMA можно оценивать\nтем же способом: изменения блока влияют на вычисленные логиты,\nа формат префикса и список допустимых меток по-прежнему задаёт тот,\nкто проводит оценку. Как на практике сравнивают ответы разной длины,\nразобрано в [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-candidate-scores|главе GPT-3]].",
+          "new": "В режиме few-shot GPT-3 перед той же парой получает несколько\nразмеченных пар, например строку\n`Premise: The door is open. Hypothesis: The door is shut. Relation: contradiction`.\nТолько у последней пары метка оставлена пустой. Демонстрации занимают\nчасть входного окна и меняют состояния токенов при прямом проходе.\nОптимизатор при этом не запускается. Базовую LLaMA можно оценивать\nтак же. Порядок примеров, написание меток и способ\n[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-candidate-scores|сравнить продолжения разной длины]]\nпо-прежнему выбирает тот, кто проводит оценку.\n\n<a id=\"gpt3-demo-order\"></a>\n\n### Четыре примера, разные ответы\n\nZhao et al. взяли GPT-3 2.7B и проверили её на классификации\nтональности SST-2. Перед оцениваемым отзывом ставили четыре\nразмеченных отзыва. Исследователи перебирали их порядок, оставляя\nте же четыре отзыва, тот же шаблон и те же веса. Для каждой\nперестановки заново считали долю правильных ответов на тестовых\nвходах. Затем повторили процедуру для десяти наборов демонстраций.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/zhao21c-figure2.png|Точность GPT-3 2.7B на SST-2 по перестановкам четырёх примеров: десять наборов демонстраций]]\n\n*Tony Z. Zhao, Eric Wallace, Shi Feng, Dan Klein и Sameer Singh,\n[Calibrate Before Use: Improving Few-Shot Performance of Language Models, PMLR 139](https://proceedings.mlr.press/v139/zhao21c.html),\n[рис. 2, с. 3](https://proceedings.mlr.press/v139/zhao21c/zhao21c.pdf#page=3).\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nОригинальный график извлечён из PDF; оси и подписи не менялись.*\n\nПо горизонтали здесь номер набора, а не число примеров: везде\nих четыре. Точки внутри одного столбца показывают результаты разных\nперестановок; прямоугольник отмечает межквартильный размах. У первого\nнабора нижние и верхние точки находятся примерно у 54% и 93%.\nЕсли сравнивать две модели в режиме four-shot, одного числа примеров\nв описании опыта мало. Чтобы сравнение можно было повторить, нужно\nуказать сами демонстрации, их порядок и шаблон запроса. Это измерение\nGPT-3 на SST-2, а не оценка разброса у LLaMA."
+        },
+        {
+          "old": "<a id=\"gpt-llama-comparison\"></a>\n\n## От GPT-3 к первой LLaMA",
+          "new": "<a id=\"gpt-llama-comparison\"></a>\n<a id=\"от-gpt-3-к-первой-llama\"></a>\n\n## От GPT-1 к первой LLaMA"
+        },
+        {
+          "old": "### Четыре примера, разные ответы",
+          "new": "### Что меняет порядок примеров"
+        },
+        {
+          "old": "те же четыре отзыва, тот же шаблон и те же веса. Для каждой\nперестановки заново считали долю правильных ответов на тестовых\nвходах. Затем повторили процедуру для десяти наборов демонстраций.",
+          "new": "те же четыре отзыва, тот же шаблон и те же веса. Для каждой\nперестановки заново считали долю правильных ответов на одном и том же\nнаборе для оценки. Всего взяли десять разных наборов демонстраций."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "7a91cafdb0d6a228a8000b5cf4e85912f4b651e18edb438b3a9023605d6b8ec4",
+      "after_sha256": "2bdc8613dcc389b5f4e8b3e83edd09cb99c4c40cdfd0b88f24722ea366c3c80c",
+      "changes": [
+        {
+          "old": "assets:",
+          "new": "assets:\n  - id: \"curated-gpt-history-zhao-figure2-a398a8c85dd7\"\n    asset: \"00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/zhao21c-figure2.png\"\n    title: \"Accuracy Across Training Sets and Permutations (Figure 2)\"\n    author: \"Tony Z. Zhao, Eric Wallace, Shi Feng, Dan Klein and Sameer Singh\"\n    source_url: \"https://proceedings.mlr.press/v139/zhao21c.html\"\n    source_image_url: \"https://proceedings.mlr.press/v139/zhao21c/zhao21c.pdf#page=3\"\n    source_asset: \"05 Источники/Originals/gpt-history-2026-11-09/zhao21c.pdf\"\n    source_asset_sha256: \"e94f3e10fd0c94a1555e1e2f2603ee3be7b704a458baa258094618e456ba2274\"\n    source_page: 3\n    render_dpi: 360\n    render_page_size_px: [3060,3960]\n    crop_box_px: [290,345,1455,1185]\n    dimensions_px: [1165,840]\n    sha256: \"a398a8c85dd7cfdd05424eb50574d6ce5154583e82de0c031dc4d6bcec8d708a\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/llama-scaling-2026-11-09/pmlr-license.html\"\n    license_evidence_sha256: \"13c6fe60205573585fbcb97c5ca6579c50cce9d412af96ad68a1d0db96dfd35a\"\n    modifications: \"Complete original Figure 2 plot extracted from PDF page 3, excluding the adjacent figure and running text; no redraw, rescaling or translated labels.\"\n    derivation: \"pdf-page-render-crop\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    metadata_status: \"verified\"\n    used_in: [\"00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\"]"
+        },
+        {
+          "old": "    used_in: [\"00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md\", \"00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md\", \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md\", \"en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md\"]",
+          "new": "    used_in: [\"00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md\", \"00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md\", \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md\", \"en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md\", \"00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\"]"
+        }
+      ]
+    }
+  ]
+}

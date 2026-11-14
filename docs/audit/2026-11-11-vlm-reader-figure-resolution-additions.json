@@ -1,0 +1,262 @@
+{
+  "date": "2026-11-11",
+  "scope": "Resolve three VLM figure redistribution gaps in the local reader, across both textbook editions and the atlas. Preserve the existing PNGs in the local repository; link to the original papers instead of serving the copied images.",
+  "review": {
+    "sources": "Chen et al., InternVL 2.5 v5 §§2.1 and 3.1, Figure 2; Wang et al., Qwen2-VL v1 Appendix A.1 Figure 11; Girdhar et al., ImageBind v2 §§3.2 and 4.4, Figure 1. The arXiv editions have no verified redistribution grant. The Qwen2-VL archive hash pins the existing local crop, not a byte-level match to an upstream PDF.",
+    "mechanisms": "The 800×1300 example becomes a 896×1344 grid with six tiles and one overview, 1792 visual vectors. The invoice compares 12480 vs 12840, separating translation fluency from field accuracy. ImageBind's three panels distinguish ranking existing images, composing embeddings, and conditioning a separate image generator. The atlas links to the chapter's mechanism.",
+    "preservation": "Every changed source matches its prior full-reading receipt; only seven local figure passages changed. Exact reversal verified; all code fences, headings, and explicit anchors are unchanged. No whole-chapter acceptance is claimed. The other figures are unchanged.",
+    "verification": "2077 pages built, 293 rendered-output and 208 registry/preservation tests passed, zero broken internal routes/fragments/files. All 2081 built HTML files and the asset tree omit the three PNGs; the archived files retain their hashes. All 310 manifest textbook pages: 1187 matched local image paths, 32 unpinned, no external image loads or KaTeX errors. Chrome: 16 route/locale/width checks, 8 mobile zoom checks; four routes at 375 and 1280 px in both locales. The three chapter checkers executed all 39 canonical Python blocks both standalone and in sequence (78 runs), including the exact InternVL preprocessing helper and the OCR arithmetic check. No pretrained model run, push or deploy."
+  },
+  "retired": [
+    {
+      "id": "curated-vlm2026-internvl-figure2-e6f8f5eefb4c",
+      "asset": "00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure2-dynamic-tiles.png",
+      "author": "Zhe Chen et al.",
+      "source_url": "https://arxiv.org/html/2412.05271v5",
+      "figure_url": "https://arxiv.org/pdf/2412.05271v5#page=3",
+      "source_page": 3,
+      "source_asset": "raw/papers/external/vlm-2026/2412.05271.pdf",
+      "source_asset_sha256": "361dae69850c1bb15397fd673738ff187fc342ac990b6d0c966ab477caad01b6",
+      "sha256": "fbde9619994fb8b3555e5e1320af5c1ca3094c5c110459f1573135d7c499b2c3",
+      "dimensions_px": [
+        1363,
+        473
+      ],
+      "bytes": 375079,
+      "license": null,
+      "license_url": null,
+      "license_evidence": "https://arxiv.org/html/2412.05271v5",
+      "metadata_status": "needs-confirmation",
+      "rights_status": "needs-confirmation",
+      "provenance_confirmation": "third-party-figure-origin-verified",
+      "derivation": "pdf-page-render-crop",
+      "modifications": "Figure 2 rendered from official paper and cropped without content changes",
+      "last_verified": "2026-11-11",
+      "used_in": [],
+      "publication_status": "retired",
+      "retirement_reason": "The arXiv version is publicly readable but no independent redistribution grant was verified. The reader links to the original; the existing local copy is preserved.",
+      "former_used_in": [
+        "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md",
+        "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md",
+        "02 Атлас моделей/Семейства/Мультимодальные семейства.md"
+      ]
+    },
+    {
+      "id": "curated-vlm2026-qwen2vl-figure11-9e9e972693ee",
+      "asset": "00 Учебник/Assets/Figures/curated/vlm-2026/qwen2vl-figure11-dense-ocr.png",
+      "author": "Peng Wang et al.",
+      "source_url": "https://arxiv.org/html/2409.12191v1",
+      "license": null,
+      "license_url": null,
+      "modifications": "Figure 11 rendered from official paper and cropped without content changes",
+      "used_in": [],
+      "metadata_status": "needs-confirmation",
+      "provenance_confirmation": "figure-reference-verified-local-crop-archived",
+      "source_asset": "raw/papers/external/vlm-2026/2409.12191.pdf",
+      "derivation": "pdf-page-render-crop",
+      "figure_url": "https://arxiv.org/pdf/2409.12191v1#page=29",
+      "source_page": 29,
+      "sha256": "e7438077ff1d4decfa9eb68647913f49885ab7d2204041fe28e777d57180aba8",
+      "bytes": 389991,
+      "dimensions_px": [
+        1207,
+        1524
+      ],
+      "license_evidence": "https://arxiv.org/html/2409.12191v1",
+      "rights_status": "needs-confirmation",
+      "publication_status": "retired",
+      "last_verified": "2026-11-11",
+      "retirement_reason": "The arXiv version is publicly readable but no independent redistribution grant was verified. The reader links to the original; the existing local copy is preserved.",
+      "former_used_in": [
+        "00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md",
+        "en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md"
+      ]
+    },
+    {
+      "id": "curated-vlm2026-imagebind-figure1-96c0ae5b7af5",
+      "asset": "00 Учебник/Assets/Figures/curated/vlm-2026/imagebind-figure1-capabilities.png",
+      "author": "Rohit Girdhar et al.",
+      "source_url": "https://arxiv.org/html/2305.05665v2",
+      "figure_url": "https://arxiv.org/pdf/2305.05665v2#page=1",
+      "source_page": 1,
+      "source_asset": "raw/papers/external/vlm-2026/2305.05665.pdf",
+      "source_asset_sha256": "0dcf74b737b46d82c304fb88fd16dfb3b1911975ac9439a23b9b0e82049e0ffb",
+      "sha256": "96c0ae5b7af5d07296e9494686bc5617c18d89caca6b9f6514b714d6926c2837",
+      "dimensions_px": [
+        1240,
+        430
+      ],
+      "bytes": 445024,
+      "license": null,
+      "license_url": null,
+      "license_evidence": "https://arxiv.org/html/2305.05665v2",
+      "metadata_status": "needs-confirmation",
+      "rights_status": "needs-confirmation",
+      "provenance_confirmation": "third-party-figure-origin-verified",
+      "derivation": "pdf-page-render-crop",
+      "modifications": "Figure 1 rendered from the official paper; caption and surrounding page text removed, three capability panels preserved",
+      "last_verified": "2026-11-11",
+      "used_in": [],
+      "publication_status": "retired",
+      "retirement_reason": "The arXiv version is publicly readable but no independent redistribution grant was verified. The reader links to the original; the existing local copy is preserved.",
+      "former_used_in": [
+        "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+        "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "source": "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md",
+      "before_sha256": "c919ade1e7e7b76cb1f304c6efde6cd5fc0b5ec8af6636e531d358eb08caa5f1",
+      "after_sha256": "36ad1356c2a79fdf0ade58459a0d2b2a2a18b0c6746ef8576cbd6cd360a1fe20",
+      "lines": 880,
+      "changes": [
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure2-dynamic-tiles.png]]\n\n*Zhe Chen et al., [InternVL 2.5, Figure 2](https://arxiv.org/abs/2412.05271v1),\nPDF p. 3. В панели (a) шесть детальных плиток дополняются одним thumbnail.\nПанель (b) показывает общий путь ViT → PixelUnshuffle → MLP → LLM.*",
+          "new": "На [рисунке 2 из статьи Zhe Chen et al.](https://arxiv.org/pdf/2412.05271v5#page=3) страницу\n$800\\times1300$ приводят к размеру $896\\times1344$. Получаются два\nстолбца и три ряда плиток по $448\\times448$. Седьмой квадрат, thumbnail,\nпоказывает страницу целиком: в нём хуже видны буквы, но сохраняется\nих положение на странице. После ViT операция PixelUnshuffle собирает\nкаждые четыре соседние позиции в один более широкий вектор.\nMLP проецирует эти векторы в размерность LLM. Семь квадратов дают\n$7\\cdot256=1792$ визуальных вектора без служебных позиций."
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md",
+      "before_sha256": "debc293999103b678281eb2f0583b2a00db28dd57ea7a7bf8e1554c61974d876",
+      "after_sha256": "bd1a3294222f6bbe3011ac566d1ad005a8ff5574665f904d8c6c47ee0ebfabf3",
+      "lines": 497,
+      "changes": [
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure2-dynamic-tiles.png]]\n\n*Figure 2 from Zhe Chen et al., [InternVL 2.5](https://arxiv.org/abs/2412.05271), PDF p. 3. Dynamic tiling feeds a ViT–MLP–LLM stack for images, multiple images, and video.*",
+          "new": "In [Figure 2 of Zhe Chen et al.](https://arxiv.org/pdf/2412.05271v5#page=3), an\n$800\\times1300$ page is resized to $896\\times1344$ and cut into two\ncolumns by three rows of $448\\times448$ tiles. A seventh square shows\nthe whole page: small letters are harder to read, but their locations\non the page remain visible. After the ViT, pixel unshuffle packs every\nfour neighboring positions into one wider vector. The MLP projects\nthose vectors to the LLM width. Seven squares contribute\n$7\\cdot256=1792$ visual vectors before special tokens."
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md",
+      "before_sha256": "0294ef46fb9b10f1dbba0b3efd1b9841f2671be4bea8d004bfdf27fc65315d22",
+      "after_sha256": "9b1d1126236ab864656743549d9be4364fa86a4740992f0574810cbe74aece5b",
+      "lines": 705,
+      "changes": [
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/qwen2vl-figure11-dense-ocr.png]]\n\n*Peng Wang et al., [Qwen2-VL, Figure 11](https://arxiv.org/pdf/2409.12191v1#page=29). В исходной демонстрации запрошен перевод плотного китайского текста на английский. Это качественный пример чтения с последующей генерацией перевода, а не посимвольная транскрипция и не измерение CER. Существующий рисунок сохранён без изменений.*\n\nПеревод может выглядеть связно даже при пропуске слова или числа в исходнике. Демонстрация перевода не устанавливает точность извлечения банковских реквизитов или суммы. Для таких полей нужен эталон исходных символов и отдельная проверка значения.",
+          "new": "В [примере Qwen2‑VL у Peng Wang et al.](https://arxiv.org/pdf/2409.12191v1#page=29) на вход\nподают страницу с плотным китайским текстом, а на выходе получают\nанглийский перевод. По переводу нельзя посчитать CER: для этого нужны\nтранскрипция на языке оригинала и эталон, с которым её сравнивают.\n\nВ счёте из нашего примера достаточно прочитать `12480` как `12840`,\nчтобы завысить сумму на 360. Обе записи выглядят правдоподобно.\nПри проверке сохраняют фрагмент страницы рядом с распознанным полем,\nа число сверяют с эталонным значением. Связный перевод этой проверки\nне заменяет."
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md",
+      "before_sha256": "6afe9c513944348683a001fd6df63daa17a9767407339fdbd9a8ba3bea2ff39e",
+      "after_sha256": "c8763bab6e25a3c17243b6ef4d143bd53dcf8f1bc542b07a5b5a8a3599ad8b88",
+      "lines": 576,
+      "changes": [
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/qwen2vl-figure11-dense-ocr.png]]\n\n*Figure 11 in Wang et al., [Qwen2-VL](https://arxiv.org/abs/2409.12191v1), PDF p. 29. The requested output translates dense Chinese text into English. It is a qualitative reading-and-translation example, not literal transcription or a CER measurement.*\n\nA fluent translation may omit a word or number. It does not establish reliable extraction of account details or monetary amounts; those require reference source characters and field-value checks. In the running invoice example, subtotal 11,000 plus tax 1,480 equals total 12,480. Arithmetic consistency helps detect reading mistakes but does not by itself establish which row the user requested: another invoice may show a deposit below the total.",
+          "new": "In [Figure 11 of Peng Wang et al.](https://arxiv.org/pdf/2409.12191v1#page=29), Qwen2-VL reads\na page of dense Chinese text and returns an English translation.\nTo measure character error rate, we would need a transcription in\nthe original language and a reference to compare it with.\n\nIn the invoice example, reading `12480` as `12840` adds 360 to the\ntotal. Both numbers look plausible on their own. Keep the page region\nwith the extracted field and compare the amount with the reference.\nThe subtotal of 11,000 plus tax of 1,480 is another check, but it\ncannot identify the requested row by itself: an invoice can also show\na deposit below the total."
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+      "before_sha256": "cf394a0ddae0011830aaedeb1cded99bc7c3f5849f5839f8eec67b38c8418974",
+      "after_sha256": "d15766e05d47e92e7e00bf4e4c4bf608ee1d22aedff025f875c4280880739f2c",
+      "lines": 741,
+      "changes": [
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/imagebind-figure1-capabilities.png]]\n\n*Rohit Girdhar et al., [ImageBind, Figure 1](https://arxiv.org/pdf/2305.05665v1#page=1). Показаны межмодальный поиск, операции над embeddings и использование представления звука с уже обученным генератором изображений. Последняя панель не означает, что сам ImageBind обучен декодировать изображения.*\n\nПосле обучения звук потрескивающего огня можно использовать как запрос к изображениям. Энкодер звука выдаёт вектор, который сравнивают с векторами изображений; выбирается наибольшее сходство. Ни ASR-транскрипция, ни генерация ответа для этой операции не требуются.",
+          "new": "В первой панели [рисунка 1 из ImageBind](https://arxiv.org/pdf/2305.05665v2#page=1) звук\nпотрескивающего огня служит запросом к коллекции изображений. Энкодер\nзвука выдаёт вектор, который сравнивают с векторами изображений;\nвыбирается наибольшее сходство. Транскрипция для этого не нужна.\n\nВо второй панели складывают представления птицы и шума волн, чтобы\nнайти изображение, подходящее к обоим сигналам. В третьей панели\nпо звуку уже создают новое изображение. Его строит отдельный\nпредобученный генератор, которому передают представление звука\nиз ImageBind."
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md",
+      "before_sha256": "2b1e907b5a2c0d44272be1e03319ef165972c2ee70bc483a0455d43b60fbd529",
+      "after_sha256": "e17b0dd4f10ae182a8493cf77827e30cc742391aa7522454a4f99d3df61c4290",
+      "lines": 709,
+      "changes": [
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/imagebind-figure1-capabilities.png]]\n\n*Girdhar et al., [ImageBind, Figure 1](https://arxiv.org/abs/2305.05665). Shared representations support retrieval and conditioning of a separate image generator; the diagram is not a streaming speech architecture.*\n\nImageBind trains modality encoders using pairs linked through images, with a contrastive objective over normalized vectors. A crackling-fire audio vector can retrieve an image by cosine similarity without ASR or answer generation. This numerical example illustrates retrieval, not actual ImageBind embeddings:",
+          "new": "ImageBind trains modality encoders using pairs linked through images,\nwith a contrastive objective over normalized vectors. In the first\npanel of [Girdhar et al.'s Figure 1](https://arxiv.org/pdf/2305.05665v2#page=1), crackling fire is\nthe audio query for image retrieval. The system ranks image vectors\nby cosine similarity without transcribing the audio.\n\nThe second panel adds a bird image vector to a wave sound vector\nand retrieves images that match the combination. The third produces\na new image with a separate pretrained generator conditioned on\nImageBind's audio embedding. The numbers below illustrate ranking\nby cosine similarity; they are not actual ImageBind embeddings."
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Мультимодальные семейства.md",
+      "before_sha256": "58c0ad07918bef4e5d00ccbd7b3a93962585cde3b2f62ddf91f1b96b98f2086e",
+      "after_sha256": "f7ee8001d86067b93bda0aaa1db439a881de11e874106814e757b92a0a4acd03",
+      "lines": 124,
+      "changes": [
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure2-dynamic-tiles.png]]\n\n*Рисунок: Weiyun Wang et al., Figure 2 из [InternVL 2.5](https://arxiv.org/pdf/2412.05271). Изображение сопоставляется с одной из заранее заданных сеток, режется на tiles 448×448 и дополняется thumbnail. После vision encoder и pixel shuffle признаки поступают через MLP-projector в LLM. Из рисунка видно, откуда появляется переменное число визуальных токенов и почему предел числа tiles является частью serving-контракта.*",
+          "new": "На [рисунке 2 из InternVL 2.5](https://arxiv.org/pdf/2412.05271v5#page=3) шесть плиток дополняются\nобщим обзором. Каждый квадрат даёт 256 визуальных векторов: если\nизменить предел числа плиток при обслуживании, изменится и объём\nвхода LLM. В [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции|главе о разрешении]] разобрано, как подбирают сетку и где сокращается число позиций."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "001788c324f22a33e40c4c44e71b2566959609de1790891efa0f1be9de7019e4",
+      "after_sha256": "20b32d05ec248918788b90f0f6a788228d7be6276ed70e505fd42f3f6ba2b567",
+      "lines": 25911,
+      "changes": [
+        {
+          "old": "  - id: curated-vlm2026-internvl-figure2-e6f8f5eefb4c\n    asset: \"00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure2-dynamic-tiles.png\"\n    author: \"Zhe Chen et al.\"\n    source_url: \"https://arxiv.org/html/2412.05271v5\"\n    figure_url: \"https://arxiv.org/pdf/2412.05271v5#page=3\"\n    source_page: 3\n    source_asset: \"raw/papers/external/vlm-2026/2412.05271.pdf\"\n    source_asset_sha256: \"361dae69850c1bb15397fd673738ff187fc342ac990b6d0c966ab477caad01b6\"\n    sha256: \"fbde9619994fb8b3555e5e1320af5c1ca3094c5c110459f1573135d7c499b2c3\"\n    dimensions_px: [1363,473]\n    bytes: 375079\n    license: null\n    license_url: null\n    license_evidence: \"https://arxiv.org/html/2412.05271v5\"\n    metadata_status: \"needs-confirmation\"\n    rights_status: \"needs-confirmation\"\n    provenance_confirmation: \"third-party-figure-origin-verified\"\n    derivation: \"pdf-page-render-crop\"\n    modifications: \"Figure 2 rendered from official paper and cropped without content changes\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md\",\"en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md\"]",
+          "new": "  - id: curated-vlm2026-internvl-figure2-e6f8f5eefb4c\n    asset: \"00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure2-dynamic-tiles.png\"\n    author: \"Zhe Chen et al.\"\n    source_url: \"https://arxiv.org/html/2412.05271v5\"\n    figure_url: \"https://arxiv.org/pdf/2412.05271v5#page=3\"\n    source_page: 3\n    source_asset: \"raw/papers/external/vlm-2026/2412.05271.pdf\"\n    source_asset_sha256: \"361dae69850c1bb15397fd673738ff187fc342ac990b6d0c966ab477caad01b6\"\n    sha256: \"fbde9619994fb8b3555e5e1320af5c1ca3094c5c110459f1573135d7c499b2c3\"\n    dimensions_px: [1363,473]\n    bytes: 375079\n    license: null\n    license_url: null\n    license_evidence: \"https://arxiv.org/html/2412.05271v5\"\n    metadata_status: \"needs-confirmation\"\n    rights_status: \"needs-confirmation\"\n    provenance_confirmation: \"third-party-figure-origin-verified\"\n    derivation: \"pdf-page-render-crop\"\n    modifications: \"Figure 2 rendered from official paper and cropped without content changes\"\n    last_verified: \"2026-11-11\"\n    used_in: []\n    publication_status: \"retired\"\n    retirement_reason: \"The arXiv version is publicly readable but no independent redistribution grant was verified. The reader links to the original; the existing local copy is preserved.\"\n    former_used_in: [\"00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md\",\"en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md\",\"02 Атлас моделей/Семейства/Мультимодальные семейства.md\"]"
+        },
+        {
+          "old": "  - id: curated-vlm2026-qwen2vl-figure11-9e9e972693ee\n    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/qwen2vl-figure11-dense-ocr.png\n    author: Peng Wang et al.\n    source_url: https://arxiv.org/pdf/2409.12191\n    license: open paper material; reuse confirmed by repository owner\n    license_url: https://arxiv.org/pdf/2409.12191\n    modifications: Figure 11 rendered from official paper and cropped without content changes\n    used_in: [\"00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/vlm-2026/2409.12191.pdf\n    derivation: pdf-page-render-crop",
+          "new": "  - id: curated-vlm2026-qwen2vl-figure11-9e9e972693ee\n    asset: \"00 Учебник/Assets/Figures/curated/vlm-2026/qwen2vl-figure11-dense-ocr.png\"\n    author: \"Peng Wang et al.\"\n    source_url: \"https://arxiv.org/html/2409.12191v1\"\n    license: null\n    license_url: null\n    modifications: \"Figure 11 rendered from official paper and cropped without content changes\"\n    used_in: []\n    metadata_status: \"needs-confirmation\"\n    provenance_confirmation: \"figure-reference-verified-local-crop-archived\"\n    source_asset: \"raw/papers/external/vlm-2026/2409.12191.pdf\"\n    derivation: \"pdf-page-render-crop\"\n    figure_url: \"https://arxiv.org/pdf/2409.12191v1#page=29\"\n    source_page: 29\n    sha256: \"e7438077ff1d4decfa9eb68647913f49885ab7d2204041fe28e777d57180aba8\"\n    bytes: 389991\n    dimensions_px: [1207,1524]\n    license_evidence: \"https://arxiv.org/html/2409.12191v1\"\n    rights_status: \"needs-confirmation\"\n    publication_status: \"retired\"\n    last_verified: \"2026-11-11\"\n    retirement_reason: \"The arXiv version is publicly readable but no independent redistribution grant was verified. The reader links to the original; the existing local copy is preserved.\"\n    former_used_in: [\"00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md\",\"en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md\"]"
+        },
+        {
+          "old": "  - id: curated-vlm2026-imagebind-figure1-96c0ae5b7af5\n    asset: \"00 Учебник/Assets/Figures/curated/vlm-2026/imagebind-figure1-capabilities.png\"\n    author: \"Rohit Girdhar et al.\"\n    source_url: \"https://arxiv.org/html/2305.05665v2\"\n    figure_url: \"https://arxiv.org/pdf/2305.05665v2#page=1\"\n    source_page: 1\n    source_asset: \"raw/papers/external/vlm-2026/2305.05665.pdf\"\n    source_asset_sha256: \"0dcf74b737b46d82c304fb88fd16dfb3b1911975ac9439a23b9b0e82049e0ffb\"\n    sha256: \"96c0ae5b7af5d07296e9494686bc5617c18d89caca6b9f6514b714d6926c2837\"\n    dimensions_px: [1240,430]\n    bytes: 445024\n    license: null\n    license_url: null\n    license_evidence: \"https://arxiv.org/html/2305.05665v2\"\n    metadata_status: \"needs-confirmation\"\n    rights_status: \"needs-confirmation\"\n    provenance_confirmation: \"third-party-figure-origin-verified\"\n    derivation: \"pdf-page-render-crop\"\n    modifications: \"Figure 1 rendered from the official paper; caption and surrounding page text removed, three capability panels preserved\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md\",\"en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md\"]",
+          "new": "  - id: curated-vlm2026-imagebind-figure1-96c0ae5b7af5\n    asset: \"00 Учебник/Assets/Figures/curated/vlm-2026/imagebind-figure1-capabilities.png\"\n    author: \"Rohit Girdhar et al.\"\n    source_url: \"https://arxiv.org/html/2305.05665v2\"\n    figure_url: \"https://arxiv.org/pdf/2305.05665v2#page=1\"\n    source_page: 1\n    source_asset: \"raw/papers/external/vlm-2026/2305.05665.pdf\"\n    source_asset_sha256: \"0dcf74b737b46d82c304fb88fd16dfb3b1911975ac9439a23b9b0e82049e0ffb\"\n    sha256: \"96c0ae5b7af5d07296e9494686bc5617c18d89caca6b9f6514b714d6926c2837\"\n    dimensions_px: [1240,430]\n    bytes: 445024\n    license: null\n    license_url: null\n    license_evidence: \"https://arxiv.org/html/2305.05665v2\"\n    metadata_status: \"needs-confirmation\"\n    rights_status: \"needs-confirmation\"\n    provenance_confirmation: \"third-party-figure-origin-verified\"\n    derivation: \"pdf-page-render-crop\"\n    modifications: \"Figure 1 rendered from the official paper; caption and surrounding page text removed, three capability panels preserved\"\n    last_verified: \"2026-11-11\"\n    used_in: []\n    publication_status: \"retired\"\n    retirement_reason: \"The arXiv version is publicly readable but no independent redistribution grant was verified. The reader links to the original; the existing local copy is preserved.\"\n    former_used_in: [\"00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md\",\"en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md\"]"
+        }
+      ]
+    },
+    {
+      "source": "docs/audit/2026-10-30-reading-route-review.json",
+      "before_sha256": "a44b17c83963dd681ffc02721fc491e6ab49a3e5f11e00be8390f34bc707d5e3",
+      "after_sha256": "1285246964ef1257fc886ca164db1cdb4b8c1e667b02a328612f531b740991f6",
+      "lines": 8027,
+      "changes": [
+        {
+          "old": "      \"sha256\": \"c919ade1e7e7b76cb1f304c6efde6cd5fc0b5ec8af6636e531d358eb08caa5f1\",\n      \"lines\": 877,",
+          "new": "      \"sha256\": \"36ad1356c2a79fdf0ade58459a0d2b2a2a18b0c6746ef8576cbd6cd360a1fe20\",\n      \"lines\": 880,\n      \"vlmFigureResolutionEvidence\": \"docs/audit/2026-11-11-vlm-reader-figure-resolution-additions.json\","
+        },
+        {
+          "old": "      \"sha256\": \"0294ef46fb9b10f1dbba0b3efd1b9841f2671be4bea8d004bfdf27fc65315d22\",\n      \"lines\": 700,",
+          "new": "      \"sha256\": \"9b1d1126236ab864656743549d9be4364fa86a4740992f0574810cbe74aece5b\",\n      \"lines\": 705,\n      \"vlmFigureResolutionEvidence\": \"docs/audit/2026-11-11-vlm-reader-figure-resolution-additions.json\","
+        },
+        {
+          "old": "      \"sha256\": \"cf394a0ddae0011830aaedeb1cded99bc7c3f5849f5839f8eec67b38c8418974\",\n      \"lines\": 736,",
+          "new": "      \"sha256\": \"d15766e05d47e92e7e00bf4e4c4bf608ee1d22aedff025f875c4280880739f2c\",\n      \"lines\": 741,\n      \"vlmFigureResolutionEvidence\": \"docs/audit/2026-11-11-vlm-reader-figure-resolution-additions.json\","
+        },
+        {
+          "old": "      \"currentSha256\": \"debc293999103b678281eb2f0583b2a00db28dd57ea7a7bf8e1554c61974d876\",\n      \"lines\": 492,",
+          "new": "      \"currentSha256\": \"bd1a3294222f6bbe3011ac566d1ad005a8ff5574665f904d8c6c47ee0ebfabf3\",\n      \"lines\": 497,\n      \"vlmFigureResolutionEvidence\": \"docs/audit/2026-11-11-vlm-reader-figure-resolution-additions.json\","
+        },
+        {
+          "old": "      \"currentSha256\": \"6afe9c513944348683a001fd6df63daa17a9767407339fdbd9a8ba3bea2ff39e\",\n      \"lines\": 570,",
+          "new": "      \"currentSha256\": \"c8763bab6e25a3c17243b6ef4d143bd53dcf8f1bc542b07a5b5a8a3599ad8b88\",\n      \"lines\": 576,\n      \"vlmFigureResolutionEvidence\": \"docs/audit/2026-11-11-vlm-reader-figure-resolution-additions.json\","
+        },
+        {
+          "old": "      \"currentSha256\": \"2b1e907b5a2c0d44272be1e03319ef165972c2ee70bc483a0455d43b60fbd529\",\n      \"lines\": 703,",
+          "new": "      \"currentSha256\": \"e17b0dd4f10ae182a8493cf77827e30cc742391aa7522454a4f99d3df61c4290\",\n      \"lines\": 709,\n      \"vlmFigureResolutionEvidence\": \"docs/audit/2026-11-11-vlm-reader-figure-resolution-additions.json\","
+        },
+        {
+          "old": "      \"sha256\": \"58c0ad07918bef4e5d00ccbd7b3a93962585cde3b2f62ddf91f1b96b98f2086e\",\n      \"lines\": 123,",
+          "new": "      \"sha256\": \"f7ee8001d86067b93bda0aaa1db439a881de11e874106814e757b92a0a4acd03\",\n      \"lines\": 124,\n      \"vlmFigureResolutionEvidence\": \"docs/audit/2026-11-11-vlm-reader-figure-resolution-additions.json\","
+        }
+      ]
+    },
+    {
+      "source": "docs/audit/2026-11-09-release-readiness.json",
+      "before_sha256": "ba8ab80df7db97de57e9f9404ce6cddd4716db6a48c65570770e4c878be74f87",
+      "after_sha256": "b4c840bd99c4c32a3789db349485a15068b6c562d4ecf17933e42300453b467e",
+      "lines": 1435,
+      "changes": [
+        {
+          "old": "  \"remaining\": [\n    \"Reconcile digests and source records for 33 older rendered textbook entries; Qwen2-VL Figure 11 has no reuse grant in the checked arXiv v1 record and needs a separate source or link-only treatment. Resolve the two pinned but rights-pending InternVL 2.5 and ImageBind figures before public release. The broader source-library image inventory is separate.\",",
+          "new": "  \"vlmReaderFigureResolution20261111\": {\n    \"journal\": \"docs/audit/2026-11-11-vlm-reader-figure-resolution-additions.json\",\n    \"checkedTextbookLocalePages\": 310,\n    \"localBuildPages\": 2077,\n    \"retiredVlmCopies\": 3,\n    \"retiredCopiesInBuiltOutput\": 0,\n    \"textbookRenderedImagePathsWithMatchingSHA256\": 1187,\n    \"registeredTextbookPathsStillWithoutSHA256\": 32,\n    \"distinctExternalTextbookImages\": 0,\n    \"renderedTextbookRowsMarkedRightsNeedsConfirmation\": 0,\n    \"scope\": \"The three PNGs remain byte-identical in the repository archive and are absent from built HTML and assets, including the atlas and its English fallback. Six chapter editions retain direct links to the exact original paper pages and walk through the cases inline. A zero count of rows marked needs-confirmation is not rights clearance for all remaining legacy entries or the source library.\"\n  },\n  \"remaining\": [\n    \"Reconcile digests and source records for 32 older rendered textbook entries. The broader source-library image inventory is separate. The three retired VLM copies require no reader embed; a reusable visual equivalent for each distinct teaching case remains an editorial option.\","
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "pin": "5672cd98a7671eda4d9122b10f8eec580f74d03e",
+  "archive": "05 Источники/Originals/gpu-copy-2026-11-04/",
+  "folder": "00 Учебник/Assets/Figures/curated/gpu-copy-2026-11-04/",
+  "files": [
+    {
+      "name": "trace_streamed0_pinned0.png",
+      "bytes": 83185,
+      "sha256": "395688a4a2fe4cf94708052b95fb7634f6e5ab6e124ac92a3e1a350533ad5b6e",
+      "dimensions": [
+        1889,
+        264
+      ]
+    },
+    {
+      "name": "trace_streamed0_pinned1.png",
+      "bytes": 83389,
+      "sha256": "dc999e2a1014751c3ca11d2c1b5ac92feb69286f7351af9e4e4028379c0c4e4a",
+      "dimensions": [
+        1890,
+        290
+      ]
+    },
+    {
+      "name": "trace_streamed1_pinned0.png",
+      "bytes": 87483,
+      "sha256": "6f5021b4b7d27480fc4a774fd5727d731de2bb5537d2419ee325984df8780830",
+      "dimensions": [
+        1889,
+        308
+      ]
+    },
+    {
+      "name": "trace_streamed1_pinned1.png",
+      "bytes": 92727,
+      "sha256": "69c37ff3b3f381224519df17ca5d0c4c90e1e216e8e4b91e3137e83aed30258a",
+      "dimensions": [
+        1894,
+        309
+      ]
+    },
+    {
+      "name": "pinmem_nonblock.py",
+      "bytes": 31606,
+      "sha256": "c19188e197f5bccb7c26be751ce894c71091c02470164a5431f3829bad604c33",
+      "dimensions": null
+    },
+    {
+      "name": "LICENSE",
+      "bytes": 1525,
+      "sha256": "5703fcbe2d5dfcc48d486d26e4b9d2e48255c24602e1bd0270b60b8978116f86",
+      "dimensions": null
+    }
+  ]
+}

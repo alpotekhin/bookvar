@@ -9,9 +9,34 @@ const english = path.startsWith('/en/') && (path.startsWith('/en/textbook/') || 
 const practice = path.startsWith('/en/practice/');
 const nativeEnglish = data.sourceLanguage === 'en' && status === undefined;
 const canonical = data.canonicalHref ?? `${base}${path.replace(/^\/en\//, '/')}`;
+const decoderHistory = [
+  ['GPT-1', 'models/gpt-1'],
+  ['GPT-2', 'models/gpt-2'],
+  ['GPT-3', 'models/gpt-3'],
+  ['LLaMA v1', 'modern-llm/llama-architecture'],
+];
+const textbook = `${english ? '/en' : ''}/textbook/`;
+const historyStep = decoderHistory.findIndex(([, slug]) => path.replace(/\/$/, '') === textbook + slug);
 ---
 
 <PageTitle />
+{historyStep !== -1 && (
+  <nav class="decoder-history" aria-label={english ? 'From GPT-1 to LLaMA' : 'От GPT-1 к LLaMA'}>
+    <ol role="list">
+      {decoderHistory.map(([label, slug], i) => (
+        <li>
+          {i !== 0 && <span aria-hidden="true">→</span>}
+          {i === historyStep
+            ? <span aria-current="page">{label}</span>
+            : <a href={`${base}${textbook}${slug}/`}>{label}</a>}
+        </li>
+      ))}
+    </ol>
+    <a href={`${base}${textbook}#gpt-decoder-route-comparison`}>
+      {english ? 'Comparison with source figures' : 'Сравнение с рисунками'}
+    </a>
+  </nav>
+)}
 {english && !nativeEnglish && status !== 'current' && (
   <aside class="edition-notice" aria-label="English edition status">
     {status === 'partial' ? (
@@ -24,6 +49,13 @@ const canonical = data.canonicalHref ?? `${base}${path.replace(/^\/en\//, '/')}`
 )}
 
 <style>
+  .decoder-history{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:1.25rem;row-gap:.2rem;margin-top:.6rem;font-size:var(--sl-text-sm)}
+  .decoder-history ol{display:flex;flex-wrap:wrap;gap:.2rem .55rem;list-style:none;padding:0;margin:0}
+  .decoder-history li{display:inline-flex;gap:.55rem;white-space:nowrap}
+  .decoder-history [aria-current]{font-weight:600;color:var(--sl-color-white)}
+  .decoder-history [aria-hidden]{color:var(--sl-color-gray-3)}
+  .decoder-history a{color:var(--sl-color-accent);text-underline-offset:.17em}
+  .decoder-history a:hover,.decoder-history a:focus-visible{color:var(--sl-color-accent-high)}
   .edition-notice{margin-top:1rem;padding:1rem;border-inline-start:3px solid var(--sl-color-orange);background:var(--sl-color-orange-low);font-size:var(--sl-text-sm)}
   .edition-notice p{margin:0 0 .5rem}
 </style>

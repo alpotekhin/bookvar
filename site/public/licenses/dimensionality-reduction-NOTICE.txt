@@ -1,12 +1,44 @@
 PCA, t-SNE and UMAP figures in Bookvar
 
+ADDITIONAL ORIGINAL FIGURES, 2026-11-03
+
+Jake VanderPlas, Python Data Science Handbook:
+jake-pixel-basis.png, jake-pca-basis.png, jake-cumulative-variance.png,
+jake-noisy-digits.png, jake-filtered-digits.png.
+https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html
+Source revision d66231454ef753818dc9213c9b5942e067266966.
+CC BY-NC-ND 3.0 Unported: https://creativecommons.org/licenses/by-nc-nd/3.0/
+All complete original images remain unmodified. Three PNG outputs decoded from
+the saved notebook; the two basis images copied from the repository's native PNGs.
+
+Martin Wattenberg, Fernanda Viégas, Ian Johnson, How to Use t-SNE Effectively:
+distill-global-150-input.png, distill-global-150-p50.png,
+distill-global-600-input.png, distill-global-600-p50.png,
+distill-noise-input.png, distill-noise-p2.png.
+https://distill.pub/2016/misread-tsne/
+Source revision f2492b469bec8aaa7aa83cc828081e14a295414d.
+CC BY 2.0: https://creativecommons.org/licenses/by/2.0/
+Complete original PNGs, no changes. Source Sections 3 and 4 and the pinned
+figure configurations specify sample counts, dimensions, perplexity and iterations.
+Attributed English source excerpts retain CC BY 2.0.
+
+Leland McInnes and UMAP contributors; documentation based on work by Philippe Rivière:
+umap-neighbors-2.png, umap-neighbors-200.png,
+umap-min-dist-0.png, umap-min-dist-099.png.
+https://umap-learn.readthedocs.io/en/latest/parameters.html
+Source revision e82ed0d457b566b043ef44f4007a7149b0daca74.
+BSD-3-Clause; full license already included below.
+Complete native PNGs and attributed source-language explanatory paragraphs,
+without redraw, crop, relabeling, translation or resampling.
+These source licenses do not relicense unrelated Bookvar material.
+
 Jake VanderPlas, Python Data Science Handbook:
 https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html
 https://jakevdp.github.io/PythonDataScienceHandbook/06.00-figure-code.html#Principal-Components-Rotation
 CC BY-NC-ND 3.0 Unported, per the pinned repository LICENSE-TEXT:
 https://creativecommons.org/licenses/by-nc-nd/3.0/
 https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/LICENSE-TEXT
-Two full original figures, no modifications. The rotation example uses
+Full original figures, no modifications. The rotation example uses
 whiten=True. The source notebook output is decoded, not regenerated.
 
 Martin Wattenberg, Fernanda Viégas, Ian Johnson,

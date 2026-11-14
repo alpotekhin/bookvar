@@ -15,7 +15,7 @@ const routes = new Map(textbook.pages.flatMap((page) => [page.source, page.sourc
   .map((source) => [normalize(source), page.route] as const)));
 
 function chapterLinks(text: string): string[] {
-  return [...text.matchAll(/\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|[^\]]*)?\]\]/g)]
+  return [...text.matchAll(/(?<!!)\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|[^\]]*)?\]\]/g)]
     .map((match) => normalize(match[1]))
     .filter((source) => source.startsWith('00 Учебник/') || source.startsWith('en/00 Textbook/'))
     .map((source) => {
@@ -64,7 +64,14 @@ describe('reader-facing textbook order', () => {
 
   it('renders the systems sequence as separate Markdown list items', () => {
     const systems = ru.split('Вычислительные основы ML-систем\n')[1].split(/^### /m)[0];
-    expect(systems.match(/^- \[\[/gm)).toHaveLength(8);
+    const expected = ['model-as-part-of-system', 'gpu-cuda-memory-hierarchy',
+      'performance-measurement-roofline', 'transformer-moe-arithmetic',
+      'numerical-formats-mixed-precision', 'data-pipeline-padding-packing',
+      'profiling', 'gpu-kernels-triton', 'graph-compilation-pytorch-jax']
+      .map(slug => 'textbook/ml-systems/' + slug);
+    const items = [...systems.matchAll(/^- (\[\[[^\n]+\]\])$/gm)]
+      .flatMap(match => chapterLinks(match[1]));
+    expect(items).toEqual(expected);
     expect(systems).not.toMatch(/^S\d+\./m);
   });
 

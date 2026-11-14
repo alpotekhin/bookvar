@@ -4,13 +4,17 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { withoutLocalReductionAddition } from './helpers/local-reduction-baseline.js';
+import { beforeTopicConsolidation } from '../tools/topic-consolidation-baseline.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const chapter = '00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md';
 const originals = '05 Источники/Originals/harvard-performance-2026-10-26';
 const start = '<!-- BEGIN REVIEW: CUDA Graphs 2026-10-26 -->';
 const end = '<!-- END REVIEW: CUDA Graphs 2026-10-26 -->';
-const read = (path: string) => readFile(join(root, path), 'utf8');
+const read = async (path: string) => {
+  const text = await readFile(join(root, path), 'utf8');
+  return path === chapter ? beforeTopicConsolidation(text, path, root) : text;
+};
 const digest = (text: string | Buffer) => createHash('sha256').update(text).digest('hex');
 const sourceBlock = (text: string, label: string) => text.split(`<!-- BEGIN SOURCE: ${label} -->`)[1]
   .split(`<!-- END SOURCE: ${label} -->`)[0].trim();

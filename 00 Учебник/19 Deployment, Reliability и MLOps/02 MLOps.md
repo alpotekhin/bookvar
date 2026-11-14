@@ -4,6 +4,28 @@ type: textbook-chapter
 status: canonical
 last_updated: 2026-10-29
 last_verified: 2026-10-26
+reference_terms:
+  - label: Feature store — историческое соединение на момент решения
+    label_en: Feature store — point-in-time retrieval
+    anchor: mlops-point-in-time
+  - label: Периодичность переобучения — устаревание и стоимость
+    label_en: Retraining cadence — staleness and cost
+    anchor: mlops-retraining-cadence
+  - label: Канареечный выпуск — ошибки по версиям
+    label_en: Canary rollout — errors by version
+    anchor: mlops-canary-rollout
+  - label: A/B-тест — перекос групп и потеря наблюдений (SRM)
+    label_en: A/B testing — sample ratio mismatch
+    anchor: mlops-sample-ratio-mismatch
+  - label: Бюджет ошибок — доля запросов и burn rate
+    label_en: Error budget — request counts and burn rate
+    anchor: mlops-request-budget
+  - label: Версии признаков, зависимости и пересчёт истории
+    label_en: Feature versions, lineage, and backfills
+    anchor: mlops-feature-backfill
+  - label: Стоимость запроса и полезного результата
+    label_en: Cost per request and useful result
+    anchor: mlops-useful-result-cost
 primary_sources:
   - https://docs.cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning
   - https://sre.google/workbook/canarying-releases/
@@ -171,6 +193,8 @@ retrieval from transformation engines. A feature-store deployment does not
 automatically implement every batch or streaming transformation. The team
 still owns those computations, their dependencies and the comparison between
 the values that training retrieves and the values that serving actually uses.
+
+<a id="mlops-point-in-time"></a>
 
 ### Point-in-time retrieval
 
@@ -470,6 +494,8 @@ CC BY 4.0. Слова и язык оригинала сохранены; изм�
 Ежедневный запуск на ошибочной выгрузке лишь быстрее повторяет ошибку.
 
 <!-- serving-decisions-completion: retraining start -->
+<a id="mlops-retraining-cadence"></a>
+
 ### Retraining frequency: stale predictions and update cost
 
 An automatic training pipeline still needs a rule for when to run. The
@@ -746,13 +772,15 @@ Canary описывает ограничение воздействия и оц�
 Мгновенный переход всех пользователей между двумя средами
 не даёт периода ограниченного воздействия.
 
+<a id="mlops-canary-rollout"></a>
+
 ### Почему ошибки новой версии не видны в общей метрике
 
 В учебном сервисе Google SRE кандидат намеренно возвращает ошибки
 примерно для 20% запросов. Ему направляют 5% трафика.
 На общей панели ошибка почти исчезает на фоне масштаба оси:
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mlops-review-2026-10/sre-canary-aggregate.webp]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mlops-review-2026-10/sre-canary-aggregate.webp|На общей панели доля HTTP 500 поднимается примерно до 1%, почти незаметно на шкале от 0 до 100%]]
 
 *Alec Warner, Štěpán Davidovič et al.,
 [Google SRE Workbook, Figure 16-3](https://sre.google/workbook/canarying-releases/),
@@ -761,7 +789,7 @@ CC BY-NC-ND 4.0. Полный неизменённый оригинал; иск�
 
 Разбиение по версии показывает, где появляются ошибки:
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mlops-review-2026-10/sre-canary-versions.webp]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mlops-review-2026-10/sre-canary-versions.webp|HTTP-ошибки по версиям: доля ошибок растёт у кандидата, а не у контрольной версии]]
 
 *Alec Warner, Štěpán Davidovič et al.,
 [Figure 16-4 — HTTP response codes by application version](https://sre.google/workbook/canarying-releases/),
@@ -993,6 +1021,84 @@ model/feature versions with the result. Check whether observed assignment
 counts match the intended split before interpreting an outcome difference.
 A routing bug that selectively drops users can invalidate the comparison
 even when the final p-value is small.
+
+<a id="mlops-sample-ratio-mismatch"></a>
+
+#### Перекос групп в A/B-тесте
+
+Пусть в опыте с ранжированием каждому пользователю независимо
+назначают A или B с вероятностью 0.5. Журнал назначения содержит
+по 10 000 пользователей в каждой группе. После соединения с журналом
+исходов в таблицу анализа попали все пользователи A, но только 9000 из B.
+Сравнивать нужно пользователей одной зрелой когорты, а не число их
+запросов: один человек может создать десятки событий.
+
+| Где считаем пользователей | A | B |
+| --- | ---: | ---: |
+| Журнал назначения | 10 000 | 10 000 |
+| Таблица анализа | 10 000 | 9000 |
+| Потеря между этапами | 0 | 1000 |
+
+Отклонение от ожидаемой доли в таблице анализа называют
+*sample ratio mismatch*, или SRM. При случайном распределении
+без выборочных потерь среди 19 000 наблюдений ожидалось бы по 9500.
+Статистика Пирсона для двух групп равна
+
+$$
+\begin{aligned}
+\chi^2
+&=\frac{(10000-9500)^2}{9500}
+ +\frac{(9000-9500)^2}{9500}\\
+&\approx52.63.
+\end{aligned}
+$$
+
+У приближения с одной степенью свободы $p\approx4.0\cdot10^{-13}$.
+Это тест долей групп, а не тест изменения покупок. Он не объясняет,
+почему пользователи исчезли. При ступенчатом выпуске ожидаемые доли
+надо брать из фактического плана назначения для каждого периода;
+тест против произвольных 50/50 даст ложный сигнал.
+
+Если у A зарегистрированы 500 покупок, а у оставшихся пользователей B —
+480, анализ покажет 5.00% против 5.33%. Но если выяснится, что ни один
+из пропущенных пользователей B ничего не купил, полная доля B равна
+4.80% и направление эффекта меняется. Пока исходы неизвестны,
+доля B может лежать между 4.80% и 14.80%: нижняя граница соответствует
+нулю покупок у пропущенных, верхняя — покупке у каждого. Это границы
+из-за пропусков, а не доверительный интервал.
+
+~~~python
+from fractions import Fraction
+from math import erfc, isclose, sqrt
+
+expected = Fraction(10_000 + 9_000, 2)
+chi2 = sum((count - expected)**2 / expected for count in [10_000, 9_000])
+assert chi2 == Fraction(1000, 19)
+p_value = erfc(sqrt(float(chi2) / 2))
+assert isclose(p_value, 4.02367219068424e-13, rel_tol=1e-12)
+control = Fraction(500, 10_000)
+selected = Fraction(480, 9_000)
+lower = Fraction(480, 10_000)
+upper = Fraction(480 + 1000, 10_000)
+assert lower < control < selected < upper
+~~~
+
+Первый шаг диагностики — найти отсутствующие ID в журнале назначения
+и выяснить, на каком переходе они пропали: доставке варианта, записи
+события, соединении таблиц или отборе когорты. Дедупликация идёт по ID
+единицы назначения; отсутствие события покупки можно считать нулём
+только при подтверждённом наблюдении за пользователем до конца окна.
+Результат не используют для выпуска, пока причина потери не установлена
+и анализ не повторён для допустимой выборки. Равные размеры групп тоже
+не гарантируют отсутствие смещения: обе группы могут потерять одинаковое
+число пользователей с разными исходами.
+
+В [разборе Microsoft Research](https://www.microsoft.com/en-us/research/articles/diagnosing-sample-ratio-mismatch-in-a-b-testing/)
+показан обратный по знаку случай: более активные пользователи варианта B
+попали под фильтр ботов, и эксперимент сперва показал ухудшение.
+[Fabijan et al., §§2.3.1, 3](https://exp-platform.com/Documents/2019_KDDFabijanGupchupFuptaOmhoverVermeerDmitriev.pdf)
+разбирают проверку долей и причины перекоса по этапам.
+Числа в таблице выше — отдельный учебный пример.
 <!-- serving-decisions-completion: experiment end -->
 
 <a id="интерфейс-эксплуатации-и-наблюдения"></a>
@@ -1224,6 +1330,53 @@ assert np.isclose(burn, 14.4) and np.isclose(spent, .02)
 assert np.isclose(budget_burn(.999, .01, 1., 720.)[0], 10.)
 ```
 
+<a id="mlops-request-budget"></a>
+
+### Доля бюджета при разном объёме трафика
+
+Пусть за завершившиеся 30 дней сервис получил миллион допустимых запросов.
+При SLO 99.9% бюджет составил 1000 ошибок. В двух часовых окнах
+доля ошибок одинакова и равна 1%, но в тихий час пришло 1000 запросов,
+а в час нагрузки — 10 000. Первое окно дало 10 ошибок, второе — 100.
+Burn rate в обоих случаях равен 10, но потрачены соответственно
+1% и 10% полного бюджета.
+
+Если в окне $w$ было $N_w$ запросов и $E_w$ ошибок, а за весь период
+пришло $N_P$ запросов, доля бюджета равна
+
+$$
+\frac{E_w}{(1-S)N_P}
+=\frac{E_w/N_w}{1-S}\cdot\frac{N_w}{N_P}.
+$$
+
+Первый множитель справа — burn rate окна, второй — доля трафика за период,
+не доля часов. Для пустого окна burn rate не определён. Если календарный
+период ещё не завершился, точное $N_P$ неизвестно: оценку на весь период
+надо отличать от результата по уже прошедшим запросам.
+
+~~~python
+from fractions import Fraction
+
+allowed_error = Fraction(1, 1000)
+period_requests = 1_000_000
+budget = allowed_error * period_requests
+assert budget == 1000
+for window_requests, errors, expected in [
+    (1_000, 10, Fraction(1, 100)),
+    (10_000, 100, Fraction(1, 10)),
+]:
+    burn = Fraction(errors, window_requests) / allowed_error
+    assert burn == 10
+    assert Fraction(errors, budget) == burn * Fraction(window_requests, period_requests)
+    assert Fraction(errors, budget) == expected
+~~~
+
+Числитель и знаменатель берут на одних границах сервиса. Если SLI
+считает конечный исход пользовательского запроса, несколько попыток
+не превращают его в несколько наблюдений. Определение через количества
+событий и оговорка о незавершённом периоде приведены в
+[Google SRE Workbook, Implementing SLOs](https://sre.google/workbook/implementing-slos/#what-to-measure-using-slis).
+
 ### Длинное и короткое окно
 
 Длинное окно накапливает достаточно событий, но продолжает помнить
@@ -1232,7 +1385,7 @@ assert np.isclose(budget_burn(.999, .01, 1., 720.)[0], 10.)
 В двухоконном правиле сигнал возникает, когда порог превышен
 в обоих окнах.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mlops-review-2026-10/sre-alert-windows.webp]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mlops-review-2026-10/sre-alert-windows.webp|После восстановления пятиминутная доля ошибок падает ниже порога раньше часовой]]
 
 *Steven Thurgood et al.,
 [Google SRE Workbook, Figure 5-6 — Short and long windows for alerting](https://sre.google/workbook/alerting-on-slos/),
@@ -1456,6 +1609,8 @@ assert 2 * .8 - 1 > 0 and 2 * (-.8) - 1 < 0
 Её хранение и обслуживание имеют стоимость и срок завершения миграции.
 
 <!-- BEGIN REVIEW: mlops feature-migration 2026-10-26 -->
+<a id="mlops-feature-backfill"></a>
+
 ### Feature versions, lineage and backfills
 
 <!-- source-excerpt: harvard-feature-version-incident -->
@@ -2392,6 +2547,8 @@ team has the most recent request changes the accounting without evidence.
 The same underlying charge may appear in views by team and by model, but
 adding both views together would count it twice. Reporting costs to a team
 is showback; actually transferring the charge to its budget is chargeback.
+
+<a id="mlops-useful-result-cost"></a>
 
 ### Cost per completed request and per accepted result
 

@@ -75,7 +75,7 @@ describe('loadManifest', () => {
     expect(reading).not.toMatch(/^\s*(?:-\s*)?(?:S\d+|\d+(?:\.\d+)*)\.\s*\[\[/m);
   });
 
-  it('preserves the historical 68-route matrix as an ordered subset, not as the complete current curriculum', () => {
+  it('keeps the historical 68 routes in the curriculum, with T5 moved before the GPT sequence', () => {
     const root = join(import.meta.dirname, '..', '..');
     const matrix = readFileSync(join(root, '00 Учебник', 'Редакционная матрица Bookvar.md'), 'utf8');
     const matrixRows = [...matrix.matchAll(/^\|\s*(\d+)\s*\|\s*`([^`]+)`\s*\|$/gm)]
@@ -96,7 +96,10 @@ describe('loadManifest', () => {
     const curriculumOrder = textbookOrder.filter((route) =>
       matrixRows.some((row) => row.route === route)
     );
-    expect(curriculumOrder).toEqual(matrixRows.map(({ route }) => route));
+    const t5 = 'textbook/models/t5';
+    const expectedOrder = matrixRows.map(({ route }) => route).filter(route => route !== t5);
+    expectedOrder.splice(expectedOrder.indexOf('textbook/models/gpt-1'), 0, t5);
+    expect(curriculumOrder).toEqual(expectedOrder);
   });
 
   it('maps every curriculum topic from 1 through 68 to compared source material', () => {

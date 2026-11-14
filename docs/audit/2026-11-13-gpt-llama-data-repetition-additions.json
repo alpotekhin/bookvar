@@ -1,0 +1,102 @@
+{
+  "date": "2026-11-13",
+  "scope": "Clarify what changes between GPT-3 and LLaMA in the existing bilingual GPT-1 → GPT-2 → GPT-3 → LLaMA reader route. No new chapter or route.",
+  "review": {
+    "sources": "Brown et al. §§2.1–2.2 and Tables 2.1–2.2; Hoffmann et al. §4; Touvron et al. §§1–2.1 and Tables 1–2; Muennighoff et al., JMLR §6, Figure 10 and §10.1.",
+    "worked_case": "At fixed model size (8.7B) and total C4 tokens (about 178B), about 44B corpus tokens correspond to four passes and the 25% point; the paper reports a 0.5% higher held-out loss relative to the 178B corpus run. The right panel is extrapolation, not a replay of GPT-3 or LLaMA training.",
+    "style": "Read the surrounding route with the new explanation and keep historical facts separate from the controlled experiment; preserve the authors' figure and terminology.",
+    "rights": "The exact JMLR PDF declares CC BY 4.0 on p. 1. Both panels and the legend on p. 14 were retained.",
+    "validation": "Astro built 2083 pages with 0 broken internal routes, anchors, or files. All 310 built-output tests, 200 asset-registry tests, and 26 GPT/LLaMA and preservation tests passed. Inspected both reader locales in Chrome at 1280 and 375 px, including inline fit, visible attribution, and 4× zoom with panning at 375 px. Followed Next from GPT-1 through GPT-2 and GPT-3 to LLaMA in both languages. No commit, push, or deployment."
+  },
+  "figure": {
+    "id": "curated-gpt-route-muennighoff-figure10-b12e4dcd113f",
+    "author": "Niklas Muennighoff et al.",
+    "title": "Scaling Data-Constrained Language Models — Figure 10",
+    "source_url": "https://jmlr.org/papers/v26/24-1000.html",
+    "source_image_url": "https://jmlr.org/papers/volume26/24-1000/24-1000.pdf#page=14",
+    "source_asset": "05 Источники/Papers/Source PDFs/muennighoff-24-1000.pdf",
+    "source_asset_sha256": "3e14dd572c42489f23bf6ffb741e0e9a686863c34704f5215c3e4dd39fc35502",
+    "source_page": 14,
+    "render_dpi": 360,
+    "render_page_size_px": [
+      3060,
+      3960
+    ],
+    "crop_box_px": [
+      445,
+      445,
+      2625,
+      1430
+    ],
+    "dimensions_px": [
+      2180,
+      985
+    ],
+    "sha256": "b12e4dcd113ffd6d8add76b69c37cedcda8548603bd3d44ffffdef0d745ca3de",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "https://jmlr.org/papers/volume26/24-1000/24-1000.pdf#page=1",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "derivation": "pdf-page-render-crop",
+    "modifications": "Both author panels and the shared legend, cropped at 360 dpi. Page header, original caption and surrounding prose excluded. No redraw or relabeling.",
+    "asset": "00 Учебник/Assets/Figures/curated/gpt-route-2026-11-13/muennighoff-jmlr-figure10.png",
+    "metadata_status": "verified",
+    "last_verified": "2026-11-13",
+    "used_in": [
+      "00 Учебник/_index.md",
+      "en/00 Textbook/_index.md"
+    ]
+  },
+  "files": [
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "9a4aa588abcc3b9a95f0b2309dbbc439efc33f694778d9b134476e10c9c66445",
+      "after_sha256": "e6da9fb161f4973fbe8da61881e690da2f6eca80d9a28c12911c13b53e149ede",
+      "changes": [
+        {
+          "old": "  - id: curated-scaling-finite-data-breakdown-chart-809739c21bcd",
+          "new": "  - {\"id\":\"curated-gpt-route-muennighoff-figure10-b12e4dcd113f\",\"author\":\"Niklas Muennighoff et al.\",\"title\":\"Scaling Data-Constrained Language Models — Figure 10\",\"source_url\":\"https://jmlr.org/papers/v26/24-1000.html\",\"source_image_url\":\"https://jmlr.org/papers/volume26/24-1000/24-1000.pdf#page=14\",\"source_asset\":\"05 Источники/Papers/Source PDFs/muennighoff-24-1000.pdf\",\"source_asset_sha256\":\"3e14dd572c42489f23bf6ffb741e0e9a686863c34704f5215c3e4dd39fc35502\",\"source_page\":14,\"render_dpi\":360,\"render_page_size_px\":[3060,3960],\"crop_box_px\":[445,445,2625,1430],\"dimensions_px\":[2180,985],\"sha256\":\"b12e4dcd113ffd6d8add76b69c37cedcda8548603bd3d44ffffdef0d745ca3de\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence\":\"https://jmlr.org/papers/volume26/24-1000/24-1000.pdf#page=1\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"derivation\":\"pdf-page-render-crop\",\"modifications\":\"Both author panels and the shared legend, cropped at 360 dpi. Page header, original caption and surrounding prose excluded. No redraw or relabeling.\",\"asset\":\"00 Учебник/Assets/Figures/curated/gpt-route-2026-11-13/muennighoff-jmlr-figure10.png\",\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-13\",\"used_in\":[\"00 Учебник/_index.md\",\"en/00 Textbook/_index.md\"]}\n  - id: curated-scaling-finite-data-breakdown-chart-809739c21bcd"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "8e0ed77b6e971e0fa4d2876437692c8039a9559d27cece588352c56e57cab947",
+      "after_sha256": "1478a9cf077bdb8756e16bab0886846805341f8988b6d4c3382f16df929af3db",
+      "changes": [
+        {
+          "old": "type: textbook-chapter\nstatus: active\nlast_updated: 2026-11-11\n---",
+          "new": "type: textbook-chapter\nstatus: active\nlast_updated: 2026-11-13\n---"
+        },
+        {
+          "old": "[[#gpt-decoder-route-architecture|Схемы декодеров]] ·\n[[#gpt-decoder-route-cache|Память при генерации]] ·\n[[#gpt-decoder-route-data|Данные обучения]] ·\n[[#gpt-decoder-route-evidence|Результаты опытов]]",
+          "new": "[[#gpt-decoder-route-architecture|Схемы декодеров]] ·\n[[#gpt-decoder-route-cache|Память при генерации]] ·\n[[#gpt-decoder-route-data|Корпуса и объём обучения]] ·\n[[#gpt-decoder-route-evidence|Результаты опытов]]"
+        },
+        {
+          "old": "На графике нет GPT-3: снижение потерь вдоль одной кривой показывает\nэффект продолжения обучения LLaMA, но не разницу между двумя семействами.\n\n<a id=\"gpt-decoder-route-evidence\"></a>",
+          "new": "На графике нет GPT-3: снижение потерь вдоль одной кривой показывает\nэффект продолжения обучения LLaMA, но не разницу между двумя семействами.\n\nАвторы GPT-3 дали каждой из восьми моделей по 300 млрд токенов. Они\nмогли проверить, как при таком объёме обучения результат меняется\nс размером модели. Авторы LLaMA решали другую задачу: если число\nпараметров ограничивает стоимость вывода, сколько можно выиграть,\nдольше обучая модель того же размера? На этот выбор повлияла\n[работа о Chinchilla](https://arxiv.org/html/2203.15556v1#S4): при примерно\nтом же бюджете обучения, что у Gopher, Chinchilla имела вчетверо меньше\nпараметров (70 против 280 млрд) и обработала примерно вчетверо больше\nтокенов. [Введение статьи LLaMA](https://arxiv.org/html/2302.13971v1#S1)\nобъясняет, почему команда отдельно учитывала стоимость вывода.\n\n<a id=\"gpt-decoder-route-repeated-data\"></a>\n\n#### Новые токены или ещё один проход по корпусу\n\nУ GPT-3 один проход по источнику не был нормой: по WebText2 авторы\nнасчитали 2,9 прохода, по Common Crawl — 0,44. У LLaMA после 1,4 трлн\nтокенов счётчик Common Crawl дошёл до 1,10, а Wikipedia — до 2,45.\nЭто средние по каждому источнику, а не число прочтений любого документа.\nПри сравнении таких смесей по общему числу токенов нельзя узнать,\nсколько раз модели видели один и тот же текст. Muennighoff et al.\nвыделили эффект повторов отдельным экспериментом.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-route-2026-11-13/muennighoff-jmlr-figure10.png|Слева измеренные потери при фиксированной длине обучения: у модели 8,7 млрд параметров результат при 25% неповторяющихся токенов близок к результату при 100%. Справа прогноз для более долгого обучения на корпусе фиксированного размера.]]\n\n*Niklas Muennighoff et al., [Scaling Data-Constrained Language Models, JMLR 26(53), 2025](https://jmlr.org/papers/v26/24-1000.html),\n[§6, рис. 10, с. 14](https://jmlr.org/papers/volume26/24-1000/24-1000.pdf#page=14),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nОбе панели и легенда из статьи, без перерисовки.*\n\nСлева проследите нижний ряд точек: у каждой модели 8,7 млрд параметров,\nкаждая обработала около 178 млрд токенов C4. При 100% это один проход\nпо большому корпусу; при 25% корпус содержит около 44 млрд токенов\nи его проходят четыре раза. В этом опыте итоговая потеря на отложенном\nтексте выросла всего на 0,5% относительно одного прохода. Сплошные линии\nслева подогнаны по эксперименту. Справа сплошные линии уже показывают\nпрогноз: корпус фиксирован, а число обработанных токенов растёт за счёт\nновых проходов. Сравнение относится к повторению всего корпуса C4;\nоно не измеряет эффект повторов Wikipedia в смеси LLaMA.\n\n<a id=\"gpt-decoder-route-evidence\"></a>"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "f6c2d0ac5565cf4e6cd1195b253102cb72874ff90f2e9f40ab028c96f883f11f",
+      "after_sha256": "fb02aeff4e20e19870c76821b1a5af761d5f8bead4bb521533b1e68845163f49",
+      "changes": [
+        {
+          "old": "locale: en\ntranslation_status: current\ncanonical_revision: \"8e0ed77b6e971e0fa4d2876437692c8039a9559d27cece588352c56e57cab947\"\ntranslation_reviewed: \"2026-11-11\"\ntranslation_of: \"00 Учебник/_index.md\"\nlast_updated: 2026-11-11\nlast_verified: 2026-09-15\n---",
+          "new": "locale: en\ntranslation_status: current\ncanonical_revision: \"1478a9cf077bdb8756e16bab0886846805341f8988b6d4c3382f16df929af3db\"\ntranslation_reviewed: \"2026-11-13\"\ntranslation_of: \"00 Учебник/_index.md\"\nlast_updated: 2026-11-13\nlast_verified: 2026-09-15\n---"
+        },
+        {
+          "old": "[[#gpt-decoder-route-architecture|Decoder diagrams]] ·\n[[#gpt-decoder-route-cache|Memory during generation]] ·\n[[#gpt-decoder-route-data|Training data]] ·\n[[#gpt-decoder-route-evidence|Experimental results]]",
+          "new": "[[#gpt-decoder-route-architecture|Decoder diagrams]] ·\n[[#gpt-decoder-route-cache|Memory during generation]] ·\n[[#gpt-decoder-route-data|Corpora and training length]] ·\n[[#gpt-decoder-route-evidence|Experimental results]]"
+        },
+        {
+          "old": "trained longer, not how the two families compare.\n\n<a id=\"gpt-decoder-route-evidence\"></a>",
+          "new": "trained longer, not how the two families compare.\n\nAll eight GPT-3 models processed 300 billion tokens each. The authors\ncould compare model sizes at that training length. The LLaMA authors\nasked how far they could improve a model of a given size by training\nit longer, since parameter count affects inference cost. They drew on\nthe [Chinchilla study](https://arxiv.org/html/2203.15556v1#S4):\nat roughly Gopher's training compute, Chinchilla had a quarter as many\nparameters (70 billion versus 280 billion) and processed about four\ntimes as many tokens. The [LLaMA introduction](https://arxiv.org/html/2302.13971v1#S1)\nexplains why the team considered the inference budget separately.\n\n<a id=\"gpt-decoder-route-repeated-data\"></a>\n\n#### New tokens or another pass through the corpus\n\nGPT-3's authors report 2.9 passes through WebText2 and 0.44 through\nCommon Crawl. For LLaMA at 1.4 trillion training tokens, the Common\nCrawl count reached 1.10 passes and Wikipedia reached 2.45. These are\naverages for each source, not the number of times any one document\nappeared. Total tokens alone cannot tell us how often a model read\nthe same text. Muennighoff et al. ran a separate experiment to measure\nthe effect of repetition.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-route-2026-11-13/muennighoff-jmlr-figure10.png|Left: measured loss at fixed training length. For the 8.7B model, the 25% unique-token run is close to the 100% run. Right: predicted loss for longer training on a corpus of fixed size.]]\n\n*Niklas Muennighoff et al., [Scaling Data-Constrained Language Models, JMLR 26(53), 2025](https://jmlr.org/papers/v26/24-1000.html),\n[§6, Figure 10, p. 14](https://jmlr.org/papers/volume26/24-1000/24-1000.pdf#page=14),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nBoth panels and the legend are from the paper, not redrawn.*\n\nFollow the bottom row of dots on the left. Each model has 8.7 billion\nparameters and processed about 178 billion C4 tokens. At 100%, the\nmodel makes one pass over a large corpus. At 25%, it makes four passes\nover about 44 billion tokens. The final loss on held-out text was\nonly 0.5% higher than for one pass. The solid curves on the left are\nfits to the experiment. The solid curves on the right are predictions\nfor a fixed corpus and more training tokens from additional passes.\nThe experiment repeats the whole C4 corpus; it does not measure the\neffect of repeating Wikipedia in LLaMA's mixture.\n\n<a id=\"gpt-decoder-route-evidence\"></a>"
+        }
+      ]
+    }
+  ]
+}

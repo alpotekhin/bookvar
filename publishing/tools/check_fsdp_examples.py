@@ -1,6 +1,6 @@
 """Execute chapter 44e examples on CPU/Gloo; no mocked FSDP or GPU claims.
 
-Requires PyTorch 2.14. Eight Python fences are executed from the current
+Requires PyTorch 2.14. Nine Python fences are executed from the current
 chapter. Four real worker processes exercise DeviceMesh, DTensor, FSDP2,
 hybrid sharding, gradients, AdamW states, dtype policy and token weighting.
 No throughput, allocator peak, NCCL or checkpoint portability is measured.
@@ -34,7 +34,7 @@ CHAPTER = ROOT / "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, 
 def chapter_blocks() -> dict[str, str]:
     text = CHAPTER.read_text()
     blocks = re.findall(r"^~~~python\n(.*?)^~~~", text, re.M | re.S)
-    assert len(blocks) == 8, "Review test mapping after changing chapter code."
+    assert len(blocks) == 9, "Review test mapping after changing chapter code."
     for block in blocks:
         ast.parse(block)
     markers = {
@@ -46,6 +46,7 @@ def chapter_blocks() -> dict[str, str]:
         "owned": "def owned_adam_step(",
         "nonlinear": "pair_mesh = mesh[",
         "hybrid": "row_sum_shard = gradient_shard.clone()",
+        "hybrid_accumulation": "def hsdp_accumulated_step(",
     }
     selected = {}
     for name, marker in markers.items():
@@ -287,6 +288,65 @@ def lifetime_and_accumulation(rank, namespace, mesh):
         print("PASS default child/root lifetime and two-microbatch accumulation", flush=True)
 
 
+def partially_synchronized_accumulation(rank, namespace, mesh):
+    step_fn = namespace["hsdp_accumulated_step"]
+    cases = 0
+    for seed in (710, 711):
+        for length in (1, 2, 3):
+            torch.manual_seed(seed)
+            model = ToyModel().double()
+            reference = copy.deepcopy(model)
+            reference_optimizer = torch.optim.AdamW(reference.parameters(), lr=1e-3)
+            model, optimizer = namespace["shard_model"](model, mesh)
+            for update in range(2):
+                offsets = [10 + 3 * update + index for index in range(length)]
+                window = [batch(rank, index) for index in offsets]
+                step_fn(model, optimizer, window, dist.group.WORLD)
+                reference_optimizer.zero_grad(set_to_none=True)
+                global_window = [batch(r, index) for r in range(4) for index in offsets]
+                inputs, targets = zip(*global_window, strict=True)
+                targets = torch.cat(targets)
+                loss = nn.functional.cross_entropy(
+                    reference(torch.cat(inputs)), targets,
+                    ignore_index=-100, reduction="sum",
+                ) / (targets != -100).sum()
+                loss.backward()
+                reference_optimizer.step()
+                compare(model, reference, optimizer, reference_optimizer)
+            previous = [full(p).detach().clone() for p in model.parameters()]
+            inputs, targets = batch(rank)
+            targets.fill_(-100)
+            for window, message in [([], "The accumulation window must not be empty"),
+                    ([(inputs, targets)], "No valid targets in the global window")]:
+                try:
+                    step_fn(model, optimizer, window, dist.group.WORLD)
+                except ValueError as error:
+                    assert str(error) == message
+                else:
+                    raise AssertionError("an empty window was accepted")
+            for actual, expected in zip(model.parameters(), previous, strict=True):
+                close(actual, expected)
+            cases += 1
+
+    # Independently execute the written logical example: two row SUM
+    # reduce-scatters, then one column SUM all-reduce and a global /8.
+    accumulated = torch.zeros(1, dtype=torch.float64)
+    local = torch.tensor([2. * rank + 1, 2. * rank + 2], dtype=torch.float64)
+    for factor in (1., 2.):
+        piece = torch.empty(1, dtype=torch.float64)
+        dist.reduce_scatter_single(piece, local * factor, op=dist.ReduceOp.SUM,
+                                   group=namespace["shard_group"])
+        accumulated += piece
+    close(accumulated, torch.tensor([[12.], [18.], [36.], [42.]][rank], dtype=torch.float64))
+    dist.all_reduce(accumulated, op=dist.ReduceOp.SUM, group=namespace["replicate_group"])
+    accumulated /= 8
+    close(accumulated, torch.tensor([6. if rank % 2 == 0 else 7.5], dtype=torch.float64))
+    if rank == 0:
+        print(f"PASS actual HSDP accumulation: {cases} seed/window cases, two AdamW updates each; "
+              "all parameters/gradients/moments and empty-window controls", flush=True)
+        print("PASS independent two-row-RS/one-column-AR trace: [6,7.5] global mean", flush=True)
+
+
 def dtype_checks(rank, namespace, mesh):
     torch.manual_seed(17)
     model = ToyModel()
@@ -325,6 +385,7 @@ def worker(rank, rendezvous, blocks):
         namespace = {"torch": torch}
         execute(blocks["shard"], namespace)
         execute(blocks["tokens"], namespace)
+        execute(blocks["hybrid_accumulation"], namespace)
         namespace["_precision_source"] = blocks["precision"]
         hybrid_mesh = layout_checks(rank, namespace, blocks)
         if rank == 0:
@@ -333,6 +394,7 @@ def worker(rank, rendezvous, blocks):
         training_checks(rank, namespace, full_mesh, "FSDP2 1D")
         training_checks(rank, namespace, hybrid_mesh, "FSDP2 2x2 hybrid")
         lifetime_and_accumulation(rank, namespace, full_mesh)
+        partially_synchronized_accumulation(rank, namespace, hybrid_mesh)
         dtype_checks(rank, namespace, full_mesh)
         dist.barrier()
     finally:
@@ -355,7 +417,7 @@ def main():
         assert source in text
     for row in ["| ZeRO-1 | $4+12/N$ | $4+8/N$ |", "| ZeRO-2 | $2+14/N$ | $2+10/N$ |"]:
         assert row in text
-    print(f"PASS eight chapter fences parsed and numerical calculations; torch={torch.__version__}",
+    print(f"PASS nine chapter fences parsed and numerical calculations; torch={torch.__version__}",
           flush=True)
     with tempfile.TemporaryDirectory(prefix="bookvar-fsdp-") as directory:
         context = mp.spawn(worker, args=(str(Path(directory) / "store"), blocks),

@@ -1,0 +1,166 @@
+{
+  "date": "2026-11-09",
+  "scope": "Whole-owner read of both existing visual resolution editions. Explain the concrete effect of strided MRoPE assignment and map duplicate or clipped detections across two overlapping tiles. Add six reference subjects and replace the inherited partial AnyRes image with the complete unchanged original. Local only.",
+  "files": [
+    {
+      "source": "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-20",
+          "new": "last_updated: 2026-11-09\nreference_terms:\n  - label: VLM — бюджет визуальных токенов\n    label_en: VLMs — visual token budget\n    anchor: vlm-pixel-budget\n  - label: Molmo — перекрытие и сборка сетки\n    label_en: Molmo — overlapping crops and grid assembly\n    anchor: vlm-molmo-overlap\n  - label: AnyRes — локальные плитки и общий обзор\n    label_en: AnyRes — local tiles and global overview\n    anchor: vlm-anyres\n  - label: Pixtral — упаковка изображений\n    label_en: Pixtral — packing images\n    anchor: vlm-pixtral-packing\n  - label: MRoPE — координаты и частоты\n    label_en: MRoPE — coordinates and frequencies\n    anchor: vlm-mrope-frequencies\n  - label: Visual grounding — рамки перекрывающихся плиток\n    label_en: Visual grounding — boxes from overlapping tiles\n    anchor: vlm-tile-boxes"
+        },
+        {
+          "old": "## 1. Бюджет визуальных токенов",
+          "new": "<a id=\"vlm-pixel-budget\"></a>\n\n## 1. Бюджет визуальных токенов"
+        },
+        {
+          "old": "### Molmo: перекрытие и сборка общей сетки",
+          "new": "<a id=\"vlm-molmo-overlap\"></a>\n\n### Molmo: перекрытие и сборка общей сетки"
+        },
+        {
+          "old": "## AnyRes: глобальный кадр и локальные плитки",
+          "new": "<a id=\"vlm-anyres\"></a>\n\n## AnyRes: глобальный кадр и локальные плитки"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-anyres.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/resolution-2026-11-09/llava-onevision-anyres.png|В верхней панели детальные плитки кодируются до интерполяции признаков; в нижней размер изображения меняется до разбиения. В обеих панелях общий обзор идёт отдельной ветвью.]]"
+        },
+        {
+          "old": "*Percy Liang, Stanford CS336, Lecture 17; верхняя панель Figure 2 из\nLi et al., [LLaVA-OneVision](https://arxiv.org/abs/2408.03326v1).\nВерхний путь собирает детальные признаки и при необходимости уменьшает\nих сетку. Нижний путь даёт отдельный обзор всего изображения.*",
+          "new": "*Bo Li et al., [LLaVA-OneVision v1, рис. 2](https://arxiv.org/html/2408.03326v1#S3.F2),\n[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).\nВ панели (a) ViT сначала обрабатывает более мелкие плитки, и интерполяция\nуменьшает уже сетку признаков. В панели (b) исходный AnyRes меняет размер\nсамого изображения до разбиения. Фиолетовый блок в каждой панели\nпредставляет обзор всей страницы. Обе панели взяты из статьи без изменений.*"
+        },
+        {
+          "old": "### Pixtral: упаковка изображений и границы строк",
+          "new": "<a id=\"vlm-pixtral-packing\"></a>\n\n### Pixtral: упаковка изображений и границы строк"
+        },
+        {
+          "old": "### Как координата меняет attention",
+          "new": "<a id=\"vlm-mrope-frequencies\"></a>\n\n### Как координата меняет attention"
+        },
+        {
+          "old": "буквальное повторение `t,h,w` на всём диапазоне было бы неверным.",
+          "new": "буквальное повторение `t,h,w` на всём диапазоне было бы неверным.\n\nЭто видно на уменьшенной голове с восемью частотами.\nПронумеруем их от 0 до 7 в порядке убывания и выделим\nосям 4, 2 и 2 пары. При последовательных группах получатся\n`T T T T H H W W`. Код чередования начинает со всех `T`,\nзатем заменяет ось у индексов `1, 4` на `H`, а у `2, 5`\nна `W`. Итог: `T H W T H W T T`. Число пар на ось не\nизменилось, но ширина теперь использует $\\omega_2$ и $\\omega_5$\nвместо $\\omega_6$ и $\\omega_7$.\n\nУ горизонтальных соседей разность координат ширины равна 1.\nЕсли в одной такой паре $q=k=(1,0)$, её вклад в скалярное\nпроизведение равен $\\cos\\omega_j$. При $\\omega_2=0.5$ это\nоколо 0.8776, а при $\\omega_6=0.05$ — около 0.9988.\nЭто пример для выбранных частот и одной пары, а не изменение\nсуммарного attention-логита обученной модели."
+        },
+        {
+          "old": "Для перекрывающихся плиток сначала переводят предсказания в одну\nсистему координат, затем сопоставляют их, например по IoU.\nСравнивать локальные рамки двух разных плиток напрямую нельзя:\nсовпадающие числа могут описывать разные места страницы. Выбор\nмежду дубликатами также зависит от класса объекта и правил задачи;\nодно значение confidence не устанавливает, что это один и тот же объект.",
+          "new": "<a id=\"vlm-tile-boxes\"></a>\n\n### Рамки на перекрывающихся плитках\n\nВозьмём прежнюю плитку A с началом $(80,40)$ и соседнюю плитку B\nс началом $(96,48)$. Масштаб и padding те же. Если объект\nполностью виден в обеих, их локальные рамки будут\n$(32,16,232,116)$ и $(16,8,216,108)$. На исходной странице\nобе дают $(200,100,600,300)$, поэтому IoU равен 1.\nЕсли сравнить локальные числа напрямую, получится около 0.7344,\nхотя предсказания точны. Отдельная поправка на перекрытие не нужна:\nразница уже учтена в началах плиток.\n\nТеперь пусть правая граница B проходит по её локальной координате\n$u=128$. Видимая рамка B заканчивается на 128 вместо 216;\nв оригинале это $x=(128+96-12)/0.5=424$. При той же высоте\nпересечение с полной рамкой занимает 224 из 400 пикселей\nпо ширине. IoU равен 0.56. Порог 0.7 не объединит эти\nпредсказания, хотя видимая часть принадлежит тому же объекту.\nСнижение порога без проверки может, наоборот, объединить\nсоседние объекты одного класса.\n\nВ [SAHI, §3](https://arxiv.org/html/2202.06934v5#S3) этот\nпорядок применяется к детектору: отдельно обработать плитки,\nвернуть рамки в координаты изображения, затем сопоставить их.\nТакое слияние относится к предсказаниям по плиткам, а не к\nсборке сетки признаков перед LLM, как в AnyRes."
+        },
+        {
+          "old": "Если сравнить локальные числа напрямую, получится около 0.7344,",
+          "new": "Если сравнить локальные числа напрямую, получится около 0.7337,"
+        }
+      ],
+      "before_sha256": "aa23f1104f3a83d91bc759f207ab809ebf018b9946f44a022c761fc3e9e81258",
+      "after_sha256": "c919ade1e7e7b76cb1f304c6efde6cd5fc0b5ec8af6636e531d358eb08caa5f1",
+      "lines": 877
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md",
+      "changes": [
+        {
+          "old": "canonical_revision: \"aa23f1104f3a83d91bc759f207ab809ebf018b9946f44a022c761fc3e9e81258\"\ntranslation_reviewed: \"2026-10-29\"",
+          "new": "canonical_revision: \"c919ade1e7e7b76cb1f304c6efde6cd5fc0b5ec8af6636e531d358eb08caa5f1\"\ntranslation_reviewed: \"2026-11-09\""
+        },
+        {
+          "old": "last_updated: 2026-10-29",
+          "new": "last_updated: 2026-11-09"
+        },
+        {
+          "old": "For patch size $P$, $N=HW/P^2$. Doubling both dimensions creates four times as many patches. Compute is governed by the post-preprocessing token count, not the JPEG file size.",
+          "new": "<a id=\"vlm-pixel-budget\"></a>\n\n## Visual token budget\n\nFor patch size $P$, $N=HW/P^2$. Doubling both dimensions creates four times as many patches. Compute is governed by the post-preprocessing token count, not the JPEG file size."
+        },
+        {
+          "old": "## Global overview plus detailed crops\n\nMolmo combines a low-resolution view of the full image with overlapping high-resolution crops. The overview preserves composition; crops preserve fine detail; overlap prevents boundary objects from losing context. Special image and row/column tokens record the final layout.",
+          "new": "## Global overview plus detailed crops\n\n<a id=\"vlm-molmo-overlap\"></a>\n\n### Molmo: overlapping crops and grid assembly\n\nMolmo combines a low-resolution view of the full image with overlapping high-resolution crops. The overview preserves composition; crops preserve fine detail; overlap prevents boundary objects from losing context. Special image and row/column tokens record the final layout."
+        },
+        {
+          "old": "### AnyRes: restore detail without discarding the overview",
+          "new": "<a id=\"vlm-anyres\"></a>\n\n### AnyRes: restore detail without discarding the overview"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-anyres.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/resolution-2026-11-09/llava-onevision-anyres.png|The top panel encodes detailed tiles before feature interpolation. The bottom resizes the image before splitting it. Each panel includes a separate global view.]]"
+        },
+        {
+          "old": "*Stanford CS336, Lecture 17, AnyRes illustration based on [LLaVA-OneVision](https://arxiv.org/abs/2408.03326). Follow grid choice, independent views, and the assembled feature grid; each stage can preserve or lose different information.*",
+          "new": "*Bo Li et al., [LLaVA-OneVision v1, Figure 2](https://arxiv.org/html/2408.03326v1#S3.F2),\n[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).\nIn (a), the ViT encodes smaller, more detailed tiles before interpolation\nreduces the feature grid. In (b), the original AnyRes resizes the image\nbefore splitting it. The purple block in each panel is the whole-page view.\nBoth panels are reproduced unchanged.*"
+        },
+        {
+          "old": "### Pixtral: packing images without cross-image leakage",
+          "new": "<a id=\"vlm-pixtral-packing\"></a>\n\n### Pixtral: packing images without cross-image leakage"
+        },
+        {
+          "old": "For one rotary pair and frequency $\\omega$,",
+          "new": "<a id=\"vlm-mrope-frequencies\"></a>\n\n### Which frequencies each axis uses\n\nFor one rotary pair and frequency $\\omega$,"
+        },
+        {
+          "old": "## Returning coordinates to the original image",
+          "new": "Consider a smaller head with eight frequencies, numbered 0 through 7\nin descending order, and an allocation of four, two, and two pairs.\nContiguous blocks give `T T T T H H W W`. The interleaving code starts\nwith all `T`, sets indices `1, 4` to `H`, and sets `2, 5` to `W`.\nThe result is `T H W T H W T T`. The counts are unchanged, but width\nuses $\\omega_2$ and $\\omega_5$ instead of $\\omega_6$ and $\\omega_7$.\n\nHorizontal neighbors differ by one in width. With $q=k=(1,0)$\nin one width pair, that pair contributes $\\cos\\omega_j$ to the dot\nproduct. The contribution is about 0.8776 for $\\omega_2=0.5$ and\n0.9988 for $\\omega_6=0.05$. These are selected frequencies for one\npair, not a prediction of the trained model's full attention logit.\n\n## Returning coordinates to the original image"
+        },
+        {
+          "old": "A box predicted inside a tile must be offset by the crop origin, corrected for overlap and padding, and divided by resize scale. Preprocessing metadata must therefore travel with the tensor. Inverting coordinates does not restore pixels lost to downsampling or cropping; it only maps locations within the retained region. When both overview and crops contain the same object, the training format must unambiguously state which coordinate system the target uses.",
+          "new": "A box predicted inside a tile must be offset by the crop origin,\ncorrected for padding, and divided by resize scale. Preprocessing\nmetadata must travel with the tensor. Inverting coordinates maps\nlocations within the retained region; it does not restore lost pixels.\nWhen the overview and crops contain the same object, the target\nformat must specify which coordinate system it uses."
+        },
+        {
+          "old": "Coordinates here are continuous rectangle boundaries, without the `+1` used by some discrete formats. If a crop clipped the object, inversion returns only the visible box, not the missing part. Map detections from different tiles into a common coordinate system before comparing IoU; equal tile-local numbers can refer to different places. Confidence alone does not establish that two boxes describe one object.",
+          "new": "Coordinates here are continuous rectangle boundaries, without the `+1` used by some discrete formats. If a crop clipped the object, inversion returns only the visible box, not the missing part.\n\n<a id=\"vlm-tile-boxes\"></a>\n\n### Boxes from overlapping tiles\n\nKeep tile A at origin $(80,40)$ and add tile B at $(96,48)$,\nwith the same scale and padding. When the full object fits in both,\nthe local boxes are $(32,16,232,116)$ and $(16,8,216,108)$.\nBoth map to $(200,100,600,300)$, so their IoU is 1.\nComparing the local numbers directly gives about 0.7337 even\nthough both predictions are exact. No separate overlap correction\nis needed; the tile origins already account for the difference.\n\nNow let tile B end at local $u=128$. Its visible box ends at 128\nrather than 216; that edge maps to $x=(128+96-12)/0.5=424$.\nWith unchanged height, the intersection with the full box covers\n224 of its 400 pixels in width, for an IoU of 0.56. A threshold\nof 0.7 would leave two detections for the same object. Lowering\nthe threshold can also merge adjacent objects of the same class.\n\n[SAHI, §3](https://arxiv.org/html/2202.06934v5#S3) applies this\nsequence to an object detector: predict on each tile, return the\nboxes to the image coordinate system, then match them.\nThat is post-processing of tile predictions, not the assembly of\nan input feature grid before an LLM as in AnyRes."
+        },
+        {
+          "old": "The rotated dot product is $q^\\top R((p_k-p_q)\\omega)k$. MRoPE assigns different pairs to differences in time, height, and width. Horizontal neighbors differ only in width coordinates; vertical neighbors differ in height. A shared coordinate shift leaves this dot product unchanged for fixed $q$ and $k$. That algebraic property does not make the entire image network translation-invariant:",
+          "new": "The dot product after both rotations is\n\n$$\nq^\\top R((p_k-p_q)\\omega)k.\n$$\n\nMRoPE assigns different pairs to differences in time, height, and width.\nHorizontal neighbors differ only in width; vertical neighbors differ in\nheight. A shared shift leaves this dot product unchanged for fixed $q$\nand $k$. The full image network need not be translation-invariant:"
+        }
+      ],
+      "before_sha256": "a570a03c487c9f6bb89977abb8607e68d2ce5b616daa00b3bac863954a4f5de4",
+      "after_sha256": "debc293999103b678281eb2f0583b2a00db28dd57ea7a7bf8e1554c61974d876",
+      "lines": 492
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции|Разрешение, tiling и пространственные позиции]]",
+          "new": "- [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции|Разрешение, tiling и пространственные позиции]]\n  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-pixel-budget|VLM — бюджет визуальных токенов]]\n  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-molmo-overlap|Molmo — перекрытие и сборка сетки]]\n  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-anyres|AnyRes — локальные плитки и общий обзор]]\n  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-pixtral-packing|Pixtral — упаковка изображений]]\n  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-mrope-frequencies|MRoPE — координаты и частоты]]\n  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-tile-boxes|Visual grounding — рамки перекрывающихся плиток]]"
+        }
+      ],
+      "before_sha256": "7eca680840b646c0efadb06b62e0c4fdd3e91ff5caefbbf22356ba4862514b24",
+      "after_sha256": "589f2fcc3837b2bd816dd76d890d18ffbe4ed038d88d2b3791f6d9e1474af6c9",
+      "lines": 1617
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции|Resolution, tiling, and spatial positions]] · **EN**",
+          "new": "- [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции|Resolution, tiling, and spatial positions]] · **EN**\n  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-pixel-budget|VLMs — visual token budget]]\n  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-molmo-overlap|Molmo — overlapping crops and grid assembly]]\n  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-anyres|AnyRes — local tiles and global overview]]\n  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-pixtral-packing|Pixtral — packing images]]\n  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-mrope-frequencies|MRoPE — coordinates and frequencies]]\n  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-tile-boxes|Visual grounding — boxes from overlapping tiles]]"
+        }
+      ],
+      "before_sha256": "650ccb7d3d6dd6088374c9dc3c55b8ac206ed7bc597b0bd425255bed56d26476",
+      "after_sha256": "b87fadb4ea3b12b8dcb80389324a5f3064934e09a3b04c538636e09165df314a",
+      "lines": 1619
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "changes": [
+        {
+          "old": "  - id: \"curated-llava-paper-figure1-310746447f5a\"",
+          "new": "  - id: \"curated-onevision-higher-anyres-db33ded7e7e6\"\n    asset: \"00 Учебник/Assets/Figures/curated/resolution-2026-11-09/llava-onevision-anyres.png\"\n    author: \"Bo Li et al.\"\n    source_url: \"https://arxiv.org/html/2408.03326v1#S3.F2\"\n    source_image_url: \"https://arxiv.org/html/2408.03326v1/higher_res.png\"\n    source_figure_label: \"Figure 2, both panels\"\n    source_asset: \"05 Источники/Originals/resolution-2026-10-20/onevision-v1-higher_res.png\"\n    source_asset_sha256: \"db33ded7e7e6fb072235d58b79df115555753d29606ede070df2ac0365c79b1f\"\n    sha256: \"db33ded7e7e6fb072235d58b79df115555753d29606ede070df2ac0365c79b1f\"\n    dimensions_px: [1899,1319]\n    bytes: 361765\n    license: \"CC BY-NC-ND 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by-nc-nd/4.0/\"\n    license_evidence: \"05 Источники/Originals/resolution-2026-10-20/onevision-v1-abstract.html\"\n    license_evidence_sha256: \"e57b651eb1e0d03510ed23de758743cdfc3f8c4ce9d8746a397d45bb8495785d\"\n    rights_status: \"source-license-verified\"\n    provenance_confirmation: \"licensed-paper-figure\"\n    metadata_status: \"verified\"\n    derivation: \"source-raster-copy\"\n    modifications: \"The complete PNG delivered with the arXiv v1 article is reused byte-for-byte. No crop, redrawing, translation, overlays, or resampling.\"\n    used_in: [\"00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md\", \"en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md\"]\n    last_verified: \"2026-11-09\"\n  - id: \"curated-llava-paper-figure1-310746447f5a\""
+        },
+        {
+          "old": "    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging\n    used_in:\n      - 00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md",
+          "new": "    modifications: byte-for-byte copy from the exact pinned course source; path changed for publication packaging\n    used_in: []\n    publication_status: retired\n    retirement_reason: Both reader editions use the complete and unchanged Figure 2 from arXiv v1."
+        }
+      ],
+      "before_sha256": "e1dd79b86de8436c050bf9af5c988e4d9c247787964e3b734b61522fb47f405b",
+      "after_sha256": "253bab150925c12723e81f83d291d20ab86b396737e5290f8f398d94e9dd6dc2",
+      "lines": 23562
+    }
+  ],
+  "review": {
+    "sources": "Li et al., LLaVA-OneVision v1 §3.2 and Figure 2, Qwen2-VL v1 §2.1, Qwen3-VL v1 §2.1 and Transformers 8cb5963c apply_interleaved_mrope, Akyon et al. SAHI v5 §3 and Figure 2. Also checked the surrounding discussions against Molmo Appendix A.1, InternVL 2.5 §2.1, and Pixtral §2.2–2.3.",
+    "examples": "Under equal 4/2/2 axis counts, width changes from frequency indices [6,7] to [2,5]. A unit-width displacement contributes cos(0.05) or cos(0.5) in the chosen pair; no checkpoint prediction. The two full boxes have IoU 0.7337 in their unrelated local frames and 1 after mapping to the original page. Clipping the right edge of one yields IoU 0.56 on the original page.",
+    "figure": "Visually compared arXiv v1 PDF p. 4 with the complete PNG of Figure 2 delivered by the same version's HTML. Both panels, labels, diagrams and all their geometry are preserved. Hash matches the downloaded original byte for byte; CC BY-NC-ND 4.0 with unchanged asset and linked attribution.",
+    "reader": "Final build inspected at 375 and 1280 px in both locales: six figures loaded, six subject links per language, both worked-section links opened without overflow or KaTeX errors, and both AnyRes panels could be read with zoom/pan. Checked the final English dot product as a separate display equation on mobile.",
+    "local_checks": "2023 pages built; 734 publication tests, 228 built-output tests, two asset checks and all nine Python examples per edition passed. Zero broken internal routes, fragments or files.",
+    "limits": "Does not settle inherited Molmo, InternVL or Qwen figure permissions. No model benchmark or deployment."
+  }
+}

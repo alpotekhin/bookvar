@@ -20,7 +20,7 @@ def sha(path):
 def main():
     chapter = CHAPTER.read_text()
     blocks = re.findall(r"^~~~python\n(.*?)^~~~", chapter, re.M | re.S)
-    assert len(blocks) == 17, len(blocks)
+    assert len(blocks) == 18, len(blocks)
     spaces, shared = [], {}
     for i, block in enumerate(blocks, 1):
         code = compile(block, f"{CHAPTER}:block-{i}", "exec")
@@ -80,8 +80,9 @@ def main():
     assert best[128] == 100
 
     # Half-open intervals distinguish exact end points; time values are rational.
-    f = spaces[9]["F"]
-    words_at, segments = spaces[9]["words_at"], spaces[9]["segments"]
+    alignment, = [space for space in spaces if "words_at" in space]
+    f = alignment["F"]
+    words_at, segments = alignment["words_at"], alignment["segments"]
     assert words_at(segments, f("18.24")) == ["Я вернулся"]
     assert words_at(segments, f("18.72")) == []
     assert words_at(segments, f("18.4"), f(".01")) == ["Я вернулся"]
@@ -107,15 +108,38 @@ def main():
             assert sha(evidence) == row["license_evidence_sha256"]
             suffix = "by-nc-sa" if "NC" in row["license"] else "by"
             assert f"creativecommons.org/licenses/{suffix}/4.0/" in evidence.read_text()
-    assert len(re.findall(r"!\[\[", chapter)) == 10
+    reader_figures = {
+        link.split("|", 1)[0].rsplit("/", 1)[-1]
+        for link in re.findall(r"!\[\[([^\]\n]+)\]\]", chapter)
+    }
+    assert reader_figures == {
+        "llava-onevision-modalities.png", "gens-frame-selection.png", "mimi-split-rvq.png",
+        "qwen25omni-figure3-tmrope.png", "qwen25omni-figure2-thinker-talker.png",
+        "qwen3omni-architecture.png", "qwen3omni-figure3-aut.png",
+        "moshi-rq-transformer.png", "moshi-duplex-streams.png", "qwen25omni-block-attention.png",
+        "panda-act-figure2.jpg",
+    }
+    assert "https://arxiv.org/pdf/2305.05665v2#page=1" in chapter
+    journal = ROOT / "docs/audit/2026-11-13-internvl-imagebind-figures-additions.json"
+    application = json.loads(journal.read_text())["figures"][1]
+    assert application["asset"] in chapter and application["license"] == "CC BY-NC-ND 4.0"
+    assert sha(ROOT / application["asset"]) == application["sha256"]
+    assert sha(ROOT / application["license_evidence"]) == application["license_evidence_sha256"]
+    image = Image.open(ROOT / application["asset"])
+    assert image.format == "JPEG" and list(image.size) == application["dimensions_px"]
+    retrieval, = [space for space in spaces if "scores" in space and "audio" in space]
+    permutation = np.array([1, 2, 0])
+    ranked = retrieval["images"][permutation] @ retrieval["audio"]
+    assert int(permutation[ranked.argmax()]) == int(retrieval["scores"].argmax()) == 0
     assert "meeting-07-slides-xgen-video" in chapter and "meeting-07-slides-gens" in chapter
     print(json.dumps({
         "chapter_sha256": sha(CHAPTER),
-        "standalone_and_shared_code_runs": 34,
+        "standalone_and_shared_code_runs": 2 * len(blocks),
         "causal_chunk_cases": 100, "residual_bookkeeping_cases": 100,
         "conditional_joint_sum": float(joint.sum()), "deduplicated_selected_frames": len(selected),
         "new_original_figures": 6, "repaired_historical_figures": 1,
         "unchanged_historical_figures": 3, "pretrained_model_run": False,
+        "imagebind_application_original_jpeg_verified": True,
     }, indent=2))
 
 

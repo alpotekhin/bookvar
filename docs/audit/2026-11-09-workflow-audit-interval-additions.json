@@ -1,0 +1,189 @@
+{
+  "date": "2026-11-09",
+  "status": "source-runtime-reader-local-build-verified",
+  "scope": "Whole ML workflow explanation read; extend the existing selective-labeling example with design-based uncertainty, fix its compilation cross-reference, add navigation and alt descriptions. Preserve source excerpts, figures and prior programs.",
+  "files": [
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-27\nlast_verified: 2026-10-27",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-10-27\nsource_language: mixed\nreference_terms:\n  - label: \"Контур предсказания и контур обновления\"\n    label_en: \"Prediction and update loops\"\n    anchor: workflow-contours\n  - label: \"Цена ошибок и загрузка инженеров\"\n    label_en: \"Error costs and engineer capacity\"\n    anchor: workflow-error-cost\n  - label: \"Признаки на момент предсказания\"\n    label_en: \"Point-in-time features\"\n    anchor: workflow-point-in-time\n  - label: \"Горизонт метки и разбиение данных\"\n    label_en: \"Label horizon and data splits\"\n    anchor: workflow-label-horizon\n  - label: \"Идентификатор выпуска и зависимости\"\n    label_en: \"Release identity and dependencies\"\n    anchor: workflow-release-id\n  - label: \"Бюджет полезных экспериментов\"\n    label_en: \"Useful experiment budget\"\n    anchor: workflow-iteration-budget\n  - label: \"Экспорт графа в ONNX\"\n    label_en: \"Exporting a graph to ONNX\"\n    anchor: workflow-onnx-graph\n  - label: \"Провайдеры ONNX Runtime и разбиение графа\"\n    label_en: \"ONNX Runtime providers and graph partitioning\"\n    anchor: workflow-execution-provider\n  - label: \"Проверка входного контракта ONNX\"\n    label_en: \"Validating the ONNX input contract\"\n    anchor: workflow-input-contract\n  - label: \"Граф без зарегистрированного ядра\"\n    label_en: \"A graph without a registered kernel\"\n    anchor: workflow-missing-kernel\n  - label: \"SavedModel: граф, переменные и сигнатуры\"\n    label_en: \"SavedModel graphs, variables and signatures\"\n    anchor: workflow-savedmodel\n  - label: \"Преобразование SavedModel для другой среды\"\n    label_en: \"Converting SavedModel for another runtime\"\n    anchor: workflow-target-conversion\n  - label: \"Проверки перед выпуском модели\"\n    label_en: \"Model release checks\"\n    anchor: workflow-release-validation\n  - label: \"Предсказание по запросу и заранее\"\n    label_en: \"Online and precomputed inference\"\n    anchor: workflow-inference-modes\n  - label: \"Выборочная разметка и взвешенный recall\"\n    label_en: \"Selective labeling and weighted recall\"\n    anchor: workflow-selective-labels\n  - label: \"Интервал recall при выборочной разметке\"\n    label_en: \"Recall interval under selective labeling\"\n    anchor: workflow-recall-interval\n  - label: \"Разная задержка обратной связи\"\n    label_en: \"Feedback on different timescales\"\n    anchor: workflow-feedback-clocks\n  - label: \"Что передаётся между стадиями\"\n    label_en: \"What each stage hands off\"\n    anchor: workflow-stage-contract"
+        },
+        {
+          "old": "## Контур предсказания и контур обновления",
+          "new": "<a id=\"workflow-contours\"></a>\n## Контур предсказания и контур обновления"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-pipes.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-pipes.png|Синий контур обслуживает запросы. Зелёный конвейер готовит данные, красный обучает кандидата, фиолетовый сравнивает модели и возвращает выбранную версию в serving.]]"
+        },
+        {
+          "old": "### Accuracy, стоимость ошибок и жёсткое ограничение",
+          "new": "<a id=\"workflow-error-cost\"></a>\n### Accuracy, стоимость ошибок и жёсткое ограничение"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-data-process.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-data-process.png|Из журнала приложения конвейер данных строит обучающий и проверочный наборы. Оба сохраняются в Dataset storage.]]"
+        },
+        {
+          "old": "### Временная корректность признаков",
+          "new": "<a id=\"workflow-point-in-time\"></a>\n### Временная корректность признаков"
+        },
+        {
+          "old": "### Метки, разбиение и исключённые примеры",
+          "new": "<a id=\"workflow-label-horizon\"></a>\n### Метки, разбиение и исключённые примеры"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-train.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-train.png|Из Dataset storage берётся обучающий набор. Model training получает этот набор и выдаёт обученную модель.]]"
+        },
+        {
+          "old": "### Идентификатор выпуска включает больше, чем веса",
+          "new": "<a id=\"workflow-release-id\"></a>\n### Идентификатор выпуска включает больше, чем веса"
+        },
+        {
+          "old": "## How many useful experiments fit in the development window?",
+          "new": "<a id=\"workflow-iteration-budget\"></a>\n## How many useful experiments fit in the development window?"
+        },
+        {
+          "old": "### From PyTorch operations to an ONNX graph",
+          "new": "<a id=\"workflow-onnx-graph\"></a>\n### From PyTorch operations to an ONNX graph"
+        },
+        {
+          "old": "Data-dependent Python branches and graph capture failures have a separate\nworked treatment in [[02 Areas/ML & DL/00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению|the kernels and compilation chapter]].",
+          "new": "The [[02 Areas/ML & DL/00 Учебник/10 ML Systems/09 Компиляция графов — PyTorch, JAX и CUDA Graphs#compile-tracing-a-data-dependent-branch|worked graph-capture example]] shows how a data-dependent Python branch can fail during export."
+        },
+        {
+          "old": "### Which provider executes each part?",
+          "new": "<a id=\"workflow-execution-provider\"></a>\n### Which provider executes each part?"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/model-export-2026-10-27/onnx-runtime-providers.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/model-export-2026-10-27/onnx-runtime-providers.png|Модель ONNX поступает в Graph Partitioner. Он использует реестр execution providers, чтобы назначить поддерживаемые части графа доступным средам исполнения.]]"
+        },
+        {
+          "old": "### A complete CPU export with a checked input contract",
+          "new": "<a id=\"workflow-input-contract\"></a>\n### A complete CPU export with a checked input contract"
+        },
+        {
+          "old": "### A valid graph can still have no executable kernel",
+          "new": "<a id=\"workflow-missing-kernel\"></a>\n### A valid graph can still have no executable kernel"
+        },
+        {
+          "old": "## TensorFlow: saved graphs, variables and callable signatures",
+          "new": "<a id=\"workflow-savedmodel\"></a>\n## TensorFlow: saved graphs, variables and callable signatures"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensorflow-export-2026-10-27/two-layer-network.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensorflow-export-2026-10-27/two-layer-network.png|Граф в TensorBoard: вход проходит через MatMul, сложение и ReLU первого слоя, затем через операции второго слоя.]]"
+        },
+        {
+          "old": "### Conversion to a smaller runtime is another checked boundary",
+          "new": "<a id=\"workflow-target-conversion\"></a>\n### Conversion to a smaller runtime is another checked boundary"
+        },
+        {
+          "old": "## От качества кандидата к разрешению на выпуск",
+          "new": "<a id=\"workflow-release-validation\"></a>\n## От качества кандидата к разрешению на выпуск"
+        },
+        {
+          "old": "## Где выполняется предсказание и что делает приложение",
+          "new": "<a id=\"workflow-inference-modes\"></a>\n## Где выполняется предсказание и что делает приложение"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-offline-online.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-offline-online.png|Слева модель считает ответ после запроса. Справа предсказания считаются заранее, а приложение читает сохранённый результат.]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-prediction-process.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-prediction-process.png|До вызова модели обрабатываются данные приложения и вычисляются признаки. После модели отдельно обрабатывается предсказание.]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-prediction-log.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-prediction-log.png|В Prediction logging попадают выходы модели, в App logging — данные приложения. Стрелки ведут к двум разным журналам.]]"
+        },
+        {
+          "old": "### Пример выборочной разметки",
+          "new": "<a id=\"workflow-selective-labels\"></a>\n### Пример выборочной разметки"
+        },
+        {
+          "old": "### Какое наблюдение требует какого изменения",
+          "new": "<a id=\"workflow-recall-interval\"></a>\n### Как оценить неопределённость recall\n\nИз 900 обращений первой линии случайно выбрали ровно 100 без возвращения\nи среди них нашли 20 пропущенных сбоев. Число сбоев во всей группе, $K$,\nнеизвестно. Если бы $K$ было равно 117, получить не меньше 20 пропусков\nв такой выборке удалось бы примерно в 2,43% повторных аудитов. При $K=259$\nуже противоположный исход редок: не больше 20 пропусков наблюдалось бы\nпримерно в 2,37% аудитов. Так наблюдение ограничивает $K$ с двух сторон.\n\nПри фиксированном $K$ число пропусков $X$ в случайной выборке из $n$\nобращений имеет гипергеометрическое распределение. Чтобы получить $x$\nпропусков, нужно выбрать $x$ из $K$ и $n-x$ из остальных $N-K$ обращений:\n\n$$\n\\Pr_K(X=x)=\\frac{\\binom Kx\\binom{N-K}{n-x}}{\\binom Nn}.\n$$\n\nДля двустороннего 95%-го интервала оставляем те $K$, для которых\n$\\Pr_K(X\\ge 20)>0.025$ и $\\Pr_K(X\\le 20)>0.025$.\nКаждый хвост исключает истинное $K$ с вероятностью не более 2,5%;\nзначит, в повторных выборках интервал содержит истинное $K$\nне реже чем в 95% случаев. Из-за целочисленных счётчиков покрытие\nможет быть выше. Метод вывода односторонних границ разобран в\n[Berkeley STAT 159, Hypergeometric confidence bounds](https://ucb-stat-159-s21.github.io/site/Notes/binom.html#hypergeometric-confidence-bounds).\nЗдесь мы применяем его к двум хвостам примера со службой поддержки.\n\nПолучаем от 118 до 258 пропущенных сбоев. Число верно направленных\nсбоев известно: все 100 обращений инженерной группы были разобраны,\nиз них 90 — TP. Поэтому recall равен $90/(90+K)$ и убывает с ростом $K$.\nПодставляем 258 для нижней границы и 118 для верхней:\n95%-й интервал recall составляет примерно 25,9–43,3% при оценке 33,3%.\n\n```python\nfrom math import comb\n\ndef fn_interval95(population, draws, observed):\n    counts = (population, draws, observed)\n    if any(type(value) is not int for value in counts):\n        raise ValueError(\"counts must be integers\")\n    if not 0 < draws <= population or not 0 <= observed <= draws:\n        raise ValueError(\"require 0 < draws <= population and 0 <= observed <= draws\")\n    denominator = comb(population, draws)\n    accepted = []\n    for total in range(observed, population - draws + observed + 1):\n        lo = max(0, draws - (population - total))\n        hi = min(draws, total)\n        left = right = 0\n        for seen in range(lo, hi + 1):\n            weight = comb(total, seen) * comb(population - total, draws - seen)\n            if seen <= observed:\n                left += weight\n            if seen >= observed:\n                right += weight\n        # 2.5% = 1/40; compare integer counts without rounding.\n        if 40 * left > denominator and 40 * right > denominator:\n            accepted.append(total)\n    return accepted[0], accepted[-1]\n\nfn_low, fn_high = fn_interval95(900, 100, 20)\nassert (fn_low, fn_high) == (118, 258)\nrecall_interval = (90 / (90 + fn_high), 90 / (90 + fn_low))\nassert tuple(round(100 * bound, 1) for bound in recall_interval) == (25.9, 43.3)\nassert fn_interval95(100, 100, 20) == (20, 20)\n```\n\nЭтот расчёт учитывает только случайный отбор в группе первой линии.\nЕсли оператор выбирает самые трудные сообщения или часть выбранных\nобращений остаётся без метки, гипергеометрическая модель такого аудита\nуже не подходит. Интервал также ничего не говорит о новом трафике,\nесли меняются пользователи или критерий технического сбоя.\n\n### Какое наблюдение требует какого изменения"
+        },
+        {
+          "old": "## Feedback loops do not share one clock",
+          "new": "<a id=\"workflow-feedback-clocks\"></a>\n## Feedback loops do not share one clock"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/workflow-feedback-2026-10-26/feedback-timescales.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/workflow-feedback-2026-10-26/feedback-timescales.svg|На логарифмической шкале времени сопоставлены контуры обратной связи: от минутной проверки камеры до квартального пересмотра архитектуры.]]"
+        },
+        {
+          "old": "## Что передаётся следующей стадии",
+          "new": "<a id=\"workflow-stage-contract\"></a>\n## Что передаётся следующей стадии"
+        }
+      ],
+      "before_sha256": "0cf7ea888bc50e50aac7ee6010e1f9cccb9b86b96ceebdc6fdcf5eb646754045",
+      "after_sha256": "a29a52dc59c3b8c9f113236df91fd2decd26698841d544bfa26df81bbcb9eb41",
+      "lines": 1572
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow|Жизненный цикл ML-системы: от постановки задачи до эксплуатации]]",
+          "new": "- [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow|Жизненный цикл ML-системы: от постановки задачи до эксплуатации]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-contours|Контур предсказания и контур обновления]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-error-cost|Цена ошибок и загрузка инженеров]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-point-in-time|Признаки на момент предсказания]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-label-horizon|Горизонт метки и разбиение данных]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-release-id|Идентификатор выпуска и зависимости]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-iteration-budget|Бюджет полезных экспериментов]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-onnx-graph|Экспорт графа в ONNX]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-execution-provider|Провайдеры ONNX Runtime и разбиение графа]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-input-contract|Проверка входного контракта ONNX]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-missing-kernel|Граф без зарегистрированного ядра]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-savedmodel|SavedModel: граф, переменные и сигнатуры]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-target-conversion|Преобразование SavedModel для другой среды]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-release-validation|Проверки перед выпуском модели]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-inference-modes|Предсказание по запросу и заранее]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-selective-labels|Выборочная разметка и взвешенный recall]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-recall-interval|Интервал recall при выборочной разметке]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-feedback-clocks|Разная задержка обратной связи]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-stage-contract|Что передаётся между стадиями]]"
+        }
+      ],
+      "before_sha256": "0fe82bf0d3c2549d0a4424ee2736104fd3d7ff7dc9b782b8a6756e068b587a8e",
+      "after_sha256": "56ed40badb1bc8a99fb132b3cbf543125170f7438e6da349d42942055cbef4ec",
+      "lines": 1558
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow|The ML workflow]]",
+          "new": "- [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow|The ML workflow]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-contours|Prediction and update loops]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-error-cost|Error costs and engineer capacity]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-point-in-time|Point-in-time features]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-label-horizon|Label horizon and data splits]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-release-id|Release identity and dependencies]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-iteration-budget|Useful experiment budget]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-onnx-graph|Exporting a graph to ONNX]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-execution-provider|ONNX Runtime providers and graph partitioning]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-input-contract|Validating the ONNX input contract]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-missing-kernel|A graph without a registered kernel]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-savedmodel|SavedModel graphs, variables and signatures]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-target-conversion|Converting SavedModel for another runtime]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-release-validation|Model release checks]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-inference-modes|Online and precomputed inference]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-selective-labels|Selective labeling and weighted recall]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-recall-interval|Recall interval under selective labeling]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-feedback-clocks|Feedback on different timescales]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow#workflow-stage-contract|What each stage hands off]]"
+        }
+      ],
+      "before_sha256": "7ec85a60ce90a7a8e43039f0259896fb5629875f82bf895691ab67ea0751123b",
+      "after_sha256": "83fc5d8e36db4ea4ffaad4427a9279681f185d776bd7ed298b47e3c2926067be",
+      "lines": 1560
+    }
+  ],
+  "validation": {
+    "subjectsPerLocale": 18,
+    "originals": 9,
+    "numerical": {
+      "retainedWorkflowBlocksPlusNewExample": 8,
+      "previousIndependentCases": 800,
+      "newExactCoverageCases": 330,
+      "feedbackAndBudgetCases": 600,
+      "log": "/var/tmp/bookvar-workflow-interval-examples-20261109.log",
+      "scope": "Exact finite-audit arithmetic, earlier CPU examples and frozen-source fidelity, not production monitoring or a new device run."
+    },
+    "runtimeReuse": "ONNX and TensorFlow source/provenance tests passed on the preserved code. A fresh offline rerun found missing runtime packages; the exact original CPU examples and their source snapshots are unchanged. Reuse prior CPU results for these examples only.",
+    "reader": "Native RU/mobile and EN/desktop reference jumps reached the interval. Inspected the formula and original ONNX diagram at desktop and narrow widths. Browser loaded all nine figures with correct aspect ratios and no page overflow. After refining three alt descriptions against the Google originals, the final preview served all nine descriptions in both locales.",
+    "readerEvidence": "docs/audit/evidence/2026-11-09-workflow-interval",
+    "publicationSuite": {"tests": 715, "files": 122, "log": "/var/tmp/bookvar-workflow-interval-publication-20261109-final.log"},
+    "output": {"pages": 2015, "htmlTests": 219, "brokenInternalLinks": 0, "bytes": 858386362, "files": 5637},
+    "historicalChecks": "Each revision check now starts from the live file rather than feeding an already rewound shared index into a newer journal. Previous SHA-256 and tamper checks remain intact."
+  },
+  "sourceComparison": {
+    "inherited": [
+      "docs/audit/2026-10-20-ml-workflow.md",
+      "docs/audit/2026-10-26-workflow-feedback.md",
+      "docs/audit/2026-10-27-model-export.md",
+      "docs/audit/2026-10-27-tensorflow-export.md",
+      "docs/audit/2026-10-29-reader-route-navigation.json"
+    ],
+    "added": {
+      "source": "https://ucb-stat-159-s21.github.io/site/Notes/binom.html#hypergeometric-confidence-bounds",
+      "authors": "Philip Stark and Fernando Pérez",
+      "read": "Comparison with the normal approximation: opening two-tail construction; complete Hypergeometric confidence bounds section.",
+      "use": "The PMF and inversion are taught on the existing Bookvar triage audit. No copied code, prose excerpt or raster."
+    },
+    "checkedReasoning": "100 of 900 first-line tickets sampled without replacement, 20 missed failures, 90 known TP in the census stratum. The central exact set is FN 118–258; monotone decreasing recall gives 25.9–43.3%. Not a future-traffic estimate; depends on known simple random audit and complete labels."
+  }
+}

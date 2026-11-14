@@ -1,0 +1,185 @@
+{
+  "date": "2026-11-09",
+  "scope": "Review the coding, web and computer-use chapter; make the mark-to-action boundary executable; replace two lecture rasters with licensed originals without dropping source links or ledger coverage.",
+  "review": {
+    "sources": [
+      "SWE-agent arXiv v3 §3 and Figures 1, 3: commands, feedback, file-viewer window and edit results.",
+      "VisualWebArena arXiv v2 §§3.1–3.2: references in actions come from the current SoM observation; revision validation in the example is Bookvar's teaching contract.",
+      "OSWorld arXiv v1 §2.2 and Figure 2: task config, VM, postprocess, getter and metrics. §2.1 illustrates 20 steps; Appendix C.1 specifies a 15-step, 30-minute baseline."
+    ],
+    "reading": "Full 1375-line chapter in ranges 1–302, 303–594, 595–916, 917–1185, 1186–1375; final changed passages reread in context and matched to the pinned source sections. Eight exact reversible changes preserve previous hashes, including the generated Berkeley records.",
+    "validation": "All five published Python blocks ran. Nine tab/document/revision mismatches caused no click; a valid current reference could dispatch a restricted button, showing why this guard is not authorization. Parser failure reproduced on the old code. Passed 738 publication and 233 built-output checks, curated asset registry, reference index, offline Berkeley ledgers and 31 Berkeley importer tests. Local build produced 2027 pages with zero broken internal routes, fragments or files.",
+    "reader": "Verified both original PNGs at 375 and 1280 CSS pixels, including zoom and pan. Followed the three reference links in both readers; EN still displays the labeled canonical-language fallback. The old lecture images are retained on disk and absent from the built reader.",
+    "limits": "No agent or OSWorld benchmark run. Other inherited lecture figures retain their existing rights records. No translation, push or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
+      "before_sha256": "76fa7ccbe709235d43b1efd523317a9922df77e81191811b659716c0071d689c",
+      "after_sha256": "49344780e38482e41813d0716644711a8a264f2ed40a1d953c9a52bb4f66667b",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-21\nlast_verified: 2026-10-21\nprimary_sources:",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-11-09\nreference_terms:\n  - label: SWE-agent — команды и обратная связь ACI\n    label_en: SWE-agent — ACI commands and feedback\n    anchor: swe-agent-модель-управляет-циклом-через-aci\n  - label: Set-of-Marks — проверка метки перед действием\n    label_en: Set-of-Marks — checking a mark before an action\n    anchor: web-agent-observation-bound-marks\n  - label: OSWorld — подготовка среды и проверка артефакта\n    label_en: OSWorld — environment setup and artifact evaluation\n    anchor: osworld-resettable-vm-executable-action-and-final-state-grader\nprimary_sources:"
+        },
+        {
+          "old": "файла превращает предположение в проверяемую гипотезу. Она может сгенерировать\nпатч, но лишь применение патча и запуск тестов изменяют состояние репозитория и\nдают обратную связь. Поэтому при оценивании проверяют изменённую программу",
+          "new": "файла превращает предположение в проверяемую гипотезу. Применение патча меняет\nсостояние репозитория, а запуск тестов даёт новое наблюдение. Поэтому при\nоценивании проверяют изменённую программу"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m05-p17-react-aci.png]]\n\n*ACI SWE-agent дополняет стандартные Linux Bash-команды специальными средствами\nпросмотра, поиска и редактирования — это явно указано в\n[Table 4 оригинальной статьи](https://arxiv.org/html/2405.15793v2#A1).\nУдобный интерфейс уменьшает сложность выбора действий, но сам по себе не\nслужит границей полномочий: ограничения задают sandbox и права исполнителя. Источник слайда:\n[Berkeley Advanced LLM Agents, Meeting 5](https://rdi.berkeley.edu/adv-llm-agents/sp25), физическая стр. 17; первичные работы — [ReAct](https://arxiv.org/abs/2210.03629) и [SWE-agent](https://arxiv.org/abs/2405.15793). Полный слайд воспроизведён без обрезки.*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/computer-agents-2026-11-09/swe-agent-overview.png|SWE-agent посылает команды через ACI в терминал и файловую систему; ответ среды возвращается через тот же интерфейс]]\n\n*John Yang et al., [SWE-agent v3, Figure 1](https://arxiv.org/html/2405.15793v3#S1.F1).\n[Оригинальный PNG](https://arxiv.org/html/2405.15793v3/swe_agent_overview.png),\nбез изменений, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\n[Berkeley, лекция 5, слайд 17](https://rdi.berkeley.edu/adv-llm-agents/slides/Code%20Agents%20and%20AI%20for%20Vulnerability%20Detection.pdf#page=17).*\n\nВерхняя стрелка показывает команды, нижняя — ответ среды. Например, `open`\nвыбирает файл в репозитории, а в ответе модель видит путь, номера строк и\nчасть содержимого. После `edit` интерфейс сам возвращает обновлённый фрагмент;\nещё один вызов для чтения не нужен. Специальные команды дополняют обычный\nLinux shell. Права на чтение, запись и запуск программ задаёт исполнитель,\nа не схема команд ACI."
+        },
+        {
+          "old": "В исходной [§3 SWE-agent](https://arxiv.org/abs/2405.15793) поиск возвращает",
+          "new": "В [SWE-agent v3, §3](https://arxiv.org/html/2405.15793v3#S3) поиск возвращает"
+        },
+        {
+          "old": "Номер SoM относится к конкретному наблюдению. Если после перехода прежняя\nметка 17 указывает уже на другую кнопку, повтор `click(mark=17)` не является\nповтором прежнего действия. Исполнителю нужно сопоставить команду с версией\nнаблюдения и передать модели новое состояние после изменения страницы.\nЭто особенно заметно в длинных журналах, где старые номера ещё остаются\nв контексте.",
+          "new": "<a id=\"web-agent-observation-bound-marks\"></a>\n\n### Метка относится к тому снимку, на котором её выбрали\n\nВ [VisualWebArena v2, §3.1–3.2](https://arxiv.org/html/2401.13649v2#S3.SS1)\nмодель получает рамки и номера, а `click [elem]` использует номер из\nтекущего наблюдения. На одном снимке под номером 17 может быть выбор\nспособа доставки, а после перерисовки — подтверждение заказа. Подстановка\nстарого номера в новую таблицу меток нажмёт другую кнопку, хотя текст\nкоманды не изменился.\n\nВ учебном примере исполнитель сохраняет с предложенной командой ключ\nнаблюдения: вкладку, документ и ревизию разметки. Ключ берётся из\nнаблюдения, которое получил данный вызов модели. Исполнитель не\nподставляет вместо него ключ актуального кадра после получения ответа.\n\n~~~python\nframe1 = ((\"shop-tab\", \"checkout\", 1), {17: \"shipping\"})\nframe2 = ((\"shop-tab\", \"checkout\", 2),\n          {17: \"confirm_order\", 23: \"shipping\"})\nold_click = (frame1[0], 17)\nfresh_click = (frame2[0], 23)\nclick_log = []\n\ndef dispatch_click(request, current, click):\n    observed_key, mark = request\n    current_key, marks = current\n    if observed_key != current_key:\n        return \"stale_observation\"\n    if mark not in marks:\n        return \"unknown_mark\"\n    click(marks[mark])\n    return \"dispatched\"\n\n# A dispatcher that uses only the latest mark table targets another button.\nassert frame2[1][old_click[1]] == \"confirm_order\"\nassert dispatch_click(old_click, frame2, click_log.append) == \"stale_observation\"\nassert dispatch_click((frame2[0], 99), frame2, click_log.append) == \"unknown_mark\"\nassert click_log == []\nassert dispatch_click(fresh_click, frame2, click_log.append) == \"dispatched\"\nassert click_log == [\"shipping\"]\n~~~\n\nПри `stale_observation` модель должна получить новое наблюдение и\nзаново выбрать элемент. Состояние страницы может измениться и между\nпроверкой ключа и щелчком. В реальном браузере исполнитель должен\nпроверить актуальный элемент непосредственно перед действием или\nотказаться от координатного клика, если цель нельзя связать с наблюдением.\nПроверка свежести не заменяет разрешения на подтверждение заказа.\nСтатус `dispatched` означает вызов исполнителя, а не подтверждённый\nрезультат действия. Здесь браузер не запускается: проверяется контракт\nпередачи команды, а не реализация VisualWebArena."
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p11-osworld-contract.png]]\n\n*OSWorld: подготовка исходной среды, наблюдение агента, исполнение действия\nи проверка конечного состояния.\nИсточник: Berkeley Advanced LLM Agents, Meeting 7, физическая стр. 11;\n[OSWorld](https://arxiv.org/abs/2404.07972). Полный слайд без обрезки.*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/computer-agents-2026-11-09/osworld-task-environment.png|OSWorld: конфигурация задачи поступает координатору; агент взаимодействует с виртуальной машиной через симулятор, а артефакты получает проверяющая программа]]\n\n*Tianbao Xie et al., [OSWorld v1, Figure 2](https://arxiv.org/html/2404.07972v1#S2.F2).\n[Оригинальный PNG](https://arxiv.org/html/2404.07972v1/arch_figure_w_config_new.png),\nбез изменений, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\n[Berkeley, лекция 7, слайд 11](https://rdi.berkeley.edu/adv-llm-agents/slides/Multimodal_Agent_caiming.pdf#page=11).*\n\nСлева в конфигурации показана задача обновить бухгалтерскую таблицу.\n`Set-up` готовит таблицу и открывает её до запуска агента. После его\nостановки `Postprocess` активирует окно Calc, `Getter` получает файл\nиз виртуальной машины, а `Metrics` сравнивает заданные диапазоны с\nэталонным файлом. Снимок окна помогает агенту редактировать таблицу,\nно проверка на рисунке читает файл. Если правки остались в памяти\nприложения и не попали в извлечённый файл, они не участвуют в сравнении."
+        },
+        {
+          "old": "в координаты. Основная конфигурация хранит три последних наблюдения\nи действия и допускает до 15 шагов. Это параметры исходного опыта,\nа не обязательный интерфейс любой системы на OSWorld.",
+          "new": "в координаты. В §4.1 описана история из трёх наблюдений и действий,\nа [приложение C.1](https://arxiv.org/html/2404.07972v1#A3.SS1) указывает\nлимит 15 шагов и 30 минут для базовых агентов. В §2.1 той же версии\nдля общего цикла приведён пример с 20 шагами. При воспроизведении\nконкретного результата нужно брать лимит из его конфигурации."
+        },
+        {
+          "old": "- [Berkeley Advanced LLM Agents, Spring 2025](https://rdi.berkeley.edu/adv-llm-agents/sp25): лекции 5–7 посвящены программирующим агентам, работе в браузере и обучению управлению графическим интерфейсом. Иллюстрации главы воспроизводят полные слайды этих лекций; номера указаны в подписях.",
+          "new": "- [Berkeley Advanced LLM Agents, Spring 2025](https://rdi.berkeley.edu/adv-llm-agents/sp25): лекции 5–7 посвящены программирующим агентам, работе в браузере и обучению управлению графическим интерфейсом. Номера использованных слайдов и ссылки на оригинальные рисунки из статей указаны в подписях."
+        },
+        {
+          "old": "    anchor: swe-agent-модель-управляет-циклом-через-aci",
+          "new": "    anchor: coding-agent-aci"
+        },
+        {
+          "old": "## SWE-agent: модель управляет циклом через ACI",
+          "new": "<a id=\"coding-agent-aci\"></a>\n\n## SWE-agent: модель управляет циклом через ACI"
+        },
+        {
+          "old": "наблюдения: вкладку, документ и ревизию разметки. Ключ берётся из\nнаблюдения, которое получил данный вызов модели. Исполнитель не\nподставляет вместо него ключ актуального кадра после получения ответа.",
+          "new": "наблюдения: вкладку, документ и ревизию разметки. Исполнитель берёт ключ\nкадра, отправленного модели с этим запросом. Когда приходит ответ,\nисполнитель не заменяет старый ключ ключом нового кадра."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "9e55d57b952da3b1fca53c4b7158e0e4686295a93bdc47d06ffeb2ce846a8687",
+      "after_sha256": "1e63982bd7f3782bd8d4386ac341b80bde1aa031b9b481833d2164e974b671ec",
+      "changes": [
+        {
+          "old": "assets:",
+          "new": "assets:\n  - id: \"curated-computer-agents-swe-agent-5fccc1b52e34\"\n    asset: \"00 Учебник/Assets/Figures/curated/computer-agents-2026-11-09/swe-agent-overview.png\"\n    title: \"SWE-agent, Figure 1: commands and feedback through ACI\"\n    author: \"John Yang et al.\"\n    source_url: \"https://arxiv.org/abs/2405.15793v3\"\n    source_image_url: \"https://arxiv.org/html/2405.15793v3/swe_agent_overview.png\"\n    source_asset: \"00 Учебник/Assets/Figures/curated/computer-agents-2026-11-09/swe-agent-overview.png\"\n    source_asset_sha256: \"5fccc1b52e3405b2eb219a0a656b0c31fca94e4753fa0621de78274a3a9b7fee\"\n    source_page_snapshot: \"publishing/fixtures/swe-agent-v3/arxiv-license.html\"\n    source_page_sha256: \"c00b334ab131db5e00a7f869618fe605755149fa3b158ff854af608222951884\"\n    sha256: \"5fccc1b52e3405b2eb219a0a656b0c31fca94e4753fa0621de78274a3a9b7fee\"\n    dimensions_px: [2031,590]\n    bytes: 139606\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"publishing/fixtures/swe-agent-v3/arxiv-license.html\"\n    license_evidence_sha256: \"c00b334ab131db5e00a7f869618fe605755149fa3b158ff854af608222951884\"\n    modifications: \"Complete author PNG copied byte-for-byte from pinned arXiv HTML. No crop, translation, or redraw.\"\n    derivation: \"source-raster-copy\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    metadata_status: \"verified\"\n    last_verified: \"2026-11-09\"\n    used_in: [\"00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md\"]\n  - id: \"curated-computer-agents-osworld-fe27ee95f4c4\"\n    asset: \"00 Учебник/Assets/Figures/curated/computer-agents-2026-11-09/osworld-task-environment.png\"\n    title: \"OSWorld, Figure 2: task configuration and execution-based evaluation\"\n    author: \"Tianbao Xie et al.\"\n    source_url: \"https://arxiv.org/abs/2404.07972v1\"\n    source_image_url: \"https://arxiv.org/html/2404.07972v1/arch_figure_w_config_new.png\"\n    source_asset: \"00 Учебник/Assets/Figures/curated/computer-agents-2026-11-09/osworld-task-environment.png\"\n    source_asset_sha256: \"fe27ee95f4c4c84821a52ee1fc9269be84ebd9949cfd158c1357fc4fb1785b0b\"\n    source_page_snapshot: \"publishing/fixtures/osworld-v1/arxiv-license.html\"\n    source_page_sha256: \"0682fd6505fce742efd8e7c402541a75c2f1664a5d2e0cb38188e46d8886cee7\"\n    sha256: \"fe27ee95f4c4c84821a52ee1fc9269be84ebd9949cfd158c1357fc4fb1785b0b\"\n    dimensions_px: [1076,460]\n    bytes: 155080\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"publishing/fixtures/osworld-v1/arxiv-license.html\"\n    license_evidence_sha256: \"0682fd6505fce742efd8e7c402541a75c2f1664a5d2e0cb38188e46d8886cee7\"\n    modifications: \"Complete author PNG copied byte-for-byte from pinned arXiv HTML. No crop, translation, or redraw.\"\n    derivation: \"source-raster-copy\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    metadata_status: \"verified\"\n    last_verified: \"2026-11-09\"\n    used_in: [\"00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md\"]"
+        },
+        {
+          "old": "    sha256: 18a2110990eafd3ed959102584cfdd8e5500bc74c3a561a3445c0daca2929e34\n    license: User permission record (not a license)\n    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25\n    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change\n    used_in:\n    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
+          "new": "    sha256: 18a2110990eafd3ed959102584cfdd8e5500bc74c3a561a3445c0daca2929e34\n    license: User permission record (not a license)\n    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25\n    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change\n    used_in: []\n    former_used_in: [\"00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md\"]\n    publication_status: retired\n    retirement_reason: The reader uses the verified original research figure; the course frame is preserved in the local archive."
+        },
+        {
+          "old": "    sha256: bc09bab696428d94a95a263fc4f07af63ab711a369a7800928e576bb1d0a1637\n    license: User permission record (not a license)\n    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25\n    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change\n    used_in:\n    - 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
+          "new": "    sha256: bc09bab696428d94a95a263fc4f07af63ab711a369a7800928e576bb1d0a1637\n    license: User permission record (not a license)\n    license_url: https://rdi.berkeley.edu/adv-llm-agents/sp25\n    modifications: full physical PDF page rendered with Poppler; no crop, redraw, or semantic content change\n    used_in: []\n    former_used_in: [\"00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md\"]\n    publication_status: retired\n    retirement_reason: The reader uses the verified original research figure; the course frame is preserved in the local archive."
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "db15b701916d00259b05c3429eb4e7180764d99b97dfb9b848395c4b0da58a87",
+      "after_sha256": "6f4e68b77544dab18fa7f48c614d6937c0ccba7862c400cbf5de59aa1df5848d",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|Coding, web и computer-use agents]]",
+          "new": "- [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|Coding, web и computer-use agents]]\n  - [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#swe-agent-модель-управляет-циклом-через-aci|SWE-agent — команды и обратная связь ACI]]\n  - [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#web-agent-observation-bound-marks|Set-of-Marks — проверка метки перед действием]]\n  - [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#osworld-resettable-vm-executable-action-and-final-state-grader|OSWorld — подготовка среды и проверка артефакта]]"
+        },
+        {
+          "old": "  - [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#swe-agent-модель-управляет-циклом-через-aci|SWE-agent — команды и обратная связь ACI]]",
+          "new": "  - [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#coding-agent-aci|SWE-agent — команды и обратная связь ACI]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "e62055a04397eea3e5cbb06c026d4443214148e9c769ac03831393be4cb0b248",
+      "after_sha256": "cd1d9959afffad2b92ec3bc8c10e30183100b7753afd6d6d2adf1289f8b2fdf1",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|Coding, web, and computer-use agents]]",
+          "new": "- [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|Coding, web, and computer-use agents]]\n  - [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#swe-agent-модель-управляет-циклом-через-aci|SWE-agent — ACI commands and feedback]]\n  - [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#web-agent-observation-bound-marks|Set-of-Marks — checking a mark before an action]]\n  - [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#osworld-resettable-vm-executable-action-and-final-state-grader|OSWorld — environment setup and artifact evaluation]]"
+        },
+        {
+          "old": "  - [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#swe-agent-модель-управляет-циклом-через-aci|SWE-agent — ACI commands and feedback]]",
+          "new": "  - [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#coding-agent-aci|SWE-agent — ACI commands and feedback]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/editorial-map.yml",
+      "before_sha256": "89dddff5fda630727b0dec644b2c7d59d03e086620604af801ee794c4c5f3712",
+      "after_sha256": "9ea19f6e563e2e226268a6410602a31563ffd1c620205827cf73c7e538fff6f3",
+      "changes": [
+        {
+          "old": "    \"meeting-05-slides-visual-swe-agent-loop\": {",
+          "new": "    \"meeting-05-slides-visual-swe-agent-loop\": {"
+        },
+        {
+          "old": "        \"00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m05-p17-react-aci.png\"\n      ],\n      \"transformation\": \"Exact full physical PDF page render at 144 DPI; no crop, redraw, or semantic content change.\",\n      \"caption\": \"Attributed Berkeley course visual for: What does the reviewed sequence establish about SWE-agent interaction loop?\",\n      \"rendered_route\": \"/textbook/agents/coding-web-computer-use/\",\n      \"desktop_evidence\": \"Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.\",\n      \"narrow_evidence\": \"Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.\",\n      \"reviewer\": \"Codex source-to-destination visual audit\",\n      \"checked_at\": \"2026-09-07\"",
+          "new": "        \"00 Учебник/Assets/Figures/curated/computer-agents-2026-11-09/swe-agent-overview.png\"\n      ],\n      \"transformation\": \"Replaced the course frame with the complete original SWE-agent v3 Figure 1 (CC BY 4.0), copied byte-for-byte; lecture page remains linked.\",\n      \"caption\": \"The upper arrow carries ACI commands into the computer; the lower arrow returns environment feedback.\",\n      \"rendered_route\": \"/textbook/agents/coding-web-computer-use/\",\n      \"desktop_evidence\": \"Original two-arrow figure and source attribution at desktop content width.\",\n      \"narrow_evidence\": \"Original figure and zoom viewer preserve both arrows and the complete English labels.\",\n      \"reviewer\": \"Bookvar source and browser review\",\n      \"checked_at\": \"2026-11-09\""
+        },
+        {
+          "old": "    \"meeting-07-slides-visual-osworld\": {",
+          "new": "    \"meeting-07-slides-visual-osworld\": {"
+        },
+        {
+          "old": "        \"00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p11-osworld-contract.png\"\n      ],\n      \"transformation\": \"Exact full physical PDF page rendered at 144 DPI; no crop, redraw, or semantic content change.\",\n      \"caption\": \"Attributed Berkeley course visual for: What does the reviewed sequence establish about OSWorld environment and evaluation?\",\n      \"rendered_route\": \"/textbook/agents/coding-web-computer-use/\",\n      \"desktop_evidence\": \"Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.\",\n      \"narrow_evidence\": \"Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.\",\n      \"reviewer\": \"Codex source-to-destination visual audit\",\n      \"checked_at\": \"2026-09-07\"",
+          "new": "        \"00 Учебник/Assets/Figures/curated/computer-agents-2026-11-09/osworld-task-environment.png\"\n      ],\n      \"transformation\": \"Replaced the course frame with the complete original OSWorld v1 Figure 2 (CC BY 4.0), copied byte-for-byte; lecture page remains linked.\",\n      \"caption\": \"Setup prepares the VM, while postprocessing, retrieval and evaluation act on the final spreadsheet after the agent stops.\",\n      \"rendered_route\": \"/textbook/agents/coding-web-computer-use/\",\n      \"desktop_evidence\": \"Original configuration and VM diagram at desktop content width; dense JSON also has a worked prose explanation.\",\n      \"narrow_evidence\": \"Original PNG opens in the zoom viewer; the configuration and the evaluation path can be read by panning.\",\n      \"reviewer\": \"Bookvar source and browser review\",\n      \"checked_at\": \"2026-11-09\""
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/coverage.yml",
+      "before_sha256": "129cb699353db9a8fa63cbd91efe43a1f704577e4f966864c6bc0bc73f2dfcc3",
+      "after_sha256": "82f5f630de741594dcdafe1aaa6a09834f76fbb95ddb439e2fef3f8197360550",
+      "changes": [
+        {
+          "old": "      \"evidence\": \"https://github.com/Precioux/Advanced-Large-Language-Model-Agents/tree/16f7b26346ec4b8978199e6d35bcee96b128bd0a#discovery-only; A student-maintained third-party mirror cannot substantiate an official Berkeley lab contract.\"\n    }\n  ],\n  \"editorial_overlay_sha256\": \"89dddff5fda630727b0dec644b2c7d59d03e086620604af801ee794c4c5f3712\"\n}",
+          "new": "      \"evidence\": \"https://github.com/Precioux/Advanced-Large-Language-Model-Agents/tree/16f7b26346ec4b8978199e6d35bcee96b128bd0a#discovery-only; A student-maintained third-party mirror cannot substantiate an official Berkeley lab contract.\"\n    }\n  ],\n  \"editorial_overlay_sha256\": \"9ea19f6e563e2e226268a6410602a31563ffd1c620205827cf73c7e538fff6f3\"\n}"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/visuals.yml",
+      "before_sha256": "b776150cf3d17c55a25442a4871da746ac3ad2b6e0446c9f476cd942dfc10f25",
+      "after_sha256": "8674b381c4771eb341374357fc32865fe9888bbfb93e7eb2f1b33317ac3536b8",
+      "changes": [
+        {
+          "old": "      \"extractor_revision\": \"berkeley-advanced-llm-agents-semantic-audit-v2\",\n      \"extraction_tool\": \"Codex-assisted ordered contact-sheet review plus pdftotext -layout (Poppler 26.04.0)\",\n      \"rendered_route\": \"/textbook/agents/coding-web-computer-use/\",\n      \"desktop_evidence\": \"Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.\",\n      \"narrow_evidence\": \"Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.\",\n      \"reviewer\": \"Codex source-to-destination visual audit\",\n      \"checked_at\": \"2026-09-07\",\n      \"disposition\": \"integrated\",\n      \"destination\": \"00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md\",\n      \"destination_anchor\": \"swe-agent-модель-управляет-циклом-через-aci\",\n      \"local_files\": [\n        \"00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m05-p17-react-aci.png\"\n      ],\n      \"transformation\": \"Exact full physical PDF page render at 144 DPI; no crop, redraw, or semantic content change.\",\n      \"caption\": \"Attributed Berkeley course visual for: What does the reviewed sequence establish about SWE-agent interaction loop?\"\n    },\n    {\n      \"id\": \"meeting-05-slides-visual-coding-agent-design-comparisons\",",
+          "new": "      \"extractor_revision\": \"berkeley-advanced-llm-agents-semantic-audit-v2\",\n      \"extraction_tool\": \"Codex-assisted ordered contact-sheet review plus pdftotext -layout (Poppler 26.04.0)\",\n      \"rendered_route\": \"/textbook/agents/coding-web-computer-use/\",\n      \"desktop_evidence\": \"Original two-arrow figure and source attribution at desktop content width.\",\n      \"narrow_evidence\": \"Original figure and zoom viewer preserve both arrows and the complete English labels.\",\n      \"reviewer\": \"Bookvar source and browser review\",\n      \"checked_at\": \"2026-11-09\",\n      \"disposition\": \"integrated\",\n      \"destination\": \"00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md\",\n      \"destination_anchor\": \"swe-agent-модель-управляет-циклом-через-aci\",\n      \"local_files\": [\n        \"00 Учебник/Assets/Figures/curated/computer-agents-2026-11-09/swe-agent-overview.png\"\n      ],\n      \"transformation\": \"Replaced the course frame with the complete original SWE-agent v3 Figure 1 (CC BY 4.0), copied byte-for-byte; lecture page remains linked.\",\n      \"caption\": \"The upper arrow carries ACI commands into the computer; the lower arrow returns environment feedback.\"\n    },\n    {\n      \"id\": \"meeting-05-slides-visual-coding-agent-design-comparisons\","
+        },
+        {
+          "old": "      \"extractor_revision\": \"berkeley-advanced-llm-agents-semantic-audit-v2\",\n      \"extraction_tool\": \"Codex-assisted ordered contact-sheet review plus pdftotext -layout (Poppler 26.04.0)\",\n      \"rendered_route\": \"/textbook/agents/coding-web-computer-use/\",\n      \"desktop_evidence\": \"Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.\",\n      \"narrow_evidence\": \"Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.\",\n      \"reviewer\": \"Codex source-to-destination visual audit\",\n      \"checked_at\": \"2026-09-07\",\n      \"disposition\": \"integrated\",\n      \"destination\": \"00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md\",\n      \"destination_anchor\": \"osworld-resettable-vm-executable-action-and-final-state-grader\",\n      \"local_files\": [\n        \"00 Учебник/Assets/Figures/curated/berkeley-agents-2025/coding-web-computer-use/m07-p11-osworld-contract.png\"\n      ],\n      \"transformation\": \"Exact full physical PDF page rendered at 144 DPI; no crop, redraw, or semantic content change.\",\n      \"caption\": \"Attributed Berkeley course visual for: What does the reviewed sequence establish about OSWorld environment and evaluation?\"\n    },\n    {\n      \"id\": \"meeting-07-slides-visual-meeting-07-outline-a\",",
+          "new": "      \"extractor_revision\": \"berkeley-advanced-llm-agents-semantic-audit-v2\",\n      \"extraction_tool\": \"Codex-assisted ordered contact-sheet review plus pdftotext -layout (Poppler 26.04.0)\",\n      \"rendered_route\": \"/textbook/agents/coding-web-computer-use/\",\n      \"desktop_evidence\": \"Original configuration and VM diagram at desktop content width; dense JSON also has a worked prose explanation.\",\n      \"narrow_evidence\": \"Original PNG opens in the zoom viewer; the configuration and the evaluation path can be read by panning.\",\n      \"reviewer\": \"Bookvar source and browser review\",\n      \"checked_at\": \"2026-11-09\",\n      \"disposition\": \"integrated\",\n      \"destination\": \"00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md\",\n      \"destination_anchor\": \"osworld-resettable-vm-executable-action-and-final-state-grader\",\n      \"local_files\": [\n        \"00 Учебник/Assets/Figures/curated/computer-agents-2026-11-09/osworld-task-environment.png\"\n      ],\n      \"transformation\": \"Replaced the course frame with the complete original OSWorld v1 Figure 2 (CC BY 4.0), copied byte-for-byte; lecture page remains linked.\",\n      \"caption\": \"Setup prepares the VM, while postprocessing, retrieval and evaluation act on the final spreadsheet after the agent stops.\"\n    },\n    {\n      \"id\": \"meeting-07-slides-visual-meeting-07-outline-a\","
+        },
+        {
+          "old": "      \"evidence\": \"The page advertises an external event and adds no course technical content.\"\n    }\n  ],\n  \"editorial_overlay_sha256\": \"89dddff5fda630727b0dec644b2c7d59d03e086620604af801ee794c4c5f3712\"\n}",
+          "new": "      \"evidence\": \"The page advertises an external event and adds no course technical content.\"\n    }\n  ],\n  \"editorial_overlay_sha256\": \"9ea19f6e563e2e226268a6410602a31563ffd1c620205827cf73c7e538fff6f3\"\n}"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/snapshot-lock.json",
+      "before_sha256": "ecd207dbb8545672ad7725aa782d9164f306700e0aeb82dcf884bd96a36da0a3",
+      "after_sha256": "51dc9161ff2c8b903d0a97a04ae6c65ba6bf7f5b668ca4d606709c7e2ecd325e",
+      "changes": [
+        {
+          "old": "  \"generated_audit\": {\n    \"semantic_review_sha256\": \"4f3cdc494aa011875c2d978aeeba22dcaab4094643dc6fb8494a94d6e7bf7072\",\n    \"audit_contract_sha256\": \"8b3a6f5d9e416b90f9681731a80d30fd069bc6e830a5053aa4acc7457fed4ba4\",\n    \"editorial_overlay_sha256\": \"89dddff5fda630727b0dec644b2c7d59d03e086620604af801ee794c4c5f3712\",\n    \"importer_sha256\": \"ddb05e2c7582a189f6ae38fa1c975045b3217f604ed17acc21f7af3344a6d2c8\",\n    \"extractor_revision\": \"berkeley-advanced-llm-agents-semantic-audit-v2\",\n    \"page_index_tool\": \"pdftotext -layout (Poppler 26.04.0)\",",
+          "new": "  \"generated_audit\": {\n    \"semantic_review_sha256\": \"4f3cdc494aa011875c2d978aeeba22dcaab4094643dc6fb8494a94d6e7bf7072\",\n    \"audit_contract_sha256\": \"8b3a6f5d9e416b90f9681731a80d30fd069bc6e830a5053aa4acc7457fed4ba4\",\n    \"editorial_overlay_sha256\": \"9ea19f6e563e2e226268a6410602a31563ffd1c620205827cf73c7e538fff6f3\",\n    \"importer_sha256\": \"ddb05e2c7582a189f6ae38fa1c975045b3217f604ed17acc21f7af3344a6d2c8\",\n    \"extractor_revision\": \"berkeley-advanced-llm-agents-semantic-audit-v2\",\n    \"page_index_tool\": \"pdftotext -layout (Poppler 26.04.0)\","
+        },
+        {
+          "old": "        \"records\": 212\n      },\n      \"coverage.yml\": {\n        \"sha256\": \"129cb699353db9a8fa63cbd91efe43a1f704577e4f966864c6bc0bc73f2dfcc3\",\n        \"records\": 212\n      },\n      \"visuals.yml\": {\n        \"sha256\": \"b776150cf3d17c55a25442a4871da746ac3ad2b6e0446c9f476cd942dfc10f25\",\n        \"records\": 161\n      }\n    }",
+          "new": "        \"records\": 212\n      },\n      \"coverage.yml\": {\n        \"sha256\": \"82f5f630de741594dcdafe1aaa6a09834f76fbb95ddb439e2fef3f8197360550\",\n        \"records\": 212\n      },\n      \"visuals.yml\": {\n        \"sha256\": \"8674b381c4771eb341374357fc32865fe9888bbfb93e7eb2f1b33317ac3536b8\",\n        \"records\": 161\n      }\n    }"
+        }
+      ]
+    }
+  ]
+}

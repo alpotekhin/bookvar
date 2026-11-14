@@ -16,10 +16,42 @@ ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/01 Классическое машинное обучение/02 Линейная регрессия и классификация.md"
 chapter_text = CHAPTER.read_text()
 blocks = re.findall(r"```python\n(.*?)```", chapter_text, re.S)
-assert len(blocks) == 3
+assert len(blocks) == 5
 scope = {}
 for i, code in enumerate(blocks):
     exec(compile(code, f"{CHAPTER}:python-{i+1}", "exec"), scope)
+
+# A standardized model and its raw-coordinate form are the same fitted score.
+np.testing.assert_allclose(scope["raw_weights"], [.4, -.5])
+np.testing.assert_allclose([scope["raw_intercept"], scope["raw_score"]], [-6.5, 3])
+np.testing.assert_allclose(scope["standardized_point"], [1, -1.5])
+np.testing.assert_allclose(expit(scope["raw_score"]), .9525741268224334)
+for seed in range(3):
+    rng = np.random.default_rng(seed)
+    observations = rng.normal(size=(16, 2))*[5, 2]+[40, 20]
+    responses = (observations[:, 0] - 2*observations[:, 1] > 0).astype(int)
+    fitted = make_pipeline(StandardScaler(), LogisticRegression()).fit(observations, responses)
+    scale, clf = fitted.steps[0][1], fitted.steps[1][1]
+    raw_w = clf.coef_[0] / scale.scale_
+    raw_b = clf.intercept_[0] - raw_w @ scale.mean_
+    np.testing.assert_allclose(fitted.decision_function(observations), observations @ raw_w + raw_b,
+                               atol=1e-13)
+
+# Feature-wise indicators remain additive. Cross-products add joint states.
+np.testing.assert_array_equal(scope["bin_encoded"],
+    [[1, 0, 1, 0], [1, 0, 0, 1], [0, 1, 1, 0], [0, 1, 0, 1]])
+np.testing.assert_allclose(scope["additive_model"].decision_function(scope["bin_encoded"]), 0)
+np.testing.assert_array_equal(scope["joint_model"].predict(scope["bin_corners"]), scope["bin_labels"])
+joint_columns = scope["joint_model"][:-1].transform(scope["bin_corners"])
+assert joint_columns.shape == (4, 10)
+# Every additive weight vector obeys the diagonal sum identity; individual
+# cross-products can violate it and isolate either positive corner.
+for seed in range(20):
+    coeff = np.random.default_rng(seed).normal(size=4)
+    values = scope["bin_encoded"] @ coeff + .7
+    np.testing.assert_allclose(values[0]+values[3], values[1]+values[2], atol=1e-13)
+np.testing.assert_array_equal(scope["bin_encoded"][:, 0]*scope["bin_encoded"][:, 3], [0, 1, 0, 0])
+np.testing.assert_array_equal(scope["bin_encoded"][:, 1]*scope["bin_encoded"][:, 2], [0, 0, 1, 0])
 X, y, beta = scope["X"], scope["y"], scope["beta"]
 np.testing.assert_allclose(X.T @ X, [[3, 9], [9, 29]])
 np.testing.assert_allclose(X.T @ y, [10, 33])
@@ -170,6 +202,6 @@ GridSearchCV(
     {"ridge__alpha":[.1,1.]}, cv=cv, scoring="neg_mean_squared_error"
 ).fit(data,targets)
 np.testing.assert_allclose(RecordingScaler.means, [101.,1.,101.,1.,51.])
-assert len(re.findall(r"!\[\[", chapter_text)) == 13
-print("PASS: 3 published blocks, rank-deficient predictions and residuals, OLS, logistic/softmax gradients, XOR, penalties, inner-fold isolation, 13 figures")
+assert len(re.findall(r"!\[\[", chapter_text)) == 17
+print("PASS: 5 published blocks, standardized/raw score equivalence, additive bins/joint features, rank-deficient predictions and residuals, OLS, logistic/softmax gradients, XOR, penalties, inner-fold isolation, 17 figures")
 print("chapter sha256:", hashlib.sha256(CHAPTER.read_bytes()).hexdigest())

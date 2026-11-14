@@ -3,8 +3,39 @@ title: Active learning — запрос меток и выбор примеро�
 type: textbook-chapter
 status: canonical
 source_language: en
-last_updated: 2026-10-28
-last_verified: 2026-10-28
+last_updated: 2026-11-04
+last_verified: 2026-11-04
+reference_terms:
+  - anchor: annotation-loop
+    label: "Пул, размеченные данные и цикл запросов"
+    label_en: "The pool, labelled data and query loop"
+  - anchor: uncertainty
+    label: "Least confidence, margin и entropy"
+    label_en: "Least confidence, margin and entropy"
+  - anchor: al-score-comparison
+    label: "Разные запросы при трёх классах"
+    label_en: "Different queries with three classes"
+  - anchor: committee
+    label: "Query-by-committee и конкурирующие гипотезы"
+    label_en: "Query-by-committee and competing hypotheses"
+  - anchor: al-vote-entropy
+    label: "Энтропия голосов комитета"
+    label_en: "Committee vote entropy"
+  - anchor: al-consensus-disagreement
+    label: "Энтропия консенсуса и расхождение участников"
+    label_en: "Consensus entropy and member disagreement"
+  - anchor: expected-gradient
+    label: "Ожидаемая длина градиента без известной метки"
+    label_en: "Expected gradient length without known labels"
+  - anchor: executable-loop
+    label: "Полный цикл active learning с ID и oracle"
+    label_en: "A complete active-learning loop with IDs and an oracle"
+  - anchor: batch-and-diversity
+    label: "Разнообразие запросов и размер пакета разметки"
+    label_en: "Query diversity and annotation batch size"
+  - anchor: evaluation-and-cost
+    label: "Оценивание active learning и стоимость разметки"
+    label_en: "Active-learning evaluation and annotation cost"
 primary_sources:
   - https://www.cs.cmu.edu/~bsettles/pub/settles.activelearning.pdf
   - https://arxiv.org/abs/1708.00489v4
@@ -32,7 +63,7 @@ learner must decide which targets are worth obtaining.
 <a id="annotation-loop"></a>
 ## The pool, the labelled set, and the annotation loop
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/active-learning-2026-10-28/active-learning.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/active-learning-2026-10-28/active-learning.png|Original modAL workflow from data gathering through training, uncertainty scoring, labelling and retraining]]
 
 *The active learning workflow from Tivadar Danka's modAL documentation:
 gather data, train a model, measure uncertainty, request labels, and train again.
@@ -80,7 +111,7 @@ a fixed pool of real-valued inputs rather than query synthesis.
 <a id="uncertainty"></a>
 ## Uncertainty sampling uses the predicted label distribution
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/active-learning-2026-10-28/motivating-example.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/active-learning-2026-10-28/motivating-example.png|Original modAL probability regions with black unlabelled candidates and coloured labelled points]]
 
 *The modAL motivating example. Black points are unlabelled candidates; blue and
 red outlined points already have labels. The background shows the classifier's
@@ -139,6 +170,8 @@ The largest entropy occurs at a uniform distribution; a distribution concentrate
 on one class has zero entropy. The query strategy selects the largest $H$.
 This is uncertainty under the model, not information gain from a label already
 observed, and not a count of the guesses an annotator would need.
+
+<a id="al-score-comparison"></a>
 
 ### Three strategies need not select the same example
 
@@ -203,6 +236,8 @@ may use different initializations or bootstrap samples rather than explicitly
 enumerating consistent hypotheses. This is an approximation: several models
 with the same blind spot can agree on a wrong label.
 
+<a id="al-vote-entropy"></a>
+
 ### Vote entropy
 
 The original modAL example asks three classifiers to predict five candidates.
@@ -248,6 +283,8 @@ print("vote entropies", vote_entropy)
 Hard votes discard confidence. A classifier assigning `(0.51, 0.49)` casts
 the same vote as one assigning `(0.99, 0.01)`, although the distributions differ.
 Probabilistic committee measures retain that information.
+
+<a id="al-consensus-disagreement"></a>
 
 ### Consensus entropy and disagreement with the consensus
 

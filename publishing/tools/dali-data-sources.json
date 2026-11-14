@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "chapter": "00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md",
+  "pin": "5b33fee1968ba069a9ed04965fd2af5f0025de7e",
+  "figure": "00 Учебник/Assets/Figures/curated/dali-2026-11-04/two_readers.svg",
+  "figure_sha256": "3a04306186cc2d4c1800a1c9e9b2bd7051646ec35c4054ace1cac1225da17214",
+  "source_code": "@pipeline_def  # create a pipeline with processing graph defined by the function below\ndef my_pipeline():\n    \"\"\" Create a pipeline which reads images and masks, decodes the images and\n        returns them. \"\"\"\n    img_files, labels = fn.readers.file(file_root=\"image_dir\", seed=1)\n    mask_files, _ = fn.readers.file(file_root=\"mask_dir\", seed=1)\n    images = fn.decoders.image(img_files, device=\"mixed\")\n    masks  = fn.decoders.image(mask_files, device=\"mixed\")\n    return images, masks, labels\n\npipe = my_pipeline(batch_size=4, num_threads=2, device_id=0)",
+  "sources": [
+    {
+      "path": "publishing/fixtures/dali-originals/pipeline.rst",
+      "url": "https://raw.githubusercontent.com/NVIDIA/DALI/5b33fee1968ba069a9ed04965fd2af5f0025de7e/docs/pipeline.rst",
+      "sha256": "3ca2cc06792e49f6f9280bf9f745a85938c603d53bb01b44743d1414eff04be3"
+    },
+    {
+      "path": "publishing/fixtures/dali-originals/two_readers.svg",
+      "url": "https://raw.githubusercontent.com/NVIDIA/DALI/5b33fee1968ba069a9ed04965fd2af5f0025de7e/docs/images/two_readers.svg",
+      "sha256": "3a04306186cc2d4c1800a1c9e9b2bd7051646ec35c4054ace1cac1225da17214"
+    },
+    {
+      "path": "site/public/licenses/nvidia-dali-5b33fee1-Apache-2.0.txt",
+      "url": "https://raw.githubusercontent.com/NVIDIA/DALI/5b33fee1968ba069a9ed04965fd2af5f0025de7e/LICENSE",
+      "sha256": "bea1b4266f1499fa4bbb16d6e7577e6b5b53d1ef010835a9d460876022cc8722"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "pytorch_pin": "5c4886908584029761b579af026dcfb627c84070",
+  "te_pin": "eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc",
+  "sources": [
+    {
+      "path": "05 Источники/Originals/precision-accumulation-2026-11-04/amp_examples.md",
+      "url": "https://raw.githubusercontent.com/pytorch/pytorch/5c4886908584029761b579af026dcfb627c84070/docs/source/notes/amp_examples.md",
+      "sha256": "cfcaf23662153f75dfe7a717925197dad204894b4df9d5e4bcb0b3b0d4eb41a4"
+    },
+    {
+      "path": "05 Источники/Originals/precision-accumulation-2026-11-04/grad_scaler.py",
+      "url": "https://raw.githubusercontent.com/pytorch/pytorch/5c4886908584029761b579af026dcfb627c84070/torch/amp/grad_scaler.py",
+      "sha256": "97c411da028daaf6a6ed15d06b9b20c017404846db68203be1a586e276e44039"
+    },
+    {
+      "path": "05 Источники/Originals/precision-accumulation-2026-11-04/mxfp8.rst",
+      "url": "https://raw.githubusercontent.com/NVIDIA/TransformerEngine/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/docs/features/low_precision_training/mxfp8/mxfp8.rst",
+      "sha256": "5e1149ba5099452008bd9b6264910616ba1939b0e821c181d25abb971024c288"
+    },
+    {
+      "path": "publishing/fixtures/precision-originals/mxfp8_row_col.svg",
+      "url": "https://raw.githubusercontent.com/NVIDIA/TransformerEngine/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/docs/features/low_precision_training/mxfp8/img/mxfp8_row_col.svg",
+      "sha256": "cdc2c974507032f145af51b9a4be128a63419a9cd22515b6a31e81a2005bc337"
+    },
+    {
+      "path": "publishing/fixtures/precision-originals/diagram-colors.css",
+      "url": "https://raw.githubusercontent.com/NVIDIA/TransformerEngine/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/docs/_static/css/diagram-colors.css",
+      "sha256": "ee997e774be6887f4a6ed2f26a14702386ef71e60e7aca4071464bcf650c3c5f"
+    },
+    {
+      "path": "site/public/licenses/nvidia-transformer-engine-Apache-2.0.txt",
+      "url": "https://raw.githubusercontent.com/NVIDIA/TransformerEngine/eb56ba22fd2b3c1fa4c962a4a575d4ba12d1fcbc/LICENSE",
+      "sha256": "bea1b4266f1499fa4bbb16d6e7577e6b5b53d1ef010835a9d460876022cc8722"
+    }
+  ],
+  "figure": "00 Учебник/Assets/Figures/curated/precision-2026-11/te-mxfp8-row-column.svg",
+  "figure_sha256": "603a59f25341ddbc04c0c9820cc3ebe054a0c713f95ddc89b88b4a63dccb21b0",
+  "chapter": "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+  "quote": "Also, grads should remain scaled, and the scale factor should remain constant, while grads for a given effective batch are accumulated."
+}

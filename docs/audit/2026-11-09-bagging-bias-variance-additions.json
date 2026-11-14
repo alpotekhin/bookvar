@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-09",
+  "scope": "Replace the redundant CS229 formula screenshot in the generalization chapter with the original, licensed scikit-learn single-tree versus bagging experiment. Keep the CS229 derivation link and local historical crop. No deployment.",
+  "review": {
+    "source": "Read CS229 §3–3.1 from the official PDF text and the complete pinned scikit-learn 1.9.1 example. The independent test answer and variation over training sets remain distinct.",
+    "example": "Ran the unchanged 1.9.1 source (SHA-256 f5500d7e21e1f0d3f50049cb292e4d6993ce9e47c7d8f802176bef8b234256e9) against scikit-learn 1.9.1. The 50 fits per method and cross-product of 50 noisy answers and 50 predictions produce the documented MSE, bias squared, variance and noise values; the finite test noise mean can be nonzero.",
+    "figure": "The full 1000×800 original from the versioned gallery matched the pinned scikit-learn.github.io commit byte for byte. The source example declares BSD-3-Clause; the existing public COPYING matches the upstream license. No crop, recolor, redraw or re-encoding.",
+    "retirement": "The CS229 PDF connection timed out for a fresh local render. Its source text, link and historical crop digest are retained; no redistribution grant or new pixel-to-PDF confirmation claimed.",
+    "editorial": "Read the preceding 779-line and final 818-line chapter in full, including the unchanged regularization and inference examples. The new example distinguishes a prediction from one whole fitted ensemble, the variance across training sets, and the variation in held-out answers. All three chapter programs and nine unchanged images are preserved by the historical/current checks.",
+    "reader": "Chrome at 375 and 1280 CSS px on the Russian route and the labelled English fallback. The 1000×800 image renders at 343×274 and 632×506, with all four panels and both legends. Inspected the full desktop viewer, mobile inline and 3× mobile zoom: panning reaches the bottom and right edges, and attribution remains visible. No KaTeX errors or document-width overflow."
+  },
+  "verification": {
+    "chapterExamples": "All three embedded programs and independent checks passed on the exact final chapter hash.",
+    "rootBuild": 2049,
+    "localUnit": {"files": 223, "passed": 1257, "failed": 0},
+    "siteOutputTestsPassed": 246,
+    "brokenInternalLinks": 0,
+    "topicOwners": 153,
+    "retiredAssetAbsentFromDist": true,
+    "published": false
+  },
+  "files": [
+    {
+      "source": "00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md",
+      "before_sha256": "6e831b99ad8d131bde8b2f271e9ec9875ccc7bb5a8342235b570b82a877fac70",
+      "after_sha256": "eda38b1dd7114272ba22a9ef054259ab849561a84c23b81e1c65c72cc846026c",
+      "lines": 818,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-31",
+          "new": "last_updated: 2026-11-09"
+        },
+        {
+          "old": "  - https://cs229.stanford.edu/summer2023/BiasVarianceAnalysis.pdf",
+          "new": "  - https://cs229.stanford.edu/summer2023/BiasVarianceAnalysis.pdf\n  - https://scikit-learn.org/1.9/auto_examples/ensemble/plot_bias_variance.html"
+        },
+        {
+          "old": "здесь понимается относительно зафиксированного набора входов.\n\n### Числовой пример",
+          "new": "здесь понимается относительно зафиксированного набора входов.\n\nРазложение через тождество $\\mathbb E[Z^2]=\\operatorname{Var}(Z)+(\\mathbb E[Z])^2$\nприведено в [конспекте Ананда Авати, Stanford CS229, §3](https://cs229.stanford.edu/summer2023/BiasVarianceAnalysis.pdf#page=7).\n\n### Числовой пример"
+        },
+        {
+          "old": "<details>\n<summary>Вывод в исходном конспекте Stanford CS229</summary>\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/foundations-source-first/cs229-bias-variance-decomposition.png]]\n\n*Anand Avati, Stanford CS229,\n[Bias–Variance Analysis: Theory and Practice, §3, p. 7](https://cs229.stanford.edu/summer2023/BiasVarianceAnalysis.pdf#page=7).*\n\n</details>\n\nВ этом разложении усредняют по возможным обучающим выборкам.",
+          "new": "В этом разложении усредняют по возможным обучающим выборкам."
+        },
+        {
+          "old": "обучающей и валидационной метрик.\n\n| Наблюдение | Что проверить следующим |",
+          "new": "обучающей и валидационной метрик.\n\n<a id=\"bias-variance-bagging-example\"></a>\n\n### Одно дерево и усреднение деревьев\n\nВ [эксперименте scikit-learn](https://scikit-learn.org/1.9/auto_examples/ensemble/plot_bias_variance.html) известна\nистинная кривая $f_*(x)$: программа сама генерирует ответы, добавляя\nк ней независимый гауссов шум со стандартным отклонением $0.1$.\nОна создаёт 50 обучающих выборок по 50 наблюдений. На каждой\nвыборке обучает одиночное дерево и отдельно строит ансамбль\nиз деревьев, обученных на бутстрэп-выборках из тех же 50 наблюдений.\nАнсамбль выдаёт среднее их прогнозов.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/foundations-source-first/sklearn-tree-bagging-bias-variance.png|Слева одиночное дерево, справа бэггинг. Верхний ряд: прогнозы при разных обучающих выборках и их среднее. Нижний ряд: ошибка, квадрат смещения, дисперсия и шум.]]\n\n*The scikit-learn developers, [Single estimator versus bagging: bias-variance decomposition](https://scikit-learn.org/1.9/auto_examples/ensemble/plot_bias_variance.html).\n[Оригинальный рисунок](https://raw.githubusercontent.com/scikit-learn/scikit-learn.github.io/199d116ab37beed506c63fc9f6a74f56e228de43/1.9/_images/sphx_glr_plot_bias_variance_001.png), без изменений.\n[BSD-3-Clause](https://github.com/scikit-learn/scikit-learn/blob/866c0f51e7560ef0303cbcc5f159df5382ea9e3f/COPYING).*\n\nВ верхнем ряду зафиксируем $x$ около правой вершины, где $x\\approx2$.\nКаждая красная кривая даёт один прогноз в этой точке: слева это\nпрогноз дерева, справа уже средний прогноз целого ансамбля.\nКрасных кривых в каждом столбце 50, по одной на обучающую выборку.\nДисперсия $V(x)$ измеряет разброс между этими кривыми при одном\nи том же $x$, а не разброс между деревьями внутри ансамбля.\nКвадрат смещения $B^2(x)$ — квадрат расстояния между средней\nкривой прогнозов и известной $f_*(x)$ в той же точке.\n\nНа нижних графиках `variance(x)` и `bias²(x)` показывают эти величины\nдля всех тестовых точек, а `error(x)` — средний квадрат ошибки в каждой\nиз них. В исходном запуске средняя\nпо тестовым точкам оценка дисперсии снизилась с 0.0152 до 0.0092,\nа оценка квадрата смещения выросла с 0.0003 до 0.0004.\nСнижение дисперсии оказалось больше роста квадрата смещения:\nизмеренная MSE уменьшилась с 0.0255 до 0.0196. Теоретическая\nдисперсия шума равна $0.1^2=0.01$ для обоих методов. В коде\nошибка считается по конечному набору шумных ответов, а смещение\nотсчитывается от известной кривой без шума. Средний шум на конечной\nвыборке не обязан быть нулевым, поэтому приведённые оценки слагаемых\nне складываются точно в измеренную MSE.\n\nВ реальной задаче истинная кривая неизвестна. Улучшение от усреднения\nпроверяют на новых наблюдениях: пример не гарантирует, что бэггинг\nуменьшит MSE для любого базового алгоритма.\n[[00 Учебник/01 Классическое машинное обучение/04 Bagging, random forest и gradient boosting|В главе о бэггинге]] разобрано, как зависимость между деревьями ограничивает снижение дисперсии.\n\n| Наблюдение | Что проверить следующим |"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "8194b606ad91f732802b65a2e06d6a207c21a43f0ef2e45ecc1275d973e4a439",
+      "after_sha256": "6d838d61dd80134bf4e6ac2c2fbcc039925cdfddac326517e2989ee0758129ea",
+      "lines": 24151,
+      "changes": [
+        {
+          "old": "  - id: curated-cs229-bias-variance-0000000000ac\n    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/cs229-bias-variance-decomposition.png\n    author: Anand Avati, Stanford CS229\n    source_url: https://cs229.stanford.edu/summer2023/BiasVarianceAnalysis.pdf\n    license: open-course-material; reuse confirmed by repository owner\n    license_url: https://cs229.stanford.edu/\n    modifications: page 7 rendered and cropped to the decomposition\n    used_in:\n      - 00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/cs229-bias-variance.pdf\n    source_page: 7\n    derivation: pdf-page-render-crop\n    sha256: 244d71e359d9a099496b02fa305b4fccffdaf968281dd411274f2782c3b7d493\n    last_verified: 2026-10-21\n  - id: curated-google-complex-model-0000000000ad",
+          "new": "  - id: curated-cs229-bias-variance-0000000000ac\n    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/cs229-bias-variance-decomposition.png\n    author: Anand Avati, Stanford CS229\n    source_url: https://cs229.stanford.edu/summer2023/BiasVarianceAnalysis.pdf\n    license: Unverified for redistribution\n    license_url: null\n    rights_status: course-note-republication-unverified\n    publication_status: retired\n    retirement_reason: Replaced by a licensed experiment; the chapter links to the original CS229 derivation instead of serving its crop.\n    modifications: page 7 rendered and cropped to the decomposition\n    used_in: []\n    former_used_in:\n      - 00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md\n    metadata_status: verified\n    provenance_confirmation: source-linked-rights-unverified\n    source_asset: raw/papers/external/cs229-bias-variance.pdf\n    source_page: 7\n    derivation: pdf-page-render-crop\n    sha256: 244d71e359d9a099496b02fa305b4fccffdaf968281dd411274f2782c3b7d493\n    last_verified: 2026-10-21\n  - id: curated-sklearn-tree-bagging-8fa36b8ac57a\n    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/sklearn-tree-bagging-bias-variance.png\n    author: The scikit-learn developers\n    source_url: https://scikit-learn.org/1.9/auto_examples/ensemble/plot_bias_variance.html\n    source_image_url: https://raw.githubusercontent.com/scikit-learn/scikit-learn.github.io/199d116ab37beed506c63fc9f6a74f56e228de43/1.9/_images/sphx_glr_plot_bias_variance_001.png\n    source_asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/sklearn-tree-bagging-bias-variance.png\n    source_asset_sha256: 8fa36b8ac57a9fdfa12f7856d4d55fb70f82dc09d62f8b1a70604473e06a3a08\n    sha256: 8fa36b8ac57a9fdfa12f7856d4d55fb70f82dc09d62f8b1a70604473e06a3a08\n    commit: 199d116ab37beed506c63fc9f6a74f56e228de43\n    dimensions_px: [1000, 800]\n    license: BSD-3-Clause\n    license_url: https://github.com/scikit-learn/scikit-learn/blob/866c0f51e7560ef0303cbcc5f159df5382ea9e3f/COPYING\n    license_evidence: site/public/licenses/scikit-learn-1.9.1-BSD-3-Clause.txt\n    license_evidence_sha256: 50d6a9d340f19ab355609917993114daf5f47e3161067bcf34955bbd05cd9cb0\n    public_license_copy: site/public/licenses/scikit-learn-1.9.1-BSD-3-Clause.txt\n    rights_status: source-license-verified\n    derivation: source-raster-copy\n    modifications: Complete four-panel upstream PNG, byte-for-byte, with both legends and axes.\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    last_verified: 2026-11-09\n    used_in:\n      - 00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md\n  - id: curated-google-complex-model-0000000000ad"
+        }
+      ]
+    }
+  ]
+}

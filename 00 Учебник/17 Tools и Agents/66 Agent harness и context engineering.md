@@ -2,14 +2,44 @@
 title: Agent harness и context engineering
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-20
-last_verified: 2026-10-20
+last_updated: 2026-11-09
+last_verified: 2026-11-09
+reference_terms:
+  - label: Цикл агента — вызов модели, исполнение и проверка
+    label_en: Agent loop — model call, execution, and verification
+    anchor: harness-loop
+  - label: Контекст агента — расчёт бюджета
+    label_en: Agent context — token budget
+    anchor: harness-context-budget
+  - label: Кеш префикса в агентном цикле
+    label_en: Prefix caching in the agent loop
+    anchor: harness-prompt-prefix
+  - label: Журнал, рабочий контекст и состояние задачи
+    label_en: Event log, active context, and task state
+    anchor: harness-authoritative-state
+  - label: Маскирование наблюдений и суммаризация истории
+    label_en: Observation masking and history summarization
+    anchor: harness-observation-masking
+  - label: Compaction — границы между вызовами и наблюдениями
+    label_en: Compaction — boundaries around calls and observations
+    anchor: harness-compaction-boundaries
+  - label: Handoff после операции с неизвестным исходом
+    label_en: Handoff after an operation with an unknown outcome
+    anchor: harness-handoff-unknown
+  - label: Reminder tokens — событие, напоминание и проверка
+    label_en: Reminder tokens — triggers, reminders, and checks
+    anchor: harness-reminder-tokens
+  - label: Завершение агента — проверка текущей ревизии
+    label_en: Agent completion — verifying the current revision
+    anchor: harness-verified-completion
 primary_sources:
   - https://openai.com/index/unrolling-the-codex-agent-loop/
   - https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
   - https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
   - https://arxiv.org/abs/2405.15793
   - https://docs.openhands.dev/sdk/guides/context-condenser
+  - https://arxiv.org/abs/2508.21433v3
+  - https://github.com/OpenHands/software-agent-sdk/blob/0996c33916c2a977ea9fe38deee660ff0e1389f2/openhands-sdk/openhands/sdk/context/view/properties/tool_call_matching.py
   - https://huggingface.co/learn/context-course/unit0/introduction
 ---
 
@@ -28,6 +58,8 @@ primary_sources:
 результат теста именно для этой версии, оставшиеся ограничения и историю
 уже выполненных действий. Часть этих сведений передаётся модели, а часть
 используется программой для проверки её предложений.
+
+<a id="harness-loop"></a>
 
 ## 1. Из чего состоит один шаг
 
@@ -92,33 +124,21 @@ primary_sources:
 | найденные сведения | фрагменты файлов, документы, память | пока полезны текущему решению |
 | событийные вставки | ошибка, смена прав, reminder | до обработки или истечения |
 
-[![Prompt engineering и повторная сборка контекста в агентном цикле](https://www-cdn.anthropic.com/images/4zrzovbb/website/faa261102e46c7f090a2402a49000ffae18c5dd6-2292x1290.png)](https://www-cdn.anthropic.com/images/4zrzovbb/website/faa261102e46c7f090a2402a49000ffae18c5dd6-2292x1290.png)
-
-*Prompt engineering меняет отдельный prompt, а context engineering заново
-отбирает вход перед каждым вызовом модели. Источник: Anthropic Applied AI team,
-[Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents),
-схема «Prompt engineering vs. context engineering».*
-
 После записи `timeout=45` модели нужны исходное требование, подтверждение
-правки и сведения о незапущенном тесте. Полный журнал установки зависимостей
-обычно не помогает выбрать следующий шаг. Он может остаться во внешнем
-хранилище с адресом, по которому его можно открыть при необходимости.
-Так отбор контекста сохраняет доступ к данным, не требуя каждый раз включать
-все их токены во вход.
+правки и сведения о незапущенном тесте. После теста вместо «не запущен»
+сборщик передаст его результат. Полный журнал установки зависимостей можно
+оставить в хранилище и передать только путь к нему. Системная инструкция
+«запусти тест после правки» в обоих вызовах одинакова; меняются данные, по
+которым модель решает, что делать дальше. Это различие показано на
+[схеме «Prompt engineering vs. context engineering» Anthropic](https://www-cdn.anthropic.com/images/4zrzovbb/website/faa261102e46c7f090a2402a49000ffae18c5dd6-2292x1290.png).
 
-[![Выбор подробности системных инструкций](https://www-cdn.anthropic.com/images/4zrzovbb/website/0442fe138158e84ffce92bed1624dd09f37ac46f-2292x1288.png)](https://www-cdn.anthropic.com/images/4zrzovbb/website/0442fe138158e84ffce92bed1624dd09f37ac46f-2292x1288.png)
-
-*Две крайности системной инструкции: каталог частных случаев и слишком общее
-пожелание. Между ними — компактная роль, способ работы и правила эскалации.
-Источник: Anthropic Applied AI team,
-[Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents),
-схема «Calibrating the system prompt».*
-
-Левая часть рисунка пытается заранее записать в prompt все ветви процесса. Такое
-описание быстро устаревает и конкурирует с текущими данными. Правая оставляет
-слишком много неоднозначности. Средний вариант фиксирует устойчивые принципы, а
-меняющиеся сведения и узкие процедуры подгружаются как инструменты, документы
-или skills только тогда, когда они нужны.
+Инструкция «проверь изменения» не говорит, достаточно ли прочитать diff или
+нужно запустить тест. Перечислять в системной инструкции команды для всех
+репозиториев тоже не нужно. Постоянное правило может быть таким: после правки
+запусти проверку, указанную для текущей задачи; если она не запустилась, сообщи
+об этом. Конкретную команду сборщик берёт из конфигурации проекта.
+[Anthropic разбирает выбор подробности инструкции](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) и показывает его на
+[схеме «Calibrating the system prompt»](https://www-cdn.anthropic.com/images/4zrzovbb/website/0442fe138158e84ffce92bed1624dd09f37ac46f-2292x1288.png).
 
 ### Загрузка сведений по мере необходимости
 
@@ -140,6 +160,8 @@ primary_sources:
 и progressive disclosure. Цена подхода — дополнительные вызовы и зависимость
 от качества навигации. Найденная ссылка не равна прочитанному документу,
 а старый индекс может ссылаться на уже изменившуюся версию.
+
+<a id="harness-context-budget"></a>
 
 ### Бюджет одного входа
 
@@ -188,6 +210,8 @@ assert after_compaction == 6960 and after_compaction <= window
 токенов. Если сам запрос на сжатие уже не помещается, требуется иной
 протокол сокращения входа, а не повтор того же переполненного запроса.
 
+<a id="harness-prompt-prefix"></a>
+
 ## 3. Стабильный префикс и динамический суффикс
 
 Порядок влияет не только на внимание модели, но и на стоимость. Prompt cache
@@ -232,6 +256,8 @@ assert common_prefix_length(stable, [10, 11, 99, 13]) == 2
 а смена cwd — новым user-сообщением. Это сохраняет прежние элементы префикса.
 Проверка фактических прав при исполнении всё равно использует текущую
 политику; старое разрешение в истории не должно её отменять.
+
+<a id="harness-authoritative-state"></a>
 
 ## 4. Состояние не равно стенограмме
 
@@ -319,6 +345,56 @@ assert common_prefix_length(stable, [10, 11, 99, 13]) == 2
 строке нельзя восстановить их текст. Если прежний вывод снова нужен,
 его получают из сохранённого журнала или выполняют допустимое новое чтение.
 
+<a id="harness-observation-masking"></a>
+
+### Сократить вывод или пересказать ход работы
+
+Агент нашёл нужный файл, прочитал его и запустил тест. Два первых
+вывода длинные, а следующий шаг зависит от свежей ошибки теста.
+При маскировании старых наблюдений в истории останутся команды поиска
+и чтения, но вместо их результатов будут короткие заглушки. Если позже
+понадобится строка из файла, её придётся найти в журнале или прочитать заново.
+Суммаризация может перенести эту строку в краткий пересказ, но может и
+пропустить её: модель-суммаризатор не знает наверняка, что понадобится дальше.
+
+![[00 Учебник/Assets/Figures/curated/harness-context-2026-11-09/management-strategies.png|Три входа для одного агента: полная история слева, заглушки вместо старых наблюдений в центре и сводка старых шагов справа]]
+
+*Tobias Lindenbauer, Igor Slinko, Ludwig Felder, Egor Bogomolov и Yaroslav Zharov,
+[The Complexity Trap, Figure 3](https://arxiv.org/html/2508.21433v3#S3.F3).
+Оригинальный рисунок без изменений, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+
+В средней колонке рисунка `Mask 1` и `Mask 2` заменяют только вывод
+инструментов: шаги `Reasoning` и `Action` остаются. В правой колонке
+`Summary 1` заменяет оба старых шага целиком. Последний шаг в обоих вариантах
+сохраняется полностью. Рисунок показывает окно в один шаг; в основных
+опытах окно было десять шагов. В варианте с суммаризацией первый пересказ
+появлялся после 31 шага: 21 для пересказа, десять без изменений.
+Маскирование сокращает каждый старый вывод, но не останавливает рост
+истории: оставшиеся рассуждения, действия и заглушки продолжают накапливаться.
+
+В [опытах SWE-agent на 500 задачах SWE-bench Verified](https://arxiv.org/html/2508.21433v3#S4.T1)
+с Qwen3-Coder 480B получились следующие средние:
+
+| История | Решено | Долл. на задачу |
+| --- | ---: | ---: |
+| Полная | 53,4% | 1,29 |
+| Маскирование | 54,8% | 0,61 |
+| Суммаризация | 53,8% | 0,64 |
+
+По округлённым числам маскирование снизило среднюю стоимость на
+$(1{,}29-0{,}61)/1{,}29\approx53\%$. Это затраты на всю попытку,
+а не на один вход. Отдельные вызовы для пересказа тоже входят в расчёт;
+для этой модели авторы отнесли к ним около 7% стоимости варианта с пересказом.
+В [парном сравнении с полной историей](https://arxiv.org/html/2508.21433v3#A3.T4)
+интервал для разницы в доле решённых задач при маскировании составляет
+от −1,6 до +4,4 процентного пункта. Эти результаты не доказывают ни
+выигрыша по качеству от маскирования, ни его равенства суммаризации.
+С Gemini 2.5 Flash в режиме thinking сокращение истории снизило
+и расходы, и долю решённых задач. В дополнительном опыте с OpenHands
+перенос окна из SWE-agent без настройки тоже ухудшил результат.
+Условия опытов и исходные данные собраны в
+[[05 Источники/Papers/The Complexity Trap|заметке к статье]].
+
 <span id="6-compaction-как-преобразование-состояния"></span>
 ## 6. Compaction и сохранение состояния задачи
 
@@ -356,9 +432,11 @@ Condenser возвращает другое представление или с
 с идентификаторами заменяемых событий, резюме и местом его вставки.
 Так исходный журнал и представление для модели остаются разными объектами.
 
-[![Замена старых событий резюме в OpenHands](https://mintcdn.com/allhandsai/hwL6uO0ZqM-lmlYG/sdk/guides/assets/condenser_overview_light_mode.png?fit=max&auto=format&n=hwL6uO0ZqM-lmlYG&q=85&s=dc85afa9f2821b1f7a305ad1406ab3d9)](https://mintcdn.com/allhandsai/hwL6uO0ZqM-lmlYG/sdk/guides/assets/condenser_overview_light_mode.png?fit=max&auto=format&n=hwL6uO0ZqM-lmlYG&q=85&s=dc85afa9f2821b1f7a305ad1406ab3d9)
-
-*OpenHands contributors, [Context Condenser](https://docs.openhands.dev/sdk/guides/context-condenser), исходная обзорная схема. Защищённое начало истории и границы связанных групп событий на ней не показаны; они рассматриваются ниже по коду.*
+На [схеме OpenHands](https://mintcdn.com/allhandsai/hwL6uO0ZqM-lmlYG/sdk/guides/assets/condenser_overview_light_mode.png?fit=max&auto=format&n=hwL6uO0ZqM-lmlYG&q=85&s=dc85afa9f2821b1f7a305ad1406ab3d9) длинная последовательность событий превращается
+в резюме и короткий хвост. В реализации резюме заменяет выбранные события
+только в представлении для модели. Какие события можно заменить вместе,
+видно из примера ниже и из кода, на который ссылается
+[документация Context Condenser](https://docs.openhands.dev/sdk/guides/context-condenser).
 
 В [закреплённом коде LLMSummarizingCondenser](https://github.com/OpenHands/software-agent-sdk/blob/0996c33916c2a977ea9fe38deee660ff0e1389f2/openhands-sdk/openhands/sdk/context/condenser/llm_summarizing_condenser.py)
 `max_size` ограничивает число событий, а не число токенов.
@@ -381,6 +459,82 @@ Condenser возвращает другое представление или с
 поступать с уже переполненным входом: для жёсткого случая предусмотрено
 восстановление или ошибка. Эти детали зависят от версии библиотеки;
 само имя «condenser» не задаёт единой политики.
+
+<a id="harness-compaction-boundaries"></a>
+
+### Почему нельзя сжать вызов отдельно от ответа
+
+Вернёмся к [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#mcp-response-correlation|двум чтениям из предыдущей главы]].
+В активной истории OpenHands стоят два действия из одного ответа модели,
+затем два наблюдения. Первым пришёл результат `c3`, вторым — `c2`.
+В примере ниже начальные события 0 и 1 защищены, а события 2–6 не содержат
+вызовов. При `max_size=10` и 11 событиях расчёт без учёта связей дал бы
+границу 9: в сводку ушли бы оба действия, а два результата остались бы
+в хвосте без соответствующих вызовов.
+
+| Индекс | Событие | Ждём ответ |
+| ---: | --- | --- |
+| 7 | Вызов `c2` | `c2` |
+| 8 | Вызов `c3` | `c2`, `c3` |
+| 9 | Результат `c3` | `c2` |
+| 10 | Результат `c2` | — |
+
+В [`ToolCallMatchingProperty.manipulation_indices`](https://github.com/OpenHands/software-agent-sdk/blob/0996c33916c2a977ea9fe38deee660ff0e1389f2/openhands-sdk/openhands/sdk/context/view/properties/tool_call_matching.py#L61-L95)
+граница после события разрешена, только если нет ожидающих ответов.
+После события 8 остаются два незакрытых вызова; после события 9 — один.
+Первый допустимый индекс не меньше 9 — это 11, сразу после результата
+`c2`. Поэтому в сводку уходят события `[2:11]`, и от этих двух вызовов
+не остаётся необработанных результатов в хвосте. Плановые два события
+в хвосте здесь не сохраняются: целостность важнее планового числа.
+Исходные события по-прежнему принадлежат журналу, а число токенов
+нового входа нужно проверить отдельно.
+
+Следующий код воспроизводит выбор границы для этой истории. Это расчёт
+для учебных событий, не запуск OpenHands и не генерация резюме.
+
+~~~python
+def safe_cuts(events):
+    cuts, pending = [0], set()
+    for after, (kind, call_id) in enumerate(events, start=1):
+        if kind == "call":
+            pending.add(call_id)
+        elif kind == "result":
+            pending.discard(call_id)
+        if not pending:
+            cuts.append(after)
+    return cuts
+
+events = [("message", None)] * 7 + [
+    ("call", "c2"), ("call", "c3"),
+    ("result", "c3"), ("result", "c2"),
+]
+keep_first, max_size = 2, 10
+tail = max_size // 2 - keep_first - 1
+naive_end = len(events) - tail
+cuts = safe_cuts(events)
+assert (tail, naive_end) == (2, 9)
+assert cuts == [0, 1, 2, 3, 4, 5, 6, 7, 11]
+end = next(cut for cut in cuts if cut >= naive_end)
+assert events[keep_first:end][-4:] == events[7:]
+assert end == 11 and events[end:] == []
+
+# Пока c2 не ответил, за границей 9 нет допустимого разреза.
+assert all(cut < naive_end for cut in safe_cuts(events[:-1]))
+~~~
+
+В закреплённой версии OpenHands
+[`_get_forgotten_events`](https://github.com/OpenHands/software-agent-sdk/blob/0996c33916c2a977ea9fe38deee660ff0e1389f2/openhands-sdk/openhands/sdk/context/condenser/llm_summarizing_condenser.py#L327-L352)
+сдвигает обе границы к следующим допустимым индексам. В полном
+представлении есть и другие ограничения:
+[`BatchAtomicityProperty`](https://github.com/OpenHands/software-agent-sdk/blob/0996c33916c2a977ea9fe38deee660ff0e1389f2/openhands-sdk/openhands/sdk/context/view/properties/batch_atomicity.py#L49-L76)
+защищает пакет действий из одного ответа модели,
+[`ToolLoopAtomicityProperty`](https://github.com/OpenHands/software-agent-sdk/blob/0996c33916c2a977ea9fe38deee660ff0e1389f2/openhands-sdk/openhands/sdk/context/view/properties/tool_loop_atomicity.py#L95-L126)
+может защищать целый цикл, начатый действием с thinking-блоком.
+Если обычный разрез недоступен, мягкий запрос может оставить представление
+прежним. Для жёсткого запроса код пробует восстановление или возвращает
+ошибку. Ни одно из этих действий не подтверждает завершение инструмента.
+
+<a id="harness-handoff-unknown"></a>
 
 ### Handoff после записи с неизвестным исходом
 
@@ -422,7 +576,7 @@ Condenser возвращает другое представление или с
 При eventual consistency ответ `not_found` одного чтения также не доказывает
 отсутствие эффекта. Тогда используют контракт идемпотентного API или
 сохраняют неопределённый исход. Механизм повторов подробно разобран
-в [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#Потерянный ответ после записи|главе 65]].
+в [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#tool-retry-idempotency|разборе потерянного ответа после записи]].
 
 При передаче состояния операция с `outcome=unknown` должна остаться
 неразрешённой, с прежним ключом. `terminal_verified` остаётся false до чтения
@@ -474,6 +628,8 @@ assert not valid_checkpoint(bad)
 и проверка следующего checkpoint будет опираться уже на него.
 
 <span id="7-reminder-tokens--не-особый-вид-токена"></span>
+<a id="harness-reminder-tokens"></a>
+
 ## 7. Текстовые напоминания: reminder tokens
 
 В этой главе reminder tokens означают текст, который управляющая программа
@@ -613,6 +769,8 @@ Checkpoint должен содержать и счётчики расхода. �
 времени может также произойти посреди работающего процесса. Его идентификатор
 и состояние нужно сохранить: отсутствие ответа не означает, что процесс
 завершился и его можно безопасно запустить ещё раз.
+
+<a id="harness-verified-completion"></a>
 
 ## 10. Наблюдаемость и доказательство завершения
 
@@ -841,6 +999,7 @@ assert resumed["model_steps"] == 5 and resumed["tool_calls"] == 3
 - [Anthropic: Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) — прогресс и handoff между сессиями.
 - [SWE-agent v3](https://arxiv.org/abs/2405.15793v3), Appendix C, Figures 26–32 — последовательность сообщений, начальные шаблоны, наблюдения и ошибки формата.
 - [OpenHands Context Condenser](https://docs.openhands.dev/sdk/guides/context-condenser) — проверяемая реализация keep-first, recent history и summarization.
+- [[05 Источники/Papers/The Complexity Trap|Lindenbauer et al., The Complexity Trap]] — маскирование наблюдений, суммаризация и их стоимость на SWE-bench Verified.
 - [Hugging Face Context Engineering Course](https://huggingface.co/learn/context-course/unit0/introduction) — практический курс по контексту, skills, hooks и harness.
 - [Lost in the Middle](https://aclanthology.org/2024.tacl-1.9/) — позиционные эффекты длинного контекста.
 - [OpenAI: Compaction](https://developers.openai.com/api/docs/guides/compaction) — форматы сжатого окна и правила передачи результата.

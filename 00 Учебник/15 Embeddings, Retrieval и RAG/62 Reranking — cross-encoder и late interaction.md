@@ -2,8 +2,9 @@
 title: "Переранжирование: cross-encoder и late interaction"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-20
-last_verified: 2026-10-20
+last_updated: 2026-11-06
+last_verified: 2026-11-06
+source_language: mixed
 primary_sources:
   - https://sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html
   - https://sbert.net/docs/cross_encoder/loss_overview.html
@@ -13,6 +14,92 @@ primary_sources:
   - https://aclanthology.org/2023.emnlp-main.923/
   - https://proceedings.mlr.press/v70/guo17a.html
   - https://web.stanford.edu/~jurafsky/slp3/11.pdf
+  - https://marc.najork.org/papers/cikm2018.pdf
+reference_terms:
+  - label: "Cross-encoder: совместный вход и оценка пары"
+    label_en: "Cross-encoder: joint input and pair scoring"
+    anchor: rerank-cross-encoder
+  - label: "Токенный бюджет и обрезка пары"
+    label_en: "Pair token budget and truncation"
+    anchor: rerank-pair-budget
+  - label: "MiniLM: пример реальной оценки двух пар"
+    label_en: "MiniLM: two-pair inference example"
+    anchor: rerank-minilm-example
+  - label: "Данные reranker и трудные отрицательные примеры"
+    label_en: "Reranker data and hard negatives"
+    anchor: rerank-hard-negatives
+  - label: "Pointwise: BCE и градиент logit"
+    label_en: "Pointwise: BCE and logit gradients"
+    anchor: rerank-pointwise
+  - label: "Pairwise: RankNet и разница оценок"
+    label_en: "Pairwise: RankNet and score differences"
+    anchor: rerank-pairwise
+  - label: "Listwise: ListNet, энтропия и KL"
+    label_en: "Listwise: ListNet, entropy and KL"
+    anchor: rerank-listwise
+  - label: "Дистилляция оценок и обновление negatives"
+    label_en: "Score distillation and negative refresh"
+    anchor: rerank-teacher
+  - label: "Калибровка и порядок ранжирования"
+    label_en: "Calibration and ranking order"
+    anchor: rerank-calibration
+  - label: "Temperature scaling и Brier score"
+    label_en: "Temperature scaling and Brier score"
+    anchor: rerank-temperature
+  - label: "ColBERT: токенные представления и late interaction"
+    label_en: "ColBERT: token representations and late interaction"
+    anchor: rerank-colbert
+  - label: "MaxSim: матрица совпадений и победители"
+    label_en: "MaxSim: similarity matrix and winning tokens"
+    anchor: rerank-maxsim
+  - label: "Маски ColBERT и query augmentation"
+    label_en: "ColBERT masks and query augmentation"
+    anchor: rerank-masks
+  - label: "Токенный ANN и полная оценка MaxSim"
+    label_en: "Token-level ANN and full MaxSim scoring"
+    anchor: rerank-token-index
+  - label: "ColBERTv2: остаточное сжатие и обучение"
+    label_en: "ColBERTv2: residual compression and training"
+    anchor: rerank-colbertv2
+  - label: "ColBERT-QA: раунды retrieval supervision"
+    label_en: "ColBERT-QA: retrieval-supervision rounds"
+    anchor: rerank-retrieval-rounds
+  - label: "Стоимость reranking, padding и batching"
+    label_en: "Reranking cost, padding and batching"
+    anchor: rerank-serving-cost
+  - label: "Каскад и потери на отсечках"
+    label_en: "Cascades and cutoff losses"
+    anchor: rerank-cascade
+  - label: "LLM reranking: оценка, сравнение и перестановка"
+    label_en: "LLM reranking: scores, comparisons and permutations"
+    anchor: rerank-llm
+  - label: "RankGPT: перекрывающиеся окна и дистилляция"
+    label_en: "RankGPT: overlapping windows and distillation"
+    anchor: rerank-rankgpt
+  - label: "Oracle reranking и предел nDCG"
+    label_en: "Oracle reranking and the nDCG ceiling"
+    anchor: rerank-oracle
+  - label: "Оценка reranker на фиксированных кандидатах"
+    label_en: "Reranker evaluation on fixed candidates"
+    anchor: rerank-evaluation
+  - label: "Позиционное смещение и циклы предпочтений"
+    label_en: "Position bias and preference cycles"
+    anchor: rerank-position-bias
+  - label: "Длина, окна и источник как shortcut"
+    label_en: "Length, windows and source shortcuts"
+    anchor: rerank-length-bias
+  - label: "Недоверенный документ и проверка доступа"
+    label_en: "Untrusted documents and authorization"
+    anchor: rerank-untrusted-docs
+  - label: "Версии документов и временная утечка меток"
+    label_en: "Document versions and temporal label leakage"
+    anchor: rerank-temporal-labels
+  - label: "LambdaRank: изменение nDCG и вес пары"
+    label_en: "LambdaRank: nDCG changes and pair weights"
+    anchor: rerank-lambdarank
+  - label: "LambdaLoss: cutoff, нормировка и вариант objective"
+    label_en: "LambdaLoss: cutoff, normalization and objective variants"
+    anchor: rerank-lambdaloss-cutoff
 ---
 
 # Переранжирование: cross-encoder и late interaction
@@ -30,7 +117,7 @@ primary_sources:
 в выдачу. Поэтому глубину первого поиска и размер окончательного
 контекста задают отдельно.
 
-![[00 Учебник/Assets/Figures/curated/reranking-review-2026-10/retrieve-rerank.png]]
+![[00 Учебник/Assets/Figures/curated/reranking-review-2026-10/retrieve-rerank.png|Retrieve and re-rank: candidate retrieval followed by cross-encoder scoring]]
 
 *Sentence Transformers contributors,
 [Retrieve & Re-Rank — Pipeline](https://sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html).
@@ -50,6 +137,7 @@ Sentence Transformers, тот же источник, Apache-2.0. Слова на
 
 ## 1. Bi-encoder и cross-encoder решают разные вычислительные задачи
 
+<a id="rerank-cross-encoder"></a>
 ### Где встречаются запрос и документ
 
 У bi-encoder документ кодируется без знания будущего запроса.
@@ -69,7 +157,7 @@ Sentence Transformers, тот же источник, Apache-2.0. Слова на
 Конкретная модель ещё должна научиться использовать эти связи:
 совместный вход сам по себе не гарантирует правильного ответа.
 
-![[00 Учебник/Assets/Figures/curated/source-first-60-64/sbert-bi-vs-cross-encoder.png]]
+![[00 Учебник/Assets/Figures/curated/source-first-60-64/sbert-bi-vs-cross-encoder.png|Bi-encoder cached representations versus joint cross-encoder input]]
 
 *Sentence Transformers contributors,
 [Cross-Encoder vs. Bi-Encoder](https://sbert.net/examples/cross_encoder/applications/README.html),
@@ -100,6 +188,7 @@ cross-encoder нельзя заменить одним заранее вычис
 сто таких оценок. Это подсчёт входов модели, не оценка ускорения:
 первый поиск тоже имеет стоимость, а пары можно обрабатывать пакетами.
 
+<a id="rerank-pair-budget"></a>
 ### Что помещается во вход
 
 Ограничение длины относится ко всей паре со специальными токенами.
@@ -115,6 +204,7 @@ $512-64-3=445$ токенов документу. Если документ со
 используют фрагменты или несколько окон; их последующее объединение
 тоже меняет алгоритм оценки.
 
+<a id="rerank-minilm-example"></a>
 ### Пример с настоящей моделью
 
 Ниже используются два английских фрагмента из
@@ -170,6 +260,7 @@ print(scores.tolist(), order)
 
 ## 2. Обучающие примеры должны приходить из настоящего retriever
 
+<a id="rerank-hard-negatives"></a>
 ### Какие ошибки должна исправлять модель
 
 Для запроса о восстановлении доступа к Atlas v2 случайная статья
@@ -204,6 +295,7 @@ retriever. Сохраняют запрос, документы, их верси�
 разногласия оценщиков и сомнительные пары лучше хранить отдельно,
 а не превращать отсутствие метки в уверенный ноль.
 
+<a id="rerank-pointwise"></a>
 ### Pointwise: оценить каждую пару
 
 При бинарной метке $y\in\{0,1\}$ модель выдаёт logit $s$,
@@ -230,6 +322,7 @@ $$
 численно устойчивым способом. Применять sigmoid заранее к входу
 такой функции не нужно.
 
+<a id="rerank-pairwise"></a>
 ### Pairwise: сравнить два документа
 
 Если известен только порядок $d^+>d^-$, абсолютные значения
@@ -259,6 +352,7 @@ $$
 масштаб, основание логарифма и отбор пар задаются отдельно.
 Численные потери разных соглашений нельзя сравнивать как одну шкалу.
 
+<a id="rerank-listwise"></a>
 ### Listwise: использовать распределение по списку
 
 Модель может по-прежнему независимо вычислять $s(q,d_j)$
@@ -336,6 +430,146 @@ assert np.isclose(listnet([0., 1., 2.], [2., 1., 0.]), 1.982816347)
 Примеры выше не выполняют обучение нейросети: они позволяют
 проверить, какой именно сигнал получает модель.
 
+<a id="rerank-lambdarank"></a>
+### LambdaRank: weighting pairs by a change in nDCG
+
+Return to the Atlas query. Document B gives the v2 recovery procedure
+(grade 2), C describes v2 SSO without the procedure (grade 1), and A gives
+the obsolete v1 instructions (grade 0). Suppose their scores are 0, 1
+and 2, respectively. The scorer ranks them A, C, B. Swapping B and A
+puts the recovery procedure first; swapping B and C moves it only to
+second place. The unweighted RankNet loss uses score differences alone.
+To account for where the documents end up, weight each pair by how much
+its swap changes nDCG.
+
+Use exponential gains $g_i=2^{y_i}-1$ and rank discounts
+$a_r=1/\log_2(r+1)$, as in
+[[00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning#emb-ranking-metrics|the earlier nDCG explanation]].
+The three gains are 3, 1 and 0. Their ideal DCG is
+$3+1/\log_2 3\approx3.63093$.
+If documents i and j occupy current ranks $r_i,r_j$, swapping them changes
+only their two contributions. The absolute change in nDCG is
+
+$$
+w_{ij}=
+\frac{|g_i-g_j|\,|a_{r_i}-a_{r_j}|}
+{\operatorname{IDCG}}.
+$$
+
+For B and A, the gain difference is 3 and the discount difference is
+$1-0.5=0.5$. Dividing their product 1.5 by the ideal DCG gives about
+0.41312. B and C have a gain difference of 2 but a smaller discount
+difference, $1/\log_2 3-0.5\approx0.13093$.
+
+| Swapped pair in A, C, B | Absolute nDCG change |
+| --- | ---: |
+| B and A, ranks 3 and 1 | 0.41312 |
+| B and C, ranks 3 and 2 | 0.07212 |
+| C and A, ranks 2 and 1 | 0.10165 |
+
+LambdaRank uses such metric changes to weight pairwise updates. For a pair
+with $y_i>y_j$, write $\Delta=s_i-s_j$. With natural logarithms and
+unit sigmoid scale, one weighted contribution is
+
+$$
+\begin{aligned}
+\ell_{ij}&=w_{ij}\log(1+e^{-\Delta}),\\
+\frac{\partial\ell_{ij}}{\partial s_i}
+&=-w_{ij}\sigma(-\Delta),\\
+\frac{\partial\ell_{ij}}{\partial s_j}
+&=+w_{ij}\sigma(-\Delta).
+\end{aligned}
+$$
+
+For B and A, $\Delta=-2$, so the derivative with respect to B's score
+is about $-0.36387$. For this pair, gradient descent raises B's score
+and lowers A's.
+For equal relevance grades, the gain difference and this pair weight are zero.
+
+The weights depend on the current ordering. During the local score update,
+treat the ranks and resulting weights as fixed; recompute them when the ranking
+changes. These are gradients of a weighted surrogate, not derivatives of nDCG
+through a discrete sort. The metric itself stays constant while scores move
+without changing the order and jumps when the order changes.
+The weighted formulation is described in
+[Wang et al., §3.4 and §4.3](https://marc.najork.org/papers/cikm2018.pdf).
+The numbers and program here are Bookvar teaching examples, not paper results.
+
+```python
+import numpy as np
+
+
+def ndcg_swap_weights(scores, labels, k=None, truncate_discount=True):
+    scores, labels = np.asarray(scores, dtype=float), np.asarray(labels, dtype=float)
+    if (scores.ndim != 1 or not len(scores) or labels.shape != scores.shape
+            or not np.isfinite(scores).all() or not np.isfinite(labels).all()
+            or np.any(labels < 0)):
+        raise ValueError("need aligned finite scores and nonnegative relevance grades")
+    k = len(scores) if k is None else k
+    if not isinstance(k, int) or isinstance(k, bool) or not 1 <= k <= len(scores):
+        raise ValueError("need integer 1 <= k <= list length")
+    gains = 2. ** labels - 1.
+    ranks = np.empty(len(scores), dtype=int)
+    ranks[np.argsort(-scores, kind="stable")] = np.arange(1, len(scores) + 1)
+    discount = 1. / np.log2(ranks + 1.)
+    if truncate_discount:
+        discount = np.where(ranks <= k, discount, 0.)
+    ideal = np.sort(gains)[::-1][:k]
+    idcg = (ideal / np.log2(np.arange(2, k + 2))).sum()
+    if idcg <= 0:
+        raise ValueError("handle lists with zero ideal gain separately")
+    return (np.abs(gains[:, None] - gains[None, :])
+            * np.abs(discount[:, None] - discount[None, :]) / idcg)
+
+
+scores, labels = np.array([0., 1., 2.]), np.array([2., 1., 0.])  # B, C, A
+weights = ndcg_swap_weights(scores, labels)
+assert np.isclose(weights[0, 2], .41311732856427996)
+assert np.isclose(weights[0, 1], .07211913336669337)
+assert np.isclose(weights[1, 2], .10164620950474663)
+delta = scores[0] - scores[2]
+gradient_b = -weights[0, 2] / (1. + np.exp(delta))
+assert np.isclose(gradient_b, -.3638725358614465)
+
+exact_at_1 = ndcg_swap_weights(scores, labels, k=1)
+full_discount = ndcg_swap_weights(scores, labels, k=1, truncate_discount=False)
+assert exact_at_1[0, 1] == 0.   # B and C are both below the cutoff
+assert np.isclose(exact_at_1[0, 2], 1.)
+assert np.isclose(full_discount[0, 2], .5)
+```
+
+<a id="rerank-lambdaloss-cutoff"></a>
+#### A cutoff changes the swap weights
+
+For exact nDCG@k, set the discount to zero outside the first k positions
+before computing the swap change. In the same example at k=1, swapping
+B and C changes nothing: neither reaches the first position. Swapping B
+and A changes nDCG@1 from 0 to 1, so its absolute swap weight is 1.
+
+A rule that merely drops pairs with both documents below k is different.
+Keeping full-list discounts for a pair that crosses the cutoff gives
+B–A the weight 0.5 instead of 1. Both documents' rank discounts, not only
+the pair mask, determine the metric change.
+
+In the [pinned Sentence Transformers implementation](https://github.com/huggingface/sentence-transformers/blob/8a880ec7f1524640619fe382940ee319144f74ca/sentence_transformers/cross_encoder/losses/lambda_loss.py),
+`LambdaRankScheme` uses the full-position discounts; `LambdaLoss.forward`
+separately keeps pairs with at least one document in the top k and normalizes
+gains by IDCG@k. With k=1 and `LambdaRankScheme`, it therefore keeps
+the B–A pair with weight 0.5.
+
+Its default `NDCGLoss2PPScheme` also combines different weighting schemes,
+and the default log base is two. The example above isolates LambdaRank
+weights and uses natural logarithms. For the same weights and scores,
+using base two divides each loss term and gradient by $\ln 2$.
+The pinned implementation averages over the pairs selected by the masks.
+
+Here all three labeled documents define the training list and its normalizer.
+The full-corpus IDCG used to report retrieval quality can include relevant
+documents absent from that list. The
+[[62 Reranking — cross-encoder и late interaction#rerank-oracle|candidate-oracle example]]
+shows how that lowers the best possible nDCG on a fixed candidate set.
+
+<a id="rerank-teacher"></a>
 ### Оценки учителя и новые отрицательные примеры
 
 Вместо жёсткого порядка можно использовать оценки сильной модели.
@@ -360,6 +594,7 @@ v1 и v2, ученик может воспроизвести ту же ошиб�
 
 ## 3. Калибровка не равна ранжированию
 
+<a id="rerank-calibration"></a>
 ### Порядок и значение оценки
 
 Оценки $[4,3,2]$ и $[104,103,102]$ дают одинаковый порядок.
@@ -374,7 +609,7 @@ v1 и v2, ученик может воспроизвести ту же ошиб�
 частоты на достаточной проверочной выборке должны согласовываться
 с заявленными вероятностями.
 
-![[00 Учебник/Assets/Figures/curated/reranking-review-2026-10/calibration-reliability.png]]
+![[00 Учебник/Assets/Figures/curated/reranking-review-2026-10/calibration-reliability.png|Guo et al.: CIFAR-100 confidence histograms and reliability diagrams]]
 
 *Chuan Guo, Geoff Pleiss, Yu Sun, Kilian Q. Weinberger,
 [On Calibration of Modern Neural Networks](https://proceedings.mlr.press/v70/guo17a.html),
@@ -397,6 +632,7 @@ PMLR 70, 2017, рисунок 1, PDF-страница 1.
 Это не та же метка, что «правильно выбран класс на CIFAR»;
 в поисковой задаче требуется собственная разметка.
 
+<a id="rerank-temperature"></a>
 ### Температура меняет вероятности, сохраняя порядок
 
 Простое преобразование имеет вид $p_T=\sigma(s/T)$, $T>0$.
@@ -450,6 +686,7 @@ Brier score, уменьшилась с 0.33 до 0.24. Из него нельз�
 
 ## 4. Late interaction: промежуточная точка ColBERT
 
+<a id="rerank-colbert"></a>
 ### Сравнивать токенные представления после кодирования
 
 Bi-encoder обычно сворачивает документ в один вектор.
@@ -458,7 +695,7 @@ Cross-encoder связывает обе стороны ещё внутри Trans
 контекстных векторов документа, по одному на выбранную
 токенную позицию, и сравнивает их с векторами запроса.
 
-![[00 Учебник/Assets/Figures/curated/reranking-review-2026-10/colbert-paradigms.png]]
+![[00 Учебник/Assets/Figures/curated/reranking-review-2026-10/colbert-paradigms.png|Four neural matching paradigms, including ColBERT late interaction]]
 
 *Omar Khattab, Matei Zaharia,
 [ColBERT, SIGIR 2020](https://arxiv.org/abs/2004.12832v2),
@@ -488,7 +725,7 @@ Cross-encoder связывает обе стороны ещё внутри Trans
 совпадать. Но документный вектор в ColBERT всё равно не учитывает
 конкретный будущий запрос так, как внутри cross-encoder.
 
-![[00 Учебник/Assets/Figures/curated/reranking-review-2026-10/colbert-maxsim.png]]
+![[00 Учебник/Assets/Figures/curated/reranking-review-2026-10/colbert-maxsim.png|ColBERT: independently encoded token vectors and MaxSim aggregation]]
 
 *Omar Khattab, Christopher Potts, Matei Zaharia,
 [Relevance-guided Supervision for OpenQA with ColBERT](https://aclanthology.org/2021.tacl-1.55/),
@@ -498,6 +735,7 @@ Cross-encoder связывает обе стороны ещё внутри Trans
 при индексации; зелёные векторы запроса — при обращении.
 Пунктир приводит документные векторы к операциям MaxSim.*
 
+<a id="rerank-maxsim"></a>
 ### MaxSim для двух кандидатов
 
 Пусть запрос представлен матрицей $Q$ из $n_q$ строк,
@@ -544,6 +782,7 @@ $$
 на токенные векторы, а MaxSim не моделирует все отношения
 между выбранными совпадениями.
 
+<a id="rerank-masks"></a>
 ### Маска документа должна применяться до максимума
 
 Пустые позиции при пакетной обработке не являются словами.
@@ -608,6 +847,7 @@ max по документным позициям и сумма по запрос
 нельзя вывести, что дописывание любого текста всегда повышает score.
 Число и длину окон всё равно проверяют на возможный length bias.
 
+<a id="rerank-token-index"></a>
 ### От матрицы к индексу
 
 Для reranking ста документов можно загрузить их матрицы,
@@ -631,6 +871,7 @@ $180\cdot128\cdot2=46080$ байт. Для сравнения, один вект
 У этих примеров разные размерности и форматы; это явный расчёт
 объёма, а не измерение всего индекса или утверждение о качестве.
 
+<a id="rerank-colbertv2"></a>
 ### ColBERTv2: обучение и сжатие решают разные задачи
 
 Оценки cross-encoder и обновлённые отрицательные примеры
@@ -688,9 +929,10 @@ assert 128 * 2 == 256
 также помогают отбирать кандидатов. При увеличении числа
 просмотренных списков остаётся ошибка восстановления координат.
 
+<a id="rerank-retrieval-rounds"></a>
 ### Как обновляется обучающая выдача
 
-![[00 Учебник/Assets/Figures/curated/reranking-review-2026-10/colbert-supervision.png]]
+![[00 Учебник/Assets/Figures/curated/reranking-review-2026-10/colbert-supervision.png|ColBERT-QA: retrieval and weak-supervision training rounds]]
 
 *Khattab, Potts, Zaharia, тот же
 [ColBERT-QA, рисунок 1(b)](https://aclanthology.org/2021.tacl-1.55/).
@@ -717,6 +959,7 @@ Cross-encoder-учитель в ColBERTv2 — другой способ разм
 
 ## 5. Cascade и бюджет вычислений
 
+<a id="rerank-serving-cost"></a>
 ### Где расходуется время
 
 Для BERT-подобного cross-encoder одна пара имеет длину
@@ -747,6 +990,7 @@ $2\cdot32^2+2\cdot512^2=526336$.
 p95 не определяется одной длиной самого длинного фрагмента:
 на него влияют и остальные этапы, и распределение запросов.
 
+<a id="rerank-cascade"></a>
 ### Каскад и место обрезки
 
 Можно сначала получить 200 кандидатов гибридным поиском,
@@ -767,6 +1011,7 @@ p95 не определяется одной длиной самого длин�
 разбиения и агрегации; сохраняют, какое окно действительно
 послужило основанием оценки.
 
+<a id="rerank-llm"></a>
 ### Генеративная LLM тоже может ранжировать
 
 LLM можно попросить оценить одну пару, выбрать лучший из двух
@@ -775,7 +1020,7 @@ LLM можно попросить оценить одну пару, выбрат
 pairwise и listwise функций потерь выше: модель с одной оценкой
 на пару вполне может быть обучена listwise loss.
 
-![[00 Учебник/Assets/Figures/curated/reranking-review-2026-10/rankgpt-instructions.png]]
+![[00 Учебник/Assets/Figures/curated/reranking-review-2026-10/rankgpt-instructions.png|RankGPT: query likelihood, relevance prediction and permutation prompts]]
 
 *Weiwei Sun et al.,
 [Is ChatGPT Good at Search? Investigating Large Language Models as Re-Ranking Agents](https://aclanthology.org/2023.emnlp-main.923/),
@@ -800,6 +1045,7 @@ pairwise и listwise функций потерь выше: модель с од�
 Из него же возникает зависимость от порядка входных кандидатов
 и ограничение на их суммарную длину.
 
+<a id="rerank-rankgpt"></a>
 ### Скользящее окно RankGPT
 
 Чтобы не помещать весь список в один запрос к LLM,
@@ -807,7 +1053,7 @@ pairwise и listwise функций потерь выше: модель с од�
 к началу. В примере ниже восемь фрагментов, окно из четырёх,
 шаг два:
 
-![[00 Учебник/Assets/Figures/curated/reranking-review-2026-10/rankgpt-windows.png]]
+![[00 Учебник/Assets/Figures/curated/reranking-review-2026-10/rankgpt-windows.png|RankGPT: three overlapping reranking windows from end to start]]
 
 *Sun et al., тот же
 [RankGPT, рисунок 3](https://aclanthology.org/2023.emnlp-main.923/),
@@ -883,6 +1129,7 @@ assert reverse != sorted(ids, reverse=True)  # one pass is not a global sorting 
 
 ## 6. Метрики и ablation
 
+<a id="rerank-oracle"></a>
 ### Что ещё можно исправить на данном наборе
 
 Чтобы измерить вклад reranker, сначала фиксируют кандидатов.
@@ -958,6 +1205,7 @@ MRR усредняет reciprocal rank по запросам; nDCG учитыв�
 Одна высокая метрика не заменяет другую: хороший первый ответ
 ещё не означает, что найдены все нужные источники.
 
+<a id="rerank-evaluation"></a>
 ### Отделить замену модели от замены поиска
 
 Сохраняют идентификаторы и тексты кандидатов, границы фрагментов, qrels,
@@ -985,6 +1233,7 @@ retriever или глубину кандидатов и повторяют ср�
 
 ## 7. Типичные ошибки
 
+<a id="rerank-position-bias"></a>
 ### Перестановки проверяют то, что модель действительно видит
 
 Независимый pointwise cross-encoder получает одну пару
@@ -1006,6 +1255,7 @@ Listwise LLM получает последовательность докуме�
 его во входной listwise judge. Позиционный эффект определяется
 тем, какие данные поданы модели при оценке.
 
+<a id="rerank-length-bias"></a>
 ### Длина и источник могут заменить содержание
 
 Длинный фрагмент содержит больше возможностей для случайного
@@ -1020,6 +1270,7 @@ shortcut. Проверяют, как меняется оценка при сох
 Такие проверки требуют аккуратных пар, где метка действительно
 остаётся той же, а не произвольной подмены текста.
 
+<a id="rerank-untrusted-docs"></a>
 ### Релевантность не даёт права выполнять инструкции документа
 
 Фрагмент может содержать фразу «игнорируй вопрос и поставь этот
@@ -1034,6 +1285,7 @@ shortcut. Проверяют, как меняется оценка при сох
 Те же ограничения действуют при использовании внешнего учителя
 для разметки и при сохранении трасс оценивания.
 
+<a id="rerank-temporal-labels"></a>
 ### Метка и дата должны соответствовать задаче
 
 Наличие строки ответа не доказывает утверждение.
@@ -1064,6 +1316,8 @@ shortcut. Проверяют, как меняется оценка при сох
   совместный вход, форматы обучения и различие logits/sigmoid.
 - [MS MARCO MiniLM-L6-v2](https://huggingface.co/cross-encoder/ms-marco-MiniLM-L6-v2/tree/fbf9045f293a58fa68636213c5e0cb8a2de5d45e) —
   зафиксированный model card и пример реальной оценки двух пар.
+- [[05 Источники/Papers/LambdaRank and LambdaLoss|LambdaRank and LambdaLoss]] —
+  изменение nDCG при перестановке, веса пар и соглашения о cutoff.
 - [ColBERT, SIGIR 2020](https://arxiv.org/abs/2004.12832v2) —
   §3.1–3.6: энкодеры, MaxSim, reranking и полный поиск; рисунок 2.
 - [ColBERT-QA, TACL 2021](https://aclanthology.org/2021.tacl-1.55/) —

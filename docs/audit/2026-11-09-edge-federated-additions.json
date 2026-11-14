@@ -1,0 +1,155 @@
+{
+  "date": "2026-11-09",
+  "scope": "Full canonical Edge/FL owner read; worked examples for overlapping secure aggregates, user-level weighted update sensitivity and buffered asynchronous aggregation; original FedBuff Figure 2, nine subject anchors per locale, no release.",
+  "review": {
+    "sources": [
+      "So et al., AAAI 2023, §§3.1–3.2, participant-vector example, fixed local update assumption.",
+      "McMahan et al., ICLR 2018, arXiv v3, §2 (bounded-sensitivity weighted queries) and Appendix A (fixed denominator part of Lemma 1).",
+      "Nguyen et al., AISTATS 2022, Figure 2, §3 / Algorithms 1–2, §5 staleness scaling. Exact PDF and figure hashes, crop and license evidence in asset registry.",
+      "Inherited Edge review archived the selected TinyTL, FedAvg, LiteRT, Harvard and Dwork/Roth sections. No full Harvard transfer or target-runtime acceptance claimed."
+    ],
+    "local_checks": "2017 pages built; 715 publication tests, 220 built-output tests and 178 asset-registry tests passed; zero broken internal routes, files, or fragments. The Edge checker executed seven Python blocks and 1200 prior independent fixtures plus the three new calculations, verified original hashes and re-rendered four PDF crops byte-for-byte.",
+    "reader": "At 375 and 1280 px, verified 9 subject links per locale, followed the three new explanation sections in both shells and opened all eight originals with their captions. Checked mobile zoom and horizontal pan for TinyTL, Harvard Secure Aggregation and FedBuff. Inspected the rendered desktop FedBuff figure, its mobile zoom, and the mobile weighted-sensitivity equation.",
+    "limits": "Numerical examples only, not a privacy budget, crypto implementation, fleet benchmark, or target-device result. Chapter is canonical RU with EN fallback; no translation, release, or push."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md",
+      "before_sha256": "c5505f93fc2e94051abe3220664683c3c39ffd7d5d2ea7acbf13a9885d8e5c77",
+      "after_sha256": "78783055217e07435987b2170d060d3a101d611d01a166135adf5add98c02640",
+      "changes": [
+        {
+          "old": "last_verified: 2026-10-27\nprimary_sources:",
+          "new": "last_verified: 2026-11-09\nreference_terms:\n  - label: Tensor arena — память тензоров на микроконтроллере\n    label_en: Tensor arena — microcontroller tensor memory\n    anchor: edge-tensor-arena\n  - label: TinyTL — замороженные веса и память активаций\n    label_en: TinyTL — frozen weights and activation memory\n    anchor: edge-tinytl\n  - label: LiteRT — сохранение и восстановление локальных весов\n    label_en: LiteRT — saving and restoring on-device weights\n    anchor: edge-litert-checkpoint\n  - label: FedAvg — усреднение клиентских обновлений\n    label_en: FedAvg — averaging client updates\n    anchor: edge-fedavg\n  - label: Федеративное обучение — отстающие клиенты и смещение отбора\n    label_en: Federated learning — stragglers and selection bias\n    anchor: edge-client-selection\n  - label: Безопасная агрегация — маски и пересекающиеся группы\n    label_en: Secure aggregation — masks and overlapping cohorts\n    anchor: edge-secure-aggregation\n  - label: DP-FedAvg — чувствительность взвешенного обновления\n    label_en: DP-FedAvg — sensitivity of a weighted update\n    anchor: edge-weighted-dp\n  - label: FedBuff — буфер и запаздывающие обновления\n    label_en: FedBuff — buffered asynchronous aggregation\n    anchor: edge-fedbuff\n  - label: Edge — оценивание и откат модели на устройствах\n    label_en: Edge deployment — on-device evaluation and rollback\n    anchor: edge-evaluation-rollback\nprimary_sources:"
+        },
+        {
+          "old": "  - https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf",
+          "new": "  - https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf\n  - https://proceedings.mlr.press/v151/nguyen22b.html\n  - https://ojs.aaai.org/index.php/AAAI/article/view/26177\n  - https://arxiv.org/abs/1710.06963v3"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/tinytl-memory-figure1.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/tinytl-memory-figure1.png|Слева память ResNet-50 при инференсе и обучении с разными батчами; справа память параметров и активаций ResNet-50 и MobileNetV2 при обучении]]"
+        },
+        {
+          "old": "<!-- BEGIN REVIEW: Micro arena 2026-10-27 -->\n## Microcontroller inference: planning a tensor arena",
+          "new": "<!-- BEGIN REVIEW: Micro arena 2026-10-27 -->\n<a id=\"edge-tensor-arena\"></a>\n\n## Microcontroller inference: planning a tensor arena"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/micro-runtime-2026-10-27/model-buffer-and-arena.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/micro-runtime-2026-10-27/model-buffer-and-arena.png|Отдельные буферы сериализованной модели и tensor arena; неизменяемые данные тензоров могут указывать в буфер модели]]"
+        },
+        {
+          "old": "## Почему замороженные веса могут уменьшить память обратного прохода",
+          "new": "<a id=\"edge-tinytl\"></a>\n\n## Почему замороженные веса могут уменьшить память обратного прохода"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/tinytl-activation-figure2.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/tinytl-activation-figure2.png|Три блока TinyTL: полное дообучение, обучение смещений и уменьшенная остаточная ветвь. Закрашены обучаемые параметры и сохраняемые активации]]"
+        },
+        {
+          "old": "## Локальное обучение должно переживать перезапуск приложения",
+          "new": "<a id=\"edge-litert-checkpoint\"></a>\n\n## Локальное обучение должно переживать перезапуск приложения"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/litert-checkpoint.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/litert-checkpoint.png|Логиты одного входа до и после восстановления весов из checkpoint]]"
+        },
+        {
+          "old": "### Взвешенное среднее и выпадение клиента",
+          "new": "<a id=\"edge-fedavg\"></a>\n\n### Взвешенное среднее и выпадение клиента"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/fedavg-initialization-figure1.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/fedavg-initialization-figure1.png|Loss по мере усреднения параметров двух сетей: при общей инициализации провал качества между исходными моделями меньше]]"
+        },
+        {
+          "old": "## Выбор участников, задержки и сетевой обмен",
+          "new": "<a id=\"edge-client-selection\"></a>\n\n## Выбор участников, задержки и сетевой обмен"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/harvard-stragglers.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/harvard-stragglers.svg|Сервер принимает первые K клиентских обновлений, закрывает раунд, поздний ответ остаётся за пределами раунда]]"
+        },
+        {
+          "old": "### Что скрывает безопасная агрегация",
+          "new": "<a id=\"edge-secure-aggregation\"></a>\n\n### Что скрывает безопасная агрегация"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/harvard-secure-agg.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edge-review-2026-10/harvard-secure-agg.svg|Два клиента отправляют обновления с противоположными масками; при сложении маски сокращаются]]"
+        },
+        {
+          "old": "может ограничить доступные серверу методы их проверки.\n\n### Дифференциальная приватность и накопление гарантии",
+          "new": "может ограничить доступные серверу методы их проверки.\n\nДопустим, сервер трижды получает только сумму двух клиентов. В первом\nраунде участвуют клиенты 1 и 2, во втором — 2 и 3, в третьем — 1 и 3.\nЕсли их вклады остались равны $5$, $7$ и $-2$, сервер видит суммы $12$,\n$5$ и $3$. Из первой и третьей сумм можно вычесть вторую: вклад первого\nклиента вошёл дважды, а вклады второго и третьего сократились.\n\n$$\nu_1=\\frac{s_{12}+s_{13}-s_{23}}{2}\n    =\\frac{12+3-5}{2}=5.\n$$\n\nОставшиеся вклады получаются вычитанием: $s_{12}-5=7$ и $s_{13}-5=-2$.\nВо всех трёх раундах порог в два участника выполнен. Утечку создаёт\nсочетание точных агрегатов и известных составов групп, а не нарушение\nпротокола маскирования. Точное восстановление в этом примере требует\nодинакового вклада каждого клиента в разных раундах. При меняющихся\nвкладах те же три уравнения уже не дают точного решения. В\n[So et al., §§3.1–3.2](https://ojs.aaai.org/index.php/AAAI/article/download/26177/25949#page=3)\nразобрано, как составы групп влияют на то, какие вклады можно восстановить.\nНапример, если двух клиентов всегда включают вместе, эта система уравнений\nне разделяет их вклады. Это ограничение конкретного способа восстановления,\nа не гарантия дифференциальной приватности.\n\n### Дифференциальная приватность и накопление гарантии"
+        },
+        {
+          "old": "К результату добавляют шум, согласованный с чувствительностью и требуемой",
+          "new": "<a id=\"edge-weighted-dp\"></a>\n\n#### Чувствительность при разных весах клиентов\n\nПусть граница нормы $C=2$, а в буфере пока один клиент: у него один\nпример и скалярное обновление $+2$. Взвешенное среднее равно $2$.\nДобавим клиента с 99 примерами и обновлением $-2$. Норма каждого обновления\nпо-прежнему не больше двух, но среднее меняется:\n\n$$\n\\frac{1\\cdot2+99\\cdot(-2)}{1+99}=-1.96.\n$$\n\nРазность равна $3.96$. Новый клиент добавил слагаемое в числитель и\nуменьшил долю прежнего клиента с $1$ до $1/100$. При неотрицательных\nвесах и ненулевом знаменателе обе средние лежат в шаре радиуса $C$,\nпоэтому $2C$ остаётся грубой границей; делить её на число клиентов\nпо формуле для равных весов здесь нельзя.\n\nОдин из вариантов DP-FedAvg ограничивает вес каждого клиента,\nнапример $w_k=\\min(n_k/100,1)$, и делит сумму $w_k\\bar u_k$ на\nзаранее заданный знаменатель $D>0$. Знаменатель должен быть одинаковым\nдля соседних наборов данных. При добавлении пользователя меняется только\nодно слагаемое, поэтому изменение не превышает $C/D$. При $D=2$\nпервый клиент даёт $0.01$, оба вместе дают $-0.98$, а разность $0.99$\nне превышает $C/D=1$. Это оценка с фиксированным знаменателем,\nа не точное среднее по пришедшим обновлениям. Если вес выборки оказался\nменьше ожидаемого, величина шага тоже меняется. См.\n[McMahan et al., §2, Lemma 1 и Appendix A](https://arxiv.org/pdf/1710.06963v3#page=4).\n\nК результату добавляют шум, согласованный с чувствительностью и требуемой"
+        },
+        {
+          "old": "Асинхронные федеративные методы допускают запаздывающие обновления по\nсобственным правилам. Синхронный FedAvg не превращается в такой метод после\nудаления проверки версии. Допустимое запаздывание, вес устаревшего обновления\nи точку, относительно которой вычислена разность, задают в алгоритме.",
+          "new": "<a id=\"edge-fedbuff\"></a>\n\n### FedBuff: асинхронные клиенты, обновление сервера по буферу\n\nВ синхронном раунде клиенты начинают с одной модели. По мере поступления\nответов число ещё обучающихся клиентов уменьшается. Пока сервер ждёт\nдостаточно ответов, освободившееся место не обязательно используется новым\nклиентом того же раунда. В асинхронном режиме новый клиент может начать работу,\nпока другие заканчивают обучение. На рисунке это видно по числу одновременно\nработающих клиентов, а не по качеству модели.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fedbuff-2026-11-09/fedbuff-concurrency-figure2.png|При синхронных раундах число обучающихся клиентов падает во время ожидания отстающих; при асинхронном запуске остаётся около предела параллелизма]]\n\n*John Nguyen et al., [Federated Learning with Buffered Asynchronous Aggregation](https://proceedings.mlr.press/v151/nguyen22b.html),\nAISTATS 2022, PMLR 151:3581–3607, [Figure 2, PDF p. 3](https://proceedings.mlr.press/v151/nguyen22b/nguyen22b.pdf#page=3),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Схема перенесена\nиз PDF без перерисовки; убраны окружающий текст и поля. Она сравнивает\nдва режима допуска клиентов и не задаёт частоту серверных шагов FedBuff.*\n\nFedBuff разделяет запуск локального обучения и обновление общей модели.\nПусть одновременно учатся три клиента, а сервер делает шаг после каждых\n$K=2$ ответов. Начальная модель $w_{17}=2$. Клиенты A и B завершают работу\nпервыми с поправками $+0.4$ и $+0.2$. При простом среднем и серверном шаге\nс коэффициентом $1$ получается $w_{18}=2.3$. Клиент C ещё учится\nна версии 17. Пока он работает, клиент D начинает с версии 18.\n\nВ следующий буфер приходят $-0.2$ от C и $+0.4$ от D. Перед шагом\nу C запаздывание в одну серверную версию, у D — ноль. При равных весах\nсредняя поправка равна $0.1$, поэтому сервер получает $w_{19}=2.4$.\nЕсли вместо поправок усреднить конечные локальные параметры $1.8$ и $2.7$,\nполучится $2.25$: тогда в результат попадёт и старая точка старта клиента C.\nВ описании статьи знак клиентской разности выбран наоборот и сервер\nвычитает её; здесь сохранено обозначение $u_k=\\theta_k-\\theta^{\\text{base}}$.\n\nПри заметном запаздывании поправку можно ослабить. В\n[§5 статьи](https://proceedings.mlr.press/v151/nguyen22b/nguyen22b.pdf#page=6)\nпредложен множитель $1/\\sqrt{1+\\tau}$, где $\\tau$ — число прошедших\nсерверных шагов, а не время в секундах. Размер буфера задаёт частоту\nсерверных шагов, но не равен числу одновременно обучающихся клиентов.\nСамо ожидание $K$ ответов не скрывает обновления: для этого нужен\nкриптографический протокол или защищённая среда выполнения. Значение $K=2$\nздесь выбрано для расчёта, а не как рекомендация по приватности.\n[[05 Источники/Papers/Federated Learning with Buffered Asynchronous Aggregation|Статья и указатель к алгоритмам 1–2]]."
+        },
+        {
+          "old": "<a id=\"distributed-validation-и-rollback\"></a>",
+          "new": "<a id=\"distributed-validation-и-rollback\"></a>\n<a id=\"edge-evaluation-rollback\"></a>"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "25f8a4d2881ba6950ee1d96b69f2a9050e409fd6cf1d29ce3e20ba9378aaf0ab",
+      "after_sha256": "fd5fa30c77bd8c36001a7269c335bd08991a0cb09779aa3386eba6300eeb1ff1",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment|Развёртывание на периферийных устройствах и федеративное обучение]]",
+          "new": "- [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment|Развёртывание на периферийных устройствах и федеративное обучение]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-tensor-arena|Tensor arena — память тензоров на микроконтроллере]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-tinytl|TinyTL — замороженные веса и память активаций]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-litert-checkpoint|LiteRT — сохранение и восстановление локальных весов]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-fedavg|FedAvg — усреднение клиентских обновлений]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-client-selection|Федеративное обучение — отстающие клиенты и смещение отбора]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-secure-aggregation|Безопасная агрегация — маски и пересекающиеся группы]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-weighted-dp|DP-FedAvg — чувствительность взвешенного обновления]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-fedbuff|FedBuff — буфер и запаздывающие обновления]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-evaluation-rollback|Edge — оценивание и откат модели на устройствах]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "65511d7a82c6a507c09821896d28e6fe15031060d9438c65ae1f88970f3f454b",
+      "after_sha256": "24a3c142deeb51ac22e38e080073e1a4f41662f30dcb94e2a62d0e584e4a0949",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment|Edge and federated deployment]]",
+          "new": "- [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment|Edge and federated deployment]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-tensor-arena|Tensor arena — microcontroller tensor memory]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-tinytl|TinyTL — frozen weights and activation memory]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-litert-checkpoint|LiteRT — saving and restoring on-device weights]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-fedavg|FedAvg — averaging client updates]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-client-selection|Federated learning — stragglers and selection bias]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-secure-aggregation|Secure aggregation — masks and overlapping cohorts]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-weighted-dp|DP-FedAvg — sensitivity of a weighted update]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-fedbuff|FedBuff — buffered asynchronous aggregation]]\n  - [[00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment#edge-evaluation-rollback|Edge deployment — on-device evaluation and rollback]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "415add53e4f5a782dff9768a9bd4849c32776837e4ca29c588d21c804625610f",
+      "after_sha256": "e966ae104bb6fe6b45b4566afac20fe3e3ce876d50276b0287def08e9e17cc4b",
+      "changes": [
+        {
+          "old": "    source_image_url: \"https://developers.google.com/static/edge/litert/conversion/tensorflow/build/ondevice_training_files/output_fjiUbx7zIoLq_0.png\"",
+          "new": "    source_image_url: \"https://developers.google.com/static/edge/litert/conversion/tensorflow/build/ondevice_training_files/output_fjiUbx7zIoLq_0.png\"\n  - id: \"curated-edge-fedbuff-concurrency-figure2-f9457ab23f9d\"\n    asset: \"00 Учебник/Assets/Figures/curated/fedbuff-2026-11-09/fedbuff-concurrency-figure2.png\"\n    author: \"John Nguyen, Kshitiz Malik, Hongyuan Zhan, Ashkan Yousefpour, Mike Rabbat, Mani Malek, Dzmitry Huba\"\n    source_url: \"https://proceedings.mlr.press/v151/nguyen22b.html\"\n    source_figure_label: \"Figure 2, PDF p. 3\"\n    source_asset: \"05 Источники/Originals/fedbuff-2026-11-09/nguyen22b.pdf\"\n    source_asset_sha256: \"3c2764067cecb4727fc33dc9de9c3a73f31d2794cb7f557457506faf470a474b\"\n    sha256: \"f9457ab23f9d443a7b4805da9e0cc278ab2d0a1c48cb2139f6b292aa5ce8333b\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/edge-2026-10-20/pmlr-license.html\"\n    license_evidence_sha256: \"1c8123a6c840ca2752e383f0924fa23ba38552140a2cc54f69ea9df5acfcdd3d\"\n    derivation: \"pdf-page-render-crop\"\n    provenance_confirmation: \"licensed-paper-figure\"\n    metadata_status: \"verified\"\n    modifications: \"Direct source PDF rendering and rectangular crop; only surrounding text and page margins removed. No redrawing, translation, bitmap upscaling or label modification.\"\n    used_in: [\"00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md\"]\n    last_verified: \"2026-11-09\"\n    source_page: 3\n    crop_box_px: [455,2090,2275,2840]\n    render_page_size_px: [4637,6000]\n    render_options: {\"scale_to\":6000,\"x\":455,\"y\":2090,\"width\":1820,\"height\":750}"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "f541f119c1466b67718c0b5263cdeb45342957cdf39182e41fe4a9e29fa0e635",
+      "after_sha256": "7ea5a248ee74ae47e177f2ae7536be18702ecce3bdf203c644e2a776aedb9950",
+      "changes": [
+        {
+          "old": "        route: sources/papers/lambdarank-lambdaloss",
+          "new": "        route: sources/papers/lambdarank-lambdaloss\n      - source: 05 Источники/Papers/Federated Learning with Buffered Asynchronous Aggregation.md\n        route: sources/papers/fedbuff"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/_index.md",
+      "before_sha256": "228781aac5523793443973ef034563fe679547a14f3c3b635ab67805d322ae40",
+      "after_sha256": "92d2784c74e129a0dbde4d68e6452e08fa2d8720275da61c97ff2c76bbd05940",
+      "changes": [
+        {
+          "old": "- [[05 Источники/Papers/LambdaRank and LambdaLoss|LambdaRank and LambdaLoss — nDCG pair weights and cutoff conventions]]",
+          "new": "- [[05 Источники/Papers/LambdaRank and LambdaLoss|LambdaRank and LambdaLoss — nDCG pair weights and cutoff conventions]]\n- [[05 Источники/Papers/Federated Learning with Buffered Asynchronous Aggregation|FedBuff — buffered asynchronous federated learning]]"
+        }
+      ]
+    }
+  ]
+}

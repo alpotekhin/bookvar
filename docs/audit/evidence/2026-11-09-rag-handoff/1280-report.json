@@ -1,0 +1,267 @@
+{
+  "url": "http://127.0.0.1:4330/textbook/rag/full-pipeline/",
+  "width": 1280,
+  "height": 900,
+  "figures": [
+    {
+      "index": 0,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/rag-review-2026-10/rag-sequence-token.png",
+      "alt": "rag-sequence-token",
+      "natural": [
+        1615,
+        485
+      ],
+      "display": [
+        1195,
+        358.8671875
+      ],
+      "viewport": [
+        1227,
+        701
+      ],
+      "scroll": [
+        1227,
+        701
+      ],
+      "caption": "Patrick Lewis et al., Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks, рисунок 1.\nУвеличенный crop исходной иллюстрации, без перерисовки. Query Encoder\nзадаёт оценки документов; MIPS находит кандидатов; генератор обрабатывает\nих по отдельности, а блок Marginalize объединяет вероятности.\nПунктир сверху показывает обучение query encoder и генератора.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-rag-handoff/1280-figure-00.png"
+    },
+    {
+      "index": 1,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-first-60-64/hf-rag-evaluation-workflow.png",
+      "alt": "hf-rag-evaluation-workflow",
+      "natural": [
+        2444,
+        2106
+      ],
+      "display": [
+        776.3671875,
+        668.9921875
+      ],
+      "viewport": [
+        1227,
+        701
+      ],
+      "scroll": [
+        1227,
+        701
+      ],
+      "caption": "Aymeric Roucher, Hugging Face, RAG Evaluation cookbook.\nВерхняя часть — подготовка фрагментов, векторов и индекса; нижняя —\nпуть запроса через поиск к генератору. Синие подписи обозначают параметры\nэксперимента. Схема не включает управление правами и версиями:\nэти проверки нужны дополнительно. Оригинальное изображение сохранено\nбез изменений.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-rag-handoff/1280-figure-01.png"
+    },
+    {
+      "index": 2,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m03-p31-hipporag-index-and-retrieval.png",
+      "alt": "m03-p31-hipporag-index-and-retrieval",
+      "natural": [
+        1920,
+        1080
+      ],
+      "display": [
+        1189.328125,
+        668.9921875
+      ],
+      "viewport": [
+        1227,
+        701
+      ],
+      "scroll": [
+        1227,
+        701
+      ],
+      "caption": "Yu Su, Berkeley Advanced LLM Agents, слайд 31,\nпо рисунку 2 HippoRAG. Верхний ряд показывает извлечение троек\nи связывание сущностей; нижний — обработку запроса и распространение\nвеса по графу. Термины Neocortex и Hippocampus обозначают аналогию\nавторов с памятью, а не биологически точную модель. Сохранён\nоригинальный слайд без перерисовки.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-rag-handoff/1280-figure-02.png"
+    },
+    {
+      "index": 3,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/rag-review-2026-10/lost-middle-position.png",
+      "alt": "lost-middle-position",
+      "natural": [
+        1033,
+        1016
+      ],
+      "display": [
+        700.5234375,
+        688.9921875
+      ],
+      "viewport": [
+        1227,
+        721
+      ],
+      "scroll": [
+        1227,
+        721
+      ],
+      "caption": "Nelson F. Liu et al., Lost in the Middle,\nрисунок 1, CC BY 4.0. Оригинальный график для GPT-3.5-Turbo-0613:\n20 документов, около 4K токенов. По горизонтали меняется только\nместо документа с ответом. Красная линия — результат без документов.\nЭто измерение конкретной модели и постановки, не характеристика\nвсех современных LLM.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-rag-handoff/1280-figure-03.png"
+    },
+    {
+      "index": 4,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/rag-review-2026-10/alce-citation-evaluation.png",
+      "alt": "alce-citation-evaluation",
+      "natural": [
+        1095,
+        1205
+      ],
+      "display": [
+        626.1015625,
+        688.9921875
+      ],
+      "viewport": [
+        1227,
+        721
+      ],
+      "scroll": [
+        1227,
+        721
+      ],
+      "caption": "Tianyu Gao, Howard Yen, Jiatong Yu и Danqi Chen,\nEnabling Large Language Models to Generate Text with Citations,\nрисунок 3, CC BY 4.0. Вверху оценивается поддержка целого утверждения;\nвнизу по очереди удаляются ссылки, чтобы выявить нерелевантные.\nТри утверждения и шесть ссылок дают разные знаменатели.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-rag-handoff/1280-figure-04.png"
+    },
+    {
+      "index": 5,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/rag-review-2026-10/openscholar-inference.png",
+      "alt": "openscholar-inference",
+      "natural": [
+        2025,
+        504
+      ],
+      "display": [
+        1195,
+        297.421875
+      ],
+      "viewport": [
+        1227,
+        721
+      ],
+      "scroll": [
+        1227,
+        721
+      ],
+      "caption": "Akari Asai et al., OpenScholar,\nверхняя часть рисунка 2, CC BY 4.0. Слева собираются и переранжируются\nкандидаты; справа формируются черновик, замечания, дополнительные\nзапросы и новая версия ответа. Панель отделена от схемы обучения\nбез изменения её содержания.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-rag-handoff/1280-figure-05.png"
+    },
+    {
+      "index": 6,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/rag-review-2026-10/openscholar-training.png",
+      "alt": "openscholar-training",
+      "natural": [
+        2025,
+        397
+      ],
+      "display": [
+        1195,
+        234.2734375
+      ],
+      "viewport": [
+        1227,
+        721
+      ],
+      "scroll": [
+        1227,
+        721
+      ],
+      "caption": "Akari Asai et al., OpenScholar, рисунок 2, нижняя панель,\nCC BY 4.0. Сохраняются первоначальные и исправленные ответы,\nзамечания и цитаты. После фильтрации эти примеры обучают\nменьшую модель генерировать ответ, замечания и исправления.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-rag-handoff/1280-figure-06.png"
+    },
+    {
+      "index": 7,
+      "src": "http://127.0.0.1:4330/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-first-60-64/hf-rag-settings-accuracy.png",
+      "alt": "hf-rag-settings-accuracy",
+      "natural": [
+        2114,
+        1416
+      ],
+      "display": [
+        1028.6328125,
+        688.9921875
+      ],
+      "viewport": [
+        1212,
+        721
+      ],
+      "scroll": [
+        1212,
+        721
+      ],
+      "caption": "Aymeric Roucher, HF RAG Evaluation cookbook.\nОригинальный график сравнивает несколько настроек разбиения,\nembedding model, reranking и reader на учебном наборе.\nЭто оценки использованного в notebook судьи, не универсальные\nизмерения точности этих компонентов. Изображение сохранено\nбез изменений.",
+      "scale": "1×",
+      "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-rag-handoff/1280-figure-07.png"
+    }
+  ],
+  "limits": "Headless browser interactions and screenshots; requires separate human visual inspection.",
+  "layout": {
+    "page": [
+      1280,
+      1280
+    ],
+    "mathErrors": 0,
+    "formulas": [
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ]
+    ],
+    "tables": [
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ]
+    ]
+  },
+  "contextScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-rag-handoff/1280-page.png"
+}

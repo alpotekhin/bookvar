@@ -1,0 +1,81 @@
+{
+  "url": "http://127.0.0.1:4330/textbook/rag/full-pipeline/",
+  "width": 375,
+  "height": 812,
+  "navigation": {
+    "from": "/reference/",
+    "href": "http://127.0.0.1:4330/textbook/rag/full-pipeline/#rag-context-budget",
+    "text": "Бюджет контекста и удаление дубликатов",
+    "arrived": "http://127.0.0.1:4330/textbook/rag/full-pipeline/#rag-context-budget",
+    "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-rag-index/ru/375-reference-target.png"
+  },
+  "figures": [],
+  "limits": "Headless browser interactions and screenshots; requires separate human visual inspection.",
+  "layout": {
+    "page": [
+      375,
+      375
+    ],
+    "mathErrors": 0,
+    "formulas": [
+      [
+        343,
+        343
+      ],
+      [
+        343,
+        343
+      ],
+      [
+        343,
+        343
+      ],
+      [
+        343,
+        343
+      ],
+      [
+        343,
+        343
+      ]
+    ],
+    "tables": [
+      [
+        343,
+        350,
+        "visible"
+      ],
+      [
+        343,
+        350,
+        "visible"
+      ],
+      [
+        343,
+        350,
+        "visible"
+      ],
+      [
+        343,
+        350,
+        "visible"
+      ],
+      [
+        343,
+        350,
+        "visible"
+      ],
+      [
+        343,
+        350,
+        "visible"
+      ],
+      [
+        343,
+        350,
+        "visible"
+      ]
+    ]
+  },
+  "contextScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-rag-index/ru/375-page.png"
+}

@@ -1,0 +1,167 @@
+{
+  "revision": "f966c2c9dfdc684e3cf4d338b4af08a75ca8ed1b",
+  "source": {
+    "path": "mlcourse_ai_jupyter_book/book/topic07/topic7_pca_clustering.md",
+    "blob": "b011598423c4426d8c3029362043c9c23742be52",
+    "sha256": "7586fdbd2e09e64f6012a558c7816fda1f3ad8e8a8c727501279a98aa8115420"
+  },
+  "license": {
+    "spdx": "CC-BY-NC-SA-4.0",
+    "path": "LICENSE.md",
+    "blob": "0bbe17e107ad56792a2a995d3f0ece9b7360bccc",
+    "sha256": "7d8eda7c42839e8c2b72519dcf8e128f6cbeac9fb249c0872866368053ec9447"
+  },
+  "plots": {
+    "032f2847b9f513d6d0614f738e666425b0184e10da38cb4400dd8db64303f816": {
+      "asset": "iris-three-features.png",
+      "alt": "Iris points by species in the original sepal length, sepal width and petal length coordinates.",
+      "section": "id7"
+    },
+    "887e5d6b2d134f108dc3debe37f7556a36cb5cf44e9bd9e0304a43eb7c7e9413": {
+      "asset": "iris-two-components.png",
+      "alt": "Iris projected onto two principal components; Setosa separates clearly, while the other two species partly overlap.",
+      "section": "id7"
+    },
+    "1ed697a8fc545b9c4b77491125cbbccdf7e50e4870600a91b56783860f05a293": {
+      "asset": "digits-input.png",
+      "alt": "The first ten images from scikit-learn Digits, displayed as 8 by 8 pixel grids.",
+      "section": "id8"
+    },
+    "7a5b2cec005bff39885d867e486de0291e1a47ec2ff4547539c6e42bd692f051": {
+      "asset": "digits-pca.png",
+      "alt": "Two-component PCA of scikit-learn Digits. The color key identifies digit labels; several classes overlap.",
+      "section": "id8"
+    },
+    "1169af1cfe17392c5aba2683a150b7f6af939b469261cf79ca77f2abfbed5bf9": {
+      "asset": "digits-tsne.png",
+      "alt": "t-SNE of the same 8 by 8 digits; samples of the same label tend to gather into neighborhoods.",
+      "section": "id8"
+    },
+    "f1384088f403e5d88b167cf5ae7b6c764bcf6dc9f673b17390a2e6959606cbb4": {
+      "asset": "digits-explained-variance.png",
+      "alt": "Cumulative explained variance; a horizontal line marks 90 percent and a vertical line is drawn at index 21.",
+      "section": "id8"
+    },
+    "8d0c4e1cf274b337544a14fd085183110f28e9691b2fff352464258f692e00e3": {
+      "asset": "kmeans-input.png",
+      "alt": "The 150 synthetic points before assigning cluster labels.",
+      "section": "id10"
+    },
+    "63369dddec053552bcf56b1df7c76c2513d99d9554667d8a146690d237e5e6c0": {
+      "asset": "kmeans-iterations.png",
+      "alt": "Four successive K-means assignments; crosses mark the centroids used at each step.",
+      "section": "id10"
+    },
+    "82d18544f53df2e5e67e5a9815a7192895e247b7fc785fd2d082459641ae8d25": {
+      "asset": "kmeans-elbow.png",
+      "alt": "Square root of K-means inertia for one to seven clusters. The steep decrease slows around three clusters.",
+      "section": "id11"
+    },
+    "8180ff70c368f1959ad4d25edc5a02f65c84cb6f812dc8749deb034b89d4d0cb": {
+      "asset": "single-linkage-dendrogram.png",
+      "alt": "Single-linkage dendrogram for 150 points; the branch height gives the distance at which two clusters merge.",
+      "section": "id15"
+    }
+  },
+  "thirdParty": {
+    "pca": {
+      "sha256": "d3b0a9473c0ec82fd9cd31f712b85ccdc15d568b2849568b4c112a4060dfa00e",
+      "sha1": "73556871f4960fa8b909bc27029fac90aae342da"
+    },
+    "clustering": {
+      "sha256": "907292aa7295368a977a3b5bbc1052dd1612dcd0661d30f58d05777bd9d61365"
+    }
+  },
+  "codeCells": [
+    {
+      "block": 0,
+      "archivedSha256": "73d2350e5306d8475f93e19f178ad6e73de28e66470ce92d52b7edcff59d4f43",
+      "source": "\nimport numpy as np\nimport pandas as pd\nfrom sklearn import datasets, decomposition\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nsns.set(style=\"white\")\nfrom mpl_toolkits.mplot3d import Axes3D\n%matplotlib inline\n%config InlineBackend.figure_format = 'retina'\n\n# Load the iris dataset\niris = datasets.load_iris()\nX = iris.data\ny = iris.target\n\n# Plot the dataset in 3D ignoring Petal Width\nfig = plt.figure(figsize=(10, 10))\nax = fig.add_subplot(111, projection='3d')\nax.scatter(X[:, 0], X[:, 1], X[:, 2],  \n           c=y, cmap='viridis', alpha=0.7)\nax.set_xlabel('Sepal Length')\nax.set_ylabel('Sepal Width')\nax.set_zlabel('Petal Length');\n"
+    },
+    {
+      "block": 1,
+      "archivedSha256": "1d1765f22073a96e79648dd02486d75cf86a9bf097fe9306de5fb7f34861e77d",
+      "source": "from sklearn.metrics import accuracy_score, roc_auc_score\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.tree import DecisionTreeClassifier\n\n# Train, test splits\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.3, stratify=y, random_state=42\n)\n\n# Decision trees with depth = 2\nclf = DecisionTreeClassifier(max_depth=2, random_state=42)\nclf.fit(X_train, y_train)\npreds = clf.predict_proba(X_test)\nprint(\"Accuracy: {:.5f}\".format(accuracy_score(y_test, preds.argmax(axis=1))))\n"
+    },
+    {
+      "block": 3,
+      "archivedSha256": "c725311c7af9382441df412f0a93b72d36f13b981a02f27e934c501d8263afb6",
+      "source": "# Using PCA from sklearn PCA\npca = decomposition.PCA(n_components=2)\nX_centered = X - X.mean(axis=0)\npca.fit(X_centered)\nX_pca = pca.transform(X_centered)\n\n# Plotting the results of PCA\nplt.plot(X_pca[y == 0, 0], X_pca[y == 0, 1], \"bo\", label=\"Setosa\")\nplt.plot(X_pca[y == 1, 0], X_pca[y == 1, 1], \"go\", label=\"Versicolour\")\nplt.plot(X_pca[y == 2, 0], X_pca[y == 2, 1], \"ro\", label=\"Virginica\")\nplt.legend(loc=0);\n"
+    },
+    {
+      "block": 4,
+      "archivedSha256": "0aefac74430baaf7c75b68903c0d57b772c7b250455aed399d6b22b5a6e63a61",
+      "source": "# Test-train split and apply PCA\nX_train, X_test, y_train, y_test = train_test_split(\n    X_pca, y, test_size=0.3, stratify=y, random_state=42\n)\n\nclf = DecisionTreeClassifier(max_depth=2, random_state=42)\nclf.fit(X_train, y_train)\npreds = clf.predict_proba(X_test)\nprint(\"Accuracy: {:.5f}\".format(accuracy_score(y_test, preds.argmax(axis=1))))\n"
+    },
+    {
+      "block": 6,
+      "archivedSha256": "03efc9c4aa8f3c99d18c54764435f94cce1a496f0402df9413365abfe111d4de",
+      "source": "for i, component in enumerate(pca.components_):\n    print(\n        \"{} component: {}% of initial variance\".format(\n            i + 1, round(100 * pca.explained_variance_ratio_[i], 2)\n        )\n    )\n    print(\n        \" + \".join(\n            \"%.3f x %s\" % (value, name)\n            for value, name in zip(component, iris.feature_names)\n        )\n    )\n"
+    },
+    {
+      "block": 8,
+      "archivedSha256": "8b53080926a89a93c5e271bf31917be60c112b8871555bd92b57c1dc90ea5642",
+      "source": "digits = datasets.load_digits()\nX = digits.data\ny = digits.target\n"
+    },
+    {
+      "block": 9,
+      "archivedSha256": "c39371ac51c1d4495c5de75ab936cd63c554059e5bb6c9aee6b5bf6159de66b0",
+      "source": "# f, axes = plt.subplots(5, 2, sharey=True, figsize=(16,6))\nplt.figure(figsize=(16, 6))\nfor i in range(10):\n    plt.subplot(2, 5, i + 1)\n    plt.imshow(X[i, :].reshape([8, 8]), cmap=\"gray\");\n"
+    },
+    {
+      "block": 10,
+      "archivedSha256": "6e5af54f6a8481255b1c1892a74e370d2fc8bb2669de2beb53f00b00f5713df2",
+      "source": "pca = decomposition.PCA(n_components=2)\nX_reduced = pca.fit_transform(X)\n\nprint(\"Projecting %d-dimensional data to 2D\" % X.shape[1])\n\nplt.figure(figsize=(12, 10))\nplt.scatter(\n    X_reduced[:, 0],\n    X_reduced[:, 1],\n    c=y,\n    edgecolor=\"none\",\n    alpha=0.7,\n    s=40,\n    cmap=plt.get_cmap(\"nipy_spectral\", 10),\n)\nplt.colorbar()\nplt.title(\"MNIST. PCA projection\");\n"
+    },
+    {
+      "block": 12,
+      "archivedSha256": "5729af9d383a1c89c7af572491b16868034fedddbf233470fcc2ef0d9f35f1c1",
+      "source": "%%time\n\nfrom sklearn.manifold import TSNE\n\ntsne = TSNE(random_state=17)\n\nX_tsne = tsne.fit_transform(X)\n\nplt.figure(figsize=(12, 10))\nplt.scatter(\n    X_tsne[:, 0],\n    X_tsne[:, 1],\n    c=y,\n    edgecolor=\"none\",\n    alpha=0.7,\n    s=40,\n    cmap=plt.get_cmap(\"nipy_spectral\", 10),\n)\nplt.colorbar()\nplt.title(\"MNIST. t-SNE projection\");\n"
+    },
+    {
+      "block": 14,
+      "archivedSha256": "7a8987025ff0710a0aca55374394dc4fc6f640000685936b4fde57c9d9147924",
+      "source": "pca = decomposition.PCA().fit(X)\n\nplt.figure(figsize=(10, 7))\nplt.plot(np.cumsum(pca.explained_variance_ratio_), color=\"k\", lw=2)\nplt.xlabel(\"Number of components\")\nplt.ylabel(\"Total explained variance\")\nplt.xlim(0, 63)\nplt.yticks(np.arange(0, 1.1, 0.1))\nplt.axvline(21, c=\"b\")\nplt.axhline(0.9, c=\"r\")\nplt.show();\n"
+    },
+    {
+      "block": 15,
+      "archivedSha256": "738cbf3c32ef8cf6da199fce04dc5b2b55dd916deeb062d69da7c3a7b2e711cf",
+      "source": "# Let's begin by allocation 3 cluster's points\nX = np.zeros((150, 2))\n\nnp.random.seed(seed=42)\nX[:50, 0] = np.random.normal(loc=0.0, scale=0.3, size=50)\nX[:50, 1] = np.random.normal(loc=0.0, scale=0.3, size=50)\n\nX[50:100, 0] = np.random.normal(loc=2.0, scale=0.5, size=50)\nX[50:100, 1] = np.random.normal(loc=-1.0, scale=0.2, size=50)\n\nX[100:150, 0] = np.random.normal(loc=-1.0, scale=0.2, size=50)\nX[100:150, 1] = np.random.normal(loc=2.0, scale=0.5, size=50)\n\nplt.figure(figsize=(5, 5))\nplt.plot(X[:, 0], X[:, 1], \"bo\");\n"
+    },
+    {
+      "block": 16,
+      "archivedSha256": "f02f33721499a5a58ab11a609ac9049c8763828370c385ca3f07c039d92f8fdb",
+      "source": "# Scipy has function that takes 2 tuples and return\n# calculated distance between them\nfrom scipy.spatial.distance import cdist\n\n# Randomly allocate the 3 centroids\nnp.random.seed(seed=42)\ncentroids = np.random.normal(loc=0.0, scale=1.0, size=6)\ncentroids = centroids.reshape((3, 2))\n\ncent_history = []\ncent_history.append(centroids)\n\nfor i in range(3):\n    # Calculating the distance from a point to a centroid\n    distances = cdist(X, centroids)\n    # Checking what's the closest centroid for the point\n    labels = distances.argmin(axis=1)\n\n    # Labeling the point according the point's distance\n    centroids = centroids.copy()\n    centroids[0, :] = np.mean(X[labels == 0, :], axis=0)\n    centroids[1, :] = np.mean(X[labels == 1, :], axis=0)\n    centroids[2, :] = np.mean(X[labels == 2, :], axis=0)\n\n    cent_history.append(centroids)\n"
+    },
+    {
+      "block": 17,
+      "archivedSha256": "6e631fe3a8f14e31b0ec16fe64935c735e3f30b3513dbb515bf2b8b3e0e8042e",
+      "source": "# Let's plot K-means\nplt.figure(figsize=(8, 8))\nfor i in range(4):\n    distances = cdist(X, cent_history[i])\n    labels = distances.argmin(axis=1)\n\n    plt.subplot(2, 2, i + 1)\n    plt.plot(X[labels == 0, 0], X[labels == 0, 1], \"bo\", label=\"cluster #1\")\n    plt.plot(X[labels == 1, 0], X[labels == 1, 1], \"co\", label=\"cluster #2\")\n    plt.plot(X[labels == 2, 0], X[labels == 2, 1], \"mo\", label=\"cluster #3\")\n    plt.plot(cent_history[i][:, 0], cent_history[i][:, 1], \"rX\")\n    plt.legend(loc=0)\n    plt.title(\"Step {:}\".format(i + 1));\n"
+    },
+    {
+      "block": 18,
+      "archivedSha256": "11ad5b317418484e502ef78fe3592cc93257578f004451b7b3a65737da0dcbf1",
+      "source": "from sklearn.cluster import KMeans\n"
+    },
+    {
+      "block": 19,
+      "archivedSha256": "54744678f7a8a6d420fe6f231434fed08aace435c3f3cb26e2f8018c6cd46fb7",
+      "source": "inertia = []\nfor k in range(1, 8):\n    kmeans = KMeans(n_clusters=k, random_state=1, n_init='auto').fit(X)\n    inertia.append(np.sqrt(kmeans.inertia_))\n"
+    },
+    {
+      "block": 20,
+      "archivedSha256": "356bd226d7da7c699dd0e8f08751293625da4b67174ef0ef12c1c4858f4e0200",
+      "source": "plt.plot(range(1, 8), inertia, marker=\"s\")\nplt.xlabel(\"$k$\")\nplt.ylabel(\"$J(C_k)$\");\n"
+    },
+    {
+      "block": 21,
+      "archivedSha256": "c9ffefcdae86a80cb7a078efc35ec8baa6ee018a40b58e4302edd48cfbfab21f",
+      "source": "from scipy.cluster import hierarchy\nfrom scipy.spatial.distance import pdist\n\nX = np.zeros((150, 2))\n\nnp.random.seed(seed=42)\nX[:50, 0] = np.random.normal(loc=0.0, scale=0.3, size=50)\nX[:50, 1] = np.random.normal(loc=0.0, scale=0.3, size=50)\n\nX[50:100, 0] = np.random.normal(loc=2.0, scale=0.5, size=50)\nX[50:100, 1] = np.random.normal(loc=-1.0, scale=0.2, size=50)\n\nX[100:150, 0] = np.random.normal(loc=-1.0, scale=0.2, size=50)\nX[100:150, 1] = np.random.normal(loc=2.0, scale=0.5, size=50)\n\n# pdist will calculate the upper triangle of the pairwise distance matrix\ndistance_mat = pdist(X)\n# linkage — is an implementation of agglomerative algorithm\nZ = hierarchy.linkage(distance_mat, \"single\")\nplt.figure(figsize=(10, 5))\ndn = hierarchy.dendrogram(Z, color_threshold=0.5)\n"
+    },
+    {
+      "block": 22,
+      "archivedSha256": "64db73b8d68a15b0393f980004181b74b3f5a67b2e13325e52f7169250b3d768",
+      "source": "import pandas as pd\nfrom sklearn import datasets, metrics\nfrom sklearn.cluster import (AffinityPropagation, AgglomerativeClustering,\n                             KMeans, SpectralClustering)\n\ndata = datasets.load_digits()\nX, y = data.data, data.target\n\nalgorithms = []\nalgorithms.append(KMeans(n_clusters=10, random_state=1, n_init='auto'))\nalgorithms.append(AffinityPropagation())\nalgorithms.append(\n    SpectralClustering(n_clusters=10, random_state=1, affinity=\"nearest_neighbors\")\n)\nalgorithms.append(AgglomerativeClustering(n_clusters=10))\n\ndata = []\nfor algo in algorithms:\n    algo.fit(X)\n    data.append(\n        (\n            {\n                \"ARI\": metrics.adjusted_rand_score(y, algo.labels_),\n                \"AMI\": metrics.adjusted_mutual_info_score(y, algo.labels_),\n                \"Homogeneity\": metrics.homogeneity_score(y, algo.labels_),\n                \"Completeness\": metrics.completeness_score(y, algo.labels_),\n                \"V-measure\": metrics.v_measure_score(y, algo.labels_),\n                \"Silhouette\": metrics.silhouette_score(X, algo.labels_),\n            }\n        )\n    )\n\nresults = pd.DataFrame(\n    data=data,\n    columns=[\"ARI\", \"AMI\", \"Homogeneity\", \"Completeness\", \"V-measure\", \"Silhouette\"],\n    index=[\"K-means\", \"Affinity\", \"Spectral\", \"Agglomerative\"],\n)\n\nresults\n"
+    }
+  ]
+}

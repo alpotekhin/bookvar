@@ -1,0 +1,558 @@
+{
+  "date": "2026-11-11",
+  "scope": "Eight reader-facing figure slots in the canonical chapter on sequence models: three higher-resolution originals and five existing crops with exact source evidence. No translation or deployment.",
+  "review": {
+    "sources": "Yang et al. v3 §3.4 and Figure 1; Lahoti et al. v1 §3 and Figure 2; Yu Sun et al. v1 §2 and Figure 4; Arnuv Tandon et al. v2 §§2.3–2.4 and Figure 3; Falcon-H1 v1 §2, Table 1 and Figure 1; Waleffe et al. v1 §3.3.2 and §5.2 Figures 3 and 7; Yutao Sun et al. v4 §2.1 and Figure 3.",
+    "preservation": "Full source chapter read. Programs, equations, route anchors and the English URL fallback remain. Three old files are archived as retired without modifying their bytes. The TTT legacy crop is not claimed to match v1.",
+    "rights": "The RetNet figure and two Phonebook plots reproduce exact source pixels, but the selected arXiv records provide no grant to Bookvar. They remain for local preview and require replacement, permission, or link-only treatment before a public release.",
+    "method": "For the first three rows use pdftoppm with the listed -r and crop window via -x/-y/-W/-H. For the other rows render the full page, then crop with the recorded box and compare RGB pixels. Source PDF and publication image SHA-256 are distinct.",
+    "workedCase": "Falcon-H1 34B yields 20×128 = 2560 attention output channels and 32×128 = 4096 SSM output channels; 6656 are projected back to 5120. The four K/V heads affect cache width, not attention output width."
+  },
+  "figures": [
+    {
+      "id": "curated-sequence-architecture-gated-v3-dd6f9e5ce009",
+      "asset": "00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/gated-deltanet-figure1-complete.png",
+      "title": "Gated DeltaNet, Figure 1: two hybrid layouts and the mixer",
+      "author": "Songlin Yang, Jan Kautz, Ali Hatamizadeh",
+      "source_url": "https://arxiv.org/abs/2412.06464v3",
+      "figure_url": "https://arxiv.org/pdf/2412.06464v3#page=7",
+      "source_image_url": "https://arxiv.org/pdf/2412.06464v3#page=7",
+      "source_asset": "05 Источники/Originals/sequence-architecture-figures-2026-11-11/gated-v3.pdf",
+      "source_asset_sha256": "55f84f2ae9c4e52ff494bfa699499867f5e9e17514994ac71de43888363a5fb9",
+      "source_page": 7,
+      "render_dpi": 480,
+      "render_page_size_px": [
+        4080,
+        5280
+      ],
+      "crop_box_px": [
+        905,
+        577,
+        3200,
+        1800
+      ],
+      "dimensions_px": [
+        2295,
+        1223
+      ],
+      "sha256": "dd6f9e5ce009f40bb76b12ee51abb4ef5247e25018c2edb1ab869ec97c06656c",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence_url": "https://arxiv.org/abs/2412.06464v3",
+      "modifications": "All three figure panels and labels, excluding the page header, blank margins, and printed caption.",
+      "derivation": "pdf-page-render-crop",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+        "05 Источники/Papers/Gated Delta Networks.md"
+      ]
+    },
+    {
+      "id": "curated-sequence-architecture-falcon-4f80fb76b447",
+      "asset": "00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/falcon-h1-report-figure1.png",
+      "title": "Falcon-H1 technical report, Figure 1: parallel SSM and attention",
+      "author": "Technology Innovation Institute",
+      "source_url": "https://arxiv.org/abs/2507.22448v1",
+      "figure_url": "https://arxiv.org/pdf/2507.22448v1#page=5",
+      "source_image_url": "https://arxiv.org/pdf/2507.22448v1#page=5",
+      "source_asset": "05 Источники/Originals/sequence-architecture-figures-2026-11-11/falcon.pdf",
+      "source_asset_sha256": "e62149cee2b71bbb096a88885377c5e736f0eb5fc7ca27f5b4008ffec906f8b5",
+      "source_page": 5,
+      "render_dpi": 480,
+      "render_page_size_px": [
+        4080,
+        5280
+      ],
+      "crop_box_px": [
+        930,
+        450,
+        3150,
+        2480
+      ],
+      "dimensions_px": [
+        2220,
+        2030
+      ],
+      "sha256": "4f80fb76b447db6da1c921447e5230e37387427b70166690b31aceb96c676454",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence_url": "https://arxiv.org/abs/2507.22448v1",
+      "modifications": "Complete author diagram, cropped from the vector report without redrawing.",
+      "derivation": "pdf-page-render-crop",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"
+      ]
+    },
+    {
+      "id": "curated-sequence-architecture-ttt-v1-543d7255d9b6",
+      "asset": "00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/ttt-v1-figure4.png",
+      "title": "Learning to (Learn at Test Time), v1 Figure 4: sequence-layer state",
+      "author": "Yu Sun et al.",
+      "source_url": "https://arxiv.org/abs/2407.04620v1",
+      "figure_url": "https://arxiv.org/pdf/2407.04620v1#page=4",
+      "source_image_url": "https://arxiv.org/pdf/2407.04620v1#page=4",
+      "source_asset": "05 Источники/Originals/sequence-architecture-figures-2026-11-11/ttt-v1.pdf",
+      "source_asset_sha256": "61a6cdb14891692fc42c827a9e7de2a953618f236803976389cb64da2b16b832",
+      "source_page": 4,
+      "render_dpi": 480,
+      "render_page_size_px": [
+        4080,
+        5280
+      ],
+      "crop_box_px": [
+        565,
+        565,
+        3515,
+        1860
+      ],
+      "dimensions_px": [
+        2950,
+        1295
+      ],
+      "sha256": "543d7255d9b602831167192a38b14d353bcc0cebd394a7ca6562953f1ebc9e93",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence_url": "https://arxiv.org/abs/2407.04620v1",
+      "modifications": "Both original parts, the update diagram and the complete English comparison table; no printed caption.",
+      "derivation": "pdf-page-render-crop",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+        "05 Источники/Papers/TTT layers.md"
+      ]
+    },
+    {
+      "id": "curated-alternatives-transformer-mamba3-block-d2d01ac095fd",
+      "asset": "00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/mamba3-figure2.png",
+      "title": "Mamba-3, Figure 2: Mamba-2 and Mamba-3 block comparison",
+      "author": "Aakash Lahoti et al.",
+      "source_url": "https://arxiv.org/abs/2603.15569v1",
+      "figure_url": "https://arxiv.org/pdf/2603.15569v1#page=11",
+      "source_image_url": "https://arxiv.org/pdf/2603.15569v1#page=11",
+      "source_asset": "05 Источники/Originals/sequence-architecture-figures-2026-11-11/mamba3.pdf",
+      "source_asset_sha256": "17e65b882c4b7dc7dad82a437e54c5fa973e4624d5653dc431f1a2a55538c826",
+      "source_page": 11,
+      "render_dpi": 180,
+      "render_page_size_px": [
+        1530,
+        1980
+      ],
+      "crop_box_px": [
+        130,
+        180,
+        1410,
+        780
+      ],
+      "dimensions_px": [
+        1280,
+        600
+      ],
+      "sha256": "d2d01ac095fd21e0addeebb5a04b248515667ee048b3990c38ae54e017b33f38",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence_url": "https://arxiv.org/abs/2603.15569v1",
+      "modifications": "Existing crop, reproduced pixel-for-pixel including both blocks and the full legend.",
+      "derivation": "pdf-page-render-crop",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"
+      ]
+    },
+    {
+      "id": "curated-alternatives-transformer-ttte2e-20e62455adca",
+      "asset": "00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/ttt-e2e-figure3.png",
+      "title": "End-to-End TTT, Figure 3: main method and comparison with TTT-KVB",
+      "author": "Arnuv Tandon et al.",
+      "source_url": "https://arxiv.org/abs/2512.23675v2",
+      "figure_url": "https://arxiv.org/pdf/2512.23675v2#page=6",
+      "source_image_url": "https://arxiv.org/pdf/2512.23675v2#page=6",
+      "source_asset": "05 Источники/Originals/sequence-architecture-figures-2026-11-11/e2e-v2.pdf",
+      "source_asset_sha256": "e1390e9347fe339e31205351420bfddcfb1f5cfa540841706228c07184b7ec7a",
+      "source_page": 6,
+      "render_dpi": 180,
+      "render_page_size_px": [
+        1530,
+        1980
+      ],
+      "crop_box_px": [
+        105,
+        70,
+        1425,
+        1120
+      ],
+      "dimensions_px": [
+        1320,
+        1050
+      ],
+      "sha256": "20e62455adcae2524bcb614e6f836b27b4445a7c45eae9844dec1d87452eec81",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence_url": "https://arxiv.org/abs/2512.23675v2",
+      "modifications": "Existing crop, reproduced pixel-for-pixel including both panels and the original English caption.",
+      "derivation": "pdf-page-render-crop",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"
+      ]
+    },
+    {
+      "id": "curated-alternatives-transformer-phonebook-pure-cd84e7205558",
+      "asset": "00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-pure-figure3.png",
+      "title": "An Empirical Study of Mamba-based Language Models, Figure 3: pure-model Phonebook",
+      "author": "Roger Waleffe et al.",
+      "source_url": "https://arxiv.org/abs/2406.07887v1",
+      "figure_url": "https://arxiv.org/pdf/2406.07887v1#page=8",
+      "source_image_url": "https://arxiv.org/pdf/2406.07887v1#page=8",
+      "source_asset": "05 Источники/Originals/sequence-architecture-figures-2026-11-11/phonebook.pdf",
+      "source_asset_sha256": "db92bcb9090700728eda598a97bd349ce3b6621be001e26fc93ed7b06aec6267",
+      "source_page": 8,
+      "render_dpi": 300,
+      "render_page_size_px": [
+        2550,
+        3300
+      ],
+      "crop_box_px": [
+        297,
+        196,
+        2257,
+        706
+      ],
+      "dimensions_px": [
+        1960,
+        510
+      ],
+      "sha256": "cd84e72055589a5989453281b1fc9251c5558f91be130a45de5958542134ad65",
+      "license": null,
+      "license_url": null,
+      "license_evidence_url": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html",
+      "modifications": "Existing crop, reproduced pixel-for-pixel including all three original plots.",
+      "derivation": "pdf-page-render-crop",
+      "metadata_status": "verified",
+      "provenance_confirmation": "original-pdf-pixels-verified",
+      "rights_status": "paper-figure-license-unverified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"
+      ]
+    },
+    {
+      "id": "curated-alternatives-transformer-phonebook-hybrid-aceade6603a2",
+      "asset": "00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-hybrid-figure7.png",
+      "title": "An Empirical Study of Mamba-based Language Models, Figure 7: hybrid Phonebook",
+      "author": "Roger Waleffe et al.",
+      "source_url": "https://arxiv.org/abs/2406.07887v1",
+      "figure_url": "https://arxiv.org/pdf/2406.07887v1#page=14",
+      "source_image_url": "https://arxiv.org/pdf/2406.07887v1#page=14",
+      "source_asset": "05 Источники/Originals/sequence-architecture-figures-2026-11-11/phonebook.pdf",
+      "source_asset_sha256": "db92bcb9090700728eda598a97bd349ce3b6621be001e26fc93ed7b06aec6267",
+      "source_page": 14,
+      "render_dpi": 300,
+      "render_page_size_px": [
+        2550,
+        3300
+      ],
+      "crop_box_px": [
+        350,
+        826,
+        2250,
+        1326
+      ],
+      "dimensions_px": [
+        1900,
+        500
+      ],
+      "sha256": "aceade6603a25be2a6596b77404c8b0604900598ccd36fb8ab2671a0b6199cda",
+      "license": null,
+      "license_url": null,
+      "license_evidence_url": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html",
+      "modifications": "Existing crop, reproduced pixel-for-pixel including all three original plots.",
+      "derivation": "pdf-page-render-crop",
+      "metadata_status": "verified",
+      "provenance_confirmation": "original-pdf-pixels-verified",
+      "rights_status": "paper-figure-license-unverified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"
+      ]
+    },
+    {
+      "id": "curated-atlas-retnet-000000000082",
+      "asset": "00 Учебник/Assets/Figures/curated/atlas-remainder-official/retnet-dual-form.png",
+      "title": "RetNet, Figure 3: dual form of retention",
+      "author": "Yutao Sun et al.",
+      "source_url": "https://arxiv.org/abs/2307.08621v4",
+      "figure_url": "https://arxiv.org/pdf/2307.08621v4#page=4",
+      "source_image_url": "https://arxiv.org/pdf/2307.08621v4#page=4",
+      "source_asset": "05 Источники/Originals/sequence-architecture-figures-2026-11-11/retnet.pdf",
+      "source_asset_sha256": "b75fdb67fdcc760609a38d28171a785f336ece30f750d210c7379306bb483fa7",
+      "source_page": 4,
+      "render_dpi": 220,
+      "render_page_size_px": [
+        1870,
+        2420
+      ],
+      "crop_box_px": [
+        275,
+        90,
+        1595,
+        740
+      ],
+      "dimensions_px": [
+        1320,
+        650
+      ],
+      "sha256": "4a0b1ec822e392e6e4f6187d2be5cf21d2fed51e39335450fe3b0547f37ea99e",
+      "license": null,
+      "license_url": null,
+      "license_evidence_url": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html",
+      "modifications": "Existing crop, reproduced pixel-for-pixel with both panels and the original English caption.",
+      "derivation": "pdf-page-render-crop",
+      "metadata_status": "verified",
+      "provenance_confirmation": "original-pdf-pixels-verified",
+      "rights_status": "paper-figure-license-unverified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "02 Атлас моделей/Семейства/RetNet.md",
+        "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "source": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "before_sha256": "acbd5172b5ef5a321ed150210231b766cc95e2a556441de3754bcf15b5622ead",
+      "after_sha256": "724e5760e798681f3f029b126c1107e055491c0e8cc3dffb6f9be599c3a4040a",
+      "lines": 2180,
+      "changes": [
+        {
+          "old": "last_updated: 2026-11-10\n",
+          "new": "last_updated: 2026-11-11\n"
+        },
+        {
+          "old": "*Две формы вычисления retention: параллельная слева и рекуррентная справа.\nИсточник: Yutao Sun et al., [Retentive Network, Figure 3](https://arxiv.org/abs/2307.08621).*",
+          "new": "*Yutao Sun et al., [Retentive Network, v4, рис. 3, с. 4](https://arxiv.org/pdf/2307.08621v4#page=4).\nСлева матрица $D$ взвешивает связи между позициями. Справа вместо матрицы\nсвязей следующий шаг получает состояние $S_n$. Блочная форма на рисунке не показана.*"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/mamba3-figure2.png]]\n\n*Сравнение блоков Mamba-2 и Mamba-3. Источник: Lahoti et al.,\n[Mamba-3, Figure 2](https://arxiv.org/abs/2603.15569). Результаты статьи получены\nна моделях до 1.5B параметров. Они не подтверждают перенос тех же преимуществ\nна существенно более крупные модели или готовность к эксплуатации в сервисе.*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/mamba3-figure2.png|В блоке Mamba-2 слева есть короткая свёртка; у Mamba-3 справа — зависящее от входа вращение и необязательные проекции MIMO.]]\n\n*Aakash Lahoti et al., [Mamba-3, v1, рис. 2, с. 11](https://arxiv.org/pdf/2603.15569v1#page=11),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Обе панели и легенда\nиз статьи. Результаты получены на моделях до 1,5 млрд параметров; по ним\nнельзя оценить выигрыш у более крупных моделей или при нагрузке сервиса.*"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/gated-deltanet-figure1.png]]\n\n*Два гибридных варианта и устройство Gated DeltaNet. Источник: Yang, Kautz &\nHatamizadeh, [Gated Delta Networks, Figure 1](https://arxiv.org/abs/2412.06464),\nICLR 2025.*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/gated-deltanet-figure1-complete.png|Слева Gated DeltaNet чередуется со скользящим вниманием. В центре к повторяющейся группе добавляется Mamba-2. Справа показаны входы и выход слоя Gated DeltaNet.]]\n\n*Songlin Yang, Jan Kautz и Ali Hatamizadeh,\n[Gated Delta Networks, v3, рис. 1, с. 7](https://arxiv.org/pdf/2412.06464v3#page=7),\nICLR 2025, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nВ H1 чередуются Gated DeltaNet и внимание в скользящем окне (SWA);\nв H2 перед ними стоит Mamba-2. Справа $\\alpha$ задаёт затухание\n(выше оно обозначено $\\gamma_t$), а $\\beta$ управляет записью.*"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/ttt-figure3.png]]\n\n*RNN хранит вектор, self-attention — список K/V, а TTT — параметры внутренней\nмодели. Источник: Sun et al.,\n[Learning to (Learn at Test Time), v1, Figure 4](https://arxiv.org/html/2407.04620v1#S1.F4).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/ttt-v1-figure4.png|Верхняя схема разделяет обновление состояния и получение выхода. В таблице сравниваются вектор RNN, список K/V и быстрые веса TTT.]]\n\n*Yu Sun et al.,\n[Learning to (Learn at Test Time), v1, рис. 4, с. 4](https://arxiv.org/pdf/2407.04620v1#page=4),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Верхняя схема\nпоказывает один шаг, а таблица сравнивает три способа хранить прошлое.\n$O(1)$ у TTT относится к стоимости шага по мере роста контекста при\nфиксированном размере внутренней модели.*"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/ttt-e2e-figure3.png]]\n\n*При чтении документа градиент обновляет часть параметров модели\nс вниманием в скользящем окне.\nИсточник: Tandon et al., [End-to-End Test-Time Training,\nFigure 3](https://arxiv.org/abs/2512.23675).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/ttt-e2e-figure3.png|Слева ошибка предсказания второго токена обновляет MLP в верхних блоках перед предсказанием третьего. Справа авторы приводят для сравнения упрощённый TTT-KVB.]]\n\n*Arnuv Tandon et al., [End-to-End Test-Time Training, v2, рис. 3, с. 6](https://arxiv.org/pdf/2512.23675v2#page=6),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). На левой панели\n$x_2$ уже известен: ошибка его предсказания обновляет MLP перед расчётом\nраспределения для ещё неизвестного $x_3$. Нижние три четверти блоков\nне получают этот внутренний градиент. Справа показан другой метод.*"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/falcon-h1-architecture.webp]]\n\n*Параллельные ветви Falcon-H1. Источник: Technology Innovation Institute,\n[Falcon-H1 technical report and release materials](https://huggingface.co/tiiuae/Falcon-H1-34B-Base).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/falcon-h1-report-figure1.png|После общей входной проекции данные идут в SSM и Attention. Блок Concat соединяет их выходы перед общей выходной проекцией.]]\n\n*Technology Innovation Institute,\n[Falcon-H1 Technical Report, v1, рис. 1, с. 5](https://arxiv.org/pdf/2507.22448v1#page=5),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Стрелки идут снизу\nвверх: SSM и внимание читают одну позицию, их выходы соединяются по каналам\nперед общей выходной проекцией.*\n\nВ [Falcon-H1 34B, табл. 1 и §2.1](https://arxiv.org/html/2507.22448v1#S2.SS1)\n20 голов запросов по 128 координат дают 2560 выходных каналов внимания,\n32 головы SSM той же ширины — ещё 4096. После `Concat` для одного токена\nполучается 6656 каналов. Выходная проекция возвращает их к ширине 5120,\nчтобы результат можно было сложить со входом блока. Четыре KV-головы\nопределяют размер кэша, но не число выходных каналов ветви внимания."
+        },
+        {
+          "old": "*Чистые Mamba/Mamba-2 теряют точность phonebook раньше Transformer. Источник:\nWaleffe et al., [An Empirical Study of Mamba-based Language Models,\nPhonebook experiments](https://arxiv.org/abs/2406.07887), в продолжение линии\nJelassi et al., [Repeat After Me](https://arxiv.org/abs/2402.01032).*",
+          "new": "*Roger Waleffe et al.,\n[An Empirical Study of Mamba-based Language Models, v1, рис. 3, с. 8](https://arxiv.org/pdf/2406.07887v1#page=8).\nУ левой и правой панелей вертикальная ось — доля верных ответов.\nСредняя панель считает, сколько токенов ответа удалось восстановить.\nВертикальная черта обозначает длину последовательностей предобучения (4K).\nСм. также [Repeat After Me](https://arxiv.org/abs/2402.01032).*"
+        },
+        {
+          "old": "*Mamba-2-Hybrid значительно дольше сохраняет точность phonebook при контекстах\n4K, 16K и 32K. Источник: Waleffe et al.,\n[An Empirical Study of Mamba-based Language Models](https://arxiv.org/abs/2406.07887),\nFigure 7.*",
+          "new": "*Waleffe et al., [рис. 7, с. 14](https://arxiv.org/pdf/2406.07887v1#page=14).\nТри панели показывают модели с окнами 4K, 16K и 32K. Например, на средней\nпанели Transformer падает почти до нуля около 18 тысяч токенов, а гибрид\nдержится около единицы примерно до 24 тысяч. Это сравнение на Phonebook,\nа не на произвольных длинных документах.*"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "a140e86820e81fa5942b70cff53bc664af4c43edc7e5f00c80240d486f9a67e5",
+      "after_sha256": "e73e1fbe392bb600625863b3968ab5fd5082f6125b1a3aa9aa7c199552ece36e",
+      "lines": 26278,
+      "changes": [
+        {
+          "old": "  - id: curated-alternatives-transformer-mamba3-block-d2d01ac095fd\n    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/mamba3-figure2.png\n    author: Aakash Lahoti et al.\n    source_url: https://arxiv.org/abs/2603.15569\n    license: open paper material; reuse confirmed by repository owner\n    license_url: https://arxiv.org/abs/2603.15569\n    modifications: Figure 2 rendered from the official paper and cropped without content changes\n    used_in: [\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/alternatives-transformer-2026/papers/mamba3.pdf\n    derivation: pdf-page-render-crop",
+          "new": "  - id: curated-alternatives-transformer-mamba3-block-d2d01ac095fd\n    asset: \"00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/mamba3-figure2.png\"\n    title: \"Mamba-3, Figure 2: Mamba-2 and Mamba-3 block comparison\"\n    author: \"Aakash Lahoti et al.\"\n    source_url: \"https://arxiv.org/abs/2603.15569v1\"\n    figure_url: \"https://arxiv.org/pdf/2603.15569v1#page=11\"\n    source_image_url: \"https://arxiv.org/pdf/2603.15569v1#page=11\"\n    source_asset: \"05 Источники/Originals/sequence-architecture-figures-2026-11-11/mamba3.pdf\"\n    source_asset_sha256: \"17e65b882c4b7dc7dad82a437e54c5fa973e4624d5653dc431f1a2a55538c826\"\n    source_page: 11\n    render_dpi: 180\n    render_page_size_px: [1530,1980]\n    crop_box_px: [130,180,1410,780]\n    dimensions_px: [1280,600]\n    sha256: \"d2d01ac095fd21e0addeebb5a04b248515667ee048b3990c38ae54e017b33f38\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence_url: \"https://arxiv.org/abs/2603.15569v1\"\n    modifications: \"Existing crop, reproduced pixel-for-pixel including both blocks and the full legend.\"\n    derivation: \"pdf-page-render-crop\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\"]"
+        },
+        {
+          "old": "  - id: curated-alternatives-transformer-ttte2e-20e62455adca\n    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/ttt-e2e-figure3.png\n    author: Sharan Tandon et al.\n    source_url: https://arxiv.org/abs/2512.23675\n    license: open paper material; reuse confirmed by repository owner\n    license_url: https://arxiv.org/abs/2512.23675\n    modifications: Figure 3 rendered from the official paper and cropped without content changes\n    used_in: [\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/alternatives-transformer-2026/papers/ttt-e2e.pdf\n    derivation: pdf-page-render-crop",
+          "new": "  - id: curated-alternatives-transformer-ttte2e-20e62455adca\n    asset: \"00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/ttt-e2e-figure3.png\"\n    title: \"End-to-End TTT, Figure 3: main method and comparison with TTT-KVB\"\n    author: \"Arnuv Tandon et al.\"\n    source_url: \"https://arxiv.org/abs/2512.23675v2\"\n    figure_url: \"https://arxiv.org/pdf/2512.23675v2#page=6\"\n    source_image_url: \"https://arxiv.org/pdf/2512.23675v2#page=6\"\n    source_asset: \"05 Источники/Originals/sequence-architecture-figures-2026-11-11/e2e-v2.pdf\"\n    source_asset_sha256: \"e1390e9347fe339e31205351420bfddcfb1f5cfa540841706228c07184b7ec7a\"\n    source_page: 6\n    render_dpi: 180\n    render_page_size_px: [1530,1980]\n    crop_box_px: [105,70,1425,1120]\n    dimensions_px: [1320,1050]\n    sha256: \"20e62455adcae2524bcb614e6f836b27b4445a7c45eae9844dec1d87452eec81\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence_url: \"https://arxiv.org/abs/2512.23675v2\"\n    modifications: \"Existing crop, reproduced pixel-for-pixel including both panels and the original English caption.\"\n    derivation: \"pdf-page-render-crop\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\"]"
+        },
+        {
+          "old": "  - id: curated-alternatives-transformer-phonebook-pure-cd84e7205558\n    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-pure-figure3.png\n    author: Roger Waleffe et al.\n    source_url: https://arxiv.org/abs/2406.07887\n    license: open paper material; reuse confirmed by repository owner\n    license_url: https://arxiv.org/abs/2406.07887\n    modifications: Figure 3 rendered from the official paper and cropped without content changes\n    used_in: [\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/alternatives-transformer-2026/papers/empirical-mamba.pdf\n    derivation: pdf-page-render-crop",
+          "new": "  - id: curated-alternatives-transformer-phonebook-pure-cd84e7205558\n    asset: \"00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-pure-figure3.png\"\n    title: \"An Empirical Study of Mamba-based Language Models, Figure 3: pure-model Phonebook\"\n    author: \"Roger Waleffe et al.\"\n    source_url: \"https://arxiv.org/abs/2406.07887v1\"\n    figure_url: \"https://arxiv.org/pdf/2406.07887v1#page=8\"\n    source_image_url: \"https://arxiv.org/pdf/2406.07887v1#page=8\"\n    source_asset: \"05 Источники/Originals/sequence-architecture-figures-2026-11-11/phonebook.pdf\"\n    source_asset_sha256: \"db92bcb9090700728eda598a97bd349ce3b6621be001e26fc93ed7b06aec6267\"\n    source_page: 8\n    render_dpi: 300\n    render_page_size_px: [2550,3300]\n    crop_box_px: [297,196,2257,706]\n    dimensions_px: [1960,510]\n    sha256: \"cd84e72055589a5989453281b1fc9251c5558f91be130a45de5958542134ad65\"\n    license: null\n    license_url: null\n    license_evidence_url: \"https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html\"\n    modifications: \"Existing crop, reproduced pixel-for-pixel including all three original plots.\"\n    derivation: \"pdf-page-render-crop\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"original-pdf-pixels-verified\"\n    rights_status: \"paper-figure-license-unverified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\"]"
+        },
+        {
+          "old": "  - id: curated-alternatives-transformer-phonebook-hybrid-aceade6603a2\n    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-hybrid-figure7.png\n    author: Roger Waleffe et al.\n    source_url: https://arxiv.org/abs/2406.07887\n    license: open paper material; reuse confirmed by repository owner\n    license_url: https://arxiv.org/abs/2406.07887\n    modifications: Figure 7 rendered from the official paper and cropped without content changes\n    used_in: [\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/alternatives-transformer-2026/papers/empirical-mamba.pdf\n    derivation: pdf-page-render-crop",
+          "new": "  - id: curated-alternatives-transformer-phonebook-hybrid-aceade6603a2\n    asset: \"00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-hybrid-figure7.png\"\n    title: \"An Empirical Study of Mamba-based Language Models, Figure 7: hybrid Phonebook\"\n    author: \"Roger Waleffe et al.\"\n    source_url: \"https://arxiv.org/abs/2406.07887v1\"\n    figure_url: \"https://arxiv.org/pdf/2406.07887v1#page=14\"\n    source_image_url: \"https://arxiv.org/pdf/2406.07887v1#page=14\"\n    source_asset: \"05 Источники/Originals/sequence-architecture-figures-2026-11-11/phonebook.pdf\"\n    source_asset_sha256: \"db92bcb9090700728eda598a97bd349ce3b6621be001e26fc93ed7b06aec6267\"\n    source_page: 14\n    render_dpi: 300\n    render_page_size_px: [2550,3300]\n    crop_box_px: [350,826,2250,1326]\n    dimensions_px: [1900,500]\n    sha256: \"aceade6603a25be2a6596b77404c8b0604900598ccd36fb8ab2671a0b6199cda\"\n    license: null\n    license_url: null\n    license_evidence_url: \"https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html\"\n    modifications: \"Existing crop, reproduced pixel-for-pixel including all three original plots.\"\n    derivation: \"pdf-page-render-crop\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"original-pdf-pixels-verified\"\n    rights_status: \"paper-figure-license-unverified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\"]"
+        },
+        {
+          "old": "  - id: curated-atlas-retnet-000000000082\n    asset: 00 Учебник/Assets/Figures/curated/atlas-remainder-official/retnet-dual-form.png\n    author: Yutao Sun et al.\n    source_url: https://arxiv.org/abs/2307.08621\n    license: open educational material; reuse confirmed by repository owner\n    license_url: https://arxiv.org/abs/2307.08621\n    modifications: Figure 3 rendered from the official PDF at high resolution and cropped without content changes\n    used_in:\n      [\"02 Атлас моделей/Семейства/RetNet.md\",\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/retnet/paper.pdf\n    derivation: pdf-page-render-crop",
+          "new": "  - id: curated-atlas-retnet-000000000082\n    asset: \"00 Учебник/Assets/Figures/curated/atlas-remainder-official/retnet-dual-form.png\"\n    title: \"RetNet, Figure 3: dual form of retention\"\n    author: \"Yutao Sun et al.\"\n    source_url: \"https://arxiv.org/abs/2307.08621v4\"\n    figure_url: \"https://arxiv.org/pdf/2307.08621v4#page=4\"\n    source_image_url: \"https://arxiv.org/pdf/2307.08621v4#page=4\"\n    source_asset: \"05 Источники/Originals/sequence-architecture-figures-2026-11-11/retnet.pdf\"\n    source_asset_sha256: \"b75fdb67fdcc760609a38d28171a785f336ece30f750d210c7379306bb483fa7\"\n    source_page: 4\n    render_dpi: 220\n    render_page_size_px: [1870,2420]\n    crop_box_px: [275,90,1595,740]\n    dimensions_px: [1320,650]\n    sha256: \"4a0b1ec822e392e6e4f6187d2be5cf21d2fed51e39335450fe3b0547f37ea99e\"\n    license: null\n    license_url: null\n    license_evidence_url: \"https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html\"\n    modifications: \"Existing crop, reproduced pixel-for-pixel with both panels and the original English caption.\"\n    derivation: \"pdf-page-render-crop\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"original-pdf-pixels-verified\"\n    rights_status: \"paper-figure-license-unverified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"02 Атлас моделей/Семейства/RetNet.md\",\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\"]"
+        },
+        {
+          "old": "  - id: curated-alternatives-transformer-gated-deltanet-c4297ff47865\n    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/gated-deltanet-figure1.png\n    author: Songlin Yang, Jan Kautz, and Ali Hatamizadeh\n    source_url: https://arxiv.org/abs/2412.06464\n    license: open paper material; reuse confirmed by repository owner\n    license_url: https://arxiv.org/abs/2412.06464\n    modifications: Figure 1 rendered from the official paper and cropped without content changes\n    used_in: [\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/alternatives-transformer-2026/papers/gated-deltanet.pdf\n    derivation: pdf-page-render-crop",
+          "new": "  - id: curated-alternatives-transformer-gated-deltanet-c4297ff47865\n    asset: \"00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/gated-deltanet-figure1.png\"\n    title: \"Gated DeltaNet Figure 1 with article page header, historical crop\"\n    author: \"Songlin Yang, Jan Kautz, Ali Hatamizadeh\"\n    source_url: \"https://arxiv.org/abs/2412.06464v3\"\n    figure_url: \"https://arxiv.org/pdf/2412.06464v3#page=7\"\n    source_image_url: \"https://arxiv.org/pdf/2412.06464v3#page=7\"\n    source_asset: \"05 Источники/Originals/sequence-architecture-figures-2026-11-11/gated-v3.pdf\"\n    source_asset_sha256: \"55f84f2ae9c4e52ff494bfa699499867f5e9e17514994ac71de43888363a5fb9\"\n    source_page: 7\n    render_dpi: 300\n    render_page_size_px: [2550,3300]\n    crop_box_px: [446,82,2346,1122]\n    dimensions_px: [1900,1040]\n    sha256: \"c4297ff478654a952bb9b31f49a24eb1360e5597726ec16a24bdabd9dedeb3c0\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence_url: \"https://arxiv.org/abs/2412.06464v3\"\n    modifications: \"Existing pixels match the source; the page header and intervening whitespace are outside the figure.\"\n    derivation: \"pdf-page-render-crop\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    used_in: []\n    former_used_in: [\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\",\"05 Источники/Papers/Gated Delta Networks.md\"]\n    publication_status: \"retired\"\n    replacement: \"00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/gated-deltanet-figure1-complete.png\"\n    retirement_reason: \"Preserved locally; the chapter now embeds the complete figure from the versioned, licensed paper.\"\n  - id: curated-sequence-architecture-gated-v3-dd6f9e5ce009\n    asset: \"00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/gated-deltanet-figure1-complete.png\"\n    title: \"Gated DeltaNet, Figure 1: two hybrid layouts and the mixer\"\n    author: \"Songlin Yang, Jan Kautz, Ali Hatamizadeh\"\n    source_url: \"https://arxiv.org/abs/2412.06464v3\"\n    figure_url: \"https://arxiv.org/pdf/2412.06464v3#page=7\"\n    source_image_url: \"https://arxiv.org/pdf/2412.06464v3#page=7\"\n    source_asset: \"05 Источники/Originals/sequence-architecture-figures-2026-11-11/gated-v3.pdf\"\n    source_asset_sha256: \"55f84f2ae9c4e52ff494bfa699499867f5e9e17514994ac71de43888363a5fb9\"\n    source_page: 7\n    render_dpi: 480\n    render_page_size_px: [4080,5280]\n    crop_box_px: [905,577,3200,1800]\n    dimensions_px: [2295,1223]\n    sha256: \"dd6f9e5ce009f40bb76b12ee51abb4ef5247e25018c2edb1ab869ec97c06656c\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence_url: \"https://arxiv.org/abs/2412.06464v3\"\n    modifications: \"All three figure panels and labels, excluding the page header, blank margins, and printed caption.\"\n    derivation: \"pdf-page-render-crop\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\",\"05 Источники/Papers/Gated Delta Networks.md\"]"
+        },
+        {
+          "old": "  - id: curated-alternatives-transformer-falcon-h1-aaa13009e484\n    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/falcon-h1-architecture.webp\n    author: Technology Innovation Institute\n    source_url: https://huggingface.co/tiiuae/Falcon-H1-34B-Base\n    license: open release material; reuse confirmed by repository owner\n    license_url: https://huggingface.co/tiiuae/Falcon-H1-34B-Base\n    modifications: copied without visual modification from the official release material\n    used_in: [\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/alternatives-transformer-2026/vendor/falcon-h1-architecture.webp",
+          "new": "  - id: curated-alternatives-transformer-falcon-h1-aaa13009e484\n    asset: \"00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/falcon-h1-architecture.webp\"\n    author: \"Technology Innovation Institute\"\n    source_url: \"https://huggingface.co/tiiuae/Falcon-H1-34B-Base\"\n    sha256: \"aaa13009e484bf720cb5f0039782a0695a96be9849aba71a82e639b04b5879c0\"\n    license: null\n    license_url: null\n    modifications: \"Historical WebP unchanged in the local archive.\"\n    metadata_status: \"needs-confirmation\"\n    rights_status: \"historical-source-license-unverified\"\n    provenance_confirmation: \"historical-copy-only\"\n    used_in: []\n    former_used_in: [\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\"]\n    publication_status: \"retired\"\n    replacement: \"00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/falcon-h1-report-figure1.png\"\n    retirement_reason: \"Preserved locally; the chapter now embeds the complete figure from the versioned, licensed paper.\"\n  - id: curated-sequence-architecture-falcon-4f80fb76b447\n    asset: \"00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/falcon-h1-report-figure1.png\"\n    title: \"Falcon-H1 technical report, Figure 1: parallel SSM and attention\"\n    author: \"Technology Innovation Institute\"\n    source_url: \"https://arxiv.org/abs/2507.22448v1\"\n    figure_url: \"https://arxiv.org/pdf/2507.22448v1#page=5\"\n    source_image_url: \"https://arxiv.org/pdf/2507.22448v1#page=5\"\n    source_asset: \"05 Источники/Originals/sequence-architecture-figures-2026-11-11/falcon.pdf\"\n    source_asset_sha256: \"e62149cee2b71bbb096a88885377c5e736f0eb5fc7ca27f5b4008ffec906f8b5\"\n    source_page: 5\n    render_dpi: 480\n    render_page_size_px: [4080,5280]\n    crop_box_px: [930,450,3150,2480]\n    dimensions_px: [2220,2030]\n    sha256: \"4f80fb76b447db6da1c921447e5230e37387427b70166690b31aceb96c676454\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence_url: \"https://arxiv.org/abs/2507.22448v1\"\n    modifications: \"Complete author diagram, cropped from the vector report without redrawing.\"\n    derivation: \"pdf-page-render-crop\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\"]"
+        },
+        {
+          "old": "  - id: curated-alternatives-transformer-ttt-bfa8fa71ff52\n    asset: 00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/ttt-figure3.png\n    author: Yu Sun et al.\n    source_url: https://arxiv.org/abs/2407.04620\n    license: open paper material; reuse confirmed by repository owner\n    license_url: https://arxiv.org/abs/2407.04620\n    modifications: Figure 3 rendered from the official paper and cropped without content changes\n    used_in: [\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/alternatives-transformer-2026/papers/ttt.pdf\n    derivation: pdf-page-render-crop",
+          "new": "  - id: curated-alternatives-transformer-ttt-bfa8fa71ff52\n    asset: \"00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/ttt-figure3.png\"\n    author: \"Yu Sun et al.\"\n    source_url: \"https://arxiv.org/abs/2407.04620\"\n    sha256: \"bfa8fa71ff52473437c9698c24961b02d68039334e03b1dbbf445db8f8aa9bc8\"\n    license: null\n    license_url: null\n    modifications: \"Historical PNG unchanged in the local archive.\"\n    metadata_status: \"needs-confirmation\"\n    rights_status: \"historical-source-license-unverified\"\n    provenance_confirmation: \"historical-copy-only\"\n    used_in: []\n    former_used_in: [\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\",\"05 Источники/Papers/TTT layers.md\"]\n    publication_status: \"retired\"\n    replacement: \"00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/ttt-v1-figure4.png\"\n    retirement_reason: \"Preserved locally; the chapter now embeds the complete figure from the versioned, licensed paper.\"\n  - id: curated-sequence-architecture-ttt-v1-543d7255d9b6\n    asset: \"00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/ttt-v1-figure4.png\"\n    title: \"Learning to (Learn at Test Time), v1 Figure 4: sequence-layer state\"\n    author: \"Yu Sun et al.\"\n    source_url: \"https://arxiv.org/abs/2407.04620v1\"\n    figure_url: \"https://arxiv.org/pdf/2407.04620v1#page=4\"\n    source_image_url: \"https://arxiv.org/pdf/2407.04620v1#page=4\"\n    source_asset: \"05 Источники/Originals/sequence-architecture-figures-2026-11-11/ttt-v1.pdf\"\n    source_asset_sha256: \"61a6cdb14891692fc42c827a9e7de2a953618f236803976389cb64da2b16b832\"\n    source_page: 4\n    render_dpi: 480\n    render_page_size_px: [4080,5280]\n    crop_box_px: [565,565,3515,1860]\n    dimensions_px: [2950,1295]\n    sha256: \"543d7255d9b602831167192a38b14d353bcc0cebd394a7ca6562953f1ebc9e93\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence_url: \"https://arxiv.org/abs/2407.04620v1\"\n    modifications: \"Both original parts, the update diagram and the complete English comparison table; no printed caption.\"\n    derivation: \"pdf-page-render-crop\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md\",\"05 Источники/Papers/TTT layers.md\"]"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tests/fixtures/legacy-unhashed-assets.json",
+      "before_sha256": "5912e75591ac778c0f4230341012da03d0703f9a94bef97f454166fb593b46fc",
+      "after_sha256": "f4563fdd02943116346833af869bdd3c5501ad875377dadcc1be8514ebb62ada",
+      "lines": 287,
+      "changes": [
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/falcon-h1-architecture.webp\",\n    \"00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/gated-deltanet-figure1.png\",\n    \"00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/mamba-selective-copying.png\",",
+          "new": "    \"00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/mamba-selective-copying.png\","
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/mamba3-figure2.png\",\n    \"00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-hybrid-figure7.png\",\n    \"00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-pure-figure3.png\",\n    \"00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/rwkv7-state-update.png\",",
+          "new": "    \"00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/rwkv7-state-update.png\","
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/ttt-e2e-figure3.png\",\n    \"00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/ttt-figure3.png\",\n    \"00 Учебник/Assets/Figures/curated/astra/env-synthesis.png\",",
+          "new": "    \"00 Учебник/Assets/Figures/curated/astra/env-synthesis.png\","
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/atlas-remainder-official/retnet-dual-form.png\",\n    \"00 Учебник/Assets/Figures/curated/atlas-remainder-official/rwkv-architecture.png\",",
+          "new": "    \"00 Учебник/Assets/Figures/curated/atlas-remainder-official/rwkv-architecture.png\","
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/Gated Delta Networks.md",
+      "before_sha256": "fcb86a832d67984ad4ab4372bf4fcf7812833c19de38635a19982c282493aa99",
+      "changes": [
+        {
+          "old": "Упрощённое обновление:\n\n$$\nS_t=\\alpha_tS_{t-1}\n+\\beta_t(v_t-S_{t-1}k_t)k_t^\\top.\n$$\n\n$\\alpha_t$ управляет общим сохранением состояния. Разность\n$v_t-S_{t-1}k_t$ исправляет именно ошибку текущей ассоциации.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/gated-deltanet-figure1.png]]\n\n*Figure 1 показывает сам блок и два гибрида: с sliding-window attention и с\nMamba-2.*",
+          "new": "В записи авторов состояние $S_t$ имеет оси «значения × ключи».\nСначала прежняя память затухает с коэффициентом $\\alpha_t$.\nПо ослабленному состоянию слой оценивает значение текущего ключа\nи записывает поправку:\n\n$$\nS_t=\\alpha_tS_{t-1}\n+\\beta_t(v_t-\\alpha_t S_{t-1}k_t)k_t^\\top.\n$$\n\nПри единичном ключе и $\\beta_t=1$ чтение по этому ключу после обновления\nдаёт $v_t$. Например, если старая оценка 10, новое значение 30, а\n$\\alpha_t=0.5$, ослабленная оценка равна 5. Слой добавляет $30-5=25$\nв направлении ключа, поэтому новая оценка равна 30.\nСм. [§3.1, уравнение 10](https://arxiv.org/html/2412.06464v3#S3.SS1).\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/gated-deltanet-figure1-complete.png|H1 чередует Gated DeltaNet и скользящее внимание, H2 добавляет Mamba-2. Справа показаны проекции одного блока.]]\n\n*Songlin Yang, Jan Kautz и Ali Hatamizadeh,\n[Gated Delta Networks, v3, рис. 1, с. 7](https://arxiv.org/pdf/2412.06464v3#page=7),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*"
+        }
+      ],
+      "after_sha256": "f1a33c436bf602f6d0aadae4ba795c7bd2beafd7ccc401f1f508c53af7d6a708",
+      "lines": 57
+    },
+    {
+      "source": "05 Источники/Papers/TTT layers.md",
+      "before_sha256": "db9020750d915502ef16b2636f48d31b1f177a6b764f1564fa34af0fa260141e",
+      "changes": [
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/ttt-figure3.png]]\n\n*Figure 3 из статьи сопоставляет vector state RNN, список K/V self-attention и\nпараметры внутренней модели TTT.*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/ttt-v1-figure4.png|Таблица сопоставляет три состояния и правила их обновления: вектор RNN, список K/V и параметры внутренней модели TTT.]]\n\n*Yu Sun et al.,\n[Learning to (Learn at Test Time), v1, рис. 4, с. 4](https://arxiv.org/pdf/2407.04620v1#page=4),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). В поздней версии\nстатьи это [рисунок 3](https://arxiv.org/html/2407.04620v4#S1.F3).*"
+        }
+      ],
+      "after_sha256": "b3d04300c37a9de9b55c7a61134126fd9764b3594b300833805ba2eccecf1460",
+      "lines": 54
+    }
+  ],
+  "historical": [
+    {
+      "id": "curated-alternatives-transformer-gated-deltanet-c4297ff47865",
+      "asset": "00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/gated-deltanet-figure1.png",
+      "title": "Gated DeltaNet Figure 1 with article page header, historical crop",
+      "author": "Songlin Yang, Jan Kautz, Ali Hatamizadeh",
+      "source_url": "https://arxiv.org/abs/2412.06464v3",
+      "figure_url": "https://arxiv.org/pdf/2412.06464v3#page=7",
+      "source_image_url": "https://arxiv.org/pdf/2412.06464v3#page=7",
+      "source_asset": "05 Источники/Originals/sequence-architecture-figures-2026-11-11/gated-v3.pdf",
+      "source_asset_sha256": "55f84f2ae9c4e52ff494bfa699499867f5e9e17514994ac71de43888363a5fb9",
+      "source_page": 7,
+      "render_dpi": 300,
+      "render_page_size_px": [
+        2550,
+        3300
+      ],
+      "crop_box_px": [
+        446,
+        82,
+        2346,
+        1122
+      ],
+      "dimensions_px": [
+        1900,
+        1040
+      ],
+      "sha256": "c4297ff478654a952bb9b31f49a24eb1360e5597726ec16a24bdabd9dedeb3c0",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence_url": "https://arxiv.org/abs/2412.06464v3",
+      "modifications": "Existing pixels match the source; the page header and intervening whitespace are outside the figure.",
+      "derivation": "pdf-page-render-crop",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [],
+      "former_used_in": [
+        "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+        "05 Источники/Papers/Gated Delta Networks.md"
+      ],
+      "publication_status": "retired",
+      "replacement": "00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/gated-deltanet-figure1-complete.png",
+      "retirement_reason": "Preserved locally; the chapter now embeds the complete figure from the versioned, licensed paper."
+    },
+    {
+      "id": "curated-alternatives-transformer-falcon-h1-aaa13009e484",
+      "asset": "00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/falcon-h1-architecture.webp",
+      "author": "Technology Innovation Institute",
+      "source_url": "https://huggingface.co/tiiuae/Falcon-H1-34B-Base",
+      "sha256": "aaa13009e484bf720cb5f0039782a0695a96be9849aba71a82e639b04b5879c0",
+      "license": null,
+      "license_url": null,
+      "modifications": "Historical WebP unchanged in the local archive.",
+      "metadata_status": "needs-confirmation",
+      "rights_status": "historical-source-license-unverified",
+      "provenance_confirmation": "historical-copy-only",
+      "used_in": [],
+      "former_used_in": [
+        "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md"
+      ],
+      "publication_status": "retired",
+      "replacement": "00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/falcon-h1-report-figure1.png",
+      "retirement_reason": "Preserved locally; the chapter now embeds the complete figure from the versioned, licensed paper."
+    },
+    {
+      "id": "curated-alternatives-transformer-ttt-bfa8fa71ff52",
+      "asset": "00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/ttt-figure3.png",
+      "author": "Yu Sun et al.",
+      "source_url": "https://arxiv.org/abs/2407.04620",
+      "sha256": "bfa8fa71ff52473437c9698c24961b02d68039334e03b1dbbf445db8f8aa9bc8",
+      "license": null,
+      "license_url": null,
+      "modifications": "Historical PNG unchanged in the local archive.",
+      "metadata_status": "needs-confirmation",
+      "rights_status": "historical-source-license-unverified",
+      "provenance_confirmation": "historical-copy-only",
+      "used_in": [],
+      "former_used_in": [
+        "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+        "05 Источники/Papers/TTT layers.md"
+      ],
+      "publication_status": "retired",
+      "replacement": "00 Учебник/Assets/Figures/curated/sequence-architecture-figures-2026-11-11/ttt-v1-figure4.png",
+      "retirement_reason": "Preserved locally; the chapter now embeds the complete figure from the versioned, licensed paper."
+    }
+  ]
+}

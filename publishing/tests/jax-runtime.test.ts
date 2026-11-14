@@ -3,6 +3,7 @@ import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {describe,expect,it} from 'vitest';
 import {jaxRuntimeStart,jaxRuntimeEnd,withoutJaxRuntimeAddition} from './helpers/jax-runtime-baseline.js';
+import {beforeTopicConsolidation} from '../tools/topic-consolidation-baseline.mjs';
 
 const root=resolve(import.meta.dirname,'../..');
 const read=(path:string)=>readFileSync(resolve(root,path));
@@ -10,7 +11,7 @@ const text=(path:string)=>read(path).toString();
 const sha=(value:Buffer|string)=>createHash('sha256').update(value).digest('hex');
 const chapter='00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md';
 const originals='05 Источники/Originals/jax-runtime-2026-10-27';
-const current=text(chapter);
+const current=beforeTopicConsolidation(text(chapter),chapter,root);
 const section=current.split(jaxRuntimeStart)[1].split(jaxRuntimeEnd)[0];
 const fragment=(label:string)=>section.split(`<!-- BEGIN SOURCE: ${label} -->`)[1]
   .split(`<!-- END SOURCE: ${label} -->`)[0].trim();

@@ -2,6 +2,7 @@
 from pathlib import Path
 from math import isclose, log2, sqrt
 from itertools import permutations, combinations
+from fractions import Fraction
 import ast
 import hashlib
 import re
@@ -11,8 +12,9 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация.md"
 content = CHAPTER.read_bytes()
-blocks = re.findall(r"```python\n(.*?)```", content.decode(), re.S)
-assert len(blocks) == 7
+blocks = [match[1] for match in re.findall(
+    r"^(```|~~~)python\n(.*?)^\1$", content.decode(), re.S | re.M)]
+assert len(blocks) == 8
 scope = {}
 for number, code in enumerate(blocks, 1):
     print(f"Execute actual evaluation block {number}", flush=True)
@@ -58,6 +60,23 @@ else:
     raise AssertionError("Duplicates must be rejected")
 assert metrics([], set(), 1) is None
 print(f"PASS {cases} independent rank-position cases and boundary policies")
+
+# Enumerate every subset of actual rank positions and score it with the
+# chapter's ranking metric, independently of the combinatorial expression.
+expected_hit = scope["expected_sampled_hit1"]
+sampled_cases = 0
+for n in range(2, 10):
+    for relevant_rank in range(1, n + 1):
+        negatives = [r for r in range(1, n + 1) if r != relevant_rank]
+        for m in range(n):
+            wins = samples = 0
+            for subset in combinations(negatives, m):
+                ordered = sorted((*subset, relevant_rank))
+                wins += int(metrics(ordered, {relevant_rank}, 1)["hit"])
+                samples += 1
+            assert expected_hit(relevant_rank, n, m) == Fraction(wins, samples)
+            sampled_cases += 1
+print(f"PASS {sampled_cases} exact sampled-Hit@1 probabilities by enumeration")
 
 source = ROOT / "05 Источники/Originals/recommender-evaluation-2026-10-25"
 for name, expected in {

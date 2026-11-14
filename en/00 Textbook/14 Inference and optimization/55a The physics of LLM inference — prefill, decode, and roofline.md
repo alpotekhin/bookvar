@@ -4,10 +4,10 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "dcdc7f9712614b5342b15d03cba1beb7f641ea72b27fe6ee04730ad70fd66bdc"
-translation_reviewed: "2026-10-29"
+canonical_revision: "1c76c468f45b58340647e5ed7dd8723c70081e36f398bbaa19d5a554cd4453a9"
+translation_reviewed: "2026-11-11"
 translation_of: "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md"
-last_updated: 2026-10-29
+last_updated: 2026-11-11
 last_verified: 2026-07-22
 primary_sources:
   - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py
@@ -251,9 +251,14 @@ is the roofline ridge point. To its left, an operation is memory-bandwidth-bound
 CS336 uses nominal H100 SXM ceilings of 989 TFLOP/s for dense BF16 Tensor Core arithmetic, without structured sparsity, and 3.35 TB/s HBM bandwidth. Their ratio is about 295 FLOP/byte. The ridge belongs to that precision and device variant. It does not predict that a batch of 295 rows saturates a real GPU: matrix shapes, kernels and achieved bandwidth still matter.
 
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png]]
-
-*Arithmetic and memory-bandwidth ceilings. Implementations may operate below either ceiling. Original diagram by Aleksa Gordić, from the Performance section of [Inside vLLM](https://www.aleksagordic.com/blog/vllm); Stanford CS336 uses the same definitions. No explicit license is stated on the page.*
+On the sloping part of the curve, doubling $I$ doubles the bound:
+128 FLOP/byte gives $128\cdot3.35=428.8$ TFLOP/s, and 256 FLOP/byte
+gives $857.6$ TFLOP/s. At 512 FLOP/byte, $I W_{\max}$ already exceeds
+989 TFLOP/s, so the flat arithmetic ceiling sets the bound. These are
+H100 calculations, not values read from the schematic Harvard plot.
+A real kernel can fall below the bound at the same intensity.
+The [plot in Inside vLLM](https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/roofline.png)
+shows the same relationship.
 
 Prefill turns projections into large GEMMs: each loaded weight tile serves many input rows. The number of operations per byte rises, often placing prefill near the compute-bound portion of the roofline. Decode with small $B$ resembles matrix–vector multiplication: weights are loaded for only one or a few rows. If weights occupy $M_W$ bytes, a simplified decode pass has $F\approx2PB$ while weight traffic remains about $M_W$. A larger batch raises intensity because the same weights serve several requests:
 
@@ -529,11 +534,19 @@ PagedAttention addresses placement by dividing logical history into blocks and m
 
 ## Latency is not reducible to tokens per second
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png]]
+**TTFT** (*time to first token*) runs from request submission to receipt of the first token.
 
-*Aleksa Gordić, [Inside vLLM: Performance](https://www.aleksagordic.com/blog/vllm). TTFT runs from submission to the first token, ITL between successive tokens, and complete latency to the last token. These are observed intervals, not a diagram of internal server stages. No explicit license is stated on the page.*
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg|Server queue, prefill and first-token sampling, followed by later passes. The client receives the first token separately and the rest together in a buffered chunk.]]
 
-At least two independent quantities matter to a user. **TTFT** (*time to first token*) runs from request submission to receipt of the first token:
+*Vijay Janapa Reddi et al., [Harvard ML Systems, vol. III, Figure 5: First-Token Accounting](https://harvard-edge.github.io/cs249r_book_dev/vol3/02_foundation_model/02_foundation_model.html#fig-vol3-first-token-accounting), [original SVG](https://raw.githubusercontent.com/harvard-edge/cs249r_book_dev/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/images/svg/first_token_accounting.svg), [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Unmodified; distances on the diagram are not measured durations.*
+
+On the upper track, `Prompt prefill` ends with the initial logits.
+The server then selects the first token (`Sample 1`). The `Client TTFT`
+bracket starts before queueing and ends only when the client receives
+`Token 1`. Ordinary decoding needs $K-1$ passes to produce the remaining
+$K-1$ tokens. They arrive in one buffered chunk on the lower track,
+so the client sees when the chunk arrived, but not the timing of
+each pass. We can split TTFT into non-overlapping intervals:
 
 $$
 \begin{aligned}

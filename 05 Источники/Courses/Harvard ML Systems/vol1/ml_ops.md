@@ -592,9 +592,13 @@ Without this automation, model deployment degrades into a manual, error-prone pr
 
 [Figure 6](https://mlsysbook.ai/vol1/ml_ops/ml_ops.html#fig-ops-cicd) shows how a representative CI/CD pipeline addresses these risks, beginning with a dataset and feature repository from which data is ingested and validated. Validated data is then transformed for model training. A retraining trigger, such as a scheduled job or performance threshold, initiates this process automatically. Once training and hyperparameter tuning are complete, the resulting model undergoes evaluation against predefined criteria. If the model satisfies the required thresholds, it is registered in a model repository along with metadata, performance metrics, and lineage information. Finally, the model is deployed back into the production system, closing the loop and enabling continuous delivery of updated models.
 
-![[Assets/Sources/Harvard ML Systems/vol1/ml_ops/124c70a98d50344e78517384c2658cae1de42925.svg]]
+[Archived Figure 6: ML CI/CD Pipeline](https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/ml_ops/ml_ops_files/mediabag/124c70a98d50344e78517384c2658cae1de42925.svg)
 
 Figure 6: **ML CI/CD Pipeline**: The pipeline begins with dataset and feature repositories, flows through data validation, transformation, training, evaluation, and model registration stages, then deploys to production. Retraining triggers initiate the cycle automatically, while metadata and artifact repositories ensure reproducibility and governance. Adapted from Google Cloud’s MLOps continuous delivery and automation pipeline guidance ([Google Cloud 2026b](https://mlsysbook.ai/vol1/ml_ops/ml_ops.html#ref-googleCloudMlopsPipelines)).
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mlops-review-2026-10/google-cicd-stages.svg|Six stages from development through pipeline integration, deployment, triggering, model delivery, and monitoring.]]
+
+*Bookvar illustration: Pipeline continuous delivery deploys the training pipeline; Model continuous delivery deploys a model trained by that pipeline. Jarek Kazmierczak, Khalid Salama and Valentín Huerta, Google Cloud, [Stages of the CI/CD automated ML pipeline, Figure 5](https://docs.cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning#mlops_level_2_cicd_pipeline_automation), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Unmodified.*
 
 Google Cloud. 2026b. *MLOps: Continuous Delivery and Automation Pipelines in Machine Learning*.
 

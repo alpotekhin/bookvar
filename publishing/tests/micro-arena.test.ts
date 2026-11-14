@@ -1,4 +1,5 @@
-import { beforeReaderRouteNavigation, readBeforeReaderRouteNavigation } from '../tools/reader-route-baseline.mjs';
+import { beforeReaderRouteNavigation } from '../tools/reader-route-baseline.mjs';
+import { beforeTopicConsolidation } from '../tools/topic-consolidation-baseline.mjs';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
@@ -13,12 +14,14 @@ const pattern=/<!-- BEGIN REVIEW: Micro arena 2026-10-27 -->\n([\s\S]*?)<!-- END
 const addition=text.match(pattern)!;
 describe('micro-runtime arena walkthrough',()=>{
   it('preserves the entire accepted Edge/FL chapter and its original anchor placement',()=>{
-    const baseline=beforeReaderRouteNavigation(text, path).replace(pattern,'').replace('last_updated: 2026-10-27','last_updated: 2026-10-26')
+    const atReview=beforeTopicConsolidation(text,path,root);
+    const baseline=beforeReaderRouteNavigation(text,path,root).replace(pattern,'').replace('last_updated: 2026-10-27','last_updated: 2026-10-26')
       .replace('last_verified: 2026-10-27','last_verified: 2026-10-26');
     expect(digest(baseline)).toBe('9038a3d22ef6b746b7a99720542763f94b8117641c84543499433305a001c7e3');
-    expect(text.match(/^```python/gm)).toHaveLength(7);
-    expect(text.match(/!\[\[/g)).toHaveLength(7);
-    expect(text).toContain('<a id="ограничить-изменяемое-состояние"></a>\n\n## Почему замороженные');
+    expect(atReview.match(/^```python/gm)).toHaveLength(7);
+    expect(atReview.match(/!\[\[/g)).toHaveLength(7);
+    expect(atReview).toContain('<a id="ограничить-изменяемое-состояние"></a>\n\n## Почему замороженные');
+    expect(text).toContain('<a id="ограничить-изменяемое-состояние"></a>');
   });
   it('retains both complete source C++ fragments and distinguishes code from executed bookkeeping',()=>{
     const manual=read('05 Источники/Originals/micro-runtime-2026-10-27/memory_management.md').toString();

@@ -1,0 +1,307 @@
+{
+  "date": "2026-11-09",
+  "scope": "Replace four slide crops in the Chinchilla discussion with versioned source links and five complete CC BY 4.0 originals. Explain the link between fixed-budget minima, their scaling laws, parabolic approximation bias, and the independent joint-fit reconstruction.",
+  "review": {
+    "sources": [
+      "Hoffmann et al. arXiv:2203.15556v1 §§3.1–3.3, Figures 2–4 and Appendix D.2. Figure reuse grant not verified; exact versions remain linked.",
+      "Stanford CS336 Lecture 1 trace step 276 and Lecture 9 pp. 47–49, 53. The reader follows an existing textbook owner; the exact Lecture 1 image stays source-only.",
+      "Czech et al. arXiv:2603.22339v1 §§4–6, Figures 3–4. Synthetic, noiseless controls; equal grid width and known center give a fixed multiplicative shift, while a drifting center can change the slope.",
+      "Besiroglu et al. arXiv:2404.10102v2 §§2–3, Figures 2–5. The reconstruction is partial; Figure 1 is a third-party reprint and is not reused."
+    ],
+    "example": "Subtract E and divide by the common derivative coefficient. The rescaled exact minimum is N/N*=1; the printed three-point interpolator returns 1.03249557 and 1.32845978 for grids centered at the true minimum. Equal exponents recover 1. Changing the budget-independent center by a factor 10 scales both estimates by 10. These are analytic controls, not model training.",
+    "figures": "All five author assets are complete byte-exact copies, no crop or relabel. Frozen versioned HTML confirms figure-to-file correspondence and CC BY 4.0. The four retired slide files remain available as historical artifacts; none is embedded in the chapter.",
+    "editorial": "Read the full pre-edit canonical chapter and reread the revised passages. Original learning curves, fit conditions, Huber example and warning against transferring one D/N ratio are preserved. The checked English route shows the labelled canonical-language fallback; this is not a translation."
+  },
+  "verification": {
+    "chapter": "3a409165160ceae540945646f03b61a5904a23ada0dc36ed7b1ee1a68b24ffba: check_scaling_examples.py passed, including symmetric and budget-rescaled controls.",
+    "reader": "Chrome at 375 and 1280 CSS px: five figures in RU and the labelled EN chapter fallback, source-note round trips in both shells, CS336 to method 2, intact aspect ratios, no page overflow or KaTeX errors. All five images panned at 3.5× on narrow RU. Inspected panel order, axes and legend; corrected the Figure 5 x-axis and Figure 4 panel description before the final check.",
+    "readerReport": "/var/folders/6c/j5sghwf51gx41g_055zlcs_m0000gq/T/bookvar-gpt-route-vqUQEM/isoflop-report.json",
+    "localBuild": "2057 pages, 251 built-output tests passed, 0 broken routes, fragments or files. 17 focused receipts, residual and publication-policy checks passed. Source coverage and topic index checks passed.",
+    "assetRegistry": "The full run passed 186 tests and found the missing dispatch for these original assets. After adding explicit validation, both affected cases passed: five-source provenance/retirement and exactly-once registration for every tracked curated binary.",
+    "course": "Fresh Stanford snapshot regeneration passed against 902 archived artifacts: 811 semantic rows and 159 visual rows; source inventory and source units unchanged.",
+    "publication": "Local only; no commit, push or deployment."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "before_sha256": "4d6e1450497fa190b47bb18105c8428ababdc15589828a365e2858ff1cd325c6",
+      "after_sha256": "3a409165160ceae540945646f03b61a5904a23ada0dc36ed7b1ee1a68b24ffba",
+      "lines": 1595,
+      "changes": [
+        {
+          "old": "  - https://arxiv.org/abs/2404.10102",
+          "new": "  - https://arxiv.org/abs/2404.10102\n  - https://arxiv.org/abs/2603.22339v1"
+        },
+        {
+          "old": "В работе Chinchilla этот компромисс оценивали тремя способами.\nНа её графиках ниже используется обучающая кросс-энтропия (`Training Loss`).",
+          "new": "В работе Chinchilla этот компромисс оценивали тремя способами.\nНа графиках Hoffmann et al. отложена обучающая кросс-энтропия."
+        },
+        {
+          "old": "Из множества кривых обучения выбирают наименьшие потери, достигнутые при каждом\nбюджете, и подгоняют степенную зависимость к этой огибающей. Метод использует\nвесь ход обучения, но чувствителен к тому, какие траектории и точки остановки\nвообще попали в эксперимент.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scaling-review-2026-10/chinchilla-lower-envelope-chart.png]]\n\n*Слева цвет обозначает размер модели, чёрная огибающая выбирает\nнаименьшие достигнутые потери при каждом бюджете. В центре и справа\nчерез выбранные размеры модели и объёмы данных проводят степенные зависимости.\nРазличия расписаний и настройки оптимизатора могут изменить саму огибающую.\nИсточник: [Stanford CS336, lecture 9, page 47](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf).*",
+          "new": "Для каждого размера авторы обучили четыре модели с разной длиной\nкосинусного расписания. Они сгладили и интерполировали кривые потерь,\nчтобы сравнивать их при одних и тех же FLOPs. Если мысленно провести\nвертикаль на [Figure 2 Hoffmann et al.](https://arxiv.org/html/2203.15556v1#S3.F2),\nсамое нижнее пересечение даёт лучшую из доступных траекторий при этом\nбюджете. Вместе с потерей из неё считывают размер модели и число\nобработанных токенов. Эти пары, собранные при разных бюджетах, дают\nточки на средней и правой панелях. Добавление удачного расписания может\nопустить огибающую, даже если список размеров модели не изменился."
+        },
+        {
+          "old": "По завершении запусков строят $L(N\\mid C_i)$ и находят минимум\n$(N_i^*,D_i^*)$. Хорошая сетка охватывает обе стороны минимума. Если лучшая\nточка оказалась на границе, минимум не найден: диапазон нужно расширить, а не\nпроводить кривую через пограничное значение.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scaling-review-2026-10/chinchilla-isoflops-chart.png]]\n\n*Слева каждая линия имеет фиксированный бюджет; её минимум задаёт одну\nвычислительно оптимальную пару. Центральный и правый графики проводят степенные законы\nчерез последовательность минимумов. Источник: [Stanford CS336, lecture 9,\npage 48](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf),\nFigure 3 из [Hoffmann et al., 2022](https://arxiv.org/abs/2203.15556).*",
+          "new": "Здесь длину косинусного расписания задают отдельно для каждого запуска,\nчтобы снижение скорости закончилось к его $D_{ij}$. На кривую\n$L(N\\mid C_i)$ попадают только итоговые потери. Hoffmann et al. подгоняли\nпараболу к каждой кривой и брали пару $(N_i^*,D_i^*)$ в её минимуме.\nВ [оригинальной Figure 3](https://arxiv.org/html/2203.15556v1#S3.F3),\nкоторую показывает и [первая лекция CS336](https://cs336.stanford.edu/lectures/?trace=lecture_01)\nна шаге 276, каждая цветная кривая слева соответствует своему бюджету.\nЕсли лучшая наблюдаемая точка оказалась на краю сетки, опыт пока не\nпоказывает вторую сторону минимума. Тогда нужны запуски за этим краем.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/happy_path.svg|Слева пять IsoFLOP-кривых с разными бюджетами и совпадающими истинными и оценёнными минимумами; справа степенная подгонка числа токенов.]]\n\n*Eric Czech, Zhiwei Xu, Yael Elmatad, Yixin Wang и William Held,\n[Problems with Chinchilla Approach 2, Figure 3](https://arxiv.org/html/2603.22339v1#S4.F3).\n[Исходный SVG](https://arxiv.org/html/2603.22339v1/happy_path.svg), без изменений.\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nЭто моделирование, в котором истинные потери заранее заданы.*\n\nЛевая панель показывает пять бюджетов. Для каждого крестик обозначает\nизвестный минимум, а плюс — минимум подогнанной параболы; в этом опыте\nони накладываются. На правой панели по каждому найденному $N_i^*$\nуже вычислено $D_i^*=C_i/(6N_i^*)$. Рост бюджета в 100 раз здесь\nсопровождается десятикратным ростом оптимального числа токенов:\nнаклон в логарифмических координатах равен $1/2$."
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scaling-review-2026-10/chinchilla-joint-fit-chart.png]]\n\n*Слева контуры соединяют равные предсказанные потери на плоскости\n«вычисления — размер модели». Синяя линия проходит через оптимальные\nразмеры; точки обозначают проведённые эксперименты. Вертикальные сечения\nпри фиксированном бюджете дают показанные справа IsoFLOP-кривые.\nТеперь кривые получены из общей подогнанной поверхности, а не независимо\nдля каждого бюджета. Источник: [Stanford CS336,\nlecture 9, page 49](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/training_flop_vs_model_size.png|Восстановленные точки Chinchilla: по горизонтали FLOPs, по вертикали размер модели, цвет обозначает обучающие потери.]]\n\n*Tamay Besiroglu, Ege Erdil, Matthew Barnett и Josh You,\n[Chinchilla Scaling: A replication attempt, Figure 2](https://arxiv.org/html/2404.10102v2#S2.F2).\n[Авторский PNG](https://arxiv.org/html/2404.10102v2/training_flop_vs_model_size.png),\nбез изменений, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nТочки восстановлены из графика Hoffmann et al.; это не исходный журнал запусков.*\n\nИз координат точки получаем $C_i$ и $N_i$, откуда можно оценить $D_i$;\nцвет даёт $L_i$. Besiroglu et al. восстанавливали потери по дискретной\nцветовой шкале с точностью порядка $0{,}01$. В\n[Figure 4 Hoffmann et al.](https://arxiv.org/html/2203.15556v1#S3.F4)\nк точкам добавлены контуры уже подогнанной поверхности. Вертикальное\nсечение при заданном $C$ даёт кривую справа. В методе 2 каждую такую\nкривую подгоняли отдельно; здесь все сечения задаёт один набор\nкоэффициентов."
+        },
+        {
+          "old": "Besiroglu et al. решали другую задачу: восстановили данные третьего\nметода Chinchilla и заново подогнали его коэффициенты. Результат лучше\nсогласуется с первыми двумя методами. Это не тот же эксперимент,\nчто последовательные изменения настроек у Porian et al.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scaling-review-2026-10/chinchilla-residuals-chart.png]]\n\n*Слева остатки исходной подгонки смещены относительно нуля; после\nперепроверки они сосредоточены ближе к нулю. Справа новая оценка отношения\nтокенов к параметрам близка к 20, но её неопределённость растёт при\nэкстраполяции. Это пересчёт Besiroglu et al., не эксперимент Porian выше.\nИсточник: [Stanford CS336, lecture 9, page 53](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf).*",
+          "new": "Besiroglu et al. оставили ту же форму $L(N,D)$ и заново подогнали её\nпо восстановленным точкам. У них было 240 наблюдений против более чем\n400 в исходной работе. В статье сравниваются три набора коэффициентов:\nокруглённые из текста Hoffmann et al., более точные из исходников TeX\nи полученные при новой подгонке.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/distributions.svg|Распределения остатков для округлённых коэффициентов Chinchilla и повторной подгонки Besiroglu et al.]]\n\n*Besiroglu, Erdil, Barnett и You, [Figure 3](https://arxiv.org/html/2404.10102v2#S3.F3).\n[Исходный SVG](https://arxiv.org/html/2404.10102v2/distributions.svg),\nбез изменений, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nНа рисунке показаны округлённые коэффициенты: при них остатки заметно\nсмещены от нуля. Подстановка более точных значений\n[[#Метод 3: совместная поверхность|в ту же формулу потерь]] устраняет\nзначительную часть смещения, но остатки новой подгонки всё ещё меньше\n([§3.1, Figure 4](https://arxiv.org/html/2404.10102v2#S3.F4)).\nРазница в остатках относится к восстановленным данным. По ней нельзя\nузнать ошибки на тех запусках, которые не удалось восстановить.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/tokens_to_params_ratio_plot.svg|Оценки оптимального числа токенов на параметр с 80-процентными интервалами.]]\n\n*Besiroglu, Erdil, Barnett и You, [Figure 5](https://arxiv.org/html/2404.10102v2#S3.F5).\n[Исходный SVG](https://arxiv.org/html/2404.10102v2/tokens_to_params_ratio_plot.svg),\nбез изменений, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nЗдесь по горизонтали отложено число параметров, по вертикали $D^*/N^*$.\nПолосы обозначают 80%-ные интервалы. В диапазоне, к которому относится\nChinchilla 70B, новая оценка согласуется с фактическим отношением около\n20 токенов на параметр. У исходной параметрической подгонки интервал\nзначительно уже. Как сообщает один из её авторов, оптимизатор останавливался\nслишком рано из-за масштаба целевой функции: в коде усредняли слагаемые\nХьюбера, хотя в статье стояла их сумма. Минимум от такого деления не\nменяется, но меняются градиенты и условия остановки. Это объясняет,\nпочему результаты повторных подгонок при бутстрэпе могли оставаться\nслишком близко к начальному приближению ([§3.2](https://arxiv.org/html/2404.10102v2#S3.SS2))."
+        },
+        {
+          "old": "Ни дискретный минимум, ни трёхточечная интерполяция не заменяют\nуточнение сетки и проверку на новых запусках.",
+          "new": "Ни дискретный минимум, ни трёхточечная интерполяция не заменяют\nуточнение сетки и проверку на новых запусках.\n\n<a id=\"isoflop-parabola-bias\"></a>\n\n### Когда парабола смещает минимум\n\nДо сих пор истинный минимум был неизвестен. Построим пример, где\nего положение можно проверить. Возьмём $x=\\ln(N/N^*)$ и вычтем\nиз $L$ константу $E$. В точке оптимума два члена производной равны.\nРазделим потери без $E$ на их общий множитель\n$\\alpha A(N^*)^{-\\alpha}=\\beta B(D^*)^{-\\beta}$. Тогда сечение\nиз метода 3 принимает вид\n\n$$\nf(x)=\\frac{e^{-\\alpha x}}{\\alpha}+\\frac{e^{\\beta x}}{\\beta}.\n$$\n\nПроизводная в нуле равна $-1+1=0$, вторая производная\nположительна при $\\alpha,\\beta>0$, поэтому истинный минимум\nлежит в $x=0$. При $\\alpha=\\beta$ кривая симметрична и парабола\nчерез точки $-h,0,h$ тоже имеет минимум в нуле. Возьмём теперь\n$\\alpha=0{,}6$ и $\\beta=0{,}2$. При $h=\\ln 2$ потери по обе стороны\nот минимума возрастают на 0,2123 и 0,1764 соответственно.\nПравый край ниже левого, хотя от центра они одинаково далеки.\nТа же функция `three_point_minimum` с тремя точными значениями $f$\nдаёт следующий результат:\n\n| Размеры в единицах $N^*$ | Оценка $N/N^*$ | Оценка $D/D^*$ |\n|---:|---:|---:|\n| $1/2,\\ 1,\\ 2$ | 1,0325 | 0,9685 |\n| $1/8,\\ 1,\\ 8$ | 1,3285 | 0,7528 |\n\nСетка шире, а ошибка больше, хотя в ней по-прежнему есть истинный\nоптимум и ни в одном измерении нет шума. Если использовать одну и ту\nже относительную сетку при всех бюджетах, каждый $N^*$ умножится\nна один и тот же коэффициент. Наклон зависимости $\\log N^*$ от\n$\\log C$ сохранится, но сама прямая сдвинется. При фиксированном\n$C$ переоценка размера означает недооценку числа токенов.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/asymmetric.svg|Две асимметричные поверхности: слева IsoFLOP-кривые, справа истинные и оценённые степенные зависимости для числа токенов.]]\n\n*Czech et al., [Figure 4](https://arxiv.org/html/2603.22339v1#S5.F4).\n[Исходный SVG](https://arxiv.org/html/2603.22339v1/asymmetric.svg),\nбез изменений, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nАвторы используют больше точек и другие показатели, чем в расчёте выше.*\n\nНа нижней правой панели пунктир и сплошная линия имеют одинаковый\nнаклон, но расходятся по высоте. Это случай центрированной сетки:\nесли её центр смещается по-разному на разных бюджетах, может исказиться\nи наклон ([Czech et al., §6.2](https://arxiv.org/html/2603.22339v1#S6.SS2)).\nВ реальном опыте положение центра заранее неизвестно. Сначала нужна\nдостаточно широкая сетка, чтобы найти обе стороны минимума. Затем можно\nдобавить точки около лучшего запуска и проверить, сохраняется ли\nоценка при другой ширине подгонки."
+        },
+        {
+          "old": "- Besiroglu et al. [Chinchilla Scaling: A replication attempt](https://arxiv.org/abs/2404.10102), 2024 — восстановление данных и перепроверка третьего метода Chinchilla.",
+          "new": "- Besiroglu et al. [Chinchilla Scaling: A replication attempt](https://arxiv.org/abs/2404.10102), 2024 — восстановление данных и перепроверка третьего метода Chinchilla.\n- [[05 Источники/Papers/Czech et al. 2026 — Problems with Chinchilla Approach 2|Czech et al., Problems with Chinchilla Approach 2]], 2026 — условия, при которых подгонка параболы смещает оптимум даже без шума."
+        },
+        {
+          "old": "source_unit_id:\n  - lecture-01-figure-step-39-rendering-1",
+          "new": "source_unit_id:\n  - lecture-01-figure-step-39-rendering-1\n  - lecture-01-figure-step-276-rendering-1"
+        },
+        {
+          "old": "Левая панель показывает пять бюджетов. Для каждого крестик обозначает\nизвестный минимум, а плюс — минимум подогнанной параболы; в этом опыте\nони накладываются. На правой панели по каждому найденному $N_i^*$\nуже вычислено $D_i^*=C_i/(6N_i^*)$. Рост бюджета в 100 раз здесь\nсопровождается десятикратным ростом оптимального числа токенов:\nнаклон в логарифмических координатах равен $1/2$.",
+          "new": "На левой панели пять бюджетов. В отличие от графика Hoffmann et al.,\nпо горизонтали отложен логарифм числа токенов, а не размера модели.\nПри фиксированном бюджете переход от $N$ к $D=C/(6N)$ только разворачивает\nлогарифмическую ось. Крестик обозначает истинный минимум, плюс — минимум\nпараболы; в этом опыте они накладываются. Справа найденные $D_i^*$\nотложены против бюджетов. Рост бюджета в 100 раз сопровождается\nдесятикратным ростом $D^*$: наклон в логарифмических координатах равен $1/2$."
+        },
+        {
+          "old": "Здесь по горизонтали отложено число параметров, по вертикали $D^*/N^*$.",
+          "new": "По горизонтали отложены FLOPs обучения, по вертикали $D^*/N^*$."
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/asymmetric.svg|Две асимметричные поверхности: слева IsoFLOP-кривые, справа истинные и оценённые степенные зависимости для числа токенов.]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/asymmetric.svg|Две асимметричные поверхности: сверху IsoFLOP-кривые, снизу истинные и оценённые степенные зависимости для числа токенов.]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "05ae0d5445264ede0b1d1d042e30ee51ad1ec4fdb754517fae3fbf649a541833",
+      "after_sha256": "ccff0d4c5f951bfc64948293de6b15dde9c726fe76aa053548a0a84230ec1768",
+      "lines": 24285,
+      "changes": [
+        {
+          "old": "assets:",
+          "new": "assets:\n  - id: \"curated-scaling-isoflop-0ac01e9299c3\"\n    asset: \"00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/happy_path.svg\"\n    title: \"IsoFLOP fits on a symmetric loss surface\"\n    author: \"Eric Czech, Zhiwei Xu, Yael Elmatad, Yixin Wang and William Held\"\n    source_url: \"https://arxiv.org/html/2603.22339v1#S4.F3\"\n    source_image_url: \"https://arxiv.org/html/2603.22339v1/happy_path.svg\"\n    source_asset: \"00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/happy_path.svg\"\n    source_asset_sha256: \"0ac01e9299c3c92fc3705dc0a2482e1979e9d721dcff70935adf2efdb45df8ad\"\n    sha256: \"0ac01e9299c3c92fc3705dc0a2482e1979e9d721dcff70935adf2efdb45df8ad\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    rights_evidence: \"https://arxiv.org/html/2603.22339v1\"\n    source_page_snapshot: \"05 Источники/Originals/scaling-isoflop-2026-11-09/2603.22339v1.html\"\n    source_page_sha256: \"fdba9fb1ecd43409437ff6b3eb9b162ab660ec59322db37e133c662cfa58f7bb\"\n    derivation: \"source-svg-copy\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    modifications: \"Original image copied byte-for-byte; no crop, redraw or relabelling.\"\n    used_in: [\"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\"]\n  - id: \"curated-scaling-isoflop-6df85f0b6ddf\"\n    asset: \"00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/asymmetric.svg\"\n    title: \"IsoFLOP fits on asymmetric loss surfaces\"\n    author: \"Eric Czech, Zhiwei Xu, Yael Elmatad, Yixin Wang and William Held\"\n    source_url: \"https://arxiv.org/html/2603.22339v1#S5.F4\"\n    source_image_url: \"https://arxiv.org/html/2603.22339v1/asymmetric.svg\"\n    source_asset: \"00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/asymmetric.svg\"\n    source_asset_sha256: \"6df85f0b6ddf5d8be2486e2ea614d6aa37d60076e0f30072ab53b14c34fa8ebc\"\n    sha256: \"6df85f0b6ddf5d8be2486e2ea614d6aa37d60076e0f30072ab53b14c34fa8ebc\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    rights_evidence: \"https://arxiv.org/html/2603.22339v1\"\n    source_page_snapshot: \"05 Источники/Originals/scaling-isoflop-2026-11-09/2603.22339v1.html\"\n    source_page_sha256: \"fdba9fb1ecd43409437ff6b3eb9b162ab660ec59322db37e133c662cfa58f7bb\"\n    derivation: \"source-svg-copy\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    modifications: \"Original image copied byte-for-byte; no crop, redraw or relabelling.\"\n    used_in: [\"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\"]\n  - id: \"curated-scaling-isoflop-3fbaefa50fa0\"\n    asset: \"00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/training_flop_vs_model_size.png\"\n    title: \"Reconstructed Chinchilla data\"\n    author: \"Tamay Besiroglu, Ege Erdil, Matthew Barnett and Josh You\"\n    source_url: \"https://arxiv.org/html/2404.10102v2#S2.F2\"\n    source_image_url: \"https://arxiv.org/html/2404.10102v2/training_flop_vs_model_size.png\"\n    source_asset: \"00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/training_flop_vs_model_size.png\"\n    source_asset_sha256: \"3fbaefa50fa091f9dc58136ae9772a1d27123bf9399751bc8be0c919a2be7841\"\n    sha256: \"3fbaefa50fa091f9dc58136ae9772a1d27123bf9399751bc8be0c919a2be7841\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    rights_evidence: \"https://arxiv.org/html/2404.10102v2\"\n    source_page_snapshot: \"05 Источники/Originals/scaling-isoflop-2026-11-09/2404.10102v2.html\"\n    source_page_sha256: \"1ee763faf48118f14f5cd570f6f0c17c06014b672a123e80b0984ec3d69ce347\"\n    derivation: \"source-png-copy\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    modifications: \"Original image copied byte-for-byte; no crop, redraw or relabelling.\"\n    used_in: [\"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\"]\n    dimensions_px: [1058,536]\n  - id: \"curated-scaling-isoflop-98769023cbf1\"\n    asset: \"00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/distributions.svg\"\n    title: \"Residuals of the rounded and refitted scaling models\"\n    author: \"Tamay Besiroglu, Ege Erdil, Matthew Barnett and Josh You\"\n    source_url: \"https://arxiv.org/html/2404.10102v2#S3.F3\"\n    source_image_url: \"https://arxiv.org/html/2404.10102v2/distributions.svg\"\n    source_asset: \"00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/distributions.svg\"\n    source_asset_sha256: \"98769023cbf1cd7193d454cab36051328d71182d12bb0a9895c2e4d8df6bd1e5\"\n    sha256: \"98769023cbf1cd7193d454cab36051328d71182d12bb0a9895c2e4d8df6bd1e5\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    rights_evidence: \"https://arxiv.org/html/2404.10102v2\"\n    source_page_snapshot: \"05 Источники/Originals/scaling-isoflop-2026-11-09/2404.10102v2.html\"\n    source_page_sha256: \"1ee763faf48118f14f5cd570f6f0c17c06014b672a123e80b0984ec3d69ce347\"\n    derivation: \"source-svg-copy\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    modifications: \"Original image copied byte-for-byte; no crop, redraw or relabelling.\"\n    used_in: [\"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\"]\n  - id: \"curated-scaling-isoflop-c550efc1565c\"\n    asset: \"00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/tokens_to_params_ratio_plot.svg\"\n    title: \"Optimal ratio of training tokens to model parameters\"\n    author: \"Tamay Besiroglu, Ege Erdil, Matthew Barnett and Josh You\"\n    source_url: \"https://arxiv.org/html/2404.10102v2#S3.F5\"\n    source_image_url: \"https://arxiv.org/html/2404.10102v2/tokens_to_params_ratio_plot.svg\"\n    source_asset: \"00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/tokens_to_params_ratio_plot.svg\"\n    source_asset_sha256: \"c550efc1565c868ac3ebb095a2f46a14f8fdd0ceb16246dcbab7d67028461cd6\"\n    sha256: \"c550efc1565c868ac3ebb095a2f46a14f8fdd0ceb16246dcbab7d67028461cd6\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    rights_evidence: \"https://arxiv.org/html/2404.10102v2\"\n    source_page_snapshot: \"05 Источники/Originals/scaling-isoflop-2026-11-09/2404.10102v2.html\"\n    source_page_sha256: \"1ee763faf48118f14f5cd570f6f0c17c06014b672a123e80b0984ec3d69ce347\"\n    derivation: \"source-svg-copy\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    modifications: \"Original image copied byte-for-byte; no crop, redraw or relabelling.\"\n    used_in: [\"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\"]"
+        },
+        {
+          "old": "    sha256: 3a727fbd7b1e6954385f18062082d4570dac1352117c37bb4dc58a2a87039285\n    license: User permission record (not a named license)\n    license_url: https://cs336.stanford.edu/\n    rights_status: existing-local-reformat; third-party-rights-unverified\n    derivation: pdf-page-render-crop\n    modifications: Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.\n    used_in:\n      - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    review_note: Existing chapter figure; underlying paper attribution in scaling-review-2026-10/NOTICE.md. No independent permission inferred.\n    last_verified: 2026-10-13",
+          "new": "    sha256: 3a727fbd7b1e6954385f18062082d4570dac1352117c37bb4dc58a2a87039285\n    license: User permission record (not a named license)\n    license_url: https://cs336.stanford.edu/\n    rights_status: existing-local-reformat; third-party-rights-unverified\n    derivation: pdf-page-render-crop\n    modifications: Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.\n    publication_status: retired\n    used_in: []\n    former_used_in: [\"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\"]\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    review_note: \"Original linked: Hoffmann et al. Figure 2.\"\n    last_verified: 2026-11-09"
+        },
+        {
+          "old": "    sha256: d1d3c4ea710ff85545450f6230dbc24f9c0dce418b3f5c3f440541c1df974367\n    license: User permission record (not a named license)\n    license_url: https://cs336.stanford.edu/\n    rights_status: existing-local-reformat; third-party-rights-unverified\n    derivation: pdf-page-render-crop\n    modifications: Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.\n    used_in:\n      - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    review_note: Existing chapter figure; underlying paper attribution in scaling-review-2026-10/NOTICE.md. No independent permission inferred.\n    last_verified: 2026-10-13",
+          "new": "    sha256: d1d3c4ea710ff85545450f6230dbc24f9c0dce418b3f5c3f440541c1df974367\n    license: User permission record (not a named license)\n    license_url: https://cs336.stanford.edu/\n    rights_status: existing-local-reformat; third-party-rights-unverified\n    derivation: pdf-page-render-crop\n    modifications: Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.\n    publication_status: retired\n    used_in: []\n    former_used_in: [\"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\"]\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    review_note: \"Original linked: Hoffmann et al. Figure 3. Replaced in teaching flow by Czech et al. Figures 3 and 4.\"\n    last_verified: 2026-11-09"
+        },
+        {
+          "old": "    sha256: 6e848739c66ce799a81a29a12084db9bc9b84527b2baf09ad4337eedd5b7ef28\n    license: User permission record (not a named license)\n    license_url: https://cs336.stanford.edu/\n    rights_status: existing-local-reformat; third-party-rights-unverified\n    derivation: pdf-page-render-crop\n    modifications: Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.\n    used_in:\n      - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    review_note: Existing chapter figure; underlying paper attribution in scaling-review-2026-10/NOTICE.md. No independent permission inferred.\n    last_verified: 2026-10-13",
+          "new": "    sha256: 6e848739c66ce799a81a29a12084db9bc9b84527b2baf09ad4337eedd5b7ef28\n    license: User permission record (not a named license)\n    license_url: https://cs336.stanford.edu/\n    rights_status: existing-local-reformat; third-party-rights-unverified\n    derivation: pdf-page-render-crop\n    modifications: Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.\n    publication_status: retired\n    used_in: []\n    former_used_in: [\"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\"]\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    review_note: \"Original linked: Hoffmann et al. Figure 4. The chapter embeds Besiroglu et al. Figure 2 as a separate reconstruction of the data.\"\n    last_verified: 2026-11-09"
+        },
+        {
+          "old": "    sha256: 82bec92ccc8efa37be469093ba6c6e92996f3d352650967ef234a2e78bf1aa8d\n    license: User permission record (not a named license)\n    license_url: https://cs336.stanford.edu/\n    rights_status: existing-local-reformat; third-party-rights-unverified\n    derivation: pdf-page-render-crop\n    modifications: Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.\n    used_in:\n      - 00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    review_note: Existing chapter figure; underlying paper attribution in scaling-review-2026-10/NOTICE.md. No independent permission inferred.\n    last_verified: 2026-10-13",
+          "new": "    sha256: 82bec92ccc8efa37be469093ba6c6e92996f3d352650967ef234a2e78bf1aa8d\n    license: User permission record (not a named license)\n    license_url: https://cs336.stanford.edu/\n    rights_status: existing-local-reformat; third-party-rights-unverified\n    derivation: pdf-page-render-crop\n    modifications: Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.\n    publication_status: retired\n    used_in: []\n    former_used_in: [\"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\"]\n    metadata_status: needs-confirmation\n    provenance_confirmation: user-confirmed-open-materials\n    review_note: Replaced by the unchanged SVGs for Besiroglu et al. Figures 3 and 5.\n    last_verified: 2026-11-09"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "cbdbead98352c77287dbb5e819b82034e9a7f12ac3a589b4542abf2b0ffe410a",
+      "after_sha256": "1ca14b40a73dc33ef73765f8213d8628a48ab11dbdaa622da11997d50bc5a3d2",
+      "lines": 2582,
+      "changes": [
+        {
+          "old": "      - source: 05 Источники/Papers/Are Emergent Abilities of Large Language Models a Mirage.md\n        route: sources/papers/emergent-abilities-metric-mirage",
+          "new": "      - source: 05 Источники/Papers/Are Emergent Abilities of Large Language Models a Mirage.md\n        route: sources/papers/emergent-abilities-metric-mirage\n      - source: 05 Источники/Papers/Czech et al. 2026 — Problems with Chinchilla Approach 2.md\n        route: sources/papers/isoflop-parabola-bias"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/editorial-map.yml",
+      "before_sha256": "17708ba6a6da9a98317db39a9915e79822970f15270e36f9dc728e935594b351",
+      "after_sha256": "93000fb056634a0e923ac2ca62bcb73d7513e9a5beec5386426fa57c5e96aeb9",
+      "lines": 5469,
+      "changes": [
+        {
+          "old": "    \"lecture-01-figure-step-276-rendering-1\": {\n      \"disposition\": \"source-only\",\n      \"reason\": \"Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.\",\n      \"evidence\": \"Lectures/repository/var/traces/lecture_01.json#step=276:rendering=1; reviewed title: chinchilla isoflop\"",
+          "new": "    \"lecture-01-figure-step-276-rendering-1\": {\n      \"disposition\": \"covered-existing\",\n      \"destination\": \"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\",\n      \"destination_anchor\": \"isoflops-experiment\",\n      \"evidence\": \"Lecture 9 already owns the procedure. The chapter links the exact Hoffmann Figure 3 used at step 276 and now compares it with licensed symmetric and asymmetric controls.\""
+        },
+        {
+          "old": "    \"lecture-01-visual-figure-step-276-rendering-1\": {\n      \"disposition\": \"source-only\",\n      \"reason\": \"Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.\",",
+          "new": "    \"lecture-01-visual-figure-step-276-rendering-1\": {\n      \"disposition\": \"source-only\",\n      \"reason\": \"This is a reproduction of Hoffmann et al. Figure 3. The chapter links the exact original; no downstream reuse grant was verified for that image. Czech et al. Figures 3 and 4 are different illustrations under CC BY 4.0.\","
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+      "before_sha256": "f8244829bd1afd23ebffc762cd4862641659ff8cb55889f5f59c5932fceac791",
+      "after_sha256": "4c30bda8cba77a7c3bf456f67cf21081c4bc0dd1529f3cf555b996e71e4aab47",
+      "lines": 309,
+      "changes": [
+        {
+          "old": "В учебнике: [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-attention-share|как ширина модели и длина контекста меняют долю FLOP внимания]] (шаг 37); [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws#scaling-metric-emergence|почему метрика может создать видимый скачок качества]] (шаг 39); [[00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention#prefill-decode-cache-states|как меняется KV-cache между prefill и decode]] (шаг 241).",
+          "new": "В учебнике: [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-attention-share|как ширина модели и длина контекста меняют долю FLOP внимания]] (шаг 37); [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws#scaling-metric-emergence|почему метрика может создать видимый скачок качества]] (шаг 39); [[00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention#prefill-decode-cache-states|как меняется KV-cache между prefill и decode]] (шаг 241); [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws#isoflops-experiment|как найти минимум на IsoFLOP-кривой]] (шаг 276)."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Курсы.md",
+      "before_sha256": "0657f37b9e9be45ca8db8bdb4776507de68e287ad6b3cd67922b5878110389f5",
+      "after_sha256": "3790fd7e2d260f412b16f39c9525fdf4358f446438a188c3b8c4f3cef8c023da",
+      "lines": 400,
+      "changes": [
+        {
+          "old": "Из 811 записей покрытия 559 имеют статус `integrated`, 28 — `covered-existing`,\n21 — `contract-only`, 147 — `source-only`, 56 — `excluded`. В числе 559",
+          "new": "Из 811 записей покрытия 559 имеют статус `integrated`, 29 — `covered-existing`,\n21 — `contract-only`, 146 — `source-only`, 56 — `excluded`. В числе 559"
+        }
+      ]
+    },
+    {
+      "source": "en/05 Sources/Courses.md",
+      "before_sha256": "e652330990b8940cf0ac4d012b13728487016f7eb1d63c95b27ce65b74f3c147",
+      "after_sha256": "5c25ac9aa78334e1ee1f03bb3d00ecb043c16a66f095fcb8d55cc2e82ec694a6",
+      "lines": 151,
+      "changes": [
+        {
+          "old": "The coverage ledger contains 811 semantic units: 559 integrated, 28 already\ncovered, 21 assignment-contract-only, 147 source-only, and 56 excluded.",
+          "new": "The coverage ledger contains 811 semantic units: 559 integrated, 29 already\ncovered, 21 assignment-contract-only, 146 source-only, and 56 excluded."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/coverage.yml",
+      "before_sha256": "c34dbf4c1384fcacec91ad309acb60dacfccbdf3d533af18b5ed500a1554de49",
+      "after_sha256": "e10a5140be760487b4eb7ce6af9af7dd4d377895e2a7a41054af3438185bff88",
+      "lines": 11685,
+      "changes": [
+        {
+          "old": "        \"lecture-01\"\n      ],\n      \"disposition\": \"source-only\",\n      \"destination\": \"05 Источники/Courses/Stanford CS336 Spring 2026/_index.md\",\n      \"destination_anchor\": \"lecture-01\",\n      \"reason\": \"Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.\",\n      \"evidence\": \"Lectures/repository/var/traces/lecture_01.json#step=276:rendering=1; reviewed title: chinchilla isoflop\"\n    },\n    {",
+          "new": "        \"lecture-01\"\n      ],\n      \"disposition\": \"covered-existing\",\n      \"destination\": \"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\",\n      \"destination_anchor\": \"isoflops-experiment\",\n      \"evidence\": \"Lecture 9 already owns the procedure. The chapter links the exact Hoffmann Figure 3 used at step 276 and now compares it with licensed symmetric and asymmetric controls.\"\n    },\n    {"
+        },
+        {
+          "old": "    }\n  ],\n  \"editorial_overlay_sha256\": \"71e735d6874bb6f5162472e456e26a81b74f99587455b9e998e6f8f76dc1ebc6\"\n}",
+          "new": "    }\n  ],\n  \"editorial_overlay_sha256\": \"3ea5ee46d94c4807fa7e2538082edbe0e20774bd3599436e93de580d104339b4\"\n}"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/visuals.yml",
+      "before_sha256": "10361faba7b355a37ef8e2a67002f95f488a97141f6fb1005ffde5d658b36b1f",
+      "after_sha256": "791cb4cb4122145fb54990656fd234e4b81bb44da51ee4f57d7868663fe35bda",
+      "lines": 16448,
+      "changes": [
+        {
+          "old": "      \"source_parent_sha256\": \"a7d47339eab889679010e926db8beb79f475a0596243f19bb15dbd69223f67e6\",\n      \"asset_url\": \"https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/chinchilla-isoflop.png\",\n      \"reason\": \"Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.\",\n      \"evidence\": \"Lectures/repository/var/traces/lecture_01.json#step=276:rendering=1; question reviewed: How does chinchilla isoflop support the lecture section “Assignment 2 (systems)”?\"\n    },",
+          "new": "      \"source_parent_sha256\": \"a7d47339eab889679010e926db8beb79f475a0596243f19bb15dbd69223f67e6\",\n      \"asset_url\": \"https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/chinchilla-isoflop.png\",\n      \"reason\": \"This is a reproduction of Hoffmann et al. Figure 3. The chapter links the exact original; no downstream reuse grant was verified for that image. Czech et al. Figures 3 and 4 are different illustrations under CC BY 4.0.\",\n      \"evidence\": \"Lectures/repository/var/traces/lecture_01.json#step=276:rendering=1; question reviewed: How does chinchilla isoflop support the lecture section “Assignment 2 (systems)”?\"\n    },"
+        },
+        {
+          "old": "    }\n  ],\n  \"editorial_overlay_sha256\": \"71e735d6874bb6f5162472e456e26a81b74f99587455b9e998e6f8f76dc1ebc6\"\n}",
+          "new": "    }\n  ],\n  \"editorial_overlay_sha256\": \"3ea5ee46d94c4807fa7e2538082edbe0e20774bd3599436e93de580d104339b4\"\n}"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/snapshot-lock.json",
+      "before_sha256": "225c648c87fbd69297a79ff08eeb46a507060bbb0d24ffd740211e536376d053",
+      "after_sha256": "37bc0021adc2710259d791ea7b4a650f048e4f7202a1da59680a6d7a0a682771",
+      "lines": 116,
+      "changes": [
+        {
+          "old": "    \"extractor_sha256\": \"1e8d049b33e599e0e23c7edd26601f70120aff2899e13258b4dd3b852092c48f\",\n    \"semantic_review_sha256\": \"250bd1d1a7f73d26ce805846d506b4cf6c87aeef045d5c373699f199d958ccc1\",\n    \"editorial_overlay_sha256\": \"71e735d6874bb6f5162472e456e26a81b74f99587455b9e998e6f8f76dc1ebc6\",\n    \"tool_versions\": {\n      \"edtrace\": \"0.1.15\",",
+          "new": "    \"extractor_sha256\": \"1e8d049b33e599e0e23c7edd26601f70120aff2899e13258b4dd3b852092c48f\",\n    \"semantic_review_sha256\": \"250bd1d1a7f73d26ce805846d506b4cf6c87aeef045d5c373699f199d958ccc1\",\n    \"editorial_overlay_sha256\": \"3ea5ee46d94c4807fa7e2538082edbe0e20774bd3599436e93de580d104339b4\",\n    \"tool_versions\": {\n      \"edtrace\": \"0.1.15\","
+        },
+        {
+          "old": "      },\n      \"coverage.yml\": {\n        \"sha256\": \"c34dbf4c1384fcacec91ad309acb60dacfccbdf3d533af18b5ed500a1554de49\",\n        \"records\": 811\n      },\n      \"visuals.yml\": {\n        \"sha256\": \"10361faba7b355a37ef8e2a67002f95f488a97141f6fb1005ffde5d658b36b1f\",\n        \"records\": 159\n      }",
+          "new": "      },\n      \"coverage.yml\": {\n        \"sha256\": \"e10a5140be760487b4eb7ce6af9af7dd4d377895e2a7a41054af3438185bff88\",\n        \"records\": 811\n      },\n      \"visuals.yml\": {\n        \"sha256\": \"791cb4cb4122145fb54990656fd234e4b81bb44da51ee4f57d7868663fe35bda\",\n        \"records\": 159\n      }"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tools/check_scaling_examples.py",
+      "before_sha256": "b430388c5fcf8d724ccf24f518e20ec03b5ebb1ed4fbfbe3cc47d8eea23dee11",
+      "after_sha256": "833d636860591e3a73123e5e74f1d7df3fb41150940d983952e42a7f998f24c0",
+      "lines": 482,
+      "changes": [
+        {
+          "old": "    RESULTS[\"emergence_example\"] = {\"exact_match\": rates, \"zero_matches\": zero_rate}\n\n\ndef structure_and_assets():",
+          "new": "    RESULTS[\"emergence_example\"] = {\"exact_match\": rates, \"zero_matches\": zero_rate}\n\n\ndef isoflop_bias_example():\n    section = TEXT.split('<a id=\"isoflop-parabola-bias\"></a>', 1)[1].split(\n        '<a id=\"scaling-campaign-начинается-до-регрессии\">', 1)[0]\n    alpha, beta = map(number, need(\n        r\"\\\\alpha=(0\\{,\\}\\d+)\\$ и \\$\\\\beta=(0\\{,\\}\\d+)\\$\", section).groups())\n    block = next(b for b in re.findall(FENCE + r\"python\\n(.*?)\\n\" + FENCE, TEXT, re.S)\n                 if \"def three_point_minimum(\" in b)\n    namespace = {}\n    with redirect_stdout(io.StringIO()):\n        exec(compile(block, str(CHAPTER), \"exec\"), namespace)\n    fit = namespace[\"three_point_minimum\"]\n    def loss(x, alpha=alpha, beta=beta):\n        return math.exp(-alpha*x)/alpha + math.exp(beta*x)/beta\n    for side, shown in [(-1, .2123), (1, .1764)]:\n        approx(loss(side*math.log(2)) - loss(0), shown, .00005)\n    estimates = []\n    for cells in table(\"| Размеры в единицах\"):\n        k = int(need(r\"1/(\\d+)\", cells[0]).group(1))\n        positions = [1/k, 1, k]\n        measurements = [loss(math.log(size)) for size in positions]\n        assert measurements[1] < min(measurements[0], measurements[2])\n        estimate = fit(positions, measurements)\n        approx(estimate, number(cells[1]), .00005)\n        approx(1/estimate, number(cells[2]), .00005)\n        approx(fit([10*size for size in positions], measurements), 10*estimate, 1e-12)\n        approx(fit(positions, [loss(math.log(size), .3, .3) for size in positions]), 1, 1e-12)\n        estimates.append(estimate)\n    assert 1 < estimates[0] < estimates[1]\n    RESULTS[\"isoflop_bias_model_ratios\"] = estimates\n\n\ndef structure_and_assets():"
+        },
+        {
+          "old": "        \"scaling-metric-emergence\",",
+          "new": "        \"scaling-metric-emergence\",\n        \"isoflop-parabola-bias\","
+        },
+        {
+          "old": "    assert len(embeds) == 29, len(embeds)",
+          "new": "    assert len(embeds) == 30, len(embeds)"
+        },
+        {
+          "old": "    records = json.loads((ASSETS / \"assets.json\").read_text())\n    assert len(records) == 21\n    for record in records:",
+          "new": "    records = json.loads((ASSETS / \"assets.json\").read_text())\n    assert len(records) == 21\n    retired = {f\"chinchilla-{part}-chart.png\" for part in\n               (\"lower-envelope\", \"isoflops\", \"joint-fit\", \"residuals\")}\n    active_embeds = {path.removeprefix(\"02 Areas/ML & DL/\") for path in embeds}\n    for record in records:"
+        },
+        {
+          "old": "        assert str(asset.relative_to(ROOT)) in \"\\n\".join(embeds)",
+          "new": "        assert (str(asset.relative_to(ROOT)) in active_embeds) == (asset.name not in retired)"
+        },
+        {
+          "old": "    RESULTS[\"structure\"][\"new_originals\"] = len(new_records)",
+          "new": "    RESULTS[\"structure\"][\"new_originals\"] = len(new_records)"
+        },
+        {
+          "old": "                  deepseek_example, mup_examples, inference_example, emergence_example,",
+          "new": "                  deepseek_example, mup_examples, inference_example, emergence_example, isoflop_bias_example,"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tests/asset-registry.test.ts",
+      "before_sha256": "7682f6d538f6fba49fcce37926f754c44a2cdb63a19ec789ad7931e604ea010a",
+      "after_sha256": "c8516b78f43fc33ffaeba8213eb0e26f45e982a904648f2e77969142f00584ad",
+      "lines": 10566,
+      "changes": [
+        {
+          "old": "describe('publication asset registry', () => {",
+          "new": "describe('publication asset registry', () => {\n  it('keeps the five versioned IsoFLOP originals and retires the earlier slide crops', () => {\n    const { assets } = parse(readFileSync(resolve(root, '05 Источники/asset-registry.yml'), 'utf8')) as { assets: CuratedAsset[] };\n    const rows = assets.filter(row => row.asset.startsWith('00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/'));\n    expect(rows).toHaveLength(5);\n    const chapter = '00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md';\n    const prose = readFileSync(resolve(root, chapter), 'utf8');\n    for (const [name, digest, figure, original] of [[\"happy_path.svg\",\"0ac01e9299c3c92fc3705dc0a2482e1979e9d721dcff70935adf2efdb45df8ad\",\"https://arxiv.org/html/2603.22339v1#S4.F3\",\"https://arxiv.org/html/2603.22339v1/happy_path.svg\"],[\"asymmetric.svg\",\"6df85f0b6ddf5d8be2486e2ea614d6aa37d60076e0f30072ab53b14c34fa8ebc\",\"https://arxiv.org/html/2603.22339v1#S5.F4\",\"https://arxiv.org/html/2603.22339v1/asymmetric.svg\"],[\"training_flop_vs_model_size.png\",\"3fbaefa50fa091f9dc58136ae9772a1d27123bf9399751bc8be0c919a2be7841\",\"https://arxiv.org/html/2404.10102v2#S2.F2\",\"https://arxiv.org/html/2404.10102v2/training_flop_vs_model_size.png\"],[\"distributions.svg\",\"98769023cbf1cd7193d454cab36051328d71182d12bb0a9895c2e4d8df6bd1e5\",\"https://arxiv.org/html/2404.10102v2#S3.F3\",\"https://arxiv.org/html/2404.10102v2/distributions.svg\"],[\"tokens_to_params_ratio_plot.svg\",\"c550efc1565c868ac3ebb095a2f46a14f8fdd0ceb16246dcbab7d67028461cd6\",\"https://arxiv.org/html/2404.10102v2#S3.F5\",\"https://arxiv.org/html/2404.10102v2/tokens_to_params_ratio_plot.svg\"]]) {\n      const path = '00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/' + name;\n      const row = rows.find(asset => asset.asset === path);\n      expect(row).toMatchObject({ source_asset: path, source_asset_sha256: digest, sha256: digest,\n        license: 'CC BY 4.0', license_url: 'https://creativecommons.org/licenses/by/4.0/',\n        metadata_status: 'verified', rights_status: 'source-license-verified',\n        source_url: figure, source_image_url: original, rights_evidence: figure.split('#')[0], used_in: [chapter] });\n      expect(row!.crop_box_px).toBeUndefined();\n      expect(sha256(resolve(root, path))).toBe(digest);\n      expectDecodableImage(resolve(root, path));\n      expect(prose).toContain(path);\n      const snapshot = resolve(root, row!.source_page_snapshot!);\n      if (existsSync(snapshot)) {\n        expect(sha256(snapshot)).toBe(row!.source_page_sha256);\n        const html = readFileSync(snapshot, 'utf8');\n        expect(html).toContain('License: CC BY 4.0');\n        const panel = html.split('<figure id=\"' + figure.split('#')[1] + '\"')[1]?.split('</figure>')[0];\n        expect(panel).toContain('/' + name + '\"');\n      }\n    }\n    for (const part of ['lower-envelope', 'isoflops', 'joint-fit', 'residuals']) {\n      const name = 'chinchilla-' + part + '-chart.png';\n      expect(prose).not.toContain(name);\n      const old = assets.find(asset => asset.asset.endsWith('/scaling-review-2026-10/' + name));\n      expect(old).toMatchObject({ publication_status: 'retired', used_in: [], former_used_in: [chapter] });\n      expect(sha256(resolve(root, old!.asset))).toBe(old!.sha256);\n    }\n  });"
+        },
+        {
+          "old": "function validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root): void {",
+          "new": "const isoflopOriginalDir = '00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09';\nconst isoflopOriginals = [\n  [\"happy_path.svg\",\"0ac01e9299c3c92fc3705dc0a2482e1979e9d721dcff70935adf2efdb45df8ad\",\"https://arxiv.org/html/2603.22339v1#S4.F3\",\"https://arxiv.org/html/2603.22339v1/happy_path.svg\"],\n  [\"asymmetric.svg\",\"6df85f0b6ddf5d8be2486e2ea614d6aa37d60076e0f30072ab53b14c34fa8ebc\",\"https://arxiv.org/html/2603.22339v1#S5.F4\",\"https://arxiv.org/html/2603.22339v1/asymmetric.svg\"],\n  [\"training_flop_vs_model_size.png\",\"3fbaefa50fa091f9dc58136ae9772a1d27123bf9399751bc8be0c919a2be7841\",\"https://arxiv.org/html/2404.10102v2#S2.F2\",\"https://arxiv.org/html/2404.10102v2/training_flop_vs_model_size.png\"],\n  [\"distributions.svg\",\"98769023cbf1cd7193d454cab36051328d71182d12bb0a9895c2e4d8df6bd1e5\",\"https://arxiv.org/html/2404.10102v2#S3.F3\",\"https://arxiv.org/html/2404.10102v2/distributions.svg\"],\n  [\"tokens_to_params_ratio_plot.svg\",\"c550efc1565c868ac3ebb095a2f46a14f8fdd0ceb16246dcbab7d67028461cd6\",\"https://arxiv.org/html/2404.10102v2#S3.F5\",\"https://arxiv.org/html/2404.10102v2/tokens_to_params_ratio_plot.svg\"],\n] as const;\n\nfunction validateCuratedSourceAsset(entry: CuratedAsset, repositoryRoot = root): void {\n  if (entry.asset.startsWith(isoflopOriginalDir + '/')) {\n    const original = isoflopOriginals.find(([name]) => entry.asset === isoflopOriginalDir + '/' + name);\n    expect(original).toBeDefined();\n    const [name, digest, figure, source] = original!;\n    expect(entry).toMatchObject({\n      source_asset: entry.asset, source_asset_sha256: digest, sha256: digest,\n      source_url: figure, source_image_url: source, rights_evidence: figure.split('#')[0],\n      license: 'CC BY 4.0', license_url: 'https://creativecommons.org/licenses/by/4.0/',\n      metadata_status: 'verified', provenance_confirmation: 'source-license-verified',\n      rights_status: 'source-license-verified', used_in: ['00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md'],\n      derivation: name.endsWith('.svg') ? 'source-svg-copy' : 'source-png-copy',\n    });\n    expect(entry.crop_box_px).toBeUndefined();\n    const target = resolve(repositoryRoot, entry.asset);\n    expect(sha256(target)).toBe(digest);\n    expectDecodableImage(target);\n    return;\n  }"
+        },
+        {
+          "old": "    for (const [name, digest, figure, original] of [[\"happy_path.svg\",\"0ac01e9299c3c92fc3705dc0a2482e1979e9d721dcff70935adf2efdb45df8ad\",\"https://arxiv.org/html/2603.22339v1#S4.F3\",\"https://arxiv.org/html/2603.22339v1/happy_path.svg\"],[\"asymmetric.svg\",\"6df85f0b6ddf5d8be2486e2ea614d6aa37d60076e0f30072ab53b14c34fa8ebc\",\"https://arxiv.org/html/2603.22339v1#S5.F4\",\"https://arxiv.org/html/2603.22339v1/asymmetric.svg\"],[\"training_flop_vs_model_size.png\",\"3fbaefa50fa091f9dc58136ae9772a1d27123bf9399751bc8be0c919a2be7841\",\"https://arxiv.org/html/2404.10102v2#S2.F2\",\"https://arxiv.org/html/2404.10102v2/training_flop_vs_model_size.png\"],[\"distributions.svg\",\"98769023cbf1cd7193d454cab36051328d71182d12bb0a9895c2e4d8df6bd1e5\",\"https://arxiv.org/html/2404.10102v2#S3.F3\",\"https://arxiv.org/html/2404.10102v2/distributions.svg\"],[\"tokens_to_params_ratio_plot.svg\",\"c550efc1565c868ac3ebb095a2f46a14f8fdd0ceb16246dcbab7d67028461cd6\",\"https://arxiv.org/html/2404.10102v2#S3.F5\",\"https://arxiv.org/html/2404.10102v2/tokens_to_params_ratio_plot.svg\"]]) {\n      const path = '00 Учебник/Assets/Figures/curated/scaling-isoflop-2026-11-09/' + name;\n      const row = rows.find(asset => asset.asset === path);\n      expect(row).toMatchObject({ source_asset: path, source_asset_sha256: digest, sha256: digest,\n        license: 'CC BY 4.0', license_url: 'https://creativecommons.org/licenses/by/4.0/',\n        metadata_status: 'verified', rights_status: 'source-license-verified',\n        source_url: figure, source_image_url: original, rights_evidence: figure.split('#')[0], used_in: [chapter] });\n      expect(row!.crop_box_px).toBeUndefined();\n      expect(sha256(resolve(root, path))).toBe(digest);\n      expectDecodableImage(resolve(root, path));",
+          "new": "    for (const [name, , figure] of isoflopOriginals) {\n      const path = isoflopOriginalDir + '/' + name;\n      const row = rows.find(asset => asset.asset === path);\n      expect(row).toBeDefined();\n      validateCuratedSourceAsset(row!);\n      for (const drift of [{license: 'public access'}, {crop_box_px: [0, 0, 1, 1]}])\n        expect(() => validateCuratedSourceAsset({ ...row!, ...drift })).toThrow();"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tests/site-output.test.ts",
+      "before_sha256": "6241dc2a8a362f38c510eec1408911446c6dd554a060ec1c057db77103160071",
+      "after_sha256": "3a17a5b36193a9372c7b39cffa94cf7a1f67e9382eab7f065adc45b5ac77274f",
+      "lines": 4864,
+      "changes": [
+        {
+          "old": "  it('renders original scaling metric figures and the links to their explanations in both locale routes', async () => {",
+          "new": "  it('renders the original IsoFLOP figures, worked example and source-note round trip', async () => {\n    const route = 'textbook/pretraining/scaling-laws/';\n    for (const locale of ['', 'en/']) {\n      const html = await readFile(join(distDir, locale, route, 'index.html'), 'utf8');\n      for (const [name, digest, paper] of [[\"happy_path.svg\",\"0ac01e9299c3c92fc3705dc0a2482e1979e9d721dcff70935adf2efdb45df8ad\",\"https://arxiv.org/html/2603.22339v1#S4.F3\"],[\"asymmetric.svg\",\"6df85f0b6ddf5d8be2486e2ea614d6aa37d60076e0f30072ab53b14c34fa8ebc\",\"https://arxiv.org/html/2603.22339v1#S5.F4\"],[\"training_flop_vs_model_size.png\",\"3fbaefa50fa091f9dc58136ae9772a1d27123bf9399751bc8be0c919a2be7841\",\"https://arxiv.org/html/2404.10102v2#S2.F2\"],[\"distributions.svg\",\"98769023cbf1cd7193d454cab36051328d71182d12bb0a9895c2e4d8df6bd1e5\",\"https://arxiv.org/html/2404.10102v2#S3.F3\"],[\"tokens_to_params_ratio_plot.svg\",\"c550efc1565c868ac3ebb095a2f46a14f8fdd0ceb16246dcbab7d67028461cd6\",\"https://arxiv.org/html/2404.10102v2#S3.F5\"]]) {\n        const src = [...html.matchAll(/<img[^>]* src=\"([^\"]+)\"/g)]\n          .map(match => match[1]).find(url => url.endsWith('/' + name));\n        expect(src).toBeDefined();\n        expect(createHash('sha256').update(await readFile(join(distDir, decodeURIComponent(src!)))).digest('hex')).toBe(digest);\n        expect(html).toContain(paper);\n      }\n      for (const old of ['lower-envelope', 'isoflops', 'joint-fit', 'residuals'])\n        expect(html).not.toContain('chinchilla-' + old + '-chart.png');\n      for (const anchor of ['S3.F2', 'S3.F3', 'S3.F4'])\n        expect(html).toContain('https://arxiv.org/html/2203.15556v1#' + anchor);\n      expect(html).toContain('id=\"isoflop-parabola-bias\"');\n      expect(html).toContain('1,3285');\n      expect(html).not.toContain('katex-error');\n      const note = 'sources/papers/isoflop-parabola-bias/';\n      expect(html).toContain('href=\"/' + locale + note + '\"');\n      const source = await readFile(join(distDir, locale, note, 'index.html'), 'utf8');\n      expect(source).toContain('href=\"/' + locale + route + '#isoflop-parabola-bias\"');\n    }\n  });\n  it('renders original scaling metric figures and the links to their explanations in both locale routes', async () => {"
+        },
+        {
+          "old": "      expect(source).toContain('href=\"/' + locale + route + '#isoflop-parabola-bias\"');",
+          "new": "      expect(source.match(/href=\"\\/(?:en\\/)?textbook\\/pretraining\\/scaling-laws\\/#isoflop-parabola-bias\"/)?.[0]).toBeDefined();\n      expect(source).toContain('Textbook (in Russian): a three-point fit with a known minimum');"
+        },
+        {
+          "old": "    expect(native).toHaveLength(32);",
+          "new": "    expect(native).toHaveLength(33);\n    expect(native.some(page => page.route === 'sources/papers/isoflop-parabola-bias')).toBe(true);"
+        },
+        {
+          "old": "      expect(source.match(/href=\"\\/(?:en\\/)?textbook\\/pretraining\\/scaling-laws\\/#isoflop-parabola-bias\"/)?.[0]).toBeDefined();",
+          "new": "      expect(source).toContain('href=\"/' + locale + route + '#isoflop-parabola-bias\"');"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/Czech et al. 2026 — Problems with Chinchilla Approach 2.md",
+      "created": true,
+      "after_sha256": "f0a50892d0a3d59c4a0e88e208359148e132ce3f5f7f56742a2d4fb1c9261419"
+    }
+  ]
+}

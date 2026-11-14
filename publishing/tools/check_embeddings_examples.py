@@ -34,7 +34,7 @@ def rejects(function, *args):
 def main():
     chapter = CHAPTER.read_text()
     blocks = re.findall(r'^```python\n(.*?)^```', chapter, re.M | re.S)
-    assert len(blocks) == 3
+    assert len(blocks) == 4
     ns = {}
     for i, block in enumerate(blocks, 1):
         exec(compile(block, f'{CHAPTER}:block-{i}', 'exec'), ns)
@@ -160,10 +160,10 @@ def main():
            '7-как-проверять-эмбеддинг', 'источники-и-дальнейшее-чтение']
     assert all(page.find(id=name) for name in old)
     assert len(article.select('img')) == 8
-    assert len(article.select('pre')) == 3
+    assert len(article.select('pre')) == 4
     assert not article.select('.katex-error')
-    assert len(article.select('.katex-display')) == 11
-    assert len(article.select('blockquote')) == 2
+    assert len(article.select('.katex-display')) == 12
+    assert len(article.select('blockquote')) == 3
     assert 'cross-encoder MiniLM' in article.get_text(' ', strip=True)
     assert 'без NLI-классификатора' in article.get_text(' ', strip=True)
     assert article.select_one('a[href$="/textbook/retrieval/sparse-dense-hybrid/"]') is not None

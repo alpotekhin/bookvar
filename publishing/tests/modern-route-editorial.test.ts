@@ -41,9 +41,14 @@ describe('modern route editorial corrections', () => {
     expect(text).toContain('[[43 Scaling laws|Scaling laws]]');
   });
 
-  it('retains all five long-context examples without the stale four-block claim', () => {
+  it('retains the five original long-context examples alongside the new block-routing example', () => {
     const text = read(long);
-    expect(text.match(/^~~~python$/gm)).toHaveLength(5);
+    const prior = beforeTopicConsolidation(text, long, root, '2026-11-10-qwen38-flash-next-additions.json');
+    const originals = teachingMaterial(prior).code;
+    const current = teachingMaterial(text).code;
+    expect(originals).toHaveLength(5);
+    expect(current).toHaveLength(6);
+    expect(current.filter(block => !block.includes('def qsa_visible'))).toEqual(originals);
     expect(text).not.toContain('Все четыре блока NumPy');
     expect(text).toContain('Примеры NumPy в главе можно');
   });
@@ -52,7 +57,8 @@ describe('modern route editorial corrections', () => {
     const pages = loadManifest(resolve(root, 'publishing/navigation.yml')).sections.flatMap(s => s.pages);
     for (const source of [ffn, long, distributed]) {
       expect(pages.find(p => p.source === source)?.sourceEn).toBeUndefined();
-      expect(parse(read(source).split('---')[1]).last_updated).toBe('2026-10-30');
+      const reviewed = beforeTopicConsolidation(read(source), source, root, journalName);
+      expect(parse(reviewed.split('---')[1]).last_updated).toBe('2026-10-30');
     }
   });
 
@@ -63,11 +69,12 @@ describe('modern route editorial corrections', () => {
     expect(journal.files[1].before_sha256).toBe('c15d27a0f6565299948cf7c3aa0005428743735058ff8d9998707bced97c1b85');
     for (const row of journal.files) {
       const current = read(row.source);
+      const after = beforeTopicConsolidation(current, row.source, root, journalName);
       const prior = beforeTopicConsolidation(current, row.source, root,
         '2026-10-30-posttraining-order-additions.json');
-      expect(hash(current), row.source).toBe(row.after_sha256);
+      expect(hash(after), row.source).toBe(row.after_sha256);
       expect(hash(prior), row.source).toBe(row.before_sha256);
-      expect(teachingMaterial(current), row.source).toEqual(teachingMaterial(prior));
+      expect(teachingMaterial(after), row.source).toEqual(teachingMaterial(prior));
       expect(() => beforeTopicConsolidation(current + '\nunknown prose edit\n', row.source, root,
         '2026-10-30-posttraining-order-additions.json')).toThrow('Unreviewed topic consolidation revision');
     }

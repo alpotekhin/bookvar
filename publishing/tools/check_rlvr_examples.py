@@ -86,6 +86,17 @@ def main():
     assert math.isclose(.9**8, .43046721)
     assert math.isclose(18/113, .1592920353982301)
 
+    # Independent attempts on each of two tasks in the crossover example.
+    def coverage(probs, k):
+        return math.fsum(-math.expm1(k * math.log1p(-p)) for p in probs) / len(probs)
+
+    base, trained = (.4, .1), (.8, .005)
+    assert math.isclose(coverage(base, 1), .25)
+    assert math.isclose(coverage(trained, 1), .4025)
+    assert round(coverage(base, 16), 3) == .907
+    assert round(coverage(trained, 16), 3) == .539
+    assert round(.99**128, 2) == .28
+
     # Isolate the actual course function's format gate. This does not test SymPy.
     grader = ROOT / "05 Источники/Courses/Stanford CS336 Spring 2026/Assignments/assignment5-alignment/cs336_alignment/drgrpo_grader.py"
     tree = ast.parse(grader.read_text())

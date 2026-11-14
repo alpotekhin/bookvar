@@ -16,7 +16,7 @@ describe('MoE explanation and source figures',()=>{
     }
   });
   it('retains meaningful older figures and replaces small plot copies with complete originals',()=>{
-    const images=[...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^\]]+)\]\]/g)].map(m=>m[1]);
+    const images=[...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^\]|]+)(?:\|[^\]]*)?\]\]/g)].map(m=>m[1]);
     expect(images).toHaveLength(19);
     expect(images.filter(p=>p.includes('/moe-2026-10-23/'))).toHaveLength(8);
     for(const path of images){

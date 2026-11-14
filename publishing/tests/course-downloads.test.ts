@@ -31,6 +31,7 @@ describe('official course PDF delivery', () => {
 
   it('rejects path escape, credentials and non-HTTPS delivery', async () => {
     for (const overrides of [{ local_path: '../private.pdf' }, { local_path: '/private.pdf' },
+      { local_path: undefined, local_archive_path: '../private.pdf' },
       { canonical_url: 'http://example.edu/deck.pdf' }, { canonical_url: 'https://name:secret@example.edu/deck.pdf' }]) {
       await expect(loadCoursePdfDownloads(fixture(overrides).rootDir, [course])).rejects.toThrow();
     }
@@ -60,8 +61,11 @@ describe('official course PDF delivery', () => {
     expect(readFileSync(join(rootDir, 'site/public', route, 'Lectures/example.py'), 'utf8')).toBe('print(1)\n');
   });
 
-  it('builds a recorded external PDF link without requiring a local verification copy', async () => {
-    const { rootDir, write } = fixture();
+  it.each([
+    {},
+    { local_path: undefined, local_archive_path: 'Lectures/deck.pdf' },
+  ])('builds a recorded external PDF link without a verification copy (%o)', async (record) => {
+    const { rootDir, write } = fixture(record);
     const route = 'sources/courses/berkeley-advanced-llm-agents-spring-2025';
     write(`${course}/_index.md`, '---\ntitle: Course\ntype: source-note\nstatus: verified\n---\n[Full PDF](Lectures/deck.pdf#page=7)\n');
     write('publishing/navigation.yml', `site_title: Fixture\nsections:\n  - id: sources\n    title: Sources\n    pages:\n      - source: ${course}/_index.md\n        route: ${route}/index\n`);
@@ -71,5 +75,6 @@ describe('official course PDF delivery', () => {
     expect(readFileSync(join(outputDir, route, 'index.md'), 'utf8'))
       .toContain('[Full PDF](https://example.edu/deck.pdf#page=7)');
     expect(existsSync(join(rootDir, course, 'Lectures/deck.pdf'))).toBe(false);
+    expect(existsSync(join(rootDir, 'site/public', route, 'Lectures/deck.pdf'))).toBe(false);
   });
 });

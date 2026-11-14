@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "kind": "arithmetic-subject-navigation-additions",
+  "review_date": "2026-11-04",
+  "verification": {
+    "date": "2026-11-04",
+    "status": "verified-local-navigation-delta",
+    "chapterSha256": "f0b4f724a87958426982ab167638ab9a9d6d9d7fd2ed2f88c2ed72c26e213b87",
+    "wholeOwnerRead": "All 1227 input lines freshly read in ranges 1–310, 311–620, 621–930 and 931–EOF. The first combined middle output was truncated; both complete middle ranges were read again separately. The 1383-line final file adds only dates, 31 metadata terms/anchors and nine alt aliases. An exact-content test proves its explanatory body, code, equations, captions and source links are unchanged after removing those bounded navigation additions; no new full final reread is claimed.",
+    "explanation": "Existing source-faithful derivations retained: exact LLaMA matrix/state counts; separate dX/dW; 6P exclusions and context-length costs; checkpointing and MFU/HFU; ring bytes; FSDP transient weights; TP partition shapes; separate/shared network budgets; TP/EP assignments and traffic; Qwen3/DeepSeek block counts; pipeline dependencies and schedules. No short synthetic replacement or translation.",
+    "source": "The 2026-10-23 accepted chapter hash exactly matches this pass's input, so its bounded source-comparison evidence remains applicable to the unchanged body. That full audit and the visual-redesign/Harvard-link audits were read. Fresh selected CS336 lecture_02.py MFU (310–355) and gradients_flops (502–556), plus complete physical Assignment 2 pages 40–46 (§8.1–8.5), were read and compared. Current JAX/HF/source URLs checked. No new whole-course or fresh upstream pixel audit.",
+    "preservation": "Three-file reversible journal restores exact accepted hash 2d49342e… and both preceding indexes. All original prose, one NumPy program, 29 display equations, nine image paths/bytes and complete captions retained. No new image, generation, redraw or translation. Both indexes now expose 31 actual subjects of this same owner.",
+    "style": "no-ai-slop SKILL and eval read fully. Existing concrete explanations retained rather than rewritten for uniformity. Added subject labels and descriptive alts only; chapter status remains draft.",
+    "examples": {
+      "command": "uv run --offline --python 3.13 --with numpy python publishing/tools/check_transformer_arithmetic_examples.py",
+      "exit": 0,
+      "scope": "Actual NumPy program, eight finite differences, parameter/memory/collective arithmetic, MFU/HFU, 256 communication grids and 16 continuous-optimum controls passed on CPU. Not a GPU/distributed timing experiment."
+    },
+    "tests": {
+      "files": 4,
+      "tests": 210,
+      "htmlTests": 201,
+      "exit": 0,
+      "scope": "Current arithmetic preservation and 31 subjects, preceding roofline journal chain, both index synchronization and all current built-output tests."
+    },
+    "build": {
+      "pages": 2007,
+      "pagefindHtmlFiles": 2011,
+      "durationSeconds": 31.25,
+      "exit": 0,
+      "brokenInternalLinks": 0,
+      "bytes": 855369762,
+      "files": 5613,
+      "limit": 1000000000,
+      "headroom": 144630238
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-04-arithmetic-reader",
+      "desktop": "1280×900: document 1265/1265, 617px content, all 29 display equations fit and zero KaTeX errors. All nine original figures/captions personally inspected whole in the image viewer: JAX block, HF memory, NeMo checkpointing, both FSDP passes, EDLS TP/EP and GPipe/1F1B.",
+      "mobile": "375×812: document 360/360, 328px content; all nine images load and have 328px-or-less displayed widths; all 29 display equations fit. Four inherited tables have internal scroll widths 354, 343, 336 and 423px, without expanding the document. FSDP surrounding explanation inspected; original vector viewer inspected at 2× with horizontal panning required. Temporary viewport reset.",
+      "navigation": "Actual EN reference FSDP term -> exact EN anchor, explicit canonical-language notice, Next -> EN mixed-precision H1. Actual RU reference traffic term -> exact TP/EP traffic anchor and visible section heading. All 31 destinations per locale checked by tests."
+    },
+    "remaining": [
+      "This is a whole-owner reading and navigation pass, not a claim that all course material is integrated or that every chapter is accepted.",
+      "Existing Zero Bubble/DualPipe schedules remain primary-source links, not newly reproduced figures. Historical figure provenance/pixel evidence is reused, not freshly upgraded.",
+      "65 of 152 owners still require this route pass. Next four ML Systems owners: mixed precision, data pipeline, profiling, Triton.",
+      "Whole-book release checks and dev/Pages publication remain pending."
+    ],
+    "publication": "local only; no staging, commit, push or deployment"
+  },
+  "files": [
+    {
+      "source": "00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-23\nlast_verified: 2026-10-23",
+          "new": "last_updated: 2026-11-04\nlast_verified: 2026-11-04"
+        },
+        {
+          "old": "source_language: mixed\nsource_unit_id:",
+          "new": "source_language: mixed\nreference_terms:\n  - anchor: arith-shapes\n    label: \"Формы тензоров и число параметров\"\n    label_en: \"Tensor shapes and parameter counts\"\n  - anchor: arith-attention\n    label: \"Параметры MHA и GQA\"\n    label_en: \"MHA and GQA parameter counts\"\n  - anchor: arith-swiglu\n    label: \"Три матрицы SwiGLU\"\n    label_en: \"The three SwiGLU matrices\"\n  - anchor: arith-llama\n    label: \"Точный расчёт LLaMA 7B\"\n    label_en: \"An exact LLaMA 7B calculation\"\n  - anchor: arith-linear-gradients\n    label: \"Стоимость forward, dX и dW\"\n    label_en: \"The cost of forward, dX, and dW\"\n  - anchor: arith-sixp\n    label: \"Вывод и ограничения оценки 6P\"\n    label_en: \"Deriving the 6P approximation and its limits\"\n  - anchor: arith-attention-length\n    label: \"Длина контекста и FLOP внимания\"\n    label_en: \"Context length and attention FLOPs\"\n  - anchor: arith-states\n    label: \"Память параметров, градиентов и Adam\"\n    label_en: \"Parameter, gradient, and Adam memory\"\n  - anchor: arith-activations\n    label: \"Активации и пиковая память\"\n    label_en: \"Activations and peak memory\"\n  - anchor: arith-checkpointing\n    label: \"Память и FLOP при checkpointing\"\n    label_en: \"Checkpointing memory and FLOPs\"\n  - anchor: arith-mfu-hfu\n    label: \"MFU и HFU при пересчёте\"\n    label_en: \"MFU and HFU with recomputation\"\n  - anchor: arith-kv\n    label: \"Расчёт KV-кеша MHA и GQA\"\n    label_en: \"MHA and GQA KV-cache calculation\"\n  - anchor: arith-collectives\n    label: \"Байты AllGather, ReduceScatter и AllReduce\"\n    label_en: \"AllGather, ReduceScatter, and AllReduce bytes\"\n  - anchor: arith-ddp\n    label: \"Данные и состояния в DDP\"\n    label_en: \"DDP data and model states\"\n  - anchor: arith-zero\n    label: \"Память ZeRO-1, ZeRO-2 и ZeRO-3\"\n    label_en: \"ZeRO-1, ZeRO-2, and ZeRO-3 memory\"\n  - anchor: arith-fsdp\n    label: \"FSDP: время жизни полных весов\"\n    label_en: \"FSDP and the lifetime of full weights\"\n  - anchor: arith-fsdp-unit\n    label: \"Гранулярность FSDP и временный полный слой\"\n    label_en: \"FSDP granularity and temporary full layers\"\n  - anchor: arith-tp\n    label: \"Разбиение SwiGLU при TP\"\n    label_en: \"SwiGLU tensor partitioning\"\n  - anchor: arith-fsdp-tp\n    label: \"Формы тензоров FSDP × TP\"\n    label_en: \"FSDP × TP tensor shapes\"\n  - anchor: arith-strong-scaling\n    label: \"Границы сильного масштабирования DP, FSDP и TP\"\n    label_en: \"DP, FSDP, and TP strong-scaling limits\"\n  - anchor: arith-shared-network\n    label: \"Две оси параллелизма при общей полосе\"\n    label_en: \"Two parallelism axes sharing bandwidth\"\n  - anchor: arith-moe\n    label: \"Хранимые и активные параметры MoE\"\n    label_en: \"Stored and active MoE parameters\"\n  - anchor: arith-tp-ep-work\n    label: \"TP и EP: одинаковая работа, разные формы\"\n    label_en: \"TP and EP: equal work, different shapes\"\n  - anchor: arith-tp-ep-traffic\n    label: \"Расчёт трафика TP и EP\"\n    label_en: \"Calculating TP and EP traffic\"\n  - anchor: arith-qwen3\n    label: \"Параметры блока Qwen3-235B-A22B\"\n    label_en: \"Qwen3-235B-A22B block parameters\"\n  - anchor: arith-deepseek\n    label: \"Параметры блока DeepSeek-V3\"\n    label_en: \"DeepSeek-V3 block parameters\"\n  - anchor: arith-pipeline\n    label: \"Трафик между стадиями PP\"\n    label_en: \"Pipeline-stage traffic\"\n  - anchor: arith-microbatches\n    label: \"GPipe, 1F1B и доля простоя\"\n    label_en: \"GPipe, 1F1B, and the bubble fraction\"\n  - anchor: arith-zero-bubble\n    label: \"Zero Bubble: зависимости dX и dW\"\n    label_en: \"Zero Bubble: dX and dW dependencies\"\n  - anchor: arith-dualpipe\n    label: \"DualPipe и DualPipeV\"\n    label_en: \"DualPipe and DualPipeV\"\n  - anchor: arith-budget\n    label: \"Память, обмены и критический путь\"\n    label_en: \"Memory, communication, and the critical path\"\nsource_unit_id:"
+        },
+        {
+          "old": "## 1. От схемы блока к числу параметров",
+          "new": "<a id=\"arith-shapes\"></a>\n\n## 1. От схемы блока к числу параметров"
+        },
+        {
+          "old": "### Проекции внимания",
+          "new": "<a id=\"arith-attention\"></a>\n\n### Проекции внимания"
+        },
+        {
+          "old": "### Три матрицы SwiGLU",
+          "new": "<a id=\"arith-swiglu\"></a>\n\n### Три матрицы SwiGLU"
+        },
+        {
+          "old": "### Полный расчёт исходной LLaMA 7B",
+          "new": "<a id=\"arith-llama\"></a>\n\n### Полный расчёт исходной LLaMA 7B"
+        },
+        {
+          "old": "### Прямой и обратный проход линейного слоя",
+          "new": "<a id=\"arith-linear-gradients\"></a>\n\n### Прямой и обратный проход линейного слоя"
+        },
+        {
+          "old": "### Откуда берётся оценка 6P",
+          "new": "<a id=\"arith-sixp\"></a>\n\n### Откуда берётся оценка 6P"
+        },
+        {
+          "old": "### Внимание добавляет зависимость от квадрата длины",
+          "new": "<a id=\"arith-attention-length\"></a>\n\n### Внимание добавляет зависимость от квадрата длины"
+        },
+        {
+          "old": "### Параметры, градиенты и Adam",
+          "new": "<a id=\"arith-states\"></a>\n\n### Параметры, градиенты и Adam"
+        },
+        {
+          "old": "### Активации: что понадобится для производной",
+          "new": "<a id=\"arith-activations\"></a>\n\n### Активации: что понадобится для производной"
+        },
+        {
+          "old": "### Что сохранять, а что пересчитывать",
+          "new": "<a id=\"arith-checkpointing\"></a>\n\n### Что сохранять, а что пересчитывать"
+        },
+        {
+          "old": "### MFU и HFU при пересчёте активаций",
+          "new": "<a id=\"arith-mfu-hfu\"></a>\n\n### MFU и HFU при пересчёте активаций"
+        },
+        {
+          "old": "### На инференсе появляется другой долгоживущий объект",
+          "new": "<a id=\"arith-kv\"></a>\n\n### На инференсе появляется другой долгоживущий объект"
+        },
+        {
+          "old": "## 4. Что передаётся между GPU",
+          "new": "<a id=\"arith-collectives\"></a>\n\n## 4. Что передаётся между GPU"
+        },
+        {
+          "old": "### DDP: разные данные, одинаковая модель",
+          "new": "<a id=\"arith-ddp\"></a>\n\n### DDP: разные данные, одинаковая модель"
+        },
+        {
+          "old": "### ZeRO: хранить по одной части вместо одинаковых копий",
+          "new": "<a id=\"arith-zero\"></a>\n\n### ZeRO: хранить по одной части вместо одинаковых копий"
+        },
+        {
+          "old": "### FSDP: полный слой нужен временно",
+          "new": "<a id=\"arith-fsdp\"></a>\n\n### FSDP: полный слой нужен временно"
+        },
+        {
+          "old": "### Почему деление на число GPU иногда не помогает",
+          "new": "<a id=\"arith-fsdp-unit\"></a>\n\n### Почему деление на число GPU иногда не помогает"
+        },
+        {
+          "old": "## 6. Tensor parallelism: разделить матричное произведение",
+          "new": "<a id=\"arith-tp\"></a>\n\n## 6. Tensor parallelism: разделить матричное произведение"
+        },
+        {
+          "old": "### FSDP и TP можно совместить, но нельзя смешивать их делители",
+          "new": "<a id=\"arith-fsdp-tp\"></a>\n\n### FSDP и TP можно совместить, но нельзя смешивать их делители"
+        },
+        {
+          "old": "### Сколько устройств можно загрузить при неизменном пакете",
+          "new": "<a id=\"arith-strong-scaling\"></a>\n\n### Сколько устройств можно загрузить при неизменном пакете"
+        },
+        {
+          "old": "### Две оси: отдельные соединения или общая сеть",
+          "new": "<a id=\"arith-shared-network\"></a>\n\n### Две оси: отдельные соединения или общая сеть"
+        },
+        {
+          "old": "## 7. MoE: хранить экспертов или передавать к ним токены",
+          "new": "<a id=\"arith-moe\"></a>\n\n## 7. MoE: хранить экспертов или передавать к ним токены"
+        },
+        {
+          "old": "### Одинаковые FLOP не означают одинаковое выполнение",
+          "new": "<a id=\"arith-tp-ep-work\"></a>\n\n### Одинаковые FLOP не означают одинаковое выполнение"
+        },
+        {
+          "old": "### Посчитаем трафик обеих схем",
+          "new": "<a id=\"arith-tp-ep-traffic\"></a>\n\n### Посчитаем трафик обеих схем"
+        },
+        {
+          "old": "### Qwen3-235B-A22B: размер одного блока",
+          "new": "<a id=\"arith-qwen3\"></a>\n\n### Qwen3-235B-A22B: размер одного блока"
+        },
+        {
+          "old": "### DeepSeek-V3: 21 GiB — это ещё не полный блок",
+          "new": "<a id=\"arith-deepseek\"></a>\n\n### DeepSeek-V3: 21 GiB — это ещё не полный блок"
+        },
+        {
+          "old": "## 8. Конвейер: распределить последовательные слои",
+          "new": "<a id=\"arith-pipeline\"></a>\n\n## 8. Конвейер: распределить последовательные слои"
+        },
+        {
+          "old": "### Зачем разбивать пакет на микропакеты",
+          "new": "<a id=\"arith-microbatches\"></a>\n\n### Зачем разбивать пакет на микропакеты"
+        },
+        {
+          "old": "### Zero Bubble: разделить два вида градиентов",
+          "new": "<a id=\"arith-zero-bubble\"></a>\n\n### Zero Bubble: разделить два вида градиентов"
+        },
+        {
+          "old": "### DualPipe и DualPipeV",
+          "new": "<a id=\"arith-dualpipe\"></a>\n\n### DualPipe и DualPipeV"
+        },
+        {
+          "old": "## 9. Как составить расчёт перед запуском",
+          "new": "<a id=\"arith-budget\"></a>\n\n## 9. Как составить расчёт перед запуском"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/jax-transformer.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/jax-transformer.png|Блок Transformer: обучаемые матрицы и матричные произведения]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-training-memory.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-training-memory.svg|Профиль памяти четырёх шагов обучения Llama 1B с активациями, градиентами и Adam]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/nemo-checkpointing-detail.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/nemo-checkpointing-detail.png|Первые два блока при полном и избирательном пересчёте активаций]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-fsdp-forward.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-fsdp-forward.svg|FSDP forward: AllGather весов, вычисление и освобождение полной копии]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-fsdp-backward.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-fsdp-backward.svg|FSDP backward: повторный AllGather весов и ReduceScatter градиентов]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/edls-tp.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/edls-tp.png|TP: на каждой GPU хранятся части всех экспертов]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/edls-ep.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/edls-ep.png|EP: на каждой GPU хранятся целые эксперты, токены доставляются Dispatch]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-pipeline-gpipe.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-pipeline-gpipe.svg|GPipe: прямые проходы всех микропакетов перед обратными]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-pipeline-1f1b.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/hf-pipeline-1f1b.svg|1F1B: чередование прямых и обратных проходов после заполнения]]"
+        }
+      ],
+      "before_sha256": "2d49342ee5b2998d93980151ff95f2fdbf5a464c1cbb6911f9e7c3c4dce0cafa",
+      "after_sha256": "f0b4f724a87958426982ab167638ab9a9d6d9d7fd2ed2f88c2ed72c26e213b87"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE|Арифметика Transformer и MoE]]",
+          "new": "- [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE|Арифметика Transformer и MoE]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-shapes|Формы тензоров и число параметров]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-attention|Параметры MHA и GQA]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-swiglu|Три матрицы SwiGLU]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-llama|Точный расчёт LLaMA 7B]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-linear-gradients|Стоимость forward, dX и dW]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-sixp|Вывод и ограничения оценки 6P]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-attention-length|Длина контекста и FLOP внимания]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-states|Память параметров, градиентов и Adam]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-activations|Активации и пиковая память]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-checkpointing|Память и FLOP при checkpointing]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-mfu-hfu|MFU и HFU при пересчёте]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-kv|Расчёт KV-кеша MHA и GQA]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-collectives|Байты AllGather, ReduceScatter и AllReduce]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-ddp|Данные и состояния в DDP]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-zero|Память ZeRO-1, ZeRO-2 и ZeRO-3]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-fsdp|FSDP: время жизни полных весов]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-fsdp-unit|Гранулярность FSDP и временный полный слой]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-tp|Разбиение SwiGLU при TP]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-fsdp-tp|Формы тензоров FSDP × TP]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-strong-scaling|Границы сильного масштабирования DP, FSDP и TP]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-shared-network|Две оси параллелизма при общей полосе]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-moe|Хранимые и активные параметры MoE]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-tp-ep-work|TP и EP: одинаковая работа, разные формы]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-tp-ep-traffic|Расчёт трафика TP и EP]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-qwen3|Параметры блока Qwen3-235B-A22B]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-deepseek|Параметры блока DeepSeek-V3]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-pipeline|Трафик между стадиями PP]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-microbatches|GPipe, 1F1B и доля простоя]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-zero-bubble|Zero Bubble: зависимости dX и dW]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-dualpipe|DualPipe и DualPipeV]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-budget|Память, обмены и критический путь]]"
+        }
+      ],
+      "before_sha256": "57a5f734fc159932c530aed5140012179034d7a46c477d74d8467a623b634154",
+      "after_sha256": "ce03e991f13338d2ec19d92444c44714bc0254325c6e830b9c9cd8b9073beb19"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE|Transformer and MoE arithmetic]]",
+          "new": "- [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE|Transformer and MoE arithmetic]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-shapes|Tensor shapes and parameter counts]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-attention|MHA and GQA parameter counts]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-swiglu|The three SwiGLU matrices]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-llama|An exact LLaMA 7B calculation]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-linear-gradients|The cost of forward, dX, and dW]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-sixp|Deriving the 6P approximation and its limits]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-attention-length|Context length and attention FLOPs]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-states|Parameter, gradient, and Adam memory]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-activations|Activations and peak memory]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-checkpointing|Checkpointing memory and FLOPs]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-mfu-hfu|MFU and HFU with recomputation]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-kv|MHA and GQA KV-cache calculation]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-collectives|AllGather, ReduceScatter, and AllReduce bytes]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-ddp|DDP data and model states]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-zero|ZeRO-1, ZeRO-2, and ZeRO-3 memory]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-fsdp|FSDP and the lifetime of full weights]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-fsdp-unit|FSDP granularity and temporary full layers]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-tp|SwiGLU tensor partitioning]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-fsdp-tp|FSDP × TP tensor shapes]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-strong-scaling|DP, FSDP, and TP strong-scaling limits]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-shared-network|Two parallelism axes sharing bandwidth]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-moe|Stored and active MoE parameters]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-tp-ep-work|TP and EP: equal work, different shapes]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-tp-ep-traffic|Calculating TP and EP traffic]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-qwen3|Qwen3-235B-A22B block parameters]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-deepseek|DeepSeek-V3 block parameters]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-pipeline|Pipeline-stage traffic]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-microbatches|GPipe, 1F1B, and the bubble fraction]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-zero-bubble|Zero Bubble: dX and dW dependencies]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-dualpipe|DualPipe and DualPipeV]]\n  - [[00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE#arith-budget|Memory, communication, and the critical path]]"
+        }
+      ],
+      "before_sha256": "642b41b082034bdd74333a25d3224367901f4bccf5c661e12208bb784b8b1704",
+      "after_sha256": "c73ab01cc74b14d25b5dc6553e3bbbba18f043cbeab14506cde78164020ecf71"
+    }
+  ]
+}

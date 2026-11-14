@@ -1,0 +1,73 @@
+{
+  "url": "http://127.0.0.1:4330/en/textbook/retrieval/embeddings-metric-learning/",
+  "width": 1280,
+  "height": 900,
+  "navigation": {
+    "from": "/en/reference/",
+    "href": "http://127.0.0.1:4330/en/textbook/retrieval/embeddings-metric-learning/#emb-gradcache",
+    "text": "GradCache: joint loss and recomputation",
+    "arrived": "http://127.0.0.1:4330/en/textbook/retrieval/embeddings-metric-learning/#emb-gradcache",
+    "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-embeddings-navigation/en/1280-reference-target.png"
+  },
+  "figures": [],
+  "limits": "Headless browser interactions and screenshots; requires separate human visual inspection.",
+  "layout": {
+    "page": [
+      1265,
+      1265
+    ],
+    "mathErrors": 0,
+    "formulas": [
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ]
+    ],
+    "tables": []
+  },
+  "contextScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-embeddings-navigation/en/1280-page.png"
+}

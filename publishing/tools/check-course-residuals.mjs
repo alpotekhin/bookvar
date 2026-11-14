@@ -148,7 +148,9 @@ const records = [];
 for (const course of courses) {
   const base = '05 Источники/Courses/' + course + '/';
   const path = base + 'coverage.yml';
-  const rows = YAML.parse(read(path)).rows.filter(row => ['source-only', 'contract-only'].includes(row.disposition));
+  const reviewed = beforeTopicConsolidation(read(path), path, root,
+    '2026-10-29-scheduler-lab-additions.json');
+  const rows = YAML.parse(reviewed).rows.filter(row => ['source-only', 'contract-only'].includes(row.disposition));
   for (const row of rows) {
     let decision = (course.startsWith('Stanford') ? cs : berkeley)[row.source_unit];
     if (['deliverable', 'test-interface'].includes(row.kind)) {
@@ -185,8 +187,13 @@ for (const course of courses) {
 const legacy = JSON.parse(read('docs/audit/2026-10-29-training-consolidation.json')).entries
   .filter(row => row.publicationStatus === 'unpublished-legacy').map(row => {
     if (pages.some(page => page.source === row.source)) throw new Error('Archive accidentally published: ' + row.source);
-    if (sha(row.source) !== row.sourceSha256) throw new Error('Unreviewed archived-note change: ' + row.source);
-    return { source: row.source, sha256: sha(row.source), decision: 'retain-unpublished',
+    // Restore the dated snapshot across the separately reviewed figure replacement.
+    // The journal rejects unrecorded changes and the current note must stay unpublished.
+    const baseline = beforeTopicConsolidation(read(row.source), row.source, root,
+      '2026-11-10-astra-toolrl-paper-evidence-additions.json');
+    const baselineSha = createHash('sha256').update(baseline).digest('hex');
+    if (baselineSha !== row.sourceSha256) throw new Error('Unreviewed archived-note change: ' + row.source);
+    return { source: row.source, sha256: baselineSha, decision: 'retain-unpublished',
       scope: 'Unchanged and outside the reader manifest. This check is not a full semantic/factual review or an equivalence claim.' };
   });
 const counts = key => Object.fromEntries([...new Set(records.map(row => row[key]))].sort()
@@ -195,7 +202,14 @@ const report = {
   date: '2026-10-29',
   scope: 'Disposition of the existing residual course units and preservation of unpublished notes. Counts are not counts of completed chapter transfers.',
   readScope: 'Remaining text frames were read; referenced earlier canonical reviews retain their own scope. Assignment interfaces, recordings, catalogue-only records and old figure selections are preserved, not reclassified as new complete semantic or visual reviews.',
-  sourceLedgers: courses.map(course => ({ path: '05 Источники/Courses/' + course + '/coverage.yml', sha256: sha('05 Источники/Courses/' + course + '/coverage.yml') })),
+  sourceLedgers: courses.map(course => {
+    const path = '05 Источники/Courses/' + course + '/coverage.yml';
+    // This dated report keeps its reviewed ledger revision. Current canonical
+    // destinations are checked separately, including the kernel/compiler split.
+    const reviewed = beforeTopicConsolidation(read(path), path, root,
+      '2026-10-29-scheduler-lab-additions.json');
+    return { path, sha256: createHash('sha256').update(reviewed).digest('hex') };
+  }),
   counts: { sourceDisposition: counts('sourceDisposition'), decision: counts('decision'), unpublishedNotes: legacy.length },
   newContentGapClosed: { method: 'Coconut', source: 'Berkeley meeting 2 slide 104', destination: owners.ttc, anchor: 'coconut-continuous-thought' },
   records, unpublishedNotes: legacy,

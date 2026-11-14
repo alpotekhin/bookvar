@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-10",
+  "scope": "Bridge the decoder walkthrough to the pinned Qwen3-0.6B/8B Base models and the Gemma 3 local/global cache ablation, preserving the existing worked block, its six images, routes and formulas.",
+  "review": {
+    "reading": "Read the complete 972-line chapter and the relevant QK normalization section. Read Qwen3 Technical Report §2, the pinned configurations, Transformers v4.51.3 Qwen3Attention and its enclosing decoder layer, and Gemma 3 Technical Report §§2 and 5.2. The 128-parameter teaching block and all its numerical traces are unchanged.",
+    "workedCases": "Independent parameter count matches all 310 Qwen3-0.6B tensor shapes in the header; positions retained under a five-local/one-global pattern are counted separately from masking and compared to the authors' ablation, not claimed as device measurement.",
+    "language": "The English route retains its pre-existing explicitly marked canonical-language edition; no translation was added.",
+    "verification": "The final revision passed the complete decoder CPU checker, including the Qwen header and cache calculations. Root build: 2073 pages, 0 broken links, 284 built-output and 768 publication checks passed (13 skipped). Chrome at 1280 px and 375 px in both locale shells: Gemma figure and Qwen table fit, the norms link resolves, and no KaTeX errors. Inspected the source plot, desktop and mobile inline render, 3.5× mobile zoom, and the mobile table. The Gemma SVG matches the official source byte-for-byte.",
+    "status": "Local only; no commit, push, or deployment."
+  },
+  "evidence": [
+    {
+      "path": "05 Источники/Originals/decoder-configs-2026-11-10/qwen3-06b-config.json",
+      "url": "https://huggingface.co/Qwen/Qwen3-0.6B-Base/raw/da87bfb608c14b7cf20ba1ce41287e8de496c0cd/config.json",
+      "sha256": "504a6b58c4271583724e66584b6b7698aea18450209df6b2f7582df0e89cee59"
+    },
+    {
+      "path": "05 Источники/Originals/decoder-configs-2026-11-10/qwen3-8b-config.json",
+      "url": "https://huggingface.co/Qwen/Qwen3-8B-Base/raw/49e3418fbbbca6ecbdf9608b4d22e5a407081db4/config.json",
+      "sha256": "3bd01d7ad7a2e203ecbbe84e24087a51c6d2a108ee4bcc42d0016bf49564983a"
+    },
+    {
+      "path": "05 Источники/Originals/decoder-configs-2026-11-10/safetensors-header.bin",
+      "url": "https://huggingface.co/Qwen/Qwen3-0.6B-Base/resolve/da87bfb608c14b7cf20ba1ce41287e8de496c0cd/model.safetensors",
+      "range": "bytes 0-35255/1192135096",
+      "sha256": "da8f2268dd6a09cb578dcc4a8dad1c0b41e7d323499625fb219757dfca29f6c8",
+      "scope": "Eight-byte length and full JSON metadata only; no tensor payload read."
+    },
+    {
+      "path": "05 Источники/Originals/decoder-configs-2026-11-10/modeling_qwen3.py",
+      "url": "https://raw.githubusercontent.com/huggingface/transformers/v4.51.3/src/transformers/models/qwen3/modeling_qwen3.py",
+      "sha256": "704c914530530a1acb0b443add1f520404e3ac2c28c0ab7e16f80f86cfe8ccb2"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/gemma/gemma-3-kv-cache.svg",
+      "url": "https://arxiv.org/html/2503.19786v1/mem_lc.svg",
+      "sha256": "304affd7e22f11162d405f074e64c23fa08ab580407af332cf57e8ffcd17abf5",
+      "license": "CC BY 4.0"
+    }
+  ],
+  "files": [
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
+      "before_sha256": "08d5dc5dd54e8ad7e997eea86fe7decf172c0fed92b1e0001e883addd7c2993d",
+      "after_sha256": "14dac3577c240829d0ec88961afd4ef0eb62734a56b44b3a3cfa2b304b79ba67",
+      "lines": 1060,
+      "changes": [
+        {
+          "old": "  - https://proceedings.mlr.press/v306/han26b.html\n  - https://arxiv.org/abs/2002.05202v1\n---\n\n",
+          "new": "  - https://proceedings.mlr.press/v306/han26b.html\n  - https://arxiv.org/abs/2002.05202v1\n  - https://arxiv.org/html/2503.19786v1#S5.SS2\n  - https://arxiv.org/html/2505.09388v1#S2\n  - https://huggingface.co/Qwen/Qwen3-0.6B-Base/blob/da87bfb608c14b7cf20ba1ce41287e8de496c0cd/config.json\n  - https://huggingface.co/Qwen/Qwen3-8B-Base/blob/49e3418fbbbca6ecbdf9608b4d22e5a407081db4/config.json\n---\n\n"
+        },
+        {
+          "old": "В [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|предыдущей главе]]\nпрослежен полный путь LLaMA от токенов до словарных вероятностей.\n\n<span id=\"два-последовательных-уточнения\"></span>\n",
+          "new": "В [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|предыдущей главе]]\nпрослежен полный путь LLaMA от токенов до словарных вероятностей.\nНа том же блоке можно разобрать две детали современных моделей:\n[[#qwen3-checkpoint-shapes|почему у Qwen3 ширина Q больше ширины состояния]]\nи [[#gemma3-mixed-kv-cache|почему у Gemma 3 слои хранят разное число позиций]].\n\n<span id=\"два-последовательных-уточнения\"></span>\n"
+        },
+        {
+          "old": "есть отдельное поле `sliding_window=4096`; его нельзя восстановить\nиз одного `hidden_size`.\n\n## От GPT-2 к LLaMA: что сохранилось, а что заменили\n\n",
+          "new": "есть отдельное поле `sliding_window=4096`; его нельзя восстановить\nиз одного `hidden_size`.\n\n<a id=\"gemma3-mixed-kv-cache\"></a>\n\n### Сколько истории хранит каждый слой в Gemma 3\n\nВ [отчёте Gemma 3, §2](https://arxiv.org/html/2503.19786v1#S2)\nпосле каждых пяти локальных слоёв с окном 1024 идёт один глобальный.\nЕсли реализация при декодировании вытесняет старые K/V из локальных\nслоёв, каждый из пяти хранит не более 1024 позиций. Шестой слой\nхранит всю последовательность. При 32 768 токенах это\n$5\\cdot1024+32768=37\\,888$ позиций, суммарно по шести слоям.\nЕсли все шесть слоёв глобальные, получится $6\\cdot32768=196\\,608$.\nПри одинаковых размерах K/V и типе данных первая группа занимает\nоколо 19,3% памяти второй. До 1024 токенов обе группы хранят\nодинаковое число позиций.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/gemma-3-kv-cache.svg|Память KV-cache двух моделей на 2 млрд параметров. При длинном контексте кэш варианта со всеми глобальными слоями растёт быстрее, чем у варианта с пятью локальными слоями на один глобальный.]]\n\n*Gemma Team / Google DeepMind, [Gemma 3 Technical Report, рис. 6](https://arxiv.org/html/2503.19786v1#S5.F6),\n[оригинальный SVG](https://arxiv.org/html/2503.19786v1/mem_lc.svg),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Без изменений.*\n\nНа графике обе линии относятся к 2B-моделям из абляции §5.2.\nПри 128K жёлтая линия доходит примерно до 7000 МБ, а красная —\nдо 1100 МБ. Красная линия тоже растёт: глобальным слоям по-прежнему\nнужны ключи и значения всех позиций. Эти величины относятся только\nк кэшу авторского опыта. Они не описывают память весов, пик при\nprefill или время ответа выпущенной Gemma 3. Само ограничение маски\nне освобождает память: в учебном блоке выше `window` запрещает\nобращение к старым позициям, но старые K/V всё ещё лежат в тензоре.\n\n## От GPT-2 к LLaMA: что сохранилось, а что заменили\n\n"
+        },
+        {
+          "old": "согласованное разбиение голов. Требования делимости конкретного ядра\nили библиотеки не являются математическим определением attention.\n\n### Глубина и ширина\n\n",
+          "new": "согласованное разбиение голов. Требования делимости конкретного ядра\nили библиотеки не являются математическим определением attention.\n\n<a id=\"qwen3-checkpoint-shapes\"></a>\n\n#### Проверка по весам Qwen3\n\nУ [Qwen3-0.6B-Base](https://huggingface.co/Qwen/Qwen3-0.6B-Base/blob/da87bfb608c14b7cf20ba1ce41287e8de496c0cd/config.json)\n`hidden_size=1024`, `num_attention_heads=16`,\n`num_key_value_heads=8` и `head_dim=128`. Если поделить\nширину состояния на число query-голов, выйдет 64. Это не размер\nголовы этой модели: Q расширяется до $16\\cdot128=2048$ координат.\nВ таблице формы весов PyTorch записаны в порядке\n`[out_features, in_features]`. Они сверены с заголовком\n[`model.safetensors`](https://huggingface.co/Qwen/Qwen3-0.6B-Base/blob/da87bfb608c14b7cf20ba1ce41287e8de496c0cd/model.safetensors).\n\n| Проекция | Форма веса первого слоя | Результат для 3 токенов |\n| --- | --- | --- |\n| Q | `[2048,1024]` | `[1,3,16,128]` после разбиения на головы |\n| K | `[1024,1024]` | `[1,3,8,128]` после разбиения |\n| V | `[1024,1024]` | `[1,3,8,128]` после разбиения |\n| O | `[1024,2048]` | `[1,3,1024]` после объединения query-голов |\n\nДве query-головы читают одну пару K/V, как в средней панели\n[[#Что происходит внутри attention|рисунка Ainslie et al.]].\nПосле проекций Qwen3 применяет ещё одну RMSNorm к каждому вектору\nQ и K по его 128 координатам. Веса `q_norm` и `k_norm` имеют по\n128 элементов: каждый вектор масштабов используется всеми головами\nсоответствующего типа. Затем RoPE поворачивает Q и K, а в кэш\nзаписываются уже повёрнутые K и обычные V.\nПорядок видно в\n[`Qwen3Attention.forward`](https://github.com/huggingface/transformers/blob/v4.51.3/src/transformers/models/qwen3/modeling_qwen3.py#L214-L227).\nНорма входа подслоя остаётся на месте; эффект дополнительной нормы\nна оценки внимания разобран [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual#QK normalization|на числовом примере в следующей главе]].\n\nЧетыре проекции содержат вместе 6 291 456 весов, три матрицы SwiGLU —\n9 437 184, а четыре нормы блока добавляют $2\\cdot1024+2\\cdot128=2304$.\nИтого 15 730 944 параметра на слой. В стеке 28 слоёв. Добавив\nодну общую таблицу входа и выхода размера $151936\\times1024$\nи финальную RMSNorm, получим 596 049 920 параметров. В заголовке\nперечислено 310 тензоров. Если сложить произведения их размеров,\nвыходит то же число. Значения весов для этой проверки не нужны.\n\nСравним с [Qwen3-8B-Base](https://huggingface.co/Qwen/Qwen3-8B-Base/blob/49e3418fbbbca6ecbdf9608b4d22e5a407081db4/config.json).\nВ ней 32 query-головы, но по-прежнему восемь KV-голов по 128 координат.\nКэш одного слоя на токен при BF16 в обеих моделях занимает\n$2\\cdot8\\cdot128\\cdot2=4096$ байт. На 4096 токенах и с учётом\nвсех слоёв это 448 МиБ у 0.6B (28 слоёв) и 576 МиБ у 8B (36 слоёв).\nЗдесь считается только сохранённый K/V одной последовательности.\nРазмеры Q и FFN влияют на другие затраты. По одному числу\nпараметров модели этот кэш не вычислить.\n\n### Глубина и ширина\n\n"
+        },
+        {
+          "old": "- [Stanford CS336, Lecture 3](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf): с. 36–51 — гиперпараметры и основания их выбора, с. 57–66 — KV-cache и разрежённая видимость.\n- [Закреплённая Llama 3](https://github.com/meta-llama/llama3/blob/a0940f9cf7065d45bb6675660f80d305c041a754/llama/model.py): отдельные Q/KV-головы, RoPE, cache, прямоугольная маска и два residual-сложения. CPU-код главы следует этим операциям, но не копирует CUDA/model-parallel инфраструктуру.\n- [Shazeer, GLU Variants, §2](https://arxiv.org/abs/2002.05202v1): две ветви, произведение координат и замена sigmoid на Swish в SwiGLU.\n- [PaLM, §2](https://arxiv.org/html/2204.02311v5#S2): параллельные attention/MLP и условия сравнения с последовательной записью.\n",
+          "new": "- [Stanford CS336, Lecture 3](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf): с. 36–51 — гиперпараметры и основания их выбора, с. 57–66 — KV-cache и разрежённая видимость.\n- [Закреплённая Llama 3](https://github.com/meta-llama/llama3/blob/a0940f9cf7065d45bb6675660f80d305c041a754/llama/model.py): отдельные Q/KV-головы, RoPE, cache, прямоугольная маска и два residual-сложения. CPU-код главы следует этим операциям, но не копирует CUDA/model-parallel инфраструктуру.\n- [Qwen3 Technical Report, §2](https://arxiv.org/html/2505.09388v1#S2): настройки плотных моделей, переход от смещений QKV к QK-norm. Формы и размеры в примере взяты из конкретных конфигураций Base и заголовка тензоров.\n- [Gemma 3 Technical Report, §§2 и 5.2](https://arxiv.org/html/2503.19786v1#S5.SS2): порядок локальных и глобальных слоёв, размер окна и абляция памяти кэша.\n- [Shazeer, GLU Variants, §2](https://arxiv.org/abs/2002.05202v1): две ветви, произведение координат и замена sigmoid на Swish в SwiGLU.\n- [PaLM, §2](https://arxiv.org/html/2204.02311v5#S2): параллельные attention/MLP и условия сравнения с последовательной записью.\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "f1b62014b5ebbf43d5ad40bbba46b1ff5a5bda38266b73234ead432fa2687db1",
+      "after_sha256": "4ec99c58ee3b6ad46ba1b763061d0b55da6d78c442076fc35a855c1c87500546",
+      "lines": 25403,
+      "changes": [
+        {
+          "old": "    license_evidence: \"https://arxiv.org/html/2503.19786v1\"\n    modifications: \"Original figure copied byte-for-byte; no crop, redraw, relabeling or resampling.\"\n    used_in: [\"02 Атлас моделей/Семейства/Gemma.md\"]\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n",
+          "new": "    license_evidence: \"https://arxiv.org/html/2503.19786v1\"\n    modifications: \"Original figure copied byte-for-byte; no crop, redraw, relabeling or resampling.\"\n    used_in: [\"02 Атлас моделей/Семейства/Gemma.md\", \"00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md\"]\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n"
+        }
+      ]
+    },
+    {
+      "source": "docs/audit/2026-10-30-reading-route-review.json",
+      "before_sha256": "7822a320a09c18ba8f6782adcf2a7a5f1c03307d2c12341e03d18ceccb788c94",
+      "after_sha256": "a121ec64a18cb97bb6579f97dcd8866bdbf251d466577280369a661565e214bd",
+      "lines": 8000,
+      "changes": [
+        {
+          "old": "      \"path\": \"00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md\",\n      \"route\": \"textbook/modern-llm/decoder-block\",\n      \"sha256\": \"08d5dc5dd54e8ad7e997eea86fe7decf172c0fed92b1e0001e883addd7c2993d\",\n      \"lines\": 972,\n      \"read\": \"complete saved chapter, frontmatter through sources and final navigation\",\n      \"hyperparameterSourceRecheck\": \"Read the full preceding 940-line chapter and rechecked the revised FFN, depth/width and weight-decay sections against the author figures and experimental tables. See 2026-11-10-decoder-design-figures-additions.json.\",\n",
+          "new": "      \"path\": \"00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md\",\n      \"route\": \"textbook/modern-llm/decoder-block\",\n      \"sha256\": \"14dac3577c240829d0ec88961afd4ef0eb62734a56b44b3a3cfa2b304b79ba67\",\n      \"lines\": 1060,\n      \"configExampleDelta\": {\"before\": \"08d5dc5dd54e8ad7e997eea86fe7decf172c0fed92b1e0001e883addd7c2993d\", \"journal\": \"2026-11-10-modern-decoder-config-examples-additions.json\", \"review\": \"Full canonical chapter read; verified actual Qwen3 tensor dimensions, projection and norm ordering, and cache arithmetic. The original Gemma figure distinguishes retained K/V from a mask that merely disallows old positions.\"},\n      \"read\": \"complete saved chapter, frontmatter through sources and final navigation\",\n      \"hyperparameterSourceRecheck\": \"Read the full preceding 940-line chapter and rechecked the revised FFN, depth/width and weight-decay sections against the author figures and experimental tables. See 2026-11-10-decoder-design-figures-additions.json.\",\n"
+        }
+      ]
+    }
+  ]
+}

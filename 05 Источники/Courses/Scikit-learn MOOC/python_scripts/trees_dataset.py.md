@@ -28,8 +28,9 @@ Each penguin is from one of the three following species: Adelie, Gentoo, and
 Chinstrap. See the illustration below depicting the three different penguin
 species:
 
-![Image of
-penguins](https://github.com/allisonhorst/palmerpenguins/raw/main/man/figures/lter_penguins.png)
+![Adelie, Chinstrap and Gentoo penguins](https://raw.githubusercontent.com/allisonhorst/palmerpenguins/8957207b78d6ccd1b4654a9dd9c9041b657478ab/man/figures/lter_penguins.png)
+
+*Artwork by @allison_horst. [Palmer Penguins teaching artwork](https://allisonhorst.github.io/palmerpenguins/articles/art.html#meet-the-palmer-penguins).*
 
 This problem is a classification problem since the target is categorical. We
 limit our input data to a subset of the original features to simplify our
@@ -37,8 +38,9 @@ explanations when presenting the decision tree algorithm. Indeed, we use
 features based on penguins' culmen measurement. You can learn more about the
 penguins' culmen with the illustration below:
 
-![Image of
-culmen](https://github.com/allisonhorst/palmerpenguins/raw/main/man/figures/culmen_depth.png)
+![Bill length and bill depth measured along and across the bill](https://raw.githubusercontent.com/allisonhorst/palmerpenguins/8957207b78d6ccd1b4654a9dd9c9041b657478ab/man/figures/culmen_depth.png)
+
+*Artwork by @allison_horst. [Palmer Penguins teaching artwork](https://allisonhorst.github.io/palmerpenguins/articles/art.html#culmen-measurements).*
 
 We start by loading this subset of the dataset.
 

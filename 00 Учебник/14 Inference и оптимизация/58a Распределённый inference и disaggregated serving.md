@@ -2,8 +2,8 @@
 title: "Параллелизм и коллективные операции в LLM inference"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-20
-last_verified: 2026-10-20
+last_updated: 2026-11-11
+last_verified: 2026-11-11
 primary_sources:
   - https://jax-ml.github.io/scaling-book/sharding/
   - https://jax-ml.github.io/scaling-book/inference/
@@ -79,11 +79,12 @@ $$
 
 ### AllGather: собрать полный тензор из фрагментов
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allgather.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allgather.png|Каждый из четырёх процессов вносит один блок. У всех четырёх одинаковый выход из четырёх блоков в порядке источников.]]
 
-*Официальная схема NCCL: каждый rank передаёт свой фрагмент, после чего все ranks
-получают конкатенацию фрагментов в порядке rank. Источник: NVIDIA,
-[Collective Operations](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html).*
+*NVIDIA, [NCCL Collective Operations: AllGather](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#allgather),
+[лицензия исходного файла](/licenses/nvidia-nccl-bbc3d605-LICENSE.txt). Блок `in2` оказывается
+третьим в каждом `out`: место блока задаёт номер источника, а не
+номер получателя.*
 
 Пусть rank 0 хранит `[1, 2]`, а rank 1 — `[3, 4]`. После AllGather оба получат
 `[1, 2, 3, 4]`. Значения не складываются: исходные фрагменты занимают разные
@@ -96,11 +97,12 @@ $$
 
 ### ReduceScatter: просуммировать и оставить результат разделённым
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-reducescatter.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-reducescatter.png|Все четыре входа разбиты на четыре блока. Каждый процесс получает сумму одноимённых блоков с номером своего rank.]]
 
-*ReduceScatter сначала редуцирует соответствующие элементы входов, затем оставляет
-на каждом rank только его часть результата. Источник: официальная документация
-[NCCL Collective Operations](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html).*
+*NVIDIA, [NCCL Collective Operations: ReduceScatter](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#reducescatter),
+[лицензия исходного файла](/licenses/nvidia-nccl-bbc3d605-LICENSE.txt). Чтобы получить `out2`,
+сложите третьи блоки всех четырёх входов. Этот блок останется
+на rank 2; остальные получатели получат другие части суммы.*
 
 Теперь входы имеют полную форму, но содержат частичные суммы. Rank 0 передаёт
 `[1, 2, 3, 4]`, rank 1 — `[10, 20, 30, 40]`. Их поэлементная сумма равна
@@ -110,11 +112,12 @@ rank 1. Каждый процесс получает готовые значен
 
 ### AllReduce: полная сумма на каждом rank
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allreduce.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allreduce.png|На входе четыре массива одной формы. Каждый выход содержит полную сумму по соответствующим позициям.]]
 
-*AllReduce возвращает результат редукции всем ranks. Его можно мыслить как
-ReduceScatter, за которым следует AllGather. Источник: официальная документация
-[NCCL Collective Operations](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html).*
+*NVIDIA, [NCCL Collective Operations: AllReduce](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#allreduce),
+[лицензия исходного файла](/licenses/nvidia-nccl-bbc3d605-LICENSE.txt). Здесь четыре одинаковых `out`
+на месте отдельных `out0`–`out3`: у каждого получателя
+сумма для всех позиций, а не один её блок.*
 
 Для тех же входов AllReduce вернёт `[11, 22, 33, 44]` обоим процессам. Получить
 тот же результат можно через ReduceScatter, а затем AllGather. Это равенство
@@ -177,11 +180,13 @@ AllReduce на слой при этом остаётся прежним.
 
 ### AllToAll: передать каждому процессу свой фрагмент
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-alltoall.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-alltoall.png|В каждом входе блоки упорядочены по получателю, в каждом выходе — по источнику. Блоки не складываются.]]
 
-*При AllToAll каждый rank отправляет отдельный фрагмент каждому назначению и
-получает отдельный фрагмент от каждого источника. Источник: официальная
-документация [NCCL Collective Operations](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html).*
+*NVIDIA, [NCCL Collective Operations: AlltoAll](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#alltoall),
+[лицензия исходного файла](/licenses/nvidia-nccl-bbc3d605-LICENSE.txt). Входной буфер разбит по получателям:
+rank 1 берёт второй блок от каждого из четырёх источников. В его `out1`
+эти блоки уже стоят в порядке отправителей. `ncclAlltoAll` на рисунке
+использует один и тот же `count` для каждой пары процессов.*
 
 Пусть rank 0 подготовил значение `10` для себя и `11` для rank 1, а rank 1 —
 `20` для rank 0 и `21` для себя. После AllToAll rank 0 получает `[10, 20]`, rank 1
@@ -511,21 +516,28 @@ assert np.allclose(result, reference)
 вычисленные по разным частям ключей. Причинная маска и глобальные позиции
 должны сохраняться при любом порядке передачи.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/megatron-context-parallel-overview.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/megatron-context-parallel-overview.png|Четыре строки GPU0–GPU3. GPU0 и GPU1 делят головы на первой части контекста, GPU2 и GPU3 на второй. K/V обмениваются между GPU0 и GPU2, а также между GPU1 и GPU3.]]
 
-*Transformer layer при TP2×CP2. GPU0 и GPU1 обрабатывают один фрагмент
-последовательности с TP2, GPU2 и GPU3 другой. CP связывает GPU0↔GPU2 и
-GPU1↔GPU3. Жёлтые AG/RS относятся к TP/SP, синие к обменам attention при CP.
-Обозначения через косую черту описывают прямой и обратный проходы обучения;
-при inference выполняется только прямой. Источник:
-NVIDIA, [Megatron Core Context Parallelism](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/features/context_parallel.html),
-Figure 1.*
+*NVIDIA, [Megatron Core: Context Parallelism, рис. 1](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/features/context_parallel.html),
+[оригинал в исходной ревизии](https://github.com/NVIDIA/Megatron-LM/blob/0b13c98fb4d33de7080cab08aeaaed810b2de50a/docs/images/context_parallel/CP_overview.png),
+[лицензия этой ревизии](/licenses/nvidia-megatron-0b13c98f-LICENSE.txt). В парах обозначений вроде `AG/RS`
+первая часть относится к прямому проходу, вторая — к обратному.
+Блок `/AG` после attention ничего не делает в прямом проходе.*
 
-В этой [реализации Megatron CP](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/features/context_parallel.html)
-обмен блоками можно организовать кольцевыми point-to-point передачами.
-На исходной схеме синий AG означает получение K/V других частей контекста,
-а не AllGather всех весов. Сравнивать такую схему с FSDP только по названию
-коллективной операции было бы ошибкой.
+В примере Megatron последовательность из 8192 токенов делится на две части
+по 4096. Проследим строку GPU0. Перед `QKV` первый `AG` собирает
+строки его части контекста между GPU0 и GPU1. Затем GPU0 вычисляет Q, K и V
+для своей доли голов на этих 4096 позициях. Перед `Attn` ему нужны
+K/V тех же голов из другой части контекста. Их вычислил GPU2, поэтому второй
+`AG` идёт между GPU0 и GPU2. GPU1 и GPU3 образуют такую же пару
+для второй доли голов. Q остаются локальными, а причинная маска ограничивает,
+какие из полученных ключей вправе читать каждый запрос.
+
+Два `AG` собирают разные данные: первый — строки активаций внутри одной
+части контекста, второй — K/V между частями. Megatron может выполнить
+второй обмен передачами между соседями в кольце, не храня на каждом GPU
+постоянную копию всех K/V. Это схема prefill по частям контекста; ниже
+рассматривается другой прямой проход, с одним query при decode.
 
 ### Как объединить attention по двум частям KV
 

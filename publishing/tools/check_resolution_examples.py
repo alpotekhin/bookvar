@@ -91,7 +91,8 @@ def main():
     exec(compile(helpers, "internvl-README.md:helpers", "exec"), env)
     image_counts = []
     for width, height, expected_grid in [
-        (1600, 800, (4, 2)), (800, 400, (2, 1)), (448, 448, (1, 1))
+        (1600, 800, (4, 2)), (800, 400, (2, 1)), (448, 448, (1, 1)),
+        (800, 1300, (2, 3)),
     ]:
         assert spaces[2]["internvl_grid"](width, height) == expected_grid
         tiles = env["dynamic_preprocess"](
@@ -102,6 +103,8 @@ def main():
         assert len(tiles) == expected_count
         assert all(tile.size == (448, 448) for tile in tiles)
         image_counts.append(len(tiles))
+    assert image_counts[-1] == 7
+    assert image_counts[-1] * (448 // 14)**2 // 4 == 1792
 
     shuffle = source_function(SOURCE / "internvl-model.py", "pixel_shuffle")
     for n, h, w, c in [(1, 4, 4, 1), (2, 6, 8, 3), (1, 32, 32, 4)]:
@@ -223,14 +226,46 @@ def main():
     after = Image.open(ROOT/repair["asset"]).convert("RGB")
     assert list(before.size) == repair["source_raster_size_px"]
     assert ImageChops.difference(before.crop(repair["crop_box_px"]), after).getbbox() is None
-    assert len(re.findall(r"!\[\[", chapter)) == 6
+    reader_figures = {
+        link.split("|", 1)[0].rsplit("/", 1)[-1]
+        for link in re.findall(r"!\[\[([^\]\n]+)\]\]", chapter)
+    }
+    assert reader_figures == {
+        "llava-onevision-anyres.png",
+        "qwen2-vl-architecture.png", "pixtral-vision-packing.png", "qwen2vl-figure3-mrope.png",
+        "internvl35-figure2c.png",
+    }
+    assert "https://arxiv.org/pdf/2409.17146v2#page=9" in chapter
+    left, right = list(range(24)), list(range(16, 40))
+    assert sorted(set(left) & set(right)) == list(range(16, 24))
+    assert left[:-4] + right[4:] == list(range(40))
+    assert 19 in left[:-4] and 19 not in right[4:] and left[20:] == [20, 21, 22, 23]
+    assert "https://arxiv.org/pdf/2412.05271v5#page=3" in chapter
+    journal = ROOT / "docs/audit/2026-11-13-internvl-imagebind-figures-additions.json"
+    router = json.loads(journal.read_text())["figures"][0]
+    for path_key, hash_key in [
+        ("asset", "sha256"), ("source_asset", "source_asset_sha256"),
+        ("license_evidence", "license_evidence_sha256"),
+    ]:
+        assert sha(ROOT / router[path_key]) == router[hash_key]
+    parent = Image.open(ROOT / router["source_asset"]).convert("RGB")
+    panel = Image.open(ROOT / router["asset"]).convert("RGB")
+    assert list(parent.size) == router["source_dimensions_px"]
+    assert list(panel.size) == router["dimensions_px"]
+    assert ImageChops.difference(parent.crop(router["crop_box_px"]), panel).getbbox() is None
+    assert router["asset"] in chapter and router["license"] == "CC BY 4.0"
+    base, routed = 6 * 256, 4 * 256 + 2 * 64
+    assert (base, routed, (base - routed) / base) == (1536, 1152, .25)
     print(json.dumps({
         "chapter_sha256": sha(CHAPTER), "standalone_and_shared_code_runs": 18,
         "pinned_resize_cases": resize_cases, "internvl_images_with_thumbnail": image_counts,
         "molmo_axis_cases": 6, "pixtral_row_shapes": 20, "mrope_grid_shapes": 20,
+        "molmo_seam_context_without_duplicate_patches": True,
         "rotary_relative_position_cases": 100, "coordinate_roundtrips": 100,
         "interleaved_frequency_pairs": [24, 20, 20], "new_original_figure_crops": 1,
         "existing_figure_whitespace_repairs": 1,
+        "internvl35_connector_panel_matches_source_pixels": True,
+        "illustrative_router_positions": [base, routed],
         "pretrained_model_run": False,
     }, indent=2))
 

@@ -1,6 +1,7 @@
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
+import { createHash } from 'node:crypto';
 import { parse, stringify } from 'yaml';
 import { afterEach, describe, expect, it } from 'vitest';
 import { validateCourseLedger } from '../tools/course-ledger.ts';
@@ -92,6 +93,24 @@ afterEach(() => {
 });
 
 describe('course ingestion ledger', () => {
+  it('keeps excluded Berkeley pages numbered without their text or a public PDF dependency', () => {
+    const root = resolve(import.meta.dirname, '../../05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025');
+    const doc = parse(readFileSync(resolve(root, 'source-manifest.yml'), 'utf8'));
+    const deck = rowById(doc, 'objects', 'meeting-06-slides');
+    expect(deck.local_path).toBeUndefined();
+    expect(deck.local_archive_path).toBe('Lectures/meeting-06-slides.pdf');
+    expect(deck.text_index_excluded_physical_pages).toEqual([117, 118, 119, 120, 121]);
+    const index = readFileSync(resolve(root, String(deck.text_index_path)));
+    const pages = Array.from(index.toString('utf8').matchAll(
+      /^=== PHYSICAL PAGE (\d+) OF 126 ===\n?([\s\S]*?)(?=^=== PHYSICAL PAGE|(?![\s\S]))/gm
+    ));
+    expect(pages.map(page => Number(page[1]))).toEqual(Array.from({ length: 126 }, (_, i) => i + 1));
+    for (const page of [117, 118, 119, 120, 121]) {
+      expect(pages[page - 1][2].trim()).toBe('[Withheld: excluded from reuse.]');
+    }
+    expect(createHash('sha256').update(index).digest('hex')).toBe(deck.text_index_sha256);
+  });
+
   it('accepts explicit lecture, PDF, assignment, and video unit schemas with every coverage disposition', () => {
     validate(fixture('course-ledger.valid.yml'));
   });

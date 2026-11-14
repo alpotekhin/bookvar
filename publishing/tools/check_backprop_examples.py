@@ -8,6 +8,8 @@ import math
 import re
 import runpy
 import textwrap
+import sys
+from topic_consolidation_baseline import before_topic_consolidation
 
 import numpy as np
 import torch
@@ -17,9 +19,10 @@ ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / '00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md'
 SOURCE = ROOT / '05 Источники/Originals/backpropagation-2026-10-21/micrograd-engine.py'
 current_text = CHAPTER.read_text()
+reviewed_text = before_topic_consolidation(current_text, CHAPTER)
 additions = re.findall(r'<!-- BEGIN REVIEW: (forward mode|custom backward) 2026-10-27 -->\n(.*?)<!-- END REVIEW: \1 2026-10-27 -->\n\n', current_text, re.S)
 assert [name for name, _ in additions] == ['forward mode', 'custom backward']
-baseline = re.sub(r'<!-- BEGIN REVIEW: JAX transforms 2026-10-27 -->\n.*?<!-- END REVIEW: JAX transforms 2026-10-27 -->\n\n', '', current_text, flags=re.S)
+baseline = re.sub(r'<!-- BEGIN REVIEW: JAX transforms 2026-10-27 -->\n.*?<!-- END REVIEW: JAX transforms 2026-10-27 -->\n\n', '', reviewed_text, flags=re.S)
 baseline = re.sub(r'<!-- BEGIN REVIEW: (forward mode|custom backward) 2026-10-27 -->\n.*?<!-- END REVIEW: \1 2026-10-27 -->\n\n', '', baseline, flags=re.S)
 baseline = baseline.replace('last_updated: 2026-10-27', 'last_updated: 2026-10-21')
 baseline = baseline.replace(r'''\begin{aligned}
@@ -36,7 +39,9 @@ Z&=\begin{pmatrix}4.5&4.5\\5.5&-6.5\end{pmatrix}.
 \end{aligned}''', r'''b=(0.5,-0.5),\qquad
 Z=\begin{pmatrix}4.5&4.5\\5.5&-6.5\end{pmatrix}.''')
 assert hashlib.sha256(baseline.encode()).hexdigest() == 'd329325d295f0fc50ddbf013412c96e0f24f8a31bd6733754e08ae23a5baa198'
-blocks = re.findall(r'```python\n(.*?)```', baseline, re.S)
+current_core = re.sub(r'<!-- BEGIN REVIEW: (?:JAX transforms|forward mode|custom backward) 2026-10-27 -->\n.*?<!-- END REVIEW: (?:JAX transforms|forward mode|custom backward) 2026-10-27 -->\n\n', '', current_text, flags=re.S)
+blocks = re.findall(r'```python\n(.*?)```', current_core, re.S)
+assert blocks == re.findall(r'```python\n(.*?)```', baseline, re.S)
 assert len(blocks) == 6
 # The published class excerpt is explicitly not a standalone program.
 engine = SOURCE.read_text()
@@ -262,3 +267,19 @@ print(f'PASS: {len(new_blocks)} additional actual fences, exact Harvard examples
       'identities, 9 explicit HVP checks, both custom interfaces over 5 shape '
       'patterns, reverse/forward gradcheck, gradgradcheck and a failing negative control.')
 print('SHA-256:',hashlib.sha256(current_text.encode()).hexdigest())
+
+if '--all-published' in sys.argv:
+    # Moving the advanced material must not break imports/definitions used by
+    # later fences. Run the actual complete chapter in its new reading order.
+    sequential = {'__name__': '__backprop_sequential_examples__'}
+    all_blocks = re.findall(r'```python\n(.*?)```', current_text, re.S)
+    assert len(all_blocks) == 20
+    for index, code in enumerate(all_blocks):
+        if index == 1:
+            # Exact original non-standalone Value methods were checked above.
+            assert textwrap.dedent(code).strip() == textwrap.dedent(mul) + '\n\n' + textwrap.dedent(backward)
+            continue
+        with redirect_stdout(StringIO()):
+            exec(compile(code, f'{CHAPTER}:sequential-{index+1}', 'exec'), sequential)
+    print('PASS: all19 runnable current fences in actual reading order; '
+          'one exact original class-method fragment checked separately.')

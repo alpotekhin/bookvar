@@ -2,7 +2,7 @@
 title: Собираем Transformer — от блока к BERT, GPT и LLaMA
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-30
+last_updated: 2026-11-10
 source_language: mixed
 reference_terms:
   - label: Attention, residual and embedding dropout
@@ -427,6 +427,23 @@ $d=512$, восемь голов ширины 64 и FFN ширины 2048.
 целевой префикс, затем cross-attention обращается к памяти $M$.
 После него FFN преобразует каждую целевую строку.
 
+<a id="transformer-original-figure"></a>
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-gpt-bridge-2026-11-10/vaswani-transformer-figure1.png|Слева энкодер читает исходную фразу, справа декодер читает сдвинутый перевод и выход энкодера]]
+
+*Оригинальный Transformer. Читайте правый блок снизу вверх:
+сдвинутый перевод → причинное self-attention → cross-attention → FFN.
+В средний блок внимания входят три стрелки: две из энкодера (K и V)
+и одна из декодера (Q). Выходная проекция и softmax находятся над стеком,
+а не внутри каждого слоя. Ashish Vaswani и соавторы,
+[Attention Is All You Need, рис. 1](https://arxiv.org/html/1706.03762v7#S3.F1).
+Рисунок без изменений; [разрешение Google на воспроизведение](https://arxiv.org/html/1706.03762v7#p1.1).*
+
+В [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer#translation-two-reads|рекуррентном переводчике]] запросом было предыдущее состояние
+декодера. Здесь в каждой целевой позиции запрос строится после причинного
+self-attention по уже известным токенам перевода. В обоих случаях ключи
+и значения берутся из представлений источника, а не из перевода.
+
 Для состояния $D$ один post-norm блок выполняет три последовательных обновления:
 
 $$
@@ -837,18 +854,10 @@ K/V cross-attention также неизменны в пределах одног
 
 ## 8. Три архитектурные ветви
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt-2-transformer-xl-bert-3.png]]
-
-*Слева GPT-2 с причинными блоками без cross-attention, в центре BERT
-с двунаправленными блоками, справа Transformer-XL с памятью между сегментами.
-Рисунок не сравнивает GPT-1 и LLaMA; их отличия перечислены в тексте ниже.
-Источник: Jay Alammar, [The Illustrated GPT-2](https://jalammar.github.io/illustrated-gpt2/),
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
-
-В уже разобранном encoder–decoder исходный текст образует отдельную память,
-а декодер генерирует условный выход. Два других варианта оставляют
-только энкодер или только причинный декодер. LLaMA развивает последний
-вариант, меняя нормализацию, FFN и позиционный механизм.
+На [схеме переводчика](#transformer-original-figure) левый и правый стеки
+отвечают за разные последовательности. В BERT остаётся один двунаправленный
+стек; в GPT и LLaMA — один причинный. От этого зависит, как сведения
+об исходном тексте доходят до позиции, из которой модель делает прогноз.
 
 ### Encoder-only: BERT
 
@@ -867,19 +876,34 @@ BERT не является авторегрессионным генератор
 
 ### Decoder-only: GPT
 
-GPT использует причинный стек без энкодера и без cross-attention:
+На [рисунке Vaswani](#transformer-original-figure) уберите левый стек
+и средний блок внимания справа вместе с его Add & Norm. В стеке GPT‑1
+остаются причинное self-attention и FFN, оба с нормализацией после
+остаточного сложения. Позиционные представления теперь обучаются,
+а в FFN вместо ReLU используется GELU
+([Radford et al., §§3.1, 4.1](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=3),
+[исходный код блока](https://github.com/openai/finetune-transformer-lm/blob/a69b5c43b0452462890bca8ff92fb75dee9290cf/train.py#L140-L147)).
 
-- masked self-attention;
-- FFN;
-- обучаемые позиционные представления в ранних GPT;
-- предсказание следующего токена.
+Проследим выбор следующего токена после `the cat`. В переводчике запрос
+в позиции `cat` читает `<BOS> the cat` в self-attention, а затем
+обращается к `кот спит` через отдельный cross-attention. В причинной
+модели можно подать обе части одним потоком: `кот спит <SEP> the cat sleeps`.
 
-В GPT-1 причинное языковое предобучение используется как инициализация
-для обучения на размеченных задачах NLP. GPT-2 затем масштабировал модель и данные
-и сделал акцент на переносе без дополнительного градиентного обучения на
-целевой задаче. В опытах GPT-2 с вопросами и ответами в контекст добавлялись
-примеры пар, без изменения весов
-([отчёт GPT-2, §3.8](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=7)).
+Позиция `cat` может читать первые пять позиций, включая русские слова,
+но не `sleeps`. Все пять весов одной головы нормируются вместе; у
+переводчика веса на исходной и целевой сторонах вычислялись двумя
+подслоями с отдельными softmax. Кроме того, в причинном стеке сама позиция
+`кот` не может читать стоящее справа `спит`, тогда как в исходном
+энкодере могла. Пример показывает доступные связи, а не способность
+GPT‑1 переводить по такому шаблону.
+
+В [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md#gpt1-decoder-architecture|главе о GPT‑1]] эта же архитектура
+сначала предсказывает продолжение книги, а затем получает отдельную
+голову для размеченной задачи. У GPT‑2 меняется и блок, и способ
+использовать языковую модель на новой задаче. Например, в эксперименте
+с ответами на вопросы авторы добавляли пары «вопрос — короткий ответ»
+в контекст, не меняя весов
+([отчёт GPT‑2, §3.8](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=7)).
 
 ### Modern decoder-only: LLaMA
 
@@ -1189,6 +1213,7 @@ vocabulary logits         [B, T, |Vocab|]
 - [Karpathy — Let’s reproduce GPT-2](https://www.youtube.com/watch?v=l8pRSuU81PU)
 - [Transformer Explainer](https://poloclub.github.io/transformer-explainer/)
 - [Jay Alammar — The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
+- [Jay Alammar — The Illustrated GPT-2](https://jalammar.github.io/illustrated-gpt2/) — сравнение причинных блоков GPT-2, двунаправленных блоков BERT и памяти Transformer-XL.
 - [[02 Areas/ML & DL/01 Справочник/Архитектурные паттерны/Encoder-Decoder|Encoder–Decoder]]
 
 **Назад:** [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/04 Позиционная информация]] ·

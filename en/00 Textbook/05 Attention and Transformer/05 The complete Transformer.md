@@ -4,10 +4,10 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "1ffb968f9bc3b562b3065f1b059c12e9e9c0b41f78176f2e6d6e5c303f6e52b5"
-translation_reviewed: "2026-10-29"
+canonical_revision: "1db53779e4503c9cde32d5ebd21c85e4022fb70a52ec381ae5987d65ad136fef"
+translation_reviewed: "2026-11-10"
 translation_of: "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md"
-last_updated: 2026-10-30
+last_updated: 2026-11-10
 source_unit_id:
   - lecture-01-section-175-model-architecture
   - lecture-03-architecture-framing
@@ -417,6 +417,23 @@ The first target state is built from `<BOS>`. It does not yet contain
 the selected token `the`. Masked self-attention processes the known
 target prefix, then cross-attention reads memory $M$. The FFN transforms
 each target row afterward.
+
+<a id="transformer-original-figure"></a>
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-gpt-bridge-2026-11-10/vaswani-transformer-figure1.png|The encoder on the left reads the source; the decoder on the right reads the shifted target and encoder output]]
+
+*The original Transformer. Read the right-hand block from bottom to top:
+shifted target → causal self-attention → cross-attention → FFN. Three
+arrows enter the middle attention block: two from the encoder (K and V)
+and one from the decoder (Q). The output projection and softmax sit
+above the stack, not inside each layer. Ashish Vaswani et al.,
+[Attention Is All You Need, Figure 1](https://arxiv.org/html/1706.03762v7#S3.F1).
+Unmodified figure, reproduced under [Google's permission notice](https://arxiv.org/html/1706.03762v7#p1.1).*
+
+The [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer#translation-two-reads|recurrent translator]] used the previous decoder state as
+its query. Here each target position forms its query after causal
+self-attention over the known target tokens. In both cases the keys
+and values come from the source representations.
 
 For state $D$, one post-norm block makes three successive updates:
 
@@ -828,19 +845,10 @@ the entire prefix.
 
 ## 8. Three architectural branches
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt-2-transformer-xl-bert-3.png]]
-
-*GPT-2 on the left has causal blocks without cross-attention; BERT in
-the center has bidirectional blocks; Transformer-XL on the right carries
-memory across segments. The figure does not compare GPT-1 with LLaMA;
-their differences are described below.
-Source: Jay Alammar, [The Illustrated GPT-2](https://jalammar.github.io/illustrated-gpt2/),
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
-
-In the encoder–decoder just examined, the source becomes separate memory
-and the decoder generates a conditional output. Two other variants retain
-only the encoder or only a causal decoder. LLaMA develops the latter,
-changing normalization, the FFN, and the positional mechanism.
+In the [translation architecture](#transformer-original-figure), the
+left and right stacks process different sequences. BERT has one
+bidirectional stack; GPT and LLaMA have one causal stack. This changes
+the path from the source tokens to the position making a prediction.
 
 ### Encoder-only: BERT
 
@@ -859,18 +867,34 @@ from left to right ([Devlin et al., §3–3.1](https://arxiv.org/pdf/1810.04805v
 
 ### Decoder-only: GPT
 
-GPT uses a causal stack without an encoder or cross-attention:
+In [Vaswani's figure](#transformer-original-figure), remove the left stack
+and the middle attention sublayer on the right, including its Add & Norm.
+GPT‑1 retains causal self-attention and an FFN, both with normalization
+after the residual addition. It learns its position embeddings and uses
+GELU instead of ReLU in the FFN
+([Radford et al., §§3.1, 4.1](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=3),
+[original block implementation](https://github.com/openai/finetune-transformer-lm/blob/a69b5c43b0452462890bca8ff92fb75dee9290cf/train.py#L140-L147)).
 
-- masked self-attention;
-- an FFN;
-- learned positional representations in early GPT;
-- next-token prediction.
+Consider the next-token prediction after `the cat`. In the translator,
+the query at `cat` reads `<BOS> the cat` in self-attention and then
+reads `кот спит` in a separate cross-attention sublayer. A causal
+language model can receive both parts in one stream: `кот спит <SEP> the cat sleeps`.
 
-GPT-1 uses causal language pre-training to initialize learning on labeled
-NLP tasks. GPT-2 then scaled model and data and emphasized transfer without
-additional gradient training on the target task. GPT-2's question-answering
-experiments placed example pairs in the context without changing weights
-([GPT-2 report, §3.8](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=7)).
+The `cat` position can read the first five positions, including the Russian
+words, but not `sleeps`. One head normalizes all five weights together;
+the translator used separate softmax operations for the target prefix
+and source. In the causal stack, `кот` itself cannot read `спит` to its
+right, whereas it could in the original encoder. This example shows
+which connections are available. It does not show that GPT‑1 translates
+with this prompt.
+
+In the [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md#gpt1-decoder-architecture|GPT‑1 chapter]],
+the same architecture first predicts the continuation of a book and
+then receives a separate head for a labeled task. GPT‑2 changes both
+the block and how the language model is applied to a new task. In
+one question-answering experiment, the authors added example questions
+and short answers to the context without updating the weights
+([GPT‑2 report, §3.8](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=7)).
 
 ### Modern decoder-only: LLaMA
 
@@ -1181,6 +1205,7 @@ after which the same computation can be implemented in
 - [Karpathy, Let's reproduce GPT-2](https://www.youtube.com/watch?v=l8pRSuU81PU)
 - [Transformer Explainer](https://poloclub.github.io/transformer-explainer/)
 - [Jay Alammar, The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
+- [Jay Alammar, The Illustrated GPT-2](https://jalammar.github.io/illustrated-gpt2/) — causal GPT-2 blocks, bidirectional BERT blocks, and Transformer-XL memory.
 - [[02 Areas/ML & DL/01 Справочник/Архитектурные паттерны/Encoder-Decoder|Encoder–Decoder reference]]
 
 **Previous:** [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/04 Позиционная информация|Positional information]] ·

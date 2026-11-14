@@ -4,6 +4,7 @@ from pathlib import Path
 from math import isclose, log, tanh
 import hashlib
 import re
+from topic_consolidation_baseline import before_topic_consolidation
 import torch
 from torch import nn
 import torch.nn.functional as F
@@ -12,13 +13,18 @@ ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md"
 text = CHAPTER.read_text()
 blocks = re.findall(r"\x60\x60\x60python\n(.*?)\n\x60\x60\x60", text, flags=re.S)
-assert len(blocks) == 6, len(blocks)
+assert len(blocks) == 8, len(blocks)
 namespaces = []
 for number, block in enumerate(blocks, 1):
     namespace = {}
     exec(compile(block, f"{CHAPTER}:block{number}", "exec"), namespace)
     namespaces.append(namespace)
     print("PASS standalone published block", number)
+
+library_namespace = next(n for n in namespaces if "effective_after_two_biases" in n)
+packing_namespace = next(n for n in namespaces if "packed_output" in n)
+namespaces = [n for n in namespaces
+              if "effective_after_two_biases" not in n and "packed_output" not in n]
 
 # Complete neural LM, independently count each matrix and the target multiplicities.
 n = namespaces[0]
@@ -179,7 +185,9 @@ for publication, member, expected in rows:
     assert hashlib.sha256(local).hexdigest() == expected
 print("PASS five original SVG byte copies and fixed source hashes")
 # The accepted explanation is preserved outside one bounded addition and its date.
-restored = re.sub(r"<!-- rnn-execution 2026-10-26 -->\n.*?<!-- /rnn-execution -->\n\n", "", text, flags=re.S)
+preceding = before_topic_consolidation(text, CHAPTER)
+assert hashlib.sha256(preceding.encode()).hexdigest() == "9e7990cd4670623c0f8b4cc78fc233d30dfca3696143dee5ad01f87f2fa136b4"
+restored = re.sub(r"<!-- rnn-execution 2026-10-26 -->\n.*?<!-- /rnn-execution -->\n\n", "", preceding, flags=re.S)
 restored = restored.replace("last_updated: 2026-10-26", "last_updated: 2026-10-21", 1)
 assert hashlib.sha256(restored.encode()).hexdigest() == "d9cb27f7d76de93f41fe3f252ce1da1bcf53897197decbabaf257dbddfabaa25"
 
@@ -246,4 +254,94 @@ excerpt = "\n".join(line.removeprefix("> ") for line in excerpt.splitlines())
 assert " ".join(excerpt.split()) in " ".join(source.split())
 assert hashlib.sha256((ROOT/"00 Учебник/Assets/Figures/curated/rnn-execution-2026-10-26/d2l-deep-rnn.svg").read_bytes()).hexdigest() == "518484464a1fd5fce1bde4fefdbbf68402fde18f62c460ee1ab680fe3965d8e0"
 print("PASS accepted chapter preservation; 216 projection/gradient cases; 48 batched weight reductions; 64 dependency grids; source excerpt and original SVG")
+# A native cell is a different two-bias parameterization of the same forward
+# map. Check axes and every gradient, without claiming training equivalence.
+library_cases = 0
+for B in (1, 2, 3):
+    for T in (1, 3, 5):
+        for d in (1, 3):
+            for m in (1, 4):
+                torch.manual_seed(10000+B*1000+T*100+d*10+m)
+                X = torch.randn(B,T,d,dtype=dtype,requires_grad=True)
+                h0 = torch.randn(1,B,m,dtype=dtype,requires_grad=True)
+                wx = (.2*torch.randn(m,d,dtype=dtype)).requires_grad_()
+                wh = (.2*torch.randn(m,m,dtype=dtype)).requires_grad_()
+                bias = torch.randn(m,dtype=dtype,requires_grad=True)
+                native = nn.RNN(d,m,batch_first=True,dtype=dtype)
+                with torch.no_grad():
+                    native.weight_ih_l0.copy_(wx)
+                    native.weight_hh_l0.copy_(wh)
+                    native.bias_ih_l0.copy_(bias)
+                    native.bias_hh_l0.zero_()
+                h = h0[0]
+                states = []
+                for t in range(T):
+                    h = torch.tanh(X[:,t]@wx.T+h@wh.T+bias)
+                    states.append(h)
+                expected = torch.stack(states,1)
+                got, final = native(X,h0)
+                torch.testing.assert_close(got,expected,atol=1e-12,rtol=1e-12)
+                torch.testing.assert_close(final,expected[:,-1][None],atol=1e-12,rtol=1e-12)
+                manual = torch.autograd.grad(expected.square().sum(),(X,h0,wx,wh,bias))
+                actual = torch.autograd.grad(got.square().sum(),
+                    (X,h0,native.weight_ih_l0,native.weight_hh_l0,native.bias_ih_l0,native.bias_hh_l0))
+                for a,b in zip(actual[:4],manual[:4]):
+                    torch.testing.assert_close(a,b,atol=1e-12,rtol=1e-12)
+                for a in actual[4:]:
+                    torch.testing.assert_close(a,manual[4],atol=1e-12,rtol=1e-12)
+                torch.testing.assert_close(actual[4]+actual[5],2*manual[4],atol=1e-12,rtol=1e-12)
+                assert sum(p.numel() for p in native.parameters()) == m*d+m*m+2*m
+                library_cases += 1
+assert library_cases == 36
+assert 4*3+4*4+4 == 32 and 4*3+4*4+2*4 == 36
+assert 24+36+32+8 == 100
+print("PASS native RNN;",library_cases,"axis/forward/all-gradient cases; two bias derivatives and32/36 core counts")
+
+# Packing must remove invalid-prefix transitions and restore original row order,
+# including a supplied nonzero h0 and its derivative. Independent controls run
+# each true sequence separately using the same native cell and parameter values.
+from torch.nn.utils.rnn import pack_padded_sequence,pad_packed_sequence
+packing_cases = 0
+for B in (1,2,3):
+    for T in (1,2,4):
+        for d in (1,3):
+            for m in (1,4):
+                torch.manual_seed(20000+B*1000+T*100+d*10+m)
+                lengths = torch.tensor([1+(2*i+1)%T for i in range(B)],dtype=torch.int64)
+                valid = torch.arange(T)[None,:] < lengths[:,None]
+                values = torch.randn(B,T,d,dtype=dtype)
+                values[~valid] = 1000.
+                values.requires_grad_()
+                h0 = torch.randn(1,B,m,dtype=dtype,requires_grad=True)
+                native = nn.RNN(d,m,batch_first=True,dtype=dtype)
+                packed = pack_padded_sequence(values,lengths,batch_first=True,enforce_sorted=False)
+                out, final = native(packed,h0)
+                expanded, restored_lengths = pad_packed_sequence(out,batch_first=True,total_length=T)
+                torch.testing.assert_close(restored_lengths,lengths)
+                assert out.data.shape == (int(lengths.sum()),m)
+                assert expanded[~valid].count_nonzero() == 0
+                assert packed.batch_sizes.tolist() == [
+                    int((lengths>t).sum()) for t in range(int(lengths.max()))]
+                variables = (values,h0,*native.parameters())
+                loss = out.data.square().sum()+final.square().sum()
+                got_grads = torch.autograd.grad(loss,variables)
+                reference = values.new_zeros(())
+                for row,length in enumerate(lengths.tolist()):
+                    expected, expected_final = native(values[row:row+1,:length],h0[:,row:row+1])
+                    torch.testing.assert_close(expanded[row,:length],expected[0],atol=1e-12,rtol=1e-12)
+                    torch.testing.assert_close(final[:,row:row+1],expected_final,atol=1e-12,rtol=1e-12)
+                    reference = reference+expected.square().sum()+expected_final.square().sum()
+                expected_grads = torch.autograd.grad(reference,variables)
+                for got,expected in zip(got_grads,expected_grads):
+                    torch.testing.assert_close(got,expected,atol=1e-12,rtol=1e-12)
+                assert got_grads[0][~valid].count_nonzero() == 0
+                packing_cases += 1
+assert packing_cases == 36
+n = packing_namespace
+torch.testing.assert_close(n["packed"].data,
+    torch.stack([n["inputs"][row,t] for t,rows in [
+        (0,[1,0,2]),(1,[1,0]),(2,[1]),(3,[1])] for row in rows]))
+assert n["packed"].batch_sizes.tolist() == [3,2,1,1]
+assert n["packed"].data.shape == (7,3)
+print("PASS packed RNN;",packing_cases,"original-order/true-state/all-gradient cases; seven-vector layout; no PAD gradients")
 print("ALL RNN/BPTT CHECKS PASSED")

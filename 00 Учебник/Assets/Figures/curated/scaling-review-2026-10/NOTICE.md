@@ -29,6 +29,29 @@ other third-party figures are not promoted to an independently verified
 reuse license by this revision. The parent reviewer owns the central
 registry and publication review.
 
+The active chapter no longer uses seven of the lecture crops listed below.
+Their archived files and evidence remain unchanged. The current replacements
+are original figures or explicitly identified panels from Hashimoto, Kim et al.,
+Hu et al., and Wen et al.; see `docs/audit/2026-11-09-scaling-paper-figure-rights-additions.json` for exact changes
+and grants. The remaining lecture crops do not inherit those licenses.
+
+The chapter also no longer uses the three lecture crops for data repetition,
+learning-rate transfer, and the optimizer search surface. The replacement
+figures are Figure 1 of Muennighoff et al.'s JMLR article (CC BY 4.0),
+the unchanged microsoft/mup README figure (MIT), and the two-panel Figure 1
+from the Step Law project website (CC BY-SA 4.0). See
+`docs/audit/2026-11-10-scaling-source-figures-additions.json`.
+This does not change the status of the historical course files.
+
+The seven remaining crops from this set are no longer embedded in the scaling
+chapter. It links to the original figures in Kaplan (1, 6, 10), Chinchilla
+(A1), and DeepSeek LLM (2, 4, 5), with numerical walkthroughs. Two crops
+in the separate Stanford scaling directory, for DeepSeek Figure 3 and
+Held's first Delphi run, were likewise replaced by links to the authors.
+Hägele et al. Figures 1 and 12 are new, unchanged CC BY-SA 4.0 originals
+from a separate experiment. See
+`docs/audit/2026-11-10-scaling-primary-figures-additions.json`.
+
 ## Shared source provenance
 
 - Course author: Tatsunori Hashimoto and Stanford CS336 course staff.
@@ -40,7 +63,7 @@ registry and publication review.
 - Render command: `pdftoppm -f PAGE -l PAGE -singlefile -scale-to 2400 -png PDF PREFIX`.
 - All pages rendered to 2400 × 1352 pixels.
 - Crop coordinates below are `(left, top, right, bottom)` in that render.
-- Used in: `00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md`.
+- Formerly used in: `00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md`.
 
 ## Underlying works
 

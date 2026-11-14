@@ -55,6 +55,18 @@ def main():
     expected_std = math.sqrt(sum((v-.575)**2 for v in r.tolist())/4)
     torch.testing.assert_close(a, (r.detach()-.575)/(expected_std+1e-12))
     assert not a.requires_grad
+
+    # Dynamic sampling retains the whole mixed-answer group.
+    def mixed(p):
+        return sum(math.comb(4, k) * p**k * (1-p)**(4-k) for k in range(1, 4))
+
+    assert mixed(0) == mixed(1) == 0
+    assert math.isclose(mixed(.99), mixed(.01))
+    assert math.isclose(mixed(.99), .03940398)
+    assert mixed(.5) == .875
+    assert round(mixed(.5) / (mixed(.99) + mixed(.5)), 3) == .957
+    assert .012 < .0125 < .0128
+    assert 1 - (18_432 - 16_384) / 4_096 == .5
     torch.testing.assert_close(group(r+100, eps=1e-12), a)
     torch.testing.assert_close(group(10*r, eps=1e-12), a)
     torch.testing.assert_close(group(r, scale=False), r.detach()-.575)

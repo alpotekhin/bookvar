@@ -1,0 +1,103 @@
+{
+  "date": "2026-11-09",
+  "scope": "Close the GradCache visualization gap with a licensed original comparison in the canonical embeddings chapter. Keep the original method prose and never infer permission for the early arXiv v1 image. Local only.",
+  "files": [
+    {
+      "source": "00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md",
+      "before_sha256": "face8eec87440ec12eee2f30a91f06c883317031de9c18d3f09cdd6bbd84fa67",
+      "after_sha256": "61fe0a555fbd9ae9b74d39cfbaf4da61e78a28264963d4b183c6b6fa01e6f625",
+      "lines": 1202,
+      "changes": [
+        {
+          "old": "last_updated: 2026-11-06\nlast_verified: 2026-11-06",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-11-09"
+        },
+        {
+          "old": "  - https://aclanthology.org/2021.repl4nlp-1.31/",
+          "new": "  - https://aclanthology.org/2021.repl4nlp-1.31/\n  - https://arxiv.org/abs/2406.12356v3"
+        },
+        {
+          "old": "<a id=\"emb-gradcache\"></a>\n### GradCache: full-batch negatives with chunked encoder passes\n\nWith two training pairs, let both the query and document inputs be the rows",
+          "new": "<a id=\"emb-gradcache\"></a>\n### GradCache: full-batch negatives with chunked encoder passes\n\nSplit four query–document pairs into two chunks, pairs 1–2 and 3–4.\nIn the figure, rows are queries and columns are documents. A query's\npositive is on the diagonal; the other documents in its row are\nnegatives if the labels say they are irrelevant.\n\n![[00 Учебник/Assets/Figures/curated/gradcache-comparison-2026-11-09/contaccum-figure1.png|Three panels: GradCache uses all 16 query–document scores; gradient accumulation uses only the two 2-by-2 diagonal blocks; ContAccum mixes current and detached past representations]]\n\n*Jaehee Kim, Yukyung Lee, Pilsung Kang,\n[A Gradient Accumulation Method for Dense Retriever under Memory Constraint, Figure 1](https://arxiv.org/html/2406.12356v3#S2.F1).\n[Original PNG](https://arxiv.org/html/2406.12356v3/Styles/figures/comparison-camera_ready.png), unchanged,\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nIn **(a)** GradCache computes the row loss over all four columns.\nQuery 1 has three negatives, including documents 3 and 4 in the\nother chunk. In **(b)** ordinary gradient accumulation computes\neach loss separately, over just two columns. Query 1 has only\ndocument 2 as a negative. The empty blocks in (b) are absent from\nthe softmax; they are not zero-valued logits. For the score row\n$(1,0,0,0)$, the loss for query 1 is $\\log(1+3/e)\\approx0.7437$ in\n(a) and $\\log(1+1/e)\\approx0.3133$ in (b). Accumulating the weight\ngradients cannot put the two missing terms back into the denominator.\n\nIn **(c)** [[05 Источники/Papers/ContAccum|ContAccum]] appends four saved query\nvectors and four saved document vectors to the two current pairs. A current\nquery now compares its positive with five negatives. A saved document\naffects the gradient of the current query but receives no gradient\nthrough its old encoder pass; the hatched cells show comparisons with\none trainable side. This changes the loss. GradCache instead\nrecomputes encoder activations for the same examples and preserves\nthe full-batch objective.\n\nWith two training pairs, let both the query and document inputs be the rows"
+        },
+        {
+          "old": "- [[05 Источники/Papers/GradCache|GradCache]] — исходные этапы алгоритма,\n  связь с градиентом полной партии и авторская реализация повторных проходов.",
+          "new": "- [[05 Источники/Papers/GradCache|GradCache]] — исходные этапы алгоритма,\n  связь с градиентом полной партии и авторская реализация повторных проходов.\n- [[05 Источники/Papers/ContAccum|ContAccum]] — рис. 1, локальные и полные наборы\n  кандидатов и роль сохранённых представлений."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/GradCache.md",
+      "before_sha256": "913ff9d0283ef0ea9c609e8c479727d5bbcc4169c3cf68b6a4abb3554ab9888b",
+      "after_sha256": "d6f9a9e2df4c4838aad598736701f0cdbbd9ad1b0da2cf74360309ba8c0b4a86",
+      "lines": 38,
+      "changes": [
+        {
+          "old": "has an algorithm illustration absent from the published version; that image\nhas not been republished here under an assumed license.",
+          "new": "has an algorithm illustration absent from the published version; that image\nhas not been republished. The chapter uses the separately licensed\n[[05 Источники/Papers/ContAccum|comparison from Kim, Lee and Kang]]\nto show which query–document scores each method includes."
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "2a5303e198e3bed17444b6be222e7070d8cdb4d940a6da02cc29b7854e33a452",
+      "after_sha256": "3077dc04dcf49f2405c42b0c683fdf9530ec9b7639aa02cd88f0a55214aa39fb",
+      "lines": 2570,
+      "changes": [
+        {
+          "old": "      - source: 05 Источники/Papers/GradCache.md\n        route: sources/papers/gradcache",
+          "new": "      - source: 05 Источники/Papers/GradCache.md\n        route: sources/papers/gradcache\n      - source: 05 Источники/Papers/ContAccum.md\n        route: sources/papers/contaccum"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "1fc90bfbfc9ad3254f5455e17f1f8f392e54d87a288592d82e71b2767738e259",
+      "after_sha256": "5556fae0a38f26e3b729439780a9aeecc99303940e29bf504e63ef3c34bf636e",
+      "lines": 24120,
+      "changes": [
+        {
+          "old": "assets:",
+          "new": "assets:\n  - {\"id\":\"curated-gradcache-contaccum-figure1-d320bf69ed17\",\"asset\":\"00 Учебник/Assets/Figures/curated/gradcache-comparison-2026-11-09/contaccum-figure1.png\",\"title\":\"Illustrations of ContAccum and comparative methods (Figure 1)\",\"author\":\"Jaehee Kim, Yukyung Lee and Pilsung Kang\",\"source_url\":\"https://arxiv.org/abs/2406.12356v3\",\"source_image_url\":\"https://arxiv.org/html/2406.12356v3/Styles/figures/comparison-camera_ready.png\",\"source_asset_sha256\":\"d320bf69ed173d43aaa186f44c93d1e6cdf1c8b5252a4a0a2dd5fe038b9f7ea0\",\"sha256\":\"d320bf69ed173d43aaa186f44c93d1e6cdf1c8b5252a4a0a2dd5fe038b9f7ea0\",\"dimensions_px\":[5140,2010],\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence_url\":\"https://arxiv.org/html/2406.12356v3\",\"derivation\":\"source-raster-copy\",\"modifications\":\"Complete unchanged native PNG; no crop, translation, redraw or rescaling.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-09\",\"used_in\":[\"00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md\"]}"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/ContAccum.md",
+      "created": true,
+      "after_sha256": "8b9cc7725bc3c21a755b72409d61036dd0c0c0e788747f7f2703a8a3af25f3b1"
+    },
+    {
+      "source": "05 Источники/_index.md",
+      "before_sha256": "dd2f8c789cb5c1c3fbfa16ef629614d7e44d7fa2f0404c6c56bd53dd50642327",
+      "after_sha256": "3e96bf1859ea661f3b9eff2685b93a9170b8ff899b88fa80ad453f8daec34a79",
+      "lines": 56,
+      "changes": [
+        {
+          "old": "- [[05 Источники/Papers/GradCache|GradCache — полный контрастивный пакет и повторные проходы энкодера]]",
+          "new": "- [[05 Источники/Papers/GradCache|GradCache — полный контрастивный пакет и повторные проходы энкодера]]\n- [[05 Источники/Papers/ContAccum|ContAccum — наборы кандидатов и банк представлений]]"
+        }
+      ]
+    }
+  ],
+  "review": {
+    "sources": [
+      "Gao et al. RepL4NLP 2021 §§3.1–3.4 and pinned GradCache source 906f0383: full-batch objective, representation derivatives and recomputation conditions.",
+      "Kim, Lee and Kang arXiv v3 §§2.1, 3.1–3.3 and Figure 1. CC BY 4.0 applies to this version. The figure is the complete author PNG, 5140×2010, unchanged."
+    ],
+    "examples": "The figure's four current pairs give 3 negatives per query in GradCache and 1 with isolated microbatch loss. For scores (1,0,0,0), the losses are log(1+3/e) and log(1+1/e). The six-pair memory-bank check keeps old vectors detached but checks that they influence current gradients. The old two-pair GradCache example and full method excerpt remain.",
+    "checks": "738 publication and 243 static-output tests passed. Topic index, reading receipts, and curated asset registry passed. Astro check reported no errors or warnings; the 93 site tests passed. CPU checks covered three figure cases, eight deterministic and eight upstream-dropout derivative comparisons and eight missing-RNG negative controls. The PNG matches the versioned author's original byte-for-byte. Root build: 2045 pages, zero broken internal links.",
+    "reader": "Chrome verified both language shells at 375 and 1280 CSS pixels, reference and source-note round trips, and no page or display-math overflow. The full original and all three panels were inspected in the 3x mobile viewer, with author and license shown.",
+    "pagesBase": {
+      "mode": "Local current worktree, not clean public checkout and not deployed",
+      "prefix": "/bookvar",
+      "pages": 2045,
+      "files": 5706,
+      "bytes": 872712018,
+      "headroomBytes": 127287982,
+      "brokenRoutesFragmentsOrFiles": 0,
+      "reader": "Served the prefixed artifact on loopback. In Chrome, both locale routes kept prefixed canonicals, working reference and source-note links, and a usable prefixed figure viewer."
+    },
+    "nextFigureCandidate": "Goujon, Etemadi and Unser, On the Number of Regions of Piecewise Linear Neural Networks, Figure 6, p. 7, https://bigwww.epfl.ch/publications/goujon2401.pdf#page=7. Visually verified a rank-4 Maxout panel in the publisher PDF, which states CC BY 4.0 on p. 1. Candidate only; not imported and not evidence of rights to the Goodfellow figure."
+  }
+}

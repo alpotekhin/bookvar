@@ -1,0 +1,56 @@
+{
+  "url": "http://127.0.0.1:4330/en/textbook/pretraining/synthetic-images-sim-to-real/",
+  "width": 1280,
+  "height": 900,
+  "navigation": {
+    "from": "/en/reference/",
+    "href": "http://127.0.0.1:4330/en/textbook/pretraining/synthetic-images-sim-to-real/#sim-gradient-reversal",
+    "text": "Gradient reversal: forward and backward rules",
+    "arrived": "http://127.0.0.1:4330/en/textbook/pretraining/synthetic-images-sim-to-real/#sim-gradient-reversal",
+    "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-navigation/en-images/1280-reference-target.png"
+  },
+  "figures": [],
+  "limits": "Headless browser interactions and screenshots; requires separate human visual inspection.",
+  "layout": {
+    "page": [
+      1265,
+      1265
+    ],
+    "mathErrors": 0,
+    "formulas": [
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ],
+      [
+        617,
+        617
+      ]
+    ],
+    "tables": [
+      [
+        617,
+        625,
+        "visible"
+      ],
+      [
+        617,
+        625,
+        "visible"
+      ]
+    ]
+  },
+  "contextScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-navigation/en-images/1280-page.png"
+}

@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-09",
+  "scope": "Close the Maxout illustration gap in the canonical activation chapter. Explain the surface and input partition in Figure 6, verify a separate 2D calculation, and preserve the Goodfellow source link.",
+  "review": {
+    "source": "Goujon, Etemadi and Unser, J. Comput. Appl. Math. 441, article 115667, §§2.1–2.2, 3.3 and Figure 6; version of record with CC BY 4.0 stated on p. 1.",
+    "example": "Compare the four affine scores at (2,1), (1,2), and (1,1); check distinct local input gradients at equal heights and different directional slopes across the tie. The weights in this calculation are not inferred from the paper's visual.",
+    "figures": "Use the complete Maxout column of the original, not a redraw; the unconfirmed Goodfellow 2013 figure remains a source link.",
+    "language": "The original figure labels and native English source note are retained. The English textbook route is explicitly a Russian fallback."
+  },
+  "verification": {
+    "provenance": "Fresh 460 dpi crop from page 7 was byte-identical; both original panels and the kappa = 4 label were inspected.",
+    "example": "PyTorch 2.14.1 passed all five published programs, the 2D outputs and gradients at (2,1) and (1,2), and one-sided slopes across (1,1).",
+    "browser": "Checked full-image viewer, 1.5x zoom, KaTeX, attribution and the source-note round trip at 375 and 1280 pixels in both locales under both root and /bookvar. No page overflow or clipped labels in the full-image view. EN remains a labelled fallback.",
+    "publication": "Local root and /bookvar builds only. No commit, push or deploy."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/02 Функции активации.md",
+      "before_sha256": "97fab7ff329b196454c259b16be3c4e3d30ccbded7a07b3a63c2b3390351d8fa",
+      "after_sha256": "c4d7cb43b781e106b6e6d949508905d868a3c2ffa7ca950c4badf95ddb55f899",
+      "lines": 934,
+      "changes": [
+        {
+          "old": "last_updated: 2026-11-03",
+          "new": "last_updated: 2026-11-09"
+        },
+        {
+          "old": "  - https://proceedings.mlr.press/v28/goodfellow13.html",
+          "new": "  - https://proceedings.mlr.press/v28/goodfellow13.html\n  - https://bigwww.epfl.ch/publications/goujon2401.html"
+        },
+        {
+          "old": "горизонтальная прямая $0$ и прямая $x$.\n\n### Размерности и число параметров",
+          "new": "горизонтальная прямая $0$ и прямая $x$.\n\n<a id=\"maxout-input-regions\"></a>\n\n### Как Maxout делит плоскость\n\nПри двух входных координатах каждая аффинная ветвь задаёт плоскость.\nMaxout берёт высоту той плоскости, которая выше остальных в данной\nточке. Поэтому сверху на рисунке видны плоские грани, а снизу —\nобласти входов, на которых выбирается каждая из них. Четыре ветви\nздесь дают четыре грани одного выхода, а не четыре выхода.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/maxout-regions-2026-11-09/goujon-maxout-figure6.png|Maxout с четырьмя ветвями: сверху четыре грани графика, снизу соответствующие области на плоскости входов]]\n\n*Alexis Goujon, Arian Etemadi и Michael Unser,\n[On the number of regions of piecewise linear neural networks, рис. 6, с. 7](https://bigwww.epfl.ch/publications/goujon2401.pdf#page=7).\nСтолбец Maxout целиком, без перерисовки.\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nВетвь $z_j(x)$ выбирается там, где одновременно выполняются\nнеравенства $z_j(x)\\geq z_i(x)$ для всех остальных ветвей $i$.\nРазность двух аффинных функций снова аффинна, поэтому каждое\nсравнение ограничивает одну полуплоскость, если разность не постоянна.\nПересечение полуплоскостей выпукло. Оно может оказаться пустым:\nналичие ветви в слое ещё не означает, что у неё есть своя грань.\n\nДля расчёта возьмём свои четыре ветви:\n\n$$\nh(x_1,x_2)=\\max(x_1,-x_1,x_2,-x_2).\n$$\n\nВ точке $(2,1)$ оценки равны $(2,-2,1,-1)$: максимум даёт $x_1$,\nи градиент по входу равен $(1,0)$. В точке $(1,2)$ максимум тоже\nравен 2, но его даёт $x_2$, и градиент равен $(0,1)$.\nТочка $(1,1)$ лежит на общей границе: обе ветви дают 1.\nПри переходе через границу значение меняется непрерывно, а наклон\nскачком меняется с одного на другой.\n\n### Размерности и число параметров"
+        },
+        {
+          "old": "- Ian Goodfellow et al.,\n  [Maxout Networks](https://proceedings.mlr.press/v28/goodfellow13.html), §3–4:\n  максимум аффинных ветвей, выпуклость и условия универсальной аппроксимации.",
+          "new": "- Ian Goodfellow et al.,\n  [Maxout Networks](https://proceedings.mlr.press/v28/goodfellow13.html), §3–4:\n  максимум аффинных ветвей, выпуклость и условия универсальной аппроксимации.\n- [[05 Источники/Papers/Goujon et al. — Piecewise-linear regions|Goujon et al., On the number of regions of piecewise linear neural networks]],\n  §2.1–2.2, §3.3 и рис. 6: области аффинности и поверхность Maxout."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "16679d5f8ee2d683dda874c3c8ba86df417b0c197f1ba03cc129e466264c417b",
+      "after_sha256": "568557bc59eda79c3611408b32c1765dfe53fd41d426f5f6f83b7a156cf59207",
+      "lines": 24123,
+      "changes": [
+        {
+          "old": "  - id: \"curated-gpt-history-gulordava-figure1-ab-653bf6ed32a1\"",
+          "new": "  - {\"id\":\"curated-maxout-goujon-figure6-805648ec858c\",\"asset\":\"00 Учебник/Assets/Figures/curated/maxout-regions-2026-11-09/goujon-maxout-figure6.png\",\"title\":\"Maxout surface and input partition (Figure 6, Maxout column)\",\"author\":\"Alexis Goujon, Arian Etemadi and Michael Unser\",\"source_url\":\"https://bigwww.epfl.ch/publications/goujon2401.html\",\"source_image_url\":\"https://bigwww.epfl.ch/publications/goujon2401.pdf#page=7\",\"source_asset\":\"05 Источники/Papers/Source PDFs/goujon2401-regions.pdf\",\"source_asset_sha256\":\"edf5093e34353a64d99a30aa67f5eb3e0529986de14b744f5cbac0aa6d937eb1\",\"source_page\":7,\"render_dpi\":460,\"render_page_size_px\":[3478,4745],\"crop_box_px\":[1372,320,2028,1272],\"dimensions_px\":[656,952],\"sha256\":\"805648ec858ce2d4e28904d6660d7862a8a578ce1b29e676d6310af65cbc9268\",\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence_url\":\"https://bigwww.epfl.ch/publications/goujon2401.pdf#page=1\",\"modifications\":\"Complete original Maxout column of Figure 6, retaining the surface, the input partition and their label; neighboring columns and typeset caption omitted. No redraw, relabeling or rescaling.\",\"derivation\":\"pdf-page-render-crop\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-09\",\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/02 Функции активации.md\"]}\n  - id: \"curated-gpt-history-gulordava-figure1-ab-653bf6ed32a1\""
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/_index.md",
+      "before_sha256": "c9e33b2f513f3521cfdd8d5265bb72cb352df39e77624b9f36b2e57269b60b10",
+      "after_sha256": "64629bc505888849050ade444554fa3ca83bdac819edc21db621a445eb49058e",
+      "lines": 58,
+      "changes": [
+        {
+          "old": "- [[05 Источники/Papers/ContAccum|ContAccum — наборы кандидатов и банк представлений]]",
+          "new": "- [[05 Источники/Papers/ContAccum|ContAccum — наборы кандидатов и банк представлений]]\n- [[05 Источники/Papers/Goujon et al. — Piecewise-linear regions|Goujon et al. — кусочно-линейные области Maxout]]"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "71bae458926f81fe24322f1077e55ad257b622ed25923d0a39a75a9ad8559f47",
+      "after_sha256": "62684fb354e82fc825ca8f6cc7cbd1ae94fae9616f4335340a67ed6384a8be37",
+      "lines": 2574,
+      "changes": [
+        {
+          "old": "      - source: 05 Источники/Papers/Pan et al. 2023 — What in-context learning learns.md\n        route: sources/papers/what-in-context-learning-learns\n    sidebar:",
+          "new": "      - source: 05 Источники/Papers/Pan et al. 2023 — What in-context learning learns.md\n        route: sources/papers/what-in-context-learning-learns\n      - source: 05 Источники/Papers/Goujon et al. — Piecewise-linear regions.md\n        route: sources/papers/piecewise-linear-regions\n    sidebar:"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/Goujon et al. — Piecewise-linear regions.md",
+      "created": true,
+      "after_sha256": "c9d0781ab8e06093a3b2b51776c51848d273688aef05b905dcbe95e39c8204ab"
+    }
+  ]
+}

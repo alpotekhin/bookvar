@@ -1,0 +1,228 @@
+{
+  "date": "2026-11-09",
+  "scope": "Integrate the exact CS336 Lecture 1 step-39 figure with a full explanation of metric choice and test resolution in the canonical scaling chapter. Preserve the parent lecture range and the previously reviewed course residual report.",
+  "review": {
+    "sources": [
+      "Stanford CS336 Spring 2026, lecture 1 trace steps 26–39 and corresponding repository code; the covered unit is step 39 only.",
+      "Wei et al., arXiv:2206.07682v2 §§2–3, Figure 2 and Appendix A.1–A.2.",
+      "Schaeffer, Miranda and Koyejo, arXiv:2304.15004v2 §§2–3 and Figure 3."
+    ],
+    "editorial": "The previous full chapter read is byte-identical when the new delta is reversed. Reread the added section and its transitions from downstream accuracy calibration to training/serving cost. Wei compares families against training FLOPs. Schaeffer compares two metrics on the same sets of GPT outputs against parameter count, not by re-scoring Wei's entire chart. Wei's counterexamples to a metric-only explanation remain in the chapter.",
+    "example": "46 × 44 = 2024; 1924 and 2004 give the same exact-match score but need two versus one substitutions. An independent-position toy example gives p^20 and an approximately 92.3% chance of no complete successes with p=0.7 and 100 independent responses. This is not a new GPT evaluation.",
+    "figures": "Wei PNG is byte-identical to the pinned CS336 image, original Figure 2, CC BY 4.0. The two exact Schaeffer SVG files are published as standalone assets in arXiv v2 Figure 3, reused verbatim with CC BY-NC-ND 4.0 for the noncommercial reader. Original figures and their captions were checked against the papers; no graphic was redrawn.",
+    "preserved": "Synchronize the existing assignment2 torch.compile destination and existing lecture10 DeepSeek heterogeneous-range reason into the generator overlay so their already reviewed coverage rows remain unchanged."
+  },
+  "reader": "Followed the link from CS336 Lecture 1 to the textbook at 375 and 1280 CSS px. The three exact assets rendered with no distortion, formula errors or page overflow. At 375 px the viewer zoomed to 3.5× and panned to the legends, keeping the captions and license links. The EN route exposes a labeled canonical-language fallback, not a translation.",
+  "verification": {
+    "arithmetic": "check_scaling_examples.py passed on chapter SHA-256 4d6e1450497fa190b47bb18105c8428ababdc15589828a365e2858ff1cd325c6.",
+    "provenance": "cmp passed for all three copies. The original hashes are pinned in the asset registry and independently checked in generated RU/EN HTML and dist assets.",
+    "course": "Stanford snapshot regeneration/check passed in the temporary projection with all 902 archived artifacts present. The current semantic and visual records both point to the exact chapter anchor. The historical residual report still has 206 rows; lecture 1 steps 26–39 are still retained as an umbrella. Course-ingestion, topic-index, and source-coverage checks passed.",
+    "localBuild": "2053 pages, 248 built-output tests passed, no broken internal links or fragments. The full local suite initially had 1257 passes and one failure on pre-update course counts; both course overviews were synchronized with their ledgers and all 14 policy tests then passed.",
+    "archiveFreePublication": "After the course-count correction, 738 passed and 11 source-archive tests were excluded as configured (127 files, maxWorkers 2).",
+    "publication": "Local only, no commit, push, or deployment."
+  },
+  "files": [
+    {
+      "source": "05 Источники/Курсы.md",
+      "before_sha256": "8e5261449194c569ce4ff9a075a447f477773df512ce6bda02ac49ef50bb9fd1",
+      "after_sha256": "9ca950f3693a91d2231f5c08a1a46c64a7ce7338cfd36342b015b28c7010c923",
+      "lines": 400,
+      "changes": [
+        {
+          "old": "Из 811 записей покрытия 557 имеют статус `integrated`, 27 — `covered-existing`,\n21 — `contract-only`, 150 — `source-only`, 56 — `excluded`. В числе 557\nперенесённых записей 373 относятся к заданиям; их нельзя считать отдельными\nразделами лекций.\nОтдельный реестр содержит 159 визуальных записей: 70 `integrated`,\n9 `covered-existing`, 48 `source-only`, 32 `excluded`.",
+          "new": "Из 811 записей покрытия 558 имеют статус `integrated`, 27 — `covered-existing`,\n21 — `contract-only`, 149 — `source-only`, 56 — `excluded`. В числе 558\nперенесённых записей 373 относятся к заданиям; их нельзя считать отдельными\nразделами лекций.\nОтдельный реестр содержит 159 визуальных записей: 71 `integrated`,\n9 `covered-existing`, 47 `source-only`, 32 `excluded`."
+        }
+      ]
+    },
+    {
+      "source": "en/05 Sources/Courses.md",
+      "before_sha256": "4298c1d5c0694a8fd29e48cfb0c77bde094b806b8c4d573b2716504ddace54a5",
+      "after_sha256": "406150a527d5acfa04f396bfbc2b03520f04eb93671c33f9ceec185f3fb91973",
+      "lines": 147,
+      "changes": [
+        {
+          "old": "The coverage ledger contains 811 semantic units: 557 integrated, 27 already\ncovered, 21 assignment-contract-only, 150 source-only, and 56 excluded.\nOf the 557 integrated units, 373 come from assignment material and 184 from\nlectures. The separate visual ledger has 159 records: 70 integrated,\n9 already covered, 48 source-only, and 32 excluded. These are bookkeeping\ncategories, not a count of fully reviewed chapters or individual figures.",
+          "new": "The coverage ledger contains 811 semantic units: 558 integrated, 27 already\ncovered, 21 assignment-contract-only, 149 source-only, and 56 excluded.\nOf the 558 integrated units, 373 come from assignment material and 185 from\nlectures. The separate visual ledger has 159 records: 71 integrated,\n9 already covered, 47 source-only, and 32 excluded. These are bookkeeping\ncategories, not a count of fully reviewed chapters or individual figures."
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "before_sha256": "472401f6f3bf906cc8b23f29a5ff206cb8c083da3f20ac5654249eaee61aef69",
+      "after_sha256": "4d6e1450497fa190b47bb18105c8428ababdc15589828a365e2858ff1cd325c6",
+      "lines": 1498,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-23\nlast_verified: 2026-10-23\nsource_unit_id:",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-11-09\nsource_unit_id:\n  - lecture-01-figure-step-39-rendering-1"
+        },
+        {
+          "old": "  - lecture-11-recap\nprimary_sources:",
+          "new": "  - lecture-11-recap\nreference_terms:\n  - label: Скачки качества при масштабировании — метрика и размер теста\n    label_en: Apparent emergence — metrics and test resolution\n    anchor: scaling-metric-emergence\nprimary_sources:"
+        },
+        {
+          "old": "  - https://arxiv.org/abs/2407.21783v1",
+          "new": "  - https://arxiv.org/abs/2407.21783v1\n  - https://arxiv.org/abs/2206.07682v2\n  - https://arxiv.org/abs/2304.15004v2"
+        },
+        {
+          "old": "прежняя калибровка требует новой проверки.\n\n<a id=\"train-inference-tradeoff\"></a>",
+          "new": "прежняя калибровка требует новой проверки.\n\n<a id=\"scaling-metric-emergence\"></a>\n\n### Как метрика меняет форму кривой\n\nВ [первой лекции CS336](https://cs336.stanford.edu/lectures/?trace=lecture_01),\nна шаге 39, показан график Wei et al. На панели A небольшие GPT-3 и LaMDA\nпочти не решают задачи из Modified Arithmetic целиком, а у более крупных\nмоделей точность поднимается над уровнем случайного ответа. В набор входят\nтрёхзначное сложение и вычитание и двузначное умножение; перед заданием\nмодель получает два примера.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/wei-emergence-figure2.png|Восемь задач; каждая точка — отдельная модель. По горизонтали FLOPs обучения, пунктир — уровень случайного ответа.]]\n\n*Jason Wei, Yi Tay, Rishi Bommasani et al.,\n[Emergent Abilities of Large Language Models, Figure 2](https://arxiv.org/html/2206.07682v2#S3.F2).\n[Копия, которую показывает CS336, шаг 39](https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/wei-emergence-plot.png), без изменений.\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nПо горизонтали здесь вычисления на обучение, а не число параметров.\nКаждая точка — отдельная модель. Между соседними точками нет измерений,\nпоэтому по рисунку нельзя установить, на каком именно масштабе меняется\nповедение. На панели A рост виден у GPT-3 и LaMDA при разных бюджетах.\nАвторы не предлагают общий порог, который можно перенести на другой\nрецепт обучения или другую задачу.\n\nОдин из способов получить такую форму графика — требовать совпадения\nвсей строки. Для умножения $46\\cdot44$ эталон — `2024`.\nОтветы `1924` и `2004` отличаются от эталона на две и одну замены символа\nсоответственно. По exact match оба получают ноль; по расстоянию\nредактирования второй ближе к эталону. Когда ответ становится\n`2024`, exact match сразу меняется с нуля на единицу.\n\nЧтобы отделить эффект метрики, представим ответ из $m$ позиций, где\nкаждая верна с вероятностью $p$, независимо от остальных. Доля верных\nпозиций в среднем равна $p$. Для совпадения всей строки нужны все $m$\nуспехов одновременно, поэтому\n\n$$\n\\Pr(\\text{exact match})=p^m.\n$$\n\nПри $m=20$ значения $p=0{,}7;\\;0{,}8;\\;0{,}9$ дают примерно\n0,080%, 1,153% и 12,158% полных совпадений. На тесте из 100 независимых\nответов минимальный ненулевой результат — 1%. При первом $p$ вероятность\nне увидеть ни одного полного совпадения составляет около 92,3%:\n$(1-0{,}7^{20})^{100}$. Доля верных позиций при этом всё ещё равна 70%\nв ожидании. Эта модель объясняет, как возникает почти плоский участок,\nно не измеряет реальную точность GPT: в её ответах ошибки соседних\nпозиций зависимы, а длина может отличаться от эталона.\n\nSchaeffer, Miranda и Koyejo проверили этот эффект на ответах GPT-3/InstructGPT\nдля двузначного умножения и четырёхзначного сложения. Они оценили одни\nи те же ответы двумя способами, не меняя модель и декодирование между\nоценками. Ниже две отдельные панели для умножения. По горизонтали теперь\nчисло параметров GPT-3, не FLOPs. Цвет обозначает длину эталонной строки,\nстиль линии — температуру выборки.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/schaeffer-multiplication-exact-match.svg|Двузначное умножение: доля полностью совпавших ответов для разных длин эталона и температур.]]\n\n*Rylan Schaeffer, Brando Miranda, Sanmi Koyejo,\n[Are Emergent Abilities of Large Language Models a Mirage?, Figure 3](https://arxiv.org/html/2304.15004v2#S3.F3).\n[Исходная верхняя панель умножения](https://arxiv.org/html/2304.15004v2/multiplication_acc_vs_model_size_by_temp_by_target_str_len.svg).\n[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/);\nфайл без изменений.*\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/schaeffer-multiplication-token-edits.svg|Те же ответы: отрицательное расстояние редактирования по токенам. Чем ближе к нулю, тем меньше правок.]]\n\n*Schaeffer, Miranda, Koyejo, [Figure 3](https://arxiv.org/html/2304.15004v2#S3.F3).\n[Исходная нижняя панель умножения](https://arxiv.org/html/2304.15004v2/multiplication_neg_token_edit_dist_vs_model_size_by_temp_by_target_str_len.svg).\n[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/);\nфайл без изменений.*\n\nДля четырёхзначного эталона на первом графике малые модели дают почти\nнулевую долю точных ответов. На втором уже между малыми моделями\nвидно сокращение числа правок. Здесь правки считаются по токенам:\nвставка, удаление или замена токена. Авторы откладывают расстояние\nсо знаком минус, поэтому улучшение ведёт кривую вверх к нулю.\nВ отдельном опыте они увеличили тест и увидели редкие полные совпадения,\nкоторые было трудно заметить в исходном измерении.\n\nЧастичный зачёт отвечает на другой вопрос, чем полная правильность.\nДля программы, числа в расчёте или формального доказательства\nчастично верный результат может быть непригоден. При проверке\nзаявленного скачка полезно сохранить полную метрику, пересчитать\nте же ответы с частичным зачётом, показать число тестовых примеров\nи проверить промежуточные размеры. В\n[приложении A.2 Wei et al.](https://arxiv.org/html/2206.07682v2#A1.SS2)\nв трёх генеративных задачах скачок сохранился при замене метрики на\nдоступные авторам BLEU, ROUGE или BLEURT. Результат по арифметике не\nзакрывает вопрос для этих задач, как и сама крутая кривая не доказывает,\nчто у модели появился новый механизм.\n\nПротоколы и ограничения: [[05 Источники/Papers/Emergent Abilities of Large Language Models.md|Wei et al.]]\nи [[05 Источники/Papers/Are Emergent Abilities of Large Language Models a Mirage.md|Schaeffer et al.]].\n\n<a id=\"train-inference-tradeoff\"></a>"
+        },
+        {
+          "old": "в ожидании. Эта модель объясняет, как возникает почти плоский участок,\nно не измеряет реальную точность GPT: в её ответах ошибки соседних\nпозиций зависимы, а длина может отличаться от эталона.",
+          "new": "в ожидании. Эта модель объясняет, как возникает почти плоский участок,\nно не измеряет реальную точность GPT: ошибки в разных позициях могут\nзависеть друг от друга, а длина ответа может отличаться от эталона."
+        },
+        {
+          "old": "Schaeffer, Miranda и Koyejo проверили этот эффект на ответах GPT-3/InstructGPT\nдля двузначного умножения и четырёхзначного сложения. Они оценили одни",
+          "new": "Schaeffer, Miranda и Koyejo проверили этот эффект на ответах GPT-3/InstructGPT\nпри умножении двух двузначных чисел и сложении двух четырёхзначных. Они оценили одни"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "3ac746efb4f62eaaad5c239362bc71121fe7fa00b3247454c61e9d751c3c90f2",
+      "after_sha256": "04e37cc1be8b118be0d815d06d7b5ae2ae928d3f51a8153da60ad38299842de2",
+      "lines": 24179,
+      "changes": [
+        {
+          "old": "  - id: \"curated-scaling-porian-ablation-c6de58a59c32\"",
+          "new": "  - {\"id\":\"curated-scaling-emergence-wei-d905d44f12c6\",\"asset\":\"00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/wei-emergence-figure2.png\",\"author\":\"Jason Wei, Yi Tay, Rishi Bommasani et al.\",\"source_url\":\"https://arxiv.org/html/2206.07682v2#S3.F2\",\"source_image_url\":\"https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/wei-emergence-plot.png\",\"source_asset\":\"05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/wei-emergence-plot.png\",\"commit\":\"8b59b50730766695c2ffedd1a79c50cd09b9eb91\",\"source_asset_sha256\":\"d905d44f12c6861f6e1febd0af3e7ab446f1ccf1531a1702c43dd4b977dd453b\",\"sha256\":\"d905d44f12c6861f6e1febd0af3e7ab446f1ccf1531a1702c43dd4b977dd453b\",\"dimensions_px\":[777,549],\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"rights_evidence\":\"https://arxiv.org/html/2206.07682v2\",\"derivation\":\"source-raster-copy\",\"modifications\":\"Complete Wei et al. Figure 2 as shown in CS336 Lecture 1 step 39, unchanged from the pinned course PNG; all eight plots and legend.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-09\",\"used_in\":[\"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\"]}\n  - {\"id\":\"curated-scaling-emergence-schaeffer-19c9799140b9\",\"asset\":\"00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/schaeffer-multiplication-exact-match.svg\",\"author\":\"Rylan Schaeffer, Brando Miranda and Sanmi Koyejo\",\"source_url\":\"https://arxiv.org/html/2304.15004v2#S3.F3\",\"source_image_url\":\"https://arxiv.org/html/2304.15004v2/multiplication_acc_vs_model_size_by_temp_by_target_str_len.svg\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/schaeffer-multiplication-exact-match.svg\",\"source_asset_sha256\":\"19c9799140b911f3d7d6eb8a8f0194f154b12800ca89012c6336aac166d77054\",\"sha256\":\"19c9799140b911f3d7d6eb8a8f0194f154b12800ca89012c6336aac166d77054\",\"license\":\"CC BY-NC-ND 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by-nc-nd/4.0/\",\"rights_evidence\":\"https://arxiv.org/html/2304.15004v2\",\"derivation\":\"source-svg-copy\",\"modifications\":\"Complete standalone multiplication panel SVG from the arXiv v2 Figure 3, byte-for-byte; no edits, extraction or composition.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-09\",\"used_in\":[\"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\"]}\n  - {\"id\":\"curated-scaling-emergence-schaeffer-19ed0bcfe5a8\",\"asset\":\"00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/schaeffer-multiplication-token-edits.svg\",\"author\":\"Rylan Schaeffer, Brando Miranda and Sanmi Koyejo\",\"source_url\":\"https://arxiv.org/html/2304.15004v2#S3.F3\",\"source_image_url\":\"https://arxiv.org/html/2304.15004v2/multiplication_neg_token_edit_dist_vs_model_size_by_temp_by_target_str_len.svg\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/schaeffer-multiplication-token-edits.svg\",\"source_asset_sha256\":\"19ed0bcfe5a86739ae0c656e516fdc28c242156c5d23b60ca2aed548c40f9aab\",\"sha256\":\"19ed0bcfe5a86739ae0c656e516fdc28c242156c5d23b60ca2aed548c40f9aab\",\"license\":\"CC BY-NC-ND 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by-nc-nd/4.0/\",\"rights_evidence\":\"https://arxiv.org/html/2304.15004v2\",\"derivation\":\"source-svg-copy\",\"modifications\":\"Complete standalone multiplication panel SVG from the arXiv v2 Figure 3, byte-for-byte; no edits, extraction or composition.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-09\",\"used_in\":[\"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\"]}\n  - id: \"curated-scaling-porian-ablation-c6de58a59c32\""
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "62684fb354e82fc825ca8f6cc7cbd1ae94fae9616f4335340a67ed6384a8be37",
+      "after_sha256": "f6dcff328eb6576e56060f8ff73c4953108e8dd2c74f9fbc76adfdbc190a992b",
+      "lines": 2578,
+      "changes": [
+        {
+          "old": "      - source: 05 Источники/Papers/AlphaEvolve.md\n        route: sources/papers/alphaevolve",
+          "new": "      - source: 05 Источники/Papers/AlphaEvolve.md\n        route: sources/papers/alphaevolve\n      - source: 05 Источники/Papers/Emergent Abilities of Large Language Models.md\n        route: sources/papers/emergent-abilities\n      - source: 05 Источники/Papers/Are Emergent Abilities of Large Language Models a Mirage.md\n        route: sources/papers/emergent-abilities-metric-mirage"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/editorial-map.yml",
+      "before_sha256": "1ef90342d33c53a86f3866e5d26af2c04151660f25a17e22317971a96eeb3e43",
+      "after_sha256": "98677295cffb4d26cd4da246919f01f4b035a80069f68f1e4c604237ff181781",
+      "lines": 5458,
+      "changes": [
+        {
+          "old": "    \"lecture-01-figure-step-39-rendering-1\": {\n      \"disposition\": \"source-only\",\n      \"reason\": \"Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.\",\n      \"evidence\": \"Lectures/repository/var/traces/lecture_01.json#step=39:rendering=1; reviewed title: wei emergence plot\"",
+          "new": "    \"lecture-01-figure-step-39-rendering-1\": {\n      \"disposition\": \"integrated\",\n      \"destination\": \"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\",\n      \"destination_anchor\": \"scaling-metric-emergence\",\n      \"evidence\": \"Lecture 1 step 39 uses Wei et al. v2 Figure 2; the destination reads the arithmetic panel and distinguishes exact-match scores, edit distances, and test resolution.\""
+        },
+        {
+          "old": "    \"lecture-01-visual-figure-step-39-rendering-1\": {\n      \"disposition\": \"source-only\",\n      \"reason\": \"Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.\",\n      \"evidence\": \"Lectures/repository/var/traces/lecture_01.json#step=39:rendering=1; question reviewed: How does wei emergence plot support the lecture section “The industrialization of language models”?\"",
+          "new": "    \"lecture-01-visual-figure-step-39-rendering-1\": {\n      \"disposition\": \"integrated\",\n      \"destination\": \"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\",\n      \"destination_anchor\": \"scaling-metric-emergence\",\n      \"local_file\": \"00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/wei-emergence-figure2.png\",\n      \"transformation\": \"Byte-exact step-39 PNG copy, SHA-256 d905d44f12c6861f6e1febd0af3e7ab446f1ccf1531a1702c43dd4b977dd453b; figure rights verified separately from Wei et al. arXiv v2, CC BY 4.0.\",\n      \"caption\": \"Eight tasks, each point a separate model; the horizontal axis is training FLOPs and dashed lines mark chance performance.\",\n      \"rendered_route\": \"/textbook/pretraining/scaling-laws/#scaling-metric-emergence\",\n      \"desktop_evidence\": \"Source Figure 2 and local PNG inspected; final browser verification is recorded with the chapter revision.\",\n      \"narrow_evidence\": \"Full original retained for the mobile viewer; final pan and label checks are recorded with the chapter revision.\",\n      \"reviewer\": \"Bookvar editorial review\",\n      \"checked_at\": \"2026-11-09\""
+        },
+        {
+          "old": "  \"assignment-02-task-torch-compile\": {\n    \"disposition\": \"integrated\",\n    \"destination\": \"00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md\",\n    \"destination_anchor\": \"cs336-systems-triton\"",
+          "new": "  \"assignment-02-task-torch-compile\": {\n    \"disposition\": \"integrated\",\n    \"destination\": \"00 Учебник/10 ML Systems/09 Компиляция графов — PyTorch, JAX и CUDA Graphs.md\",\n    \"destination_anchor\": \"torch-compile-graphs-guards-recompilation\""
+        },
+        {
+          "old": "  \"lecture-10-section-274-deepseek-v4-attention\": {\n    \"disposition\": \"source-only\",\n    \"reason\": \"Retained as a time-sensitive architecture note until the dedicated DeepSeek lineage chapter verifies the released model and primary technical report.\",\n    \"evidence\": \"Lectures/repository/var/traces/lecture_10.json#steps=274-310:semantic=section-274-deepseek-v4-attention\"",
+          "new": "  \"lecture-10-section-274-deepseek-v4-attention\": {\n    \"disposition\": \"source-only\",\n    \"reason\": \"Heterogeneous heading umbrella: trace steps 274–279 cover CSA/HCA, 280–284 summarize cache alternatives, and 288–310 cover quantization. CSA/HCA is explained in the long-context chapter, quantization mechanisms in the full quantization chapter, and the diffusion mention now links to the dedicated masked-diffusion chapter. Keep the umbrella source-only rather than claiming that one destination covers every step. See docs/audit/2026-10-29-masked-diffusion.md and the earlier lecture10 boundary map.\",\n    \"evidence\": \"Lectures/repository/var/traces/lecture_10.json#steps=274-310:semantic=section-274-deepseek-v4-attention\""
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+      "before_sha256": "4692006c33b5f84eaa49ee5a8ee761aaf74e44d190da07abfd4f46d9bd0ba4c1",
+      "after_sha256": "ea235552dfcd7c4c70a87b6211b8346eeb042813f03cff5843d80dbe69d41005",
+      "lines": 309,
+      "changes": [
+        {
+          "old": "[Оригинальная лекция с кодом и иллюстрациями](https://cs336.stanford.edu/lectures/?trace=lecture_01) · [сохранённый Python-файл](Lectures/repository/lecture_01.py)\n\n<a id=\"lecture-02-pytorch-einops-resource-accounting-flops-memory-arithmetic-intensity\"></a>",
+          "new": "[Оригинальная лекция с кодом и иллюстрациями](https://cs336.stanford.edu/lectures/?trace=lecture_01) · [сохранённый Python-файл](Lectures/repository/lecture_01.py)\n\nВ учебнике: [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws#scaling-metric-emergence|почему метрика может создать видимый скачок качества]] (шаг 39).\n\n<a id=\"lecture-02-pytorch-einops-resource-accounting-flops-memory-arithmetic-intensity\"></a>"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/coverage.yml",
+      "before_sha256": "55c3d475a5488714830e000f3744ba4ce5fdb712dea60082ce0655b2267e52a9",
+      "after_sha256": "c400006e9f534a018e8662c99241c71ebacc72a7649392554ed47765e6a89610",
+      "lines": 11688,
+      "changes": [
+        {
+          "old": "      \"primary_sources\": [\n        \"lecture-01\"\n      ],\n      \"disposition\": \"source-only\",\n      \"destination\": \"05 Источники/Courses/Stanford CS336 Spring 2026/_index.md\",\n      \"destination_anchor\": \"lecture-01\",\n      \"reason\": \"Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.\",\n      \"evidence\": \"Lectures/repository/var/traces/lecture_01.json#step=39:rendering=1; reviewed title: wei emergence plot\"\n    },\n    {\n      \"id\": \"coverage-lecture-01-section-40-what-can-we-learn-in-this-class-that-transfers-to-frontier-models\",",
+          "new": "      \"primary_sources\": [\n        \"lecture-01\"\n      ],\n      \"disposition\": \"integrated\",\n      \"destination\": \"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\",\n      \"destination_anchor\": \"scaling-metric-emergence\",\n      \"evidence\": \"Lecture 1 step 39 uses Wei et al. v2 Figure 2; the destination reads the arithmetic panel and distinguishes exact-match scores, edit distances, and test resolution.\"\n    },\n    {\n      \"id\": \"coverage-lecture-01-section-40-what-can-we-learn-in-this-class-that-transfers-to-frontier-models\","
+        },
+        {
+          "old": "      \"evidence\": \"Assignments/assignment5-alignment/tests/test_data.py#L55\"\n    }\n  ],\n  \"editorial_overlay_sha256\": \"c84c0d698fec824fe5e216488b5ae2612200c4b417cb90709c693d5771b405c3\"\n}",
+          "new": "      \"evidence\": \"Assignments/assignment5-alignment/tests/test_data.py#L55\"\n    }\n  ],\n  \"editorial_overlay_sha256\": \"41095c26c858eb15d035ab140b97b7d0231daab8070aeee7f7e313a93ab3fe64\"\n}"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/visuals.yml",
+      "before_sha256": "b93a2857c1faaa7edb9f428152b532aa54811d9e66ad14e1bfc5eb7efb575c4c",
+      "after_sha256": "dd6bf389a97d4dd79fb554b45b5603033c51e0307b01b844a08598d79c98c925",
+      "lines": 16447,
+      "changes": [
+        {
+          "old": "          \"source_location\": \"Lectures/repository/var/traces/lecture_01.json#step=39:rendering=1\"\n        }\n      ],\n      \"disposition\": \"source-only\",\n      \"destination\": \"05 Источники/Courses/Stanford CS336 Spring 2026/_index.md\",\n      \"destination_anchor\": \"lecture-01\",\n      \"attribution\": \"Stanford CS336 staff, Language Modeling from Scratch, Spring 2026\",\n      \"rights_status\": \"permission-recorded\",\n      \"rights_holder\": \"Stanford CS336 source authors and identified upstream asset owners\",",
+          "new": "          \"source_location\": \"Lectures/repository/var/traces/lecture_01.json#step=39:rendering=1\"\n        }\n      ],\n      \"disposition\": \"integrated\",\n      \"destination\": \"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\",\n      \"destination_anchor\": \"scaling-metric-emergence\",\n      \"attribution\": \"Stanford CS336 staff, Language Modeling from Scratch, Spring 2026\",\n      \"rights_status\": \"permission-recorded\",\n      \"rights_holder\": \"Stanford CS336 source authors and identified upstream asset owners\","
+        },
+        {
+          "old": "      \"extractor_sha256\": \"1e8d049b33e599e0e23c7edd26601f70120aff2899e13258b4dd3b852092c48f\",\n      \"extractor_revision\": \"stanford-cs336-semantic-audit-v3\",\n      \"extraction_tool\": \"edtrace 0.1.15 archived image rendering\",\n      \"rendered_route\": \"/sources/courses/stanford-cs336-spring-2026/\",\n      \"desktop_evidence\": \"pending editorial integration; source archive inspected\",\n      \"narrow_evidence\": \"pending editorial integration; source archive inspected\",\n      \"reviewer\": \"Codex source audit\",\n      \"checked_at\": \"2026-09-04\",\n      \"source_parent_sha256\": \"a7d47339eab889679010e926db8beb79f475a0596243f19bb15dbd69223f67e6\",\n      \"asset_url\": \"https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/wei-emergence-plot.png\",\n      \"reason\": \"Preserved as an exact source sequence for a later systems, scaling, inference, or architecture treatment; Task 1 uses prose or primary evidence instead of flattening this visual.\",\n      \"evidence\": \"Lectures/repository/var/traces/lecture_01.json#step=39:rendering=1; question reviewed: How does wei emergence plot support the lecture section “The industrialization of language models”?\"\n    },\n    {\n      \"id\": \"lecture-01-visual-figure-step-50-rendering-1\",",
+          "new": "      \"extractor_sha256\": \"1e8d049b33e599e0e23c7edd26601f70120aff2899e13258b4dd3b852092c48f\",\n      \"extractor_revision\": \"stanford-cs336-semantic-audit-v3\",\n      \"extraction_tool\": \"edtrace 0.1.15 archived image rendering\",\n      \"rendered_route\": \"/textbook/pretraining/scaling-laws/#scaling-metric-emergence\",\n      \"desktop_evidence\": \"Source Figure 2 and local PNG inspected; final browser verification is recorded with the chapter revision.\",\n      \"narrow_evidence\": \"Full original retained for the mobile viewer; final pan and label checks are recorded with the chapter revision.\",\n      \"reviewer\": \"Bookvar editorial review\",\n      \"checked_at\": \"2026-11-09\",\n      \"source_parent_sha256\": \"a7d47339eab889679010e926db8beb79f475a0596243f19bb15dbd69223f67e6\",\n      \"asset_url\": \"https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/wei-emergence-plot.png\",\n      \"local_file\": \"00 Учебник/Assets/Figures/curated/scaling-emergence-2026-11-09/wei-emergence-figure2.png\",\n      \"transformation\": \"Byte-exact step-39 PNG copy, SHA-256 d905d44f12c6861f6e1febd0af3e7ab446f1ccf1531a1702c43dd4b977dd453b; figure rights verified separately from Wei et al. arXiv v2, CC BY 4.0.\",\n      \"caption\": \"Eight tasks, each point a separate model; the horizontal axis is training FLOPs and dashed lines mark chance performance.\"\n    },\n    {\n      \"id\": \"lecture-01-visual-figure-step-50-rendering-1\","
+        },
+        {
+          "old": "      \"evidence\": \"Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#pages=15-18\"\n    }\n  ],\n  \"editorial_overlay_sha256\": \"c84c0d698fec824fe5e216488b5ae2612200c4b417cb90709c693d5771b405c3\"\n}",
+          "new": "      \"evidence\": \"Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#pages=15-18\"\n    }\n  ],\n  \"editorial_overlay_sha256\": \"41095c26c858eb15d035ab140b97b7d0231daab8070aeee7f7e313a93ab3fe64\"\n}"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/snapshot-lock.json",
+      "before_sha256": "03d824582b6d144e4f87bbfa1455593bf25b23525219e9a291eb9f1f98d300f5",
+      "after_sha256": "b8c59b80a38fc8af5a7481a64e17aa5ec1edb217f3f2acb90fa1d01b36756a61",
+      "lines": 116,
+      "changes": [
+        {
+          "old": "    \"extractor_revision\": \"stanford-cs336-semantic-audit-v3\",\n    \"extractor_sha256\": \"1e8d049b33e599e0e23c7edd26601f70120aff2899e13258b4dd3b852092c48f\",\n    \"semantic_review_sha256\": \"250bd1d1a7f73d26ce805846d506b4cf6c87aeef045d5c373699f199d958ccc1\",\n    \"editorial_overlay_sha256\": \"c84c0d698fec824fe5e216488b5ae2612200c4b417cb90709c693d5771b405c3\",\n    \"tool_versions\": {\n      \"edtrace\": \"0.1.15\",\n      \"pdfinfo\": \"26.04.0\",",
+          "new": "    \"extractor_revision\": \"stanford-cs336-semantic-audit-v3\",\n    \"extractor_sha256\": \"1e8d049b33e599e0e23c7edd26601f70120aff2899e13258b4dd3b852092c48f\",\n    \"semantic_review_sha256\": \"250bd1d1a7f73d26ce805846d506b4cf6c87aeef045d5c373699f199d958ccc1\",\n    \"editorial_overlay_sha256\": \"41095c26c858eb15d035ab140b97b7d0231daab8070aeee7f7e313a93ab3fe64\",\n    \"tool_versions\": {\n      \"edtrace\": \"0.1.15\",\n      \"pdfinfo\": \"26.04.0\","
+        },
+        {
+          "old": "        \"records\": 811\n      },\n      \"coverage.yml\": {\n        \"sha256\": \"0aac7b725025ca74253f22476f9cf01687040c892813b104e185bf6982bdaae8\",\n        \"records\": 811\n      },\n      \"visuals.yml\": {\n        \"sha256\": \"b93a2857c1faaa7edb9f428152b532aa54811d9e66ad14e1bfc5eb7efb575c4c\",\n        \"records\": 159\n      }\n    }",
+          "new": "        \"records\": 811\n      },\n      \"coverage.yml\": {\n        \"sha256\": \"c400006e9f534a018e8662c99241c71ebacc72a7649392554ed47765e6a89610\",\n        \"records\": 811\n      },\n      \"visuals.yml\": {\n        \"sha256\": \"dd6bf389a97d4dd79fb554b45b5603033c51e0307b01b844a08598d79c98c925\",\n        \"records\": 159\n      }\n    }"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "ad1f8a49a7c8652c0b13674d319f7dcdb52ba5934703708de1d6521a58762096",
+      "after_sha256": "e84787090cdaa31e678616017295957a6bfa2ad328375880b26d5b7df4351b19",
+      "lines": 1699,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws|Законы масштабирования]]\n- [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism|Конвейерное обучение]]",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws|Законы масштабирования]]\n  - [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws#scaling-metric-emergence|Скачки качества при масштабировании — метрика и размер теста]]\n- [[00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism|Конвейерное обучение]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "394b66466f9b6ce261bbe1b9a80f5cc5825ef19bc953f6ec96df308495a5dad5",
+      "after_sha256": "00898fc96c53ce2dbf0137d04fa635f718439bca0bacc4d3273c22c5c3937a58",
+      "lines": 1701,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws|Scaling laws]]\n- [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы|Synthetic data and curricula]]",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws|Scaling laws]]\n  - [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws#scaling-metric-emergence|Apparent emergence — metrics and test resolution]]\n- [[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы|Synthetic data and curricula]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/Emergent Abilities of Large Language Models.md",
+      "created": true,
+      "after_sha256": "0d4bd1987978a571f487a8e96b51adc185a61579d28c046688fa012bdf9e064b"
+    },
+    {
+      "source": "05 Источники/Papers/Are Emergent Abilities of Large Language Models a Mirage.md",
+      "created": true,
+      "after_sha256": "a1804dc1d1aa51a5c23e53bbabc38b5ea34ae0232206bd04c5e90ec5d089a54d"
+    }
+  ]
+}

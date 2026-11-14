@@ -1,6 +1,6 @@
 {
   "date": "2026-10-30",
-  "status": "local-clean-checkout-verified; live-release-pending",
+  "status": "local-clean-checkout-verified; subsequent-live-release-verified-at-9bd4e7d",
   "scope": "Release reproducibility and publication behavior. No new chapter explanation or translation accepted by these checks.",
   "checkedIndexTree": "beb636e476d5e947f8355d05857597fb360eec30",
   "cleanCheckout": {
@@ -128,6 +128,29 @@
       "originalPdfJpegTestMs": 87
     },
     "buildEvidenceReuse": "Only workflow, test and this receipt changed. Renderer, publication adapter, chapter, asset and source inputs are unchanged from the checked tree above; those local build and UI observations remain applicable. Linux CI and live deployment still require separate success on the correction commit."
+  },
+  "liveReleaseObservation": {
+    "commit": "9bd4e7d9e8fba571c3e2467f7388f10874367c97",
+    "branch": "dev",
+    "author": "Alexander Potekhin <al_potechin@mail.ru>",
+    "verify": "https://github.com/alpotekhin/bookvar/actions/runs/41056489265",
+    "pages": "https://github.com/alpotekhin/bookvar/actions/runs/41056489196",
+    "verifyConclusion": "success",
+    "buildConclusion": "success",
+    "deployConclusion": "success",
+    "url": "https://alpotekhin.github.io/bookvar/",
+    "browser": {
+      "gpt3English": "All five original images loaded after network completion; native figure viewer and source credit checked. No KaTeX error or document overflow at 1265px.",
+      "sourceAlias": "Old EN course URL reached the canonical full original, preserving query and fragment.",
+      "sourceLineBlocks": 4119,
+      "sourceDecodedCharacters": 151419,
+      "sourceDecodedSha256": "7369360962cf8a1cfdc6cc04013e15f35f430f4beb71d0414c7c4a55aaff8713",
+      "schedulerMobile": "Actual control completed 4/4 requests and 10 output tokens in 5 steps; 0 MiB remained allocated; peak 3/8 blocks. Document client/scroll width both 345px at the requested 360px viewport.",
+      "englishFallbackExplicit": true,
+      "viewportRestored": true,
+      "evidenceDirectory": "docs/audit/evidence/2026-10-30-live-release"
+    },
+    "scope": "These observations cover the published 9bd4e7d release. Later local tensor-chapter additions are not part of that deployment. No main branch or additional remote branch was published."
   },
   "remaining": {
     "wholeBook": "The route journal records 34 whole canonical-owner reads plus 14 earlier whole-owner reads reused at pinned revisions or reviewed deltas, out of 152 owners. This is not whole-book explanation/source/visual acceptance.",

@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-13",
+  "scope": "Record two existing, previously unjournaled publication deltas. Neither source file is changed by this journal.",
+  "review": {
+    "legacy": "Forward replay from HEAD reaches 010db7be044b. The ten remaining removals are Flamingo, eight vLLM figures, and LMCache MP mode. All ten archived figure bytes match their current registry hashes and the entries are marked retired. A hash and retirement do not grant reuse rights.",
+    "adapter": "Forward replay from HEAD reaches the contributor-edit-links revision. The three exact deltas cover the existing HSE catalogue boundary and GenAI Agents media handling, with no unrelated edits. The current code is covered by reader media and build tests."
+  },
+  "files": [
+    {
+      "source": "publishing/tests/fixtures/legacy-unhashed-assets.json",
+      "before_sha256": "010db7be044b6da336284c976c67ace96786a3b8ddda978835321103926eb528",
+      "after_sha256": "61e61229e8af37748bfdbd06d91e9f45465d54a9c8b8a488a8a2fff4d8f5d171",
+      "changes": [
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/atlas-remainder-official/flamingo-architecture.png\",\n    \"00 Учебник/Assets/Figures/curated/atlas-remainder-official/gpt-decoder-block.png\",\n",
+          "new": "    \"00 Учебник/Assets/Figures/curated/atlas-remainder-official/gpt-decoder-block.png\",\n"
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-engine_constructor.png\",\n    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-engine_loop.png\",\n    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-fwd_pass.png\",\n    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-multiprocexecutor.png\",\n    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt1.png\",\n    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt2.png\",\n    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt3.png\",\n    \"00 Учебник/Assets/Figures/curated/inference-serving/vllm-server_setup.png\",\n    \"00 Учебник/Assets/Figures/curated/instructgpt/pretraining-hf.png\",\n",
+          "new": "    \"00 Учебник/Assets/Figures/curated/instructgpt/pretraining-hf.png\",\n"
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-mode-architecture.png\",\n    \"00 Учебник/Assets/Figures/curated/lstm/lstm-chain.png\",\n",
+          "new": "    \"00 Учебник/Assets/Figures/curated/lstm/lstm-chain.png\",\n"
+        }
+      ]
+    },
+    {
+      "source": "publishing/adapter/build.ts",
+      "before_sha256": "d19eb820a17382d227d9fac0f3066e3408c4b5b6c4e060a0d46fb8214572d5f1",
+      "after_sha256": "8b67a6efabdacdde0f1bade79e4996446b5848ac1291ead7a2ee49d58b662563",
+      "changes": [
+        {
+          "old": "import { mapMarkdownProse } from './markdown-prose.js';\n",
+          "new": "import { mapMarkdownProse } from './markdown-prose.js';\nimport { genaiReaderMedia, genaiSource } from './genai-course-media.js';\n"
+        },
+        {
+          "old": "function normalizeProtocolRelativeHtmlUrls(markdown: string): string {\n  // Imported notebooks often preserve HTML copied from Wikimedia and other\n  // sites with `//host/path` URLs. Astro otherwise treats these as local\n  // publication paths during static rendering.\n  return markdown.replace(/\\b(href|src)=(['\"])\\/\\//gi, '$1=$2https://');\n}\n\nfunction readerSourceBody(route: string, body: string): string {\n  if (!route.startsWith('sources/courses/genai-agents/')) return body;\n  // The upstream notebook footer loads a per-notebook view counter.\n  // Preserve the archived notebook and examples; omit the beacon from HTML.\n  return mapMarkdownProse(body, prose => prose.replace(\n    /^!\\[\\]\\(https:\\/\\/europe-west1-genai-agents-views-tracker\\.cloudfunctions\\.net\\/genai-agents-tracker\\?notebook=[a-z0-9-]+\\)[ \\t]*\\r?$/gm,\n    ''\n  ));\n}\n\n",
+          "new": "function normalizeProtocolRelativeHtmlUrls(markdown: string): string {\n  // Imported notebooks often preserve HTML copied from Wikimedia and other\n  // sites with `//host/path` URLs. Astro otherwise treats these as local\n  // publication paths during static rendering.\n  return markdown.replace(/\\b(href|src)=(['\"])\\/\\//gi, '$1=$2https://');\n}\n\nconst HSE_ARCHIVE_ROOT = '05 Источники/Courses/HSE ML course/';\nconst HSE_SOURCE = 'https://github.com/esokolov/ml-course-hse/blob/4b21051531fb72dc9eef58632332ad971c92d006/';\nconst GENAI_ARCHIVE_ROOT = '05 Источники/Courses/GenAI Agents/';\nconst GENAI_NOTEBOOK_FIGURES = new Map([\n  ['Academic_Task_Learning_Agent_LangGraph/cell-003-markdown-01.png', 'ATLAS routes a request to one of its specialist workflows.'],\n  ['Academic_Task_Learning_Agent_LangGraph/cell-003-markdown-02.png', 'ATLAS fans out to profile, calendar and task analysis before execution.'],\n  ['Academic_Task_Learning_Agent_LangGraph/cell-055-markdown-01.png', 'Two nested ATLAS subgraphs for calendar and note analysis.'],\n  ['Weather_Disaster_Management_AI_AGENT/cell-004-markdown-01.jpg', 'Weather alerts pass through severity and human review gates before escalation.'],\n  ['database_discovery_fleet/cell-002-attachment.png', 'The agent classifies the request, then answers directly or plans and executes a database query.'],\n  ['database_discovery_fleet/cell-003-attachment.png', 'Example database schema and relationships used by the discovery agent.'],\n  ['sales_call_analyzer_agent/cell-021-markdown-01.png', 'Audio goes through transcription, analysis and report generation.'],\n  ['systematic_review_of_scientific_articles/cell-004-markdown-01.png', 'The review graph splits into queries and combines the results for synthesis.'],\n]);\n\nfunction readerSourceBody(route: string, source: string, body: string): string {\n  if (source.startsWith(HSE_ARCHIVE_ROOT) && route.startsWith('sources/courses/hse-ml-course/')) {\n    // This revision has no verified redistribution grant. Keep the Obsidian\n    // originals and stable catalogue routes; don't stage the notebook media.\n    const original = source.slice(HSE_ARCHIVE_ROOT.length).replace(/\\.md$/, '')\n      .split('/').map(encodeURIComponent).join('/');\n    return [\n      'Материал курса машинного обучения ВШЭ, весна 2026. Полный текст доступен на русском языке у авторов курса.',\n      `[Открыть оригинал на GitHub](${HSE_SOURCE}${original})`,\n      'На сайте Bookvar сохранена ссылка: разрешение на перепубликацию этого материала не подтверждено.',\n    ].join('\\n\\n') + '\\n';\n  }\n  if (!route.startsWith('sources/courses/genai-agents/')) return body;\n  // The upstream notebook footer loads a per-notebook view counter.\n  // Preserve the archived notebook and examples; omit the beacon from HTML.\n  return mapMarkdownProse(body, prose => {\n    const withoutCounter = genaiReaderMedia(prose.replace(\n      /^!\\[\\]\\(https:\\/\\/europe-west1-genai-agents-views-tracker\\.cloudfunctions\\.net\\/genai-agents-tracker\\?notebook=[a-z0-9-]+\\)[ \\t]*\\r?$/gm,\n      ''\n    ));\n    if (!source.startsWith(GENAI_ARCHIVE_ROOT + 'all_agents_tutorials/')) return withoutCounter;\n    const notebook = source.slice(GENAI_ARCHIVE_ROOT.length).replace(/\\.md$/, '');\n    const directory = notebook.slice('all_agents_tutorials/'.length, -'.ipynb'.length);\n    return withoutCounter.replace(\n      /!\\[([^\\]\\n]*)\\]\\(\\/_assets\\/Sources\\/GenAI Agents\\/all_agents_tutorials\\/([^/)]+)\\/(cell-\\d+-(?:attachment|markdown-\\d+)\\.(?:png|jpg|svg))\\)/g,\n      (match, _alt: string, owner: string, file: string) => {\n        if (owner !== directory) return match;\n        const cell = Number(file.match(/^cell-(\\d+)-/)![1]);\n        const original = genaiSource + notebook.split('/').map(encodeURIComponent).join('/');\n        const description = GENAI_NOTEBOOK_FIGURES.get(owner + '/' + file);\n        if (!description) return `[View the screenshot in the original notebook (cell ${cell})](${original})`;\n        return [\n          '',\n          `![[Assets/Sources/GenAI Agents/all_agents_tutorials/${owner}/${file}|${description}]]`,\n          `*Nir Diamant and GenAI Agents contributors, [original notebook, cell ${cell}](${original}), [custom non-commercial license](${genaiSource}LICENSE). Unmodified image.*`,\n          '',\n        ].join('\\n\\n');\n      }\n    );\n  });\n}\n\n"
+        },
+        {
+          "old": "readerSourceBody(entry.route, page.body), routeBySource, pdfDownloads);",
+          "new": "readerSourceBody(entry.route, source, page.body), routeBySource, pdfDownloads);"
+        }
+      ]
+    }
+  ]
+}

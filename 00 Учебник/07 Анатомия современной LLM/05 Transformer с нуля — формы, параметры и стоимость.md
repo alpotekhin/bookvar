@@ -2,8 +2,8 @@
 title: Transformer с нуля — формы, параметры и стоимость
 type: textbook-chapter
 status: in-review
-last_updated: 2026-10-22
-last_verified: 2026-10-22
+last_updated: 2026-11-13
+last_verified: 2026-11-13
 source_unit_id:
   - lecture-02-flop-units
   - lecture-01-figure-step-177-rendering-1
@@ -33,22 +33,26 @@ primary_sources:
   - https://docs.pytorch.org/docs/2.8/generated/torch.nn.Module.html
   - https://jax-ml.github.io/scaling-book/roofline/
   - https://arxiv.org/abs/2204.02311
+  - https://aclanthology.org/E17-2025/
+  - https://github.com/openai/gpt-2/blob/9b63575ef42771a015060c964af2c3da4cf7c8ab/src/model.py
+  - https://github.com/meta-llama/llama/blob/1076b9c51c77ad06e9d7ba8a4c6df775741732bd/llama/model.py
 previous: "[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating|Dense FFN — расширение размерности и SwiGLU]]"
 next: "[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training|Данные и предобучение]]"
 ---
 
 # Transformer с нуля: формы, параметры и стоимость
 
-Удвоение длины контекста не меняет число параметров Transformer, но увеличивает
-объём активаций и стоимость внимания. Увеличение словаря, наоборот, добавляет
-параметры во входную и выходную матрицы, не меняя число блоков. Чтобы оценить
-память и время обучения, этих величин недостаточно по отдельности: нужно
-проследить формы тензоров и операции над ними.
+Декодер получает пакет из двух последовательностей по 128 токенов. При
+словаре из 10 000 токенов на выходе будет 2 560 000 логитов. Какой следующий
+токен соответствует каждой строке и что придётся пересчитать, если удвоить
+длину входа?
 
 Разберём модель из Stanford CS336 Assignment 1: декодер с причинным вниманием,
 RoPE, RMSNorm и SwiGLU. Сначала определим формы промежуточных тензоров, затем
 посчитаем параметры, арифметические операции и объём памяти. Полученные оценки
-можно сопоставить с измерениями на конкретном устройстве.
+можно сопоставить с измерениями на конкретном устройстве. У модели с RoPE
+удлинение входа не добавляет параметров; в GPT-2 увеличение максимально
+поддерживаемой длины требует дополнительных строк в обучаемой таблице позиций.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/a1-figures1-2-model-block.png]]
 
@@ -72,9 +76,9 @@ Feed-Forward` реализуется через SwiGLU. Позиции учит�
 
 <a id="notation-and-shapes"></a>
 
-## Сначала имена осей, затем операции
+<a id="сначала-имена-осей-затем-операции"></a>
 
-Зафиксируем обозначения до первой строки кода.
+## Формы тензоров от входа до выхода
 
 | Символ | Смысл |
 |---|---|
@@ -125,11 +129,10 @@ $$[B,T,D]\to[B,T,F]\to[B,T,D].$$
 потерь. Отдельный тензор вероятностей не требуется: численно устойчивую
 кросс-энтропию можно вычислить непосредственно по логитам.
 
-Имена осей полезнее запоминания конкретного `reshape`. Запись вроде
-`batch sequence (heads head_dim)` заставляет проверить равенство $D=Hd_h$ в том
-месте, где оно действительно нужно. Анонимные `view(B, T, H, -1)` и `transpose`
-могут дать тензор правильного размера, но перепутать семантику осей — такой баг
-часто не вызывает исключения.
+Запись `batch sequence (heads head_dim)` показывает, что на головы
+разбивается ось признаков. Следующая перестановка переносит ось голов
+перед осью токенов. Если перепутать эти операции, итоговая форма может
+совпасть с ожидаемой, хотя отдельные головы получат другие числа.
 
 ### Один пакет через все слои
 
@@ -188,12 +191,83 @@ assert heads.untyped_storage().data_ptr() == x.untyped_storage().data_ptr()
 assert not heads.is_contiguous()
 ~~~
 
-Последние две проверки отделяют логическую форму от размещения в памяти.
-Здесь разделение и перестановка осей создают представление тех же восьми
+Разделение и перестановка осей создают представление тех же восьми
 чисел, а не ещё восемь чисел. Но переставленный тензор не является
 непрерывным: соседние логические элементы могут находиться не рядом.
 Операция `contiguous()` для него создаст копию. Поэтому память нельзя
 подсчитать, механически сложив объёмы всех имён промежуточных тензоров.
+
+<a id="logits-to-next-token-loss"></a>
+
+### Какая строка предсказывает следующий токен
+
+После финальной нормализации на каждой входной позиции есть вектор
+$h_t$ длины $D$. В GPT-2 его скалярно умножают на каждую строку
+таблицы токенов. Так из одного вектора получаются $V$ логитов:
+по одному для каждого кандидата на следующую позицию.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt2-2026-10-22/gpt2-output-projection-2.png|Один выходной вектор GPT-2 ширины 768 умножается на таблицу из 50 257 строк, чтобы получить логит для каждого токена.]]
+
+*Jay Alammar, [The Illustrated GPT-2, Model Output](https://jalammar.github.io/illustrated-gpt2/#model-output),
+[оригинал](https://jalammar.github.io/images/gpt2/gpt2-output-projection-2.png),
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+На схеме показан расчёт для одной позиции. Во время обучения та же
+матрица обрабатывает все $BT$ строк сразу.*
+
+Возьмём фрагмент с идентификаторами `[0, 1, 2]`. При нарезке для
+обучения первые два токена идут на вход, последние два становятся
+целями: `[0, 1]` → `[1, 2]`. Первая строка логитов отвечает за
+$p(1\mid 0)$, вторая — за $p(2\mid 0,1)$. Причинная маска не даёт
+первой позиции прочитать токен 1, хотя он уже есть на входе.
+Токен 2 в этом проходе вообще не подаётся на вход.
+
+Пусть словарь состоит из трёх токенов, а их выходные векторы равны
+$(1,0)$, $(0,1)$ и $(-1,0)$. Возьмём $(2,1)$ и $(1,2)$ в качестве
+состояний двух позиций после нормализации. Это заданные числа,
+а не результат вычисления обученной модели.
+
+| Видимый префикс | Три логита | Цель | Вероятность цели | Потеря |
+|---|---|---:|---:|---:|
+| `[0]` | $(2,1,-2)$ | 1 | 0.2654 | 1.3266 |
+| `[0,1]` | $(1,2,-1)$ | 2 | 0.0351 | 3.3490 |
+
+Для первой строки нужен логит с индексом 1, равный $1$. Потеря
+равна $\log(e^2+e+e^{-2})-1\approx1.3266$. Во второй строке
+вычитаем логит токена 2, равный $-1$, и получаем $3.3490$.
+Среднее по обеим позициям — около $2.3378$. Это та же
+кросс-энтропия, что в [§4.1 задания CS336](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=28).
+
+~~~python
+import torch.nn.functional as ops
+
+sequence = torch.tensor([[0, 1, 2]])
+inputs, targets = sequence[:, :-1], sequence[:, 1:]
+output_rows = torch.tensor([[1., 0.], [0., 1.], [-1., 0.]], dtype=torch.float64)
+# Эти состояния уже прошли финальную нормализацию.
+final_states = torch.tensor([[[2., 1.], [1., 2.]]], dtype=torch.float64)
+token_logits = ops.linear(final_states, output_rows)  # [1,2,3]
+assert inputs.tolist() == [[0, 1]] and targets.tolist() == [[1, 2]]
+assert token_logits.tolist() == [[[2., 1., -2.], [1., 2., -1.]]]
+chosen_logits = token_logits.gather(-1, targets.unsqueeze(-1)).squeeze(-1)
+token_nll = token_logits.logsumexp(-1) - chosen_logits
+loss = ops.cross_entropy(token_logits.flatten(0, 1), targets.flatten())
+torch.testing.assert_close(token_nll.mean(), loss)
+print(token_nll.tolist(), round(loss.item(), 6))
+
+# Для обычной генерации продолжения нужен только последний ряд.
+next_logits = ops.linear(final_states[:, -1, :], output_rows)  # [1,3]
+torch.testing.assert_close(next_logits, token_logits[:, -1, :])
+~~~
+
+Здесь цели уже сдвинуты при нарезке последовательности, а
+`cross_entropy` получает логиты и цели одинаковой длины. Если
+обёртка модели сдвигает цели внутри, такой сдвиг не надо повторять.
+При обычной генерации из префикса `[0, 1]` нам нужно только
+распределение для следующей позиции. В
+[первой реализации LLaMA](https://github.com/meta-llama/llama/blob/1076b9c51c77ad06e9d7ba8a4c6df775741732bd/llama/model.py#L204-L220)
+выходная проекция получает только последнее состояние `h[:, -1, :]`.
+Это сокращает работу выходной матрицы при обработке префикса;
+предыдущие токены всё равно участвуют в вычислении последнего состояния.
 
 <a id="parameter-accounting"></a>
 
@@ -205,6 +279,28 @@ Assignment 1. Таблица эмбеддингов содержит $VD$ пар
 она добавляет ещё $DV$; при совместном использовании весов (weight tying)
 хранится одна матрица вместо двух.
 RoPE обучаемых параметров не добавляет.
+
+В [GPT-2](https://github.com/openai/gpt-2/blob/9b63575ef42771a015060c964af2c3da4cf7c8ab/src/model.py#L149-L158)
+из `wte` сначала выбирают входные строки, а в конце на её
+транспонированную версию умножают выходные векторы. В
+[первой LLaMA](https://github.com/meta-llama/llama/blob/1076b9c51c77ad06e9d7ba8a4c6df775741732bd/llama/model.py#L182-L199)
+`tok_embeddings` и `output` имеют независимые веса. В обоих
+случаях форма логитов одна и та же; различаются число параметров
+и способ их обучения.
+
+При общей матрице градиент каждой строки складывается из двух вкладов:
+от её использования на входе и от её участия в расчёте логитов.
+В примере выше токена 2 не было на входе, поэтому выбор эмбеддингов
+не даёт градиента строке 2. Но в первом распределении токен 2 получил
+ненулевую вероятность, а во втором был целью. Через выход он получает
+вклады из обеих позиций. Если матрицы раздельные, такой градиент
+изменит выходной вектор токена 2, но не его входной эмбеддинг.
+Эти два пути градиента разбирают
+[Press и Wolf, §3](https://aclanthology.org/E17-2025.pdf#page=2).
+В числах из примера градиент выходной строки 2 равен
+$\bigl(0.0132(2,1)+(0.0351-1)(1,2)\bigr)/2\approx(-0.4692,-0.9583)$.
+Коэффициент первой позиции равен вероятности токена 2, второй —
+вероятности минус единица, потому что там этот токен был целью.
 
 В многоголовом самовнимании четыре проекции ширины $D$: $W_Q,W_K,W_V,W_O$.
 При одинаковом числе голов запросов, ключей и значений это
@@ -302,6 +398,26 @@ assert tied.head.weight is tied.embedding.weight
 
 # state_dict содержит оба имени одной общей матрицы.
 print(sum(p.numel() for p in tied.state_dict().values()))  # 22696448
+
+# Минимальный граф с теми же логитами в точке расчёта.
+# Смещение фиксировано; здесь оно заменяет блоки Transformer.
+fixed_offset = final_states - output_rows[inputs]
+read_table = output_rows.clone().requires_grad_()
+write_table = output_rows.clone().requires_grad_()
+shared_table = output_rows.clone().requires_grad_()
+
+def table_loss(read, write):
+    states = read[inputs] + fixed_offset
+    scores = ops.linear(states, write)
+    return ops.cross_entropy(scores.flatten(0, 1), targets.flatten())
+
+input_grad, output_grad = torch.autograd.grad(
+    table_loss(read_table, write_table), (read_table, write_table)
+)
+shared_grad, = torch.autograd.grad(table_loss(shared_table, shared_table), shared_table)
+torch.testing.assert_close(shared_grad, input_grad + output_grad)
+torch.testing.assert_close(input_grad[2], torch.zeros_like(input_grad[2]))
+print(shared_grad[2].tolist())  # [-0.4692275995665407, -0.9582745295637655]
 ~~~
 
 [`parameters()`](https://docs.pytorch.org/docs/2.8/generated/torch.nn.Module.html#torch.nn.Module.named_parameters)
@@ -312,6 +428,11 @@ print(sum(p.numel() for p in tied.state_dict().values()))  # 22696448
 при weight tying. Две независимые матрицы с одинаковыми начальными
 значениями, наоборот, должны считаться дважды: равенство значений
 ещё не означает совместного использования параметра.
+
+В конце примера общий параметр передан в обе операции одного графа.
+В варианте с раздельными таблицами начальные значения те же, поэтому
+можно сравнивать производные в одной и той же точке. Их сумма совпадает
+с производной по общей таблице; строка 2 получила только выходной вклад.
 
 <a id="compute-accounting"></a>
 
@@ -471,6 +592,32 @@ print(forward_flops, training_flops)  # 9265217536, 27795652608
 часть пока мала. Если вместо полного квадрата считать только разрешённые
 пары, нужно менять оба матричных произведения внимания согласованно.
 
+<a id="gpt2-sized-not-gpt2"></a>
+
+### Размеры GPT-2 XL, блок из CS336
+
+В [задаче Transformer LM resource accounting](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=27)
+предлагают взять $L=48$, $D=1600$, $H=25$ и $V=50\,257$ от GPT-2 XL,
+но использовать блок CS336: две RMSNorm, RoPE, SwiGLU ширины $4288$ и
+линейные слои без смещений. С отдельной выходной матрицей получается
+1 640 452 800 параметров. У
+[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|выпущенной GPT-2 XL]]
+их 1 557 611 200: там связаны веса, есть абсолютная таблица позиций,
+FFN с двумя матрицами ширины $6400$, LayerNorm и смещения.
+
+Если в модели из задания менять только $T$, число весов остаётся прежним.
+Для одной последовательности и полного квадрата внимания получаем:
+
+| Длина $T$ | Матричная работа прямого прохода | Из неё $QK^\top$ и умножение на значения |
+|---:|---:|---:|
+| 1 024 | 3.517 TFLOP | 0.322 TFLOP (9.2%) |
+| 16 384 | 133.578 TFLOP | 82.463 TFLOP (61.7%) |
+
+В 16 раз больше токенов дают в 16 раз больше работы проекций и FFN,
+но в 256 раз больше пар позиций. Поэтому доля смешивания токенов
+растёт, даже если все размеры матриц весов оставить прежними. Это расчёт
+для модели задания, не замер GPT-2 на длине 16 384.
+
 <a id="memory-accounting"></a>
 
 ## Память: что живёт долго, а что зависит от пакета
@@ -570,13 +717,16 @@ weight decay и clipping общего градиента выполняются 
 зависит от границ checkpoint и реализации. Подробнее это разобрано в
 [[00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload|главе о checkpointing и offload]].
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/compute-memory.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/hardware-completion-2026-10-29/tpu-load-weights.gif|Анимация Google Cloud: веса поступают из HBM в блок матричного умножения TPU до выполнения операции.]]
 
-*Перед выполнением операции входы нужно прочитать из памяти, а результат —
-записать обратно. Пропускная способность памяти ограничивает скорость этого
-обмена независимо от числа арифметических блоков. Источник: Percy Liang,
-[Stanford CS336, Lecture 2](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_02.py#L337),
-исходное изображение `compute-memory.png`.*
+*Google Cloud, [TPU system architecture](https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm),
+[оригинал анимации](https://docs.cloud.google.com/static/tpu/docs/images/image4_5pfb45w.gif),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Веса сначала проходят из HBM в блок матричного умножения TPU.
+Анимация показывает путь весов. При расчёте времени нужны ещё чтение
+входных активаций и запись выхода.
+[Схема из Lecture 2 CS336](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/compute-memory.png)
+доступна в оригинале.*
 
 Поэтому отдельно оценивают состояние модели, пиковые активации, временные
 буферы и служебную память распределителя. Расчёт сравнивают с измеренным
@@ -908,6 +1058,8 @@ Assignment 1, официальные тесты, варианты запуска
 - [Stanford CS336 Spring 2026, Lecture 2 — pinned source](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_02.py).
 - [Stanford CS336 Spring 2026, Assignment 1 — pinned handout](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf).
 - Vaswani et al. [Attention Is All You Need](https://arxiv.org/abs/1706.03762), 2017.
+- Press, Wolf. [Using the Output Embedding to Improve Language Models](https://aclanthology.org/E17-2025/),
+  §3: откуда берутся два слагаемых градиента общей таблицы.
 - Chowdhery et al. [PaLM, §4.1 и Appendix B](https://arxiv.org/html/2204.02311v5#S4.SS1),
   2022: определения MFU и HFU, учёт пересчёта активаций.
 - Austin et al. [How To Scale Your Model, All About Rooflines](https://jax-ml.github.io/scaling-book/roofline/):

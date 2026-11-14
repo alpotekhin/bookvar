@@ -254,6 +254,8 @@ generation define different procedures. The difficulty concerns
 training objective and available context, not whether a class name
 contains “decoder.”
 
+<a id="decoder-only-next-token"></a>
+
 ## Decoder-only: predict the next token
 
 A causal language model learns

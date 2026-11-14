@@ -1,0 +1,418 @@
+{
+  "date": "2026-11-11",
+  "scope": "Resolve the six explicit third-party credits previously flagged in the Harvard course image inventory. Keep original captions and exact archive links. Replace four embedded images with source originals; no substantive changes to imported English text.",
+  "review": [
+    {
+      "label": "RGB channels",
+      "source": "https://medium.com/data-science/what-are-tensors-in-machine-learning-5671814646ff",
+      "finding": "The imported caption credits Niklas Lang. A grant for that particular image was not found. Link to the pinned Harvard artwork and show a different public-domain RGB composite."
+    },
+    {
+      "label": "MLOps pipeline",
+      "source": "https://docs.cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning#mlops_level_2_cicd_pipeline_automation",
+      "finding": "Retain the archival link to Harvard's adaptation. Reuse the unchanged native Google Cloud Figure 5, already reviewed under the page's CC BY 4.0 notice; this is not a claim about the license of every image linked from Google."
+    },
+    {
+      "label": "Cloud TPU photo",
+      "source": "https://blog.google/innovation-and-ai/technology/ai/google-gemini-ai/",
+      "finding": "Harvard credits Google DeepMind; the Gemini launch page is a related primary source, not proof of the exact file or a grant. Preserve the archived photo link and original caption."
+    },
+    {
+      "label": "Block sparsity",
+      "source": "https://developer.nvidia.com/blog/accelerating-matrix-multiplication-with-block-sparse-format-and-nvidia-tensor-cores/#blocked-ellpack_format",
+      "finding": "The NVIDIA article shows the Blocked-ELL layout; the site terms do not give a general redistribution grant for the blog artwork. Link to both the archived Harvard adaptation and NVIDIA’s original example."
+    },
+    {
+      "label": "MLP",
+      "source": "https://doi.org/10.2200/S00783ED1V01Y201706CAC041",
+      "finding": "The course credits the 2017 book Deep Learning for Computer Architects, whose publisher does not identify a reuse grant for the adaptation. Link to the archive and reuse the original MIT-licensed CS231n diagram."
+    },
+    {
+      "label": "Autoencoder",
+      "source": null,
+      "finding": "The historical caption credits a Towards Data Science tutorial without naming a verified reusable figure. Link to the archival adaptation and reuse Chervinskii’s original CC BY-SA 4.0 diagram."
+    }
+  ],
+  "placements": [
+    {
+      "route": "sources/courses/harvard-ml-systems/vol1/frameworks",
+      "owner": "05 Источники/Courses/Harvard ML Systems/vol1/frameworks.md",
+      "archived": "Assets/Sources/Harvard ML Systems/vol1/frameworks/421b1d608519785291cfd3fe15a4c88e24545a14.svg",
+      "archive_url": "https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/frameworks/frameworks_files/mediabag/421b1d608519785291cfd3fe15a4c88e24545a14.svg",
+      "replacement": "00 Учебник/Assets/Figures/curated/harvard-credits-2026-11-11/prokudin-gorsky-rgb.jpg"
+    },
+    {
+      "route": "sources/courses/harvard-ml-systems/vol1/ml-operations",
+      "owner": "05 Источники/Courses/Harvard ML Systems/vol1/ml_ops.md",
+      "archived": "Assets/Sources/Harvard ML Systems/vol1/ml_ops/124c70a98d50344e78517384c2658cae1de42925.svg",
+      "archive_url": "https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/ml_ops/ml_ops_files/mediabag/124c70a98d50344e78517384c2658cae1de42925.svg",
+      "replacement": "00 Учебник/Assets/Figures/curated/mlops-review-2026-10/google-cicd-stages.svg"
+    },
+    {
+      "route": "sources/courses/harvard-ml-systems/vol1/ml-systems",
+      "owner": "05 Источники/Courses/Harvard ML Systems/vol1/ml_systems.md",
+      "archived": "Assets/Sources/Harvard ML Systems/vol1/ml_systems/cloud_ml_tpu.jpeg",
+      "archive_url": "https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/ml_systems/images/jpg/cloud_ml_tpu.jpeg",
+      "replacement": null
+    },
+    {
+      "route": "sources/courses/harvard-ml-systems/vol1/model-compression",
+      "owner": "05 Источники/Courses/Harvard ML Systems/vol1/model_compression.md",
+      "archived": "Assets/Sources/Harvard ML Systems/vol1/model_compression/69ef310a48248ea96fb6b3f52a567bc01eacaad3.svg",
+      "archive_url": "https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/model_compression/model_compression_files/mediabag/69ef310a48248ea96fb6b3f52a567bc01eacaad3.svg",
+      "replacement": null
+    },
+    {
+      "route": "sources/courses/harvard-ml-systems/vol1/network-architectures",
+      "owner": "05 Источники/Courses/Harvard ML Systems/vol1/nn_architectures.md",
+      "archived": "Assets/Sources/Harvard ML Systems/vol1/nn_architectures/34f1ff4eb2e4f04cbfc72069d106a4d9bd7e066d.svg",
+      "archive_url": "https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/nn_architectures/nn_architectures_files/mediabag/34f1ff4eb2e4f04cbfc72069d106a4d9bd7e066d.svg",
+      "replacement": "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-mlp-layered.jpeg"
+    },
+    {
+      "route": "sources/courses/harvard-ml-systems/vol2/robust-ai",
+      "owner": "05 Источники/Courses/Harvard ML Systems/vol2/robust_ai.md",
+      "archived": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/2106df9e0de5e907ea8ab741d33097ba20258cdf.svg",
+      "archive_url": "https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol2/robust_ai/robust_ai_files/mediabag/2106df9e0de5e907ea8ab741d33097ba20258cdf.svg",
+      "replacement": "00 Учебник/Assets/Figures/curated/autoencoder-dropout-primary-2026-11-10/chervinskii-autoencoder.png"
+    }
+  ],
+  "figures": [
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/harvard-credits-2026-11-11/prokudin-gorsky-rgb.jpg",
+      "sha256": "927a674c0a18d2e5701f9e80d0cd968adbd9627cb4ff84d10e19aef45171a513",
+      "license": "Public domain (PDM 1.0)",
+      "used_in": [
+        "05 Источники/Courses/Harvard ML Systems/vol1/frameworks.md"
+      ]
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-mlp-layered.jpeg",
+      "sha256": "649d51c291077a114e32cdbd282b49841124383ff63a91d612a4d0d2310641c8",
+      "license": "MIT",
+      "used_in": [
+        "00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md",
+        "05 Источники/Courses/Harvard ML Systems/vol1/nn_architectures.md"
+      ]
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/autoencoder-dropout-primary-2026-11-10/chervinskii-autoencoder.png",
+      "sha256": "36bda1536cc36e02b56ee438834566fb659525e0752aa13377f5d4ea8f65f9af",
+      "license": "CC BY-SA 4.0",
+      "used_in": [
+        "00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md",
+        "05 Источники/Courses/Harvard ML Systems/vol2/robust_ai.md"
+      ]
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/mlops-review-2026-10/google-cicd-stages.svg",
+      "sha256": "f5d9d5da64c7a888a8f0dcd21c70460049524bf5693315c885884bc6cf147c05",
+      "license": "CC BY 4.0",
+      "used_in": [
+        "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+        "05 Источники/Courses/Harvard ML Systems/vol1/ml_ops.md"
+      ]
+    }
+  ],
+  "newFigure": {
+    "id": "curated-prokudin-gorskii-rgb-927a674c0a18",
+    "asset": "00 Учебник/Assets/Figures/curated/harvard-credits-2026-11-11/prokudin-gorsky-rgb.jpg",
+    "title": "Alleia Hamerops composite",
+    "author": "Sergei Prokudin-Gorskii; composite by Wikimedia Commons contributor Mdd4696",
+    "source_url": "https://commons.wikimedia.org/w/index.php?title=File:Alleia_Hamerops_composite.jpg&oldid=1130485549",
+    "source_image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Alleia_Hamerops_composite.jpg",
+    "source_asset": "00 Учебник/Assets/Figures/curated/harvard-credits-2026-11-11/prokudin-gorsky-rgb.jpg",
+    "sha256": "927a674c0a18d2e5701f9e80d0cd968adbd9627cb4ff84d10e19aef45171a513",
+    "source_asset_sha256": "927a674c0a18d2e5701f9e80d0cd968adbd9627cb4ff84d10e19aef45171a513",
+    "bytes": 156688,
+    "dimensions_px": [
+      1000,
+      250
+    ],
+    "license": "Public domain (PDM 1.0)",
+    "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "license_evidence": "05 Источники/Originals/harvard-credits-2026-11-11/rgb-license.html",
+    "license_evidence_sha256": "d472ebe6dd28092f64fdd820e623e30db0630239700e78fb7d2d52b78bab5088",
+    "rights_status": "source-license-verified",
+    "metadata_status": "verified",
+    "provenance_confirmation": "author-archive-and-commons-file-history",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete Commons original JPEG, unchanged in Bookvar.",
+    "last_verified": "2026-11-11",
+    "used_in": [
+      "05 Источники/Courses/Harvard ML Systems/vol1/frameworks.md"
+    ]
+  },
+  "retired": [
+    {
+      "id": "harvard-course-credited-archive-9409b401f1f5",
+      "asset": "Assets/Sources/Harvard ML Systems/vol1/frameworks/421b1d608519785291cfd3fe15a4c88e24545a14.svg",
+      "title": "Niklas Lang’s RGB tensor figure",
+      "author": "Harvard ML Systems contributors; source credit: Niklas Lang’s RGB tensor figure",
+      "source_url": "https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/frameworks/frameworks_files/mediabag/421b1d608519785291cfd3fe15a4c88e24545a14.svg",
+      "source_image_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/frameworks/frameworks_files/mediabag/421b1d608519785291cfd3fe15a4c88e24545a14.svg",
+      "source_render_commit": "c1c8e803d61c7c4f96bd1424ec5a0501f20f7730",
+      "git_blob_sha1": "efb85b71412cc3abe0c3aa66732b95fdb973d4e2",
+      "bytes": 45359,
+      "sha256": "9409b401f1f55c1032e0e4d328e4df26d43d446d38825bf3da271f92caef2697",
+      "source_asset_sha256": "9409b401f1f55c1032e0e4d328e4df26d43d446d38825bf3da271f92caef2697",
+      "source_asset": "Assets/Sources/Harvard ML Systems/vol1/frameworks/421b1d608519785291cfd3fe15a4c88e24545a14.svg",
+      "license": null,
+      "license_url": null,
+      "rights_status": "source-republication-unverified",
+      "metadata_status": "verified",
+      "publication_status": "retired",
+      "provenance_confirmation": "source-bytes-verified",
+      "derivation": "source-image-copy",
+      "modifications": "Local archival bytes unchanged; no longer embedded or served by the derived site.",
+      "used_in": [],
+      "former_used_in": [
+        "05 Источники/Courses/Harvard ML Systems/vol1/frameworks.md"
+      ],
+      "last_verified": "2026-11-11",
+      "retirement_reason": "No separate redistribution terms were verified for the Niklas Lang figure credited in the chapter.",
+      "replacement": "00 Учебник/Assets/Figures/curated/harvard-credits-2026-11-11/prokudin-gorsky-rgb.jpg"
+    },
+    {
+      "id": "harvard-course-credited-archive-1c9b8f96c125",
+      "asset": "Assets/Sources/Harvard ML Systems/vol1/ml_ops/124c70a98d50344e78517384c2658cae1de42925.svg",
+      "title": "Google Cloud MLOps pipeline adaptation",
+      "author": "Harvard ML Systems contributors; source credit: Google Cloud MLOps pipeline adaptation",
+      "source_url": "https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/ml_ops/ml_ops_files/mediabag/124c70a98d50344e78517384c2658cae1de42925.svg",
+      "source_image_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/ml_ops/ml_ops_files/mediabag/124c70a98d50344e78517384c2658cae1de42925.svg",
+      "source_render_commit": "c1c8e803d61c7c4f96bd1424ec5a0501f20f7730",
+      "git_blob_sha1": "ede3bf369b05ef0f24ff1f5bf1ce5b08ee6c6dea",
+      "bytes": 203528,
+      "sha256": "1c9b8f96c1259f44521811031a07b2365f872b1e9757bb8ed5a039c588fa5681",
+      "source_asset_sha256": "1c9b8f96c1259f44521811031a07b2365f872b1e9757bb8ed5a039c588fa5681",
+      "source_asset": "Assets/Sources/Harvard ML Systems/vol1/ml_ops/124c70a98d50344e78517384c2658cae1de42925.svg",
+      "license": null,
+      "license_url": null,
+      "rights_status": "source-republication-unverified",
+      "metadata_status": "verified",
+      "publication_status": "retired",
+      "provenance_confirmation": "source-bytes-verified",
+      "derivation": "source-image-copy",
+      "modifications": "Local archival bytes unchanged; no longer embedded or served by the derived site.",
+      "used_in": [],
+      "former_used_in": [
+        "05 Источники/Courses/Harvard ML Systems/vol1/ml_ops.md"
+      ],
+      "last_verified": "2026-11-11",
+      "retirement_reason": "The archived Harvard adaptation is linked; the local chapter uses the complete first-party Google Cloud Figure 5 already verified in the asset registry.",
+      "replacement": "00 Учебник/Assets/Figures/curated/mlops-review-2026-10/google-cicd-stages.svg"
+    },
+    {
+      "id": "harvard-course-credited-archive-9cf91386aff2",
+      "asset": "Assets/Sources/Harvard ML Systems/vol1/ml_systems/cloud_ml_tpu.jpeg",
+      "title": "Google DeepMind data center photo",
+      "author": "Harvard ML Systems contributors; source credit: Google DeepMind data center photo",
+      "source_url": "https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/ml_systems/images/jpg/cloud_ml_tpu.jpeg",
+      "source_image_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/ml_systems/images/jpg/cloud_ml_tpu.jpeg",
+      "source_render_commit": "c1c8e803d61c7c4f96bd1424ec5a0501f20f7730",
+      "git_blob_sha1": "aa362487eeea934f84603b3e07cfe8709e3cbc3e",
+      "bytes": 296485,
+      "sha256": "9cf91386aff2b2e691f53f952dab04ad9208ee84c47a8f1e1b99417d2dfd121b",
+      "source_asset_sha256": "9cf91386aff2b2e691f53f952dab04ad9208ee84c47a8f1e1b99417d2dfd121b",
+      "source_asset": "Assets/Sources/Harvard ML Systems/vol1/ml_systems/cloud_ml_tpu.jpeg",
+      "license": null,
+      "license_url": null,
+      "rights_status": "source-republication-unverified",
+      "metadata_status": "verified",
+      "publication_status": "retired",
+      "provenance_confirmation": "source-bytes-verified",
+      "derivation": "source-image-copy",
+      "modifications": "Local archival bytes unchanged; no longer embedded or served by the derived site.",
+      "used_in": [],
+      "former_used_in": [
+        "05 Источники/Courses/Harvard ML Systems/vol1/ml_systems.md"
+      ],
+      "last_verified": "2026-11-11",
+      "retirement_reason": "The Harvard caption credits Google DeepMind; no redistribution grant was verified for this photo."
+    },
+    {
+      "id": "harvard-course-credited-archive-2954edd50daa",
+      "asset": "Assets/Sources/Harvard ML Systems/vol1/model_compression/69ef310a48248ea96fb6b3f52a567bc01eacaad3.svg",
+      "title": "NVIDIA cuSPARSE block-sparse figure adaptation",
+      "author": "Harvard ML Systems contributors; source credit: NVIDIA cuSPARSE block-sparse figure adaptation",
+      "source_url": "https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/model_compression/model_compression_files/mediabag/69ef310a48248ea96fb6b3f52a567bc01eacaad3.svg",
+      "source_image_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/model_compression/model_compression_files/mediabag/69ef310a48248ea96fb6b3f52a567bc01eacaad3.svg",
+      "source_render_commit": "c1c8e803d61c7c4f96bd1424ec5a0501f20f7730",
+      "git_blob_sha1": "42642234eea8c54e769688e4619b78025c3cea2d",
+      "bytes": 187917,
+      "sha256": "2954edd50daac0862c4a6a1ab72e6279d01be3b62376b5f0d5d62bb7bffb3750",
+      "source_asset_sha256": "2954edd50daac0862c4a6a1ab72e6279d01be3b62376b5f0d5d62bb7bffb3750",
+      "source_asset": "Assets/Sources/Harvard ML Systems/vol1/model_compression/69ef310a48248ea96fb6b3f52a567bc01eacaad3.svg",
+      "license": null,
+      "license_url": null,
+      "rights_status": "source-republication-unverified",
+      "metadata_status": "verified",
+      "publication_status": "retired",
+      "provenance_confirmation": "source-bytes-verified",
+      "derivation": "source-image-copy",
+      "modifications": "Local archival bytes unchanged; no longer embedded or served by the derived site.",
+      "used_in": [],
+      "former_used_in": [
+        "05 Источники/Courses/Harvard ML Systems/vol1/model_compression.md"
+      ],
+      "last_verified": "2026-11-11",
+      "retirement_reason": "The Harvard caption credits an adaptation of NVIDIA material; no redistribution grant was verified for the adaptation."
+    },
+    {
+      "id": "harvard-course-credited-archive-10edb709f68c",
+      "asset": "Assets/Sources/Harvard ML Systems/vol1/nn_architectures/34f1ff4eb2e4f04cbfc72069d106a4d9bd7e066d.svg",
+      "title": "Reagen et al. MLP architecture adaptation",
+      "author": "Harvard ML Systems contributors; source credit: Reagen et al. MLP architecture adaptation",
+      "source_url": "https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/nn_architectures/nn_architectures_files/mediabag/34f1ff4eb2e4f04cbfc72069d106a4d9bd7e066d.svg",
+      "source_image_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/nn_architectures/nn_architectures_files/mediabag/34f1ff4eb2e4f04cbfc72069d106a4d9bd7e066d.svg",
+      "source_render_commit": "c1c8e803d61c7c4f96bd1424ec5a0501f20f7730",
+      "git_blob_sha1": "d3cb393b5af6799ac0920c75cbe6126b91f0c7c6",
+      "bytes": 98610,
+      "sha256": "10edb709f68c291ed0136d349bc4467d7ebfb2e831ac7aad26996fe4daefb36e",
+      "source_asset_sha256": "10edb709f68c291ed0136d349bc4467d7ebfb2e831ac7aad26996fe4daefb36e",
+      "source_asset": "Assets/Sources/Harvard ML Systems/vol1/nn_architectures/34f1ff4eb2e4f04cbfc72069d106a4d9bd7e066d.svg",
+      "license": null,
+      "license_url": null,
+      "rights_status": "source-republication-unverified",
+      "metadata_status": "verified",
+      "publication_status": "retired",
+      "provenance_confirmation": "source-bytes-verified",
+      "derivation": "source-image-copy",
+      "modifications": "Local archival bytes unchanged; no longer embedded or served by the derived site.",
+      "used_in": [],
+      "former_used_in": [
+        "05 Источники/Courses/Harvard ML Systems/vol1/nn_architectures.md"
+      ],
+      "last_verified": "2026-11-11",
+      "retirement_reason": "The Harvard caption credits Reagen et al. (2017); no redistribution grant was verified for that adaptation.",
+      "replacement": "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-mlp-layered.jpeg"
+    },
+    {
+      "id": "harvard-course-credited-archive-542a65c3d093",
+      "asset": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/2106df9e0de5e907ea8ab741d33097ba20258cdf.svg",
+      "title": "Towards Data Science autoencoder figure adaptation",
+      "author": "Harvard ML Systems contributors; source credit: Towards Data Science autoencoder figure adaptation",
+      "source_url": "https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol2/robust_ai/robust_ai_files/mediabag/2106df9e0de5e907ea8ab741d33097ba20258cdf.svg",
+      "source_image_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol2/robust_ai/robust_ai_files/mediabag/2106df9e0de5e907ea8ab741d33097ba20258cdf.svg",
+      "source_render_commit": "c1c8e803d61c7c4f96bd1424ec5a0501f20f7730",
+      "git_blob_sha1": "17ce56d36eed0dbaa0033695dfe09d62e23e6aa4",
+      "bytes": 42536,
+      "sha256": "542a65c3d093886f162fb39e39e6d66c236876c4053b86d21519181f24e9e8b9",
+      "source_asset_sha256": "542a65c3d093886f162fb39e39e6d66c236876c4053b86d21519181f24e9e8b9",
+      "source_asset": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/2106df9e0de5e907ea8ab741d33097ba20258cdf.svg",
+      "license": null,
+      "license_url": null,
+      "rights_status": "source-republication-unverified",
+      "metadata_status": "verified",
+      "publication_status": "retired",
+      "provenance_confirmation": "source-bytes-verified",
+      "derivation": "source-image-copy",
+      "modifications": "Local archival bytes unchanged; no longer embedded or served by the derived site.",
+      "used_in": [],
+      "former_used_in": [
+        "05 Источники/Courses/Harvard ML Systems/vol2/robust_ai.md"
+      ],
+      "last_verified": "2026-11-11",
+      "retirement_reason": "The Harvard caption names Towards Data Science but does not identify a reusable edition of the original figure.",
+      "replacement": "00 Учебник/Assets/Figures/curated/autoencoder-dropout-primary-2026-11-10/chervinskii-autoencoder.png"
+    }
+  ],
+  "files": [
+    {
+      "source": "05 Источники/Courses/Harvard ML Systems/vol1/frameworks.md",
+      "before_sha256": "c348b78528c0f0af99a477e0bd07651b03a445ebbda51b0adf046e97777c6e14",
+      "changes": [
+        {
+          "old": "![[Assets/Sources/Harvard ML Systems/vol1/frameworks/421b1d608519785291cfd3fe15a4c88e24545a14.svg]]\n\nFigure 9: **Image as RGB Tensor**: Three stacked grids representing the red, green, and blue color channels of an image, with dimension labels showing width, height, and channel depth forming a rank-3 tensor. Credit: Niklas Lang.",
+          "new": "[Archived Figure 9: Image as RGB Tensor](https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/frameworks/frameworks_files/mediabag/421b1d608519785291cfd3fe15a4c88e24545a14.svg)\n\nFigure 9: **Image as RGB Tensor**: Three stacked grids representing the red, green, and blue color channels of an image, with dimension labels showing width, height, and channel depth forming a rank-3 tensor. Credit: Niklas Lang.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/harvard-credits-2026-11-11/prokudin-gorsky-rgb.jpg|Three grayscale channel images of a man among palms, followed by their color composite.]]\n\n*Bookvar illustration: the three monochrome panels record one scene in three color channels; the right panel combines them. Sergei Prokudin-Gorskii, [Alleia Hamerops composite](https://commons.wikimedia.org/w/index.php?title=File:Alleia_Hamerops_composite.jpg&oldid=1130485549), composite by Mdd4696. [Public Domain Mark 1.0](https://creativecommons.org/publicdomain/mark/1.0/). [Library of Congress source](https://hdl.loc.gov/loc.pnp/prok.01512).*"
+        }
+      ],
+      "after_sha256": "a3b775e1f0a194be7b7305029319dee98fac2caf140f6e8365e64fdea503faa9",
+      "lines": 2867
+    },
+    {
+      "source": "05 Источники/Courses/Harvard ML Systems/vol1/ml_ops.md",
+      "before_sha256": "945a5301062be339925318aeecf5977d192d22eb92de600bf824e7de786a07f5",
+      "changes": [
+        {
+          "old": "![[Assets/Sources/Harvard ML Systems/vol1/ml_ops/124c70a98d50344e78517384c2658cae1de42925.svg]]\n\nFigure 6: **ML CI/CD Pipeline**: The pipeline begins with dataset and feature repositories, flows through data validation, transformation, training, evaluation, and model registration stages, then deploys to production. Retraining triggers initiate the cycle automatically, while metadata and artifact repositories ensure reproducibility and governance. Adapted from Google Cloud’s MLOps continuous delivery and automation pipeline guidance ([Google Cloud 2026b](https://mlsysbook.ai/vol1/ml_ops/ml_ops.html#ref-googleCloudMlopsPipelines)).",
+          "new": "[Archived Figure 6: ML CI/CD Pipeline](https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/ml_ops/ml_ops_files/mediabag/124c70a98d50344e78517384c2658cae1de42925.svg)\n\nFigure 6: **ML CI/CD Pipeline**: The pipeline begins with dataset and feature repositories, flows through data validation, transformation, training, evaluation, and model registration stages, then deploys to production. Retraining triggers initiate the cycle automatically, while metadata and artifact repositories ensure reproducibility and governance. Adapted from Google Cloud’s MLOps continuous delivery and automation pipeline guidance ([Google Cloud 2026b](https://mlsysbook.ai/vol1/ml_ops/ml_ops.html#ref-googleCloudMlopsPipelines)).\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mlops-review-2026-10/google-cicd-stages.svg|Six stages from development through pipeline integration, deployment, triggering, model delivery, and monitoring.]]\n\n*Bookvar illustration: Pipeline continuous delivery deploys the training pipeline; Model continuous delivery deploys a model trained by that pipeline. Jarek Kazmierczak, Khalid Salama and Valentín Huerta, Google Cloud, [Stages of the CI/CD automated ML pipeline, Figure 5](https://docs.cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning#mlops_level_2_cicd_pipeline_automation), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Unmodified.*"
+        }
+      ],
+      "after_sha256": "8e9af34be859e09bb1f41c35a2c3496add28b4466caa0561e95cdcc7e4a1c204",
+      "lines": 2661
+    },
+    {
+      "source": "05 Источники/Courses/Harvard ML Systems/vol1/ml_systems.md",
+      "before_sha256": "b7e74999a207b1ae432600d70152d335decf16d9403f0c7a75c77212b75a9d9c",
+      "changes": [
+        {
+          "old": "![[Assets/Sources/Harvard ML Systems/vol1/ml_systems/cloud_ml_tpu.jpeg]]\n\nFigure 4: **Cloud Data Center Scale**: Rows of server racks illuminated by blue LEDs extend across a Google Cloud TPU data center floor. Image source: ([Google DeepMind 2024](https://mlsysbook.ai/vol1/ml_systems/ml_systems.html#ref-google2024gemini)).",
+          "new": "[Archived Figure 4: Cloud Data Center Scale](https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/ml_systems/images/jpg/cloud_ml_tpu.jpeg)\n\nFigure 4: **Cloud Data Center Scale**: Rows of server racks illuminated by blue LEDs extend across a Google Cloud TPU data center floor. Image source: ([Google DeepMind 2024](https://mlsysbook.ai/vol1/ml_systems/ml_systems.html#ref-google2024gemini))."
+        }
+      ],
+      "after_sha256": "75ecf12ce988ca88d373c7382e93a922fd657b1c14c34001d51f30ecd78f2a64",
+      "lines": 1961
+    },
+    {
+      "source": "05 Источники/Courses/Harvard ML Systems/vol1/model_compression.md",
+      "before_sha256": "31025e43cae976e3ca44f07c11b1e45dcd46b161ee298350fc1f0dc03d4c091c",
+      "changes": [
+        {
+          "old": "![[Assets/Sources/Harvard ML Systems/vol1/model_compression/69ef310a48248ea96fb6b3f52a567bc01eacaad3.svg]]\n\nFigure 28: **Block Sparse Representation**: NVIDIA’s cuSPARSE library efficiently stores block sparse matrices by exploiting dense submatrix structures, enabling accelerated matrix operations while maintaining compatibility with dense matrix computations through block indexing. This approach reduces memory footprint and arithmetic complexity for sparse linear algebra, important for scaling machine learning models. Adapted from NVIDIA’s cuSPARSE documentation ([NVIDIA 2020](https://mlsysbook.ai/vol1/model_compression/model_compression.html#ref-nvidia_cusparse_block)).",
+          "new": "[Archived Figure 28: Block Sparse Representation](https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/model_compression/model_compression_files/mediabag/69ef310a48248ea96fb6b3f52a567bc01eacaad3.svg)\n\nFigure 28: **Block Sparse Representation**: NVIDIA’s cuSPARSE library efficiently stores block sparse matrices by exploiting dense submatrix structures, enabling accelerated matrix operations while maintaining compatibility with dense matrix computations through block indexing. This approach reduces memory footprint and arithmetic complexity for sparse linear algebra, important for scaling machine learning models. Adapted from NVIDIA’s cuSPARSE documentation ([NVIDIA 2020](https://mlsysbook.ai/vol1/model_compression/model_compression.html#ref-nvidia_cusparse_block)).\n\n[NVIDIA: the original Blocked-ELL example](https://developer.nvidia.com/blog/accelerating-matrix-multiplication-with-block-sparse-format-and-nvidia-tensor-cores/#blocked-ellpack_format)."
+        }
+      ],
+      "after_sha256": "90ffaeb4decf2a464c529eac190dd9f184e1ad43617dc05f943d61c4a43d082d",
+      "lines": 2532
+    },
+    {
+      "source": "05 Источники/Courses/Harvard ML Systems/vol1/nn_architectures.md",
+      "before_sha256": "52c77d7f6d386e97af65decf4f55523be785930571759fe5a906069ad13fcfac",
+      "changes": [
+        {
+          "old": "![[Assets/Sources/Harvard ML Systems/vol1/nn_architectures/34f1ff4eb2e4f04cbfc72069d106a4d9bd7e066d.svg]]\n\nFigure 2: **Multilayer Perceptron Architecture**: Three fully-connected layers where every neuron connects to all neurons in adjacent layers. The highlighted neuron receives weighted contributions from all inputs, illustrating the dense <span class=\"source-math-inline\"><span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:1em;vertical-align:-0.25em;\"></span><span class=\"mord mathcal\" style=\"margin-right:0.0278em;\">O</span><span class=\"mopen\">(</span><span class=\"mord mathnormal\" style=\"margin-right:0.109em;\">N</span><span class=\"mspace\" style=\"margin-right:0.2222em;\"></span><span class=\"mbin\">×</span><span class=\"mspace\" style=\"margin-right:0.2222em;\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:1em;vertical-align:-0.25em;\"></span><span class=\"mord mathnormal\" style=\"margin-right:0.109em;\">M</span><span class=\"mclose\">)</span></span></span></span></span> connectivity pattern implemented through matrix multiplications. For MNIST classification, a 784-dimensional input connects to 100 hidden neurons through a <span class=\"source-math-inline\"><span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.7278em;vertical-align:-0.0833em;\"></span><span class=\"mord\">784</span><span class=\"mord\"><span class=\"mord\">×</span></span><span class=\"mord\">100</span></span></span></span></span> weight matrix, requiring 78,400 multiply-accumulate operations per sample. Adapted from ([Reagen et al. 2017](https://mlsysbook.ai/vol1/nn_architectures/nn_architectures.html#ref-reagen2017)).",
+          "new": "[Archived Figure 2: Multilayer Perceptron Architecture](https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/nn_architectures/nn_architectures_files/mediabag/34f1ff4eb2e4f04cbfc72069d106a4d9bd7e066d.svg)\n\nFigure 2: **Multilayer Perceptron Architecture**: Three fully-connected layers where every neuron connects to all neurons in adjacent layers. The highlighted neuron receives weighted contributions from all inputs, illustrating the dense <span class=\"source-math-inline\"><span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:1em;vertical-align:-0.25em;\"></span><span class=\"mord mathcal\" style=\"margin-right:0.0278em;\">O</span><span class=\"mopen\">(</span><span class=\"mord mathnormal\" style=\"margin-right:0.109em;\">N</span><span class=\"mspace\" style=\"margin-right:0.2222em;\"></span><span class=\"mbin\">×</span><span class=\"mspace\" style=\"margin-right:0.2222em;\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:1em;vertical-align:-0.25em;\"></span><span class=\"mord mathnormal\" style=\"margin-right:0.109em;\">M</span><span class=\"mclose\">)</span></span></span></span></span> connectivity pattern implemented through matrix multiplications. For MNIST classification, a 784-dimensional input connects to 100 hidden neurons through a <span class=\"source-math-inline\"><span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.7278em;vertical-align:-0.0833em;\"></span><span class=\"mord\">784</span><span class=\"mord\"><span class=\"mord\">×</span></span><span class=\"mord\">100</span></span></span></span></span> weight matrix, requiring 78,400 multiply-accumulate operations per sample. Adapted from ([Reagen et al. 2017](https://mlsysbook.ai/vol1/nn_architectures/nn_architectures.html#ref-reagen2017)).\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-mlp-layered.jpeg|Three inputs, two fully connected hidden layers of four units each, and one output.]]\n\n*Bookvar illustration: each unit in a layer receives an input from every unit in the preceding layer. Andrej Karpathy and Stanford CS231n, [Layer-wise organization](https://cs231n.github.io/neural-networks-1/#layers), [original JPEG](https://cs231n.github.io/assets/nn1/neural_net2.jpeg), [MIT](/licenses/cs231n-MIT.txt). Unmodified.*"
+        }
+      ],
+      "after_sha256": "8f761b6f7e4a6f851df04cfdb18e9c31046531d2c411e37cf66e272142357dae",
+      "lines": 2964
+    },
+    {
+      "source": "05 Источники/Courses/Harvard ML Systems/vol2/robust_ai.md",
+      "before_sha256": "3948fbdd656fd389ba8adbbb0b46ec4a90983bd8a51e9d52af04ed858cd1bc7b",
+      "changes": [
+        {
+          "old": "![[Assets/Sources/Harvard ML Systems/vol2/robust_ai/2106df9e0de5e907ea8ab741d33097ba20258cdf.svg]]\n\nFigure 21: **Autoencoder Architecture**: Autoencoders learn compressed data representations by minimizing reconstruction error, enabling anomaly detection by identifying inputs with high reconstruction loss. During training on normal data, the network learns efficient encoding and decoding, making it sensitive to deviations indicative of potential poisoning attacks. Source: adapted from a *Towards Data Science* autoencoder tutorial.",
+          "new": "[Archived Figure 21: Autoencoder Architecture](https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol2/robust_ai/robust_ai_files/mediabag/2106df9e0de5e907ea8ab741d33097ba20258cdf.svg)\n\nFigure 21: **Autoencoder Architecture**: Autoencoders learn compressed data representations by minimizing reconstruction error, enabling anomaly detection by identifying inputs with high reconstruction loss. During training on normal data, the network learns efficient encoding and decoding, making it sensitive to deviations indicative of potential poisoning attacks. Source: adapted from a *Towards Data Science* autoencoder tutorial.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/autoencoder-dropout-primary-2026-11-10/chervinskii-autoencoder.png|An encoder maps input X to a narrow representation z; the decoder reconstructs X prime.]]\n\n*Bookvar illustration: an encoder compresses the input into a code; a decoder reconstructs the input from that code. Chervinskii, [Autoencoder structure](https://commons.wikimedia.org/wiki/File:Autoencoder_structure.png), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Unmodified.*"
+        }
+      ],
+      "after_sha256": "23f17055af2e0806f5040286b410c851393daa34da36de832ec07dac8774e1d2",
+      "lines": 1731
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "fa387bdd672004fc120393d5483665433a497e2f9209531e9ae4dabe2d97ac6a",
+      "changes": [
+        {
+          "old": "assets:",
+          "new": "assets:\n  - {\"id\":\"harvard-course-credited-archive-9409b401f1f5\",\"asset\":\"Assets/Sources/Harvard ML Systems/vol1/frameworks/421b1d608519785291cfd3fe15a4c88e24545a14.svg\",\"title\":\"Niklas Lang’s RGB tensor figure\",\"author\":\"Harvard ML Systems contributors; source credit: Niklas Lang’s RGB tensor figure\",\"source_url\":\"https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/frameworks/frameworks_files/mediabag/421b1d608519785291cfd3fe15a4c88e24545a14.svg\",\"source_image_url\":\"https://raw.githubusercontent.com/harvard-edge/cs249r_book/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/frameworks/frameworks_files/mediabag/421b1d608519785291cfd3fe15a4c88e24545a14.svg\",\"source_render_commit\":\"c1c8e803d61c7c4f96bd1424ec5a0501f20f7730\",\"git_blob_sha1\":\"efb85b71412cc3abe0c3aa66732b95fdb973d4e2\",\"bytes\":45359,\"sha256\":\"9409b401f1f55c1032e0e4d328e4df26d43d446d38825bf3da271f92caef2697\",\"source_asset_sha256\":\"9409b401f1f55c1032e0e4d328e4df26d43d446d38825bf3da271f92caef2697\",\"source_asset\":\"Assets/Sources/Harvard ML Systems/vol1/frameworks/421b1d608519785291cfd3fe15a4c88e24545a14.svg\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"metadata_status\":\"verified\",\"publication_status\":\"retired\",\"provenance_confirmation\":\"source-bytes-verified\",\"derivation\":\"source-image-copy\",\"modifications\":\"Local archival bytes unchanged; no longer embedded or served by the derived site.\",\"used_in\":[],\"former_used_in\":[\"05 Источники/Courses/Harvard ML Systems/vol1/frameworks.md\"],\"last_verified\":\"2026-11-11\",\"retirement_reason\":\"No separate redistribution terms were verified for the Niklas Lang figure credited in the chapter.\",\"replacement\":\"00 Учебник/Assets/Figures/curated/harvard-credits-2026-11-11/prokudin-gorsky-rgb.jpg\"}\n  - {\"id\":\"harvard-course-credited-archive-1c9b8f96c125\",\"asset\":\"Assets/Sources/Harvard ML Systems/vol1/ml_ops/124c70a98d50344e78517384c2658cae1de42925.svg\",\"title\":\"Google Cloud MLOps pipeline adaptation\",\"author\":\"Harvard ML Systems contributors; source credit: Google Cloud MLOps pipeline adaptation\",\"source_url\":\"https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/ml_ops/ml_ops_files/mediabag/124c70a98d50344e78517384c2658cae1de42925.svg\",\"source_image_url\":\"https://raw.githubusercontent.com/harvard-edge/cs249r_book/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/ml_ops/ml_ops_files/mediabag/124c70a98d50344e78517384c2658cae1de42925.svg\",\"source_render_commit\":\"c1c8e803d61c7c4f96bd1424ec5a0501f20f7730\",\"git_blob_sha1\":\"ede3bf369b05ef0f24ff1f5bf1ce5b08ee6c6dea\",\"bytes\":203528,\"sha256\":\"1c9b8f96c1259f44521811031a07b2365f872b1e9757bb8ed5a039c588fa5681\",\"source_asset_sha256\":\"1c9b8f96c1259f44521811031a07b2365f872b1e9757bb8ed5a039c588fa5681\",\"source_asset\":\"Assets/Sources/Harvard ML Systems/vol1/ml_ops/124c70a98d50344e78517384c2658cae1de42925.svg\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"metadata_status\":\"verified\",\"publication_status\":\"retired\",\"provenance_confirmation\":\"source-bytes-verified\",\"derivation\":\"source-image-copy\",\"modifications\":\"Local archival bytes unchanged; no longer embedded or served by the derived site.\",\"used_in\":[],\"former_used_in\":[\"05 Источники/Courses/Harvard ML Systems/vol1/ml_ops.md\"],\"last_verified\":\"2026-11-11\",\"retirement_reason\":\"The archived Harvard adaptation is linked; the local chapter uses the complete first-party Google Cloud Figure 5 already verified in the asset registry.\",\"replacement\":\"00 Учебник/Assets/Figures/curated/mlops-review-2026-10/google-cicd-stages.svg\"}\n  - {\"id\":\"harvard-course-credited-archive-9cf91386aff2\",\"asset\":\"Assets/Sources/Harvard ML Systems/vol1/ml_systems/cloud_ml_tpu.jpeg\",\"title\":\"Google DeepMind data center photo\",\"author\":\"Harvard ML Systems contributors; source credit: Google DeepMind data center photo\",\"source_url\":\"https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/ml_systems/images/jpg/cloud_ml_tpu.jpeg\",\"source_image_url\":\"https://raw.githubusercontent.com/harvard-edge/cs249r_book/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/ml_systems/images/jpg/cloud_ml_tpu.jpeg\",\"source_render_commit\":\"c1c8e803d61c7c4f96bd1424ec5a0501f20f7730\",\"git_blob_sha1\":\"aa362487eeea934f84603b3e07cfe8709e3cbc3e\",\"bytes\":296485,\"sha256\":\"9cf91386aff2b2e691f53f952dab04ad9208ee84c47a8f1e1b99417d2dfd121b\",\"source_asset_sha256\":\"9cf91386aff2b2e691f53f952dab04ad9208ee84c47a8f1e1b99417d2dfd121b\",\"source_asset\":\"Assets/Sources/Harvard ML Systems/vol1/ml_systems/cloud_ml_tpu.jpeg\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"metadata_status\":\"verified\",\"publication_status\":\"retired\",\"provenance_confirmation\":\"source-bytes-verified\",\"derivation\":\"source-image-copy\",\"modifications\":\"Local archival bytes unchanged; no longer embedded or served by the derived site.\",\"used_in\":[],\"former_used_in\":[\"05 Источники/Courses/Harvard ML Systems/vol1/ml_systems.md\"],\"last_verified\":\"2026-11-11\",\"retirement_reason\":\"The Harvard caption credits Google DeepMind; no redistribution grant was verified for this photo.\"}\n  - {\"id\":\"harvard-course-credited-archive-2954edd50daa\",\"asset\":\"Assets/Sources/Harvard ML Systems/vol1/model_compression/69ef310a48248ea96fb6b3f52a567bc01eacaad3.svg\",\"title\":\"NVIDIA cuSPARSE block-sparse figure adaptation\",\"author\":\"Harvard ML Systems contributors; source credit: NVIDIA cuSPARSE block-sparse figure adaptation\",\"source_url\":\"https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/model_compression/model_compression_files/mediabag/69ef310a48248ea96fb6b3f52a567bc01eacaad3.svg\",\"source_image_url\":\"https://raw.githubusercontent.com/harvard-edge/cs249r_book/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/model_compression/model_compression_files/mediabag/69ef310a48248ea96fb6b3f52a567bc01eacaad3.svg\",\"source_render_commit\":\"c1c8e803d61c7c4f96bd1424ec5a0501f20f7730\",\"git_blob_sha1\":\"42642234eea8c54e769688e4619b78025c3cea2d\",\"bytes\":187917,\"sha256\":\"2954edd50daac0862c4a6a1ab72e6279d01be3b62376b5f0d5d62bb7bffb3750\",\"source_asset_sha256\":\"2954edd50daac0862c4a6a1ab72e6279d01be3b62376b5f0d5d62bb7bffb3750\",\"source_asset\":\"Assets/Sources/Harvard ML Systems/vol1/model_compression/69ef310a48248ea96fb6b3f52a567bc01eacaad3.svg\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"metadata_status\":\"verified\",\"publication_status\":\"retired\",\"provenance_confirmation\":\"source-bytes-verified\",\"derivation\":\"source-image-copy\",\"modifications\":\"Local archival bytes unchanged; no longer embedded or served by the derived site.\",\"used_in\":[],\"former_used_in\":[\"05 Источники/Courses/Harvard ML Systems/vol1/model_compression.md\"],\"last_verified\":\"2026-11-11\",\"retirement_reason\":\"The Harvard caption credits an adaptation of NVIDIA material; no redistribution grant was verified for the adaptation.\"}\n  - {\"id\":\"harvard-course-credited-archive-10edb709f68c\",\"asset\":\"Assets/Sources/Harvard ML Systems/vol1/nn_architectures/34f1ff4eb2e4f04cbfc72069d106a4d9bd7e066d.svg\",\"title\":\"Reagen et al. MLP architecture adaptation\",\"author\":\"Harvard ML Systems contributors; source credit: Reagen et al. MLP architecture adaptation\",\"source_url\":\"https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/nn_architectures/nn_architectures_files/mediabag/34f1ff4eb2e4f04cbfc72069d106a4d9bd7e066d.svg\",\"source_image_url\":\"https://raw.githubusercontent.com/harvard-edge/cs249r_book/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/nn_architectures/nn_architectures_files/mediabag/34f1ff4eb2e4f04cbfc72069d106a4d9bd7e066d.svg\",\"source_render_commit\":\"c1c8e803d61c7c4f96bd1424ec5a0501f20f7730\",\"git_blob_sha1\":\"d3cb393b5af6799ac0920c75cbe6126b91f0c7c6\",\"bytes\":98610,\"sha256\":\"10edb709f68c291ed0136d349bc4467d7ebfb2e831ac7aad26996fe4daefb36e\",\"source_asset_sha256\":\"10edb709f68c291ed0136d349bc4467d7ebfb2e831ac7aad26996fe4daefb36e\",\"source_asset\":\"Assets/Sources/Harvard ML Systems/vol1/nn_architectures/34f1ff4eb2e4f04cbfc72069d106a4d9bd7e066d.svg\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"metadata_status\":\"verified\",\"publication_status\":\"retired\",\"provenance_confirmation\":\"source-bytes-verified\",\"derivation\":\"source-image-copy\",\"modifications\":\"Local archival bytes unchanged; no longer embedded or served by the derived site.\",\"used_in\":[],\"former_used_in\":[\"05 Источники/Courses/Harvard ML Systems/vol1/nn_architectures.md\"],\"last_verified\":\"2026-11-11\",\"retirement_reason\":\"The Harvard caption credits Reagen et al. (2017); no redistribution grant was verified for that adaptation.\",\"replacement\":\"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-mlp-layered.jpeg\"}\n  - {\"id\":\"harvard-course-credited-archive-542a65c3d093\",\"asset\":\"Assets/Sources/Harvard ML Systems/vol2/robust_ai/2106df9e0de5e907ea8ab741d33097ba20258cdf.svg\",\"title\":\"Towards Data Science autoencoder figure adaptation\",\"author\":\"Harvard ML Systems contributors; source credit: Towards Data Science autoencoder figure adaptation\",\"source_url\":\"https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol2/robust_ai/robust_ai_files/mediabag/2106df9e0de5e907ea8ab741d33097ba20258cdf.svg\",\"source_image_url\":\"https://raw.githubusercontent.com/harvard-edge/cs249r_book/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol2/robust_ai/robust_ai_files/mediabag/2106df9e0de5e907ea8ab741d33097ba20258cdf.svg\",\"source_render_commit\":\"c1c8e803d61c7c4f96bd1424ec5a0501f20f7730\",\"git_blob_sha1\":\"17ce56d36eed0dbaa0033695dfe09d62e23e6aa4\",\"bytes\":42536,\"sha256\":\"542a65c3d093886f162fb39e39e6d66c236876c4053b86d21519181f24e9e8b9\",\"source_asset_sha256\":\"542a65c3d093886f162fb39e39e6d66c236876c4053b86d21519181f24e9e8b9\",\"source_asset\":\"Assets/Sources/Harvard ML Systems/vol2/robust_ai/2106df9e0de5e907ea8ab741d33097ba20258cdf.svg\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"metadata_status\":\"verified\",\"publication_status\":\"retired\",\"provenance_confirmation\":\"source-bytes-verified\",\"derivation\":\"source-image-copy\",\"modifications\":\"Local archival bytes unchanged; no longer embedded or served by the derived site.\",\"used_in\":[],\"former_used_in\":[\"05 Источники/Courses/Harvard ML Systems/vol2/robust_ai.md\"],\"last_verified\":\"2026-11-11\",\"retirement_reason\":\"The Harvard caption names Towards Data Science but does not identify a reusable edition of the original figure.\",\"replacement\":\"00 Учебник/Assets/Figures/curated/autoencoder-dropout-primary-2026-11-10/chervinskii-autoencoder.png\"}\n  - {\"id\":\"curated-prokudin-gorskii-rgb-927a674c0a18\",\"asset\":\"00 Учебник/Assets/Figures/curated/harvard-credits-2026-11-11/prokudin-gorsky-rgb.jpg\",\"title\":\"Alleia Hamerops composite\",\"author\":\"Sergei Prokudin-Gorskii; composite by Wikimedia Commons contributor Mdd4696\",\"source_url\":\"https://commons.wikimedia.org/w/index.php?title=File:Alleia_Hamerops_composite.jpg&oldid=1130485549\",\"source_image_url\":\"https://upload.wikimedia.org/wikipedia/commons/f/f3/Alleia_Hamerops_composite.jpg\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/harvard-credits-2026-11-11/prokudin-gorsky-rgb.jpg\",\"sha256\":\"927a674c0a18d2e5701f9e80d0cd968adbd9627cb4ff84d10e19aef45171a513\",\"source_asset_sha256\":\"927a674c0a18d2e5701f9e80d0cd968adbd9627cb4ff84d10e19aef45171a513\",\"bytes\":156688,\"dimensions_px\":[1000,250],\"license\":\"Public domain (PDM 1.0)\",\"license_url\":\"https://creativecommons.org/publicdomain/mark/1.0/\",\"license_evidence\":\"05 Источники/Originals/harvard-credits-2026-11-11/rgb-license.html\",\"license_evidence_sha256\":\"d472ebe6dd28092f64fdd820e623e30db0630239700e78fb7d2d52b78bab5088\",\"rights_status\":\"source-license-verified\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"author-archive-and-commons-file-history\",\"derivation\":\"source-raster-copy\",\"modifications\":\"Complete Commons original JPEG, unchanged in Bookvar.\",\"last_verified\":\"2026-11-11\",\"used_in\":[\"05 Источники/Courses/Harvard ML Systems/vol1/frameworks.md\"]}"
+        },
+        {
+          "old": "  - {\"id\":\"curated-cs231n-mlp-00000000008a\",\"asset\":\"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-mlp-layered.jpeg\",\"author\":\"Andrej Karpathy and Stanford CS231n course staff\",\"source_url\":\"https://cs231n.github.io/neural-networks-1/#layers\",\"license\":\"MIT\",\"license_url\":\"https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/LICENSE\",\"modifications\":\"None. Complete original JPEG copied byte-for-byte; no crop, relabeling, redraw, translation or resampling.\",\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md\"],\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-mlp-layered.jpeg\",\"source_image_url\":\"https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/nn1/neural_net2.jpeg\",\"license_evidence\":\"site/public/licenses/cs231n-MIT.txt\",\"license_evidence_sha256\":\"85b365f07b4cfc5d678c548bc41965bc3bc782106b8903bd3b876d9d49a4270d\",\"public_license_copy\":\"site/public/licenses/cs231n-MIT.txt\",\"rights_status\":\"source-license-verified\",\"source_asset_sha256\":\"649d51c291077a114e32cdbd282b49841124383ff63a91d612a4d0d2310641c8\",\"sha256\":\"649d51c291077a114e32cdbd282b49841124383ff63a91d612a4d0d2310641c8\",\"source_page_snapshot\":\"05 Источники/Originals/neuron-mlp-2026-10-21/cs231n-neural-networks-1.md\",\"source_page_sha256\":\"28196e335053230ac9f1fff728c8baa089e05814982d950ffc6339462828f0f3\",\"commit\":\"8ec57ccfc32379ae4b37c45de949af359673f92f\",\"derivation\":\"source-image-copy\",\"dimensions_px\":[791,388],\"bytes\":68873,\"last_verified\":\"2026-11-03\"}",
+          "new": "  - {\"id\":\"curated-cs231n-mlp-00000000008a\",\"asset\":\"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-mlp-layered.jpeg\",\"author\":\"Andrej Karpathy and Stanford CS231n course staff\",\"source_url\":\"https://cs231n.github.io/neural-networks-1/#layers\",\"license\":\"MIT\",\"license_url\":\"https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/LICENSE\",\"modifications\":\"None. Complete original JPEG copied byte-for-byte; no crop, relabeling, redraw, translation or resampling.\",\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md\",\"05 Источники/Courses/Harvard ML Systems/vol1/nn_architectures.md\"],\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-mlp-layered.jpeg\",\"source_image_url\":\"https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/nn1/neural_net2.jpeg\",\"license_evidence\":\"site/public/licenses/cs231n-MIT.txt\",\"license_evidence_sha256\":\"85b365f07b4cfc5d678c548bc41965bc3bc782106b8903bd3b876d9d49a4270d\",\"public_license_copy\":\"site/public/licenses/cs231n-MIT.txt\",\"rights_status\":\"source-license-verified\",\"source_asset_sha256\":\"649d51c291077a114e32cdbd282b49841124383ff63a91d612a4d0d2310641c8\",\"sha256\":\"649d51c291077a114e32cdbd282b49841124383ff63a91d612a4d0d2310641c8\",\"source_page_snapshot\":\"05 Источники/Originals/neuron-mlp-2026-10-21/cs231n-neural-networks-1.md\",\"source_page_sha256\":\"28196e335053230ac9f1fff728c8baa089e05814982d950ffc6339462828f0f3\",\"commit\":\"8ec57ccfc32379ae4b37c45de949af359673f92f\",\"derivation\":\"source-image-copy\",\"dimensions_px\":[791,388],\"bytes\":68873,\"last_verified\":\"2026-11-03\"}"
+        },
+        {
+          "old": "  - {\"id\":\"curated-chervinskii-ae-36bda1536cc3\",\"asset\":\"00 Учебник/Assets/Figures/curated/autoencoder-dropout-primary-2026-11-10/chervinskii-autoencoder.png\",\"author\":\"Chervinskii\",\"title\":\"Autoencoder structure\",\"source_url\":\"https://commons.wikimedia.org/wiki/File:Autoencoder_structure.png\",\"source_image_url\":\"https://upload.wikimedia.org/wikipedia/commons/2/28/Autoencoder_structure.png\",\"license_evidence_url\":\"https://commons.wikimedia.org/w/index.php?title=File:Autoencoder_structure.png&oldid=808656750\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/autoencoder-dropout-primary-2026-11-10/chervinskii-autoencoder.png\",\"source_asset_sha256\":\"36bda1536cc36e02b56ee438834566fb659525e0752aa13377f5d4ea8f65f9af\",\"sha256\":\"36bda1536cc36e02b56ee438834566fb659525e0752aa13377f5d4ea8f65f9af\",\"source_file_sha1\":\"0926f68e96701ef3edf0e4c577bea1a36e366cbb\",\"dimensions_px\":[677,506],\"license\":\"CC BY-SA 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by-sa/4.0/\",\"derivation\":\"source-raster-copy\",\"modifications\":\"Full uploader's original, byte-for-byte; no crop or redraw.\",\"metadata_status\":\"verified\",\"rights_status\":\"source-license-verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-10\",\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md\"]}",
+          "new": "  - {\"id\":\"curated-chervinskii-ae-36bda1536cc3\",\"asset\":\"00 Учебник/Assets/Figures/curated/autoencoder-dropout-primary-2026-11-10/chervinskii-autoencoder.png\",\"author\":\"Chervinskii\",\"title\":\"Autoencoder structure\",\"source_url\":\"https://commons.wikimedia.org/wiki/File:Autoencoder_structure.png\",\"source_image_url\":\"https://upload.wikimedia.org/wikipedia/commons/2/28/Autoencoder_structure.png\",\"license_evidence_url\":\"https://commons.wikimedia.org/w/index.php?title=File:Autoencoder_structure.png&oldid=808656750\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/autoencoder-dropout-primary-2026-11-10/chervinskii-autoencoder.png\",\"source_asset_sha256\":\"36bda1536cc36e02b56ee438834566fb659525e0752aa13377f5d4ea8f65f9af\",\"sha256\":\"36bda1536cc36e02b56ee438834566fb659525e0752aa13377f5d4ea8f65f9af\",\"source_file_sha1\":\"0926f68e96701ef3edf0e4c577bea1a36e366cbb\",\"dimensions_px\":[677,506],\"license\":\"CC BY-SA 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by-sa/4.0/\",\"derivation\":\"source-raster-copy\",\"modifications\":\"Full uploader's original, byte-for-byte; no crop or redraw.\",\"metadata_status\":\"verified\",\"rights_status\":\"source-license-verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-10\",\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md\",\"05 Источники/Courses/Harvard ML Systems/vol2/robust_ai.md\"]}"
+        },
+        {
+          "old": "  - id: \"curated-mlops-google-cicd-stages-f5d9d5da64c7\"\n    asset: \"00 Учебник/Assets/Figures/curated/mlops-review-2026-10/google-cicd-stages.svg\"\n    author: \"Jarek Kazmierczak, Khalid Salama, Valentín Huerta; Google Cloud\"\n    source_url: \"https://docs.cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning\"\n    source_image_url: \"https://docs.cloud.google.com/static/architecture/images/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning-5-stages.svg\"\n    source_figure_label: \"Figure 5\"\n    source_asset: \"05 Источники/Originals/mlops-2026-10-20/google-cicd-stages.svg\"\n    source_asset_sha256: \"f5d9d5da64c7a888a8f0dcd21c70460049524bf5693315c885884bc6cf147c05\"\n    sha256: \"f5d9d5da64c7a888a8f0dcd21c70460049524bf5693315c885884bc6cf147c05\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/mlops-2026-10-20/google-mlops.html\"\n    license_evidence_sha256: \"91ed6a335db82c0e1ba8ec0122e4004fb2a902cd40fd28fb0dc87ee5992f7ef5\"\n    derivation: \"source-svg-copy\"\n    provenance_confirmation: \"official-google-source-asset\"\n    metadata_status: \"verified\"\n    modifications: \"Complete original copied byte-for-byte. No crop, redraw, translation, resizing or other visual modification.\"\n    used_in:\n      - \"00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md\"\n    last_verified: \"2026-10-20\"",
+          "new": "  - id: \"curated-mlops-google-cicd-stages-f5d9d5da64c7\"\n    asset: \"00 Учебник/Assets/Figures/curated/mlops-review-2026-10/google-cicd-stages.svg\"\n    author: \"Jarek Kazmierczak, Khalid Salama, Valentín Huerta; Google Cloud\"\n    source_url: \"https://docs.cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning\"\n    source_image_url: \"https://docs.cloud.google.com/static/architecture/images/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning-5-stages.svg\"\n    source_figure_label: \"Figure 5\"\n    source_asset: \"05 Источники/Originals/mlops-2026-10-20/google-cicd-stages.svg\"\n    source_asset_sha256: \"f5d9d5da64c7a888a8f0dcd21c70460049524bf5693315c885884bc6cf147c05\"\n    sha256: \"f5d9d5da64c7a888a8f0dcd21c70460049524bf5693315c885884bc6cf147c05\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/mlops-2026-10-20/google-mlops.html\"\n    license_evidence_sha256: \"91ed6a335db82c0e1ba8ec0122e4004fb2a902cd40fd28fb0dc87ee5992f7ef5\"\n    derivation: \"source-svg-copy\"\n    provenance_confirmation: \"official-google-source-asset\"\n    metadata_status: \"verified\"\n    modifications: \"Complete original copied byte-for-byte. No crop, redraw, translation, resizing or other visual modification.\"\n    used_in:\n      - \"00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md\"\n      - \"05 Источники/Courses/Harvard ML Systems/vol1/ml_ops.md\"\n    last_verified: \"2026-10-20\""
+        }
+      ],
+      "after_sha256": "7ff3c1713d0f7d5353697f78f6c3ccb66d4b1bab2b56d0d3e555f169078fdd08",
+      "lines": 26473
+    }
+  ]
+}

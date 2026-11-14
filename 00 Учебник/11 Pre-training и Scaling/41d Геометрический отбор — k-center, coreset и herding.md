@@ -4,8 +4,45 @@ type: textbook-chapter
 status: canonical
 source_language: en
 license: CC BY-NC-SA 4.0
-last_updated: 2026-10-28
-last_verified: 2026-10-28
+last_updated: 2026-11-04
+last_verified: 2026-11-04
+reference_terms:
+  - anchor: coverage-objective
+    label: "Расстояние до множества и радиус покрытия"
+    label_en: "Distance to a set and covering radius"
+  - anchor: farthest-first
+    label: "Farthest-first и обновление ближайших расстояний"
+    label_en: "Farthest-first and nearest-distance updates"
+  - anchor: coverage-trace
+    label: "Пошаговый выбор центров на шести точках"
+    label_en: "A six-point centre-selection trace"
+  - anchor: approximation-guarantee
+    label: "Доказательство 2-аппроксимации k-center"
+    label_en: "The k-center 2-approximation proof"
+  - anchor: implementation
+    label: "Stable IDs, исключение выбранных и вырожденные случаи"
+    label_en: "Stable IDs, exclusion and degenerate cases"
+  - anchor: representation-and-metric
+    label: "Нормировка признаков, метрика и cosine distance"
+    label_en: "Feature normalization, metrics and cosine distance"
+  - anchor: outliers-and-labels
+    label: "Robust k-center и ограничения loss bound"
+    label_en: "Robust k-center and loss-bound assumptions"
+  - anchor: coreset-versus-centres
+    label: "Взвешенный coreset и семейство запросов"
+    label_en: "Weighted coresets and query families"
+  - anchor: grid-compression
+    label: "Сеточное сжатие и аддитивная ошибка покрытия"
+    label_en: "Grid compression and additive coverage error"
+  - anchor: herding
+    label: "Herding, динамические веса и сходимость среднего"
+    label_en: "Herding, dynamic weights and mean convergence"
+  - anchor: mean-error
+    label: "Herding и минимизация следующей ошибки среднего"
+    label_en: "Herding versus the next mean-error minimum"
+  - anchor: geometric-selection-ledger
+    label: "Версия признаков, геометрическая ошибка и task metric"
+    label_en: "Feature versions, geometric errors and task metrics"
 primary_sources:
   - https://jeffe.cs.illinois.edu/teaching/algorithms/notes/J-approx.pdf
   - https://arxiv.org/abs/1708.00489v4
@@ -116,15 +153,21 @@ The new centre can improve an example's nearest distance or leave it
 unchanged. It cannot make that distance larger. The next query is an
 unselected example with the largest current $a_i$.
 
-For the six-point example, all distances are absolute differences:
+For the six-point example, all distances are absolute differences.
+Each column below gives the distances to the selected set named in its header;
+the last row is the largest distance in that column.
 
 <a id="coverage-trace"></a>
 
-| Selected coordinates | $a(0)$ | $a(1)$ | $a(4)$ | $a(5)$ | $a(9)$ | $a(10)$ | Radius |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| $\{0\}$ | 0 | 1 | 4 | 5 | 9 | 10 | 10 |
-| $\{0,10\}$ | 0 | 1 | 4 | 5 | 1 | 0 | 5 |
-| $\{0,10,5\}$ | 0 | 1 | 1 | 0 | 1 | 0 | 1 |
+| Point | $\{0\}$ | $\{0,10\}$ | $\{0,10,5\}$ |
+| --- | ---: | ---: | ---: |
+| 0 | 0 | 0 | 0 |
+| 1 | 1 | 1 | 1 |
+| 4 | 4 | 4 | 1 |
+| 5 | 5 | 5 | 0 |
+| 9 | 9 | 1 | 1 |
+| 10 | 10 | 0 | 0 |
+| Radius | 10 | 5 | 1 |
 
 Initially $10$ is the farthest point. After adding it, $9$ is only one unit
 from a centre, while $5$ is still five units from either centre. Thus the
@@ -294,7 +337,7 @@ optimized. Representations should be fixed during one traversal; after
 retraining the encoder, previously cached distances may no longer describe
 the new feature space.
 
-![[Assets/Sources/Scikit-learn MOOC/figures/clustering_quiz_kmeans_not_scaled.svg|K-means on original features]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/selection-metric-2026-11-04/mooc-kmeans-not-scaled.svg|K-means on original features]]
 
 *scikit-learn MOOC authors,
 [Quiz M4.01](https://inria.github.io/scikit-learn-mooc/clustering/clustering_quiz_m4_01.html),
@@ -302,7 +345,7 @@ CC BY 4.0. Original synthetic k-means example with three clusters and no
 feature scaling. Horizontal variation dominates the assignments. The original
 figure has no numerical axis labels; it is not a k-center experiment.*
 
-![[Assets/Sources/Scikit-learn MOOC/figures/clustering_quiz_kmeans_scaled.svg|K-means on scaled features]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/selection-metric-2026-11-04/mooc-kmeans-scaled.svg|K-means on scaled features]]
 
 *scikit-learn MOOC authors,
 [Quiz M4.01](https://inria.github.io/scikit-learn-mooc/clustering/clustering_quiz_m4_01.html),
@@ -430,6 +473,8 @@ defines weighted geometric clustering costs and their query-specific
 approximation. In active-learning literature, “core-set selection” also
 names a subset-selection approach motivated by a loss bound; the name
 alone does not establish the uniform inequality above.
+
+<a id="grid-compression"></a>
 
 For k-center in the Euclidean plane, Erickson's §J.11 gives a geometric
 compression construction. First compute a greedy radius $R$, so
@@ -617,6 +662,8 @@ choosing $0$ would have immediate error $1/4$. Herding compensates through
 subsequent weight updates, rather than minimizing every intermediate mean
 error. The prefix error rises from $0$ after four states to $3/20$ after
 five, before returning to $0$ after eight.
+
+<a id="geometric-selection-ledger"></a>
 
 For a dataset-selection experiment, retain the feature extractor version,
 normalization, metric, seed IDs, requested budget, tie rule, selected IDs

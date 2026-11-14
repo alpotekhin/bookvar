@@ -2,8 +2,8 @@
 title: Mixture of Experts — маршрутизация, ёмкость и выполнение
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-23
-last_verified: 2026-10-23
+last_updated: 2026-11-03
+last_verified: 2026-11-03
 previous: "[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание|Длинный контекст — расширение, разреженность и оценивание]]"
 next: "[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры]]"
 source_unit_id:
@@ -17,6 +17,70 @@ source_unit_id:
   - lecture-04-moe-upcycling
   - lecture-04-deepseek-moe
   - lecture-04-recap
+reference_terms:
+  - label: "Общее и активное число параметров"
+    label_en: "Total and active parameters"
+    anchor: "moe-capacity-evidence"
+  - label: "Router и взвешенный top-k"
+    label_en: "Router and weighted top-k"
+    anchor: "moe-routing-mechanisms"
+  - label: "Token-choice и expert-choice"
+    label_en: "Token-choice and expert-choice"
+    anchor: "moe-expert-choice"
+  - label: "Градиенты дискретного выбора"
+    label_en: "Gradients through discrete selection"
+    anchor: "moe-task-gradients"
+  - label: "Группировка и обратная сборка токенов"
+    label_en: "Token grouping and weighted combine"
+    anchor: "moe-dispatch-combine"
+  - label: "Мелкозернистые и общие эксперты"
+    label_en: "Fine-grained and shared experts"
+    anchor: "moe-routing-evidence"
+  - label: "Балансировка экспертов и устройств"
+    label_en: "Expert and device load balance"
+    anchor: "moe-load-balancing"
+  - label: "Вспомогательная потеря Switch"
+    label_en: "Switch auxiliary balance loss"
+    anchor: "moe-balance-loss"
+  - label: "Балансировка смещениями DeepSeek-V3"
+    label_en: "DeepSeek-V3 bias-based balancing"
+    anchor: "moe-bias-routing"
+  - label: "Capacity и отбрасывание назначений"
+    label_en: "Capacity and dropped assignments"
+    anchor: "moe-systems-capacity"
+  - label: "Expert parallelism: dispatch и combine"
+    label_en: "Expert parallelism: dispatch and combine"
+    anchor: "moe-ep-exchange"
+  - label: "LatentMoE и размер сообщений"
+    label_en: "LatentMoE and message size"
+    anchor: "moe-latent"
+  - label: "Обучение дискретной маршрутизации"
+    label_en: "Training discrete routing"
+    anchor: "moe-training-failures"
+  - label: "Router z-loss и устойчивость"
+    label_en: "Router z-loss and numerical stability"
+    anchor: "moe-stability-finetuning"
+  - label: "Дообучение и выбор параметров"
+    label_en: "Fine-tuning and parameter subsets"
+    anchor: "moe-finetuning"
+  - label: "Upcycling плотного чекпойнта"
+    label_en: "Upcycling a dense checkpoint"
+    anchor: "moe-upcycling"
+  - label: "DeepSeekMoE, V2 и V3"
+    label_en: "DeepSeekMoE, V2, and V3"
+    anchor: "deepseek-moe-evolution"
+  - label: "Ограничение числа узлов"
+    label_en: "Node-limited routing"
+    anchor: "moe-node-limited"
+  - label: "Формула отчёта и выпущенный Gate"
+    label_en: "Report formula and released Gate"
+    anchor: "moe-report-code"
+  - label: "Экспертные группы при инференсе"
+    label_en: "Expert batches at inference"
+    anchor: "moe-serving"
+  - label: "Сравнение Switch, Mixtral и DeepSeek"
+    label_en: "Switch, Mixtral, and DeepSeek routing"
+    anchor: "moe-recap"
 primary_sources:
   - https://arxiv.org/abs/1701.06538
   - https://arxiv.org/abs/2101.03961
@@ -30,8 +94,7 @@ primary_sources:
 
 # Mixture of Experts — маршрутизация, ёмкость и выполнение
 
-В предыдущей главе мы разобрали FFN — полносвязную сеть, которая преобразует
-состояние каждого токена после attention. Если увеличить её промежуточный слой,
+[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating|Плотная FFN]] преобразует состояние каждого токена после attention. Если увеличить её промежуточный слой,
 модель получит больше параметров, но обработка каждого токена станет дороже.
 Mixture of Experts (MoE, смесь экспертов) предлагает другой способ увеличения
 модели: вместо одной FFN хранить несколько и выбирать, какие из них выполнить.
@@ -51,7 +114,7 @@ Mixture of Experts (MoE, смесь экспертов) предлагает д�
 устроен этот слой, откуда маршрутизатор получает обучающий сигнал и что
 происходит при распределённом выполнении.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/modern-37-40-moe/mixtral-smoe-layer.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/modern-37-40-moe/mixtral-smoe-layer.png|Mixtral sparse MoE layer: router, eight experts and weighted top-2 outputs]]
 
 *Схема разреженного MoE-слоя Mixtral: маршрутизатор выбирает два из восьми
 экспертов и складывает их выходы с выбранными весами.
@@ -73,7 +136,7 @@ Albert Q. Jiang et al.,
 контролируемого семейства экспериментов: сравнивать MoE с плотной моделью нужно
 при одинаковом числе активных FLOP, токенов и качестве оптимизации.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/switch-scaling.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/switch-scaling.png|Switch Figure 1: test loss versus expert count and training efficiency versus T5]]
 
 *William Fedus, Barret Zoph, Noam Shazeer,
 [Switch Transformers, Figure 1](https://jmlr.org/papers/volume23/21-0998/21-0998.pdf#page=2),
@@ -173,6 +236,7 @@ $0.50(2,0)+0.30(0,4)=(1,1.2)$. Значит, описания «в слое top-
 учитывается также смещение балансировки, которое разберём ниже. Таким образом,
 выбор индексов и вычисление коэффициентов — два отдельных шага маршрутизации.
 
+<a id="moe-expert-choice"></a>
 ### Кто выбирает: токен или эксперт
 
 До сих пор каждый токен выбирал экспертов независимо — это **token-choice**.
@@ -201,7 +265,7 @@ BASE Layers решает задачу назначения сразу для в�
 создавать неравномерную нагрузку. Это полезная простая альтернатива, но она
 не эквивалентна обученному маршрутизатору.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-routing-families.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-routing-families.png|Token choice, expert choice and globally balanced assignment]]
 
 *Три семейства назначения: токен выбирает эксперта, эксперт выбирает токены или
 назначение оптимизируется глобально. Изображение из Stanford CS336,
@@ -210,6 +274,7 @@ BASE Layers решает задачу назначения сразу для в�
 [Expert Choice](https://arxiv.org/abs/2202.09368) и
 [BASE Layers](https://arxiv.org/abs/2103.16716).*
 
+<a id="moe-task-gradients"></a>
 ### Почему top-1 нельзя бездумно перенормировать
 
 Top-$k$ меняет набор индексов скачком. Между такими переключениями набор
@@ -258,6 +323,7 @@ $\alpha_j(v_j-\sum_{i\in S}\alpha_i v_i)$, а для невыбранного �
 Это производная внутри области, где top-2 не меняется; на границе выбора
 обычной производной может не существовать.
 
+<a id="moe-dispatch-combine"></a>
 ### От назначений к выходу всего слоя
 
 Для пакета токенов удобно сначала собрать строки по экспертам, выполнить
@@ -352,7 +418,7 @@ $2\cdot3dm=4\cdot3d(m/2)$. При этом возможных наборов э�
 дублировать в маршрутизируемых FFN. Это не гарантированное разделение знаний:
 роль общей ветви и пользу её добавления нужно проверять экспериментально.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/deepseekmoe-fine-grained-shared.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/deepseekmoe-fine-grained-shared.png|DeepSeekMoE fine-grained routed experts and always-active shared experts]]
 
 *Переход от обычного top-2 к мелким маршрутизируемым и общим экспертам. Фрагмент
 из Stanford CS336, [Lecture 4, p. 32](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=32); оригинальная
@@ -368,14 +434,14 @@ Figure 2: [DeepSeekMoE](https://arxiv.org/abs/2401.06066).*
 изменяются разные величины: наличие общей ветви при фиксированном числе
 экспертов и размер эксперта при фиксированном параметрическом бюджете.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/deepseekmoe-routing-ablation.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/deepseekmoe-routing-ablation.png|DeepSeekMoE ablations of fine-grained and shared expert designs]]
 
 *Абляции DeepSeekMoE: мелкозернистое разбиение и общий эксперт в данном
 эксперименте улучшали нормированное качество. Stanford CS336,
 [Lecture 4, p. 33](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=33);
 [DeepSeekMoE, Figure 3](https://arxiv.org/abs/2401.06066).*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-shared.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-shared.png|OLMoE shared-expert ablation: training loss, C4 loss, HellaSwag and MMLU]]
 
 *Niklas Muennighoff et al., OLMoE, Figure 6.
 [Исходный PDF авторов](https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/visuals/figures/shared.pdf),
@@ -384,7 +450,7 @@ Figure 2: [DeepSeekMoE](https://arxiv.org/abs/2401.06066).*
 и MMLU Var. Общая ветвь в этом опыте не улучшила результаты.
 Рисунок целиком, без обрезки и перерисовки.*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-granularity.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-granularity.png|OLMoE expert-granularity ablation at fixed total and active parameter budgets]]
 
 *OLMoE, Figure 5,
 [исходный PDF](https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/visuals/figures/granularity.pdf),
@@ -411,6 +477,7 @@ Apache-2.0. В отличие от предыдущей абляции, здес
 Кроме числа строк, на время выполнения влияют размеры матриц, скорость GPU
 и то, какие данные пришлось получить по сети.
 
+<a id="moe-balance-loss"></a>
 ### Балансирующая потеря Switch
 
 Для top-1 и группы из $T$ токенов Switch Transformer определяет
@@ -460,6 +527,7 @@ $P=(0.744,0.256)$ и $\mathcal L_{\text{balance}}/\alpha=0.99024$.
 Второй эксперт получает чуть больше назначений, но заметно меньшую среднюю
 вероятность: скалярное произведение учитывает обе величины.
 
+<a id="moe-bias-routing"></a>
 ### Балансировка устройств и смещения выбора
 
 В статье DeepSeekMoE предложена также потеря на уровне устройств: назначения
@@ -511,7 +579,7 @@ $$
 значение валидационной потери. Величина изменения зависит от архитектуры,
 данных и масштаба.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-lbl.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-lbl.png|OLMoE balance-loss ablation: main losses and auxiliary load-balancing loss]]
 
 *OLMoE, Figure 9,
 [исходный PDF](https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/visuals/figures/lbl.pdf),
@@ -519,7 +587,7 @@ Apache-2.0. Балансировка улучшает основную обуч�
 в этой абляции. Из Training loss исключён сам вспомогательный штраф;
 отдельная панель показывает его значение. Все четыре панели сохранены.*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-lbltoks.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-lbltoks.png|OLMoE expert token fractions over training, with and without balancing]]
 
 *OLMoE, Figure 10,
 [исходный PDF](https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/visuals/figures/lbltoks.pdf),
@@ -595,7 +663,7 @@ print(y_limited[3])  # [0., 0.]
 $(-1,1)$. Здесь оставшиеся веса не перенормируются; такая перенормировка
 была бы отдельным изменением алгоритма.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/switch-capacity.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/switch-capacity.png|Switch Figure 3: token assignments, buffer capacity and dropped branches]]
 
 *Fedus, Zoph, Shazeer,
 [Switch Transformers, Figure 3](https://jmlr.org/papers/volume23/21-0998/21-0998.pdf#page=5),
@@ -604,7 +672,7 @@ CC BY 4.0. При top-1 запас capacity factor 1.5 оставляет бол
 Красная пунктирная линия обозначает переполнение. Сохранены вся схема
 и английская подпись; числовой top-2 пример выше — отдельный случай.*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-capacity-token-dropping.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-capacity-token-dropping.png|Token permutation into expert buffers, overflow and inverse permutation]]
 
 *Маршрутизация, перестановка по экспертам, отбрасывание сверх ёмкости и обратная
 перестановка. Фрагмент из Stanford CS336,
@@ -621,7 +689,7 @@ Dropless MoE не отбрасывает назначения, однако не
 отсутствия любого padding: меняется его причина и объём
 ([MegaBlocks, §5.2](https://arxiv.org/html/2211.15841v1#S5.SS2)).
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-37-40-audit/megablocks-expert-matmuls.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-37-40-audit/megablocks-expert-matmuls.png|MegaBlocks batched, block-diagonal and block-sparse expert matrix multiplications]]
 
 *Обычный пакетный GEMM, блочно-диагональная запись и блочно-разреженное
 умножение. Trevor Gale et al.,
@@ -630,6 +698,7 @@ Dropless MoE не отбрасывает назначения, однако не
 [исходный файл](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/moe/11_expert_matmuls.png).*
 
 <a id="параллелизм-экспертов-почему-нужны-два-all-to-all"></a>
+<a id="moe-ep-exchange"></a>
 ## Параллелизм экспертов: dispatch и combine
 
 При **expert parallelism (EP)** разные эксперты размещены на разных процессах,
@@ -678,7 +747,7 @@ all-to-all. Если все эксперты на одной GPU, межпроц
 диспетчеров разобраны в
 [Megatron-Core 0.15](https://docs.nvidia.com/megatron-core/developer-guide/0.15.0/api-guide/moe.html).
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/switch-parallelism.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/switch-parallelism.png|Switch Figure 9: five weight and computation layouts across sixteen cores]]
 
 *Fedus, Zoph, Shazeer,
 [Switch Transformers, Figure 9](https://jmlr.org/papers/volume23/21-0998/21-0998.pdf#page=20),
@@ -687,6 +756,7 @@ CC BY 4.0. Верхняя строка показывает размещение
 и полная исходная подпись сохранены. Это схема размещения тензоров
 в постановке Switch, а не последовательность сетевых вызовов любого MoE-движка.*
 
+<a id="moe-latent"></a>
 ### LatentMoE: обмен в меньшей размерности
 
 LatentMoE добавляет проекцию $d\to\ell$ перед отправкой токенов и проекцию
@@ -694,13 +764,13 @@ $\ell\to d$ после суммирования ответов эксперто�
 входами размерности $\ell$, сохраняя промежуточную ширину $m$. Маршрутизатор
 и общие эксперты по-прежнему получают исходный вектор размерности $d$.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-review-2026-09/standard-moe.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-review-2026-09/standard-moe.png|Standard MoE sends full hidden vectors to distributed experts]]
 
 *Обычный MoE: через границу устройств проходят векторы размерности $d$.
 Elango et al., [LatentMoE, Figure 1(a)](https://arxiv.org/html/2601.18089v1#S1.F1),
 CC BY 4.0. Оригинал без обрезки и перерисовки.*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-review-2026-09/latent-moe.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-review-2026-09/latent-moe.png|LatentMoE projects routed vectors to a smaller dimension before communication]]
 
 *LatentMoE: маршрутизируемая ветвь выполняется в размерности $\ell$, а общий
 эксперт остаётся в размерности $d$. Figure 1(b) той же статьи,
@@ -837,13 +907,14 @@ print(balance, z_loss)  # 0.011, 0.1
 В абляции OLMoE удаление z-loss сопровождается выбросами основной
 обучающей потери; сравниваются также валидационная потеря и две конечные задачи.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-zloss.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-zloss.png|OLMoE z-loss ablation: training instability, C4 loss and downstream results]]
 
 *OLMoE, Figure 11,
 [исходный PDF](https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/visuals/figures/zloss.pdf),
 Apache-2.0. Добавление z-loss с коэффициентом 0.001 уменьшает выбросы
 обучающей потери в данном опыте. Четыре исходные панели, оси и легенды сохранены.*
 
+<a id="moe-finetuning"></a>
 ### Что меняется при дообучении
 
 Небольшой набор дообучения распределяется между экспертами неравномерно.
@@ -866,7 +937,7 @@ DeepSeek-V3, например, проходит SFT на 1,5 млн инстру
 отличаются данные, модель и режим обновления. Решение о замораживании модулей
 нужно проверять на своей задаче по обучающей и валидационной потерям.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-finetuning-parameter-ablation.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/moe-finetuning-parameter-ablation.png|ST-MoE SuperGLUE results for different subsets of fine-tuned parameters]]
 
 *SuperGLUE при разных наборах обновляемых параметров ST-MoE. Фрагмент из Stanford
 CS336, [Lecture 4, p. 50](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=50); оригинал: Zoph et al.,
@@ -903,7 +974,7 @@ $\sum_{i\in S}\alpha_i=1$ и выполнении всех выбранных в
 копирования необходим этап обучения, на котором маршруты и эксперты
 приспосабливаются друг к другу.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/sparse-upcycling-procedure.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/sparse-upcycling-procedure.png|Sparse upcycling copies a dense FFN into experts and continues training]]
 
 *Копирование блоков плотного чекпойнта в экспертов и последующее
 обучение. Фрагмент из Stanford CS336,
@@ -920,7 +991,7 @@ MiniCPM-MoE был получен из чекпойнта стабильной �
 отделяет вклад MoE от дополнительного продолжения обучения — корректное чтение
 результата требует помнить об этом втором изменении.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/minicpm-moe-upcycling-results.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/minicpm-moe-upcycling-results.png|MiniCPM-MoE results compared with dense checkpoints after continued training]]
 
 *Результаты MiniCPM-MoE и плотных базовых моделей. Фрагмент из Stanford CS336,
 [Lecture 4, p. 52](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_04.pdf#page=52); оригинал: [MiniCPM](https://arxiv.org/abs/2404.06395),
@@ -962,6 +1033,7 @@ MoE-слое есть 256 маршрутизируемых экспертов, �
 балансирующую потерю
 ([технический отчёт, §2.1.2 и §4.2](https://arxiv.org/html/2412.19437v2#S4.SS2)).
 
+<a id="moe-node-limited"></a>
 ### Ограничение числа узлов в DeepSeek-V3
 
 Распределённый маршрутизатор V3 ограничивает число узлов, которым разрешено
@@ -978,15 +1050,19 @@ $(0.95,0.10,0.09,0.08)$. Суммы лучших пар — 1.55 и 1.05. Выб
 0.95 недоступен. Выбор узла по максимуму вместо суммы дал бы другой маршрут.
 
 ~~~python
-def node_limited_route(scores, k, groups, allowed_groups, bias=None):
+def node_limited_route(scores, k, groups, allowed_groups, bias=None,
+                       *, group_topk=None):
     tokens, experts = scores.shape
-    assert experts % groups == 0 and k % allowed_groups == 0
+    assert 1 <= allowed_groups <= groups and experts % groups == 0
     per_node = experts // groups
-    q = k // allowed_groups
-    assert 1 <= q <= per_node and 1 <= allowed_groups <= groups
+    if group_topk is None:  # report rule, for an integral k / M
+        assert k % allowed_groups == 0
+        group_topk = k // allowed_groups
+    assert 1 <= group_topk <= per_node
+    assert 1 <= k <= allowed_groups * per_node
     ranking = scores if bias is None else scores + bias
     grouped = ranking.reshape(tokens, groups, per_node)
-    node_scores = np.sort(grouped, axis=-1)[:, :, -q:].sum(axis=-1)
+    node_scores = np.sort(grouped, axis=-1)[:, :, -group_topk:].sum(axis=-1)
     nodes = np.argsort(-node_scores, axis=-1, kind="stable")[:, :allowed_groups]
     allowed = np.zeros((tokens, groups), dtype=bool)
     np.put_along_axis(allowed, nodes, True, axis=-1)
@@ -997,16 +1073,51 @@ node_s = np.array([[.80, .75, .70, .65, .95, .10, .09, .08]])
 node_ids, node_weights = node_limited_route(node_s, 2, 2, 1)
 print(node_ids + 1)  # [[1, 2]]
 print(node_weights)  # [[0.51612903, 0.48387097]]
+
+# Same scores, different group-scoring rules.
+three_nodes = np.array([[.90, .02, .60, .59, .58, .57]])
+report_ids, _ = node_limited_route(three_nodes, 2, 3, 2)
+released_ids, released_weights = node_limited_route(
+    three_nodes, 2, 3, 2, bias=np.zeros(6), group_topk=2
+)
+print(report_ids + 1)     # [[1, 3]]
+print(released_ids + 1)   # [[3, 4]]
+print(released_weights)   # [[0.50420168, 0.49579832]]
 ~~~
 
 Здесь `scores` — уже полученные sigmoid-оценки. Если заданы смещения,
 они участвуют в выборе узлов и экспертов, но веса снова берутся из исходных
-`scores`. Пример реализует этот порядок для случая, где $k$ делится на число
-допустимых узлов; он не моделирует сеть. В исходном
-[`Gate.forward`](https://github.com/deepseek-ai/DeepSeek-V3/blob/9b4e9788e4a3a731f7567338ed15d3ec549ce03b/inference/model.py#L566)
-есть также отдельный множитель `route_scale`, применяемый после нормировки
-весов. При воспроизведении чекпойнта его значение тоже нужно брать из
-конфигурации. Простая формула с суммой весов 1 этот множитель не учитывает.
+`scores`. Пример не моделирует сеть и не загружает чекпойнт.
+
+<a id="moe-report-code"></a>
+### Report formula and released Gate
+
+The [report's node-limited routing paragraph](https://arxiv.org/html/2412.19437v2#S2.SS1.SSS2)
+scores each node using its best $k/M$ expert scores. The helper uses that rule
+by default and requires an integral ratio. For V3's $k=8$ and $M=4$, it sums
+two scores.
+
+The pinned [`Gate.forward` implementation](https://github.com/deepseek-ai/DeepSeek-V3/blob/9b4e9788e4a3a731f7567338ed15d3ec549ce03b/inference/model.py#L566)
+hard-codes a two-score sum when its bias tensor exists; the branch without
+that tensor uses a maximum. Thus `group_topk=2` reproduces the biased branch's
+group selection even when $k/M$ differs from two. Zero-valued biases still
+count as a present tensor in that implementation.
+
+The second input above separates these rules:
+
+| Node | Expert scores | Best one, $k/M=1$ | Best two |
+| --- | --- | ---: | ---: |
+| A | 0.90, 0.02 | 0.90 | 0.92 |
+| B | 0.60, 0.59 | 0.60 | 1.19 |
+| C | 0.58, 0.57 | 0.58 | 1.15 |
+
+The report rule admits A and B, then selects experts 1 and 3. The released
+biased branch admits B and C, then selects experts 3 and 4. Both selected
+experts belong to B: $k/M$ scores nodes; it does not impose a per-node quota.
+
+After gathering the original sigmoid scores, `Gate` normalizes them and
+multiplies by `route_scale`. The helper omits that last factor and uses stable
+sorting for ties; neither tie order nor full checkpoint execution is reproduced.
 
 MLA в DeepSeek-V2/V3 отвечает за размер KV-кэша и рассматривается в главе
 [[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache|MLA и сжатие KV-cache]].
@@ -1014,6 +1125,7 @@ Multi-token prediction задаёт дополнительные предска�
 и не меняет описанное правило экспертной маршрутизации.
 
 <a id="serving-flops-экономятся-latency-не-автоматически"></a>
+<a id="moe-serving"></a>
 ## Инференс: почему меньше операций не всегда означает меньшую задержку
 
 Пусть за шаг EP-группа обрабатывает $M$ токенов, у неё $N$ экспертов и top-$k$.
@@ -1104,9 +1216,7 @@ GPU. Вывод зависит от качества сравниваемых м
   [LatentMoE](https://arxiv.org/abs/2601.18089) — выполнение неодинаковых групп
   без отбрасывания и обмен в меньшей размерности.
 
-Краткое описание механизма находится в
-[[02 Areas/ML & DL/01 Справочник/FFN и MoE/Mixture of Experts|справочнике MoE]],
-а различия конкретных моделей — на страницах семейств
+Различия конкретных моделей — на страницах семейств
 [[02 Areas/ML & DL/02 Атлас моделей/Семейства/DeepSeek|DeepSeek]] и
 [[02 Areas/ML & DL/02 Атлас моделей/Семейства/Mistral и Mixtral|Mistral и Mixtral]].
 

@@ -2,8 +2,72 @@
 title: Gradient checkpointing и offload
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-23
-last_verified: 2026-10-23
+last_updated: 2026-11-05
+last_verified: 2026-11-05
+reference_terms:
+  - anchor: checkpoint-memory-states
+    label: "Параметры, градиенты, активации и временные буферы"
+    label_en: "Parameters, gradients, activations and temporary buffers"
+  - anchor: checkpoint-saved-inputs
+    label: "Зачем autograd сохраняет входы операций"
+    label_en: "Why autograd saves operation inputs"
+  - anchor: checkpoint-storage-hooks
+    label: "Saved-tensor hooks и учёт общей памяти"
+    label_en: "Saved-tensor hooks and shared-storage accounting"
+  - anchor: checkpoint-storage-views
+    label: "Маленький view и большое хранилище"
+    label_en: "A small view retaining large storage"
+  - anchor: checkpoint-recomputation
+    label: "Восстановление активаций из входа сегмента"
+    label_en: "Reconstructing activations from segment inputs"
+  - anchor: checkpoint-segment-size
+    label: "Размер checkpoint-сегмента и пик активаций"
+    label_en: "Checkpoint segment size and activation peaks"
+  - anchor: checkpoint-recursive
+    label: "Вложенный пересчёт и восстановление префиксов"
+    label_en: "Nested recomputation and prefix replay"
+  - anchor: checkpoint-variants
+    label: "Non-reentrant checkpointing, early_stop и побочные эффекты"
+    label_en: "Non-reentrant checkpointing, early_stop and side effects"
+  - anchor: checkpoint-dropout-rng
+    label: "Dropout и восстановление RNG при пересчёте"
+    label_en: "Dropout and RNG preservation during recomputation"
+  - anchor: checkpoint-selective
+    label: "Selective checkpointing: сохранить дорогой GEMM"
+    label_en: "Selective checkpointing: retaining an expensive GEMM"
+  - anchor: checkpoint-memory-budget
+    label: "Выбор сохранений, min-cut и memory budget"
+    label_en: "Save-policy selection, min-cut and memory budgets"
+  - anchor: checkpoint-kernel-dependence
+    label: "Сохранения RMSNorm и FlashAttention зависят от ядра"
+    label_en: "Kernel-dependent saved tensors in RMSNorm and FlashAttention"
+  - anchor: checkpoint-memory-traffic
+    label: "Пересчёт, fusion и обращения к HBM"
+    label_en: "Recomputation, fusion and HBM traffic"
+  - anchor: checkpoint-offload-types
+    label: "Activation, parameter и optimizer offload"
+    label_en: "Activation, parameter and optimizer offload"
+  - anchor: checkpoint-save-on-cpu
+    label: "save_on_cpu и сохранённые веса"
+    label_en: "save_on_cpu and retained weights"
+  - anchor: checkpoint-sac-hooks
+    label: "Selective-кеш, saved-tensor hooks и offload"
+    label_en: "The selective cache, saved-tensor hooks and offload"
+  - anchor: checkpoint-transfer-time
+    label: "Стоимость D2H/H2D и два направления передачи"
+    label_en: "D2H/H2D costs and both transfer directions"
+  - anchor: checkpoint-prefetch
+    label: "Предзагрузка, pinned memory и двойные буферы"
+    label_en: "Prefetch, pinned memory and double buffering"
+  - anchor: worked-configuration
+    label: "Совместный бюджет пересчёта и offload"
+    label_en: "A joint recomputation/offload memory budget"
+  - anchor: checkpoint-optimizer-offload
+    label: "Перенос Adam, параметров и уровень NVMe"
+    label_en: "Adam offload, parameter offload and the NVMe tier"
+  - anchor: checkpoint-validation
+    label: "Проверка градиентов, пика памяти и полного шага"
+    label_en: "Checking gradients, memory peaks and full steps"
 source_unit_id:
   - lecture-05-activation-recomputation
   - lecture-08-activation-memory
@@ -34,6 +98,8 @@ checkpointing**, также называемый gradient checkpointing. Дру�
 вернуть их без потери точности. Ошибка в этом условии может изменить
 градиенты, даже если функция потерь выглядит совершенно нормально.
 
+<a id="checkpoint-memory-states"></a>
+
 ## Что именно занимает память
 
 Пусть модель содержит $P$ параметров. Даже до учёта активаций нельзя свести
@@ -62,6 +128,8 @@ checkpointing**, также называемый gradient checkpointing. Дру�
 `max_memory_allocated`, так и `max_memory_reserved`, а в сложном случае —
 временная диаграмма выделений.
 
+<a id="checkpoint-saved-inputs"></a>
+
 ### Почему autograd сохраняет входы операций
 
 Рассмотрим $Y=XW$ и градиент по выходу $G=\partial\mathcal L/\partial Y$.
@@ -86,7 +154,7 @@ Python-переменной не освобождает память, если a
 эта ситуация возникает при переносе замороженных весов: их приходится
 повторно загружать и для обратного, а не только для прямого прохода.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/checkpoint-2026-10-23/pytorch-eager-saved-tensors.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/checkpoint-2026-10-23/pytorch-eager-saved-tensors.png|Операции forward и backward, соединённые сохранёнными для производных тензорами]]
 
 *Слева прямой проход идёт сверху вниз, справа обратный — снизу вверх.
 Изогнутые стрелки между ними показывают значения, сохранённые до вычисления
@@ -96,6 +164,8 @@ Python-переменной не освобождает память, если a
 Источник: PyTorch contributors, [Activation Memory Basics](https://pytorch.org/blog/activation-checkpointing-techniques/#activation-memory-basics),
 оригинальный рисунок без изменений,
 [BSD-3-Clause](/licenses/pytorch-site-BSD-3.txt).*
+
+<a id="checkpoint-storage-hooks"></a>
 
 ## Как увидеть saved tensors, а не угадывать их
 
@@ -150,6 +220,8 @@ print(x.grad)
 трассировка. В длинном исполнении адрес освобождённой области может быть
 использован повторно, поэтому объединять события только по адресу,
 без учёта времени, нельзя.
+
+<a id="checkpoint-storage-views"></a>
 
 ### Почему один элемент может удерживать большой буфер
 
@@ -208,6 +280,8 @@ $$
 
 ## Полное и выборочное сохранение
 
+<a id="checkpoint-recomputation"></a>
+
 ### Сохранить вход, восстановить внутренние значения
 
 Пусть `segment(x)` выполняет несколько последовательных блоков. Обычное
@@ -221,7 +295,7 @@ Checkpointing сохраняет вход сегмента, но не держи
 что при исходном проходе: обновление весов выполняют после соответствующего
 backward.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/pytorch-checkpoint.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/pytorch-checkpoint.png|Сохранение промежуточных тензоров и восстановление checkpoint-области из входа]]
 
 *Слева несколько промежуточных тензоров сохраняются до backward. Справа
 остаётся вход checkpoint-области, а операции внутри неё повторяются.
@@ -233,6 +307,8 @@ Techniques in PyTorch](https://pytorch.org/blog/activation-checkpointing-techniq
 Очень большие сегменты не устраняют почти все активации: при восстановлении
 сегмента его внутренние значения снова занимают память. У слишком маленьких
 сегментов другая проблема — приходится хранить много входных границ.
+
+<a id="checkpoint-segment-size"></a>
 
 ### Как выбрать размер сегмента
 
@@ -314,6 +390,8 @@ for k in (1, 4, 6, 8, 12, 48):
 на треть**: время зависит от загрузки GPU, обращений к памяти, микробатча
 и фактически повторяемых операций.
 
+<a id="checkpoint-recursive"></a>
+
 ### Вложенные области пересчёта
 
 Оценка $Lb/k+ka$ относится к одному уровню сегментов. Вложенные
@@ -344,6 +422,8 @@ checkpoint-области позволяют освобождать актива
 Таким образом, минимум активаций без ограничения времени и выбор сегментов
 при одном дополнительном forward — разные задачи.
 
+<a id="checkpoint-variants"></a>
+
 ### Повторяется не обязательно весь Python-код
 
 В новых примерах PyTorch рекомендуется явно задавать `use_reentrant=False`.
@@ -368,6 +448,8 @@ Non-reentrant-реализация поддерживает `torch.autograd.grad
 Ещё одна деталь готовой обёртки: `checkpoint_sequential` не применяет
 checkpointing к последнему сегменту, поэтому её пик не следует автоматически
 приравнивать к оценке для одинаково обёрнутых сегментов.
+
+<a id="checkpoint-dropout-rng"></a>
 
 ### Dropout: одинаковый forward ещё не доказывает правильный backward
 
@@ -425,6 +507,8 @@ for result in (kept_rng, changed_rng):
 восстановленных тензоров, а не все численные значения. Она не заменяет
 сравнение градиентов.
 
+<a id="checkpoint-selective"></a>
+
 ### Выборочное сохранение: не повторять дорогую матрицу
 
 Внутри сегмента можно сохранять результаты дорогих операций,
@@ -432,7 +516,7 @@ for result in (kept_rng, changed_rng):
 матриц может стоить значительно дороже синуса. Если оставить $XW$ в памяти,
 при восстановлении не придётся выполнять этот GEMM ещё раз.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/pytorch-selective-checkpoint.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/arithmetic-review-2026-09/pytorch-selective-checkpoint.png|Полный пересчёт и selective checkpointing с сохранённым дорогим результатом]]
 
 *Слева пересчитывается вся отмеченная область. Справа результат одной
 операции сохранён дополнительно; он выделен красным и соединён отдельной
@@ -505,6 +589,8 @@ autograd: она способна оставить результаты, кот�
 тензора не позволяет освободить большой общий буфер, выигрыш может
 оказаться меньше ожидаемого.
 
+<a id="checkpoint-memory-budget"></a>
+
 ### Как выбирать сохранения при ограничении памяти
 
 Одинаковый объём памяти можно потратить на разные результаты. Предположим,
@@ -549,7 +635,7 @@ for budget in (0, 40, 64, 72, 96, 104):
 одного значения может требовать другого, несколько тензоров могут делить
 память, а объединённые операции имеют другую цену, чем сумма отдельных.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/checkpoint-2026-10-23/pytorch-memory-budget-pareto.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/checkpoint-2026-10-23/pytorch-memory-budget-pareto.png|Граница Парето для selective-политик и ограничение памяти сохранений]]
 
 *Качественная схема PyTorch: по горизонтали объём сохранённых активаций,
 по вертикали скорость. Синие точки соответствуют разным selective-политикам.
@@ -582,6 +668,8 @@ for budget in (0, 40, 64, 72, 96, 104):
 этого бюджета. Даже оптимальная политика в используемой модели стоимости
 не гарантирует оптимального реального времени; результат проверяют профайлером.
 
+<a id="checkpoint-kernel-dependence"></a>
+
 ### Что зависит от реализации attention и нормализации
 
 Для одного математического слоя существуют разные наборы сохранений.
@@ -610,6 +698,8 @@ RMSNorm могут оставлять разные тензоры. Поэтом�
 устранить большую материализацию $S^2$, если доступное ядро подходит
 по точности, маскам и другим требованиям.
 
+<a id="checkpoint-memory-traffic"></a>
+
 ### Когда пересчёт уменьшает обращения к памяти
 
 У недорогих поэлементных операций основным расходом времени могут быть
@@ -632,6 +722,8 @@ RMSNorm могут оставлять разные тензоры. Поэтом�
 не обещает. Соотношение $5/8$ не является измеренным отношением времени
 исполнения.
 
+<a id="checkpoint-offload-types"></a>
+
 <a id="offload--другая-граница"></a>
 
 ## Перенос данных в память CPU
@@ -651,6 +743,8 @@ checkpoint-сегментов на CPU, а внутренние активаци
 `torch.save` состояния модели не заменяет activation checkpointing.
 Первое позволяет продолжить обучение после сбоя, второе меняет хранение
 промежуточных значений при вычислении градиентов.
+
+<a id="checkpoint-save-on-cpu"></a>
 
 ### Перенос сохранённых тензоров в PyTorch
 
@@ -699,6 +793,90 @@ for actual, expected in zip(restored, reference):
 `respect_saved_tensors_hooks=True`. Нельзя предполагать, что любое вложение
 контекстов автоматически переместит все эти результаты на CPU.
 
+<a id="checkpoint-sac-hooks"></a>
+### Какие сохранения увидят пользовательские hooks
+
+Selective checkpointing хранит выбранные результаты в собственном кеше,
+отдельно от сохранений autograd. Если `pack` вызывается только при
+сохранении входов checkpoint-области, это ещё не означает, что через него
+прошли результаты дорогих операций внутри неё. Для сочетания selective
+checkpointing с offload нужно охватить и этот кеш.
+
+Рассмотрим `sin(x @ w)`, где `x` имеет форму `[3,4]`, а `w` —
+`[4,5]`. Политика сохраняет результат `mm` формы `[3,5]`, чтобы
+не повторять умножение. В PyTorch 2.14.1 при
+`respect_saved_tensors_hooks=False` внешний hook видит входы `[3,4]`
+и `[4,5]`, но кеш самостоятельно удерживает результат `[3,5]`.
+При `True` результат тоже передаётся в `pack`, а перед использованием
+в восстановленном проходе — в `unpack`.
+
+<!-- example:checkpoint-sac-hooks -->
+
+```python
+import torch
+from functools import partial
+from torch.utils.checkpoint import checkpoint, create_selective_checkpoint_contexts
+
+def cache_hook_run(respect, shape=(3, 4, 5)):
+    torch.manual_seed(7)
+    rows, width, outputs = shape
+    x = torch.randn(rows, width, dtype=torch.float64, requires_grad=True)
+    w = torch.randn(width, outputs, dtype=torch.float64, requires_grad=True)
+    packed, unpacked = [], []
+
+    def pack(tensor):
+        packed.append(tuple(tensor.shape))
+        return tensor.detach()
+
+    def unpack(tensor):
+        unpacked.append(tuple(tensor.shape))
+        return tensor
+
+    def region(x, w):
+        return torch.sin(torch.mm(x, w))
+
+    contexts = partial(
+        create_selective_checkpoint_contexts, [torch.ops.aten.mm.default]
+    )
+    with torch.autograd.graph.saved_tensors_hooks(pack, unpack):
+        y = checkpoint(
+            region, x, w, use_reentrant=False, context_fn=contexts,
+            respect_saved_tensors_hooks=respect,
+        )
+    y.sum().backward()
+    return (packed, unpacked), (y.detach(), x.grad.clone(), w.grad.clone())
+
+without_hooks, baseline = cache_hook_run(False)
+with_hooks, routed = cache_hook_run(True)
+assert without_hooks == ([(3, 4), (4, 5)], [(3, 4), (4, 5)])
+assert with_hooks == ([(3, 4), (4, 5), (3, 5)], [(3, 4), (4, 5), (3, 5)])
+for actual, expected in zip(routed, baseline):
+    torch.testing.assert_close(actual, expected, rtol=1e-12, atol=1e-12)
+print("pack/unpack without SAC routing:", without_hooks)
+print("pack/unpack with SAC routing:", with_hooks)
+```
+
+В этом примере `pack` записывает форму и возвращает `detach()`: данные
+остаются в том же хранилище. Поэтому совпадение выходов и градиентов
+проверяет маршрут сохранения, но не экономию GPU-памяти. Дополнительные
+15 значений FP64 в результате `mm` — 120 байт данных; сумма таких
+событий по-прежнему не равна пику памяти шага.
+
+`save_on_cpu` использует тот же механизм hooks для копирования сохранений.
+Флаг `True` позволяет ему обработать и результаты из selective-кеша;
+исходные параметры и другие живые ссылки при этом могут оставаться на GPU.
+По умолчанию `None` в этой версии сохраняет прежнее поведение и выдаёт
+предупреждение, если внешний hook активен. Явный `False` выбирает прежний
+маршрут без предупреждения. Эти правила относятся к non-reentrant
+checkpointing с selective-политикой, а не к любому кешу компилятора.
+
+Источник: [PyTorch 2.14, параметр `respect_saved_tensors_hooks`](https://docs.pytorch.org/docs/2.14/checkpoint.html#torch.utils.checkpoint.checkpoint)
+и [реализация selective-кеша в v2.14.1](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/torch/utils/checkpoint.py#L1545-L1651).
+Пример добавлен для разбора этого механизма; он исполняется на CPU без
+CUDA-передач и не измеряет пользу offload.
+
+<a id="checkpoint-transfer-time"></a>
+
 ### Сколько времени занимает передача
 
 Для объёма $V$ и эффективной пропускной способности связи
@@ -739,6 +917,8 @@ print(round(one_way_seconds, 4), round(exposed_seconds, 4))
 без перекрытия составляет около 1.4317 с. Это не означает, что они идут
 подряд или что всё это время добавится к шагу, но одну передачу нельзя
 просто исключить из оценки.
+
+<a id="checkpoint-prefetch"></a>
 
 ### Предзагрузка и двойная буферизация
 
@@ -819,6 +999,8 @@ CPU-копии необходимо дождаться готовности.
 и закреплённой CPU-памятью. Этот пример объясняет бюджет; он не является
 измерением скорости обучения.
 
+<a id="checkpoint-optimizer-offload"></a>
+
 ### Offload оптимизатора и параметров
 
 При большом числе параметров основным потребителем памяти может быть
@@ -827,7 +1009,7 @@ CPU-копии необходимо дождаться готовности.
 Перенос оптимизатора позволяет держать их на CPU и выполнять обновление
 там, передавая градиенты и возвращая обновлённые веса.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/checkpoint-offload-review-2026-10/deepspeed-optimizer-offload.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/checkpoint-offload-review-2026-10/deepspeed-optimizer-offload.png|Размещение весов, градиентов и состояния Adam на CPU или GPU]]
 
 *Два размещения обновления Adam: CPUAdam слева и GPU FusedAdam справа.
 Показаны веса, градиенты и состояние оптимизатора, а не сохранённые
@@ -857,6 +1039,8 @@ CPU-буферы и передача на GPU. Существенны разме
 упереться в задержку операций, даже если суммарный объём кажется
 приемлемым по паспортной скорости SSD.
 Такую конфигурацию считают и измеряют отдельно от CPU offload.
+
+<a id="checkpoint-validation"></a>
 
 ## Инженерный выбор
 

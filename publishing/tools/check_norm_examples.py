@@ -1,5 +1,6 @@
 """Execute the published blocks; independently verify every numerical mechanism."""
 from pathlib import Path
+import json
 import math
 import re
 import torch
@@ -13,10 +14,16 @@ text=CHAPTER.read_text()
 assert not re.search(r'^\$$',text,re.M)
 assert not re.search(r'`{1,2}(?=\d)',text), 'section references must not open inline code'
 blocks=re.findall(r'```python\n(.*?)```',text,re.S)
-assert len(blocks)==3
+assert len(blocks)==4
 for i,code in enumerate(blocks,1):
     exec(compile(code,f"{CHAPTER}:block{i}","exec"),{})
     print("PASS published block",i)
+notebook=json.loads((ROOT/"05 Источники/Originals/normalization-course-2026-11-03/makemore_part3_bn.ipynb").read_text())
+source_cell=''.join(notebook['cells'][13]['source'])
+source_class=source_cell[source_cell.index('class BatchNorm1d:'):source_cell.index('class Tanh:')].rstrip()
+assert re.sub(r'^[ \t]+$', '', source_class, flags=re.M) in blocks[3], 'source class logic/comments changed'
+assert 'torch.tensor([[1., 3.], [5., 7.]]' in blocks[3]
+np.testing.assert_allclose(1-.97**2,.0591,atol=1e-15)
 np.testing.assert_allclose(.9**100,.0000265614,atol=1e-10)
 np.testing.assert_allclose(1.1**100,13780.61234,atol=1e-5)
 dtype=torch.float64
@@ -55,6 +62,30 @@ for a in (0.,.1,.5,1.):
     f=lambda z:z if z>=0 else a*z
     q=quad(lambda z:f(z)**2*pdf(z),-np.inf,np.inf)[0]
     np.testing.assert_allclose(q,1+a*a,atol=1e-12)
+
+# The groups in Fleuret's figure use different axes from the learned affine.
+eps=1e-5
+image=torch.arange(24,dtype=dtype).reshape(2,3,2,2)
+bn_group=image.movedim(1,0).reshape(3,8)
+ln_group=image.reshape(2,12)
+torch.testing.assert_close(bn_group.mean(1),torch.tensor([7.5,11.5,15.5],dtype=dtype))
+torch.testing.assert_close(ln_group.mean(1),torch.tensor([5.5,17.5],dtype=dtype))
+bn_scale=torch.tensor([1.,2.,3.],dtype=dtype)
+bn_shift=torch.tensor([0.,1.,-1.],dtype=dtype)
+ln_scale=torch.arange(1,13,dtype=dtype).reshape(3,2,2)
+ln_shift=-ln_scale/3
+bn_base=(bn_group-bn_group.mean(1,keepdim=True))/(bn_group.var(1,correction=0,keepdim=True)+eps).sqrt()
+ln_base=(ln_group-ln_group.mean(1,keepdim=True))/(ln_group.var(1,correction=0,keepdim=True)+eps).sqrt()
+torch.testing.assert_close(
+    F.batch_norm(image,None,None,bn_scale,bn_shift,training=True,eps=eps),
+    (bn_base*bn_scale[:,None]+bn_shift[:,None]).reshape(3,2,2,2).movedim(0,1),
+)
+torch.testing.assert_close(
+    F.layer_norm(image,(3,2,2),ln_scale,ln_shift,eps=eps),
+    ln_base.reshape_as(image)*ln_scale+ln_shift,
+)
+np.testing.assert_allclose([784*.01**2,784*.1**2],[.0784,7.84])
+print("PASS Figure 4.9 reduction axes and affine sharing for the 8- and 12-value groups")
 
 # Batch dependence and eval exceptions; no_grad does not stop running-state updates.
 eps=1e-5

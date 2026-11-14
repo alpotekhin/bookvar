@@ -1,0 +1,115 @@
+{
+  "date": "2026-11-09",
+  "scope": "Read the recommender module map and data chapter; distinguish attribution horizon, observation age and delivery completeness for delayed purchase labels. Local only.",
+  "review": {
+    "sources": [
+      "Chapelle 2014 §§2–3 and Eq. 9: conditional conversion delay, no fixed matching window in DFM, and the mixture likelihood for an unobserved conversion.",
+      "Yang et al., arXiv 2012.03245v1 Background, Figure 1 and Proposed Method, Eqs. 2–3 and 13–16: three timelines, observed vs latent label, sample correction and limits of estimated importance weights.",
+      "The map’s original D2L Overview of Recommender Systems and the chapter’s pinned Feast point-in-time joins remain in their existing roles. Delayed purchase labels do not justify feature versions unavailable at impression time."
+    ],
+    "example": "All eight published-source Python blocks ran together under Python 3. The new example asserts the early 30/200 and 30/110 fractions, mature-only 20/100, eventual 40/200, an event at +6 days arriving at +8, and rejection of a purchase outside the seven-day window.",
+    "figure": "Original Yang et al. v1 Figure 1 (874 × 390) copied byte-for-byte from figures/toxi.png, SHA-256 e6028a1fff95712f833769334bfa7fbb369bc2a8683d6ca25bf053041ca58a08. arXiv v1 explicitly states CC BY 4.0. No crop or redraw.",
+    "prose": "Read the entire module map and 717-line input chapter. Kept the prior click and feature-time examples; the new subsection separates late behavior, late delivery, and selection on already known positives. Synthetic values are not a paper result.",
+    "reader": "Chrome at 375 and 1280 CSS px: both localized navigation paths reach the example, the figure and four-row table fit, the formula has no KaTeX error, and the source note links back. Inspected the original figure at both ends of the 2x mobile viewer. The English textbook route marks its Russian fallback; the source note is original English.",
+    "verification": "2037 built pages; 738 publication tests and 238 output tests passed, with zero broken internal routes, fragments or files. Course ingestion, topic-index, current read receipts and curated-asset registry passed."
+  },
+  "files": [
+    {
+      "source": "05 Источники/_index.md",
+      "before_sha256": "748818c1af3851fefacfac33dec594ceb4655cfa27b5b95bfbe418e0f48f1aba",
+      "after_sha256": "38151e9d2adbab16f2c271f66c4cf30fd72ba6a3e95303b4ee188826297b27f9",
+      "lines": 53,
+      "changes": [
+        {
+          "old": "- [[05 Источники/Papers/LambdaRank and LambdaLoss|LambdaRank and LambdaLoss — nDCG pair weights and cutoff conventions]]",
+          "new": "- [[05 Источники/Papers/LambdaRank and LambdaLoss|LambdaRank and LambdaLoss — nDCG pair weights and cutoff conventions]]\n- [[05 Источники/Papers/Delayed conversion feedback|Delayed conversion feedback — conversion delay and observation time]]"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "214a214a6060cd3c65ac88591a88d1fb1fa75958898024a717463a9638c086dd",
+      "after_sha256": "4eeda89240f41772b0b38591b31db31fed247dcd4ccd622d288e2d8d220dd519",
+      "lines": 2562,
+      "changes": [
+        {
+          "old": "      - source: 05 Источники/Papers/LambdaRank and LambdaLoss.md\n        route: sources/papers/lambdarank-lambdaloss",
+          "new": "      - source: 05 Источники/Papers/LambdaRank and LambdaLoss.md\n        route: sources/papers/lambdarank-lambdaloss\n      - source: 05 Источники/Papers/Delayed conversion feedback.md\n        route: sources/papers/delayed-conversion-feedback"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline.md",
+      "before_sha256": "a60abdfb139e2bff0879dbcf0ea7be6db0300d86abbcd77eaa1081fd4bb2286d",
+      "after_sha256": "a5d4c28e5894f981beee248d36f662170563cbe66518830a49ab8af903a9d200",
+      "lines": 833,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-25",
+          "new": "last_updated: 2026-11-09\nreference_terms:\n  - label: Рекомендации — покупки с задержкой и неполные метки\n    label_en: Recommendations — delayed purchases and incomplete labels\n    anchor: recommendation-delayed-labels"
+        },
+        {
+          "old": "Нулевая метка в этой таблице означает «не зарегистрирован целевой отклик\nв окне после данного показа». Она не доказывает неприязни к объекту:\nпользователь мог не заметить карточку или отвлечься.\n\n<a id=\"двухступенчатый-serving\"></a>",
+          "new": "Нулевая метка в этой таблице означает «не зарегистрирован целевой отклик\nв окне после данного показа». Она не доказывает неприязни к объекту:\nпользователь мог не заметить карточку или отвлечься.\n\n<a id=\"recommendation-delayed-labels\"></a>\n\n### Покупки с задержкой и неполные метки\n\nМагазин хочет предсказать покупку в течение семи дней после показа.\nПравило атрибуции уже выбрано: в примере каждая покупка связана с одним\nконкретным показом. Через сутки после показа мы можем знать, что покупка\nсостоялась. Если её пока нет, до конца окна остаётся ещё шесть дней.\n\n![[00 Учебник/Assets/Figures/curated/recommender-delayed-feedback-2026-11-09/yang-esdfm-figure1.png|Три временные линии: покупка не состоялась, покупка после выгрузки, покупка до выгрузки]]\n\n*Jia-Qi Yang et al., [Capturing Delayed Feedback in Conversion Rate Prediction via Elapsed-Time Sampling, рис. 1](https://arxiv.org/html/2012.03245v1#Sx3.F1).\n[Исходный PNG](https://arxiv.org/html/2012.03245v1/figures/toxi.png) из версии arXiv v1,\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), без изменений.*\n\nУ Yang et al. отсчёт начинается с клика `c_t`; у нас с показа.\nЗелёная риска `o_t` отмечает момент выгрузки, синий квадрат `v_t` —\nмомент покупки. На средней линии риска стоит раньше квадрата:\nв выгрузке покупки ещё нет, хотя позднее она появится. На нижней линии\nквадрат уже слева от риски, поэтому метка 1 известна сразу.\nВерхнюю и среднюю линии можно различить задним числом; на момент\nранней выгрузки на обеих ещё не наблюдалось покупки.\n\nВыгрузим 200 показов. У ста старых семидневное окно закрыто:\nполучено 20 покупок. У ста свежих прошли сутки, и в журнале видно\n10 покупок. В следующих выгрузках появятся ещё 10 покупок, совершённых\nв срок. Эти последние десять известны нам из последующей проверки,\nа не из первой выгрузки.\n\n| Правило отбора | Доля единиц |\n| --- | ---: |\n| Все неизвестные записать как нули | $30/200=15\\%$ |\n| Из свежих взять только уже известные покупки | $30/110\\approx27{,}3\\%$ |\n| Взять все показы с закрытым окном | $20/100=20\\%$ |\n| Пересчитать обе группы после закрытия окон | $40/200=20\\%$ |\n\nВ первой строке десять будущих покупок записали в нули. Во второй\nчислитель тот же, но из знаменателя убрали все 90 свежих показов без\nизвестной покупки. Если бы мы обучали модель с одной общей вероятностью\nи бинарной кросс-энтропией, её оценка совпала бы с долей единиц в\nобучающем наборе. На старых показах метки полные, но их 20% не обязаны\nсовпадать с долей покупок на свежем трафике, например после смены цен.\n\nЕсть и задержка доставки. Если покупка произошла на шестой день после\nпоказа, а запись дошла на восьмой, она входит в семидневную метку.\nНа седьмой день окно событий закрыто по календарю, но журнал ещё\nнеполон. Ноль можно выставить, когда граница полноты достигла конца\nокна. Признаки при этом по-прежнему берутся на момент показа.\n\n~~~python\nfrom fractions import Fraction\n\nW = 7\n# Days on one timeline: impression, purchase event, available in storage.\nold = [(0, 1, 1)] * 20 + [(0, None, None)] * 80\nlate = (10, 16, 18)\nfresh = [(10, 11, 11)] * 10 + [(10, 16, 16)] * 9 + [late]\nfresh += [(10, None, None)] * 80\nrows = old + fresh\n\ndef purchase_status(row, snapshot, complete_through):\n    shown, event, available = row\n    assert shown <= snapshot and complete_through <= snapshot\n    end = shown + W\n    if event is not None and shown < event <= end and available <= snapshot:\n        return 1\n    return 0 if end <= complete_through else None\n\nfirst = [purchase_status(row, 11, 11) for row in rows]\nassert first.count(None) == 90\nassert Fraction(first.count(1), len(first)) == Fraction(15, 100)\nassert Fraction(first.count(1), sum(y is not None for y in first)) == Fraction(30, 110)\nclosed = [y for row, y in zip(rows, first) if row[0] + W <= 11]\nassert Fraction(closed.count(1), len(closed)) == Fraction(20, 100)\nassert purchase_status(late, 17, 15) is None\nassert purchase_status(late, 18, 17) == 1\nassert purchase_status((10, 18, 18), 18, 17) == 0  # Outside the window.\nfinal = [purchase_status(row, 18, 17) for row in rows]\nassert None not in final and Fraction(final.count(1), len(final)) == Fraction(20, 100)\n~~~\n\nПри мгновенной доставке можно отделить вероятность покупки от её\nскорости. Пусть $Y=1$ означает покупку в семидневном окне, $x$ —\nпризнаки на момент показа, $p(x)=\\Pr(Y=1\\mid x)$, а $D$ — время до\nпокупки среди показов с $Y=1$. Для выгрузки на фиксированном возрасте\n$a$ положительная метка наблюдается, только если покупка входит в окно\nи произошла не позднее возраста $a$. Поэтому\n\n$$\n\\Pr(\\text{покупка видна к } a\\mid x)\n= p(x) F(a\\mid x,Y=1),\\qquad\nF(a\\mid x,Y=1)=\\Pr(D\\le a\\mid x,Y=1).\n$$\n\nВ свежей сотне $p=0{,}2$, но за сутки состоялась лишь половина покупок\nиз семидневного окна. В первой выгрузке поэтому видно $0{,}2\\cdot0{,}5=0{,}1$.\nВероятность не увидеть покупки равна $1-pF=(1-p)+p(1-F)$.\nПервое слагаемое даёт 80 показов без покупки в окне, второе — десять\nпоказов с покупкой позже выгрузки. По одному раннему срезу виден\nтолько результат произведения: 10% могли бы получиться и при $p=0{,}1$,\nесли бы все покупки происходили в первые сутки.\n\nВ [модели Chapelle, §3](https://doi.org/10.1145/2623330.2623634) вероятность\nконверсии и распределение задержки оцениваются совместно. Для\nненаблюдавшейся конверсии в правдоподобие входит смесь двух случаев,\nа не обычный член для отрицательной метки. У Chapelle нет нашего\nсемидневного ограничения, а условная задержка моделируется\nэкспоненциальным распределением. В\n[[05 Источники/Papers/Delayed conversion feedback|заметке об источниках]]\nесть также продолжение Yang et al.: как учесть изменение состава\nвыборки, если поздние покупки добавляют отдельными записями.\n\n<a id=\"двухступенчатый-serving\"></a>"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/02 Рекомендательные системы/00 Карта модуля.md",
+      "before_sha256": "dcd33730cc0e127d94301bd87f3e3af5c2d8df1aaa44cb5219a1b7e010b41ebc",
+      "after_sha256": "58a48076518e1e6a5c8275f014e1887a70c1a16209f08ad340d8dd66151ba112",
+      "lines": 136,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-25",
+          "new": "last_updated: 2026-11-09"
+        },
+        {
+          "old": "восстановить все четыре таблицы как у действующего магазина.\n\n<a id=\"сквозной-пример\"></a>",
+          "new": "восстановить все четыре таблицы как у действующего магазина.\n\nДля признаков граница проходит в момент показа. Метка покупки, напротив,\nзависит от событий после него. На\n[[00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline#recommendation-delayed-labels|примере с семидневным окном]]\nвидно, почему недостаточно знать только дату выгрузки: нужно ещё знать,\nдо какого момента журнал откликов полон.\n\n<a id=\"сквозной-пример\"></a>"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "e17389de7417de96a0f2ba22bda1a78a7b8370253562b70cbf290fea5b390538",
+      "after_sha256": "2a783e717086ab2999ac667bb8a05dc86f1f2d411c14bfb936d73cc36dd508f6",
+      "lines": 1693,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline|Задача рекомендации, данные и конвейер]]",
+          "new": "- [[00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline|Задача рекомендации, данные и конвейер]]\n  - [[00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline#recommendation-delayed-labels|Рекомендации — покупки с задержкой и неполные метки]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "80ce9b70709f1f5fa3b0c5f799de37ac942b7ac322b51620fb8f43b3e903e7e2",
+      "after_sha256": "29a058231dd1217ddcf2f61723cbe0a91e80a5beb9d1bc0329535b34c1ace20b",
+      "lines": 1695,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline|Recommendation tasks, data, and pipelines]]",
+          "new": "- [[00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline|Recommendation tasks, data, and pipelines]]\n  - [[00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline#recommendation-delayed-labels|Recommendations — delayed purchases and incomplete labels]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "d6ba2a9690eca2a423ef6a215cc8fbac5886fc6895bd3a634e81f4b568137b9e",
+      "after_sha256": "c3531283dc25aa4df9ec9a4d33fb0eed58318377cad0536a08585700cdeeb03b",
+      "lines": 24074,
+      "changes": [
+        {
+          "old": "assets:",
+          "new": "assets:\n  - id: curated-esdfm-delayed-feedback-e6028a1fff95\n    asset: 00 Учебник/Assets/Figures/curated/recommender-delayed-feedback-2026-11-09/yang-esdfm-figure1.png\n    author: Jia-Qi Yang et al.\n    source_url: https://arxiv.org/abs/2012.03245v1\n    source_image_url: https://arxiv.org/html/2012.03245v1/figures/toxi.png\n    derivation: source-raster-copy\n    source_asset_sha256: e6028a1fff95712f833769334bfa7fbb369bc2a8683d6ca25bf053041ca58a08\n    sha256: e6028a1fff95712f833769334bfa7fbb369bc2a8683d6ca25bf053041ca58a08\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    license_evidence: https://arxiv.org/abs/2012.03245v1\n    modifications: \"Original Figure 1 from arXiv v1 copied byte-for-byte; no crop, redraw, or translation.\"\n    used_in:\n      - 00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    last_verified: 2026-11-09"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/Delayed conversion feedback.md",
+      "created": true,
+      "after_sha256": "49337957c563b9c2e1dc1345d3027cc328d1a3f35ab057985c9b1d271f249df5"
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "date": "2026-11-10",
+  "scope": "Verify provenance and remove the legacy no-digest exception for seven existing textbook images, without changing image bytes or chapter text.",
+  "review": {
+    "method": "Each distributed figure was compared using cmp with the original course/author asset. SHA-256 binds the matching bytes. For pinned repositories the license was verified at the same commit. For Alammar and Google the author page provides the applicable license; URL plus the observed digest records these unversioned originals.",
+    "excluded": "CS231n opt1.gif is an exact match but the saddle-point animation is credited to Alec Radford at https://ruder.io/optimizing-gradient-descent/. The course's MIT license is not treated as the license for that animation. No separate rights confirmation was established.",
+    "publicNotices": "The CS231n, micrograd, and Harvard license notices match the pinned upstream files. The Hugging Face image dataset card declares Apache-2.0; the reused full public notice matches the canonical Apache Foundation license text.",
+    "verification": "Root build: 2077 pages, zero broken internal routes or files. Output: 291 passed; publication: 769 passed and 13 skipped; evidence: 588 passed. Checked the delivered bytes on all seven routes in both readers, and 28 browser figure loads at 1280 and 375 px. Whole-textbook scan: 1181 matching local digests, 37 unpinned paths, 10 external images, and zero mismatches, unregistered paths or KaTeX errors.",
+    "status": "Local only, not pushed or deployed."
+  },
+  "verifiedOriginals": [
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/foundations-source-first/google-gradient-descent.png",
+      "route": "textbook/ml-foundations/derivatives-gradients/",
+      "sha256": "530f26363b7bc5860123bc04be3d7e9923840b4a8e70005e2ce812db517931a0",
+      "bytes": 103704,
+      "sourceImage": "https://developers.google.com/static/machine-learning/crash-course/linear-regression/images/gradient-descent.png",
+      "sourceAsset": "00 Учебник/Assets/Figures/curated/foundations-source-first/google-gradient-descent.png",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "licenseEvidence": "https://developers.google.com/machine-learning/crash-course/linear-regression/gradient-descent",
+      "dimensions": [
+        1259,
+        946
+      ]
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/micrograd/computational-graph.svg",
+      "route": "textbook/neural-networks/backpropagation/",
+      "sha256": "c5c5461e9735cd42974fd6b5091eba227e8a25692b59b72ed815661949e189b0",
+      "bytes": 11360,
+      "sourceImage": "https://raw.githubusercontent.com/karpathy/micrograd/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/gout.svg",
+      "sourceAsset": "05 Источники/Originals/backpropagation-2026-10-21/micrograd-gout.svg",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/LICENSE",
+      "licenseEvidence": "site/public/licenses/micrograd-MIT.txt",
+      "licenseEvidenceSha256": "f372f582c99dc5b0e8dcf5ca5542183a735365468857ec6416af628490187cc1",
+      "publicNotice": "site/public/licenses/micrograd-MIT.txt",
+      "publicNoticeSha256": "f372f582c99dc5b0e8dcf5ca5542183a735365468857ec6416af628490187cc1",
+      "commit": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+      "viewBox": [
+        0,
+        0,
+        1351.73,
+        210
+      ]
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/micrograd/moon-mlp.png",
+      "route": "textbook/neural-networks/mlp/",
+      "sha256": "bbd4f795955b6d2b8651101ab0ed77d193354a2de39123ae4f9638967b55de2e",
+      "bytes": 15806,
+      "sourceImage": "https://raw.githubusercontent.com/karpathy/micrograd/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/moon_mlp.png",
+      "sourceAsset": "00 Учебник/Assets/Figures/curated/micrograd/moon-mlp.png",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/LICENSE",
+      "licenseEvidence": "site/public/licenses/micrograd-MIT.txt",
+      "licenseEvidenceSha256": "f372f582c99dc5b0e8dcf5ca5542183a735365468857ec6416af628490187cc1",
+      "publicNotice": "site/public/licenses/micrograd-MIT.txt",
+      "publicNoticeSha256": "f372f582c99dc5b0e8dcf5ca5542183a735365468857ec6416af628490187cc1",
+      "commit": "7bc720e951fe422b8f8814aa5aa1b64121d26b4c",
+      "dimensions": [
+        384,
+        252
+      ]
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-learning-rates.jpeg",
+      "route": "textbook/neural-networks/optimizers-schedules/",
+      "sha256": "0cd4d81903ba18e834e216c7ceb01dfa6dd535a70c1be0ee0851cb0f7e573599",
+      "bytes": 32518,
+      "sourceImage": "https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/nn3/learningrates.jpeg",
+      "sourceAsset": "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-learning-rates.jpeg",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/LICENSE",
+      "licenseEvidence": "site/public/licenses/cs231n-MIT.txt",
+      "licenseEvidenceSha256": "85b365f07b4cfc5d678c548bc41965bc3bc782106b8903bd3b876d9d49a4270d",
+      "publicNotice": "site/public/licenses/cs231n-MIT.txt",
+      "publicNoticeSha256": "85b365f07b4cfc5d678c548bc41965bc3bc782106b8903bd3b876d9d49a4270d",
+      "commit": "8ec57ccfc32379ae4b37c45de949af359673f92f",
+      "dimensions": [
+        459,
+        414
+      ]
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/source-audit-15-24/hf-tokenization-pipeline.svg",
+      "route": "textbook/text-representation/tokenization/",
+      "sha256": "c3c5caf940349c90cacf3cddc6d88f37ed8432c4df6443fb7970e3fdfe74d712",
+      "bytes": 118437,
+      "sourceImage": "https://huggingface.co/datasets/huggingface-course/documentation-images/resolve/96e71ad956904da670e6827274fc2c9b735b09d5/en/chapter6/tokenization_pipeline.svg",
+      "sourceAsset": "00 Учебник/Assets/Figures/curated/source-audit-15-24/hf-tokenization-pipeline.svg",
+      "license": "Apache-2.0",
+      "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0",
+      "licenseEvidence": "https://huggingface.co/datasets/huggingface-course/documentation-images/blob/96e71ad956904da670e6827274fc2c9b735b09d5/README.md",
+      "licenseEvidenceSha256": "4bcf87ecfbbb8e07a01b21415a970c8b53a5283bf6872b657040d3f45c9241f7",
+      "publicNotice": "site/public/licenses/huggingface-ultrascale-Apache-2.0.txt",
+      "publicNoticeSha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "commit": "96e71ad956904da670e6827274fc2c9b735b09d5",
+      "viewBox": [
+        0,
+        0,
+        1776,
+        1276
+      ]
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/modern-37-40-dense-ffn/transformer-block-ffn.png",
+      "route": "textbook/modern-llm/dense-ffn/",
+      "sha256": "94d7c51658e7feffd01c66e61acd8897cb17e93989725f0a523a95ab8b771047",
+      "bytes": 88228,
+      "sourceImage": "https://jalammar.github.io/images/gpt2/gpt2-transformer-block-vectors-2.png",
+      "sourceAsset": "05 Источники/Originals/gpt2-2026-10-22/gpt2-transformer-block-vectors-2.png",
+      "license": "CC BY-NC-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "licenseEvidence": "05 Источники/Originals/gpt2-2026-10-22/illustrated-gpt2.html",
+      "licenseEvidenceSha256": "4e74bc829c6d067038346fe92240c6f4f2eb42b58f28c966dfe6381bceb31dd0",
+      "dimensions": [
+        1440,
+        680
+      ]
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg",
+      "route": "textbook/inference/llm-inference-physics/",
+      "sha256": "304b952ce3d768150291a52ecbfc8fb8e66207993ba3c83ed4a313f1c87d2893",
+      "bytes": 7296,
+      "sourceImage": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/prefill-vs-decode-roofline.svg",
+      "sourceAsset": "00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg",
+      "license": "CC BY-NC-SA 4.0",
+      "licenseUrl": "https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md",
+      "licenseEvidence": "site/public/licenses/harvard-45ecc8d8-LICENSE.md",
+      "licenseEvidenceSha256": "b6f4689d6fccf48d82d0871a3b994a122427fcb0b278971f6ba008be44e2c926",
+      "publicNotice": "site/public/licenses/harvard-45ecc8d8-LICENSE.md",
+      "publicNoticeSha256": "b6f4689d6fccf48d82d0871a3b994a122427fcb0b278971f6ba008be44e2c926",
+      "commit": "45ecc8d82fcae70c149cdce550d3b3d3411df913",
+      "viewBox": [
+        0,
+        0,
+        680,
+        460
+      ]
+    }
+  ],
+  "files": [
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "a8450834b51cf2905c7c24a5cd13992aba7cb5297824a706f71ee71513199b97",
+      "after_sha256": "1f3d792368d21faa7f088392d791bd232201c52dd56594869889ab2613d30668",
+      "lines": 25810,
+      "changes": [
+        {
+          "old": "    author: Andrej Karpathy\n    source_url: https://github.com/karpathy/micrograd\n    license: MIT\n    license_url: https://github.com/karpathy/micrograd/blob/master/LICENSE\n    modifications: copied without modification from the open repository\n    used_in:\n      - 00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/micrograd/computational-graph.svg\n  - id: curated-micrograd-moon-000000000009\n    asset: 00 Учебник/Assets/Figures/curated/micrograd/moon-mlp.png\n    author: Andrej Karpathy\n    source_url: https://github.com/karpathy/micrograd\n    license: MIT\n    license_url: https://github.com/karpathy/micrograd/blob/master/LICENSE\n    modifications: copied without modification from the open repository\n    used_in:\n      - 00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/micrograd/moon-mlp.png\n  - id: curated-vae-blocks-00000000000a\n    asset: 00 Учебник/Assets/Figures/curated/vae/vae-blocks.png\n",
+          "new": "    author: Andrej Karpathy\n    source_url: https://github.com/karpathy/micrograd\n    used_in:\n      - 00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md\n    metadata_status: verified\n    commit: 7bc720e951fe422b8f8814aa5aa1b64121d26b4c\n    title: \"micrograd: computation graph of a two-input ReLU neuron\"\n    source_image_url: \"https://raw.githubusercontent.com/karpathy/micrograd/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/gout.svg\"\n    source_asset: \"05 Источники/Originals/backpropagation-2026-10-21/micrograd-gout.svg\"\n    sha256: c5c5461e9735cd42974fd6b5091eba227e8a25692b59b72ed815661949e189b0\n    source_asset_sha256: c5c5461e9735cd42974fd6b5091eba227e8a25692b59b72ed815661949e189b0\n    bytes: 11360\n    source_viewbox: [0,0,1351.73,210]\n    license: \"MIT\"\n    license_url: \"https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/LICENSE\"\n    license_evidence: \"site/public/licenses/micrograd-MIT.txt\"\n    license_evidence_sha256: f372f582c99dc5b0e8dcf5ca5542183a735365468857ec6416af628490187cc1\n    public_license_copy: \"site/public/licenses/micrograd-MIT.txt\"\n    modifications: \"Compared byte-for-byte with the author asset. Existing image retained without crop, redraw, relabeling or resampling.\"\n    derivation: source-svg-copy\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-10\"\n  - id: curated-micrograd-moon-000000000009\n    asset: 00 Учебник/Assets/Figures/curated/micrograd/moon-mlp.png\n    author: Andrej Karpathy\n    source_url: https://github.com/karpathy/micrograd\n    used_in:\n      - 00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md\n    metadata_status: verified\n    commit: 7bc720e951fe422b8f8814aa5aa1b64121d26b4c\n    title: \"micrograd: MLP decision boundary on two moons\"\n    source_image_url: \"https://raw.githubusercontent.com/karpathy/micrograd/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/moon_mlp.png\"\n    source_asset: \"00 Учебник/Assets/Figures/curated/micrograd/moon-mlp.png\"\n    sha256: bbd4f795955b6d2b8651101ab0ed77d193354a2de39123ae4f9638967b55de2e\n    source_asset_sha256: bbd4f795955b6d2b8651101ab0ed77d193354a2de39123ae4f9638967b55de2e\n    bytes: 15806\n    dimensions_px: [384,252]\n    license: \"MIT\"\n    license_url: \"https://github.com/karpathy/micrograd/blob/7bc720e951fe422b8f8814aa5aa1b64121d26b4c/LICENSE\"\n    license_evidence: \"site/public/licenses/micrograd-MIT.txt\"\n    license_evidence_sha256: f372f582c99dc5b0e8dcf5ca5542183a735365468857ec6416af628490187cc1\n    public_license_copy: \"site/public/licenses/micrograd-MIT.txt\"\n    modifications: \"Compared byte-for-byte with the author asset. Existing image retained without crop, redraw, relabeling or resampling.\"\n    derivation: source-raster-copy\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-10\"\n  - id: curated-vae-blocks-00000000000a\n    asset: 00 Учебник/Assets/Figures/curated/vae/vae-blocks.png\n"
+        },
+        {
+          "old": "    author: Jay Alammar\n    source_url: https://jalammar.github.io/illustrated-gpt2/\n    license: CC BY-NC-SA 4.0\n    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/\n    modifications: copied without content changes\n    used_in:\n      - 00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/gpt-30/images/gpt2-transformer-block-vectors-2.png\n  - id: curated-hf-moe-layer-000000000027\n    asset: 00 Учебник/Assets/Figures/curated/modern-37-40-moe/mixtral-smoe-layer.png\n",
+          "new": "    author: Jay Alammar\n    source_url: https://jalammar.github.io/illustrated-gpt2/\n    used_in:\n      - 00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md\n    metadata_status: verified\n    title: \"The Illustrated GPT-2: a vector through the decoder block stack\"\n    source_image_url: \"https://jalammar.github.io/images/gpt2/gpt2-transformer-block-vectors-2.png\"\n    source_asset: \"05 Источники/Originals/gpt2-2026-10-22/gpt2-transformer-block-vectors-2.png\"\n    sha256: 94d7c51658e7feffd01c66e61acd8897cb17e93989725f0a523a95ab8b771047\n    source_asset_sha256: 94d7c51658e7feffd01c66e61acd8897cb17e93989725f0a523a95ab8b771047\n    bytes: 88228\n    dimensions_px: [1440,680]\n    license: \"CC BY-NC-SA 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by-nc-sa/4.0/\"\n    license_evidence: \"05 Источники/Originals/gpt2-2026-10-22/illustrated-gpt2.html\"\n    license_evidence_sha256: 4e74bc829c6d067038346fe92240c6f4f2eb42b58f28c966dfe6381bceb31dd0\n    modifications: \"Compared byte-for-byte with the author asset. Existing image retained without crop, redraw, relabeling or resampling.\"\n    derivation: source-raster-copy\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-10\"\n  - id: curated-hf-moe-layer-000000000027\n    asset: 00 Учебник/Assets/Figures/curated/modern-37-40-moe/mixtral-smoe-layer.png\n"
+        },
+        {
+          "old": "  - id: curated-cs231n-lr-000000000096\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-learning-rates.jpeg\n    author: Stanford CS231n course staff\n    source_url: https://cs231n.github.io/neural-networks-3/\n    license: open-course-material; reuse confirmed by repository owner\n    license_url: https://cs231n.github.io/neural-networks-3/\n    modifications: copied without modification; path changed for tracked publication packaging\n    used_in:\n      - 00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/source-first-7-14/cs231n-learning-rates.jpeg\n  - id: curated-cs231n-dropout-000000000097\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-dropout-train.jpeg\n",
+          "new": "  - id: curated-cs231n-lr-000000000096\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-learning-rates.jpeg\n    author: \"Andrej Karpathy (Stanford CS231n)\"\n    source_url: https://cs231n.github.io/neural-networks-3/\n    used_in:\n      - 00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md\n    metadata_status: verified\n    commit: 8ec57ccfc32379ae4b37c45de949af359673f92f\n    title: \"CS231n: loss curves for four learning rates\"\n    source_image_url: \"https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/nn3/learningrates.jpeg\"\n    source_asset: \"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-learning-rates.jpeg\"\n    sha256: 0cd4d81903ba18e834e216c7ceb01dfa6dd535a70c1be0ee0851cb0f7e573599\n    source_asset_sha256: 0cd4d81903ba18e834e216c7ceb01dfa6dd535a70c1be0ee0851cb0f7e573599\n    bytes: 32518\n    dimensions_px: [459,414]\n    license: \"MIT\"\n    license_url: \"https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/LICENSE\"\n    license_evidence: \"site/public/licenses/cs231n-MIT.txt\"\n    license_evidence_sha256: 85b365f07b4cfc5d678c548bc41965bc3bc782106b8903bd3b876d9d49a4270d\n    public_license_copy: \"site/public/licenses/cs231n-MIT.txt\"\n    modifications: \"Compared byte-for-byte with the author asset. Existing image retained without crop, redraw, relabeling or resampling.\"\n    derivation: source-raster-copy\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-10\"\n  - id: curated-cs231n-dropout-000000000097\n    asset: 00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-dropout-train.jpeg\n"
+        },
+        {
+          "old": "    author: Google\n    source_url: https://developers.google.com/machine-learning/crash-course/linear-regression/gradient-descent\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    modifications: copied from the course page\n    used_in:\n      - 00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/foundations-source-first/google-gradient-descent.png\n  - {\"id\":\"curated-d2l-density-interval-35d85344b8bd\",\"asset\":\"00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-density-interval.svg\",\"author\":\"Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola\",\"title\":\"D2L probability as area under a density, original course output\",\"source_url\":\"https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/random-variables.html#probability-density-functions\",\"source_image_url\":\"https://d2l.ai/_images/output_random-variables_886f4c_15_0.svg\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-density-interval.svg\",\"source_asset_sha256\":\"35d85344b8bd9faf7cda96b89bfd235754990ec381f3fdb0ca9d30a812bac27f\",\"sha256\":\"35d85344b8bd9faf7cda96b89bfd235754990ec381f3fdb0ca9d30a812bac27f\",\"bytes\":32316,\"source_code\":\"05 Источники/Originals/probability-native-2026-10-30/random-variables.md\",\"source_code_sha256\":\"506e48d177d6753b65a671702f4e85422d0501496a085728960799ec4bd1e43f\",\"source_code_commit\":\"23d7a5aecceee57d1292c56e90cce307f183bb0a\",\"source_code_url\":\"https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_appendix-mathematics-for-deep-learning/random-variables.md\",\"source_version\":\"Official D2L 1.0.3 generated output; captured exact SHA-256, not an immutable image URL\",\"view_box\":[0,0,310.137492,226.237508],\"license\":\"CC BY-SA 4.0\",\"license_url\":\"https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE\",\"license_evidence\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"license_evidence_sha256\":\"a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\",\"public_license_copy\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"derivation\":\"source-svg-copy\",\"modifications\":\"Complete original SVG copied byte-for-byte. No crop, redraw, relabeling, recoloring or resampling. Attribution and explanation are separate in the chapter.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-10-30\",\"used_in\":[\"00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md\"]}\n  - {\"id\":\"curated-d2l-marginal-cda896c59fd8\",\"asset\":\"00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-marginal.svg\",\"author\":\"Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola\",\"title\":\"D2L marginalization, original Figure 22.6.1\",\"source_url\":\"https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/random-variables.html#fig-marginal\",\"source_image_url\":\"https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/marginal.svg\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-marginal.svg\",\"source_asset_sha256\":\"cda896c59fd8dfb81f4d5d03fd392142da25b331378e1da668a0088cbd44dd51\",\"sha256\":\"cda896c59fd8dfb81f4d5d03fd392142da25b331378e1da668a0088cbd44dd51\",\"bytes\":70709,\"source_code\":\"05 Источники/Originals/probability-native-2026-10-30/random-variables.md\",\"source_code_sha256\":\"506e48d177d6753b65a671702f4e85422d0501496a085728960799ec4bd1e43f\",\"source_code_commit\":\"23d7a5aecceee57d1292c56e90cce307f183bb0a\",\"source_code_url\":\"https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_appendix-mathematics-for-deep-learning/random-variables.md\",\"source_version\":\"Pinned source SVG at recorded commit\",\"view_box\":[0,0,337,163],\"license\":\"CC BY-SA 4.0\",\"license_url\":\"https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE\",\"license_evidence\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"license_evidence_sha256\":\"a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\",\"public_license_copy\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"derivation\":\"source-svg-copy\",\"modifications\":\"Complete original SVG copied byte-for-byte. No crop, redraw, relabeling, recoloring or resampling. Attribution and explanation are separate in the chapter.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-10-30\",\"used_in\":[\"00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md\"]}\n",
+          "new": "    author: Google\n    source_url: https://developers.google.com/machine-learning/crash-course/linear-regression/gradient-descent\n    used_in:\n      - 00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md\n    metadata_status: verified\n    title: \"Gradient descent process (Figure 11)\"\n    source_image_url: \"https://developers.google.com/static/machine-learning/crash-course/linear-regression/images/gradient-descent.png\"\n    source_asset: \"00 Учебник/Assets/Figures/curated/foundations-source-first/google-gradient-descent.png\"\n    sha256: 530f26363b7bc5860123bc04be3d7e9923840b4a8e70005e2ce812db517931a0\n    source_asset_sha256: 530f26363b7bc5860123bc04be3d7e9923840b4a8e70005e2ce812db517931a0\n    bytes: 103704\n    dimensions_px: [1259,946]\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"https://developers.google.com/machine-learning/crash-course/linear-regression/gradient-descent\"\n    modifications: \"Compared byte-for-byte with the author asset. Existing image retained without crop, redraw, relabeling or resampling.\"\n    derivation: source-raster-copy\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-10\"\n  - {\"id\":\"curated-d2l-density-interval-35d85344b8bd\",\"asset\":\"00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-density-interval.svg\",\"author\":\"Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola\",\"title\":\"D2L probability as area under a density, original course output\",\"source_url\":\"https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/random-variables.html#probability-density-functions\",\"source_image_url\":\"https://d2l.ai/_images/output_random-variables_886f4c_15_0.svg\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-density-interval.svg\",\"source_asset_sha256\":\"35d85344b8bd9faf7cda96b89bfd235754990ec381f3fdb0ca9d30a812bac27f\",\"sha256\":\"35d85344b8bd9faf7cda96b89bfd235754990ec381f3fdb0ca9d30a812bac27f\",\"bytes\":32316,\"source_code\":\"05 Источники/Originals/probability-native-2026-10-30/random-variables.md\",\"source_code_sha256\":\"506e48d177d6753b65a671702f4e85422d0501496a085728960799ec4bd1e43f\",\"source_code_commit\":\"23d7a5aecceee57d1292c56e90cce307f183bb0a\",\"source_code_url\":\"https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_appendix-mathematics-for-deep-learning/random-variables.md\",\"source_version\":\"Official D2L 1.0.3 generated output; captured exact SHA-256, not an immutable image URL\",\"view_box\":[0,0,310.137492,226.237508],\"license\":\"CC BY-SA 4.0\",\"license_url\":\"https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE\",\"license_evidence\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"license_evidence_sha256\":\"a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\",\"public_license_copy\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"derivation\":\"source-svg-copy\",\"modifications\":\"Complete original SVG copied byte-for-byte. No crop, redraw, relabeling, recoloring or resampling. Attribution and explanation are separate in the chapter.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-10-30\",\"used_in\":[\"00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md\"]}\n  - {\"id\":\"curated-d2l-marginal-cda896c59fd8\",\"asset\":\"00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-marginal.svg\",\"author\":\"Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola\",\"title\":\"D2L marginalization, original Figure 22.6.1\",\"source_url\":\"https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/random-variables.html#fig-marginal\",\"source_image_url\":\"https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/marginal.svg\",\"source_asset\":\"00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/d2l-marginal.svg\",\"source_asset_sha256\":\"cda896c59fd8dfb81f4d5d03fd392142da25b331378e1da668a0088cbd44dd51\",\"sha256\":\"cda896c59fd8dfb81f4d5d03fd392142da25b331378e1da668a0088cbd44dd51\",\"bytes\":70709,\"source_code\":\"05 Источники/Originals/probability-native-2026-10-30/random-variables.md\",\"source_code_sha256\":\"506e48d177d6753b65a671702f4e85422d0501496a085728960799ec4bd1e43f\",\"source_code_commit\":\"23d7a5aecceee57d1292c56e90cce307f183bb0a\",\"source_code_url\":\"https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_appendix-mathematics-for-deep-learning/random-variables.md\",\"source_version\":\"Pinned source SVG at recorded commit\",\"view_box\":[0,0,337,163],\"license\":\"CC BY-SA 4.0\",\"license_url\":\"https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE\",\"license_evidence\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"license_evidence_sha256\":\"a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\",\"public_license_copy\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"derivation\":\"source-svg-copy\",\"modifications\":\"Complete original SVG copied byte-for-byte. No crop, redraw, relabeling, recoloring or resampling. Attribution and explanation are separate in the chapter.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-10-30\",\"used_in\":[\"00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md\"]}\n"
+        },
+        {
+          "old": "    author: Hugging Face Course\n    source_url: https://huggingface.co/docs/course/main/chapter6/4\n    license: Apache-2.0\n    license_url: https://github.com/huggingface/course/blob/main/LICENSE\n    modifications: copied without content changes from the course asset\n    used_in:\n      - 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md\n      - Concepts/NLP/Tokenization.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/source-audit-15-24/hf-tokenization-pipeline.svg\n  - id: curated-tokenizer-choice-0000000000c0\n    asset: 00 Учебник/Assets/Figures/curated/source-audit-15-24/tokenizer-choice-figure1.png\n",
+          "new": "    author: Hugging Face Course\n    source_url: https://huggingface.co/docs/course/main/chapter6/4\n    used_in:\n      - 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md\n      - Concepts/NLP/Tokenization.md\n    metadata_status: verified\n    commit: 96e71ad956904da670e6827274fc2c9b735b09d5\n    title: \"Hugging Face LLM Course: the tokenization pipeline\"\n    source_image_url: \"https://huggingface.co/datasets/huggingface-course/documentation-images/resolve/96e71ad956904da670e6827274fc2c9b735b09d5/en/chapter6/tokenization_pipeline.svg\"\n    source_asset: \"00 Учебник/Assets/Figures/curated/source-audit-15-24/hf-tokenization-pipeline.svg\"\n    sha256: c3c5caf940349c90cacf3cddc6d88f37ed8432c4df6443fb7970e3fdfe74d712\n    source_asset_sha256: c3c5caf940349c90cacf3cddc6d88f37ed8432c4df6443fb7970e3fdfe74d712\n    bytes: 118437\n    source_viewbox: [0,0,1776,1276]\n    license: \"Apache-2.0\"\n    license_url: \"https://www.apache.org/licenses/LICENSE-2.0\"\n    license_evidence: \"https://huggingface.co/datasets/huggingface-course/documentation-images/blob/96e71ad956904da670e6827274fc2c9b735b09d5/README.md\"\n    license_evidence_sha256: 4bcf87ecfbbb8e07a01b21415a970c8b53a5283bf6872b657040d3f45c9241f7\n    public_license_copy: \"site/public/licenses/huggingface-ultrascale-Apache-2.0.txt\"\n    modifications: \"Compared byte-for-byte with the author asset. Existing image retained without crop, redraw, relabeling or resampling.\"\n    derivation: source-svg-copy\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-10\"\n  - id: curated-tokenizer-choice-0000000000c0\n    asset: 00 Учебник/Assets/Figures/curated/source-audit-15-24/tokenizer-choice-figure1.png\n"
+        },
+        {
+          "old": "    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/prefill-vs-decode-roofline.svg\n    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913\n    license: CC BY-NC-SA 4.0\n    license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/\n    modifications: copied without modification; path changed for tracked publication packaging\n    used_in: []\n    metadata_status: verified\n    provenance_confirmation: pinned-upstream-repository\n  - id: curated-harvard-harvard-performance-optimization-decision-tree-svg-cd7e4555257c\n    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/optimization-decision-tree.svg\n",
+          "new": "    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/prefill-vs-decode-roofline.svg\n    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913\n    used_in: [\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md\"]\n    metadata_status: verified\n    title: \"Harvard ML Systems: prefill and decode on the roofline\"\n    source_image_url: \"https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/prefill-vs-decode-roofline.svg\"\n    source_asset: \"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg\"\n    sha256: 304b952ce3d768150291a52ecbfc8fb8e66207993ba3c83ed4a313f1c87d2893\n    source_asset_sha256: 304b952ce3d768150291a52ecbfc8fb8e66207993ba3c83ed4a313f1c87d2893\n    bytes: 7296\n    source_viewbox: [0,0,680,460]\n    license: \"CC BY-NC-SA 4.0\"\n    license_url: \"https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md\"\n    license_evidence: \"site/public/licenses/harvard-45ecc8d8-LICENSE.md\"\n    license_evidence_sha256: b6f4689d6fccf48d82d0871a3b994a122427fcb0b278971f6ba008be44e2c926\n    public_license_copy: \"site/public/licenses/harvard-45ecc8d8-LICENSE.md\"\n    modifications: \"Compared byte-for-byte with the author asset. Existing image retained without crop, redraw, relabeling or resampling.\"\n    derivation: source-svg-copy\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-10\"\n  - id: curated-harvard-harvard-performance-optimization-decision-tree-svg-cd7e4555257c\n    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/optimization-decision-tree.svg\n"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tests/fixtures/legacy-unhashed-assets.json",
+      "before_sha256": "cfa215a8dddccdbe96271b5474fc3512d0664dd5769574caeb4c6923b213f9f8",
+      "after_sha256": "dc414bd6b82eeb74f6c461240708fc20913e56324c40f308a1d074478d3640eb",
+      "lines": 304,
+      "changes": [
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/flash-attention/fig1-tiling.jpg\",\n    \"00 Учебник/Assets/Figures/curated/foundations-source-first/d2l-broadcasting-example.png\",\n    \"00 Учебник/Assets/Figures/curated/foundations-source-first/google-gradient-descent.png\",\n    \"00 Учебник/Assets/Figures/curated/gemma-2/figure1-memorization-tight.png\",\n    \"00 Учебник/Assets/Figures/curated/gemma/fig1.png\",\n",
+          "new": "    \"00 Учебник/Assets/Figures/curated/flash-attention/fig1-tiling.jpg\",\n    \"00 Учебник/Assets/Figures/curated/foundations-source-first/d2l-broadcasting-example.png\",\n    \"00 Учебник/Assets/Figures/curated/gemma-2/figure1-memorization-tight.png\",\n    \"00 Учебник/Assets/Figures/curated/gemma/fig1.png\",\n"
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/mamba/selective-ssm.png\",\n    \"00 Учебник/Assets/Figures/curated/mamba/ssm-three-views.png\",\n    \"00 Учебник/Assets/Figures/curated/micrograd/computational-graph.svg\",\n    \"00 Учебник/Assets/Figures/curated/micrograd/moon-mlp.png\",\n    \"00 Учебник/Assets/Figures/curated/mistral-7b/benchmark-comparison.png\",\n    \"00 Учебник/Assets/Figures/curated/mistral-7b/effective-model-sizes.png\",\n",
+          "new": "    \"00 Учебник/Assets/Figures/curated/mamba/selective-ssm.png\",\n    \"00 Учебник/Assets/Figures/curated/mamba/ssm-three-views.png\",\n    \"00 Учебник/Assets/Figures/curated/mistral-7b/benchmark-comparison.png\",\n    \"00 Учебник/Assets/Figures/curated/mistral-7b/effective-model-sizes.png\",\n"
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/flashattention-tiling.svg\",\n    \"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/gpu-memory-hierarchy.svg\",\n    \"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg\",\n    \"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/profiling-hierarchy.svg\",\n    \"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/roofline-model.svg\",\n",
+          "new": "    \"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/flashattention-tiling.svg\",\n    \"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/gpu-memory-hierarchy.svg\",\n    \"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/profiling-hierarchy.svg\",\n    \"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/roofline-model.svg\",\n"
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/modern-37-40-alternatives/retnet-dual-form.png\",\n    \"00 Учебник/Assets/Figures/curated/modern-37-40-alternatives/rwkv-architecture.png\",\n    \"00 Учебник/Assets/Figures/curated/modern-37-40-dense-ffn/transformer-block-ffn.png\",\n    \"00 Учебник/Assets/Figures/curated/modern-37-40-long-context/rope-decay.png\",\n    \"00 Учебник/Assets/Figures/curated/modern-37-40-moe/sparse-routing.png\",\n",
+          "new": "    \"00 Учебник/Assets/Figures/curated/modern-37-40-alternatives/retnet-dual-form.png\",\n    \"00 Учебник/Assets/Figures/curated/modern-37-40-alternatives/rwkv-architecture.png\",\n    \"00 Учебник/Assets/Figures/curated/modern-37-40-long-context/rope-decay.png\",\n    \"00 Учебник/Assets/Figures/curated/modern-37-40-moe/sparse-routing.png\",\n"
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/self-rag/fig3.png\",\n    \"00 Учебник/Assets/Figures/curated/source-audit-1-18/resnet-figure-2.png\",\n    \"00 Учебник/Assets/Figures/curated/source-audit-15-24/hf-tokenization-pipeline.svg\",\n    \"00 Учебник/Assets/Figures/curated/source-audit-15-24/tokenizer-choice-figure1.png\",\n    \"00 Учебник/Assets/Figures/curated/source-audit-25-31/deberta-disentangled-attention-equation4.png\",\n",
+          "new": "    \"00 Учебник/Assets/Figures/curated/self-rag/fig3.png\",\n    \"00 Учебник/Assets/Figures/curated/source-audit-1-18/resnet-figure-2.png\",\n    \"00 Учебник/Assets/Figures/curated/source-audit-15-24/tokenizer-choice-figure1.png\",\n    \"00 Учебник/Assets/Figures/curated/source-audit-25-31/deberta-disentangled-attention-equation4.png\",\n"
+        },
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/source-first-65-68/system-prompt-calibration.png\",\n    \"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-dropout-train.jpeg\",\n    \"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-learning-rates.jpeg\",\n    \"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif\",\n    \"00 Учебник/Assets/Figures/curated/t5/encoder-decoder-architecture.png\",\n",
+          "new": "    \"00 Учебник/Assets/Figures/curated/source-first-65-68/system-prompt-calibration.png\",\n    \"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-dropout-train.jpeg\",\n    \"00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif\",\n    \"00 Учебник/Assets/Figures/curated/t5/encoder-decoder-architecture.png\",\n"
+        }
+      ]
+    },
+    {
+      "source": "docs/audit/2026-11-09-release-readiness.json",
+      "before_sha256": "3f87b4b7b21732c9988a71ebc132b843de7974ef4ee5e276ac4851286de7c4f7",
+      "after_sha256": "6b86ed19c8ea1d4b239ec710c470a6558c14fb329e4f737769f580035757d4f2",
+      "lines": 1383,
+      "changes": [
+        {
+          "old": "    \"scope\": \"Root build, textbook manifest only. Agent evaluation now uses ToolSandbox Figures 1–2 and τ-bench Figure 4; the three prior Anthropic images remain links. The GPT history comparison also adds one verified local image in a separate journal.\"\n  },\n  \"remaining\": [\n    \"Reconcile digests and source records for 44 older rendered textbook entries. For 10 external textbook images, replace the embed with an appropriate licensed original or link to the source with a worked explanation where redistribution is unconfirmed. The broader source-library image inventory is separate.\",\n    \"Continue source/explanation and visual acceptance separately from mechanical build gates.\",\n    \"Live CI and Pages deployment require the user's authorization; dev and main were not changed.\"\n",
+          "new": "    \"scope\": \"Root build, textbook manifest only. Agent evaluation now uses ToolSandbox Figures 1–2 and τ-bench Figure 4; the three prior Anthropic images remain links. The GPT history comparison also adds one verified local image in a separate journal.\"\n  },\n  \"legacyTextbookSourceCopies20261110\": {\n    \"journal\": \"docs/audit/2026-11-10-legacy-textbook-source-copies-additions.json\",\n    \"checkedTextbookLocalePages\": 310,\n    \"upstreamByteMatchesPinned\": 7,\n    \"textbookRenderedImagePathsWithMatchingSHA256\": 1181,\n    \"registeredTextbookPathsStillWithoutSHA256\": 37,\n    \"remainingDistinctExternalTextbookImages\": 10,\n    \"scope\": \"Verified exact author bytes for Google ML Crash Course, two micrograd figures, the CS231n learning-rate figure, the Hugging Face course image dataset, The Illustrated GPT-2, and the Harvard ML Systems roofline. Neither images nor reader routes were changed. The separate CS231n optimizer animation was not relicensed.\"\n  },\n  \"remaining\": [\n    \"Reconcile digests and source records for 37 older rendered textbook entries. For 10 external textbook images, replace the embed with an appropriate licensed original or link to the source with a worked explanation where redistribution is unconfirmed. The broader source-library image inventory is separate.\",\n    \"Continue source/explanation and visual acceptance separately from mechanical build gates.\",\n    \"Live CI and Pages deployment require the user's authorization; dev and main were not changed.\"\n"
+        }
+      ]
+    }
+  ]
+}

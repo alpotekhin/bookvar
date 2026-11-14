@@ -9,15 +9,18 @@ import warnings
 from pathlib import Path
 
 import torch
+from kernel_split_baseline import kernels_before_graph_split
 
 ROOT=Path(__file__).resolve().parents[2]
-CHAPTER=ROOT/'00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md'
+CHAPTER=ROOT/'00 Учебник/10 ML Systems/09 Компиляция графов — PyTorch, JAX и CUDA Graphs.md'
 text=CHAPTER.read_text()
 text=re.sub(r'<!-- BEGIN REVIEW: JAX runtime 2026-10-27 -->\n.*?<!-- END REVIEW: JAX runtime 2026-10-27 -->\n\n', '', text, flags=re.S)
 start='<!-- BEGIN REVIEW: tracing control flow 2026-10-27 -->'
 end='<!-- END REVIEW: tracing control flow 2026-10-27 -->'
 section=text.split(start)[1].split(end)[0]
-previous=text.replace(start+section+end+'\n\n','')
+historical=re.sub(r'<!-- BEGIN REVIEW: JAX runtime 2026-10-27 -->\n.*?<!-- END REVIEW: JAX runtime 2026-10-27 -->\n\n', '', kernels_before_graph_split(), flags=re.S)
+historical_section=historical.split(start)[1].split(end)[0]
+previous=historical.replace(start+historical_section+end+'\n\n','')
 assert hashlib.sha256(previous.encode()).hexdigest()==\
     '61b8e6b36d4484c9d3ba2d920942701af321638e77556b7215fde7dbaa39922b'
 blocks=re.findall(r'```python\n(.*?)```',section,re.S)

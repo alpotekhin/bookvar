@@ -1,0 +1,117 @@
+{
+  "date": "2026-11-09",
+  "scope": "Review the complete image diffusion and flow matching chapter. Connect SD3 training choices to Euler inference and observed few-step quality; expose nine mechanisms through the existing reference index.",
+  "review": {
+    "sources": [
+      "Esser et al., PMLR 235 §§2–3, 5.1–5.1.1, Tables 1–2, Figure 3 and Appendix B.3. Figure 3 reproduced from proceedings PDF p. 7 under the PMLR publication agreement, CC BY 4.0.",
+      "Holderrieth and Erives, MIT 6.S184 notes §§2.1, 3.1–3.3 and 5.2, for the time and velocity convention and existing illustrations.",
+      "Peebles and Xie, DiT §3.2, §4; reference implementation ed81ce2229091fd4ecc9a223645f95cf379d582b models.py FinalLayer and diffusion/gaussian_diffusion.py p_mean_variance."
+    ],
+    "example": "The same Euler update moves 0 to 1 for t=0.75→0.50 with velocity −4 and τ=0.25→0.50 with velocity +4. Flipping only one sign moves it to −1. In original DiT, p=2 and C=4 yield 32 projected numbers per token, 8 channels after unpatchify, with a 4+4 split.",
+    "validation": "21 standalone chapter programs passed; PMLR Figure 3 was re-extracted byte-for-byte. Both curated-registry and legacy diffusion figure checks passed. Local build produced 2023 pages, 738 publication checks passed with the updated receipt independently rechecked, 230 built-output checks passed on the final build, and no internal link failures were found.",
+    "reader": "Checked current RU page and EN fallback at 375 and 1280 CSS pixels; all ten illustrations loaded, all nine links exist in each reference, and three changed sections were reached by those links. Inspected the new plot, original MIT trajectories and MM-DiT diagrams, including figure zoom/pan. No page overflow or KaTeX errors on the reviewed route.",
+    "limits": "Current English route remains the labeled canonical-language fallback, not a translation. The paper reports comparative evaluation with a fixed protocol, not our GPU runtime or a universal quality ranking. Public checkout, Pages-base, and deployment were not performed."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md",
+      "before_sha256": "d91e82d6d90ea7ee513416230b0decdc09590652246d4af2d09f280f33e62912",
+      "after_sha256": "73c7445849e3693eee019d293c8525a6e04c11931fb7da3cf39f61cf844dd546",
+      "lines": 767,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-20\nlast_verified: 2026-10-20\nprimary_sources:",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-11-09\nreference_terms:\n  - label: DDPM — прямое зашумление и обучающая цель\n    label_en: DDPM — forward noising and training target\n    anchor: diffusion-forward-noise\n  - label: Diffusion — связь предсказанного шума со score\n    label_en: Diffusion — relating predicted noise to the score\n    anchor: diffusion-score\n  - label: DDIM — детерминированный обратный шаг\n    label_en: DDIM — a deterministic reverse step\n    anchor: diffusion-ddim\n  - label: Latent diffusion — автоэнкодер и форма тензора\n    label_en: Latent diffusion — autoencoder and tensor shape\n    anchor: diffusion-latent\n  - label: Classifier-free guidance — условный и безусловный проходы\n    label_en: Classifier-free guidance — conditional and unconditional passes\n    anchor: diffusion-cfg\n  - label: DiT — разбиение на патчи и выходная голова\n    label_en: DiT — patchification and the output head\n    anchor: diffusion-dit\n  - label: Flow matching — поле скоростей всего распределения\n    label_en: Flow matching — the marginal velocity field\n    anchor: flow-marginal-field\n  - label: Stable Diffusion 3 — направление времени и знак скорости\n    label_en: Stable Diffusion 3 — time direction and velocity sign\n    anchor: flow-sd3-time\n  - label: Rectified flow — число шагов и качество генерации\n    label_en: Rectified flow — sampling steps and generation quality\n    anchor: flow-sampling-budget\nprimary_sources:"
+        },
+        {
+          "old": "## 1. Как создаётся учебный пример",
+          "new": "<a id=\"diffusion-forward-noise\"></a>\n\n## 1. Как создаётся учебный пример"
+        },
+        {
+          "old": "### Связь с score function",
+          "new": "<a id=\"diffusion-score\"></a>\n\n### Связь с score function"
+        },
+        {
+          "old": "### Один численный обратный шаг",
+          "new": "<a id=\"diffusion-ddim\"></a>\n\n### Один численный обратный шаг"
+        },
+        {
+          "old": "## 3. Latent diffusion: denoising не в RGB",
+          "new": "<a id=\"diffusion-latent\"></a>\n\n## 3. Latent diffusion: denoising не в RGB"
+        },
+        {
+          "old": "### Classifier-free guidance",
+          "new": "<a id=\"diffusion-cfg\"></a>\n\n### Classifier-free guidance"
+        },
+        {
+          "old": "### Patchify и DiT",
+          "new": "<a id=\"diffusion-dit\"></a>\n\n### Patchify и DiT"
+        },
+        {
+          "old": "В исходном DiT выход содержит оценки шума и диагональной ковариации обратного перехода. Поэтому при $C$ латентных каналах выходная patch-проекция имеет $2C$ каналов. У генератора с другой целевой величиной и фиксированной дисперсией выход может содержать только $C$ каналов. Нельзя переносить размер выходной головы между ними по одному слову DiT.",
+          "new": "В исходном DiT для каждого элемента латента предсказываются шум и параметр диагональной ковариации обратного перехода. При $C$ латентных каналах проекция одного токена патча размером $p×p$ выдаёт $p^2\\cdot2C$ чисел. Например, при $p=2$ и $C=4$ это $32$ числа на токен; после сборки патчей пространственный тензор имеет восемь каналов. Первые четыре идут в оценку шума. Остальные задают коэффициент интерполяции в логарифмической шкале между дисперсией условного обратного перехода и $\\beta_t$, а не подставляются напрямую как дисперсия. Этот порядок виден в [голове DiT](https://github.com/facebookresearch/DiT/blob/ed81ce2229091fd4ecc9a223645f95cf379d582b/models.py#L126-L134) и [вычислении дисперсии](https://github.com/facebookresearch/DiT/blob/ed81ce2229091fd4ecc9a223645f95cf379d582b/diffusion/gaussian_diffusion.py#L283-L294). При фиксированной дисперсии для шума достаточно $C$ выходных каналов."
+        },
+        {
+          "old": "### Почему прямые обучающие пути дают общее поле",
+          "new": "<a id=\"flow-marginal-field\"></a>\n\n### Почему прямые обучающие пути дают общее поле"
+        },
+        {
+          "old": "### Stable Diffusion 3: путь, обучение и MM-DiT",
+          "new": "<a id=\"flow-sd3-time\"></a>\n\n### Stable Diffusion 3: путь, обучение и MM-DiT"
+        },
+        {
+          "old": "[Stable Diffusion 3, §3–4](https://proceedings.mlr.press/v235/esser24a.html) сочетает латентное представление, прямолинейный путь rectified flow и мультимодальный Transformer. В статье время направлено от данных к шуму: $z_t=(1-t)x_0+t\\epsilon$, а целевая скорость равна $\\epsilon-x_0$. При замене $\\tau=1-t$ получается использованное выше направление и противоположный знак скорости.",
+          "new": "[Stable Diffusion 3, §3–4](https://proceedings.mlr.press/v235/esser24a.html) сочетает латентное представление, прямолинейный путь rectified flow и мультимодальный Transformer. В статье время направлено от данных к шуму: $z_t=(1-t)x_0+t\\epsilon$, а целевая скорость равна $\\epsilon-x_0$. При замене $\\tau=1-t$ получается использованное выше направление и противоположный знак скорости.\n\nВозьмём первую координату из примера с прямолинейным путём: чистое значение $3$, шум $-1$. В обозначениях статьи точка $z_{0{,}75}=0$, а скорость по $t$ равна $-4$. При генерации переходим с $t=0{,}75$ на $t=0{,}50$, поэтому $\\Delta t=-0{,}25$. Шаг Эйлера даёт $0+(-0{,}25)(-4)=1$. В нашем времени $\\tau$ тот же переход идёт с $0{,}25$ на $0{,}50$ со скоростью $+4$ и даёт ту же точку. Смена только знака скорости или только направления сетки уведёт координату к $-1$. Это расчёт для одной прямой с известной скоростью; при генерации вместо неё подставляют поле модели.\n\n~~~python\nfrom math import isclose\n\nclean, noise = 3.0, -1.0\nt, next_t = .75, .50\ntau, next_tau = 1 - t, 1 - next_t\npoint = (1 - t) * clean + t * noise\nfrom_paper = point + (next_t - t) * (noise - clean)\nfrom_noise = point + (next_tau - tau) * (clean - noise)\nwrong_sign = point + (next_t - t) * (clean - noise)\n\nassert isclose(from_paper, (1 - next_t) * clean + next_t * noise)\nassert (point, from_paper, from_noise, wrong_sign) == (0.0, 1.0, 1.0, -1.0)\n~~~"
+        },
+        {
+          "old": "<span id=\"7-быстрая-проверка-понимания\"></span>\n\n## 7. Полный цикл генерации",
+          "new": "<span id=\"7-быстрая-проверка-понимания\"></span>\n\n<a id=\"flow-sampling-budget\"></a>\n\n### Что происходит с качеством, если сократить генерацию до пяти шагов\n\nВ §5.1 статьи о Stable Diffusion 3 авторы меняли способ предобучения: путь зашумления, цель сети и распределение обучающих моментов времени. Архитектуру, оптимизатор и протокол оценки фиксировали. Затем для каждого обученного варианта генерировали изображения, меняя уже число шагов Эйлера. Это два разных решения: как выбирать $t$ для обучающего примера и в каких точках вызывать готовую сеть при генерации.\n\n![[00 Учебник/Assets/Figures/curated/diffusion-sampling-2026-11-09/sd3-fid-vs-steps.png|Исходный график FID для разных способов обучения при 5, 10, 25 и 50 шагах генерации]]\n\n*Patrick Esser et al., [Scaling Rectified Flow Transformers for High-Resolution Image Synthesis](https://proceedings.mlr.press/v235/esser24a.html), [Figure 3, с. 7](https://raw.githubusercontent.com/mlresearch/v235/main/assets/esser24a/esser24a.pdf#page=7), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). График извлечён из PDF; оси, линии и легенда не изменены.*\n\nСлева первая точка соответствует пяти шагам. У выделенной линии `rf/lognorm(0.00, 1.00)` FID заметно ниже, чем у `eps/linear`. К 25 шагам разрыв меньше. Сравните также две зелёные линии: сплошную для логит-нормальной выборки и пунктирную для равномерной. Обе используют прямолинейный обучающий путь, но одинакового качества при малом числе шагов не дают.\n\nНа графике меньшее значение лучше. Авторы измеряли расстояние между распределениями признаков сгенерированных и валидационных изображений; в этом опыте использованы признаки CLIP L/14 и 1000 генераций на настройку ([Appendix B.3](https://arxiv.org/html/2403.03206v1#A2.SS3)). Это не точность выполнения каждого запроса и не число миллисекунд. Отдельный сводный ранг из Table 1 учитывает и FID, и соответствие текста изображению: вариант `rf/lognorm(0.50, 0.60)` занимает в среднем 1-е место при 50 шагах и 8,5-е при пяти. Если в сервисе допустимы только пять вызовов поля, результат при 50 шагах не отвечает на вопрос о качестве в этом бюджете.\n\n## 7. Полный цикл генерации"
+        },
+        {
+          "old": "<span id=\"7-быстрая-проверка-понимания\"></span>\n\n<a id=\"flow-sampling-budget\"></a>",
+          "new": "<a id=\"flow-sampling-budget\"></a>"
+        },
+        {
+          "old": "## 7. Полный цикл генерации",
+          "new": "<span id=\"7-быстрая-проверка-понимания\"></span>\n\n## 7. Полный цикл генерации"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "30b92bd608b227488e4dbe0e83bb7524bf5c56e4e1f2fd72c3dc41bfa96ccc8b",
+      "after_sha256": "0eb0262b6cd33032267c461f1296e8d5537bc5880eb874f2391f443e03676e9a",
+      "lines": 1651,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|Как генерируются изображения: diffusion, latent diffusion и flow matching]]",
+          "new": "- [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|Как генерируются изображения: diffusion, latent diffusion и flow matching]]\n  - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#diffusion-forward-noise|DDPM — прямое зашумление и обучающая цель]]\n  - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#diffusion-score|Diffusion — связь предсказанного шума со score]]\n  - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#diffusion-ddim|DDIM — детерминированный обратный шаг]]\n  - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#diffusion-latent|Latent diffusion — автоэнкодер и форма тензора]]\n  - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#diffusion-cfg|Classifier-free guidance — условный и безусловный проходы]]\n  - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#diffusion-dit|DiT — разбиение на патчи и выходная голова]]\n  - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#flow-marginal-field|Flow matching — поле скоростей всего распределения]]\n  - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#flow-sd3-time|Stable Diffusion 3 — направление времени и знак скорости]]\n  - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#flow-sampling-budget|Rectified flow — число шагов и качество генерации]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "1f9ae8359fe1c2abba4b6a581d17ccd06731e8f2e43179cb1e0b840d191eefd8",
+      "after_sha256": "1e238d025732db008625fa0963a087fc75127d2b04cdf92c8f78d7581ccdc807",
+      "lines": 1653,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|Diffusion, latent diffusion, and flow matching]]",
+          "new": "- [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|Diffusion, latent diffusion, and flow matching]]\n  - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#diffusion-forward-noise|DDPM — forward noising and training target]]\n  - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#diffusion-score|Diffusion — relating predicted noise to the score]]\n  - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#diffusion-ddim|DDIM — a deterministic reverse step]]\n  - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#diffusion-latent|Latent diffusion — autoencoder and tensor shape]]\n  - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#diffusion-cfg|Classifier-free guidance — conditional and unconditional passes]]\n  - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#diffusion-dit|DiT — patchification and the output head]]\n  - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#flow-marginal-field|Flow matching — the marginal velocity field]]\n  - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#flow-sd3-time|Stable Diffusion 3 — time direction and velocity sign]]\n  - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#flow-sampling-budget|Rectified flow — sampling steps and generation quality]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "c4fa9936cbb8ff158c97246c0d854b56eceb61d2d5bccd449d3f8b83a7dc2cbe",
+      "after_sha256": "5f278c0ed7462620c9f5b136ff8ce214486d5e1642db8170ddb8463d4cb427de",
+      "lines": 23784,
+      "changes": [
+        {
+          "old": "assets:",
+          "new": "assets:\n  - id: \"curated-sd3-fid-vs-steps-704c59fc63e4\"\n    asset: \"00 Учебник/Assets/Figures/curated/diffusion-sampling-2026-11-09/sd3-fid-vs-steps.png\"\n    title: \"Figure 3: Rectified flows are sample efficient\"\n    author: \"Patrick Esser et al.\"\n    source_url: \"https://proceedings.mlr.press/v235/esser24a.html\"\n    source_image_url: \"https://raw.githubusercontent.com/mlresearch/v235/main/assets/esser24a/esser24a.pdf#page=7\"\n    source_asset: \"05 Источники/Originals/diffusion-flow-2026-10-20/sd3-pmlr.pdf\"\n    source_asset_sha256: \"e3db32f3c0630f6d137f0867802b7ae13b1508e329ae89f11e401010a6021ffe\"\n    source_page: 7\n    render_dpi: 360\n    render_page_size_px: [3060,3960]\n    crop_box_px: [260,328,1390,973]\n    dimensions_px: [1130,645]\n    sha256: \"704c59fc63e42973114040cd18920c7383b92429794c6648d5fbd52ef5a48927\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/vlm-evaluation-serving-2026-10-20/pmlr-license-agreement.pdf\"\n    license_evidence_sha256: \"3a3eac0ebdded57660c12c59028c5429b6d2b328be2c6fde534a104438444c31\"\n    modifications: \"The complete plot from the PMLR PDF with its original axes, curves and legend; only adjacent material and the typeset caption were excluded.\"\n    derivation: \"pdf-page-render-crop\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    metadata_status: \"verified\"\n    used_in: [\"00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md\"]"
+        }
+      ]
+    }
+  ]
+}

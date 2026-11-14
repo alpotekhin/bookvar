@@ -2,8 +2,108 @@
 title: Процессы, коллективные операции и DDP
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-27
-last_verified: 2026-10-27
+last_updated: 2026-11-05
+last_verified: 2026-11-05
+reference_terms:
+  - anchor: ddp-process-ranks
+    label: "Global rank, local rank и выбор устройства"
+    label_en: "Global rank, local rank and device selection"
+  - anchor: ddp-process-groups
+    label: "Группы процессов и согласованный new_group"
+    label_en: "Process groups and consistent new_group creation"
+  - anchor: ddp-launch
+    label: "Запуск torchrun и инициализация DDP"
+    label_en: "torchrun launch and DDP initialization"
+  - anchor: ddp-collective-results
+    label: "Коллективные операции: результат и владельцы тензора"
+    label_en: "Collective operations: results and tensor ownership"
+  - anchor: collective-destinations-gather-scatter-all-to-all
+    label: "Scatter, gather и all-gather: получатели результата"
+    label_en: "Scatter, gather and all-gather: result destinations"
+  - anchor: ddp-all-to-all
+    label: "All-to-all: отдельная часть каждому получателю"
+    label_en: "All-to-all: a separate part for each destination"
+  - anchor: ddp-uneven-all-to-all
+    label: "Неравные all-to-all: send counts и receive counts"
+    label_en: "Uneven all-to-all: send counts and receive counts"
+  - anchor: ddp-collective-order
+    label: "Совпадение порядка и смысла collective-операций"
+    label_en: "Matching collective order and meaning"
+  - anchor: ddp-replica-state
+    label: "Согласованность весов, Adam и буферов реплик"
+    label_en: "Consistency of replica weights, Adam and buffers"
+  - anchor: ddp-loss-reduction
+    label: "Среднее по процессам и нормировка по токенам"
+    label_en: "Process means versus token-normalized gradients"
+  - anchor: ddp-sampler
+    label: "DistributedSampler, set_epoch и повторные индексы"
+    label_en: "DistributedSampler, set_epoch and repeated indices"
+  - anchor: ddp-join
+    label: "DDP join: неравные входы и состояние оптимизатора"
+    label_en: "DDP join: uneven inputs and optimizer state"
+  - anchor: ddp-accumulation
+    label: "Накопление градиентов и область no_sync"
+    label_en: "Gradient accumulation and the no_sync region"
+  - anchor: ddp-token-window
+    label: "Общий знаменатель токенов за окно накопления"
+    label_en: "A global token denominator over the accumulation window"
+  - anchor: ddp-flat-gradients
+    label: "Объединение и обратное размещение градиентов"
+    label_en: "Flattening and restoring gradients"
+  - anchor: ddp-bucket-size
+    label: "Размер buckets и момент начала обмена"
+    label_en: "Bucket sizes and communication release times"
+  - anchor: ddp-unused-parameters
+    label: "Порядок редукции и неиспользованные параметры"
+    label_en: "Reduction order and unused parameters"
+  - anchor: ddp-overlap-readiness-streams-compilation
+    label: "Готовность buckets на всех rank и хвост обмена"
+    label_en: "Bucket readiness on every rank and the exposed tail"
+  - anchor: ddp-stream-lifetime
+    label: "Порядок CUDA streams и срок жизни хранилища"
+    label_en: "CUDA stream ordering and allocation lifetime"
+  - anchor: ddp-compiled-backward
+    label: "Компиляция backward и готовность autograd hooks"
+    label_en: "Backward compilation and autograd-hook readiness"
+  - anchor: ddp-resource-contention
+    label: "Конкуренция вычислений и обмена за ресурсы"
+    label_en: "Resource contention between compute and communication"
+  - anchor: ddp-ring-cost
+    label: "Кольцевой all-reduce: раунды, байты и задержки"
+    label_en: "Ring all-reduce: rounds, bytes and latency"
+  - anchor: ddp-ring-trace
+    label: "Reduce-scatter и all-gather по шагам кольца"
+    label_en: "Step-by-step ring reduce-scatter and all-gather"
+  - anchor: ddp-alternate-ring
+    label: "Кольцо с целыми тензорами и с разбиением"
+    label_en: "Whole-tensor rings versus chunked rings"
+  - anchor: ddp-capacity-bound
+    label: "Предел data parallelism при фиксированном батче"
+    label_en: "The data-parallel limit at a fixed global batch"
+  - anchor: ddp-scaling-efficiency
+    label: "Скрытое время обмена и ускорение полного шага"
+    label_en: "Hidden communication and full-step speedup"
+  - anchor: ddp-gossip
+    label: "Gossip: сохранение среднего и согласие реплик"
+    label_en: "Gossip: mean preservation and replica consensus"
+  - anchor: ddp-error-feedback
+    label: "Error feedback и состояние остатка"
+    label_en: "Error feedback and residual state"
+  - anchor: ddp-powersgd
+    label: "PowerSGD: низкоранговое сжатие и его цена"
+    label_en: "PowerSGD: low-rank compression and its costs"
+  - anchor: ddp-powersgd-steps
+    label: "Согласование факторов PowerSGD двумя редукциями"
+    label_en: "Coordinating PowerSGD factors through two reductions"
+  - anchor: ddp-failures
+    label: "Диагностика остановившегося или разошедшегося rank"
+    label_en: "Diagnosing a stopped or divergent rank"
+  - anchor: ddp-correctness-validation
+    label: "Сверка DDP с однопроцессным обучением"
+    label_en: "Comparing DDP with single-process training"
+  - anchor: ddp-bandwidth
+    label: "Algorithm bandwidth и bus bandwidth"
+    label_en: "Algorithm bandwidth and bus bandwidth"
 source_language: mixed
 source_unit_id:
   - lecture-07-figure-step-5-rendering-1
@@ -60,6 +160,8 @@ primary_sources:
 отдельная задача. Способы такого разделения сопоставлены в
 [[44 Distributed training и mixed precision|предыдущей обзорной главе]].
 
+<a id="ddp-process-ranks"></a>
+
 ## Процесс, устройство и группа процессов
 
 В обычной конфигурации PyTorch DDP на каждой GPU работает отдельный процесс.
@@ -68,7 +170,7 @@ primary_sources:
 Чтобы отправить сообщение нужному участнику, каждому процессу назначают
 номер — *rank*. Это номер процесса, а не универсальный идентификатор GPU.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-rank-topology.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-rank-topology.png|Глобальные и локальные номера восьми процессов на двух машинах]]
 
 *Нумерация восьми процессов на двух машинах. На второй машине локальные номера
 снова начинаются с нуля, а глобальные продолжаются с четырёх. Источник:
@@ -82,6 +184,8 @@ PDF p. 32; исходная схема — Lightning Fabric.
 устройство 2. Поэтому передать ему `cuda:6` было бы ошибкой: на этой машине
 доступны только устройства с локальными номерами от 0 до 3. При иной настройке
 видимости GPU соответствие локального номера и устройства задают явно.
+
+<a id="ddp-process-groups"></a>
 
 Коллективная операция выполняется не обязательно всеми процессами запуска,
 а участниками выбранной группы — `ProcessGroup`. После `init_process_group`
@@ -98,6 +202,8 @@ PDF p. 32; исходная схема — Lightning Fabric.
 к настройкам по умолчанию, без `use_local_synchronization=True`, у которого
 свои требования. Нельзя переносить условие «только выбранные rank»
 с обмена на создание группы без проверки API.
+
+<a id="ddp-launch"></a>
 
 Для запуска одной копии процесса на каждой из четырёх GPU одной машины
 можно использовать `torchrun --standalone --nproc-per-node=4 train.py`.
@@ -131,6 +237,8 @@ ddp = DDP(model, device_ids=[local_rank])
 [Документация PyTorch: torchrun](https://docs.pytorch.org/docs/2.14/elastic/run.html),
 [группы процессов](https://docs.pytorch.org/docs/2.14/distributed.html#groups).
 
+<a id="ddp-collective-results"></a>
+
 ## От сообщений к коллективным операциям
 
 Пара `send`/`recv` задаёт один обмен: какой процесс отправляет тензор и какой
@@ -140,7 +248,7 @@ ddp = DDP(model, device_ids=[local_rank])
 который должен получить каждый участник, а библиотека выбирает порядок
 пересылок с учётом размера сообщения и соединений между устройствами.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/collective-primitives-overview.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/collective-primitives-overview.svg|Входы, выходы и размещение результатов четырёх коллективных операций]]
 
 *Сравнение входов и выходов коллективных операций. Редукция складывает
 значения, а gather объединяет части тензора.
@@ -274,6 +382,8 @@ buffer after `reduce` is not a defined copy of the reduction result.
 | Reduce, SUM | $t_0+t_1+t_2+t_3$ | Selected destination only |
 | All-reduce, SUM | The same elementwise sum | All four ranks |
 
+<a id="ddp-all-to-all"></a>
+
 ### All-to-all sends a different part to each destination
 
 All-gather starts with one local tensor per source and makes its contents
@@ -341,6 +451,8 @@ in `all_to_all_single`. Backend support must be checked for the chosen
 operation and device; a Gloo result does not establish NCCL performance.
 [PyTorch v2.14.1 API source](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/torch/distributed/distributed_c10d.py).
 
+<a id="ddp-uneven-all-to-all"></a>
+
 ### Uneven all-to-all: send counts become receive counts
 
 Expert routing can produce different token counts for each destination.
@@ -348,13 +460,16 @@ A variable-size implementation needs compatible send/receive counts and
 output storage. It can exchange those counts and specify matching split
 sizes. The PyTorch API's uneven-split example makes the bookkeeping visible:
 
-| Source rank | To rank 0 | To rank 1 | To rank 2 | To rank 3 | Total sent |
+The numbered columns name destination ranks. The last column and row
+contain the sent and received totals, respectively.
+
+| Source | To 0 | To 1 | To 2 | To 3 | Sent |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | 0 | 2 | 2 | 1 | 1 | 6 |
 | 1 | 3 | 2 | 2 | 2 | 9 |
 | 2 | 2 | 1 | 1 | 1 | 5 |
 | 3 | 2 | 2 | 2 | 1 | 7 |
-| Total received | 9 | 7 | 6 | 5 | 27 |
+| Total | 9 | 7 | 6 | 5 | 27 |
 
 Each source stores its outgoing pieces consecutively, in destination order.
 Rank 0's input is `[0,1,2,3,4,5]`, so its one-element piece for rank 2 is
@@ -411,6 +526,8 @@ and the destination process rank describe different address spaces.
 
 <!-- END REVIEW: collective destinations 2026-10-27 -->
 
+<a id="ddp-collective-order"></a>
+
 Коллективные операции требуют согласованного участия процессов: совпадающих
 типов операций, совместимых размеров и типов тензоров, одинакового порядка
 вызовов. Если один процесс вошёл в all-reduce градиента слоя A, а другой —
@@ -431,6 +548,8 @@ and the destination process rank describe different address spaces.
 сам all-reduce, остальные процессы не войдут в обмен. DDP автоматически
 синхронизирует градиенты, но не превращает локальное скалярное значение
 потерь в глобальную метрику.
+
+<a id="ddp-replica-state"></a>
 
 <a id="ddp-как-replicated-state-machine"></a>
 
@@ -474,7 +593,7 @@ $$
 нормализацию по глобальному пакету: для согласования статистик в самом
 вычислении нужен соответствующий алгоритм, например SyncBatchNorm.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/data-parallel-flow.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/data-parallel-flow.svg|Четыре полные реплики модели с разными данными и общей редукцией градиентов]]
 
 *На каждой GPU остаётся полная модель; разделяются данные, а перед обновлением
 объединяются градиенты. На рисунке четыре реплики по 32 примера,
@@ -483,6 +602,8 @@ Systems Book, [Distributed Training, `fig-data-parallel-flow`](https://github.co
 CC BY-NC-SA 4.0. Доля времени обмена 10–40% в нижней подписи — иллюстративная
 оценка источника, а не гарантированный диапазон для DDP; в этой главе
 она не используется в расчётах.*
+
+<a id="ddp-loss-reduction"></a>
 
 ### Среднее по процессам и среднее по данным
 
@@ -530,6 +651,8 @@ $$
 даёт $0{,}5$ и $4{,}5$; после DDP получается $(0{,}5+4{,}5)/2=2{,}5$.
 При взвешенных потерях знаменатель тоже должен соответствовать определению
 целевой функции: число токенов не заменяет сумму их весов.
+
+<a id="ddp-sampler"></a>
 
 ## Как разделить данные: DistributedSampler
 
@@ -586,6 +709,8 @@ sampler, наоборот, добавляет повторные индексы,
 с исключением при первом исчерпавшем данные процессе.
 [PyTorch: обработка неравных входов](https://docs.pytorch.org/tutorials/advanced/generic_join.html).
 
+<a id="ddp-join"></a>
+
 ### Что делает join с закончившим работу процессом
 
 Пусть процесс 0 получил один пакет, а процесс 1 — два. После первого
@@ -617,6 +742,8 @@ Adam выполнил один шаг, а другой два, его момен
 обмены. Отказ процесса и неравномерный объём данных — разные ситуации.
 Семантика делителя и финального распространения модели описана в
 [PyTorch 2.14, DDP.join](https://docs.pytorch.org/docs/2.14/generated/torch.nn.parallel.DistributedDataParallel.html#torch.nn.parallel.DistributedDataParallel.join).
+
+<a id="ddp-accumulation"></a>
 
 ## Накопление градиентов и no_sync
 
@@ -658,6 +785,8 @@ optimizer.step()
 Однако оно корректно только при указанном условии одинаковых размеров
 микробатчей. Для последовательностей разной длины нужна нормировка по общему
 числу учитываемых токенов **за всё окно и на всех процессах**:
+
+<a id="ddp-token-window"></a>
 
 ```python
 # Каждый labels содержит уже выровненные целевые токены.
@@ -708,6 +837,8 @@ all-reduce и показанный код согласованно прекра�
 Нулевые цели не разрешают подавать некорректные входы: все используемые
 индексы и формы должны оставаться допустимыми, а промежуточные вычисления —
 конечными. Умножение уже возникшего NaN на ноль его не устраняет.
+
+<a id="ddp-flat-gradients"></a>
 
 <a id="от-корректного-ddp-к-перекрытию-communication"></a>
 
@@ -765,7 +896,7 @@ for grad in grads:
 в группу — *bucket*. Как только все её градиенты готовы и наступила очередь
 этой группы, запускается асинхронный all-reduce.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ddp-review-2026-09/pytorch-ddp-fig4-gradient-reduction.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ddp-review-2026-09/pytorch-ddp-fig4-gradient-reduction.png|Autograd двух реплик, упаковка градиентов в buckets и обмен]]
 
 *Две копии сети из двух линейных слоёв. Стрелки autograd идут от функции
 потерь к параметрам; пунктир показывает копирование градиентов в буферы DDP;
@@ -792,6 +923,8 @@ CUDA events или явную синхронизацию устройства. �
 не делает обычный CPU-таймер автоматически корректным.
 [CS336 Assignment 2, §5.3](https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf#page=34).
 
+<a id="ddp-bucket-size"></a>
+
 Размер группы градиентов задаёт компромисс. Очень маленькие группы позволяют
 рано начать обмен, но создают много коротких операций. Очень большие
 эффективнее используют канал, но поздно становятся готовы. В крайнем случае
@@ -799,7 +932,7 @@ CUDA events или явную синхронизацию устройства. �
 Поэтому `bucket_cap_mb` выбирают по измеренному времени шага и его временной
 диаграмме, а не только по скорости отдельного all-reduce.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-overview-2026-10-23/hf-ddp-sequential.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-overview-2026-10-23/hf-ddp-sequential.svg|Последовательные backward и редукция всех градиентов]]
 
 *Nouamane Tazi и соавторы, Hugging Face,
 [Ultra-Scale Playbook, исходный SVG](https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/dp_overlap1.svg),
@@ -807,7 +940,7 @@ CUDA events или явную синхронизацию устройства. �
 backward, затем идёт общая редукция `ALL`. Числа 0–2 обозначают слои,
 две строки — вычисления и передачу, а не разные процессы.*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-overview-2026-10-23/hf-ddp-overlap.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-overview-2026-10-23/hf-ddp-overlap.svg|Передачи градиентов слоёв перекрываются с оставшимся backward]]
 
 *Те же авторы, [исходный SVG с перекрытием](https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/dp_overlap2.svg),
 [Apache-2.0](/licenses/ultrascale-Apache-2.0.txt). Передача частей
@@ -831,6 +964,8 @@ backward, затем идёт общая редукция `ALL`. Числа 0–
 порядок готовности, конкуренция за GPU и сеть, а также уже выполняемые
 обмены.
 
+<a id="ddp-unused-parameters"></a>
+
 ### Порядок операций и неиспользованные параметры
 
 Процессы могут вычислять градиенты с разной скоростью и даже в разном порядке.
@@ -839,7 +974,7 @@ backward, затем идёт общая редукция `ALL`. Числа 0–
 DDP соблюдает этот порядок, даже если более поздний буфер локально готов раньше.
 Это видно и в [реализации `Reducer::mark_bucket_ready`](https://github.com/pytorch/pytorch/blob/v2.14.0/torch/csrc/distributed/c10d/reducer.cpp#L1051-L1074).
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ddp-review-2026-09/pytorch-ddp-fig3-order-and-unused-gradients.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ddp-review-2026-09/pytorch-ddp-fig3-order-and-unused-gradients.png|Неверный порядок редукций и bucket с отсутствующим градиентом]]
 
 *Слева показан неверный обмен между разными группами градиентов, справа —
 группа, которая не станет полностью готовой из-за отсутствующего $g_3$.
@@ -968,6 +1103,8 @@ channels, and overlap with other traffic. The deliberately serialized model
 isolates readiness and fixed ordering; it does not predict a cluster's timing.
 The ordering requirement is documented in the
 [PyTorch DDP design note](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/docs/source/notes/ddp.md#internal-design).
+
+<a id="ddp-stream-lifetime"></a>
 
 ### Stream ordering and allocation lifetime
 
@@ -1099,6 +1236,8 @@ read of the result from the caller stream. This is CUDA/NCCL example code,
 not an executed test on this CPU-only machine. Correct dependencies permit
 overlap; they do not establish that the hardware actually ran work concurrently.
 
+<a id="ddp-compiled-backward"></a>
+
 ### Compiling backward can change when hooks become ready
 
 The compilation boundary also changes readiness. A faster backward region
@@ -1166,9 +1305,11 @@ The selected implementation counts parameter sizes in reverse graph order;
 it can extend a bucket to obtain a usable graph output and bypasses splitting
 when there is only one bucket. It is not a guarantee of one compiled region
 per layer or perfectly aligned boundaries in every model. The
-[[02 Areas/ML & DL/00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению#torch-compile-graphs-guards-recompilation|Dynamo explanation in S8]]
+[[02 Areas/ML & DL/00 Учебник/10 ML Systems/09 Компиляция графов — PyTorch, JAX и CUDA Graphs#torch-compile-graphs-guards-recompilation|Dynamo explanation in S8]]
 introduces FX graphs, guards and ordinary graph breaks; here the deliberate
 partition serves the distributed schedule.
+
+<a id="ddp-resource-contention"></a>
 
 ### Resource contention is outside the readiness-only model
 
@@ -1195,6 +1336,8 @@ it cannot show CUDA overlap, NCCL resource use or GPU speedup.
 
 <!-- END REVIEW: DDP overlap 2026-10-26 -->
 
+<a id="ddp-ring-cost"></a>
+
 ## Сколько стоит all-reduce
 
 Даже правильно организованный обмен занимает время. Для оценки полезно
@@ -1209,7 +1352,7 @@ $$
 канала. Это приближённая модель: она не учитывает конкуренцию потоков,
 вычисления при редукции и все особенности топологии.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/ring-allreduce.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/ring-allreduce.svg|Фазы reduce-scatter и all-gather кольцевого all-reduce]]
 
 *Кольцевой all-reduce состоит из накопления суммы частей и распространения
 готовых частей. Источник: Vijay Janapa Reddi и авторы Harvard Edge ML Systems
@@ -1242,6 +1385,8 @@ $\alpha=5\,\mu\mathrm{s}$ задержки раундов добавляют 70 
 Для тензора 4 KiB, напротив, передача занимает лишь около 0,29 мкс,
 и почти всё расчётное время приходится на задержки запуска.
 
+<a id="ddp-ring-trace"></a>
+
 ### Один фрагмент на четырёх процессах
 
 Вернёмся к четырём тензорам `[0,1,2,3]`, `[1,2,3,4]`,
@@ -1264,6 +1409,8 @@ $\alpha=5\,\mu\mathrm{s}$ задержки раундов добавляют 70 
 и собирает `[6,10,14,18]`. Каждый участник отправил шесть сообщений
 размером $S/4$, то есть $1{,}5S$ байтов.
 
+<a id="ddp-alternate-ring"></a>
+
 В [задаче `alternate_ring_all_reduce`, CS336 Assignment 2, §8.1](https://github.com/stanford-cs336/assignment2-systems/blob/ca8bc81a59b70516f7ebb2da4808daade877c736/cs336_assignment2_systems.pdf#page=41)
 предложен другой алгоритм: каждый участник передаёт по кольцу целые
 исходные тензоры и добавляет каждый полученный тензор к своей сумме.
@@ -1282,7 +1429,7 @@ $3S$ байтов. В общем случае время без задержек
 выгоден один алгоритм, для крупных — другой. NCCL выбирает алгоритм
 и протокол с учётом оборудования и размера сообщения.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p6.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l08-p6.png|Пути связи GPU через NVLink, NVSwitch, PCIe и сетевые адаптеры]]
 
 *Разные пути обмена между GPU: прямые соединения и NVSwitch внутри машины,
 PCIe и сетевые адаптеры HCA для других маршрутов. Источник: Tatsu Hashimoto,
@@ -1296,6 +1443,8 @@ PDF p. 6. Поколения интерфейсов и числа на рису�
 стоимость. Иерархические алгоритмы учитывают эту разницу и организуют обмен
 внутри узлов отдельно от межузлового. RDMA — способ доступа к удалённой памяти,
 а не альтернатива Ethernet: RoCE реализует RDMA поверх Ethernet.
+
+<a id="ddp-capacity-bound"></a>
 
 ### Где возникает предел параллелизма по данным
 
@@ -1365,6 +1514,8 @@ backward; начатая после этого передача оставляе
 для редукции вместо FP16/BF16 время передачи в этой модели
 удваивается, и предел становится $N\le1+bw/(2f)$.
 
+<a id="ddp-scaling-efficiency"></a>
+
 ### Полезность масштабирования
 
 Пусть обратный проход без обмена занимает 180 мс, а обмен — 70 мс.
@@ -1386,6 +1537,8 @@ backward; начатая после этого передача оставляе
 точного объединения всех градиентов передавать приближение или обмениваться
 лишь с частью процессов, меняется уже алгоритм обучения. Ускорение здесь
 нельзя оценивать без проверки качества модели.
+
+<a id="ddp-gossip"></a>
 
 При *gossip*-обмене каждый участник усредняет значения только с соседями
 в выбранном графе. После одного раунда глобального среднего обычно ещё нет:
@@ -1410,6 +1563,8 @@ $[4/3,0,4/3,4/3]$, хотя глобальное среднее равно 1.
 к симметричному кольцу, не ко всем вариантам gossip из
 [EDLS, Week 3, p39–51](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week03_data_parallel/lecture.pdf#page=39).
 
+<a id="ddp-error-feedback"></a>
+
 При сжатии градиентов часть информации теряется. Например, если каждый раз
 округлять маленькие значения до нуля, их накопленный вклад может исчезнуть
 полностью. Метод *error feedback* сохраняет неотправленный остаток и добавляет
@@ -1430,7 +1585,7 @@ $$
 Это объясняет назначение остатка, но само по себе не доказывает сходимость
 любого компрессора.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ddp-2026-10-23/edls-error-feedback.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ddp-2026-10-23/edls-error-feedback.png|Сжатие градиента с сохранением неотправленного остатка для следующего шага]]
 
 *Авторы курса Efficient DL Systems (ВШЭ и ШАД),
 [Week 3, полный слайд 58](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week03_data_parallel/lecture.pdf#page=58),
@@ -1446,6 +1601,8 @@ $$
 следующее обновление уже не продолжит прежнюю последовательность
 сжатых обновлений. Для воспроизведения нужно сохранять и это состояние.
 
+<a id="ddp-powersgd"></a>
+
 PowerSGD использует низкоранговое приближение матрицы градиента
 $G\in\mathbb R^{m\times n}$ в виде $PQ^\top$. При ранге $r$ вместо $mn$
 элементов передаются факторы суммарного размера $r(m+n)$. Для матрицы
@@ -1457,6 +1614,8 @@ $4096\times4096$ и $r=8$ это 65 536 вместо 16 777 216 чисел, то
 зависит от формы, представления градиента и реализации метода.
 [Vogels et al., PowerSGD, 2019](https://arxiv.org/abs/1905.13727),
 [реализация PyTorch PowerSGD](https://docs.pytorch.org/docs/2.14/ddp_comm_hooks.html#powersgd-communication-hook).
+
+<a id="ddp-powersgd-steps"></a>
 
 ### Как согласовать низкоранговое приближение
 
@@ -1512,6 +1671,8 @@ DDP communication hook; совместимость сохранённого со
 нормировки и момента включения сжатия проверяют по
 [документации hook](https://docs.pytorch.org/docs/2.14/ddp_comm_hooks.html#powersgd-communication-hook).
 
+<a id="ddp-failures"></a>
+
 ## Если один процесс остановился или пошёл по другой ветви
 
 Ошибка распределённой программы нередко видна не там, где возникла.
@@ -1554,6 +1715,8 @@ DDP communication hook; совместимость сохранённого со
 и состав контрольной точки разбираются в
 [[44h Fault tolerance и fleet orchestration|главе об отказоустойчивости]].
 
+<a id="ddp-correctness-validation"></a>
+
 ## Проверка
 
 Корректность и скорость проверяют отдельно. Сначала берут модель без DDP
@@ -1582,6 +1745,8 @@ CS336, необходимо сохранить обе архитектуры и�
 Время лучше собирать со всех процессов: слишком раннее завершение измерения
 на одном участнике может скрыть ожидание на другом. Одинаковые размеры входных
 тензоров обязательны для рассматриваемого all-reduce.
+
+<a id="ddp-bandwidth"></a>
 
 Наконец, указывать просто «пропускная способность» недостаточно.
 В `nccl-tests` используются две нормировки:

@@ -18,7 +18,7 @@ import torch.nn.functional as F
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT/"00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md"
 blocks = re.findall(r"~~~python\n(.*?)\n~~~", CHAPTER.read_text(), re.S)
-assert len(blocks) == 2
+assert len(blocks) == 4
 env = {}
 for index, block in enumerate(blocks):
     exec(compile(block, f"{CHAPTER}:python-{index+1}", "exec"), env)
@@ -96,6 +96,28 @@ for row in rows:
     np.testing.assert_allclose(values,expected,atol=5e-5,rtol=0)
 assert trace["activated"][0,-1,0]<0 and trace["activated"][0,-1,5]>1
 print("PASS all six published SwiGLU rows and non-probabilistic gate values")
+
+# Verify the published generation table using independent block arithmetic.
+# The output matrix selects hidden coordinates 1, 2, 4 and 3.
+normed = ref[0, 1:3] / np.sqrt(
+    (ref[0, 1:3] ** 2).mean(-1, keepdims=True) + 1e-5
+)
+vocab_logits = normed[:, [0, 1, 3, 2]]
+generation_rows = re.findall(
+    r"^\| (?:Prefill|Decode)<br>[^|]+\| ([0-9., ]+<br>[0-9., ]+) \| Выход: `([^`]+)`<br>Кэш: ([0-9, ]+) \|$",
+    CHAPTER.read_text(), re.M,
+)
+assert len(generation_rows) == 2
+np.testing.assert_allclose(
+    vocab_logits,
+    [[float(value) for value in row[0].replace("<br>", "").split(",")] for row in generation_rows],
+    atol=5e-5, rtol=0,
+)
+np.testing.assert_allclose(env["prompt_logits"].numpy(), vocab_logits[0], atol=2e-12, rtol=0)
+np.testing.assert_allclose(env["decode_logits"].numpy(), vocab_logits[1], atol=2e-12, rtol=0)
+assert [env["vocab"][i] for i in vocab_logits.argmax(axis=-1)] == [row[1] for row in generation_rows]
+assert [[int(i) for i in row[2].split(",")] for row in generation_rows] == [[0, 1], [0, 1, 2]]
+print("PASS independent prefill/decode logits and first-token/stop-token choices")
 
 # The derivative check uses a scalar probe on all output positions, not LM quality.
 probe=torch.arange(12,dtype=torch.float64).reshape(1,3,4)/10-.35
@@ -315,6 +337,22 @@ assert not torch.allclose(badq,correctq)
 allowed=torch.arange(3)[None,:]<=torch.arange(1,3)[:,None]
 assert allowed.tolist()==[[True,True,False],[True,True,True]]
 assert not torch.equal(allowed,torch.ones(2,3,dtype=torch.bool).tril())
+# The PyTorch shorthand matches upper-left alignment; a suffix query
+# needs the offset implied by its absolute position.
+from torch.nn.attention.bias import causal_lower_right
+with torch.no_grad():
+    _, past, _ = model(x[:, :1])
+    _, _, suffix_trace = model(x[:, 1:], start_pos=1, cache=past)
+    q = suffix_trace["q"]
+    k, v = (suffix_trace[name].repeat_interleave(2, dim=1) for name in ("k", "v"))
+    sdpa = F.scaled_dot_product_attention
+    upper = sdpa(q, k, v, is_causal=True)
+    upper_mask = torch.ones_like(allowed).tril()
+    torch.testing.assert_close(upper, sdpa(q, k, v, attn_mask=upper_mask))
+    lower = sdpa(q, k, v, attn_mask=causal_lower_right(2, 3))
+    torch.testing.assert_close(lower, suffix_trace["mixed"])
+    np.testing.assert_allclose(lower[0,0,0].numpy(), [.298538,1.411221], atol=5e-7)
+    assert not torch.allclose(upper, lower)
 # window two can relay 0 -> 1 -> 2 through two layers.
 a=np.tril(np.ones((5,5),dtype=int))-np.tril(np.ones((5,5),dtype=int),-2)
 assert a[2,0]==0 and (a@a)[2,0]>0
@@ -348,5 +386,71 @@ assert 2*32000*4096==262144000 and (100/80)**2==1.5625
 assert math.isclose((1-.001*.1)*2,1.9998)
 assert (1+1)+(1+1)**2==6 and 1+1+1**2==3
 print("PASS config width/vocab/recipe boundaries, original Qwen half-width and T5-11B 24-layer correction")
+
+# Official config files and the HTTP byte range containing only the header.
+case = ROOT/"05 Источники/Originals/decoder-configs-2026-11-10"
+snapshots = {
+    "modeling_qwen3.py": "704c914530530a1acb0b443add1f520404e3ac2c28c0ab7e16f80f86cfe8ccb2",
+    "qwen3-06b-config.json": "504a6b58c4271583724e66584b6b7698aea18450209df6b2f7582df0e89cee59",
+    "qwen3-8b-config.json": "3bd01d7ad7a2e203ecbbe84e24087a51c6d2a108ee4bcc42d0016bf49564983a",
+    "safetensors-header.bin": "da8f2268dd6a09cb578dcc4a8dad1c0b41e7d323499625fb219757dfca29f6c8",
+}
+for name, digest in snapshots.items():
+    assert hashlib.sha256((case/name).read_bytes()).hexdigest() == digest
+small, large = (json.loads((case/name).read_bytes())
+                for name in ("qwen3-06b-config.json", "qwen3-8b-config.json"))
+header = (case/"safetensors-header.bin").read_bytes()
+assert int.from_bytes(header[:8], "little") + 8 == len(header) == 35256
+tensors = json.loads(header[8:])
+assert tensors.pop("__metadata__") == {"format": "pt"}
+d, h, q, kv, f, layers, vocab = (small[key] for key in (
+    "hidden_size", "head_dim", "num_attention_heads", "num_key_value_heads",
+    "intermediate_size", "num_hidden_layers", "vocab_size"))
+assert (d, h, q, kv, f, layers, vocab) == (1024, 128, 16, 8, 3072, 28, 151936)
+assert small["tie_word_embeddings"] and not small["attention_bias"]
+expected_layer = {
+    "self_attn.q_proj.weight": [q*h, d], "self_attn.k_proj.weight": [kv*h, d],
+    "self_attn.v_proj.weight": [kv*h, d], "self_attn.o_proj.weight": [d, q*h],
+    "self_attn.q_norm.weight": [h], "self_attn.k_norm.weight": [h],
+    "input_layernorm.weight": [d], "post_attention_layernorm.weight": [d],
+    "mlp.gate_proj.weight": [f, d], "mlp.up_proj.weight": [f, d],
+    "mlp.down_proj.weight": [d, f],
+}
+expected = {"model.embed_tokens.weight": [vocab, d], "model.norm.weight": [d]}
+for layer in range(layers):
+    expected.update({f"model.layers.{layer}.{name}": shape
+                     for name, shape in expected_layer.items()})
+assert len(expected) == len(tensors) == 310
+assert {name: data["shape"] for name, data in tensors.items()} == expected
+assert {data["dtype"] for data in tensors.values()} == {"BF16"}
+attn, ff, norms = 2*d*(q+kv)*h, 3*d*f, 2*d+2*h
+assert (attn, ff, norms, attn+ff+norms) == (6291456, 9437184, 2304, 15730944)
+assert sum(map(math.prod, expected.values())) == layers*(attn+ff+norms)+vocab*d+d == 596049920
+cursor = 0
+for data in sorted(tensors.values(), key=lambda data: data["data_offsets"][0]):
+    assert data["data_offsets"] == [cursor, cursor+2*math.prod(data["shape"])]
+    cursor = data["data_offsets"][1]
+assert cursor + len(header) == 1192135096
+source = (case/"modeling_qwen3.py").read_text()
+forward = source.split("class Qwen3Attention", 1)[1].split("class Qwen3DecoderLayer", 1)[0]
+assert forward.index("self.q_norm(self.q_proj") < forward.index("apply_rotary_pos_emb(") < forward.index("past_key_value.update(")
+assert forward.index("self.k_norm(self.k_proj") < forward.index("apply_rotary_pos_emb(")
+assert "self.v_proj(hidden_states).view(hidden_shape)" in forward
+assert (large["num_attention_heads"], large["num_key_value_heads"], large["head_dim"],
+        large["num_hidden_layers"], large["tie_word_embeddings"]) == (32, 8, 128, 36, False)
+cache_mib = lambda c: 2*c["num_hidden_layers"]*c["num_key_value_heads"]*c["head_dim"]*2*4096//(2**20)
+assert all(not c["use_sliding_window"] for c in (small, large))
+assert (cache_mib(small), cache_mib(large)) == (448, 576)
+print("PASS pinned Qwen3 configurations, all 310 BF16 header tensors and byte offsets, Q/K norm order, and KV arithmetic")
+
+# The chapter estimates retained positions, not an allocated GPU peak.
+local_group = lambda tokens: 5*min(tokens, 1024)+tokens
+assert local_group(512) == 6*512 and local_group(1024) == 6*1024
+assert local_group(32768) == 37888 and 6*32768 == 196608
+assert round(100*local_group(32768)/(6*32768), 1) == 19.3
+with torch.no_grad():
+    _, local_cache, _ = model(x, window=2)
+    assert local_cache[0].shape[2] == x.shape[1] == 3
+print("PASS mixed-cache capacity estimate and toy negative control: mask does not evict K/V")
 print("No released-weight quality, GPU memory peak, kernel speed or complete-course transfer claim.")
 print("CHAPTER_SHA256",hashlib.sha256(CHAPTER.read_bytes()).hexdigest())

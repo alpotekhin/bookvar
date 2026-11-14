@@ -47,7 +47,7 @@ def check_grads(loss, arrays, expected):
 
 # Run the actual public example, not a separately maintained approximation.
 blocks = re.findall(r"```python\n(.*?)\n```", text, re.S)
-assert len(blocks) == 3
+assert len(blocks) == 4  # three NumPy examples plus the original EDLS torch classes
 def execute_example(name):
     match = re.search(r"<!-- example:" + re.escape(name) + r" -->\s*```python\n(.*?)\n```", text, re.S)
     assert match, name
@@ -477,12 +477,13 @@ assert '<a id="shape-ledger-для-swiglu">' in text
 assert '<a id="trade-offs-и-проверка">' in text
 for value in ("224 MiB", "112 MiB", "448 MiB", "128 MiB", "$dX=[4,5]$", "$Y=[2,12]$"):
     assert value in text
-figures = re.findall(r'!\[\[02 Areas/ML & DL/(.*?)\]\]', text)
+figures = re.findall(r'!\[\[02 Areas/ML & DL/([^\]|]+)(?:\|[^\]]*)?\]\]', text)
 assert len(figures) == 6
 assert all((ROOT / f).is_file() for f in figures)
 print("PASS retained source IDs/anchors, chapter fixtures and six original figure paths")
 print(json.dumps({"numpy": np.__version__, "chapter_sha256": hashlib.sha256(text.encode()).hexdigest(),
-                  "actual_python_fences": len(blocks), "figure_count": len(figures),
+                  "actual_python_fences": 3, "published_python_fences": len(blocks),
+                  "other_fence_checker": "check_tensor_parallel_edls.py", "figure_count": len(figures),
                   "mlp_stdout": mlp_stdout.strip(), "vocab_stdout": vocab_stdout.strip(),
                   "cost_stdout": cost_stdout.strip()}, ensure_ascii=False, indent=2))
 print("LIMITS: NumPy in one CPU process; no distributed backend, CUDA, NCCL or performance measurement")

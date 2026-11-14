@@ -1,0 +1,126 @@
+{
+  "date": "2026-11-09",
+  "scope": "Read the final two recommender owners. Verify SASRec slot changes and exact sampled Hit@1 reversal; keep recommendation protocol distinctions and original graphics. Local only.",
+  "review": {
+    "sources": [
+      "Kang and McAuley, SASRec v1 §III-A and original model.py at e3738967: left padding, fixed window and learned absolute slot embeddings. Cache equivalence is a textbook deduction, not upstream behavior.",
+      "Krichene and Rendle KDD 2020, and Rendle v1 §§4.2, 4.4–4.5: model ordering under naive sampling need not persist in expectation.",
+      "Li et al. KDD 2020 §2.2: hypergeometric rank count without replacement; Li et al. 2022 v1 §4.1 Figure 1: sample ranks and error of the estimated full-catalog top-K in EASE / MovieLens 20M."
+    ],
+    "examples": [
+      "All 12 sequence blocks passed. Direct last-query evaluation matches fresh and stale K/V calculations separately. With fixed action IDs the same attention weights produce different values and opposite top-1 choices.",
+      "All eight evaluation blocks passed, including independent enumeration for 284 sampled Hit@1 probabilities and 5520 rank-position checks. The 5-item example gives A/B 1/2 vs 0 at full catalog and 1/2 vs 3/4 with one uniform negative."
+    ],
+    "figure": "Figure 1 copied byte-for-byte from arXiv 2211.15743v1/figure/p1.png. Original 822 × 608 RGBA, SHA-256 7679f7cffbec63e1a43f1f488df7f5498d7a6eac98aec50dfe3ae469cfc72a3b, CC BY 4.0, both panels unchanged. Original SASRec notebook illustration retained.",
+    "prose": "Read both input chapters completely. New examples are derived with fixed data and do not claim upstream cache implementation, policy lift, or a published comparison between the toy models. The full-route count is a reading receipt only.",
+    "reader": "Chrome at 375 and 1280 CSS px: the SASRec table and the evaluation equation fit the article. Both localized reference paths open their examples and link through the English source note and back. Original SASRec figure fits; both panels of Li et al. were visually inspected, including 2× mobile zoom in dark theme. The English chapters are labelled Russian fallbacks.",
+    "verification": "2041 pages built; 738 publication and 240 built-output tests passed. Topic and course ledgers, the 153 exact read receipts and the curated-asset registry passed. Zero broken internal routes, fragments or files. No commit, push or deployment."
+  },
+  "files": [
+    {
+      "source": "05 Источники/_index.md",
+      "before_sha256": "3e5aa3d3ca81019a60aed9751ba8db61ad00de9b11aea46a5c98c5ab4100b351",
+      "after_sha256": "dd2f8c789cb5c1c3fbfa16ef629614d7e44d7fa2f0404c6c56bd53dd50642327",
+      "lines": 55,
+      "changes": [
+        {
+          "old": "- [[05 Источники/Papers/Implicit feedback weights and negative sampling|Implicit feedback — confidence weights and negative sampling]]",
+          "new": "- [[05 Источники/Papers/Implicit feedback weights and negative sampling|Implicit feedback — confidence weights and negative sampling]]\n- [[05 Источники/Papers/Sequence windows and sampled evaluation|Sequential windows and sampled recommendation metrics]]"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "ad43b888328c01e27b42301c06812be5fa11812d0fe75ab1a29dc3e9bf02cd0a",
+      "after_sha256": "ad0e8ba74131cd122dc31f1e802929d818e313ce042a519b554ef5dfa0e6bab0",
+      "lines": 2566,
+      "changes": [
+        {
+          "old": "      - source: 05 Источники/Papers/Implicit feedback weights and negative sampling.md\n        route: sources/papers/implicit-feedback-weights-sampling",
+          "new": "      - source: 05 Источники/Papers/Implicit feedback weights and negative sampling.md\n        route: sources/papers/implicit-feedback-weights-sampling\n      - source: 05 Источники/Papers/Sequence windows and sampled evaluation.md\n        route: sources/papers/sequence-windows-sampled-evaluation"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/02 Рекомендательные системы/04 Последовательные рекомендации и признаки.md",
+      "before_sha256": "13ce0edd316d5a868933dc4e44723d2b7e5bee7b709b5a25754289bbc23ea9dd",
+      "after_sha256": "4642d06d18b929dc11582c7eaa76acbbfdb3abde5bb48865d66fea7e8d28e66f",
+      "lines": 855,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-25",
+          "new": "last_updated: 2026-11-09\nreference_terms:\n  - label: SASRec — сдвиг окна и повторное использование KV\n    label_en: SASRec — rolling windows and KV reuse\n    anchor: sasrec-rolling-window-cache"
+        },
+        {
+          "old": "После обновления модели прошлый кешированный hidden state может\nне соответствовать новым весам или словарю. Удобство кеширования\nне доказывает совместимость: версионируют модель, историю и способ\nполучения состояния. Пересчёт усечённого окна с переназначенными\nпозициями тоже не обязан совпадать с простым добавлением элемента\nк старому KV cache.",
+          "new": "После обновления модели прошлый кешированный hidden state может\nне соответствовать новым весам или словарю. Удобство кеширования\nне доказывает совместимость: версионируют модель, историю и способ\nполучения состояния.\n\n<a id=\"sasrec-rolling-window-cache\"></a>\n\n### Почему сдвиг окна меняет ключи и значения\n\nВ [SASRec, §III-A](https://arxiv.org/html/1808.09781v1#S3.SS1) короткую\nисторию дополняют слева до фиксированной длины. В\n[исходном коде](https://github.com/kang205/SASRec/blob/e3738967fddab206d6eeb4fda433e7a7034dd8b1/model.py#L28-L42)\nобучаемая позиция берётся по номеру слота в этом массиве. При ширине окна\nтри история `[A,B]` занимает слоты `[PAD,A,B]`. После нового события C\nполучается `[A,B,C]`: ни одно старое действие не потерялось, но A и B\nсдвинулись на один слот влево. К ним прибавляются уже другие\nпозиционные векторы.\n\nПрименим [[#padding-и-mask--разные-вещи|ту же учебную голову внимания]],\nв которой $Q=K=V$. Номера слотов начинаются с нуля, а их векторы равны\n$(0,0)$, $(1,0)$ и $(2,0)$. Эмбеддинги A, B и C возьмём равными\n$(0,0)$, $(0,1)$ и $(-2,1)$. Новому запросу C соответствует $(0,1)$.\nДля первых двух объектов входы получаются разными:\n\n| Ключ | Старое окно | Новое окно |\n| --- | --- | --- |\n| A | $(1,0)$ | $(0,0)$ |\n| B | $(2,1)$ | $(1,1)$ |\n\nВ этом примере запрос C смотрит только на вторые координаты,\nпоэтому веса внимания в обоих расчётах одинаковы. Пусть\n$a=\\exp(1/\\sqrt{2})$, тогда веса A, B и C пропорциональны $(1,a,a)$.\nЗначения всё равно различаются. В новом окне первая координата\nвыхода равна $a/(1+2a)\\approx0{,}401$, вторая вдвое больше.\nЕсли оставить старые значения A и B, первая координата станет\n$(1+2a)/(1+2a)=1$, а вторая не изменится. При двух кандидатах\nс векторами $(1,0)$ и $(0,1)$ это меняет первый результат выдачи.\n\n~~~python\nslot_vectors = np.array([[0., 0.], [1., 0.], [2., 0.]])\nitem_vectors = np.array([[0., 0.], [0., 0.], [0., 1.], [-2., 1.]])\ncached_ids = pad_left([1, 2], 3)\ncurrent_ids = pad_left([1, 2, 3], 3)\ncached_input = item_vectors[cached_ids] + slot_vectors\ncurrent_input = item_vectors[current_ids] + slot_vectors\nstale_input = np.vstack([cached_input[1:], current_input[-1]])\n\ncurrent_output, current_weights = causal_attention(current_input, current_ids)\nstale_output, stale_weights = causal_attention(stale_input, current_ids)\nnp.testing.assert_allclose(current_weights[-1], stale_weights[-1])\nmass = np.exp(1 / np.sqrt(2))\nweight = mass / (1 + 2 * mass)\nnp.testing.assert_allclose(current_output[-1], [weight, 2 * weight])\nnp.testing.assert_allclose(stale_output[-1], [1, 2 * weight])\nassert (current_output[-1].argmax(), stale_output[-1].argmax()) == (1, 0)\n~~~\n\nРасчёт сравнивает выход последней query с актуальными и старыми K/V.\nЭто не реализация кеша SASRec. Для точного совпадения с полным проходом\nнужно сохранить и позиции, и тот префикс, который прочитал каждый слой.\nДаже если при переходе `[A,B,C] → [B,C,D]` номера B и C не менять,\nстарое состояние B после первого слоя могло уже включать вклад A.\nУдаление ключа A из кеша второго слоя этот вклад не вычитает.\nЕсли сервис должен воспроизводить модель на новом окне, надёжная\nисходная проверка — пересчитать окно и сравнить оценки. Использованные\nпостановки собраны в [[05 Источники/Papers/Sequence windows and sampled evaluation|заметке об источниках]]."
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация.md",
+      "before_sha256": "4e62789f0cfbd8a2e6482c4d523ba0c653a7d3533d2ad0d28c2cec1a8bef3b87",
+      "after_sha256": "ad8a935066520f55eb75a713622f7cf9270bd5495f017022487380edc48a2c7c",
+      "lines": 1049,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-26",
+          "new": "last_updated: 2026-11-09\nreference_terms:\n  - label: Рекомендации — подвыборка каталога и смена победителя\n    label_en: Recommendations — sampled evaluation can reverse model order\n    anchor: sampled-ranking-order-reversal"
+        },
+        {
+          "old": "У объекта может быть третье место по полному каталогу, но первое после удаления\nдвух сильных конкурентов при выборке отрицательных. Тогда HitRate@1 меняется\nс 0 на 1 при тех же весах и баллах. Сохранение seed делает искусственный тест\nвоспроизводимым, но не превращает его в оценку полного каталога.\n\nНиже небольшой end-to-end replay четырёх запросов. Каталог, история просмотров,",
+          "new": "У объекта может быть третье место по полному каталогу, но первое после удаления\nдвух сильных конкурентов при выборке отрицательных. Тогда HitRate@1 меняется\nс 0 на 1 при тех же весах и баллах. Сохранение seed делает искусственный тест\nвоспроизводимым, но не превращает его в оценку полного каталога.\n\n<a id=\"sampled-ranking-order-reversal\"></a>\n\n### Почему даже среднее по подвыборкам может выбрать другую модель\n\nДва запроса, по пять допустимых объектов на каждый. Из них только один\nпроверочный объект помечен как релевантный. Модель A ставит его на первое\nместо в первом запросе и на пятое во втором. Модель B ставит его вторым\nв обоих запросах. В полном каталоге Hit@1 у A равен $1/2$, у B — нулю.\n\nТеперь оставляем релевантный объект и одного случайного конкурента из\nчетырёх. A сохраняет попадание в первом запросе и промах во втором.\nУ B три конкурента из четырёх стоят ниже проверочного объекта.\nВ каждом запросе B выигрывает сравнение с вероятностью $3/4$.\nСредний Hit@1 по всем таким подвыборкам у B уже выше: $3/4$ против $1/2$.\nЗдесь нет ошибки из-за неудачного seed. Даже точное усреднение\nпо всем подвыборкам меняет порядок моделей.\n\nВ общем случае пусть полный каталог содержит $N$ объектов,\nместо проверочного объекта равно $R$, а из $N-1$ конкурентов\nвыбирают $m$ равномерно и без возвращения. После разрешения равных\nбаллов выше цели находятся $R-1$ объектов, ниже — $N-R$.\nДля Hit@1 ни один объект сверху не должен попасть в подвыборку:\n\n$$\n\\Pr(\\mathrm{Hit@1}_{\\mathrm{sampled}}=1)\n=\\frac{\\binom{N-R}{m}}{\\binom{N-1}{m}}.\n$$\n\nЕсли $m>N-R$, числитель равен нулю. При $m=N-1$ формула даёт\nобычное попадание полного каталога. Для Hit@K в подвыборке\nдопустимо до $K-1$ конкурентов сверху; их число имеет\nгипергеометрическое распределение.\n[Li et al., §2.2](https://arxiv.org/html/2106.10621v1#S2.SS2).\n\n~~~python\nfrom fractions import Fraction\nfrom math import comb\n\ndef expected_sampled_hit1(rank, catalog_size, sampled_negatives):\n    assert 1 <= rank <= catalog_size and 0 <= sampled_negatives < catalog_size\n    return Fraction(comb(catalog_size - rank, sampled_negatives),\n                    comb(catalog_size - 1, sampled_negatives))\n\nranks_a, ranks_b = [1, 5], [2, 2]\ndef mean_sampled_hit1(ranks, m):\n    return sum(expected_sampled_hit1(rank, 5, m) for rank in ranks) / len(ranks)\n\nassert (mean_sampled_hit1(ranks_a, 4), mean_sampled_hit1(ranks_b, 4)) == (\n    Fraction(1, 2), Fraction(0)\n)\nassert (mean_sampled_hit1(ranks_a, 1), mean_sampled_hit1(ranks_b, 1)) == (\n    Fraction(1, 2), Fraction(3, 4)\n)\n~~~\n\n![[00 Учебник/Assets/Figures/curated/recommender-sampled-evaluation-2026-11-09/li-sampled-ranks-figure1.png|EASE на MovieLens 20M: распределение ранга после подвыборки и относительная ошибка оценки полного top-K]]\n\n*Dong Li et al., [Towards Reliable Item Sampling for Recommendation Evaluation,\nрис. 1](https://arxiv.org/html/2211.15743v1#S4.F1).\n[Исходный PNG](https://arxiv.org/html/2211.15743v1/figure/p1.png),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), без изменений.*\n\nВерхний график показывает ранги в наборах по 100 объектов.\nВыделенный столбец соответствует первому месту в подвыборке;\nиз него нельзя узнать, какие из этих целей были первыми в полном\nкаталоге. На нижнем графике показана относительная ошибка метода\nоценивания по максимальному правдоподобию: в этом опыте она выше\nдля самых малых $K$. Рисунок относится к EASE на MovieLens 20M;\nон не показывает наши модели A и B и не задаёт универсальный порог\nчисла конкурентов. В [[05 Источники/Papers/Sequence windows and sampled evaluation|заметке об источниках]]\nразделены оценка по подвыборке и методы восстановления метрики\nполного каталога. Если полный расчёт дорог, его можно провести на заранее\nвыбранном подмножестве запросов, не сокращая каталог внутри запроса.\n\nНиже небольшой end-to-end replay четырёх запросов. Каталог, история просмотров,"
+        },
+        {
+          "old": "выбранном подмножестве запросов, не сокращая каталог внутри запроса.\n\nНиже небольшой end-to-end replay четырёх запросов. Каталог, история просмотров,",
+          "new": "выбранном подмножестве запросов, не сокращая каталог внутри запроса.\n\n### Что теряется между каталогом и выдачей\n\nНиже небольшой end-to-end replay четырёх запросов. Каталог, история просмотров,"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "11eac632e5bf528925da91fdfa1c52309f9fde1fc01f80efc6cb1bfd6f4788b7",
+      "after_sha256": "58030e3a0a9cf6fadec7e823727e25b78449475ab3e038815fdadd53b4a35fce",
+      "lines": 1697,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация|Оценивание и эксплуатация рекомендательных систем]]\n- [[00 Учебник/02 Рекомендательные системы/04 Последовательные рекомендации и признаки|Последовательные рекомендации и признаки]]",
+          "new": "- [[00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация|Оценивание и эксплуатация рекомендательных систем]]\n  - [[00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация#sampled-ranking-order-reversal|Рекомендации — подвыборка каталога и смена победителя]]\n- [[00 Учебник/02 Рекомендательные системы/04 Последовательные рекомендации и признаки|Последовательные рекомендации и признаки]]\n  - [[00 Учебник/02 Рекомендательные системы/04 Последовательные рекомендации и признаки#sasrec-rolling-window-cache|SASRec — сдвиг окна и повторное использование KV]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "d528650edd53c51ce9c2af451bdd9335123d3799101242c19087bbf3166a3294",
+      "after_sha256": "cd5d282d173106994b99939c16bb63425aa5835b1ecd11727d536e923e31900f",
+      "lines": 1699,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация|Evaluation and operations]]",
+          "new": "- [[00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация|Evaluation and operations]]\n  - [[00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация#sampled-ranking-order-reversal|Recommendations — sampled evaluation can reverse model order]]"
+        },
+        {
+          "old": "- [[00 Учебник/02 Рекомендательные системы/04 Последовательные рекомендации и признаки|Sequential recommendations and features]]",
+          "new": "- [[00 Учебник/02 Рекомендательные системы/04 Последовательные рекомендации и признаки|Sequential recommendations and features]]\n  - [[00 Учебник/02 Рекомендательные системы/04 Последовательные рекомендации и признаки#sasrec-rolling-window-cache|SASRec — rolling windows and KV reuse]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "c3531283dc25aa4df9ec9a4d33fb0eed58318377cad0536a08585700cdeeb03b",
+      "after_sha256": "36b7a89ec742addddc2b2ebe2f9d8ade2901d9af71ca5213a6200d67d927da89",
+      "lines": 24091,
+      "changes": [
+        {
+          "old": "assets:",
+          "new": "assets:\n  - id: curated-sampled-ranks-ease-7679f7cffbec\n    asset: 00 Учебник/Assets/Figures/curated/recommender-sampled-evaluation-2026-11-09/li-sampled-ranks-figure1.png\n    author: Dong Li et al.\n    source_url: https://arxiv.org/abs/2211.15743v1\n    source_image_url: https://arxiv.org/html/2211.15743v1/figure/p1.png\n    derivation: source-raster-copy\n    source_asset_sha256: 7679f7cffbec63e1a43f1f488df7f5498d7a6eac98aec50dfe3ae469cfc72a3b\n    sha256: 7679f7cffbec63e1a43f1f488df7f5498d7a6eac98aec50dfe3ae469cfc72a3b\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    license_evidence: https://arxiv.org/abs/2211.15743v1\n    modifications: \"Original Figure 1 from arXiv v1 copied byte-for-byte; both panels retained.\"\n    used_in:\n      - 00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация.md\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    last_verified: 2026-11-09"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/Sequence windows and sampled evaluation.md",
+      "created": true,
+      "after_sha256": "002d6fe92e3a7fc835926c2dbfdad1645a69146f1e1cf4d4ac34535f2a00dafe"
+    }
+  ]
+}

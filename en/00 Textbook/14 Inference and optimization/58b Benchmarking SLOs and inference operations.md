@@ -4,10 +4,10 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "1d453c6e9f77e4aee10c81305bc406fe0bf3a50e69fc4edd22748a555e5a0b9c"
-translation_reviewed: "2026-10-29"
+canonical_revision: "28e92f60e3467e7237d6c86bbf0f5f7adaeae6b233cc0d3d860b5a2b18acddce"
+translation_reviewed: "2026-11-11"
 translation_of: "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md"
-last_updated: 2026-10-29
+last_updated: 2026-11-11
 last_verified: 2026-09-15
 source_unit_id:
   - lecture-10-section-4-understanding-the-inference-workload
@@ -18,6 +18,7 @@ primary_sources:
   - https://github.com/vllm-project/vllm/blob/b8e9001bf9568c801985889deff34d3b9fe6d0b0/vllm/benchmarks/serve.py
   - https://docs.nvidia.com/aiperf/v0.13.0/reference/ai-perf-metrics-reference
   - https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf
+  - https://arxiv.org/html/2401.09670v3#S1.F1
   - https://sre.google/workbook/alerting-on-slos/
 ---
 
@@ -73,12 +74,15 @@ network routing, and postprocessing belong to your own timer.
 
 ## The timeline of one request
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg|Server queue, prefill and first-token sampling, followed by later passes. The client receives the first token separately and the rest together in a buffered chunk.]]
 
-*Aleksa Gordić, [Inside vLLM](https://www.aleksagordic.com/blog/vllm),
-[original image](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/latency_diagram.png).
-The arrows mark dispatch and client receipt of output tokens. TTFT ends at the
-first token; ITL measures the interval between adjacent tokens.*
+*Vijay Janapa Reddi et al., [Harvard ML Systems, vol. III, Figure 5: First-Token Accounting](https://harvard-edge.github.io/cs249r_book_dev/vol3/02_foundation_model/02_foundation_model.html#fig-vol3-first-token-accounting), [original SVG](https://raw.githubusercontent.com/harvard-edge/cs249r_book_dev/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/images/svg/first_token_accounting.svg), [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Unmodified; distances on the diagram are not measured durations.*
+
+The top track belongs to the server and the bottom one to the client.
+From `Send` to `Token 1` the request goes through queueing, prefill,
+first-token selection, and delivery. The `Server prefill` bracket ends
+at the initial logits. Later tokens arrive together in this example,
+so they do not have separate client timestamps.
 
 Let dispatch occur at $t_0$, with output tokens received at $t_1,\ldots,t_O$.
 Then
@@ -139,12 +143,28 @@ extended completion latency.
 
 <a id="событие-потока-и-токен-не-всегда-совпадают"></a>
 
+<a id="stream-events-vs-token-latency"></a>
+
 ### Stream events are not necessarily individual tokens
 
 An SSE stream can contain role metadata, keepalives, usage statistics,
 reasoning fragments, and answer text. A content-bearing event may include
 several tokens. A network packet, an SSE event, and a model token are
 different units.
+
+Compare two streams of four tokens. In the second, the first token
+arrives on its own and the next three arrive together, as in the figure.
+
+| Tokens per event | Client timestamps, ms | Gaps between events, ms |
+| --- | --- | --- |
+| 1, 1, 1, 1 | 200, 260, 320, 380 | 60, 60, 60 |
+| 1, 3 | 200, 380 | 180 |
+
+Both have a TTFT of 200 ms and an E2E of 380 ms. The token-normalized
+mean from the endpoints is $(380-200)/(4-1)=60$ ms in both cases.
+That number cannot distinguish the steady stream from the 180-ms
+pause. The client cannot tell when the server generated each of the
+three later tokens or why they arrived in one event.
 
 Suppose six tokens arrive in three two-token chunks at 200, 300, and 500 ms.
 The observed inter-chunk gaps are 100 and 200 ms. The client does not know
@@ -274,12 +294,13 @@ of a load experiment, not the number of passing requests per second at an
 arbitrary operating point. Label the run's `request_goodput` separately from
 DistServe's sustainable-rate metric.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/distserve-figure1-original.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/distserve-original-teaser.svg|DistServe: P90 TTFT and TPOT for colocated and isolated phases]]
 
-*Yinmin Zhong et al., [DistServe, Figure 1, PDF p. 2](https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf#page=2).
-Original panels and caption. The authors use a 13B model, A100 80GB, 512 input
-tokens, and 64 output tokens. Dashed limits concern P90 TTFT 0.4 s and
-TPOT 0.04 s. These are historical measurements, not Bookvar results.*
+*Yinmin Zhong et al., [DistServe, Figure 1](https://arxiv.org/html/2401.09670v3#S1.F1),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+Unchanged author SVG. The authors ran a 13B model on one A100 80 GB with
+512 input and 64 output tokens per request. The top panel shows P90 TTFT
+against a 0.4 s limit; the bottom shows P90 TPOT against a 0.04 s limit.*
 
 The blue colocated curve crosses the TPOT limit around 1.6 requests/s,
 before crossing the TTFT limit. Orange and green describe isolated phases.
@@ -915,6 +936,7 @@ records so aggregates can be recalculated without another GPU run.
 - MLCommons, [LoadGen README, commit 3fbc329](https://github.com/mlcommons/inference/blob/3fbc329939999c13d0a7b5e67fb2092287e06047/loadgen/README.md): LoadGen, QSL, and system-under-test boundaries.
 - Zhong et al., [DistServe, OSDI 2024](https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf): Section 1 and Figure 1, sustainable load under TTFT/TPOT constraints.
 - vLLM, [calculate_metrics and benchmark, commit b8e9001](https://github.com/vllm-project/vllm/blob/b8e9001bf9568c801985889deff34d3b9fe6d0b0/vllm/benchmarks/serve.py), [stream backend](https://github.com/vllm-project/vllm/blob/b8e9001bf9568c801985889deff34d3b9fe6d0b0/vllm/benchmarks/lib/endpoint_request_func.py), [CLI](https://docs.vllm.ai/en/stable/cli/bench/serve/). Version-specific metric and schedule definitions; canonical snapshot 20 October 2026.
+- Aleksa Gordić, [Inside vLLM](https://www.aleksagordic.com/blog/vllm): [original client-side latency diagram](https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/latency_diagram.png).
 - NVIDIA, [AIPerf v0.13.0: Metrics Reference](https://docs.nvidia.com/aiperf/v0.13.0/reference/ai-perf-metrics-reference): TTFT, ITL, ICL, and response chunks.
 - Google, [Implementing SLOs](https://sre.google/workbook/implementing-slos/) and [Alerting on SLOs](https://sre.google/workbook/alerting-on-slos/): populations, windows, and error budgets.
 - MLCommons, [Agentic Inference for MLPerf Inference](https://mlcommons.org/2026/07/agentic-inference-for-mlperf-inference/): dependent multi-turn workloads.

@@ -30,7 +30,8 @@
       "path": "00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting.md",
       "sha256": "77c2b1dd27626e40bb33f9cfcd204b5744fd72575fc82ac736961047c90f9a6a",
       "review": "docs/audit/2026-10-28-data-selection-scores.md",
-      "current_sha256": "18aa3e0c623deceaf7bd475e03f045c7a5e5e8b68ccc7921297e106fa4b04fe4",
+      "current_sha256": "c65a1d01f7ba7a5620f4ca37a2c633da5b40bb58a1f838c94bf066be1398dbc7",
+      "navigation_review": "docs/audit/2026-11-04-data-selection-route-additions.json",
       "additional_review": "docs/audit/2026-10-29-confident-learning.md",
       "baseline_restoration": "docs/audit/2026-10-29-confident-learning-addition.json"
     },
@@ -517,7 +518,7 @@
       "required": "Develop out-of-sample predicted probabilities, class-dependent confident thresholds, candidate review and rare-class/model-error counterexamples from the primary Confident Learning explanation. Cleanlab is named in the source, but its algorithm is not yet developed in the reader.",
       "status": "reader-explanation-reviewed",
       "review": "docs/audit/2026-10-29-confident-learning.md",
-      "chapter_sha256": "18aa3e0c623deceaf7bd475e03f045c7a5e5e8b68ccc7921297e106fa4b04fe4",
+      "chapter_sha256": "c65a1d01f7ba7a5620f4ca37a2c633da5b40bb58a1f838c94bf066be1398dbc7",
       "anchor": "confident-learning",
       "resolution": "OOF predictions, class thresholds, raw and row-calibrated joint, candidate IDs and ranking, rare valid-label counterexample, paper/software discrepancy, two original figures and three executable examples."
     },

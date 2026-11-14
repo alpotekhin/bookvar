@@ -13,7 +13,7 @@ from pathlib import Path
 import torch
 
 ROOT = Path(__file__).resolve().parents[2]
-CHAPTER = ROOT / "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md"
+CHAPTER = ROOT / "00 Учебник/10 ML Systems/09 Компиляция графов — PyTorch, JAX и CUDA Graphs.md"
 text = CHAPTER.read_text()
 section = text.split("<!-- BEGIN REVIEW: torch.compile 2026-10-26 -->")[1].split(
     "<!-- END REVIEW: torch.compile 2026-10-26 -->"

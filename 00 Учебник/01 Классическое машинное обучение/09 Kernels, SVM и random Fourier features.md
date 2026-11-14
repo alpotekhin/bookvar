@@ -2,13 +2,42 @@
 title: Kernels, SVM и random Fourier features
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-26
+last_updated: 2026-11-03
+reference_terms:
+  - label: Ядро и матрица Грама
+    label_en: Kernel and Gram matrix
+    anchor: kernel-gram
+  - label: SVM — геометрический отступ
+    label_en: SVM geometric margin
+    anchor: svm-geometric-margin
+  - label: SVM — двойственная задача и KKT
+    label_en: SVM dual problem and KKT
+    anchor: svm-dual-kkt
+  - label: SVM — предсказание и цена ядра
+    label_en: Kernel SVM prediction and cost
+    anchor: kernel-prediction-cost
+  - label: Random Fourier features
+    label_en: Random Fourier features
+    anchor: random-fourier-features
+  - label: RFF — ошибка случайной карты
+    label_en: RFF approximation variance
+    anchor: rff-approximation-variance
+  - label: Nyström — проекция на опоры
+    label_en: Nyström anchor projection
+    anchor: nystrom-anchor-projection
+  - label: RBF — совместный выбор C и gamma
+    label_en: RBF C and gamma selection
+    anchor: rbf-c-gamma
+  - label: RFF — фиксированная карта и gamma scale
+    label_en: RFF fixed map and gamma scale
+    anchor: rff-fixed-map-scale
 primary_sources:
   - https://mml-book.com/
   - https://jakevdp.github.io/PythonDataScienceHandbook/05.07-support-vector-machines.html
   - https://scikit-learn.org/stable/modules/svm.html
   - https://scikit-learn.org/stable/modules/kernel_approximation.html
   - https://scikit-learn.org/stable/auto_examples/miscellaneous/plot_kernel_approximation.html
+  - https://scikit-learn.org/stable/auto_examples/svm/plot_rbf_parameters.html
   - https://papers.nips.cc/paper/3182-random-features-for-large-scale-kernel-machines
 ---
 
@@ -31,6 +60,7 @@ primary_sources:
 
 <a id="kernel-как-скалярное-произведение"></a>
 
+<a id="kernel-gram"></a>
 ## Ядро как скалярное произведение
 
 Для отображения $\phi$ функция
@@ -152,7 +182,7 @@ $\ell=1/\sqrt{2\gamma}$. При большом $\gamma$ сходство быс�
 Несколько прямых могут без ошибок разделять одну обучающую выборку.
 Их ответы на новые объекты при этом различаются.
 
-![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-separators.png]]
+![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-separators.png|Три прямые без ошибок разделяют обучающие точки, но дают разные метки объекту, отмеченному крестиком]]
 
 *Jake VanderPlas,
 [Motivating Support Vector Machines](https://jakevdp.github.io/PythonDataScienceHandbook/05.07-support-vector-machines.html#Motivating-Support-Vector-Machines),
@@ -161,6 +191,7 @@ CC BY-NC-ND 3.0 Unported. Оригинал без изменений.*
 На рисунке крестик попадает по разные стороны допустимых прямых.
 Одной нулевой ошибки на обучающих точках недостаточно для выбора.
 
+<a id="svm-geometric-margin"></a>
 ### Линейно разделимый случай
 
 Пусть $y_i\in\{-1,+1\}$ и $f(x)=w^\top x+b$, где $w\ne0$.
@@ -198,7 +229,7 @@ $$
 Если в выбранном пространстве признаков не существует строго разделяющей
 гиперплоскости, эта система ограничений не имеет решения.
 
-![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-support-vectors.png]]
+![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-support-vectors.png|Линейная граница SVM, две пунктирные границы отступа и три обведённые опорные точки]]
 
 *Jake VanderPlas,
 [Fitting a Support Vector Machine](https://jakevdp.github.io/PythonDataScienceHandbook/05.07-support-vector-machines.html#Fitting-a-support-vector-machine),
@@ -252,7 +283,7 @@ print("support indices:", hard.support_, "full margin width:", 2/np.linalg.norm(
 а совпадение с hard-margin решением проверено явно.
 Большое конечное $C$ не является общим определением hard margin.
 
-![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-support-invariance.png]]
+![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-support-invariance.png|Одинаковая разделяющая прямая и три опорные точки на первых 60 и 120 наблюдениях]]
 
 *Jake VanderPlas,
 [Fitting a Support Vector Machine](https://jakevdp.github.io/PythonDataScienceHandbook/05.07-support-vector-machines.html#Fitting-a-support-vector-machine),
@@ -313,7 +344,7 @@ $\lambda\|w\|^2/2$. После деления приведённой цели н
 получается $\lambda=1/(Cn)$. Поэтому численное значение коэффициента
 регуляризации нельзя сравнивать без соглашения о сумме или среднем.
 
-![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-soft-margin.png]]
+![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-soft-margin.png|Линейный SVM на одинаковых данных при C 10 и 0,1: при меньшем C полоса шире и опорных точек больше]]
 
 *Jake VanderPlas,
 [Tuning the SVM: Softening Margins](https://jakevdp.github.io/PythonDataScienceHandbook/05.07-support-vector-machines.html#Tuning-the-SVM:-Softening-Margins),
@@ -326,6 +357,7 @@ CC BY-NC-ND 3.0 Unported. Оригинал без изменений.*
 
 <a id="от-dual-problem-к-kernel-svm"></a>
 
+<a id="svm-dual-kkt"></a>
 ## Двойственная задача и опорные векторы
 
 В hard-margin задаче каждому ограничению соответствует множитель
@@ -482,7 +514,7 @@ $\alpha_i y_i$; умножать их на метки повторно не ну
 
 | Линейная граница | RBF SVM |
 | --- | --- |
-| ![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-circles-linear.png]] | ![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-circles-rbf.png]] |
+| ![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-circles-linear.png|Линейный SVM не отделяет центральное облако от окружающего кольца в исходных двух координатах]] | ![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-circles-rbf.png|RBF SVM строит замкнутую разделяющую границу между центральным облаком и кольцом]] |
 
 *Jake VanderPlas,
 [Beyond Linear Boundaries: Kernel SVM](https://jakevdp.github.io/PythonDataScienceHandbook/05.07-support-vector-machines.html#Beyond-linear-boundaries:-Kernel-SVM),
@@ -492,7 +524,7 @@ CC BY-NC-ND 3.0 Unported. Два оригинала без изменений.*
 в этих координатах, но линейна в пространстве $\phi$.
 Функция $r=e^{-\|x\|^2}$ даёт наглядный отдельный пример смены признаков:
 
-![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-radial-lift.png]]
+![[00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-radial-lift.png|Дополнительная координата r равна экспоненте минус квадрата радиуса: центральные точки подняты над кольцом]]
 
 *Jake VanderPlas,
 [Beyond Linear Boundaries: Kernel SVM](https://jakevdp.github.io/PythonDataScienceHandbook/05.07-support-vector-machines.html#Beyond-linear-boundaries:-Kernel-SVM),
@@ -505,6 +537,7 @@ CC BY-NC-ND 3.0 Unported. Оригинал без изменений.*
 <a id="от-объектов-к-gram-matrix"></a>
 <a id="что-означает-kernel-trick-вычислительно"></a>
 
+<a id="kernel-prediction-cost"></a>
 ### Цена точного ядра
 
 Вычисление одной пары RBF для плотных $d$-мерных векторов требует $O(d)$.
@@ -524,6 +557,7 @@ CC BY-NC-ND 3.0 Unported. Оригинал без изменений.*
 остаётся дорогой. Поэтому переход к явным конечным признакам может
 снизить и стоимость обучения, и стоимость применения модели.
 
+<a id="random-fourier-features"></a>
 ## Random Fourier features: явное приближение RBF
 
 Для стационарного ядра $k(x,x')=\kappa(x-x')$ значение зависит только
@@ -646,6 +680,7 @@ print("paired dimension:", paired.shape[1], "phase dimension:", Z_phase.shape[1]
 и фазы после выборки фиксированы; обучаются веса следующего линейного
 алгоритма. Обучение самих частот меняет метод.
 
+<a id="rff-approximation-variance"></a>
 ### Как число признаков влияет на ошибку
 
 Для фиксированной пары обозначим $a=k(x,x')$.
@@ -709,6 +744,7 @@ for D in [8, 32, 128]:
 
 <a id="nyström-другой-путь-к-явным-признакам"></a>
 
+<a id="nystrom-anchor-projection"></a>
 ## Nyström: признаки по опорным объектам
 
 Nyström выбирает $m$ объектов из обучающей выборки и использует их
@@ -835,7 +871,7 @@ print("anchors:", anchors.ravel(), "reconstructed middle diagonal:", K_approx[1,
 
 ## Сравнение методов на данных
 
-![[00 Учебник/Assets/Figures/curated/advanced-unsupervised-classical/kernel-approximation.png]]
+![[00 Учебник/Assets/Figures/curated/advanced-unsupervised-classical/kernel-approximation.png|Классификация Digits точным RBF SVM, линейным SVM и RFF/Nyström: качество и время в сохранённом исходном эксперименте]]
 
 *The scikit-learn developers,
 [Explicit feature map approximation for RBF kernels](https://scikit-learn.org/stable/auto_examples/miscellaneous/plot_kernel_approximation.html),
@@ -915,6 +951,7 @@ print("selected method:", selected[1], "test accuracy:", selected_test_accuracy)
 
 <a id="leakage-и-scaling"></a>
 
+<a id="rff-fixed-map-scale"></a>
 При фиксированном числовом $\gamma$ и одинаковом типе данных
 `RBFSampler.fit` использует число координат, а не значения наблюдений.
 В режиме `gamma="scale"` частоты зависят от дисперсии входной выборки.
@@ -952,6 +989,9 @@ print("numeric gamma uses a fixed map; scale gamma uses training variance")
 преобразования и времени следующего линейного алгоритма.
 
 <a id="совместная-роль-ccc-и-γgammaγ"></a>
+<a id="rbf-c-gamma"></a>
+
+### Совместный выбор C и gamma
 
 $C$ и $\gamma$ подбирают совместно. При слишком локальном ядре модель
 может запомнить отдельные наблюдения; увеличение $C$ сильнее наказывает
@@ -959,6 +999,149 @@ $C$ и $\gamma$ подбирают совместно. При слишком л�
 $C$. Нельзя заранее назначить одному параметру роль «качества»,
 а другому — только «скорости». Число признаков приближения добавляет
 ещё один источник ошибки и ещё один настраиваемый бюджет.
+
+### Радиус влияния и вид разделяющей функции
+
+Для фиксированного уровня сходства $k(x,x')=e^{-1}$ расстояние равно
+$r=1/\sqrt{\gamma}$. При $\gamma=0{,}1$, $1$ и $10$ получаются
+радиусы примерно $3{,}16$, $1$ и $0{,}316$ в текущих единицах признаков.
+Параметр $C$ не меняет эту зависимость: он меняет цену нарушений
+отступа при уже заданных значениях ядра.
+
+![[00 Учебник/Assets/Figures/curated/kernels-2026-11-03/sklearn-rbf-decision-grid.png|Девять разделяющих функций RBF SVM: по строкам C равно 0,01, 1 и 100, по столбцам gamma равно 0,1, 1 и 10; справа влияние наблюдений становится локальным]]
+
+*The scikit-learn developers,
+[RBF SVM parameters](https://scikit-learn.org/stable/auto_examples/svm/plot_rbf_parameters.html),
+BSD-3-Clause. Полный исходный PNG из документации 1.9, без изменений.
+Для этих девяти панелей взяты два признака и два класса Iris:
+100 наблюдений после стандартизации.*
+
+На каждой строке $C$ фиксирован, а слева направо увеличивается
+$\gamma$. При малой $\gamma$ цвет фона меняется плавно на большой
+области; при большой возникают локальные области около отдельных
+наблюдений. В каждом столбце фиксирована $\gamma$: увеличение $C$
+меняет решение в пользу меньшей суммарной hinge loss.
+
+Цвет фона кодирует значение `decision_function`. Знак этой функции
+определяет предсказанный класс, а её модуль не является вероятностью.
+В исходном коде цветовая шкала настраивается отдельно для каждой панели,
+причём её середина не закреплена в нуле. Поэтому белая полоса не обязана
+совпадать с границей $f(x)=0$, а одинаковый цвет на разных панелях
+не означает одинаковое значение функции.
+
+Точки окрашены по известным меткам; они использовались при обучении.
+Рисунок показывает форму найденного решения, а не проверку
+на новых объектах.
+
+Снижение $C$ может привести к слабому разделению даже на обучающих
+точках. Оно не заменяет локальное ядро более широким. Поэтому
+сначала рассматривают обе оси параметров, а затем проверяют качество
+найденной конфигурации на отложенных данных.
+
+### Карта качества на сетке параметров
+
+![[00 Учебник/Assets/Figures/curated/kernels-2026-11-03/sklearn-rbf-validation-grid.png|Карта средней кросс-валидационной accuracy RBF SVM: C меняется по вертикали, gamma по горизонтали; хорошие значения образуют диагональную область]]
+
+*The scikit-learn developers,
+[RBF SVM parameters — Validation accuracy](https://scikit-learn.org/stable/auto_examples/svm/plot_rbf_parameters.html),
+BSD-3-Clause. Второй полный исходный PNG без изменений.
+Здесь уже использованы все 150 наблюдений Iris, четыре признака
+и три класса; это другая постановка, чем на девяти панелях выше.
+Оценки и цветовая шкала относятся к сохранённому запуску источника.*
+
+Каждая ячейка соответствует одной паре $(C,\gamma)$.
+В исходном скрипте проверяются 13 значений $C$ от $10^{-2}$ до $10^{10}$
+и 13 значений $\gamma$ от $10^{-9}$ до $10^3$.
+Для каждой из 169 пар усредняются оценки по пяти стратифицированным
+разбиениям: 80% объектов используются для обучения, 20% — для проверки.
+
+Светлая диагональная область показывает, почему один параметр нельзя
+подбирать независимо от другого. Для более широкого ядра в этом
+эксперименте хорошими оказались большие $C$; при более локальном
+достаточны меньшие. Авторы объясняют эту область так:
+
+> For intermediate values, we can see on the second plot that good models can
+> be found on a diagonal of `C` and `gamma`. Smooth models (lower `gamma`
+> values) can be made more complex by increasing the importance of classifying
+> each point correctly (larger `C` values) hence the diagonal of good
+> performing models.
+
+*The scikit-learn developers, исходный английский текст, BSD-3-Clause.*
+
+Эта диагональ относится к данным и их масштабу. Цветовая шкала
+нелинейна: её середина расположена около accuracy 0,92, чтобы
+лучше различать близкие хорошие значения. Одинаковая разница в цвете
+не означает одинаковую разницу в качестве. Кроме того, оценки
+разных ячеек получены на общих разбиениях и не являются независимыми
+экспериментами.
+
+В исходном примере стандартизатор обучается до кросс-валидации.
+Такой рисунок полезен для чтения параметров, но эту деталь протокола
+нельзя переносить в оценку собственного классификатора.
+Ниже стандартизация находится внутри `Pipeline` и переобучается
+на обучающей части каждого разбиения. Сетка сокращена до девяти пар;
+код не воспроизводит историческую карту из 169 ячеек.
+
+### Масштаб признаков и воспроизводимый подбор
+
+При общем изменении единиц оба объекта $u,v$ заменяются на $su,sv$,
+а расстояние в квадрате умножается на $s^2$. То же ядро получится
+при $\gamma'=\gamma/s^2$:
+
+$$
+e^{-\gamma'\|su-sv\|^2}
+=e^{-\gamma\|u-v\|^2}.
+$$
+
+Например, умножение всех координат на 5 требует заменить $\gamma=2$
+на $0{,}08$. Матрица Грама и задача C-SVM тогда сохраняются при том же
+$C$. При разных множителях по координатам одна скалярная $\gamma$
+не компенсирует изменение метрики: изменяются относительные вклады
+разных направлений.
+
+```python
+from sklearn.datasets import load_iris
+from sklearn.model_selection import GridSearchCV, StratifiedShuffleSplit
+
+unit_scale = 5.0
+rescaled_gamma = kernel_gamma / unit_scale**2
+rescaled_gram = rbf_kernel(X_ring * unit_scale, gamma=rescaled_gamma)
+np.testing.assert_allclose(rescaled_gram, K_ring, atol=1e-14)
+rescaled_svm = SVC(
+    kernel="rbf", gamma=rescaled_gamma, C=10., tol=1e-9
+).fit(X_ring * unit_scale, y_ring)
+np.testing.assert_allclose(
+    rescaled_svm.decision_function(query * unit_scale),
+    kernel_model.decision_function(query), atol=1e-6
+)
+
+iris_search_X, iris_search_y = load_iris(return_X_y=True)
+rbf_cv = StratifiedShuffleSplit(
+    n_splits=5, test_size=0.2, random_state=42
+)
+rbf_folds = list(rbf_cv.split(iris_search_X, iris_search_y))
+rbf_search = GridSearchCV(
+    Pipeline([("scale", StandardScaler()), ("svc", SVC())]),
+    {"svc__C": [0.01, 1., 100.], "svc__gamma": [0.1, 1., 10.]},
+    cv=rbf_folds
+).fit(iris_search_X, iris_search_y)
+print("selected C/gamma:", rbf_search.best_params_)
+print("selection CV accuracy:", rbf_search.best_score_)
+```
+
+`best_score_` — оценка, по которой выбиралась пара параметров,
+а не независимая итоговая оценка выбранной модели.
+После подбора `GridSearchCV` по умолчанию обучает лучший конвейер
+заново на всех переданных данных. Для проверки его обобщения
+нужна отдельная тестовая часть или внешний цикл кросс-валидации.
+
+Если лучшие параметры оказались на краю проверенной сетки, сначала
+расширяют сетку в этом направлении, а не объявляют крайнее значение
+свойством данных. На малой выборке стоит также смотреть разброс
+оценок между разбиениями: небольшая разница средних может зависеть
+от того, какие наблюдения попали в проверочную часть.
+
+### Независимые карты и стоимость применения
 
 <a id="случайность-rff"></a>
 

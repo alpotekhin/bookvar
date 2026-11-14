@@ -12,69 +12,78 @@ concepts: [Reinforcement Learning, Chain of Thought, GRPO, Reasoning, Knowledge 
 ---
 # DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning
 
-## TL;DR
+DeepSeek-R1-Zero и DeepSeek-R1 начинаются с DeepSeek-V3-Base. В опыте
+с R1-Zero авторы сразу перешли к обучению с подкреплением: перед ним не было
+SFT на готовых рассуждениях. Для финального R1 они добавили несколько
+стадий обучения на примерах и с наградами. Рисунок с кривыми ниже относится
+только к R1-Zero.
 
-DeepSeek-R1 показывает, что **чистое RL без SFT** (DeepSeek-R1-Zero) может вызвать emergent reasoning: self-reflection, verification, dynamic strategy. Финальная модель DeepSeek-R1 через multi-stage pipeline (cold-start SFT → RL → rejection sampling → RL) достигает уровня OpenAI o1 на math/code reasoning. Дистилляция в маленькие модели сохраняет reasoning capability.
+## DeepSeek-R1-Zero
 
-## Problem
+На каждый вопрос модель генерирует 16 ответов. Для задачи с однозначным
+числовым решением программа извлекает итог и сравнивает его с эталоном;
+отдельная проверка оценивает формат. Правильность каждого промежуточного
+шага такая награда не устанавливает. GRPO вычисляет относительное
+преимущество ответа по наградам всей группы, без отдельной сети,
+оценивающей состояние. Расчёт на одной группе разобран в
+[[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1|главе о GRPO и DeepSeek-R1]].
 
-Reasoning в LLM традиционно строился на human-annotated CoT demonstrations. Это ограничивает масштабируемость, вносит cognitive biases и cap-ает модель уровнем человеческих exemplars. Вопрос: можно ли получить superior reasoning через pure RL, без человеческих reasoning traces?
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-originals-2026-11-09/r1-zero-nature-figure1.png|R1-Zero: слева pass@1 и голосование по 16 ответам на AIME 2024, справа средняя длина ответов на обучающем наборе.]]
 
-## Method
+*Daya Guo, Dejian Yang, Haowei Zhang et al., [DeepSeek-R1, Nature, рис. 1](https://www.nature.com/articles/s41586-025-09422-z/figures/1), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Оригинал издателя без изменений.*
 
-### DeepSeek-R1-Zero (Pure RL)
-- Base model: DeepSeek-V3-Base (без SFT!)
-- RL algorithm: **GRPO** (Group Relative Policy Optimization) -- упрощённый PPO без critic model. Для каждого вопроса семплируется G=16 ответов, advantage считается через нормализацию групповых rewards.
-- **Rule-based rewards only**: accuracy reward (проверка ответа) + format reward (наличие `<think>` и `<answer>` тегов). Никаких neural reward models.
-- lr=3e-6, KL coeff=0.001, temperature=1, max length 32K→65K tokens
-- 10,400 steps = 1.6 epochs
+Слева измеряют точность на AIME 2024. Оценка точности одного ответа
+(`pass@1`) выросла с 15,6% до 77,9%. При голосовании по 16 сгенерированным
+ответам (`cons@16`) итог составил 86,7%. Прирост относительно `pass@1`
+включает дополнительную работу на выводе: модель генерирует несколько
+ответов, и оценка использует наиболее частый итог.
 
-### Emergent Behaviors
-- Модель самостоятельно развивает: self-verification, reflection, exploration of alternative approaches
-- **"Aha moment"**: внезапное увеличение использования слова "wait" в reasoning -- модель учится перепроверять свои шаги
-- Response length растёт с 2.5K до 17K+ токенов за тренинг
+Справа измеряют длину ответов на обучающих задачах, а не на AIME. Около шага
+8200 авторы подняли максимальную длину генерации с 32 768 до 65 536 токенов.
+Это изменение настройки обучения нужно учитывать при чтении скачка на
+графике. Две панели не показывают, что если принудительно удлинить ответ
+на любом вопросе, он станет правильнее.
+[Методика в Nature](https://www.nature.com/articles/s41586-025-09422-z#Sec18) ·
+[Расширенный отчёт, §2](https://arxiv.org/html/2501.12948v2#S2).
 
-### DeepSeek-R1 (Multi-Stage Pipeline)
-1. **Cold-start SFT**: тысячи примеров с human-aligned thinking process
-2. **RL Stage 1**: reasoning prompts + rule-based rewards + language consistency reward
-3. **Rejection Sampling + SFT**: sampling из checkpoint, фильтрация, SFT на reasoning + non-reasoning data
-4. **RL Stage 2**: diverse prompts, rule-based + preference reward model (helpfulness + safety), 1700 steps
+## Как обучали финальный R1
 
-### Reward Design
-- Reasoning: rule-based (accuracy + format + language consistency)
-- General: model-based (helpfulness RM на 66K пар, safety RM на 106K примеров)
-- Language consistency: доля целевого языка в CoT
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-r1/figure2-pipeline.png|Четыре этапа обучения R1: начальное SFT, RL для рассуждений, сбор ответов и новое SFT от V3-Base, затем финальное RL.]]
 
-### Distillation
-- R1 → Qwen/Llama маленьких размеров (1.5B-70B)
-- Distilled модели превосходят оригинальные instruct-версии на reasoning
+*Guo et al., [DeepSeek-R1, рис. 2](https://arxiv.org/html/2501.12948v2#S3.F2). Из препринта v2; тот же рисунок опубликован в [Nature под CC BY 4.0](https://www.nature.com/articles/s41586-025-09422-z/figures/2).*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/deepseek-r1-figure1-hq.png]]
+1. V3-Base дообучили на небольшой подборке образцовых рассуждений
+   (cold-start SFT).
+2. Модель обучили с подкреплением на проверяемых задачах. Дополнительная
+   награда за долю слов на целевом языке уменьшала смешение языков.
+3. После этой стадии RL модель использовали для генерации кандидатов.
+   Отобранные решения объединили с примерами общих задач. На полученной смеси
+   провели SFT, снова начиная с V3-Base. По этой ветви схемы передаются
+   данные, а не веса предыдущей стадии.
+4. После SFT выполнили финальную стадию RL. Она длилась 1700 шагов.
+   Общие инструкции и обученные модели награды за полезность и безопасность
+   добавляли только на последних 400: при более длительной оптимизации
+   авторы наблюдали случаи подгонки ответов под оценщик.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-r1/figure2-pipeline.png]]
+[Методика и настройки, препринт v2 §3](https://arxiv.org/html/2501.12948v2#S3).
+Для дистилляции авторы дообучали плотные модели Qwen и Llama на примерах
+ответов R1. Эти версии сохраняют архитектуру Qwen или Llama, а не получают
+экспертов и MLA от V3.
 
-## Key Results
+## Результаты финального R1
 
-| Benchmark | DeepSeek-R1 | OpenAI o1-0120 | Claude-3.5-Sonnet |
-|---|---|---|---|
-| AIME 2024 (Pass@1) | 79.8 | 79.2 | 16.0 |
-| MATH-500 | 97.3 | 96.4 | 78.3 |
-| Codeforces (Rating) | 2029 | 1891 | -- |
-| GPQA Diamond | 71.5 | 75.7 | 65.0 |
-| MMLU | 90.8 | 91.8 | 88.3 |
-| LiveCodeBench (Pass@1) | 65.9 | 63.4 | -- |
-| SWE-Bench Verified | 49.2 | 48.9 | 50.8 |
+Ниже несколько строк [таблицы 8 препринта v2](https://arxiv.org/html/2501.12948v2#A4.T8).
+Сравнение относится к указанным версиям моделей и настройкам из приложения D.
+У R1 здесь выше результат на AIME 2024, чем у Claude-3.5-Sonnet-1022,
+а на SWE-bench Verified Claude впереди. Переносить порядок с одного теста
+на другой нельзя.
 
-- R1-Zero: AIME 15.6% → 77.9% (pass@1), 86.7% с self-consistency
-- AlpacaEval 2.0: 87.6% LC-winrate, ArenaHard: 92.3%
-- Distilled Qwen-32B: AIME 72.6%, MATH 94.3%
-
-## My notes
-
-- Главный результат -- не бенчмарки, а **proof of concept**: pure RL без SFT порождает emergent reasoning. Это сильный аргумент в пользу того, что reasoning -- emergent свойство, которое можно "разбудить" правильным reward signal.
-- "Aha moment" -- красивая демонстрация, но по сути это просто модель, которая научилась, что self-correction увеличивает reward. Не стоит антропоморфизировать.
-- Практически, pure RL (R1-Zero) имеет проблемы: language mixing, poor readability, limited non-reasoning capability. Multi-stage pipeline R1 решает это, но ценой сложности.
-- GRPO вместо PPO -- значимое упрощение: нет critic model, advantage через group normalization. Это делает масштабирование RL дешевле.
-- Reward hacking остаётся реальной проблемой -- preference RM используется только 400 steps в финальном RL, иначе модель начинает хакать.
-- Token efficiency -- слабое место: overthinking на простых задачах. R1 тратит тысячи токенов на задачи, которые V3 решает за сотни.
-- Distillation preserves reasoning -- это практически самый ценный результат для production: можно получить reasoning в 7B модели.
+| Тест | DeepSeek-R1 | OpenAI o1-1217 | Claude-3.5-Sonnet-1022 |
+|---|---:|---:|---:|
+| AIME 2024 (Pass@1) | 79,8 | 79,2 | 16,0 |
+| MATH-500 (Pass@1) | 97,3 | 96,4 | 78,3 |
+| Codeforces (рейтинг) | 2029 | 2061 | 717 |
+| GPQA Diamond (Pass@1) | 71,5 | 75,7 | 65,0 |
+| MMLU (EM) | 90,8 | 91,8 | 88,3 |
+| LiveCodeBench (Pass@1 с CoT) | 65,9 | 63,4 | 38,9 |
+| SWE-bench Verified (решено, %) | 49,2 | 48,9 | 50,8 |

@@ -1,0 +1,1986 @@
+{
+  "date": "2026-11-09",
+  "scope": "Local release candidate, ordinary root and GitHub Pages /bookvar. No commit, push, workflow dispatch, or deployment.",
+  "snapshot": {
+    "base": "9bd4e7d9e8fba571c3e2467f7388f10874367c97",
+    "remoteDevObserved": "9bd4e7d9e8fba571c3e2467f7388f10874367c97",
+    "checkedOutBranch": "editorial-route-alignment",
+    "inputs": 9592,
+    "bytes": 1336019934,
+    "deletedTrackedInputs": 6,
+    "sha256": "35b671ec60f46f57d4e64afa5e13575f859c1c13ccd443ae4669e49523345ecd",
+    "digestMethod": "Sorted JSON lines of relative Git-visible path, filesystem permission bits and content SHA-256. Every included input matched the isolated copy byte-for-byte; this report and its screenshots were added afterward.",
+    "limits": "The projection includes tracked and non-ignored uncommitted inputs. No .git, raw, Originals or prior node_modules were copied. Offline frozen-lockfile install succeeded. This is not a committed or GitHub-run revision."
+  },
+  "testCorrections": [
+    "The contents parser excludes image embeds without relaxing chapter-order, uniqueness or sidebar parity checks.",
+    "Course hub links use the publication adapter's path resolution, including an optional .md suffix.",
+    "The English inventory includes the later LLaMA review at its own exact revisions; the historical 29-page receipt is unchanged.",
+    "Inference checks compare historical headings, aliases and hashes at their reviewed revision and enforce current cross-locale additions, math, code, figures and fragment preservation. The GPT-3 paper configuration test separately pins both EN/RU revision pairs.",
+    "Only the 53 imported GenAI Agents counter embeds are omitted from derived pages. Source notebook bytes, instructional figures and fenced examples are retained."
+  ],
+  "validation": {
+    "node": "22.12.0",
+    "pnpm": "10.32.1",
+    "packageInstall": "frozen offline: 476 packages resolved from local store",
+    "topics": 153,
+    "publicationTests": {
+      "passed": 740,
+      "skipped": 11,
+      "suites": 127
+    },
+    "allLocalTests": {
+      "passed": 1264,
+      "suites": 223,
+      "maxWorkers": 4,
+      "testTimeoutMs": 15000,
+      "notes": "The initial parallel run timed out on six archive checks at the default 5s and found one stale GPT-3 hash expectation. No assertions were removed."
+    },
+    "astroCheck": {
+      "files": 24,
+      "errors": 0,
+      "warnings": 0,
+      "hints": 6,
+      "stage": "Type diagnostics ran before the notebook-footer change; both variants were rebuilt after it."
+    },
+    "root": {
+      "pages": 2063,
+      "builtOutputTests": 258,
+      "siteTests": 93,
+      "brokenLinks": 0
+    },
+    "pagesBase": {
+      "pages": 2063,
+      "brokenLinks": 0,
+      "artifactBytes": 877509868,
+      "artifactFiles": 5745,
+      "configuredLimitBytes": 1000000000,
+      "headroomBytes": 122490132
+    },
+    "notebookCounter": {
+      "sourceOccurrences": 53,
+      "emittedImageUrls": 0,
+      "verifiedRoutes": "53 source pages and their built output; Chrome also opened the prefixed overview."
+    }
+  },
+  "reader": {
+    "testedWidths": [
+      375,
+      1280
+    ],
+    "flows": [
+      "Contents to GPT-3 and original attention figure",
+      "EN GPT-3 to the authored EN LLaMA chapter and CS336 original",
+      "Berkeley source card to EnIGMA and its original proceedings illustration",
+      "Scheduler: step, undo, change input budget/slots/blocks, add a request, then finish 5/5, 12 emitted tokens, 0 MiB resident"
+    ],
+    "evidence": "docs/audit/evidence/2026-11-09-release-readiness/release-reader-report.json",
+    "renderLimit": "These are sampled browser paths. The whole-HTML scan checks error markers and references, not label readability on every page."
+  },
+  "imageInventory": {
+    "scan": {
+      "htmlIndexes": 2065,
+      "textbookLocaleIndexes": 310,
+      "katexErrorMarkers": 0,
+      "textbookImageReferences": 2598,
+      "distinctLocalImagePaths": 2687,
+      "distinctExternalImageUrls": 166,
+      "externalOnTextbook": 16
+    },
+    "exactNormalizedPathRegistryMatches": {
+      "verified": 1159,
+      "needs-confirmation": 84,
+      "not registered": 1435,
+      "unlabelled": 9
+    },
+    "textbookMatches": {
+      "verified": 1108,
+      "needs-confirmation": 57,
+      "not registered": 46,
+      "unlabelled": 9
+    },
+    "notes": "Metadata status, not a legal conclusion. Missing exact registry matches may be covered by separate course asset inventories. External image URLs were counted but not all fetched.",
+    "needsConfirmationInTextbook": [
+      [
+        "00 Учебник/Assets/Figures/curated/source-first-35-36/cs336-mha-gqa-mqa-mla.png",
+        [
+          "models/sravneniya/karta-arhitekturnyh-liniy",
+          "research/effektivnyy-attention",
+          "textbook/inference/kv-cache-compression-offload",
+          "textbook/modern-llm/mla-kv-compression"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/instructgpt/chatgpt-training-pipeline.png",
+        [
+          "research/alignment-rlhf-dpo-rlvr",
+          "textbook/post-training/sft-instruction-data"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/distserve-figure1-original.png",
+        [
+          "textbook/inference/benchmarking-slo"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/voita-language-modeling/ngram-window.png",
+        [
+          "textbook/language-modeling/ngram"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/voita-language-modeling/ngram-probability.png",
+        [
+          "textbook/language-modeling/ngram"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/voita-language-modeling/backoff.png",
+        [
+          "textbook/language-modeling/ngram"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/voita-language-modeling/interpolation.png",
+        [
+          "textbook/language-modeling/ngram"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure1-block.png",
+        [
+          "textbook/models/gpt-1"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure1.png",
+        [
+          "textbook/models/gpt-1"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure2-transfer.png",
+        [
+          "textbook/models/gpt-1"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure2-zero-shot.png",
+        [
+          "textbook/models/gpt-1"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architecture/ffn-ratio-evidence-slide.png",
+        [
+          "textbook/modern-llm/decoder-block"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architecture/aspect-ratio-evidence-slide.png",
+        [
+          "textbook/modern-llm/decoder-block"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architecture/weight-decay-evidence-slide.png",
+        [
+          "textbook/modern-llm/decoder-block"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-first-35-36/deepseek-v2-mha-gqa-mqa-ablation.png",
+        [
+          "textbook/modern-llm/mla-kv-compression"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-first-35-36/deepseek-v2-mla-ablation.png",
+        [
+          "textbook/modern-llm/mla-kv-compression"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/mamba/ssm-three-views.png",
+        [
+          "textbook/modern-llm/sequence-model-alternatives"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/mamba/selective-ssm.png",
+        [
+          "textbook/modern-llm/sequence-model-alternatives"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/mamba/mamba-block.png",
+        [
+          "textbook/modern-llm/sequence-model-alternatives"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-first-7-14/weng-autoencoder.png",
+        [
+          "textbook/neural-networks/autoencoder-vae"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-first-7-14/weng-vae-graphical-model.png",
+        [
+          "textbook/neural-networks/autoencoder-vae"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-first-7-14/weng-reparameterization.png",
+        [
+          "textbook/neural-networks/autoencoder-vae"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-dropout-train.jpeg",
+        [
+          "textbook/neural-networks/dropout-regularization"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/data-power-law-chart.png",
+        [
+          "textbook/pretraining/scaling-laws"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/distribution-shift-offset-chart.png",
+        [
+          "textbook/pretraining/scaling-laws"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/repeated-data-effective-tokens-chart.png",
+        [
+          "textbook/pretraining/scaling-laws"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/finite-data-breakdown-chart.png",
+        [
+          "textbook/pretraining/scaling-laws"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/parameter-count-convention-chart.png",
+        [
+          "textbook/pretraining/scaling-laws"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/critical-batch-vs-loss-chart.png",
+        [
+          "textbook/pretraining/scaling-laws"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/learning-rate-scaling-chart.png",
+        [
+          "textbook/pretraining/scaling-laws"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/minicpm-cosine-campaign-cost-chart.png",
+        [
+          "textbook/pretraining/scaling-laws"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/minicpm-wsd-branching-chart.png",
+        [
+          "textbook/pretraining/scaling-laws"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/minicpm-wsd-loss-dynamics-chart.png",
+        [
+          "textbook/pretraining/scaling-laws"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/minicpm-joint-scaling-fit-chart.png",
+        [
+          "textbook/pretraining/scaling-laws"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/deepseek-lr-batch-grid-chart.png",
+        [
+          "textbook/pretraining/scaling-laws"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/deepseek-isoflop-curves-chart.png",
+        [
+          "textbook/pretraining/scaling-laws"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/deepseek-loss-prediction-chart.png",
+        [
+          "textbook/pretraining/scaling-laws"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/optimizer-search-surface-chart.png",
+        [
+          "textbook/pretraining/scaling-laws"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/optimizer-unfair-tuning-chart.png",
+        [
+          "textbook/pretraining/scaling-laws"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/optimizer-compute-ratio-confound-chart.png",
+        [
+          "textbook/pretraining/scaling-laws"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-chain.png",
+        [
+          "textbook/recurrent-networks/lstm-gru"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-f.png",
+        [
+          "textbook/recurrent-networks/lstm-gru"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-i.png",
+        [
+          "textbook/recurrent-networks/lstm-gru"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-C.png",
+        [
+          "textbook/recurrent-networks/lstm-gru"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-o.png",
+        [
+          "textbook/recurrent-networks/lstm-gru"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-C-line.png",
+        [
+          "textbook/recurrent-networks/lstm-gru"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-var-GRU.png",
+        [
+          "textbook/recurrent-networks/lstm-gru"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/voita-word-embeddings/one-hot.png",
+        [
+          "textbook/text-representation/numerical-representation"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/voita-word-embeddings/lookup-table.gif",
+        [
+          "textbook/text-representation/numerical-representation"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/voita-word-embeddings/count-based-idea.png",
+        [
+          "textbook/text-representation/word2vec-glove"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/voita-word-embeddings/cbow-skipgram.png",
+        [
+          "textbook/text-representation/word2vec-glove"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/voita-word-embeddings/negative-sampling.png",
+        [
+          "textbook/text-representation/word2vec-glove"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/voita-word-embeddings/glove-idea.png",
+        [
+          "textbook/text-representation/word2vec-glove"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/voita-word-embeddings/glove-loss.png",
+        [
+          "textbook/text-representation/word2vec-glove"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/bottleneck-min.png",
+        [
+          "textbook/transformer/from-seq2seq-to-transformer"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/bahdanau_examples-min.png",
+        [
+          "textbook/transformer/from-seq2seq-to-transformer"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-audit-15-24/qkv-for-heads.png",
+        [
+          "textbook/transformer/masking-heads-shapes"
+        ]
+      ]
+    ],
+    "needsConfirmationElsewhere": [
+      [
+        "00 Учебник/Assets/Figures/deepseek-r1-figure1-hq.png",
+        [
+          "models/families/deepseek",
+          "sources/papers/deepseek-r1-reasoning-via-rl"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/qwen-next-block-original.jpg",
+        [
+          "models/semeystva/qwen"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/qwen25-figure1-hq.png",
+        [
+          "models/semeystva/qwen",
+          "sources/papers/qwen-2-5-technical-report"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/dpo/dpo-pipeline.png",
+        [
+          "research/alignment-rlhf-dpo-rlvr"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-first-37-40-audit/longformer-attention-patterns.png",
+        [
+          "research/long-context"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/source-first-37-40-audit/lost-in-the-middle-figure-1.png",
+        [
+          "research/long-context"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/astra/sft-pipeline.png",
+        [
+          "sources/papers/astra"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/astra/env-synthesis.png",
+        [
+          "sources/papers/astra"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/astra/rl-pipeline.png",
+        [
+          "sources/papers/astra"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/astra/reward-ablation.png",
+        [
+          "sources/papers/astra"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/astra/tool-mixing-ablation.png",
+        [
+          "sources/papers/astra"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/astra/turn-distribution.png",
+        [
+          "sources/papers/astra"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/deepseek-v3-figure1-hq.png",
+        [
+          "sources/papers/deepseek-v3-technical-report"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/deepseek-v3-figure2-architecture-hq.png",
+        [
+          "sources/papers/deepseek-v3-technical-report"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/gemma/fig1.png",
+        [
+          "sources/papers/gemma"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/gemma/fig2.png",
+        [
+          "sources/papers/gemma"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/gemma/fig3.png",
+        [
+          "sources/papers/gemma"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/gemma/fig4.png",
+        [
+          "sources/papers/gemma"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/jamba/fig1.png",
+        [
+          "sources/papers/jamba-ssm-transformer-hybrid"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/jamba/fig3.png",
+        [
+          "sources/papers/jamba-ssm-transformer-hybrid"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/lora/fig1.png",
+        [
+          "questions/100-nlp/source-answers",
+          "sources/papers/lora"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/lora/fig5.png",
+        [
+          "sources/papers/lora"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/lora/fig2.png",
+        [
+          "sources/papers/lora"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/lora/fig3.png",
+        [
+          "sources/papers/lora"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/self-rag/fig1.png",
+        [
+          "sources/papers/self-rag"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/toolrl/introduction.png",
+        [
+          "sources/papers/toolrl"
+        ]
+      ],
+      [
+        "00 Учебник/Assets/Figures/curated/toolrl/cold-start-comparison.png",
+        [
+          "sources/papers/toolrl"
+        ]
+      ]
+    ],
+    "noExactRegistryMatchInTextbook": [
+      [
+        "Sources/Scikit-learn MOOC/figures/clustering_quiz_kmeans_not_scaled.svg",
+        [
+          "sources/courses/scikit-learn-mooc/jupyter-book/clustering/clustering-quiz-m4-01",
+          "textbook/classical-ml/clustering"
+        ]
+      ],
+      [
+        "Sources/Scikit-learn MOOC/figures/clustering_quiz_kmeans_scaled.svg",
+        [
+          "sources/courses/scikit-learn-mooc/jupyter-book/clustering/clustering-quiz-m4-01",
+          "textbook/classical-ml/clustering"
+        ]
+      ],
+      [
+        "Sources/Scikit-learn MOOC/figures/cross_validation_diagram.png",
+        [
+          "sources/courses/scikit-learn-mooc/python-scripts/02-numerical-pipeline-cross-validation",
+          "textbook/classical-ml/evaluation"
+        ]
+      ],
+      [
+        "Sources/Scikit-learn MOOC/figures/nested_cross_validation_diagram.png",
+        [
+          "textbook/classical-ml/evaluation"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/robust_ai/f379357456b6019c3804c10b13f2b37a9769547e.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol2/robust-ai",
+          "textbook/deployment/robustness"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/robust_ai/robust_ai_psi_drift_knee.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol2/robust-ai",
+          "textbook/deployment/robustness"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/robust_ai/gradient-attack.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol2/robust-ai",
+          "textbook/deployment/robustness"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/robust_ai/robust_ai_robustness_tax.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol2/robust-ai",
+          "textbook/deployment/robustness"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/robust_ai/0d8106a3c7ca65302fa306b4b86e5170bc79e78f.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol2/robust-ai",
+          "textbook/deployment/robustness"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/robust_ai/weight-corruption.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol2/robust-ai",
+          "textbook/deployment/robustness"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/robust_ai/cell-4-output-1.png",
+        [
+          "sources/courses/harvard-ml-systems/vol2/robust-ai",
+          "textbook/deployment/robustness"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/security_privacy/attack-surface-taxonomy.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol2/security-privacy",
+          "textbook/deployment/security-privacy"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/security_privacy/threat-prioritization-matrix.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol2/security-privacy",
+          "textbook/deployment/security-privacy"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/security_privacy/security_privacy_output_leakage_ladder.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol2/security-privacy",
+          "textbook/deployment/security-privacy"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/security_privacy/defense-stack.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol2/security-privacy",
+          "textbook/deployment/security-privacy"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/security_privacy/71393fab82f7333b27d3df80508ecbcfeca4b822.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol2/security-privacy",
+          "textbook/deployment/security-privacy"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/responsible_ai/cell-5-output-1.png",
+        [
+          "sources/courses/harvard-ml-systems/vol2/responsible-ai",
+          "textbook/evaluation/responsible-systems"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/responsible_ai/bias-loop.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol2/responsible-ai",
+          "textbook/evaluation/responsible-systems"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/responsible_ai/7e4491e267fc6d4d2c9f626e32d8d046d40c4336.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol2/responsible-ai",
+          "textbook/evaluation/responsible-systems"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/responsible_engr/7e90020a549120057c84129906fcbe359da4738b.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol1/responsible-engineering",
+          "textbook/evaluation/responsible-systems"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/responsible_ai/unlearning-strategies.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol2/responsible-ai",
+          "textbook/evaluation/responsible-systems"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/sustainable_ai/carbon-lifecycle.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol2/sustainable-ai",
+          "textbook/evaluation/responsible-systems"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/sustainable_ai/prefill-decode-energy.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol2/sustainable-ai",
+          "textbook/evaluation/responsible-systems"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/model_compression/5b8ca5d44a1556b84569cdc9156a94c4b1500e92.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol1/model-compression",
+          "textbook/inference/model-compression-pruning-distillation-low-rank"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/model_compression/fc4813524b57d9439c3a0b9101f2c1f2a79382c3.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol1/model-compression",
+          "textbook/inference/model-compression-pruning-distillation-low-rank"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/model_compression/4000264baf2311c2b61ca0ddd3fcedaa9d047ed3.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol1/model-compression",
+          "textbook/inference/model-compression-pruning-distillation-low-rank"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/model_compression/28c3ef541fd4ed95724389fad083bb720b229e40.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol1/model-compression",
+          "textbook/inference/model-compression-pruning-distillation-low-rank"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/model_compression/dcbd6535b09a28528559354f928838baaae7644b.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol1/model-compression",
+          "textbook/inference/model-compression-pruning-distillation-low-rank"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/model_compression/708770dcb60d00ea7f382f39d15b3206ba6ccb1f.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol1/model-compression",
+          "textbook/inference/model-compression-pruning-distillation-low-rank"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/model_compression/755a01d61fa04f057cd25ccea73187a7b8a8d769.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol1/model-compression",
+          "textbook/inference/model-compression-pruning-distillation-low-rank"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/model_compression/c6d3e77bf90984ccd1a0aa0e731ead3ded0c3e64.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol1/model-compression",
+          "textbook/inference/model-compression-pruning-distillation-low-rank"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/hw_acceleration/844618e87a09fb654cbccb727a9bef56c88aabea.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol1/hardware-acceleration",
+          "textbook/ml-systems/gpu-cuda-memory-hierarchy"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/model_serving/2f10e92057738ef1e4a50e524fddf5389d61d795.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol1/model-serving",
+          "textbook/ml-systems/model-as-part-of-system"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/ml_systems/c491ee41569a92f002bf915150731598e0d64e26.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol1/ml-systems",
+          "textbook/ml-systems/model-as-part-of-system"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/ml_workflow/3b022a3ffa6f028fe2c2c3165c292a16a3a9e0ff.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol1/ml-workflow",
+          "textbook/ml-systems/model-as-part-of-system"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/benchmarking/b2b9aaeaa637a9a665f0f4e9229daeb5bc5a4f2d.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol1/benchmarking",
+          "textbook/ml-systems/performance-measurement-roofline"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/benchmarking/682e143e450db0d85ad5c608e3a125ac5176e0ba.svg",
+        [
+          "sources/courses/harvard-ml-systems/vol1/benchmarking",
+          "textbook/ml-systems/performance-measurement-roofline"
+        ]
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/robust_ai/data_augmentation.png",
+        [
+          "sources/courses/harvard-ml-systems/vol2/robust-ai",
+          "textbook/neural-networks/dropout-regularization"
+        ]
+      ],
+      [
+        "Sources/Dive into Deep Learning — Recommender Systems/rec-mf.svg",
+        [
+          "sources/courses/d2l-recommender-systems/matrix-factorization",
+          "textbook/recommender-systems/collaborative-filtering-matrix-factorization"
+        ]
+      ],
+      [
+        "Sources/Dive into Deep Learning — Recommender Systems/rec-intro.svg",
+        [
+          "sources/courses/d2l-recommender-systems/overview",
+          "textbook/recommender-systems"
+        ]
+      ],
+      [
+        "Sources/Dive into Deep Learning — Recommender Systems/rec-ranking.svg",
+        [
+          "sources/courses/d2l-recommender-systems/personalized-ranking",
+          "textbook/recommender-systems/ranking-neural-models",
+          "textbook/recommender-systems/task-data-pipeline"
+        ]
+      ],
+      [
+        "Sources/Dive into Deep Learning — Recommender Systems/rec-neumf.svg",
+        [
+          "sources/courses/d2l-recommender-systems/neural-collaborative-filtering",
+          "textbook/recommender-systems/ranking-neural-models"
+        ]
+      ],
+      [
+        "Sources/Dive into Deep Learning — Recommender Systems/rec-deepfm.svg",
+        [
+          "sources/courses/d2l-recommender-systems/deepfm",
+          "textbook/recommender-systems/ranking-neural-models"
+        ]
+      ],
+      [
+        "Sources/Dive into Deep Learning — Recommender Systems/rec-seq-data.svg",
+        [
+          "sources/courses/d2l-recommender-systems/sequence-aware",
+          "textbook/recommender-systems/sequential-feature-aware"
+        ]
+      ],
+      [
+        "Sources/Dive into Deep Learning — Recommender Systems/rec-caser.svg",
+        [
+          "sources/courses/d2l-recommender-systems/sequence-aware",
+          "textbook/recommender-systems/sequential-feature-aware"
+        ]
+      ],
+      [
+        "Sources/Linux Foundation Recommenders/examples/00_quick_start/sasrec_amazon/cell-001-attachment.png",
+        [
+          "textbook/recommender-systems/sequential-feature-aware"
+        ]
+      ]
+    ]
+  },
+  "courseImageReconciliation": {
+    "scope": "Subsequent root build audit; original snapshot and counts above are historical.",
+    "journal": "docs/audit/2026-11-09-course-figure-provenance-additions.json",
+    "baselineUnmatched": 46,
+    "registeredFromPinnedUpstream": {
+      "d2l": 7,
+      "scikitLearnMooc": 4
+    },
+    "retiredNotebookCopy": "Sources/Linux Foundation Recommenders/examples/00_quick_start/sasrec_amazon/cell-001-attachment.png",
+    "replacementFigures": [
+      "00 Учебник/Assets/Figures/curated/petrov-sequential-2026-11-09/petrov-sasrec.svg",
+      "00 Учебник/Assets/Figures/curated/petrov-sequential-2026-11-09/petrov-bert4rec.svg"
+    ],
+    "unregisteredTextbook": 34,
+    "harvardImportMatches": 34,
+    "harvardImportManifest": "05 Источники/Courses/Harvard ML Systems/import-manifest.json",
+    "pendingHarvardFileAndSHA256": [
+      [
+        "Sources/Harvard ML Systems/vol2/robust_ai/f379357456b6019c3804c10b13f2b37a9769547e.svg",
+        "d2d3e4a421014562c4204be291d0b5f1891908821370525aaceeae759bbd3740"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/robust_ai/robust_ai_psi_drift_knee.svg",
+        "7be3f303dd6dd5efe38afa0e613e5cd12ed88454e404a9683b1ef530f4e1c605"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/robust_ai/gradient-attack.svg",
+        "766d1977a930b864e3551b540382cf074d7b8aa1061e4f4509559fb1d4ff89b2"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/robust_ai/robust_ai_robustness_tax.svg",
+        "0f33c7f2eceecf84782edf8d432931c7e373fda0a8056d3df0aa81546ccfc594"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/robust_ai/0d8106a3c7ca65302fa306b4b86e5170bc79e78f.svg",
+        "96ffaf898add5d1c926ac38c4358f49d1f9bc4a28fb837e87cd8a63b68dab163"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/robust_ai/weight-corruption.svg",
+        "3f2c0df7969c61becbc465ba15a891888b3e5289e7f92c44e6f083d10d05ecdf"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/robust_ai/cell-4-output-1.png",
+        "3e4d56e367ff98bf2647a503d16e90366e66c46507383aa939cb6c6d380ff2c5"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/security_privacy/attack-surface-taxonomy.svg",
+        "1c778d9336f37b6b467dbec677d58a4fbcb7f8d88e4ebfc8592619b4322e3328"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/security_privacy/threat-prioritization-matrix.svg",
+        "2735b82f85687dfa61188ad0294ecb67de4f1dd973fdaae669243415f49bf732"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/security_privacy/security_privacy_output_leakage_ladder.svg",
+        "115e0ef03f826bfdecf654f023f758f25f6f0b3eac907c42f7d90d4e1d188889"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/security_privacy/defense-stack.svg",
+        "9308cf48b75e664ba2aeae032f2e5ce17d9dc2d7a400fa4c19242add962d6377"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/security_privacy/71393fab82f7333b27d3df80508ecbcfeca4b822.svg",
+        "6c5c193626f5830be7f895868d9b5cf1487a2588894bc7dff37844aeb7030039"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/responsible_ai/cell-5-output-1.png",
+        "2967da322ec1c27b675707b7aa299351ef123d6251df1a8c1cc7ab3e35a45cb3"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/responsible_ai/bias-loop.svg",
+        "a0e75b6443e278b0b5a26725552915230ae37df02032ec0c9929c58754a8cba6"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/responsible_ai/7e4491e267fc6d4d2c9f626e32d8d046d40c4336.svg",
+        "38a76ab53024fd922a32a750454687618932aaab25957539d5f14558a2ea09ff"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/responsible_engr/7e90020a549120057c84129906fcbe359da4738b.svg",
+        "83e1d0d3604331ba2375f8d82e02ee7ca53a68cfd817a2b9ab3b137bef10fbcd"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/responsible_ai/unlearning-strategies.svg",
+        "1232e6ffece3b39181016f503f3a7dfd4a98db8bc7c7b3453868a1264106f8de"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/sustainable_ai/carbon-lifecycle.svg",
+        "f7abb04f91f69903dad83bf1204dbea01befdc5a4e63148f873689c69abb2a36"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/sustainable_ai/prefill-decode-energy.svg",
+        "f3179ee189dc181d1992ee1eae8909a9c1a63f802e30d68187da733d736e57f4"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/model_compression/5b8ca5d44a1556b84569cdc9156a94c4b1500e92.svg",
+        "6495864f718014d687f96bc7f52e05f505ba26d4b64b89898f426bee9c5060d0"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/model_compression/fc4813524b57d9439c3a0b9101f2c1f2a79382c3.svg",
+        "c91056b0c1fa5d1dd563f2c25add405bbbbd234b83450586c337a61517dae534"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/model_compression/4000264baf2311c2b61ca0ddd3fcedaa9d047ed3.svg",
+        "98e148cd5a8e2f510824a3f2f6c7e01f6f9e17932b759a14d96c39315b83d2ce"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/model_compression/28c3ef541fd4ed95724389fad083bb720b229e40.svg",
+        "0120f2715407f2f1cf02d6e014c6c0e69197b1ddf7d2bc00e322e148589acf4b"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/model_compression/dcbd6535b09a28528559354f928838baaae7644b.svg",
+        "23dd3b216eccd3993963d7686da137e7220c9cd52f82ba56e1ed34ebf1a20e02"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/model_compression/708770dcb60d00ea7f382f39d15b3206ba6ccb1f.svg",
+        "e844be4c3e46e1ea2b5c6ac03db47edab3ae062e19930f107a3889cf5853b692"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/model_compression/755a01d61fa04f057cd25ccea73187a7b8a8d769.svg",
+        "d8210ddfaa1fb1b67648c155e5683715f837445e78875959747046f004ac887f"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/model_compression/c6d3e77bf90984ccd1a0aa0e731ead3ded0c3e64.svg",
+        "492f30624f4fc633a7a846250c254fdf8da5a358c830a5259f1e14a02b606332"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/hw_acceleration/844618e87a09fb654cbccb727a9bef56c88aabea.svg",
+        "d2250ebf84f7e6a36fc4c4691f45be50c4d85991adcc55986f82eb38c3dcfad5"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/model_serving/2f10e92057738ef1e4a50e524fddf5389d61d795.svg",
+        "4a5bd2caaa8c19de2f9d7e1a2efaa52829595fbf5cd88fd315b74f8f99b56888"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/ml_systems/c491ee41569a92f002bf915150731598e0d64e26.svg",
+        "51eab06be405c5f84400505ad57a3255ac913b4c9d36f4e9484cde4b98a1b888"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/ml_workflow/3b022a3ffa6f028fe2c2c3165c292a16a3a9e0ff.svg",
+        "c4d3aadc33da2a2a1146ac8276206ca31218c4d083ce948810bd92b43490de18"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/benchmarking/b2b9aaeaa637a9a665f0f4e9229daeb5bc5a4f2d.svg",
+        "113540ac120b8df39f3cd5cf780c87c102427c2cb3e32edc9b922f43a1ada7c8"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol1/benchmarking/682e143e450db0d85ad5c608e3a125ac5176e0ba.svg",
+        "838d09a156a75d4f54306e27834c5a4334393dbd6826d106171220e5d09e144f"
+      ],
+      [
+        "Sources/Harvard ML Systems/vol2/robust_ai/data_augmentation.png",
+        "ea7fd4208722517056751d2728c17989e66f1ea2c89fb94ebf48b5dc29aa33ad"
+      ]
+    ],
+    "activeNeedsConfirmationRegistryAssets": 72,
+    "activeRetiredRegistryAssets": 0,
+    "interpretation": "All 34 current textbook paths without an exact registry row are byte-identical to their Harvard import-manifest entry. This verifies identity and origin, not original authorship or redistribution rights for every asset in the course. The separate needs-confirmation count is across rendered site images; the sets are disjoint. External URLs are outside both counts."
+  },
+  "harvardFigureReconciliation": {
+    "journal": "docs/audit/2026-11-09-harvard-archive-figure-rights-additions.json",
+    "sourceCommit": "fc26c6257a96f4f6937a720b458db13e3bac070f",
+    "renderCommit": "c1c8e803d61c7c4f96bd1424ec5a0501f20f7730",
+    "exactImages": 34,
+    "exactRenderedChapters": 11,
+    "matchedQmdFiles": 11,
+    "registeredAndActive": 33,
+    "retired": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/gradient-attack.svg",
+    "replacement": "00 Учебник/Assets/Figures/curated/harvard-robustness-2026-11-09/fgsm-geometry.svg",
+    "unregisteredLocalTextbookImages": 0,
+    "remainingActiveNeedsConfirmation": 72,
+    "activeRetiredImages": 0,
+    "scope": "Subsequent local root build. Counts cover actual rendered <img src='/assets/...'> references, not external images or assets only linked from prose. Preserved historical checks above."
+  },
+  "deepseekFigureReconciliation": {
+    "journal": "docs/audit/2026-11-09-deepseek-originals-additions.json",
+    "newVerifiedOriginals": 4,
+    "historicalEmbedsRetired": 5,
+    "remainingActiveNeedsConfirmation": 69,
+    "activeRetiredImages": 0,
+    "scope": "Current local root build. The 69 count covers rendered image paths with an exact registry row marked needs-confirmation, not all external or archived course figures. Two retired images already carried a verified metadata label, so five replacements retired only three from that count."
+  },
+  "deepseekV2MlaFigureReconciliation": {
+    "journal": "docs/audit/2026-11-09-deepseek-v2-mla-originals-additions.json",
+    "newVerifiedOriginals": 3,
+    "historicalEmbedsRetired": 3,
+    "remainingActiveNeedsConfirmation": 66,
+    "activeRetiredImages": 0,
+    "scope": "Current local root build. Replaced the four-panel diagram on four reader pages and both ablation tables in the canonical MLA chapter. Course archive copies remain preserved. The count covers rendered image paths with an exact registry row marked needs-confirmation."
+  },
+  "qwen72bFigureReconciliation": {
+    "journal": "docs/audit/2026-11-09-qwen-72b-release-diff-additions.json",
+    "reusedVerifiedOriginal": "00 Учебник/Assets/Figures/curated/gqa/mha-gqa-mqa.png",
+    "retired": "00 Учебник/Assets/Figures/qwen25-figure1-hq.png",
+    "remainingActiveNeedsConfirmation": 65,
+    "activeRetiredImages": 0,
+    "scope": "Latest local root scan of rendered images. The GQA paper figure matches the author PNG and is CC BY 4.0. The original Qwen2.5 report chart is linked but not embedded. Counts exclude external images and figures without an exact registry row."
+  },
+  "qwen3NextFigureReconciliation": {
+    "journal": "docs/audit/2026-11-09-qwen3-next-comparison-additions.json",
+    "newVerifiedOriginals": 2,
+    "historicalEmbedsRetired": 2,
+    "remainingActiveNeedsConfirmation": 64,
+    "activeRetiredImages": 0,
+    "scope": "Latest local root scan of actual rendered image paths. One retired asset was already marked needs-confirmation; one had owner confirmation without a source license. The official architecture image, CS336 slide and Qwen3 report pipeline are linked from the atlas; the CS336 slide remains in the canonical hybrid chapter."
+  },
+  "qwen38SourceFigure": {
+    "journal": "docs/audit/2026-11-10-qwen38-flash-next-additions.json",
+    "verifiedOriginal": "00 Учебник/Assets/Figures/curated/engram/engram-system.svg",
+    "license": "CC BY 4.0",
+    "remainingActiveNeedsConfirmation": 64,
+    "activeRetiredImages": 0,
+    "scope": "The added Engram source figure renders in both locale shells. The Qwen technical report and SGLang QSA figures remain direct source links; they are not counted as licensed embedded assets."
+  },
+  "longContextBlockRoutingFigure": {
+    "journal": "docs/audit/2026-11-10-long-context-block-routing-additions.json",
+    "verifiedOriginal": "00 Учебник/Assets/Figures/curated/moba/moba-running-example.png",
+    "license": "MIT",
+    "remainingActiveNeedsConfirmation": 64,
+    "activeRetiredImages": 0,
+    "scope": "Exact Moonshot AI original rendered in both locale shells. This addition does not change the status of the 64 other registered active images that still need confirmation."
+  },
+  "gemmaSelfRagAstraFigureReconciliation": {
+    "journal": "docs/audit/2026-11-10-gemma-self-rag-astra-originals-additions.json",
+    "newVerifiedOriginals": 7,
+    "historicalEmbedsRetired": 7,
+    "remainingActiveNeedsConfirmation": 57,
+    "activeRetiredImages": 0,
+    "scope": "Local root scan of rendered paths with an exact registry row. Five source-paper SVGs under CC BY 4.0 and two official ASTRA repository assets under Apache 2.0. Other ASTRA paper images are not cleared by the repository license."
+  },
+  "contributorCleanCandidate20261110": {
+    "scope": "Clean public projection of the current uncommitted worktree, not a committed tree or a live Linux CI run. This evidence does not accept chapter prose, complete courses or clear reuse rights.",
+    "inputs": 9694,
+    "deletedTrackedInputs": 6,
+    "sha256": "8c98ad8049155a865c7f118d92a77aec2c1ce80459231f2f7e4976a47dd3405f",
+    "digestMethod": "Sorted Git-visible paths, each followed by a NUL, file SHA-256 and a NUL. Current inputs matched the projection byte-for-byte. This audit section was added afterward.",
+    "archiveAbsent": ["05 Источники/Originals/", "Berkeley meeting-06-slides.pdf"],
+    "install": "Node 22.12.0, pnpm 10.32.1, 476 packages, independent frozen install from the local store",
+    "publicChecks": {
+      "topics": 153,
+      "sourceCoverage": "passed",
+      "courseLedgers": ["Stanford CS336 Spring 2026", "Berkeley Advanced LLM Agents Spring 2025"],
+      "publicationPassed": 761,
+      "publicationSkipped": 12,
+      "astroErrors": 0,
+      "astroWarnings": 0,
+      "astroHints": 6,
+      "builtOutputTests": 275,
+      "siteTests": 93,
+      "root": { "pages": 2071, "brokenLinks": 0, "artifactBytes": 879903862 },
+      "pagesBase": { "pages": 2071, "brokenLinks": 0, "artifactBytes": 883366556, "limitBytes": 1000000000 }
+    },
+    "reader": "Live local preview at 1280 and 375 px: GPT-1 RU/EN links resolve to their selected Markdown files; the EN RoPE fallback links the canonical RU source. No edit link on the Berkeley course archive. Prefixed HTML retains the absolute GitHub destination.",
+    "archive": "The full Berkeley deck is unchanged in the local archive. The public text index retains all 126 physical positions, with 117–121 replaced by a fixed exclusion notice. Neither deck nor text index is in the built Pages tree. Independent offline regeneration/check and 31 importer tests passed with the local originals; the EnIGMA note bytes were preserved.",
+    "imageInventory": { "distinctRenderedLocalRegistryEntriesNeedingConfirmation": 44, "retiredEmbeds": 0, "katexErrorMarkers": 0 },
+    "remoteDevObserved": "9bd4e7d9e8fba571c3e2467f7388f10874367c97"
+  },
+  "ngramFigureReconciliation20261110": {
+    "journal": "docs/audit/2026-11-10-ngram-author-figures-additions.json",
+    "newVerifiedOriginals": 3,
+    "historicalEmbedsRetired": 4,
+    "remainingActiveNeedsConfirmation": 40,
+    "activeRetiredImages": 0,
+    "scope": "Root output after the n-gram chapter update. The three author images replace the four historical Voita embeds; the MIT Karpathy figure remains. The exact registry-path inventory is not a rights clearance for external links, separate archives or other assets."
+  },
+  "embeddingFigureReconciliation20261110": {
+    "journal": "docs/audit/2026-11-10-embedding-author-figures-additions.json",
+    "newVerifiedOriginals": 5,
+    "additionalUsesOfExistingVerifiedOriginals": 1,
+    "historicalEmbedsRemoved": 5,
+    "remainingActiveNeedsConfirmation": 35,
+    "activeRetiredImages": 0,
+    "scope": "Root output exact registered asset paths used in page images. The five displaced figures remain in the archive. The one-hot and SVD originals remain in their chapters; neither has a newly verified redistribution license."
+  },
+  "gatedRecurrentFigureReconciliation20261110": {
+    "journal": "docs/audit/2026-11-10-lstm-gru-author-figures-additions.json",
+    "newVerifiedOriginals": 4,
+    "historicalEmbedsRemoved": 7,
+    "remainingActiveNeedsConfirmation": 28,
+    "activeRetiredImages": 0,
+    "scope": "Exact registered asset paths used in the root output. Olah's originals remain archived and linked. Nine source figures are embedded in the current LSTM/GRU chapter."
+  },
+  "seq2seqAttentionBridgeFigureReconciliation20261110": {
+    "journal": "docs/audit/2026-11-10-seq2seq-attention-bridge-additions.json",
+    "newVerifiedOriginals": 3,
+    "historicalEmbedsRemoved": 2,
+    "remainingActiveNeedsConfirmation": 26,
+    "activeRetiredImages": 0,
+    "scope": "Exact registered paths embedded in root output. Both Voita originals remain in the source archive and the Voita explanation remains linked. New embeds: two byte-identical D2L SVGs and all three panels of Figure 4 from Cho et al."
+  },
+  "multiheadFigureReconciliation20261110": {
+    "journal": "docs/audit/2026-11-10-multihead-originals-additions.json",
+    "newVerifiedOriginals": 2,
+    "historicalEmbedsRemoved": 1,
+    "remainingActiveNeedsConfirmation": 25,
+    "activeRetiredImages": 0,
+    "scope": "Current root output, exact registered paths. The former course diagram remains archived and the course animation remains linked. Both locales now embed the original Vaswani right panel and all three panels of Voita et al. Figure 1."
+  },
+  "scalingPrimaryFigureReconciliation20261110": {
+    "journal": "docs/audit/2026-11-10-scaling-primary-figures-additions.json",
+    "newVerifiedOriginals": 2,
+    "historicalEmbedsRemoved": 9,
+    "removedNeedsConfirmationEmbeds": 7,
+    "remainingActiveNeedsConfirmation": 18,
+    "activeRetiredImages": 0,
+    "scope": "Exact local registered paths in the current 2073-page root build. Nine former chapter images are absent from both the rendered route and the root output's asset tree, and their archived hashes match. The two previously verified entries authenticated their crop provenance, not the authors' redistribution rights. Rights for external URLs, unregistered assets and separately retained source archives are outside this count."
+  },
+  "loraPrimaryFigureReconciliation20261110": {
+    "journal": "docs/audit/2026-11-10-lora-primary-figures-additions.json",
+    "newVerifiedOriginals": 2,
+    "historicalEmbedsRemoved": 4,
+    "previouslyInactiveArchiveFiles": 1,
+    "remainingActiveNeedsConfirmation": 14,
+    "activeRetiredImages": 0,
+    "scope": "Exact local registered paths in the 2073-page root build. The PEFT chapter contains the authors' GPT-3 graph, the paper note their GPT-2 table, and the editorial Q&A reuses the existing verified Hugging Face animation. All five older archived LoRA files retain their bytes and are absent from the public asset tree. External links, unregistered files and separately retained source archives are outside this count."
+  },
+  "longContextEncoderFigures20261110": {
+    "journal": "docs/audit/2026-11-10-longformer-longt5-additions.json",
+    "newVerifiedOriginals": 1,
+    "historicalEmbedsRemoved": 1,
+    "remainingActiveNeedsConfirmation": 13,
+    "activeRetiredImages": 0,
+    "scope": "Exact registered paths in the 2073-page root build. The LongT5 ACL Figure 2 is published with its caption and attribution. The Longformer crop remains on disk but is absent from the public asset tree and from the research overview; the original is linked. External URLs, unregistered paths and separate source archives are outside this count."
+  },
+  "autoencoderDropoutAuthorFigures20261110": {
+    "journal": "docs/audit/2026-11-10-autoencoder-dropout-primary-figures-additions.json",
+    "newVerifiedOriginals": 4,
+    "historicalEmbedsRemoved": 4,
+    "remainingActiveNeedsConfirmation": 9,
+    "activeRetiredImages": 0,
+    "scope": "Exact registered paths in the 2073-page local root build. Three complete Prince figures and the Chervinskii original replace the four historical reader embeds. Their original bytes remain in the archive and all four historical files are absent from built assets. Rights of external URLs, unregistered paths and separate source archives are outside this count."
+  },
+  "agentPaperFigures20261110": {
+    "journal": "docs/audit/2026-11-10-astra-toolrl-paper-evidence-additions.json",
+    "historicalEmbedsRemoved": 6,
+    "licensedRepositoryFiguresPreserved": 3,
+    "remainingActiveNeedsConfirmation": 3,
+    "activeRetiredImages": 0,
+    "scope": "Exact registered paths in the 2073-page local root build. Both ASTRA and ToolRL notes retain their instructional repository originals. The six historical copies are absent from the built asset tree; their corresponding exact original figures are linked in the notes. This does not classify external URLs, unregistered files or separate source archives."
+  },
+  "finalRegisteredFigures20261110": {
+    "journal": "docs/audit/2026-11-10-last-registered-illustrations-additions.json",
+    "historicalEmbedsRemoved": 3,
+    "replacementOriginals": 3,
+    "remainingActiveNeedsConfirmation": 0,
+    "activeRetiredImages": 0,
+    "rootIndexFilesScanned": 2075,
+    "registeredVerifiedRenderedPaths": 1231,
+    "registeredUnlabelledRenderedPaths": 9,
+    "unregisteredRenderedPaths": 1433,
+    "externalImageUrls": 166,
+    "textbookPathsWithoutVerifiedExactRegistryMatch": 52,
+    "textbookPathsBySourceGroupBeforeAliasResolution": {"Harvard ML Systems": 33, "other curated assets": 9, "D2L Recommender Systems": 6, "Scikit-learn MOOC": 4},
+    "textbookAliasResolution": {
+      "totalPaths": 1219,
+      "exactKeys": 1176,
+      "assetPrefixAliasesVerifiedByBuiltSHA256": 43,
+      "verifiedAndByteMatchedTotal": 1154,
+      "verifiedMetadataButNoRecordedSHA256": 56,
+      "unlabelledWithNoRecordedSHA256": 9,
+      "byteMismatches": 0,
+      "unlabelledOwner": "textbook/modern-llm/sequence-model-alternatives",
+      "method": "For a rendered path with no exact key, also try the canonical Assets/ prefix. Require matching SHA-256 of the built file before clearing the alias. A verified metadata label or a matching hash does not independently establish author-level redistribution rights."
+    },
+    "textbookExternalImageUrls": 16,
+    "scope": "Distinct literal img src paths in built /assets/ output (URL-decoded), joined to the exact registry key, plus distinct external URLs counted separately. Index scan includes aliases and is not the Astro page count. The Huyen and Voita originals remain linked, but the three former embeds are absent from both HTML and built assets. Zero flagged entries does not clear unregistered, unlabelled, external, or separately archived material."
+  },
+  "localPagesCandidateAfterDecoderConfig20261110": {
+    "journal": "docs/audit/2026-11-10-modern-decoder-config-examples-additions.json",
+    "chapterRevision": "14dac3577c240829d0ec88961afd4ef0eb62734a56b44b3a3cfa2b304b79ba67",
+    "root": {"pages": 2073, "brokenLinks": 0, "builtOutputPassed": 284, "publicationPassed": 768, "publicationSkipped": 13},
+    "pagesBase": {"path": "/bookvar", "pages": 2073, "brokenLinks": 0, "artifactBytes": 880697883, "artifactFiles": 5755, "limitBytes": 1000000000, "headroomBytes": 119302117},
+    "scope": "Separate local static build of the current dirty worktree under /bookvar. Prefixed image and cross-chapter links checked in both locale outputs. The root preview remains available. This is not a clean checkout, live CI or deployment."
+  },
+  "sequenceCourseFigureReconciliation20261110": {
+    "journal": "docs/audit/2026-11-10-sequence-course-figure-reconciliation-additions.json",
+    "chapterRevision": "acbd5172b5ef5a321ed150210231b766cc95e2a556441de3754bcf15b5622ead",
+    "retiredCourseFrames": 10,
+    "reusedSourceOriginals": 7,
+    "newSourceOriginals": 1,
+    "activeRetiredImages": 0,
+    "textbookPagesScannedInBothLocales": 310,
+    "distinctLocalRenderedImagePaths": 1212,
+    "exactRegistryKeys": 1168,
+    "assetPrefixAliases": 44,
+    "matchingSHA256": 1156,
+    "registeredWithoutSHA256": 56,
+    "mismatchedSHA256": 0,
+    "unregistered": 0,
+    "externalImageUrls": 16,
+    "scope": "Textbook routes in the current root build. The nine records reported as unlabelled in the previous snapshot had YAML-inherited source metadata: that scan did not resolve merge keys. They were nevertheless unpinned and their reuse was not independently established. The chapter now uses eight source originals, links directly to the official Qwen diagram, and preserves the old ten slide files locally but not in the built asset tree. Verified metadata or an exact digest does not by itself verify third-party rights."
+  },
+  "externalTextbookFigureReview20261110": {
+    "journal": "docs/audit/2026-11-10-external-textbook-figure-review-additions.json",
+    "externalURLsReviewed": 16,
+    "externalEmbedsReplaced": 3,
+    "remainingExternalImageUrls": 13,
+    "textbookPagesScannedInBothLocales": 310,
+    "distinctLocalRenderedImagePaths": 1214,
+    "exactRegistryKeys": 1170,
+    "assetPrefixAliases": 44,
+    "matchingSHA256": 1158,
+    "registeredWithoutSHA256": 56,
+    "unregistered": 0,
+    "mismatchedSHA256": 0,
+    "activeRetiredImages": 0,
+    "scope": "Current root build, textbook manifest only. The linked ReAct project graphic no longer ships as a local copy. RepairAgent Figure 2 and AgentTrek Figure 4 are unchanged copies of the licensed originals. AgentTrek Figures 5–6 are linked as the replay examples; Figure 5 includes third-party interface content. The 13 remaining external images were not cleared for redistribution."
+  },
+  "d2lLegacyFigureReconciliation20261110": {
+    "journal": "docs/audit/2026-11-10-external-textbook-figure-review-additions.json",
+    "checkedD2LFigures": 12,
+    "upstreamByteMatchesPinned": 12,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1170,
+    "registeredTextbookPathsStillWithoutSHA256": 44,
+    "scope": "Compare the existing SVGs with assets served by the corresponding chapters in Dive into Deep Learning 1.0.3 or archived at the exact tagged revision. LeNet matches the vertical original; ResNet-18 matches the unrotated source image. The exact version license also matches the archived copy. No images or reader routes changed in this subset."
+  },
+  "agentEvaluationOriginalFigures20261110": {
+    "journal": "docs/audit/2026-11-10-agent-evaluation-original-figures-additions.json",
+    "localBuildPages": 2077,
+    "checkedTextbookLocalePages": 310,
+    "newByteIdenticalAuthorFigures": 3,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1174,
+    "registeredTextbookPathsStillWithoutSHA256": 44,
+    "remainingDistinctExternalTextbookImages": 10,
+    "unregisteredTextbookImages": 0,
+    "textbookImageHashMismatches": 0,
+    "scope": "Root build, textbook manifest only. Agent evaluation now uses ToolSandbox Figures 1–2 and τ-bench Figure 4; the three prior Anthropic images remain links. The GPT history comparison also adds one verified local image in a separate journal."
+  },
+  "legacyTextbookSourceCopies20261110": {
+    "journal": "docs/audit/2026-11-10-legacy-textbook-source-copies-additions.json",
+    "checkedTextbookLocalePages": 310,
+    "upstreamByteMatchesPinned": 7,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1181,
+    "registeredTextbookPathsStillWithoutSHA256": 37,
+    "remainingDistinctExternalTextbookImages": 10,
+    "scope": "Verified exact author bytes for Google ML Crash Course, two micrograd figures, the CS231n learning-rate figure, the Hugging Face course image dataset, The Illustrated GPT-2, and the Harvard ML Systems roofline. Neither images nor reader routes were changed. The separate CS231n optimizer animation was not relicensed."
+  },
+  "chameleonVisualTokenizerFigures20261110": {
+    "journal": "docs/audit/2026-11-10-chameleon-visual-tokenizer-sources-additions.json",
+    "localBuildPages": 2077,
+    "checkedTextbookLocalePages": 310,
+    "newLicensedOriginalFigures": 2,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1183,
+    "registeredTextbookPathsStillWithoutSHA256": 37,
+    "remainingDistinctExternalTextbookImages": 9,
+    "scope": "Local textbook build. The original VQ-VAE image remains an external link, not an embed. The new local VQ diagram is the licensed ACL publication figure; the Emu3 image is the unchanged original. The English route still serves a labeled canonical-language fallback."
+  },
+  "diffusionLicensedOriginals20261111": {
+    "journal": "docs/audit/2026-11-11-diffusion-licensed-originals-additions.json",
+    "localBuildPages": 2077,
+    "checkedTextbookLocalePages": 310,
+    "newLicensedOriginalFigures": 2,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1185,
+    "registeredTextbookPathsStillWithoutSHA256": 37,
+    "remainingDistinctExternalTextbookImages": 7,
+    "scope": "Two unchanged Alammar originals with CC BY-NC-SA 4.0 and verified Git blob IDs. The DDPM Algorithms 1–2 and Rombach Figure 3 remain external links, not embeds. Both chapter routes render local figures; the English route is still a labeled canonical-language fallback."
+  },
+  "agentExternalFigureResolution20261111": {
+    "journal": "docs/audit/2026-11-11-agent-external-figure-resolution-additions.json",
+    "localBuildPages": 2077,
+    "checkedTextbookLocalePages": 310,
+    "externalEmbedsReplacedWithLinks": 7,
+    "licensedFigureReused": 1,
+    "remainingDistinctExternalTextbookImages": 0,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1185,
+    "registeredTextbookPathsStillWithoutSHA256": 37,
+    "scope": "Canonical textbook routes from the publication manifest, in both locales. The tool-use chapter reuses the unchanged ToolSandbox Figure 2; all seven prior originals are still linked, and the three chapters explain the relevant examples inline. This does not cover the source library or clear previously unpinned images for redistribution."
+  },
+  "legacyPdfFigureEvidence20261111": {
+    "journal": "docs/audit/2026-11-11-legacy-pdf-figure-evidence-additions.json",
+    "checkedTextbookLocalePages": 310,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1189,
+    "registeredTextbookPathsStillWithoutSHA256": 33,
+    "newlyConfirmedSourceLicenses": 2,
+    "knownPublishedFiguresWithUnconfirmedRedistribution": 2,
+    "scope": "Four existing PNGs are pinned without changing them. NAACL Figure 1 and Qwen2.5-Omni Figure 2 have named CC BY 4.0 evidence. InternVL 2.5 Figure 2 and ImageBind Figure 1 match the archived paper panels but have no verified redistribution grant; they remain in local preview pending a licensed equivalent or link-only treatment. A public release must not treat these as cleared. The 33 remaining records are not rights-reviewed by this check."
+  },
+  "vlmReaderFigureResolution20261111": {
+    "journal": "docs/audit/2026-11-11-vlm-reader-figure-resolution-additions.json",
+    "checkedTextbookLocalePages": 310,
+    "localBuildPages": 2077,
+    "retiredVlmCopies": 3,
+    "retiredCopiesInBuiltOutput": 0,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1187,
+    "registeredTextbookPathsStillWithoutSHA256": 32,
+    "distinctExternalTextbookImages": 0,
+    "renderedTextbookRowsMarkedRightsNeedsConfirmation": 0,
+    "scope": "The three PNGs remain byte-identical in the repository archive and are absent from built HTML and assets, including the atlas and its English fallback. Six chapter editions retain direct links to the exact original paper pages and walk through the cases inline. A zero count of rows marked needs-confirmation is not rights clearance for all remaining legacy entries or the source library."
+  },
+  "paddleocrReadingOrder20261111": {
+    "journal": "docs/audit/2026-11-11-paddleocr-reading-order-additions.json",
+    "chapter": "textbook/multimodal/documents-ocr-grounding/#doc-paddleocr-reading-order",
+    "checkedTextbookLocalePages": 310,
+    "localBuildPages": 2079,
+    "newLicensedOriginalFigures": 1,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1188,
+    "registeredTextbookPathsStillWithoutSHA256": 32,
+    "scope": "Both chapter editions use the unchanged CC BY 4.0 PP-DocLayoutV2 Figure 3. The paper note and subject index link back to the worked invoice. The previous Qwen2-VL translation example remains a paper link, not a copied image."
+  },
+  "distserveOriginalFigures20261111": {
+    "journal": "docs/audit/2026-11-11-distserve-original-figures-additions.json",
+    "chapter": "textbook/inference/disaggregated-serving",
+    "localBuildPages": 2079,
+    "checkedTextbookLocalePages": 310,
+    "visibleImagePaths": 1221,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1191,
+    "byteIdenticalSourcePathAliases": 44,
+    "registeredTextbookPathsStillWithoutSHA256": 30,
+    "distinctExternalTextbookImages": 0,
+    "retiredCopiesInBuiltOutput": 0,
+    "scope": "Two original DistServe v3 figures replace historical crops in both locales under CC BY-SA 4.0. The right-panel example distinguishes execution time from client p95, and the architecture explanation distinguishes the pull initiator from data direction. Source-PDF reproduction, existing CPU examples and local rendered pages were checked; remaining legacy rights and deployment are outside this evidence."
+  },
+  "mooncakeDynamoOriginalFigures20261111": {
+    "journal": "docs/audit/2026-11-11-mooncake-dynamo-originals-additions.json",
+    "chapter": "textbook/inference/disaggregated-serving",
+    "localBuildPages": 2079,
+    "checkedTextbookLocalePages": 310,
+    "visibleImagePaths": 1221,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1193,
+    "byteIdenticalSourcePathAliases": 44,
+    "registeredTextbookPathsStillWithoutSHA256": 28,
+    "distinctExternalTextbookImages": 0,
+    "retiredCopiesInBuiltOutput": 0,
+    "scope": "The Mooncake documentation PNG and the Dynamo v1.5.1 cross-node KV SVG are unchanged originals from pinned Git trees. Both languages carry the figures and Apache-2.0 license text. The paper's earlier Mooncake Figure 1 is linked rather than re-licensed. The removed English-only Dynamo overview remains a pinned link. These checks cover the local reader, not new serving measurements or a release."
+  },
+  "sequenceArchitectureFigures": {
+    "journal": "docs/audit/2026-11-11-sequence-architecture-figures-additions.json",
+    "chapter": "textbook/modern-llm/sequence-model-alternatives",
+    "localBuildPages": 2079,
+    "checkedTextbookLocalePages": 310,
+    "visibleImagePaths": 1222,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1202,
+    "byteIdenticalSourcePathAliases": 44,
+    "registeredTextbookPathsStillWithoutSHA256": 20,
+    "distinctExternalTextbookImages": 0,
+    "katexErrorMarkersInTextbook": 0,
+    "figureSlotsCheckedInChrome": 8,
+    "viewportWidths": [375, 1280],
+    "scope": "Three replacements reproduce exact PDF crops; five retained files match the source pixels. The Russian chapter and its English fallback both load the eight figures. The RetNet figure and two Phonebook plots are pinned for provenance only and are not cleared for a public release."
+  },
+  "distributedNvidiaSourceFigures": {
+    "journal": "docs/audit/2026-11-11-distributed-nvidia-source-figures-additions.json",
+    "chapter": "textbook/inference/distributed-inference",
+    "localBuildPages": 2079,
+    "checkedTextbookLocalePages": 310,
+    "visibleImagePaths": 1222,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1207,
+    "byteIdenticalSourcePathAliases": 44,
+    "registeredTextbookPathsStillWithoutSHA256": 15,
+    "distinctExternalTextbookImages": 0,
+    "katexErrorMarkersInTextbook": 0,
+    "figureSlotsCheckedInChrome": 5,
+    "viewportWidths": [375, 1280],
+    "scope": "Four NCCL diagrams and the Megatron TP2×CP2 figure are unchanged originals at pinned upstream revisions. Both editions show how to follow the rank buffers and distinguish the two forward gathers. Eight published CPU examples per edition passed, along with an independent four-rank buffer check and a fully masked KV shard. Both pinned license files match the copies in the local build. This is not an NCCL throughput measurement or a deployment."
+  },
+  "chenSpeculativeSourceFigures": {
+    "journal": "docs/audit/2026-11-11-chen-speculative-source-figures-additions.json",
+    "chapter": "textbook/inference/speculative-decoding",
+    "localBuildPages": 2079,
+    "checkedTextbookLocalePages": 310,
+    "visibleImagePaths": 1222,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1209,
+    "byteIdenticalSourcePathAliases": 44,
+    "registeredTextbookPathsStillWithoutSHA256": 13,
+    "distinctExternalTextbookImages": 0,
+    "katexErrorMarkersInTextbook": 0,
+    "figureSlotsCheckedInChrome": 3,
+    "viewportWidths": [375, 1280],
+    "scope": "Algorithm 2 and Table 1 are the unchanged CS336 crops of Chen et al. v1; the third visible object is the existing full-resolution Figure 1. The lower-resolution historical duplicate is absent from built textbook assets. Both editions distinguish the K sweep from Table 1 and separate the paper's reported XSum nucleus speedup from the ratio of displayed times. The existing CPU check includes exact finite-sequence probabilities. These are source results, not local measurements."
+  },
+  "quantizationSourceFigures": {
+    "journal": "docs/audit/2026-11-11-quantization-source-figures-additions.json",
+    "chapter": "textbook/inference/quantization",
+    "localBuildPages": 2081,
+    "checkedTextbookLocalePages": 310,
+    "visibleImagePaths": 1215,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1206,
+    "byteIdenticalSourcePathAliases": 44,
+    "registeredTextbookPathsStillWithoutSHA256": 9,
+    "distinctExternalTextbookImages": 0,
+    "renderedTextbookFiguresWithUnconfirmedRedistribution": 3,
+    "katexErrorMarkersInTextbook": 0,
+    "newLicensedOriginalFigures": 3,
+    "retiredCopiesInBuiltOutput": 0,
+    "remainingUnhashedVisiblePaths": [
+      "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/gpqa.png",
+      "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hle-pipeline.png",
+      "00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png",
+      "00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-transfer-paths.png",
+      "00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png",
+      "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/anyscale-static-batching.png",
+      "00 Учебник/Assets/Figures/curated/inference-advanced/physics-scheduling/gordic-chunked-prefill.png",
+      "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif",
+      "00 Учебник/Assets/Figures/curated/post-training-courses/sft-chat-template.png"
+    ],
+    "scope": "Current HTML main regions on canonical textbook routes in both locales. Counts use distinct decoded asset paths and exact SHA256 (allowing byte-identical registered aliases); source-library media are outside this inventory. Three new source images replace two older embeds. The two previous files remain unchanged in the archive, and both original source links stay in each chapter. The 20-point AWQ example is checked on CPU; it is not a model benchmark."
+  },
+  "visibleTextbookFigureProvenance": {
+    "journal": "docs/audit/2026-11-11-textbook-visible-figure-provenance-additions.json",
+    "localBuildPages": 2081,
+    "checkedTextbookLocalePages": 310,
+    "visibleImagePaths": 1215,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1215,
+    "byteIdenticalSourcePathAliases": 44,
+    "registeredTextbookPathsStillWithoutSHA256": 0,
+    "distinctExternalTextbookImages": 0,
+    "renderedTextbookFiguresExplicitlyFlaggedForRightsReview": 9,
+    "katexErrorMarkersInTextbook": 0,
+    "sourceLicensesConfirmedThisPass": 3,
+    "sourceIdentitiesWithoutRedistributionGrantThisPass": 6,
+    "remainingFlaggedRightsPaths": [
+      "00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png",
+      "00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-transfer-paths.png",
+      "00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png",
+      "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/anyscale-static-batching.png",
+      "00 Учебник/Assets/Figures/curated/inference-advanced/physics-scheduling/gordic-chunked-prefill.png",
+      "00 Учебник/Assets/Figures/curated/atlas-remainder-official/retnet-dual-form.png",
+      "00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-pure-figure3.png",
+      "00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-hybrid-figure7.png",
+      "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif"
+    ],
+    "scope": "Current root HTML main regions on canonical textbook routes. All nine previous digest gaps are reconciled; this does not establish republication rights for the nine flagged images, aliases, or media outside this scope. No reader figures or chapters were replaced. Source-library media need their own inventory."
+  },
+  "schedulingSourceFigures": {
+    "journal": "docs/audit/2026-11-11-scheduling-originals-additions.json",
+    "chapter": "textbook/inference/scheduling",
+    "localBuildPages": 2083,
+    "checkedTextbookLocalePages": 310,
+    "visibleImagePaths": 1215,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1215,
+    "byteIdenticalSourcePathAliases": 44,
+    "registeredTextbookPathsStillWithoutSHA256": 0,
+    "renderedTextbookFiguresExplicitlyFlaggedForRightsReview": 7,
+    "katexErrorMarkersInTextbook": 0,
+    "remainingFlaggedRightsPaths": [
+      "00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png",
+      "00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-transfer-paths.png",
+      "00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png",
+      "00 Учебник/Assets/Figures/curated/atlas-remainder-official/retnet-dual-form.png",
+      "00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-pure-figure3.png",
+      "00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-hybrid-figure7.png",
+      "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif"
+    ],
+    "scope": "Both scheduling editions now use two byte-identical author figures with named licenses. The replaced paths are still archived and linked upstream, and absent from the root build asset tree. Scope is canonical reader paths; separate lecture copies and source-library media are not covered."
+  },
+  "inferenceLatencySourceFigures": {
+    "journal": "docs/audit/2026-11-11-inference-roofline-latency-figures-additions.json",
+    "chapters": [
+      "textbook/inference/llm-inference-physics",
+      "textbook/inference/benchmarking-slo"
+    ],
+    "localBuildPages": 2083,
+    "checkedTextbookLocalePages": 310,
+    "visibleImagePaths": 1214,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1214,
+    "byteIdenticalSourcePathAliases": 44,
+    "registeredTextbookPathsStillWithoutSHA256": 0,
+    "renderedTextbookFiguresExplicitlyFlaggedForRightsReview": 5,
+    "katexErrorMarkersInTextbook": 0,
+    "remainingFlaggedRightsPaths": [
+      "00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-transfer-paths.png",
+      "00 Учебник/Assets/Figures/curated/atlas-remainder-official/retnet-dual-form.png",
+      "00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-pure-figure3.png",
+      "00 Учебник/Assets/Figures/curated/alternatives-transformer-2026/phonebook-hybrid-figure7.png",
+      "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif"
+    ],
+    "formerTextbookPathsStillInSourceLibrary": [
+      "00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png",
+      "00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png"
+    ],
+    "scope": "Local root build, reader main regions. The two Gordić copies no longer appear as figures in the textbook; original links and the unchanged source-library article remain. Their republication rights in that library are unresolved. This snapshot does not cover source-library media or establish license clearance for all remaining assets."
+  },
+  "sequenceRecallLicensedFigures": {
+    "journal": "docs/audit/2026-11-11-sequence-recall-licensed-figures-additions.json",
+    "chapter": "textbook/modern-llm/sequence-model-alternatives",
+    "localBuildPages": 2083,
+    "checkedTextbookLocalePages": 310,
+    "visibleImagePaths": 1212,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1212,
+    "byteIdenticalSourcePathAliases": 44,
+    "registeredTextbookPathsStillWithoutSHA256": 0,
+    "distinctExternalTextbookImages": 0,
+    "renderedTextbookFiguresExplicitlyFlaggedForRightsReview": 1,
+    "katexErrorMarkersInTextbook": 0,
+    "remainingFlaggedRightsPaths": [
+      "00 Учебник/Assets/Figures/curated/source-first-7-14/cs231n-optimizer-trajectories.gif"
+    ],
+    "scope": "RetNet and Waleffe figures are linked to the original articles from all their former textbook, atlas, and source-note placements. Added two CC BY 4.0 figures; the primary Wang PNG replaces a course slide capture. The four archived assets are absent from the build. The earlier LMCache replacement is included in the current scan. This covers explicit registry flags on rendered textbook paths, not comprehensive legal review or source-library rights."
+  },
+  "optimizerCurvatureSourceFigures": {
+    "journal": "docs/audit/2026-11-11-optimizer-curvature-source-figures-additions.json",
+    "chapter": "textbook/neural-networks/optimizers-schedules",
+    "localBuildPages": 2083,
+    "checkedTextbookLocalePages": 310,
+    "visibleImagePaths": 1214,
+    "textbookRenderedImagePathsWithMatchingSHA256": 1214,
+    "byteIdenticalSourcePathAliases": 44,
+    "distinctExternalTextbookImages": 0,
+    "renderedTextbookFiguresExplicitlyFlaggedForRightsReview": 0,
+    "katexErrorMarkersInTextbook": 0,
+    "scope": "Replaced the last explicitly flagged textbook image with a CC BY 4.0 PMLR plot and two CC BY-SA 4.0 D2L originals. The Radford GIF is absent from built assets but remains linked from the chapter. The count covers explicit flags on rendered textbook paths, not comprehensive legal clearance or source-library rights."
+  },
+  "vllmSourceLibraryFigureReconciliation": {
+    "journal": "docs/audit/2026-11-11-vllm-source-library-figure-reconciliation-additions.json",
+    "route": "sources/implementations/vllm",
+    "archivedGordicCopies": 10,
+    "archivedCopiesInBuiltAssets": 0,
+    "licensedFiguresReused": 5,
+    "sourceLibraryImageScan": {
+      "htmlPagesWithMain": 1508,
+      "distinctLocalImagePaths": 1421,
+      "commonRegistryMatches": 81,
+      "exactSHA256Matches": 73,
+      "registeredWithoutSHA256": 8,
+      "outsideCommonRegistry": 1340,
+      "externalImagePlacements": 179,
+      "missingLocalFiles": 0,
+      "explicitRegistryFlagsOnMatchedPaths": 0,
+      "ownerConfirmedWithoutNamedRightsStatus": 9,
+      "pathsOutsideCommonRegistryByCourse": {
+        "courses/harvard-ml-systems": 910,
+        "courses/hse-ml-course": 221,
+        "courses/scikit-learn-mooc": 156,
+        "courses/genai-agents": 39,
+        "courses/llms-practical-guide": 10,
+        "courses/efficient-dl-systems": 4
+      }
+    },
+    "scope": "Root local build, main content of every RU and EN sources/index.html and descendant index.html. Counts are paths or placements, not unique illustrations by bytes or decisions on reuse. The common registry is not the only provenance inventory: the large import groups need reconciliation against their per-course manifests and applicable license terms. External images were not fetched as part of this scan."
+  },
+  "harvardLibraryMediaAudit": {
+    "scope": "Built Harvard library paths and references from any built page to the same Harvard asset family. The chapter and slide manifests cover their own media; the common asset registry supplies retirement decisions. Image hashes are not an individual rights or teaching-quality review.",
+    "command": "pnpm --dir publishing check:harvard-media",
+    "optionalUpstreamComparison": "pnpm --dir publishing check:harvard-media --upstream DIRECTORY (save the three complete GitHub tree responses below under their listed file names)",
+    "actual": {
+      "coursePagesWithMain": 240,
+      "visibleCourseMedia": 943,
+      "matchingChapterImages": 674,
+      "matchingSlideImages": 269,
+      "archivedChapterHtmlSnapshotsMatchingSHA256": 29,
+      "oldChapterImageExcluded": 1,
+      "slideImagesKeptAsLinks": 14,
+      "uncoveredByBothHarvardManifests": 0,
+      "distinctMediaOutsideCommonRegistryReconciled": 910
+    },
+    "archive": {
+      "renderCommit": "c1c8e803d61c7c4f96bd1424ec5a0501f20f7730",
+      "historicalSourceCommit": "fc26c6257a96f4f6937a720b458db13e3bac070f",
+      "declaredChapterImportCommit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+      "slideCommit": "45ecc8d82fcae70c149cdce550d3b3d3411df913",
+      "matchingUpstreamChapterBlobs": 674,
+      "matchingUpstreamSlideBlobs": 269,
+      "trees": {
+        "vol1-tree.json": "https://api.github.com/repos/harvard-edge/cs249r_book/git/trees/259aad6d6e151c1769aaacdd9e884efcea5ac2cb?recursive=1",
+        "vol2-tree.json": "https://api.github.com/repos/harvard-edge/cs249r_book/git/trees/9cffef1270bbb694a194337d700b2bd9d07285b2?recursive=1",
+        "slides-tree.json": "https://api.github.com/repos/harvard-edge/cs249r_book/git/trees/45ecc8d82fcae70c149cdce550d3b3d3411df913?recursive=1"
+      }
+    },
+    "licenseEvidence": {
+      "historicalRepositoryNotice": "CC BY-NC-SA 4.0",
+      "sameNoticeAtHistoricalSourceDeclaredImportAndSlideCommits": "b6f4689d6fccf48d82d0871a3b994a122427fcb0b278971f6ba008be44e2c926",
+      "archivedNotice": "site/public/licenses/harvard-45ecc8d8-LICENSE.md",
+      "limits": "The repository notice applies to original materials in the pinned editions, not necessarily every third-party component. The current repository separately describes the MIT Press textbook text under CC BY-NC-ND 4.0. Do not apply the current terms retroactively or apply the older notice to a later edition."
+    },
+    "explicitCreditTriage": [
+      {
+        "chapter": "vol1/frameworks.md",
+        "line": 1297,
+        "asset": "Sources/Harvard ML Systems/vol1/frameworks/421b1d608519785291cfd3fe15a4c88e24545a14.svg",
+        "credit": "Niklas Lang’s RGB tensor figure",
+        "decision": "not-reviewed"
+      },
+      {
+        "chapter": "vol1/ml_ops.md",
+        "line": 597,
+        "asset": "Sources/Harvard ML Systems/vol1/ml_ops/124c70a98d50344e78517384c2658cae1de42925.svg",
+        "credit": "Google Cloud MLOps pipeline adaptation",
+        "decision": "not-reviewed"
+      },
+      {
+        "chapter": "vol1/ml_systems.md",
+        "line": 530,
+        "asset": "Sources/Harvard ML Systems/vol1/ml_systems/cloud_ml_tpu.jpeg",
+        "credit": "Google DeepMind data center photo",
+        "decision": "not-reviewed"
+      },
+      {
+        "chapter": "vol1/model_compression.md",
+        "line": 1676,
+        "asset": "Sources/Harvard ML Systems/vol1/model_compression/69ef310a48248ea96fb6b3f52a567bc01eacaad3.svg",
+        "credit": "NVIDIA cuSPARSE block-sparse figure adaptation",
+        "decision": "not-reviewed"
+      },
+      {
+        "chapter": "vol1/nn_architectures.md",
+        "line": 297,
+        "asset": "Sources/Harvard ML Systems/vol1/nn_architectures/34f1ff4eb2e4f04cbfc72069d106a4d9bd7e066d.svg",
+        "credit": "Reagen et al. MLP architecture adaptation",
+        "decision": "not-reviewed"
+      },
+      {
+        "chapter": "vol2/robust_ai.md",
+        "line": 782,
+        "asset": "Sources/Harvard ML Systems/vol2/robust_ai/gradient-attack.svg",
+        "credit": "defence.AI FGSM figure",
+        "decision": "already-excluded"
+      },
+      {
+        "chapter": "vol2/robust_ai.md",
+        "line": 1157,
+        "asset": "Sources/Harvard ML Systems/vol2/robust_ai/0d8106a3c7ca65302fa306b4b86e5170bc79e78f.svg",
+        "credit": "Li et al., Mathematics 12(2):247 figure adaptation",
+        "decision": "already-reviewed"
+      },
+      {
+        "chapter": "vol2/robust_ai.md",
+        "line": 1173,
+        "asset": "Sources/Harvard ML Systems/vol2/robust_ai/2106df9e0de5e907ea8ab741d33097ba20258cdf.svg",
+        "credit": "Towards Data Science autoencoder figure adaptation",
+        "decision": "not-reviewed"
+      }
+    ],
+    "triageLimit": "Historical snapshot of a pattern scan for explicit credit/image-source/adapted-from language, not an exhaustive review. The six subsequent decisions are recorded below. The previously reviewed adaptation and excluded FGSM remain as recorded in the earlier Harvard journal.",
+    "verification": "Five new fixture tests cover base paths, missing/unregistered/corrupt bytes, Git identity and archive leaks; 306 built-output tests include the real course media check. No chapter, image or live site changed."
+  },
+  "harvardCreditedIllustrations": {
+    "journal": "docs/audit/2026-11-11-harvard-credited-illustrations-additions.json",
+    "decision": "Preserved the original captions and exact archival links for all six third-party credits. Replaced four inline illustrations with source originals whose reuse terms are documented; the data center photo and block-sparse diagram are link-only.",
+    "actual": {
+      "coursePagesWithMain": 240,
+      "matchingChapterImages": 668,
+      "matchingSlideImages": 269,
+      "totalRetiredCourseImages": 7,
+      "slideImagesKeptAsLinks": 14,
+      "verifiedReplacementPlacements": 4
+    },
+    "verification": "The current local build matched the 937 remaining course images to the pinned upstream Git blobs and reported no missing, unregistered, corrupted, or leaked archival media. The four replacement images were inspected in the browser; the mobile viewer allowed zoom and pan.",
+    "limits": "Decisions cover the six flagged third-party cases, not an exhaustive audit of all Harvard figures."
+  },
+  "vlmConnectorAndRetrievalFigures20261113": {
+    "journal": "docs/audit/2026-11-13-internvl-imagebind-figures-additions.json",
+    "localBuildPages": 2083,
+    "newOriginalFigurePlacements": 4,
+    "scope": "InternVL3.5 Figure 2(c) is a pixel-exact panel crop under CC BY 4.0. Panda Act Figure 2 is the unchanged publisher JPEG under CC BY-NC-ND 4.0. They illustrate feature compression and cross-modal retrieval respectively. The original InternVL 2.5 and ImageBind figures remain direct links, not served copies. The result is scoped to these two examples, not to other InternVL or VLM artwork.",
+    "verification": "Both explanations and images rendered in both locales at 1280 and 375 pixels; figure zoom and pan worked. The current build and link check passed. All 54 runs of the canonical examples and both source checks passed."
+  },
+  "internvlTrainingFigures20261113": {
+    "journal": "docs/audit/2026-11-13-internvl-training-figure-additions.json",
+    "scope": "Chapter 64c in both locales. InternVL 2.5 Figure 4 now links to the pinned PDF without publishing its archived raster. InternVL 3.5 Figure 3 is the unmodified original PNG under CC BY 4.0 and illustrates the later joint-training recipe.",
+    "verification": "The rebuilt 2083-page preview passed all 311 output tests, including a check that the retired raster is absent from public assets. Both stage tables and the new figure were inspected in Chrome at 1280, 375 and 320 px."
+  },
+  "pixmoDataFigure20261113": {
+    "journal": "docs/audit/2026-11-13-pixmo-data-figure-additions.json",
+    "scope": "Chapter 64c in RU and EN. Molmo Figure 1 remains linked; its crop is archived and not served. The original CC BY 4.0 Figure 3 from MolmoPoint shows how the later GUI dataset obtains target coordinates and text instructions.",
+    "verification": "2083 pages built and 312 built-output tests passed, including byte identity and absence of the retired raster. Chrome verification at 1280, 375 and 320 px covered inline fit in both languages, with 4× zoom and panning at 375 px."
+  },
+  "vlmEvaluationContamination20261113": {
+    "journal": "docs/audit/2026-11-13-vlm-evaluation-contamination-additions.json",
+    "scope": "Chapter 64f in both languages. The historical Molmo table remains linked to the exact PDF page, with a worked two-row comparison. The new original Song Figure 1 illustrates text-only and multimodal leakage; a controlled experiment shows how scores can change after an image edit.",
+    "verification": "2083 pages built; 313 built-output and 230 asset/provenance/parity checks passed, with 36 runs of the canonical chapter examples. Both languages were inspected in Chrome at 1280, 375 and 320 px.",
+    "nextSourceChecks": [
+      "flamingo-figure3-architecture.png — connectors/fusion",
+      "pix2struct-figure1-tasks.png — documents and OCR",
+      "qwen25omni-figure3-tmrope.png — audio/video and omni",
+      "molmo-figure5-image-tokenization.png — visual tokenization"
+    ],
+    "inventoryLimit": "Four owner-confirmed entries among 73 distinct rendered image paths in the two VLM textbook subtrees, not a review of source-license evidence for every figure."
+  },
+  "pix2structTmropeProvenance20261113": {
+    "journal": "docs/audit/2026-11-13-pix2struct-tmrope-provenance-additions.json",
+    "scope": "The TMRoPE PNG stays byte-identical under the verified Qwen2.5-Omni v1 CC BY 4.0 license. The Pix2Struct task composite remains in the archive and is linked from both editions; the original screenshot-parsing and variable-resolution illustrations are still embedded. Added a worked comparison of AI2D, Screen2Words, DocVQA and RefExp.",
+    "verification": "2083 pages built; 315 built-output and 231 provenance/parity tests passed, and both chapter example checkers passed. Reviewed both figures in Chrome in RU and EN at 1280, 375 and 320 px.",
+    "nextSourceChecks": [
+      "flamingo-figure3-architecture.png — connectors/fusion; exact arXiv v2 is non-exclusive, and the authors separately credit photos. Investigate an author diagram for a clearly distinguished cross-attention variant, such as Pheye Figure 2 from the COLING proceedings.",
+      "molmo-figure5-image-tokenization.png — visual tokenization; exact arXiv v2 is non-exclusive. Preserve the original PDF link and the worked distinction between overlap during encoding and the stitched nonduplicated sequence."
+    ],
+    "inventoryLimit": "Two flagged entries among 72 distinct rendered image paths in the two VLM textbook subtrees after exact-path registry join. This is not a review of source-license evidence for every other asset."
+  },
+  "flamingoMolmoFigures20261113": {
+    "journal": "docs/audit/2026-11-13-flamingo-molmo-figure-additions.json",
+    "scope": "Three historical copies stay archived. The two chapters and atlas link the exact originals. Both connector editions embed the unchanged CC BY 4.0 Pheye cross-attention figure; both tokenization editions explain the Molmo overlap seam without a duplicated patch contribution.",
+    "verification": "Scanned 2085 root index.html files and the distributed asset tree: none of the three archive filenames appear. The built Pheye PNG matches the original SHA-256. Inspected both languages, including desktop dark mode, narrow layout and mobile enlargement.",
+    "inventoryLimit": "No generic owner-confirmed, needs-confirmation, unregistered or external images in the latest exact-path scan of 71 distinct VLM textbook images. This does not clear unexamined rights or certify the whole textbook."
+  },
+  "scikitLearnMoocMedia20261113": {
+    "sourceCommit": "0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6",
+    "sourceBlobFixture": "publishing/tests/fixtures/scikit-learn-mooc-blobs.json",
+    "scope": "The original English glossary now embeds five byte-identical course SVGs with original-file links and CC BY 4.0 notices. The penguin lesson retains two external illustrations with the artist's requested attribution and immutable URLs, separate from the course license. The EN aliases lead to the same original pages.",
+    "verification": "The 212 archived course files and license match the exact upstream Git tree; the 165 distributed course-media files also match. Both changed source documents match their import-manifest SHA-256. The importer passed 17 focused cases. The root build produced 2083 pages, with 317 built-output checks and zero broken internal routes, fragments or files. Visually inspected the five SVGs and exercised 4× zoom and pan at 375 px; verified direct and EN-alias paths at 375 and 1280 px. Both linked penguin images decoded.",
+    "pagesBase": "A separate local /bookvar build produced 2083 pages, 5762 files and 883444742 bytes. Zero broken internal links; all five glossary images and the English alias use the /bookvar prefix. No release or deployment.",
+    "limits": "Byte identity is not blanket clearance for credited third-party assets. This checks the Inria library image import and the two repaired reader pages, not complete editorial transfer of the course."
+  },
+  "hseAndGenAiLibrary20261113": {
+    "hse": {
+      "sourceCommit": "4b21051531fb72dc9eef58632332ad971c92d006",
+      "catalogueRecords": 67,
+      "scope": "The full pinned upstream Git tree contains all 67 linked originals and no repository license file. With no independently verified redistribution grant, the public artifact keeps the catalogue URLs, English aliases and original-source links, but does not render the archived bodies or stage the 221 formerly visible notebook images. The local archived sources and assets remain unchanged.",
+      "limits": "This is a site-output boundary. The tracked archive and its Git history are not changed or cleared for republication by this check."
+    },
+    "genaiAgents": {
+      "sourceCommit": "bd681451b254ac1a790e947b581d3997ab35013d",
+      "notebookMediaFixture": "publishing/tests/fixtures/genai-notebook-media-sha256.json",
+      "scope": "All 53 notebook source hashes matched the import manifest; 39 saved output figures, five attachments and ten inline data images matched the corresponding notebook payloads. Eight teaching images were restored and seven screenshots remain link-only. The Document Intake notebook now serves its four original repository SVGs with the exact source links and the custom non-commercial license notice. The original prose and code were retained.",
+      "limits": "The audit does not establish permission for other externally embedded media or for every third-party element shown in notebook outputs. The Document Intake example was read and its visual flow checked, not executed against the vendor's API."
+    },
+    "verification": "The local build produced 2083 pages; 320 built-output checks passed with zero broken internal links. The artifact measures 849123475 bytes across 5553 files. Inspected desktop and 375px diagrams, the attribution and 4× zoom/pan, and clicked through from the spectral-clustering chapter to the HSE seminar catalogue page in both interfaces. Source-coverage and publisher unit checks passed. No commit, push or deployment."
+  },
+  "sourceEvidence20261113": {
+    "scope": "Local evidence suite, including checks against retained originals and executable examples. No change to rendered content.",
+    "corrections": "Harvard network architectures and frameworks compare their original report revisions via the existing exact-byte journals; inference MBU reverses the later reviewed additions before checking the accepted chapter. The Node and Python restorers reuse the last verified digest without changing their checks. The three latest GPT overview files independently passed exact restoration and rejection of unknown edits in both runtimes.",
+    "verification": "UV_PYTHON=3.13 pnpm --dir publishing test:evidence --maxWorkers=3: 602 passed in 108 files. The pinned nanoGPT dependencies were cached before the offline run. No commit, push or deployment.",
+    "limit": "A passing archive check does not establish redistribution permission or editorial completeness."
+  },
+  "genaiAgentsRepositoryFigures20261113": {
+    "scope": "54 GenAI Agents reader pages. The original notebook content and code are not edited.",
+    "before": { "remoteImageReferences": 46 },
+    "after": { "remoteImageReferences": 0, "localRepositoryFigures": 16, "byteIdenticalRasterFigures": 6, "svgStylesheetsOmitted": 10, "svgViewportRepairs": 1 },
+    "evidence": "publishing/adapter/genai-course-figures.json pins the upstream Git blobs, source SHA-256 hashes, published SHA-256 hashes and exact license file from bd681451b254ac1a790e947b581d3997ab35013d. The captions disclose modifications and link to the original figures and license. Unreviewed images remain outbound links; linked badges keep their text and destination.",
+    "verification": "Local build: 2087 pages, zero broken internal links, 96 adapter, 324 built-output and 94 site tests passed. Chromium decoded all 16 figures at 375px and 1280px with external requests blocked, and the Contextual Quoting viewer opened with attribution and zoom at both sizes. Checked the rendered Contextual Quoting, ContentIntelli and Chiron examples. No commit, push or deployment.",
+    "limits": "The repository license is non-commercial and does not clear third-party material. This checks the GenAI Agents reader pages and their repository figures, not the rest of the source library or a public release."
+  },
+  "encoderPretraining20261113": {
+    "scope": "The BERT family chapter in RU and EN now traces ELECTRA's RTD target construction and DeBERTaV3's ES, NES and GDES updates. Both subject indexes route to the same canonical sections.",
+    "evidence": "docs/audit/2026-11-13-electra-debertav3-additions.json",
+    "verification": "Nine CPU examples, exact reproduction of the two CC BY 4.0 source figures, 219 tests in four evidence suites, 324 built-output checks and zero broken internal links. Checked the reference-to-chapter flow, formulas and both figures at 375px and 1280px in both locales, plus 4× zoom and pan on mobile.",
+    "limits": "Only the new sections received editorial acceptance in this pass. No commit, push or deployment."
+  },
+  "localPublicationSuite20261113": {
+    "status": "not green",
+    "result": {"passed": 772, "failed": 9, "skipped": 13},
+    "closed": "The reading-receipt suite now checks the freshly read encoder revision and requires exact journal reversal for ten later GPT/LLaMA and VLM revisions. It does not count those reversals as fresh editorial acceptance.",
+    "remaining": [
+      "Three English inference parity assertions encounter a changed section sequence.",
+      "Four tensor, derivative, MLP and reranking restoration assertions encounter the same unrecorded legacy-unhashed-assets fixture revision.",
+      "Two scheduler restoration assertions require reconciling the current scheduling chapter and publisher adapter with their exact prior revisions."
+    ],
+    "limits": "The rendered site, internal links and scoped evidence pass separately. No publication."
+  },
+  "publicationReceiptReconciliation20261113": {
+    "status": "local checks passed",
+    "journal": "docs/audit/2026-11-13-publication-receipt-reconciliation.json",
+    "closed": "Restored the exact preceding publisher and legacy figure inventory revisions. The scheduler practice-link preservation check compares its historical revision; current links and figures retain separate checks. The speculative decoding heading rename is explicit, with its old Russian and English fragments checked in source, rendered HTML and Chromium at 375 and 1280 CSS px.",
+    "publication": {"passed": 781, "failed": 0, "archiveTaggedSkipped": 13},
+    "localEvidence": {"passed": 604, "failed": 0},
+    "site": {"passed": 94, "astroFiles": 39, "astroErrors": 0, "astroWarnings": 0},
+    "root": {"pages": 2087, "builtOutputChecks": 325, "brokenLinks": 0},
+    "pagesBase": {"base": "/bookvar", "pages": 2087, "bytes": 855399263, "files": 5583, "brokenLinks": 0},
+    "limits": "Local builds from the current working copy; no push, deployment or new whole-book editorial acceptance. The reader still contains 133 external media references (109 distinct URLs) on 54 source-library pages in seven groups; none found in the textbook main regions by the img/iframe/video/source scan. Inherited media rights and source-by-source acceptance remain open."
+  },
+  "imbalancedLearnGallery20261113": {
+    "scope": "Five imported imbalanced-learn User Guide pages, in both site locales. All 20 imported source files and 21 canonical corpus routes are unchanged.",
+    "evidence": "05 Источники/imbalanced-learn/0.14.2/figures.json records the unchanged PNGs, dimensions, SHA-256 hashes, authors, gallery pages and MIT notice. The seven official gallery HTML snapshots report 0.14.2. Their downloadable Python examples match the pinned source commit byte-for-byte; the snapshots and code are kept in the local Originals directory. This is not a byte-for-byte rerun of the upstream plotting environment.",
+    "media": {"beforeExternalReferences": 46, "afterExternalReferences": 0, "uniqueLocalFigures": 23, "newCopies": 20, "reusedTextbookCopies": 3},
+    "reader": "All 23 figures decoded in Chromium at 375px and 1280px with zero external requests on the five pages. The multi-panel SMOTE original opens at 3× and pans without clipping the asset. The upstream cross-validation PNG clips its own left labels; the separate Bookvar note identifies their order and points to the working gallery source. The five originally unfenced doctest blocks are now code, with the original prompt lines unchanged.",
+    "checks": {"pages": 2087, "artifactBytes": 860592973, "publicationPassed": 783, "publicationArchiveTaggedSkipped": 13, "builtOutputPassed": 326, "brokenInternalLinks": 0},
+    "limits": "Root build only for this change; no publication, no revision to the canonical chapter, and no rerun of the source examples. An img/iframe/video/source scan of the reader main regions found 87 external media references (86 distinct URLs) on 44 source-library pages in six remaining groups."
+  },
+  "efficientDlSystemsMedia20261113": {
+    "scope": "Derived Efficient DL Systems course-library pages at e632aa89ca9e6638d52e1b686095e7442faffbb0. The imported Markdown, original notebook code, routes and existing English aliases are unchanged.",
+    "evidence": "publishing/adapter/edls-course-figures.json and docs/audit/2026-11-13-edls-reader-media-additions.json",
+    "media": { "beforeExternalReferences": 31, "beforeAffectedPages": 16, "afterExternalReferences": 0, "localFigures": 5, "newCopies": 2, "reusedOriginals": 3, "linkedSlideDecks": 10, "pinnedColabLinks": 3 },
+    "reader": "All five figures decoded at 375 and 1280 CSS px with no external requests on the four sampled pages. Inspected the FP8, Ulysses and memory-trace figures and tested 3× zoom with panning and attribution for Liger FLCE.",
+    "checks": { "rootPages": 2087, "rootArtifactBytes": 860690818, "publicationPassed": 786, "publicationArchiveTaggedSkipped": 13, "builtOutputPassed": 327, "brokenInternalLinks": 0 },
+    "pagesBase": { "base": "/bookvar", "pages": 2087, "bytes": 864210472, "files": 5605, "brokenInternalLinks": 0, "checkedCourseRoutesAndEnglishAliases": 3 },
+    "limits": "This corrects the reader presentation and three technical points, not the entire course or GPU reproduction. Three Imgur references returned 429. Across the built site, 56 external media references remain on 28 source-library pages in five other groups. No commit, push or deployment."
+  },
+  "scikitLearnMoocReader20261113": {
+    "scope": "Derived reader for the pinned Inria course. No edits to imported source pages, main textbook chapters, or routes.",
+    "evidence": "docs/audit/2026-11-13-scikit-mooc-reader-additions.json and publishing/adapter/scikit-mooc-palmerpenguins.json",
+    "media": { "beforeExternalReferences": 25, "beforeAffectedPages": 14, "afterExternalReferences": 0, "linkedVideos": 13, "linkedSlideshowEntries": 10, "locallyRenderedDecks": 12, "speakerNoteBlocks": 156, "slideImageOccurrences": 205, "uniqueSlideImages": 141, "originalPalmerPenguinsFigures": 2 },
+    "reader": "Chromium loaded all 205 slide image occurrences and both Palmer Penguins PNGs at 375 and 1280 CSS px with no external requests during the test. Followed the bagging deck link from its entry page, opened notes in both viewports, and checked the English alias. A cross-validation SVG initially returned 404 for %3D in its filename; it now loads with the literal '='.",
+    "checks": { "rootPages": 2087, "rootArtifactBytes": 862827412, "publicationPassed": 790, "publicationArchiveTaggedSkipped": 13, "builtOutputPassed": 328, "brokenInternalLinks": 0 },
+    "pagesBase": { "base": "/bookvar", "pages": 2087, "bytes": 866347194, "files": 5607, "brokenInternalLinks": 0, "checked": "Local deck link, cross-validation SVG, penguin PNG and English alias." },
+    "limits": "Source videos are links; playback not audited. No fresh chapter acceptance or publication. Across the built site, 31 external media references remain on 14 pages in four other source-library groups."
+  },
+  "mlcourseTopic7Reader20261113": {
+    "scope": "Derived Topic 7 reader, without edits to the source archive or the canonical textbook.",
+    "evidence": "docs/audit/2026-11-13-mlcourse-topic7-reader-additions.json and publishing/adapter/mlcourse-topic7-evidence.json",
+    "media": { "beforeExternalReferences": 13, "afterExternalReferences": 0, "originalLessonPlots": 10, "separatelyCreditedReplacementFigures": 2, "linkedOriginalBanner": 1 },
+    "restored": { "pythonCells": 18, "preservedTextOutputs": 5, "displayEquations": 12, "metricTableRows": 4 },
+    "reader": "Decoded all 12 local figures at 375 and 1280 CSS px. No KaTeX errors or external media requests. The metrics table stays inside its scroll area. Checked 3× zoom, panning and source attribution on the four-stage K-means figure, plus the original-language English alias.",
+    "checks": { "rootPages": 2087, "rootArtifactBytes": 865318890, "publicationPassed": 794, "publicationArchiveTaggedSkipped": 13, "builtOutputPassed": 329, "brokenInternalLinks": 0 },
+    "pagesBase": { "base": "/bookvar", "pages": 2087, "bytes": 868838872, "files": 5618, "brokenInternalLinks": 0, "checked": "Local figures, canonical K-means link, rendered formulas and English alias." },
+    "limits": "The historical source results are retained, not presented as re-run plots. Selected claims were tested independently. Across the built site, 18 external media references remain on 13 source-library pages in three groups. No commit, push or deployment."
+  },
+  "remainingCourseLibraryMedia20261113": {
+    "scope": "Derived source-library pages only; original English Markdown and extracted text unchanged.",
+    "evidence": "docs/audit/2026-11-13-course-library-media-additions.json",
+    "media": { "beforeExternalReferences": 18, "beforeAffectedPages": 13, "afterReaderExternalReferences": 0, "originalRecommendersFigures": 3, "originalAnimations": 3, "originalPdfs": 5, "wholePagePreviews": 5, "marimoLinks": 3, "cs230IndexLinks": 4 },
+    "reader": "At widths 375 and 1280 CSS px Chromium decoded all 11 figure/preview occurrences on nine pages without external requests. PDF links return application/pdf and point to the selected page or full document. Desktop embedding initially loaded but mobile showed a blank rectangle; the final version uses a clickable full-page render instead. The three Marimo links return HTTP 200 after redirect; notebook execution and slider behavior were not tested.",
+    "checks": { "rootPages": 2087, "rootArtifactBytes": 886696497, "publicationPassed": 798, "publicationArchiveTaggedSkipped": 13, "builtOutputPassed": 330, "brokenInternalLinks": 0 },
+    "pagesBase": { "base": "/bookvar", "pages": 2087, "bytes": 890216934, "files": 5634, "brokenInternalLinks": 0, "checkedReaderRoutesAndEnglishAliases": 5 },
+    "limits": "Zero remote src attributes in img/iframe/video/source tags across 2087 rendered reader bodies, excluding code; this is not a claim about all HTTP requests, links or static evidence snapshots. Two external decorative images remain in the original JAIR license snapshot. No commit, push or deployment."
+  },
+  "hseArchiveFreeProjection20261113": {
+    "evidence": "docs/audit/2026-11-13-hse-catalogue-without-archive.json",
+    "scope": "The HSE catalogue and public test suite no longer require the local course archive. The independent projection verifies all 67 catalogue pages at the root and /bookvar; the three historical notebook math checks still run when the local archive is present.",
+    "limits": "The 316 archived paths remain in the local Git tree and in the inspected origin/dev ref. No archive files were moved or removed; no commit, push or deployment."
+  },
+  "gptRouteAssetReuse20261113": {
+    "scope": "Verify existing reuse of the Chinchilla replication Figure 2 and the Hugging Face KV-cache diagram in the reader. Neither source image nor chapter prose changed in this pass.",
+    "assetRegistry": "The IsoFLOP check now requires the scaling chapter and both textbook indexes. The HF diagram's source manifest now includes the decoder chapter. Both checks require each declared owner to embed the original. Both image and license-evidence digests matched the existing registry.",
+    "readingReceipts": "The current decoder, normalization and LLaMA hashes restore exactly to their historical whole-read receipts through the corresponding bounded journals. The EN LLaMA figure inventory checks the actual additional Alammar figure in both locales.",
+    "checks": {
+      "publicationPassed": 802,
+      "publicationArchiveTaggedSkipped": 13,
+      "assetRegistryPassed": 206,
+      "builtOutputPassed": 341,
+      "sitePassed": 94,
+      "pagesBase": {"base": "/bookvar", "pages": 2089, "bytes": 891674831, "files": 5641, "brokenInternalLinks": 0},
+      "reader": "Both originals at all five owner routes at 375 and 1280 px, with 3× zoom and panning in the scaling and decoder chapters. Verified the English LLaMA position fragment under the Pages prefix."
+    },
+    "limits": "Local working-copy verification. Does not establish acceptance of all explanations, full source redistribution rights, clean-checkout CI, or a live deployment."
+  },
+  "hseReleaseBoundary20261114": {
+    "scope": "Separate verification of the current public Git tree and two local site artifacts. The artifacts are working-copy builds, not builds attributed to the remote commit.",
+    "upstream": {
+      "revision": "4b21051531fb72dc9eef58632332ad971c92d006",
+      "tree": "https://api.github.com/repos/esokolov/ml-course-hse/git/trees/4b21051531fb72dc9eef58632332ad971c92d006?recursive=1",
+      "treeEntries": 1460,
+      "treeTruncated": false,
+      "licenseNamedPathsFound": 0,
+      "githubLicenseEndpointStatus": 404,
+      "decision": "Redistribution rights remain unconfirmed. These indicators do not exclude a separate agreement or per-file terms."
+    },
+    "publicDev": {
+      "commit": "9bd4e7d9e8fba571c3e2467f7388f10874367c97",
+      "visibility": "public",
+      "archivePaths": 316,
+      "coursePaths": 94,
+      "assetPaths": 222,
+      "archiveBytes": 34613223,
+      "exactCopiesOutsideArchive": 0
+    },
+    "localRootArtifact": { "filesScanned": 5678, "matches": 0 },
+    "localPagesArtifact": { "filesScanned": 5676, "matches": 0, "edition": "Previous Constitutional AI preview at /bookvar" },
+    "check": "publishing/tools/check-hse-release-boundary.mjs",
+    "limits": "The gate detects the known path prefixes or byte-identical copies, not paraphrases, raster conversions or other third-party works. It does not verify whether the built artifact came from the supplied commit, purge Git history, stage changes or deploy."
+  },
+  "remaining": [
+    "Review third-party rights not covered by the source-library media fixes. The HSE local archive has no verified redistribution grant for inclusion in a future public Git tree; do not treat its exclusion from built HTML as clearance for the tracked files. GenAI Agents' unreviewed remote images are outbound links, not republished figures.",
+    "Owner-confirmed entries, external media and course-specific rights are not resolved by the rendered-textbook flag count. The Gordić blog's ten figures now link to their pinned originals rather than being served by the local site.",
+    "Continue source/explanation and visual acceptance separately from mechanical build gates.",
+    "Live CI and Pages deployment require the user's authorization; dev and main were not changed."
+  ]
+}

@@ -2,7 +2,7 @@
 title: "Scheduling: continuous batching, chunked prefill, and prefix caching"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-30
+last_updated: 2026-11-11
 last_verified: 2026-10-25
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention]]"
@@ -24,10 +24,12 @@ primary_sources:
   - https://github.com/sgl-project/sglang/blob/bab9c81fea62c2d20b646736c918c88fea54b7a2/python/sglang/srt/managers/schedule_policy.py
   - https://www.aleksagordic.com/blog/vllm
   - https://huggingface.co/blog/continuous_batching
+  - https://arxiv.org/html/2401.08671v1#S3.F3
+  - https://huggingface.co/blog/faster-transformers#continuous-batching--paged-attention
 locale: en
 translation_status: current
-canonical_revision: "53a8c18595f4e2f2205a0d43c009e443e948720dc199e50f966449a838e8e0ec"
-translation_reviewed: "2026-10-30"
+canonical_revision: "ba3f1ffd41915bed77d0978af8113c506301f99135b0747c73055462ffedd3fd"
+translation_reviewed: "2026-11-11"
 translation_of: "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md"
 ---
 
@@ -70,13 +72,21 @@ rows and compute smaller matrices. New requests still wait if admission
 cannot resume until the whole group finishes. Fixed tensor shapes can
 add unnecessary computation on finished rows as well.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/anyscale-static-batching.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scheduling-source-2026-11-11/hf-static-batching.png|Five requests in a fixed batch. The second sequence ends at t4, leaving three empty cells while longer sequences continue.]]
 
-*Empty positions remain to the right of END after shorter sequences
-finish. This is a fixed-group diagram, not a GPU-kernel trace.
-Anyscale, reproduced in
-[Stanford CS336 Lecture 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L553);
-[original article](https://www.anyscale.com/blog/continuous-batching-llm-inference).*
+*Aritra Roy Gosthipaty et al., Hugging Face,
+[Tricks from OpenAI gpt-oss, Figure 8](https://huggingface.co/blog/faster-transformers#continuous-batching--paged-attention),
+[original PNG](https://huggingface.co/datasets/huggingface/documentation-images/blob/c8c3cf72b3b724ce734259e4a086d30618a9198b/blog/faster-transformers/static-batching.png).
+Unchanged, [CC BY-NC-SA 4.0](https://huggingface.co/datasets/huggingface/documentation-images/blob/c8c3cf72b3b724ce734259e4a086d30618a9198b/README.md).*
+
+The second row contains two prompt tokens, two generated tokens and
+a pink `EOS` at `t4`. Three cells to its right are empty while the
+third row keeps generating. With fixed membership, a new request
+cannot take that second row's place. The `t0`–`t7` labels mark
+positions within each sequence, not shared GPU iterations.
+[The CS336 lecture](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L553)
+and the [Anyscale original](https://www.anyscale.com/blog/continuous-batching-llm-inference)
+show the same problem on an iteration timeline.
 
 Add waiting requests E and F, each needing two steps. With static
 batching they start after step eight and finish at ten. If membership
@@ -417,13 +427,31 @@ Chunked prefill splits the unprocessed prompt. Each chunk leaves K/V
 in the cache and gives the scheduler another opportunity to redistribute
 the next step's work.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-advanced/physics-scheduling/gordic-chunked-prefill.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/scheduling-source-2026-11-11/deepspeed-paper-figure3.png|Three schedules. The top row has long passes with no output arrows. The middle row has an arrow after each long mixed pass. The bottom row shows more even passes, each with an output arrow.]]
 
-*Aleksa Gordić's diagram shows the first two eight-token chunks of an
-18-token prompt. Four blocks are filled after pass two; the remaining
-two tokens require another pass. This shows cache growth, not the
-schedule of neighboring requests.
-[Inside vLLM, Chunked prefill](https://www.aleksagordic.com/blog/vllm).*
+*Connor Holmes et al., [DeepSpeed-FastGen, Figure 3](https://arxiv.org/html/2401.08671v1#S3.F3),
+[original PNG](https://arxiv.org/html/2401.08671v1/figures/fastgen-overview-light.png), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+All three rows are unchanged.*
+
+A rectangle marks one model pass; an arrow below it marks the release
+of at least one token. In the top row, two long prefill passes interrupt
+output. That row represents the early vLLM version compared in 2024.
+In the Orca row, a whole new prompt shares a pass with decode, so
+output still follows the long rectangle, but clients wait for that
+pass to finish. In the bottom row, DeepSpeed fills the available
+space alongside decode with part of a prompt. Passes are drawn more
+evenly; the figure has no time scale, and an arrow does not mean
+that every request emits a token. The
+[[05 Источники/Papers/DeepSpeed-FastGen|Dynamic SplitFuse source note]]
+links to the batch-composition policy.
+
+Chunking also changes when KV blocks are populated. For an 18-token
+prompt with eight-token chunks and four-token blocks, the first two
+passes fill two blocks each. The third processes the last two
+tokens and fills half of a fifth block. Only that pass can select
+the first answer token.
+[Gordić's original illustration](https://www.aleksagordic.com/blog/vllm#chunked-prefill)
+shows the first two cache states.
 
 If $S_{\mathrm{new}}$ input tokens remain after cache reuse, and each
 pass can process a chunk of $C$, prefill needs

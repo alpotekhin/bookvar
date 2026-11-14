@@ -1,0 +1,153 @@
+{
+  "date": "2026-11-09",
+  "scope": "Review both video/audio/omni editions; separate the AuT training decoder from deployed perception and model the boundary between first-packet latency and audible playback. Preserve earlier programs and visuals.",
+  "files": [
+    {
+      "source": "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-20\nlast_verified: 2026-10-20\nsource_unit_id:",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-10-20\nreference_terms:\n  - label: xGen-MM-Vid — временное сжатие после отбора кадров\n    label_en: xGen-MM-Vid — temporal compression after frame sampling\n    anchor: xgen-video-temporal-compression\n  - label: GenS — отбор кадров по вопросу\n    label_en: GenS — question-aware frame selection\n    anchor: gens-question-aware-frame-selection\n  - label: Qwen3-Omni — входной аудиоэнкодер AuT\n    label_en: Qwen3-Omni — the AuT input encoder\n    anchor: omni-aut\n  - label: Moshi — задержка кодов и два потока речи\n    label_en: Moshi — codec delay and duplex speech streams\n    anchor: omni-duplex\n  - label: Qwen3-Omni — задержка первого аудиопакета\n    label_en: Qwen3-Omni — first-audio-packet latency\n    anchor: omni-first-packet\n  - label: Потоковый звук — RTF, буфер и паузы\n    label_en: Streaming audio — real-time factor, buffering, and stalls\n    anchor: omni-playback-gaps\nsource_unit_id:"
+        },
+        {
+          "old": "AuT, входной аудиоэнкодер Qwen3-Omni, уменьшает частоту mel-признаков в восемь раз до 12.5 позиций/с. Он обучен на распознавании речи и других аудиозадачах, а не только на восстановлении волны. Выходной многословарный кодек решает отдельную задачу синтеза. Совпадение частоты входных и выходных позиций не означает, что их векторы или индексы взаимозаменяемы.",
+          "new": "<a id=\"omni-aut\"></a>\n\n#### AuT: чем обучают аудиоэнкодер\n\nЧтобы научить AuT распознавать речь, авторы [Qwen3-Omni, §2.2](https://arxiv.org/html/2509.17765v1#S2.SS2)\nобучают пару «энкодер звука и текстовый декодер». На схеме снизу вверх\nвиден путь записи: признаки фильтробанка, три слоя Conv2d, 32 слоя\nвнимания энкодера и выход `AuT Hidden`. Восьмислойный декодер\nпри обучении получает звуковое представление и предыдущие токены\nэталонной фразы. Он учится предсказывать следующий текстовый токен,\nвключая маркер конца. В задачи обучения входят распознавание и понимание\nзвука; волна на выходе этого декодера не восстанавливается.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/omni-2026-11-09/qwen3omni-figure3-aut.png|AuT при обучении: от признаков звука через Conv2d и энкодер к текстовому декодеру]]\n\n*Qwen Team, [Qwen3-Omni, Figure 3, с. 4](https://arxiv.org/pdf/2509.17765v1#page=4),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nВ Qwen3-Omni используется нижняя часть схемы до `AuT Hidden`;\nверхний декодер нужен для обучения AuT.*\n\nПри шаге входных признаков 10 мс их частота равна 100 в секунду.\nПосле восьмикратного сжатия остаётся 12.5 позиций в секунду:\nчетыре секунды соответствуют примерно 400 входным позициям и 50\nвыходным, без поправок на края. Эти 80 мс задают шаг выходной сетки,\nа не длительность контекста каждого признака. В §2.2 авторы описывают\nоконное внимание с диапазоном от одной до восьми секунд.\n\nВ составе Qwen3-Omni AuT передаёт Thinker непрерывные признаки,\nа не готовую транскрипцию. Выходной кодек, наоборот, получает\nдискретные индексы, которые предсказывают Talker и MTP. У этих\nпотоков может быть одинаковый шаг 80 мс, но они несут разные данные."
+        },
+        {
+          "old": "| Аудиовход | Энкодер Qwen2-Audio, около 25 позиций/с | AuT, около 12.5 позиций/с |",
+          "new": "| Аудиовход | Энкодер по схеме Qwen2-Audio, инициализация Whisper-large-v3, около 25 позиций/с | AuT, около 12.5 позиций/с |"
+        },
+        {
+          "old": "Для двух звуковых потоков и одного текстового потока Moshi имеет $K=2\\cdot8+1=17$ компонентов на шаг. Сначала предсказывается текстовый компонент; затем компоненты аудио. В приложении пользовательский поток берётся из настоящего звука, а не заменяется предсказаниями модели.",
+          "new": "Для двух звуковых потоков и одного текстового потока Moshi имеет $K=2\\cdot8+1=17$ компонентов на шаг. В схеме Inner Monologue первой идёт текстовая позиция: её логиты выдаёт отдельная линейная проекция состояния Temporal Transformer. Затем Depth Transformer предсказывает аудиокоды с учётом этого текста ([§3.4.1 и §3.4.4](https://arxiv.org/html/2410.00037v2#S3.SS4)). В приложении пользовательский поток берётся из настоящего звука, а не заменяется предсказаниями модели."
+        },
+        {
+          "old": "### Inner Monologue, задержка акустики и два потока",
+          "new": "<a id=\"omni-duplex\"></a>\n\n### Inner Monologue, задержка акустики и два потока"
+        },
+        {
+          "old": "Задержка до первого слышимого звука включает поступление нужного контекста, подготовку признаков, вычисления Thinker и Talker, декодирование кодов, передачу и воспроизведение. Лог «первый токен сгенерирован» фиксирует только один этап.\n\nReal-time factor, RTF, сравнивает длительность вычисления с длительностью полученного звука. RTF ниже единицы означает, что в среднем звук создаётся быстрее, чем воспроизводится. Это не гарантирует отсутствие пауз: один задержавшийся блок может исчерпать накопленный буфер.",
+          "new": "Задержка до первого слышимого звука включает поступление нужного контекста, подготовку признаков, вычисления Thinker и Talker, декодирование кодов, передачу и воспроизведение. Лог «первый токен сгенерирован» фиксирует только один этап.\n\n<a id=\"omni-first-packet\"></a>\n\n#### Из чего складываются 234 мс у Qwen3-Omni\n\nВ [Table 2 отчёта Qwen3-Omni](https://arxiv.org/html/2509.17765v1#S2.T2)\nзадержка первого пакета складывается из подготовки хвоста входа,\nпервого токена Thinker, первого кода Talker, работы MTP и декодера.\nДля одного аудиопотока это $72+88+57+14+3=234$ мс. Для одного\nвидеопотока со звуком те же этапы занимают $160+160+210+14+3=547$ мс.\nВ эксперименте с четырьмя одновременными аудиопотоками суммарная\nоценка первого пакета уже 728 мс, из которых 468 мс приходятся на\nпервый токен Thinker. Поэтому ускорение последнего этапа на несколько\nмиллисекунд мало изменит этот результат.\n\nВ отчёте это расчётная задержка первого пакета по временам этапов\nна vLLM, с `torch.compile` и CUDA Graph для MTP и декодера.\nОна не включает полный путь от начала реплики до звука в динамике.\nДля такого замера нужно указать начальное событие (например,\nокончание речи пользователя) и зафиксировать первое воспроизведение\nна клиенте. Время обнаружения конца реплики, сеть и буфер проигрывателя\nследует измерять отдельно от генерации пакета.\n\n<a id=\"omni-playback-gaps\"></a>\n\n#### Пауза при RTF меньше единицы\n\nReal-time factor, RTF, сравнивает длительность вычисления с длительностью полученного звука. RTF ниже единицы означает, что в среднем звук создаётся быстрее, чем воспроизводится. Это не гарантирует отсутствие пауз: один задержавшийся блок может исчерпать накопленный буфер."
+        },
+        {
+          "old": "Третий и четвёртый блоки опаздывают относительно исходного расписания, хотя средний RTF меньше единицы. После остановки проигрывания расписание сдвинется; этот расчёт не подсчитывает число реальных заиканий. Предварительное накопление буфера может устранить паузу ценой более позднего начала ответа.",
+          "new": "Третий и четвёртый блоки опаздывают относительно исходного расписания.\nЭто не две паузы: после проигрывания второго блока буфер пуст с 180\nдо 290 мс. Третий блок затем играет до 370 мс, а четвёртый к этому\nмоменту уже получен в 310 мс. Правило проигрывателя без пропуска\nблоков: начинать очередной блок не раньше его прихода и не раньше\nокончания предыдущего.\n\n~~~python\ndef playback(arrivals_ms, durations_ms, first_start_ms):\n    end = first_start_ms\n    starts, gaps = [], []\n    for arrival, duration in zip(arrivals_ms, durations_ms, strict=True):\n        start = max(arrival, end)\n        starts.append(start)\n        gaps.append(start - end)\n        end = start + duration\n    return starts, gaps, end\n\narrivals_ms = [20, 40, 290, 310]\ndurations_ms = [80] * 4\nassert playback(arrivals_ms, durations_ms, 20) == (\n    [20, 100, 290, 370], [0, 0, 110, 0], 450\n)\nuninterrupted_start = max(a - 80 * i for i, a in enumerate(arrivals_ms))\nassert uninterrupted_start == 130\nassert playback(arrivals_ms, durations_ms, uninterrupted_start) == (\n    [130, 210, 290, 370], [0, 0, 0, 0], 450\n)\n~~~\n\nЕсли отложить начало до 130 мс, этот конкретный поток сыграет\nнепрерывно. Обе стратегии закончат в 450 мс: первая выдаёт звук\nна 110 мс раньше, но делает паузу, вторая переносит это ожидание\nдо начала ответа. Такой буфер рассчитан по уже известному расписанию\nи не гарантирует отсутствия пауз на новых запросах."
+        },
+        {
+          "old": "За один временной шаг Talker выбирает первый код кадра. Небольшой MTP Transformer авторегрессионно предсказывает оставшиеся словари этого же кадра; это последовательные шаги маленькой модели, а не одновременный независимый выбор всех кодов. Затем лёгкий причинный ConvNet Code2Wav восстанавливает волну из кодов. Вместо ожидания будущего блока DiT можно обрабатывать уже полученный кадр кодека с левым контекстом.",
+          "new": "#### Как появляется первый кадр речи\n\nЗа один временной шаг Talker выбирает первый код кадра. Небольшой MTP Transformer авторегрессионно предсказывает индексы остальных словарей этого же кадра. Затем причинный ConvNet Code2Wav восстанавливает волну из кодов. Декодеру нужны все коды текущего кадра и левый контекст; ждать будущего блока, как у DiT, не требуется."
+        },
+        {
+          "old": "| Восстановление волны | Flow-Matching DiT и BigVGAN | Причинный ConvNet |",
+          "new": "| Восстановление волны | Flow-Matching DiT и BigVGAN | Причинный ConvNet |\n\nДля инициализации аудиоэнкодера Qwen2.5-Omni авторы указывают Whisper-large-v3\n([отчёт, §3.1](https://arxiv.org/html/2503.20215v1#S3.SS1)); описание\nинтерфейса признаков ссылается на Qwen2-Audio (§2.2)."
+        }
+      ],
+      "after_sha256": "cf394a0ddae0011830aaedeb1cded99bc7c3f5849f5839f8eec67b38c8418974",
+      "lines": 736,
+      "before_sha256": "cb9d70037a4ead20d49d9883ec0182e7eed038bd4bc1a579f2599cc71bd8bf42"
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md",
+      "changes": [
+        {
+          "old": "canonical_revision: \"cb9d70037a4ead20d49d9883ec0182e7eed038bd4bc1a579f2599cc71bd8bf42\"\ntranslation_reviewed: \"2026-10-29\"",
+          "new": "canonical_revision: \"af84c9909547e22f5d029da697bf33f1607a8c91f5da40060e91d4d23962b9af\"\ntranslation_reviewed: \"2026-11-09\""
+        },
+        {
+          "old": "last_updated: 2026-10-29",
+          "new": "last_updated: 2026-11-09"
+        },
+        {
+          "old": "Qwen3-Omni conditions Talker on discrete text and multimodal features, no longer on the hidden states of Thinker's text positions. This allows text intervention before speech, such as external filtering or prepared text. Its AuT input encoder downsamples mel features eightfold to 12.5 positions/s and learns recognition and other audio tasks. The output multi-codebook codec serves synthesis. Equal input/output rates do not make their vectors or indices interchangeable.",
+          "new": "Qwen3-Omni conditions Talker on discrete text and multimodal features, no longer on the hidden states of Thinker's text positions. This allows text intervention before speech, such as external filtering or prepared text.\n\n<a id=\"omni-aut\"></a>\n\n#### How AuT learns to encode audio\n\nThe [Qwen3-Omni report, §2.2](https://arxiv.org/html/2509.17765v1#S2.SS2)\ntrains AuT as an audio encoder and text decoder. Read the figure from\nthe bottom: filterbank features enter three Conv2d layers, pass through\n32 encoder attention layers and become `AuT Hidden`. During training,\nthe eight-layer decoder sees the audio representation and the previous\nreference tokens. It predicts the next text token, including the end\nmarker. The training tasks include recognition and audio understanding;\nthis decoder does not reconstruct a waveform.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/omni-2026-11-09/qwen3omni-figure3-aut.png|AuT training path from audio features through Conv2d and the audio encoder to the text decoder]]\n\n*Qwen Team, [Qwen3-Omni, Figure 3, p. 4](https://arxiv.org/pdf/2509.17765v1#page=4),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nQwen3-Omni uses the path up to `AuT Hidden`; the decoder above it\nis used to train AuT.*\n\nA 10-ms input hop means 100 feature positions per second. Eightfold\ndownsampling gives 12.5 positions per second: about 400 input and 50\noutput positions for four seconds, ignoring boundary effects. The\nresulting 80-ms stride does not limit each feature's context to 80 ms.\nThe report describes attention windows ranging from one to eight seconds.\n\nIn Qwen3-Omni, AuT supplies continuous features to Thinker rather than\na transcript. The output codec instead accepts discrete indices from\nTalker and MTP. The two streams can have the same 80-ms stride without\nrepresenting the same information."
+        },
+        {
+          "old": "| Input audio encoder | Qwen2-Audio, about 25 positions/s | AuT, about 12.5 positions/s |",
+          "new": "| Input audio encoder | Qwen2-Audio design, Whisper-large-v3 initialization, about 25 positions/s | AuT, about 12.5 positions/s |"
+        },
+        {
+          "old": "### Inner Monologue, delayed acoustics, and duplex streams",
+          "new": "<a id=\"omni-duplex\"></a>\n\n### Inner Monologue, delayed acoustics, and duplex streams"
+        },
+        {
+          "old": "First-audio latency includes required input context, feature preparation, Thinker/Talker computation, codec decoding, transport, and playback. A “first token generated” log covers only one stage. Real-time factor divides compute duration by generated audio duration. A mean below one does not prevent an individual late chunk from exhausting the buffer:",
+          "new": "First-audio latency includes required input context, feature preparation, Thinker/Talker computation, codec decoding, transport, and playback. A “first token generated” log covers only one stage.\n\n<a id=\"omni-first-packet\"></a>\n\n#### What the 234 ms in the Qwen3-Omni report measures\n\n[Table 2](https://arxiv.org/html/2509.17765v1#S2.T2) adds five stages:\npreprocessing the final input chunk, Thinker's first token, Talker's\nfirst code, MTP and waveform decoding. For one audio stream, the sum is\n$72+88+57+14+3=234$ ms. For one video stream with audio it is\n$160+160+210+14+3=547$ ms. With four concurrent audio streams the\nfirst-packet estimate rises to 728 ms, of which 468 ms is Thinker's\nfirst-token time. Shaving a few milliseconds off the final decoder\nwould barely move that result.\n\nThe authors derive the first-packet estimate from stage timings on\nvLLM, with `torch.compile` and CUDA Graph for MTP and the decoder.\nIt does not cover the full path from the start of speech to sound from\nthe speaker. For a client measurement, state the start event, such as\nthe end of the user's utterance, and record when playback actually starts.\nTrack endpointing, transport and playback buffering separately from\npacket generation.\n\n<a id=\"omni-playback-gaps\"></a>\n\n#### A playback stall even when RTF is below one\n\nReal-time factor divides compute duration by generated audio duration. A mean below one does not prevent an individual late chunk from exhausting the buffer:"
+        },
+        {
+          "old": "The third and fourth chunks miss their original deadlines despite RTF 0.96875. This does not count actual audible stalls: after a stall, playback scheduling shifts. Prebuffering can avoid a gap by delaying response onset.",
+          "new": "The third and fourth chunks miss their original deadlines, but there is\nonly one stall. Playback runs out after the second chunk at 180 ms and\nresumes at 290 ms. The third chunk ends at 370 ms, by which time the\nfourth has already arrived at 310 ms. A player that does not drop chunks\nstarts each chunk no earlier than its arrival and the previous chunk's end.\n\n```python\ndef playback(arrivals_ms, durations_ms, first_start_ms):\n    end = first_start_ms\n    starts, gaps = [], []\n    for arrival, duration in zip(arrivals_ms, durations_ms, strict=True):\n        start = max(arrival, end)\n        starts.append(start)\n        gaps.append(start - end)\n        end = start + duration\n    return starts, gaps, end\n\narrivals_ms = [20, 40, 290, 310]\ndurations_ms = [80] * 4\nassert playback(arrivals_ms, durations_ms, 20) == (\n    [20, 100, 290, 370], [0, 0, 110, 0], 450\n)\nuninterrupted_start = max(a - 80 * i for i, a in enumerate(arrivals_ms))\nassert uninterrupted_start == 130\nassert playback(arrivals_ms, durations_ms, uninterrupted_start) == (\n    [130, 210, 290, 370], [0, 0, 0, 0], 450\n)\n```\n\nStarting at 130 ms makes this particular stream play continuously. Both\nstrategies finish at 450 ms: starting earlier trades 110 ms of waiting\nbefore playback for a 110-ms stall during it. The buffer calculation uses\nknown arrivals and does not guarantee uninterrupted playback on new requests."
+        },
+        {
+          "old": "canonical_revision: \"af84c9909547e22f5d029da697bf33f1607a8c91f5da40060e91d4d23962b9af\"",
+          "new": "canonical_revision: \"cf394a0ddae0011830aaedeb1cded99bc7c3f5849f5839f8eec67b38c8418974\""
+        },
+        {
+          "old": "Video adds time to images; audio makes time continuous and sampling-rate dependent. Encoding every frame and short audio window quickly exhausts context. An omni model must select evidence, synchronize modalities, and often generate speech online.\n\nSuppose a user asks, “What did the person say when they opened the door?” The system must locate a visual event, select the corresponding audio interval, understand its speech, and connect that evidence to its answer. An accurate transcript of the entire clip does not establish that the event and utterance were aligned.",
+          "new": "Someone opens a door and says “I'm back.” A few seconds later, the recording contains another utterance. To answer “What did they say when they opened the door?”, the system needs the audio at the time of the action. Even a perfect transcript of the full recording does not tell it which words belong to that moment."
+        },
+        {
+          "old": "The [Qwen3-Omni report, §2.2](https://arxiv.org/html/2509.17765v1#S2.SS2)\ntrains AuT as an audio encoder and text decoder. Read the figure from\nthe bottom: filterbank features enter three Conv2d layers, pass through",
+          "new": "The [Qwen3-Omni authors, §2.2](https://arxiv.org/html/2509.17765v1#S2.SS2)\ntrain AuT as an audio encoder and text decoder. At the bottom of the\nfigure, filterbank features enter three Conv2d layers, pass through"
+        },
+        {
+          "old": "Talker chooses each frame's first code; a small MTP Transformer autoregressively predicts the remaining codebooks of that frame. They are not independent simultaneous predictions. A causal ConvNet Code2Wav uses available codes and left context instead of waiting for a future DiT block.",
+          "new": "#### How the first speech frame is generated\n\nTalker chooses each frame's first code. A small MTP Transformer autoregressively predicts the indices for the remaining codebooks of that frame. Code2Wav, a causal ConvNet, needs all codes for the current frame and left context, but does not wait for a future block as the DiT does."
+        },
+        {
+          "old": "| Waveform synthesis | Flow-Matching DiT and BigVGAN | causal ConvNet |",
+          "new": "| Waveform synthesis | Flow-Matching DiT and BigVGAN | causal ConvNet |\n\nThe Qwen2.5-Omni authors specify Whisper-large-v3 for encoder initialization\n([report, §3.1](https://arxiv.org/html/2503.20215v1#S3.SS1)); the description\nof the audio feature interface cites Qwen2-Audio (§2.2)."
+        }
+      ],
+      "after_sha256": "2b1e907b5a2c0d44272be1e03319ef165972c2ee70bc483a0455d43b60fbd529",
+      "lines": 703,
+      "before_sha256": "bf2322845969a44a679c0dfa2afccabe1c5985ca7ee06be2d865dbef333f6200"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|Видео, аудио и omni-модели]]",
+          "new": "- [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|Видео, аудио и omni-модели]]\n  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#xgen-video-temporal-compression|xGen-MM-Vid — временное сжатие после отбора кадров]]\n  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#gens-question-aware-frame-selection|GenS — отбор кадров по вопросу]]\n  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#omni-aut|Qwen3-Omni — входной аудиоэнкодер AuT]]\n  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#omni-duplex|Moshi — задержка кодов и два потока речи]]\n  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#omni-first-packet|Qwen3-Omni — задержка первого аудиопакета]]\n  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#omni-playback-gaps|Потоковый звук — RTF, буфер и паузы]]"
+        }
+      ],
+      "after_sha256": "f7817ef761ee6411a2f3057ecfeb670d19ab9c002d02b5848262883f790a27ec",
+      "lines": 1635,
+      "before_sha256": "a95e690319f02fecbccd2864238672b85bfb84d696313cc9d8d3c91c70bc4b2c"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|Video, audio, and omni models]] · **EN**",
+          "new": "- [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|Video, audio, and omni models]] · **EN**\n  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#xgen-video-temporal-compression|xGen-MM-Vid — temporal compression after frame sampling]]\n  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#gens-question-aware-frame-selection|GenS — question-aware frame selection]]\n  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#omni-aut|Qwen3-Omni — the AuT input encoder]]\n  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#omni-duplex|Moshi — codec delay and duplex speech streams]]\n  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#omni-first-packet|Qwen3-Omni — first-audio-packet latency]]\n  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#omni-playback-gaps|Streaming audio — real-time factor, buffering, and stalls]]"
+        }
+      ],
+      "after_sha256": "65b0199e9606c34bde41e0ff000ce25dad39a9c64c3548b793e566a167997c99",
+      "lines": 1637,
+      "before_sha256": "32f009d8ee564732e768639d0d084ee9113837e9343642befa2119604e58d004"
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "changes": [
+        {
+          "old": "  - asset: \"00 Учебник/Assets/Figures/curated/omni-review-2026-10/qwen3omni-architecture.png\"",
+          "new": "  - id: \"curated-qwen3omni-aut-e552edfddd77\"\n    asset: \"00 Учебник/Assets/Figures/curated/omni-2026-11-09/qwen3omni-figure3-aut.png\"\n    sha256: \"e552edfddd77ddbd6aa2fab934f2e216f910620e515a22e14512b254d78dbc69\"\n    author: \"Qwen Team\"\n    source_url: \"https://arxiv.org/abs/2509.17765v1\"\n    source_image_url: \"https://arxiv.org/pdf/2509.17765v1#page=4\"\n    source_asset: \"05 Источники/Originals/omni-2026-10-20/qwen3omni.pdf\"\n    source_asset_sha256: \"4608d7f5d0694dd09a66144dac921797e161331d92b5eef133615bec392ec928\"\n    source_page: 4\n    source_printed_page: 4\n    render_dpi: 360\n    render_page_size_px: [2977, 4210]\n    crop_box_px: [805, 1252, 2200, 2512]\n    dimensions_px: [1395, 1260]\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/omni-2026-10-20/qwen3omni-abstract.html\"\n    license_evidence_sha256: \"d15086198a7a2103e70332c7b2b8f748461b87a8f1379abd5a756d8dbaac0195\"\n    derivation: \"pdf-page-render-crop\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    modifications: \"Complete Figure 3 from the v1 report with all labels and arrows; PDF margins and surrounding text excluded.\"\n    used_in: [\"00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md\", \"en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md\"]\n  - asset: \"00 Учебник/Assets/Figures/curated/omni-review-2026-10/qwen3omni-architecture.png\""
+        }
+      ],
+      "after_sha256": "7a91cafdb0d6a228a8000b5cf4e85912f4b651e18edb438b3a9023605d6b8ec4",
+      "lines": 23708,
+      "before_sha256": "81df198503f7b45271453d4c9a34b3240634db6bd5749475c664ec66caadef1f"
+    }
+  ],
+  "review": {
+    "sources": [
+      "Qwen3-Omni v1 §2.2 Figure 3 and §2.5 Table 2: the trained encoder–decoder, continuous encoder output, reported stage times, and theoretical first-packet accounting.",
+      "Qwen2.5-Omni v1 §2.2 and §3.1: Qwen2-Audio encoder design and Whisper-large-v3 initialization.",
+      "Moshi v2 §§3.4.1 and 3.4.4: the first stream's linear projection and text-first codec generation; Figure 3 illustrates the generic RQ architecture."
+    ],
+    "calculations": "Report: 72+88+57+14+3=234 ms for one audio stream, 160+160+210+14+3=547 ms for one audiovisual stream, 94+468+145+16+5=728 ms for four audio streams. The playback recurrence uses the existing RTF example's exact integer-ms arrivals: one 110 ms stall with immediate playback, none for this known schedule with onset at 130 ms, same 450 ms finish. No real client benchmark or timing guarantee.",
+    "validation": "All 18 published Python blocks ran in each edition; the three stage sums passed an independent arithmetic check. The AuT raster was regenerated byte-for-byte from the pinned PDF. The 2023-page local build, 738 publication checks, 230 built-output checks, whole asset-registry integration check, and internal link check passed.",
+    "reader": "At 375 and 1280 CSS px, verified the six subject links in both reference indexes and clicked AuT, first-packet, and playback. Five relevant diagrams loaded in both locales. Inspected the AuT figure and source caption in the desktop viewer and at mobile 2.5× with panning, plus the mobile first-packet formula. Checked pages had no viewport overflow or KaTeX errors.",
+    "limits": "No live benchmark or publication. xGen Figure 3 remains a direct source link; no new copying under a nonexclusive arXiv deposit license."
+  }
+}

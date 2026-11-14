@@ -1,0 +1,68 @@
+[
+  {
+    "id": "curated-mooc-scaling-04c1dd673b6b",
+    "asset": "00 Учебник/Assets/Figures/curated/selection-metric-2026-11-04/mooc-kmeans-not-scaled.svg",
+    "title": "Original k-means assignments before feature scaling",
+    "author": "INRIA, scikit-learn MOOC contributors",
+    "source_url": "https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/jupyter-book/clustering/clustering_quiz_m4_01.md",
+    "source_image_url": "https://raw.githubusercontent.com/INRIA/scikit-learn-mooc/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/figures/clustering_quiz_kmeans_not_scaled.svg",
+    "commit": "0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6",
+    "source_asset": "Assets/Sources/Scikit-learn MOOC/figures/clustering_quiz_kmeans_not_scaled.svg",
+    "source_asset_sha256": "04c1dd673b6b7690a0bc9e7c06358a43ec7b38e64c7cac401180bb9cf37ec2c8",
+    "sha256": "04c1dd673b6b7690a0bc9e7c06358a43ec7b38e64c7cac401180bb9cf37ec2c8",
+    "source_page_snapshot": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_quiz_m4_01.md.md",
+    "source_viewbox": [
+      0,
+      0,
+      375.6672,
+      325.18365
+    ],
+    "license": "CC BY 4.0",
+    "license_url": "https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE",
+    "license_evidence": "site/public/licenses/scikit-learn-mooc-0cc70c41-CC-BY-4.0.txt",
+    "license_evidence_sha256": "f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f",
+    "public_license_copy": "site/public/licenses/scikit-learn-mooc-0cc70c41-CC-BY-4.0.txt",
+    "derivation": "source-svg-copy",
+    "modifications": "None. Existing full course SVG retained byte-for-byte; no crop, redraw, translation, relabeling or recompression. The k-means example illustrates changes in feature geometry, not k-center accuracy.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-11-04",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding.md"
+    ]
+  },
+  {
+    "id": "curated-mooc-scaling-bd2aae6c6eca",
+    "asset": "00 Учебник/Assets/Figures/curated/selection-metric-2026-11-04/mooc-kmeans-scaled.svg",
+    "title": "Original k-means assignments after feature scaling",
+    "author": "INRIA, scikit-learn MOOC contributors",
+    "source_url": "https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/jupyter-book/clustering/clustering_quiz_m4_01.md",
+    "source_image_url": "https://raw.githubusercontent.com/INRIA/scikit-learn-mooc/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/figures/clustering_quiz_kmeans_scaled.svg",
+    "commit": "0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6",
+    "source_asset": "Assets/Sources/Scikit-learn MOOC/figures/clustering_quiz_kmeans_scaled.svg",
+    "source_asset_sha256": "bd2aae6c6eca8e5951324b268c312dc52263a697e7de1d7b3040bc3df2310694",
+    "sha256": "bd2aae6c6eca8e5951324b268c312dc52263a697e7de1d7b3040bc3df2310694",
+    "source_page_snapshot": "05 Источники/Courses/Scikit-learn MOOC/jupyter-book/clustering/clustering_quiz_m4_01.md.md",
+    "source_viewbox": [
+      0,
+      0,
+      375.6672,
+      325.18365
+    ],
+    "license": "CC BY 4.0",
+    "license_url": "https://github.com/INRIA/scikit-learn-mooc/blob/0cc70c41c640578c28eb7fd38d8c1c19e09c8aa6/LICENSE",
+    "license_evidence": "site/public/licenses/scikit-learn-mooc-0cc70c41-CC-BY-4.0.txt",
+    "license_evidence_sha256": "f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f",
+    "public_license_copy": "site/public/licenses/scikit-learn-mooc-0cc70c41-CC-BY-4.0.txt",
+    "derivation": "source-svg-copy",
+    "modifications": "None. Existing full course SVG retained byte-for-byte; no crop, redraw, translation, relabeling or recompression. The k-means example illustrates changes in feature geometry, not k-center accuracy.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-11-04",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding.md"
+    ]
+  }
+]

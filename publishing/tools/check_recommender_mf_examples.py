@@ -8,8 +8,9 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/02 Рекомендательные системы/02 Collaborative filtering и matrix factorization.md"
 content = CHAPTER.read_bytes()
-blocks = re.findall(r"```python\n(.*?)```", content.decode(), re.S)
-assert len(blocks) == 11
+blocks = [match[1] for match in re.findall(
+    r"^(```|~~~)python\n(.*?)^\1$", content.decode(), re.S | re.M)]
+assert len(blocks) == 12
 scope = {}
 for index, code in enumerate(blocks, 1):
     print(f"Execute actual chapter block {index}", flush=True)
@@ -138,6 +139,29 @@ for args in [(np.array([-1., 0., 0.]), 2., 1.),
 assert np.all(np.diff(scope["implicit_losses"]) <= 1e-10)
 np.testing.assert_allclose(scope["contributions"], [.5, -.5])
 print("PASS 100 independent weighted least-squares systems, sparse equivalence and history explanations")
+
+# Independently remove the unavailable row in the published example, then
+# check the item-weighted Gram identity against random dense objectives.
+Q = scope["Q_als"]
+available = np.array([0, 2])
+c = np.array([7., 3.])
+lhs = np.vstack([np.sqrt(c)[:, None] * Q[available], np.eye(2)])
+rhs = np.r_[np.sqrt(c), 0., 0.]
+np.testing.assert_allclose(
+    scope["als_without_unavailable"], np.linalg.lstsq(lhs, rhs, rcond=None)[0])
+for _ in range(50):
+    Q = rng.normal(size=(9, 3))
+    baseline = rng.uniform(0., 2., size=9)
+    baseline[rng.integers(len(Q))] = 0.
+    positive = rng.choice(np.flatnonzero(baseline > 0), size=3, replace=False)
+    actual = baseline.copy()
+    actual[positive] = rng.uniform(1., 6., size=3)
+    correction = Q[positive].T @ (
+        (actual[positive] - baseline[positive])[:, None] * Q[positive])
+    np.testing.assert_allclose(
+        Q.T @ (baseline[:, None] * Q) + correction,
+        Q.T @ (actual[:, None] * Q))
+print("PASS unavailable-row least squares and 50 item-weighted Gram identities")
 
 # A final P block is optimal for its fixed Q; perturbing it cannot lower the loss.
 counts = scope["implicit_counts"]

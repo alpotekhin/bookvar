@@ -27,7 +27,7 @@
     "rights_status": "source-license-verified",
     "last_verified": "2026-10-27",
     "used_in": [
-      "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md"
+      "00 Учебник/10 ML Systems/09 Компиляция графов — PyTorch, JAX и CUDA Graphs.md"
     ]
   }
 ]

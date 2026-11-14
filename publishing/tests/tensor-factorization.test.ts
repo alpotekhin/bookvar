@@ -4,12 +4,13 @@ import {resolve} from 'node:path';
 import {describe,expect,it} from 'vitest';
 import {beforeTensorFactorization} from '../tools/tensor-factorization-baseline.mjs';
 import {beforeSystemsCompletion} from '../tools/systems-completion-baseline.mjs';
+import {beforeTopicConsolidation} from '../tools/topic-consolidation-baseline.mjs';
 
 const root=resolve(import.meta.dirname,'../..');
 const read=(p:string)=>readFileSync(resolve(root,p),'utf8');
 const sha=(s:string)=>createHash('sha256').update(s).digest('hex');
 const row=JSON.parse(read('docs/audit/2026-10-29-tensor-factorization-addition.json'));
-const chapter=beforeSystemsCompletion(read(row.source),row.source,root);
+const chapter=beforeSystemsCompletion(beforeTopicConsolidation(read(row.source),row.source,root),row.source,root);
 const packet='05 Источники/Originals/tensor-factorization-2026-10-29/';
 
 describe('Tensor decomposition explanation',()=>{

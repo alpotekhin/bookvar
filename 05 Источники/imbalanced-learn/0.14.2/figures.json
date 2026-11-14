@@ -1,0 +1,276 @@
+{
+  "version": "0.14.2",
+  "commit": "8504e95f0160f61d1b617ca66f779646d2ee609e",
+  "docs_base": "https://imbalanced-learn.org/0.14/",
+  "license": "MIT",
+  "notice": "site/public/licenses/imbalanced-learn-8504e95f-MIT.txt",
+  "notice_sha256": "fbcab88e3daf0f2f9248f5a774e97915b7a1a36da76a78c6a5baaa07095ef644",
+  "galleries": {
+    "auto_examples/combine/plot_comparison_combine.html": {
+      "title": "Compare sampler combining over- and under-sampling",
+      "author": "Guillaume Lemaitre",
+      "code_path": "examples/combine/plot_comparison_combine.py",
+      "code_download_url": "https://imbalanced-learn.org/0.14/_downloads/d2fad7088aa901373a45f6d1de37af90/plot_comparison_combine.py",
+      "code_sha256": "5a83e806b0a9b02510eb5d5359288d9ffd846b360d9eb80d9e4a1c9e9c577488",
+      "page_sha256": "347026c0fd505eee09878b070f67eb88dfba70430c2234ea0dcdd5cff2907079"
+    },
+    "auto_examples/model_selection/plot_instance_hardness_cv.html": {
+      "title": "Distribute hard-to-classify datapoints over CV folds",
+      "author": "Frits Hermans",
+      "code_path": "examples/model_selection/plot_instance_hardness_cv.py",
+      "code_download_url": "https://imbalanced-learn.org/0.14/_downloads/dd20f869b66ee0e356e4afadf6f87f84/plot_instance_hardness_cv.py",
+      "code_sha256": "297740f9ac066e5c9698e4a30d5647ac16fa03827e1ed8e1909a90c5f13b6a4e",
+      "page_sha256": "33e1a49760c8b661316562faaba7410a6c7d49cdb39ee249e75075fb1b9a749b"
+    },
+    "auto_examples/over-sampling/plot_comparison_over_sampling.html": {
+      "title": "Compare over-sampling samplers",
+      "author": "Guillaume Lemaitre",
+      "code_path": "examples/over-sampling/plot_comparison_over_sampling.py",
+      "code_download_url": "https://imbalanced-learn.org/0.14/_downloads/b49f40a015e9f4563e97ac8e98bbe342/plot_comparison_over_sampling.py",
+      "code_sha256": "6d1d251269ff290af942f7584840cebdb7c7e5d555d7c6de520280380867a801",
+      "page_sha256": "cda0cc871930f5296a3f529ab1fa00376baee19cb6a705e962dac5fe8714366a"
+    },
+    "auto_examples/over-sampling/plot_illustration_generation_sample.html": {
+      "title": "Sample generator used in SMOTE-like samplers",
+      "author": "Guillaume Lemaitre",
+      "code_path": "examples/over-sampling/plot_illustration_generation_sample.py",
+      "code_download_url": "https://imbalanced-learn.org/0.14/_downloads/cd11fea1e8c74493b06b871266fcd2f1/plot_illustration_generation_sample.py",
+      "code_sha256": "923502e7f7f2706cff7688f0f3298a4ea8af64eb181b26b814c8aab32ea10bca",
+      "page_sha256": "690848377a3f26ac25025449f0251b94a9f3a28856f302cacd03b458ae3df52a"
+    },
+    "auto_examples/under-sampling/plot_comparison_under_sampling.html": {
+      "title": "Compare under-sampling samplers",
+      "author": "Guillaume Lemaitre",
+      "code_path": "examples/under-sampling/plot_comparison_under_sampling.py",
+      "code_download_url": "https://imbalanced-learn.org/0.14/_downloads/80f61a39373735d0a361ada6fe956e22/plot_comparison_under_sampling.py",
+      "code_sha256": "53afa5bf91b8d29de8ad7f000e7dda1ed78b72cdf07a0c620ed1a8215b755376",
+      "page_sha256": "f5e6330a6b3c8ccd8c017be455da7f0c600899b4138da1b1aed728a02dfb171d"
+    },
+    "auto_examples/under-sampling/plot_illustration_nearmiss.html": {
+      "title": "Sample selection in NearMiss",
+      "author": "Guillaume Lemaitre",
+      "code_path": "examples/under-sampling/plot_illustration_nearmiss.py",
+      "code_download_url": "https://imbalanced-learn.org/0.14/_downloads/2c85205cfc68bbe74b401a911152f71b/plot_illustration_nearmiss.py",
+      "code_sha256": "09dcd7873b29d5308e6248b6f30dd70501494b291f57b9f4bcf5741267a320d0",
+      "page_sha256": "24381dd24c89e0427e4efd98776bfe91e9896be969b689ffd87c0edde42be7d0"
+    },
+    "auto_examples/under-sampling/plot_illustration_tomek_links.html": {
+      "title": "Illustration of the definition of a Tomek link",
+      "author": "Guillaume Lemaitre",
+      "code_path": "examples/under-sampling/plot_illustration_tomek_links.py",
+      "code_download_url": "https://imbalanced-learn.org/0.14/_downloads/51d2d6678c0b5548346a388752069a5d/plot_illustration_tomek_links.py",
+      "code_sha256": "514b79580e49b45c1d27b90dde1dde3157ce9f3092cbd6ee39b57b323736b5a4",
+      "page_sha256": "d1cc33588823abb0fa0d81f4d530f114fb12b46d0c12fcc03ff0ca194c68ea7f"
+    }
+  },
+  "figures": {
+    "sphx_glr_plot_comparison_combine_001.png": {
+      "gallery": "auto_examples/combine/plot_comparison_combine.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_combine_001.png",
+      "alt": "Original imbalanced data before applying a combined sampler",
+      "sha256": "967b724d81e66704e3b05ab9f8be86682167526c64567a880b105007bfa090b4",
+      "bytes": 72351,
+      "width": 600,
+      "height": 600
+    },
+    "sphx_glr_plot_comparison_over_sampling_001.png": {
+      "gallery": "auto_examples/over-sampling/plot_comparison_over_sampling.html",
+      "asset": "00 Учебник/Assets/Figures/imbalanced-learning/plot_comparison_over_sampling.png",
+      "alt": "Decision function of LogisticRegression, weight=(0.01, 0.01, 0.98), weight=(0.01, 0.05, 0.94), weight=(0.2, 0.1, 0.7), weight=(0.33, 0.33, 0.33)",
+      "sha256": "2266119a6c018ecec5a7a508309b8046a7b5479b2c6dd649f080b0ba0fbf4d3d",
+      "bytes": 390185,
+      "width": 1500,
+      "height": 1200
+    },
+    "sphx_glr_plot_comparison_over_sampling_002.png": {
+      "gallery": "auto_examples/over-sampling/plot_comparison_over_sampling.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_over_sampling_002.png",
+      "alt": "Decision function of LogisticRegression, Without resampling, Using RandomOverSampler",
+      "sha256": "efa9d5fa318fd009233195bb8df338f3e5a79de6873e4ec01931c743a5e7a78b",
+      "bytes": 135062,
+      "width": 1500,
+      "height": 700
+    },
+    "sphx_glr_plot_comparison_over_sampling_003.png": {
+      "gallery": "auto_examples/over-sampling/plot_comparison_over_sampling.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_over_sampling_003.png",
+      "alt": "Resampling with RandomOverSampler, Normal bootstrap, Smoothed bootstrap",
+      "sha256": "8166e88ff4bcd6a1d718cacb6d155732c109ae510e31a1f26b001ee6b851d273",
+      "bytes": 194319,
+      "width": 1500,
+      "height": 700
+    },
+    "sphx_glr_plot_comparison_over_sampling_004.png": {
+      "gallery": "auto_examples/over-sampling/plot_comparison_over_sampling.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_over_sampling_004.png",
+      "alt": "Original dataset, Resampling with RandomOverSampler, Resampling with SMOTE, Resampling with ADASYN",
+      "sha256": "6f9d7bda817bfbab22b806102e5c608ac6e1e1f06f065a0412608f69493e16bd",
+      "bytes": 432427,
+      "width": 1500,
+      "height": 1500
+    },
+    "sphx_glr_plot_comparison_over_sampling_005.png": {
+      "gallery": "auto_examples/over-sampling/plot_comparison_over_sampling.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_over_sampling_005.png",
+      "alt": "Decision function using a LogisticRegression, Without sampler, ADASYN sampler, SMOTE sampler",
+      "sha256": "3bc8f3ec01ac6ef9a5bcf1af2ecd4b17b36756221fb45adb3f485e3825424e88",
+      "bytes": 297388,
+      "width": 2000,
+      "height": 600
+    },
+    "sphx_glr_plot_comparison_over_sampling_006.png": {
+      "gallery": "auto_examples/over-sampling/plot_comparison_over_sampling.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_over_sampling_006.png",
+      "alt": "Particularities of over-sampling with SMOTE and ADASYN, Decision function with SMOTE, Resampling with SMOTE, Decision function with ADASYN, Resampling with ADASYN",
+      "sha256": "a83c540f5d95412befc8e85bbe9d363ebd3a2a029eff3c628ae3f93e5c4037e1",
+      "bytes": 807036,
+      "width": 1500,
+      "height": 1500
+    },
+    "sphx_glr_plot_comparison_over_sampling_007.png": {
+      "gallery": "auto_examples/over-sampling/plot_comparison_over_sampling.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_over_sampling_007.png",
+      "alt": "Decision function and resampling using SMOTE variants, Decision function for SMOTE, Resampling with SMOTE, Decision function for BorderlineSMOTE, Resampling with BorderlineSMOTE, Decision function for BorderlineSMOTE, Resampling with BorderlineSMOTE, Decision function for KMeansSMOTE, Resampling with KMeansSMOTE, Decision function for SVMSMOTE, Resampling with SVMSMOTE",
+      "sha256": "a3273958bffd262f969fdf300b8ff25c37f22c27ed31f72a1d8be33ef693008d",
+      "bytes": 1686643,
+      "width": 1500,
+      "height": 3000
+    },
+    "sphx_glr_plot_comparison_under_sampling_001.png": {
+      "gallery": "auto_examples/under-sampling/plot_comparison_under_sampling.html",
+      "asset": "00 Учебник/Assets/Figures/imbalanced-learning/plot_comparison_under_sampling.png",
+      "alt": "Decision function with ClusterCentroids, Resampling with ClusterCentroids, Decision function with FunctionSampler, Resampling with FunctionSampler",
+      "sha256": "3c04f9462afe2ab2cbe5718fe77c8bc4dc08a8394a57e1ffe1984d5afc6ba745",
+      "bytes": 520617,
+      "width": 1500,
+      "height": 1500
+    },
+    "sphx_glr_plot_comparison_under_sampling_002.png": {
+      "gallery": "auto_examples/under-sampling/plot_comparison_under_sampling.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_under_sampling_002.png",
+      "alt": "Decision function with FunctionSampler, Resampling with FunctionSampler, Decision function with RandomUnderSampler, Resampling with RandomUnderSampler",
+      "sha256": "0db402b9e2592dd1942c781bfd4f90837a7625e9c8a2e3023ef064afed100d57",
+      "bytes": 521996,
+      "width": 1500,
+      "height": 1500
+    },
+    "sphx_glr_plot_comparison_under_sampling_003.png": {
+      "gallery": "auto_examples/under-sampling/plot_comparison_under_sampling.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_under_sampling_003.png",
+      "alt": "Decision function for NearMiss-1, Resampling using NearMiss-1, Decision function for NearMiss-2, Resampling using NearMiss-2, Decision function for NearMiss-3, Resampling using NearMiss-3",
+      "sha256": "4d505c1294a2cee6a71ad4b1d6e823d89d7ec1ab745b7b63cad6262083a3a26f",
+      "bytes": 1021918,
+      "width": 1500,
+      "height": 2500
+    },
+    "sphx_glr_plot_comparison_under_sampling_004.png": {
+      "gallery": "auto_examples/under-sampling/plot_comparison_under_sampling.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_under_sampling_004.png",
+      "alt": "Decision function for EditedNearestNeighbours, Resampling using EditedNearestNeighbours, Decision function for RepeatedEditedNearestNeighbours, Resampling using RepeatedEditedNearestNeighbours, Decision function for AllKNN, Resampling using AllKNN",
+      "sha256": "d4ae7658c7be8435327bb05a8c7bcedb0d5d80a8f61eccb930305ff983b7631c",
+      "bytes": 1183818,
+      "width": 1500,
+      "height": 2500
+    },
+    "sphx_glr_plot_comparison_under_sampling_005.png": {
+      "gallery": "auto_examples/under-sampling/plot_comparison_under_sampling.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_under_sampling_005.png",
+      "alt": "Decision function for CondensedNearestNeighbour, Resampling using CondensedNearestNeighbour, Decision function for OneSidedSelection, Resampling using OneSidedSelection, Decision function for NeighbourhoodCleaningRule, Resampling using NeighbourhoodCleaningRule",
+      "sha256": "dcf0866ab04ef2d06cc0709069d5b33c4a6922380d7bda2b2b4864c9d4c302ec",
+      "bytes": 1137422,
+      "width": 1500,
+      "height": 2500
+    },
+    "sphx_glr_plot_comparison_under_sampling_006.png": {
+      "gallery": "auto_examples/under-sampling/plot_comparison_under_sampling.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_under_sampling_006.png",
+      "alt": "Decision function with FunctionSampler, Resampling using FunctionSampler, Decision function with InstanceHardnessThreshold, Resampling using InstanceHardnessThreshold",
+      "sha256": "d118fbe66fcc0e93ffbd39be8b10474e0407180fd58840de7de7abb86bb896ac",
+      "bytes": 789642,
+      "width": 1500,
+      "height": 1500
+    },
+    "sphx_glr_plot_illustration_generation_sample_001.png": {
+      "gallery": "auto_examples/over-sampling/plot_illustration_generation_sample.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_illustration_generation_sample_001.png",
+      "alt": "SMOTE places a synthetic sample on the line from a minority sample to its minority neighbor",
+      "sha256": "3f05f571182b0b1918b5fa8a274347461d7a726a84a8e0fde7e6ff62fbec7acd",
+      "bytes": 42308,
+      "width": 800,
+      "height": 800
+    },
+    "sphx_glr_plot_illustration_nearmiss_001.png": {
+      "gallery": "auto_examples/under-sampling/plot_illustration_nearmiss.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_illustration_nearmiss_001.png",
+      "alt": "NearMiss-1",
+      "sha256": "94675fd8ac026b225d715714ec666b316e4406e8576f94ab808995c195883531",
+      "bytes": 42701,
+      "width": 800,
+      "height": 800
+    },
+    "sphx_glr_plot_illustration_nearmiss_002.png": {
+      "gallery": "auto_examples/under-sampling/plot_illustration_nearmiss.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_illustration_nearmiss_002.png",
+      "alt": "NearMiss-2",
+      "sha256": "a884e02452b3a6a0ed4571045bbfee811044633e9e960bf280363c9cd811789d",
+      "bytes": 51775,
+      "width": 800,
+      "height": 800
+    },
+    "sphx_glr_plot_illustration_nearmiss_003.png": {
+      "gallery": "auto_examples/under-sampling/plot_illustration_nearmiss.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_illustration_nearmiss_003.png",
+      "alt": "NearMiss-3",
+      "sha256": "fc05366a7966201d91c7aa439a5617f0e100ce4cc0e7032d2899444c9a477f40",
+      "bytes": 53269,
+      "width": 850,
+      "height": 850
+    },
+    "sphx_glr_plot_illustration_tomek_links_001.png": {
+      "gallery": "auto_examples/under-sampling/plot_illustration_tomek_links.html",
+      "asset": "00 Учебник/Assets/Figures/imbalanced-learning/plot_illustration_tomek_links.png",
+      "alt": "Illustration of a Tomek link",
+      "sha256": "080cccea77b781b5587bb827e47f17c25fbcc9a29e18c6b9c35d4bda6d21741c",
+      "bytes": 38275,
+      "width": 800,
+      "height": 800
+    },
+    "sphx_glr_plot_illustration_tomek_links_002.png": {
+      "gallery": "auto_examples/under-sampling/plot_illustration_tomek_links.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_illustration_tomek_links_002.png",
+      "alt": "Removing only majority samples, Removing all samples",
+      "sha256": "0fde7740606ca3b14136fc07436bfee31bdfbce4a679be14b9f8638391722810",
+      "bytes": 49485,
+      "width": 1600,
+      "height": 800
+    },
+    "sphx_glr_plot_instance_hardness_cv_001.png": {
+      "gallery": "auto_examples/model_selection/plot_instance_hardness_cv.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_instance_hardness_cv_001.png",
+      "alt": "Two clusters before adding hard-to-classify samples: 950 majority points and 50 minority points",
+      "sha256": "b4813277669463bcf2e743bec11865c29148ce91579a5bc6a32e8023a2cd135e",
+      "bytes": 57915,
+      "width": 640,
+      "height": 480
+    },
+    "sphx_glr_plot_instance_hardness_cv_002.png": {
+      "gallery": "auto_examples/model_selection/plot_instance_hardness_cv.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_instance_hardness_cv_002.png",
+      "alt": "Two clusters after adding points from each class near the center of the other class",
+      "sha256": "9beee58bb1d96dfcd03132072dcbbc7ca88c156747b44d39c9083fa74a0322a2",
+      "bytes": 59827,
+      "width": 640,
+      "height": 480
+    },
+    "sphx_glr_plot_instance_hardness_cv_003.png": {
+      "gallery": "auto_examples/model_selection/plot_instance_hardness_cv.html",
+      "asset": "Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_instance_hardness_cv_003.png",
+      "alt": "Average precision by fold for StratifiedKFold and InstanceHardnessCV on the same synthetic dataset",
+      "reading_note": "Top: InstanceHardnessCV. Bottom: StratifiedKFold. The original PNG clips these labels on the left. The gallery link has the runnable example; the guide snippet above is kept as written upstream.",
+      "sha256": "3eb265fd8d3893c06b4721cc127819c152e49c2970aecc503f22e43f6c8beb3e",
+      "bytes": 14671,
+      "width": 640,
+      "height": 480
+    }
+  }
+}

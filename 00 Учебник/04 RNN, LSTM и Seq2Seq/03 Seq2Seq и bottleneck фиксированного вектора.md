@@ -2,10 +2,83 @@
 title: Seq2Seq и bottleneck фиксированного вектора
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-21
+last_updated: 2026-11-10
+source_language: mixed
+reference_terms:
+  - label: "Условная вероятность перевода и EOS"
+    label_en: "Conditional translation probability and EOS"
+    anchor: seq2seq-factorization
+  - label: "Инициализация декодера и постоянный контекст"
+    label_en: "Decoder initialization and fixed context"
+    anchor: seq2seq-source-context
+  - label: "Слои, состояния и формы"
+    label_en: "Layers, states and tensor shapes"
+    anchor: seq2seq-state-shapes
+  - label: "Согласование состояний энкодера и декодера"
+    label_en: "Bridging encoder and decoder states"
+    anchor: seq2seq-state-bridge
+  - label: "Сдвиг целей и teacher forcing"
+    label_en: "Target shift and teacher forcing"
+    anchor: seq2seq-teacher-forcing
+  - label: "EOS, PAD и нормировка потери"
+    label_en: "EOS, PAD and loss reduction"
+    anchor: seq2seq-loss-mask
+  - label: "Padding источника и конечное состояние"
+    label_en: "Source padding and final encoder state"
+    anchor: seq2seq-source-padding
+  - label: "Полная двухслойная GRU-модель"
+    label_en: "Complete two-layer GRU model"
+    anchor: seq2seq-complete-model
+  - label: "Два пути градиента в энкодер"
+    label_en: "Two gradient paths into the encoder"
+    anchor: seq2seq-encoder-gradients
+  - label: "Ограничение фиксированного контекста"
+    label_en: "Fixed-context bottleneck"
+    anchor: seq2seq-bottleneck
+  - label: "Обращение источника и расстояния"
+    label_en: "Source reversal and dependency distances"
+    anchor: seq2seq-source-reversal
+  - label: "Авторегрессивный цикл и EOS"
+    label_en: "Autoregressive decoding and EOS"
+    anchor: seq2seq-generation
+  - label: "Ошибка префикса и exposure bias"
+    label_en: "Prefix errors and exposure bias"
+    anchor: seq2seq-exposure-bias
+  - label: "Локальный выбор и вероятность всего ответа"
+    label_en: "Local choices versus sequence probability"
+    anchor: seq2seq-greedy
+  - label: "Beam search и общий отбор кандидатов"
+    label_en: "Beam search and global candidate selection"
+    anchor: seq2seq-beam-search
+  - label: "Завершённые гипотезы и остановка"
+    label_en: "Finished hypotheses and stopping"
+    anchor: seq2seq-beam-stop
+  - label: "Родители гипотез и перенос состояний"
+    label_en: "Beam parents and state routing"
+    anchor: seq2seq-beam-states
+  - label: "Нормализация длины и усечение"
+    label_en: "Length normalization and truncation"
+    anchor: seq2seq-length-score
+  - label: "Контекст по всем позициям источника"
+    label_en: "Context over all source positions"
+    anchor: seq2seq-attention
+  - label: "Маска источника до softmax"
+    label_en: "Source mask before softmax"
+    anchor: seq2seq-attention-mask
+  - label: "Обучение весов внимания"
+    label_en: "Learning attention weights"
+    anchor: seq2seq-attention-gradients
+  - label: "Память и вычисления attention"
+    label_en: "Attention storage and computation"
+    anchor: seq2seq-memory-cost
+  - label: "Seq2Seq, encoder–decoder и причинность"
+    label_en: "Seq2Seq, encoder–decoder and causality"
+    anchor: seq2seq-scope
 previous: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU]]"
 next: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer]]"
 primary_sources:
+  - https://docs.pytorch.org/docs/2.14/generated/torch.nn.GRU.html
+  - https://docs.pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html
   - https://arxiv.org/abs/1406.1078
   - https://arxiv.org/abs/1409.3215
   - https://d2l.ai/chapter_recurrent-modern/seq2seq.html
@@ -31,6 +104,17 @@ primary_sources:
 состояние. С него начнём, чтобы проследить, что именно меняет attention.
 Архитектура encoder–decoder сама по себе не требует ни RNN, ни такого сжатия;
 ниже речь именно о модели с фиксированным представлением источника.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-bridge-2026-11-03/d2l-encoder-decoder.svg|Энкодер, передаваемое состояние и декодер в общей архитектуре D2L]]
+
+*The original encoder–decoder architecture from D2L. The diagram separates
+the source encoder, the transferred state and the target decoder; it does
+not specify a recurrent cell or require equal source and target lengths.
+Source: Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola,
+[D2L, §10.6](https://d2l.ai/chapter_recurrent-modern/encoder-decoder.html),
+CC BY-SA 4.0. Complete original SVG, without cropping or redrawing.*
+
+<a id="seq2seq-factorization"></a>
 
 ## Условная языковая модель
 
@@ -73,6 +157,8 @@ $$
 возможные переводы: достаточно вычислить распределения вдоль правильного
 продолжения и увеличить вероятность его токенов.
 
+<a id="seq2seq-source-context"></a>
+
 ### Как источник попадает в предсказание
 
 Энкодер последовательно читает эмбеддинги исходных токенов:
@@ -110,7 +196,7 @@ $$
 информацию о `cat` получает из $v$. При выборе «спит» изменятся предыдущее
 слово и состояние декодера; $v$ останется тем же.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/seq2seq.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/seq2seq.svg|Обучение encoder–decoder: правильные предыдущие токены и постоянный контекст]]
 
 *Обучение рекуррентного encoder–decoder на английско-французской паре.
 Нижняя длинная стрелка передаёт одно и то же конечное состояние энкодера
@@ -136,6 +222,8 @@ CC BY-SA 4.0. Исходный SVG, без изменения содержани
 число координат, а не обязательный тензор с одной осью.
 Обозначением $v$ мы отделяем контекст источника от состояния ячейки LSTM $c$.
 
+<a id="seq2seq-state-shapes"></a>
+
 ## Формы на одном примере
 
 Пусть в пакете 32 предложения, максимальная длина источника — 12 токенов,
@@ -154,7 +242,7 @@ CC BY-SA 4.0. Исходный SVG, без изменения содержани
 | Вход декодера на шаге | `[32, 1, 768]` | эмбеддинг 256 + контекст 512 |
 | Оценки следующего токена | `[32, 1, V_y]` | $V_y$ — размер целевого словаря |
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/seq2seq-details.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/seq2seq-details.svg|Embedding, рекуррентные слои и выходной классификатор encoder–decoder]]
 
 *Слои энкодера и декодера. Embedding заменяет ID векторами, Recurrent
 обрабатывает последовательность, FC вычисляет оценки целевого словаря.
@@ -168,6 +256,121 @@ Zhang et al., CC BY-SA 4.0; исходный SVG.*
 явная операция согласования: например, конкатенация направлений и обучаемая
 линейная проекция в размер состояния декодера. Простое присваивание тензоров
 несовместимых форм не реализует такой переход.
+
+<a id="seq2seq-state-bridge"></a>
+
+### Bridging different state shapes
+
+D2L separates decoding from the operation that prepares its initial state:
+
+<!-- source-excerpt: d2l-decoder-init-state -->
+> In the following decoder interface,
+> we add an additional `init_state` method
+> to convert the encoder output (`enc_all_outputs`)
+> into the encoded state.
+<!-- /source-excerpt -->
+
+*Zhang, Lipton, Li, Smola,
+[D2L, §10.6, Decoder](https://d2l.ai/chapter_recurrent-modern/encoder-decoder.html#decoder),
+original English excerpt, CC BY-SA 4.0.*
+
+Consider a two-layer bidirectional GRU encoder with hidden width 3 and
+a one-layer unidirectional GRU decoder with hidden width 4. Copying the
+encoder’s `[4,B,3]` final state into the decoder cannot satisfy its
+`[1,B,4]` state contract.
+
+One possible bridge takes the final forward and reverse states of the
+top encoder layer, concatenates them, and applies a learned affine map
+followed by tanh. This is a design choice, not an operation that the GRU
+API performs automatically.
+
+| Operation | Shape |
+|---|---|
+| Encoder final states | `[4,B,3]` |
+| Expose layer and direction axes | `[2,2,B,3]` |
+| Select the top layer | `[2,B,3]` |
+| Concatenate its directions for each input | `[B,6]` |
+| Apply the learned bridge and tanh | `[B,4]` |
+| Add the decoder’s layer axis | `[1,B,4]` |
+
+The six features for each input must come from that same input. For
+example, directly reshaping `[2,B,3]` into `[B,6]` when $B>1$
+would mix the batch and direction axes. Concatenating the two direction
+slices avoids that error.
+
+For a concatenated vector $(0.1,0.2,0.3,-0.1,0,0.4)$, a bridge row
+$(1,0,0,1,0,0)$ and bias 0.05 give $0.1-0.1+0.05=0.05$, then
+$\tanh(0.05)\approx0.049958$. Each of the decoder’s four initial-state
+coordinates has its own learned row. The affine map has $4\cdot6+4=28$
+parameters.
+
+The following standalone program isolates this interface. It processes
+two source sequences of different lengths, constructs a correctly
+shaped initial decoder state, then checks that a loss on two decoder
+steps reaches both the bridge and the encoder. As in the D2L-style model
+below, the fixed source context also accompanies every target input.
+The target inputs here are assigned feature vectors; the next complete
+model adds token embeddings, vocabulary logits and the translation loss.
+
+```python
+import torch
+from torch import nn
+from torch.nn.utils.rnn import pack_padded_sequence
+
+torch.manual_seed(61)
+dtype = torch.float64
+B, encoder_layers, encoder_width, decoder_width = 2, 2, 3, 4
+source_features = torch.randn(B, 3, 2, dtype=dtype, requires_grad=True)
+source_lengths = torch.tensor([2, 3])
+encoder = nn.GRU(2, encoder_width, num_layers=encoder_layers,
+                 bidirectional=True, batch_first=True, dtype=dtype)
+packed = pack_padded_sequence(source_features, source_lengths,
+                             batch_first=True, enforce_sorted=False)
+_, encoded = encoder(packed)
+assert encoded.shape == (4, B, 3)
+by_layer = encoded.reshape(encoder_layers, 2, B, encoder_width)
+top = by_layer[-1]
+fixed_context = torch.cat([top[0], top[1]], dim=-1)
+torch.testing.assert_close(fixed_context, torch.cat([encoded[-2], encoded[-1]], -1))
+
+state_bridge = nn.Linear(6, decoder_width, dtype=dtype)
+initial_decoder = state_bridge(fixed_context).tanh()[None]
+assert initial_decoder.shape == (1, B, 4)
+assert sum(parameter.numel() for parameter in state_bridge.parameters()) == 28
+decoder = nn.GRU(2 + 6, decoder_width, batch_first=True, dtype=dtype)
+target_features = torch.randn(B, 2, 2, dtype=dtype)
+decoder_inputs = torch.cat([
+    target_features, fixed_context[:, None].expand(-1, 2, -1),
+], dim=-1)
+decoded, final_decoder = decoder(decoder_inputs, initial_decoder)
+assert decoded.shape == (B, 2, 4) and final_decoder.shape == (1, B, 4)
+decoded.square().mean().backward()
+assert state_bridge.weight.grad.abs().sum() > 0
+assert source_features.grad[0, :2].abs().sum() > 0
+assert source_features.grad[0, 2].count_nonzero() == 0
+assert encoder.weight_hh_l1_reverse.grad.abs().sum() > 0
+
+example_context = torch.tensor([.1, .2, .3, -.1, 0., .4], dtype=dtype)
+example_row = torch.tensor([1., 0., 0., 1., 0., 0.], dtype=dtype)
+torch.testing.assert_close((example_row @ example_context + .05).tanh(),
+                           torch.tensor(.05, dtype=dtype).tanh())
+```
+
+Only the top-layer states enter this bridge directly. Lower encoder
+layers still influence them through the recurrent network. A different
+model could project all layer states or initialize several decoder
+layers; it must define that mapping explicitly. For an LSTM decoder,
+both $h_0$ and $c_0$ need compatible shapes, so mapping only the hidden
+state is insufficient.
+
+This bridge still transfers a fixed number of source coordinates.
+Changing its dimensions does not give the decoder access to individual
+source positions. The direction/state axis ordering is specified in
+[PyTorch 2.14, GRU](https://docs.pytorch.org/docs/2.14/generated/torch.nn.GRU.html)
+and worked through in the
+[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#recurrent-bidirectional|previous chapter]].
+
+<a id="seq2seq-teacher-forcing"></a>
 
 ### Сдвиг целей и teacher forcing
 
@@ -202,6 +405,8 @@ Zhang et al., CC BY-SA 4.0; исходный SVG.*
 потерю на соответствующем PAD нужно исключить. В генерации после EOS
 нового шага уже не будет.
 
+<a id="seq2seq-loss-mask"></a>
+
 Если $M_{bt}$ равно единице на правильных целях, включая EOS, и нулю на
 дополнении, средняя потеря по токенам равна
 
@@ -221,6 +426,8 @@ PAD и EOS должны иметь разные ID, если маска стро
 исключает позиции с такой целью; он не удаляет класс PAD из softmax
 на остальных позициях. Для текущего примера достаточно маски по целям.
 
+<a id="seq2seq-source-padding"></a>
+
 ### Padding источника меняет состояние
 
 У фразы `cat sleeps` истинная длина равна двум, даже если тензор содержит
@@ -233,6 +440,8 @@ PAD и EOS должны иметь разные ID, если маска стро
 конечное состояние каждого предложения соответствует последнему
 действительному токену. Маска целевой потери эту проблему не решает:
 она применяется позже, после кодирования источника.
+
+<a id="seq2seq-complete-model"></a>
 
 ### Полная небольшая модель
 
@@ -354,6 +563,8 @@ for row, length in zip(src, lengths):
 Ни архитектура, ни такой эксперимент не задают точного языкового
 толкования отдельным координатам состояния.
 
+<a id="seq2seq-encoder-gradients"></a>
+
 Обратное распространение проходит из потерь декодера через его начальное
 состояние и через все использования `context` в энкодер. `expand` не создаёт
 новых обучаемых копий вектора: при backward вклады шагов суммируются.
@@ -364,6 +575,8 @@ for row, length in zip(src, lengths):
 При пошаговом декодировании переменная `hidden` меняется, а `context`
 остаётся состоянием энкодера. Если на каждом шаге заменять контекст
 текущим `hidden[-1]` декодера, получится уже другая вычислительная схема.
+
+<a id="seq2seq-bottleneck"></a>
 
 ## Почему фиксированный контекст становится узким местом
 
@@ -388,12 +601,27 @@ LSTM и GRU помогают переносить информацию и гра
 представления. Это не математическое доказательство невозможности
 закодировать длинную последовательность вещественным вектором.
 
-В [Cho et al., On the Properties of Neural Machine Translation, §5.1 и
-рис. 4](https://arxiv.org/abs/1409.1259) качество двух исследованных моделей
-снижалось с ростом длины фраз и числа неизвестных слов. Авторы предложили
-недостаточную ёмкость фиксированного представления как объяснение.
-Эти эксперименты не устанавливают универсальную границу длины для всех
-encoder–decoder.
+В опыте [Cho et al., §5.1](https://aclanthology.org/W14-4012/) у двух
+моделей с фиксированным представлением, RNNenc и grConv, качество
+перевода заметно падало на длинных фразах. На графиках (a) и (b)
+сравните сплошные кривые: у обеих моделей BLEU для источника около
+40 слов ниже, чем для источника около 20 слов. У оси (c) другой смысл:
+там меняется допустимое число неизвестных слов в наборе фраз, а не их
+длина. BLEU тоже снижается.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-attention-bridge-2026-11-10/cho-2014-figure4.png|Графики BLEU в зависимости от длины фразы и числа неизвестных слов]]
+
+*Сплошная линия — отбор по исходным фразам, линия из точек — по
+эталонным переводам, штриховая — по обоим. Для (a) и (b) авторы
+сгладили кривые окном в 10 слов. Cho et al.,
+[On the Properties of Neural Machine Translation, рис. 4](https://aclanthology.org/W14-4012.pdf#page=7),
+CC BY-NC-SA 3.0; три панели из PDF, без перерисовки.*
+
+Авторы предположили, что вектору не хватает ёмкости, чтобы удерживать
+информацию о длинной фразе. График сам по себе не выделяет эту причину:
+размер вектора здесь не варьировали, а качество зависело и от словаря.
+
+<a id="seq2seq-source-reversal"></a>
 
 В [Sutskever et al., §3.3 и §3.7](https://arxiv.org/abs/1409.3215)
 глубокая LSTM с обращённым порядком источника успешно работала и на длинных
@@ -404,19 +632,23 @@ encoder–decoder.
 соответствии при этом не уменьшается. Это приём оптимизации конкретной
 модели, а не устранение фиксированного контекста.
 
+<a id="seq2seq-generation"></a>
+
 ## Декодирование — не обучение
 
 В обучающей паре правильная история известна. При переводе нового
 предложения известен только источник: после BOS сеть должна сама выбрать
 первый токен, подать его обратно и продолжить до EOS.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/seq2seq-predict.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/seq2seq-predict.svg|Генерация перевода с возвратом выбранного токена в декодер]]
 
 *Генерация в той же модели. Петли справа возвращают выбранный токен на
 следующий вход декодера; на схеме обучения эти входы брались из правильного
 перевода. Длинная нижняя стрелка по-прежнему несёт постоянный контекст
 источника. Источник: [D2L, §10.7, Prediction](https://d2l.ai/chapter_recurrent-modern/seq2seq.html),
 Zhang et al., CC BY-SA 4.0; исходный SVG.*
+
+<a id="seq2seq-exposure-bias"></a>
 
 Если вместо «чёрная» модель выбрала «белая», следующее распределение уже
 условно на «белая». При teacher forcing оно вычислялось бы для «чёрная».
@@ -426,6 +658,8 @@ Zhang et al., CC BY-SA 4.0; исходный SVG.*
 логарифмическое правдоподобие обучающего перевода. Обучение на собственных
 выбранных токенах — изменение процедуры, а не необходимая поправка
 к формуле максимального правдоподобия.
+
+<a id="seq2seq-greedy"></a>
 
 ### Почему локально лучший токен может проиграть
 
@@ -441,7 +675,7 @@ $0.4\cdot0.9=0.36$, хотя первый токен $B$ локально уст
 
 В D2L приведён похожий пример с четырьмя выходными позициями:
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/s2s-prob1.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/s2s-prob1.svg|Жадный путь A B C EOS и его условные распределения]]
 
 *Жадный путь $A,B,C,\mathrm{EOS}$ имеет вероятность
 $0.5\cdot0.4\cdot0.4\cdot0.6=0.048$. Каждый столбец — распределение
@@ -449,7 +683,7 @@ $0.5\cdot0.4\cdot0.4\cdot0.6=0.048$. Каждый столбец — распр�
 Источник: [D2L, §10.8, Greedy Search](https://d2l.ai/chapter_recurrent-modern/beam-search.html),
 Zhang et al., CC BY-SA 4.0; исходный SVG.*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/s2s-prob2.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/s2s-prob2.svg|Другой префикс меняет распределения и повышает вероятность ответа]]
 
 *Выбор $C$ вместо $B$ на втором шаге меняет последующие распределения.
 Путь $A,C,B,\mathrm{EOS}$ получает $0.054$, что больше $0.048$.
@@ -457,6 +691,8 @@ Zhang et al., CC BY-SA 4.0; исходный SVG.*
 не доказывает, что второй путь лучший среди всех возможных.
 Источник: [D2L, §10.8](https://d2l.ai/chapter_recurrent-modern/beam-search.html),
 Zhang et al., CC BY-SA 4.0; исходный SVG.*
+
+<a id="seq2seq-beam-search"></a>
 
 ### Как работает beam search
 
@@ -475,7 +711,7 @@ $A,A$ и $A,B$ с $0.18$ каждое, $B,A$ и $B,B$ с $0.02$ каждое.
 Выбор двух токенов отдельно для каждого родителя дал бы до четырёх
 гипотез, а не beam ширины два.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/beam-search.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/seq2seq-2026-10-21/beam-search.svg|Глобальный отбор двух гипотез после расширения beam]]
 
 *Ширина beam равна двум: после расширения сохраняются две гипотезы
 среди всех кандидатов. На втором шаге это AB и CE, на третьем — ABD и CED.
@@ -563,11 +799,83 @@ for name, answer in [("greedy", greedy), ("beam", beam), ("exact", exact)]:
 рассматривать вместе: первая найденная EOS-гипотеза не обязательно
 лучшая.
 
+<a id="seq2seq-beam-stop"></a>
+
 Если ранжирование использует исходную сумму логарифмов, оценка любого
 продолжения не больше оценки его префикса: новые слагаемые неположительны.
 Поэтому поиск можно остановить, когда лучшая завершённая оценка не ниже
 всех живых оценок. Такая проверка доказывает оптимальность только среди
 ещё не отброшенных ветвей. Сам beam search мог раньше удалить лучший путь.
+
+<a id="seq2seq-beam-states"></a>
+
+### Reordering states after beam selection
+
+The global top-$B$ selection may keep two children of the same parent
+and none from another parent. Suppose the live prefixes are A and C.
+If the selected continuations are CB and CD, both inherit the state
+after C:
+
+| Selected prefix | Parent row | State to carry | Token to consume next |
+|---|---:|---|---|
+| CB | 1 | state after C | B |
+| CD | 1 | state after C | D |
+
+The parent state already includes the old prefix. The selected new
+token is then consumed by each child to obtain its state and predict
+the following token. Both children initially receive equal state
+values, but the different B and D embeddings generally make the next
+states different.
+
+The code below checks this one state-routing operation after selection.
+It does not choose the beam or compute sequence probabilities; the
+complete finite-distribution search above handles that separate step.
+
+```python
+import torch
+from torch import nn
+
+torch.manual_seed(67)
+dtype = torch.float64
+embedding = nn.Embedding(4, 3, dtype=dtype)  # A=0, B=1, C=2, D=3
+decoder_cell = nn.GRUCell(3 + 2, 4, dtype=dtype)
+parent_states = torch.tensor([
+    [.1, .2, .3, .4],  # state after A
+    [.5, .6, .7, .8],  # state after C
+], dtype=dtype)
+selected_parents = torch.tensor([1, 1])
+selected_tokens = torch.tensor([1, 3])  # CB and CD
+source_context = torch.tensor([[-.2, .4]], dtype=dtype)
+
+with torch.no_grad():
+    inherited = parent_states.index_select(0, selected_parents)
+    child_inputs = torch.cat([
+        embedding(selected_tokens), source_context.expand(2, -1),
+    ], dim=-1)
+    child_states = decoder_cell(child_inputs, inherited)
+    for child in range(2):
+        single = decoder_cell(child_inputs[child:child+1], parent_states[1:2])
+        torch.testing.assert_close(child_states[child:child+1], single)
+    assert not torch.allclose(child_states[0], child_states[1])
+    wrong_states = decoder_cell(child_inputs, parent_states)
+    assert not torch.allclose(child_states[0], wrong_states[0])
+```
+
+For `nn.GRUCell`, beam rows occupy axis 0 of `[beam,m]`.
+For a sequence module’s hidden state `[layers,beam,m]`, the
+corresponding gather is on axis 1. An LSTM must reorder both hidden
+and cell states with the same parent indices. When decoding several
+source inputs together, the indices and source contexts must also
+remain grouped by their source.
+
+An EOS child is placed among finished hypotheses according to the
+chosen search rule; it is not fed back merely to continue that finished
+prefix. The D2L
+[beam-search tree](https://d2l.ai/chapter_recurrent-modern/beam-search.html#fig-beam-search)
+illustrates global prefix selection. The tensor example here makes the
+associated recurrent-state routing explicit.
+
+<a id="seq2seq-length-score"></a>
 
 ### Длина ответа и качество перевода
 
@@ -599,6 +907,8 @@ $0.30$ и длины 2 при $\alpha=1$ оценка равна $-0.6020$;
 EOS. Если интерфейс возвращает незавершённый текст, он должен явно
 сообщать об усечении. В нейросетевом примере выше это флаг `ended=False`.
 
+<a id="seq2seq-attention"></a>
+
 ## Мост к attention
 
 При переводе слова «кошка» декодеру может понадобиться состояние энкодера
@@ -606,7 +916,7 @@ EOS. Если интерфейс возвращает незавершённый
 $h_1,\ldots,h_n$, можно вычислять отдельный контекст $v_t$ для каждого
 выходного шага вместо постоянного $v=h_n$.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/seq2seq-attention.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/seq2seq-attention.svg|Attention по выходам энкодера перед каждым шагом декодера]]
 
 *В этой модели attention получает все выходы энкодера и предыдущее состояние
 декодера. Его результат поступает в следующий рекуррентный шаг вместе
@@ -634,8 +944,9 @@ s_t=f_{\mathrm{dec}}([E_y[y_{t-1}];v_t],s_{t-1}).
 \end{gathered}
 $$
 
-Пусть для трёх исходных позиций $h_1=(1,0)$, $h_2=(0,2)$,
-$h_3=(-1,1)$. При весах $(0.05,0.85,0.10)$ получаем
+Пусть для `black cat sleeps` состояния равны $h_1=(1,0)$, $h_2=(0,2)$,
+$h_3=(-1,1)$. Чтобы увидеть, как устроено чтение, зададим веса вручную:
+$(0.05,0.85,0.10)$. Получаем
 
 $$
 \begin{aligned}
@@ -645,10 +956,11 @@ v_t&=0.05(1,0)+0.85(0,2)\\
 \end{aligned}
 $$
 
-При следующих весах $(0.05,0.10,0.85)$ контекст станет $(-0.80,1.05)$,
-хотя память энкодера не изменилась. Числа здесь заданы для объяснения
-операции, а не сняты с обученного переводчика. У настоящей модели
-оценки $e_{tj}$ вычисляются из состояний с обучаемыми параметрами.
+Откуда берутся веса, покажет
+[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer#translation-two-reads|расчёт двух шагов перевода]].
+В нём те же $h_1,h_2,h_3$; меняется только состояние декодера.
+
+<a id="seq2seq-attention-mask"></a>
 
 Правое дополнение источника нужно исключить до softmax. Если
 паддинговая позиция получит большой score, последующее обнуление
@@ -677,6 +989,8 @@ print("context:", context.detach().tolist())
 print("score gradients:", scores.grad.tolist())
 ```
 
+<a id="seq2seq-attention-gradients"></a>
+
 Все три действительные позиции участвуют в сумме, а градиент проходит
 через softmax к оценкам. Отдельная разметка «на каком слове фокусироваться»
 для такого обучения не обязательна: сигнал может поступать из функции
@@ -684,6 +998,8 @@ print("score gradients:", scores.grad.tolist())
 выравниванием или полным объяснением решения. Каждое $h_j$ уже зависит
 от контекста; одно соответствие может распределяться по нескольким
 позициям.
+
+<a id="seq2seq-memory-cost"></a>
 
 Теперь размер хранимой памяти $[h_1;\ldots;h_n]$ растёт с длиной входа.
 Сам $v_t$ всё ещё имеет фиксированную размерность, но декодер на каждом
@@ -708,6 +1024,8 @@ Attention устраняет необходимость передавать с�
 при этом останется последовательной — следующий выбранный токен
 станет известен только после предыдущего.
 
+<a id="seq2seq-scope"></a>
+
 ## Ограничения и частые смешения
 
 Seq2Seq обозначает преобразование последовательностей, а encoder–decoder —
@@ -730,6 +1048,7 @@ Teacher forcing задаёт входную историю при обучени
 
 ## Источники и дальнейшее чтение
 
+- [PyTorch, NLP From Scratch: Translation with a Sequence to Sequence Network and Attention](https://docs.pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html), The Encoder and Simple Decoder — a second implementation of the initialization-only decoder and teacher forcing. Its fixed-length padding/attention code is not substituted for the explicit masks and packed source lengths used here.
 - Zhang, Lipton, Li, Smola, **Dive into Deep Learning**:
   [§10.6 — The Encoder–Decoder Architecture](https://d2l.ai/chapter_recurrent-modern/encoder-decoder.html),
   [§10.7 — Sequence-to-Sequence Learning](https://d2l.ai/chapter_recurrent-modern/seq2seq.html),

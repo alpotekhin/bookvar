@@ -39,6 +39,7 @@ hero:
   </a>
 </nav>
 
+<p><a href="./textbook/#gpt-decoder-route">От GPT-1 к LLaMA</a>: как менялись декодер, предобучение и способ задать задачу модели.</p>
 <p><a href="./practice/">Практика и интерактивные примеры</a> · <a href="./questions/">Вопросы со ссылками на ответы</a></p>
 
 <section class="curriculum" aria-labelledby="curriculum-title">

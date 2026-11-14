@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-10",
+  "scope": "Integrate learned block routing in the canonical long-context chapter between token-level DSA and main-cache compression (CSA/HCA), and connect the Flash-Next report note. Do not publish.",
+  "review": {
+    "previousGoalTurn": "Progress: added the Qwen3.8-Flash-Next report note, exact examples, one licensed original source figure and the atlas/timeline/map routes.",
+    "sources": "Read the whole long-context chapter and the MoBA §2 / Fig. 1a and reference implementation; DeepSeek-V3.2-Exp DSA diagram and DeepSeek-V3.2 §2.1; Qwen3.8 report §2.1.2, Eqs. 12–19 and Fig. 3, and pinned model config. Added MoBA and QSA source links to the chapter.",
+    "explanation": "MoBA uses the mean of core keys, counts the current block in the budget and masks future tokens. QSA uses a separate trainable indexer and adds the incomplete tail. At positions 10 and 11 in blocks of four, MoBA sees 4–10 then 4–11; QSA sees 0–10 then 0–7 with the specified block scores. Actual QSA counts at context 32768: 8192 index keys, 2048 selected main K/V, 32768 resident K/V per attention layer. No throughput claim.",
+    "code": "All six Markdown Python blocks executed together with NumPy 2.5.4 via uv. The original five are unchanged; added four mask assertions passed.",
+    "rights": "Moonshot AI author PNG running_example.png at b5d58363311d3ca946f1ec444182727c15e338b5, byte-for-byte, MIT and full copyright notice. Kept the original Qwen report figure as a source link, not an embed. DSA source artwork untouched; clarified score direction in the existing caption.",
+    "reader": "Inspected the original MoBA diagram, its captions and the worked example at 375px and 1280px, including the EN fallback at 375px in dark mode. The exact author PNG fits the article column; 3× zoom/pan and the chapter-to-report round trip worked. Fresh build, all 266 rendered-output checks and internal-link check passed.",
+    "limits": "This change verifies the affected sparse attention sequence and not a fresh primary-source audit of unrelated RoPE, CLA, or evaluation passages; EN remains labeled canonical-language fallback."
+  },
+  "figure": {
+    "asset": "00 Учебник/Assets/Figures/curated/moba/moba-running-example.png",
+    "sha256": "34861ce26910fe40efea3b0abaf2a2dfbc756547dada22a1e84279f93d420e7f",
+    "dimensions_px": [
+      2552,
+      2328
+    ],
+    "commit": "b5d58363311d3ca946f1ec444182727c15e338b5"
+  },
+  "files": [
+    {
+      "source": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "before_sha256": "258d15855652ecacc9321b3d15651531e7c5776656e3548510977fe4572c7507",
+      "after_sha256": "01689f8d299f006ec8e65612ee7836abad19be7da5935e23fe6942825b4c444a",
+      "lines": 1320,
+      "changes": [
+        {
+          "old": "  - lecture-10-section-267-local-sliding-window-attention\nprimary_sources:\n  - https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/89d501aed998d33fa4f4702102ec1bb2331e10f6/DeepSeek_V4.pdf\n  - https://arxiv.org/abs/2306.15595\n",
+          "new": "  - lecture-10-section-267-local-sliding-window-attention\nprimary_sources:\n  - https://arxiv.org/html/2502.13189v1#S2\n  - https://arxiv.org/html/2608.30320v1#S2.SS1.SSS2\n  - https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/89d501aed998d33fa4f4702102ec1bb2331e10f6/DeepSeek_V4.pdf\n  - https://arxiv.org/abs/2306.15595\n"
+        },
+        {
+          "old": "[DeepSeek-V3.2-Exp Technical Report](https://github.com/deepseek-ai/DeepSeek-V3.2-Exp/blob/840f3c924a6b1604b1998baebf0c5f167e10375a/DeepSeek_V3_2.pdf#page=2).\nСлева и в центре — MLA с отдельным RoPE-ключом; справа индексатор передаёт\nвыбранные позиции в Top-k Selector. Из PDF выделена схема без соседнего\nтекста. [MIT, Copyright 2025 DeepSeek](https://github.com/deepseek-ai/DeepSeek-V3.2-Exp/blob/840f3c924a6b1604b1998baebf0c5f167e10375a/LICENSE).*\n\n",
+          "new": "[DeepSeek-V3.2-Exp Technical Report](https://github.com/deepseek-ai/DeepSeek-V3.2-Exp/blob/840f3c924a6b1604b1998baebf0c5f167e10375a/DeepSeek_V3_2.pdf#page=2).\nСлева и в центре — MLA с отдельным RoPE-ключом; справа индексатор передаёт\nоценки позиций в Top-k Selector. Селектор выбирает записи для основного\nвнимания. Из PDF выделена схема без соседнего\nтекста. [MIT, Copyright 2025 DeepSeek](https://github.com/deepseek-ai/DeepSeek-V3.2-Exp/blob/840f3c924a6b1604b1998baebf0c5f167e10375a/LICENSE).*\n\n"
+        },
+        {
+          "old": "отсутствие прямого доступа не означает полного отсутствия влияния.\n\n<a id=\"compressed-sparse-attention-csa-hca\"></a>\n## CSA и HCA: сжать позиции, затем выбрать записи\n\nDSA уменьшает число прочитанных записей, но сохраняет KV-представления\nкаждой позиции. В CSA и HCA группы входных позиций сначала превращаются\nв сжатые записи. CSA затем выбирает часть таких записей индексатором;\nHCA сильнее сжимает историю и читает весь получившийся набор.\n\n",
+          "new": "отсутствие прямого доступа не означает полного отсутствия влияния.\n\n<a id=\"block-routing-moba-qsa\"></a>\n\n## MoBA и QSA: выбрать блок, прочитать его токены\n\nВ DSA индексатор даёт отдельную оценку каждой позиции. Для прямого чтения\nнескольких соседних токенов каждый из них должен попасть в top-$k$. При блочном\nотборе оценивают группу целиком. Достаточно выбрать блок один раз, чтобы\nосновное внимание получило все его токены. Это уменьшает число оценок для\nотбора, но один нужный токен может занять в бюджете место вместе с\nнесколькими несущественными соседями.\n\nВ **MoBA** (Mixture of Block Attention) маршрутизатор усредняет ключи\nосновного внимания внутри каждого законченного блока и сравнивает это\nсреднее с запросом. Если для одного запроса важен первый блок, а для\nдругого третий, им не обязательно читать одну область. После отбора\nвеса softmax вычисляются по отдельным ключам выбранных токенов; средние\nключи нужны только для маршрутизации. Текущий блок включается всегда,\nно причинная маска закрывает его будущие токены.\n[Lu et al., MoBA, §2](https://arxiv.org/html/2502.13189v1#S2).\n\n![[00 Учебник/Assets/Figures/curated/moba/moba-running-example.png|Запрос q1 по сплошным стрелкам читает ключи и значения блоков 1 и 2. Запрос q2 по пунктирным стрелкам читает блоки 3 и 4. После отбора внимание считает оценки внутри выбранных блоков.]]\n\n*Enzhe Lu et al., Moonshot AI, [MoBA, рис. 1a](https://arxiv.org/html/2502.13189v1#S2.F1).\n[Оригинальный PNG из репозитория авторов](https://github.com/MoonshotAI/MoBA/blob/b5d58363311d3ca946f1ec444182727c15e338b5/figures/running_example.png),\n[MIT](/licenses/moonshot-moba-b5d58363-MIT.txt). Схема показывает разные\nнаборы блоков для двух запросов, а не причинную маску внутри блока.*\n\nВ **Qwen Sparse Attention (QSA)** тоже выбирают блоки и раскрывают их до\nотдельных токенов. Но для отбора есть отдельный обучаемый индексатор, как\nв DSA. Он усредняет не ключи основного внимания, а собственные ключи\nпозиций блока. Затем нормирует среднее и применяет RoPE с позицией начала\nблока. Индексатор оценивает только полностью видимые блоки. Токены\nнезаконченного хвоста идут в основное внимание без отбора.\nНа [схеме Qwen Team](https://arxiv.org/html/2608.30320v1#S2.F3)\nэто две разные ветви: AvgPool слева перед индексатором и несжатые\nK/V справа перед Sparse Core Attention.\n\n### Что меняется на границе блока\n\nПусть позиции разбиты на блоки 0–3, 4–7 и 8–11. Запрос в позиции 10\nещё не видит позицию 11. В упрощённом MoBA с запросом 1 и скалярными\nключами $(8,0,0,0)$ и $(3,3,3,3)$ средние ключи двух предыдущих\nблоков равны 2 и 3. При бюджете в два блока выбираются 4–7 и текущий\nблок 8–11; внутри текущего причинная маска оставляет 8–10.\nВ QSA с учебным бюджетом в два полных блока войдут оба доступных\nблока, а 8–10 будут добавлены как хвост.\n\nСдвинем запрос на позицию 11. В MoBA блок 8–11 всё ещё текущий\nи поэтому остаётся. Если 4–7 по-прежнему выигрывает среди прошлых\nблоков, внимание увидит 4–11. В QSA блок 8–11 теперь закончен\nи участвует в отборе на общих основаниях. При оценках 0,7, 1,2 и\n0,2 он проиграет первым двум блокам. Хвоста больше нет, и основное\nвнимание увидит только 0–7. Эти оценки заданы для проверки маски,\nа не взяты из чекпойнта.\n\n~~~python\ndef moba_visible(t, block_size, earlier_scores, budget):\n    current = t // block_size\n    earlier = sorted(range(current), key=lambda b: -earlier_scores[b])\n    blocks = [*earlier[:budget - 1], current]\n    return sorted(i for b in blocks\n                  for i in range(b * block_size, (b + 1) * block_size)\n                  if i <= t)\n\ndef qsa_visible(t, block_size, complete_scores, budget):\n    complete = (t + 1) // block_size\n    blocks = sorted(range(complete), key=lambda b: -complete_scores[b])[:budget]\n    selected = [i for b in blocks\n                for i in range(b * block_size, (b + 1) * block_size)]\n    return sorted(selected + list(range(complete * block_size, t + 1)))\n\nassert moba_visible(10, 4, [2, 3], 2) == list(range(4, 11))\nassert moba_visible(11, 4, [2, 3], 2) == list(range(4, 12))\nassert qsa_visible(10, 4, [.7, 1.2], 2) == list(range(11))\nassert qsa_visible(11, 4, [.7, 1.2, .2], 2) == list(range(8))\n~~~\n\n### Сколько записей оценивается, читается и хранится\n\nВ Qwen3.8-Flash-Next блок состоит из четырёх токенов, а бюджет\nиндексатора — 512 полных блоков. Для последнего запроса в контексте\n32 768 токенов нет неполного хвоста. Индексатор оценивает\n8192 сводных ключа, основное внимание читает 2048 записей, а в\nкэше этого слоя остаются все 32 768 записей K/V. У DSA с бюджетом\n2048 индексатор оценивает все 32 768 позиций. Число сравнений\nуменьшается в четыре раза при блочном отборе, но это не коэффициент\nускорения: у индексаторов разные головы, форматы и ядра, а основной\nоператор QSA читает GQA-записи, не латенты MLA.\n\nПри удвоении длины число сравнений индексатора на шаге вывода\nпримерно удвоится, хотя бюджет основного внимания останется тем же.\nВ полном prefill число пар «запрос — видимый блок» по-прежнему\nквадратично по длине при фиксированном размере блока. Число\nслоёв с растущим KV-кэшем уменьшает другое решение: у Flash-Next\n36 из 48 слоёв используют фиксированное состояние Gated DeltaNet.\n[[05 Источники/Papers/Qwen3.8-Flash-Next#qsa-block-selection|Обучение индексатора QSA и расчёт памяти для Flash-Next]].\n\n<a id=\"compressed-sparse-attention-csa-hca\"></a>\n## CSA и HCA: сжать позиции, затем выбрать записи\n\nDSA и QSA выбирают, какие записи отдельных токенов прочитать. QSA\nсжимает ключи **индексатора**, но не записи основного внимания.\nВ CSA и HCA группы входных позиций превращаются в сжатые записи\n**самого внимания**. CSA затем выбирает часть таких записей индексатором;\nHCA сильнее сжимает историю и читает весь получившийся набор.\n\n"
+        },
+        {
+          "old": "  — формула lightning indexer, top-$k$ по токенам и двухэтапное продолжение\n  обучения.\n\n**Связанные темы:** [[02 Areas/ML & DL/01 Справочник/Позиционные представления/RoPE|RoPE]],\n",
+          "new": "  — формула lightning indexer, top-$k$ по токенам и двухэтапное продолжение\n  обучения.\n- [Lu et al., MoBA, §2](https://arxiv.org/html/2502.13189v1#S2) — отбор по средним\n  ключам и причинная маска текущего блока.\n- [Qwen Team, Qwen3.8-Next, §2.1.2](https://arxiv.org/html/2608.30320v1#S2.SS1.SSS2)\n  — отдельный блочный индексатор, неполный хвост и продолжение предобучения.\n\n**Связанные темы:** [[02 Areas/ML & DL/01 Справочник/Позиционные представления/RoPE|RoPE]],\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "7843f84de0bd58bb37804c16bc2573920cdf1a28a94ab83cc7af3167f76a15a0",
+      "after_sha256": "9d620d1f39146bcc1b93bb755c6ac2551c85b8937ba3b55301b80af9289563ac",
+      "lines": 24673,
+      "changes": [
+        {
+          "old": "    last_verified: 2026-09-28\n\n  - id: curated-long-context-ec2eec93132d\n    asset: 00 Учебник/Assets/Figures/curated/long-context-review-2026-09/mistral-rolling-step-0.png\n",
+          "new": "    last_verified: 2026-09-28\n\n  - id: curated-moba-running-example-34861ce26910\n    asset: 00 Учебник/Assets/Figures/curated/moba/moba-running-example.png\n    author: Enzhe Lu et al., Moonshot AI\n    source_url: https://arxiv.org/html/2502.13189v1#S2.F1\n    source_image_url: https://raw.githubusercontent.com/MoonshotAI/MoBA/b5d58363311d3ca946f1ec444182727c15e338b5/figures/running_example.png\n    commit: b5d58363311d3ca946f1ec444182727c15e338b5\n    sha256: 34861ce26910fe40efea3b0abaf2a2dfbc756547dada22a1e84279f93d420e7f\n    dimensions_px: [2552, 2328]\n    license: MIT\n    license_url: https://github.com/MoonshotAI/MoBA/blob/b5d58363311d3ca946f1ec444182727c15e338b5/LICENSE\n    license_evidence: site/public/licenses/moonshot-moba-b5d58363-MIT.txt\n    license_evidence_sha256: 1dc1d84f4ceae20777190f80c9390cc520f3b3efa2511ba983599eeb2296012b\n    modifications: Exact running_example.png from the author repository README; no crop or re-encoding\n    used_in:\n      - 00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md\n    metadata_status: verified\n    provenance_confirmation: pinned-upstream-repository\n    derivation: source-image-copy\n\n  - id: curated-long-context-ec2eec93132d\n    asset: 00 Учебник/Assets/Figures/curated/long-context-review-2026-09/mistral-rolling-step-0.png\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/Qwen3.8-Flash-Next.md",
+      "before_sha256": "eb618f872466a2e215884bc3a7d14e5d313851567cebf72ca29841f813aaeee5",
+      "after_sha256": "62a3a73bc2b632c8163d8fc37db310041971a81891c7bb495db9ca7334e0fb02",
+      "lines": 225,
+      "changes": [
+        {
+          "old": "\n[[02 Атлас моделей/Семейства/Qwen#qwen38-flash-next|Переход к Qwen3.8 в атласе]] ·\n[[00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание|Глава о разреженном внимании и длинном контексте]].\n",
+          "new": "\n[[02 Атлас моделей/Семейства/Qwen#qwen38-flash-next|Переход к Qwen3.8 в атласе]] ·\n[[00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание#block-routing-moba-qsa|MoBA и QSA в главе о длинном контексте]].\n"
+        }
+      ]
+    }
+  ]
+}

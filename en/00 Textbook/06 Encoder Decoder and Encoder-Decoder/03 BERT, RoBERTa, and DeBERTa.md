@@ -4,18 +4,20 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "0cce42e115bc2a8c453047ce060f7a67dac104a9eae45ed1b899a49f4d921741"
-translation_reviewed: "2026-10-29"
+canonical_revision: "af828cebc82902fdba70dcbec6a7ad0261f223052c6b2191c7a205df95dfd1dd"
+translation_reviewed: "2026-11-13"
 translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md"
-last_updated: 2026-10-29
+last_updated: 2026-11-13
 primary_sources:
   - https://aclanthology.org/N19-1423/
   - https://arxiv.org/abs/1907.11692v1
   - https://arxiv.org/abs/2006.03654v6
   - https://aclanthology.org/2020.tacl-1.5/
   - https://arxiv.org/abs/1909.11942v6
+  - https://arxiv.org/abs/2003.10555v1
+  - https://arxiv.org/abs/2111.09543v4
 previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]"
-next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]"
+next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]"
 ---
 
 # BERT, RoBERTa, and DeBERTa
@@ -1257,9 +1259,186 @@ language tasks.
 Version boundaries also matter. The [official repository](https://github.com/microsoft/DeBERTa)
 separately describes V2: a new 128K SentencePiece vocabulary, an added
 convolution, shared content/position projections, and relative buckets.
-V3 changes pre-training to ELECTRA-style replaced-token detection and
-gradient-disentangled embedding sharing. The formulas and MLM step
-above describe the original version, not a complete V3 recipe.
+V3 changes the pre-training objective and how embeddings are updated.
+
+<a id="electra-replaced-token-detection"></a>
+
+## ELECTRA: detecting which tokens changed
+
+BERT computes states for the entire input, but its vocabulary head
+has direct targets only at selected positions. ELECTRA uses those
+positions to construct a corrupted input. The main encoder receives
+one binary label at every valid position: did the token change?
+The resulting encoder can be fine-tuned for the same classification
+and labeling tasks as BERT.
+
+The small generator first solves the familiar MLM task. Suppose the
+original text is `She cooked rice and washed dishes`, with `cooked`
+and `dishes` masked for the generator. It returns two vocabulary
+distributions and trains against the original `cooked` and `dishes`.
+Draw one token from each distribution. In this example the draws
+are `ate` and `dishes`. The second draw matches the original token,
+so the discriminator reads `She ate rice and washed dishes` with
+labels $(0,1,0,0,0,0)$, where 1 means the token changed. The
+`dishes` position has an MLM target and an RTD label of zero.
+
+Let $x_i$ be the original token, $\hat{x}_i$ the discriminator input
+token, and $\mathcal V$ the set of valid positions excluding padding.
+For the target $y_i=\mathbb 1[\hat{x}_i\ne x_i]$ and the logit $s_i$
+from the discriminator state, let $p_i=\sigma(s_i)$. The mean loss is
+
+$$
+L_{\mathrm{RTD}}=-\frac{1}{|\mathcal V|}
+\sum_{i\in\mathcal V}\big[y_i\log p_i+(1-y_i)\log(1-p_i)\big].
+$$
+
+Here $p_i$ is the probability of a replacement. The original paper
+uses $D$ for the probability that the token is original. Reversing
+the class convention leaves the binary loss unchanged. If the
+discriminator gives $p_i=0.8$ to `ate` and $p_i=0.2$ to the five
+original tokens, each correct label receives probability $0.8$ and
+the mean loss is $-\log 0.8\approx0.2231$.
+
+The main encoder receives more direct targets per sequence than
+in MLM, at the cost of also running and training the generator.
+Sampling plausible replacements asks the discriminator to judge the
+token in context. The generator learns to reconstruct the original
+text; the binary loss does not differentiate through the discrete
+sample. With a shared embedding table, the loss has a separate path
+to shared parameters. [ELECTRA Figure 2](https://arxiv.org/html/2003.10555v1#S2.F2)
+shows the full path from masks to replacement labels.
+
+<a id="debertav3-gradient-disentangling"></a>
+
+## DeBERTaV3: shared values, separate gradients
+
+DeBERTaV3 retains DeBERTa's attention with separate content and
+relative-position signals. During pre-training the main encoder becomes
+the RTD discriminator, while MLM remains the auxiliary generator's
+objective. The upper arrows in the authors' figure show the token
+path; the arrows below show gradient flow. $\theta_G$ and $\theta_D$
+denote network parameters apart from the embedding tables shown.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/debertav3-2026-11-13/debertav3-figure1-sharing.png|Three ways to share generator and discriminator embeddings: ES, NES, and GDES]]
+
+*Pengcheng He, Jianfeng Gao, and Weizhu Chen, [DeBERTaV3, Figure 1, p. 5](https://arxiv.org/pdf/2111.09543v4#page=5),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+All three panels and the original caption are retained; only the surrounding page is cropped.*
+
+In panel (a), ES, one table $E$ receives the sum of the
+$L_{\mathrm{MLM}}$ and $\lambda L_{\mathrm{RTD}}$ gradients. Where
+one gradient component is negative and the other positive, they
+partly cancel. In panel (b), NES, each network has a separate table:
+updating $E_G$ no longer changes $E_D$. This removes the competition
+over a shared parameter, but the discriminator no longer reads the
+values learned by the generator.
+
+In panel (c), GDES, each discriminator forward pass constructs its
+table from two terms:
+
+$$
+E_D=\operatorname{stopgrad}(E_G)+E_\Delta.
+$$
+
+$E_\Delta$ starts at zero, so both networks initially read the same
+rows. The stop-gradient operation passes the value of $E_G$ forward
+without differentiating through it. RTD updates $E_\Delta$ and the
+discriminator parameters; MLM updates $E_G$ and the generator
+parameters. After an MLM step, the effective $E_D$ also changes:
+the discriminator reads the new value of $E_G$ on its next pass.
+The [pinned Microsoft implementation](https://github.com/microsoft/DeBERTa/blob/4d7fe0bd4fb3c7d4f4005a7cafabde9800372098/DeBERTa/apps/tasks/rtd_task.py#L99-L131)
+uses `.detach()` on the sampled input IDs and, separately, on the
+generator's contribution to the discriminator's embedding table.
+
+Consider one embedding coordinate instead of a full table. Use
+quadratic stand-ins for MLM and RTD to isolate their gradients:
+the targets are 3 and 0 respectively, the initial value is 1,
+$\lambda=2$, and the SGD learning rate is $0.1$. Under ES the
+derivatives are $1-3=-2$ and $2(1-0)=2$, leaving the shared value
+at 1. Under NES the generator updates its value to $1.2$ and the
+discriminator updates its own value to $0.8$. Under GDES the MLM
+step first updates $E_G$ to $1.2$. The discriminator then reads
+$1.2+0$ and sends a gradient of $2.4$ only to $E_\Delta$. The
+correction becomes $-0.24$, so after both updates
+$E_D=1.2-0.24=0.96$ while $E_G=1.2$. This is one illustrative step,
+not a simulation of training on a corpus.
+
+```python
+import math
+import torch
+import torch.nn.functional as F
+
+# One fixed outcome of sampling: cooked -> ate, dishes -> dishes.
+original = torch.tensor([1, 2, 3, 4, 5, 6, 0])  # 0 is PAD
+chosen = torch.tensor([1, 5])
+sampled = torch.tensor([7, 6])
+valid = original.ne(0)
+masked = original.clone()
+masked[chosen] = 8  # MASK
+corrupted = original.clone()
+corrupted[chosen] = sampled
+replaced = corrupted.ne(original)
+assert masked.tolist() == [1, 8, 3, 4, 5, 8, 0]
+assert original[chosen].tolist() == [2, 6]  # generator's two MLM labels
+assert replaced[valid].int().tolist() == [0, 1, 0, 0, 0, 0]
+
+# Supplied RTD logits give the true label probability 0.8 at each position.
+logits = torch.where(replaced, math.log(4), -math.log(4)).double()
+rtd = F.binary_cross_entropy_with_logits(logits[valid], replaced[valid].double())
+assert math.isclose(rtd.item(), -math.log(.8), abs_tol=1e-8)
+
+# Scalar losses isolate gradient flow; they are not MLM or RTD losses.
+def scalar(value):
+    return torch.tensor(value, dtype=torch.float64, requires_grad=True)
+
+lr, weight = .1, 2.
+e = scalar(1.)
+loss_es = .5 * (e - 3).square() + weight * .5 * e.square()
+grad_es, = torch.autograd.grad(loss_es, e)
+assert grad_es.item() == 0.
+
+g, delta, d = scalar(1.), scalar(0.), scalar(1.)
+grad_g, = torch.autograd.grad(.5 * (g - 3).square(), g)
+g_next = (g - lr * grad_g).detach().requires_grad_()
+grad_d, = torch.autograd.grad(weight * .5 * d.square(), d)
+d_nes = d - lr * grad_d
+
+d_gdes = g_next.detach() + delta
+grad_g_from_rtd, grad_delta = torch.autograd.grad(
+    weight * .5 * d_gdes.square(), (g_next, delta), allow_unused=True
+)
+assert grad_g_from_rtd is None
+assert math.isclose(grad_delta.item(), 2.4)
+delta_next = delta - lr * grad_delta
+exported = g_next.detach() + delta_next.detach()
+assert math.isclose(g_next.item(), 1.2)
+assert math.isclose(d_nes.item(), .8)
+assert math.isclose(exported.item(), .96)
+```
+
+The authors compare all three methods with the same Base setup.
+Figure 2 plots the **generator's** MLM loss against training steps,
+rather than discriminator accuracy or elapsed time. In this
+experiment NES and GDES track each other and remain below ES
+after the initial drop.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/debertav3-2026-11-13/debertav3-figure2-mlm-loss.png|Generator MLM loss over training steps for ES, NES, and GDES]]
+
+*He, Gao, and Chen, [DeBERTaV3, Figure 2, p. 6](https://arxiv.org/pdf/2111.09543v4#page=6),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+The original plot, logarithmic loss axis, and English caption are retained.*
+
+[Table 2, p. 5](https://arxiv.org/pdf/2111.09543v4#page=5) separately
+compares downstream results after fine-tuning. MNLI-m accuracy is
+88.8 for ES, 88.3 for NES, and 89.3 for GDES; SQuAD 2.0 F1 is
+86.3, 85.3, and 87.2 respectively. Here NES reduced the MLM loss
+more quickly but trailed ES on both downstream tasks. The final V3
+model family in §4.1 also changes the training recipe, so those
+results cannot be attributed to GDES alone.
+
+The discriminator can be exported with the folded table
+$E_G+E_\Delta$. Fine-tuning the encoder for answer extraction, for
+example, requires neither the generator nor the RTD head.
 
 ## Limitations and legacy
 
@@ -1284,14 +1463,16 @@ Pre-training transfers corpus properties, including errors and social
 biases. A mean benchmark result does not establish robustness to a
 new domain or the correctness of every prediction.
 
-The [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|next chapter, GPT-1]],
-examines causal pre-training and supervised fine-tuning.
+The encoder in [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]] also reads in both directions. Its decoder
+uses those states to generate the answer as text.
 
 ## Sources and further reading
 
 - Jacob Devlin et al., [BERT, §§3–5, Appendices A.1–A.5 and C.2](https://aclanthology.org/N19-1423/).
 - Yinhan Liu et al., [RoBERTa v1, §§3–5, Tables 1–7](https://arxiv.org/abs/1907.11692v1).
 - Pengcheng He et al., [DeBERTa v6, §§3–5, Appendices A.7–A.8](https://arxiv.org/abs/2006.03654v6).
+- Kevin Clark et al., [ELECTRA, §2 and Figure 2](https://arxiv.org/html/2003.10555v1#S2), and the [authors' Google Research explanation](https://research.google/blog/more-efficient-nlp-model-pre-training-with-electra/).
+- Pengcheng He, Jianfeng Gao, and Weizhu Chen, [DeBERTaV3, §§2.3 and 3–4.1](https://arxiv.org/pdf/2111.09543v4): RTD, three embedding-sharing methods, Figures 1–2, and Table 2.
 - Google Research, [BERT Whole Word Masking release and generator](https://github.com/google-research/bert/blob/eedf5716ce1268e56f0a50264a88cafad334ac61/README.md#L74-L118), Apache-2.0. The original explanation is quoted above; the reduced selector and budget examples are added. [Full license](/licenses/google-bert-eedf5716-Apache-2.0.txt).
 - Mandar Joshi et al., [SpanBERT, sections 3, 4.2–4.3 and 6, Figures 1–2, Tables 6–7](https://aclanthology.org/2020.tacl-1.5/), CC BY 4.0. Original figures/captions and the boundary-input passage retain their language. The equations use $h$ for contextual states; the small PyTorch module and probability calculations are added.
 - Zhenzhong Lan et al., [ALBERT v6, sections 3.1 and 4.6, Table 5](https://arxiv.org/abs/1909.11942v6). Pair construction and legacy feature naming are also checked against [the pinned original generator](https://github.com/google-research/albert/blob/b772393d3dae115b493258ce8e37c17b2cc62100/create_pretraining_data.py), Copyright 2019 The Google Research Authors, Apache-2.0. The swap excerpt is unchanged; the door example and supplied-logit calculation are added. [Full code license](/licenses/google-albert-b772393d-Apache-2.0.txt).
@@ -1303,4 +1484,4 @@ examines causal pre-training and supervised fine-tuning.
 - [[02 Areas/ML & DL/04 Вопросы/100 вопросов по NLP|NLP questions]].
 
 **Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three architectural patterns]] ·
-**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].
+**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]].

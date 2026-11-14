@@ -21,7 +21,7 @@ describe('one primary explanation per published topic', () => {
   it('covers every textbook subject in both topic indexes without writing second explanations', () => {
     const book = pages.filter(page => page.route.startsWith('textbook/')
       && !['textbook/index', 'textbook/how-to-use'].includes(page.route));
-    expect(book).toHaveLength(152);
+    expect(book).toHaveLength(153);
     for (const path of ['01 Справочник/_index.md', 'en/01 Reference/_index.md']) {
       const content = read(path), links = targets(content);
       for (const page of book) expect(links.has(page.source.replace(/\.md$/, '')), page.source).toBe(true);
@@ -53,14 +53,15 @@ describe('one primary explanation per published topic', () => {
     }
   });
 
-  it('keeps original implementation studies in the library without altering their text, code or images', () => {
+  it('preserves the implementation studies at their library routes and reverses reviewed figure edits exactly', () => {
     const moves = JSON.parse(read('docs/audit/2026-10-29-implementation-studies-move.json')).entries;
     for (const move of moves) {
       const alias = aliases.find((row: any) => row.source === move.source);
       expect(alias).toBeDefined();
       const original = matter(read(alias.snapshot));
-      const study = matter(read(move.canonicalSource));
-      expect(study.data.type).toBe('source-note');
+      const current = read(move.canonicalSource);
+      expect(matter(current).data.type).toBe('source-note');
+      const study = matter(beforeTopicConsolidation(current, move.canonicalSource, root));
       expect(study.content.trimEnd()).toBe(original.content.trimEnd());
       expect(pages.find(page => page.source === move.canonicalSource)?.route).toMatch(/^sources\/implementations\//);
     }

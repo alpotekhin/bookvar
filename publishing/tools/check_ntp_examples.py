@@ -36,7 +36,7 @@ def main():
     torch.manual_seed(42)
     text = CHAPTER.read_text()
     blocks = re.findall(r"^```python\n(.*?)^```", text, re.M | re.S)
-    assert len(blocks) == 3, "Review new/removed chapter code blocks before updating this check"
+    assert len(blocks) == 4, "Review new/removed chapter code blocks before updating this check"
     namespace = {"__name__": "bookvar_ntp_chapter"}
     for index, block in enumerate(blocks, 1):
         exec(compile(block, f"{CHAPTER}:python-block-{index}", "exec"), namespace)
@@ -52,7 +52,7 @@ def main():
     close(namespace["loss_without_eos"].detach().exp(), 2 ** 1.5)
     close((0.5 * 0.25 * 0.125) ** (-1 / 3), 4)
     close(6 * math.log(2) / (12 * math.log(2)), 0.5)  # 12 raw bytes: BPB.
-    print("PASS: executed all three chapter code blocks; NLL, masks, PPL, BPB")
+    print("PASS: executed all four chapter code blocks; NLL, masks, PPL, BPB")
 
     # The actual chapter function agrees with explicitly pre-shifted targets.
     expected = F.cross_entropy(logits[:, :-1].reshape(-1, 4), ids[:, 1:].reshape(-1))
@@ -108,6 +108,43 @@ def main():
     changed_noncausal = F.scaled_dot_product_attention(changed_x, changed_x, changed_x, is_causal=False)
     assert not torch.allclose(noncausal[:, :, :3], changed_noncausal[:, :, :3])
     print("PASS: causal prefix invariance; unmasked-attention negative control")
+
+    # The chapter's packed goals and two controls: attention and loss are independent.
+    packed = namespace["packed_ids"]
+    doc = namespace["document"]
+    keep = namespace["packed_targets"]
+    assert keep.tolist() == [[False, True, True, True, False, True, True, True]]
+    assert namespace["right"].tolist().count(3) == 2
+    assert (3, 0) not in zip(namespace["left"].tolist(), namespace["right"].tolist())
+    embedding = torch.randn(6, 5)
+    readout = torch.randn(5, 6)
+    causal = torch.ones(8, 8, dtype=torch.bool).tril()
+    allow = causal & (doc[0, :, None] == doc[0, None, :])
+
+    def predict(batch, allowed=None):
+        v = embedding[batch].unsqueeze(1)
+        h = F.scaled_dot_product_attention(
+            v, v, v, attn_mask=allowed, is_causal=allowed is None
+        )
+        return h.squeeze(1) @ readout
+
+    z_pack = predict(packed, allow)
+    z_separate = predict(packed.reshape(2, 4))
+    close(z_pack.reshape(2, 4, 6), z_separate)
+    close(loss_fn(z_pack, packed, keep), loss_fn(
+        z_separate, packed.reshape(2, 4), torch.ones((2, 4), dtype=torch.bool)
+    ))
+    changed = packed.clone()
+    changed[0, 1] = 4
+    close(predict(changed, allow)[:, 4:], z_pack[:, 4:])
+    assert not torch.allclose(predict(changed)[:, 4:], predict(packed)[:, 4:])
+    for active, expected in [(keep, 0), (torch.ones_like(keep), 1)]:
+        logits_for_grad = z_pack.clone().detach().requires_grad_(True)
+        loss_fn(logits_for_grad, packed, active).backward()
+        assert int(bool(logits_for_grad.grad[0, 3].count_nonzero())) == expected
+        assert logits_for_grad.grad[0, 2].count_nonzero() > 0  # EOS is still predicted.
+        assert logits_for_grad.grad[0, 6].count_nonzero() > 0
+    print("PASS: packed versus separate loss and logits; independent boundary controls")
 
     close((3 * 1 + 1 * 3) / 4, 1.5)
     close((1 + 3) / 2, 2)
@@ -194,6 +231,14 @@ def main():
     close(sum((1, 2, 3)) / 3, 2)
     close(sum(n * mean for n, mean in zip(head_counts, (1, 2, 3))) / 9, 16 / 9)
     assert [(t, t + 2) for t in range(4)] == [(0, 2), (1, 3), (2, 4), (3, 5)]
+    # Figure 3 first column: the intermediate is an input, not a label leak.
+    assert [(t, t + 1, t + 2) for t in range(4)] == [
+        (0, 1, 2), (1, 2, 3), (2, 3, 4), (3, 4, 5)
+    ]
+    four_losses = -torch.full((4,), 0.5, dtype=torch.float64).log()
+    close(four_losses.mean(), math.log(2))
+    close(0.3 * four_losses.sum() / 5, 0.24 * math.log(2))
+    assert not torch.isclose(0.3 * four_losses.mean(), 0.3 * four_losses.sum() / 5)
     # A one-head synthetic MTP fixture exercises the depth-specific causal
     # boundary; it is not an implementation or execution of DeepSeek-V3.
     emb = torch.randn(1, 1, 6, 4, dtype=torch.float64)
@@ -208,7 +253,7 @@ def main():
     changed_emb[:, :, 3:] += torch.tensor([10., -7., 3., 5.])
     close(mtp_fixture(emb, True)[:, :, :2], mtp_fixture(changed_emb, True)[:, :, :2], atol=1e-12)
     assert not torch.allclose(mtp_fixture(emb, False)[:, :, :2], mtp_fixture(changed_emb, False)[:, :, :2])
-    print("PASS: MTP valid-pair counts, 2 vs 16/9 weighting; shifted-input causal boundary")
+    print("PASS: MTP alignment, per-head and report denominators, shifted-input causal boundary")
 
     hashes = {
         "ppl-full.gif": "8e4421a0b180d9a5b5d8edee4705da19775ce52f80d297623cbbd29bdc406c9d",
@@ -223,6 +268,8 @@ def main():
     assert "license: cc-by-nc-sa-4.0" in (archive / "hf-images-README.md").read_text()
     assert (ROOT / "site/public/licenses/transformers-e7b03417-Apache-2.0.txt").read_bytes() == (archive / "transformers-LICENSE.txt").read_bytes()
     print("PASS: unchanged original GIF bytes, dataset license and complete Apache text license")
+    packing_figure = ROOT / "00 Учебник/Assets/Figures/curated/ntp-boundaries-2026-11-14/barbero-figure8-data-packing.png"
+    assert hashlib.sha256(packing_figure.read_bytes()).hexdigest() == "f513d40145efbd10156eae38094ba7100fb140eca064478d0250b18910430978"
 
     # Very small bigram model; verifies the chapter loss in an optimizer loop.
     table = torch.nn.Embedding(4, 4)

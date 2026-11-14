@@ -4,10 +4,10 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "26464f4cb33c2b281c72e63e1870157e0a41a23807c4eca7c2b79f542000608d"
-translation_reviewed: "2026-10-29"
+canonical_revision: "8d013d93864cb436131ce75d9a24fee009c80b946e9985470863aad4667edcac"
+translation_reviewed: "2026-11-09"
 translation_of: "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md"
-last_updated: 2026-10-29
+last_updated: 2026-11-09
 last_verified: 2026-09-15
 primary_sources:
   - https://arxiv.org/abs/2010.11929
@@ -15,6 +15,8 @@ primary_sources:
   - https://arxiv.org/abs/2303.15343
   - https://cs336.stanford.edu/
   - https://cs231n.stanford.edu/slides/2025/lecture_16.pdf
+  - https://arxiv.org/abs/1912.06430
+  - https://arxiv.org/html/2004.11362v5#S3.SS2.SSS2
 ---
 
 # From images to visual tokens: ViT and CLIP
@@ -30,6 +32,7 @@ Turning an image into “tokens” can mean two different things. For visual que
 This module first follows the perception path—vision encoder, semantic training, connector, and text generation. Image output is developed separately in [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|diffusion and flow models]] and [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|discrete image codes and Chameleon]]. Those pages may currently use the explicitly labeled Russian fallback. A shared embedding space alone does not supply either generator.
 
 <span id="1-изображение-как-тензор"></span>
+<a id="vlm-patch-projection"></a>
 
 ## Images as sequences of patches
 
@@ -194,9 +197,14 @@ $$
 
 and applies symmetric cross-entropy over image-to-text and text-to-image directions. Correct pairs lie on the diagonal; all other pairs in the batch act as negatives.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/clip-figure1-training-and-zero-shot.png]]
+![[00 Учебник/Assets/Figures/curated/vision-objectives-2026-11-09/clip-figure1-training-and-zero-shot.png|CLIP trains on a matrix of image-caption similarities. At inference a new image is scored against text-derived class vectors.]]
 
-*Figure 1 from Radford et al., [Learning Transferable Visual Models From Natural Language Supervision](https://arxiv.org/abs/2103.00020), PDF p. 2. The left half shows contrastive batch training; the right half shows text-derived zero-shot classifier weights.*
+*Alec Radford et al., [CLIP, PMLR 139](https://proceedings.mlr.press/v139/radford21a.html),
+[Figure 1, p. 2](https://proceedings.mlr.press/v139/radford21a/radford21a.pdf#page=2),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+The left panel compares every image-caption pair in the training batch.
+On the right, the text encoder builds class vectors. A new image needs
+one row of comparisons against those vectors.*
 
 After training, prompts such as `a photo of a dog` are encoded into class vectors. A new image is assigned to the nearest class vector without fitting a classifier on the target dataset. Prompt wording matters because bare labels can be ambiguous and differ from natural captions. CLIP therefore ensembles several prompt templates.
 
@@ -220,6 +228,8 @@ This causal text encoder learns the contrastive task, not next-token loss.
 The functions `encode_image` and `encode_text` return features that
 [`forward` subsequently normalizes](https://github.com/openai/CLIP/blob/d05afc436d78f1c48dc0dbf8e5980a9d471f35f6/clip/model.py#L340);
 callers using those functions independently must normalize explicitly.
+
+<a id="vlm-clip-objective"></a>
 
 ### Two directions of the same loss
 
@@ -289,9 +299,61 @@ reach zero. Larger batches supply both difficult alternatives and false
 negatives. Adding a common constant to logits changes neither softmax nor
 loss; changing an individual competitor affects both directions.
 
-An image may also have several correct captions describing different
-details. Caption generation predicts one particular word sequence, whereas
-contrastive training distinguishes the observed caption from batch rivals.
+<a id="vlm-multi-positive"></a>
+
+### When two captions are valid
+
+Two captions describe the same photo: “a dog in the snow” and “a dog
+running down a snowy trail.” A third caption, “a person on a bicycle,”
+does not fit. Suppose the row softmax is $(0.8,0.1,0.1)$. If the
+training label marks only the first caption as positive, the gradient
+with respect to the second logit is $0.1-0=0.1$. A gradient step on that
+logit alone lowers the score of a valid caption.
+
+Let $P=\{1,2\}$ be the valid caption indices and let $p_j$ be the
+softmax probability of caption $j$ over the full row. Two objectives
+use the same positive set:
+
+$$
+\begin{aligned}
+\ell_{\mathrm{any}}&=-\log\!\left(\sum_{j\in P}p_j\right),\\
+\ell_{\mathrm{each}}&=-\frac{1}{|P|}\sum_{j\in P}\log p_j.
+\end{aligned}
+$$
+
+The first increases the total probability assigned to valid captions.
+Here its loss is $-\log(0.9)\approx0.1054$. The second averages the
+loss for each valid caption: $-\tfrac12(\log 0.8+\log 0.1)\approx1.2629$.
+Each caption has target weight $1/2$, so the high probability of the first
+does not make up for a very low probability on the second.
+
+| Objective | Loss | Gradient |
+| --- | ---: | ---: |
+| First caption only | 0.2231 | $+0.1000$ |
+| Either valid caption | 0.1054 | $-0.0111$ |
+| Each valid caption | 1.2629 | $-0.4000$ |
+
+For the pooled objective, the second gradient is
+$p_2-p_2/(p_1+p_2)=0.1-0.1/0.9$: the second caption has little
+weight within the positive set. For the per-caption objective, it is
+$p_2-1/2$. These are contributions from one row, not predictions of
+the full update of the shared encoder weights. The loss values score
+different targets and cannot rank models across these objectives.
+
+[MIL-NCE, equation (1) and §3.2](https://openaccess.thecvf.com/content_CVPR_2020/papers/Miech_End-to-End_Learning_of_Visual_Representations_From_Uncurated_Instructional_Videos_CVPR_2020_paper.pdf)
+pools nearby narration candidates for a video clip; some of them need
+not describe that clip. The per-caption average has the form of one row
+of [SupCon, §3.2.2](https://arxiv.org/html/2004.11362v5#S3.SS2.SSS2),
+where same-class membership is known. Using either with CLIP-style scores
+requires a positive-pair policy. A symmetric objective needs those
+positive sets for columns as well as rows.
+
+### Contrastive training and caption generation
+
+When training a caption generator on “a dog in the snow,” the model
+predicts the next caption token after “a dog in the.” The contrastive
+model receives the complete image and caption, then scores the pair.
+It does not predict a vocabulary distribution at each caption position.
 
 ![[00 Учебник/Assets/Figures/curated/vision-encoders-review-2026-10/clip-objectives.png]]
 
@@ -450,9 +512,17 @@ would shrink every gradient by $B$, requiring a corresponding optimization
 choice. Comparing the raw CLIP and SigLIP loss values is not a comparison
 of model quality.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/siglip-parallelism.png]]
+<a id="vlm-siglip-blocks"></a>
 
-*Stanford CS336, Lecture 17, illustration of distributed pair blocks based on Zhai et al., [Sigmoid Loss for Language Image Pre-Training](https://arxiv.org/abs/2303.15343). Follow one local block; independent pair losses simplify accumulation, not eliminate all communication.*
+![[00 Учебник/Assets/Figures/curated/vision-objectives-2026-11-09/siglip-parallelism.png|Four panels show local features, local 4-by-4 blocks, exchange of text features and the final cross-device sum.]]
+
+*Xiaohua Zhai et al., [SigLIP v4](https://arxiv.org/abs/2303.15343v4),
+[Figure 1, p. 3](https://arxiv.org/pdf/2303.15343v4#page=3),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+The four panels and their original explanations are preserved.
+Device 1 keeps images $I_{1:4}$ and receives two blocks of remote text
+features. After three computations its four images have been compared
+with all 12 texts.*
 
 This changes the optimization and communication problem, not the meaning of a visual token. Compare losses with the encoder, data, hardware, and training budget controlled; training-day figures on different accelerators are not an isolated speedup.
 
@@ -475,6 +545,11 @@ loss variant here. Batch size still changes negative comparisons and the
 number of updates for a fixed example budget. SigLIP also retains false
 negatives when interchangeable captions receive opposing labels.*
 
+For a pair at logit $z=0$, the derivative of its binary loss is
+$+0.5$ with a negative label and $-0.5$ with a positive label, before
+division by $B$. Pairwise sigmoid removes the shared denominator;
+it does not correct a wrong target.
+
 ## Dual encoders and generative VLMs are different systems
 
 Dual encoders produce a shared representation and excel at search, ranking, and zero-shot classification. A generative VLM conditions an autoregressive decoder on visual information. It needs an interface between the vision encoder and the LLM: a projector, Q-Former, Perceiver Resampler, or cross-attention.
@@ -490,6 +565,8 @@ The distinction prevents misleading comparisons. Better contrastive retrieval ma
 ## Diagnostic tests
 
 Evaluation should alter the evidence. Occluding the answer region should change the prediction. Swapping object relations should change compositional answers. Reducing font size should produce a measurable degradation curve. For CLIP-like models, retrieval, zero-shot classification, linear probing, and distribution-shift robustness answer different questions and should be reported separately.
+
+<a id="vlm-winoground"></a>
 
 ### Winoground checks both matching directions
 

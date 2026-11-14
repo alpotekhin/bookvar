@@ -16,7 +16,7 @@ const assets = JSON.parse(read('00 Учебник/Assets/Figures/curated/retenti
 describe('retention mechanisms inside the existing fine-tuning chapter', () => {
   it('publishes native-English reasoning, four CPU cases and both locale topic links', () => {
     expect(body).toContain('source_language: en');
-    expect(body.match(/^`{3}python$/gm)).toHaveLength(18);
+    expect(body.match(/^`{3}python$/gm)).toHaveLength(19);
     for (const anchor of ['retaining-capabilities', 'fine-tuning-replay', 'l2-sp',
       'elastic-weight-consolidation', 'fisher-for-ewc']) {
       expect(body).toContain('id="' + anchor + '"');

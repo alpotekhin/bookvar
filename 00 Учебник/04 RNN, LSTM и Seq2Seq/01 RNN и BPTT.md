@@ -2,10 +2,81 @@
 title: RNN и обратное распространение во времени
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-26
+last_updated: 2026-11-03
+source_language: mixed
+reference_terms:
+  - label: "Рекуррентное состояние вместо окна"
+    label_en: "Recurrent state instead of a context window"
+    anchor: rnn-state
+  - label: "Tanh-ячейка и объединение входов"
+    label_en: "Tanh cell and concatenated inputs"
+    anchor: rnn-cell
+  - label: "Состояние, выходная проекция и число параметров"
+    label_en: "Hidden state, output projection and parameter counts"
+    anchor: rnn-lm-head
+  - label: "Три шага скалярной RNN"
+    label_en: "Three scalar recurrent steps"
+    anchor: rnn-scalar-forward
+  - label: "Сдвиг целей и teacher forcing"
+    label_en: "Target shift and teacher forcing"
+    anchor: rnn-teacher-forcing
+  - label: "Полное обучение RNNLM"
+    label_en: "Complete small RNNLM training"
+    anchor: rnn-small-lm
+  - label: "Формы output и h_n в torch.nn.RNN"
+    label_en: "Output and h_n shapes in torch.nn.RNN"
+    anchor: rnn-library-contract
+  - label: "Два смещения и эквивалентность обновлений"
+    label_en: "Two biases and optimizer equivalence"
+    anchor: rnn-two-biases
+  - label: "Общие веса в развёрнутом графе"
+    label_en: "Shared weights in an unrolled graph"
+    anchor: rnn-bptt
+  - label: "Ручной обратный проход и сумма вкладов"
+    label_en: "Manual backward pass and summed contributions"
+    anchor: rnn-manual-backward
+  - label: "Матричный BPTT с CE на каждом шаге"
+    label_en: "Matrix BPTT with cross-entropy at every step"
+    anchor: rnn-ce-backward
+  - label: "Порядок якобианов, затухание и рост"
+    label_en: "Ordered Jacobians, vanishing and exploding gradients"
+    anchor: rnn-jacobians
+  - label: "Отсоединение истории и сброс состояния"
+    label_en: "Detaching history versus resetting state"
+    anchor: rnn-detach
+  - label: "Длина фрагмента и граница градиента"
+    label_en: "Chunk length and gradient horizon"
+    anchor: rnn-truncation-horizon
+  - label: "Общая норма градиента и clipping"
+    label_en: "Global gradient norm and clipping"
+    anchor: rnn-clipping
+  - label: "Параллельные входные проекции"
+    label_en: "Parallel input projections"
+    anchor: rnn-input-projections
+  - label: "Буфер проекций и усечение BPTT"
+    label_en: "Projection buffers versus BPTT truncation"
+    anchor: rnn-projection-chunks
+  - label: "Зависимости по слоям и времени"
+    label_en: "Layer/time dependency grid"
+    anchor: rnn-layer-grid
+  - label: "Матричное суммирование градиентов весов"
+    label_en: "Matrix reduction of weight gradients"
+    anchor: rnn-weight-reduction
+  - label: "Память потока и обновления на PAD"
+    label_en: "Streaming state memory and PAD updates"
+    anchor: rnn-streaming-padding
+  - label: "PackedSequence и реальные длины текстов"
+    label_en: "PackedSequence and true sequence lengths"
+    anchor: rnn-packed-sequences
+  - label: "Ограничения памяти, градиента и параллелизма"
+    label_en: "Limits of state capacity, gradients and parallelism"
+    anchor: rnn-limitations
 previous: "[[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram]]"
 next: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU]]"
 primary_sources:
+  - https://docs.pytorch.org/docs/2.14/generated/torch.nn.RNN.html
+  - https://docs.pytorch.org/docs/2.14/generated/torch.nn.utils.rnn.pack_padded_sequence.html
+  - https://docs.pytorch.org/docs/2.14/generated/torch.nn.utils.rnn.pad_packed_sequence.html
   - https://doi.org/10.1016/0364-0213(90)90002-E
   - https://doi.org/10.1038/323533a0
   - https://d2l.ai/chapter_recurrent-neural-networks/rnn.html
@@ -22,10 +93,13 @@ primary_sources:
 
 Рекуррентная нейронная сеть, RNN, читает по одному токену и после каждого шага
 обновляет вектор состояния. При предсказании следующего слова она использует
-этот вектор как представление уже прочитанного текста. Размер вектора не
-меняется с длиной текста, поэтому число параметров тоже остаётся прежним.
+этот вектор как представление уже прочитанного текста. Во всех позициях
+работает одна и та же ячейка с общими весами. Размер состояния и число
+параметров не зависят от длины текста.
 Сохранится ли в состоянии нужная деталь из начала предложения, зависит от
 параметров и обучения.
+
+<a id="rnn-state"></a>
 
 ## Состояние вместо окна
 
@@ -36,7 +110,7 @@ primary_sources:
 заранее назначенной координаты «род подлежащего»: представление формируется
 при обучении на задаче предсказания.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/unfolded-rnn.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/unfolded-rnn.svg|Рекуррентная связь и развёртка RNN с общими весами по времени]]
 
 *Слева рекуррентная связь показана петлёй, справа тот же расчёт развёрнут
 по времени. Hidden layers 1, 2 и T обозначают скрытые состояния на разных
@@ -49,6 +123,8 @@ CC BY-SA 4.0. Оригинальный SVG, без перерисовки.*
 через него самого. На шаге $t$ состояние $h_{t-1}$ уже известно. Из него и
 текущего входа вычисляется новое $h_t$. Для конечной последовательности
 получается обычный ациклический вычислительный граф.
+
+<a id="rnn-cell"></a>
 
 ### Одна рекуррентная ячейка
 
@@ -84,7 +160,7 @@ $$
 $m$ строк и $d+m$ столбцов. Это равенство объясняет обозначение
 Concatenate на следующей схеме D2L.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rnn-bptt-2026-10-21/d2l-rnn.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rnn-bptt-2026-10-21/d2l-rnn.svg|Объединение текущего входа с предыдущим состоянием в ячейке RNN]]
 
 *На каждом шаге вход $X_t$ объединяется с предыдущим состоянием и проходит
 через полносвязный слой с активацией $\phi$. Полученное $H_t$ используется
@@ -94,6 +170,8 @@ Concatenate на следующей схеме D2L.
 один объект. Источник: Zhang et al.,
 [D2L, §9.4.2](https://d2l.ai/chapter_recurrent-neural-networks/rnn.html),
 CC BY-SA 4.0. Оригинальный SVG.*
+
+<a id="rnn-lm-head"></a>
 
 ### Выход языковой модели
 
@@ -142,6 +220,8 @@ $24+9+9+3+24+8=77$ параметров, со связыванием $77-24=53$.
 Прямой расчёт логитов сохранил бы форму $V$, но входные и выходные
 представления слов больше нельзя было бы обучать независимо.
 
+<a id="rnn-scalar-forward"></a>
+
 ## Численный проход
 
 Возьмём одномерную RNN без смещения и выходного классификатора:
@@ -169,6 +249,8 @@ $\tanh(0.5)\approx0.462117$ вместо $0.654413$. Прежняя истори
 первого входа здесь нет. Если повторять нулевые входы с этим весом,
 состояние будет приближаться к нулю.
 
+<a id="rnn-teacher-forcing"></a>
+
 ### Предсказание следующего токена
 
 В языковой модели к рекуррентной ячейке добавляется выходной классификатор.
@@ -184,7 +266,7 @@ $\tanh(0.5)\approx0.462117$ вместо $0.654413$. Прежняя истори
 зависит от `<BOS>`, «кот», «кот». Цель на один токен опережает вход:
 текущий токен не должен одновременно быть ответом для своего же выхода.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rnn-bptt-2026-10-21/d2l-rnn-train.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rnn-bptt-2026-10-21/d2l-rnn-train.svg|Символьные входы machin и сдвинутые цели achine]]
 
 *Символьная языковая модель D2L: вход machin, цель achine. Например,
 на третьем шаге прочитано mac и предсказывается h. Вход следующего
@@ -207,6 +289,8 @@ CC BY-SA 4.0. Оригинальный SVG.*
 дальнейшее состояние и последующие предсказания.
 Постановка с этим сдвигом разобрана также в
 [SLP3, §14.2.1–14.2.2](https://web.stanford.edu/~jurafsky/slp3/14.pdf).
+
+<a id="rnn-small-lm"></a>
 
 ### Полная маленькая модель
 
@@ -331,6 +415,106 @@ $$
 о предшествующем «кот». Из такого опыта нельзя заключить, что та же
 ячейка сохранит произвольный факт через сотню слов.
 
+<a id="rnn-library-contract"></a>
+
+### Matching the cell to `torch.nn.RNN`
+
+`torch.nn.RNN` implements the recurrent feature extractor. It does not
+include the embedding table or the vocabulary classifier of `RNNLM`.
+For one unidirectional layer with `batch_first=True`, the shapes are
+
+| Object | Shape | Meaning |
+|---|---|---|
+| Input | `[B,T,d]` | Feature vectors, not token IDs |
+| `output` | `[B,T,m]` | Hidden state at every position |
+| `h_0`, `h_n` | `[1,B,m]` | Initial and final state of the layer |
+
+`batch_first` changes the input/output layout, not the hidden-state
+layout. With several layers, the leading state axis enumerates layers;
+`output` contains the top layer’s sequence. These contracts and the
+equivalent recurrence are specified in
+[PyTorch 2.14, RNN](https://docs.pytorch.org/docs/2.14/generated/torch.nn.RNN.html).
+
+<a id="rnn-two-biases"></a>
+
+### Two biases represent one effective offset
+
+The library cell has input and recurrent biases, `bias_ih_l0` and
+`bias_hh_l0`. Both are added before the same tanh. To match our cell,
+copy its $b_h$ to the first and set the second to zero. The forward pass
+then depends on their sum, $b_{\mathrm{eff}}=b_{ih}+b_{hh}$.
+
+The following complete example uses the same $d=3$, $m=4$ dimensions.
+It compares every state and the input/initial-state gradients, then
+checks the two bias derivatives. The input vectors are assigned random
+features here; no embedding lookup or language-model loss is implied.
+
+```python
+import torch
+
+torch.manual_seed(31)
+dtype = torch.float64
+B, T, d, m = 2, 4, 3, 4
+features = torch.randn(B, T, d, dtype=dtype, requires_grad=True)
+initial_state = torch.randn(1, B, m, dtype=dtype, requires_grad=True)
+input_weight = (.1 * torch.randn(m, d, dtype=dtype)).requires_grad_()
+state_weight = (.1 * torch.randn(m, m, dtype=dtype)).requires_grad_()
+single_bias = torch.randn(m, dtype=dtype, requires_grad=True)
+
+cell = torch.nn.RNN(d, m, batch_first=True, dtype=dtype)
+with torch.no_grad():
+    cell.weight_ih_l0.copy_(input_weight)
+    cell.weight_hh_l0.copy_(state_weight)
+    cell.bias_ih_l0.copy_(single_bias)
+    cell.bias_hh_l0.zero_()
+
+state = initial_state[0]
+history = []
+for t in range(T):
+    state = torch.tanh(features[:, t] @ input_weight.T
+                       + state @ state_weight.T + single_bias)
+    history.append(state)
+manual_states = torch.stack(history, dim=1)
+library_states, library_final = cell(features, initial_state)
+torch.testing.assert_close(library_states, manual_states)
+torch.testing.assert_close(library_final, manual_states[:, -1][None])
+assert library_states.shape == (B, T, m)
+assert library_final.shape == (1, B, m)
+
+manual_gradients = torch.autograd.grad(manual_states.square().sum(),
+    (features, initial_state, input_weight, state_weight, single_bias))
+library_gradients = torch.autograd.grad(library_states.square().sum(),
+    (features, initial_state, cell.weight_ih_l0, cell.weight_hh_l0,
+     cell.bias_ih_l0, cell.bias_hh_l0))
+for got, expected in zip(library_gradients[:4], manual_gradients[:4]):
+    torch.testing.assert_close(got, expected)
+for got in library_gradients[4:]:
+    torch.testing.assert_close(got, manual_gradients[4])
+
+g = manual_gradients[4]
+rate = .01
+effective_after_two_biases = (cell.bias_ih_l0.detach() + cell.bias_hh_l0.detach()
+    - rate * (library_gradients[4] + library_gradients[5]))
+torch.testing.assert_close(effective_after_two_biases,
+                           single_bias.detach() - 2 * rate * g)
+assert not torch.allclose(effective_after_two_biases, single_bias.detach() - rate * g)
+```
+
+If $g=\partial L/\partial b_{\mathrm{eff}}$, then each bias receives
+the same $g$. For plain SGD with rate $\eta$, updating both changes
+their sum by $-2\eta g$. Updating one bias changes it by $-\eta g$.
+Equal forward values therefore do not imply identical optimizer steps.
+This calculation has no clipping, momentum or weight decay.
+
+Our recurrent core has $md+m^2+m=32$ parameters. The library core has
+$md+m^2+2m=36$. Keeping the same embedding and output classifier would
+give 100 parameters instead of 96. To preserve the single-bias
+parameterization when using this module, the extra bias can be held at
+zero rather than trained. Time sharing of a weight and splitting a bias
+into two trainable parameters are separate choices.
+
+<a id="rnn-bptt"></a>
+
 ## BPTT: backpropagation по развёрнутой сети
 
 Для обучения нужно вычислить производную потери по общим весам.
@@ -339,7 +523,7 @@ $$
 Поэтому при обратном проходе в $h_t$ складываются производные
 от обеих ветвей.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/rnn-bptt.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/rnn-bptt.svg|Зависимости трёх шагов RNN от общих параметров и входов]]
 
 *Вычислительный граф D2L для трёх шагов. Снизу вверх идут состояния
 $h_1,h_2,h_3$, справа от них выходы и общая потеря $L$.
@@ -362,6 +546,8 @@ CC BY-SA 4.0. Оригинальный SVG.*
 backpropagation through time, BPTT.
 Развёртка и общий параметр разобраны в
 [SLP3, §14.1.2](https://web.stanford.edu/~jurafsky/slp3/14.pdf).
+
+<a id="rnn-manual-backward"></a>
 
 ### Обратный проход на тех же трёх шагах
 
@@ -450,6 +636,8 @@ assert after < before
 print("loss after SGD:", before, "->", after)
 ```
 
+<a id="rnn-ce-backward"></a>
+
 ### Общая формула для языковой модели
 
 Введём $e_t=p_t-\operatorname{onehot}(y_t)$, производную суммы
@@ -502,6 +690,8 @@ $$
 Так градиент проходит от ошибки следующего слова через состояние
 к embeddings всех повлиявших позиций. Обычный autograd выполняет
 эту же процедуру по развёрнутому графу.
+
+<a id="rnn-jacobians"></a>
 
 ### Почему далёкие зависимости трудно обучать
 
@@ -586,6 +776,8 @@ $BTm$ чисел; дополнительно нужны активации вы�
 для обратных операций. В длинном непрерывном потоке хранить весь
 граф с начала потока обычно непрактично.
 
+<a id="rnn-detach"></a>
+
 ### Передать состояние, отсоединить историю
 
 При усечённом BPTT, truncated BPTT, поток делят на фрагменты.
@@ -649,6 +841,8 @@ print("reset:", reset)
 Нельзя после перемешивания строк без согласования переносить
 на них состояния старого пакета.
 
+<a id="rnn-truncation-horizon"></a>
+
 ### Длина фрагмента и длина зависимости
 
 В неперекрывающихся фрагментах длины $K$ потеря в конце фрагмента
@@ -662,7 +856,7 @@ print("reset:", reset)
 обновления, а не вводит жёсткое окно из $K$ токенов в прямом проходе.
 Уменьшение $K$ экономит память, но меняет градиент обучения.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rnn-bptt-2026-10-21/d2l-truncated-bptt.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rnn-bptt-2026-10-21/d2l-truncated-bptt.svg|Случайное, фиксированное и полное обратное распространение во времени]]
 
 *Три стратегии D2L на тексте The Time Machine: сверху случайные длины
 усечения, посередине фиксированные фрагменты, снизу полный расчёт.
@@ -681,6 +875,8 @@ $1/2$ умножить на 2. Его ожидание сохранится. Д�
 разброс оценки. Простое случайное разбиение без этих поправок
 несмещённого градиента не даёт. Это отдельная стратегия, не действие
 обычного `detach()` на фиксированных границах.
+
+<a id="rnn-clipping"></a>
 
 ### Ограничение нормы градиента
 
@@ -762,6 +958,8 @@ Clipping уменьшает большой градиент, но не восс�
 норма также считается по всем параметрам вместе.
 
 <!-- rnn-execution 2026-10-26 -->
+<a id="rnn-input-projections"></a>
+
 ## Parallel work inside a recurrent network
 
 For the scalar example above, the three input contributions are already
@@ -791,6 +989,8 @@ The same $X_t$ still reaches the same state and loss. Preparing a
 projection for a later position does not feed it into an earlier state,
 so this rearrangement preserves causality. It does not make the nonlinear
 state transitions independent.
+
+<a id="rnn-projection-chunks"></a>
 
 ### Full sequence, chunks and a live stream
 
@@ -873,6 +1073,8 @@ also separates the recurrent and layer-to-layer products. Its performance
 examples use A100, CUDA 11.2 and cuDNN 8.1; their timings and selection
 thresholds are not measurements of this example or promises for another GPU.
 
+<a id="rnn-layer-grid"></a>
+
 ### Several layers form a dependency grid
 
 An RNN can be deep along both time and layers. D2L describes the
@@ -888,7 +1090,7 @@ layer-to-layer construction as follows:
 [Dive into Deep Learning, §10.3: Deep Recurrent Neural Networks](https://d2l.ai/chapter_recurrent-modern/deep-rnn.html).
 Original English excerpt, unchanged apart from line wrapping; CC BY-SA 4.0.*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rnn-execution-2026-10-26/d2l-deep-rnn.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rnn-execution-2026-10-26/d2l-deep-rnn.svg|Сетка зависимостей многослойной RNN по слоям и времени]]
 
 *The complete original D2L figure, CC BY-SA 4.0. Horizontal arrows carry
 the previous state within one layer; vertical arrows carry the current
@@ -941,6 +1143,8 @@ receives its input sequence as the layer below produces states. It can
 project an available prefix or chunk; it cannot project lower-layer
 states that have not been computed yet.
 
+<a id="rnn-weight-reduction"></a>
+
 ### Weight gradients can be reduced across time
 
 The BPTT recurrence above computes $\delta_t=dL/da_t$ in reverse time.
@@ -971,6 +1175,8 @@ dependency. How much they reduce it has to be measured for the actual
 model, batch and hardware.
 
 <!-- /rnn-execution -->
+
+<a id="rnn-streaming-padding"></a>
 
 ## Что RNN умеет и где ломается
 
@@ -1006,6 +1212,82 @@ model, batch and hardware.
 Для независимых текстов требуется также отдельный $h_0$;
 маска потерь его не заменяет.
 
+<a id="rnn-packed-sequences"></a>
+
+### Variable-length batches without PAD state updates
+
+Consider three independent sequences of lengths 2, 4 and 1.
+Call their input vectors $A_0,A_1$, $B_0,\ldots,B_3$ and $C_0$.
+For packing, descending length order is B, A, C. The active rows are
+
+| Time | Active rows | Packed input vectors |
+|---:|---|---|
+| 0 | B, A, C | $B_0,A_0,C_0$ |
+| 1 | B, A | $B_1,A_1$ |
+| 2 | B | $B_2$ |
+| 3 | B | $B_3$ |
+
+The packed data contain seven vectors instead of twelve padded slots.
+`batch_sizes` is `[3,2,1,1]`: the number of active sequences at each step.
+This is a time-grouped layout, not three complete sequences concatenated
+one after another. A row that has ended does not receive another RNN update.
+
+[`pack_padded_sequence`](https://docs.pytorch.org/docs/2.14/generated/torch.nn.utils.rnn.pack_padded_sequence.html)
+accepts unsorted input with `enforce_sorted=False`. Tensor lengths must
+be on the CPU. They select valid prefixes: this interface is not a mask
+for left padding or holes inside a sequence. In the example below, all
+lengths are positive and no greater than the padded width.
+
+```python
+import torch
+from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
+
+torch.manual_seed(11)
+dtype = torch.float64
+lengths = torch.tensor([2, 4, 1], dtype=torch.int64)  # CPU, original row order
+valid = torch.arange(4)[None, :] < lengths[:, None]
+inputs = torch.randn(3, 4, 3, dtype=dtype)
+inputs[~valid] = 0.  # Even zero PAD features do not freeze a dense RNN.
+network = torch.nn.RNN(3, 4, batch_first=True, dtype=dtype)
+
+packed = pack_padded_sequence(inputs, lengths, batch_first=True, enforce_sorted=False)
+assert packed.batch_sizes.tolist() == [3, 2, 1, 1]
+assert packed.data.shape == (7, 3)
+packed_output, packed_final = network(packed)
+output, restored_lengths = pad_packed_sequence(
+    packed_output, batch_first=True, total_length=4)
+torch.testing.assert_close(restored_lengths, lengths)
+assert output.shape == (3, 4, 4) and packed_final.shape == (1, 3, 4)
+assert output[~valid].count_nonzero() == 0
+
+dense_output, dense_final = network(inputs)
+for row, length in enumerate(lengths.tolist()):
+    short_output, short_final = network(inputs[row:row+1, :length])
+    torch.testing.assert_close(output[row, :length], short_output[0])
+    torch.testing.assert_close(packed_final[:, row:row+1], short_final)
+    torch.testing.assert_close(dense_output[row, length-1], short_final[0, 0])
+    if length < inputs.shape[1]:
+        assert not torch.allclose(dense_final[:, row], packed_final[:, row])
+```
+
+The packed final state matches running each short sequence separately,
+in the original A, B, C row order. In the dense run, selecting
+`dense_output[row, length-1]` also recovers that state for this
+unidirectional network. Taking `dense_final` instead includes the extra
+PAD-time transitions for the short rows.
+
+[`pad_packed_sequence`](https://docs.pytorch.org/docs/2.14/generated/torch.nn.utils.rnn.pad_packed_sequence.html)
+restores the original row order; `total_length=4` fixes the unpacked
+width. The zeros it inserts into `output` are padding values, not
+computed states after fictitious tokens. When computing a loss on this
+unpacked tensor, the valid-position mask is still required. Packing
+does not reset states between documents and does not detach the
+computational graph at a chunk boundary.
+
+<a id="rnn-limitations"></a>
+
+### Ограничения рекуррентной модели
+
 Остаются три разных ограничения. Вектор конечного размера может
 потерять нужную информацию о префиксе. Длинная цепочка производных
 может мешать обучению даже тогда, когда представление такой зависимости
@@ -1022,6 +1304,11 @@ model, batch and hardware.
 
 ## Источники и дальнейшее чтение
 
+- [PyTorch 2.14, RNN](https://docs.pytorch.org/docs/2.14/generated/torch.nn.RNN.html),
+  [pack_padded_sequence](https://docs.pytorch.org/docs/2.14/generated/torch.nn.utils.rnn.pack_padded_sequence.html)
+  and [pad_packed_sequence](https://docs.pytorch.org/docs/2.14/generated/torch.nn.utils.rnn.pad_packed_sequence.html):
+  tensor layouts, two biases and variable-length batches. The small equivalence
+  and gradient checks here are independent CPU examples, not library benchmarks.
 - Zhang, Lipton, Li, Smola, [D2L, §9.4: Recurrent Neural Networks](https://d2l.ai/chapter_recurrent-neural-networks/rnn.html) — скрытое состояние, общие веса, объединение входов и символьная языковая модель. Три рисунка этого раздела перенесены в оригинале, CC BY-SA 4.0.
 - Те же авторы, [§9.5: RNN Implementation from Scratch](https://d2l.ai/chapter_recurrent-neural-networks/rnn-scratch.html) — формы тензоров, последовательный прямой проход, общая норма градиента.
 - Те же авторы, [§9.7: Backpropagation Through Time](https://d2l.ai/chapter_recurrent-neural-networks/bptt.html) — полный градиент, усечение и вычислительный граф. Оба рисунка перенесены в оригинале, CC BY-SA 4.0. В исходном подробном выводе ячейка линейная; в нашей обратной рекурсии сохранена производная $\tanh$.

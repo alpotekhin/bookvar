@@ -1,0 +1,103 @@
+{
+  "date": "2026-11-09",
+  "scope": "Continue the existing GPT-1 → GPT-2 → GPT-3 → LLaMA v1 reading route with a source-grounded Natural Questions comparison; keep T5 in the main curriculum and do not publish.",
+  "review": {
+    "sources": [
+      "Radford et al., GPT-2 §3.8: example QA pairs in the prefix and 4.1% exact match without retrieval; no separate shot-count rows reported.",
+      "Brown et al., GPT-3 §3.2 Table 3.3 and Appendix H: Natural Questions scores 14.6/23.0/29.9 and K=64; the wiki-split test result of 71.2 on TriviaQA is separately identified.",
+      "Touvron et al., LLaMA v1 §3.2 Table 4 and Appendix A Figure 3: 7B and 13B Natural Questions scores, 3610-question split, actual prompt and target, greedy decoding and exact-match normalization; distinct TriviaQA split."
+    ],
+    "explanation": "The known-answer pair is input, the Darwin target is external to the prompt, and extracting a short completion precedes exact match. Shot-count effects within a checkpoint do not isolate changes across checkpoints.",
+    "visual": "The complete Natural Questions panel of Figure 3 is cropped at 360 dpi from the already-pinned PDF. No redraw or translation. The article's CC BY 4.0 license and the complete figure are linked.",
+    "validation": "Fresh local build: 2023 pages, 738 publication checks and 231 rendered-output checks passed, no broken internal routes, fragments or files. Curated registry test passed; a fresh Poppler crop matched the bundled asset byte-for-byte. Six content files restore their exact prior SHA-256 values. Checked the extracted answer, the 15.3-point difference and the 13.5x parameter ratio independently.",
+    "reader": "Followed the four chapter links and the reference link from each locale in isolated Chrome at 375 and 1280 CSS px. One original figure checked per chapter, no page overflow or KaTeX errors; reviewed the new original at both widths and tested mobile zoom and horizontal panning.",
+    "locale": "Both contents and subject indices link to the comparison. The LLaMA English URL retains the explicitly labeled Russian fallback; the English GPT chapters already exist.",
+    "limits": "No model was rerun or benchmarked; no branch was pushed or deployed."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "before_sha256": "ebf6a9c00b3e3a41a0c718955c2967faf7a525a6ae4e453f7b67e78a9a20ee62",
+      "after_sha256": "636e5052ae0611a46a3dabe0bdd5b4033c7c587ff28f2817ed347cfa335a8fd3",
+      "lines": 1155,
+      "changes": [
+        {
+          "old": "previous: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/02 Современный decoder block]]\"\nprimary_sources:",
+          "new": "previous: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/02 Современный decoder block]]\"\nreference_terms:\n  - label: От GPT-1 к LLaMA — сравнение декодеров\n    label_en: GPT-1 to LLaMA — decoder comparison\n    anchor: gpt-llama-comparison\n  - label: Natural Questions — ответы без поиска от GPT-2 до LLaMA\n    label_en: Natural Questions — closed-book QA from GPT-2 to LLaMA\n    anchor: natural-questions-gpt-llama\nprimary_sources:"
+        },
+        {
+          "old": "по-прежнему выбирает тот, кто проводит оценку.\n\n<a id=\"gpt3-demo-order\"></a>",
+          "new": "по-прежнему выбирает тот, кто проводит оценку.\n\n<a id=\"natural-questions-gpt-llama\"></a>\n\n### Как менялась оценка на Natural Questions\n\nВ §3.8 статьи о GPT-2 авторы уже ставили перед вопросом несколько пар\n«вопрос — ответ», чтобы модель продолжила запрос коротким ответом.\nДокумент с нужным фактом ей не давали. В этом опыте крупнейшая GPT-2\nполучила 4,1% по exact match. Авторы не приводят отдельные оценки для\nнуля, одного и нескольких примеров, поэтому 4,1% нельзя записать в\nстолбец zero-shot в смысле статьи GPT-3.\n[Radford et al., §3.8](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=7).\n\nВ GPT-3 и LLaMA число демонстраций меняли явно. Ниже левый фрагмент\nFigure 3 из статьи LLaMA: инструкция и заполненная пара про Фрэнка\nСинатру идут в модель вместе с новым вопросом. После последнего\n`A:` запрос заканчивается. Строка `Target` отделена чертой: это\nэталон для проверки, а не часть запроса или ответ, сгенерированный моделью.\nВ zero-shot убрали бы заполненную пару, сохранив инструкцию и новый\nвопрос. При 64-shot перед новым вопросом было бы 64 заполненных пары.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/llama1-figure3-natural-questions.png|Оригинальный пример Natural Questions: пара с ответом Frank Sinatra входит в контекст, а Charles Darwin остаётся эталоном для нового вопроса]]\n\n*Hugo Touvron et al., [LLaMA v1, Figure 3, приложение A, с. 17](https://arxiv.org/pdf/2302.13971v1#page=17).\nЛевая панель (Natural Questions), без перерисовки.\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nПосле жадной генерации авторы LLaMA извлекали короткий ответ и\nсравнивали его с допустимыми строками после нормализации регистра,\nпунктуации, артиклей и пробелов. Например, если модель продолжит\n`A:` строкой `Charles Darwin, an English naturalist`, из неё\nвозьмут часть до запятой; после нормализации она совпадёт с эталоном\nна рисунке. Это пример работы проверки, а не результат запуска.\n\n| Базовая модель | 0 примеров | 1 пример | 64 примера |\n| --- | ---: | ---: | ---: |\n| GPT-3 175B | 14,6% | 23,0% | 29,9% |\n| LLaMA 7B | 16,8% | 18,7% | 26,1% |\n| LLaMA 13B | 20,1% | 23,4% | 31,9% |\n\nЦифры для Natural Questions приведены в [LLaMA, Table 4](https://arxiv.org/pdf/2302.13971v1#page=4);\nстрока GPT-3 взята авторами из [Brown et al., Table 3.3](https://arxiv.org/html/2005.14165v4#S3.SS2).\nУ GPT-3 между нулём и 64 примерами разница в 15,3 процентного пункта\nпри тех же весах. По опубликованным числам LLaMA 13B сравнима\nс GPT-3 175B на этой задаче, хотя параметров у неё примерно в 13,5 раза\nменьше. Это сопоставление результатов двух работ, а не прогон\nобеих моделей с одинаковыми запросами. Из него нельзя выделить\nвклад RoPE, числа токенов обучения или состава корпуса. Для TriviaQA,\nпоказанной справа в оригинале Figure 3, есть ещё одно различие:\nLLaMA оценивали на отфильтрованном dev-наборе, а 71,2% GPT-3 few-shot\nавторы отдельно подтвердили на тестовом сервере wiki split. Эти числа\nнельзя читать как прямое сравнение на одних вопросах.\n\n<a id=\"gpt3-demo-order\"></a>"
+        },
+        {
+          "old": "В GPT-3 и LLaMA число демонстраций меняли явно. Ниже левый фрагмент\nFigure 3 из статьи LLaMA: инструкция и заполненная пара про Фрэнка\nСинатру идут в модель вместе с новым вопросом. После последнего\n`A:` запрос заканчивается. Строка `Target` отделена чертой: это\nэталон для проверки, а не часть запроса или ответ, сгенерированный моделью.\nВ zero-shot убрали бы заполненную пару, сохранив инструкцию и новый\nвопрос. При 64-shot перед новым вопросом было бы 64 заполненных пары.",
+          "new": "В опытах с GPT-3 и LLaMA исследователи меняли число демонстраций.\nНа рисунке из статьи LLaMA показан запрос с одним примером. В модель\nподают инструкцию, вопрос про Фрэнка Синатру с готовым ответом и новый\nвопрос. Запрос заканчивается на последнем `A:`. Строка `Target` под\nчертой содержит эталон для проверки и в модель не поступает.\nВ zero-shot перед новым вопросом оставили бы только инструкцию.\nВ 64-shot между инструкцией и вопросом было бы 64 пары с ответами."
+        },
+        {
+          "old": "Цифры для Natural Questions приведены в [LLaMA, Table 4](https://arxiv.org/pdf/2302.13971v1#page=4);\nстрока GPT-3 взята авторами из [Brown et al., Table 3.3](https://arxiv.org/html/2005.14165v4#S3.SS2).",
+          "new": "LLaMA оценивали на тестовом наборе Natural Questions из 3610 вопросов\n([табл. 4](https://arxiv.org/pdf/2302.13971v1#page=4) и\n[приложение A](https://arxiv.org/html/2302.13971v1#A1)).\nСтроку GPT-3 авторы взяли из [Brown et al., табл. 3.3](https://arxiv.org/html/2005.14165v4#S3.SS2)."
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "cd19f3a82df94028ace379a9debec8d751324ba59f6dec15add21499405e4b74",
+      "after_sha256": "3a1c0d43cd2e4b4200e7c6b123c38fd197b9f6d85b776288bb9a0bcbef4ed3b7",
+      "lines": 344,
+      "changes": [
+        {
+          "old": "4. [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|LLaMA v1]]. Сравнение четырёх поколений: объём предобучения, RMSNorm, RoPE и SwiGLU. Сюда можно перейти сразу после GPT-3; T5 в основном курсе показывает отдельную ветвь с энкодером и декодером.",
+          "new": "4. [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|LLaMA v1]]. Сравнение четырёх декодеров и разбор экспериментов с ответами без поиска. Сюда можно перейти сразу после GPT-3; T5 в основном курсе показывает отдельную ветвь с энкодером и декодером."
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "31755e82917d8364fa0b16e19c11bc4972294019e1bbc45f86afb2c530fbe299",
+      "after_sha256": "bb6c113d7fd6720ee3a946dcc9e3ff5e8e7b3b8f440031ab9fa29fe22ee80e8b",
+      "lines": 347,
+      "changes": [
+        {
+          "old": "Original lectures, books, slides, and assignments are collected in the [[05 Источники/Курсы|course library]]. Chapters link to the specific materials used in their explanations.\n\n<a id=\"curriculum\"></a>",
+          "new": "Original lectures, books, slides, and assignments are collected in the [[05 Источники/Курсы|course library]]. Chapters link to the specific materials used in their explanations.\n\n## From GPT-1 to LLaMA\n\n1. [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]]. Pre-training on books, then fine-tuning the decoder and a task-specific classifier.\n2. [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]]. Layer normalization moves before each sublayer; a text prefix specifies the task.\n3. [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3]]. Full and local attention alternate; the experiments vary the number of demonstrations in the prompt.\n4. [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|LLaMA v1 (Russian)]]. A comparison of the four decoders, including how the papers evaluated closed-book question answering. This route goes directly from GPT-3 to LLaMA; T5 stays in the core course.\n\n<a id=\"curriculum\"></a>"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "8fecb09d12b00e724e631705ebb6344b6374c98b842aec432db454753dfb2fe9",
+      "after_sha256": "f91f16c894ac5970d8203673db4bd4323621499af7458209b66dd49ceb0506cb",
+      "lines": 1663,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|LLaMA как базовая архитектура]]",
+          "new": "- [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|LLaMA как базовая архитектура]]\n  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|От GPT-1 к LLaMA — сравнение декодеров]]\n  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#natural-questions-gpt-llama|Natural Questions — ответы без поиска от GPT-2 до LLaMA]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "29f4aadc904f8fabc0d4379ac3b6e4888739d2f43617c46ba8be920eff6f0973",
+      "after_sha256": "d8cf39ed15d50175d986c6d55ebe9556c46e34acacada4222feb9fddaa65abd4",
+      "lines": 1665,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|LLaMA as a baseline architecture]]",
+          "new": "- [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|LLaMA as a baseline architecture]]\n  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|GPT-1 to LLaMA — decoder comparison]]\n  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#natural-questions-gpt-llama|Natural Questions — closed-book QA from GPT-2 to LLaMA]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "f79527944667a621f7f2bd0c06ef740882a451f42db960dbef0eb103bd035ef4",
+      "after_sha256": "8605f39693fc62a364543ecf6d8e62cb1ff7c9a6414f05d654f02f076d32e4e1",
+      "lines": 23832,
+      "changes": [
+        {
+          "old": "  - id: \"curated-llama-downstream-9bef2893d15c\"",
+          "new": "  - id: \"curated-llama-natural-questions-d26da0e48179\"\n    asset: \"00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/llama1-figure3-natural-questions.png\"\n    title: \"LLaMA v1 Figure 3, Natural Questions (left panel)\"\n    author: \"Hugo Touvron et al.\"\n    source_url: \"https://arxiv.org/abs/2302.13971v1\"\n    source_image_url: \"https://arxiv.org/pdf/2302.13971v1#page=17\"\n    source_asset: \"05 Источники/Originals/full-transformer-2026-10-21/llama1-v1.pdf\"\n    source_asset_sha256: \"2e663675ae36ad12adb2f5a05281bac2747ecf8d23d92bedd9f937a89fee7136\"\n    source_page: 17\n    render_dpi: 360\n    render_page_size_px: [2977,4210]\n    crop_box_px: [333,1245,1483,1545]\n    dimensions_px: [1150,300]\n    sha256: \"d26da0e48179d3e7cbb65875baf5054f01e4437a21b900eb0733252e95b7325b\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/llama-2026-10-22/llama1-arxiv.html\"\n    license_evidence_sha256: \"cd6a7b5db31fe2fa71d278823c7dbfd69354e5a525aa7a2961b65b6957f09078\"\n    modifications: \"Cropped to the complete Natural Questions panel from the original PDF; the right-hand TriviaQA panel and typeset caption remain in the linked source. No redraw, rescaling or translated labels.\"\n    derivation: \"pdf-page-render-crop\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    metadata_status: \"verified\"\n    used_in: [\"00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\"]\n  - id: \"curated-llama-downstream-9bef2893d15c\""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-10",
+  "scope": "Link authored reader pages to the selected Markdown source on dev. The proof reverses the edit metadata delta without changing older reader-build acceptance.",
+  "files": [
+    {
+      "source": "publishing/adapter/build.ts",
+      "before_sha256": "6e99ccf5e4007b9fa0993872a8fe88a2c6817ba81628eeb9431252c9933a8c3c",
+      "after_sha256": "d19eb820a17382d227d9fac0f3066e3408c4b5b6c4e060a0d46fb8214572d5f1",
+      "lines": 945,
+      "changes": [
+        {
+          "old": "function canonicalEnglishRoute(route: string): boolean {\n  return route.startsWith('textbook/') || route === 'practice/inference-scheduler';\n}\n\nconst REFERENCE_SIDEBAR_GROUPS",
+          "new": "function canonicalEnglishRoute(route: string): boolean {\n  return route.startsWith('textbook/') || route === 'practice/inference-scheduler';\n}\n\nconst editSourceBase = 'https://github.com/alpotekhin/bookvar/edit/dev/';\n\nfunction editableReaderRoute(route: string): boolean {\n  return /^(textbook|reference|models|research|questions|practice)\\//.test(route)\n    && !route.includes('/legacy/');\n}\n\nconst REFERENCE_SIDEBAR_GROUPS"
+        },
+        {
+          "old": "      metadata.prev = false;\n      metadata.next = false;\n    }\n    if (locale === 'en' && canonicalEnglishRoute",
+          "new": "      metadata.prev = false;\n      metadata.next = false;\n    } else if (editableReaderRoute(entry.route) && !['redirect', 'legacy'].includes(page.status)) {\n      // Use the selected locale's source, never Starlight's generated file.\n      metadata.editUrl = editSourceBase + source.replaceAll('\\\\', '/').split('/').map(encodeURIComponent).join('/');\n    }\n    if (locale === 'en' && canonicalEnglishRoute"
+        }
+      ]
+    }
+  ]
+}

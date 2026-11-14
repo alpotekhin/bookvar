@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-14",
+  "scope": "Correct provenance metadata for already published source illustrations without modifying the chapter text or figure binaries.",
+  "review": {
+    "root_causes": "Canonical source-svg-copy was misnamed on two QLoRA and two Tülu figures; ACL citations did not dispatch to versioned arXiv figure validation for the Dolma and C4 SVGs. Sardana Figure 5 needs embedded-raster provenance, not lecture-page crop validation. The Google TPU snapshot lacked its second actual reader location.",
+    "evidence": "Compared six SVGs byte-for-byte against the versioned arXiv HTML assets, checked license and figure anchors in upstream HTML. Extracted Sardana Figure 5 from page 6, PDF object 32 via pdfimages and compared PNG bytes. The Google TPU animations retain their SHA, frame counts, and page-level license; both actual references exist.",
+    "visual": "On seven local routes, all ten affected embeds load at 375 and 1280 CSS px with alt text, retained aspect ratios and no page overflow. Dense plots still need the built-in viewer on narrow screens; verified horizontal panning in the three-panel Tülu plot at 2.5×.",
+    "verification": "Full asset suite: 207 passed. Publication suite (four workers): 804 passed and 13 skipped. Root build: 2099 pages; 350 built-output checks and 94 site unit tests passed. Zero broken internal links; both subject indexes current; 891541464 bytes below the size limit. Historical registry restoration is byte-identical.",
+    "remaining": "This verifies the affected figures and the current root artifact; it is not whole-book editorial completion or a deploy. No commits or remote writes."
+  },
+  "files": [
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "3964c2a5354268e80e5b11e76357187c458c1b4d2c7d12a611352015fe5fef8b",
+      "after_sha256": "eeb14c8f737cc93887dfe7ee8bb021a8f81e913a5a414f77985a20a91a8cacce",
+      "changes": [
+        {
+          "old": "    used_in:\n      - \"00 Учебник/07 Анатомия современной LLM/04 RoPE.md\"\n  - {\"id\":\"curated-scaling-sardana-figure5-2eeafe50cf15\",\"asset\":\"00 Учебник/Assets/Figures/curated/scaling-lifetime-2026-11-14/sardana24a-figure5.png\",\"author\":\"Nikhil Sardana, Jacob Portes, Sasha Doubov and Jonathan Frankle\",\"title\":\"Sardana et al., ICML Figure 5: extrapolation from short pretraining runs\",\"source_url\":\"https://proceedings.mlr.press/v235/sardana24a.html\",\"source_image_url\":\"https://raw.githubusercontent.com/mlresearch/v235/main/assets/sardana24a/sardana24a.pdf#page=6\",\"source_asset\":\"05 Источники/Originals/llama-scaling-2026-11-09/sardana24a.pdf\",\"source_asset_sha256\":\"cd66b62454f51dcee723ba98746f7ae37e5ff0c7dce2441b9fe3d6decd188952\",\"source_page\":6,\"source_object\":32,\"sha256\":\"2eeafe50cf15461f81656df20cfbe90302b4ec97bdb09f7a1b7834892038094c\",\"bytes\":296129,\"dimensions_px\":[1710,1314],\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence_url\":\"https://proceedings.mlr.press/pmlr-license-agreement.html\",\"derivation\":\"pdf-embedded-raster-extraction\",\"modifications\":\"Complete unresized RGB raster from PDF image object 32, extracted with pdfimages -f 6 -l 6 -png. Its soft mask is fully opaque; no redraw or cropping.\",\"metadata_status\":\"verified\",\"rights_status\":\"source-license-verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-14\",\"used_in\":[\"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\"]}\n  - id: \"curated-llama-inference-scaling-1110a08cd813\"\n    asset: \"00 Учебник/Assets/Figures/curated/llama-scaling-2026-11-09/sardana24a-figure1.png\"",
+          "new": "    used_in:\n      - \"00 Учебник/07 Анатомия современной LLM/04 RoPE.md\"\n  - {\"id\":\"curated-scaling-sardana-figure5-2eeafe50cf15\",\"asset\":\"00 Учебник/Assets/Figures/curated/scaling-lifetime-2026-11-14/sardana24a-figure5.png\",\"author\":\"Nikhil Sardana, Jacob Portes, Sasha Doubov and Jonathan Frankle\",\"title\":\"Sardana et al., ICML Figure 5: extrapolation from short pretraining runs\",\"source_url\":\"https://proceedings.mlr.press/v235/sardana24a.html\",\"source_image_url\":\"https://raw.githubusercontent.com/mlresearch/v235/main/assets/sardana24a/sardana24a.pdf#page=6\",\"source_asset\":\"05 Источники/Originals/llama-scaling-2026-11-09/sardana24a.pdf\",\"source_asset_sha256\":\"cd66b62454f51dcee723ba98746f7ae37e5ff0c7dce2441b9fe3d6decd188952\",\"source_page\":6,\"source_pdf_object\":32,\"sha256\":\"2eeafe50cf15461f81656df20cfbe90302b4ec97bdb09f7a1b7834892038094c\",\"bytes\":296129,\"dimensions_px\":[1710,1314],\"license\":\"CC BY 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by/4.0/\",\"license_evidence_url\":\"https://proceedings.mlr.press/pmlr-license-agreement.html\",\"derivation\":\"pdf-embedded-raster-extraction\",\"modifications\":\"Complete unresized RGB raster from PDF image object 32, extracted with pdfimages -f 6 -l 6 -png. Its soft mask is fully opaque; no redraw or cropping.\",\"metadata_status\":\"verified\",\"rights_status\":\"source-license-verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-14\",\"used_in\":[\"00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md\"]}\n  - id: \"curated-llama-inference-scaling-1110a08cd813\"\n    asset: \"00 Учебник/Assets/Figures/curated/llama-scaling-2026-11-09/sardana24a-figure1.png\""
+        },
+        {
+          "old": "    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    derivation: \"source-vector-copy\"\n    last_verified: \"2026-11-14\"\n  - id: \"curated-peft-qlora-fig6-cc100be66d62\"",
+          "new": "    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    derivation: \"source-svg-copy\"\n    last_verified: \"2026-11-14\"\n  - id: \"curated-peft-qlora-fig6-cc100be66d62\""
+        },
+        {
+          "old": "    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    derivation: \"source-vector-copy\"\n    last_verified: \"2026-11-14\"\n  - id: \"curated-quantization-qlora-5035d5990255\"",
+          "new": "    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    derivation: \"source-svg-copy\"\n    last_verified: \"2026-11-14\"\n  - id: \"curated-quantization-qlora-5035d5990255\""
+        },
+        {
+          "old": "    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    derivation: \"source-vector-copy\"\n    last_verified: \"2026-11-14\"\n  - id: curated-posttraining-tulu-figure23-d1aa186a4c2c",
+          "new": "    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    derivation: \"source-svg-copy\"\n    last_verified: \"2026-11-14\"\n  - id: curated-posttraining-tulu-figure23-d1aa186a4c2c"
+        },
+        {
+          "old": "    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    derivation: \"source-vector-copy\"\n    last_verified: \"2026-11-14\"\n  - id: curated-tulu3-overview-c41ba1e6892e",
+          "new": "    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    derivation: \"source-svg-copy\"\n    last_verified: \"2026-11-14\"\n  - id: curated-tulu3-overview-c41ba1e6892e"
+        }
+      ]
+    }
+  ]
+}

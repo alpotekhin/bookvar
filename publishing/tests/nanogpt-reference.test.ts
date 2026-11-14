@@ -62,12 +62,13 @@ describe('worked upstream nanoGPT reference',()=>{
   });
   it('executes original preparation, training, resume and sampling on CPU',()=>{
     const result=JSON.parse(execFileSync('uv',[
-      'run','--offline','--with','torch==2.14.1','--with','numpy==2.3.5',
+      'run','--offline','--python','3.13','--with','torch==2.14.1','--with','numpy==2.3.5',
       '--with','requests==2.32.5','--with','tiktoken==0.12.0',
       'python','06 Практика/Code/nanogpt_reference_lab.py'
     ],{cwd:root,encoding:'utf8',timeout:60000,maxBuffer:4*1024*1024,
       env:{...process.env,LC_ALL:'C',LANG:'C'}}));
     expect(result.status).toBe('passed');
+    expect(result.environment.python).toMatch(/^3\.13\./);
     expect(result.model_checks.math_backend_forced).toBe(true);
     expect(result.model_checks.upstream_flash_attribute).toBe(true);
     expect(result.model_checks.generation_input_lengths).toEqual([6,7,8,8,8]);

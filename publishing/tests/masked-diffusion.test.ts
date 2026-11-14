@@ -6,6 +6,7 @@ import { parse } from 'yaml';
 import { describe, expect, it } from 'vitest';
 import { loadManifest } from '../adapter/manifest.js';
 import { readingPaths } from '../adapter/reading-paths.js';
+import { beforeTopicConsolidation } from '../tools/topic-consolidation-baseline.mjs';
 
 const root=resolve(import.meta.dirname,'../..');
 const path='00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA.md';
@@ -22,7 +23,12 @@ describe('masked diffusion language models',()=>{
     expect(report.negative_controls).toBe(6);
     expect(report.training_stream_leakage_control).toBe(true);
     const receipt=JSON.parse(read('docs/audit/2026-10-29-final-closure-masked-examples.json'));
-    expect(receipt.chapter_sha256).toBe(hash(path));
+    // The old receipt pins the revision before the current subject-only delta.
+    // Actual current program execution is checked separately by the report.
+    const historical=beforeTopicConsolidation(body,path,root,
+      '2026-11-05-pretext-subject-additions.json');
+    expect(receipt.chapter_sha256).toBe(createHash('sha256').update(historical).digest('hex'));
+    expect(report.chapter_sha256).toBe(hash(path));
     expect(receipt.checker_sha256).toBe(hash('publishing/tools/check_masked_diffusion_examples.py'));
   });
   it('preserves four complete licensed original figures with their primary bytes',()=>{

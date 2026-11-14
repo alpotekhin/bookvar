@@ -4,25 +4,29 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "3cd49ae19d8bc01c4c68d05a823ffd5c1fd7fee1106332a9a53843491566b0a2"
-translation_reviewed: "2026-10-30"
+canonical_revision: "be4628d08c30b6997e31a2fc4106a4cc0c3af0c18fc330b73697075de7143de1"
+translation_reviewed: "2026-11-13"
 translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md"
-last_updated: 2026-10-30
+last_updated: 2026-11-13
 primary_sources:
   - https://arxiv.org/abs/2005.14165v4
   - https://github.com/openai/gpt-3/tree/d7a9bb505df6f630f9bab3b30c889e52f22eb9ea
   - https://stanford-cs324.github.io/winter2022/lectures/capabilities/
   - https://jalammar.github.io/how-gpt3-works-visualizations-animations/
+  - https://aclanthology.org/2022.emnlp-main.759/
+  - https://aclanthology.org/P19-1472/
 previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]"
-next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]"
+next: "[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура]]"
 ---
 
 # GPT-3: scaling and in-context learning
 
-A language model can classify a review after reading several reviews
-with completed labels. It receives all this text as one request and
-continues the last, unfinished pair. Switching from reviews to
-translation changes the input examples; the weights remain fixed.
+GPT-2 could already read completed translations before translating
+a new sentence. GPT-3 turns that technique into an experiment:
+how many examples does the same model need? In the
+[[#gpt3-relation-shots|entailment example]], keep the premise and
+hypothesis fixed and put zero, one, or two labeled pairs before them.
+All three requests use the same weights.
 
 GPT-3 investigates how well this way of specifying tasks works as model
 size increases. Brown et al. train eight autoregressive Transformers,
@@ -72,6 +76,12 @@ pair before it is one-shot; two pairs are two-shot, a few-shot setting.
 The paper usually uses 10–100 examples, as far as the 2048-token window
 permits. GPT-3 fine-tuning is outside this study.
 
+The [[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language#Translation and answers through prefixes|GPT-2 translation experiment]]
+already put completed pairs before the new sentence. In the GPT-2 paper,
+“zero-shot transfer” meant no task-specific weight updates. GPT-3
+counts completed examples separately: the same weights can be evaluated
+with zero, one, or several demonstrations.
+
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/10-gpt3-fine-tuning.gif]]
 
 *Jay Alammar, [How GPT3 Works — Fine-tuning](https://jalammar.github.io/how-gpt3-works-visualizations-animations/).
@@ -88,6 +98,49 @@ For an unusual string transformation, examples may specify a more
 particular rule. Section 5 discusses this ambiguity: recognizing a
 familiar task, adapting to a variant, and acquiring a new rule cannot
 be distinguished from one successful answer.
+
+<a id="gpt3-relation-shots"></a>
+
+## One task with zero, one, or two examples
+
+Return to the [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-relation-prefix|pair about the cat]].
+An instruction can ask the model to choose `entailment`,
+`contradiction` or `neutral`. Keep that instruction and the final
+unlabeled pair fixed. The text after the instruction looks like this:
+
+~~~text
+Premise: A robin is singing.
+Hypothesis: A bird is singing.
+Relation: entailment
+
+Premise: The door is open.
+Hypothesis: The door is shut.
+Relation: contradiction
+
+Premise: A cat sleeps.
+Hypothesis: An animal rests.
+Relation:
+~~~
+
+For zero-shot, keep only the last pair; for one-shot, put the door
+example before it; for two-shot, use the whole block. The correct label
+for the final pair never goes into the input. Score the same three
+continuations in each condition. The context changes; the vocabulary,
+weights, and scoring rule stay fixed. This is a teaching prompt, not
+an ANLI item or a measured GPT-3 result.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-continuity-2026-11-10/min-figure2-demonstrations.png|Three labeled lines go into the prompt; the fourth ends at a blank. Positive is shown separately as the model's prediction.]]
+
+*Sewon Min et al., [Rethinking the Role of Demonstrations, Figure 2, p. 11049](https://aclanthology.org/2022.emnlp-main.759.pdf#page=2),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+The complete figure is cropped from the paper; the labels are unchanged.*
+
+Min et al. illustrate a different task: classifying the sentiment of
+a news snippet. The model reads three lines with completed labels and
+a fourth line with a blank. The `Positive` below the LM box is the
+prediction, not part of the input. Remove the three labeled lines for
+the no-demonstration condition. The new snippet stays the same and the
+reference label used to compute accuracy is kept separately.
 
 ## Mechanics of a few-shot prompt
 
@@ -240,6 +293,8 @@ If scoring includes a terminating newline, its probability also counts.
 The same terminator may have different conditional probabilities
 after different labels.
 
+<a id="gpt3-candidate-scores"></a>
+
 ### How the paper compares different answer lengths
 
 The sum $s_{\rm sum}=\sum_t\log P(y_t\mid D,q,y_{<t})$ scores the
@@ -270,6 +325,61 @@ sum to one; this is a ranking rule, not a new probability of the
 correct class. Application conditions are given in
 [§2.4](https://arxiv.org/pdf/2005.14165v4#page=10).
 
+<a id="gpt3-surface-form-competition"></a>
+
+### When wording changes the winning answer
+
+In [Holtzman et al.'s CommonsenseQA example](https://arxiv.org/pdf/2104.08315v9#page=1),
+a person chooses `Whirlpool bath` from four options. A language model
+can also continue with `Bathtub`, which is missing from the list.
+Probability assigned to that string does not count toward
+`Whirlpool bath`. The authors call this *surface form competition*.
+Dividing by token count changes the penalty for length; it does
+not pool different phrasings of the same answer.
+
+In the COPA example about a bar, the full prefix $x$ ends in
+`because`. For the background prefix $a_0$, the authors keep only
+`because`. The model still has to produce a cause, but it no longer
+knows that the bar closed. They score each answer twice, with the
+full and background prefixes. The difference of logs above is
+the log of the ratio, which Holtzman et al. call *domain-conditional
+PMI*. With the illustrative probabilities above, adding the event
+makes the first answer less likely ($0.8$ times its background
+probability) and the second six times as likely. A tiny denominator
+can also boost a rare answer, so choose the background for the task
+and test the rule on held-out examples.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt3-surface-form-2026-11-13/holtzman-figure3.png|Left: the same prefix about the bar and two different endings. Right: the prefixes change but the scored ending about the bar closing is the same.]]
+
+*Ari Holtzman, Peter West, Vered Shwartz, Yejin Choi, and Luke Zettlemoyer,
+[Surface Form Competition, Figure 3, §5](https://arxiv.org/pdf/2104.08315v9#page=8),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Complete original figure, not redrawn.*
+
+On the left, the model scores two different endings after one prefix:
+`it was crowded.` and `it was 3 AM.` On the right, the authors put
+the cause first and replace `because` with `so`. The model scores
+the same ending, `the bar closed.`, after two prefixes:
+`It was crowded so` and `It was 3 AM so`. The wording and length
+of the scored string on the right are now fixed. Both evaluations
+are ordinary forward passes of the causal decoder. The event moves
+to the end; the model never reads from right to left.
+
+The row below the dotted line tests another wording. In the original
+setup, changing the time from 3:00 to 3:30 lowers the answer's log
+probability from about $-16$ to $-20$. With the order reversed, both
+causes give the same effect a log probability of about $-12$.
+These are scores for one example in §5.2, not accuracy figures.
+Reversing the clauses can change how natural the sentence sounds,
+so the authors do not present it as a general transformation for every task.
+
+In [Table 1](https://arxiv.org/pdf/2104.08315v9#page=6), the authors
+compare scoring rules on the same GPT‑3 175B weights with no demonstrations.
+On COPA, full-string probability scores 85.2%, the mean per token
+scores 82.8%, and the background correction scores 89.2%. On HellaSwag,
+the mean scores 77.2% and the correction drops to 53.5%. These are
+Holtzman et al.'s results, not Brown et al.'s.
+[[05 Источники/Papers/Holtzman et al. — Surface Form Competition.md|Experimental setup and sources]].
+
 <span id="архитектура-знакомый-блок-в-новом-масштабе"></span>
 
 ## GPT-3 architecture
@@ -298,13 +408,37 @@ the FFN then applies its two dense projections at each position.
 Sparse attention connections do not mean MoE: this GPT-3 has no router
 or selection of several experts.
 
+<a id="gpt3-full-local-attention"></a>
+
 ### Full and local attention
 
-Full causal attention at $i$ uses every $j\le i$. A local layer
-restricts the allowed region to a band near $i$. With teaching band
-width 3, position 7 would read 5, 6, and 7 instead of 0–7.
-This illustrates a local mask, not a published GPT-3 configuration:
-Section 2.1 does not specify exact band width.
+In GPT-2, the query at position $i$ could read keys at every $j\le i$
+in every layer. GPT-3 keeps full layers and alternates them with layers
+that restrict each query to its own position and a band immediately to
+its left.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/long-context-review-2026-09/mistral-sliding-window.png|Two masks for The cat sat on the; in the on row, the full mask allows The and the local mask excludes it]]
+
+*Albert Q. Jiang et al., [Mistral 7B, Figure 1](https://arxiv.org/html/2310.06825v1#S2.F1).
+[Unmodified original](https://arxiv.org/html/2310.06825v1/swa.png),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+The right panel shows a stack of local layers in Mistral, not GPT-3's
+alternating pattern.*
+
+In the `on` row, each column is a key. The full mask allows `The`,
+`cat`, `sat`, and `on`. The middle panel's window holds three positions
+including the query itself, so `The` drops out. The final `the` is to
+the right of the query and stays masked in both panels. A one admits
+the score to softmax; it does not specify its weight. The GPT-3 paper
+does not give the exact band width in [Section 2.1](https://arxiv.org/html/2005.14165v4#S2.SS1).
+
+Take the query at `sleeps` in the [[00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V|three-position attention example]].
+It gives scaled scores $(1,1,2)/\sqrt2$ for `a`, `cat` and `sleeps`.
+Full causal attention permits all three, with weights
+$(0.2483,0.2483,0.5035)$. A two-position window masks `a`, so
+softmax now normalizes only across `cat` and `sleeps`, giving
+$(0,0.3302,0.6698)$. The projection weights and the remaining scores
+stay the same. The difference comes from the mask.
 
 A local band restricts direct reading in one layer, not all input
 positions capable of affecting the final output. Suppose the first
@@ -480,17 +614,21 @@ then fixed for test. Test labels must not guide that choice.
 Prompt format can change what the scored continuation means.
 [Stanford CS324, Capabilities](https://stanford-cs324.github.io/winter2022/lectures/capabilities/)
 separates task definition, reduction to language modeling, and results.
-The discussion below similarly separates LAMBADA, closed-book answers,
-and synthetic arithmetic. For free-form answers, Section 2.4 describes
+LAMBADA asks for a missing word; Story Cloze and HellaSwag supply
+candidate endings. For free-form answers, Section 2.4 describes
 beam search of width 4 with length penalty 0.6; metrics depend on
 the task: F1, BLEU, or exact match.
+
+<a id="lambada-gpt3-fill-blank"></a>
 
 ### LAMBADA: specifying exactly one answer
 
 LAMBADA asks for a paragraph's final word. Simply truncating before
 that word also assigns probability to continuations that leave the
-sentence open. Few-shot formatting supplies examples with a blank
-and a separate answer, demonstrating an infilling task.
+sentence open. In the [[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language#gpt2-gpt3-lambada|GPT-2 experiment]],
+a stop-word filter excluded some such continuations. In the GPT-3
+few-shot format, the prompt first gives passages with blanks and
+completed answers, then a passage whose blank remains unanswered.
 
 This short example illustrates the format; its words are not from
 the test set.
@@ -516,7 +654,83 @@ therefore be attributed solely to demonstration count under fixed
 wording. One example hurts here; fifteen help. The 125M model has
 few-shot accuracy 22.0%, versus zero-shot 42.7%. Added text helps only
 to the extent that the model can use its format. LAMBADA's pre-training
-overlap is examined below.
+overlap is examined [[#Benchmark contamination and honest evaluation|separately]].
+
+<a id="gpt-llama-completion-scoring"></a>
+
+### How GPT and LLaMA rank candidate endings
+
+In Story Cloze, a story stops after four sentences. The task is to pick
+the fitting ending from two supplied options. In
+[the GPT-1 experiment, §3.3](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=4),
+each ending is appended to the story and sent through the decoder
+separately. The same trained head reads the final special token for
+each sequence and gives it one score. The fine-tuned model scored
+86.5% on Story Cloze
+([Table 3](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=6)).
+
+In [GPT-2's Children's Book Test, §3.2](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=5),
+the missing word is inside a sentence. The authors use the language
+model's output: insert a candidate $v$ after context $x$ and score
+both the word and the known suffix $s$:
+$P(v,s\mid x)=P(v\mid x)P(s\mid x,v)$. A word with the highest
+probability at the blank can lose if it makes the rest of the sentence
+less likely. This experiment uses a different dataset; it is not a
+GPT-2 result on Story Cloze. The
+[[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language#Selecting a candidate by text probability|GPT-2 worked example]]
+shows how the suffix can reverse the ranking.
+
+GPT-3 returns to Story Cloze with the same kind of language-model
+output as GPT-2. It scores the tokens of each ending in context.
+Few-shot adds labeled examples before the story, keeping the weights
+fixed. [Appendix Figure G.17](https://arxiv.org/html/2005.14165v4#A7.F17)
+shows the formatted task. HellaSwag supplies four endings. In
+[Zellers et al., Figure 1](https://aclanthology.org/P19-1472.pdf#page=1),
+a dog runs away from a woman with a bucket. The correct ending
+continues the attempt to bathe it. Distractors keep words about
+water and bathing, but describe less plausible next actions.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-continuation-scoring-2026-11-11/zellers19-figure2-adversarial-filtering.png|Above, a classifier learns to distinguish real and generated endings. Below, arrows replace easily detected generated endings with other candidates.]]
+
+*Rowan Zellers et al., [HellaSwag, Figure 2, p. 4792](https://aclanthology.org/P19-1472.pdf#page=2).
+The complete diagram is cropped from the PDF with its labels unchanged,
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+
+The authors first generate a pool of wrong endings for each context.
+At each iteration they split the examples into two temporary sets.
+The classifier learns to separate real and generated endings on the
+upper set. In the lower set, easily recognized fakes are replaced
+by harder unused candidates for the same context. The authors repeat
+the split and selection, then use human checks to screen out distractors
+that are actually plausible. This is how HellaSwag is built, not how
+GPT-3 is trained during evaluation
+([Zellers et al., §§2 and 4.3](https://aclanthology.org/P19-1472.pdf#page=2)).
+
+| GPT-3 175B, accuracy | Zero-shot | One-shot | Few-shot |
+| --- | ---: | ---: | ---: |
+| StoryCloze, test | 83.2% | 84.7% | 87.7% ($K=70$) |
+| HellaSwag, dev | 78.9% | 78.1% | 79.3% ($K=20$) |
+
+Source: [Brown et al., §§3.1.3–3.1.4, Table 3.2 and Appendix H](https://arxiv.org/html/2005.14165v4#S3.T2).
+Going from zero-shot to few-shot gains 4.5 percentage points on
+StoryCloze and 0.4 on HellaSwag. On HellaSwag, one demonstration
+scores lower than none.
+
+The [first LLaMA, §3 and Table 3](https://arxiv.org/html/2302.13971v1#S3)
+also scores the supplied endings. LLaMA's HellaSwag protocol normalizes
+by character count; GPT-3's uses token count. Suppose candidates A and B
+have total log-probabilities of $-3.6$ and $-4.8$. If they contain two
+and four tokens, B wins on mean log-probability per token:
+$-1.2>-1.8$. If those same strings contain 12 and 14 characters, A
+wins per character: $-0.30>-0.343$. These numbers are illustrative:
+the divisor alone can change the choice at fixed log-probabilities.
+
+LLaMA's zero-shot table gives 79.2% for LLaMA-13B, 84.2% for LLaMA-65B, and
+78.9% for GPT-3 175B. The last number comes from Brown et al.; Meta
+did not rerun GPT-3 under its own settings. Isolating the effect of
+[[en/00 Textbook/07 Anatomy of a modern LLM/01 LLaMA as a baseline architecture#gpt-llama-comparison|the architectural changes]]
+would require controlling pre-training, the HellaSwag split, the
+prompt template, and the scoring rule.
 
 ### Question answering without retrieval
 
@@ -567,6 +781,25 @@ retrieve one fact from parameters.
 [CS324, Translation](https://stanford-cs324.github.io/winter2022/lectures/capabilities/#translation)
 shows this reduction to text continuation. GPT-3 one-shot uses one
 pair; few-shot uses 64.
+
+Keep `The bird sings.` from the
+[[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language#Translation and answers through prefixes|GPT-2 example]]
+and ask for English-to-French translation. With no completed pairs,
+the instruction and new sentence make a zero-shot prompt. Put the first
+completed pair below before the new sentence for one-shot; include both
+for two-shot:
+
+~~~text
+Translate from English to French.
+The cat sleeps. = Le chat dort.
+The dog runs. = Le chien court.
+The bird sings. =
+~~~
+
+The prefix ends at the last equals sign in all three cases. `L'oiseau chante.`
+is the expected continuation, not part of the input or a recorded GPT-3
+output. [Brown et al., Figure 2.1](https://arxiv.org/pdf/2005.14165v4#page=7)
+shows the same distinction with the paper's own example.
 
 | Direction | Zero-shot | One-shot | Few-shot |
 |---|---:|---:|---:|
@@ -726,6 +959,67 @@ removal; Figure 1.3 aggregates 42 accuracy measurements. The aggregate
 does not replace separate protocols or tell whether a particular
 instruction will work and how many examples it needs.
 
+<a id="gpt3-few-shot-pet"></a>
+
+### 32 examples in the prompt or 32 examples for fine-tuning
+
+In the [[#gpt3-relation-shots|example about the cat]], the completed
+labels go into the prompt before the new pair. The same
+annotation can be used another way: show the model one pair, compare
+its prediction with the label, and update the weights. Schick and
+Schütze tested this approach on SuperGLUE with ALBERT and
+Pattern-Exploiting Training (PET).
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt3-pet-2026-11-13/schick21-entailment-figure2.png|The premise about falling oil prices is to the right of the blank. The hypothesis about rising prices is to the left. Labels map to Yes and No.]]
+
+*Timo Schick and Hinrich Schütze, [Small Language Models Are Also Few-Shot Learners, Figure 2, p. 2340](https://aclanthology.org/2021.naacl-main.185.pdf#page=2),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Original diagram.*
+
+In the figure, the hypothesis `Oil prices rise?` is to the left of
+the blank and the premise `Oil prices fall back.` is to the right.
+ALBERT's bidirectional attention lets the masked position use both
+sentences. In GPT‑3's causal decoder, the premise on the right could
+not affect the score at the blank; it would have to come before the
+answer.
+
+PET assigns a word to each class in advance. In the figure,
+`entailment` maps to `Yes` and `not_entailment` to `No`.
+Suppose the model assigns `No` probability 0.75 after normalizing
+over those two words. On a pair labeled `not_entailment`, the loss
+is $-\ln 0.75\approx 0.288$, and the gradient updates the model.
+These numbers are illustrative. As in GPT‑2, the pretrained
+vocabulary head scores words. Unlike GPT‑3's evaluation, the labeled
+pair supplies the target for a gradient step instead of being
+prepended to a test item.
+
+The authors train multiple models on different templates. The
+models score unlabeled texts; those soft labels are then used to
+train a single classifier. iPET also adds pseudo-labeled examples
+for later rounds. FewGLUE provides 32 originally labeled examples
+and up to 20,000 unlabeled examples per task. For most tasks, GPT‑3
+draws 32 demonstrations anew for each test input. The labeled counts
+match, but the examples and the available data differ
+([Sections 3–4](https://aclanthology.org/2021.naacl-main.185.pdf#page=3)).
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt3-pet-2026-11-13/schick21-superglue-figure1.png|Eight blue GPT-3 points span a logarithmic parameter axis. PET and iPET at 223 million parameters score higher than GPT-3 175B on the SuperGLUE dev average.]]
+
+*Timo Schick and Hinrich Schütze, [Small Language Models Are Also Few-Shot Learners, Figure 1, p. 2339](https://aclanthology.org/2021.naacl-main.185.pdf#page=1),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Original plot with both axes and labels.*
+
+The blue line compares eight GPT‑3 sizes in the few-shot setting.
+The score dips from 64.3 to 63.6 between 2.7B and 6.7B,
+despite rising across the series.
+The two separate points at left are ALBERT after fine-tuning, with
+223 million parameters. [Table 1](https://aclanthology.org/2021.naacl-main.185.pdf#page=6)
+gives SuperGLUE dev averages of 73.2 for GPT‑3 175B, 74.1 for PET,
+and 76.8 for iPET. The average ranking holds on test, but on ReCoRD,
+GPT‑3 scores 91.1 F1 against 85.9 for both PET variants. The result
+compares adaptation methods on these tasks; it does not show that
+small models generally perform better. To measure what demonstrations
+contribute, compare prompts with the same model.
+[Figure 5](https://aclanthology.org/2021.naacl-main.185.pdf#page=8) does this for one and 32 demonstrations:
+adding examples lowers performance on some tasks.
+
 ## Benchmark contamination and honest evaluation
 
 At web scale, test questions, answers, or near copies may already
@@ -791,17 +1085,24 @@ base GPT-3 from 2020, not automatically a later chat service,
 instruction-tuned model, or tool-using system.
 
 <span id="наследие-и-следующий-переход"></span>
+<a id="transition-to-t5"></a>
+<a id="gpt3-next-models"></a>
 
-## Transition to T5
+<a id="two-paths-after-gpt-3"></a>
 
-GPT-3 tasks use one autoregressive continuation of a shared sequence.
-Examples and question form its prefix; the answer is appended on
-the right, with fixed weights during evaluation.
+## From GPT-3 to the first LLaMA
+
+The [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-comparison|first LLaMA]]
+uses the same task format: demonstrations and the unfinished answer
+go in one sequence. The forward pass changes. Every layer uses full
+causal attention, RMSNorm replaces LayerNorm, RoPE applies position to
+queries and keys, and the FFN uses SwiGLU. Both papers use a 2,048-token
+window. At roughly the same model size (13B), LLaMA trained on one
+trillion tokens, compared with 300 billion for GPT-3. Comparing the
+finished models does not isolate the contribution of these changes.
+
 [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]]
-also uses textual inputs and outputs but separates them architecturally:
-an encoder builds bidirectional input states, and a decoder generates
-an answer with cross-attention to them. The next chapter continues
-an architectural comparison, not publication chronology: T5 preceded GPT-3.
+[first appeared as a preprint in 2019](https://arxiv.org/abs/1910.10683v1), before GPT-3. Its encoder reads the input in both directions, and a separate decoder attends to the encoder states when generating.
 
 Instruction tuning and preference learning are covered later in
 post-training. They update weights and can coexist with demonstrations
@@ -812,8 +1113,10 @@ in the current context.
 - [Brown et al., Language Models are Few-Shot Learners, v4](https://arxiv.org/abs/2005.14165v4): §2 architecture and evaluation; §3.1.2 LAMBADA; §§3.2–3.3 closed-book QA and translation; §§3.8–3.9 ANLI, synthetic tasks, qualitative experiments; §§4–5 overlap and limitations. Appendices A–C and G–H give recipe details, formats, and full results.
 - [OpenAI publication repository, pinned revision](https://github.com/openai/gpt-3/tree/d7a9bb505df6f630f9bab3b30c889e52f22eb9ea): synthetic tasks, statistics, generation examples, and model card, not GPT-3 training code.
 - [Stanford CS324 — Capabilities](https://stanford-cs324.github.io/winter2022/lectures/capabilities/): NLP task definitions and reductions to scoring or generation. This chapter's formulas and numbers follow the primary paper.
+- [Min et al., Rethinking the Role of Demonstrations](https://aclanthology.org/2022.emnlp-main.759/), §§2–4 and Figure 2: few-shot inputs and predictions, and tests of the role of labeled examples in GPT-2, GPT-3, and other models.
+- [[05 Источники/Papers/Schick and Schütze 2021 — Small Language Models Are Also Few-Shot Learners.md|Schick and Schütze, Small Language Models Are Also Few-Shot Learners]]: PET, iPET, and their comparison with GPT‑3 on SuperGLUE.
 - [Jay Alammar — How GPT3 Works](https://jalammar.github.io/how-gpt3-works-visualizations-animations/): original parameter, context, layer, and fine-tuning illustrations, CC BY-NC-SA 4.0. Figures explain mechanisms rather than reproduce measured GPT-3 answers.
 - [[02 Areas/ML & DL/Papers/GPT 3.0|Earlier GPT-3 note]]: additional comparisons with each row's protocol identified separately.
 
 **Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].
-**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 and text-to-text]].
+**Next:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|The first LLaMA]].

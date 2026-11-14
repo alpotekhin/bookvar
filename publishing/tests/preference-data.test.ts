@@ -17,6 +17,7 @@ describe('preference data chapter examples', () => {
     expect(report.independent_cycle_probability).toBeCloseTo(0.09453439083199781, 12);
     expect(report.pair_weighted_loss).toBeCloseTo(0.6941176470588236, 12);
     expect(report.group_weighted_loss).toBe(0.5);
+    expect(report.tulu_example_means).toEqual({ A: 4.75, B: 3, C: 3.75, D: 4.25 });
     expect(report.majority_cycle_votes).toEqual([2, 2, 2]);
     expect(report.example_stdout).toEqual(['0.094534']);
     expect(report.chapter_sha256).toMatch(/^[a-f0-9]{64}$/);

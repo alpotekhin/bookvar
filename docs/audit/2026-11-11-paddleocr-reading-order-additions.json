@@ -1,0 +1,222 @@
+{
+  "date": "2026-11-11",
+  "scope": "Add the complete licensed PP-DocLayoutV2 Figure 3 and a source-grounded reading-order example to both editions of the existing OCR chapter. Index the paper without creating a parallel reading route.",
+  "review": {
+    "sources": "Cui et al., PaddleOCR-VL arXiv v1, §§2.1–2.1.2 and 4, Figures 2–4; Transformers v5.14.0 PP-DocLayoutV2ImageProcessor._get_order_seqs. Figure 3 is the publisher's complete raster. Figure 2 was not copied because its input sample reproduces a page from a separate article.",
+    "workedExample": "Binary example in the completed matrix: the column sums 3,4,0,2,1 yield region order 3,5,4,1,2. The Bookvar invoice maps those IDs to heading, subtotal, tax, total, and footnote. It distinguishes a missing box, a recognition error, and a reading-order error. Binary figure demonstration is distinguished from probability summation in the pinned implementation.",
+    "preservation": "Read both full chapter editions. All existing Python blocks, original illustrations, and deep anchors remain unchanged. The English invoice response now uses the exact page-pixel box in the canonical example. No OCR/VLM model was run. The resolution and Omni English files changed only in their canonical revision pointer; their text and examples are untouched.",
+    "verification": "2079-page local build; 294 HTML tests, 196 asset-registry tests, four public-assets tests and 18 parity/preservation tests passed. Both subject indexes match the generator; zero broken internal routes, fragments or files. In both locales the source note links back to the invoice example without fallback. The document checker executed all 12 Python examples standalone and in sequence and independently computed the Figure 3 column sums and invoice order. Both chapters displayed the exact 1440×436 raster in Chrome at 375 and 1280 px; the right-hand matrix and labels were readable at 4×. The final served PNG matched the author download byte for byte; the retired Qwen2-VL PNG was not served. No push or deploy."
+  },
+  "newAssets": [
+    {
+      "id": "curated-pp-doclayout-v2-reading-order-f02cc9356b2a",
+      "asset": "00 Учебник/Assets/Figures/curated/paddleocr-vl-2026-11-11/pp-doclayout-v2-reading-order.png",
+      "title": "PP-DocLayoutV2: region detection and reading order, Figure 3",
+      "author": "Cheng Cui et al., PaddlePaddle Team, Baidu",
+      "source_url": "https://arxiv.org/html/2510.14528v1#S2.F3",
+      "source_image_url": "https://arxiv.org/html/2510.14528v1/images/PP-DocLayoutV2.png",
+      "source_asset_sha256": "f02cc9356b2a659757ed83f1477881a0cd95b17e9408588daf0ade82811643e0",
+      "sha256": "f02cc9356b2a659757ed83f1477881a0cd95b17e9408588daf0ade82811643e0",
+      "dimensions_px": [
+        1440,
+        436
+      ],
+      "bytes": 177984,
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "https://arxiv.org/html/2510.14528v1",
+      "derivation": "source-raster-copy",
+      "modifications": "Complete Figure 3 from the versioned report. No crop, redraw, relabeling, or recompression.",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md",
+        "en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "source": "00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md",
+      "before_sha256": "9b1d1126236ab864656743549d9be4364fa86a4740992f0574810cbe74aece5b",
+      "after_sha256": "cfece25b0013bb7310166cda6123cf1fcfce715f01bd751af30536ea84e97cb2",
+      "lines": 749,
+      "changes": [
+        {
+          "old": "title: \"64.4. Документы, OCR и visual grounding\"\ntype: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-09\nlast_verified: 2026-10-20\nreference_terms:\n  - label: LayoutLMv3 — текст, координаты и изображение",
+          "new": "title: \"64.4. Документы, OCR и visual grounding\"\ntype: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-11\nlast_verified: 2026-10-20\nreference_terms:\n  - label: LayoutLMv3 — текст, координаты и изображение"
+        },
+        {
+          "old": "  - label: Donut — извлечение полей без внешнего OCR\n    label_en: Donut — field extraction without external OCR\n    anchor: doc-donut\n  - label: Visual grounding — обратное преобразование координат\n    label_en: Visual grounding — mapping coordinates back to the source\n    anchor: doc-coordinates",
+          "new": "  - label: Donut — извлечение полей без внешнего OCR\n    label_en: Donut — field extraction without external OCR\n    anchor: doc-donut\n  - label: PaddleOCR-VL — разметка страницы и порядок чтения\n    label_en: PaddleOCR-VL — page layout and reading order\n    anchor: doc-paddleocr-reading-order\n  - label: Visual grounding — обратное преобразование координат\n    label_en: Visual grounding — mapping coordinates back to the source\n    anchor: doc-coordinates"
+        },
+        {
+          "old": "  - https://arxiv.org/abs/2511.21631v1\n  - https://proceedings.mlr.press/v202/lee23g.html\n  - https://arxiv.org/abs/2111.15664v5\n  - https://arxiv.org/abs/2204.08387v3\n  - https://arxiv.org/abs/2409.17146v2\n  - https://www.docvqa.org/challenges/2020",
+          "new": "  - https://arxiv.org/abs/2511.21631v1\n  - https://proceedings.mlr.press/v202/lee23g.html\n  - https://arxiv.org/abs/2111.15664v5\n  - https://arxiv.org/abs/2510.14528v1\n  - https://arxiv.org/abs/2204.08387v3\n  - https://arxiv.org/abs/2409.17146v2\n  - https://www.docvqa.org/challenges/2020"
+        },
+        {
+          "old": "\nЭти варианты допускают сочетание. Внешний OCR может подготовить индекс документов, VLM — проверить найденную страницу, а правила — сверить сумму позиций. Каскад оценивают целиком и по этапам: удачный отдельный OCR не гарантирует правильного ответа по документу.\n\n## 3. Как проходит один запрос\n\nДля счёта из начала главы сначала сохраняется исходная страница. Если PDF содержит текстовый слой, его можно использовать как отдельный источник кандидатов; для скана требуется распознавание изображения. Текстовый слой тоже может быть ошибочным или относиться к прежней версии изображения, поэтому его наличие не заменяет проверку видимого документа.",
+          "new": "\nЭти варианты допускают сочетание. Внешний OCR может подготовить индекс документов, VLM — проверить найденную страницу, а правила — сверить сумму позиций. Каскад оценивают целиком и по этапам: удачный отдельный OCR не гарантирует правильного ответа по документу.\n\n<a id=\"doc-paddleocr-reading-order\"></a>\n\n### PaddleOCR-VL: порядок чтения до распознавания\n\nВ [PaddleOCR-VL v1, §2.1](https://arxiv.org/html/2510.14528v1#S2.SS1)\nсначала определяют, где на странице находятся текст, таблицы, формулы и\nграфики. PP-DocLayoutV2 получает изображение всей страницы. Детектор\nRT-DETR предлагает рамки и классы; следующая сеть оценивает, какая из\nкаждых двух областей должна читаться первой. Распознанные слова ей ещё\nне нужны: на входе у неё координаты и классы областей.\n\n![[00 Учебник/Assets/Figures/curated/paddleocr-vl-2026-11-11/pp-doclayout-v2-reading-order.png|Слева RT-DETR находит области; справа оценка пар и сортировка дают порядок 3, 5, 4, 1, 2.]]\n\n*Cheng Cui et al., [PaddleOCR-VL v1, рис. 3](https://arxiv.org/html/2510.14528v1#S2.F3).\n[Исходный PNG](https://arxiv.org/html/2510.14528v1/images/PP-DocLayoutV2.png),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nВ правом нижнем углу рисунка показаны пять областей. Единица в ячейке\n$(i,j)$ означает, что $i$ предшествует $j$. Сумма по столбцу показывает,\nсколько областей надо прочитать до $j$. Суммы столбцов 1–5 равны\n$(3,4,0,2,1)$, поэтому порядок получается $3,5,4,1,2$. Если эти номера\nна нашем учебном счёте соответствуют заголовку, подытогу, налогу, итогу\nи сноске, то сноска окажется последней, даже если расположена выше\nитога в соседней колонке. Это перенос чисел с рисунка на пример,\nа не результат запуска модели на счёте. В\n[реализации Transformers](https://github.com/huggingface/transformers/blob/v5.14.0/src/transformers/models/pp_doclayout_v2/image_processing_pp_doclayout_v2.py#L85-L111)\nвместо нулей и единиц суммируют вероятности. При противоречивых оценках\nпар сортировка всё равно вернёт порядок, но он может нарушить часть\nпредсказанных отношений.\n\nЗатем из страницы вырезают области. В PaddleOCR-VL-0.9B один зрительный\nэнкодер и декодер ERNIE-4.5-0.3B распознают разные типы фрагментов:\nдля текста передают инструкцию OCR, для таблицы — инструкцию\nраспознавания таблицы. Сборщик соединяет результаты в порядке чтения.\nЕсли область «Итого» не найдена, распознаватель не получит её фрагмент.\nЕсли область найдена, но прочитано `12840` вместо `12480`, проверяют\nсам фрагмент и распознавание. Перестановка правильно прочитанных областей\nуказывает уже на ошибку порядка, а не символов.\n\n## 3. Как проходит один запрос\n\nДля счёта из начала главы сначала сохраняется исходная страница. Если PDF содержит текстовый слой, его можно использовать как отдельный источник кандидатов; для скана требуется распознавание изображения. Текстовый слой тоже может быть ошибочным или относиться к прежней версии изображения, поэтому его наличие не заменяет проверку видимого документа."
+        },
+        {
+          "old": "- Yupan Huang et al., [LayoutLMv3](https://arxiv.org/abs/2204.08387v3), §2.1–2.2, §3.1: входы, MLM/MIM/WPA и конфигурация.\n- Geewook Kim et al., [Donut](https://arxiv.org/abs/2111.15664v5), §2 и [официальная реализация](https://github.com/clovaai/donut/tree/4cfcf972560e1a0f26eb3e294c8fc88a0d336626): encoder–decoder, текстовые цели, сериализация.\n- Kenton Lee et al., [Pix2Struct](https://proceedings.mlr.press/v202/lee23g.html), §2.2–2.5: разрешение, screenshot parsing, reading curriculum и интерфейсы задач.\n- Peng Wang et al., [Qwen2-VL](https://arxiv.org/abs/2409.12191v1), Figure 11; Shuai Bai et al., [Qwen2.5-VL](https://arxiv.org/abs/2502.13923v1), §2.1.2 и документные данные; [Qwen3-VL](https://arxiv.org/abs/2511.21631v1), §3.2.3–3.2.4.\n- Matt Deitke et al., [Molmo and PixMo](https://arxiv.org/abs/2409.17146v2), §3–4: pointing, counting, отсутствующие объекты и формат координат.\n- [DocVQA 2020 — evaluation](https://www.docvqa.org/challenges/2020); Ali Furkan Biten et al., [Scene Text Visual Question Answering](https://openaccess.thecvf.com/content_ICCV_2019/papers/Biten_Scene_Text_Visual_Question_Answering_ICCV_2019_paper.pdf), §3.4: ANLS.",
+          "new": "- Yupan Huang et al., [LayoutLMv3](https://arxiv.org/abs/2204.08387v3), §2.1–2.2, §3.1: входы, MLM/MIM/WPA и конфигурация.\n- Geewook Kim et al., [Donut](https://arxiv.org/abs/2111.15664v5), §2 и [официальная реализация](https://github.com/clovaai/donut/tree/4cfcf972560e1a0f26eb3e294c8fc88a0d336626): encoder–decoder, текстовые цели, сериализация.\n- Kenton Lee et al., [Pix2Struct](https://proceedings.mlr.press/v202/lee23g.html), §2.2–2.5: разрешение, screenshot parsing, reading curriculum и интерфейсы задач.\n- Cheng Cui et al., [[05 Источники/Papers/PaddleOCR-VL v1|PaddleOCR-VL v1]], §2.1: рамки и классы областей, порядок чтения, распознавание по фрагментам.\n- Peng Wang et al., [Qwen2-VL](https://arxiv.org/abs/2409.12191v1), Figure 11; Shuai Bai et al., [Qwen2.5-VL](https://arxiv.org/abs/2502.13923v1), §2.1.2 и документные данные; [Qwen3-VL](https://arxiv.org/abs/2511.21631v1), §3.2.3–3.2.4.\n- Matt Deitke et al., [Molmo and PixMo](https://arxiv.org/abs/2409.17146v2), §3–4: pointing, counting, отсутствующие объекты и формат координат.\n- [DocVQA 2020 — evaluation](https://www.docvqa.org/challenges/2020); Ali Furkan Biten et al., [Scene Text Visual Question Answering](https://openaccess.thecvf.com/content_ICCV_2019/papers/Biten_Scene_Text_Visual_Question_Answering_ICCV_2019_paper.pdf), §3.4: ANLS."
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md",
+      "before_sha256": "c8763bab6e25a3c17243b6ef4d143bd53dcf8f1bc542b07a5b5a8a3599ad8b88",
+      "after_sha256": "296fde91073e02b30f393acb86adf2a34357bb832b206ac47566d9d49593642a",
+      "lines": 617,
+      "changes": [
+        {
+          "old": "status: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"0294ef46fb9b10f1dbba0b3efd1b9841f2671be4bea8d004bfdf27fc65315d22\"\ntranslation_reviewed: \"2026-11-09\"\ntranslation_of: \"00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md\"\nlast_updated: 2026-11-09\nlast_verified: 2026-09-15\nprimary_sources:\n  - https://arxiv.org/abs/2409.12191\n  - https://arxiv.org/abs/2502.13923\n  - https://arxiv.org/abs/2210.03347\n  - https://arxiv.org/abs/2111.15664\n  - https://arxiv.org/abs/2204.08387\n  - https://arxiv.org/abs/2409.17146\n  - https://arxiv.org/abs/2203.12555v3",
+          "new": "status: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"cfece25b0013bb7310166cda6123cf1fcfce715f01bd751af30536ea84e97cb2\"\ntranslation_reviewed: \"2026-11-11\"\ntranslation_of: \"00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md\"\nlast_updated: 2026-11-11\nlast_verified: 2026-09-15\nprimary_sources:\n  - https://arxiv.org/abs/2409.12191\n  - https://arxiv.org/abs/2502.13923\n  - https://arxiv.org/abs/2210.03347\n  - https://arxiv.org/abs/2111.15664\n  - https://arxiv.org/abs/2510.14528v1\n  - https://arxiv.org/abs/2204.08387\n  - https://arxiv.org/abs/2409.17146\n  - https://arxiv.org/abs/2203.12555v3"
+        },
+        {
+          "old": "| OCR-free specialist | pixels | no fixed OCR boundary | character and structural errors can be intertwined |\n| General VLM | media and instruction | broad interface | language priors can conceal perception errors |\n\n### Trace the invoice request\n\nFirst rasterize the document page at a known resolution, retaining the transform between PDF coordinates and image pixels. Tile the image if small print would otherwise disappear; keep scale, padding, and crop origins. Locate candidates such as “Subtotal: 11,000 RUB” and “Total: 12,480 RUB.” Use layout and labels to select the requested field, not merely the closest number.\n\nAn illustrative result is:\n\n```json\n{\n  \"value\": \"12 480 RUB\",\n  \"page\": 1,\n  \"box\": [0.68, 0.82, 0.91, 0.87],\n  \"coordinate_system\": \"normalized_original_page\"\n}\n```\n",
+          "new": "| OCR-free specialist | pixels | no fixed OCR boundary | character and structural errors can be intertwined |\n| General VLM | media and instruction | broad interface | language priors can conceal perception errors |\n\n<a id=\"doc-paddleocr-reading-order\"></a>\n\n### PaddleOCR-VL: order the regions before recognizing them\n\n[PaddleOCR-VL v1, §2.1](https://arxiv.org/html/2510.14528v1#S2.SS1)\nfirst locates text, tables, formulas, and charts on the page.\nPP-DocLayoutV2 takes the full page image. Its RT-DETR detector proposes\nboxes and classes; the next network scores which region in each pair\nshould come first. It uses the region coordinates and classes before\nany text has been recognized.\n\n![[00 Учебник/Assets/Figures/curated/paddleocr-vl-2026-11-11/pp-doclayout-v2-reading-order.png|RT-DETR detects regions on the left; pairwise scores and sorting recover order 3, 5, 4, 1, 2 on the right.]]\n\n*Cheng Cui et al., [PaddleOCR-VL v1, Figure 3](https://arxiv.org/html/2510.14528v1#S2.F3).\n[Original PNG](https://arxiv.org/html/2510.14528v1/images/PP-DocLayoutV2.png),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nThe lower-right panel shows five regions. A one in cell $(i,j)$ means\n$i$ precedes $j$. A column sum counts how many regions come before $j$.\nColumns 1–5 sum to $(3,4,0,2,1)$, so sorting gives $3,5,4,1,2$.\nMap those IDs to the invoice heading, subtotal, tax, total, and footnote.\nThe footnote comes last even if it sits higher than the total in another\ncolumn. This uses the figure's scores in a worked example, not model\noutput on the invoice. The\n[Transformers implementation](https://github.com/huggingface/transformers/blob/v5.14.0/src/transformers/models/pp_doclayout_v2/image_processing_pp_doclayout_v2.py#L85-L111)\nsums probabilities rather than binary decisions. Sorting still returns\nan order when pairwise estimates disagree, but that order can violate\nsome of those estimates.\n\nThe system then crops the regions. PaddleOCR-VL-0.9B uses the same vision\nencoder and ERNIE-4.5-0.3B decoder for multiple region types, with an OCR\ninstruction for text and a table recognition instruction for tables.\nPostprocessing assembles the results in reading order. If the detector\nmisses the total, the recognizer never gets that crop. If it reads\n`12840` instead of `12480` in the right region, inspect the crop and the\nrecognition step. Correct strings in the wrong order point to a\ndifferent stage.\n\n### Trace the invoice request\n\nFirst rasterize the document page at a known resolution, retaining the transform between PDF coordinates and image pixels. Tile the image if small print would otherwise disappear; keep scale, padding, and crop origins. Locate candidates such as “Subtotal: 11,000 RUB” and “Total: 12,480 RUB.” Use layout and labels to select the requested field, not merely the closest number.\n\nFor the pixel box traced below, the application could return:\n\n```json\n{\n  \"value\": \"12 480 RUB\",\n  \"page\": 1,\n  \"box\": [700, 1140, 910, 1180],\n  \"page_size\": [1000, 1400],\n  \"coordinate_system\": \"page_pixels\"\n}\n```\n"
+        },
+        {
+          "old": "\n- [Qwen2-VL](https://arxiv.org/abs/2409.12191), [Qwen2.5-VL](https://arxiv.org/abs/2502.13923), and [Molmo and PixMo](https://arxiv.org/abs/2409.17146).\n- [LayoutLMv3 §2.1–2.2, §3.1](https://arxiv.org/abs/2204.08387v3); [Donut §2](https://arxiv.org/abs/2111.15664v5); [Pix2Struct §2.2–2.5](https://proceedings.mlr.press/v202/lee23g.html); [Qwen3-VL document and grounding data, §3.2.3–3.2.4](https://arxiv.org/abs/2511.21631v1).\n- [DocVQA 2020 evaluation](https://www.docvqa.org/challenges/2020) and [Scene Text VQA §3.4](https://openaccess.thecvf.com/content_ICCV_2019/papers/Biten_Scene_Text_Visual_Question_Answering_ICCV_2019_paper.pdf) specify the ANLS basis.\n- [GriTS](https://arxiv.org/html/2203.12555v3#S3), §3.1–3.4: grid alignment and its three metrics; [Zhong et al., PubTabNet](https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123660562.pdf#page=7), §5: TEDS.\n- Previous: [[en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data|Training VLMs]]. Next: [[en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models|Video, audio, and omni models]].",
+          "new": "\n- [Qwen2-VL](https://arxiv.org/abs/2409.12191), [Qwen2.5-VL](https://arxiv.org/abs/2502.13923), and [Molmo and PixMo](https://arxiv.org/abs/2409.17146).\n- [LayoutLMv3 §2.1–2.2, §3.1](https://arxiv.org/abs/2204.08387v3); [Donut §2](https://arxiv.org/abs/2111.15664v5); [Pix2Struct §2.2–2.5](https://proceedings.mlr.press/v202/lee23g.html); [Qwen3-VL document and grounding data, §3.2.3–3.2.4](https://arxiv.org/abs/2511.21631v1).\n- Cheng Cui et al., [[05 Источники/Papers/PaddleOCR-VL v1|PaddleOCR-VL v1]], §2.1: layout regions, reading order, and crop recognition.\n- [DocVQA 2020 evaluation](https://www.docvqa.org/challenges/2020) and [Scene Text VQA §3.4](https://openaccess.thecvf.com/content_ICCV_2019/papers/Biten_Scene_Text_Visual_Question_Answering_ICCV_2019_paper.pdf) specify the ANLS basis.\n- [GriTS](https://arxiv.org/html/2203.12555v3#S3), §3.1–3.4: grid alignment and its three metrics; [Zhong et al., PubTabNet](https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123660562.pdf#page=7), §5: TEDS.\n- Previous: [[en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data|Training VLMs]]. Next: [[en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models|Video, audio, and omni models]]."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/_index.md",
+      "before_sha256": "6029835ec9014880bc13eb915e38a6c9cf0778deb7937eefcbcfe2ee9fa01808",
+      "after_sha256": "514b802f4487b6c9d062c3efe3a6e4cf4950881ec356dcdbf20262ee69efd5c0",
+      "lines": 63,
+      "changes": [
+        {
+          "old": "- [[05 Источники/Papers/Kimi K3 и K3.1 Pro|Kimi K3 и K3.1 Pro — KDA, Attention Residuals, LatentMoE и разреженное MLA]]\n- [[05 Источники/Papers/Gemma 3 и Gemma 4|Gemma 3 и Gemma 4 — локальные слои, общий KV и мультимодальный вход]]\n- [[02 Areas/ML & DL/05 Источники/Papers/Recall in efficient sequence models|Recall в эффективных sequence models]]\n- [[05 Источники/Papers/Mathlib Euler products|Mathlib: Euler products — исходный модуль и условия теоремы]]\n- [[05 Источники/Papers/AlphaProof|AlphaProof — поиск доказательств и обучение под задачу]]\n- [[05 Источники/Papers/FunSearch|FunSearch — эволюция эвристик и проверка cap sets]]",
+          "new": "- [[05 Источники/Papers/Kimi K3 и K3.1 Pro|Kimi K3 и K3.1 Pro — KDA, Attention Residuals, LatentMoE и разреженное MLA]]\n- [[05 Источники/Papers/Gemma 3 и Gemma 4|Gemma 3 и Gemma 4 — локальные слои, общий KV и мультимодальный вход]]\n- [[02 Areas/ML & DL/05 Источники/Papers/Recall in efficient sequence models|Recall в эффективных sequence models]]\n- [[05 Источники/Papers/PaddleOCR-VL v1|PaddleOCR-VL — вёрстка, порядок чтения и распознавание областей]]\n- [[05 Источники/Papers/Mathlib Euler products|Mathlib: Euler products — исходный модуль и условия теоремы]]\n- [[05 Источники/Papers/AlphaProof|AlphaProof — поиск доказательств и обучение под задачу]]\n- [[05 Источники/Papers/FunSearch|FunSearch — эволюция эвристик и проверка cap sets]]"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "796434d7a264f4274053651a2dc741f202425e58c950adba475beaae9ff89a83",
+      "after_sha256": "29ba3e9da3f87395ad5f5b6f2c77706778ae3bbe15a030ba7da54104f373a777",
+      "lines": 2608,
+      "changes": [
+        {
+          "old": "        route: sources/papers/gated-delta-networks\n      - source: 05 Источники/Papers/Recall in efficient sequence models.md\n        route: sources/papers/recall-efficient-sequence-models\n      - source: 05 Источники/LMCache/LMCache — карта материалов.md\n        source_en: en/05 Sources/LMCache/LMCache — map of materials.md\n        route: sources/lmcache/index",
+          "new": "        route: sources/papers/gated-delta-networks\n      - source: 05 Источники/Papers/Recall in efficient sequence models.md\n        route: sources/papers/recall-efficient-sequence-models\n      - source: 05 Источники/Papers/PaddleOCR-VL v1.md\n        source_en: en/05 Sources/Papers/PaddleOCR-VL v1.md\n        route: sources/papers/paddleocr-vl\n      - source: 05 Источники/LMCache/LMCache — карта материалов.md\n        source_en: en/05 Sources/LMCache/LMCache — map of materials.md\n        route: sources/lmcache/index"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "1d59a9074db1b066d7b16b96b4bb22aea1fbd6643c1fe4ee3c8b963bc30125b8",
+      "after_sha256": "ab56f8d048c31c037bdd4746017ceabb9446465545e234480857a8ee623f4d1c",
+      "lines": 1703,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Документы, OCR и visual grounding]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-layoutlm|LayoutLMv3 — текст, координаты и изображение]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-donut|Donut — извлечение полей без внешнего OCR]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-coordinates|Visual grounding — обратное преобразование координат]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-anls|DocVQA — ANLS и точность полей]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-grits|GriTS и TEDS — оценка структуры таблиц]]",
+          "new": "- [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Документы, OCR и visual grounding]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-layoutlm|LayoutLMv3 — текст, координаты и изображение]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-donut|Donut — извлечение полей без внешнего OCR]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-paddleocr-reading-order|PaddleOCR-VL — разметка страницы и порядок чтения]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-coordinates|Visual grounding — обратное преобразование координат]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-anls|DocVQA — ANLS и точность полей]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-grits|GriTS и TEDS — оценка структуры таблиц]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "a2cf49072870fdcaa5606999a16f63e91b469d0eec510e43663a6e2903f6052e",
+      "after_sha256": "92f54c8cea90540110648b151ea25fcfa2ee631d244113bb7fc10e0e966bfaff",
+      "lines": 1705,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Documents, OCR, and visual grounding]] · **EN**\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-layoutlm|LayoutLMv3 — text, boxes, and image patches]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-donut|Donut — field extraction without external OCR]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-coordinates|Visual grounding — mapping coordinates back to the source]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-anls|DocVQA — ANLS and exact field values]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-grits|GriTS and TEDS — evaluating table structure]]",
+          "new": "- [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Documents, OCR, and visual grounding]] · **EN**\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-layoutlm|LayoutLMv3 — text, boxes, and image patches]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-donut|Donut — field extraction without external OCR]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-paddleocr-reading-order|PaddleOCR-VL — page layout and reading order]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-coordinates|Visual grounding — mapping coordinates back to the source]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-anls|DocVQA — ANLS and exact field values]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-grits|GriTS and TEDS — evaluating table structure]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "20b32d05ec248918788b90f0f6a788228d7be6276ed70e505fd42f3f6ba2b567",
+      "after_sha256": "a0e9b0b0d1a50f0d5c0edbf0ce9406be609bc66dad8a60b9ae96c17f35aff185",
+      "lines": 25931,
+      "changes": [
+        {
+          "old": "    source_asset: raw/papers/external/vlm-2026/2409.17146.pdf\n    sha256: 92d1f84d843ecd54ff46226df8ef6f424d285ed4c9a217882c5a8653df5c659e\n    derivation: pdf-page-render-crop\n  - id: curated-vlm2026-internvl-figure2-e6f8f5eefb4c\n    asset: \"00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure2-dynamic-tiles.png\"\n    author: \"Zhe Chen et al.\"",
+          "new": "    source_asset: raw/papers/external/vlm-2026/2409.17146.pdf\n    sha256: 92d1f84d843ecd54ff46226df8ef6f424d285ed4c9a217882c5a8653df5c659e\n    derivation: pdf-page-render-crop\n  - id: curated-pp-doclayout-v2-reading-order-f02cc9356b2a\n    asset: \"00 Учебник/Assets/Figures/curated/paddleocr-vl-2026-11-11/pp-doclayout-v2-reading-order.png\"\n    title: \"PP-DocLayoutV2: region detection and reading order, Figure 3\"\n    author: \"Cheng Cui et al., PaddlePaddle Team, Baidu\"\n    source_url: \"https://arxiv.org/html/2510.14528v1#S2.F3\"\n    source_image_url: \"https://arxiv.org/html/2510.14528v1/images/PP-DocLayoutV2.png\"\n    source_asset_sha256: \"f02cc9356b2a659757ed83f1477881a0cd95b17e9408588daf0ade82811643e0\"\n    sha256: \"f02cc9356b2a659757ed83f1477881a0cd95b17e9408588daf0ade82811643e0\"\n    dimensions_px: [1440,436]\n    bytes: 177984\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"https://arxiv.org/html/2510.14528v1\"\n    derivation: \"source-raster-copy\"\n    modifications: \"Complete Figure 3 from the versioned report. No crop, redraw, relabeling, or recompression.\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md\",\"en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md\"]\n  - id: curated-vlm2026-internvl-figure2-e6f8f5eefb4c\n    asset: \"00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure2-dynamic-tiles.png\"\n    author: \"Zhe Chen et al.\""
+        }
+      ]
+    },
+    {
+      "source": "docs/audit/2026-10-30-reading-route-review.json",
+      "before_sha256": "1285246964ef1257fc886ca164db1cdb4b8c1e667b02a328612f531b740991f6",
+      "after_sha256": "f6a8f8054425191d5cacf2b1da0c234e84a208ee524345162b9eb36c7730883f",
+      "lines": 8031,
+      "changes": [
+        {
+          "old": "      \"sha256\": \"9b1d1126236ab864656743549d9be4364fa86a4740992f0574810cbe74aece5b\",\n      \"lines\": 705,",
+          "new": "      \"sha256\": \"cfece25b0013bb7310166cda6123cf1fcfce715f01bd751af30536ea84e97cb2\",\n      \"lines\": 749,\n      \"paddleocrDeltaEvidence\": \"docs/audit/2026-11-11-paddleocr-reading-order-additions.json\","
+        },
+        {
+          "old": "      \"currentSha256\": \"c8763bab6e25a3c17243b6ef4d143bd53dcf8f1bc542b07a5b5a8a3599ad8b88\",\n      \"lines\": 576,",
+          "new": "      \"currentSha256\": \"296fde91073e02b30f393acb86adf2a34357bb832b206ac47566d9d49593642a\",\n      \"lines\": 617,\n      \"paddleocrDeltaEvidence\": \"docs/audit/2026-11-11-paddleocr-reading-order-additions.json\","
+        },
+        {
+          "old": "      \"currentSha256\": \"bd1a3294222f6bbe3011ac566d1ad005a8ff5574665f904d8c6c47ee0ebfabf3\",\n      \"lines\": 497,",
+          "new": "      \"currentSha256\": \"92cdfed919a488fe7f1577eda29f42de72308ae115c87ba218fa17182caceea9\",\n      \"lines\": 497,\n      \"canonicalSyncEvidence\": \"docs/audit/2026-11-11-paddleocr-reading-order-additions.json\","
+        },
+        {
+          "old": "      \"currentSha256\": \"e17b0dd4f10ae182a8493cf77827e30cc742391aa7522454a4f99d3df61c4290\",\n      \"lines\": 709,",
+          "new": "      \"currentSha256\": \"894a75131dcad28255de9dd7421d4022712e4d3afad0f86e2d9ffe1c02facd11\",\n      \"lines\": 709,\n      \"canonicalSyncEvidence\": \"docs/audit/2026-11-11-paddleocr-reading-order-additions.json\","
+        }
+      ]
+    },
+    {
+      "source": "docs/audit/2026-11-09-release-readiness.json",
+      "before_sha256": "b4c840bd99c4c32a3789db349485a15068b6c562d4ecf17933e42300453b467e",
+      "after_sha256": "e0f345b93611995db88fc0ddfd99d560991f3c90ed85673225a038ab202b5760",
+      "lines": 1445,
+      "changes": [
+        {
+          "old": "  \"remaining\": [\n    \"Reconcile digests and source records for 32 older rendered textbook entries. The broader source-library image inventory is separate. The three retired VLM copies require no reader embed; a reusable visual equivalent for each distinct teaching case remains an editorial option.\",",
+          "new": "  \"paddleocrReadingOrder20261111\": {\n    \"journal\": \"docs/audit/2026-11-11-paddleocr-reading-order-additions.json\",\n    \"chapter\": \"textbook/multimodal/documents-ocr-grounding/#doc-paddleocr-reading-order\",\n    \"checkedTextbookLocalePages\": 310,\n    \"localBuildPages\": 2079,\n    \"newLicensedOriginalFigures\": 1,\n    \"textbookRenderedImagePathsWithMatchingSHA256\": 1188,\n    \"registeredTextbookPathsStillWithoutSHA256\": 32,\n    \"scope\": \"Both chapter editions use the unchanged CC BY 4.0 PP-DocLayoutV2 Figure 3. The paper note and subject index link back to the worked invoice. The previous Qwen2-VL translation example remains a paper link, not a copied image.\"\n  },\n  \"remaining\": [\n    \"Reconcile digests and source records for 32 older rendered textbook entries. The source-library image inventory is separate. A directly reusable illustration of the distinct InternVL and ImageBind cases remains open.\","
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/PaddleOCR-VL v1.md",
+      "created": true,
+      "after_sha256": "433315128a8f8c20a1409d21cde84831dc6313467bf223e24cd950583789da71",
+      "lines": 34
+    },
+    {
+      "source": "en/05 Sources/Papers/PaddleOCR-VL v1.md",
+      "created": true,
+      "after_sha256": "68681eb593b15e66dfaa8684c0423a72aa48f423f5919069af7e17f04cb65463",
+      "lines": 37
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md",
+      "before_sha256": "bd1a3294222f6bbe3011ac566d1ad005a8ff5574665f904d8c6c47ee0ebfabf3",
+      "after_sha256": "92cdfed919a488fe7f1577eda29f42de72308ae115c87ba218fa17182caceea9",
+      "lines": 497,
+      "changes": [
+        {
+          "old": "canonical_revision: \"c919ade1e7e7b76cb1f304c6efde6cd5fc0b5ec8af6636e531d358eb08caa5f1\"",
+          "new": "canonical_revision: \"36ad1356c2a79fdf0ade58459a0d2b2a2a18b0c6746ef8576cbd6cd360a1fe20\""
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md",
+      "before_sha256": "e17b0dd4f10ae182a8493cf77827e30cc742391aa7522454a4f99d3df61c4290",
+      "after_sha256": "894a75131dcad28255de9dd7421d4022712e4d3afad0f86e2d9ffe1c02facd11",
+      "lines": 709,
+      "changes": [
+        {
+          "old": "canonical_revision: \"cf394a0ddae0011830aaedeb1cded99bc7c3f5849f5839f8eec67b38c8418974\"",
+          "new": "canonical_revision: \"d15766e05d47e92e7e00bf4e4c4bf608ee1d22aedff025f875c4280880739f2c\""
+        }
+      ]
+    }
+  ]
+}

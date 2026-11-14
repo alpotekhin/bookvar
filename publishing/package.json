@@ -10,7 +10,9 @@
     "test:output": "vitest run tests/site-output.test.ts",
     "check:links": "tsx adapter/check-built-links.ts",
     "check:size": "tsx adapter/check-built-size.ts",
+    "check:hse-release": "node tools/check-hse-release-boundary.mjs",
     "check:source-coverage": "node tools/check-source-coverage.mjs",
+    "check:harvard-media": "tsx tools/check-harvard-media.ts",
     "check:course-ingestion": "tsx tools/check-course-ingestion.ts",
     "check:topics": "tsx tools/sync-topic-index.ts --check",
     "build": "tsx adapter/build.ts"

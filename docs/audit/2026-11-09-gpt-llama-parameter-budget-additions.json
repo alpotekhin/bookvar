@@ -1,0 +1,94 @@
+{
+  "date": "2026-11-09",
+  "scope": "Explain the GPT-1 → GPT-2 → GPT-3 → LLaMA v1 parameter changes in the existing four-model comparison; no deployment.",
+  "files": [
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "before_sha256": "c7dff62786fcee22d6bd941767cbdfb4d4f1cf61e09987f823facd632dbcb02d",
+      "after_sha256": "7541815b4a7a998cf89b6ad52cc34cfaceb9c72dadeb4dec0f58f636cd01b63a",
+      "lines": 1293,
+      "changes": [
+        {
+          "old": "  - label: Токенизация и размер окна от GPT-1 до LLaMA\n    label_en: Tokenization and context length from GPT-1 to LLaMA\n    anchor: gpt-llama-tokenization",
+          "new": "  - label: Токенизация и размер окна от GPT-1 до LLaMA\n    label_en: Tokenization and context length from GPT-1 to LLaMA\n    anchor: gpt-llama-tokenization\n  - label: Параметры GPT и LLaMA — словарь, позиции и связывание весов\n    label_en: GPT and LLaMA parameters — vocabulary, positions, and weight tying\n    anchor: gpt-llama-parameter-budget"
+        },
+        {
+          "old": "У [[#llama-pretraining-data|исходных кривых LLaMA]] горизонтальная ось\nпоказывает число обработанных токенов, а не число параметров.\n\n### Где задаётся нужный ответ",
+          "new": "У [[#llama-pretraining-data|исходных кривых LLaMA]] горизонтальная ось\nпоказывает число обработанных токенов, а не число параметров.\n\n<a id=\"gpt-llama-parameter-budget\"></a>\n\n### Сколько весов приходится на словарь и позиции\n\nУ GPT-1, младшей GPT-2 и младшей GPT-3 по 12 блоков, ширина состояния\n768 и по 12 голов. Между GPT-1 и GPT-2 прибавилось примерно восемь\nмиллионов параметров, хотя стек не стал глубже или шире. В выпущенных\nтокенизаторах словарь вырос с 40 478 до 50 257 токенов. На каждую\nновую строку приходится 768 весов, так что одна эта разница даёт\n7 510 272 параметра. Переход с 512 позиций на 1024 добавляет ещё\n393 216 весов в позиционной таблице, а финальная LayerNorm GPT-2 —\n1536. В этом подсчёте не участвуют служебные токены и голова, которые\nдобавляли при дообучении GPT-1 под отдельную задачу.\n[Словарь GPT-1](https://github.com/openai/finetune-transformer-lm/blob/a69b5c43b0452462890bca8ff92fb75dee9290cf/model/encoder_bpe_40000.json),\n[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|подсчёт параметров в главе о GPT-2]].\n\nПри переходе от младшей GPT-2 к младшей GPT-3 окно снова удвоилось:\n1024 дополнительные строки той же ширины соответствуют примерно\n0,79 млн параметров. Это оценка вклада позиционной таблицы, а не\nточный подсчёт закрытых весов GPT-3. Локальные слои GPT-3 меняют\n[[#Какие токены читает один слой|доступ к ключам]], не увеличивая число\nголов или ширину состояния у младшей модели\n([GPT-3, §2.1 и табл. 2.1](https://arxiv.org/html/2005.14165v4#S2.SS1)).\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/gulordava-figure1-ab.png|Две панели Figure 1: сверху входная таблица E и отдельная проекция W, снизу одна таблица E используется и на входе, и в транспонированном виде на выходе]]\n\n*Kristina Gulordava, Laura Aina и Gemma Boleda,\n[How to represent a word and predict it, too, рис. 1(a–b), с. 2937](https://aclanthology.org/D18-1323.pdf#page=2),\nEMNLP 2018. Две панели оригинала, без изменений внутри панелей;\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nАвторы показывают LSTM; тот же выбор словарных матриц есть у декодера Transformer.*\n\nВ нижней панели одна и та же таблица используется дважды. В GPT-2\nдля входного `␠cat` берут строку 3797 таблицы $E$; на выходе модели\nскалярное произведение итогового состояния с той же строкой даёт\nлогит токена `␠cat`. Поэтому 50 257 строк по 768 весов считаются\nодин раз: 38 597 376 параметров. В LLaMA-7B, как в верхней панели,\nдля входного `▁cat` и его выходного логита используются две независимо\nобучаемые строки. У неё меньше токенов в словаре (32 000), но ширина\n4096 и две матрицы. Вместе они содержат 262 144 000 весов. Отдельной\nтаблицы для позиций уже нет: RoPE применяется к запросам и ключам\nвнутри блоков. [[#Формы и параметры исходных моделей|Полный подсчёт LLaMA]]\nдобавляет к словарным весам проекции внимания, FFN и нормы.\n\n### Где задаётся нужный ответ"
+        },
+        {
+          "old": "- [Исходная реализация LLaMA, февраль 2023](https://github.com/meta-llama/llama/blob/1076b9c51c77ad06e9d7ba8a4c6df775741732bd/llama/model.py): формы проекций, нормы, RoPE, округление FFN, несвязанные embeddings/output и ограничения inference-метода.",
+          "new": "- [Исходная реализация LLaMA, февраль 2023](https://github.com/meta-llama/llama/blob/1076b9c51c77ad06e9d7ba8a4c6df775741732bd/llama/model.py): формы проекций, нормы, RoPE, округление FFN, несвязанные embeddings/output и ограничения inference-метода.\n- [[05 Источники/Papers/Gulordava et al. 2018 — Tied language model architectures|Gulordava, Aina и Boleda, EMNLP 2018]]: Figure 1 и §2 — связанные и раздельные словарные матрицы."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/Gulordava et al. 2018 — Tied language model architectures.md",
+      "created": true,
+      "after_sha256": "833e6063ee0f1a41c0306e6931db141e69e04d35664decb56af822b4c3c50ac5"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "58030e3a0a9cf6fadec7e823727e25b78449475ab3e038815fdadd53b4a35fce",
+      "after_sha256": "ad1f8a49a7c8652c0b13674d319f7dcdb52ba5934703708de1d6521a58762096",
+      "lines": 1698,
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-tokenization|Токенизация и размер окна от GPT-1 до LLaMA]]",
+          "new": "  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-tokenization|Токенизация и размер окна от GPT-1 до LLaMA]]\n  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-parameter-budget|Параметры GPT и LLaMA — словарь, позиции и связывание весов]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "cd5d282d173106994b99939c16bb63425aa5835b1ecd11727d536e923e31900f",
+      "after_sha256": "394b66466f9b6ce261bbe1b9a80f5cc5825ef19bc953f6ec96df308495a5dad5",
+      "lines": 1700,
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-tokenization|Tokenization and context length from GPT-1 to LLaMA]]",
+          "new": "  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-tokenization|Tokenization and context length from GPT-1 to LLaMA]]\n  - [[00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура#gpt-llama-parameter-budget|GPT and LLaMA parameters — vocabulary, positions, and weight tying]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "36b7a89ec742addddc2b2ebe2f9d8ade2901d9af71ca5213a6200d67d927da89",
+      "after_sha256": "cdd580077c54b03b8dae5be2c75301ddb6ad28dd1dbf07335fc3e705f135f37e",
+      "lines": 24115,
+      "changes": [
+        {
+          "old": "    used_in: [\"00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\"]",
+          "new": "    used_in: [\"00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\"]\n  - id: \"curated-gpt-history-gulordava-figure1-ab-653bf6ed32a1\"\n    asset: \"00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/gulordava-figure1-ab.png\"\n    title: \"Non-tied and tied language models (Figure 1a–b)\"\n    author: \"Kristina Gulordava, Laura Aina and Gemma Boleda\"\n    source_url: \"https://aclanthology.org/D18-1323/\"\n    source_image_url: \"https://aclanthology.org/D18-1323.pdf#page=2\"\n    source_asset: \"05 Источники/Originals/gpt-history-2026-11-09/gulordava-2018.pdf\"\n    source_asset_sha256: \"517a614be88996eb20954208b2ff7d18bb6a044ef9a6d36e7fe59aa455b3e3d8\"\n    source_page: 2\n    render_dpi: 360\n    render_page_size_px: [2977,4210]\n    crop_box_px: [1495,288,2465,1189]\n    dimensions_px: [970,901]\n    sha256: \"653bf6ed32a10a05d58db78e311288e0c59956974137eed1eaa03779afa39b21\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence_url: \"https://aclanthology.org/faq/copyright/\"\n    modifications: \"Two complete original panels (a) and (b), extracted from PDF page 2. Panel (c), the typeset caption and running text are excluded; no redraw, rescaling or translated labels.\"\n    derivation: \"pdf-page-render-crop\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    metadata_status: \"verified\"\n    last_verified: \"2026-11-09\"\n    used_in: [\"00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md\"]"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "ad0e8ba74131cd122dc31f1e802929d818e313ce042a519b554ef5dfa0e6bab0",
+      "after_sha256": "2a5303e198e3bed17444b6be222e7070d8cdb4d940a6da02cc29b7854e33a452",
+      "lines": 2568,
+      "changes": [
+        {
+          "old": "      - source: Papers/GPT 1.0.md\n        route: sources/papers/gpt-1-0",
+          "new": "      - source: Papers/GPT 1.0.md\n        route: sources/papers/gpt-1-0\n      - source: 05 Источники/Papers/Gulordava et al. 2018 — Tied language model architectures.md\n        route: sources/papers/tied-language-model-architectures"
+        }
+      ]
+    }
+  ],
+  "review": {
+    "sources": [
+      "Radford et al., GPT-1 §§3.1 and 4.1; released encoder vocabulary and task fine-tuning code.",
+      "Radford et al., GPT-2 §§2.2–2.3 and pinned model.py: 50,257 tokens, learned positions, final LayerNorm and the tied output projection.",
+      "Brown et al., GPT-3 v4 §2.1 and Table 2.1: GPT-3 Small shape and locally banded attention. The extra position row count is an estimate, not a reconstruction of the closed model.",
+      "Touvron et al., LLaMA v1 §§2.1–2.2 and pinned model.py: separate vocabulary tables and rotary Q/K.",
+      "Gulordava, Aina and Boleda, EMNLP 2018 §2 and Figure 1: direct tying, independent tables and the separately proposed intermediate projection."
+    ],
+    "figure": "Original complete panels (a–b), without labels changed or rescaling. ACL Anthology policy permits reuse under CC BY 4.0. Crop, dimensions and source hash recorded in the asset registry.",
+    "example": "The same vocabulary row is looked up for the input ID and reused for its logit in GPT-2. In LLaMA the two rows are independent. At width 768 the vocabulary and position increases add 7,510,272 and 393,216 weights respectively; at width 4096 the two LLaMA-7B vocabulary matrices total 262,144,000 weights.",
+    "editorial": "Read the existing LLaMA chapter including all code, figures and references; reread the added explanation and its transitions. The edit stays in the canonical comparison, separates a position-table estimate from a closed model's exact count, and leaves the existing T5 sequence and English fallback in place.",
+    "verification": "Final local build: 2043 pages, 738 publication checks, 241 built-output checks, topic index and reading receipts passed; zero broken internal routes, fragments or files. CPU chapter checker passed the count of tied and separate weights and the additional position rows. Full registry integration check passed after the asset addition. Poppler reproduced the crop byte-for-byte, and the dev reader served the same bytes.",
+    "reader": "Opened all four model pages and checked one original figure per page in Chrome at 375 and 1280 CSS pixels. The new panels and caption were inspected at both widths, including full and 2x mobile views with panning. Followed the reference entry and original-paper source-note round trip in both locale shells. No page overflow or KaTeX errors on the four checked pages.",
+    "limits": "No checkpoint run or benchmark, translation of the LLaMA chapter, commit, push or publication."
+  }
+}

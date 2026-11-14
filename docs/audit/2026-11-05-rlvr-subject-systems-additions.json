@@ -1,0 +1,272 @@
+{
+  "schema_version": 1,
+  "kind": "rlvr-subject-systems-additions",
+  "review_date": "2026-11-05",
+  "files": [
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+      "before_sha256": "e47cc4f42c05c58f9ff84aaba765cf21e6ad80f8c658efa159ea510ff5ff5828",
+      "after_sha256": "88f8496071d47ac4dfa57a2480379490de5e134d2aa07b6eeda47fdc98dd1f2f",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29\nlast_verified: 2026-10-29\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\nreference_terms:\n  - anchor: rlvr-contract\n    label: \"Проверяемая награда и исходная способность решать задачи\"\n    label_en: \"Verifiable rewards and initial task competence\"\n  - anchor: verifiable-reward\n    label: \"Источник награды и алгоритм обновления\"\n    label_en: \"Reward sources versus update algorithms\"\n  - anchor: rlvr-equation-example\n    label: \"Четыре ответа на уравнение и компоненты награды\"\n    label_en: \"Four equation answers and reward components\"\n  - anchor: rlvr-reward-components\n    label: \"Награда за правильность и за формат\"\n    label_en: \"Correctness and format rewards\"\n  - anchor: rlvr-task-records\n    label: \"Запись задачи, закрытые тесты и разбиение данных\"\n    label_en: \"Task records, hidden tests and data splits\"\n  - anchor: rlvr-rollout-records\n    label: \"Версия стратегии и вероятности сгенерированного ответа\"\n    label_en: \"Policy revisions and rollout log probabilities\"\n  - anchor: rlvr-objective\n    label: \"Ожидаемая награда и KL-регуляризация\"\n    label_en: \"Expected rewards and KL regularization\"\n  - anchor: rlvr-score-function\n    label: \"Градиент при недифференцируемой проверке\"\n    label_en: \"Learning from a nondifferentiable verifier\"\n  - anchor: rlvr-reward-scale\n    label: \"Масштаб награды относительно KL\"\n    label_en: \"Reward scaling relative to KL\"\n  - anchor: parser-vs-verifier\n    label: \"Извлечение ответа и проверка результата\"\n    label_en: \"Answer extraction versus result verification\"\n  - anchor: rlvr-reward-gradient\n    label: \"От строк и наград к обновлению вероятностей\"\n    label_en: \"From response strings to reward gradients\"\n  - anchor: rlvr-symbolic-verification\n    label: \"Эквивалентность выражений, допуски и Math-Verify\"\n    label_en: \"Expression equivalence, tolerances and Math-Verify\"\n  - anchor: rlvr-program-tests\n    label: \"Покрытие тестов, частичная награда и изоляция кода\"\n    label_en: \"Test coverage, partial credit and code isolation\"\n  - anchor: rlvr-agent-final-state\n    label: \"Конечное состояние и допустимость действий агента\"\n    label_en: \"Agent final states and permitted actions\"\n  - anchor: rlvr-formal-proofs\n    label: \"Формальное утверждение, аксиомы и доказательство\"\n    label_en: \"Formal statements, axioms and proofs\"\n  - anchor: agent-reward-design\n    label: \"Совпадение вызова и выполнение задачи\"\n    label_en: \"Tool-call matching versus task completion\"\n  - anchor: rlvr-toolrl\n    label: \"ToolRL: частичные оценки имени и аргументов\"\n    label_en: \"ToolRL partial function and argument scores\"\n  - anchor: rlvr-tooln1\n    label: \"Tool-N1: бинарная проверка и single-step данные\"\n    label_en: \"Tool-N1 binary checks and single-step data\"\n  - anchor: rlvr-completion-efficiency\n    label: \"ASTRA: полнота, число вызовов и F1\"\n    label_en: \"ASTRA completion, call counts and F1\"\n  - anchor: rlvr-refusal-filtering\n    label: \"Отказ, недостающая информация и фильтрация групп\"\n    label_en: \"Refusal, missing information and group filtering\"\n  - anchor: rlvr-process-vs-outcome\n    label: \"Награда за результат и за промежуточные шаги\"\n    label_en: \"Outcome rewards versus step feedback\"\n  - anchor: rlvr-curriculum\n    label: \"Смешанные группы и оценка доступной сложности\"\n    label_en: \"Mixed-reward groups and task difficulty\"\n  - anchor: verifier-audit\n    label: \"Аудит оценщика, шаблоны и остановка генерации\"\n    label_en: \"Grader audits, prompt formats and stopping\"\n  - anchor: rlvr-false-acceptance\n    label: \"Редкие ложные принятия и загрязнение награды\"\n    label_en: \"False accepts and contaminated reward signals\"\n  - anchor: rlvr-metrics\n    label: \"Метрики разбора, проверки, обучения и обобщения\"\n    label_en: \"Parsing, verification, learning and generalization metrics\"\n  - anchor: rlvr-pass-at-k\n    label: \"Pass@k, неоднородность задач и несмещённая оценка\"\n    label_en: \"Pass@k, task heterogeneity and unbiased estimation\"\n  - anchor: rlvr-tulu-experiment\n    label: \"Tülu 3: награда, KL, длина и перенос\"\n    label_en: \"Tülu 3 rewards, KL, length and transfer\"\n  - anchor: rlvr-tulu-value-model\n    label: \"Функция ценности, награда RM и параметры PPO\"\n    label_en: \"Value models, RM scores and PPO settings\"\n  - anchor: rlvr-rollout-learner-workers\n    label: \"Rollout workers, learner и устаревшие данные\"\n    label_en: \"Rollout workers, learners and stale data\"\n  - anchor: rlvr-failures\n    label: \"Open-R1 и контракты открытых реализаций\"\n    label_en: \"Open-R1 and implementation contracts\"\n"
+        },
+        {
+          "old": "## Сквозной пример: линейное уравнение",
+          "new": "<a id=\"rlvr-equation-example\"></a>\n\n## Сквозной пример: линейное уравнение"
+        },
+        {
+          "old": "### Ручной расчёт награды",
+          "new": "<a id=\"rlvr-reward-components\"></a>\n\n### Ручной расчёт награды"
+        },
+        {
+          "old": "### 1. Формат набора данных",
+          "new": "<a id=\"rlvr-task-records\"></a>\n\n### 1. Формат набора данных"
+        },
+        {
+          "old": "### 2. Запись о сгенерированном ответе",
+          "new": "<a id=\"rlvr-rollout-records\"></a>\n\n### 2. Запись о сгенерированном ответе"
+        },
+        {
+          "old": "### 3. Целевая функция обучения",
+          "new": "<a id=\"rlvr-objective\"></a>\n\n### 3. Целевая функция обучения"
+        },
+        {
+          "old": "### Почему можно учиться на недифференцируемой проверке",
+          "new": "<a id=\"rlvr-score-function\"></a>\n\n### Почему можно учиться на недифференцируемой проверке"
+        },
+        {
+          "old": "### Масштаб награды меняет задачу",
+          "new": "<a id=\"rlvr-reward-scale\"></a>\n\n### Масштаб награды меняет задачу"
+        },
+        {
+          "old": "### Как награда меняет вероятности ответов",
+          "new": "<a id=\"rlvr-reward-gradient\"></a>\n\n### Как награда меняет вероятности ответов"
+        },
+        {
+          "old": "### Точная и символьная проверка математики",
+          "new": "<a id=\"rlvr-symbolic-verification\"></a>\n\n### Точная и символьная проверка математики"
+        },
+        {
+          "old": "### Программный код",
+          "new": "<a id=\"rlvr-program-tests\"></a>\n\n### Программный код"
+        },
+        {
+          "old": "### Инструменты и агенты",
+          "new": "<a id=\"rlvr-agent-final-state\"></a>\n\n### Инструменты и агенты"
+        },
+        {
+          "old": "### Формальные доказательства",
+          "new": "<a id=\"rlvr-formal-proofs\"></a>\n\n### Формальные доказательства"
+        },
+        {
+          "old": "### ToolRL: compare the function and its arguments",
+          "new": "<a id=\"rlvr-toolrl\"></a>\n\n### ToolRL: compare the function and its arguments"
+        },
+        {
+          "old": "Binary matching is another choice. In",
+          "new": "<a id=\"rlvr-tooln1\"></a>\n\nBinary matching is another choice. In"
+        },
+        {
+          "old": "### Partial completion and unnecessary calls",
+          "new": "<a id=\"rlvr-completion-efficiency\"></a>\n\n### Partial completion and unnecessary calls"
+        },
+        {
+          "old": "### Refusal, missing information and group filtering",
+          "new": "<a id=\"rlvr-refusal-filtering\"></a>\n\n### Refusal, missing information and group filtering"
+        },
+        {
+          "old": "## Проверка результата и проверка хода решения",
+          "new": "<a id=\"rlvr-process-vs-outcome\"></a>\n\n## Проверка результата и проверка хода решения"
+        },
+        {
+          "old": "## Учебная программа и доступная сложность",
+          "new": "<a id=\"rlvr-curriculum\"></a>\n\n## Учебная программа и доступная сложность"
+        },
+        {
+          "old": "### Почему редкие ложные принятия опасны",
+          "new": "<a id=\"rlvr-false-acceptance\"></a>\n\n### Почему редкие ложные принятия опасны"
+        },
+        {
+          "old": "## Метрики",
+          "new": "<a id=\"rlvr-metrics\"></a>\n\n## Метрики"
+        },
+        {
+          "old": "### Одна попытка и несколько попыток",
+          "new": "<a id=\"rlvr-pass-at-k\"></a>\n\n### Одна попытка и несколько попыток"
+        },
+        {
+          "old": "## Что показывает кривая RLVR, а чего она не доказывает",
+          "new": "<a id=\"rlvr-tulu-experiment\"></a>\n\n## Что показывает кривая RLVR, а чего она не доказывает"
+        },
+        {
+          "old": "### Модель награды может исчезнуть, а функция ценности — остаться",
+          "new": "<a id=\"rlvr-tulu-value-model\"></a>\n\n### Модель награды может исчезнуть, а функция ценности — остаться"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-rlvr-loop.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-rlvr-loop.png|Цикл Tülu 3: генерация, проверяемая награда и обновление PPO]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/toolrl/reward-design.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/toolrl/reward-design.png|ToolRL: формат, имена функций, ключи и значения аргументов]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-2026-10-24/tulu-rlvr-full-figure19.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-2026-10-24/tulu-rlvr-full-figure19.png|Tülu 3: все двенадцать панелей награды, KL, длины и тестовых оценок]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-ifeval-kl-and-generalization.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-ifeval-kl-and-generalization.png|Целевая IFEval-оценка и среднее качество при разном KL]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-value-initialization.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-value-initialization.png|Инициализация функции ценности из RM и SFT]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-2026-10-24/tulu-rlvr-reward-mixing.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-2026-10-24/tulu-rlvr-reward-mixing.png|Проверяемая награда отдельно и вместе с оценками RM]]"
+        },
+        {
+          "old": "<a id=\"rlvr-failures\"></a>\n",
+          "new": "<a id=\"rlvr-rollout-learner-workers\"></a>\n## Rollout workers and learner workers\n\nTülu 3 separates generation from parameter updates. Rollout workers run a\npolicy copy with vLLM and PagedAttention; learner workers update the policy\nand value models. The reference policy provides the KL comparison and is\nnot trained. ZeRO Stage 3 partitions training states so that the models fit\nacross devices.\n\nWith a synchronous schedule, generation waits while the learner updates,\nthen the learner waits for fresh responses. Dedicated worker pools can\noverlap these phases: while one batch is being consumed, rollout workers\nprepare another. This improves utilization without making the two phases\nequally fast. Queued responses may come from older policy weights.\n\nThe paper uses the second-latest inference batch to control this lag.\nA bounded lag does not guarantee on-policy data. Their sampling-policy\nrevision and log probabilities must remain attached to them; replacing\nthose probabilities with scores from the updated learner changes the\nPPO ratio. The [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#offpolicy-ratios|next chapter’s ratio analysis]]\nexplains this distinction.\n\nThese are the implementation choices in\n[Tülu 3, §6.3](https://arxiv.org/html/2411.15124v5#S6.SS3), not requirements\nof every RLVR algorithm.\n\n<a id=\"rlvr-failures\"></a>\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "84f07593017eaf7a02ace8ee6c27b0c3e2bd543a9700379ffad1b40d1829459e",
+      "after_sha256": "63eb96ae5281c7efd9b5786a871a917adacb45be380d092e71bbb2f044ec5121",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers|RLVR — обучение по проверяемой награде]]\n",
+          "new": "- [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers|RLVR — обучение по проверяемой награде]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-contract|Проверяемая награда и исходная способность решать задачи]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#verifiable-reward|Источник награды и алгоритм обновления]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-equation-example|Четыре ответа на уравнение и компоненты награды]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-reward-components|Награда за правильность и за формат]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-task-records|Запись задачи, закрытые тесты и разбиение данных]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-rollout-records|Версия стратегии и вероятности сгенерированного ответа]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-objective|Ожидаемая награда и KL-регуляризация]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-score-function|Градиент при недифференцируемой проверке]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-reward-scale|Масштаб награды относительно KL]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#parser-vs-verifier|Извлечение ответа и проверка результата]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-reward-gradient|От строк и наград к обновлению вероятностей]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-symbolic-verification|Эквивалентность выражений, допуски и Math-Verify]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-program-tests|Покрытие тестов, частичная награда и изоляция кода]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-agent-final-state|Конечное состояние и допустимость действий агента]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-formal-proofs|Формальное утверждение, аксиомы и доказательство]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#agent-reward-design|Совпадение вызова и выполнение задачи]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-toolrl|ToolRL: частичные оценки имени и аргументов]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-tooln1|Tool-N1: бинарная проверка и single-step данные]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-completion-efficiency|ASTRA: полнота, число вызовов и F1]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-refusal-filtering|Отказ, недостающая информация и фильтрация групп]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-process-vs-outcome|Награда за результат и за промежуточные шаги]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-curriculum|Смешанные группы и оценка доступной сложности]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#verifier-audit|Аудит оценщика, шаблоны и остановка генерации]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-false-acceptance|Редкие ложные принятия и загрязнение награды]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-metrics|Метрики разбора, проверки, обучения и обобщения]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-pass-at-k|Pass@k, неоднородность задач и несмещённая оценка]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-tulu-experiment|Tülu 3: награда, KL, длина и перенос]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-tulu-value-model|Функция ценности, награда RM и параметры PPO]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-rollout-learner-workers|Rollout workers, learner и устаревшие данные]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-failures|Open-R1 и контракты открытых реализаций]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "87974ca67d464e0117a21f289b9c54b20857e5ac1565ad8bd66e3a7db093ede5",
+      "after_sha256": "dab94494faec8d98a15cb007a6bf065b472926fa472bb881c6bda769919e501c",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers|RLVR and verifiers]]\n",
+          "new": "- [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers|RLVR and verifiers]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-contract|Verifiable rewards and initial task competence]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#verifiable-reward|Reward sources versus update algorithms]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-equation-example|Four equation answers and reward components]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-reward-components|Correctness and format rewards]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-task-records|Task records, hidden tests and data splits]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-rollout-records|Policy revisions and rollout log probabilities]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-objective|Expected rewards and KL regularization]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-score-function|Learning from a nondifferentiable verifier]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-reward-scale|Reward scaling relative to KL]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#parser-vs-verifier|Answer extraction versus result verification]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-reward-gradient|From response strings to reward gradients]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-symbolic-verification|Expression equivalence, tolerances and Math-Verify]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-program-tests|Test coverage, partial credit and code isolation]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-agent-final-state|Agent final states and permitted actions]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-formal-proofs|Formal statements, axioms and proofs]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#agent-reward-design|Tool-call matching versus task completion]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-toolrl|ToolRL partial function and argument scores]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-tooln1|Tool-N1 binary checks and single-step data]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-completion-efficiency|ASTRA completion, call counts and F1]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-refusal-filtering|Refusal, missing information and group filtering]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-process-vs-outcome|Outcome rewards versus step feedback]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-curriculum|Mixed-reward groups and task difficulty]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#verifier-audit|Grader audits, prompt formats and stopping]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-false-acceptance|False accepts and contaminated reward signals]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-metrics|Parsing, verification, learning and generalization metrics]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-pass-at-k|Pass@k, task heterogeneity and unbiased estimation]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-tulu-experiment|Tülu 3 rewards, KL, length and transfer]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-tulu-value-model|Value models, RM scores and PPO settings]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-rollout-learner-workers|Rollout workers, learners and stale data]]\n  - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-failures|Open-R1 and implementation contracts]]\n"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "status": "verified-local-delta",
+    "chapter": {
+      "source": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+      "inputSha256": "e47cc4f42c05c58f9ff84aaba765cf21e6ad80f8c658efa159ea510ff5ff5828",
+      "inputLines": 1205,
+      "finalSha256": "88f8496071d47ac4dfa57a2480379490de5e134d2aa07b6eeda47fdc98dd1f2f",
+      "finalLines": 1368,
+      "wholeRead": "Complete input1-320,321-620,621-930,931-1205. Complete final1-370,371-740,741-1070,1071-1368 read. No subsequent chapter edits."
+    },
+    "explanation": {
+      "preserved": "Full preceding Russian explanation and native-English ToolRL/Tool-N1/ASTRA/refusal block retained. Six actual programs, all twelve display derivations, three source-unit identifiers, legacy anchors and six source figures preserved.",
+      "mechanismReview": "Reviewed reward source versus optimizer; constructed equation/format rewards; records, policy revisions and KL; nondifferentiable-score gradient and scaling; strict Decimal parser; exact four-outcome update; mathematical/code/formal/agent checks; matching and completion rewards; process/outcome distinction; mixed groups and finite sampling; CS336 grader/stop contracts; false-acceptance contamination; pass@k; Tulu learning/generalization/value/RM ablations.",
+      "newSourceAddition": "The prior chapter omitted the explanation of dedicated rollout/learner pools in Tulu section6.3. Added source-scoped English prose about policy/value/reference roles, ZeRO3, overlapping generation and learning, queued older-policy responses, controlled lag and preserved sampling-policy scores. Links directly to existing GRPO token-ratio analysis. No synthetic diagram or parallel course route created.",
+      "freshSourceRead": {
+        "url": "https://arxiv.org/html/2411.15124v5#S6",
+        "sections": "Complete section6 introduction and6.1-6.3, Table21 and Table23 freshly read. This includes source-specific reward scaling, dropout/whitening/non-EOS penalty, value initialization, ablations, allocation and asynchronous data-lag discussion. Not a fresh complete6.4 or whole-paper/course reading."
+      },
+      "sourceComparisonReuse": "Exact1205-line input matches the accepted October29 revision e47cc4f4. Reread mechanism/source maps in docs/audit/2026-10-24-rlvr.md and docs/audit/2026-10-29-legacy-grpo-rlvr-verification.json. Reuse unchanged comparisons for grader, Math-Verify/Open-R1, HumanEval metrics and ToolRL/Tool-N1/ASTRA only on these exact bytes.",
+      "style": "No-ai-slop applied with academic qualifications to complete final reading. Retained mechanisms, examples, caveats, mathematical notation and original English rather than translating or compressing. New worker explanation is connected English prose, explicitly attributed to Tulu; not represented as a verbatim course excerpt or new runtime experiment."
+    },
+    "examples": {
+      "fullChapter": {
+        "exit": 0,
+        "publishedPrograms": 6,
+        "torch": "2.14.1",
+        "device": "CPU",
+        "executedChapterSha256": "88f8496071d47ac4dfa57a2480379490de5e134d2aa07b6eeda47fdc98dd1f2f",
+        "log": "/var/tmp/bookvar-rlvr-final-examples-20261105.log",
+        "scope": "All six actual programs execute. Strict parser and invalid-data controls; independently differentiated exact four-outcome gradient(.13125,-.14375,.13125,-.11875), finite differences and three constant baselines; reward.575→.581920864175349.5200 pass@k combinatorial cases plus boundary,rare-probability and expectation checks. Actual CS336 format gate isolated with an explicitly substituted comparison fixture."
+      },
+      "toolReward": {
+        "exit": 0,
+        "programsInFullChapter": 2,
+        "pinnedCodeComparisons": 72,
+        "f1Cases": 408,
+        "modelCalls": 0,
+        "environmentActions": 0,
+        "log": "/var/tmp/bookvar-rlvr-scoped-20261105.log",
+        "scope": "Existing tool-rewards test freshly executes the two included programs and isolated pinned pure scoring functions. Reordering candidates reproduces3/7 versus15/7. These two programs are a subset of the six, not extra chapter programs."
+      },
+      "limits": "CPU arithmetic/parser and pure scoring only. No useful LLM training, arbitrary generated-code execution/sandbox audit, full Math-Verify/SymPy grader, live agent actions, GPU throughput or benchmark. New infrastructure prose checked against documentation, not deployed.",
+      "warnings": "AST parsing of the preserved CS336 source emitted invalid-escape SyntaxWarnings; all assertions passed. The source file was not rewritten or its full symbolic grader executed."
+    },
+    "subjectsPerLocale": 30,
+    "originalFigures": 6,
+    "materials": "Six original paths/bytes match the current registry. No new PDFs, crops, translations, diagrams, rights assumptions or registry edits. Existing provenance comparison reused only for unchanged source/figure hashes.",
+    "checks": {
+      "scoped": {
+        "exit": 0,
+        "files": 4,
+        "tests": 20,
+        "log": "/var/tmp/bookvar-rlvr-scoped-20261105.log"
+      },
+      "build": {
+        "exit": 0,
+        "pages": 2009,
+        "pagefindFiles": 2013,
+        "seconds": 31.49,
+        "log": "/var/tmp/bookvar-rlvr-build-20261105.log"
+      },
+      "html": {
+        "exit": 0,
+        "tests": 217,
+        "log": "/var/tmp/bookvar-rlvr-output-20261105.log"
+      },
+      "links": {
+        "exit": 0,
+        "brokenInternal": 0,
+        "log": "/var/tmp/bookvar-rlvr-links-20261105.log"
+      },
+      "topicIndex": {
+        "exit": 0,
+        "topics": 153,
+        "termsInOwner": 30,
+        "log": "/var/tmp/bookvar-rlvr-topics-check-20261105.log"
+      },
+      "size": {
+        "exit": 0,
+        "bytes": 857011162,
+        "files": 5626,
+        "limit": 1000000000,
+        "headroom": 142988838
+      },
+      "receipt": {
+        "exit": 0,
+        "files": 5,
+        "tests": 22,
+        "receiptTests": 2,
+        "currentHashMatches": 114,
+        "unreadOwnersInRoutePass": 39,
+        "log": "/var/tmp/bookvar-rlvr-receipts-final-20261105.log",
+        "scope": "Current RLVR and preceding DPO/preference preservation plus whole-owner receipts. Overlaps the earlier20 tests."
+      },
+      "scopedWhitespace": {
+        "trackedExit": 0,
+        "newFiles": "No whitespace diagnostics; git diff --no-index --check uses difference exit1 for new files."
+      }
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-05-rlvr-reader",
+      "desktop": "Default1280x720, document1280/1280. All six originals and attached captions inspected in viewer: loop, complete ToolRL, full12-panel Figure19, IFEval/generalization, value initialization and RM-score mixing. Twelve display formulas and four tables fit632/632 with zero KaTeX errors. New English worker section inspected inline. Dense Figure19 thumbnail alone is not readable.",
+      "mobile": "375x812, document375/375, reader343px. All12 displays and four tables fit343/343 with overflow-x:auto and zero KaTeX errors. New English prose inspected inline. Full Figure19 enlarged4x: measured(564,520), upper-left(0,0) and lower-right(1077,932) with maxima(1077,932); readable selected axes/legend/caption. ToolRL enlarged6x: left and right content inspected; right measuredx1795(max1795),y95(max154). No all12 individual-panel or all-six enlarged-mobile inspection claim. Viewport reset.",
+      "navigation": "Actual RU/EN reference links reach #rlvr-rollout-learner-workers. The actual ratio-analysis link reaches GRPO #offpolicy-ratios. Actual RU/EN Next opens grpo-deepseek-r1 with correct h1. English edition notice remains explicit fallback; no new translation. Russian interface restored and next GRPO owner left open.",
+      "recovery": "Old cross-goal browser handle and direct fresh tab wrapper failed; reset and same browser3/tab6 rebound successfully. No user tabs closed or unrelated surfaces used."
+    },
+    "remaining": [
+      "100 fresh plus14 reused=114 whole-owner reads out of153;39 owners unread in this pass. Whole reads are not accepted-chapter counts.",
+      "Next:GRPO,reasoning distillation,test-time compute and remaining synthetic-data,deployment,retrieval,multimodal,agent and recommender owners.",
+      "Full course-completeness comparison, existing figure/rights gaps, public-checkout/Pages-base checks and authorized dev/Pages release remain open. No translation,stage,commit,push or deploy in this pass."
+    ]
+  }
+}

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Pin and audit Berkeley Advanced LLM Agents, Spring 2025.
 
-The checked-in PDFs are unchanged official artifacts.  The adjacent page-index
-files are deterministic ``pdftotext -layout`` search aids, never substitutes
-for the originals.  All ledger rows are rebuilt from ``semantic-review.json``,
+The retained PDFs are unchanged official artifacts. The adjacent page indexes
+are deterministic ``pdftotext -layout`` search aids; excluded pages keep their
+physical page numbers but not their text. All ledger rows are rebuilt from ``semantic-review.json``,
 which records a direct page-by-page visual and semantic review at meaningful
 section scope.  Its exact semantic IDs, titles, kinds, ranges, dispositions,
 exclusion evidence, and parent PDF hashes must match the separately reviewed,
@@ -70,6 +70,18 @@ RIGHTS_EVIDENCE = (
 )
 EXTRACTOR_REVISION = "berkeley-advanced-llm-agents-semantic-audit-v2"
 PAGE_INDEX_TOOL = "pdftotext -layout (Poppler 26.04.0)"
+EXCLUDED_INDEX_PAGES = {"meeting-06-slides.pdf": (117, 118, 119, 120, 121)}
+WITHHELD_INDEX_TEXT = "[Withheld: excluded from reuse.]"
+# Authored catalogue additions are regenerated alongside pinned metadata.
+READING_EDITORIAL_SUFFIXES = {
+    "arxiv-2409-16165": (
+        "- Conference version: [ICML 2025, PMLR 267](https://proceedings.mlr.press/v267/abramovich25a.html). "
+        "The original lecture cites the preprint; the textbook illustrations and ablation figures use the published version.\n\n"
+        "[[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents"
+        "#CTF: состояние, специализированные инструменты и обратная связь"
+        "|Учебник: интерактивный сеанс EnIGMA, длинный вывод и проверка результата]].\n"
+    ),
+}
 
 
 @dataclass(frozen=True)
@@ -676,7 +688,7 @@ def reading_note(meeting: Meeting, order: int, reading: Reading) -> bytes:
         f"- Relationship: primary source for technical claims; the lecture deck is a secondary explanation.\n"
         f"- Retrieved: {RETRIEVED_AT}\n"
     )
-    return text.encode("utf-8")
+    return (text + READING_EDITORIAL_SUFFIXES.get(reading.key, "")).encode("utf-8")
 
 
 def reading_path(object_id: str) -> Path:
@@ -725,8 +737,9 @@ def page_index_bytes(path: Path, expected_pages: int) -> bytes:
             f"pdftotext physical page split mismatch for {path.name}: expected {expected_pages}, got {len(chunks)}"
         )
     blocks: list[str] = []
+    excluded = EXCLUDED_INDEX_PAGES.get(path.name, ())
     for page, chunk in enumerate(chunks, start=1):
-        content = chunk.rstrip()
+        content = WITHHELD_INDEX_TEXT if page in excluded else chunk.rstrip()
         blocks.append(f"=== PHYSICAL PAGE {page} OF {expected_pages} ===\n{content}".rstrip())
     return ("\n\n".join(blocks) + "\n").encode("utf-8")
 
@@ -866,6 +879,8 @@ def build_manifest() -> dict[str, Any]:
         for deck_id in meeting.deck_ids:
             deck = DECKS_BY_ID[deck_id]
             index_path = page_index_path(deck)
+            excluded_index_pages = EXCLUDED_INDEX_PAGES.get(deck.filename)
+            local_path = f"Lectures/{deck.filename}"
             deck_object = object_common(
                 object_id=deck.object_id,
                 kind="pdf",
@@ -875,7 +890,7 @@ def build_manifest() -> dict[str, Any]:
                 title=deck.title,
                 canonical_url=deck.url,
                 revision=deck.sha256,
-                local_path=f"Lectures/{deck.filename}",
+                local_path=None if excluded_index_pages else local_path,
                 mime="application/pdf",
                 size=deck.size,
                 page_count=deck.pages,
@@ -890,6 +905,8 @@ def build_manifest() -> dict[str, Any]:
                 "physical_page_closure": "complete in semantic-review.json and visuals.yml",
             })
             if deck.object_id == "meeting-06-slides":
+                deck_object["local_archive_path"] = local_path
+                deck_object["text_index_excluded_physical_pages"] = list(excluded_index_pages or ())
                 deck_object["rights_overrides"] = [{
                     "physical_page": 117,
                     "marking": "NVIDIA CONFIDENTIAL. DO NOT DISTRIBUTE.",

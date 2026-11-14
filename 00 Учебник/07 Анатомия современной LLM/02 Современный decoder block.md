@@ -2,9 +2,13 @@
 title: Современный decoder block
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-22
+last_updated: 2026-11-13
 previous: "[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура]]"
 next: "[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual]]"
+reference_terms:
+  - label: Прямоугольная причинная маска с KV-кэшем
+    label_en: Rectangular causal masking with a KV cache
+    anchor: decoder-rectangular-mask
 source_unit_id:
   - lecture-03-hyperparameter-evidence
   - lecture-03-kv-cache-attention
@@ -13,11 +17,20 @@ primary_sources:
   - https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf
   - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf
   - https://github.com/meta-llama/llama3/blob/a0940f9cf7065d45bb6675660f80d305c041a754/llama/model.py
+  - https://github.com/meta-llama/llama3/blob/a0940f9cf7065d45bb6675660f80d305c041a754/llama/generation.py#L160-L186
   - https://arxiv.org/abs/2204.02311v5
+  - https://docs.pytorch.org/tutorials/intermediate/scaled_dot_product_attention_tutorial.html
+  - https://arxiv.org/html/2310.06825v1#S2.F3
   - https://arxiv.org/abs/2001.08361v1
   - https://arxiv.org/abs/2109.10686v2
   - https://arxiv.org/abs/2310.04415v2
+  - https://proceedings.mlr.press/v235/liu24ce.html
+  - https://proceedings.mlr.press/v306/han26b.html
   - https://arxiv.org/abs/2002.05202v1
+  - https://arxiv.org/html/2503.19786v1#S5.SS2
+  - https://arxiv.org/html/2505.09388v1#S2
+  - https://huggingface.co/Qwen/Qwen3-0.6B-Base/blob/da87bfb608c14b7cf20ba1ce41287e8de496c0cd/config.json
+  - https://huggingface.co/Qwen/Qwen3-8B-Base/blob/49e3418fbbbca6ecbdf9608b4d22e5a407081db4/config.json
 ---
 
 # Современный decoder block
@@ -27,22 +40,29 @@ primary_sources:
 Пусть один блок получил три вектора ширины 4. Их можно обработать
 одновременно, а можно сначала обработать первый вектор, сохранить
 его ключ и значение, затем добавить оставшиеся два. При тех же
-весах, без dropout и с причинной маской результаты в каждой
-из трёх позиций должны совпасть.
+весах, позициях и маске, без dropout оба расчёта дают одинаковые
+состояния трёх позиций с точностью до округления.
 
 В [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|предыдущей главе]]
 прослежен полный путь LLaMA от токенов до словарных вероятностей.
+На том же блоке можно разобрать две детали современных моделей:
+[[#qwen3-checkpoint-shapes|почему у Qwen3 ширина Q больше ширины состояния]]
+и [[#gemma3-mixed-kv-cache|почему у Gemma 3 слои хранят разное число позиций]].
+
+В [[02 Атлас моделей/Сравнения/Сравнение семейств#llama-qwen-deepseek-worked-comparison|сравнении Llama, Qwen и DeepSeek]]
+тот же подсчёт применён к четырём базовым моделям: одинаковое число
+позиций в префиксе, разные объёмы кэша и разные матрицы FFN на токен.
 
 <span id="два-последовательных-уточнения"></span>
 
 ## Два остаточных сложения
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/llama-2026-10-22/cs336-prenorm-block.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/llama-2026-10-22/cs336-prenorm-block.png|Внизу вход раздваивается: одна ветвь идёт через норму и причинное внимание, другая прямо к сложению. Результат снова раздваивается перед нормой и FFN.]]
 
 *Stanford CS336 Staff, Assignment 1, Version 26.0.3,
 [Figure 2, с. 13](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=13),
-MIT. Исходная схема одного pre-norm-блока с целыми входом,
-выходом и обеими обходными ветвями.*
+[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).
+Схема pre-norm-блока из задания, без перерисовки.*
 
 Блок получает $X$ формы $[B,T,d]$, где $B$ — число последовательностей,
 $T$ — число обрабатываемых сейчас позиций, $d$ — ширина состояния.
@@ -116,8 +136,9 @@ X=\begin{bmatrix}
 $$
 
 Пусть $R_1$ использует единичный масштаб и $\epsilon=10^{-5}$.
-Последняя строка после нормализации равна примерно
-$(0.8165,0.8165,1.6330,0)$.
+У последней строки средний квадрат координат равен
+$(1^2+1^2+2^2+0^2)/4=1.5$. Деление каждой координаты на
+$\sqrt{1.5+\epsilon}$ даёт $(0.8165,0.8165,1.6330,0)$.
 Проекция Q в этом примере единичная: первые две координаты
 образуют первую query-голову, последние две — вторую.
 Проекция K выбирает первые две координаты нормализованной строки,
@@ -139,11 +160,11 @@ RoPE поворачивает Q и K на угол, соответствующи
 $(-1.0822,0.4027)$, вторая — $(-0.6796,1.4849)$.
 Векторы V не поворачиваются.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gqa/mha-gqa-mqa.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gqa/mha-gqa-mqa.png|В MHA у каждого запроса своя пара K/V, в GQA пары разделяют группы запросов, в MQA одна пара общая для всех запросов.]]
 
 *Ainslie et al., [GQA, Figure 2](https://aclanthology.org/2023.emnlp-main.298/),
 [оригинальный PNG](https://arxiv.org/html/2305.13245v3/images/gmq_architecture.png),
-CC BY 4.0. Внизу — query-головы; одна общая пара K/V
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Внизу — query-головы; одна общая пара K/V
 может обслуживать одну, несколько или все query-головы.*
 
 В общем GQA число query-голов $h_q$ кратно числу KV-голов $h_{kv}$.
@@ -166,7 +187,12 @@ $$
 
 Здесь $g(a)$ выбирает KV-группу query-головы, $d_h=2$.
 $M_{ij}$ равна нулю при $j\le i$ и $-\infty$ в остальных случаях.
-Для последней позиции допустимы все три ключа. Её оценки равны
+Для последней позиции допустимы все три ключа. Первый ключ
+$(1.4142,0)$ не повернулся, поскольку его позиция равна нулю.
+Первая голова последней позиции сравнивает свой повёрнутый
+запрос с этим ключом и получает
+$((-1.0822)\cdot1.4142+0.4027\cdot0)/\sqrt2\approx-1.0822$.
+Сравнения со всеми ключами дают
 
 $$
 S_{\rm last}\approx
@@ -448,6 +474,8 @@ Cache допустим при тех же весах, входном префи�
 На обучении промежуточные состояния также нужны для backward;
 inference-cache не заменяет вычислительный граф.
 
+<a id="decoder-rectangular-mask"></a>
+
 ### Прямоугольная маска
 
 После одной сохранённой позиции добавим сразу две.
@@ -476,12 +504,75 @@ $$
 вращать query с позиции 0, она сравнивается с ключами в неверных
 относительных фазах. Размеры тензоров при этом останутся правильными.
 
+У [PyTorch SDPA](https://docs.pytorch.org/docs/main/generated/torch.nn.functional.scaled_dot_product_attention.html)
+флаг `is_causal=True` строит треугольник от левого верхнего угла.
+Это верно для полного прохода, где первая строка Q и первый столбец K
+относятся к одной позиции. При продолжении первая строка Q относится
+к позиции 1, а первый столбец K всё ещё к позиции 0. Флаг оставит
+первой голове только значение позиции 0, $(1.4142,0)$, вместо смеси
+значений позиций 0 и 1, $(0.2985,1.4112)$. Форма результата не изменится.
+
+Передадим SDPA явную булеву маску, где `True` разрешает пару Q/K.
+Следующий код использует `model` и `x` из предыдущего примера.
+Ключи и значения уже содержат префикс; RoPE применён в `model`.
+Сравниваем выход внимания до проекции $W_O$ и остаточного сложения.
+
+~~~python
+with torch.no_grad():
+    _, past, _ = model(x[:, :1])
+    _, _, chunk = model(x[:, 1:], start_pos=1, cache=past)
+    q, k, v = (chunk[name] for name in ("q", "k", "v"))
+    repeat = model.nq // model.nkv
+    k = k.repeat_interleave(repeat, dim=1)
+    v = v.repeat_interleave(repeat, dim=1)
+    i = torch.arange(1, 3)[:, None]
+    j = torch.arange(3)[None, :]
+    visible = j <= i
+    sdpa = F.scaled_dot_product_attention
+    correct = sdpa(q, k, v, attn_mask=visible)
+    wrong = sdpa(q, k, v, is_causal=True)
+    torch.testing.assert_close(correct, chunk["mixed"])
+    assert not torch.allclose(wrong, correct)
+    print(wrong[0, 0, 0], correct[0, 0, 0])
+    # tensor([1.414199, 0.000000]) tensor([0.298538, 1.411221])
+
+    # Same keys and positions, but the window includes at most two tokens.
+    local_visible = visible & (j > i - 2)
+    assert local_visible.tolist() == [[True, True, False], [False, True, True]]
+    _, _, local_chunk = model(x[:, 1:], start_pos=1, cache=past, window=2)
+    torch.testing.assert_close(
+        sdpa(q, k, v, attn_mask=local_visible), local_chunk["mixed"])
+~~~
+
+Для сплошного суффикса без padding и локального окна подойдёт также
+[`causal_lower_right`](https://docs.pytorch.org/docs/main/generated/torch.nn.attention.bias.causal_lower_right.html):
+он смещает диагональ на разницу длин K и Q. У отдельной библиотеки
+[FlashAttention начиная с 2.1](https://github.com/Dao-AILab/flash-attention/blob/v2.1.0/README.md#changes-in-v21-compared-to-v20)
+флаг `causal=True` выровнен по правому нижнему углу. Поэтому при
+замене вызова проверяют, какие позиции видит запрос, а не только
+имя флага или размер выхода.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/long-context-2026-10-23/mistral-chunk-mask.png|Четыре строки новых запросов. В первой строке единицы стоят под тремя токенами из кэша и первым токеном новой порции; в последней разрешены все четыре новых токена и ни одного старого.]]
+
+*Albert Q. Jiang et al., [Mistral 7B, рис. 3, с. 3](https://arxiv.org/pdf/2310.06825v1#page=3).
+Исходная маска и английская подпись, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+
+На рисунке окно включает четыре позиции, считая текущую.
+Первый новый `the` видит `mat`, `and`, `saw` и себя.
+Последний новый `to` видит только четыре токена своей порции.
+Это та же проверка $i-w<j\le i$, что в примере с окном 2.
+Если перезаписать весь старый кэш новой порцией до вычисления первой
+строки, `the` потеряет три нужных ключа. Как хранить хвост и обновлять
+его после вычисления порции, разобрано в
+[[00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание#Кольцевой кэш при обработке нескольких новых токенов|главе о длинном контексте]].
+
 ### Два блока и два кэша
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt2-transformer-block-vectors-2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt2-transformer-block-vectors-2.png|Векторы двух входных позиций проходят через первый блок. Его выход становится входом второго блока, а не возвращается в таблицу токенов.]]
 
 *Jay Alammar, [The Illustrated GPT-2](https://jalammar.github.io/illustrated-gpt2/),
-CC BY-NC-SA 4.0. Исходный путь векторов через decoder blocks.
+[оригинальный PNG](https://jalammar.github.io/images/gpt2/gpt2-transformer-block-vectors-2.png),
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 Нормализации, остаточные связи и KV-cache на этом упрощённом рисунке
 не показаны; схема показывает последовательность блоков.*
 
@@ -497,8 +588,8 @@ CC BY-NC-SA 4.0. Исходный путь векторов через decoder b
 | Первый | K: $(1.4142,0)$<br>V: $(1.4142,0)$ |
 | Второй | K: $(1.4761,0.0090)$<br>V: $(1.3438,-0.1232)$ |
 
-При продолжении каждый блок дописывает новые K/V к своей строке
-таблицы, а не к общему кэшу. Первый блок обрабатывает новые входные
+При продолжении каждый блок дописывает новые K/V к собственному
+кэшу. Первый блок обрабатывает новые входные
 векторы; второй получает только их новые выходы из первого блока.
 Пересчитывать старые выходы первого блока для этого не требуется:
 они уже участвовали в создании сохранённых K/V второго блока.
@@ -542,6 +633,77 @@ K и V формы `[1,1,3,2]`: всего 24 числа, или 192 байта �
 Размеры кэшей совпадают, но их содержимое различно.
 Подстановка K/V первого слоя во второй не вызовет ошибки формы
 и всё же даст другой результат.
+
+<a id="decoder-first-token"></a>
+
+### Как из последней строки получается первый токен ответа
+
+На схеме Hugging Face модель уже выдала `will`: его выбрали по
+логитам последней позиции исходного запроса, `ject`. Сам `will`
+в первом проходе через блоки ещё не участвовал. На следующем
+проходе модель строит Q, K и V для `will`. К семи парам K/V
+исходного запроса добавляется восьмая, и состояние позиции `will`
+теперь позволяет предсказать `be`.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/edls-neural-kv-2026-10-26/hf-kv-cache.png|Один запрос для will читает семь сохранённых пар K/V и новую пару для will. Стрелка справа ведёт к следующему токену be.]]
+
+*Rémi Ouazan Reboul, Arthur Zucker и Luc Georges,
+[Continuous batching, KV-cache](https://huggingface.co/blog/continuous_batching#kv-cache),
+[оригинальный PNG](https://huggingface.co/datasets/huggingface/documentation-images/resolve/c8c3cf72b3b724ce734259e4a086d30618a9198b/blog/continuous_batching/kv_cache.png),
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+Рисунок без изменений. Головы опущены; $A$ обозначает ширину головы.*
+
+Проверим этот порядок на тех же $X$ и `model`. Пусть первые две
+строки $X$ соответствуют входу `a cat`. Дадим блоку словарь из
+четырёх токенов в порядке `a`, `cat`, `sleeps`, `<eos>`.
+После блока применим отдельную финальную RMSNorm и учебную выходную
+проекцию. Её четыре строки выбирают из нормализованного вектора
+координаты 1, 2, 4 и 3 соответственно. Это фиксированные веса
+для проверки индексов, а не обученная языковая модель.
+
+| Проход | Логиты | Токен и кэш |
+| --- | --- | --- |
+| Prefill<br>`a cat`, позиция 1 | 0.1996, 1.1409,<br>1.6305, 0.0027 | Выход: `sleeps`<br>Кэш: 0, 1 |
+| Decode<br>`sleeps`, позиция 2 | 1.0877, 0.8951,<br>0.2321, 1.4006 | Выход: `<eos>`<br>Кэш: 0, 1, 2 |
+
+В первой строке таблицы наибольший логит у `sleeps`. Для жадного
+выбора вычислять softmax не нужно: он сохраняет порядок логитов.
+Только на втором проходе берём представление выбранного токена
+(третью строку $X$) и передаём его блоку с позицией 2.
+После выбора `<eos>` останавливаемся, поэтому в этом примере
+ключа и значения для `<eos>` в кэше нет.
+
+~~~python
+final_norm = RMSNorm(4).double()
+vocab = ("a", "cat", "sleeps", "<eos>")
+embeddings = dict(zip(vocab[:3], x.unbind(dim=1)))
+
+def logits(states):
+    return final_norm(states)[..., [0, 1, 3, 2]]
+
+with torch.no_grad():
+    prompt_states, past, _ = model(x[:, :2])
+    prompt_logits = logits(prompt_states)[0, -1]
+    first = int(prompt_logits.argmax())
+    assert vocab[first] == "sleeps" and past[0].shape[2] == 2
+
+    next_input = embeddings[vocab[first]].unsqueeze(1)
+    state, past, _ = model(next_input, start_pos=2, cache=past)
+    decode_logits = logits(state)[0, -1]
+    assert vocab[int(decode_logits.argmax())] == "<eos>"
+    assert past[0].shape[2] == 3
+    full_states, _, _ = model(x)
+    torch.testing.assert_close(
+        logits(full_states)[0, 1:3], torch.stack((prompt_logits, decode_logits)))
+~~~
+
+В [`Transformer.forward` Llama 3](https://github.com/meta-llama/llama3/blob/a0940f9cf7065d45bb6675660f80d305c041a754/llama/model.py#L256-L279)
+после всех блоков тоже идут финальная норма и выходная проекция.
+[`generate`](https://github.com/meta-llama/llama3/blob/a0940f9cf7065d45bb6675660f80d305c041a754/llama/generation.py#L160-L186)
+берёт `logits[:, -1]`, записывает выбранный токен и только в
+следующей итерации подаёт его на вход. Для пакета запросов разной
+длины тот же цикл сохраняет исходный токен там, где запрос ещё
+не закончился. В нашем расчёте последовательность одна.
 
 ### Почему кэш для генерации не заменяет граф обучения
 
@@ -673,6 +835,36 @@ $(2.1306,1.7534,2.7436,0.4547)$.
 есть отдельное поле `sliding_window=4096`; его нельзя восстановить
 из одного `hidden_size`.
 
+<a id="gemma3-mixed-kv-cache"></a>
+
+### Сколько истории хранит каждый слой в Gemma 3
+
+В [отчёте Gemma 3, §2](https://arxiv.org/html/2503.19786v1#S2)
+после каждых пяти локальных слоёв с окном 1024 идёт один глобальный.
+Если реализация при декодировании вытесняет старые K/V из локальных
+слоёв, каждый из пяти хранит не более 1024 позиций. Шестой слой
+хранит всю последовательность. При 32 768 токенах это
+$5\cdot1024+32768=37\,888$ позиций, суммарно по шести слоям.
+Если все шесть слоёв глобальные, получится $6\cdot32768=196\,608$.
+При одинаковых размерах K/V и типе данных первая группа занимает
+около 19,3% памяти второй. До 1024 токенов обе группы хранят
+одинаковое число позиций.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gemma/gemma-3-kv-cache.svg|Память KV-cache двух моделей на 2 млрд параметров. При длинном контексте кэш варианта со всеми глобальными слоями растёт быстрее, чем у варианта с пятью локальными слоями на один глобальный.]]
+
+*Gemma Team / Google DeepMind, [Gemma 3 Technical Report, рис. 6](https://arxiv.org/html/2503.19786v1#S5.F6),
+[оригинальный SVG](https://arxiv.org/html/2503.19786v1/mem_lc.svg),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Без изменений.*
+
+На графике обе линии относятся к 2B-моделям из абляции §5.2.
+При 128K жёлтая линия доходит примерно до 7000 МБ, а красная —
+до 1100 МБ. Красная линия тоже растёт: глобальным слоям по-прежнему
+нужны ключи и значения всех позиций. Эти величины относятся только
+к кэшу авторского опыта. Они не описывают память весов, пик при
+prefill или время ответа выпущенной Gemma 3. Само ограничение маски
+не освобождает память: в учебном блоке выше `window` запрещает
+обращение к старым позициям, но старые K/V всё ещё лежат в тензоре.
+
 ## От GPT-2 к LLaMA: что сохранилось, а что заменили
 
 И GPT-2, и последовательный LLaMA-блок сначала выполняют
@@ -746,26 +938,31 @@ $3df=8d^2$, то есть $f=8d/3$.
 В Qwen1.5 поле `intermediate_size=13696` уже задаёт ширину одной ветви.
 Сравнение только одноимённых полей дало бы ложное различие в два раза.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architecture/ffn-ratio-evidence-slide.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/decoder-design-2026-11-10/mobilellm-design-figure3.png|Первые две строки MobileLLM: при 134.1 млн параметров средняя zero-shot accuracy растёт с 42.6% до 43.9% после перехода на SwiGLU.]]
 
-*Stanford CS336, [Lecture 3, с. 40](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf#page=40).
-Полный исходный слайд с панелью Kaplan et al., Figure 5:
-отношение $f/d$ и относительное увеличение loss при масштабе 50M.
-Английские подписи сохранены без изменений.*
+*У первых двух цветных полос одинаковое число параметров: 134.1 млн.
+Средняя точность по восьми zero-shot задачам выросла с 42.6% до 43.9%.
+Штрихованные полосы относятся к более крупной группе, около 350 млн.
+Zechun Liu et al., [MobileLLM, ICML 2024](https://proceedings.mlr.press/v235/liu24ce.html),
+[рис. 3, с. 3](https://raw.githubusercontent.com/mlresearch/v235/main/assets/liu24ce/liu24ce.pdf#page=3),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Рисунок и английская подпись из PDF.*
 
-В [Kaplan et al., §2–3.1](https://arxiv.org/abs/2001.08361v1)
-сравнивали модели при приблизительно одинаковом числе параметров
-без embeddings. При изменении $f$ меняли также $d$, чтобы
-сохранить этот бюджет; небольшой остаток различий корректировали
-по зависимости loss от числа параметров.
-Поэтому график не показывает, что расширение только FFN
-готовой модели почти бесплатно.
+В обеих конфигурациях на 134.1 млн параметров по 12 слоёв ширины 768.
+Авторы заменили двухматричную ReLU-FFN на SwiGLU, у которой три матрицы.
+Сравнивать здесь нужно первые две строки: с третьей меняются уже глубина
+и ширина всей сети. В группе около 350 млн параметров переход на SwiGLU
+тоже повысил среднюю точность (47.4% → 48.7%), но число параметров выросло
+с 376.8 до 386.7 млн. Точные размеры и результаты приведены в
+[Table 10, с. 14](https://raw.githubusercontent.com/mlresearch/v235/main/assets/liu24ce/liu24ce.pdf#page=14).
 
-На исходной панели отношение примерно от 1 до нескольких единиц
-даёт близкие потери, а крайние значения ухудшают их.
-Эксперимент относится к указанным малым масштабам, WebText2,
-causal LM и их режиму обучения. Он не устанавливает оптимальную
-ширину FFN всех многомиллиардных моделей.
+В [Kaplan et al., §2–3.1, Figure 5](https://arxiv.org/abs/2001.08361v1)
+проверяли другой вопрос: как меняется потеря при изменении $f/d$ и
+приблизительно постоянном числе параметров без embeddings. Вместе с $f$
+меняли $d$, а небольшой остаток различий корректировали по зависимости
+потерь от числа параметров. Для моделей около 50 млн параметров на WebText2
+получилась область близких потерь от $f/d\approx1$ до нескольких единиц.
+Крайние отношения давали худший результат. Этот опыт не измеряет, что
+произойдёт, если расширить только FFN, оставив остальные размеры прежними.
 
 ### Число голов и размер головы
 
@@ -787,6 +984,55 @@ causal LM и их режиму обучения. Он не устанавлив�
 согласованное разбиение голов. Требования делимости конкретного ядра
 или библиотеки не являются математическим определением attention.
 
+<a id="qwen3-checkpoint-shapes"></a>
+
+#### Проверка по весам Qwen3
+
+У [Qwen3-0.6B-Base](https://huggingface.co/Qwen/Qwen3-0.6B-Base/blob/da87bfb608c14b7cf20ba1ce41287e8de496c0cd/config.json)
+`hidden_size=1024`, `num_attention_heads=16`,
+`num_key_value_heads=8` и `head_dim=128`. Если поделить
+ширину состояния на число query-голов, выйдет 64. Это не размер
+головы этой модели: Q расширяется до $16\cdot128=2048$ координат.
+В таблице формы весов PyTorch записаны в порядке
+`[out_features, in_features]`. Они сверены с заголовком
+[`model.safetensors`](https://huggingface.co/Qwen/Qwen3-0.6B-Base/blob/da87bfb608c14b7cf20ba1ce41287e8de496c0cd/model.safetensors).
+
+| Проекция | Форма веса первого слоя | Результат для 3 токенов |
+| --- | --- | --- |
+| Q | `[2048,1024]` | `[1,3,16,128]` после разбиения на головы |
+| K | `[1024,1024]` | `[1,3,8,128]` после разбиения |
+| V | `[1024,1024]` | `[1,3,8,128]` после разбиения |
+| O | `[1024,2048]` | `[1,3,1024]` после объединения query-голов |
+
+Две query-головы читают одну пару K/V, как в средней панели
+[[#Что происходит внутри attention|рисунка Ainslie et al.]].
+После проекций Qwen3 применяет ещё одну RMSNorm к каждому вектору
+Q и K по его 128 координатам. Веса `q_norm` и `k_norm` имеют по
+128 элементов: каждый вектор масштабов используется всеми головами
+соответствующего типа. Затем RoPE поворачивает Q и K, а в кэш
+записываются уже повёрнутые K и обычные V.
+Порядок видно в
+[`Qwen3Attention.forward`](https://github.com/huggingface/transformers/blob/v4.51.3/src/transformers/models/qwen3/modeling_qwen3.py#L214-L227).
+Норма входа подслоя остаётся на месте; эффект дополнительной нормы
+на оценки внимания разобран [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual#QK normalization|на числовом примере в следующей главе]].
+
+Четыре проекции содержат вместе 6 291 456 весов, три матрицы SwiGLU —
+9 437 184, а четыре нормы блока добавляют $2\cdot1024+2\cdot128=2304$.
+Итого 15 730 944 параметра на слой. В стеке 28 слоёв. Добавив
+одну общую таблицу входа и выхода размера $151936\times1024$
+и финальную RMSNorm, получим 596 049 920 параметров. В заголовке
+перечислено 310 тензоров. Если сложить произведения их размеров,
+выходит то же число. Значения весов для этой проверки не нужны.
+
+Сравним с [Qwen3-8B-Base](https://huggingface.co/Qwen/Qwen3-8B-Base/blob/49e3418fbbbca6ecbdf9608b4d22e5a407081db4/config.json).
+В ней 32 query-головы, но по-прежнему восемь KV-голов по 128 координат.
+Кэш одного слоя на токен при BF16 в обеих моделях занимает
+$2\cdot8\cdot128\cdot2=4096$ байт. На 4096 токенах и с учётом
+всех слоёв это 448 МиБ у 0.6B (28 слоёв) и 576 МиБ у 8B (36 слоёв).
+Здесь считается только сохранённый K/V одной последовательности.
+Размеры Q и FFN влияют на другие затраты. По одному числу
+параметров модели этот кэш не вычислить.
+
 ### Глубина и ширина
 
 При близком числе весов более глубокая сеть имеет больше
@@ -804,15 +1050,25 @@ causal LM и их режиму обучения. Он не устанавлив�
 бы один decoder-only стек. Точные размеры поэтому задаются
 вместе с архитектурой и выпуском модели.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architecture/aspect-ratio-evidence-slide.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/decoder-design-2026-11-10/mobilellm-depth-figure4.png|Шесть панелей MobileLLM сравнивают глубину в двух размерных группах на zero-shot reasoning, TQA и RACE.]]
 
-*Stanford CS336, [Lecture 3, с. 46](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf#page=46).
-Слева — график Kaplan et al. для разных масштабов;
-справа — pre-training и downstream-результаты Tay et al.
-Полный исходный слайд, без перерисовки графиков.*
+*Слева, на панелях (a) и (b), каждая линия соответствует одной глубине.
+Последняя отметка оси, Average, усредняет восемь предыдущих задач.
+Zechun Liu et al., [MobileLLM, ICML 2024](https://proceedings.mlr.press/v235/liu24ce.html),
+[рис. 4, с. 4](https://raw.githubusercontent.com/mlresearch/v235/main/assets/liu24ce/liu24ce.pdf#page=4),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Все панели и английская подпись из PDF.*
 
-Левая панель показывает широкую область близких потерь при
-сохранении числа параметров.
+Сравним две линии на панели (a). У 12 слоёв ширины 768 было 134.1 млн
+параметров, у 30 слоёв ширины 512 — 135.0 млн. Средняя точность выросла
+с 43.9% до 44.8%, но на ARC-Challenge снизилась с 28.9% до 26.1%.
+При сужении сети авторы также сократили число голов с 12 до 8, сохранив
+по 64 координаты на голову. Это сравнение двух форм сети близкого размера,
+а не увеличение только числа слоёв.
+Числа: [MobileLLM, Table 11, с. 15](https://raw.githubusercontent.com/mlresearch/v235/main/assets/liu24ce/liu24ce.pdf#page=15).
+
+В [Kaplan et al., Figure 5](https://arxiv.org/abs/2001.08361v1)
+в широком диапазоне $d/L$ потери предобучения оставались близкими при
+примерно одинаковом числе параметров.
 В [Tay et al., §3–4.1, Table 3](https://arxiv.org/abs/2109.10686v2)
 модель NL12-XXL с 3.6B параметров имеет лучший показатель
 предобучения, чем NL32-XL с 3.8B: negative log-perplexity
@@ -868,15 +1124,7 @@ $(1-\eta\lambda)w=1.9998$.
 Это изменение траектории оптимизации даже до обсуждения
 разницы training и validation loss.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architecture/weight-decay-evidence-slide.png]]
-
-*Stanford CS336, [Lecture 3, с. 50](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf#page=50),
-по работе D'Angelo, Andriushchenko, Varre и Flammarion.
-Слева сопоставлены training/validation loss, справа — ход training loss
-при cosine и постоянной скорости обучения.
-Сохранён полный оригинальный слайд.*
-
-В [D'Angelo et al., §3](https://arxiv.org/abs/2310.04415v2)
+В [D'Angelo et al., §3](https://arxiv.org/html/2310.04415v2#S3)
 рассматривается GPT-2-124M на OpenWebText, обычно с контекстом
 256, AdamW, скоростью 0.0006 и cosine-спадом в десять раз.
 При weight decay 0.1/0.3 улучшается конечный training loss,
@@ -892,6 +1140,27 @@ $(1-\eta\lambda)w=1.9998$.
 помогал избежать расходимости.
 Это результаты и объяснение конкретной работы, не универсальная
 эквивалентность AdamW любому изменению learning rate.
+
+Если после предобучения модель предстоит дообучать, проверочной потери
+базы может оказаться недостаточно для выбора weight decay. Han et al.
+предобучили несколько вариантов каждой архитектуры, меняя коэффициент
+AdamW. Затем варианты одной группы дообучили на одних и тех же задачах
+и сравнили точность после SFT.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/decoder-design-2026-11-10/han-weight-decay-figure3.png|По горизонтали проверочная потеря базы, по вертикали точность после SFT. В одной группе есть варианты с близкими потерями и разной точностью.]]
+
+*Сравнивайте точки одного цвета: внутри группы совпадают архитектура,
+размер и бюджет токенов, а меняется weight decay предобучения.
+Tessa Han et al., [Weight Decay Improves Language Model Plasticity, ICML 2026](https://proceedings.mlr.press/v306/han26b.html),
+[рис. 3, с. 6](https://raw.githubusercontent.com/mlresearch/v306/main/assets/han26b/han26b.pdf#page=6),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Все панели и английская подпись из PDF.*
+
+В группе OLMo-2-1B-140x проверочная потеря базы при коэффициенте 0.3
+равна 2.6208 против 2.6088 при 0.1. Если выбирать только по этой потере,
+победил бы вариант 0.1. После SFT вариант 0.3 показал лучшую точность
+на задачах рассуждения. В каждой группе было не более десяти точек;
+результат даёт повод проверить качество после SFT на своих задачах,
+но не переносить коэффициент 0.3 на любое предобучение.
 
 <a id="decoder-evidence"></a>
 <span id="что-считать-подтверждением-корректной-сборки"></span>
@@ -925,11 +1194,15 @@ $(1-\eta\lambda)w=1.9998$.
 - [Stanford CS336, Assignment 1, §3.4–3.5](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf): последовательная сборка pre-norm-блока, формы и подсчёт ресурсов; Figures 1–3.
 - [Stanford CS336, Lecture 3](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf): с. 36–51 — гиперпараметры и основания их выбора, с. 57–66 — KV-cache и разрежённая видимость.
 - [Закреплённая Llama 3](https://github.com/meta-llama/llama3/blob/a0940f9cf7065d45bb6675660f80d305c041a754/llama/model.py): отдельные Q/KV-головы, RoPE, cache, прямоугольная маска и два residual-сложения. CPU-код главы следует этим операциям, но не копирует CUDA/model-parallel инфраструктуру.
+- [Qwen3 Technical Report, §2](https://arxiv.org/html/2505.09388v1#S2): настройки плотных моделей, переход от смещений QKV к QK-norm. Формы и размеры в примере взяты из конкретных конфигураций Base и заголовка тензоров.
+- [Gemma 3 Technical Report, §§2 и 5.2](https://arxiv.org/html/2503.19786v1#S5.SS2): порядок локальных и глобальных слоёв, размер окна и абляция памяти кэша.
 - [Shazeer, GLU Variants, §2](https://arxiv.org/abs/2002.05202v1): две ветви, произведение координат и замена sigmoid на Swish в SwiGLU.
 - [PaLM, §2](https://arxiv.org/html/2204.02311v5#S2): параллельные attention/MLP и условия сравнения с последовательной записью.
 - [Kaplan et al., §2–3.1, Figure 5](https://arxiv.org/abs/2001.08361v1): влияние формы при фиксированных non-embedding параметрах.
 - [Tay et al., §3–4.1, Table 3](https://arxiv.org/abs/2109.10686v2): различие pre-training loss и downstream-результата после fine-tuning.
 - [D'Angelo et al., §3](https://arxiv.org/abs/2310.04415v2): weight decay и динамика оптимизации малой LM.
+- [Liu et al., MobileLLM, §2.2 и приложение](https://proceedings.mlr.press/v235/liu24ce.html): варианты FFN, глубины и ширины у моделей до миллиарда параметров.
+- [Han et al., Weight Decay Improves Language Model Plasticity, §§3–4](https://proceedings.mlr.press/v306/han26b.html): выбор weight decay по потере базы и по результату после SFT.
 - [[02 Areas/ML & DL/01 Справочник/Attention/MHA|Multi-head attention]], [[02 Areas/ML & DL/01 Справочник/FFN и MoE/SwiGLU|SwiGLU]] и [[02 Areas/ML & DL/02 Атлас моделей/Семейства/Llama|семейство Llama]].
 
 **Назад:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|LLaMA]].

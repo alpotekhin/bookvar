@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-30",
+  "scope": "Complete NumPy one-dimensional matmul and D2L norm properties using worked examples; preserve the preceding chapter, all seven source illustrations and original storage explanation. No translation.",
+  "files": [
+    {
+      "source": "00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md",
+      "before_sha256": "7764790a11f7cbf12fbb9e662d62d56bd94ad8d39863a8995423f29161ff6ebb",
+      "after_sha256": "cad5dc0c553788b6c0fab04f627ad4af9a8bea76f098f4f8f3019c098b76b14f",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-27",
+          "new": "last_updated: 2026-10-30"
+        },
+        {
+          "old": "### Что происходит с несколькими матрицами\n",
+          "new": "### One-dimensional operands in NumPy\n\nFor a NumPy array of shape `(3,)`, transposition still gives `(3,)`:\nthere are no separate row and column axes to exchange. The position of\nthat array in a matrix product determines how `matmul` uses its coordinates.\n\nTake the original matrix $X$ and a vector $v=[1,0,2]$. On the right of\n`@`, NumPy temporarily treats $v$ as a column with shape `(3,1)`.\nEach row of $X$ is multiplied by that column:\n\n$$\nXv=\n\\begin{bmatrix}\n1\\cdot1+2\\cdot0+0\\cdot2\\\\\n0\\cdot1+1\\cdot0+3\\cdot2\n\\end{bmatrix}\n=\n\\begin{bmatrix}1\\\\6\\end{bmatrix}.\n$$\n\nThe intermediate matrix has shape `(2,1)`. NumPy removes the column axis\nthat it introduced, so `X @ v` returns a one-dimensional array, `[1,6]`,\nwith shape `(2,)`. If the input is explicitly `v[:, None]`, its column\naxis is part of the input and remains: `X @ v[:, None]` has shape `(2,1)`.\n\nOn the left of `@`, a one-dimensional array is temporarily treated as a\nrow. For $x=[1,2,0]$ and the earlier $W$, the multiplication is\n`(1,3) @ (3,2) -> (1,2)`. Removing the introduced row axis gives\n`x @ W = [5,-2]`, of shape `(2,)`. These are the two output features\nalready calculated for the first object in $X$.\n\n| Inputs | Temporary matrix calculation | Returned shape |\n|---|---|---|\n| `(2,3) @ (3,)` | `(2,3) @ (3,1) -> (2,1)` | `(2,)` |\n| `(3,) @ (3,2)` | `(1,3) @ (3,2) -> (1,2)` | `(2,)` |\n| `(3,) @ (3,)` | `(1,3) @ (3,1) -> (1,1)` | `()` |\n\nWith two one-dimensional inputs, both introduced axes are removed.\nFor the same $x$ and $v$, `x @ v` is the scalar\n$1\\cdot1+2\\cdot0+0\\cdot2=1$. Explicit row and column inputs,\n`x[None, :] @ v[:, None]`, instead return `[[1]]`, with shape `(1,1)`.\nThe sum is the same; the output axes differ because the input axes differ.\n\nThese are the one-dimensional promotion and removal rules in\n[NumPy `matmul`, Notes](https://numpy.org/doc/2.3/reference/generated/numpy.matmul.html#notes).\nThey apply to `@`, not to elementwise `*`. A scalar operand has no\ncoordinate axis to contract and is rejected by `matmul`; use `2 * X`\nfor multiplication by a number.\n\n### Что происходит с несколькими матрицами\n"
+        },
+        {
+          "old": "# Общая матрица и отдельные матрицы для двух таблиц.\n",
+          "new": "# One-dimensional operands: inserted axes are removed after matmul.\nx = np.array([1., 2., 0.])\nv = np.array([1., 0., 2.])\nassert x.T.shape == (3,)\nassert np.array_equal(X @ v, [1., 6.])\nassert (X @ v).shape == (2,)\nassert np.array_equal(X @ v[:, None], [[1.], [6.]])\nassert (X @ v[:, None]).shape == (2, 1)\nassert np.array_equal(x @ W, [5., -2.])\nassert (x @ W).shape == (2,)\nassert (x @ v) == 1. and np.ndim(x @ v) == 0\nassert np.array_equal(x[None, :] @ v[:, None], [[1.]])\n\n# Общая матрица и отдельные матрицы для двух таблиц.\n"
+        },
+        {
+          "old": "## Как проверять формы без угадывания\n",
+          "new": "### Norm properties\n\nFor real vectors, a norm satisfies three requirements:\n\n$$\n\\begin{aligned}\n&\\|x\\|\\ge0,\\qquad \\|x\\|=0\\ \\Longleftrightarrow\\ x=0,\\\\\n&\\|\\alpha x\\|=|\\alpha|\\,\\|x\\| \\quad(\\alpha\\in\\mathbb R),\\\\\n&\\|x+y\\|\\le\\|x\\|+\\|y\\|.\n\\end{aligned}\n$$\n\nThe first separates the zero vector from every nonzero vector. The\nsecond specifies how length changes under scaling, including negative\nscales. For $x=[3,4]$, the Euclidean length is 5; $2x=[6,8]$ and\n$-2x=[-6,-8]$ both have length 10.\n\nThe third is the triangle inequality. Take $a=[3,0]$ and $b=[0,4]$.\nTheir lengths are 3 and 4. Following those two displacements covers\na total distance of 7, while the direct displacement $a+b=[3,4]$ has\nlength 5. The inequality allows equality: vectors $[3,0]$ and $[4,0]$\npoint in the same direction, and their sum has length $3+4=7$.\n\nSquaring a length changes these properties. For the earlier $x$,\n$\\|x\\|_2^2=25$ but $\\|2x\\|_2^2=100$, not $2\\cdot25$.\nA squared Euclidean length can be a useful error measure without being\na norm. The general norm requirements and the $L_1$, $L_2$ and\nFrobenius examples are developed in\n[D2L, Linear Algebra — Norms](https://d2l.ai/chapter_preliminaries/linear-algebra.html#norms).\n\n## Как проверять формы без угадывания\n"
+        },
+        {
+          "old": "# One-dimensional operands: inserted axes are removed after matmul.\n",
+          "new": "# Norm scaling and the triangle inequality use lengths, not squared lengths.\nnorm_x = np.array([3., 4.])\nassert np.linalg.norm(2 * norm_x) == np.linalg.norm(-2 * norm_x) == 10.\nassert np.linalg.norm([3., 0.]) + np.linalg.norm([0., 4.]) == 7.\nassert np.linalg.norm(norm_x) == 5.\nassert np.linalg.norm([3., 0.]) + np.linalg.norm([4., 0.]) == 7.\nassert np.linalg.norm([7., 0.]) == 7.\nassert np.linalg.norm(2 * norm_x) ** 2 == 100.\nassert 2 * np.linalg.norm(norm_x) ** 2 == 50.\n\n# One-dimensional operands: inserted axes are removed after matmul.\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "5a0efcd8c2787cd6462d624a413ef93a09e51558d92d30423102b5b347412b49",
+      "after_sha256": "89e0f8a294a82bfe0e7e82792981dc18f7cb6065ea37f50c675e397e4562c94a",
+      "changes": [
+        {
+          "old": "  - id: curated-mml-vector-geometry-00000000009e\n    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/mml-vector-geometry.png\n    author: Marc Peter Deisenroth; A. Aldo Faisal; Cheng Soon Ong\n    source_url: https://mml-book.github.io/book/mml-book.pdf\n    license: free-to-view educational book; reuse confirmed by repository owner\n    license_url: https://mml-book.github.io/\n    modifications: Figure 2.1 rendered from page 17; the diagram is preserved, while the page header, original side caption, and surrounding text are removed because Bookvar provides its own linked caption\n    used_in:\n      - 00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/mml-book.pdf\n    source_page: 17\n    derivation: pdf-page-render-crop",
+          "new": "  - id: curated-mml-vector-geometry-00000000009e\n    asset: 00 Учебник/Assets/Figures/curated/foundations-source-first/mml-vector-geometry.png\n    author: Marc Peter Deisenroth; A. Aldo Faisal; Cheng Soon Ong\n    source_url: https://mml-book.github.io/book/mml-book.pdf\n    license: unverified; freely available educational book, no reproduction grant confirmed\n    license_url: https://mml-book.github.io/\n    modifications: Figure 2.1 rendered from page 17; the diagram is preserved, while the page header, original side caption, and surrounding text are removed because Bookvar provides its own linked caption\n    used_in:\n      - 00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md\n    metadata_status: needs-confirmation\n    provenance_confirmation: legacy-attribution-reviewed-permission-unconfirmed\n    source_asset: raw/papers/external/mml-book.pdf\n    source_page: 17\n    derivation: pdf-page-render-crop\n    rights_status: publisher-figure-reproduction-unverified"
+        }
+      ]
+    }
+  ]
+}

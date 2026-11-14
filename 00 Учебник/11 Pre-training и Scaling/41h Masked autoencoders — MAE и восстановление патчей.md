@@ -3,8 +3,42 @@ title: Masked autoencoders — MAE и восстановление патчей
 type: textbook-chapter
 status: canonical
 source_language: en
-last_updated: 2026-10-28
-last_verified: 2026-10-28
+last_updated: 2026-11-05
+last_verified: 2026-11-05
+reference_terms:
+  - anchor: asymmetric-mae
+    label: "MAE: короткий encoder и полный decoder"
+    label_en: "MAE: a short encoder and a full decoder"
+  - anchor: patch-layout
+    label: "Patchify и порядок RGB-координат"
+    label_en: "Patchify and RGB coordinate ordering"
+  - anchor: mask-and-restore
+    label: "MAE: выбор видимых патчей и обратная перестановка"
+    label_en: "MAE: visible-patch selection and inverse shuffling"
+  - anchor: masked-pixel-loss
+    label: "Masked pixel loss и градиенты видимого контекста"
+    label_en: "Masked pixel loss and visible-context gradients"
+  - anchor: normalized-targets
+    label: "Нормировка целей MAE и sample variance"
+    label_en: "MAE target normalization and sample variance"
+  - anchor: mae-training-step
+    label: "Полный шаг MAE через encoder и decoder"
+    label_en: "A complete MAE step through encoder and decoder"
+  - anchor: reading-reconstructions
+    label: "Реконструкция MAE: raw output и вставка видимых пикселей"
+    label_en: "MAE reconstructions: raw output and pasted visible pixels"
+  - anchor: mae-gan-demo
+    label: "Отдельный GAN-checkpoint в демонстрации MAE"
+    label_en: "The separate GAN checkpoint in the MAE demo"
+  - anchor: mae-cost-and-evaluation
+    label: "MAE: число токенов, стоимость и оценивание encoder"
+    label_en: "MAE: token counts, cost and encoder evaluation"
+  - anchor: mae-alternative-targets
+    label: "Цели MAE: пиксели, PCA и dVAE-коды"
+    label_en: "MAE targets: pixels, PCA and dVAE codes"
+  - anchor: mae-masking-recipe
+    label: "MAE: block, grid и random masking, аугментации и эпохи"
+    label_en: "MAE: block, grid and random masks, augmentations and epochs"
 primary_sources:
   - https://arxiv.org/abs/2111.06377
   - https://openaccess.thecvf.com/content/CVPR2022/html/He_Masked_Autoencoders_Are_Scalable_Vision_Learners_CVPR_2022_paper.html
@@ -592,6 +626,8 @@ A predicted normalized vector alone cannot recover those absolute values;
 they would need to be supplied or predicted separately. Copying the
 visible input does not restore the hidden patches' missing statistics.
 
+<a id="mae-gan-demo"></a>
+
 ### The optional GAN model in the same demo
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mae-2026-10-28/gan-comparison.png|Original MAE demo model with extra GAN loss, separate from the pixel-only baseline]]
@@ -650,6 +686,8 @@ scores of one- and eight-block decoders coexist with a large linear-probe
 gap. A frozen probe therefore answers a more restricted question than
 fine-tuning the whole encoder.
 
+<a id="mae-alternative-targets"></a>
+
 ### Other reconstruction targets
 
 The pixel target can be replaced without changing the visible-patch
@@ -675,6 +713,8 @@ target does not improve either score over normalized pixels here, although
 it slightly improves fine-tuning over unnormalized pixels. This comparison
 supports the paper's choice of a direct pixel target in that setup;
 it does not rule out learned visual tokenizers for other tasks or models.
+
+<a id="mae-masking-recipe"></a>
 
 ### Masks, augmentations and training length
 

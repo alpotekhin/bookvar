@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
 import config from '../astro.config.mjs';
 import { normalizeArchiveMath } from '../../publishing/adapter/math';
@@ -21,6 +21,8 @@ const cases = [
   ['hse-ml-course/ml2-2026-spring/homeworks-practice/homework-practice-11-random-features/homework-practice-11-random-features-ipynb', 'HSE ML course/ml2-2026-spring/homeworks-practice/homework-practice-11-random-features/homework-practice-11-random-features.ipynb.md', 2],
   ['scikit-learn-mooc/python-scripts/dev-features-importance', 'Scikit-learn MOOC/python_scripts/dev_features_importance.py.md', 1]
 ] as const;
+
+const hseArchive = new URL('../../05 Источники/Courses/HSE ML course/', import.meta.url);
 
 describe('source archive math compatibility', () => {
   test.each([
@@ -68,7 +70,7 @@ describe('source archive math compatibility', () => {
     const errors = [...result.code.matchAll(/<span class="katex-error"[^>]*title="([^"]*)"[^>]*>([\s\S]*?)<\/span>/g)].map(match => ({ error: match[1], sample: match[2].slice(0, 200) }));
     expect(errors).toEqual([]);
   });
-  test.each(cases)('renders the complete frozen %s body without consuming prose', async (route, source, originalErrors) => {
+  async function checkFrozenBody(route: string, source: string, originalErrors: number) {
     const body = readFileSync(new URL(`../../05 Источники/Courses/${source}`, import.meta.url), 'utf8')
       .replace(/^---\n[\s\S]*?\n---\n/, '') + '\n\nARCHIVE_TAIL_SENTINEL\n';
     const renderer = await configuredProcessor().createRenderer({});
@@ -89,6 +91,17 @@ describe('source archive math compatibility', () => {
         expect(normalizeArchiveMath(changed, new URL(`../src/content/docs/generated/${locale}sources/courses/${route}.md`, import.meta.url))).toBe(changed);
       }
     }
+  }
+  test.each(cases.filter(([route]) => !route.startsWith('hse-ml-course/')))(
+    'renders the complete frozen %s body without consuming prose', checkFrozenBody,
+  );
+  // Public catalogue pages no longer include these bodies. Keep the exact
+  // historical regression when the local archive is present, including failure
+  // if only part of that archive is available.
+  describe.skipIf(!existsSync(hseArchive))('retained HSE notebook archive', () => {
+    test.each(cases.filter(([route]) => route.startsWith('hse-ml-course/')))(
+      'renders the complete frozen %s body without consuming prose', checkFrozenBody,
+    );
   });
 
   test('recovers mathematical operators from retained TeX, not from guessed repairs', () => {

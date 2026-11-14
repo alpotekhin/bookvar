@@ -2,14 +2,38 @@
 title: Tool use — от вызова функции к действию
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-30
-last_verified: 2026-10-20
+last_updated: 2026-11-09
+last_verified: 2026-11-09
+reference_terms:
+  - label: Вызов инструмента — схема, права и проверка результата
+    label_en: Tool calls — schema, permissions, and result verification
+    anchor: tool-call-contract
+  - label: Toolformer — отбор вызовов и оценивание
+    label_en: Toolformer — call selection and evaluation
+    anchor: toolformer-curation-evaluation
+  - label: MCP — клиент, сервер и границы протокола
+    label_en: MCP — client, server, and protocol boundaries
+    anchor: mcp-host-client-server
+  - label: MCP — сопоставление ответов и два вида ошибок
+    label_en: MCP — response correlation and two kinds of error
+    anchor: mcp-response-correlation
+  - label: ReAct — prompting, запасная стратегия и обучение
+    label_en: ReAct — prompting, fallback, and fine-tuning
+    anchor: react-prompting-learning
+  - label: Идемпотентность — повтор после потерянного ответа
+    label_en: Idempotency — retries after a lost response
+    anchor: tool-retry-idempotency
+  - label: Вызов инструмента — проверяемое завершение эпизода
+    label_en: Tool use — verifying episode completion
+    anchor: tool-use-verification
 primary_sources:
   - https://huggingface.co/learn/agents-course/en/unit1/agent-steps-and-structure
   - https://react-lm.github.io/
   - https://arxiv.org/abs/2302.04761
   - https://www.anthropic.com/engineering/writing-tools-for-agents
   - https://rdi.berkeley.edu/adv-llm-agents/sp25
+  - https://modelcontextprotocol.io/specification/2025-11-25/basic
+  - https://modelcontextprotocol.io/specification/2025-11-25/architecture
   - https://modelcontextprotocol.io/specification/2025-11-25/server/tools
   - https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 source_unit_id:
@@ -120,14 +144,19 @@ $$a_t=(\text{name},\text{arguments}).$$
 Это отдельные траектории, а не доказательство, что каждый вызов без записанного
 рассуждения обязательно закончится ошибкой.
 
-[![Reason-only, Act-only и ReAct: рассуждение и обратная связь от среды](https://react-lm.github.io/files/diagram.png)](https://react-lm.github.io/files/diagram.png)
+<a id="react-hotpotqa-trajectories"></a>
 
-*Сравнение Reason-only, Act-only и ReAct. Источник: Shunyu Yao et al.,
-[ReAct project page](https://react-lm.github.io/), рисунок `diagram.png`.*
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tool-use-2026-10/react-hotpotqa-primary.png|Четыре траектории для вопроса об Apple Remote: обычный запрос, цепочка рассуждений, действия без записанных рассуждений и ReAct.]]
 
-В первом режиме модель строит текстовое рассуждение без нового внешнего
-наблюдения. Во втором явно выдаёт действия, но промежуточные текстовые
-рассуждения не включены в траекторию. ReAct чередует оба типа шагов.
+*Shunyu Yao et al., [ReAct v3, Figure 1(1), с. 2](https://arxiv.org/pdf/2210.03629v3#page=2),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Первая панель исходного рисунка, с английскими подписями.
+[Сводная схема трёх циклов на сайте проекта](https://react-lm.github.io/files/diagram.png).*
+
+В столбце Reason-only модель строит рассуждение без нового внешнего
+наблюдения. В Act-only видны действия и ответы среды; промежуточный
+текст рассуждения не записан. В панели ReAct модель пишет `Thought`
+и `Act`, а среда возвращает `Obs`.
 Отсутствие видимого текста между вызовами не доказывает, что у современной
 модели нет внутреннего рассуждения; схема сравнивает форматы prompting
 исходной работы, а не позволяет наблюдать все вычисления сети.
@@ -165,6 +194,8 @@ Anthropic рекомендует проектировать инструмент
    выводу занять всё контекстное окно.
 5. **Явные ошибки.** `permission_denied`, `not_found` и `rate_limited` требуют
    разных следующих шагов; строка `failed` этого не сообщает.
+
+<a id="tool-call-contract"></a>
 
 ### Один запрос через схему, ошибку и проверку
 
@@ -508,15 +539,32 @@ around 775M parameters is likewise specific to the tested GPT-2/GPT-J
 models and tools, with an exception for search; it is not a universal
 minimum model size for tool use.
 
+<a id="mcp-host-client-server"></a>
+
 ### Где здесь MCP
 
-Function calling описывает, как приложение получает предложенное моделью
-действие. MCP задаёт другой участок взаимодействия: как приложение-клиент
-обнаруживает инструменты сервера и вызывает их. В спецификации
-[2025-11-25, Tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)
-клиент использует `tools/list`, получает имя, описание и `inputSchema`,
-а затем отправляет `tools/call`. Выбор инструмента моделью и проверка
-прав в приложении не исчезают из-за наличия стандартного протокола.
+Модель предлагает `read_file`, а приложение должно найти и вызвать программу,
+которая умеет читать файл. Если это внешний MCP-сервер, приложение (host)
+использует свой MCP-клиент: через `tools/list` клиент получает имя, описание и
+`inputSchema`, а через `tools/call` передаёт проверенные аргументы.
+Сервер выполняет чтение и возвращает результат клиенту. Решение о том, какие
+инструменты показать модели и при каких условиях вызвать, остаётся у приложения.
+
+![[00 Учебник/Assets/Figures/curated/tool-use-2026-11-09/mcp-simple-diagram.png|Слева приложения, справа источники данных и инструменты; MCP обозначает протокол обмена между ними]]
+
+*Anthropic и участники проекта Model Context Protocol,
+[FAQ, «How does MCP work?»](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/27ab2419191334dd288b05343e3a622ed615913d/docs/faqs.mdx#how-does-mcp-work),
+[оригинальная схема](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/27ab2419191334dd288b05343e3a622ed615913d/docs/images/mcp-simple-diagram.png),
+[MIT](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/27ab2419191334dd288b05343e3a622ed615913d/LICENSE).*
+
+IDE слева на рисунке может обратиться к файловой системе или к Git справа.
+Она открывает отдельное клиентское соединение с каждым сервером.
+Центральная плашка `MCP` обозначает общий формат обмена, а не третий
+процесс, через который проходят все запросы. Сами данные приложение
+передаёт модели отдельно. Роли участников описаны в
+[Architecture](https://modelcontextprotocol.io/specification/2025-11-25/architecture#core-components),
+а формат `tools/list` и `tools/call` — в
+[Tools, 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/server/tools).
 
 Например, модель предложила `read_file` с диапазоном строк 1–2.
 После проверки клиент может представить вызов серверу так:
@@ -545,14 +593,96 @@ Function calling описывает, как приложение получае�
 соответствовать этой схеме. Сама структура ответа не доказывает, что
 модель выбрала правильные аргументы или что найденные данные истинны.
 
-Протокольная ошибка и ошибка исполняемого инструмента тоже различаются.
-Неизвестный инструмент или некорректный JSON-RPC запрос могут дать
-`error` на уровне протокола. Ошибка значения аргумента или внешнего API
-может вернуться внутри результата с `isError: true`.
-Приложение должно сохранить эту информацию, а не передать модели только
-`content` и потерять флаг ошибки. Подсказка `readOnlyHint` в
-описании инструмента не заменяет проверку прав: сама спецификация считает
-annotations недоверенными, если серверу нельзя доверять.
+Подсказка `readOnlyHint` в описании инструмента не заменяет проверку прав.
+Спецификация требует считать такие аннотации недоверенными, если они
+пришли от сервера, которому приложение не доверяет.
+
+<a id="mcp-response-correlation"></a>
+
+### Если ответы приходят не по порядку
+
+Модель просит одновременно прочитать `notes.txt` и `settings.txt`.
+Приложение отправляет два отдельных запроса в одной MCP-сессии. Перед
+отправкой оно записывает, какому вызову модели соответствует каждый
+JSON-RPC `id`. В этой сессии запрашивающая сторона не использует
+один и тот же идентификатор дважды.
+[MCP 2025-11-25, Messages](https://modelcontextprotocol.io/specification/2025-11-25/basic#messages).
+
+| Порядок | JSON-RPC → вызов модели | Ответ |
+| ---: | --- | --- |
+| 1 | `18` → `c3` | Файла нет, `isError: true` |
+| 2 | `17` → `c2` | `timeout=30`, `retries=2` |
+
+Если раздать ответы по порядку отправки, модель получит «файла нет»
+для `notes.txt` и припишет `timeout=30` файлу `settings.txt`.
+Сопоставление по `id` сохраняет обе связи. В случае `18` внешняя
+оболочка всё равно содержит `result`: JSON-RPC-запрос обработан,
+но чтение не удалось. Если клиент отправит устаревшее имя инструмента,
+например `read_old_file`, сервер может вернуть `error` в самой оболочке.
+Приложению нужно отличить неисправный вызов от результата чтения.
+
+Функция ниже принимает уже разобранный ответ из одной сессии и возвращает
+запись для журнала приложения. Она сохраняет данные обеих ошибок и не
+относит неизвестный или уже обработанный `id` ни к одному вызову модели.
+Полную проверку входного сообщения выполняет слой MCP-клиента.
+
+~~~python
+import json
+
+pending = {17: "c2", 18: "c3", 19: "c4"}
+
+def correlate_response(message):
+    rpc_id = message.get("id")
+    if (message.get("jsonrpc") != "2.0"
+            or type(rpc_id) not in (str, int) or rpc_id not in pending):
+        return None
+    if ("error" in message) == ("result" in message):
+        return None
+    if "error" in message:
+        kind, payload = "rpc_error", message["error"]
+    else:
+        payload = message["result"]
+        if not isinstance(payload, dict):
+            return None
+        is_error = payload.get("isError", False)
+        if type(is_error) is not bool:
+            return None
+        kind = "tool_error" if is_error else "tool_result"
+    return {"call_id": pending.pop(rpc_id), "kind": kind, "payload": payload}
+
+def rpc(rpc_id, **body):
+    return {"jsonrpc": "2.0", "id": rpc_id, **body}
+
+missing = rpc(18, result={
+    "isError": True,
+    "content": [{"type": "text", "text": "settings.txt not found"}],
+})
+data = {"path": "notes.txt", "lines": ["timeout=30", "retries=2"]}
+reading = rpc(17, result={
+    "content": [{"type": "text", "text": json.dumps(data)}],
+    "structuredContent": data,
+})
+stale = rpc(19, error={"code": -32602, "message": "Unknown tool: read_old_file"})
+
+assert correlate_response(rpc(999, result={})) is None
+assert correlate_response(rpc(17, result={}, error={})) is None
+received = [correlate_response(msg) for msg in (missing, reading, stale)]
+assert [(item["call_id"], item["kind"]) for item in received] == [
+    ("c3", "tool_error"), ("c2", "tool_result"), ("c4", "rpc_error"),
+]
+assert received[0]["payload"]["content"][0]["text"] == "settings.txt not found"
+assert received[1]["payload"]["structuredContent"] == data
+assert json.loads(received[1]["payload"]["content"][0]["text"]) == data
+assert received[2]["payload"]["code"] == -32602
+assert not pending and correlate_response(reading) is None
+~~~
+
+В журнале первым появится `c3`, но прочитанные строки относятся к
+`c2`. Приложение ведёт таблицу ожидающих ответов отдельно для каждой
+сессии: `id: 17` в двух сессиях может обозначать разные вызовы.
+При записи сопоставление не защищает от повтора действия. Для этого нужен
+[[#tool-retry-idempotency|устойчивый ключ операции]]: если ответ потерялся,
+повтор получает новый JSON-RPC `id`, но сохраняет ключ намерения.
 
 ## 4. Наблюдение должно отвечать на следующий вопрос
 
@@ -562,11 +692,8 @@ annotations недоверенными, если серверу нельзя д�
 и подтверждённые поля; для shell-команды — код завершения, stdout, stderr и
 признак усечения.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tool-use-2026-10/react-hotpotqa-primary.png]]
-
-*Shunyu Yao et al., [ReAct v3, Figure 1(1), PDF p. 2](https://arxiv.org/pdf/2210.03629v3#page=2), CC BY 4.0. Верхняя часть исходного рисунка: один вопрос решается обычным prompting, CoT, Act-only и ReAct. Подписи и английский текст не переводились.*
-
-Вопрос в верхней части рисунка: каким устройством, кроме Apple Remote,
+Вопрос в [траекториях HotpotQA выше](#react-hotpotqa-trajectories):
+каким устройством, кроме Apple Remote,
 можно управлять программой, для которой этот пульт первоначально предназначался?
 Он требует связать два факта: название программы и другое средство управления.
 
@@ -757,8 +884,8 @@ benchmark conditions, not current leaderboard claims.
 повышает число ошибок. Эти требования к контексту, краткому и подробному режимам
 разбираются в [Writing effective tools for agents](https://www.anthropic.com/engineering/writing-tools-for-agents#returning-meaningful-context-from-your-tools).
 
-При нескольких вызовах результат связывают с конкретным идентификатором
-вызова, а не с порядком прихода ответов. Два независимых чтения можно выполнять
+[[#mcp-response-correlation|Сопоставление по идентификатору]] позволяет
+обрабатывать ответы в любом порядке. Два независимых чтения можно выполнять
 параллельно. Поиск идентификатора и чтение найденного документа зависимы:
 второй вызов нельзя исполнить до результата первого. Даже два read-only вызова
 не образуют согласованный снимок автоматически, если данные меняются между ними.
@@ -775,6 +902,8 @@ benchmark conditions, not current leaderboard claims.
 | недостаток прав | запрещён путь или операция | останавливает действие или запрашивает подтверждение |
 | неопределённый побочный эффект | timeout после записи | проверяет состояние по ключу идемпотентности |
 | терминальная | объект не существует и создать нельзя | завершает с доказанным объяснением |
+
+<a id="tool-retry-idempotency"></a>
 
 ### Потерянный ответ после записи
 
@@ -884,12 +1013,20 @@ Anthropic различает заранее заданные процессы и
 вызовов модели и инструментов. Свободный цикл полезен, когда результаты среды
 меняют следующий шаг и заранее неизвестно число итераций.
 
-[![Автономный цикл: действие, наблюдение и остановка](https://www-cdn.anthropic.com/images/4zrzovbb/website/58d9f10c985c4eb5d53798dea315f7bb5ab6249e-2401x1000.png)](https://www-cdn.anthropic.com/images/4zrzovbb/website/58d9f10c985c4eb5d53798dea315f7bb5ab6249e-2401x1000.png)
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/agent-evaluation-2026-11-10/toolsandbox-roles.png|Пользователь общается с агентом слева; справа агент вызывает инструменты, а среда возвращает результаты.]]
 
-*Автономный цикл: модель выбирает действие, среда возвращает обратную связь,
-затем модель либо продолжает, либо останавливается. Источник: Anthropic,
-[Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents),
-схема «Agents».*
+*Jiarui Lu et al., [ToolSandbox v2, Figure 2](https://arxiv.org/html/2408.04682v2#S2.F2),
+[оригинал](https://arxiv.org/html/2408.04682v2/architecture_diagram.png),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+
+В тесте ToolSandbox пользователь просит отправить сообщение. Первый вызов
+`send_message` возвращает `ConnectionError`: сотовая связь выключена.
+Агент включает её и повторяет отправку. На схеме все три вызова проходят
+справа, между агентом и средой, без новой реплики пользователя. Если агенту
+не хватает текста сообщения или получателя, он обращается к пользователю
+слева. [В статье показана и сама траектория теста](https://arxiv.org/html/2408.04682v2#S1.F1);
+[схема «Agents» Anthropic](https://www-cdn.anthropic.com/images/4zrzovbb/website/58d9f10c985c4eb5d53798dea315f7bb5ab6249e-2401x1000.png)
+показывает тот же цикл без деталей испытательной среды.
 
 Для задачи «прочитай файл и назови значение» переходы можно задать заранее:
 проверка пути, чтение, разбор строки, ответ. Поиск в незнакомом репозитории
@@ -898,8 +1035,8 @@ Anthropic различает заранее заданные процессы и
 варианта: свободный поиск причины и фиксированный, проверяемый порядок
 применения правки.
 
-Остановка на схеме означает завершение цикла, но сама по себе не доказывает
-успех. Если пользователь просил прочитать файл, подтверждают прочитанное значение;
+Остановка завершает цикл. Успех проверяют отдельно. Если пользователь просил прочитать
+файл, подтверждают прочитанное значение;
 если исправить тест, проверяют соответствующий тест после изменения. Превышение
 лимита шагов тоже останавливает цикл, однако результат в этом случае может
 остаться незавершённым.
@@ -920,6 +1057,8 @@ Anthropic различает заранее заданные процессы и
 Результат теста должен отделять ошибку выбора от ошибки исполнения.
 Корректный JSON при недопустимом пути не является успешным вызовом;
 успешный вызов с неверным ответом тоже не закрывает задачу.
+
+<a id="tool-use-verification"></a>
 
 ### Полный учебный эпизод с проверяемым завершением
 
@@ -1044,7 +1183,7 @@ assert not run_episode(proposals, max_steps=1)[0]
 - [ReAct](https://react-lm.github.io/) — готовые сопоставимые траектории и исходная [статья](https://arxiv.org/abs/2210.03629).
 - [Toolformer](https://arxiv.org/abs/2302.04761) — self-supervised обучение вызовам API.
 - [Anthropic: Writing effective tools for agents](https://www.anthropic.com/engineering/writing-tools-for-agents) — проектирование описаний и ответов инструментов.
-- [Model Context Protocol, Tools, 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) — обнаружение, вызовы и два уровня ошибок.
+- Model Context Protocol 2025-11-25: [Architecture](https://modelcontextprotocol.io/specification/2025-11-25/architecture) — роли приложения, клиента и сервера; [Messages](https://modelcontextprotocol.io/specification/2025-11-25/basic#messages) — идентификаторы запросов; [Tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) — обнаружение, вызовы и два уровня ошибок.
 - [AWS Builders' Library: Making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/) — повторы с устойчивым идентификатором намерения.
 - [SWE-agent: Agent-Computer Interfaces](https://arxiv.org/abs/2405.15793) — влияние интерфейса компьютера на качество агента.
 

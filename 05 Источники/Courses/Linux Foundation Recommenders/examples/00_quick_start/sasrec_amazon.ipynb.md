@@ -17,7 +17,7 @@ source_commit: 6232b154548c955315650d58dca6bf1411c56020
 
 ### Sequential Recommendation Using Transformer
 
-![image.png](/_assets/Sources/Linux Foundation Recommenders/examples/00_quick_start/sasrec_amazon/cell-001-attachment.png)
+[Training diagram: Figure 1 in Kang and McAuley, *Self-Attentive Sequential Recommendation*](https://arxiv.org/html/1808.09781v1#S1.F1)
 
 This is a class of sequential recommendation that uses Transformer \[2\] for encoding the users preference represented in terms of a sequence of items purchased/viewed before. Instead of using CNN (Caser \[3\]) or RNN (GRU \[4\], SLI-Rec \[5\] etc.) the approach relies on Transformer based encoder that generates a new representation of the item sequence. Two variants of this Transformer based approaches are included here,
 

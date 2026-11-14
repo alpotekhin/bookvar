@@ -17,9 +17,10 @@ const grpo = journal.files[2].source;
 describe('licensed visual replacements', () => {
   it('restores preceding chapter and registry bytes exactly and rejects unrecorded edits', () => {
     for (const row of journal.files) {
-      const current = read(row.source);
+      const current = beforeTopicConsolidation(read(row.source), row.source, root,
+        '2026-10-30-figure-replacements-additions.json');
       expect(sha(current)).toBe(row.after_sha256);
-      const restored = beforeTopicConsolidation(current, row.source, root,
+      const restored = beforeTopicConsolidation(read(row.source), row.source, root,
         '2026-10-30-atlas-release-label-additions.json');
       expect(sha(restored)).toBe(row.before_sha256);
       const fences = (text: string) => [...text.matchAll(/^(?:`{3}|~{3})python\n([\s\S]*?)^(?:`{3}|~{3})\s*$/gm)].map(x=>x[1]);
@@ -48,6 +49,9 @@ describe('licensed visual replacements', () => {
     const actual = rows(ru).map(x=>x.split('|').slice(1,-1).map(x=>x.trim()));
     expect(actual).toEqual(expected);
     expect(rows(en)).toEqual(rows(ru));
+    const atReview = (path: string) => beforeTopicConsolidation(read(path), path, root,
+      '2026-10-30-figure-replacements-additions.json');
+    expect(YAML.parse(atReview(en).split('---')[1]).canonical_revision).toBe(sha(atReview(ru)));
     expect(YAML.parse(read(en).split('---')[1]).canonical_revision).toBe(sha(read(ru)));
   });
 

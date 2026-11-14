@@ -4,27 +4,73 @@ from itertools import product
 from types import SimpleNamespace
 import ast
 import hashlib
+import json
 import importlib.util
 import re
 import torch
 from torch import nn
 from torch.nn import functional as F
+from topic_consolidation_baseline import before_topic_consolidation
 
 torch.set_num_threads(1)
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md"
 content = CHAPTER.read_bytes()
 blocks = re.findall(r"```python\n(.*?)```", content.decode(), re.S)
-assert len(blocks) == 21
+assert len(blocks) == 22
 scope = {}
 for number, code in enumerate(blocks, 1):
     print(f"Execute actual CNN block {number}", flush=True)
     exec(compile(code, f"{CHAPTER}:block{number}", "exec"), scope)
 
+# Independently index causal windows and inspect their Jacobian support.
+causal_cases = 0
+causal_generator = torch.Generator().manual_seed(20261103)
+for length, width, dilation in product([1, 3, 8], [1, 2, 3], [1, 2, 4]):
+    values = torch.randn(2, 2, length, generator=causal_generator, dtype=torch.float64)
+    weight = torch.randn(3, 2, width, generator=causal_generator, dtype=torch.float64)
+    output = scope['causal_conv1d'](values, weight, dilation=dilation)
+    expected = torch.zeros(2, 3, length, dtype=torch.float64)
+    for t, c, o in product(range(length), range(2), range(3)):
+        for q in range(width):
+            position = t - dilation * (width - 1 - q)
+            if position >= 0:
+                expected[:, o, t] += values[:, c, position] * weight[o, c, q]
+    torch.testing.assert_close(output, expected, atol=2e-12, rtol=2e-12)
+    for t in range(length):
+        changed = values.clone()
+        changed[..., t+1:] += 1000
+        torch.testing.assert_close(scope['causal_conv1d'](changed, weight, dilation)[..., :t+1],
+                                   output[..., :t+1], atol=2e-12, rtol=2e-12)
+    causal_cases += 1
+causal_values = torch.randn(1, 2, 6, generator=causal_generator,
+                            dtype=torch.float64, requires_grad=True)
+causal_kernel = torch.randn(3, 2, 3, generator=causal_generator,
+                            dtype=torch.float64, requires_grad=True)
+assert torch.autograd.gradcheck(lambda x, k: scope['causal_conv1d'](x, k, 2),
+                                (causal_values, causal_kernel))
+future = scope['causal_input'].detach().clone()
+future[..., 1] += 1
+assert F.conv1d(future, scope['causal_weight'], padding=1)[0, 0, 0].item() == 310
+assert scope['causal_conv1d'](future, scope['causal_weight'])[0, 0, 0].item() == 100
+print(f'PASS {causal_cases} independently indexed causal multi-channel/dilation cases, all future perturbations and gradcheck')
+
 # The accepted explanation is retained byte-for-byte outside this addition.
+historical = before_topic_consolidation(content.decode(), CHAPTER,
+    stop_before_journal='2026-11-03-augmentation-composition-additions.json')
+# Earlier route prose has its own exact-byte journal; restore it only for
+# the historical checks below, never for executing the current programs.
+navigation = json.loads((ROOT / 'docs/audit/2026-10-29-reader-route-navigation.json').read_text())
+nav_row = next(row for row in navigation['files']
+               if row['source'] == CHAPTER.relative_to(ROOT).as_posix())
+assert hashlib.sha256(historical.encode()).hexdigest() == nav_row['after']
+for change in reversed(nav_row['changes']):
+    assert historical.count(change['new']) == 1
+    historical = historical.replace(change['new'], change['old'], 1)
+assert hashlib.sha256(historical.encode()).hexdigest() == nav_row['before']
 without_winograd = re.sub(
     r'<!-- BEGIN REVIEW: Winograd 2026-10-27 -->\n.*?<!-- END REVIEW: Winograd 2026-10-27 -->\n\n',
-    '', content.decode(), flags=re.S)
+    '', historical, flags=re.S)
 assert hashlib.sha256(without_winograd.encode()).hexdigest() == \
     'faf4455eb24ef822f831521f1549b44f9f5fc5770a74c69f9b3f61f068bd66da'
 without_native = re.sub(

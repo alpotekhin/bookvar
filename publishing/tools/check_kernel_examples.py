@@ -6,6 +6,8 @@ import re
 import numpy as np
 from scipy.optimize import minimize_scalar
 from sklearn.svm import SVC
+from sklearn.base import clone
+from sklearn.datasets import load_iris
 from sklearn.kernel_approximation import RBFSampler
 from sklearn.metrics.pairwise import rbf_kernel, polynomial_kernel
 
@@ -13,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md"
 content = CHAPTER.read_bytes()
 blocks = re.findall(r"```python\n(.*?)```", content.decode(), re.S)
-assert len(blocks) == 9
+assert len(blocks) == 10
 scope = {}
 for index, code in enumerate(blocks, 1):
     print(f"Execute actual chapter block {index}", flush=True)
@@ -160,4 +162,60 @@ for row in scope["candidate_rows"]:
         np.testing.assert_array_equal(feature_map.components_,source[feature_map.component_indices_])
 assert scope["selected_test_accuracy"] > .8
 print("PASS 33 actual pipelines, train-only fitted statistics and anchors, selected test contract")
+
+# Uniform changes of units preserve all pairwise RBF values after gamma/s^2.
+for gamma in [.1, 1., 10.]:
+    radius = 1/np.sqrt(gamma)
+    np.testing.assert_allclose(np.exp(-gamma*radius**2), np.exp(-1), atol=1e-15)
+    for scale in [.2, 5., 10.]:
+        points = rng.normal(size=(13, 4))
+        np.testing.assert_allclose(
+            rbf_kernel(points*scale, gamma=gamma/scale**2),
+            rbf_kernel(points, gamma=gamma), atol=1e-13)
+for scale in [.2, 5., 10.]:
+    scaled_model = SVC(kernel="rbf", C=10., gamma=2/scale**2,
+                       tol=1e-9).fit(scope["X_ring"]*scale, scope["y_ring"])
+    np.testing.assert_allclose(scaled_model.decision_function(queries*scale),
+                               model.decision_function(queries), atol=1e-6)
+print("PASS nine uniform-unit Gram cases, three SVM prediction cases and RBF level radii")
+
+# Independently reconstruct the grid's folds and fit the selected pipeline on
+# each training fold. This is not a rerun of the historical 169-cell figure.
+search = scope["rbf_search"]
+data, labels = load_iris(return_X_y=True)
+np.testing.assert_array_equal(data, scope["iris_search_X"])
+np.testing.assert_array_equal(labels, scope["iris_search_y"])
+assert len(search.cv_results_["params"]) == 9
+assert search.n_splits_ == 5
+scores = []
+for index, (train, validation) in enumerate(scope["rbf_folds"]):
+    assert len(train) == 120 and len(validation) == 30
+    assert set(train).isdisjoint(validation)
+    np.testing.assert_array_equal(np.bincount(labels[train]), [40, 40, 40])
+    np.testing.assert_array_equal(np.bincount(labels[validation]), [10, 10, 10])
+    fitted = clone(search.best_estimator_).fit(data[train], labels[train])
+    scaler = fitted.named_steps["scale"]
+    np.testing.assert_allclose(scaler.mean_, data[train].mean(axis=0), atol=1e-14)
+    assert not np.allclose(scaler.mean_, data.mean(axis=0))
+    score = fitted.score(data[validation], labels[validation])
+    np.testing.assert_allclose(score,
+        search.cv_results_[f"split{index}_test_score"][search.best_index_])
+    scores.append(score)
+np.testing.assert_allclose(np.mean(scores), search.best_score_)
+# refit=True intentionally trains the final estimator on all input data.
+np.testing.assert_allclose(search.best_estimator_.named_steps["scale"].mean_,
+                           data.mean(axis=0), atol=1e-14)
+print("PASS nine-configuration/five-fold grid, fold-only scalers and explicit all-data refit")
+
+# The source figure uses pcolormesh's independent min/max normalization, not
+# a zero-centered diverging norm. In this source panel the midpoint is nonzero.
+binary = labels > 0
+source_points = scope["StandardScaler"]().fit_transform(data[binary, :2])
+source_model = SVC(C=1., gamma=1.).fit(source_points, labels[binary]-1)
+gx, gy = np.meshgrid(
+    np.linspace(source_points[:, 0].min()-.5, source_points[:, 0].max()+.5, 100),
+    np.linspace(source_points[:, 1].min()-.5, source_points[:, 1].max()+.5, 100))
+response = source_model.decision_function(np.c_[gx.ravel(), gy.ravel()])
+assert abs((response.min()+response.max())/2) > .01
+print("PASS source decision-panel color midpoint is not an f=0 contour")
 print("chapter_sha256",hashlib.sha256(content).hexdigest())

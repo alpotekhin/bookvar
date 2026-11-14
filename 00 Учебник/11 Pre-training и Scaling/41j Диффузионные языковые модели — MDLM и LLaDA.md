@@ -3,15 +3,48 @@ title: Masked diffusion — MDLM, LLaDA and block generation
 type: textbook-chapter
 status: canonical
 source_language: en
+last_updated: 2026-11-05
+last_verified: 2026-11-05
 reference_terms:
-  - label: Block Diffusion — блочная генерация и KV-cache
-    label_en: Block Diffusion — block generation and KV caching
-    anchor: block-diffusion-and-kv
-  - label: ReMDM — повторное маскирование
-    label_en: ReMDM — remasking and refinement
-    anchor: remasking-and-refinement
-last_updated: 2026-10-29
-last_verified: 2026-10-29
+  - anchor: masking-process
+    label: "MDLM: поглощающее маскирование и обучающий вход"
+    label_en: "MDLM: absorbing masking and the training input"
+  - anchor: weighted-mask-loss
+    label: "SUBS и взвешенная ошибка masked diffusion"
+    label_en: "SUBS and the weighted masked-diffusion loss"
+  - anchor: diffusion-bert-boundary
+    label: "BERT и генеративная модель с маскированием"
+    label_en: "BERT versus a generative masking model"
+  - anchor: reverse-transition
+    label: "Обратный переход: вероятность токена и вероятность раскрытия"
+    label_en: "Reverse transitions: token probability and reveal probability"
+  - anchor: complete-toy-sampler
+    label: "Полный sampler с точными условными распределениями"
+    label_en: "A complete sampler with exact conditional distributions"
+  - anchor: diffusion-pair-factorization
+    label: "Ошибка независимой генерации зависимых токенов"
+    label_en: "Independent sampling of dependent tokens"
+  - anchor: llada-training-and-selection
+    label: "LLaDA: pre-training, SFT, EOS и выбор позиций"
+    label_en: "LLaDA: pre-training, SFT, EOS and position selection"
+  - anchor: block-diffusion-and-kv
+    label: "Block Diffusion — блочная генерация и KV-cache"
+    label_en: "Block Diffusion — block generation and KV caching"
+  - anchor: diffusion-stream-leakage
+    label: "Block Diffusion: чистый и зашумлённый потоки без утечки targets"
+    label_en: "Block Diffusion: clean/noisy streams without target leakage"
+  - anchor: remasking-and-refinement
+    label: "ReMDM — повторное маскирование"
+    label_en: "ReMDM — remasking and refinement"
+  - anchor: remdm-loop
+    label: "ReMDM-loop: доработка при постоянном уровне шума"
+    label_en: "ReMDM-loop: refinement at a fixed noise level"
+  - anchor: likelihood-and-serving
+    label: "NELBO, perplexity и стоимость диффузионной генерации"
+    label_en: "NELBO, perplexity and diffusion-serving cost"
+  - anchor: diffusion-prediction-reuse
+    label: "Повторное использование прогноза и prefix KV-cache"
+    label_en: "Prediction reuse versus prefix KV caching"
 primary_sources:
   - https://arxiv.org/html/2406.07524v2
   - https://arxiv.org/html/2502.09992v3
@@ -29,12 +62,12 @@ model can instead start with four `[MASK]` tokens, reveal `sleeps` first,
 then fill other positions using everything already visible on either side.
 The output positions exist before their contents are known.
 
-| Reverse-process state | Position 1 | Position 2 | Position 3 | Position 4 |
-|---|---|---|---|---|
-| Initial | `[MASK]` | `[MASK]` | `[MASK]` | `[MASK]` |
-| One possible step | `[MASK]` | `[MASK]` | `sleeps` | `[MASK]` |
-| Later | `The` | `[MASK]` | `sleeps` | `here` |
-| Complete | `The` | `cat` | `sleeps` | `here` |
+| Reverse-process state | Sequence (positions 1–4) |
+|---|---|
+| Initial | `[MASK]` `[MASK]` `[MASK]` `[MASK]` |
+| One possible step | `[MASK]` `[MASK]` `sleeps` `[MASK]` |
+| Later | `The` `[MASK]` `sleeps` `here` |
+| Complete | `The` `cat` `sleeps` `here` |
 
 This is a hand-constructed trajectory, not the output of a model run.
 Words stand for tokens only in this example. A step can reveal several
@@ -172,6 +205,8 @@ cross-entropy. Near $t=0$, the factor $1/t$ and rare masking events can
 produce high-variance estimates. Practical schedules, lower cutoffs and
 low-discrepancy sampling need to be specified when reproducing training.
 Block Diffusion §§4–5 studies this variance explicitly.
+
+<a id="diffusion-bert-boundary"></a>
 
 BERT also learns to predict missing tokens, but its original corruption
 recipe uses a fixed selected fraction and a mixture of replacements.
@@ -327,6 +362,8 @@ marginals produce four equally probable pairs. Two never occur in the
 dataset. More steps reduce the chance of simultaneous revelation and let
 one sampled token condition the other.
 
+<a id="diffusion-pair-factorization"></a>
+
 For a linear schedule with $T$ equally spaced reverse steps, each position
 has a uniform reveal-step index in $\{1,\ldots,T\}$. Their independent
 indices coincide with probability $1/T$. When that happens, the two
@@ -441,6 +478,8 @@ the mean to 4. A subsequent projection of the prefix state changes too.
 An exact prefix KV cache requires the appropriate attention structure,
 not just the word “block” in a sampling option.
 
+<a id="diffusion-stream-leakage"></a>
+
 Training must also prevent target leakage. To denoise block $b$, the
 model needs its noisy version and clean earlier blocks. To use block $b$
 as context for a later block, it needs the clean version of $b$. The
@@ -512,6 +551,8 @@ CC BY 4.0. Generation runs from right to left as $t$ decreases. On the
 flat part of $\alpha$, remasking spends additional steps revising a
 partially completed sequence rather than increasing its visible fraction.*
 
+<a id="remdm-loop"></a>
+
 In ReMDM-loop, ordinary unmasking first creates a partial candidate.
 During an intermediate phase, $\alpha_s=\alpha_t$ is held constant and
 remasking is enabled. At $\alpha=0.5$, $\sigma=0.25$ gives a masked-to-visible
@@ -540,6 +581,8 @@ prefix state; a fully bidirectional denoising step can process the whole
 sequence again. Report the number of network evaluations, tokens processed
 per evaluation, block size, cache policy and actual end-to-end latency.
 Count extra unconditional evaluations if classifier-free guidance is used.
+
+<a id="diffusion-prediction-reuse"></a>
 
 MDLM §4.1 describes another form of reuse: when a step reveals no tokens,
 the next input sequence is identical. A time-independent denoiser can

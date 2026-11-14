@@ -1,0 +1,22 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { getEntry, render } from 'astro:content';
+import RopeLab from './RopeLab.astro';
+import { ropeLabHeadings } from '../lib/rope-lab';
+
+const { lang } = Astro.props as { lang: 'ru' | 'en' };
+const id = lang === 'ru' ? 'practice/rope' : 'en/practice/rope';
+const entry = await getEntry('docs', id);
+if (!entry) throw new Error('Missing RoPE practice: ' + id);
+const { Content, headings } = await render(entry);
+const { hero: _hero, editUrl, ...frontmatter } = entry.data;
+const labHeadings = [
+  { depth: 2, slug: 'rope-rotation-lab', text: ropeLabHeadings[lang][0] },
+  { depth: 2, slug: 'rope-frequency-lab', text: ropeLabHeadings[lang][1] },
+];
+---
+
+<StarlightPage frontmatter={{ ...frontmatter, editUrl: editUrl === true ? undefined : editUrl }} headings={[...labHeadings, ...headings]}>
+  <RopeLab lang={lang} />
+  <Content />
+</StarlightPage>

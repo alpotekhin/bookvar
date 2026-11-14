@@ -1,0 +1,110 @@
+{
+  "date": "2026-11-11",
+  "scope": "Resolve the remaining seven externally loaded figures on the canonical textbook routes: keep the original figure links, reuse the complete licensed ToolSandbox Figure 2, and walk through the corresponding agent decisions in the prose.",
+  "review": {
+    "primarySources": "Anthropic Building Effective Agents (Agents, Orchestrator-workers, Evaluator-optimizer) and Effective context engineering for AI agents; OpenHands Context Condenser and the pinned SDK; Park et al., Generative Agents §4.2 Figure 7; Lu et al., ToolSandbox arXiv v2 §§2–2.1 and Figures 1–2.",
+    "workedExamples": "ToolSandbox: failed send_message, enable cellular service, retry, and optional clarification with the user. Harness: the test command stays in project configuration while the assembled prompt changes from unrun to observed test result. Memory: distinguish raw observations from reflections in the Wolfgang/Maria example, dynamically reassign seminar work, and check the invitation against the calendar.",
+    "rightsLimits": "No verified reuse permission found for the seven previous external images. All remain links to the source originals. The existing ToolSandbox asset is unchanged under CC BY-SA 4.0; only its usage record changes.",
+    "preservation": "Exact reversal pins all three chapters and three metadata files; all existing code blocks, headings and anchors stayed byte-for-byte unchanged. English remains a labeled canonical-language fallback.",
+    "verification": "2077 built pages, 292 built-output tests, zero broken internal routes, fragments or files. All 310 manifest textbook pages scanned: zero external img src values, zero KaTeX errors, 1185 pinned local asset matches, 37 unpinned paths, zero missing registry keys or hash mismatches. Chrome checks of all three routes in both locales at 375 and 1280 px verified local image decoding, bounds, and mobile enlargement; the two ToolSandbox layouts were inspected visually.",
+    "status": "Local; not committed, pushed, or deployed."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+      "before_sha256": "506559100112802f7d71df1d33f6760a56bc426966bb5fed4ad589b61eea2570",
+      "after_sha256": "f7bd2ce622fa778bb1b4059f0ef79f0eee787e965f49d06e489bef799c6648ea",
+      "lines": 1196,
+      "changes": [
+        {
+          "old": "[![Автономный цикл: действие, наблюдение и остановка](https://www-cdn.anthropic.com/images/4zrzovbb/website/58d9f10c985c4eb5d53798dea315f7bb5ab6249e-2401x1000.png)](https://www-cdn.anthropic.com/images/4zrzovbb/website/58d9f10c985c4eb5d53798dea315f7bb5ab6249e-2401x1000.png)\n\n*Автономный цикл: модель выбирает действие, среда возвращает обратную связь,\nзатем модель либо продолжает, либо останавливается. Источник: Anthropic,\n[Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents),\nсхема «Agents».*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/agent-evaluation-2026-11-10/toolsandbox-roles.png|Пользователь общается с агентом слева; справа агент вызывает инструменты, а среда возвращает результаты.]]\n\n*Jiarui Lu et al., [ToolSandbox v2, Figure 2](https://arxiv.org/html/2408.04682v2#S2.F2),\n[оригинал](https://arxiv.org/html/2408.04682v2/architecture_diagram.png),\n[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*\n\nВ тесте ToolSandbox пользователь просит отправить сообщение. Первый вызов\n`send_message` возвращает `ConnectionError`: сотовая связь выключена.\nАгент включает её и повторяет отправку. На схеме все три вызова проходят\nсправа, между агентом и средой, без новой реплики пользователя. Если агенту\nне хватает текста сообщения или получателя, он обращается к пользователю\nслева. [В статье показана и сама траектория теста](https://arxiv.org/html/2408.04682v2#S1.F1);\n[схема «Agents» Anthropic](https://www-cdn.anthropic.com/images/4zrzovbb/website/58d9f10c985c4eb5d53798dea315f7bb5ab6249e-2401x1000.png)\nпоказывает тот же цикл без деталей испытательной среды."
+        },
+        {
+          "old": "Остановка на схеме означает завершение цикла, но сама по себе не доказывает\nуспех. Если пользователь просил прочитать файл, подтверждают прочитанное значение;",
+          "new": "Остановка завершает цикл. Успех проверяют отдельно. Если пользователь просил прочитать\nфайл, подтверждают прочитанное значение;"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md",
+      "before_sha256": "2131c49a1489df48348dd55869eee6d41733dbe10e6f4c8c0adc94db2128409f",
+      "after_sha256": "4184d89a04d8ce363092de6012efb5be4dec2e9ee334659fece8f20af5feae33",
+      "lines": 1010,
+      "changes": [
+        {
+          "old": "[![Prompt engineering и повторная сборка контекста в агентном цикле](https://www-cdn.anthropic.com/images/4zrzovbb/website/faa261102e46c7f090a2402a49000ffae18c5dd6-2292x1290.png)](https://www-cdn.anthropic.com/images/4zrzovbb/website/faa261102e46c7f090a2402a49000ffae18c5dd6-2292x1290.png)\n\n*Prompt engineering меняет отдельный prompt, а context engineering заново\nотбирает вход перед каждым вызовом модели. Источник: Anthropic Applied AI team,\n[Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents),\nсхема «Prompt engineering vs. context engineering».*\n\nПосле записи `timeout=45` модели нужны исходное требование, подтверждение\nправки и сведения о незапущенном тесте. Полный журнал установки зависимостей\nобычно не помогает выбрать следующий шаг. Он может остаться во внешнем\nхранилище с адресом, по которому его можно открыть при необходимости.\nТак отбор контекста сохраняет доступ к данным, не требуя каждый раз включать\nвсе их токены во вход.\n\n[![Выбор подробности системных инструкций](https://www-cdn.anthropic.com/images/4zrzovbb/website/0442fe138158e84ffce92bed1624dd09f37ac46f-2292x1288.png)](https://www-cdn.anthropic.com/images/4zrzovbb/website/0442fe138158e84ffce92bed1624dd09f37ac46f-2292x1288.png)\n\n*Две крайности системной инструкции: каталог частных случаев и слишком общее\nпожелание. Между ними — компактная роль, способ работы и правила эскалации.\nИсточник: Anthropic Applied AI team,\n[Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents),\nсхема «Calibrating the system prompt».*\n\nЛевая часть рисунка пытается заранее записать в prompt все ветви процесса. Такое\nописание быстро устаревает и конкурирует с текущими данными. Правая оставляет\nслишком много неоднозначности. Средний вариант фиксирует устойчивые принципы, а\nменяющиеся сведения и узкие процедуры подгружаются как инструменты, документы\nили skills только тогда, когда они нужны.",
+          "new": "После записи `timeout=45` модели нужны исходное требование, подтверждение\nправки и сведения о незапущенном тесте. После теста вместо «не запущен»\nсборщик передаст его результат. Полный журнал установки зависимостей можно\nоставить в хранилище и передать только путь к нему. Системная инструкция\n«запусти тест после правки» в обоих вызовах одинакова; меняются данные, по\nкоторым модель решает, что делать дальше. Это различие показано на\n[схеме «Prompt engineering vs. context engineering» Anthropic](https://www-cdn.anthropic.com/images/4zrzovbb/website/faa261102e46c7f090a2402a49000ffae18c5dd6-2292x1290.png).\n\nИнструкция «проверь изменения» не говорит, достаточно ли прочитать diff или\nнужно запустить тест. Перечислять в системной инструкции команды для всех\nрепозиториев тоже не нужно. Постоянное правило может быть таким: после правки\nзапусти проверку, указанную для текущей задачи; если она не запустилась, сообщи\nоб этом. Конкретную команду сборщик берёт из конфигурации проекта.\n[Anthropic разбирает выбор подробности инструкции](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) и показывает его на\n[схеме «Calibrating the system prompt»](https://www-cdn.anthropic.com/images/4zrzovbb/website/0442fe138158e84ffce92bed1624dd09f37ac46f-2292x1288.png)."
+        },
+        {
+          "old": "[![Замена старых событий резюме в OpenHands](https://mintcdn.com/allhandsai/hwL6uO0ZqM-lmlYG/sdk/guides/assets/condenser_overview_light_mode.png?fit=max&auto=format&n=hwL6uO0ZqM-lmlYG&q=85&s=dc85afa9f2821b1f7a305ad1406ab3d9)](https://mintcdn.com/allhandsai/hwL6uO0ZqM-lmlYG/sdk/guides/assets/condenser_overview_light_mode.png?fit=max&auto=format&n=hwL6uO0ZqM-lmlYG&q=85&s=dc85afa9f2821b1f7a305ad1406ab3d9)\n\n*OpenHands contributors, [Context Condenser](https://docs.openhands.dev/sdk/guides/context-condenser), исходная обзорная схема. Защищённое начало истории и границы связанных групп событий на ней не показаны; они рассматриваются ниже по коду.*",
+          "new": "На [схеме OpenHands](https://mintcdn.com/allhandsai/hwL6uO0ZqM-lmlYG/sdk/guides/assets/condenser_overview_light_mode.png?fit=max&auto=format&n=hwL6uO0ZqM-lmlYG&q=85&s=dc85afa9f2821b1f7a305ad1406ab3d9) длинная последовательность событий превращается\nв резюме и короткий хвост. В реализации резюме заменяет выбранные события\nтолько в представлении для модели. Какие события можно заменить вместе,\nвидно из примера ниже и из кода, на который ссылается\n[документация Context Condenser](https://docs.openhands.dev/sdk/guides/context-condenser)."
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+      "before_sha256": "63b05db50c38724b585562df56d1389ec1ed0ad1561917dc54ef76e00c0ac2a7",
+      "after_sha256": "c1bf43a2e06d247c2a450a0615e96bb5034b7e8c78ef4001b6749849f864e9a1",
+      "lines": 1390,
+      "changes": [
+        {
+          "old": "[![Дерево рефлексий Klaus: записи памяти внизу и обобщения со ссылками на них](https://arxiv.org/html/2304.03442v2/figures/figure_reflection6.png)](https://arxiv.org/html/2304.03442v2/figures/figure_reflection6.png)\n\n*Joon Sung Park et al., [Generative Agents, §4.2, Figure 7](https://arxiv.org/html/2304.03442v2#S4.SS2).\nОригинальное изображение подключено со страницы статьи. Верхний вывод\nопирается на нижележащие записи; повторное использование вывода не создаёт\nновых независимых свидетельств. Среди нижних записей показаны наблюдения,\nплан и ранее полученные рефлексии.*\n\nЕсли обобщение ссылается на другое обобщение, получается дерево, как на\nрисунке. Для проверки его нужно пройти до наблюдений: пять пересказов одного\nсообщения остаются одним основанием. Если исходное наблюдение отменено,",
+          "new": "В [примере Park et al.](https://arxiv.org/html/2304.03442v2#S4.SS2) Klaus\nс одними наблюдениями выбирает в собеседники соседа Wolfgang: они часто\nпересекаются. С рефлексией Klaus выбирает Maria: в памяти появляется вывод\nоб их общем интересе к исследованиям. [На рисунке 7](https://arxiv.org/html/2304.03442v2/figures/figure_reflection6.png) можно проследить\nодну часть этого рассуждения: на каких записях основан вывод об увлечённости\nсамого Klaus. Чтобы проверить такой вывод, нужно дойти до наблюдений:\nесли два промежуточных обобщения ссылаются на один разговор, независимых\nсвидетельств от этого не прибавляется. Если исходное\nнаблюдение отменено,"
+        },
+        {
+          "old": "[![Orchestrator-workers: координатор определяет подзадачи, исполнители возвращают результаты, синтез объединяет их](https://www-cdn.anthropic.com/images/4zrzovbb/website/8985fc683fae4780fb34eab1365ab78c7e51bc8e-2401x1000.png)](https://www-cdn.anthropic.com/images/4zrzovbb/website/8985fc683fae4780fb34eab1365ab78c7e51bc8e-2401x1000.png)\n\n*Центральный агент выделяет подзадачи и передаёт их исполнителям, затем\nобъединяет полученные результаты. Число и содержание подзадач могут меняться\nв зависимости от запроса.\nИсточник: Anthropic,\n[Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents),\nсхема «Orchestrator-workers», оригинал подключён с сайта автора.*\n\nНа схеме показан способ организации вычислений, а не требование использовать\nразные модели или отдельные процессы. «Исполнитель» может быть новым вызовом\nтой же модели со своими инструкциями и контекстом. Выигрыш зависит от того,\nпомогло ли разделение решить задачу; сами названия ролей дополнительных знаний\nне создают.",
+          "new": "Если список работ всегда один и тот же — найти помещение и подобрать статьи, —\nдостаточно двух параллельных вызовов. Если зал на выбранную дату недоступен,\nкоординатор может назначить новую подзадачу: проверить, позволяет ли площадка\nпровести семинар дистанционно. Затем он собирает только результаты для\nсогласованной даты и формата. В\n[схеме «Orchestrator-workers» Anthropic](https://www-cdn.anthropic.com/images/4zrzovbb/website/8985fc683fae4780fb34eab1365ab78c7e51bc8e-2401x1000.png)\nсостав работ определяет координатор. Исполнителями могут быть отдельные вызовы\nодной и той же модели с разными входными данными."
+        },
+        {
+          "old": "Например, проверка приглашения может обнаружить, что в нём нет часового пояса.\nГенератор получает конкретное замечание и исправляет текст. Если же оценщик\nкаждый раз просит «сделать стиль лучше», процесс не имеет ясного условия\nостановки. Итерации должны приближать результат к определённым требованиям,\nа не просто порождать новые варианты.\n\n[![Evaluator-optimizer: генератор передаёт результат оценщику, решение оценщика завершает работу или возвращает замечания](https://www-cdn.anthropic.com/images/4zrzovbb/website/14f51e6406ccb29e695da48b17017e899a6119c7-2401x1000.png)](https://www-cdn.anthropic.com/images/4zrzovbb/website/14f51e6406ccb29e695da48b17017e899a6119c7-2401x1000.png)\n\n*Результат проходит оценку; при обнаружении недостатков замечания возвращаются\nгенератору. Источник: Anthropic,\n[Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents),\nсхема «Evaluator-optimizer», оригинал подключён с сайта автора.*",
+          "new": "В черновике приглашения указано «16:00», а в календаре встреча стоит на\n16:00 по Москве. Оценщик возвращает конкретное замечание: в приглашении\nне указан часовой пояс. Генератор исправляет текст, а следующая проверка\nсверяет время и пояс с календарём. Просьба «сделать стиль лучше» такого\nусловия остановки не даёт.\n[Схема «Evaluator-optimizer» Anthropic](https://www-cdn.anthropic.com/images/4zrzovbb/website/14f51e6406ccb29e695da48b17017e899a6119c7-2401x1000.png)\nпоказывает две ветви после проверки: принять результат или вернуть замечания."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "9853531baa19b717f9bb6d5c8334a2833137c42448702eff3b9b2976a71205fc",
+      "after_sha256": "552423a50d6787b98a176ab08e0a0e36843f56432e28356f7895f60b62023db8",
+      "lines": 25860,
+      "changes": [
+        {
+          "old": "    used_in: [\"00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md\"]\n  - id: \"curated-toolsandbox-trace-90d2eb262f57\"",
+          "new": "    used_in: [\"00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md\", \"00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md\"]\n  - id: \"curated-toolsandbox-trace-90d2eb262f57\""
+        }
+      ]
+    },
+    {
+      "source": "docs/audit/2026-10-30-reading-route-review.json",
+      "before_sha256": "2eed0f8ef5b9fc3413be8958d507f15db4e18077a20a8f982d7d17a7630cb77d",
+      "after_sha256": "a44b17c83963dd681ffc02721fc491e6ab49a3e5f11e00be8390f34bc707d5e3",
+      "lines": 8020,
+      "changes": [
+        {
+          "old": "      \"route\": \"textbook/agents/memory-planning-orchestration\",\n      \"sha256\": \"63b05db50c38724b585562df56d1389ec1ed0ad1561917dc54ef76e00c0ac2a7\",\n      \"lines\": 1403,\n      \"read\": \"Complete preceding chapter, including all programs, original excerpts, figures/captions and navigation; exact final editorial delta reviewed separately.\",",
+          "new": "      \"route\": \"textbook/agents/memory-planning-orchestration\",\n      \"sha256\": \"c1bf43a2e06d247c2a450a0615e96bb5034b7e8c78ef4001b6749849f864e9a1\",\n      \"lines\": 1390,\n      \"read\": \"Complete preceding chapter, including all programs, original excerpts, figures/captions and navigation; exact final editorial delta reviewed separately.\",\n      \"agentFigureDeltaEvidence\": \"docs/audit/2026-11-11-agent-external-figure-resolution-additions.json\","
+        },
+        {
+          "old": "      \"route\": \"textbook/agents/tool-use\",\n      \"sha256\": \"506559100112802f7d71df1d33f6760a56bc426966bb5fed4ad589b61eea2570\",\n      \"lines\": 1188,\n      \"read\": \"Read all 1057 lines of the input across the route pass, then checked the exact revised MCP, idempotency and index deltas in context.\",",
+          "new": "      \"route\": \"textbook/agents/tool-use\",\n      \"sha256\": \"f7bd2ce622fa778bb1b4059f0ef79f0eee787e965f49d06e489bef799c6648ea\",\n      \"lines\": 1196,\n      \"read\": \"Read all 1057 lines of the input across the route pass, then checked the exact revised MCP, idempotency and index deltas in context.\",\n      \"agentFigureDeltaEvidence\": \"docs/audit/2026-11-11-agent-external-figure-resolution-additions.json\","
+        },
+        {
+          "old": "      \"route\": \"textbook/agents/harness-context-engineering\",\n      \"sha256\": \"2131c49a1489df48348dd55869eee6d41733dbe10e6f4c8c0adc94db2128409f\",\n      \"lines\": 1020,\n      \"read\": \"Read all 851 lines across the two consecutive route turns, then read the final additions in context. Exact reversal pins the unchanged material.\",",
+          "new": "      \"route\": \"textbook/agents/harness-context-engineering\",\n      \"sha256\": \"4184d89a04d8ce363092de6012efb5be4dec2e9ee334659fece8f20af5feae33\",\n      \"lines\": 1010,\n      \"read\": \"Read all 851 lines across the two consecutive route turns, then read the final additions in context. Exact reversal pins the unchanged material.\",\n      \"agentFigureDeltaEvidence\": \"docs/audit/2026-11-11-agent-external-figure-resolution-additions.json\","
+        }
+      ]
+    },
+    {
+      "source": "docs/audit/2026-11-09-release-readiness.json",
+      "before_sha256": "f4d77600952b53d0d1308ab95d7f650e2dff7b06d6b87171f2093f5c37d930f5",
+      "after_sha256": "131c218c818189ca03df949d18b5f9d6cf8c1bc0361c8e2abf7c042959ca921b",
+      "lines": 1414,
+      "changes": [
+        {
+          "old": "  \"remaining\": [\n    \"Reconcile digests and source records for 37 older rendered textbook entries. For 7 external textbook images in tool use, harness/context engineering, and agent memory, replace the embed with an appropriate licensed original or link to the source with a worked explanation where redistribution is unconfirmed. The broader source-library image inventory is separate.\",",
+          "new": "  \"agentExternalFigureResolution20261111\": {\n    \"journal\": \"docs/audit/2026-11-11-agent-external-figure-resolution-additions.json\",\n    \"localBuildPages\": 2077,\n    \"checkedTextbookLocalePages\": 310,\n    \"externalEmbedsReplacedWithLinks\": 7,\n    \"licensedFigureReused\": 1,\n    \"remainingDistinctExternalTextbookImages\": 0,\n    \"textbookRenderedImagePathsWithMatchingSHA256\": 1185,\n    \"registeredTextbookPathsStillWithoutSHA256\": 37,\n    \"scope\": \"Canonical textbook routes from the publication manifest, in both locales. The tool-use chapter reuses the unchanged ToolSandbox Figure 2; all seven prior originals are still linked, and the three chapters explain the relevant examples inline. This does not cover the source library or clear previously unpinned images for redistribution.\"\n  },\n  \"remaining\": [\n    \"Reconcile digests and source records for 37 older rendered textbook entries. The broader source-library image inventory is separate.\","
+        }
+      ]
+    }
+  ]
+}

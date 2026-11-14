@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-11",
+  "scope": "Compare the learned absolute position table in GPT-2 with the rotary Q/K operation in LLaMA v1, inside the existing Russian and English GPT-1 → GPT-2 → GPT-3 → LLaMA route.",
+  "review": {
+    "sources": "OpenAI GPT-2 model.py lines 147–165 at 9b63575; Touvron et al. §2.2; first LLaMA model.py lines 119–143 at 1076b9c; Su et al. RoFormer v5 §3.2 and Figure 1.",
+    "worked_case": "Follow one two-coordinate Q/K pair with unit rotation frequency. Dot products for key/query positions (0,1) and (3,4) both equal cos(1) ≈ 0.5403; (0,2) gives cos(2) ≈ −0.4161. Check that the GPT-2 Small learned table has 1024 × 768 = 786,432 parameters. The calculation keeps the pre-rotation vectors fixed; no claim about whole-model invariance.",
+    "rights": "Reuse the registered figure and complete caption from RoFormer v5 without changing its bytes (CC BY-NC-ND 4.0).",
+    "preservation": "No new route, chapter, artwork, or modified source file. The four canonical model chapters and their ordering remain intact. Local only.",
+    "style": "Read the full contents pages in both languages and revised the added passages against the no-ai-slop checklist. Kept the formulas, fixed-vector assumption, and source terminology.",
+    "validation": "Astro built 2083 pages; no broken internal routes, fragments, or files; 299 built-output tests and 198 asset-registry tests passed. In both languages, Chrome followed Next through all four model chapters. The original 1670 × 1065 figure rendered without cropping or page overflow at 1280 px and 375 px. At 375 px, the figure viewer allowed zoom and pan for the small labels. No KaTeX errors on either contents page."
+  },
+  "figure": {
+    "id": "curated-positional-roformer-b1a65eb5e30f",
+    "sha256": "b1a65eb5e30f1510dce571cedb548b98c1db5c5e57ca04112b856f931a0d2591"
+  },
+  "files": [
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "33c6933399099d884e524c2604a507a7da8f4266320b05316b65c597774397b3",
+      "after_sha256": "39a8e454809d309e2ee2b184f59cb52de1775ecb0546c24337e536a92d5e2bae",
+      "lines": 598,
+      "changes": [
+        {
+          "old": "она масштабирует вектор без вычитания среднего. Внутри внимания RoPE\nповорачивает Q и K перед их сравнением. В GPT-2 позицию добавляли\nк входному вектору токена перед первым блоком.",
+          "new": "она масштабирует вектор без вычитания среднего. Внутри внимания\nнадпись `w/ RoPE` относится к вычислению запроса и ключа."
+        },
+        {
+          "old": "Схема из задания, без перерисовки.*",
+          "new": "Схема из задания, без перерисовки.*\n\n<a id=\"gpt-decoder-route-positions\"></a>\n\nВ [коде GPT-2](https://github.com/openai/gpt-2/blob/9b63575ef42771a015060c964af2c3da4cf7c8ab/src/model.py#L147-L165)\nк вектору токена на позиции $i$ прибавляют строку $p_i$ из обучаемой\nтаблицы `wpe` и только потом подают сумму в первый блок. У младшей\nGPT-2 таблица содержит $1024\\times768=786\\,432$ параметра. Если\nперенести два токена с позиций $(0,1)$ на $(3,4)$, на вход попадут\nуже $p_3$ и $p_4$ вместо $p_0$ и $p_1$. Таблица не связывает эти пары\nусловием, что между токенами одинаковое расстояние.\n\n[Первая LLaMA](https://arxiv.org/html/2302.13971v1#S2.SS2) убирает эту\nтаблицу. В каждом слое она сначала вычисляет запрос $q$ и ключ $k$,\nзатем поворачивает пары их координат. На верхней панели RoFormer\nпоказана одна такая пара: вектор $(x_1,x_2)$ поворачивается на\n$m\\theta_1$, где $m$ — позиция, а $\\theta_1$ — фиксированная частота\nдля этих двух координат. На нижней панели тот же расчёт повторяется\nдля других пар координат и других позиций.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/positions-2026-10-21/roformer-figure1.png|Верхняя панель показывает поворот двух координат запроса или ключа на угол mθ₁. Внизу тот же расчёт применяется к каждой паре координат с её частотой.]]\n\n*Jianlin Su et al., [RoFormer, рис. 1 и §3.2](https://arxiv.org/html/2104.09864v5#S3.SS2),\n[исходная страница PDF](https://arxiv.org/pdf/2104.09864v5#page=5),\n[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).\nПолный рисунок и авторская подпись, без изменений.*\n\nВозьмём только одну пару координат: до поворота $q=k=(1,0)$,\nчастота $\\theta_1=1$ радиан на позицию. При ключе на позиции 0\nи запросе на позиции 1 углы равны 0 и 1. Скалярное произведение\nдвух единичных векторов равно косинусу угла между ними:\n$\\cos(1)\\approx0.5403$. На позициях $(3,4)$ оба вектора дополнительно\nповёрнуты на 3 радиана, угол между ними по-прежнему 1.\nЕсли оставить ключ на позиции 0, а запрос перенести на 2,\nполучится $\\cos(2)\\approx-0.4161$. Это вклад одной пары координат\nдо масштабирования и softmax. При добавлении нового префикса\nмогут измениться сами $q$ и $k$ и набор доступных ключей, поэтому\nиз примера не следует, что ответ модели останется прежним.\nВ [коде LLaMA](https://github.com/meta-llama/llama/blob/1076b9c51c77ad06e9d7ba8a4c6df775741732bd/llama/model.py#L115-L143)\nповорот стоит перед сравнением запросов с ключами, а значения $V$\nчерез него не проходят."
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "a0d82c4627b505b0183304a301645bbc6c8fceecafb4ea51d69081e1a35297da",
+      "after_sha256": "be953095aa347640f157e3ec37739ae63c52cd921c351436f617efcbb97f380f",
+      "lines": 601,
+      "changes": [
+        {
+          "old": "canonical_revision: \"33c6933399099d884e524c2604a507a7da8f4266320b05316b65c597774397b3\"",
+          "new": "canonical_revision: \"39a8e454809d309e2ee2b184f59cb52de1775ecb0546c24337e536a92d5e2bae\""
+        },
+        {
+          "old": "its mean. Within attention, RoPE rotates Q and K before their dot\nproduct. GPT-2 instead added a position vector to the token embedding\nbefore the first block.",
+          "new": "its mean. Inside the attention sublayer, the label `w/ RoPE` refers to\nhow the query and key are computed."
+        },
+        {
+          "old": "Original diagram from the assignment.*",
+          "new": "Original diagram from the assignment.*\n\n<a id=\"gpt-decoder-route-positions\"></a>\n\nThe [GPT-2 implementation](https://github.com/openai/gpt-2/blob/9b63575ef42771a015060c964af2c3da4cf7c8ab/src/model.py#L147-L165)\nadds row $p_i$ of the learned table `wpe` to the token embedding at\nposition $i$ before the first block. In GPT-2 Small that table\ncontains $1024\\times768=786\\,432$ parameters. Move two tokens from\npositions $(0,1)$ to $(3,4)$ and the block receives $p_3$ and $p_4$\nin place of $p_0$ and $p_1$. The table does not constrain those pairs\nto encode the same distance.\n\n[The first LLaMA](https://arxiv.org/html/2302.13971v1#S2.SS2) removes\nthe table. Each layer computes a query $q$ and key $k$, then rotates\ntheir coordinates in pairs. The top panel in the RoFormer figure\nshows one pair: it rotates $(x_1,x_2)$ by $m\\theta_1$, where $m$ is\nthe position and $\\theta_1$ is the fixed frequency for that pair.\nThe bottom panel repeats the operation across positions and\ncoordinate pairs.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/positions-2026-10-21/roformer-figure1.png|Top: a query or key coordinate pair rotates by mθ₁. Bottom: the operation repeats for each pair with its own frequency.]]\n\n*Jianlin Su et al., [RoFormer, Figure 1 and §3.2](https://arxiv.org/html/2104.09864v5#S3.SS2),\n[original PDF page](https://arxiv.org/pdf/2104.09864v5#page=5),\n[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).\nComplete figure and original caption, unmodified.*\n\nTake one coordinate pair with $q=k=(1,0)$ before rotation and\n$\\theta_1=1$ radian per position. Put the key at 0 and the query at 1,\nso their rotation angles are 0 and 1. The dot product of these unit\nvectors is the cosine of the angle between them, $\\cos(1)\\approx0.5403$.\nAt positions $(3,4)$ both vectors have turned by three more radians,\nso the angle between them is still one radian. Keep the key at 0\nand move the query to 2, and the dot product becomes\n$\\cos(2)\\approx-0.4161$. This is one pair's contribution before\nscaling and softmax. Adding a prefix can change $q$ and $k$ themselves\nas well as the set of available keys, so the model need not give the\nsame answer. The [LLaMA implementation](https://github.com/meta-llama/llama/blob/1076b9c51c77ad06e9d7ba8a4c6df775741732bd/llama/model.py#L115-L143)\nrotates queries and keys before comparing them; it leaves values $V$ unrotated."
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "1e8fb06411402e755932f3fe7123bcbcfe3e1da8974db7066c15bd2cd376af68",
+      "after_sha256": "1733ceaff11c1a2f495ded20f13a52019817afd95261884919ac46c5b4380b27",
+      "lines": 26496,
+      "changes": [
+        {
+          "old": "      - \"00 Учебник/07 Анатомия современной LLM/04 RoPE.md\"\n  - id: curated-positional-alibi-ade378177ac2",
+          "new": "      - \"00 Учебник/07 Анатомия современной LLM/04 RoPE.md\"\n      - \"00 Учебник/_index.md\"\n      - \"en/00 Textbook/_index.md\"\n  - id: curated-positional-alibi-ade378177ac2"
+        }
+      ]
+    }
+  ]
+}

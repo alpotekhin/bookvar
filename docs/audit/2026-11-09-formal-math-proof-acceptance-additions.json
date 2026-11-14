@@ -1,0 +1,138 @@
+{
+  "date": "2026-11-09",
+  "scope": "Whole-owner formal math reading, executable Lean proof acceptance, and the AlphaProof publisher's search versus TTRL plot. Local only.",
+  "review": {
+    "previousTurn": "Progress: the GPT-to-LLaMA tokenization example and original Alammar figure were built and verified in both reading routes.",
+    "input": "Complete 1516-line input read at SHA a81cede17e8726c611b8455d35bc296a917d4d3012632a73214ea00b6a6841fe in consecutive sections 1–292, 293–553, 554–870, 871–1157, 1158–1419, 1420–1516. The final delta is read against the primary sources; unchanged text is verified by exact reversal.",
+    "sources": [
+      "Lean Language Reference, Validating a Lean Proof, including benign attempts, axioms, and the external comparator boundary.",
+      "Hubert et al., Nature DOI 10.1038/s41586-025-09833-y, Inference-time scaling, Fig. 4, and Methods: Inference (fixed search, variant generation, focused RL). The two horizontal axes have different units and scales."
+    ],
+    "asset": "Publisher's full 1766×646 PNG, unmodified. SHA-256 e0474a1f3a96dd82346cb66f8761da69b9357299c72b6d04e0c673069f86e1cc. Europe PMC publisher XML, 70799ee4b8c683b592583357d1d349d4e6827474c08c04dead02d6af482c5870, records CC BY 4.0 and no separate Fig. 4 restriction.",
+    "runtime": "Lean 4.19.0 (6caaee842e94): all six Lean examples compile. The intended warning and all four axiom outputs are asserted. Assigning Candidate.easy to Given.Goal fails with a type mismatch. Both unchanged finite Python examples were executed; Coq and comparator were not rerun.",
+    "moduleMap": "Read all 72 input lines and the complete final revision. The map now links two concrete acceptance checks and points to permission checks before running the practical notebooks. The chapter sequence and notebook index stay unchanged.",
+    "verification": "Local build: 2029 pages; 235 built-output tests, zero broken routes/fragments/files. The 738 publication tests passed after the module-map delta and the receipt tests reran after the final table-header change. Both topic indexes, both course ledgers and curated asset registry passed.",
+    "reader": "At 375 and 1280 CSS pixels in Chrome: both locale routes from the module map and reference, all four proof rows without horizontal scrolling, original Figure 4 at its full extent on desktop and both sides reachable in the mobile zoom viewer. EN explicitly shows the canonical-language fallback.",
+    "release": "No commit, push or deployment. Reading-route status: 145 of 153 owners, including 131 fresh and 14 reused. This is not a whole-book acceptance count."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
+      "before_sha256": "a81cede17e8726c611b8455d35bc296a917d4d3012632a73214ea00b6a6841fe",
+      "after_sha256": "53ac9cf6e3bb35fd905e0ca0bcc9f2f365d031291f1acae18600b370c837d26a",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-26\nlast_verified: 2026-10-26\nprimary_sources:",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-10-26\nreference_terms:\n  - label: AlphaProof — бюджет поиска и дообучения\n    label_en: AlphaProof — search and adaptation budgets\n    anchor: alphaproof-search-vs-ttrl\n  - label: Lean — проверка постановки и аксиом\n    label_en: Lean — checking the statement and its axioms\n    anchor: lean-proof-acceptance\nprimary_sources:"
+        },
+        {
+          "old": "  - https://rdi.berkeley.edu/adv-llm-agents/sp25",
+          "new": "  - https://rdi.berkeley.edu/adv-llm-agents/sp25\n  - https://doi.org/10.1038/s41586-025-09833-y"
+        },
+        {
+          "old": "### Test-time RL как локальная специализация вокруг трудной задачи\n\nДля особенно трудной задачи можно создать семейство связанных вариантов\nи продолжить обучение на них во время решения. Если часть вариантов\nуже решается, их доказательства дают обучающие данные для специализации\nмодели. Именно такой процесс в лекции называется *test-time RL*.\nИсходная трудная задача при этом может ещё оставаться нерешённой.",
+          "new": "### Test-time RL как локальная специализация вокруг трудной задачи\n\nКогда поиск не находит доказательство исходной теоремы, AlphaProof\nгенерирует связанные задачи: упрощает условия, выделяет промежуточные\nлеммы или меняет цель. Lean проверяет, что эти варианты корректно записаны.\nЭто ещё не означает, что они верны. Решатель пытается их доказать или\nопровергнуть, а успешные траектории пополняют обучающую выборку."
+        },
+        {
+          "old": "При обычном поиске можно увеличить число попыток, не меняя веса модели.\nПри test-time RL меняется сама модель. Для воспроизведения второго\nэксперимента недостаточно сохранить запрос и число попыток: нужны\nсозданные варианты, найденные траектории, настройки обучения и контрольные\nточки до и после специализации.",
+          "new": "Специализированный решатель начинает с весов общей модели. На парах\n«состояние — тактика» из успешных траекторий он обновляет веса.\nОн продолжает попытки и на исходной теореме: доказательство одного из\nвариантов ещё не закрывает её. Когда решатель находит доказательство\nисходной теоремы, планировщик перестаёт выдавать задания по ней и её\nвариантам. Так устроен *test-time reinforcement learning* (TTRL)\nв [статье Hubert et al.](https://doi.org/10.1038/s41586-025-09833-y),\nMethods → Inference.\n\n<a id=\"alphaproof-search-vs-ttrl\"></a>\n\n#### Сколько вычислений уходит на поиск и на дообучение\n\nЕсли веса оставить неизменными, тот же решатель может раскрыть больше\nузлов дерева или запустить несколько независимых поисков. На панели\n**a** показан этот режим. На панели **b** вычисления уходят на обновление\nвесов; после дообучения долю решённых задач измеряют при 4000 симуляций\nпоиска. Сравним оранжевую кривую `formal-imo` на обеих панелях.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/alphaproof-nature/figure-4-search-vs-ttrl.png|AlphaProof, Figure 4: слева бюджет поиска в TPU-часах, справа бюджет дообучения в TPU-днях; оранжевая кривая соответствует formal-imo]]\n\n*Thomas Hubert, Rishi Mehta, Laurent Sartran et al.,\n[Olympiad-level formal mathematical reasoning with reinforcement learning, Fig. 4](https://www.nature.com/articles/s41586-025-09833-y/figures/4).\nОригинал издателя без изменений,\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nСлева переход от двух TPU-минут к 12 TPU-часам на задачу поднимает\nдолю решённых задач с 33,1 до 43,7%, на 10,6 процентного пункта.\nСправа при среднем бюджете в 50 TPU-дней на задачу решено 53,9%,\nа примерно при 500 TPU-днях — 58,3%. Это на 14,6 процентного пункта\nвыше результата 12-часового поиска, но при другом бюджете. Шкала слева\nлогарифмическая и подписана в часах, справа линейная и подписана в днях.\nTPU-день означает загрузку одного устройства на сутки, а не обязательно\nсутки ожидания: несколько устройств могут работать параллельно.\nДля обеих панелей авторы делят суммарные затраты на число задач набора."
+        },
+        {
+          "old": "<span id=\"acceptance-contract-без-пропусков-и-подмены-постановки\"></span>\n### Приёмка: зависимости доказательства и неизменность постановки\n\nУспешно обработанный Lean терм может опираться на недопустимую аксиому.\nСледующие примеры компилируются, но не принимаются как доказательства `False`:\n\n```lean\ntheorem unfinished : False := by sorry\naxiom invented : False\ntheorem forged : False := invented\n#print axioms unfinished\n#print axioms forged\n```\n\nПервый зависит от `sorryAx`, второй — от `invented`.\n`#print axioms` показывает транзитивные зависимости: пропуск может находиться\nв другом модуле, на который ссылается окончательная теорема.\nПоиск слова `sorry` только в её тексте такой случай пропустит.\nТак же выявляется зависимость от `SMT_VERIF`, даже если сам текст\nгеометрического доказательства не содержит ни `sorry`, ни `axiom`.",
+          "new": "<span id=\"acceptance-contract-без-пропусков-и-подмены-постановки\"></span>\n<a id=\"lean-proof-acceptance\"></a>\n### Приёмка: зависимости доказательства и неизменность постановки\n\nВернёмся к перестановке `P ∧ Q` из начала главы. Зафиксируем\nеё как `Given.Goal`. Три кандидата объявлены с этим типом:\nодин действительно переставляет части конъюнкции, второй оставляет\nпропуск, а третий выводит результат из специально введённой аксиомы\n`invented : False`. Четвёртый доказывает другое утверждение,\nкоторое тоже называется `Goal`.\n\n```lean\nnamespace Given\ndef Goal : Prop := ∀ P Q : Prop, P ∧ Q → Q ∧ P\nend Given\n\ntheorem valid : Given.Goal := by\n  intro P Q h\n  exact ⟨h.right, h.left⟩\n\ntheorem unfinished : Given.Goal := by sorry\n\naxiom invented : False\ntheorem helper : False := invented\ntheorem forged : Given.Goal := False.elim helper\n\nnamespace Candidate\ndef Goal : Prop := True\ntheorem easy : Goal := True.intro\nend Candidate\n\n#print axioms valid\n#print axioms unfinished\n#print axioms forged\n#print axioms Candidate.easy\n\nexample : Given.Goal := valid\nexample : Given.Goal := unfinished\nexample : Given.Goal := forged\n\n#check Candidate.easy\n```\n\nLean 4.19.0 обработал весь файл и предупредил о `sorry`.\nТри строки `example` прошли проверку типа. Если дописать\n`example : Given.Goal := Candidate.easy`, Lean сообщит `type mismatch`:\nпосле раскрытия определений `Candidate.Goal` означает `True`,\nа `Given.Goal` требует переставить части конъюнкции.\n\n| Кандидат | Тип `Given.Goal` | Аксиомы |\n| --- | --- | --- |\n| `valid` | подходит | нет |\n| `unfinished` | подходит | `sorryAx` |\n| `forged` | подходит | `invented` |\n| `Candidate.easy` | не подходит | нет |\n\n`#print axioms` проходит по зависимостям рекурсивно. В теле `forged`\nнет ни `sorry`, ни имени `invented`, но Lean находит аксиому через\n`helper`. По той же причине можно обнаружить зависимость от `SMT_VERIF`\nв геометрическом доказательстве, которое ссылается на уже готовую лемму."
+        },
+        {
+          "old": "Кроме зависимостей сравнивают итоговое утверждение с неизменяемым\nдоверенным условием задачи, включая определения. Если агент заменил\nтеорему на `True` или переопределил смысл используемого предиката,\nуспешная проверка нового терма не решает исходную задачу.",
+          "new": "В примере `Given.Goal` задано заранее, отдельно от кандидатов. В рабочей\nпроверке фиксируют также определения, от которых оно зависит. Сверки\nимени теоремы или её напечатанного заголовка недостаточно: выражение\nможет выглядеть одинаково и ссылаться на разные определения."
+        },
+        {
+          "old": "- [Berkeley Advanced LLM Agents, Meeting 8 — AlphaProof](https://rdi.berkeley.edu/adv-llm-agents/slides/alphaproof.pdf): физические страницы 5–107; использованы изображения 30, 79, 84 и 91, а также исходные JPEG с изображениями 99–100.",
+          "new": "- [Berkeley Advanced LLM Agents, Meeting 8 — AlphaProof](https://rdi.berkeley.edu/adv-llm-agents/slides/alphaproof.pdf): физические страницы 5–107; использованы изображения 30, 79, 84 и 91, а также исходные JPEG с изображениями 99–100.\n- [[05 Источники/Papers/AlphaProof|Hubert et al., AlphaProof, Nature]]: Figure 4, раздел о масштабировании поиска и Methods → Inference с описанием TTRL."
+        },
+        {
+          "old": "| Кандидат | Тип `Given.Goal` | Аксиомы |\n| --- | --- | --- |\n| `valid` | подходит | нет |",
+          "new": "| Кандидат | Тип | Аксиомы |\n| --- | --- | --- |\n| `valid` | подходит | нет |"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/_index.md",
+      "before_sha256": "e654ca89234671f3043d6d9f67af7157f584be641c661ea7153c5640fc28c603",
+      "after_sha256": "6f2b61bf260ab3d69cc505081eaa7de395abb27689abc6e57b5aea63e15e0b0d",
+      "changes": [
+        {
+          "old": "- [[05 Источники/Papers/Mathlib Euler products|Mathlib: Euler products — исходный модуль и условия теоремы]]\n- [[05 Источники/Papers/TinyBERT|TinyBERT — дистилляция слоёв Transformer и исходная реализация]]",
+          "new": "- [[05 Источники/Papers/Mathlib Euler products|Mathlib: Euler products — исходный модуль и условия теоремы]]\n- [[05 Источники/Papers/AlphaProof|AlphaProof — поиск доказательств и обучение под задачу]]\n- [[05 Источники/Papers/TinyBERT|TinyBERT — дистилляция слоёв Transformer и исходная реализация]]"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "049a73ecdb31d827f7b7bd3789ff3d0bbd41e2617ff1d2416013d8811fb6820f",
+      "after_sha256": "ab89aa14a71e685edfbb0edfeee871abd74ac5ceb148e20f931f6d4f611e5c68",
+      "changes": [
+        {
+          "old": "      - source: 05 Источники/Papers/Mathlib Euler products.md\n        route: sources/papers/mathlib-euler-products\n      - source: Papers/Qwen3.md",
+          "new": "      - source: 05 Источники/Papers/Mathlib Euler products.md\n        route: sources/papers/mathlib-euler-products\n      - source: 05 Источники/Papers/AlphaProof.md\n        route: sources/papers/alphaproof\n      - source: Papers/Qwen3.md"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "eaaab1afdd6f437b5803ee314128c20efade54e2950f483d485aacee8b636009",
+      "after_sha256": "c2fdebc082d7101dd277e0d591b34d730fa8521916e12a00795a0480ecce905f",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|Формальные доказательства и математические агенты]]\n- [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering|Agent harness и context engineering]]",
+          "new": "- [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|Формальные доказательства и математические агенты]]\n  - [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#alphaproof-search-vs-ttrl|AlphaProof — бюджет поиска и дообучения]]\n  - [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#lean-proof-acceptance|Lean — проверка постановки и аксиом]]\n- [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering|Agent harness и context engineering]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "910141c0e3d59ab70adf35856e47ba12231bd0a1b2cc749539e60934cacf2124",
+      "after_sha256": "c2302bf992e8a77216e5b16fa1412d0b3cc0d3d4c8200212674ec9a28930d1d8",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|Formal proofs and mathematical agents]]\n- [[00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля|Module map and sources]]",
+          "new": "- [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|Formal proofs and mathematical agents]]\n  - [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#alphaproof-search-vs-ttrl|AlphaProof — search and adaptation budgets]]\n  - [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#lean-proof-acceptance|Lean — checking the statement and its axioms]]\n- [[00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля|Module map and sources]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "a255b627e1d3533e494fb92d3186ca10995f3e99ab442e70625d8e2d9e829716",
+      "after_sha256": "40b2623e4e1fafd2814b48108c45aa0e4195f47cc39bb1728fe49059f1a1c014",
+      "changes": [
+        {
+          "old": "  - id: \"curated-llama-downstream-9bef2893d15c\"",
+          "new": "  - id: curated-alphaproof-nature-e0474a1f3a96\n    asset: \"00 Учебник/Assets/Figures/curated/alphaproof-nature/figure-4-search-vs-ttrl.png\"\n    title: \"AlphaProof performance scaling with inference compute per problem (Fig. 4)\"\n    author: \"Thomas Hubert, Rishi Mehta, Laurent Sartran et al.\"\n    source_url: https://www.nature.com/articles/s41586-025-09833-y/figures/4\n    source_image_url: \"https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-025-09833-y/MediaObjects/41586_2025_9833_Fig4_HTML.png\"\n    sha256: e0474a1f3a96dd82346cb66f8761da69b9357299c72b6d04e0c673069f86e1cc\n    source_asset: \"00 Учебник/Assets/Figures/curated/alphaproof-nature/figure-4-search-vs-ttrl.png\"\n    source_asset_sha256: e0474a1f3a96dd82346cb66f8761da69b9357299c72b6d04e0c673069f86e1cc\n    source_page_snapshot: \"05 Источники/Originals/alphaproof-nature/pmc12999475.xml\"\n    source_page_sha256: 70799ee4b8c683b592583357d1d349d4e6827474c08c04dead02d6af482c5870\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    license_evidence: \"05 Источники/Originals/alphaproof-nature/pmc12999475.xml\"\n    license_evidence_sha256: 70799ee4b8c683b592583357d1d349d4e6827474c08c04dead02d6af482c5870\n    dimensions_px: [1766, 646]\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    derivation: source-raster-copy\n    modifications: \"Full publisher PNG copied byte-for-byte; no crop, relabeling, or redraw.\"\n    used_in: [\"00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md\"]\n  - id: \"curated-llama-downstream-9bef2893d15c\""
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля.md",
+      "before_sha256": "34c04e8466c39d903039c20e7e19c882392641ba3b216979d9cc604ab1f24925",
+      "after_sha256": "24fb12d88b67c0a640c940978c8801336003208a5be5ce8b633dfcaf67d6f2d2",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29",
+          "new": "last_updated: 2026-11-09"
+        },
+        {
+          "old": "Первые четыре главы дают общие понятия, необходимые для прикладных разборов.\nНапример, при работе с репозиторием нужно различать предложенную моделью\nкоманду, её фактическое исполнение и результат теста. При доказательстве теоремы\nаналогично различаются предложенный шаг и его принятие проверяющей системой.\nОграничения полномочий рассматриваются в последней главе, но действуют во всех\nэтих примерах: доступ к инструменту не должен означать неограниченный доступ\nко всей среде.",
+          "new": "Успешный вызов инструмента ещё не означает, что задача выполнена.\nВ браузере координаты нужно брать с того снимка, по которому модель\n[[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#web-agent-observation-bound-marks|выбрала метку]].\nПосле щелчка отдельная проверка устанавливает, изменилось ли состояние\nстраницы. В Lean результат выглядит иначе: нужно принять доказательство\n[[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#lean-proof-acceptance|ровно исходного утверждения]] и проверить, на какие аксиомы оно опирается.\nВ обоих случаях критерий успеха задаётся отдельно от ответа модели.\n\nРазрешение на действие проверяют до его исполнения. Если собираетесь\nзапускать примеры с доступом к файлам, браузеру или внешним сервисам,\nпрочитайте [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем|главу о безопасности]]\nдо практики, хотя в линейном маршруте она стоит последней."
+        },
+        {
+          "old": "Успешный вызов инструмента ещё не означает, что задача выполнена.\nВ браузере координаты нужно брать с того снимка, по которому модель\n[[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#web-agent-observation-bound-marks|выбрала метку]].\nПосле щелчка отдельная проверка устанавливает, изменилось ли состояние",
+          "new": "Успешный вызов инструмента ещё не означает, что задача выполнена.\nОдна и та же метка на двух снимках браузера может обозначать разные\nэлементы. Перед щелчком управляющая программа\n[[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#web-agent-observation-bound-marks|проверяет, что снимок ещё актуален]].\nПосле щелчка другая проверка устанавливает, изменилось ли состояние"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/Papers/AlphaProof.md",
+      "created": true,
+      "after_sha256": "147c3fe3d21f84c4869ee8f79dac0342c1a8b4f7a196be2adaf86188c3963b46"
+    }
+  ]
+}

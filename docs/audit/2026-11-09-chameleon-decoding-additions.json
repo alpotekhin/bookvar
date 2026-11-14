@@ -1,0 +1,125 @@
+{
+  "date": "2026-11-09",
+  "scope": "Review the complete Chameleon chapter; tie the visible mixed-modal response to its sequence, and make vocabulary masking, CFG order, the context guard and a forced image terminator concrete.",
+  "review": {
+    "sources": [
+      "Chameleon v2 Figure 4, p. 5, and §2.4, p. 8. Reproduces only the generated response excerpt with watermark and marker, not the input photograph. arXiv v2 declares CC BY 4.0.",
+      "Meta reference snapshot dbbe47fdbc7a3cc4982ae931fea75e227262e70a: Options, TextDecoder, ImageDecoder, the logits processor's length condition, generation.py processor→softmax→selector order and token_selector.py replication. Names and control-flow facts are documented without republishing the code.",
+      "Transformers v5.20.2 documents textual output and its separate image-generation limitation. This is not a claim about every checkpoint or newest implementation."
+    ],
+    "examples": [
+      "The original output marker follows the last line of the recipe even though the rendered image floats to the left. The marker denotes an image block, not a single image-valued vocabulary token.",
+      "Exact conditional probabilities equal masked softmax for retry-until-allowed with fixed logits; a rejected one-shot draw does not return a token. A fixed shared finite-logit mixture avoids subtracting −∞ from −∞ before vocabulary masking.",
+      "At max_seq_len 4096, the pinned TextDecoder's mask allows the begin marker through the length guard at 3069 and masks it at 3070. The forced end marker does not run the model. Defaults and the separate stop limit still govern generation."
+    ],
+    "validation": "All 17 extracted Python programs passed. Executed the pinned length guard, TextDecoder EOS transition and ImageDecoder end-marker path with CPU stubs; a fake model iterator throws if called for the forced marker. Figure 4 crop reproduced byte-for-byte. Curated registry and five inherited figure checks passed. Final local build: 2023 pages; 738 publication checks passed with the final reading receipt rechecked, 230 output checks passed, zero broken internal links or fragments.",
+    "reader": "Checked the final canonical chapter and marked EN fallback in Chrome at 375 and 1280 CSS pixels. All seven images loaded and ten links per locale point at canonical mechanisms. Visually inspected the new crop, paper architecture and stability panels; tested mobile zoom/pan. No whole-page horizontal overflow or KaTeX error.",
+    "limits": "No checkpoint was downloaded or run. The current English route retains the marked canonical-language fallback. The remaining course/rights/public-checkout/Pages gates are outside this chapter result; no push or deploy."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
+      "before_sha256": "f477e17e2449b1abcc3890c585ced5c012c0c9efe6ac143943d8f769ddf9a1e6",
+      "after_sha256": "7541cb85a437ffe8a5529233eebdebc097f5090dd85101a9e6a83cd689799a25",
+      "lines": 665,
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-20\nlast_verified: 2026-10-20\nprimary_sources:",
+          "new": "last_updated: 2026-11-09\nlast_verified: 2026-11-09\nreference_terms:\n  - label: Chameleon — текст и изображение в одном ответе\n    label_en: Chameleon — text and image in one response\n    anchor: chameleon-mixed-response\n  - label: VQ-VAE — ближайший вектор кодовой книги\n    label_en: VQ-VAE — nearest codebook vector\n    anchor: chameleon-vq-codebook\n  - label: VQ-VAE — straight-through и обучение кодовой книги\n    label_en: VQ-VAE — straight-through and codebook training\n    anchor: chameleon-vq-gradient\n  - label: Chameleon — общий словарь и сдвиг целей\n    label_en: Chameleon — shared vocabulary and shifted targets\n    anchor: chameleon-token-sequence\n  - label: Chameleon — маска словаря и границы изображения\n    label_en: Chameleon — vocabulary mask and image boundaries\n    anchor: chameleon-output-mask\n  - label: Chameleon — три ветви guidance для изображения\n    label_en: Chameleon — three guidance branches for images\n    anchor: chameleon-image-cfg\n  - label: Chameleon — бюджет контекста для изображения\n    label_en: Chameleon — reserving context for an image\n    anchor: chameleon-image-budget\n  - label: Chameleon — QK-Norm и масштаб логитов внимания\n    label_en: Chameleon — QK-Norm and attention-logit scale\n    anchor: chameleon-qknorm\n  - label: Chameleon — z-loss на выходных логитах\n    label_en: Chameleon — z-loss on vocabulary logits\n    anchor: chameleon-zloss\n  - label: Chameleon — оценка смешанных ответов\n    label_en: Chameleon — evaluating mixed-modal answers\n    anchor: chameleon-mixed-evaluation\nprimary_sources:"
+        },
+        {
+          "old": "Изображение при этом проходит через собственный токенизатор. Его кодировщик заменяет пиксели дискретными индексами, а декодер восстанавливает пиксели по сгенерированным индексам. Общими становятся словарь и Transformer; преобразования между изображением и токенами сохраняются. Архитектура из статьи и доступный интерфейс конкретной реализации тоже могут различаться: наличие image decoder в исходном коде ещё не подтверждает доступность всех режимов у скачанного checkpoint.\n\n## 1. Две независимые оси: представление и место объединения",
+          "new": "Изображение при этом проходит через собственный токенизатор. Его кодировщик заменяет пиксели дискретными индексами, а декодер восстанавливает пиксели по сгенерированным индексам. Общими становятся словарь и Transformer; преобразования между изображением и токенами сохраняются. Архитектура из статьи и доступный интерфейс конкретной реализации тоже могут различаться: наличие image decoder в исходном коде ещё не подтверждает доступность всех режимов у скачанного checkpoint.\n\n<a id=\"chameleon-mixed-response\"></a>\n\n### Где заканчивается рецепт и начинается картинка\n\nВ оригинальном примере Chameleon отвечает рецептом бананового хлеба. Иллюстрация на странице статьи стоит слева от нескольких пунктов, но метка `<img>` напечатана после последнего. Вёрстка рисунка не показывает порядок токенов. В последовательности после текста рецепта начинается один блок изображения; читатель получает картинку, когда собраны коды и декодер преобразовал их в пиксели. `<img>` на рисунке обозначает этот блок целиком, а не один токен, в котором хранится всё изображение.\n\n![[00 Учебник/Assets/Figures/curated/chameleon-decoding-2026-11-09/chameleon-recipe-response.png|Фрагмент ответа Chameleon: шаги рецепта, сгенерированный банановый хлеб и метка изображения после последней строки]]\n\n*Chameleon Team, [Mixed-Modal Early-Fusion Foundation Models](https://arxiv.org/abs/2405.09818v2), [Figure 4, с. 5](https://arxiv.org/pdf/2405.09818v2#page=5), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Показан фрагмент ответа; входная фотография и начало рецепта остались в оригинале. Текст, метка и водяной знак сохранены.*\n\n## 1. Две независимые оси: представление и место объединения"
+        },
+        {
+          "old": "### Поиск ближайшего вектора",
+          "new": "<a id=\"chameleon-vq-codebook\"></a>\n\n### Поиск ближайшего вектора"
+        },
+        {
+          "old": "### Обучение через недифференцируемый выбор",
+          "new": "<a id=\"chameleon-vq-gradient\"></a>\n\n### Обучение через недифференцируемый выбор"
+        },
+        {
+          "old": "### Словарь, embeddings и сдвиг целей",
+          "new": "<a id=\"chameleon-token-sequence\"></a>\n\n### Словарь, embeddings и сдвиг целей"
+        },
+        {
+          "old": "### Разрешённые токены и границы изображения",
+          "new": "<a id=\"chameleon-output-mask\"></a>\n\n### Разрешённые токены и границы изображения"
+        },
+        {
+          "old": "В [официальном коде](https://github.com/facebookresearch/chameleon/blob/dbbe47fdbc7a3cc4982ae931fea75e227262e70a/chameleon/inference/chameleon.py#L294) `ImageDecoder.__next__` после 1024 кодов принудительно возвращает end-image. Модель не должна случайно решить закончить картинку после 713 позиций. В текстовом режиме тот же код запрещает начинать изображение, когда до предельной длины контекста осталось недостаточно места для блока.",
+          "new": "В [`ImageDecoder.__next__`](https://github.com/facebookresearch/chameleon/blob/dbbe47fdbc7a3cc4982ae931fea75e227262e70a/chameleon/inference/chameleon.py#L356-L371) после 1024 кодов маркер конца подставляется принудительно. Для него не выполняется ещё один вызов модели. В текстовом режиме [`TextDecoder`](https://github.com/facebookresearch/chameleon/blob/dbbe47fdbc7a3cc4982ae931fea75e227262e70a/chameleon/inference/chameleon.py#L251-L286) допускает маркер начала, если разрешены изображения, но переход к `ImageDecoder` произойдёт только если этот маркер не включён в список EOS. Поэтому для смешанного вывода недостаточно включить одну маску: по умолчанию `extra_eos_tokens` содержит именно маркер начала изображения."
+        },
+        {
+          "old": "assert np.allclose(probabilities, [0., .119202922, .880797078, 0.])\nassert np.isclose(probabilities.sum(), 1.)\n~~~\n\nМаска не исправляет неверное содержание изображения. Она гарантирует тип допустимого токена и структуру блока. Нельзя сначала выбрать токен из полного словаря, а потом удалить запрещённый результат: это даст другую процедуру и потребует повторного сэмплирования. Если запрещены все категории, softmax не определён; это ошибка управления состоянием.",
+          "new": "assert np.allclose(probabilities, [0., .119202922, .880797078, 0.])\nassert np.isclose(probabilities.sum(), 1.)\n\nraw_weights = np.exp(logits - logits.max())\nraw = raw_weights / raw_weights.sum()\nallowed_mass = raw[allowed].sum()\nassert np.allclose(probabilities[allowed], raw[allowed] / allowed_mass)\nassert 1.36 < 1 / allowed_mass < 1.37\n~~~\n\nМаска задаёт распределение при условии, что токен принадлежит допустимому множеству. Если независимо выбирать из исходного распределения и повторять попытку до первого допустимого токена, результат будет иметь то же условное распределение. Но число попыток случайно: в примере в среднем понадобится около 1,37 выбора. Один выбор с последующим удалением запрещённого токена может вообще не дать продолжения, а после исчерпания конечного числа попыток возможен отказ. Chameleon ограничивает словарь до softmax, не прибегая к таким повторам. Равенство относится к фиксированному исходному распределению: если до проверки уже применить top-p, множество оставшихся кандидатов может отличаться. Если запрещены все категории, softmax не определён."
+        },
+        {
+          "old": "### Guidance по тексту и входным изображениям",
+          "new": "<a id=\"chameleon-image-cfg\"></a>\n\n### Guidance по тексту и входным изображениям"
+        },
+        {
+          "old": "При обоих коэффициентах 1 слагаемые сокращаются до $z_{\\mathrm{full}}$. При обоих нулевых получается безусловная ветвь. Если повышать только $s_{\\mathrm{text}}$, усиливается разность между полным условием и тем же визуальным условием без текста. Смешиваются логиты, после чего вычисляется softmax; среднее готовых вероятностей дало бы другой результат. Это конкретный механизм из кода вывода, а не вывод о неописанных деталях обучения всех checkpoint.",
+          "new": "При обоих коэффициентах 1 слагаемые сокращаются до $z_{\\mathrm{full}}$, при нулевых получается безусловная ветвь. Если повышать только $s_{\\mathrm{text}}$, усиливается разность между полным условием и тем же визуальным условием без текста. Порядок в [`ImageDecoder`](https://github.com/facebookresearch/chameleon/blob/dbbe47fdbc7a3cc4982ae931fea75e227262e70a/chameleon/inference/chameleon.py#L297-L329) такой: смешать логиты трёх ветвей, исключить невизуальные токены, применить температуру и top-p. Если подставить $-\\infty$ во все три ветви до вычитания, разность двух таких значений даст `NaN`."
+        },
+        {
+          "old": "assert np.allclose(guided(2., 1.), [1., 4., -.5])\n~~~\n\nТри ветви можно объединить в один batch, но это три набора состояний, а не вычисления для одного контекста. Каждый из 1024 визуальных шагов остаётся зависимым от предыдущего. Слово fused в описании непотокового вывода Chameleon означает возможность сократить управляющие ветвления для блока известной длины; оно не превращает авторегрессионные 1024 шага в один параллельный forward.\n\n### Длина контекста и выдача пикселей",
+          "new": "assert np.allclose(guided(2., 1.), [1., 4., -.5])\n\nvisual_only = np.array([True, True, False])\nmasked_after = np.where(visual_only, guided(2., 1.), -np.inf)\nwith np.errstate(invalid=\"ignore\"):\n    masked_before = (np.where(visual_only, full, -np.inf)\n                     - np.where(visual_only, image_only, -np.inf))\nassert np.isneginf(masked_after[2]) and np.isnan(masked_before[2])\n~~~\n\nТри ветви вычисляются одним пакетом. На шаге выбирается один id, и [`ReplicatedInputTokenSelector`](https://github.com/facebookresearch/chameleon/blob/dbbe47fdbc7a3cc4982ae931fea75e227262e70a/chameleon/inference/token_selector.py#L34-L47) дописывает его во все три последовательности. Иначе на следующем шаге сравнивались бы разные уже сгенерированные картинки, а не одна картинка при разных условиях. Каждый из 1024 шагов по-прежнему зависит от предыдущего. В §2.4 слово *fused* относится к сокращению управляющих ветвлений на блоке известной длины, а не к параллельному вычислению всех его токенов.\n\n<a id=\"chameleon-image-budget\"></a>\n\n### Длина контекста и выдача пикселей"
+        },
+        {
+          "old": "assert 3 * image_block == 3078\n~~~\n\nПока декодер не получил сетку, текстовая потоковая выдача и выдача готовой картинки находятся на разных стадиях. Первое визуальное id ещё не является отображаемым изображением. Для полного результата нужны последний код, декодирование и передача пикселей. Проверка каждого нового токена на CPU может добавлять синхронизацию с GPU; перенос масок и счётчиков на устройство уменьшает эту цену, но не устраняет зависимость между самими кодами.",
+          "new": "assert 3 * image_block == 3078\n~~~\n\nВ закреплённом коде граница чуть строже проверки «1026 позиций помещаются». [`DisallowTokensAtOrAfterIndexLogitsProcessor`](https://github.com/facebookresearch/chameleon/blob/dbbe47fdbc7a3cc4982ae931fea75e227262e70a/chameleon/inference/logits_processor.py#L52-L71) берёт текущую длину `input_ids.shape[1]`, а `TextDecoder` запрещает маркер начала с индекса `max_seq_len - 1026` включительно. Для одиночной последовательности при лимите 4096 этот фильтр пропускает маркер на длине 3069 и уже запрещает на длине 3070. В первом случае после полного блока остаётся одна позиция. Это проверка конкретного фильтра; остальные условия генерации, включая EOS и лимит новых токенов текстового декодера, действуют отдельно.\n\n~~~python\ndef admits_begin_marker(input_len, max_seq_len=4096, block_len=1026):\n    return input_len < max_seq_len - block_len\n\nassert admits_begin_marker(3069)\nassert not admits_begin_marker(3070)\nassert 4096 - (3069 + 1026) == 1\nassert 4096 - (3070 + 1026) == 0\n~~~\n\nПока декодер не получил сетку, текстовая потоковая выдача и выдача готовой картинки находятся на разных стадиях. Первое визуальное id ещё не является отображаемым изображением. Для полного результата нужны последний код, декодирование и передача пикселей. Проверка каждого нового токена на CPU может добавлять синхронизацию с GPU; перенос масок и счётчиков на устройство уменьшает эту цену, но не устраняет зависимость между самими кодами."
+        },
+        {
+          "old": "### QK-Norm внутри внимания",
+          "new": "<a id=\"chameleon-qknorm\"></a>\n\n### QK-Norm внутри внимания"
+        },
+        {
+          "old": "### Z-loss на выходе",
+          "new": "<a id=\"chameleon-zloss\"></a>\n\n### Z-loss на выходе"
+        },
+        {
+          "old": "### Как читались результаты статьи",
+          "new": "<a id=\"chameleon-mixed-evaluation\"></a>\n\n### Как читались результаты статьи"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "0eb0262b6cd33032267c461f1296e8d5537bc5880eb874f2391f443e03676e9a",
+      "after_sha256": "8fecb09d12b00e724e631705ebb6344b6374c98b842aec432db454753dfb2fe9",
+      "lines": 1661,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Единая мультимодальная последовательность: Chameleon и раннее объединение модальностей]]",
+          "new": "- [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Единая мультимодальная последовательность: Chameleon и раннее объединение модальностей]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-mixed-response|Chameleon — текст и изображение в одном ответе]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-vq-codebook|VQ-VAE — ближайший вектор кодовой книги]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-vq-gradient|VQ-VAE — straight-through и обучение кодовой книги]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-token-sequence|Chameleon — общий словарь и сдвиг целей]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-output-mask|Chameleon — маска словаря и границы изображения]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-image-cfg|Chameleon — три ветви guidance для изображения]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-image-budget|Chameleon — бюджет контекста для изображения]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-qknorm|Chameleon — QK-Norm и масштаб логитов внимания]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-zloss|Chameleon — z-loss на выходных логитах]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-mixed-evaluation|Chameleon — оценка смешанных ответов]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "1e238d025732db008625fa0963a087fc75127d2b04cdf92c8f78d7581ccdc807",
+      "after_sha256": "29f4aadc904f8fabc0d4379ac3b6e4888739d2f43617c46ba8be920eff6f0973",
+      "lines": 1663,
+      "changes": [
+        {
+          "old": "- [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Unified multimodal sequences and Chameleon]]",
+          "new": "- [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Unified multimodal sequences and Chameleon]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-mixed-response|Chameleon — text and image in one response]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-vq-codebook|VQ-VAE — nearest codebook vector]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-vq-gradient|VQ-VAE — straight-through and codebook training]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-token-sequence|Chameleon — shared vocabulary and shifted targets]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-output-mask|Chameleon — vocabulary mask and image boundaries]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-image-cfg|Chameleon — three guidance branches for images]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-image-budget|Chameleon — reserving context for an image]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-qknorm|Chameleon — QK-Norm and attention-logit scale]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-zloss|Chameleon — z-loss on vocabulary logits]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-mixed-evaluation|Chameleon — evaluating mixed-modal answers]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "5f278c0ed7462620c9f5b136ff8ce214486d5e1642db8170ddb8463d4cb427de",
+      "after_sha256": "f79527944667a621f7f2bd0c06ef740882a451f42db960dbef0eb103bd035ef4",
+      "lines": 23808,
+      "changes": [
+        {
+          "old": "assets:",
+          "new": "assets:\n  - id: \"curated-chameleon-recipe-response-b40d5d9f935d\"\n    asset: \"00 Учебник/Assets/Figures/curated/chameleon-decoding-2026-11-09/chameleon-recipe-response.png\"\n    title: \"Generated response excerpt from Figure 4: Sample Chameleon outputs\"\n    author: \"Chameleon Team\"\n    source_url: \"https://arxiv.org/abs/2405.09818v2\"\n    source_image_url: \"https://arxiv.org/pdf/2405.09818v2#page=5\"\n    source_asset: \"05 Источники/Originals/chameleon-2026-10-20/chameleon.pdf\"\n    source_asset_sha256: \"a937480c856ba915e93de1419b37c5572cf8e52f6490ce6a05d8aeff389b0d18\"\n    source_page: 5\n    render_dpi: 360\n    render_page_size_px: [3060,3960]\n    crop_box_px: [345,1590,2710,2550]\n    dimensions_px: [2365,960]\n    sha256: \"b40d5d9f935dd35bbc4b2d369658b00d1f173e22a6662e199f591d70bce60f96\"\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"05 Источники/Originals/chameleon-2026-10-20/chameleon-abstract.html\"\n    license_evidence_sha256: \"4eef8307c2e820412ca8c5832db460df4e2c28c34c3d50e9f4b29fee795a41b6\"\n    modifications: \"Cropped the generated output excerpt: instructions, the marked generated image, watermark and inline image placeholder. The prompt, the input photograph and other text are not reproduced. No redraw or relabeling.\"\n    derivation: \"pdf-page-render-crop\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    metadata_status: \"verified\"\n    used_in: [\"00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md\"]"
+        }
+      ]
+    }
+  ]
+}

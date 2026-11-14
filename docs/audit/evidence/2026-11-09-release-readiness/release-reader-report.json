@@ -1,0 +1,109 @@
+{
+  "results": [
+    {
+      "w": 375,
+      "gptImage": {
+        "natural": [
+          1790,
+          667
+        ],
+        "bounds": [
+          343,
+          127.8046875
+        ],
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/long-context-review-2026-09/mistral-sliding-window.png",
+        "alt": "Две маски для последовательности The cat sat on the; в строке on ключ The доступен в полной маске и закрыт в локальной",
+        "overflow": 375,
+        "katexErrors": 0
+      },
+      "llamaImage": {
+        "natural": [
+          1015,
+          1290
+        ],
+        "bounds": [
+          343,
+          435.9296875
+        ],
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/llama-2026-10-22/cs336-prenorm-block.png",
+        "alt": "CS336 pre-norm Transformer block with residual paths around attention and the FFN",
+        "overflow": 375,
+        "katexErrors": 0
+      },
+      "ctfImage": {
+        "natural": [
+          2024,
+          842
+        ],
+        "bounds": [
+          343,
+          142.6875
+        ],
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/computer-agents-2026-11-09/enigma-figure3.png",
+        "alt": "Одна команда и три наблюдения: пересказ модели со ссылкой на файл, первые 15 из 170 строк файла и полный вывод без ограничения",
+        "overflow": 375,
+        "katexErrors": 0
+      },
+      "scheduler": {
+        "completion": "5 / 5",
+        "tokens": 12,
+        "resident": "0 MiB",
+        "status": "Все запросы завершены за 12 шагов. Блоки освобождены.",
+        "width": 375
+      }
+    },
+    {
+      "w": 1280,
+      "gptImage": {
+        "natural": [
+          1790,
+          667
+        ],
+        "bounds": [
+          632,
+          235.4921875
+        ],
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/long-context-review-2026-09/mistral-sliding-window.png",
+        "alt": "Две маски для последовательности The cat sat on the; в строке on ключ The доступен в полной маске и закрыт в локальной",
+        "overflow": 1280,
+        "katexErrors": 0
+      },
+      "llamaImage": {
+        "natural": [
+          1015,
+          1290
+        ],
+        "bounds": [
+          480,
+          610.046875
+        ],
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/llama-2026-10-22/cs336-prenorm-block.png",
+        "alt": "CS336 pre-norm Transformer block with residual paths around attention and the FFN",
+        "overflow": 1280,
+        "katexErrors": 0
+      },
+      "ctfImage": {
+        "natural": [
+          2024,
+          842
+        ],
+        "bounds": [
+          632,
+          262.9140625
+        ],
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/computer-agents-2026-11-09/enigma-figure3.png",
+        "alt": "Одна команда и три наблюдения: пересказ модели со ссылкой на файл, первые 15 из 170 строк файла и полный вывод без ограничения",
+        "overflow": 1280,
+        "katexErrors": 0
+      },
+      "scheduler": {
+        "completion": "5 / 5",
+        "tokens": 12,
+        "resident": "0 MiB",
+        "status": "Все запросы завершены за 12 шагов. Блоки освобождены.",
+        "width": 1280
+      }
+    }
+  ],
+  "counters": 0
+}

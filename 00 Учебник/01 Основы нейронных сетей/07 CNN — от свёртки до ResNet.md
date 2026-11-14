@@ -2,7 +2,66 @@
 title: CNN — от свёртки до ResNet
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-27
+last_updated: 2026-11-03
+source_language: mixed
+reference_terms:
+  - label: Двумерная cross-correlation
+    label_en: Cross-correlation and convolution
+    anchor: cnn-cross-correlation
+  - label: Общие веса и сумма градиентов
+    label_en: Shared weights and accumulated gradients
+    anchor: cnn-shared-gradients
+  - label: Обучение фильтра по целевому отклику
+    label_en: Learning an edge-detection filter
+    anchor: cnn-learned-filter
+  - label: Входные и выходные каналы свёртки
+    label_en: Input and output channels
+    anchor: cnn-channels
+  - label: Свёртка 1×1 как линейное преобразование
+    label_en: Pointwise convolution as a linear map
+    anchor: cnn-pointwise
+  - label: Padding, stride, dilation и форма выхода
+    label_en: Padding, stride, dilation and output geometry
+    anchor: cnn-geometry
+  - label: Групповая и depthwise-свёртки
+    label_en: Grouped and depthwise convolution
+    anchor: cnn-depthwise
+  - label: Pooling, градиент и глобальное усреднение
+    label_en: Pooling, gradients and global averaging
+    anchor: cnn-pooling
+  - label: Область восприятия и шаг выходной сетки
+    label_en: Receptive field and output-grid jump
+    anchor: cnn-receptive-field
+  - label: im2col, unfold и матричное умножение
+    label_en: im2col, unfold and matrix multiplication
+    anchor: cnn-im2col
+  - label: LeNet — формы, параметры и обратный проход
+    label_en: LeNet shapes, parameters and backward pass
+    anchor: cnn-lenet
+  - label: AlexNet, VGG и глубина сети
+    label_en: AlexNet, VGG and network depth
+    anchor: cnn-alexnet-vgg
+  - label: Residual-блок ResNet
+    label_en: ResNet residual block
+    anchor: cnn-resnet
+  - label: Проекция shortcut и формы ветвей
+    label_en: Shortcut projections and branch shapes
+    anchor: cnn-residual-shapes
+  - label: Нулевой residual и градиент shortcut
+    label_en: Zero residual and shortcut gradient
+    anchor: cnn-residual-gradient
+  - label: Полная сборка ResNet-18
+    label_en: Complete ResNet-18 construction
+    anchor: cnn-resnet18
+  - label: Причинная Conv1d и сдвиг целевого токена
+    label_en: Causal Conv1d and next-token alignment
+    anchor: cnn-causal
+  - label: Эквивариантность C4 и ориентации признаков
+    label_en: C4 equivariance and feature orientations
+    anchor: cnn-c4
+  - label: Winograd — преобразования и ошибка округления
+    label_en: Winograd transforms and rounding error
+    anchor: cnn-winograd
 primary_sources:
   - https://d2l.ai/chapter_convolutional-neural-networks/index.html
   - https://cs231n.github.io/convolutional-networks/
@@ -27,6 +86,8 @@ primary_sources:
 фильтра к соответствующему окну. Несколько фильтров образуют несколько карт,
 или каналов выхода. Все веса обучаются через ту же функцию потерь и обратное
 распространение, что и в MLP.
+
+<a id="cnn-cross-correlation"></a>
 
 ## Двумерная cross-correlation
 
@@ -103,6 +164,8 @@ print(Y)
 окна из левого верхнего. На матрице от 1 до 9 все четыре разности равны $-4$.
 Фильтр вычисляет один и тот же диагональный контраст в разных местах.
 
+<a id="cnn-shared-gradients"></a>
+
 ### Общие веса и обратный проход
 
 Пусть $\Delta_{i,j}$ — производная потери по элементу выхода. Поскольку один
@@ -131,6 +194,8 @@ torch.testing.assert_close(x_grad.grad, torch.tensor(
     [[0., 1., 1.], [2., 6., 4.], [2., 5., 3.]], dtype=X.dtype))
 print(k_grad.grad, x_grad.grad)
 ```
+
+<a id="cnn-learned-filter"></a>
 
 ### Обучение фильтра по желаемому отклику
 
@@ -176,6 +241,8 @@ print(edge_losses[:2], edge_filter.weight.detach().flatten())
 классификации нет готовой целевой карты для каждого слоя: производные проходят
 к его фильтрам от ошибки классификатора. Поэтому фильтры обучаются совместно,
 а не независимо под заранее назначенные названия вроде «детектор глаза».
+
+<a id="cnn-channels"></a>
 
 ## Входные и выходные каналы
 
@@ -241,6 +308,8 @@ output  [B, C_out, H_out, W_out]
 словесный смысл: обучению достаточно, чтобы совокупность каналов помогала
 следующим слоям решать задачу.
 
+<a id="cnn-pointwise"></a>
+
 ### Свёртка 1×1
 
 В окне $1\times1$ нет соседних пространственных позиций, но остаётся ось каналов.
@@ -272,6 +341,8 @@ print(point_output)
 нелинейности можно объединить в одну матрицу. ReLU между ними меняет семейство
 реализуемых функций. Поэтому блок из нескольких свёрток $1\times1$ с
 нелинейностями может выполнять больше, чем одна линейная проекция каналов.
+
+<a id="cnn-geometry"></a>
 
 ## Padding, stride и размер выхода
 
@@ -337,6 +408,8 @@ print(shape_output.shape, dilated_output.shape)
 свойство. Свёртка сама по себе не делает классификатор инвариантным ко всем
 переносам, поворотам и изменениям масштаба.
 
+<a id="cnn-depthwise"></a>
+
 ### Групповая и поканальная свёртки
 
 У обычной свёртки каждый выход использует все входные каналы. При `groups=2`
@@ -370,6 +443,8 @@ $3\cdot9+3\cdot16=75$. Такая экономия ограничивает во
 свёртки. [Документация Conv2d](https://docs.pytorch.org/docs/2.14/generated/torch.nn.Conv2d.html)
 задаёт также более общий depthwise multiplier, когда выходов на входной канал
 несколько.
+
+<a id="cnn-pooling"></a>
 
 ## Pooling
 
@@ -425,7 +500,623 @@ $[B,C,H,W]$ получается $[B,C,1,1]$, после удаления еди
 Так можно заменить большую полносвязную часть, ценой потери явной
 пространственной раскладки признаков.
 
+<a id="cnn-receptive-field"></a>
+
+## Receptive field
+
+Область восприятия (receptive field) выходного элемента содержит позиции входа,
+которые могут повлиять на его значение. Одно ядро $3\times3$ использует
+небольшое окно; два последовательных ядра с шагом 1 охватывают область
+$5\times5$. Во втором случае выход зависит от нескольких перекрывающихся
+окон первого слоя, а не только от трёх новых пикселей.
+
+Для последовательности локальных операций обозначим через $r_l$ размер
+теоретической области по одной оси, а через $j_l$ — расстояние между центрами
+соседних выходов в координатах исходного входа. При $r_0=j_0=1$
+
+$$
+\begin{aligned}
+j_l&=j_{l-1}s_l,\\
+r_l&=r_{l-1}+d_l(k_l-1)j_{l-1}.
+\end{aligned}
+$$
+
+Рекуррентный расчёт и границы применимости разобраны у Araujo, Norris и Sim,
+[Computing Receptive Fields of Convolutional Neural Networks](https://distill.pub/2019/computing-receptive-fields/).
+Формулы применяются по высоте и ширине отдельно. Для входа $[3,32,32]$
+получается такая последовательность; в свёртках dilation 1:
+
+| Операция | Выход без B | $(j,r)$ |
+|---|---|---|
+| Вход | $3\times32\times32$ | $(1,1)$ |
+| Conv 3, s=1, p=1 | $8\times32\times32$ | $(1,3)$ |
+| Pool 2, s=2 | $8\times16\times16$ | $(2,4)$ |
+| Conv 3, s=1, p=1 | $16\times16\times16$ | $(2,8)$ |
+
+Последнее ядро охватывает три позиции с шагом 2 в предыдущей карте.
+Оно добавляет $2\cdot2=4$ к уже доступному окну размера 4, получая 8.
+Проверить геометрию можно обратным проходом. Возьмём положительные единичные
+ядра и average pooling, чтобы все доступные пути давали ненулевой вклад.
+
+```python
+rf_input = torch.ones(1, 1, 32, 32, dtype=X.dtype, requires_grad=True)
+rf_kernel = torch.ones(1, 1, 3, 3, dtype=X.dtype)
+rf_output = F.conv2d(F.avg_pool2d(
+    F.conv2d(rf_input, rf_kernel, padding=1), 2, stride=2),
+    rf_kernel, padding=1)
+rf_gradient, = torch.autograd.grad(rf_output[0, 0, 5, 5], rf_input)
+positions = (rf_gradient[0, 0] != 0).nonzero()
+assert positions.shape == (64, 2)
+assert positions.amin(0).tolist() == [7, 7]
+assert positions.amax(0).tolist() == [14, 14]
+print(positions.amin(0), positions.amax(0))
+```
+
+Геометрическая область не равна распределению фактического градиента:
+ReLU и max pooling выключают часть путей, а dilation может оставлять
+промежутки внутри охватываемого прямоугольника. У границы часть номинальной
+области приходится на padding, поэтому реальных пикселей в ней меньше.
+Операции с глобальными
+статистиками тоже требуют отдельного учёта: BatchNorm в обучающем режиме
+использует значения во всём канале пакета. Приведённый расчёт относится
+к последовательности локальных операций в примере, а не автоматически
+к любому графу с нормализацией, ветвями и глобальным pooling.
+
+<a id="cnn-im2col"></a>
+
+## Свёртка как матричное умножение
+
+В [CS231n, Implementation as Matrix Multiplication](https://cs231n.github.io/convolutional-networks/#conv)
+каждое локальное окно разворачивается в столбец. Если есть
+$N=H_{\mathrm{out}}W_{\mathrm{out}}$ положений, матрица окон имеет форму
+$[C_{\mathrm{in}}k_hk_w,N]$. Матрица фильтров —
+$[C_{\mathrm{out}},C_{\mathrm{in}}k_hk_w]$. Их произведение даёт все
+отклики сразу; затем результат возвращается в пространственную форму.
+
+```python
+columns = F.unfold(multi_X[None], kernel_size=(2, 2))
+flat_weights = all_kernels.reshape(3, -1)
+matrix_maps = (flat_weights @ columns[0]).reshape(3, 2, 2)
+torch.testing.assert_close(matrix_maps, multi_Y)
+assert columns.numel() == 2 * 2 * 2 * 4
+print(columns.shape, matrix_maps.shape)
+```
+
+<!-- BEGIN REVIEW: Harvard im2row 2026-10-27 -->
+<a id="two-channels-window-rows-and-filter-vector"></a>
+
+### Two channels, window rows and a filter vector
+
+The Harvard diagram below uses a second example: the first input channel
+contains 1 through 9, the second 10 through 18. A single output channel has
+two $2\times2$ kernel slices, containing 1 through 4 and 5 through 8.
+Stride and dilation are 1; there is no padding or bias. There are four output
+positions, visited left to right and then top to bottom.
+
+![[00 Учебник/Assets/Figures/curated/nn-native-2026-10-27/harvard-window-rows.svg|Two input channels flattened into four window rows and an eight-value filter vector]]
+
+*Vijay Janapa Reddi and Harvard ML Systems contributors,
+[Network Architectures, Core computational primitives](https://github.com/harvard-edge/cs249r_book/blob/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/nn_architectures/nn_architectures.qmd#L4042),
+complete original archived SVG, unchanged;
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+Each **row** of the $4\times8$ matrix contains both channels of one window;
+the right-hand $8\times1$ vector contains both slices of one filter.
+This explanatory caption corrects the source caption's reversed row/column
+description. No labels or geometry in the figure have been changed.*
+
+The upper red outline selects $[1,2,4,5]$ from the first channel.
+The next four entries in that same matrix row, $[10,11,13,14]$, come from
+the matching position in the second channel. The lower red outline instead
+follows the second channel's top-right window into the **second** row.
+It does not identify an additional output channel. The numbers and outlines
+specify these correspondences without relying on the colors alone.
+
+Call this window matrix $P$. Its first four columns form $P_0$ and the
+remaining four form $P_1$:
+
+$$
+P_0=\begin{bmatrix}
+1&2&4&5\\2&3&5&6\\4&5&7&8\\5&6&8&9
+\end{bmatrix},
+$$
+
+$$
+P_1=\begin{bmatrix}
+10&11&13&14\\11&12&14&15\\13&14&16&17\\14&15&17&18
+\end{bmatrix}.
+$$
+
+Flattening the filter in that same channel-first order gives
+$k=[1,2,3,4,5,6,7,8]^\mathsf{T}$. The first dot product contains two
+channel contributions:
+
+$$
+\begin{aligned}
+y_{0,0}
+&=(1\cdot1+2\cdot2+4\cdot3+5\cdot4)\\
+&\quad +(10\cdot5+11\cdot6\\
+&\qquad +13\cdot7+14\cdot8)\\
+&=37+319=356.
+\end{aligned}
+$$
+
+The other rows give $47+345=392$, $67+397=464$ and $77+423=500$.
+Reshaping $Pk$ by the window order produces the map
+
+$$
+Y=\begin{bmatrix}356&392\\464&500\end{bmatrix}.
+$$
+
+The previous example and
+[PyTorch Unfold](https://docs.pytorch.org/docs/2.14/generated/torch.nn.Unfold.html)
+place windows in columns. For this input, `F.unfold` returns $[1,8,4]$;
+removing the batch axis and transposing gives Harvard's $P$ of shape $[4,8]$.
+Thus `flat_weights @ columns` and `window_rows @ filter_vector` use the same
+dot products. An implementation must keep the window, channel and kernel
+orders consistent on both operands.
+
+```python
+harvard_input = torch.arange(1, 19, dtype=torch.float64).reshape(1, 2, 3, 3)
+harvard_filter = torch.arange(1, 9, dtype=torch.float64).reshape(1, 2, 2, 2)
+harvard_rows = torch.tensor([
+    [1., 2., 4., 5., 10., 11., 13., 14.],
+    [2., 3., 5., 6., 11., 12., 14., 15.],
+    [4., 5., 7., 8., 13., 14., 16., 17.],
+    [5., 6., 8., 9., 14., 15., 17., 18.]
+], dtype=torch.float64)
+harvard_columns = F.unfold(harvard_input, kernel_size=2)
+assert harvard_columns.shape == (1, 8, 4)
+torch.testing.assert_close(harvard_columns[0].T, harvard_rows)
+harvard_values = harvard_rows @ harvard_filter.flatten()
+torch.testing.assert_close(harvard_values,
+                           torch.tensor([356., 392., 464., 500.], dtype=torch.float64))
+torch.testing.assert_close(harvard_values.reshape(1, 1, 2, 2),
+                           F.conv2d(harvard_input, harvard_filter))
+print(harvard_rows.shape, harvard_values.reshape(2, 2))
+```
+
+There are 32 stored window entries instead of 18 input values. Each channel's
+center appears in four rows; a corner appears in only one. This duplication
+explains the extra storage of a fully materialized window matrix. The
+identity above does not prescribe a convolution implementation or establish
+a speedup: a kernel can generate tiles as needed instead of storing the
+entire matrix. No timing measurement is made in this example.
+<!-- END REVIEW: Harvard im2row 2026-10-27 -->
+
+Число умножений и сложений с накоплением (MAC) для обычной свёртки без смещений:
+
+$$
+\mathrm{MAC}
+=B\,H_{\mathrm{out}}W_{\mathrm{out}}
+C_{\mathrm{out}}C_{\mathrm{in}}k_hk_w.
+$$
+
+Если умножение и сложение считают двумя FLOP, арифметический объём примерно
+вдвое больше. Это соглашение нужно указывать при сравнении оценок.
+
+Общие веса сокращают число параметров, но не число применений ядра.
+Кроме того, явная матрица окон дублирует пиксели из перекрывающихся областей.
+В нашем примере 18 входных чисел превращаются в 32 числа матрицы окон.
+Поэтому тождество с матричным умножением само по себе не означает, что
+материализация im2col — самый быстрый или экономный по памяти алгоритм.
+
+<a id="lenet-5"></a>
+
+<a id="cnn-lenet"></a>
+
+## LeNet: полный проход изображения через сеть
+
+После двух блоков «свёртка — нелинейность — pooling» карта разворачивается
+в вектор и передаётся классификатору. В учебной реализации
+[D2L, LeNet](https://d2l.ai/chapter_convolutional-neural-networks/lenet.html)
+первый фильтр $5\times5$ с padding 2 сохраняет размер $28\times28$ и даёт
+шесть каналов. Pooling уменьшает его до $14\times14$. Вторая свёртка без
+padding даёт $16\times10\times10$, второй pooling — $16\times5\times5$.
+После flatten на каждый пример приходится 400 чисел.
+
+![[00 Учебник/Assets/Figures/curated/d2l/lenet.svg|Последовательность слоёв учебной LeNet]]
+
+*Учебная LeNet из D2L: две свёртки, pooling и классификатор. Это адаптация
+исторической сети, а не точное воспроизведение всех деталей LeNet-5 1998 года.
+Aston Zhang и соавторы, [D2L, LeNet](https://d2l.ai/chapter_convolutional-neural-networks/lenet.html),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+
+Ниже воспроизведена последовательность D2L с явно заданными входными размерами
+вместо Lazy-модулей. Последний слой возвращает десять logits.
+`cross_entropy` сама вычисляет log-softmax; дополнительная softmax перед
+потерей не нужна. Для получения вероятностей при прогнозе можно применить
+softmax к logits отдельно. D2L заменяет этим способом исторический
+гауссовский выходной слой.
+
+```python
+torch.manual_seed(26)
+lenet = nn.Sequential(
+    nn.Conv2d(1, 6, 5, padding=2), nn.Sigmoid(),
+    nn.AvgPool2d(2, stride=2),
+    nn.Conv2d(6, 16, 5), nn.Sigmoid(),
+    nn.AvgPool2d(2, stride=2), nn.Flatten(),
+    nn.Linear(400, 120), nn.Sigmoid(),
+    nn.Linear(120, 84), nn.Sigmoid(),
+    nn.Linear(84, 10)
+).double()
+for layer in lenet:
+    if isinstance(layer, (nn.Conv2d, nn.Linear)):
+        nn.init.xavier_uniform_(layer.weight)
+lenet_input = torch.randn(4, 1, 28, 28, dtype=torch.float64)
+with torch.no_grad():
+    state = lenet_input
+    lenet_shapes = []
+    for layer in lenet:
+        state = layer(state)
+        lenet_shapes.append(tuple(state.shape))
+assert lenet_shapes[5] == (4, 16, 5, 5)
+assert lenet_shapes[6] == (4, 400) and lenet_shapes[-1] == (4, 10)
+assert sum(p.numel() for p in lenet.parameters()) == 61706
+
+lenet_optimizer = torch.optim.SGD(lenet.parameters(), lr=.1)
+before_first_filter = lenet[0].weight.detach().clone()
+lenet_optimizer.zero_grad()
+classification_loss = F.cross_entropy(lenet(lenet_input), torch.tensor([0, 1, 2, 3]))
+classification_loss.backward()
+assert all(p.grad is not None and torch.isfinite(p.grad).all() for p in lenet.parameters())
+lenet_optimizer.step()
+assert not torch.equal(before_first_filter, lenet[0].weight)
+print(lenet_shapes, classification_loss.item())
+```
+
+Метки в этом запуске назначены четырём случайным входам. Проверка показывает
+передачу форм, вычисление потери и обновление первого фильтра, но не качество
+распознавания и не результат обучения на MNIST. Проверочную точность получают
+после обучения на настоящих данных с отдельной проверочной выборкой.
+
+<a id="cnn-alexnet-vgg"></a>
+
+## AlexNet, VGG и переход к глубине
+
+В AlexNet, победившей в ImageNet 2012, пять свёрточных слоёв соединены с тремя
+полносвязными. Вместо sigmoid используются ReLU, в большой полносвязной части —
+dropout, а при обучении — преобразования изображений. Сеть обучалась на GPU.
+[D2L, AlexNet](https://d2l.ai/chapter_convolutional-modern/alexnet.html)
+сопоставляет этот переход с LeNet и отдельно описывает данные, нелинейности
+и архитектуру.
+
+Большая полносвязная часть может содержать основную долю параметров.
+Например, соединение карты $[256,6,6]$ со слоем ширины 4096 требует
+$9216\cdot4096=37\,748\,736$ весов, не считая смещений.
+Это около 144 MiB только для весов float32; градиенты, состояния оптимизатора
+и активации занимают дополнительную память.
+
+VGG группирует несколько свёрток $3\times3$ с ReLU и padding 1 перед одним
+pooling. Пространственное разрешение сохраняется внутри группы и уменьшается
+на её выходе. Это позволяет добавлять нелинейные слои, не уменьшая карту после
+каждой свёртки.
+
+![[00 Учебник/Assets/Figures/curated/cnn-2026-10-26/vgg.svg|Сравнение AlexNet и повторяемых блоков VGG]]
+
+*Слева отдельные слои учебной AlexNet, справа повторяемые блоки VGG. Обозначение
+повтора относится к группе операций, а не к одному общему набору весов.
+Aston Zhang и соавторы, [D2L, Networks Using Blocks](https://d2l.ai/chapter_convolutional-modern/vgg.html),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+
+В левой части исходного рисунка последняя свёртка AlexNet подписана как
+384 канала, тогда как код AlexNet в D2L задаёт для неё 256. Для расчёта
+полносвязной части выше использована форма из кода; рисунок сохранён без
+изменения авторских подписей.
+
+При постоянном числе каналов $C$ два слоя $3\times3$ содержат $18C^2$ весов
+против $25C^2$ у одного слоя $5\times5$, без смещений.
+Теоретическая область восприятия в обоих случаях — $5\times5$.
+Но два слоя с промежуточной ReLU не эквивалентны одному линейному фильтру:
+их ответ зависит от того, какие промежуточные значения прошли через ReLU.
+
+Функция ниже — исходный PyTorch-блок D2L; английский код сохранён.
+Он создаёт новые параметры для каждого слоя, а не применяет один слой повторно.
+
+```python
+def vgg_block(num_convs, out_channels):
+    layers = []
+    for _ in range(num_convs):
+        layers.append(nn.LazyConv2d(out_channels, kernel_size=3, padding=1))
+        layers.append(nn.ReLU())
+    layers.append(nn.MaxPool2d(kernel_size=2,stride=2))
+    return nn.Sequential(*layers)
+
+small_vgg_block = vgg_block(2, 8).double()
+assert small_vgg_block(torch.ones(1, 3, 32, 32, dtype=X.dtype)).shape == (1, 8, 16, 16)
+assert sum(p.numel() for p in small_vgg_block.parameters()) == 808
+print(sum(p.numel() for p in small_vgg_block.parameters()))
+```
+
+### Почему глубина могла ухудшать обучение
+
+В экспериментах He и соавторов более глубокие обычные сети давали более высокую
+ошибку уже на обучающей выборке. Это наблюдение нельзя объяснить только
+переобучением, при котором обучение успешно, а перенос на новые данные плох.
+
+Если дополнительные слои реализуют тождественное преобразование, более глубокая
+сеть может повторить решение мелкой. Существование таких весов, однако, не
+обеспечивает их нахождение оптимизатором. ResNet меняет параметризацию блока:
+обучаемая ветвь предсказывает поправку к входу. Постановка и результаты
+сравнения приведены в [Deep Residual Learning, §§1 и 3](https://arxiv.org/abs/1512.03385).
+
+<a id="cnn-resnet"></a>
+
+## ResNet
+
+Пусть желаемое преобразование блока — $H(x)$. При одинаковых формах входа и
+выхода вместо прямого приближения $H$ можно обучать
+$F(x)=H(x)-x$ и складывать результат со входом:
+
+$$
+z=x+F(x).
+$$
+
+Для $H(x)=x$ ветвь должна давать ноль. Она не обязана сама обучиться копировать
+все координаты входа. Это мотивирует residual-параметризацию, но не доказывает
+универсального преимущества для любого набора данных и режима обучения.
+
+В basic block исходной post-activation ResNet за сложением следует ReLU:
+$y=\operatorname{ReLU}(z)$. Ветвь имеет порядок
+`Conv 3×3 → BatchNorm → ReLU → Conv 3×3 → BatchNorm`.
+Между второй BatchNorm и сложением ReLU нет.
+
+![[00 Учебник/Assets/Figures/curated/initialization-normalization-2026-10-21/d2l-resnet-block.svg|Residual-блок без проекции и с проекцией]]
+
+*Слева shortcut сохраняет вход, справа свёртка $1\times1$ согласует его форму
+с основной ветвью. ReLU применяется после сложения. Aston Zhang и соавторы,
+[D2L, Residual Blocks](https://d2l.ai/chapter_convolutional-modern/resnet.html#residual-blocks),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+
+<a id="cnn-residual-shapes"></a>
+
+### Формы на двух ветвях
+
+При входе $[B,64,56,56]$ две свёртки с 64 выходными каналами, шагом 1 и
+padding 1 сохраняют форму. Shortcut передаёт вход без изменения.
+Складываются два тензора $[B,64,56,56]$.
+
+В первом блоке следующей группы первая свёртка имеет 128 выходных каналов
+и шаг 2: основная ветвь выдаёт $[B,128,28,28]$. Прежний вход прибавить к нему
+нельзя. В выбранной реализации D2L shortcut использует свёртку $1\times1$
+с 128 каналами и шагом 2. Она даёт ту же форму, но уже имеет обучаемые веса.
+Это вариант проекции; не все варианты исторической ResNet используют именно
+такое согласование.
+
+Ниже сохранён исходный класс D2L, включая Lazy-модули и английскую docstring.
+Его shortcut не содержит дополнительной BatchNorm. Сравнивая с другой
+библиотекой, нужно проверять эту деталь, bias и место шага в блоке.
+
+```python
+class Residual(nn.Module):  #@save
+    """The Residual block of ResNet models."""
+    def __init__(self, num_channels, use_1x1conv=False, strides=1):
+        super().__init__()
+        self.conv1 = nn.LazyConv2d(num_channels, kernel_size=3, padding=1,
+                                   stride=strides)
+        self.conv2 = nn.LazyConv2d(num_channels, kernel_size=3, padding=1)
+        if use_1x1conv:
+            self.conv3 = nn.LazyConv2d(num_channels, kernel_size=1,
+                                       stride=strides)
+        else:
+            self.conv3 = None
+        self.bn1 = nn.LazyBatchNorm2d()
+        self.bn2 = nn.LazyBatchNorm2d()
+
+    def forward(self, X):
+        Y = F.relu(self.bn1(self.conv1(X)))
+        Y = self.bn2(self.conv2(Y))
+        if self.conv3:
+            X = self.conv3(X)
+        Y += X
+        return F.relu(Y)
+
+same_block = Residual(64).double().eval()
+projected_block = Residual(128, use_1x1conv=True, strides=2).double().eval()
+block_input = torch.randn(1, 64, 56, 56, dtype=X.dtype)
+with torch.no_grad():
+    assert same_block(block_input).shape == (1, 64, 56, 56)
+    assert projected_block(block_input).shape == (1, 128, 28, 28)
+print(same_block.conv3, projected_block.conv3.weight.shape)
+```
+
+<a id="cnn-residual-gradient"></a>
+
+### Нулевой residual и градиент
+
+До последней ReLU якобиан блока равен $I+J_F(x)$. Слагаемое $I$ даёт
+отдельный путь производной, но не гарантирует ненулевой итог: например,
+для $F(x)=-x$ сумма равна нулю. После ReLU добавляется её маска.
+Поэтому утверждение «в residual-блоке градиент всегда проходит без изменений»
+неверно.
+
+Даже при $F=0$ весь post-activation блок возвращает $\operatorname{ReLU}(x)$,
+а не $x$ для произвольных отрицательных координат. Проверим это настоящим
+классом: обнулим коэффициенты и смещения последней BatchNorm ветви.
+Нормализация переведена в eval, чтобы использовать фиксированное состояние.
+
+```python
+zero_block = Residual(3).double().eval()
+zero_input = torch.linspace(-1, 1, 108, dtype=X.dtype).reshape(1, 3, 6, 6).requires_grad_()
+zero_block(zero_input)  # Initialize lazy parameters.
+with torch.no_grad():
+    zero_block.bn2.weight.zero_()
+    zero_block.bn2.bias.zero_()
+zero_output = zero_block(zero_input)
+torch.testing.assert_close(zero_output, F.relu(zero_input))
+zero_gradient, = torch.autograd.grad(zero_output.sum(), zero_input)
+torch.testing.assert_close(zero_gradient, (zero_input > 0).to(X.dtype))
+print(zero_gradient.unique())
+```
+
+Pre-activation ResNet меняет порядок нормализации и нелинейностей.
+В более глубоких ResNet используются также bottleneck-блоки
+$1\times1 \to 3\times3 \to 1\times1$: сначала уменьшается число каналов для
+пространственной свёртки, затем восстанавливается. Эти конструкции нельзя
+считать тем же basic block только потому, что у них есть shortcut.
+
+<a id="cnn-resnet18"></a>
+
+### Сборка ResNet-18
+
+У ResNet-18 четыре группы по два basic block. Первый слой — свёртка
+$7\times7$ с шагом 2; затем max pooling с шагом 2.
+В следующих группах число каналов растёт от 64 до 512, а разрешение
+уменьшается. В конце global average pooling даёт по одному числу на канал,
+и полносвязный слой выдаёт logits классов.
+
+![[00 Учебник/Assets/Figures/curated/d2l/resnet18.svg|Повторение блоков в ResNet-18]]
+
+*Общая структура ResNet-18 из D2L. Два блока первой группы показаны отдельно;
+переход к новой группе с проекцией и следующий блок повторяются для трёх
+групп с растущим числом каналов. Aston Zhang и соавторы,
+[D2L, ResNet Model](https://d2l.ai/chapter_convolutional-modern/resnet.html#resnet-model),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+
+Код собирает те же группы с классом D2L. Здесь явно выбраны RGB-вход
+$224\times224$ и 1000 выходов, а не параметры задачи Fashion-MNIST из курса.
+Число 18 считает один начальный слой, 16 свёрток внутри восьми блоков
+и классификатор; дополнительные shortcut-проекции не включены в это название.
+
+```python
+def make_resnet18(num_classes=1000):
+    stages = [nn.Sequential(
+        nn.LazyConv2d(64, kernel_size=7, stride=2, padding=3),
+        nn.LazyBatchNorm2d(), nn.ReLU(),
+        nn.MaxPool2d(kernel_size=3, stride=2, padding=1))]
+    for stage_index, channels in enumerate([64, 128, 256, 512]):
+        blocks = []
+        for block_index in range(2):
+            transition = stage_index > 0 and block_index == 0
+            blocks.append(Residual(channels, use_1x1conv=transition,
+                                   strides=2 if transition else 1))
+        stages.append(nn.Sequential(*blocks))
+    stages.append(nn.Sequential(nn.AdaptiveAvgPool2d((1, 1)),
+                                nn.Flatten(), nn.LazyLinear(num_classes)))
+    return nn.Sequential(*stages)
+
+resnet18 = make_resnet18().eval()
+resnet_shapes = []
+with torch.no_grad():
+    state = torch.zeros(1, 3, 224, 224)
+    for stage in resnet18:
+        state = stage(state)
+        resnet_shapes.append(tuple(state.shape))
+assert resnet_shapes == [
+    (1, 64, 56, 56), (1, 64, 56, 56), (1, 128, 28, 28),
+    (1, 256, 14, 14), (1, 512, 7, 7), (1, 1000)]
+print(resnet_shapes)
+```
+
+Проверка выполняет один прямой проход случайно инициализированной сети.
+Она не воспроизводит обучение ImageNet и не измеряет производительность.
+
+<a id="связь-cnn-с-текстом-и-современными-моделями"></a>
+
+<a id="cnn-causal"></a>
+
+## Свёртки в последовательностях и связь с Transformer
+
+В одномерной свёртке пространственная ось заменяется временем или позицией
+токена. Для каждого положения применяется одно и то же ядро.
+При причинной свёртке окно не включает будущее; дополнение делают слева,
+а не симметрично. Dilation позволяет увеличивать охватываемый контекст без
+пропорционального увеличения числа весов; такой подход используется в
+[WaveNet](https://arxiv.org/abs/1609.03499).
+
+### Причинная Conv1d на пяти значениях
+
+Пусть вход равен $[1,2,3,4,5]$, а ядро $[1,10,100]$ перечисляет веса
+от самой старой позиции к текущей. При шаге 1 дополним вход двумя нулями
+слева. Первые окна будут $[0,0,1]$, $[0,1,2]$ и $[1,2,3]$.
+Получим $[100,210,321,432,543]$: например, третий выход равен
+$1\cdot1+10\cdot2+100\cdot3=321$. Он не использует четвёртое и пятое
+значения входа.
+
+В [PyTorch Conv1d](https://docs.pytorch.org/docs/2.14/generated/torch.nn.Conv1d.html)
+оси входа имеют порядок $[B,C,T]$. Числовой параметр `padding` добавляет
+нули с обеих сторон, поэтому здесь левое дополнение задаётся отдельно.
+Для ядра ширины $k$ с dilation $d$ и шагом 1 нужны $d(k-1)$ нулей слева;
+правое дополнение равно нулю.
+
+```python
+def causal_conv1d(values, weight, dilation=1):
+    left_padding = dilation * (weight.shape[-1] - 1)
+    return F.conv1d(F.pad(values, (left_padding, 0)), weight,
+                    dilation=dilation)
+
+causal_input = torch.tensor([[[1., 2., 3., 4., 5.]]],
+                            dtype=torch.float64, requires_grad=True)
+causal_weight = torch.tensor([[[1., 10., 100.]]], dtype=torch.float64)
+causal_output = causal_conv1d(causal_input, causal_weight)
+torch.testing.assert_close(causal_output.flatten(),
+    torch.tensor([100., 210., 321., 432., 543.], dtype=torch.float64))
+causal_gradient, = torch.autograd.grad(causal_output[0, 0, 2], causal_input)
+assert causal_gradient.flatten().tolist() == [1., 10., 100., 0., 0.]
+
+changed_future = causal_input.detach().clone()
+changed_future[..., 3:] += 1000
+torch.testing.assert_close(causal_conv1d(changed_future, causal_weight)[..., :3],
+                            causal_output.detach()[..., :3])
+
+symmetric_output = F.conv1d(causal_input.detach(), causal_weight, padding=1)
+assert symmetric_output[0, 0, 0].item() == 210  # Uses the future value x[1].
+dilated_output = causal_conv1d(causal_input.detach(), causal_weight, dilation=2)
+assert dilated_output.flatten().tolist() == [100., 200., 310., 420., 531.]
+print(causal_output.detach().flatten(), dilated_output.flatten())
+```
+
+Производная третьего выхода по входу равна $[1,10,100,0,0]$.
+Последние два нуля показывают отсутствие путей из будущих позиций.
+При симметричном дополнении первый выход равен 210 и уже зависит от
+второго входного значения. Одного сохранения длины последовательности
+недостаточно для причинности.
+
+При dilation 2 третье окно использует позиции $t-4,t-2,t$.
+Для $t=2$ это $[0,1,3]$, поэтому выход равен $0+10+300=310$.
+Ширина охватываемого отрезка выросла с 3 до 5, но число весов осталось 3.
+Непоследовательные позиции внутри одного такого окна не становятся
+доступными только из-за увеличения его ширины.
+
+В [WaveNet, §2.1](https://arxiv.org/html/1609.03499v1#S2.SS1)
+выход на позиции $t$ предсказывает следующее значение $x_{t+1}$ по уже
+известным $x_{\le t}$. В примере текущее значение входит в окно, поэтому
+при обучении на следующий токен цели нужно сдвинуть на одну позицию.
+Если тем же выходом предсказывать $x_t$, модель увидит целевое значение
+во входе. Проверка причинности окна не заменяет проверку выравнивания
+входов и целей. Сам пример вычисляет скалярные отклики, а не распределение
+следующего токена и не полную WaveNet.
+
+У свёртки коэффициенты смешивания внутри окна являются параметрами,
+одинаковыми для всех примеров. В self-attention веса между позициями
+вычисляются из текущих представлений. Общая residual-структура встречается
+в обоих случаях, но она не делает операции смешивания одинаковыми.
+Переход к patch embeddings и vision-энкодерам разобран отдельно в разделе VLM.
+
+<a id="краткие-итоги"></a>
+
+## Проверка собственной реализации
+
+При переносе блока сначала проверяют порядок осей, число входных и выходных
+каналов, правило padding, stride и фактические формы на обеих ветвях.
+Для одной маленькой матрицы рассчитывают выход вручную и сравнивают с API.
+Затем проверяют производные: общие веса должны собирать вклады всех окон,
+а перекрывающиеся окна — складывать производные по входу.
+
+Сравнение архитектур требует отдельно фиксировать число параметров,
+размеры активаций и арифметический объём. Сокращение одного из них не
+гарантирует сокращение остальных или ускорение на конкретном устройстве.
+Качество классификации проверяют после обучения на отдельной выборке,
+а не по успешному прохождению теста форм.
+
+[[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE|Глава об автоэнкодерах]]
+в отдельном модуле меняет обучающую цель: сеть восстанавливает вход вместо
+предсказания класса. Основной курс продолжается
+[[00 Учебник/02 Представление текста и токенизация/01 Представление текста числами|представлением текста числами]]:
+как получить числовой вход для модели, если исходные данные — слова.
+
 <!-- group-equivariance 2026-10-26 -->
+<a id="cnn-c4"></a>
+
 ## Rotation-equivariant feature maps
 
 A vertical-edge filter and its quarter-turn detect different orientations.
@@ -638,501 +1329,9 @@ continues to typed scalar/vector fields.
 </details>
 <!-- /group-equivariance -->
 
-## Receptive field
-
-Область восприятия (receptive field) выходного элемента содержит позиции входа,
-которые могут повлиять на его значение. Одно ядро $3\times3$ использует
-небольшое окно; два последовательных ядра с шагом 1 охватывают область
-$5\times5$. Во втором случае выход зависит от нескольких перекрывающихся
-окон первого слоя, а не только от трёх новых пикселей.
-
-Для последовательности локальных операций обозначим через $r_l$ размер
-теоретической области по одной оси, а через $j_l$ — расстояние между центрами
-соседних выходов в координатах исходного входа. При $r_0=j_0=1$
-
-$$
-\begin{aligned}
-j_l&=j_{l-1}s_l,\\
-r_l&=r_{l-1}+d_l(k_l-1)j_{l-1}.
-\end{aligned}
-$$
-
-Рекуррентный расчёт и границы применимости разобраны у Araujo, Norris и Sim,
-[Computing Receptive Fields of Convolutional Neural Networks](https://distill.pub/2019/computing-receptive-fields/).
-Формулы применяются по высоте и ширине отдельно. Для входа $[3,32,32]$
-получается такая последовательность; в свёртках dilation 1:
-
-| Операция | Выход без B | $(j,r)$ |
-|---|---|---|
-| Вход | $3\times32\times32$ | $(1,1)$ |
-| Conv 3, s=1, p=1 | $8\times32\times32$ | $(1,3)$ |
-| Pool 2, s=2 | $8\times16\times16$ | $(2,4)$ |
-| Conv 3, s=1, p=1 | $16\times16\times16$ | $(2,8)$ |
-
-Последнее ядро охватывает три позиции с шагом 2 в предыдущей карте.
-Оно добавляет $2\cdot2=4$ к уже доступному окну размера 4, получая 8.
-Проверить геометрию можно обратным проходом. Возьмём положительные единичные
-ядра и average pooling, чтобы все доступные пути давали ненулевой вклад.
-
-```python
-rf_input = torch.ones(1, 1, 32, 32, dtype=X.dtype, requires_grad=True)
-rf_kernel = torch.ones(1, 1, 3, 3, dtype=X.dtype)
-rf_output = F.conv2d(F.avg_pool2d(
-    F.conv2d(rf_input, rf_kernel, padding=1), 2, stride=2),
-    rf_kernel, padding=1)
-rf_gradient, = torch.autograd.grad(rf_output[0, 0, 5, 5], rf_input)
-positions = (rf_gradient[0, 0] != 0).nonzero()
-assert positions.shape == (64, 2)
-assert positions.amin(0).tolist() == [7, 7]
-assert positions.amax(0).tolist() == [14, 14]
-print(positions.amin(0), positions.amax(0))
-```
-
-Геометрическая область не равна распределению фактического градиента:
-ReLU и max pooling выключают часть путей, а dilation может оставлять
-промежутки внутри охватываемого прямоугольника. У границы часть номинальной
-области приходится на padding, поэтому реальных пикселей в ней меньше.
-Операции с глобальными
-статистиками тоже требуют отдельного учёта: BatchNorm в обучающем режиме
-использует значения во всём канале пакета. Приведённый расчёт относится
-к последовательности локальных операций в примере, а не автоматически
-к любому графу с нормализацией, ветвями и глобальным pooling.
-
-## Свёртка как матричное умножение
-
-В [CS231n, Implementation as Matrix Multiplication](https://cs231n.github.io/convolutional-networks/#conv)
-каждое локальное окно разворачивается в столбец. Если есть
-$N=H_{\mathrm{out}}W_{\mathrm{out}}$ положений, матрица окон имеет форму
-$[C_{\mathrm{in}}k_hk_w,N]$. Матрица фильтров —
-$[C_{\mathrm{out}},C_{\mathrm{in}}k_hk_w]$. Их произведение даёт все
-отклики сразу; затем результат возвращается в пространственную форму.
-
-```python
-columns = F.unfold(multi_X[None], kernel_size=(2, 2))
-flat_weights = all_kernels.reshape(3, -1)
-matrix_maps = (flat_weights @ columns[0]).reshape(3, 2, 2)
-torch.testing.assert_close(matrix_maps, multi_Y)
-assert columns.numel() == 2 * 2 * 2 * 4
-print(columns.shape, matrix_maps.shape)
-```
-
-<!-- BEGIN REVIEW: Harvard im2row 2026-10-27 -->
-<a id="two-channels-window-rows-and-filter-vector"></a>
-
-### Two channels, window rows and a filter vector
-
-The Harvard diagram below uses a second example: the first input channel
-contains 1 through 9, the second 10 through 18. A single output channel has
-two $2\times2$ kernel slices, containing 1 through 4 and 5 through 8.
-Stride and dilation are 1; there is no padding or bias. There are four output
-positions, visited left to right and then top to bottom.
-
-![[00 Учебник/Assets/Figures/curated/nn-native-2026-10-27/harvard-window-rows.svg|Two input channels flattened into four window rows and an eight-value filter vector]]
-
-*Vijay Janapa Reddi and Harvard ML Systems contributors,
-[Network Architectures, Core computational primitives](https://github.com/harvard-edge/cs249r_book/blob/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/nn_architectures/nn_architectures.qmd#L4042),
-complete original archived SVG, unchanged;
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
-Each **row** of the $4\times8$ matrix contains both channels of one window;
-the right-hand $8\times1$ vector contains both slices of one filter.
-This explanatory caption corrects the source caption's reversed row/column
-description. No labels or geometry in the figure have been changed.*
-
-The upper red outline selects $[1,2,4,5]$ from the first channel.
-The next four entries in that same matrix row, $[10,11,13,14]$, come from
-the matching position in the second channel. The lower red outline instead
-follows the second channel's top-right window into the **second** row.
-It does not identify an additional output channel. The numbers and outlines
-specify these correspondences without relying on the colors alone.
-
-Call this window matrix $P$. Its first four columns form $P_0$ and the
-remaining four form $P_1$:
-
-$$
-P_0=\begin{bmatrix}
-1&2&4&5\\2&3&5&6\\4&5&7&8\\5&6&8&9
-\end{bmatrix},
-$$
-
-$$
-P_1=\begin{bmatrix}
-10&11&13&14\\11&12&14&15\\13&14&16&17\\14&15&17&18
-\end{bmatrix}.
-$$
-
-Flattening the filter in that same channel-first order gives
-$k=[1,2,3,4,5,6,7,8]^\mathsf{T}$. The first dot product contains two
-channel contributions:
-
-$$
-\begin{aligned}
-y_{0,0}
-&=(1\cdot1+2\cdot2+4\cdot3+5\cdot4)\\
-&\quad +(10\cdot5+11\cdot6\\
-&\qquad +13\cdot7+14\cdot8)\\
-&=37+319=356.
-\end{aligned}
-$$
-
-The other rows give $47+345=392$, $67+397=464$ and $77+423=500$.
-Reshaping $Pk$ by the window order produces the map
-
-$$
-Y=\begin{bmatrix}356&392\\464&500\end{bmatrix}.
-$$
-
-The previous example and
-[PyTorch Unfold](https://docs.pytorch.org/docs/2.14/generated/torch.nn.Unfold.html)
-place windows in columns. For this input, `F.unfold` returns $[1,8,4]$;
-removing the batch axis and transposing gives Harvard's $P$ of shape $[4,8]$.
-Thus `flat_weights @ columns` and `window_rows @ filter_vector` use the same
-dot products. An implementation must keep the window, channel and kernel
-orders consistent on both operands.
-
-```python
-harvard_input = torch.arange(1, 19, dtype=torch.float64).reshape(1, 2, 3, 3)
-harvard_filter = torch.arange(1, 9, dtype=torch.float64).reshape(1, 2, 2, 2)
-harvard_rows = torch.tensor([
-    [1., 2., 4., 5., 10., 11., 13., 14.],
-    [2., 3., 5., 6., 11., 12., 14., 15.],
-    [4., 5., 7., 8., 13., 14., 16., 17.],
-    [5., 6., 8., 9., 14., 15., 17., 18.]
-], dtype=torch.float64)
-harvard_columns = F.unfold(harvard_input, kernel_size=2)
-assert harvard_columns.shape == (1, 8, 4)
-torch.testing.assert_close(harvard_columns[0].T, harvard_rows)
-harvard_values = harvard_rows @ harvard_filter.flatten()
-torch.testing.assert_close(harvard_values,
-                           torch.tensor([356., 392., 464., 500.], dtype=torch.float64))
-torch.testing.assert_close(harvard_values.reshape(1, 1, 2, 2),
-                           F.conv2d(harvard_input, harvard_filter))
-print(harvard_rows.shape, harvard_values.reshape(2, 2))
-```
-
-There are 32 stored window entries instead of 18 input values. Each channel's
-center appears in four rows; a corner appears in only one. This duplication
-explains the extra storage of a fully materialized window matrix. The
-identity above does not prescribe a convolution implementation or establish
-a speedup: a kernel can generate tiles as needed instead of storing the
-entire matrix. No timing measurement is made in this example.
-<!-- END REVIEW: Harvard im2row 2026-10-27 -->
-
-Число умножений и сложений с накоплением (MAC) для обычной свёртки без смещений:
-
-$$
-\mathrm{MAC}
-=B\,H_{\mathrm{out}}W_{\mathrm{out}}
-C_{\mathrm{out}}C_{\mathrm{in}}k_hk_w.
-$$
-
-Если умножение и сложение считают двумя FLOP, арифметический объём примерно
-вдвое больше. Это соглашение нужно указывать при сравнении оценок.
-
-Общие веса сокращают число параметров, но не число применений ядра.
-Кроме того, явная матрица окон дублирует пиксели из перекрывающихся областей.
-В нашем примере 18 входных чисел превращаются в 32 числа матрицы окон.
-Поэтому тождество с матричным умножением само по себе не означает, что
-материализация im2col — самый быстрый или экономный по памяти алгоритм.
-
-<a id="lenet-5"></a>
-
-## LeNet: полный проход изображения через сеть
-
-После двух блоков «свёртка — нелинейность — pooling» карта разворачивается
-в вектор и передаётся классификатору. В учебной реализации
-[D2L, LeNet](https://d2l.ai/chapter_convolutional-neural-networks/lenet.html)
-первый фильтр $5\times5$ с padding 2 сохраняет размер $28\times28$ и даёт
-шесть каналов. Pooling уменьшает его до $14\times14$. Вторая свёртка без
-padding даёт $16\times10\times10$, второй pooling — $16\times5\times5$.
-После flatten на каждый пример приходится 400 чисел.
-
-![[00 Учебник/Assets/Figures/curated/d2l/lenet.svg|Последовательность слоёв учебной LeNet]]
-
-*Учебная LeNet из D2L: две свёртки, pooling и классификатор. Это адаптация
-исторической сети, а не точное воспроизведение всех деталей LeNet-5 1998 года.
-Aston Zhang и соавторы, [D2L, LeNet](https://d2l.ai/chapter_convolutional-neural-networks/lenet.html),
-[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
-
-Ниже воспроизведена последовательность D2L с явно заданными входными размерами
-вместо Lazy-модулей. Последний слой возвращает десять logits.
-`cross_entropy` сама вычисляет log-softmax; дополнительная softmax перед
-потерей не нужна. Для получения вероятностей при прогнозе можно применить
-softmax к logits отдельно. D2L заменяет этим способом исторический
-гауссовский выходной слой.
-
-```python
-torch.manual_seed(26)
-lenet = nn.Sequential(
-    nn.Conv2d(1, 6, 5, padding=2), nn.Sigmoid(),
-    nn.AvgPool2d(2, stride=2),
-    nn.Conv2d(6, 16, 5), nn.Sigmoid(),
-    nn.AvgPool2d(2, stride=2), nn.Flatten(),
-    nn.Linear(400, 120), nn.Sigmoid(),
-    nn.Linear(120, 84), nn.Sigmoid(),
-    nn.Linear(84, 10)
-).double()
-for layer in lenet:
-    if isinstance(layer, (nn.Conv2d, nn.Linear)):
-        nn.init.xavier_uniform_(layer.weight)
-lenet_input = torch.randn(4, 1, 28, 28, dtype=torch.float64)
-with torch.no_grad():
-    state = lenet_input
-    lenet_shapes = []
-    for layer in lenet:
-        state = layer(state)
-        lenet_shapes.append(tuple(state.shape))
-assert lenet_shapes[5] == (4, 16, 5, 5)
-assert lenet_shapes[6] == (4, 400) and lenet_shapes[-1] == (4, 10)
-assert sum(p.numel() for p in lenet.parameters()) == 61706
-
-lenet_optimizer = torch.optim.SGD(lenet.parameters(), lr=.1)
-before_first_filter = lenet[0].weight.detach().clone()
-lenet_optimizer.zero_grad()
-classification_loss = F.cross_entropy(lenet(lenet_input), torch.tensor([0, 1, 2, 3]))
-classification_loss.backward()
-assert all(p.grad is not None and torch.isfinite(p.grad).all() for p in lenet.parameters())
-lenet_optimizer.step()
-assert not torch.equal(before_first_filter, lenet[0].weight)
-print(lenet_shapes, classification_loss.item())
-```
-
-Метки в этом запуске назначены четырём случайным входам. Проверка показывает
-передачу форм, вычисление потери и обновление первого фильтра, но не качество
-распознавания и не результат обучения на MNIST. Проверочную точность получают
-после обучения на настоящих данных с отдельной проверочной выборкой.
-
-## AlexNet, VGG и переход к глубине
-
-В AlexNet, победившей в ImageNet 2012, пять свёрточных слоёв соединены с тремя
-полносвязными. Вместо sigmoid используются ReLU, в большой полносвязной части —
-dropout, а при обучении — преобразования изображений. Сеть обучалась на GPU.
-[D2L, AlexNet](https://d2l.ai/chapter_convolutional-modern/alexnet.html)
-сопоставляет этот переход с LeNet и отдельно описывает данные, нелинейности
-и архитектуру.
-
-Большая полносвязная часть может содержать основную долю параметров.
-Например, соединение карты $[256,6,6]$ со слоем ширины 4096 требует
-$9216\cdot4096=37\,748\,736$ весов, не считая смещений.
-Это около 144 MiB только для весов float32; градиенты, состояния оптимизатора
-и активации занимают дополнительную память.
-
-VGG группирует несколько свёрток $3\times3$ с ReLU и padding 1 перед одним
-pooling. Пространственное разрешение сохраняется внутри группы и уменьшается
-на её выходе. Это позволяет добавлять нелинейные слои, не уменьшая карту после
-каждой свёртки.
-
-![[00 Учебник/Assets/Figures/curated/cnn-2026-10-26/vgg.svg|Сравнение AlexNet и повторяемых блоков VGG]]
-
-*Слева отдельные слои учебной AlexNet, справа повторяемые блоки VGG. Обозначение
-повтора относится к группе операций, а не к одному общему набору весов.
-Aston Zhang и соавторы, [D2L, Networks Using Blocks](https://d2l.ai/chapter_convolutional-modern/vgg.html),
-[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
-
-В левой части исходного рисунка последняя свёртка AlexNet подписана как
-384 канала, тогда как код AlexNet в D2L задаёт для неё 256. Для расчёта
-полносвязной части выше использована форма из кода; рисунок сохранён без
-изменения авторских подписей.
-
-При постоянном числе каналов $C$ два слоя $3\times3$ содержат $18C^2$ весов
-против $25C^2$ у одного слоя $5\times5$, без смещений.
-Теоретическая область восприятия в обоих случаях — $5\times5$.
-Но два слоя с промежуточной ReLU не эквивалентны одному линейному фильтру:
-их ответ зависит от того, какие промежуточные значения прошли через ReLU.
-
-Функция ниже — исходный PyTorch-блок D2L; английский код сохранён.
-Он создаёт новые параметры для каждого слоя, а не применяет один слой повторно.
-
-```python
-def vgg_block(num_convs, out_channels):
-    layers = []
-    for _ in range(num_convs):
-        layers.append(nn.LazyConv2d(out_channels, kernel_size=3, padding=1))
-        layers.append(nn.ReLU())
-    layers.append(nn.MaxPool2d(kernel_size=2,stride=2))
-    return nn.Sequential(*layers)
-
-small_vgg_block = vgg_block(2, 8).double()
-assert small_vgg_block(torch.ones(1, 3, 32, 32, dtype=X.dtype)).shape == (1, 8, 16, 16)
-assert sum(p.numel() for p in small_vgg_block.parameters()) == 808
-print(sum(p.numel() for p in small_vgg_block.parameters()))
-```
-
-### Почему глубина могла ухудшать обучение
-
-В экспериментах He и соавторов более глубокие обычные сети давали более высокую
-ошибку уже на обучающей выборке. Это наблюдение нельзя объяснить только
-переобучением, при котором обучение успешно, а перенос на новые данные плох.
-
-Если дополнительные слои реализуют тождественное преобразование, более глубокая
-сеть может повторить решение мелкой. Существование таких весов, однако, не
-обеспечивает их нахождение оптимизатором. ResNet меняет параметризацию блока:
-обучаемая ветвь предсказывает поправку к входу. Постановка и результаты
-сравнения приведены в [Deep Residual Learning, §§1 и 3](https://arxiv.org/abs/1512.03385).
-
-## ResNet
-
-Пусть желаемое преобразование блока — $H(x)$. При одинаковых формах входа и
-выхода вместо прямого приближения $H$ можно обучать
-$F(x)=H(x)-x$ и складывать результат со входом:
-
-$$
-z=x+F(x).
-$$
-
-Для $H(x)=x$ ветвь должна давать ноль. Она не обязана сама обучиться копировать
-все координаты входа. Это мотивирует residual-параметризацию, но не доказывает
-универсального преимущества для любого набора данных и режима обучения.
-
-В basic block исходной post-activation ResNet за сложением следует ReLU:
-$y=\operatorname{ReLU}(z)$. Ветвь имеет порядок
-`Conv 3×3 → BatchNorm → ReLU → Conv 3×3 → BatchNorm`.
-Между второй BatchNorm и сложением ReLU нет.
-
-![[00 Учебник/Assets/Figures/curated/initialization-normalization-2026-10-21/d2l-resnet-block.svg|Residual-блок без проекции и с проекцией]]
-
-*Слева shortcut сохраняет вход, справа свёртка $1\times1$ согласует его форму
-с основной ветвью. ReLU применяется после сложения. Aston Zhang и соавторы,
-[D2L, Residual Blocks](https://d2l.ai/chapter_convolutional-modern/resnet.html#residual-blocks),
-[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
-
-### Формы на двух ветвях
-
-При входе $[B,64,56,56]$ две свёртки с 64 выходными каналами, шагом 1 и
-padding 1 сохраняют форму. Shortcut передаёт вход без изменения.
-Складываются два тензора $[B,64,56,56]$.
-
-В первом блоке следующей группы первая свёртка имеет 128 выходных каналов
-и шаг 2: основная ветвь выдаёт $[B,128,28,28]$. Прежний вход прибавить к нему
-нельзя. В выбранной реализации D2L shortcut использует свёртку $1\times1$
-с 128 каналами и шагом 2. Она даёт ту же форму, но уже имеет обучаемые веса.
-Это вариант проекции; не все варианты исторической ResNet используют именно
-такое согласование.
-
-Ниже сохранён исходный класс D2L, включая Lazy-модули и английскую docstring.
-Его shortcut не содержит дополнительной BatchNorm. Сравнивая с другой
-библиотекой, нужно проверять эту деталь, bias и место шага в блоке.
-
-```python
-class Residual(nn.Module):  #@save
-    """The Residual block of ResNet models."""
-    def __init__(self, num_channels, use_1x1conv=False, strides=1):
-        super().__init__()
-        self.conv1 = nn.LazyConv2d(num_channels, kernel_size=3, padding=1,
-                                   stride=strides)
-        self.conv2 = nn.LazyConv2d(num_channels, kernel_size=3, padding=1)
-        if use_1x1conv:
-            self.conv3 = nn.LazyConv2d(num_channels, kernel_size=1,
-                                       stride=strides)
-        else:
-            self.conv3 = None
-        self.bn1 = nn.LazyBatchNorm2d()
-        self.bn2 = nn.LazyBatchNorm2d()
-
-    def forward(self, X):
-        Y = F.relu(self.bn1(self.conv1(X)))
-        Y = self.bn2(self.conv2(Y))
-        if self.conv3:
-            X = self.conv3(X)
-        Y += X
-        return F.relu(Y)
-
-same_block = Residual(64).double().eval()
-projected_block = Residual(128, use_1x1conv=True, strides=2).double().eval()
-block_input = torch.randn(1, 64, 56, 56, dtype=X.dtype)
-with torch.no_grad():
-    assert same_block(block_input).shape == (1, 64, 56, 56)
-    assert projected_block(block_input).shape == (1, 128, 28, 28)
-print(same_block.conv3, projected_block.conv3.weight.shape)
-```
-
-### Нулевой residual и градиент
-
-До последней ReLU якобиан блока равен $I+J_F(x)$. Слагаемое $I$ даёт
-отдельный путь производной, но не гарантирует ненулевой итог: например,
-для $F(x)=-x$ сумма равна нулю. После ReLU добавляется её маска.
-Поэтому утверждение «в residual-блоке градиент всегда проходит без изменений»
-неверно.
-
-Даже при $F=0$ весь post-activation блок возвращает $\operatorname{ReLU}(x)$,
-а не $x$ для произвольных отрицательных координат. Проверим это настоящим
-классом: обнулим коэффициенты и смещения последней BatchNorm ветви.
-Нормализация переведена в eval, чтобы использовать фиксированное состояние.
-
-```python
-zero_block = Residual(3).double().eval()
-zero_input = torch.linspace(-1, 1, 108, dtype=X.dtype).reshape(1, 3, 6, 6).requires_grad_()
-zero_block(zero_input)  # Initialize lazy parameters.
-with torch.no_grad():
-    zero_block.bn2.weight.zero_()
-    zero_block.bn2.bias.zero_()
-zero_output = zero_block(zero_input)
-torch.testing.assert_close(zero_output, F.relu(zero_input))
-zero_gradient, = torch.autograd.grad(zero_output.sum(), zero_input)
-torch.testing.assert_close(zero_gradient, (zero_input > 0).to(X.dtype))
-print(zero_gradient.unique())
-```
-
-Pre-activation ResNet меняет порядок нормализации и нелинейностей.
-В более глубоких ResNet используются также bottleneck-блоки
-$1\times1 \to 3\times3 \to 1\times1$: сначала уменьшается число каналов для
-пространственной свёртки, затем восстанавливается. Эти конструкции нельзя
-считать тем же basic block только потому, что у них есть shortcut.
-
-### Сборка ResNet-18
-
-У ResNet-18 четыре группы по два basic block. Первый слой — свёртка
-$7\times7$ с шагом 2; затем max pooling с шагом 2.
-В следующих группах число каналов растёт от 64 до 512, а разрешение
-уменьшается. В конце global average pooling даёт по одному числу на канал,
-и полносвязный слой выдаёт logits классов.
-
-![[00 Учебник/Assets/Figures/curated/d2l/resnet18.svg|Повторение блоков в ResNet-18]]
-
-*Общая структура ResNet-18 из D2L. Два блока первой группы показаны отдельно;
-переход к новой группе с проекцией и следующий блок повторяются для трёх
-групп с растущим числом каналов. Aston Zhang и соавторы,
-[D2L, ResNet Model](https://d2l.ai/chapter_convolutional-modern/resnet.html#resnet-model),
-[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
-
-Код собирает те же группы с классом D2L. Здесь явно выбраны RGB-вход
-$224\times224$ и 1000 выходов, а не параметры задачи Fashion-MNIST из курса.
-Число 18 считает один начальный слой, 16 свёрток внутри восьми блоков
-и классификатор; дополнительные shortcut-проекции не включены в это название.
-
-```python
-def make_resnet18(num_classes=1000):
-    stages = [nn.Sequential(
-        nn.LazyConv2d(64, kernel_size=7, stride=2, padding=3),
-        nn.LazyBatchNorm2d(), nn.ReLU(),
-        nn.MaxPool2d(kernel_size=3, stride=2, padding=1))]
-    for stage_index, channels in enumerate([64, 128, 256, 512]):
-        blocks = []
-        for block_index in range(2):
-            transition = stage_index > 0 and block_index == 0
-            blocks.append(Residual(channels, use_1x1conv=transition,
-                                   strides=2 if transition else 1))
-        stages.append(nn.Sequential(*blocks))
-    stages.append(nn.Sequential(nn.AdaptiveAvgPool2d((1, 1)),
-                                nn.Flatten(), nn.LazyLinear(num_classes)))
-    return nn.Sequential(*stages)
-
-resnet18 = make_resnet18().eval()
-resnet_shapes = []
-with torch.no_grad():
-    state = torch.zeros(1, 3, 224, 224)
-    for stage in resnet18:
-        state = stage(state)
-        resnet_shapes.append(tuple(state.shape))
-assert resnet_shapes == [
-    (1, 64, 56, 56), (1, 64, 56, 56), (1, 128, 28, 28),
-    (1, 256, 14, 14), (1, 512, 7, 7), (1, 1000)]
-print(resnet_shapes)
-```
-
-Проверка выполняет один прямой проход случайно инициализированной сети.
-Она не воспроизводит обучение ImageNet и не измеряет производительность.
-
 <!-- BEGIN REVIEW: Winograd 2026-10-27 -->
+<a id="cnn-winograd"></a>
+
 ## Winograd: fewer multiplications for overlapping outputs
 
 Consider two adjacent outputs of a length-three filter:
@@ -1455,39 +1654,6 @@ the original algorithm and numerical discussion are in
 [Lavin and Gray, §§3–4](https://arxiv.org/abs/1509.09308v2).
 <!-- END REVIEW: Winograd 2026-10-27 -->
 
-<a id="связь-cnn-с-текстом-и-современными-моделями"></a>
-
-## Свёртки в последовательностях и связь с Transformer
-
-В одномерной свёртке пространственная ось заменяется временем или позицией
-токена. Для каждого положения применяется одно и то же ядро.
-При причинной свёртке окно не включает будущее; дополнение делают слева,
-а не симметрично. Dilation позволяет увеличивать охватываемый контекст без
-пропорционального увеличения числа весов; такой подход используется в
-[WaveNet](https://arxiv.org/abs/1609.03499).
-
-У свёртки коэффициенты смешивания внутри окна являются параметрами,
-одинаковыми для всех примеров. В self-attention веса между позициями
-вычисляются из текущих представлений. Общая residual-структура встречается
-в обоих случаях, но она не делает операции смешивания одинаковыми.
-Переход к patch embeddings и vision-энкодерам разобран отдельно в разделе VLM.
-
-<a id="краткие-итоги"></a>
-
-## Проверка собственной реализации
-
-При переносе блока сначала проверяют порядок осей, число входных и выходных
-каналов, правило padding, stride и фактические формы на обеих ветвях.
-Для одной маленькой матрицы рассчитывают выход вручную и сравнивают с API.
-Затем проверяют производные: общие веса должны собирать вклады всех окон,
-а перекрывающиеся окна — складывать производные по входу.
-
-Сравнение архитектур требует отдельно фиксировать число параметров,
-размеры активаций и арифметический объём. Сокращение одного из них не
-гарантирует сокращение остальных или ускорение на конкретном устройстве.
-Качество классификации проверяют после обучения на отдельной выборке,
-а не по успешному прохождению теста форм.
-
 ## Источники
 
 - Aston Zhang, Zachary Lipton, Mu Li, Alexander Smola, [Dive into Deep Learning: Convolutional Neural Networks](https://d2l.ai/chapter_convolutional-neural-networks/index.html):
@@ -1512,9 +1678,3 @@ the original algorithm and numerical discussion are in
 - [[05 Источники/Courses/Harvard ML Systems/tinytorch/09_convolutions|TinyTorch 09 — полный исходный модуль о свёртках]]:
   самостоятельная реализация и анализ пространственных операций.
 - [[05 Источники/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-convolutional-neural-networks.pdf|Stanford CS230 — Convolutional Neural Networks Cheatsheet]].
-
-[[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE|Глава об автоэнкодерах]]
-в отдельном модуле меняет обучающую цель: сеть восстанавливает вход вместо
-предсказания класса. Основной курс продолжается
-[[00 Учебник/02 Представление текста и токенизация/01 Представление текста числами|представлением текста числами]]:
-как получить числовой вход для модели, если исходные данные — слова.

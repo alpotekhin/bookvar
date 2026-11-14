@@ -2,7 +2,7 @@
 title: "Benchmarking, SLO и эксплуатация LLM inference"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-20
+last_updated: 2026-11-11
 last_verified: 2026-10-20
 source_unit_id:
   - lecture-10-section-4-understanding-the-inference-workload
@@ -13,6 +13,7 @@ primary_sources:
   - https://github.com/vllm-project/vllm/blob/b8e9001bf9568c801985889deff34d3b9fe6d0b0/vllm/benchmarks/serve.py
   - https://docs.nvidia.com/aiperf/v0.13.0/reference/ai-perf-metrics-reference
   - https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf
+  - https://arxiv.org/html/2401.09670v3#S1.F1
   - https://sre.google/workbook/alerting-on-slos/
 ---
 
@@ -66,12 +67,15 @@ chat template, извлечение документов, сетевой мар�
 
 ## Временная шкала одного запроса
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg|Сверху очередь, prefill и выбор первого токена, затем отдельные проходы генерации. Снизу первый токен приходит отдельно, остальные буферизуются в одном фрагменте.]]
 
-*Aleksa Gordić, [Inside vLLM](https://www.aleksagordic.com/blog/vllm),
-[исходное изображение](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/latency_diagram.png).
-Стрелки отмечают отправку запроса и получение токенов пользователем.
-TTFT заканчивается на первом токене, ITL относится к соседним токенам.*
+*Vijay Janapa Reddi и соавторы, [Harvard ML Systems, т. III, рис. 5: First-Token Accounting](https://harvard-edge.github.io/cs249r_book_dev/vol3/02_foundation_model/02_foundation_model.html#fig-vol3-first-token-accounting), [исходный SVG](https://raw.githubusercontent.com/harvard-edge/cs249r_book_dev/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/images/svg/first_token_accounting.svg), [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Рисунок без изменений; расстояния на схеме не соответствуют измеренным временам.*
+
+Верхняя дорожка относится к серверу, нижняя — к клиенту.
+Между `Send` и `Token 1` проходят очередь, prefill, выбор токена
+и его доставка. Скобка `Server prefill` охватывает только вычисление
+до начальных логитов. Остальные токены на рисунке приходят одним
+событием: для них нет отдельных клиентских меток. [Шкала из статьи Inside vLLM](https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/latency_diagram.png) показывает, где на клиенте начинаются и заканчиваются TTFT, ITL и E2E ([статья](https://www.aleksagordic.com/blog/vllm)).
 
 Пусть запрос отправлен в момент $t_0$, а выходные токены получены в моменты
 $t_1,\ldots,t_O$. Тогда время до первого токена и интервалы между токенами равны
@@ -129,11 +133,27 @@ assert request_metrics(0., [250.])['tpot'] is None
 в хранилище и другая последующая работа могут закончиться позже. Их время
 добавляют в отдельно определённую расширенную задержку.
 
+<a id="stream-events-vs-token-latency"></a>
+
 ### Событие потока и токен не всегда совпадают
 
 В SSE-потоке бывают метаданные роли, keepalive, статистика usage, фрагменты
 reasoning и полезный текст. Одно содержательное событие может включать несколько
 токенов. Сетевой пакет, SSE-событие и токен модели являются разными единицами.
+
+Сравним два потока по четыре токена. Во втором первый токен
+приходит отдельно, как на рисунке, а остальные три — вместе.
+
+| Токенов в событии | Метки клиента, мс | Паузы между событиями, мс |
+| --- | --- | --- |
+| 1, 1, 1, 1 | 200, 260, 320, 380 | 60, 60, 60 |
+| 1, 3 | 200, 380 | 180 |
+
+У обоих потоков TTFT равен 200 мс, E2E — 380 мс, а среднее
+на токен по двум крайним меткам составляет $(380-200)/(4-1)=60$ мс.
+По нему нельзя отличить ровную выдачу от паузы в 180 мс. Во втором
+случае клиент не знает, когда сервер сгенерировал три токена, и по
+одному событию не может определить, почему их доставили вместе.
 
 Предположим, шесть токенов получены тремя пачками по два в моменты 200, 300
 и 500 ms. Между пачками наблюдаются паузы 100 и 200 ms. Времён выдачи отдельных
@@ -261,12 +281,13 @@ assert summary == {
 `request_goodput` конкретного запуска и максимальную допустимую частоту
 DistServe нельзя без пояснения подставлять друг вместо друга.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/distserve-figure1-original.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/distserve-original-teaser.svg|DistServe: P90 TTFT и TPOT при совместном и раздельном исполнении фаз]]
 
-*Yinmin Zhong et al., [DistServe, Figure 1, PDF p.2](https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf#page=2).
-Оригинальные панели и подпись из PDF. Нагрузка авторов: 13B-модель,
-A100 80GB, вход 512 и выход 64 токена. Пунктирные границы относятся к P90
-TTFT 0.4 s и TPOT 0.04 s. Это историческое измерение, не результат Bookvar.*
+*Yinmin Zhong et al., [DistServe, рис. 1](https://arxiv.org/html/2401.09670v3#S1.F1),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+Авторский SVG без изменений. В опыте модель 13B обслуживала на одной
+A100 80 GB запросы с 512 входными и 64 выходными токенами. Сверху P90 TTFT
+с границей 0,4 с, снизу P90 TPOT с границей 0,04 с.*
 
 Синяя кривая общего исполнения пересекает ограничение TPOT примерно при
 1.6 запроса/с, раньше ограничения TTFT. Оранжевая и зелёная кривые относятся

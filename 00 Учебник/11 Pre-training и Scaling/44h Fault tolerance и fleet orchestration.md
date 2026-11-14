@@ -2,11 +2,107 @@
 title: Отказоустойчивость и управление вычислительным кластером
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-23
-last_verified: 2026-10-23
+last_updated: 2026-11-05
+last_verified: 2026-11-05
+reference_terms:
+  - anchor: fault-group-dependency
+    label: "Почему один отказ останавливает всю коллективную группу"
+    label_en: "Why one failure stops the collective group"
+  - anchor: fault-job-mtbf
+    label: "MTBF всего запуска и независимость отказов"
+    label_en: "Whole-job MTBF and independent failures"
+  - anchor: fault-failure-domains
+    label: "Общие причины отказов и размещение копий"
+    label_en: "Shared failure domains and checkpoint replicas"
+  - anchor: fault-silent-corruption
+    label: "Падение, зависание, NaN и silent corruption"
+    label_en: "Crashes, hangs, NaNs and silent corruption"
+  - anchor: fault-checksum-limits
+    label: "Контрольная сумма и корректность сохранённых весов"
+    label_en: "Checksums versus correct saved weights"
+  - anchor: fault-progress-detection
+    label: "Heartbeat, timeout и наблюдаемый прогресс"
+    label_en: "Heartbeat, timeout and observed training progress"
+  - anchor: fault-straggler-replacement
+    label: "Straggler: когда окупается замена участника"
+    label_en: "When replacing a straggler pays off"
+  - anchor: fault-young-cost
+    label: "Young: вывод интервала из стоимости записи и повтора"
+    label_en: "Deriving the Young interval from save and replay costs"
+  - anchor: fault-young-time-denominator
+    label: "Время вычислений и доля прошедшего времени"
+    label_en: "Compute time versus elapsed-time fractions"
+  - anchor: fault-daly-interval
+    label: "Daly: compute-only интервал и уточнённое приближение"
+    label_en: "Daly compute-only intervals and the higher-order estimate"
+  - anchor: fault-async-interval-limits
+    label: "Почему пауза async-save не равна стоимости сохранения"
+    label_en: "Why an async-save pause is not the whole checkpoint cost"
+  - anchor: fault-torchrun-contract
+    label: "Torchrun: перезапуск всех workers и нестабильные ranks"
+    label_en: "Torchrun full-worker restarts and unstable ranks"
+  - anchor: fault-recovery-sequence
+    label: "Новая попытка, защита записи и контрольный шаг"
+    label_en: "New attempts, writer fencing and a verification step"
+  - anchor: fault-recovery-levels
+    label: "Восстановить веса, алгоритм или численную траекторию"
+    label_en: "Restoring weights, the algorithm or the numerical trajectory"
+  - anchor: fault-consumed-data-cursor
+    label: "Курсор потребления данных и prefetch"
+    label_en: "Consumed-data cursors versus prefetch"
+  - anchor: fault-next-step-example
+    label: "Пример Adam/dropout: следующий шаг и пропущенное состояние"
+    label_en: "Adam/dropout next-step and omitted-state example"
+  - anchor: fault-world-size-batch
+    label: "Новый world size, глобальный batch и нормировка"
+    label_en: "Changed world size, global batch and normalization"
+  - anchor: fault-launcher-test
+    label: "Torchrun/DDP/DCP: намеренный выход и реальное восстановление"
+    label_en: "Torchrun/DDP/DCP injected exit and actual recovery"
+  - anchor: fault-local-rendezvous
+    label: "Локальный rendezvous, loopback и bootstrap TCPStore"
+    label_en: "Local rendezvous, loopback and bootstrap TCPStore"
+  - anchor: fault-resource-fragmentation
+    label: "Фрагментация GPU и совместные ограничения CPU/памяти"
+    label_en: "GPU fragmentation and joint CPU/memory constraints"
+  - anchor: fault-gang-scheduling
+    label: "Совместное выделение ресурсов и взаимное ожидание"
+    label_en: "Gang allocation and circular resource waits"
+  - anchor: fault-slurm-gang-meaning
+    label: "Gang scheduling в Slurm: другое значение термина"
+    label_en: "The distinct Slurm meaning of gang scheduling"
+  - anchor: fault-backfill
+    label: "Backfill и время освобождения ресурсов"
+    label_en: "Backfill and resource-release times"
+  - anchor: fault-priority-quota-fairshare
+    label: "Приоритет, квота и fair-share"
+    label_en: "Priority, quota and fair-share"
+  - anchor: fault-preemption
+    label: "Вытеснение и время полной записи checkpoint"
+    label_en: "Preemption and the full checkpoint-write deadline"
+  - anchor: fault-topology-placement
+    label: "Размещение групп TP/EP/PP с учётом сети"
+    label_en: "Network-aware placement of TP/EP/PP groups"
+  - anchor: fault-required-preferred
+    label: "Kueue: обязательная и предпочтительная топология"
+    label_en: "Kueue required and preferred topology"
+  - anchor: fault-wait-versus-start
+    label: "Ждать компактного размещения или стартовать сразу"
+    label_en: "Waiting for compact placement versus starting now"
+  - anchor: fault-elastic-expansion
+    label: "Окупаемость расширения с сохранением и прогревом"
+    label_en: "Elastic expansion including save and warmup costs"
+  - anchor: fault-controller-training-contract
+    label: "Планировщик, контроллер и программа обучения"
+    label_en: "Scheduler, controller and training-program responsibilities"
+  - anchor: fault-recovery-runbook
+    label: "Runbook восстановления и границы испытаний"
+    label_en: "Recovery runbook and test boundaries"
 ---
 
 # Отказоустойчивость и управление вычислительным кластером
+
+<a id="fault-group-dependency"></a>
 
 Предположим, что модель обучается на 1024 GPU. Один процесс перестал отвечать
 во время AllReduce. Остальные могут быть исправны, но закончить эту операцию
@@ -20,6 +116,8 @@ last_verified: 2026-10-23
 checkpoint, выделение ресурсов, запуск процессов и проверка восстановления.
 Даже свободных GPU может быть достаточно по количеству, но недостаточно
 для нужного размещения связанных групп.
+
+<a id="fault-job-mtbf"></a>
 
 ## Почему большой запуск прерывается чаще
 
@@ -61,6 +159,8 @@ $$
 прерываний относится к этому запуску, а не к произвольному кластеру.
 [Llama 3, §3.3.4](https://arxiv.org/html/2407.21783v3#S3.SS3.SSS4).
 
+<a id="fault-failure-domains"></a>
+
 ## Домены отказа и silent corruption
 
 Домен отказа — группа компонентов, которую может вывести из строя одна
@@ -68,7 +168,7 @@ $$
 у серверов одной стойки могут быть общие коммутатор и питание. Поэтому две
 копии данных не обязательно дают две независимые возможности восстановления.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/failure-domains.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/failure-domains.svg|Общие компоненты и иерархия доменов отказа]]
 
 *Иерархия доменов отказа в Harvard ML Systems Book. Числа MTBF — условные
 значения авторского примера, не универсальные показатели оборудования.
@@ -82,6 +182,8 @@ CC BY-NC-SA 4.0.*
 обучение. Локальный NVMe ускоряет восстановление после падения процесса,
 но не поможет, если недоступен весь сервер. Нужна копия вне того домена
 отказа, от которого мы хотим защититься.
+
+<a id="fault-silent-corruption"></a>
 
 ### Падение, зависание и неверный результат
 
@@ -100,7 +202,7 @@ CC BY-NC-SA 4.0.*
 неисправность GPU. Его могут вызвать данные, слишком большой шаг обучения
 или ошибка реализации.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fault-tolerance-review-2026-10/failure-types.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fault-tolerance-review-2026-10/failure-types.svg|Остановившийся участник и участник с неверным результатом]]
 
 *Слева участник перестал отвечать, справа продолжает отправлять неверный
 результат. Схема Harvard ML Systems Book показывает различие видов отказа,
@@ -117,6 +219,8 @@ CC BY-NC-SA 4.0.*
 повтора нужно с учётом формата чисел, порядка редукций и случайных операций,
 иначе нормальные расхождения будут приняты за отказ.
 
+<a id="fault-checksum-limits"></a>
+
 Если файл испортился **после** вычисления его контрольной суммы, проверка
 суммы это обнаружит. Если в файл уже были записаны неверные веса и для них
 посчитали правильную сумму, проверка пройдёт. Целостность хранения не равна
@@ -128,6 +232,8 @@ CC BY-NC-SA 4.0.*
 корректности и контрольного вычисления. Ни одна конечная серия проверок не
 доказывает отсутствие всех ошибок, но она отделяет проверенное состояние
 от просто существующего файла.
+
+<a id="fault-progress-detection"></a>
 
 ### Как обнаруживать остановку обучения
 
@@ -144,6 +250,8 @@ CC BY-NC-SA 4.0.*
 отдельно учитывая первый шаг, компиляцию и сохранение. Heartbeat процесса
 и timeout коллективной операции измеряют разные вещи; увеличение одного
 не устраняет причину срабатывания другого.
+
+<a id="fault-straggler-replacement"></a>
 
 ### Медленный участник и цена его замены
 
@@ -186,6 +294,8 @@ $$
 ради экономии 180 с нельзя: сначала нужна проверка корректности.
 [Harvard: Distinguishing stragglers from failures](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fault_tolerance/fault_tolerance.qmd#sec-fault-tolerance-reliability-reliability-failure-detection-recovery-0f54).
 
+<a id="fault-young-cost"></a>
+
 ## Интервал Young–Daly
 
 Частые сохранения уменьшают потерю работы после отказа, но отнимают время
@@ -225,11 +335,13 @@ $$
 | 53.7 минуты | 3.73% + 3.73% | 7.45% |
 | 3 часа | 1.11% + 12.50% | 13.61% |
 
+<a id="fault-young-time-denominator"></a>
+
 Это расходы относительно полезного времени, а не непосредственно доля
 потерянного астрономического времени. Две минуты записи после каждых десяти
 минут вычислений — 20% от вычисления, но $2/12=16.7\%$ безотказного цикла.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fault-tolerance-2026-10-23/harvard-checkpoint-tradeoff.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fault-tolerance-2026-10-23/harvard-checkpoint-tradeoff.png|Стоимость checkpoint и повторной работы в модели Young]]
 
 *Синяя кривая — стоимость записей, красная — ожидаемый повтор вычислений,
 зелёная — их сумма. Здесь условия исходного рисунка другие:
@@ -239,6 +351,8 @@ $C=2.5$ минуты, $M=120$ минут; минимум около 24.5 мин�
 CC BY-NC-SA 4.0. Полный исходный PNG. В коде рисунка по вертикали вычисляется
 именно $C/T+T/(2M)$, хотя ось названа «Fraction of Total Time Wasted»:
 это приближённые расходы, а не точная доля прошедшего времени.*
+
+<a id="fault-daly-interval"></a>
 
 ### Что уточняет Daly
 
@@ -259,6 +373,8 @@ $$
 в статье оно приведено для $C<M/2$. Нельзя сравнивать интервалы, если один
 включает запись, а другой нет.
 [Daly, 2006, pp. 304, 312, формулы (37)–(38)](https://graal.ens-lyon.fr/~lmarchal/scheduling/articles/daly_checkpoint.pdf).
+
+<a id="fault-async-interval-limits"></a>
 
 ### Когда этой формулы недостаточно
 
@@ -281,6 +397,8 @@ $$
 измеряют по отдельности. Ускорение загрузки с минуты до тридцати секунд мало
 меняет ситуацию, если свободные узлы приходится ждать час.
 
+<a id="fault-torchrun-contract"></a>
+
 ## Elastic recovery
 
 Термин *elastic* означает, что запуск допускает изменение состава участников
@@ -294,6 +412,8 @@ worker-процессов: оставшиеся участники тоже за
 загрузить checkpoint. Номера `RANK` не стабильны; при разрешённом изменении
 размера группы меняется и `WORLD_SIZE`.
 [Контракт PyTorch 2.14](https://docs.pytorch.org/docs/2.14/elastic/run.html#important-notices).
+
+<a id="fault-recovery-sequence"></a>
 
 ### Последовательность восстановления
 
@@ -319,6 +439,8 @@ worker-процессов: оставшиеся участники тоже за
 оставшегося состояния, заменить недостающие части и пересоздать обмены.
 Это не свойство обычного DDP и не поведение `torchrun`, описанное выше.
 
+<a id="fault-recovery-levels"></a>
+
 ### Что значит «продолжить с того же места»
 
 Есть как минимум три разных требования.
@@ -339,12 +461,16 @@ worker-процессов: оставшиеся участники тоже за
 При сохранении в середине накопления градиентов нужно сохранить также
 промежуточные градиенты и позицию микробатча. Один счётчик шага их не заменяет.
 
+<a id="fault-consumed-data-cursor"></a>
+
 Позиция чтения тоже неоднозначна. Загрузчик мог получить несколько батчей
 вперёд, хотя обучение их ещё не использовало. Если сохранить курсор чтения
 вместо курсора **потребления**, после перезапуска эти батчи будут пропущены.
 Для потоковых данных и нескольких загрузчиков требуется явно определить,
 какие записи относятся к завершённым обновлениям и как собрать следующую
 порцию данных.
+
+<a id="fault-next-step-example"></a>
 
 ### Небольшая проверка: восстановились веса или обучение?
 
@@ -432,6 +558,8 @@ print("no cursor:", same_step(reference, resume(data_cursor=False)))
 Проверять нужно те из них, которые влияют на данные и вычисление, а не
 ограничиваться `manual_seed` при каждом старте.
 
+<a id="fault-world-size-batch"></a>
+
 ### Изменение числа устройств
 
 Переразбиение тензоров checkpoint решает задачу размещения состояния, но
@@ -459,6 +587,8 @@ $a$ — число микробатчей до обновления. При $D=8
 затрагивает также разбиение модели и расписание. Допустимые конфигурации
 проверяют заранее: диапазон числа процессов сам по себе не делает модель
 эластичной.
+
+<a id="fault-launcher-test"></a>
 
 ### Проверка перезапуска всей группы
 
@@ -589,6 +719,8 @@ GLOO_SOCKET_IFNAME=lo0 TORCH_DISABLE_SHARE_RDZV_TCP_STORE=1 torchrun \
   recovery_example.py /tmp/bookvar-recovery-example
 ~~~
 
+<a id="fault-local-rendezvous"></a>
+
 Для однокомпьютерного теста Gloo явно выбран loopback-интерфейс:
 на macOS это lo0, на Linux обычно lo. В последнем случае значение
 GLOO_SOCKET_IFNAME нужно заменить на lo. Это настройка локального
@@ -626,6 +758,8 @@ store каждой попытки. Это не меняет механизм в�
 завершённые обновления и время до окончания задачи, а не только занятость
 устройств.
 
+<a id="fault-resource-fragmentation"></a>
+
 ### Свободная память, свободные GPU и фрагментация
 
 Пусть в сервере четыре свободных GPU, но только 16 свободных ядер CPU.
@@ -642,7 +776,7 @@ store каждой попытки. Это не меняет механизм в�
 по четыре GPU, результат мог бы быть другим: ограничение на размещение
 принадлежит конкретному запуску, а не всем GPU-программам.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fault-tolerance-2026-10-23/harvard-cluster-fragmentation.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fault-tolerance-2026-10-23/harvard-cluster-fragmentation.png|19 свободных GPU без одного полностью свободного узла]]
 
 *Строки — восемь серверов, столбцы — восемь GPU каждого сервера;
 светло-серые клетки свободны. Источник: Harvard ML Systems Book,
@@ -659,6 +793,8 @@ CC BY-NC-SA 4.0. Полный исходный PNG. Числа описываю�
 добавить ещё один процесс: его пиковые требования к HBM всё равно
 должны помещаться, либо нужен явно настроенный механизм разделения.
 
+<a id="fault-gang-scheduling"></a>
+
 ### Совместное выделение ресурсов
 
 Рассмотрим кластер из восьми GPU и два запуска, каждому из которых нужны
@@ -667,7 +803,7 @@ CC BY-NC-SA 4.0. Полный исходный PNG. Числа описываю�
 одному запуску предоставляют весь набор, а другой ждёт, не удерживая половину.
 В ML-планировщиках этот принцип часто называют *gang scheduling*.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fault-tolerance-review-2026-10/gang-deadlock.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/fault-tolerance-review-2026-10/gang-deadlock.svg|Частичное удержание ресурсов и совместное выделение всей группы]]
 
 *Слева запуски удерживают часть ресурсов и ждут друг друга; справа ресурсы
 выделяются запуску целиком. Схема Harvard ML Systems Book,
@@ -679,10 +815,14 @@ CC BY-NC-SA 4.0. Пример предполагает фиксированны�
 ожидающей восемь участников. Допуск по ресурсам ещё не доказывает готовность
 всех процессов: возможны ошибки запуска, хранилища или сети.
 
+<a id="fault-slurm-gang-meaning"></a>
+
 Терминология зависит от системы. В Slurm отдельный механизм *gang scheduling*
 описывает разделение времени между заданиями; его не следует автоматически
 приравнивать к приведённому принципу all-or-nothing выделения.
 [Документация Slurm](https://slurm.schedmd.com/gang_scheduling.html).
+
+<a id="fault-backfill"></a>
 
 ### Очередь, backfill и вытеснение
 
@@ -694,10 +834,14 @@ CC BY-NC-SA 4.0. Пример предполагает фиксированны�
 ресурсы освободятся.
 [Backfill в Slurm](https://slurm.schedmd.com/sched_config.html).
 
+<a id="fault-priority-quota-fairshare"></a>
+
 Приоритет и квота отвечают на другие вопросы. Приоритет определяет порядок
 рассмотрения, квота ограничивает потребление, а fair-share учитывает историю
 распределения ресурсов между пользователями или командами. Ни одна из этих
 политик сама по себе не гарантирует, что нужные GPU окажутся рядом.
+
+<a id="fault-preemption"></a>
 
 Вытеснение имеет цену: потерянные шаги, запись, повторное ожидание и загрузка.
 Если система предупреждает о завершении, надо сравнить оставшееся время
@@ -705,9 +849,11 @@ CC BY-NC-SA 4.0. Пример предполагает фиксированны�
 запись недостаточно. Если предупреждения нет или запись не успевает,
 восстановление опирается на предыдущее завершённое поколение.
 
+<a id="fault-topology-placement"></a>
+
 ### Размещение с учётом сети
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/topology-placement.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/topology-placement.svg|Распределённое и компактное размещение связанных процессов]]
 
 *Распределённое по стойкам и компактное размещение в Harvard ML Systems Book.
 Подписи пропускной способности — условия примера, не универсальные скорости
@@ -727,11 +873,15 @@ CC BY-NC-SA 4.0.*
 Нужны измерения шага и коллективов, а не универсальное правило «между стойками
 всегда в четыре раза медленнее».
 
+<a id="fault-required-preferred"></a>
+
 В Kueue Topology-Aware Scheduling различаются обязательное и предпочтительное
 размещение. Первое требует поместить набор процессов в заданный домен;
 второе позволяет перейти к более широкому домену, если компактное размещение
 не получается. Выбор означает компромисс между ожиданием и качеством размещения.
 [Документация Kueue](https://kueue.sigs.k8s.io/docs/concepts/topology_aware_scheduling/#user-facing-apis).
+
+<a id="fault-wait-versus-start"></a>
 
 ### Расчёт решения
 
@@ -754,6 +904,8 @@ $$
 общего кластера — учесть и другие задания очереди.
 
 <span id="где-проходит-граница-ответственности"></span>
+
+<a id="fault-elastic-expansion"></a>
 
 ### Когда выгодно расширять запуск
 
@@ -782,6 +934,8 @@ $$
 сколько времени займут сохранение и прогрев или изменится ли сходимость.
 [Harvard: Elastic scaling policies](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fleet_orchestration/fleet_orchestration.qmd#sec-fleet-orchestration-elastic-policies).
 
+<a id="fault-controller-training-contract"></a>
+
 ### Планировщик, контроллер и программа обучения
 
 Slurm объединяет выделение ресурсов, очереди и запуск batch-заданий.
@@ -803,6 +957,8 @@ Slurm объединяет выделение ресурсов, очереди �
 сохранение, перезапуск и переразбиение состояния. Для решения нужны очередь,
 время подготовки, ожидаемый выигрыш скорости и стоимость перехода.
 Мгновенная загрузка GPU может быть одним из наблюдений, но не заменяет расчёт.
+
+<a id="fault-recovery-runbook"></a>
 
 ## Runbook проверки восстановления
 

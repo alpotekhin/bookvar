@@ -59,7 +59,9 @@ to their former samplers:
 We can also see in the example below that `SMOTEENN` tends to clean more
 noisy samples than `SMOTETomek`.
 
-[![Official imbalanced-learn figure: sphx_glr_plot_comparison_combine_001.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_comparison_combine_001.png)](https://imbalanced-learn.org/stable/auto_examples/combine/plot_comparison_combine.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_combine_001.png|Original imbalanced data before applying a combined sampler]]
+
+*Guillaume Lemaitre, [Compare sampler combining over- and under-sampling](https://imbalanced-learn.org/0.14/auto_examples/combine/plot_comparison_combine.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_comparison_combine_001.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 > [!note] Examples
 > - [`sphx_glr_auto_examples_combine_plot_comparison_combine.py`](https://imbalanced-learn.org/stable/)

@@ -71,7 +71,9 @@ K-means method instead of the original samples:
 
 The figure below illustrates such under-sampling.
 
-[![Official imbalanced-learn figure: sphx_glr_plot_comparison_under_sampling_001.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_comparison_under_sampling_001.png)](https://imbalanced-learn.org/stable/auto_examples/under-sampling/plot_comparison_under_sampling.html)
+![[00 Учебник/Assets/Figures/imbalanced-learning/plot_comparison_under_sampling.png|Decision function with ClusterCentroids, Resampling with ClusterCentroids, Decision function with FunctionSampler, Resampling with FunctionSampler]]
+
+*Guillaume Lemaitre, [Compare under-sampling samplers](https://imbalanced-learn.org/0.14/auto_examples/under-sampling/plot_comparison_under_sampling.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_comparison_under_sampling_001.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 `ClusterCentroids` offers an efficient way to represent the data cluster
 with a reduced number of samples. Keep in mind that this method requires that
@@ -120,7 +122,9 @@ randomly selecting a subset of data for the targeted classes:
 [(0, 64), (1, 64), (2, 64)]
 ```
 
-[![Official imbalanced-learn figure: sphx_glr_plot_comparison_under_sampling_002.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_comparison_under_sampling_002.png)](https://imbalanced-learn.org/stable/auto_examples/under-sampling/plot_comparison_under_sampling.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_under_sampling_002.png|Decision function with FunctionSampler, Resampling with FunctionSampler, Decision function with RandomUnderSampler, Resampling with RandomUnderSampler]]
+
+*Guillaume Lemaitre, [Compare under-sampling samplers](https://imbalanced-learn.org/0.14/auto_examples/under-sampling/plot_comparison_under_sampling.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_comparison_under_sampling_002.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 `RandomUnderSampler` allows bootstrapping the data by setting
 `replacement` to `True`. When there are multiple classes, each targeted class is
@@ -187,19 +191,25 @@ under-sampled. *Negative sample* refers to the samples from the minority class
 NearMiss-1 selects the positive samples for which the average distance
 to the $N$ closest samples of the negative class is the smallest.
 
-[![Official imbalanced-learn figure: sphx_glr_plot_illustration_nearmiss_001.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_illustration_nearmiss_001.png)](https://imbalanced-learn.org/stable/auto_examples/under-sampling/plot_illustration_nearmiss.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_illustration_nearmiss_001.png|NearMiss-1]]
+
+*Guillaume Lemaitre, [Sample selection in NearMiss](https://imbalanced-learn.org/0.14/auto_examples/under-sampling/plot_illustration_nearmiss.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_illustration_nearmiss_001.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 NearMiss-2 selects the positive samples for which the average distance to the
 $N$ farthest samples of the negative class is the smallest.
 
-[![Official imbalanced-learn figure: sphx_glr_plot_illustration_nearmiss_002.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_illustration_nearmiss_002.png)](https://imbalanced-learn.org/stable/auto_examples/under-sampling/plot_illustration_nearmiss.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_illustration_nearmiss_002.png|NearMiss-2]]
+
+*Guillaume Lemaitre, [Sample selection in NearMiss](https://imbalanced-learn.org/0.14/auto_examples/under-sampling/plot_illustration_nearmiss.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_illustration_nearmiss_002.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 NearMiss-3 is a 2-steps algorithm. First, for each negative sample, their
 $M$ nearest-neighbors will be kept. Then, the positive samples selected
 are the one for which the average distance to the $N$ nearest-neighbors
 is the largest.
 
-[![Official imbalanced-learn figure: sphx_glr_plot_illustration_nearmiss_003.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_illustration_nearmiss_003.png)](https://imbalanced-learn.org/stable/auto_examples/under-sampling/plot_illustration_nearmiss.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_illustration_nearmiss_003.png|NearMiss-3]]
+
+*Guillaume Lemaitre, [Sample selection in NearMiss](https://imbalanced-learn.org/0.14/auto_examples/under-sampling/plot_illustration_nearmiss.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_illustration_nearmiss_003.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 In the next example, the different `NearMiss` variant are applied on the
 previous toy example. It can be seen that the decision functions obtained in
@@ -215,7 +225,9 @@ the presence of noise can also altered the sampling mainly in the presence of
 marginal outliers. NearMiss-3 is probably the version which will be less
 affected by noise due to the first step sample selection.
 
-[![Official imbalanced-learn figure: sphx_glr_plot_comparison_under_sampling_003.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_comparison_under_sampling_003.png)](https://imbalanced-learn.org/stable/auto_examples/under-sampling/plot_comparison_under_sampling.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_under_sampling_003.png|Decision function for NearMiss-1, Resampling using NearMiss-1, Decision function for NearMiss-2, Resampling using NearMiss-2, Decision function for NearMiss-3, Resampling using NearMiss-3]]
+
+*Guillaume Lemaitre, [Compare under-sampling samplers](https://imbalanced-learn.org/0.14/auto_examples/under-sampling/plot_comparison_under_sampling.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_comparison_under_sampling_003.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 ### Cleaning under-sampling techniques
 
@@ -245,7 +257,9 @@ would not help the algorithm find a suitable discrimination boundary.
 In the following figure, a Tomek's link between an observation of class $+$ and
 class $-$ is highlighted in green:
 
-[![Official imbalanced-learn figure: sphx_glr_plot_illustration_tomek_links_001.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_illustration_tomek_links_001.png)](https://imbalanced-learn.org/stable/auto_examples/under-sampling/plot_illustration_tomek_links.html)
+![[00 Учебник/Assets/Figures/imbalanced-learning/plot_illustration_tomek_links.png|Illustration of a Tomek link]]
+
+*Guillaume Lemaitre, [Illustration of the definition of a Tomek link](https://imbalanced-learn.org/0.14/auto_examples/under-sampling/plot_illustration_tomek_links.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_illustration_tomek_links_001.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 When `TomekLinks` finds a Tomek's link, it can either remove the sample of the
 majority class, or both. The parameter `sampling_strategy` controls which samples
@@ -257,7 +271,9 @@ and the one from the minority class, can be removed by setting `sampling_strateg
 The following figure illustrates this behaviour: on the left, only the sample from the
 majority class is removed, whereas on the right, the entire Tomek's link is removed.
 
-[![Official imbalanced-learn figure: sphx_glr_plot_illustration_tomek_links_002.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_illustration_tomek_links_002.png)](https://imbalanced-learn.org/stable/auto_examples/under-sampling/plot_illustration_tomek_links.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_illustration_tomek_links_002.png|Removing only majority samples, Removing all samples]]
+
+*Guillaume Lemaitre, [Illustration of the definition of a Tomek link](https://imbalanced-learn.org/0.14/auto_examples/under-sampling/plot_illustration_tomek_links.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_illustration_tomek_links_002.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 ##### Editing data using nearest neighbours
 
@@ -354,7 +370,9 @@ In the example below, we see that `EditedNearestNeighbours`,
 `RepeatedEditedNearestNeighbours` and `AllKNN` have similar impact when
 cleaning "noisy" samples at the boundaries between classes.
 
-[![Official imbalanced-learn figure: sphx_glr_plot_comparison_under_sampling_004.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_comparison_under_sampling_004.png)](https://imbalanced-learn.org/stable/auto_examples/under-sampling/plot_comparison_under_sampling.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_under_sampling_004.png|Decision function for EditedNearestNeighbours, Resampling using EditedNearestNeighbours, Decision function for RepeatedEditedNearestNeighbours, Resampling using RepeatedEditedNearestNeighbours, Decision function for AllKNN, Resampling using AllKNN]]
+
+*Guillaume Lemaitre, [Compare under-sampling samplers](https://imbalanced-learn.org/0.14/auto_examples/under-sampling/plot_comparison_under_sampling.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_comparison_under_sampling_004.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 ##### Condensed nearest neighbors
 
@@ -435,7 +453,9 @@ and the output a 3 nearest neighbors classifier. The class can be used as:
 [(0, 64), (1, 193), (2, 4535)]
 ```
 
-[![Official imbalanced-learn figure: sphx_glr_plot_comparison_under_sampling_005.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_comparison_under_sampling_005.png)](https://imbalanced-learn.org/stable/auto_examples/under-sampling/plot_comparison_under_sampling.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_under_sampling_005.png|Decision function for CondensedNearestNeighbour, Resampling using CondensedNearestNeighbour, Decision function for OneSidedSelection, Resampling using OneSidedSelection, Decision function for NeighbourhoodCleaningRule, Resampling using NeighbourhoodCleaningRule]]
+
+*Guillaume Lemaitre, [Compare under-sampling samplers](https://imbalanced-learn.org/0.14/auto_examples/under-sampling/plot_comparison_under_sampling.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_comparison_under_sampling_005.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 ### Additional undersampling techniques
 
@@ -483,4 +503,6 @@ with cross-validation which can be specified through the parameter ``cv`.
 
 The figure below shows examples of instance hardness undersampling on a toy dataset.
 
-[![Official imbalanced-learn figure: sphx_glr_plot_comparison_under_sampling_006.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_comparison_under_sampling_006.png)](https://imbalanced-learn.org/stable/auto_examples/under-sampling/plot_comparison_under_sampling.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_comparison_under_sampling_006.png|Decision function with FunctionSampler, Resampling using FunctionSampler, Decision function with InstanceHardnessThreshold, Resampling using InstanceHardnessThreshold]]
+
+*Guillaume Lemaitre, [Compare under-sampling samplers](https://imbalanced-learn.org/0.14/auto_examples/under-sampling/plot_comparison_under_sampling.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_comparison_under_sampling_006.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*

@@ -4,10 +4,10 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "cb9d70037a4ead20d49d9883ec0182e7eed038bd4bc1a579f2599cc71bd8bf42"
-translation_reviewed: "2026-10-29"
+canonical_revision: "20e8da4205d31b66897b599e2ee40be3ed071710a009d7bb13ef87251eaa271a"
+translation_reviewed: "2026-11-13"
 translation_of: "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md"
-last_updated: 2026-10-29
+last_updated: 2026-11-13
 last_verified: 2026-09-15
 source_unit_id:
   - meeting-07-slides-xgen-video
@@ -22,15 +22,14 @@ primary_sources:
   - https://arxiv.org/abs/2511.21631
   - https://arxiv.org/abs/2503.20215
   - https://arxiv.org/abs/2305.05665
+  - https://doi.org/10.1038/s41598-025-17015-z
   - https://arxiv.org/abs/2410.00037
   - https://cs336.stanford.edu/
 ---
 
 # Video, audio, and omni models
 
-Video adds time to images; audio makes time continuous and sampling-rate dependent. Encoding every frame and short audio window quickly exhausts context. An omni model must select evidence, synchronize modalities, and often generate speech online.
-
-Suppose a user asks, “What did the person say when they opened the door?” The system must locate a visual event, select the corresponding audio interval, understand its speech, and connect that evidence to its answer. An accurate transcript of the entire clip does not establish that the event and utterance were aligned.
+Someone opens a door and says “I'm back.” A few seconds later, the recording contains another utterance. To answer “What did they say when they opened the door?”, the system needs the audio at the time of the action. Even a perfect transcript of the full recording does not tell it which words belong to that moment.
 
 <span id="1-от-видеофайла-до-visual-tokens"></span>
 
@@ -367,17 +366,54 @@ Talker receives both Thinker representations and embeddings of the selected text
 
 *Qwen Team, [Qwen3-Omni, Figure 2](https://arxiv.org/pdf/2509.17765v1#page=3), CC BY 4.0. Talker predicts the first code, a small MTP predicts remaining codes in that frame, and causal Code2Wav reconstructs audio.*
 
-Qwen3-Omni conditions Talker on discrete text and multimodal features, no longer on the hidden states of Thinker's text positions. This allows text intervention before speech, such as external filtering or prepared text. Its AuT input encoder downsamples mel features eightfold to 12.5 positions/s and learns recognition and other audio tasks. The output multi-codebook codec serves synthesis. Equal input/output rates do not make their vectors or indices interchangeable.
+Qwen3-Omni conditions Talker on discrete text and multimodal features, no longer on the hidden states of Thinker's text positions. This allows text intervention before speech, such as external filtering or prepared text.
 
-Talker chooses each frame's first code; a small MTP Transformer autoregressively predicts the remaining codebooks of that frame. They are not independent simultaneous predictions. A causal ConvNet Code2Wav uses available codes and left context instead of waiting for a future DiT block.
+<a id="omni-aut"></a>
+
+#### How AuT learns to encode audio
+
+The [Qwen3-Omni authors, §2.2](https://arxiv.org/html/2509.17765v1#S2.SS2)
+train AuT as an audio encoder and text decoder. At the bottom of the
+figure, filterbank features enter three Conv2d layers, pass through
+32 encoder attention layers and become `AuT Hidden`. During training,
+the eight-layer decoder sees the audio representation and the previous
+reference tokens. It predicts the next text token, including the end
+marker. The training tasks include recognition and audio understanding;
+this decoder does not reconstruct a waveform.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/omni-2026-11-09/qwen3omni-figure3-aut.png|AuT training path from audio features through Conv2d and the audio encoder to the text decoder]]
+
+*Qwen Team, [Qwen3-Omni, Figure 3, p. 4](https://arxiv.org/pdf/2509.17765v1#page=4),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Qwen3-Omni uses the path up to `AuT Hidden`; the decoder above it
+is used to train AuT.*
+
+A 10-ms input hop means 100 feature positions per second. Eightfold
+downsampling gives 12.5 positions per second: about 400 input and 50
+output positions for four seconds, ignoring boundary effects. The
+resulting 80-ms stride does not limit each feature's context to 80 ms.
+The report describes attention windows ranging from one to eight seconds.
+
+In Qwen3-Omni, AuT supplies continuous features to Thinker rather than
+a transcript. The output codec instead accepts discrete indices from
+Talker and MTP. The two streams can have the same 80-ms stride without
+representing the same information.
+
+#### How the first speech frame is generated
+
+Talker chooses each frame's first code. A small MTP Transformer autoregressively predicts the indices for the remaining codebooks of that frame. Code2Wav, a causal ConvNet, needs all codes for the current frame and left context, but does not wait for a future block as the DiT does.
 
 | Component | Qwen2.5-Omni | Qwen3-Omni |
 |---|---|---|
-| Input audio encoder | Qwen2-Audio, about 25 positions/s | AuT, about 12.5 positions/s |
+| Input audio encoder | Qwen2-Audio design, Whisper-large-v3 initialization, about 25 positions/s | AuT, about 12.5 positions/s |
 | Time representation | 40-ms IDs and two-second grouping | 80-ms IDs without rigid grouping |
 | Talker text condition | hidden states and selected text | discrete text without former text-position hidden states |
 | Code prediction | dual-track autoregression | first code by Talker, remaining codes by MTP |
 | Waveform synthesis | Flow-Matching DiT and BigVGAN | causal ConvNet |
+
+The Qwen2.5-Omni authors specify Whisper-large-v3 for encoder initialization
+([report, §3.1](https://arxiv.org/html/2503.20215v1#S3.SS1)); the description
+of the audio feature interface cites Qwen2-Audio (§2.2).
 
 Thinker and Talker use MoE, but attention configuration and sequence length determine KV-cache size, not expert count. Lower temporal frequency reduces positions without eliminating AuT, MTP, or Code2Wav work.
 
@@ -411,6 +447,8 @@ assert isclose(-log(joint), -log(0.6) - log(0.5))
 ```
 
 The conditional product $p(a)p(b\mid a)$ retains within-step dependence; replacing it with $p(a)p(b)$ assumes independence. The illustrative probabilities and step counts are not a Moshi speed benchmark.
+
+<a id="omni-duplex"></a>
 
 ### Inner Monologue, delayed acoustics, and duplex streams
 
@@ -510,7 +548,34 @@ The centered convolution at the end violates that property by using a future nei
 
 ### First audible sound and uninterrupted playback
 
-First-audio latency includes required input context, feature preparation, Thinker/Talker computation, codec decoding, transport, and playback. A “first token generated” log covers only one stage. Real-time factor divides compute duration by generated audio duration. A mean below one does not prevent an individual late chunk from exhausting the buffer:
+First-audio latency includes required input context, feature preparation, Thinker/Talker computation, codec decoding, transport, and playback. A “first token generated” log covers only one stage.
+
+<a id="omni-first-packet"></a>
+
+#### What the 234 ms in the Qwen3-Omni report measures
+
+[Table 2](https://arxiv.org/html/2509.17765v1#S2.T2) adds five stages:
+preprocessing the final input chunk, Thinker's first token, Talker's
+first code, MTP and waveform decoding. For one audio stream, the sum is
+$72+88+57+14+3=234$ ms. For one video stream with audio it is
+$160+160+210+14+3=547$ ms. With four concurrent audio streams the
+first-packet estimate rises to 728 ms, of which 468 ms is Thinker's
+first-token time. Shaving a few milliseconds off the final decoder
+would barely move that result.
+
+The authors derive the first-packet estimate from stage timings on
+vLLM, with `torch.compile` and CUDA Graph for MTP and the decoder.
+It does not cover the full path from the start of speech to sound from
+the speaker. For a client measurement, state the start event, such as
+the end of the user's utterance, and record when playback actually starts.
+Track endpointing, transport and playback buffering separately from
+packet generation.
+
+<a id="omni-playback-gaps"></a>
+
+#### A playback stall even when RTF is below one
+
+Real-time factor divides compute duration by generated audio duration. A mean below one does not prevent an individual late chunk from exhausting the buffer:
 
 ```python
 import numpy as np
@@ -526,7 +591,39 @@ assert np.isclose(rtf, 0.96875) and rtf < 1
 assert np.flatnonzero(late).tolist() == [2, 3]
 ```
 
-The third and fourth chunks miss their original deadlines despite RTF 0.96875. This does not count actual audible stalls: after a stall, playback scheduling shifts. Prebuffering can avoid a gap by delaying response onset.
+The third and fourth chunks miss their original deadlines, but there is
+only one stall. Playback runs out after the second chunk at 180 ms and
+resumes at 290 ms. The third chunk ends at 370 ms, by which time the
+fourth has already arrived at 310 ms. A player that does not drop chunks
+starts each chunk no earlier than its arrival and the previous chunk's end.
+
+```python
+def playback(arrivals_ms, durations_ms, first_start_ms):
+    end = first_start_ms
+    starts, gaps = [], []
+    for arrival, duration in zip(arrivals_ms, durations_ms, strict=True):
+        start = max(arrival, end)
+        starts.append(start)
+        gaps.append(start - end)
+        end = start + duration
+    return starts, gaps, end
+
+arrivals_ms = [20, 40, 290, 310]
+durations_ms = [80] * 4
+assert playback(arrivals_ms, durations_ms, 20) == (
+    [20, 100, 290, 370], [0, 0, 110, 0], 450
+)
+uninterrupted_start = max(a - 80 * i for i, a in enumerate(arrivals_ms))
+assert uninterrupted_start == 130
+assert playback(arrivals_ms, durations_ms, uninterrupted_start) == (
+    [130, 210, 290, 370], [0, 0, 0, 0], 450
+)
+```
+
+Starting at 130 ms makes this particular stream play continuously. Both
+strategies finish at 450 ms: starting earlier trades 110 ms of waiting
+before playback for a 110-ms stall during it. The buffer calculation uses
+known arrivals and does not guarantee uninterrupted playback on new requests.
 
 Interruption requires continued microphone input, speech detection, generation cancellation, and removal of unplayed audio. Samples already sent to a device may remain audible after server cancellation. For user speech at 1000 ms, detection at 1040, cancellation at 1055, and final audible model sound at 1180, interruption latency is 180 ms, not 55. The other 125 ms belongs to buffered output and playback. These are illustrative event timestamps, not product measurements.
 
@@ -536,11 +633,44 @@ Conversation state must record what was actually played. If a full sentence was 
 
 ImageBind creates one embedding space for text, image, audio, depth, thermal, and IMU data. That supports cross-modal retrieval but does not itself generate each modality. Image or speech output requires a dedicated decoder such as diffusion/flow, discrete image tokens, or an audio codec.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/imagebind-figure1-capabilities.png]]
+ImageBind trains modality encoders using pairs linked through images,
+with a contrastive objective over normalized vectors. In the first
+panel of [Girdhar et al.'s Figure 1](https://arxiv.org/pdf/2305.05665v2#page=1), crackling fire is
+the audio query for image retrieval. The system ranks image vectors
+by cosine similarity without transcribing the audio.
 
-*Girdhar et al., [ImageBind, Figure 1](https://arxiv.org/abs/2305.05665). Shared representations support retrieval and conditioning of a separate image generator; the diagram is not a streaming speech architecture.*
+The second panel adds a bird image vector to a wave sound vector
+and retrieves images that match the combination. The third produces
+a new image with a separate pretrained generator conditioned on
+ImageBind's audio embedding.
 
-ImageBind trains modality encoders using pairs linked through images, with a contrastive objective over normalized vectors. A crackling-fire audio vector can retrieve an image by cosine similarity without ASR or answer generation. This numerical example illustrates retrieval, not actual ImageBind embeddings:
+<a id="imagebind-audio-retrieval"></a>
+
+### Using sound to pick an object in a photo
+
+In the [Panda Act experiment](https://www.nature.com/articles/s41598-025-17015-z#Fig2),
+the alarm is recorded separately from the photo of the table. A segmentation
+model first identifies candidate objects in the photo and crops them out.
+In the lower part of the diagram, the audio encoder takes the recording and
+the image encoder takes those crops. For one recording $A_1$, read one row
+of the matrix: $A_1\cdot I_1$, $A_1\cdot I_2$, and so on. The largest
+similarity selects a crop. The system gets coordinates from the selected
+object's mask in the photo, not from the direction of the sound. If the
+segmentation model misses the clock, the clock is absent from the candidates.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-connectors-2026-11-13/panda-act-figure2.jpg|Panda Act diagram. At lower right, ImageBind compares audio vectors against vectors for candidate object crops. The segmentation model on the left supplies the crops.]]
+
+*Yifan Li et al., [A framework for robotic manipulation tasks based on multiple zero shot models, Figure 2](https://www.nature.com/articles/s41598-025-17015-z#Fig2),
+[original JPEG](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41598-025-17015-z/MediaObjects/41598_2025_17015_Fig2_HTML.jpg),
+[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).
+Complete original, unmodified. The lower matching matrix uses ImageBind;
+other components handle the rest of the system.*
+
+The row in the example below has three scores: $0.8$, $0.6$, and $-0.8$.
+If the alarm clock is the first candidate, it wins. Reordering the crops
+would change the winning column number, not the object with the highest score.
+
+The values are illustrative, not actual ImageBind embeddings.
 
 ```python
 import numpy as np

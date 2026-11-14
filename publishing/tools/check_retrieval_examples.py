@@ -41,7 +41,7 @@ def rejects(function, *args, **kwargs):
 def main():
     chapter = CHAPTER.read_text()
     blocks = re.findall(r'^```python\n(.*?)^```', chapter, re.M | re.S)
-    assert len(blocks) == 6
+    assert len(blocks) == 7
     namespaces, shared = [], {}
     for index, block in enumerate(blocks, 1):
         namespace = {}
@@ -52,8 +52,8 @@ def main():
     counts = {'standalone_and_shared_code_blocks': len(blocks) * 2}
     make, search = [namespaces[0][name] for name in ['make_bm25', 'bm25_search']]
     ivf = namespaces[1]['ivf_flat']
-    windows = namespaces[4]['token_windows']
-    rrf = namespaces[5]['rrf']
+    windows = namespaces[5]['token_windows']
+    rrf = namespaces[6]['rrf']
     rng = np.random.default_rng(20261020)
 
     # Independent brute-force BM25 reference: scan documents, not posting lists.
@@ -146,7 +146,7 @@ def main():
         assert np.allclose(((vectors @ orthogonal - query @ orthogonal) ** 2).sum(axis=1),
                            ((vectors - query) ** 2).sum(axis=1))
     assert 96 * 8 / 8 == 96 and 768 * 4 / 96 == 32
-    assert np.array_equal(namespaces[2]['codes'][0], namespaces[2]['codes'][1])
+    assert np.array_equal(namespaces[3]['codes'][0], namespaces[3]['codes'][1])
     counts['pq_adc_reconstruction_rotation_and_collision'] = 62
 
     for length in range(1, 25):
@@ -231,7 +231,7 @@ def main():
                     '7-обновления-и-версии-индекса', '8-диагностика-retrieval',
                     'источники-и-дальнейшее-чтение']:
         assert page.find(id=heading), heading
-    assert len(article.select('img')) == 8 and len(article.select('pre')) == 6
+    assert len(article.select('img')) == 8 and len(article.select('pre')) == 7
     assert not article.select('.katex-error') and len(article.select('.katex-display')) == 8
     assert len(page.select('[data-figure-viewer]')) == 1
     assert not article.select('[data-figure-viewer]')

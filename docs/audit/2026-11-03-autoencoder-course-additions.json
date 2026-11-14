@@ -1,0 +1,230 @@
+{
+  "date": "2026-11-03",
+  "scope": "Whole Autoencoder/VAE owner review. Preserve complete derivations, fourteen programs and six old illustrations. Add four complete original UvA SVG outputs, latent-width and out-of-distribution comparisons, worked retrieval/coordinate ambiguity, and24 subject links per locale.",
+  "status": "Local owner delta verified: full final read, CPU/source preservation, original SVG extraction, built HTML and selected desktop/mobile reader checks. Whole-book and release work remains open.",
+  "verification": {
+    "chapterSha256": "cb1ec4878e091881114a4013247babb13e34aea7aaa270a1fafee5920a213c44",
+    "wholeOwnerRead": "Entire 956-line current baseline read; complete final 1248-line chapter reread in ranges 1–320,321–650,651–980,981–EOF. No chapter edits after that read.",
+    "preservation": "All fourteen prior Python blocks, seventeen display equations and six source image paths/bytes retained. Fifteen programs, nineteen display equations and ten originals now. Four-file reversible journal also pins registry and both indexes;24 unique subject anchors per locale.",
+    "explanation": "Retained the complete AE/PCA/SGD, transposed-convolution, ELBO/two-KL, Gaussian-likelihood/KL, fixed-noise gradient, full VAE, stochastic eval/interpolation and beta/collapse explanations. Added source latent-width and OOD comparisons, actual ordinary-decoder random-code outputs and a full retrieval/distance counterexample with unchanged nonlinear reconstruction.",
+    "style": "no-ai-slop skill and eval read fully. Strong existing Russian prose, derivations and original English code preserved. New source-derived discussion remains English; no translation pass. Calculations and source observations are explicitly distinguished.",
+    "source": "All58 cells of pinned UvA notebook read, including full theory/code for width, OOD, generation, retrieval and TensorBoard. Fresh AEVB §§2.1–2.4, Algorithm1 and AppendixB; entire pinned PyTorch VAE script. Full older audit read but its e742c3a5 hash differs from the current 0fa503da baseline, so it is not counted as an exact-current read. Existing Weng comparisons and supplementary Doersch reading remain historical, not newly claimed whole-source reads.",
+    "figures": {
+      "count": 4,
+      "bytes": 253033,
+      "pin": "c7d9e18f42fee53bc8925f08ec2358371b1e9200",
+      "notebookSha256": "ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be",
+      "method": "Whole original SVG outputs from existing filled notebook cells26,32,34,37 copied byte-for-byte. No new plotting, crop, rasterization, relabeling or synthetic diagram. Embedded rasters retained. No extra source notebook, dataset or model weights saved.",
+      "permissions": "UvA MIT and unchanged full public license verified. Three prior Weng/Kingma image records remain needs-confirmation; no clearance inferred from UvA."
+    },
+    "cpu": {
+      "exit": 0,
+      "device": "CPU",
+      "torch": "2.14.1",
+      "programs": 15,
+      "command": "uv run --offline --python 3.13 --with torch==2.14.1 --with numpy==2.5.4 python publishing/tools/check_autoencoder_examples.py",
+      "scope": "All15 actual chapter blocks execute. Exact original UvA/PyTorch classes and loss preserved modulo trailing whitespace; both original legacy programs preserved by AST. All earlier324 conjugate ELBO identities,87 multichannel transpose/adjoint cases, fixed-noise autograd/central differences, sample/rsample, full UvA gradient step, reductions, eval, interpolation and explicit collapse checks pass. Added27 batched distance/brute-force/index cases. Actual metric counterexample changes nearest order [1,0] ->[0,1] while reconstructed outputs remain equal. No local CIFAR/MNIST training run, quality estimate or benchmark."
+    },
+    "tests": {
+      "scoped": "184 tests in4 files pass: new delta/preservation, Seq2Seq delta chain, reference sync and full asset-registry suite. Includes32 rejected changed-provenance cases for four new SVGs. Six existing non-fatal Poppler closepath diagnostics retained.",
+      "builtOutput": "198 HTML tests pass after completed final site build, including both AE/VAE locale routes,24 anchors,15 programs,10 actual image assets, new explanations and explicit EN canonical-language notice."
+    },
+    "build": {
+      "exit": 0,
+      "pages": 2007,
+      "pagefindHtmlFiles": 2011,
+      "durationSeconds": 30.4,
+      "brokenInternalLinks": 0,
+      "bytes": 853827078,
+      "files": 5606,
+      "limit": 1000000000,
+      "headroom": 146172922,
+      "warnings": "Five existing duplicate-route warnings retained. Astro and Pagefind completed before HTML/link/browser checks."
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-03-autoencoder-reader",
+      "desktop": "1280x720: document1265/1265; all10 assets loaded at native proportions and fit,19 display equations617/617,zero KaTeX errors. All four new original SVGs inspected inline with surrounding explanation/captions. Earlier complete six-image visual inspection remains historical on unchanged bytes, not freshly repeated for all six.",
+      "mobile": "390x844: document375/375; all10 original images fit<=343px,19 display equations343/343,zero KaTeX errors,no tables. All four new figures plus old VAE graphical-model and reparameterization diagrams inspected inline. New vector loss plot at2x has readable labels; horizontal viewer pan x188 ->228. No all-pan-endpoints or every-old-image zoom claim.",
+      "navigation": "Actual RU reference ->#ae-latent-width and actual EN reference ->#ae-retrieval, each a unique target. EN explicitly reports no separate English edition. Actual EN Next opens gan-dcgan with correct h1. Temporary viewport reset; RU latent-width section left open.",
+      "recovery": "Stale cross-turn browser handles failed despite a live tab inventory. Fresh same-browser tab binding also failed; documented troubleshooting read, CUA session reset and same browser/tab rebound. Current reader checks then executed successfully."
+    },
+    "publication": "Local only; no stage, commit, push or deployment. Other owners, thematic course integration, material permissions, public-checkout acceptance and dev/Pages release remain open."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md",
+      "before_sha256": "0fa503dade5bacee4bf88d40a4aa799474328586332fe92fc6a28538dca9b4fd",
+      "after_sha256": "cb1ec4878e091881114a4013247babb13e34aea7aaa270a1fafee5920a213c44",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-26\n",
+          "new": "last_updated: 2026-11-03\nsource_language: mixed\nreference_terms:\n  - label: Обучение автоэнкодера по реконструкции\n    label_en: Autoencoder reconstruction objective\n    anchor: ae-objective\n  - label: Линейный автоэнкодер и PCA\n    label_en: Linear autoencoders and PCA\n    anchor: ae-linear-pca\n  - label: Шаг SGD в линейном автоэнкодере\n    label_en: A linear autoencoder SGD step\n    anchor: ae-learning-step\n  - label: Denoising autoencoder\n    label_en: Denoising autoencoders\n    anchor: ae-denoising\n  - label: Свёрточный автоэнкодер\n    label_en: Convolutional autoencoders\n    anchor: ae-convolutional\n  - label: Транспонированная свёртка и output_padding\n    label_en: Transposed convolution and output_padding\n    anchor: ae-transpose\n  - label: Encoder и decoder из курса UvA\n    label_en: Original UvA encoder and decoder\n    anchor: ae-uva-model\n  - label: MSE и размытые восстановления\n    label_en: MSE and blurred reconstructions\n    anchor: ae-mse\n  - label: Размерность кода и ошибка восстановления\n    label_en: Latent width and reconstruction error\n    anchor: ae-latent-width\n  - label: Восстановление входов вне обучающего распределения\n    label_en: Out-of-distribution reconstruction\n    anchor: ae-ood\n  - label: Поиск соседей в кодах автоэнкодера\n    label_en: Image retrieval and latent-space distance\n    anchor: ae-retrieval\n  - label: Почему реконструкция не задаёт генерацию\n    label_en: Why reconstruction does not define generation\n    anchor: ae-generative-gap\n  - label: Prior, likelihood и энкодер VAE\n    label_en: VAE prior, likelihood and inference model\n    anchor: vae-generative-model\n  - label: ELBO и два разных KL\n    label_en: ELBO and its two KL divergences\n    anchor: vae-elbo\n  - label: Точный posterior и зазор ELBO\n    label_en: Exact posterior and the ELBO gap\n    anchor: vae-exact-posterior\n  - label: Likelihood декодера и аналитический KL\n    label_en: Decoder likelihood and analytical Gaussian KL\n    anchor: vae-likelihood\n  - label: Репараметризация нормального кода\n    label_en: Gaussian reparameterization\n    anchor: vae-reparameterization\n  - label: Градиент при фиксированном шуме\n    label_en: Fixed-noise pathwise gradients\n    anchor: vae-pathwise-gradient\n  - label: Полный шаг обучения VAE\n    label_en: A complete VAE training step\n    anchor: vae-training\n  - label: VAE из PyTorch examples\n    label_en: Original PyTorch VAE example\n    anchor: vae-source-model\n  - label: Генерация из prior и наблюдение декодера\n    label_en: Prior generation and decoder observations\n    anchor: vae-generation\n  - label: Случайность VAE в eval\n    label_en: VAE randomness in eval mode\n    anchor: vae-eval\n  - label: Интерполяция и распределение кодов\n    label_en: Interpolation and the code distribution\n    anchor: vae-interpolation\n  - label: β-VAE и posterior collapse\n    label_en: Beta-VAE and posterior collapse\n    anchor: vae-beta-collapse\n"
+        },
+        {
+          "old": "<a id=\"почему-обычный-latent-space-неудобен-для-генерации\"></a>",
+          "new": "### Choosing the latent width\n\nThe same image can be reconstructed through codes of different widths. In the\nUvA experiment, the input has $32\\cdot32\\cdot3=3072$ scalar values; separate\nmodels use 64, 128, 256 or 384 latent coordinates. Each model is evaluated on\nthe validation split using the sum of squared pixel errors per image, averaged\nover images.\n\n![[00 Учебник/Assets/Figures/curated/autoencoder-course-2026-11-03/uva-latent-width.svg|Validation reconstruction error for 64, 128, 256 and 384 UvA latent coordinates]]\n\n*Original validation-loss plot from Phillip Lippe,\n[UvA, Comparing latent dimensionality](https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial9/AE_CIFAR10.html#Comparing-latent-dimensionality).\nThe horizontal axis is logarithmic; the vertical axis uses the summed pixel\nerror, not the error of one pixel. Notebook cell 26, complete original SVG;\n[MIT](/licenses/uva-c7d9e18f-MIT.txt).*\n\nIncreasing the code width lowers the measured validation error in this\nexperiment. A plotted point compares separately trained models, rather than\nturning a single trained model's width knob at inference time. The curve does\nnot establish a universal scaling law or show that every larger model will\ngeneralize better.\n\nA width of 64 gives 48 times fewer scalar coordinates than the input:\n$3072/64=48$. That is not a measured 48-fold file compression ratio. Storage\nalso depends on the precision of each coordinate, quantization, entropy coding\nand how the model parameters are stored. A real compression system must count\nbits and evaluate distortion after encoding and decoding those bits.\n\n### Reconstruction outside the training distribution\n\nA small training loss only constrains the model on the distribution used for\ntraining. The UvA notebook also passes random noise and hand-constructed\npatterns through the CIFAR10 autoencoder. These inputs need no class labels,\nbut they test a different question from reconstruction of held-out natural\nimages.\n\n![[00 Учебник/Assets/Figures/curated/autoencoder-course-2026-11-03/uva-noise-reconstruction.svg|Two noise inputs and their reconstructions through the 256-coordinate UvA autoencoder]]\n\n*Phillip Lippe,\n[UvA, Out-of-distribution images](https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial9/AE_CIFAR10.html#Out-of-distribution-images).\nEach adjacent pair contains the input followed by its reconstruction. Here the\ninputs are independently generated noise, not CIFAR10 photographs. Notebook\ncell 32, complete original SVG;\n[MIT](/licenses/uva-c7d9e18f-MIT.txt).*\n\nThe decoder produces broad coloured regions in place of the input's\npixel-to-pixel variation. The learned bottleneck and decoder have not preserved\nthe particular noise realization. This example does not prove that every\nautoencoder rejects noise, or that reconstruction error is a calibrated\nout-of-distribution detector.\n\n![[00 Учебник/Assets/Figures/curated/autoencoder-course-2026-11-03/uva-pattern-reconstruction.svg|Constant fields, block patterns and colour ramps before and after UvA reconstruction]]\n\n*Phillip Lippe,\n[UvA, Out-of-distribution images](https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial9/AE_CIFAR10.html#Out-of-distribution-images).\nInput/reconstruction pairs are placed consecutively, four tiles per row.\nThe inputs are synthetic constant fields, a piecewise-constant block pattern\nand a two-channel colour ramp. Notebook cell 34, complete original SVG;\n[MIT](/licenses/uva-c7d9e18f-MIT.txt).*\n\nThe block boundaries and smooth ramps probe different spatial changes. Reading\nthe pairs requires comparing the same input with its reconstruction, not\ncomparing two unrelated tiles. Together with the loss curve, these examples\nseparate three checks: error on held-out data, preservation of a chosen visual\ndetail, and behaviour on inputs outside the training distribution.\n\n## Image retrieval from autoencoder codes\n\nAn encoder also supplies a vector for image search. The UvA\n[Finding visually similar images](https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial9/AE_CIFAR10.html#Finding-visually-similar-images)\nsection encodes a search corpus once and encodes each query with the same\nmodel. It then ranks corpus vectors by Euclidean distance. No decoder is\nneeded during that ranking.\n\nLet the query code be $u=(0,0)$ and three corpus codes be\n$a=(0.1,2)$, $b=(1,0.1)$ and $c=(3,3)$. Their distances from the query are\napproximately 2.0025, 1.0050 and 4.2426. The nearest result is $b$, followed\nby $a$. Squaring these distances preserves their order, so an implementation\ncan avoid the square root when only the ranking is needed.\n\nFor a query batch of shape $[Q,d]$ and a corpus of shape $[N,d]$,\n`torch.cdist` produces a $[Q,N]$ distance matrix. Selecting the smallest $k$\nentries in each row gives indices into the corpus. Those indices must remain\naligned with image IDs when loading data in batches or shuffling it. The\nexample below checks the ranking against a direct coordinate-wise calculation.\n\nReconstruction training does not fix the units of the code coordinates.\nApply an invertible map $A$ to every code and undo it at the decoder input:\n\n$$\n\\begin{aligned}\ng'(x)&=A\\,g(x),\\\\\nf'(u)&=f(A^{-1}u).\n\\end{aligned}\n$$\n\nThe decoded output is unchanged for every input. For Euclidean search,\nhowever, the squared distance becomes\n\n$$\n\\|A(z_i-z_j)\\|^2\n=(z_i-z_j)^{\\mathsf T}A^{\\mathsf T}A(z_i-z_j).\n$$\n\nWith $A=\\operatorname{diag}(10,0.1)$, the first coordinate counts much more\nand the second counts much less. The transformed codes are\n$a'=(1,0.2)$, $b'=(10,0.01)$ and $c'=(30,0.3)$.\nNow $a'$ is nearest: its distance is about 1.0198, while $b'$ is about 10.\nThe reconstruction function can remain exactly the same even though the\nretrieval order changes.\n\nThis numerical example illustrates the coordinate ambiguity already encountered\nin the linear autoencoder/PCA discussion. It is a separate worked calculation,\nnot a result from training the UvA models.\n\n```python\nimport torch\n\nretrieval_dtype = torch.float64\nquery_code = torch.tensor([[0., 0.]], dtype=retrieval_dtype)\ncorpus_codes = torch.tensor([[.1, 2.], [1., .1], [3., 3.]], dtype=retrieval_dtype)\ndistances = torch.cdist(query_code, corpus_codes)\nmanual_distances = (query_code[:, None, :] - corpus_codes[None, :, :]).square().sum(-1).sqrt()\ntorch.testing.assert_close(distances, manual_distances)\nnearest = distances.topk(2, largest=False, dim=1).indices\nassert nearest.tolist() == [[1, 0]]\n\ncoordinate_map = torch.diag(torch.tensor([10., .1], dtype=retrieval_dtype))\nnew_query = query_code @ coordinate_map.T\nnew_corpus = corpus_codes @ coordinate_map.T\nnew_distances = torch.cdist(new_query, new_corpus)\nassert new_distances.topk(2, largest=False, dim=1).indices.tolist() == [[0, 1]]\n\ndef retrieval_decoder(z):\n    return torch.stack((z[..., 0].square(), z[..., 1], z[..., 0] + z[..., 1]), dim=-1)\n\nrecovered_codes = new_corpus @ torch.linalg.inv(coordinate_map).T\ntorch.testing.assert_close(recovered_codes, corpus_codes)\ntorch.testing.assert_close(retrieval_decoder(recovered_codes), retrieval_decoder(corpus_codes))\nprint(distances, new_distances, nearest)\n```\n\nTo evaluate an image-search system, choose queries and relevance judgments for\nthe task, then inspect or measure the returned neighbours. A reconstruction loss\ndoes not supply those judgments. Pixel reconstruction may preserve background\ncolour that occupies much of an image, whereas a search task may care about\nthe depicted object. Normalizing vectors or switching to cosine similarity\nchanges the search metric; neither operation follows automatically from the\nautoencoder objective.\n\nAn exhaustive distance matrix needs $QN$ entries and $O(QNd)$ arithmetic.\nLarge corpora need batching or a suitable nearest-neighbour index. Those search\nmethods are developed in\n[[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid|the retrieval chapter]];\nthe representation still has to be evaluated for the intended queries.\n\n<a id=\"почему-обычный-latent-space-неудобен-для-генерации\"></a>"
+        },
+        {
+          "old": "от восстановления входов.\n\n## Encoder VAE",
+          "new": "от восстановления входов.\n\n![[00 Учебник/Assets/Figures/curated/autoencoder-course-2026-11-03/uva-random-codes.svg|Eight outputs of the ordinary UvA decoder from independent standard-normal codes]]\n\n*Phillip Lippe,\n[UvA, Generating new images](https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial9/AE_CIFAR10.html#Generating-new-images).\nEight independent standard-normal vectors are sent directly to the\n256-coordinate ordinary decoder; no input image is encoded. Notebook cell 37,\ncomplete original SVG; [MIT](/licenses/uva-c7d9e18f-MIT.txt).*\n\nThese are the source notebook's outputs, not samples from a VAE and not a local\ntraining result. The broad colour patterns illustrate why a chosen sampling\ndistribution must be checked separately from reconstruction. They do not prove\nthat an ordinary autoencoder can never be combined with a learned model of its\ncode distribution.\n\n## Encoder VAE"
+        },
+        {
+          "old": "## Обычный autoencoder",
+          "new": "<a id=\"ae-objective\"></a>\n\n## Обычный autoencoder"
+        },
+        {
+          "old": "### Пример с одной скрытой координатой",
+          "new": "<a id=\"ae-linear-pca\"></a>\n\n### Пример с одной скрытой координатой"
+        },
+        {
+          "old": "### Один шаг обучения",
+          "new": "<a id=\"ae-learning-step\"></a>\n\n### Один шаг обучения"
+        },
+        {
+          "old": "### Повреждённый вход и чистая цель",
+          "new": "<a id=\"ae-denoising\"></a>\n\n### Повреждённый вход и чистая цель"
+        },
+        {
+          "old": "## Свёрточный автоэнкодер",
+          "new": "<a id=\"ae-convolutional\"></a>\n\n## Свёрточный автоэнкодер"
+        },
+        {
+          "old": "### Transposed convolution не обращает свёртку",
+          "new": "<a id=\"ae-transpose\"></a>\n\n### Transposed convolution не обращает свёртку"
+        },
+        {
+          "old": "### Исходные encoder и decoder UvA",
+          "new": "<a id=\"ae-uva-model\"></a>\n\n### Исходные encoder и decoder UvA"
+        },
+        {
+          "old": "### Почему MSE может давать размытое восстановление",
+          "new": "<a id=\"ae-mse\"></a>\n\n### Почему MSE может давать размытое восстановление"
+        },
+        {
+          "old": "### Choosing the latent width",
+          "new": "<a id=\"ae-latent-width\"></a>\n\n### Choosing the latent width"
+        },
+        {
+          "old": "### Reconstruction outside the training distribution",
+          "new": "<a id=\"ae-ood\"></a>\n\n### Reconstruction outside the training distribution"
+        },
+        {
+          "old": "## Image retrieval from autoencoder codes",
+          "new": "<a id=\"ae-retrieval\"></a>\n\n## Image retrieval from autoencoder codes"
+        },
+        {
+          "old": "## Почему реконструкции недостаточно для генерации",
+          "new": "<a id=\"ae-generative-gap\"></a>\n\n## Почему реконструкции недостаточно для генерации"
+        },
+        {
+          "old": "## Encoder VAE выдаёт распределение",
+          "new": "<a id=\"vae-generative-model\"></a>\n\n## Encoder VAE выдаёт распределение"
+        },
+        {
+          "old": "## ELBO и два разных KL",
+          "new": "<a id=\"vae-elbo\"></a>\n\n## ELBO и два разных KL"
+        },
+        {
+          "old": "### Модель, где оба KL можно посчитать точно",
+          "new": "<a id=\"vae-exact-posterior\"></a>\n\n### Модель, где оба KL можно посчитать точно"
+        },
+        {
+          "old": "## Likelihood декодера и ошибка восстановления",
+          "new": "<a id=\"vae-likelihood\"></a>\n\n## Likelihood декодера и ошибка восстановления"
+        },
+        {
+          "old": "## Reparameterization trick",
+          "new": "<a id=\"vae-reparameterization\"></a>\n\n## Reparameterization trick"
+        },
+        {
+          "old": "### Числовой путь производной",
+          "new": "<a id=\"vae-pathwise-gradient\"></a>\n\n### Числовой путь производной"
+        },
+        {
+          "old": "### Полный шаг маленького VAE",
+          "new": "<a id=\"vae-training\"></a>\n\n### Полный шаг маленького VAE"
+        },
+        {
+          "old": "## Исходный VAE из PyTorch examples",
+          "new": "<a id=\"vae-source-model\"></a>\n\n## Исходный VAE из PyTorch examples"
+        },
+        {
+          "old": "## Генерация и интерполяция",
+          "new": "<a id=\"vae-generation\"></a>\n\n## Генерация и интерполяция"
+        },
+        {
+          "old": "### Eval не отключает случайный код автоматически",
+          "new": "<a id=\"vae-eval\"></a>\n\n### Eval не отключает случайный код автоматически"
+        },
+        {
+          "old": "### Интерполяция между двумя кодами",
+          "new": "<a id=\"vae-interpolation\"></a>\n\n### Интерполяция между двумя кодами"
+        },
+        {
+          "old": "## Вес KL, β-VAE и потеря информации о входе",
+          "new": "<a id=\"vae-beta-collapse\"></a>\n\n## Вес KL, β-VAE и потеря информации о входе"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "3073aa50c43a40f9d2c449e88bda55a796d1417f64b06e0839aaa6ba50e34b5d",
+      "after_sha256": "c15c6aaf940e7e843aed29156464c733255aa9363f7912615676c5d0366a601a",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE|Autoencoder и variational autoencoder]]",
+          "new": "- [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE|Autoencoder и variational autoencoder]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-objective|Обучение автоэнкодера по реконструкции]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-linear-pca|Линейный автоэнкодер и PCA]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-learning-step|Шаг SGD в линейном автоэнкодере]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-denoising|Denoising autoencoder]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-convolutional|Свёрточный автоэнкодер]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-transpose|Транспонированная свёртка и output_padding]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-uva-model|Encoder и decoder из курса UvA]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-mse|MSE и размытые восстановления]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-latent-width|Размерность кода и ошибка восстановления]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-ood|Восстановление входов вне обучающего распределения]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-retrieval|Поиск соседей в кодах автоэнкодера]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-generative-gap|Почему реконструкция не задаёт генерацию]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-generative-model|Prior, likelihood и энкодер VAE]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-elbo|ELBO и два разных KL]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-exact-posterior|Точный posterior и зазор ELBO]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-likelihood|Likelihood декодера и аналитический KL]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-reparameterization|Репараметризация нормального кода]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-pathwise-gradient|Градиент при фиксированном шуме]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-training|Полный шаг обучения VAE]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-source-model|VAE из PyTorch examples]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-generation|Генерация из prior и наблюдение декодера]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-eval|Случайность VAE в eval]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-interpolation|Интерполяция и распределение кодов]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-beta-collapse|β-VAE и posterior collapse]]"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "d6f428e5cea169b73ea32f45346a769539042a9f0b963580f31f7828808d0f35",
+      "after_sha256": "0be3b535ea84e595bc9c222932e8f63403f8a4f1d6fe70cbd5bc434979424404",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE|Autoencoders and VAEs]]",
+          "new": "- [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE|Autoencoders and VAEs]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-objective|Autoencoder reconstruction objective]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-linear-pca|Linear autoencoders and PCA]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-learning-step|A linear autoencoder SGD step]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-denoising|Denoising autoencoders]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-convolutional|Convolutional autoencoders]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-transpose|Transposed convolution and output_padding]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-uva-model|Original UvA encoder and decoder]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-mse|MSE and blurred reconstructions]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-latent-width|Latent width and reconstruction error]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-ood|Out-of-distribution reconstruction]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-retrieval|Image retrieval and latent-space distance]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#ae-generative-gap|Why reconstruction does not define generation]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-generative-model|VAE prior, likelihood and inference model]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-elbo|ELBO and its two KL divergences]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-exact-posterior|Exact posterior and the ELBO gap]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-likelihood|Decoder likelihood and analytical Gaussian KL]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-reparameterization|Gaussian reparameterization]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-pathwise-gradient|Fixed-noise pathwise gradients]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-training|A complete VAE training step]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-source-model|Original PyTorch VAE example]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-generation|Prior generation and decoder observations]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-eval|VAE randomness in eval mode]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-interpolation|Interpolation and the code distribution]]\n  - [[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE#vae-beta-collapse|Beta-VAE and posterior collapse]]"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "4876d245f99bba28c80bfe93c1addfcf50483ade0c456c475306198b63f7d4b4",
+      "after_sha256": "9a66ad91d9a38a6ef7367392e851f75d118b5d5a2984c0c51ddfd3b7233e6881",
+      "changes": [
+        {
+          "old": "  - {\"id\":\"curated-neural-lm-bengio-figure1-402764857919\",\"asset\":\"00 Учебник/Assets/Figures/curated/neural-lm-bengio-2026-11-03/bengio-original-figure1.png\",\"author\":\"Yoshua Bengio, Réjean Ducharme, Pascal Vincent, Christian Jauvin\",\"source_url\":\"https://www.jmlr.org/papers/v3/bengio03a.html\",\"source_image_url\":\"https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf#page=6\",\"source_asset\":\"05 Источники/Originals/neural-lm-bengio-2026-11-03/bengio03a.pdf\",\"source_asset_sha256\":\"0bddf9a608d62da449a6413d86cbf6e8b206212595efe0e0a14da0d79d5f4976\",\"sha256\":\"4027648579190044a162655b51453f816cdb98adb298d4c5a2a55bb0f6cdfcd1\",\"source_page\":6,\"source_printed_page\":1142,\"render_dpi\":240,\"render_page_size_px\":[2040,2640],\"crop_box_px\":[273,283,1780,1263],\"dimensions_px\":[1507,980],\"bytes\":94140,\"license\":\"CC BY (JMLR publication policy; version unspecified)\",\"license_url\":\"https://jmlr.org/author-info.html#publication\",\"license_evidence\":\"05 Источники/Originals/neural-lm-bengio-2026-11-03/jmlr-author-info.html\",\"license_evidence_sha256\":\"de4f2e6dee40e595e0307ab1ff40a11554ab51be6ce12f4a625f04fdf97e3924\",\"public_license_copy\":\"site/public/licenses/bengio03a-figure1-jmlr-policy.txt\",\"rights_status\":\"publisher-cc-by-policy;paper-specific-license-version-not-stated\",\"provenance_confirmation\":\"publisher-publication-policy\",\"metadata_status\":\"verified\",\"derivation\":\"source-pdf-render-crop\",\"modifications\":\"Complete original Figure1 including its original caption, rendered at240dpi from publisher PDF page6. Only surrounding page header/body removed. No diagram redraw, relabeling, recoloring or translation.\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction.md\"]}",
+          "new": "  - {\"id\":\"curated-neural-lm-bengio-figure1-402764857919\",\"asset\":\"00 Учебник/Assets/Figures/curated/neural-lm-bengio-2026-11-03/bengio-original-figure1.png\",\"author\":\"Yoshua Bengio, Réjean Ducharme, Pascal Vincent, Christian Jauvin\",\"source_url\":\"https://www.jmlr.org/papers/v3/bengio03a.html\",\"source_image_url\":\"https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf#page=6\",\"source_asset\":\"05 Источники/Originals/neural-lm-bengio-2026-11-03/bengio03a.pdf\",\"source_asset_sha256\":\"0bddf9a608d62da449a6413d86cbf6e8b206212595efe0e0a14da0d79d5f4976\",\"sha256\":\"4027648579190044a162655b51453f816cdb98adb298d4c5a2a55bb0f6cdfcd1\",\"source_page\":6,\"source_printed_page\":1142,\"render_dpi\":240,\"render_page_size_px\":[2040,2640],\"crop_box_px\":[273,283,1780,1263],\"dimensions_px\":[1507,980],\"bytes\":94140,\"license\":\"CC BY (JMLR publication policy; version unspecified)\",\"license_url\":\"https://jmlr.org/author-info.html#publication\",\"license_evidence\":\"05 Источники/Originals/neural-lm-bengio-2026-11-03/jmlr-author-info.html\",\"license_evidence_sha256\":\"de4f2e6dee40e595e0307ab1ff40a11554ab51be6ce12f4a625f04fdf97e3924\",\"public_license_copy\":\"site/public/licenses/bengio03a-figure1-jmlr-policy.txt\",\"rights_status\":\"publisher-cc-by-policy;paper-specific-license-version-not-stated\",\"provenance_confirmation\":\"publisher-publication-policy\",\"metadata_status\":\"verified\",\"derivation\":\"source-pdf-render-crop\",\"modifications\":\"Complete original Figure1 including its original caption, rendered at240dpi from publisher PDF page6. Only surrounding page header/body removed. No diagram redraw, relabeling, recoloring or translation.\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction.md\"]}\n  - {\"id\":\"curated-uva-autoencoder-output-472ec692b4af\",\"asset\":\"00 Учебник/Assets/Figures/curated/autoencoder-course-2026-11-03/uva-latent-width.svg\",\"author\":\"Phillip Lippe\",\"title\":\"Validation reconstruction error over latent dimensionality\",\"source_url\":\"https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial9/AE_CIFAR10.ipynb\",\"source_image_url\":\"https://raw.githubusercontent.com/phlippe/uvadlc_notebooks/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial9/AE_CIFAR10.ipynb\",\"source_asset\":\"05 Источники/Originals/autoencoder-2026-10-26/uva-ae.ipynb\",\"source_asset_sha256\":\"ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be\",\"source_page_snapshot\":\"05 Источники/Originals/autoencoder-2026-10-26/uva-ae.ipynb\",\"source_page_sha256\":\"ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be\",\"source_cell\":26,\"source_member\":\"cells/26/outputs/0/data/image/svg+xml\",\"source_member_sha256\":\"472ec692b4afb5b51012b78d61ac8cd8ae827303b105fb7cd3a3172ad188bee3\",\"commit\":\"c7d9e18f42fee53bc8925f08ec2358371b1e9200\",\"license\":\"MIT\",\"license_url\":\"https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/LICENSE.md\",\"license_evidence\":\"site/public/licenses/uva-c7d9e18f-MIT.txt\",\"license_evidence_sha256\":\"bc760ea73079016ab58ddb9ade0ea6e822dc1ba801b8e26c9d0eadb68e564735\",\"derivation\":\"notebook-svg-output-copy\",\"modifications\":\"Complete original SVG output copied byte-for-byte, including any embedded raster. No plotting, crop, redraw, relabeling, resizing or recompression.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"sha256\":\"472ec692b4afb5b51012b78d61ac8cd8ae827303b105fb7cd3a3172ad188bee3\",\"bytes\":31342,\"viewBox\":[0,0,392.025469,282.535781],\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md\"]}\n  - {\"id\":\"curated-uva-autoencoder-output-5fefe3cd0a33\",\"asset\":\"00 Учебник/Assets/Figures/curated/autoencoder-course-2026-11-03/uva-noise-reconstruction.svg\",\"author\":\"Phillip Lippe\",\"title\":\"Reconstruction of independently generated noise\",\"source_url\":\"https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial9/AE_CIFAR10.ipynb\",\"source_image_url\":\"https://raw.githubusercontent.com/phlippe/uvadlc_notebooks/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial9/AE_CIFAR10.ipynb\",\"source_asset\":\"05 Источники/Originals/autoencoder-2026-10-26/uva-ae.ipynb\",\"source_asset_sha256\":\"ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be\",\"source_page_snapshot\":\"05 Источники/Originals/autoencoder-2026-10-26/uva-ae.ipynb\",\"source_page_sha256\":\"ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be\",\"source_cell\":32,\"source_member\":\"cells/32/outputs/0/data/image/svg+xml\",\"source_member_sha256\":\"5fefe3cd0a33955b020f7343acd2d3da9dffa004df4f773f1c657d0ac089cc13\",\"commit\":\"c7d9e18f42fee53bc8925f08ec2358371b1e9200\",\"license\":\"MIT\",\"license_url\":\"https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/LICENSE.md\",\"license_evidence\":\"site/public/licenses/uva-c7d9e18f-MIT.txt\",\"license_evidence_sha256\":\"bc760ea73079016ab58ddb9ade0ea6e822dc1ba801b8e26c9d0eadb68e564735\",\"derivation\":\"notebook-svg-output-copy\",\"modifications\":\"Complete original SVG output copied byte-for-byte, including any embedded raster. No plotting, crop, redraw, relabeling, resizing or recompression.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"sha256\":\"5fefe3cd0a33955b020f7343acd2d3da9dffa004df4f773f1c657d0ac089cc13\",\"bytes\":119845,\"viewBox\":[0,0,405,130.885027],\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md\"]}\n  - {\"id\":\"curated-uva-autoencoder-output-f0f5ef6a8dec\",\"asset\":\"00 Учебник/Assets/Figures/curated/autoencoder-course-2026-11-03/uva-pattern-reconstruction.svg\",\"author\":\"Phillip Lippe\",\"title\":\"Reconstruction of synthetic fields, blocks and ramps\",\"source_url\":\"https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial9/AE_CIFAR10.ipynb\",\"source_image_url\":\"https://raw.githubusercontent.com/phlippe/uvadlc_notebooks/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial9/AE_CIFAR10.ipynb\",\"source_asset\":\"05 Источники/Originals/autoencoder-2026-10-26/uva-ae.ipynb\",\"source_asset_sha256\":\"ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be\",\"source_page_snapshot\":\"05 Источники/Originals/autoencoder-2026-10-26/uva-ae.ipynb\",\"source_page_sha256\":\"ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be\",\"source_cell\":34,\"source_member\":\"cells/34/outputs/0/data/image/svg+xml\",\"source_member_sha256\":\"f0f5ef6a8decb6a29fd2975f70cd5d7918d0b483431486cd1ccba4140a06d63e\",\"commit\":\"c7d9e18f42fee53bc8925f08ec2358371b1e9200\",\"license\":\"MIT\",\"license_url\":\"https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/LICENSE.md\",\"license_evidence\":\"site/public/licenses/uva-c7d9e18f-MIT.txt\",\"license_evidence_sha256\":\"bc760ea73079016ab58ddb9ade0ea6e822dc1ba801b8e26c9d0eadb68e564735\",\"derivation\":\"notebook-svg-output-copy\",\"modifications\":\"Complete original SVG output copied byte-for-byte, including any embedded raster. No plotting, crop, redraw, relabeling, resizing or recompression.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"sha256\":\"f0f5ef6a8decb6a29fd2975f70cd5d7918d0b483431486cd1ccba4140a06d63e\",\"bytes\":58332,\"viewBox\":[0,0,405,227.11981],\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md\"]}\n  - {\"id\":\"curated-uva-autoencoder-output-94bd5c7d9898\",\"asset\":\"00 Учебник/Assets/Figures/curated/autoencoder-course-2026-11-03/uva-random-codes.svg\",\"author\":\"Phillip Lippe\",\"title\":\"Ordinary decoder outputs from standard-normal codes\",\"source_url\":\"https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial9/AE_CIFAR10.ipynb\",\"source_image_url\":\"https://raw.githubusercontent.com/phlippe/uvadlc_notebooks/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial9/AE_CIFAR10.ipynb\",\"source_asset\":\"05 Источники/Originals/autoencoder-2026-10-26/uva-ae.ipynb\",\"source_asset_sha256\":\"ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be\",\"source_page_snapshot\":\"05 Источники/Originals/autoencoder-2026-10-26/uva-ae.ipynb\",\"source_page_sha256\":\"ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be\",\"source_cell\":37,\"source_member\":\"cells/37/outputs/0/data/image/svg+xml\",\"source_member_sha256\":\"94bd5c7d9898dbc7483f254e77a2b7d032e7efbe995a0cac7803aeefa1968722\",\"commit\":\"c7d9e18f42fee53bc8925f08ec2358371b1e9200\",\"license\":\"MIT\",\"license_url\":\"https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/LICENSE.md\",\"license_evidence\":\"site/public/licenses/uva-c7d9e18f-MIT.txt\",\"license_evidence_sha256\":\"bc760ea73079016ab58ddb9ade0ea6e822dc1ba801b8e26c9d0eadb68e564735\",\"derivation\":\"notebook-svg-output-copy\",\"modifications\":\"Complete original SVG output copied byte-for-byte, including any embedded raster. No plotting, crop, redraw, relabeling, resizing or recompression.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"sha256\":\"94bd5c7d9898dbc7483f254e77a2b7d032e7efbe995a0cac7803aeefa1968722\",\"bytes\":43514,\"viewBox\":[0,0,460.8,240.834783],\"used_in\":[\"00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md\"]}"
+        }
+      ]
+    }
+  ],
+  "sourceComparison": [
+    {
+      "source": "docs/audit/2026-10-26-autoencoder.md",
+      "read": "Entire historical report read. Its e742c3a5 chapter hash differs from current baseline 0fa503da; it is not an exact-current read receipt. Entire current 956-line baseline freshly read in ranges 1–240,241–505,506–735,736–EOF."
+    },
+    {
+      "source": "05 Источники/Originals/autoencoder-2026-10-26/uva-ae.ipynb",
+      "sha256": "ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be",
+      "commit": "c7d9e18f42fee53bc8925f08ec2358371b1e9200",
+      "read": "All58 markdown and code cells freshly read, including loss, training/evaluation setup, latent-width comparison, OOD inputs, random-code generation, retrieval, TensorBoard and limitations. Existing source is already a filled notebook; PNG-only inventory initially missed the SVG outputs. No extra dataset, weights or notebook download saved.",
+      "use": "Cells26,32,34,37: complete original SVG outputs extracted without plotting, cropping or rasterization. Retrieval method carried into canonical explanation with an independently identified numerical metric counterexample. No claim of locally reproducing the source's CIFAR experiment or TensorBoard session."
+    },
+    {
+      "source": "https://arxiv.org/html/1312.6114v11",
+      "read": "Full Method §§2.1–2.4, Algorithm1 and AppendixB read freshly. Compared likelihood/posterior roles, both KL identities, analytic Gaussian KL and fixed-noise gradient path. No copied paper image or new license inferred."
+    },
+    {
+      "source": "05 Источники/Originals/autoencoder-2026-10-26/pytorch-vae.py",
+      "sha256": "366116e8252ac68ef1f180cce0b3c017f5a957595d863c8d4904210a80cdab6d",
+      "read": "Entire pinned original script freshly read, including VAE class, loss, train/test, eval and sampling. Existing original classes/loss retained and source-compared by checker. No whole script import, MNIST download or training run."
+    }
+  ],
+  "remaining": [
+    "Three existing Weng/Kingma figure permissions remain needs-confirmation; not relicensed under UvA MIT.",
+    "Sparse/contractive AE, full VQ-VAE and a separate English translation are not claimed complete by this delta.",
+    "Other owners, thematic course integration, public-checkout acceptance and dev/Pages release remain open."
+  ]
+}

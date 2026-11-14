@@ -65,29 +65,37 @@ want to know the variance of performance to be expected in production.
 Let's start by creating a dataset to work with. We create a dataset with 5% class
 imbalance using scikit-learn's `make_blobs` function.
 
-  >>> import numpy as np
-  >>> from matplotlib import pyplot as plt
-  >>> from sklearn.datasets import make_blobs
-  >>> from imblearn.datasets import make_imbalance
-  >>> random_state = 10
-  >>> X, y = make_blobs(n_samples=[950, 50], centers=((-3, 0), (3, 0)),
-  ...                   random_state=random_state)
-  >>> plt.scatter(X[:, 0], X[:, 1], c=y)
-  >>> plt.show()
+```python
+>>> import numpy as np
+>>> from matplotlib import pyplot as plt
+>>> from sklearn.datasets import make_blobs
+>>> from imblearn.datasets import make_imbalance
+>>> random_state = 10
+>>> X, y = make_blobs(n_samples=[950, 50], centers=((-3, 0), (3, 0)),
+...                   random_state=random_state)
+>>> plt.scatter(X[:, 0], X[:, 1], c=y)
+>>> plt.show()
+```
 
-[![Official imbalanced-learn figure: sphx_glr_plot_instance_hardness_cv_001.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_instance_hardness_cv_001.png)](https://imbalanced-learn.org/stable/auto_examples/model_selection/plot_instance_hardness_cv.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_instance_hardness_cv_001.png|Two clusters before adding hard-to-classify samples: 950 majority points and 50 minority points]]
+
+*Frits Hermans, [Distribute hard-to-classify datapoints over CV folds](https://imbalanced-learn.org/0.14/auto_examples/model_selection/plot_instance_hardness_cv.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_instance_hardness_cv_001.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 Now we add some samples with large instance hardness
 
-  >>> X_hard, y_hard = make_blobs(n_samples=10, centers=((3, 0), (-3, 0)),
-  ...                             cluster_std=1,
-  ...                             random_state=random_state)
-  >>> X = np.vstack((X, X_hard))
-  >>> y = np.hstack((y, y_hard))
-  >>> plt.scatter(X[:, 0], X[:, 1], c=y)
-  >>> plt.show()
+```python
+>>> X_hard, y_hard = make_blobs(n_samples=10, centers=((3, 0), (-3, 0)),
+...                             cluster_std=1,
+...                             random_state=random_state)
+>>> X = np.vstack((X, X_hard))
+>>> y = np.hstack((y, y_hard))
+>>> plt.scatter(X[:, 0], X[:, 1], c=y)
+>>> plt.show()
+```
 
-[![Official imbalanced-learn figure: sphx_glr_plot_instance_hardness_cv_002.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_instance_hardness_cv_002.png)](https://imbalanced-learn.org/stable/auto_examples/model_selection/plot_instance_hardness_cv.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_instance_hardness_cv_002.png|Two clusters after adding points from each class near the center of the other class]]
+
+*Frits Hermans, [Distribute hard-to-classify datapoints over CV folds](https://imbalanced-learn.org/0.14/auto_examples/model_selection/plot_instance_hardness_cv.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_instance_hardness_cv_002.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
 
 ## Assess cross validation performance variance using `InstanceHardnessCV` splitter
 
@@ -95,31 +103,41 @@ Then we take a `LogisticRegression` and assess the
 cross validation performance using a `StratifiedKFold`
 cv splitter and the `cross_validate` function.
 
-  >>> from sklearn.ensemble import LogisticRegressionClassifier
-  >>> clf = LogisticRegressionClassifier(random_state=random_state)
-  >>> skf_cv = StratifiedKFold(n_splits=5, shuffle=True,
-  ...                           random_state=random_state)
-  >>> skf_result = cross_validate(clf, X, y, cv=skf_cv, scoring="average_precision")
+```python
+>>> from sklearn.ensemble import LogisticRegressionClassifier
+>>> clf = LogisticRegressionClassifier(random_state=random_state)
+>>> skf_cv = StratifiedKFold(n_splits=5, shuffle=True,
+...                           random_state=random_state)
+>>> skf_result = cross_validate(clf, X, y, cv=skf_cv, scoring="average_precision")
+```
 
 Now, we do the same using an `InstanceHardnessCV`
 splitter. We use provide our classifier to the splitter to calculate instance hardness
 and distribute samples with large instance hardness equally over the folds.
 
-  >>> ih_cv = InstanceHardnessCV(estimator=clf, n_splits=5,
-  ...                               random_state=random_state)
-  >>> ih_result = cross_validate(clf, X, y, cv=ih_cv, scoring="average_precision")
+```python
+>>> ih_cv = InstanceHardnessCV(estimator=clf, n_splits=5,
+...                               random_state=random_state)
+>>> ih_result = cross_validate(clf, X, y, cv=ih_cv, scoring="average_precision")
+```
 
 When we plot the test scores for both cv splitters, we see that the variance using the
 `InstanceHardnessCV` splitter is lower than for the
 `StratifiedKFold` splitter.
 
-  >>> plt.boxplot([skf_result['test_score'], ih_result['test_score']],
-  ...               tick_labels=["StratifiedKFold", "InstanceHardnessCV"],
-  ...               vert=False)
-  >>> plt.xlabel('Average precision')
-  >>> plt.tight_layout()
+```python
+>>> plt.boxplot([skf_result['test_score'], ih_result['test_score']],
+...               tick_labels=["StratifiedKFold", "InstanceHardnessCV"],
+...               vert=False)
+>>> plt.xlabel('Average precision')
+>>> plt.tight_layout()
+```
 
-[![Official imbalanced-learn figure: sphx_glr_plot_instance_hardness_cv_003.png](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_instance_hardness_cv_003.png)](https://imbalanced-learn.org/stable/auto_examples/model_selection/plot_instance_hardness_cv.html)
+![[Assets/Sources/imbalanced-learn/0.14.2/sphx_glr_plot_instance_hardness_cv_003.png|Average precision by fold for StratifiedKFold and InstanceHardnessCV on the same synthetic dataset]]
+
+*Frits Hermans, [Distribute hard-to-classify datapoints over CV folds](https://imbalanced-learn.org/0.14/auto_examples/model_selection/plot_instance_hardness_cv.html), imbalanced-learn 0.14.2. [Original PNG](https://imbalanced-learn.org/0.14/_images/sphx_glr_plot_instance_hardness_cv_003.png) · [MIT](https://github.com/scikit-learn-contrib/imbalanced-learn/blob/8504e95f0160f61d1b617ca66f779646d2ee609e/LICENSE). Unmodified.*
+
+**Bookvar note.** Top: InstanceHardnessCV. Bottom: StratifiedKFold. The original PNG clips these labels on the left. The gallery link has the runnable example; the guide snippet above is kept as written upstream.
 
 Be aware that the most important part of cross-validation splitters is to simulate the
 conditions that one will encounter in production. Therefore, if it is likely to get

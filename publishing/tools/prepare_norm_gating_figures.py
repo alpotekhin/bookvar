@@ -52,4 +52,4 @@ with tempfile.TemporaryDirectory() as folder:
     with Image.open(prefix.with_suffix(".png")) as page,Image.open(ROOT/"00 Учебник/Assets/Figures/curated/source-first-32-34/cs336-silu-vs-relu.png") as actual:
         expected=page.crop([633,293,1420,1084])
         assert ImageChops.difference(actual.convert("RGB"),expected.convert("RGB")).getbbox() is None
-print("PASS source pixels CS336 SiLU; five original figures checked")
+print("PASS source pixels CS336 SiLU")

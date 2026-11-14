@@ -1,12 +1,14 @@
+import { createHash } from "node:crypto";
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
-import { resolve } from "node:path";
+import { relative, resolve, sep } from "node:path";
 import process from "node:process";
 import matter from "gray-matter";
 import { parse } from "yaml";
 
 const root = resolve(import.meta.dirname, "../..");
-const publishedSources = new Set(parse(readFileSync(resolve(root, "publishing/navigation.yml"), "utf8"))
-  .sections.flatMap(section => section.pages.map(page => page.source)));
+const navigationPages = parse(readFileSync(resolve(root, "publishing/navigation.yml"), "utf8"))
+  .sections.flatMap(section => section.pages);
+const publishedSources = new Set(navigationPages.map(page => page.source));
 
 const matrices = [
   {
@@ -159,6 +161,24 @@ if (!existsSync(figuresPath)) {
         `found ${figureFiles.length}`,
     );
   }
+  const source = JSON.parse(readFileSync(resolve(root,
+    "publishing/tests/fixtures/scikit-learn-mooc-blobs.json"), "utf8"));
+  const imported = new Set();
+  const compare = (file, upstream) => {
+    const bytes = readFileSync(file);
+    const actual = createHash("sha1").update(`blob ${bytes.length}\0`).update(bytes).digest("hex");
+    if (source.blobs[upstream] !== actual) {
+      failures.push(`Scikit-learn MOOC: source blob mismatch: ${upstream}`);
+    }
+    imported.add(upstream);
+  };
+  for (const file of figureFiles) {
+    compare(file, "figures/" + relative(figuresPath, file).split(sep).join("/"));
+  }
+  compare(resolve(root, "site/public/licenses/scikit-learn-mooc-0cc70c41-CC-BY-4.0.txt"), "LICENSE");
+  for (const upstream of Object.keys(source.blobs)) {
+    if (!imported.has(upstream)) failures.push(`Scikit-learn MOOC: missing source blob: ${upstream}`);
+  }
 }
 
 const canonicalPath = resolve(root, scikitCourse.canonicalDirectory);
@@ -228,15 +248,22 @@ if (!existsSync(harvardPracticePath)) {
 
 const hseManifest = "05 Источники/Courses/HSE ML course/import-manifest.json";
 const hseManifestPath = resolve(root, hseManifest);
-if (!existsSync(hseManifestPath)) {
-  failures.push(`${hseManifest}: manifest does not exist`);
-} else {
+const hseRouteRoot = "sources/courses/hse-ml-course/";
+const hsePages = navigationPages.filter(page => page.route.startsWith(hseRouteRoot)
+  && page.route !== hseRouteRoot + "index");
+checkedHseArtifacts = hsePages.length;
+if (checkedHseArtifacts !== 67) {
+  failures.push(`HSE catalogue: expected 67 routes, found ${checkedHseArtifacts}`);
+}
+const hasHseArchive = existsSync(hseManifestPath);
+if (hasHseArchive) {
   const records = JSON.parse(readFileSync(hseManifestPath, "utf8"));
-  const navigation = readFileSync(resolve(root, "publishing/navigation.yml"), "utf8");
-  checkedHseArtifacts = records.length;
-  if (checkedHseArtifacts !== 67) {
-    failures.push(`${hseManifest}: expected 67 artifacts, found ${checkedHseArtifacts}`);
-  }
+  const archiveRoutes = new Map(records.map(record => [record.route, record.output]));
+  for (const page of hsePages)
+    if (archiveRoutes.get(page.route) !== page.source)
+      failures.push(`${hseManifest}: route or source mismatch: ${page.route}`);
+  if (records.length !== hsePages.length)
+    failures.push(`${hseManifest}: expected ${hsePages.length} artifacts, found ${records.length}`);
   for (const record of records) {
     const outputPath = resolve(root, record.output);
     if (!existsSync(outputPath)) {
@@ -255,9 +282,6 @@ if (!existsSync(hseManifestPath)) {
         failures.push(`${hseManifest}: asset missing: ${asset}`);
       }
     }
-    if (!navigation.includes(`route: ${record.route}`)) {
-      failures.push(`${hseManifest}: route missing from navigation: ${record.route}`);
-    }
   }
 }
 
@@ -274,8 +298,9 @@ console.log(
   `Source coverage check passed: ${checkedRows} matrix rows, ` +
     `${checkedDestinations} existing destinations with direct source links, ` +
     `${scikitCourse.expectedPages} Scikit-learn MOOC pages, ` +
-    `${scikitCourse.expectedFigures} figures, and ` +
+    `${scikitCourse.expectedFigures} source figure blobs and their license, and ` +
     `${scikitCourse.canonicalFiles.length} canonical course-linked pages; ` +
     `${checkedHarvardLabs} Harvard labs, ${checkedHarvardSlides} slide decks, ` +
-    `and ${checkedHseArtifacts} HSE course artifacts.`,
+    `and ${checkedHseArtifacts} HSE catalogue entries ` +
+    (hasHseArchive ? "(local archive also checked)." : "(local archive not installed)."),
 );

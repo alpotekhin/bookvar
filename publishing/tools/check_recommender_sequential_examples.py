@@ -8,8 +8,9 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/02 Рекомендательные системы/04 Последовательные рекомендации и признаки.md"
 content = CHAPTER.read_bytes()
-blocks = re.findall(r"```python\n(.*?)```", content.decode(), re.S)
-assert len(blocks) == 11
+blocks = [match[1] for match in re.findall(
+    r"^(```|~~~)python\n(.*?)^\1$", content.decode(), re.S | re.M)]
+assert len(blocks) == 12
 scope = {}
 for number, code in enumerate(blocks, 1):
     print(f"Execute actual sequential block {number}", flush=True)
@@ -90,6 +91,20 @@ assert np.isfinite(zero_output).all() and np.isfinite(zero_weights).all()
 np.testing.assert_array_equal(zero_output, np.zeros((4, 2)))
 assert attention(np.array([[1., -1.]]), np.array([1]))[1][0, 0] == 1
 print("PASS 100 independent attention systems, future/PAD invariance and fully masked rows")
+
+# Independent one-query attention on the exact keys saved by the two inputs.
+new_input = scope["current_input"]
+old_input = scope["cached_input"]
+new_query = new_input[-1]
+for keys, expected in (
+    (new_input, scope["current_output"][-1]),
+    (np.concatenate([old_input[1:], new_query[None, :]]), scope["stale_output"][-1]),
+):
+    mass = np.exp(keys @ new_query / np.sqrt(2))
+    np.testing.assert_allclose(mass @ keys / mass.sum(), expected)
+assert np.all(scope["cached_ids"][1:] == scope["current_ids"][:2])
+assert not np.array_equal(old_input[1:], new_input[:2])
+print("PASS unchanged item IDs with shifted slots and incompatible cached K/V")
 
 # Independent scalar BCE and finite differences on all non-PAD logits.
 positive, negative, mask = (scope[k] for k in ["pos_logits", "neg_logits", "target_mask"])

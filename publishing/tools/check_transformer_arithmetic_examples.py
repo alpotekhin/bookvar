@@ -85,7 +85,25 @@ for formula in (r"\frac{2N_{\rm global}W}{bR}",r"\frac{3IW}{bR}",r"p-1\le6IW/(bR
                 r"\frac12+\frac{a_{\rm F}-a_{\rm T}}{2a_{\rm F}a_{\rm T}}"):
     assert formula in body
 assert body.count('id="cs336-systems-arithmetic"') == 1
-assert len(re.findall(r"!\[\[02 Areas/ML & DL/",body)) == 9
+assert len(re.findall(r"!\[\[02 Areas/ML & DL/",body)) == 10
+
+# Independently sum causal pairs and derive the shapes of each matrix.
+section = body.split('<a id="arith-attention-share"></a>', 1)[1].split('## 3.', 1)[0]
+opt = {"350M": (1024, 4096), "1.3B": (2048, 8192)}
+rows = re.findall(r"^\| OPT-(350M|1\.3B), (\d+) \| ([\d,]+) \| ([\d,]+) \| ([\d,]+)% \|$", section, re.M)
+assert [(name, s) for name, s, *_ in rows] == [("350M", "2048"), ("1.3B", "2048"), ("350M", "1024")]
+for name, s, displayed_linear, displayed_mix, displayed_share in rows:
+    s = int(s)
+    width, intermediate = opt[name]
+    linear = 2 * s * sum(prod(shape) for shape in
+                         [(width, width)] * 4 + [(width, intermediate), (intermediate, width)])
+    mix = 4 * width * sum(range(1, s + 1))
+    share = Q(mix, linear + mix)
+    assert share == Q(s + 1, 12 * width + s + 1)
+    for value, displayed in ((linear / 1e9, displayed_linear),
+                             (mix / 1e9, displayed_mix), (share * 100, displayed_share)):
+        assert f"{float(value):.2f}".replace(".", ",") == displayed
+assert (60 + 40 // 5, 20 + 80 // 5) == (68, 36)
 print("PASS actual NumPy block, eight finite differences, resource arithmetic, MFU/HFU, "
-      "256 communication grids and 16 continuous optima; CPU only")
+      "256 communication grids, 16 continuous optima and three OPT FLOP table rows; CPU only")
 print("chapter_sha256=" + hashlib.sha256(path.read_bytes()).hexdigest())

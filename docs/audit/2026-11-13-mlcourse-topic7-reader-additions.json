@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-13",
+  "scope": "Repair the derived reader page for mlcourse.ai Topic 7; preserve the archived HTML and Markdown.",
+  "review": {
+    "source": "The retained HTML matches its import manifest. The pinned Git tree identifies the exact MyST lesson and license blobs; all 18 input cells match the pinned lesson and retain the same code tokens as the archived projection. The five text outputs are untouched. All 18 cells parse after removing IPython magic lines.",
+    "figures": "The ten authored plots match the publisher's SHA-256 filenames and neighboring original plotting code. The separate PCA and clustering images are credited to their own sources; the substitute figures are not claimed to be the historical Habr images. The banner remains linked on the source page.",
+    "calculation": "scikit-learn 1.7.2: 40/45 without PCA and 41/45 after training a PCA/tree pipeline on the train split only. On Digits, 20 and 21 components explain 0.89430312 and 0.90319850. Executed the original seeded K-means input and iteration cells: squared-distance objectives 322.01381, 45.53922, 36.05993, 36.05993. On a four-item mismatched partition ARI and AMI are both -0.5.",
+    "limits": "The historical plots and metrics are retained, not claimed to be newly reproduced byte for byte. This review covers Topic 7 and the explicit corrections, not the full archive or the canonical textbook chapters."
+  },
+  "files": [
+    {
+      "source": "publishing/adapter/build.ts",
+      "before_sha256": "d74579062b8650a829a7588c2c18025d2f16e399f273bb808968914b78711f70",
+      "after_sha256": "8919648585d77bf30f77ed4a0fb63b2f9d201a923d7372e6c5a5ba6e0d45c73b",
+      "changes": [
+        {
+          "old": "",
+          "new": "import { mlcourseTopic7ReaderBody } from './mlcourse-topic7-reader.js';\n"
+        },
+        {
+          "old": "  if (!route.startsWith('sources/courses/genai-agents/')) return scikitMoocReaderBody(route, source, body);",
+          "new": "  if (!route.startsWith('sources/courses/genai-agents/')) {\n    return mlcourseTopic7ReaderBody(route, source, scikitMoocReaderBody(route, source, body));\n  }"
+        }
+      ]
+    }
+  ]
+}

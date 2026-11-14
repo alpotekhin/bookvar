@@ -1,4 +1,4 @@
-"""Execute five published NumPy blocks; independently check masks, cache and pooling."""
+"""Execute the published examples; independently check masks, cache and pooling."""
 from pathlib import Path
 import hashlib
 import itertools
@@ -9,7 +9,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / '00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md'
 blocks = re.findall(r'~~~python\n(.*?)\n~~~', CHAPTER.read_text(), re.S)
-assert len(blocks) == 5
+assert len(blocks) == 6
 ns = {}
 for i, block in enumerate(blocks, 1):
     exec(compile(block, f'{CHAPTER.name}:block-{i}', 'exec'), ns)
@@ -29,6 +29,9 @@ for i, block in enumerate(blocks, 1):
         np.testing.assert_array_equal(ns['selected'], [3,4])
         assert math.isclose(ns['sparse'].item(), 8)
         assert math.isclose(ns['full'].item(), 212/16)
+    elif i == 5:
+        assert ns['moba_visible'](10, 4, [2, 3], 2) == list(range(4, 11))
+        assert ns['moba_visible'](11, 4, [2, 3], 2) == list(range(4, 12))
     else:
         np.testing.assert_allclose(ns['csa_pool'], [[2.,20.],[3.75,45.]])
         np.testing.assert_allclose(ns['hca_pool'], [[4.,40.]])
@@ -81,6 +84,48 @@ for count,wanted in enumerate((4,7,10),1):
     paths = (local.astype(int)@paths.astype(int))>0
     assert paths[-1].sum() == wanted
 print('PASS three-layer receptive fields: 4, 7, 10')
+
+# Count the independently enumerated pairs in the worked encoder examples.
+n, radius, block_size = 8, 1, 4
+window_keys = [
+    set(range(max(0, i - radius), min(n, i + radius + 1))) for i in range(n)
+]
+global_keys = [set(range(n)) if i == 0 else keys | {0} for i, keys in enumerate(window_keys)]
+dilated = [j for j in range(n) if abs(j - 3) in {0, 2}]
+assert window_keys[3] == {2, 3, 4} and global_keys[3] == {0, 2, 3, 4}
+assert global_keys[0] == set(range(n)) and dilated == [1, 3, 5]
+assert sum(map(len, window_keys)) == 22 and sum(map(len, global_keys)) == 34
+assert n * n == 64
+longformer = np.array([[j in keys for j in range(n)] for keys in global_keys])
+assert math.isclose(ns['two_layers'](longformer)[3, 0], 1/32)
+future_global = np.array([
+    [j <= i and (j in keys or i == 5 or j == 5) for j in range(n)]
+    for i, keys in enumerate(window_keys)
+])
+assert not future_global[3, 5] and future_global[5, :6].all() and not future_global[5, 6:].any()
+print('PASS Longformer rows, pair counts, dilated radius, 1/32 path and causal controls')
+
+g = n // block_size
+summary_keys = set(range(n, n + g))
+tglobal_keys = [keys | summary_keys for keys in window_keys]
+assert tglobal_keys[3] == {2, 3, 4, 8, 9} and sum(map(len, tglobal_keys)) == 38
+assert n * g == 16 == n ** 2 // block_size
+
+def tglobal_single_attention(states):
+    totals = np.stack([states[i:i + block_size].sum(axis=0) for i in range(0, n, block_size)])
+    summaries = totals / np.sqrt(np.mean(totals ** 2, axis=-1, keepdims=True) + 1e-6)
+    keys_values = np.concatenate([states, summaries])
+    mask = np.array([[j in keys for j in range(n + g)] for keys in tglobal_keys])
+    return ns['attention'](np.zeros_like(states), np.zeros_like(keys_values), keys_values, mask)
+
+states = np.zeros((n, 2))
+states[4, 0] = 1
+prior = tglobal_single_attention(states)
+states[7, 1] = 1
+updated = tglobal_single_attention(states)
+assert 7 not in tglobal_keys[3] and prior[3, 1] == 0
+assert math.isclose(updated[3, 1], 1 / (5 * math.sqrt(1 + 1e-6)))
+print('PASS LongT5 extra columns, no direct key 7, same-layer influence through g1')
 
 # A causal stack cannot transmit a changed future value to an earlier query.
 mask = ns['causal_pattern']

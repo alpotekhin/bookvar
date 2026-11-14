@@ -2,7 +2,7 @@
 title: "FlashAttention: exact attention with less memory traffic"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-19
+last_updated: 2026-11-11
 last_verified: 2026-10-14
 source_unit_id:
   - lecture-05-performance-recap-transition
@@ -17,14 +17,15 @@ primary_sources:
   - https://arxiv.org/abs/2205.14135
   - https://arxiv.org/abs/2307.08691
   - https://arxiv.org/html/2407.08608v1
+  - https://arxiv.org/abs/2603.05451v1
   - https://crfm.stanford.edu/2023/07/17/flash2.html
   - https://github.com/Dao-AILab/flash-attention
   - https://pytorch.org/docs/stable/generated/torch.nn.functional.scaled_dot_product_attention.html
   - https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html
 locale: en
 translation_status: current
-canonical_revision: "15ba654d059b1ccd35bd07c6b041e405bef2f99d74ee03f672c205263b7589a1"
-translation_reviewed: "2026-10-29"
+canonical_revision: "123b9691c61aee75e1d39ded8c5e13903f67db59d01f645ac848263ddc626660"
+translation_reviewed: "2026-11-11"
 translation_of: "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md"
 ---
 
@@ -127,12 +128,19 @@ Its contribution can immediately enter the output tile, after which the
 temporary matrix is discarded. Inputs, outputs and short row-statistics
 vectors remain.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention-tiling.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/flashattention-editorial-2026-11-11/fa1-tiling-loops.png|The outer loop chooses a key/value tile; the inner loop visits query tiles. SRAM holds the current score tile; HBM receives the updated output.]]
 
-*Tri Dao, [FlashAttention-2, Stanford CRFM](https://crfm.stanford.edu/2023/07/17/flash2.html).
-Two key/value blocks contribute to one output without storing complete
-$S$ and $P$. The original diagram omits maximum subtraction for simplicity;
-the numerically stable version is derived below.*
+*Tri Dao et al., [FlashAttention, center panel of the original diagram](https://github.com/Dao-AILab/flash-attention/blob/1fc0221183e799363001394a12dd9e78e15f5dda/assets/flashattn_banner.pdf),
+[BSD-3-Clause](/licenses/flash-attention-1fc02211-BSD-3-Clause.txt). Only the neighboring panels are omitted; the labels and loop arrows
+are unchanged.*
+
+The dashed outline marks the full $QK^\top$ matrix, but only the current
+tile is computed in SRAM. The arrow to HBM leads to an update of the
+output $\operatorname{softmax}(QK^\top)V$, not to the square score matrix.
+[Tri Dao's Stanford CRFM diagram](https://crfm.stanford.edu/2023/07/17/flash2.html) shows the same update with
+two key blocks: the second changes the denominator, so the first
+contribution is rescaled. That diagram omits maximum subtraction; the
+stable update is derived below.
 
 FA1 and FA2 visit tiles in different orders. The original FA1 algorithm
 selects $K_j,V_j$ in the outer loop and visits query tiles $Q_i$ in the inner
@@ -548,12 +556,18 @@ In sliced-Q, warps receive separate query rows and share the $K,V$ tiles.
 Each warp owns its output rows, eliminating this cross-warp reduction from
 that portion of forward.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention2-partitioning.png]]
+In [Tri Dao's Figure 3](https://arxiv.org/html/2307.08691v1#S3.F3), four warps share one thread block's
+work. Take a tile with 128 queries and 128 keys, using zero-based indices:
 
-*Tri Dao, [FlashAttention-2, Stanford CRFM](https://crfm.stanford.edu/2023/07/17/flash2.html).
-Left: warps contribute to the same output rows. Right: each warp owns rows
-of $Q$ and the corresponding output. This partitions work within a thread
-block; it does not distribute a model across GPUs.*
+| Within one thread block | Sliced-K | Sliced-Q |
+|---|---|---|
+| Warp 0 handles | All 128 queries, keys 0–31 | Queries 0–31, all 128 keys |
+| Who computes row 40 | All four warps, each with its own keys | Warp 1, which owns rows 32–63 |
+| Before writing the result | Combine the warp contributions to one row | No contribution from another warp is needed for that row |
+
+These are two levels of partitioning. A thread block owns a query tile;
+the warps within it own rows of that tile. With sliced-Q, each output row
+has one owner, so this forward step needs no cross-warp reduction for it.
 
 These changes do not imply that FA2 is always limited only by matrix
 operations. Relative execution rates change across GPU generations.
@@ -699,6 +713,55 @@ The accuracy comparison in [FA3, §3.3 and §4.3](https://arxiv.org/html/2407.08
 applies to the paper's inputs and quantization choices, not every model or
 quality tolerance.
 
+<a id="fa4-blackwell"></a>
+
+## FlashAttention-4: matrix operations and softmax on Blackwell
+
+On B200, matrix hardware gained more throughput than other execution units.
+In [the FA4 paper's model, Table 1](https://arxiv.org/html/2603.05451v1#S3.T1), a
+$128\times128$ tile with head dimension 128 takes 1024 modeled cycles for
+its two matrix products, another 1024 on the exponential unit, and 768
+for shared-memory reads. These are resource estimates, not a measured
+forward-pass time. With serial matrix and softmax stages, one unit would
+wait for the other.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/flashattention-editorial-2026-11-11/fa4-forward-pipeline.png|Four thread blocks on the left each own two query tiles. On the right, Tensor Core products alternate with softmax for the two tiles, H and L.]]
+
+*Ted Zadouri, Markus Hoehnerbach, Jay Shah, Timmy Liu, Vijay Thakkar and Tri Dao,
+[FlashAttention-4, Figure 1](https://arxiv.org/html/2603.05451v1#S3.F1), [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+Unmodified source image; the cycle counts are modeled.*
+
+On the left, CTA 0 owns Q0 and Q1 and scans the K/V tiles. Follow the first
+steps on one SM on the right: Tensor Cores compute
+$S_0^H=Q^H K_0^\top$, then a softmax group processes those scores while
+Tensor Cores compute $S_0^L$ for the other query tile. Once $P_0^H$ is
+ready, the value product can start while the softmax group works on $S_0^L$.
+Blackwell stores matrix accumulators in tensor memory (TMEM).
+A separate correction group rescales the accumulated output.
+[§3.1.2](https://arxiv.org/html/2603.05451v1#S3.SS1.SSS2).
+
+The kernel also splits exponentials between execution units. Some entries
+use a polynomial approximation to $2^x$ evaluated with FMA; the rest use
+MUFU.EX2. Both units can then work concurrently. The choice trades greater
+exponential throughput against register pressure, and the paper reports
+FP32 and BF16 errors separately. [§3.1.3](https://arxiv.org/html/2603.05451v1#S3.SS1.SSS3).
+
+The kernel can also rescale less often. Return to scores $0,\log 2,\log 4$.
+After the first two keys, using $\log 2$ as the reference gives
+$\ell=1.5$ and $u=25$. If the threshold permits keeping that reference
+after the third key, the new weight is $e^{\log 4-\log 2}=2$. This gives
+$\ell'=3.5$ and $u'=105$: $105/3.5=30$, the same as immediate
+rescaling. Numerator and denominator use the same scale. Once the maximum
+rises beyond the threshold, the kernel updates its reference to keep the
+exponentials in range. [§3.1.4](https://arxiv.org/html/2603.05451v1#S3.SS1.SSS4).
+
+Backward still combines contributions to $dQ$ from different key tiles.
+In 2-CTA mode, neighboring thread blocks exchange parts of $dS$ through
+distributed shared memory, then execute a joint matrix product with a
+larger reduction dimension. That reduces some repeated reads and global
+updates; it does not remove the reduction across key tiles.
+[§3.2.3, Figure 3](https://arxiv.org/html/2603.05451v1#S3.SS2.SSS3).
+
 <a id="реализация-и-номер-версии"></a>
 
 ## Implementations and version numbers
@@ -718,8 +781,8 @@ This is not a complete compatibility matrix. ROCm has separate implementations
 and constraints. FA4's presence does not mean an arbitrary PyTorch call
 selects it. Check the
 [pinned README](https://raw.githubusercontent.com/Dao-AILab/flash-attention/1fc0221183e799363001394a12dd9e78e15f5dda/README.md)
-and the executed kernel. FA4 mechanisms require its own paper; a similar
-name does not establish the FA3 execution schedule.
+and the executed kernel. The FA4 section describes a Blackwell schedule;
+this table describes the implementations available in the pinned README.
 
 <a id="обучение-prefill-и-decode"></a>
 
@@ -810,6 +873,7 @@ MLPs, data movement, communication and other operations also contribute.
 - Dao, [FlashAttention-2](https://arxiv.org/abs/2307.08691): non-matrix work, parallelism and warp partitioning.
 - Tri Dao, [FlashAttention-2 at Stanford CRFM](https://crfm.stanford.edu/2023/07/17/flash2.html): original aggregation and sliced-Q diagrams.
 - Shah et al., [FlashAttention-3](https://arxiv.org/html/2407.08608v1): asynchronous schedules, register constraints and FP8; CC BY 4.0.
+- [[05 Источники/Papers/FlashAttention-4.md|Zadouri et al. — FlashAttention-4]]: Blackwell, conditional rescaling and two-CTA backward.
 - [Dao-AILab/flash-attention](https://github.com/Dao-AILab/flash-attention): official implementations, constraints and tests; the reviewed state is pinned above.
 - PyTorch, [Scaled Dot Product Attention](https://pytorch.org/docs/stable/generated/torch.nn.functional.scaled_dot_product_attention.html): current API documentation; version 2.14 was used for chapter verification.
 - [Stanford CS336 Lecture 5, pinned `8b59b507`, pp.49–55](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf): tiling, fusion and online softmax.

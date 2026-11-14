@@ -12,9 +12,12 @@ const assets=YAML.parse(readFileSync(resolve(root,'05 Источники/asset-r
 const expected=[
  '00 Учебник/Assets/Figures/curated/norm-gating-2026-10-22/xiong-pre-post-norm.png',
  '00 Учебник/Assets/Figures/curated/norm-gating-2026-10-22/xiong-gradient-norms.png',
+ '00 Учебник/Assets/Figures/curated/norm-gating-2026-10-22/xiong-warmup.png',
  '00 Учебник/Assets/Figures/curated/source-first-32-34/cs336-silu-vs-relu.png',
+ '00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/tajima-figure1-ffn.svg',
  '00 Учебник/Assets/Figures/curated/chameleon-2026-10/chameleon-norm-qk-dropout.png',
- '00 Учебник/Assets/Figures/curated/chameleon-2026-10/chameleon-training-ablations.png'
+ '00 Учебник/Assets/Figures/curated/chameleon-2026-10/chameleon-training-ablations.png',
+ '00 Учебник/Assets/Figures/curated/gemma2-norm-2026-11-13/gemma-scope-figure1.svg'
 ];
 describe('normalization and stability chapter',()=>{
  it('contains worked residual, pre/post, RMS derivative and epsilon counterexamples',()=>{
@@ -35,10 +38,10 @@ describe('normalization and stability chapter',()=>{
    expect(body).toContain('1.677');
    expect(body).toContain('524 288');
  });
- it('uses five exact licensed originals and withdraws the cropped legacy collage',()=>{
-   const embeds=[...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^\]]+)\]\]/g)].map(m=>m[1]);
+ it('uses exact licensed originals and withdraws the cropped legacy collage',()=>{
+   const embeds=[...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^\]|]+)(?:\|[^\]]*)?\]\]/g)].map(m=>m[1]);
    expect(new Set(embeds)).toEqual(new Set(expected));
-   expect(embeds).toHaveLength(5);
+   expect(embeds).toHaveLength(expected.length);
    expect(new Set(assets.filter((a:any)=>a.used_in?.includes(file)).map((a:any)=>a.asset)))
      .toEqual(new Set(expected));
    for(const path of expected){
@@ -51,6 +54,28 @@ describe('normalization and stability chapter',()=>{
    expect(old.used_in).toEqual([]);
    expect(old.metadata_status).toBe('needs-confirmation');
    expect(existsSync(resolve(root,old.asset))).toBe(true);
+ });
+ it('connects the actual warm-up experiment and the two SwiGLU gradient branches to source figures',()=>{
+   const warm=body.split('### Что показали эксперименты с warm-up')[1]?.split('id="rmsnorm-validation"')[0];
+   for(const value of ['4000 шагов','8,45','31,16','2,77','На всех четырёх панелях архитектура post-LN',
+     'https://proceedings.mlr.press/v119/xiong20b/xiong20b.pdf#page=4'])expect(warm).toContain(value);
+   const gate=body.split('id="ffn-variants"')[1]?.split('## Как четыре механизма')[0];
+   for(const value of ['tajima-figure1-ffn.svg','1.8553','0.7311','SiLU'])expect(gate).toContain(value);
+ });
+ it('keeps the Gemma 2 output norms before residual addition and pins the exact author diagram',()=>{
+   const section=body.split('id="gemma2-sandwich-norm"')[1]?.split('id="normalization-evidence"')[0];
+   expect(section).toBeDefined();
+   for(const value of ['post_attention_layernorm', 'residual + hidden_states', 'GeGLU', 'W_O',
+     '0.575,1.916','1.194,1.592,0.119,0.159','48.20','29.92','SAE','2408.05147v2#S3.F1'])
+     expect(section).toContain(value);
+   const row=assets.find((a:any)=>a.asset===expected.at(-1));
+   expect(row).toMatchObject({
+     source_image_url:'https://arxiv.org/html/2408.05147v2/sae_location_diagram.svg',
+     license_evidence_url:'https://arxiv.org/html/2408.05147v2',
+     rights_status:'source-license-verified',
+     sha256:'a89a4f331b2aefab50191633add37e4e80691acf63cd325f3ca309653c12b424',
+   });
+   expect(fm.reference_terms).toContainEqual(expect.objectContaining({anchor:'gemma2-sandwich-norm'}));
  });
  it('preserves five source anchors and the sequential book route',()=>{
    for(const id of ['normalization-stability','rmsnorm-validation','ffn-variants',

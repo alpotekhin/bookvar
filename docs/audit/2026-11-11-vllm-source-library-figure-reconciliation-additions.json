@@ -1,0 +1,515 @@
+{
+  "date": "2026-11-11",
+  "scope": "Keep the local implementation study and its full example. Link to Gordić's intact original article and pinned original figures instead of serving the ten archived copies. Reuse five unchanged licensed figures from the existing textbook.",
+  "review": {
+    "sourceScope": "The vLLM website/blog repository has no root license at pinned revision 05f81b0527e2d484c48721f9dc1c49d06849c9f3 or reported license at review time. The post and adjacent figure directory have no separate notice. No grant was verified. The vLLM software repository's Apache-2.0 license covers its own documented architecture and prefix-cache images, not the blog repository. Original copies are kept byte-for-byte locally.",
+    "sources": "Official blog edition and article sections on engine core, batching, prefix caching, scaling and metrics; vLLM 42172ad scheduler, especially running versus preempted/waiting; PagedAttention arXiv v1 Figure 5; pinned official process and prefix-cache docs; Harvard First-Token Accounting and Performance Engineering.",
+    "workedCase": "Request A: KV positions 3 → 4 → 5 and physical blocks 2 → 2 → 3. Request B finishes at step 2 and releases one block; step 3 uses 3 + 2 blocks for A and C. Decode tokens occupy KV slots only on a later forward pass. Unchanged table and numbers.",
+    "style": "Full existing study read. Preserve its mechanism sections, table, equations and terminology. Specify what each new caption demonstrates, distinguish the version of the TP=4 topology, and keep the full original reachable in English."
+  },
+  "verification": "Ten archived PNGs match the official blog Git blobs at the pinned commit and are absent from both published asset paths. In the built RU source note and its EN fallback, all ten pinned figure links and both complete article links remain, and all five inline figures match their registered SHA-256. Read the finished note and checked the three-step token and block example independently. In Chrome the five figures fit at 1280 and 375 CSS px without page overflow or KaTeX errors, with 4× zoom and horizontal pan on mobile. Astro built 2083 pages; 305 built-output tests and 206 asset-registry and preservation tests passed, with zero broken internal routes, fragments or files. Both exact journal inverses and local HEAD/origin-dev were unchanged by publication operations; no deployment.",
+  "figures": [
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/paged-attention-blocks.png",
+      "sha256": "16b5c731f1f5ee4e031b5cbbce0ca97a4df580b63864de1dd08fde82dc605f6d",
+      "license": "CC BY 4.0",
+      "source_url": "https://arxiv.org/abs/2309.06180",
+      "source_image_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/paged-attention-blocks.png",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+        "05 Источники/Implementation studies/Inside vLLM.md"
+      ]
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg",
+      "sha256": "cd26640ab6dab6e5877f70ee267584b5edb2486498d013078d32a4bfc4c1ecc5",
+      "license": "CC BY-NC-ND 4.0",
+      "source_url": "https://harvard-edge.github.io/cs249r_book_dev/vol3/02_foundation_model/02_foundation_model.html#fig-vol3-first-token-accounting",
+      "source_image_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book_dev/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/images/svg/first_token_accounting.svg",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+        "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md",
+        "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+        "en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md",
+        "05 Источники/Implementation studies/Inside vLLM.md"
+      ]
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg",
+      "sha256": "304b952ce3d768150291a52ecbfc8fb8e66207993ba3c83ed4a313f1c87d2893",
+      "license": "CC BY-NC-SA 4.0",
+      "source_url": "https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/prefill-vs-decode-roofline.svg",
+      "source_image_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/prefill-vs-decode-roofline.svg",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+        "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md",
+        "05 Источники/Implementation studies/Inside vLLM.md"
+      ]
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-cache-overview.png",
+      "sha256": "44f3000fcd73ec08ad66183ca8b3e0901e4b52044cf501f19fa8839391ac4e6a",
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/docs/assets/design/prefix_caching/overview.png",
+      "source_image_url": "https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/docs/assets/design/prefix_caching/overview.png",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+        "05 Источники/Implementation studies/Inside vLLM.md"
+      ]
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/vllm-v1-processes-tp4.png",
+      "sha256": "8602fecbabf3b5fb4ceeb831f608dc178d14ec4a686e2f2cff58b1af78f8951d",
+      "license": "Apache-2.0",
+      "source_url": "https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/assets/design/arch_overview/v1_process_architecture_tp4.png",
+      "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/assets/design/arch_overview/v1_process_architecture_tp4.png",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md",
+        "05 Источники/Implementation studies/Inside vLLM.md"
+      ]
+    }
+  ],
+  "retired": [
+    {
+      "id": "curated-vllm-engine-constructor-a1b2c3d4e501",
+      "asset": "00 Учебник/Assets/Figures/curated/inference-serving/vllm-engine_constructor.png",
+      "author": "Aleksa Gordić",
+      "source_url": "https://www.aleksagordic.com/blog/vllm",
+      "license": null,
+      "license_url": null,
+      "modifications": "Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.",
+      "used_in": [],
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-bytes-verified",
+      "source_asset": "raw/papers/external/inference-serving/vllm/engine_constructor.png",
+      "publication_status": "retired",
+      "rights_status": "source-republication-unverified",
+      "commit": "05f81b0527e2d484c48721f9dc1c49d06849c9f3",
+      "git_blob": "44fcf3187d6df6cc1ae07fa2d3b67416680b153b",
+      "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/engine_constructor.png",
+      "figure_url": "https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/engine_constructor.png",
+      "sha256": "c401049e1f7e58ebed2a37f959d43e00973b4b6153d70ee27d1f6d39f2407237",
+      "source_asset_sha256": "c401049e1f7e58ebed2a37f959d43e00973b4b6153d70ee27d1f6d39f2407237",
+      "bytes": 189910,
+      "derivation": "source-raster-copy-byte-verified",
+      "last_verified": "2026-11-11",
+      "former_used_in": [
+        "docs/audit/2026-10-14-serving-engines.md",
+        "05 Источники/Implementation studies/Inside vLLM.md"
+      ],
+      "retirement_reason": "Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original."
+    },
+    {
+      "id": "curated-vllm-engine-loop-a1b2c3d4e502",
+      "asset": "00 Учебник/Assets/Figures/curated/inference-serving/vllm-engine_loop.png",
+      "author": "Aleksa Gordić",
+      "source_url": "https://www.aleksagordic.com/blog/vllm",
+      "license": null,
+      "license_url": null,
+      "modifications": "Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.",
+      "used_in": [],
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-bytes-verified",
+      "source_asset": "raw/papers/external/inference-serving/vllm/engine_loop.png",
+      "publication_status": "retired",
+      "rights_status": "source-republication-unverified",
+      "commit": "05f81b0527e2d484c48721f9dc1c49d06849c9f3",
+      "git_blob": "165bf57289c58cab008a7b24ad72d84a215fcca4",
+      "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/engine_loop.png",
+      "figure_url": "https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/engine_loop.png",
+      "sha256": "87194d5d20695e1359876dbcc9909fb32abc9e4d83b94da04441b66c4f8064b6",
+      "source_asset_sha256": "87194d5d20695e1359876dbcc9909fb32abc9e4d83b94da04441b66c4f8064b6",
+      "bytes": 85078,
+      "derivation": "source-raster-copy-byte-verified",
+      "last_verified": "2026-11-11",
+      "former_used_in": [
+        "docs/audit/2026-10-14-serving-engines.md",
+        "05 Источники/Implementation studies/Inside vLLM.md"
+      ],
+      "retirement_reason": "Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original."
+    },
+    {
+      "id": "curated-vllm-forward-pass-a1b2c3d4e503",
+      "asset": "00 Учебник/Assets/Figures/curated/inference-serving/vllm-fwd_pass.png",
+      "author": "Aleksa Gordić",
+      "source_url": "https://www.aleksagordic.com/blog/vllm",
+      "license": null,
+      "license_url": null,
+      "modifications": "Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.",
+      "used_in": [],
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-bytes-verified",
+      "source_asset": "raw/papers/external/inference-serving/vllm/fwd_pass.png",
+      "publication_status": "retired",
+      "rights_status": "source-republication-unverified",
+      "commit": "05f81b0527e2d484c48721f9dc1c49d06849c9f3",
+      "git_blob": "89d066e8b45ef366fb7e657c62317617317f6743",
+      "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/fwd_pass.png",
+      "figure_url": "https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/fwd_pass.png",
+      "sha256": "9e6a21aa1754ecad6cce8b0723fd18fbfd19cf61ce62be7fb1505e97e48c8547",
+      "source_asset_sha256": "9e6a21aa1754ecad6cce8b0723fd18fbfd19cf61ce62be7fb1505e97e48c8547",
+      "bytes": 919947,
+      "derivation": "source-raster-copy-byte-verified",
+      "last_verified": "2026-11-11",
+      "former_used_in": [
+        "docs/audit/2026-10-14-serving-engines.md",
+        "docs/audit/2026-10-14-inference-scheduling.md",
+        "05 Источники/Implementation studies/Inside vLLM.md"
+      ],
+      "retirement_reason": "Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original."
+    },
+    {
+      "id": "curated-vllm-prefix-one-a1b2c3d4e504",
+      "asset": "00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt1.png",
+      "author": "Aleksa Gordić",
+      "source_url": "https://www.aleksagordic.com/blog/vllm",
+      "license": null,
+      "license_url": null,
+      "modifications": "Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.",
+      "used_in": [],
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-bytes-verified",
+      "source_asset": "raw/papers/external/inference-serving/vllm/prefix_pt1.png",
+      "publication_status": "retired",
+      "rights_status": "source-republication-unverified",
+      "commit": "05f81b0527e2d484c48721f9dc1c49d06849c9f3",
+      "git_blob": "3053390d020d04dac781326b52305247aa960668",
+      "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/prefix_pt1.png",
+      "figure_url": "https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/prefix_pt1.png",
+      "sha256": "4f7d91bea0c77b3040e0edca32d38847d2ea81d65a11ca5c2955990ffb4529a9",
+      "source_asset_sha256": "4f7d91bea0c77b3040e0edca32d38847d2ea81d65a11ca5c2955990ffb4529a9",
+      "bytes": 348861,
+      "derivation": "source-raster-copy-byte-verified",
+      "last_verified": "2026-11-11",
+      "former_used_in": [
+        "docs/audit/2026-10-14-inference-scheduling.md",
+        "05 Источники/Implementation studies/Inside vLLM.md"
+      ],
+      "retirement_reason": "Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original.",
+      "replacement": "00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-cache-overview.png"
+    },
+    {
+      "id": "curated-vllm-prefix-two-a1b2c3d4e505",
+      "asset": "00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt2.png",
+      "author": "Aleksa Gordić",
+      "source_url": "https://www.aleksagordic.com/blog/vllm",
+      "license": null,
+      "license_url": null,
+      "modifications": "Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.",
+      "used_in": [],
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-bytes-verified",
+      "source_asset": "raw/papers/external/inference-serving/vllm/prefix_pt2.png",
+      "publication_status": "retired",
+      "rights_status": "source-republication-unverified",
+      "commit": "05f81b0527e2d484c48721f9dc1c49d06849c9f3",
+      "git_blob": "022e176a24df32de89950dc2c65a85e832db760b",
+      "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/prefix_pt2.png",
+      "figure_url": "https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/prefix_pt2.png",
+      "sha256": "4babbda7d0425f3a91ea70916c9a9a6517ef314db6579eb1082aa8c550aff957",
+      "source_asset_sha256": "4babbda7d0425f3a91ea70916c9a9a6517ef314db6579eb1082aa8c550aff957",
+      "bytes": 186966,
+      "derivation": "source-raster-copy-byte-verified",
+      "last_verified": "2026-11-11",
+      "former_used_in": [
+        "docs/audit/2026-10-14-inference-scheduling.md",
+        "05 Источники/Implementation studies/Inside vLLM.md"
+      ],
+      "retirement_reason": "Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original.",
+      "replacement": "00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-cache-overview.png"
+    },
+    {
+      "id": "curated-vllm-prefix-three-a1b2c3d4e506",
+      "asset": "00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt3.png",
+      "author": "Aleksa Gordić",
+      "source_url": "https://www.aleksagordic.com/blog/vllm",
+      "license": null,
+      "license_url": null,
+      "modifications": "Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.",
+      "used_in": [],
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-bytes-verified",
+      "source_asset": "raw/papers/external/inference-serving/vllm/prefix_pt3.png",
+      "publication_status": "retired",
+      "rights_status": "source-republication-unverified",
+      "commit": "05f81b0527e2d484c48721f9dc1c49d06849c9f3",
+      "git_blob": "bbaed33e5baeed009f0b9485f1ecdd8865430357",
+      "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/prefix_pt3.png",
+      "figure_url": "https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/prefix_pt3.png",
+      "sha256": "e33f5cb126de6d21b32a519789ef778fbadaf6e4b871382029e50dfeddac0abc",
+      "source_asset_sha256": "e33f5cb126de6d21b32a519789ef778fbadaf6e4b871382029e50dfeddac0abc",
+      "bytes": 343325,
+      "derivation": "source-raster-copy-byte-verified",
+      "last_verified": "2026-11-11",
+      "former_used_in": [
+        "docs/audit/2026-10-14-inference-scheduling.md",
+        "05 Источники/Implementation studies/Inside vLLM.md"
+      ],
+      "retirement_reason": "Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original.",
+      "replacement": "00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-cache-overview.png"
+    },
+    {
+      "id": "curated-vllm-multiprocess-a1b2c3d4e507",
+      "asset": "00 Учебник/Assets/Figures/curated/inference-serving/vllm-multiprocexecutor.png",
+      "author": "Aleksa Gordić",
+      "source_url": "https://www.aleksagordic.com/blog/vllm",
+      "license": null,
+      "license_url": null,
+      "modifications": "Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.",
+      "used_in": [],
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-bytes-verified",
+      "source_asset": "raw/papers/external/inference-serving/vllm/multiprocexecutor.png",
+      "publication_status": "retired",
+      "rights_status": "source-republication-unverified",
+      "commit": "05f81b0527e2d484c48721f9dc1c49d06849c9f3",
+      "git_blob": "59c2977e4f684743cab8bda05b3ff1442d298329",
+      "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/multiprocexecutor.png",
+      "figure_url": "https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/multiprocexecutor.png",
+      "sha256": "8da9588a276d435ea8dbca0d95e3cce1dc76f203a64f626aab62d7d4b399545c",
+      "source_asset_sha256": "8da9588a276d435ea8dbca0d95e3cce1dc76f203a64f626aab62d7d4b399545c",
+      "bytes": 79039,
+      "derivation": "source-raster-copy-byte-verified",
+      "last_verified": "2026-11-11",
+      "former_used_in": [
+        "05 Источники/Implementation studies/Inside vLLM.md",
+        "00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md"
+      ],
+      "retirement_reason": "Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original.",
+      "replacement": "00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/vllm-v1-processes-tp4.png"
+    },
+    {
+      "id": "curated-vllm-server-setup-a1b2c3d4e508",
+      "asset": "00 Учебник/Assets/Figures/curated/inference-serving/vllm-server_setup.png",
+      "author": "Aleksa Gordić",
+      "source_url": "https://www.aleksagordic.com/blog/vllm",
+      "license": null,
+      "license_url": null,
+      "modifications": "Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.",
+      "used_in": [],
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-bytes-verified",
+      "source_asset": "raw/papers/external/inference-serving/vllm/server_setup.png",
+      "publication_status": "retired",
+      "rights_status": "source-republication-unverified",
+      "commit": "05f81b0527e2d484c48721f9dc1c49d06849c9f3",
+      "git_blob": "4186d77c13021250ba6b6a3213a9699b74cbe618",
+      "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/server_setup.png",
+      "figure_url": "https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/server_setup.png",
+      "sha256": "2a1d18b17bddc03f111d8d1b4933850c5e5cac62dcbc31b71d49d1edd4ff4369",
+      "source_asset_sha256": "2a1d18b17bddc03f111d8d1b4933850c5e5cac62dcbc31b71d49d1edd4ff4369",
+      "bytes": 42531,
+      "derivation": "source-raster-copy-byte-verified",
+      "last_verified": "2026-11-11",
+      "former_used_in": [
+        "05 Источники/Implementation studies/Inside vLLM.md",
+        "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+        "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md"
+      ],
+      "retirement_reason": "Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original.",
+      "replacement": "00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/vllm-v1-processes-tp4.png"
+    },
+    {
+      "id": "curated-vllm-latency-a1b2c3d4e509",
+      "asset": "00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png",
+      "author": "Aleksa Gordić",
+      "source_url": "https://www.aleksagordic.com/blog/vllm",
+      "license": null,
+      "license_url": null,
+      "rights_status": "source-republication-unverified",
+      "provenance_confirmation": "source-bytes-verified",
+      "title": "Time to first token, inter-token latency, and end-to-end latency",
+      "commit": "05f81b0527e2d484c48721f9dc1c49d06849c9f3",
+      "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/latency_diagram.png",
+      "modifications": "Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.",
+      "sha256": "c4aedd158b29b99d7430e12b4f5dca1bb160abc02261cd4a8fbecab598c9d53c",
+      "bytes": 37423,
+      "dimensions_px": [
+        862,
+        396
+      ],
+      "metadata_status": "verified",
+      "last_verified": "2026-11-11",
+      "derivation": "source-raster-copy-byte-verified",
+      "source_asset_sha256": "c4aedd158b29b99d7430e12b4f5dca1bb160abc02261cd4a8fbecab598c9d53c",
+      "used_in": [],
+      "former_used_in": [
+        "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+        "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md",
+        "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+        "en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md",
+        "05 Источники/Implementation studies/Inside vLLM.md"
+      ],
+      "publication_status": "retired",
+      "replacement": "00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg",
+      "git_blob": "b514d814b17a9d9ea607047ee0e5bbf0bfb77835",
+      "figure_url": "https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/latency_diagram.png",
+      "retirement_reason": "Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original."
+    },
+    {
+      "id": "curated-vllm-roofline-a1b2c3d4e50a",
+      "asset": "00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png",
+      "author": "Aleksa Gordić",
+      "source_url": "https://www.aleksagordic.com/blog/vllm",
+      "license": null,
+      "license_url": null,
+      "rights_status": "source-republication-unverified",
+      "provenance_confirmation": "source-bytes-verified",
+      "title": "Memory and compute limits in the roofline model",
+      "commit": "05f81b0527e2d484c48721f9dc1c49d06849c9f3",
+      "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/roofline.png",
+      "modifications": "Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.",
+      "sha256": "137cbceb1790cd0de91db60d4a990ab2669d8ebe5bf5e675f2a24190978fe6a4",
+      "bytes": 48865,
+      "dimensions_px": [
+        579,
+        406
+      ],
+      "metadata_status": "verified",
+      "last_verified": "2026-11-11",
+      "derivation": "source-raster-copy-byte-verified",
+      "source_asset_sha256": "137cbceb1790cd0de91db60d4a990ab2669d8ebe5bf5e675f2a24190978fe6a4",
+      "used_in": [],
+      "former_used_in": [
+        "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+        "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md",
+        "05 Источники/Implementation studies/Inside vLLM.md"
+      ],
+      "publication_status": "retired",
+      "replacement": "00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg",
+      "git_blob": "4a745983cd54ec2c7bcb898870661e2191f0c1e5",
+      "figure_url": "https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/roofline.png",
+      "retirement_reason": "Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original."
+    }
+  ],
+  "files": [
+    {
+      "source": "05 Источники/Implementation studies/Inside vLLM.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-07-21\nlast_verified: 2026-07-21",
+          "new": "last_updated: 2026-11-11\nlast_verified: 2026-11-11"
+        },
+        {
+          "old": "> Декомпозиция engine и оригинальные иллюстрации сопоставлены со статьёй Алексы\n> Гордича [Inside vLLM: Anatomy of a High-Throughput LLM Inference System](https://www.aleksagordic.com/blog/vllm),\n> описывающей [commit `42172ad`](https://github.com/vllm-project/vllm/tree/42172ad)\n> от 9 августа 2025 года. Ниже механизмы разобраны самостоятельно, включая\n> игрушечное расписание и расчёт блоков; это не полный перевод статьи и не\n> спецификация текущего API. Имена классов и поддержка сочетаний функций\n> проверяются по закреплённой версии реализации.",
+          "new": "> Статья Алексы Гордича *Inside vLLM* целиком на английском: [сайт автора](https://www.aleksagordic.com/blog/vllm) и [блог vLLM](https://vllm.ai/blog/2025-09-05-anatomy-of-vllm).\n> В статье разобран [commit `42172ad`](https://github.com/vllm-project/vllm/tree/42172ad)\n> от 9 августа 2025 года. Здесь к этому разбору добавлены учебное расписание\n> и расчёт KV-блоков. Ссылки на рисунки Гордича ведут к оригиналам;\n> у встроенных схем из других источников указана версия."
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-engine_constructor.png]]\n\n*Компоненты, создаваемые вокруг `LLM`: конфигурация, processor, engine core,\nmodel executor, scheduler и KV-cache manager. Иллюстрация: Aleksa Gordić,\n[Inside vLLM](https://www.aleksagordic.com/blog/vllm), оригинал в\n[официальном blog repository](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/engine_constructor.png).*",
+          "new": "На [схеме конструктора `LLM` у Гордича](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/engine_constructor.png)\nвидно, какие компоненты создаёт клиент и что инициализирует Engine Core."
+        },
+        {
+          "old": "6. завершённые запросы освобождают блоки, а незавершённые возвращаются в очередь.",
+          "new": "6. для завершённых запросов менеджер освобождает блоки; остальные могут попасть\n   в следующий шаг. Активный запрос остаётся в наборе `running`, а вытесненный\n   планировщик возвращает в `waiting`\n   ([реализация `42172ad`](https://github.com/vllm-project/vllm/blob/42172ad/vllm/v1/core/sched/scheduler.py#L204-L274))."
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-engine_loop.png]]\n\n*Жизненный цикл запроса внутри engine loop. Иллюстрация: Aleksa Gordić,\n[Inside vLLM](https://www.aleksagordic.com/blog/vllm),\n[исходный файл](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/engine_loop.png).*",
+          "new": "[Схема одного шага Engine Core у Гордича](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/engine_loop.png)."
+        },
+        {
+          "old": "Во время **prefill** модель обрабатывает сразу все токены prompt. Большая\nматричная работа обычно даёт сравнительно высокую арифметическую интенсивность.",
+          "new": "Во время **prefill** модель обрабатывает токены запроса и записывает их\nключи и значения в KV-кеш. Если запрос не разбит на части, prefill обрабатывает\nвесь запрос за один проход. Большие матричные операции обычно дают высокую\nарифметическую интенсивность."
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-fwd_pass.png]]\n\n*Подготовка metadata и один forward pass для запросов разной длины. Иллюстрация:\nAleksa Gordić, [Inside vLLM](https://www.aleksagordic.com/blog/vllm),\n[исходный файл](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/fwd_pass.png).*",
+          "new": "[Подготовка метаданных для нескольких запросов на схеме Гордича](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/fwd_pass.png)."
+        },
+        {
+          "old": "копирования всей последовательности.\n\n### Один цикл на конкретных запросах",
+          "new": "копирования всей последовательности.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/paged-attention-blocks.png|Таблица блоков связывает логический порядок токенов с разнесёнными физическими блоками, к которым обращается запрос для forth.]]\n\n*Woosuk Kwon et al., [PagedAttention, рис. 5](https://arxiv.org/html/2309.06180v1#S4.F5),\n[оригинал из материалов CS336](https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/paged-attention-blocks.png),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\nПервый блок последовательности, `Block 0`, находится в нижней строке.\nДля вычисления внимания к `forth` ядро читает `Block 0`, `Block 1`\nи `Block 2` там, где они лежат в памяти.*\n\n### Один цикл на конкретных запросах"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt1.png]]\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt2.png]]\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt3.png]]\n\n*Пошаговый пример построения, завершения и повторного использования cache\nblocks. Иллюстрации: Aleksa Gordić,\n[Inside vLLM](https://www.aleksagordic.com/blog/vllm), исходные файлы\n[1](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/prefix_pt1.png),\n[2](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/prefix_pt2.png),\n[3](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/prefix_pt3.png).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-cache-overview.png|Пул физических блоков, очередь свободных блоков, индекс хешей и списки блоков по запросам.]]\n\n*Команда vLLM, [Automatic Prefix Caching](https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/docs/design/prefix_caching.md),\n[исходный PNG](https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/docs/assets/design/prefix_caching/overview.png),\n[Apache-2.0](/licenses/vllm-23fbc2ec-Apache-2.0.txt).\nИндекс находит блок по ключу, а список запроса хранит ссылку на уже\nвыделенный физический блок.*\n\nУ Гордича этот процесс показан в трёх состояниях:\n[вычисление хешей](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/prefix_pt1.png),\n[заполнение блоков KV](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/prefix_pt2.png),\n[повторное использование](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/prefix_pt3.png)."
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-multiprocexecutor.png]]\n\n*Переход от одного worker к multiprocess executor. Иллюстрация: Aleksa Gordić,\n[Inside vLLM](https://www.aleksagordic.com/blog/vllm),\n[исходный файл](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/multiprocexecutor.png).*",
+          "new": "[Переход от одного worker к нескольким процессам на схеме Гордича](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/multiprocexecutor.png)."
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-server_setup.png]]\n\n*Сетевой слой отделён от engine core: API server принимает и валидирует запросы,\nа engine client передаёт их runtime. Иллюстрация: Aleksa Gordić,\n[Inside vLLM](https://www.aleksagordic.com/blog/vllm),\n[исходный файл](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/server_setup.png).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/vllm-v1-processes-tp4.png|Один процесс API-сервера передаёт запросы одному Engine Core, который управляет четырьмя процессами GPU Worker.]]\n\n*Команда vLLM, [V1 Process Architecture, TP=4](https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/design/arch_overview.md),\n[исходный PNG](https://raw.githubusercontent.com/vllm-project/vllm/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/assets/design/arch_overview/v1_process_architecture_tp4.png),\n[Apache-2.0](/licenses/vllm-db9527a4-Apache-2.0.txt).\nПри четырёх GPU один запрос проходит через API-сервер и Engine Core,\nа один шаг модели вычисляют четыре процесса GPU Worker. Схема показывает\nконфигурацию из документации, а не все способы запуска vLLM.*\n\n[Сетевой слой и Engine Core на схеме Гордича](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/server_setup.png)."
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png]]\n\n*Разложение пользовательской задержки. Иллюстрация: Aleksa Gordić,\n[Inside vLLM](https://www.aleksagordic.com/blog/vllm),\n[исходный файл](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/latency_diagram.png).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg|Сверху этапы обработки на сервере. Снизу клиент получает первый токен отдельно, остальные токены приходят одним фрагментом.]]\n\n*Vijay Janapa Reddi et al., [Harvard ML Systems, т. III, рис. 5: First-Token Accounting](https://harvard-edge.github.io/cs249r_book_dev/vol3/02_foundation_model/02_foundation_model.html#fig-vol3-first-token-accounting),\n[исходный SVG](https://raw.githubusercontent.com/harvard-edge/cs249r_book_dev/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/images/svg/first_token_accounting.svg),\n[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/), без изменений.\nСкобка Client TTFT заканчивается на Token 1. Остальные токены приходят\nодним фрагментом; по нему нельзя восстановить интервалы между шагами декодирования.*\n\n[Диаграмма задержки у Гордича](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/latency_diagram.png)."
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png]]\n\n*Roofline-модель связывает арифметическую интенсивность операции с достижимой\nпроизводительностью. В типичной LLM-нагрузке prefill ближе к\ncompute-bound-режиму, а decode с малым batch — к memory-bound. Иллюстрация:\nAleksa Gordić, [Inside vLLM](https://www.aleksagordic.com/blog/vllm),\n[исходный файл](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/roofline.png).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg|На наклонной части roofline расположен decode с одним запросом; prefill длинного запроса находится ближе к вычислительному потолку.]]\n\n*Vijay Janapa Reddi et al., [Harvard ML Systems, Performance Engineering](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/prefill-vs-decode-roofline.svg),\n[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).\nТочки на графике схематические. При увеличении decode-пакета стоимость\nчтения весов распределяется между запросами, поэтому положение точки меняется.*\n\n[Roofline из статьи Гордича](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/roofline.png)."
+        }
+      ],
+      "before_sha256": "9662caac4b2f93ca1ea095bf473982c94dda7ab499222d4688838a03f34b070c",
+      "after_sha256": "fc8fe2cc8b223171c40be907446401dd453d643ae72ee49bffd2613bcd20db41",
+      "lines": 277
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "changes": [
+        {
+          "old": "  - id: curated-paged-blocks-000000000041\n    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/paged-attention-blocks.png\n    sha256: 16b5c731f1f5ee4e031b5cbbce0ca97a4df580b63864de1dd08fde82dc605f6d\n    author: Woosuk Kwon et al.\n    source_url: https://arxiv.org/abs/2309.06180\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    rights_verification: \"2026-10-14: arXiv 2309.06180v1 license link and HTML license notice; original Figure 5.\"\n    modifications: copied or extracted without visual modification for publication\n    used_in:\n      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: 05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/paged-attention-blocks.png\n    source_asset_sha256: 16b5c731f1f5ee4e031b5cbbce0ca97a4df580b63864de1dd08fde82dc605f6d\n    source_image_url: https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/paged-attention-blocks.png\n    derivation: source-raster-copy",
+          "new": "  - id: curated-paged-blocks-000000000041\n    asset: 00 Учебник/Assets/Figures/curated/topics-53-59-source-first/paged-attention-blocks.png\n    sha256: 16b5c731f1f5ee4e031b5cbbce0ca97a4df580b63864de1dd08fde82dc605f6d\n    author: Woosuk Kwon et al.\n    source_url: https://arxiv.org/abs/2309.06180\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    rights_verification: \"2026-10-14: arXiv 2309.06180v1 license link and HTML license notice; original Figure 5.\"\n    modifications: copied or extracted without visual modification for publication\n    used_in:\n      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md\n      - 05 Источники/Implementation studies/Inside vLLM.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: 05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/paged-attention-blocks.png\n    source_asset_sha256: 16b5c731f1f5ee4e031b5cbbce0ca97a4df580b63864de1dd08fde82dc605f6d\n    source_image_url: https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/paged-attention-blocks.png\n    derivation: source-raster-copy"
+        },
+        {
+          "old": "  - id: curated-vllm-engine-constructor-a1b2c3d4e501\n    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-engine_constructor.png\n    author: Aleksa Gordić\n    source_url: https://www.aleksagordic.com/blog/vllm\n    license: open educational web material; reuse confirmed by repository owner\n    license_url: https://www.aleksagordic.com/blog/vllm\n    modifications: copied without visual modification from the official vLLM blog repository\n    used_in:\n      [\"docs/audit/2026-10-14-serving-engines.md\",\"05 Источники/Implementation studies/Inside vLLM.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/inference-serving/vllm/engine_constructor.png\n    review_note: \"Removed from chapter 55c after page-by-page review; replaced by official process/interface diagrams. Existing source/reference uses and original bytes are preserved.\"",
+          "new": "  - {\"id\":\"curated-vllm-engine-constructor-a1b2c3d4e501\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-serving/vllm-engine_constructor.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"modifications\":\"Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.\",\"used_in\":[],\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-bytes-verified\",\"source_asset\":\"raw/papers/external/inference-serving/vllm/engine_constructor.png\",\"publication_status\":\"retired\",\"rights_status\":\"source-republication-unverified\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"git_blob\":\"44fcf3187d6df6cc1ae07fa2d3b67416680b153b\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/engine_constructor.png\",\"figure_url\":\"https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/engine_constructor.png\",\"sha256\":\"c401049e1f7e58ebed2a37f959d43e00973b4b6153d70ee27d1f6d39f2407237\",\"source_asset_sha256\":\"c401049e1f7e58ebed2a37f959d43e00973b4b6153d70ee27d1f6d39f2407237\",\"bytes\":189910,\"derivation\":\"source-raster-copy-byte-verified\",\"last_verified\":\"2026-11-11\",\"former_used_in\":[\"docs/audit/2026-10-14-serving-engines.md\",\"05 Источники/Implementation studies/Inside vLLM.md\"],\"retirement_reason\":\"Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original.\"}"
+        },
+        {
+          "old": "  - id: curated-vllm-engine-loop-a1b2c3d4e502\n    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-engine_loop.png\n    author: Aleksa Gordić\n    source_url: https://www.aleksagordic.com/blog/vllm\n    license: open educational web material; reuse confirmed by repository owner\n    license_url: https://www.aleksagordic.com/blog/vllm\n    modifications: copied without visual modification from the official vLLM blog repository\n    used_in:\n      [\"docs/audit/2026-10-14-serving-engines.md\",\"05 Источники/Implementation studies/Inside vLLM.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/inference-serving/vllm/engine_loop.png\n    review_note: \"Removed from chapter 55c after page-by-page review; replaced by official process/interface diagrams. Existing source/reference uses and original bytes are preserved.\"",
+          "new": "  - {\"id\":\"curated-vllm-engine-loop-a1b2c3d4e502\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-serving/vllm-engine_loop.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"modifications\":\"Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.\",\"used_in\":[],\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-bytes-verified\",\"source_asset\":\"raw/papers/external/inference-serving/vllm/engine_loop.png\",\"publication_status\":\"retired\",\"rights_status\":\"source-republication-unverified\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"git_blob\":\"165bf57289c58cab008a7b24ad72d84a215fcca4\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/engine_loop.png\",\"figure_url\":\"https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/engine_loop.png\",\"sha256\":\"87194d5d20695e1359876dbcc9909fb32abc9e4d83b94da04441b66c4f8064b6\",\"source_asset_sha256\":\"87194d5d20695e1359876dbcc9909fb32abc9e4d83b94da04441b66c4f8064b6\",\"bytes\":85078,\"derivation\":\"source-raster-copy-byte-verified\",\"last_verified\":\"2026-11-11\",\"former_used_in\":[\"docs/audit/2026-10-14-serving-engines.md\",\"05 Источники/Implementation studies/Inside vLLM.md\"],\"retirement_reason\":\"Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original.\"}"
+        },
+        {
+          "old": "  - id: curated-vllm-forward-pass-a1b2c3d4e503\n    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-fwd_pass.png\n    author: Aleksa Gordić\n    source_url: https://www.aleksagordic.com/blog/vllm\n    license: open educational web material; reuse confirmed by repository owner\n    license_url: https://www.aleksagordic.com/blog/vllm\n    modifications: copied without visual modification from the official vLLM blog repository\n    used_in:\n      [\"docs/audit/2026-10-14-serving-engines.md\",\"docs/audit/2026-10-14-inference-scheduling.md\",\"05 Источники/Implementation studies/Inside vLLM.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/inference-serving/vllm/fwd_pass.png\n    review_note: \"Removed from chapter 55c after page-by-page review; replaced by official process/interface diagrams. Existing source/reference uses and original bytes are preserved.\"",
+          "new": "  - {\"id\":\"curated-vllm-forward-pass-a1b2c3d4e503\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-serving/vllm-fwd_pass.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"modifications\":\"Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.\",\"used_in\":[],\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-bytes-verified\",\"source_asset\":\"raw/papers/external/inference-serving/vllm/fwd_pass.png\",\"publication_status\":\"retired\",\"rights_status\":\"source-republication-unverified\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"git_blob\":\"89d066e8b45ef366fb7e657c62317617317f6743\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/fwd_pass.png\",\"figure_url\":\"https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/fwd_pass.png\",\"sha256\":\"9e6a21aa1754ecad6cce8b0723fd18fbfd19cf61ce62be7fb1505e97e48c8547\",\"source_asset_sha256\":\"9e6a21aa1754ecad6cce8b0723fd18fbfd19cf61ce62be7fb1505e97e48c8547\",\"bytes\":919947,\"derivation\":\"source-raster-copy-byte-verified\",\"last_verified\":\"2026-11-11\",\"former_used_in\":[\"docs/audit/2026-10-14-serving-engines.md\",\"docs/audit/2026-10-14-inference-scheduling.md\",\"05 Источники/Implementation studies/Inside vLLM.md\"],\"retirement_reason\":\"Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original.\"}"
+        },
+        {
+          "old": "  - id: curated-vllm-prefix-one-a1b2c3d4e504\n    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt1.png\n    author: Aleksa Gordić\n    source_url: https://www.aleksagordic.com/blog/vllm\n    license: open educational web material; reuse confirmed by repository owner\n    license_url: https://www.aleksagordic.com/blog/vllm\n    modifications: copied without visual modification from the official vLLM blog repository\n    used_in:\n      [\"docs/audit/2026-10-14-inference-scheduling.md\",\"05 Источники/Implementation studies/Inside vLLM.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/inference-serving/vllm/prefix_pt1.png\n    review_note: \"Replaced by official licensed vLLM cache structures plus executable hash-chain example.\"",
+          "new": "  - {\"id\":\"curated-vllm-prefix-one-a1b2c3d4e504\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt1.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"modifications\":\"Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.\",\"used_in\":[],\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-bytes-verified\",\"source_asset\":\"raw/papers/external/inference-serving/vllm/prefix_pt1.png\",\"publication_status\":\"retired\",\"rights_status\":\"source-republication-unverified\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"git_blob\":\"3053390d020d04dac781326b52305247aa960668\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/prefix_pt1.png\",\"figure_url\":\"https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/prefix_pt1.png\",\"sha256\":\"4f7d91bea0c77b3040e0edca32d38847d2ea81d65a11ca5c2955990ffb4529a9\",\"source_asset_sha256\":\"4f7d91bea0c77b3040e0edca32d38847d2ea81d65a11ca5c2955990ffb4529a9\",\"bytes\":348861,\"derivation\":\"source-raster-copy-byte-verified\",\"last_verified\":\"2026-11-11\",\"former_used_in\":[\"docs/audit/2026-10-14-inference-scheduling.md\",\"05 Источники/Implementation studies/Inside vLLM.md\"],\"retirement_reason\":\"Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original.\",\"replacement\":\"00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-cache-overview.png\"}"
+        },
+        {
+          "old": "  - id: curated-vllm-prefix-two-a1b2c3d4e505\n    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt2.png\n    author: Aleksa Gordić\n    source_url: https://www.aleksagordic.com/blog/vllm\n    license: open educational web material; reuse confirmed by repository owner\n    license_url: https://www.aleksagordic.com/blog/vllm\n    modifications: copied without visual modification from the official vLLM blog repository\n    used_in:\n      [\"docs/audit/2026-10-14-inference-scheduling.md\",\"05 Источники/Implementation studies/Inside vLLM.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/inference-serving/vllm/prefix_pt2.png\n    review_note: \"Replaced by official licensed vLLM lifecycle example.\"",
+          "new": "  - {\"id\":\"curated-vllm-prefix-two-a1b2c3d4e505\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt2.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"modifications\":\"Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.\",\"used_in\":[],\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-bytes-verified\",\"source_asset\":\"raw/papers/external/inference-serving/vllm/prefix_pt2.png\",\"publication_status\":\"retired\",\"rights_status\":\"source-republication-unverified\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"git_blob\":\"022e176a24df32de89950dc2c65a85e832db760b\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/prefix_pt2.png\",\"figure_url\":\"https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/prefix_pt2.png\",\"sha256\":\"4babbda7d0425f3a91ea70916c9a9a6517ef314db6579eb1082aa8c550aff957\",\"source_asset_sha256\":\"4babbda7d0425f3a91ea70916c9a9a6517ef314db6579eb1082aa8c550aff957\",\"bytes\":186966,\"derivation\":\"source-raster-copy-byte-verified\",\"last_verified\":\"2026-11-11\",\"former_used_in\":[\"docs/audit/2026-10-14-inference-scheduling.md\",\"05 Источники/Implementation studies/Inside vLLM.md\"],\"retirement_reason\":\"Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original.\",\"replacement\":\"00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-cache-overview.png\"}"
+        },
+        {
+          "old": "  - id: curated-vllm-prefix-three-a1b2c3d4e506\n    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt3.png\n    author: Aleksa Gordić\n    source_url: https://www.aleksagordic.com/blog/vllm\n    license: open educational web material; reuse confirmed by repository owner\n    license_url: https://www.aleksagordic.com/blog/vllm\n    modifications: copied without visual modification from the official vLLM blog repository\n    used_in:\n      [\"docs/audit/2026-10-14-inference-scheduling.md\",\"05 Источники/Implementation studies/Inside vLLM.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/inference-serving/vllm/prefix_pt3.png\n    review_note: \"Replaced by explicit reference-count and full-block reuse explanation; no original file removed.\"",
+          "new": "  - {\"id\":\"curated-vllm-prefix-three-a1b2c3d4e506\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt3.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"modifications\":\"Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.\",\"used_in\":[],\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-bytes-verified\",\"source_asset\":\"raw/papers/external/inference-serving/vllm/prefix_pt3.png\",\"publication_status\":\"retired\",\"rights_status\":\"source-republication-unverified\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"git_blob\":\"bbaed33e5baeed009f0b9485f1ecdd8865430357\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/prefix_pt3.png\",\"figure_url\":\"https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/prefix_pt3.png\",\"sha256\":\"e33f5cb126de6d21b32a519789ef778fbadaf6e4b871382029e50dfeddac0abc\",\"source_asset_sha256\":\"e33f5cb126de6d21b32a519789ef778fbadaf6e4b871382029e50dfeddac0abc\",\"bytes\":343325,\"derivation\":\"source-raster-copy-byte-verified\",\"last_verified\":\"2026-11-11\",\"former_used_in\":[\"docs/audit/2026-10-14-inference-scheduling.md\",\"05 Источники/Implementation studies/Inside vLLM.md\"],\"retirement_reason\":\"Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original.\",\"replacement\":\"00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-cache-overview.png\"}"
+        },
+        {
+          "old": "  - id: curated-vllm-multiprocess-a1b2c3d4e507\n    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-multiprocexecutor.png\n    author: Aleksa Gordić\n    source_url: https://www.aleksagordic.com/blog/vllm\n    license: open educational web material; reuse confirmed by repository owner\n    license_url: https://www.aleksagordic.com/blog/vllm\n    modifications: copied without visual modification from the official vLLM blog repository\n    used_in:\n      [\"05 Источники/Implementation studies/Inside vLLM.md\",\"00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/inference-serving/vllm/multiprocexecutor.png",
+          "new": "  - {\"id\":\"curated-vllm-multiprocess-a1b2c3d4e507\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-serving/vllm-multiprocexecutor.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"modifications\":\"Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.\",\"used_in\":[],\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-bytes-verified\",\"source_asset\":\"raw/papers/external/inference-serving/vllm/multiprocexecutor.png\",\"publication_status\":\"retired\",\"rights_status\":\"source-republication-unverified\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"git_blob\":\"59c2977e4f684743cab8bda05b3ff1442d298329\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/multiprocexecutor.png\",\"figure_url\":\"https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/multiprocexecutor.png\",\"sha256\":\"8da9588a276d435ea8dbca0d95e3cce1dc76f203a64f626aab62d7d4b399545c\",\"source_asset_sha256\":\"8da9588a276d435ea8dbca0d95e3cce1dc76f203a64f626aab62d7d4b399545c\",\"bytes\":79039,\"derivation\":\"source-raster-copy-byte-verified\",\"last_verified\":\"2026-11-11\",\"former_used_in\":[\"05 Источники/Implementation studies/Inside vLLM.md\",\"00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md\"],\"retirement_reason\":\"Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original.\",\"replacement\":\"00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/vllm-v1-processes-tp4.png\"}"
+        },
+        {
+          "old": "  - id: curated-vllm-server-setup-a1b2c3d4e508\n    asset: 00 Учебник/Assets/Figures/curated/inference-serving/vllm-server_setup.png\n    author: Aleksa Gordić\n    source_url: https://www.aleksagordic.com/blog/vllm\n    license: open educational web material; reuse confirmed by repository owner\n    license_url: https://www.aleksagordic.com/blog/vllm\n    modifications: copied without visual modification from the official vLLM blog repository\n    used_in:\n      [\"05 Источники/Implementation studies/Inside vLLM.md\",\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/inference-serving/vllm/server_setup.png",
+          "new": "  - {\"id\":\"curated-vllm-server-setup-a1b2c3d4e508\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-serving/vllm-server_setup.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"modifications\":\"Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.\",\"used_in\":[],\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-bytes-verified\",\"source_asset\":\"raw/papers/external/inference-serving/vllm/server_setup.png\",\"publication_status\":\"retired\",\"rights_status\":\"source-republication-unverified\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"git_blob\":\"4186d77c13021250ba6b6a3213a9699b74cbe618\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/server_setup.png\",\"figure_url\":\"https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/server_setup.png\",\"sha256\":\"2a1d18b17bddc03f111d8d1b4933850c5e5cac62dcbc31b71d49d1edd4ff4369\",\"source_asset_sha256\":\"2a1d18b17bddc03f111d8d1b4933850c5e5cac62dcbc31b71d49d1edd4ff4369\",\"bytes\":42531,\"derivation\":\"source-raster-copy-byte-verified\",\"last_verified\":\"2026-11-11\",\"former_used_in\":[\"05 Источники/Implementation studies/Inside vLLM.md\",\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md\"],\"retirement_reason\":\"Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original.\",\"replacement\":\"00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/vllm-v1-processes-tp4.png\"}"
+        },
+        {
+          "old": "  - {\"id\":\"curated-harvard-first-token-accounting-cd26640ab6da\",\"asset\":\"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg\",\"author\":\"Vijay Janapa Reddi and contributors, Harvard ML Systems\",\"title\":\"First-Token Accounting (Figure 5)\",\"source_url\":\"https://harvard-edge.github.io/cs249r_book_dev/vol3/02_foundation_model/02_foundation_model.html#fig-vol3-first-token-accounting\",\"figure_url\":\"https://harvard-edge.github.io/cs249r_book_dev/vol3/02_foundation_model/02_foundation_model.html#fig-vol3-first-token-accounting\",\"source_image_url\":\"https://raw.githubusercontent.com/harvard-edge/cs249r_book_dev/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/images/svg/first_token_accounting.svg\",\"commit\":\"a32512942fe30f4fa1edb51486f7de53c1318ac7\",\"license\":\"CC BY-NC-ND 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by-nc-nd/4.0/\",\"license_evidence\":\"https://raw.githubusercontent.com/harvard-edge/cs249r_book_dev/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/02_foundation_model.html\",\"license_evidence_sha256\":\"9a443487058d0c9d61d2e209cf7b27003b3ac4416106afcdfb88d068f23b8481\",\"license_evidence_url\":\"https://mlsysbook.ai/about/license.html\",\"sha256\":\"cd26640ab6dab6e5877f70ee267584b5edb2486498d013078d32a4bfc4c1ecc5\",\"source_asset_sha256\":\"cd26640ab6dab6e5877f70ee267584b5edb2486498d013078d32a4bfc4c1ecc5\",\"bytes\":4197,\"source_viewbox\":[0,0,680,350],\"derivation\":\"source-svg-copy\",\"modifications\":\"Complete original Harvard ML Systems Volume III static SVG, byte-for-byte. No edits, recoloring, crop, or translation.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-11\",\"used_in\":[\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md\",\"00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md\",\"en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md\"]}",
+          "new": "  - {\"id\":\"curated-harvard-first-token-accounting-cd26640ab6da\",\"asset\":\"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg\",\"author\":\"Vijay Janapa Reddi and contributors, Harvard ML Systems\",\"title\":\"First-Token Accounting (Figure 5)\",\"source_url\":\"https://harvard-edge.github.io/cs249r_book_dev/vol3/02_foundation_model/02_foundation_model.html#fig-vol3-first-token-accounting\",\"figure_url\":\"https://harvard-edge.github.io/cs249r_book_dev/vol3/02_foundation_model/02_foundation_model.html#fig-vol3-first-token-accounting\",\"source_image_url\":\"https://raw.githubusercontent.com/harvard-edge/cs249r_book_dev/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/images/svg/first_token_accounting.svg\",\"commit\":\"a32512942fe30f4fa1edb51486f7de53c1318ac7\",\"license\":\"CC BY-NC-ND 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by-nc-nd/4.0/\",\"license_evidence\":\"https://raw.githubusercontent.com/harvard-edge/cs249r_book_dev/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/02_foundation_model.html\",\"license_evidence_sha256\":\"9a443487058d0c9d61d2e209cf7b27003b3ac4416106afcdfb88d068f23b8481\",\"license_evidence_url\":\"https://mlsysbook.ai/about/license.html\",\"sha256\":\"cd26640ab6dab6e5877f70ee267584b5edb2486498d013078d32a4bfc4c1ecc5\",\"source_asset_sha256\":\"cd26640ab6dab6e5877f70ee267584b5edb2486498d013078d32a4bfc4c1ecc5\",\"bytes\":4197,\"source_viewbox\":[0,0,680,350],\"derivation\":\"source-svg-copy\",\"modifications\":\"Complete original Harvard ML Systems Volume III static SVG, byte-for-byte. No edits, recoloring, crop, or translation.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-11\",\"used_in\":[\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md\",\"00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md\",\"en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md\",\"05 Источники/Implementation studies/Inside vLLM.md\"]}"
+        },
+        {
+          "old": "  - {\"id\":\"curated-vllm-latency-a1b2c3d4e509\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"provenance_confirmation\":\"source-bytes-verified\",\"title\":\"Time to first token, inter-token latency, and end-to-end latency\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/latency_diagram.png\",\"modifications\":\"Byte-identical to the pinned official vLLM blog asset. No grant found for the blog artwork; the engine repository license is not evidence for this separate repository.\",\"sha256\":\"c4aedd158b29b99d7430e12b4f5dca1bb160abc02261cd4a8fbecab598c9d53c\",\"bytes\":37423,\"dimensions_px\":[862,396],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-byte-verified\",\"source_asset_sha256\":\"c4aedd158b29b99d7430e12b4f5dca1bb160abc02261cd4a8fbecab598c9d53c\",\"used_in\":[\"05 Источники/Implementation studies/Inside vLLM.md\"],\"former_used_in\":[\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md\",\"00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md\",\"en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md\"],\"publication_status\":\"source-library-only\",\"replacement\":\"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg\"}",
+          "new": "  - {\"id\":\"curated-vllm-latency-a1b2c3d4e509\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"provenance_confirmation\":\"source-bytes-verified\",\"title\":\"Time to first token, inter-token latency, and end-to-end latency\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/latency_diagram.png\",\"modifications\":\"Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.\",\"sha256\":\"c4aedd158b29b99d7430e12b4f5dca1bb160abc02261cd4a8fbecab598c9d53c\",\"bytes\":37423,\"dimensions_px\":[862,396],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-byte-verified\",\"source_asset_sha256\":\"c4aedd158b29b99d7430e12b4f5dca1bb160abc02261cd4a8fbecab598c9d53c\",\"used_in\":[],\"former_used_in\":[\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md\",\"00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md\",\"en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md\",\"05 Источники/Implementation studies/Inside vLLM.md\"],\"publication_status\":\"retired\",\"replacement\":\"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg\",\"git_blob\":\"b514d814b17a9d9ea607047ee0e5bbf0bfb77835\",\"figure_url\":\"https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/latency_diagram.png\",\"retirement_reason\":\"Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original.\"}"
+        },
+        {
+          "old": "  - {\"id\":\"curated-vllm-roofline-a1b2c3d4e50a\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"provenance_confirmation\":\"source-bytes-verified\",\"title\":\"Memory and compute limits in the roofline model\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/roofline.png\",\"modifications\":\"Byte-identical to the pinned official vLLM blog asset. No grant found for the blog artwork; the engine repository license is not evidence for this separate repository.\",\"sha256\":\"137cbceb1790cd0de91db60d4a990ab2669d8ebe5bf5e675f2a24190978fe6a4\",\"bytes\":48865,\"dimensions_px\":[579,406],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-byte-verified\",\"source_asset_sha256\":\"137cbceb1790cd0de91db60d4a990ab2669d8ebe5bf5e675f2a24190978fe6a4\",\"used_in\":[\"05 Источники/Implementation studies/Inside vLLM.md\"],\"former_used_in\":[\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md\"],\"publication_status\":\"source-library-only\",\"replacement\":\"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg\"}",
+          "new": "  - {\"id\":\"curated-vllm-roofline-a1b2c3d4e50a\",\"asset\":\"00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png\",\"author\":\"Aleksa Gordić\",\"source_url\":\"https://www.aleksagordic.com/blog/vllm\",\"license\":null,\"license_url\":null,\"rights_status\":\"source-republication-unverified\",\"provenance_confirmation\":\"source-bytes-verified\",\"title\":\"Memory and compute limits in the roofline model\",\"commit\":\"05f81b0527e2d484c48721f9dc1c49d06849c9f3\",\"source_image_url\":\"https://raw.githubusercontent.com/vllm-project/vllm-project.github.io/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/roofline.png\",\"modifications\":\"Unchanged source pixels and bytes; Git blob verified against the pinned official vLLM blog repository.\",\"sha256\":\"137cbceb1790cd0de91db60d4a990ab2669d8ebe5bf5e675f2a24190978fe6a4\",\"bytes\":48865,\"dimensions_px\":[579,406],\"metadata_status\":\"verified\",\"last_verified\":\"2026-11-11\",\"derivation\":\"source-raster-copy-byte-verified\",\"source_asset_sha256\":\"137cbceb1790cd0de91db60d4a990ab2669d8ebe5bf5e675f2a24190978fe6a4\",\"used_in\":[],\"former_used_in\":[\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md\",\"05 Источники/Implementation studies/Inside vLLM.md\"],\"publication_status\":\"retired\",\"replacement\":\"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg\",\"git_blob\":\"4a745983cd54ec2c7bcb898870661e2191f0c1e5\",\"figure_url\":\"https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/roofline.png\",\"retirement_reason\":\"Kept as an unchanged local archive; no redistribution grant was verified for the blog article's figures. The source note links to the pinned original.\"}"
+        },
+        {
+          "old": "  - id: curated-harvard-harvard-performance-prefill-vs-decode-roofline-svg-85802162e84d\n    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg\n    author: Harvard Edge ML Systems Book contributors\n    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/prefill-vs-decode-roofline.svg\n    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913\n    used_in: [\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md\"]\n    metadata_status: verified\n    title: \"Harvard ML Systems: prefill and decode on the roofline\"\n    source_image_url: \"https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/prefill-vs-decode-roofline.svg\"\n    source_asset: \"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg\"\n    sha256: 304b952ce3d768150291a52ecbfc8fb8e66207993ba3c83ed4a313f1c87d2893\n    source_asset_sha256: 304b952ce3d768150291a52ecbfc8fb8e66207993ba3c83ed4a313f1c87d2893\n    bytes: 7296\n    source_viewbox: [0,0,680,460]\n    license: \"CC BY-NC-SA 4.0\"\n    license_url: \"https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md\"\n    license_evidence: \"site/public/licenses/harvard-45ecc8d8-LICENSE.md\"\n    license_evidence_sha256: b6f4689d6fccf48d82d0871a3b994a122427fcb0b278971f6ba008be44e2c926\n    public_license_copy: \"site/public/licenses/harvard-45ecc8d8-LICENSE.md\"\n    modifications: \"Compared byte-for-byte with the author asset. Existing image retained without crop, redraw, relabeling or resampling.\"\n    derivation: source-svg-copy\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-10\"",
+          "new": "  - id: curated-harvard-harvard-performance-prefill-vs-decode-roofline-svg-85802162e84d\n    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg\n    author: Harvard Edge ML Systems Book contributors\n    source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/prefill-vs-decode-roofline.svg\n    commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913\n    used_in: [\"00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md\",\"en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md\",\"05 Источники/Implementation studies/Inside vLLM.md\"]\n    metadata_status: verified\n    title: \"Harvard ML Systems: prefill and decode on the roofline\"\n    source_image_url: \"https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/prefill-vs-decode-roofline.svg\"\n    source_asset: \"00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg\"\n    sha256: 304b952ce3d768150291a52ecbfc8fb8e66207993ba3c83ed4a313f1c87d2893\n    source_asset_sha256: 304b952ce3d768150291a52ecbfc8fb8e66207993ba3c83ed4a313f1c87d2893\n    bytes: 7296\n    source_viewbox: [0,0,680,460]\n    license: \"CC BY-NC-SA 4.0\"\n    license_url: \"https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md\"\n    license_evidence: \"site/public/licenses/harvard-45ecc8d8-LICENSE.md\"\n    license_evidence_sha256: b6f4689d6fccf48d82d0871a3b994a122427fcb0b278971f6ba008be44e2c926\n    public_license_copy: \"site/public/licenses/harvard-45ecc8d8-LICENSE.md\"\n    modifications: \"Compared byte-for-byte with the author asset. Existing image retained without crop, redraw, relabeling or resampling.\"\n    derivation: source-svg-copy\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-10\""
+        },
+        {
+          "old": "  - id: \"curated-vllm-prefix-cache-overview-44f3000fcd73\"\n    asset: \"00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-cache-overview.png\"\n    author: \"vLLM contributors\"\n    source_url: \"https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/docs/assets/design/prefix_caching/overview.png\"\n    source_download_url: \"https://raw.githubusercontent.com/vllm-project/vllm/23fbc2ec2f7219888bfc76cf987381f501151971/docs/assets/design/prefix_caching/overview.png\"\n    source_image_url: \"https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/docs/assets/design/prefix_caching/overview.png\"\n    commit: \"23fbc2ec2f7219888bfc76cf987381f501151971\"\n    sha256: \"44f3000fcd73ec08ad66183ca8b3e0901e4b52044cf501f19fa8839391ac4e6a\"\n    dimensions: [743,331]\n    license: \"Apache-2.0\"\n    license_url: \"https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/LICENSE\"\n    license_copy: \"00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/LICENSE-vllm-Apache-2.0.txt\"\n    license_sha256: \"c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c\"\n    license_evidence: \"Original documentation image in the vLLM repository governed by its root Apache License 2.0. Repository tree checked at pinned commit: no nearer license or NOTICE for docs/assets/design/prefix_caching. Full root license retained locally.\"\n    derivation: \"source-raster-copy\"\n    modifications: \"None. Original PNG bytes retained, including transparency, native resolution and all labels. No crop, recoloring, redraw or translation.\"\n    provenance_confirmation: \"pinned-upstream-repository\"\n    rights_status: \"source-license-verified\"\n    metadata_status: \"verified\"\n    last_verified: \"2026-10-14\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md\"]\n    review_note: \"Block pool, free queue, cache-key map and request block references. Personally inspected original; black labels require a light background. White-container site inspection is parent-owned.\"\n    source_page_url: \"https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/docs/design/prefix_caching.md\"\n    public_license_copy: \"site/public/licenses/vllm-23fbc2ec-Apache-2.0.txt\"",
+          "new": "  - id: \"curated-vllm-prefix-cache-overview-44f3000fcd73\"\n    asset: \"00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-cache-overview.png\"\n    author: \"vLLM contributors\"\n    source_url: \"https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/docs/assets/design/prefix_caching/overview.png\"\n    source_download_url: \"https://raw.githubusercontent.com/vllm-project/vllm/23fbc2ec2f7219888bfc76cf987381f501151971/docs/assets/design/prefix_caching/overview.png\"\n    source_image_url: \"https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/docs/assets/design/prefix_caching/overview.png\"\n    commit: \"23fbc2ec2f7219888bfc76cf987381f501151971\"\n    sha256: \"44f3000fcd73ec08ad66183ca8b3e0901e4b52044cf501f19fa8839391ac4e6a\"\n    dimensions: [743,331]\n    license: \"Apache-2.0\"\n    license_url: \"https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/LICENSE\"\n    license_copy: \"00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/LICENSE-vllm-Apache-2.0.txt\"\n    license_sha256: \"c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c\"\n    license_evidence: \"Original documentation image in the vLLM repository governed by its root Apache License 2.0. Repository tree checked at pinned commit: no nearer license or NOTICE for docs/assets/design/prefix_caching. Full root license retained locally.\"\n    derivation: \"source-raster-copy\"\n    modifications: \"None. Original PNG bytes retained, including transparency, native resolution and all labels. No crop, recoloring, redraw or translation.\"\n    provenance_confirmation: \"pinned-upstream-repository\"\n    rights_status: \"source-license-verified\"\n    metadata_status: \"verified\"\n    last_verified: \"2026-10-14\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md\",\"05 Источники/Implementation studies/Inside vLLM.md\"]\n    review_note: \"Block pool, free queue, cache-key map and request block references. Personally inspected original; black labels require a light background. White-container site inspection is parent-owned.\"\n    source_page_url: \"https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/docs/design/prefix_caching.md\"\n    public_license_copy: \"site/public/licenses/vllm-23fbc2ec-Apache-2.0.txt\""
+        },
+        {
+          "old": "  - id: \"curated-serving-engines-vllm-v1-processes-tp4-8602fecbabf3\"\n    asset: \"00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/vllm-v1-processes-tp4.png\"\n    author: \"vLLM contributors\"\n    source_url: \"https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/assets/design/arch_overview/v1_process_architecture_tp4.png\"\n    source_page_url: \"https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/design/arch_overview.md\"\n    source_image_url: \"https://raw.githubusercontent.com/vllm-project/vllm/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/assets/design/arch_overview/v1_process_architecture_tp4.png\"\n    commit: \"db9527a46873454610df6dbedf79a36d6bf1a7f6\"\n    sha256: \"8602fecbabf3b5fb4ceeb831f608dc178d14ec4a686e2f2cff58b1af78f8951d\"\n    source_asset_sha256: \"8602fecbabf3b5fb4ceeb831f608dc178d14ec4a686e2f2cff58b1af78f8951d\"\n    license: \"Apache-2.0\"\n    license_url: \"https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/LICENSE\"\n    license_copy: \"00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/vllm-LICENSE.txt\"\n    rights_status: \"source-license-verified\"\n    derivation: \"source-raster-copy\"\n    provenance_confirmation: \"pinned-upstream-repository\"\n    metadata_status: \"verified\"\n    modifications: \"none; byte-for-byte original 2816 x 1536 PNG; no cropping, recoloring, translation or resampling. Full upstream LICENSE and attribution retained alongside image.\"\n    last_verified: \"2026-10-14\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md\"]\n    public_license_copy: \"site/public/licenses/vllm-db9527a4-Apache-2.0.txt\"",
+          "new": "  - id: \"curated-serving-engines-vllm-v1-processes-tp4-8602fecbabf3\"\n    asset: \"00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/vllm-v1-processes-tp4.png\"\n    author: \"vLLM contributors\"\n    source_url: \"https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/assets/design/arch_overview/v1_process_architecture_tp4.png\"\n    source_page_url: \"https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/design/arch_overview.md\"\n    source_image_url: \"https://raw.githubusercontent.com/vllm-project/vllm/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/assets/design/arch_overview/v1_process_architecture_tp4.png\"\n    commit: \"db9527a46873454610df6dbedf79a36d6bf1a7f6\"\n    sha256: \"8602fecbabf3b5fb4ceeb831f608dc178d14ec4a686e2f2cff58b1af78f8951d\"\n    source_asset_sha256: \"8602fecbabf3b5fb4ceeb831f608dc178d14ec4a686e2f2cff58b1af78f8951d\"\n    license: \"Apache-2.0\"\n    license_url: \"https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/LICENSE\"\n    license_copy: \"00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/vllm-LICENSE.txt\"\n    rights_status: \"source-license-verified\"\n    derivation: \"source-raster-copy\"\n    provenance_confirmation: \"pinned-upstream-repository\"\n    metadata_status: \"verified\"\n    modifications: \"none; byte-for-byte original 2816 x 1536 PNG; no cropping, recoloring, translation or resampling. Full upstream LICENSE and attribution retained alongside image.\"\n    last_verified: \"2026-10-14\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md\",\"05 Источники/Implementation studies/Inside vLLM.md\"]\n    public_license_copy: \"site/public/licenses/vllm-db9527a4-Apache-2.0.txt\""
+        }
+      ],
+      "before_sha256": "bca68c5e2d16881a07019acda5803e8840a04dc55392f915ab67cd694f11a3aa",
+      "after_sha256": "fa387bdd672004fc120393d5483665433a497e2f9209531e9ae4dabe2d97ac6a",
+      "lines": 26465
+    }
+  ]
+}

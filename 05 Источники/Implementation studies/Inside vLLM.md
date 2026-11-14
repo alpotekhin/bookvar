@@ -2,20 +2,18 @@
 title: vLLM — анатомия inference engine
 type: source-note
 status: active
-last_updated: 2026-07-21
-last_verified: 2026-07-21
+last_updated: 2026-11-11
+last_verified: 2026-11-11
 ---
 
 # vLLM — анатомия inference engine
 
 > [!SOURCE] Источник и границы версии
-> Декомпозиция engine и оригинальные иллюстрации сопоставлены со статьёй Алексы
-> Гордича [Inside vLLM: Anatomy of a High-Throughput LLM Inference System](https://www.aleksagordic.com/blog/vllm),
-> описывающей [commit `42172ad`](https://github.com/vllm-project/vllm/tree/42172ad)
-> от 9 августа 2025 года. Ниже механизмы разобраны самостоятельно, включая
-> игрушечное расписание и расчёт блоков; это не полный перевод статьи и не
-> спецификация текущего API. Имена классов и поддержка сочетаний функций
-> проверяются по закреплённой версии реализации.
+> Статья Алексы Гордича *Inside vLLM* целиком на английском: [сайт автора](https://www.aleksagordic.com/blog/vllm) и [блог vLLM](https://vllm.ai/blog/2025-09-05-anatomy-of-vllm).
+> В статье разобран [commit `42172ad`](https://github.com/vllm-project/vllm/tree/42172ad)
+> от 9 августа 2025 года. Здесь к этому разбору добавлены учебное расписание
+> и расчёт KV-блоков. Ссылки на рисунки Гордича ведут к оригиналам;
+> у встроенных схем из других источников указана версия.
 
 `transformers.generate()` отвечает на вопрос, как получить продолжение одной
 последовательности. Inference engine решает другую задачу: как одновременно
@@ -32,12 +30,8 @@ sampling и сетевой слой в один runtime.
 scheduler перед каждым шагом решает, какие токены каких запросов войдут в
 следующий batch.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-engine_constructor.png]]
-
-*Компоненты, создаваемые вокруг `LLM`: конфигурация, processor, engine core,
-model executor, scheduler и KV-cache manager. Иллюстрация: Aleksa Gordić,
-[Inside vLLM](https://www.aleksagordic.com/blog/vllm), оригинал в
-[официальном blog repository](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/engine_constructor.png).*
+На [схеме конструктора `LLM` у Гордича](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/engine_constructor.png)
+видно, какие компоненты создаёт клиент и что инициализирует Engine Core.
 
 В однопроцессной конфигурации executor управляет одним worker на одной GPU.
 Даже здесь engine уже должен заранее оценить память весов и служебных буферов,
@@ -54,13 +48,12 @@ model executor, scheduler и KV-cache manager. Иллюстрация: Aleksa Go
 3. model executor выполняет forward pass;
 4. sampler выбирает новые токены;
 5. output processor обновляет состояние, проверяет EOS, stop tokens и лимиты;
-6. завершённые запросы освобождают блоки, а незавершённые возвращаются в очередь.
+6. для завершённых запросов менеджер освобождает блоки; остальные могут попасть
+   в следующий шаг. Активный запрос остаётся в наборе `running`, а вытесненный
+   планировщик возвращает в `waiting`
+   ([реализация `42172ad`](https://github.com/vllm-project/vllm/blob/42172ad/vllm/v1/core/sched/scheduler.py#L204-L274)).
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-engine_loop.png]]
-
-*Жизненный цикл запроса внутри engine loop. Иллюстрация: Aleksa Gordić,
-[Inside vLLM](https://www.aleksagordic.com/blog/vllm),
-[исходный файл](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/engine_loop.png).*
+[Схема одного шага Engine Core у Гордича](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/engine_loop.png).
 
 Цикл важнее конкретного API. Offline inference получает все запросы заранее;
 асинхронный server принимает новые запросы между шагами. Именно возможность
@@ -68,8 +61,10 @@ model executor, scheduler и KV-cache manager. Иллюстрация: Aleksa Go
 
 ## 3. Prefill и decode требуют разного расписания
 
-Во время **prefill** модель обрабатывает сразу все токены prompt. Большая
-матричная работа обычно даёт сравнительно высокую арифметическую интенсивность.
+Во время **prefill** модель обрабатывает токены запроса и записывает их
+ключи и значения в KV-кеш. Если запрос не разбит на части, prefill обрабатывает
+весь запрос за один проход. Большие матричные операции обычно дают высокую
+арифметическую интенсивность.
 Во время **decode** каждый запрос добавляет один токен, но для этого снова читает
 веса модели и весь релевантный KV-cache. Поэтому decode часто ограничен
 пропускной способностью памяти.
@@ -93,16 +88,21 @@ Continuous batching после каждого шага удаляет завер
 собирает активные токены в общую «суперпоследовательность», а metadata указывает
 attention kernel, к каким KV-блокам относится каждая позиция.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-fwd_pass.png]]
-
-*Подготовка metadata и один forward pass для запросов разной длины. Иллюстрация:
-Aleksa Gordić, [Inside vLLM](https://www.aleksagordic.com/blog/vllm),
-[исходный файл](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/fwd_pass.png).*
+[Подготовка метаданных для нескольких запросов на схеме Гордича](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/fwd_pass.png).
 
 Связь двух механизмов принципиальна. Continuous batching постоянно меняет
 состав batch; непрерывный KV-буфер потребовал бы дорогих перемещений. [[02 Areas/ML & DL/01 Справочник/Inference/PagedAttention|PagedAttention]]
 разделяет cache на блоки и позволяет менять логическое размещение без
 копирования всей последовательности.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/paged-attention-blocks.png|Таблица блоков связывает логический порядок токенов с разнесёнными физическими блоками, к которым обращается запрос для forth.]]
+
+*Woosuk Kwon et al., [PagedAttention, рис. 5](https://arxiv.org/html/2309.06180v1#S4.F5),
+[оригинал из материалов CS336](https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/paged-attention-blocks.png),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Первый блок последовательности, `Block 0`, находится в нижней строке.
+Для вычисления внимания к `forth` ядро читает `Block 0`, `Block 1`
+и `Block 2` там, где они лежат в памяти.*
 
 ### Один цикл на конкретных запросах
 
@@ -144,18 +144,18 @@ Aleksa Gordić, [Inside vLLM](https://www.aleksagordic.com/blog/vllm),
 включая LoRA ID, хэши мультимодальных входов и cache salt. Совпадение в
 совместимом пространстве ключей позволяет пропустить prefill полных блоков.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-cache-overview.png|Пул физических блоков, очередь свободных блоков, индекс хешей и списки блоков по запросам.]]
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt2.png]]
+*Команда vLLM, [Automatic Prefix Caching](https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/docs/design/prefix_caching.md),
+[исходный PNG](https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/docs/assets/design/prefix_caching/overview.png),
+[Apache-2.0](/licenses/vllm-23fbc2ec-Apache-2.0.txt).
+Индекс находит блок по ключу, а список запроса хранит ссылку на уже
+выделенный физический блок.*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt3.png]]
-
-*Пошаговый пример построения, завершения и повторного использования cache
-blocks. Иллюстрации: Aleksa Gordić,
-[Inside vLLM](https://www.aleksagordic.com/blog/vllm), исходные файлы
-[1](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/prefix_pt1.png),
-[2](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/prefix_pt2.png),
-[3](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/prefix_pt3.png).*
+У Гордича этот процесс показан в трёх состояниях:
+[вычисление хешей](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/prefix_pt1.png),
+[заполнение блоков KV](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/prefix_pt2.png),
+[повторное использование](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/prefix_pt3.png).
 
 Prefix caching не делает attention дешёвым для новых decode-токенов: новый
 query всё равно должен обратиться к сохранённым keys/values. Выигрыш приходится
@@ -182,11 +182,7 @@ prefill- и decode-workers.
 
 ## 7. От одного worker к нескольким GPU
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-multiprocexecutor.png]]
-
-*Переход от одного worker к multiprocess executor. Иллюстрация: Aleksa Gordić,
-[Inside vLLM](https://www.aleksagordic.com/blog/vllm),
-[исходный файл](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/multiprocexecutor.png).*
+[Переход от одного worker к нескольким процессам на схеме Гордича](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/multiprocexecutor.png).
 
 Tensor parallelism делит матричные операции слоя и добавляет коллективные
 обмены. Pipeline parallelism распределяет группы слоёв, но усложняет
@@ -197,12 +193,16 @@ Tensor parallelism делит матричные операции слоя и д
 
 ## 8. Serving layer
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-server_setup.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/vllm-v1-processes-tp4.png|Один процесс API-сервера передаёт запросы одному Engine Core, который управляет четырьмя процессами GPU Worker.]]
 
-*Сетевой слой отделён от engine core: API server принимает и валидирует запросы,
-а engine client передаёт их runtime. Иллюстрация: Aleksa Gordić,
-[Inside vLLM](https://www.aleksagordic.com/blog/vllm),
-[исходный файл](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/server_setup.png).*
+*Команда vLLM, [V1 Process Architecture, TP=4](https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/design/arch_overview.md),
+[исходный PNG](https://raw.githubusercontent.com/vllm-project/vllm/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/assets/design/arch_overview/v1_process_architecture_tp4.png),
+[Apache-2.0](/licenses/vllm-db9527a4-Apache-2.0.txt).
+При четырёх GPU один запрос проходит через API-сервер и Engine Core,
+а один шаг модели вычисляют четыре процесса GPU Worker. Схема показывает
+конфигурацию из документации, а не все способы запуска vLLM.*
+
+[Сетевой слой и Engine Core на схеме Гордича](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/server_setup.png).
 
 HTTP streaming, токенизация и клиентские соединения не должны блокировать GPU
 loop. Поэтому production server отделяет frontend от engine core и связывает их
@@ -212,24 +212,29 @@ loop. Поэтому production server отделяет frontend от engine cor
 
 ## 9. Как измерять результат
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/first-token-accounting.svg|Сверху этапы обработки на сервере. Снизу клиент получает первый токен отдельно, остальные токены приходят одним фрагментом.]]
 
-*Разложение пользовательской задержки. Иллюстрация: Aleksa Gordić,
-[Inside vLLM](https://www.aleksagordic.com/blog/vllm),
-[исходный файл](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/latency_diagram.png).*
+*Vijay Janapa Reddi et al., [Harvard ML Systems, т. III, рис. 5: First-Token Accounting](https://harvard-edge.github.io/cs249r_book_dev/vol3/02_foundation_model/02_foundation_model.html#fig-vol3-first-token-accounting),
+[исходный SVG](https://raw.githubusercontent.com/harvard-edge/cs249r_book_dev/a32512942fe30f4fa1edb51486f7de53c1318ac7/vol3/02_foundation_model/images/svg/first_token_accounting.svg),
+[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/), без изменений.
+Скобка Client TTFT заканчивается на Token 1. Остальные токены приходят
+одним фрагментом; по нему нельзя восстановить интервалы между шагами декодирования.*
+
+[Диаграмма задержки у Гордича](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/latency_diagram.png).
 
 Прежде чем подбирать scheduler и размер batch, полезно определить, чем
 ограничен конкретный этап вычисления. На roofline diagram операция находится
 между двумя пределами: слева производительность ограничивает пропускная
 способность памяти, справа — вычислительная мощность GPU.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg|На наклонной части roofline расположен decode с одним запросом; prefill длинного запроса находится ближе к вычислительному потолку.]]
 
-*Roofline-модель связывает арифметическую интенсивность операции с достижимой
-производительностью. В типичной LLM-нагрузке prefill ближе к
-compute-bound-режиму, а decode с малым batch — к memory-bound. Иллюстрация:
-Aleksa Gordić, [Inside vLLM](https://www.aleksagordic.com/blog/vllm),
-[исходный файл](https://github.com/vllm-project/vllm-project.github.io/blob/main/assets/figures/2025-vllm-anatomy/roofline.png).*
+*Vijay Janapa Reddi et al., [Harvard ML Systems, Performance Engineering](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/performance_engineering/images/svg/prefill-vs-decode-roofline.svg),
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+Точки на графике схематические. При увеличении decode-пакета стоимость
+чтения весов распределяется между запросами, поэтому положение точки меняется.*
+
+[Roofline из статьи Гордича](https://github.com/vllm-project/vllm-project.github.io/blob/05f81b0527e2d484c48721f9dc1c49d06849c9f3/assets/figures/2025-vllm-anatomy/roofline.png).
 
 Одного throughput недостаточно. Минимальный отчёт различает:
 

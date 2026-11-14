@@ -2,7 +2,7 @@
 title: "KV-cache compression и offload"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-19
+last_updated: 2026-11-11
 last_verified: 2026-10-19
 primary_sources:
   - https://github.com/mryab/efficient-dl-systems/tree/e632aa89ca9e6638d52e1b686095e7442faffbb0/week09_inference_algorithms
@@ -11,6 +11,7 @@ primary_sources:
   - https://arxiv.org/abs/2306.14048v2
   - https://arxiv.org/abs/2404.14469v2
   - https://github.com/huggingface/transformers/blob/1d9654e78a23fb167ef539cbd699dfbd3e4830cf/docs/source/en/kv_cache.md
+  - https://arxiv.org/abs/2510.09665v1
 ---
 
 # KV-cache compression и offload
@@ -117,13 +118,9 @@ MLA сохраняет сжатое латентное представлени�
 Замена MHA на GQA или MLA у готовой модели требует преобразования и обучения,
 а не одного параметра планировщика.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-35-36/cs336-mha-gqa-mqa-mla.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/deepseek-v2-mla-2026-11-09/v2-figure3-attention.png|Четыре схемы: отдельные K/V для каждой головы в MHA, K/V на группу в GQA, одна готовая пара K/V в MQA и общий латент для разных K/V в MLA. Штриховка показывает кэшируемые векторы.]]
 
-*Сравнение MHA, GQA, MQA и MLA из материалов
-[Stanford CS336](https://stanford-cs336.github.io/spring2025/).
-Штриховка обозначает кешируемые векторы. Схема показывает различие
-представлений, но не задаёт универсального коэффициента экономии для MLA.
-Исходное изображение сохранено без изменений.*
+*DeepSeek-AI, [DeepSeek-V2, рис. 3, с. 7](https://raw.githubusercontent.com/deepseek-ai/DeepSeek-V2/ec98ee3cbffc32104cd55dba8af884b3d772602a/deepseek-v2-tech-report.pdf#page=7), [MIT](/licenses/deepseek-v2-ec98ee3c-MIT.txt). Штриховка обозначает сохраняемые векторы. Упрощённая схема не показывает отдельный ключ RoPE, который MLA хранит вместе с латентом.*
 
 Для уже обученной модели можно изменить точность K,V или набор доступных
 позиций. Квантизация добавляет ошибку округления, но сохраняет всю историю.
@@ -714,24 +711,62 @@ assert recompute_prefix - load_prefix > 0.247
 Новые токены нельзя считать сохранёнными в CPU только потому,
 что более ранний префикс уже был скопирован.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lmcache-blog-2026/mp-transfer-paths.png]]
+<a id="lmcache-pages-to-chunks"></a>
 
-*Jiayue Chen, Tony Lin and LMCache Team,
-[Understanding LMCache MP Mode Transfer Paths](https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/).
-Показана операция store между worker и сервером кеша.
-Это схема передачи, а не политика выбора токенов или обещание
-автоматической выгрузки всего активного attention. Исходное изображение
-сохранено без изменений.*
+### Как LMCache собирает страницы в один объект
 
-В CUDA-пути указатель IPC позволяет серверу обратиться к памяти worker,
-но не переносит сами данные в CPU бесплатно: сначала разрозненные блоки
-собираются в GPU-буфер, затем копируются в CPU.
-В SHM-пути процессы могут видеть одну физическую область памяти;
-обозначенная одна копия предполагает специализированный C backend,
-а Python fallback добавляет промежуточную копию.
-В пути pickle данные собираются, сериализуются, передаются и записываются.
-Поэтому число копий и общий объём перемещения зависят от выбранного пути,
-даже если внешний запрос «сохранить кеш» одинаков.
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lmcache-paper-2026-11-11/lmcache-figure3-workflow.png|Коннектор движка соединён с обработчиком токенов и GPU Connector; менеджер хранилища связан с каналом передачи. Слева увеличена часть схемы с GPU, CPU и SSD.]]
+
+*Yihua Cheng et al., [LMCache, рис. 3](https://arxiv.org/html/2510.09665v1#S3.F3), [авторский PNG](https://arxiv.org/html/2510.09665v1/e2e_system_diagram.png), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Рисунок из статьи 2025 года; конкретные пути передачи MP из более поздней документации на нём не показаны.*
+
+При сохранении движок передаёт коннектору номера токенов и адреса
+страниц. `Token Processor` определяет, какие токены ещё не сохранены,
+а `GPU Connector` собирает разрозненные страницы в один буфер. На схеме
+менеджер хранилища передаёт собранные данные выбранному хранилищу через
+`Transfer Channel`. При повторном запросе сначала ищут совпавший
+префикс. Затем данные загружают и раскладывают по страницам, которые
+движок выделил для этого запроса. Найденный ключ ещё не означает,
+что данные уже лежат там, откуда их прочитает GPU.
+
+В [§4.1 статьи](https://arxiv.org/html/2510.09665v1#S4.SS1) блок движка покрывает 16 токенов,
+а объект LMCache по умолчанию объединяет 256. Возьмём модель из начала
+главы, у которой на один токен приходится 128 KiB во всех слоях.
+Тогда 16 токенов занимают 64 KiB в одном слое. Чтобы сохранить объект
+из 256 токенов для всех 32 слоёв, нужно собрать $16\cdot32=512$
+таких частей. Полезная нагрузка объекта равна $256\cdot128=32\,768$ KiB,
+то есть 32 MiB.
+
+<!-- checked-example: lmcache-chunk-transfer -->
+```python
+tokens_per_page, tokens_per_object, layers = 16, 256, 32
+bytes_per_token = 128 * 2**10
+bytes_per_page_layer = tokens_per_page * bytes_per_token // layers
+page_layers = tokens_per_object // tokens_per_page * layers
+object_bytes = page_layers * bytes_per_page_layer
+assert bytes_per_page_layer == 64 * 2**10
+assert page_layers == 512
+assert object_bytes == 32 * 2**20
+assert round(1000 * object_bytes / (24 * 10**9), 2) == 1.40
+```
+
+В [разборе MP от 15 июня 2026 года](https://blog.lmcache.ai/en/2026/06/15/understanding-lmcache-mp-mode-transfer-paths-a-beginners-guide/) Chen и Lin показывают
+[три пути сохранения](https://blog.lmcache.ai/wp-content/uploads/2026/06/3pathsUpdate-1-edited.png). Они различаются тем, что передаётся
+между процессами, и тем, кто копирует данные.
+
+| Путь из статьи | Куда попадает KV при сохранении | Что передаётся через RPC |
+| --- | --- | --- |
+| CUDA IPC | Страницы GPU → временный буфер на GPU → L1 в CPU RAM | Дескриптор и метаданные, не тензоры |
+| POSIX SHM | Worker пишет в область RAM, общую с процессом LMCache | Управляющие сообщения, не тензоры |
+| Pickle | Worker собирает и сериализует KV; сервер читает байты и пишет в свой L1 | Сериализованное содержимое KV |
+
+На первом пути две операции копирования, но через канал GPU–CPU
+32 MiB проходят только один раз. При 24 GB/s это не менее 1,40 мс
+на саму передачу. Сборка страниц внутри GPU, запуск операций и ожидание
+в эту оценку не входят. В SHM-пути одна копия предполагает
+специализированное ядро: описанный Python fallback добавляет
+промежуточный буфер. Эти пути и подсчёт копий относятся к версии из
+статьи; для конкретного релиза их сверяют с
+[руководством LMCache MP](https://docs.lmcache.ai/mp/architecture.html).
 
 | Хранилище | Для чего его используют | Что ограничивает возврат |
 |---|---|---|

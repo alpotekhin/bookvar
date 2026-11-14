@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-09",
+  "scope": "Omit the upstream GenAI Agents view-counter image from derived notebook pages. Preserve the archive, other images, and fenced source examples.",
+  "files": [
+    {
+      "source": "publishing/adapter/build.ts",
+      "before_sha256": "90e250063f0cf6d7ed275360f93ee4bd06bec6d2fe546a5aa1142feb9717cc26",
+      "after_sha256": "6e99ccf5e4007b9fa0993872a8fe88a2c6817ba81628eeb9431252c9933a8c3c",
+      "lines": 935,
+      "changes": [
+        {
+          "old": "function escapeHtml",
+          "new": "function readerSourceBody(route: string, body: string): string {\n  if (!route.startsWith('sources/courses/genai-agents/')) return body;\n  // The upstream notebook footer loads a per-notebook view counter.\n  // Preserve the archived notebook and examples; omit the beacon from HTML.\n  return mapMarkdownProse(body, prose => prose.replace(\n    /^!\\[\\]\\(https:\\/\\/europe-west1-genai-agents-views-tracker\\.cloudfunctions\\.net\\/genai-agents-tracker\\?notebook=[a-z0-9-]+\\)[ \\t]*\\r?$/gm,\n    ''\n  ));\n}\n\nfunction escapeHtml"
+        },
+        {
+          "old": "    const linked = prepareLinkedCourseArtifacts(rootDir, source, entry.route, page.body, routeBySource, pdfDownloads);",
+          "new": "    const linked = prepareLinkedCourseArtifacts(rootDir, source, entry.route,\n      readerSourceBody(entry.route, page.body), routeBySource, pdfDownloads);"
+        }
+      ]
+    }
+  ]
+}

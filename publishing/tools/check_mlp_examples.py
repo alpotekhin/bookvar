@@ -12,6 +12,7 @@ import re
 import numpy as np
 import torch
 from scipy.optimize import linprog
+from topic_consolidation_baseline import before_topic_consolidation
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md"
@@ -20,8 +21,12 @@ chapter_text = re.sub(r'<!-- BEGIN REVIEW: Module hooks 2026-10-27 -->\n.*?'
     r'<!-- END REVIEW: Module hooks 2026-10-27 -->\n\n', '', chapter_text, flags=re.S)
 blocks = re.findall(r"```python\n(.*?)```", chapter_text, re.S)
 assert len(blocks) == 7
+historical = before_topic_consolidation(CHAPTER.read_text(), CHAPTER,
+    stop_before_journal='2026-11-03-kernels-course-additions.json')
+historical = re.sub(r'<!-- BEGIN REVIEW: Module hooks 2026-10-27 -->\n.*?'
+    r'<!-- END REVIEW: Module hooks 2026-10-27 -->\n\n', '', historical, flags=re.S)
 original_text = re.sub(r'<!-- BEGIN REVIEW: Module state 2026-10-27 -->\n.*?'
-    r'<!-- END REVIEW: Module state 2026-10-27 -->\n\n', '', chapter_text, flags=re.S)
+    r'<!-- END REVIEW: Module state 2026-10-27 -->\n\n', '', historical, flags=re.S)
 original_text = original_text.replace('last_updated: 2026-10-27', 'last_updated: 2026-10-21', 1)
 for reflow in json.loads((ROOT / 'publishing/tools/mlp-review-layout.json').read_text())['reflows']:
     assert original_text.count(reflow['after']) == 1

@@ -8,6 +8,7 @@ import math
 import re
 import torch
 import torch.nn.functional as F
+from topic_consolidation_baseline import before_topic_consolidation
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md"
@@ -136,8 +137,9 @@ print("PASS value/content separation, non-self maximum and qualified permutation
 
 addition = json.loads((ROOT / "docs/audit/2026-10-29-attention-consolidation-additions.json").read_text())
 record = next(row for row in addition["files"] if row["source"] == str(CHAPTER.relative_to(ROOT)))
-assert hashlib.sha256(text.encode()).hexdigest() == record["after_sha256"]
-restored = text
+restored = before_topic_consolidation(text, CHAPTER,
+    stop_before_journal='2026-10-29-attention-consolidation-additions.json')
+assert hashlib.sha256(restored.encode()).hexdigest() == record["after_sha256"]
 for change in reversed(record["changes"]):
     assert restored.count(change["new"]) == 1
     restored = restored.replace(change["new"], change["old"], 1)

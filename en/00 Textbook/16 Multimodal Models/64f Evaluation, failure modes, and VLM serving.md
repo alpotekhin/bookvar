@@ -4,22 +4,24 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "7158736c550f13fbe8deca537fc369ef87c94a38586dae167fbdc78d215e625a"
-translation_reviewed: "2026-10-29"
+canonical_revision: "2722e2abbc31935c56e96324e5c722992e7afa1763a8f3f1407e7a04a5d1f0ba"
+translation_reviewed: "2026-11-09"
 translation_of: "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md"
-last_updated: 2026-10-29
-last_verified: 2026-09-15
+last_updated: 2026-11-09
+last_verified: 2026-11-09
 primary_sources:
   - https://cs231n.stanford.edu/slides/2025/lecture_16.pdf
   - https://arxiv.org/abs/2204.03162
   - https://arxiv.org/abs/2305.10355
-  - https://arxiv.org/abs/2409.17146
-  - https://arxiv.org/abs/2502.13923
+  - https://arxiv.org/abs/2411.03823v3
+  - https://arxiv.org/abs/2511.03774v1
+  - https://arxiv.org/abs/2409.17146v2
+  - https://proceedings.mlr.press/v267/singh25d.html
 ---
 
 # Evaluation, failure modes, and VLM serving
 
-One aggregate multimodal score mixes recognition, OCR, knowledge, reasoning, grounding, and response format. A useful evaluation separates those abilities and then tests whether the answer causally depends on visual evidence.
+An image description can name a person, a bicycle, and a road sign correctly and still invent a helmet. An invoice reader can transcribe every number correctly and return a deposit instead of the amount due. The first error concerns the presence of an object; the second concerns the role of a number. A single accuracy score does not tell you which one to fix.
 
 MMMU covers expert disciplines; MathVista visual mathematics; OCRBench, DocVQA, and ChartQA text and layout; Video-MME and LongVideoBench temporal understanding. None is a complete measure of “multimodal intelligence.”
 
@@ -64,11 +66,9 @@ Micro averaging describes the chosen request mix; macro averaging gives each cat
 
 ## Composition and hallucination
 
-Winoground uses image-caption pairs with the same words and entities but different relations. It tests whether the representation preserves composition rather than a bag of concepts.
+<a id="vlm-eval-winoground"></a>
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/cs231n-lecture16-winoground.png]]
-
-*Stanford CS231n 2025, [Lecture 16, slide 50](https://cs231n.stanford.edu/slides/2025/lecture_16.pdf#page=50). Winoground, CREPE, and ARO examples are shown. The same-word constraint belongs to Winoground here; CREPE also substitutes words.*
+On the left of [Stanford CS231n, Lecture 16, slide 50](https://cs231n.stanford.edu/slides/2025/lecture_16.pdf#page=50), one image has a cup in grass and the other has grass in a cup. The captions use the same words in different orders. Recognizing both objects won't tell a model which contains the other. The adjacent CREPE and ARO examples test other kinds of compositional errors; CREPE also changes words.
 
 For a Winoground item, let $I_0,I_1$ be images and $T_0,T_1$ their matching captions. Four similarities expose two different directions:
 
@@ -107,6 +107,10 @@ assert winoground_scores(np.ones((2, 2))) == (False, False, False)
 ```
 
 For independent identically distributed continuous random scores, expected text/image scores are each $1/4$, and group score is $1/6$. The four group comparisons are dependent: both diagonal entries must outrank both off-diagonal entries, true in four of the 24 orderings. This baseline does not automatically apply to a generative model choosing one of two letters. Fix how its outputs become four comparable scores. The dataset also includes pragmatics, symbolic depictions, and same-series photographs; failure is not a complete diagnosis of every kind of compositional understanding.
+
+<a id="vlm-eval-pope"></a>
+
+### POPE asks about objects that may be absent
 
 POPE probes object hallucination with absent categories sampled randomly, by dataset frequency, or by co-occurrence with present objects. It measures one failure mode, not all hallucination: attributes, relations, counts, and OCR can also be false. “Adversarial” names the co-occurrence sampling procedure, not proof that every such question is harder for every model.
 
@@ -249,13 +253,59 @@ These differences do not prove that a particular test image appeared in training
 
 Check exact hashes, perceptually similar images, OCR text, questions, and solutions; redrawn charts can preserve the same task and answer. A new benchmark date reduces some risks without proving every original or synthetic source clean.
 
-Open weights do not imply an open training pipeline. Molmo separates the final VLM, LLM backbone, vision encoder, and data/code.
+<a id="vlm-eval-leakage-routes"></a>
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/molmo-figure11-openness.png]]
+### What could have leaked into training?
 
-*Figure 11 from Deitke et al., [Molmo and PixMo](https://arxiv.org/abs/2409.17146), PDF p. 19. The table is a dated comparison of openness across model components and data.*
+Suppose our invoice question was published with the answer “12,480.”
+If the language backbone saw that pair in its text corpus, it can
+recall the amount without seeing the invoice. That is the left branch
+in Song et al.'s figure. On the right, the same question enters
+multimodal training along with the invoice image. Either source can
+include the answer. Image similarity search misses the text-only pair;
+finding the question does not tell you whether the training record also
+contained the image.
 
-The figure belongs to the December 5, 2024 report, not a current status table for every listed family. “Distilled” identifies dependence on proprietary-VLM-generated data. Reproducing evaluation requires encoder/processor revisions, templates, media, questions, and evaluators; reproducing training additionally requires provenance, licenses, filtering, teachers, and recipe. Open weights alone provide neither missing corpus details nor all reproduction inputs.
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-eval-2026-11-13/mm-detect-contamination-figure1.png|On the left, the question or question–answer pair enters text pre-training. On the right, the question and image enter multimodal training.]]
+
+*Dingjie Song et al., [Both Text and Images Leaked!, Figure 1](https://arxiv.org/html/2411.03823v3#S1.F1),
+[§2.1](https://arxiv.org/html/2411.03823v3#S2.SS1),
+[original PNG](https://arxiv.org/html/2411.03823v3/fig1_arr.png),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Unmodified figure.*
+
+When the corpus is unavailable, keep the question fixed and edit the
+invoice so the correct total becomes 13,480. If the answer stays at
+12,480, the model fails the paired test. To test
+the link with memorization, Park et al. fine-tuned copies on the
+original test examples and compared them with the model without that
+additional training. On 478 selected MMStar questions, editing the
+images raised LLaVA-v1.5-7B's accuracy from 37.78% to 69.29%. After
+three epochs of LoRA on the test examples, the same comparison went
+from 54.34% down to 38.18%
+([§§4–5, Table 2](https://arxiv.org/html/2511.03774v1#S5)).
+The edits could make the questions easier. The experiment shows how
+known exposure affected this comparison; a failed pair alone cannot
+establish leakage in a model with an undisclosed corpus.
+
+<a id="vlm-eval-open-components"></a>
+
+### What can open weights reproduce?
+
+In the December 2024 [Molmo comparison, Figure 11, p. 19](https://arxiv.org/pdf/2409.17146v2#page=19),
+Molmo-7B-O and Molmo-7B-D both have open final VLM weights, data,
+and training code. The language backbones differ: the table marks
+OLMo's weights and data plus code open, but only Qwen2 7B's weights
+open. Neither row marks the vision encoder's data plus code open.
+For other models, `Distilled` means data generation depended on a
+proprietary VLM. These are the authors' classifications at the time,
+not a current license inventory.
+
+To repeat evaluation, pin the checkpoint, encoder, processor, prompt
+template, media, questions, and scoring rules. To check whether test
+items appeared during training, you also need access to the relevant
+corpus. Repeating training also requires data provenance and licenses,
+filtering rules, versions of synthetic-data teachers, and the training
+configuration.
 
 ## Serving path and observability
 
@@ -314,6 +364,8 @@ assert reserved_kv_bytes / 2**20 == 489.5
 These are tensor sizes, not peak memory or a particular Qwen configuration. They exclude weights, temporary vision/prefill activations, block alignment, transfer buffers, and concurrent requests. Total parameter count does not determine KV-head count or projected feature width.
 
 Admission control should cap pixels, images, frames, and total visual tokens. Variable-length media causes batch imbalance and head-of-line blocking. Image-embedding cache keys must include content hash, preprocessing configuration, encoder, and connector version; video keys also include sampling policy.
+
+<a id="vlm-eval-ttft"></a>
 
 ### Follow the complete latency clock
 
@@ -438,6 +490,33 @@ assert max(allocations, key=lambda a: capacity(a, image_heavy_rates)) == (2, 1, 
 
 This model assumes linear replication; real queues, memory, and communication add constraints. Stage capacity does not prove tail-latency SLO compliance. EPD uses a workload-sample simulator and Bayesian optimization to choose resources, batches, and scheduling under cost constraints. Role changes stop new admissions, redistribute queued work, change weights/cache roles, then resume. P↔D can reuse some state; moving from E to the LLM requires different weights.
 
+<a id="vlm-slo-goodput"></a>
+
+### How much load can the service handle within its SLO?
+
+The [EPD experiment, §4.1](https://proceedings.mlr.press/v267/singh25d.html) checks two conditions on each request. Time to first token (TTFT) runs from request submission until the user receives the first token. Time per output token (TPOT) averages the intervals from the first output token to the last. Each metric has its own limit. A request counts only if it meets both limits, and *SLO attainment* is the share of submitted requests that do. The horizontal line marks 90%. The authors define *goodput* as the highest offered request rate with at least 90% attainment.
+
+![[00 Учебник/Assets/Figures/curated/vlm-eval-2026-11-09/epd-figure5-slo.png|Six plots of joint SLO attainment for three VLMs, with two images per request above and four below]]
+
+*Gursimran Singh et al., [Efficiently Serving Large Multimodal Models Using EPD Disaggregation](https://proceedings.mlr.press/v267/singh25d.html), [Figure 5, p. 6](https://raw.githubusercontent.com/mlresearch/v267/main/assets/singh25d/singh25d.pdf#page=6), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Original panels, axes, and legend extracted from the PDF without modification.*
+
+Each run sent 100 requests with Poisson arrivals and fixed every response at ten output tokens. The upper row uses two images per request; the lower uses four. Each image is 4032 × 3024 pixels. At two requests per second, the MiniCPM-V 2.6 EPD point is above the 90% line in the upper row and below it in the lower row. For this model, the TTFT limits are 1.40 s and 2.60 s respectively, with a 0.04 s TPOT limit in both rows ([Appendix E.3, Table 9](https://raw.githubusercontent.com/mlresearch/v267/main/assets/singh25d/singh25d.pdf#page=16)). The rows show how each workload meets its own SLO, not what adding images does at one fixed latency limit.
+
+In the illustrative log below, at three requests per second, 91 requests meet the TTFT limit and 90 meet the TPOT limit. Only 84 meet both. At two requests per second, exactly 90 out of 100 meet both, so two is the goodput over the tested rates. If those 100 requests were submitted and accounted for over 50 seconds, the rate of timely answers would instead be 90 / 50 = 1.8 responses per second. The paper's goodput is an offered load, not a count of the answers that passed the filter.
+
+```python
+# Each row: both, TTFT only, TPOT only, neither.
+runs = {1: (94, 2, 2, 2), 2: (90, 4, 3, 3), 3: (84, 7, 6, 3)}
+attainment = {rate: counts[0] / sum(counts) for rate, counts in runs.items()}
+assert attainment == {1: .94, 2: .90, 3: .84}
+assert max(rate for rate, share in attainment.items() if share >= .90) == 2
+assert (runs[3][0] + runs[3][1], runs[3][0] + runs[3][2]) == (91, 90)
+```
+
+Figure 5 measures timing. A service can meet both limits and still read the wrong total from an invoice. To measure that outcome, [[#vlm-eval-joint-quality|check correctness and timing together]].
+
+<a id="vlm-eval-cache"></a>
+
 ### Cache identity depends on the cached object
 
 An encoder-feature cache needs the image bytes, preprocessing, and vision-checkpoint identity. A cache of **projected** visual embeddings additionally depends on connector weights. A full LLM KV cache also depends on text prefix, LLM revision, adapters, positions, and multimodal ordering. Identical visible text does not justify reusing KV from another image.
@@ -511,6 +590,10 @@ An evaluator should retain the judge prompt, checkpoint/version, media access, r
 
 Reliable interfaces expose evidence: crop and coordinates for documents, timestamp for video, segment for audio. Inspectable provenance is more valuable than a fluent unsupported explanation.
 
+<a id="vlm-eval-abstention"></a>
+
+### When to answer or send the case for review
+
 An extracted total is supported by its printed region; a computed total needs both summand regions and the operation. A crop with no established connection to the answer proves neither. When evidence is unavailable, request a clearer input or human review and measure that behavior. Rejecting every request avoids wrong outputs but solves no tasks.
 
 For an acceptance threshold, coverage is the accepted fraction and risk the error fraction among accepted outputs. Risk is undefined at zero coverage. These ten illustrative scores yield coverage 0.4 and risk 0.25 at threshold 0.85:
@@ -530,7 +613,11 @@ assert stricter.mean() == .2 and (~correct[stricter]).mean() == 0
 
 The scores are manually chosen, not claimed calibrated probabilities. Zero observed error on two accepted examples at a stricter threshold does not establish zero system risk. Tune thresholds on validation data and test on separate documents, including relevant error types.
 
-Quality and efficiency should be inspected together on photos, dense documents, multiple-image prompts, and videos. The useful result is a quality–budget–latency curve with failure slices, not one average score or a gallery of successful responses.
+<a id="vlm-eval-joint-quality"></a>
+
+### Count answers that are both correct and timely
+
+A dense document can require more processing than a photograph and still produce a wrong answer. Report the results separately for photos, dense documents, multi-image prompts, and videos. Within each workload, count how many requests satisfy both criteria.
 
 Of 100 requests, suppose 80 are correct, 70 timely, and 60 both. Multiplying 0.8 by 0.7 would give 0.56 but assumes independence; difficult documents can correlate errors and latency. Count the intersection directly:
 
@@ -547,7 +634,7 @@ measurement_seconds = 10
 assert usable.sum() / measurement_seconds == 6
 ```
 
-This artificial ten-second log yields six correct-and-timely responses/s. It is the joint metric defined here, not a reproduction of EPD's goodput. Keep all 100 requests, failures, abstentions, timeouts, and per-class latency/quality results in the denominator and report the separate numerators.
+This artificial ten-second log yields six correct and timely responses per second. Unlike [[#vlm-slo-goodput|EPD's goodput]], it counts qualifying responses per unit time rather than the maximum offered load. Keep all 100 requests in the denominator, including failures, abstentions, and timeouts. Report the correctness and timing counts separately as well as their intersection.
 
 The [[06 Практика/19 Найти автомобильный номер в видеопотоке|video license-plate practical]] connects detection, tracking, OCR, and direct VLM calls to measurable frame-rate and latency requirements. The next conceptual branch, [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|diffusion and flow matching]], changes the output from text to generated images; these linked pages can use the marked Russian fallback until separately localized.
 
@@ -555,7 +642,8 @@ The [[06 Практика/19 Найти автомобильный номер в
 
 - Stanford CS231n, [Multimodal Foundation Models](https://cs231n.stanford.edu/slides/2025/lecture_16.pdf).
 - Li et al., [POPE](https://arxiv.org/abs/2305.10355).
-- Deitke et al., [Molmo and PixMo](https://arxiv.org/abs/2409.17146).
+- Deitke et al., [Molmo and PixMo v2](https://arxiv.org/abs/2409.17146v2).
+- Song et al., [MM-Detect](https://aclanthology.org/2025.findings-emnlp.556/), §2.1; Park et al., [Multi-Modal Semantic Perturbations](https://arxiv.org/html/2511.03774v1#S4), §§4–5.
 - [Winoground §3.1–3.2](https://arxiv.org/abs/2204.03162v1); [POPE §5.1–5.2](https://aclanthology.org/2023.emnlp-main.20/); [CHAIR §2.1](https://aclanthology.org/D18-1437/); [MM-Vet §3.1–3.2](https://proceedings.mlr.press/v235/yu24o.html); [MMStar §3 and §4.3](https://arxiv.org/abs/2403.20330v1).
 - [EPD Disaggregation §3.1–3.2](https://proceedings.mlr.press/v267/singh25d.html) and [pinned vLLM documentation/code](https://github.com/vllm-project/vllm/tree/7b569ec8953cf8099638a6d2ee1e915b75867c3a). Settings described here are version-specific.
 - Previous: [[en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models|Video, audio, and omni models]].

@@ -1,9 +1,9 @@
 ---
 title: "Jamba: A Hybrid Transformer-Mamba Language Model"
-url: https://arxiv.org/abs/2403.19887
-authors: "AI21 Labs"
+url: https://arxiv.org/abs/2403.19887v2
+authors: "Opher Lieber et al. (AI21 Labs)"
 year: 2024
-date_reviewed: 2026-04-08
+date_reviewed: 2026-11-09
 type: source-note
 status: legacy
 category: paper
@@ -12,78 +12,111 @@ concepts: [Mamba, State Space Models, Mixture of Experts, Transformer, KV Cache,
 ---
 # Jamba: A Hybrid Transformer-Mamba Language Model
 
-## TL;DR
+В Jamba v0.1 из 32 слоёв только четыре хранят ключи и значения для
+каждого токена. Остальные используют Mamba: при генерации они обновляют
+состояние фиксированного размера. Отдельно от этого выбора часть FFN
+заменена на MoE. Поэтому 52 млрд параметров нужно разместить в памяти,
+но в вычислении для одного токена участвуют около 12 млрд. Это базовая
+модель без обучения следованию инструкциям
+([Lieber et al., §§1–3](https://arxiv.org/html/2403.19887v2#S2)).
 
-Jamba -- первая production-grade **hybrid Transformer-Mamba** модель с MoE. Interleaving Transformer и Mamba layers (1:7 ratio) даёт: 8x меньше KV cache (4GB vs 32GB на 256K context), 3x throughput vs Mixtral, поддержка 256K context -- при сопоставимом quality. 52B total / 12B active parameters, помещается в одну 80GB GPU.
+## Один блок: внимание, состояние и эксперты
 
-## Problem
+Четыре блока по восемь слоёв дают 4 слоя внимания и 28 слоёв Mamba.
+Каждый слой состоит из модуля, который связывает токены, и FFN.
+В выпущенной конфигурации каждый второй FFN заменён на MoE. Маршрутизатор
+выбирает два из 16 экспертов отдельно для каждого токена. В слое с
+вниманием работает GQA; для FFN авторы используют SwiGLU. Токенизатор BPE
+имеет 65 536 записей и кодирует цифры по отдельности.
 
-Transformer -- dominant architecture, но две проблемы при длинных контекстах: (1) KV cache растёт линейно, ограничивая context length, (2) каждый generated token требует computation на всём контексте → low throughput. SSM (Mamba) решают оба, но отстают по quality. Можно ли совместить benefits обоих?
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/course-follow-through/jamba-architecture.svg|Слева блок из восьми слоёв с одним Attention и семью Mamba; справа четыре сочетания Attention или Mamba с обычным FFN или MoE.]]
 
-## Method
+*Opher Lieber et al., [Jamba, рис. 1](https://arxiv.org/html/2403.19887v2#S2.F1), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Слева — блок выпущенной модели. Справа перечислены возможные типы слоёв; вариант Attention + MoE на этой схеме предусмотрен архитектурой, но не используется в Jamba v0.1.*
 
-### Архитектура (Jamba Block)
-- **Hybrid layers**: чередование Attention и Mamba layers в ratio `a:m`
-- **MoE**: на каждом втором MLP layer, 16 experts, top-2 routing
-- Конфигурация: 4 Jamba blocks, каждый:
-  - `l = 8` layers
-  - `a:m = 1:7` (1 attention на 7 Mamba layers)
-  - `e = 2` (MoE every other layer)
-  - `n = 16` experts, `K = 2` top experts
+## Откуда берутся 4 ГиБ KV-кеша
 
-### Ключевые design decisions
-- **1:7 ratio** (Attention:Mamba): chosen через ablations как most compute-efficient среди best-performing variants
-- **RMSNorm в Mamba layers**: critical для stability при large-scale training. Без нормализации training diverges.
-- **No positional embeddings**: с Mamba layers позиционная информация не нужна (implicit через recurrence)
-- GQA, SwiGLU, 64K vocabulary, BPE tokenizer
+В [конфигурации v0.1](https://huggingface.co/ai21labs/Jamba-v0.1/raw/9efd11575ba791d9e3d25d4c8b670e78506b2df7/config.json)
+внимание стоит раз в восемь слоёв, ширина модели 4096, а на 32 головы
+запросов приходится восемь голов K/V. Ширина головы равна $4096/32=128$.
+На один токен четыре слоя записывают ключи и значения для всех восьми
+голов K/V. При двух байтах на число это $2\cdot4\cdot8\cdot128\cdot2=16384$
+байта на токен. Для 262 144 токенов получается ровно 4 ГиБ:
 
-### Memory Efficiency
-| Model | Total params | Active params | KV cache (256K, 16bit) |
-|---|---|---|---|
-| LLaMA-2 7B | 6.7B | 6.7B | 128GB |
-| Mistral 7B | 7.2B | 7.2B | 32GB |
-| Mixtral 8x7B | 46.7B | 12.9B | 32GB |
-| **Jamba** | **52B** | **12B** | **4GB** |
+$$
+16\,384\cdot262\,144=2^{32}\ \text{байт}.
+$$
 
-- 8x reduction в KV cache vs vanilla Transformer
-- Fits single 80GB GPU с context до 140K tokens (vs 20K для LLaMA-2 70B)
+[Таблица 1](https://arxiv.org/html/2403.19887v2#S2.T1) приводит для
+того же числа токенов и 16-битного кеша 32 ГБ у Mistral и Mixtral и
+128 ГБ у Llama 2 7B. В этот расчёт не входят веса, состояние Mamba
+и временные тензоры. Окно 256K означает, что модель поддерживает такую
+длину, а не что полный запрос поместится на одной карте. Для одной
+A100 80 ГБ авторы сообщают о текстах до 140K токенов с весами int8
+([§3.1](https://arxiv.org/html/2403.19887v2#S3.SS1),
+[§7](https://arxiv.org/html/2403.19887v2#S7)).
 
-### Training
-- NVIDIA H100 GPUs, in-house framework (FSDP, tensor/sequence/expert parallelism)
-- In-house dataset: web, books, code (last update March 2024)
-- Successfully trained on context lengths up to 1M tokens
+## Два измерения пропускной способности
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/jamba/fig1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/jamba/throughput-figure3-v2.png|Панель a: скорость при разных размерах пакета на одной A100. Панель b: скорость при разных длинах контекста на четырёх A100.]]
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/jamba/fig3.png]]
+*Opher Lieber et al., [Jamba, рис. 3, с. 6](https://arxiv.org/pdf/2403.19887v2#page=6), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Обе панели и подписи взяты из статьи. В обоих опытах модель генерировала 512 токенов, а авторы измеряли суммарную пропускную способность обработки входа и генерации.*
 
-## Key Results
+На панели (a) контекст фиксирован на 8K, веса int8, GPU один.
+У Mixtral нет столбца при batch size 16: этот пакет не поместился.
+Поэтому почти трёхкратная разница между максимальными показанными
+скоростями двух моделей включает эффект разного размера пакета.
+На панели (b) запрос один, GPU четыре, веса без квантизации. Меняется
+длина входа. На 128K по графику получается около 1500 токенов/с у Jamba
+и около 600 у Mixtral; в тексте авторы описывают преимущество как
+примерно трёхкратное. Это конкретные замеры из
+[§3.2](https://arxiv.org/html/2403.19887v2#S3.SS2), а не обещание
+ускорения на другом движке, оборудовании или длине ответа.
 
-### Standard Benchmarks
-| Benchmark | Jamba | Mixtral 8x7B | LLaMA-2 70B |
-|---|---|---|---|
-| MMLU (5-shot) | 67.4 | 70.6 | 69.8 |
-| HellaSwag (10-shot) | 87.1 | 86.7 | 85.3 |
-| WinoGrande (5-shot) | 82.5 | 81.2 | 80.2 |
-| GSM8K (3-shot CoT) | 59.9 | 60.4 | 55.3 |
-| HumanEval | 29.3 | 34.8 | 29.9 |
+## Обучение и абляции
 
-### Long Context
-- Needle-in-a-haystack: excellent performance до 256K tokens
-- Few-shot classification (128K context): Jamba >= Mixtral на Trec-Fine, Banking77
-- Long-context QA: Jamba outperforms Mixtral on average (0.44 vs 0.43 F1)
+Авторы обучали модель на H100 с FSDP, тензорным, последовательностным и
+экспертным параллелизмом. Данные включали веб-тексты, книги и код;
+авторы описывают фильтрацию и дедупликацию, но не публикуют саму смесь
+([§4](https://arxiv.org/html/2403.19887v2#S4)). В статье сообщается об
+обучении вариантов Jamba с контекстами до 1 млн токенов. Для выпущенной
+модели заявлено и проверено другое окно, до 256K.
 
-### Throughput
-- Single GPU, batch=16: Jamba 3x throughput vs Mixtral (Mixtral doesn't fit)
-- 4 GPUs, context 128K: Jamba 3x throughput vs Mixtral
+Пропорции 1:3 и 1:7 дали близкие результаты в абляции гибридов 1.3B
+без MoE после 250 млрд токенов. Авторы взяли 1:7 для больших моделей,
+поскольку в этом варианте меньше слоёв внимания. В той же серии
+сравнений на IMDB модель только с Mamba нередко отвечала свободным
+текстом вместо одной из заданных меток. Гибрид лучше соблюдал формат.
+Из одного такого опыта нельзя заключить, что SSM вообще не способна
+обучаться по примерам
+([§§6.1–6.2](https://arxiv.org/html/2403.19887v2#S6.SS1)).
 
-## My notes
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/jamba/fig3.png|На участке без внутренней RMSNorm наблюдаются всплески потерь; на последующем участке с RMSNorm они исчезают.]]
 
-- **Architectural proof-of-concept**: hybrid Attention-SSM works at scale. 1:7 ratio -- aggressive, но ablations показывают: pure Mamba struggles с in-context learning, даже 1 attention layer на 7 Mamba решает проблему.
-- KV cache 4GB vs 32GB на 256K context -- это game-changer для deployment. Long-context inference feasible на consumer hardware.
-- Quality несколько ниже Mixtral на MMLU (67.4 vs 70.6) и HumanEval (29.3 vs 34.8). Это цена за architectural novelty -- оптимизация ещё не на уровне mature Transformer stack.
-- RMSNorm в Mamba layers -- crucial insight для community. Без этого large-scale Mamba training нестабилен.
-- No positional embeddings -- Mamba's recurrence inherently captures position. Это означает, что hybrid model полагается на attention layers для explicit positional reasoning, а Mamba -- для sequential patterns.
-- Training на 1M tokens, release на 256K -- gap указывает на degradation при extreme lengths, но 256K -- уже best-in-class для open models.
-- MoE on top of hybrid -- three-way combination (Attention + Mamba + MoE). Flexible design space с 5 degrees of freedom (l, a:m, e, n, K). Много room для optimization.
-- Base model only (no instruction tuning) -- честно, но ограничивает practical use. Community fine-tunes нужны для fair comparison с Mixtral-Instruct.
+*Opher Lieber et al., [Jamba, рис. 9](https://arxiv.org/html/2403.19887v2#S6.F9), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Оригинал без изменений. При переходе к выпущенной конфигурации авторы наблюдали всплески потерь и большие внутренние активации в Mamba. После добавления RMSNorm внутри этих слоёв всплески на показанном участке исчезли ([§6.4](https://arxiv.org/html/2403.19887v2#S6.SS4)).*
+
+В Jamba v0.1 нет RoPE и других явных позиционных представлений. В
+сравнении моделей 1.3B вариант с RoPE не давал однозначного выигрыша
+по задачам. Предположение авторов состоит в том, что порядок передают
+состояния Mamba перед слоями внимания
+([§6.5](https://arxiv.org/html/2403.19887v2#S6.SS5)).
+
+## Оценка качества
+
+| Задача | Jamba | Mixtral 8×7B | Llama 2 70B |
+|---|---:|---:|---:|
+| MMLU, 5-shot | 67,4 | 70,6 | 69,8 |
+| HellaSwag, 10-shot | 87,1 | 86,7 | 85,3 |
+| WinoGrande, 5-shot | 82,5 | 81,2 | 80,2 |
+| GSM8K, 3-shot CoT | 59,9 | 60,4 | 55,3 |
+| HumanEval, pass@1 | 29,3 | 34,8 | 29,9 |
+
+Числа взяты из [таблицы 2](https://arxiv.org/html/2403.19887v2#S5.T2).
+В опытах на длинном контексте извлечение одной вставленной фразы
+работало до 256K. В классификации с примерами до 128K Jamba обошла
+Mixtral на TREC-Fine и Banking77; на NLU Intent и CLINC150 результаты
+близки. Средний F1 по пяти задачам длинного QA составил 0,44 против
+0,43, но на CUAD и SFiction результат Jamba ниже
+([§5.2 и таблица 3](https://arxiv.org/html/2403.19887v2#S5.SS2)).
+
+[[02 Атлас моделей/Семейства/Jamba|Семейство Jamba]] ·
+[[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры|Как устроены SSM и гибридные декодеры]]

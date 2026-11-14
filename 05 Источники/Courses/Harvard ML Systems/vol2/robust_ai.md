@@ -775,9 +775,9 @@ where:
 - <span class="source-math-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">sign</span></span><span class="mopen">(</span><span class="mord">⋅</span><span class="mclose">)</span></span></span></span></span> keeps only the direction of steepest ascent
 - <span class="source-math-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ϵ</span></span></span></span></span> controls how much perturbation the attacker is allowed to add
 
-[Figure 13](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html#fig-gradient-attack) visualizes how this approach generates adversarial examples by taking a single step in the direction that increases the loss most rapidly, moving the input across the decision boundary with minimal perturbation.
+[Figure 13](https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol2/robust_ai/images/svg/gradient-attack.svg) visualizes how this approach generates adversarial examples by taking a single step in the direction that increases the loss most rapidly, moving the input across the decision boundary with minimal perturbation.
 
-![[Assets/Sources/Harvard ML Systems/vol2/robust_ai/gradient-attack.svg]]
+[Archived Figure 13: Adversarial Perturbations](https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol2/robust_ai/images/svg/gradient-attack.svg)
 
 Figure 13: **Adversarial Perturbations**: Gradient-based attacks generate subtle, intentionally crafted input noise with magnitude controlled by <span class="source-math-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ϵ</span></span></span></span></span> that maximizes the loss function <span class="source-math-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal">L</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mclose">)</span></span></span></span></span> and causes misclassification by the model. These perturbations, imperceptible to humans, exploit model vulnerabilities by moving the input <span class="source-math-inline"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span></span> across the decision boundary. Source: adapted from a gradient-based-attacks tutorial at defence.AI.
 
@@ -1168,9 +1168,13 @@ After the source boundary, anomaly detection asks whether a candidate training e
 
 More coordinated attacks require structure-aware checks. Clustering methods such as K-means, DBSCAN, and hierarchical clustering look for anomalous groups or isolated points rather than single extreme values. Autoencoders add a learned representation to the same gate: the model reconstructs normal examples well, so high reconstruction error marks a record as abnormal and potentially poisoned ([figure 21](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html#fig-autoencoder)). Each method has a failure mode. Outlier tests miss clean-label poisons, clustering depends on feature representation, and autoencoders can learn the attack pattern if the reference corpus is already contaminated.
 
-![[Assets/Sources/Harvard ML Systems/vol2/robust_ai/2106df9e0de5e907ea8ab741d33097ba20258cdf.svg]]
+[Archived Figure 21: Autoencoder Architecture](https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol2/robust_ai/robust_ai_files/mediabag/2106df9e0de5e907ea8ab741d33097ba20258cdf.svg)
 
 Figure 21: **Autoencoder Architecture**: Autoencoders learn compressed data representations by minimizing reconstruction error, enabling anomaly detection by identifying inputs with high reconstruction loss. During training on normal data, the network learns efficient encoding and decoding, making it sensitive to deviations indicative of potential poisoning attacks. Source: adapted from a *Towards Data Science* autoencoder tutorial.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/autoencoder-dropout-primary-2026-11-10/chervinskii-autoencoder.png|An encoder maps input X to a narrow representation z; the decoder reconstructs X prime.]]
+
+*Bookvar illustration: an encoder compresses the input into a code; a decoder reconstructs the input from that code. Chervinskii, [Autoencoder structure](https://commons.wikimedia.org/wiki/File:Autoencoder_structure.png), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Unmodified.*
 
 #### Sanitization and preprocessing
 

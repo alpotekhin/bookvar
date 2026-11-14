@@ -1,0 +1,81 @@
+{
+  "url": "http://127.0.0.1:4330/en/textbook/rag/full-pipeline/",
+  "width": 1280,
+  "height": 900,
+  "navigation": {
+    "from": "/en/reference/",
+    "href": "http://127.0.0.1:4330/en/textbook/rag/full-pipeline/#rag-hipporag",
+    "text": "HippoRAG and personalized PageRank",
+    "arrived": "http://127.0.0.1:4330/en/textbook/rag/full-pipeline/#rag-hipporag",
+    "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-rag-index/en/1280-reference-target.png"
+  },
+  "figures": [],
+  "limits": "Headless browser interactions and screenshots; requires separate human visual inspection.",
+  "layout": {
+    "page": [
+      1280,
+      1280
+    ],
+    "mathErrors": 0,
+    "formulas": [
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ]
+    ],
+    "tables": [
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ]
+    ]
+  },
+  "contextScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-09-rag-index/en/1280-page.png"
+}

@@ -44,12 +44,16 @@ the optional safety/RLHF supplement inside Assignment 5. The schedule also recor
 sessions without published official artifacts. The material is already linked
 to textbook sections, not merely stored for future use.
 
-The coverage ledger contains 811 semantic units: 557 integrated, 27 already
-covered, 21 assignment-contract-only, 150 source-only, and 56 excluded.
-Of the 557 integrated units, 373 come from assignment material and 184 from
+The coverage ledger contains 811 semantic units: 559 integrated, 29 already
+covered, 21 assignment-contract-only, 146 source-only, and 56 excluded.
+Of the 559 integrated units, 373 come from assignment material and 186 from
 lectures. The separate visual ledger has 159 records: 70 integrated,
-9 already covered, 48 source-only, and 32 excluded. These are bookkeeping
+10 already covered, 47 source-only, and 32 excluded. These are bookkeeping
 categories, not a count of fully reviewed chapters or individual figures.
+
+Lecture 1 shows the first four calls of a decoding loop. The
+[[00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention#prefill-decode-cache-states|prefill and decode walkthrough]]
+follows the same diagram and counts the positions in the cache after each call.
 
 Multi-token prediction is now integrated into the
 [[00 Учебник/11 Pre-training и Scaling/42 Next-token prediction#multi-token-training-objective|training-objective chapter]],
@@ -111,7 +115,7 @@ integration are separate claims.
 
 ### HSE and legacy SHAD notes
 
-The [[05 Источники/Courses/HSE ML course|HSE archive]] contains 67 Russian
+The [[05 Источники/Courses/HSE ML course|HSE catalogue]] links to 67 Russian-language
 materials from two Spring 2026 tracks. Its [[05 Источники/Source maps/HSE ML course — link map|topic map]]
 is useful for classical ML, but full chapter-by-chapter transfer has not been
 established. Older notes for a separate SHAD LLM course are legacy material;

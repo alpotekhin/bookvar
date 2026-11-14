@@ -1,0 +1,88 @@
+[
+  {
+    "id": "curated-spectral-wiskott-a5060cb9bdda",
+    "asset": "00 Учебник/Assets/Figures/curated/spectral-2026-10-31/wiskott-connected-heat.png",
+    "author": "Laurenz Wiskott and Fabian Schönfeld",
+    "title": "Heat diffusion on the connected chain and its one-dimensional ordering",
+    "source_url": "https://www.ini.rub.de/PEOPLE/wiskott/Teaching/UnsupervisedLearning/PublicWeb/LaplacianMatrix-L0-LectureNotes-PublicWeb.pdf#page=5",
+    "source_asset": "05 Источники/Originals/spectral-2026-10-25/wiskott-laplacian.pdf",
+    "source_asset_sha256": "cb2ff89dff43e1bdcd9d3f77dea73b2b8a926a805665b28ef07fa6f6f84933fc",
+    "source_page": 5,
+    "source_printed_page": 5,
+    "source_figure": "1.1",
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2550,
+      3300
+    ],
+    "crop_box_px": [
+      280,
+      980,
+      2280,
+      1860
+    ],
+    "sha256": "a5060cb9bddaaea7d3f45bfa43e25e52e9180aff0137ea2e59f75af611d2659e",
+    "width": 2000,
+    "height": 880,
+    "dimensions_px": [
+      2000,
+      880
+    ],
+    "bytes": 119615,
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/spectral-2026-10-25/wiskott-laplacian.pdf",
+    "license_evidence_sha256": "cb2ff89dff43e1bdcd9d3f77dea73b2b8a926a805665b28ef07fa6f6f84933fc",
+    "modifications": "Complete original Figure 1.1 and its English caption cropped from a 300 dpi page render. Only surrounding page text removed; no redraw, relabeling, translation or resampling.",
+    "derivation": "source-pdf-figure-crop",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-11-03",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian.md"
+    ]
+  },
+  {
+    "id": "curated-spectral-wiskott-4615778b7c70",
+    "asset": "00 Учебник/Assets/Figures/curated/spectral-2026-10-31/wiskott-weighted-constraint.png",
+    "author": "Laurenz Wiskott and Fabian Schönfeld",
+    "title": "Ordinary versus degree-weighted unit-norm constraint",
+    "source_url": "https://www.ini.rub.de/PEOPLE/wiskott/Teaching/UnsupervisedLearning/PublicWeb/LaplacianMatrix-L0-LectureNotes-PublicWeb.pdf#page=15",
+    "source_asset": "05 Источники/Originals/spectral-2026-10-25/wiskott-laplacian.pdf",
+    "source_asset_sha256": "cb2ff89dff43e1bdcd9d3f77dea73b2b8a926a805665b28ef07fa6f6f84933fc",
+    "source_page": 15,
+    "source_printed_page": 15,
+    "source_figure": "2.2",
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2550,
+      3300
+    ],
+    "crop_box_px": [
+      280,
+      300,
+      2280,
+      1390
+    ],
+    "sha256": "4615778b7c706d94775f2c2f0fc5c08ebf8e5fd12fc132879f1602500d6c3416",
+    "width": 2000,
+    "height": 1090,
+    "dimensions_px": [
+      2000,
+      1090
+    ],
+    "bytes": 161839,
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/spectral-2026-10-25/wiskott-laplacian.pdf",
+    "license_evidence_sha256": "cb2ff89dff43e1bdcd9d3f77dea73b2b8a926a805665b28ef07fa6f6f84933fc",
+    "modifications": "Complete original Figure 2.2 and its English caption cropped from a 300 dpi page render. Only surrounding page text removed; no redraw, relabeling, translation or resampling.",
+    "derivation": "source-pdf-figure-crop",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-11-03",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian.md"
+    ]
+  }
+]

@@ -1,0 +1,296 @@
+{
+  "date": "2026-11-11",
+  "scope": "Keep the original NVIDIA artwork in both editions of the distributed inference chapter. Pin the four NCCL collectives and the TP2×CP2 figure to exact upstream sources and teach how to follow the buffers.",
+  "review": {
+    "sources": "NCCL Collective Operations: AllGather, ReduceScatter, AllReduce, AlltoAll and the exact upstream RST. Megatron Core Context Parallel Overview, Figure 1, including the 8K example and forward/backward labels. The code, derivations, sequence, anchors and existing course figures in both editions were preserved.",
+    "rights": "NCCL documentation figures match the documentation-import revision bbc3d605. The repository defaults to Apache-2.0, with separately identified BSD and other material. The Megatron PNG matches the 0b13c98f documentation revision, before the subsequent copyright header in the Markdown. The exact older source contains no file-specific override; its repository license defaults to BSD-3-Clause. Both full pinned license files are supplied. The current NVIDIA website is a reading link, not the grant used for the Megatron copy.",
+    "workedCases": "Follow in2 to the third output block on every rank for AllGather, the third block of each input to out2 for ReduceScatter, all four blocks to every rank for AllReduce, and the second block of each input to rank 1 for AllToAll. For an 8192-token prompt under TP2×CP2, GPU0 first gathers activation rows with GPU1, then obtains remote K/V for the same heads from GPU2. The 4096 local query positions stay local. Slash-separated operations on the diagram denote forward and backward, not two forward collectives."
+  },
+  "figures": [
+    {
+      "id": "curated-distributed-serving-nccl-allreduce-56ba8399a2d0",
+      "asset": "00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allreduce.png",
+      "author": "NVIDIA NCCL project",
+      "source_url": "https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#allreduce",
+      "source_image_url": "https://raw.githubusercontent.com/NVIDIA/nccl/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/images/allreduce.png",
+      "figure_url": "https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/images/allreduce.png",
+      "source_page_url": "https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/collectives.rst",
+      "source_asset": "05 Источники/Originals/distributed-parallelism-nvidia-2026-11-11/nccl-allreduce.png",
+      "source_asset_sha256": "56ba8399a2d0ae820a989cc1130d37264c5923d36f8852f5eeb057919537a675",
+      "commit": "bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5",
+      "git_blob": "7fa3cdf3420d36a3a1ca60260746ed6afb5a8916",
+      "sha256": "56ba8399a2d0ae820a989cc1130d37264c5923d36f8852f5eeb057919537a675",
+      "bytes": 20420,
+      "dimensions_px": [
+        650,
+        200
+      ],
+      "license": "Apache-2.0",
+      "license_url": "https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/LICENSE.txt",
+      "license_evidence": "site/public/licenses/nvidia-nccl-bbc3d605-LICENSE.txt",
+      "license_evidence_url": "https://raw.githubusercontent.com/NVIDIA/nccl/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/LICENSE.txt",
+      "license_evidence_sha256": "c1f53beabe4dbf05bd87c00f7ca6084c0cb541c3f7bf8edab7913f266018b7be",
+      "public_license_copy": "site/public/licenses/nvidia-nccl-bbc3d605-LICENSE.txt",
+      "modifications": "None; byte-identical copy of the complete pinned upstream PNG.",
+      "derivation": "source-raster-copy",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md",
+        "en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md"
+      ]
+    },
+    {
+      "id": "curated-distributed-serving-nccl-allgather-93b7bf717381",
+      "asset": "00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allgather.png",
+      "author": "NVIDIA NCCL project",
+      "source_url": "https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#allgather",
+      "source_image_url": "https://raw.githubusercontent.com/NVIDIA/nccl/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/images/allgather.png",
+      "figure_url": "https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/images/allgather.png",
+      "source_page_url": "https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/collectives.rst",
+      "source_asset": "05 Источники/Originals/distributed-parallelism-nvidia-2026-11-11/nccl-allgather.png",
+      "source_asset_sha256": "93b7bf717381477043bc7b8dc34d76c519eb71339af2b67401f37ac1ef0e8c81",
+      "commit": "bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5",
+      "git_blob": "96b9491f83f9773b834c05a843944b09221194a4",
+      "sha256": "93b7bf717381477043bc7b8dc34d76c519eb71339af2b67401f37ac1ef0e8c81",
+      "bytes": 23453,
+      "dimensions_px": [
+        650,
+        205
+      ],
+      "license": "Apache-2.0",
+      "license_url": "https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/LICENSE.txt",
+      "license_evidence": "site/public/licenses/nvidia-nccl-bbc3d605-LICENSE.txt",
+      "license_evidence_url": "https://raw.githubusercontent.com/NVIDIA/nccl/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/LICENSE.txt",
+      "license_evidence_sha256": "c1f53beabe4dbf05bd87c00f7ca6084c0cb541c3f7bf8edab7913f266018b7be",
+      "public_license_copy": "site/public/licenses/nvidia-nccl-bbc3d605-LICENSE.txt",
+      "modifications": "None; byte-identical copy of the complete pinned upstream PNG.",
+      "derivation": "source-raster-copy",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md",
+        "en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md"
+      ]
+    },
+    {
+      "id": "curated-distributed-serving-nccl-reducescatter-1a8a69eec211",
+      "asset": "00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-reducescatter.png",
+      "author": "NVIDIA NCCL project",
+      "source_url": "https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#reducescatter",
+      "source_image_url": "https://raw.githubusercontent.com/NVIDIA/nccl/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/images/reducescatter.png",
+      "figure_url": "https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/images/reducescatter.png",
+      "source_page_url": "https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/collectives.rst",
+      "source_asset": "05 Источники/Originals/distributed-parallelism-nvidia-2026-11-11/nccl-reducescatter.png",
+      "source_asset_sha256": "1a8a69eec2115d501cb724ac41197ab4d33cb997f1f0ba24e38f079b1d1689b4",
+      "commit": "bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5",
+      "git_blob": "432c79ec62ab9ce741efbaeb474a99f791158a3d",
+      "sha256": "1a8a69eec2115d501cb724ac41197ab4d33cb997f1f0ba24e38f079b1d1689b4",
+      "bytes": 26445,
+      "dimensions_px": [
+        650,
+        200
+      ],
+      "license": "Apache-2.0",
+      "license_url": "https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/LICENSE.txt",
+      "license_evidence": "site/public/licenses/nvidia-nccl-bbc3d605-LICENSE.txt",
+      "license_evidence_url": "https://raw.githubusercontent.com/NVIDIA/nccl/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/LICENSE.txt",
+      "license_evidence_sha256": "c1f53beabe4dbf05bd87c00f7ca6084c0cb541c3f7bf8edab7913f266018b7be",
+      "public_license_copy": "site/public/licenses/nvidia-nccl-bbc3d605-LICENSE.txt",
+      "modifications": "None; byte-identical copy of the complete pinned upstream PNG.",
+      "derivation": "source-raster-copy",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md",
+        "en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md"
+      ]
+    },
+    {
+      "id": "curated-distributed-serving-nccl-alltoall-664155da9f45",
+      "asset": "00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-alltoall.png",
+      "author": "NVIDIA NCCL project",
+      "source_url": "https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#alltoall",
+      "source_image_url": "https://raw.githubusercontent.com/NVIDIA/nccl/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/images/alltoall.png",
+      "figure_url": "https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/images/alltoall.png",
+      "source_page_url": "https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/collectives.rst",
+      "source_asset": "05 Источники/Originals/distributed-parallelism-nvidia-2026-11-11/nccl-alltoall.png",
+      "source_asset_sha256": "664155da9f45512acce0ebce36c63c32a8cc13456a2632c685626f20749fc8bf",
+      "commit": "bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5",
+      "git_blob": "8842b992a016b527535666f4887162d3a006ff5a",
+      "sha256": "664155da9f45512acce0ebce36c63c32a8cc13456a2632c685626f20749fc8bf",
+      "bytes": 29154,
+      "dimensions_px": [
+        650,
+        205
+      ],
+      "license": "Apache-2.0",
+      "license_url": "https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/LICENSE.txt",
+      "license_evidence": "site/public/licenses/nvidia-nccl-bbc3d605-LICENSE.txt",
+      "license_evidence_url": "https://raw.githubusercontent.com/NVIDIA/nccl/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/LICENSE.txt",
+      "license_evidence_sha256": "c1f53beabe4dbf05bd87c00f7ca6084c0cb541c3f7bf8edab7913f266018b7be",
+      "public_license_copy": "site/public/licenses/nvidia-nccl-bbc3d605-LICENSE.txt",
+      "modifications": "None; byte-identical copy of the complete pinned upstream PNG.",
+      "derivation": "source-raster-copy",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md",
+        "en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md"
+      ]
+    },
+    {
+      "id": "curated-distributed-serving-megatron-cp-7df8af2f3f89",
+      "asset": "00 Учебник/Assets/Figures/curated/distributed-serving-2026/megatron-context-parallel-overview.png",
+      "author": "NVIDIA Megatron Core project",
+      "source_url": "https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/features/context_parallel.html",
+      "source_image_url": "https://raw.githubusercontent.com/NVIDIA/Megatron-LM/0b13c98fb4d33de7080cab08aeaaed810b2de50a/docs/images/context_parallel/CP_overview.png",
+      "figure_url": "https://github.com/NVIDIA/Megatron-LM/blob/0b13c98fb4d33de7080cab08aeaaed810b2de50a/docs/images/context_parallel/CP_overview.png",
+      "source_page_url": "https://github.com/NVIDIA/Megatron-LM/blob/0b13c98fb4d33de7080cab08aeaaed810b2de50a/docs/user-guide/features/context_parallel.md",
+      "source_asset": "05 Источники/Originals/distributed-parallelism-nvidia-2026-11-11/megatron-context-parallel-overview.png",
+      "source_asset_sha256": "7df8af2f3f899342d3bd72b221afc4b5dc6ab52375246293cda671b365945a31",
+      "commit": "0b13c98fb4d33de7080cab08aeaaed810b2de50a",
+      "git_blob": "38c55b371aafbd639b47ab3eea8aa406ca3beb56",
+      "sha256": "7df8af2f3f899342d3bd72b221afc4b5dc6ab52375246293cda671b365945a31",
+      "bytes": 154304,
+      "dimensions_px": [
+        3101,
+        1384
+      ],
+      "license": "BSD-3-Clause",
+      "license_url": "https://github.com/NVIDIA/Megatron-LM/blob/0b13c98fb4d33de7080cab08aeaaed810b2de50a/LICENSE",
+      "license_evidence": "site/public/licenses/nvidia-megatron-0b13c98f-LICENSE.txt",
+      "license_evidence_url": "https://raw.githubusercontent.com/NVIDIA/Megatron-LM/0b13c98fb4d33de7080cab08aeaaed810b2de50a/LICENSE",
+      "license_evidence_sha256": "39f1df137a306d31698db206063f462b69c19e536f012db09a66997ad2cb96f0",
+      "public_license_copy": "site/public/licenses/nvidia-megatron-0b13c98f-LICENSE.txt",
+      "modifications": "None; byte-identical copy of the complete pinned upstream PNG.",
+      "derivation": "source-raster-copy",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "last_verified": "2026-11-11",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md",
+        "en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md",
+      "before_sha256": "7219c5e6fdef1ca9cd3fa92c50097cfe77a6ad664afa3ac43e9e6d8c117d7625",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-20\nlast_verified: 2026-10-20",
+          "new": "last_updated: 2026-11-11\nlast_verified: 2026-11-11"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allgather.png]]\n\n*Официальная схема NCCL: каждый rank передаёт свой фрагмент, после чего все ranks\nполучают конкатенацию фрагментов в порядке rank. Источник: NVIDIA,\n[Collective Operations](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allgather.png|Каждый из четырёх процессов вносит один блок. У всех четырёх одинаковый выход из четырёх блоков в порядке источников.]]\n\n*NVIDIA, [NCCL Collective Operations: AllGather](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#allgather),\n[лицензия исходного файла](/licenses/nvidia-nccl-bbc3d605-LICENSE.txt). Блок `in2` оказывается\nтретьим в каждом `out`: место блока задаёт номер источника, а не\nномер получателя.*"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-reducescatter.png]]\n\n*ReduceScatter сначала редуцирует соответствующие элементы входов, затем оставляет\nна каждом rank только его часть результата. Источник: официальная документация\n[NCCL Collective Operations](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-reducescatter.png|Все четыре входа разбиты на четыре блока. Каждый процесс получает сумму одноимённых блоков с номером своего rank.]]\n\n*NVIDIA, [NCCL Collective Operations: ReduceScatter](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#reducescatter),\n[лицензия исходного файла](/licenses/nvidia-nccl-bbc3d605-LICENSE.txt). Чтобы получить `out2`,\nсложите третьи блоки всех четырёх входов. Этот блок останется\nна rank 2; остальные получатели получат другие части суммы.*"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allreduce.png]]\n\n*AllReduce возвращает результат редукции всем ranks. Его можно мыслить как\nReduceScatter, за которым следует AllGather. Источник: официальная документация\n[NCCL Collective Operations](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allreduce.png|На входе четыре массива одной формы. Каждый выход содержит полную сумму по соответствующим позициям.]]\n\n*NVIDIA, [NCCL Collective Operations: AllReduce](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#allreduce),\n[лицензия исходного файла](/licenses/nvidia-nccl-bbc3d605-LICENSE.txt). Здесь четыре одинаковых `out`\nна месте отдельных `out0`–`out3`: у каждого получателя\nсумма для всех позиций, а не один её блок.*"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-alltoall.png]]\n\n*При AllToAll каждый rank отправляет отдельный фрагмент каждому назначению и\nполучает отдельный фрагмент от каждого источника. Источник: официальная\nдокументация [NCCL Collective Operations](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-alltoall.png|В каждом входе блоки упорядочены по получателю, в каждом выходе — по источнику. Блоки не складываются.]]\n\n*NVIDIA, [NCCL Collective Operations: AlltoAll](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#alltoall),\n[лицензия исходного файла](/licenses/nvidia-nccl-bbc3d605-LICENSE.txt). Входной буфер разбит по получателям:\nrank 1 берёт второй блок от каждого из четырёх источников. В его `out1`\nэти блоки уже стоят в порядке отправителей. `ncclAlltoAll` на рисунке\nиспользует один и тот же `count` для каждой пары процессов.*"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/megatron-context-parallel-overview.png]]\n\n*Transformer layer при TP2×CP2. GPU0 и GPU1 обрабатывают один фрагмент\nпоследовательности с TP2, GPU2 и GPU3 другой. CP связывает GPU0↔GPU2 и\nGPU1↔GPU3. Жёлтые AG/RS относятся к TP/SP, синие к обменам attention при CP.\nОбозначения через косую черту описывают прямой и обратный проходы обучения;\nпри inference выполняется только прямой. Источник:\nNVIDIA, [Megatron Core Context Parallelism](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/features/context_parallel.html),\nFigure 1.*\n\nВ этой [реализации Megatron CP](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/features/context_parallel.html)\nобмен блоками можно организовать кольцевыми point-to-point передачами.\nНа исходной схеме синий AG означает получение K/V других частей контекста,\nа не AllGather всех весов. Сравнивать такую схему с FSDP только по названию\nколлективной операции было бы ошибкой.",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/megatron-context-parallel-overview.png|Четыре строки GPU0–GPU3. GPU0 и GPU1 делят головы на первой части контекста, GPU2 и GPU3 на второй. K/V обмениваются между GPU0 и GPU2, а также между GPU1 и GPU3.]]\n\n*NVIDIA, [Megatron Core: Context Parallelism, рис. 1](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/features/context_parallel.html),\n[оригинал в исходной ревизии](https://github.com/NVIDIA/Megatron-LM/blob/0b13c98fb4d33de7080cab08aeaaed810b2de50a/docs/images/context_parallel/CP_overview.png),\n[лицензия этой ревизии](/licenses/nvidia-megatron-0b13c98f-LICENSE.txt). В парах обозначений вроде `AG/RS`\nпервая часть относится к прямому проходу, вторая — к обратному.\nБлок `/AG` после attention ничего не делает в прямом проходе.*\n\nВ примере Megatron последовательность из 8192 токенов делится на две части\nпо 4096. Проследим строку GPU0. Перед `QKV` первый `AG` собирает\nстроки его части контекста между GPU0 и GPU1. Затем GPU0 вычисляет Q, K и V\nдля своей доли голов на этих 4096 позициях. Перед `Attn` ему нужны\nK/V тех же голов из другой части контекста. Их вычислил GPU2, поэтому второй\n`AG` идёт между GPU0 и GPU2. GPU1 и GPU3 образуют такую же пару\nдля второй доли голов. Q остаются локальными, а причинная маска ограничивает,\nкакие из полученных ключей вправе читать каждый запрос.\n\nДва `AG` собирают разные данные: первый — строки активаций внутри одной\nчасти контекста, второй — K/V между частями. Megatron может выполнить\nвторой обмен передачами между соседями в кольце, не храня на каждом GPU\nпостоянную копию всех K/V. Это схема prefill по частям контекста; ниже\nрассматривается другой прямой проход, с одним query при decode."
+        }
+      ],
+      "after_sha256": "6c5496f244246742373d8ea58b247579a2e98a0710e7e6bacf9310787c1617e3",
+      "lines": 934
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md",
+      "before_sha256": "91dbf85d69db6a4389b9a23c5978eb61f9b5c5e8343da50bc494c73345435629",
+      "changes": [
+        {
+          "old": "canonical_revision: \"7219c5e6fdef1ca9cd3fa92c50097cfe77a6ad664afa3ac43e9e6d8c117d7625\"\ntranslation_reviewed: \"2026-10-29\"",
+          "new": "canonical_revision: \"6c5496f244246742373d8ea58b247579a2e98a0710e7e6bacf9310787c1617e3\"\ntranslation_reviewed: \"2026-11-11\""
+        },
+        {
+          "old": "last_updated: 2026-10-29\nlast_verified: 2026-07-23",
+          "new": "last_updated: 2026-11-11\nlast_verified: 2026-11-11"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allgather.png]]\n\n*Official NVIDIA NCCL diagram: every rank contributes a fragment and receives\ntheir concatenation in rank order. Source:\n[Collective Operations](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html),\nBSD-licensed documentation.*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allgather.png|Each rank contributes one block. Every rank receives the same four blocks in source-rank order.]]\n\n*NVIDIA, [NCCL Collective Operations: AllGather](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#allgather),\n[source license](/licenses/nvidia-nccl-bbc3d605-LICENSE.txt). Block `in2` comes third in every `out`.\nIts position is determined by the sender's rank, not the receiver's.*"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-reducescatter.png]]\n\n*ReduceScatter reduces matching elements and leaves one output shard on each\nrank. Source: official [NCCL documentation](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-reducescatter.png|Each of the four inputs contains four blocks. Each receiver gets the reduction of the input blocks matching its rank.]]\n\n*NVIDIA, [NCCL Collective Operations: ReduceScatter](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#reducescatter),\n[source license](/licenses/nvidia-nccl-bbc3d605-LICENSE.txt). To get `out2`, add the third blocks of all\nfour inputs. That block stays on rank 2; the other ranks receive\ndifferent parts of the sum.*"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allreduce.png]]\n\n*AllReduce returns the reduced result to every rank. ReduceScatter followed by\nAllGather has the same result; the library need not use that implementation.\nSource: official [NCCL documentation](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allreduce.png|Four arrays of the same shape enter the operation. Each output contains the complete elementwise sum.]]\n\n*NVIDIA, [NCCL Collective Operations: AllReduce](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#allreduce),\n[source license](/licenses/nvidia-nccl-bbc3d605-LICENSE.txt). There are four identical `out` buffers instead\nof separate `out0` through `out3`: each receiver has the sum at every\nposition, rather than one block of it.*"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-alltoall.png]]\n\n*Each rank sends a distinct fragment to each destination and receives one from\neach source. Source: official [NCCL documentation](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html).*",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-alltoall.png|Input blocks are ordered by destination; output blocks are ordered by source. No values are added.]]\n\n*NVIDIA, [NCCL Collective Operations: AlltoAll](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#alltoall),\n[source license](/licenses/nvidia-nccl-bbc3d605-LICENSE.txt). Each input buffer is arranged by destination:\nrank 1 takes the second block from each of the four senders. Its `out1`\nthen contains those blocks in source order. The `ncclAlltoAll` call shown\nuses the same `count` for each pair of ranks.*"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/megatron-context-parallel-overview.png]]\n\n*NVIDIA,\n[Megatron Core Context Parallelism](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/features/context_parallel.html),\nFigure 1. GPU0/1 process one sequence shard with TP2; GPU2/3 process the other.\nCP connects GPU0↔GPU2 and GPU1↔GPU3. Yellow AG/RS belong to TP/SP, blue operations\nto CP attention. Slash-separated labels describe forward/backward training;\ninference executes the forward path.*\n\nMegatron's documented CP implementation can exchange blocks through ring\npoint-to-point transfers. Blue AG here means obtaining K/V from other context\nshards, not gathering all weights. A collective name alone does not make this\nequivalent to FSDP.",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/megatron-context-parallel-overview.png|GPU0 and GPU1 split heads for one context shard, GPU2 and GPU3 for the other. K/V pass between GPU0 and GPU2, and between GPU1 and GPU3.]]\n\n*NVIDIA, [Megatron Core: Context Parallelism, Figure 1](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/features/context_parallel.html),\n[pinned original](https://github.com/NVIDIA/Megatron-LM/blob/0b13c98fb4d33de7080cab08aeaaed810b2de50a/docs/images/context_parallel/CP_overview.png),\n[source license](/licenses/nvidia-megatron-0b13c98f-LICENSE.txt). In a label such as `AG/RS`, the first operation\nbelongs to forward and the second to backward. The `/AG` block after\nattention does nothing in the forward pass.*\n\nMegatron's example splits an 8192-token sequence into two 4096-token shards.\nFollow GPU0. The first `AG`, before `QKV`, gathers rows of its context shard\nacross GPU0 and GPU1. GPU0 computes Q, K, and V for its share of the heads at\nthose 4096 positions. Before `Attn`, it needs K/V for the same heads from the\nother context shard. GPU2 computed those, so the second `AG` involves GPU0 and\nGPU2. GPU1 and GPU3 pair up for the other heads. Queries stay local, and the\ncausal mask determines which received keys a query can use.\n\nThe two gathers move different data: the first collects activation rows\nwithin a context shard; the second obtains K/V from other shards. Megatron can\nimplement the latter with point-to-point ring transfers rather than keeping a\npermanent copy of all K/V on every GPU. This example follows sharded prefill;\nthe next example instead uses one query during decode."
+        }
+      ],
+      "after_sha256": "13559180469dfaf3f6747970ad0387ed351a3c2910ba5a01b9b37fe4fad7b891",
+      "lines": 924
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "e73e1fbe392bb600625863b3968ab5fd5082f6125b1a3aa9aa7c199552ece36e",
+      "changes": [
+        {
+          "old": "  - id: curated-distributed-serving-nccl-allreduce-56ba8399a2d0\n    asset: 00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allreduce.png\n    author: NVIDIA NCCL project\n    source_url: https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html\n    license: BSD-3-Clause\n    license_url: https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html\n    modifications: copied without visual modification from the official NCCL documentation\n    used_in:\n      - 00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md\n      - en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/distributed-serving-2026/nccl-allreduce.png",
+          "new": "  - id: curated-distributed-serving-nccl-allreduce-56ba8399a2d0\n    asset: \"00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allreduce.png\"\n    author: \"NVIDIA NCCL project\"\n    source_url: \"https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#allreduce\"\n    source_image_url: \"https://raw.githubusercontent.com/NVIDIA/nccl/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/images/allreduce.png\"\n    figure_url: \"https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/images/allreduce.png\"\n    source_page_url: \"https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/collectives.rst\"\n    source_asset: \"05 Источники/Originals/distributed-parallelism-nvidia-2026-11-11/nccl-allreduce.png\"\n    source_asset_sha256: \"56ba8399a2d0ae820a989cc1130d37264c5923d36f8852f5eeb057919537a675\"\n    commit: \"bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5\"\n    git_blob: \"7fa3cdf3420d36a3a1ca60260746ed6afb5a8916\"\n    sha256: \"56ba8399a2d0ae820a989cc1130d37264c5923d36f8852f5eeb057919537a675\"\n    bytes: 20420\n    dimensions_px: [650,200]\n    license: \"Apache-2.0\"\n    license_url: \"https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/LICENSE.txt\"\n    license_evidence: \"site/public/licenses/nvidia-nccl-bbc3d605-LICENSE.txt\"\n    license_evidence_url: \"https://raw.githubusercontent.com/NVIDIA/nccl/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/LICENSE.txt\"\n    license_evidence_sha256: \"c1f53beabe4dbf05bd87c00f7ca6084c0cb541c3f7bf8edab7913f266018b7be\"\n    public_license_copy: \"site/public/licenses/nvidia-nccl-bbc3d605-LICENSE.txt\"\n    modifications: \"None; byte-identical copy of the complete pinned upstream PNG.\"\n    derivation: \"source-raster-copy\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md\",\"en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md\"]"
+        },
+        {
+          "old": "  - id: curated-distributed-serving-nccl-allgather-93b7bf717381\n    asset: 00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allgather.png\n    author: NVIDIA NCCL project\n    source_url: https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html\n    license: BSD-3-Clause\n    license_url: https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html\n    modifications: copied without visual modification from the official NCCL documentation\n    used_in:\n      - 00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md\n      - en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/distributed-serving-2026/nccl-allgather.png",
+          "new": "  - id: curated-distributed-serving-nccl-allgather-93b7bf717381\n    asset: \"00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allgather.png\"\n    author: \"NVIDIA NCCL project\"\n    source_url: \"https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#allgather\"\n    source_image_url: \"https://raw.githubusercontent.com/NVIDIA/nccl/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/images/allgather.png\"\n    figure_url: \"https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/images/allgather.png\"\n    source_page_url: \"https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/collectives.rst\"\n    source_asset: \"05 Источники/Originals/distributed-parallelism-nvidia-2026-11-11/nccl-allgather.png\"\n    source_asset_sha256: \"93b7bf717381477043bc7b8dc34d76c519eb71339af2b67401f37ac1ef0e8c81\"\n    commit: \"bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5\"\n    git_blob: \"96b9491f83f9773b834c05a843944b09221194a4\"\n    sha256: \"93b7bf717381477043bc7b8dc34d76c519eb71339af2b67401f37ac1ef0e8c81\"\n    bytes: 23453\n    dimensions_px: [650,205]\n    license: \"Apache-2.0\"\n    license_url: \"https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/LICENSE.txt\"\n    license_evidence: \"site/public/licenses/nvidia-nccl-bbc3d605-LICENSE.txt\"\n    license_evidence_url: \"https://raw.githubusercontent.com/NVIDIA/nccl/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/LICENSE.txt\"\n    license_evidence_sha256: \"c1f53beabe4dbf05bd87c00f7ca6084c0cb541c3f7bf8edab7913f266018b7be\"\n    public_license_copy: \"site/public/licenses/nvidia-nccl-bbc3d605-LICENSE.txt\"\n    modifications: \"None; byte-identical copy of the complete pinned upstream PNG.\"\n    derivation: \"source-raster-copy\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md\",\"en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md\"]"
+        },
+        {
+          "old": "  - id: curated-distributed-serving-nccl-reducescatter-1a8a69eec211\n    asset: 00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-reducescatter.png\n    author: NVIDIA NCCL project\n    source_url: https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html\n    license: BSD-3-Clause\n    license_url: https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html\n    modifications: copied without visual modification from the official NCCL documentation\n    used_in:\n      - 00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md\n      - en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/distributed-serving-2026/nccl-reducescatter.png",
+          "new": "  - id: curated-distributed-serving-nccl-reducescatter-1a8a69eec211\n    asset: \"00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-reducescatter.png\"\n    author: \"NVIDIA NCCL project\"\n    source_url: \"https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#reducescatter\"\n    source_image_url: \"https://raw.githubusercontent.com/NVIDIA/nccl/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/images/reducescatter.png\"\n    figure_url: \"https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/images/reducescatter.png\"\n    source_page_url: \"https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/collectives.rst\"\n    source_asset: \"05 Источники/Originals/distributed-parallelism-nvidia-2026-11-11/nccl-reducescatter.png\"\n    source_asset_sha256: \"1a8a69eec2115d501cb724ac41197ab4d33cb997f1f0ba24e38f079b1d1689b4\"\n    commit: \"bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5\"\n    git_blob: \"432c79ec62ab9ce741efbaeb474a99f791158a3d\"\n    sha256: \"1a8a69eec2115d501cb724ac41197ab4d33cb997f1f0ba24e38f079b1d1689b4\"\n    bytes: 26445\n    dimensions_px: [650,200]\n    license: \"Apache-2.0\"\n    license_url: \"https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/LICENSE.txt\"\n    license_evidence: \"site/public/licenses/nvidia-nccl-bbc3d605-LICENSE.txt\"\n    license_evidence_url: \"https://raw.githubusercontent.com/NVIDIA/nccl/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/LICENSE.txt\"\n    license_evidence_sha256: \"c1f53beabe4dbf05bd87c00f7ca6084c0cb541c3f7bf8edab7913f266018b7be\"\n    public_license_copy: \"site/public/licenses/nvidia-nccl-bbc3d605-LICENSE.txt\"\n    modifications: \"None; byte-identical copy of the complete pinned upstream PNG.\"\n    derivation: \"source-raster-copy\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md\",\"en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md\"]"
+        },
+        {
+          "old": "  - id: curated-distributed-serving-nccl-alltoall-664155da9f45\n    asset: 00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-alltoall.png\n    author: NVIDIA NCCL project\n    source_url: https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html\n    license: BSD-3-Clause\n    license_url: https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html\n    modifications: copied without visual modification from the official NCCL documentation\n    used_in:\n      - 00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md\n      - en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/distributed-serving-2026/nccl-alltoall.png",
+          "new": "  - id: curated-distributed-serving-nccl-alltoall-664155da9f45\n    asset: \"00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-alltoall.png\"\n    author: \"NVIDIA NCCL project\"\n    source_url: \"https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html#alltoall\"\n    source_image_url: \"https://raw.githubusercontent.com/NVIDIA/nccl/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/images/alltoall.png\"\n    figure_url: \"https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/images/alltoall.png\"\n    source_page_url: \"https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/docs/userguide/source/usage/collectives.rst\"\n    source_asset: \"05 Источники/Originals/distributed-parallelism-nvidia-2026-11-11/nccl-alltoall.png\"\n    source_asset_sha256: \"664155da9f45512acce0ebce36c63c32a8cc13456a2632c685626f20749fc8bf\"\n    commit: \"bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5\"\n    git_blob: \"8842b992a016b527535666f4887162d3a006ff5a\"\n    sha256: \"664155da9f45512acce0ebce36c63c32a8cc13456a2632c685626f20749fc8bf\"\n    bytes: 29154\n    dimensions_px: [650,205]\n    license: \"Apache-2.0\"\n    license_url: \"https://github.com/NVIDIA/nccl/blob/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/LICENSE.txt\"\n    license_evidence: \"site/public/licenses/nvidia-nccl-bbc3d605-LICENSE.txt\"\n    license_evidence_url: \"https://raw.githubusercontent.com/NVIDIA/nccl/bbc3d605f44fbbfee9c99688bdfccc2bb7353cf5/LICENSE.txt\"\n    license_evidence_sha256: \"c1f53beabe4dbf05bd87c00f7ca6084c0cb541c3f7bf8edab7913f266018b7be\"\n    public_license_copy: \"site/public/licenses/nvidia-nccl-bbc3d605-LICENSE.txt\"\n    modifications: \"None; byte-identical copy of the complete pinned upstream PNG.\"\n    derivation: \"source-raster-copy\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md\",\"en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md\"]"
+        },
+        {
+          "old": "  - id: curated-distributed-serving-megatron-cp-7df8af2f3f89\n    asset: 00 Учебник/Assets/Figures/curated/distributed-serving-2026/megatron-context-parallel-overview.png\n    author: NVIDIA Megatron Core project\n    source_url: https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/features/context_parallel.html\n    license: Apache-2.0\n    license_url: https://github.com/NVIDIA/Megatron-LM/blob/main/LICENSE\n    modifications: copied without visual modification from the official Megatron Core documentation\n    used_in:\n      - 00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md\n      - en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/distributed-serving-2026/megatron-context-parallel-overview.png",
+          "new": "  - id: curated-distributed-serving-megatron-cp-7df8af2f3f89\n    asset: \"00 Учебник/Assets/Figures/curated/distributed-serving-2026/megatron-context-parallel-overview.png\"\n    author: \"NVIDIA Megatron Core project\"\n    source_url: \"https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/features/context_parallel.html\"\n    source_image_url: \"https://raw.githubusercontent.com/NVIDIA/Megatron-LM/0b13c98fb4d33de7080cab08aeaaed810b2de50a/docs/images/context_parallel/CP_overview.png\"\n    figure_url: \"https://github.com/NVIDIA/Megatron-LM/blob/0b13c98fb4d33de7080cab08aeaaed810b2de50a/docs/images/context_parallel/CP_overview.png\"\n    source_page_url: \"https://github.com/NVIDIA/Megatron-LM/blob/0b13c98fb4d33de7080cab08aeaaed810b2de50a/docs/user-guide/features/context_parallel.md\"\n    source_asset: \"05 Источники/Originals/distributed-parallelism-nvidia-2026-11-11/megatron-context-parallel-overview.png\"\n    source_asset_sha256: \"7df8af2f3f899342d3bd72b221afc4b5dc6ab52375246293cda671b365945a31\"\n    commit: \"0b13c98fb4d33de7080cab08aeaaed810b2de50a\"\n    git_blob: \"38c55b371aafbd639b47ab3eea8aa406ca3beb56\"\n    sha256: \"7df8af2f3f899342d3bd72b221afc4b5dc6ab52375246293cda671b365945a31\"\n    bytes: 154304\n    dimensions_px: [3101,1384]\n    license: \"BSD-3-Clause\"\n    license_url: \"https://github.com/NVIDIA/Megatron-LM/blob/0b13c98fb4d33de7080cab08aeaaed810b2de50a/LICENSE\"\n    license_evidence: \"site/public/licenses/nvidia-megatron-0b13c98f-LICENSE.txt\"\n    license_evidence_url: \"https://raw.githubusercontent.com/NVIDIA/Megatron-LM/0b13c98fb4d33de7080cab08aeaaed810b2de50a/LICENSE\"\n    license_evidence_sha256: \"39f1df137a306d31698db206063f462b69c19e536f012db09a66997ad2cb96f0\"\n    public_license_copy: \"site/public/licenses/nvidia-megatron-0b13c98f-LICENSE.txt\"\n    modifications: \"None; byte-identical copy of the complete pinned upstream PNG.\"\n    derivation: \"source-raster-copy\"\n    metadata_status: \"verified\"\n    provenance_confirmation: \"source-license-verified\"\n    rights_status: \"source-license-verified\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md\",\"en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md\"]"
+        }
+      ],
+      "after_sha256": "bde823c6e272261b025268358a0a94f8840f6c1512d7b5a2cc9cadef9b7ae47a",
+      "lines": 26348
+    },
+    {
+      "source": "publishing/tests/fixtures/legacy-unhashed-assets.json",
+      "before_sha256": "f4563fdd02943116346833af869bdd3c5501ad875377dadcc1be8514ebb62ada",
+      "changes": [
+        {
+          "old": "    \"00 Учебник/Assets/Figures/curated/distributed-serving-2026/megatron-context-parallel-overview.png\",\n    \"00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allgather.png\",\n    \"00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allreduce.png\",\n    \"00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-alltoall.png\",\n    \"00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-reducescatter.png\",\n    \"00 Учебник/Assets/Figures/curated/dpo/dpo-pipeline.png\",",
+          "new": "    \"00 Учебник/Assets/Figures/curated/dpo/dpo-pipeline.png\","
+        }
+      ],
+      "after_sha256": "87c095e0fc5e29322781f696677578b1951269583264fb64a5d7b2d5c79475c8",
+      "lines": 282
+    }
+  ]
+}

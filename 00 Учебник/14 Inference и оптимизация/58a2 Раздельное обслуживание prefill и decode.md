@@ -2,11 +2,12 @@
 title: "Раздельное обслуживание prefill и decode"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-20
+last_updated: 2026-11-11
 last_verified: 2026-10-20
 primary_sources:
   - https://jax-ml.github.io/scaling-book/inference/
   - https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf
+  - https://arxiv.org/html/2401.09670v3
   - https://arxiv.org/abs/2311.18677v2
   - https://arxiv.org/abs/2407.00079v1
   - https://docs.nvidia.com/dynamo/v1.5.1/knowledge-base/concepts/system-architecture/disaggregated-serving
@@ -176,13 +177,22 @@ KV и работу attention. Поэтому D ограничен одновре
 пакета. Однако текущую итерацию всё равно нужно закончить, прежде чем выдать
 следующие результаты.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/distserve-fig2-prefill-decode-interference.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distserve-v3-2026-11-11/distserve-v3-figure2-interference.png|Две панели с задержкой шага по размеру пакета. При добавлении одного prefill синяя кривая выше оранжевой. Разрыв больше для входа из 1024 токенов, чем для входа из 128.]]
 
-*Zhong et al., [DistServe, Figure 2](https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf#page=5).
+*Zhong et al., [DistServe, рис. 2, arXiv v3, с. 4](https://arxiv.org/pdf/2401.09670v3#page=4).
 Измерение авторов для 13B-модели: оранжевым показан пакет только с decode,
 синим тот же пакет с одним prefill. Вход prefill имеет длину 128 слева и 1024
 справа. Горизонтальная пунктирная линия показывает время prefill без соседних
-decode-запросов. Вертикальные стрелки сравнивают задержки фаз, не объём KV.*
+decode-запросов. Обе панели с подписями извлечены из PDF без перерисовки,
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+
+В правой панели при размере пакета около 40 шаг decode занимает примерно
+17 ms. Добавление одного prefill на 1024 токена увеличивает время общего
+шага примерно до 132 ms. Разность между синей и оранжевой кривыми, около
+115 ms, показывает добавку к длительности этого шага. Её нельзя
+читать как клиентский p95 межтокенной задержки: здесь нет времени
+ожидания запроса и доставки токена. Для замедления самого prefill
+сравнивают синюю кривую с пунктиром, а не с оранжевой.
 
 Возьмём начальное условное расписание: decode-пакет занимает 10 ms, новый
 prefill 120 ms. Если выполнить prefill целиком, следующий шаг активных ответов
@@ -216,12 +226,12 @@ P и D исполняют одну модель с совместимым сос
 активных ответов и продолжает генерацию. Соотношение числа машин не обязано быть
 один к одному: несколько P могут снабжать один D или наоборот.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/distserve-fig6-runtime-architecture.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distserve-v3-2026-11-11/distserve-v3-figure6-runtime.png|Входящие запросы идут к контроллеру и дальше к экземплярам prefill. Отдельная стрелка передачи KV ведёт от prefill к decode. Модель загружена в обоих пулах.]]
 
-*Zhong et al., [DistServe, Figure 6](https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf#page=9).
-Controller выбирает экземпляры P и D. В каждом есть собственная модель и
-распределённый исполнитель. Стрелка между ними обозначает передачу KV
-соответствующих слоёв, а не передачу весов модели при каждом запросе.*
+*Zhong et al., [DistServe, рис. 6, arXiv v3, с. 8](https://arxiv.org/pdf/2401.09670v3#page=8).
+Тонкие стрелки показывают назначение запросов на P, широкая — перенос KV
+из P в D. В обоих пулах уже загружены веса модели. Рисунок целиком
+извлечён из PDF, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
 
 Такое размещение позволяет не вставлять длительный prefill между шагами
 активных ответов. Для P и D можно независимо выбирать TP, PP, число реплик и
@@ -337,8 +347,9 @@ assert sum(buffer.nbytes for buffer in wire_buffers) == logical.nbytes
 При push отправитель начинает запись в заранее согласованные буферы D.
 При pull получатель запрашивает данные, когда выделил под них место. Это
 различие инициатора и порядка резервирования; обе схемы могут использовать
-асинхронный обмен. В [DistServe, §4.3](https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf#page=9)
-D забирает готовый KV по мере возможности, а P временно сохраняет его в GPU-памяти.
+асинхронный обмен. В [DistServe, §4.3](https://arxiv.org/html/2401.09670v3#S4.SS3)
+D инициирует передачу, хотя на схеме стрелка данных идёт от P к D.
+Пока D не готов забрать KV, P хранит его в GPU-памяти.
 
 | Состояние запроса | Что уже известно | Что ещё нельзя делать |
 |---|---|---|
@@ -753,14 +764,20 @@ CPU DRAM и SSD, а перед attention нужные данные должны 
 пути доступа. Большая ёмкость внешнего хранилища сама по себе не заменяет
 скорость чтения локального KV при decode.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/mooncake-figure1-architecture.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mooncake-dynamo-2026-11-11/mooncake-architecture.png|Conductor слева назначает prefill и decode и управляет размещением блоков. Между верхним и нижним пулами показаны Mooncake Store и перенос KV по RDMA через Transfer Engine.]]
 
-*Qin et al., [Mooncake v1, Figure 1](https://arxiv.org/abs/2407.00079v1).
-Слева показаны три обязанности Conductor: назначение prefill с учётом кэша,
-балансировка блоков и назначение decode. Сверху P, снизу D, между ними
-CPU-пул KV и RDMA-передачи. TBT на рисунке соответствует межтокенной задержке.
-Схема относится к исходной архитектуре 2024 года, не к каждой современной
-конфигурации библиотеки Mooncake Transfer Engine.*
+*Mooncake, [схема из документации, ревизия 73471dc2](https://raw.githubusercontent.com/kvcache-ai/Mooncake/73471dc2803f0de7e42484cfa1e2f44c09dc1de5/docs/source/image/architecture.png).
+Оригинал без изменений, [Apache-2.0](/licenses/mooncake-73471dc2-Apache-2.0.txt).
+Это версия из репозитория: центральные блоки явно подписаны Mooncake Store
+и Transfer Engine. [Рисунок 1 из статьи 2024 года](https://arxiv.org/html/2407.00079v1#S1.F1)
+остаётся источником для описания первоначального Conductor.*
+
+В примере с 8192 входными токенами выбранный P загружает готовый префикс
+из 6144 позиций и вычисляет оставшиеся 2048. По мере готовности слоёв
+он передаёт состояние запроса на D. Чтобы продолжить ответ, D нужны K/V
+для всех 8192 позиций: повторное использование префикса сокращает
+вычисления на P, но само по себе не означает, что префикс уже есть в VRAM
+у D. Последовательность описана в [§3 статьи](https://arxiv.org/html/2407.00079v1#S3).
 
 ### Длинный prefill: части входа и стадии модели
 
@@ -839,6 +856,18 @@ PrefillRouter выбирает P, получает метаданные прод
 D. Сам KV движется непосредственно между исполнителями, а не через JSON-ответ
 маршрутизатора. NIXL обеспечивает передачу по поддерживаемому транспортному пути;
 маршрутизатору для управления не нужно читать содержимое каждого KV-блока.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mooncake-dynamo-2026-11-11/dynamo-cross-node-kv.svg|Prefill и decode на разных узлах. Данные идут из VRAM prefill через сетевые адаптеры RDMA и InfiniBand или RoCE в VRAM decode.]]
+
+*NVIDIA Dynamo v1.5.1, [межузловой перенос KV](https://raw.githubusercontent.com/ai-dynamo/dynamo/2093662a4d4e5fd318732935213dde08dc7be818/docs/fern/assets/img/disagg-cross-node.svg).
+Схема без изменений, [Apache-2.0](/licenses/dynamo-2093662a-Apache-2.0.txt).
+© 2025–2026 NVIDIA Corporation & Affiliates.*
+
+На схеме показан путь данных: из VRAM на P через два сетевых адаптера в
+VRAM на D. Передача метаданных через маршрутизатор на рисунке не показана.
+Для примера с кэшем 1 GiB при полезной скорости 25 GiB/s этот сетевой этап
+занял бы 40 ms без учёта ожидания и подготовки. Выбор D с короткой очередью
+не гарантирует, что путь до него даст такую скорость.
 
 | Backend в этой версии документации | Метаданные продолжения |
 |---|---|

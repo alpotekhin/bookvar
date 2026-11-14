@@ -1,0 +1,249 @@
+{
+  "date": "2026-11-03",
+  "scope": "Whole1116-line Word2Vec/GloVe owner read. Preserve full prior mechanisms and eight original figures. Add original D2L context-window function, source-faithful batchify adapter, worked context-dependent noise/reduction explanations;25 RU/EN subject links and eight descriptive alt labels.",
+  "status": "local delta verified; broader course and release acceptance not claimed",
+  "files": [
+    {
+      "source": "00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md",
+      "before_sha256": "53dba94646abb1903ae0ca729e6caea54b99b9c6a5a4a9fb63ede9dda7df1bab",
+      "after_sha256": "c4c4ba15fe5e9212e96e905046024e446a647516e7768472c39e63ec06290ad3",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-22\n",
+          "new": "last_updated: 2026-11-03\nsource_language: mixed\nreference_terms:\n  - label: \"Таблица embeddings и обучающий сигнал\"\n    label_en: \"Embedding lookup and its training signal\"\n    anchor: emb-lookup\n  - label: \"Контекстное сходство и соседство\"\n    label_en: \"Context similarity versus co-occurrence\"\n    anchor: emb-contexts\n  - label: \"Направленные пары и матрица соседств\"\n    label_en: \"Directed pairs and co-occurrence counts\"\n    anchor: emb-counts\n  - label: \"PMI, PPMI и редкие пары\"\n    label_en: \"PMI, PPMI and rare pairs\"\n    anchor: emb-pmi\n  - label: \"Усечённый SVD и ошибка восстановления\"\n    label_en: \"Truncated SVD and reconstruction error\"\n    anchor: emb-svd\n  - label: \"Skip-gram, полный softmax и градиенты\"\n    label_en: \"Skip-gram, full softmax and gradients\"\n    anchor: emb-skipgram\n  - label: \"CBOW, среднее и повторные ID\"\n    label_en: \"CBOW, averaging and repeated IDs\"\n    anchor: emb-cbow\n  - label: \"Случайный радиус окна и вес расстояния\"\n    label_en: \"Random context radius and distance weighting\"\n    anchor: emb-dynamic-window\n  - label: \"SGNS и бинарная цель\"\n    label_en: \"SGNS and its binary objective\"\n    anchor: emb-sgns\n  - label: \"SGNS: обновление обеих таблиц\"\n    label_en: \"SGNS update of both parameter tables\"\n    anchor: emb-sgns-step\n  - label: \"Шум в степени 3/4 и subsampling\"\n    label_en: \"Three-quarter noise weights and subsampling\"\n    anchor: emb-noise\n  - label: \"Отбрасывание контекстных слов из шума\"\n    label_en: \"Context-dependent rejection of noise words\"\n    anchor: emb-filtered-noise\n  - label: \"Оптимум SGNS и сдвинутая PMI\"\n    label_en: \"SGNS optimum and shifted PMI\"\n    anchor: emb-sgns-pmi\n  - label: \"Hierarchical softmax и вероятности путей\"\n    label_en: \"Hierarchical softmax and path probabilities\"\n    anchor: emb-hierarchical\n  - label: \"Бинарные метки, padding и усреднение\"\n    label_en: \"Binary labels, padding and reduction\"\n    anchor: emb-batch-masks\n  - label: \"GloVe: отношения вероятностей и log-count\"\n    label_en: \"GloVe probability ratios and log-counts\"\n    anchor: emb-glove-ratios\n  - label: \"GloVe: веса, смещения и градиенты\"\n    label_en: \"GloVe weights, biases and gradients\"\n    anchor: emb-glove-loss\n  - label: \"Косинус, аналогии и неединственность геометрии\"\n    label_en: \"Cosine, analogies and non-unique geometry\"\n    anchor: emb-geometry\n  - label: \"Intrinsic и extrinsic оценка embeddings\"\n    label_en: \"Intrinsic and extrinsic embedding evaluation\"\n    anchor: emb-evaluation\n  - label: \"Многозначность статических embeddings\"\n    label_en: \"Polysemy in static embeddings\"\n    anchor: emb-polysemy\n  - label: \"fastText, фрагменты и OOV\"\n    label_en: \"fastText subwords and out-of-vocabulary words\"\n    anchor: emb-fasttext\n  - label: \"Контекстные состояния и слои BERT\"\n    label_en: \"Contextual states and BERT layers\"\n    anchor: emb-contextual\n  - label: \"Weight tying и экономия параметров\"\n    label_en: \"Weight tying and parameter counts\"\n    anchor: emb-tying\n  - label: \"Два пути градиента общей таблицы\"\n    label_en: \"Two gradient paths through tied embeddings\"\n    anchor: emb-tying-gradient\n  - label: \"Почему поисковый embedding требует отдельного обучения\"\n    label_en: \"Why retrieval embeddings need their own training\"\n    anchor: emb-retrieval\n"
+        },
+        {
+          "old": "primary_sources:\n",
+          "new": "primary_sources:\n  - https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_natural-language-processing-pretraining/word-embedding-dataset.md\n"
+        },
+        {
+          "old": "## 5. Почему нужна выборка отрицательных примеров",
+          "new": "<a id=\"emb-dynamic-window\"></a>\n\n### Random context windows\n\nThe examples above use a fixed radius. In\n[D2L, Extracting Center Words and Context Words](https://d2l.ai/chapter_natural-language-processing-pretraining/word-embedding-dataset.html#extracting-center-words-and-context-words),\neach center draws an integer radius uniformly from 1 to `max_window_size`.\nThe original function below is unchanged; `import random` supplies the\nmodule imported at the start of the source chapter.\n\n```python\nimport random\n\ndef get_centers_and_contexts(corpus, max_window_size):\n    \"\"\"Return center words and context words in skip-gram.\"\"\"\n    centers, contexts = [], []\n    for line in corpus:\n        # To form a \"center word--context word\" pair, each sentence needs to\n        # have at least 2 words\n        if len(line) < 2:\n            continue\n        centers += line\n        for i in range(len(line)):  # Context window centered at `i`\n            window_size = random.randint(1, max_window_size)\n            indices = list(range(max(0, i - window_size),\n                                 min(len(line), i + 1 + window_size)))\n            # Exclude the center word from the context words\n            indices.remove(i)\n            contexts.append([line[idx] for idx in indices])\n    return centers, contexts\n\nrandom.seed(7)\ntiny_dataset = [list(range(7)), list(range(7, 10))]\ncenters, contexts = get_centers_and_contexts(tiny_dataset, 3)\nassert len(centers) == len(contexts) == 10\nassert all(center not in context for center, context in zip(centers, contexts))\nassert all((neighbor < 7) == (center < 7)\n           for center, context in zip(centers, contexts) for neighbor in context)\n```\n\n*Zhang, Lipton, Li, Smola, D2L,\n[`get_centers_and_contexts`, revision 23d7a5a](https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_natural-language-processing-pretraining/word-embedding-dataset.md#extracting-center-words-and-context-words).\nOriginal function body; the import and assertions are added here.\n[CC BY-SA 4.0](/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt).*\n\nFor the center at position 3 in `[0,1,2,3,4,5,6]`, radius 1\nselects `[2,4]`; radius 2 selects `[1,2,4,5]`; radius 3 selects\n`[0,1,2,4,5,6]`. Every immediate neighbor is included. A neighbor\ntwo positions away appears for two of the three radii; a neighbor\nthree positions away appears only for radius 3.\nFor a maximum radius $M$ and an existing neighbor at distance $r$,\n\n$$\n\\begin{gathered}\nP(\\text{pair included})=P(R\\ge r)=\\frac{M-r+1}{M},\\\\\n1\\le r\\le M.\n\\end{gathered}\n$$\n\nThis probability decreases linearly with distance. It is neither the\nfixed-window counter used in our first calculation nor GloVe’s $1/r$\ncontribution. At a sentence boundary there are fewer available neighbors,\nbut no synthetic neighbors are added to fill the window.\n\nThe function receives the corpus after subsampling. For example, removing\n`the` from `[A,the,B]` makes `A` and `B` immediate neighbors in that input.\nTheir distance is measured in the retained sequence, not in the original\ntext. With repeated word IDs, exclusion removes the center position only:\nanother occurrence of the same ID can still be a context word.\nThe assertions use distinct IDs; they do not claim that equal IDs are\nforbidden from forming a pair.\n\n## 5. Почему нужна выборка отрицательных примеров"
+        },
+        {
+          "old": "### Связь с PMI",
+          "new": "<a id=\"emb-filtered-noise\"></a>\n\n### Rejecting context words changes the noise distribution\n\nD2L’s\n[`get_negatives`](https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_natural-language-processing-pretraining/word-embedding-dataset.md#negative-sampling)\ndraws from frequency-based weights, then accepts a draw only if\n`neg not in contexts`. This excludes every ID in the current context list,\nnot only one positive target. Duplicates among the accepted negatives\nare still allowed.\n\nLet $C$ be the set of excluded context IDs and let $q$ be the normalized\nproposal distribution over eligible vocabulary IDs. If $q(C)<1$,\nthe distribution of accepted draws is\n\n$$\n\\begin{gathered}\nq_C(n)=\\frac{q(n)\\mathbf1[n\\notin C]}{1-q(C)},\\\\\nq(C)=\\sum_{c\\in C}q(c).\n\\end{gathered}\n$$\n\nFor four IDs with proposal probabilities $(0.4,0.3,0.2,0.1)$\nand $C=\\{2,3\\}$, half the proposal mass is rejected.\nThe accepted probabilities for IDs 1 and 4 are $0.8$ and $0.2$;\nIDs 2 and 3 receive zero. Repeating ID 2 in the context list\ndoes not remove its mass twice: $C$ is a set for this calculation.\n\nIf the context list has $m$ positions, the source requests $Km$ accepted\nnegative samples. Repeated context positions increase that count even\nwhen the excluded set is unchanged. If all proposal mass is excluded,\nthe source rejection loop cannot fill its output; a usable sampler needs\nat least one eligible ID with positive mass.\n\nThe independent-noise SGNS derivation below uses $q(c)$, without this\ncontext-dependent rejection step. Its optimum cannot be applied unchanged\nto a sampler whose accepted distribution is $q_C$. The course implementation\nand the independent-draw mathematical objective specify different choices.\n\n### Связь с PMI"
+        },
+        {
+          "old": "## 6. GloVe: аппроксимация логарифма совместных частот",
+          "new": "<a id=\"emb-batch-masks\"></a>\n\n### Positive labels and padding masks are separate arrays\n\nA context window can contain a different number of words for each center.\nD2L concatenates the positive context IDs and sampled negative IDs, then\npads rows to one batch width. Its `labels` array answers whether a pair\nis positive. Its `masks` array answers whether the position belongs to\nthe training example at all.\n\nThe source’s two examples are `(1,[2,2],[3,3,3,3])` and\n`(1,[2,2,2],[3,3])`: center ID, positive IDs, negative IDs.\nThey produce\n\n| Array | First center | Second center |\n|---|---|---|\n| Pair IDs | `2 2 3 3 3 3` | `2 2 2 3 3 0` |\n| Labels | `1 1 0 0 0 0` | `1 1 1 0 0 0` |\n| Masks | `1 1 1 1 1 1` | `1 1 1 1 1 0` |\n\nThese two rows are a batching fixture. Their negative-to-positive ratios\nare $4/2$ and $2/3$, so they are not output from `get_negatives`\nwith one shared integer $K$. The fixture isolates padding and labels.\n\nThe final zero label of the second row is padding, not a sixth negative\nexample. A zero label alone cannot tell these cases apart.\nThere are five positive positions, six negative positions and one padding\nposition. Repeated ID 2 remains a repeated observation.\n\n```python\nimport torch\nimport torch.nn.functional as F\n\ndef batchify(data):\n    \"\"\"Return a minibatch of examples for skip-gram with negative sampling.\"\"\"\n    max_len = max(len(c) + len(n) for _, c, n in data)\n    centers, contexts_negatives, masks, labels = [], [], [], []\n    for center, context, negative in data:\n        cur_len = len(context) + len(negative)\n        centers += [center]\n        contexts_negatives += [context + negative + [0] * (max_len - cur_len)]\n        masks += [[1] * cur_len + [0] * (max_len - cur_len)]\n        labels += [[1] * len(context) + [0] * (max_len - len(context))]\n    return (torch.tensor(centers).reshape((-1, 1)), torch.tensor(\n        contexts_negatives), torch.tensor(masks), torch.tensor(labels))\n\nx_1 = (1, [2, 2], [3, 3, 3, 3])\nx_2 = (1, [2, 2, 2], [3, 3])\ncenters, contexts_negatives, masks, labels = batchify((x_1, x_2))\nkeep = masks.bool()\nassert centers.shape == (2, 1)\nassert contexts_negatives.shape == labels.shape == masks.shape == (2, 6)\nassert keep.sum().item() == 11 and labels[keep].sum().item() == 5\n\nlogits = torch.zeros((2, 6), dtype=torch.float64)\nlogits[1, 5] = 1000.  # A padding score must not become a negative example.\nlogits.requires_grad_()\nloss = F.binary_cross_entropy_with_logits(logits[keep], labels[keep].double())\ntorch.testing.assert_close(loss, torch.tensor(2.).double().log())\nloss.backward()\nassert logits.grad[1, 5].item() == 0\nwrong = F.binary_cross_entropy_with_logits(logits.detach(), labels.double())\nassert wrong.item() > 10\n```\n\n*Zhang, Lipton, Li, Smola, D2L,\n[`batchify` and the two-example fixture](https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_natural-language-processing-pretraining/word-embedding-dataset.md#loading-training-examples-in-minibatches).\nThe function uses the source’s tensor construction, with `d2l.tensor`\nand `d2l.reshape` replaced by their PyTorch equivalents; the loss and\nassertions are added here.\n[CC BY-SA 4.0](/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt).*\n\nThe displayed loss averages over all 11 valid binary decisions.\nAveraging each center’s loss first and then averaging the two centers\nassigns a different weight to their decisions. If the first center’s\nsix decisions each have loss 1 and the second center’s five each have\nloss 2, the global mean is $16/11$, while the mean of the two center\nmeans is $1.5$. These are specified losses for illustrating the weights,\nnot the zero-logit output above.\nThe batching code specifies IDs, labels and masks; the reduction must\nalso be specified when implementing the optimizer step.\n\n## 6. GloVe: аппроксимация логарифма совместных частот"
+        },
+        {
+          "old": "## 1. Почему номера слов недостаточно",
+          "new": "<a id=\"emb-lookup\"></a>\n\n## 1. Почему номера слов недостаточно"
+        },
+        {
+          "old": "## 2. Значение видно по окружению",
+          "new": "<a id=\"emb-contexts\"></a>\n\n## 2. Значение видно по окружению"
+        },
+        {
+          "old": "### От текста к матрице",
+          "new": "<a id=\"emb-counts\"></a>\n\n### От текста к матрице"
+        },
+        {
+          "old": "### Поправка на частоту: PMI и PPMI",
+          "new": "<a id=\"emb-pmi\"></a>\n\n### Поправка на частоту: PMI и PPMI"
+        },
+        {
+          "old": "### Сжатие матрицы",
+          "new": "<a id=\"emb-svd\"></a>\n\n### Сжатие матрицы"
+        },
+        {
+          "old": "### Skip-gram: один центр, несколько целей",
+          "new": "<a id=\"emb-skipgram\"></a>\n\n### Skip-gram: один центр, несколько целей"
+        },
+        {
+          "old": "### CBOW: окружение как вход",
+          "new": "<a id=\"emb-cbow\"></a>\n\n### CBOW: окружение как вход"
+        },
+        {
+          "old": "### Другая функция потерь",
+          "new": "<a id=\"emb-sgns\"></a>\n\n### Другая функция потерь"
+        },
+        {
+          "old": "### Один шаг обеих таблиц",
+          "new": "<a id=\"emb-sgns-step\"></a>\n\n### Один шаг обеих таблиц"
+        },
+        {
+          "old": "### Распределение шума и частые слова",
+          "new": "<a id=\"emb-noise\"></a>\n\n### Распределение шума и частые слова"
+        },
+        {
+          "old": "### Связь с PMI",
+          "new": "<a id=\"emb-sgns-pmi\"></a>\n\n### Связь с PMI"
+        },
+        {
+          "old": "### Hierarchical softmax",
+          "new": "<a id=\"emb-hierarchical\"></a>\n\n### Hierarchical softmax"
+        },
+        {
+          "old": "### От отношений вероятностей к логарифмам счётчиков",
+          "new": "<a id=\"emb-glove-ratios\"></a>\n\n### От отношений вероятностей к логарифмам счётчиков"
+        },
+        {
+          "old": "### Взвешенная ошибка и один шаг",
+          "new": "<a id=\"emb-glove-loss\"></a>\n\n### Взвешенная ошибка и один шаг"
+        },
+        {
+          "old": "### Близость и проверка аналогий",
+          "new": "<a id=\"emb-geometry\"></a>\n\n### Близость и проверка аналогий"
+        },
+        {
+          "old": "### Как оценивать результат",
+          "new": "<a id=\"emb-evaluation\"></a>\n\n### Как оценивать результат"
+        },
+        {
+          "old": "## 8. Один вектор не справляется с многозначностью",
+          "new": "<a id=\"emb-polysemy\"></a>\n\n## 8. Один вектор не справляется с многозначностью"
+        },
+        {
+          "old": "### fastText и символьные фрагменты",
+          "new": "<a id=\"emb-fasttext\"></a>\n\n### fastText и символьные фрагменты"
+        },
+        {
+          "old": "## 9. Контекстные представления",
+          "new": "<a id=\"emb-contextual\"></a>\n\n## 9. Контекстные представления"
+        },
+        {
+          "old": "## 10. Входные embeddings и выходная матрица языковой модели",
+          "new": "<a id=\"emb-tying\"></a>\n\n## 10. Входные embeddings и выходная матрица языковой модели"
+        },
+        {
+          "old": "### Два вклада в градиент общей таблицы",
+          "new": "<a id=\"emb-tying-gradient\"></a>\n\n### Два вклада в градиент общей таблицы"
+        },
+        {
+          "old": "## 11. Векторные представления для поиска — отдельная задача",
+          "new": "<a id=\"emb-retrieval\"></a>\n\n## 11. Векторные представления для поиска — отдельная задача"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-word-embeddings/count-based-idea.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-word-embeddings/count-based-idea.png|Разложение матрицы слово–контекст на низкоразмерные множители]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-word-embeddings/cbow-skipgram.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-word-embeddings/cbow-skipgram.png|Skip-gram предсказывает соседей центра, CBOW восстанавливает центр по соседям]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-word-embeddings/negative-sampling.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-word-embeddings/negative-sampling.png|Все выходные строки при softmax и выбранные строки при negative sampling]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/word-embeddings-2026-10-21/d2l-hi-softmax.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/word-embeddings-2026-10-21/d2l-hi-softmax.svg|Путь по внутренним узлам дерева к слову w3 в hierarchical softmax]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-word-embeddings/glove-idea.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-word-embeddings/glove-idea.png|Агрегация совместных частот и обучение векторов GloVe]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-word-embeddings/glove-loss.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/voita-word-embeddings/glove-loss.png|Две таблицы, смещения и вес ненулевого счётчика в GloVe]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-feature-extraction-contextualized-embeddings.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-feature-extraction-contextualized-embeddings.png|Способы объединения слоёв BERT и Dev F1 на CoNLL-2003 NER]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt2-2026-10-22/gpt2-output-projection-2.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt2-2026-10-22/gpt2-output-projection-2.png|Выход GPT-2 через транспонированную входную таблицу токенов]]"
+        },
+        {
+          "old": "Пять исполняемых блоков выше проверяют конкретные механизмы:\nсоставление пар и PPMI/SVD, CBOW и градиенты среднего,\nодин SGNS-шаг, один GloVe-шаг и оба вклада в градиент общей таблицы.",
+          "new": "Семь исполняемых блоков выше проверяют конкретные механизмы:\nсоставление пар и PPMI/SVD, CBOW и градиенты среднего,\nслучайное окно и маски пар, один SGNS-шаг, один GloVe-шаг\nи оба вклада в градиент общей таблицы."
+        },
+        {
+          "old": "## Источники\n\n",
+          "new": "## Источники\n\n- Zhang, Lipton, Li, Smola,\n  [D2L, The Dataset for Pretraining Word Embeddings](https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_natural-language-processing-pretraining/word-embedding-dataset.md):\n  random context radius, rejection sampling, positive labels and padding masks.\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "bc60819352f1cae6ffe0f0ac7e529fac989037d44de1d80c1b4a3ffa134839e4",
+      "after_sha256": "8dc9e010e7c1c052c156028c55ddecc1bdf588d270e6b40145e2290908da4ea2",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings|Word2Vec, GloVe и распределительные представления]]\n",
+          "new": "- [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings|Word2Vec, GloVe и распределительные представления]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-lookup|Таблица embeddings и обучающий сигнал]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-contexts|Контекстное сходство и соседство]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-counts|Направленные пары и матрица соседств]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-pmi|PMI, PPMI и редкие пары]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-svd|Усечённый SVD и ошибка восстановления]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-skipgram|Skip-gram, полный softmax и градиенты]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-cbow|CBOW, среднее и повторные ID]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-dynamic-window|Случайный радиус окна и вес расстояния]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-sgns|SGNS и бинарная цель]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-sgns-step|SGNS: обновление обеих таблиц]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-noise|Шум в степени 3/4 и subsampling]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-filtered-noise|Отбрасывание контекстных слов из шума]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-sgns-pmi|Оптимум SGNS и сдвинутая PMI]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-hierarchical|Hierarchical softmax и вероятности путей]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-batch-masks|Бинарные метки, padding и усреднение]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-glove-ratios|GloVe: отношения вероятностей и log-count]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-glove-loss|GloVe: веса, смещения и градиенты]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-geometry|Косинус, аналогии и неединственность геометрии]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-evaluation|Intrinsic и extrinsic оценка embeddings]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-polysemy|Многозначность статических embeddings]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-fasttext|fastText, фрагменты и OOV]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-contextual|Контекстные состояния и слои BERT]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-tying|Weight tying и экономия параметров]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-tying-gradient|Два пути градиента общей таблицы]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-retrieval|Почему поисковый embedding требует отдельного обучения]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "3f4fc98b68bfd1349d51a787f233918196ee87746205340db6119456686a0758",
+      "after_sha256": "3d07dcfeb029a186c245ceb1d529d88d2d6c6419398b932d4f2775963c93b91b",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings|Word2Vec, GloVe, and distributional representations]]\n",
+          "new": "- [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings|Word2Vec, GloVe, and distributional representations]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-lookup|Embedding lookup and its training signal]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-contexts|Context similarity versus co-occurrence]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-counts|Directed pairs and co-occurrence counts]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-pmi|PMI, PPMI and rare pairs]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-svd|Truncated SVD and reconstruction error]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-skipgram|Skip-gram, full softmax and gradients]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-cbow|CBOW, averaging and repeated IDs]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-dynamic-window|Random context radius and distance weighting]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-sgns|SGNS and its binary objective]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-sgns-step|SGNS update of both parameter tables]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-noise|Three-quarter noise weights and subsampling]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-filtered-noise|Context-dependent rejection of noise words]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-sgns-pmi|SGNS optimum and shifted PMI]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-hierarchical|Hierarchical softmax and path probabilities]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-batch-masks|Binary labels, padding and reduction]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-glove-ratios|GloVe probability ratios and log-counts]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-glove-loss|GloVe weights, biases and gradients]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-geometry|Cosine, analogies and non-unique geometry]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-evaluation|Intrinsic and extrinsic embedding evaluation]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-polysemy|Polysemy in static embeddings]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-fasttext|fastText subwords and out-of-vocabulary words]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-contextual|Contextual states and BERT layers]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-tying|Weight tying and parameter counts]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-tying-gradient|Two gradient paths through tied embeddings]]\n  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-retrieval|Why retrieval embeddings need their own training]]\n"
+        }
+      ]
+    }
+  ],
+  "sourceComparison": [
+    {
+      "source": "docs/audit/2026-10-21-word-embeddings.md and docs/audit/2026-10-22-word-embeddings-revisit.md",
+      "use": "Exact1116-line current baseline53dba946... matches prior full selected-source reviews. Entire owner read freshly; earlier full D2L/Voita/CS224N/Mikolov/Levy-Goldberg/GloVe/fastText/API comparisons explicitly reused, not claimed as fresh reading of all courses."
+    },
+    {
+      "source": "https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_natural-language-processing-pretraining/word-embedding-dataset.md",
+      "path": "05 Источники/Originals/word-embeddings-2026-11-03/d2l-word-embedding-dataset.md",
+      "sha256": "106fd54974ae5a9dc5d37d71aee1b01def9aee6b1168df74bd01cae11a053ec4",
+      "read": "Complete pinned source chapter including input vocabulary, subsampling, context extraction, noise generator/rejection, batchify and both load_data_ptb backends. Current official rendered15.3.3–15.3.5 compared. No PTB dataset download/training or corpus sample-count reproduction.",
+      "use": "Exact original get_centers_and_contexts body; batchify differs only in PyTorch tensor/reshape APIs. English added explanations distinguish triangular inclusion probability from inverse-distance counts, rejected q_C from independent q, and labels/masks and reductions. Fixture checks added independently.",
+      "license": "CC BY-SA4.0; existing pinned D2L license and public copy reused",
+      "licensePath": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt"
+    }
+  ],
+  "verification": {
+    "chapterSha256": "c4c4ba15fe5e9212e96e905046024e446a647516e7768472c39e63ec06290ad3",
+    "wholeOwnerRead": "Complete1116-line baseline and full1429-line edited chapter read in bounded ranges1-380,381-750,751-1100,1101-EOF. Truncated1101-1225 output explicitly reread separately. Final math-only two-line reflow and surrounding508-524 reread; current chapter1431lines. No substantive content changes after the whole read. Final bounded clarification of source fixture ratios4/2 and2/3 reread with the full labels/masks subsection; all prior prose/code/figures unchanged. Current chapter1435lines.",
+    "style": "no-ai-slop SKILL/eval read fully. Existing full causal explanations, five complete numerical programs, sources and limitations preserved. Original source functions and fresh source-derived additions remain English. Technical distinctions and useful summary table retained under academic qualifications; no translation pass.",
+    "preservation": "Reversible exact-byte journal restores full1116-line53dba946... chapter and both indexes. Eight previous image paths, unchanged asset bytes, twenty earlier display equations and all five previous program bodies retained.25 explicit subject links in RU/EN indexes; eight alt labels now descriptive.",
+    "cpu": {
+      "exit": 0,
+      "device": "CPU",
+      "torch": "2.14.1",
+      "programs": 7,
+      "command": "uv run --offline --python 3.13 --with torch==2.14.1 --with numpy==2.5.4 python publishing/tools/check_word_embeddings_examples.py",
+      "scope": "Seven current standalone programs execute, including the original context function and source-faithful batchify. All prior PPMI/SVD, full-softmax/CBOW/SGNS/tree/GloVe/geometry/fastText/weight-tying checks pass. Fresh150 boundary/radius cases, exact triangular inclusion probabilities, repeated-ID positions, original rejection-code fixtures, conditional q_C calculation and64 minibatch shape/mask/label cases pass. Padding-score gradient0; distinct16/11 versus1.5 reduction weights checked. A later two-line display-math reflow changed no executable code. No PTB training, learned semantic-quality result, fastText binary run or benchmark."
+    },
+    "source": {
+      "pinnedRevision": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+      "path": "05 Источники/Originals/word-embeddings-2026-11-03/d2l-word-embedding-dataset.md",
+      "sha256": "106fd54974ae5a9dc5d37d71aee1b01def9aee6b1168df74bd01cae11a053ec4",
+      "license": "CC BY-SA4.0 with existing pinned public license copy",
+      "scope": "Entire pinned D2L data source chapter freshly read, plus rendered selected sections. Prior complete selected-source comparisons explicitly reused only on exact current baseline. No all-course reread claim. Source batch fixture is explicitly distinguished from a shared-integer-K sampler run."
+    },
+    "tests": {
+      "initialDeltaChain": "12 tests in3 files pass; includes new reversible journal, earlier neural-LM journal and current index links.",
+      "finalDeltaAndIndex": "8 tests in2 files pass after math reflow; includes exact source functions and eight source-asset hashes.",
+      "builtOutput": "194 tests pass after final rebuild; includes both locale routes,25 anchors,7 Python blocks,8 actual asset images, source license and fallback edition notice. Initial new test counted the empty image-viewer placeholder; corrected selector to actual /assets/ source images, not by adding a ninth illustration."
+    },
+    "build": {
+      "exit": 0,
+      "pages": 2007,
+      "pagefindHtmlFiles": 2011,
+        "durationSeconds": 26.96,
+      "links": "0 broken internal routes,fragments or files",
+      "size": {
+          "bytes": 852802720,
+        "files": 5600,
+        "limit": 1000000000,
+          "headroom": 147197280
+      }
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-03-word-embeddings-reader",
+      "desktop": "1280x720 final build: document1265/1265; all eight source images loaded at native proportions;0 KaTeX errors and display-math overflow. Original CBOW/Skip-gram figure, attribution and surrounding calculation inspected inline and screenshot saved. No diagram or source pixels redrawn.",
+      "mobile": "390x844 final build: document375/375; all eight originals <=343px;five tables343/343;0 KaTeX errors/overflow. One new formula initially440/343 was reflowed and rechecked at343/343. All eight originals and captions inspected in fit viewer. Seven wide originals additionally inspected at2x center, with readable source labels; no claim that every label is legible at fit or that both pan endpoints were freshly inspected. New labels/masks table and explanation inspected on-page.",
+      "navigation": "Actual RU reference -> #emb-dynamic-window; actual EN reference -> #emb-batch-masks. EN status explicitly states Canonical-language chapter and no separate English edition. Actual EN Next -> tokenization -> rnn-bptt, each with correct h1. Temporary viewport reset; final reader returned to RU CBOW owner."
+    },
+    "publication": "Local only; no staging,commit,push or deployment. Existing broader source/course/public-checkout/release requirements remain."
+  },
+  "remaining": [
+    "Five existing Voita originals retain prior needs-confirmation/user permission records; no named redistribution license newly established.",
+    "This owner delta does not accept the entire courses, all remaining owners, a separate English translation or a public release."
+  ]
+}

@@ -3,11 +3,12 @@ import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {describe,expect,it} from 'vitest';
 import {tracingStart,tracingEnd,withoutTracingControlAddition} from './helpers/tracing-control-baseline.js';
+import {beforeTopicConsolidation} from '../tools/topic-consolidation-baseline.mjs';
 
 const root=resolve(import.meta.dirname,'../..');
 const read=(path:string)=>readFileSync(resolve(root,path),'utf8');
 const hash=(text:string)=>createHash('sha256').update(text).digest('hex');
-const chapter=read('00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md');
+const chapter=beforeTopicConsolidation(read('00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md'), '00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md', root);
 const sourceDir='05 Источники/Originals/frameworks-2026-10-27/';
 const section=chapter.split(tracingStart)[1].split(tracingEnd)[0];
 const blocks=[...section.matchAll(/```python\n([\s\S]*?)```/g)].map(m=>m[1]);

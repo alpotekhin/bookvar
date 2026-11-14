@@ -1,6 +1,7 @@
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {resolve} from 'node:path';
+import {execFileSync} from 'node:child_process';
 import YAML from 'yaml';
 import {describe,expect,it} from 'vitest';
 const root=resolve(import.meta.dirname,'../..');
@@ -12,7 +13,7 @@ const registry=YAML.parse(read('05 Источники/asset-registry.yml').toStr
 const sha=(b: Buffer)=>createHash('sha256').update(b).digest('hex');
 describe('BERT family chapter contracts',()=>{
   it('keeps standalone examples separate from the original MIT excerpt',()=>{
-    expect(body.match(/\x60\x60\x60python\n/g)).toHaveLength(8);
+    expect(body.match(/\x60\x60\x60python\n/g)).toHaveLength(9);
     expect(body).toContain('\x60\x60\x60python title="Original implementation — MIT"');
     for(const fact of ['TinyBertPretraining','src_key_padding_mask=~valid',
       'self.word.weight','reduction="sum"','nsp_target','forward =','reverse =',
@@ -26,10 +27,12 @@ describe('BERT family chapter contracts',()=>{
     expect(read('site/public/licenses/microsoft-deberta-MIT.txt')).toEqual(
       read('05 Источники/Originals/bert-family-2026-10-22/deberta-LICENSE'));
   });
-  it('keeps the seven reviewed originals and adds the two original SpanBERT figures',()=>{
+  it('keeps the reviewed BERT, SpanBERT and DeBERTaV3 originals',()=>{
     const embedded=[...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^\]]+)\]\]/g)].map(m=>m[1]!.split('|')[0]);
     const objectiveFigures=JSON.parse(read('00 Учебник/Assets/Figures/curated/bert-objectives-2026-10-29/assets.json').toString());
-    expect(new Set(embedded)).toEqual(new Set([...figures,...objectiveFigures].map((f:any)=>f.asset)));
+    const v3 = registry.filter((r: {id?: string}) => r.id?.startsWith('curated-debertav3-'));
+    expect(v3).toHaveLength(2);
+    expect(new Set(embedded)).toEqual(new Set([...figures,...objectiveFigures,...v3].map((f:any)=>f.asset)));
     expect(figures).toHaveLength(7);
     for(const f of figures){
       const rows=registry.filter((r:any)=>r.asset===f.asset);
@@ -51,10 +54,29 @@ describe('BERT family chapter contracts',()=>{
     expect(body).not.toContain('bert-input-output.png');
     expect(body).not.toContain('bert-tasks.png');
   });
+  it('reproduces both DeBERTaV3 source figures with their captions and verifies the pinned license',()=>{
+    const entries = registry.filter((r: {id?: string}) => r.id?.startsWith('curated-debertav3-'));
+    expect(entries.map((r: {source_page: number}) => r.source_page)).toEqual([5,6]);
+    for (const row of entries) {
+      const [x, y, right, bottom] = row.crop_box_px;
+      expect(sha(read(row.source_asset))).toBe(row.source_asset_sha256);
+      const license = read(row.license_evidence);
+      expect(sha(license)).toBe(row.license_evidence_sha256);
+      expect(license.toString()).toMatch(/class="abs-license"><a href="https?:\/\/creativecommons\.org\/licenses\/by\/4\.0\//);
+      expect(row.license).toBe('CC BY 4.0');
+      const image = read(row.asset);
+      expect(sha(image)).toBe(row.sha256);
+      expect([image.readUInt32BE(16),image.readUInt32BE(20)]).toEqual([right-x,bottom-y]);
+      const rebuilt = execFileSync('pdftoppm', ['-f',row.source_page.toString(),'-l',row.source_page.toString(),
+        '-r',row.render_dpi.toString(),'-x',x.toString(),'-y',y.toString(),'-W',(right-x).toString(),
+        '-H',(bottom-y).toString(),'-singlefile','-png',resolve(root,row.source_asset)]);
+      expect(sha(rebuilt)).toBe(row.sha256);
+    }
+  });
   it('preserves the reading route and removes stale figure uses',()=>{
     const fm=YAML.parse(body.split('---')[1]);
     expect(fm.previous).toContain('01 Три архитектурных паттерна');
-    expect(fm.next).toContain('04 GPT-1');
+    expect(fm.next).toContain('07 T5');
     const footer=body.slice(body.lastIndexOf('**Назад:**'));
     expect(footer).toContain(fm.previous);
     expect(footer).toContain(fm.next);

@@ -26,7 +26,8 @@
     "metadata_status": "verified",
     "last_verified": "2026-10-20",
     "used_in": [
-      "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md"
+      "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+      "03 Исследовательские линии/Agentic learning.md"
     ],
     "sha256": "8c5057223d4c527352a4d3088342bd6437fb43651a9de01090ebd2cf1f2f69c6",
     "source_asset_sha256": "f285b0971ae4a790e402fb93966bed3adde2cf0a04977d08b2b40d6ab0cace69",

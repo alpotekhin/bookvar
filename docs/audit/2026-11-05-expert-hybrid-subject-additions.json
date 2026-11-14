@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "kind": "expert-hybrid-subject-additions",
+  "review_date": "2026-11-05",
+  "files": [
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md",
+      "before_sha256": "ccead0e7d311931c46e98b85b48cf1cf5a4864ead1dafacc5a8042e33128672b",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-23\nlast_verified: 2026-10-23\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\nreference_terms:\n  - anchor: ep-token-ownership\n    label: \"Эксперты на разных процессах и движение токенов\"\n    label_en: \"Expert ownership and token movement\"\n  - anchor: dispatch-compute-combine\n    label: \"Dispatch → вычисление экспертов → combine\"\n    label_en: \"Dispatch → expert computation → combine\"\n  - anchor: ep-assignment-permutation\n    label: \"Номера назначений и обратная перестановка\"\n    label_en: \"Assignment identities and inverse permutations\"\n  - anchor: ep-gate-placement\n    label: \"Где применять коэффициент маршрутизатора\"\n    label_en: \"Where to apply the routing coefficient\"\n  - anchor: ep-variable-splits\n    label: \"All-to-all с разными размерами сообщений\"\n    label_en: \"All-to-all with variable split sizes\"\n  - anchor: ep-empty-participants\n    label: \"Пустой получатель и участие в коллективах\"\n    label_en: \"Empty receivers and collective participation\"\n  - anchor: ep-autograd-exchange\n    label: \"Дифференцируемый обмен и обратные split-списки\"\n    label_en: \"Autograd-aware exchange and reversed split lists\"\n  - anchor: ep-two-rank-example\n    label: \"Полный пример EP на двух CPU-процессах\"\n    label_en: \"Complete two-rank CPU expert-parallel example\"\n  - anchor: ep-router-gradients\n    label: \"Градиенты экспертов, входов и коэффициентов\"\n    label_en: \"Expert, input and routing-coefficient gradients\"\n  - anchor: ep-selected-softmax\n    label: \"Производная softmax по выбранным логитам\"\n    label_en: \"Softmax gradients over selected logits\"\n  - anchor: ep-topk-boundaries\n    label: \"Граница выбора top-k и нормированный top-1\"\n    label_en: \"Top-k boundaries and normalized top-1\"\n  - anchor: ep-empty-expert-update\n    label: \"Нулевой градиент эксперта и состояние оптимизатора\"\n    label_en: \"Empty-expert gradients and optimizer state\"\n  - anchor: ep-expert-rank-load\n    label: \"Дисбаланс экспертов и дисбаланс GPU\"\n    label_en: \"Expert imbalance versus GPU imbalance\"\n  - anchor: ep-capacity-pool\n    label: \"Capacity и размер пула назначений\"\n    label_en: \"Capacity and the assignment pool\"\n  - anchor: ep-token-dropping\n    label: \"Отбрасывание назначений и ответ MoE-слоя\"\n    label_en: \"Assignment dropping and the MoE layer output\"\n  - anchor: ep-padding\n    label: \"Дополнение экспертных входов и лишние вычисления\"\n    label_en: \"Expert-input padding and extra computation\"\n  - anchor: ep-dropless\n    label: \"Dropless: переменные буферы без отбрасывания\"\n    label_en: \"Dropless execution and variable buffers\"\n  - anchor: ep-groupedgemm\n    label: \"GroupedGEMM: разные веса и размеры групп\"\n    label_en: \"GroupedGEMM with distinct weights and group sizes\"\n  - anchor: ep-fsdp-weight-traffic\n    label: \"Почему обычный FSDP собирает не только активные эксперты\"\n    label_en: \"Why ordinary FSDP gathers more than the active experts\"\n  - anchor: ep-tp-versus-ep\n    label: \"TP внутри эксперта и распределение целых экспертов\"\n    label_en: \"Tensor-sharded experts versus expert ownership\"\n  - anchor: ep-divisibility\n    label: \"Делимость числа экспертов и внутренней ширины\"\n    label_en: \"Expert-count and hidden-width divisibility\"\n  - anchor: ep-dense-expert-replicas\n    label: \"Разные группы реплик плотных и экспертных параметров\"\n    label_en: \"Distinct dense and expert replica groups\"\n  - anchor: worked-configuration-1024-gpu\n    label: \"1024 GPU: координаты TP/PP/EP/EDP и плотный DP\"\n    label_en: \"1024 GPUs: TP/PP/EP/EDP coordinates and dense DP\"\n  - anchor: ep-parameter-memory\n    label: \"Память плотных и экспертных фрагментов\"\n    label_en: \"Dense and expert parameter-shard memory\"\n  - anchor: ep-sp-communication\n    label: \"SP перед маршрутизацией и порядок EP/TP-обменов\"\n    label_en: \"Sequence sharding before routing and EP/TP ordering\"\n  - anchor: ep-physical-byte-ledger\n    label: \"31.5 MiB на GPU: EP-трафик и TP-трафик отдельно\"\n    label_en: \"31.5 MiB per GPU: separate EP and TP traffic\"\n  - anchor: ep-backward-collectives\n    label: \"Обратные обмены и сумма вкладов в токен\"\n    label_en: \"Backward collectives and summed token contributions\"\n  - anchor: ep-edp-loss-normalization\n    label: \"Почему среднего по EDP недостаточно для общего loss\"\n    label_en: \"Why the EDP mean is not the global-loss gradient\"\n  - anchor: ep-parallel-folding\n    label: \"Parallel Folding: разные разбиения внимания и MoE\"\n    label_en: \"Parallel Folding: distinct attention and MoE layouts\"\n  - anchor: ep-report-configurations\n    label: \"DeepSeek-V3 и Llama 3: конфигурации из отчётов\"\n    label_en: \"DeepSeek-V3 and Llama 3 report configurations\"\n  - anchor: ep-correctness-checks\n    label: \"Проверки EP: перестановки, градиенты, сообщения\"\n    label_en: \"EP checks: permutations, gradients and messages\"\n"
+        },
+        {
+          "old": "В обычном FFN-блоке все токены проходят через одну и ту же сеть.\n",
+          "new": "<a id=\"ep-token-ownership\"></a>\n\nВ обычном FFN-блоке все токены проходят через одну и ту же сеть.\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/expert-hybrid-2026-10-23/hf-ep-layer.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/expert-hybrid-2026-10-23/hf-ep-layer.svg|Экспертный обмен в Transformer: dispatch и combine между полными FFN]]"
+        },
+        {
+          "old": "### Почему недостаточно восстановить размер тензора\n",
+          "new": "<a id=\"ep-assignment-permutation\"></a>\n\n### Почему недостаточно восстановить размер тензора\n"
+        },
+        {
+          "old": "Коэффициент можно применить к готовому ответу эксперта до обратной\n",
+          "new": "<a id=\"ep-gate-placement\"></a>\n\nКоэффициент можно применить к готовому ответу эксперта до обратной\n"
+        },
+        {
+          "old": "### Исполнение на двух процессах\n",
+          "new": "<a id=\"ep-variable-splits\"></a>\n\n### Исполнение на двух процессах\n"
+        },
+        {
+          "old": "Процесс без входящих назначений всё равно участвует в коллективе:\n",
+          "new": "<a id=\"ep-empty-participants\"></a>\n\nПроцесс без входящих назначений всё равно участвует в коллективе:\n"
+        },
+        {
+          "old": "Для данных используется дифференцируемая оболочка: её backward выполняет\n",
+          "new": "<a id=\"ep-autograd-exchange\"></a>\n\nДля данных используется дифференцируемая оболочка: её backward выполняет\n"
+        },
+        {
+          "old": "Чтобы воспроизвести исходный пример, добавим код инициализации и вызова.\n",
+          "new": "<a id=\"ep-two-rank-example\"></a>\n\nЧтобы воспроизвести исходный пример, добавим код инициализации и вызова.\n"
+        },
+        {
+          "old": "## Как через маршрутизацию проходит градиент\n",
+          "new": "<a id=\"ep-router-gradients\"></a>\n\n## Как через маршрутизацию проходит градиент\n"
+        },
+        {
+          "old": "У входа есть также путь через маршрутизатор. Если\n",
+          "new": "<a id=\"ep-selected-softmax\"></a>\n\nУ входа есть также путь через маршрутизатор. Если\n"
+        },
+        {
+          "old": "Выбор индексов top-$k$ дискретен. Эти производные описывают участок,\n",
+          "new": "<a id=\"ep-topk-boundaries\"></a>\n\nВыбор индексов top-$k$ дискретен. Эти производные описывают участок,\n"
+        },
+        {
+          "old": "Эксперт, не получивший ни одного токена, имеет нулевой вклад в градиент\n",
+          "new": "<a id=\"ep-empty-expert-update\"></a>\n\nЭксперт, не получивший ни одного токена, имеет нулевой вклад в градиент\n"
+        },
+        {
+          "old": "<a id=\"дисбаланс--это-время-а-не-только-loss\"></a>\n",
+          "new": "<a id=\"ep-expert-rank-load\"></a>\n\n<a id=\"дисбаланс--это-время-а-не-только-loss\"></a>\n"
+        },
+        {
+          "old": "### Вместимость: отбросить, дополнить или обработать всё\n",
+          "new": "<a id=\"ep-capacity-pool\"></a>\n\n### Вместимость: отбросить, дополнить или обработать всё\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/expert-hybrid-review-2026-10/mcore-token-capacity.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/expert-hybrid-review-2026-10/mcore-token-capacity.png|Назначения экспертам без ограничения, с отбрасыванием и с дополнением]]"
+        },
+        {
+          "old": "**Отбрасывание** (*token dropping*) удаляет лишние назначения.\n",
+          "new": "<a id=\"ep-token-dropping\"></a>\n\n**Отбрасывание** (*token dropping*) удаляет лишние назначения.\n"
+        },
+        {
+          "old": "**Дополнение до вместимости** (*padding*) делает размеры экспертных входов\n",
+          "new": "<a id=\"ep-padding\"></a>\n\n**Дополнение до вместимости** (*padding*) делает размеры экспертных входов\n"
+        },
+        {
+          "old": "**Обработка без отбрасывания** (*dropless*) сохраняет все назначения.\n",
+          "new": "<a id=\"ep-dropless\"></a>\n\n**Обработка без отбрасывания** (*dropless*) сохраняет все назначения.\n"
+        },
+        {
+          "old": "### Что делает GroupedGEMM\n",
+          "new": "<a id=\"ep-groupedgemm\"></a>\n\n### Что делает GroupedGEMM\n"
+        },
+        {
+          "old": "## Почему шардирования весов бывает недостаточно\n",
+          "new": "<a id=\"ep-fsdp-weight-traffic\"></a>\n\n## Почему шардирования весов бывает недостаточно\n"
+        },
+        {
+          "old": "<a id=\"tp-или-ep\"></a>\n",
+          "new": "<a id=\"ep-tp-versus-ep\"></a>\n\n<a id=\"tp-или-ep\"></a>\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/expert-hybrid-review-2026-10/edls-moe-tensor-parallel.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/expert-hybrid-review-2026-10/edls-moe-tensor-parallel.png|TP в MoE: фрагменты всех экспертных сетей на одном GPU]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/expert-hybrid-review-2026-10/edls-moe-expert-parallel.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/expert-hybrid-review-2026-10/edls-moe-expert-parallel.png|EP в MoE: полные эксперты у владельцев и назначенные им строки]]"
+        },
+        {
+          "old": "При равном размещении число экспертов должно делиться на EP, а внутренняя\n",
+          "new": "<a id=\"ep-divisibility\"></a>\n\nПри равном размещении число экспертов должно делиться на EP, а внутренняя\n"
+        },
+        {
+          "old": "<a id=\"гибридный-и-3d-parallelism\"></a>\n",
+          "new": "<a id=\"ep-dense-expert-replicas\"></a>\n\n<a id=\"гибридный-и-3d-parallelism\"></a>\n"
+        },
+        {
+          "old": "Пусть на конвейерной стадии $P_d$ параметров плотных матриц, которые\n",
+          "new": "<a id=\"ep-parameter-memory\"></a>\n\nПусть на конвейерной стадии $P_d$ параметров плотных матриц, которые\n"
+        },
+        {
+          "old": "<a id=\"forward-и-backward-в-этой-конфигурации\"></a>\n",
+          "new": "<a id=\"ep-sp-communication\"></a>\n\n<a id=\"forward-и-backward-в-этой-конфигурации\"></a>\n"
+        },
+        {
+          "old": "| Этап прямого прохода | Буфер и исходящие данные на GPU |\n",
+          "new": "<a id=\"ep-physical-byte-ledger\"></a>\n\n| Этап прямого прохода | Буфер и исходящие данные на GPU |\n"
+        },
+        {
+          "old": "### Обратные обмены и правильное усреднение\n",
+          "new": "<a id=\"ep-backward-collectives\"></a>\n\n### Обратные обмены и правильное усреднение\n"
+        },
+        {
+          "old": "Размер группы синхронизации ещё не определяет нормировку потери.\n",
+          "new": "<a id=\"ep-edp-loss-normalization\"></a>\n\nРазмер группы синхронизации ещё не определяет нормировку потери.\n"
+        },
+        {
+          "old": "### Размещение и разные разбиения для внимания и MoE\n",
+          "new": "<a id=\"ep-parallel-folding\"></a>\n\n### Размещение и разные разбиения для внимания и MoE\n"
+        },
+        {
+          "old": "## Две реальные конфигурации — не два универсальных рецепта\n",
+          "new": "<a id=\"ep-report-configurations\"></a>\n\n## Две реальные конфигурации — не два универсальных рецепта\n"
+        },
+        {
+          "old": "<a id=\"проверка-экспертного-параллелизма\"></a>\n",
+          "new": "<a id=\"ep-correctness-checks\"></a>\n\n<a id=\"проверка-экспертного-параллелизма\"></a>\n"
+        }
+      ],
+      "after_sha256": "34f4a7dba34287adb9ac1e75f99df57c7024e92f5f53c9ce392178243fd3edce"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "856f65c612cc1bdf1594fed104f10feb040138c4b94f69720df0af40a45d200c",
+      "after_sha256": "dc673c7af5a77af28b1811629a274e7db51385e075c66fa51262f3062524ae48",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism|Expert и hybrid parallelism]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism|Expert и hybrid parallelism]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-token-ownership|Эксперты на разных процессах и движение токенов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#dispatch-compute-combine|Dispatch → вычисление экспертов → combine]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-assignment-permutation|Номера назначений и обратная перестановка]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-gate-placement|Где применять коэффициент маршрутизатора]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-variable-splits|All-to-all с разными размерами сообщений]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-empty-participants|Пустой получатель и участие в коллективах]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-autograd-exchange|Дифференцируемый обмен и обратные split-списки]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-two-rank-example|Полный пример EP на двух CPU-процессах]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-router-gradients|Градиенты экспертов, входов и коэффициентов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-selected-softmax|Производная softmax по выбранным логитам]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-topk-boundaries|Граница выбора top-k и нормированный top-1]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-empty-expert-update|Нулевой градиент эксперта и состояние оптимизатора]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-expert-rank-load|Дисбаланс экспертов и дисбаланс GPU]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-capacity-pool|Capacity и размер пула назначений]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-token-dropping|Отбрасывание назначений и ответ MoE-слоя]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-padding|Дополнение экспертных входов и лишние вычисления]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-dropless|Dropless: переменные буферы без отбрасывания]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-groupedgemm|GroupedGEMM: разные веса и размеры групп]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-fsdp-weight-traffic|Почему обычный FSDP собирает не только активные эксперты]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-tp-versus-ep|TP внутри эксперта и распределение целых экспертов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-divisibility|Делимость числа экспертов и внутренней ширины]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-dense-expert-replicas|Разные группы реплик плотных и экспертных параметров]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#worked-configuration-1024-gpu|1024 GPU: координаты TP/PP/EP/EDP и плотный DP]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-parameter-memory|Память плотных и экспертных фрагментов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-sp-communication|SP перед маршрутизацией и порядок EP/TP-обменов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-physical-byte-ledger|31.5 MiB на GPU: EP-трафик и TP-трафик отдельно]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-backward-collectives|Обратные обмены и сумма вкладов в токен]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-edp-loss-normalization|Почему среднего по EDP недостаточно для общего loss]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-parallel-folding|Parallel Folding: разные разбиения внимания и MoE]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-report-configurations|DeepSeek-V3 и Llama 3: конфигурации из отчётов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-correctness-checks|Проверки EP: перестановки, градиенты, сообщения]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "8dafb78b6e6d4b6c0ec60357fc093de6540074de012e5ed7d6896c99e1ee6819",
+      "after_sha256": "5eff849992d87b05da860a9374b07339f3fa41ca84d1dc177d6dcde4e7b5adf1",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism|Expert and hybrid parallelism]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism|Expert and hybrid parallelism]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-token-ownership|Expert ownership and token movement]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#dispatch-compute-combine|Dispatch → expert computation → combine]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-assignment-permutation|Assignment identities and inverse permutations]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-gate-placement|Where to apply the routing coefficient]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-variable-splits|All-to-all with variable split sizes]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-empty-participants|Empty receivers and collective participation]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-autograd-exchange|Autograd-aware exchange and reversed split lists]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-two-rank-example|Complete two-rank CPU expert-parallel example]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-router-gradients|Expert, input and routing-coefficient gradients]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-selected-softmax|Softmax gradients over selected logits]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-topk-boundaries|Top-k boundaries and normalized top-1]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-empty-expert-update|Empty-expert gradients and optimizer state]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-expert-rank-load|Expert imbalance versus GPU imbalance]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-capacity-pool|Capacity and the assignment pool]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-token-dropping|Assignment dropping and the MoE layer output]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-padding|Expert-input padding and extra computation]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-dropless|Dropless execution and variable buffers]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-groupedgemm|GroupedGEMM with distinct weights and group sizes]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-fsdp-weight-traffic|Why ordinary FSDP gathers more than the active experts]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-tp-versus-ep|Tensor-sharded experts versus expert ownership]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-divisibility|Expert-count and hidden-width divisibility]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-dense-expert-replicas|Distinct dense and expert replica groups]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#worked-configuration-1024-gpu|1024 GPUs: TP/PP/EP/EDP coordinates and dense DP]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-parameter-memory|Dense and expert parameter-shard memory]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-sp-communication|Sequence sharding before routing and EP/TP ordering]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-physical-byte-ledger|31.5 MiB per GPU: separate EP and TP traffic]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-backward-collectives|Backward collectives and summed token contributions]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-edp-loss-normalization|Why the EDP mean is not the global-loss gradient]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-parallel-folding|Parallel Folding: distinct attention and MoE layouts]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-report-configurations|DeepSeek-V3 and Llama 3 report configurations]]\n  - [[00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism#ep-correctness-checks|EP checks: permutations, gradients and messages]]\n"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "status": "verified-local-delta",
+    "scope": "Navigation-only changes after complete reading of the 792-line input and 944-line final owner. Added 31 subject links per locale and four descriptive figure aliases. All prose, derivations, code, textual traces, captions, four scientific images, source-unit IDs and legacy anchors retained. No translation or release.",
+    "chapterSha256": "34f4a7dba34287adb9ac1e75f99df57c7024e92f5f53c9ce392178243fd3edce",
+    "fullRead": {
+      "inputLines": 792,
+      "inputSha256": "ccead0e7d311931c46e98b85b48cf1cf5a4864ead1dafacc5a8042e33128672b",
+      "inputRanges": [
+        "1–200",
+        "201–400",
+        "401–600",
+        "601–792"
+      ],
+      "finalLines": 944,
+      "finalRanges": [
+        "1–196",
+        "197–430",
+        "431–680",
+        "681–944"
+      ]
+    },
+    "explanationReview": {
+      "preserved": "Assignment identities, variable split counts and reverse exchange; expert/input/gate/selected-softmax gradients; fixed-top-k boundaries and top-1 caveat; independent expert/rank imbalance; capacity/drop/padding/dropless/GroupedGEMM; FSDP weight traffic; TP/EP composition; explicit 1024-rank groups and per-physical-rank EP/TP byte ledger; EDP loss normalization; Parallel Folding; pinned DeepSeek-V3 and Llama 3 report cases.",
+      "sourceComparison": "The full input exactly matches the 2026-10-23 accepted edition. That audit and the complete 2026-10-13 audit were read. Their pinned EDLS pp.118–136, Playbook EP, Megatron dispatcher/DDP/Folding, CS336 and primary-report comparisons are reused only for byte-identical explanations. This is not a new full-course or Harvard transfer claim.",
+      "freshSource": {
+        "url": "https://docs.pytorch.org/docs/2.14/distributed.html#torch.distributed.all_to_all_single",
+        "section": "Complete all_to_all_single contract and examples, including uneven splits, complex values and experimental warning (rendered lines5980–6075). No whole torch.distributed documentation read claimed."
+      },
+      "workedExamples": "Four-token top-2 dispatch and inverse, selected-logit derivatives -0.375/+0.375, [3,2,3,0] expert versus [5,3] rank loads, capacity [3,6,5,2] at C4, all 1024 coordinate partitions, 16384 assignment identities, EP1.75/TP14/31.5MiB outgoing ledger and 8× wrong-EDP negative control checked.",
+      "style": "Full input and final text read with no-ai-slop/eval.md and repository technical qualifications. Existing supported explanations retained without compression or synthetic replacement."
+    },
+    "examples": {
+      "numpy": {
+        "exit": 0,
+        "version": "2.5.4",
+        "groups": 7,
+        "log": "/var/tmp/bookvar-ep-numpy-20261105.log",
+        "scope": "Dense versus routed nonlinear experts at TP1/2/3; permutation negative, owner relabeling, finite differences for x/W1/W2/router, capacity and load, 1024 virtual-rank partitions, exact 16384-assignment traffic ledger, SUM/AVG EDP normalization.",
+        "maxFiniteDifferenceErrors": [
+          4.583216584030936e-10,
+          1.3678926880089648e-9,
+          5.844020614653722e-10,
+          8.510405852257819e-10
+        ]
+      },
+      "distributed": {
+        "exit": 0,
+        "torch": "2.14.1",
+        "ranks": 2,
+        "device": "CPU/Gloo",
+        "publishedPrograms": 2,
+        "log": "/var/tmp/bookvar-ep-gloo-20261105.log",
+        "scope": "Both actual published blocks execute, including their init/forward/backward/destroy. Original outputs and input/gate/local-expert gradients match dense reference. Uneven routes, empty destination, empty sender and learned router pass at1e-11; router contributions are summed.",
+        "executedChapterSha256": "ccead0e7d311931c46e98b85b48cf1cf5a4864ead1dafacc5a8042e33128672b",
+        "revision": "Run on the complete input before navigation-only edits. Exact inverse and preservation tests prove both code blocks, every math body and full preceding explanation unchanged."
+      },
+      "limits": "No CUDA/NCCL, real1024-rank run, Megatron execution, network performance/overlap, GPU memory, optimizer-step comparison or benchmark."
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-05-expert-reader",
+      "desktop": "Default1280×720, document1280/1280. All four original content figures load at native proportions. All four originals and captions personally inspected in viewer. Eleven display equations and four tables fit632/632; zero KaTeX errors.",
+      "mobile": "375×812 override, document375/375, reader343px. All four images preserve proportions; all eleven displays and four tables fit343/343, zero KaTeX errors. Capacity inspected at2.5×: left position0 and right portion538.5 with client375/scroll914; original counts, E0–E3, dropless and padded blocks readable. No exact right-edge or all-four mobile zoom claim. Viewport reset.",
+      "navigation": "Actual RU reference→#ep-assignment-permutation and EN reference→#ep-edp-loss-normalization; each target unique. EN explicitly discloses no separate English edition. Actual EN Next→network-storage-checkpoints with correct h1; Russian interface restored and next owner left open."
+    },
+    "checks": {
+      "scoped": {
+        "exit": 0,
+        "files": 5,
+        "tests": 21,
+        "includesReceiptTests": 2,
+        "hashPinnedWholeReads": 107,
+        "unreadOwners": 46,
+        "log": "/var/tmp/bookvar-ep-final-20261105.log"
+      },
+      "html": {
+        "exit": 0,
+        "tests": 213,
+        "log": "/var/tmp/bookvar-ep-output-20261105.log"
+      },
+      "build": {
+        "exit": 0,
+        "pages": 2009,
+        "pagefindFiles": 2013,
+        "seconds": 29.82,
+        "log": "/var/tmp/bookvar-ep-build-20261105.log"
+      },
+      "links": {
+        "exit": 0,
+        "brokenInternal": 0,
+        "log": "/var/tmp/bookvar-ep-links-20261105.log"
+      },
+      "size": {
+        "exit": 0,
+        "bytes": 856695684,
+        "files": 5626,
+        "limit": 1000000000,
+        "headroom": 143304316
+      }
+    },
+    "remaining": [
+      "After registering this full-owner read,46 of153 canonical owners remain unread in this route pass. Read counters are not accepted-chapter counters.",
+      "Next: network/storage/distributed checkpoints, then fault tolerance and the remaining post-training, retrieval, multimodal, agents, deployment and recommender owners.",
+      "Thematic course completeness, existing figure/rights gaps, public-checkout/Pages-base checks and authorized dev/Pages release remain open."
+    ]
+  }
+}

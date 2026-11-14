@@ -1671,9 +1671,11 @@ Gale, Trevor, Deepak Narayanan, Cliff Young, and Matei Zaharia. 2022. “MegaBlo
 
 A sparse pattern earns hardware speedup only when it is regular enough for kernels to predict. Two prominent formats make that regularity explicit: block sparse matrices and N:M sparsity patterns. Block sparse matrices isolate blocks of zero and nonzero dense submatrices so that operations on the large sparse matrix can be re-expressed as a smaller number of dense operations on submatrices. This structure supports more efficient storage of dense submatrices while maintaining shape compatibility for matrix or vector products. For example, [figure 28](https://mlsysbook.ai/vol1/model_compression/model_compression.html#fig-block-sparse-gemm) shows how NVIDIA’s cuSPARSE ([NVIDIA 2020](https://mlsysbook.ai/vol1/model_compression/model_compression.html#ref-nvidia_cusparse_block)) library supports sparse block matrix operations and storage. Several other works, such as Monarch matrices ([Tri Dao et al. 2022](https://mlsysbook.ai/vol1/model_compression/model_compression.html#ref-dao2022monarchexpressivestructuredmatrices)), have built on this block-sparsity approach to strike an improved balance between matrix expressivity and compute/memory efficiency.
 
-![[Assets/Sources/Harvard ML Systems/vol1/model_compression/69ef310a48248ea96fb6b3f52a567bc01eacaad3.svg]]
+[Archived Figure 28: Block Sparse Representation](https://github.com/harvard-edge/cs249r_book/blob/c1c8e803d61c7c4f96bd1424ec5a0501f20f7730/vol1/model_compression/model_compression_files/mediabag/69ef310a48248ea96fb6b3f52a567bc01eacaad3.svg)
 
 Figure 28: **Block Sparse Representation**: NVIDIA’s cuSPARSE library efficiently stores block sparse matrices by exploiting dense submatrix structures, enabling accelerated matrix operations while maintaining compatibility with dense matrix computations through block indexing. This approach reduces memory footprint and arithmetic complexity for sparse linear algebra, important for scaling machine learning models. Adapted from NVIDIA’s cuSPARSE documentation ([NVIDIA 2020](https://mlsysbook.ai/vol1/model_compression/model_compression.html#ref-nvidia_cusparse_block)).
+
+[NVIDIA: the original Blocked-ELL example](https://developer.nvidia.com/blog/accelerating-matrix-multiplication-with-block-sparse-format-and-nvidia-tensor-cores/#blocked-ellpack_format).
 
 NVIDIA. 2020. *Accelerating Matrix Multiplication with Block Sparse Format and NVIDIA Tensor Cores*.
 

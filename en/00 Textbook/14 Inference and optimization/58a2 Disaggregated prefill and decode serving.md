@@ -4,14 +4,15 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "7973703ca7ec77248f0fdc77321e7c5f9805164d182508234fb5c49c3e86a13d"
-translation_reviewed: "2026-10-29"
+canonical_revision: "77a9692564344794cbe04ca61c1660584e659576f459eccd9d306fe0b16fb687"
+translation_reviewed: "2026-11-11"
 translation_of: "00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md"
-last_updated: 2026-10-29
+last_updated: 2026-11-11
 last_verified: 2026-07-23
 primary_sources:
   - https://jax-ml.github.io/scaling-book/inference/
   - https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf
+  - https://arxiv.org/html/2401.09670v3
   - https://arxiv.org/abs/2311.18677v2
   - https://arxiv.org/abs/2407.00079v1
   - https://docs.nvidia.com/dynamo/v1.5.1/knowledge-base/concepts/system-architecture/disaggregated-serving
@@ -184,13 +185,22 @@ ones after each pass. Continuous batching need not wait for a whole batch to
 finish generating, but the current pass must still finish before its next
 tokens can be emitted.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/distserve-fig2-prefill-decode-interference.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distserve-v3-2026-11-11/distserve-v3-figure2-interference.png|Two plots show batch latency by batch size. Adding one prefill raises the blue curve above the orange decode-only curve. The gap is larger with a 1024-token prompt than with a 128-token prompt.]]
 
-*Zhong et al., [DistServe, Figure 2](https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf#page=5).
+*Zhong et al., [DistServe, Figure 2, arXiv v3, p. 4](https://arxiv.org/pdf/2401.09670v3#page=4).
 The authors' 13B measurement compares a decode-only batch in orange with the same
 batch plus one prefill in blue. Prompt lengths are 128 on the left and 1024 on
-the right. Horizontal dashed lines mark prefill running alone. Vertical arrows
-compare phase latencies, not KV volume.*
+the right. Horizontal dashed lines mark prefill running alone. Both panels
+and their labels are taken from the PDF without redrawing,
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+
+At a batch size of about 40 on the right, the decode-only step takes roughly
+17 ms. Adding one 1024-token prefill raises the joint step to about 132 ms.
+The gap between the blue and orange curves, about 115 ms, is the extra
+execution time for that step. It is not a client-side p95 inter-token
+latency: it does not include waiting or delivery. To read the slowdown
+for prefill itself, compare the blue curve with the dashed baseline
+instead of the orange curve.
 
 Return to a 10 ms decode batch and 120 ms prefill. Executing the whole prefill
 first produces a 130 ms gap. Splitting it into four 30 ms chunks and running a
@@ -225,11 +235,12 @@ weight copies. P computes input prefixes; D retains long-lived KV for active
 answers. Their machine counts need not match: multiple P instances can feed
 one D or vice versa.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/distserve-fig6-runtime-architecture.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distserve-v3-2026-11-11/distserve-v3-figure6-runtime.png|Incoming requests go through a controller to prefill instances. A separate KV transfer arrow points from prefill to decode. Both pools have model weights loaded.]]
 
-*Zhong et al., [DistServe, Figure 6](https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf#page=9).
-The controller selects P and D instances, each with its own model and distributed
-executor. Their connecting arrow moves layer KV, not model weights per request.*
+*Zhong et al., [DistServe, Figure 6, arXiv v3, p. 8](https://arxiv.org/pdf/2401.09670v3#page=8).
+The thin arrows assign requests to P; the wide arrow carries KV from P to D.
+Both pools already hold model weights. The complete drawing is cropped from
+the PDF, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
 
 Each phase can choose its own TP, PP, replicas, and hardware, as described in
 [[58a Distributed inference and disaggregated serving|parallelism and collectives]].
@@ -341,8 +352,9 @@ bitwise-identical subsequent computation on another device.
 
 With push, P starts writing agreed D buffers. With pull, D fetches after
 allocating capacity. This distinguishes the initiator and reservation order;
-both may be asynchronous. [DistServe §4.3](https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf#page=9)
-lets D pull as capacity permits while P temporarily holds completed KV in GPU memory.
+both may be asynchronous. In [DistServe §4.3](https://arxiv.org/html/2401.09670v3#S4.SS3),
+D initiates the transfer even though the data arrow points from P to D.
+P holds the completed KV in GPU memory until D can fetch it.
 
 | State | What is known | What is still unsafe |
 |---|---|---|
@@ -771,13 +783,20 @@ reuse, movement, and compute load. Distributed CPU DRAM and SSD complement VRAM,
 but attention still needs data on a suitable access path. External capacity
 does not replace local decode bandwidth.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/mooncake-figure1-architecture.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mooncake-dynamo-2026-11-11/mooncake-architecture.png|The Conductor at left assigns prefill and decode work and manages block placement. Mooncake Store and the RDMA Transfer Engine sit between the two worker pools.]]
 
-*Qin et al., [Mooncake v1, Figure 1](https://arxiv.org/abs/2407.00079v1).
-The Conductor's three duties are cache-aware prefill assignment, block balancing,
-and decode assignment. P is above D, with a CPU KV pool and RDMA transfers
-between them. TBT denotes inter-token delay. This is the original 2024
-architecture, not every current deployment of Mooncake Transfer Engine.*
+*Mooncake, [documentation diagram, revision 73471dc2](https://raw.githubusercontent.com/kvcache-ai/Mooncake/73471dc2803f0de7e42484cfa1e2f44c09dc1de5/docs/source/image/architecture.png).
+Unmodified original, [Apache-2.0](/licenses/mooncake-73471dc2-Apache-2.0.txt).
+The repository drawing names Mooncake Store and the Transfer Engine.
+[Figure 1 of the 2024 paper](https://arxiv.org/html/2407.00079v1#S1.F1)
+is the reference for the original Conductor design.*
+
+In the 8192-token example, the selected P loads the 6144-position prefix
+and computes the remaining 2048 positions. It streams request state to D
+as layers become ready. D still needs K/V for all 8192 positions to continue
+the answer. Reusing the prefix saves computation on P, but does not by
+itself put that prefix in D's VRAM. This sequence follows
+[Section 3 of the paper](https://arxiv.org/html/2407.00079v1#S3).
 
 <span id="длинный-prefill-части-входа-и-стадии-модели"></span>
 
@@ -860,6 +879,19 @@ the D request. KV itself moves directly between executors, not inside the
 router's JSON response. NIXL provides a supported transport path; routing does
 not require reading each block's contents.
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/mooncake-dynamo-2026-11-11/dynamo-cross-node-kv.svg|Prefill and decode run on separate nodes. KV moves from prefill VRAM through RDMA network adapters and InfiniBand or RoCE to decode VRAM.]]
+
+*NVIDIA Dynamo v1.5.1, [cross-node KV transfer](https://raw.githubusercontent.com/ai-dynamo/dynamo/2093662a4d4e5fd318732935213dde08dc7be818/docs/fern/assets/img/disagg-cross-node.svg).
+Unmodified diagram, [Apache-2.0](/licenses/dynamo-2093662a-Apache-2.0.txt).
+© 2025–2026 NVIDIA Corporation & Affiliates.*
+
+The figure traces the data from P's VRAM through two network adapters
+to D's VRAM. It does not show the metadata sent through the router.
+At 25 GiB/s of useful bandwidth, the 1 GiB cache from the earlier example
+would spend 40 ms in transfer, excluding setup and queueing. Choosing a D
+worker with a short queue does not guarantee that its network path
+can sustain that bandwidth.
+
 | Backend in that documentation version | Continuation metadata |
 |---|---|
 | SGLang | bootstrap_info: address, port, and room_id |
@@ -878,13 +910,9 @@ cannot be attributed to that path automatically. It also states that after P
 dispatch, prefill/handoff errors are returned to the request rather than silently
 retried through a unified decode-only path.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/distributed-serving-2026/dynamo-architecture.png]]
-
-*The official Dynamo overview retained from the previous English edition:
-frontend/router, disaggregated executors, and transfer/memory components.
-Source: [ai-dynamo/dynamo](https://github.com/ai-dynamo/dynamo/blob/main/docs/assets/img/architecture.png),
-Apache-2.0. Use the versioned protocol above for exact handoff behavior; a general
-architecture drawing does not establish backend-specific guarantees.*
+[Dynamo’s platform overview at v1.5.1](https://raw.githubusercontent.com/ai-dynamo/dynamo/2093662a4d4e5fd318732935213dde08dc7be818/docs/fern/assets/img/architecture.png)
+also shows the planner, storage and cache events. The transport figure above
+shows only the path taken by KV during a handoff.
 
 “Mooncake” in SGLang configuration normally names a transfer mechanism,
 not the original paper's entire Conductor and cache system. Choosing NIXL or

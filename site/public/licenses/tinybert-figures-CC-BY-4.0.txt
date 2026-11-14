@@ -1,0 +1,20 @@
+TinyBERT figures
+
+Xiaoqi Jiao et al., TinyBERT: Distilling BERT for Natural Language Understanding,
+Findings of EMNLP 2020, DOI: 10.18653/v1/2020.findings-emnlp.372.
+https://aclanthology.org/2020.findings-emnlp.372/
+
+The author-created published ACL illustrations are available under CC BY 4.0:
+https://creativecommons.org/licenses/by/4.0/
+ACL policy: https://aclanthology.org/faq/copyright/
+A byte-preserved copy of the policy is in publishing/fixtures/tinybert-0598f02d/acl-copyright.html.
+
+The two full PNGs are unchanged. Figure1 is copied from Huawei Noah's Ark Lab's
+repository at 0598f02d7fc4eaa7b4cbc1e9d7ab18bc875c24f9. The layer-detail figure is
+the author's transformer_layer_detail.png from arXiv v5.
+The source URLs, hashes and dimensions are in assets.json beside the figures.
+No crop, redraw, translation, relabeling or recompression was performed.
+
+The implementation files have their own Apache-2.0 copyright/license notices.
+Those software notices are not used to license paper figures or the whole
+arXiv manuscript.

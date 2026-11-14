@@ -1,0 +1,72 @@
+[
+  {
+    "name": "hnsw-base",
+    "scale": "4×",
+    "scroll": [
+      423.5,
+      344.5
+    ],
+    "extent": [
+      1077,
+      344
+    ]
+  },
+  {
+    "name": "pq-lookup",
+    "scale": "4×",
+    "scroll": [
+      624.5,
+      691.5
+    ],
+    "extent": [
+      1077,
+      775
+    ]
+  },
+  {
+    "name": "hyde-generated",
+    "scale": "4×",
+    "scroll": [
+      624.5,
+      0
+    ],
+    "extent": [
+      1077,
+      0
+    ]
+  },
+  {
+    "width": 1280,
+    "table": [
+      632,
+      632,
+      "auto"
+    ],
+    "parent": [
+      632,
+      639
+    ],
+    "page": [
+      1280,
+      1280
+    ],
+    "panEnd": 0
+  },
+  {
+    "width": 375,
+    "table": [
+      343,
+      343,
+      "auto"
+    ],
+    "parent": [
+      343,
+      343
+    ],
+    "page": [
+      375,
+      375
+    ],
+    "panEnd": 0
+  }
+]

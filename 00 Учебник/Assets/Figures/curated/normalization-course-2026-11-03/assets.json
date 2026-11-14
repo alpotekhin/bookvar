@@ -1,0 +1,66 @@
+[
+  {
+    "id": "curated-normalization-karpathy-activation-21dcfd9131f7",
+    "asset": "00 Учебник/Assets/Figures/curated/normalization-course-2026-11-03/karpathy-activation-distribution.png",
+    "author": "Andrej Karpathy",
+    "source_url": "https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/karpathy/nn-zero-to-hero/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb",
+    "commit": "73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde",
+    "source_asset": "05 Источники/Originals/normalization-course-2026-11-03/makemore_part3_bn.ipynb",
+    "source_asset_sha256": "464c959353b5e929bf0f922c0e7547823fb514fa2f672f30a065a9d403c641e4",
+    "sha256": "21dcfd9131f72a10d06f33777b2261a881bf6ce1312cbada0ba824354349fc98",
+    "source_cell_index": 15,
+    "source_output_index": 2,
+    "dimensions_px": [
+      1153,
+      264
+    ],
+    "source_page_snapshot": "05 Источники/Originals/normalization-course-2026-11-03/makemore_part3_bn.ipynb",
+    "source_page_sha256": "464c959353b5e929bf0f922c0e7547823fb514fa2f672f30a065a9d403c641e4",
+    "license": "MIT",
+    "license_url": "https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/LICENSE",
+    "license_evidence": "05 Источники/Originals/normalization-course-2026-11-03/karpathy-LICENSE.txt",
+    "license_evidence_sha256": "a59ec5cdb1c1e447e5266a014b3e7ded511f8d6e5a08931e931c87490ff821fe",
+    "public_license_copy": "site/public/licenses/karpathy-nn-zero-to-hero-73c3fcc7-MIT.txt",
+    "derivation": "notebook-output-extraction",
+    "modifications": "Exact decoded original saved PNG output, no training rerun, crop, relabeling, resizing, redraw or translation.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-11-03",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md"
+    ]
+  },
+  {
+    "id": "curated-normalization-karpathy-gradient-64f71cfb1523",
+    "asset": "00 Учебник/Assets/Figures/curated/normalization-course-2026-11-03/karpathy-gradient-distribution.png",
+    "author": "Andrej Karpathy",
+    "source_url": "https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/karpathy/nn-zero-to-hero/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/lectures/makemore/makemore_part3_bn.ipynb",
+    "commit": "73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde",
+    "source_asset": "05 Источники/Originals/normalization-course-2026-11-03/makemore_part3_bn.ipynb",
+    "source_asset_sha256": "464c959353b5e929bf0f922c0e7547823fb514fa2f672f30a065a9d403c641e4",
+    "sha256": "64f71cfb15237a19c1c592734d3d1570a9e897a982a7afb9f38f825a0dd8784a",
+    "source_cell_index": 16,
+    "source_output_index": 2,
+    "dimensions_px": [
+      1156,
+      264
+    ],
+    "source_page_snapshot": "05 Источники/Originals/normalization-course-2026-11-03/makemore_part3_bn.ipynb",
+    "source_page_sha256": "464c959353b5e929bf0f922c0e7547823fb514fa2f672f30a065a9d403c641e4",
+    "license": "MIT",
+    "license_url": "https://github.com/karpathy/nn-zero-to-hero/blob/73c3fcc741f0ec104ca850b1fb0df90e7e8d4cde/LICENSE",
+    "license_evidence": "05 Источники/Originals/normalization-course-2026-11-03/karpathy-LICENSE.txt",
+    "license_evidence_sha256": "a59ec5cdb1c1e447e5266a014b3e7ded511f8d6e5a08931e931c87490ff821fe",
+    "public_license_copy": "site/public/licenses/karpathy-nn-zero-to-hero-73c3fcc7-MIT.txt",
+    "derivation": "notebook-output-extraction",
+    "modifications": "Exact decoded original saved PNG output, no training rerun, crop, relabeling, resizing, redraw or translation.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-11-03",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md"
+    ]
+  }
+]

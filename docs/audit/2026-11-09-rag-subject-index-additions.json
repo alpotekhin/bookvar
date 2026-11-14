@@ -1,0 +1,217 @@
+{
+  "date": "2026-11-09",
+  "status": "subject-navigation-and-figure-descriptions-verified-locally",
+  "scope": "Subject navigation and descriptive alt text only. Exact input already read in the previous pass. Keep all source-image bytes, captions, former aliases, quotations and examples.",
+  "files": [
+    {
+      "source": "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md",
+      "changes": [
+        {
+          "old": "  - meeting-04-reading-03-catalogue-record\n---",
+          "new": "  - meeting-04-reading-03-catalogue-record\nreference_terms:\n  - label: \"Исходная архитектура RAG\"\n    label_en: \"The original RAG architecture\"\n    anchor: rag-original\n  - label: \"RAG-Sequence и RAG-Token\"\n    label_en: \"RAG-Sequence and RAG-Token\"\n    anchor: rag-sequence-token\n  - label: \"Обучение поиска по правильному ответу\"\n    label_en: \"Training retrieval from answer likelihood\"\n    anchor: rag-retriever-training\n  - label: \"Разметка вопросов и обязательных источников\"\n    label_en: \"Question and required-evidence annotation\"\n    anchor: rag-evidence-contract\n  - label: \"Разбор документов и происхождение фрагментов\"\n    label_en: \"Document parsing and chunk provenance\"\n    anchor: rag-ingestion\n  - label: \"Разбиение, перекрытие и родительские разделы\"\n    label_en: \"Chunking, overlap and parent sections\"\n    anchor: rag-chunking\n  - label: \"Версии документов и права доступа\"\n    label_en: \"Document versions and access control\"\n    anchor: rag-access\n  - label: \"Декомпозиция и переформулировка запроса\"\n    label_en: \"Query decomposition and rewriting\"\n    anchor: rag-query-rewrite\n  - label: \"HippoRAG и Personalized PageRank\"\n    label_en: \"HippoRAG and personalized PageRank\"\n    anchor: rag-hipporag\n  - label: \"Отбор и переранжирование фрагментов\"\n    label_en: \"Passage selection and reranking\"\n    anchor: rag-reranking\n  - label: \"Бюджет контекста и удаление дубликатов\"\n    label_en: \"Context budgeting and deduplication\"\n    anchor: rag-context-budget\n  - label: \"Положение источника и lost in the middle\"\n    label_en: \"Source position and lost in the middle\"\n    anchor: rag-context-position\n  - label: \"Инъекции инструкций через найденный текст\"\n    label_en: \"Prompt injection through retrieved text\"\n    anchor: rag-prompt-injection\n  - label: \"Поддержка утверждений, полнота и точность цитирования\"\n    label_en: \"Claim support, citation recall and precision\"\n    anchor: rag-citation-metrics\n  - label: \"Недостаточные и противоречивые источники\"\n    label_en: \"Insufficient and conflicting sources\"\n    anchor: rag-conflicting-sources\n  - label: \"OpenScholar: поиск, уточнение и цитаты\"\n    label_en: \"OpenScholar: retrieval, refinement and citations\"\n    anchor: rag-openscholar\n  - label: \"Поэтапная оценка RAG и полнота оснований\"\n    label_en: \"Stage-wise RAG evaluation and evidence coverage\"\n    anchor: rag-stage-evaluation\n  - label: \"Контроль с достаточными источниками\"\n    label_en: \"Oracle-context control\"\n    anchor: rag-oracle-context\n  - label: \"Поиск этапа, на котором потерялся источник\"\n    label_en: \"Tracing where evidence was lost\"\n    anchor: rag-failure-trace\n  - label: \"Обновление индекса и отзыв доступа\"\n    label_en: \"Index refresh and access revocation\"\n    anchor: rag-index-refresh\n  - label: \"Кеш ответов и повторная проверка прав\"\n    label_en: \"Answer caching and permission rechecks\"\n    anchor: rag-cache\n  - label: \"Задержка запроса и свежесть индекса\"\n    label_en: \"Request latency and index freshness\"\n    anchor: rag-freshness\n  - label: \"Полный контекст, SQL и другие варианты вместо RAG\"\n    label_en: \"Full context, SQL and other alternatives to RAG\"\n    anchor: rag-alternatives\n---"
+        },
+        {
+          "old": "## 1. Что добавила исходная архитектура RAG",
+          "new": "<a id=\"rag-original\"></a>\n## 1. Что добавила исходная архитектура RAG"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/rag-review-2026-10/rag-sequence-token.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/rag-review-2026-10/rag-sequence-token.png|Кодировщик запроса и MIPS находят документы. Генератор читает их по одному, затем блок Marginalize объединяет вероятности.]]"
+        },
+        {
+          "old": "### Один документ для ответа или отдельный документ для токена",
+          "new": "<a id=\"rag-sequence-token\"></a>\n### Один документ для ответа или отдельный документ для токена"
+        },
+        {
+          "old": "### Как обучается выбор документа",
+          "new": "<a id=\"rag-retriever-training\"></a>\n### Как обучается выбор документа"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/source-first-60-64/hf-rag-evaluation-workflow.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/source-first-60-64/hf-rag-evaluation-workflow.png|Над пунктиром документы делят на фрагменты и индексируют их эмбеддинги. Под пунктиром поиск выбирает фрагменты, а reader получает вопрос и собранный контекст.]]"
+        },
+        {
+          "old": "## 2. Сначала — задача и набор проверки",
+          "new": "<a id=\"rag-evidence-contract\"></a>\n## 2. Сначала — задача и набор проверки"
+        },
+        {
+          "old": "## 3. Ingestion: сохранить структуру и происхождение",
+          "new": "<a id=\"rag-ingestion\"></a>\n## 3. Ingestion: сохранить структуру и происхождение"
+        },
+        {
+          "old": "## 4. Chunking — гипотеза, проверяемая на запросах",
+          "new": "<a id=\"rag-chunking\"></a>\n## 4. Chunking — гипотеза, проверяемая на запросах"
+        },
+        {
+          "old": "### Дата и права доступа меняют допустимый корпус",
+          "new": "<a id=\"rag-access\"></a>\n### Дата и права доступа меняют допустимый корпус"
+        },
+        {
+          "old": "## 6. Обработка запроса и retrieval",
+          "new": "<a id=\"rag-query-rewrite\"></a>\n## 6. Обработка запроса и retrieval"
+        },
+        {
+          "old": "### HippoRAG: ассоциативное извлечение по графу",
+          "new": "<a id=\"rag-hipporag\"></a>\n### HippoRAG: ассоциативное извлечение по графу"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m03-p31-hipporag-index-and-retrieval.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m03-p31-hipporag-index-and-retrieval.png|Верхний ряд: извлечение троек и построение графа. Нижний ряд: связывание сущностей вопроса с вершинами и распространение веса через Personalized PageRank.]]"
+        },
+        {
+          "old": "## 7. Переранжирование",
+          "new": "<a id=\"rag-reranking\"></a>\n## 7. Переранжирование"
+        },
+        {
+          "old": "## 8. Сборка контекста",
+          "new": "<a id=\"rag-context-budget\"></a>\n## 8. Сборка контекста"
+        },
+        {
+          "old": "### Положение источника внутри контекста",
+          "new": "<a id=\"rag-context-position\"></a>\n### Положение источника внутри контекста"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/rag-review-2026-10/lost-middle-position.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/rag-review-2026-10/lost-middle-position.png|Точность GPT-3.5 на 20 документах выше всего при источнике на первой позиции, падает к середине и растёт к концу. Пунктир показывает результат без документов.]]"
+        },
+        {
+          "old": "### Найденный текст не является управляющей инструкцией",
+          "new": "<a id=\"rag-prompt-injection\"></a>\n### Найденный текст не является управляющей инструкцией"
+        },
+        {
+          "old": "### Что именно проверяется у цитаты",
+          "new": "<a id=\"rag-citation-metrics\"></a>\n### Что именно проверяется у цитаты"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/rag-review-2026-10/alce-citation-evaluation.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/rag-review-2026-10/alce-citation-evaluation.png|Для трёх утверждений ALCE проверяет поддержку всеми цитатами, затем убирает по одной цитате. На рисунке полнота 2 из 3, точность 4 из 6.]]"
+        },
+        {
+          "old": "### Недостаточность и конфликт источников",
+          "new": "<a id=\"rag-conflicting-sources\"></a>\n### Недостаточность и конфликт источников"
+        },
+        {
+          "old": "### OpenScholar: литературный поиск как итеративный retrieval-and-synthesis loop",
+          "new": "<a id=\"rag-openscholar\"></a>\n### OpenScholar: литературный поиск как итеративный retrieval-and-synthesis loop"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/rag-review-2026-10/openscholar-inference.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/rag-review-2026-10/openscholar-inference.png|OpenScholar ищет и переранжирует фрагменты, пишет черновик, уточняет его после дополнительных запросов и проверяет цитаты.]]"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/rag-review-2026-10/openscholar-training.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/rag-review-2026-10/openscholar-training.png|OpenScholar сохраняет черновики, замечания и исправленные ответы. После фильтрации ими обучают генерации ответа, замечаний и правок.]]"
+        },
+        {
+          "old": "## 10. Оценивание по этапам",
+          "new": "<a id=\"rag-stage-evaluation\"></a>\n## 10. Оценивание по этапам"
+        },
+        {
+          "old": "### Контроли с одним и тем же генератором",
+          "new": "<a id=\"rag-oracle-context\"></a>\n### Контроли с одним и тем же генератором"
+        },
+        {
+          "old": "![[00 Учебник/Assets/Figures/curated/source-first-60-64/hf-rag-settings-accuracy.png]]",
+          "new": "![[00 Учебник/Assets/Figures/curated/source-first-60-64/hf-rag-settings-accuracy.png|Пять столбцов от исходного RAG с 74,6% до конфигурации с 94,8% после настройки разбиения, эмбеддингов, переранжирования и модели ответа.]]"
+        },
+        {
+          "old": "## 11. Failure modes",
+          "new": "<a id=\"rag-failure-trace\"></a>\n## 11. Failure modes"
+        },
+        {
+          "old": "### Обновление документа и согласованность индекса",
+          "new": "<a id=\"rag-index-refresh\"></a>\n### Обновление документа и согласованность индекса"
+        },
+        {
+          "old": "### Кеширование",
+          "new": "<a id=\"rag-cache\"></a>\n### Кеширование"
+        },
+        {
+          "old": "### Задержка и свежесть",
+          "new": "<a id=\"rag-freshness\"></a>\n### Задержка и свежесть"
+        },
+        {
+          "old": "## 13. Когда RAG не нужен",
+          "new": "<a id=\"rag-alternatives\"></a>\n## 13. Когда RAG не нужен"
+        }
+      ],
+      "before_sha256": "b4fe44643a27e1d9319cabad47072c10d037efa9a74eaf9b1daf9044a20c03d3",
+      "after_sha256": "7c12d58f2eb744489c4c7077a0bc7f2ce6b622ce37abc3dabf02780895adfbfd",
+      "lines": 1347
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер|RAG: от источника до проверяемого ответа]]",
+          "new": "- [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер|RAG: от источника до проверяемого ответа]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-original|Исходная архитектура RAG]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-sequence-token|RAG-Sequence и RAG-Token]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-retriever-training|Обучение поиска по правильному ответу]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-evidence-contract|Разметка вопросов и обязательных источников]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-ingestion|Разбор документов и происхождение фрагментов]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-chunking|Разбиение, перекрытие и родительские разделы]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-access|Версии документов и права доступа]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-query-rewrite|Декомпозиция и переформулировка запроса]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-hipporag|HippoRAG и Personalized PageRank]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-reranking|Отбор и переранжирование фрагментов]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-context-budget|Бюджет контекста и удаление дубликатов]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-context-position|Положение источника и lost in the middle]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-prompt-injection|Инъекции инструкций через найденный текст]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-citation-metrics|Поддержка утверждений, полнота и точность цитирования]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-conflicting-sources|Недостаточные и противоречивые источники]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-openscholar|OpenScholar: поиск, уточнение и цитаты]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-stage-evaluation|Поэтапная оценка RAG и полнота оснований]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-oracle-context|Контроль с достаточными источниками]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-failure-trace|Поиск этапа, на котором потерялся источник]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-index-refresh|Обновление индекса и отзыв доступа]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-cache|Кеш ответов и повторная проверка прав]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-freshness|Задержка запроса и свежесть индекса]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-alternatives|Полный контекст, SQL и другие варианты вместо RAG]]"
+        }
+      ],
+      "before_sha256": "0f674bbfe1fd2e8c0a2c156de6bd711fb4bfc70bba36424cf57f81a2c5332d5e",
+      "after_sha256": "0fe82bf0d3c2549d0a4424ee2736104fd3d7ff7dc9b782b8a6756e068b587a8e",
+      "lines": 1540
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер|RAG: the complete pipeline]]",
+          "new": "- [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер|RAG: the complete pipeline]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-original|The original RAG architecture]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-sequence-token|RAG-Sequence and RAG-Token]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-retriever-training|Training retrieval from answer likelihood]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-evidence-contract|Question and required-evidence annotation]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-ingestion|Document parsing and chunk provenance]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-chunking|Chunking, overlap and parent sections]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-access|Document versions and access control]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-query-rewrite|Query decomposition and rewriting]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-hipporag|HippoRAG and personalized PageRank]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-reranking|Passage selection and reranking]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-context-budget|Context budgeting and deduplication]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-context-position|Source position and lost in the middle]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-prompt-injection|Prompt injection through retrieved text]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-citation-metrics|Claim support, citation recall and precision]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-conflicting-sources|Insufficient and conflicting sources]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-openscholar|OpenScholar: retrieval, refinement and citations]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-stage-evaluation|Stage-wise RAG evaluation and evidence coverage]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-oracle-context|Oracle-context control]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-failure-trace|Tracing where evidence was lost]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-index-refresh|Index refresh and access revocation]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-cache|Answer caching and permission rechecks]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-freshness|Request latency and index freshness]]\n  - [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-alternatives|Full context, SQL and other alternatives to RAG]]"
+        }
+      ],
+      "before_sha256": "c2c60224791512af3f687ad53ab1164be4ecff37f98bf80a9b2beb7292993fcf",
+      "after_sha256": "7ec85a60ce90a7a8e43039f0259896fb5629875f82bf895691ab67ea0751123b",
+      "lines": 1542
+    }
+  ],
+  "rightsReview": {
+    "date": "2026-11-09",
+    "disposition": "Four inherited illustrations remain in the local preview; no independent permission asserted for release. The existing repository-owner statements are not substitutes for an upstream grant.",
+    "checked": [
+      {
+        "objects": [
+          "rag-sequence-token.png"
+        ],
+        "evidence": [
+          "https://arxiv.org/abs/2005.11401v4",
+          "https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html",
+          "https://neurips.cc/FAQ/Copyright"
+        ],
+        "finding": "The exact arXiv version points to permission granted to arXiv. The publisher describes its own non-exclusive license, not a general grant to readers."
+      },
+      {
+        "objects": [
+          "hf-rag-evaluation-workflow.png",
+          "hf-rag-settings-accuracy.png"
+        ],
+        "evidence": [
+          "https://huggingface.co/datasets/huggingface/cookbook-images",
+          "https://github.com/huggingface/cookbook",
+          "05 Источники/Originals/rag-2026-10-20/hf-images-README.md"
+        ],
+        "finding": "Cookbook instructions link to a separate image dataset. The dataset card has no license metadata; the frozen dataset README contains no grant. Do not extend the cookbook code license to these image files."
+      },
+      {
+        "objects": [
+          "m03-p31-hipporag-index-and-retrieval.png"
+        ],
+        "evidence": [
+          "https://rdi.berkeley.edu/adv-llm-agents/sp25",
+          "https://arxiv.org/abs/2405.14831v3",
+          "https://github.com/OSU-NLP-Group/HippoRAG/blob/main/LICENSE"
+        ],
+        "finding": "The course page links to slides without an explicit reuse grant. The paper points to arXiv's distribution license; the separate MIT software license does not establish permission for the Berkeley slide."
+      }
+    ]
+  },
+  "validation": {
+    "subjectsPerLocale": 23,
+    "originals": 8,
+    "figures": "All eight alt descriptions served in both locales. Previous exact original PNGs and source captions preserved; all source and pixel checks reran successfully.",
+    "reader": "Native Russian mobile reference click to context budgeting and English desktop reference click to HippoRAG, both visually inspected. Final rendered figures loaded with correct aspect ratios and no page overflow at 375 and 1280 px.",
+    "readerEvidence": "docs/audit/evidence/2026-11-09-rag-index",
+    "figureGeometry": "docs/audit/evidence/2026-11-09-workflow-interval/rendered-figures.json",
+    "preservation": "The reversible three-file change restores the previous RAG and both indexes exactly, including every old anchor."
+  },
+  "next": "Resolve the four inherited figure permissions or find explicitly licensed originals before release."
+}

@@ -4,7 +4,7 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc"
+canonical_revision: "c0a782f948d6f46fce8dfb29c8f06a684b2115a2fc5f182995fd74cf423a1a33"
 translation_reviewed: "2026-10-29"
 translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md"
 last_updated: 2026-10-29
@@ -12,8 +12,8 @@ primary_sources:
   - https://jmlr.org/papers/v21/20-074.html
   - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4
   - https://github.com/huggingface/transformers/tree/753d61104116eefc8ffc977327b441ee0c8d599f/src/transformers/models/t5
-previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning]]"
-next: "[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура]]"
+previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa]]"
+next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]"
 ---
 
 # T5: the text-to-text Transformer
@@ -773,8 +773,9 @@ they change language data, input representation, or post-training.
 Task prefixes, supervised-task mixture training, and generalization
 to unseen instructions must be evaluated as distinct properties.
 
-The reading route now returns to decoder-only models:
-[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|LLaMA]].
+In [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]], one causal stack reads the entire input. For
+classification, its final state feeds a head that scores the classes.
+T5 instead generates the label as text.
 
 ## Sources and further reading
 
@@ -786,5 +787,5 @@ The reading route now returns to decoder-only models:
 - [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|T5 family]].
 - [[02 Areas/ML & DL/Papers/T5|Detailed paper and comparison-protocol note]].
 
-**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3]].
-**Next:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|LLaMA as a baseline architecture]].
+**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa, and DeBERTa]].
+**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].

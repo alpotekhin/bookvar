@@ -1,0 +1,267 @@
+{
+  "date": "2026-11-03",
+  "scope": "Whole 839-line LSTM/GRU owner read; preserve all existing mechanisms, five programs and eleven source pictures. Add candidate-bias counterexample, bidirectional endpoint trace with original D2L diagram/excerpt, projected-state recurrence and gradients, and 21 RU/EN subject links.",
+  "status": "locally verified: complete final read, CPU mechanisms, source preservation and selected desktop/mobile reader checks; unpublished",
+  "files": [
+    {
+      "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md",
+      "before_sha256": "c0afc59f36af36d3616792c6dc8873cdee8ce419fa8cf0db000698f2393283f4",
+      "after_sha256": "18deaed5ac22f6e88e01882d14846f245960174261d49f41f9a4ec00df7e2785",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-21\n",
+          "new": "last_updated: 2026-11-03\nsource_language: mixed\nreference_terms:\n  - label: \"Память c и скрытое состояние h\"\n    label_en: \"Cell memory c and hidden state h\"\n    anchor: lstm-two-states\n  - label: \"Вентиль забывания\"\n    label_en: \"Forget gate\"\n    anchor: lstm-forget\n  - label: \"Входной вентиль и кандидат\"\n    label_en: \"Input gate and candidate\"\n    anchor: lstm-write\n  - label: \"Выходной вентиль и чтение памяти\"\n    label_en: \"Output gate and memory readout\"\n    anchor: lstm-output\n  - label: \"Численный проход LSTM\"\n    label_en: \"Scalar LSTM forward pass\"\n    anchor: lstm-scalar\n  - label: \"Производные вентилей и полный BPTT\"\n    label_en: \"Gate derivatives and full BPTT\"\n    anchor: lstm-gate-gradients\n  - label: \"Прямой путь, забывание и полный якобиан\"\n    label_en: \"Direct path, retention and full Jacobian\"\n    anchor: lstm-gradient-path\n  - label: \"Совмещённая матрица и порядок i/f/g/o\"\n    label_en: \"Fused weights and i/f/g/o ordering\"\n    anchor: lstm-cell-weights\n  - label: \"Исходная LSTM и добавление forget gate\"\n    label_en: \"Original LSTM and the added forget gate\"\n    anchor: lstm-history\n  - label: \"Связанные вентили и peephole\"\n    label_en: \"Coupled gates and peepholes\"\n    anchor: lstm-variants\n  - label: \"Единое состояние GRU\"\n    label_en: \"Single GRU state\"\n    anchor: gru-state\n  - label: \"Reset gate и кандидат GRU\"\n    label_en: \"GRU reset gate and candidate\"\n    anchor: gru-reset\n  - label: \"Update gate и выпуклая смесь\"\n    label_en: \"Update gate and convex mixing\"\n    anchor: gru-update\n  - label: \"Соглашения z и порядок reset\"\n    label_en: \"z conventions and reset placement\"\n    anchor: gru-conventions\n  - label: \"Почему смещения кандидата GRU не складываются\"\n    label_en: \"Why GRU candidate biases do not merge\"\n    anchor: gru-candidate-biases\n  - label: \"Состояния и число параметров\"\n    label_en: \"Recurrent states and parameter counts\"\n    anchor: recurrent-parameter-counts\n  - label: \"Слои, направления и формы тензоров\"\n    label_en: \"Layers, directions and tensor shapes\"\n    anchor: recurrent-sequence-shapes\n  - label: \"Два направления и конечные состояния\"\n    label_en: \"Two directions and final states\"\n    anchor: recurrent-bidirectional\n  - label: \"Проекция внутри рекуррентного состояния\"\n    label_en: \"Projection inside recurrent state\"\n    anchor: lstm-projection\n  - label: \"Реальные длины LSTM/GRU и padding\"\n    label_en: \"True LSTM/GRU lengths and padding\"\n    anchor: gated-packed-sequences\n  - label: \"Перенос и отсоединение обоих состояний\"\n    label_en: \"Carrying and detaching both states\"\n    anchor: gated-state-carry\n"
+        },
+        {
+          "old": "primary_sources:\n",
+          "new": "primary_sources:\n  - https://d2l.ai/chapter_recurrent-modern/bi-rnn.html\n  - https://docs.pytorch.org/docs/2.14/generated/torch.nn.LSTM.html\n  - https://docs.pytorch.org/docs/2.14/generated/torch.nn.GRU.html\n"
+        },
+        {
+          "old": "## Что выбирать",
+          "new": "<a id=\"gru-candidate-biases\"></a>\n\n### Why the candidate biases cannot be merged\n\nIn the PyTorch candidate, the input bias is outside the reset product\nand the recurrent bias is inside it. Their contribution before tanh is\n$b_{in}+r_t\\odot b_{hn}$. In the RNN and LSTM branches above, both biases\nare added with coefficient one and the forward pass depends on their\nsum. The GRU candidate has a different dependence on the two biases.\n\nTake one coordinate with $b_{in}=0.1$ and $b_{hn}=0.8$. At reset values\n0.25 and 0.75, their contributions are 0.3 and 0.7. Replacing the pair\nwith $b_{in}=0.9$, $b_{hn}=0$ preserves the sum of the parameters, but\ngives 0.9 in both cases. A single constant bias cannot reproduce both\nvalues. The reset and update branches do allow the two biases to be\nsummed; this obstruction concerns the candidate branch.\n\nThe example isolates those offsets. Only the input weight of the reset\ngate is nonzero. It turns the two supplied log-odds into reset values\n0.25 and 0.75; the update gate is 0.5 and the previous state is zero.\n\n```python\nfrom copy import deepcopy\nimport torch\n\ndtype = torch.float64\nbiased_gru = torch.nn.GRUCell(1, 1, dtype=dtype)\nwith torch.no_grad():\n    for parameter in biased_gru.parameters():\n        parameter.zero_()\n    biased_gru.weight_ih[0, 0] = 1.  # PyTorch gate order: r, z, n\n    biased_gru.bias_ih[2] = .1\n    biased_gru.bias_hh[2] = .8\n\nreset_values = torch.tensor([[.25], [.75]], dtype=dtype)\ninputs = torch.logit(reset_values)\ninitial = torch.zeros_like(inputs)\nseparate_output = biased_gru(inputs, initial)\nexpected_output = .5 * (.1 + .8 * reset_values).tanh()\ntorch.testing.assert_close(separate_output, expected_output)\n\nmerged_gru = deepcopy(biased_gru)\nwith torch.no_grad():\n    merged_gru.bias_ih[2] = .9\n    merged_gru.bias_hh[2] = 0.\nmerged_output = merged_gru(inputs, initial)\ntorch.testing.assert_close(merged_output, .5 * torch.full_like(inputs, .9).tanh())\nassert not torch.allclose(separate_output, merged_output)\nprint(\"separate candidate biases:\", separate_output[:, 0].tolist())\nprint(\"same bias sum, different output:\", merged_output[:, 0].tolist())\n```\n\nThis follows from the candidate equation in\n[PyTorch 2.14, GRU](https://docs.pytorch.org/docs/2.14/generated/torch.nn.GRU.html).\nIt also limits weight conversion between implementations: the reset\nplacement and recurrent candidate bias must both be matched.\n\n## Что выбирать"
+        },
+        {
+          "old": "Двунаправленная сеть обрабатывает текст",
+          "new": "<a id=\"recurrent-bidirectional\"></a>\n\n### Two directions and two sequence endpoints\n\nДвунаправленная сеть обрабатывает текст"
+        },
+        {
+          "old": "У LSTM с проекцией сначала вычисляется",
+          "new": "\n<!-- source-excerpt: d2l-bidirectional-order -->\n> For the first RNN layer,\n> the first input is $\\mathbf{x}_1$\n> and the last input is $\\mathbf{x}_T$,\n> but for the second RNN layer,\n> the first input is $\\mathbf{x}_T$\n> and the last input is $\\mathbf{x}_1$.\n> To produce the output of this bidirectional RNN layer,\n> we simply concatenate together the corresponding outputs\n> of the two underlying unidirectional RNN layers.\n<!-- /source-excerpt -->\n\n*Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola,\n[D2L, Bidirectional Recurrent Neural Networks](https://d2l.ai/chapter_recurrent-modern/bi-rnn.html),\noriginal English excerpt, CC BY-SA 4.0.*\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lstm-gru-contracts-2026-11-03/d2l-birnn.svg|Два независимых направления RNN и объединение состояний одной позиции]]\n\n*Original D2L bidirectional RNN, Fig. 10.4.1. The two hidden-state rows\nhave opposite temporal arrows and separate parameters. Both states at\nposition $t$ feed that position’s output. The diagram shows generic\nrecurrent cells; using LSTM changes each cell’s internal operations and\nadds its carried $c$, not the direction of these arrows.\nSource: Zhang et al.,\n[D2L](https://d2l.ai/chapter_recurrent-modern/bi-rnn.html#fig-birnn),\nCC BY-SA 4.0. Complete pinned SVG, without cropping or redrawing.*\n\nFor inputs $x_0,x_1,x_2$, the forward recurrence visits positions\n0, 1, 2. The reverse recurrence visits 2, 1, 0. The library aligns both\nsets of outputs to the original position axis:\n\n| Original position | Forward state has read | Reverse state has read |\n|---:|---|---|\n| 0 | $x_0$ | $x_2,x_1,x_0$ |\n| 1 | $x_0,x_1$ | $x_2,x_1$ |\n| 2 | $x_0,x_1,x_2$ | $x_2$ |\n\nThus `output[:, -1]` combines a complete forward pass with the\nfirst computed reverse state. The complete reverse pass appears at\n`output[:, 0, m:]`. For one unprojected layer, `h_n[0]` and\n`h_n[1]` are the final forward and reverse states. With $L$ layers,\n`h_n.reshape(L, 2, B, m)[-1]` selects the top layer’s pair.\n\nThe following program copies each direction into a separate one-step\nLSTM cell and visits the positions explicitly. This verifies every\naligned output and both final memory states, not just the tensor shapes.\n\n```python\nimport torch\nfrom torch import nn\n\ntorch.manual_seed(47)\ndtype = torch.float64\nB, T, d, m = 1, 3, 1, 2\nsequence = torch.tensor([[[1.], [2.], [3.]]], dtype=dtype)\nbidirectional_lstm = nn.LSTM(d, m, bidirectional=True,\n                             batch_first=True, dtype=dtype)\ncombined, (final_h, final_c) = bidirectional_lstm(sequence)\n\ndef trace_direction(reverse):\n    cell = nn.LSTMCell(d, m, dtype=dtype)\n    suffix = \"_reverse\" if reverse else \"\"\n    with torch.no_grad():\n        for name in [\"weight_ih\", \"weight_hh\", \"bias_ih\", \"bias_hh\"]:\n            getattr(cell, name).copy_(getattr(bidirectional_lstm, name + \"_l0\" + suffix))\n    h = torch.zeros(B, m, dtype=dtype)\n    c = torch.zeros_like(h)\n    aligned = [None] * T\n    positions = range(T-1, -1, -1) if reverse else range(T)\n    for position in positions:\n        h, c = cell(sequence[:, position], (h, c))\n        aligned[position] = h\n    return torch.stack(aligned, dim=1), h, c\n\nforward, forward_h, forward_c = trace_direction(False)\nreverse, reverse_h, reverse_c = trace_direction(True)\ntorch.testing.assert_close(combined, torch.cat([forward, reverse], dim=-1))\ntorch.testing.assert_close(final_h, torch.stack([forward_h, reverse_h]))\ntorch.testing.assert_close(final_c, torch.stack([forward_c, reverse_c]))\ntorch.testing.assert_close(combined[:, -1, :m], final_h[0])\ntorch.testing.assert_close(combined[:, 0, m:], final_h[1])\nassert not torch.allclose(combined[:, -1, m:], final_h[1])\n```\n\nThe reverse output at position 0 depends on all three inputs, so it\ncannot be used as a causal state after reading only $x_0$. When\nsequences have different lengths, the reversal must stop at each\nsequence’s actual boundary. Running backward over right-padding first\nwould allow PAD transitions to affect the valid reverse states.\nPacking supplies those boundaries; a zero loss on PAD does not.\nThe endpoint contract is also documented in\n[PyTorch 2.14, LSTM](https://docs.pytorch.org/docs/2.14/generated/torch.nn.LSTM.html).\n\n<a id=\"lstm-projection\"></a>\n\n### Projection inside the recurrent state\n\nУ LSTM с проекцией сначала вычисляется"
+        },
+        {
+          "old": "### Разная длина текстов и перенос состояния",
+          "new": "\nWrite the unprojected readout as $\\widehat h_t=o_t\\odot\\tanh(c_t)$.\nThe projected state is $h_t=P\\widehat h_t$. On the next step, the\nfour gates receive this $p$-dimensional $h_t$, so the recurrent matrix\nhas $4m$ rows and $p$ columns. The projection participates in the\nrecurrence; applying a smaller classifier only after an ordinary LSTM\nwould leave a different recurrent state.\n\nFor the $d=2,m=3,p=2$ example, the parameter count separates into\n\n| Parameter group | Shape | Count |\n|---|---|---:|\n| Input weights | `[12,2]` | 24 |\n| Recurrent weights | `[12,2]` | 24 |\n| Two bias vectors | two `[12]` | 24 |\n| Projection | `[2,3]` | 6 |\n\nThe sum is 78. In the corresponding unprojected library LSTM it is 84.\nFor general $d,m,p$, subtracting the unprojected one-layer count from\nthe projected count gives $m(5p-4m)$. Therefore $p<m$ alone does not\nguarantee fewer parameters: $m=6,p=5,d=2$ gives 246 rather than 240.\nThis comparison concerns parameter counts, not execution time.\n\nThe full forward calculation below uses nonzero initial $h$ and $c$.\nIt checks the projection at every step and compares gradients with the\nlibrary implementation.\n\n```python\nimport torch\nimport torch.nn.functional as F\n\ntorch.manual_seed(53)\ndtype = torch.float64\nB, T, d, m, p = 2, 3, 2, 3, 2\nprojected_lstm = torch.nn.LSTM(d, m, proj_size=p, batch_first=True, dtype=dtype)\nfeatures = torch.randn(B, T, d, dtype=dtype, requires_grad=True)\nh0 = torch.randn(1, B, p, dtype=dtype, requires_grad=True)\nc0 = torch.randn(1, B, m, dtype=dtype, requires_grad=True)\nlibrary_output, (library_h, library_c) = projected_lstm(features, (h0, c0))\n\nh, c = h0[0], c0[0]\nhistory = []\nfor time in range(T):\n    gates = (F.linear(features[:, time], projected_lstm.weight_ih_l0,\n                      projected_lstm.bias_ih_l0)\n             + F.linear(h, projected_lstm.weight_hh_l0, projected_lstm.bias_hh_l0))\n    ai, af, ag, ao = gates.chunk(4, dim=-1)\n    c = af.sigmoid() * c + ai.sigmoid() * ag.tanh()\n    unprojected_h = ao.sigmoid() * c.tanh()\n    h = F.linear(unprojected_h, projected_lstm.weight_hr_l0)\n    history.append(h)\nmanual_output = torch.stack(history, dim=1)\ntorch.testing.assert_close(manual_output, library_output)\ntorch.testing.assert_close(h[None], library_h)\ntorch.testing.assert_close(c[None], library_c)\nassert library_output.shape == (B, T, p)\nassert library_h.shape == (1, B, p) and library_c.shape == (1, B, m)\nassert sum(parameter.numel() for parameter in projected_lstm.parameters()) == 78\n\nleaves = (features, h0, c0, *projected_lstm.parameters())\nmanual_loss = manual_output.square().sum() + .3 * c.square().sum()\nlibrary_loss = library_output.square().sum() + .3 * library_c.square().sum()\nmanual_gradients = torch.autograd.grad(manual_loss, leaves)\nlibrary_gradients = torch.autograd.grad(library_loss, leaves)\nfor manual, reference in zip(manual_gradients, library_gradients):\n    torch.testing.assert_close(manual, reference)\n```\n\nThe $c$-state still has three coordinates throughout this example.\nA projection neither truncates the time graph nor resets the memory.\nIts matrix receives gradients through both the outputs and later gate\ncalculations. Parameter names, shapes and the projection definition are\nspecified in\n[PyTorch 2.14, LSTM](https://docs.pytorch.org/docs/2.14/generated/torch.nn.LSTM.html).\n\n### Разная длина текстов и перенос состояния"
+        },
+        {
+          "old": "## LSTM: память и три решения",
+          "new": "<a id=\"lstm-two-states\"></a>\n\n## LSTM: память и три решения"
+        },
+        {
+          "old": "### Сколько прежней памяти сохранить",
+          "new": "<a id=\"lstm-forget\"></a>\n\n### Сколько прежней памяти сохранить"
+        },
+        {
+          "old": "### Что добавить к памяти",
+          "new": "<a id=\"lstm-write\"></a>\n\n### Что добавить к памяти"
+        },
+        {
+          "old": "### Что передать в скрытое состояние",
+          "new": "<a id=\"lstm-output\"></a>\n\n### Что передать в скрытое состояние"
+        },
+        {
+          "old": "## Вычислимый пример одной координаты",
+          "new": "<a id=\"lstm-scalar\"></a>\n\n## Вычислимый пример одной координаты"
+        },
+        {
+          "old": "### Как обучаются вентили",
+          "new": "<a id=\"lstm-gate-gradients\"></a>\n\n### Как обучаются вентили"
+        },
+        {
+          "old": "### Как далеко проходит производная",
+          "new": "<a id=\"lstm-gradient-path\"></a>\n\n### Как далеко проходит производная"
+        },
+        {
+          "old": "### Полная ячейка и порядок весов",
+          "new": "<a id=\"lstm-cell-weights\"></a>\n\n### Полная ячейка и порядок весов"
+        },
+        {
+          "old": "Историческая LSTM 1997 года",
+          "new": "<a id=\"lstm-history\"></a>\n\nИсторическая LSTM 1997 года"
+        },
+        {
+          "old": "Есть и варианты современной ячейки.",
+          "new": "<a id=\"lstm-variants\"></a>\n\nЕсть и варианты современной ячейки."
+        },
+        {
+          "old": "## GRU: объединить память и выход",
+          "new": "<a id=\"gru-state\"></a>\n\n## GRU: объединить память и выход"
+        },
+        {
+          "old": "### Reset gate и кандидат",
+          "new": "<a id=\"gru-reset\"></a>\n\n### Reset gate и кандидат"
+        },
+        {
+          "old": "### Update gate и новое состояние",
+          "new": "<a id=\"gru-update\"></a>\n\n### Update gate и новое состояние"
+        },
+        {
+          "old": "### Почему схемы могут выглядеть противоречиво",
+          "new": "<a id=\"gru-conventions\"></a>\n\n### Почему схемы могут выглядеть противоречиво"
+        },
+        {
+          "old": "## Что выбирать",
+          "new": "<a id=\"recurrent-parameter-counts\"></a>\n\n## Что выбирать"
+        },
+        {
+          "old": "### Последовательности, слои и формы тензоров",
+          "new": "<a id=\"recurrent-sequence-shapes\"></a>\n\n### Последовательности, слои и формы тензоров"
+        },
+        {
+          "old": "### Разная длина текстов и перенос состояния",
+          "new": "<a id=\"gated-packed-sequences\"></a>\n\n### Разная длина текстов и перенос состояния"
+        },
+        {
+          "old": "Между независимыми текстами начальное состояние задаётся заново.",
+          "new": "<a id=\"gated-state-carry\"></a>\n\nМежду независимыми текстами начальное состояние задаётся заново."
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-chain.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-chain.png|Три шага LSTM с раскрытыми вычислениями средней ячейки]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-f.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-f.png|Вентиль забывания масштабирует прежнюю память LSTM]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-i.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-i.png|Входной вентиль и кандидат новой записи LSTM]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-C.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-C.png|Сложение сохранённой памяти и новой записи LSTM]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-o.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-focus-o.png|Выходной вентиль читает память через tanh]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/lstm-gates.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/lstm-gates.svg|Три вентиля LSTM из текущего входа и прежнего скрытого состояния]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/lstm-hidden-state.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/lstm-hidden-state.svg|Полная ячейка LSTM с обновлением памяти и скрытого состояния]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-C-line.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-C-line.png|Прямая ветвь переноса памяти через умножение и сложение]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/gru.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/gru.svg|Расчёт reset и update gate в GRU]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lstm-gru-2026-10-21/d2l-gru-3.svg]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/lstm-gru-2026-10-21/d2l-gru-3.svg|Кандидат GRU и смешивание старого и нового состояний]]"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-var-GRU.png]]",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/LSTM3-var-GRU.png|GRU у Олаха: коэффициент z относится к новой записи]]"
+        },
+        {
+          "old": "## Источники и дальнейшее чтение\n\n",
+          "new": "## Источники и дальнейшее чтение\n\n- Zhang, Lipton, Li, Smola, [D2L, §10.4: Bidirectional Recurrent Neural Networks](https://d2l.ai/chapter_recurrent-modern/bi-rnn.html) — original English explanation and complete source SVG, CC BY-SA 4.0. The endpoint trace here uses LSTM cells and checks both h and c.\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "36d70f678e8030c9bd733a0d77eb7b076111d236fed2e51ab7173036030fbb66",
+      "after_sha256": "2f1d1b38634902af6803bccfff82bb813ac79c59d3a9af8b87afcfeddde1cff5",
+      "changes": [
+        {
+          "old": "assets:\n",
+          "new": "assets:\n  - {\"id\":\"curated-lstm-gru-bidirectional-aa4e678afa0e\",\"asset\":\"00 Учебник/Assets/Figures/curated/lstm-gru-contracts-2026-11-03/d2l-birnn.svg\",\"author\":\"Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola\",\"title\":\"Architecture of a bidirectional RNN, complete original D2L figure\",\"source_url\":\"https://d2l.ai/chapter_recurrent-modern/bi-rnn.html\",\"source_image_url\":\"https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/birnn.svg\",\"commit\":\"23d7a5aecceee57d1292c56e90cce307f183bb0a\",\"source_asset\":\"05 Источники/Originals/lstm-gru-contracts-2026-11-03/d2l-birnn.svg\",\"source_asset_sha256\":\"aa4e678afa0e31c160374974709512d4d7e0121eeab7a1af1ad7725403afc018\",\"sha256\":\"aa4e678afa0e31c160374974709512d4d7e0121eeab7a1af1ad7725403afc018\",\"bytes\":33892,\"source_viewbox\":[0,0,240,141],\"source_page_snapshot\":\"05 Источники/Originals/lstm-gru-contracts-2026-11-03/d2l-bi-rnn.md\",\"source_page_sha256\":\"6de8c8124497b0c69703ba3805559d51eb57c96d93096b70e2d5b6e133373975\",\"license\":\"CC BY-SA 4.0\",\"license_url\":\"https://creativecommons.org/licenses/by-sa/4.0/\",\"license_evidence\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"license_evidence_sha256\":\"a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c\",\"public_license_copy\":\"site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt\",\"derivation\":\"source-svg-copy\",\"modifications\":\"None. Complete pinned original SVG; no crop, redraw, relabeling, translation or recompression. Live rendered-site SVG is a different encoding and is not claimed byte-identical.\",\"metadata_status\":\"verified\",\"provenance_confirmation\":\"source-license-verified\",\"rights_status\":\"source-license-verified\",\"last_verified\":\"2026-11-03\",\"used_in\":[\"00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md\"]}\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU|LSTM и GRU]]\n",
+          "new": "- [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU|LSTM и GRU]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-two-states|Память c и скрытое состояние h]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-forget|Вентиль забывания]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-write|Входной вентиль и кандидат]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-output|Выходной вентиль и чтение памяти]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-scalar|Численный проход LSTM]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-gate-gradients|Производные вентилей и полный BPTT]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-gradient-path|Прямой путь, забывание и полный якобиан]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-cell-weights|Совмещённая матрица и порядок i/f/g/o]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-history|Исходная LSTM и добавление forget gate]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-variants|Связанные вентили и peephole]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gru-state|Единое состояние GRU]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gru-reset|Reset gate и кандидат GRU]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gru-update|Update gate и выпуклая смесь]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gru-conventions|Соглашения z и порядок reset]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gru-candidate-biases|Почему смещения кандидата GRU не складываются]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#recurrent-parameter-counts|Состояния и число параметров]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#recurrent-sequence-shapes|Слои, направления и формы тензоров]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#recurrent-bidirectional|Два направления и конечные состояния]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-projection|Проекция внутри рекуррентного состояния]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gated-packed-sequences|Реальные длины LSTM/GRU и padding]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gated-state-carry|Перенос и отсоединение обоих состояний]]\n"
+        }
+      ],
+      "before_sha256": "68ca91598ebf25e6eaa4fd352db016eaf999eab0c93115662303cec897aefba7",
+      "after_sha256": "2de2c3576cb73a7ff9da767d34f9d73b1200eb7a6098d882455738edff37ec06"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU|LSTM and GRU]]\n",
+          "new": "- [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU|LSTM and GRU]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-two-states|Cell memory c and hidden state h]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-forget|Forget gate]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-write|Input gate and candidate]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-output|Output gate and memory readout]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-scalar|Scalar LSTM forward pass]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-gate-gradients|Gate derivatives and full BPTT]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-gradient-path|Direct path, retention and full Jacobian]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-cell-weights|Fused weights and i/f/g/o ordering]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-history|Original LSTM and the added forget gate]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-variants|Coupled gates and peepholes]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gru-state|Single GRU state]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gru-reset|GRU reset gate and candidate]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gru-update|Update gate and convex mixing]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gru-conventions|z conventions and reset placement]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gru-candidate-biases|Why GRU candidate biases do not merge]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#recurrent-parameter-counts|Recurrent states and parameter counts]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#recurrent-sequence-shapes|Layers, directions and tensor shapes]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#recurrent-bidirectional|Two directions and final states]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-projection|Projection inside recurrent state]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gated-packed-sequences|True LSTM/GRU lengths and padding]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gated-state-carry|Carrying and detaching both states]]\n"
+        }
+      ],
+      "before_sha256": "93bb16b6699635129b7625c13da1959dee44989034f6ace7a020536d04840c3c",
+      "after_sha256": "6e53ed8f1c7fa5380334666594daf9a1e0c7f59a9c79204f8cc9735001bca86b"
+    }
+  ],
+  "sourceComparison": [
+    {
+      "source": "docs/audit/2026-10-21-lstm-gru.md",
+      "read": "Whole prior report read; exact current baseline c0afc59f matches prior whole-source comparison. Current 839-line owner freshly read completely. Prior selected Olah/D2L/SLP3/CS224N/Cho comparisons reused explicitly, not a fresh complete-course read."
+    },
+    {
+      "source": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.LSTM.html",
+      "read": "Full API body: equations, projection, parameters, all input/output/state/weight shapes, direction and h_n notes, warnings and example.",
+      "use": "Explicit projected recurrence with p-dimensional h and m-dimensional c, gradient agreement and 78/84 versus 246/240 counts; two-direction endpoint and separate-cell trace."
+    },
+    {
+      "source": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.GRU.html",
+      "read": "Full API body: equations, layer/dropout contracts, parameters, all input/output/state/weight shapes and reset-placement note/example.",
+      "use": "Candidate bias inside versus outside reset; same bias sum is not sufficient for equal forward states."
+    },
+    {
+      "source": "05 Источники/Originals/lstm-gru-contracts-2026-11-03/d2l-bi-rnn.md",
+      "sha256": "6de8c8124497b0c69703ba3805559d51eb57c96d93096b70e2d5b6e133373975",
+      "pinnedRevision": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+      "read": "Whole 8478-byte pinned chapter read, including all framework-tab code, alignment/reversal explanation, concise implementation, summary and exercises. Original rendered source text also opened.",
+      "use": "Original direction-order excerpt and complete source SVG; adaptation explicitly traces LSTM h and c. No claim to execute D2L framework training or translate source prose."
+    }
+  ],
+  "verification": {
+    "chapterSha256": "18deaed5ac22f6e88e01882d14846f245960174261d49f41f9a4ec00df7e2785",
+    "wholeOwnerRead": "Complete 839-line baseline read, then the complete final 1178-line chapter reread in ranges 1–310, 311–620, 621–930 and 931–EOF. No subsequent chapter changes.",
+    "style": "no-ai-slop SKILL and eval read fully. Full prior explanations, calculations, technical contrasts, five programs and original figures retained. New source excerpt remains unchanged English; source-derived extensions remain English, with explicit API equations and worked examples. No translation pass or compression into definitions.",
+    "preservation": "Exact reversible four-file journal restores baseline c0afc59f... owner, registry and both indexes. All five old program bodies, all22 display equations and all11 old image paths/bytes retained. Added3 complete programs, one complete original SVG, an exact original direction-order excerpt, and21 subject links to both indexes; old alt labels now descriptive.",
+    "cpu": {
+      "exit": 0,
+      "device": "CPU",
+      "torch": "2.14.1",
+      "programs": 8,
+      "command": "uv run --offline --python 3.13 --with torch==2.14.1 --with numpy==2.5.4 python publishing/tools/check_lstm_gru_examples.py",
+      "scope": "Eight actual chapter programs execute; all five old bodies are retained. Existing scalar activation derivatives, direct versus full memory derivative, full every-step CE/c-state LSTM BPTT, both-state detach, GRU reset order/full Jacobian, bias counts, packed lengths and eleven source-asset byte checks pass. New 56 projected-state/all-gradient/count cases, 72 LSTM/GRU independent-direction/all-gradient cases with nonzero boundaries and 80 reset-weighted candidate-bias gradient cases pass. Published bias counterexample outputs [0.14565630622579548,0.30218388855858175] versus [0.35814893509951223,0.35814893509951223]. No GPU execution, throughput or quality benchmark."
+    },
+    "source": {
+      "fresh": "Full PyTorch2.14 LSTM and GRU API bodies read. Entire pinned D2L bidirectional chapter read, including all framework-tab code. Native320x188 SVG copied byte-identically from pinned repository; live-site encoding differs and is not claimed identical.",
+      "pin": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+      "chapterSha256": "6de8c8124497b0c69703ba3805559d51eb57c96d93096b70e2d5b6e133373975",
+      "assetSha256": "aa4e678afa0e31c160374974709512d4d7e0121eeab7a1af1ad7725403afc018",
+      "license": "CC BY-SA4.0, pinned public license hash a39a4b3d... . Existing seven Olah records retain needs-confirmation; no new license inferred.",
+      "reused": "Entire prior RNN-architecture audit read; selected Olah/D2L/SLP3/CS224N/Cho source comparisons reused on exact current baseline, not a new entire-course review."
+    },
+    "tests": {
+      "scoped": "182 tests in4 files pass: new exact delta/source preservation, previous RNN delta chain, RU/EN reference sync and full asset-registry suite. Includes negative changed-provenance cases for the new SVG.",
+      "builtOutput": "196 tests pass on the completed final build, including both locale LSTM/GRU routes,21 anchors,eight Python blocks,twelve actual asset images,source excerpt/links,next route and EN fallback notice."
+    },
+    "build": {
+      "exit": 0,
+      "pages": 2007,
+      "pagefindHtmlFiles": 2011,
+      "durationSeconds": 28.96,
+      "links": "0 broken internal routes, fragments or files",
+      "size": {
+        "bytes": 853262545,
+        "files": 5601,
+        "limit": 1000000000,
+        "headroom": 146737455
+      },
+      "warnings": "Five existing duplicate-route warnings retained, unrelated to this chapter.",
+      "preparedVsBuilt": "publishing build first generated derived Markdown/assets only. site build then executed Astro and Pagefind; HTML/link/browser checks ran only after the actual site build completed."
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-03-lstm-gru-reader",
+      "desktop": "1280x720: document 1265/1265; twelve original assets loaded and fit their content boxes, including both SVGs after opening the D2L details block. All 22 display equations and seven tables fit; 0 KaTeX errors. New bidirectional original plus original Olah input-gate and both D2L LSTM figures freshly inspected inline with captions. Earlier whole eleven-image inspection remains historical on the unchanged asset bytes, not claimed freshly repeated for every image.",
+      "mobile": "390x844: document 375/375; all twelve assets loaded at native proportions and widths <=343px, including two <=325px inside open details. All 22 display equations fit at343/343; 0 KaTeX errors. Same four selected diagrams freshly inspected inline with captions. Original Olah input gate opened at3x; left detail at x0 and right formula ends at x703 inspected. New original bidirectional SVG inspected at2x center with readable labels. No all-pan-endpoint or every-image zoom claim. Four existing tables have contained widths359/343,373/343,357/343,462/343; largest reached scrollLeft119 with final formula column visible. Both new tables fit343/343. Projection explanation inspected on-page.",
+      "navigation": "Actual RU reference -> #lstm-projection; actual EN reference -> #gru-candidate-biases, both unique anchors. EN notice explicitly says Canonical-language chapter and no separate English edition. Actual EN Next -> seq2seq-bottleneck with correct h1. Temporary viewport reset; final reader returned to RU LSTM/GRU bidirectional section."
+    },
+    "publication": "Local only; no staging, commit, push or deployment. Broad source/course/public-checkout/dev release work remains."
+  },
+  "remaining": [
+    "Seven earlier Olah PNGs retain their recorded user permission status; no named third-party redistribution license newly established.",
+    "No separate English translation or all-source-course completeness accepted by this delta.",
+    "Broad unread-owner/course-integration/public-checkout/release work remains."
+  ]
+}

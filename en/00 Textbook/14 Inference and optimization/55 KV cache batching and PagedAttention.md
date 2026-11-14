@@ -2,13 +2,14 @@
 title: "KV cache, batching, and PagedAttention"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-29
+last_updated: 2026-11-09
 last_verified: 2026-10-25
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline]]"
 next:
   - "[[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching]]"
 source_unit_id:
+  - lecture-01-figure-step-241-rendering-1
   - lecture-10-naive-versus-cached-inference
   - lecture-10-dynamic-workload-failure-mode
   - lecture-10-paged-attention-memory-sequence
@@ -22,8 +23,8 @@ primary_sources:
   - https://www.anyscale.com/blog/continuous-batching-llm-inference
 locale: en
 translation_status: current
-canonical_revision: "42438233617da20ba81611806b40ed450beaf6506e90ec181e2d43ac92580832"
-translation_reviewed: "2026-10-29"
+canonical_revision: "f52796e71a65dc3d2347c8bb0ee1fab1dbbab1e2e977bbe8c3ecaa97125451e5"
+translation_reviewed: "2026-11-09"
 translation_of: "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md"
 ---
 
@@ -49,18 +50,34 @@ examines computational cost; the [[55b Scheduling — continuous batching, chunk
 examines which requests run in each iteration.
 
 <a id="prefill-и-decode-используют-устройство-по-разному"></a>
+<a id="prefill-decode-cache-states"></a>
 
 ## Prefill and decode use the device differently
 
 The server first processes the input prompt in **prefill**, then adds
 the answer one token at a time in **decode**.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-review-2026-09/prefill-decode.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-review-2026-09/prefill-decode.png|Four calls: the prompt produces a, then each selected token enters the next forward pass until the model emits EOS.]]
 
-*The first call processes Computer science is and selects a. The next
-receives a, appends its K/V and selects discipline. Baolin Li et al.,
-Figure 2 in [LLM Inference Serving: Survey of Recent Advances and Opportunities](https://arxiv.org/html/2407.12391v1#S2.F2),
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+*Baolin Li et al., Figure 2 in
+[LLM Inference Serving: Survey of Recent Advances and Opportunities](https://arxiv.org/html/2407.12391v1#S2.F2),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+The paper's original, unchanged. A lower-resolution copy appears at
+step 241 of [CS336 Lecture 1](https://cs336.stanford.edu/lectures/?trace=lecture_01).*
+
+In the figure, “Computer science is” enters **Iteration 1**.
+If the prompt has $S$ positions after tokenization, the first call
+stores $S$ K/V pairs in each layer. The logits at the final prompt
+position produce the first answer token, `a`. The server can send it
+to the client while the cache still holds only the prompt positions.
+
+**Iteration 2** takes `a` as input, appends its K/V and selects
+`discipline`. The cache now covers $S+1$ positions. **Iteration 3**
+processes `discipline` and selects the period. **Iteration 4**
+processes the period and selects `<EOS>`. If generation stops there,
+`<EOS>` never enters a forward pass. The cache covers $S+3$ processed
+positions even though the model made four selections. The words in the
+diagram stand for tokens; actual token boundaries depend on the tokenizer.
 
 For a prefill of length $S$, activation matrices contain many rows.
 Large matrix multiplications often make good use of tensor cores,
@@ -68,12 +85,6 @@ so arithmetic can be the limiting resource. During decode there is only
 one new row per request. The device rereads layer parameters and
 attention history while performing relatively little arithmetic.
 With a small batch, memory bandwidth more often limits decode.
-
-The first output token is selected from logits at the final prefill
-position. Its own K/V is not yet in the cache: it is computed when
-that token enters the next iteration. After a 4,000-token prompt,
-the server can therefore send the first answer token while the cache
-contains exactly 4,000 positions, not 4,001.
 
 <a id="что-именно-сохраняет-kv-cache"></a>
 

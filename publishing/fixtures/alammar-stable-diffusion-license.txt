@@ -1,0 +1,7 @@
+Jay Alammar, The Illustrated Stable Diffusion
+Source: https://jalammar.github.io/illustrated-stable-diffusion/
+License declared in the article footer: CC BY-NC-SA 4.0
+License: https://creativecommons.org/licenses/by-nc-sa/4.0/
+Publisher footer template: https://github.com/jalammar/jalammar.github.io/blob/master/_layouts/default.html
+Verified footer Git blob: 2a6c87905b450e17d4cbb001be0e03ea1d2bf447
+Checked 2026-11-11 against both the article footer and the author's repository.

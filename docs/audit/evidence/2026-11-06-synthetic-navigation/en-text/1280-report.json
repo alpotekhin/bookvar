@@ -1,0 +1,109 @@
+{
+  "url": "http://127.0.0.1:4330/en/textbook/pretraining/synthetic-data-curricula/",
+  "width": 1280,
+  "height": 900,
+  "navigation": {
+    "from": "/en/reference/",
+    "href": "http://127.0.0.1:4330/en/textbook/pretraining/synthetic-data-curricula/#syn-simulated-epoching",
+    "text": "Simulated epoching in a small run",
+    "arrived": "http://127.0.0.1:4330/en/textbook/pretraining/synthetic-data-curricula/#syn-simulated-epoching",
+    "screenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-navigation/en-text/1280-reference-target.png"
+  },
+  "figures": [],
+  "limits": "Headless browser interactions and screenshots; requires separate human visual inspection.",
+  "layout": {
+    "page": [
+      1280,
+      1280
+    ],
+    "mathErrors": 0,
+    "formulas": [
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ],
+      [
+        632,
+        632
+      ]
+    ],
+    "tables": [
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ],
+      [
+        632,
+        632,
+        "visible"
+      ]
+    ]
+  },
+  "contextScreenshot": "/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/docs/audit/evidence/2026-11-06-synthetic-navigation/en-text/1280-page.png"
+}

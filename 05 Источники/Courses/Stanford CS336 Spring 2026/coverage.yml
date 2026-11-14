@@ -102,11 +102,10 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
-      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=37:rendering=1; reviewed title: roller flops"
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md",
+      "destination_anchor": "arith-attention-share",
+      "evidence": "Step 37 contrasts attention and FFN FLOP shares for OPT. Chapter uses controlled forward counts from pinned OPT configurations and a separate original prefill FLOP breakdown; it does not reproduce the screenshot's training fractions."
     },
     {
       "id": "coverage-lecture-01-figure-step-39-rendering-1",
@@ -118,11 +117,10 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
-      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=39:rendering=1; reviewed title: wei emergence plot"
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "scaling-metric-emergence",
+      "evidence": "Lecture 1 step 39 uses Wei et al. v2 Figure 2; the destination reads the arithmetic panel and distinguishes exact-match scores, edit distances, and test resolution."
     },
     {
       "id": "coverage-lecture-01-section-40-what-can-we-learn-in-this-class-that-transfers-to-frontier-models",
@@ -552,11 +550,10 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
-      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=241:rendering=1; reviewed title: prefill decode"
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "destination_anchor": "prefill-decode-cache-states",
+      "evidence": "Step 241 uses Li et al. Figure 2. Both textbook editions already retain the original; the explanation now traces four forward calls and distinguishes selected IDs from cached positions."
     },
     {
       "id": "coverage-lecture-01-administrative-assignment-2-systems",
@@ -582,11 +579,10 @@
       "primary_sources": [
         "lecture-01"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-01",
-      "reason": "Preserved in the pinned course archive for a later overview, systems, scaling, evaluation, or data chapter; Task 1 does not duplicate this contextual unit.",
-      "evidence": "Lectures/repository/var/traces/lecture_01.json#step=276:rendering=1; reviewed title: chinchilla isoflop"
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "destination_anchor": "isoflops-experiment",
+      "evidence": "Lecture 9 already owns the procedure. The chapter links the exact Hoffmann Figure 3 used at step 276 and now compares it with licensed symmetric and asymmetric controls."
     },
     {
       "id": "coverage-lecture-01-figure-step-280-rendering-1",
@@ -1582,9 +1578,9 @@
       ],
       "disposition": "integrated",
       "destination": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
-      "destination_anchor": "multi-token-training-objective",
+      "destination_anchor": "deepseek-sequential-mtp",
       "reason": "Integrated into the existing training-objective chapter: independent heads versus DeepSeek sequential teacher-forced modules, valid target masks, shared embedding/output, auxiliary weighting, and training versus speculative inference.",
-      "evidence": "Lecture 4 page 59 read and rendered; primary DeepSeek-V3 v2 section 2.2 and Meta MTP v1 section 2 verified. Original licensed Meta Figure 1 illustrates the contrasted independent-head variant; it is not mislabeled as the DeepSeek slide."
+      "evidence": "Lecture 4 page 59 read and rendered. DeepSeek's left-hand figure is embedded from the MIT-licensed author repository snapshot d5c08b3, PDF page 10; the composite lecture slide stays in the course archive. Meta Figure 1 illustrates the independent-head variant."
     },
     {
       "id": "coverage-lecture-04-recap",
@@ -7100,8 +7096,8 @@
         "assignment-02"
       ],
       "disposition": "integrated",
-      "destination": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
-      "destination_anchor": "cs336-systems-triton"
+      "destination": "00 Учебник/10 ML Systems/09 Компиляция графов — PyTorch, JAX и CUDA Graphs.md",
+      "destination_anchor": "torch-compile-graphs-guards-recompilation"
     },
     {
       "id": "coverage-assignment-02-deliverable-torch-compile-022",
@@ -11685,5 +11681,5 @@
       "evidence": "Assignments/assignment5-alignment/tests/test_data.py#L55"
     }
   ],
-  "editorial_overlay_sha256": "c84c0d698fec824fe5e216488b5ae2612200c4b417cb90709c693d5771b405c3"
+  "editorial_overlay_sha256": "3ea5ee46d94c4807fa7e2538082edbe0e20774bd3599436e93de580d104339b4"
 }

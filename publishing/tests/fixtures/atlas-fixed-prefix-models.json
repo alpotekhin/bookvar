@@ -1,0 +1,49 @@
+[
+  {
+    "name": "Llama 3.1 8B",
+    "source": "https://arxiv.org/html/2407.21783v3#S3.T3",
+    "layers": 32,
+    "width": 4096,
+    "kv_heads": 8,
+    "head_dim": 128,
+    "ffn_width": 14336
+  },
+  {
+    "name": "Qwen3-8B",
+    "source": "https://huggingface.co/Qwen/Qwen3-8B-Base/blob/49e3418fbbbca6ecbdf9608b4d22e5a407081db4/config.json",
+    "config_sha256": "3bd01d7ad7a2e203ecbbe84e24087a51c6d2a108ee4bcc42d0016bf49564983a",
+    "layers": 36,
+    "width": 4096,
+    "kv_heads": 8,
+    "head_dim": 128,
+    "ffn_width": 12288
+  },
+  {
+    "name": "Qwen3-30B-A3B",
+    "source": "https://huggingface.co/Qwen/Qwen3-30B-A3B-Base/blob/1b75feb79f60b8dc6c5bc769a898c206a1c6a4f9/config.json",
+    "config_sha256": "7e4142150e976c6b4796adf88fce0a2a23e581ed63bcede7e1d69a645e73b362",
+    "layers": 48,
+    "width": 2048,
+    "kv_heads": 4,
+    "head_dim": 128,
+    "ffn_width": 768,
+    "routed": 128,
+    "top_k": 8,
+    "shared": 0
+  },
+  {
+    "name": "DeepSeek-V3",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-V3-Base/blob/afb92e1fa402c2be2a9eb085312bb02e0384d6c7/config.json",
+    "config_sha256": "cbf0b95dc614de208a109bb5fd4e7eed11385e9c68411d2c17db5319443035d9",
+    "layers": 61,
+    "width": 7168,
+    "kv_rank": 512,
+    "rope_key_dim": 64,
+    "ffn_width": 2048,
+    "routed": 256,
+    "top_k": 8,
+    "shared": 1,
+    "initial_dense_layers": 3,
+    "initial_ffn_width": 18432
+  }
+]

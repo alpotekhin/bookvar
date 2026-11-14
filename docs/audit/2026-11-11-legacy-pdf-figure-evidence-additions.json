@@ -1,0 +1,175 @@
+{
+  "date": "2026-11-11",
+  "scope": "Verify four previously unhashed textbook figures from PDF sources. Pin the existing published PNGs without replacing them. Keep source origin and redistribution status separate.",
+  "review": {
+    "preservation": "No reader content, image bytes, navigation, or built output changed. The digest check covered 310 manifest textbook pages, 1189 registered file matches and 33 older files without hashes. It found no missing registry rows or differing image bytes.",
+    "licenseLimit": "InternVL 2.5 and ImageBind remain unconfirmed for redistribution; local preview still uses both. Qwen2-VL Figure 11 was located in arXiv v1 Appendix A.1, but the PDF was not retrieved and the record has no reuse grant; it was not pinned in this pass.",
+    "release": "Local only; no push or deploy."
+  },
+  "proofs": [
+    {
+      "record": {
+        "id": "curated-tokenizer-choice-0000000000c0",
+        "asset": "00 Учебник/Assets/Figures/curated/source-audit-15-24/tokenizer-choice-figure1.png",
+        "author": "Mehdi Ali et al.",
+        "source_url": "https://aclanthology.org/2024.findings-naacl.247/",
+        "figure_url": "https://aclanthology.org/2024.findings-naacl.247.pdf#page=5",
+        "source_page": 5,
+        "source_asset": "raw/papers/external/2024.findings-naacl.247.pdf",
+        "sha256": "4368417a0ff011dbdbd4c9283881ecbffd9a29ca83b8cb9bde4dc9c867b7cb32",
+        "dimensions_px": [
+          1240,
+          660
+        ],
+        "bytes": 88054,
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "license_evidence": "https://aclanthology.org/faq/copyright/",
+        "metadata_status": "verified",
+        "rights_status": "source-license-verified",
+        "provenance_confirmation": "source-license-verified",
+        "derivation": "pdf-page-render-crop",
+        "modifications": "Figure 1 rendered from the official paper and cropped without data changes",
+        "last_verified": "2026-11-11",
+        "used_in": [
+          "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md"
+        ]
+      },
+      "comparison": "The two panels, axis labels, vocabulary tick marks, legend and caption match the publisher PDF text; the official local PDF fetch timed out and no upstream file digest or exact crop reproducibility is claimed."
+    },
+    {
+      "record": {
+        "id": "curated-vlm2026-internvl-figure2-e6f8f5eefb4c",
+        "asset": "00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure2-dynamic-tiles.png",
+        "author": "Zhe Chen et al.",
+        "source_url": "https://arxiv.org/html/2412.05271v5",
+        "figure_url": "https://arxiv.org/pdf/2412.05271v5#page=3",
+        "source_page": 3,
+        "source_asset": "raw/papers/external/vlm-2026/2412.05271.pdf",
+        "source_asset_sha256": "361dae69850c1bb15397fd673738ff187fc342ac990b6d0c966ab477caad01b6",
+        "sha256": "fbde9619994fb8b3555e5e1320af5c1ca3094c5c110459f1573135d7c499b2c3",
+        "dimensions_px": [
+          1363,
+          473
+        ],
+        "bytes": 375079,
+        "license": null,
+        "license_url": null,
+        "license_evidence": "https://arxiv.org/html/2412.05271v5",
+        "metadata_status": "needs-confirmation",
+        "rights_status": "needs-confirmation",
+        "provenance_confirmation": "third-party-figure-origin-verified",
+        "derivation": "pdf-page-render-crop",
+        "modifications": "Figure 2 rendered from official paper and cropped without content changes",
+        "last_verified": "2026-11-11",
+        "used_in": [
+          "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md",
+          "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md"
+        ]
+      },
+      "comparison": "Compared the local PNG to both Figure 2 panels on page 3 of the arXiv v5 PDF, including the thumbnail and the split text/vision branches. arXiv's non-exclusive distribution license is not a reuse grant. Source panels also contain sample images."
+    },
+    {
+      "record": {
+        "id": "curated-vlm2026-qwen25omni-figure2-6a1a5c7d1f45",
+        "asset": "00 Учебник/Assets/Figures/curated/vlm-2026/qwen25omni-figure2-thinker-talker.png",
+        "author": "Jin Xu et al.",
+        "source_url": "https://arxiv.org/html/2503.20215v1",
+        "figure_url": "https://arxiv.org/pdf/2503.20215v1#page=3",
+        "source_page": 3,
+        "source_asset": "raw/papers/external/vlm-2026/2503.20215.pdf",
+        "source_asset_sha256": "95906505512440a3a32c37b10a6aeeef092c44d60fcfaebfb309950685b7cbf1",
+        "sha256": "f79d0eeab70fb94eb67cfcc766a56ebd10d3b3f59f08a676d605f679417fa54e",
+        "dimensions_px": [
+          1131,
+          880
+        ],
+        "bytes": 219908,
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "license_evidence": "https://arxiv.org/html/2503.20215v1",
+        "metadata_status": "verified",
+        "rights_status": "source-license-verified",
+        "provenance_confirmation": "source-license-verified",
+        "derivation": "pdf-page-render-crop",
+        "modifications": "Figure 2 rendered from the official paper; surrounding page text and logo removed, complete Thinker-Talker diagram preserved",
+        "last_verified": "2026-11-11",
+        "used_in": [
+          "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+          "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md"
+        ]
+      },
+      "comparison": "Compared the crop to Figure 2 on page 3 of arXiv v1. The legend, two encoder branches, Thinker, Talker and audio codec remain visible; the source logo and caption are outside the crop. The pinned paper labels itself CC BY 4.0."
+    },
+    {
+      "record": {
+        "id": "curated-vlm2026-imagebind-figure1-96c0ae5b7af5",
+        "asset": "00 Учебник/Assets/Figures/curated/vlm-2026/imagebind-figure1-capabilities.png",
+        "author": "Rohit Girdhar et al.",
+        "source_url": "https://arxiv.org/html/2305.05665v2",
+        "figure_url": "https://arxiv.org/pdf/2305.05665v2#page=1",
+        "source_page": 1,
+        "source_asset": "raw/papers/external/vlm-2026/2305.05665.pdf",
+        "source_asset_sha256": "0dcf74b737b46d82c304fb88fd16dfb3b1911975ac9439a23b9b0e82049e0ffb",
+        "sha256": "96c0ae5b7af5d07296e9494686bc5617c18d89caca6b9f6514b714d6926c2837",
+        "dimensions_px": [
+          1240,
+          430
+        ],
+        "bytes": 445024,
+        "license": null,
+        "license_url": null,
+        "license_evidence": "https://arxiv.org/html/2305.05665v2",
+        "metadata_status": "needs-confirmation",
+        "rights_status": "needs-confirmation",
+        "provenance_confirmation": "third-party-figure-origin-verified",
+        "derivation": "pdf-page-render-crop",
+        "modifications": "Figure 1 rendered from the official paper; caption and surrounding page text removed, three capability panels preserved",
+        "last_verified": "2026-11-11",
+        "used_in": [
+          "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+          "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md"
+        ]
+      },
+      "comparison": "Compared all three panels to Figure 1 on page 1 of arXiv v2. The project README's CC BY-NC 4.0 statement covers code and weights, not the third-party sample imagery in the paper figure."
+    }
+  ],
+  "files": [
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "552423a50d6787b98a176ab08e0a0e36843f56432e28356f7895f60b62023db8",
+      "after_sha256": "001788c324f22a33e40c4c44e71b2566959609de1790891efa0f1be9de7019e4",
+      "lines": 25894,
+      "changes": [
+        {
+          "old": "  - id: curated-tokenizer-choice-0000000000c0\n    asset: 00 Учебник/Assets/Figures/curated/source-audit-15-24/tokenizer-choice-figure1.png\n    author: Mehdi Ali et al.\n    source_url: https://aclanthology.org/2024.findings-naacl.247/\n    license: open-paper-material; reuse confirmed by repository owner\n    license_url: https://aclanthology.org/2024.findings-naacl.247/\n    modifications: Figure 1 rendered from the official paper and cropped without data changes\n    used_in:\n      - 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/2024.findings-naacl.247.pdf\n    derivation: pdf-page-render-crop",
+          "new": "  - id: curated-tokenizer-choice-0000000000c0\n    asset: \"00 Учебник/Assets/Figures/curated/source-audit-15-24/tokenizer-choice-figure1.png\"\n    author: \"Mehdi Ali et al.\"\n    source_url: \"https://aclanthology.org/2024.findings-naacl.247/\"\n    figure_url: \"https://aclanthology.org/2024.findings-naacl.247.pdf#page=5\"\n    source_page: 5\n    source_asset: \"raw/papers/external/2024.findings-naacl.247.pdf\"\n    sha256: \"4368417a0ff011dbdbd4c9283881ecbffd9a29ca83b8cb9bde4dc9c867b7cb32\"\n    dimensions_px: [1240,660]\n    bytes: 88054\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"https://aclanthology.org/faq/copyright/\"\n    metadata_status: \"verified\"\n    rights_status: \"source-license-verified\"\n    provenance_confirmation: \"source-license-verified\"\n    derivation: \"pdf-page-render-crop\"\n    modifications: \"Figure 1 rendered from the official paper and cropped without data changes\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md\"]"
+        },
+        {
+          "old": "  - id: curated-vlm2026-internvl-figure2-e6f8f5eefb4c\n    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure2-dynamic-tiles.png\n    author: Zhe Chen et al.\n    source_url: https://arxiv.org/pdf/2412.05271\n    license: open paper material; reuse confirmed by repository owner\n    license_url: https://arxiv.org/pdf/2412.05271\n    modifications: Figure 2 rendered from official paper and cropped without content changes\n    used_in: [\"00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/vlm-2026/2412.05271.pdf\n    derivation: pdf-page-render-crop",
+          "new": "  - id: curated-vlm2026-internvl-figure2-e6f8f5eefb4c\n    asset: \"00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure2-dynamic-tiles.png\"\n    author: \"Zhe Chen et al.\"\n    source_url: \"https://arxiv.org/html/2412.05271v5\"\n    figure_url: \"https://arxiv.org/pdf/2412.05271v5#page=3\"\n    source_page: 3\n    source_asset: \"raw/papers/external/vlm-2026/2412.05271.pdf\"\n    source_asset_sha256: \"361dae69850c1bb15397fd673738ff187fc342ac990b6d0c966ab477caad01b6\"\n    sha256: \"fbde9619994fb8b3555e5e1320af5c1ca3094c5c110459f1573135d7c499b2c3\"\n    dimensions_px: [1363,473]\n    bytes: 375079\n    license: null\n    license_url: null\n    license_evidence: \"https://arxiv.org/html/2412.05271v5\"\n    metadata_status: \"needs-confirmation\"\n    rights_status: \"needs-confirmation\"\n    provenance_confirmation: \"third-party-figure-origin-verified\"\n    derivation: \"pdf-page-render-crop\"\n    modifications: \"Figure 2 rendered from official paper and cropped without content changes\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md\",\"en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md\"]"
+        },
+        {
+          "old": "  - id: curated-vlm2026-qwen25omni-figure2-6a1a5c7d1f45\n    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/qwen25omni-figure2-thinker-talker.png\n    author: Jin Xu et al.\n    source_url: https://arxiv.org/pdf/2503.20215\n    license: open paper material; reuse confirmed by repository owner\n    license_url: https://arxiv.org/pdf/2503.20215\n    modifications: Figure 2 rendered from the official paper; surrounding page text and logo removed, complete Thinker-Talker diagram preserved\n    used_in: [\"00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/vlm-2026/2503.20215.pdf\n    derivation: pdf-page-render-crop",
+          "new": "  - id: curated-vlm2026-qwen25omni-figure2-6a1a5c7d1f45\n    asset: \"00 Учебник/Assets/Figures/curated/vlm-2026/qwen25omni-figure2-thinker-talker.png\"\n    author: \"Jin Xu et al.\"\n    source_url: \"https://arxiv.org/html/2503.20215v1\"\n    figure_url: \"https://arxiv.org/pdf/2503.20215v1#page=3\"\n    source_page: 3\n    source_asset: \"raw/papers/external/vlm-2026/2503.20215.pdf\"\n    source_asset_sha256: \"95906505512440a3a32c37b10a6aeeef092c44d60fcfaebfb309950685b7cbf1\"\n    sha256: \"f79d0eeab70fb94eb67cfcc766a56ebd10d3b3f59f08a676d605f679417fa54e\"\n    dimensions_px: [1131,880]\n    bytes: 219908\n    license: \"CC BY 4.0\"\n    license_url: \"https://creativecommons.org/licenses/by/4.0/\"\n    license_evidence: \"https://arxiv.org/html/2503.20215v1\"\n    metadata_status: \"verified\"\n    rights_status: \"source-license-verified\"\n    provenance_confirmation: \"source-license-verified\"\n    derivation: \"pdf-page-render-crop\"\n    modifications: \"Figure 2 rendered from the official paper; surrounding page text and logo removed, complete Thinker-Talker diagram preserved\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md\",\"en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md\"]"
+        },
+        {
+          "old": "  - id: curated-vlm2026-imagebind-figure1-96c0ae5b7af5\n    asset: 00 Учебник/Assets/Figures/curated/vlm-2026/imagebind-figure1-capabilities.png\n    author: Rohit Girdhar et al.\n    source_url: https://arxiv.org/pdf/2305.05665\n    license: open paper material; reuse confirmed by repository owner\n    license_url: https://arxiv.org/pdf/2305.05665\n    modifications: Figure 1 rendered from the official paper; caption and surrounding page text removed, three capability panels preserved\n    used_in: [\"00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md\"]\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\n    source_asset: raw/papers/external/vlm-2026/2305.05665.pdf\n    derivation: pdf-page-render-crop",
+          "new": "  - id: curated-vlm2026-imagebind-figure1-96c0ae5b7af5\n    asset: \"00 Учебник/Assets/Figures/curated/vlm-2026/imagebind-figure1-capabilities.png\"\n    author: \"Rohit Girdhar et al.\"\n    source_url: \"https://arxiv.org/html/2305.05665v2\"\n    figure_url: \"https://arxiv.org/pdf/2305.05665v2#page=1\"\n    source_page: 1\n    source_asset: \"raw/papers/external/vlm-2026/2305.05665.pdf\"\n    source_asset_sha256: \"0dcf74b737b46d82c304fb88fd16dfb3b1911975ac9439a23b9b0e82049e0ffb\"\n    sha256: \"96c0ae5b7af5d07296e9494686bc5617c18d89caca6b9f6514b714d6926c2837\"\n    dimensions_px: [1240,430]\n    bytes: 445024\n    license: null\n    license_url: null\n    license_evidence: \"https://arxiv.org/html/2305.05665v2\"\n    metadata_status: \"needs-confirmation\"\n    rights_status: \"needs-confirmation\"\n    provenance_confirmation: \"third-party-figure-origin-verified\"\n    derivation: \"pdf-page-render-crop\"\n    modifications: \"Figure 1 rendered from the official paper; caption and surrounding page text removed, three capability panels preserved\"\n    last_verified: \"2026-11-11\"\n    used_in: [\"00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md\",\"en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md\"]"
+        }
+      ]
+    },
+    {
+      "source": "docs/audit/2026-11-09-release-readiness.json",
+      "before_sha256": "131c218c818189ca03df949d18b5f9d6cf8c1bc0361c8e2abf7c042959ca921b",
+      "after_sha256": "ba8ab80df7db97de57e9f9404ce6cddd4716db6a48c65570770e4c878be74f87",
+      "lines": 1423,
+      "changes": [
+        {
+          "old": "  \"remaining\": [\n    \"Reconcile digests and source records for 37 older rendered textbook entries. The broader source-library image inventory is separate.\",",
+          "new": "  \"legacyPdfFigureEvidence20261111\": {\n    \"journal\": \"docs/audit/2026-11-11-legacy-pdf-figure-evidence-additions.json\",\n    \"checkedTextbookLocalePages\": 310,\n    \"textbookRenderedImagePathsWithMatchingSHA256\": 1189,\n    \"registeredTextbookPathsStillWithoutSHA256\": 33,\n    \"newlyConfirmedSourceLicenses\": 2,\n    \"knownPublishedFiguresWithUnconfirmedRedistribution\": 2,\n    \"scope\": \"Four existing PNGs are pinned without changing them. NAACL Figure 1 and Qwen2.5-Omni Figure 2 have named CC BY 4.0 evidence. InternVL 2.5 Figure 2 and ImageBind Figure 1 match the archived paper panels but have no verified redistribution grant; they remain in local preview pending a licensed equivalent or link-only treatment. A public release must not treat these as cleared. The 33 remaining records are not rights-reviewed by this check.\"\n  },\n  \"remaining\": [\n    \"Reconcile digests and source records for 33 older rendered textbook entries; Qwen2-VL Figure 11 has no reuse grant in the checked arXiv v1 record and needs a separate source or link-only treatment. Resolve the two pinned but rights-pending InternVL 2.5 and ImageBind figures before public release. The broader source-library image inventory is separate.\","
+        }
+      ]
+    }
+  ]
+}

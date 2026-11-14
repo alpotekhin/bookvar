@@ -1,0 +1,18 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { getEntry, render } from 'astro:content';
+import EntailmentLab from './EntailmentLab.astro';
+
+const { lang } = Astro.props as { lang: 'ru' | 'en' };
+const id = (lang === 'en' ? 'en/' : '') + 'practice/gpt-entailment';
+const entry = await getEntry('docs', id);
+if (!entry) throw new Error('Missing GPT entailment practice: ' + id);
+const { Content, headings } = await render(entry);
+const { hero: _hero, editUrl, ...frontmatter } = entry.data;
+const labHeading = { depth: 2, slug: 'entailment-lab', text: lang === 'ru' ? 'Вход и оценки' : 'Input and scores' };
+---
+
+<StarlightPage frontmatter={{ ...frontmatter, editUrl: editUrl === true ? undefined : editUrl }} headings={[labHeading, ...headings]}>
+  <EntailmentLab lang={lang} heading={labHeading.text} />
+  <Content />
+</StarlightPage>

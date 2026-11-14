@@ -1,0 +1,86 @@
+[
+  {
+    "width": 1280,
+    "name": "gradcache-formula",
+    "display": [
+      617,
+      95.7734375
+    ],
+    "scroll": null,
+    "page": [
+      1265,
+      1265
+    ]
+  },
+  {
+    "width": 1280,
+    "name": "dpr-inline",
+    "display": [
+      617,
+      462.75
+    ],
+    "scroll": null,
+    "page": [
+      1265,
+      1265
+    ]
+  },
+  {
+    "width": 1280,
+    "name": "simcse-inline",
+    "display": [
+      617,
+      209.7421875
+    ],
+    "scroll": null,
+    "page": [
+      1265,
+      1265
+    ]
+  },
+  {
+    "width": 375,
+    "name": "gradcache-formula",
+    "display": [
+      343,
+      83.640625
+    ],
+    "scroll": null,
+    "page": [
+      375,
+      375
+    ]
+  },
+  {
+    "width": 375,
+    "name": "dpr-inline",
+    "display": [
+      672,
+      504
+    ],
+    "scroll": [
+      343,
+      672
+    ],
+    "page": [
+      375,
+      375
+    ]
+  },
+  {
+    "width": 375,
+    "name": "simcse-inline",
+    "display": [
+      672,
+      228.4375
+    ],
+    "scroll": [
+      343,
+      672
+    ],
+    "page": [
+      375,
+      375
+    ]
+  }
+]

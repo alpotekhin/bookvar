@@ -34,7 +34,7 @@ def rejects(function, *args, **kwargs):
 def main():
     chapter = CHAPTER.read_text()
     blocks = re.findall(r'^```python\n(.*?)^```', chapter, re.M | re.S)
-    assert len(blocks) == 7
+    assert len(blocks) == 8
     namespaces, shared = [], {}
     for i, block in enumerate(blocks, 1):
         ns = {}
@@ -42,7 +42,7 @@ def main():
         exec(code, ns)
         exec(code, shared)
         namespaces.append(ns)
-    counts = {'standalone_and_shared_code_blocks': 14}
+    counts = {'standalone_and_shared_code_blocks': 16}
     model_ns = namespaces[0]
     assert model_ns['scores'].dtype == model_ns['torch'].float64
     observed = model_ns['scores'].tolist()
@@ -85,8 +85,8 @@ def main():
         rejects(fn, *args)
     counts['loss_boundaries_and_extreme_logits'] = 10
 
-    sigmoid = namespaces[2]['sigmoid']
-    assert np.isclose(namespaces[2]['temperature'], 5.41902258270291)
+    sigmoid = namespaces[3]['sigmoid']
+    assert np.isclose(namespaces[3]['temperature'], 5.41902258270291)
     for _ in range(60):
         scores = rng.normal(size=20)
         temperature = float(rng.uniform(.5, 10))
@@ -97,7 +97,7 @@ def main():
     rejects(sigmoid, [math.nan])
     counts['temperature_order_and_probability_boundaries'] = 62
 
-    maxsim = namespaces[3]['maxsim_matrix']
+    maxsim = namespaces[4]['maxsim_matrix']
     for _ in range(60):
         q, d = rng.normal(size=(4, 8)), rng.normal(size=(7, 8))
         q /= np.linalg.norm(q, axis=1, keepdims=True)
@@ -124,7 +124,7 @@ def main():
     assert 2 * 32**2 + 2 * 512**2 == 526336
     counts['storage_residual_and_padding_arithmetic'] = 4
 
-    sliding = namespaces[5]['sliding_rerank']
+    sliding = namespaces[6]['sliding_rerank']
     window_cases = 0
     for n in range(1, 25):
         ids = list(range(n))
@@ -145,7 +145,7 @@ def main():
     assert sliding([], lambda v: v) == ([], [])
     counts['sliding_windows_ids_call_counts_and_invalid_permutations'] = window_cases + 8
 
-    metric = namespaces[6]['ranking_metrics']
+    metric = namespaces[7]['ranking_metrics']
     for order in itertools.permutations(['A', 'B', 'X']):
         for k in [1, 2, 3]:
             result = metric(order, {'A': 1, 'B': 1, 'C': 1}, k)
@@ -197,8 +197,8 @@ def main():
                'maxsim-для-двух-кандидатов', '5-cascade-и-бюджет-вычислений',
                '6-метрики-и-ablation', '7-типичные-ошибки', 'источники-и-дальнейшее-чтение']
     assert all(page.find(id=name) for name in anchors)
-    assert len(article.select('img')) == 8 and len(article.select('pre')) == 7
-    assert not article.select('.katex-error') and len(article.select('.katex-display')) == 7
+    assert len(article.select('img')) == 8 and len(article.select('pre')) == 8
+    assert not article.select('.katex-error') and len(article.select('.katex-display')) == 9
     assert article.select_one('a[href$="/textbook/retrieval/sparse-dense-hybrid/"]')
     assert article.select_one('a[href$="/textbook/rag/full-pipeline/"]')
     assert not article.select('img[src$="colbert-late-interaction.png"]')

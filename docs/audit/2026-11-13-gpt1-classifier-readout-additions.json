@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-13",
+  "scope": "Illustrate the GPT-1 Extract readout in both existing editions and continue the same NLI example at the GPT-2 vocabulary-output subsection.",
+  "review": {
+    "sources": "Radford et al. §§3.1–3.3 and 4.1–4.2, Figure 1; Stanford CS224N Winter 2023 lecture 9, slides 40–46, and archived course reuse notice under Logistics; pinned OpenAI train.py for Extract pooling in the released Story Cloze experiment.",
+    "workedCase": "The nine-position NLI example pools h8 above Extract. Causal masking would prevent a first-position Extract from reading the two sentences. The 768-by-3 class matrix gives one logit per relation, unlike GPT-2's vocabulary head at Relation:, where a two-token label requires two conditional probabilities. Keep the numerical worked example and the distinction between the paper's NLI recipe and the released Story Cloze implementation.",
+    "style": "Read both complete chapter inputs before editing. Keep two-stage examples, equations, results and citations; replace the repeated conclusion with the concrete transition. Distinguish the main supervised protocol from GPT-1's zero-shot experiments.",
+    "provenance": "Manning's original slide-41 diagram, including arrows, both rows and all labels; from the archived lecture PDF at 240 dpi. Stanford's course page permits use and requests acknowledgment. No permission for the separate OpenAI paper artwork is inferred; its panels remain linked only.",
+    "verification": "2083 pages built; 30 focused and 320 built-output tests passed; zero broken internal links. Both standalone GPT-1 examples and the original Story Cloze serialization checks ran on CPU. Chrome at 1280 and 375 CSS px in both languages confirmed the exact image hash, column fit, zoom, source caption and a working link to the same-locale GPT-2 example. Visually inspected the inline diagram at desktop and mobile widths."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md",
+      "changes": [
+        {
+          "old": "type: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-10\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"",
+          "new": "type: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-13\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\""
+        },
+        {
+          "old": "```\n\nСостояние $h_8$ использует обе фразы. Голова формы $[768,3]$ даёт три\nлогита. Замена посылки и гипотезы местами вообще говоря меняет ответ:\nиз «A cat sleeps» следует существование отдыхающего животного,\nно обратное утверждение не устанавливает, что животное является кошкой.",
+          "new": "```\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt1-pretraining-2026-11-10/cs224n-decoder-classifier.png|Стрелки от всех входных позиций сходятся к последнему состоянию h_T. Только это состояние поступает в линейный классификатор.]]\n\n*Christopher Manning, Stanford CS224N, [Lecture 9: Pretraining, слайд 41](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/slides/cs224n-2023-lecture9-pretraining.pdf#page=41).\nПравая схема с оригинальными обозначениями; [условия использования материалов курса](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/#logistics).*\n\nНа схеме вход $w_T$ — это наш `Extract`, а $h_T$ — состояние $h_8$\nнад ним. К нему идут стрелки от всех входных позиций. Если перенести\n`Extract` в начало, причинная маска закроет обе фразы для этой\nпозиции. На [слайде 44](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/slides/cs224n-2023-lecture9-pretraining.pdf#page=44)\nтот же формат показан на другой паре предложений.\n\nСмайлики на схеме обозначают два класса тональности. Для нашей задачи\nголова формы $[768,3]$ даёт три логита: следование, нейтральность и\nпротиворечие. Это оценки классов, а не токенов `entailment`, `neutral`\nи `contradiction` в словаре. Замена посылки и гипотезы местами может менять ответ:\nиз «A cat sleeps» следует существование отдыхающего животного,\nно обратное утверждение не устанавливает, что животное является кошкой."
+        },
+        {
+          "old": "не меняя эту видимость внутри блоков.\n\nДля новой задачи нужны разметка, выходная голова и обучение параметров.\nОбщая инициализация не означает, что одна и та же дообученная сеть\nбез изменений выполняет все двенадцать задач. Наконец, выбор правдоподобного",
+          "new": "не меняя эту видимость внутри блоков.\n\nВ основном протоколе GPT-1 для новой задачи нужны разметка, выходная\nголова и обучение параметров.\nОбщая инициализация не означает, что одна и та же дообученная сеть\nбез изменений выполняет все двенадцать задач. Наконец, выбор правдоподобного"
+        },
+        {
+          "old": "## Наследие и переход к GPT-2\n\nGPT-1 объединяет причинное языковое предобучение и перенос всех параметров\nна разные размеченные задачи. Форматы входа позволяют сохранить один\nTransformer, а головы определяют, какой ответ нужен: метка, оценка\nблизости или индекс кандидата.\n\nВ [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]]\nавторы увеличат модель и корпус и будут исследовать выполнение задач\nчерез текстовый префикс без отдельного supervised fine-tuning. Такой\nинтерфейс нужно отличать от описанных здесь обучаемых голов GPT-1.\n\n## Источники и дальнейшее чтение",
+          "new": "## Наследие и переход к GPT-2\n\nВ нашем примере GPT-1 выбирает класс из трёх логитов над `Extract`.\nВ [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-relation-prefix|том же примере с GPT-2]]\nпоследняя позиция запроса — двоеточие в `Relation:`. Словарная\nголова оценивает следующий токен. Если метка занимает два токена,\nодного выхода на двоеточии не хватит: вероятность второго токена\nзависит от первого. Такой способ выбора уже встречался в zero-shot\nопытах GPT-1; в статье о GPT-2 авторы проверяют его и другие способы\nзадать задачу через текст без отдельного дообучения.\n\n## Источники и дальнейшее чтение"
+        }
+      ],
+      "before_sha256": "786087b3f9493f3cbfe1a6ecf6c70948b0d24df054ddb34c0a50ec75c6af8663",
+      "after_sha256": "480d3ccf43e3c543f477a0adea2a298d4c6bf80dc89dfb39eb42e5ab86ca4e16"
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md",
+      "changes": [
+        {
+          "old": "locale: en\ntranslation_status: current\ncanonical_revision: \"786087b3f9493f3cbfe1a6ecf6c70948b0d24df054ddb34c0a50ec75c6af8663\"\ntranslation_reviewed: \"2026-11-10\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\"\nlast_updated: 2026-11-10\nprimary_sources:\n  - https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf",
+          "new": "locale: en\ntranslation_status: current\ncanonical_revision: \"480d3ccf43e3c543f477a0adea2a298d4c6bf80dc89dfb39eb42e5ab86ca4e16\"\ntranslation_reviewed: \"2026-11-13\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\"\nlast_updated: 2026-11-13\nprimary_sources:\n  - https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf"
+        },
+        {
+          "old": "```\n\nState $h_8$ uses both sentences. A $[768,3]$ head produces three logits.\nSwapping premise and hypothesis can change the correct answer:\n“A cat sleeps” entails a resting animal, but the reverse does not",
+          "new": "```\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt1-pretraining-2026-11-10/cs224n-decoder-classifier.png|Arrows from every input position meet at the final state h_T. Only that state goes into the linear classifier.]]\n\n*Christopher Manning, Stanford CS224N, [Lecture 9: Pretraining, slide 41](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/slides/cs224n-2023-lecture9-pretraining.pdf#page=41).\nRight-hand diagram with original labels; [course resource reuse notice](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/#logistics).*\n\nIn the diagram, input $w_T$ is our `Extract` token and $h_T$ is\nthe state $h_8$ above it. Arrows reach it from every input position.\nMove `Extract` to the start and the causal mask would hide both\nsentences from that position. [Slide 44](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/slides/cs224n-2023-lecture9-pretraining.pdf#page=44)\nshows this format with a different pair of sentences.\n\nThe faces on the slide represent two sentiment classes. For our task,\na $[768,3]$ head produces three logits: entailment, neutral, and\ncontradiction. These are class scores, not scores for the words\n`entailment`, `neutral`, and `contradiction` in the vocabulary.\nSwapping premise and hypothesis can change the correct answer:\n“A cat sleeps” entails a resting animal, but the reverse does not"
+        },
+        {
+          "old": "inside blocks.\n\nA new task requires labels, an output head, and parameter training.\nA shared initialization does not mean that one fine-tuned network\nperforms all twelve tasks unchanged. Finally, selecting a plausible",
+          "new": "inside blocks.\n\nIn GPT-1's main protocol, a new task requires labels, an output head,\nand parameter training.\nA shared initialization does not mean that one fine-tuned network\nperforms all twelve tasks unchanged. Finally, selecting a plausible"
+        },
+        {
+          "old": "## Legacy and the transition to GPT-2\n\nGPT-1 combines causal language pre-training with transfer of all parameters\nto different labeled tasks. Input formats retain one Transformer, while\nheads specify the required answer: a label, similarity score, or candidate index.\n\nIn [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]],\nthe authors enlarge model and corpus and investigate task execution\nthrough a text prefix without separate supervised fine-tuning.\nThat interface differs from GPT-1's trained heads described here.\n\n## Sources and further reading",
+          "new": "## Legacy and the transition to GPT-2\n\nIn our example, GPT-1 chooses a class from three logits above `Extract`.\nIn [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-relation-prefix|the same example with GPT-2]],\nthe final position is the colon in `Relation:`. The vocabulary head\nscores the next token. If a label takes two tokens, the output at the\ncolon is not enough: the second token's probability depends on the\nfirst. GPT-1 already used this kind of scoring in its zero-shot tests.\nThe GPT-2 paper studies this and other ways to express a task in text\nwithout separate fine-tuning.\n\n## Sources and further reading"
+        }
+      ],
+      "before_sha256": "f951490cca20c77dc67a9de619807963166fe254062536eae6afab230aeb61ff",
+      "after_sha256": "c7887ed525d6a6f48f6b6ee6d594f031263bc99f5ca20bb626e787db054edaab"
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "changes": [
+        {
+          "old": "    used_in:\n      - \"00 Учебник/05 Attention и Transformer/04 Позиционная информация.md\"\n  - id: curated-gpt1-bert-gpt-elmo-figure3-d837358953dc\n    asset: 00 Учебник/Assets/Figures/curated/gpt1-pretraining-2026-11-10/bert-gpt-elmo-figure3.png",
+          "new": "    used_in:\n      - \"00 Учебник/05 Attention и Transformer/04 Позиционная информация.md\"\n  - id: curated-gpt1-cs224n-decoder-classifier-c68a1e607ec6\n    asset: 00 Учебник/Assets/Figures/curated/gpt1-pretraining-2026-11-10/cs224n-decoder-classifier.png\n    author: Christopher Manning, Stanford CS224N\n    title: \"Lecture 9: Pretraining, slide 41, decoder classification head\"\n    source_url: https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/slides/cs224n-2023-lecture9-pretraining.pdf#page=41\n    source_image_url: https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/slides/cs224n-2023-lecture9-pretraining.pdf#page=41\n    source_asset: 05 Источники/Originals/t5-2026-10-22/cs224n-2023-pretraining.pdf\n    source_asset_sha256: e29d1700e74468e811000a2ae2d8aadc63b1b0638d553dbc08102d0e3ff0e771\n    source_page: 41\n    render_dpi: 240\n    crop_box_px: [1835, 399, 2910, 1319]\n    dimensions_px: [1075, 920]\n    bytes: 40308\n    sha256: c68a1e607ec6d776d8070a1025ed768c60c5cfeeb3b71ace3d230a9a626a196f\n    license: Stanford CS224N course resource reuse notice\n    license_url: https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/#logistics\n    license_evidence_url: https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/#logistics\n    derivation: pdf-page-render-crop\n    modifications: Original right-hand diagram with all arrows and labels; surrounding slide text and footer omitted. No redraw, translation, or rescaling.\n    metadata_status: verified\n    rights_status: source-permission-verified\n    provenance_confirmation: cs224n-2023-course-permission\n    last_verified: 2026-11-13\n    used_in:\n      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\n      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md\n  - id: curated-gpt1-bert-gpt-elmo-figure3-d837358953dc\n    asset: 00 Учебник/Assets/Figures/curated/gpt1-pretraining-2026-11-10/bert-gpt-elmo-figure3.png"
+        }
+      ],
+      "before_sha256": "865a3a45dcafb51fd9293193dc8c4c4d4feb88cd7d01c52efc9353732dcae140",
+      "after_sha256": "032be9e417f6d0db37a70830f275023ce4cd08d572a952a54271f25deac40551"
+    }
+  ]
+}

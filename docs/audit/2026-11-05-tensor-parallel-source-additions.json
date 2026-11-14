@@ -1,0 +1,307 @@
+{
+  "schema_version": 1,
+  "kind": "tensor-parallel-source-additions",
+  "review_date": "2026-11-05",
+  "files": [
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md",
+      "before_sha256": "19a681a8a334905e3c2b65b66757b4dcff58086e7c2e4c48a3717882767da30a",
+      "after_sha256": "bb16999906c89f7be4fa4e6433078dd7a36fd2d880edbfa66fcb95116b6b0fe0",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-23\nlast_verified: 2026-10-23\n",
+          "new": "last_updated: 2026-11-05\nlast_verified: 2026-11-05\nsource_language: mixed\nreference_terms:\n  - anchor: tp-matrix-cuts\n    label: \"Разрез по столбцам и по строкам: конкатенация или сумма\"\n    label_en: \"Column and row splits: concatenation versus summation\"\n  - anchor: tp-paired-projections\n    label: \"Парные проекции MLP и положение нелинейности\"\n    label_en: \"Paired MLP projections and nonlinearity placement\"\n  - anchor: tp-backward\n    label: \"Backward TP: локальные веса и сумма dX\"\n    label_en: \"TP backward: local weight shards and summed input gradients\"\n  - anchor: tp-swiglu\n    label: \"SwiGLU: согласованные разрезы gate, up и down\"\n    label_en: \"SwiGLU: aligned gate, up and down partitions\"\n  - anchor: tp-attention-heads\n    label: \"Целые головы внимания и выходная проекция\"\n    label_en: \"Whole attention heads and the output projection\"\n  - anchor: tp-gqa-replication\n    label: \"GQA/MQA: репликация KV-голов и их градиенты\"\n    label_en: \"GQA/MQA: KV-head replication and gradient ownership\"\n  - anchor: tp-vocabulary\n    label: \"Vocabulary-parallel embedding и связанные веса\"\n    label_en: \"Vocabulary-parallel embeddings and tied weights\"\n  - anchor: tp-vocab-ce\n    label: \"Cross-entropy по разделённому словарю без all-gather logits\"\n    label_en: \"Vocabulary-parallel cross-entropy without gathering logits\"\n  - anchor: tp-loss-parallel-contract\n    label: \"loss_parallel: target, reduction и padding\"\n    label_en: \"loss_parallel: targets, reductions and padding\"\n  - anchor: sp-full-feature-rows\n    label: \"SP: полная ширина токена при разделённых строках\"\n    label_en: \"SP: full token width with partitioned rows\"\n  - anchor: sp-boundaries\n    label: \"Границы SP/TP: all-gather и reduce-scatter\"\n    label_en: \"SP/TP boundaries: all-gather and reduce-scatter\"\n  - anchor: sp-backward-regather\n    label: \"Обратные операции и повторная сборка входа для dW\"\n    label_en: \"Adjoint collectives and input regather for weight gradients\"\n  - anchor: sp-norm-gradients\n    label: \"Градиенты нормализации и согласованный dropout при SP\"\n    label_en: \"Normalization gradients and consistent dropout under SP\"\n  - anchor: sp-activation-memory\n    label: \"Локальные активации и временный полный all-gather\"\n    label_en: \"Local activations and transient full all-gathers\"\n  - anchor: tp-activation-accounting\n    label: \"Сохранения 34sbh и квадратичная часть внимания\"\n    label_en: \"The 34sbh activation model and quadratic attention storage\"\n  - anchor: tp-sp-memory-example\n    label: \"TP, SP и selective recomputation: 3648/736/456/136 MiB\"\n    label_en: \"TP, SP and selective recomputation: 3648/736/456/136 MiB\"\n  - anchor: tp-sp-traffic\n    label: \"Байты обменов TP/SP и дополнительный regather\"\n    label_en: \"TP/SP communication bytes and the extra regather\"\n  - anchor: tp-scaling-limit\n    label: \"Цена TP: времена SwiGLU и границы 25/49\"\n    label_en: \"TP costs: SwiGLU timings and the 25/49 bounds\"\n  - anchor: cp-ulysses\n    label: \"Ulysses: перестановка между позициями и головами\"\n    label_en: \"Ulysses: sequence-to-head redistribution\"\n  - anchor: cp-ulysses-traffic\n    label: \"Объём all-to-all Ulysses и ограничения GQA\"\n    label_en: \"Ulysses all-to-all volume and GQA constraints\"\n  - anchor: cp-ring\n    label: \"Ring Attention: локальные Q и циркуляция K/V\"\n    label_en: \"Ring Attention: local queries and circulating keys/values\"\n  - anchor: cp-online-softmax\n    label: \"Общая нормировка softmax по KV-блокам\"\n    label_en: \"A shared softmax normalization across KV blocks\"\n  - anchor: cp-global-mask\n    label: \"Глобальная причинная маска и zigzag-разбиение\"\n    label_en: \"Global causal masks and zigzag partitioning\"\n  - anchor: cp-ring-overlap\n    label: \"Ring: размер блока и условие перекрытия обмена\"\n    label_en: \"Ring block size and the communication-overlap bound\"\n  - anchor: cp-byte-comparison\n    label: \"Ulysses и Ring: пример 112 против 448 MiB\"\n    label_en: \"Ulysses versus Ring: a 112 versus 448 MiB example\"\n  - anchor: cp-parameter-gradients\n    label: \"CP: сумма градиентов параметров и нормировка loss\"\n    label_en: \"CP parameter-gradient sums and loss normalization\"\n  - anchor: tp-sp-cp-mesh\n    label: \"Совместные оси TP, SP, CP и ограничения голов\"\n    label_en: \"Combining TP, SP and CP with head-count constraints\"\n  - anchor: tp-fsdp-mesh\n    label: \"FSDP×TP: собрать свою часть, а не всю матрицу\"\n    label_en: \"FSDP×TP: gathering the TP-local part, not the full matrix\"\n  - anchor: tp-validation\n    label: \"Выбор размещения и проверка численной эквивалентности\"\n    label_en: \"Layout selection and numerical-equivalence checks\"\n  - anchor: tp-pytorch-contract\n    label: \"ColwiseParallel, RowwiseParallel и SequenceParallel\"\n    label_en: \"ColwiseParallel, RowwiseParallel and SequenceParallel\"\n  - anchor: tp-edls-distributed-mlp\n    label: \"EDLS Llama MLP: реальные редукции и ограничения backward\"\n    label_en: \"EDLS Llama MLP: real reductions and backward limitations\"\n"
+        },
+        {
+          "old": "### Два разреза одной матрицы\n",
+          "new": "<a id=\"tp-matrix-cuts\"></a>\n\n### Два разреза одной матрицы\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/tensor-parallel-split.svg]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/tensor-parallel-split.svg|Разрез весов по выходным признакам и по суммируемым входным признакам]]\n"
+        },
+        {
+          "old": "### Почему первую проекцию делят по столбцам, а вторую — по строкам\n",
+          "new": "<a id=\"tp-paired-projections\"></a>\n\n### Почему первую проекцию делят по столбцам, а вторую — по строкам\n"
+        },
+        {
+          "old": "### Обратный проход: что суммируется, а что остаётся локальным\n",
+          "new": "<a id=\"tp-backward\"></a>\n\n### Обратный проход: что суммируется, а что остаётся локальным\n"
+        },
+        {
+          "old": "<a id=\"shape-ledger-для-swiglu\"></a>\n",
+          "new": "<a id=\"tp-swiglu\"></a>\n\n<a id=\"shape-ledger-для-swiglu\"></a>\n"
+        },
+        {
+          "old": "<a id=\"attention-tp-heads-qkv-и-output\"></a>\n",
+          "new": "<a id=\"tp-attention-heads\"></a>\n\n<a id=\"attention-tp-heads-qkv-и-output\"></a>\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-review-2026-10/hf-attention-tp.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-review-2026-10/hf-attention-tp.png|Разделение целых голов внимания и суммирование выходных проекций]]\n"
+        },
+        {
+          "old": "GQA меняет эту картину: несколько query-голов пользуются одной парой\n",
+          "new": "<a id=\"tp-gqa-replication\"></a>\n\nGQA меняет эту картину: несколько query-голов пользуются одной парой\n"
+        },
+        {
+          "old": "## Разделение словаря: embedding и cross-entropy\n",
+          "new": "<a id=\"tp-vocabulary\"></a>\n\n## Разделение словаря: embedding и cross-entropy\n"
+        },
+        {
+          "old": "В выходной проекции каждый процесс вычисляет только свои логиты\n",
+          "new": "<a id=\"tp-vocab-ce\"></a>\n\nВ выходной проекции каждый процесс вычисляет только свои логиты\n"
+        },
+        {
+          "old": "Код имитирует редукции массивами одного процесса. В PyTorch аналогичный\n",
+          "new": "<a id=\"tp-loss-parallel-contract\"></a>\n\nКод имитирует редукции массивами одного процесса. В PyTorch аналогичный\n"
+        },
+        {
+          "old": "### Какие активации всё ещё повторяются\n",
+          "new": "<a id=\"sp-full-feature-rows\"></a>\n\n### Какие активации всё ещё повторяются\n"
+        },
+        {
+          "old": "### Границы между SP и TP\n",
+          "new": "<a id=\"sp-boundaries\"></a>\n\n### Границы между SP и TP\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-review-2026-10/hf-tp-sp-regions.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-review-2026-10/hf-tp-sp-regions.png|Реплицированные области TP и разделённые по позициям области TP со SP]]\n"
+        },
+        {
+          "old": "В обратном проходе reduce-scatter на входной границе одновременно складывает\n",
+          "new": "<a id=\"sp-backward-regather\"></a>\n\nВ обратном проходе reduce-scatter на входной границе одновременно складывает\n"
+        },
+        {
+          "old": "Параметры нормализации $\\gamma$ и $\\beta$ при SP обычно реплицированы.\n",
+          "new": "<a id=\"sp-norm-gradients\"></a>\n\nПараметры нормализации $\\gamma$ и $\\beta$ при SP обычно реплицированы.\n"
+        },
+        {
+          "old": "### Память и объём обменов\n",
+          "new": "<a id=\"sp-activation-memory\"></a>\n\n### Память и объём обменов\n"
+        },
+        {
+          "old": "MLP хранит вход первой проекции ($2sbh$), её расширенный выход для\n",
+          "new": "<a id=\"tp-activation-accounting\"></a>\n\nMLP хранит вход первой проекции ($2sbh$), её расширенный выход для\n"
+        },
+        {
+          "old": "Для одного слоя из этой модели возьмём $s=2048$, $b=2$, $h=8192$,\n",
+          "new": "<a id=\"tp-sp-memory-example\"></a>\n\nДля одного слоя из этой модели возьмём $s=2048$, $b=2$, $h=8192$,\n"
+        },
+        {
+          "old": "Пусть полный передаваемый тензор имеет размер $N$ байтов. Для идеального\n",
+          "new": "<a id=\"tp-sp-traffic\"></a>\n\nПусть полный передаваемый тензор имеет размер $N$ байтов. Для идеального\n"
+        },
+        {
+          "old": "### Когда увеличение TP перестаёт сокращать время\n",
+          "new": "<a id=\"tp-scaling-limit\"></a>\n\n### Когда увеличение TP перестаёт сокращать время\n"
+        },
+        {
+          "old": "## Context parallelism: Ulysses\n",
+          "new": "<a id=\"cp-ulysses\"></a>\n\n## Context parallelism: Ulysses\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-2026-10-23/ulysses-design.png]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-2026-10-23/ulysses-design.png|Два all-to-all меняют размещение последовательности и голов в Ulysses]]\n"
+        },
+        {
+          "old": "При равномерном MHA каждый процесс до первого обмена имеет\n",
+          "new": "<a id=\"cp-ulysses-traffic\"></a>\n\nПри равномерном MHA каждый процесс до первого обмена имеет\n"
+        },
+        {
+          "old": "## Context parallelism: Ring Attention\n",
+          "new": "<a id=\"cp-ring\"></a>\n\n## Context parallelism: Ring Attention\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-2026-10-23/hf-ring-attention.gif]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-2026-10-23/hf-ring-attention.gif|Неподвижные локальные запросы и три пересылки блоков K/V по четырём GPU]]\n"
+        },
+        {
+          "old": "Как в FlashAttention, для каждой строки запроса достаточно поддерживать\n",
+          "new": "<a id=\"cp-online-softmax\"></a>\n\nКак в FlashAttention, для каждой строки запроса достаточно поддерживать\n"
+        },
+        {
+          "old": "Причинная маска проверяет **глобальные** позиции: ключ с номером $j$\n",
+          "new": "<a id=\"cp-global-mask\"></a>\n\nПричинная маска проверяет **глобальные** позиции: ключ с номером $j$\n"
+        },
+        {
+          "old": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-review-2026-10/hf-causal-zigzag.svg]]\n",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tensor-sequence-review-2026-10/hf-causal-zigzag.svg|Zigzag-распределение причинной маски с 34 разрешёнными парами на процесс]]\n"
+        },
+        {
+          "old": "В модели равных MHA-блоков это условие можно оценить численно.\n",
+          "new": "<a id=\"cp-ring-overlap\"></a>\n\nВ модели равных MHA-блоков это условие можно оценить численно.\n"
+        },
+        {
+          "old": "Для численного сравнения возьмём обычный MHA с $B_\\mu=1$, $S=32768$,\n",
+          "new": "<a id=\"cp-byte-comparison\"></a>\n\nДля численного сравнения возьмём обычный MHA с $B_\\mu=1$, $S=32768$,\n"
+        },
+        {
+          "old": "### Градиенты параметров при CP\n",
+          "new": "<a id=\"cp-parameter-gradients\"></a>\n\n### Градиенты параметров при CP\n"
+        },
+        {
+          "old": "## Полная конфигурация\n",
+          "new": "<a id=\"tp-sp-cp-mesh\"></a>\n\n## Полная конфигурация\n"
+        },
+        {
+          "old": "В FSDP×TP у каждой TP-координаты есть своя группа FSDP: она собирает\n",
+          "new": "<a id=\"tp-fsdp-mesh\"></a>\n\nВ FSDP×TP у каждой TP-координаты есть своя группа FSDP: она собирает\n"
+        },
+        {
+          "old": "<a id=\"trade-offs-и-проверка\"></a>\n",
+          "new": "<a id=\"tp-validation\"></a>\n\n<a id=\"trade-offs-и-проверка\"></a>\n"
+        },
+        {
+          "old": "В PyTorch эти размещения выражаются через `ColwiseParallel`,\n",
+          "new": "<a id=\"tp-pytorch-contract\"></a>\n\nВ PyTorch эти размещения выражаются через `ColwiseParallel`,\n"
+        },
+        {
+          "old": "## Практика и первоисточники\n",
+          "new": "<a id=\"tp-edls-distributed-mlp\"></a>\n\n## От математики к распределённому MLP\n\nВ практике [EDLS Week 4, Part 2](https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_large_models/practice_part2.ipynb)\nразбирается MLP Llama с теми же тремя проекциями. Ниже сохранены исходные\nклассы практикума: локальный SwiGLU, граница с двумя редукциями\nи модуль-обёртка. Код и английские комментарии не изменены.\nАвторы Efficient Deep Learning Systems; [полный текст MIT License](/licenses/edls-e632aa89-MIT.txt).\n\n<!-- BEGIN SOURCE: EDLS tensor-parallel Llama MLP -->\n<!-- example:tp-edls-mlp -->\n\n```python\nimport torch\nimport torch.nn as nn\nimport torch.nn.functional as F\nimport torch.distributed as dist\n\n\nclass LlamaMLP(nn.Module):  #  based on llama 3.1 8B configuration\n    def __init__(self, hidden_size: int = 4096, intermediate_size: int = 14336):\n        super().__init__()\n        self.gate_proj = nn.Linear(hidden_size, intermediate_size, bias=False)\n        self.up_proj = nn.Linear(hidden_size, intermediate_size, bias=False)\n        self.down_proj = nn.Linear(intermediate_size, hidden_size, bias=False)\n\n    def forward(self, input):\n        return self.down_proj(F.silu(self.gate_proj(input)) * self.up_proj(input))\n\n\nclass ComputeWithAllReduce(torch.autograd.Function):\n    @staticmethod  # fun fact: torch.distributed.nn has differentiable all_reduce!\n    def forward(ctx, tp_shard: nn.Module, input: torch.Tensor):\n        input = input.detach().requires_grad_(input.requires_grad)\n        ctx.save_for_backward(input)\n        ctx._tp_shard = tp_shard\n        output = tp_shard(input)\n        dist.all_reduce(output)\n        return output\n    @staticmethod\n    def backward(ctx, grad_output: torch.Tensor):\n        with torch.enable_grad():\n          output = ctx._tp_shard(ctx.saved_tensors[0])\n          output.backward(grad_output)\n        dist.all_reduce(ctx.saved_tensors[0].grad)\n        return None, ctx.saved_tensors[0].grad\n\n\nclass AllReduceModule(nn.Sequential):\n    def forward(self, input: torch.Tensor):\n        return ComputeWithAllReduce.apply(super().forward, input)\n```\n\n<!-- END SOURCE: EDLS tensor-parallel Llama MLP -->\n\nРаспределяется промежуточная ширина `intermediate_size`. Например,\nдля входа `[3,4]`, полной ширины 12 и двух процессов каждый экземпляр\n`LlamaMLP(hidden_size=4, intermediate_size=6)` хранит веса\n`gate_proj.weight:[6,4]`, `up_proj.weight:[6,4]`\nи `down_proj.weight:[4,6]`. Первые две матрицы получают соответствующие\nстроки полных весов `nn.Linear`, последняя — соответствующие столбцы.\nЕё выход `[3,4]` содержит вклад шести промежуточных признаков.\n`dist.all_reduce(output)` складывает два таких вклада и возвращает\nполный выход MLP на обоих процессах. Здесь используется группа процессов\nпо умолчанию; при нескольких осях параллелизма граница должна работать\nименно с TP-группой.\n\nВход в `ComputeWithAllReduce` отделяется от внешнего графа через\n`detach()`, но не копируется в новое хранилище. Снаружи связь восстанавливает\nсобственный `backward` класса. Операции внутри `forward` пользовательской\n`autograd.Function` не образуют обычный граф для автоматического backward:\nшаблон сохраняет вход и повторно вызывает локальный MLP внутри\n`torch.enable_grad()`. Поэтому локальный MLP исполняется дважды.\nЭто конкретная форма checkpointing из предыдущей главы, а не свойство,\nнеобходимое самому тензорному параллелизму.\n\nНа обоих процессах `grad_output` — одна и та же производная по полному\nвыходу. Повторный локальный проход даёт градиенты своих трёх матриц\nи локальный вклад по входу. Вызов `output.backward(grad_output)` записывает\nградиенты параметров в их `.grad`; последующая редукция складывает только\nвклады по входу. Возвращаемый `None` относится к аргументу\n`tp_shard`, который не является тензором. Уже одинаковый\n`grad_output` повторно не суммируется, а разные части весов не смешиваются.\n\nУ этой реализации есть ограничения, которые видны из её графа.\nПараметры локального MLP переданы через Python-объект, а не как\nтензорные аргументы `Function.apply`. Если вход имеет\n`requires_grad=False`, выход этой границы тоже не требует градиента,\nдаже когда внутренние веса обучаемы. Обычный `nn.Linear` с тем же входом\nпродолжал бы обучать веса. В исходном примере перед MLP стоит обучаемый\nRMSNorm, поэтому его выход требует градиента. Заморозка нормализации\nи предшествующих слоёв меняет это условие. Применять шаблон к такому\nслучаю без изменения границы нельзя.\n\nПри повторном вычислении также нужно восстановить тот же dropout\nи другие случайные операции. Этот код не сохраняет состояние RNG.\nЕсли добавить dropout внутрь обёртки, backward может использовать другую\nмаску и вычислить производную не того forward, который дал выход.\nПобочные изменения состояния внутри локального модуля тоже повторятся.\nОригинальный `LlamaMLP` содержит детерминированные линейные операции\nи SiLU; отсутствие этих проблем в нём не делает обёртку универсальной.\n\nRMSNorm перед обёрткой в обычном TP получает одинаковые входы и уже\nпросуммированные производные по ним. При одинаковых параметрах его\nградиент полный и одинаковый на обоих процессах. Ещё одна TP-сумма\nумножила бы его на два. Это отличается от SP, где процессы нормируют\nразные строки и действительно должны сложить разные части градиента\nпараметров нормализации. При независимой оси DP остаётся отдельная\nсинхронизация между репликами данных.\n\nДля проверки этих свойств не требуется загружать Llama или выделять\nматрицы исходной конфигурации 8B. Можно оставить те же классы, уменьшить\nразмерности и сверить с полным модулем выход, производную по входу\nи градиенты всех трёх матриц и RMSNorm. Проверка должна также показать,\nчто замороженный вход и новый dropout нарушают предпосылки шаблона.\nЭто проверка учебной реализации; для библиотечного размещения параметров\nиспользуются описанные выше стили PyTorch, с собственным контрактом\nраспределённого autograd.\n\n## Практика и первоисточники\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "0120ad90a721f47da62b901a77878efdf0d5ec2564d04c522a726fc2e1830ddd",
+      "after_sha256": "1a8d12ea33980f0d42911b993e8707a085954c92983e17b04e2a47fa7c854970",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism|Tensor, sequence и context parallelism]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism|Tensor, sequence и context parallelism]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-matrix-cuts|Разрез по столбцам и по строкам: конкатенация или сумма]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-paired-projections|Парные проекции MLP и положение нелинейности]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-backward|Backward TP: локальные веса и сумма dX]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-swiglu|SwiGLU: согласованные разрезы gate, up и down]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-attention-heads|Целые головы внимания и выходная проекция]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-gqa-replication|GQA/MQA: репликация KV-голов и их градиенты]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-vocabulary|Vocabulary-parallel embedding и связанные веса]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-vocab-ce|Cross-entropy по разделённому словарю без all-gather logits]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-loss-parallel-contract|loss_parallel: target, reduction и padding]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#sp-full-feature-rows|SP: полная ширина токена при разделённых строках]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#sp-boundaries|Границы SP/TP: all-gather и reduce-scatter]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#sp-backward-regather|Обратные операции и повторная сборка входа для dW]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#sp-norm-gradients|Градиенты нормализации и согласованный dropout при SP]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#sp-activation-memory|Локальные активации и временный полный all-gather]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-activation-accounting|Сохранения 34sbh и квадратичная часть внимания]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-sp-memory-example|TP, SP и selective recomputation: 3648/736/456/136 MiB]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-sp-traffic|Байты обменов TP/SP и дополнительный regather]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-scaling-limit|Цена TP: времена SwiGLU и границы 25/49]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#cp-ulysses|Ulysses: перестановка между позициями и головами]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#cp-ulysses-traffic|Объём all-to-all Ulysses и ограничения GQA]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#cp-ring|Ring Attention: локальные Q и циркуляция K/V]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#cp-online-softmax|Общая нормировка softmax по KV-блокам]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#cp-global-mask|Глобальная причинная маска и zigzag-разбиение]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#cp-ring-overlap|Ring: размер блока и условие перекрытия обмена]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#cp-byte-comparison|Ulysses и Ring: пример 112 против 448 MiB]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#cp-parameter-gradients|CP: сумма градиентов параметров и нормировка loss]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-sp-cp-mesh|Совместные оси TP, SP, CP и ограничения голов]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-fsdp-mesh|FSDP×TP: собрать свою часть, а не всю матрицу]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-validation|Выбор размещения и проверка численной эквивалентности]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-pytorch-contract|ColwiseParallel, RowwiseParallel и SequenceParallel]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-edls-distributed-mlp|EDLS Llama MLP: реальные редукции и ограничения backward]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "80c5b6135747621cc7d41f4fd4ab7af3333fa73fe7e51f7594b6dc5fc15fc7f3",
+      "after_sha256": "74040429a98e564e204333d15323fc254c2fd9cc8e6f71c1cbadb7f3bac5b541",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism|Tensor and sequence parallelism]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism|Tensor and sequence parallelism]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-matrix-cuts|Column and row splits: concatenation versus summation]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-paired-projections|Paired MLP projections and nonlinearity placement]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-backward|TP backward: local weight shards and summed input gradients]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-swiglu|SwiGLU: aligned gate, up and down partitions]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-attention-heads|Whole attention heads and the output projection]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-gqa-replication|GQA/MQA: KV-head replication and gradient ownership]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-vocabulary|Vocabulary-parallel embeddings and tied weights]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-vocab-ce|Vocabulary-parallel cross-entropy without gathering logits]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-loss-parallel-contract|loss_parallel: targets, reductions and padding]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#sp-full-feature-rows|SP: full token width with partitioned rows]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#sp-boundaries|SP/TP boundaries: all-gather and reduce-scatter]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#sp-backward-regather|Adjoint collectives and input regather for weight gradients]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#sp-norm-gradients|Normalization gradients and consistent dropout under SP]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#sp-activation-memory|Local activations and transient full all-gathers]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-activation-accounting|The 34sbh activation model and quadratic attention storage]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-sp-memory-example|TP, SP and selective recomputation: 3648/736/456/136 MiB]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-sp-traffic|TP/SP communication bytes and the extra regather]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-scaling-limit|TP costs: SwiGLU timings and the 25/49 bounds]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#cp-ulysses|Ulysses: sequence-to-head redistribution]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#cp-ulysses-traffic|Ulysses all-to-all volume and GQA constraints]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#cp-ring|Ring Attention: local queries and circulating keys/values]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#cp-online-softmax|A shared softmax normalization across KV blocks]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#cp-global-mask|Global causal masks and zigzag partitioning]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#cp-ring-overlap|Ring block size and the communication-overlap bound]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#cp-byte-comparison|Ulysses versus Ring: a 112 versus 448 MiB example]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#cp-parameter-gradients|CP parameter-gradient sums and loss normalization]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-sp-cp-mesh|Combining TP, SP and CP with head-count constraints]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-fsdp-mesh|FSDP×TP: gathering the TP-local part, not the full matrix]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-validation|Layout selection and numerical-equivalence checks]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-pytorch-contract|ColwiseParallel, RowwiseParallel and SequenceParallel]]\n  - [[00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism#tp-edls-distributed-mlp|EDLS Llama MLP: real reductions and backward limitations]]\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "a43c66752dc637ff15af5ff587f12246470a6abfdd395f53e290dd5f645a5f13",
+      "after_sha256": "3a058e16e2d217b34cb5959a30a52457cdbd566ed589f971300c5d6f98454db4",
+      "changes": [
+        {
+          "old": "    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/tensor-parallel-split.svg\n",
+          "new": "    asset: 00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/tensor-parallel-split.svg\n    sha256: 9f055d06bd632baa79f9ec20a5d6e88fd36248673660412be4aa4b4164777999\n"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "status": "verified-local-delta",
+    "scope": "Complete1012-line baseline and1287-line final TP/SP/CP owner reads.31 subjects per locale,six descriptive figure aliases,exact original EDLS class code and a worked explanation of real forward/backward reductions,recomputation and boundary limits. Existing explanations,three numerical programs,23 display equations,six original figures and five source-unit IDs preserved. No translation,new scientific image,whole-course/full-book acceptance or release.",
+    "sourceComparison": {
+      "reused": "The whole2026-10-23 and2026-10-13 tensor/sequence audit documents were read. Current input19a681a8a334905e3c2b65b66757b4dcff58086e7c2e4c48a3717882767da30a exactly matches the previously compared1012-line owner. Its Megatron§3,CS336L8pp39–54/A2§8.4–8.5,Korthikanti§4–5,Ulysses§3,Ring§3/Algorithm1 and Playbook TP/SP/CP comparisons are reused only for unchanged material; exact inverse tests preserve it. Not a fresh complete reimport or acceptance of those courses.",
+      "fresh": "EDLS Part2 first complete MLP template/code/output/caveat section read from imported Markdown. Entire corresponding upstream notebook code cell freshly compared byte-for-byte at pinned e632aa89ca9e6638d52e1b686095e7442faffbb0; selected three-class block is unchanged. Current PyTorch2.14 TP main API,ColwiseParallel,RowwiseParallel and SequenceParallel contracts read; experimental/initialization/layout caveats retained.",
+      "sourceCaveat": "The original notebook's blanket note that replicated RMSNorm requires extra synchronization is not copied into the TP explanation. With identical ordinary-TP inputs and already-summed dX,the norm gradient is full and identical. Actual Gloo tests compare it with the dense reference; an additional TP SUM multiplies it by2. SP token-sharded and independent-DP cases remain separate.",
+      "read": "Final owner read in ordered ranges1–240,241–480,481–720,721–960,961–1200,1201–EOF; no later chapter edits.",
+      "style": "No-ai-slop skill and eval read fully. New explanation follows the source graph through shapes,forward,backward and observed counterexamples. Necessary terminology and original English code retained; no compression of the existing derivations."
+    },
+    "examples": {
+      "numpy": {
+        "exit": 0,
+        "version": "2.5.4",
+        "executedPrograms": 3,
+        "publishedPrograms": 4,
+        "log": "/var/tmp/bookvar-tp-numpy-20261105.log",
+        "scope": "All earlier14 groups retain paired-MLP/SwiGLU/SP/RMSNorm/GQA finite differences,Ulysses permutations,causal/noncausal Ring including empty blocks and large logits,vocabulary CE and embeddings,cost/bound/memory figures and FSDP×TP shape/gradient reconstruction."
+      },
+      "gloo": {
+        "exit": 0,
+        "torch": "2.14.1",
+        "ranks": 2,
+        "ordinaryConfigurations": 8,
+        "realReductionsPerConfiguration": 2,
+        "log": "/var/tmp/bookvar-tp-edls-20261105.log",
+        "scope": "Executes the actual fourth published Python block,exact three original EDLS classes. Compares outputs,input gradients,all three weight-shard gradients and full RMSNorm gradients with dense modules. Records two local MLP calls. Controls confirm that an extra TP norm-gradient SUM doubles it,a fully frozen tensor input disconnects the custom boundary,and recomputed dropout differentiates a different mask."
+      },
+      "limits": "Only small CPU modules;no pretrained-model download/full Llama fine-tuning,CUDA/NCCL,DTensor GPU execution,multi-process SP/CP,network overlap,peak-device-memory measurement or benchmark."
+    },
+    "visual": {
+      "evidence": "docs/audit/evidence/2026-11-05-tensor-parallel-reader",
+      "desktop": "Default1280x720,document1265/1265. All6 original figures loaded in native proportions and personally inspected in viewer with captions:Harvard row/column split,HF head TP,full TP/SP panels,Ulysses full Figure2,Ring GIF,and zigzag mask. Ring screenshots show unchanged local Q with different K/V indices. All23 display equations and4 tables617/617,zero KaTeX errors.",
+      "mobile": "375x812 override,document360/360,reader328px. All6 original images fit328px;all23 display equations and4 tables328/328,zero KaTeX errors. New EDLS introduction/original code read on-page;code uses contained horizontal scroll. Ulysses personally inspected at2.5x with horizontal pan270->366,readable dimensions/legend;no all-viewer-endpoint claim. Temporary viewport reset.",
+      "navigation": "Actual RU reference ->#tp-edls-distributed-mlp;actual EN reference ->#cp-ulysses,each target unique. EN explicitly reports no separate English edition while retaining original source-code language. Actual EN Next ->pipeline-parallelism with correct h1;Russian interface restored and PP left open.",
+      "recovery": "Stale cross-turn tab and fresh same-browser tab binding failed. Documented browser troubleshooting read;CUA session reset and same browser3/tab6 rebound. No unrelated browser-control mechanism or local-server restart."
+    },
+    "checks": {
+      "scoped": {
+        "files": 3,
+        "tests": 22,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-tp-scoped-final-20261105.log"
+      },
+      "html": {
+        "tests": 210,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-tp-output-20261105.log"
+      },
+      "build": {
+        "pages": 2009,
+        "pagefindFiles": 2013,
+        "seconds": 29.54,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-tp-build-20261105.log"
+      },
+      "links": {
+        "brokenInternal": 0,
+        "exit": 0,
+        "log": "/var/tmp/bookvar-tp-links-20261105.log"
+      },
+      "size": {
+        "bytes": 856594346,
+        "files": 5626,
+        "headroom": 143405654,
+        "limit": 1000000000,
+        "exit": 0
+      },
+      "topicIndex": {
+        "topics": 153,
+        "exit": 0
+      },
+      "scopedWhitespace": {
+        "exit": 0
+      },
+      "receipt": {
+        "exit": 0,
+        "hashPinnedWholeReads": 104,
+        "unreadOwners": 49,
+        "log": "/var/tmp/bookvar-tp-receipts-final-20261105.log",
+        "combinedWithSourceAndDdpTests": 16,
+        "receiptTests": 2
+      }
+    },
+    "remaining": [
+      "After registering this read,49 of153 canonical owners still unread in this route pass;read counts do not establish accepted-chapter counts.",
+      "Continue PP,ZeRO/FSDP,expert/hybrid parallelism,network/storage/checkpoints and fault tolerance.",
+      "Existing figure/rights gaps,thematic course completeness,public-checkout/Pages-base checks and authorized dev/Pages release remain open."
+    ],
+    "sourceClass": {
+      "source": "05 Источники/Courses/Efficient DL Systems/week04_large_models/practice_part2.ipynb.md",
+      "pinnedNotebook": "https://raw.githubusercontent.com/mryab/efficient-dl-systems/e632aa89ca9e6638d52e1b686095e7442faffbb0/week04_large_models/practice_part2.ipynb",
+      "notebookSha256": "f410e22675549b38a04a57b8de4466479d231a2f91464427f85a89eab5b1a6f3",
+      "classSha256": "92414271c13361505eaa4929140e5c452b05a986808c22676c600ea3b1e29cb8",
+      "originalLanguageAndCodeRetained": true,
+      "license": "MIT",
+      "licenseCopy": "site/public/licenses/edls-e632aa89-MIT.txt",
+      "upstreamCodeCellEqualsImportedMarkdown": true
+    },
+    "upstreamFigureByteCheck": {
+      "asset": "00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/tensor-parallel-split.svg",
+      "url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/tensor-parallel-split.svg",
+      "upstreamSha256": "9f055d06bd632baa79f9ec20a5d6e88fd36248673660412be4aa4b4164777999",
+      "localSha256": "9f055d06bd632baa79f9ec20a5d6e88fd36248673660412be4aa4b4164777999",
+      "byteIdentical": true,
+      "bytes": 9797
+    }
+  }
+}
