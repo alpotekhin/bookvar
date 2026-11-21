@@ -3908,6 +3908,13 @@ describe('static handbook output', () => {
     expect(html.match(/<pre/g)).toHaveLength(3);
     expect(html).not.toContain('katex-error');
     expect(html).toContain('id="ffn-vocabulary-projection"');
+    expect(html).toContain('id="вентильная-ffn-две-входные-проекции"');
+    expect(html).toContain('id="две-входные-проекции-swiglu"');
+    for(const id of ['ffn-swiglu-code','ffn-shard-code','ffn-backward-code']){
+      const listing=html.match(new RegExp('<details\\b[^>]*id="'+id+'"[^>]*>'));
+      expect(listing?.[0]).toBeDefined();
+      expect(listing?.[0]).not.toMatch(/\sopen(?:[\s=>])/);
+    }
     expect(html).toContain('https://arxiv.org/html/2203.14680v1#S1.F1');
     expect(html).toContain('https://arxiv.org/html/2506.23225v1#S1.F1');
     expect(html).toMatch(/<strong>Назад:<\/strong>[\s\S]{0,300}href="\/textbook\/modern-llm\/rope\/"/);
@@ -4000,7 +4007,9 @@ describe('static handbook output', () => {
     expect(html.match(/<pre/g)).toHaveLength(4);
     expect(html).not.toContain('katex-error');
     expect(html).not.toContain('/source-first-35-36/gqa-');
-    expect(html).toMatch(/К модулям:[\s\S]{0,300}href="\/textbook\/#/);
+    expect(html).toContain('id="gqa-shared-kv-worked-case"');
+    expect(html.indexOf('id="gqa-shared-kv-worked-case"')).toBeLessThan(html.indexOf('id="объём-kv-кэша"'));
+    expect(html).toMatch(/<strong>Назад:<\/strong>[\s\S]{0,300}href="\/textbook\/modern-llm\/transformer-shapes-resources\/"/);
     expect(html).toMatch(/<strong>Далее:<\/strong>[\s\S]{0,300}href="\/textbook\/modern-llm\/mla-kv-compression\/"/);
   });
   it('renders complete resource examples, original plots and uncropped optional course pages',async()=>{
@@ -4014,6 +4023,10 @@ describe('static handbook output', () => {
     expect(html.match(/<pre/g)).toHaveLength(7);
     expect(html).toContain('id="logits-to-next-token-loss"');
     expect(html).toContain('id="gpt2-sized-not-gpt2"');
+    expect(html).toContain('id="token-ids-through-one-block"');
+    expect(html.indexOf('id="token-ids-through-one-block"')).toBeLessThan(html.indexOf('id="logits-to-next-token-loss"'));
+    expect(html).toContain('id="transformer-assignment-pages"');
+    expect(html.match(/<details\b[^>]*\bid="transformer-[^"]*-code"/g)).toHaveLength(7);
     expect(html).not.toMatch(/<img[^>]+src="[^"]*\/compute-memory\.png"/);
     expect(html).not.toContain('katex-error');
     expect(html).not.toContain('/a1-sequence-');

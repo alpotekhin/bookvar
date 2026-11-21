@@ -27,6 +27,25 @@ torch.testing.assert_close(ns['before'],torch.tensor([4-2*prob,2+2*prob],dtype=t
 assert ns['after'].item()==3
 print('PASS shared-KV outputs and numerical mean-pooling counterexample')
 
+# Same four queries in all three cases. Swap only the two keys in the
+# second GQA group; the values remain in original token order.
+q4=q.repeat(1,2,1,1)
+k2=torch.cat((k,k.flip(2)),dim=1)
+v2=v.repeat(1,2,1,1)
+gqa_rows=torch.cat((expected,expected.flip(0)))
+cases=[
+    (k,v, 8, torch.cat((expected,expected))),
+    (k2,v2, 16, gqa_rows),
+    (k2.repeat_interleave(2,dim=1),v2.repeat_interleave(2,dim=1),32,gqa_rows),
+]
+for keys,values,cache_elements,outputs in cases:
+    y,new=grouped(q4,keys[:,:,1:],values[:,:,1:],(keys[:,:,:1],values[:,:,:1]))
+    torch.testing.assert_close(y[0,:,0],outputs,rtol=0,atol=3e-15)
+    assert sum(t.numel() for t in new)==cache_elements
+    assert y.shape==(1,4,1,2)
+    assert q4.shape[1]*keys.shape[2]==8
+print('PASS same four queries, 32/16/8 KV numbers and eight query-key pairs')
+
 def by_head(q,k,v,old=0):
     batch,heads,tokens,dh=q.shape
     r=heads//k.shape[1]

@@ -114,7 +114,7 @@ nodes=[n for n in ast.parse(rope_block).body
 assert len(nodes)==2
 rope_ns={'torch':torch}
 exec(compile(ast.fix_missing_locations(ast.Module(body=nodes,type_ignores=[])),str(rope_chapter),'exec'),rope_ns)
-def forward(m,ids,heads):
+def forward(m,ids,heads,eps=1e-5,trace=None):
     x=m.embedding(ids)
     B,T,D=x.shape
     d=D//heads
@@ -122,7 +122,7 @@ def forward(m,ids,heads):
     omega=rope_ns['frequencies'](d)
     mask=torch.ones(T,T,dtype=torch.bool).tril()
     def norm(z,g):
-        return z*torch.rsqrt(z.square().mean(-1,keepdim=True)+1e-5)*g
+        return z*torch.rsqrt(z.square().mean(-1,keepdim=True)+eps)*g
     for w in m.blocks:
         n=norm(x,w['norm1'])
         q,k,v=[F.linear(n,w[key]).reshape(B,T,heads,d) for key in ('q','k','v')]
@@ -134,8 +134,42 @@ def forward(m,ids,heads):
         merged=(weights@v).transpose(1,2).reshape(B,T,D)
         x=x+F.linear(merged,w['o'])
         n=norm(x,w['norm2'])
+        if trace is not None:
+            trace.update(scores=scores,weights=weights,attention_residual=x,ffn_input=n)
         x=x+F.linear(F.silu(F.linear(n,w['gate']))*F.linear(n,w['up']),w['down'])
+        if trace is not None:
+            trace['ffn_residual']=x
     return F.linear(norm(x,m.final_norm),m.head.weight)
+
+# The prose example uses one head and two positions, with all projections
+# fixed to the identity and epsilon set to zero for nonzero inputs.
+tiny=layout(3,2,2,1)
+tiny.to_empty(device='cpu').double()
+with torch.no_grad():
+    tiny.embedding.weight.copy_(ns['output_rows'])
+    tiny.head.weight.copy_(ns['output_rows'])
+    tiny.final_norm.fill_(1.)
+    for name, value in tiny.blocks[0].items():
+        value.copy_(torch.eye(2, dtype=torch.float64) if value.ndim==2 else torch.ones_like(value))
+trace={}
+toy_logits=forward(tiny,ns['inputs'],1,eps=0.,trace=trace)
+s2=math.sqrt(2.)
+rows={
+    'scores': (trace['scores'][0,0,1], [-s2*math.sin(1.),s2]),
+    'weights': (trace['weights'][0,0,1], [.06886647254766655,.93113352745233345]),
+    'attention_residual': (trace['attention_residual'][0,1], [.09739189946970447,2.316821662903391]),
+    'ffn_input': (trace['ffn_input'][0,1], [.059396635739346684,1.4129656894853633]),
+    'ffn_residual': (trace['ffn_residual'][0,1], [.09920825148579816,3.922450938470705]),
+    'first_logits': (toy_logits[0,0], [s2,0.,-s2]),
+    'last_logits': (toy_logits[0,1], [.035757439048064665,1.413761438699162,-.035757439048064665]),
+}
+for actual, expected in rows.values():
+    torch.testing.assert_close(actual,torch.tensor(expected,dtype=actual.dtype),rtol=0,atol=2e-14)
+torch.testing.assert_close(trace['weights'][0,0,0],torch.tensor([1.,0.],dtype=torch.float64))
+torch.testing.assert_close(forward(tiny,ns['inputs'][:,:1],1,eps=0.),toy_logits[:,:1])
+assert math.isclose(F.cross_entropy(toy_logits.flatten(0,1),ns['targets'].flatten()).item(),
+                    1.7622035228662254,abs_tol=2e-14)
+print('PASS complete two-position example and independent prefix-only computation')
 
 for tied in (False,True):
     torch.manual_seed(17)

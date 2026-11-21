@@ -19,7 +19,7 @@ describe('GQA explanation and original visual evidence',()=>{
       expect(body).toContain(text);
   });
   it('preserves all nine sourced images and archives superseded course copies',()=>{
-    const embeds=[...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^\]]+)\]\]/g)].map(m=>m[1]);
+    const embeds=[...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^|\]]+)\|([^\]]+)\]\]/g)].map(m=>m[1]);
     expect(embeds).toHaveLength(9);
     expect(new Set(embeds)).toEqual(new Set(specs.map((s:any)=>s.asset)));
     expect(new Set(assets.filter((a:any)=>a.used_in?.includes(file)).map((a:any)=>a.asset))).toEqual(new Set(embeds));
@@ -47,9 +47,17 @@ describe('GQA explanation and original visual evidence',()=>{
       'не задержку одиночного запроса','трём запускам','не доказательство неизбежной'])
       expect(body).toContain(text);
     expect(fm.source_unit_id).toHaveLength(2);
-    expect(fm.previous).toContain('_index');
+    expect(fm.previous).toContain('05 Transformer с нуля');
     expect(fm.next).toContain('02 MLA и сжатие KV-cache');
-    expect(body).toContain('К модулям:');
+    expect(body).toContain('**Назад:**');
+    expect(body).not.toContain('К модулям:');
     expect(body).toContain('**Далее:**');
+  });
+  it('checks the same queries in MHA, GQA and MQA before generalizing cache capacity',()=>{
+    const start=body.indexOf('id="gqa-shared-kv-worked-case"');
+    expect(start).toBeGreaterThan(0);
+    expect(start).toBeLessThan(body.indexOf('## Объём KV-кэша'));
+    for(const row of ['| MHA | 4 | 32 |','| GQA | 2 | 16 |','| MQA | 1 | 8 |'])
+      expect(body).toContain(row);
   });
 });

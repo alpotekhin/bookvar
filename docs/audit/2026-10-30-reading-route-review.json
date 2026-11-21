@@ -2,6 +2,18 @@
   "date": "2026-10-30",
   "lastReviewedDate": "2026-11-09",
   "editorialRevisions": {
+    "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md": {
+      "currentSha256": "6c3cfceda74e34386ab5aad0e4eb4819e727fa20436810f7e45edba697a9a5da",
+      "stopBefore": "2026-11-21-transformer-shapes-editorial-pass.json"
+    },
+    "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md": {
+      "currentSha256": "90f695e1141d6768deadd1aa6e98dae44d3d2239e24738b20a0715dad7620761",
+      "stopBefore": "2026-11-21-dense-ffn-editorial-pass.json"
+    },
+    "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md": {
+      "currentSha256": "e70950e1ceb81c800f917bebd3903b450ac924618b148fa3d136aa152f38783c",
+      "stopBefore": "2026-11-21-rope-editorial-pass.json"
+    },
     "00 Учебник/07 Анатомия современной LLM/04 RoPE.md": {
       "currentSha256": "6c16f6acf35897a999a21b17400d6d4932d8e85e8f24e64298e61c5b8c071b79",
       "stopBefore": "2026-11-21-norm-gating-editorial-pass.json"

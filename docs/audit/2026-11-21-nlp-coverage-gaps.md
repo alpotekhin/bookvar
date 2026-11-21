@@ -63,8 +63,11 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«GPT-3 — масштабирование и in-context learning»](2026-11-21-gpt3-editorial-pass.json),
 [«LLaMA как базовая архитектура»](2026-11-21-llama-editorial-pass.json),
 [«Современный decoder block»](2026-11-21-decoder-block-editorial-pass.json),
-[глава о нормализации и остаточных связях](2026-11-21-norm-gating-editorial-pass.json) и
-[«RoPE»](2026-11-21-rope-editorial-pass.json).
-Следующая глава — Dense FFN. После расчёта весов внимания нужно
-проследить уже смешанное состояние одной позиции через расширение,
-поэлементное умножение в SwiGLU и возврат к ширине остаточного пути.
+[глава о нормализации и остаточных связях](2026-11-21-norm-gating-editorial-pass.json),
+[«RoPE»](2026-11-21-rope-editorial-pass.json),
+[«Dense FFN — расширение размерности и SwiGLU»](2026-11-21-dense-ffn-editorial-pass.json),
+[«Transformer с нуля — формы, параметры и стоимость»](2026-11-21-transformer-shapes-editorial-pass.json) и
+[«MHA, MQA и GQA»](2026-11-21-gqa-editorial-pass.json).
+Следующая глава — «MLA и сжатие KV-кэша». Нужно отдельно показать,
+что сохраняется в кэше одной позиции и как из него получают оценки
+внимания, не восстанавливая полные ключи и значения на каждом шаге.

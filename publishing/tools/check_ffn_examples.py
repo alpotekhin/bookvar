@@ -17,6 +17,15 @@ for i,block in enumerate(blocks,1):
     exec(compile(block,f'{CHAPTER.name}:block-{i}','exec'),ns)
     print('PASS published block',i)
 np.testing.assert_allclose(ns['y'][0,0],[-.13447071068499755,-.5965878679450073])
+np.testing.assert_allclose(ns['y'][0,1],[1.0305355773257596,-1.8960648666407622],atol=1e-14,rtol=0.)
+# The first intermediate coordinate has zero output, but a nonzero gate derivative.
+u_first = float((ns['x'] @ ns['wu'])[0,0,0])
+z_first = float((ns['x'] @ ns['wg'])[0,0,0])
+dh_first = float((ns['y'] @ ns['wd'].T)[0,0,0])
+assert u_first == 2. and z_first == 0. and dh_first != 0.
+np.testing.assert_allclose(ns['dwu'][0,0],0.)
+np.testing.assert_allclose(ns['dwg'][0,0],dh_first)
+print('PASS both printed SwiGLU rows and the zero-activation gate gradient')
 
 def scalar_swiglu(x,wu,wg,wd):
     """Separate loops for each row, intermediate coordinate and output."""
@@ -110,6 +119,9 @@ r2 = np.array([[1.,0.],[0.,1.],[1.,1.],[-1.,1.]])
 rh = np.maximum(rx@r1,0)
 np.testing.assert_array_equal(rh,[[1,0,0,0],[0,2,2,2]])
 np.testing.assert_array_equal(rh@r2,[[1,0],[0,6]])
+residual = np.array([3.,-3.])
+np.testing.assert_array_equal(residual/np.sqrt(np.mean(residual**2)),rx[0])
+np.testing.assert_array_equal(residual+(rh@r2)[0],[4.,-3.])
 np.testing.assert_array_equal(rh[:,0:2]@r2[:2]+rh[:,2:]@r2[2:],rh@r2)
 b1,b2 = rng.normal(size=4),rng.normal(size=2)
 np.testing.assert_allclose((rx@r1+b1)@r2+b2,rx@(r1@r2)+(b1@r2+b2))

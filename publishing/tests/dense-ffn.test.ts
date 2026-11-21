@@ -48,7 +48,7 @@ describe('dense FFN explanation and source preservation',()=>{
     expect(body.match(/~~~python\n/g)).toHaveLength(3);
     for(const s of ['def swiglu(','def swiglu_backward(','np.logaddexp','fused_projection',
       'split_y','flat_x.T @ flat_du','3,3,4','4000 префиксах','примерно ниже 68%',
-      'log-perplexity','1.633','135 266 304','4 328 521 728','172 MiB','8320',
+      'логарифм перплексии','1.633','135 266 304','4 328 521 728','172 MiB','8320',
       '((z * silu(u)) @ wd)[0, 0]'])
       expect(body).toContain(s);
     expect(body).toContain('нет реального обмена');
@@ -61,5 +61,13 @@ describe('dense FFN explanation and source preservation',()=>{
     expect(fm.next).toContain('05 Transformer с нуля');
     expect(body).toContain('**Назад:**');
     expect(body).toContain('**Дальше:**');
+  });
+  it('starts with two ReLU rows and states the SwiGLU outputs and gradient before relying on code',()=>{
+    expect(body.indexOf('### Два токена через ReLU-FFN')).toBeLessThan(body.indexOf('### Размерности'));
+    expect(body.indexOf('### Сложение с остаточной ветвью')).toBeLessThan(body.indexOf('## Две входные проекции SwiGLU'));
+    for(const s of ['$(4,-3)$','(1.0305,-1.8961)','$D_{Z,1}=D_{H,1}$','математическое число параметров'])
+      expect(body).toContain(s);
+    for(const id of ['ffn-swiglu-code','ffn-shard-code','ffn-backward-code'])
+      expect(body).toContain('<details id="'+id+'">');
   });
 });

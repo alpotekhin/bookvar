@@ -2,8 +2,8 @@
 title: Transformer с нуля — формы, параметры и стоимость
 type: textbook-chapter
 status: in-review
-last_updated: 2026-11-13
-last_verified: 2026-11-13
+last_updated: 2026-11-21
+last_verified: 2026-11-21
 source_unit_id:
   - lecture-02-flop-units
   - lecture-01-figure-step-177-rendering-1
@@ -42,37 +42,34 @@ next: "[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention 
 
 # Transformer с нуля: формы, параметры и стоимость
 
-Декодер получает пакет из двух последовательностей по 128 токенов. При
-словаре из 10 000 токенов на выходе будет 2 560 000 логитов. Какой следующий
-токен соответствует каждой строке и что придётся пересчитать, если удвоить
-длину входа?
+Если подать на вход `[0, 1]`, выход декодера содержит две строки.
+Первая оценивает продолжение после токена 0, вторая — после префикса
+из обоих токенов. При словаре из 10 000 токенов в каждой строке будет
+10 000 логитов. При обучении нужны обе строки; чтобы сгенерировать
+один токен после всего префикса, достаточно последней. Остальные
+позиции всё равно нужны, чтобы вычислить состояние последнего токена.
 
-Разберём модель из Stanford CS336 Assignment 1: декодер с причинным вниманием,
-RoPE, RMSNorm и SwiGLU. Сначала определим формы промежуточных тензоров, затем
-посчитаем параметры, арифметические операции и объём памяти. Полученные оценки
-можно сопоставить с измерениями на конкретном устройстве. У модели с RoPE
-удлинение входа не добавляет параметров; в GPT-2 увеличение максимально
-поддерживаемой длины требует дополнительных строк в обучаемой таблице позиций.
+В схеме Stanford CS336 входные идентификаторы превращаются в векторы,
+блоки меняют эти векторы, а выходная матрица даёт оценки по словарю.
+Проследим этот путь на двух токенах, затем подставим размеры модели
+TinyStories из задания и посчитаем её веса, операции и память.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/a1-figures1-2-model-block.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/a1-figures1-2-model-block.png|Слева схема от идентификаторов до логитов и softmax. Справа pre-norm блок с причинным вниманием, SwiGLU и двумя остаточными сложениями.]]
 
 *Слева — полная языковая модель Assignment 1, справа — один pre-norm блок.
 Обе схемы и исходные подписи сохранены целиком. Источник: Stanford CS336,
 [Assignment 1, Figures 1–2, p. 13](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=13),
 [MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
 
-На левой схеме таблица эмбеддингов переводит идентификаторы в векторы, а
-последовательность блоков обновляет эти представления, сохраняя их размерность.
-Финальная нормализация и выходная проекция дают логиты по словарю. Softmax
-показан как переход к вероятностям; при обучении его обычно вычисляют внутри
-устойчивой функции потерь, а не отдельным слоем модели.
+Слева последний линейный слой возвращает логиты, а softmax превращает их
+в вероятности. Для обучения передаём в функцию потерь логиты: она вычисляет
+логарифм вероятности цели без отдельного тензора вероятностей.
 
-Правая схема раскрывает два остаточных соединения: результат внимания
-складывается с его входом, затем результат FFN складывается с обновлённым
-представлением. В обоих случаях нормализация стоит перед подслоем — отсюда
-название pre-norm. В задании `Norm` означает RMSNorm, а `Position-Wise
-Feed-Forward` реализуется через SwiGLU. Позиции учитываются вращениями RoPE
-внутри внимания; отдельной таблицы абсолютных позиций здесь нет.
+Справа внутри блока два сложения. Внимание получает нормализованный вход,
+но его результат прибавляется к исходному состоянию. Затем ту же схему
+повторяют для FFN уже на обновлённом состоянии. В задании `Norm` означает
+RMSNorm, а `Position-Wise Feed-Forward` — SwiGLU. Вместо обучаемой таблицы
+позиций модель вращает запросы и ключи с помощью RoPE.
 
 <a id="notation-and-shapes"></a>
 
@@ -92,10 +89,9 @@ Feed-Forward` реализуется через SwiGLU. Позиции учит�
 | $L$ | число Transformer-блоков |
 | $N=BT$ | число токен-позиций в пакете |
 
-В базовой MHA-конфигурации задания A1 выбрано $D=Hd_h$, поэтому $D$ должно
-делиться на $H$: именно такая проекция затем разбивается на одинаковые головы.
-Для Transformer вообще это не обязательное условие — Q/K/V-проекции могут
-иметь выходную ширину $Hd_h$, отличную от $D$, а выходная проекция возвращает $D$.
+В задании ширину проекций Q, K и V выбирают равной $D=Hd_h$, поэтому
+$D$ должно делиться на $H$. В другой реализации $Hd_h$ может отличаться
+от $D$: тогда выходная матрица внимания преобразует ширину $Hd_h$ в $D$.
 Входные идентификаторы токенов имеют форму $[B,T]$.
 Выбор вектора из таблицы эмбеддингов добавляет ось признаков:
 
@@ -116,7 +112,12 @@ $$
 Перестановка меняет порядок осей: последовательность и номер головы меняются
 местами, но каждый вектор остаётся при своём токене и своей голове. Теперь
 
-$$QK^\top:[B,H,T,d_h]\times[B,H,d_h,T]\to[B,H,T,T].$$
+$$
+\begin{aligned}
+QK^\top:\quad &[B,H,T,d_h]\times[B,H,d_h,T]\\
+ &\longrightarrow[B,H,T,T].
+\end{aligned}
+$$
 
 Softmax нормализуется по последней оси — по ключам, доступным одному запросу.
 Причинная маска также должна допускать расширение к форме $[B,H,T,T]$. Умножение весов на
@@ -134,13 +135,17 @@ $$[B,T,D]\to[B,T,F]\to[B,T,D].$$
 перед осью токенов. Если перепутать эти операции, итоговая форма может
 совпасть с ожидаемой, хотя отдельные головы получат другие числа.
 
-### Один пакет через все слои
+<span id="один-пакет-через-все-слои"></span>
+
+### Размеры TinyStories
 
 Возьмём учебную конфигурацию TinyStories из A1:
 $V=10\,000$, $D=512$, $H=16$, $F=1344$, $L=4$. Ширина головы равна
 $d_h=512/16=32$. Для разбора выберем две последовательности по 128 токенов:
 $B=2$, $T=128$. Размер пакета и длина здесь выбраны для расчёта; в исходном
-рецепте TinyStories длина равна 256.
+рецепте TinyStories длина равна 256. Выход нашего пакета содержит
+$2\cdot128=256$ строк, или 2 560 000 логитов. Во всех следующих оценках
+для TinyStories используем этот же пакет.
 
 | Этап | Форма |
 |---|---|
@@ -169,10 +174,12 @@ softmax превращает только эти оценки в веса с с�
 `[2,3]`: признаки другого подпространства ошибочно станут следующим токеном.
 Итоговые размеры совпадут, а вычисление будет другим.
 
-Следующий пример проверяет именно порядок чисел. Оба размера — число
-токенов и число голов — намеренно равны двум: ошибочная форма не выдаст
-себя несовпадением размеров. Все блоки Python в этой главе выполняются
-последовательно в одной сессии; достаточно PyTorch на CPU.
+<details id="transformer-shapes-code">
+<summary>Проверка порядка чисел и общей памяти в PyTorch</summary>
+
+Оба размера, число токенов и число голов, равны двум. Одна только проверка
+формы не найдёт ошибку. Все семь примеров Python в этой главе можно выполнить
+по порядку в одной сессии PyTorch на CPU.
 
 ~~~python
 import torch
@@ -191,15 +198,55 @@ assert heads.untyped_storage().data_ptr() == x.untyped_storage().data_ptr()
 assert not heads.is_contiguous()
 ~~~
 
+</details>
+
 Разделение и перестановка осей создают представление тех же восьми
 чисел, а не ещё восемь чисел. Но переставленный тензор не является
 непрерывным: соседние логические элементы могут находиться не рядом.
 Операция `contiguous()` для него создаст копию. Поэтому память нельзя
 подсчитать, механически сложив объёмы всех имён промежуточных тензоров.
 
+<a id="token-ids-through-one-block"></a>
+
+### Два токена через один блок
+
+Чтобы проследить сами числа, уменьшим модель до одного блока и одной головы
+с $D=d_h=F=2$. Вход `[0, 1]` выбирает первые две строки таблицы: $(1,0)$
+и $(0,1)$. Матрицы Q, K, V, O и все три матрицы SwiGLU единичные.
+Во всех RMSNorm веса равны единице, $\epsilon=0$: ни один входной вектор
+нормализации здесь не нулевой.
+
+**Внимание.** RMSNorm даёт $(\sqrt2,0)$ и $(0,\sqrt2)$. В позиции 0
+RoPE не поворачивает Q и K; в позиции 1 поворачивает их на один радиан
+(у единственной пары координат частота 1). У второго запроса оценки двух
+ключей до softmax равны $-\sqrt2\sin 1$ и $\sqrt2$. Первая получается
+из скалярного произведения повёрнутого запроса с ключом позиции 0,
+вторая — из скалярного произведения двух одинаково повёрнутых векторов.
+После softmax веса примерно $(0.0689,0.9311)$. У первого запроса маска
+оставляет только свой ключ с весом 1.
+
+**Остаток и FFN.** Значения не вращаются. Поэтому второй выход внимания
+равен $0.0689(\sqrt2,0)+0.9311(0,\sqrt2)$. После сложения с $(0,1)$
+получаем $r\approx(0.0974,2.3168)$. RMSNorm превращает его в
+$n\approx(0.0594,1.4130)$. Обе ветви SwiGLU получают этот $n$,
+поэтому к $r$ прибавляется $n\odot\operatorname{SiLU}(n)$ и выходит
+$(0.0992,3.9225)$. У первой позиции все эти операции сохраняют нулевую
+вторую координату.
+
+**Логиты.** Финальная RMSNorm даёт $h_0=(\sqrt2,0)$ и
+$h_1\approx(0.0358,1.4138)$. Возьмём строки выходной матрицы
+$(1,0)$, $(0,1)$, $(-1,0)$. Тогда для любого $h=(a,b)$ логиты равны
+$(a,b,-a)$. Первая строка предсказывает токен после `[0]`,
+вторая — после `[0, 1]`. Во второй строке логиты примерно
+$(0.0358,1.4138,-0.0358)$. Первая позиция токен 1 не видела,
+хотя выходная матрица у обеих строк одна. Перед нами расчёт с заданными вручную весами,
+а не результат обучения TinyStories.
+
 <a id="logits-to-next-token-loss"></a>
 
-### Какая строка предсказывает следующий токен
+<span id="какая-строка-предсказывает-следующий-токен"></span>
+
+### Сдвиг целей и кросс-энтропия
 
 После финальной нормализации на каждой входной позиции есть вектор
 $h_t$ длины $D$. В GPT-2 его скалярно умножают на каждую строку
@@ -222,20 +269,25 @@ $p(1\mid 0)$, вторая — за $p(2\mid 0,1)$. Причинная маск�
 Токен 2 в этом проходе вообще не подаётся на вход.
 
 Пусть словарь состоит из трёх токенов, а их выходные векторы равны
-$(1,0)$, $(0,1)$ и $(-1,0)$. Возьмём $(2,1)$ и $(1,2)$ в качестве
-состояний двух позиций после нормализации. Это заданные числа,
-а не результат вычисления обученной модели.
+$(1,0)$, $(0,1)$ и $(-1,0)$. Чтобы отдельно посчитать потерю на простых
+логитах, возьмём состояния $(2,1)$ и $(1,2)$ вместо полученных выше.
+Механизм выбора целевого логита от этого не меняется.
 
-| Видимый префикс | Три логита | Цель | Вероятность цели | Потеря |
-|---|---|---:|---:|---:|
-| `[0]` | $(2,1,-2)$ | 1 | 0.2654 | 1.3266 |
-| `[0,1]` | $(1,2,-1)$ | 2 | 0.0351 | 3.3490 |
+| Префикс → цель | Логиты | Потеря |
+|---|---|---:|
+| `[0]` → `1` | $(2,1,-2)$ | 1.3266 |
+| `[0,1]` → `2` | $(1,2,-1)$ | 3.3490 |
+
+Вероятности целей в этих строках равны примерно 0.2654 и 0.0351.
 
 Для первой строки нужен логит с индексом 1, равный $1$. Потеря
 равна $\log(e^2+e+e^{-2})-1\approx1.3266$. Во второй строке
 вычитаем логит токена 2, равный $-1$, и получаем $3.3490$.
 Среднее по обеим позициям — около $2.3378$. Это та же
 кросс-энтропия, что в [§4.1 задания CS336](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=28).
+
+<details id="transformer-loss-code">
+<summary>Сдвиг целей и проверка кросс-энтропии в PyTorch</summary>
 
 ~~~python
 import torch.nn.functional as ops
@@ -259,6 +311,8 @@ next_logits = ops.linear(final_states[:, -1, :], output_rows)  # [1,3]
 torch.testing.assert_close(next_logits, token_logits[:, -1, :])
 ~~~
 
+</details>
+
 Здесь цели уже сдвинуты при нарезке последовательности, а
 `cross_entropy` получает логиты и цели одинаковой длины. Если
 обёртка модели сдвигает цели внутри, такой сдвиг не надо повторять.
@@ -278,7 +332,10 @@ Assignment 1. Таблица эмбеддингов содержит $VD$ пар
 проекция (LM head) не разделяет с ней веса,
 она добавляет ещё $DV$; при совместном использовании весов (weight tying)
 хранится одна матрица вместо двух.
-RoPE обучаемых параметров не добавляет.
+RoPE обучаемых параметров не добавляет. Более длинный вход требует
+больше вычислений, но в этой модели не добавляет весов. У GPT-2,
+если увеличивать поддерживаемый предел контекста, понадобятся новые
+строки в обучаемой таблице позиций.
 
 В [GPT-2](https://github.com/openai/gpt-2/blob/9b63575ef42771a015060c964af2c3da4cf7c8ab/src/model.py#L149-L158)
 из `wte` сначала выбирают входные строки, а в конце на её
@@ -356,12 +413,14 @@ $22\,696\,448-5\,120\,000=17\,576\,448$. Численное совпадение
 ### Подсчёт по зарегистрированным параметрам
 
 Формулу можно сверить с теми матрицами, которые зарегистрированы в
-модулях PyTorch. В следующем примере построен только набор параметров,
-без `forward`: это проверка инвентаризации, а не ещё одна реализация LM.
+модулях PyTorch. Функция ниже регистрирует параметры нужных форм без `forward`.
 Устройство
 [`meta`](https://docs.pytorch.org/docs/2.8/meta.html)
 хранит формы и типы без самих числовых массивов, поэтому для проверки
 не нужно выделять память под 22 млн весов.
+
+<details id="transformer-params-code">
+<summary>Подсчёт уникальных весов и два пути градиента</summary>
 
 ~~~python
 from torch import nn
@@ -420,6 +479,8 @@ torch.testing.assert_close(input_grad[2], torch.zeros_like(input_grad[2]))
 print(shared_grad[2].tolist())  # [-0.4692275995665407, -0.9582745295637655]
 ~~~
 
+</details>
+
 [`parameters()`](https://docs.pytorch.org/docs/2.8/generated/torch.nn.Module.html#torch.nn.Module.named_parameters)
 по умолчанию не возвращает один и тот же объект параметра повторно.
 У `state_dict` другая задача: сохранить значения под именами модулей,
@@ -436,7 +497,9 @@ print(shared_grad[2].tolist())  # [-0.4692275995665407, -0.9582745295637655]
 
 <a id="compute-accounting"></a>
 
-## FLOPs: сначала одна матрица, потом весь граф
+<span id="flops-сначала-одна-матрица-потом-весь-граф"></span>
+
+## Матричные операции прямого прохода
 
 Для произведения $[m,k]\times[k,n]$ обычно считают примерно $2mkn$ FLOPs:
 каждый элемент результата требует $k$ умножений и почти столько же сложений.
@@ -447,7 +510,9 @@ print(shared_grad[2].tolist())  # [-0.4692275995665407, -0.9582745295637655]
 $8ND^2$ FLOPs. Три матрицы SwiGLU — $6NDF$. Два матричных произведения внутри
 обычного многоголового внимания дают ещё
 
-$4BT^2D.$
+$$
+4BT^2D.
+$$
 
 Это стоимость вычисления полной квадратной матрицы оценок внимания.
 Ядро причинного внимания, пропускающее верхний треугольник, выполняет для двух
@@ -487,10 +552,10 @@ $2\cdot2\cdot16\cdot128^2\cdot32=33\,554\,432$;
 
 | Операции | На блок | На модель |
 |---|---:|---:|
-| Q, K, V и выходная проекция внимания | 0.536871 | 2.147484 |
+| Q, K, V, O | 0.536871 | 2.147484 |
 | Три проекции SwiGLU | 1.056965 | 4.227858 |
-| $QK^\top$ и умножение весов внимания на V | 0.067109 | 0.268435 |
-| Выходная проекция на словарь, один раз после блоков | — | 2.621440 |
+| Смешивание токенов | 0.067109 | 0.268435 |
+| Проекция в словарь | — | 2.621440 |
 | Сумма | — | 9.265218 |
 
 Это около 9.27 GFLOPs на прямой проход пакета. У этой небольшой модели
@@ -548,6 +613,9 @@ $\partial\ell/\partial X=GW=W$,
 При принятом соглашении каждое из трёх произведений стоит
 $2\cdot2\cdot2\cdot2=16$ FLOPs, всего 48.
 
+<details id="transformer-flops-code">
+<summary>Два градиента и стоимость матричных операций</summary>
+
 ~~~python
 X = torch.tensor([[1., 2.], [3., 4.]], dtype=torch.float64, requires_grad=True)
 W = torch.tensor([[2., -1.], [.5, 1.]], dtype=torch.float64, requires_grad=True)
@@ -577,6 +645,8 @@ training_flops = 3 * forward_flops
 print(costs)
 print(forward_flops, training_flops)  # 9265217536, 27795652608
 ~~~
+
+</details>
 
 Множитель 3 в последней строке применён только к перечисленным матричным
 операциям и предполагает, что нужны оба градиента. Если веса слоя
@@ -608,10 +678,10 @@ FFN с двумя матрицами ширины $6400$, LayerNorm и смещ�
 Если в модели из задания менять только $T$, число весов остаётся прежним.
 Для одной последовательности и полного квадрата внимания получаем:
 
-| Длина $T$ | Матричная работа прямого прохода | Из неё $QK^\top$ и умножение на значения |
+| Длина $T$ | Всего, TFLOP | Смешивание, TFLOP |
 |---:|---:|---:|
-| 1 024 | 3.517 TFLOP | 0.322 TFLOP (9.2%) |
-| 16 384 | 133.578 TFLOP | 82.463 TFLOP (61.7%) |
+| 1 024 | 3.517 | 0.322 (9.2%) |
+| 16 384 | 133.578 | 82.463 (61.7%) |
 
 В 16 раз больше токенов дают в 16 раз больше работы проекций и FFN,
 но в 256 раз больше пар позиций. Поэтому доля смешивания токенов
@@ -620,7 +690,9 @@ FFN с двумя матрицами ширины $6400$, LayerNorm и смещ�
 
 <a id="memory-accounting"></a>
 
-## Память: что живёт долго, а что зависит от пакета
+<span id="память-что-живёт-долго-а-что-зависит-от-пакета"></span>
+
+## Веса, градиенты и активации
 
 Во время обучения веса и связанные с ними состояния могут храниться в разных
 форматах. Например, веса BF16, их градиенты BF16, основная копия весов FP32
@@ -683,6 +755,9 @@ $1/4$ и $3/4$ — дают $1/4+(3/4)(29/3)=7.5$.
 целям и делятся на общее число таких целей, без PAD и других
 игнорируемых позиций.
 
+<details id="transformer-accumulation-code">
+<summary>Накопление по микропакетам разной длины</summary>
+
 ~~~python
 values = torch.tensor([1., 2., 3., 4.], dtype=torch.float64)
 
@@ -702,6 +777,8 @@ def accumulated_gradient(equal_microbatch_weight=False):
 print(accumulated_gradient())       # 7.5
 print(accumulated_gradient(True))   # 5.333333333333333
 ~~~
+
+</details>
 
 Равенство полному пакету предполагает те же параметры на всех
 микропакетах и ту же функцию потерь. Обновление оптимизатора,
@@ -735,7 +812,9 @@ weight decay и clipping общего градиента выполняются 
 
 <a id="arithmetic-intensity"></a>
 
-## Почему одинаковое число FLOPs выполняется с разной скоростью
+<span id="почему-одинаковое-число-flops-выполняется-с-разной-скоростью"></span>
+
+## Арифметическая интенсивность и roofline
 
 При умножении матрицы на вектор каждый её вес используется для одного
 скалярного произведения. При умножении той же матрицы на пакет векторов вес
@@ -800,7 +879,7 @@ roofline ограничивает время снизу величиной 20 ms
 40 ms. Число FLOPs одинаково, но нижняя оценка времени различается вдвое.
 Здесь заданы учебные характеристики, а не измерены два реальных GPU.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/jax-scaling-roofline.webp]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/jax-scaling-roofline.webp|Две кривые roofline с одинаковым вычислительным пиком. При малой интенсивности выше кривая устройства с большей пропускной способностью.]]
 
 *Два устройства с одинаковым вычислительным пиком, но разной пропускной
 способностью памяти. Для Algo 1 более быстрая память поднимает предел
@@ -823,7 +902,7 @@ $2ND+2DF+2NF$ байт, а работа — $2NDF$ FLOPs.
 приблизительно равна $N$. Увеличение пакета позволяет использовать
 прочитанные веса для большего числа входов.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/jax-roofline-batch.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/jax-roofline-batch.png|Пропускная способность матричного умножения растёт с числом строк. Синяя кривая для ширины 4096 достигает вычислительного пика раньше кривой для ширины 1024.]]
 
 *Jacob Austin et al.,
 [How To Scale Your Model, Rooflines, Question 3](https://jax-ml.github.io/scaling-book/roofline/).
@@ -854,6 +933,9 @@ $$
 даже неограниченное увеличение $N$ не выводит операцию на заданный пик.
 Эти числа описывают аналитический график источника, не наш запуск TPU.
 
+<details id="transformer-roofline-code">
+<summary>Интенсивность для INT8-весов и BF16-активаций</summary>
+
 ~~~python
 def mixed_weight_roofline(n, dim, hidden):
     flops = 2 * n * dim * hidden
@@ -868,83 +950,13 @@ for dim in (4096, 1024):
     print(dim, critical, mixed_weight_roofline(256, dim, dim))
 ~~~
 
-<a id="a1-construction"></a>
-
-## От базовых операций к языковой модели: условия сборки A1
-
-Официальный Assignment 1 строит модель в порядке зависимостей: linear и
-embedding; RMSNorm и SiLU/SwiGLU; RoPE; стабильный softmax и scaled dot-product
-attention; causal multi-head attention; блок; полная LM; затем подсчёт
-ресурсов. Порядок важен: на каждом шаге можно зафиксировать форму входа, выхода
-и имя проверяющей функции-переходника до того, как ошибка спрячется внутри всей
-модели.
-
-Для реализации модели ниже сохранены страницы исходного задания с формулами
-и интерфейсами. Они идут в порядке построения компонентов; готовых решений
-заданий в них нет.
-
-<details>
-<summary>Полные оригинальные страницы Assignment 1, pp. 18–27</summary>
-
-Страницы сохранены на английском целиком, включая верхние и нижние строки.
-Начало Linear находится на [p. 17](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=17),
-а продолжение resource accounting — на [p. 28](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=28).
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-18.png]]
-
-*Stanford CS336 staff, [Assignment 1, p. 18](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=18): Linear и начало Embedding. Полная страница без обрезки;
-[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-19.png]]
-
-*Stanford CS336 staff, [Assignment 1, p. 19](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=19): Embedding, pre-norm и начало RMSNorm. Полная страница без обрезки;
-[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-20.png]]
-
-*Stanford CS336 staff, [Assignment 1, p. 20](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=20): RMSNorm. Полная страница без обрезки;
-[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-21.png]]
-
-*Stanford CS336 staff, [Assignment 1, p. 21](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=21): SiLU и GLU. Полная страница без обрезки;
-[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-22.png]]
-
-*Stanford CS336 staff, [Assignment 1, p. 22](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=22): SwiGLU и начало RoPE. Полная страница без обрезки;
-[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-23.png]]
-
-*Stanford CS336 staff, [Assignment 1, p. 23](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=23): RoPE и начало softmax. Полная страница без обрезки;
-[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-24.png]]
-
-*Stanford CS336 staff, [Assignment 1, p. 24](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=24): softmax и scaled dot-product attention. Полная страница без обрезки;
-[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-25.png]]
-
-*Stanford CS336 staff, [Assignment 1, p. 25](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=25): причинное multi-head attention. Полная страница без обрезки;
-[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-26.png]]
-
-*Stanford CS336 staff, [Assignment 1, p. 26](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=26): Transformer block и начало полной LM. Полная страница без обрезки;
-[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-27.png]]
-
-*Stanford CS336 staff, [Assignment 1, p. 27](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=27): полная LM и начало resource accounting. Полная страница без обрезки;
-[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
-
 </details>
 
 <a id="evidence-boundary"></a>
 
-## Где заканчивается формула и начинается эксперимент
+<span id="где-заканчивается-формула-и-начинается-эксперимент"></span>
+
+## MFU и HFU
 
 **Model FLOPs Utilization (MFU)** сопоставляет скорость полезной работы,
 следующей из формулы модели, с паспортным пиком ускорителей:
@@ -980,6 +992,9 @@ data parallel обучение: каждое обрабатывает наш п�
 но разделить её на суммарный пик восьми, получится ошибочное 3.47%.
 Эти числа вычислены для заданного времени, а не получены бенчмарком.
 
+<details id="transformer-mfu-code">
+<summary>Предел времени и MFU для восьми устройств</summary>
+
 ~~~python
 def roofline_time(flops, moved_bytes, peak, bandwidth):
     return max(flops / peak, moved_bytes / bandwidth)
@@ -995,6 +1010,8 @@ mfu = global_flops / step_seconds / (devices * peak_per_device)
 wrong_mfu = training_flops / step_seconds / (devices * peak_per_device)
 print(global_tokens / step_seconds, mfu, wrong_mfu)
 ~~~
+
+</details>
 
 MFU отвечает на узкий вопрос: какая доля теоретического пика превращается в
 арифметику самой модели. Время обменов, запуска ядер, чтения памяти и простоя
@@ -1013,15 +1030,10 @@ MFU исключает пересчёт из числителя. Поэтому 
 устройств, численный формат, режим разреженности, использование пересчёта
 активаций и правило подсчёта FLOPs.
 
-Три типа утверждений требуют разного подтверждения.
-
-- **Тождество форм.** Проверяется размерностями, модульным тестом и сравнением с
-  эталонной функцией на маленьком тензоре.
-- **Аналитическая оценка.** Проверяется явным соглашением о FLOP, параметрах,
-  численном формате и сохранённых активациях.
-- **Системный результат.** Требует описания оборудования, версий программ,
-  форм тензоров, прогрева, числа повторов и исходных измерений. Чужой MFU или
-  время выполнения не является свойством архитектуры.
+Формы можно проверить на маленьком тензоре, а бюджет FLOPs — по списку
+матричных умножений. Ни одна из этих проверок не измеряет время или пик
+памяти. Для таких измерений нужны формы входов, характеристики устройств,
+версии библиотек, прогрев и повторные замеры.
 
 Числа из Assignment 1 — критерии прохождения конкретного курса, а не обещание
 для любого ноутбука или GPU. В частности, 20–30 минут на одном B200 и наблюдения
@@ -1037,21 +1049,76 @@ MFU исключает пересчёт из числителя. Поэтому 
 набор параметров выше её не заменяет.
 
 <a id="exercise-transition"></a>
+<span id="упражнение-предсказать-измерение-до-запуска"></span>
 
-## Упражнение: предсказать измерение до запуска
+<a id="a1-construction"></a>
+<span id="от-базовых-операций-к-языковой-модели-условия-сборки-a1"></span>
 
-Для выбранных $B,T,V,D,H,F,L$ составьте таблицу форм каждого промежуточного
-тензора, выведите число параметров, указав, разделяют ли входная и выходная
-матрицы веса, и оцените FLOPs прямого прохода. Затем увеличьте только $T$ вдвое:
-какие члены выросли вдвое, а какие — вчетверо? Наконец сравните прогноз с
-результатами профилирования и объясните хотя бы
-одно расхождение.
+## Оригинальные страницы CS336
 
-В практической работе
-[[02 Areas/ML & DL/06 Практика/20 Собрать языковую модель с нуля|«Собрать языковую модель с нуля»]]
-можно реализовать эти компоненты и проверить расчёты. Там приведены версия
-Assignment 1, официальные тесты, варианты запуска на небольшом и полном
-наборе данных и требования к отчёту.
+В полном задании линейные слои и эмбеддинги вводятся до нормализации,
+RoPE и внимания. После описания этих операций авторы собирают блок
+и языковую модель, а затем считают параметры и FLOPs. Ниже можно
+раскрыть страницы с формулами и интерфейсами без пересказа.
+
+<details id="transformer-assignment-pages">
+<summary>Полные оригинальные страницы Assignment 1, pp. 18–27</summary>
+
+Страницы сохранены на английском целиком, включая верхние и нижние строки.
+Начало Linear находится на [p. 17](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=17),
+а продолжение resource accounting — на [p. 28](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=28).
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-18.png|Страница 18 задания Stanford CS336: Линейный слой и начало раздела об эмбеддингах.]]
+
+*Stanford CS336 staff, [Assignment 1, p. 18](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=18): Linear и начало Embedding. Полная страница без обрезки;
+[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-19.png|Страница 19 задания Stanford CS336: Эмбеддинги, устройство блока и начало RMSNorm.]]
+
+*Stanford CS336 staff, [Assignment 1, p. 19](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=19): Embedding, pre-norm и начало RMSNorm. Полная страница без обрезки;
+[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-20.png|Страница 20 задания Stanford CS336: Вывод и интерфейс RMSNorm.]]
+
+*Stanford CS336 staff, [Assignment 1, p. 20](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=20): RMSNorm. Полная страница без обрезки;
+[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-21.png|Страница 21 задания Stanford CS336: SiLU и схема гейтинга.]]
+
+*Stanford CS336 staff, [Assignment 1, p. 21](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=21): SiLU и GLU. Полная страница без обрезки;
+[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-22.png|Страница 22 задания Stanford CS336: SwiGLU и начало описания RoPE.]]
+
+*Stanford CS336 staff, [Assignment 1, p. 22](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=22): SwiGLU и начало RoPE. Полная страница без обрезки;
+[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-23.png|Страница 23 задания Stanford CS336: RoPE и начало раздела о softmax.]]
+
+*Stanford CS336 staff, [Assignment 1, p. 23](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=23): RoPE и начало softmax. Полная страница без обрезки;
+[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-24.png|Страница 24 задания Stanford CS336: Softmax и scaled dot-product attention.]]
+
+*Stanford CS336 staff, [Assignment 1, p. 24](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=24): softmax и scaled dot-product attention. Полная страница без обрезки;
+[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-25.png|Страница 25 задания Stanford CS336: Причинное внимание с несколькими головами.]]
+
+*Stanford CS336 staff, [Assignment 1, p. 25](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=25): причинное multi-head attention. Полная страница без обрезки;
+[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-26.png|Страница 26 задания Stanford CS336: Сборка блока и модели.]]
+
+*Stanford CS336 staff, [Assignment 1, p. 26](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=26): Transformer block и начало полной LM. Полная страница без обрезки;
+[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-27.png|Страница 27 задания Stanford CS336: Модель и начало подсчёта параметров и FLOPs.]]
+
+*Stanford CS336 staff, [Assignment 1, p. 27](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=27): полная LM и начало resource accounting. Полная страница без обрезки;
+[MIT](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/LICENSE).*
+
+</details>
 
 ## Источники
 
@@ -1071,5 +1138,3 @@ Assignment 1, официальные тесты, варианты запуска
 **Назад:** [[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating|Dense FFN — расширение размерности и SwiGLU]].
 
 **Далее:** [[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA|MHA, MQA и GQA]].
-
-**Практика:** [[02 Areas/ML & DL/06 Практика/20 Собрать языковую модель с нуля|Собрать языковую модель с нуля]].

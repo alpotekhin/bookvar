@@ -14,7 +14,7 @@ describe('Transformer shapes and resource explanations',()=>{
     expect(body.match(/~~~python\n/g)).toHaveLength(7);
     for(const fact of ['heads.untyped_storage()','parameter_layout','22696448','17576448',
       'state_dict','G.T @ X.detach()','9265217536','27795652608','19.067306',
-      'заморожены','не ещё одна реализация LM'])expect(body).toContain(fact);
+      'заморожены','регистрирует параметры нужных форм'])expect(body).toContain(fact);
   });
   it('connects a shifted target to its vocabulary row and distinguishes GPT-2 XL from the A1 block',()=>{
     for(const fact of ['targets = sequence[:, :-1], sequence[:, 1:]','token_logits.gather',
@@ -60,7 +60,11 @@ describe('Transformer shapes and resource explanations',()=>{
     expect(fm.source_unit_id).toHaveLength(21);
     expect(fm.source_unit_id).toContain('lecture-02-flop-units');
     expect(fm.previous).toContain('01 Dense FFN');
-    expect(fm.next).toContain('01 Данные и pre-training');
-    expect(body).toContain('**Практика:**');
+    expect(fm.next).toContain('01 MHA, MQA и GQA');
+    expect(body).not.toContain('**Практика:**');
+    expect(body).not.toContain('06 Практика/');
+    for(const s of ['id="token-ids-through-one-block"','(0.0689,0.9311)',
+      '(0.0992,3.9225)','(0.0358,1.4138,-0.0358)','2 560 000 логитов'])
+      expect(body).toContain(s);
   });
 });
