@@ -4,6 +4,22 @@
   "subsequentVerifiedRevisions": {
     "scope": "These current bytes restore to the historical whole-read receipts via the exact journals. This does not claim another full read or acceptance of those chapters.",
     "chapters": {
+      "00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer.md": {
+        "currentSha256": "c82c7bd854f54b45618c3c522e872d0667c688ca5e7129d653f09550e4983572",
+        "stopBefore": "2026-11-21-seq2seq-editorial-pass.json"
+      },
+      "00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора.md": {
+        "currentSha256": "a48b68217e4df4a1c0198e99085f18a9b6ca73ea8baac14c9f5161830b95c504",
+        "stopBefore": "2026-11-21-lstm-gru-editorial-pass.json"
+      },
+      "00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md": {
+        "currentSha256": "0b011f7c8446ec3055cb31dbedd82d86a0a3b000b7027d2d5f2043c72a2842d6",
+        "stopBefore": "2026-11-21-rnn-bptt-editorial-pass.json"
+      },
+      "00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md": {
+        "currentSha256": "a4a31e6c421dfa190c65619fd45b1e47ec75c73e67b656c8124f91ccc9128114",
+        "stopBefore": "2026-11-21-tokenization-editorial-pass.json"
+      },
       "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md": {
         "currentSha256": "8d0fa034654143e0ce6fdd4cca57f99593c10eb7982b4542fd9ddeb74c5f1983",
         "stopBefore": "2026-11-21-word2vec-glove-editorial-pass.json"

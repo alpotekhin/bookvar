@@ -406,7 +406,8 @@ sections:
                 route: textbook/recurrent-networks/rnn-bptt
               - label: LSTM и GRU
                 route: textbook/recurrent-networks/lstm-gru
-              - label: Seq2Seq и bottleneck фиксированного вектора
+              - label: Seq2Seq с фиксированным контекстом
+                label_en: Seq2Seq with a fixed context
                 route: textbook/recurrent-networks/seq2seq-bottleneck
               - label: Attention для перевода
                 route: textbook/transformer/from-seq2seq-to-transformer

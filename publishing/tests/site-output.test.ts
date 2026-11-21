@@ -1660,6 +1660,21 @@ describe('static handbook output', () => {
         '0.653275','D14-1179.pdf#page=3','#step-by-step-lstm-walk-through',
         '#variants-on-long-short-term-memory','/img/LSTM3-chain.png'])
         expect(html).toContain(phrase);
+      const positions=['lstm-scalar','lstm-gradient-path','gru-state','gru-update',
+        'recurrent-parameter-counts','lstm-cell-weights','gru-conventions','gated-state-carry']
+        .map(id=>html.indexOf('id="'+id+'"'));
+      expect(positions.every((offset,i)=>offset>=0&&(i===0||offset>positions[i-1]))).toBe(true);
+      const comparison=html.slice(positions[4],positions[5]);
+      expect(comparison).toMatch(/<th\b[^>]*>Результат<\/th>/);
+      for(const phrase of ['0.891','<annotation encoding="application/x-tex">0.35</annotation>',
+        'Реализация в PyTorch','коэффициент кандидата'])
+        expect(html).toContain(phrase);
+      for(const id of ['lstm-gate-gradients','gru-candidate-biases','recurrent-bidirectional','lstm-projection']){
+        const offset=html.indexOf('id="'+id+'"');
+        const tags=html.slice(html.indexOf('<main'),offset).match(/<\/?details\b[^>]*>/g)??[];
+        const depth=tags.reduce((open,tag)=>open+(tag.startsWith('</')?-1:1),0);
+        expect(depth,id).toBeGreaterThan(0);
+      }
       expect(html).not.toMatch(/<img\b[^>]*\bsrc="[^"]*LSTM3-/);
       expect(html).not.toContain('class="katex-error');
       expect(html).toContain('/textbook/recurrent-networks/seq2seq-bottleneck/');
@@ -1681,6 +1696,21 @@ describe('static handbook output', () => {
         'packed_final','restored_lengths','dense_final','100 parameters instead of 96',
         'Рекуррентная связь и развёртка RNN с общими весами по времени'])
         expect(html).toContain(phrase);
+      const order=['rnn-teacher-forcing','rnn-scalar-forward','rnn-bptt',
+        'rnn-manual-backward','rnn-ce-backward','rnn-detach','rnn-small-lm',
+        'rnn-library-contract','rnn-streaming-padding','rnn-limitations'];
+      const positions=order.map(id=>html.indexOf('id="'+id+'"'));
+      expect(positions.every((position,i)=>position>=0&&(i===0||position>positions[i-1]))).toBe(true);
+      const detach=html.slice(html.indexOf('id="rnn-detach"'),html.indexOf('id="rnn-truncation-horizon"'));
+      expect(detach).toMatch(/<th\b[^>]*>Градиент по весу<\/th>/);
+      for(const text of ['Полный граф','0.253364','0.132348','0.462117'])
+        expect(detach).toContain(text);
+      for(const id of ['rnn-library-contract','rnn-input-projections','rnn-packed-sequences']){
+        const position=html.indexOf('id="'+id+'"');
+        expect(html.lastIndexOf('<details',position)).toBeGreaterThan(html.lastIndexOf('</details>',position));
+      }
+      for(const alias of ['численный-проход','полная-маленькая-модель','что-rnn-умеет-и-где-ломается'])
+        expect(html).toContain('id="'+alias+'"');
       expect(html).not.toContain('class="katex-error');
       expect(html).toContain('https://docs.pytorch.org/docs/2.14/generated/torch.nn.RNN.html');
       expect(html).toContain('/textbook/recurrent-networks/lstm-gru/');
@@ -5683,6 +5713,18 @@ describe('static handbook output', () => {
       '<strong>0.726</strong>', '<strong>0.673</strong>', '#seq2seq-attention',
       'https://arxiv.org/html/1409.0473v7#S4.F3'])
       expect(html).toContain(fact);
+    const order=['translation-two-reads','веса-для-кошка','веса-для-спит',
+      'мини-реализация-recurrent-attention','4-bahdanau-и-luong--похожий-принцип-разные-сборки',
+      '6-почему-этого-всё-ещё-недостаточно'].map(id=>html.indexOf('id="'+id+'"'));
+    expect(order.every((offset,i)=>offset>=0&&(i===0||offset>order[i-1]))).toBe(true);
+    const trace=html.slice(order[0],order[1]);
+    expect(trace).toContain('<th>Токен на входе RNN</th>');
+    for(const state of ['s_0','s_1','s_2'])expect(trace).toContain(state+'</annotation>');
+    expect(html).toContain('состояние после шага с BOS');
+    expect(html).toContain('Attention для перевода');
+    const english=await readFile(join(distDir,'en/textbook/transformer/from-seq2seq-to-transformer/index.html'),'utf8');
+    expect(english).toContain('Canonical-language chapter.');
+    expect(english).toContain('<th>Токен на входе RNN</th>');
     expect(html).not.toMatch(/<img[^>]+src="[^"]*\/(?:bottleneck-min|bahdanau_examples-min)\.png"/);
     for (const id of ['перевод-как-условная-языковая-модель',
       '1-до-attention-один-вектор-на-всё-предложение', '2-оставим-не-резюме-а-память',
@@ -5715,6 +5757,21 @@ describe('static handbook output', () => {
         '/cho-2014-figure4.png','https://aclanthology.org/W14-4012.pdf#page=7',
         '#translation-two-reads'])
         expect(html).toContain(phrase);
+      const routeOrder=['seq2seq-factorization','seq2seq-source-context','seq2seq-teacher-forcing',
+        'seq2seq-generation','seq2seq-complete-model','seq2seq-state-shapes',
+        'seq2seq-bottleneck','seq2seq-attention'].map(id=>html.indexOf('id="'+id+'"'));
+      expect(routeOrder.every((offset,i)=>offset>=0&&(i===0||offset>routeOrder[i-1]))).toBe(true);
+      const shapes=html.slice(routeOrder[5],routeOrder[6]);
+      for(const shape of ['[2, 4, 16]','[4, 4, 24]','[1, 1, 24]','[4, 4, 7]'])
+        expect(shapes).toContain(shape);
+      for(const phrase of ['Seq2Seq с фиксированным контекстом','пропустить цвет',
+        '(-0.6,1.1)','Полный код обучения и пошагового перевода'])
+        expect(html).toContain(phrase);
+      for(const id of ['seq2seq-beam-states','seq2seq-state-bridge']){
+        const offset=html.indexOf('id="'+id+'"');
+        const tags=html.slice(html.indexOf('<main'),offset).match(/<\/?details\b[^>]*>/g)??[];
+        expect(tags.reduce((depth,tag)=>depth+(tag.startsWith('</')?-1:1),0),id).toBeGreaterThan(0);
+      }
       expect(html).not.toContain('class="katex-error');
       expect(html).toContain('/textbook/transformer/from-seq2seq-to-transformer/');
       if(locale)expect(html).toContain('Canonical-language chapter.');

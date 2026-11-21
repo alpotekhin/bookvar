@@ -4,7 +4,7 @@ type: textbook-chapter
 status: active
 locale: en
 translation_status: current
-canonical_revision: "79ec6c5bd155231a8858cd05a81811c2f0f72c4f02932c46bb729baa390c11ac"
+canonical_revision: "8b45d042501fa68c95cd15849ef51bd61a7761574fb7edcc405799359e378135"
 translation_reviewed: "2026-11-14"
 translation_of: "00 Учебник/_index.md"
 last_updated: 2026-11-14
@@ -59,7 +59,7 @@ The course starts with mathematics and neural networks. It then covers language 
 - [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram|BPE, WordPiece, and Unigram]]
 - [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT|RNNs and backpropagation through time]]
 - [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU|LSTM and GRU]]
-- [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора|Seq2Seq and the fixed-vector bottleneck]]
+- [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора|Seq2Seq with a fixed context]]
 - [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer|Attention for translation]]
 
 <a id="vi-transformer-bert-и-gpt"></a>

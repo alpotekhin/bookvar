@@ -45,8 +45,12 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«Представление текста числами»](2026-11-21-text-representation-editorial-pass.json),
 [«N-граммная языковая модель»](2026-11-21-ngram-editorial-pass.json),
 [«Вероятность текста и предсказание следующего токена»](2026-11-21-next-token-editorial-pass.json),
-[«Word2Vec, GloVe и распределительные представления»](2026-11-21-word2vec-glove-editorial-pass.json) и
-[«BPE, WordPiece и Unigram»](2026-11-21-tokenization-editorial-pass.json).
-Следующая глава — «RNN и BPTT». Проверить переход от окна фиксированной
-длины к переносу скрытого состояния и показать, где встречаются
-вклады разных шагов при вычислении градиента общих весов.
+[«Word2Vec, GloVe и распределительные представления»](2026-11-21-word2vec-glove-editorial-pass.json),
+[«BPE, WordPiece и Unigram»](2026-11-21-tokenization-editorial-pass.json),
+[«RNN и BPTT»](2026-11-21-rnn-bptt-editorial-pass.json),
+[«LSTM и GRU»](2026-11-21-lstm-gru-editorial-pass.json),
+[«Seq2Seq с фиксированным контекстом»](2026-11-21-seq2seq-editorial-pass.json) и
+[«Attention для перевода»](2026-11-21-attention-translation-editorial-pass.json).
+Следующая глава — «Self-Attention — Q, K, V». Проследить, как одна
+последовательность даёт запросы, ключи и значения, и проверить руками
+одну строку весов, масштабирование и результат взвешенной суммы.

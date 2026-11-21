@@ -326,7 +326,7 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT#rnn-streaming-padding|Streaming state memory and PAD updates]]
   - [[00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT#rnn-packed-sequences|PackedSequence and true sequence lengths]]
   - [[00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT#rnn-limitations|Limits of state capacity, gradients and parallelism]]
-- [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора|Seq2Seq and the fixed-vector bottleneck]]
+- [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора|Seq2Seq with a fixed context]]
   - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-factorization|Conditional translation probability and EOS]]
   - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-source-context|Decoder initialization and fixed context]]
   - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-state-shapes|Layers, states and tensor shapes]]

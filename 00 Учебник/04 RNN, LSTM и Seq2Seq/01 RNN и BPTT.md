@@ -2,7 +2,7 @@
 title: RNN и обратное распространение во времени
 type: textbook-chapter
 status: canonical
-last_updated: 2026-11-03
+last_updated: 2026-11-21
 source_language: mixed
 reference_terms:
   - label: "Рекуррентное состояние вместо окна"
@@ -220,51 +220,24 @@ $24+9+9+3+24+8=77$ параметров, со связыванием $77-24=53$.
 Прямой расчёт логитов сохранил бы форму $V$, но входные и выходные
 представления слов больше нельзя было бы обучать независимо.
 
-<a id="rnn-scalar-forward"></a>
-
-## Численный проход
-
-Возьмём одномерную RNN без смещения и выходного классификатора:
-
-$$
-h_t=\tanh(0.5x_t+0.8h_{t-1}),\qquad h_0=0.
-$$
-
-Пусть входы равны $1,0,1$. Числа ниже округлены только для таблицы;
-при дальнейших вычислениях используются неокруглённые состояния.
-
-| Шаг | $x_t$ | $0.5x_t$ | $0.8h_{t-1}$ | $a_t$ | $h_t$ |
-|---:|---:|---:|---:|---:|---:|
-| 1 | 1 | 0.500000 | 0 | 0.500000 | 0.462117 |
-| 2 | 0 | 0 | 0.369694 | 0.369694 | 0.353724 |
-| 3 | 1 | 0.500000 | 0.282979 | 0.782979 | 0.654413 |
-
-Второй вход нулевой, но состояние осталось ненулевым: на него влияет первый
-вход. Если перед третьим шагом сбросить состояние в ноль, получится
-$\tanh(0.5)\approx0.462117$ вместо $0.654413$. Прежняя история
-изменила результат последнего шага.
-
-На каждом шаге прежнее состояние снова умножается на рекуррентный вес
-и проходит через $\tanh$. Никакого отдельного неизменяемого хранилища
-первого входа здесь нет. Если повторять нулевые входы с этим весом,
-состояние будет приближаться к нулю.
-
 <a id="rnn-teacher-forcing"></a>
 
-### Предсказание следующего токена
+<a id="предсказание-следующего-токена"></a>
 
-В языковой модели к рекуррентной ячейке добавляется выходной классификатор.
-Для строки «кот кот спит» обучающие вход и цель имеют вид
+### Сдвиг входов и целей
+
+После каждого токена выходной слой получает новое состояние.
+Для строки «кот кот спит» входы и цели сдвинуты на одну позицию:
 
 ```text
 вход:  <BOS>   кот    кот    спит
 цель:   кот   кот   спит   <EOS>
 ```
 
-На первой позиции сеть видит только начало текста. На второй видит
-состояние после `<BOS>` и текущий «кот». На третьей её состояние уже
-зависит от `<BOS>`, «кот», «кот». Цель на один токен опережает вход:
-текущий токен не должен одновременно быть ответом для своего же выхода.
+На первой позиции, после `<BOS>`, модель должна предсказать «кот». На второй она
+получает первый «кот» и предсказывает второй. На третьей позиции состояние
+зависит от начала текста и обоих «кот», а цель теперь «спит». Для каждого
+входа правильный ответ берут из следующей позиции исходного текста.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rnn-bptt-2026-10-21/d2l-rnn-train.svg|Символьные входы machin и сдвинутые цели achine]]
 
@@ -290,238 +263,50 @@ CC BY-SA 4.0. Оригинальный SVG.*
 Постановка с этим сдвигом разобрана также в
 [SLP3, §14.2.1–14.2.2](https://web.stanford.edu/~jurafsky/slp3/14.pdf).
 
-<a id="rnn-small-lm"></a>
+<a id="rnn-scalar-forward"></a>
 
-### Полная маленькая модель
+<a id="численный-проход"></a>
 
-В коде объекты пакета хранятся строками. Поэтому формуле $W_{xh}x_t$
-соответствует `x @ W_xh.T`. Вход `ids` имеет форму `[B, T]`, состояние
-имеет форму `[B, m]`, логиты имеют форму `[B, T, V]`. Цикл проходит по
-времени; объекты пакета обрабатываются одновременно.
+## Три шага прямого прохода
 
-Следующий пример содержит embeddings, рекуррентную ячейку и выходной слой,
-а также обучение на тех же трёх текстах, что использовались
-в главе о языковой модели. Чтобы не смешивать рекуррентность с padding,
-тексты обрабатываются по одному; их потери суммируются и делятся
-на общее число целей. Это один шаг оптимизатора по всему маленькому корпусу.
-
-<details>
-<summary>RNN на 96 параметров: полный код обучения и продолжения</summary>
-
-```python
-import torch
-from torch import nn
-import torch.nn.functional as F
-
-torch.set_num_threads(1)
-torch.manual_seed(42)
-
-class RNNLM(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.E = nn.Parameter(.1 * torch.randn(8, 3, dtype=torch.float64))
-        self.W_xh = nn.Parameter(.1 * torch.randn(4, 3, dtype=torch.float64))
-        self.W_hh = nn.Parameter(.1 * torch.randn(4, 4, dtype=torch.float64))
-        self.b_h = nn.Parameter(torch.zeros(4, dtype=torch.float64))
-        self.W_hy = nn.Parameter(.1 * torch.randn(8, 4, dtype=torch.float64))
-        self.b_y = nn.Parameter(torch.zeros(8, dtype=torch.float64))
-
-    def forward(self, ids, h=None):
-        B, T = ids.shape
-        if h is None:
-            h = self.E.new_zeros(B, 4)
-        states = []
-        for t in range(T):
-            x = self.E[ids[:, t]]
-            h = torch.tanh(x @ self.W_xh.T + h @ self.W_hh.T + self.b_h)
-            states.append(h)
-        H = torch.stack(states, dim=1)
-        return H @ self.W_hy.T + self.b_y, h
-
-vocab = ["<PAD>", "<UNK>", "кот", "спит", "пёс", "бежит", "<BOS>", "<EOS>"]
-docs = [
-    torch.tensor([[6, 2, 2, 3, 7]]),  # кот кот спит
-    torch.tensor([[6, 4, 3, 7]]),     # пёс спит
-    torch.tensor([[6, 2, 3, 5, 7]]),  # кот спит бежит
-]
-model = RNNLM()
-optimizer = torch.optim.Adam(model.parameters(), lr=.03)
-N = sum(z.shape[1] - 1 for z in docs)
-
-def objective():
-    total = model.E.new_zeros(())
-    for z in docs:
-        logits, _ = model(z[:, :-1])  # h=None: новый независимый текст
-        total = total + F.cross_entropy(
-            logits.reshape(-1, 8), z[:, 1:].reshape(-1), reduction="sum"
-        )
-    return total / N
-
-initial = objective().item()
-for step in range(1500):
-    optimizer.zero_grad(set_to_none=True)
-    loss = objective()
-    loss.backward()
-    nn.utils.clip_grad_norm_(model.parameters(), 1., error_if_nonfinite=True)
-    optimizer.step()
-
-print("parameters:", sum(p.numel() for p in model.parameters()))
-print("N:", N, "NLL:", initial, "->", objective().item())
-
-@torch.no_grad()
-def continue_text(prefix, max_new=8):
-    ids = torch.tensor([[6] + prefix])
-    logits, h = model(ids)
-    result = []
-    for _ in range(max_new):
-        token = int(logits[0, -1].argmax())  # жадный выбор, не sampling
-        result.append(token)
-        if token == 7:
-            break
-        logits, h = model(torch.tensor([[token]]), h)
-    return [vocab[i] for i in result]
-
-print("кот спит ->", continue_text([2, 3]))
-print("кот кот спит ->", continue_text([2, 2, 3]))
-```
-
-</details>
-
-У примера 11 целей. В проверенном запуске средняя NLL уменьшилась
-с $2.078633$ до $0.299976$. Это проверка обучения маленькой сети
-на трёх строках, не оценка качества на новых текстах.
-
-Околонулевая потеря здесь недостижима даже у более мощной модели:
-один и тот же полный префикс встречается с разными продолжениями.
-После `<BOS>` в двух текстах идёт «кот», в одном «пёс». Оптимальны
-вероятности $2/3$ и $1/3$. После `<BOS>` «кот» в одном тексте идёт
-«кот», в другом «спит», поэтому оптимальны $1/2$ и $1/2$.
-Остальные полные префиксы имеют единственную цель. Нижняя граница
-средней потери равна
+Возьмём одномерную RNN без смещения и выходного классификатора:
 
 $$
-\begin{aligned}
-L_{\min}&=\frac{3H(2/3,1/3)+2\ln2}{11}\\
-&\approx0.299622,
-\end{aligned}
+h_t=\tanh(0.5x_t+0.8h_{t-1}),\qquad h_0=0.
 $$
 
-где $H(q)=-\sum_jq_j\ln q_j$. Обученная сеть приблизилась к этой границе.
+Пусть входы равны $1,0,1$. Числа ниже округлены только для таблицы;
+при дальнейших вычислениях используются неокруглённые состояния.
 
-При этом префиксы `<BOS>` «кот кот спит» и `<BOS>` «кот спит» она различила.
-Первый заканчивается `<EOS>`, второй продолжается «бежит».
-У оконной модели с окном два оба случая давали один вход «кот спит».
-В этом корпусе рекуррентное состояние позволило сохранить сведения
-о предшествующем «кот». Из такого опыта нельзя заключить, что та же
-ячейка сохранит произвольный факт через сотню слов.
+| Шаг | $x_t$ | $a_t$ | $h_t$ |
+|---:|---:|---:|---:|
+| 1 | 1 | 0.500000 | 0.462117 |
+| 2 | 0 | 0.369694 | 0.353724 |
+| 3 | 1 | 0.782979 | 0.654413 |
 
-<a id="rnn-library-contract"></a>
+На втором шаге $x_2=0$. В $a_2$ остаётся только вклад предыдущего
+состояния: $0.8\cdot0.462117\approx0.369694$. Поэтому второй шаг
+передаёт в третий ненулевое состояние $h_2\approx0.353724$.
 
-### Matching the cell to `torch.nn.RNN`
-
-`torch.nn.RNN` implements the recurrent feature extractor. It does not
-include the embedding table or the vocabulary classifier of `RNNLM`.
-For one unidirectional layer with `batch_first=True`, the shapes are
-
-| Object | Shape | Meaning |
-|---|---|---|
-| Input | `[B,T,d]` | Feature vectors, not token IDs |
-| `output` | `[B,T,m]` | Hidden state at every position |
-| `h_0`, `h_n` | `[1,B,m]` | Initial and final state of the layer |
-
-`batch_first` changes the input/output layout, not the hidden-state
-layout. With several layers, the leading state axis enumerates layers;
-`output` contains the top layer’s sequence. These contracts and the
-equivalent recurrence are specified in
-[PyTorch 2.14, RNN](https://docs.pytorch.org/docs/2.14/generated/torch.nn.RNN.html).
-
-<a id="rnn-two-biases"></a>
-
-### Two biases represent one effective offset
-
-The library cell has input and recurrent biases, `bias_ih_l0` and
-`bias_hh_l0`. Both are added before the same tanh. To match our cell,
-copy its $b_h$ to the first and set the second to zero. The forward pass
-then depends on their sum, $b_{\mathrm{eff}}=b_{ih}+b_{hh}$.
-
-The following complete example uses the same $d=3$, $m=4$ dimensions.
-It compares every state and the input/initial-state gradients, then
-checks the two bias derivatives. The input vectors are assigned random
-features here; no embedding lookup or language-model loss is implied.
-
-```python
-import torch
-
-torch.manual_seed(31)
-dtype = torch.float64
-B, T, d, m = 2, 4, 3, 4
-features = torch.randn(B, T, d, dtype=dtype, requires_grad=True)
-initial_state = torch.randn(1, B, m, dtype=dtype, requires_grad=True)
-input_weight = (.1 * torch.randn(m, d, dtype=dtype)).requires_grad_()
-state_weight = (.1 * torch.randn(m, m, dtype=dtype)).requires_grad_()
-single_bias = torch.randn(m, dtype=dtype, requires_grad=True)
-
-cell = torch.nn.RNN(d, m, batch_first=True, dtype=dtype)
-with torch.no_grad():
-    cell.weight_ih_l0.copy_(input_weight)
-    cell.weight_hh_l0.copy_(state_weight)
-    cell.bias_ih_l0.copy_(single_bias)
-    cell.bias_hh_l0.zero_()
-
-state = initial_state[0]
-history = []
-for t in range(T):
-    state = torch.tanh(features[:, t] @ input_weight.T
-                       + state @ state_weight.T + single_bias)
-    history.append(state)
-manual_states = torch.stack(history, dim=1)
-library_states, library_final = cell(features, initial_state)
-torch.testing.assert_close(library_states, manual_states)
-torch.testing.assert_close(library_final, manual_states[:, -1][None])
-assert library_states.shape == (B, T, m)
-assert library_final.shape == (1, B, m)
-
-manual_gradients = torch.autograd.grad(manual_states.square().sum(),
-    (features, initial_state, input_weight, state_weight, single_bias))
-library_gradients = torch.autograd.grad(library_states.square().sum(),
-    (features, initial_state, cell.weight_ih_l0, cell.weight_hh_l0,
-     cell.bias_ih_l0, cell.bias_hh_l0))
-for got, expected in zip(library_gradients[:4], manual_gradients[:4]):
-    torch.testing.assert_close(got, expected)
-for got in library_gradients[4:]:
-    torch.testing.assert_close(got, manual_gradients[4])
-
-g = manual_gradients[4]
-rate = .01
-effective_after_two_biases = (cell.bias_ih_l0.detach() + cell.bias_hh_l0.detach()
-    - rate * (library_gradients[4] + library_gradients[5]))
-torch.testing.assert_close(effective_after_two_biases,
-                           single_bias.detach() - 2 * rate * g)
-assert not torch.allclose(effective_after_two_biases, single_bias.detach() - rate * g)
-```
-
-If $g=\partial L/\partial b_{\mathrm{eff}}$, then each bias receives
-the same $g$. For plain SGD with rate $\eta$, updating both changes
-their sum by $-2\eta g$. Updating one bias changes it by $-\eta g$.
-Equal forward values therefore do not imply identical optimizer steps.
-This calculation has no clipping, momentum or weight decay.
-
-Our recurrent core has $md+m^2+m=32$ parameters. The library core has
-$md+m^2+2m=36$. Keeping the same embedding and output classifier would
-give 100 parameters instead of 96. To preserve the single-bias
-parameterization when using this module, the extra bias can be held at
-zero rather than trained. Time sharing of a weight and splitting a bias
-into two trainable parameters are separate choices.
+Теперь пропустим первый вход и прочитаем только $0,1$, снова начиная
+с нулевого состояния. После нуля состояние равно нулю, а после единицы
+получится $\tanh(0.5)\approx0.462117$. У обеих последовательностей
+одинаковый хвост $0,1$, но итоговые состояния различны. В случае $1,0,1$
+первый вход меняет результат через $h_1$ и $h_2$. Если после второго
+шага продолжать подавать нули, состояние будет приближаться к нулю:
+при каждом таком шаге $|\tanh(0.8h)|\le 0.8|h|$.
 
 <a id="rnn-bptt"></a>
 
-## BPTT: backpropagation по развёрнутой сети
+<a id="bptt-backpropagation-по-развёрнутой-сети"></a>
 
-Для обучения нужно вычислить производную потери по общим весам.
-Состояние $h_t$ влияет на выход текущего шага и на следующее состояние.
-Через это следующее состояние оно влияет и на более поздние выходы.
-Поэтому при обратном проходе в $h_t$ складываются производные
-от обеих ветвей.
+## Обратное распространение во времени (BPTT)
+
+Измерим ошибку только после третьего шага. Изменение $h_2$ всё равно
+изменит ошибку: $h_2$ входит в расчёт $h_3$. Если считать потерю на
+каждом шаге, от $h_2$ к итоговой потере идут два пути: через выход
+второго шага и через последующие состояния. При обратном проходе
+их вклады в производную по $h_2$ складываются.
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/d2l-recurrent/rnn-bptt.svg|Зависимости трёх шагов RNN от общих параметров и входов]]
 
@@ -551,10 +336,10 @@ backpropagation through time, BPTT.
 
 ### Обратный проход на тех же трёх шагах
 
-Для одномерного примера выберем одну потерю на конце
-$L=\tfrac12h_3^2\approx0.214128$. Цель этого расчёта — получить нулевое
-финальное состояние; это отдельная учебная задача, а не
-cross-entropy языковой модели.
+Пусть последнее состояние должно быть нулевым. Для трёх шагов из таблицы
+возьмём квадратичную потерю $L=\tfrac12h_3^2\approx0.214128$. На первых двух
+шагах потерь нет. В языковой модели вместо этой квадратичной ошибки
+будет кросс-энтропия по сдвинутым целям.
 
 Производная потери по $h_3$ равна $h_3$. Производная $\tanh(a_t)$
 равна $1-h_t^2$. Обозначим $\delta_t=dL/da_t$. Тогда
@@ -589,13 +374,18 @@ $$
 | На шаге 3 | $h_2=0.353724$ | 0.132348 |
 | Сумма | | 0.253364 |
 
-Нулевой первый вклад объясняется именно $h_0=0$. Первый вход всё равно
-повлиял на $h_1$, затем на $h_2$ и на последнюю потерю.
+На первом шаге рекуррентный вес умножается на $h_0=0$, поэтому его
+локальный вклад нулевой, хотя сам вход $x_1$ влияет на все три состояния.
+На втором шаге $x_2=0$, но $h_1\ne0$, и последняя потеря зависит от того,
+как $w$ преобразовал $h_1$ в $h_2$. Складываем $0.121016$ и $0.132348$:
+в модели один обучаемый $w$, ему и достаётся сумма.
+
 Если вместо рекуррентного веса дифференцировать входной вес $v=0.5$,
 получится $\sum_t\delta_tx_t=\delta_1+\delta_3\approx0.538916$.
 Для общего смещения производная равнялась бы $\sum_t\delta_t$.
 
-Проверим ручной обратный проход и один шаг SGD:
+<details>
+<summary>Проверка градиента и одного шага SGD в PyTorch</summary>
 
 ```python
 import torch
@@ -636,6 +426,8 @@ assert after < before
 print("loss after SGD:", before, "->", after)
 ```
 
+</details>
+
 <a id="rnn-ce-backward"></a>
 
 ### Общая формула для языковой модели
@@ -653,10 +445,13 @@ $$
 \delta_t=g_t\odot(1-h_t^2).
 $$
 
-Первое слагаемое в $g_t$ приходит от текущего выхода, второе от будущих
-потерь. Поэтому при потере только на последнем шаге локальное слагаемое
-на предыдущих шагах нулевое, но производная через будущее сохраняется.
-В языковой модели локальное слагаемое обычно есть на каждом шаге.
+В строке «кот кот спит» состояние после второго «кот» прямо влияет на
+вероятность «спит». Это первое слагаемое, $W_{hy}^{\top}e_t$. То же
+состояние участвует в обработке слова «спит», после которого модель
+предсказывает конец текста. Производная этой более поздней потери
+приходит через $W_{hh}^{\top}\delta_{t+1}$. В скалярном примере
+с одной последней потерей первые два состояния получали производную
+только по второму пути.
 
 После обратной рекурсии градиенты параметров получаются суммированием:
 
@@ -693,7 +488,9 @@ $$
 
 <a id="rnn-jacobians"></a>
 
-### Почему далёкие зависимости трудно обучать
+<a id="почему-далёкие-зависимости-трудно-обучать"></a>
+
+### Затухание и рост градиента
 
 Даже при полном BPTT производная может стать очень маленькой задолго
 до начала текста. Возьмём скалярную ячейку
@@ -778,7 +575,9 @@ $BTm$ чисел; дополнительно нужны активации вы�
 
 <a id="rnn-detach"></a>
 
-### Передать состояние, отсоединить историю
+<a id="передать-состояние-отсоединить-историю"></a>
+
+### Усечение графа без сброса состояния
 
 При усечённом BPTT, truncated BPTT, поток делят на фрагменты.
 Численное значение конечного состояния одного фрагмента передают
@@ -796,10 +595,17 @@ $$
 =\delta_3h_2\approx0.132348.
 $$
 
-Полный градиент был $0.253364$. Потерянный вклад $0.121016$
-приходил через обучение второго шага. Для этой последней потери
-граница отключила именно этот путь; другие потери прошлого
-фрагмента могли обучать те же веса раньше.
+В полном графе последние два применения $w$ давали $0.121016$ и
+$0.132348$. Граница убирает первый из этих вкладов: производная последней
+потери больше не проходит к вычислению $h_2$. Если вместо отсоединения
+сбросить $h_2$ в ноль, исчезнет и второй вклад: в $a_3$
+вес $w$ теперь умножается на ноль.
+
+| Перед третьим шагом | $h_3$ | Градиент по весу |
+|---|---:|---:|
+| Полный граф | 0.654413 | 0.253364 |
+| Отсоединение $h_2$ | 0.654413 | 0.132348 |
+| Сброс $h_2$ в ноль | 0.462117 | 0 |
 
 ```python
 import torch
@@ -909,6 +715,9 @@ $$
 Бесконечности и NaN нужно обнаруживать отдельно, а не пытаться
 исправить умножением на коэффициент ограничения.
 
+<details>
+<summary>Код: обучение по фрагментам и ограничение нормы</summary>
+
 Следующий самостоятельный пример обучает скалярную ячейку на потоке
 из шести чисел. Цели заданы явно. Он показывает границы графа и порядок
 операций; это регрессионная задача, не языковая модель.
@@ -952,15 +761,252 @@ for start in range(0, len(xs), K):
 Для сравнения полного и усечённого градиента при одинаковых параметрах
 нужно отложить `step()`, как в предыдущем примере.
 
+</details>
+
 Clipping уменьшает большой градиент, но не восстанавливает затухший
 и не возвращает пути, обрезанные при усечении.
 [В D2L, §9.5.3](https://d2l.ai/chapter_recurrent-neural-networks/rnn-scratch.html#gradient-clipping)
 норма также считается по всем параметрам вместе.
 
+<a id="rnn-small-lm"></a>
+
+<a id="полная-маленькая-модель"></a>
+
+## Обучение RNN на трёх текстах
+
+В коде объекты пакета хранятся строками. Поэтому формуле $W_{xh}x_t$
+соответствует `x @ W_xh.T`. Вход `ids` имеет форму `[B, T]`, состояние
+имеет форму `[B, m]`, логиты имеют форму `[B, T, V]`. Цикл проходит по
+времени; объекты пакета обрабатываются одновременно.
+
+Следующий пример содержит embeddings, рекуррентную ячейку и выходной слой,
+а также обучение на тех же трёх текстах, что использовались
+в главе о языковой модели. Чтобы не смешивать рекуррентность с padding,
+тексты обрабатываются по одному; их потери суммируются и делятся
+на общее число целей. Это один шаг оптимизатора по всему маленькому корпусу.
+
+<details>
+<summary>RNN на 96 параметров: полный код обучения и продолжения</summary>
+
+```python
+import torch
+from torch import nn
+import torch.nn.functional as F
+
+torch.set_num_threads(1)
+torch.manual_seed(42)
+
+class RNNLM(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.E = nn.Parameter(.1 * torch.randn(8, 3, dtype=torch.float64))
+        self.W_xh = nn.Parameter(.1 * torch.randn(4, 3, dtype=torch.float64))
+        self.W_hh = nn.Parameter(.1 * torch.randn(4, 4, dtype=torch.float64))
+        self.b_h = nn.Parameter(torch.zeros(4, dtype=torch.float64))
+        self.W_hy = nn.Parameter(.1 * torch.randn(8, 4, dtype=torch.float64))
+        self.b_y = nn.Parameter(torch.zeros(8, dtype=torch.float64))
+
+    def forward(self, ids, h=None):
+        B, T = ids.shape
+        if h is None:
+            h = self.E.new_zeros(B, 4)
+        states = []
+        for t in range(T):
+            x = self.E[ids[:, t]]
+            h = torch.tanh(x @ self.W_xh.T + h @ self.W_hh.T + self.b_h)
+            states.append(h)
+        H = torch.stack(states, dim=1)
+        return H @ self.W_hy.T + self.b_y, h
+
+vocab = ["<PAD>", "<UNK>", "кот", "спит", "пёс", "бежит", "<BOS>", "<EOS>"]
+docs = [
+    torch.tensor([[6, 2, 2, 3, 7]]),  # кот кот спит
+    torch.tensor([[6, 4, 3, 7]]),     # пёс спит
+    torch.tensor([[6, 2, 3, 5, 7]]),  # кот спит бежит
+]
+model = RNNLM()
+optimizer = torch.optim.Adam(model.parameters(), lr=.03)
+N = sum(z.shape[1] - 1 for z in docs)
+
+def objective():
+    total = model.E.new_zeros(())
+    for z in docs:
+        logits, _ = model(z[:, :-1])  # h=None: новый независимый текст
+        total = total + F.cross_entropy(
+            logits.reshape(-1, 8), z[:, 1:].reshape(-1), reduction="sum"
+        )
+    return total / N
+
+initial = objective().item()
+for step in range(1500):
+    optimizer.zero_grad(set_to_none=True)
+    loss = objective()
+    loss.backward()
+    nn.utils.clip_grad_norm_(model.parameters(), 1., error_if_nonfinite=True)
+    optimizer.step()
+
+print("parameters:", sum(p.numel() for p in model.parameters()))
+print("N:", N, "NLL:", initial, "->", objective().item())
+
+@torch.no_grad()
+def continue_text(prefix, max_new=8):
+    ids = torch.tensor([[6] + prefix])
+    logits, h = model(ids)
+    result = []
+    for _ in range(max_new):
+        token = int(logits[0, -1].argmax())  # жадный выбор, не sampling
+        result.append(token)
+        if token == 7:
+            break
+        logits, h = model(torch.tensor([[token]]), h)
+    return [vocab[i] for i in result]
+
+print("кот спит ->", continue_text([2, 3]))
+print("кот кот спит ->", continue_text([2, 2, 3]))
+```
+
+</details>
+
+У примера 11 целей. В проверенном запуске средняя NLL уменьшилась
+с $2.078633$ до $0.299976$. Это проверка обучения маленькой сети
+на трёх строках, не оценка качества на новых текстах.
+
+Один и тот же полный префикс встречается с разными продолжениями.
+Поэтому даже более мощная модель не сведёт среднюю потерю к нулю.
+После `<BOS>` в двух текстах идёт «кот», в одном «пёс». Оптимальны
+вероятности $2/3$ и $1/3$. После `<BOS>` «кот» в одном тексте идёт
+«кот», в другом «спит», поэтому оптимальны $1/2$ и $1/2$.
+Остальные полные префиксы имеют единственную цель. Нижняя граница
+средней потери равна
+
+$$
+\begin{aligned}
+L_{\min}&=\frac{3H(2/3,1/3)+2\ln2}{11}\\
+&\approx0.299622,
+\end{aligned}
+$$
+
+где $H(q)=-\sum_jq_j\ln q_j$. Обученная сеть приблизилась к этой границе.
+
+При этом префиксы `<BOS>` «кот кот спит» и `<BOS>` «кот спит» она различила.
+Первый заканчивается `<EOS>`, второй продолжается «бежит».
+У оконной модели с окном два оба случая давали один вход «кот спит».
+В этом корпусе рекуррентное состояние позволило сохранить сведения
+о предшествующем «кот». Из такого опыта нельзя заключить, что та же
+ячейка сохранит произвольный факт через сотню слов.
+
+### Реализация рекуррентного слоя
+
+<details>
+<summary>Формы тензоров и смещения в torch.nn.RNN</summary>
+
+<a id="rnn-library-contract"></a>
+
+<h4 id="matching-the-cell-to-torchnnrnn">Matching the cell to <code>torch.nn.RNN</code></h4>
+
+`torch.nn.RNN` implements the recurrent feature extractor. It does not
+include the embedding table or the vocabulary classifier of `RNNLM`.
+For one unidirectional layer with `batch_first=True`, the shapes are
+
+| Object | Shape | Meaning |
+|---|---|---|
+| Input | `[B,T,d]` | Feature vectors, not token IDs |
+| `output` | `[B,T,m]` | Hidden state at every position |
+| `h_0`, `h_n` | `[1,B,m]` | Initial and final state of the layer |
+
+`batch_first` changes the input/output layout, not the hidden-state
+layout. With several layers, the leading state axis enumerates layers;
+`output` contains the top layer’s sequence. These contracts and the
+equivalent recurrence are specified in
+[PyTorch 2.14, RNN](https://docs.pytorch.org/docs/2.14/generated/torch.nn.RNN.html).
+
+<a id="rnn-two-biases"></a>
+
+<h4 id="two-biases-represent-one-effective-offset">Two biases represent one effective offset</h4>
+
+The library cell has input and recurrent biases, `bias_ih_l0` and
+`bias_hh_l0`. Both are added before the same tanh. To match our cell,
+copy its $b_h$ to the first and set the second to zero. The forward pass
+then depends on their sum, $b_{\mathrm{eff}}=b_{ih}+b_{hh}$.
+
+The following complete example uses the same $d=3$, $m=4$ dimensions.
+It compares every state and the input/initial-state gradients, then
+checks the two bias derivatives. The input vectors are assigned random
+features here; no embedding lookup or language-model loss is implied.
+
+```python
+import torch
+
+torch.manual_seed(31)
+dtype = torch.float64
+B, T, d, m = 2, 4, 3, 4
+features = torch.randn(B, T, d, dtype=dtype, requires_grad=True)
+initial_state = torch.randn(1, B, m, dtype=dtype, requires_grad=True)
+input_weight = (.1 * torch.randn(m, d, dtype=dtype)).requires_grad_()
+state_weight = (.1 * torch.randn(m, m, dtype=dtype)).requires_grad_()
+single_bias = torch.randn(m, dtype=dtype, requires_grad=True)
+
+cell = torch.nn.RNN(d, m, batch_first=True, dtype=dtype)
+with torch.no_grad():
+    cell.weight_ih_l0.copy_(input_weight)
+    cell.weight_hh_l0.copy_(state_weight)
+    cell.bias_ih_l0.copy_(single_bias)
+    cell.bias_hh_l0.zero_()
+
+state = initial_state[0]
+history = []
+for t in range(T):
+    state = torch.tanh(features[:, t] @ input_weight.T
+                       + state @ state_weight.T + single_bias)
+    history.append(state)
+manual_states = torch.stack(history, dim=1)
+library_states, library_final = cell(features, initial_state)
+torch.testing.assert_close(library_states, manual_states)
+torch.testing.assert_close(library_final, manual_states[:, -1][None])
+assert library_states.shape == (B, T, m)
+assert library_final.shape == (1, B, m)
+
+manual_gradients = torch.autograd.grad(manual_states.square().sum(),
+    (features, initial_state, input_weight, state_weight, single_bias))
+library_gradients = torch.autograd.grad(library_states.square().sum(),
+    (features, initial_state, cell.weight_ih_l0, cell.weight_hh_l0,
+     cell.bias_ih_l0, cell.bias_hh_l0))
+for got, expected in zip(library_gradients[:4], manual_gradients[:4]):
+    torch.testing.assert_close(got, expected)
+for got in library_gradients[4:]:
+    torch.testing.assert_close(got, manual_gradients[4])
+
+g = manual_gradients[4]
+rate = .01
+effective_after_two_biases = (cell.bias_ih_l0.detach() + cell.bias_hh_l0.detach()
+    - rate * (library_gradients[4] + library_gradients[5]))
+torch.testing.assert_close(effective_after_two_biases,
+                           single_bias.detach() - 2 * rate * g)
+assert not torch.allclose(effective_after_two_biases, single_bias.detach() - rate * g)
+```
+
+If $g=\partial L/\partial b_{\mathrm{eff}}$, then each bias receives
+the same $g$. For plain SGD with rate $\eta$, updating both changes
+their sum by $-2\eta g$. Updating one bias changes it by $-\eta g$.
+Equal forward values therefore do not imply identical optimizer steps.
+This calculation has no clipping, momentum or weight decay.
+
+Our recurrent core has $md+m^2+m=32$ parameters. The library core has
+$md+m^2+2m=36$. Keeping the same embedding and output classifier would
+give 100 parameters instead of 96. To preserve the single-bias
+parameterization when using this module, the extra bias can be held at
+zero rather than trained. Time sharing of a weight and splitting a bias
+into two trainable parameters are separate choices.
+
+</details>
+
+<details>
+<summary>Входные проекции, несколько слоёв и параллельные вычисления</summary>
+
 <!-- rnn-execution 2026-10-26 -->
 <a id="rnn-input-projections"></a>
 
-## Parallel work inside a recurrent network
+<h4 id="parallel-work-inside-a-recurrent-network">Parallel work inside a recurrent network</h4>
 
 For the scalar example above, the three input contributions are already
 known before the first state is computed: $0.5x_t$ gives
@@ -992,7 +1038,7 @@ state transitions independent.
 
 <a id="rnn-projection-chunks"></a>
 
-### Full sequence, chunks and a live stream
+<h5 id="full-sequence-chunks-and-a-live-stream">Full sequence, chunks and a live stream</h5>
 
 The entire training input is available under teacher forcing. An encoder
 can also receive a complete source sequence. In either case the first
@@ -1075,7 +1121,7 @@ thresholds are not measurements of this example or promises for another GPU.
 
 <a id="rnn-layer-grid"></a>
 
-### Several layers form a dependency grid
+<h5 id="several-layers-form-a-dependency-grid">Several layers form a dependency grid</h5>
 
 An RNN can be deep along both time and layers. D2L describes the
 layer-to-layer construction as follows:
@@ -1145,7 +1191,7 @@ states that have not been computed yet.
 
 <a id="rnn-weight-reduction"></a>
 
-### Weight gradients can be reduced across time
+<h5 id="weight-gradients-can-be-reduced-across-time">Weight gradients can be reduced across time</h5>
 
 The BPTT recurrence above computes $\delta_t=dL/da_t$ in reverse time.
 Once those values are available, their contributions to a shared weight
@@ -1176,9 +1222,13 @@ model, batch and hardware.
 
 <!-- /rnn-execution -->
 
+</details>
+
 <a id="rnn-streaming-padding"></a>
 
-## Что RNN умеет и где ломается
+<a id="что-rnn-умеет-и-где-ломается"></a>
+
+## Память при чтении потока и заполнители
 
 После обработки префикса для следующего шага RNN нужны текущее состояние
 и новый токен. Хранить все прежние состояния для самого прямого
@@ -1212,9 +1262,12 @@ model, batch and hardware.
 Для независимых текстов требуется также отдельный $h_0$;
 маска потерь его не заменяет.
 
+<details>
+<summary>Как PyTorch упаковывает последовательности разной длины</summary>
+
 <a id="rnn-packed-sequences"></a>
 
-### Variable-length batches without PAD state updates
+<h3 id="variable-length-batches-without-pad-state-updates">Variable-length batches without PAD state updates</h3>
 
 Consider three independent sequences of lengths 2, 4 and 1.
 Call their input vectors $A_0,A_1$, $B_0,\ldots,B_3$ and $C_0$.
@@ -1284,23 +1337,23 @@ unpacked tensor, the valid-position mask is still required. Packing
 does not reset states between documents and does not detach the
 computational graph at a chunk boundary.
 
+</details>
+
 <a id="rnn-limitations"></a>
 
-### Ограничения рекуррентной модели
+<a id="ограничения-рекуррентной-модели"></a>
 
-Остаются три разных ограничения. Вектор конечного размера может
-потерять нужную информацию о префиксе. Длинная цепочка производных
-может мешать обучению даже тогда, когда представление такой зависимости
-в принципе возможно. Последовательный расчёт ограничивает параллелизм.
-Усечение помогает с памятью обучения, clipping с чрезмерной нормой
-градиента; ни один из них не устраняет все три ограничения.
+### От RNN к LSTM и GRU
 
+В простой RNN на каждом шаге весь вектор заново вычисляется из текущего
+входа и прошлого состояния. В примере с нулями сохранённое значение
+постепенно исчезало, хотя новых сведений к нему не добавлялось.
 В [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU|LSTM и GRU]]
-появятся обучаемые вентили, управляющие сохранением и обновлением состояния.
-У LSTM отдельный аддитивный переход состояния памяти изменяет путь
-распространения производной. Он помогает обучать длительные зависимости,
-но не отменяет последовательность шагов и не гарантирует сохранение
-любой информации.
+модель учится выбирать, какую часть прошлого состояния перенести
+и какую заменить. У LSTM есть отдельное состояние памяти: в него
+складываются сохранённая часть и новая запись. Через это сложение
+производная может пройти иначе, чем через цепочку повторных $\tanh$.
+Шаги при этом по-прежнему зависят друг от друга.
 
 ## Источники и дальнейшее чтение
 
