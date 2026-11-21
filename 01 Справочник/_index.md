@@ -419,7 +419,7 @@ last_updated: 2026-10-30
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#lambada-gpt3-fill-blank|LAMBADA — заполнение пропуска в GPT-3]]
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt-llama-completion-scoring|HellaSwag — выбор продолжения в GPT-3 и LLaMA]]
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-surface-form-competition|Surface form competition — оценка вариантов ответа с PMI]]
-- [[00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V|Self-Attention изнутри — Q, K, V]]
+- [[00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V|Self-Attention — Q, K, V]]
 - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 — text-to-text Transformer]]
 
 ### Современная LLM, внимание и MoE

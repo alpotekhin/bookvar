@@ -82,7 +82,7 @@ last_verified: 2026-09-04
 
 [Оригинальная лекция с кодом и иллюстрациями](https://cs336.stanford.edu/lectures/?trace=lecture_02) · [сохранённый Python-файл](Lectures/repository/lecture_02.py)
 
-В учебнике: [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#Именованные оси: rearrange, einsum и reduce|формы тензоров внимания в примере с двумя головами]].
+В учебнике: [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#einops-attention-shapes|формы тензоров внимания в примере с двумя головами]].
 
 <a id="lecture-03-architectures-hyperparameters"></a>
 <a id="lecture-03"></a>

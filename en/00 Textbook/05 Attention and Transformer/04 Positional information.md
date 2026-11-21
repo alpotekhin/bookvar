@@ -4,10 +4,10 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "897a19c428e9ef20a6c651e981eb32d905d6f72a616907c2ea2e20fa1842451a"
-translation_reviewed: "2026-10-29"
+canonical_revision: "4d458ed18bbe0fa5eeb9c2625fea5c0bcdea8d5d0fbf09b47e1dfbba3047e9ac"
+translation_reviewed: "2026-11-21"
 translation_of: "00 Учебник/05 Attention и Transformer/04 Позиционная информация.md"
-last_updated: 2026-10-29
+last_updated: 2026-11-21
 source_unit_id:
   - lecture-03-rope-derivation
 previous: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров]]"
@@ -23,26 +23,33 @@ primary_sources:
 
 # Positional information in Transformers
 
-If a sentence is split into words, `John loves Mary` and `Mary loves John`
-contain the same tokens but describe different relationships.
-For full, unmasked self-attention without positional features, permuting
-input rows permutes Q/K/V and output rows in the same way. Formally,
-$F(PX)=PF(X)$ for a permutation matrix $P$. This is equivariance, not
-an unchanged output matrix: each row's content moves with its token.
+Without positional features, full self-attention gives a token the
+same output when its input row moves but the set of input rows stays
+the same. Thus the representations follow the same tokens in
+`John loves Mary` and `Mary loves John`, although the sentences mean
+different things. A causal mask already distinguishes past from
+future; it does not explicitly give a distance to an allowed key.
 
-A causal mask prevents position $i$ from reading keys $j>i$ and creates
-an asymmetry itself. If tokens are permuted while the triangular mask stays
-fixed, their accessible predecessors change; the equality need not hold.
-The mask adds no explicit metric encoding of distance, but can provide
-an implicit positional signal. Causal NoPE studies investigate learned
-positional features ([Haviv et al.](https://aclanthology.org/2022.findings-emnlp.99/),
+A prefix average makes the effect of the mask explicit. Let the values be
+$(1,3,7)$, with each query averaging its accessible prefix.
+The outputs are $(1,2,11/3)$. Reversing the input gives $(7,5,11/3)$,
+whereas reversing the original outputs gives $(11/3,2,1)$.
+Even without position vectors, the causal average depends on input order.
+
+Keeping the triangular mask fixed after reordering changes the set of
+predecessors. A mask that depends on positions can therefore break
+equivariance. Permuting its rows and columns with the tokens,
+$M\mapsto PMP^\top$, restores it. Studies of causal models without
+explicit positional embeddings examine what position features can
+be learned from such asymmetric access
+([Haviv et al.](https://aclanthology.org/2022.findings-emnlp.99/),
 [Kazemnejad et al.](https://arxiv.org/abs/2305.19466)).
-For an arbitrary mask, equivariance requires permuting its rows and columns
-consistently: $M\mapsto PMP^\top$. A padding mask excludes invalid positions
-but does not replace the chosen positional mechanism.
 
-The unmasked equality can be checked step by step.
-Permuting rows gives $Q'=PQ$, $K'=PK$, and $V'=PV$:
+<details>
+<summary>Permutation of rows and attention weights</summary>
+
+For a permutation matrix $P$, the unmasked operation satisfies
+$F(PX)=PF(X)$. Permuting input rows gives $Q'=PQ$, $K'=PK$, and $V'=PV$:
 
 $$
 \begin{aligned}
@@ -57,28 +64,17 @@ weight rows, while permuting keys moves their columns. The model has no
 separate “first” or “third” feature: a token retains its representation
 when surrounded by the same set of neighbors.
 
-A causal counterexample needs no learned scores. Let the values be
-$(1,3,7)$, with each query averaging its accessible prefix.
-The outputs are $(1,2,11/3)$. Reversing the input gives $(7,5,11/3)$,
-whereas reversing the original outputs gives $(11/3,2,1)$.
-Different predecessor sets already distinguish positions. This does not
-show that prefix averaging recovers exact distances or solves arbitrary
-word-order tasks.
+</details>
 
-Position methods can be compared by where they change the Transformer:
+<a id="starting-point-where-position-enters-attention"></a>
 
-1. Before the first layer, add an absolute vector to the token embedding.
-2. In the score, add a term depending on relative offset $j-i$ to
-   $q_i k_j^\top$.
-3. Before calculating the score, transform queries and keys so that their
-   dot product depends on $j-i$.
-
-## Starting point: where position enters attention
+## Scores without positional features
 
 For one head before positional information is added, use row vectors
 $x_i\in\mathbb R^{1\times d_{model}}$ and
 $q_i,k_i\in\mathbb R^{1\times d_h}$.
-$W_Q,W_K$ have shape $d_{model}\times d_h$; Value width is also $d_h$ here:
+$W_Q,W_K$ have shape $d_{model}\times d_h$. The value projection $W_V$
+can produce a vector of a different width:
 
 $$
 \begin{aligned}
@@ -96,12 +92,14 @@ z_i&=\sum_j a_{ij}v_j.
 \end{aligned}
 $$
 
-$M_{ij}$ denotes a causal or padding mask. Each method below changes
-$x_i$, $s_{ij}$, or $q_i,k_j$. In an implementation, these operations
-may belong to different modules: vector addition near the embedding table,
-relative bias near the score matrix, and RoPE rotation after Q/K projection.
+$M_{ij}$ encodes access restrictions from causal and padding masks.
+A position method can change the input $x_i$, the score $s_{ij}$, or
+the vectors used by attention. RoPE rotates queries and keys alone;
+Shaw's method can also add a vector to the value.
 
-## Absolute positions: an address for each row
+<a id="absolute-positions-an-address-for-each-row"></a>
+
+## Absolute position vectors
 
 ### A learned table
 
@@ -119,7 +117,7 @@ For a batch `[B,T,d]` whose examples all use positions 0 through $T-1$,
 the first `T` rows of `[T_max,d]` are added to each example.
 Examples with different numbering instead select rows by explicit position IDs.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_positional_encoding_vectors.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_positional_encoding_vectors.png|Position vectors are added to the token embeddings for Je, suis, and étudiant]]
 
 *Position vectors are added to the embeddings of Je, suis, and étudiant.
 The first block and its $W_Q$, $W_K$, and $W_V$ projections receive
@@ -158,6 +156,9 @@ $(5/\sqrt2,3/\sqrt2)$ and weights approximately
 $(0.804430,0.195570)$. If the V projection is also the identity,
 the output is $(1.804430,1)$.
 
+<details>
+<summary>Absolute position table in PyTorch</summary>
+
 ```python
 import math
 import torch
@@ -184,6 +185,8 @@ assert torch.isfinite(e.grad).all() and torch.isfinite(P.grad).all()
 assert torch.count_nonzero(P.grad[2:]) == 0
 assert torch.count_nonzero(P.grad[:2]) > 0
 ```
+
+</details>
 
 The example's table has four rows, but uses only the first two.
 Backward propagation gives zero gradient for the two unused rows.
@@ -213,14 +216,14 @@ integer $i$. In §3.5, Vaswani et al. report similar results for fixed and
 learned encodings on their translation task. That is not a comparison
 across all models or arbitrary sequence lengths.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-25-31/d2l-sinusoidal-curves.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-25-31/d2l-sinusoidal-curves.svg|Sine and cosine curves show the fast and slow coordinate pairs over 60 positions]]
 
 *Coordinates 6–9 of a width-32 encoding over 60 positions. Coordinates 6
 and 7 oscillate faster than 8 and 9; each sine/cosine pair has a phase
 offset. Source: Zhang et al., [Dive into Deep Learning, §11.6](https://d2l.ai/chapter_attention-mechanisms-and-transformers/self-attention-and-positional-encoding.html),
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-25-31/d2l-positional-heatmap.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-25-31/d2l-positional-heatmap.svg|Rows are positions and columns are coordinates; the patterns change at different speeds]]
 
 *The same signal as a matrix: 60 position rows and 32 coordinate columns.
 Phase changes rapidly between rows on the left; the same interval covers
@@ -255,6 +258,9 @@ $U_r$ depends on the shift $r$, not the original position $i$.
 Its sine signs differ from a standard rotation of an $(x,y)$ column
 because these coordinates are ordered as $(\sin,\cos)$.
 
+<details>
+<summary>Sinusoidal encodings in PyTorch</summary>
+
 ```python
 import math
 import torch
@@ -281,6 +287,8 @@ torch.testing.assert_close(U @ P[1, :2], sinusoidal([4], 4)[0, :2])
 print("one-position PE dot product:", (P[0] @ P[1]).item())
 ```
 
+</details>
+
 Each pair has squared norm one, so $\|PE_i\|^2=d/2$.
 The dot product of two pure position codes is
 
@@ -300,7 +308,9 @@ guarantee quality at new distances. The model encounters new combinations
 of phases and new sets of keys. This limitation differs from the
 physical boundary of a learned table.
 
-## Shaw relative representations: distance becomes part of an edge
+<a id="shaw-relative-representations-distance-becomes-part-of-an-edge"></a>
+
+## Shaw’s relative key and value vectors
 
 Shaw, Uszkoreit, and Vaswani encode directed offset $j-i$, rather than
 the two addresses $i$ and $j$ independently. One score variant is
@@ -327,7 +337,7 @@ the edge's weight: the query compares against both key content and
 relative-position type. The second changes the message transmitted:
 the same value may contribute differently depending on direction and distance.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/positions-2026-10-21/shaw-relative-figure1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/positions-2026-10-21/shaw-relative-figure1.png|Arrows from x₂ or x₄ illustrate directed relative offsets −1, 2, and the clipped class k]]
 
 *Edges $x_2\to x_1$, $x_2\to x_4$, and $x_4\to x_n$ receive
 representations for offsets $-1$, $2$, and the limiting class $k$.
@@ -352,6 +362,9 @@ Values $(10,20,30)$ and relative-value additions $(1,0,-2)$ produce
 messages $(11,20,28)$. Their weighted output is approximately
 $18.517688$. Changing a relative key changes its weight;
 changing a relative value changes the number transmitted along that edge.
+
+<details>
+<summary>Shaw’s vectors and the gradient</summary>
 
 ```python
 import torch
@@ -383,6 +396,8 @@ expected_key_grad = q * weights.detach() * (messages.detach() - z.detach())
 torch.testing.assert_close(key_table.grad, expected_key_grad)
 ```
 
+</details>
+
 In this scalar example, the derivative with respect to a relative value
 equals its attention weight. The derivative with respect to a relative
 key is $q\,a_{ij}(v_j+a^V_{ij}-z_i)$. Both identities are checked
@@ -396,7 +411,9 @@ sharing scheme, across heads. Each table contains $2k+1$ vectors,
 not a separate parameter for every pair. Parameter sharing and
 intermediate-tensor materialization are distinct implementation choices.
 
-## T5 relative position bias: one scalar per bucket and head
+<a id="t5-relative-position-bias-one-scalar-per-bucket-and-head"></a>
+
+## T5 position bias
 
 T5's encoder and decoder self-attention receive a learned scalar
 position bias for each head:
@@ -433,7 +450,9 @@ With 32 buckets and maximum distance 128, the boundaries differ:
 Offset zero belongs to bucket 0. The causal bucket function also
 returns 0 for future positions; a separate causal mask forbids them.
 
-| Absolute distance | Decoder | Encoder past | Encoder future at the same distance |
+The two rightmost columns give encoder buckets for keys to the left and right.
+
+| Distance | Decoder | Left | Right |
 |---:|---:|---:|---:|
 | 0 | 0 | 0 | 0 |
 | 1 | 1 | 1 | 17 |
@@ -450,6 +469,9 @@ to the final class. The code adapts the
 [Transformers v4.57.1 function](https://github.com/huggingface/transformers/blob/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/models/t5/modeling_t5.py#L400-L446)
 under Apache-2.0. Small distances are temporarily clamped in the unused
 logarithmic branch to avoid evaluating $\log0$; bucket numbers are unchanged.
+
+<details>
+<summary>T5 distance classes and gradients</summary>
 
 ```python
 import math
@@ -505,8 +527,10 @@ expected_far = (weights[:, 1:] * (values[1:] - z[:, None])).sum(-1)
 torch.testing.assert_close(table.weight.grad[31], expected_far)
 ```
 
-The final example has keys at distances 1, 128, and 512, with zero
-content scores. The first head assigns bias $-1$ to bucket 31,
+</details>
+
+Take keys at distances 1, 128, and 512, with zero content scores.
+The selected buckets are 1, 31, and 31. The first head assigns bias $-1$ to bucket 31,
 giving weights approximately $(0.576117,0.211942,0.211942)$.
 The second head assigns $+1$ to the same bucket and gives both
 distant keys more weight.
@@ -525,14 +549,16 @@ tables when both stacks use the mechanism with the same number of heads.
 
 <a id="rope-relative-position-derivation"></a>
 
-## RoPE: position as a rotation of query and key
+<a id="rope-position-as-a-rotation-of-query-and-key"></a>
+
+## RoPE: rotating queries and keys
 
 The preceding methods add position to either embeddings or scores.
 RoPE transforms already projected Q/K: each coordinate pair rotates
 by an angle proportional to position. V is not rotated.
 
-For unchanged content, the edge score should remain unchanged under
-a common shift of both indices.
+The design starts from a constraint: shifting both positions while holding
+the input vectors fixed should not change their score.
 [CS336 Lecture 3, slides 30–35](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf#page=30)
 develops this requirement from the mixed terms of absolute encodings
 to the geometry of rotations. Rotating both vectors by the same
@@ -554,7 +580,7 @@ $$
 q_i'=q_iR_i^\top,\qquad k_j'=k_jR_j^\top.
 $$
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/positions-2026-10-21/roformer-figure1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/positions-2026-10-21/roformer-figure1.png|One coordinate pair rotates by an angle proportional to its position; the pairs below use different frequencies]]
 
 *The upper diagram rotates one coordinate pair by $m\theta_1$.
 The lower diagram applies the same operation to multiple pairs with
@@ -620,12 +646,24 @@ v'&=u\sin\varphi+v\cos\varphi.
 \end{aligned}
 $$
 
-This is the implementation in RoFormer §3.4.2.
+This is the coordinate-wise calculation in [RoFormer §3.4.2](https://arxiv.org/html/2104.09864v5#S3.SS4.SSS2).
 For the row-vector expression $q_i'=q_iR_i^\top$, backward gives
 $G_{q_i}=G_{q_i'}R_i$, applying the inverse of the forward rotation.
 RoPE itself adds no trainable parameters; the Q/K projections remain trainable.
 
-### RoPE and KV-cache: a key retains its position
+RoPE also supplies no monotonic penalty for distant keys.
+The standard first pair has $\theta_0=1$. With $q=k=(1,0)$,
+dot products at distances 0, 3, and 6 are
+$1$, $\cos3\approx-0.989992$, and $\cos6\approx0.960170$.
+A farther key can score higher than an intermediate one.
+RoFormer §3.4.3 studies sums of different-frequency contributions
+and a bound on their long-distance behavior; it does not guarantee
+that every individual attention score decreases at every step.
+
+<details>
+<summary>RoPE with cached keys</summary>
+
+<h3 id="rope-and-kv-cache-a-key-retains-its-position">Positions of cached keys</h3>
 
 A full pass over known text rotates all queries and keys in one call.
 During incremental generation, previously rotated keys can be cached.
@@ -639,7 +677,7 @@ allowed score is $\cos(i-j)/\sqrt2$. Step 0 can read only value 1.
 At step 1, weights are approximately $(0.419444,0.580556)$,
 giving $0.419444\cdot1+0.580556\cdot2=1.580556$.
 
-| Query position | New key | Cached key positions after insertion | Output |
+| $i$ | Key | Cache | Output |
 |---:|---|---|---:|
 | 0 | $(1,0)$ | 0 | 1.000000 |
 | 1 | $(\cos1,\sin1)$ | 0, 1 | 1.580556 |
@@ -781,14 +819,7 @@ Two further implementation choices are independent:
   one might rotate $(a,b)$ and retain $(c,d)$. That is a separate
   configuration; the code above rotates all D coordinates.
 
-RoPE also supplies no monotonic penalty for distant keys.
-The standard first pair has $\theta_0=1$. With $q=k=(1,0)$,
-dot products at distances 0, 3, and 6 are
-$1$, $\cos3\approx-0.989992$, and $\cos6\approx0.960170$.
-A farther key can score higher than an intermediate one.
-RoFormer §3.4.3 studies sums of different-frequency contributions
-and a bound on their long-distance behavior; it does not guarantee
-that every individual attention score decreases at every step.
+</details>
 
 ## ALiBi: a linear distance penalty
 
@@ -809,7 +840,7 @@ With equal content, a farther key gets a lower score. Different slopes
 impose different strengths of preference for nearby keys; they do not
 guarantee predetermined head specializations.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/positions-2026-10-21/alibi-original.jpeg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/positions-2026-10-21/alibi-original.jpeg|A matrix of distance penalties is added to the attention scores, and a causal mask blocks the upper triangle]]
 
 *The content-score matrix receives negative distances multiplied by the
 head's slope. A causal mask blocks future positions; the linear bias
@@ -819,9 +850,9 @@ alone does not forbid them. Source: Press, Smith, and Lewis,
 The original JPEG is unchanged.*
 
 For a query at position 5 and identical content scores `2.0`
-for keys 4, 3, and 1, take $m_h=0.25$:
+for keys 4, 3, and 1, set $m_h=0.25$. The scores are:
 
-| Key $j$ | Distance $5-j$ | Bias | Final logit |
+| Key $j$ | $5-j$ | Bias | Score |
 |---:|---:|---:|---:|
 | 4 | 1 | $-0.25$ | 1.75 |
 | 3 | 2 | $-0.50$ | 1.50 |
@@ -838,6 +869,9 @@ eight heads receive slopes $2^{-1},2^{-2},\ldots,2^{-8}$.
 This scale is geometric rather than evenly spaced. If the head count
 is not a power of two, the code extends the nearest smaller scale
 with part of a denser one.
+
+<details>
+<summary>ALiBi slopes and the row constant</summary>
 
 ```python
 import math
@@ -879,6 +913,8 @@ torch.testing.assert_close(full.softmax(-1), compact.softmax(-1))
 print("relative-bias and column-bias attention agree")
 ```
 
+</details>
+
 The second check explains why the authors' implementation can store
 a term depending only on key index. Expanding
 $-m_h(i-j)=m_hj-m_hi$ isolates the row constant $-m_hi$.
@@ -890,49 +926,73 @@ In [§3 of the paper](https://ofir.io/train_short_test_long.pdf#page=5),
 the bias is added after scaling the dot product. Do not divide the
 linear penalty by $\sqrt{d_h}$ a second time.
 
-The linear function is defined at every distance. ALiBi experiments
-test training on short contexts and evaluating on longer ones;
-their results apply to the studied configurations, not all tasks.
-At a large distance, the penalty can suppress a needed key.
-Being able to extend the matrix is therefore insufficient.
+[Press et al., §4.2 and Figure 5](https://ofir.io/train_short_test_long.pdf#page=8)
+compared models with 1.3 billion parameters at a test length of 2,048.
+The ALiBi model trained on sequences of length 1,024 reached roughly
+the perplexity of a sinusoidal model trained at 2,048. That is a
+result for those models and that metric. A stronger distance penalty
+can make a relevant far key harder to use in other tasks.
 
-## One example, six interventions
+<a id="one-example-six-interventions"></a>
 
-Place the query at $i=5$ and the key at $j=2$, giving $j-i=-3$.
+## The same query and key across six methods
 
-- **Learned absolute:** the first layer receives $e(t_5)+P_5$ and
-  $e(t_2)+P_2$; distance must emerge through the learned projections.
-- **Sinusoidal:** it receives $e(t_5)+PE_5$ and $e(t_2)+PE_2$,
-  with vectors supplied by a fixed formula.
-- **Shaw relative:** the offset-class vector
-  $\operatorname{clip}(-3,k)$ is added to $k_2$ for the edge.
-  The full variant also adds a positional vector to $v_2$.
-- **T5 bias:** a scalar for the bucket containing $-3$ is added
-  to the head's logit.
-- **RoPE:** $q_5$ and $k_2$ rotate separately; their dot product
-  contains relative rotation $R_{-3}$.
-- **ALiBi:** the causal decoder subtracts $3m_h$ from the logit.
+Put token A at $i=5$ and token B at $j=2$. Use identity projections
+and the earlier embeddings $e_A=(2,0)$ and $e_B=(0,1)$. The content
+dot product is zero and the unmodified value is $(0,1)$. The mask
+allows this pair. Use a width of two and the usual divisor $\sqrt2$,
+except for T5, which uses its own convention.
 
-## Comparing the methods
+| Method | Score | Value |
+| --- | ---: | --- |
+| Learned table | $3/\sqrt2$ | $(1,1)$ |
+| Sinusoidal | $0.786490$ | $(0.9093,0.5839)$ |
+| Shaw | $2/\sqrt2$ | $(0,2)$ |
+| T5 | $-0.50$ | $(0,1)$ |
+| RoPE | $0.199574$ | $(0,1)$ |
+| ALiBi | $-0.75$ | $(0,1)$ |
 
-| Method | Where computation changes | Position parameters | Relative distance | Beyond training length |
-|---|---|---:|---|---|
-| Learned absolute | $x_i\leftarrow e(t_i)+P_i$ before layer one | $T_{max}d$ | implicit through $P_i,P_j$ | unused rows are untrained; positions outside the table have no row |
-| Sinusoidal | $x_i\leftarrow e(t_i)+PE_i$ before layer one | 0 | extractable from phase pairs | formula exists; quality is not guaranteed |
-| Shaw relative | vector $a^K_{ij}$ in the score, sometimes $a^V_{ij}$ in the message | relative-vector tables | explicit, usually clipped | far distances share a limiting class |
-| T5 bias | scalar bucket bias in each head's logits | bucket count × $H$ per stack | explicit and bucketed | new distances enter coarse far buckets |
-| RoPE | Q/K rotation in each attention layer | 0 | appears in the dot product | formula exists; extension quality needs separate evaluation |
-| ALiBi | fixed linear logit bias | 0 | explicit by distance | linear continuation may impose a strong far penalty |
+The learned table uses $P_5=(0,1)$ and $P_2=(1,0)$, the same two
+vectors as in the earlier example. The sinusoidal row uses
+$(\sin i,\cos i)$: the inputs become $(2+\sin5,\cos5)$ and
+$(\sin2,1+\cos2)$. These two methods change the input to the value
+projection as well as the query and key projections.
 
-The positional method is part of a trained architecture.
-Replacing a learned table with RoPE changes projection inputs and scores
-even if all tensor shapes match. Replacing one code class does not
-turn existing weights into the weights of another positional model.
+With Shaw's method, clipping at 2 sends $j-i=-3$ to class $-2$.
+Choose a key addition $(1,0)$ and a value addition $(0,1)$ for that
+class. The query compares with $(1,1)$ but the sum receives $(0,2)$.
+T5 instead looks up bucket 3; choosing bias $-0.50$ changes the score
+alone. At one radian per position, RoPE gives $qR_{-3}k^\top=2\sin3$,
+while ALiBi with slope $0.25$ subtracts $0.25\cdot3$.
 
-## Extrapolation: what needs to be evaluated
+The table compares one entry of the score row and its corresponding
+value. With only this key available, its weight would be 1 in every
+method. A weight comparison needs the scores of other permitted keys.
 
-“Supports 128K” may mean only that the code does not crash.
-Evaluation needs at least four independent properties:
+<a id="comparing-the-methods"></a>
+
+### Trainable position parameters
+
+| Method | Trainable position parameters |
+| --- | --- |
+| Learned table | $T_{\max}d$ |
+| Sinusoidal | 0 |
+| Shaw | Two tables of $2k+1$ vectors each |
+| T5 | Bucket count × head count per stack |
+| RoPE | 0 |
+| ALiBi | 0 |
+
+Changing a learned table to RoPE changes the calculation with the same
+projection weights. A checkpoint trained with one scheme does not
+support the other merely because all tensor shapes agree.
+
+<a id="extrapolation-what-needs-to-be-evaluated"></a>
+
+## Quality beyond the training length
+
+A model that accepts 128,000 tokens may still miss a relevant passage
+near the end of that context. Evaluation answers several separate
+questions:
 
 1. Local quality: perplexity and target-task metrics at training lengths.
 2. Use of distance: fact retrieval and synthetic tasks whose answers
@@ -953,11 +1013,14 @@ Checkpoint compatibility and training on longer data require separate checks.
 [[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание|The long-context chapter]]
 continues the discussion of context-extension methods.
 
-Accepting 128K tokens does not establish equally good retrieval at 8K
-and 120K. One successful needle-in-a-haystack example is weaker evidence
-than quality curves across positions, lengths, and multiple task types.
+A successful needle-in-a-haystack example tests one context length and
+one answer position. To see where quality changes, measure it across
+lengths, positions, and multiple task types.
 
-## Practical errors that shapes do not reveal
+<details>
+<summary>Position IDs and implementation checks</summary>
+
+<a id="practical-errors-that-shapes-do-not-reveal"></a>
 
 - During cached generation, a new token needs an absolute `position_id`
   continuing after the cached keys, not zero again.
@@ -971,19 +1034,17 @@ than quality curves across positions, lengths, and multiple task types.
 - Padding masks, causal masks, and positional biases can all enter the
   logits while serving different purposes. No position method hides padding.
 
-## Where the operations sit in a complete block
+</details>
 
-In the original encoder–decoder Transformer, sinusoidal vectors are
-added to embeddings before the first layer. Later layers carry this
-position signal through attention, FFNs, and residual connections with
-the other features; it is not added again in every block.
+<a id="where-the-operations-sit-in-a-complete-block"></a>
 
-RoPE instead rotates each layer's newly projected Q/K.
-T5 and ALiBi add position terms to each layer's scores without changing
-V through that operation. These choices determine where the operations
-belong in the complete block assembled next.
+The [[en/00 Textbook/05 Attention and Transformer/05 The complete Transformer|complete Transformer]]
+uses the original sinusoidal scheme: add the vectors before the first
+layer, then follow the resulting states through encoder and decoder.
 
-## Sources and further reading
+<a id="sources-and-further-reading"></a>
+
+## Sources
 
 - Vaswani et al., [Attention Is All You Need](https://arxiv.org/abs/1706.03762): sinusoidal positional encoding.
 - Shaw, Uszkoreit, and Vaswani, [Self-Attention with Relative Position Representations](https://arxiv.org/abs/1803.02155): vector-valued relative key/value representations.

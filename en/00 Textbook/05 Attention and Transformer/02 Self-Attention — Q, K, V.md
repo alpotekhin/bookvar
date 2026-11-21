@@ -1,62 +1,41 @@
 ---
-title: Self-attention from the inside — Q, K, V
+title: Self-Attention — Q, K, V
 type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "270146832ba9d5f349939f802663643786563c05fd88bb0271633fcfce0baba7"
-translation_reviewed: "2026-10-29"
+canonical_revision: "75fd6a6a528fc69025b84f44acb10af1a6ed20d7ec1e271ab90f4b48fc73c02c"
+translation_reviewed: "2026-11-21"
 translation_of: "00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md"
-last_updated: 2026-10-29
+last_updated: 2026-11-21
 primary_sources:
   - https://arxiv.org/abs/1706.03762
 ---
 
-# Self-attention from the inside: Q, K, V
+# Self-Attention — Q, K, V
 
-## Why a word must look at other words
+<a id="why-a-word-must-look-at-other-words"></a>
 
-An embedding table gives the same token ID the same initial vector in every sentence.
-Before positional information is added, `mole` therefore has the same embedding in a
-discussion of chemical amount, an animal, and a skin mark. Contextual meaning
-must arise inside the network: positions need a way to receive information from
-other positions and decide which ones matter now.
+## Token representations in context
 
-The word labels come from [3Blue1Brown's attention
-lesson](https://www.3blue1brown.com/lessons/attention). A real tokenizer can split
-a word into several tokens; the comparison assumes the same token ID at the
-position being examined. Positional features can distinguish locations, but do
-not by themselves tell the network which sense of `mole` the sentence uses.
+In `American shrew mole`, `one mole of carbon dioxide`, and
+`a biopsy of the mole`, the word `mole` names an animal, a unit, and a mark
+on the skin. If the tokenizer assigns it the same token ID in all three
+cases, the embedding table returns the same vector. Position features can
+tell the network where the token occurs, but not which meaning the sentence
+calls for. The example comes from [3Blue1Brown's lesson on attention](https://www.3blue1brown.com/lessons/attention/).
+A real tokenizer can also split a word into several tokens.
 
-Compare three phrases:
+In the preceding chapter, the decoder read the source sentence. In
+self-attention, each query reads from the sequence that supplies it.
+An encoder can use `cat` to represent `was tired` in “The cat that had been
+running all day was tired.” A model predicting the next token `tired` uses
+the preceding position instead. Letting that position read `tired` would
+give it the target.
 
-- `American shrew mole` — the animal;
-- `one mole of carbon dioxide` — amount of substance;
-- `a biopsy of the mole` — a skin mark.
+<a id="1-the-simplest-channel-average-the-past"></a>
 
-The embedding table initially supplies the same vector for `mole`. It knows the
-token identity, but not which sentence contains it. Attention refines that
-vector with context.
-
-For a long-range dependency, consider:
-
-> **The cat that had been running all day was tired.**
-
-To represent `was tired`, the model should connect the predicate to `cat`
-despite the intervening phrase. If each word is processed independently, that
-connection does not yet exist in the computation.
-
-This describes representations of known input. When an autoregressive model
-predicts `tired`, that token is not yet available: the preceding input position
-must supply its prediction. Reading an already supplied target would change the
-task. Self-attention means that queries, keys, and values originate from the
-same sequence; whether future positions are visible depends on the mask.
-
-Karpathy's [Let's build GPT from
-scratch](https://www.youtube.com/watch?v=kCc8FmEb1nY) constructs this connection
-step by step.
-
-## 1. The simplest channel: average the past
+## Averaging the current and earlier positions
 
 Let $x_i$ be the vector at position $i$. Define its context as the average of
 all available tokens:
@@ -100,70 +79,139 @@ torch.testing.assert_close(scores.softmax(-1), A_mean)
 print(A_mean @ X)
 ```
 
-This already creates context, but its weights are fixed. For `tired`, `cat` and
-`running` should matter more than `the`, yet uniform averaging cannot know that.
+The third row gives each of its three inputs a weight of $1/3$, whatever
+their vectors contain. [Karpathy's GPT lecture](https://www.youtube.com/watch?v=kCc8FmEb1nY)
+starts with that fixed average, then lets the input determine the weights.
 
-## 2. Make weights depend on content
+<a id="2-make-weights-depend-on-content"></a>
 
-Each position needs two different roles:
+## Queries, keys, and values
 
-- describe **what it currently needs**;
-- announce **the features by which it can be selected**.
-
-The model obtains two learned projections from every input vector:
-
-$$
-q_i=x_iW_Q,\qquad k_i=x_iW_K.
-$$
-
-Here $x_i$ is a $1\times d_{\mathrm{model}}$ row, $W_Q,W_K$ have shape
-$d_{\mathrm{model}}\times d_k$, and $q_i,k_i$ are $1\times d_k$ rows.
-Compatibility between the query at $i$ and key at $j$ is a scalar:
+Keep the weighted sum, but let the input determine both what goes into
+it and how much weight each term gets. Three learned matrices produce
+a query, key, and value from every input row:
 
 $$
-s_{ij}=q_i k_j^\top=\sum_{a=1}^{d_k}q_{i,a}k_{j,a}.
+\begin{gathered}
+q_i=x_iW_Q,\qquad k_i=x_iW_K,\\
+v_i=x_iW_V.
+\end{gathered}
 $$
 
-The same projection matrices act on every row. More tokens therefore do not
-add projection parameters. For example, if the rows of $W_Q$ are $(1,0)$,
-$(0,1)$, and $(1,1)$, input $x=(2,1,0)$ produces $q=(2,1)$ by weighting and
-adding those rows. Since $W_Q$ and $W_K$ are separate, reading from position
-$i$ to $j$ generally has a different score from reading in the opposite direction.
+To compute output $i$, compare its query $q_i$ with the keys $k_j$ of
+the available positions. The resulting scores determine the weights
+on those positions' values $v_j$. The same three matrices act on every
+row, so a longer sequence does not add projection parameters.
 
-A large $s_{ij}$ does not mean that two words are generally similar. It means
-that, in this layer and this head, position $j$ matches what position $i$ is
-seeking.
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/attention/transformer_self_attention_vectors.png|Thinking passes through three separate matrices to produce q₁, k₁, and v₁]]
 
-:::note[Analogy and exact meaning]
-`Query = question` and `Key = address` are useful mnemonics. Q and K do not
-contain predetermined human roles; they are learned linear projections whose
-meaning is determined by the loss and the rest of the network.
-:::
+*Jay Alammar, [The Illustrated
+Transformer](https://jalammar.github.io/illustrated-transformer/): every token
+vector is projected into Q, K, and V. CC BY-NC-SA 4.0.*
 
-## 3. Why Value is separate
+<a id="4-a-numerical-example-by-hand"></a>
 
-The key participates in selection, but the vector transmitted to the recipient
-is different:
+## The output at the third token
+
+Use the three tokens `a cat sleeps`, with all three positions visible.
+Set $X=I_3$. Each projection matrix has shape $[3,2]$, and $W_Q$
+and $W_K$ have the same entries in this example. The projected rows are:
 
 $$
-v_j=x_jW_V.
+Q=K=
+\begin{bmatrix}
+1&0\\
+0&1\\
+1&1
+\end{bmatrix},
+\qquad
+V=
+\begin{bmatrix}
+1&0\\
+0&2\\
+3&1
+\end{bmatrix}.
 $$
 
-The features used to find a position need not be the information that should be
-copied from it. A database analogy is helpful: lookup uses an index, while the
-query returns the record's contents.
+Multiplying by $x_i$ selects row $i$ of each projection matrix.
+For instance, $x_3=(0,0,1)$ gives $q_3=k_3=(1,1)$ and $v_3=(3,1)$.
+The matrices $W_Q$ and $W_K$ are still separate parameters. Using
+independent rows of $I_3$ lets us set all three values independently:
+if $x_3=x_1+x_2$, linearity would force $v_3=v_1+v_2$.
 
-$W_V$ has shape $[d_{\mathrm{model}},d_v]$; $d_v$ need not equal $d_k$.
-Doubling $W_V$ while keeping $X,W_Q,W_K$ fixed doubles the values and attention
-outputs, without changing any attention weight. The choice of where to read
-and the content read from those positions have separate parameter paths.
+<a id="step-a-dot-products"></a>
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/self-attention-2026-10-21/self-attention-output.png]]
+### Comparing the query with the keys
 
-*Jay Alammar, [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/),
-CC BY-NC-SA 4.0. Follow projection, dot products, scaling, softmax, multiplication
-by values, and summation. The illustration uses $d_k=64$, hence division by 8;
-its numbers are separate from the worked example below.*
+The score $s_{ij}=q_i k_j^\top$ compares query $i$ with key $j$.
+Both vectors therefore need the same number of entries, $d_k$.
+For the third query:
+
+$$
+q_3K^\top=(1,1,2).
+$$
+
+The first two dot products are $1\cdot1+1\cdot0$ and $1\cdot0+1\cdot1$.
+The third is $1\cdot1+1\cdot1$. With the query fixed, changing one key
+changes only its score before softmax. Changing the query can change
+the whole row.
+
+<a id="step-b-scaling"></a>
+
+### Scaling and softmax
+
+Divide the scores by $\sqrt{d_k}=\sqrt2$:
+
+$$
+\frac{q_3K^\top}{\sqrt2}\approx(0.707107,0.707107,1.414214).
+$$
+
+<a id="step-c-softmax"></a>
+
+To apply softmax, exponentiate the scores and divide each exponential by
+their sum. Subtracting the same number from all three scores leaves their
+ratios unchanged. Subtract $1/\sqrt2$ to get exponentials
+$(1,1,e^{1/\sqrt2})$. Their sum is $2+e^{1/\sqrt2}$, giving the weights
+
+$$
+a_3\approx(0.248255,0.248255,0.503490).
+$$
+
+For a forbidden key, the mask replaces its score with $-\infty$ before
+softmax. Its exponential is zero, so it contributes nothing to the
+denominator, provided at least one key is allowed.
+
+<a id="step-d-weighted-sum-of-values"></a>
+
+### The weighted sum of values
+
+$$
+\begin{aligned}
+z_3={}&0.248255[1,0]+0.248255[0,2]\\
+&+0.503490[3,1]\\
+\approx{}&[1.758725,1].
+\end{aligned}
+$$
+
+The third value receives about half the weight. The other two also
+contribute: the second coordinate is $2(0.248255)+0.503490=1$
+to the displayed precision.
+
+<a id="3-why-value-is-separate"></a>
+
+Now change only $v_3$, from $(3,1)$ to $(3,3)$. The queries, keys, and
+weights stay fixed. The second coordinate of $z_3$ increases by
+$2a_{33}\approx1.006980$, giving $(1.758725,2.006980)$. With $X=I_3$,
+this takes a change to just one entry of $W_V$.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/self-attention-2026-10-21/self-attention-output.png|Scores for Thinking and Machines are scaled and normalized, and the two resulting weights multiply their value vectors]]
+
+*Alammar's example compares the query for `Thinking` with the keys for
+`Thinking` and `Machines`. The key width is 64, so the scores are
+divided by 8. The resulting weights of 0.88 and 0.12 multiply the first
+and second values. Jay Alammar,
+[The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/#self-attention-in-detail),
+CC BY-NC-SA 4.0.*
 
 Before attention dropout, every nonempty row of weights is nonnegative and sums
 to one. The output is therefore in the convex hull of its available values.
@@ -172,15 +220,33 @@ Attention softmax normalizes source positions; the language model's output
 softmax normalizes vocabulary entries. An attention output is a feature vector,
 not a next-token distribution.
 
-## The whole computation in two figures
+Each row lists one query's weights. The column labels name the value
+vectors multiplied by those weights. The table rounds to four decimal places.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/attention/transformer_self_attention_vectors.png]]
+| Query | $v_1$ | $v_2$ | $v_3$ |
+|---|---:|---:|---:|
+| $q_1$ | 0.4011 | 0.1978 | 0.4011 |
+| $q_2$ | 0.1978 | 0.4011 | 0.4011 |
+| $q_3$ | 0.2483 | 0.2483 | 0.5035 |
 
-*Jay Alammar, [The Illustrated
-Transformer](https://jalammar.github.io/illustrated-transformer/): every token
-vector is projected into Q, K, and V. CC BY-NC-SA 4.0.*
+Even with $Q=K$, $a_{13}=0.401112$ and $a_{31}=0.248255$ differ.
+Their raw scores are equal, but row 1 contains $(1,0,1)$ and row 3
+contains $(1,1,2)$. The softmax denominators differ.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/attention/self-attention-matrix-calculation-2.png]]
+The query for `cat` assigns `sleeps` a weight of $0.401112$.
+An encoder can use that position. A model predicting `sleeps`
+from `a cat` must [[en/00 Textbook/05 Attention and Transformer/03 Masking, multi-head attention, and tensor shapes#Causal masking and shifted targets|mask that key]].
+
+<a id="the-whole-computation-in-two-figures"></a>
+
+## Matrix form and shapes
+
+Stack the $T$ input vectors as rows of $X$ to compute $Q=XW_Q$,
+$K=XW_K$, and $V=XW_V$ together. The query and key matrices share
+the width $d_k$. A scalar weight can multiply a value of a different
+width, $d_v$.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/attention/self-attention-matrix-calculation-2.png|The query and key matrices produce scores; row-wise softmax gives the weights that multiply V]]
 
 *Jay Alammar, [The Illustrated
 Transformer](https://jalammar.github.io/illustrated-transformer/): the matrix
@@ -188,7 +254,7 @@ form of the full computation. Read it from right to left: Values determine the
 content being transmitted, while `softmax(QKᵀ/√dₖ)` supplies mixing weights.
 CC BY-NC-SA 4.0.*
 
-The complete formula is
+Without a mask, the complete computation is
 
 $$
 \operatorname{Attention}(Q,K,V)=
@@ -209,88 +275,17 @@ For one sequence, the matrix shapes are:
 Each row is normalized independently. Column sums need not equal one, and
 output row $i$ still belongs to input query $i$.
 
-## 4. A numerical example by hand
+<a id="5-why-divide-by-dksqrtd_kdk"></a>
 
-Take three positions with $d_{\mathrm{model}}=3$ and $d_k=d_v=2$.
-Set $X=I_3$ and choose separate projection matrices $W_Q,W_K,W_V$ whose rows
-are the matrices displayed below. Then $Q=XW_Q$, $K=XW_K$, and $V=XW_V$:
+## Score scale and the softmax derivative
 
-$$
-Q=K=
-\begin{bmatrix}
-1&0\\
-0&1\\
-1&1
-\end{bmatrix},
-\qquad
-V=
-\begin{bmatrix}
-1&0\\
-0&2\\
-3&1
-\end{bmatrix}.
-$$
-
-Consider the third-position query $q_3=[1,1]$.
-
-The input dimension matters. If we had instead set $X=Q=K$ above, then
-$x_3=x_1+x_2$, so every shared linear projection would require
-$v_3=v_1+v_2$. The displayed values violate that constraint. Choosing the
-independent input rows of $I_3$ makes all three projections realizable. Equal
-initial values for $W_Q$ and $W_K$ do not make them one shared parameter.
-
-### Step A: dot products
+If the components of $q$ and $k$ are independent with mean zero and
+variance one, then $\mathbb E[q_a^2k_a^2]=1$ and $\mathbb E[q_ak_a]=0$.
+Each product has variance one. Those products are independent, so
 
 $$
-q_3K^\top=[1,1,2].
-$$
-
-### Step B: scaling
-
-$$
-\frac{q_3K^\top}{\sqrt2}\approx[0.707,0.707,1.414].
-$$
-
-### Step C: softmax
-
-$$
-\alpha_3\approx[0.248255,0.248255,0.503490].
-$$
-
-The weights are normalized across the three keys; the displayed rounding sums to one.
-Subtracting the common score $1/\sqrt2$ before exponentiation gives weights
-proportional to $(1,1,e^{1/\sqrt2})$. Dividing by $2+e^{1/\sqrt2}$ yields
-the displayed row.
-
-### Step D: weighted sum of Values
-
-$$
-\begin{aligned}
-z_3={}&0.248255[1,0]+0.248255[0,2]\\
-&+0.503490[3,1]\\
-\approx{}&[1.758725,1].
-\end{aligned}
-$$
-
-The third position now has a contextual representation. It combines content
-from all three Values, with roughly half the weight assigned to the third.
-
-| Query | Weight of $v_1$ | Weight of $v_2$ | Weight of $v_3$ |
-|---|---:|---:|---:|
-| $q_1$ | 0.401112 | 0.197776 | 0.401112 |
-| $q_2$ | 0.197776 | 0.401112 | 0.401112 |
-| $q_3$ | 0.248255 | 0.248255 | 0.503490 |
-
-Even with $Q=K$, $a_{13}$ and $a_{31}$ differ: symmetric dot products are
-normalized by different row denominators.
-
-## 5. Why divide by $\sqrt{d_k}$
-
-If components of $q$ and $k$ are independent with mean zero and variance one,
-then
-
-$$
-\operatorname{Var}(q k^\top)=d_k.
+\operatorname{Var}(q k^\top)=d_k,\qquad
+\operatorname{Var}(q k^\top/\sqrt{d_k})=1.
 $$
 
 Typical differences between dot-product scores grow with dimension under these
@@ -312,7 +307,9 @@ produce sharp attention after scaling.
 The divisor is $\sqrt{d_k}$, the key dimension of one head, not automatically
 $\sqrt{d_{model}}$.
 
-## 6. Minimal implementation of one head
+<a id="6-minimal-implementation-of-one-head"></a>
+
+## Training the projections
 
 ```python
 import math
@@ -390,7 +387,9 @@ enters all three projections. With $X=I_3$, the parameter derivatives equal
 the corresponding projected-tensor derivatives; general inputs combine
 contributions from several positions.
 
-### Check the forward pass and every gradient
+<a id="check-the-forward-pass-and-every-gradient"></a>
+
+### Forward and backward passes in PyTorch
 
 ```python
 import math
@@ -453,7 +452,7 @@ projection back to the model width.
 
 ## Parallel execution and position order
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/self-attention-2026-10-21/cnn-rnn-self-attention.svg]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/self-attention-2026-10-21/cnn-rnn-self-attention.svg|Convolution reads nearby inputs; recurrence passes states along the sequence; full attention reads every input directly]]
 
 *Zhang, Lipton, Li, and Smola, [Dive into Deep Learning, §11.6.2](https://d2l.ai/chapter_attention-mechanisms-and-transformers/self-attention-and-positional-encoding.html),
 CC BY-SA 4.0. RNN states depend on earlier states; self-attention output rows
@@ -489,9 +488,11 @@ The statement requires full attention without position features; a fixed
 causal mask changes which predecessors a token can access. Positional
 information and masking are developed in the following chapters.
 
-## Common confusions
+<a id="common-confusions"></a>
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_self-attention_visualization.png]]
+## What an attention map shows
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_self-attention_visualization.png|Lines connect it to other positions in the encoder, including the animal]]
 
 *Attention to the position `it`: lines connect it to source positions, with
 line width showing attention weights. This is encoder self-attention, so
@@ -499,13 +500,12 @@ positions to the right are available too. Jay Alammar,
 [The Illustrated Transformer, Self-Attention at a High Level](https://jalammar.github.io/illustrated-transformer/),
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
 
-- Softmax runs over keys separately for each query.
-- Before attention dropout, attention weights sum to one across a row, but are not calibrated
-  probabilities of “true importance.”
-- Q, K, and V are learned projections, not renamed input embeddings.
-- A position's output is a weighted sum of rows of $V$, not $Q$ or $K$.
+The lines show the coefficients on the value vectors. A thick line
+alone does not establish that removing that token would change the
+model's prediction. Even for fixed values, different weights can
+produce the same head output.
 
-## Different weights, the same output
+### Different weights, the same output
 
 Let the values be $v_1=(1,0)$, $v_2=(0,1)$ and
 $v_3=(0.5,0.5)$. The third value is the midpoint of the first two.
@@ -568,9 +568,14 @@ Brunner et al. analyse the corresponding null-space question in
 An attention map records mixing coefficients; interpreting it as causal
 token importance requires additional evidence.
 
-## Reading the lecture implementation
+<details>
+<summary>The attention head in Karpathy's lecture code</summary>
 
-The most useful practical sequence is:
+<a id="reading-the-lecture-implementation"></a>
+
+The [lecture implementation of Head](https://github.com/karpathy/ng-video-lecture/blob/52201428ed7b46804849dea0b3ccf0de9df1a5c3/gpt.py#L61-L90)
+adds a causal mask before softmax and applies dropout afterwards.
+The lecture reaches that implementation in this order:
 
 1. [bigram baseline](https://github.com/karpathy/ng-video-lecture/blob/master/bigram.py);
 2. uniform averaging of earlier tokens with a lower-triangular matrix;
@@ -579,8 +584,10 @@ The most useful practical sequence is:
 5. masking, multiple heads, and output projection;
 6. [a complete minimal GPT](https://github.com/karpathy/ng-video-lecture/blob/master/gpt.py).
 
-Then open [Transformer Explainer](https://poloclub.github.io/transformer-explainer/)
-and identify the same stages inside a real GPT-2.
+[Transformer Explainer](https://poloclub.github.io/transformer-explainer/)
+shows these operations within a GPT-2 block.
+
+</details>
 
 ## Sources
 
@@ -596,5 +603,5 @@ and identify the same stages inside a real GPT-2.
 - [Transformer Explainer](https://poloclub.github.io/transformer-explainer/)
 - [BertViz](https://github.com/jessevig/bertviz)
 
-**Previous:** [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer|From seq2seq to Transformer]] ·
+**Previous:** [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer|Attention for translation]] ·
 **Next:** [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|Masking, multi-head attention, and tensor shapes]]

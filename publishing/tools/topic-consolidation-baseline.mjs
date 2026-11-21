@@ -5,6 +5,9 @@ import { resolve } from 'node:path';
 const defaultRoot = resolve(import.meta.dirname, '../..');
 const hash = text => createHash('sha256').update(text).digest('hex');
 const journals = [
+  '2026-11-21-positional-information-editorial-pass.json',
+  '2026-11-21-masking-heads-editorial-pass.json',
+  '2026-11-21-self-attention-editorial-pass.json',
   '2026-11-21-attention-translation-editorial-pass.json',
   '2026-11-21-seq2seq-editorial-pass.json',
   '2026-11-21-lstm-gru-editorial-pass.json',

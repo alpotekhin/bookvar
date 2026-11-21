@@ -49,8 +49,11 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«BPE, WordPiece и Unigram»](2026-11-21-tokenization-editorial-pass.json),
 [«RNN и BPTT»](2026-11-21-rnn-bptt-editorial-pass.json),
 [«LSTM и GRU»](2026-11-21-lstm-gru-editorial-pass.json),
-[«Seq2Seq с фиксированным контекстом»](2026-11-21-seq2seq-editorial-pass.json) и
-[«Attention для перевода»](2026-11-21-attention-translation-editorial-pass.json).
-Следующая глава — «Self-Attention — Q, K, V». Проследить, как одна
-последовательность даёт запросы, ключи и значения, и проверить руками
-одну строку весов, масштабирование и результат взвешенной суммы.
+[«Seq2Seq с фиксированным контекстом»](2026-11-21-seq2seq-editorial-pass.json),
+[«Attention для перевода»](2026-11-21-attention-translation-editorial-pass.json),
+[«Self-Attention — Q, K, V»](2026-11-21-self-attention-editorial-pass.json),
+[«Маски, несколько голов и формы тензоров»](2026-11-21-masking-heads-editorial-pass.json) и
+[«Позиционная информация»](2026-11-21-positional-information-editorial-pass.json).
+Следующая глава — «Полный Transformer». Проследить входы и выходы
+энкодера и декодера на одном переводе, включая доступ к источнику,
+сдвиг целей, вычисление потерь и генерацию до EOS.

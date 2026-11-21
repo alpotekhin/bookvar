@@ -4,10 +4,10 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "bb5214bc2fd44c37f7cb66c3d201ef4ccde882963839b73b46c9bcf7eeabfe8b"
-translation_reviewed: "2026-11-10"
+canonical_revision: "f0e1d80899ff8f222437c78dc7d77d9ede4772c0af462027d84a8286b59ab116"
+translation_reviewed: "2026-11-21"
 translation_of: "00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md"
-last_updated: 2026-11-10
+last_updated: 2026-11-21
 source_unit_id:
   - lecture-02-einops-named-axes
   - assignment-01-task-scaled-dot-product-attention
@@ -25,17 +25,15 @@ primary_sources:
 
 # Masks, multiple heads, and tensor shapes
 
-Suppose a batch contains a two-token sentence and a four-token sentence.
-The shorter sentence is padded to the common length, but its real tokens must
-not read the fillers. Language-model training must also prevent access to
-future positions, even though the whole training sequence is already in memory.
+In the preceding chapter, the query for `cat` gave `sleeps` a
+weight of $0.401112$. That is valid when the encoder already has the whole
+sentence. When the model predicts `sleeps` from `a cat`, the key for
+`sleeps` must be excluded, even if the training batch contains the whole
+sequence. A mask specifies which keys each query can use.
 
-A mask specifies which query–key pairs are allowed. Multiple heads assign
-different scores to these pairs and read different projections of the values.
-The tensor therefore needs separate batch, head, query, and key axes.
-Their order determines which rows are multiplied.
+<a id="a-mask-changes-the-set-of-accessible-keys"></a>
 
-## A mask changes the set of accessible keys
+## Masking before softmax
 
 Let $S=QK^\top/\sqrt{D_h}$ be the score matrix. Add the mask to $S$ before softmax:
 
@@ -48,6 +46,9 @@ Exponentiation sends a forbidden cell to zero, excluding it from both the
 weighted sum and the normalization of the remaining weights. Zeroing an
 already normalized matrix $A$ is insufficient: the allowed weights no longer
 sum to one unless they are normalized again.
+
+<details>
+<summary>Why masking comes before softmax: numbers and code</summary>
 
 For example, one query has scores $(2,1,0)$ and cannot access the third key.
 Ordinary softmax gives approximately $(0.665241,0.244728,0.090031)$.
@@ -84,6 +85,8 @@ the answer whenever their sum is nonzero. In the `extreme` example,
 underflow has already erased the allowed exponentials. Dividing these zeros
 by their zero sum cannot recover the result.
 
+</details>
+
 <a id="causal-mask-shifted-targets"></a>
 
 ### Causal masking and shifted targets
@@ -102,7 +105,7 @@ M^{\text{causal}}_{ij}=
 \end{cases}
 $$
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/causal-mask-detailed.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/causal-mask-detailed.png|The query at the second position is compared with the keys of the first and second positions, not the future keys]]
 
 *The diagram follows the second token's query along the red path. It is
 compared with the first and second keys; future keys do not participate.
@@ -113,25 +116,46 @@ Lena Voita shows the same operation in an
 moving along the target sequence adds one position to the accessible
 lower-triangular region.
 
-For the sequence A, B, EOS, the shifted inputs and prediction targets are:
+Without an initial BOS in the input, the shifted targets for
+`a cat sleeps` are:
 
-| Query position | Known input | Prediction target | Accessible inputs |
-|---|---|---|---|
-| 0 | BOS | A | BOS |
-| 1 | A | B | BOS, A |
-| 2 | B | EOS | BOS, A, B |
+| Input | Target | Visible input |
+| --- | --- | --- |
+| `a` | `cat` | `a` |
+| `cat` | `sleeps` | `a cat` |
+| `sleeps` | EOS | `a cat sleeps` |
 
-The diagonal is allowed: A at input position 1 is already known, whereas
-that position's target is the unread B. Masking and target shifting work
-together. Feeding the targets themselves as inputs would leak the answer
-along the diagonal even with a lower-triangular mask.
+The diagonal stays visible: `cat` is known at its own input position,
+whose target is `sleeps`. If inputs and targets were aligned without
+the shift, the diagonal would expose the answer.
 
 Masking does not make training sequential. All rows of $S$ can still be
 computed in one matrix multiplication; forbidden connections are removed
 before softmax. Generation remains sequential because the next input token
 is not yet known.
 
-### Padding masks: exclude filler keys
+### The query for cat in a cat sleeps
+
+Return to the [[en/00 Textbook/05 Attention and Transformer/02 Self-Attention — Q, K, V#The output at the third token|three-token example]].
+The query for `cat` is $(0,1)$, so its scaled scores are
+$(0,1/\sqrt 2,1/\sqrt 2)$. Replacing the third score with $-\infty$
+leaves $1+e^{1/\sqrt 2}$ in the softmax denominator.
+
+| Query | Weights on a, cat, sleeps |
+| --- | --- |
+| `a` | $(1,0,0)$ |
+| `cat` | $(0.330238,0.669762,0)$ |
+| `sleeps` | $(0.248255,0.248255,0.503490)$ |
+
+The third row is unchanged: there are no keys after `sleeps`. The second
+row mixes only $v_1=(1,0)$ and $v_2=(0,2)$ and gives
+$z_2\approx(0.330238,1.339523)$. In a model without access to future keys,
+sending the prefix `a cat` gives this query the same two keys. During
+training, `sleeps` provides the target, not the value read by the query.
+
+<a id="padding-masks-exclude-filler-keys"></a>
+
+### Masking padding keys
 
 Sentences of different lengths are commonly padded with a special token
 to a shared length $T$. These positions provide a rectangular tensor, not
@@ -141,7 +165,7 @@ the two fillers.
 
 A causal mask depends on the pair `(query position, key position)` and
 has shape `[T,T]`. A padding mask depends on the example and key position,
-so its natural shape is `[B,T]`. A decoder-only model needs both:
+so its natural shape is `[B,T]`. If a causal model's batch contains padding, add the two masks:
 
 $$
 M_{b,i,j}=M^{\text{causal}}_{i,j}+M^{\text{padding}}_{b,j}.
@@ -151,19 +175,20 @@ The key positions must be masked. An output from a padding query can also
 be zeroed later, but that separate operation does not prevent real tokens
 from reading filler keys.
 
-## Why one position needs multiple heads
+<a id="why-one-position-needs-multiple-heads"></a>
+
+## Projections and outputs of multiple heads
 
 Let $X_Q,X_K,X_V$ denote the inputs before projection. In self-attention
 all three are the same $X$. In cross-attention, $X_Q$ comes from the
 decoder and $X_K=X_V$ from the encoder's final output. The projected
 $Q,K,V$ below retain the notation of the preceding chapter.
 
-Within one head, a key's weight multiplies every coordinate of its
-value vector. When several heads read the same key, each has its own
-projections and its own weight. A word might get one set of features
-from its neighbor and another from the subject it agrees with.
-The architecture assigns no such roles: the same loss trains all
-projections, and different heads can read the same positions.
+One head uses one coefficient for all the coordinates of a value.
+Two heads can put different weights on the same pair of positions.
+Each head projects the queries, keys, and values separately and produces
+one output vector per query. The output projection then combines their
+features at that query position.
 
 $$
 \begin{aligned}
@@ -207,9 +232,77 @@ between them. These formulas use row vectors. PyTorch `Linear` stores
 weights for the operation $xW^\top$; matrices written in our notation must
 be transposed when loaded into the layer.
 
+<a id="two-heads-trace"></a>
+
+<a id="a-numerical-example-with-two-heads"></a>
+
+### One query through two heads
+
+Take two input positions with vectors $(1,0)$ and $(0,1)$. Each of the
+two heads has one coordinate, so the first column of each projection
+goes to the first head, the second to the second head. The input is $X=I_2$, so $Q,K,V$ are equal to their respective projection matrices:
+
+$$
+\begin{gathered}
+Q=\begin{pmatrix}1&1\\1&1\end{pmatrix},\\
+K=\begin{pmatrix}\log3&0\\0&\log3\end{pmatrix},
+\qquad
+V=\begin{pmatrix}0&4\\8&12\end{pmatrix}.
+\end{gathered}
+$$
+
+At the first position, both heads get scalar query $1$. The first head's
+keys give scores $(\log3,0)$; the second head's give $(0,\log3)$.
+The head width is one, so scaling leaves the scores unchanged.
+Since $e^{\log3}=3$, the heads normalize $(3,1)$ and $(1,3)$ by the
+sum $4$. The resulting weights act on columns 1 and 2 of $V$ respectively.
+Write $z^{(r)}_1$ for the output of head $r$ at the first position:
+
+$$
+\begin{gathered}
+z^{(1)}_1=0.75\cdot0+0.25\cdot8=2,\\
+z^{(2)}_1=0.25\cdot4+0.75\cdot12=10.
+\end{gathered}
+$$
+
+Concatenation gives the row $(2,10)$. Choose the output matrix:
+
+$$
+W^O=\begin{bmatrix}1&2\\3&-1\end{bmatrix}.
+$$
+
+Then $(2,10)W^O=(32,-6)$. A single shared weight $p$ on the second
+token would give a mixture of the same rows of $V$ equal to $(8p,4+8p)$.
+The two coordinates always differ by 4, so no such mixture yields $(2,10)$.
+Averaging the two computed head outputs would produce a single
+number, $6$, losing the distinction between $(2,10)$ and $(6,6)$.
+Yet $(6,6)W^O=(24,6)$. That one average cannot recover both projected
+outputs.
+
+Now enable the causal mask (`causal=True`). At the first position, both heads
+get weights $(1,0)$ because the second key is to its right. Concatenation
+gives $(0,4)$ and the output is $(12,-4)$. At the second position both
+keys are visible, so the output remains $(32,-6)$. All projection
+parameters are unchanged.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_z.png|Every head returns a separate matrix with one output row per query]]
+
+*Head results stay separate until concatenation. Source: Jay Alammar,
+[The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/),
+CC BY-NC-SA 4.0.*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_weight_matrix_o.png|The head outputs are concatenated along features and multiplied by the output matrix WO]]
+
+*After concatenation, $W^O$ mixes head outputs and returns width
+$D_{model}$. Source: Jay Alammar,
+[The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/),
+CC BY-NC-SA 4.0.*
+
 <a id="named-attention-shapes"></a>
 
-## Split and merge: one operation, two notations
+<a id="split-and-merge-one-operation-two-notations"></a>
+
+## Separating and joining the head axis
 
 The input axes are `batch`, `sequence`, and `model_dim`.
 After projection, the last axis contains consecutive features from all heads.
@@ -237,7 +330,7 @@ multiplication produces `[B,T,3*Dmodel]`, which is split into Q, K, and V.
 The implementation below keeps three separate `Linear` layers so their
 parameters and computation paths remain visible.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_qkv.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_qkv.png|Each head projects the same input matrix to its own query, key, and value matrices]]
 
 *Jay Alammar illustrates the separate projections producing each head's
 queries, keys, and values. Source: [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/),
@@ -275,22 +368,12 @@ by `contiguous().view(...)`. A `reshape(...)` can make the copy itself
 when needed. Some special dimensions permit `view` without a copy,
 but general code should not rely on that coincidence.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_z.png]]
-
-*Head results stay separate until concatenation. Source: Jay Alammar,
-[The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/),
-CC BY-NC-SA 4.0.*
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_weight_matrix_o.png]]
-
-*After concatenation, $W^O$ mixes head outputs and returns width
-$D_{model}$. Source: Jay Alammar,
-[The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/),
-CC BY-NC-SA 4.0.*
+<details>
+<summary>Named axes in einops</summary>
 
 <a id="einops-attention-shapes"></a>
 
-### Named axes: rearrange, einsum, and reduce
+<h3 id="named-axes-rearrange-einsum-and-reduce">Splitting heads and summing over coordinates</h3>
 
 In `q @ k.transpose(-2,-1)`, the meaning of each axis must be recovered
 from surrounding code. The `einops` library puts that meaning into the
@@ -394,57 +477,11 @@ still determines the meaning of those hidden axes.
 [CS336 Lecture 2, einops_einsum, einops_reduce, and einops_rearrange](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_02.py#L202-L276)
 works through this sequence of `einsum`, `reduce`, and `rearrange`.
 
-<a id="two-heads-trace"></a>
+</details>
 
-### A numerical example with two heads
+<a id="complete-shape-trace"></a>
 
-Take two input positions with vectors $(1,0)$ and $(0,1)$. Each of the
-two heads has one coordinate, so the first column of each projection
-goes to the first head, the second to the second head. The code below
-chooses $W^Q,W^K,W^V$ as follows; multiplying by $X=I_2$ leaves them unchanged:
-
-$$
-\begin{gathered}
-Q=\begin{pmatrix}1&1\\1&1\end{pmatrix},\\
-K=\begin{pmatrix}\log3&0\\0&\log3\end{pmatrix},
-\qquad
-V=\begin{pmatrix}0&4\\8&12\end{pmatrix}.
-\end{gathered}
-$$
-
-At the first position, both heads get scalar query $1$. The first head's
-keys give scores $(\log3,0)$; the second head's give $(0,\log3)$.
-If both positions are visible, softmax gives $(0.75,0.25)$ and
-$(0.25,0.75)$ respectively. Apply these weights to the columns of $V$:
-
-$$
-\begin{gathered}
-z_1=0.75\cdot0+0.25\cdot8=2,\\
-z_2=0.25\cdot4+0.75\cdot12=10.
-\end{gathered}
-$$
-
-Concatenation gives the row $(2,10)$. Choose the output matrix:
-
-$$
-W^O=\begin{bmatrix}1&2\\3&-1\end{bmatrix}.
-$$
-
-Then $(2,10)W^O=(32,-6)$. A single shared weight $p$ on the second
-token would give a mixture of the same rows of $V$ equal to $(8p,4+8p)$.
-The two coordinates always differ by 4, so no such mixture yields $(2,10)$.
-Averaging the two computed head outputs would produce a single
-number, $6$, losing the distinction between $(2,10)$ and $(6,6)$.
-Yet $(6,6)W^O=(24,6)$. That one average cannot recover both projected
-outputs.
-
-Now enable the causal mask (`causal=True`). At the first position, both heads
-get weights $(1,0)$ because the second key is to its right. Concatenation
-gives $(0,4)$ and the output is $(12,-4)$. At the second position both
-keys are visible, so the output remains $(32,-6)$. All projection
-parameters are unchanged.
-
-## Complete shape trace
+## Tensor shapes through the layer
 
 Let the batch contain $B$ sequences of length $T$, with model width
 $D_{model}$, $H$ heads, and head width $D_h=D_{model}/H$.
@@ -484,58 +521,96 @@ the separate policy below. Normalizing over queries instead would make
 columns sum to one, allocating shares among different queries for one
 key. A query row would no longer define a normalized mixture of values.
 
-## Broadcasting masks
+<a id="broadcasting-masks"></a>
+
+## How masks broadcast
 
 After splitting heads, scores have shape `[B,H,Tq,Tk]`.
 A mask need not physically store all these elements: length-one axes
 broadcast.
 
-| Purpose | Convenient shape | Broadcast axes |
+| Mask | Shape | Broadcast axes |
 |---|---|---|
-| a common causal mask | `[1,1,Tq,Tk]` | batch and heads |
-| each example's key padding | `[B,1,1,Tk]` | heads and queries |
-| exclude padding queries | `[B,1,Tq,1]` | heads and keys |
-| each example's full mask | `[B,1,Tq,Tk]` | heads |
+| shared causal mask | `[1,1,Tq,Tk]` | batch, heads |
+| padding keys | `[B,1,1,Tk]` | heads, queries |
+| padding queries | `[B,1,Tq,1]` | heads, keys |
+| mask per example | `[B,1,Tq,Tk]` | heads |
 
 For example, query position 3 of the second example may read key 1 only
 if the causal rule permits it, key 1 is real, and the query itself is
 not padding. In a full-sequence self-attention pass, query and key lengths are equal;
 cross-attention requires them to be specified separately.
 
-### Empty rows and Boolean-mask polarity
+<a id="empty-rows-and-boolean-mask-polarity"></a>
+
+### Empty rows and Boolean masks in PyTorch
 
 With left padding `[0,0,1,1]`, the first two queries may have no
 allowed keys. Softmax of a row containing only $-\infty$ is undefined.
 Replacing a resulting `NaN` with zero does not guarantee a correct
 backward pass through the preceding softmax.
 
-The implementation below substitutes finite placeholder scores for
+The implementation in the disclosure uses finite placeholder scores for
 empty rows before softmax, then replaces their weights with zeros.
 The resulting $AV$ is zero and forbidden paths carry no gradient.
 Nonempty rows retain ordinary masked softmax. This assumes finite
 Q/K/V inputs: a mask does not repair arbitrary `NaN` values inside V.
 
-For `[0,0,1,1]`, row sums are `[0,0,1,1]`. The first real token
+For `[0,0,1,1]`, this procedure makes the row sums `[0,0,1,1]`. The first real token
 reads itself; the second reads both real tokens. An output-projection
 bias or residual connection can make padding states nonzero again.
 Masking prediction targets in the loss is a separate operation.
 
-The same Boolean `True` has opposite meanings in different interfaces:
+In PyTorch 2.14, `True` means different things in
+`F.scaled_dot_product_attention` (SDPA) and `nn.MultiheadAttention` (MHA):
 
-| PyTorch 2.14 interface | Meaning of `True` |
+| Parameter | Meaning of `True` |
 |---|---|
-| `F.scaled_dot_product_attention(attn_mask=...)` | the pair participates in attention |
-| `nn.MultiheadAttention(attn_mask=...)` | the pair is forbidden |
-| `nn.MultiheadAttention(key_padding_mask=...)` | the key is padding |
+| SDPA: `attn_mask` | the pair is allowed |
+| MHA: `attn_mask` | the pair is forbidden |
+| MHA: `key_padding_mask` | the key is padding |
 
-These are current interfaces, not a distinction between “new” and “old”
-PyTorch. Their contracts are specified in the versioned
+The contracts are specified in the versioned
 [SDPA](https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html)
 and [MultiheadAttention](https://docs.pytorch.org/docs/2.14/generated/torch.nn.MultiheadAttention.html)
 documentation. Unlike a Boolean mask, a floating-point SDPA mask is
 added to the scores.
 
-### Rectangular masks and KV-cache positions
+<a id="measuring-head-specialization"></a>
+
+<a id="how-head-specialization-was-measured"></a>
+
+## Head specialization in a trained translator
+
+Voita et al. studied the encoder of an English-to-Russian translator
+trained on six million OpenSubtitles sentence pairs. For each head,
+they measured two different quantities: relevance to the top predicted
+logit using layer-wise relevance propagation (LRP), and the mean
+maximum attention weight across queries, excluding EOS.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/multihead-2026-11-10/voita-trained-heads-figure1.png|Three panels from one experiment: relevance by LRP, mean maximum attention weight, and measured head functions.]]
+
+*Rows are layers; columns are heads sorted by LRP separately within
+each layer. The left panel shows relevance and the center shows the
+mean maximum attention weight. On the right, −1 and +1 mean the
+previous and next token, `v-o` denotes a verb-to-direct-object relation,
+and `r` marks attention to rare tokens. Voita, Talbot, Moiseev, Sennrich,
+and Titov, [Analyzing Multi-Head Self-Attention, Figure 1](https://aclanthology.org/P19-1580.pdf#page=3),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); all three panels cropped from the PDF, not redrawn.*
+
+The first cell in the top row represents the same head on all three panels.
+It has the highest LRP score in layer 1 but a low mean maximum weight.
+Its label `r` marks attention to rare tokens. In layer 2, two heads score high on both
+measures and usually pick neighboring positions. The authors classified
+a head as positional if its maximum fell at the same relative offset
+at least 90% of the time. These are measurements of a trained model,
+not roles assigned in the architecture. A peak attention weight alone
+does not measure a head's contribution to a prediction.
+
+<details>
+<summary>Cached positions and implementation checks</summary>
+
+<h3 id="rectangular-masks-and-kv-cache-positions">Rectangular masks and absolute positions</h3>
 
 Two queries and five source keys produce scores of shape `[B,H,2,5]`.
 This is common in cross-attention, where a causal mask comparing target
@@ -633,7 +708,7 @@ SDPA applies dropout according to `dropout_p` even when the calling
 module is in `eval()` mode. Evaluation must explicitly pass zero.
 All numerical checks below disable dropout.
 
-## Plausible-looking implementation errors
+<h3 id="plausible-looking-implementation-errors">Checks on scores, axes, and masks</h3>
 
 - **Softmax along the wrong axis.** `weights.sum(-1)` should contain
   ones for rows with at least one allowed key.
@@ -655,7 +730,7 @@ All numerical checks below disable dropout.
 
 <a id="shape-evidence"></a>
 
-## A complete implementation check
+<h3 id="a-complete-implementation-check">PyTorch implementation and checks</h3>
 
 ```python
 import math
@@ -795,36 +870,16 @@ The connection between shapes, parameters, FLOPs, and memory continues in
 Implementation continues in
 [[02 Areas/ML & DL/06 Практика/20 Собрать языковую модель с нуля#Этап 2. Модель от базовых операций к логитам|Capstone 1]].
 
-<a id="measuring-head-specialization"></a>
+</details>
 
-## How head specialization was measured
+A causal mask separates past keys from future ones. It does not tell
+a head how many tokens separate an allowed key from the query.
+[[en/00 Textbook/05 Attention and Transformer/04 Positional information|Positional representations]]
+give the model features for order and distance.
 
-Voita et al. studied the encoder of an English-to-Russian translator
-trained on six million OpenSubtitles sentence pairs. For each head,
-they measured two different quantities: relevance to the top predicted
-logit using layer-wise relevance propagation (LRP), and the mean
-maximum attention weight across queries, excluding EOS.
+<a id="sources-and-visual-continuations"></a>
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/multihead-2026-11-10/voita-trained-heads-figure1.png|Three panels from one experiment: relevance by LRP, mean maximum attention weight, and measured head functions.]]
-
-*Rows are layers; columns are heads sorted by LRP separately within
-each layer. The left panel shows relevance and the center shows the
-mean maximum attention weight. On the right, −1 and +1 mean the
-previous and next token, `v-o` denotes a verb-to-direct-object relation,
-and `r` marks attention to rare tokens. Voita, Talbot, Moiseev, Sennrich,
-and Titov, [Analyzing Multi-Head Self-Attention, Figure 1](https://aclanthology.org/P19-1580.pdf#page=3),
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); all three panels cropped from the PDF, not redrawn.*
-
-Compare the first cell of the top row across the three panels. This head
-ranks highest in layer 1 by LRP but has a low mean maximum weight. The
-right panel marks it `r`. In layer 2, two heads score high on both
-measures and usually pick neighboring positions. The authors classified
-a head as positional if its maximum fell at the same relative offset
-at least 90% of the time. These are measurements of a trained model,
-not roles assigned in the architecture. A peak attention weight alone
-does not measure a head's contribution to a prediction.
-
-## Sources and visual continuations
+## Sources
 
 - [Stanford CS336 Spring 2026, Lecture 2 — pinned source](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_02.py): named axes, `einsum`, and the relationship between shapes and resource counts.
 - [Stanford CS336 Spring 2026, Assignment 1 — pinned assignment](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf): testable attention and Transformer interfaces.

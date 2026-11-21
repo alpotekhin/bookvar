@@ -5620,6 +5620,19 @@ describe('static handbook output', () => {
       'rope-и-kv-cache-позиция-сохраняется-вместе-с-ключом'])
       expect(html).toContain('id="'+id+'"');
     expect(html).not.toContain('katex-error');
+    for (const [locale, id] of [['', 'один-запрос-и-один-ключ-в-шести-методах'],
+      ['en/', 'the-same-query-and-key-across-six-methods']]) {
+      const page = await readFile(join(distDir,locale+'textbook/transformer/positional-information/index.html'),'utf8');
+      const start = page.indexOf('id="'+id+'"');
+      expect(start).toBeGreaterThan(0);
+      const comparison = page.slice(start,page.indexOf('</table>',start));
+      for (const cell of ['0.786490','0.199574','-0.75','(0,2)','(0,1)'])
+        expect(comparison).toContain(cell+'</annotation>');
+      expect(comparison.match(/<tr>/g)).toHaveLength(7);
+      expect(page.match(/<pre data-language="python"/g)).toHaveLength(6);
+      for (const tag of page.match(/<img[^>]+src="\/assets\/[^>]+>/g) ?? [])
+        expect(tag).toMatch(/ alt="[^"]+"/);
+    }
   });
   it('renders device-placement semantics beside the original CUDA stream figures', async () => {
     const html = await readFile(join(distDir, 'textbook/ml-systems/gpu-cuda-memory-hierarchy/index.html'), 'utf8');
@@ -5634,7 +5647,7 @@ describe('static handbook output', () => {
     expect(html).not.toContain('class="katex-error');
   });
 
-  it('renders masking/head examples, source figures and existing chapter anchors', async () => {
+  it('renders masking and two-head calculations before tensor layout and optional implementations', async () => {
     const html = await readFile(join(distDir,'textbook/transformer/masking-heads-shapes/index.html'),'utf8');
     for (const name of ['causal-mask-detailed.png', 'vaswani-multihead-figure2.png',
       'voita-trained-heads-figure1.png',
@@ -5670,9 +5683,16 @@ describe('static handbook output', () => {
       expect(page).toContain('id="measuring-head-specialization"');
       expect(page).toContain('causal=True');
       expect(page).not.toContain('katex-error');
+      for (const number of ['0.330238', '0.669762', '1.339523']) expect(page).toContain(number);
+      const stages = [locale ? 'the-query-for-cat-in-a-cat-sleeps' : 'что-видит-второй-токен-в-a-cat-sleeps',
+        'two-heads-trace', 'named-attention-shapes', 'measuring-head-specialization', 'shape-evidence'];
+      const offsets = stages.map(id => page.indexOf('id="' + id + '"'));
+      expect(offsets.every((offset, i) => offset >= 0 && (i === 0 || offset > offsets[i - 1]))).toBe(true);
+      for (const tag of page.match(/<img[^>]+src="\/assets\/[^>]+>/g) ?? [])
+        expect(tag).toMatch(/ alt="[^"]+"/);
     }
   });
-  it('renders projected self-attention, complete examples and four original figures', async () => {
+  it('renders one self-attention row before its matrix form, with five original figures', async () => {
     const html = await readFile(join(distDir,'textbook/transformer/self-attention/index.html'),'utf8');
     for (const name of ['transformer_self_attention_vectors.png',
       'self-attention-matrix-calculation-2.png', 'self-attention-output.png',
@@ -5699,6 +5719,24 @@ describe('static handbook output', () => {
     expect(html).toContain('https://arxiv.org/html/1908.04211v3#S3');
     expect(html.match(/<pre data-language="python"/g)).toHaveLength(4);
     expect(html).not.toContain('katex-error');
+    const pages = [
+      [html, 'выход-для-третьего-токена', '3-почему-нужен-отдельный-value', 'матричная-запись-и-формы'],
+      [await readFile(join(distDir, 'en/textbook/transformer/self-attention/index.html'), 'utf8'),
+        'the-output-at-the-third-token', '3-why-value-is-separate', 'matrix-form-and-shapes'],
+    ];
+    for (const [page, ...ids] of pages) {
+      const offsets = ids.map(id => page.indexOf('id="' + id + '"'));
+      expect(offsets.every((offset, i) => offset >= 0 && (i === 0 || offset > offsets[i - 1]))).toBe(true);
+      const perturbation = page.slice(offsets[1], offsets[2]);
+      expect(perturbation).toContain('1.006980');
+      expect(perturbation).toContain('2.006980');
+      for (const name of ['transformer_self_attention_vectors.png', 'self-attention-matrix-calculation-2.png',
+        'self-attention-output.png', 'cnn-rnn-self-attention.svg', 'transformer_self-attention_visualization.png']) {
+        const image = page.match(/<img\b[^>]+>/g)?.find(tag => tag.includes('/' + name + '"'));
+        expect(image, name).toMatch(/ alt="[^"]+"/);
+      }
+      expect(page).not.toContain('katex-error');
+    }
   });
 
   it('renders recurrent-attention mechanisms, full examples and all eight source figures', async () => {
