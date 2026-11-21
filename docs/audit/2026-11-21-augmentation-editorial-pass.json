@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-21",
+  "scope": "Full editorial read in the original English. Distinguish supervised label preservation from prediction agreement, connect the two-parent transformations on the same images, and verify how using the nominal CutMix weight reverses a logit gradient after clipping.",
+  "verification": {
+    "sources": ["Zhang et al., mixup §2", "Yun et al., CutMix §3.1 and pinned train.py lines 230–240", "Cubuk et al., RandAugment §3", "Sennrich et al., back-translation §3.2"],
+    "examples": "All nine reader programs executed on CPU with PyTorch 2.14.1. The corner example checked both logit gradients against autograd. The existing harness checked 630 reflected boxes, 372 Mixup loss and gradient cases, and 405 CutMix clipping and area cases.",
+    "site": "Topic indexes, 2,099-page local build, internal links, ten focused publication tests and the rendered-output test covering both locale routes passed.",
+    "visual": "Four original figures decoded and fit the article at widths 1440 and 390 px. Inspected the gallery, CutMix comparison, and new gradient example. The figure viewer enlarged the comparison to 2.5× on the narrow viewport."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований.md",
+      "before_sha256": "a152a674e2852ff85127dc5f2cd2fe12298b7b663666ad5114a357172127ca5b",
+      "after_sha256": "8638ae2184d4d9ffc0277179f30ba5d4adb5b7e45835ad30f5f870961b0ce8e3",
+      "changes": [
+        {
+          "old": "  - label: TTA — усреднение вероятностей и логитов\n    label_en: TTA probability and logit averaging\n    anchor: tta-averaging\nlast_updated: 2026-11-03\nlast_verified: 2026-11-03\nprimary_sources:\n  - https://d2l.ai/chapter_computer-vision/image-augmentation.html\n  - https://arxiv.org/html/1710.09412v2\n",
+          "new": "  - label: TTA — усреднение вероятностей и логитов\n    label_en: TTA probability and logit averaging\n    anchor: tta-averaging\nlast_updated: 2026-11-21\nlast_verified: 2026-11-21\nprimary_sources:\n  - https://d2l.ai/chapter_computer-vision/image-augmentation.html\n  - https://arxiv.org/html/1710.09412v2\n"
+        },
+        {
+          "old": "\n# Аугментация данных — Mixup, CutMix и политики преобразований\n\nA photograph of a cat can be cropped or reflected without necessarily changing\nthe answer “cat.” A left-turn arrow cannot be reflected while keeping the\nanswer “left.” Data augmentation constructs training examples by transforming\nexisting ones. Choosing a transformation includes deciding what should happen\nto the target.\n\nSome transformations keep a class label, some transform an annotation along\nwith the input, and some construct a mixture of targets. Mixup and CutMix belong\nto the last group. They do not require a pasted or blended image to have the\nunchanged label of its first parent.\n\nThe examples use small tensors so that coordinates, target weights, losses,\nand gradients can be inspected. They do not measure recognition quality.\nThe image galleries and comparison below are the authors' original figures,\nnot new augmentation results generated for this book.\n\n<a id=\"augmentation-target\"></a>\n## Transform the input and its target together\n\nFor classification, a label-preserving transformation asks for\n$f(T(x))$ to predict the same class as $f(x)$. In object detection, the target\ncontains coordinates. Reflecting an image must also reflect its boxes.\nFor segmentation, the class mask must undergo the same spatial transformation.\nImage and annotation cannot draw their geometric random choices independently.\n",
+          "new": "\n# Аугментация данных — Mixup, CutMix и политики преобразований\n\nFlip a photograph of a cat and the class is still “cat.” Flip a left-turn\narrow and the class changes to “right.” When the target includes a box, its\ncoordinates must follow the object even if the class stays the same.\n\nMixup and CutMix start from two labelled images. Mixup blends their pixels;\nCutMix copies a patch from one image onto the other. Both change the class\ntarget as well as the input, but they determine the target weights differently.\n\n<a id=\"augmentation-target\"></a>\n## Transform the input and its target together\n\nIn classification, a label-preserving transformation turns $(x,y)$ into\n$(T(x),y)$. The classifier is trained against the original label $y$ for both\ninputs. In object detection, the target\ncontains coordinates. Reflecting an image must also reflect its boxes.\nFor segmentation, the class mask must undergo the same spatial transformation.\nImage and annotation cannot draw their geometric random choices independently.\n"
+        },
+        {
+          "old": "not automatically another source of useful task variation.\n\n<a id=\"augmentation-objective\"></a>\n## The training objective averages transformed examples\n\nLet $q(\\tau)$ describe the random choices of an augmentation. A transformation\ncan act on the whole labelled pair, giving\n$(\\widetilde x_i,\\widetilde y_i)=A_\\tau(x_i,y_i)$. The augmented objective is\n\n$$\n\\begin{aligned}\n",
+          "new": "not automatically another source of useful task variation.\n\n<a id=\"augmentation-objective\"></a>\n## Average loss over transformed examples\n\nLet $q(\\tau)$ describe the random choices of an augmentation, such as the\nposition and size of a crop. Applying those choices to example $i$ produces\n$(\\widetilde x_i,\\widetilde y_i)$ from $(x_i,y_i)$. For Mixup or CutMix, the\nchoices also include the second labelled example. Training minimizes the\nexpected loss on these transformed pairs:\n\n$$\n\\begin{aligned}\n"
+        },
+        {
+          "old": "print(\"gradient\", gradient)\n```\n\nHere training on both views can favour equal treatment of the two input\npositions. The example establishes the objective and its gradient, not that\nthis symmetry is appropriate for every task. If reflection changes the answer,\nforcing the same target introduces contradictory supervision.\n\n<a id=\"augmentation-views\"></a>\n## Occlusion and photometric changes\n",
+          "new": "print(\"gradient\", gradient)\n```\n\nEqual weights give the correct output for both views. The gradient\n$(2,-2)$ moves the weights in that direction: a gradient descent step reduces\nthe first weight and increases the second. This symmetry is useful only\nwhen reflection preserves the label.\n\n<a id=\"augmentation-views\"></a>\n## Occlusion and photometric changes\n"
+        },
+        {
+          "old": "generalization.\n\n<a id=\"mixup\"></a>\n## Mixup interpolates inputs and targets\n\nMixup draws two labelled examples and a coefficient $\\lambda\\in[0,1]$:\n\n",
+          "new": "generalization.\n\n<a id=\"mixup\"></a>\n## Mixup\n\nMixup draws two labelled examples and a coefficient $\\lambda\\in[0,1]$:\n\n"
+        },
+        {
+          "old": "\\end{aligned}\n$$\n\nBoth losses use the same logits for the mixed input. Running the network\nseparately on $x_A$ and $x_B$ and combining those losses does not implement\nthe same update.\n\nSuppose the mixed input produces probabilities $(0.8,0.2)$. With target\n$(0.25,0.75)$, the loss is about 1.2629 and its logit gradient is\n",
+          "new": "\\end{aligned}\n$$\n\nCompute the logits once, on $\\widetilde x$. The two terms can then use\nordinary class-index targets. Computing separate logits on $x_A$ and $x_B$\nwould train on the original inputs instead of the interpolated one.\n\nSuppose the mixed input produces probabilities $(0.8,0.2)$. With target\n$(0.25,0.75)$, the loss is about 1.2629 and its logit gradient is\n"
+        },
+        {
+          "old": "\n<a id=\"mixup-beta\"></a>\n\nThe paper samples $\\lambda\\sim\\operatorname{Beta}(\\alpha,\\alpha)$.\nAt $\\alpha=1$ the distribution is uniform. Smaller positive $\\alpha$ places\nmore mass near zero and one; larger $\\alpha$ concentrates nearer one half.\n",
+          "new": "\n<a id=\"mixup-beta\"></a>\n\n### The mixing coefficient and the choice of pairs\n\nThe paper samples $\\lambda\\sim\\operatorname{Beta}(\\alpha,\\alpha)$.\nAt $\\alpha=1$ the distribution is uniform. Smaller positive $\\alpha$ places\nmore mass near zero and one; larger $\\alpha$ concentrates nearer one half.\n"
+        },
+        {
+          "old": "Inputs must already share compatible shapes and numerical units.\n\n<a id=\"cutmix\"></a>\n## CutMix uses a patch and measures its actual area\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-augmentation-2026-10-28/cutmix-comparison.png|Original NAVER comparison of Mixup, Cutout and CutMix inputs, labels and reported results]]\n\n",
+          "new": "Inputs must already share compatible shapes and numerical units.\n\n<a id=\"cutmix\"></a>\n## CutMix\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/data-augmentation-2026-10-28/cutmix-comparison.png|Original NAVER comparison of Mixup, Cutout and CutMix inputs, labels and reported results]]\n\n"
+        },
+        {
+          "old": "must become integers, and part of a centred rectangle may fall outside the image.\nThe nominal coefficient can therefore differ from the target weight.\n\nFor a $4\\times4$ image and nominal $\\lambda=0.5$, flooring each side gives\na $2\\times2$ rectangle. At the centre it replaces four of sixteen pixels,\nso the actual retained weight is 0.75. At the corner, clipping leaves only\n$1\\times1$ and the retained weight becomes $15/16=0.9375$.\n\nThe released training loop performs that correction before calculating either\ncross-entropy term:\n",
+          "new": "must become integers, and part of a centred rectangle may fall outside the image.\nThe nominal coefficient can therefore differ from the target weight.\n\nTake two $4\\times4$ images: A has class 0, B has class 1. At $\\lambda=0.5$,\nMixup averages every pair of corresponding pixels and gives target\n$(0.5,0.5)$. For CutMix, start with the same nominal $\\lambda$ and a\n$2\\times2$ rectangle. In the middle of the image, four of sixteen pixels\ncome from B, giving target $(0.75,0.25)$. At a corner only one pixel is\npasted after clipping, giving target $(15/16,1/16)$.\n\nSuppose the classifier assigns the corner example probabilities $(0.8,0.2)$.\nThe cross-entropy gradient on the class-0 logit is $0.8-15/16=-0.1375$.\nUsing the nominal target $(0.5,0.5)$ gives $0.8-0.5=+0.3$ instead.\nWith the correct target the loss favours a larger class-0 logit; with the\nnominal target it favours a smaller one.\n\nThe released training loop performs that correction before calculating either\ncross-entropy term:\n"
+        },
+        {
+          "old": "assert (middle[0][0] == 1).sum().item() == 4\nassert (corner[0][0] == 1).sum().item() == 1\ntorch.testing.assert_close(middle[1][0], torch.tensor([.75, .25], dtype=images.dtype))\nassert torch.equal(images[0], torch.zeros_like(images[0]))\nprint(\"centre:\", middle[2:], \"corner:\", corner[2:])\n```\n\n",
+          "new": "assert (middle[0][0] == 1).sum().item() == 4\nassert (corner[0][0] == 1).sum().item() == 1\ntorch.testing.assert_close(middle[1][0], torch.tensor([.75, .25], dtype=images.dtype))\ntorch.testing.assert_close(corner[1][0], images.new_tensor([15 / 16, 1 / 16]))\nassert torch.equal(images[0], torch.zeros_like(images[0]))\n\ncorner_logits = images.new_tensor([.8, .2]).log().requires_grad_()\nactual_loss = F.cross_entropy(corner_logits[None], corner[1][:1])\nnominal_loss = F.cross_entropy(corner_logits[None], images.new_tensor([[.5, .5]]))\nactual_gradient, = torch.autograd.grad(actual_loss, corner_logits)\nnominal_gradient, = torch.autograd.grad(nominal_loss, corner_logits)\ntorch.testing.assert_close(actual_gradient, images.new_tensor([-.1375, .1375]))\ntorch.testing.assert_close(nominal_gradient, images.new_tensor([.3, -.3]))\nprint(\"centre:\", middle[2:], \"corner:\", corner[2:])\n```\n\n"
+        },
+        {
+          "old": "its declared held-out protocol.\n\n<a id=\"augmentation-policies\"></a>\n## AutoAugment searches policies; RandAugment reduces the search parameters\n\nA list of permitted operations does not specify a policy. A policy also\ndetermines their order, probability, strength, and whether choices are shared\n",
+          "new": "its declared held-out protocol.\n\n<a id=\"augmentation-policies\"></a>\n## Image augmentation policies\n\nA list of permitted operations does not specify a policy. A policy also\ndetermines their order, probability, strength, and whether choices are shared\n"
+        },
+        {
+          "old": "\n<a id=\"autoaugment-controller\"></a>\n\n### AutoAugment separates policy search from final training\n\nIn [AutoAugment, §3](https://arxiv.org/html/1805.09501v3#S3), a candidate\npolicy contains five sub-policies. Each sub-policy contains two ordered\n",
+          "new": "\n<a id=\"autoaugment-controller\"></a>\n\n### AutoAugment policy search\n\nIn [AutoAugment, §3](https://arxiv.org/html/1805.09501v3#S3), a candidate\npolicy contains five sub-policies. Each sub-policy contains two ordered\n"
+        },
+        {
+          "old": "\n<a id=\"randaugment-n-m\"></a>\n\n### RandAugment tunes the operation count and shared magnitude\n\n[RandAugment, §3](https://arxiv.org/html/1909.13719v2#S3) uses a uniform\nsampler over a pool of 14 operations and two main hyperparameters:\n",
+          "new": "\n<a id=\"randaugment-n-m\"></a>\n\n### RandAugment operation count and magnitude\n\n[RandAugment, §3](https://arxiv.org/html/1909.13719v2#S3) uses a uniform\nsampler over a pool of 14 operations and two main hyperparameters:\n"
+        },
+        {
+          "old": "underfit when transformations or target mixtures are too strong.\n\n<a id=\"text-audio-augmentation\"></a>\n## Text and speech need task-specific transformations\n\nDeleting “not” from “the film was not good” can reverse sentiment. Replacing\na word with a dictionary synonym can change its sense in context.\n",
+          "new": "underfit when transformations or target mixtures are too strong.\n\n<a id=\"text-audio-augmentation\"></a>\n## Augmentation for text and speech\n\nDeleting “not” from “the film was not good” can reverse sentiment. Replacing\na word with a dictionary synonym can change its sense in context.\n"
+        },
+        {
+          "old": "```\n\nThe program checks identity and partitioning; it does not synthesize audio.\nThe same parent-ID rule applies to document paraphrases and image crops.\nMore independent source material and more views of existing material are\ndifferent ways to spend the data budget.\n\n<a id=\"augmentation-evaluation\"></a>\n## Training transforms, validation, and test-time augmentation\n",
+          "new": "```\n\nThe program checks identity and partitioning; it does not synthesize audio.\nThe same grouping applies to a document and its paraphrases, or a photograph\nand its crops. Assign the original to a split, then send all its derivatives\nto that same split.\n\n<a id=\"augmentation-evaluation\"></a>\n## Training transforms, validation, and test-time augmentation\n"
+        },
+        {
+          "old": "\n---\n\n**Предыдущая глава:** [[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация|Dropout и регуляризация]]\n\n**Следующая глава:** [[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet|CNN — от свёртки до ResNet]]\n\n**Источники:** Zhang et al.,\n[D2L, Image Augmentation](https://d2l.ai/chapter_computer-vision/image-augmentation.html),\nCC BY-SA 4.0; Zhang et al.,\n[mixup, §2](https://arxiv.org/html/1710.09412v2#S2); Yun et al.,\n",
+          "new": "\n---\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация|Dropout and regularization]]\n\n**Next:** [[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet|CNNs: from convolution to ResNet]]\n\n**Sources:** Zhang et al.,\n[D2L, Image Augmentation](https://d2l.ai/chapter_computer-vision/image-augmentation.html),\nCC BY-SA 4.0; Zhang et al.,\n[mixup, §2](https://arxiv.org/html/1710.09412v2#S2); Yun et al.,\n"
+        }
+      ]
+    }
+  ]
+}

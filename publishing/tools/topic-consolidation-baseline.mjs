@@ -5,6 +5,11 @@ import { resolve } from 'node:path';
 const defaultRoot = resolve(import.meta.dirname, '../..');
 const hash = text => createHash('sha256').update(text).digest('hex');
 const journals = [
+  '2026-11-21-text-representation-editorial-pass.json',
+  '2026-11-21-cnn-editorial-pass.json',
+  '2026-11-21-augmentation-editorial-pass.json',
+  '2026-11-21-dropout-editorial-pass.json',
+  '2026-11-21-initialization-editorial-pass.json',
   '2026-11-21-optimizers-editorial-pass.json',
   '2026-11-21-backprop-editorial-pass.json',
   '2026-11-21-activations-editorial-pass.json',
@@ -321,6 +326,21 @@ const journals = [
   '2026-10-29-inference-consolidation-additions.json',
 ];
 
+// Verification commands read a fixed snapshot. Index each journal once per
+// process; chapter content and both hash boundaries are still checked per call.
+const rowsByJournal = new Map();
+function journalRows(path) {
+  if (rowsByJournal.has(path)) return rowsByJournal.get(path);
+  if (!existsSync(path)) return;
+  const journal = JSON.parse(readFileSync(path, 'utf8'));
+  const rows = new Map();
+  for (const row of journal.files ?? journal.entries ?? journal.records) {
+    if (!rows.has(row.source)) rows.set(row.source, row);
+  }
+  rowsByJournal.set(path, rows);
+  return rows;
+}
+
 // Historical preservation contracts still apply to the exact revision they
 // reviewed. Reverse only independently recorded additions, never normalize prose.
 export function beforeTopicConsolidation(text, source, root = defaultRoot, stopBeforeJournal) {
@@ -330,9 +350,7 @@ export function beforeTopicConsolidation(text, source, root = defaultRoot, stopB
   for (const name of journals) {
     if (name === stopBeforeJournal) break;
     const path = resolve(root, 'docs/audit', name);
-    if (!existsSync(path)) continue;
-    const journal = JSON.parse(readFileSync(path, 'utf8'));
-    const row = (journal.files ?? journal.entries ?? journal.records).find(row => row.source === source);
+    const row = journalRows(path)?.get(source);
     if (!row || row.created) continue;
     // A verified preceding revision is the input to the next journal.
     // Keep its digest instead of rehashing the whole source at each boundary.

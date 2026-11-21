@@ -25,11 +25,35 @@ assert len("кот спит")==8 and len("кот спит".encode("utf8"))==15
 assert "к".encode("utf8")==bytes.fromhex("d0ba")
 assert [ord(c) for c in "👩‍💻"]==[0x1F469,0x200D,0x1F4BB]
 assert [len(s.encode("utf8")) for s in ("é","e\u0301")]==[2,3]
+
+def edit_matrix(source, target):
+    rows = [list(range(len(target)+1))]
+    for i, s in enumerate(source, 1):
+        row = [i]
+        for j, t in enumerate(target, 1):
+            row.append(min(rows[-1][j]+1, row[j-1]+1,
+                           rows[-1][j-1]+(s != t)))
+        rows.append(row)
+    return rows
+
+edit_section = text.split('<a id="text-edit-distance"></a>', 1)[1].split('</details>', 1)[0]
+printed_rows = []
+for line in edit_section.splitlines():
+    if line.startswith("| "):
+        cells = [cell.strip() for cell in line.strip("|").split("|")]
+        if len(cells) == 5 and all(cell.isdecimal() for cell in cells[1:]):
+            printed_rows.append([int(cell) for cell in cells[1:]])
+assert printed_rows == edit_matrix("кот", "кто")
+assert printed_rows[-1][-1] == edit_matrix("кто", "кот")[-1][-1] == 2
+assert edit_matrix("é", "e\u0301")[-1][-1] == 2
+normalize = unicode["unicodedata"].normalize
+assert edit_matrix(normalize("NFC", "é"), normalize("NFC", "e\u0301"))[-1][-1] == 0
 counts=vocabulary["Counter"](w for doc in vocabulary["corpus"] for w in doc.split())
 assert sum(counts.values())==8 and dict(counts)=={"кот":3,"спит":3,"пёс":1,"бежит":1}
 assert vocabulary["encode"]("кот  спит")==vocabulary["encode"]("кот спит")
 assert vocabulary["decode"](vocabulary["encode"]("лиса тигр"))==["<unk>","<unk>"]
 assert vocabulary["vocab"]["<pad>"]==0 and vocabulary["vocab"]["<unk>"]==1
+assert lookup["ids"].tolist() == vocabulary["encode"](vocabulary["corpus"][0])
 # Reserved spellings do not produce duplicate vocabulary entries.
 extra=vocabulary["build_vocab"](["<pad> кот <unk>"])[1]
 assert extra==["<pad>","<unk>","кот"]
@@ -123,6 +147,6 @@ np.testing.assert_array_equal(default.idf_,before)
 v=torch.tensor([2.,1.,0.,0.],dtype=dtype)
 torch.testing.assert_close(F.cosine_similarity(v,2*v,dim=0),torch.tensor(1.,dtype=dtype))
 assert np.array_equal(dense[0]>0,np.array([True,True,False,False]))
-print("PASS Unicode/UTF8/NFC; vocabulary/OOV/roundtrip/permutation; one-hot/memory; "
+print("PASS Unicode/UTF8/NFC/NFKC/edit-distance table; vocabulary/OOV/roundtrip/permutation; one-hot/memory; "
       "lookup/VJP/frequency/sparse/decay; padding/masked pooling; BOW/bigrams/CSR; "
       "manual/sklearn TF-IDF, smoothing/sublinear/zero-vector and cosine. torch",torch.__version__)

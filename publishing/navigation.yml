@@ -381,7 +381,7 @@ sections:
                 route: textbook/neural-networks/backpropagation
               - label: SGD, Momentum, Adam и расписания шага
                 route: textbook/neural-networks/optimizers-schedules
-              - label: Инициализация, нормализация и residual connections
+              - label: Инициализация, нормализация и остаточные связи
                 route: textbook/neural-networks/initialization-normalization-residuals
               - label: Dropout и регуляризация
                 route: textbook/neural-networks/dropout-regularization

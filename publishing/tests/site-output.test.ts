@@ -7676,6 +7676,21 @@ describe('static handbook output', () => {
     }
   });
 
+  it('renders the spelling appendix and the same worked document in both locales', async () => {
+    for (const locale of ['', 'en/']) {
+      const html = await readFile(join(distDir, locale, 'textbook/text-representation/numerical-representation/index.html'), 'utf8');
+      const details = html.match(/<details\b[^>]*>\s*<summary>Дополнение: словоформы и сравнение написаний<\/summary>[\s\S]*?<\/details>/)?.[0];
+      expect(details).toBeDefined();
+      expect(details).toContain('id="text-lemmas"');
+      expect(details).toContain('id="text-edit-distance"');
+      expect(details).toContain('<table>');
+      expect(details).toContain('D_{i,j}');
+      for (const text of ['[2, 2, 3]', '[3, 2, 2]', 'reordered_counts', 'UAX #15'])
+        expect(html).toContain(text);
+      expect(details).not.toContain('katex-error');
+    }
+  });
+
   it('publishes bound approval, its queue semantics and the original outbox diagram', async () => {
     const route = '/textbook/agents/security/';
     for (const prefix of ['', '/en']) {

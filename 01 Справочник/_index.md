@@ -109,7 +109,7 @@ last_updated: 2026-10-30
   - [[00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation#gradient-function-transforms|Grad и vmap — индивидуальные и средние градиенты]]
   - [[00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation#custom-backward-contract|Custom backward — производная по каждому входу]]
   - [[00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation#custom-forward-transform-rules|Custom autograd — JVP, broadcasting и torch.func]]
-- [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections|Инициализация, нормализация и residual connections]]
+- [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections|Инициализация, нормализация и остаточные связи]]
   - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#initialization-symmetry|Симметрия при инициализации]]
   - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#initialization-second-moment|Ширина слоя и второй момент активаций]]
   - [[00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections#xavier-initialization|Xavier — прямой и обратный проходы]]

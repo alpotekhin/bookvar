@@ -4,6 +4,26 @@
   "subsequentVerifiedRevisions": {
     "scope": "These current bytes restore to the historical whole-read receipts via the exact journals. This does not claim another full read or acceptance of those chapters.",
     "chapters": {
+      "00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md": {
+        "currentSha256": "9eb4b9c45a269fff59a6a1f36ffce15e419b3b3822dfb3710edd3a569070c3ae",
+        "stopBefore": "2026-11-21-cnn-editorial-pass.json"
+      },
+      "00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md": {
+        "currentSha256": "068691b4d716bd0d0346612083c293fc576a2c726c017f4d1337a35b76f5dd84",
+        "stopBefore": "2026-11-21-augmentation-editorial-pass.json"
+      },
+      "00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований.md": {
+        "currentSha256": "8638ae2184d4d9ffc0277179f30ba5d4adb5b7e45835ad30f5f870961b0ce8e3",
+        "stopBefore": "2026-11-21-dropout-editorial-pass.json"
+      },
+      "00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md": {
+        "currentSha256": "d449dbe3f4773ac045a13a9918aa2f80ebf58b957b0ef31f01ace59d5c89e8b0",
+        "stopBefore": "2026-11-21-initialization-editorial-pass.json"
+      },
+      "00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md": {
+        "currentSha256": "0a266c815620815d8da557a4bda83f5c5e7afa163a5f868d809984a325763ca5",
+        "stopBefore": "2026-11-21-optimizers-editorial-pass.json"
+      },
       "00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md": {
         "currentSha256": "e05de31ca80d5d7810207fa0969f5da9bd1d64b8e7065a48eec15dd298933051",
         "stopBefore": "2026-11-21-activations-editorial-pass.json"
