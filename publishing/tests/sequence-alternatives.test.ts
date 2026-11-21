@@ -7,10 +7,25 @@ import {beforeTopicConsolidation} from '../tools/topic-consolidation-baseline.mj
 const root=resolve(import.meta.dirname,'../..');
 const file='00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md';
 const prior=(path:string)=>beforeTopicConsolidation(readFileSync(resolve(root,path),'utf8'),path,root,'2026-11-03-moe-gate-additions.json');
+const current=readFileSync(resolve(root,file),'utf8');
 const body=prior(file);
 const fm=YAML.parse(body.split('---')[1]);
 const registry=YAML.parse(prior('05 Источники/asset-registry.yml'),{merge:true}).assets;
 describe('sequence models explanation',()=>{
+  it('keeps the current worked examples, linear next chapter and no inline exercises',()=>{
+    const example=current.indexOf('id="seq-phonebook-collision"');
+    const memory=current.indexOf('id="seq-hybrid-memory-worked"');
+    expect(example).toBeGreaterThan(0);
+    expect(memory).toBeGreaterThan(example);
+    for(const fact of ['Алиса — 10, Борис — 20','Алиса — 20, Борис — 10','h_2=30',
+      'Алиса — 30','6.75 MiB','При $T=72$','Данные для предобучения'])
+      expect(current).toContain(fact);
+    expect(current).not.toMatch(/^## Практика$/m);
+    expect(current).not.toContain('К модулям:');
+    expect(current.match(/~~~python\n/g)).toHaveLength(7);
+    expect(current.match(/!\[\[[^|\]]+\|[^\]]+\]\]/g)).toHaveLength(27);
+    expect(current).toContain('**Дальше:**');
+  });
   it('keeps six executable examples and explicit operator boundaries',()=>{
     expect(body.match(/~~~python\n/g)).toHaveLength(6);
     for(const s of ['def diagonal_recurrence(','def selective_ssm(','def ssd_chunked(',

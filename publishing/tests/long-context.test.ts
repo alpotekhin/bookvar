@@ -11,8 +11,8 @@ const assets=YAML.parse(readFileSync(resolve(root,'05 Источники/asset-r
 const specs=JSON.parse(readFileSync(resolve(root,'publishing/tools/long-context-figures.json'),'utf8'));
 describe('long-context explanation and reading order',()=>{
   it('preserves all originals and adds complete chunking, CLA and RULER figures',()=>{
-    const embeds=[...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^\]]+)\]\]/g)].map(m=>m[1]);
-    expect(embeds).toHaveLength(12);
+    const embeds=[...body.matchAll(/!\[\[(?:02 Areas\/ML & DL\/)?([^|\]]+)\|([^\]]+)\]\]/g)].map(m=>m[1]);
+    expect(embeds).toHaveLength(16);
     for(const spec of specs)expect(embeds).toContain(spec.asset);
     for(const path of embeds){
       expect(existsSync(resolve(root,path))).toBe(true);
@@ -24,8 +24,20 @@ describe('long-context explanation and reading order',()=>{
     for(const s of ['1/24','window_attention','h2_shared','h2_separate',
       'kind="stable"','13.25','1.375 GiB','2048','943.7184','пересчитать затронутый префикс',
       'разрешены четыре позиции, включая текущую','неполная группа здесь первая','SQuAD и HotpotQA',
-      'recall 1','precision $2/3$','в §8'])expect(body).toContain(s);
+      'recall 1','precision $2/3$','§8 авторы отмечают'])expect(body).toContain(s);
     expect(body).not.toContain('## Как связаны рассмотренные методы');
+  });
+  it('uses the same evidence positions for positional scaling, masking, selection and evaluation',()=>{
+    const comparison=body.indexOf('id="long-context-two-evidence-positions"');
+    const evaluation=body.indexOf('## Проверка качества на длинном входе');
+    expect(comparison).toBeGreaterThan(body.indexOf('id="compressed-sparse-attention-csa-hca"'));
+    expect(evaluation).toBeGreaterThan(comparison);
+    const caseText=body.slice(comparison,evaluation);
+    for(const s of ['позиции 2048','30 720','32 767','28 672','16 и 240','восьми слоёв'])
+      expect(caseText).toContain(s);
+    const check=body.slice(evaluation);
+    for(const s of ['17 и 23','ответ 40','ответ станет 48','единственное упоминание переименования'])
+      expect(check).toContain(s);
   });
   it('uses the unmodified author MoBA diagram and distinguishes an incomplete tail from a completed block',()=>{
     const path='00 Учебник/Assets/Figures/curated/moba/moba-running-example.png';

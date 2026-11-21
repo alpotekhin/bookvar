@@ -66,8 +66,11 @@ Language Processing, редакция от 19 августа 2026 года](http
 [глава о нормализации и остаточных связях](2026-11-21-norm-gating-editorial-pass.json),
 [«RoPE»](2026-11-21-rope-editorial-pass.json),
 [«Dense FFN — расширение размерности и SwiGLU»](2026-11-21-dense-ffn-editorial-pass.json),
-[«Transformer с нуля — формы, параметры и стоимость»](2026-11-21-transformer-shapes-editorial-pass.json) и
-[«MHA, MQA и GQA»](2026-11-21-gqa-editorial-pass.json).
-Следующая глава — «MLA и сжатие KV-кэша». Нужно отдельно показать,
-что сохраняется в кэше одной позиции и как из него получают оценки
-внимания, не восстанавливая полные ключи и значения на каждом шаге.
+[«Transformer с нуля — формы, параметры и стоимость»](2026-11-21-transformer-shapes-editorial-pass.json),
+[«MHA, MQA и GQA»](2026-11-21-gqa-editorial-pass.json),
+[«MLA и сжатие KV-кэша»](2026-11-21-mla-editorial-pass.json),
+[«Длинный контекст»](2026-11-21-long-context-editorial-pass.json),
+[«Mixture of Experts»](2026-11-21-moe-editorial-pass.json) и
+[«SSM, Mamba, линейное внимание и гибриды»](2026-11-21-sequence-models-editorial-pass.json).
+Следующая глава — «Данные и предобучение»: как из корпуса получают
+последовательности токенов и примеры для обучения языковой модели.

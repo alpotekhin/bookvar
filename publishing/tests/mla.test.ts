@@ -20,8 +20,19 @@ describe('MLA chapter explanation and scope',()=>{
     expect(body).toContain('веса FP8');
     expect(body).toContain('8 H800');
     for(const s of ['420 млрд','1,33 трлн','34{,}6/860{,}2','4,0 процентного пункта',
-      'Таблица не показывает, какой','позиционный ключ на этой упрощённой схеме не показан'])
+      'Таблица не показывает, какой','ключ на этой упрощённой схеме не показан'])
       expect(body).toContain(s);
+  });
+  it('continues the original two-latent example through the positional term and value reconstruction',()=>{
+    const withoutRoPE=body.indexOf('## Один запрос к двум латентам');
+    const worked=body.indexOf('id="mla-decoupled-worked-example"');
+    const code=body.indexOf('id="mla-layer-code"');
+    expect(withoutRoPE).toBeGreaterThan(0);
+    expect(worked).toBeGreaterThan(withoutRoPE);
+    expect(code).toBeGreaterThan(worked);
+    for(const fact of [String.raw`\sqrt{3/5}`, '0.3155', '0.6845', '0.6310,2.7381',
+      'больший вес получает вторая позиция', '8 вместо 14 чисел'])
+      expect(body.slice(worked,code)).toContain(fact);
   });
   it('keeps five originals, preserves historical assets and does not reintroduce the disputed operation plot',()=>{
     const embeds=[...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^\]|]+)(?:\|[^\]]+)?\]\]/g)].map(m=>m[1]);

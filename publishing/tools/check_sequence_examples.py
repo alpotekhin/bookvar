@@ -16,6 +16,29 @@ for block in blocks:
     exec(compile(block, str(FILE), 'exec'), ns)
 print('PASS seven published blocks', hashlib.sha256(FILE.read_bytes()).hexdigest())
 
+# The worked phonebook case contrasts a colliding sum with readout by key.
+books = [[10., 20.], [20., 10.]]
+assert sum(books[0]) == sum(books[1]) == 30
+name_keys = np.eye(2)
+query_alice = np.tile(name_keys[0], (2, 1))
+alice = [ns['normalized_linear'](query_alice, name_keys, np.array(book)[:, None])[0][-1, 0]
+         for book in books]
+np.testing.assert_array_equal(alice, [10., 20.])
+np.testing.assert_allclose(ns['y_linear'][-1, 0], 20.)
+np.testing.assert_allclose(ns['y_delta'][-1, 0], 30.)
+
+# Bytes for one request; identical attention heads in both variants.
+per_layer_token = 2 * 8 * 128 * 2  # K and V, 8 KV heads, BF16
+full_per_token, hybrid_per_token = 32 * per_layer_token, 8 * per_layer_token
+recurrent_bytes = 24 * (4096 * 16 * 4 + 4096 * 4 * 2)
+assert (full_per_token, hybrid_per_token, recurrent_bytes) == (128 * 1024, 32 * 1024, 7077888)
+assert recurrent_bytes / 2**20 == 6.75
+assert 131072 * full_per_token == 16 * 2**30
+assert 131072 * hybrid_per_token == 4 * 2**30
+delta = lambda t: t * full_per_token - (t * hybrid_per_token + recurrent_bytes)
+assert (delta(71), delta(72), delta(73)) == (-96 * 1024, 0, 96 * 1024)
+print('PASS phonebook collision and keyed readout; hybrid buffer crossover at 72 tokens')
+
 # Independent scalar LTI unrolling, including nonzero initial state.
 rng = np.random.default_rng(73)
 T, D, N = 7, 3, 2

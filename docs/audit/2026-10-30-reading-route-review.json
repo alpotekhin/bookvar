@@ -2,6 +2,22 @@
   "date": "2026-10-30",
   "lastReviewedDate": "2026-11-09",
   "editorialRevisions": {
+    "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md": {
+      "currentSha256": "c864451c4d06f558656bc2291702e29695f293f85619dc051683ce29fe9a2e32",
+      "stopBefore": "2026-11-21-moe-editorial-pass.json"
+    },
+    "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md": {
+      "currentSha256": "ea02b06d185ded78b29db95855fea37f78bf7fa3ec9d57486c51f63d5b29cb4f",
+      "stopBefore": "2026-11-21-long-context-editorial-pass.json"
+    },
+    "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md": {
+      "currentSha256": "c2a408c523668f25d904c56636a786924a109c6af42c44406645f96051d436f8",
+      "stopBefore": "2026-11-21-mla-editorial-pass.json"
+    },
+    "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md": {
+      "currentSha256": "be96b0bbe4998afd9d888fdf71fa88af203591f9330e6239dc1b3e41057ed575",
+      "stopBefore": "2026-11-21-gqa-editorial-pass.json"
+    },
     "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md": {
       "currentSha256": "6c3cfceda74e34386ab5aad0e4eb4819e727fa20436810f7e45edba697a9a5da",
       "stopBefore": "2026-11-21-transformer-shapes-editorial-pass.json"

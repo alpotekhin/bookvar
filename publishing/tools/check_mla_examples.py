@@ -24,6 +24,36 @@ torch.testing.assert_close(ns['rope_scores'], torch.tensor([0., 1.], dtype=torch
 assert not torch.allclose(ns['rope_scores'].softmax(-1), ns['lost_position_scores'].softmax(-1))
 print('PASS numerical outputs, unchanged temperature and explicit RoPE obstruction')
 
+def verify_worked_example():
+    c = torch.eye(2, dtype=torch.float64)
+    up_k = c.new_tensor([[1, 0], [0, 1], [1, 1]])
+    up_v = c.new_tensor([[2, 0], [0, 4]])
+    qc = c.new_tensor([math.sqrt(3), 0, 0])
+    kr = torch.eye(2, dtype=c.dtype)  # Already rotated.
+    qr = c.new_tensor([0, 2 * math.sqrt(3)])
+    keys = torch.cat((c @ up_k.T, kr), dim=-1)
+    values = c @ up_v.T
+    query = torch.cat((qc, qr))
+    scale = math.sqrt(keys.size(-1))
+    full = keys @ query / scale
+    latent = (c @ (up_k.T @ qc) + kr @ qr) / scale
+    expected = float(1 / (1 + math.exp(math.sqrt(3 / 5))))
+    weights = c.new_tensor([expected, 1 - expected])
+    torch.testing.assert_close(full, c.new_tensor([1, 2]) * math.sqrt(3 / 5))
+    torch.testing.assert_close(full, latent, atol=1e-15, rtol=1e-15)
+    torch.testing.assert_close(full.softmax(-1), weights)
+    out = weights @ values
+    torch.testing.assert_close(out, up_v @ (latent.softmax(-1) @ c))
+    torch.testing.assert_close(out, c.new_tensor([0.6310, 2.7381]), atol=5e-5, rtol=0)
+    assert out.numel() == 2 and full.argmax().item() == 1
+    assert (c @ (up_k.T @ qc)).argmax().item() == 0
+    wrong = (latent * scale / math.sqrt(c.size(-1) + kr.size(-1))).softmax(-1)
+    assert not torch.allclose(wrong, weights)
+    assert (c.numel() + kr.numel(), keys.numel() + values.numel()) == (8, 14)
+
+verify_worked_example()
+print('PASS two-position decoupled RoPE: identical full/latent outputs, reversed ranking and cache 8 vs 14')
+
 def independent(layer, x):
     """Per batch, query, head and history position; no absorption or vectorized mask."""
     def norm(y, gain):

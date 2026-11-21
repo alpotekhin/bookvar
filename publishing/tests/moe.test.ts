@@ -39,6 +39,17 @@ describe('MoE explanation and source figures',()=>{
     expect(body).not.toContain('Здесь видно тонкое различие');
     expect(body).not.toContain('худший\nзначение');
   });
+  it('traces the four token routes through capacity, recombination and both exchange phases',()=>{
+    const cap=body.indexOf('id="moe-systems-capacity"');
+    const ep=body.indexOf('id="moe-four-token-dispatch-ledger"');
+    expect(cap).toBeGreaterThan(body.indexOf('id="moe-dispatch-combine"'));
+    expect(ep).toBeGreaterThan(cap);
+    const capacity=body.slice(cap,ep);
+    for(const fact of ['(2,8/15)','(14/15,0)','стал бы $(2,0)$'])expect(capacity).toContain(fact);
+    const exchange=body.slice(ep,body.indexOf('id="moe-latent"'));
+    for(const fact of ['32$ байта','16 байт','24 байта','выполняет $4+2=6$','| 4 | 1, 2 | 2 |'])
+      expect(exchange).toContain(fact);
+  });
   it('preserves named anchors and neighboring chapter links',()=>{
     for(const id of ['moe-routing-mechanisms','moe-load-balancing','moe-systems-capacity',
       'moe-training-failures','moe-upcycling','deepseek-moe-evolution','moe-recap'])

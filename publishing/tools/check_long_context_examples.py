@@ -85,6 +85,25 @@ for count,wanted in enumerate((4,7,10),1):
     assert paths[-1].sum() == wanted
 print('PASS three-layer receptive fields: 4, 7, 10')
 
+# The chapter's running example tracks evidence positions, not model accuracy.
+t, rename_at, expense_at, w = 32_767, 2048, 30_720, 4096
+past = set(range(t + 1))
+near = set(range(t - w + 1, t + 1))
+evidence = {rename_at, expense_at}
+assert evidence <= past and len(past) == 32_768
+assert min(near) == 28_672 and near & evidence == {expense_at}
+assert math.ceil((t - rename_at) / (w - 1)) == 8
+distance = t - rename_at
+assert 7 * (w - 1) < distance <= 8 * (w - 1)
+assert t / 4 < 8192 and (t - rename_at) / 4 == 7679.75
+qsa_blocks = {p // 4 for p in evidence}
+qsa_keys = {4 * i + j for i in qsa_blocks for j in range(4)}
+assert len(qsa_blocks) == 2 and evidence <= qsa_keys <= past
+pooled_blocks = {p // 128 for p in evidence}
+assert pooled_blocks == {16, 240} and max(pooled_blocks) < t // 128
+assert {sum(row) for row in ((17, 23), (17, 31))} == {40, 48}
+print('PASS shared report example: full, local, selected and pooled access; eight-layer path')
+
 # Count the independently enumerated pairs in the worked encoder examples.
 n, radius, block_size = 8, 1, 4
 window_keys = [

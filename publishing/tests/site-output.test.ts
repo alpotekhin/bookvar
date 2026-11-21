@@ -3816,8 +3816,12 @@ describe('static handbook output', () => {
       expect(text).toContain(s);
     expect(html).not.toContain('mamba2-block-figure.png');
     expect(html).not.toContain('katex-error');
+    expect(html).toContain('id="seq-phonebook-collision"');
+    expect(html).toContain('id="seq-hybrid-memory-worked"');
+    expect(html).not.toMatch(/<h2[^>]+id="практика"/);
+    expect(html.match(/<details\b[^>]+id="seq-[^"]+-code"/g)).toHaveLength(7);
     expect(html).toMatch(/<strong>Назад:<\/strong>[\s\S]{0,300}href="\/textbook\/moe\/mixture-of-experts\/"/);
-    expect(html).toMatch(/К модулям:[\s\S]{0,300}href="\/textbook\/#/);
+    expect(html).toMatch(/<strong>Дальше:<\/strong>[\s\S]{0,300}href="\/textbook\/pretraining\/data-and-pretraining\/"/);
   });
   it('uses source originals in the sequence-model reader and excludes the retired course frames', async () => {
     const route = 'textbook/modern-llm/sequence-model-alternatives';
@@ -3889,7 +3893,14 @@ describe('static handbook output', () => {
       'olmoe-granularity','olmoe-lbl','olmoe-lbltoks','olmoe-zloss'])
       expect(html).toMatch(new RegExp('<img[^>]+src="[^"]*/moe-2026-10-23/'+name+'\\.png"'));
     for(const s of ['dispatch_combine','capacity_mask','router_losses','node_limited_route',
-      '0.99024','route_scale','32 байта'])expect(text).toContain(s);
+      '0.99024','route_scale','32 байта','16 байт','24 байта'])expect(text).toContain(s);
+    expect(html).toContain('id="moe-four-token-dispatch-ledger"');
+    expect(html.match(/id="router-и-top-k"/g)).toHaveLength(1);
+    for(const id of ['dispatch','capacity','losses','node']){
+      const details=html.match(new RegExp('<details\\b[^>]*id="moe-'+id+'-code"[^>]*>'))?.[0];
+      expect(details).toBeDefined();
+      expect(details).not.toMatch(/\sopen(?:[\s=>])/);
+    }
     expect(html.match(/<pre/g)).toHaveLength(4);
     expect(html).not.toContain('katex-error');
     expect(html).toMatch(/<strong>Назад:<\/strong>[\s\S]{0,300}href="\/textbook\/modern-llm\/long-context\/"/);
@@ -3932,6 +3943,13 @@ describe('static handbook output', () => {
       'пересчитать затронутый префикс','SQuAD и HotpotQA','500 примеров'])expect(text).toContain(fact);
     for (const figure of ['deepseek-v4-csa.png', 'deepseek-v4-hca.png']) expect(html).toContain(figure);
     expect(html).toContain('compressed-sparse-attention-csa-hca');
+    expect(html).toContain('id="long-context-two-evidence-positions"');
+    expect(html).toContain('id="как-честно-оценивать-длинный-контекст"');
+    for(const id of ['global-mask','window-cache','cla','dsa','block-mask','pooling']){
+      const details=html.match(new RegExp('<details\\b[^>]*id="long-context-'+id+'-code"[^>]*>'))?.[0];
+      expect(details).toBeDefined();
+      expect(details).not.toMatch(/\sopen(?:[\s=>])/);
+    }
     expect(html.match(/<pre/g)).toHaveLength(6);
     expect(html).not.toContain('katex-error');
     expect(html).toMatch(/<strong>Назад:<\/strong>[\s\S]{0,300}href="\/textbook\/modern-llm\/mla-kv-compression\/"/);
@@ -3946,6 +3964,13 @@ describe('static handbook output', () => {
     for(const s of ['TinyMLA','same_latents','q_gain','kv_gain','11110','11111',
       '80 чисел','20 чисел','13 254 000 640','8 H800','420 млрд','860,2 до 34,6',
       '4,0 процентного пункта','50,9%, у MHA 51,6%'])expect(text).toContain(s);
+    expect(html).toContain('id="mla-decoupled-worked-example"');
+    expect(html).toContain('id="пример-одинаковое-внимание-с-полным-и-сжатым-кэшем"');
+    for(const id of ['mla-two-latents-code','mla-rope-obstruction-code','mla-layer-code','mla-history-code']){
+      const summary=html.match(new RegExp('<details\\b[^>]*id="'+id+'"[^>]*>'))?.[0];
+      expect(summary).toBeDefined();
+      expect(summary).not.toMatch(/\sopen(?:[\s=>])/);
+    }
     expect(html.match(/<pre/g)).toHaveLength(4);
     expect(html).not.toContain('katex-error');
     expect(html).not.toMatch(/<img[^>]+src="[^"]*deepseek-v2-figure2-hq/);

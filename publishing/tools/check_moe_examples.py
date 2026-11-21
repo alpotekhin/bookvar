@@ -142,8 +142,36 @@ for groups,allowed,k in ((2,1,2),(4,2,4),(8,4,8),(4,4,4)):
 print('PASS biased original-score weights and independently enumerated node-limited routes')
 
 owners=np.array([0,0,1,1]); origins=np.array([0,0,1,1])
-remote=int((owners[ids]!=origins[:,None]).sum())
+remote_mask = owners[ids] != origins[:, None]
+remote=int(remote_mask.sum())
 assert remote==4 and 2*remote*2*2==32
+kept = ns['capacity_mask'](ids, experts=4, capacity=2)
+full_remote = [[e + 1 for e, m in zip(row, mask) if m]
+               for row, mask in zip(ids, remote_mask)]
+kept_remote = [[e + 1 for e, m in zip(row, mask) if m]
+               for row, mask in zip(ids, remote_mask & kept)]
+assert full_remote == [[], [3], [1], [1, 2]]
+assert kept_remote == [[], [3], [], [2]]
+np.testing.assert_array_equal(np.bincount(owners[ids].ravel()), [6, 2])
+np.testing.assert_array_equal(np.bincount(owners[ids[kept]]), [4, 2])
+remote_after = int((remote_mask & kept).sum())
+vector_bytes = 2 * 2
+assert (2*remote_after*vector_bytes, (remote+remote_after)*vector_bytes) == (16, 24)
+retained_weights = np.where(kept, weights, 0.)
+retained_weights /= retained_weights.sum(axis=1, keepdims=True)
+renorm = scalar_moe(x, ids, retained_weights, up, down, kept)
+np.testing.assert_allclose(renorm[2], [2., 0.], atol=1e-14)
+assert not np.allclose(renorm, ns['y_limited'])
+
+# Same expert output, normalized mixture, fixed top-2 indices.
+def task_with_copies(z):
+    p = np.array(scalar_softmax(z))
+    active = np.sort(p)[-2:]
+    same_output = float(incoming @ values[0])
+    return same_output * float(np.sum(active / np.sum(active)))
+
+np.testing.assert_allclose(finite_gradient(task_with_copies, logits), 0, atol=3e-10)
+print('PASS four-token EP ledger, local/remote load, 32/16/24 logical bytes and normalized copy control')
 assert 3*1024*2048==6291456 and 8*6291456==50331648
 assert 8*6291456*2/2**20==96 and 2*6291456*2/2**20==24
 assert math.comb(8,2)==28 and math.comb(16,4)==1820
