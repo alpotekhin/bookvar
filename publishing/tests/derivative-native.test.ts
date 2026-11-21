@@ -11,6 +11,8 @@ const sha = (text: string | Buffer) => createHash('sha256').update(text).digest(
 const journal = JSON.parse(read('docs/audit/2026-10-30-derivative-native-additions.json'));
 const chapter = journal.files[0].source;
 const current = read(chapter);
+const nativeRevision = beforeTopicConsolidation(current, chapter, root,
+  '2026-10-30-derivative-native-additions.json');
 const prior = beforeTopicConsolidation(current, chapter, root,
   '2026-10-30-tensor-native-geometry-additions.json');
 const figures = JSON.parse(read('00 Учебник/Assets/Figures/curated/derivative-native-2026-10-30/assets.json'));
@@ -32,8 +34,9 @@ describe('source-native derivative explanation and figures', () => {
   it('retains the original numerical programs and the complete matrix-output convention', () => {
     const fences = (s: string) => [...s.matchAll(/^```python\n([\s\S]*?)^```\s*$/gm)].map(m => m[1]);
     expect(fences(current)).toHaveLength(3);
-    expect(fences(current)).toEqual(fences(prior));
-    for (const mechanism of ['Если функция дифференцируема в рассматриваемой точке',
+    expect(fences(nativeRevision)).toEqual(fences(prior));
+    expect(fences(current)[2]).toContain('np.outer(x, upstream)');
+    for (const mechanism of ['При дифференцируемой функции и ненулевом градиенте',
       '### Differentiation rules', '### Several paths through a graph',
       'J_{\\,i+4(j-1),\\,k}=T_{ijk}', '24 производных',
       'f=22x+36y', '0&1&1', 'Неодинаковые множители и векторные состояния'])

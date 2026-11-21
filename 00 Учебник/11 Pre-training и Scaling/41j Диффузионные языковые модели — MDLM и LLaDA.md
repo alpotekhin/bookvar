@@ -618,5 +618,5 @@ Related: [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoB
 [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей|MAE]],
 [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|diffusion and flow models for images]].
 
-Previous: [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей|MAE]].
+Previous: [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/43 Scaling laws|Scaling laws]].
 [[00 Учебник/_index#Контрастивное и маскированное предобучение|Back to the module]].

@@ -10,8 +10,10 @@ const read = (path: string) => readFileSync(resolve(root, path), 'utf8');
 const sha = (value: string | Buffer) => createHash('sha256').update(value).digest('hex');
 const journal = JSON.parse(read('docs/audit/2026-10-30-tensor-native-geometry-additions.json'));
 const chapter = journal.files[0].source;
-const text = read(chapter);
-const prior = beforeTopicConsolidation(text, chapter, root,
+const current = read(chapter);
+const text = beforeTopicConsolidation(current, chapter, root,
+  '2026-10-30-tensor-native-geometry-additions.json');
+const prior = beforeTopicConsolidation(current, chapter, root,
   '2026-10-30-tensor-vector-operands-additions.json');
 const figures = JSON.parse(read('00 Учебник/Assets/Figures/curated/tensor-native-geometry-2026-10-30/assets.json'));
 

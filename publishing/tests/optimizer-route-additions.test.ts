@@ -10,7 +10,9 @@ const sha=(s:string)=>createHash('sha256').update(s).digest('hex');
 const own='2026-11-03-optimizer-route-additions.json';
 const stop='2026-11-03-backprop-route-additions.json';
 const journal=JSON.parse(read('docs/audit/'+own)),row=journal.files[0];
-const current=beforeTopicConsolidation(read(row.source),row.source,root,own);
+const raw=read(row.source);
+const latestBaseline=beforeTopicConsolidation(raw,row.source,root,'2026-11-21-backprop-editorial-pass.json');
+const current=beforeTopicConsolidation(raw,row.source,root,own);
 const prior=beforeTopicConsolidation(read(row.source),row.source,root,stop);
 const programs=(s:string)=>[...s.matchAll(/^\x60\x60\x60python\n([\s\S]*?)^\x60\x60\x60\s*$/gm)].map(m=>m[1]).sort();
 const figures=(s:string)=>[...s.matchAll(/!\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g)].map(m=>m[1]).sort();
@@ -27,10 +29,13 @@ describe('optimizer chapter reading route',()=>{
   it('keeps all nine programs, thirteen source images and complete English source additions',()=>{
     expect(programs(current)).toHaveLength(9);expect(programs(current)).toEqual(programs(prior));
     expect(figures(current)).toHaveLength(13);expect(figures(current)).toEqual(figures(prior));
+    expect(programs(raw)).toHaveLength(10);expect(programs(raw)).toEqual(programs(latestBaseline));
+    expect(figures(raw)).toHaveLength(16);expect(figures(raw)).toEqual(figures(latestBaseline));
     for(const [name,date] of [['adaptive clipping','2026-10-29'],['optimizer memory','2026-10-28']]){
       const pattern=new RegExp('<!-- BEGIN REVIEW: '+name+' '+date+' -->\\n([\\s\\S]*?)<!-- END REVIEW: '+name+' '+date+' -->');
       const plain=(s:string)=>s.replace(/<a id="[^"]+"><\/a>\n/g,'').replace(/!\[\[([^\]|]+)\|[^\]]+\]\]/g,'![[$1]]');
       expect(plain(current.match(pattern)![1])).toBe(plain(prior.match(pattern)![1]));
+      expect(raw.match(pattern)![1]).toBe(latestBaseline.match(pattern)![1]);
     }
     const captions=(s:string)=>[...s.matchAll(/^\*(?!\*)[\s\S]*?\*(?=\n\n|$)/gm)].map(m=>m[0]).sort();
     expect(captions(current)).toEqual(captions(prior));

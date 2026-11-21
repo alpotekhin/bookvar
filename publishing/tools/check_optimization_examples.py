@@ -51,6 +51,48 @@ np.testing.assert_allclose(optim['paths']['Momentum'],[1,.9,.72,.486],atol=1e-14
 np.testing.assert_allclose(optim['paths']['Adam'],[1,.9,.8004122277,.7015862723],atol=1e-8)
 np.testing.assert_allclose([optim['regularized']['Adam+L2'],optim['regularized']['AdamW']],[1.9,1.88],atol=1e-8)
 
+# Reconstruct the two-example MLP and apply each optimizer to the same gradient.
+x_mlp = torch.tensor([[1., 2.], [2., -1.]], dtype=torch.float64)
+w1_initial = x_mlp.new_tensor([[1., -1., 2.], [2., 1., -1.]])
+w2_mlp = x_mlp.new_tensor([[.2, -.2], [.1, .1], [-.25, .25]])
+b1_mlp = x_mlp.new_tensor([0., 1., -1.])
+mlp_rows = {}
+for name, cls, options in (
+    ("SGD", torch.optim.SGD, {}),
+    ("Momentum", torch.optim.SGD, {"momentum": .9}),
+    ("Adam", torch.optim.Adam, {"betas": (.9, .999), "eps": 1e-8}),
+):
+    weight = torch.nn.Parameter(w1_initial.clone())
+    mlp_opt = cls([weight], lr=.1, **options)
+    logits = (x_mlp @ weight + b1_mlp).relu() @ w2_mlp
+    torch.nn.functional.cross_entropy(logits, torch.tensor([0, 1])).backward()
+    grad = weight.grad.detach().clone()
+    q = 1 / (1 + math.exp(2))
+    torch.testing.assert_close(grad[0], grad.new_tensor([-.2*q, 0., -.5*q]))
+    mlp_opt.step()
+    mlp_rows[name] = weight.detach()[0].clone()
+    if name == "Adam":
+        m = mlp_opt.state[weight]["exp_avg"].detach().clone()
+        v = mlp_opt.state[weight]["exp_avg_sq"].detach().clone()
+        torch.testing.assert_close(m, .1 * grad)
+        torch.testing.assert_close(v, .001 * grad.square())
+        np.testing.assert_allclose([m[0, 0].item(), v[0, 0].item()],
+                                   [-.002384, 5.684e-7], atol=5e-10, rtol=5e-4)
+        mlp_opt.zero_grad(set_to_none=True)
+        assert weight.grad is None
+        torch.testing.assert_close(mlp_opt.state[weight]["exp_avg"], m, rtol=0, atol=0)
+        torch.testing.assert_close(mlp_opt.state[weight]["exp_avg_sq"], v, rtol=0, atol=0)
+    # The mathematical zero can be a tiny float64 residual from cross-entropy.
+    # Allow its first Adam step after division by eps rather than demanding a bitwise zero.
+    np.testing.assert_allclose(mlp_rows[name][1].item(), -1., atol=1e-9, rtol=0)
+torch.testing.assert_close(mlp_rows["Momentum"], mlp_rows["SGD"], rtol=0, atol=0)
+np.testing.assert_allclose(mlp_rows["SGD"].numpy()[[0, 2]], [1.00238, 2.00596], atol=5e-6, rtol=0)
+np.testing.assert_allclose(mlp_rows["Adam"].numpy()[[0, 2]], [1.1, 2.1], atol=1e-7, rtol=0)
+exact_zero = torch.nn.Parameter(torch.tensor(-1., dtype=torch.float64))
+exact_zero.grad = torch.zeros_like(exact_zero)
+torch.optim.Adam([exact_zero], lr=.1).step()
+assert exact_zero.item() == -1.
+
 # Independent recurrence, including every intermediate in the three-step table.
 q=1.;m=v=0.
 for t in range(1,4):

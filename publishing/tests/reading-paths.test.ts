@@ -75,8 +75,8 @@ describe('independent reader paths', () => {
     const target = (link: string) => link.replace(/^\[\[/, '').split(/[|#]/)[0]
       .replace(/\]\]$/, '').replace(/^02 Areas\/ML & DL\//, '').replace(/\.md$/, '');
     const paths = readingPaths(book);
-    expect(paths.find(p => p.id === 'main')!.routes).toHaveLength(64);
-    expect(paths).toHaveLength(14);
+    expect(paths.find(p => p.id === 'main')!.routes).toHaveLength(85);
+    expect(paths).toHaveLength(11);
     for (const path of paths) for (const [i, route] of path.routes.entries()) {
       const page = book.pages.find(p => p.route === route)!;
       const { data } = matter(readFileSync(resolve(root, page.source), 'utf8'));

@@ -37,7 +37,7 @@ primary_sources:
   - https://github.com/openai/gpt-2/blob/9b63575ef42771a015060c964af2c3da4cf7c8ab/src/model.py
   - https://github.com/meta-llama/llama/blob/1076b9c51c77ad06e9d7ba8a4c6df775741732bd/llama/model.py
 previous: "[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating|Dense FFN — расширение размерности и SwiGLU]]"
-next: "[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training|Данные и предобучение]]"
+next: "[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA]]"
 ---
 
 # Transformer с нуля: формы, параметры и стоимость
@@ -1070,6 +1070,6 @@ Assignment 1, официальные тесты, варианты запуска
 
 **Назад:** [[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating|Dense FFN — расширение размерности и SwiGLU]].
 
-**Далее:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training|Данные и предобучение]].
+**Далее:** [[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA|MHA, MQA и GQA]].
 
 **Практика:** [[02 Areas/ML & DL/06 Практика/20 Собрать языковую модель с нуля|Собрать языковую модель с нуля]].

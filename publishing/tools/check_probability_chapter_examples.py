@@ -18,7 +18,7 @@ def main():
     scope = {"__name__": "__chapter_example__"}
     exec(compile(blocks[0], str(CHAPTER), "exec"), scope)
 
-    masses = [Q(55, 100), Q(25, 100), Q(15, 100), Q(5, 100)]
+    masses = [Q(50, 100), Q(30, 100), Q(15, 100), Q(5, 100)]
     assert sum(masses) == 1 and sum(masses[:2]) == Q(4, 5)
     density = 1 / (Q(16, 10)-Q(9, 10))
     assert density == Q(10, 7) > 1
@@ -89,11 +89,15 @@ def main():
     assert normalization == Q(1, 2)
     assert integrate_unit([0, 1/normalization]) == 1
 
-    sequence = Q(1, 2)*Q(3, 5)*Q(1, 4)
+    sequence = masses[0]*Q(3, 5)*Q(1, 4)
     assert sequence == Q(3, 40)
     nll = -log(float(sequence))
     assert isclose(nll, 2.5902671654458267)
     assert isclose(nll/3, 0.8634223884819422)
+    assert masses[0]*Q(3, 5)*Q(1, 2) == Q(3, 20)
+    answer_given_cat = Q(3, 5)*Q(1, 4)
+    assert answer_given_cat == sequence/masses[0] == Q(3, 20)
+    assert isclose(-log(float(answer_given_cat))/2, scope["answer_nll"])
     assert isclose(-2000*log(2), -1386.2943611198905)
     assert Q(1, 2)**2000 > 0 and float(Q(1, 2)**2000) == 0
 
@@ -140,12 +144,15 @@ def main():
     for n in (4, 16):
         assert Q(1, 4)/n == (Q(1, 2)*(1-Q(1, 2)))/n
 
-    figures = re.findall(r"!\[\[.*?/([^/]+)\]\]", text)
-    assert figures == ["d2l-density-interval.svg", "d2l-marginal.svg", "d2l-likelihood-coin.svg",
+    figures = re.findall(r"!\[\[[^\]|]+/([^/\]|]+)(?:\|[^\]]+)?\]\]", text)
+    assert figures == ["d2l-likelihood-coin.svg", "d2l-density-interval.svg", "d2l-marginal.svg",
                        "d2l-coin-frequency-convergence.svg"]
     prior = before_topic_consolidation(text, CHAPTER,
         stop_before_journal="2026-10-30-derivative-native-additions.json")
-    assert re.findall(r"^```python\n(.*?)^```\s*$", prior, re.M | re.S) == blocks
+    native = before_topic_consolidation(text, CHAPTER,
+        stop_before_journal="2026-10-30-probability-native-additions.json")
+    assert re.findall(r"^```python\n(.*?)^```\s*$", prior, re.M | re.S) == re.findall(
+        r"^```python\n(.*?)^```\s*$", native, re.M | re.S)
     assert "mml-discrete-continuous-density.png" in prior
     print("PASS: published code, Bayes, density/CDF, continuous marginal, finite-window MLE, NLL and exact batch moments")
     print("chapter_sha256=" + sha256(text.encode()).hexdigest())

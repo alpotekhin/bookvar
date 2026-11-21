@@ -17,7 +17,9 @@ const addition = text.split('<!-- BEGIN REVIEW: adaptive clipping 2026-10-29 -->
 
 describe('adaptive clipping in the canonical optimization explanation', () => {
   it('keeps source-language explanations, worked cases and both reference indexes', () => {
-    expect(text.match(/^\x60{3}python$/gm)).toHaveLength(9);
+    const originalRoute = beforeTopicConsolidation(text, chapter, root,
+      '2026-11-03-optimizer-route-additions.json');
+    expect(originalRoute.match(/^\x60{3}python$/gm)).toHaveLength(9);
     expect(addition.match(/^\x60{3}python$/gm)).toHaveLength(2);
     for (const anchor of ['agc-unitwise','autoclip']) {
       expect(text).toContain('id="'+anchor+'"');

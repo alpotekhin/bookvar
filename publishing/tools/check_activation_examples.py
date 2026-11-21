@@ -14,7 +14,8 @@ import torch.nn.functional as F
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/01 Основы нейронных сетей/02 Функции активации.md"
-blocks = re.findall(r"```python\n(.*?)```", CHAPTER.read_text(), re.S)
+chapter_text = CHAPTER.read_text()
+blocks = re.findall(r"```python\n(.*?)```", chapter_text, re.S)
 assert len(blocks) == 5
 scopes = []
 for i, code in enumerate(blocks, 1):
@@ -127,6 +128,46 @@ np.testing.assert_allclose(F.gelu(torch.tensor(-1., dtype=torch.float64), approx
                            -.158808, atol=.5e-6)
 np.testing.assert_allclose(points*expit(0*points), points/2)
 np.testing.assert_allclose(points*expit(1000*points), np.maximum(points, 0), atol=1e-15)
+
+# Replace only the third hidden activation in the preceding chapter's MLP.
+first_object = torch.tensor([1., 2.], dtype=torch.float64)
+W1 = torch.tensor([[1., -1., 2.], [2., 1., -1.]], dtype=torch.float64)
+W2 = torch.tensor([[.2, -.2], [.1, .1], [-.25, .25]], dtype=torch.float64)
+pre = first_object @ W1 + first_object.new_tensor([0., 1., -1.])
+torch.testing.assert_close(pre, first_object.new_tensor([5., 2., -1.]))
+comparison = chapter_text.split("### Замена ReLU в одном нейроне MLP", 1)[1].split("</", 1)[0]
+ran = []
+for name, fn, expected in [
+    ("ReLU", F.relu, (0., .880797, 0.)),
+    ("GELU", F.gelu, (-.158655, .888878, -.004629)),
+    ("SiLU", F.silu, (-.268941, .894209, .003826)),
+]:
+    z3 = pre[2].clone().requires_grad_()
+    h3 = fn(z3)
+    h = torch.cat((pre[:2].relu(), h3[None]))
+    logits = h @ W2
+    p0 = logits.softmax(dim=0)[0]
+    loss = F.cross_entropy(logits[None, :], torch.tensor([0]))
+    loss.backward()
+    np.testing.assert_allclose([h3.item(), p0.item(), z3.grad.item()], expected,
+                               atol=.5e-6, rtol=0)
+    published = next(line for line in comparison.splitlines()
+                     if line.startswith(f"| {name} |")).split("|")[2:5]
+    published = [float(v.strip().replace("−", "-").replace(",", ".")) for v in published]
+    np.testing.assert_array_equal(np.round([h3.item(), p0.item(), z3.grad.item()], 5),
+                                  published)
+    # Check the derivative of the complete loss, not only the local slope.
+    def first_loss(value):
+        with torch.no_grad():
+            h3 = fn(z3.new_tensor(value))
+            return F.cross_entropy(
+                (torch.cat((pre[:2].relu(), h3[None])) @ W2)[None, :], torch.tensor([0])
+            ).item()
+    eps = 1e-5
+    finite = (first_loss(-1+eps) - first_loss(-1-eps)) / (2*eps)
+    np.testing.assert_allclose(finite, z3.grad.item(), atol=1e-10, rtol=0)
+    ran.append(z3.grad.item())
+assert ran[1] < ran[0] == 0 < ran[2]
 
 # SwiGLU's actual matrix example, both branch derivatives, and equal matrix counts.
 np.testing.assert_allclose(scopes[1]["v"].numpy(), [[1.462117, .806824]], atol=.5e-6)

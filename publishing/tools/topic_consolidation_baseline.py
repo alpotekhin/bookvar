@@ -5,6 +5,17 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 JOURNALS = (
+    '2026-11-21-optimizers-editorial-pass.json',
+    '2026-11-21-backprop-editorial-pass.json',
+    '2026-11-21-activations-editorial-pass.json',
+    '2026-11-21-mlp-editorial-pass.json',
+    '2026-11-21-generalization-editorial-pass.json',
+    '2026-11-21-data-split-editorial-pass.json',
+    '2026-11-21-loss-editorial-pass.json',
+    '2026-11-21-probability-editorial-pass.json',
+    '2026-11-21-derivatives-editorial-pass.json',
+    '2026-11-21-tensor-editorial-pass.json',
+    '2026-11-21-linear-nlp-navigation.json',
     '2026-11-14-gpt-decoder-history-component-additions.json',
     '2026-11-14-gpt-route-shared-output-additions.json',
     '2026-11-14-distillation-vs-direct-rl-additions.json',

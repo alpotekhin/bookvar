@@ -9,16 +9,16 @@ const root = resolve(import.meta.dirname, '../..');
 const journalName = '2026-10-30-tensor-vector-operands-additions.json';
 const journal = JSON.parse(readFileSync(resolve(root, 'docs/audit', journalName), 'utf8'));
 const row = journal.files[0];
-const text = beforeTopicConsolidation(readFileSync(resolve(root, row.source), 'utf8'),
-  row.source, root, journalName);
+const current = readFileSync(resolve(root, row.source), 'utf8');
+const text = beforeTopicConsolidation(current, row.source, root, journalName);
 const sha = (value: string) => createHash('sha256').update(value).digest('hex');
-const prior = beforeTopicConsolidation(text, row.source, root, '2026-10-30-clean-checkout-additions.json');
+const prior = beforeTopicConsolidation(current, row.source, root, '2026-10-30-clean-checkout-additions.json');
 
 describe('one-dimensional NumPy matmul explanation', () => {
   it('restores the exact whole chapter read before this bounded addition', () => {
     expect(sha(text)).toBe(row.after_sha256);
     expect(sha(prior)).toBe(row.before_sha256);
-    expect(() => beforeTopicConsolidation(text + '\nUNREVIEWED\n', row.source, root,
+    expect(() => beforeTopicConsolidation(current + '\nUNREVIEWED\n', row.source, root,
       '2026-10-30-clean-checkout-additions.json')).toThrow();
   });
 

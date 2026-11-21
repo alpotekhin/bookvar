@@ -5,7 +5,7 @@ status: canonical
 last_updated: 2026-11-11
 last_verified: 2026-11-10
 previous: "[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving]]"
-next: "[[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]]"
+next: "[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training]]"
 source_unit_id:
   - lecture-04-attention-alternatives-overview
   - lecture-04-linear-attention-recurrence

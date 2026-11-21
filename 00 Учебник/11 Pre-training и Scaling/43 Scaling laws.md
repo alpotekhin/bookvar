@@ -1679,5 +1679,5 @@ Mistral 7B; поскольку исходный технический отчё�
 ## Дальше по учебнику
 
 Предыдущая глава: [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md]].
-Следующая: [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники|Карта post-training и источники]].
+Следующая: [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA|Диффузионные языковые модели: MDLM и LLaDA]].
 Состав и повторение данных: [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md]].

@@ -1393,6 +1393,10 @@ describe('static handbook output', () => {
       for(const figure of ['galore_code_box.png','subspace_learning.png','memory_breakdown.svg'])
         expect(html).toMatch(new RegExp('<img[^>]+src="[^"]*galore-2026-10-28/'+figure.replace('.','\\.')));
       expect(html).toContain('/licenses/galore-2cc66f88-Apache-2.0.txt');
+      expect(html).toContain('Первый шаг Adam на весах MLP');
+      for (const value of ['−0,02384','−0,05960','1,00238','2,00596'])
+        expect(html).toContain(value);
+      expect(html).toMatch(/<details>\s*<summary>Открыть AGC,[^<]+<\/summary>[\s\S]*?id="agc-unitwise"[\s\S]*?id="matrix-optimizers"[\s\S]*?id="optimizer-memory-accounting"[\s\S]*?<\/details>/);
       expect(html).toContain('id="galore-memory-breakdown"');
       expect(html).toContain('https://creativecommons.org/licenses/by/4.0/');
       expect(html.match(/<pre\b/g)).toHaveLength(10);
@@ -1430,6 +1434,7 @@ describe('static handbook output', () => {
         'https://docs.pytorch.org/docs/2.15/generated/torch.optim.SparseAdam.html'])
         expect(section).toContain(value);
       expect(section).toContain('<pre');
+      expect(html).toMatch(/<details>\s*<summary>Редкие градиенты и SparseAdam[^<]+<\/summary>[\s\S]*?id="optimizer-sparse-gradients"[\s\S]*?<\/details>/);
       expect(section).not.toContain('katex-error');
       const reference = await readFile(join(distDir, locale, 'reference/index.html'), 'utf8');
       expect(reference).toContain('href="/'+locale+route+'#'+anchor+'"');
@@ -1787,9 +1792,9 @@ describe('static handbook output', () => {
   });
   it('keeps the reading sequence separate from the common course library', async () => {
     const html=await readFile(join(distDir,'textbook/index.html'),'utf8');
-    const curriculum = html.match(/<h2[^>]*id="основной-курс"[\s\S]*?(?=<a id="gpt-decoder-route-comparison")/)?.[0];
-    expect(curriculum?.match(/<h3\b/g)).toHaveLength(22);
-    for(const part of ['Основной курс','Углублённые модули','III. Нейронные сети','V. Transformer, BERT и GPT','Рекомендательные системы'])
+    const curriculum = html.match(/<h2[^>]*id="основной-курс"[\s\S]*?(?=<a id="gpt-decoder-route")/)?.[0];
+    expect(curriculum?.match(/<h3\b/g)).toHaveLength(23);
+    for(const part of ['Основной курс','Углублённые модули','II. Нейронные сети','IV. Transformer, BERT и T5','Рекомендательные системы'])
       expect(html).toContain(part);
     for(const alias of ['iv-нейронные-сети','iii-рекомендательные-системы','другие-режимы'])
       expect(html).toContain(`id="${alias}"`);
@@ -1803,24 +1808,46 @@ describe('static handbook output', () => {
     expect(svm).not.toContain('>08 Gaussian mixture и EM</a>');
     expect(svm).toMatch(/<a\b(?=[^>]*\brel="next")(?=[^>]*\bhref="\/textbook\/#)[^>]*>/);
   });
-  it('publishes previous and next buttons for all 153 chapters within their reading paths', async () => {
+  it('opens the course in the textbook sidebar without expanding unrelated sections', async () => {
+    const open = (html: string, label: string) => {
+      const group = [...html.matchAll(/<details([^>]*)><summary[^>]*><span[^>]*><span[^>]*>([^<]+)<\/span>/g)]
+        .find(match => match[2] === label);
+      expect(group, label).toBeDefined();
+      return /\bopen\b/.test(group![1]);
+    };
+    for (const [lang, core, reference, modules] of [
+      ['', 'Основной курс', 'Справочник', 'Углублённые модули'],
+      ['en', 'Core course', 'Reference', 'Specialist modules'],
+    ]) {
+      const html = await readFile(join(distDir, lang, 'textbook/index.html'), 'utf8');
+      expect(open(html, core)).toBe(true);
+      expect(open(html, reference)).toBe(false);
+      expect(open(html, modules)).toBe(false);
+      const index = await readFile(join(distDir, lang, 'reference/index.html'), 'utf8');
+      expect(open(index, reference)).toBe(true);
+    }
+  });
+  it('publishes previous and next buttons for all chapters in both languages', async () => {
     const book = loadManifest(join(rootDir, 'publishing/navigation.yml')).sections.find(s => s.id === 'textbook')!;
     const publishedRoute = (route: string) => route.replace(/\/index$/, '');
     let checked = 0;
-    for (const path of readingPaths(book)) for (const [i, route] of path.routes.entries()) {
-      const html = await readFile(join(distDir, publishedRoute(route), 'index.html'), 'utf8');
+    for (const lang of ['', 'en/']) for (const path of readingPaths(book)) for (const [i, route] of path.routes.entries()) {
+      const html = await readFile(join(distDir, lang, publishedRoute(route), 'index.html'), 'utf8');
       const anchors = html.match(/<a\b[^>]*>/g) ?? [];
-      const prev = path.routes[i - 1] ? '/' + publishedRoute(path.routes[i - 1]) + '/'
-        : path.id === 'main' ? '/textbook/how-to-use/' : '/textbook/#углублённые-модули';
-      const next = path.routes[i + 1] ? '/' + publishedRoute(path.routes[i + 1]) + '/' : '/textbook/#углублённые-модули';
+      const modules = 'textbook/#' + (lang ? 'specialist-modules' : 'углублённые-модули');
+      const contents = 'textbook/#' + (lang ? 'curriculum' : 'полный-маршрут');
+      const prev = path.routes[i - 1] ? publishedRoute(path.routes[i - 1]) + '/'
+        : path.id === 'main' ? 'textbook/how-to-use/' : modules;
+      const next = path.routes[i + 1] ? publishedRoute(path.routes[i + 1]) + '/'
+        : path.id === 'main' ? contents : modules;
       for (const [rel, expected] of [['prev', prev], ['next', next]]) {
         const button = anchors.find(a => a.includes(`rel="${rel}"`));
         expect(button, `${route}: ${rel} button`).toBeTruthy();
-        expect(decodeURI(button!.match(/href="([^"]+)"/)![1]), `${route}: ${rel}`).toBe(expected);
+        expect(decodeURI(button!.match(/href="([^"]+)"/)![1]), `${lang}${route}: ${rel}`).toBe('/' + lang + expected);
       }
       checked++;
     }
-    expect(checked).toBe(153);
+    expect(checked).toBe(306);
   });
   it('renders the complete original GAN/DCGAN reader and four-route gradient explanation in both locales',async()=>{
     const source=await readFile(join(rootDir,'00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор.md'),'utf8');
@@ -3943,7 +3970,7 @@ describe('static handbook output', () => {
     expect(html).not.toContain('katex-error');
     expect(html).not.toContain('/a1-sequence-');
     expect(html).toMatch(/<strong>Назад:<\/strong>[\s\S]{0,300}href="\/textbook\/modern-llm\/dense-ffn\/"/);
-    expect(html).toMatch(/<strong>Далее:<\/strong>[\s\S]{0,300}href="\/textbook\/pretraining\/data-and-pretraining\/"/);
+    expect(html).toMatch(/<strong>Далее:<\/strong>[\s\S]{0,300}href="\/textbook\/modern-llm\/mha-mqa-gqa\/"/);
   });
   it('renders RoPE derivation, scaling/cache examples and all eight original figures',async()=>{
     const html=await readFile(join(distDir,'textbook/modern-llm/rope/index.html'),'utf8');
@@ -4528,7 +4555,7 @@ describe('static handbook output', () => {
         `href="${prefix}${book}modern-llm/llama-architecture/#gpt-llama-ffn"`,
         prefix ? 'does not specify its window width' : 'ширину окна GPT-3 авторы не указали',
       ]) expect(decoder).toContain(fragment);
-      const overview = html.match(/<a id="gpt-decoder-route"><\/a>[\s\S]*?(?=<a id="(?:curriculum|полный-маршрут)")/)?.[0];
+      const overview = html.match(/<a id="gpt-decoder-route"><\/a>[\s\S]*?(?=<a id="gpt-decoder-route-comparison")/)?.[0];
       expect(overview).toBeDefined();
       expect(overview).not.toContain('<img');
       const comparison = overview!.match(/<table>[\s\S]*?<\/table>/)?.[0];
@@ -5707,7 +5734,8 @@ describe('static handbook output', () => {
       expect(html.includes('id="' + anchor + '"'), 'missing stable activation anchor: ' + anchor).toBe(true);
     for (const fact of ['binary_cross_entropy_with_logits', '-0.993307', '0{,}006648',
       'Leaky ReLU', '0{,}6875', 'SwiGLU', '2726505c4767eed99dfd89ce0f836fbca44d6a6d',
-      'Левый и правый наклоны', 'В минимуме', 'производная по', '0.655293'])
+      'Левый и правый наклоны', 'В минимуме', 'производная по', '0.655293',
+      'Замена ReLU в одном нейроне MLP', '0,88888', '0,00383'])
       expect(html.includes(fact), 'missing activation explanation: ' + fact).toBe(true);
     expect(html.includes('class="katex-error')).toBe(false);
     expect(html.includes('<p>![')).toBe(false);
@@ -5742,6 +5770,7 @@ describe('static handbook output', () => {
       expect(region).toContain('https://bigwww.epfl.ch/publications/goujon2401.pdf#page=7');
       expect(region).toContain('CC BY 4.0');
       expect(region).toContain('Пересечение полуплоскостей');
+      expect(html).toMatch(/<details>\s*<summary>Разобрать Maxout:[^<]+<\/summary>[\s\S]*?id="maxout-input-regions"[\s\S]*?<\/details>/);
       expect(region).not.toContain('katex-error');
       expect(html).toContain('href="/'+prefix+paper+'"');
       const source = await readFile(join(distDir, prefix, paper, 'index.html'), 'utf8');
@@ -5759,7 +5788,7 @@ describe('static handbook output', () => {
       'mlp-внутри-transformer', 'краткие-итоги', 'источники'])
       expect(html.includes('id="' + anchor + '"'), 'missing stable MLP anchor: ' + anchor).toBe(true);
     for (const fact of ['0{,}126928', '0{,}098018', '-0{,}298007', 'optimizer.step',
-      'weight.copy_', 'Глубина одинакова', 'Positionwise Feed-Forward Networks',
+      '-0{,}023841', '1{,}002384', 'weight.copy_', 'Глубина одинакова', 'Positionwise Feed-Forward Networks',
       'grad', 'hinge loss', 'MIT License'])
       expect(html.includes(fact), 'missing worked MLP explanation: ' + fact).toBe(true);
     for (const mechanism of ['model-state-parameters-buffers-and-submodules',
@@ -5800,6 +5829,7 @@ describe('static handbook output', () => {
         'output_gradient','no_grad_records','bypass_records','13.5','CC BY-NC-SA 4.0'])
         expect(html).toContain(fact);
       expect(html).toContain('frameworks.qmd#L3871');
+      expect(html).toMatch(/<details>\s*<summary>Открыть приложение на английском<\/summary>[\s\S]*?id="pytorch-module-state"[\s\S]*?id="pytorch-module-hooks"[\s\S]*?<\/details>/);
       expect(html).not.toContain('class="katex-error');
       if(prefix) expectCanonicalEditionNotice(html);
     }
@@ -6300,6 +6330,10 @@ describe('static handbook output', () => {
         expect(html).toContain(fact);
       expect(html).toContain('frameworks.qmd#L2324');
       expect(html).toContain('17-468.pdf#page=9');
+      for(const fact of ['Обратный проход MLP по всему батчу', '-0{,}023841', '-0{,}298007',
+        'id="4-правило-цепочки-и-разветвлённый-граф"', 'id="11-как-проверить-собственный-обратный-проход"'])
+        expect(html).toContain(fact);
+      expect(html).toMatch(/<details>\s*<summary>Открыть примеры JVP,[^<]+<\/summary>[\s\S]*?id="forward-jvp-dual"[\s\S]*?id="custom-forward-transform-rules"[\s\S]*?<\/details>/);
       expect(html.match(/<pre data-language="python"/g)).toHaveLength(20);
       expect(html.indexOf('id="reverse-vjp"')).toBeLessThan(html.indexOf('id="autograd-gradient-stability"'));
       expect(html.indexOf('id="autograd-gradient-stability"')).toBeLessThan(html.indexOf('id="finite-difference-gradcheck"'));
@@ -7129,6 +7163,14 @@ describe('static handbook output', () => {
     expect(broadcasting).not.toContain('<ol>');
     expect(dotProduct?.match(/<ol>/g)).toHaveLength(1);
     expect(dotProduct?.match(/<li>/g)).toHaveLength(2);
+    expect(html.indexOf('id="нормы"')).toBeLessThan(html.indexOf('id="скалярное-произведение"'));
+    expect(html).toContain('X_text[0,1]');
+    expect(html).toContain('первую позицию второй фразы');
+    for (const alt of ['Второй вектор начинается в конце первого',
+      'Столбец из четырёх чисел и строка из трёх чисел',
+      'Одна матрица два на три в памяти по строкам и по столбцам']) {
+      expect(html).toContain('alt="' + alt);
+    }
     expect(html).not.toContain('class="katex-error');
     expect(html).not.toContain('<p>![');
   });
@@ -7180,6 +7222,10 @@ describe('static handbook output', () => {
     expect(html).toContain('/textbook/ml-foundations/tensors/');
     expect(html).toContain('id="прямой-и-обратный-проход-линейного-отображения"');
     expect(html).toContain('numeric_linear');
+    expect(html).toContain('numeric_W');
+    expect(html).toContain('id="производные-по-весам-линейного-слоя"');
+    expect(html).toContain('alt="К параболе');
+    expect(html).toContain('alt="Три пути из y в f');
     expect(html).toContain('/textbook/ml-foundations/probability-likelihood-logarithms/');
     expect(html).not.toContain('class="katex-error');
     expect(html).not.toContain('<p>![');
@@ -7204,6 +7250,12 @@ describe('static handbook output', () => {
     expect(html).toContain('id="условное-правдоподобие-что-считается-входом"');
     expect(html).toContain('conditional_likelihood');
     expect(html).toContain('conditional_nll');
+    expect(html).toContain('answer_nll');
+    expect(html).toContain('alt="Под кривой плотности');
+    const sequenceLoss = html.indexOf('id="nll-последовательности-и-средняя-потеря-на-токен"');
+    const continuous = html.indexOf('id="непрерывные-распределения-и-правдоподобие"');
+    expect(sequenceLoss).toBeGreaterThan(-1);
+    expect(continuous).toBeGreaterThan(sequenceLoss);
     expect(html).toContain('/textbook/ml-foundations/derivatives-gradients/');
     expect(html).toContain('/textbook/ml-foundations/loss-functions/');
     expect(html).not.toContain('class="katex-error');
@@ -7215,6 +7267,11 @@ describe('static handbook output', () => {
     expect(html).toContain('id="class-weights-and-the-meaning-of-mean"');
     expect(html).toContain('weighted_elements');
     expect(html).toContain('scaled_probability_mean');
+    expect(html).toContain('lm_nll');
+    expect(html).toContain('answer_mask');
+    expect(html.indexOf('id="маски-и-усреднение-по-токенам"'))
+      .toBeLessThan(html.indexOf('id="градиент-по-логитам"'));
+    expect(html).toContain('alt="Полносвязный слой');
     for (const figure of ['google-softmax-multiclass.png',
       'cs231n-pixelspace-original.jpeg', 'google-mse-outliers.png',
       'google-mae-outliers.png', 'd2l-gaussian-densities.svg', 'd2l-softmaxreg.svg',
@@ -7274,8 +7331,10 @@ describe('static handbook output', () => {
       'вложенная-кросс-валидация', 'почему-случайный-split-подходит-не-всегда', 'data-leakage',
       'каким-должен-быть-test-set', 'llm-одного-held-out-loss-недостаточно', 'краткие-итоги'])
       expect(html).toContain('id="' + anchor + '"');
-    for (const mechanism of ['fold_losses', 'split_group', 'Вложенная кросс-валидация', '0.366', '0.00949'])
+    for (const mechanism of ['fold_losses', 'split_group', 'Вложенная кросс-валидация', '0.366', '0.00949',
+      'Выбор и проверка фильтра спама', 'незнакомом адресе', '0.9465', 'Подбор преобразований на train'])
       expect(html).toContain(mechanism);
+    expect(html).toContain('alt="Четыре фолда GroupKFold');
     expect(html).toContain('id="отбор-признаков-высокая-accuracy-на-случайных-метках"');
     for (const code of ['SelectKBest', 'HistGradientBoostingClassifier', 'X_train_selected', 'make_pipeline'])
       expect(html).toContain(code);
@@ -7298,6 +7357,8 @@ describe('static handbook output', () => {
       'почему-масштаб-llm-не-отменяет-overfitting', 'краткие-итоги', 'источники'])
       expect(html).toContain('id="' + anchor + '"');
     for (const example of ['Polynomial.fit', 'bootstrap_means', 'empirical_quantile', '0.634624', '0.9998', '1.93'])
+      expect(html).toContain(example);
+    for (const example of ['ridge_errors', '0.006555', '0.050435', 'Ранняя остановка', 'метрику выбирают до проверки'])
       expect(html).toContain(example);
     expect(html).toContain('id="почему-остановка-может-уменьшить-ошибку-на-новых-данных"');
     for (const example of ['early_path', 'best_step', '0.28125', '0.1953125'])

@@ -7,7 +7,7 @@ last_verified: 2026-10-22
 source_unit_id:
   - lecture-10-kv-cache-attention-alternatives
   - lecture-10-section-229-grouped-query-attention-gqa
-previous: "[[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]]"
+previous: "[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость]]"
 next: "[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache]]"
 primary_sources:
   - https://arxiv.org/abs/1911.02150

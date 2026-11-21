@@ -6,7 +6,7 @@ last_updated: 2026-10-30
 last_verified: 2026-10-25
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/42 Next-token prediction|Next-token objective]]"
-next: "[[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация|Оценивание моделей и контаминация]]"
+next: "[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники]]"
 primary_sources:
   - https://web.stanford.edu/~jurafsky/slp3/
   - https://huggingface.co/blog/how-to-generate
@@ -16,7 +16,7 @@ primary_sources:
   - https://arxiv.org/abs/1904.09751v2
 locale: en
 translation_status: current
-canonical_revision: "c10fe3a763d44cf1f0e8d2e4103bcba7adae026fc7cf910e673515aaa51ab486"
+canonical_revision: "1f12fb049389433c942ce4833f1ca4e0398ffed721e264004c501c6a38ff499b"
 translation_reviewed: "2026-10-30"
 translation_of: "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md"
 ---
@@ -825,5 +825,5 @@ random instance.
 - Hugging Face, [GenerationConfig](https://huggingface.co/docs/transformers/v4.57.1/en/main_classes/text_generation) and [generation utilities](https://huggingface.co/docs/transformers/v4.57.1/en/internal/generation_utils): version 4.57.1 used by these executable examples, not a designation of the latest release.
 - Holtzman et al., [The Curious Case of Neural Text Degeneration](https://arxiv.org/abs/1904.09751): nucleus sampling and degeneration analysis.
 
-Previous: [[02 Areas/ML & DL/00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute|Test-time compute]].
-Next: [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация|Model evaluation and contamination]].
+Previous: [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA|Masked diffusion: MDLM and LLaDA]].
+Next: [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники|Карта post-training и источники]].

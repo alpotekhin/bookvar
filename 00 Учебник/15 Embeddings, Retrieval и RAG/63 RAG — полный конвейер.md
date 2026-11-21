@@ -5,7 +5,7 @@ status: canonical
 last_updated: 2026-11-10
 prerequisites:
   - "[[00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction]]"
-next: "[[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]]"
+next: "[[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64 Мультимодальные модели]]"
 primary_sources:
   - https://arxiv.org/abs/2005.11401v4
   - https://arxiv.org/html/2310.11511v1

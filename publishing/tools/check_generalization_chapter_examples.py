@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md"
 text = CHAPTER.read_text()
 blocks = re.findall(r"```python\n(.*?)```", text, re.S)
-assert len(blocks) == 3
+assert len(blocks) == 4
 scope = {}
 for i, code in enumerate(blocks):
     exec(compile(code, f"{CHAPTER}:python-{i+1}", "exec"), scope)
@@ -20,6 +20,35 @@ np.testing.assert_allclose(scope["errors"], [
 ], atol=1e-11)
 assert scope["errors"][2][0] < 1e-20
 assert scope["errors"][2][1] > scope["errors"][0][1] > scope["errors"][1][1]
+
+# Rebuild the degree-nine fits with centered predictors and the normal
+# equations for positive lambda, independently of the augmented solver.
+train_x, train_y = scope["x"], scope["y"]
+validation_x, validation_y = scope["x_val"], scope["y_val"]
+test_grid = scope["grid"]
+powers = np.arange(1, 10)
+features = train_x[:, None] ** powers
+center = features.mean(axis=0)
+centered = features - center
+for i, lam in enumerate((.0001, .01, 1.), start=1):
+    coef = np.linalg.solve(centered.T @ centered + len(train_x) * lam * np.eye(9),
+                           centered.T @ (train_y - train_y.mean()))
+    intercept = train_y.mean() - center @ coef
+    def mse(values, targets):
+        return np.mean((values[:, None] ** powers @ coef + intercept - targets)**2)
+    np.testing.assert_allclose(
+        scope["ridge_errors"][i],
+        [mse(train_x, train_y), mse(validation_x, validation_y),
+         mse(test_grid, test_grid**2)],
+        atol=1e-12,
+    )
+np.testing.assert_allclose(np.round(scope["ridge_errors"], 6), [
+    [0., 1.110041, .634624],
+    [.011987, .014843, .005158],
+    [.016851, .006555, .002726],
+    [.086998, .050957, .050435],
+])
+assert scope["best_index"] == 2
 
 # Six pairs of fitted models and independent future answers.
 answers = np.array([1., 3.])
@@ -122,6 +151,8 @@ assert d[[0,1,1,3]].mean() == .75
 assert d[[2,2,0,1]].mean() == -.25
 assert (scope["low"], scope["high"]) == (-.5, 1.)
 assert scope["low"] <= 0 <= scope["high"]
+assert (.2 + 0) / 2 == .1
+assert (10 * .2 + 90 * 0) / 100 == .02
 
-print("PASS: 3 published blocks, fits, risk decomposition, penalties, decay, checkpoint/gradient trajectory, dropout, paired bootstrap")
+print("PASS: 4 published blocks, polynomial fits and ridge selection, risk decomposition, penalties, decay, checkpoint/gradient trajectory, dropout, paired bootstrap and group weighting")
 print("chapter sha256:", sha256(CHAPTER.read_bytes()).hexdigest())

@@ -4,6 +4,74 @@
   "subsequentVerifiedRevisions": {
     "scope": "These current bytes restore to the historical whole-read receipts via the exact journals. This does not claim another full read or acceptance of those chapters.",
     "chapters": {
+      "00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md": {
+        "currentSha256": "e05de31ca80d5d7810207fa0969f5da9bd1d64b8e7065a48eec15dd298933051",
+        "stopBefore": "2026-11-21-activations-editorial-pass.json"
+      },
+      "00 Учебник/01 Основы нейронных сетей/02 Функции активации.md": {
+        "currentSha256": "a265ed674a0426c36299c0ce9a70b195f3d2d4ebeea0309c67656984a4632205",
+        "stopBefore": "2026-11-21-mlp-editorial-pass.json"
+      },
+      "00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md": {
+        "currentSha256": "2f810f8fce5ee7f407df7469224252a546cd0e5b689801da5646c14cadef580e",
+        "stopBefore": "2026-11-21-generalization-editorial-pass.json"
+      },
+      "00 Учебник/00 Математические и ML-основания/05 Train, validation и test.md": {
+        "currentSha256": "987be074a8746c262edb78e2684d2f5b54a1be03243061e28895ea4e614d261c",
+        "stopBefore": "2026-11-21-loss-editorial-pass.json"
+      },
+      "00 Учебник/00 Математические и ML-основания/04 Функции потерь.md": {
+        "currentSha256": "1b09103a20aa55c2937ef7d1fe7bbf5cea8b0bdae2343cc788e50512d406edb7",
+        "stopBefore": "2026-11-21-probability-editorial-pass.json"
+      },
+      "00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md": {
+        "currentSha256": "a8a858b400ac02eebd64ecd42d282d31913de5edbd019ca0e86c43d2c10d8db2",
+        "stopBefore": "2026-11-21-derivatives-editorial-pass.json"
+      },
+      "00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md": {
+        "currentSha256": "ece1414ede8f7eaf27fa4b9fdbc31486b653fe883e0268b4c84bc63b2a0bfb54",
+        "stopBefore": "2026-11-21-tensor-editorial-pass.json"
+      },
+      "00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md": {
+        "currentSha256": "936414e68e72c31e84c13367bb70ab93b96e64d18580826ac67c20f22222c783",
+        "stopBefore": "2026-11-21-linear-nlp-navigation.json"
+      },
+      "00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md": {
+        "currentSha256": "7cfe9864c073a2c1edd85824698565f62307e771c8cebf4ccf40b9e72612b121",
+        "stopBefore": "2026-11-14-gpt-decoder-history-component-additions.json"
+      },
+      "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md": {
+        "currentSha256": "fa8b41495300ed733eb2069dc4868315fd4ea84ee4aa056e55ecdb72fc2e5747",
+        "stopBefore": "2026-11-14-gpt-decoder-history-component-additions.json"
+      },
+      "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md": {
+        "currentSha256": "75648b9405a1ed301ce71ab8380d5f6735c13fb2ccc60e1aeefa605d08560e2b",
+        "stopBefore": "2026-11-14-gpt-decoder-history-component-additions.json"
+      },
+      "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md": {
+        "currentSha256": "1f12fb049389433c942ce4833f1ca4e0398ffed721e264004c501c6a38ff499b",
+        "stopBefore": "2026-11-14-gpt-decoder-history-component-additions.json"
+      },
+      "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md": {
+        "currentSha256": "98f58ab3029faee06c0b52a446311c92f2912c95754e429ac2ee5e1f798892e4",
+        "stopBefore": "2026-11-14-gpt-decoder-history-component-additions.json"
+      },
+      "00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA.md": {
+        "currentSha256": "64bd9d2f676d2bf6a2d300349251f12d6130344e3310f359b6f68fab8f789dc9",
+        "stopBefore": "2026-11-14-gpt-decoder-history-component-additions.json"
+      },
+      "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md": {
+        "currentSha256": "00822b4686e092ae97ef3a15b1ee0e3e837234219ec946697a3b18f037bd5f4a",
+        "stopBefore": "2026-11-14-gpt-decoder-history-component-additions.json"
+      },
+      "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md": {
+        "currentSha256": "d4a69f80ddaeb5ce8bd9c1270117f0239ca23e9e85ba301918819bda1163cb7b",
+        "stopBefore": "2026-11-14-gpt-decoder-history-component-additions.json"
+      },
+      "00 Учебник/01 Классическое машинное обучение/00 Карта модуля.md": {
+        "currentSha256": "56c4dd11b6ab2af8bc1b493b80854ef9d1b50ca839056d55d3cba5dd297506c9",
+        "stopBefore": "2026-11-14-gpt-decoder-history-component-additions.json"
+      },
       "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md": {
         "currentSha256": "69b3b527c15912b09e6c37c9918ce82599d34deed93d95bba55c7f0a83ac24c7",
         "stopBefore": "2026-11-14-grpo-dapo-dynamic-sampling-additions.json"
@@ -49,7 +117,7 @@
         "stopBefore": "2026-11-14-gpt-route-bits-per-byte-additions.json"
       },
       "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md": {
-        "currentSha256": "f155f1fa5acf4cc8480983ce50fb537aca2c0b552f81adabdb3bf6f57a4c3460",
+        "currentSha256": "17f7d0979b2f039628b60a0dbd2885b19d43b306bb9e1946be521566b7b29c91",
         "stopBefore": "2026-11-14-ntp-packed-document-boundaries-additions.json"
       },
       "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md": {
@@ -65,11 +133,11 @@
         "stopBefore": "2026-11-13-pretraining-mixture-and-evaluation-additions.json"
       },
       "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md": {
-        "currentSha256": "b6bca8b7302ec34e6f720c9da2eda3eaa47b77f2db5cfc97b266bc1025bcb9dc",
+        "currentSha256": "6b525dc71ad5ba6396043f45065a5f49dce82027db96667732877c8c9c7b0a83",
         "stopBefore": "2026-11-13-transformer-shapes-logits-and-xl-additions.json"
       },
       "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md": {
-        "currentSha256": "71c4cc12f0e4054f7c784f51ddbfd1b1ab6295ae1f1a4a21511ca9b94922ff6f",
+        "currentSha256": "a18cc11d3ae15f4df56f21ad3a030c6e790eed1d3a7006683ba1486887b70cf1",
         "stopBefore": "2026-11-13-dense-ffn-vocabulary-and-gates-additions.json"
       },
       "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md": {
@@ -81,7 +149,7 @@
         "stopBefore": "2026-11-13-gpt-llama-position-shift-additions.json"
       },
       "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md": {
-        "currentSha256": "d0f28aa469c24907d10c6898784cce439e88148ed75e452912b08f2d418b31a8",
+        "currentSha256": "c4af966fe059b6ad123980d9d8d391296ea6bb2afab154cb626b9dea2f521869",
         "stopBefore": "2026-11-13-gemma2-sandwich-norm-additions.json"
       },
       "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md": {

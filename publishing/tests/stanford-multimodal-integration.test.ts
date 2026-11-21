@@ -130,7 +130,7 @@ describe('Stanford CS336 Lecture 17 publication integration', () => {
     });
   });
 
-  it('publishes 64h once at the end of the independent multimodal module', () => {
+  it('publishes Chameleon once between VLM evaluation and the agent chapters', () => {
     const navigation = parse(readFileSync(resolve(root, 'publishing/navigation.yml'), 'utf8')) as {
       sections: Array<{
         id: string;
@@ -142,7 +142,7 @@ describe('Stanford CS336 Lecture 17 publication integration', () => {
     const pageRoutes = textbook.pages.map(({ route }) => route);
     const sidebarRoutes = readingPaths(loadManifest(resolve(root, 'publishing/navigation.yml'))
       .sections.find(section => section.id === 'textbook')!)
-      .find(path => path.id === 'multimodal')!.routes;
+      .find(path => path.id === 'main')!.routes;
     const expected = [
       'textbook/multimodal/evaluation-serving',
       'textbook/multimodal/diffusion-flow-images',
@@ -155,7 +155,9 @@ describe('Stanford CS336 Lecture 17 publication integration', () => {
     expect(sidebarRoutes.filter((route) => route === multimodalRoute)).toHaveLength(1);
     expect(pageRoutes.slice(pageRoutes.indexOf(expected[0]), pageRoutes.indexOf(expected[0]) + expected.length))
       .toEqual(expected);
-    expect(sidebarRoutes.slice(-2)).toEqual([expected[0], multimodalRoute]);
+    expect(sidebarRoutes.slice(sidebarRoutes.indexOf(multimodalRoute) - 1,
+      sidebarRoutes.indexOf(multimodalRoute) + 3)).toEqual(expected.filter(
+      route => route !== 'textbook/multimodal/diffusion-flow-images'));
     expect(sidebarRoutes).not.toContain('textbook/multimodal/diffusion-flow-images');
 
     const moduleMap = readFileSync(

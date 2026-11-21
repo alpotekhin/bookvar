@@ -70,6 +70,18 @@ np.testing.assert_allclose(scope["before"], np.logaddexp(0, -2), atol=1e-15)
 np.testing.assert_allclose(scope["grad"], -2.5*q, atol=1e-15)
 np.testing.assert_allclose(scope["model"].fc2.weight[0, 0].item(), .2 + .25*q, atol=1e-15)
 
+# Compute the two paths from each example's logits to its first hidden unit.
+logit_derivative = np.array([[-q, q], [q, -q]]) / 2
+hidden_derivative = logit_derivative @ W2.detach().numpy().T
+torch.testing.assert_close(Z[:, 0], Z.new_tensor([5., 0.]))
+hidden_gradient = float((hidden_derivative[:, 0] * (Z[:, 0].numpy() > 0)
+                         * X[:, 0].numpy()).sum())
+np.testing.assert_allclose(hidden_gradient, -.2 * q, atol=1e-15)
+np.testing.assert_allclose(scope["model"].fc1.weight.grad[0, 0].item(), hidden_gradient, atol=1e-15)
+np.testing.assert_allclose(scope["model"].fc1.weight[0, 0].item(), 1 - .1*hidden_gradient, atol=1e-15)
+assert round(hidden_gradient, 6) == -.023841
+assert round(1 - .1*hidden_gradient, 6) == 1.002384
+
 # Central difference is taken in W2, where ReLU's kink at Z[1,0]=0 is irrelevant.
 def loss_with_weight(value):
     w = W2.clone()

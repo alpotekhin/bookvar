@@ -25,11 +25,13 @@ describe('generalization source-figure caption', () => {
       '2026-10-30-loss-weighted-reduction-additions.json')).toThrow();
   });
 
-  it('keeps the three programs and nine unchanged originals beside the new experiment', () => {
+  it('keeps the original programs and figures beside the ridge and bagging examples', () => {
     const fences = (s: string) => [...s.matchAll(/^```python\n([\s\S]*?)^```\s*$/gm)].map(m => m[1]);
-    const images = (s: string) => [...s.matchAll(/!\[\[([^\]]+)\]\]/g)].map(m => m[1]);
-    expect(fences(current)).toHaveLength(3);
-    expect(fences(current)).toEqual(fences(prior));
+    const images = (s: string) => [...s.matchAll(/!\[\[([^\]|]+)/g)].map(m => m[1]);
+    const programs = fences(current);
+    expect(programs).toHaveLength(4);
+    expect(programs.filter(program => !program.includes('ridge_errors'))).toEqual(fences(prior));
+    expect(programs[1]).toContain('np.linalg.lstsq');
     expect(images(captionRevision)).toEqual(images(prior));
     expect(images(current)).toHaveLength(10);
     expect(images(current).filter(image => !image.includes('sklearn-tree-bagging-bias-variance.png')))

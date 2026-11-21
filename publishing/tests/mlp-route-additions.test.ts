@@ -35,6 +35,9 @@ describe('continuous MLP route and original source provenance',()=>{
       .replace(/<a id="pytorch-module-(?:state|hooks)"><\/a>\n/g,'')
       .replace(/^(#{3,4}) /gm,(_,marks)=>marks.slice(1)+' ');
     expect(changed).toBe(old);
+    expect(raw.match(implementation)?.[0]).toBe(current.match(implementation)?.[0]);
+    expect(programs(raw)).toEqual(programs(current));
+    expect(figures(raw)).toEqual(figures(current));
     expect(current.indexOf('## MLP внутри Transformer')).toBeLessThan(current.indexOf('<!-- BEGIN REVIEW: Module state'));
     expect(current.indexOf('## Ширина, глубина и число параметров')).toBeLessThan(current.indexOf('## MLP внутри Transformer'));
     expect(current.indexOf('Продолжение основного курса:')).toBeLessThan(current.indexOf('## Дополнение:'));

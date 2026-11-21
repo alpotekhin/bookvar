@@ -34,8 +34,13 @@ describe('complete backpropagation reading route',()=>{
     const math=(s:string)=>[...s.matchAll(/^\$\$\n([\s\S]*?)^\$\$/gm)].map(m=>m[1]).sort();
     const captions=(s:string)=>[...s.matchAll(/^\*[\s\S]*?\*\s*$/gm)].map(m=>m[0]);
     expect(math(current)).toEqual(math(prior));expect(captions(current)).toEqual(captions(prior));
-    for(const name of ['forward mode','JAX transforms','custom backward'])
+    expect(programs(raw)).toEqual(programs(current));
+    expect(figures(raw)).toEqual(figures(current));
+    for(const formula of math(current))expect(math(raw)).toContain(formula);
+    for(const name of ['forward mode','JAX transforms','custom backward']){
       expect(plain(current.match(marker(name))![1])).toBe(prior.match(marker(name))![1]);
+      expect(raw.match(marker(name))![1]).toBe(current.match(marker(name))![1]);
+    }
   });
   it('finishes reverse-mode failure analysis and gradcheck before advanced transforms',()=>{
     const before=(a:string,b:string)=>expect(current.indexOf(a)).toBeLessThan(current.indexOf(b));

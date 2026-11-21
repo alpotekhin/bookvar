@@ -27,6 +27,10 @@ def main():
     loss = lambda w: (w-3)**2
     assert loss(1) == 4
     assert loss(Q(101, 100)) == Q(39601, 10000)
+    for h in (Q(1, 100), Q(-1, 100), Q(1, 1000)):
+        delta = loss(1+h)-loss(1)
+        assert delta == -4*h+h*h
+        assert delta/h == -4+h
     x, h = Q(3), Q(1, 100)
     delta = (x+h)**2-x*x
     assert delta == Q(601, 10000)
@@ -96,6 +100,23 @@ def main():
         assert np.allclose(numerical_gradient(scalar, input_point), expected,
                            rtol=1e-8, atol=1e-8)
     assert np.array_equal(scope["backward"], [1, 4, -4])
+
+    # Differentiate with respect to every weight while keeping the input fixed.
+    matrix = [[Q(1), Q(0)], [Q(2), Q(-1)], [Q(0), Q(2)]]
+    def weighted_output(weights):
+        x = (1, 2, 0)
+        y = [sum(xi*wij for xi, wij in zip(x, column))
+             for column in zip(*weights)]
+        return y[0]-2*y[1]
+    assert weighted_output(matrix) == 9
+    for i in range(3):
+        for j in range(2):
+            shifted = [row.copy() for row in matrix]
+            shifted[i][j] += Q(1, 100)
+            change = weighted_output(shifted) - 9
+            assert change == Q(int(scope["grad_W"][i,j]), 100)
+            if (i, j) == (1, 1):
+                assert change == Q(-4, 100)
 
     # Complete published 4x2 output: check every one of its 24 derivatives.
     def matrix_output(v):
@@ -175,7 +196,7 @@ def main():
     numerical_gradient(counted, [1., 2.])
     assert len(calls) == 4
     before = (ROOT / "docs/audit/snapshots/2026-10-21-derivatives-gradients.md").read_text()
-    embeds = lambda s:Counter(re.findall(r"!\[\[([^\]]+)\]\]", s))
+    embeds = lambda s:Counter(re.findall(r"!\[\[([^\]|]+)(?:\|[^\]]+)?\]\]", s))
     historical = before_topic_consolidation(
         text, CHAPTER, '2026-10-30-tensor-native-geometry-additions.json')
     assert embeds(historical) == embeds(before)
@@ -193,7 +214,7 @@ def main():
         if re.match(r"^1\.\s", line):
             assert not text.splitlines()[index-1].strip(), (index+1, line)
     print("PASS: 3 sequential published snippets; rational derivative/step checks; "
-          "branch accumulation; rectangular linear-map VJP and matrix-output axes; vanishing/amplification "
+          "branch accumulation; rectangular linear-map VJP, six weight derivatives, and matrix-output axes; vanishing/amplification "
           "counterexamples; finite differences and nondifferentiable point; "
           "all 24 matrix-output derivatives and column-wise flattening; "
           "native tangent and three-path examples; 4 current figure embeds. "

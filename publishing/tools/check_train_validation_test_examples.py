@@ -102,6 +102,15 @@ np.testing.assert_allclose(outer_errors, [18, 9, 18])
 users = np.array(["u17", "u17", "u42", "u42", "u99", "u99"])
 assert set(users[[0, 2, 4]]) & set(users[[1, 3, 5]]) == set(users)
 assert not set(users[:4]) & set(users[4:])
+labels = np.array([0, 0, 1, 1, 1, 1])
+for train_ids, test_ids, expected, correct in (
+    ([0, 2, 4], [1, 3, 5], [0, 1, 1], 3),
+    ([0, 1, 2, 3], [4, 5], [0, 0], 0),
+):
+    remembered = dict(zip(users[train_ids], labels[train_ids]))
+    predicted = np.array([remembered.get(uid, 0) for uid in users[test_ids]])
+    np.testing.assert_array_equal(predicted, expected)
+    assert np.count_nonzero(predicted == labels[test_ids]) == correct
 split_group = scope["split_group"]
 before = {s: split_group(s) for s in users}
 after = {s: split_group(s) for s in ["u120", *reversed(users), "u999"]}
@@ -142,6 +151,9 @@ assert isclose(sqrt(.9 * .1 / 100), .03)
 assert isclose(sqrt(.9 * .1 / 1000), .009486832980505138)
 assert isclose(sqrt(.9 * .1 / 400), .03 / 2)
 assert isclose(.99**100, .3660323412732292)
+normal_accuracy, spam_recall = Fraction(95, 100), Fraction(60, 100)
+assert (normal_accuracy + spam_recall) / 2 == Fraction("0.775")
+assert (99 * normal_accuracy + spam_recall) / 100 == Fraction("0.9465")
 
 print("PASS: 6 published blocks; upstream AST parity, leakage/pipeline reproduction, selection, nested CV, groups, time, hashes, SE, rare class")
 print("chapter sha256:", sha256(CHAPTER.read_bytes()).hexdigest())

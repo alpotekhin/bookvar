@@ -26,17 +26,19 @@ describe('weighted cross-entropy reductions', () => {
 
   it('keeps the weighted reduction example and all eight current source images', () => {
     const fences = (s: string) => [...s.matchAll(/^```python\n([\s\S]*?)^```\s*$/gm)].map(m => m[1]);
-    const blocks = fences(current);
+    const blocks = fences(reductionRevision);
     expect(fences(prior)).toHaveLength(5);
     expect(blocks).toHaveLength(6);
     expect([...blocks.slice(0, 4), blocks[5]]).toEqual(fences(prior));
-    const images = (s: string) => [...s.matchAll(/!\[\[([^\]]+)\]\]/g)].map(m => m[1]);
+    expect(fences(current)).toHaveLength(6);
+    expect(fences(current)[1]).toContain('lm_nll[answer_mask].mean()');
+    const images = (s: string) => [...s.matchAll(/!\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g)].map(m => m[1]);
     expect(images(reductionRevision)).toHaveLength(9);
     expect(images(reductionRevision)).toEqual(images(prior));
     expect(images(current)).toHaveLength(8);
     expect(images(current).filter(image => !image.includes('google-softmax-multiclass.png')))
       .toEqual(images(prior).filter(image => !/cs231n-(softmax-cross-entropy|linear-decision-boundaries)\.png/.test(image)));
-    for (const mechanism of ['### Class weights and the meaning of mean',
+    for (const mechanism of ['## Class weights and the meaning of mean',
       '0.27154744216738813', '0.5430948843347763',
       'scaled_probability_mean', 'S\\,p_j-r_j',
       'no label smoothing and no ignored targets',

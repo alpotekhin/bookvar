@@ -14,7 +14,11 @@ const read=(p:string)=>readFileSync(resolve(root,p),'utf8');
 const hash=(s:string|Buffer)=>createHash('sha256').update(s).digest('hex');
 const journal=JSON.parse(read('docs/audit/'+own));
 const owner=journal.files[0],body=read(owner.source);
-const original=()=>{let s=body;for(const c of [...owner.changes].reverse())s=s.replace(c.new,()=>c.old);return s;};
+const original=()=>{
+  let s=beforeTopicConsolidation(body,owner.source,root,own);
+  for(const c of [...owner.changes].reverse())s=s.replace(c.new,()=>c.old);
+  return s;
+};
 const programs=(s:string)=>[...s.matchAll(/^\x60{3}python\n([\s\S]*?)^\x60{3}\s*$/gm)].map(m=>m[1]);
 const displays=(s:string)=>[...s.matchAll(/^\$\$([\s\S]*?)\$\$/gm)].map(m=>m[1]);
 const figures=(s:string)=>[...s.matchAll(/!\[\[([^\]|]+)(?:\|([^\]]*))?\]\]/g)];

@@ -11,6 +11,8 @@ const sha = (value: string | Buffer) => createHash('sha256').update(value).diges
 const journal = JSON.parse(read('docs/audit/2026-10-30-probability-native-additions.json'));
 const chapter = journal.files[0].source;
 const current = read(chapter);
+const nativeRevision = beforeTopicConsolidation(current, chapter, root,
+  '2026-10-30-probability-native-additions.json');
 const prior = beforeTopicConsolidation(current, chapter, root,
   '2026-10-30-derivative-native-additions.json');
 const figures = JSON.parse(read('00 Учебник/Assets/Figures/curated/probability-native-2026-10-30/assets.json'));
@@ -36,7 +38,8 @@ describe('source-language probability explanations and native figures', () => {
   it('retains the earlier program and numerical examples while extending the explanation', () => {
     const fences = (s: string) => [...s.matchAll(/^```python\n([\s\S]*?)^```\s*$/gm)].map(m => m[1]);
     expect(fences(current)).toHaveLength(1);
-    expect(fences(current)).toEqual(fences(prior));
+    expect(fences(nativeRevision)).toEqual(fences(prior));
+    expect(fences(current)[0]).toContain('answer_nll, 0.9485599924429406');
     for (const example of ['24 | 16 | 40', '0{,}6365', '2{,}5903',
       '\\frac{10}{7}', '0{,}375', '\\binom{13}{9}=715'])
       expect(current, example).toContain(example);

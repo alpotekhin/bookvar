@@ -108,6 +108,35 @@ local = gg*(1-zz.detach().tanh().square())
 torch.testing.assert_close(ww.grad, xx.detach().T@local)
 torch.testing.assert_close(xx.grad, local@ww.detach().T)
 
+# All derivatives in the earlier 2 -> 3 -> 2 MLP, before applying SGD.
+dtype = torch.float64
+mx = torch.tensor([[1., 2.], [2., -1.]], dtype=dtype)
+mw1 = torch.tensor([[1., -1., 2.], [2., 1., -1.]], dtype=dtype, requires_grad=True)
+mb1 = torch.tensor([0., 1., -1.], dtype=dtype, requires_grad=True)
+mw2 = torch.tensor([[.2, -.2], [.1, .1], [-.25, .25]], dtype=dtype, requires_grad=True)
+mb2 = torch.zeros(2, dtype=dtype, requires_grad=True)
+z1 = mx @ mw1 + mb1
+mh = z1.relu()
+logits = mh @ mw2 + mb2
+for node in (z1, mh, logits):
+    node.retain_grad()
+torch.nn.functional.cross_entropy(logits, torch.tensor([0, 1])).backward()
+q = 1 / (1 + math.exp(2))
+expected_g2 = logits.new_tensor([[-1., 1.], [1., -1.]]) * (q / 2)
+expected_g1 = z1.new_tensor([[-.4, 0., 0.], [0., 0., -.5]]) * (q / 2)
+for actual, expected in (
+    (logits.grad, expected_g2),
+    (mh.grad, expected_g2 @ mw2.detach().T),
+    (z1.grad, expected_g1),
+    (mw1.grad, mw1.new_tensor([[-.4, 0., -1.], [-.8, 0., .5]]) * (q / 2)),
+    (mw2.grad, mw2.new_tensor([[-5., 5.], [-2., 2.], [4., -4.]]) * (q / 2)),
+    (mb1.grad, mb1.new_tensor([-.4, 0., -.5]) * (q / 2)),
+    (mb2.grad, torch.zeros_like(mb2)),
+):
+    torch.testing.assert_close(actual, expected, atol=1e-14, rtol=0)
+assert round(mw1.grad[0, 0].item(), 6) == -.023841
+assert round(mw2.grad[0, 0].item(), 6) == -.298007
+
 # Unequal microbatches: weighted means match a five-example mean at fixed weights.
 q = torch.tensor(2., dtype=torch.float64, requires_grad=True)
 data = torch.tensor([1.,2.,3.,4.,5.], dtype=torch.float64)

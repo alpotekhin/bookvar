@@ -119,7 +119,7 @@ aliases:
   - Inference-time scaling
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/08 Reasoning distillation]]"
-next: "[[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена|Декодирование и выбор следующего токена]]"
+next: "[[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация]]"
 primary_sources:
   - https://arxiv.org/abs/2203.11171
   - https://arxiv.org/abs/2311.17311v1
@@ -1981,4 +1981,4 @@ print('budget multipliers:', inference_multiplier(4, Fraction(1, 10)),
 | Управление длиной | [Muennighoff et al., s1](https://arxiv.org/abs/2501.19393): budget forcing, раздел 3.1; [Qwen3](https://arxiv.org/abs/2505.09388v1): гибридный режим и бюджет, раздел 4.3 |
 
 Предыдущая глава: [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/08 Reasoning distillation|Дистилляция рассуждений]].
-Следующая глава: [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена|Декодирование и выбор следующего токена]].
+Следующая глава: [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация|Оценивание моделей и контаминация]].

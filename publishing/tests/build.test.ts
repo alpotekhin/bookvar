@@ -820,6 +820,7 @@ describe('buildPublication', () => {
       .replace(/;\n$/, ''));
     expect(sidebar).toEqual([{
       label: 'Source fixture',
+      collapsed: true,
       items: [{ label: 'Sources', slug: 'sources/index' }]
     }]);
     for (const [, route] of pages) {
@@ -877,14 +878,15 @@ describe('buildPublication', () => {
     expect(sidebar).toEqual([
       {
         label: 'Справочник',
+        collapsed: true,
         items: [
-          { label: 'Темы и механизмы', translations: { en: 'Topics and mechanisms' }, items: [{ label: 'Reference', slug: 'reference/index' }] },
-          { label: 'Модели и семейства', translations: { en: 'Models and families' }, items: [{ label: 'Models', slug: 'models/index' }] },
-          { label: 'Обзоры направлений', translations: { en: 'Research overviews' }, items: [{ label: 'Overview', slug: 'research/index' }] },
-          { label: 'Хронология', translations: { en: 'Timeline' }, items: [{ label: 'Timeline', slug: 'models/timeline' }] }
+          { label: 'Темы и механизмы', translations: { en: 'Topics and mechanisms' }, collapsed: true, items: [{ label: 'Reference', slug: 'reference/index' }] },
+          { label: 'Модели и семейства', translations: { en: 'Models and families' }, collapsed: true, items: [{ label: 'Models', slug: 'models/index' }] },
+          { label: 'Обзоры направлений', translations: { en: 'Research overviews' }, collapsed: true, items: [{ label: 'Overview', slug: 'research/index' }] },
+          { label: 'Хронология', translations: { en: 'Timeline' }, collapsed: true, items: [{ label: 'Timeline', slug: 'models/timeline' }] }
         ]
       },
-      { label: 'Источники', items: [{ label: 'Sources', slug: 'sources/index' }] }
+      { label: 'Источники', collapsed: true, items: [{ label: 'Sources', slug: 'sources/index' }] }
     ]);
   });
 

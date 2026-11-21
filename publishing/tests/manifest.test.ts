@@ -235,8 +235,17 @@ describe('loadManifest', () => {
     const sidebarRoutes = flattenSidebar(textbook.sidebar ?? []).map((item) => item.route);
     expect([...sidebarRoutes].sort()).toEqual(textbook.pages.map((page) => page.route).sort());
     const paths = readingPaths(textbook);
-    expect(paths.find(path => path.id === 'main')!.routes).toHaveLength(64);
-    expect(paths.filter(path => path.id !== 'main')).toHaveLength(13);
+    const main = paths.find(path => path.id === 'main')!.routes;
+    expect(main).toHaveLength(85);
+    expect(paths.filter(path => path.id !== 'main')).toHaveLength(10);
+    expect(main.slice(main.indexOf('textbook/models/gpt-1'), main.indexOf('textbook/models/gpt-1') + 4))
+      .toEqual(['textbook/models/gpt-1', 'textbook/models/gpt-2', 'textbook/models/gpt-3',
+        'textbook/modern-llm/llama-architecture']);
+    expect(main.indexOf('textbook/inference/decoding')).toBeLessThan(main.indexOf('textbook/reasoning/test-time-compute'));
+    expect(main.indexOf('textbook/rag/full-pipeline')).toBeLessThan(main.indexOf('textbook/agents/tool-use'));
+    expect(main).toContain('textbook/multimodal/models');
+    expect(main).not.toContain('textbook/classical-ml/decision-trees');
+    expect(main.every(route => route.startsWith('textbook/'))).toBe(true);
     expect(readingNeighbours(paths, 'textbook/pretraining/dedup-pii-corpus-quality')?.next)
       .toBe('textbook/pretraining/next-token-objective');
     expect(readingNeighbours(paths, 'textbook/classical-ml/kernels-svm-rff')?.next).toBeUndefined();

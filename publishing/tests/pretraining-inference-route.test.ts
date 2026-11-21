@@ -33,13 +33,15 @@ describe('pretraining to decoding prerequisites', () => {
     const journal = JSON.parse(read('docs/audit/2026-10-30-decoding-prerequisites-additions.json'));
     expect(journal.files.map((r: { source: string }) => r.source)).toEqual([canonical, english]);
     for (const row of journal.files) {
-      const current = read(row.source);
-      const before = beforeTopicConsolidation(current, row.source, root,
+      const live = read(row.source);
+      const current = beforeTopicConsolidation(live, row.source, root,
+        '2026-11-14-gpt-decoder-history-component-additions.json');
+      const before = beforeTopicConsolidation(live, row.source, root,
         '2026-10-30-reader-provenance-additions.json');
       expect(hash(current), row.source).toBe(row.after_sha256);
       expect(hash(before), row.source).toBe(row.before_sha256);
       expect(current.split('\n---\n')[1]).toBe(before.split('\n---\n')[1]);
-      expect(() => beforeTopicConsolidation(current + '\nUnreviewed paragraph\n', row.source, root,
+      expect(() => beforeTopicConsolidation(live + '\nUnreviewed paragraph\n', row.source, root,
         '2026-10-30-reader-provenance-additions.json')).toThrow('Unreviewed topic consolidation revision');
     }
   });

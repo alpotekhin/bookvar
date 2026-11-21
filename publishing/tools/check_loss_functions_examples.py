@@ -29,11 +29,26 @@ def main():
         stop_before_journal="2026-10-30-probability-native-additions.json")
     prior_blocks = re.findall(r"^```python\n(.*?)^```\s*$", prior, re.M | re.S)
     assert len(prior_blocks) == 5
-    assert blocks[:4] + blocks[5:] == prior_blocks
+    reduction_revision = before_topic_consolidation(text, CHAPTER,
+        stop_before_journal="2026-10-30-loss-weighted-reduction-additions.json")
+    reduction_blocks = re.findall(r"^```python\n(.*?)^```\s*$", reduction_revision, re.M | re.S)
+    assert reduction_blocks[:4] + reduction_blocks[5:] == prior_blocks
     scope = {"__name__": "__chapter_example__"}
     for i, block in enumerate(blocks):
         exec(compile(block, str(CHAPTER)+":block-"+str(i+1), "exec"), scope)
     log_softmax = scope["log_softmax"]
+    assert np.allclose(scope["lm_nll"], [-log(.5), -log(.6), -log(.25)])
+    assert isclose(exp(-scope["lm_nll"].sum()), .075)
+    assert isclose(scope["lm_nll"][1], log(.15/.60 + .15/.60 + 1 + .10/.60))
+    # The loss on fixed logits has no direct derivative at the excluded row.
+    scores = scope["lm_logits"]
+    y = np.array([0, 2, 3])
+    active = np.array([1, 2])
+    masked_loss = lambda z: -(log_softmax(z)[active, y[active]]).sum()/2
+    guess = np.exp(log_softmax(scores))
+    masked_gradient = (guess - np.eye(4)[y])/2
+    masked_gradient[0] = 0
+    assert np.allclose(central_gradient(masked_loss, scores), masked_gradient, atol=1e-8)
     z = np.array([3.2, 5.1, -1.7])
     p = np.exp(log_softmax(z))
     assert np.allclose(np.exp(z), [24.532530197, 164.0219073, .182683524])
@@ -216,7 +231,7 @@ def main():
     assert np.allclose(scope["comparison_ce"],
                        [.0949229564, .2395447662, .5514447139])
     print("PASS: 6 published blocks; softmax/CE, weighted reductions and gradients, full W/b/x gradients and parameter step, "
-          "decision boundary and hidden tie, hinge margins/gradient, source diagrams, smoothing, masks, Gaussian MSE, "
+          "decision boundary and hidden tie, hinge margins/gradient, source diagrams, smoothing, token NLL and masked gradients, Gaussian MSE, "
           f"Brier, BCE; {mean_median_cases} exact mean/median cases")
     print("chapter_sha256:", sha256(CHAPTER.read_bytes()).hexdigest())
 

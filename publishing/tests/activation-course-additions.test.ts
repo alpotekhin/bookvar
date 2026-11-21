@@ -33,6 +33,10 @@ describe('activation mechanism additions and canonical reference',()=>{
     for(const formula of math(prior))expect(math(current)).toContain(formula);
     const captions=(s:string)=>[...s.matchAll(/^\*[\s\S]*?\*\s*$/gm)].map(m=>m[0]);
     expect(captions(current)).toEqual(captions(prior));
+    expect(programs(raw)).toEqual(programs(current));
+    expect(figures(raw).slice(0, 8)).toEqual(figures(current));
+    expect(figures(raw).at(-1)).toContain('goujon-maxout-figure6');
+    for (const formula of math(current)) expect(math(raw)).toContain(formula);
     expect(current).toContain('max(dim=-1)');
     expect(journal.remaining[0].status).toBe('linked-not-reproduced');
   });

@@ -1,0 +1,101 @@
+{
+  "date": "2026-11-21",
+  "scope": "Full read; one loss example from difference quotient to descent, explicit rectangular Jacobian and weight gradient, alt text for four unchanged figures. No translation.",
+  "verification": {
+    "sourcesChecked": [
+      "D2L, Calculus: the difference quotient and tangent for 3x^2-4x",
+      "D2L, Multivariable Calculus, Fig. 22.4.2: three paths from y to f",
+      "CS231n, Compound expressions and staged computation: q = x + y; f = qz; local derivatives and accumulation",
+      "Parr and Howard, Vector chain rule: composition of the Jacobians, accounting for the book's column-gradient convention",
+      "Google ML Crash Course, Gradient descent: four steps in the original diagram, matched to the chapter's scalar example"
+    ],
+    "workedCases": [
+      "Exact arithmetic: at w=1, (L(1+h)-L(1))/h=-4+h. With step size 0.25, w becomes 2 and loss drops from 4 to 1.",
+      "At x=[1,2,0], W transpose times x is [5,-2]. The input gradient has three entries and the gradient with respect to W is the 3 by 2 outer product. Each of the six weights was perturbed independently with the input fixed.",
+      "NumPy 2.3.5: three published code blocks and independent assertions for both Jacobians, all 24 matrix-output derivatives, the chain-rule figures and finite differences."
+    ],
+    "publication": "Local build, eight targeted source tests, derivative output test and built-link check passed. Inspected four original figures and the new weight-gradient derivation at 390 CSS px; all four figures also fit at 1440 px.",
+    "limits": "The original Google figure uses small labels at mobile fit width. The accompanying text spells out each step with the chapter's example. No push or translation."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md",
+      "before_sha256": "7694acfd427daaa417684ed0ffa88c4140f8f3871437c502f80ec1820facf312",
+      "after_sha256": "ece1414ede8f7eaf27fa4b9fdbc31486b653fe883e0268b4c84bc63b2a0bfb54",
+      "changes": [
+        {
+          "old": "title: Производная и градиент\ntype: textbook-chapter\nstatus: canonical\nlast_updated: 2026-10-30\nprimary_sources:\n  - https://d2l.ai/chapter_preliminaries/calculus.html\n  - https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/multivariable-calculus.html\n",
+          "new": "title: Производная и градиент\ntype: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-21\nprimary_sources:\n  - https://d2l.ai/chapter_preliminaries/calculus.html\n  - https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/multivariable-calculus.html\n"
+        },
+        {
+          "old": "L(w)=(w-3)^2.\n$$\n\nПри $w=1$ ошибка равна 4. Если увеличить параметр до $1{,}01$, получится\n$L(1{,}01)=3{,}9601$: ответ приблизился к нужному, ошибка уменьшилась.\nВ этой задаче направление изменения видно из формулы. В нейросети параметров\nмного, и их влияние на ошибку проходит через последовательность вычислений.\nПроизводная позволяет определить влияние малого изменения одного параметра,\nа градиент объединяет такие производные в вектор.\n\n## Производная измеряет локальную чувствительность\n\nПусть $y=f(x)$. Увеличим $x$ на небольшое число $h$ и посмотрим, насколько\nизменится результат:\n\n$$\n\\frac{f(x+h)-f(x)}{h}.\n$$\n\nЕсли при уменьшении $h$ к нулю отношение стремится к одному и тому же\nконечному значению с обеих сторон, это значение называют производной:\n\n$$\nf'(x)=\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}.\n$$\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/derivative-native-2026-10-30/d2l-function-tangent.svg]]\n\n*For $f(x)=3x^2-4x$, the tangent at $x=1$ is $2x-3$: it passes through\n$(1,-1)$ and has slope 2. Aston Zhang, Zachary C. Lipton, Mu Li and\n",
+          "new": "L(w)=(w-3)^2.\n$$\n\nПри $w=1$ ошибка равна 4. Увеличим $w$ на $0{,}01$: ошибка станет\n$3{,}9601$. Как узнать, уменьшится ли ошибка, не подставляя новое значение\nкаждый раз? Для малых шагов ответ даёт наклон графика $L(w)$ в текущей точке.\nЕсли параметров много, нужен наклон по каждому из них. Эти производные\nсоставляют градиент.\n\n<a id=\"производная-измеряет-локальную-чувствительность\"></a>\n\n## Производная и касательная\n\nПри шаге $h$ от $w=1$ ошибка меняется на\n\n$$\nL(1+h)-L(1)=(-2+h)^2-4=-4h+h^2.\n$$\n\nПри $h=0{,}01$ получаем $-0{,}04+0{,}0001=-0{,}0399$.\nОсновной вклад даёт $-4h$. Чтобы найти его коэффициент, разделим\nприращение ошибки на $h$, получим $-4+h$ и устремим $h$ к нулю.\nПредел $-4$ — производная $L'(1)$.\n\nДля произвольной функции $f(x)$ наклон секущей через точки $(x,f(x))$\nи $(x+h,f(x+h))$ равен\n\n$$\n\\frac{f(x+h)-f(x)}{h}.\n$$\n\nЕсли при $h\\to0$ слева и справа получается один и тот\nже конечный предел, он и есть производная:\n\n$$\nf'(x)=\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}.\n$$\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/derivative-native-2026-10-30/d2l-function-tangent.svg|К параболе f(x) = 3x² − 4x проведена касательная y = 2x − 3 в точке (1, −1).]]\n\n*For $f(x)=3x^2-4x$, the tangent at $x=1$ is $2x-3$: it passes through\n$(1,-1)$ and has slope 2. Aston Zhang, Zachary C. Lipton, Mu Li and\n"
+        },
+        {
+          "old": "Переход от секущей к касательной показан также на\n[рис. 5.3 MML, печатная с. 141 / страница PDF 147](https://mml-book.github.io/book/mml-book.pdf#page=147).\n\nУ производной есть одновременно геометрический и вычислительный смысл. На\nграфике функции это наклон касательной. В программе — коэффициент, который\nприближённо переводит малое изменение входа в изменение выхода:\n\n$$\nf(x+\\Delta x)\\approx f(x)+f'(x)\\Delta x.\n",
+          "new": "Переход от секущей к касательной показан также на\n[рис. 5.3 MML, печатная с. 141 / страница PDF 147](https://mml-book.github.io/book/mml-book.pdf#page=147).\n\nНаклон касательной можно выразить через приращения. При шаге $\\Delta x$\nзначение касательной меняется на $f'(x)\\Delta x$. Это даёт линейное\nприближение самой функции:\n\n$$\nf(x+\\Delta x)\\approx f(x)+f'(x)\\Delta x.\n"
+        },
+        {
+          "old": "The formulas apply where the functions and the indicated derivatives are\ndefined.\n\n## Знак и величина\n\nЗнак производной указывает, в какую сторону меняется функция.\n\n| $f'(x)$ | Если немного увеличить $x$ | Чтобы локально уменьшить $f$ |\n|---:|---|---|\n",
+          "new": "The formulas apply where the functions and the indicated derivatives are\ndefined.\n\n<a id=\"знак-и-величина\"></a>\n\n## Знак производной и направление шага\n\nПри ненулевой производной знак предсказывает, как изменится функция\nпри достаточно малом шаге вправо или влево.\n\n| $f'(x)$ | Если немного увеличить $x$ | Чтобы локально уменьшить $f$ |\n|---:|---|---|\n"
+        },
+        {
+          "old": "| $<0$ | $f$ уменьшится | увеличить $x$ |\n| $=0$ | линейного изменения нет | проверить кривизну и окрестность |\n\nБольшая абсолютная величина означает сильную локальную чувствительность, но не\nгарантирует большого изменения на произвольном шаге. Производная описывает\nокрестность точки; если шаг слишком велик, линейное приближение перестаёт быть\nнадёжным. Поэтому в оптимизации нужно выбирать длину шага.\n\nНулевая производная сама по себе не устанавливает минимум. В точке $x=0$\nу функций $x^2$, $-x^2$ и $x^3$ производная равна нулю, но поведение разное.\n",
+          "new": "| $<0$ | $f$ уменьшится | увеличить $x$ |\n| $=0$ | линейного изменения нет | проверить кривизну и окрестность |\n\nМодуль производной показывает, на сколько меняется касательная\nпри единичном шаге. Чтобы оценить изменение функции, этот наклон\nумножают на малый шаг, как в примере с $w=1$.\n\nНулевая производная сама по себе не устанавливает минимум. В точке $x=0$\nу функций $x^2$, $-x^2$ и $x^3$ производная равна нулю, но поведение разное.\n"
+        },
+        {
+          "old": "L=L(\\theta_1,\\theta_2,\\ldots,\\theta_n).\n$$\n\nЧтобы узнать чувствительность к одному параметру, остальные временно считают\nпостоянными. Так определяется частная производная\n$\\partial L/\\partial\\theta_i$.\n\nНапример,\n",
+          "new": "L=L(\\theta_1,\\theta_2,\\ldots,\\theta_n).\n$$\n\nЗафиксируем все параметры, кроме $\\theta_i$, и продифференцируем\nполученную функцию одной переменной. Так вычисляют частную производную\n$\\partial L/\\partial\\theta_i$.\n\nНапример,\n"
+        },
+        {
+          "old": "\\frac{\\partial f}{\\partial y}=3x+2y.\n$$\n\nВ точке $(x,y)=(1,2)$ получаем $(8,7)$. Первое число говорит, как изменится\n$f$, если двигаться только по оси $x$; второе — если двигаться только по оси\n$y$.\n\nЭто можно проверить без правил дифференцирования. Подставим изменённую\nкоординату в исходную функцию:\n",
+          "new": "\\frac{\\partial f}{\\partial y}=3x+2y.\n$$\n\nВ точке $(1,2)$ производная по $x$ равна 8, а по $y$ равна 7.\nПоэтому шаг $h$ вдоль первой оси меняет $f$ примерно на $8h$,\nа вдоль второй — на $7h$.\n\nЭто можно проверить без правил дифференцирования. Подставим изменённую\nкоординату в исходную функцию:\n"
+        },
+        {
+          "old": "\\end{bmatrix}.\n$$\n\nЕсли функция дифференцируема в рассматриваемой точке, её ненулевой градиент\nнаправлен в сторону наиболее быстрого локального роста среди направлений\nединичной евклидовой длины.\nПоэтому шаг в противоположную сторону уменьшает её в линейном приближении:\n\n$$\n\\boldsymbol\\theta_{t+1}\n",
+          "new": "\\end{bmatrix}.\n$$\n\nПри дифференцируемой функции и ненулевом градиенте самый быстрый\nлокальный рост получается при движении вдоль градиента, если сравнивать\nнаправления единичной евклидовой длины. Для уменьшения потерь делают\nмалый шаг в обратную сторону:\n\n$$\n\\boldsymbol\\theta_{t+1}\n"
+        },
+        {
+          "old": "\nгде $\\eta>0$ — шаг обучения (*learning rate*).\n\nДля ошибки $L(w)=(w-3)^2$ из начала главы производная равна $2(w-3)$.\nЭто следует из того же раскрытия квадрата:\n$L(w+h)-L(w)=2(w-3)h+h^2$.\nПри $w=1$ производная равна $-4$. Возьмём $\\eta=0{,}25$:\n\n$$\nw_{\\mathrm{new}}=1-0{,}25\\cdot(-4)=2.\n",
+          "new": "\nгде $\\eta>0$ — шаг обучения (*learning rate*).\n\nУ ошибки $L(w)=(w-3)^2$ всего один параметр. Множитель при $h$\nв разности $L(w+h)-L(w)=2(w-3)h+h^2$ даёт производную\n$L'(w)=2(w-3)$. В начальной точке $w=1$ она равна $-4$.\nВозьмём $\\eta=0{,}25$:\n\n$$\nw_{\\mathrm{new}}=1-0{,}25\\cdot(-4)=2.\n"
+        },
+        {
+          "old": "| $2$ | $1$ | $-2$ | $2{,}5$ |\n| $2{,}5$ | $0{,}25$ | $-1$ | $2{,}75$ |\n\nНа каждом шаге заново оценивается текущая чувствительность, поэтому\nобновления становятся меньше по мере приближения к 3.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/foundations-source-first/google-gradient-descent.png]]\n\n*Градиентный спуск повторяет один цикл: вычислить функцию потерь, определить направление\nлокального убывания и сделать шаг. Источник: Google,\n[Machine Learning Crash Course — Gradient descent](https://developers.google.com/machine-learning/crash-course/linear-regression/gradient-descent),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nНаправление градиента можно связать со скалярным произведением из\nпредыдущей главы. Для небольшого перемещения вдоль вектора $\\mathbf v$\n",
+          "new": "| $2$ | $1$ | $-2$ | $2{,}5$ |\n| $2{,}5$ | $0{,}25$ | $-1$ | $2{,}75$ |\n\nПри выбранном $\\eta$ каждый шаг уменьшает расстояние от $w$ до 3\nвдвое: $w_{\\text{new}}-3=\\tfrac12(w-3)$.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/foundations-source-first/google-gradient-descent.png|Четыре шага: вычислить потери, выбрать направление изменения весов и смещения, сделать малый шаг и повторить расчёт.]]\n\n*Градиентный спуск повторяет один цикл: вычислить функцию потерь, определить направление\nлокального убывания и сделать шаг. Источник: Google,\n[Machine Learning Crash Course — Gradient descent](https://developers.google.com/machine-learning/crash-course/linear-regression/gradient-descent),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*\n\nВ первом проходе по схеме $L(1)=4$. На втором шаге производная $-4$\nпоказывает, что $w$ нужно увеличить. На третьем получаем $w=2$, а при\nповторном вычислении потерь уже используем $L(2)=1$.\n\nНаправление градиента можно связать со скалярным произведением из\nпредыдущей главы. Для небольшого перемещения вдоль вектора $\\mathbf v$\n"
+        },
+        {
+          "old": "\n## Правило сложной функции\n\nНейросеть — композиция функций. Если\n\n$$\nu=g(x),\\qquad y=f(u),\n",
+          "new": "\n## Правило сложной функции\n\nПусть $g$ вычисляет промежуточное значение $u$, а $f$ использует его\nдля вычисления $y$:\n\n$$\nu=g(x),\\qquad y=f(u),\n"
+        },
+        {
+          "old": "Такие разветвления разобраны в\n[CS231n, Backprop in practice](https://cs231n.github.io/optimization-2/#backprop-in-practice-staged-computation).\n\nВычислительный граф фиксирует,\nкакое значение из каких получено. Прямой проход вычисляет узлы слева направо;\nобратный идёт от функции потерь к параметрам и в каждом узле применяет правило сложной\nфункции.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/backpropagation-2026-10-21/cs231n-chain.svg]]\n\n*Andrej Karpathy,\n[CS231n — Compound expressions with chain rule](https://cs231n.github.io/optimization-2/#backprop),\n",
+          "new": "Такие разветвления разобраны в\n[CS231n, Backprop in practice](https://cs231n.github.io/optimization-2/#backprop-in-practice-staged-computation).\n\nВ вычислительном графе ребро соединяет вычисленное значение с узлом,\nкоторый его использует. В прямом проходе сначала вычисляют аргументы\nузла, затем сам узел. В обратном проходе идут от функции потерь к её\nаргументам и складывают вклады от всех узлов, которые использовали\nодно и то же значение.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/backpropagation-2026-10-21/cs231n-chain.svg|Сложение даёт q = 3, умножение на z = −4 даёт f = −12; в обратном проходе к x и y приходит −4, к z приходит 3.]]\n\n*Andrej Karpathy,\n[CS231n — Compound expressions with chain rule](https://cs231n.github.io/optimization-2/#backprop),\n"
+        },
+        {
+          "old": "\n### Several paths through a graph\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/derivative-native-2026-10-30/d2l-chain-paths.svg]]\n\n*Aston Zhang et al.,\n[D2L — Multivariate Chain Rule, Fig. 22.4.2](https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/multivariable-calculus.html#multivariate-chain-rule).\n",
+          "new": "\n### Several paths through a graph\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/derivative-native-2026-10-30/d2l-chain-paths.svg|Три пути из y в f: через u и a, через u напрямую, через v и b.]]\n\n*Aston Zhang et al.,\n[D2L — Multivariate Chain Rule, Fig. 22.4.2](https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/multivariable-calculus.html#multivariate-chain-rule).\n"
+        },
+        {
+          "old": "\n### Прямой и обратный проход линейного отображения\n\nВозьмём матрицу из предыдущей главы:\n\n$$\nW=\\begin{bmatrix}1&0\\\\2&-1\\\\0&2\\end{bmatrix}.\n",
+          "new": "\n### Прямой и обратный проход линейного отображения\n\nВозьмём матрицу весов из\n[[00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры#Умножение матриц как набор скалярных произведений|главы о тензорах]]:\n\n$$\nW=\\begin{bmatrix}1&0\\\\2&-1\\\\0&2\\end{bmatrix}.\n"
+        },
+        {
+          "old": "\\end{aligned}\n$$\n\nТри входа дают два выхода, поэтому якобиан имеет две строки и три столбца:\n\n$$\nJ=\\begin{bmatrix}1&2&0\\\\0&-1&2\\end{bmatrix}=W^\\top.\n$$\n\nПервая строка перечисляет влияние всех входов на $y_1$, вторая — на $y_2$.\nПусть дальнейшие вычисления дали скаляр $s=y_1-2y_2$. Тогда\n$\\nabla_y s=[1,-2]^\\top$. Чувствительность к каждому входу складывается\nиз двух путей:\n\n$$\n",
+          "new": "\\end{aligned}\n$$\n\nДля первой строки таблицы признаков получаем $x=[1,2,0]^\\top$ и\n$y=[5,-2]^\\top$, как в предыдущей главе. Теперь нас интересует,\nкак каждый из двух выходов зависит от трёх входных координат.\nПоэтому в якобиане две строки и три столбца:\n\n$$\nJ=\\begin{bmatrix}1&2&0\\\\0&-1&2\\end{bmatrix}=W^\\top.\n$$\n\nПервая строка перечисляет влияние всех входов на $y_1$, вторая — на $y_2$.\nПусть следующая операция вычисляет скаляр $s=y_1-2y_2$. На выбранном\nвходе $s=5-2(-2)=9$, а $\\nabla_y s=[1,-2]^\\top$. Производная по каждой\nвходной координате складывается\nиз двух путей:\n\n$$\n"
+        },
+        {
+          "old": "В этой главе градиенты записаны столбцами, поэтому они умножаются\nна транспонированный якобиан.\n\n### Если выход — матрица\n\nПусть $A(x)$ имеет форму $4\\times2$, а $x$ состоит из трёх координат.\nТогда каждый из восьми элементов $A$ имеет три частные производные:\n",
+          "new": "В этой главе градиенты записаны столбцами, поэтому они умножаются\nна транспонированный якобиан.\n\n### Производные по весам линейного слоя\n\nДля обучения слоя нужно знать, как меняется результат при изменении\nего весов. Оставим $x$ постоянным. Вес $W_{ij}$ входит только в выход\n$y_j$, где он умножается на $x_i$. По правилу цепочки\n\n$$\n\\frac{\\partial s}{\\partial W_{ij}}\n=x_i\\frac{\\partial s}{\\partial y_j}.\n$$\n\nВсе эти производные можно записать как внешнее произведение:\n\n$$\n\\nabla_W s=x(\\nabla_y s)^\\top\n=\\begin{bmatrix}1\\\\2\\\\0\\end{bmatrix}\n \\begin{bmatrix}1&-2\\end{bmatrix}\n=\\begin{bmatrix}1&-2\\\\2&-4\\\\0&0\\end{bmatrix}.\n$$\n\nУ $\\nabla_W s$ та же форма $3\\times2$, что у $W$. Например, если\nувеличить только $W_{22}$ на $0{,}01$, второй выход вырастет на\n$2\\cdot0{,}01=0{,}02$, а $s$ уменьшится на $2\\cdot0{,}02=0{,}04$.\nТретья строка градиента равна нулю: при $x_3=0$ веса этой строки\nне влияют ни на один выход. Это расчёт для одного примера; на другом\nвходе производные по тем же весам могут отличаться.\n\n<a id=\"если-выход--матрица\"></a>\n\n### Якобиан матричного выхода\n\nПусть $A(x)$ имеет форму $4\\times2$, а $x$ состоит из трёх координат.\nТогда каждый из восьми элементов $A$ имеет три частные производные:\n"
+        },
+        {
+          "old": "assert np.array_equal(backward, [1., 4., -4.])\nnumeric_linear = numerical_gradient(lambda v: upstream @ (W.T @ v), x)\nassert np.allclose(numeric_linear, backward, rtol=1e-8, atol=1e-8)\n```\n\nЗдесь функция принимает одномерный вектор параметров. По каждой координате\n",
+          "new": "assert np.array_equal(backward, [1., 4., -4.])\nnumeric_linear = numerical_gradient(lambda v: upstream @ (W.T @ v), x)\nassert np.allclose(numeric_linear, backward, rtol=1e-8, atol=1e-8)\n\ngrad_W = np.outer(x, upstream)\nassert np.array_equal(grad_W, [[1., -2.], [2., -4.], [0., 0.]])\nnumeric_W = numerical_gradient(\n    lambda v: upstream @ (v.reshape(3, 2).T @ x), W.ravel()\n).reshape(3, 2)\nassert np.allclose(numeric_W, grad_W, rtol=1e-8, atol=1e-8)\n```\n\nЗдесь функция принимает одномерный вектор параметров. По каждой координате\n"
+        },
+        {
+          "old": "проверяет весь градиент: ошибка может оказаться перпендикулярна этому\nнаправлению.\n\n### Точка излома требует отдельной проверки\n\nУ $f(x)=|x|$ в нуле нет производной: наклон слева равен $-1$, справа — 1.\nТем не менее центральная разность в этой точке равна нулю при любом\n",
+          "new": "проверяет весь градиент: ошибка может оказаться перпендикулярна этому\nнаправлению.\n\n<a id=\"точка-излома-требует-отдельной-проверки\"></a>\n\n### Конечные разности в точке излома\n\nУ $f(x)=|x|$ в нуле нет производной: наклон слева равен $-1$, справа — 1.\nТем не менее центральная разность в этой точке равна нулю при любом\n"
+        }
+      ]
+    }
+  ]
+}

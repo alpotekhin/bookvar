@@ -577,7 +577,7 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     : {
         label: item.label,
         ...translatedLabel(item.labelEn),
-        collapsed: true,
+        collapsed: item.readingPath !== 'main',
         items: sidebarItems(item.items)
       });
   const sidebar = [...manifest.sections]
@@ -599,9 +599,11 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
       return {
         label: section.title,
         ...translatedLabel(section.titleEn),
+        collapsed: true,
         items: REFERENCE_SIDEBAR_GROUPS.map((group) => ({
           label: group.label,
           ...translatedLabel(group.labelEn),
+          collapsed: true,
           items: referencePages
             .filter((entry) => group.includes(entry.route)
               && visibleInSidebar(entry.route)
@@ -619,6 +621,7 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
       return {
         label: section.title,
         ...translatedLabel(section.titleEn),
+        ...(['practice', 'questions'].includes(section.id) ? { collapsed: true } : {}),
         items: section.pages.filter((entry) => visibleInSidebar(entry.route) && statuses.get(entry.route) !== 'redirect').map((entry) => ({
           label: titles.get(entry.route)!,
           ...translatedLabel(titlesEn.get(entry.route)),
@@ -630,6 +633,7 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     return {
       label: section.title,
       ...translatedLabel(section.titleEn),
+      collapsed: true,
       items: section.pages
         .filter((entry) => entry.route.startsWith('sources/')
           && visibleInSidebar(entry.route)
@@ -916,9 +920,15 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
           + (locale ? '#specialist-modules' : '#углублённые-модули'),
         label: locale ? 'Choose a module' : 'Выбрать углублённый модуль',
       };
+      const contents = {
+        link: publicationHref('textbook/index', locale)
+          + (locale ? '#curriculum' : '#полный-маршрут'),
+        label: locale ? 'Back to the contents' : 'К оглавлению курса',
+      };
       metadata.prev = neighbours.prev ? link(neighbours.prev)
         : neighbours.path.id === 'main' ? link('textbook/how-to-use') : modules;
-      metadata.next = neighbours.next ? link(neighbours.next) : modules;
+      metadata.next = neighbours.next ? link(neighbours.next)
+        : neighbours.path.id === 'main' ? contents : modules;
     }
     if (!searchableInPublication(entry.route) || ['redirect', 'legacy'].includes(page.status)) {
       metadata.pagefind = false;
