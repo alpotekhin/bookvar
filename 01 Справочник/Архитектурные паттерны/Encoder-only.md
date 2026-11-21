@@ -2,17 +2,17 @@
 title: Encoder-only
 type: concept
 status: redirect
-last_updated: '2026-10-29'
+last_updated: '2026-11-21'
 primary_sources:
   - 'https://arxiv.org/abs/1810.04805'
 canonical_topic: >-
   00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных
   паттерна.md
-canonical_heading: 'Encoder-only: построить контекстное представление'
+canonical_heading: encoder-only-bidirectional
 ---
 # Encoder-only
 
-Полное объяснение: [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна#Encoder-only: построить контекстное представление|Три архитектурных паттерна Transformer]].
+Полное объяснение: [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна#encoder-only-bidirectional|Двунаправленный энкодер]].
 
 <!-- Compatibility anchors for existing Obsidian and web links. -->
 <span id="encoder-only" aria-hidden="true"></span>

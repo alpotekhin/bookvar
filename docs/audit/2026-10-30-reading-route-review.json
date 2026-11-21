@@ -4,6 +4,14 @@
   "subsequentVerifiedRevisions": {
     "scope": "These current bytes restore to the historical whole-read receipts via the exact journals. This does not claim another full read or acceptance of those chapters.",
     "chapters": {
+      "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md": {
+        "currentSha256": "506410800209b6d39a9f1e3d005f84cea0d2721faf7c8aabff5d859fd61cc60f",
+        "stopBefore": "2026-11-21-full-transformer-editorial-pass.json"
+      },
+      "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md": {
+        "currentSha256": "b7c952329257a2010012abb0fa3803bdcdd6843a192230440a951db45e34a09d",
+        "stopBefore": "2026-11-21-positional-information-editorial-pass.json"
+      },
       "00 Учебник/05 Attention и Transformer/04 Позиционная информация.md": {
         "currentSha256": "4d458ed18bbe0fa5eeb9c2625fea5c0bcdea8d5d0fbf09b47e1dfbba3047e9ac",
         "stopBefore": "2026-11-21-masking-heads-editorial-pass.json"

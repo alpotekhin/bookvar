@@ -421,7 +421,7 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
 - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: the text-to-text Transformer]] · **EN**
 - [[00 Учебник/05 Attention и Transformer/03 Полный Transformer|The complete encoder–decoder Transformer]] · **EN**
   - [[00 Учебник/05 Attention и Transformer/03 Полный Transformer#transformer-dropout|Attention, residual and embedding dropout]]
-- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three architectural patterns]] · **EN**
+- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three Transformer architectures]] · **EN**
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна#decoder-only-next-token|Decoder-only — masking and next-token prediction]]
 
 ### Modern LLMs, attention, and MoE

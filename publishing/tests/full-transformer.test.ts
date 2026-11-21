@@ -72,7 +72,7 @@ describe('full Transformer chapter contracts', () => {
       expect(r.metadata_status).toBe('verified');
       expect(r.source_asset_sha256).toBe(f.sha256);
       if (f.name===historical) expect(r.used_in).not.toContain(chapter);
-      else expect(r.used_in).toContain(chapter);
+      else expect(r.used_in).toEqual(expect.arrayContaining([chapter, englishChapter]));
       const image = read(f.asset);
       expect(sha(image)).toBe(f.sha256);
       expect(image.equals(read(f.source_asset))).toBe(true);

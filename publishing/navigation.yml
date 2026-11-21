@@ -420,9 +420,9 @@ sections:
                 route: textbook/transformer/masking-heads-shapes
               - label: Позиционная информация
                 route: textbook/transformer/positional-information
-              - label: Полный encoder-decoder Transformer
+              - label: "Полный Transformer: энкодер и декодер"
                 route: textbook/transformer/full-transformer
-              - label: Три архитектурных паттерна
+              - label: Три архитектуры Transformer
                 route: textbook/transformer/encoder-decoder-patterns
               - label: BERT, RoBERTa и DeBERTa
                 route: textbook/models/bert-roberta-deberta

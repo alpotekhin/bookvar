@@ -3236,7 +3236,7 @@ assets:
     metadata_status: "verified"
     provenance_confirmation: "architecture-patterns-source-snapshot"
     derivation: "pdf-crop"
-    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md", "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md", "Concepts/Architectures/T5.md"]
+    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md", "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md", "Concepts/Architectures/T5.md"]
   - id: "curated-architecture-e1de839a24bd"
     asset: "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure2.png"
     sha256: "e1de839a24bd6fed80e2a95cd0b07ffc4ce9d00c5d71d65ff5034a9c86e72a6d"
@@ -3260,7 +3260,7 @@ assets:
     metadata_status: "verified"
     provenance_confirmation: "architecture-patterns-source-snapshot"
     derivation: "pdf-crop"
-    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md"]
+    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md"]
   - id: "curated-t5-spans-dab81832b013"
     asset: "00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure2-spans.png"
     sha256: "dab81832b013aa9a51b9fdaa5153d4312e975f7f2567abf00ba98f52626aa98e"
@@ -3309,7 +3309,7 @@ assets:
     metadata_status: "verified"
     provenance_confirmation: "architecture-patterns-source-snapshot"
     derivation: "pdf-crop"
-    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md", "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md"]
+    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md", "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md"]
   - id: "curated-architecture-4cbd29f25173"
     asset: "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure4.png"
     sha256: "4cbd29f251732e2522cc831d5f625bc017227925c15ea00992f0c2e171db5f99"
@@ -3333,7 +3333,7 @@ assets:
     metadata_status: "verified"
     provenance_confirmation: "architecture-patterns-source-snapshot"
     derivation: "pdf-crop"
-    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md", "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md", "Concepts/Architectures/T5.md"]
+    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md", "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md", "Concepts/Architectures/T5.md"]
   - id: "curated-t5-repeated-data-bd9b04b6dc10"
     asset: "00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure6-repeated-data.png"
     sha256: "bd9b04b6dc10e44d86d2eab6725550fc31c5b26222ee37400bc449dfbb62683b"
@@ -3407,7 +3407,7 @@ assets:
     metadata_status: "verified"
     provenance_confirmation: "architecture-patterns-source-snapshot"
     derivation: "pdf-crop"
-    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md", "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md"]
+    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md", "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md"]
   - id: "curated-full-transformer-bead3dcd79bb"
     asset: "00 Учебник/Assets/Figures/curated/full-transformer-2026-10-21/transformer_resideual_layer_norm_3.png"
     author: "Jay Alammar"
@@ -3418,6 +3418,7 @@ assets:
     modifications: "copied without content changes"
     used_in:
       - "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md"
+      - "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md"
     metadata_status: "verified"
     provenance_confirmation: "full-transformer-source-snapshot"
     source_asset: "05 Источники/Originals/full-transformer-2026-10-21/transformer_resideual_layer_norm_3.png"
@@ -7185,6 +7186,7 @@ assets:
     modifications: "copied without content changes"
     used_in:
       - "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md"
+      - "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md"
       - "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/02 Encoder-Decoder Transformer.md"
       - "Concepts/Architectures/Transformer.md"
     metadata_status: "verified"
@@ -7207,6 +7209,7 @@ assets:
     modifications: "copied without content changes"
     used_in:
       - "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md"
+      - "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md"
       - "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/02 Encoder-Decoder Transformer.md"
       - "Concepts/Architectures/Transformer.md"
     metadata_status: "verified"
@@ -7229,6 +7232,7 @@ assets:
     modifications: "copied without content changes"
     used_in:
       - "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md"
+      - "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md"
       - "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/02 Encoder-Decoder Transformer.md"
       - "Concepts/Architectures/Transformer.md"
       - "Concepts/NLP/Attention Mechanism.md"
@@ -7252,6 +7256,7 @@ assets:
     modifications: "copied without content changes"
     used_in:
       - "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md"
+      - "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md"
     metadata_status: "verified"
     provenance_confirmation: "full-transformer-source-snapshot"
     source_asset: "05 Источники/Originals/full-transformer-2026-10-21/Transformer_encoder.png"
@@ -7294,6 +7299,7 @@ assets:
     modifications: "copied without content changes"
     used_in:
       - "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md"
+      - "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md"
       - "Concepts/Architectures/Transformer.md"
       - "Concepts/NLP/Attention Mechanism.md"
       - "Concepts/NLP/Layer Normalization.md"
@@ -7393,6 +7399,7 @@ assets:
     derivation: "source-png-copy"
     used_in:
       - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md
       - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md
       - Concepts/Architectures/BERT.md
   - id: "curated-bert-893524971850"

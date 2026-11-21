@@ -5556,13 +5556,28 @@ describe('static handbook output', () => {
       'decoder_ids','two_layers','CC BY 4.0','CC BY-NC-SA 4.0'])
       expect(html).toContain(fact);
     for (const id of ["один-пример-на-всю-главу","главный-переключатель-матрица-видимости","encoder-only-построить-контекстное-представление","как-bert-учится-без-готовой-разметки","что-выходит-из-encoder","почему-encoder-неудобен-для-обычной-генерации","decoder-only-предсказать-следующий-токен","почему-из-next-token-prediction-получается-general-purpose-модель","минимальный-causal-attention-в-коде","encoderdecoder-прочитать-один-текст-написать-другой","один-шаг-перевода","teacher-forcing","t5-все-задачи-как-text-to-text","почему-слово-decoder-сбивает-с-толку","три-маски-можно-объединить-в-одной-модели","что-выбрать-на-практике","сравнение-без-рекламных-упрощений","ошибки-которые-стоит-научиться-замечать","практика-без-большого-gpu","1-нарисовать-маски","2-сравнить-representations","3-прочитать-настоящий-код","контроль-понимания","литература-и-дополнительные-материалы","основные-papers","лучшие-объяснения-и-код","связанные-заметки-базы"]) expect(html).toContain('id="'+id+'"');
-    expect(html.match(/<pre/g)).toHaveLength(8);
+    expect(html.match(/<pre data-language="python"/g)).toHaveLength(4);
     expect(html).not.toContain('katex-error');
   });
   it('routes the architecture introduction back to Transformer and forward to BERT', async () => {
     const html = await readFile(join(distDir,'textbook/transformer/encoder-decoder-patterns/index.html'),'utf8');
     expect(html).toMatch(/<strong>Назад:<\/strong>[\s\S]{0,300}href="\/textbook\/transformer\/full-transformer\/"/);
     expect(html).toMatch(/<strong>Дальше:<\/strong>[\s\S]{0,300}href="\/textbook\/models\/bert-roberta-deberta\/"/);
+  });
+  it('follows the same three architecture cases and the causal logit arithmetic in both languages', async () => {
+    for (const locale of ['', 'en/']) {
+      const page = await readFile(join(distDir,locale+'textbook/transformer/encoder-decoder-patterns/index.html'),'utf8');
+      const stages = ['id="encoder-only-bidirectional"', 'id="decoder-only-next-token"',
+        'id="causal-head-to-logits"', '0.083421', 'id="encoder-decoder-conditional"', '4\\times 5', '11.125'];
+      const offsets = stages.map(stage => page.indexOf(stage));
+      expect(offsets.every((offset,i)=>offset>=0 && (!i || offset>offsets[i-1]))).toBe(true);
+      expect(page.match(/<pre data-language="python"/g)).toHaveLength(4);
+      const headExample = locale ? 'the-query-for-cat-in-a-cat-sleeps' : 'что-видит-второй-токен-в-a-cat-sleeps';
+      const logitLinks = [...page.slice(offsets[2],offsets[3]).matchAll(/href="([^"]+)"/g)]
+        .map(match=>decodeURIComponent(match[1]));
+      expect(logitLinks).toContain('/'+locale+'textbook/transformer/masking-heads-shapes/#'+headExample);
+      expect(page).not.toContain('katex-error');
+    }
   });
   it('renders both complete Transformer models, seven originals and preserved headings', async () => {
     const html = await readFile(join(distDir,'textbook/transformer/full-transformer/index.html'),'utf8');
@@ -5595,6 +5610,21 @@ describe('static handbook output', () => {
       expect(page).toContain('href="/'+locale+'textbook/models/gpt-1/#gpt1-decoder-architecture"');
       expect(page).toContain('href="/'+locale+'textbook/transformer/from-seq2seq-to-transformer/#translation-two-reads"');
       expect(page).toContain('href="#transformer-original-figure"');
+    }
+  });
+  it('follows a translation from source positions to the generated EOS in both locales', async () => {
+    for (const locale of ['', 'en/']) {
+      const page = await readFile(join(distDir,locale+'textbook/transformer/full-transformer/index.html'),'utf8');
+      const stages = ['id="transformer-original-figure"', '0.433724', 'id="transformer-training-loss"',
+        '9.786662', '0.477611', '0.519509', 'TinyTranslation', 'TinyCausalLM'];
+      const offsets = stages.map(stage => page.indexOf(stage));
+      expect(offsets.every((offset, i) => offset >= 0 && (i === 0 || offset > offsets[i - 1]))).toBe(true);
+      const code = page.slice(page.indexOf('<code',offsets[5]),offsets[7]);
+      const trainingCheck = code.replace(/<[^>]+>/g,'');
+      expect(trainingCheck).toContain('other_target');
+      expect(trainingCheck).toContain('greedy probabilities');
+      expect(page).not.toContain('katex-error');
+      expect(page).toContain('href="/'+locale+'textbook/transformer/encoder-decoder-patterns/" rel="next"');
     }
   });
   it('renders complete positional mechanisms, six source figures and stable section anchors', async () => {

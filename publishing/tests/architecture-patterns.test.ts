@@ -7,6 +7,7 @@ import { describe, expect, it } from 'vitest';
 const root = resolve(import.meta.dirname, '../..');
 const read = (p: string) => readFileSync(resolve(root,p));
 const chapter = '00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md';
+const englishChapter = 'en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md';
 const body = read(chapter).toString();
 const specs = JSON.parse(read('publishing/tools/architecture-figures.json').toString());
 const registry = YAML.parse(read('05 Источники/asset-registry.yml').toString()).assets;
@@ -24,13 +25,13 @@ describe('architecture patterns chapter contracts', () => {
   });
   it('embeds exactly the six reviewed originals with source and licensing evidence', () => {
     expect(specs).toHaveLength(6);
-    const embedded = [...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^\]]+)\]\]/g)].map(m=>m[1]);
+    const embedded = [...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^|\]]+)\|[^\]]+\]\]/g)].map(m=>m[1]);
     expect(new Set(embedded)).toEqual(new Set(specs.map((s: any)=>s.asset)));
     for (const s of specs) {
       const rows = registry.filter((r: any)=>r.asset===s.asset);
       expect(rows).toHaveLength(1);
       const row = rows[0];
-      expect(row.used_in).toContain(chapter);
+      expect(row.used_in).toEqual(expect.arrayContaining([chapter, englishChapter]));
       for (const [key,value] of Object.entries(s)) {
         if (['name','width','height'].includes(key)) continue;
         expect(row[key]).toEqual(value);

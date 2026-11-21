@@ -2,18 +2,18 @@
 title: Decoder-only
 type: concept
 status: redirect
-last_updated: '2026-10-29'
+last_updated: '2026-11-21'
 primary_sources:
   - 'https://arxiv.org/abs/1706.03762'
   - 'https://arxiv.org/abs/2302.13971'
 canonical_topic: >-
   00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных
   паттерна.md
-canonical_heading: 'Decoder-only: предсказать следующий токен'
+canonical_heading: decoder-only-next-token
 ---
 # Decoder-only
 
-Полное объяснение: [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна#Decoder-only: предсказать следующий токен|Три архитектурных паттерна Transformer]].
+Полное объяснение: [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна#decoder-only-next-token|Причинный декодер]].
 
 <!-- Compatibility anchors for existing Obsidian and web links. -->
 <span id="decoder-only" aria-hidden="true"></span>

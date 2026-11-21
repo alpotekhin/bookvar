@@ -63,8 +63,8 @@ last_updated: 2026-11-14
 - [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V|Self-Attention — Q, K, V]]
 - [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|Маскирование, головы и формы тензоров]]
 - [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/04 Позиционная информация|Позиционная информация]]
-- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/03 Полный Transformer|Полный encoder-decoder Transformer]]
-- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектурных паттерна]]
+- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/03 Полный Transformer|Полный Transformer: энкодер и декодер]]
+- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектуры Transformer]]
 - [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa и DeBERTa]]
 - [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 — text-to-text Transformer]]
 

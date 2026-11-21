@@ -52,8 +52,9 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«Seq2Seq с фиксированным контекстом»](2026-11-21-seq2seq-editorial-pass.json),
 [«Attention для перевода»](2026-11-21-attention-translation-editorial-pass.json),
 [«Self-Attention — Q, K, V»](2026-11-21-self-attention-editorial-pass.json),
-[«Маски, несколько голов и формы тензоров»](2026-11-21-masking-heads-editorial-pass.json) и
-[«Позиционная информация»](2026-11-21-positional-information-editorial-pass.json).
-Следующая глава — «Полный Transformer». Проследить входы и выходы
-энкодера и декодера на одном переводе, включая доступ к источнику,
-сдвиг целей, вычисление потерь и генерацию до EOS.
+[«Маски, несколько голов и формы тензоров»](2026-11-21-masking-heads-editorial-pass.json),
+[«Позиционная информация»](2026-11-21-positional-information-editorial-pass.json),
+[«Полный Transformer: энкодер и декодер»](2026-11-21-full-transformer-editorial-pass.json) и
+[«Три архитектуры Transformer»](2026-11-21-architecture-patterns-editorial-pass.json).
+Следующая глава — «BERT, RoBERTa и DeBERTa». Проследить изменения в
+подготовке примеров, устройстве внимания и протоколах сравнения моделей.

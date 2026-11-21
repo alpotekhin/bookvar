@@ -1,13 +1,13 @@
 ---
-title: Building the Transformer — from the original block to BERT, GPT, and LLaMA
+title: "The complete encoder–decoder Transformer"
 type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "1db53779e4503c9cde32d5ebd21c85e4022fb70a52ec381ae5987d65ad136fef"
-translation_reviewed: "2026-11-10"
+canonical_revision: "b7c952329257a2010012abb0fa3803bdcdd6843a192230440a951db45e34a09d"
+translation_reviewed: "2026-11-21"
 translation_of: "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md"
-last_updated: 2026-11-10
+last_updated: 2026-11-21
 source_unit_id:
   - lecture-01-section-175-model-architecture
   - lecture-03-architecture-framing
@@ -24,40 +24,61 @@ previous: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/04 �
 next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]"
 ---
 
-# Building the Transformer: from the original block to BERT, GPT, and LLaMA
+# The complete encoder–decoder Transformer
 
-A translator receives `кот спит` and must produce `the cat sleeps`.
-In this teaching example, each word is one token; an actual tokenizer may
-split the words differently. The input and output need not have the same
-number of tokens. The encoder builds a representation of each source
-position. The decoder predicts the translation using both these
-representations and the beginning of the translation already available.
+The encoder receives `кот спит`, and the decoder starts the translation with `<BOS>`. Its first row does not contain `the` yet, but it can already read both positions of the source phrase. The top encoder layer supplies one vector per source position. The decoder uses those vectors when it predicts `the`, when it continues `the cat`, and when it selects `<EOS>`.
 
-In the 2017 Transformer, both parts consist of attention and feed-forward
-blocks with residual connections and normalization. Unlike a recurrent
-translator, the encoder processes all known input positions in parallel.
-During training, the decoder positions are also processed in parallel;
-during generation, the model must first produce the next token.
+Here each word stands for one token. The [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V|self-attention chapter]] defines Q, K, and V. The [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|chapter on masks and heads]] explains causal masking.
 
-BERT, GPT, and LLaMA use different inputs, connections, and training
-objectives; Section 8 compares them with the translator. Q/K/V computation
-and shapes are assumed from the
-[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V|self-attention chapter]];
-causal masking and head splitting are covered in the
-[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|chapter on attention masks and heads]].
+<a id="transformer-original-figure"></a>
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-gpt-bridge-2026-11-10/vaswani-transformer-figure1.png|The encoder on the left reads the source; the decoder on the right reads the shifted target and encoder output]]
+
+*The original Transformer. Read the right-hand block from bottom to top:
+shifted target → causal self-attention → cross-attention → FFN. Three
+arrows enter the middle attention block: two from the encoder (K and V)
+and one from the decoder (Q). The output projection and softmax sit
+above the stack, not inside each layer. Ashish Vaswani et al.,
+[Attention Is All You Need, Figure 1](https://arxiv.org/html/1706.03762v7#S3.F1).
+Unmodified figure, reproduced under [Google's permission notice](https://arxiv.org/html/1706.03762v7#p1.1).*
+
+<a id="4-positional-information"></a>
+
+## Embeddings and positions
+
+Give `кот` and `спит` IDs 3 and 4, EOS ID 2, and PAD ID 0. The encoder
+receives `[3,4,2,0]`. The decoder uses the same vocabulary but numbers
+its input positions separately, starting at zero. For a shared vocabulary
+$V$, the table $E\in\mathbb R^{|V|\times d}$ stores a learned vector for
+each token. Looking up rows for input `[B,T]` yields `[B,T,d]`. The
+2017 Transformer adds a fixed sinusoidal vector to the scaled embedding:
+
+$$
+h_i^{(0)}=\operatorname{Dropout}\big(\sqrt d\,E[t_i]+PE_i\big).
+$$
+
+At $d=4$, embedding $(1,0,0,0)$ at position 0 becomes $(2,1,0,1)$ before
+dropout: the scaled token is $(2,0,0,0)$, and the position-0 sinusoidal
+encoding is $(0,1,0,1)$. PE is added **once at the bottom of each stack**,
+not again after every block.
+
+In full, unmasked self-attention without position features, permuting
+input rows permutes output rows in the same way. A causal mask already
+breaks this symmetry: positions have different prefixes. The symmetry check, learned positions, Shaw, T5, RoPE, and
+ALiBi are covered in the
+[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/04 Позиционная информация|previous chapter]].
+
+<a id="5-the-original-encoder-block"></a>
+
+## The encoder: source states
 
 <a id="architecture-lineage"></a>
 
-## 1. The central decomposition
+<a id="1-the-central-decomposition"></a>
 
-Suppose that after the first attention layer, the vector for `кот` already
-depends on `спит`. This vector contains a mixture of features extracted
-from the phrase. A feed-forward network, or FFN, transforms its coordinates:
-it expands the representation, applies a nonlinearity, and returns to the
-original width. It applies the same network with the same weights to the
-state of `спит`. A different Transformer layer has its own FFN.
+In the first layer, self-attention lets the vector for `кот` pick up information from `спит`. The feed-forward network (FFN) then transforms that vector. It uses the same weights for `спит`, but on a different input. Both sublayers return one row of width $d$ per token. The next attention layer projects its queries, keys, and values from these new rows rather than from the original token embeddings.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/Transformer_encoder.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/Transformer_encoder.png|Two token states pass through self-attention and then through one FFN per position]]
 
 *The two encoder sublayers. Self-attention connects positions; the FFN
 processes each resulting vector independently. This simplified diagram does
@@ -65,30 +86,49 @@ not show residual connections or normalization.
 Source: Jay Alammar, [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/),
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
 
-Given input `[B,T,d]`, both sublayers return `[B,T,d]`. Their internal
-computations differ: the attention-weight matrix has two position axes,
-while the FFN's hidden representation has one position axis and an
-expanded feature axis. The FFN does not directly read neighboring rows.
-It receives a vector that already contains context, and its result can
-affect neighbors through the next layer's attention.
+Let $H^{(0)}$ contain the source embeddings plus positions. At layer
+$\ell$, the encoder first performs full multi-head self-attention, then an FFN:
 
-Softmax makes attention nonlinear. The claim that “we need the FFN because
-attention is linear” is therefore incorrect. The FFN adds a learned
-nonlinear feature transformation at each position. Without the activation
-between its two linear layers, the FFN could be collapsed into one affine
-layer, as the example below shows.
+$$
+\begin{aligned}
+H&=H^{(\ell-1)},\\
+A&=\operatorname{MHA}_{\ell}(H,H,H),\\
+U&=\operatorname{LN}_{\ell,1}(H+\operatorname{Dropout}(A)),\\
+F&=\operatorname{FFN}_{\ell}(U),\\
+H^{(\ell)}&=\operatorname{LN}_{\ell,2}(U+\operatorname{Dropout}(F)).
+\end{aligned}
+$$
 
-## 2. The residual stream
+MHA's arguments identify the sources of Q, K, and V before learned
+projections. “Full” means that every real position may read every real
+position in the source phrase. PAD keys are excluded by a mask. The
+translator's encoder needs no causal mask: the entire source is already known.
 
-For a row $x$, attention or the FFN computes an update $F(x)$ of the same
-width. A residual connection adds it to the input. For example,
-$x=(1,2,3,4)$ and $F(x)=(0,1,0,-1)$ give $(1,3,3,3)$. A sublayer can change
-some features while preserving others through direct addition. It does
-not have to reproduce the entire input vector.
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/The_transformer_encoder_decoder_stack.png|The top encoder passes source states to multiple decoder layers]]
 
-In the original paper, LayerNorm follows the addition. Normalization acts
-on the coordinates of **each row separately**, without mixing tokens or
-examples:
+*Encoder and decoder stacks. Position states, not token IDs, pass between
+blocks. Arrows from the top encoder block lead to cross-attention in every
+decoder block.
+Source: Jay Alammar, [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/),
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
+
+Transformer Base has six encoder blocks and six decoder blocks, $d=512$,
+eight heads of width 64, and FFN width 2048. Blocks have the same structure
+but **different parameters**. Repeatedly applying one `Block` object
+would share weights across depth; an ordinary stack creates separate instances.
+
+The result $M=H^{(N)}$ has shape `[B,T_src,d]`. Source length is preserved:
+the encoder does not compress the phrase into a single vector like the
+fixed context of early Seq2Seq. All rows of $M$ remain available to
+decoder attention.
+
+<a id="2-the-residual-stream"></a>
+
+### Residual addition and LayerNorm
+
+Each sublayer returns one update vector per input position. Write $F(x)$ for the update at a position with input vector $x$; attention can also use other positions to compute it. The residual connection adds the two vectors. For example, $x=(1,2,3,4)$ and $F(x)=(0,1,0,-1)$ give $(1,3,3,3)$.
+
+In the original model, LayerNorm receives this sum. With $\gamma=1$, $\beta=0$, and small $\epsilon$, it maps $(1,3,3,3)$ to $(-1.7321,0.5774,0.5774,0.5774)$. The mean and variance are computed within each row, without mixing positions or examples. For a row $x$ entering LayerNorm:
 
 $$
 \begin{aligned}
@@ -105,7 +145,7 @@ approximately $(-1.3416,-0.4472,0.4472,1.3416)$. The parameters $\gamma,\beta$
 are learned: normalization does not permanently fix the features' scale
 and offset.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_resideual_layer_norm_2.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_resideual_layer_norm_2.png|Each source position has residual addition and normalization after attention and the FFN]]
 
 *A post-norm encoder for two positions. The dashed path carries the input
 to the addition with the sublayer output; LayerNorm follows the sum.
@@ -114,7 +154,7 @@ not two separate normalizations.
 Source: Jay Alammar, [The Illustrated Transformer, The Residuals](https://jalammar.github.io/illustrated-transformer/#the-residuals),
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
 
-The order of operations distinguishes post-norm from pre-norm:
+The two paths meet at Add & Normalize. The 2017 model normalizes the sum (post-norm). In pre-norm, the normalization is on the sublayer path before the addition:
 
 $$
 \begin{aligned}
@@ -143,14 +183,351 @@ the explanatory text reproduces that formula, but `SublayerConnection`
 computes pre-norm; the authors note this in its docstring. The code has
 another difference: `std` with its default correction and $\epsilon$
 outside the square root do not match the LayerNorm formula above.
-The implementation below therefore uses `nn.LayerNorm`; the paper's
-diagram and the tutorial's code are not treated as identical.
+The example below uses `nn.LayerNorm` after the residual addition, matching Figure 1.
 
 During training, the original Transformer applies dropout to the sublayer
 output **before residual addition**. The sum of token and position
 embeddings also passes through dropout. Dropout is disabled in `eval()`.
 Normalization and gradient propagation are discussed further in the
 [[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections|chapter on initialization and normalization]].
+
+<a id="3-feed-forward-network"></a>
+
+### The FFN at one position
+
+The original FFN consists of two affine transformations with ReLU between them:
+
+$$
+\begin{aligned}
+u&=xW_1+b_1,& W_1&\in\mathbb R^{d\times d_{ff}},\\
+a&=\max(0,u),\\
+\operatorname{FFN}(x)&=aW_2+b_2,
+& W_2&\in\mathbb R^{d_{ff}\times d}.
+\end{aligned}
+$$
+
+Transformer Base uses $d=512$ and $d_{ff}=2048$. Expansion produces 2048
+intermediate features; ReLU retains positive coordinates, and $W_2$
+combines them into 512 output coordinates. Different tokens activate
+different intermediate coordinates even though the matrices are shared.
+
+Take $d=2$, $d_{ff}=3$, and row vectors:
+
+$$
+\begin{aligned}
+W_1&=\begin{pmatrix}1&-1&0\\0&1&1\end{pmatrix},
+\quad b_1=(0,1,0),\\
+W_2&=\begin{pmatrix}1&2\\3&4\\5&6\end{pmatrix},
+\quad b_2=0.
+\end{aligned}
+$$
+
+For $x=(1,-2)$, the first step gives $u=(1,-2,-2)$. ReLU leaves $(1,0,0)$,
+and the output is $(1,2)$. For $x'=(-1,2)$, the same FFN produces
+$u'=(-1,4,2)$, then $(0,4,2)$, and finally $(22,28)$. The two positions
+activate different combinations of intermediate features. Changing only
+the second input row does not change the FFN's first output row.
+
+Attention has its own nonlinearity in softmax. The FFN adds a learned transformation of the features that attention has combined. Without ReLU, the expression would expand to
+$x(W_1W_2)+(b_1W_2+b_2)$, an ordinary affine map. With ReLU, the effective
+matrix depends on which coordinates of $u$ are positive. In the first
+example, the derivative does not pass through the second and third
+intermediate coordinates. The sum of the two outputs depends on the
+active first coordinate as $1u_1+2u_1=3u_1$, and $u_1=x_1$. Its gradient
+with respect to the input is therefore $(3,0)$. Gradients with respect to
+$W_1$ and $W_2$ also pass through the first intermediate coordinate; the
+input numbers themselves are not updated in this example.
+
+```python
+import torch
+import torch.nn.functional as F
+
+x = torch.tensor([[1., -2.], [-1., 2.]], requires_grad=True)
+w1 = torch.tensor([[1., -1., 0.], [0., 1., 1.]])
+b1 = torch.tensor([0., 1., 0.])
+w2 = torch.tensor([[1., 2.], [3., 4.], [5., 6.]])
+u = x @ w1 + b1
+y = u.relu() @ w2
+torch.testing.assert_close(y, torch.tensor([[1., 2.], [22., 28.]]))
+y[0].sum().backward()
+torch.testing.assert_close(x.grad, torch.tensor([[3., 0.], [0., 0.]]))
+print(u.detach(), y.detach(), x.grad)
+```
+
+Ignoring biases, the FFN contains $2dd_{ff}$ parameters. At $d_{ff}=4d$,
+that is $8d^2$, compared with $4d^2$ for ordinary MHA whose heads have
+combined width $d$. In one encoder block, the FFN accounts for two thirds
+of these projection weights. A decoder block also contains cross-attention,
+so its FFN accounts for one half, not two thirds. Embedding tables are not
+included in this count.
+
+Position-wise FFNs and weight sharing across positions are explained in
+[Vaswani et al., §3.3](https://arxiv.org/html/1706.03762v7#S3.SS3) and
+[D2L, Transformer](https://d2l.ai/chapter_attention-mechanisms-and-transformers/transformer.html#positionwise-feed-forward-networks).
+
+<a id="6-the-original-decoder-block"></a>
+
+<a id="transformer-cross-attention"></a>
+
+## The decoder: the target prefix and the source
+
+The [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer#translation-two-reads|recurrent translator]] used the previous decoder state as
+its query. Here each target position forms its query after causal
+self-attention over the known target tokens. In both cases the keys
+and values come from the source representations.
+
+For state $D$, one post-norm block makes three successive updates:
+
+$$
+\begin{aligned}
+A&=\operatorname{MHA}_{self}(D,D,D),\\
+U&=\operatorname{LN}_1(D+\operatorname{Dropout}(A)),\\
+B&=\operatorname{MHA}_{cross}(U,M,M),\\
+C&=\operatorname{LN}_2(U+\operatorname{Dropout}(B)),\\
+F&=\operatorname{FFN}(C),\\
+D'&=\operatorname{LN}_3(C+\operatorname{Dropout}(F)).
+\end{aligned}
+$$
+
+Self-attention uses a causal mask over target positions. Cross-attention
+may read the entire real source text. A triangular mask would be
+inappropriate there: translation position 1 may need the last source
+word. Source and target lengths need not even match.
+
+For one cross-attention head:
+
+$$
+\begin{aligned}
+Q&=UW_Q\in\mathbb R^{T_{tgt}\times d_h},\\
+K&=MW_K\in\mathbb R^{T_{src}\times d_h},\\
+V&=MW_V\in\mathbb R^{T_{src}\times d_h}.
+\end{aligned}
+$$
+
+The score matrix has shape $T_{tgt}\times T_{src}$. It determines which
+source positions contribute to each target row. Every decoder block has
+its own $W_K,W_V$: memory $M$ is shared, but its projections need not be
+the same across layers.
+
+In a numerical example, the projections produce two queries and three
+keys, with the last key corresponding to PAD:
+
+$$
+\begin{aligned}
+Q&=\begin{pmatrix}1&0\\0&\sqrt2\ln3\end{pmatrix},\\
+K&=\begin{pmatrix}\sqrt2\ln2&0\\0&1\\100&100\end{pmatrix},\\
+V&=\begin{pmatrix}2&0\\0&3\\100&100\end{pmatrix}.
+\end{aligned}
+$$
+
+After division by $\sqrt2$ and exclusion of PAD, the first row's scores
+are $(\ln2,0,-\infty)$. Their exponentials are proportional to $(2,1,0)$,
+the weights are $(2/3,1/3,0)$, and the context is $(4/3,1)$.
+For the second row, scores $(0,\ln3,-\infty)$ give weights $(1/4,3/4,0)$
+and context $(1/2,9/4)$. The two queries use the same source values in
+different proportions. Even very large numbers in the PAD row do not
+affect the context.
+
+```python
+import math
+import torch
+
+q = torch.tensor([[1., 0.], [0., math.sqrt(2)*math.log(3)]],
+                 dtype=torch.float64)
+k = torch.tensor([[math.sqrt(2)*math.log(2), 0.],
+                  [0., 1.], [100., 100.]], dtype=q.dtype)
+v = torch.tensor([[2., 0.], [0., 3.], [100., 100.]], dtype=q.dtype)
+scores = (q @ k.T / math.sqrt(2)).masked_fill(
+    torch.tensor([[False, False, True]]), -torch.inf)
+a = scores.softmax(-1)
+context = a @ v
+torch.testing.assert_close(a, torch.tensor(
+    [[2/3, 1/3, 0.], [1/4, 3/4, 0.]], dtype=q.dtype))
+torch.testing.assert_close(context, torch.tensor(
+    [[4/3, 1.], [1/2, 9/4]], dtype=q.dtype))
+print(a, context)
+```
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/full-transformer-2026-10-21/transformer_resideual_layer_norm_3.png|Two encoder sublayers and three decoder sublayers, each with residual addition and normalization]]
+
+*Each decoder block has three sublayers and three residual connections;
+an encoder block has two. The left side shows two source positions, and
+the right side shows target-position representations. Decoder
+self-attention must be causal, although the diagram labels it simply
+Self-Attention.
+Source: Jay Alammar, [The Illustrated Transformer, The Residuals](https://jalammar.github.io/illustrated-transformer/#the-residuals),
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
+
+The implementation lets us check this for the first query. The encoder receives `кот спит <EOS> <PAD>` and returns memory of shape `[1,4,8]`. The first decoder row queries it using the state built from `<BOS>`. Before training, the four source weights in the first head of the first decoder layer are $(0.433724, 0.248209, 0.318067, 0)$. The PAD row makes no direct contribution, regardless of its values. The source EOS is a real token in this example, so the third row can be read. These weights are over **source positions**. The probabilities over **vocabulary tokens** come later, from the final decoder block's output.
+
+<a id="from-a-decoder-state-to-a-distribution"></a>
+
+## Logits and token probabilities
+
+The output layer applies $z_i=h_iW_{out}+b_{out}$ to every row $h_i$ from
+the last decoder block. Each column of $W_{out}$ corresponds to a vocabulary
+token, so softmax normalizes the row over those tokens. The `<BOS>` row
+gives probabilities for the first token; the `cat` row gives probabilities
+for the continuation of `<BOS> the cat`.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_decoder_output_softmax.png|The output projection produces vocabulary scores and the most probable token is selected]]
+
+*The output vector is expanded to vocabulary size. The diagram selects
+the index with maximum probability: greedy decoding. The label log_probs
+corresponds to log-softmax, while the box is named Softmax. Both give the
+same argmax index, but probabilities and log-probabilities are different
+values. The code below passes raw logits to cross-entropy.
+Source: Jay Alammar, [The Illustrated Transformer, The Final Linear and Softmax Layer](https://jalammar.github.io/illustrated-transformer/#the-final-linear-and-softmax-layer),
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
+
+For an example, restrict the output vocabulary to three tokens: `cat`,
+`sleeps`, and `<EOS>`. With state $h=(1,2)$ and columns of $W_{out}$
+equal to $(1,0)$, $(0,1)$, and $(-1,0)$, the logits are $(1,2,-1)$.
+The normalizing sum is $e^1+e^2+e^{-1}$; the probabilities are approximately
+$(0.259496,0.705385,0.035119)$. For the correct token `sleeps`, loss
+$-\ln p$ is $0.349012$.
+
+The derivative with respect to logits is $p-\mathrm{onehot}(\text{target})$:
+$(0.259496,-0.294615,0.035119)$. A gradient-descent step increases the
+correct logit and decreases the others if these three numbers are
+optimized directly. A network optimizes weights: the gradient passes
+through $W_{out}$ into the last block, cross-attention, encoder memory,
+and embedding tables.
+
+In the original paper, one matrix is shared between the source table,
+target table, and output projection when using a shared vocabulary.
+Then $W_{out}=E^\top$, and gradients from every use add together.
+Equal matrix dimensions do not themselves establish sharing: the code
+must use one parameter object, not two copies of its numbers.
+
+<a id="7-training-and-generation"></a>
+
+## Training on a known translation
+
+<a id="shifting-the-target-sequence-and-applying-masks"></a>
+
+### Shifting targets and masking future tokens
+
+A training example contains the complete reference translation. Two slices give the decoder inputs and the targets: drop the last token for the inputs and the first token for the targets. This is teacher forcing: each prediction uses the reference prefix. In [The Annotated Transformer, Batches and Masking](https://nlp.seas.harvard.edu/annotated-transformer/#batches-and-masking), the `Batch` class performs the shift, builds the masks, and counts valid targets.
+
+```text
+position:         0       1       2       3
+decoder input:  <BOS>    the     cat    sleeps
+target:          the    cat    sleeps   <EOS>
+```
+
+Row 2 receives `cat` and must predict `sleeps`. Its self-attention may
+read positions 0, 1, and 2. The token `sleeps` is already present at input
+row 3, but the causal mask prevents reading it. Without shifting, the
+target token would occupy the same row; a triangular mask alone would
+not prevent that leakage.
+
+All decoder layers preserve causal connections. The FFN and LayerNorm
+act on one position and add no future connections. Cross-attention reads
+only the source, so it does not expose future translation tokens either.
+All four distributions can be computed in parallel and trained using
+the sum or mean of their losses.
+
+With padding, encoder self-attention and cross-attention both exclude source PAD keys. Decoder self-attention excludes target PAD keys as well as future positions. The loss ignores rows whose label is PAD. A key mask need
+not zero PAD-query states: these rows may be nonzero, but must not affect
+real positions or the loss.
+
+For logits $z_{bt}$ and targets $y_{bt}$, use the mean loss over $n$
+real target tokens:
+
+$$
+\mathcal L=-\frac1n\sum_{(b,t):\,y_{bt}\ne PAD}
+\log\operatorname{softmax}(z_{bt})_{y_{bt}}.
+$$
+
+EOS contributes to this sum: the model learns to stop. BOS starts the
+prefix, but is not an additional target in this layout.
+
+<a id="transformer-training-loss"></a>
+
+### Loss over four target tokens
+
+In the example with a shared ten-token vocabulary, memory has shape `[1,4,8]`, the decoder input has shape `[1,5]`, cross-attention has shape `[1,2,5,4]`, and logits have shape `[1,5,10]`. For each of the four targets, `the cat sleeps <EOS>`, we take the correct token's probability from its row. Before training the `<BOS>` row gives `the` a logit of $-4.961152$. Softmax over ten classes gives $p(\texttt{the})\approx5.619617\cdot10^{-5}$, so the first loss is $-\ln p=9.786662$.
+
+With the specified seed on CPU in float64, the correct-token probabilities
+and losses before the training step are:
+
+| Target | Probability | $-\ln p$ |
+| --- | ---: | ---: |
+| `the` | $5.619617\cdot10^{-5}$ | 9.786662 |
+| `cat` | $9.737951\cdot10^{-3}$ | 4.631725 |
+| `sleeps` | $1.880076\cdot10^{-5}$ | 10.881613 |
+| `<EOS>` | $5.502324\cdot10^{-6}$ | 12.110340 |
+
+The four losses sum to approximately 37.410340, with mean 9.352585.
+The fifth row takes `<EOS>` as input and `<PAD>` as its label. The
+label is excluded, so the fifth element of `token_losses` is zero.
+Dividing by all five elements would give 7.482068, so an ordinary
+`token_losses.mean()` is not the same as cross-entropy with
+`ignore_index`. The denominator is the number of real targets, not the
+padded tensor's length. After one SGD step, the same example's mean loss
+falls to 8.497538.
+
+PAD nevertheless remains one of the ten output softmax classes.
+`ignore_index=PAD` excludes a target position; it does not remove the PAD
+logit from the denominator at other positions. These are distinct
+operations in the [CrossEntropyLoss formula](https://docs.pytorch.org/docs/2.14/generated/torch.nn.CrossEntropyLoss.html).
+The output projection can therefore send a gradient to the PAD row of
+the shared table E, even though source PAD keys are not read. This is
+not information leaking from padding: an output-class weight is changing.
+
+A gradient for the first encoder block's query projection demonstrates
+the path from translation error through the decoder and cross-attention
+into the encoder. Checking only `head.weight.grad` is insufficient:
+the output layer could train even if memory had accidentally been detached.
+One loss-reducing step does not mean that the model has learned to
+translate or generalize.
+
+<a id="autoregressive-inference"></a>
+
+## Generation until EOS
+
+At inference, the decoder starts with BOS. It uses the last row of its output to select a token and appends that token before the next call.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_decoding_2.gif|After each translation step the chosen token returns to the decoder input while the encoder output stays fixed]]
+
+*Repeated decoder steps with a growing target prefix. The source phrase
+has already been encoded; each newly selected token returns as input at
+the bottom. The author's animation is reproduced without changing frames.
+Source: Jay Alammar, [The Illustrated Transformer, The Decoder Side](https://jalammar.github.io/illustrated-transformer/#the-decoder-side),
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
+
+Training and generation use the same decoder. With weights fixed and the model in `eval()` mode, inputting only `<BOS>` gives the same first-row logits as a single pass with the full reference translation. Changing all the decoder inputs after BOS leaves the first logits unchanged. Changing the first source word changes them, because the BOS query still reads the encoder. If the model selects a token other than `the`, the next step continues that prefix. In the example model with random weights, BOS itself has the highest score in the first row.
+
+After 80 SGD steps on the same pair, the model memorizes it. Each input below is formed by appending the model's previous choice. This is a greedy trace: each probability belongs to the chosen token, not to the entire translation.
+
+| Decoder input | Chosen token | Probability |
+| --- | --- | ---: |
+| `<BOS>` | `the` | 0.477611 |
+| `<BOS> the` | `cat` | 0.579427 |
+| `<BOS> the cat` | `sleeps` | 0.389943 |
+| `<BOS> the cat sleeps` | `<EOS>` | 0.519509 |
+
+The loop stops when it chooses EOS. This experiment checks the computation, not the model's ability to translate new sentences. [Vaswani et al., §6.1](https://arxiv.org/html/1706.03762v7#S6.SS1) translated with beam size 4 rather than greedy decoding.
+
+An implementation can retain encoder memory instead of rerunning the
+encoder. Cross-attention K/V also remain fixed during one translation,
+although they differ across decoder layers. The decoder's own KV cache
+retains K/V for processed target positions. Causal masking keeps earlier decoder states unchanged when another token is appended. Equivalence to full recomputation assumes eval mode
+and the same positions and masks.
+
+Caching reduces repeated computation; the next unknown token still
+depends on the token just selected. Neither masking nor parallel
+training makes ordinary autoregressive generation a single pass. The example uses no cache: `decode` recomputes the entire prefix.
+
+<a id="summary"></a>
+
+In the translator, one stack processes the source and the other processes the target prefix. The [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|next chapter]] compares that setup with models that use one stack: bidirectional in BERT and causal in GPT.
+
+## Implementation and further details
+
+<details>
+<summary>Dropout on attention weights, branch outputs and embeddings</summary>
 
 <!-- BEGIN REVIEW: Transformer dropout 2026-10-29 -->
 
@@ -248,400 +625,18 @@ requirement for all later Transformer models.
 
 <!-- END REVIEW: Transformer dropout 2026-10-29 -->
 
-## 3. Feed-forward network
+</details>
 
-The original FFN consists of two affine transformations with ReLU between them:
+<details>
+<summary>Translator implementation and generation check</summary>
 
-$$
-\begin{aligned}
-u&=xW_1+b_1,& W_1&\in\mathbb R^{d\times d_{ff}},\\
-a&=\max(0,u),\\
-\operatorname{FFN}(x)&=aW_2+b_2,
-& W_2&\in\mathbb R^{d_{ff}\times d}.
-\end{aligned}
-$$
+<a id="a-complete-forward-pass-and-one-training-step"></a>
 
-Transformer Base uses $d=512$ and $d_{ff}=2048$. Expansion produces 2048
-intermediate features; ReLU retains positive coordinates, and $W_2$
-combines them into 512 output coordinates. Different tokens activate
-different intermediate coordinates even though the matrices are shared.
-
-Take $d=2$, $d_{ff}=3$, and row vectors:
-
-$$
-\begin{aligned}
-W_1&=\begin{pmatrix}1&-1&0\\0&1&1\end{pmatrix},
-\quad b_1=(0,1,0),\\
-W_2&=\begin{pmatrix}1&2\\3&4\\5&6\end{pmatrix},
-\quad b_2=0.
-\end{aligned}
-$$
-
-For $x=(1,-2)$, the first step gives $u=(1,-2,-2)$. ReLU leaves $(1,0,0)$,
-and the output is $(1,2)$. For $x'=(-1,2)$, the same FFN produces
-$u'=(-1,4,2)$, then $(0,4,2)$, and finally $(22,28)$. The two positions
-activate different combinations of intermediate features. Changing only
-the second input row does not change the FFN's first output row.
-
-Without ReLU, the expression would expand to
-$x(W_1W_2)+(b_1W_2+b_2)$, an ordinary affine map. With ReLU, the effective
-matrix depends on which coordinates of $u$ are positive. In the first
-example, the derivative does not pass through the second and third
-intermediate coordinates. The sum of the two outputs depends on the
-active first coordinate as $1u_1+2u_1=3u_1$, and $u_1=x_1$. Its gradient
-with respect to the input is therefore $(3,0)$. Gradients with respect to
-$W_1$ and $W_2$ also pass through the first intermediate coordinate; the
-input numbers themselves are not updated in this example.
-
-```python
-import torch
-import torch.nn.functional as F
-
-x = torch.tensor([[1., -2.], [-1., 2.]], requires_grad=True)
-w1 = torch.tensor([[1., -1., 0.], [0., 1., 1.]])
-b1 = torch.tensor([0., 1., 0.])
-w2 = torch.tensor([[1., 2.], [3., 4.], [5., 6.]])
-u = x @ w1 + b1
-y = u.relu() @ w2
-torch.testing.assert_close(y, torch.tensor([[1., 2.], [22., 28.]]))
-y[0].sum().backward()
-torch.testing.assert_close(x.grad, torch.tensor([[3., 0.], [0., 0.]]))
-print(u.detach(), y.detach(), x.grad)
-```
-
-Ignoring biases, the FFN contains $2dd_{ff}$ parameters. At $d_{ff}=4d$,
-that is $8d^2$, compared with $4d^2$ for ordinary MHA whose heads have
-combined width $d$. In one encoder block, the FFN accounts for two thirds
-of these projection weights. A decoder block also contains cross-attention,
-so its FFN accounts for one half, not two thirds. Embedding tables are not
-included in this count.
-
-Gated FFNs change the mapping itself. In SwiGLU, one projection supplies
-a multiplier for another:
-
-$$
-\begin{aligned}
-g&=\operatorname{SiLU}(xW_g),\\
-u&=xW_u,\\
-\operatorname{SwiGLU}(x)&=(g\odot u)W_d.
-\end{aligned}
-$$
-
-Here $\operatorname{SiLU}(z)=z\,\sigma(z)$. There are three matrices instead
-of two. Matching the parameter count of a ReLU FFN of width $4d$ gives
-$3dm\approx8d^2$, or $m\approx8d/3$, before implementation-specific
-rounding. The SiLU multiplier is not bounded to $[0,1]$ and can be
-negative: it is not the probability that a gate is open. This variant is
-introduced here for comparison with LLaMA; the 2017 model uses ReLU.
-Position-wise FFNs and weight sharing across positions are explained in
-[Vaswani et al., §3.3](https://arxiv.org/html/1706.03762v7#S3.SS3) and
-[D2L, Transformer](https://d2l.ai/chapter_attention-mechanisms-and-transformers/transformer.html#positionwise-feed-forward-networks).
-
-## 4. Positional information
-
-The encoder and decoder begin with integer IDs. For a shared vocabulary
-$V$, the table $E\in\mathbb R^{|V|\times d}$ stores a learned vector for
-each token. Looking up rows for input `[B,T]` yields `[B,T,d]`. The
-2017 Transformer adds a fixed sinusoidal vector to the scaled embedding:
-
-$$
-h_i^{(0)}=\operatorname{Dropout}\big(\sqrt d\,E[t_i]+PE_i\big).
-$$
-
-At $d=4$, embedding $(1,0,0,0)$ at position 0 becomes $(2,1,0,1)$ before
-dropout: the scaled token is $(2,0,0,0)$, and the position-0 sinusoidal
-encoding is $(0,1,0,1)$. Source and target sequences have their own
-position numbering. PE is added **once at the bottom of each stack**,
-not again after every block.
-
-In full, unmasked self-attention without position features, permuting
-input rows permutes output rows in the same way. A causal mask already
-breaks this symmetry: positions have different prefixes. It is therefore
-incorrect to say that *every* model without separate PE cannot distinguish
-order at all. The symmetry check, learned positions, Shaw, T5, RoPE, and
-ALiBi are covered in the
-[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/04 Позиционная информация|previous chapter]].
-
-Early GPT and BERT also add learned absolute positions at the bottom.
-LLaMA's RoPE instead rotates Q and K inside each attention layer.
-Adding the original Transformer's sinusoidal sum to such a block would
-introduce another positional mechanism and change the model.
-
-## 5. The original encoder block
-
-Let $H^{(0)}$ contain the source embeddings plus positions. At layer
-$\ell$, the encoder first performs full multi-head self-attention, then an FFN:
-
-$$
-\begin{aligned}
-H&=H^{(\ell-1)},\\
-A&=\operatorname{MHA}_{\ell}(H,H,H),\\
-U&=\operatorname{LN}_{\ell,1}(H+\operatorname{Dropout}(A)),\\
-F&=\operatorname{FFN}_{\ell}(U),\\
-H^{(\ell)}&=\operatorname{LN}_{\ell,2}(U+\operatorname{Dropout}(F)).
-\end{aligned}
-$$
-
-MHA's arguments identify the sources of Q, K, and V before learned
-projections. “Full” means that every real position may read every real
-position in the source phrase. PAD keys are excluded by a mask. The
-translator's encoder needs no causal mask: the entire source is already known.
-
-After the first attention operation, the row for `кот` may depend on
-`спит`. The following FFN transforms this contextual row. Attention in
-the second layer receives the transformed representations of both
-positions, not the original vocabulary embeddings. Depth thus combines
-the outputs of successive sublayers.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/The_transformer_encoder_decoder_stack.png]]
-
-*Encoder and decoder stacks. Position states, not token IDs, pass between
-blocks. Arrows from the top encoder block lead to cross-attention in every
-decoder block.
-Source: Jay Alammar, [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/),
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
-
-Transformer Base has six encoder blocks and six decoder blocks, $d=512$,
-eight heads of width 64, and FFN width 2048. Blocks have the same structure
-but **different parameters**. Repeatedly applying one `Block` object
-would share weights across depth; an ordinary stack creates separate instances.
-
-The result $M=H^{(N)}$ has shape `[B,T_src,d]`. Source length is preserved:
-the encoder does not compress the phrase into a single vector like the
-fixed context of early Seq2Seq. All rows of $M$ remain available to
-decoder attention.
-
-## 6. The original decoder block
-
-The first target state is built from `<BOS>`. It does not yet contain
-the selected token `the`. Masked self-attention processes the known
-target prefix, then cross-attention reads memory $M$. The FFN transforms
-each target row afterward.
-
-<a id="transformer-original-figure"></a>
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/transformer-gpt-bridge-2026-11-10/vaswani-transformer-figure1.png|The encoder on the left reads the source; the decoder on the right reads the shifted target and encoder output]]
-
-*The original Transformer. Read the right-hand block from bottom to top:
-shifted target → causal self-attention → cross-attention → FFN. Three
-arrows enter the middle attention block: two from the encoder (K and V)
-and one from the decoder (Q). The output projection and softmax sit
-above the stack, not inside each layer. Ashish Vaswani et al.,
-[Attention Is All You Need, Figure 1](https://arxiv.org/html/1706.03762v7#S3.F1).
-Unmodified figure, reproduced under [Google's permission notice](https://arxiv.org/html/1706.03762v7#p1.1).*
-
-The [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer#translation-two-reads|recurrent translator]] used the previous decoder state as
-its query. Here each target position forms its query after causal
-self-attention over the known target tokens. In both cases the keys
-and values come from the source representations.
-
-For state $D$, one post-norm block makes three successive updates:
-
-$$
-\begin{aligned}
-A&=\operatorname{MHA}_{self}(D,D,D),\\
-U&=\operatorname{LN}_1(D+\operatorname{Dropout}(A)),\\
-B&=\operatorname{MHA}_{cross}(U,M,M),\\
-C&=\operatorname{LN}_2(U+\operatorname{Dropout}(B)),\\
-F&=\operatorname{FFN}(C),\\
-D'&=\operatorname{LN}_3(C+\operatorname{Dropout}(F)).
-\end{aligned}
-$$
-
-Self-attention uses a causal mask over target positions. Cross-attention
-may read the entire real source text. A triangular mask would be
-inappropriate there: translation position 1 may need the last source
-word. Source and target lengths need not even match.
-
-For one cross-attention head:
-
-$$
-\begin{aligned}
-Q&=UW_Q\in\mathbb R^{T_{tgt}\times d_h},\\
-K&=MW_K\in\mathbb R^{T_{src}\times d_h},\\
-V&=MW_V\in\mathbb R^{T_{src}\times d_h}.
-\end{aligned}
-$$
-
-The score matrix has shape $T_{tgt}\times T_{src}$. It determines which
-source positions contribute to each target row. Every decoder block has
-its own $W_K,W_V$: memory $M$ is shared, but its projections need not be
-the same across layers.
-
-In a numerical example, the projections produce two queries and three
-keys, with the last key corresponding to PAD:
-
-$$
-\begin{aligned}
-Q&=\begin{pmatrix}1&0\\0&\sqrt2\ln3\end{pmatrix},\\
-K&=\begin{pmatrix}\sqrt2\ln2&0\\0&1\\100&100\end{pmatrix},\\
-V&=\begin{pmatrix}2&0\\0&3\\100&100\end{pmatrix}.
-\end{aligned}
-$$
-
-After division by $\sqrt2$ and exclusion of PAD, the first row's scores
-are $(\ln2,0,-\infty)$. Their exponentials are proportional to $(2,1,0)$,
-the weights are $(2/3,1/3,0)$, and the context is $(4/3,1)$.
-For the second row, scores $(0,\ln3,-\infty)$ give weights $(1/4,3/4,0)$
-and context $(1/2,9/4)$. The two queries use the same source values in
-different proportions. Even very large numbers in the PAD row do not
-affect the context.
-
-```python
-import math
-import torch
-
-q = torch.tensor([[1., 0.], [0., math.sqrt(2)*math.log(3)]],
-                 dtype=torch.float64)
-k = torch.tensor([[math.sqrt(2)*math.log(2), 0.],
-                  [0., 1.], [100., 100.]], dtype=q.dtype)
-v = torch.tensor([[2., 0.], [0., 3.], [100., 100.]], dtype=q.dtype)
-scores = (q @ k.T / math.sqrt(2)).masked_fill(
-    torch.tensor([[False, False, True]]), -torch.inf)
-a = scores.softmax(-1)
-context = a @ v
-torch.testing.assert_close(a, torch.tensor(
-    [[2/3, 1/3, 0.], [1/4, 3/4, 0.]], dtype=q.dtype))
-torch.testing.assert_close(context, torch.tensor(
-    [[4/3, 1.], [1/2, 9/4]], dtype=q.dtype))
-print(a, context)
-```
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/full-transformer-2026-10-21/transformer_resideual_layer_norm_3.png]]
-
-*Each decoder block has three sublayers and three residual connections;
-an encoder block has two. The left side shows two source positions, and
-the right side shows target-position representations. Decoder
-self-attention must be causal, although the diagram labels it simply
-Self-Attention.
-Source: Jay Alammar, [The Illustrated Transformer, The Residuals](https://jalammar.github.io/illustrated-transformer/#the-residuals),
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
-
-The last decoder block still returns vectors of width $d$. A separate
-output projection is needed to obtain a vocabulary distribution.
-
-## 7. Training and generation
-
-### From a decoder state to a distribution
-
-Let $h_i\in\mathbb R^d$ be the output of the last block. Projection
-$W_{out}\in\mathbb R^{d\times|V|}$ computes
-$z_i=h_iW_{out}+b_{out}$. Coordinate $z_{iv}$ is the logit for token $v$.
-Softmax over the vocabulary gives $p(v\mid x,y_{<i})$. This is not yet a
-selected token: argmax, sampling, and beam search use the same distribution
-in different ways.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_decoder_output_softmax.png]]
-
-*The output vector is expanded to vocabulary size. The diagram selects
-the index with maximum probability: greedy decoding. The label log_probs
-corresponds to log-softmax, while the box is named Softmax. Both give the
-same argmax index, but probabilities and log-probabilities are different
-values. The code below passes raw logits to cross-entropy.
-Source: Jay Alammar, [The Illustrated Transformer, The Final Linear and Softmax Layer](https://jalammar.github.io/illustrated-transformer/#the-final-linear-and-softmax-layer),
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
-
-For an example, restrict the output vocabulary to three tokens: `cat`,
-`sleeps`, and `<EOS>`. With state $h=(1,2)$ and columns of $W_{out}$
-equal to $(1,0)$, $(0,1)$, and $(-1,0)$, the logits are $(1,2,-1)$.
-The normalizing sum is $e^1+e^2+e^{-1}$; the probabilities are approximately
-$(0.259496,0.705385,0.035119)$. For the correct token `sleeps`, loss
-$-\ln p$ is $0.349012$.
-
-The derivative with respect to logits is $p-\mathrm{onehot}(\text{target})$:
-$(0.259496,-0.294615,0.035119)$. A gradient-descent step increases the
-correct logit and decreases the others if these three numbers are
-optimized directly. A network optimizes weights: the gradient passes
-through $W_{out}$ into the last block, cross-attention, encoder memory,
-and embedding tables.
-
-In the original paper, one matrix is shared between the source table,
-target table, and output projection when using a shared vocabulary.
-Then $W_{out}=E^\top$, and gradients from every use add together.
-Equal matrix dimensions do not themselves establish sharing: the code
-must use one parameter object, not two copies of its numbers.
-
-### Shifting the target sequence and applying masks
-
-During training, the correct translation is known:
-
-```text
-position:         0       1       2       3
-decoder input:  <BOS>    the     cat    sleeps
-target:          the    cat    sleeps   <EOS>
-```
-
-Row 2 receives `cat` and must predict `sleeps`. Its self-attention may
-read positions 0, 1, and 2. The token `sleeps` is already present at input
-row 3, but the causal mask prevents reading it. Without shifting, the
-target token would occupy the same row; a triangular mask alone would
-not prevent that leakage.
-
-All decoder layers preserve causal connections. The FFN and LayerNorm
-act on one position and add no future connections. Cross-attention reads
-only the source, so it does not expose future translation tokens either.
-All four distributions can be computed in parallel and trained using
-the sum or mean of their losses.
-
-When examples are padded to a common length, three separate operations
-are required: excluding PAD keys in the encoder, excluding target-prefix
-PAD keys in decoder self-attention, and excluding PAD targets from the
-loss. Cross-attention reuses the **source** PAD-key mask. A key mask need
-not zero PAD-query states: these rows may be nonzero, but must not affect
-real positions or the loss.
-
-For logits $z_{bt}$ and targets $y_{bt}$, use the mean loss over $n$
-real target tokens:
-
-$$
-\mathcal L=-\frac1n\sum_{(b,t):\,y_{bt}\ne PAD}
-\log\operatorname{softmax}(z_{bt})_{y_{bt}}.
-$$
-
-EOS contributes to this sum: the model learns to stop. BOS starts the
-prefix, but is not an additional target in this layout.
-
-The original Transformer used label smoothing with $\epsilon_{ls}=0.1$.
-For three classes, a target with confidence $0.9$ on the correct class
-and $0.05$ on each other class gives loss $0.549012$ in our example.
-The objective fits a soft target distribution instead of driving one
-probability to one. [The Annotated Transformer, Label Smoothing](https://nlp.seas.harvard.edu/annotated-transformer/#label-smoothing)
-also excludes the PAD class, and its loss function returns KL divergence.
-This differs from cross-entropy by the target distribution's entropy,
-but has the same gradient with respect to logits when the target is fixed.
-PyTorch's `label_smoothing` mixes the target with a uniform distribution
-**over all** classes; for three classes, that gives different values.
-The complete example below disables smoothing to check the shift, masks,
-and ordinary cross-entropy separately.
-
-```python
-import torch
-import torch.nn.functional as F
-
-z = torch.tensor([1., 2., -1.], dtype=torch.float64, requires_grad=True)
-logp = z.log_softmax(-1)
-p = logp.exp()
-loss = -logp[1]
-loss.backward()
-expected_grad = p.detach() - torch.tensor([0., 1., 0.])
-torch.testing.assert_close(z.grad, expected_grad)
-soft_target = torch.tensor([0.05, 0.9, 0.05], dtype=z.dtype)
-smooth_ce = -(soft_target * logp).sum()
-smooth_kl = (soft_target * (soft_target.log() - logp)).sum()
-torch.testing.assert_close(
-    F.cross_entropy(z[None], torch.tensor([1]), label_smoothing=0.1),
-    -(torch.tensor([1/30, 14/15, 1/30], dtype=z.dtype) * logp).sum())
-print(p.detach(), float(loss.detach()), float(smooth_ce.detach()))
-print("KL", float(smooth_kl.detach()), "gradient", z.grad)
-```
-
-### A complete forward pass and one training step
-
-The implementation below retains post-norm, three decoder sublayers,
-embedding scaling, sinusoidal positions, and a shared vocabulary. It
-shows the computation graph but does not reproduce Transformer Base
-training: width, layer count, initialization, data, optimizer, and loss
-are chosen for teaching. Masks use `True = allowed key`.
+The implementation retains post-norm, the decoder's three sublayers,
+embedding scaling, and sinusoidal positions. It is smaller than Transformer
+Base: two blocks per stack and width 8 instead of 512. It trains on one
+pair using SGD and unsmoothed cross-entropy. In each mask, `True` means
+that the key may be read.
 
 This implementation uses right padding: each source has at least one
 real token, and the target input begins with BOS. A query with no allowed
@@ -773,84 +768,143 @@ new_loss = F.cross_entropy(
     model(src, decoder_ids).flatten(0, 1), labels.flatten(), ignore_index=PAD)
 print("before/after", float(loss.detach()), float(new_loss.detach()))
 print("cross-attention", tuple(model.dec[-1].cross_attn.last_weights.shape))
+
+# Compare the same weights with and without the reference suffix.
+torch.manual_seed(7)
+trace = TinyTranslation().double().eval()
+with torch.no_grad():
+    memory, source_valid = trace.encode(src)
+    full = trace.decode(decoder_ids, memory, source_valid)
+    first_head = trace.dec[0].cross_attn.last_weights[0, 0, 0]
+    torch.testing.assert_close(
+        first_head, torch.tensor([.433724, .248209, .318067, 0.],
+                                 dtype=full.dtype), atol=5e-7, rtol=0)
+    for i in range(4):
+        prefix = decoder_ids[:, :i + 1]
+        torch.testing.assert_close(
+            trace.decode(prefix, memory, source_valid)[:, -1], full[:, i])
+    other_target = torch.tensor([[BOS, 9, 8, 9, 8]])
+    torch.testing.assert_close(trace(src, other_target)[:, 0], full[:, 0])
+    other_source = torch.tensor([[9, 4, EOS, PAD]])
+    assert not torch.allclose(trace(other_source, decoder_ids)[:, 0], full[:, 0])
+    assert full[0, 0].argmax().item() == BOS
+
+# Memorize the one sequence so we can check the greedy generation loop.
+trace.train()
+opt = torch.optim.SGD(trace.parameters(), lr=.01)
+for _ in range(80):
+    opt.zero_grad()
+    scores = trace(src, decoder_ids)
+    F.cross_entropy(scores.flatten(0, 1), labels.flatten(),
+                    ignore_index=PAD).backward()
+    opt.step()
+
+trace.eval()
+with torch.no_grad():
+    memory, source_valid = trace.encode(src)
+    prefix = decoder_ids[:, :1]
+    probabilities = []
+    for _ in range(8):
+        last = trace.decode(prefix, memory, source_valid)[:, -1]
+        token = last.argmax(-1, keepdim=True)
+        probabilities.append(last.softmax(-1).gather(-1, token).item())
+        prefix = torch.cat((prefix, token), dim=1)
+        if token.item() == EOS:
+            break
+    assert prefix.tolist() == [[BOS, 5, 6, 7, EOS]]
+    print("generated:", prefix.tolist())
+    print("greedy probabilities:", [round(p, 6) for p in probabilities])
 ```
 
-Here memory has shape `[1,4,8]`, decoder input `[1,5]`, cross-attention
-`[1,2,5,4]`, and logits `[1,5,10]`. The loss includes four targets,
-`the cat sleeps <EOS>`, but not the final PAD. Separate block instances
-do not share weights across depth; the embedding table and output layer,
-by contrast, intentionally share them.
+</details>
 
-With the specified seed on CPU in float64, the correct-token probabilities
-and losses before the training step are:
+<details>
+<summary>Label smoothing and logit gradients</summary>
 
-| Target | Target probability | Loss $-\ln p$ |
-| --- | ---: | ---: |
-| `the` | $5.619617\cdot10^{-5}$ | 9.786662 |
-| `cat` | $9.737951\cdot10^{-3}$ | 4.631725 |
-| `sleeps` | $1.880076\cdot10^{-5}$ | 10.881613 |
-| `<EOS>` | $5.502324\cdot10^{-6}$ | 12.110340 |
+The original Transformer used label smoothing with $\epsilon_{ls}=0.1$.
+Return to the logits $(1,2,-1)$ for `cat`, `sleeps`, and `<EOS>`. A
+target probability of $0.9$ for `sleeps` and $0.05$ for each other token
+gives a cross-entropy of $0.549012$.
+The objective fits a soft target distribution instead of driving one
+probability to one. [The Annotated Transformer, Label Smoothing](https://nlp.seas.harvard.edu/annotated-transformer/#label-smoothing)
+also excludes the PAD class, and its loss function returns KL divergence.
+This differs from cross-entropy by the target distribution's entropy,
+but has the same gradient with respect to logits when the target is fixed.
+PyTorch's `label_smoothing` mixes the target with a uniform distribution
+**over all** classes; for three classes, that gives different values.
+The translator implementation disables smoothing to check the shift, masks,
+and ordinary cross-entropy separately.
 
-The four losses sum to approximately 37.410340, with mean 9.352585.
-The fifth element of `token_losses` is zero: its PAD target is excluded.
-Dividing by all five elements would give 7.482068, so an ordinary
-`token_losses.mean()` is not the same as cross-entropy with
-`ignore_index`. The denominator is the number of real targets, not the
-padded tensor's length. After one SGD step, the same example's mean loss
-falls to 8.497538.
+```python
+import torch
+import torch.nn.functional as F
 
-PAD nevertheless remains one of the ten output softmax classes.
-`ignore_index=PAD` excludes a target position; it does not remove the PAD
-logit from the denominator at other positions. These are distinct
-operations in the [CrossEntropyLoss formula](https://docs.pytorch.org/docs/2.14/generated/torch.nn.CrossEntropyLoss.html).
-The output projection can therefore send a gradient to the PAD row of
-the shared table E, even though source PAD keys are not read. This is
-not information leaking from padding: an output-class weight is changing.
+z = torch.tensor([1., 2., -1.], dtype=torch.float64, requires_grad=True)
+logp = z.log_softmax(-1)
+p = logp.exp()
+loss = -logp[1]
+loss.backward()
+expected_grad = p.detach() - torch.tensor([0., 1., 0.])
+torch.testing.assert_close(z.grad, expected_grad)
+soft_target = torch.tensor([0.05, 0.9, 0.05], dtype=z.dtype)
+smooth_ce = -(soft_target * logp).sum()
+smooth_kl = (soft_target * (soft_target.log() - logp)).sum()
+torch.testing.assert_close(
+    F.cross_entropy(z[None], torch.tensor([1]), label_smoothing=0.1),
+    -(torch.tensor([1/30, 14/15, 1/30], dtype=z.dtype) * logp).sum())
+print(p.detach(), float(loss.detach()), float(smooth_ce.detach()))
+print("KL", float(smooth_kl.detach()), "gradient", z.grad)
+```
 
-A gradient for the first encoder block's query projection demonstrates
-the path from translation error through the decoder and cross-attention
-into the encoder. Checking only `head.weight.grad` is insufficient:
-the output layer could train even if memory had accidentally been detached.
-One loss-reducing step does not mean that the model has learned to
-translate or generalize.
+</details>
 
-### Autoregressive inference
+<details>
+<summary>Paths between positions and computation cost</summary>
 
-At generation time, the correct `the cat sleeps` is not yet available
-as input. The decoder first receives only BOS and produces a distribution
-for the first token. The chosen token is appended to the prefix, and the
-computation repeats until EOS or a length limit.
+<h3 id="11-why-the-transformer-displaced-the-recurrent-backbone">Paths between positions and computation cost</h3>
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_decoding_2.gif]]
+[Table 1 of the original paper](https://arxiv.org/html/1706.03762v7#S4.T1) gives the work per layer, the number of sequential steps, and the longest path connecting two positions:
 
-*Repeated decoder steps with a growing target prefix. The source phrase
-has already been encoded; each newly selected token returns as input at
-the bottom. The author's animation is reproduced without changing frames.
-Source: Jay Alammar, [The Illustrated Transformer, The Decoder Side](https://jalammar.github.io/illustrated-transformer/#the-decoder-side),
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
+| Layer | Work | Steps | Path |
+|---|---:|---:|---:|
+| self-attention | $O(T^2d)$ | $O(1)$ | $O(1)$ |
+| recurrent | $O(Td^2)$ | $O(T)$ | $O(T)$ |
+| dilated convolution | $O(kTd^2)$ | $O(1)$ | $O(\log_k T)$ |
 
-An implementation can retain encoder memory instead of rerunning the
-encoder. Cross-attention K/V also remain fixed during one translation,
-although they differ across decoder layers. The decoder's own KV cache
-retains K/V for processed target positions. In a post-norm Transformer
-with no future connections, these old states do not change when another
-token is appended. Equivalence to full recomputation assumes eval mode
-and the same positions and masks.
+The logarithmic path in the last row assumes a stack of increasingly
+dilated kernels of width $k>1$. For ordinary contiguous kernels without
+dilation, the paper gives $O(T/k)$: each layer expands the accessible
+region only linearly. Cost is per layer; path length traverses the depth
+needed to connect distant positions.
 
-Caching reduces repeated computation; the next unknown token still
-depends on the token just selected. Neither masking nor parallel
-training makes ordinary autoregressive generation a single pass. The
-implementation above has no cache: for clarity, `decode` recomputes
-the entire prefix.
+The table compares interactions between positions inside a layer. A
+complete Transformer also includes Q/K/V projections of order $Td^2$
+and an FFN of order $Tdd_{ff}$. The row $O(T^2d)$ alone therefore neither
+describes the entire block's cost nor proves a speedup at every length.
 
-## 8. Three architectural branches
+When processing a known sequence, all queries can be computed in
+parallel; two distant tokens are connected by one full attention layer.
+Dense attention's pairwise arithmetic grows quadratically with length.
+FlashAttention changes memory traffic without removing that arithmetic;
+sparse and linear attention change the structure or computation of
+the interactions.
 
-In the [translation architecture](#transformer-original-figure), the
-left and right stacks process different sequences. BERT has one
-bidirectional stack; GPT and LLaMA have one causal stack. This changes
-the path from the source tokens to the position making a prediction.
+> [!warning] The table depends on the regime
+> $O(1)$ sequential operations refers to processing an already known sequence
+> inside a layer, not generating unknown future tokens. Self-attention is
+> not always cheaper than a recurrent network: the comparison depends on
+> $T$, $d$, hardware, and implementation.
 
-### Encoder-only: BERT
+</details>
+
+<details>
+<summary>BERT, GPT-1, and LLaMA 1 compared with the translator</summary>
+
+<h3 id="8-three-architectural-branches">BERT, GPT-1, and LLaMA 1 compared with the translator</h3>
+
+The [translation diagram](#transformer-original-figure) contains two stacks and three kinds of attention. The models below keep different parts of that layout and use different training objectives.
+
+<h3 id="encoder-only-bert">Encoder-only: BERT</h3>
 
 BERT retains the encoder stack:
 
@@ -865,7 +919,7 @@ at selected positions. BERT is not an autoregressive generator:
 pre-training reconstructs hidden pieces rather than continuing a prefix
 from left to right ([Devlin et al., §3–3.1](https://arxiv.org/pdf/1810.04805v2#page=3)).
 
-### Decoder-only: GPT
+<h3 id="decoder-only-gpt">Decoder-only: GPT</h3>
 
 In [Vaswani's figure](#transformer-original-figure), remove the left stack
 and the middle attention sublayer on the right, including its Add & Norm.
@@ -896,7 +950,7 @@ one question-answering experiment, the authors added example questions
 and short answers to the context without updating the weights
 ([GPT‑2 report, §3.8](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=7)).
 
-### Modern decoder-only: LLaMA
+<h3 id="modern-decoder-only-llama">Modern decoder-only: LLaMA</h3>
 
 LLaMA retains a causal decoder while changing its details:
 
@@ -912,16 +966,14 @@ of the first version. The changes are described in
 the absence of biases and equal Q/K/V head counts are visible in the
 [first release's code](https://github.com/meta-llama/llama/blob/1076b9c51c77ad06e9d7ba8a4c6df775741732bd/llama/model.py).
 
-## 9. Architectural diff
+<h3 id="9-architectural-diff">Differences in blocks and training objectives</h3>
 
-| Component | Transformer 2017 | BERT Base | GPT-1 | LLaMA 1 |
-|---|---|---|---|---|
-| architecture | encoder–decoder | encoder | causal decoder | causal decoder |
-| norm layout | Post-LN | Post-LN | Post-LN | Pre-RMSNorm |
-| activation / FFN | ReLU | GELU | GELU | SwiGLU |
-| positions | sinusoidal | learned absolute | learned absolute | RoPE |
-| cross-attention | decoder only | no | no | no |
-| training objective | translation | MLM + NSP | next token + fine-tuning | next token |
+| Model | Blocks, positions, and training |
+| --- | --- |
+| Transformer (2017) | Encoder and decoder with cross-attention. Post-LN, ReLU and sinusoidal positions. Translation. |
+| BERT Base | Bidirectional encoder. Post-LN, GELU and learned absolute positions. MLM and NSP. |
+| GPT-1 | Causal self-attention without cross-attention. Post-LN, GELU and learned absolute positions. Next-token prediction, then fine-tuning. |
+| LLaMA 1 | Causal self-attention without cross-attention. Pre-RMSNorm, SwiGLU and RoPE. Next-token prediction. |
 
 In GPT-1, normalization follows the sum in both sublayers, as shown by
 `block` in the original [OpenAI train.py](https://github.com/openai/finetune-transformer-lm/blob/a69b5c43b0452462890bca8ff92fb75dee9290cf/train.py#L140-L147).
@@ -932,7 +984,7 @@ The label LLaMA 1 is likewise intentionally restricted to the first release.
 
 <a id="architecture-evidence-boundary"></a>
 
-## 10. An architectural choice is not an empirical recipe
+<h3 id="10-an-architectural-choice-is-not-an-empirical-recipe">What an architecture comparison measures</h3>
 
 Normalization placement can be established from code. Whether that
 placement improves quality requires a training comparison. Replacing
@@ -956,41 +1008,12 @@ matrix-kernel efficiency depends on dimensions and implementation.
 A quality claim needs comparable data and training; a speed claim needs
 measurements on specified hardware in a specified regime.
 
-## 11. Why the Transformer displaced the recurrent backbone
+</details>
 
-The original paper compares:
+<details>
+<summary>The causal block in CS336</summary>
 
-| Layer | Complexity per layer | Sequential operations | Maximum path length |
-|---|---:|---:|---:|
-| self-attention | $O(T^2d)$ | $O(1)$ | $O(1)$ |
-| recurrent | $O(Td^2)$ | $O(T)$ | $O(T)$ |
-| dilated convolution | $O(kTd^2)$ | $O(1)$ | $O(\log_k T)$ |
-
-The logarithmic path in the last row assumes a stack of increasingly
-dilated kernels of width $k>1$. For ordinary contiguous kernels without
-dilation, the paper gives $O(T/k)$: each layer expands the accessible
-region only linearly. Cost is per layer; path length traverses the depth
-needed to connect distant positions.
-
-The table compares interactions between positions inside a layer. A
-complete Transformer also includes Q/K/V projections of order $Td^2$
-and an FFN of order $Tdd_{ff}$. The row $O(T^2d)$ alone therefore neither
-describes the entire block's cost nor proves a speedup at every length.
-
-When processing a known sequence, all queries can be computed in
-parallel; two distant tokens are connected by one full attention layer.
-Dense attention's pairwise arithmetic grows quadratically with length.
-FlashAttention changes memory traffic without removing that arithmetic;
-sparse and linear attention change the structure or computation of
-the interactions.
-
-> [!warning] The table depends on the regime
-> $O(1)$ sequential operations refers to processing an already known sequence
-> inside a layer, not generating unknown future tokens. Self-attention is
-> not always cheaper than a recurrent network: the comparison depends on
-> $T$, $d$, hardware, and implementation.
-
-## 12. A minimal modern causal block
+<h3 id="12-a-minimal-modern-causal-block">The causal block in CS336</h3>
 
 [CS336 Assignment 1, §3.5, pages 26–27](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=26)
 describes the complete block as follows, in the original:
@@ -1017,8 +1040,7 @@ $$
 
 For $(1,2,3,4)$, the denominator without $\epsilon$ is $\sqrt{7.5}$,
 and with $\gamma=1$ the output coordinates are approximately 0.365148,
-0.730297, 1.095445, and 1.460593. This is not the LayerNorm result from
-Section 2: the row's positive offset has not been removed. In this block,
+0.730297, 1.095445, and 1.460593. Unlike [LayerNorm](#2-the-residual-stream), RMSNorm leaves the mean in the numerator. In this block,
 RMSNorm precedes attention and the FFN; RoPE acts on Q/K after their
 projections; V is not rotated.
 
@@ -1126,9 +1148,24 @@ The official CS336 adapters and tests remain in the
 [course repository](https://github.com/stanford-cs336/assignment1-basics/tree/a158843b20107949f1a8d7df1b05cd33b9166712/tests);
 running this example does not count as passing those tests.
 
-## 13. How to read real code
+Gated FFNs change the mapping itself. In SwiGLU, one projection supplies
+a multiplier for another:
 
-Three levels of difficulty:
+$$
+\begin{aligned}
+g&=\operatorname{SiLU}(xW_g),\\
+u&=xW_u,\\
+\operatorname{SwiGLU}(x)&=(g\odot u)W_d.
+\end{aligned}
+$$
+
+Here $\operatorname{SiLU}(z)=z\,\sigma(z)$. There are three matrices instead
+of two. Matching the parameter count of a ReLU FFN of width $4d$ gives
+$3dm\approx8d^2$, or $m\approx8d/3$, before implementation-specific
+rounding. The SiLU multiplier is not bounded to $[0,1]$ and can be
+negative: it is not the probability that a gate is open.
+
+<h3 id="13-how-to-read-real-code">Reference implementations</h3>
 
 1. [Karpathy's `ng-video-lecture`](https://github.com/karpathy/ng-video-lecture)
    builds a causal decoder incrementally in PyTorch.
@@ -1144,7 +1181,7 @@ compatibility and a training procedure; Llama reference code specifies
 a concrete parameter format and model computation. None should
 automatically be treated as an exact implementation of the 2017 Transformer.
 
-## 14. Tensor-shape check
+<h3 id="14-tensor-shape-check">Tensor shapes in a causal model</h3>
 
 For a causal LLM with ordinary multi-head attention (MHA):
 
@@ -1174,19 +1211,11 @@ are covered in the
 after which the same computation can be implemented in
 [[02 Areas/ML & DL/06 Практика/20 Собрать языковую модель с нуля|Capstone 1]].
 
-## Summary
+</details>
 
-- The original Transformer is an encoder–decoder, not a GPT-like tower.
-- An encoder block contains full self-attention and an FFN.
-- The original decoder contains causal self-attention, cross-attention, and an FFN.
-- Attention transfers information between positions; the FFN transforms each
-  position nonlinearly and independently.
-- The residual stream preserves shape `B × T × d_model`.
-- BERT, GPT, and LLaMA differ in training objective, positional mechanism,
-  normalization, and FFN, not just masking.
-- A modern LLM diagram must not be presented as the exact 2017 architecture.
+<a id="sources-and-interactive-explanations"></a>
 
-## Sources and interactive explanations
+## Sources
 
 ### Primary sources
 

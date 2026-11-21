@@ -35,7 +35,9 @@ describe('one primary explanation per published topic', () => {
       const original = read(row.snapshot);
       expect(hash(original), row.source).toBe(row.beforeSha256);
       const current = read(row.source), parsed = matter(current);
-      expect(hash(current), row.source).toBe(row.afterSha256);
+      const historical = beforeTopicConsolidation(current, row.source, root);
+      expect(hash(historical), row.source).toBe(row.afterSha256);
+      expect(matter(historical).data.canonical_heading, row.source).toBe(row.canonicalHeading ?? undefined);
       expect(parsed.data.status).toBe('redirect');
       expect(parsed.data.canonical_topic).toBe(row.canonicalSource);
       expect(parsed.content).not.toMatch(/^##|^\$\$|^```|!\[\[/m);
@@ -43,10 +45,11 @@ describe('one primary explanation per published topic', () => {
       expect(pages.some(page => page.source === row.canonicalSource)).toBe(true);
       const primary = matter(read(row.canonicalSource));
       expect(primary.data.status).not.toBe('redirect');
-      if (row.canonicalHeading) {
+      const canonicalHeading = parsed.data.canonical_heading;
+      if (canonicalHeading) {
         expect(parseMarkdownHeadings(primary.content, true).some(heading =>
-          heading.explicitAnchor === row.canonicalHeading
-          || heading.normalized === normalizeObsidianHeading(row.canonicalHeading))).toBe(true);
+          heading.explicitAnchor === canonicalHeading
+          || heading.normalized === normalizeObsidianHeading(canonicalHeading)), row.source).toBe(true);
       }
       for (const id of row.retainedFragmentAnchors)
         expect(parsed.content, row.source + '#' + id).toContain('id="' + id + '"');
