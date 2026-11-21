@@ -1933,6 +1933,15 @@ describe('static handbook output', () => {
         'Сдвинутые цели GPT и доступные причинные зависимости'])expect(html).toContain('alt="'+alt+'"');
       for(const phrase of ['source_vectors','lookup_gradient','WindowLM','batch_loss','128'])
         expect(html).toContain(phrase);
+      const shiftStart = html.indexOf('id="nlm-target-shift"');
+      const batchStart = html.indexOf('id="nlm-window-training"');
+      const limitsStart = html.indexOf('id="nlm-objective-limits"');
+      expect(shiftStart).toBeLessThan(batchStart);
+      expect(batchStart).toBeLessThan(limitsStart);
+      expect(html.slice(shiftStart, html.indexOf('id="nlm-causality"'))).toContain('<th>Цель</th>');
+      expect(html.slice(batchStart, limitsStart)).toContain('11 строк по 8 логитов');
+      const bengio = html.indexOf('id="nlm-bengio-architecture"');
+      expect(html.lastIndexOf('<details', bengio)).toBeGreaterThan(html.lastIndexOf('</details>', bengio));
       expect(html).toContain('/licenses/bengio03a-figure1-jmlr-policy.txt');
       expect(html).not.toContain('katex-error');
       if(prefix)expect(html).toContain('Canonical-language chapter.');
@@ -1963,6 +1972,15 @@ describe('static handbook output', () => {
       ]) expect(html).toContain(url);
       for(const phrase of ['Reading makemore','Row normalization','row_denominators','33,885','32,033'])
         expect(html).toContain(phrase);
+      const corpusExample = html.slice(html.indexOf('id="ngram-sequence-probability"'), html.indexOf('id="ngram-makemore-matrix"'));
+      expect(corpusExample).toContain('<th>Контекст</th>');
+      expect(corpusExample).toContain('<th>Ответ</th>');
+      expect(corpusExample).toContain('спит кот кот');
+      expect(corpusExample).toContain('8/81');
+      for (const anchor of ['ngram-mle-derivation', 'ngram-makemore-matrix', 'ngram-makemore-normalization', 'ngram-backoff', 'ngram-kn-discount']) {
+        const position = html.indexOf('id="' + anchor + '"');
+        expect(html.lastIndexOf('<details', position)).toBeGreaterThan(html.lastIndexOf('</details>', position));
+      }
       expect(html).toContain('/licenses/karpathy-nn-zero-to-hero-73c3fcc7-MIT.txt');
       expect(html).not.toContain('katex-error');
       if(prefix)expect(html).toContain('Canonical-language chapter.');
@@ -7561,17 +7579,21 @@ describe('static handbook output', () => {
 
   it('renders executable tokenization examples and the limits of reversibility', async () => {
     const html = await readFile(join(distDir, 'textbook/text-representation/tokenization/index.html'), 'utf8');
-    for (const figure of ['tokenized-example.png', 'hf-tokenization-pipeline.svg', 'tokenizer-choice-figure1.png'])
+    for (const figure of ['tokenized-example.png', 'hf-tokenization-pipeline.svg',
+      'zouhar-bpe-figure1.png', 'tokenizer-choice-figure1.png'])
       expect(html, figure).toContain(figure);
     for (const mechanism of ['train_bpe', 'unicodedata', 'byte_fallback', '109/53', '48/109',
       'e5c5054474f583d6d9499624649353995d63c70a', 'Как Unigram обучает вероятности'])
       expect(html, mechanism).toContain(mechanism);
-    for (const alias of ['tokenizer-contract', 'bpe-merge-trace', 'tokenizer-evidence'])
+    for (const alias of ['tokenizer-contract', 'bpe-merge-trace', 'tokenizer-evidence',
+      'почему-недостаточно-искать-самый-длинный-токен'])
       expect(html).toContain(`id="${alias}"`);
-    for (const example of ['Почему недостаточно искать самый длинный токен',
-      'a · b · cd', 'a · ##bc', 'eedf5716ce1268e56f0a50264a88cafad334ac61',
+    for (const example of ['Приоритет объединений и длина токена',
+      'a · b · cd', 'a · ##bc', 'ab · ##c', 'четыре вхождения против трёх', 'X c',
+      'eedf5716ce1268e56f0a50264a88cafad334ac61',
       '524 288 000', '750 MiB', '9 437 184', 'weight tying'])
       expect(html, example).toContain(example);
+    expect(html).toContain('<th>Токены</th>');
     expect(html).not.toContain('class="katex-error');
     expect(html).not.toContain('<p>![');
   });
@@ -7588,6 +7610,13 @@ describe('static handbook output', () => {
       for(const phrase of ['get_centers_and_contexts','random.randint','batchify',
         'contexts_negatives','keep','binary_cross_entropy_with_logits','16/11'])
         expect(html).toContain(phrase);
+      expect(html).toContain('<th>Обработка одного окна</th>');
+      for (const phrase of ['спит → кот', 'спит → бежит', 'кот, бежит → спит', 'они станут 3 и 1'])
+        expect(html).toContain(phrase);
+      for (const anchor of ['emb-dynamic-window', 'emb-filtered-noise', 'emb-batch-masks', 'emb-contextual', 'emb-tying-gradient']) {
+        const position = html.indexOf('id="' + anchor + '"');
+        expect(html.lastIndexOf('<details', position)).toBeGreaterThan(html.lastIndexOf('</details>', position));
+      }
       expect((html.match(/<img\b[^>]*\bsrc="\/assets\//g)??[]).length).toBe(9);
       expect(html).toContain('Полное, тонкое, компактное и усечённое SVD матрицы 4 на 3');
       expect(html).not.toContain('class="katex-error');

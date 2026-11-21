@@ -4,6 +4,22 @@
   "subsequentVerifiedRevisions": {
     "scope": "These current bytes restore to the historical whole-read receipts via the exact journals. This does not claim another full read or acceptance of those chapters.",
     "chapters": {
+      "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md": {
+        "currentSha256": "8d0fa034654143e0ce6fdd4cca57f99593c10eb7982b4542fd9ddeb74c5f1983",
+        "stopBefore": "2026-11-21-word2vec-glove-editorial-pass.json"
+      },
+      "00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md": {
+        "currentSha256": "2bdc604843215d6adabb1a1ac787c89ae5b12546a54457f53af152906d6dd904",
+        "stopBefore": "2026-11-21-next-token-editorial-pass.json"
+      },
+      "00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction.md": {
+        "currentSha256": "2ea0d54ea6e8d3fc62c500216d13471af64a1c7d2df1e722160eb5b0b6baa729",
+        "stopBefore": "2026-11-21-ngram-editorial-pass.json"
+      },
+      "00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель.md": {
+        "currentSha256": "b86f5cc1c56e5ea87c4bd6de27a10b4b023f70b8b4b8d0002dd1fc93710970c6",
+        "stopBefore": "2026-11-21-text-representation-editorial-pass.json"
+      },
       "00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md": {
         "currentSha256": "9eb4b9c45a269fff59a6a1f36ffce15e419b3b3822dfb3710edd3a569070c3ae",
         "stopBefore": "2026-11-21-cnn-editorial-pass.json"

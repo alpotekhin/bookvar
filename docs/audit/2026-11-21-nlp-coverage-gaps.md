@@ -41,7 +41,12 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«Инициализация, нормализация и остаточные связи»](2026-11-21-initialization-editorial-pass.json),
 [«Dropout и регуляризация»](2026-11-21-dropout-editorial-pass.json),
 [«Аугментация данных»](2026-11-21-augmentation-editorial-pass.json),
-[«CNN — от свёртки до ResNet»](2026-11-21-cnn-editorial-pass.json) и
-[«Представление текста числами»](2026-11-21-text-representation-editorial-pass.json).
-Следующая глава — «N-граммная языковая модель». Проверить переход от
-частоты пар к вероятности продолжения и роль границ последовательности.
+[«CNN — от свёртки до ResNet»](2026-11-21-cnn-editorial-pass.json),
+[«Представление текста числами»](2026-11-21-text-representation-editorial-pass.json),
+[«N-граммная языковая модель»](2026-11-21-ngram-editorial-pass.json),
+[«Вероятность текста и предсказание следующего токена»](2026-11-21-next-token-editorial-pass.json),
+[«Word2Vec, GloVe и распределительные представления»](2026-11-21-word2vec-glove-editorial-pass.json) и
+[«BPE, WordPiece и Unigram»](2026-11-21-tokenization-editorial-pass.json).
+Следующая глава — «RNN и BPTT». Проверить переход от окна фиксированной
+длины к переносу скрытого состояния и показать, где встречаются
+вклады разных шагов при вычислении градиента общих весов.
