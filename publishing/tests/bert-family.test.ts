@@ -7,6 +7,7 @@ import {describe,expect,it} from 'vitest';
 const root=resolve(import.meta.dirname,'../..');
 const read=(p: string)=>readFileSync(resolve(root,p));
 const chapter='00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md';
+const english='en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md';
 const body=read(chapter).toString();
 const figures=JSON.parse(read('publishing/tools/bert-family-figures.json').toString());
 const registry=YAML.parse(read('05 Источники/asset-registry.yml').toString()).assets;
@@ -39,6 +40,7 @@ describe('BERT family chapter contracts',()=>{
       expect(rows).toHaveLength(1);
       const row=rows[0];
       expect(row.used_in).toContain(chapter);
+      expect(row.used_in).toContain(english);
       for(const [key,value] of Object.entries(f)){
         if(['name','width','height'].includes(key)) continue;
         expect(row[key]).toEqual(value);
@@ -50,7 +52,9 @@ describe('BERT family chapter contracts',()=>{
       expect([png.readUInt32BE(16),png.readUInt32BE(20)]).toEqual([f.width,f.height]);
     }
     const features=body.indexOf('bert-feature-extraction-contextualized-embeddings.png');
-    expect(features).toBeGreaterThan(body.indexOf('### Фиксированные признаки'));
+    const panel=body.indexOf('<details id="bert-features-and-evaluation">');
+    expect(features).toBeGreaterThan(panel);
+    expect(features).toBeLessThan(body.indexOf('</details>',panel));
     expect(body).not.toContain('bert-input-output.png');
     expect(body).not.toContain('bert-tasks.png');
   });
@@ -84,5 +88,13 @@ describe('BERT family chapter contracts',()=>{
       'curated-roberta-dynamic-masking-0000000000ca','curated-deberta-equation4-0000000000cb']){
       expect(registry.find((r:any)=>r.id===id).used_in).not.toContain(chapter);
     }
+  });
+  it('keeps the English review pinned to the current Russian chapter',()=>{
+    const translated=read(english).toString();
+    const meta=YAML.parse(translated.split('---')[1]);
+    expect(meta.canonical_revision).toBe(sha(read(chapter)));
+    const originalExamples=(s:string)=>[...s.matchAll(/^\x60\x60\x60python[^\n]*\n([\s\S]*?)^\x60\x60\x60$/gm)]
+      .map(x=>x[0]).sort();
+    expect(originalExamples(translated)).toEqual(originalExamples(body));
   });
 });

@@ -5288,6 +5288,18 @@ describe('static handbook output', () => {
     expect(html).toMatch(/<strong>Назад:<\/strong>[\s\S]{0,300}href="\/textbook\/models\/bert-roberta-deberta\/"/);
     expect(html).toMatch(/<strong>Далее:<\/strong>[\s\S]{0,300}href="\/textbook\/models\/gpt-1\/"/);
   });
+  it('follows original T5 span targets through the shift, batch loss and fine-tuning in both locales',async()=>{
+    for(const prefix of ['', 'en/']){
+      const page=await readFile(join(distDir,prefix+'textbook/models/t5/index.html'),'utf8');
+      const seq=['t5-figure2-spans.png','id="t5-shifted-span"','[1,h,7,11]',
+        '3.228539','2.934116','id="t5-training-code"',
+        'id="перенос-задача-становится-данными-а-не-новой-головой"','0.6109'];
+      const offsets=seq.map(token=>page.indexOf(token));
+      expect(offsets.every((at,i)=>at>=0&&(i===0||at>offsets[i-1]))).toBe(true);
+      expect(page).toContain('href="/'+prefix+'textbook/models/gpt-1/" rel="next"');
+      expect(page).not.toContain('katex-error');
+    }
+  });
   it('renders corrected T5 source protocols without fabricated architecture claims',async()=>{
     const html=await readFile(join(distDir,'sources/papers/t5/index.html'),'utf8');
     const text=html.replace(/<[^>]*>/g,'').replace(/\s+/g,' ');
@@ -5534,6 +5546,20 @@ describe('static handbook output', () => {
         expect(html).toContain(fact);
       expect(html.match(/<pre/g)).toHaveLength(12);
       expect(html).not.toContain('katex-error');
+    }
+  });
+  it('follows the input, losses, fine-tuning, RoBERTa and DeBERTa before the variants in both locales', async()=>{
+    const routes=[
+      ['','как-из-двух-фрагментов-получается-один-вход','roberta-изменения-в-обучении','deberta-разделить-содержание-и-относительное-положение'],
+      ['en/','turning-two-segments-into-one-input','roberta-changes-to-training','deberta-separate-content-from-relative-position'],
+    ];
+    for(const [prefix,pair,roberta,deberta] of routes){
+      const html=await readFile(join(distDir,prefix+'textbook/models/bert-roberta-deberta/index.html'),'utf8');
+      const sequence=['id="'+pair+'"','14.928394','2.369681','1.184840','id="'+roberta+'"',
+        'id="'+deberta+'"','3.674235','2.390310','id="bert-corruption-variants"','id="bert-rtd-variants"'];
+      const offsets=sequence.map(token=>html.indexOf(token));
+      expect(offsets.every((at,i)=>at>=0&&(i===0||at>offsets[i-1]))).toBe(true);
+      expect(html).toContain('href="/'+prefix+'textbook/models/t5/" rel="next"');
     }
   });
   it('renders corrected RoBERTa and DeBERTa paper notes with links to the full chapter', async()=>{

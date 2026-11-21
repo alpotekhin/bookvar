@@ -4,6 +4,14 @@
   "subsequentVerifiedRevisions": {
     "scope": "These current bytes restore to the historical whole-read receipts via the exact journals. This does not claim another full read or acceptance of those chapters.",
     "chapters": {
+      "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md": {
+        "currentSha256": "2a658ef7dc210ea1633bbcdc481f6a673416b0648377083983e78eb7e3afa369",
+        "stopBefore": "2026-11-21-bert-family-editorial-pass.json"
+      },
+      "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md": {
+        "currentSha256": "2cefc2abd39c42f5850facd2ef4dab64a275b55be199baecc0b01952182509c1",
+        "stopBefore": "2026-11-21-architecture-patterns-editorial-pass.json"
+      },
       "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md": {
         "currentSha256": "506410800209b6d39a9f1e3d005f84cea0d2721faf7c8aabff5d859fd61cc60f",
         "stopBefore": "2026-11-21-full-transformer-editorial-pass.json"

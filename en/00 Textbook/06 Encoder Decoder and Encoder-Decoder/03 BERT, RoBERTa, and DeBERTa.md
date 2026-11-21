@@ -4,10 +4,10 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "af828cebc82902fdba70dcbec6a7ad0261f223052c6b2191c7a205df95dfd1dd"
-translation_reviewed: "2026-11-13"
+canonical_revision: "2cefc2abd39c42f5850facd2ef4dab64a275b55be199baecc0b01952182509c1"
+translation_reviewed: "2026-11-21"
 translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md"
-last_updated: 2026-11-13
+last_updated: 2026-11-21
 primary_sources:
   - https://aclanthology.org/N19-1423/
   - https://arxiv.org/abs/1907.11692v1
@@ -22,21 +22,50 @@ next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decod
 
 # BERT, RoBERTa, and DeBERTa
 
-BERT uses one pretrained encoder as the starting point for classification,
-token labeling, and answer extraction. It first learns from ordinary text;
-a task-specific output layer is then added and the model fine-tuned on
-annotations. For a question–paragraph pair, for example, the model locates
-the answer's start and end in the paragraph. Attention connects both texts
-inside the encoder.
+<a id="turning-two-segments-into-one-input"></a>
 
-The [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|previous chapter]]
-explains why a bidirectional encoder needs an objective other than NTP.
-Here we follow BERT through pair preparation, input representations,
-MLM/NSP, weight updates, and supervised application. RoBERTa changes the
-training recipe; DeBERTa changes attention computation and masked-token
-reconstruction.
+## How BERT combines two segments
 
-## Architecture and tensor shapes
+In Figure 2 of the BERT paper, two segments form one input.
+The word `playing` occupies two positions, `play` and `##ing`.
+
+```text
+[CLS] my dog is cute [SEP] he likes play ##ing [SEP]
+```
+
+`[CLS]` starts the input. The first `[SEP]` closes segment A and the
+second closes B. Positions run from 0 to 10 across both segments.
+The paper calls A and B *sentences*, though either may contain more
+than one sentence of text.
+
+Each row adds three learned vectors:
+
+$$
+\begin{aligned}
+e_i&=E_{\mathrm{token}}[x_i]\\
+&\quad+E_{\mathrm{position}}[i]+E_{\mathrm{segment}}[s_i].
+\end{aligned}
+$$
+
+At position 4, BERT adds the embedding of `cute`, the embedding of
+position 4, and the type A embedding. At positions 8 and 9, `play` and
+`##ing` have different vocabulary and position rows but share type B.
+The type tells the encoder which segment a token belongs to. Tokens in the two segments can still attend to each other across `[SEP]`.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert-family-2026-10-22/bert-figure2.png|Each BERT input row sums token, segment type, and position embeddings]]
+
+*The three summands of the input representation. `play` and `##ing`
+use different token and position rows but the same type B.
+Source: Jacob Devlin et al., [BERT, Figure 2](https://aclanthology.org/N19-1423.pdf#page=5),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+The diagram and English caption are unchanged.*
+
+The official code applies LayerNorm and dropout to this sum before the
+stack ([`embedding_postprocessor`](https://github.com/google-research/bert/blob/eedf5716ce1268e56f0a50264a88cafad334ac61/modeling.py#L428-L521)).
+
+<a id="architecture-and-tensor-shapes"></a>
+
+### Encoder blocks and tensor shapes
 
 `BERT_BASE` has 12 blocks, width $d=768$, and 12 heads. Each head has
 width $768/12=64$, and the FFN intermediate width is 3072.
@@ -44,7 +73,7 @@ width $768/12=64$, and the FFN intermediate width is 3072.
 The authors report approximately 110 and 340 million parameters
 respectively ([paper, §3](https://aclanthology.org/N19-1423/)).
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-base-bert-large-encoders.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-base-bert-large-encoders.png|BERT BASE and LARGE stacks have 12 and 24 bidirectional blocks]]
 
 *Stacks of 12 and 24 encoder blocks. Source: Jay Alammar,
 [The Illustrated BERT](https://jalammar.github.io/illustrated-bert/),
@@ -62,82 +91,48 @@ $$
 H'=\operatorname{LN}(U+\operatorname{Dropout}(\operatorname{FFN}(U))).
 $$
 
-This is post-norm. BERT has no separate decoder stack or cross-attention.
-Joint self-attention over a question and paragraph nevertheless lets
-positions in either text read the other. The mask excludes PAD keys,
-not right context.
-
-### Turning two segments into one input
-
-The paper uses “sentence” for an arbitrary contiguous text segment,
-which may contain several linguistic sentences. Two segments A/B are
-selected and WordPiece-tokenized. Figure 2 gives this example:
-
-```text
-[CLS] my dog is cute [SEP] he likes play ##ing [SEP]
-```
-
-There are 11 positions. `##ing` continues a word rather than being a
-separate word. `[CLS]` starts the complete input; the first `[SEP]`
-ends A and the second ends B. Positions run continuously from 0 to 10;
-the beginning of B does not reset the counter.
-
-Each row adds three learned vectors:
-
-$$
-\begin{aligned}
-e_i&=E_{\mathrm{token}}[x_i]\\
-&\quad+E_{\mathrm{position}}[i]+E_{\mathrm{segment}}[s_i].
-\end{aligned}
-$$
-
-`[CLS]` and the first `[SEP]` have type A; the second segment and final
-`[SEP]` have type B. A segment embedding identifies the token's part,
-but does not block attention between parts.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert-family-2026-10-22/bert-figure2.png]]
-
-*The three summands of the input representation. `play` and `##ing`
-use different token and position rows but the same type B.
-Source: Jacob Devlin et al., [BERT, Figure 2](https://aclanthology.org/N19-1423.pdf#page=5),
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-The diagram and English caption are unchanged.*
-
-The official code applies LayerNorm and dropout to this sum before the
-stack ([`embedding_postprocessor`](https://github.com/google-research/bert/blob/eedf5716ce1268e56f0a50264a88cafad334ac61/modeling.py#L428-L521)).
-The sum of three tables therefore describes feature assembly, not the
-whole input layer.
+This is the original Transformer’s post-norm layout. BERT keeps one
+encoder stack. Within each block the same heads read both segments,
+with PAD keys masked and right context available.
 
 For a batch of $B$ examples padded to length $T$, shapes are:
 
 | Quantity | Shape |
 |---|---|
-| token IDs, type IDs, and real-position mask | `[B,T]` |
-| states before and after each block | `[B,T,d]` |
-| Q/K/V split into heads | `[B,h,T,d_h]` |
-| attention scores | `[B,h,T,T]` |
-| MLM logits for $m$ selected positions | `[m,V]` |
+| Token and type IDs, mask | `[B,T]` |
+| States at each block | `[B,T,d]` |
+| Q, K, V split into heads | `[B,h,T,d_h]` |
+| Attention scores | `[B,h,T,T]` |
+| MLM logits at `m` positions | `[m,V]` |
 
-The example has `B=1,T=11`; BASE's Q/K/V shapes are `[1,12,11,64]`.
-Adding PAD enlarges the batch tensor, not the number of real tokens or
-MLM targets. Excluding PAD keys does not itself zero PAD-query outputs;
-those rows must be excluded from subsequent loss or pooling.
+For `BERT_BASE` on this pair, Q, K, and V have shape `[1,12,11,64]`.
 
-## MLM: obtaining a bidirectional training signal
+Padding this example to 12 positions leaves `B` at 1 and increases `T`
+from 11 to 12. Each attention layer masks PAD keys. The encoder still
+computes an output for the PAD query; neither the MLM readout nor
+classification from `[CLS]` reads that row.
 
-Positions to reconstruct are selected among ordinary subwords.
-Original BERT selects approximately 15%; `[CLS]` and `[SEP]` are
-not candidates in the official generator. Selection follows WordPiece
-tokenization: the original recipe may select one piece of a word without
-the others ([BERT, §3.1, A.1–A.2](https://aclanthology.org/N19-1423/)).
-Whole-word masking is a later data-preparation variant.
+<a id="mlm-obtaining-a-bidirectional-training-signal"></a>
 
-Suppose `cute` is selected. Its input may become `[MASK]`, a random
-token, or unchanged `cute`; the correct target is always the original
-ID for `cute`. Among selected positions, these cases have probabilities
-80%, 10%, and 10%. This does not mean that 80% of the whole text is hidden.
+## MLM: recovering a selected subword
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/BERT-language-modeling-masked-lm.png]]
+Suppose the preprocessor selects position 4 and replaces `cute` with
+`[MASK]`. The model has `my dog is` on the left and `he likes play ##ing`
+on the right. The encoder computes a state at position 4, and the output
+layer maps it to vocabulary scores. The correct class is the ID for `cute`.
+This task is called *masked language modeling* (MLM). The
+[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|previous chapter]]
+compares it with predicting the next token.
+
+BERT selects about 15% of the WordPiece positions. The preprocessor
+leaves `[CLS]` and `[SEP]` out of the candidate set
+([BERT, §3.1 and Appendix A.1](https://aclanthology.org/N19-1423/)).
+At a selected position it inserts `[MASK]` 80% of the time, a random
+token 10% of the time, and leaves the original token there 10% of the
+time. In all three cases the target is the original ID. So `cute` can
+contribute to the loss even when it remains visible.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/BERT-language-modeling-masked-lm.png|The state at the masked position passes to the MLM vocabulary head]]
 
 *The selected position's state becomes a vocabulary distribution.
 “All English words” in the original figure is a simplification: actual
@@ -145,9 +140,8 @@ outputs index a WordPiece vocabulary, including subwords and special tokens.
 Source: Jay Alammar, [The Illustrated BERT, Masked Language Model](https://jalammar.github.io/illustrated-bert/#masked-language-model),
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
 
-Bidirectional attention builds $h_{\mathrm{cute}}$ from the entire
-corrupted pair. The original implementation's MLM head applies another
-transformation:
+Bidirectional attention builds $h_4$ from the whole input after replacement. The MLM head
+passes that state through a dense layer, GELU, and LayerNorm:
 
 $$
 \begin{aligned}
@@ -157,9 +151,9 @@ z_i&=\operatorname{LN}
 \end{aligned}
 $$
 
-The output matrix shares weights with the input token table. The extra
-dense/GELU/LayerNorm transformation and vocabulary bias belong to the
-MLM head; they are unnecessary when switching to classification.
+The `cute` logit is the dot product of the transformed $z_4$ and the
+same table row BERT would have looked up for `cute` at the input,
+plus the vocabulary bias. The other logits use the other rows.
 Source: [official `get_masked_lm_output`](https://github.com/google-research/bert/blob/eedf5716ce1268e56f0a50264a88cafad334ac61/run_pretraining.py#L240-L282).
 
 Let $\mathcal M$ be selected positions and $\tilde x$ the corrupted input.
@@ -171,29 +165,33 @@ L_{\mathrm{MLM}}=
 \sum_{i\in\mathcal M}\log p_\theta(x_i\mid\tilde x).
 $$
 
-The [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|introductory chapter]]
-already checks why an unchanged selected token also contributes a loss.
-The same principle applies here: labels are stored separately from
-corrupted IDs. Unselected rows have no direct MLM loss, but their states
-participate in selected positions' attention and receive gradients
-through those dependencies.
+With $\mathcal M=\{4\}$ the average is just $-\log p_\theta(\text{cute}\mid\tilde x)$. There is no separate loss term for `dog`, although position 4 can attend to it.
+
+<details id="bert-mlm-replacement-ablation">
+<summary>Why BERT does not always use MASK</summary>
 
 The mixture of replacements reduces mismatch with downstream use,
 where `[MASK]` is usually absent. Appendix C.2 separately compares
-80/10/10 with 100% MASK. Full fine-tuning is relatively robust to these
+80/10/10 with 100% `[MASK]`. Full fine-tuning is relatively robust to these
 variants, while the frozen-feature NER experiment gives 94.0 Dev F1 for
 all-MASK versus 94.9 for 80/10/10. This is a result for a particular
 experiment, not proof that this proportion is optimal for all models.
 
-## BERT's second objective: segment relationships
+</details>
 
-For NSP, half the pairs contain a genuine next document segment, and
-half contain a randomly selected second segment. For example,
-`my dog is cute` followed by `he likes playing` and followed by a
-passage about penguins would have different labels. These illustrate
-target construction, not evaluation data.
+<a id="berts-second-objective-segment-relationships"></a>
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-next-sentence-prediction.png]]
+## NSP: where the second segment came from
+
+If `he likes playing` follows `my dog is cute` in the document, the NSP
+label is 0. If the preprocessor randomly samples the second segment,
+for example from a passage about penguins, the label is 1. This is
+*next sentence prediction* (NSP). The paper describes a 50–50 split. In the
+[official generator](https://github.com/google-research/bert/blob/eedf5716ce1268e56f0a50264a88cafad334ac61/create_pretraining_data.py#L234-L273),
+the random branch is mandatory when a chunk has only one segment
+to offer.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-next-sentence-prediction.png|The encoder reads both segments and the CLS output classifies the source of the second]]
 
 *The pair enters one bidirectional encoder, and `[CLS]` supports pair
 classification. The middle Tokenized Input row shows only the first
@@ -202,11 +200,7 @@ bottom row.
 Source: Jay Alammar, [The Illustrated BERT, Two-sentence Tasks](https://jalammar.github.io/illustrated-bert/),
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
 
-In the official model, the last `[CLS]` state passes through a pooler:
-`dense → tanh`. A binary head maps it to two logits. The code uses label
-0 for a genuine continuation and 1 for a random segment. NSP neither
-classifies every neighboring word pair nor scores the whole sequence
-using the NTP rule.
+The final `[CLS]` state in the same pair passes through a dense layer and `tanh`, together called the pooler. Its output goes to a classifier with two logits, one for a genuine continuation and one for a random segment.
 
 Each step adds mean loss over selected MLM tokens to mean NSP loss
 over batch examples:
@@ -218,10 +212,48 @@ $$
 Summing unnormalized losses for all MLM positions with one NSP loss
 would be a different normalization: the objective ratio would then
 change with text length. Original code normalizes MLM by the sum of
-valid-target weights and adds $10^{-5}$ to the denominator. That
-protects division, but does not make a batch without training targets useful.
+valid-target weights and adds $10^{-5}$ to the denominator. Weights of zero keep target padding out of the mean.
 
-### One executable pre-training step
+<a id="one-executable-pre-training-step"></a>
+
+### Losses and gradients for one pair
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert-family-2026-10-22/bert-figure1.png|A shared encoder in pre-training and separate copies for supervised tasks]]
+
+*On the left, a shared encoder receives pair A/B: MLM outputs reconstruct
+selected positions, while NSP reads `[CLS]`. On the right, the same
+pretrained parameters initialize separate supervised-task models.
+Arrows between the two sides represent parameter transfer, not the
+transfer of current states from one task to another.
+Source: Jacob Devlin et al., [BERT, Figure 1](https://aclanthology.org/N19-1423.pdf#page=3),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Both panels and the original English caption are unchanged.*
+
+The run below has one input and one selected position. Before the
+update, MLM loss is $14.243288$ and NSP loss is $0.685105$. The gradient
+of their sum, $14.928394$, updates the shared encoder. These are losses
+from random initialization; they do not measure how well a trained
+BERT can recover words.
+
+To check the unselected `dog` position's contribution specifically to
+MLM, the code differentiates MLM loss with respect to intermediate
+input vectors. Element `[0,2]` is `dog`: it is not a target, but
+attention lets its representation affect reconstruction of `cute`.
+NSP loss is not included in this measurement. The derivative is taken
+with respect to the position's input vector, not a weight row in the
+shared input/output table. The input PAD vector receives zero MLM
+gradient because it cannot be read as a key at any layer. In this run, the input `dog` gradient norm is
+approximately $0.118682$, and PAD's is zero.
+
+The shared table `word.weight` has another role: its rows also participate
+in vocabulary softmax. Nonzero `word.weight.grad[5]` alone would
+therefore not demonstrate use of input `dog`. Even the PAD row receives
+a gradient through the output classifier: the target is `cute`, but
+probabilities normalize over all 12 classes, including PAD. The input
+attention mask does not remove this output class.
+
+<details id="bert-pretraining-code">
+<summary>Code for the pre-training step</summary>
 
 The code below passes a corrupted pair through a small post-norm encoder,
 a weight-tied MLM head, and an NSP head, computes both losses, and updates
@@ -233,17 +265,6 @@ There are 12 toy vocabulary tokens, two width-16 layers, and four heads.
 Selection of `cute` is specified in advance, not produced by a real
 WordPiece tokenizer. Dropout is disabled for reproducibility. This is
 a computation example, not a reproduction of published BERT training.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert-family-2026-10-22/bert-figure1.png]]
-
-*On the left, a shared encoder receives pair A/B: MLM outputs reconstruct
-selected positions, while NSP reads `[CLS]`. On the right, the same
-pretrained parameters initialize separate supervised-task models.
-Arrows between the two sides represent parameter transfer, not the
-transfer of current states from one task to another.
-Source: Jacob Devlin et al., [BERT, Figure 1](https://aclanthology.org/N19-1423.pdf#page=3),
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-Both panels and the original English caption are unchanged.*
 
 ```python
 import torch
@@ -327,31 +348,12 @@ print("hidden/MLM/NSP", tuple(h.shape),
       tuple(mlm_logits.shape), tuple(nsp_logits.shape))
 ```
 
-The same encoder weights receive two signals: reconstruct `cute` and
-classify the segment relationship. The vocabulary table receives
-gradients through input representations and through the shared output
-projection. PAD is not a target and is masked as a key. Loss values
-from a randomly initialized network are not a language-task result.
+</details>
 
-To check the unselected `dog` position's contribution specifically to
-MLM, the code differentiates MLM loss with respect to intermediate
-input vectors. Element `[0,2]` is `dog`: it is not a target, but
-attention lets its representation affect reconstruction of `cute`.
-NSP loss is not included in this measurement. The derivative is taken
-with respect to the position's input vector, not a weight row in the
-shared input/output table. The input PAD vector receives zero MLM
-gradient because it cannot be read as a key at any layer. With the
-specified seed on CPU in float64, the input `dog` gradient norm is
-approximately $0.118682$, and PAD's is zero.
+<details id="bert-original-recipe">
+<summary>BERT’s corpus and training settings</summary>
 
-The shared table `word.weight` has another role: its rows also participate
-in vocabulary softmax. Nonzero `word.weight.grad[5]` alone would
-therefore not demonstrate use of input `dog`. Even the PAD row receives
-a gradient through the output classifier: the target is `cute`, but
-probabilities normalize over all 12 classes, including PAD. The input
-attention mask does not remove this output class.
-
-## BERT data and recipe
+<a id="bert-data-and-recipe"></a>
 
 The paper uses BooksCorpus, approximately 800 million words, and
 English Wikipedia, approximately 2.5 billion words. Wikipedia provides
@@ -382,42 +384,71 @@ BASE trained for four days on four Cloud TPUs in a Pod configuration
 hardware of the 2018 experiment, not a promised training time on a
 modern accelerator.
 
+</details>
+
 <a id="один-encoder--разные-способы-чтения-выхода"></a>
 
-## Fine-tuning on a labeled task
+<a id="fine-tuning-on-a-labeled-task"></a>
 
-After pre-training, tokenization, input tables, and the encoder are
-retained. MLM/NSP heads are replaced by the required output format.
-In full fine-tuning, supervised-task gradients change the entire stack.
-Each task gets its own fine-tuned copy of the weights: one pretrained
-checkpoint does not mean one shared ready-made classifier.
+## Fine-tuning BERT on labeled data
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/bert-figure4.png]]
+Fine-tuning starts from the pre-trained tokenizer, input tables, and
+encoder weights. Each task gets its own copy of those weights and a
+new output head, trained on labeled examples.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/bert-figure4.png|Four BERT readouts, including separate start and end positions for an answer]]
 
 *Single-text and pair classification above; answer extraction and NER below.
 Source: Jacob Devlin et al., [BERT, Figure 4](https://aclanthology.org/N19-1423.pdf#page=15),
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 All four panels and the original caption are preserved.*
 
-Classification uses `[CLS]` or its corresponding pooled output and
-learns class scores. NER applies a projection to token states. When a
-word splits into several WordPieces, the label policy must be specified:
-BERT's experiment uses the first subword's state. Special positions and
-PAD must not silently acquire training labels.
+Text classification reads the `[CLS]` output. Named entity recognition
+needs a label per word. If WordPiece splits a word into several tokens,
+the BERT experiment reads the first subword’s state.
 
-### Extractive QA: two projections and a valid span
+<a id="extractive-qa-two-projections-and-a-valid-span"></a>
 
-For a question–paragraph pair, learned vectors $s,e$ produce
+### Extractive QA: finding both boundaries
+
+Encode `Where does Marie live?` and `Marie lives in Paris` as
+`[CLS] question [SEP] passage [SEP]`. The same bidirectional encoder
+reads the two segments together. Two learned vectors $s,e$ replace
+the vocabulary head. They give each state $h_i$ a start and end logit,
 $\ell_i^{\mathrm{start}}=s^\top h_i$ and
-$\ell_i^{\mathrm{end}}=e^\top h_i$.
-Softmax normalizes over allowed positions, not vocabulary items.
-The correct start and end are indices in the source paragraph.
+$\ell_i^{\mathrm{end}}=e^\top h_i$. The labels are positions in the
+input. The vocabulary ID of `Paris` is not a target.
 
 Independent start and end maxima may define an impossible span.
-Suppose the paragraph is `Marie lives in Paris`, with start logits
+Take start logits
 $(0,0,1,3)$ and end logits $(4,0,0,2)$. Independent selection starts at
 `Paris` and ends at `Marie`. Under $j\ge i$, the highest sum is
 $3+2=5$, selecting the single-token answer `Paris`.
+
+Training uses two separate softmax distributions. With the four
+logits above, the probabilities assigned to the correct start and
+end are about $0.8098$ and $0.1155$. The two cross-entropies sum to
+$2.369681$. The paper describes a sum;
+[BERT's released training code](https://github.com/google-research/bert/blob/eedf5716ce1268e56f0a50264a88cafad334ac61/run_squad.py#L595-L610)
+averages the two losses and normalizes each distribution across the
+whole input. The average for the example's four positions would be
+$1.184840$. A candidate span $(i,j)$ is not one class in this loss.
+
+At inference the
+[same code](https://github.com/google-research/bert/blob/eedf5716ce1268e56f0a50264a88cafad334ac61/run_squad.py#L703-L776)
+filters out starts and ends outside the passage, incompatible pairs,
+and overlong spans. It splits long documents into overlapping windows
+and maps window positions back to the original text. The example
+above has only four passage positions and the constraint $j\ge i$.
+
+In SQuAD 2.0, some questions have no answer. Original BERT assigns
+`[CLS]` as both their correct start and end. At decoding, the best
+nonempty span is compared with the summed `[CLS]` start/end scores
+using a threshold selected on dev
+([BERT, §§4.2–4.3](https://aclanthology.org/N19-1423/)).
+
+<details id="bert-span-code">
+<summary>Code for selecting a valid span</summary>
 
 ```python
 import torch
@@ -438,26 +469,21 @@ loss.backward()
 print("answer:", " ".join(words[left:right+1]), "loss:", float(loss.detach()))
 ```
 
-A real batch must also exclude the question, separators, and padding.
-Long documents are split into overlapping windows with indices mapped
-back to the original text. The code only checks valid-span selection
-from given logits and its loss; it does not train an encoder.
+</details>
 
-In SQuAD 2.0, some questions have no answer. Original BERT assigns
-`[CLS]` as both their correct start and end. At decoding, the best
-nonempty span is compared with the summed `[CLS]` start/end scores
-using a threshold selected on dev. This differs from requiring some
-paragraph word as an answer
-([BERT, §§4.2–4.3](https://aclanthology.org/N19-1423/)).
+<details id="bert-features-and-evaluation">
+<summary>Frozen features and BERT results</summary>
 
-### Frozen features or full fine-tuning
+<a id="frozen-features-or-full-fine-tuning"></a>
+
+<h3>Frozen features or full fine-tuning</h3>
 
 BERT can be frozen while a separate model is trained on its states.
 Features for unchanged inputs can then be computed in advance. The
 last state at each position is not the only option: the paper compares
 several layers and their combinations.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-feature-extraction-contextualized-embeddings.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-feature-extraction-contextualized-embeddings.png|CoNLL-2003 dev F1 for features taken from different frozen BERT layers]]
 
 *Feature-extraction comparisons for CoNLL-2003 NER.
 Source: Jay Alammar, [The Illustrated BERT](https://jalammar.github.io/illustrated-bert/),
@@ -474,7 +500,9 @@ Nor does `[CLS]` become a retrieval vector by definition. Independent
 document representations need a learned similarity geometry; a joint
 pair classifier and a bi-encoder solve different tasks.
 
-## Reading BERT's results
+<a id="reading-berts-results"></a>
+
+<h3>Ablating NSP and attention direction</h3>
 
 In Table 5, BASE reaches 88.5 SQuAD 1.1 Dev F1. Removing NSP while
 retaining MLM gives 87.9; switching to LTR without NSP gives 77.8.
@@ -490,41 +518,62 @@ One LARGE model obtains 83.1 Test F1 on SQuAD 2.0. These values should
 not share an unlabeled column: dataset, external data, and ensembling
 must be identified.
 
+On small labeled datasets, fine-tuning depends on head initialization,
+data order, and hyperparameters. BERT selects runs using dev results;
+RoBERTa's replication tables report medians of five runs. These
+protocols belong beside the number; the best run should not be
+presented as expected performance.
+
+Pre-training transfers corpus properties, including errors and social
+biases. A mean benchmark result does not establish robustness to a
+new domain or the correctness of every prediction.
+
+</details>
+
 <a id="roberta-когда-новый-результат-даёт-не-новая-архитектура"></a>
 
-## RoBERTa: changes to training
+<a id="roberta-changes-to-training"></a>
 
-RoBERTa retains a bidirectional stack and MLM. Liu et al. first study
-example preparation and optimization at BASE size, then combine changes
-in a LARGE model. The sequence of comparisons separates individual
-settings from the final recipe's result
-([§§3–5](https://arxiv.org/pdf/1907.11692v1)).
+## RoBERTa: masking, data, and optimization
 
-### Static and dynamic masking
+The RoBERTa experiments retain the BERT encoder and its masked-token
+task. Liu et al. first vary how they prepare and train examples at
+BASE size. For LARGE they also use a larger corpus and train longer
+([RoBERTa, §§3–5](https://arxiv.org/pdf/1907.11692v1)).
 
-Original BERT preprocessing writes corrupted examples in advance.
-To avoid giving a text only one mask, data are duplicated ten times
-with different variants. In the 40-epoch regime described by RoBERTa,
-each variant appears about four times.
+<a id="static-and-dynamic-masking"></a>
 
-Dynamic masking selects positions again before presenting the input.
-The same tokenized string might first reconstruct `cute`, later `dog`,
-then `likes`. The training example changes, not the bidirectional
-attention visibility mask.
+### Precomputed BERT masks and fresh RoBERTa masks
 
-| BASE replication variant | SQuAD 2.0 F1 | MNLI-m accuracy | SST-2 accuracy |
+With static masking, the preprocessor might write a copy of this pair
+with `[MASK]` in place of `cute` and `cute` as its target. The next epoch
+reads the same record. BERT's data preparation makes ten copies with
+different replacements rather than fixing one pattern for each text.
+Over the 40 epochs described in RoBERTa, each variant appears about
+four times.
+
+RoBERTa draws the positions again whenever it presents a sequence.
+On the next pass `dog` might be hidden and `cute` might appear in the
+context. The encoder still predicts selected subword IDs, and its
+attention still reads right context.
+
+| Masking | SQuAD 2.0 | MNLI-m | SST-2 |
 |---|---:|---:|---:|
 | static masking | 78.3 | 84.3 | 92.5 |
 | dynamic masking | 78.7 | 84.0 | 92.9 |
 
 Source: [RoBERTa, Table 1](https://arxiv.org/pdf/1907.11692v1#page=4).
-Values are medians over five runs. The effect is small and not uniformly
+The table gives F1 on SQuAD 2.0 and accuracy on MNLI-m and SST-2. Scores are medians over five runs. The effect is small and not uniformly
 positive across the three tasks; dynamic masking alone cannot explain
 RoBERTa's later overall gain.
 
-### NSP and text assembly
+<a id="nsp-and-text-assembly"></a>
 
-Section 4.2 compares four formats:
+### Assembling inputs without NSP
+
+Dropping NSP removes the need to sample a random second segment.
+The space can instead hold more consecutive sentences. Section 4.2
+compares four ways to assemble an input:
 
 | Format | Texts included in one input | NSP |
 |---|---|---|
@@ -536,7 +585,7 @@ Section 4.2 compares four formats:
 A short pair of individual sentences offers fewer long-range dependencies
 than long contiguous segments. The authors increase the short-example
 batch to roughly preserve token count, but SENTENCE-PAIR still underperforms
-SEGMENT-PAIR in their experiment.
+SEGMENT-PAIR: 76.2 versus 78.7 F1 on SQuAD 2.0.
 
 FULL-SENTENCES gives 79.1 SQuAD 2.0 Dev F1; DOC-SENTENCES gives 79.7;
 the SEGMENT-PAIR replication with NSP gives 78.7. Later experiments
@@ -548,7 +597,9 @@ recipe can work without NSP. It does not prove that adding any NSP
 objective to any training setup must hurt. Comparison with BERT's
 ablation requires checking which inputs remain after removing the loss.
 
-### Batch size, update count, and vocabulary
+<a id="batch-size-update-count-and-vocabulary"></a>
+
+### Batch size, update count, and vocabulary size
 
 More examples per update can distribute computation more efficiently.
 But one million steps with batch 256 and one million with batch 8192
@@ -575,7 +626,9 @@ to BASE and 20 million to LARGE while preserving the main blocks.
 Section 4.4 reports small declines on some tasks from the new tokenization;
 it does not present tokenization as an independent explanation for all gains.
 
-### The final recipe and results
+<a id="the-final-recipe-and-results"></a>
+
+### 160 GB of text and half a million steps
 
 CC-NEWS, OpenWebText, and STORIES supplement the original 16 GB of
 BooksCorpus/Wikipedia, bringing the corpus above 160 GB. RoBERTa omits
@@ -600,8 +653,299 @@ start from an MNLI model, and leaderboard QNLI is reformulated as ranking.
 SQuAD 2.0 Dev F1 of 89.4 and RACE Test accuracy of 83.2 follow other
 protocols specified in the paper.
 
+<a id="deberta-separate-content-from-relative-position"></a>
+
+## DeBERTa: content and distance in an attention score
+
+At position 4 in the BERT example, the input sums token, position,
+and segment embeddings. Q and K are projected from that sum.
+DeBERTa can consult a separate row for the distance from position 4
+to `dog` at position 2: $4-2=2$. The key `he` at position 6 uses a
+different row, for $4-6=-2$. These indices are for comparison with
+the BERT example, not a run of the DeBERTa tokenizer.
+
+In the original DeBERTa design, the encoder uses a relative-position
+table $P$ rather than absolute positions at its input. It projects
+content states $H$ and the position table separately. Each token pair
+selects one positional row for each direction.
+
+For one head:
+
+$$
+\begin{aligned}
+Q^c&=HW_{q,c},\\
+K^c&=HW_{k,c},\\
+V^c&=HW_{v,c}.
+\end{aligned}
+$$
+
+$$
+Q^r=PW_{q,r},\qquad K^r=PW_{k,r}.
+$$
+
+Vectors are rows. If $H$ has shape $[T,d]$ and $P$ has shape $[2k,d]$,
+the five projection matrices have shape $[d,d_h]$. Here $k$ limits
+distinguishable distances, not attention length.
+
+<a id="three-terms-in-one-score"></a>
+
+### Three dot products for one pair
+
+Following the convention in the
+[paper, §3.1, Equations 3–4](https://arxiv.org/pdf/2006.03654v6#page=3),
+the relative-row index is
+
+$$
+\delta(i,j)=\operatorname{clip}(i-j+k,0,2k-1).
+$$
+
+The score connecting query $i$ to key $j$ is
+
+$$
+\begin{aligned}
+\tilde A_{ij}
+&=Q_i^cK_j^{c\top}\\
+&\quad+Q_i^cK_{\delta(i,j)}^{r\top}\\
+&\quad+K_j^cQ_{\delta(j,i)}^{r\top}.
+\end{aligned}
+$$
+
+The first product compares content. The second lets a query prefer a
+relative key position: `learning` may score a nearby word on the left
+differently from a distant word on the right. The third compares key content with the query’s location relative to that key, so it uses the reverse index $\delta(j,i)$. The authors omit the position-to-position term
+from the general decomposition.
+
+Take $k=2$, $i=1$, $j=2$, and $d_h=2$. Then $\delta(i,j)=1$ and
+$\delta(j,i)=3$. Let $Q_i^c=(1,2)$, $K_j^c=(3,1)$, $K_1^r=(0,1)$,
+and $Q_3^r=(1,-1)$. The products are $5$, $2$, and $2$. Before softmax,
+their sum is scaled by $\sqrt{3d_h}$:
+$9/\sqrt6\approx3.674235$. This is not yet an attention weight; scores
+for the row's other keys are required.
+
+The example uses three keys. Q, K, V, and the relative vectors are already projected, so only the calculation inside one head remains.
+
+<details id="deberta-attention-code">
+<summary>Code for the three-key calculation</summary>
+
+```python
+import math
+import torch
+
+q = torch.tensor([[1., 0.], [1., 2.], [0., 1.]], dtype=torch.float64)
+k = torch.tensor([[1., 0.], [0., 1.], [3., 1.]], dtype=torch.float64)
+v = torch.tensor([[1., 0.], [0., 1.], [2., 2.]], dtype=torch.float64)
+kr = torch.tensor([[2., 0.], [0., 1.], [1., 0.], [0., 2.]],
+                  dtype=torch.float64)
+qr = torch.tensor([[0., 1.], [1., 0.], [0., 2.], [1., -1.]],
+                  dtype=torch.float64)
+
+def disentangled(q, k, v, kr, qr):
+    distance = len(kr)//2
+    i, j = torch.arange(len(q))[:, None], torch.arange(len(k))[None, :]
+    forward = (i-j+distance).clamp(0, 2*distance-1)
+    reverse = (j-i+distance).clamp(0, 2*distance-1)
+    c2c = q @ k.T
+    c2p = (q[:, None, :]*kr[forward]).sum(-1)
+    p2c = (k[None, :, :]*qr[reverse]).sum(-1)
+    scores = (c2c+c2p+p2c)/math.sqrt(3*q.shape[-1])
+    weights = scores.softmax(-1)
+    return weights @ v, weights, (c2c, c2p, p2c)
+
+output, weights, parts = disentangled(q, k, v, kr, qr)
+assert [float(x[1, 2]) for x in parts] == [5., 2., 2.]
+assert [float(x[1, 0]) for x in parts] == [1., 4., 1.]
+torch.testing.assert_close(sum(x[1] for x in parts),
+                           torch.tensor([6., 5., 9.], dtype=q.dtype))
+print("scores:", sum(x[1] for x in parts)/math.sqrt(6))
+print("weights:", weights[1], "output:", output[1])
+```
+
+</details>
+
+At row $i=1$, sums of the three terms are $(6,5,9)$. Scaling and softmax
+give weights approximately $(0.1973,0.1312,0.6715)$. With values
+$(1,0)$, $(0,1)$, and $(2,2)$, the output is approximately
+$(1.5403,1.4742)$. The third key gets the largest weight, but both
+others still contribute.
+
+An out-of-range distance uses a boundary table row. The distant key
+remains accessible: clipping is not a local-attention mask. Permuting
+tokens can change $i-j$ even when token vectors themselves are unchanged.
+
+Materializing a separate relative vector for every pair would require
+$O(T^2d_h)$ intermediate memory. Algorithm 1 first computes products
+with the shared table of size $2k$, then selects scores by distance
+indices. Relative tables need $O(kd_h)$ memory, but the final score
+matrix is still $T\times T$. DeBERTa does not make full attention linear
+in sequence length.
+
+<a id="enhanced-mask-decoder"></a>
+
+### Enhanced Mask Decoder: absolute positions before MLM
+
+After the encoder reads the input, the MLM head still has a blank to
+fill. DeBERTa supplies absolute positions at this stage. In the
+authors' example, `a new [MASK] opened beside the new [MASK]`, the
+first blank is in the subject and the second in the phrase headed by `beside`.
+The fact that each follows `new` does not distinguish them, though
+their full relative contexts differ.
+
+In [Figure 2](https://arxiv.org/pdf/2006.03654v6#page=20) and Appendix A.8,
+EMD has two inputs: $H$ contains contextual K/V states, and $I$ supplies
+query states. After one pass, updated $I$ reads the same memory $H$
+again. The paper's experiment uses two passes with shared parameters,
+followed by the MLM head.
+
+With `position_biased_input=False`, the released code initializes its queries as
+$H+P_{\rm abs}$, adding the position vectors to the states $H$ from
+the penultimate layer. Both reads of $H$ use the final block's weights.
+
+We can trace two reads of fixed memory numerically. Keep only ordinary
+attention and a residual connection: $Q=I$, $K=V=H$, with identity
+projections. Relative terms, LayerNorm, and the FFN are disabled in this
+small example. Memory has rows $(1,0)$ and $(0,1)$. Position vectors are
+$(0,0)$ and $(1,0)$, so initial queries $I^{(0)}=H+P$ are $(1,0)$ and
+$(1,1)$. Each pass applies the same transformation:
+
+$$
+\begin{aligned}
+A^{(r)}&=\operatorname{softmax}
+\left(\frac{I^{(r)}H^\top}{\sqrt2}\right),\\
+I^{(r+1)}&=I^{(r)}+A^{(r)}H.
+\end{aligned}
+$$
+
+The first query gives scores $(1/\sqrt2,0)$ and weights approximately
+$(0.669762,0.330238)$. Adding the read vector to the query gives the first
+row of $I^{(1)}$ as $1.669762$ and $0.330238$. On the second read, the
+score difference changes; weights become approximately
+$(0.720549,0.279451)$. The first row of $I^{(2)}$ becomes $2.390310$ and
+$0.609690$. K/V remain unchanged in both passes.
+
+<details id="deberta-emd-code">
+<summary>Code for both reads of the fixed memory</summary>
+
+```python
+import math
+import torch
+
+memory = torch.eye(2, dtype=torch.float64)
+positions = torch.tensor([[0., 0.], [1., 0.]], dtype=memory.dtype)
+queries = memory+positions
+history, attention_weights = [], []
+for _ in range(2):
+    weights = (queries @ memory.T/math.sqrt(2)).softmax(-1)
+    queries = queries+weights @ memory
+    attention_weights.append(weights)
+    history.append(queries.clone())
+
+torch.testing.assert_close(history[0][0], torch.tensor(
+    [1.669761549, 0.330238451], dtype=memory.dtype))
+torch.testing.assert_close(history[1][0], torch.tensor(
+    [2.390310430, 0.609689570], dtype=memory.dtype))
+torch.testing.assert_close(history[1][1], torch.tensor(
+    [2., 2.], dtype=memory.dtype))
+print("first read", history[0], "second read", history[1])
+```
+
+</details>
+
+The first read changed the query, so the second read has different
+weights even though the keys and values stay fixed. In DeBERTa, the
+final encoder block performs both reads with learned projections,
+relative scores, normalization, and the FFN. The code computes the
+query states and gathers the prediction positions for the vocabulary
+head. This decoder fills blanks in a known sequence without generating
+a new sequence.
+
+The [authors’ ICLR 2021 slides](https://iclr.cc/media/Slides/iclr/2021/virtual%2804-00-00%29-04-00-00UTC-2562-deberta_decodi.pdf) show the same two inputs.
+
+<details id="deberta-original-emd">
+<summary>Microsoft’s implementation</summary>
+
+The following original excerpt preserves its operators and language
+([Microsoft DeBERTa, `emd_context_layer`](https://github.com/microsoft/DeBERTa/blob/4d7fe0bd4fb3c7d4f4005a7cafabde9800372098/DeBERTa/apps/models/masked_language_model.py#L51-L71)).
+Copyright Microsoft Corporation; [full MIT license](/licenses/microsoft-deberta-MIT.txt).
+
+```python title="Original implementation — MIT"
+    hidden_states = encoder_layers[-2]
+    if not self.position_biased_input:
+      layers = [encoder.layer[-1] for _ in range(2)]
+      z_states +=  hidden_states
+      query_states = z_states
+      query_mask = attention_mask
+      outputs = []
+      rel_embeddings = encoder.get_rel_embedding()
+
+      for layer in layers:
+        # TODO: pass relative pos ids
+        output = layer(hidden_states, query_mask, return_att=False, query_states = query_states, relative_pos=relative_pos, rel_embeddings = rel_embeddings)
+        query_states = output
+        outputs.append(query_states)
+```
+
+</details>
+
+<details id="deberta-setting-and-versions">
+<summary>DeBERTa results and changes in V2</summary>
+
+<a id="fine-tuning-results-and-versions"></a>
+
+SiFT in Section 4 is fine-tuning regularization, not part of the three
+attention terms. The model compares answer distributions for the
+original example and a small perturbation of its input representations.
+SiFT perturbs normalized vectors, reducing dependence of perturbation
+scale on the original embedding norm. The authors apply SiFT to the
+1.5B SuperGLUE model; this description must not be assigned to every
+original DeBERTa checkpoint.
+
+The main LARGE configuration has 24 layers, width 1024, and 16 heads.
+After deduplication it uses about 78 GB of Wikipedia, BooksCorpus,
+OpenWebText, and STORIES. In Table 4 of paper version v6, removing EMD
+changes SQuAD 2.0 Dev F1 from 82.5 to 81.3 and RACE accuracy from
+71.7 to 70.3. This is a BASE ablation, not a LARGE result or a measurement
+of one EMD pass.
+
+For LARGE, the authors report Avg 90.00 in
+[GLUE dev Table 1](https://arxiv.org/pdf/2006.03654v6#page=6), plus 90.7
+SQuAD 2.0 F1 and 86.8 RACE accuracy in Table 2. However, the simple
+mean of the eight printed GLUE metrics is $719/8=89.875$, not 90.00.
+That calculation does not reproduce the reported Avg; the paper does
+not explain the discrepancy there. RoBERTa's ensemble GLUE Test 88.5
+uses another protocol. The 89.9 result versus a human baseline of 89.8
+belongs to the 1.5B model's particular SuperGLUE protocol, not all
+language tasks.
+
+The [official repository](https://github.com/microsoft/DeBERTa)
+separately describes V2: a new 128K SentencePiece vocabulary, an added
+convolution, shared content/position projections, and relative buckets.
+V3 changes the pre-training objective and how embeddings are updated.
+
+</details>
+
+<a id="limitations-and-legacy"></a>
+
+## Input length and answer extraction
+
+BERT's 512-position limit includes subwords, the question, and
+separators. If the passage spans several windows, at least one must
+contain the entire answer, and scores from different windows have to
+be compared. A benchmark with short GLUE examples does not test this.
+
+BERT attends across a known input. MLM fills selected positions in it; that loss does not teach ordinary left-to-right continuation.
+
+On SQuAD 2.0 the model finds a span already present in the passage or
+chooses `[CLS]`. The encoder in
+[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]]
+also reads the question and passage in both directions. A separate
+decoder uses those states to generate an answer, so its output need
+not be bounded by two positions in the passage.
+
+<details id="bert-corruption-variants">
+<summary>Whole-word masking, SpanBERT, and ALBERT</summary>
+
 <a id="whole-word-masking"></a>
-## Whole-word masking selects targets together
+<h3 id="whole-word-masking-selects-targets-together">Whole-word masking selects targets together</h3>
 
 If a name is tokenized as `phil ##am ##mon`, predicting only
 `##am` leaves the other parts visible. Whole-word masking groups those
@@ -691,7 +1035,7 @@ masking in its particular bi-sequence ablation. Dataset, training budget,
 and the other objectives belong with any such comparison.
 
 <a id="spanbert-boundary-objective"></a>
-## SpanBERT: predict a span from its boundaries
+<h3 id="spanbert-predict-a-span-from-its-boundaries">SpanBERT: predict a span from its boundaries</h3>
 
 An extractive QA model locates a contiguous answer, and a coreference
 model compares mentions such as `the champion` and `Denver Broncos`.
@@ -827,7 +1171,7 @@ The check does not say that all internal-position computations receive
 zero gradient throughout SpanBERT.
 
 <a id="spanbert-span-sampling"></a>
-### Sampling several words without introducing a decoder
+<h4 id="sampling-several-words-without-introducing-a-decoder">Sampling several words without introducing a decoder</h4>
 
 Whole-word masking can select isolated words. SpanBERT instead starts
 from a word boundary and extends a contiguous span. Its proposed
@@ -905,7 +1249,7 @@ The two methods share span-based corruption, but their target format,
 conditional dependencies and computation are different.
 
 <a id="sentence-order-prediction"></a>
-## ALBERT: classify the order of two document segments
+<h3 id="albert-classify-the-order-of-two-document-segments">ALBERT: classify the order of two document segments</h3>
 
 NSP's negative example can combine a paragraph about unlocking a door
 with a paragraph about penguins. A classifier can use the change of topic
@@ -1011,259 +1355,16 @@ model, or that solving reversed pairs establishes general discourse
 understanding. A useful diagnostic must test held-out documents and
 control for punctuation, segment length and other ordering cues.
 
-## DeBERTa: separate content from relative position
+</details>
 
-BERT adds absolute position to token vectors at the input. After projection,
-the Q/K dot product mixes both signals. DeBERTa separately projects
-content states $H$ and a relative-position table $P$; a relative vector
-is selected for a position pair, not permanently attached to a word.
-
-For one head:
-
-$$
-\begin{aligned}
-Q^c&=HW_{q,c},\\
-K^c&=HW_{k,c},\\
-V^c&=HW_{v,c}.
-\end{aligned}
-$$
-
-$$
-Q^r=PW_{q,r},\qquad K^r=PW_{k,r}.
-$$
-
-Vectors are rows. If $H$ has shape $[T,d]$ and $P$ has shape $[2k,d]$,
-the five projection matrices have shape $[d,d_h]$. Here $k$ limits
-distinguishable distances, not attention length.
-
-### Three terms in one score
-
-Following the convention in the
-[paper, §3.1, Equations 3–4](https://arxiv.org/pdf/2006.03654v6#page=3),
-the relative-row index is
-
-$$
-\delta(i,j)=\operatorname{clip}(i-j+k,0,2k-1).
-$$
-
-The score connecting query $i$ to key $j$ is
-
-$$
-\begin{aligned}
-\tilde A_{ij}
-&=Q_i^cK_j^{c\top}\\
-&\quad+Q_i^cK_{\delta(i,j)}^{r\top}\\
-&\quad+K_j^cQ_{\delta(j,i)}^{r\top}.
-\end{aligned}
-$$
-
-The first product compares content. The second lets a query prefer a
-relative key position: `learning` may score a nearby word on the left
-differently from a distant word on the right. The third depends on key
-content and the query's relative location. It uses the reversed
-distance $\delta(j,i)$. The authors omit the position-to-position term
-from the general decomposition.
-
-Take $k=2$, $i=1$, $j=2$, and $d_h=2$. Then $\delta(i,j)=1$ and
-$\delta(j,i)=3$. Let $Q_i^c=(1,2)$, $K_j^c=(3,1)$, $K_1^r=(0,1)$,
-and $Q_3^r=(1,-1)$. The products are $5$, $2$, and $2$. Before softmax,
-their sum is scaled by $\sqrt{3d_h}$:
-$9/\sqrt6\approx3.674235$. This is not yet an attention weight; scores
-for the row's other keys are required.
-
-The code expands the example to three keys, applies softmax, and obtains
-a weighted sum of V. Q/K/V and relative vectors are already projected;
-this is one head's computation, not a complete DeBERTa implementation.
-
-```python
-import math
-import torch
-
-q = torch.tensor([[1., 0.], [1., 2.], [0., 1.]], dtype=torch.float64)
-k = torch.tensor([[1., 0.], [0., 1.], [3., 1.]], dtype=torch.float64)
-v = torch.tensor([[1., 0.], [0., 1.], [2., 2.]], dtype=torch.float64)
-kr = torch.tensor([[2., 0.], [0., 1.], [1., 0.], [0., 2.]],
-                  dtype=torch.float64)
-qr = torch.tensor([[0., 1.], [1., 0.], [0., 2.], [1., -1.]],
-                  dtype=torch.float64)
-
-def disentangled(q, k, v, kr, qr):
-    distance = len(kr)//2
-    i, j = torch.arange(len(q))[:, None], torch.arange(len(k))[None, :]
-    forward = (i-j+distance).clamp(0, 2*distance-1)
-    reverse = (j-i+distance).clamp(0, 2*distance-1)
-    c2c = q @ k.T
-    c2p = (q[:, None, :]*kr[forward]).sum(-1)
-    p2c = (k[None, :, :]*qr[reverse]).sum(-1)
-    scores = (c2c+c2p+p2c)/math.sqrt(3*q.shape[-1])
-    weights = scores.softmax(-1)
-    return weights @ v, weights, (c2c, c2p, p2c)
-
-output, weights, parts = disentangled(q, k, v, kr, qr)
-assert [float(x[1, 2]) for x in parts] == [5., 2., 2.]
-assert [float(x[1, 0]) for x in parts] == [1., 4., 1.]
-torch.testing.assert_close(sum(x[1] for x in parts),
-                           torch.tensor([6., 5., 9.], dtype=q.dtype))
-print("scores:", sum(x[1] for x in parts)/math.sqrt(6))
-print("weights:", weights[1], "output:", output[1])
-```
-
-At row $i=1$, sums of the three terms are $(6,5,9)$. Scaling and softmax
-give weights approximately $(0.1973,0.1312,0.6715)$. With values
-$(1,0)$, $(0,1)$, and $(2,2)$, the output is approximately
-$(1.5403,1.4742)$. The third key gets the largest weight, but both
-others still contribute.
-
-An out-of-range distance uses a boundary table row. The distant key
-remains accessible: clipping is not a local-attention mask. Permuting
-tokens can change $i-j$ even when token vectors themselves are unchanged.
-
-Materializing a separate relative vector for every pair would require
-$O(T^2d_h)$ intermediate memory. Algorithm 1 first computes products
-with the shared table of size $2k$, then selects scores by distance
-indices. Relative tables need $O(kd_h)$ memory, but the final score
-matrix is still $T\times T$. DeBERTa does not make full attention linear
-in sequence length.
-
-### Enhanced Mask Decoder
-
-EMD adds absolute positions when reconstructing MLM tokens, after the
-main relative-position processing. The authors motivate this with
-`a new [MASK] opened beside the new [MASK]`: both blanks follow
-`new`, but serve different roles. This motivates an additional feature;
-it does not prove that a complete relative-position model is fundamentally
-unable to distinguish the blanks.
-
-In [Figure 2 and Appendix A.8](https://arxiv.org/pdf/2006.03654v6#page=20),
-EMD has two inputs: $H$ contains contextual K/V states, and $I$ supplies
-query states. After one pass, updated $I$ reads the same memory $H$
-again. The paper's experiment uses two passes with shared parameters,
-followed by the MLM head.
-
-In the pinned official implementation, when
-`position_biased_input=False`, $H$ comes from the penultimate encoder
-output. Initial queries add absolute positional vectors to that $H$.
-The final Transformer block is called twice with the same memory, each
-time replacing query states with its output for the next pass.
-
-The following original excerpt preserves its operators and language
-([Microsoft DeBERTa, `emd_context_layer`](https://github.com/microsoft/DeBERTa/blob/4d7fe0bd4fb3c7d4f4005a7cafabde9800372098/DeBERTa/apps/models/masked_language_model.py#L51-L71)).
-Copyright Microsoft Corporation; [full MIT license](/licenses/microsoft-deberta-MIT.txt).
-
-```python title="Original implementation — MIT"
-    hidden_states = encoder_layers[-2]
-    if not self.position_biased_input:
-      layers = [encoder.layer[-1] for _ in range(2)]
-      z_states +=  hidden_states
-      query_states = z_states
-      query_mask = attention_mask
-      outputs = []
-      rel_embeddings = encoder.get_rel_embedding()
-
-      for layer in layers:
-        # TODO: pass relative pos ids
-        output = layer(hidden_states, query_mask, return_att=False, query_states = query_states, relative_pos=relative_pos, rel_embeddings = rel_embeddings)
-        query_states = output
-        outputs.append(query_states)
-```
-
-For example, two blanks receive different initial position vectors and
-can therefore form different Q with the same contextual memory. On the
-second pass, Q also depends on the first read's result. This is another
-attention transformation, not the addition of two finished vocabulary
-logits or one bias before softmax.
-
-We can trace two reads of fixed memory numerically. Keep only ordinary
-attention and a residual connection: $Q=I$, $K=V=H$, with identity
-projections. Relative terms, LayerNorm, and the FFN are disabled in this
-small example. Memory has rows $(1,0)$ and $(0,1)$. Position vectors are
-$(0,0)$ and $(1,0)$, so initial queries $I^{(0)}=H+P$ are $(1,0)$ and
-$(1,1)$. Each pass applies the same transformation:
-
-$$
-\begin{aligned}
-A^{(r)}&=\operatorname{softmax}
-\left(\frac{I^{(r)}H^\top}{\sqrt2}\right),\\
-I^{(r+1)}&=I^{(r)}+A^{(r)}H.
-\end{aligned}
-$$
-
-The first query gives scores $(1/\sqrt2,0)$ and weights approximately
-$(0.669762,0.330238)$. Adding the read vector to the query gives the first
-row of $I^{(1)}$ as $1.669762$ and $0.330238$. On the second read, the
-score difference changes; weights become approximately
-$(0.720549,0.279451)$. The first row of $I^{(2)}$ becomes $2.390310$ and
-$0.609690$. K/V remain unchanged in both passes.
-
-```python
-import math
-import torch
-
-memory = torch.eye(2, dtype=torch.float64)
-positions = torch.tensor([[0., 0.], [1., 0.]], dtype=memory.dtype)
-queries = memory+positions
-history, attention_weights = [], []
-for _ in range(2):
-    weights = (queries @ memory.T/math.sqrt(2)).softmax(-1)
-    queries = queries+weights @ memory
-    attention_weights.append(weights)
-    history.append(queries.clone())
-
-torch.testing.assert_close(history[0][0], torch.tensor(
-    [1.669761549, 0.330238451], dtype=memory.dtype))
-torch.testing.assert_close(history[1][0], torch.tensor(
-    [2.390310430, 0.609689570], dtype=memory.dtype))
-torch.testing.assert_close(history[1][1], torch.tensor(
-    [2., 2.], dtype=memory.dtype))
-print("first read", history[0], "second read", history[1])
-```
-
-This demonstrates changing queries with fixed memory, not a numerical
-reproduction of the full DeBERTa block. EMD reads retained context using
-the final Transformer block's learned projections, relative scores,
-normalization, and FFN. No new token is inserted between reads; the
-vocabulary head receives the second pass's result.
-
-There is no separate target sequence or causal generation here. After
-training, classification or NER uses the encoder; “decoder” in EMD
-refers to reconstruction of MLM targets. The original mechanism is
-also explained in the [authors' ICLR 2021 slides](https://iclr.cc/media/Slides/iclr/2021/virtual%2804-00-00%29-04-00-00UTC-2562-deberta_decodi.pdf).
-
-### Fine-tuning, results, and versions
-
-SiFT in Section 4 is fine-tuning regularization, not part of the three
-attention terms. The model compares answer distributions for the
-original example and a small perturbation of its input representations.
-SiFT perturbs normalized vectors, reducing dependence of perturbation
-scale on the original embedding norm. The authors apply SiFT to the
-1.5B SuperGLUE model; this description must not be assigned to every
-original DeBERTa checkpoint.
-
-The main LARGE configuration has 24 layers, width 1024, and 16 heads.
-After deduplication it uses about 78 GB of Wikipedia, BooksCorpus,
-OpenWebText, and STORIES. In Table 4 of paper version v6, removing EMD
-changes SQuAD 2.0 Dev F1 from 82.5 to 81.3 and RACE accuracy from
-71.7 to 70.3. This is a BASE ablation, not a LARGE result or a measurement
-of one EMD pass.
-
-For LARGE, the authors report Avg 90.00 in
-[GLUE dev Table 1](https://arxiv.org/pdf/2006.03654v6#page=6), plus 90.7
-SQuAD 2.0 F1 and 86.8 RACE accuracy in Table 2. However, the simple
-mean of the eight printed GLUE metrics is $719/8=89.875$, not 90.00.
-That calculation does not reproduce the reported Avg; the paper does
-not explain the discrepancy there. RoBERTa's ensemble GLUE Test 88.5
-uses another protocol. The 89.9 result versus a human baseline of 89.8
-belongs to the 1.5B model's particular SuperGLUE protocol, not all
-language tasks.
-
-Version boundaries also matter. The [official repository](https://github.com/microsoft/DeBERTa)
-separately describes V2: a new 128K SentencePiece vocabulary, an added
-convolution, shared content/position projections, and relative buckets.
-V3 changes the pre-training objective and how embeddings are updated.
+<details id="bert-rtd-variants">
+<summary>ELECTRA and DeBERTaV3: detecting replacements</summary>
 
 <a id="electra-replaced-token-detection"></a>
 
-## ELECTRA: detecting which tokens changed
+<a id="electra-detecting-which-tokens-changed"></a>
+
+<h3>ELECTRA: identifying replaced tokens</h3>
 
 BERT computes states for the entire input, but its vocabulary head
 has direct targets only at selected positions. ELECTRA uses those
@@ -1310,7 +1411,9 @@ shows the full path from masks to replacement labels.
 
 <a id="debertav3-gradient-disentangling"></a>
 
-## DeBERTaV3: shared values, separate gradients
+<a id="debertav3-shared-values-separate-gradients"></a>
+
+<h3>DeBERTaV3: sharing embeddings with stop-gradient</h3>
 
 DeBERTaV3 retains DeBERTa's attention with separate content and
 relative-position signals. During pre-training the main encoder becomes
@@ -1440,31 +1543,7 @@ The discriminator can be exported with the folded table
 $E_G+E_\Delta$. Fine-tuning the encoder for answer extraction, for
 example, requires neither the generator nor the RTD head.
 
-## Limitations and legacy
-
-Full attention processes known text, but MLM does not define an ordinary
-autoregressive factorization of its probability. Free generation needs
-another procedure or different training. Only selected positions receive
-direct MLM loss, while the full attention matrix is still computed
-for every real position.
-
-The 512 limit concerns subword input length including special tokens,
-not 512 document words. For long text, window selection, overlap,
-answer merging, and index offsets become part of the method. Quality
-on short GLUE examples does not evaluate these decisions.
-
-On small labeled datasets, fine-tuning depends on head initialization,
-data order, and hyperparameters. BERT selects runs using dev results;
-RoBERTa's replication tables report medians of five runs. These
-protocols belong beside the number; the best run should not be
-presented as expected performance.
-
-Pre-training transfers corpus properties, including errors and social
-biases. A mean benchmark result does not establish robustness to a
-new domain or the correctness of every prediction.
-
-The encoder in [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]] also reads in both directions. Its decoder
-uses those states to generate the answer as text.
+</details>
 
 ## Sources and further reading
 
@@ -1483,5 +1562,5 @@ uses those states to generate the answer as text.
 - [[02 Areas/ML & DL/01 Справочник/Архитектурные паттерны/Encoder-only|Encoder-only reference]].
 - [[02 Areas/ML & DL/04 Вопросы/100 вопросов по NLP|NLP questions]].
 
-**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three architectural patterns]] ·
+**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three Transformer architectures]] ·
 **Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]].

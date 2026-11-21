@@ -6,6 +6,7 @@ import {describe,expect,it} from 'vitest';
 const root=resolve(import.meta.dirname,'../..');
 const read=(p:string)=>readFileSync(resolve(root,p));
 const chapter='00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md';
+const english='en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md';
 const body=read(chapter).toString();
 const conceptPath='Concepts/Architectures/T5.md';
 const concept=read(conceptPath).toString();
@@ -28,13 +29,14 @@ describe('T5 chapter contracts',()=>{
       'сбрасывают и self-KV','Сам график показывает только training loss'])expect(body).toContain(fact);
   });
   it('embeds six original licensed JMLR figures and removes obsolete usages',()=>{
-    const embedded=[...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^\]]+)\]\]/g)].map(m=>m[1]);
+    const embedded=[...body.matchAll(/!\[\[02 Areas\/ML & DL\/([^\]]+)\]\]/g)].map(m=>m[1].split('|')[0]);
     expect(new Set(embedded)).toEqual(new Set(figures.map((s:any)=>s.asset)));
     expect(figures).toHaveLength(6);
     for(const f of figures){
       const rows=assets.filter((r:any)=>r.asset===f.asset);
       expect(rows).toHaveLength(1);
       expect(rows[0].used_in).toContain(chapter);
+      expect(rows[0].used_in).toContain(english);
       expect(rows[0].license).toBe('CC BY 4.0');
       for(const [key,value] of Object.entries(f)){
         if(['name','width','height'].includes(key))continue;
@@ -79,5 +81,12 @@ describe('T5 chapter contracts',()=>{
       'c4-масштаб-начинается-с-отбора-данных',
       'перенос-задача-становится-данными-а-не-новой-головой',
       'как-читать-ключевые-эксперименты'])expect(body).toContain('id="'+id+'"');
+  });
+  it('keeps exact example programs in both chapters and pins the translated revision',()=>{
+    const translated=read(english).toString();
+    const fm=YAML.parse(translated.split('---')[1]);
+    expect(fm.canonical_revision).toBe(hash(read(chapter)));
+    const examples=(s:string)=>[...s.matchAll(/^~~~python\n([\s\S]*?)^~~~$/gm)].map(m=>m[1]);
+    expect(examples(translated)).toEqual(examples(body));
   });
 });

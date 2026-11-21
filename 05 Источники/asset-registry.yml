@@ -3188,7 +3188,7 @@ assets:
     metadata_status: "verified"
     provenance_confirmation: "bert-family-source-snapshot"
     derivation: "pdf-crop"
-    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md"]
+    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md"]
   - id: "curated-bert-input-4149c1e46212"
     asset: "00 Учебник/Assets/Figures/curated/bert-family-2026-10-22/bert-figure2.png"
     sha256: "4149c1e462122866d4364bfeb51b48fe6f4c3a74315a2e3f9cbabb3e9a3a2399"
@@ -3212,7 +3212,7 @@ assets:
     metadata_status: "verified"
     provenance_confirmation: "bert-family-source-snapshot"
     derivation: "pdf-crop"
-    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md"]
+    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md"]
   - id: "curated-architecture-19124bf6d52d"
     asset: "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure1.png"
     sha256: "19124bf6d52dbf0380a26c9ce1590792333479b641774f709cdea3a231b8c76f"
@@ -3236,7 +3236,7 @@ assets:
     metadata_status: "verified"
     provenance_confirmation: "architecture-patterns-source-snapshot"
     derivation: "pdf-crop"
-    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md", "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md", "Concepts/Architectures/T5.md"]
+    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md", "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md", "Concepts/Architectures/T5.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md"]
   - id: "curated-architecture-e1de839a24bd"
     asset: "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure2.png"
     sha256: "e1de839a24bd6fed80e2a95cd0b07ffc4ce9d00c5d71d65ff5034a9c86e72a6d"
@@ -3285,7 +3285,7 @@ assets:
     provenance_confirmation: "t5-source-snapshot"
     derivation: "pdf-crop"
     rights_status: "source-license-verified"
-    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md"]
+    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md"]
   - id: "curated-architecture-3a331a66ab73"
     asset: "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure3.png"
     sha256: "3a331a66ab7332cc337df3af9db456733baa8742e86c87f7ebabe889501675d4"
@@ -3309,7 +3309,7 @@ assets:
     metadata_status: "verified"
     provenance_confirmation: "architecture-patterns-source-snapshot"
     derivation: "pdf-crop"
-    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md", "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md"]
+    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md", "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md"]
   - id: "curated-architecture-4cbd29f25173"
     asset: "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure4.png"
     sha256: "4cbd29f251732e2522cc831d5f625bc017227925c15ea00992f0c2e171db5f99"
@@ -3333,7 +3333,7 @@ assets:
     metadata_status: "verified"
     provenance_confirmation: "architecture-patterns-source-snapshot"
     derivation: "pdf-crop"
-    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md", "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md", "Concepts/Architectures/T5.md"]
+    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md", "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md", "Concepts/Architectures/T5.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md"]
   - id: "curated-t5-repeated-data-bd9b04b6dc10"
     asset: "00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure6-repeated-data.png"
     sha256: "bd9b04b6dc10e44d86d2eab6725550fc31c5b26222ee37400bc449dfbb62683b"
@@ -3358,7 +3358,7 @@ assets:
     provenance_confirmation: "t5-source-snapshot"
     derivation: "pdf-crop"
     rights_status: "source-license-verified"
-    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md", "Concepts/Architectures/T5.md"]
+    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md", "Concepts/Architectures/T5.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md"]
   - id: "curated-t5-objectives-c0ba886d49d9"
     asset: "00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure5-objectives.png"
     sha256: "c0ba886d49d9acd8115fc2cc72330730d367257ae2622153ed224e4110fdd202"
@@ -3383,7 +3383,7 @@ assets:
     provenance_confirmation: "t5-source-snapshot"
     derivation: "pdf-crop"
     rights_status: "source-license-verified"
-    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md"]
+    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md"]
   - id: "curated-architecture-6e3eb49a71f6"
     asset: "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/bert-figure4.png"
     sha256: "6e3eb49a71f6a256f2f25c6b638c085b26fb4c5bbb199bb5d660a34a2107fcc3"
@@ -3407,7 +3407,7 @@ assets:
     metadata_status: "verified"
     provenance_confirmation: "architecture-patterns-source-snapshot"
     derivation: "pdf-crop"
-    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md", "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md"]
+    used_in: ["00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md", "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md"]
   - id: "curated-full-transformer-bead3dcd79bb"
     asset: "00 Учебник/Assets/Figures/curated/full-transformer-2026-10-21/transformer_resideual_layer_norm_3.png"
     author: "Jay Alammar"
@@ -7321,7 +7321,7 @@ assets:
     license: "CC BY-NC-SA 4.0"
     license_url: "https://creativecommons.org/licenses/by-nc-sa/4.0/"
     modifications: "Original PNG copied without changes and byte-matched to the author page."
-    used_in: ["Concepts/Architectures/BERT.md","00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md"]
+    used_in: ["Concepts/Architectures/BERT.md","00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md"]
     metadata_status: "verified"
     provenance_confirmation: "bert-family-source-snapshot"
     source_asset: "05 Источники/Originals/bert-family-2026-10-22/bert-base-bert-large-encoders.png"
@@ -7355,6 +7355,7 @@ assets:
     used_in:
       - 00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md
       - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md
       - Concepts/Architectures/BERT.md
       - Concepts/NLP/Transfer Learning.md
     metadata_status: verified
@@ -7401,6 +7402,7 @@ assets:
       - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md
       - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md
       - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md
       - Concepts/Architectures/BERT.md
   - id: "curated-bert-893524971850"
     asset: "00 Учебник/Assets/Figures/curated/bert/bert-next-sentence-prediction.png"
@@ -7409,7 +7411,7 @@ assets:
     license: "CC BY-NC-SA 4.0"
     license_url: "https://creativecommons.org/licenses/by-nc-sa/4.0/"
     modifications: "Original PNG copied without changes and byte-matched to the author page."
-    used_in: ["Concepts/Architectures/BERT.md","00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md"]
+    used_in: ["Concepts/Architectures/BERT.md","00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md", "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md"]
     metadata_status: "verified"
     provenance_confirmation: "bert-family-source-snapshot"
     source_asset: "05 Источники/Originals/bert-family-2026-10-22/bert-next-sentence-prediction.png"

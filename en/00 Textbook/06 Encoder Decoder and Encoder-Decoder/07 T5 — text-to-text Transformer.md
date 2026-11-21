@@ -4,10 +4,10 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "c0a782f948d6f46fce8dfb29c8f06a684b2115a2fc5f182995fd74cf423a1a33"
-translation_reviewed: "2026-10-29"
+canonical_revision: "2a658ef7dc210ea1633bbcdc481f6a673416b0648377083983e78eb7e3afa369"
+translation_reviewed: "2026-11-21"
 translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md"
-last_updated: 2026-10-29
+last_updated: 2026-11-21
 primary_sources:
   - https://jmlr.org/papers/v21/20-074.html
   - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4
@@ -18,40 +18,39 @@ next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decod
 
 # T5: the text-to-text Transformer
 
-To judge grammatical acceptability, T5 is trained to output
-`acceptable` or `not acceptable`. Translation outputs a translated
-sentence; summarization outputs a summary. In every case, the decoder
-predicts text tokens, including an end token. No separate classification
-head is needed for each dataset.
+For grammatical acceptability, T5 takes
+`cola sentence: The course is jumping well.` and trains on the answer
+`not acceptable`. The translation example in the same paper takes
+`translate English to German: That is good.` and targets `Das ist gut.`
+The decoder draws tokens from the same vocabulary in both cases.
+One target spells a class label; the other is a translation.
 
-Text-to-Text Transfer Transformer names both this representation of
-tasks and an encoder–decoder model. Raffel et al. use the common
-format to compare architectures, pre-training objectives, corpora,
-transfer strategies, and model sizes.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure1.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure1.png|Four text input–output pairs: translation, a CoLA label, a similarity score, and a summary]]
 
 *Raffel et al., [Exploring the Limits of Transfer Learning, Figure 1, page 3](https://jmlr.org/papers/volume21/20-074/20-074.pdf#page=3).
 Original translation, CoLA, STS-B, and summarization examples. English
 strings and caption are preserved,
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
 
-A prefix such as `translate English to German:` or `cola sentence:`
-is part of training input. Its relationship to the desired answer is
-learned from such pairs. This differs from
+The prefix `translate English to German:` identifies the task. The model
+learned to translate after that prefix from labeled examples. This
+differs from
 [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3]],
 where examples specify a task in current context without weight
-updates. A short prefix alone does not make original T5 reliably
-follow any new instruction.
+updates. An unseen prefix does not guarantee that T5 can perform a new task.
 
-## Architecture: source and answer have different roles
+<a id="architecture-source-and-answer-have-different-roles"></a>
 
-In translation, the whole source sentence is available before generation.
-The encoder therefore reads it with bidirectional self-attention.
-The decoder receives previous translation tokens and accesses encoder
-output through cross-attention. Future translation words remain hidden.
+## What the encoder and decoder read
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure4.png]]
+When T5 translates `That is good.`, it already has the complete
+English sentence. The encoder reads it together with the task
+prefix and can attend to text on either side of a position. If the
+decoder has already written `Das ist`, it reads that German prefix
+and looks up the English states through cross-attention. The next
+word must be predicted without reading the rest of the translation.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure4.png|The paper compares an encoder–decoder, a causal language model, and a prefix language model]]
 
 *Raffel et al., [Figure 4, page 16](https://jmlr.org/papers/volume21/20-074/20-074.pdf#page=16).
 Encoder–decoder on the left, ordinary language model in the center,
@@ -74,9 +73,11 @@ encoder memory. With $h$ heads, scores have shapes $[B,h,T,T]$ and
 $[B,h,T,S]$ respectively. After the last decoder block, normalization
 and a shared vocabulary projection produce logits $[B,T,V]$.
 
-### Input and answer visibility
+<a id="input-and-answer-visibility"></a>
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure3.png]]
+### Which tokens each attention operation can read
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure3.png|The allowed connections under fully visible, causal, and prefix-visible attention]]
 
 *Raffel et al., [Figure 3, page 15](https://jmlr.org/papers/volume21/20-074/20-074.pdf#page=15).
 Dark cells allow attention. Rows are numbered bottom to top, which
@@ -102,162 +103,18 @@ attention within one stack. T5 has a separate encoder stack and
 separate cross-attention projections. Their information access is
 similar, but changing one mask does not make them the same implementation.
 
-### Shift decoder input, not the original targets
+<a id="pre-training-reconstruct-deleted-spans"></a>
 
-The released tokenizer encodes `not acceptable` as `[59, 9961, 1]`,
-where 1 is `</s>`. Training feeds the decoder `[0, 59, 9961]`.
-ID 0, ordinarily PAD, serves as a start token here.
+## Pre-training on missing spans
 
-| Position | Input | Target |
-|---|---|---|
-| 0 | PAD, 0 | not, 59 |
-| 1 | not, 59 | acceptable, 9961 |
-| 2 | acceptable, 9961 | EOS, 1 |
+The text supplies its own labels in pre-training. From
+`Thank you for inviting me to your party last week.` the paper
+selects `for`, `inviting`, and `last`. The first two are adjacent.
+T5 replaces both with one special token, a *sentinel*, and uses
+another sentinel in place of `last`. The decoder must emit the
+missing spans in their original order.
 
-At position 1, the model knows `not` but has not seen `acceptable`.
-All three positions are computed in parallel; causal masking preserves
-the same conditioning as sequential generation. Decoder input is
-shifted, while cross-entropy compares logits at $t$ with the original
-target at the same $t$.
-
-If conditional probabilities of the three correct tokens are $0.4$,
-$0.5$, and $0.8$, the full-string probability is $0.16$.
-Total negative log-likelihood is $-\ln0.16\approx1.8326$, or $0.6109$
-averaged over three tokens. These are illustrative values, not T5
-measurements. The EOS target teaches stopping after the label.
-
-Target-text padding must be excluded from batch loss. Transformers
-uses label `-100` for this, not the vocabulary PAD ID.
-These have different roles: `-100` is not an input token and becomes
-PAD when targets shift. The starting PAD remains a real, visible
-decoder position. A `decoder_input_ids != 0` mask would wrongly
-remove it.
-
-## How a T5 block differs from the original Transformer
-
-An encoder block applies self-attention followed by an FFN;
-a decoder block inserts cross-attention between them. Each sublayer
-receives normalized input, then adds its output to the unnormalized
-residual path. Without dropout, an encoder block is
-
-$$
-\begin{aligned}
-u&=x+\operatorname{SelfAttn}(R(x)),\\
-z&=u+\operatorname{FFN}(R(u)).
-\end{aligned}
-$$
-
-Here $R$ normalizes without mean subtraction or an added bias:
-
-$$
-R(x)_i=\gamma_i\frac{x_i}
-{\sqrt{\frac1d\sum_{j=1}^{d}x_j^2+\epsilon}}.
-$$
-
-For $x=(1,2)$, unit $\gamma$, and negligible $\epsilon$, the output
-is approximately $(0.6325,1.2649)$. Its mean is not zero.
-Ordinary LayerNorm first subtracts 1.5 and gives approximately
-$(-1,1)$. Substituting it would change T5's function even if layer
-placement stayed the same.
-
-Original T5's FFN is $\operatorname{ReLU}(xW_i)W_o$.
-In the pinned implementation, attention and FFN projections have no
-bias. Each stack also ends with normalization. Encoder token embeddings,
-decoder token embeddings, and vocabulary output weights are tied.
-This shares one table; ordinary T5's encoder and decoder blocks have
-separate parameters. Sharing whole-stack parameters is a separate ablation.
-
-Before tied vocabulary output, states are multiplied by $d^{-1/2}$.
-The pinned attention implementation computes $QK^\top$, then adds
-bias and mask; it has no extra division by $\sqrt{d_{kv}}$.
-Projection scaling is accounted for in initialization. Mechanically
-importing another implementation's scale factor would change logits
-([`modeling_t5.py`](https://github.com/huggingface/transformers/blob/753d61104116eefc8ffc977327b441ee0c8d599f/src/transformers/models/t5/modeling_t5.py);
-general architecture: paper §2.1).
-
-### Relative positions change scores, not token vectors
-
-T5 does not add absolute position vectors to embeddings. For each
-query/key pair, it computes offset $r=j-i$ and bucket $b(r)$.
-Each head learns a table of scalar biases:
-
-$$
-s_{ij}^{(a)}=q_i^{(a)}k_j^{(a)\top}+
-\beta_{a,b(j-i)}+M_{ij}.
-$$
-
-$M$ forbids unavailable connections; $\beta$ changes preferences
-among allowed ones. If two content scores are zero and biases are
-0 and $\ln3$, softmax gives weights $0.25$ and $0.75$.
-Positions can affect attention before content scores differ.
-
-The encoder uses 32 buckets split by direction. Within a direction,
-distances 0–7 are exact; farther distances enter logarithmically
-widening intervals. Positive $j-i$ gives:
-
-| Offset $j-i$ | Encoder bucket |
-|---:|---:|
-| 0 | 0 |
-| 1 | 17 |
-| 2 | 18 |
-| 8 | 24 |
-| 16 | 26 |
-| 64 | 30 |
-| 128 | 31 |
-
-Negative offsets use the other half. The decoder has only the
-past-facing direction, so its 32 buckets are not halved and exact
-distances cover 0–15. A causal mask blocks future positions;
-bucket assignment itself does not replace that mask.
-
-All distances of 128 or more use the boundary bucket for their
-direction; rounding may place some shorter distances there too.
-This is not a 128-token attention window. An encoder position can
-still read the whole source; several distant positions simply get
-the same relative bias. A stack shares its bias table across its
-layers, but encoder and decoder have separate tables. Cross-attention
-in the pinned implementation adds no such learned bias.
-
-### Head width need not be model width divided by head count
-
-For T5-Base, $d=768$, $h=12$, and $d_{kv}=64$, so combined head width
-$a=h d_{kv}=768$. But T5-3B uses $d=1024$, $h=32$, and $d_{kv}=128$,
-giving $a=4096$. At 11B, 128 heads give $a=16384$.
-$W_Q,W_K,W_V$ project width $d$ into $a$; output projection returns
-$a$ to $d$. Block counts below are for each of the two stacks.
-
-| Model | Blocks | $d$ | FFN |
-|---|---:|---:|---:|
-| Small | 6 | 512 | 2048 |
-| Base | 12 | 768 | 3072 |
-| Large | 24 | 1024 | 4096 |
-| 3B | 24 | 1024 | 16384 |
-| 11B | 24 | 1024 | 65536 |
-
-These configurations are described in
-[§3.7](https://jmlr.org/papers/volume21/20-074/20-074.pdf#page=36)
-and fixed in official gin files. A Base encoder block contains
-$4da+2df+2d$ parameters; a decoder block contains $8da+2df+3d$.
-Here $f$ is FFN width and the last term counts normalization scales.
-The shared token table adds $Vd$, final normalizations $2d$, and
-two bias tables $64h$. With $V=32128$, total parameters are
-222,903,552. “220M” is a rounded name.
-
-SentencePiece has 32,000 entries; with 100 sentinels, the tokenizer
-exposes 32,100 IDs. The configuration pads table rows to 32,128.
-This distinguishes tokenizer size from matrix size; the extra 28
-are not ordinary subwords. The tokenizer is trained on English,
-German, French, and Romanian at ratio 10:1:1:1, while the model's
-main C4 pre-training corpus remains English.
-
-## Pre-training: reconstruct deleted spans
-
-Ordinary text supplies a task without manual labels: delete some
-tokens and use them as correct answers. T5 replaces every contiguous
-deleted span with its own sentinel, allowing the decoder to associate
-reconstructed content with the right location.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure2-spans.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure2-spans.png|Sentinels X and Y replace two spans; the target contains the missing spans between X, Y, and Z]]
 
 *Raffel et al., [Figure 2, page 13](https://jmlr.org/papers/volume21/20-074/20-074.pdf#page=13).
 The encoder sees two gaps; the decoder reconstructs the removed spans.
@@ -304,7 +161,116 @@ token despite its long textual spelling. The final `<extra_id_2>`
 does not identify a third deleted word here; it closes the target
 list before EOS.
 
-### Converting a mask into two sequences
+<a id="shift-decoder-input-not-the-original-targets"></a>
+
+<a id="t5-shifted-span"></a>
+
+### The decoder input and the first four targets
+
+The encoder input has eleven tokens. The decoder must emit seven:
+the table shows the first four, followed by `last`, `<extra_id_2>`,
+and EOS. For training, the correct output is fed to the decoder
+one position to the right. The first position receives ID 0. This
+is the PAD ID, but at decoder position zero it is the start token
+and remains available to self-attention.
+
+| Position | Decoder input | Target |
+| ---: | --- | --- |
+| 0 | PAD | `<extra_id_0>` |
+| 1 | `<extra_id_0>` | `for` |
+| 2 | `for` | `inviting` |
+| 3 | `inviting` | `<extra_id_1>` |
+
+When the model predicts `for` it sees PAD and the first sentinel.
+At the next position it reads the true `for` even if its own
+prediction would have been wrong. This is *teacher forcing*.
+During generation the decoder receives the token it actually chose.
+
+One training pass computes all seven logit rows. The cross-attention
+scores have shape `[1,h,7,11]`: each row can read all eleven encoder
+positions. The causal mask belongs to a different operation, decoder
+self-attention. It hides future answer tokens without hiding `week`,
+which is still part of the input.
+
+<a id="independent-baseline-deletions-versus-final-t5s-sampled-spans"></a>
+
+### How the training pipeline selects spans
+
+In the paper's baseline (§3.1.4), each token is independently deleted
+with probability 15%, then neighboring deleted tokens are merged.
+The resulting number and average length of spans are not fixed in advance.
+
+Final models (§3.3.4, §3.7) specify noisy-token count $m$ and noisy-span
+count $s$. For $N\ge2$, noise rate 0.15, and mean length 3,
+the standard helper uses
+
+$$
+\begin{aligned}
+m&=\operatorname{clip}(\operatorname{round}(0.15N),1,N-1),\\
+s&=\max(1,\operatorname{round}(m/3)).
+\end{aligned}
+$$
+
+It partitions $m$ into $s$ positive lengths, independently partitions
+$N-m$ clean tokens into $s$ positive lengths, and alternates the parts.
+At $N=40$, $m=6$ and $s=2$. Noise lengths $(2,4)$ and clean lengths
+$(17,17)$ are possible: 17 clean, 2 noisy, 17 clean, 4 noisy.
+Mean noise length is 3 although neither span has length 3.
+
+[Official `random_spans_noise_mask`](https://github.com/google-research/text-to-text-transfer-transformer/blob/42909aa15d1fbd16c69333aa474a00ae8ed9fde4/t5/data/preprocessors.py)
+with `random_roll=False` starts clean and ends noisy.
+Paired `nonnoise_span_to_unique_sentinel` then yields a target
+ending with the last reconstructed span and EOS; there may be no
+separate closing sentinel afterward. Figure 2 ends with clean text
+and therefore includes an extra sentinel. Reproducing preprocessing
+requires checking the mask, transformation, and EOS addition together,
+not insisting that every example literally end in `<extra_id_2>`.
+
+<a id="why-the-decoder-gets-a-short-target"></a>
+
+#### Input and target lengths after corruption
+
+For $N$ original tokens, $m$ deletions, and $s$ noisy spans,
+source length before EOS is usually $N-m+s$. If the mask starts clean
+and ends noisy, target length is $m+s$. At $N=40$, lengths are 36
+and 8 before EOS rather than regenerating all 40. This reduces
+decoder positions, FFN work, and attention matrices.
+
+The standard length helper selects 568 original tokens to obtain
+encoder input length 512 including EOS. It deletes 85 tokens in
+28 spans; target length including EOS is 114. Thus “source length
+512” and “512 original tokens before corruption” may refer to
+different pipeline stages.
+
+<a id="a-teaching-training-step-from-batch-to-weight-update"></a>
+
+### The loss for a batch of two examples
+
+The first toy pair has seven target tokens. For the second, remove
+`9` from `[3,9,4]`: the encoder input is `[3,14,4,1]` and the
+targets are `[14,9,13,1]`. Pad the second input to seven positions
+with zeroes. Mark the three extra target positions `-100`. That
+value is outside the vocabulary and is ignored by cross-entropy.
+
+The shift gives decoder inputs `[0,14,9,13,1,0,0]`. The first
+four positions contribute a loss, including the EOS target at
+position 3. That same EOS appears at input position 4, but it lies
+beyond the causal mask of every supervised position. In this batch
+`labels.ne(-100)` keeps the starting zero and masks the tail after
+the last target. The mask `decoder_input_ids != 0` would incorrectly
+hide the start token.
+
+There are eleven targets in the batch, so the loss is averaged
+over eleven tokens, not `2 × 7`. With sixteen vocabulary entries
+in the toy model, the logits have shape `[2,7,16]`. One SGD update
+on this batch moves the loss from $3.228539$ to $2.934116$.
+This checks the calculation from random weights, without loading
+or evaluating a released T5 model.
+
+<details id="t5-preprocessing-code">
+<summary>Code that prepares the encoder input and targets</summary>
+
+<a id="converting-a-mask-into-two-sequences"></a>
 
 First check the transformation on short toy IDs. Let original tokens
 be `[2,3,4,5,6,7,8]`, deleting `3,4` and `7`.
@@ -343,60 +309,12 @@ samples the mask nor reproduces the official TensorFlow processor's
 random seeds. The manually chosen example also does not demonstrate
 15% noise or a mean span length of 3.
 
-### Independent baseline deletions versus final T5's sampled spans
+</details>
 
-In the paper's baseline (§3.1.4), each token is independently deleted
-with probability 15%, then neighboring deleted tokens are merged.
-The resulting number and average length of spans are not fixed in advance.
+<details id="t5-training-code">
+<summary>Code for one training update</summary>
 
-Final models (§3.3.4, §3.7) specify noisy-token count $m$ and noisy-span
-count $s$. For $N\ge2$, noise rate 0.15, and mean length 3,
-the standard helper uses
-
-$$
-\begin{aligned}
-m&=\operatorname{clip}(\operatorname{round}(0.15N),1,N-1),\\
-s&=\max(1,\operatorname{round}(m/3)).
-\end{aligned}
-$$
-
-It partitions $m$ into $s$ positive lengths, independently partitions
-$N-m$ clean tokens into $s$ positive lengths, and alternates the parts.
-At $N=40$, $m=6$ and $s=2$. Noise lengths $(2,4)$ and clean lengths
-$(17,17)$ are possible: 17 clean, 2 noisy, 17 clean, 4 noisy.
-Mean noise length is 3 although neither span has length 3.
-
-[Official `random_spans_noise_mask`](https://github.com/google-research/text-to-text-transfer-transformer/blob/42909aa15d1fbd16c69333aa474a00ae8ed9fde4/t5/data/preprocessors.py)
-with `random_roll=False` starts clean and ends noisy.
-Paired `nonnoise_span_to_unique_sentinel` then yields a target
-ending with the last reconstructed span and EOS; there may be no
-separate closing sentinel afterward. Figure 2 ends with clean text
-and therefore includes an extra sentinel. Reproducing preprocessing
-requires checking the mask, transformation, and EOS addition together,
-not insisting that every example literally end in `<extra_id_2>`.
-
-### Why the decoder gets a short target
-
-For $N$ original tokens, $m$ deletions, and $s$ noisy spans,
-source length before EOS is usually $N-m+s$. If the mask starts clean
-and ends noisy, target length is $m+s$. At $N=40$, lengths are 36
-and 8 before EOS rather than regenerating all 40. This reduces
-decoder positions, FFN work, and attention matrices.
-
-The standard length helper selects 568 original tokens to obtain
-encoder input length 512 including EOS. It deletes 85 tokens in
-28 spans; target length including EOS is 114. Thus “source length
-512” and “512 original tokens before corruption” may refer to
-different pipeline stages.
-
-## A teaching training step: from batch to weight update
-
-The two pairs below use the preceding example's toy vocabulary.
-In the second, original `[3,9,4]` becomes source `[3,14,4,1]`
-and target `[14,9,13,1]`: 14 identifies the only gap and 13 closes
-it before EOS. This shorter pair is padded. The model is small
-and randomly initialized; no pretrained weights are needed.
-The code uses Transformers 4.57.6 and ordinary CPU PyTorch.
+The toy model has two layers per stack. The configuration sets the vocabulary and start ID; the masks keep exactly eleven target positions in the loss.
 
 ~~~python
 import torch
@@ -445,27 +363,248 @@ print(float(out.loss.detach()), float(after_loss))
 assert not torch.equal(before, model.shared.weight)
 ~~~
 
-The encoder processes two length-7 sources; the second has four real
-tokens. The decoder also has seven positions in each row, but loss
-uses only 11 target tokens: seven in the first, four in the second.
-Both rows use the same parameters. Gradients update encoder, decoder,
-and shared vocabulary table; address equality checks weight tying.
-
 `_shift_right` is shown as a detail of this pinned implementation,
 not a universal public API across versions. Supplying only `labels`
 would let this implementation prepare the shift itself. It is made
 explicit here to check input and mask.
 
-This executes one step on an artificial batch. SGD and the small
-configuration are chosen to check computation. The paper uses
-AdaFactor, large corpora, and many more updates; this example does
-not reproduce released T5 quality.
+</details>
+
+<a id="how-a-t5-block-differs-from-the-original-transformer"></a>
+
+## Normalization and projections in a T5 block
+
+An encoder block applies self-attention followed by an FFN;
+a decoder block inserts cross-attention between them. Each sublayer
+receives normalized input, then adds its output to the unnormalized
+residual path. Without dropout, an encoder block is
+
+$$
+\begin{aligned}
+u&=x+\operatorname{SelfAttn}(R(x)),\\
+z&=u+\operatorname{FFN}(R(u)).
+\end{aligned}
+$$
+
+Here $R$ normalizes without mean subtraction or an added bias:
+
+$$
+R(x)_i=\gamma_i\frac{x_i}
+{\sqrt{\frac1d\sum_{j=1}^{d}x_j^2+\epsilon}}.
+$$
+
+For $x=(1,2)$, unit $\gamma$, and negligible $\epsilon$, the output
+is approximately $(0.6325,1.2649)$. Its mean is not zero.
+Ordinary LayerNorm first subtracts 1.5 and gives approximately
+$(-1,1)$. Substituting it would change T5's function even if layer
+placement stayed the same.
+
+Original T5's FFN is $\operatorname{ReLU}(xW_i)W_o$.
+In the pinned implementation, attention and FFN projections have no
+bias. Each stack also ends with normalization. Encoder token embeddings,
+decoder token embeddings, and vocabulary output weights are tied.
+This shares one table; ordinary T5's encoder and decoder blocks have
+separate parameters. Sharing whole-stack parameters is a separate ablation.
+
+Before tied vocabulary output, states are multiplied by $d^{-1/2}$.
+The pinned attention implementation computes $QK^\top$, then adds
+bias and mask; it has no extra division by $\sqrt{d_{kv}}$.
+Projection scaling is accounted for in initialization. Mechanically
+importing another implementation's scale factor would change logits
+([`modeling_t5.py`](https://github.com/huggingface/transformers/blob/753d61104116eefc8ffc977327b441ee0c8d599f/src/transformers/models/t5/modeling_t5.py);
+general architecture: paper §2.1).
+
+<a id="relative-positions-change-scores-not-token-vectors"></a>
+
+### Relative-position bias in attention
+
+T5 does not add absolute position vectors to embeddings. For each
+query/key pair, it computes offset $r=j-i$ and bucket $b(r)$.
+Each head learns a table of scalar biases:
+
+$$
+s_{ij}^{(a)}=q_i^{(a)}k_j^{(a)\top}+
+\beta_{a,b(j-i)}+M_{ij}.
+$$
+
+$M$ forbids unavailable connections; $\beta$ changes preferences
+among allowed ones. If two content scores are zero and biases are
+0 and $\ln3$, softmax gives weights $0.25$ and $0.75$.
+Positions can affect attention before content scores differ.
+
+The encoder uses 32 buckets split by direction. Within a direction,
+distances 0–7 are exact; farther distances enter logarithmically
+widening intervals. Positive $j-i$ gives:
+
+| Offset $j-i$ | Encoder bucket |
+|---:|---:|
+| 0 | 0 |
+| 1 | 17 |
+| 2 | 18 |
+| 8 | 24 |
+| 16 | 26 |
+| 64 | 30 |
+| 128 | 31 |
+
+For $j-i=-2$ the bucket is 2, and for $j-i=2$ it is 18.
+These two keys can receive different weights even when their content
+scores match. The decoder has only the
+past-facing direction, so its 32 buckets are not halved and exact
+distances cover 0–15. A causal mask blocks future positions;
+bucket assignment itself does not replace that mask.
+
+All distances of 128 or more use the boundary bucket for their
+direction; rounding may place some shorter distances there too.
+This is not a 128-token attention window. An encoder position can
+still read the whole source; several distant positions simply get
+the same relative bias. A stack shares its bias table across its
+layers, but encoder and decoder have separate tables. Cross-attention
+in the pinned implementation adds no such learned bias.
+
+<details id="t5-configuration">
+<summary>Head dimensions and parameter counts</summary>
+
+<a id="head-width-need-not-be-model-width-divided-by-head-count"></a>
+
+For T5-Base, $d=768$, $h=12$, and $d_{kv}=64$, so combined head width
+$a=h d_{kv}=768$. But T5-3B uses $d=1024$, $h=32$, and $d_{kv}=128$,
+giving $a=4096$. At 11B, 128 heads give $a=16384$.
+$W_Q,W_K,W_V$ project width $d$ into $a$; output projection returns
+$a$ to $d$. Block counts below are for each of the two stacks.
+
+| Model | Blocks | $d$ | FFN |
+|---|---:|---:|---:|
+| Small | 6 | 512 | 2048 |
+| Base | 12 | 768 | 3072 |
+| Large | 24 | 1024 | 4096 |
+| 3B | 24 | 1024 | 16384 |
+| 11B | 24 | 1024 | 65536 |
+
+These configurations are described in
+[§3.7](https://jmlr.org/papers/volume21/20-074/20-074.pdf#page=36)
+and fixed in official gin files. A Base encoder block contains
+$4da+2df+2d$ parameters; a decoder block contains $8da+2df+3d$.
+Here $f$ is FFN width and the last term counts normalization scales.
+The shared token table adds $Vd$, final normalizations $2d$, and
+two bias tables $64h$. With $V=32128$, total parameters are
+222,903,552. “220M” is a rounded name.
+
+SentencePiece has 32,000 entries; with 100 sentinels, the tokenizer
+exposes 32,100 IDs. The configuration pads table rows to 32,128.
+This distinguishes tokenizer size from matrix size; the extra 28
+are not ordinary subwords. The tokenizer is trained on English,
+German, French, and Romanian at ratio 10:1:1:1, while the model's
+main C4 pre-training corpus remains English.
+
+</details>
+
+
+<span id="перенос-задача-становится-данными-а-не-новой-головой"></span>
+
+<a id="fine-tuning-task-mixtures-and-answer-evaluation"></a>
+
+## Fine-tuning on labels and answers
+
+Return to `cola sentence:`. During pre-training the decoder restored
+missing spans; now its target comes from a labeled example. For
+`The course is jumping well.` it is `not`, `acceptable`, EOS.
+For SQuAD it reads a question and paragraph through the encoder and
+generates the answer. BERT scored candidate start and end positions
+in the same passage; T5 trains on the shifted answer tokens instead.
+
+The released tokenizer encodes `not acceptable` as `[59, 9961, 1]`,
+where 1 is `</s>`. Training feeds the decoder `[0, 59, 9961]`.
+ID 0, ordinarily PAD, serves as a start token here.
+
+| Position | Input | Target |
+|---|---|---|
+| 0 | PAD, 0 | not, 59 |
+| 1 | not, 59 | acceptable, 9961 |
+| 2 | acceptable, 9961 | EOS, 1 |
+
+At position 1, the model knows `not` but has not seen `acceptable`.
+All three positions are computed in parallel; causal masking preserves
+the same conditioning as sequential generation. Decoder input is
+shifted, while cross-entropy compares logits at $t$ with the original
+target at the same $t$.
+
+If conditional probabilities of the three correct tokens are $0.4$,
+$0.5$, and $0.8$, the full-string probability is $0.16$.
+Total negative log-likelihood is $-\ln0.16\approx1.8326$, or $0.6109$
+averaged over three tokens. These are illustrative values, not T5
+measurements. The EOS target teaches stopping after the label.
+
+Figure 1 also shows an STS-B score written as text. The preprocessor
+rounds scores to increments of 0.2, so 2.57 becomes `2.6` and
+nearby numeric scores can share a target string.
+
+At evaluation, a CoLA prediction must map to an allowed label.
+`unacceptable` in place of `not acceptable` does not count even
+though the meaning is similar. SQuAD uses exact match and token F1,
+summarization uses ROUGE, and translation uses BLEU.
+
+One encoder–decoder can train on mixed records. But sampling all
+datasets proportional to size would nearly displace small supervised
+tasks with enormous C4. Section 3.5.2 introduces an artificial
+dataset-size cap $K$:
+
+$$
+\begin{aligned}
+p_i&=\frac{\min(n_i,K)}{\sum_j\min(n_j,K)},\\
+p_i^{(T)}&=\frac{p_i^{1/T}}{\sum_jp_j^{1/T}}.
+\end{aligned}
+$$
+
+For toy datasets of 100 million, 1 million, and 10,000 examples,
+ordinary mixing gives approximately 99.00%, 0.99%, and 0.01%.
+Capping at $K=1$ million gives 49.75%, 49.75%, and 0.50%.
+Applying $T=2$ afterward gives 47.62%, 47.62%, and 4.76%.
+The small dataset appears more often, but its examples repeat more.
+This illustrates the formula, not final T5 mixture weights.
+The temperature-mixing experiment uses $K=2^{21}$.
+
+Final models choose the unlabeled task's effective size separately:
+710,000 for Small through 133 million for 11B, with 2.62 million
+for Base. En–Fr and En–De effective pre-training sizes are capped at
+one million examples. These choices and separate fine-tuning are part
+of Section 3.7's result. “Multi-task” does not mean that every table
+entry comes from one checkpoint without additional training.
+
+<details id="t5-finetuning-variants">
+<summary>Adapters and gradual unfreezing</summary>
+
+<a id="full-updates-adapters-and-gradual-unfreezing"></a>
+
+Section 3.5.1 compares fine-tuning strategies. The ordinary approach
+updates every parameter. Adapters insert extra dense–ReLU–dense blocks
+after existing FFNs; adapters and normalization parameters change,
+while main weights stay fixed. A narrow intermediate representation
+reduces trainable parameter count.
+
+At model width 768 and adapter width 32, its two matrices contain
+$2\cdot768\cdot32=49152$ weights excluding biases. Width 512 raises
+this to 786,432. Small adapters perform worse on high-resource tasks
+in the experiment; fewer trainable parameters do not automatically
+preserve quality.
+
+Gradual unfreezing starts with upper blocks of both stacks, adding
+another encoder and decoder layer approximately every $2^{18}/12$
+steps. Shared embeddings update throughout. In this comparison,
+gradual unfreezing slightly trails full fine-tuning while reducing
+some computation. That concerns a particular schedule and datasets,
+not a prohibition on frozen layers in other regimes.
+
+</details>
+
+## Objectives, data, and scale
 
 <span id="почему-авторы-выбрали-именно-эту-цель"></span>
 
-## How pre-training objectives were compared
+<a id="how-pre-training-objectives-were-compared"></a>
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure5-objectives.png]]
+### Choosing an objective for missing text
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure5-objectives.png|The experiments compare objectives, span deletion, noise rates, and span lengths in that order]]
 
 *Raffel et al., [Figure 5, page 24](https://jmlr.org/papers/volume21/20-074/20-074.pdf#page=24).
 Objective experiments proceed through general formulation, corruption
@@ -515,7 +654,9 @@ Table 2 into an unconditional architecture ranking.
 
 <span id="c4-масштаб-начинается-с-отбора-данных"></span>
 
-## C4 and the training regime
+<a id="c4-and-the-training-regime"></a>
+
+### Filtering and repeating C4 data
 
 C4 starts from the April 2019 Common Crawl snapshot. Filters retain
 English with langdetect confidence at least 0.99, lines of at least
@@ -538,7 +679,9 @@ SuperGLUE from 71.36 to 68.04. Wikipedia plus Toronto Books Corpus,
 on the other hand, gives 73.24: alignment between pre-training domain
 and task also affects results.
 
-### The controlled baseline and final series
+<a id="the-controlled-baseline-and-final-series"></a>
+
+#### Training budgets for the baseline and final models
 
 The baseline trains for $2^{19}=524288$ steps with 128 length-512
 sequences per batch: roughly $2^{35}=34.36$ billion token positions.
@@ -566,7 +709,7 @@ tokens while using only $2^{23}$ distinct tokens means 4096 passes.
 Training loss falls, but SuperGLUE drops to 59.29 from the full
 corpus's 71.36.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure6-repeated-data.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure6-repeated-data.png|Training loss on full C4 and on smaller corpora containing 2^29 to 2^23 tokens]]
 
 *Raffel et al., [Figure 6, page 29](https://jmlr.org/papers/volume21/20-074/20-074.pdf#page=29).
 Pre-training losses on full and artificially reduced C4 corpora.
@@ -582,74 +725,11 @@ consistent with corpus memorization; remasking does not create new
 source documents. Quality declines little after 64 repeats in this
 series, so the result does not mean that all data repetition is harmful.
 
-<span id="перенос-задача-становится-данными-а-не-новой-головой"></span>
-
-## Fine-tuning, task mixtures, and answer evaluation
-
-Supervised fine-tuning prepares source/target pairs. CoLA generates a
-label; SQuAD generates answer text from a question and context;
-CNN/Daily Mail generates a summary. STS-B rounds scores to increments
-of 0.2 and writes them as strings: 2.57 becomes `2.6`.
-This discretizes regression; nearby numbers may now share one target.
-
-After generation, outputs are converted to metric format. A label
-string is matched against allowed classes; an invalid string counts
-as an error. SQuAD uses exact match and token F1, summaries use
-ROUGE, and translation uses BLEU. A common vocabulary head does not
-make these criteria identical. EOS and label wording also enter
-training probability.
-
-One encoder–decoder can train on mixed records. But sampling all
-datasets proportional to size would nearly displace small supervised
-tasks with enormous C4. Section 3.5.2 introduces an artificial
-dataset-size cap $K$:
-
-$$
-\begin{aligned}
-p_i&=\frac{\min(n_i,K)}{\sum_j\min(n_j,K)},\\
-p_i^{(T)}&=\frac{p_i^{1/T}}{\sum_jp_j^{1/T}}.
-\end{aligned}
-$$
-
-For toy datasets of 100 million, 1 million, and 10,000 examples,
-ordinary mixing gives approximately 99.00%, 0.99%, and 0.01%.
-Capping at $K=1$ million gives 49.75%, 49.75%, and 0.50%.
-Applying $T=2$ afterward gives 47.62%, 47.62%, and 4.76%.
-The small dataset appears more often, but its examples repeat more.
-This illustrates the formula, not final T5 mixture weights.
-The temperature-mixing experiment uses $K=2^{21}$.
-
-Final models choose the unlabeled task's effective size separately:
-710,000 for Small through 133 million for 11B, with 2.62 million
-for Base. En–Fr and En–De effective pre-training sizes are capped at
-one million examples. These choices and separate fine-tuning are part
-of Section 3.7's result. “Multi-task” does not mean that every table
-entry comes from one checkpoint without additional training.
-
-### Full updates, adapters, and gradual unfreezing
-
-Section 3.5.1 compares fine-tuning strategies. The ordinary approach
-updates every parameter. Adapters insert extra dense–ReLU–dense blocks
-after existing FFNs; adapters and normalization parameters change,
-while main weights stay fixed. A narrow intermediate representation
-reduces trainable parameter count.
-
-At model width 768 and adapter width 32, its two matrices contain
-$2\cdot768\cdot32=49152$ weights excluding biases. Width 512 raises
-this to 786,432. Small adapters perform worse on high-resource tasks
-in the experiment; fewer trainable parameters do not automatically
-preserve quality.
-
-Gradual unfreezing starts with upper blocks of both stacks, adding
-another encoder and decoder layer approximately every $2^{18}/12$
-steps. Shared embeddings update throughout. In this comparison,
-gradual unfreezing slightly trails full fine-tuning while reducing
-some computation. That concerns a particular schedule and datasets,
-not a prohibition on frozen layers in other regimes.
-
 <span id="как-читать-ключевые-эксперименты"></span>
 
-## Scaling and results
+<a id="scaling-and-results"></a>
+
+### What changes with more training compute
 
 Section 3.6 compares ways to spend approximately $4\times$ additional
 compute. The following values are validation results from one
@@ -659,6 +739,7 @@ experimental series, not final test results:
 |---|---:|---:|
 | baseline | 83.28 | 71.36 |
 | same model, four times as many steps | 85.33 | 74.72 |
+| same model, four times the batch size | 84.60 | 74.64 |
 | twice as large, twice as many steps | 86.18 | 77.18 |
 | four times as large, original step count | 85.91 | 78.04 |
 | ensemble of four complete runs | 84.77 | 71.74 |
@@ -688,7 +769,9 @@ tasks. For example, T5-11B has COPA 94.8 and WSC 93.8 versus the
 reported human 100%. ROUGE likewise checks reference overlap,
 not factual support for every summary sentence.
 
-## Inference cost and practical trade-offs
+<a id="inference-cost-and-practical-trade-offs"></a>
+
+## Generation and cache reuse
 
 At inference, the encoder processes the source once. Each decoder
 layer separately projects encoder memory into cross-attention keys
@@ -724,7 +807,9 @@ answering from the old source. New source requires a fresh decoder
 cache, not merely new `encoder_outputs`
 ([pinned T5Attention.forward branch](https://github.com/huggingface/transformers/blob/753d61104116eefc8ffc977327b441ee0c8d599f/src/transformers/models/t5/modeling_t5.py#L496)).
 
-### Memory and computation
+<a id="memory-and-computation"></a>
+
+### Memory for keys and values
 
 For Base, $S=512$, $T=128$ already processed decoder positions, and
 FP16, self-KV requires
@@ -740,8 +825,9 @@ term. A short target reduces the last two, not the cost of encoding
 a long document. For 3B and 11B, KV calculations use $h d_{kv}$,
 not automatically $d_{model}$.
 
-Final experiments use beam width 4 and length penalty 0.6 for long
-answers; controlled experiments use greedy decoding. Beams retain
+The final WMT translation and CNN/Daily Mail summarization experiments
+use beam width 4 and length penalty 0.6. The earlier experiments use
+greedy decoding. Beams retain
 different continuations and add decoder work. Shared source permits
 reuse of encoder computation and cross-KV; actual memory duplication
 depends on implementation.
@@ -752,14 +838,10 @@ encoder–decoder separates known input from generated text. Selection
 requires source and answer lengths, latency constraints, and quality
 on relevant data; parameter count alone does not settle it.
 
-## Limitations and legacy
+<a id="limitations-and-legacy"></a>
 
-Original T5 trains on a web corpus with specific filtering and limited
-language coverage. Textual answers may contain errors; a shared loss
-does not verify each conclusion's truth. Text-to-text formatting also
-does not itself eliminate possible pre-training/evaluation overlap.
+## T5.1.1 and related models
 
-Later model names identify different changes.
 [Official T5.1.1 documentation](https://github.com/google-research/text-to-text-transfer-transformer/blob/42909aa15d1fbd16c69333aa474a00ae8ed9fde4/released_checkpoints.md)
 lists GEGLU instead of ReLU, disabled pre-training dropout, C4-only
 training without a downstream mixture, and untied embedding/output

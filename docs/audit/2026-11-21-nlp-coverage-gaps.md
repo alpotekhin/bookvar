@@ -54,7 +54,10 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«Self-Attention — Q, K, V»](2026-11-21-self-attention-editorial-pass.json),
 [«Маски, несколько голов и формы тензоров»](2026-11-21-masking-heads-editorial-pass.json),
 [«Позиционная информация»](2026-11-21-positional-information-editorial-pass.json),
-[«Полный Transformer: энкодер и декодер»](2026-11-21-full-transformer-editorial-pass.json) и
-[«Три архитектуры Transformer»](2026-11-21-architecture-patterns-editorial-pass.json).
-Следующая глава — «BERT, RoBERTa и DeBERTa». Проследить изменения в
-подготовке примеров, устройстве внимания и протоколах сравнения моделей.
+[«Полный Transformer: энкодер и декодер»](2026-11-21-full-transformer-editorial-pass.json),
+[«Три архитектуры Transformer»](2026-11-21-architecture-patterns-editorial-pass.json),
+[«BERT, RoBERTa и DeBERTa»](2026-11-21-bert-family-editorial-pass.json) и
+[«T5 — text-to-text Transformer»](2026-11-21-t5-editorial-pass.json).
+Следующая глава — «GPT-1 — генеративное предобучение».
+Проследить, как один причинный стек переходит от предсказания следующего
+токена к классификации и чем этот протокол отличается от формата T5.
