@@ -4397,6 +4397,19 @@ describe('static handbook output', () => {
       expect(html).not.toContain('katex-error');
     }
   });
+  it('presents the GPT-3 prompt, byte positions and demonstration figure before architecture', async () => {
+    for (const locale of ['', 'en/']) {
+      const html=await readFile(join(distDir,locale,'textbook/models/gpt-3/index.html'),'utf8');
+      const main=html.slice(html.indexOf('sl-markdown-content'));
+      const sequence=['id="gpt3-relation-shots"','Relation: contradiction','39793, 434',
+        'min-figure2-demonstrations.png','tokens-through-stack-frame-385.png',
+        'id="gpt3-candidate-scores"','id="gpt3-full-local-attention"',
+        'id="gpt3-training-configurations"','id="gpt3-next-models"'];
+      const offsets=sequence.map(token=>main.indexOf(token));
+      expect(offsets.every((at,i)=>at>=0&&(i===0||at>offsets[i-1]))).toBe(true);
+      expect(main).toContain('href="/'+locale+'textbook/modern-llm/llama-architecture/" rel="next"');
+    }
+  });
   it('carries the same entailment prompt from GPT-2 through GPT-3 and the first LLaMA', async () => {
     for (const locale of ['', 'en/']) {
       const base = `/${locale}textbook/`;
@@ -4564,7 +4577,11 @@ describe('static handbook output', () => {
       for (const [path, id] of translations) {
         expect(routeLinks).toContain(`${prefix}${book}${path}#${id}`);
         const chapter = await readFile(join(distDir, prefix, book, path, 'index.html'), 'utf8');
-        const example = chapter.match(new RegExp(`id="${id}"[\\s\\S]*?(?=<h[23]\\b)`))?.[0];
+        const section = path === 'models/gpt-2/'
+          ? chapter.match(/id="gpt2-translation-prefix"[\s\S]*?(?=id="gpt2-gpt3-coqa")/)?.[0]
+          : chapter.match(new RegExp(`id="${id}"[\\s\\S]*?(?=<h[23]\\b)`))?.[0];
+        const example = section;
+        if (path === 'models/gpt-2/') expect(example).toContain(`id="${id}"`);
         expect(example).toContain('The bird sings.');
         if (id === 'translation-direction-and-parallel-examples') {
           const prompt = example!.match(/<pre\b[\s\S]*?<\/pre>/)?.[0];
@@ -5375,6 +5392,21 @@ describe('static handbook output', () => {
     expect(html).toMatch(/<strong>Назад:<\/strong>[\s\S]{0,300}href="\/textbook\/models\/gpt-1\/"/);
     expect(html).toMatch(/<strong>Далее:<\/strong>[\s\S]{0,300}href="\/textbook\/models\/gpt-3\/"/);
   });
+  it('uses the same Relation prefix for scoring, vocabulary logits, and the second token with cache', async () => {
+    for (const locale of ['', 'en']) {
+      const prefix = locale ? '/en' : '';
+      const html = await readFile(join(distDir, locale, 'textbook/models/gpt-2/index.html'), 'utf8');
+      const main = html.slice(html.indexOf('sl-markdown-content'));
+      const sequence = ['id="gpt2-relation-prefix"', '39793', '0.40', '0.20',
+        'id="gpt2-pre-norm"', 'gpt2-output-projection-2.png',
+        'gpt2-self-attention-qkv-3-2.png', 'id="gpt2-cache-code"',
+        'id="gpt2-translation-prefix"', 'id="gpt2-gpt3-coqa"'];
+      const offsets = sequence.map(token => main.indexOf(token));
+      expect(offsets.every((value,i) => value >= 0 && (i === 0 || value > offsets[i-1]))).toBe(true);
+      expect(main).toContain(`href="${prefix}/textbook/models/gpt-3/" rel="next"`);
+      expect(main).toContain(`href="${prefix}/textbook/models/gpt-1/" rel="prev"`);
+    }
+  });
   it('renders the GPT-2 translation example and its GPT-3 continuation in both editions', async () => {
     for (const locale of ['', 'en']) {
       const prefix = locale ? '/en' : '';
@@ -5497,6 +5529,18 @@ describe('static handbook output', () => {
     expect(html).not.toContain('katex-error');
     expect(html).toMatch(/<strong>Назад:<\/strong>[\s\S]{0,300}href="\/textbook\/models\/t5\/"/);
     expect(html).toMatch(/<strong>Далее:<\/strong>[\s\S]{0,300}href="\/textbook\/models\/gpt-2\/"/);
+  });
+  it('follows the same prefix from language modeling to supervised GPT-1 in both locales',async()=>{
+    for(const prefix of ['', 'en/']){
+      const page=await readFile(join(distDir,prefix+'textbook/models/gpt-1/index.html'),'utf8');
+      const main=page.slice(page.indexOf('sl-markdown-content'));
+      const sequence=['d2l-gpt-decoder.png','0.083421','id="gpt1-decoder-architecture"',
+        'bert-gpt-elmo-figure3.png','cs224n-decoder-classifier.png','0.6652',
+        'id="gpt1-mit-lm"','2.085067','id="gpt1-two-update-code"','gpt2-relation-prefix'];
+      const offsets=sequence.map(token=>main.indexOf(token));
+      expect(offsets.every((at,i)=>at>=0&&(i===0||at>offsets[i-1]))).toBe(true);
+      expect(main).toContain('href="/'+prefix+'textbook/models/gpt-2/" rel="next"');
+    }
   });
   it('renders the corrected GPT-1 paper note and its link to the full chapter',async()=>{
     const html=await readFile(join(distDir,'sources/papers/gpt-1-0/index.html'),'utf8');

@@ -433,7 +433,8 @@ sections:
             items:
               - label: GPT-1 — генеративное предобучение
                 route: textbook/models/gpt-1
-              - label: GPT-2 — zero-shot через язык
+              - label: GPT-2 — задачи как продолжение текста
+                label_en: GPT-2 — tasks as text continuations
                 route: textbook/models/gpt-2
               - label: GPT-3 — in-context learning
                 route: textbook/models/gpt-3

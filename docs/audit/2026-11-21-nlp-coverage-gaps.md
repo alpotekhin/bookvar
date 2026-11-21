@@ -56,8 +56,12 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«Позиционная информация»](2026-11-21-positional-information-editorial-pass.json),
 [«Полный Transformer: энкодер и декодер»](2026-11-21-full-transformer-editorial-pass.json),
 [«Три архитектуры Transformer»](2026-11-21-architecture-patterns-editorial-pass.json),
-[«BERT, RoBERTa и DeBERTa»](2026-11-21-bert-family-editorial-pass.json) и
-[«T5 — text-to-text Transformer»](2026-11-21-t5-editorial-pass.json).
-Следующая глава — «GPT-1 — генеративное предобучение».
-Проследить, как один причинный стек переходит от предсказания следующего
-токена к классификации и чем этот протокол отличается от формата T5.
+[«BERT, RoBERTa и DeBERTa»](2026-11-21-bert-family-editorial-pass.json),
+[«T5 — text-to-text Transformer»](2026-11-21-t5-editorial-pass.json),
+[«GPT-1 — генеративное предобучение»](2026-11-21-gpt1-editorial-pass.json),
+[«GPT-2 — задачи как продолжение текста»](2026-11-21-gpt2-editorial-pass.json) и
+[«GPT-3 — масштабирование и in-context learning»](2026-11-21-gpt3-editorial-pass.json).
+Следующая глава — «LLaMA как базовая архитектура». На том же запросе
+отделить устройство блока и токенизатора от способа оценки продолжения.
+Сопоставить длину окна, объём предобучения и ширину блока, не приписывая
+разницу в бенчмарках одному изменению.

@@ -4,10 +4,10 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "480d3ccf43e3c543f477a0adea2a298d4c6bf80dc89dfb39eb42e5ab86ca4e16"
-translation_reviewed: "2026-11-13"
+canonical_revision: "a61f95738040c4e47c1b25a74a517a5bb173b527565153b862d57492578e37cc"
+translation_reviewed: "2026-11-21"
 translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md"
-last_updated: 2026-11-13
+last_updated: 2026-11-21
 primary_sources:
   - https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf
   - https://github.com/openai/finetune-transformer-lm/tree/a69b5c43b0452462890bca8ff92fb75dee9290cf
@@ -17,31 +17,120 @@ next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decod
 
 # GPT-1: generative pre-training
 
-Suppose a labeled dataset contains the premise “A cat sleeps” and the
-hypothesis “An animal rests.” The task is to choose entailment,
-contradiction, or insufficient information. An ordinary language model
-instead predicts the next token. GPT-1 connects these tasks through
-shared parameters: first a causal Transformer learns to continue books,
-then the model and a small classification head are fine-tuned on labeled pairs.
+Given `A cat sleeps` and `An animal rests`, a model must choose one
+of three relations: entailment, neutral, or contradiction.
+[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]]
+would generate the label as text. GPT‑1 assigns scores to the
+three classes with a separate head. That head reads the final
+token's state from a causal Transformer.
 
-Fine-tuning changes all network weights. Sentiment classification and
-story-ending selection need their own data and separate fine-tuned
-parameter versions. GPT-1's main results follow this training on each
-task; experiments without weight updates are discussed separately below.
-Pre-training followed by fine-tuning already existed; the authors discuss
-Dai and Le and ULMFiT. Their 2018 work examines transfer from a causal
-Transformer and ways to present several task types to it
-([paper, Sections 1–3](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf)).
+Before the head is added, the same Transformer trains to predict
+the next token in ordinary text. Fine-tuning starts from those
+weights and updates them on labeled examples for a particular task.
+The authors compare this procedure with training from scratch on
+the same tasks ([paper, §§3–5](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf)).
+
+<a id="stage-one-what-bookscorpus-teaches"></a>
+
+## The next token as a training target
+
+Treat each word in `a cat sleeps the dog runs` as one token.
+The state at `a` predicts `cat`, and the state at `cat` predicts
+`sleeps`. The second row can read `a cat`, but the next word
+`sleeps` is not visible to it.
+
+```text
+input:   a    cat     sleeps  the  dog   runs
+target:  cat  sleeps  the     dog  runs  —
+```
+
+The final output has no known target because the segment's continuation
+is absent from this example. Six input tokens yield five loss terms.
+The network computes them in parallel; the causal mask prevents reading
+the target from the next position. Gradients pass through the output
+projection, all blocks, and input representations.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ntp-review-2026-10/d2l-gpt-decoder.png|Targets are shifted one token. The causal mask lets the prediction for book read this, but not book itself.]]
+
+*Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola,
+[Dive into Deep Learning, Figure 11.9.6](https://en.d2l.ai/chapter_attention-mechanisms-and-transformers/large-pretraining-transformers.html#fig-gpt-decoder-only),
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+The complete [author SVG](https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/gpt-decoder-only.svg) is rendered without cropping or redrawing.*
+
+On the right, the row marked `book` is the prediction at the input
+position `this`. It can read inputs from `<bos>` through `this`;
+`book` is the target. The book uses start and end markers to illustrate
+the shift. They are not required for it: in our segment the position
+`a` predicts `cat` without a start marker.
+
+In the [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна#causal-head-to-logits|one-block calculation]]
+for `a cat`, the probability of `sleeps` is about $0.083421$.
+Since `sleeps` is the next token in this text, the loss at `cat`
+is $-\ln(0.083421)\approx2.484$. The text supplies that target
+without annotation. The probability comes from illustrative weights,
+not from a released model.
+
+The paper writes language modeling as maximizing a sum:
+
+$$
+L_1(U)=\sum_t\log P(u_t\mid u_{t-k},\ldots,u_{t-1};\Theta).
+$$
+
+Minimization reverses its sign to give negative log-likelihood.
+Averaging over real targets reduces the loss magnitude's dependence on
+length. Both sign and reduction must be explicit because they affect
+the language-model objective's weight during fine-tuning.
+
+The authors pretrain on BooksCorpus, containing more than seven thousand
+unpublished books. Connected prose places names, events, and related
+sentences in one context. The network nevertheless sees segments of
+at most 512 tokens, not a whole book in one pass. The paper contrasts
+this corpus with the shuffled sentences of the 1 Billion Word Benchmark.
+That motivates corpus selection; it is not an isolated experiment
+establishing the effect of textual continuity alone.
+
+Published preprocessing uses `ftfy` for Unicode repair, standardizes
+spacing and punctuation, splits with spaCy, lowercases each extracted
+token, and applies BPE. This already loses original casing and is not
+a reversible encoding of arbitrary text. The authors train BPE with
+40,000 merges. Merge count is not exact final vocabulary size: initial
+characters remain and special entries are added
+([`TextEncoder`](https://github.com/openai/finetune-transformer-lm/blob/a69b5c43b0452462890bca8ff92fb75dee9290cf/text_utils.py)).
+
+Before GPT‑1, Dai and Le and then the authors of ULMFiT used
+language-model pre-training followed by fine-tuning with recurrent
+networks. GPT‑1 used a causal Transformer for this procedure
+([paper, Section 2](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=2)).
+
+<details id="gpt1-training-settings">
+<summary>Pre-training and fine-tuning settings</summary>
+
+The historical pre-training recipe in Section 4.1 uses Adam, a peak
+learning rate of $2.5\cdot10^{-4}$, warmup over the first 2000 updates,
+then cosine decay to zero. It specifies 100 epochs, batches of 64
+length-512 segments, dropout 0.1, and normal initialization with standard
+deviation 0.02. The paper also specifies modified L2 regularization with a coefficient of 0.01, excluding biases and normalization scales.
+
+Most settings remain for fine-tuning. For most tasks, the authors give
+learning rate $6.25\cdot10^{-5}$, batch 32, three epochs, and linear decay
+after warmup over the first 0.2% of updates. Dropout 0.1 precedes the
+classification head. New special tokens and the head train together
+with transferred weights.
+
+</details>
 
 <a id="gpt1-decoder-architecture"></a>
 
-## One architecture for both stages
+<a id="one-architecture-for-both-stages"></a>
 
-GPT-1 has twelve blocks, state width $d=768$, and twelve attention heads.
-Each head uses $768/12=64$ coordinates; the FFN intermediate width is
-3072. A learned position representation is added to each token
-representation. Maximum length is 512 tokens, including downstream
-task special tokens.
+## Causal attention and the vocabulary readout
+
+The hidden state at `cat` uses token and position vectors for `a`
+and `cat`. The causal mask must be applied in every block to keep
+`sleeps` out of this state. GPT‑1 has twelve blocks with width
+$d=768$ and twelve heads. Each head has width 64, and the FFN
+expands the representation to 3072 coordinates. The input is
+limited to 512 tokens, including special tokens.
 
 The model has approximately 117 million parameters
 ([CS224n, slide 48](https://web.stanford.edu/class/cs224n/slides/cs224n-spr2024-lecture09-pretraining-updated.pdf#page=48)).
@@ -97,105 +186,25 @@ P(u_{t+1}\mid u_{\le t})
 $$
 
 Classification places a different, small matrix above a selected
-position's state. Both heads receive representations from the same
-Transformer, but their distributions cover different sets: vocabulary
-tokens and task labels.
+position's state. The vocabulary readout still produces its own scores, one per token rather than one per task label.
 
-## Stage one: what BooksCorpus teaches
+<a id="stage-two-express-each-task-as-a-sequence"></a>
 
-The authors pretrain on BooksCorpus, containing more than seven thousand
-unpublished books. Connected prose places names, events, and related
-sentences in one context. The network nevertheless sees segments of
-at most 512 tokens, not a whole book in one pass. The paper contrasts
-this corpus with the shuffled sentences of the 1 Billion Word Benchmark.
-That motivates corpus selection; it is not an isolated experiment
-establishing the effect of textual continuity alone.
+## Predicting a class from the Extract state
 
-Published preprocessing uses `ftfy` for Unicode repair, standardizes
-spacing and punctuation, splits with spaCy, lowercases each extracted
-token, and applies BPE. This already loses original casing and is not
-a reversible encoding of arbitrary text. The authors train BPE with
-40,000 merges. Merge count is not exact final vocabulary size: initial
-characters remain and special entries are added
-([`TextEncoder`](https://github.com/openai/finetune-transformer-lm/blob/a69b5c43b0452462890bca8ff92fb75dee9290cf/text_utils.py)).
+Return to `A cat sleeps` and `An animal rests`. The premise now
+appears in full: `sleeps` is part of the input. The label says
+how the two observed sentences relate.
 
-In the toy segment `a cat sleeps the dog runs`, let each word be one
-token. The output at `a` predicts `cat`, the next predicts `sleeps`,
-and so on:
+In [the right panel of Figure 1](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=4),
+the authors add `Start`, separate the sentences with `Delim`, and
+end with `Extract`. The release names them `_start_`,
+`_delimiter_`, and `_classify_`. Fine-tuning adds their vectors
+to the token table.
 
-```text
-input:   a    cat     sleeps  the  dog   runs
-target:  cat  sleeps  the     dog  runs  —
-```
+<a id="textual-entailment"></a>
 
-The final output has no known target because the segment's continuation
-is absent from this example. Six input tokens yield five loss terms.
-The network computes them in parallel; the causal mask prevents reading
-the target from the next position. Gradients pass through the output
-projection, all blocks, and input representations.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ntp-review-2026-10/d2l-gpt-decoder.png|Targets are shifted one token. The causal mask lets the prediction for book read this, but not book itself.]]
-
-*Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola,
-[Dive into Deep Learning, Figure 11.9.6](https://en.d2l.ai/chapter_attention-mechanisms-and-transformers/large-pretraining-transformers.html#fig-gpt-decoder-only),
-[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
-The complete [author SVG](https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/gpt-decoder-only.svg) is rendered without cropping or redrawing.*
-
-On the right, the row marked `book` is the prediction at the input
-position `this`. It can read inputs from `<bos>` through `this`;
-`book` is the target. The book uses start and end markers to illustrate
-the shift. They are not required for it: in our segment the position
-`a` predicts `cat` without a start marker.
-
-The paper writes language modeling as maximizing a sum:
-
-$$
-L_1(U)=\sum_t\log P(u_t\mid u_{t-k},\ldots,u_{t-1};\Theta).
-$$
-
-Minimization reverses its sign to give negative log-likelihood.
-Averaging over real targets reduces the loss magnitude's dependence on
-length. Both sign and reduction must be explicit because they affect
-the language-model objective's weight during fine-tuning.
-
-The historical pre-training recipe in Section 4.1 uses Adam, a peak
-learning rate of $2.5\cdot10^{-4}$, warmup over the first 2000 updates,
-then cosine decay to zero. It specifies 100 epochs, batches of 64
-length-512 segments, dropout 0.1, and normal initialization with standard
-deviation 0.02. These describe a particular experiment; one short
-forward pass below does not reproduce GPT-1 pre-training.
-
-Most settings remain for fine-tuning. For most tasks, the authors give
-learning rate $6.25\cdot10^{-5}$, batch 32, three epochs, and linear decay
-after warmup over the first 0.2% of updates. Dropout 0.1 precedes the
-classification head. New special tokens and the head train together
-with transferred weights.
-
-## Stage two: express each task as a sequence
-
-Fields of a labeled task become one or more text inputs. Special tokens
-mark boundaries and the position from which a representation is extracted.
-[Figure 1 in the OpenAI paper](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=4)
-calls these tokens `Start`, `Delim`, and `Extract`. The released code
-calls them `_start_`, `_delimiter_`, and `_classify_`. The four formats
-on the right are worked through below. In the symmetric task, two states
-are added before the `Linear` layer. For multiple choice, each
-candidate gets its own scalar from `Linear`.
-
-### Single-text classification
-
-For review sentiment, input is `[Start, review, Extract]`.
-When `Extract` is processed, causal attention permits the whole review.
-Its last-layer state is multiplied by
-$W_y\in\mathbb R^{768\times K}$ and softmaxed over $K$ classes.
-
-With right padding, `Extract` may precede the last array element.
-Its position must be located instead of taking `h[:, -1]`. Original
-code finds it using the `_classify_` ID. Positive or negative sentiment
-is stored as a separate label, not inserted into the input from which
-it must be predicted.
-
-### Textual entailment
+### From a sentence pair to three logits
 
 An ordered pair becomes
 `[Start, premise, Delim, hypothesis, Extract]`. Our example is:
@@ -249,7 +258,27 @@ The optimizer changes $W_y$ and Transformer weights on which $h$
 depends. The hidden state is recomputed on the next pass, not retained
 as an independent trainable parameter.
 
-### Semantic similarity
+<details id="gpt1-other-task-formats">
+<summary>Single-text classification and semantic similarity</summary>
+
+<a id="single-text-classification"></a>
+
+<h3>One review</h3>
+
+For review sentiment, input is `[Start, review, Extract]`.
+When `Extract` is processed, causal attention permits the whole review.
+Its last-layer state is multiplied by
+$W_y\in\mathbb R^{768\times K}$ and softmaxed over $K$ classes.
+
+With right padding, `Extract` may precede the last array element.
+Its position must be located instead of taking `h[:, -1]`. Original
+code finds it using the `_classify_` ID. Positive or negative sentiment
+is stored as a separate label, not inserted into the input from which
+it must be predicted.
+
+<a id="semantic-similarity"></a>
+
+<h3>Semantic similarity</h3>
 
 For a symmetric task, a pair is read twice:
 `[Start, A, Delim, B, Extract]` and
@@ -267,6 +296,8 @@ Two passes do not make internal causal states bidirectional. In each
 pass, an early word still cannot read its right context. Symmetry
 arises when the final representations are combined. Adding probabilities
 after softmax instead of states would change the described architecture.
+
+</details>
 
 ### Choosing an answer or story ending
 
@@ -293,6 +324,9 @@ $BC$ states and applying a scalar head, scores reshape to $[B,C]$.
 Candidates do not attend to each other; they interact through output
 normalization and shared weights.
 
+<details id="gpt1-head-arithmetic">
+<summary>Code for the three head calculations</summary>
+
 ```python
 import torch
 import torch.nn.functional as F
@@ -318,11 +352,17 @@ print(round(nli_loss.item(), 6), round(choice_loss.item(), 6))
 # 0.407606 0.201413
 ```
 
-### Two objectives and their normalization
+</details>
 
-The paper's $L_1,L_2,L_3$ are log-likelihoods to maximize.
-$L_2$ scores the correct task label; the auxiliary $L_1$ predicts
-next tokens in task texts:
+<a id="two-objectives-and-their-normalization"></a>
+
+### The classification and next-token losses
+
+The classifier reads `Extract` and scores the correct class. The
+language-model head still scores upcoming tokens in the same input,
+for example `sleeps` after `cat`. Both readouts train the shared
+Transformer. In the paper, $L_2$ is the log-likelihood of the label
+and $L_1$ is the log-likelihood of the tokens:
 
 $$
 L_3=L_2+\lambda L_1.
@@ -363,6 +403,9 @@ For one candidate with loss $2$ and another with losses $(1,1,1)$,
 the first method gives $(2+1)/2=1.5$; the second gives
 $(2+1+1+1)/4=1.25$. Original code uses the first method.
 
+<details id="gpt1-mit-lm">
+<summary>Normalization in the original train.py</summary>
+
 The following excerpt preserves OpenAI's `model` implementation.
 Its last line averages each sequence's losses. The subsequent
 `mgpu_train` averages the resulting array and adds `lm_coef` times
@@ -386,10 +429,14 @@ selected token and position rows, while LM projection uses all of
 `we`, including position rows. An implementation with separate tables
 and token-only output is therefore not a bitwise copy of this code.
 
-### Complete teaching example: pre-training and fine-tuning
+</details>
 
-The next example performs one update at each stage. A small post-norm
-Transformer first predicts a continuation from six ordinary tokens.
+<a id="complete-teaching-example-pre-training-and-fine-tuning"></a>
+
+### One pre-training step and one fine-tuning step
+
+In this example, a small post-norm Transformer first learns to predict
+the next token in a six-token segment.
 Three randomly initialized special embeddings and a scalar head are
 then added. Old token weights and the position table are retained.
 
@@ -398,6 +445,63 @@ Fine-tuning uses two contexts with two candidates each. Every
 mask. ID zero denotes ordinary token `a`; in padding positions it is
 only an array filler. Its presence on the right must neither alter
 the preceding `Extract` state nor add LM targets.
+
+State `h[bc, pool[bc]]` is extracted before right padding. The causal
+mask blocks future positions, so this particular layout needs no
+additional key-padding mask for real states. Left padding or interspersed
+gaps require a separate analysis of masks and positions.
+
+The first update changes weights using LM loss. The second uses CE
+over two candidates and mean LM loss over four sequences. Both objectives
+send gradients into the shared Transformer. Labels `[0,1]` identify
+correct candidate indices and do not enter `ids`.
+
+Flattening axes $B,C$ gives the row order below. The table omits only
+special tokens and padding; target counts include `Delim` and
+`Extract`, but not `Start`.
+
+| Pair | Context and continuation | Targets | Correct |
+|---|---|---:|---|
+| 0, 0 | `a cat` → `sleeps` | 5 | yes |
+| 0, 1 | `a cat` → `runs outside` | 6 | no |
+| 1, 0 | `the dog` → `sleeps outside` | 6 | no |
+| 1, 1 | `the dog` → `runs` | 5 | yes |
+
+Labels `[0,1]` define correctness in this toy dataset. Without more
+context, all these continuations are possible. The batch demonstrates
+computation, not knowledge about cats and dogs.
+
+With the specified CPU seed, row-mean LM losses are approximately
+$2.666036$, $2.762151$, $2.767778$, and $2.737765$. Their mean is
+$2.733433$. Classification loss is already averaged across two tasks
+and equals $0.718351$, giving total
+$0.718351+0.5\cdot2.733433\approx2.085067$.
+Library versions may change the last few digits.
+
+Each LM row has total weight $0.5/4=0.125$. A token in a five-target
+row has coefficient $0.125/5=0.025$; one in a six-target row has
+$0.125/6\approx0.020833$. Right padding gets zero. Averaging over
+candidates thus equalizes sequence weights, not individual token
+weights across lengths. This follows the normalization in the quoted
+`model` and `mgpu_train` code.
+
+An incorrect candidate also trains the LM: its next tokens are targets
+just like those of the correct candidate. The separate classification
+loss teaches selection between them. It sends gradients to both scores
+in each task, not just the correct option's score.
+After backward, `token_loss.grad` contains the coefficients $0.025$,
+$0.020833$, and zero for padding. Each `scores.grad` row is one half
+of candidate probabilities minus the correct-label one-hot vector;
+the factor $1/2$ comes from averaging across two tasks.
+
+Sizes, corpus, update count, and SGD are chosen for a short executable
+example. It follows causal post-norm computation and the transfer
+scheme, but reproduces neither GPT-1 training nor quality. It has no
+dropout, BPE, or distributed training. Its LM output uses token rows
+only, unlike the published TensorFlow code's combined table.
+
+<details id="gpt1-two-update-code">
+<summary>Code for both updates</summary>
 
 ```python
 import torch
@@ -519,78 +623,29 @@ print("updated: backbone and task head")
 # updated: backbone and task head
 ```
 
-State `h[bc, pool[bc]]` is extracted before right padding. The causal
-mask blocks future positions, so this particular layout needs no
-additional key-padding mask for real states. Left padding or interspersed
-gaps require a separate analysis of masks and positions.
+</details>
 
-The first update changes weights using LM loss. The second uses CE
-over two candidates and mean LM loss over four sequences. Both objectives
-send gradients into the shared Transformer. Labels `[0,1]` identify
-correct candidate indices and do not enter `ids`.
+<a id="reading-the-key-experiments"></a>
 
-Flattening axes $B,C$ gives the row order below. The table omits only
-special tokens and padding; target counts include `Delim` and
-`Extract`, but not `Start`.
-
-| Task, candidate | Context and continuation | LM targets | Correct choice |
-|---|---|---:|---|
-| 0, 0 | `a cat` → `sleeps` | 5 | yes |
-| 0, 1 | `a cat` → `runs outside` | 6 | no |
-| 1, 0 | `the dog` → `sleeps outside` | 6 | no |
-| 1, 1 | `the dog` → `runs` | 5 | yes |
-
-Labels `[0,1]` define correctness in this toy dataset. Without more
-context, all these continuations are possible. The batch demonstrates
-computation, not knowledge about cats and dogs.
-
-With the specified CPU seed, row-mean LM losses are approximately
-$2.666036$, $2.762151$, $2.767778$, and $2.737765$. Their mean is
-$2.733433$. Classification loss is already averaged across two tasks
-and equals $0.718351$, giving total
-$0.718351+0.5\cdot2.733433\approx2.085067$.
-Library versions may change the last few digits.
-
-Each LM row has total weight $0.5/4=0.125$. A token in a five-target
-row has coefficient $0.125/5=0.025$; one in a six-target row has
-$0.125/6\approx0.020833$. Right padding gets zero. Averaging over
-candidates thus equalizes sequence weights, not individual token
-weights across lengths. This follows the normalization in the quoted
-`model` and `mgpu_train` code.
-
-An incorrect candidate also trains the LM: its next tokens are targets
-just like those of the correct candidate. The separate classification
-loss teaches selection between them. It sends gradients to both scores
-in each task, not just the correct option's score.
-After backward, `token_loss.grad` contains the coefficients $0.025$,
-$0.020833$, and zero for padding. Each `scores.grad` row is one half
-of candidate probabilities minus the correct-label one-hot vector;
-the factor $1/2$ comes from averaging across two tasks.
-
-Sizes, corpus, update count, and SGD are chosen for a short executable
-example. It follows causal post-norm computation and the transfer
-scheme, but reproduces neither GPT-1 training nor quality. It has no
-dropout, BPE, or distributed training. Its LM output uses token rows
-only, unlike the published TensorFlow code's combined table.
-
-## Reading the key experiments
+## Effects of pre-training on labeled tasks
 
 Main results follow separate supervised fine-tuning on each task.
 The paper evaluates twelve datasets and reports improvements over the
 previous best on nine. Results from Tables 2–4 show both successful
 transfer and limitations:
 
-| Dataset | Metric | GPT-1 | Paper's comparison |
-|---|---|---|---|
-| MultiNLI | accuracy, matched / mismatched | 82.1 / 81.4 | previous 80.6 / 80.1 |
-| Story Cloze | ending-selection accuracy | 86.5 | previous 77.6 |
-| RACE | answer-selection accuracy | 59.0 | previous 53.3 |
-| RTE | entailment accuracy | 56.0 | previous 61.7 |
-| MRPC | paraphrase F1 | 82.3 | previous 86.0 |
+| Dataset and metric | GPT‑1 | Prior best |
+|---|---:|---:|
+| MultiNLI, matched / mismatched accuracy | 82.1 / 81.4 | 80.6 / 80.1 |
+| Story Cloze, ending-selection accuracy | 86.5 | 77.6 |
+| RACE, answer-selection accuracy | 59.0 | 53.3 |
+| RTE, entailment accuracy | 56.0 | 61.7 |
+| MRPC, paraphrase F1 | 82.3 | 86.0 |
 
-These are the authors' historical comparisons, not one shared rerun.
-MRPC F1 cannot be directly compared with RTE accuracy. Likewise, the
-GLUE score of 72.8 in Table 4 is not the mean in the separate ablation table.
+Story Cloze gains 8.9 accuracy points, while RTE trails the previous
+reported score by 5.7 points. The comparisons use different datasets
+and baselines. The GLUE score of 72.8 in Table 4 and the average in
+the ablation below are calculated differently.
 
 Section 5, “Ablation studies,” removes parts of the recipe.
 Table 5 reports these average scores over selected tasks:
@@ -625,7 +680,9 @@ runs is 85.8%, whereas the paper's 86.5% is one run. The authors warn
 about GPU-operation nondeterminism. Published `train.py` implements
 ROCStories/Story Cloze, not all twelve experimental tasks.
 
-### What zero-shot meant in this work
+<a id="what-zero-shot-meant-in-this-work"></a>
+
+## Scoring answers without fine-tuning
 
 Besides fine-tuning, the authors tried fixed rules without task-specific
 weight updates. Section 5, “Zero-shot Behaviors,” lists four ways to
@@ -654,15 +711,19 @@ guessing to the best single-model result at the time, not 68% accuracy.
 The paper's main tables measure a different setup: both the head and
 the Transformer are fine-tuned for the task.
 
-## What GPT-1 did not solve
+<details id="gpt1-context-limit">
+<summary>Context window and input truncation</summary>
+
+<a id="what-gpt-1-did-not-solve"></a>
 
 The 512-token window limits both book segments and the total fields
 of downstream tasks. For
 `Start + context + Delim + answer + Extract`, no more than 509 positions
 remain for content. If preprocessing truncates a sentence or important
 fact, causal attention cannot recover the missing input.
-`transform_roc` truncates context and candidate separately, so actual
-limits must be read together with data-preparation code.
+With `n_ctx=512`, `transform_roc` truncates context and candidate
+separately to 254 tokens, so the longest input in this script uses
+$254+254+3=511$ positions.
 
 Classification at `Extract` uses all preceding text, but early-word
 states remain one-sided. Two semantic-similarity passes remove the
@@ -676,7 +737,11 @@ performs all twelve tasks unchanged. Finally, selecting a plausible
 story ending measures success on that test, not the factual reliability
 of arbitrary text continuations.
 
-## Legacy and the transition to GPT-2
+</details>
+
+<a id="legacy-and-the-transition-to-gpt-2"></a>
+
+## From the classification head to GPT‑2
 
 In our example, GPT-1 chooses a class from three logits above `Extract`.
 In [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-relation-prefix|the same example with GPT-2]],

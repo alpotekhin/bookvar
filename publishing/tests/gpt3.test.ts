@@ -108,4 +108,16 @@ describe('GPT-3 chapter contracts',()=>{
       'ключевые-результаты-без-упрощения','наследие-и-следующий-переход'])
       expect(body).toContain('id="'+id+'"');
   });
+  it('pins both editions and ties the prompt to the actual shifted token positions',()=>{
+    const en=read('en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md').toString();
+    expect(YAML.parse(en.split('---')[1]).canonical_revision).toBe(hash(read(chapter)));
+    const prompt=(page:string)=>page.match(/id="gpt3-relation-shots"[\s\S]*?~~~text\n([\s\S]*?)\n~~~/)?.[1];
+    expect(prompt(body)).toBeDefined();
+    expect(prompt(en)).toBe(prompt(body));
+    for (const page of [body,en]) {
+      expect([...page.matchAll(/^!\[\[[^|\]\n]+\|[^\]\n]+\]\]$/gm)]).toHaveLength(11);
+      expect(page).toContain('39793, 434');
+      expect(page).toContain('gpt3-training-configurations');
+    }
+  });
 });

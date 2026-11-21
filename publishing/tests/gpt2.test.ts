@@ -18,7 +18,7 @@ describe('GPT-2 chapter contracts',()=>{
     expect(read('05 Источники/Originals/gpt2-2026-10-22/model.py').toString()).toContain(excerpt);
     expect(read('site/public/licenses/openai-gpt2-Modified-MIT.txt')).toEqual(read('05 Источники/Originals/gpt2-2026-10-22/LICENSE'));
     for(const fact of ['124 439 808','52.66%','63.24%','stop-word filter','two-shot',
-      'class TinyGPT2','self.final_norm','same logits','0.5–1 F1','4.1% exact match',
+      'class TinyGPT2','self.final_norm','same logits','0.5–1 F1','4.1% точных совпадений (exact match)',
       'P+G-1','семь позиций вместо четырёх','индекс 7 вместо 4'])
       expect(body).toContain(fact);
     expect(body).not.toContain('\x60\x60\x60mermaid');
@@ -94,5 +94,16 @@ describe('GPT-2 chapter contracts',()=>{
     const footer=body.slice(body.lastIndexOf('**Назад:**'));
     expect(footer).toContain(fm.previous.slice(0,-2)+'|');
     expect(footer).toContain(fm.next.slice(0,-2)+'|');
+  });
+  it('pins the English edition and preserves its worked programs and attributed figures',()=>{
+    const en=read('en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md').toString();
+    expect(YAML.parse(en.split('---')[1]).canonical_revision).toBe(hash(read(chapter)));
+    const blocks=(text:string)=>[...text.matchAll(/^\x60{3}python[^\n]*\n([\s\S]*?)^\x60{3}$/gm)].map(x=>x[0]);
+    expect(blocks(en)).toEqual(blocks(body));
+    for(const page of [body,en]){
+      expect([...page.matchAll(/^!\[\[[^|\]\n]+\|[^\]\n]+\]\]$/gm)]).toHaveLength(10);
+      expect(page).toContain('39793');
+      expect(page).toContain(page===body?'(ID 25) на позиции 19':'(ID 25) at position 19');
+    }
   });
 });

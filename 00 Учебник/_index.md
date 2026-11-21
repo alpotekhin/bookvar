@@ -74,7 +74,7 @@ last_updated: 2026-11-14
 ### V. От GPT-1 к LLaMA
 
 - [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1 — генеративное предобучение]]
-- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2 — zero-shot через язык]]
+- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2 — задачи как продолжение текста]]
 - [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3 — in-context learning]]
 - [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|LLaMA как базовая архитектура]]
 - [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/02 Современный decoder block|Современный decoder block]]

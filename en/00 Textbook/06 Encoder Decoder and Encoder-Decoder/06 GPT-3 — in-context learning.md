@@ -4,10 +4,10 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "be4628d08c30b6997e31a2fc4106a4cc0c3af0c18fc330b73697075de7143de1"
-translation_reviewed: "2026-11-13"
+canonical_revision: "b9729c7fce2de2bfeb9d1e6d0ab160f79de6ca6a972d84956f197b1cabfc2fd1"
+translation_reviewed: "2026-11-21"
 translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md"
-last_updated: 2026-11-13
+last_updated: 2026-11-21
 primary_sources:
   - https://arxiv.org/abs/2005.14165v4
   - https://github.com/openai/gpt-3/tree/d7a9bb505df6f630f9bab3b30c889e52f22eb9ea
@@ -21,22 +21,78 @@ next: "[[02 Areas/ML & DL/00 Учебник/07 Анатомия современ
 
 # GPT-3: scaling and in-context learning
 
-GPT-2 could already read completed translations before translating
-a new sentence. GPT-3 turns that technique into an experiment:
-how many examples does the same model need? In the
-[[#gpt3-relation-shots|entailment example]], keep the premise and
-hypothesis fixed and put zero, one, or two labeled pairs before them.
-All three requests use the same weights.
+The [[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language#gpt2-relation-prefix|GPT-2 chapter]]
+scores three labels after `Relation:`. GPT-3's experiment changes
+the input: completed examples can precede that same pair. Brown et al.
+compare this setup across eight models from 125 million to 175 billion
+parameters. For any one model, going from zero-shot to few-shot
+changes the prompt, not the weights.
 
-GPT-3 investigates how well this way of specifying tasks works as model
-size increases. Brown et al. train eight autoregressive Transformers,
-from 125 million to 175 billion parameters, and evaluate zero-, one-,
-and few-shot settings. Every model sees 300 billion pre-training tokens.
-These experiments do not train on individual benchmarks. Architecture,
-data, prompt preparation, and scoring are described in
-[Section 2](https://arxiv.org/abs/2005.14165v4).
+<a id="gpt3-relation-shots"></a>
 
-## Where the “learning” happens
+## One task with zero, one, or two examples
+
+The first two pairs already have labels. The final pair about the cat
+is the same query used in the GPT-2 chapter and still ends at the colon.
+Its reference label stays outside the prompt so it can be used to check
+the prediction afterward.
+
+~~~text
+Premise: A robin is singing.
+Hypothesis: A bird is singing.
+Relation: entailment
+
+Premise: The door is open.
+Hypothesis: The door is shut.
+Relation: contradiction
+
+Premise: A cat sleeps.
+Hypothesis: An animal rests.
+Relation:
+~~~
+
+For **zero-shot**, keep only the final pair. For **one-shot**, put the
+door example before it. For **two-shot**, use the whole block.
+With no separate instruction, these prompts take 20, 45, and 72 tokens
+under the released GPT-2 byte-level BPE that GPT-3 retained
+([§2.1](https://arxiv.org/html/2005.14165v4#S2.SS1)).
+The colon, ID 25, is still the final token. Its index moves from
+19 to 44 or 71. Use the output at that position to score the start
+of the label.
+
+In all three prompts, ` entailment` takes two tokens (39793, 434).
+Read the probability of ` entail` from the first distribution, then
+feed that token and score `ment`. For example, if the first probability
+moves from $0.40$ to $0.60$ and the second stays at $0.50$, the product
+moves from $0.20$ to $0.30$. That is enough to reverse the choice if
+` neutral` still scores $0.25$. The token counts and arithmetic are
+checked; the probabilities are illustrative, not GPT-3 measurements
+or an item from ANLI.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-continuity-2026-11-10/min-figure2-demonstrations.png|Three labeled lines go into the prompt; the fourth ends at a blank. Positive is shown separately as the model's prediction.]]
+
+*Sewon Min et al., [Rethinking the Role of Demonstrations, Figure 2, p. 11049](https://aclanthology.org/2022.emnlp-main.759.pdf#page=2),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+The complete figure is cropped from the paper; the labels are unchanged.*
+
+Min et al. illustrate a different task: classifying the sentiment of
+a news snippet. The model reads three lines with completed labels and
+a fourth line with a blank. The `Positive` below the LM box is the
+prediction, not part of the input. Remove the three labeled lines for
+the no-demonstration condition. The new snippet stays the same and the
+reference label used to compute accuracy is kept separately.
+
+In [Min et al., §4.1](https://aclanthology.org/2022.emnlp-main.759.pdf#page=3),
+the demonstration inputs stay fixed but their labels are randomly
+drawn from the same label set. On the classification and multiple-choice
+tasks studied, performance drops only modestly for most models. The
+examples still show the format, permissible labels, and type of input.
+That experiment does not establish that correct labels are dispensable
+when the examples must specify a previously unseen rule.
+
+<a id="where-the-learning-happens"></a>
+
+## Demonstrations and fine-tuning
 
 In ordinary fine-tuning, an input–correct-answer pair defines a loss.
 Backward computes gradients, an optimizer changes parameters, and the
@@ -53,12 +109,11 @@ P_\theta(y\mid D,q)=\prod_{t=1}^{|y|}
 P_\theta(y_t\mid D,q,y_{<t}).
 $$
 
-Parameters $\theta$ are the same for every request. Replacing $D$
-changes tokens, hidden states, and continuation probabilities. Removing
-examples from the next request removes them from the model's available
-context. The saved weights do not themselves memorize those examples.
+Remove $D$ from the next prompt and the model no longer reads those
+lines. They were not written into $\theta$; they changed the input tokens
+and the states computed from them.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/figure-replacements-2026-10-30/gpt3-demonstrations-frame-171.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/figure-replacements-2026-10-30/gpt3-demonstrations-frame-171.png|Two completed description-and-code pairs precede an unfinished third pair. The generated continuation is separate from the input.]]
 
 *Jay Alammar, [How GPT3 Works — examples in the prompt](https://jalammar.github.io/how-gpt3-works-visualizations-animations/).
 Two completed description–code pairs precede an unfinished third pair.
@@ -72,17 +127,18 @@ The paper's zero-/one-/few-shot comparison remains available in
 
 Shots count complete demonstrations, not sentences or instructions.
 A task description plus one new question is zero-shot. One completed
-pair before it is one-shot; two pairs are two-shot, a few-shot setting.
-The paper usually uses 10–100 examples, as far as the 2048-token window
-permits. GPT-3 fine-tuning is outside this study.
+pair before it is one-shot. In Brown et al.'s few-shot experiments,
+there are usually many more than two examples: 10 to 100, as far
+as the 2048-token window allows. The authors do not fine-tune GPT-3
+on these tasks.
 
-The [[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language#Translation and answers through prefixes|GPT-2 translation experiment]]
+The [[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language#gpt2-translation-prefix|GPT-2 translation experiment]]
 already put completed pairs before the new sentence. In the GPT-2 paper,
 “zero-shot transfer” meant no task-specific weight updates. GPT-3
 counts completed examples separately: the same weights can be evaluated
 with zero, one, or several demonstrations.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/10-gpt3-fine-tuning.gif]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/10-gpt3-fine-tuning.gif|The animation goes from a pretrained model and labeled examples to an updated model for a specific task.]]
 
 *Jay Alammar, [How GPT3 Works — Fine-tuning](https://jalammar.github.io/how-gpt3-works-visualizations-animations/).
 The animation shows additional training of pretrained parameters.
@@ -90,62 +146,26 @@ The preceding image instead places examples in the input at fixed weights.
 Original unchanged,
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
 
-“Learning” in in-context learning describes behavior changing after
-examples are presented. It does not yet explain how the task is solved.
-For translation, pre-training must supply knowledge of both languages;
-a few pairs may specify translation direction and answer format.
-For an unusual string transformation, examples may specify a more
-particular rule. Section 5 discusses this ambiguity: recognizing a
-familiar task, adapting to a variant, and acquiring a new rule cannot
-be distinguished from one successful answer.
+In translation, pairs can indicate the direction and answer format,
+but cannot by themselves teach both languages. For an unusual word
+transformation, examples may specify the rule itself. One successful
+answer does not distinguish those cases (paper, Section 5).
 
-<a id="gpt3-relation-shots"></a>
+<a id="mechanics-of-a-few-shot-prompt"></a>
 
-## One task with zero, one, or two examples
+## Which positions can read the demonstrations
 
-Return to the [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-relation-prefix|pair about the cat]].
-An instruction can ask the model to choose `entailment`,
-`contradiction` or `neutral`. Keep that instruction and the final
-unlabeled pair fixed. The text after the instruction looks like this:
+In the two-shot prefix, both demonstrations are to the left of the
+cat example. The positions in each layer can be computed in parallel. A causal mask lets the last position read accessible
+states to its left, but an earlier example cannot read the new
+question on its right. The vocabulary readout at position 71 scores
+the first answer token. After appending 39793, position 72 computes
+its own Q, K, and V, attends to the permitted keys and values in the
+prefix, and produces the scores used for `ment`.
 
-~~~text
-Premise: A robin is singing.
-Hypothesis: A bird is singing.
-Relation: entailment
-
-Premise: The door is open.
-Hypothesis: The door is shut.
-Relation: contradiction
-
-Premise: A cat sleeps.
-Hypothesis: An animal rests.
-Relation:
-~~~
-
-For zero-shot, keep only the last pair; for one-shot, put the door
-example before it; for two-shot, use the whole block. The correct label
-for the final pair never goes into the input. Score the same three
-continuations in each condition. The context changes; the vocabulary,
-weights, and scoring rule stay fixed. This is a teaching prompt, not
-an ANLI item or a measured GPT-3 result.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-continuity-2026-11-10/min-figure2-demonstrations.png|Three labeled lines go into the prompt; the fourth ends at a blank. Positive is shown separately as the model's prediction.]]
-
-*Sewon Min et al., [Rethinking the Role of Demonstrations, Figure 2, p. 11049](https://aclanthology.org/2022.emnlp-main.759.pdf#page=2),
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-The complete figure is cropped from the paper; the labels are unchanged.*
-
-Min et al. illustrate a different task: classifying the sentiment of
-a news snippet. The model reads three lines with completed labels and
-a fourth line with a blank. The `Positive` below the LM box is the
-prediction, not part of the input. Remove the three labeled lines for
-the no-demonstration condition. The new snippet stays the same and the
-reference label used to compute accuracy is kept separately.
-
-## Mechanics of a few-shot prompt
-
-Consider a two-shot request with two allowed labels. This is a teaching
-example, not a prompt or measured response from GPT-3 experiments.
+The same procedure can label a review. The instruction below names two
+allowed labels, and the completed pairs illustrate their format.
+This is a teaching prompt, not a recorded GPT-3 generation.
 
 ~~~text
 Classify the review. Answer only: positive sentiment or negative sentiment.
@@ -157,19 +177,11 @@ Review: The beautiful scenery could not rescue the boring plot.
 Label:
 ~~~
 
-The first two reviews contain answers; the last ends at `Label:`.
-The instruction specifies the classification task and permitted strings,
-while demonstrations show the review–label mapping. Newlines and colons
-also enter the tokenized text. No special two-class head is created.
+The final line ends at `Label:`. Below, both full labels are scored
+from vocabulary logits, as in the `Relation:` example. This needs no
+separate classifier.
 
-After tokenization, the Transformer processes the complete prefix.
-At every layer, its final position uses accessible earlier positions.
-The causal mask prevents reading the unwritten answer. Vocabulary
-projection of the final state gives next-token probabilities. The
-selected token is appended; the next pass predicts a continuation
-conditioned on that choice.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/tokens-through-stack-frame-385.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/tokens-through-stack-frame-385.png|Input positions go vertically through the stack. Okay becomes input for the next step, which produces human.]]
 
 *Jay Alammar, [How GPT3 Works — input and response through the layer stack](https://jalammar.github.io/how-gpt3-works-visualizations-animations/).
 Complete frame 385 of the [original animation](https://jalammar.github.io/images/gpt3/08-gpt3-tokens-transformer-blocks.gif),
@@ -206,11 +218,14 @@ ratio of these counts: every question still reads allowed K/V, and
 runtime depends on attention implementation, batching, and data transfer.
 The prefix still occupies 80 of each request's 2048 context positions.
 
-### What changes in attention when weights stay fixed?
+<a id="what-changes-in-attention-when-weights-stay-fixed"></a>
 
-Projection matrices $W_Q,W_K,W_V$ remain unchanged but act on new hidden
-states. Q/K/V, attention weights, and weighted outputs therefore change.
-Freezing parameters does not make a function constant with respect to input.
+### How the input changes one head's output
+
+The projection matrices $W_Q,W_K,W_V$ stay fixed. Adding examples can
+change the states being projected, so queries, keys, and values can
+change. Even with identical attention weights, different values give
+a different output.
 
 A small numerical example separates this input dependence from GPT-3's
 sentiment-classification quality. Let one head's already projected
@@ -218,6 +233,9 @@ query and keys be $q=(1,0)$, $k_1=(\sqrt2\ln3,0)$, and $k_2=(0,2)$.
 Division by $\sqrt2$ gives scores $(\ln3,0)$ and weights $(0.75,0.25)$.
 With $v_1=1$, $v_2=-1$, the output is $0.5$. Swapping values in response
 to new input would change it to $-0.5$.
+
+<details id="gpt3-attention-code">
+<summary>PyTorch calculation of weights and outputs</summary>
 
 ~~~python
 import math
@@ -235,13 +253,17 @@ print((weights @ values_a).item(), (weights @ values_b).item())
 # approximately [0.75, 0.25], then 0.5 and -0.5
 ~~~
 
+</details>
+
 This checks the attention formula, not a trained in-context-learning
 model. Keys and values are set by hand. It shows where input can change
 a result without a gradient step. Useful representations of reviews
 and labels must already have been learned; their quality is tested
 on new task examples.
 
-### Generating a label versus scoring supplied candidates
+<a id="generating-a-label-versus-scoring-supplied-candidates"></a>
+
+### Extracting scores for a complete label
 
 With few permitted answers, one can score each complete label instead
 of generating arbitrary text. Its tokens are forced in sequence and
@@ -259,6 +281,9 @@ The code reconstructs that calculation from artificial vocabulary
 logits. The logits at position $i$ predict position $i+1$.
 Candidates have equal length and no padding; the four-ID vocabulary
 is not GPT-3's actual vocabulary.
+
+<details id="gpt3-label-code">
+<summary>Code for extracting answer probabilities</summary>
 
 ~~~python
 import torch
@@ -284,6 +309,8 @@ print(total.tolist())                 # [-1.714798..., -1.139434...]
 print(total.exp().tolist())           # [0.18, 0.32]
 print(total.softmax(dim=0).tolist())  # [0.36, 0.64]
 ~~~
+
+</details>
 
 The last line renormalizes only the two selected candidates.
 $0.64$ is neither the original probability among all possible texts
@@ -391,7 +418,7 @@ Compared with GPT-2, context grows from 1024 to 2048 tokens, and full
 attention layers alternate with locally banded sparse layers
 ([§2.1](https://arxiv.org/pdf/2005.14165v4#page=8)).
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/07-gpt3-processing-transformer-blocks.gif]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/07-gpt3-processing-transformer-blocks.gif|The vertical arrow traces one position through a stack of decoder blocks ending at block 96.]]
 
 *Jay Alammar, [How GPT3 Works — stack of 96 decoder layers](https://jalammar.github.io/how-gpt3-works-visualizations-animations/).
 One token passes through all 96 blocks of the largest model. Dots
@@ -468,7 +495,7 @@ size, not measured peak training memory.
 
 ### Space for demonstrations and the answer
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/context-window-frame-229.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/context-window-frame-229.png|Prompt tokens and the generated continuation on the right occupy positions in one sequence.]]
 
 *Jay Alammar, [How GPT3 Works — context window](https://jalammar.github.io/how-gpt3-works-visualizations-animations/).
 Complete frame 229 of the [original animation](https://jalammar.github.io/images/gpt3/05-gpt3-generate-output-context-window.gif),
@@ -501,7 +528,12 @@ every layer; local layers may retain fewer positions. Storing
 350 GB. Prompting avoids task-specific training, but every request
 still executes a large model.
 
-## The scaling experiment
+<a id="the-scaling-experiment"></a>
+
+## Eight GPT-3 model sizes
+
+<details id="gpt3-training-configurations">
+<summary>Dimensions and training settings for all eight models</summary>
 
 | Model | Parameters | Layers | $d_{\rm model}$ | Heads | $d_{\rm head}$ | Batch size, tokens | Peak learning rate |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -513,6 +545,8 @@ still executes a large model.
 | GPT-3 6.7B | 6.7B | 32 | 4096 | 32 | 128 | 2M | $1.2\times10^{-4}$ |
 | GPT-3 13B | 13.0B | 40 | 5140 | 40 | 128 | 2M | $1.0\times10^{-4}$ |
 | GPT-3 175B | 175.0B | 96 | 12288 | 96 | 128 | 3.2M | $0.6\times10^{-4}$ |
+
+</details>
 
 Data: Brown et al., [Table 2.1, page 8](https://arxiv.org/pdf/2005.14165v4#page=8).
 All rows use a 2048-token context. Batches are measured in tokens; learning
@@ -548,7 +582,9 @@ layers split across GPUs. In current terminology, these are widthwise
 and depthwise forms of model parallelism. The paper does not publish
 a concrete TP/PP topology for every configuration.
 
-## Data and sampling
+<a id="data-and-sampling"></a>
+
+## The pre-training corpus mixture
 
 Raw Common Crawl contains copies, boilerplate, and documents unlike
 the desired training text. The authors filter it, remove near duplicates,
@@ -603,7 +639,9 @@ the source may then be reused
 
 <span id="ключевые-результаты-без-упрощения"></span>
 
-## Results: task, format, and metric
+<a id="results-task-format-and-metric"></a>
+
+## Results on NLP tasks
 
 For each test example, demonstrations are randomly sampled from the
 task's training split. Exceptions are specified: LAMBADA and StoryCloze
@@ -643,7 +681,9 @@ The intended answer is `bicycle`, not a repetition of the paragraph.
 Appendix G.21 shows the actual format; Appendix H specifies $K=15$
 for few-shot LAMBADA.
 
-| GPT-3 175B, LAMBADA test | Zero-shot | One-shot | Few-shot |
+On LAMBADA test, the 175B model is evaluated at $K=0$, $1$, and $15$:
+
+| Metric | 0 | 1 | 15 |
 |---|---:|---:|---:|
 | accuracy | 76.2% | 72.5% | 86.4% |
 | target-word perplexity | 3.00 | 3.35 | 1.92 |
@@ -706,7 +746,9 @@ that are actually plausible. This is how HellaSwag is built, not how
 GPT-3 is trained during evaluation
 ([Zellers et al., §§2 and 4.3](https://aclanthology.org/P19-1472.pdf#page=2)).
 
-| GPT-3 175B, accuracy | Zero-shot | One-shot | Few-shot |
+Accuracy for GPT-3 175B under three prompt conditions:
+
+| Test | 0 | 1 | Few-shot |
 | --- | ---: | ---: | ---: |
 | StoryCloze, test | 83.2% | 84.7% | 87.7% ($K=70$) |
 | HellaSwag, dev | 78.9% | 78.1% | 79.3% ($K=20$) |
@@ -753,13 +795,13 @@ demonstration. That example asks for a short city-name answer; the
 model must already have learned the Canadian fact. This is neither
 a test-set example nor a measured GPT-3 response.
 
-| Task | Zero-shot | One-shot | Few-shot, $K=64$ |
+| Dataset | 0 | 1 | 64 |
 |---|---:|---:|---:|
 | Natural Questions | 14.6 | 23.0 | 29.9 |
 | WebQuestions | 14.4 | 25.3 | 41.5 |
 | TriviaQA | 64.3 | 68.0 | 71.2 |
 
-Percentages are from [Table 3.3](https://arxiv.org/pdf/2005.14165v4#page=13).
+Columns give the number of completed pairs in the prompt. Percentages are from [Table 3.3](https://arxiv.org/pdf/2005.14165v4#page=13).
 Appendix H identifies NQs and WebQs as test and TriviaQA as dev;
 175B's few-shot 71.2 is also confirmed on the TriviaQA wiki-split test
 server. These should not become one “GPT-3 accuracy”: questions and
@@ -801,7 +843,7 @@ is the expected continuation, not part of the input or a recorded GPT-3
 output. [Brown et al., Figure 2.1](https://arxiv.org/pdf/2005.14165v4#page=7)
 shows the same distinction with the paper's own example.
 
-| Direction | Zero-shot | One-shot | Few-shot |
+| Direction | 0 | 1 | 64 |
 |---|---:|---:|---:|
 | En→Fr | 25.2 | 28.3 | 32.6 |
 | Fr→En | 21.2 | 33.7 | 39.2 |
@@ -941,7 +983,9 @@ The result concerns those participants, lengths, genre, and procedure.
 It establishes neither truth of generated news, a universal authorship
 test, nor the quality of a modern detector.
 
-### Where scale did not solve the task
+<a id="where-scale-did-not-solve-the-task"></a>
+
+### Textual entailment on ANLI
 
 ANLI asks for entailment, contradiction, or neutrality between statements.
 [Table C.1](https://arxiv.org/pdf/2005.14165v4#page=45) gives 175B few-shot
@@ -1020,7 +1064,9 @@ contribute, compare prompts with the same model.
 [Figure 5](https://aclanthology.org/2021.naacl-main.185.pdf#page=8) does this for one and 32 demonstrations:
 adding examples lowers performance on some tasks.
 
-## Benchmark contamination and honest evaluation
+<a id="benchmark-contamination-and-honest-evaluation"></a>
+
+## Benchmark overlap with pre-training data
 
 At web scale, test questions, answers, or near copies may already
 appear in training. Frozen weights exclude test-time fine-tuning,

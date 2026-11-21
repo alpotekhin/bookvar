@@ -119,6 +119,36 @@ assert encoder.encoder["<|endoftext|>"]==50256 and encoder.decode([140])=="\ufff
 assert len(module.bytes_to_unicode())==len(set(module.bytes_to_unicode().values()))==256
 print("PASS actual original tokenizer IDs/round trips, byte bijection and incomplete UTF-8")
 
+prompt = re.search(
+    r'<a id="gpt2-relation-prefix"></a>.*?~~~text\n(.*?)\n~~~', body, re.S
+)[1]
+assert len(encoder.encode(prompt)) == 20
+prompt_ids = encoder.encode(prompt)
+assert prompt_ids[19] == 25 and encoder.decode(prompt_ids[-1:]) == ":"
+for label, expected, pieces in [
+    (" entailment", [39793, 434], [" entail", "ment"]),
+    (" neutral", [8500], [" neutral"]),
+    (" contradiction", [25741], [" contradiction"]),
+]:
+    assert encoder.encode(prompt + label) == prompt_ids + expected
+    assert [encoder.decode([i]) for i in expected] == pieces
+first = {"entailment": .40, "neutral": .25, "contradiction": .10}
+whole = {**first, "entailment": first["entailment"] * .50}
+assert max(first, key=first.get) == "entailment"
+assert max(whole, key=whole.get) == "neutral" and whole["entailment"] == .20
+print("PASS Relation prompt, colon offset, candidate BPE boundary and full-label ranking")
+
+# Reuse the Q/K example's three input rows and projection matrices.
+x = torch.eye(3, dtype=torch.float64)
+wq = wk = torch.tensor([[1., 0.], [0., 1.], [1., 1.]], dtype=torch.float64)
+xn = torch.nn.functional.layer_norm(x, (3,), eps=1e-5)
+torch.testing.assert_close(xn[1] @ wq, torch.tensor([-1.4142, .7071], dtype=x.dtype),
+                           rtol=3e-5, atol=3e-5)
+for rows, expected in [(x, .6698), (xn, .9601)]:
+    scores = (rows[1] @ wq) @ (rows[:2] @ wk).T / math.sqrt(2)
+    assert abs(scores.softmax(0)[1].item() - expected) < 5e-5
+print("PASS the worked pre-/post-LayerNorm attention weights on the same inputs")
+
 translation = re.search(
     r'<a id="gpt2-translation-prefix"></a>.*?\x60\x60\x60text\n(.*?)\n\x60\x60\x60', body, re.S
 )[1]

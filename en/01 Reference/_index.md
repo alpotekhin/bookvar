@@ -407,7 +407,7 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa#electra-replaced-token-detection|ELECTRA and replaced-token detection]]
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa#debertav3-gradient-disentangling|DeBERTaV3 and gradient-disentangled embedding sharing]]
 - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1: generative pre-training]] · **EN**
-- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2: zero-shot through language]] · **EN**
+- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2: tasks as text continuations]] · **EN**
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-gpt3-lambada|LAMBADA — the last word and GPT-2's filter]]
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-gpt3-coqa|CoQA — dialogue history and separate demonstrations]]
 - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3: in-context learning]] · **EN**

@@ -6,6 +6,7 @@ import re
 import hashlib
 import subprocess
 import contextlib
+import importlib.util
 import io
 import torch
 import numpy as np
@@ -51,6 +52,29 @@ for start in (1, 2, 4, 5):
         changed[:, :start - 1] = torch.randn_like(changed[:, :start - 1]) * 50
         torch.testing.assert_close(score(changed, ids, start)[0], total)
 print('PASS answer-only scoring, shifted positions and four prompt boundaries')
+
+published_encoder = ROOT / '05 Источники/Originals/gpt2-2026-10-22'
+spec = importlib.util.spec_from_file_location('gpt2_encoder', published_encoder / 'encoder.py')
+assert spec is not None and spec.loader is not None
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+encoder = module.get_encoder(published_encoder.name, str(published_encoder.parent))
+block = re.search(r'<a id="gpt3-relation-shots"></a>.*?~~~text\n(.*?)\n~~~', text, re.S)[1]
+pairs = block.split('\n\n')
+assert len(pairs) == 3 and pairs[-1].endswith('Relation:')
+for k, length in enumerate((20, 45, 72)):
+    prompt = '\n\n'.join(pairs[-(k + 1):])
+    ids = encoder.encode(prompt)
+    assert len(ids) == length and ids[length - 1] == 25
+    assert encoder.decode(ids) == prompt
+    for label, suffix in [
+        (' entailment', [39793, 434]),
+        (' contradiction', [25741]),
+        (' neutral', [8500]),
+    ]:
+        assert encoder.encode(prompt + label) == ids + suffix
+assert .40 * .50 < .25 < .60 * .50
+print('PASS original BPE: 20, 45, 72 tokens; fixed candidate IDs; illustrative choice reversal')
 
 # End markers have conditional probabilities too; they can change a ranking.
 assert .18 < .32 and .18 * .9 > .32 * .1

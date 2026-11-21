@@ -412,7 +412,7 @@ last_updated: 2026-10-30
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa#electra-replaced-token-detection|ELECTRA и обнаружение подменённых токенов]]
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa#debertav3-gradient-disentangling|DeBERTaV3 и разделение градиентов эмбеддингов]]
 - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1 — генеративное предобучение]]
-- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2 — zero-shot через язык]]
+- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2 — задачи как продолжение текста]]
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-gpt3-lambada|LAMBADA — последнее слово и фильтр GPT-2]]
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-gpt3-coqa|CoQA — история диалога и отдельные демонстрации]]
 - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3 — масштабирование и in-context learning]]

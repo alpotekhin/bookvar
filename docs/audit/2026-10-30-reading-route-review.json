@@ -1,6 +1,20 @@
 {
   "date": "2026-10-30",
   "lastReviewedDate": "2026-11-09",
+  "editorialRevisions": {
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md": {
+      "currentSha256": "b9729c7fce2de2bfeb9d1e6d0ab160f79de6ca6a972d84956f197b1cabfc2fd1",
+      "stopBefore": "2026-11-21-gpt2-editorial-pass.json"
+    },
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md": {
+      "currentSha256": "0ef00e2cac0e5944a6415ff5775ff247c5450892ad54ae8810fd8ba5777ee4ec",
+      "stopBefore": "2026-11-21-gpt1-editorial-pass.json"
+    },
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md": {
+      "currentSha256": "a61f95738040c4e47c1b25a74a517a5bb173b527565153b862d57492578e37cc",
+      "stopBefore": "2026-11-21-t5-editorial-pass.json"
+    }
+  },
   "subsequentVerifiedRevisions": {
     "scope": "These current bytes restore to the historical whole-read receipts via the exact journals. This does not claim another full read or acceptance of those chapters.",
     "chapters": {
