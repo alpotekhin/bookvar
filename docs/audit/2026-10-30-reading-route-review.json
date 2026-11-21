@@ -2,6 +2,22 @@
   "date": "2026-10-30",
   "lastReviewedDate": "2026-11-09",
   "editorialRevisions": {
+    "00 Учебник/07 Анатомия современной LLM/04 RoPE.md": {
+      "currentSha256": "6c16f6acf35897a999a21b17400d6d4932d8e85e8f24e64298e61c5b8c071b79",
+      "stopBefore": "2026-11-21-norm-gating-editorial-pass.json"
+    },
+    "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md": {
+      "currentSha256": "6049cd951f576540bd43386fa679df32af1993dffba94aa24c8b0af3983ef4f3",
+      "stopBefore": "2026-11-21-decoder-block-editorial-pass.json"
+    },
+    "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md": {
+      "currentSha256": "0ff3ab96c063353fd8653b83f0259963f60be28b410a4bdaef578c7b4983ba72",
+      "stopBefore": "2026-11-21-llama-editorial-pass.json"
+    },
+    "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md": {
+      "currentSha256": "23084f7630399202af0453352e3ca725394da6e5a2bde20c3a42d7adcf8cdb93",
+      "stopBefore": "2026-11-21-gpt3-editorial-pass.json"
+    },
     "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md": {
       "currentSha256": "b9729c7fce2de2bfeb9d1e6d0ab160f79de6ca6a972d84956f197b1cabfc2fd1",
       "stopBefore": "2026-11-21-gpt2-editorial-pass.json"

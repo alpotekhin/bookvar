@@ -70,14 +70,14 @@ describe('RoPE lab reading paths', () => {
   const read = (file: string) => readFileSync(resolve(root, file), 'utf8');
   const source = '06 Практика/02a Проверить повороты RoPE.md';
   const sourceEn = 'en/06 Practice/02a Explore RoPE rotations.md';
-  it('registers both authored editions and links the lab from the practice index and chapter', () => {
+  it('registers both authored editions and keeps the lab on the separate practice route', () => {
     const manifest = loadManifest(resolve(root, 'publishing/navigation.yml'));
     const page = manifest.sections.find(section => section.id === 'practice')!
       .pages.find(page => page.route === 'practice/rope');
     expect(page).toMatchObject({ source, sourceEn });
-    for (const file of ['06 Практика/_index.md', '00 Учебник/07 Анатомия современной LLM/04 RoPE.md']) {
-      expect(read(file)).toContain(source.slice(0, -3));
-    }
+    const target = source.slice(0, -3);
+    expect(read('06 Практика/_index.md')).toContain(target);
+    expect(read('00 Учебник/07 Анатомия современной LLM/04 RoPE.md')).not.toContain(target);
     expect(read(sourceEn)).toContain(createHash('sha256').update(read(source)).digest('hex'));
     for (const file of [source, sourceEn]) {
       expect(read(file)).toContain('00 Учебник/07 Анатомия современной LLM/04 RoPE#rope-llama31-scaling');

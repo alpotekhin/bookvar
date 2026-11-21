@@ -24,8 +24,9 @@ describe('RoPE explanation and examples',()=>{
     for(const text of ['3.701805','0.117410','1.890151',
       'k_positions[None, :] <= q_positions[:, None]',
       'torch.testing.assert_close(cached, full)','stale_kv',
-      '0.00232628','Кэш всё ещё экономит','конфигурация RoPE'])
+      '0.00232628','Кэш всё ещё экономит','Переиспользовать готовый кэш без преобразований'])
       expect(body).toContain(text);
+    expect(body).toMatch(/конфигураци[яи]\s+RoPE/);
     expect(body).not.toContain('уничтожает\\nодно из преимуществ');
   });
   it('separates PI equivalence, specific scaling implementations and their limits',()=>{

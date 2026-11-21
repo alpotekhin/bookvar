@@ -2491,7 +2491,7 @@ describe('static handbook output', () => {
       for (const id of ['rope-rotation-lab', 'rope-frequency-lab', 'rope-query', 'rope-shift',
         'rope-pair', 'rope-distance', 'rope-reset']) expect(lab).toContain('id="' + id + '"');
       expect(lab).toContain('href="/' + lang + 'textbook/modern-llm/rope/#rope-llama31-scaling"');
-      expect(chapter).toContain('href="/' + lang + 'practice/rope/"');
+      expect(chapter).toContain('id="rope-llama31-scaling"');
       expect(index).toContain('href="/' + lang + 'practice/rope/"');
       expect(lab).toContain(lang ? '0.86540' : '0,86540');
       expect(lab).toContain(lang ? 'Rotate the query and key' : 'Поверните запрос и ключ');
@@ -4032,6 +4032,9 @@ describe('static handbook output', () => {
       expect(text).toContain(fact);
     expect(html.match(/<pre/g)).toHaveLength(6);
     expect(html).toContain('id="rope-coordinate-layout"');
+    expect(text).toContain('Запрос на позиции 4 сравнивается с ключами на позициях 3 и 1.');
+    expect(html).toContain('id="где-rope-стоит-в-attention"');
+    expect(html.indexOf('id="где-rope-стоит-в-attention"')).toBeLessThan(html.indexOf('id="rope-coordinate-layout"'));
     expect(html).toContain('id="rope-previous-token-head"');
     expect(html).toContain('id="rope-llama31-scaling"');
     expect(html).not.toContain('katex-error');
@@ -4075,7 +4078,7 @@ describe('static handbook output', () => {
     for(const locale of ['', 'en/']){
       const get=(path:string)=>readFile(join(distDir,locale,path,'index.html'),'utf8');
       const [chapter,reference,atlas]=await Promise.all([get(route),get('reference'),get('models/semeystva/gemma')]);
-      const section=chapter.match(/id="gemma2-sandwich-norm"[\s\S]*?(?=<a id="normalization-evidence")/)?.[0];
+      const section=chapter.match(/id="gemma2-sandwich-norm"[\s\S]*?(?=<a id="ffn-variants")/)?.[0];
       expect(section).toBeDefined();
       const src=section?.match(/<img[^>]+src="([^"]*\/gemma-scope-figure1\.svg)"[^>]+alt="[^"]+"/)?.[1];
       expect(src).toBeDefined();
@@ -4427,6 +4430,7 @@ describe('static handbook output', () => {
       expect(shots).toContain('Relation: entailment');
       expect(shots).toContain('Relation: contradiction');
       expect(shots?.slice(shots.indexOf(target))).not.toContain('entailment');
+      expect(worked(llama, 'llama-relation-prefix')).toBe(target);
       expect(worked(llama, 'gpt1-to-gpt2')).toBe(target);
       const oneShot = worked(llama, 'gpt2-to-gpt3')?.replace(/\n{3,}/g, '\n\n');
       expect(oneShot).toBe('Premise: The door is open.\nHypothesis: The door is shut.\nRelation: contradiction\n\n' + target);
@@ -4455,6 +4459,16 @@ describe('static handbook output', () => {
         'id="gpt-llama-beyond-block"', 'llama1-figure3-natural-questions.png', 'sardana24a-figure1.png']
         .map(fragment => llama.indexOf(fragment));
       expect(order.every((position, index) => position >= 0 && (index === 0 || position > order[index - 1]))).toBe(true);
+      const llamaRoute = ['id="llama-relation-prefix"', 'id="gpt-llama-tokenization"',
+        'cs336-model-overview.png', 'id="llama-pretraining-data"', 'id="llama-v1-results"',
+        'id="natural-questions-gpt-llama"', 'id="llama-generations"']
+        .map(fragment => llama.indexOf(fragment));
+      expect(llamaRoute.every((position, index) => position >= 0 && (!index || position > llamaRoute[index - 1]))).toBe(true);
+      for (const id of ['llama-gpt-history', 'llama-block-listing', 'llama-cache-listing']) {
+        const opening = llama.match(new RegExp('<details\\b[^>]*id="' + id + '"[^>]*>'))?.[0];
+        expect(opening).toBeDefined();
+        expect(opening).not.toMatch(/\sopen(?:[\s=>])/);
+      }
       for (const page of [gpt2, gpt3, llama]) expect(page).not.toContain('katex-error');
     }
   });
@@ -5032,7 +5046,7 @@ describe('static handbook output', () => {
     const route = 'textbook/modern-llm/llama-architecture/';
     for (const locale of ['', 'en/']) {
       const chapter = await readFile(join(distDir, locale, route, 'index.html'), 'utf8');
-      const section = chapter.match(/<a id="llama-generations"><\/a>[\s\S]*?(?=<span id="что-llama-не-изобрела")/)?.[0];
+      const section = chapter.match(/<a id="llama-generations"><\/a>[\s\S]*?(?=<span id="литература-и-дополнительные-материалы")/)?.[0];
       expect(section).toBeDefined();
       for (const fact of ['id="llama31-long-context"', 'id="llama-base-chat-instruct"',
         'Llama 2 Chat', 'Llama 3 Instruct',

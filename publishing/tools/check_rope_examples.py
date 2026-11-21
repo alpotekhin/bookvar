@@ -13,22 +13,25 @@ ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / '00 Учебник/07 Анатомия современной LLM/04 RoPE.md'
 body = CHAPTER.read_text()
 blocks = re.findall(r'~~~python\n(.*?)\n~~~', body, re.S)
-assert len(blocks) == 5
+assert len(blocks) == 6
 ns = {}
 for i, block in enumerate(blocks, 1):
     exec(compile(block, f'{CHAPTER.name}:block-{i}', 'exec'), ns)
     if i == 1:
         assert abs((ns['qr']*ns['kr']).sum().item()-2) < 1e-13
-    elif i == 2:
+    elif i == 3:
         scores = [math.cos(j-4)/math.sqrt(2) for j in range(5)]
+        measured = (ns['qr'][:, -1:] * ns['kr']).sum(-1).flatten() / math.sqrt(2)
+        torch.testing.assert_close(measured, torch.tensor(scores, dtype=torch.float64))
+        assert [round(measured[j].item(), 3) for j in (3, 1)] == [0.382, -0.700]
         exps = [math.exp(z) for z in scores]
         weights = [e/sum(exps) for e in exps]
         torch.testing.assert_close(ns['weights'][0,0,-1], torch.tensor(weights,dtype=torch.float64))
         assert abs(ns['full'][0,-1,0,0].item()-sum((j+1)*w for j,w in enumerate(weights))) < 1e-14
-    elif i == 4:
+    elif i == 5:
         assert abs(ns['old_angle'].cos().item() - .1559436947653746) < 1e-14
         assert abs(ns['new_angle'].cos().item() - .8654010374940259) < 1e-14
-    elif i == 5:
+    elif i == 6:
         assert abs((ns['fresh']-ns['stale']).abs().max().item()-.0023262835464963327) < 1e-14
     print('PASS published block', i)
 rope, frequencies, attention = [ns[k] for k in ('rope', 'frequencies', 'attention')]

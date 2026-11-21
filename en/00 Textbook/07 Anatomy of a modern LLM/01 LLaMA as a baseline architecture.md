@@ -4,10 +4,10 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "92ddf6f702f8f55a5b6e82ba9cfa28b56e1926c10d47e88796df7d742c40c627"
-translation_reviewed: "2026-11-13"
+canonical_revision: "23084f7630399202af0453352e3ca725394da6e5a2bde20c3a42d7adcf8cdb93"
+translation_reviewed: "2026-11-21"
 translation_of: "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md"
-last_updated: 2026-11-13
+last_updated: 2026-11-21
 previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning]]"
 next: "[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/02 Современный decoder block]]"
 primary_sources:
@@ -24,12 +24,31 @@ primary_sources:
 
 # LLaMA as a baseline architecture
 
-A seven-billion-parameter model can improve with more pre-training
-without becoming larger to serve. That is the economic argument in
-[Touvron et al.](https://arxiv.org/abs/2302.13971v1): if a model will be
-run many times, it can make sense to spend more once on training a
-smaller model. LLaMA-7B and 13B saw one trillion tokens each; 33B and
-65B saw 1.4 trillion.
+<a id="llama-relation-prefix"></a>
+
+Give the first LLaMA the same prompt as in the
+[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-relation-shots|GPT-3 chapter]],
+without demonstrations or special tokens. After the colon, compare
+three continuations: ` entailment`, ` contradiction` and ` neutral`.
+
+~~~text
+Premise: A cat sleeps.
+Hypothesis: An animal rests.
+Relation:
+~~~
+
+The reversible GPT-2 tokenizer retained by GPT-3 encodes the prompt
+in 20 tokens. The first LLaMA's SentencePiece tokenizer uses 23.
+GPT-3 splits ` entailment` into two tokens and LLaMA splits it into
+three. Call LLaMA's tokens $y_1,y_2,y_3$. The logits at the last
+position of the prompt give the probability of $y_1$. Add $y_1$ to
+score $y_2$, then add $y_2$ to score $y_3$. The product of those
+three conditional probabilities scores the whole label.
+` contradiction` and ` neutral` each use a single token in both models.
+This scores the start of a continuation. More text can follow the
+label. The [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-candidate-scores|GPT-3 example]] shows how to compare labels
+of different lengths.
+
 
 <a id="gpt-llama-comparison"></a>
 <a id="от-gpt-3-к-первой-llama"></a>
@@ -38,14 +57,11 @@ smaller model. LLaMA-7B and 13B saw one trillion tokens each; 33B and
 
 ## From GPT-1 to the first LLaMA
 
-Does “An animal rests” follow from “A cat sleeps”? In the GPT-1 setup,
-we would train a classifier on labeled pairs. With GPT-2, we can end
-the prompt at `Relation:` and score labels as text continuations.
-In a GPT-3 experiment, we could put other labeled pairs before the test
-pair. Base LLaMA accepts the same prompt format, though its attention
-and FFN work differently. Pre-training stayed autoregressive throughout:
-at each position, the model predicts the next token from the current
-and preceding tokens.
+GPT-1 applied a trained classifier to the last position of the pair.
+From GPT-2 onward, the vocabulary projection can score the answer.
+GPT-3 and LLaMA v1 share a 2,048-token window and a pretraining
+objective: predict the next token. They encode position at different stages and use different
+feed-forward layers.
 
 | Model | Decoder | Training and task interface |
 | --- | --- | --- |
@@ -59,6 +75,9 @@ Sources: [GPT-1, §§3–4](https://cdn.openai.com/research-covers/language-unsu
 and the [corrected release counts](https://github.com/openai/gpt-2/blob/9b63575ef42771a015060c964af2c3da4cf7c8ab/README.md),
 [GPT-3, §2](https://arxiv.org/html/2005.14165v4#S2), and
 [LLaMA, §§2–3](https://arxiv.org/html/2302.13971v1#S2).
+
+<details id="llama-gpt-history">
+<summary>How GPT‑1, GPT‑2 and GPT‑3 handle the same pair</summary>
 
 <a id="gpt1-to-gpt2"></a>
 
@@ -179,6 +198,8 @@ used `True`, `False` and `Neither` rather than the labels in our example.
 
 GPT-3 kept the main GPT-2 block but changed the mask in some layers.
 
+</details>
+
 <a id="какие-токены-читает-один-слой"></a>
 
 ### Which tokens can one layer read?
@@ -268,16 +289,6 @@ weights, and their weighted sum of V gives the same attention output.
 We only renumbered the tokens. Prepending another token would give
 the queries an additional key and could change the attention output.
 
-Give base LLaMA the same three-line prompt as GPT-2, without an
-instruction, demonstrations, or BOS. It takes 23 tokens in LLaMA
-and 20 in GPT-2 and GPT-3. The continuation ` entailment` now takes three tokens:
-multiply three conditional probabilities instead of two to score
-the same label. Those probabilities come from a different decoder.
-Neither the token count nor the move from LayerNorm to RMSNorm tells
-us what it will predict. The
-[[#natural-questions-gpt-llama|Natural Questions comparison]]
-shows how the LLaMA authors prompted and scored a continuation in practice.
-
 <a id="gpt-llama-ffn"></a>
 
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/tajima-figure1-ffn.svg|Left: GELU FFN with two matrices. Center: SwiGLU with separate input matrices, Swish on one branch and an elementwise product before the output matrix. Right: the separate SwiMGLU method.]]
@@ -302,12 +313,55 @@ The narrower branches keep the increase in FFN weights to about
 0.78% despite the third matrix. The [[#FFN width and rounding|matrix count below]]
 shows how these widths arise.
 
-Pre-training changed in another way: LLaMA-13B processed one
-trillion tokens, against 300 billion for GPT-3 at the same nominal
-size. Both models can still be evaluated with demonstrations in the
-prompt. The [[#gpt-llama-beyond-block|comparison of tokenization, data, and evaluation]]
-shows why matching model size and shot count cannot isolate the effect
-of a particular change to the block.
+<a id="gpt-llama-tokenization"></a>
+
+<a id="сколько-позиций-занимает-одна-и-та-же-строка"></a>
+
+## One string in three tokenizers
+
+Consider `A cat sleeps 123`. In the released GPT-1 code,
+pre-tokenization is followed by lowercasing; BPE operates within words,
+and `</w>` marks a word boundary. GPT-2 starts from UTF-8 bytes.
+It preserves case and spaces; a leading space can be part of the same
+token as the letters or digits that follow. GPT-3 retains GPT-2's
+reversible tokenizer. The first LLaMA uses SentencePiece BPE and splits
+numbers into individual digits.
+See the [GPT-1 code](https://github.com/openai/finetune-transformer-lm/blob/a69b5c43b0452462890bca8ff92fb75dee9290cf/text_utils.py),
+[GPT-2, §2.2](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=4),
+[GPT-3, §2.1](https://arxiv.org/html/2005.14165v4#S2.SS1) and
+[LLaMA, §2.1](https://arxiv.org/html/2302.13971v1#S2.SS1).
+
+The table counts only the string's tokens, without special tokens.
+
+| Model | Count | Pieces |
+| --- | ---: | --- |
+| GPT-1 | 5 | `a</w>` · `cat</w>` · `sleeps</w>` · `1` · `23</w>` |
+| GPT-2 / GPT-3 | 4 | `A` · `␠cat` · `␠sleeps` · `␠123` |
+| LLaMA v1 | 8 | `▁A` · `▁cat` · `▁sle` · `eps` · `▁` · `1` · `2` · `3` |
+
+The symbol `␠` displays a literal space inside a GPT-2 token.
+The LLaMA row shows SentencePiece vocabulary entries, where `▁` marks
+a space. The encoder inserts a dummy leading space that decoding removes.
+That space is not BOS; adding BOS separately takes another position.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt2-token-embeddings-wte-2.png|GPT-2's token embedding table, with 50,257 rows and width 768, 1,024, 1,280 or 1,600.]]
+
+*Jay Alammar, [The Illustrated GPT-2](https://jalammar.github.io/illustrated-gpt2/),
+[original Token Embeddings (wte) figure](https://jalammar.github.io/images/gpt2/gpt2-token-embeddings-wte-2.png),
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/),
+unchanged. The words at the right are examples, not a map of actual IDs.*
+
+GPT-2 assigns `␠cat` ID 3797 and reads row 3797 of the embedding table.
+In the small model that row has 768 coordinates. LLaMA assigns `▁cat`
+ID 6635, and the 7B model reads a row of width 4,096. The vocabularies
+and weights belong together; swapping the tokenizer does not preserve
+the mapping from text to model inputs.
+
+A 2,048-position window limits the number of tokens in the encoded
+prompt. GPT-3 spends one position on the space and `123`; LLaMA spends
+four. This is one string, not an estimate of context capacity on a
+corpus. To count how many demonstrations fit, tokenize the actual
+prompt with its separators and leave room for the answer.
 
 <span id="сначала-вся-модель-на-одной-странице"></span>
 <span id="что-унаследовано-от-gpt"></span>
@@ -626,7 +680,8 @@ W_d=\begin{bmatrix}
 $$
 
 the result is about $(-0.0975,-1.5162)$. In the product, the second
-coordinate goes to zero, the first changes sign and the third grows.
+coordinate goes to zero, the first changes sign relative to $z_u$,
+and the third grows from $0.5$ to $0.8808$.
 The SiLU factor can be negative or greater than one; it is not a
 probability.
 
@@ -749,6 +804,9 @@ and output matrix `U` are separate. The input IDs `[0,1]` are
 paired with targets `[1,2]`: each position predicts the next ID.
 The example uses FP64 so the intermediate values can be checked.
 
+<details id="llama-block-listing">
+<summary>Block and training step (Python)</summary>
+
 ~~~python
 import math
 import torch
@@ -817,6 +875,8 @@ with torch.no_grad():
     new_loss = F.cross_entropy(new_logits.reshape(-1, 3), targets.reshape(-1))
 print("loss:", float(loss.detach()), "->", float(new_loss))
 ~~~
+
+</details>
 
 With these initial weights, the loss falls from 2.405477 to 2.366481.
 The gradient flows through both residual additions, the normalizations,
@@ -932,7 +992,7 @@ attention for the new query.
 
 For three prefix tokens and two new tokens, the allowed pairs are:
 
-| New query / available key | 0 | 1 | 2 | 3 | 4 |
+| Query / key | 0 | 1 | 2 | 3 | 4 |
 | --- | --- | --- | --- | --- | --- |
 | 3 | yes | yes | yes | yes | no |
 | 4 | yes | yes | yes | yes | yes |
@@ -946,6 +1006,9 @@ in chunks.
 
 After the training step above, generate three IDs by choosing the
 largest logit at the final position on each call:
+
+<details id="llama-cache-listing">
+<summary>Generation loop with a cache (Python)</summary>
 
 ~~~python
 with torch.no_grad():
@@ -969,6 +1032,8 @@ with torch.no_grad():
     print(sequence.tolist())
     print(processed, cache["k"].shape[1], sequence.shape[1])  # 4, 4, 5
 ~~~
+
+</details>
 
 The first call processes the two input tokens and chooses the first
 new one. The second call processes that choice, and the third
@@ -1008,7 +1073,10 @@ the weights through fine-tuning invalidates the old cache too.
 
 ## Pretraining data and token budget
 
-LLaMA trains to predict the next token from the preceding ones.
+The LLaMA team trained 7B and 13B on one trillion tokens each, and
+33B and 65B on 1.4 trillion. Training a smaller model for longer
+can make sense if it will serve many requests: another training
+token does not add any weights that must be loaded for inference.
 Its BPE tokenizer [[#gpt-llama-tokenization|splits numbers into individual digits]]
 and falls back to UTF-8 bytes for unknown characters.
 [Llama 2, §2.2](https://arxiv.org/pdf/2307.09288v1#page=6) confirms
@@ -1048,7 +1116,7 @@ remains 4.5%, but only 45 billion tokens are sampled. The epoch counts
 in the 1.4T column do not carry over to all model sizes.
 
 The [[#Model size and pre-training tokens|two 13B models compared earlier]]
-have similar parameter counts but see different numbers of training
+have similar parameter counts but saw different numbers of training
 tokens. At the other end, storing GPT-3 175B at two bytes per
 parameter takes about 350 GB, against about 26 GB for LLaMA-13B.
 Neither figure tells us the KV-cache size or the response latency.
@@ -1068,9 +1136,7 @@ Original training loss curves, CC BY 4.0.*
 
 </details>
 
-The 7B curve is still falling near one trillion tokens. That
-observation is about training loss, not uniform improvement on
-downstream tasks. To assess
+The 7B curve is still falling near one trillion tokens. The [[#llama-v1-results|evaluation results]] track accuracy on individual tasks over the same run. To assess
 [[#training-and-inference-budget|whether further training pays off]],
 first choose the quality level at which to compare models, then
 estimate how many tokens they will process in service.
@@ -1098,6 +1164,382 @@ The authors report about 380 tokens per second per GPU for 65B on
 measurements are for the code and cluster in the 2023 paper, not
 an estimate for current hardware or a result of the CPU example.
 
+<span id="что-llama-не-изобрела"></span>
+
+<a id="что-подтверждают-результаты-и-чего-они-не-выделяют"></a>
+
+<span id="what-the-results-establish-and-what-they-leave-open"></span>
+
+<a id="llama-v1-results"></a>
+
+## LLaMA v1 results
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/llama-2026-10-22/llama1-downstream-training.png|LLaMA Figure 2: six downstream accuracy curves across the pretraining run]]
+
+*Touvron et al., [LLaMA v1, Figure 2, p. 8](https://arxiv.org/pdf/2302.13971v1#page=8).
+Accuracy on six tasks during pretraining. The horizontal axis is
+billions of training tokens; the dashed line marks Chinchilla.
+Original plots and caption, CC BY 4.0.*
+
+On HellaSwag and the question-answering tasks, the longer runs usually
+improve the result. SIQA fluctuates, while 33B and 65B are close on
+WinoGrande despite differing in training loss. Section 3.7 discusses
+both exceptions. Figure 1's declining loss does not predict an equal
+gain on each downstream task. The dashed line comes from another
+model, not another point on the LLaMA training curves.
+
+Section 2.2 identifies where the parts came from: pre-normalization
+from earlier GPT-style models, RMSNorm from Zhang and Sennrich, RoPE
+from RoFormer, and SwiGLU from Shazeer's work and its use in PaLM.
+LLaMA combines them with a different training recipe. Its GPT-3
+comparisons do not isolate the contribution of each component.
+
+For example, the zero-shot results in Table 3 show LLaMA-13B at
+79.2 on HellaSwag versus 78.9 for GPT-3 175B, but 80.1 on PIQA
+versus 81.0. The models differ in training volume, data, tokenization
+and architecture. The paper scores candidates with likelihood
+normalized by character count, except on BoolQ and OpenBookQA, where
+it divides the candidate likelihood in context by its likelihood
+after the background prefix `Answer:`. The resulting accuracy
+is for that evaluation, not for an unconstrained chat reply.
+In the [[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning#gpt-llama-completion-scoring|HellaSwag walkthrough]],
+the same probabilities select different endings under token and character normalization.
+
+The original LLaMA is a base model. In the separate experiment in §4,
+instruction-tuned LLaMA-I 65B scores 68.9 on 5-shot MMLU against
+63.4 for the base 65B. The training changes; the basic block does not.
+The [original model card](https://github.com/meta-llama/llama/blob/1076b9c51c77ad06e9d7ba8a4c6df775741732bd/MODEL_CARD.md)
+notes that the base model was not trained with human feedback and
+can produce inaccurate, harmful or unhelpful continuations.
+
+<span id="ошибки-при-чтении-схем"></span>
+
+When loading a checkpoint, match its generation, number of layers and
+heads, FFN width and multiplier, `norm_eps`, RoPE frequencies and
+layout, vocabulary and weight tying. Some errors cause a shape
+mismatch. Others, such as reordering RoPE coordinate pairs or swapping
+the two SwiGLU input branches, can keep all the shapes and still
+change the computation.
+
+<a id="gpt-llama-beyond-block"></a>
+
+<span id="токенизация-объём-обучения-и-оценка-задач"></span>
+<span id="tokenization-training-volume-and-evaluation"></span>
+
+## GPT and LLaMA in comparative experiments
+
+<a id="размер-модели-и-объём-предобучения"></a>
+
+### Model size and pre-training tokens
+
+The smallest GPT-2 and GPT-3 have almost the same parameter count,
+124M and 125M, but GPT-3 doubles the context window and changes the data.
+Its mixture adds filtered Common Crawl, two book corpora and Wikipedia
+alongside WebText2. The 300B in the table counts tokens processed by
+each model, not bytes on disk or the size of the unweighted mixture.
+Sources were sampled at different rates.
+See [GPT-3, Tables 2.1–2.2](https://arxiv.org/html/2005.14165v4#S2).
+
+GPT-3 13B and LLaMA 13B form another near-size match. The former
+processed 300B tokens and the latter 1T, about 3.3 times as many.
+Because their tokenizers differ, this is a ratio of token counts,
+not of raw text volumes. Moving along the 13B curve in
+[[#llama-pretraining-data|LLaMA Figure 1]] means the same model has
+seen more tokens. Moving to the 65B curve at the same horizontal
+position means more weights at the same token count.
+
+A rough pre-training estimate for a dense decoder is $6ND$, where
+$N$ is the parameter count and $D$ the number of tokens processed.
+With $N=13\cdot10^9$, 300 billion tokens cost about
+$2.34\cdot10^{22}$ FLOP and one trillion costs $7.8\cdot10^{22}$ FLOP,
+again a factor of 3.3. Compared with LLaMA-13B, GPT-3 175B uses
+fewer tokens but comes to about $3.15\cdot10^{23}$ FLOP by the same
+estimate. These are approximate operation counts, not measurements.
+They do not separately account for attention dot products,
+implementation differences, or GPU utilization.
+[Approximation: Sardana et al., §2](https://arxiv.org/html/2401.00448v3#S2).
+
+<a id="gpt-llama-parameter-budget"></a>
+
+<a id="сколько-весов-приходится-на-словарь-и-позиции"></a>
+
+### How many weights go to vocabulary and positions?
+
+GPT-1, the smallest GPT-2 and the smallest GPT-3 each have twelve
+layers, width 768 and twelve heads. GPT-2 gains roughly eight million
+parameters over GPT-1 without changing the depth or width of its stack.
+The released tokenizer vocabulary grows from 40,478 to 50,257 entries;
+at 768 weights per row, that adds 7,510,272 parameters. Expanding the
+position table from 512 to 1,024 entries adds 393,216, and GPT-2's
+final LayerNorm adds 1,536. The count excludes the special tokens and
+head added for GPT-1 task-specific fine-tuning.
+See the [GPT-1 vocabulary](https://github.com/openai/finetune-transformer-lm/blob/a69b5c43b0452462890bca8ff92fb75dee9290cf/model/encoder_bpe_40000.json)
+and the [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2 parameter count]].
+
+From the smallest GPT-2 to the smallest GPT-3, the window doubles
+again. The extra 1,024 rows at the same width account for about 0.79M
+weights. That estimates the contribution of the position table, not
+the exact count of GPT-3's unreleased weights. Its local attention
+changes [[#Which tokens can one layer read?|access to keys]], not the
+smallest model's head count or hidden width
+([GPT-3, §2.1 and Table 2.1](https://arxiv.org/html/2005.14165v4#S2.SS1)).
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/gulordava-figure1-ab.png|Top: separate input embedding E and output projection W. Bottom: E is reused, transposed, for the output.]]
+
+*Kristina Gulordava, Laura Aina and Gemma Boleda,
+[How to represent a word and predict it, too, Figure 1(a–b), p. 2937](https://aclanthology.org/D18-1323.pdf#page=2),
+EMNLP 2018. Two original panels, unchanged within the panels;
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+The paper shows an LSTM. Transformer decoders face the same choice
+of whether to share the two vocabulary matrices.*
+
+In the bottom panel, the same table serves two roles. GPT-2 looks up
+row 3797 of $E$ for input `␠cat`; at the output, the dot product of
+the final state with that same row is the logit for `␠cat`. The
+50,257 rows of width 768 count once: 38,597,376 parameters. LLaMA-7B
+uses two independently learned rows for input `▁cat` and its output
+logit, as in the top panel. Its vocabulary is smaller (32,000), but
+with width 4,096 the two matrices contain 262,144,000 weights together.
+There is no learned position table: RoPE acts on Q and K inside each
+block. The [[#Shapes and parameters of the original models|full LLaMA count]]
+adds attention projections, FFN and normalizations.
+
+<a id="где-задаётся-нужный-ответ"></a>
+
+### Where the answer comes from
+
+In the [[#llama-relation-prefix|opening example]], we score three
+candidate labels. In GPT-3 and base LLaMA one can prepend a solved
+example such as `Premise: The door is open. Hypothesis: The door is shut. Relation: contradiction`.
+The example takes up part of the window and changes the token states
+without changing the weights. Natural Questions gives the model no
+answer choices. It generates a continuation, which is compared with
+the reference answers.
+
+<a id="natural-questions-gpt-llama"></a>
+
+<a id="как-менялась-оценка-на-natural-questions"></a>
+
+### How Natural Questions was evaluated
+
+In §3.8 of the GPT-2 paper, several question–answer pairs already
+preceded the test question. The prompt asked for a short continuation;
+the model did not receive a document containing the answer. The
+largest GPT-2 scored 4.1% exact match. The paper does not break out
+zero, one and multiple demonstrations, so 4.1% does not belong in
+a zero-shot column as defined in the GPT-3 paper.
+[Radford et al., §3.8](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=7).
+
+GPT-3 and LLaMA varied the number of demonstrations. The figure from
+the LLaMA paper shows one. The prompt includes an instruction, a
+question answered by “Frank Sinatra,” and a new question ending in
+`A:`. The `Target` line below the rule is the answer for scoring and
+does not enter the prompt. With zero demonstrations, only the
+instruction precedes the test question. In the 64-shot condition,
+64 completed pairs appear there.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/llama1-figure3-natural-questions.png|Original Natural Questions prompt: the Frank Sinatra answer enters the prompt; Charles Darwin remains the reference answer.]]
+
+*Hugo Touvron et al., [LLaMA v1, Figure 3, Appendix A, p. 17](https://arxiv.org/pdf/2302.13971v1#page=17).
+Original left panel (Natural Questions), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+
+The LLaMA authors generated greedily, extracted a short answer,
+normalized case, punctuation, articles and whitespace, and compared
+it against the accepted strings. For example, if the continuation
+were `Charles Darwin, an English naturalist`, the text before the
+comma would match the reference after normalization. This demonstrates
+the scoring rule, not a generation run.
+
+The column headings give the number of solved pairs before the test
+question. Each cell reports exact match.
+
+| Model | 0 | 1 | 64 |
+| --- | ---: | ---: | ---: |
+| GPT-3 175B | 14.6% | 23.0% | 29.9% |
+| LLaMA 7B | 16.8% | 18.7% | 26.1% |
+| LLaMA 13B | 20.1% | 23.4% | 31.9% |
+
+LLaMA was evaluated on the 3,610-question Natural Questions test set
+([Table 4](https://arxiv.org/pdf/2302.13971v1#page=4) and
+[Appendix A](https://arxiv.org/html/2302.13971v1#A1)).
+The GPT-3 row is from [Brown et al., Table 3.3](https://arxiv.org/html/2005.14165v4#S3.SS2).
+GPT-3 gains 15.3 percentage points from zero to 64 demonstrations
+with fixed weights. The published LLaMA 13B results are competitive
+with GPT-3 175B on this task, with about 13.5 times fewer parameters.
+These are results from two papers, not a matched-prompt run. They
+cannot isolate the effect of RoPE, training tokens or corpus composition.
+TriviaQA, on the right of the original Figure 3, differs in another
+way: LLaMA used a filtered development set; the 71.2% GPT-3 few-shot
+result was separately confirmed on the wiki-split test server.
+Those numbers should not be treated as evaluations on identical questions.
+
+<a id="gpt3-demo-order"></a>
+
+<a id="что-меняет-порядок-примеров"></a>
+
+### What changes when examples are reordered?
+
+Zhao et al. evaluated GPT-3 2.7B on SST-2 sentiment classification.
+Four labeled reviews preceded the test review. The researchers
+permuted their order while holding the reviews, prompt template and
+weights fixed. They recomputed accuracy on the same evaluation
+examples for each permutation, and repeated this for ten sets
+of demonstrations.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/zhao21c-figure2.png|GPT-3 2.7B accuracy on SST-2 across permutations of four examples in each of ten demonstration sets.]]
+
+*Tony Z. Zhao, Eric Wallace, Shi Feng, Dan Klein and Sameer Singh,
+[Calibrate Before Use, PMLR 139](https://proceedings.mlr.press/v139/zhao21c.html),
+[Figure 2, p. 3](https://proceedings.mlr.press/v139/zhao21c/zhao21c.pdf#page=3),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+The original plot was extracted without changing axes or labels.*
+
+The horizontal axis is the set index, not the number of examples.
+Every set contains four. Dots within one column show the results
+for different permutations; the box marks the interquartile range.
+For the first set, the lowest and highest points lie near 54% and 93%.
+A reproducible four-shot comparison therefore needs the examples,
+their order and the prompt template. The plot measures GPT-3 on SST-2,
+not the variation to expect from LLaMA.
+
+<a id="gpt-llama-label-mapping"></a>
+
+<a id="когда-примеры-задают-новое-соответствие-меток"></a>
+
+### When examples define a new label mapping
+
+A model that labels a review `positive` may already know what that
+word means. A correct prediction alone does not show that it learned
+a rule from the prompt. Pan et al. compare three labeling schemes to
+separate the hint in the class names from the input–output pairs.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/pan-icl-figure1.png|Pan et al.'s Random, Abstract and Gold prompts. The last column gives the expected label for each.]]
+
+*Jane Pan, Tianyu Gao, Howard Chen and Danqi Chen,
+[What In-Context Learning “Learns” In-Context, Figure 1, p. 8298](https://aclanthology.org/2023.findings-acl.527.pdf#page=1),
+Findings of ACL 2023. Original artwork,
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+
+In **Gold**, at the bottom, a favorable review gets `positive`.
+In **Random**, each demonstration label is drawn uniformly from
+`positive` and `negative`. The reference for the test review
+is unchanged. This measures what a model can infer from the text and
+class names when the demonstration labels do not provide a reliable
+mapping.
+
+**Abstract** keeps a consistent mapping within the prompt but replaces
+class names with digits. Suppose `0` marks positive reviews and `1`
+marks negative ones. The correct answer for a new favorable review
+is `0`. Swap the digits in every demonstration, and the correct answer
+becomes `1` while the review and model weights stay fixed. The authors
+choose a new label permutation per test example and omit terms such
+as `Sentiment` from the abstract templates. The middle row of the
+illustration retains the task name so the prompts can be compared
+visually. The labels are single tokens in these experiments, so the
+evaluator can compare their logits after the prompt.
+[Method: §§2–3 and Appendix B](https://aclanthology.org/2023.findings-acl.527.pdf#page=2).
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/pan-icl-figure2.png|Six plots for GPT-3, LLaMA and OPT. Top: model size at 32 examples. Bottom: example count at fixed model size.]]
+
+*Pan et al., [Figure 2, p. 8300](https://aclanthology.org/2023.findings-acl.527.pdf#page=3).
+All six original panels and their legend,
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+
+In the bottom row, the weights of each model are fixed. Moving from
+8 to 32 demonstrations increases average **Abstract** accuracy from
+about 45% to 60% for GPT-3 175B, and from about 48% to 57% for LLaMA-65B.
+**Random** does not show that gain. The results average across 16
+classification datasets; the error bars show variation across three
+templates. GPT-3 and LLaMA were evaluated on different numbers of
+examples, so compare the changes within a panel before comparing
+heights across families. The **Abstract** improvement shows that more
+pairs can help the model follow a supplied mapping. The plot does not
+tell us which layers recover it or which architectural component
+explains the difference between models.
+
+<a id="training-and-inference-budget"></a>
+
+<a id="бюджет-обучения-и-бюджет-вывода"></a>
+
+### Training compute and inference compute
+
+In 2022, [Hoffmann et al., §4](https://arxiv.org/html/2203.15556v1#S4)
+reallocated Gopher's training budget. Gopher had 280 billion parameters
+and processed 300 billion tokens. Chinchilla had 70 billion parameters
+and processed 1.4 trillion tokens. Under the $6ND$ approximation, a
+token costs about a quarter as much for 70B as for 280B. The rounded
+counts give $5.0\cdot10^{23}$ and $5.9\cdot10^{23}$ FLOP, respectively.
+These are rough estimates; the paper uses the more detailed accounting
+in [Appendix F](https://arxiv.org/html/2203.15556v1#A6) to match the budgets.
+On WikiText-103, perplexity fell from 7.75 to 7.16; on zero-shot LAMBADA,
+accuracy rose from 74.5% to 77.4%. The authors also changed the optimizer,
+tokenizer, and proportions of MassiveText (§4.1), so the comparison
+does not isolate the effect of training tokens.
+
+GPT-3 held training tokens fixed while varying model size. Hoffmann
+et al. fixed training compute and looked for the model size and token
+count with the lowest loss. LLaMA starts with a constraint on the size
+of the model that will serve requests. For a 10B model, Hoffmann et al.
+estimated about 200 billion training tokens at the training-only optimum.
+On the [[#llama-pretraining-data|LLaMA training curves]], 7B loss was
+still falling at one trillion tokens. These numbers come from different
+models and corpora. They illustrate different training goals, not a
+head-to-head quality comparison.
+
+Sardana et al. formalize the serving decision. They set a target
+loss $\ell$ and an expected workload $T$, the total number of input
+and output tokens over the model's lifetime. Among models that reach
+$L(N,D)=\ell$, they compare $6ND+2NT$, where $N$ is the parameter count
+and $D$ is the pre-training token count. A larger model may reach the
+same loss with less training compute, but each request erodes that lead.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/llama-scaling-2026-11-09/sardana24a-figure1.png|Three panels compare 7B and 13B at equal loss: training cost, inference cost, and total cost for two trillion served tokens.]]
+
+*Nikhil Sardana, Jacob Portes, Sasha Doubov and Jonathan Frankle,
+[Beyond Chinchilla-Optimal, PMLR 235 (2024)](https://proceedings.mlr.press/v235/sardana24a.html),
+[Figure 1, p. 2](https://raw.githubusercontent.com/mlresearch/v235/main/assets/sardana24a/sardana24a.pdf#page=2).
+All three original panels, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+
+The horizontal dashed line in panel **(a)** sets a common loss target.
+13B reaches it at $4.5\cdot10^{22}$ FLOP and 7B at $5.2\cdot10^{22}$ FLOP.
+Before the first request, 7B has spent an extra $0.7\cdot10^{22}$ FLOP.
+Panel **(b)** shows how serving can make up the difference. Under
+the paper's approximation, a forward pass costs $2N$ FLOP per token
+for a model with $N$ parameters. On each input or output token, 7B
+saves $2(13-7)\cdot10^9=12\cdot10^9$ FLOP. The rounded numbers on
+the figure therefore give a break-even point near 580 billion tokens:
+
+$$
+T_*=\frac{0.7\cdot10^{22}}{12\cdot10^9}\approx5.8\cdot10^{11}.
+$$
+
+At two trillion served tokens, 7B spends $2.8\cdot10^{22}$ FLOP
+on inference and 13B spends $5.2\cdot10^{22}$. Adding training gives
+$8.0\cdot10^{22}$ and $9.7\cdot10^{22}$ FLOP, the totals in panel
+**(c)**. This is an equal-loss comparison, not a measurement of two
+released LLaMA models. At 100 billion served tokens, the same calculation
+gives $5.34\cdot10^{22}$ FLOP for 7B and $4.76\cdot10^{22}$ for 13B,
+making 13B cheaper. Equal loss does not guarantee equal quality
+on a particular task. Comparing costs in money also requires input
+and output lengths, throughput on the chosen hardware and resource
+prices ([§2](https://arxiv.org/html/2401.00448v3#S2),
+[§6](https://arxiv.org/html/2401.00448v3#S6)).
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/llama-scaling-2026-11-09/sardana24a-figure2b.png|Contour plot with inference tokens on the horizontal axis and target loss on the vertical axis. Each line gives a percentage of the parameter count optimal for training alone.]]
+
+*Nikhil Sardana et al., [Beyond Chinchilla-Optimal, Figure 2(b), p. 3](https://raw.githubusercontent.com/mlresearch/v235/main/assets/sardana24a/sardana24a.pdf#page=3).
+Original panel with axes and legend, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
+
+Hold the target loss at 2.2 and follow the horizontal line to the right.
+As demand grows, it crosses the contours labeled 75% and 50%: the
+calculation selects a smaller fraction of the model size that minimizes
+training compute alone. The percentages describe parameter counts,
+not FLOP savings. The authors computed the curves from a fitted loss
+function. Their long-training runs covered models from 150M to 6B
+without repeating data ([§3–4](https://arxiv.org/html/2401.00448v3#S3)).
+The [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws#joint-model-data-scaling|scaling laws chapter]]
+shows how to estimate $L(N,D)$ in the first place.
+
 <span id="llama-1-llama-2-и-llama-3--не-одна-конфигурация"></span>
 
 <a id="переходы-к-llama-2-и-llama-3"></a>
@@ -1113,12 +1555,18 @@ attention, and the same RMSNorm → sublayer → residual addition order.
 The difference comes from three places: attention projections,
 the FFN, and the two vocabulary matrices.
 
-| Base model | Context | Q / KV heads | Width of each SwiGLU branch | Vocabulary rows |
-| --- | ---: | ---: | ---: | ---: |
-| LLaMA v1 7B | 2,048 | 32 / 32 | 11,008 | 32,000 |
-| Llama 2 7B | 4,096 | 32 / 32 | 11,008 | 32,000 |
-| Llama 3 8B, April 2024 | 8,192 | 32 / 8 | 14,336 | 128,256 |
-| Llama 3.1 8B, July 2024 | 131,072 | 32 / 8 | 14,336 | 128,256 |
+The last column counts query heads and K/V heads separately.
+
+| Model | Context | Q / KV |
+| --- | ---: | ---: |
+| LLaMA v1 7B | 2,048 | 32 / 32 |
+| Llama 2 7B | 4,096 | 32 / 32 |
+| Llama 3 8B | 8,192 | 32 / 8 |
+| Llama 3.1 8B | 131,072 | 32 / 8 |
+
+For both 7B releases, each SwiGLU branch has width 11,008 and the
+vocabulary has 32,000 rows. For both 8B releases the counts are
+14,336 and 128,256.
 
 See [Llama 2, Table 1](https://arxiv.org/html/2307.09288v2#S2.T1)
 and [Llama 3 Herd, §3.2](https://arxiv.org/html/2407.21783v3#S3.SS2).
@@ -1388,450 +1836,6 @@ subsequent preference stage uses [[00 Учебник/12 Post-training и Alignme
 instead of PPO. That is a
 change in how the weights are updated, separate from both GQA
 and the chat template.
-
-<span id="что-llama-не-изобрела"></span>
-
-<a id="что-подтверждают-результаты-и-чего-они-не-выделяют"></a>
-
-## What the results establish and what they leave open
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/llama-2026-10-22/llama1-downstream-training.png|LLaMA Figure 2: six downstream accuracy curves across the pretraining run]]
-
-*Touvron et al., [LLaMA v1, Figure 2, p. 8](https://arxiv.org/pdf/2302.13971v1#page=8).
-Accuracy on six tasks during pretraining. The horizontal axis is
-billions of training tokens; the dashed line marks Chinchilla.
-Original plots and caption, CC BY 4.0.*
-
-On HellaSwag and the question-answering tasks, the longer runs usually
-improve the result. SIQA fluctuates, while 33B and 65B are close on
-WinoGrande despite differing in training loss. Section 3.7 discusses
-both exceptions. Figure 1's declining loss does not predict an equal
-gain on each downstream task. The dashed line comes from another
-model, not another point on the LLaMA training curves.
-
-Section 2.2 identifies where the parts came from: pre-normalization
-from earlier GPT-style models, RMSNorm from Zhang and Sennrich, RoPE
-from RoFormer, and SwiGLU from Shazeer's work and its use in PaLM.
-LLaMA combines them with a different training recipe. Its GPT-3
-comparisons do not isolate the contribution of each component.
-
-For example, the zero-shot results in Table 3 show LLaMA-13B at
-79.2 on HellaSwag versus 78.9 for GPT-3 175B, but 80.1 on PIQA
-versus 81.0. The models differ in training volume, data, tokenization
-and architecture. The paper scores candidates with likelihood
-normalized by character count, except on BoolQ and OpenBookQA, where
-it divides the candidate likelihood in context by its likelihood
-after the background prefix `Answer:`. The resulting accuracy
-is for that evaluation, not for an unconstrained chat reply.
-In the [[en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning#gpt-llama-completion-scoring|HellaSwag walkthrough]],
-the same probabilities select different endings under token and character normalization.
-
-The original LLaMA is a base model. In the separate experiment in §4,
-instruction-tuned LLaMA-I 65B scores 68.9 on 5-shot MMLU against
-63.4 for the base 65B. The training changes; the basic block does not.
-The [original model card](https://github.com/meta-llama/llama/blob/1076b9c51c77ad06e9d7ba8a4c6df775741732bd/MODEL_CARD.md)
-notes that the base model was not trained with human feedback and
-can produce inaccurate, harmful or unhelpful continuations.
-
-<span id="ошибки-при-чтении-схем"></span>
-
-When loading a checkpoint, match its generation, number of layers and
-heads, FFN width and multiplier, `norm_eps`, RoPE frequencies and
-layout, vocabulary and weight tying. Some errors cause a shape
-mismatch. Others, such as reordering RoPE coordinate pairs or swapping
-the two SwiGLU input branches, can keep all the shapes and still
-change the computation.
-
-<a id="gpt-llama-beyond-block"></a>
-
-## Tokenization, training volume, and evaluation
-
-<a id="gpt-llama-tokenization"></a>
-
-<a id="сколько-позиций-занимает-одна-и-та-же-строка"></a>
-
-### One string in three tokenizers
-
-Consider `A cat sleeps 123`. In the released GPT-1 code,
-pre-tokenization is followed by lowercasing; BPE operates within words,
-and `</w>` marks a word boundary. GPT-2 starts from UTF-8 bytes.
-It preserves case and spaces; a leading space can be part of the same
-token as the letters or digits that follow. GPT-3 retains GPT-2's
-reversible tokenizer. The first LLaMA uses SentencePiece BPE and splits
-numbers into individual digits.
-See the [GPT-1 code](https://github.com/openai/finetune-transformer-lm/blob/a69b5c43b0452462890bca8ff92fb75dee9290cf/text_utils.py),
-[GPT-2, §2.2](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=4),
-[GPT-3, §2.1](https://arxiv.org/html/2005.14165v4#S2.SS1) and
-[LLaMA, §2.1](https://arxiv.org/html/2302.13971v1#S2.SS1).
-
-The table counts only the string's tokens, without special tokens.
-
-| Model | Count | Pieces |
-| --- | ---: | --- |
-| GPT-1 | 5 | `a</w>` · `cat</w>` · `sleeps</w>` · `1` · `23</w>` |
-| GPT-2 / GPT-3 | 4 | `A` · `␠cat` · `␠sleeps` · `␠123` |
-| LLaMA v1 | 8 | `▁A` · `▁cat` · `▁sle` · `eps` · `▁` · `1` · `2` · `3` |
-
-The symbol `␠` displays a literal space inside a GPT-2 token.
-The LLaMA row shows SentencePiece vocabulary entries, where `▁` marks
-a space. The encoder inserts a dummy leading space that decoding removes.
-That space is not BOS; adding BOS separately takes another position.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt2-token-embeddings-wte-2.png|GPT-2's token embedding table, with 50,257 rows and width 768, 1,024, 1,280 or 1,600.]]
-
-*Jay Alammar, [The Illustrated GPT-2](https://jalammar.github.io/illustrated-gpt2/),
-[original Token Embeddings (wte) figure](https://jalammar.github.io/images/gpt2/gpt2-token-embeddings-wte-2.png),
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/),
-unchanged. The words at the right are examples, not a map of actual IDs.*
-
-GPT-2 assigns `␠cat` ID 3797 and reads row 3797 of the embedding table.
-In the small model that row has 768 coordinates. LLaMA assigns `▁cat`
-ID 6635, and the 7B model reads a row of width 4,096. The vocabularies
-and weights belong together; swapping the tokenizer does not preserve
-the mapping from text to model inputs.
-
-A 2,048-position window limits the number of tokens in the encoded
-prompt. GPT-3 spends one position on the space and `123`; LLaMA spends
-four. This is one string, not an estimate of context capacity on a
-corpus. To count how many demonstrations fit, tokenize the actual
-prompt with its separators and leave room for the answer.
-
-<a id="размер-модели-и-объём-предобучения"></a>
-
-### Model size and pre-training tokens
-
-The smallest GPT-2 and GPT-3 have almost the same parameter count,
-124M and 125M, but GPT-3 doubles the context window and changes the data.
-Its mixture adds filtered Common Crawl, two book corpora and Wikipedia
-alongside WebText2. The 300B in the table counts tokens processed by
-each model, not bytes on disk or the size of the unweighted mixture.
-Sources were sampled at different rates.
-See [GPT-3, Tables 2.1–2.2](https://arxiv.org/html/2005.14165v4#S2).
-
-GPT-3 13B and LLaMA 13B form another near-size match. The former
-processed 300B tokens and the latter 1T, about 3.3 times as many.
-Because their tokenizers differ, this is a ratio of token counts,
-not of raw text volumes. Moving along the 13B curve in
-[[#llama-pretraining-data|LLaMA Figure 1]] means the same model has
-seen more tokens. Moving to the 65B curve at the same horizontal
-position means more weights at the same token count.
-
-A rough pre-training estimate for a dense decoder is $6ND$, where
-$N$ is the parameter count and $D$ the number of tokens processed.
-With $N=13\cdot10^9$, 300 billion tokens cost about
-$2.34\cdot10^{22}$ FLOP and one trillion costs $7.8\cdot10^{22}$ FLOP,
-again a factor of 3.3. Compared with LLaMA-13B, GPT-3 175B uses
-fewer tokens but comes to about $3.15\cdot10^{23}$ FLOP by the same
-estimate. These are approximate operation counts, not measurements.
-They do not separately account for attention dot products,
-implementation differences, or GPU utilization.
-[Approximation: Sardana et al., §2](https://arxiv.org/html/2401.00448v3#S2).
-
-<a id="gpt-llama-parameter-budget"></a>
-
-<a id="сколько-весов-приходится-на-словарь-и-позиции"></a>
-
-### How many weights go to vocabulary and positions?
-
-GPT-1, the smallest GPT-2 and the smallest GPT-3 each have twelve
-layers, width 768 and twelve heads. GPT-2 gains roughly eight million
-parameters over GPT-1 without changing the depth or width of its stack.
-The released tokenizer vocabulary grows from 40,478 to 50,257 entries;
-at 768 weights per row, that adds 7,510,272 parameters. Expanding the
-position table from 512 to 1,024 entries adds 393,216, and GPT-2's
-final LayerNorm adds 1,536. The count excludes the special tokens and
-head added for GPT-1 task-specific fine-tuning.
-See the [GPT-1 vocabulary](https://github.com/openai/finetune-transformer-lm/blob/a69b5c43b0452462890bca8ff92fb75dee9290cf/model/encoder_bpe_40000.json)
-and the [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2 parameter count]].
-
-From the smallest GPT-2 to the smallest GPT-3, the window doubles
-again. The extra 1,024 rows at the same width account for about 0.79M
-weights. That estimates the contribution of the position table, not
-the exact count of GPT-3's unreleased weights. Its local attention
-changes [[#Which tokens can one layer read?|access to keys]], not the
-smallest model's head count or hidden width
-([GPT-3, §2.1 and Table 2.1](https://arxiv.org/html/2005.14165v4#S2.SS1)).
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/gulordava-figure1-ab.png|Top: separate input embedding E and output projection W. Bottom: E is reused, transposed, for the output.]]
-
-*Kristina Gulordava, Laura Aina and Gemma Boleda,
-[How to represent a word and predict it, too, Figure 1(a–b), p. 2937](https://aclanthology.org/D18-1323.pdf#page=2),
-EMNLP 2018. Two original panels, unchanged within the panels;
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-The paper shows an LSTM. Transformer decoders face the same choice
-of whether to share the two vocabulary matrices.*
-
-In the bottom panel, the same table serves two roles. GPT-2 looks up
-row 3797 of $E$ for input `␠cat`; at the output, the dot product of
-the final state with that same row is the logit for `␠cat`. The
-50,257 rows of width 768 count once: 38,597,376 parameters. LLaMA-7B
-uses two independently learned rows for input `▁cat` and its output
-logit, as in the top panel. Its vocabulary is smaller (32,000), but
-with width 4,096 the two matrices contain 262,144,000 weights together.
-There is no learned position table: RoPE acts on Q and K inside each
-block. The [[#Shapes and parameters of the original models|full LLaMA count]]
-adds attention projections, FFN and normalizations.
-
-<a id="где-задаётся-нужный-ответ"></a>
-
-### Where the answer comes from
-
-Take the pair from the GPT-1 chapter: “A cat sleeps” and “An animal
-rests.” GPT-1 sends both sentences and their separators through the
-decoder, then applies a trained head to the state at the final
-`Extract` token to produce three logits. Fine-tuning labels assign a
-meaning to each coordinate. The
-[original GPT-1 diagram](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf#page=4)
-shows this as `Task Classifier`, separate from the vocabulary output.
-
-A language model without that head can receive
-`Premise: A cat sleeps. Hypothesis: An animal rests. Relation:`.
-Generate a label or compare the probabilities of three continuations:
-` entailment`, ` contradiction` and ` neutral`. Each starts with
-a space after the colon. If a label spans several tokens, its
-probability is the product of their conditional probabilities;
-the second token is scored after the first. This makes it possible
-to use the vocabulary projection without training a classifier.
-The GPT-2 paper studied text prefixes for tasks such as translation
-and reading comprehension. This sentence pair illustrates the format;
-it is not a reported GPT-2 result.
-
-In few-shot GPT-3, completed examples precede that pair, such as
-`Premise: The door is open. Hypothesis: The door is shut. Relation: contradiction`.
-Only the final pair has a blank label. Demonstrations use space in the
-window and change the token states in the forward pass. There is no
-optimizer step. The base LLaMA can be evaluated the same way.
-The evaluator still chooses the example order, the label strings and
-[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-candidate-scores|how to score candidates of different lengths]].
-
-LLaMA accepts the prompt in [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-relation-shots|the same text format as GPT-3]], but encodes it with its own
-tokenizer. The three lines starting with `Premise:`, `Hypothesis:`
-and `Relation:` (no instruction or BOS) use 23 tokens, versus 20
-for GPT-2. The continuation ` entailment` uses three tokens instead
-of two; ` neutral` and ` contradiction` still use one each. Scoring
-the whole first label now takes three conditional probabilities.
-The token count does not tell us which label the model will choose.
-
-<a id="natural-questions-gpt-llama"></a>
-
-<a id="как-менялась-оценка-на-natural-questions"></a>
-
-### How Natural Questions was evaluated
-
-In §3.8 of the GPT-2 paper, several question–answer pairs already
-preceded the test question. The prompt asked for a short continuation;
-the model did not receive a document containing the answer. The
-largest GPT-2 scored 4.1% exact match. The paper does not break out
-zero, one and multiple demonstrations, so 4.1% does not belong in
-a zero-shot column as defined in the GPT-3 paper.
-[Radford et al., §3.8](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf#page=7).
-
-GPT-3 and LLaMA varied the number of demonstrations. The figure from
-the LLaMA paper shows one. The prompt includes an instruction, a
-question answered by “Frank Sinatra,” and a new question ending in
-`A:`. The `Target` line below the rule is the answer for scoring and
-does not enter the prompt. With zero demonstrations, only the
-instruction precedes the test question. In the 64-shot condition,
-64 completed pairs appear there.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/llama1-figure3-natural-questions.png|Original Natural Questions prompt: the Frank Sinatra answer enters the prompt; Charles Darwin remains the reference answer.]]
-
-*Hugo Touvron et al., [LLaMA v1, Figure 3, Appendix A, p. 17](https://arxiv.org/pdf/2302.13971v1#page=17).
-Original left panel (Natural Questions), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
-
-The LLaMA authors generated greedily, extracted a short answer,
-normalized case, punctuation, articles and whitespace, and compared
-it against the accepted strings. For example, if the continuation
-were `Charles Darwin, an English naturalist`, the text before the
-comma would match the reference after normalization. This demonstrates
-the scoring rule, not a generation run.
-
-| Base model | 0 demonstrations | 1 demonstration | 64 demonstrations |
-| --- | ---: | ---: | ---: |
-| GPT-3 175B | 14.6% | 23.0% | 29.9% |
-| LLaMA 7B | 16.8% | 18.7% | 26.1% |
-| LLaMA 13B | 20.1% | 23.4% | 31.9% |
-
-LLaMA was evaluated on the 3,610-question Natural Questions test set
-([Table 4](https://arxiv.org/pdf/2302.13971v1#page=4) and
-[Appendix A](https://arxiv.org/html/2302.13971v1#A1)).
-The GPT-3 row is from [Brown et al., Table 3.3](https://arxiv.org/html/2005.14165v4#S3.SS2).
-GPT-3 gains 15.3 percentage points from zero to 64 demonstrations
-with fixed weights. The published LLaMA 13B results are competitive
-with GPT-3 175B on this task, with about 13.5 times fewer parameters.
-These are results from two papers, not a matched-prompt run. They
-cannot isolate the effect of RoPE, training tokens or corpus composition.
-TriviaQA, on the right of the original Figure 3, differs in another
-way: LLaMA used a filtered development set; the 71.2% GPT-3 few-shot
-result was separately confirmed on the wiki-split test server.
-Those numbers should not be treated as evaluations on identical questions.
-
-<a id="gpt3-demo-order"></a>
-
-<a id="что-меняет-порядок-примеров"></a>
-
-### What changes when examples are reordered?
-
-Zhao et al. evaluated GPT-3 2.7B on SST-2 sentiment classification.
-Four labeled reviews preceded the test review. The researchers
-permuted their order while holding the reviews, prompt template and
-weights fixed. They recomputed accuracy on the same evaluation
-examples for each permutation, and repeated this for ten sets
-of demonstrations.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/zhao21c-figure2.png|GPT-3 2.7B accuracy on SST-2 across permutations of four examples in each of ten demonstration sets.]]
-
-*Tony Z. Zhao, Eric Wallace, Shi Feng, Dan Klein and Sameer Singh,
-[Calibrate Before Use, PMLR 139](https://proceedings.mlr.press/v139/zhao21c.html),
-[Figure 2, p. 3](https://proceedings.mlr.press/v139/zhao21c/zhao21c.pdf#page=3),
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-The original plot was extracted without changing axes or labels.*
-
-The horizontal axis is the set index, not the number of examples.
-Every set contains four. Dots within one column show the results
-for different permutations; the box marks the interquartile range.
-For the first set, the lowest and highest points lie near 54% and 93%.
-A reproducible four-shot comparison therefore needs the examples,
-their order and the prompt template. The plot measures GPT-3 on SST-2,
-not the variation to expect from LLaMA.
-
-<a id="gpt-llama-label-mapping"></a>
-
-<a id="когда-примеры-задают-новое-соответствие-меток"></a>
-
-### When examples define a new label mapping
-
-A model that labels a review `positive` may already know what that
-word means. A correct prediction alone does not show that it learned
-a rule from the prompt. Pan et al. compare three labeling schemes to
-separate the hint in the class names from the input–output pairs.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/pan-icl-figure1.png|Pan et al.'s Random, Abstract and Gold prompts. The last column gives the expected label for each.]]
-
-*Jane Pan, Tianyu Gao, Howard Chen and Danqi Chen,
-[What In-Context Learning “Learns” In-Context, Figure 1, p. 8298](https://aclanthology.org/2023.findings-acl.527.pdf#page=1),
-Findings of ACL 2023. Original artwork,
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
-
-In **Gold**, at the bottom, a favorable review gets `positive`.
-In **Random**, each demonstration label is drawn uniformly from
-`positive` and `negative`. The reference for the test review
-is unchanged. This measures what a model can infer from the text and
-class names when the demonstration labels do not provide a reliable
-mapping.
-
-**Abstract** keeps a consistent mapping within the prompt but replaces
-class names with digits. Suppose `0` marks positive reviews and `1`
-marks negative ones. The correct answer for a new favorable review
-is `0`. Swap the digits in every demonstration, and the correct answer
-becomes `1` while the review and model weights stay fixed. The authors
-choose a new label permutation per test example and omit terms such
-as `Sentiment` from the abstract templates. The middle row of the
-illustration retains the task name so the prompts can be compared
-visually. The labels are single tokens in these experiments, so the
-evaluator can compare their logits after the prompt.
-[Method: §§2–3 and Appendix B](https://aclanthology.org/2023.findings-acl.527.pdf#page=2).
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-history-2026-11-09/pan-icl-figure2.png|Six plots for GPT-3, LLaMA and OPT. Top: model size at 32 examples. Bottom: example count at fixed model size.]]
-
-*Pan et al., [Figure 2, p. 8300](https://aclanthology.org/2023.findings-acl.527.pdf#page=3).
-All six original panels and their legend,
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
-
-In the bottom row, the weights of each model are fixed. Moving from
-8 to 32 demonstrations increases average **Abstract** accuracy from
-about 45% to 60% for GPT-3 175B, and from about 48% to 57% for LLaMA-65B.
-**Random** does not show that gain. The results average across 16
-classification datasets; the error bars show variation across three
-templates. GPT-3 and LLaMA were evaluated on different numbers of
-examples, so compare the changes within a panel before comparing
-heights across families. The **Abstract** improvement shows that more
-pairs can help the model follow a supplied mapping. The plot does not
-tell us which layers recover it or which architectural component
-explains the difference between models.
-
-<a id="training-and-inference-budget"></a>
-
-<a id="бюджет-обучения-и-бюджет-вывода"></a>
-
-### Training compute and inference compute
-
-In 2022, [Hoffmann et al., §4](https://arxiv.org/html/2203.15556v1#S4)
-reallocated Gopher's training budget. Gopher had 280 billion parameters
-and processed 300 billion tokens. Chinchilla had 70 billion parameters
-and processed 1.4 trillion tokens. Under the $6ND$ approximation, a
-token costs about a quarter as much for 70B as for 280B. The rounded
-counts give $5.0\cdot10^{23}$ and $5.9\cdot10^{23}$ FLOP, respectively.
-These are rough estimates; the paper uses the more detailed accounting
-in [Appendix F](https://arxiv.org/html/2203.15556v1#A6) to match the budgets.
-On WikiText-103, perplexity fell from 7.75 to 7.16; on zero-shot LAMBADA,
-accuracy rose from 74.5% to 77.4%. The authors also changed the optimizer,
-tokenizer, and proportions of MassiveText (§4.1), so the comparison
-does not isolate the effect of training tokens.
-
-GPT-3 held training tokens fixed while varying model size. Hoffmann
-et al. fixed training compute and looked for the model size and token
-count with the lowest loss. LLaMA starts with a constraint on the size
-of the model that will serve requests. For a 10B model, Hoffmann et al.
-estimated about 200 billion training tokens at the training-only optimum.
-On the [[#llama-pretraining-data|LLaMA training curves]], 7B loss was
-still falling at one trillion tokens. These numbers come from different
-models and corpora. They illustrate different training goals, not a
-head-to-head quality comparison.
-
-Sardana et al. formalize the serving decision. They set a target
-loss $\ell$ and an expected workload $T$, the total number of input
-and output tokens over the model's lifetime. Among models that reach
-$L(N,D)=\ell$, they compare $6ND+2NT$, where $N$ is the parameter count
-and $D$ is the pre-training token count. A larger model may reach the
-same loss with less training compute, but each request erodes that lead.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/llama-scaling-2026-11-09/sardana24a-figure1.png|Three panels compare 7B and 13B at equal loss: training cost, inference cost, and total cost for two trillion served tokens.]]
-
-*Nikhil Sardana, Jacob Portes, Sasha Doubov and Jonathan Frankle,
-[Beyond Chinchilla-Optimal, PMLR 235 (2024)](https://proceedings.mlr.press/v235/sardana24a.html),
-[Figure 1, p. 2](https://raw.githubusercontent.com/mlresearch/v235/main/assets/sardana24a/sardana24a.pdf#page=2).
-All three original panels, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
-
-The horizontal dashed line in panel **(a)** sets a common loss target.
-13B reaches it at $4.5\cdot10^{22}$ FLOP and 7B at $5.2\cdot10^{22}$ FLOP.
-Before the first request, 7B has spent an extra $0.7\cdot10^{22}$ FLOP.
-Panel **(b)** shows how serving can make up the difference. Under
-the paper's approximation, a forward pass costs $2N$ FLOP per token
-for a model with $N$ parameters. On each input or output token, 7B
-saves $2(13-7)\cdot10^9=12\cdot10^9$ FLOP. The rounded numbers on
-the figure therefore give a break-even point near 580 billion tokens:
-
-$$
-T_*=\frac{0.7\cdot10^{22}}{12\cdot10^9}\approx5.8\cdot10^{11}.
-$$
-
-At two trillion served tokens, 7B spends $2.8\cdot10^{22}$ FLOP
-on inference and 13B spends $5.2\cdot10^{22}$. Adding training gives
-$8.0\cdot10^{22}$ and $9.7\cdot10^{22}$ FLOP, the totals in panel
-**(c)**. This is an equal-loss comparison, not a measurement of two
-released LLaMA models. At 100 billion served tokens, the same calculation
-gives $5.34\cdot10^{22}$ FLOP for 7B and $4.76\cdot10^{22}$ for 13B,
-making 13B cheaper. Equal loss does not guarantee equal quality
-on a particular task. Comparing costs in money also requires input
-and output lengths, throughput on the chosen hardware and resource
-prices ([§2](https://arxiv.org/html/2401.00448v3#S2),
-[§6](https://arxiv.org/html/2401.00448v3#S6)).
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/llama-scaling-2026-11-09/sardana24a-figure2b.png|Contour plot with inference tokens on the horizontal axis and target loss on the vertical axis. Each line gives a percentage of the parameter count optimal for training alone.]]
-
-*Nikhil Sardana et al., [Beyond Chinchilla-Optimal, Figure 2(b), p. 3](https://raw.githubusercontent.com/mlresearch/v235/main/assets/sardana24a/sardana24a.pdf#page=3).
-Original panel with axes and legend, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*
-
-Hold the target loss at 2.2 and follow the horizontal line to the right.
-As demand grows, it crosses the contours labeled 75% and 50%: the
-calculation selects a smaller fraction of the model size that minimizes
-training compute alone. The percentages describe parameter counts,
-not FLOP savings. The authors computed the curves from a fitted loss
-function. Their long-training runs covered models from 150M to 6B
-without repeating data ([§3–4](https://arxiv.org/html/2401.00448v3#S3)).
-The [[00 Учебник/11 Pre-training и Scaling/43 Scaling laws#joint-model-data-scaling|scaling laws chapter]]
-shows how to estimate $L(N,D)$ in the first place.
 
 <span id="литература-и-дополнительные-материалы"></span>
 <span id="основные-статьи"></span>

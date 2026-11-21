@@ -59,11 +59,11 @@ describe('normalization and stability chapter',()=>{
    const warm=body.split('### Что показали эксперименты с warm-up')[1]?.split('id="rmsnorm-validation"')[0];
    for(const value of ['4000 шагов','8,45','31,16','2,77','На всех четырёх панелях архитектура post-LN',
      'https://proceedings.mlr.press/v119/xiong20b/xiong20b.pdf#page=4'])expect(warm).toContain(value);
-   const gate=body.split('id="ffn-variants"')[1]?.split('## Как четыре механизма')[0];
+   const gate=body.split('id="ffn-variants"')[1]?.split('id="norm-llama-order"')[0];
    for(const value of ['tajima-figure1-ffn.svg','1.8553','0.7311','SiLU'])expect(gate).toContain(value);
  });
  it('keeps the Gemma 2 output norms before residual addition and pins the exact author diagram',()=>{
-   const section=body.split('id="gemma2-sandwich-norm"')[1]?.split('id="normalization-evidence"')[0];
+   const section=body.split('id="gemma2-sandwich-norm"')[1]?.split('id="ffn-variants"')[0];
    expect(section).toBeDefined();
    for(const value of ['post_attention_layernorm', 'residual + hidden_states', 'GeGLU', 'W_O',
      '0.575,1.916','1.194,1.592,0.119,0.159','48.20','29.92','SAE','2408.05147v2#S3.F1'])

@@ -59,9 +59,12 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«BERT, RoBERTa и DeBERTa»](2026-11-21-bert-family-editorial-pass.json),
 [«T5 — text-to-text Transformer»](2026-11-21-t5-editorial-pass.json),
 [«GPT-1 — генеративное предобучение»](2026-11-21-gpt1-editorial-pass.json),
-[«GPT-2 — задачи как продолжение текста»](2026-11-21-gpt2-editorial-pass.json) и
-[«GPT-3 — масштабирование и in-context learning»](2026-11-21-gpt3-editorial-pass.json).
-Следующая глава — «LLaMA как базовая архитектура». На том же запросе
-отделить устройство блока и токенизатора от способа оценки продолжения.
-Сопоставить длину окна, объём предобучения и ширину блока, не приписывая
-разницу в бенчмарках одному изменению.
+[«GPT-2 — задачи как продолжение текста»](2026-11-21-gpt2-editorial-pass.json),
+[«GPT-3 — масштабирование и in-context learning»](2026-11-21-gpt3-editorial-pass.json),
+[«LLaMA как базовая архитектура»](2026-11-21-llama-editorial-pass.json),
+[«Современный decoder block»](2026-11-21-decoder-block-editorial-pass.json),
+[глава о нормализации и остаточных связях](2026-11-21-norm-gating-editorial-pass.json) и
+[«RoPE»](2026-11-21-rope-editorial-pass.json).
+Следующая глава — Dense FFN. После расчёта весов внимания нужно
+проследить уже смешанное состояние одной позиции через расширение,
+поэлементное умножение в SwiGLU и возврат к ширине остаточного пути.
