@@ -517,9 +517,11 @@ sections:
                 route: textbook/post-training/rlvr-verifiers
               - label: GRPO и DeepSeek-R1
                 route: textbook/post-training/grpo-deepseek-r1
-              - label: Reasoning distillation
+              - label: Дистилляция рассуждений
+                label_en: Reasoning distillation
                 route: textbook/post-training/reasoning-distillation
-              - label: Test-time compute
+              - label: Вычисления во время ответа
+                label_en: Test-time compute
                 route: textbook/reasoning/test-time-compute
           - label: X. Оценивание языковых моделей
             label_en: X. Evaluating language models

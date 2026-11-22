@@ -2,6 +2,18 @@
   "date": "2026-10-30",
   "lastReviewedDate": "2026-11-09",
   "editorialRevisions": {
+    "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md": {
+      "currentSha256": "4293412fecdbb6c7fba03ad1756195f770b9a107742bc039e0c6258b069e62a2",
+      "stopBefore": "2026-11-22-distillation-editorial-pass.json"
+    },
+    "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md": {
+      "currentSha256": "0f74051536a05551b9564cdffe8a387f66208d22fe889af59ee0880e50798542",
+      "stopBefore": "2026-11-22-grpo-editorial-pass.json"
+    },
+    "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md": {
+      "currentSha256": "721060bc6f72863d589809b3ee9105a4049b5593f0e778fdfad73852e8dff02f",
+      "stopBefore": "2026-11-22-rlvr-editorial-pass.json"
+    },
     "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md": {
       "currentSha256": "39c1c254cdc5838d8e61b2a0c4d56efb112ab167a6c2c980fe92ca3b16d598e1",
       "stopBefore": "2026-11-22-dpo-editorial-pass.json"

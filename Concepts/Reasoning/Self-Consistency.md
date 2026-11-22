@@ -17,11 +17,11 @@ sources:
     Language Models (ICLR 2023)](https://arxiv.org/abs/2203.11171)
 last_updated: '2026-10-29'
 canonical_topic: 00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md
-canonical_heading: 4. Self-consistency
+canonical_heading: ttc-self-consistency
 ---
 # Self-Consistency
 
-Полное объяснение: [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#4. Self-consistency|Вычисления во время ответа]].
+Полное объяснение: [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#ttc-self-consistency|Вычисления во время ответа]].
 
 <!-- Compatibility anchors for existing Obsidian and web links. -->
 <span id="self-consistency" aria-hidden="true"></span>

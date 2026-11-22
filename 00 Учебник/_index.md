@@ -127,8 +127,8 @@ last_updated: 2026-11-14
 - [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/05 DPO|DPO]]
 - [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers|RLVR: проверяемая награда]]
 - [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1|GRPO и DeepSeek-R1]]
-- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/08 Reasoning distillation|Reasoning distillation]]
-- [[02 Areas/ML & DL/00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute|Test-time compute]]
+- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/08 Reasoning distillation|Дистилляция рассуждений]]
+- [[02 Areas/ML & DL/00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute|Вычисления во время ответа]]
 
 <a id="x-инференс-и-serving"></a>
 <a id="ix-инференс-и-serving"></a>

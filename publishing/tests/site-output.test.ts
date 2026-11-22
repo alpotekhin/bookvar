@@ -1036,6 +1036,15 @@ describe('static handbook output', () => {
       expect(html).toContain('coconut_linear_step');
       expect(html).toContain('coconut_stage');
       expect(html.match(/<pre\b/g)).toHaveLength(7);
+      expect(html.match(/<details\b[^>]*id="ttc-code-/g)).toHaveLength(7);
+      expect(html.match(/<img\b[^>]*\bsrc=/g)).toHaveLength(16);
+      const order = ['ttc-generator-selector-cost', 'ttc-budget', 'ttc-pass-at-k',
+        'ttc-self-consistency', 'ttc-best-of-n', 'ttc-revisions', 'ttc-budget-forcing',
+        'tree-of-thoughts', 'coconut-continuous-thought', 'ttc-allocation', 'ttc-evaluation'];
+      const offsets = order.map(id => html.indexOf(`id="${id}"`));
+      expect(offsets.every((i, n) => i > (offsets[n - 1] ?? -1))).toBe(true);
+      expect(html).toContain('id="11-пример-отделить-генерацию-отбор-и-стоимость"');
+      expect(html).toContain('id="8-как-распределять-flop-бюджет-между-размером-модели-и-числом-попыток"');
       for (const anchor of ['tree-of-thoughts', 'tot-creative-writing', 'tot-crossword-dfs'])
         expect(html).toContain('id="' + anchor + '"');
       for (const file of ['tot-creative-search.png', 'tot-creative-results.png', 'tot-crossword-dfs.png'])
@@ -7500,6 +7509,18 @@ describe('static handbook output', () => {
       }
       expect(html.match(/<pre data-language="python"/g)).toHaveLength(9);
       expect(html.match(/<img\b[^>]*\bsrc=/g)).toHaveLength(10);
+      expect(html.match(/<details\b[^>]*id="distillation-code-/g)).toHaveLength(9);
+      const order = [
+        'distillation-sequence-example', 'distillation-targets', 'sequence-distillation',
+        'distillation-generation-records', 'distillation-sequence-loss', 'selection-bias',
+        'distillation-logits', 'distillation-kd-code', 'distillation-vs-rft',
+        'gkd-prefix-mixture', 'gkd-tiny-llama-step', 'gkd-rft-rlvr', 'evaluation',
+      ];
+      const positions = order.map(id => html.indexOf(`id="${id}"`));
+      expect(positions.every((i, n) => i > (positions[n - 1] ?? -1))).toBe(true);
+      expect(html).toContain('id="сквозной-пример"');
+      expect(html).toContain('id="практика-и-первоисточники"');
+      expect(html).toContain('/'+locale+'textbook/post-training/rlvr-verifiers/#rlvr-equation-example');
       for(const value of ['tinybert-layer-detail.png','tinybert-overview.png',
         'tinybert_score_loss','tinybert_padded_loss','fit_dense','--pred_distill'])
         expect(html,value).toContain(value);
@@ -7564,6 +7585,17 @@ describe('static handbook output', () => {
       }
       expect(html.match(/<pre data-language="python"/g)).toHaveLength(11);
       expect(html.match(/<img\b[^>]*\bsrc=/g)).toHaveLength(9);
+      expect(html.match(/<details\b[^>]*id="grpo-code-/g)).toHaveLength(11);
+      const order = [
+        'grpo-group-example', 'преимущество-ответа-в-группе', 'grpo-estimator',
+        'grpo-signed-clipping', 'grpo-objective', 'grpo-policy-versions',
+        'grpo-normalizations', 'drgrpo-rft-maxrl', 'проверка-расчёта',
+        'dapo-dynamic-sampling', 'offpolicy-ratios', 'gspo', 'grpo-r1-pipeline',
+      ];
+      const offsets = order.map(id => html.indexOf(`id="${id}"`));
+      expect(offsets.every((offset, i) => offset > (offsets[i - 1] ?? -1))).toBe(true);
+      expect(html).toContain('/'+locale+'textbook/post-training/rlvr-verifiers/#rlvr-equation-example');
+      expect(html).toContain('id="практика-и-первоисточники"');
       expect(html).not.toContain('katex-error');
       if(locale)expectCanonicalEditionNotice(html);
     }
