@@ -97,6 +97,9 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«Переранжирование документов»](2026-11-22-reranking-editorial-pass.json),
 [«RAG: от источника до проверяемого ответа»](2026-11-22-rag-editorial-pass.json),
 [«Визуальные токены: ViT, CLIP и SigLIP»](2026-11-22-vision-encoders-editorial-pass.json),
-[«Как подключить визуальный энкодер к LLM»](2026-11-22-vision-connectors-editorial-pass.json) и
-[«Разрешение, плитки и позиции изображения»](2026-11-22-vision-resolution-editorial-pass.json).
-Следующая глава — «Обучение VLM: alignment, instruction tuning и данные».
+[«Как подключить визуальный энкодер к LLM»](2026-11-22-vision-connectors-editorial-pass.json),
+[«Разрешение, плитки и позиции изображения»](2026-11-22-vision-resolution-editorial-pass.json),
+[«Как обучают мультимодальные модели»](2026-11-22-vision-training-editorial-pass.json),
+[«Чтение документов: OCR, поля и координаты»](2026-11-22-ocr-grounding-editorial-pass.json) и
+[«Как модели понимают видео и отвечают голосом»](2026-11-22-video-omni-editorial-pass.json).
+Следующая глава — «Оценивание, отказы и serving VLM».

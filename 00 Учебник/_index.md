@@ -161,9 +161,9 @@ last_updated: 2026-11-14
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64 Мультимодальные модели|Визуальные токены: ViT, CLIP и SigLIP]]
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64a Connectors и fusion|Как подключить визуальный энкодер к LLM]]
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции|Разрешение, плитки и позиции изображения]]
-- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Обучение VLM — alignment, instruction tuning и данные]]
-- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Документы, OCR и visual grounding]]
-- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|Видео, аудио и omni-модели]]
+- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Как обучают мультимодальные модели]]
+- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Чтение документов: OCR, поля и координаты]]
+- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|Как модели понимают видео и отвечают голосом]]
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Оценивание, отказы и serving VLM]]
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Единая мультимодальная последовательность и Chameleon]]
 

@@ -14,6 +14,7 @@ from PIL import Image, ImageChops
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md"
+ENGLISH = ROOT / "en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md"
 SOURCE = ROOT / "05 Источники/Originals/documents-2026-10-20"
 
 
@@ -21,17 +22,29 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def main():
-    chapter = CHAPTER.read_text()
-    blocks = re.findall(r"^~~~python\n(.*?)^~~~", chapter, re.M | re.S)
+def run_blocks(path, fence):
+    blocks = re.findall(rf"^{fence}python\n(.*?)^{fence}", path.read_text(), re.M | re.S)
     assert len(blocks) == 12, len(blocks)
     spaces, shared = [], {}
     for i, block in enumerate(blocks, 1):
-        code = compile(block, f"{CHAPTER}:block-{i}", "exec")
+        code = compile(block, f"{path}:block-{i}", "exec")
         local = {}
         exec(code, local)
         exec(code, shared)
         spaces.append(local)
+    return spaces
+
+
+def main():
+    chapter = CHAPTER.read_text()
+    english = ENGLISH.read_text()
+    assert f'canonical_revision: "{sha(CHAPTER)}"' in english
+    spaces = run_blocks(CHAPTER, "~~~")
+    english_spaces = run_blocks(ENGLISH, "`" * 3)
+    row_cases = [next(s for s in edition if "items" in s)
+                 for edition in [spaces, english_spaces]]
+    assert row_cases[0]["items"] == row_cases[1]["items"]
+    assert row_cases[0]["answer_box"] == row_cases[1]["answer_box"]
 
     # Execute only the two reviewed serialization methods, not the downloaded module.
     model = SOURCE / "donut-model.py"
@@ -65,7 +78,7 @@ def main():
     assert toy.token2json(toy.json2token({"total": 12480}, False, False)) == {"total": "12480"}
 
     # Reading-order grouping is invariant to the order OCR returned the four items.
-    for permutation in itertools.permutations(spaces[1]["items"]):
+    for permutation in itertools.permutations(row_cases[0]["items"]):
         groups = {}
         for ident, text, box in permutation:
             cy = (box[1] + box[3]) / 2
@@ -100,8 +113,27 @@ def main():
     assert [invoice_regions[i] for i in reading_order] == [
         "heading", "subtotal", "tax", "total", "footnote",
     ]
+    cyc = np.array([[0, .9, .4], [.1, 0, .8], [.6, .2, 0]])
+    assert np.allclose(cyc.sum(axis=0), [.7, 1.1, 1.2])
+    assert cyc.sum(axis=0).argsort().tolist() == [0, 1, 2]
+    assert cyc[0, 1] > .5 and cyc[1, 2] > .5 and cyc[2, 0] > .5
 
-    distance, anls, iou = spaces[8]["edit_distance"], spaces[9]["anls_one"], spaces[10]["box_iou"]
+    # A matching literal string can come from the wrong field.
+    alternatives = {"return": ("14 days", "right"),
+                    "processing": ("14 days", "other")}
+    correct = alternatives["return"]
+    assert alternatives["processing"][0] == correct[0]
+    assert alternatives["processing"] != correct
+    changed = {**alternatives, "return": ("7 days", "right")}
+    moved = {"return": ("14 days", "other"),
+             "processing": ("14 days", "right")}
+    assert changed["return"][0] != correct[0] and changed["return"][1] == correct[1]
+    assert moved["return"][0] == correct[0] and moved["return"][1] != correct[1]
+
+    distance, anls, iou = [
+        next(space[key] for space in spaces if key in space)
+        for key in ["edit_distance", "anls_one", "box_iou"]
+    ]
     strings = ["", "0", "О", "ab", "ac", "12 480", "12480"]
     for a, b in itertools.product(strings, repeat=2):
         assert distance(a, b) == distance(b, a)
@@ -153,9 +185,10 @@ def main():
     for block in re.findall(r"^~~~json\n(.*?)^~~~", chapter, re.M | re.S):
         json.loads(block)
     print(json.dumps({
-        "chapter_sha256": sha(CHAPTER), "standalone_and_shared_code_runs": 24,
+        "chapter_sha256": [sha(CHAPTER), sha(ENGLISH)], "standalone_and_shared_code_runs": 48,
         "pinned_donut_serialization_cases": 5, "reading_order_permutations": 24,
         "paddleocr_figure3_reading_order": reading_order.tolist(),
+        "pairwise_cycle_column_sums": cyc.sum(axis=0).round(2).tolist(),
         "inverse_transform_cases": 100, "string_pairs": len(strings)**2,
         "iou_cases": 100, "new_original_figures": 4,
         "repaired_historical_figures": 1, "unchanged_historical_figures": 1,

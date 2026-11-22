@@ -1529,14 +1529,6 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#flow-marginal-field|Flow matching — the marginal velocity field]]
   - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#flow-sd3-time|Stable Diffusion 3 — time direction and velocity sign]]
   - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#flow-sampling-budget|Rectified flow — sampling steps and generation quality]]
-- [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Documents, OCR, and visual grounding]] · **EN**
-  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-layoutlm|LayoutLMv3 — text, boxes, and image patches]]
-  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-donut|Donut — field extraction without external OCR]]
-  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-paddleocr-reading-order|PaddleOCR-VL — page layout and reading order]]
-  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-coordinates|Visual grounding — mapping coordinates back to the source]]
-  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-anls|DocVQA — ANLS and exact field values]]
-  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-grits|GriTS and TEDS — evaluating table structure]]
-  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-interventions|Document understanding — testing answers with image interventions]]
 - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Evaluation, failure modes, and VLM serving]] · **EN**
   - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-winoground|Winoground — text, image, and group scores]]
   - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-pope|POPE — testing object hallucination]]
@@ -1545,12 +1537,27 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-cache|VLMs — processor, encoder, and LLM cache identity]]
   - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-abstention|VLMs — abstention, risk, and coverage]]
   - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-joint-quality|VLMs — answers that are correct and timely]]
+- [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|How models understand video and answer in speech]] · **EN**
+  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#xgen-video-temporal-compression|xGen-MM-Vid — temporal compression after frame sampling]]
+  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#gens-question-aware-frame-selection|GenS — question-aware frame selection]]
+  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#omni-aut|Qwen3-Omni — the AuT input encoder]]
+  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#omni-duplex|Moshi — codec delay and duplex speech streams]]
+  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#omni-first-packet|Qwen3-Omni — first-audio-packet latency]]
+  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#omni-playback-gaps|Streaming audio — real-time factor, buffering, and stalls]]
 - [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели|Multimodal models]] · **EN**
   - [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели#vlm-patch-projection|ViT — image patches and linear projection]]
   - [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели#vlm-clip-objective|CLIP — symmetric contrastive loss]]
   - [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели#vlm-multi-positive|Contrastive learning — multiple valid captions]]
   - [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели#vlm-siglip-blocks|SigLIP — blockwise loss computation]]
   - [[00 Учебник/16 Multimodal Models/64 Мультимодальные модели#vlm-winoground|Winoground — checking both matching directions]]
+- [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Reading documents: OCR, fields, and coordinates]] · **EN**
+  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-layoutlm|LayoutLMv3 — text, boxes, and image patches]]
+  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-donut|Donut — field extraction without external OCR]]
+  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-paddleocr-reading-order|PaddleOCR-VL — page layout and reading order]]
+  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-coordinates|Visual grounding — mapping coordinates back to the source]]
+  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-anls|DocVQA — ANLS and exact field values]]
+  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-grits|GriTS and TEDS — evaluating table structure]]
+  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-interventions|Document understanding — testing answers with image interventions]]
 - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции|Resolution, tiling, and spatial positions]] · **EN**
   - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-pixel-budget|VLMs — visual token budget]]
   - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-molmo-overlap|Molmo — overlapping crops and grid assembly]]
@@ -1558,7 +1565,7 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-pixtral-packing|Pixtral — packing images]]
   - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-mrope-frequencies|MRoPE — coordinates and frequencies]]
   - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-tile-boxes|Visual grounding — boxes from overlapping tiles]]
-- [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Training VLMs: alignment, instruction tuning, and data]] · **EN**
+- [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Training vision-language models]] · **EN**
   - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-freeze|VLMs — freezing and fine-tuning the vision encoder]]
   - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-targets|VLMs — target masking and token shifting]]
   - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-packing|VLMs — packed dialogues and shared prefixes]]
@@ -1576,13 +1583,6 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-qknorm|Chameleon — QK-Norm and attention-logit scale]]
   - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-zloss|Chameleon — z-loss on vocabulary logits]]
   - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-mixed-evaluation|Chameleon — evaluating mixed-modal answers]]
-- [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|Video, audio, and omni models]] · **EN**
-  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#xgen-video-temporal-compression|xGen-MM-Vid — temporal compression after frame sampling]]
-  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#gens-question-aware-frame-selection|GenS — question-aware frame selection]]
-  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#omni-aut|Qwen3-Omni — the AuT input encoder]]
-  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#omni-duplex|Moshi — codec delay and duplex speech streams]]
-  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#omni-first-packet|Qwen3-Omni — first-audio-packet latency]]
-  - [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#omni-playback-gaps|Streaming audio — real-time factor, buffering, and stalls]]
 
 ### Tools and agents
 

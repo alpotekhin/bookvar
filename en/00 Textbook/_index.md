@@ -169,9 +169,9 @@ Start after CNNs and the Transformer. Follow visual representations into languag
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64 Мультимодальные модели|Multimodal models]] · **EN**
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64a Connectors и fusion|Connectors and fusion]] · **EN**
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции|Resolution, tiling, and spatial positions]] · **EN**
-- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Training VLMs: alignment, instruction tuning, and data]] · **EN**
-- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Documents, OCR, and visual grounding]] · **EN**
-- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|Video, audio, and omni models]] · **EN**
+- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Training vision-language models]] · **EN**
+- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Reading documents: OCR, fields, and coordinates]] · **EN**
+- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|How models understand video and answer in speech]] · **EN**
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Evaluation, failure modes, and VLM serving]] · **EN**
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Unified multimodal sequences and Chameleon]]
 

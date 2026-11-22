@@ -2,6 +2,18 @@
   "date": "2026-10-30",
   "lastReviewedDate": "2026-11-09",
   "editorialRevisions": {
+    "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md": {
+      "currentSha256": "f95b360a17fb01791e6d1076ae0fd32af888a9cf6a2cbf6d3f670a6ff400df8d",
+      "stopBefore": "2026-11-22-ocr-grounding-editorial-pass.json"
+    },
+    "00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md": {
+      "currentSha256": "4bb6889a62cb20a935624285a1c0b61ee84cb4d9e0d4f8c6ed2ec4f91439b51a",
+      "stopBefore": "2026-11-22-vision-training-editorial-pass.json"
+    },
+    "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md": {
+      "currentSha256": "66f36ca58a55b60c092ae7c6f2d626264e4f89890e7c549f167c083fd617818d",
+      "stopBefore": "2026-11-22-vision-resolution-editorial-pass.json"
+    },
     "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md": {
       "currentSha256": "863735716405d1b65fde69cf066ea5a0a5dfee819d12f0c2cfb7e5f97ec198fe",
       "stopBefore": "2026-11-22-vision-connectors-editorial-pass.json"

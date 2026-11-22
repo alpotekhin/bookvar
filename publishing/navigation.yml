@@ -555,14 +555,14 @@ sections:
               - label: Разрешение, плитки и позиции изображения
                 label_en: Resolution, tiling, and spatial positions
                 route: textbook/multimodal/visual-tokenization-resolution
-              - label: Обучение VLM — alignment, instruction tuning и данные
-                label_en: Training VLMs — alignment, instruction tuning, and data
+              - label: Как обучают мультимодальные модели
+                label_en: Training vision-language models
                 route: textbook/multimodal/training-data
-              - label: Документы, OCR и visual grounding
-                label_en: Documents, OCR, and visual grounding
+              - label: "Чтение документов: OCR, поля и координаты"
+                label_en: "Reading documents: OCR, fields, and coordinates"
                 route: textbook/multimodal/documents-ocr-grounding
-              - label: Видео, аудио и omni-модели
-                label_en: Video, audio, and omni models
+              - label: Как модели понимают видео и отвечают голосом
+                label_en: How models understand video and answer in speech
                 route: textbook/multimodal/video-audio-omni
               - label: Оценивание, отказы и serving VLM
                 label_en: Evaluation, failure modes, and VLM serving

@@ -2,6 +2,7 @@
 """Chapter 64e examples, source hashes and original figure crops; not a model benchmark."""
 import hashlib
 import json
+from fractions import Fraction
 from pathlib import Path
 import re
 
@@ -10,6 +11,7 @@ from PIL import Image, ImageChops
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md"
+ENGLISH = ROOT / "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md"
 SOURCE = ROOT / "05 Источники/Originals/omni-2026-10-20"
 
 
@@ -17,17 +19,26 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def main():
-    chapter = CHAPTER.read_text()
-    blocks = re.findall(r"^~~~python\n(.*?)^~~~", chapter, re.M | re.S)
+def run_blocks(path, fence):
+    blocks = re.findall(rf"^{fence}python\n(.*?)^{fence}", path.read_text(), re.M | re.S)
     assert len(blocks) == 18, len(blocks)
     spaces, shared = [], {}
     for i, block in enumerate(blocks, 1):
-        code = compile(block, f"{CHAPTER}:block-{i}", "exec")
+        code = compile(block, f"{path}:block-{i}", "exec")
         local = {}
         exec(code, local)
         exec(code, shared)
         spaces.append(local)
+    return spaces
+
+
+def main():
+    chapter = CHAPTER.read_text()
+    english = ENGLISH.read_text()
+    assert f'canonical_revision: "{sha(CHAPTER)}"' in english
+    spaces = run_blocks(CHAPTER, "~~~")
+    english_spaces = run_blocks(ENGLISH, "`" * 3)
+    assert len(spaces) == len(english_spaces) == 18
 
     rng = np.random.default_rng(20261020)
     # Causal convolution must agree across arbitrary nonempty chunk boundaries.
@@ -87,6 +98,15 @@ def main():
     assert words_at(segments, f("18.72")) == []
     assert words_at(segments, f("18.4"), f(".01")) == ["Я вернулся"]
     assert 1180-1000 == 180 and 1055-1000 == 55
+    offset = Fraction(".12")
+    bounds = tuple(int((Fraction(t) - offset) * 16_000) for t in ("18.0", "18.8"))
+    assert bounds == (286_080, 298_880)
+    assert bounds[1] - bounds[0] == 12_800 and 288_000 - bounds[0] == 1920
+    assert 552_000 * Fraction(1, 30_000) == Fraction("18.4")
+    assert sum([72, 88, 57, 14, 3]) == 234
+    assert sum([160, 160, 210, 14, 3]) == 547
+    assert sum([94, 468, 145, 16, 5]) == 728
+    assert round((1000/75 + 1000/140 + 14 + 3) / 80, 2) == .47
 
     refs = json.loads((SOURCE / "references.json").read_text())
     for row in refs["downloaded"] + refs["reused"] + refs["figure_inventory"]:
@@ -133,8 +153,9 @@ def main():
     assert int(permutation[ranked.argmax()]) == int(retrieval["scores"].argmax()) == 0
     assert "meeting-07-slides-xgen-video" in chapter and "meeting-07-slides-gens" in chapter
     print(json.dumps({
-        "chapter_sha256": sha(CHAPTER),
-        "standalone_and_shared_code_runs": 2 * len(blocks),
+        "chapter_sha256": [sha(CHAPTER), sha(ENGLISH)],
+        "standalone_and_shared_code_runs": 2 * (len(spaces) + len(english_spaces)),
+        "offset_audio_slice": bounds, "qwen3_omni_rtf": .47,
         "causal_chunk_cases": 100, "residual_bookkeeping_cases": 100,
         "conditional_joint_sum": float(joint.sum()), "deduplicated_selected_frames": len(selected),
         "new_original_figures": 6, "repaired_historical_figures": 1,

@@ -127,8 +127,9 @@ describe('English multimodal substantive parity evidence', () => {
     expect(read('64b ')).toContain('geometric coordinates do not replace cache length');
     expect(read('64c ')).toContain('names SAPO in this report version, not GRPO');
     const documents = read('64d ');
-    expect(documents).toContain('returns an English translation');
-    expect(documents).toMatch(/To measure character error rate, we would need a transcription in\s+the original language and a reference/);
+    expect(documents).toContain('https://arxiv.org/pdf/2409.12191v1#page=29');
+    expect(documents).toMatch(/returns an English\s+translation/);
+    expect(documents).toMatch(/CER needs a transcription and a reference in the original\s+language/);
     expect(read('64e ')).toContain('Acoustic RVQ does not continue the semantic branch');
     expect(read('64f ')).toContain('client TTFT 500 ms');
     expect(read('64f ')).toContain('does not itself fix UUID collisions');

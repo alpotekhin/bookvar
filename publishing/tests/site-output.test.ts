@@ -7178,6 +7178,14 @@ describe('static handbook output', () => {
       for (const value of ['51.26', '54.33', '46.44', '44.45', '64.08', '42.56',
         '0.125', '0.4', '75%', '50%', '0%'])
         expect(html).toContain(value);
+      for (const section of ['projector', 'targets', 'packing', 'mixture',
+        'length-weights', 'sector', 'iou', 'kl'])
+        expect(html).toContain('id="training-code-' + section + '"');
+      expect(html.indexOf('id="vlm-training-targets"'))
+        .toBeLessThan(html.indexOf('id="vlm-internvl25-stages"'));
+      expect(html).toContain(prefix ? 'The return period is not visible' : 'срок не виден');
+      expect(html).toContain(`href="/${prefix}textbook/multimodal/visual-tokenization-resolution/#vlm-pixel-budget"`);
+      expect(html).toContain(`href="/${prefix}textbook/multimodal/documents-ocr-grounding/"`);
       expect(html).not.toContain('katex-error');
       expect(html).not.toContain('This content is not available in your language yet.');
     }
@@ -7267,6 +7275,24 @@ describe('static handbook output', () => {
       expect(html).toContain('id="' + anchor + '"');
   });
 
+  it('traces a document field before comparing architectures in both languages', async () => {
+    const route = 'textbook/multimodal/documents-ocr-grounding/';
+    for (const prefix of ['', 'en/']) {
+      const html = await readFile(join(distDir, prefix + route + 'index.html'), 'utf8');
+      for (const name of ['invoice-rows', 'layoutlm-loss', 'resolution', 'line-items',
+        'chart-scale', 'point-count', 'inverse', 'rotation', 'cer', 'anls', 'iou', 'risk'])
+        expect(html).toContain('id="document-code-' + name + '"');
+      const example = html.indexOf('id="document-code-invoice-rows"');
+      const architecture = html.indexOf('id="doc-layoutlm"');
+      expect(example).toBeGreaterThan(-1);
+      expect(architecture).toBeGreaterThan(example);
+      expect(html).toContain(`href="/${prefix}textbook/multimodal/training-data/"`);
+      expect(html).toContain(`href="/${prefix}textbook/multimodal/video-audio-omni/"`);
+      expect(html).toContain('href="#doc-interventions"');
+      expect(html).toContain(prefix ? 'cached OCR' : 'сохранённых результатов OCR');
+    }
+  });
+
 
   it('keeps Pix2Struct parsing visual and links the original downstream tasks', async () => {
     for (const prefix of ['', 'en/']) {
@@ -7316,6 +7342,25 @@ describe('static handbook output', () => {
       expect(figure).toBeDefined();
       expect(createHash('sha256').update(await readFile(join(distDir, decodeURIComponent(figure!)))).digest('hex'))
         .toBe('c0db3d7a142bc4e61ce52a93e55951c362b30cc06049252fd657db879b457d25');
+    }
+  });
+
+  it('links video timing to audio features, then evaluates the spoken result', async () => {
+    const route = 'textbook/multimodal/video-audio-omni/';
+    for (const prefix of ['', 'en/']) {
+      const html = await readFile(join(distDir, prefix + route + 'index.html'), 'utf8');
+      for (const name of ['frame-sampling', 'frame-windows', 'pts', 'fft', 'rvq',
+        'av-time', 'audio-shift', 'causal-conv', 'rtf', 'playback', 'interval-iou'])
+        expect(html).toContain('id="omni-code-' + name + '"');
+      const time = html.indexOf('id="omni-code-pts"');
+      const aligned = html.indexOf('id="omni-code-av-time"');
+      const playback = html.indexOf('id="omni-code-playback"');
+      expect(time).toBeGreaterThan(-1);
+      expect(aligned).toBeGreaterThan(time);
+      expect(playback).toBeGreaterThan(aligned);
+      expect(html).toContain(prefix ? '1,920 samples' : '1920 отсчётов');
+      expect(html).toContain(`href="/${prefix}textbook/multimodal/documents-ocr-grounding/"`);
+      expect(html).toContain(`href="/${prefix}textbook/multimodal/evaluation-serving/"`);
     }
   });
 
