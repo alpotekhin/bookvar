@@ -1592,7 +1592,7 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов#agent-planning-branches|Planning — preconditions and branching search]]
   - [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов#agent-reflexion-feedback|Reflexion — feedback between attempts]]
   - [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов#agent-worker-dependencies|Orchestration — checking the inputs a worker result depends on]]
-- [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем|Agent-system security]]
+- [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем|Agent system security]] · **EN**
   - [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#agent-security-bound-approval|Action approval — mail version and permissions]]
   - [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#agent-security-transactional-outbox|Transactional outbox — queue entry and delivery]]
 - [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|Coding, web, and computer-use agents]] · **EN**
@@ -1606,7 +1606,7 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем#agent-eval-pass-k|pass@k and pass^k — success in any or all trials]]
   - [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем#agent-eval-paired|Paired agent evaluation — task-level resampling]]
   - [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем#agent-eval-judge|LLM-as-a-judge — rubric and calibration]]
-- [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|Formal proofs and mathematical agents]]
+- [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|Formal proofs and mathematical agents]] · **EN**
   - [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#alphaproof-search-vs-ttrl|AlphaProof — search and adaptation budgets]]
   - [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#lean-proof-acceptance|Lean — checking the statement and its axioms]]
 - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию|How a function call becomes an action]] · **EN**
@@ -1628,7 +1628,7 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-reminder-tokens|Reminder tokens — triggers, reminders, and checks]]
   - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-verified-completion|Agent completion — verifying the current revision]]
 - [[00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля|How agents use tools]] · **EN**
-- [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery|Scientific search and discovery agents]]
+- [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery|Scientific discovery agents]] · **EN**
   - [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery#funsearch-program-search|FunSearch — program search and cap-set verification]]
   - [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery#alphaevolve-evaluation-cascade|AlphaEvolve — evaluation cascade and construction verification]]
 

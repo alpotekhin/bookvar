@@ -9,9 +9,19 @@ const read = path => readFileSync(resolve(root, path), 'utf8');
 const sha = path => createHash('sha256').update(readFileSync(resolve(root, path))).digest('hex');
 const manifest = YAML.parse(read('publishing/navigation.yml'));
 const pages = manifest.sections.flatMap(section => section.pages);
+const currentReads = JSON.parse(read('docs/audit/2026-10-30-reading-route-review.json')).supersedingReads ?? {};
 const route = value => {
   const page = pages.find(page => page.route === value);
   if (!page) throw new Error('Unknown canonical destination: ' + value);
+  const fullRead = currentReads[page.source];
+  if (fullRead) {
+    const receipt = JSON.parse(read('docs/audit/' + fullRead));
+    const fingerprint = sha(page.source);
+    const evidence = receipt.files.find(row => row.source === page.source);
+    if (receipt.read_scope !== 'full-body' || evidence?.after_sha256 !== fingerprint)
+      throw new Error('Unreviewed current destination: ' + value);
+    return { source: page.source, route: page.route, sha256: fingerprint, supersedingRead: fullRead };
+  }
   // The residual decisions refer to their reviewed chapter revision, before
   // the subsequent PEFT insertion. Only its exact journaled delta is reversed.
   const reviewed = beforeTopicConsolidation(read(page.source), page.source, root,

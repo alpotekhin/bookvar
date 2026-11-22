@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-22",
+  "scope": "English edition of Agent system security and bilingual review on the revised defensive Russian chapter.",
+  "files": [
+    {
+      "source": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
+      "before_sha256": "da2c0bd67c4407f09355f487cf3863681d56f3eea0ffbfc5a4a304706e0128f6",
+      "after_sha256": "da2c0bd67c4407f09355f487cf3863681d56f3eea0ffbfc5a4a304706e0128f6",
+      "changes": []
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "1ea288cf142b7b832192616328ea520e09df5462da0fcd433441fb2dc82cd5cb",
+      "after_sha256": "50ee355b40ae45993d817e11c01e1432225fceaad1262d7cb0fbcaced5d30c05",
+      "changes": [
+        {
+          "old": "      - source: 00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md\n        source_en: en/00 Textbook/17 Tools and Agents/71 Scientific discovery agents.md\n        route: textbook/agents/scientific-discovery\n      - source: 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md\n        route: textbook/agents/security\n      - source: 00 Учебник/02 Рекомендательные системы/00 Карта модуля.md\n        route: textbook/recommender-systems/index\n      - source: 00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline.md\n",
+          "new": "      - source: 00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md\n        source_en: en/00 Textbook/17 Tools and Agents/71 Scientific discovery agents.md\n        route: textbook/agents/scientific-discovery\n      - source: 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md\n        source_en: en/00 Textbook/17 Tools and Agents/72 Agent system security.md\n        route: textbook/agents/security\n      - source: 00 Учебник/02 Рекомендательные системы/00 Карта модуля.md\n        route: textbook/recommender-systems/index\n      - source: 00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline.md\n"
+        },
+        {
+          "old": "              - label: Агенты научного поиска и discovery\n                label_en: Scientific discovery agents\n                route: textbook/agents/scientific-discovery\n              - label: Безопасность агентных систем\n                route: textbook/agents/security\n      - label: Углублённые модули\n        label_en: Specialist modules\n        items:\n",
+          "new": "              - label: Агенты научного поиска и discovery\n                label_en: Scientific discovery agents\n                route: textbook/agents/scientific-discovery\n              - label: Безопасность агентных систем\n                label_en: Agent system security\n                route: textbook/agents/security\n      - label: Углублённые модули\n        label_en: Specialist modules\n        items:\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "566950eb38ec6d01555179d47bec4ddb59652d87108ca9031d3795e0efa3fb61",
+      "after_sha256": "ad6ab41a65fd0a5f9d9374810e9d94ed29fb2a4af1a385a12a15603394f6f5fd",
+      "changes": [
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/68 Оценивание агентных систем|Evaluating agent systems]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|Coding, web, and computer-use agents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|Formal proofs and mathematical agents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery|Scientific discovery agents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/72 Безопасность агентных систем|Agent-system security]]\n\n<a id=\"углублённые-модули\"></a>\n\n## Specialist modules\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/68 Оценивание агентных систем|Evaluating agent systems]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|Coding, web, and computer-use agents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|Formal proofs and mathematical agents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery|Scientific discovery agents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/72 Безопасность агентных систем|Agent system security]] · **EN**\n\n<a id=\"углублённые-модули\"></a>\n\n## Specialist modules\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "5d65028ec3083c44be2fea5494b5f557a6661ba522800472e10156a41b864aa5",
+      "after_sha256": "53d293e8f36c1ff4de7b14dc2f4eab9f7ef9fae4c1b2f3cad59bc088c1f58bf6",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов#agent-memory-ranking|Memory retrieval — recency, importance, and relevance]]\n  - [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов#agent-planning-branches|Planning — preconditions and branching search]]\n  - [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов#agent-reflexion-feedback|Reflexion — feedback between attempts]]\n  - [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов#agent-worker-dependencies|Orchestration — checking the inputs a worker result depends on]]\n- [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем|Agent-system security]]\n  - [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#agent-security-bound-approval|Action approval — mail version and permissions]]\n  - [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#agent-security-transactional-outbox|Transactional outbox — queue entry and delivery]]\n- [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|Coding, web, and computer-use agents]] · **EN**\n  - [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#coding-agent-aci|SWE-agent — ACI commands and feedback]]\n",
+          "new": "  - [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов#agent-memory-ranking|Memory retrieval — recency, importance, and relevance]]\n  - [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов#agent-planning-branches|Planning — preconditions and branching search]]\n  - [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов#agent-reflexion-feedback|Reflexion — feedback between attempts]]\n  - [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов#agent-worker-dependencies|Orchestration — checking the inputs a worker result depends on]]\n- [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем|Agent system security]] · **EN**\n  - [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#agent-security-bound-approval|Action approval — mail version and permissions]]\n  - [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#agent-security-transactional-outbox|Transactional outbox — queue entry and delivery]]\n- [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|Coding, web, and computer-use agents]] · **EN**\n  - [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#coding-agent-aci|SWE-agent — ACI commands and feedback]]\n"
+        }
+      ]
+    }
+  ],
+  "added_sources": [
+    {
+      "source": "en/00 Textbook/17 Tools and Agents/72 Agent system security.md",
+      "sha256": "fe46b41c2716fde91bc6549b5f76d6bbdd285bf01ad48633e2331d513835c568",
+      "canonical": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
+      "route": "textbook/agents/security",
+      "status": "current",
+      "en_body_read": true,
+      "outstanding_expansions": []
+    }
+  ],
+  "explanation": [
+    "Meeting 12 boundaries and uses of model output: the report can supply facts but cannot authorize a send. Measured effects come from the service rather than the model's text. The fixed SQL example binds an apostrophe-containing title and owner separately from its statement.",
+    "Saltzer and Schroeder, Privtrans and Progent v1/v3: complete mediation, privilege separation, rule ordering and the symbolic check for a request newly allowed by a proposed policy. Accounts for non-intercepted calls, scope and text outputs.",
+    "RFC 9110, SQLite and Microsoft's outbox: bind confirmation to arguments and a version. Demonstrate wrong actor, changed draft, revocation, pre-commit rollback, lost response after commit, and one queue row after a retry. Authority and delivery remain separate.",
+    "Information flow, retention after revocation and DataSentinel: an authenticated source need not issue trusted instructions; a detection result cannot authorize a tool. Retains the synthetic false-alarm calculation and the narrow setting of the quoted FNR."
+  ],
+  "provenance": "Eight existing source illustrations with English alt text and captions. Exact unchanged figure files, Saltzer–Schroeder quotation, original license and source links. Operational material removed from the previous Russian edition does not return in English.",
+  "verification": {
+    "explanation_and_style": "Full EN read against revised RU and the same source sections. Tracked the report scenario from a proposed call to approval, transaction and external side effect. Kept the evaluation protocol, rather than optimization details, where a research result motivates a defense.",
+    "examples": "All four EN Python blocks executed in isolation and are byte-identical to the current RU blocks. Two display formulas, 15 source units, the Saltzer–Schroeder quotation and the ordered set of eight original figures match. No mail service, remote target or attack harness was run.",
+    "visual": "2099 pages built. Chromium EN at 390 and 1440 CSS px: eight images, five inline/display math nodes, no math error, missing legacy fragment, fallback, or page overflow. Inspected the boundary slide, approval sequence and outbox. Verified viewer zoom, fit, both edges and source caption. Previous goes to scientific discovery and next returns to the English curriculum.",
+    "publication": "153 topics synchronized; 825 publication tests passed (13 skipped); 374 output tests passed; no broken internal routes, fragments or files.",
+    "outstanding": "No remaining issue in chapter 72 under this editorial pass. Classical NLP coverage and English editions elsewhere in the main route are tracked separately."
+  }
+}

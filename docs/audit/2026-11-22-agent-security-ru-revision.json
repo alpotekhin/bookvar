@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-22",
+  "scope": "Defensive Russian chapter on trust boundaries, tool authorization and what an execution receipt proves. This complete reading supersedes the historical chapter read; the earlier SHA remains in its receipt without copying replaced material.",
+  "files": [
+    {
+      "source": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
+      "before_sha256": "5b8c39e1059300af1c39f8c2663fc21ab9fc27e9cda7da835fb3a1dc64297b9d",
+      "after_sha256": "da2c0bd67c4407f09355f487cf3863681d56f3eea0ffbfc5a4a304706e0128f6"
+    }
+  ],
+  "read_scope": "full-body",
+  "source_review": [
+    "Berkeley Meeting 12: hybrid agent boundaries and uses of model output. Kept the separation between a model's proposal, the application's decision and an observed effect.",
+    "SQLite binding and transactions; RFC 9110 §13.1.1; Microsoft Transactional Outbox. Replaced the SQL example with exact title lookup and owner filtering; retained approved snapshots, revocation, rollback, lost acknowledgment and idempotent enqueue.",
+    "Progent v1 and v3: deny rules, no implicit permissions, fail-closed comparison and generic-first evaluation per Algorithm 4. Kept the distinction between a configurable policy approver and explicit user approval.",
+    "Reviewed Privtrans, complete mediation and least privilege, separation of provenance and authorization, and false positives/false negatives for a document detector. Research context stays at the level of measured outcomes and defensive controls."
+  ],
+  "removed_media": [
+    "agentpoison-overview.png",
+    "datasentinel-training.svg"
+  ],
+  "provenance": "Eight earlier originals retained without modifying their binary data or rights. Added descriptive alt text. Kept the Microsoft outbox source and references to prior research; did not add a duplicate of removed material.",
+  "outstanding": "English edition and bilingual review.",
+  "verification": {
+    "code": "Ran four chapter-authored Python examples in isolation. Bound SQL owner/title lookup handles an apostrophe as data; wrong actor, changed draft, modified payload, revoked grant and rollback do not create new outbox rows. A lost response after commit and retry resolve to one queued row. The working examples do not call a mail API or run a detector.",
+    "contention": "Two connections to an isolated temporary SQLite file: a second writer returned SQLITE_BUSY after BEGIN IMMEDIATE and succeeded after the first transaction committed. Distinguish this local atomicity from remote exactly-once delivery.",
+    "grounding": "Checked policy ordering against Progent v3 Algorithm 4 and the original v1 diagram, conditional writes against RFC 9110 §13.1.1 and SQLite, published outcome metrics against the AgentPoison evaluation definitions, and the source quotation from Saltzer and Schroeder.",
+    "parity": "Eight original figures byte-match the prior Bookvar dev snapshot. Three defensive examples, two displayed formulas and 15 source unit IDs preserved. Old heading fragments remain available; no reverse patch republishes removed material.",
+    "reader": "Built 2099 pages. Chromium at 390 and 1440 CSS px: 8 images, both formulas, old IDs, previous chapter, and return to textbook contents; no viewport overflow or math errors. Inspected the boundary slide, Progent drawing and outbox; verified source link, 2×, fit and both edges.",
+    "publication": "823 publication tests passed (13 skipped); 374 rendered output tests passed; 206 course residuals accounted for, no broken internal links."
+  }
+}

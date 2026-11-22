@@ -14,6 +14,7 @@ from topic_consolidation_baseline import before_topic_consolidation
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md"
+ENGLISH = ROOT / "en/00 Textbook/17 Tools and Agents/69 Coding, web, and computer-use agents.md"
 ARCHIVE = ROOT / "05 Источники/Originals/coding-web-computer-use-2026-10-21"
 MEETING_06_TEXT = "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-06-slides.pages.txt"
 MEETING_06_PUBLIC_SHA = "9f1199a38367d45cd1784c6ee7690f2bf5e40783e889485d3bd926d628310af4"
@@ -23,19 +24,37 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def main():
-    text = CHAPTER.read_text()
+def execute_examples(path, text):
     blocks = [m.group(2) for m in re.finditer(
         r"^(```|~~~)python\n(.*?)^\1\s*$", text, re.M | re.S)]
     assert len(blocks) == 5
     scopes, shared = [], {}
     for index, block in enumerate(blocks):
-        code = compile(block, f"{CHAPTER}:example-{index+1}", "exec")
+        code = compile(block, f"{path}:example-{index+1}", "exec")
         scope = {}
         exec(code, scope)
         exec(code, shared)
         scopes.append(scope)
-    dispatch, branch, search, broken, fixed = scopes
+    return blocks, scopes
+
+
+def main():
+    text = CHAPTER.read_text()
+    english = ENGLISH.read_text()
+    blocks, scopes = execute_examples(CHAPTER, text)
+    english_blocks, _ = execute_examples(ENGLISH, english)
+    assert blocks == english_blocks
+    assert f'canonical_revision: "{sha(CHAPTER)}"' in english
+    def figures(s):
+        return re.findall(r'^!\[\[([^|\]]+)\|[^\]]+\]\]', s, re.M)
+    assert len(figures(text)) == 20 and figures(text) == figures(english)
+    def scope(s):
+        math = re.findall(r'^\$\$\n(.*?)^\$\$$', s, re.M | re.S)
+        markers = re.findall(r'^<!-- source_unit_id: ([^ ]+) -->$', s, re.M)
+        return math, markers
+    math, markers = scope(text)
+    assert len(math) == 2 and len(markers) == 27 and scope(english) == (math, markers)
+    broken, fixed, dispatch, branch, search = scopes
     actual_clicks = []
     assert dispatch["dispatch_click"](dispatch["old_click"], dispatch["frame2"],
                                       actual_clicks.append) == "stale_observation"
@@ -163,7 +182,7 @@ def main():
     assert "](https://arxiv.org/html/2412.09605v2/images/part2_v6.png)" not in text
     assert refs["excluded_course_pages"]["meeting-06-slides"] == [117, 118, 119, 120, 121]
     assert "last_verified: 2026-10-21" in preceding
-    print(f"PASS: 5 code blocks individually/shared (10 executions); {search_cases} search cases; "
+    print(f"PASS: 5 code blocks per edition individually/shared (20 executions); {search_cases} search cases; "
           f"{parser_cases} parser strings; observation-bound dispatch and branch independence; "
           "arithmetic, coordinates, original figure hashes and TACO crop. "
           "No LLM/agent/browser benchmark or exploit run.")

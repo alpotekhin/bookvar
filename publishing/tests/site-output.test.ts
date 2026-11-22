@@ -6381,14 +6381,20 @@ describe('static handbook output', () => {
         expect(page).toContain(`id="${id}"`);
         expect(reference).toContain(`href="${prefix}${route}#${id}"`);
       }
-      for (const datum of ['33,1', '43,7%', '53,9%', '58,3%', '4000', 'Given.Goal', 'Candidate.easy', 'sorryAx', 'type mismatch'])
+      const rates = prefix ? ['33.1%', '43.7%', '53.9%', '58.3%'] : ['33,1', '43,7%', '53,9%', '58,3%'];
+      for (const datum of [...rates, '4000', 'Given.Goal', 'Candidate.easy', 'sorryAx', 'type mismatch'])
         expect(page).toContain(datum);
       expect(page).toContain('https://www.nature.com/articles/s41586-025-09833-y/figures/4');
       expect(page).toMatch(/<img[^>]+src="[^"]*\/figure-4-search-vs-ttrl\.png"/);
       const map = await readFile(join(distDir, prefix, 'textbook/agents/module-map/index.html'), 'utf8');
       expect(map).toContain(`href="${prefix}${route}#lean-proof-acceptance"`);
       expect(map).toContain(`href="${prefix}/textbook/agents/coding-web-computer-use/#web-agent-observation-bound-marks"`);
-      if (prefix) expectCanonicalEditionNotice(page);
+      expect(page).not.toContain('aria-label="English edition status"');
+      expect(page).not.toContain('katex-error');
+      expect(page).toContain(`href="${prefix}/textbook/agents/coding-web-computer-use/"`);
+      expect(page).toContain(`href="${prefix}/textbook/agents/scientific-discovery/"`);
+      expect([...page.matchAll(/<img[^>]+src="[^"]*\/curated\/[^"]+"[^>]+alt="[^"]+"/g)]).toHaveLength(34);
+      if (prefix) expect(page).toContain('A lemma for any stack and continuation');
     }
     const card = await readFile(join(distDir, 'sources/papers/alphaproof/index.html'), 'utf8');
     expect(card).toContain(`href="${route}#alphaproof-search-vs-ttrl"`);
@@ -7692,8 +7698,11 @@ describe('static handbook output', () => {
       expect(html, mechanism).toContain(mechanism);
     for (const alias of ['нейронный-proposal-символическая-проверка-and-search',
       'научный-поиск-как-пространство-проверяемых-гипотез', 'escher-visual-concept-library',
-      'что-показали-feynman-equations-and-scaling-law-case'])
+      'что-показали-feynman-equations-and-scaling-law-case', 'один-проход-на-условном-примере'])
       expect(html).toContain(`id="${alias}"`);
+    expect(html.indexOf('id="один-проход-на-условном-примере"'))
+      .toBeLessThan(html.indexOf('id="lasr-совместная-эволюция-формул-и-библиотеки-понятий"'));
+    expect([...html.matchAll(/<img[^>]+src="[^"]*\/curated\/[^"]+"[^>]+alt="[^"]+"/g)]).toHaveLength(11);
     expect(html).toContain('/textbook/agents/formal-math/');
     expect(html).toContain('/textbook/agents/security/');
     expect(html).not.toContain('https://github.com/trishullab/lasr');
@@ -7714,7 +7723,15 @@ describe('static handbook output', () => {
         '4096', '48', '4226acbf237ff9ad10ba7673a2af127a2d8a5971', 'https://creativecommons.org/licenses/by-nc-nd/4.0/'])
         expect(html).toContain(v);
       expect(html).not.toContain('katex-error');
-      if (prefix) expectCanonicalEditionNotice(html);
+      expect(html).not.toContain('aria-label="English edition status"');
+      expect(html).toContain(`href="${prefix}/textbook/agents/formal-math/"`);
+      expect(html).toContain(`href="${prefix}/textbook/agents/security/"`);
+      if (prefix) {
+        expect(html).toContain('Fitting coefficients and checking new points');
+        expect(html).toContain('Selecting class pairs without labels');
+        expect(html).toContain('four of 140 direct search runs');
+        expect([...html.matchAll(/<img[^>]+src="[^"]*\/curated\/[^"]+"[^>]+alt="[^"]+"/g)]).toHaveLength(11);
+      }
     }
     for (const [paper, anchor] of [
       ['funsearch', 'funsearch-program-search'], ['alphaevolve', 'alphaevolve-evaluation-cascade'],
@@ -8447,7 +8464,15 @@ describe('static handbook output', () => {
         expect(html).toContain(value);
       expect(html).toMatch(/<img[^>]+src="[^"]*\/microsoft-transactional-outbox\.svg"/);
       expect(html).toContain('https://www.rfc-editor.org/rfc/rfc9110.html#name-if-match');
-      if (prefix) expectCanonicalEditionNotice(html);
+      expect(html).not.toContain('aria-label="English edition status"');
+      expect(html).not.toContain('katex-error');
+      if (prefix) {
+        expect(html).toContain('Approving one draft version');
+        expect(html).toContain('Same receipt, still one row');
+        expect(html).toContain('How Progent chooses a rule in v1 and v3');
+        expect(html).toContain('href="/en/textbook/agents/scientific-discovery/" rel="prev"');
+        expect(html).toContain('href="/en/textbook/#curriculum" rel="next"');
+      }
     }
     const note = await readFile(join(distDir, 'sources/implementations/conditional-actions-outbox/index.html'), 'utf8');
     expect(note).toContain(`href="${route}#agent-security-bound-approval"`);
@@ -8456,10 +8481,15 @@ describe('static handbook output', () => {
   it('renders agent-security mechanisms, version distinctions and source figures', async () => {
     const html = await readFile(join(distDir, 'textbook/agents/security/index.html'), 'utf8');
     for (const figure of ['m12-p13.png', 'm12-p27.png', 'm12-p48.png',
-      'agentpoison-overview.png', 'm12-p65.png',
+      'm12-p65.png', 'microsoft-transactional-outbox.svg',
       '12-dawn-song-privilege-control-sequence.png', 'm12-p90.png',
-      'datasentinel-detection.png', 'datasentinel-training.svg'])
+      'datasentinel-detection.png'])
       expect(html, figure).toContain(figure);
+    expect([...html.matchAll(/<img[^>]+src="[^"]*\/curated\/[^"]+"[^>]+alt="[^"]+"/g)]).toHaveLength(8);
+    expect(html).toContain('https://www.sqlite.org/c3ref/bind_blob.html');
+    expect(html).toContain('Квитанция');
+    expect(html).not.toContain('agentpoison-overview.png');
+    expect(html).not.toContain('datasentinel-training.svg');
     for (const mechanism of ['sqlite3', 'decide', 'frozenset',
       '2504.11703v1', '2504.11703v3', 'Algorithm 4', 'ASR-r', 'TOCTOU', 'FNR 0,87'])
       expect(html, mechanism).toContain(mechanism);

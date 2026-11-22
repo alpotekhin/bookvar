@@ -334,10 +334,13 @@ sections:
         source_en: en/00 Textbook/17 Tools and Agents/69 Coding, web, and computer-use agents.md
         route: textbook/agents/coding-web-computer-use
       - source: 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
+        source_en: en/00 Textbook/17 Tools and Agents/70 Formal proofs and mathematical agents.md
         route: textbook/agents/formal-math
       - source: 00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md
+        source_en: en/00 Textbook/17 Tools and Agents/71 Scientific discovery agents.md
         route: textbook/agents/scientific-discovery
       - source: 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md
+        source_en: en/00 Textbook/17 Tools and Agents/72 Agent system security.md
         route: textbook/agents/security
       - source: 00 Учебник/02 Рекомендательные системы/00 Карта модуля.md
         route: textbook/recommender-systems/index
@@ -599,10 +602,13 @@ sections:
                 label_en: Coding, web, and computer-use agents
                 route: textbook/agents/coding-web-computer-use
               - label: Формальные доказательства и математические агенты
+                label_en: Formal proofs and mathematical agents
                 route: textbook/agents/formal-math
               - label: Агенты научного поиска и discovery
+                label_en: Scientific discovery agents
                 route: textbook/agents/scientific-discovery
               - label: Безопасность агентных систем
+                label_en: Agent system security
                 route: textbook/agents/security
       - label: Углублённые модули
         label_en: Specialist modules

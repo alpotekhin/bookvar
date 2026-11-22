@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-22",
+  "scope": "Scientific discovery agents: full English edition and bilingual review of the Russian revision.",
+  "files": [
+    {
+      "source": "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md",
+      "before_sha256": "e2b076b6e583c8ff0578fceb78eace665878bd16f5a085812b909252a14d61ab",
+      "after_sha256": "e2b076b6e583c8ff0578fceb78eace665878bd16f5a085812b909252a14d61ab",
+      "changes": []
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "4bcf2b8427f554973973d616e4bd1e4b03281a6acb1ea66d1f8ee94ed52c01b2",
+      "after_sha256": "1ea288cf142b7b832192616328ea520e09df5462da0fcd433441fb2dc82cd5cb",
+      "changes": [
+        {
+          "old": "      - source: 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md\n        source_en: en/00 Textbook/17 Tools and Agents/70 Formal proofs and mathematical agents.md\n        route: textbook/agents/formal-math\n      - source: 00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md\n        route: textbook/agents/scientific-discovery\n      - source: 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md\n        route: textbook/agents/security\n      - source: 00 Учебник/02 Рекомендательные системы/00 Карта модуля.md\n",
+          "new": "      - source: 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md\n        source_en: en/00 Textbook/17 Tools and Agents/70 Formal proofs and mathematical agents.md\n        route: textbook/agents/formal-math\n      - source: 00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md\n        source_en: en/00 Textbook/17 Tools and Agents/71 Scientific discovery agents.md\n        route: textbook/agents/scientific-discovery\n      - source: 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md\n        route: textbook/agents/security\n      - source: 00 Учебник/02 Рекомендательные системы/00 Карта модуля.md\n"
+        },
+        {
+          "old": "              - label: Формальные доказательства и математические агенты\n                label_en: Formal proofs and mathematical agents\n                route: textbook/agents/formal-math\n              - label: Агенты научного поиска и discovery\n                route: textbook/agents/scientific-discovery\n              - label: Безопасность агентных систем\n                route: textbook/agents/security\n      - label: Углублённые модули\n",
+          "new": "              - label: Формальные доказательства и математические агенты\n                label_en: Formal proofs and mathematical agents\n                route: textbook/agents/formal-math\n              - label: Агенты научного поиска и discovery\n                label_en: Scientific discovery agents\n                route: textbook/agents/scientific-discovery\n              - label: Безопасность агентных систем\n                route: textbook/agents/security\n      - label: Углублённые модули\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "ace5807e3b525f7c8db5e6c978040acc164eddf413658382ed047ed057da4196",
+      "after_sha256": "566950eb38ec6d01555179d47bec4ddb59652d87108ca9031d3795e0efa3fb61",
+      "changes": [
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов|Agent memory, planning, and orchestration]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/68 Оценивание агентных систем|Evaluating agent systems]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|Coding, web, and computer-use agents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|Formal proofs and mathematical agents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery|Scientific search and discovery agents]]\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/72 Безопасность агентных систем|Agent-system security]]\n\n<a id=\"углублённые-модули\"></a>\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов|Agent memory, planning, and orchestration]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/68 Оценивание агентных систем|Evaluating agent systems]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|Coding, web, and computer-use agents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|Formal proofs and mathematical agents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery|Scientific discovery agents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/72 Безопасность агентных систем|Agent-system security]]\n\n<a id=\"углублённые-модули\"></a>\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "f41cb99a91fbc86b0a5d5c9cdb5f3d25079566fa3a2f1af11b439c0b4e2ba70f",
+      "after_sha256": "5d65028ec3083c44be2fea5494b5f557a6661ba522800472e10156a41b864aa5",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-handoff-unknown|Handoff after an operation with an unknown outcome]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-reminder-tokens|Reminder tokens — triggers, reminders, and checks]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-verified-completion|Agent completion — verifying the current revision]]\n- [[00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля|How agents use tools]] · **EN**\n- [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery|Scientific search and discovery agents]]\n  - [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery#funsearch-program-search|FunSearch — program search and cap-set verification]]\n  - [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery#alphaevolve-evaluation-cascade|AlphaEvolve — evaluation cascade and construction verification]]\n\n### Evaluation and operations\n",
+          "new": "  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-handoff-unknown|Handoff after an operation with an unknown outcome]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-reminder-tokens|Reminder tokens — triggers, reminders, and checks]]\n  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-verified-completion|Agent completion — verifying the current revision]]\n- [[00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля|How agents use tools]] · **EN**\n- [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery|Scientific discovery agents]] · **EN**\n  - [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery#funsearch-program-search|FunSearch — program search and cap-set verification]]\n  - [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery#alphaevolve-evaluation-cascade|AlphaEvolve — evaluation cascade and construction verification]]\n\n### Evaluation and operations\n"
+        }
+      ]
+    }
+  ],
+  "added_sources": [
+    {
+      "source": "en/00 Textbook/17 Tools and Agents/71 Scientific discovery agents.md",
+      "sha256": "d0206869d2adc9b495f9ec63c7f74f54aca0ef885a3e5a5f686c7cbee68a6dcc",
+      "canonical": "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md",
+      "route": "textbook/agents/scientific-discovery",
+      "status": "current",
+      "en_body_read": true,
+      "outstanding_expansions": []
+    }
+  ],
+  "explanation": [
+    "LaSR v3 §§2–4 and Appendices A.3.2/A.6–A.8, compared with v1 for the printed coefficient. Retains the least-squares division, validation vs test, Pareto domination, the role of concepts in mutation, the Coulomb approximation, the cascaded results, and BIG-Bench's negative extrapolation and version caveat.",
+    "ESCHER v1 §§3–5, §7.5–7.7, Figures 2, 3 and 6, and pinned get_confusion_matrix. Retains equal-weight scores, the adapter, the two different top-k calculations, time-indexed feedback, scores versus probabilities, negative few-shot and direct CLIP comparisons.",
+    "FunSearch Nature, Methods and cap sets: a hand-written priority changes which points a fixed constructor sees first. An independent validator rejects a larger invalid list. A verified witness and the chance of finding it answer different questions.",
+    "AlphaEvolve v1 §§2–3.1: code replacements, staged scoring, finite basis check for a bilinear algorithm, exact coefficient verification and limitations on claims about optimality or speed.",
+    "The measurement example separates testing extrapolation from choosing a replicate that discriminates between two fixed fitted models."
+  ],
+  "provenance": "No new media. Chapters use the same eleven originals and source links in order. Fine print on course slides remains in their original language, with translated alt text and captions. The licensed LaSR passage is verbatim in both.",
+  "verification": {
+    "explanation_and_style": "Read the full EN chapter alongside the verified RU revision and cited work. Keep the fit, predictions and complexity before the search algorithms. Keep controls and limits with each experiment; no paraphrase replaces the original LaSR quotation.",
+    "examples": "Ran all four displayed EN Python files. Their code is byte-identical to the RU blocks. Same eight display formulas after decimal punctuation normalization, 11 figures, seven source IDs and existing links. The RU receipt for the identical examples records fresh checks of the two published mathematical witnesses.",
+    "rendering": "2,099 pages built. EN Chromium at 390/1440 CSS px: 11 images displayed with English alt text, 171 math nodes, zero math errors, all earlier anchors resolved, no English fallback, previous/next chapter links correct. The wide BIG-Bench table scrolls to its last column on mobile. Visually checked LaSR Figure 2, ESCHER Figure 2, and AlphaEvolve Figure 2; confirmed 2×, fit, both image edges and the caption link in the viewer.",
+    "publication": "153 topic indexes checked, 823 publication tests passed (13 skipped), 374 rendered output tests passed; no broken internal routes, fragments or files.",
+    "outstanding": "No remaining chapter-level explanation gap identified in this pass. Agent security and the broader classical NLP coverage audit remain open."
+  }
+}

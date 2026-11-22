@@ -35,6 +35,9 @@ const laterEditions = [
   { journal: '2026-11-22-agent-memory-planning-editorial-pass.json', figureCount: 12 },
   { journal: '2026-11-22-agent-evaluation-editorial-pass.json', figureCount: 9 },
   { journal: '2026-11-22-computer-agents-editorial-pass.json', figureCount: 20 },
+  { journal: '2026-11-22-formal-math-editorial-pass.json', figureCount: 34 },
+  { journal: '2026-11-22-scientific-discovery-editorial-pass.json', figureCount: 11 },
+  { journal: '2026-11-22-agent-security-editorial-pass.json', figureCount: 8 },
 ].flatMap(({ journal, figureCount }) => {
   const receipt = JSON.parse(read('docs/audit/' + journal));
   return (receipt.added_sources as AddedEdition[]).map(edition => ({
@@ -220,6 +223,26 @@ describe('existing English textbook reconciliation', () => {
     expect(figures(english)).toHaveLength(edition.figureCount);
     expect(figures(english)).toEqual(figures(canonical));
     for (const figure of figures(english)) expect(existsSync(resolve(root, figure))).toBe(true);
+  });
+
+  it.each([
+    { journal: '2026-11-22-formal-math-editorial-pass.json', codeCount: 19, mathCount: 10 },
+    { journal: '2026-11-22-scientific-discovery-editorial-pass.json', codeCount: 4, mathCount: 8 },
+    { journal: '2026-11-22-agent-security-editorial-pass.json', codeCount: 4, mathCount: 2 },
+  ])('preserves displayed formulae and fenced examples in $journal', ({ journal, codeCount, mathCount }) => {
+    const edition = laterEditions.find(item => item.journal === journal)!;
+    const examples = (path: string) => {
+      const source = beforeTopicConsolidation(read(path), path, root, edition.journal);
+      return {
+        code: source.match(/^(\x60\x60\x60|~~~)[^\n]*\n[\s\S]*?^\1$/gm) ?? [],
+        math: (source.match(/^\$\$\n[\s\S]*?^\$\$$/gm) ?? [])
+          .map(formula => formula.replace(/(\d)\{,\}(?=\d)/g, '$1.')),
+      };
+    };
+    const canonical = examples(edition.canonical);
+    expect(canonical.code).toHaveLength(codeCount);
+    expect(canonical.math).toHaveLength(mathCount);
+    expect(examples(edition.source)).toEqual(canonical);
   });
 
   it('pins an actual canonical revision and verifies the exact reviewed EN files', () => {

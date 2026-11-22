@@ -16,6 +16,7 @@ const rows=[...audit.fullReads,...audit.reusedWholeReads];
 const revisions: Record<string,{currentSha256:string;stopBefore:string}> =
   audit.subsequentVerifiedRevisions?.chapters ?? {};
 const editorial: typeof revisions = audit.editorialRevisions ?? {};
+const supersedingReads: Record<string,string> = audit.supersedingReads ?? {};
 const sha=(text:string)=>createHash('sha256').update(text).digest('hex');
 
 describe('whole-owner reading receipts',()=>{
@@ -24,12 +25,28 @@ describe('whole-owner reading receipts',()=>{
     expect(new Set(rows.map(source)).size).toBe(rows.length);
     const seen = new Set<string>();
     const seenEditorial = new Set<string>();
+    const seenSupersedingReads = new Set<string>();
     for(const row of rows){
       const path=source(row),expected=row.sha256??row.currentSha256;
       expect(canonical.has(path),path).toBe(true);
       expect(expected,path).toMatch(/^[a-f0-9]{64}$/);
       const revision=revisions[path];
       const current=read(path), edit=editorial[path];
+      const newerRead = supersedingReads[path];
+      if (newerRead) {
+        // A whole-body replacement keeps both hashes but does not republish
+        // removed material as a reverse patch.
+        expect(revision).toBeUndefined();
+        expect(edit).toBeUndefined();
+        const receipt = JSON.parse(read('docs/audit/' + newerRead));
+        const row = receipt.files.find((file: {source: string}) => file.source === path);
+        expect(receipt.read_scope).toBe('full-body');
+        expect(row?.before_sha256, path).toBe(expected);
+        expect(row?.after_sha256, path).toBe(sha(current));
+        expect(sha(current), path).not.toBe(expected);
+        seenSupersedingReads.add(path);
+        continue;
+      }
       let text=current;
       if (edit) {
         seenEditorial.add(path);
@@ -52,6 +69,7 @@ describe('whole-owner reading receipts',()=>{
     }
     expect(seen).toEqual(new Set(Object.keys(revisions)));
     expect(seenEditorial).toEqual(new Set(Object.keys(editorial)));
+    expect(seenSupersedingReads).toEqual(new Set(Object.keys(supersedingReads)));
   });
   it('keeps the progress counters equal to the hash-pinned read set',()=>{
     expect(audit.currentLocalVerification.readReceipt).toEqual({

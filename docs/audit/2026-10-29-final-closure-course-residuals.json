@@ -991,7 +991,8 @@
         {
           "source": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
           "route": "textbook/agents/security",
-          "sha256": "4e02810a117d85f34c408737e0a9cdfed1fe356015b02277163f80cda9470b59"
+          "sha256": "da2c0bd67c4407f09355f487cf3863681d56f3eea0ffbfc5a4a304706e0128f6",
+          "supersedingRead": "2026-11-22-agent-security-ru-revision.json"
         }
       ]
     },

@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-22",
+  "scope": "English explanation review and bilingual rendering for the formal proofs chapter. The Russian chapter is the unchanged published canonical revision.",
+  "files": [
+    {
+      "source": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
+      "before_sha256": "a4fbd9e8006b0a44a207afbf551957c28d8302025141abfdb7ea481b5b715fd7",
+      "after_sha256": "a4fbd9e8006b0a44a207afbf551957c28d8302025141abfdb7ea481b5b715fd7",
+      "changes": []
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "a22b9bc69e38c3b2bd1330f6534df7fe885a510e208f8ca844115974b0026595",
+      "after_sha256": "4bcf2b8427f554973973d616e4bd1e4b03281a6acb1ea66d1f8ee94ed52c01b2",
+      "changes": [
+        {
+          "old": "      - source: 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md\n        source_en: en/00 Textbook/17 Tools and Agents/69 Coding, web, and computer-use agents.md\n        route: textbook/agents/coding-web-computer-use\n      - source: 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md\n        route: textbook/agents/formal-math\n      - source: 00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md\n        route: textbook/agents/scientific-discovery\n      - source: 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md\n",
+          "new": "      - source: 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md\n        source_en: en/00 Textbook/17 Tools and Agents/69 Coding, web, and computer-use agents.md\n        route: textbook/agents/coding-web-computer-use\n      - source: 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md\n        source_en: en/00 Textbook/17 Tools and Agents/70 Formal proofs and mathematical agents.md\n        route: textbook/agents/formal-math\n      - source: 00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md\n        route: textbook/agents/scientific-discovery\n      - source: 00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md\n"
+        },
+        {
+          "old": "              - label: Программирующие агенты и работа с интерфейсами\n                label_en: Coding, web, and computer-use agents\n                route: textbook/agents/coding-web-computer-use\n              - label: Формальные доказательства и математические агенты\n                route: textbook/agents/formal-math\n              - label: Агенты научного поиска и discovery\n                route: textbook/agents/scientific-discovery\n              - label: Безопасность агентных систем\n",
+          "new": "              - label: Программирующие агенты и работа с интерфейсами\n                label_en: Coding, web, and computer-use agents\n                route: textbook/agents/coding-web-computer-use\n              - label: Формальные доказательства и математические агенты\n                label_en: Formal proofs and mathematical agents\n                route: textbook/agents/formal-math\n              - label: Агенты научного поиска и discovery\n                route: textbook/agents/scientific-discovery\n              - label: Безопасность агентных систем\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "8a73ee3e718c492939ba591ac0038f958a11511dc0fc40c4b9ee7a24b2538120",
+      "after_sha256": "ace5807e3b525f7c8db5e6c978040acc164eddf413658382ed047ed057da4196",
+      "changes": [
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/66 Agent harness и context engineering|How agents manage context]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов|Agent memory, planning, and orchestration]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/68 Оценивание агентных систем|Evaluating agent systems]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|Coding, web, and computer-use agents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|Formal proofs and mathematical agents]]\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery|Scientific search and discovery agents]]\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/72 Безопасность агентных систем|Agent-system security]]\n\n<a id=\"углублённые-модули\"></a>\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/66 Agent harness и context engineering|How agents manage context]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов|Agent memory, planning, and orchestration]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/68 Оценивание агентных систем|Evaluating agent systems]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|Coding, web, and computer-use agents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|Formal proofs and mathematical agents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery|Scientific search and discovery agents]]\n- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/72 Безопасность агентных систем|Agent-system security]]\n\n<a id=\"углублённые-модули\"></a>\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "c53132b899dc1092bf0aa64ed830f9c2ba2f719725c416a735e69bb8989be7b5",
+      "after_sha256": "f41cb99a91fbc86b0a5d5c9cdb5f3d25079566fa3a2f1af11b439c0b4e2ba70f",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем#agent-eval-coverage|Agent evaluation — coverage and unscored runs]]\n  - [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем#agent-eval-pass-k|pass@k and pass^k — success in any or all trials]]\n  - [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем#agent-eval-paired|Paired agent evaluation — task-level resampling]]\n  - [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем#agent-eval-judge|LLM-as-a-judge — rubric and calibration]]\n- [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|Formal proofs and mathematical agents]]\n  - [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#alphaproof-search-vs-ttrl|AlphaProof — search and adaptation budgets]]\n  - [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#lean-proof-acceptance|Lean — checking the statement and its axioms]]\n- [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию|How a function call becomes an action]] · **EN**\n  - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#tool-call-contract|Tool calls — schema, permissions, and result verification]]\n",
+          "new": "  - [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем#agent-eval-coverage|Agent evaluation — coverage and unscored runs]]\n  - [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем#agent-eval-pass-k|pass@k and pass^k — success in any or all trials]]\n  - [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем#agent-eval-paired|Paired agent evaluation — task-level resampling]]\n  - [[00 Учебник/17 Tools и Agents/68 Оценивание агентных систем#agent-eval-judge|LLM-as-a-judge — rubric and calibration]]\n- [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|Formal proofs and mathematical agents]] · **EN**\n  - [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#alphaproof-search-vs-ttrl|AlphaProof — search and adaptation budgets]]\n  - [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#lean-proof-acceptance|Lean — checking the statement and its axioms]]\n- [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию|How a function call becomes an action]] · **EN**\n  - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#tool-call-contract|Tool calls — schema, permissions, and result verification]]\n"
+        }
+      ]
+    }
+  ],
+  "added_sources": [
+    {
+      "source": "en/00 Textbook/17 Tools and Agents/70 Formal proofs and mathematical agents.md",
+      "sha256": "db86c4a6b14510ea9ffb69202398700a656713124703521b7c7d6938c1df9b60",
+      "canonical": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
+      "route": "textbook/agents/formal-math",
+      "status": "current",
+      "en_body_read": true,
+      "outstanding_expansions": []
+    }
+  ],
+  "explanation": [
+    "Lean goal order and proof terms; independent tests for the proposition, its proof and its transitive axioms; quantified counterexample, conjunction proof and recorded proof acceptance results.",
+    "Slides 94–107 and pinned Mathlib EulerProduct/Basic.lean: modulus 332 counterexample, finite exponent grid, finite versus infinite prime and exponent ranges, absolute convergence, and Tao's prime-power convention. Preserved the English Mathlib introduction verbatim.",
+    "LIPS v3 sections 2–5: a false tighter bound and a worked denominator rewrite. LeanEuclid v1 sections 3–4 and appendix B: triangle inequalities, both implications, and the pinned SMT_VERIF assumption.",
+    "LeanDojo v1 sections 3–5, Lean-STaR v1 section 3 and Table 3, AlphaProof Nature Figure 4 and Methods Inference: proof states, training from checked traces, and non-comparable search and adaptation budgets.",
+    "Draft–Sketch–Prove section 3 and Figure 2, LeanHammer section 3 and appendix B, miniCTX section 5 and Table 2, COPRA and ImProver methods: completing a square, gcd reconstruction, truncated context, state rollback, and ranking only valid proof revisions.",
+    "Berkeley Meeting 11 slides 25–39: constant and binary instructions, the stack trace for (2 + 3) × 4, the too-weak invariant, two inductive applications, and the [7] → [20, 7] → [27] continuation. Learn which axioms the same fixed theorem type can admit."
+  ],
+  "provenance": "Preserves the existing 34 local figures in order, original labels, precise slide and paper attribution, and links to the pinned trust and reuse notes. Adds no asset bytes.",
+  "verification": {
+    "explanation_and_style": "Read the full English text against the canonical chapter and its cited source sections; concrete goal transformations, arithmetic and stack states precede the general results. Kept the Mathlib excerpt in the original language and checked the surrounding English independently.",
+    "byte_parity": "Compared 34 original image files with the dev snapshot cbc3d0f; byte hashes match. Same ordered images, 19 fenced blocks, 10 display equations, 42 source IDs, and exact Mathlib extract as canonical RU.",
+    "worked_examples": "Executed both displayed Python blocks. Recomputed the stack interpreter states and underflow, DSP square, LIPS denominator, miniCTX split, and AlphaProof percentage-point differences independently.",
+    "historical_toolchains": "The unchanged Lean and Coq blocks have the recorded checks in 2026-11-09-formal-math-proof-acceptance-additions.json and the previous compiler example acceptance. Lean 4.19.0, Coq 8.20.1, and comparator were not run as part of this English review.",
+    "rendered": "Built 2099 pages. Chromium at 390 and 1440 CSS pixels: all 34 EN images displayed; 82 KaTeX instances, no math or viewport overflow, no missing or duplicated old fragments, no fallback notice, correct previous/next routes. Inspected the Fig. 4 plot, Euclid slide 97 and stack-lemma slide on the page. Inline slide text on mobile is backed by the readable code and accessible in the full-size figure viewer. Tested 2×, fit, both edges and the source caption on the Euler figure.",
+    "publication_checks": "153 topic indexes checked; 821 publication tests passed (13 skipped); 374 rendered output tests passed; no broken internal routes, fragments or assets.",
+    "outstanding": "No unresolved chapter-level explanation issues in this pass; this does not complete scientific discovery, agent safety, or the classical NLP coverage audit."
+  }
+}

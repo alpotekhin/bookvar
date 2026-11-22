@@ -16,6 +16,7 @@ from topic_consolidation_baseline import before_topic_consolidation
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / '00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md'
+ENGLISH = ROOT / 'en/00 Textbook/17 Tools and Agents/68 Evaluating agent systems.md'
 ARCHIVE = ROOT / '05 Источники/Originals/agent-evaluation-2026-10-20'
 
 
@@ -23,21 +24,41 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def main():
-    text = CHAPTER.read_text()
-    blocks = re.findall(r'^~~~python\n(.*?)^~~~', text, re.M | re.S)
-    assert len(blocks) == 4
+def execute_examples(path, text):
+    panels = re.findall(
+        r'^<details id="agent-eval-code-([^"]+)">\n<summary>[^\n]+</summary>\n\n'
+        r'~~~python\n(.*?)^~~~\n\n</details>', text, re.M | re.S)
+    assert [panel for panel, _ in panels] == ['booking', 'pass-k', 'paired', 'rubric']
+    blocks = [block for _, block in panels]
     scopes, shared = [], {}
-    for index, block in enumerate(blocks):
-        code = compile(block, f'{CHAPTER}:example-{index+1}', 'exec')
+    for panel, block in panels:
+        code = compile(block, f'{path}:example-{panel}', 'exec')
         scope = {}
         exec(code, scope)
         exec(code, shared)
         scopes.append(scope)
+    return blocks, scopes
+
+
+def main():
+    text, english = CHAPTER.read_text(), ENGLISH.read_text()
+    blocks, scopes = execute_examples(CHAPTER, text)
+    en_blocks, _ = execute_examples(ENGLISH, english)
+    assert en_blocks == blocks
+    assert f'canonical_revision: "{sha(CHAPTER)}"' in english
+    figures = lambda source: re.findall(r'^!\[\[([^|\]]+)(?:\|[^\]]*)?\]\]', source, re.M)
+    assert len(figures(text)) == 9 and figures(english) == figures(text)
+    def display_math(source):
+        return re.findall(r'^\$\$\n(.*?)^\$\$$', source, re.M | re.S)
+    assert len(display_math(text)) == 3
+    assert [formula.replace('0{,}05', '0.05') for formula in display_math(text)] == display_math(english)
     booking, metric, paired, rubric = scopes
     grade = booking['grade_booking']
     old, new, other, invite, audit = (
         booking[name] for name in ('old', 'new', 'other', 'invite', 'audit'))
+    assert old[2] == '2026-10-08T18:00:00+03:00'
+    assert new[2] == '2026-10-09T19:00:00+03:00'
+    assert invite[2:] == ('204', new[2])
     start, after, sent = [old, other], [other, new], [invite]
     saved = deepcopy((start, after, sent, audit))
     correct = "correct", {"calendar": True, "mail": True, "policy": True}
@@ -95,9 +116,18 @@ def main():
                 mean = sum(estimate(n, [c], k)[0] * comb(n, c) * p**c * (1-p)**(n-c)
                            for c in range(n+1))
                 assert isclose(mean, 1-(1-p)**k, abs_tol=1e-14)
+                all_success = sum(comb(c, k) / comb(n, k) * comb(n, c) * p**c * (1-p)**(n-c)
+                                  for c in range(n+1))
+                assert isclose(all_success, p**k, abs_tol=1e-14)
     assert np.allclose(estimate([10, 10], [2, 0], 3), [8/15, 0])
     assert isclose(1-(1-0.75)**3, 0.984375)
     assert isclose(0.75**3, 0.421875)
+    assert 1 - Fraction(comb(8, 3), comb(10, 3)) == Fraction(8, 15)
+    assert 1 - (1 - Fraction(2, 10))**3 == Fraction(488, 1000)
+    tasks = [Fraction(1), Fraction(0)]
+    assert sum(tasks)/2 == sum(1-(1-p)**3 for p in tasks)/2 == sum(p**3 for p in tasks)/2 == Fraction(1, 2)
+    assert 1 - (1 - sum(tasks)/2)**3 == Fraction(7, 8)
+    assert (sum(tasks)/2)**3 == Fraction(1, 8)
     assert np.array_equal(paired['difference'], [0, -1, 1, 1])
     assert len(paired['resampled_means']) == 256
     assert np.allclose(paired['interval'], [-0.5, 1])
@@ -132,7 +162,7 @@ def main():
     assert sha(ROOT / excerpt['published_license']) == excerpt['published_license_sha256']
     assert (ROOT / excerpt['published_license']).read_text().strip() == (
         ARCHIVE / 'human-eval-LICENSE').read_text().strip()
-    print(f'PASS: 4 examples individually/shared (8 executions); {tested} finite metric cases; '
+    print(f'PASS: 4 examples per locale individually/shared (16 executions); {tested} finite metric cases; '
           'unbiased expectations; booking failures; 256 paired resamples; rubric/judge/risk arithmetic; '
           'source function unchanged; source hashes and 5 exact original crops. No LLM/agent benchmark run.')
 

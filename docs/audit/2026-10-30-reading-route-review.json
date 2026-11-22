@@ -1,7 +1,14 @@
 {
   "date": "2026-10-30",
   "lastReviewedDate": "2026-11-09",
+  "supersedingReads": {
+    "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md": "2026-11-22-agent-security-ru-revision.json"
+  },
   "editorialRevisions": {
+    "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md": {
+      "currentSha256": "e2b076b6e583c8ff0578fceb78eace665878bd16f5a085812b909252a14d61ab",
+      "stopBefore": "2026-11-22-formal-math-editorial-pass.json"
+    },
     "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md": {
       "currentSha256": "a4fbd9e8006b0a44a207afbf551957c28d8302025141abfdb7ea481b5b715fd7",
       "stopBefore": "2026-11-22-computer-agents-editorial-pass.json"

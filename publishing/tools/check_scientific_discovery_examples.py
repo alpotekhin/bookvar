@@ -8,6 +8,7 @@ import re
 import subprocess
 import sys
 import tempfile
+from topic_consolidation_baseline import before_topic_consolidation
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md"
@@ -17,7 +18,7 @@ ARCHIVE = ROOT / "05 Источники/Originals/scientific-discovery-2026-10-2
 def main():
     text = CHAPTER.read_text()
     code = re.findall(r"^```python\n(.*?)^```\s*$", text, re.M | re.S)
-    assert len(code) == 3, len(code)
+    assert len(code) == 4, len(code)
     with tempfile.TemporaryDirectory(prefix="bookvar-discovery-") as tmp:
         for index, block in enumerate(code):
             path = Path(tmp) / f"example{index}.py"
@@ -41,14 +42,15 @@ def main():
 
     refs = json.loads((ARCHIVE / "references.json").read_text())
     sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
-    assert sha(CHAPTER) == refs["chapter_sha256"]
+    historical = before_topic_consolidation(text, CHAPTER)
+    assert hashlib.sha256(historical.encode()).hexdigest() == refs["chapter_sha256"]
     for row in refs["sources"]:
         assert sha(ROOT / row["file"]) == row["sha256"], row["file"]
     figures = json.loads((ROOT / "00 Учебник/Assets/Figures/curated/scientific-discovery-2026-10-21/assets.json").read_text())
     for row in figures:
         assert sha(ROOT / row["asset"]) == row["sha256"]
         assert (ROOT / row["asset"]).read_bytes() == (ROOT / row["source_asset"]).read_bytes()
-    print("PASS: 3 extracted Python examples; rational toy calculations; data counts; source and figure hashes. No LaSR/ESCHER training, search benchmark or real CLIP measurement.")
+    print("PASS: 4 extracted Python examples; rational toy calculations; data counts; historical chapter, source and figure hashes. No LaSR/ESCHER training, search benchmark or real CLIP measurement.")
 
 
 if __name__ == "__main__":
