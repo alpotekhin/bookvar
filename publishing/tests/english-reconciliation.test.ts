@@ -23,6 +23,19 @@ const llamaReceipt = JSON.parse(read('docs/audit/' + llamaReceiptName));
 const llamaCanonical = '00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md';
 const llamaEnglish = 'en/00 Textbook/07 Anatomy of a modern LLM/01 LLaMA as a baseline architecture.md';
 const llamaRoute = 'textbook/modern-llm/llama-architecture';
+type AddedEdition = {
+  source: string; sha256: string; canonical: string; route: string;
+  status: string; en_body_read: boolean; outstanding_expansions: string[];
+};
+const laterEditions = [
+  { journal: '2026-11-22-chameleon-editorial-pass.json', figureCount: 8 },
+  { journal: '2026-11-22-agent-intro-editorial-pass.json', figureCount: 1 },
+].flatMap(({ journal, figureCount }) => {
+  const receipt = JSON.parse(read('docs/audit/' + journal));
+  return (receipt.added_sources as AddedEdition[]).map(edition => ({
+    ...edition, journal, figureCount, files: receipt.files as { source: string; after_sha256: string }[],
+  }));
+});
 
 describe('existing English textbook reconciliation', () => {
   it('reorders Constitutional AI in both locales without losing teaching material', () => {
@@ -137,7 +150,8 @@ describe('existing English textbook reconciliation', () => {
       .find(section => section.id === 'textbook')!.pages.filter(page => page.sourceEn);
     expect(entries).toHaveLength(29);
     const reviewedEditions = [...entries, { path: llamaEnglish, route: llamaRoute,
-      canonical: llamaCanonical, status: 'current', en_body_read: true, outstanding_expansions: [] }];
+      canonical: llamaCanonical, status: 'current', en_body_read: true, outstanding_expansions: [] },
+      ...laterEditions.map(edition => ({ ...edition, path: edition.source }))];
     expect(reviewedEditions.map(row => row.path).sort()).toEqual(pages.map(page => page.sourceEn).sort());
     expect(entries.filter(row => row.status === 'current')).toHaveLength(29);
     expect(entries.filter(row => row.status === 'partial')).toHaveLength(0);
@@ -183,6 +197,24 @@ describe('existing English textbook reconciliation', () => {
     // languages. Keep the original inventory and enforce current order above.
     expect(current.filter(path => !additions.includes(path)).sort()).toEqual([...original].sort());
     for (const path of current) expect(existsSync(resolve(root, path)), path).toBe(true);
+  });
+
+  it.each(laterEditions)('pins the English edition of $route to the reviewed canonical text and figures', (edition) => {
+    const english = read(edition.source), canonical = read(edition.canonical);
+    const atReview = (text: string, path: string) =>
+      beforeTopicConsolidation(text, path, root, edition.journal);
+    expect(hash(atReview(english, edition.source))).toBe(edition.sha256);
+    expect(hash(atReview(canonical, edition.canonical))).toBe(
+      edition.files.find(row => row.source === edition.canonical)?.after_sha256);
+    expect(matter(english)).toMatchObject({
+      locale: 'en', translation_status: 'current', translation_of: edition.canonical,
+      canonical_revision: hash(canonical),
+    });
+    const figures = (text: string) => [...text.matchAll(/^!\[\[(?:02 Areas\/ML & DL\/)?([^\]|]+)/gm)]
+      .map(match => match[1]);
+    expect(figures(english)).toHaveLength(edition.figureCount);
+    expect(figures(english)).toEqual(figures(canonical));
+    for (const figure of figures(english)) expect(existsSync(resolve(root, figure))).toBe(true);
   });
 
   it('pins an actual canonical revision and verifies the exact reviewed EN files', () => {

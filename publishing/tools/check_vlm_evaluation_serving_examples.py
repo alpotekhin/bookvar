@@ -14,6 +14,7 @@ from PIL import Image, ImageChops
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md"
+ENGLISH = ROOT / "en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md"
 SOURCE = ROOT / "05 Источники/Originals/vlm-evaluation-serving-2026-10-20"
 
 
@@ -21,22 +22,43 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def main():
-    chapter = CHAPTER.read_text()
-    blocks = re.findall(r"^~~~python\n(.*?)^~~~", chapter, re.M | re.S)
+def run_examples(path, chapter):
+    blocks = re.findall(r"^(`{3}|~~~)python\n(.*?)^\1$", chapter, re.M | re.S)
     assert len(blocks) == 18, len(blocks)
     spaces, shared = [], {}
-    for i, block in enumerate(blocks, 1):
-        code = compile(block, f"{CHAPTER}:block-{i}", "exec")
+    for i, (_, block) in enumerate(blocks, 1):
+        code = compile(block, f"{path}:block-{i}", "exec")
         local = {}
         exec(code, local)
         exec(code, shared)
         spaces.append(local)
-    for block in re.findall(r"^~~~json\n(.*?)^~~~", chapter, re.M | re.S):
+    requests = re.findall(r"^(`{3}|~~~)json\n(.*?)^\1$", chapter, re.M | re.S)
+    assert len(requests) == 1
+    for _, block in requests:
         request = json.loads(block)
-        for item in request["messages"][0]["content"]:
-            if item["type"] == "image_url":
-                assert isinstance(item["image_url"], dict) and "url" in item["image_url"]
+        assert request["max_tokens"] == 200
+        items = request["messages"][0]["content"]
+        assert [item["type"] for item in items] == ["image_url", "image_url", "text"]
+        assert all(isinstance(item["image_url"], dict) and "url" in item["image_url"]
+                   for item in items[:2])
+    return spaces, [ast.dump(ast.parse(block)) for _, block in blocks]
+
+
+def main():
+    chapter = CHAPTER.read_text()
+    english = ENGLISH.read_text()
+    assert f'canonical_revision: "{sha(CHAPTER)}"' in english
+    spaces, ru_ast = run_examples(CHAPTER, chapter)
+    english_spaces, en_ast = run_examples(ENGLISH, english)
+    assert en_ast == ru_ast
+
+    for blocks in (spaces, english_spaces):
+        ttft, critical = blocks[9], blocks[10]
+        arrivals = [ttft["client_ttft"] + 40 * i for i in range(10)]
+        assert arrivals[0] == 500 and arrivals[-1] == 860
+        assert arrivals[0] <= 550 and arrivals[-1] > 800
+        assert (arrivals[-1] - arrivals[0]) / (len(arrivals) - 1) == 40
+        assert critical["critical_path"] == 475 and critical["all_work"] == 710
 
     wg = spaces[1]["winoground_scores"]
     outcomes = [wg(np.array(p).reshape(2, 2)) for p in itertools.permutations(range(4))]
@@ -123,7 +145,9 @@ def main():
         assert "molmo-figure11-openness.png" not in text
     assert "&lt;AND&gt;" in chapter and "<AND>" not in chapter
     print(json.dumps({
-        "chapter_sha256": sha(CHAPTER), "standalone_and_shared_code_runs": 2 * len(blocks),
+        "chapter_sha256": [sha(CHAPTER), sha(ENGLISH)],
+        "standalone_and_shared_code_runs": 2 * (len(spaces) + len(english_spaces)),
+        "first_and_last_token_ms": [500, 860], "answer_deadline_ms": 800,
         "winoground_rankings": 24, "winoground_success_counts": [6, 6, 4],
         "original_pope_parser_cases": 5, "original_encoder_cache_methods": 4,
         "permutation_and_intersection_cases": 100,

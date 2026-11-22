@@ -313,8 +313,10 @@ sections:
       - source: 00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md
         route: textbook/multimodal/diffusion-flow-images
       - source: 00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md
+        source_en: en/00 Textbook/16 Multimodal Models/64h Chameleon - text and images in one sequence.md
         route: textbook/multimodal/unified-sequence-chameleon
       - source: 00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля.md
+        source_en: en/00 Textbook/17 Tools and Agents/00 How agents use tools.md
         route: textbook/agents/module-map
       - source: 00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md
         route: textbook/agents/tool-use
@@ -564,15 +566,17 @@ sections:
               - label: Как модели понимают видео и отвечают голосом
                 label_en: How models understand video and answer in speech
                 route: textbook/multimodal/video-audio-omni
-              - label: Оценивание, отказы и serving VLM
-                label_en: Evaluation, failure modes, and VLM serving
+              - label: Как оценивать качество и задержку VLM
+                label_en: Evaluating VLMs and measuring serving latency
                 route: textbook/multimodal/evaluation-serving
-              - label: Единая мультимодальная последовательность и Chameleon
+              - label: "Chameleon: текст и изображения в одной последовательности"
+                label_en: "Chameleon: text and images in one sequence"
                 route: textbook/multimodal/unified-sequence-chameleon
           - label: XIII. Инструменты и агенты
             label_en: XIII. Tools and agents
             items:
-              - label: Карта модуля и источники
+              - label: Как агент работает с инструментами
+                label_en: How agents use tools
                 route: textbook/agents/module-map
               - label: Tool use — от вызова функции к действию
                 route: textbook/agents/tool-use

@@ -164,8 +164,8 @@ last_updated: 2026-11-14
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Как обучают мультимодальные модели]]
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Чтение документов: OCR, поля и координаты]]
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|Как модели понимают видео и отвечают голосом]]
-- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Оценивание, отказы и serving VLM]]
-- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Единая мультимодальная последовательность и Chameleon]]
+- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Как оценивать качество и задержку VLM]]
+- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Chameleon: текст и изображения в одной последовательности]]
 
 <a id="xiv-инструменты-и-агенты"></a>
 <a id="инструменты-и-агенты"></a>
@@ -174,7 +174,7 @@ last_updated: 2026-11-14
 
 Нужны генерация, post-training и оценивание языковых моделей. Сначала разбираются вызовы инструментов и управление контекстом, затем память, планирование, приложения и безопасность.
 
-- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля|Карта модуля и источники]]
+- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля|Как агент работает с инструментами]]
 - [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию|Tool use — от вызова функции к действию]]
 - [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/66 Agent harness и context engineering|Agent harness и context engineering]]
 - [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов|Память, планирование и оркестрация агентов]]

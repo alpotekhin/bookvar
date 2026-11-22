@@ -2,6 +2,18 @@
   "date": "2026-10-30",
   "lastReviewedDate": "2026-11-09",
   "editorialRevisions": {
+    "00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля.md": {
+      "currentSha256": "ac221121a2c28509b02705d4550ad9d5c8e73bdd699d87e385ff0f55a4df12ef",
+      "stopBefore": "2026-11-22-chameleon-editorial-pass.json"
+    },
+    "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md": {
+      "currentSha256": "bf04d0560f91edfc2a501db1e54119cf6f4ec679764eec524a429ace5521d11e",
+      "stopBefore": "2026-11-22-vlm-evaluation-serving-editorial-pass.json"
+    },
+    "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md": {
+      "currentSha256": "42f6014d53683f42a0ffa84d8f94f39d0f64c4bd004e14ea4cde6db8726c3acb",
+      "stopBefore": "2026-11-22-video-omni-editorial-pass.json"
+    },
     "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md": {
       "currentSha256": "f95b360a17fb01791e6d1076ae0fd32af888a9cf6a2cbf6d3f670a6ff400df8d",
       "stopBefore": "2026-11-22-ocr-grounding-editorial-pass.json"

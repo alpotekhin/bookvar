@@ -1513,6 +1513,17 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
 
 ### Multimodal models
 
+- [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Chameleon: text and images in one sequence]] · **EN**
+  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-mixed-response|Chameleon — text and image in one response]]
+  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-vq-codebook|VQ-VAE — nearest codebook vector]]
+  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-vq-gradient|VQ-VAE — straight-through and codebook training]]
+  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-token-sequence|Chameleon — shared vocabulary and shifted targets]]
+  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-output-mask|Chameleon — vocabulary mask and image boundaries]]
+  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-image-cfg|Chameleon — three guidance branches for images]]
+  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-image-budget|Chameleon — reserving context for an image]]
+  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-qknorm|Chameleon — QK-Norm and attention-logit scale]]
+  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-zloss|Chameleon — z-loss on vocabulary logits]]
+  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-mixed-evaluation|Chameleon — evaluating mixed-modal answers]]
 - [[00 Учебник/16 Multimodal Models/64a Connectors и fusion|Connectors and fusion]] · **EN**
   - [[00 Учебник/16 Multimodal Models/64a Connectors и fusion#vlm-projector-prefix|LLaVA — inserting a visual prefix]]
   - [[00 Учебник/16 Multimodal Models/64a Connectors и fusion#vlm-qformer-masks|BLIP-2 — three Q-Former masks]]
@@ -1529,7 +1540,7 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#flow-marginal-field|Flow matching — the marginal velocity field]]
   - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#flow-sd3-time|Stable Diffusion 3 — time direction and velocity sign]]
   - [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений#flow-sampling-budget|Rectified flow — sampling steps and generation quality]]
-- [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Evaluation, failure modes, and VLM serving]] · **EN**
+- [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Evaluating VLMs and measuring serving latency]] · **EN**
   - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-winoground|Winoground — text, image, and group scores]]
   - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-pope|POPE — testing object hallucination]]
   - [[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM#vlm-eval-ttft|VLMs — where time to first token goes]]
@@ -1572,17 +1583,6 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-mix|VLMs — mixing training datasets]]
   - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-reduction|VLMs — loss normalization across microbatches]]
   - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-image-control|VLMs — paired tests with image replacement]]
-- [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Unified multimodal sequences and Chameleon]]
-  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-mixed-response|Chameleon — text and image in one response]]
-  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-vq-codebook|VQ-VAE — nearest codebook vector]]
-  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-vq-gradient|VQ-VAE — straight-through and codebook training]]
-  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-token-sequence|Chameleon — shared vocabulary and shifted targets]]
-  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-output-mask|Chameleon — vocabulary mask and image boundaries]]
-  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-image-cfg|Chameleon — three guidance branches for images]]
-  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-image-budget|Chameleon — reserving context for an image]]
-  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-qknorm|Chameleon — QK-Norm and attention-logit scale]]
-  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-zloss|Chameleon — z-loss on vocabulary logits]]
-  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-mixed-evaluation|Chameleon — evaluating mixed-modal answers]]
 
 ### Tools and agents
 
@@ -1611,7 +1611,7 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
 - [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|Formal proofs and mathematical agents]]
   - [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#alphaproof-search-vs-ttrl|AlphaProof — search and adaptation budgets]]
   - [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#lean-proof-acceptance|Lean — checking the statement and its axioms]]
-- [[00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля|Module map and sources]]
+- [[00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля|How agents use tools]] · **EN**
 - [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery|Scientific search and discovery agents]]
   - [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery#funsearch-program-search|FunSearch — program search and cap-set verification]]
   - [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery#alphaevolve-evaluation-cascade|AlphaEvolve — evaluation cascade and construction verification]]

@@ -100,6 +100,9 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«Как подключить визуальный энкодер к LLM»](2026-11-22-vision-connectors-editorial-pass.json),
 [«Разрешение, плитки и позиции изображения»](2026-11-22-vision-resolution-editorial-pass.json),
 [«Как обучают мультимодальные модели»](2026-11-22-vision-training-editorial-pass.json),
-[«Чтение документов: OCR, поля и координаты»](2026-11-22-ocr-grounding-editorial-pass.json) и
-[«Как модели понимают видео и отвечают голосом»](2026-11-22-video-omni-editorial-pass.json).
-Следующая глава — «Оценивание, отказы и serving VLM».
+[«Чтение документов: OCR, поля и координаты»](2026-11-22-ocr-grounding-editorial-pass.json),
+[«Как модели понимают видео и отвечают голосом»](2026-11-22-video-omni-editorial-pass.json),
+[«Как оценивать качество и задержку VLM»](2026-11-22-vlm-evaluation-serving-editorial-pass.json),
+[«Chameleon: текст и изображения в одной последовательности»](2026-11-22-chameleon-editorial-pass.json) и
+[«Как агент работает с инструментами»](2026-11-22-agent-intro-editorial-pass.json).
+Следующая глава — «Как вызов функции становится действием».

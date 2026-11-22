@@ -6393,6 +6393,22 @@ describe('static handbook output', () => {
     expect(card).toContain(`href="${route}#alphaproof-search-vs-ttrl"`);
     expect(card).toContain('10.1038/s41586-025-09833-y');
   });
+  it('opens the agent route with a tool trace and keeps the notebooks in the source library', async () => {
+    for (const prefix of ['', 'en/']) {
+      const html = await readFile(join(distDir, prefix, 'textbook/agents/module-map/index.html'), 'utf8');
+      expect(html).not.toContain('aria-label="English edition status"');
+      expect(html).toContain('id="линейный-маршрут"');
+      expect(html).toContain('id="практический-корпус"');
+      expect(html).toContain('14:05');
+      expect(html).toContain(prefix ? 'unknown count, not zero' : 'неизвестный остаток за нулевой');
+      expect(html).toMatch(/<img[^>]+src="[^"]*\/swe-agent-overview\.png"[^>]+alt="[^"]+"/);
+      expect(html).toContain('href="https://arxiv.org/html/2405.15793v3#S1.F1"');
+      expect(html).toContain(`href="/${prefix}textbook/multimodal/unified-sequence-chameleon/"`);
+      expect(html).toContain(`href="/${prefix}textbook/agents/tool-use/"`);
+      expect(html).toContain(`href="/${prefix}sources/genai-agents/"`);
+      expect(html).not.toContain(`href="/${prefix}sources/courses/genai-agents/`);
+    }
+  });
   it('renders coding, web and computer-use mechanisms with original figures and examples', async () => {
     const html = await readFile(join(distDir, 'textbook/agents/coding-web-computer-use/index.html'), 'utf8');
     for (const figure of ['taco-cota-examples.png', 'swe-agent-overview.png',
@@ -6706,7 +6722,13 @@ describe('static handbook output', () => {
     for (const prefix of ['', 'en/']) {
       const reference = await readFile(join(distDir, prefix, 'reference/index.html'), 'utf8');
       const chapter = prefix ? await readFile(join(distDir, prefix, route, 'index.html'), 'utf8') : html;
-      if (prefix) expectCanonicalEditionNotice(chapter);
+      expect(chapter).not.toContain('aria-label="English edition status"');
+      expect(chapter.match(/<details id="chameleon-code-/g)).toHaveLength(18);
+      for (const fragment of ['435+362/2', '194+145/2', '5915', '2405.09818v2#page=26']) {
+        expect(chapter).toContain(fragment);
+      }
+      expect(chapter).toContain(`href="/${prefix}textbook/multimodal/evaluation-serving/#vlm-eval-ttft"`);
+      expect(chapter).toContain(`href="/${prefix}textbook/agents/module-map/"`);
       for (const [figure, digest, source] of [
         ['samuel-ovrelid-vq-figure1.png', 'e888c94fa80891363d546d8baad62a585168810ecdd82023eeb666b380e58c5d', 'https://aclanthology.org/2023.findings-acl.890.pdf#page=2'],
         ['emu3-figure1.png', 'c16ba6fccd32d9db9f748c171ecf5eefc408b57b54aa2dcf8b9667a3f6c7aafc', 'https://arxiv.org/html/2409.18869v1/emu3_arch5.png'],
@@ -7538,6 +7560,20 @@ describe('static handbook output', () => {
     }
     const retired = join(distDir, 'assets', '00 Учебник/Assets/Figures/curated/vlm-2026/molmo-figure11-openness.png');
     await expect(access(retired)).rejects.toMatchObject({code: 'ENOENT'});
+  });
+
+  it('follows the same invoice from model errors through completion latency', async () => {
+    for (const prefix of ['', 'en/']) {
+      const html = await readFile(join(distDir, prefix,
+        'textbook/multimodal/evaluation-serving/index.html'), 'utf8');
+      expect(html.match(/<details id="vlm-eval-code-/g)).toHaveLength(19);
+      for (const id of ['positions', 'ttft', 'critical', 'transfer', 'joint'])
+        expect(html).toContain('id="vlm-eval-code-' + id + '"');
+      expect(html).toContain(prefix ? 'at 860 ms' : 'на 860-й миллисекунде');
+      expect(html).toContain(prefix ? 'an 800-ms deadline' : 'срок 800 мс');
+      expect(html).toContain(`href="/${prefix}textbook/multimodal/unified-sequence-chameleon/"`);
+      expect(html).toContain(`href="/${prefix}textbook/multimodal/video-audio-omni/"`);
+    }
   });
 
   it('ships responsive rules for figures, formulas, tables, and attributed source blocks', async () => {

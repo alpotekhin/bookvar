@@ -15,6 +15,7 @@ from PIL import Image, ImageChops
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md"
+ENGLISH = ROOT / "en/00 Textbook/16 Multimodal Models/64h Chameleon - text and images in one sequence.md"
 ARCHIVE = ROOT / "05 Источники/Originals/chameleon-2026-10-20"
 
 
@@ -42,15 +43,28 @@ def check_pinned_vocabulary():
     assert vocab.text_tokens == [30]
 
 
-def main():
-    text = CHAPTER.read_text()
+def run_examples(path, text):
     blocks = re.findall(r"^~~~python\n(.*?)^~~~", text, re.M | re.S)
     shared = {}
     for index, block in enumerate(blocks):
-        code = compile(block, f"{CHAPTER}:example-{index+1}", "exec")
+        code = compile(block, f"{path}:example-{index+1}", "exec")
         exec(code, {})
         exec(code, shared)
-    assert len(blocks) >= 14
+    assert len(blocks) == 17
+    return [ast.dump(ast.parse(block)) for block in blocks]
+
+
+def main():
+    ru, en = CHAPTER.read_text(), ENGLISH.read_text()
+    assert f'canonical_revision: "{sha(CHAPTER)}"' in en
+    ru_examples, en_examples = run_examples(CHAPTER, ru), run_examples(ENGLISH, en)
+    assert ru_examples == en_examples
+    images = lambda text: [
+        item.removeprefix("02 Areas/ML & DL/") for item in re.findall(r"!\[\[([^|\]]+)\|", text)
+    ]
+    assert images(ru) == images(en) and len(images(ru)) == 8
+    assert 800 + (1024 - 1) * 5 == 5915
+    assert 5915 + 85 == 6000
     check_pinned_vocabulary()
 
     rng = np.random.default_rng(20261020)
@@ -102,8 +116,11 @@ def main():
         assert "creativecommons.org/licenses/by/4.0/" in (ROOT / row["license_evidence"]).read_text()
 
     print(json.dumps({
-        "chapter_sha256": sha(CHAPTER), "code_blocks": len(blocks),
-        "standalone_and_shared_runs": 2*len(blocks),
+        "chapter_sha256": [sha(CHAPTER), sha(ENGLISH)],
+        "code_blocks_per_locale": len(ru_examples),
+        "standalone_and_shared_runs": 2 * (len(ru_examples) + len(en_examples)),
+        "image_ready_ms_example": 6000,
+        "gemini_plus_overall_percent": 58.8, "gemini_plus_image_prompt_percent": 60.4,
         "randomized_identity_cases": 100,
         "pinned_vocabulary_methods_executed": True,
         "source_downloads_verified": len(refs["downloaded"]),
