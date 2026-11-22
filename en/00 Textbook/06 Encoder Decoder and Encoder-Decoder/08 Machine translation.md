@@ -7,7 +7,7 @@ locale: en
 source_language: en
 translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md"
 translation_status: current
-canonical_revision: "b59c7f5e7c02a14e29b77a7cb123e012087e769e54b93f35f5185826ea306172"
+canonical_revision: "e0ba7df4b575e685850ae71268e6c71105a1ea4298bb16e41e4278e97baa45d5"
 translation_reviewed: "2026-11-22"
 last_updated: 2026-11-22
 last_verified: 2026-11-22
@@ -319,4 +319,4 @@ assert toy_bleu4(safe, ref)[1] == 0
 - Matt Post, [A Call for Clarity in Reporting BLEU Scores](https://aclanthology.org/W18-6319/); Ricardo Rei et al., [COMET](https://aclanthology.org/2020.emnlp-main.213/), Section 2.3 and Figure 1; Markus Freitag et al., [Experts, Errors, and Context](https://aclanthology.org/2021.tacl-1.87/).
 
 **Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 and text-to-text tasks]].
-**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].
+**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста|Text summarization]].

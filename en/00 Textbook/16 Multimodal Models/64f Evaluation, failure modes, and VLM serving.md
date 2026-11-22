@@ -4,12 +4,12 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "42f6014d53683f42a0ffa84d8f94f39d0f64c4bd004e14ea4cde6db8726c3acb"
+canonical_revision: "b052035b0af0931e63748743d91664c096a5a39e1dd6df810f14721b9c5bbd09"
 translation_reviewed: "2026-11-22"
 translation_of: "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md"
 last_updated: 2026-11-22
 last_verified: 2026-11-22
-previous: "[[en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models]]"
+previous: "[[en/00 Textbook/16 Multimodal Models/64eb Text-to-speech synthesis]]"
 next:
   - "[[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon]]"
 primary_sources:
@@ -735,5 +735,5 @@ The next chapter, [[00 Учебник/16 Multimodal Models/64h Единая му
 - Song et al., [MM-Detect](https://aclanthology.org/2025.findings-emnlp.556/), §2.1; Park et al., [Multi-Modal Semantic Perturbations](https://arxiv.org/html/2511.03774v1#S4), §§4–5.
 - [Winoground §3.1–3.2](https://arxiv.org/abs/2204.03162v1); [POPE §5.1–5.2](https://aclanthology.org/2023.emnlp-main.20/); [CHAIR §2.1](https://aclanthology.org/D18-1437/); [MM-Vet §3.1–3.2](https://proceedings.mlr.press/v235/yu24o.html); [MMStar §3 and §4.3](https://arxiv.org/abs/2403.20330v1).
 - [EPD Disaggregation §3.1–3.2](https://proceedings.mlr.press/v267/singh25d.html) and [pinned vLLM documentation/code](https://github.com/vllm-project/vllm/tree/7b569ec8953cf8099638a6d2ee1e915b75867c3a). Settings described here are version-specific.
-- Previous: [[en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models|Video, audio, and omni models]].
+- Previous: [[en/00 Textbook/16 Multimodal Models/64eb Text-to-speech synthesis|Text-to-speech synthesis]].
 - Optional reading: [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|Diffusion and flow models for images]].

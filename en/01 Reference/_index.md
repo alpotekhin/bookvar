@@ -453,8 +453,22 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-span-metrics|Exact-span precision and recall]]
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-nested|Nested entities and span classification]]
 - [[00 Учебник/05 Attention и Transformer/04 Позиционная информация|Positional information]] · **EN**
+- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/10 Ответы на вопросы|Question answering]] · **EN**
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/10 Ответы на вопросы#qa-task|Question answering over documents]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/10 Ответы на вопросы#qa-retrieval|Passage retrieval for question answering and DPR]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/10 Ответы на вопросы#qa-span|Extracting answer spans with BERT]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/10 Ответы на вопросы#qa-no-answer|Abstention in SQuAD 2.0]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/10 Ответы на вопросы#qa-metrics|Exact Match and token F1 for question answering]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/10 Ответы на вопросы#qa-generation|Generative question answering and Fusion-in-Decoder]]
 - [[00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V|Self-attention: Q, K, and V]] · **EN**
 - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: the text-to-text Transformer]] · **EN**
+- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста|Text summarization]] · **EN**
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста#sum-task|Text summarization tasks]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста#sum-extractive|Extractive summarization and BERTSum]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста#sum-generation|Abstractive summarization and pointer-generators]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста#sum-rouge|Measuring summary overlap with ROUGE]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста#sum-faithfulness|Summary coverage and faithfulness]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста#sum-long-documents|Summarizing long documents]]
 - [[00 Учебник/05 Attention и Transformer/03 Полный Transformer|The complete encoder–decoder Transformer]] · **EN**
   - [[00 Учебник/05 Attention и Transformer/03 Полный Transformer#transformer-dropout|Attention, residual and embedding dropout]]
 - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three Transformer architectures]] · **EN**
@@ -1549,6 +1563,13 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
 
 ### Multimodal models
 
+- [[00 Учебник/16 Multimodal Models/64ea Распознавание речи|Automatic speech recognition]] · **EN**
+  - [[00 Учебник/16 Multimodal Models/64ea Распознавание речи#asr-input|Speech recognition inputs and outputs]]
+  - [[00 Учебник/16 Multimodal Models/64ea Распознавание речи#asr-ctc|CTC: blank, repeated labels, and alignment]]
+  - [[00 Учебник/16 Multimodal Models/64ea Распознавание речи#asr-forward|CTC: forward probabilities and decoding]]
+  - [[00 Учебник/16 Multimodal Models/64ea Распознавание речи#asr-transducer|RNN-T and Token-and-Duration Transducer]]
+  - [[00 Учебник/16 Multimodal Models/64ea Распознавание речи#asr-whisper|Speech recognition and translation with Whisper]]
+  - [[00 Учебник/16 Multimodal Models/64ea Распознавание речи#asr-evaluation|WER, CER, and streaming speech recognition latency]]
 - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Chameleon: text and images in one sequence]] · **EN**
   - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-mixed-response|Chameleon — text and image in one response]]
   - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-vq-codebook|VQ-VAE — nearest codebook vector]]
@@ -1612,6 +1633,13 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-pixtral-packing|Pixtral — packing images]]
   - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-mrope-frequencies|MRoPE — coordinates and frequencies]]
   - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-tile-boxes|Visual grounding — boxes from overlapping tiles]]
+- [[00 Учебник/16 Multimodal Models/64eb Синтез речи|Text-to-speech synthesis]] · **EN**
+  - [[00 Учебник/16 Multimodal Models/64eb Синтез речи#tts-text|Text normalization and pronunciation in TTS]]
+  - [[00 Учебник/16 Multimodal Models/64eb Синтез речи#tts-duration|Monotonic alignment and phoneme duration]]
+  - [[00 Учебник/16 Multimodal Models/64eb Синтез речи#tts-acoustic|Acoustic models and mel spectrograms]]
+  - [[00 Учебник/16 Multimodal Models/64eb Синтез речи#tts-vocoder|Neural vocoders and waveform generation]]
+  - [[00 Учебник/16 Multimodal Models/64eb Синтез речи#tts-codec|Speech synthesis with neural codec tokens]]
+  - [[00 Учебник/16 Multimodal Models/64eb Синтез речи#tts-evaluation|TTS intelligibility, naturalness, and latency]]
 - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Training vision-language models]] · **EN**
   - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-freeze|VLMs — freezing and fine-tuning the vision encoder]]
   - [[00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#vlm-training-targets|VLMs — target masking and token shifting]]

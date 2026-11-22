@@ -80,6 +80,8 @@ The course starts with mathematics and neural networks. It then covers language 
 - [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Information extraction from documents]] · **EN**
 - [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: the text-to-text Transformer]] · **EN**
 - [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Machine translation]] · **EN**
+- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста|Text summarization]] · **EN**
+- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/10 Ответы на вопросы|Question answering]] · **EN**
 
 <a id="vii-анатомия-современной-llm"></a>
 <a id="vi-anatomy-of-a-modern-llm"></a>
@@ -178,6 +180,8 @@ Start after CNNs and the Transformer. Follow visual representations into languag
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Training vision-language models]] · **EN**
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Reading documents: OCR, fields, and coordinates]] · **EN**
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|How models understand video and answer in speech]] · **EN**
+- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64ea Распознавание речи|Automatic speech recognition]] · **EN**
+- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64eb Синтез речи|Text-to-speech synthesis]] · **EN**
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Evaluating VLMs and measuring serving latency]] · **EN**
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Chameleon: text and images in one sequence]] · **EN**
 

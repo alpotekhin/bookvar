@@ -120,6 +120,12 @@ sections:
       - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md
         source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/08 Machine translation.md
         route: textbook/models/machine-translation
+      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста.md
+        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/09 Text summarization.md
+        route: textbook/models/summarization
+      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/10 Ответы на вопросы.md
+        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/10 Question answering.md
+        route: textbook/models/question-answering
       - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md
         source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md
         route: textbook/models/gpt-1
@@ -325,6 +331,12 @@ sections:
       - source: 00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md
         source_en: en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md
         route: textbook/multimodal/video-audio-omni
+      - source: 00 Учебник/16 Multimodal Models/64ea Распознавание речи.md
+        source_en: en/00 Textbook/16 Multimodal Models/64ea Automatic speech recognition.md
+        route: textbook/multimodal/speech-recognition
+      - source: 00 Учебник/16 Multimodal Models/64eb Синтез речи.md
+        source_en: en/00 Textbook/16 Multimodal Models/64eb Text-to-speech synthesis.md
+        route: textbook/multimodal/speech-synthesis
       - source: 00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md
         source_en: en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md
         route: textbook/multimodal/evaluation-serving
@@ -474,6 +486,12 @@ sections:
               - label: Машинный перевод
                 label_en: Machine translation
                 route: textbook/models/machine-translation
+              - label: Суммаризация текста
+                label_en: Text summarization
+                route: textbook/models/summarization
+              - label: Ответы на вопросы
+                label_en: Question answering
+                route: textbook/models/question-answering
           - label: V. От GPT-1 к LLaMA
             label_en: V. From GPT-1 to LLaMA
             items:
@@ -610,6 +628,12 @@ sections:
               - label: Как модели понимают видео и отвечают голосом
                 label_en: How models understand video and answer in speech
                 route: textbook/multimodal/video-audio-omni
+              - label: Распознавание речи
+                label_en: Automatic speech recognition
+                route: textbook/multimodal/speech-recognition
+              - label: Синтез речи
+                label_en: Text-to-speech synthesis
+                route: textbook/multimodal/speech-synthesis
               - label: Как оценивать качество и задержку VLM
                 label_en: Evaluating VLMs and measuring serving latency
                 route: textbook/multimodal/evaluation-serving

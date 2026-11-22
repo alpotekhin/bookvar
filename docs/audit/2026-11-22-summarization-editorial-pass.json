@@ -1,0 +1,226 @@
+{
+  "date": "2026-11-22",
+  "scope": "Text summarization in both locales, placed after machine translation and before GPT-1, with three original source diagrams. Adjacent chapter changes are limited to navigation and edition pins.",
+  "read_scope": [
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста.md",
+    "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/09 Text summarization.md",
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md (navigation only)",
+    "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/08 Machine translation.md (navigation only)",
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md (navigation only)",
+    "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md (navigation only)"
+  ],
+  "sources": [
+    {
+      "url": "https://aclanthology.org/D19-1387/",
+      "scope": "Sections 3–4 and Figure 1: CLS positions, interval segment embeddings, sentence labels, and trigram blocking."
+    },
+    {
+      "url": "https://aclanthology.org/P17-1099/",
+      "scope": "Sections 2.2–2.3 and Figure 3: mixture and coverage."
+    },
+    {
+      "url": "https://aclanthology.org/2020.acl-main.703/",
+      "scope": "Sections 2–3 and Figure 1(c): sequence reconstruction and conditional generation."
+    },
+    {
+      "url": "https://aclanthology.org/D18-1206/",
+      "scope": "Section 3: XSum one-sentence targets and comparison to multiple news highlights."
+    },
+    {
+      "url": "https://aclanthology.org/W04-1013/",
+      "scope": "Sections 2–3: recall-oriented ROUGE-N and LCS."
+    },
+    {
+      "url": "https://aclanthology.org/2020.acl-main.173/",
+      "scope": "Section 2: intrinsic and extrinsic errors relative to the input."
+    },
+    {
+      "url": "https://aclanthology.org/2020.acl-main.450/",
+      "scope": "Sections 3–4: questions from the summary, extractive QA, and answer similarity."
+    },
+    {
+      "url": "https://aclanthology.org/faq/copyright/",
+      "scope": "Rights evidence for the three reproduced ACL figures, CC BY 4.0."
+    }
+  ],
+  "figures": [
+    {
+      "file": "liu-bertsum-fig1.png",
+      "license": "CC BY 4.0",
+      "modifications": "Complete diagram cropped from its PDF page at -scale-to 3900; no redraw or relabeling.",
+      "sha256": "9b028be467d755d50f6c4a5bbe3757f3d43ebf334260176ed1e68a9dc7f31d81",
+      "source": "https://aclanthology.org/D19-1387.pdf#page=3"
+    },
+    {
+      "file": "see-pointer-generator-fig3.png",
+      "license": "CC BY 4.0",
+      "modifications": "Complete diagram cropped from its PDF page at -scale-to 3900; no redraw or relabeling.",
+      "sha256": "c5f9550d4989b811c1befa193f92603eb8b2bb96d70f1d75d52352517e15f525",
+      "source": "https://aclanthology.org/P17-1099.pdf#page=3"
+    },
+    {
+      "file": "lewis-bart-fig1c.png",
+      "license": "CC BY 4.0",
+      "modifications": "Panel (c) cropped from Figure 1 at -scale-to 3900; no redraw or relabeling.",
+      "sha256": "6bbb24d4fec312f6ccd7462292c6d924189feed1a1519bbffb8104516151ff3f",
+      "source": "https://aclanthology.org/2020.acl-main.703.pdf#page=2"
+    }
+  ],
+  "files": [
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста.md",
+      "created": true,
+      "after_sha256": "c0e4c040bd0697002e6b2df19342f246450e321bde05caefbb6fb334173b9c71",
+      "changes": []
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md",
+      "before_sha256": "b59c7f5e7c02a14e29b77a7cb123e012087e769e54b93f35f5185826ea306172",
+      "after_sha256": "e0ba7df4b575e685850ae71268e6c71105a1ea4298bb16e41e4278e97baa45d5",
+      "changes": [
+        {
+          "old": "  - https://aclanthology.org/W18-6319/\n  - https://aclanthology.org/2020.emnlp-main.213/\n  - https://aclanthology.org/2021.tacl-1.87/\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]\"\n---\n\n«Не закрывайте клапан до полудня» можно перевести как *Do not close the\nvalve before noon* или *Before noon, do not shut the valve*. Вторая\n",
+          "new": "  - https://aclanthology.org/W18-6319/\n  - https://aclanthology.org/2020.emnlp-main.213/\n  - https://aclanthology.org/2021.tacl-1.87/\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста]]\"\n---\n\n«Не закрывайте клапан до полудня» можно перевести как *Do not close the\nvalve before noon* или *Before noon, do not shut the valve*. Вторая\n"
+        },
+        {
+          "old": "- Melvin Johnson и соавторы, [Google’s Multilingual Neural Machine Translation System](https://aclanthology.org/Q17-1024/), разд. 2 и 4: целевой язык и zero-shot; [NLLB-200](https://doi.org/10.1038/s41586-024-07335-x): добыча пар и проверка направлений.\n- Matt Post, [A Call for Clarity in Reporting BLEU Scores](https://aclanthology.org/W18-6319/); Ricardo Rei и соавторы, [COMET](https://aclanthology.org/2020.emnlp-main.213/), разд. 2.3 и рис. 1; Markus Freitag и соавторы, [Experts, Errors, and Context](https://aclanthology.org/2021.tacl-1.87/).\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: текст на входе и текст на выходе]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].\n",
+          "new": "- Melvin Johnson и соавторы, [Google’s Multilingual Neural Machine Translation System](https://aclanthology.org/Q17-1024/), разд. 2 и 4: целевой язык и zero-shot; [NLLB-200](https://doi.org/10.1038/s41586-024-07335-x): добыча пар и проверка направлений.\n- Matt Post, [A Call for Clarity in Reporting BLEU Scores](https://aclanthology.org/W18-6319/); Ricardo Rei и соавторы, [COMET](https://aclanthology.org/2020.emnlp-main.213/), разд. 2.3 и рис. 1; Markus Freitag и соавторы, [Experts, Errors, and Context](https://aclanthology.org/2021.tacl-1.87/).\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: текст на входе и текст на выходе]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста|Суммаризация текста]].\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/08 Machine translation.md",
+      "before_sha256": "3b55c7e4df182c712f84f560aa237f2d7bdb3777b53334d91aec836cdbfe3f43",
+      "after_sha256": "5b112215c164f78966efea76b2815cd2d1b1a90ef279f6bf27eb587f6d92e0b6",
+      "changes": [
+        {
+          "old": "locale: en\nsource_language: en\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md\"\ntranslation_status: current\ncanonical_revision: \"b59c7f5e7c02a14e29b77a7cb123e012087e769e54b93f35f5185826ea306172\"\ntranslation_reviewed: \"2026-11-22\"\nlast_updated: 2026-11-22\nlast_verified: 2026-11-22\nreference_terms:\n",
+          "new": "locale: en\nsource_language: en\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md\"\ntranslation_status: current\ncanonical_revision: \"e0ba7df4b575e685850ae71268e6c71105a1ea4298bb16e41e4278e97baa45d5\"\ntranslation_reviewed: \"2026-11-22\"\nlast_updated: 2026-11-22\nlast_verified: 2026-11-22\nreference_terms:\n"
+        },
+        {
+          "old": "- Melvin Johnson et al., [Google’s Multilingual Neural Machine Translation System](https://aclanthology.org/Q17-1024/), Sections 2 and 4: selecting the target language and zero-shot translation; [NLLB-200](https://doi.org/10.1038/s41586-024-07335-x): mining and evaluating translation directions.\n- Matt Post, [A Call for Clarity in Reporting BLEU Scores](https://aclanthology.org/W18-6319/); Ricardo Rei et al., [COMET](https://aclanthology.org/2020.emnlp-main.213/), Section 2.3 and Figure 1; Markus Freitag et al., [Experts, Errors, and Context](https://aclanthology.org/2021.tacl-1.87/).\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 and text-to-text tasks]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].\n",
+          "new": "- Melvin Johnson et al., [Google’s Multilingual Neural Machine Translation System](https://aclanthology.org/Q17-1024/), Sections 2 and 4: selecting the target language and zero-shot translation; [NLLB-200](https://doi.org/10.1038/s41586-024-07335-x): mining and evaluating translation directions.\n- Matt Post, [A Call for Clarity in Reporting BLEU Scores](https://aclanthology.org/W18-6319/); Ricardo Rei et al., [COMET](https://aclanthology.org/2020.emnlp-main.213/), Section 2.3 and Figure 1; Markus Freitag et al., [Experts, Errors, and Context](https://aclanthology.org/2021.tacl-1.87/).\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 and text-to-text tasks]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста|Text summarization]].\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md",
+      "before_sha256": "49fed5b4ed154e9b5ad1b74b81cc3b6979e411846f7351886df2bf4be911b815",
+      "after_sha256": "6c4aa3b6b597ba3de45fdb4aad2fff178a18b0a66bd9b0bb95c50d62723dfa6e",
+      "changes": [
+        {
+          "old": "title: GPT-1 — генеративное предобучение\ntype: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-21\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"\nprimary_sources:\n  - https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf\n  - https://github.com/openai/finetune-transformer-lm/tree/a69b5c43b0452462890bca8ff92fb75dee9290cf\n",
+          "new": "title: GPT-1 — генеративное предобучение\ntype: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-21\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"\nprimary_sources:\n  - https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf\n  - https://github.com/openai/finetune-transformer-lm/tree/a69b5c43b0452462890bca8ff92fb75dee9290cf\n"
+        },
+        {
+          "old": "- [Stanford CS224n, Lecture 9: Pretraining, слайды 46–50](https://web.stanford.edu/class/cs224n/slides/cs224n-spr2024-lecture09-pretraining-updated.pdf#page=46). Языковая и классификационная головы, GPT-1, формат NLI и результаты; оригинал на английском.\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектурных паттерна]] — видимость входа и обучающие задачи.\n- [[02 Areas/ML & DL/Papers/GPT 1.0|Старая заметка о GPT-1]] — дополнительные записи; не заменяет первичную статью.\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Машинный перевод]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].\n",
+          "new": "- [Stanford CS224n, Lecture 9: Pretraining, слайды 46–50](https://web.stanford.edu/class/cs224n/slides/cs224n-spr2024-lecture09-pretraining-updated.pdf#page=46). Языковая и классификационная головы, GPT-1, формат NLI и результаты; оригинал на английском.\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектурных паттерна]] — видимость входа и обучающие задачи.\n- [[02 Areas/ML & DL/Papers/GPT 1.0|Старая заметка о GPT-1]] — дополнительные записи; не заменяет первичную статью.\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста|Суммаризация текста]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md",
+      "before_sha256": "e4f54f69aeae47affa51a972c8017b441803becae6bef524286a50d82db0a1de",
+      "after_sha256": "61b5984d4c0351ea24e647f4aac98498acce1a1675a24b4d8a02cf7c886074d0",
+      "changes": [
+        {
+          "old": "type: textbook-chapter\nstatus: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"49fed5b4ed154e9b5ad1b74b81cc3b6979e411846f7351886df2bf4be911b815\"\ntranslation_reviewed: \"2026-11-21\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\"\nlast_updated: 2026-11-21\nprimary_sources:\n  - https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf\n  - https://github.com/openai/finetune-transformer-lm/tree/a69b5c43b0452462890bca8ff92fb75dee9290cf\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"\n---\n\n# GPT-1: generative pre-training\n",
+          "new": "type: textbook-chapter\nstatus: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"6c4aa3b6b597ba3de45fdb4aad2fff178a18b0a66bd9b0bb95c50d62723dfa6e\"\ntranslation_reviewed: \"2026-11-21\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\"\nlast_updated: 2026-11-21\nprimary_sources:\n  - https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf\n  - https://github.com/openai/finetune-transformer-lm/tree/a69b5c43b0452462890bca8ff92fb75dee9290cf\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"\n---\n\n# GPT-1: generative pre-training\n"
+        },
+        {
+          "old": "- [Stanford CS224n, Lecture 9: Pretraining, slides 46–50](https://web.stanford.edu/class/cs224n/slides/cs224n-spr2024-lecture09-pretraining-updated.pdf#page=46). Language and classification heads, GPT-1, NLI formatting, and results, in the original English.\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three architectural patterns]] — input visibility and training objectives.\n- [[02 Areas/ML & DL/Papers/GPT 1.0|Earlier GPT-1 note]] — additional notes, not a replacement for the primary paper.\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Machine translation]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].\n",
+          "new": "- [Stanford CS224n, Lecture 9: Pretraining, slides 46–50](https://web.stanford.edu/class/cs224n/slides/cs224n-spr2024-lecture09-pretraining-updated.pdf#page=46). Language and classification heads, GPT-1, NLI formatting, and results, in the original English.\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three architectural patterns]] — input visibility and training objectives.\n- [[02 Areas/ML & DL/Papers/GPT 1.0|Earlier GPT-1 note]] — additional notes, not a replacement for the primary paper.\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста|Text summarization]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].\n"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "6e40801a63fa01e892a14c02ecd182b90b8cf7ea7e8bd3b09ccc0974b7eeaf44",
+      "after_sha256": "0cd6cacf80a2c8b54a7217c8053a07ef82be095d6ffe741855d617654d0bb8d8",
+      "changes": [
+        {
+          "old": "        route: textbook/models/t5\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/08 Machine translation.md\n        route: textbook/models/machine-translation\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md\n        route: textbook/models/gpt-1\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md\n",
+          "new": "        route: textbook/models/t5\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/08 Machine translation.md\n        route: textbook/models/machine-translation\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/09 Text summarization.md\n        route: textbook/models/summarization\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md\n        route: textbook/models/gpt-1\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md\n"
+        },
+        {
+          "old": "                route: textbook/models/t5\n              - label: Машинный перевод\n                label_en: Machine translation\n                route: textbook/models/machine-translation\n          - label: V. От GPT-1 к LLaMA\n            label_en: V. From GPT-1 to LLaMA\n            items:\n              - label: GPT-1 — генеративное предобучение\n",
+          "new": "                route: textbook/models/t5\n              - label: Машинный перевод\n                label_en: Machine translation\n                route: textbook/models/machine-translation\n              - label: Суммаризация текста\n                label_en: Text summarization\n                route: textbook/models/summarization\n          - label: V. От GPT-1 к LLaMA\n            label_en: V. From GPT-1 to LLaMA\n            items:\n              - label: GPT-1 — генеративное предобучение\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "42e86ebe521074e3bd0d0b35a5100eba529bdfc491d02b7097ee02af237ea8e7",
+      "after_sha256": "bd05c700a9498c0fa194ecf7368d32b7d101834a59d3f8959f771226cb7a9e35",
+      "changes": [
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Классификация документов]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Извлечение информации из документов]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 — text-to-text Transformer]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Машинный перевод]]\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n<a id=\"vi-анатомия-современной-llm\"></a>\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Классификация документов]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Извлечение информации из документов]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 — text-to-text Transformer]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Машинный перевод]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста|Суммаризация текста]]\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n<a id=\"vi-анатомия-современной-llm\"></a>\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "a39e35c268b6002c18a40e156641fb56ac8d993988b66924841cc3d514c581d9",
+      "after_sha256": "5df440a3f7e4d68a405c4b6c4bbe293a00e931e4bc0b6f121fa9ca4751ce9400",
+      "changes": [
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Document classification]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Information extraction from documents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: the text-to-text Transformer]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Machine translation]] · **EN**\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n<a id=\"vi-anatomy-of-a-modern-llm\"></a>\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Document classification]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Information extraction from documents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: the text-to-text Transformer]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Machine translation]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста|Text summarization]] · **EN**\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n<a id=\"vi-anatomy-of-a-modern-llm\"></a>\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "6fd812cfcd1dbb175b1274f777d945a5aeb284843f1eef40b1cb4184cb6bde77",
+      "after_sha256": "2aa6701793a806b4991777781ed46abea7233e3c660cfa18e3936b2f867c17de",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-wordpiece-alignment|NER на BERT: выравнивание слов и субтокенов]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-constrained-decoding|NER: декодирование допустимой цепочки]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-span-metrics|Точность и полнота по границам сущностей]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-nested|Вложенные сущности и классификация фрагментов]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектуры Transformer]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна#decoder-only-next-token|Decoder-only — маска и следующий токен]]\n- [[00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer|Attention для перевода]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa и DeBERTa]]\n",
+          "new": "  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-wordpiece-alignment|NER на BERT: выравнивание слов и субтокенов]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-constrained-decoding|NER: декодирование допустимой цепочки]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-span-metrics|Точность и полнота по границам сущностей]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-nested|Вложенные сущности и классификация фрагментов]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста|Суммаризация текста]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста#sum-task|Постановка задачи суммаризации]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста#sum-extractive|Извлекающая суммаризация и BERTSum]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста#sum-generation|Генерация резюме и pointer-generator]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста#sum-rouge|Оценивание резюме с ROUGE]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста#sum-faithfulness|Покрытие и верность резюме источнику]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста#sum-long-documents|Суммаризация длинных документов]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектуры Transformer]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна#decoder-only-next-token|Decoder-only — маска и следующий токен]]\n- [[00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer|Attention для перевода]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa и DeBERTa]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "875a6a7d9aab38a6071c8907d12f7d5a270a7308e135fe513bd0af619d479110",
+      "after_sha256": "34776143f190da30137c4976a4fc7f566d8dbe5b2c2e9063b5d066d173f4d57d",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-nested|Nested entities and span classification]]\n- [[00 Учебник/05 Attention и Transformer/04 Позиционная информация|Positional information]] · **EN**\n- [[00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V|Self-attention: Q, K, and V]] · **EN**\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: the text-to-text Transformer]] · **EN**\n- [[00 Учебник/05 Attention и Transformer/03 Полный Transformer|The complete encoder–decoder Transformer]] · **EN**\n  - [[00 Учебник/05 Attention и Transformer/03 Полный Transformer#transformer-dropout|Attention, residual and embedding dropout]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three Transformer architectures]] · **EN**\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна#decoder-only-next-token|Decoder-only — masking and next-token prediction]]\n",
+          "new": "  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-nested|Nested entities and span classification]]\n- [[00 Учебник/05 Attention и Transformer/04 Позиционная информация|Positional information]] · **EN**\n- [[00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V|Self-attention: Q, K, and V]] · **EN**\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: the text-to-text Transformer]] · **EN**\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста|Text summarization]] · **EN**\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста#sum-task|Text summarization tasks]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста#sum-extractive|Extractive summarization and BERTSum]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста#sum-generation|Abstractive summarization and pointer-generators]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста#sum-rouge|Measuring summary overlap with ROUGE]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста#sum-faithfulness|Summary coverage and faithfulness]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста#sum-long-documents|Summarizing long documents]]\n- [[00 Учебник/05 Attention и Transformer/03 Полный Transformer|The complete encoder–decoder Transformer]] · **EN**\n  - [[00 Учебник/05 Attention и Transformer/03 Полный Transformer#transformer-dropout|Attention, residual and embedding dropout]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three Transformer architectures]] · **EN**\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна#decoder-only-next-token|Decoder-only — masking and next-token prediction]]\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "cac074b6418fbaee5a107d59a81cb62ac7ff98a60b57e2b5956b6984a9aa2822",
+      "after_sha256": "656df80368ea45d05f1d3325d49f434b5f771a31cf5b107ee151ee9851b3fbfa",
+      "changes": [
+        {
+          "old": "    modifications: copied without visual modification from the source slide render\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\nassets:\n  - id: curated-heffernan-laser3-fig1-d1a7149e6afe\n    asset: 00 Учебник/Assets/Figures/curated/machine-translation-2026-11-22/heffernan-laser3-fig1.png\n    title: \"LASER3 auxiliary MLM and multilingual distillation, Figure 1\"\n    author: \"Kevin Heffernan, Onur Çelebi, and Holger Schwenk\"\n",
+          "new": "    modifications: copied without visual modification from the source slide render\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\nassets:\n  - id: curated-liu-bertsum-fig1-9b028be467d7\n    asset: 00 Учебник/Assets/Figures/curated/summarization-2026-11-22/liu-bertsum-fig1.png\n    title: \"Original BERT and BERTSum input layouts, Figure 1\"\n    author: \"Yang Liu and Mirella Lapata\"\n    source_url: https://aclanthology.org/D19-1387.pdf#page=3\n    source_image_url: https://aclanthology.org/D19-1387.pdf\n    rights_evidence: https://aclanthology.org/faq/copyright/\n    sha256: 9b028be467d755d50f6c4a5bbe3757f3d43ebf334260176ed1e68a9dc7f31d81\n    source_pdf_sha256: 26dc6cb0f01b75599edbdc7d4ab59eed017c5736b5edf9d20607f3374413b31c\n    source_page: 3\n    dimensions_px: [2130, 655]\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    derivation: source-pdf-render\n    crop_px: [317, 285, 2130, 655]\n    modifications: \"Complete diagram cropped from its PDF page at -scale-to 3900; no redraw or relabeling.\"\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-22\"\n    used_in:\n      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста.md\n      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/09 Text summarization.md\n  - id: curated-see-pointer-generator-fig3-c5f9550d4989\n    asset: 00 Учебник/Assets/Figures/curated/summarization-2026-11-22/see-pointer-generator-fig3.png\n    title: \"Pointer-generator for text summarization, Figure 3\"\n    author: \"Abigail See, Peter J. Liu, and Christopher D. Manning\"\n    source_url: https://aclanthology.org/P17-1099.pdf#page=3\n    source_image_url: https://aclanthology.org/P17-1099.pdf\n    rights_evidence: https://aclanthology.org/faq/copyright/\n    sha256: c5f9550d4989b811c1befa193f92603eb8b2bb96d70f1d75d52352517e15f525\n    source_pdf_sha256: 499a1f95e7f291821233351fc6fd1beecce55dbb2cae05bcf7386ab6df6aef89\n    source_page: 3\n    dimensions_px: [1915, 1060]\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    derivation: source-pdf-render\n    crop_px: [435, 273, 1915, 1060]\n    modifications: \"Complete diagram cropped from its PDF page at -scale-to 3900; no redraw or relabeling.\"\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-22\"\n    used_in:\n      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста.md\n      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/09 Text summarization.md\n  - id: curated-lewis-bart-fig1c-6bbb24d4fec3\n    asset: 00 Учебник/Assets/Figures/curated/summarization-2026-11-22/lewis-bart-fig1c.png\n    title: \"BART denoising encoder-decoder, Figure 1(c)\"\n    author: \"Mike Lewis, Yinhan Liu, Naman Goyal, Marjan Ghazvininejad, Abdelrahman Mohamed, Omer Levy, Veselin Stoyanov, and Luke Zettlemoyer\"\n    source_url: https://aclanthology.org/2020.acl-main.703.pdf#page=2\n    source_image_url: https://aclanthology.org/2020.acl-main.703.pdf\n    rights_evidence: https://aclanthology.org/faq/copyright/\n    sha256: 6bbb24d4fec312f6ccd7462292c6d924189feed1a1519bbffb8104516151ff3f\n    source_pdf_sha256: 3562c723fe7bebb8b362533122b3ca5c065037c8e8d67460654cf3740652bb59\n    source_page: 2\n    dimensions_px: [1037, 400]\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    derivation: source-pdf-render\n    crop_px: [872, 903, 1037, 400]\n    modifications: \"Panel (c) cropped from Figure 1 at -scale-to 3900; no redraw or relabeling.\"\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-22\"\n    used_in:\n      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста.md\n      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/09 Text summarization.md\n  - id: curated-heffernan-laser3-fig1-d1a7149e6afe\n    asset: 00 Учебник/Assets/Figures/curated/machine-translation-2026-11-22/heffernan-laser3-fig1.png\n    title: \"LASER3 auxiliary MLM and multilingual distillation, Figure 1\"\n    author: \"Kevin Heffernan, Onur Çelebi, and Holger Schwenk\"\n"
+        }
+      ]
+    }
+  ],
+  "added_sources": [
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/09 Text summarization.md",
+      "sha256": "5b5d889cc41a9ff2877c5b881de56ce6989c0bb571a69076210460e5a66acfc2",
+      "canonical": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста.md",
+      "route": "textbook/models/summarization",
+      "status": "current",
+      "en_body_read": true,
+      "outstanding_expansions": []
+    }
+  ],
+  "verification": {
+    "explanation": "The repair report anchors both model objectives and both evaluation denominators. Distinguish estimated scores and hand-written QA from measured model behavior.",
+    "style": "Both editions explain one example throughout. Edited the prose against the full NO AI Slop checklist; the original figure words are unchanged.",
+    "example": "Shared executable example validates sentences 2 and 3, mixture probability 0.17, coverage 0.25, ROUGE-1 F1 0.900 and 0.632, and average answer F1 0.5.",
+    "publication": "92 core chapters and 160 topic owners. Root build: 2113 pages. Publication tests: 849 passed, 13 skipped. Output tests: 381 passed. Internal route, fragment, and file check: 0 broken.",
+    "visual": "Checked both editions in Chromium at widths 390 and 1440. Three original figures loaded without clipping; the figure viewer reached the end of the wide diagram and returned to fit at 1×. KaTeX rendered without horizontal overflow, and a wide English table scrolls to its final column.",
+    "open": "Question answering, speech recognition, and speech synthesis."
+  }
+}

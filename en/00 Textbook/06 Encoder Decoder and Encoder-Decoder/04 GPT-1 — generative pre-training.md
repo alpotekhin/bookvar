@@ -4,14 +4,14 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "49fed5b4ed154e9b5ad1b74b81cc3b6979e411846f7351886df2bf4be911b815"
+canonical_revision: "71c46983e225866cbbaf738b42797ff997cd82fa06de30c0177de09cbce20fa7"
 translation_reviewed: "2026-11-21"
 translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md"
 last_updated: 2026-11-21
 primary_sources:
   - https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf
   - https://github.com/openai/finetune-transformer-lm/tree/a69b5c43b0452462890bca8ff92fb75dee9290cf
-previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод]]"
+previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/10 Ответы на вопросы]]"
 next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]"
 ---
 
@@ -761,5 +761,5 @@ without separate fine-tuning.
 - [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three architectural patterns]] — input visibility and training objectives.
 - [[02 Areas/ML & DL/Papers/GPT 1.0|Earlier GPT-1 note]] — additional notes, not a replacement for the primary paper.
 
-**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Machine translation]].
+**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/10 Ответы на вопросы|Question answering]].
 **Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].

@@ -5,6 +5,18 @@
     "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md": "2026-11-22-agent-security-ru-revision.json"
   },
   "editorialRevisions": {
+    "00 Учебник/16 Multimodal Models/64ea Распознавание речи.md": {
+      "currentSha256": "61d7736f676c43ae95a160986ba1a35157a2ab6be0dc4a10c13439b39789fdfb",
+      "stopBefore": "2026-11-22-speech-recognition-editorial-pass.json"
+    },
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста.md": {
+      "currentSha256": "2bcfcd3c6452747ff0ceca05ad5f274bd0a7c43b39fc9779edf7e6841246b969",
+      "stopBefore": "2026-11-22-summarization-editorial-pass.json"
+    },
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md": {
+      "currentSha256": "e0ba7df4b575e685850ae71268e6c71105a1ea4298bb16e41e4278e97baa45d5",
+      "stopBefore": "2026-11-22-machine-translation-editorial-pass.json"
+    },
     "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов.md": {
       "currentSha256": "ce4198c891a166efc1b940abd3d677f01457b1845d392a05b6d65d5f861a9644",
       "stopBefore": "2026-11-22-document-classification-editorial-pass.json"
@@ -54,11 +66,11 @@
       "stopBefore": "2026-11-22-vlm-evaluation-serving-editorial-pass.json"
     },
     "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md": {
-      "currentSha256": "42f6014d53683f42a0ffa84d8f94f39d0f64c4bd004e14ea4cde6db8726c3acb",
+      "currentSha256": "b052035b0af0931e63748743d91664c096a5a39e1dd6df810f14721b9c5bbd09",
       "stopBefore": "2026-11-22-video-omni-editorial-pass.json"
     },
     "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md": {
-      "currentSha256": "f95b360a17fb01791e6d1076ae0fd32af888a9cf6a2cbf6d3f670a6ff400df8d",
+      "currentSha256": "d8fedb7077a3ade4262c0d37f2d9d8b35062d51d083c83a9c3c83056c062b607",
       "stopBefore": "2026-11-22-ocr-grounding-editorial-pass.json"
     },
     "00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md": {
@@ -226,7 +238,7 @@
       "stopBefore": "2026-11-21-gpt1-editorial-pass.json"
     },
     "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md": {
-      "currentSha256": "49fed5b4ed154e9b5ad1b74b81cc3b6979e411846f7351886df2bf4be911b815",
+      "currentSha256": "71c46983e225866cbbaf738b42797ff997cd82fa06de30c0177de09cbce20fa7",
       "stopBefore": "2026-11-21-t5-editorial-pass.json"
     }
   },
@@ -3568,7 +3580,7 @@
       "exit": 0
     },
     "readReceipt": {
-      "currentHashMatches": 159,
+      "currentHashMatches": 163,
       "outsideTextbookManifest": 0,
       "unreadOwnersInRoutePass": 0
     },
@@ -3701,6 +3713,42 @@
   "scope": "Conceptual and editorial reading-route review, separate from the completed 31-note archive reconciliation.",
   "goalTurnClassification": "progress: the preceding turn completed the English GPT-to-LLaMA reader route. This turn resolved the linked-only sequential DeepSeek-V3 MTP figure using the author repository PDF and MIT notice, integrated it with the CS336 topic and numerical/source-verified chapter explanation, and verified the final root and /bookvar artifacts. See 2026-11-09-deepseek-mtp-original-additions.json. The remaining inherited illustrations, whole-book source completeness and authorized release remain open; no commit, push or deployment.",
   "fullReads": [
+    {
+      "path": "00 Учебник/16 Multimodal Models/64eb Синтез речи.md",
+      "route": "textbook/multimodal/speech-synthesis",
+      "sha256": "26320709949219c813067505986fe48a25fb53ebdc4973cf25fc5498700c2e93",
+      "lines": 369,
+      "read": "Both locales checked through normalization, monotone alignment, acoustic prediction, waveform synthesis, codecs and listening/latency evaluation.",
+      "sourceComparisonEvidence": "docs/audit/2026-11-22-speech-synthesis-editorial-pass.json",
+      "reviewStage": "Complete new chapter and bounded navigation edits; values are teaching examples, not measured synthesis quality."
+    },
+    {
+      "path": "00 Учебник/16 Multimodal Models/64ea Распознавание речи.md",
+      "route": "textbook/multimodal/speech-recognition",
+      "sha256": "c278ae8338947819776dc7f0fbb0d89b663bbc3010c4bd93988f38661e77b117",
+      "lines": 391,
+      "read": "Both editions cover framing, the CTC path sum and decoding, transducer transitions, Whisper's outputs, WER, and streaming delay.",
+      "sourceComparisonEvidence": "docs/audit/2026-11-22-speech-recognition-editorial-pass.json",
+      "reviewStage": "Complete new chapter and bounded navigation edits; worked examples, not ASR benchmarks."
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/10 Ответы на вопросы.md",
+      "route": "textbook/models/question-answering",
+      "sha256": "09ec2334e7f677d69c11d2a1ee58b54c305f119a575313acd542ebfeb547d8d1",
+      "lines": 359,
+      "read": "Both editions checked through passage retrieval, joint span ranking, abstention, answer scoring, and generation from multiple passages.",
+      "sourceComparisonEvidence": "docs/audit/2026-11-22-question-answering-editorial-pass.json",
+      "reviewStage": "Complete new chapter and bounded navigation edits; toy numbers independently checked rather than reported as QA benchmark results."
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста.md",
+      "route": "textbook/models/summarization",
+      "sha256": "c0e4c040bd0697002e6b2df19342f246450e321bde05caefbb6fb334173b9c71",
+      "lines": 329,
+      "read": "Both editions read through sentence selection, word-level generation, BART, overlap, and checking claims.",
+      "sourceComparisonEvidence": "docs/audit/2026-11-22-summarization-editorial-pass.json",
+      "reviewStage": "Complete new chapter. Numbers are from the worked example; they are not summarizer benchmarks."
+    },
     {
       "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md",
       "route": "textbook/models/machine-translation",
@@ -8053,7 +8101,7 @@
       "reviewStage": "Whole-owner reading and scoped source, CPU and reader evidence; no new online effect claim."
     }
   ],
-  "reviewLimits": "145 complete canonical-owner reads in this selected route pass and 14 reused earlier whole-owner reads with exact current hashes or separately reviewed bounded deltas. Also 28 complete atlas documents and nine English editions in the original pass, with later English editions documented separately. Not a fresh whole-book reread or explanation/source-completeness acceptance of all 159 owners. CPU/source checks, prose review, factual corrections, material permissions and selected visual checks remain distinct; no GPU benchmark or deployment inferred.",
+  "reviewLimits": "149 complete canonical-owner reads in this selected route pass and 14 reused earlier whole-owner reads with exact current hashes or separately reviewed bounded deltas. Also 28 complete atlas documents and nine English editions in the original pass, with later English editions documented separately. Not a fresh whole-book reread or explanation/source-completeness acceptance of all 163 owners. CPU/source checks, prose review, factual corrections, material permissions and selected visual checks remain distinct; no GPU benchmark or deployment inferred.",
   "acceptedRouteObservations": [
     "Lookup, sequence axes, shared parameter gradients and masked pooling are established before attention.",
     "Tokenization explains train/apply/decode and algorithm-specific choices rather than assuming BPE is longest-match search.",

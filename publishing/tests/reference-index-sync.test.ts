@@ -86,7 +86,7 @@ describe('reference index follows the chapter that owns each explanation', () =>
     const output = execFileSync(resolve(root, 'publishing/node_modules/.bin/tsx'),
       [resolve(root, 'publishing/tools/sync-topic-index.ts'), '--check'],
       { cwd: root, encoding: 'utf8', timeout: 20000 });
-    expect(JSON.parse(output)).toEqual({ mode: 'check', topics: 159,
+    expect(JSON.parse(output)).toEqual({ mode: 'check', topics: 163,
       indexes: ['01 Справочник/_index.md', 'en/01 Reference/_index.md'] });
   }, 25000);
 });

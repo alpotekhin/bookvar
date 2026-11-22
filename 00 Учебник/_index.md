@@ -73,6 +73,8 @@ last_updated: 2026-11-14
 - [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Извлечение информации из документов]]
 - [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 — text-to-text Transformer]]
 - [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Машинный перевод]]
+- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста|Суммаризация текста]]
+- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/10 Ответы на вопросы|Ответы на вопросы]]
 
 <a id="vii-анатомия-современной-llm"></a>
 <a id="vi-анатомия-современной-llm"></a>
@@ -170,6 +172,8 @@ last_updated: 2026-11-14
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Как обучают мультимодальные модели]]
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Чтение документов: OCR, поля и координаты]]
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|Как модели понимают видео и отвечают голосом]]
+- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64ea Распознавание речи|Распознавание речи]]
+- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64eb Синтез речи|Синтез речи]]
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Как оценивать качество и задержку VLM]]
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Chameleon: текст и изображения в одной последовательности]]
 

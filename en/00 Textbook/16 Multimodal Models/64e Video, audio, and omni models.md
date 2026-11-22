@@ -4,14 +4,14 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "f95b360a17fb01791e6d1076ae0fd32af888a9cf6a2cbf6d3f670a6ff400df8d"
+canonical_revision: "d8fedb7077a3ade4262c0d37f2d9d8b35062d51d083c83a9c3c83056c062b607"
 translation_reviewed: "2026-11-22"
 translation_of: "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md"
 last_updated: 2026-11-22
 last_verified: 2026-11-22
 previous: "[[en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding]]"
 next:
-  - "[[en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving]]"
+  - "[[en/00 Textbook/16 Multimodal Models/64ea Automatic speech recognition]]"
 source_unit_id:
   - meeting-07-slides-xgen-video
   - meeting-07-slides-gens
@@ -871,4 +871,4 @@ reaches the client too late.
 - [xGen-MM-Vid §2.1–2.3](https://arxiv.org/abs/2410.16267v2); [GenS §2](https://aclanthology.org/2025.findings-acl.921/); [EnCodec §3.1–3.2](https://arxiv.org/abs/2210.13438v1); [Moshi §3.3–3.4](https://arxiv.org/abs/2410.00037v2); [Whisper §2.2–2.3](https://arxiv.org/abs/2212.04356v1).
 - [Qwen2.5-Omni §2.1–2.4](https://arxiv.org/abs/2503.20215v1); [Qwen3-Omni §2.1–2.5](https://arxiv.org/abs/2509.17765v1); [Qwen3-VL §2.3](https://arxiv.org/abs/2511.21631v1); [ImageBind §3](https://arxiv.org/abs/2305.05665v1).
 - [Stanford CS336 Lecture 17](https://cs336.stanford.edu/) and [Berkeley Advanced LLM Agents Meeting 7](https://rdi.berkeley.edu/adv-llm-agents/sp25).
-- Previous: [[en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding|Documents, OCR, and grounding]]. Next: [[en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving|Evaluation and VLM serving]].
+- Previous: [[en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding|Documents, OCR, and grounding]]. Next: [[en/00 Textbook/16 Multimodal Models/64ea Automatic speech recognition|Automatic speech recognition]].

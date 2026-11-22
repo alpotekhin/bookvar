@@ -236,7 +236,7 @@ describe('loadManifest', () => {
     expect([...sidebarRoutes].sort()).toEqual(textbook.pages.map((page) => page.route).sort());
     const paths = readingPaths(textbook);
     const main = paths.find(path => path.id === 'main')!.routes;
-    expect(main).toHaveLength(91);
+    expect(main).toHaveLength(95);
     expect(paths.filter(path => path.id !== 'main')).toHaveLength(10);
     expect(main.slice(main.indexOf('textbook/models/gpt-1'), main.indexOf('textbook/models/gpt-1') + 4))
       .toEqual(['textbook/models/gpt-1', 'textbook/models/gpt-2', 'textbook/models/gpt-3',
@@ -265,7 +265,17 @@ describe('loadManifest', () => {
     expect(readingNeighbours(paths, 'textbook/models/t5')?.next)
       .toBe('textbook/models/machine-translation');
     expect(readingNeighbours(paths, 'textbook/models/machine-translation')?.next)
+      .toBe('textbook/models/summarization');
+    expect(readingNeighbours(paths, 'textbook/models/summarization')?.next)
+      .toBe('textbook/models/question-answering');
+    expect(readingNeighbours(paths, 'textbook/models/question-answering')?.next)
       .toBe('textbook/models/gpt-1');
+    expect(readingNeighbours(paths, 'textbook/multimodal/video-audio-omni')?.next)
+      .toBe('textbook/multimodal/speech-recognition');
+    expect(readingNeighbours(paths, 'textbook/multimodal/speech-recognition')?.next)
+      .toBe('textbook/multimodal/speech-synthesis');
+    expect(readingNeighbours(paths, 'textbook/multimodal/speech-synthesis')?.next)
+      .toBe('textbook/multimodal/evaluation-serving');
     expect(readingNeighbours(paths, 'textbook/classical-ml/kernels-svm-rff')?.next).toBeUndefined();
     expect(readingNeighbours(paths, 'textbook/pretraining/moco-queue-momentum')?.next)
       .toBe('textbook/pretraining/mae-masked-autoencoders');

@@ -4,7 +4,7 @@ type: textbook-chapter
 status: canonical
 last_updated: 2026-11-22
 last_verified: 2026-11-22
-previous: "[[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели]]"
+previous: "[[00 Учебник/16 Multimodal Models/64eb Синтез речи]]"
 next:
   - "[[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon]]"
 reference_terms:
@@ -864,4 +864,4 @@ assert usable.sum() / measurement_seconds == 6
 - Gursimran Singh et al., [EPD Disaggregation](https://proceedings.mlr.press/v267/singh25d.html), §3.1–3.2: перенос тензоров, независимое кодирование, распределение ресурсов и смена ролей.
 - [vLLM](https://github.com/vllm-project/vllm/tree/7b569ec8953cf8099638a6d2ee1e915b75867c3a), зафиксированная версия документации и EncoderCacheManager: обработка media, три вычислительных кэша и ограничения безопасности. У других релизов набор настроек может отличаться.
 - Связано: [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline|физика inference]] и [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация|оценивание и контаминация]].
-- Предыдущая глава: [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|Видео, аудио и речь]]. Дополнительная тема: [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|Диффузионные и flow-модели изображений]].
+- Предыдущая глава: [[00 Учебник/16 Multimodal Models/64eb Синтез речи|Синтез речи]]. Дополнительная тема: [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|Диффузионные и flow-модели изображений]].

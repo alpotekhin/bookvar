@@ -6,7 +6,7 @@ last_updated: 2026-11-22
 last_verified: 2026-11-22
 previous: "[[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding]]"
 next:
-  - "[[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM]]"
+  - "[[00 Учебник/16 Multimodal Models/64ea Распознавание речи]]"
 reference_terms:
   - label: xGen-MM-Vid — временное сжатие после отбора кадров
     label_en: xGen-MM-Vid — temporal compression after frame sampling
@@ -910,4 +910,4 @@ assert np.isclose(snr_db, 10)
 - [Qwen2.5-VL](https://arxiv.org/abs/2502.13923v1), §2.1.2; [Qwen3-VL](https://arxiv.org/abs/2511.21631v1), §2.3: варианты представления времени.
 - Rohit Girdhar et al., [ImageBind](https://arxiv.org/abs/2305.05665v1), §3: общее пространство и межмодальное сравнение.
 - [Stanford CS336](https://cs336.stanford.edu/), Lecture 17; [Berkeley Advanced LLM Agents](https://rdi.berkeley.edu/adv-llm-agents/sp25), Meeting 7: мультимодальные архитектуры и видео.
-- Назад: [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|64.4]]. Далее: [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|64.6]].
+- Назад: [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|64.4]]. Далее: [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64ea Распознавание речи|Распознавание речи]].

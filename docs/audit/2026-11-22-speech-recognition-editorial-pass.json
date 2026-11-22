@@ -1,0 +1,237 @@
+{
+  "date": "2026-11-22",
+  "scope": "Introduce automatic speech recognition after audio representations and before VLM evaluation, with Russian and English editions, original visual evidence, and one reproducible example.",
+  "read_scope": [
+    "00 Учебник/16 Multimodal Models/64ea Распознавание речи.md",
+    "en/00 Textbook/16 Multimodal Models/64ea Automatic speech recognition.md",
+    "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md (navigation only)",
+    "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md (navigation only)",
+    "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md (navigation only)",
+    "en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md (navigation only)"
+  ],
+  "sources": [
+    {
+      "url": "https://web.stanford.edu/~jurafsky/slp3/16.pdf",
+      "scope": "Chapter 16: task, log-mel framing, encoder–decoder, CTC and transducer overview, word edit distance."
+    },
+    {
+      "url": "https://distill.pub/2017/ctc/",
+      "scope": "The Algorithm: collapse, loss and forward lattice, repeated and distinct labels, greedy and prefix beam search."
+    },
+    {
+      "url": "https://distill.pub/2017/ctc/#reuse",
+      "scope": "Article's explicit CC BY 4.0 grant for the two copied diagrams."
+    },
+    {
+      "url": "https://proceedings.mlr.press/v32/graves14.html",
+      "scope": "Section 3: path probability and conditional independence."
+    },
+    {
+      "url": "https://arxiv.org/abs/2006.11477v3",
+      "scope": "Sections 2–3: waveform features, masked contrastive learning, supervised CTC."
+    },
+    {
+      "url": "https://arxiv.org/abs/1211.3711v1",
+      "scope": "Section 2: original transducer, blank and label transitions, terminal blank."
+    },
+    {
+      "url": "https://proceedings.mlr.press/v202/xu23g.html",
+      "scope": "Sections 2–3 and Figure 1: joiner, path sums, durations and comparative alignment."
+    },
+    {
+      "url": "https://proceedings.mlr.press/v202/radford23a.html",
+      "scope": "Sections 2.1–2.3, 3.2 and A.1; Figure 1: features, labels, task and timestamp tokens, WER normalization, offline long-form inference."
+    },
+    {
+      "url": "https://proceedings.mlr.press/pmlr-license-agreement.html",
+      "scope": "CC BY 4.0 PMLR publication agreement; captions link to the original papers."
+    }
+  ],
+  "figures": [
+    {
+      "file": "hannun-ctc-collapse.svg",
+      "license": "CC BY 4.0",
+      "source": "https://distill.pub/2017/ctc/assets/ctc_alignment_steps.svg",
+      "modifications": "Original SVG copied byte-for-byte.",
+      "sha256": "d844064330116bcb1124113bf2d557b33833cf195d8876ed1c4bfc3aeb14faff"
+    },
+    {
+      "file": "hannun-ctc-forward.svg",
+      "license": "CC BY 4.0",
+      "source": "https://distill.pub/2017/ctc/assets/ctc_cost.svg",
+      "modifications": "Original SVG copied byte-for-byte.",
+      "sha256": "80d15891a2481679728416d67d83b7d17e54db91bdd4d4f3639cdf960c8db287"
+    },
+    {
+      "file": "xu-rnnt-tdt-fig1.png",
+      "license": "CC BY 4.0",
+      "source": "https://proceedings.mlr.press/v202/xu23g/xu23g.pdf#page=2",
+      "modifications": "Complete three-panel plot cropped from PDF at -scale-to 3900; no redraw or relabeling.",
+      "sha256": "bf46a4fa3a2a73b0e5291397dc71167593449096873d14b3e8b2b441bae5b0c4"
+    },
+    {
+      "file": "radford-whisper-task-fig1.png",
+      "license": "CC BY 4.0",
+      "source": "https://proceedings.mlr.press/v202/radford23a/radford23a.pdf#page=3",
+      "modifications": "The multitask training format panel cropped at -scale-to 3900; other panels and caption omitted, no redraw or relabeling.",
+      "sha256": "8cc564f1d0101742a3cf2015d40560f67a1e4c4b76bcb26bb2e58e1f6a28bb21"
+    }
+  ],
+  "files": [
+    {
+      "source": "00 Учебник/16 Multimodal Models/64ea Распознавание речи.md",
+      "created": true,
+      "after_sha256": "c278ae8338947819776dc7f0fbb0d89b663bbc3010c4bd93988f38661e77b117",
+      "changes": []
+    },
+    {
+      "source": "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+      "before_sha256": "f95b360a17fb01791e6d1076ae0fd32af888a9cf6a2cbf6d3f670a6ff400df8d",
+      "after_sha256": "d8fedb7077a3ade4262c0d37f2d9d8b35062d51d083c83a9c3c83056c062b607",
+      "changes": [
+        {
+          "old": "last_updated: 2026-11-22\nlast_verified: 2026-11-22\nprevious: \"[[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding]]\"\nnext:\n  - \"[[00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM]]\"\nreference_terms:\n  - label: xGen-MM-Vid — временное сжатие после отбора кадров\n    label_en: xGen-MM-Vid — temporal compression after frame sampling\n    anchor: xgen-video-temporal-compression\n",
+          "new": "last_updated: 2026-11-22\nlast_verified: 2026-11-22\nprevious: \"[[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding]]\"\nnext:\n  - \"[[00 Учебник/16 Multimodal Models/64ea Распознавание речи]]\"\nreference_terms:\n  - label: xGen-MM-Vid — временное сжатие после отбора кадров\n    label_en: xGen-MM-Vid — temporal compression after frame sampling\n    anchor: xgen-video-temporal-compression\n"
+        },
+        {
+          "old": "- Jin Xu et al., [Qwen2.5-Omni](https://arxiv.org/abs/2503.20215v1), §2.1–2.4; Qwen Team, [Qwen3-Omni](https://arxiv.org/abs/2509.17765v1), §2.1–2.5: восприятие, Talker, временные позиции и потоковый синтез.\n- [Qwen2.5-VL](https://arxiv.org/abs/2502.13923v1), §2.1.2; [Qwen3-VL](https://arxiv.org/abs/2511.21631v1), §2.3: варианты представления времени.\n- Rohit Girdhar et al., [ImageBind](https://arxiv.org/abs/2305.05665v1), §3: общее пространство и межмодальное сравнение.\n- [Stanford CS336](https://cs336.stanford.edu/), Lecture 17; [Berkeley Advanced LLM Agents](https://rdi.berkeley.edu/adv-llm-agents/sp25), Meeting 7: мультимодальные архитектуры и видео.\n- Назад: [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|64.4]]. Далее: [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|64.6]].\n",
+          "new": "- Jin Xu et al., [Qwen2.5-Omni](https://arxiv.org/abs/2503.20215v1), §2.1–2.4; Qwen Team, [Qwen3-Omni](https://arxiv.org/abs/2509.17765v1), §2.1–2.5: восприятие, Talker, временные позиции и потоковый синтез.\n- [Qwen2.5-VL](https://arxiv.org/abs/2502.13923v1), §2.1.2; [Qwen3-VL](https://arxiv.org/abs/2511.21631v1), §2.3: варианты представления времени.\n- Rohit Girdhar et al., [ImageBind](https://arxiv.org/abs/2305.05665v1), §3: общее пространство и межмодальное сравнение.\n- [Stanford CS336](https://cs336.stanford.edu/), Lecture 17; [Berkeley Advanced LLM Agents](https://rdi.berkeley.edu/adv-llm-agents/sp25), Meeting 7: мультимодальные архитектуры и видео.\n- Назад: [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|64.4]]. Далее: [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64ea Распознавание речи|Распознавание речи]].\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md",
+      "before_sha256": "df35a2edc8b28f504378cb266d93dc815920f0258c32999db97dd6f1b264b398",
+      "after_sha256": "683bf8e09551172c6b2d80aebcc6c1aebc1b23f7fafc7550354fb8376219b5bc",
+      "changes": [
+        {
+          "old": "type: textbook-chapter\nstatus: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"f95b360a17fb01791e6d1076ae0fd32af888a9cf6a2cbf6d3f670a6ff400df8d\"\ntranslation_reviewed: \"2026-11-22\"\ntranslation_of: \"00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md\"\nlast_updated: 2026-11-22\nlast_verified: 2026-11-22\nprevious: \"[[en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding]]\"\nnext:\n  - \"[[en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving]]\"\nsource_unit_id:\n  - meeting-07-slides-xgen-video\n  - meeting-07-slides-gens\nprimary_sources:\n",
+          "new": "type: textbook-chapter\nstatus: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"d8fedb7077a3ade4262c0d37f2d9d8b35062d51d083c83a9c3c83056c062b607\"\ntranslation_reviewed: \"2026-11-22\"\ntranslation_of: \"00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md\"\nlast_updated: 2026-11-22\nlast_verified: 2026-11-22\nprevious: \"[[en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding]]\"\nnext:\n  - \"[[en/00 Textbook/16 Multimodal Models/64ea Automatic speech recognition]]\"\nsource_unit_id:\n  - meeting-07-slides-xgen-video\n  - meeting-07-slides-gens\nprimary_sources:\n"
+        },
+        {
+          "old": "- [Flamingo](https://arxiv.org/abs/2204.14198), [Qwen2.5-VL](https://arxiv.org/abs/2502.13923), [Qwen2.5-Omni](https://arxiv.org/abs/2503.20215), and [ImageBind](https://arxiv.org/abs/2305.05665).\n- [xGen-MM-Vid §2.1–2.3](https://arxiv.org/abs/2410.16267v2); [GenS §2](https://aclanthology.org/2025.findings-acl.921/); [EnCodec §3.1–3.2](https://arxiv.org/abs/2210.13438v1); [Moshi §3.3–3.4](https://arxiv.org/abs/2410.00037v2); [Whisper §2.2–2.3](https://arxiv.org/abs/2212.04356v1).\n- [Qwen2.5-Omni §2.1–2.4](https://arxiv.org/abs/2503.20215v1); [Qwen3-Omni §2.1–2.5](https://arxiv.org/abs/2509.17765v1); [Qwen3-VL §2.3](https://arxiv.org/abs/2511.21631v1); [ImageBind §3](https://arxiv.org/abs/2305.05665v1).\n- [Stanford CS336 Lecture 17](https://cs336.stanford.edu/) and [Berkeley Advanced LLM Agents Meeting 7](https://rdi.berkeley.edu/adv-llm-agents/sp25).\n- Previous: [[en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding|Documents, OCR, and grounding]]. Next: [[en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving|Evaluation and VLM serving]].\n",
+          "new": "- [Flamingo](https://arxiv.org/abs/2204.14198), [Qwen2.5-VL](https://arxiv.org/abs/2502.13923), [Qwen2.5-Omni](https://arxiv.org/abs/2503.20215), and [ImageBind](https://arxiv.org/abs/2305.05665).\n- [xGen-MM-Vid §2.1–2.3](https://arxiv.org/abs/2410.16267v2); [GenS §2](https://aclanthology.org/2025.findings-acl.921/); [EnCodec §3.1–3.2](https://arxiv.org/abs/2210.13438v1); [Moshi §3.3–3.4](https://arxiv.org/abs/2410.00037v2); [Whisper §2.2–2.3](https://arxiv.org/abs/2212.04356v1).\n- [Qwen2.5-Omni §2.1–2.4](https://arxiv.org/abs/2503.20215v1); [Qwen3-Omni §2.1–2.5](https://arxiv.org/abs/2509.17765v1); [Qwen3-VL §2.3](https://arxiv.org/abs/2511.21631v1); [ImageBind §3](https://arxiv.org/abs/2305.05665v1).\n- [Stanford CS336 Lecture 17](https://cs336.stanford.edu/) and [Berkeley Advanced LLM Agents Meeting 7](https://rdi.berkeley.edu/adv-llm-agents/sp25).\n- Previous: [[en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding|Documents, OCR, and grounding]]. Next: [[en/00 Textbook/16 Multimodal Models/64ea Automatic speech recognition|Automatic speech recognition]].\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md",
+      "before_sha256": "42f6014d53683f42a0ffa84d8f94f39d0f64c4bd004e14ea4cde6db8726c3acb",
+      "after_sha256": "a5e579d31a0fdeb9bcf273d7cfffb068e7f77ad6b4005151bb9d46e8c414d4cf",
+      "changes": [
+        {
+          "old": "type: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-22\nlast_verified: 2026-11-22\nprevious: \"[[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели]]\"\nnext:\n  - \"[[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon]]\"\nreference_terms:\n  - label: Winoground — оценки текста, изображения и группы\n",
+          "new": "type: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-22\nlast_verified: 2026-11-22\nprevious: \"[[00 Учебник/16 Multimodal Models/64ea Распознавание речи]]\"\nnext:\n  - \"[[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon]]\"\nreference_terms:\n  - label: Winoground — оценки текста, изображения и группы\n"
+        },
+        {
+          "old": "- Matt Deitke et al., [Molmo and PixMo v2](https://arxiv.org/abs/2409.17146v2), Figure 11: историческая открытость компонентов.\n- Gursimran Singh et al., [EPD Disaggregation](https://proceedings.mlr.press/v267/singh25d.html), §3.1–3.2: перенос тензоров, независимое кодирование, распределение ресурсов и смена ролей.\n- [vLLM](https://github.com/vllm-project/vllm/tree/7b569ec8953cf8099638a6d2ee1e915b75867c3a), зафиксированная версия документации и EncoderCacheManager: обработка media, три вычислительных кэша и ограничения безопасности. У других релизов набор настроек может отличаться.\n- Связано: [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline|физика inference]] и [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация|оценивание и контаминация]].\n- Предыдущая глава: [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|Видео, аудио и речь]]. Дополнительная тема: [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|Диффузионные и flow-модели изображений]].\n",
+          "new": "- Matt Deitke et al., [Molmo and PixMo v2](https://arxiv.org/abs/2409.17146v2), Figure 11: историческая открытость компонентов.\n- Gursimran Singh et al., [EPD Disaggregation](https://proceedings.mlr.press/v267/singh25d.html), §3.1–3.2: перенос тензоров, независимое кодирование, распределение ресурсов и смена ролей.\n- [vLLM](https://github.com/vllm-project/vllm/tree/7b569ec8953cf8099638a6d2ee1e915b75867c3a), зафиксированная версия документации и EncoderCacheManager: обработка media, три вычислительных кэша и ограничения безопасности. У других релизов набор настроек может отличаться.\n- Связано: [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline|физика inference]] и [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация|оценивание и контаминация]].\n- Предыдущая глава: [[00 Учебник/16 Multimodal Models/64ea Распознавание речи|Распознавание речи]]. Дополнительная тема: [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|Диффузионные и flow-модели изображений]].\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md",
+      "before_sha256": "a9ecb100c36da2d09cd813e331d5b8d16c69a40c11c58df34e81a1d81987679e",
+      "after_sha256": "6adbe6de18caf85c4feaee2694276b04fcd36fd15588a1d2a43acfde0480fee2",
+      "changes": [
+        {
+          "old": "type: textbook-chapter\nstatus: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"42f6014d53683f42a0ffa84d8f94f39d0f64c4bd004e14ea4cde6db8726c3acb\"\ntranslation_reviewed: \"2026-11-22\"\ntranslation_of: \"00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md\"\nlast_updated: 2026-11-22\nlast_verified: 2026-11-22\nprevious: \"[[en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models]]\"\nnext:\n  - \"[[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon]]\"\nprimary_sources:\n  - https://cs231n.stanford.edu/slides/2025/lecture_16.pdf\n",
+          "new": "type: textbook-chapter\nstatus: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"a5e579d31a0fdeb9bcf273d7cfffb068e7f77ad6b4005151bb9d46e8c414d4cf\"\ntranslation_reviewed: \"2026-11-22\"\ntranslation_of: \"00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md\"\nlast_updated: 2026-11-22\nlast_verified: 2026-11-22\nprevious: \"[[en/00 Textbook/16 Multimodal Models/64ea Automatic speech recognition]]\"\nnext:\n  - \"[[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon]]\"\nprimary_sources:\n  - https://cs231n.stanford.edu/slides/2025/lecture_16.pdf\n"
+        },
+        {
+          "old": "- Deitke et al., [Molmo and PixMo v2](https://arxiv.org/abs/2409.17146v2).\n- Song et al., [MM-Detect](https://aclanthology.org/2025.findings-emnlp.556/), §2.1; Park et al., [Multi-Modal Semantic Perturbations](https://arxiv.org/html/2511.03774v1#S4), §§4–5.\n- [Winoground §3.1–3.2](https://arxiv.org/abs/2204.03162v1); [POPE §5.1–5.2](https://aclanthology.org/2023.emnlp-main.20/); [CHAIR §2.1](https://aclanthology.org/D18-1437/); [MM-Vet §3.1–3.2](https://proceedings.mlr.press/v235/yu24o.html); [MMStar §3 and §4.3](https://arxiv.org/abs/2403.20330v1).\n- [EPD Disaggregation §3.1–3.2](https://proceedings.mlr.press/v267/singh25d.html) and [pinned vLLM documentation/code](https://github.com/vllm-project/vllm/tree/7b569ec8953cf8099638a6d2ee1e915b75867c3a). Settings described here are version-specific.\n- Previous: [[en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models|Video, audio, and omni models]].\n- Optional reading: [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|Diffusion and flow models for images]].\n",
+          "new": "- Deitke et al., [Molmo and PixMo v2](https://arxiv.org/abs/2409.17146v2).\n- Song et al., [MM-Detect](https://aclanthology.org/2025.findings-emnlp.556/), §2.1; Park et al., [Multi-Modal Semantic Perturbations](https://arxiv.org/html/2511.03774v1#S4), §§4–5.\n- [Winoground §3.1–3.2](https://arxiv.org/abs/2204.03162v1); [POPE §5.1–5.2](https://aclanthology.org/2023.emnlp-main.20/); [CHAIR §2.1](https://aclanthology.org/D18-1437/); [MM-Vet §3.1–3.2](https://proceedings.mlr.press/v235/yu24o.html); [MMStar §3 and §4.3](https://arxiv.org/abs/2403.20330v1).\n- [EPD Disaggregation §3.1–3.2](https://proceedings.mlr.press/v267/singh25d.html) and [pinned vLLM documentation/code](https://github.com/vllm-project/vllm/tree/7b569ec8953cf8099638a6d2ee1e915b75867c3a). Settings described here are version-specific.\n- Previous: [[en/00 Textbook/16 Multimodal Models/64ea Automatic speech recognition|Automatic speech recognition]].\n- Optional reading: [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|Diffusion and flow models for images]].\n"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "f15a22709deddf41dcd8df9f77046fe63ced3bbf4fa88e75e2da40c5bf8f3d44",
+      "after_sha256": "83976353ea7e2b5e38acd6bbd820e67ffa6a952f301d1e02168939fef844d1a8",
+      "changes": [
+        {
+          "old": "        route: textbook/multimodal/documents-ocr-grounding\n      - source: 00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md\n        source_en: en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md\n        route: textbook/multimodal/video-audio-omni\n      - source: 00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md\n        source_en: en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md\n        route: textbook/multimodal/evaluation-serving\n      - source: 00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md\n",
+          "new": "        route: textbook/multimodal/documents-ocr-grounding\n      - source: 00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md\n        source_en: en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md\n        route: textbook/multimodal/video-audio-omni\n      - source: 00 Учебник/16 Multimodal Models/64ea Распознавание речи.md\n        source_en: en/00 Textbook/16 Multimodal Models/64ea Automatic speech recognition.md\n        route: textbook/multimodal/speech-recognition\n      - source: 00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md\n        source_en: en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md\n        route: textbook/multimodal/evaluation-serving\n      - source: 00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md\n"
+        },
+        {
+          "old": "                route: textbook/multimodal/documents-ocr-grounding\n              - label: Как модели понимают видео и отвечают голосом\n                label_en: How models understand video and answer in speech\n                route: textbook/multimodal/video-audio-omni\n              - label: Как оценивать качество и задержку VLM\n                label_en: Evaluating VLMs and measuring serving latency\n                route: textbook/multimodal/evaluation-serving\n              - label: \"Chameleon: текст и изображения в одной последовательности\"\n",
+          "new": "                route: textbook/multimodal/documents-ocr-grounding\n              - label: Как модели понимают видео и отвечают голосом\n                label_en: How models understand video and answer in speech\n                route: textbook/multimodal/video-audio-omni\n              - label: Распознавание речи\n                label_en: Automatic speech recognition\n                route: textbook/multimodal/speech-recognition\n              - label: Как оценивать качество и задержку VLM\n                label_en: Evaluating VLMs and measuring serving latency\n                route: textbook/multimodal/evaluation-serving\n              - label: \"Chameleon: текст и изображения в одной последовательности\"\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "f5228f2cf0bf85a205e368af6b72bab2d75ecf84e0e17462dd5419ba890b4501",
+      "after_sha256": "69313383891cd0cd8bdbeb2cdf74b6da83e014e4af102846b2f7bfe1a2016727",
+      "changes": [
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции|Разрешение, плитки и позиции изображения]]\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Как обучают мультимодальные модели]]\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Чтение документов: OCR, поля и координаты]]\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|Как модели понимают видео и отвечают голосом]]\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Как оценивать качество и задержку VLM]]\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Chameleon: текст и изображения в одной последовательности]]\n\n<a id=\"xiv-инструменты-и-агенты\"></a>\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции|Разрешение, плитки и позиции изображения]]\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Как обучают мультимодальные модели]]\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Чтение документов: OCR, поля и координаты]]\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|Как модели понимают видео и отвечают голосом]]\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64ea Распознавание речи|Распознавание речи]]\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Как оценивать качество и задержку VLM]]\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Chameleon: текст и изображения в одной последовательности]]\n\n<a id=\"xiv-инструменты-и-агенты\"></a>\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "43338bb82c548e1adffd2c013b6f4cc469b24bc7fa1e6e28bf5945cfd226b16d",
+      "after_sha256": "b1b8c8a4ba8e51ef37b51eb90cc300e4cf5372fea0ed387f4290d6fffc031230",
+      "changes": [
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции|Resolution, tiling, and spatial positions]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Training vision-language models]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Reading documents: OCR, fields, and coordinates]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|How models understand video and answer in speech]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Evaluating VLMs and measuring serving latency]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Chameleon: text and images in one sequence]] · **EN**\n\n<a id=\"xiv-инструменты-и-агенты\"></a>\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции|Resolution, tiling, and spatial positions]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Training vision-language models]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Reading documents: OCR, fields, and coordinates]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|How models understand video and answer in speech]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64ea Распознавание речи|Automatic speech recognition]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM|Evaluating VLMs and measuring serving latency]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Chameleon: text and images in one sequence]] · **EN**\n\n<a id=\"xiv-инструменты-и-агенты\"></a>\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "4da68f9f0bdad131069d4c4468246d5c51d7ff413104b3288d6be8772cacd0b6",
+      "after_sha256": "e9a3e52bb4d007e081aa5eb2c123152ae13748e8612f20d60adfb8b63e5a69ea",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-anyres|AnyRes — локальные плитки и общий обзор]]\n  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-pixtral-packing|Pixtral — упаковка изображений]]\n  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-mrope-frequencies|MRoPE — координаты и частоты]]\n  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-tile-boxes|Visual grounding — рамки перекрывающихся плиток]]\n- [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Чтение документов: OCR, поля и координаты]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-layoutlm|LayoutLMv3 — текст, координаты и изображение]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-donut|Donut — извлечение полей без внешнего OCR]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-paddleocr-reading-order|PaddleOCR-VL — разметка страницы и порядок чтения]]\n",
+          "new": "  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-anyres|AnyRes — локальные плитки и общий обзор]]\n  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-pixtral-packing|Pixtral — упаковка изображений]]\n  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-mrope-frequencies|MRoPE — координаты и частоты]]\n  - [[00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#vlm-tile-boxes|Visual grounding — рамки перекрывающихся плиток]]\n- [[00 Учебник/16 Multimodal Models/64ea Распознавание речи|Распознавание речи]]\n  - [[00 Учебник/16 Multimodal Models/64ea Распознавание речи#asr-input|Вход и выход распознавателя речи]]\n  - [[00 Учебник/16 Multimodal Models/64ea Распознавание речи#asr-ctc|CTC: blank, свёртка повторов и выравнивание]]\n  - [[00 Учебник/16 Multimodal Models/64ea Распознавание речи#asr-forward|CTC: расчёт вероятности и декодирование]]\n  - [[00 Учебник/16 Multimodal Models/64ea Распознавание речи#asr-transducer|RNN-T и Token-and-Duration Transducer]]\n  - [[00 Учебник/16 Multimodal Models/64ea Распознавание речи#asr-whisper|Распознавание и перевод речи с Whisper]]\n  - [[00 Учебник/16 Multimodal Models/64ea Распознавание речи#asr-evaluation|WER, CER и задержка потокового распознавания]]\n- [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Чтение документов: OCR, поля и координаты]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-layoutlm|LayoutLMv3 — текст, координаты и изображение]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-donut|Donut — извлечение полей без внешнего OCR]]\n  - [[00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding#doc-paddleocr-reading-order|PaddleOCR-VL — разметка страницы и порядок чтения]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "f9aa4a724d09273895c9a41150a17642e99f7437aedf123ec235f9c12f8bfd5a",
+      "after_sha256": "27a5dc2a5be82211e1628cbf468197f0d4eacc984e08df0e7a6f248be4f02e09",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-hnsw-links|HNSW: construction neighbor selection]]\n\n### Multimodal models\n\n- [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Chameleon: text and images in one sequence]] · **EN**\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-mixed-response|Chameleon — text and image in one response]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-vq-codebook|VQ-VAE — nearest codebook vector]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-vq-gradient|VQ-VAE — straight-through and codebook training]]\n",
+          "new": "  - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-hnsw-links|HNSW: construction neighbor selection]]\n\n### Multimodal models\n\n- [[00 Учебник/16 Multimodal Models/64ea Распознавание речи|Automatic speech recognition]] · **EN**\n  - [[00 Учебник/16 Multimodal Models/64ea Распознавание речи#asr-input|Speech recognition inputs and outputs]]\n  - [[00 Учебник/16 Multimodal Models/64ea Распознавание речи#asr-ctc|CTC: blank, repeated labels, and alignment]]\n  - [[00 Учебник/16 Multimodal Models/64ea Распознавание речи#asr-forward|CTC: forward probabilities and decoding]]\n  - [[00 Учебник/16 Multimodal Models/64ea Распознавание речи#asr-transducer|RNN-T and Token-and-Duration Transducer]]\n  - [[00 Учебник/16 Multimodal Models/64ea Распознавание речи#asr-whisper|Speech recognition and translation with Whisper]]\n  - [[00 Учебник/16 Multimodal Models/64ea Распознавание речи#asr-evaluation|WER, CER, and streaming speech recognition latency]]\n- [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Chameleon: text and images in one sequence]] · **EN**\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-mixed-response|Chameleon — text and image in one response]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-vq-codebook|VQ-VAE — nearest codebook vector]]\n  - [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon#chameleon-vq-gradient|VQ-VAE — straight-through and codebook training]]\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "271f42f0a95995f23706daced6fe73066aaff0e11704dab1e31eac6f6a01e44c",
+      "after_sha256": "a34e337c33737bfb4f0dfb5bc16c3c12e211330c7155db8ededdf7bbae1139fb",
+      "changes": [
+        {
+          "old": "    modifications: copied without visual modification from the source slide render\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\nassets:\n  - id: curated-karpukhin-dpr-fig1-81a22ad03a3c\n    asset: 00 Учебник/Assets/Figures/curated/question-answering-2026-11-22/karpukhin-dpr-fig1.png\n    title: \"DPR retrieval top-k accuracy on Natural Questions, Figure 1\"\n    author: \"Vladimir Karpukhin, Barlas Oguz, Sewon Min, Patrick Lewis, Ledell Wu, Sergey Edunov, Danqi Chen, and Wen-tau Yih\"\n",
+          "new": "    modifications: copied without visual modification from the source slide render\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\nassets:\n  - id: curated-hannun-ctc-collapse-d84406433011\n    asset: 00 Учебник/Assets/Figures/curated/speech-recognition-2026-11-22/hannun-ctc-collapse.svg\n    title: \"CTC collapse: combine repeats, then remove blanks\"\n    author: \"Awni Hannun\"\n    source_url: https://distill.pub/2017/ctc/\n    source_image_url: https://distill.pub/2017/ctc/assets/ctc_alignment_steps.svg\n    rights_evidence: https://distill.pub/2017/ctc/#reuse\n    sha256: d844064330116bcb1124113bf2d557b33833cf195d8876ed1c4bfc3aeb14faff\n    viewBox: [35, 0, 535, 240]\n    derivation: SVG-byte-copy\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    modifications: \"Original SVG copied byte-for-byte.\"\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-22\"\n    used_in:\n      - 00 Учебник/16 Multimodal Models/64ea Распознавание речи.md\n      - en/00 Textbook/16 Multimodal Models/64ea Automatic speech recognition.md\n  - id: curated-hannun-ctc-forward-80d15891a248\n    asset: 00 Учебник/Assets/Figures/curated/speech-recognition-2026-11-22/hannun-ctc-forward.svg\n    title: \"CTC forward states and the two final nodes\"\n    author: \"Awni Hannun\"\n    source_url: https://distill.pub/2017/ctc/\n    source_image_url: https://distill.pub/2017/ctc/assets/ctc_cost.svg\n    rights_evidence: https://distill.pub/2017/ctc/#reuse\n    sha256: 80d15891a2481679728416d67d83b7d17e54db91bdd4d4f3639cdf960c8db287\n    viewBox: [0, -2, 618, 280]\n    derivation: SVG-byte-copy\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    modifications: \"Original SVG copied byte-for-byte.\"\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-22\"\n    used_in:\n      - 00 Учебник/16 Multimodal Models/64ea Распознавание речи.md\n      - en/00 Textbook/16 Multimodal Models/64ea Automatic speech recognition.md\n  - id: curated-xu-rnnt-tdt-fig1-bf46a4fa3a2a\n    asset: 00 Учебник/Assets/Figures/curated/speech-recognition-2026-11-22/xu-rnnt-tdt-fig1.png\n    title: \"RNN-T and TDT alignments and their input spectrogram, Figure 1\"\n    author: \"Hainan Xu, Fei Jia, Somshubra Majumdar, He Huang, Shinji Watanabe, and Boris Ginsburg\"\n    source_url: https://proceedings.mlr.press/v202/xu23g.html\n    source_image_url: https://proceedings.mlr.press/v202/xu23g/xu23g.pdf#page=2\n    rights_evidence: https://proceedings.mlr.press/pmlr-license-agreement.html\n    sha256: bf46a4fa3a2a73b0e5291397dc71167593449096873d14b3e8b2b441bae5b0c4\n    source_pdf_sha256: b637cea35e648e9f3469dac7f76d67b09308947b53d1ada81f5991100fd45519\n    source_page: 2\n    dimensions_px: [1180, 951]\n    crop_px: [258, 318, 1180, 951]\n    derivation: source-pdf-render\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    modifications: \"Complete three-panel plot cropped from PDF at -scale-to 3900; no redraw or relabeling.\"\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-22\"\n    used_in:\n      - 00 Учебник/16 Multimodal Models/64ea Распознавание речи.md\n      - en/00 Textbook/16 Multimodal Models/64ea Automatic speech recognition.md\n  - id: curated-radford-whisper-task-fig1-8cc564f1d010\n    asset: 00 Учебник/Assets/Figures/curated/speech-recognition-2026-11-22/radford-whisper-task-fig1.png\n    title: \"Whisper multitask training format, lower panel of Figure 1\"\n    author: \"Alec Radford, Jong Wook Kim, Tao Xu, Greg Brockman, Christine McLeavey, and Ilya Sutskever\"\n    source_url: https://proceedings.mlr.press/v202/radford23a.html\n    source_image_url: https://proceedings.mlr.press/v202/radford23a/radford23a.pdf#page=3\n    rights_evidence: https://proceedings.mlr.press/pmlr-license-agreement.html\n    sha256: 8cc564f1d0101742a3cf2015d40560f67a1e4c4b76bcb26bb2e58e1f6a28bb21\n    source_pdf_sha256: 84496ed07ac01bf3d00866a1934f81173ddbba99f7488de59bb8ae3b28f0f85e\n    source_page: 3\n    dimensions_px: [2420, 727]\n    crop_px: [260, 1421, 2420, 727]\n    derivation: source-pdf-render\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    modifications: \"The multitask training format panel cropped at -scale-to 3900; other panels and caption omitted, no redraw or relabeling.\"\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-22\"\n    used_in:\n      - 00 Учебник/16 Multimodal Models/64ea Распознавание речи.md\n      - en/00 Textbook/16 Multimodal Models/64ea Automatic speech recognition.md\n  - id: curated-karpukhin-dpr-fig1-81a22ad03a3c\n    asset: 00 Учебник/Assets/Figures/curated/question-answering-2026-11-22/karpukhin-dpr-fig1.png\n    title: \"DPR retrieval top-k accuracy on Natural Questions, Figure 1\"\n    author: \"Vladimir Karpukhin, Barlas Oguz, Sewon Min, Patrick Lewis, Ledell Wu, Sergey Edunov, Danqi Chen, and Wen-tau Yih\"\n"
+        }
+      ]
+    }
+  ],
+  "added_sources": [
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64ea Automatic speech recognition.md",
+      "sha256": "3558cdc94370a2aeefbf1345dcf39a90db0be94f91911e142ec4de747104bd56",
+      "canonical": "00 Учебник/16 Multimodal Models/64ea Распознавание речи.md",
+      "route": "textbook/multimodal/speech-recognition",
+      "status": "current",
+      "en_body_read": true,
+      "outstanding_expansions": []
+    }
+  ],
+  "verification": {
+    "explanation": "Trace audio to encoder frames and a repeated label, sum and decode with CTC, contrast RNN-T's time/prefix axes with the timestamp tokens in Whisper, then separate error metrics from streaming delays.",
+    "style": "Reread both editions with the no-ai-slop checklist. Added the incoming CTC mass and final transducer blank, distinguished the highest probability from correctness, and corrected source section locators.",
+    "example": "The identical executable example verifies CTC forward and enumeration at 0.3384, greedy LL versus most probable L at 0.5832, RNN-T path probability 0.378, WER 3/5, CER 1/4, and first partial at 315 ms with computation-only RTF 0.175.",
+    "publication": "94 core chapters and 162 reference topics. Root build: 2117 pages; 855 publication tests passed (13 skipped); 383 rendered output tests passed; zero broken links.",
+    "visual": "Checked both languages at 390 and 1440 px in Chromium. Four figures load without clipping and no KaTeX elements overflow. The Whisper panel at 4× has legible labels, horizontal reach to both edges, credit and original link, and reset to whole image.",
+    "open": "Speech synthesis chapter, then final review of the full core path against the stated scope."
+  }
+}

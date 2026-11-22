@@ -45,6 +45,299 @@ course_asset_defaults:
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
 assets:
+  - id: curated-popov-grad-tts-fig2-94b099cc9d87
+    asset: 00 Учебник/Assets/Figures/curated/speech-synthesis-2026-11-22/popov-grad-tts-fig2.png
+    title: "Grad-TTS inference, Figure 2"
+    author: "Vadim Popov, Ivan Vovk, Vladimir Gogoryan, Tasnima Sadekova, and Mikhail Kudinov"
+    source_url: https://proceedings.mlr.press/v139/popov21a.html
+    source_image_url: https://proceedings.mlr.press/v139/popov21a/popov21a.pdf#page=5
+    rights_evidence: https://proceedings.mlr.press/pmlr-license-agreement.html
+    sha256: 94b099cc9d87970a00a89811532734fa3cd48816f6d2be9f01db171842d144b5
+    source_pdf_sha256: 86a851c0e1e2970015b7ff4417f18c276273c491bedbbfdec50233ae5b1bc9f8
+    source_page: 5
+    dimensions_px: [2410, 912]
+    crop_px: [260, 309, 2410, 912]
+    derivation: source-pdf-render
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: "Whole labeled figure cropped from the official PDF at -scale-to 3900; no redraw or relabeling."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64eb Синтез речи.md
+      - en/00 Textbook/16 Multimodal Models/64eb Text-to-speech synthesis.md
+  - id: curated-kim-vits-fig1-c385d20053a3
+    asset: 00 Учебник/Assets/Figures/curated/speech-synthesis-2026-11-22/kim-vits-fig1.png
+    title: "VITS training and inference, Figure 1"
+    author: "Jaehyeon Kim, Jungil Kong, and Juhee Son"
+    source_url: https://proceedings.mlr.press/v139/kim21f.html
+    source_image_url: https://proceedings.mlr.press/v139/kim21f/kim21f.pdf#page=3
+    rights_evidence: https://proceedings.mlr.press/pmlr-license-agreement.html
+    sha256: c385d20053a3e09b5a0e507145f2e614482930eef285c52fc386f96a6d3be12d
+    source_pdf_sha256: e327384e50eb17b1464547348313bbf5c48c4aedfb12ebd725fbcfe8ecfd76e1
+    source_page: 3
+    dimensions_px: [2446, 1210]
+    crop_px: [248, 370, 2446, 1210]
+    derivation: source-pdf-render
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: "Whole labeled figure cropped from the official PDF at -scale-to 3900; no redraw or relabeling."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64eb Синтез речи.md
+      - en/00 Textbook/16 Multimodal Models/64eb Text-to-speech synthesis.md
+  - id: curated-yang-uniaudio-codecformer-fig3-c3c0e813ec36
+    asset: 00 Учебник/Assets/Figures/curated/speech-synthesis-2026-11-22/yang-uniaudio-codecformer-fig3.png
+    title: "UniAudio CodecFormer, Figure 3"
+    author: "Dongchao Yang, Jinchuan Tian, Xu Tan, Rongjie Huang, Songxiang Liu, Haohan Guo, Xuankai Chang, Jiatong Shi, Sheng Zhao, Jiang Bian, Zhou Zhao, Xixin Wu, Helen M. Meng, and Dong Yu"
+    source_url: https://proceedings.mlr.press/v235/yang24x.html
+    source_image_url: https://raw.githubusercontent.com/mlresearch/v235/main/assets/yang24x/yang24x.pdf#page=4
+    rights_evidence: https://proceedings.mlr.press/pmlr-license-agreement.html
+    sha256: c3c0e813ec368e2d006881aeb29acd980a8c797b0f0023d6caefa70af8d533c8
+    source_pdf_sha256: 6dadd63b7e76bcb5d4272ec93414d44ccb658c26ba6ace479d0c708676469b24
+    source_page: 4
+    dimensions_px: [1080, 880]
+    crop_px: [1540, 1176, 1080, 880]
+    derivation: source-pdf-render
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: "Whole labeled figure cropped from the official PDF at -scale-to 3900; no redraw or relabeling."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64eb Синтез речи.md
+      - en/00 Textbook/16 Multimodal Models/64eb Text-to-speech synthesis.md
+  - id: curated-hannun-ctc-collapse-d84406433011
+    asset: 00 Учебник/Assets/Figures/curated/speech-recognition-2026-11-22/hannun-ctc-collapse.svg
+    title: "CTC collapse: combine repeats, then remove blanks"
+    author: "Awni Hannun"
+    source_url: https://distill.pub/2017/ctc/
+    source_image_url: https://distill.pub/2017/ctc/assets/ctc_alignment_steps.svg
+    rights_evidence: https://distill.pub/2017/ctc/#reuse
+    sha256: d844064330116bcb1124113bf2d557b33833cf195d8876ed1c4bfc3aeb14faff
+    viewBox: [35, 0, 535, 240]
+    derivation: SVG-byte-copy
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: "Original SVG copied byte-for-byte."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64ea Распознавание речи.md
+      - en/00 Textbook/16 Multimodal Models/64ea Automatic speech recognition.md
+  - id: curated-hannun-ctc-forward-80d15891a248
+    asset: 00 Учебник/Assets/Figures/curated/speech-recognition-2026-11-22/hannun-ctc-forward.svg
+    title: "CTC forward states and the two final nodes"
+    author: "Awni Hannun"
+    source_url: https://distill.pub/2017/ctc/
+    source_image_url: https://distill.pub/2017/ctc/assets/ctc_cost.svg
+    rights_evidence: https://distill.pub/2017/ctc/#reuse
+    sha256: 80d15891a2481679728416d67d83b7d17e54db91bdd4d4f3639cdf960c8db287
+    viewBox: [0, -2, 618, 280]
+    derivation: SVG-byte-copy
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: "Original SVG copied byte-for-byte."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64ea Распознавание речи.md
+      - en/00 Textbook/16 Multimodal Models/64ea Automatic speech recognition.md
+  - id: curated-xu-rnnt-tdt-fig1-bf46a4fa3a2a
+    asset: 00 Учебник/Assets/Figures/curated/speech-recognition-2026-11-22/xu-rnnt-tdt-fig1.png
+    title: "RNN-T and TDT alignments and their input spectrogram, Figure 1"
+    author: "Hainan Xu, Fei Jia, Somshubra Majumdar, He Huang, Shinji Watanabe, and Boris Ginsburg"
+    source_url: https://proceedings.mlr.press/v202/xu23g.html
+    source_image_url: https://proceedings.mlr.press/v202/xu23g/xu23g.pdf#page=2
+    rights_evidence: https://proceedings.mlr.press/pmlr-license-agreement.html
+    sha256: bf46a4fa3a2a73b0e5291397dc71167593449096873d14b3e8b2b441bae5b0c4
+    source_pdf_sha256: b637cea35e648e9f3469dac7f76d67b09308947b53d1ada81f5991100fd45519
+    source_page: 2
+    dimensions_px: [1180, 951]
+    crop_px: [258, 318, 1180, 951]
+    derivation: source-pdf-render
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: "Complete three-panel plot cropped from PDF at -scale-to 3900; no redraw or relabeling."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64ea Распознавание речи.md
+      - en/00 Textbook/16 Multimodal Models/64ea Automatic speech recognition.md
+  - id: curated-radford-whisper-task-fig1-8cc564f1d010
+    asset: 00 Учебник/Assets/Figures/curated/speech-recognition-2026-11-22/radford-whisper-task-fig1.png
+    title: "Whisper multitask training format, lower panel of Figure 1"
+    author: "Alec Radford, Jong Wook Kim, Tao Xu, Greg Brockman, Christine McLeavey, and Ilya Sutskever"
+    source_url: https://proceedings.mlr.press/v202/radford23a.html
+    source_image_url: https://proceedings.mlr.press/v202/radford23a/radford23a.pdf#page=3
+    rights_evidence: https://proceedings.mlr.press/pmlr-license-agreement.html
+    sha256: 8cc564f1d0101742a3cf2015d40560f67a1e4c4b76bcb26bb2e58e1f6a28bb21
+    source_pdf_sha256: 84496ed07ac01bf3d00866a1934f81173ddbba99f7488de59bb8ae3b28f0f85e
+    source_page: 3
+    dimensions_px: [2420, 727]
+    crop_px: [260, 1421, 2420, 727]
+    derivation: source-pdf-render
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    modifications: "The multitask training format panel cropped at -scale-to 3900; other panels and caption omitted, no redraw or relabeling."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/16 Multimodal Models/64ea Распознавание речи.md
+      - en/00 Textbook/16 Multimodal Models/64ea Automatic speech recognition.md
+  - id: curated-karpukhin-dpr-fig1-81a22ad03a3c
+    asset: 00 Учебник/Assets/Figures/curated/question-answering-2026-11-22/karpukhin-dpr-fig1.png
+    title: "DPR retrieval top-k accuracy on Natural Questions, Figure 1"
+    author: "Vladimir Karpukhin, Barlas Oguz, Sewon Min, Patrick Lewis, Ledell Wu, Sergey Edunov, Danqi Chen, and Wen-tau Yih"
+    source_url: https://aclanthology.org/2020.emnlp-main.550.pdf#page=5
+    source_image_url: https://aclanthology.org/2020.emnlp-main.550.pdf
+    rights_evidence: https://aclanthology.org/faq/copyright/
+    sha256: 81a22ad03a3ced3123f4b73e8117ff0a805e679ffa50fd631e0bf4a866bfe97b
+    source_pdf_sha256: 2abfc7991519be2b8ce30215905516fdb593218b7bf59e50ece0d8a088a7c4d5
+    source_page: 5
+    dimensions_px: [965, 749]
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    derivation: source-pdf-render
+    crop_px: [1437, 1027, 965, 749]
+    modifications: "Complete diagram or plot cropped from its PDF page at -scale-to 3900; no redraw or relabeling."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/10 Ответы на вопросы.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/10 Question answering.md
+  - id: curated-devlin-bert-qa-fig4c-78853ca8fbb1
+    asset: 00 Учебник/Assets/Figures/curated/question-answering-2026-11-22/devlin-bert-qa-fig4c.png
+    title: "BERT fine-tuning for SQuAD, Figure 4(c)"
+    author: "Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova"
+    source_url: https://aclanthology.org/N19-1423.pdf#page=15
+    source_image_url: https://aclanthology.org/N19-1423.pdf
+    rights_evidence: https://aclanthology.org/faq/copyright/
+    sha256: 78853ca8fbb1ce3b4ceed955f4b98f8b05898d5e20b2ff4e6a90141675ca8574
+    source_pdf_sha256: 987545ffb087f1ece898142c403a516baeabeb70ce19089397fac6f7db12c3d4
+    source_page: 15
+    dimensions_px: [803, 826]
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    derivation: source-pdf-render
+    crop_px: [515, 1185, 803, 826]
+    modifications: "Panel (c) for question answering cropped from Figure 4 at -scale-to 3900; no redraw or relabeling."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/10 Ответы на вопросы.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/10 Question answering.md
+  - id: curated-izacard-fid-fig2-8f5852e9aed6
+    asset: 00 Учебник/Assets/Figures/curated/question-answering-2026-11-22/izacard-fid-fig2.png
+    title: "Fusion-in-Decoder, Figure 2"
+    author: "Gautier Izacard and Edouard Grave"
+    source_url: https://aclanthology.org/2021.eacl-main.74.pdf#page=2
+    source_image_url: https://aclanthology.org/2021.eacl-main.74.pdf
+    rights_evidence: https://aclanthology.org/faq/copyright/
+    sha256: 8f5852e9aed633ec6f72a59cb6355a9f74ae1087cfb730d2bd63757344341b3b
+    source_pdf_sha256: a0b8708f35c78bc5799322a91e042f33233a5e48226c400843082c8a76b01175
+    source_page: 2
+    dimensions_px: [2103, 323]
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    derivation: source-pdf-render
+    crop_px: [336, 270, 2103, 323]
+    modifications: "Complete diagram or plot cropped from its PDF page at -scale-to 3900; no redraw or relabeling."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/10 Ответы на вопросы.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/10 Question answering.md
+  - id: curated-liu-bertsum-fig1-9b028be467d7
+    asset: 00 Учебник/Assets/Figures/curated/summarization-2026-11-22/liu-bertsum-fig1.png
+    title: "Original BERT and BERTSum input layouts, Figure 1"
+    author: "Yang Liu and Mirella Lapata"
+    source_url: https://aclanthology.org/D19-1387.pdf#page=3
+    source_image_url: https://aclanthology.org/D19-1387.pdf
+    rights_evidence: https://aclanthology.org/faq/copyright/
+    sha256: 9b028be467d755d50f6c4a5bbe3757f3d43ebf334260176ed1e68a9dc7f31d81
+    source_pdf_sha256: 26dc6cb0f01b75599edbdc7d4ab59eed017c5736b5edf9d20607f3374413b31c
+    source_page: 3
+    dimensions_px: [2130, 655]
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    derivation: source-pdf-render
+    crop_px: [317, 285, 2130, 655]
+    modifications: "Complete diagram cropped from its PDF page at -scale-to 3900; no redraw or relabeling."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/09 Text summarization.md
+  - id: curated-see-pointer-generator-fig3-c5f9550d4989
+    asset: 00 Учебник/Assets/Figures/curated/summarization-2026-11-22/see-pointer-generator-fig3.png
+    title: "Pointer-generator for text summarization, Figure 3"
+    author: "Abigail See, Peter J. Liu, and Christopher D. Manning"
+    source_url: https://aclanthology.org/P17-1099.pdf#page=3
+    source_image_url: https://aclanthology.org/P17-1099.pdf
+    rights_evidence: https://aclanthology.org/faq/copyright/
+    sha256: c5f9550d4989b811c1befa193f92603eb8b2bb96d70f1d75d52352517e15f525
+    source_pdf_sha256: 499a1f95e7f291821233351fc6fd1beecce55dbb2cae05bcf7386ab6df6aef89
+    source_page: 3
+    dimensions_px: [1915, 1060]
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    derivation: source-pdf-render
+    crop_px: [435, 273, 1915, 1060]
+    modifications: "Complete diagram cropped from its PDF page at -scale-to 3900; no redraw or relabeling."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/09 Text summarization.md
+  - id: curated-lewis-bart-fig1c-6bbb24d4fec3
+    asset: 00 Учебник/Assets/Figures/curated/summarization-2026-11-22/lewis-bart-fig1c.png
+    title: "BART denoising encoder-decoder, Figure 1(c)"
+    author: "Mike Lewis, Yinhan Liu, Naman Goyal, Marjan Ghazvininejad, Abdelrahman Mohamed, Omer Levy, Veselin Stoyanov, and Luke Zettlemoyer"
+    source_url: https://aclanthology.org/2020.acl-main.703.pdf#page=2
+    source_image_url: https://aclanthology.org/2020.acl-main.703.pdf
+    rights_evidence: https://aclanthology.org/faq/copyright/
+    sha256: 6bbb24d4fec312f6ccd7462292c6d924189feed1a1519bbffb8104516151ff3f
+    source_pdf_sha256: 3562c723fe7bebb8b362533122b3ca5c065037c8e8d67460654cf3740652bb59
+    source_page: 2
+    dimensions_px: [1037, 400]
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    derivation: source-pdf-render
+    crop_px: [872, 903, 1037, 400]
+    modifications: "Panel (c) cropped from Figure 1 at -scale-to 3900; no redraw or relabeling."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/09 Суммаризация текста.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/09 Text summarization.md
   - id: curated-heffernan-laser3-fig1-d1a7149e6afe
     asset: 00 Учебник/Assets/Figures/curated/machine-translation-2026-11-22/heffernan-laser3-fig1.png
     title: "LASER3 auxiliary MLM and multilingual distillation, Figure 1"
