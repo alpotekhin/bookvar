@@ -498,11 +498,14 @@ sections:
               - label: Fine-tuning и PEFT
                 label_en: Fine-tuning and PEFT
                 route: textbook/post-training/fine-tuning-peft
-              - label: Preference data
+              - label: Данные предпочтений
+                label_en: Preference data
                 route: textbook/post-training/preference-data
-              - label: Reward modeling
+              - label: Модель награды
+                label_en: Reward modeling
                 route: textbook/post-training/reward-modeling
-              - label: Policy gradient и PPO для LLM
+              - label: Градиент стратегии и PPO
+                label_en: Policy gradients and PPO for LLMs
                 route: textbook/post-training/ppo
               - label: Цели alignment, HHH, Constitutional AI и RLAIF
                 label_en: Alignment goals, HHH, Constitutional AI, and RLAIF

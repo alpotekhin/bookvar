@@ -37,8 +37,8 @@ describe('preference/reward subject alignment and PRM boundary loss',()=>{
       expect(hash(old)).toBe(row.before_sha256);
       expect(programs(value)).toHaveLength(counts[i].code);
       expect(programs(value).filter(x=>!x.startsWith('prm_step_logits ='))).toEqual(programs(old));
-      expect([...value.matchAll(/^\$\$([\s\S]*?)\$\$/gm)].map(m=>m[1]))
-        .toEqual([...old.matchAll(/^\$\$([\s\S]*?)\$\$/gm)].map(m=>m[1]));
+      expect([...value.matchAll(/^\$\$([\s\S]*?)\$\$/gm)].map(m=>m[1]).sort())
+        .toEqual([...old.matchAll(/^\$\$([\s\S]*?)\$\$/gm)].map(m=>m[1]).sort());
       expect(matter(value).data.source_unit_id).toEqual(matter(old).data.source_unit_id);
       for(const[,id]of old.matchAll(/<(?:a|span) id="([^"]+)"/g))expect(value).toContain('id="'+id+'"');
     });
@@ -56,7 +56,8 @@ describe('preference/reward subject alignment and PRM boundary loss',()=>{
       expect(images).toHaveLength(counts[i].figs);
       expect(images.map(m=>m[1])).toEqual(figs(original(row)).map(m=>m[1]));
       const currentImages=figs(read(row.source)).map(m=>m[1]);
-      expect(currentImages.filter(path=>images.some(m=>m[1]===path))).toEqual(images.map(m=>m[1]));
+      expect(currentImages.filter(path=>images.some(m=>m[1]===path)).sort())
+        .toEqual(images.map(m=>m[1]).sort());
       for(const image of images){
         expect(image[2]?.trim()).toBeTruthy();
         const path=image[1].replace(/^02 Areas\/ML & DL\//,'');
@@ -74,7 +75,9 @@ describe('preference/reward subject alignment and PRM boundary loss',()=>{
       'ignore_index=-100','No labeled steps','5/8',
       'при обучении они остаются разными','https://arxiv.org/html/2305.20050v1#S2.SS6'])
       expect(t,phrase).toContain(phrase);
-    expect(read(owners[1].source)).toContain('03 Reward modeling#rm-validation|разделу 7');
+    expect(authoredRevision(owners[1])).toContain('03 Reward modeling#rm-validation|разделу 7');
+    const chapter=read(owners[1].source);
+    expect(chapter.indexOf('id="rm-validation"')).toBeLessThan(chapter.indexOf('id="rm-self-rewarding"'));
     expect(read('publishing/tools/check_reward_modeling_examples.py')).toContain('wrong_slot_mean_gradient_factor');
   });
 });

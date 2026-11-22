@@ -2,6 +2,18 @@
   "date": "2026-10-30",
   "lastReviewedDate": "2026-11-09",
   "editorialRevisions": {
+    "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md": {
+      "currentSha256": "77c1f0da1a8051effaaea80dc6610c22527ef7030427be838f6716ddff922ca2",
+      "stopBefore": "2026-11-22-reward-model-editorial-pass.json"
+    },
+    "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md": {
+      "currentSha256": "d0ff3dee0cbfb4ee62407b7469af3da604ef86044e01f762af6851bda5b6ad9b",
+      "stopBefore": "2026-11-22-preference-data-editorial-pass.json"
+    },
+    "00 Учебник/12 Post-training и Alignment/02 Preference data.md": {
+      "currentSha256": "488c15dc70cf42e7f9d9c72def068f2e2c416d19616d2859f437e9e239d13c88",
+      "stopBefore": "2026-11-22-peft-editorial-pass.json"
+    },
     "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md": {
       "currentSha256": "1c53e873d9c84b1a25ddbc9ec47565e324336040c0942286bf33f680221a07af",
       "stopBefore": "2026-11-22-sft-editorial-pass.json"

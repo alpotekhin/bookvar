@@ -80,6 +80,9 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«Диффузионные языковые модели: MDLM и LLaDA»](2026-11-22-masked-diffusion-editorial-pass.json),
 [«Декодирование и выбор следующего токена»](2026-11-22-decoding-editorial-pass.json),
 [«Постобучение языковых моделей»](2026-11-22-posttraining-intro-editorial-pass.json),
-[«SFT: обучение на демонстрациях»](2026-11-22-sft-editorial-pass.json) и
-[«Fine-tuning и PEFT»](2026-11-22-peft-editorial-pass.json).
-Следующая глава — «Preference data».
+[«SFT: обучение на демонстрациях»](2026-11-22-sft-editorial-pass.json),
+[«Fine-tuning и PEFT»](2026-11-22-peft-editorial-pass.json),
+[«Данные предпочтений»](2026-11-22-preference-data-editorial-pass.json),
+[«Модель награды»](2026-11-22-reward-model-editorial-pass.json) и
+[«Градиент стратегии и PPO»](2026-11-22-ppo-editorial-pass.json).
+Следующая глава — «Цели alignment, HHH, Constitutional AI и RLAIF».

@@ -2766,13 +2766,25 @@ describe('static handbook output', () => {
     expect(en).toContain('id="ppo-token-update"');
     expect(en).toContain('areal-interruptible-timeline.png');
     expect(html).not.toContain('katex-error');
+    for (const [edition, prefix] of [[html, ''], [en, 'en/']]) {
+      expect(edition.match(/<details\b[^>]*id="ppo-code-/g)).toHaveLength(6);
+      const token = edition.match(/id="ppo-token-update"[\s\S]*?(?=<h3\b[^>]*id="градиент-ppo-clip")/)?.[0];
+      for (const evidence of ['ref_logp', 'old_logp', 'new_logp', '0{,}01', '0{,}036'])
+        expect(token).toContain(evidence);
+      expect(edition.indexOf('id="токеновые-награды-и-kl-штраф"')).toBeLessThan(edition.indexOf('id="gae-по-токенам"'));
+      expect(edition.indexOf('id="метрики-ppo"')).toBeLessThan(edition.indexOf('id="ppo-areal"'));
+      expect(edition.match(/<a\b[^>]*\brel="prev"[^>]*>/)?.[0]).toContain('/' + prefix + 'textbook/post-training/reward-modeling/');
+      expect(edition.match(/<a\b[^>]*\brel="next"[^>]*>/)?.[0]).toContain('/' + prefix + 'textbook/post-training/alignment-goals/');
+      for (const id of ['2-вывод-reinforce-без-пропущенных-шагов', '6-почему-простого-градиента-стратегии-недостаточно', 'второй-токен-от-оценки-ответа-до-градиента'])
+        expect(edition.split('id="' + id + '"')).toHaveLength(2);
+    }
   });
   it('renders runnable reward modeling, listwise/step examples and the complete calibration figure', async () => {
     const html = await readFile(join(distDir, 'textbook/post-training/reward-modeling/index.html'), 'utf8');
     const text = html.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ');
     for (const value of ['LlamaModel', 'position_ids', 'left_score', 'plackett_luce_loss',
       '0.380952', '0.355556', 'prm_product', 'calibration_loss', '0.929074',
-      '47,4%', '1,949', '0,526', 'Что меняется при PPO'])
+      '47,4%', '1,949', '0,526', 'Переоптимизация при PPO'])
       expect(text).toContain(value);
     expect(html.match(/<pre data-language="python"/g)).toHaveLength(7);
     for (const name of ['reward-model-hf.png', 'preference-rm-training.png',
@@ -2781,6 +2793,7 @@ describe('static handbook output', () => {
       expect(html).toMatch(new RegExp('<img[^>]+src="[^"]*/' + name.replaceAll('.', '\\.') + '"'));
     expect(html).toContain('id="bradley-terry"');
     expect(html).toContain('id="reward-overoptimization"');
+    expect(html.split('id="что-меняется-при-ppo"')).toHaveLength(2);
     expect(html).not.toContain('katex-error');
   });
   it('resolves preference/reward subject entries to both complete locale routes', async () => {
@@ -2801,6 +2814,27 @@ describe('static handbook output', () => {
       }
     }
   });
+  it('keeps gradient, calibration and PPO before the DPO-dependent appendix', async () => {
+    for (const locale of ['', 'en/']) {
+      const route = locale + 'textbook/post-training/';
+      const html = await readFile(join(distDir, route, 'reward-modeling/index.html'), 'utf8');
+      const sections = ['preference-to-reward', 'bradley-terry', 'rm-soft-labels',
+        'prm-boundary-loss', 'rm-validation', 'rm-calibration',
+        'reward-overoptimization', 'rm-self-rewarding', 'rm-meta-rewarding', 'rm-evalplanner'];
+      const positions = sections.map(id => html.indexOf('id="' + id + '"'));
+      expect(positions.every((position, i) => position >= 0 && (!i || positions[i - 1] < position))).toBe(true);
+      const training = html.slice(positions[1], positions[2]);
+      expect(training).toContain('1{,}209');
+      expect(training).toContain('−0.8808');
+      expect(html.match(/<details\b[^>]*id="rm-code-/g)).toHaveLength(7);
+      expect(html).toContain('https://proceedings.mlr.press/v202/gao23h/gao23h.pdf#page=32');
+      for (const id of ['ручной-расчёт-неправильный-порядок',
+        '6-совместное-улучшение-ответов-и-их-оценки', 'численная-проверка-функции-потерь'])
+        expect(html.split('id="' + id + '"')).toHaveLength(2);
+      expect(html.match(/<a\b[^>]*\brel="prev"[^>]*>/)?.[0]).toContain('/' + route + 'preference-data/');
+      expect(html.match(/<a\b[^>]*\brel="next"[^>]*>/)?.[0]).toContain('/' + route + 'ppo/');
+    }
+  });
   it('renders executable preference preparation with the complete licensed primary figures', async () => {
     const html = await readFile(join(distDir, 'textbook/post-training/preference-data/index.html'), 'utf8');
     const text = html.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ');
@@ -2819,6 +2853,26 @@ describe('static handbook output', () => {
     expect(text).toContain('три вероятности');
     expect(html).toContain('id="задания"');
     expect(html).not.toContain('katex-error');
+  });
+  it('keeps data collection, comparison outcomes and the next chapter in reader order', async () => {
+    for (const locale of ['', 'en/']) {
+      const route = locale + 'textbook/post-training/';
+      const html = await readFile(join(distDir, route + 'preference-data/index.html'), 'utf8');
+      const anchors = ['pref-comparison-record', 'pref-sampling-distribution',
+        'pref-rankings', 'pref-bt-observation', 'pref-position-swap',
+        'pref-cohen-kappa', 'pref-group-splits'];
+      const positions = anchors.map(id => html.indexOf('id="' + id + '"'));
+      expect(positions.every((pos, i) => pos >= 0 && (!i || positions[i - 1] < pos))).toBe(true);
+      expect(html.match(/<details\b[^>]*id="pref-code-/g)).toHaveLength(6);
+      for (const id of ['сквозной-пример-сравнения', 'ручной-пример',
+        'практика-и-первоисточники', '7-преобразование-ранжирования-в-пары-без-утечки'])
+        expect(html.split('id="' + id + '"')).toHaveLength(2);
+      const audit = html.slice(positions[4], positions[5]);
+      expect(audit).toContain('https://arxiv.org/html/2306.05685v4#S3.SS4');
+      expect(audit).toContain('ошибку');
+      expect(html).toMatch(new RegExp('<a[^>]*rel="prev"[^>]*href="/' + route + 'fine-tuning-peft/"|<a[^>]*href="/' + route + 'fine-tuning-peft/"[^>]*rel="prev"'));
+      expect(html).toMatch(new RegExp('<a[^>]*rel="next"[^>]*href="/' + route + 'reward-modeling/"|<a[^>]*href="/' + route + 'reward-modeling/"[^>]*rel="next"'));
+    }
   });
   it('keeps the Tülu preference pipeline and the two data-scaling experiments distinct', async () => {
     for (const locale of ['', 'en/']) {

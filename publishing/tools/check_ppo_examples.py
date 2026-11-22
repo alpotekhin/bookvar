@@ -58,6 +58,13 @@ def main():
     # Follow the second token of the first rollout through the two losses.
     t = (slice(0, 1), slice(1, 2))
     advantage, critic_target = ns["toy_advantages"][t], ns["toy_returns"][t]
+    sampled_penalty = -0.1 * (lp[t] - ref[t]).item()
+    changed_logp = (lp[t] + math.log(1.3)).item()
+    recalculated_penalty = -0.1 * (changed_logp - ref[t].item())
+    assert math.isclose(ns["toy_rewards"][t].item(), sampled_penalty, abs_tol=1e-12)
+    assert round(sampled_penalty, 3) == -.010
+    assert round(changed_logp, 3) == -.538
+    assert round(recalculated_penalty, 3) == -.036
     for ratio, actor_value, actor_grad in ((1., .4415, -.4415), (1.3, .5298, 0.)):
         new_lp = (lp[t] + math.log(ratio)).requires_grad_()
         token_loss = loss(new_lp, lp[t], advantage, mask[t])
@@ -117,6 +124,9 @@ def main():
     grads = torch.autograd.grad(loss(new, old, adv, cm), (new, old, adv), allow_unused=True)
     torch.testing.assert_close(grads[0], ns["expected_gradient"])
     assert grads[1:] == (None, None)
+    actual_ratio = (new.detach() - old.detach()).exp()
+    assert ((actual_ratio < .8) | (actual_ratio > 1.2)).sum().item() == 4
+    assert (grads[0] == 0).sum().item() == 2
     # Masked NaN/huge logits must be excluded before subtraction/exp.
     padded_loss = loss(torch.cat([new, torch.tensor([[float("nan"), 1e30]], dtype=dtype)], -1),
                        torch.cat([old, torch.zeros((1, 2), dtype=dtype)], -1),
@@ -157,10 +167,23 @@ def main():
     kl_terms = (q/torch.tensor([.5, .5], dtype=dtype)).log()
     assert kl_terms[0] > 0 and kl_terms[1] < 0
     assert math.isclose((q*kl_terms).sum().item(), .020135513550688863)
+    # At the rollout policy, the explicit derivative of the log penalty
+    # integrates to zero; keep the penalty value in the score-function term.
+    rollout_logit = torch.tensor(math.log(.6/.4), dtype=dtype, requires_grad=True)
+    rollout_p = rollout_logit.sigmoid()
+    rollout_probs = torch.stack([rollout_p, 1 - rollout_p])
+    regularized_rewards = torch.tensor([1., 0.], dtype=dtype) - .1 * (rollout_probs.log() - math.log(.5))
+    exact = torch.autograd.grad((rollout_probs * regularized_rewards).sum(),
+                                rollout_logit, retain_graph=True)[0]
+    score_term = torch.autograd.grad((rollout_probs * regularized_rewards.detach()).sum(),
+                                     rollout_logit)[0]
+    torch.testing.assert_close(exact, score_term)
     print(json.dumps({"published_python_fences": len(blocks), "device": "cpu",
         "torch": torch.__version__, "transformers": transformers.__version__,
         "parameters": sum(p.numel() for p in policy.parameters()) + sum(p.numel() for p in critic.parameters()),
         "actor_loss": ns["actor_loss"].item(), "value_loss": ns["value_loss"].item(),
+        "second_token": {"sampled_penalty": sampled_penalty, "changed_logp": changed_logp,
+                         "penalty_if_recalculated": recalculated_penalty},
         "max_causal_alignment_error": max_alignment_error,
         "example_stdout": output.getvalue().splitlines(),
         "chapter_sha256": hashlib.sha256(text.encode()).hexdigest()}, indent=2))

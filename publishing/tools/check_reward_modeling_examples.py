@@ -94,6 +94,19 @@ def main():
     assert torch.allclose((r[0]-r[1]).sigmoid(), ((r[0]+100)-(r[1]+100)).sigmoid())
     assert not torch.allclose((r[0]-r[1]).sigmoid(), (10*(r[0]-r[1])).sigmoid())
 
+    # The chapter's hand calculation treats the two scores as parameters.
+    toy_scores = torch.tensor([-.4, .6], dtype=torch.float64, requires_grad=True)
+    toy_optimizer = torch.optim.SGD([toy_scores], lr=.1)
+    toy_loss = -F.logsigmoid(toy_scores[0]-toy_scores[1])
+    toy_loss.backward()
+    toy_optimizer.step()
+    toy_gap = (toy_scores[0]-toy_scores[1]).item()
+    toy_loss_after = -F.logsigmoid(torch.tensor(toy_gap, dtype=torch.float64)).item()
+    assert [round(v, 3) for v in toy_scores.tolist()] == [-.327, .527]
+    assert round(toy_gap, 3) == -.854
+    assert round(toy_loss.item(), 3) == 1.313
+    assert round(toy_loss_after, 3) == 1.209
+
     torch.testing.assert_close(ns["pl_loss"].neg().exp(), torch.tensor(8/21, dtype=torch.float64))
     torch.testing.assert_close(ns["pair_losses"].sum().neg().exp(), torch.tensor(16/45, dtype=torch.float64))
     torch.testing.assert_close(pl(r), -F.logsigmoid(r[0]-r[1]))
@@ -149,6 +162,10 @@ def main():
         "transformers": transformers.__version__, "device": "cpu",
         "model_parameters": sum(p.numel() for p in backbone.parameters()) + head.weight.numel(),
         "loss_before": ns["loss"].item(), "loss_after": new_loss.item(),
+        "scalar_example": {
+            "scores_after": toy_scores.tolist(), "gap_after": toy_gap,
+            "loss_before": toy_loss.item(), "loss_after": toy_loss_after,
+        },
         "padding_comparisons": 24, "max_padding_error": max_padding_error,
         "backbone_gradient_norm_sum": backbone_grad,
         "pl_probability": ns["pl_loss"].neg().exp().item(),
