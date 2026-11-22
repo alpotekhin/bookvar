@@ -1115,6 +1115,17 @@ describe('static handbook output', () => {
       expect(html.match(/<h1(?:\s|>)/g)).toHaveLength(1);
       expect(html.match(/<img\b[^>]*\bsrc=/g)).toHaveLength(13);
       expect(html.match(/<pre\b/g)).toHaveLength(19);
+      expect(html.match(/<details\b[^>]*id="peft-code-/g)).toHaveLength(19);
+      const requantization = html.match(/id="qlora-requantized-merge"[\s\S]*?(?=<h3\b)/)?.[0];
+      expect(requantization).toContain('1.2/0.5=2.4');
+      expect(requantization).toContain('reconstruct 1');
+      const budget = html.match(/id="peft-memory-budget"[\s\S]*?<\/table>/)?.[0];
+      for (const subtotal of ['84 GB', '14.05 GB', '3.66 GB'])
+        expect(budget).toContain(subtotal);
+      for (const id of ['lora-changes-a-projection-through-two-small-factors',
+        'merging-checkpoints-and-serving-different-adapters',
+        'account-for-base-weights-trainable-state-and-activations-separately'])
+        expect(html.split('id="' + id + '"')).toHaveLength(2);
       for (const name of ['houlsby-adapter.png', 'lora-animated.gif', 'lora-merge.png', 'lora-gpt3-figure2.png',
         'qlora-training-original.png', 'qlora-figure2-target-modules.svg',
         'qlora-figure6-training-memory.svg', 'prompt-tuning.png', 'prefix-tuning.png',
@@ -2589,24 +2600,39 @@ describe('static handbook output', () => {
       expect(course).toContain('href="/' + prefix + route + '/#' + anchor + '"');
     }
   });
-  it('renders six executable decoding examples, source illustrations and stop/beam limits', async () => {
-    const html = await readFile(join(distDir,'textbook/inference/decoding/index.html'),'utf8');
-    const text = html.replace(/<[^>]*>/g,'').replace(/\s+/g,' ');
-    expect(html.match(/<pre data-language="python"/g)).toHaveLength(6);
-    for (const name of ['greedy_search','beam_search','sampling_search',
-      'sampling_search_with_temp','top_k_sampling','top_p_sampling'])
-      expect(html).toMatch(new RegExp('<img[^>]+src="[^"]*/hf-'+name+'\\.png"'));
-    for (const value of ['probabilities_at','k_then_p','p_then_k','prompt_ignore_length',
-      'StopStringCriteria','beam_indices','compute_transition_scores',
-      '0,099','0,02','0,68','0,99','0,0816']) {
-      expect(text).toContain(value);
+  it('keeps the two-step decoding example, six source figures and main-course links in both editions', async () => {
+    for (const locale of ['', 'en/']) {
+      const html = await readFile(join(distDir, locale, 'textbook/inference/decoding/index.html'), 'utf8');
+      const prose = html.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ');
+      expect(html.match(/<pre data-language="python"/g)).toHaveLength(6);
+      for (const name of ['temperature', 'filters', 'order', 'penalty', 'stop', 'generate'])
+        expect(html).toMatch(new RegExp('<details\\b[^>]*id="decoding-' + name + '-code"'));
+      for (const name of ['greedy_search', 'beam_search', 'sampling_search',
+        'sampling_search_with_temp', 'top_k_sampling', 'top_p_sampling'])
+        expect(html).toMatch(new RegExp('<img[^>]+src="[^"]*/hf-' + name + '\\.png"'));
+      for (const value of ['probabilities_at', 'k_then_p', 'p_then_k', 'prompt_ignore_length',
+        'StopStringCriteria', 'beam_indices', 'compute_transition_scores', 'stopera'])
+        expect(prose).toContain(value);
+      for (const value of ['0.099', '0.02', '0.68', '0.99', '0.0816'])
+        expect(prose).toContain(locale ? value : value.replace('.', ','));
+      const example = html.indexOf('id="decoding-top-p-two-steps"');
+      expect(example).toBeGreaterThan(0);
+      const text = html.slice(example, html.indexOf('<h2', example));
+      expect(text).toContain(locale ? '0.27' : '0{,}27');
+      expect(text).toContain('=1/3');
+      for (const id of ['temperature-меняет-контраст-вероятностей',
+        'остановка-тоже-относится-к-декодированию', 'практика-и-первоисточники'])
+        expect(html.split('id="' + id + '"')).toHaveLength(2);
+      const links = html.match(/<a\b[^>]*>/g) ?? [];
+      for (const [rel, path] of [['prev','pretraining/masked-diffusion-language-models'],
+        ['next','post-training/module-map']])
+        expect(links.some(tag => tag.includes('rel="' + rel + '"')
+          && tag.includes('href="/' + locale + 'textbook/' + path + '/"'))).toBe(true);
+      expect(prose).not.toContain('speculative sampling и Triton');
+      expect(prose).not.toContain('speculative sampling and Triton seminar');
+      expect(html).not.toContain('katex-error');
+      expect(html).not.toContain('aria-label="English edition status"');
     }
-    expect(text).not.toContain('Top-k на реальном распределении GPT-2');
-    expect(text).not.toContain('chapter 8');
-    expect(text).toContain('speculative sampling и Triton');
-    expect(html).toContain('href="/textbook/pretraining/synthetic-data-curricula/"');
-    expect(html).toContain('href="/textbook/inference/llm-inference-physics/"');
-    expect(html).not.toContain('katex-error');
   });
   it('preserves synthetic-data examples, original figures and the linear chapter route', async () => {
     const html = await readFile(join(distDir, 'textbook/pretraining/synthetic-data-curricula/index.html'), 'utf8');
@@ -2842,6 +2868,15 @@ describe('static handbook output', () => {
     for (const locale of ['', 'en/']) {
       const html = await readFile(join(distDir, locale, 'textbook/post-training/sft-instruction-data/index.html'), 'utf8');
       expect(html).toContain(`href="/${locale}textbook/post-training/module-map/#posttraining-one-prompt"`);
+      for (const id of ['loss-code','update-code','packing-code'])
+        expect(html).toMatch(new RegExp('<details\\b[^>]*id="sft-' + id + '"'));
+      const shifted = html.match(/id="sft-shifted-targets"[\s\S]*?(?=<span id="многоходовой-диалог-что-считать-эталоном")/)?.[0];
+      expect(shifted).toBeDefined();
+      for (const marker of ['ID 41', 'позиции 4', 'позиции 8', 'Всего целей пять'])
+        expect(shifted).toContain(marker);
+      for (const id of ['зачем-обучать-модель-ещё-раз', 'сквозной-пример',
+        'проверка-обучающего-шага', 'практика-и-первоисточники'])
+        expect(html.split('id="' + id + '"')).toHaveLength(2);
       const accumulation = html.match(/id="sft-accumulation-denominator"[\s\S]*?(?=<h2\b)/)?.[0];
       expect(accumulation).toBeDefined();
       for (const claim of ['1/16', '1/10', 'вчетверо', 'huggingface.co/docs/transformers/grad_accumulation'])
@@ -2870,11 +2905,20 @@ describe('static handbook output', () => {
         expect(explanation).toContain(marker);
       for (const url of ['https://arxiv.org/html/2203.02155#S3.SS1', 'https://arxiv.org/html/2305.18290#S4'])
         expect(exercise).toContain(url);
+      expect(exercise).toContain('\\log 4-\\log 2=\\log 2');
+      expect(explanation).toContain('вероятность каждого ответа упала');
       const scores = exercise!.match(/<tbody>[\s\S]*?<\/tbody>/)?.[0];
       expect([...scores!.matchAll(/<td[^>]*>([01])<\/td>/g)].map(match => match[1])).toEqual(['1', '1', '0', '0']);
       const compare = html.match(/id="tulu-stage-comparison"[\s\S]*?(?=<h2\b)/)?.[0];
       expect(compare).toBeDefined();
       expect(compare).toContain('https://arxiv.org/html/2411.15124v5#S7.T31');
+      expect(compare).toContain('pass@10');
+      for (const id of ['что-меняется-между-prompting-sft-preference-learning-и-rlvr',
+        'пример-полного-процесса-tülu-3', 'как-сравнить-этапы-если-награда-и-тест-измеряют-разное',
+        'минимальная-воспроизводимая-последовательность', 'маршрут-по-модулю'])
+        expect(html.split('id="' + id + '"')).toHaveLength(2);
+      const previous = (html.match(/<a\b[^>]*>/g) ?? []).find(tag => tag.includes('rel="prev"'));
+      expect(previous).toContain('href="/' + locale + 'textbook/inference/decoding/"');
       for (const row of [/31,5[\s\S]*?42,0[\s\S]*?43,7/, /32,3[\s\S]*?33,0[\s\S]*?35,4/, /11,5[\s\S]*?9,5[\s\S]*?7,4/]) {
         expect(compare).toMatch(row);
       }

@@ -22,11 +22,12 @@ describe('pretraining to decoding prerequisites', () => {
     }
   });
 
-  it('pins the same canonical revision without creating or replacing a translation', () => {
+  it('pins the current canonical revision and translation review date', () => {
     const data = matter(read(english));
     expect(data.canonical_revision).toBe(hash(read(canonical)));
     expect(data.translation_status).toBe('current');
-    expect(data.translation_reviewed).toBe('2026-10-30');
+    expect(data.translation_reviewed).toBe(matter(read(canonical)).last_verified);
+    expect(data.translation_reviewed).toMatch(/^\d{4}-\d{2}-\d{2}$/);
   });
 
   it('changes only frontmatter in both full chapters and rejects unknown edits', () => {

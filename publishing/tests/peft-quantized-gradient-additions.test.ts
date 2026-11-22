@@ -17,6 +17,7 @@ const programs=(s:string)=>[...s.matchAll(/^\x60{3}python\n([\s\S]*?)^\x60{3}\s*
 const figs=(s:string)=>[...s.matchAll(/!\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g)].map(m=>m[1]);
 const reviewed=()=>beforeTopicConsolidation(body,owner.source,root,own);
 const original=()=>{let value=reviewed();for(const c of [...owner.changes].reverse())value=value.replace(c.new,()=>c.old);return value;};
+const equations=(s:string)=>[...s.matchAll(/^\$\$([\s\S]*?)\$\$/gm)].map(m=>m[1]);
 
 describe('PEFT quantized-base worked gradient',()=>{
   it('reverses only the four recorded chapter, index and verifier deltas',()=>{
@@ -37,13 +38,18 @@ describe('PEFT quantized-base worked gradient',()=>{
     expect(programs(body)).toHaveLength(19);
     expect(programs(old)).toHaveLength(18);
     expect(programs(body).filter(x=>!x.includes('q_original ='))).toEqual(programs(old));
-    expect([...body.matchAll(/^\$\$([\s\S]*?)\$\$/gm)].map(m=>m[1]))
-      .toEqual([...old.matchAll(/^\$\$([\s\S]*?)\$\$/gm)].map(m=>m[1]));
+    expect(equations(reviewed())).toEqual(equations(old));
+    expect(equations(body)).toHaveLength(equations(old).length);
+    expect(equations(body).find(formula=>formula.includes('M_{\\mathrm{frozen'))).toContain('M_{\\mathrm{trainable\\ state}}');
     expect(matter(body).data.source_language).toBe('en');
   });
   it('points both subject indexes to the same complete English explanation',()=>{
     const parsed=matter(body),terms=referenceTerms(owner.source,parsed.data.reference_terms,parseMarkdownHeadings(parsed.content,true));
-    expect(terms).toHaveLength(18);
+    const historic=matter(reviewed());
+    const historicTerms=referenceTerms(owner.source,historic.data.reference_terms,parseMarkdownHeadings(historic.content,true));
+    const additions=['qlora-requantized-merge','peft-memory-budget'];
+    expect(terms.filter(t=>!additions.includes(t.anchor))).toEqual(historicTerms);
+    expect(terms.filter(t=>additions.includes(t.anchor)).map(t=>t.anchor)).toEqual(additions);
     for(const [p,en] of [['01 Справочник/_index.md',false],['en/01 Reference/_index.md',true]] as const)
       for(const t of terms)expect(read(p)).toContain('[['+owner.source.slice(0,-3)+'#'+t.anchor+'|'+(en?t.label_en:t.label)+']]');
   });

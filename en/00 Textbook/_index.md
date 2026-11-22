@@ -124,8 +124,8 @@ After the decoder architecture, the course turns to the corpus, training objecti
 
 A pretrained model already predicts the next token. Post-training changes the examples, quality signal, and optimization procedure used to shape its behavior.
 
-- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники|Post-training map and sources]]
-- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT and instruction data]]
+- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники|Language model post-training]]
+- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT: learning from demonstrations]]
 - [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts|Fine-tuning and PEFT]] · **EN original**
 - [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/02 Preference data|Preference data]]
 - [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/03 Reward modeling|Reward modeling]]

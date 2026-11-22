@@ -1264,6 +1264,7 @@ last_updated: 2026-10-30
   - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#rm-calibration|Точность порядка и калибровка вероятностей]]
   - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#annotator-effects|Протокол разметки и зависимость ошибок]]
   - [[00 Учебник/12 Post-training и Alignment/03 Reward modeling#reward-overoptimization|Best-of-N и эксплуатация награды]]
+- [[00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники|Постобучение языковых моделей]]
 - [[00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF|Alignment: цели, HHH и Constitutional AI]]
 - [[00 Учебник/12 Post-training и Alignment/05 DPO|DPO — непосредственная оптимизация предпочтений]]
   - [[00 Учебник/12 Post-training и Alignment/05 DPO#dpo-stages|Какие этапы RLHF заменяет DPO]]
@@ -1299,6 +1300,8 @@ last_updated: 2026-10-30
   - [[00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts#merging-and-serving|Слияние LoRA и обслуживание нескольких адаптеров]]
   - [[00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts#qlora-training|QLoRA — обучение с квантованной базой]]
   - [[00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts#qlora-frozen-gradient-example|QLoRA — градиент через замороженную квантованную матрицу]]
+  - [[00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts#qlora-requantized-merge|Слияние LoRA и повторная квантизация]]
+  - [[00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts#peft-memory-budget|Память при полном дообучении, LoRA и QLoRA]]
   - [[00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts#soft-prompts|Soft prompts и prompt tuning]]
   - [[00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts#prefix-keys-values|Prefix tuning — обучаемые K/V]]
   - [[00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts#small-data-fine-tuning|Дообучение энкодера на малой выборке]]
@@ -1346,7 +1349,6 @@ last_updated: 2026-10-30
   - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-self-correction|Самокоррекция: наблюдаемый текст и границы выводов]]
   - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-failures|Сбои GRPO и диагностические показатели]]
   - [[00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1#grpo-open-implementations|Открытые реализации GRPO и границы воспроизведения]]
-- [[00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники|Post-training и Alignment — карта модуля и источники]]
 - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers|RLVR — обучение по проверяемой награде]]
   - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-contract|Проверяемая награда и исходная способность решать задачи]]
   - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#verifiable-reward|Источник награды и алгоритм обновления]]
@@ -1378,7 +1380,10 @@ last_updated: 2026-10-30
   - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-tulu-value-model|Функция ценности, награда RM и параметры PPO]]
   - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-rollout-learner-workers|Rollout workers, learner и устаревшие данные]]
   - [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers#rlvr-failures|Open-R1 и контракты открытых реализаций]]
-- [[00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT и инструктивные данные]]
+- [[00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT: обучение на демонстрациях]]
+  - [[00 Учебник/12 Post-training и Alignment/01 SFT и instruction data#sft-shifted-targets|Сдвиг меток и границы ответа]]
+  - [[00 Учебник/12 Post-training и Alignment/01 SFT и instruction data#sft-accumulation-denominator|Нормировка при накоплении градиентов]]
+  - [[00 Учебник/12 Post-training и Alignment/01 SFT и instruction data#sft-flan-held-out-task|Проверка на новых типах задач в FLAN]]
 
 ### Инференс и обслуживание запросов
 

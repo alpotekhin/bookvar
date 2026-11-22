@@ -17,9 +17,44 @@ import re
 
 import torch
 import transformers
+from tokenizers import Tokenizer, models, pre_tokenizers
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md"
+
+
+def check_template_masks(ids, assistant_mask):
+    # The chapter's artificial vocabulary: no checkpoint or network request.
+    names = [f"unused_{i}" for i in range(128)]
+    for token, index in {"<unk>": 0, "точный": 25, "TCP": 41, "порядок": 51,
+                         "надёжен": 72, "сохранён": 88, "<system>": 101,
+                         "<user>": 102, "<assistant>": 103, "<end>": 104}.items():
+        names[index] = token
+    backend = Tokenizer(models.WordLevel(dict(zip(names, range(128))), unk_token="<unk>"))
+    backend.pre_tokenizer = pre_tokenizers.WhitespaceSplit()
+    tok = transformers.PreTrainedTokenizerFast(
+        tokenizer_object=backend, unk_token="<unk>", eos_token="<end>", pad_token="<end>"
+    )
+    messages = [
+        {"role": "system", "content": "точный"},
+        {"role": "user", "content": "TCP"},
+        {"role": "assistant", "content": "TCP надёжен порядок сохранён"},
+    ]
+    start = (
+        '{% for m in messages %}{{ "<" + m["role"] + "> " }}'
+        '{% if m["role"] == "assistant" %}'
+    )
+    end = '{% else %}{{ m["content"] }}{% endif %}{{ " " }}{% endfor %}'
+    reply = '{% generation %}{{ m["content"] + " <end>" }}{% endgeneration %}'
+    kwargs = dict(tokenize=True, return_dict=True, return_assistant_tokens_mask=True,
+                  add_generation_prompt=False)
+    full = tok.apply_chat_template(messages, chat_template=start + reply + end, **kwargs)
+    assert full["input_ids"] == ids[0].tolist()
+    assert full["assistant_masks"] == assistant_mask[0].tolist()
+    without_target = '{% generation %}{{ m["content"] }}{% endgeneration %}{{ " <end>" }}'
+    negative = tok.apply_chat_template(messages, chat_template=start + without_target + end, **kwargs)
+    assert negative["input_ids"] == full["input_ids"]
+    assert negative["assistant_masks"] == full["assistant_masks"][:-1] + [0]
 
 
 def main():
@@ -34,12 +69,14 @@ def main():
     assert output.getvalue().strip() == "loss=4.840772, padded=4.840772", output.getvalue()
 
     model, ids, am, attn = [ns[k] for k in ("model", "input_ids", "assistant_mask", "attention_mask")]
+    check_template_masks(ids, am)
     loss_fn = ns["assistant_only_loss"]
     assert sum(p.numel() for p in model.parameters()) == 6704
     assert ns["optimizer"].state, "the published optimizer step must have executed"
     assert all(state["step"].item() == 1 for state in ns["optimizer"].state.values())
     target_ids = ids[:, 1:][am[:, 1:].bool() & attn[:, 1:].bool()]
     assert target_ids.tolist() == [41, 72, 51, 88, 104]
+    assert torch.where(am[:, 1:].bool() & attn[:, 1:].bool())[1].tolist() == [4, 5, 6, 7, 8]
     assert (ns["padded_assistant"][:, 1:].bool() &
             ns["padded_attention"][:, 1:].bool()).sum().item() == 5
 
@@ -86,6 +123,8 @@ def main():
     assert ns["allowed"].sum().item() == 8 * 9 // 2 + 5 * 6 // 2
     assert not ns["allowed"][8:, :8].any()
     assert not ns["allowed"][:8, 8:].any()
+    assert torch.where(ns["allowed"][8])[0].tolist() == [8]
+    assert torch.where(ns["allowed"][9])[0].tolist() == [8, 9]
     packing_error = (ns["isolated"] - ns["standalone"]).abs().max().item()
     leak = (ns["ordinary"] - ns["ordinary_changed"]).abs().max().item()
     assert packing_error < 1e-6 and leak > 1e-5
@@ -138,6 +177,7 @@ def main():
         "nll": manual, "perplexity": math.exp(manual),
         "accumulation_max_error": (full_grad - correct).abs().max().item(),
         "mean_of_means_max_error": (full_grad - naive).abs().max().item(),
+        "template_end_marker_negative_control": True,
     }, indent=2))
     print("PASS published SFT loss/update/packing; EOS, padding, empty targets, prompt gradients, mixture arithmetic")
 

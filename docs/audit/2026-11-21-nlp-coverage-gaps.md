@@ -76,6 +76,10 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«Сбор, очистка и смеси данных»](2026-11-22-data-collection-editorial-pass.json),
 [«Дедупликация, PII и контроль качества корпуса»](2026-11-22-corpus-dedup-editorial-pass.json),
 [«Целевая функция предобучения»](2026-11-22-ntp-objective-editorial-pass.json),
-[«Законы масштабирования»](2026-11-22-scaling-laws-editorial-pass.json) и
-[«Диффузионные языковые модели: MDLM и LLaDA»](2026-11-22-masked-diffusion-editorial-pass.json).
-Следующая глава — «Декодирование и выбор следующего токена».
+[«Законы масштабирования»](2026-11-22-scaling-laws-editorial-pass.json),
+[«Диффузионные языковые модели: MDLM и LLaDA»](2026-11-22-masked-diffusion-editorial-pass.json),
+[«Декодирование и выбор следующего токена»](2026-11-22-decoding-editorial-pass.json),
+[«Постобучение языковых моделей»](2026-11-22-posttraining-intro-editorial-pass.json),
+[«SFT: обучение на демонстрациях»](2026-11-22-sft-editorial-pass.json) и
+[«Fine-tuning и PEFT»](2026-11-22-peft-editorial-pass.json).
+Следующая глава — «Preference data».

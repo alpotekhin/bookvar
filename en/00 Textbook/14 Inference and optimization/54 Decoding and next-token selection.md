@@ -2,8 +2,8 @@
 title: "Decoding and next-token selection"
 type: textbook-chapter
 status: canonical
-last_updated: 2026-10-30
-last_verified: 2026-10-25
+last_updated: 2026-11-22
+last_verified: 2026-11-22
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/42 Next-token prediction|Next-token objective]]"
 next: "[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники]]"
@@ -14,10 +14,11 @@ primary_sources:
   - https://huggingface.co/docs/transformers/v4.57.1/en/main_classes/text_generation
   - https://github.com/huggingface/transformers/blob/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/generation/logits_process.py
   - https://arxiv.org/abs/1904.09751v2
+  - https://arxiv.org/abs/2407.01082
 locale: en
 translation_status: current
-canonical_revision: "1f12fb049389433c942ce4833f1ca4e0398ffed721e264004c501c6a38ff499b"
-translation_reviewed: "2026-10-30"
+canonical_revision: "470bd39c9463365f9f12896d666f4d4ff8e955075a77806e75031ee4b5888183"
+translation_reviewed: "2026-11-22"
 translation_of: "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md"
 ---
 
@@ -25,12 +26,12 @@ translation_of: "00 Учебник/14 Inference и оптимизация/54 Д�
 
 # Decoding and next-token selection
 
-A language model does not emit a finished sentence. After each prefix it
-returns one number for every token in its vocabulary. Decoding turns those
-numbers into decisions: which token to append, when to stop, and which
-alternatives to retain for the next step. The same model parameters can
-therefore produce a translation, a repetitive loop, or several plausible
-continuations depending on the selection procedure.
+Suppose a language model has read the prompt and started its answer.
+Its next forward pass returns one logit per vocabulary token. A decoding
+rule can turn those scores into probabilities, exclude some candidates,
+and select a token. Adding the token to the prefix changes the input to
+the next forward pass. The loop ends, for example, when it selects EOS
+or reaches the length limit.
 
 <a id="от-логитов-к-распределению"></a>
 
@@ -95,7 +96,7 @@ $$
 x_t=\arg\max_{w\in V}p(w\mid x_{<t}).
 $$
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-greedy_search.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-greedy_search.png|Greedy choice of two tokens on a probability tree]]
 
 *The greedy path in Patrick von Platen's
 [How to generate text](https://huggingface.co/blog/how-to-generate).
@@ -126,7 +127,7 @@ Beam search retains the $B$ highest-scoring unfinished sequences.
 Each step expands them with candidate tokens, computes cumulative
 scores, and retains the best $B$ continuations.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-beam_search.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-beam_search.png|Two paths in the beam with full-sequence probabilities]]
 
 *A beam width of two preserves both initial branches and discovers that
 the less probable first token leads to the more probable pair.
@@ -231,7 +232,7 @@ $$
 x_t\sim p(\cdot\mid x_{<t}).
 $$
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-sampling_search.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-sampling_search.png|Sampling two transitions on a probability tree]]
 
 *A branch is selected randomly according to its displayed probability;
 another run may take a different path. Patrick von Platen,
@@ -252,7 +253,8 @@ This illustrates risk accumulation, not the measured error rate of an LLM.
 
 <a id="temperature-меняет-контраст-вероятностей"></a>
 
-## Temperature changes probability contrast
+<span id="temperature-changes-probability-contrast"></span>
+## Temperature
 
 Temperature divides logits by $T>0$:
 
@@ -284,7 +286,7 @@ sampling explicitly with `do_sample=False`. Other servers may treat
 `temperature=0` as a separate switch; that is an API convention,
 not a softmax value.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-sampling_search_with_temp.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-sampling_search_with_temp.png|A sharper distribution over three tokens after lowering temperature]]
 
 *Lowering temperature makes the car branch less probable.
 Patrick von Platen, [How to generate text](https://huggingface.co/blog/how-to-generate).*
@@ -316,8 +318,10 @@ and renormalizing.
 | D | 0.0800 | 0.0216 | 0.1379 |
 | E | 0.0200 | 0.0013 | 0.0689 |
 
-Run the following Python blocks sequentially in one session.
-First compute this table:
+The listings share one Python session. The first sets up the logits and computes the table.
+
+<details id="decoding-temperature-code">
+<summary>Code: the temperature table</summary>
 
 ~~~python
 import math
@@ -339,6 +343,8 @@ for temperature in (0.5, 1.0, 2.0):
     print(temperature, probabilities_at(temperature).tolist())
 ~~~
 
+</details>
+
 
 <a id="top-k-фиксированное-число-кандидатов"></a>
 
@@ -355,17 +361,17 @@ p_i / \sum_{j\in K}p_j,&i\in K,\\
 \end{cases}
 $$
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-top_k_sampling.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-top_k_sampling.png|With k = 6 the two contexts retain different probability masses]]
 
 *At $k=6$, the illustration retains 0.68 of the original mass on the
 left and 0.99 on the right. The retained bars are blue. The two
 distributions show how excluded mass changes at a fixed k.
 Patrick von Platen, [How to generate text](https://huggingface.co/blog/how-to-generate).*
 
-Fixed $k$ has different costs in two limiting contexts. If the model
-is almost certain about one token, the other $k-1$ candidates add
-unnecessary noise. If the distribution is broad, the same $k$ can
-discard substantial plausible mass.
+The same $k$ can retain very different amounts of probability mass.
+When one token accounts for nearly all of it, top-k can still admit
+rare alternatives. On a flatter distribution those $k$ tokens may
+cover only a small share of the mass.
 
 For A–E at $k=2$, A and B remain with total mass 0.7.
 After normalization their probabilities are $4/7$ and $3/7$,
@@ -380,10 +386,12 @@ filter is omitted rather than constructed.
 
 <a id="top-p-переменный-набор-заданной-массы"></a>
 
-## Top-p: a variable set with a mass threshold
+<span id="top-p-a-variable-set-with-a-mass-threshold"></span>
+## Top-p: a cumulative probability threshold
 
-Nucleus sampling sorts tokens and chooses the smallest set $V^{(p)}$
-whose mass reaches the threshold:
+Top-p (nucleus sampling) sorts tokens by decreasing probability,
+then takes them from the front of the list until their cumulative
+probability reaches the threshold. Call the selected set $V^{(p)}$:
 
 $$
 \sum_{w\in V^{(p)}}p(w\mid x_{<t})\ge p.
@@ -391,7 +399,7 @@ $$
 
 The retained probabilities are renormalized before sampling.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-top_p_sampling.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-top_p_sampling.png|At p = 0.92 the nucleus retains nine tokens in one context and three in the other]]
 
 *At threshold 0.92, nine candidates remain in the first context and
 three in the second. The original mass of the retained bars may exceed
@@ -418,11 +426,28 @@ Holtzman et al.'s conclusions concern their GPT-2 open-generation setup
 and selected metrics. They do not establish one best decoder for every
 modern model, translation, program or verifiable task.
 
+<a id="decoding-top-p-two-steps"></a>
+### Two sampling steps with top-p
+
+Let E denote EOS. Divide $[0,1)$ into intervals with lengths equal
+to the filtered probabilities. Give A the first $4/9$ and B the
+next interval, from $4/9$ to $7/9$. A uniform draw of $u=0.60$
+selects B. The model receives the prefix with B appended
+and computes new probabilities. Suppose E now has probability $0.9$
+and all other tokens share $0.1$. At the same threshold of $0.8$,
+E alone is enough. Its probability becomes 1 after renormalization,
+so generation ends.
+
+The original model assigns B followed by EOS probability
+$0.3\cdot0.9=0.27$. Top-p sampling assigns that same sequence
+probability $(3/9)\cdot1=1/3$, using the filtered distribution at
+each step.
+
 <a id="min-p-порог-относительно-лидера"></a>
 
 ## Min-p: a threshold relative to the leading token
 
-Min-p retains token $i$ when its probability is at least fraction $m$
+The [min-p filter](https://arxiv.org/abs/2407.01082) retains token $i$ when its probability is at least fraction $m$
 of the largest probability:
 
 $$
@@ -447,6 +472,9 @@ temperatures need not retain the same candidates. See
 
 Check all three filters on the same logits:
 
+<details id="decoding-filters-code">
+<summary>Code: top-k, top-p, and min-p</summary>
+
 ~~~python
 from transformers import (
     TopKLogitsWarper, TopPLogitsWarper, MinPLogitsWarper,
@@ -465,6 +493,8 @@ for name, transform in filters.items():
     print(name, result.tolist())
 ~~~
 
+</details>
+
 
 The filters write $-\infty$ into excluded logits, making their softmax
 probabilities zero. If constraints forbid every token, there is no mass
@@ -473,7 +503,8 @@ arbitrary token.
 
 <a id="почему-порядок-преобразований-меняет-результат"></a>
 
-## Transformation order changes the result
+<span id="transformation-order-changes-the-result"></span>
+## Filter order
 
 Apply `top_k=2` and `top_p=0.5` to A–E.
 Top-k first retains A and B with probabilities $4/7$ and $3/7$.
@@ -481,6 +512,9 @@ Top-p now needs only A because $4/7>0.5$. Selection becomes deterministic.
 
 Top-p first instead needs both A and B, since A's original mass is only
 0.4. Subsequent top-k removes nothing, leaving $4/7$ and $3/7$.
+
+<details id="decoding-order-code">
+<summary>Code: the two filter orders</summary>
 
 ~~~python
 top_k = TopKLogitsWarper(top_k=2)
@@ -491,6 +525,8 @@ p_then_k = top_k(history, top_p(history, logits.clone())).softmax(-1)
 print(k_then_p.tolist())  # [[1.0, 0.0, 0.0, 0.0, 0.0]]
 print(p_then_k.tolist())  # [[4/7, 3/7, 0.0, 0.0, 0.0]]
 ~~~
+
+</details>
 
 
 For sampling, Transformers 4.57.1 applies temperature → top-k → top-p
@@ -525,7 +561,8 @@ r z_i,&z_i<0.
 \end{cases}
 $$
 
-At $r>1$, both operations lower the logit. For example, 2 becomes
+For $r>1$, the penalty lowers any nonzero logit. Zero stays zero.
+For example, 2 becomes
 $2/1.2\approx1.667$ and $-0.5$ becomes $-0.6$. Dividing a negative
 logit by a factor greater than one would move it toward zero and
 make that token more attractive instead.
@@ -563,6 +600,9 @@ and n-gram size two, appending 1 would repeat `[0,1]`, so it is
 forbidden. Token 1 is not forbidden in every context: the ban depends
 on the current sequence's suffix.
 
+<details id="decoding-penalty-code">
+<summary>Code: penalties and n-gram bans</summary>
+
 ~~~python
 from transformers import (
     RepetitionPenaltyLogitsProcessor, NoRepeatNGramLogitsProcessor,
@@ -587,6 +627,8 @@ ngram_scores = NoRepeatNGramLogitsProcessor(2)(
 )
 assert torch.isneginf(ngram_scores[0, 1])
 ~~~
+
+</details>
 
 
 Penalties can disrupt a required repetition of a name, pronoun, code
@@ -623,19 +665,17 @@ These are different distributions even with correct format validation.
 
 <a id="остановка-тоже-относится-к-декодированию"></a>
 
-## Stopping is part of decoding
+<span id="stopping-is-part-of-decoding"></span>
+## EOS, stop strings, and token limits
 
-Generation ends at EOS, a length limit or an external criterion.
-A string stop sequence may cross token boundaries, occur inside code
-or already have been streamed to the user. Minimum/maximum length and
-length penalties change the distribution of completed answers, so
-record them alongside temperature and top-p.
+EOS is a special ID in the vocabulary. Selecting it ends the loop.
+A chat model can use several end-of-turn IDs. Its configuration
+specifies the IDs, and its chat template defines how a turn is formatted.
 
-EOS is a special token ID that the model can select.
-`max_new_tokens` bounds newly generated tokens; `max_length`
-bounds total length including the prompt. They are different parameters.
-A chat model may use several special IDs to end a turn; obtain them
-from its configuration and chat template.
+In `generate` for a decoder-only model, `max_new_tokens` bounds
+the number of new tokens and `max_length` bounds the combined length
+of the prompt and completion. If both are given, Transformers uses
+`max_new_tokens`.
 
 String stops examine decoded text and need not be a single token.
 [StopStringCriteria](https://github.com/huggingface/transformers/blob/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/generation/stopping_criteria.py)
@@ -648,16 +688,20 @@ illustrates these cases for the marker `stop`:
 | las, then topper | The marker spans the boundary, using s from the first token and top from the second |
 | stop, then at | The latest step creates no new match; an ordinary loop would have stopped one step earlier |
 
-Stopping and removing the marker are separate operations.
-`StopStringCriteria` does not itself delete the marker from returned
-IDs. Already streamed text cannot be recalled. To hide the marker,
-a server needs a buffer for possible stop-string prefixes and a defined
-rule for the trailing text. Checking only the latest token or each
-client chunk separately is insufficient.
+`StopStringCriteria` returns a stop flag and leaves the IDs unchanged.
+Suppose a server must hide `stop` and anything after it, even when they
+are part of a generated token. After receiving `st`, the server holds
+those letters in a buffer because they could start the marker. Receiving
+`opera` makes the buffer read `stopera`. Under this rule the server
+drops both `stop` and `era`, even though both token IDs remain in the
+sequence. It could not retract `st` if it had already sent it.
 
 Test the four cases with the real `StopStringCriteria`. The small
 vocabulary supplies an ID-to-string mapping; the token splits are
 specified explicitly, not produced by encoding ordinary text.
+
+<details id="decoding-stop-code">
+<summary>Code: stop-string matches</summary>
 
 ~~~python
 from tokenizers import Tokenizer, models, decoders
@@ -684,18 +728,27 @@ for tokens, expected in stop_cases:
     assert criterion(ids, None).item() is expected
 ~~~
 
+</details>
+
 
 <a id="как-выбирать-стратегию"></a>
 
-## Choosing a strategy
+<span id="choosing-a-strategy"></span>
+## Comparing strategies
 
-| Task | Starting point | What to test |
-|---|---|---|
-| Exact extraction / JSON | Greedy or low randomness plus a grammar | Schema validity and semantics |
-| Translation / ASR | Beam search with length normalization | Quality versus beam width and latency |
-| Open dialogue | Top-p or min-p with moderate temperature | Diversity, factuality and repetition |
-| Multiple candidates | Independent samples | Distinct alternatives rather than paraphrases |
-| Code | Sample candidates and execute tests | pass@k and verification cost |
+For JSON extraction, start with greedy decoding or low-temperature
+sampling under a grammar. A schema check verifies the format; compare
+the extracted values with the source to evaluate the answer itself.
+
+For translation or speech recognition, try beam search with length
+normalization. Measure quality and latency at several beam widths.
+For open-ended dialogue, try top-p or min-p at a moderate temperature
+and measure factual accuracy, diversity and repetition separately.
+
+Draw several independent samples when you need alternatives. Check
+whether they solve the problem in different ways or merely rephrase
+one answer. For code, run the tests on each candidate and report
+pass@k alongside the cost of generating and checking the candidates.
 
 Parameter values do not transfer mechanically between models. Logit
 calibration, vocabulary and chat templates differ. Updating a model
@@ -723,6 +776,9 @@ A tiny randomly initialized model is sufficient to test the API.
 It has not learned language; its outputs are IDs in an artificial
 vocabulary, not language-quality measurements. This example runs real
 forward and `generate` calls in Transformers 4.57.1 on CPU.
+
+<details id="decoding-generate-code">
+<summary>Code: a generate call on CPU</summary>
 
 ~~~python
 import copy
@@ -795,6 +851,8 @@ print("beam scores", beams.sequences_scores.tolist())
 print("sampling", samples.sequences.tolist())
 ~~~
 
+</details>
+
 
 The first run disables EOS and stops at the new-token limit. The second
 deliberately assigns EOS to the most probable next-token ID, testing
@@ -815,11 +873,10 @@ random instance.
 
 <a id="практика-и-первоисточники"></a>
 
-## Practice and primary sources
+<span id="practice-and-primary-sources"></span>
+## References
 
 - [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week09_inference_algorithms/lecture.pdf|Efficient DL Systems: inference acceleration lecture]].
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week09_inference_algorithms/seminar.ipynb|Efficient DL Systems: speculative sampling and Triton seminar]].
-- [[02 Areas/ML & DL/05 Источники/Courses/Efficient DL Systems/week09_inference_algorithms/homework/homework.ipynb|Efficient DL Systems: decoding exercises]].
 - Jurafsky & Martin, [Speech and Language Processing, chapter 7, §7.6](https://web.stanford.edu/~jurafsky/slp3/7.pdf#page=20), 19 August 2026 revision: greedy, sampling, temperature and truncation.
 - Patrick von Platen, [How to generate text](https://huggingface.co/blog/how-to-generate): the original greedy, beam and sampling illustrations.
 - Hugging Face, [GenerationConfig](https://huggingface.co/docs/transformers/v4.57.1/en/main_classes/text_generation) and [generation utilities](https://huggingface.co/docs/transformers/v4.57.1/en/internal/generation_utils): version 4.57.1 used by these executable examples, not a designation of the latest release.

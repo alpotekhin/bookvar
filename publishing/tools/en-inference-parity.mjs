@@ -31,14 +31,33 @@ const speculativeRenames = {
     anchor: 'algorithm-2-drafting-verification-and-correction',
   },
 };
-const currentBaseline = (rows, rename) => rows.map(row =>
-  rename && row.anchor === rename.oldAnchor ? { ...row, title: rename.title, anchor: rename.anchor } : row);
-const preservedAnchor = (ids, rename, path) => {
-  if (!rename) return [];
+const decodingRenames = {
+  ru: [
+    { oldAnchor: 'temperature-меняет-контраст-вероятностей', title: 'Температура', anchor: 'температура' },
+    { oldAnchor: 'top-p-переменный-набор-заданной-массы', title: 'Top-p: порог суммарной вероятности', anchor: 'top-p-порог-суммарной-вероятности' },
+    { oldAnchor: 'почему-порядок-преобразований-меняет-результат', title: 'Порядок фильтров', anchor: 'порядок-фильтров' },
+    { oldAnchor: 'остановка-тоже-относится-к-декодированию', title: 'EOS, стоп-строки и лимит токенов', anchor: 'eos-стоп-строки-и-лимит-токенов' },
+    { oldAnchor: 'как-выбирать-стратегию', title: 'Сравнение стратегий', anchor: 'сравнение-стратегий' },
+    { oldAnchor: 'практика-и-первоисточники', title: 'Источники', anchor: 'источники' },
+  ],
+  en: [
+    { oldAnchor: 'temperature-changes-probability-contrast', title: 'Temperature', anchor: 'temperature' },
+    { oldAnchor: 'top-p-a-variable-set-with-a-mass-threshold', title: 'Top-p: a cumulative probability threshold', anchor: 'top-p-a-cumulative-probability-threshold' },
+    { oldAnchor: 'transformation-order-changes-the-result', title: 'Filter order', anchor: 'filter-order' },
+    { oldAnchor: 'stopping-is-part-of-decoding', title: 'EOS, stop strings, and token limits', anchor: 'eos-stop-strings-and-token-limits' },
+    { oldAnchor: 'choosing-a-strategy', title: 'Comparing strategies', anchor: 'comparing-strategies' },
+    { oldAnchor: 'practice-and-primary-sources', title: 'References', anchor: 'references' },
+  ],
+};
+const currentBaseline = (rows, renames = []) => rows.map(row => {
+  const rename = renames.find(candidate => row.anchor === candidate.oldAnchor);
+  return rename ? { ...row, title: rename.title, anchor: rename.anchor } : row;
+});
+const preservedAnchors = (ids, renames = [], path) => renames.map(rename => {
   assert.equal(ids.filter(id => id === rename.oldAnchor).length, 1,
     `Missing or duplicate legacy fragment: ${path}#${rename.oldAnchor}`);
-  return [rename.oldAnchor];
-};
+  return rename.oldAnchor;
+});
 const addedLevels = (current, baseline, path) => {
   let next = 0;
   const added = [];
@@ -130,7 +149,9 @@ export function inspectEnInferenceParity(root) {
     assert.ok(english.includes('translation_status: current'));
     assert.deepEqual(headings(reviewedCanonical), sectionKeys(chapter.source_sections));
     assert.deepEqual(headings(reviewedEnglish), sectionKeys(chapter.english_sections));
-    const renames = chapter.path.endsWith('/58 Speculative decoding.md') ? speculativeRenames : {};
+    const renames = chapter.path.endsWith('/58 Speculative decoding.md')
+      ? { ru: [speculativeRenames.ru], en: [speculativeRenames.en] }
+      : chapter.path.endsWith('/54 Decoding and next-token selection.md') ? decodingRenames : {};
     const canonicalBaseline = currentBaseline(chapter.source_sections, renames.ru);
     const englishBaseline = currentBaseline(chapter.english_sections, renames.en);
     assert.deepEqual(addedLevels(headings(english), englishBaseline, chapter.path),
@@ -148,8 +169,8 @@ export function inspectEnInferenceParity(root) {
     const canonicalAliases = explicitIds(canonical);
     assert.deepEqual(aliases.filter(id => chapter.retained_aliases.includes(id)), chapter.retained_aliases);
     assert.deepEqual(canonicalAliases.filter(id => chapter.source_explicit_aliases.includes(id)), chapter.source_explicit_aliases);
-    const englishPreserved = [...chapter.retained_aliases, ...preservedAnchor(aliases, renames.en, chapter.path)];
-    const canonicalPreserved = [...chapter.source_explicit_aliases, ...preservedAnchor(canonicalAliases, renames.ru, chapter.source)];
+    const englishPreserved = [...chapter.retained_aliases, ...preservedAnchors(aliases, renames.en, chapter.path)];
+    const canonicalPreserved = [...chapter.source_explicit_aliases, ...preservedAnchors(canonicalAliases, renames.ru, chapter.source)];
     assert.deepEqual(aliases.filter(id => !englishPreserved.includes(id)),
       canonicalAliases.filter(id => !canonicalPreserved.includes(id)), `New shared anchors: ${chapter.path}`);
     const ids = [...aliases, ...englishBaseline.map((h) => h.anchor)];

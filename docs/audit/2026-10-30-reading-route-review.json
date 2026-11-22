@@ -2,6 +2,22 @@
   "date": "2026-10-30",
   "lastReviewedDate": "2026-11-09",
   "editorialRevisions": {
+    "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md": {
+      "currentSha256": "1c53e873d9c84b1a25ddbc9ec47565e324336040c0942286bf33f680221a07af",
+      "stopBefore": "2026-11-22-sft-editorial-pass.json"
+    },
+    "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md": {
+      "currentSha256": "ffe9d53f5fa42d93fd7d743bf9b81ec88a91b8cff962a835a22c42c34dda9f26",
+      "stopBefore": "2026-11-22-posttraining-intro-editorial-pass.json"
+    },
+    "00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md": {
+      "currentSha256": "d8e1d96455105334eb5b08c1e485beab2a4e593e11dfaa280390a5cf898fb90d",
+      "stopBefore": "2026-11-22-decoding-editorial-pass.json"
+    },
+    "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md": {
+      "currentSha256": "470bd39c9463365f9f12896d666f4d4ff8e955075a77806e75031ee4b5888183",
+      "stopBefore": "2026-11-22-masked-diffusion-editorial-pass.json"
+    },
     "00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA.md": {
       "currentSha256": "3e18229bdda45a87e291d5e7112be52e86c41005b48a974ab903c53d3294659a",
       "stopBefore": "2026-11-22-scaling-laws-editorial-pass.json"

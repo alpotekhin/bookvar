@@ -80,6 +80,23 @@ def main():
     assert ns["adapter_parameters"] * 12 / 1e6 == 50.331648
     assert 2400 // 32 * 3 == 225
     assert math.isclose(ns["scale_bits"], .126953125)
+    base_parameters = 7_000_000_000
+    adapter_parameters = ns["adapter_parameters"]
+    full_gb = base_parameters * 12 / 1e9
+    bf16_gb = (base_parameters * 2 + adapter_parameters * 12) / 1e9
+    quantized_gb = (base_parameters * ((4 + ns["scale_bits"]) / 8)
+                    + adapter_parameters * 12) / 1e9
+    assert [round(v, 2) for v in (full_gb, bf16_gb, quantized_gb)] == [84, 14.05, 3.66]
+    assert round(3 * adapter_parameters * 2 / 1e6) == 25
+
+    # Reusing the toy quantization grid can erase a merged update.
+    scalar_base = ns["q_base"][0, 0]
+    scalar_delta = torch.tensor(.2, dtype=dtype)
+    merged_scalar = scalar_base + scalar_delta
+    requantized_scalar = (merged_scalar / ns["q_scale"]).round().clamp(-8, 7) * ns["q_scale"]
+    torch.testing.assert_close(merged_scalar, torch.tensor(1.2, dtype=dtype))
+    torch.testing.assert_close(requantized_scalar, scalar_base)
+    assert not torch.isclose(merged_scalar, requantized_scalar)
 
     # The published quantized-base example updates only its LoRA factors.
     torch.testing.assert_close(ns["q_codes"], ns["q_codes_before"])
@@ -128,6 +145,10 @@ def main():
         "soft_prompt_output": ns["soft_output"].detach().tolist(),
         "prefix_output": ns["prefix_output"].detach().tolist(),
         "adapter_parameters": ns["adapter_parameters"],
+        "weight_and_optimizer_subtotals_gb": [full_gb, bf16_gb, quantized_gb],
+        "scalar_merge_before_and_after_requantization": [
+            merged_scalar.item(), requantized_scalar.item()
+        ],
         "quantized_base": {
             "codes": ns["q_codes"].tolist(),
             "initial_output": ns["q_initial"].detach().tolist(),

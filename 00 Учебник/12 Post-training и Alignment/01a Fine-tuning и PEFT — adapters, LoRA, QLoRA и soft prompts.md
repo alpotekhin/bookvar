@@ -3,8 +3,8 @@ title: Fine-tuning and PEFT — adapters, LoRA, QLoRA and soft prompts
 type: textbook-chapter
 status: canonical
 source_language: en
-last_updated: 2026-11-14
-last_verified: 2026-11-14
+last_updated: 2026-11-22
+last_verified: 2026-11-22
 aliases: [Fine-tuning, PEFT, LoRA, QLoRA, Prompt tuning, Prefix tuning]
 previous: "[[00 Учебник/12 Post-training и Alignment/01 SFT и instruction data]]"
 next: "[[00 Учебник/12 Post-training и Alignment/02 Preference data]]"
@@ -27,6 +27,12 @@ reference_terms:
   - label: QLoRA — градиент через замороженную квантованную матрицу
     label_en: QLoRA — gradient through a frozen quantized projection
     anchor: qlora-frozen-gradient-example
+  - label: Слияние LoRA и повторная квантизация
+    label_en: LoRA merging and requantization
+    anchor: qlora-requantized-merge
+  - label: Память при полном дообучении, LoRA и QLoRA
+    label_en: Training memory for full fine-tuning, LoRA and QLoRA
+    anchor: peft-memory-budget
   - label: Soft prompts и prompt tuning
     label_en: Soft prompts and prompt tuning
     anchor: soft-prompts
@@ -81,25 +87,29 @@ primary_sources:
 
 # Fine-tuning and PEFT
 
-Suppose three customers need the same pretrained language model to behave
-differently: one extracts fields from invoices, another answers support
-questions, and the third writes summaries. Full fine-tuning can produce
-three different copies of the weights. With seven billion parameters and
-two bytes per weight, those copies require 42 GB before serving caches or
-training state are counted. A shared frozen base plus three small sets of
-task-specific parameters can reduce that duplication. The model still has
-to execute the base network for each request.
+A 7-billion-parameter model stored at two bytes per weight takes 14 GB.
+If invoice extraction, support and summarization each get a fully
+fine-tuned checkpoint, storing the three copies takes 42 GB. With a
+shared base and three BF16 LoRA adapters of about 4.2 million parameters
+each, the stored weights instead take 14 GB plus about 25 MB. This
+counts weight files, not training memory or serving caches. Every request
+still runs the base network.
 
-The preceding [[00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT chapter]]
-defines the training examples, target tokens and loss. A separate choice is
-which parameters may change when that loss is differentiated. SFT can update
-all weights, only selected layers, a LoRA branch or a soft prompt. The same
-parameterization can also be used with a different objective, including DPO.
-“SFT versus LoRA” therefore compares a training objective with a choice of
-trainable parameters.
+The [[00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT chapter]]
+described which tokens contribute to the loss. Here we keep that choice
+fixed and vary which tensors the optimizer can update. Full fine-tuning
+updates the original weights. Parameter-efficient fine-tuning (PEFT)
+updates a smaller set, such as selected layers, added LoRA factors or
+prefix vectors. Those same parameters can be trained with another loss,
+such as DPO.
+
+The optional CPU listings run in order in one Python session. They check
+the calculations on small tensors, without pretrained weights.
 
 <a id="choosing-trainable-parameters"></a>
-## Choosing the trainable parameters
+<span id="choosing-the-trainable-parameters"></span>
+
+## Trainable parameters
 
 For classification with an encoder, write the prediction as
 $p(y\mid x)=\operatorname{softmax}(C f_{\theta}(x)+b)$.
@@ -141,6 +151,9 @@ which is propagated into the encoder. A linear probe changes the classifier
 but keeps that representation fixed; it does not use the second gradient
 to update the encoder.
 
+<details id="peft-code-probe">
+<summary>Code: a linear probe and encoder gradients</summary>
+
 ```python
 import math
 import torch
@@ -163,6 +176,8 @@ F.binary_cross_entropy_with_logits(probe_classifier @ probe_features, positive).
 assert probe_features.grad is None and probe_classifier.grad is not None
 ```
 
+</details>
+
 | Method | Parameters changed for a task | Where the change acts |
 |---|---|---|
 | Linear probe | New classifier | After a fixed representation |
@@ -179,9 +194,9 @@ differentiated through that frozen layer to reach the adapter. This is
 different from a linear probe sitting above an entirely frozen encoder.
 
 <a id="bottleneck-adapters"></a>
-## Bottleneck adapters
+## Bottleneck adapter modules
 
-![[00 Учебник/Assets/Figures/curated/peft-2026-10-29/houlsby-adapter.png|Original Houlsby adapter architecture and placement]]
+![[00 Учебник/Assets/Figures/curated/peft-2026-10-29/houlsby-adapter.png|Down-projection, nonlinearity and up-projection with a residual; two adapters in a post-norm Transformer block]]
 
 *Neil Houlsby et al., [Parameter-Efficient Transfer Learning for NLP,
 Figure 2, PDF p. 3](https://proceedings.mlr.press/v97/houlsby19a/houlsby19a.pdf#page=3),
@@ -235,6 +250,9 @@ weight matrix: its effective linear map changes with the input. The extra
 operations remain in the inference graph. Their latency depends on shapes,
 batching and implementation; “20–30% overhead” is not a universal property.
 
+<details id="peft-code-adapter">
+<summary>Code: the bottleneck example</summary>
+
 ```python
 h = torch.tensor([2., -1., 0., 3.], dtype=dtype)
 down = torch.tensor([[1., 0., 0., 0.]], dtype=dtype)
@@ -244,8 +262,12 @@ torch.testing.assert_close(adapted, torch.tensor([2., -.8, 0., 3.], dtype=dtype)
 assert 2 * 768 * 64 + 768 + 64 == 99136
 ```
 
+</details>
+
 <a id="lora-update"></a>
-## LoRA changes a projection through two small factors
+<span id="lora-changes-a-projection-through-two-small-factors"></span>
+
+## LoRA
 
 > LoRA represents the weight updates $\Delta W$ with two smaller matrices
 > (called *update matrices*) through low-rank decomposition. These new
@@ -256,7 +278,7 @@ assert 2 * 768 * 64 + 768 + 64 == 99136
 — Hugging Face Team, [PEFT: LoRA](https://github.com/huggingface/peft/blob/fee923eb6e0382236478e4259bc69f4aeaab6813/docs/source/package_reference/lora.md),
 Apache-2.0, excerpt retained in English.
 
-![[00 Учебник/Assets/Figures/curated/peft-2026-10-29/lora-animated.gif|Original Hugging Face animation of the frozen projection and LoRA branch]]
+![[00 Учебник/Assets/Figures/curated/peft-2026-10-29/lora-animated.gif|The same input passes through a frozen projection and a trainable A-then-B branch, whose outputs are added]]
 
 *Hugging Face Team, [PEFT LoRA documentation](https://huggingface.co/docs/peft/main/en/package_reference/lora),
 [original animation](https://huggingface.co/datasets/huggingface/documentation-images/blob/861b6c920fe27492d35256c39f266592a518d50c/peft/lora_animated.gif),
@@ -287,7 +309,9 @@ are square.
 
 <a id="lora-gqa-budget"></a>
 
-### Compare target modules at the same parameter budget
+<span id="compare-target-modules-at-the-same-parameter-budget"></span>
+
+### LoRA placement at a fixed budget
 
 [Llama 3 8B](https://arxiv.org/html/2407.21783v3#S3.T3) also has 32
 layers and a hidden width of 4,096, but it has 32 query heads and
@@ -298,11 +322,11 @@ branches have $8(4096+1024)=40\,960$ and $8(4096+4096)=65\,536$
 parameters respectively. The model-wide total for query and value is
 $(65\,536+40\,960)\cdot32=3\,407\,872$.
 
-| Projections adapted in each block | Rank | Trainable factor parameters in 32 blocks |
+| Projections per block | Rank | Total parameters |
 | --- | ---: | ---: |
 | Query and value | 8 | 3,407,872 |
-| All four attention projections | 4 | 3,407,872 |
-| All seven attention and FFN projections | 8 | 20,971,520 |
+| All attention projections | 4 | 3,407,872 |
+| Attention and FFN | 8 | 20,971,520 |
 
 The first two rows have the same budget: adding keys costs as much as
 adding values, and the attention output projection costs as much as queries.
@@ -328,29 +352,37 @@ In the paper's Table 5, the base is GPT-3 175B with 96 layers and the
 adapter budget is fixed at about 18 million parameters. Targeting more
 projections therefore requires a smaller rank for each one:
 
-| Adapted projections | Rank | WikiSQL validation accuracy, % | MultiNLI validation accuracy, % |
+| Targets | Rank | WikiSQL | MultiNLI |
 |---|---:|---:|---:|
 | $W_q$ | 8 | 70.4 | 91.0 |
 | $W_v$ | 8 | 73.0 | 91.0 |
-| $W_q,W_v$ | 4 | 73.7 | 91.3 |
-| $W_q,W_k,W_v,W_o$ | 2 | 73.7 | 91.7 |
+| $W_q$, $W_v$ | 4 | 73.7 | 91.3 |
+| $W_q$, $W_k$, $W_v$, $W_o$ | 2 | 73.7 | 91.7 |
 
-These are historical task results, not four choices tested by Bookvar.
-The authors report typical seed standard deviations of about 0.5 and
+Both task columns report validation accuracy in percent. The authors found typical
+seed standard deviations of about 0.5 and
 0.1 percentage points for the two tasks. A larger rank concentrated in
 one projection did not outperform all lower-rank, broader placements.
 The budget and target matrices must accompany a rank comparison.
 
-### Reported quality and the parameter budget
+<span id="reported-quality-and-the-parameter-budget"></span>
+
+### GPT-3 results at different budgets
 
 The main GPT-3 comparison in [LoRA, §5.5 and Table 4](https://arxiv.org/html/2106.09685v2)
 uses different adapter budgets from the 18M diagnostic comparison above:
 
-| GPT-3 175B adaptation | Trainable parameters | WikiSQL validation accuracy, % | MNLI-m validation accuracy, % | SAMSum ROUGE-1/2/L |
-|---|---:|---:|---:|---|
-| Full fine-tuning | 175,255.8M | 73.8 | 89.5 | 52.0 / 28.0 / 44.5 |
-| LoRA | 4.7M | 73.4 | 91.7 | 53.8 / 29.8 / 45.9 |
-| LoRA | 37.7M | 74.0 | 91.6 | 53.4 / 29.2 / 45.1 |
+| GPT-3 175B | Full tuning | LoRA 4.7M | LoRA 37.7M |
+|---|---:|---:|---:|
+| Trainable | 175,255.8M | 4.7M | 37.7M |
+| WikiSQL, % | 73.8 | 73.4 | 74.0 |
+| MNLI-m, % | 89.5 | 91.7 | 91.6 |
+| SAMSum R-1 | 52.0 | 53.8 | 53.4 |
+| SAMSum R-2 | 28.0 | 29.8 | 29.2 |
+| SAMSum R-L | 44.5 | 45.9 | 45.1 |
+
+The two accuracy rows report validation scores. SAMSum uses
+ROUGE-1, ROUGE-2 and ROUGE-L.
 
 The authors report typical seed fluctuations of about 0.5 percentage
 points on WikiSQL and 0.1 on MNLI-m. The 4.7M run is not better than the
@@ -383,7 +415,9 @@ attached to every 4.7M adapter. Likewise, rank 256 is not inherently
 factors have $2\cdot4096\cdot256=2\,097\,152$ entries, one eighth
 of the original matrix's parameter count.
 
-### The first update, including both factor gradients
+<span id="the-first-update-including-both-factor-gradients"></span>
+
+### Initialization and the first update
 
 Initialize $B=0$ and $A$ to nonzero random values. Then $BA=0$, so the
 adapted layer initially gives the base output. For one example, let
@@ -413,6 +447,9 @@ $h=(1,-1)^T$, and $\mathcal L=1$. The factor gradients are
 $\nabla_B=(-1,1)^T$ and $\nabla_A=(0,0)$.
 An SGD step of size 0.1 produces $B=(0.1,-0.1)^T$ while $A$ stays
 unchanged. The new output is $(0.9,-0.9)^T$ and the loss is 0.81.
+
+<details id="peft-code-lora-step">
+<summary>Code: the first LoRA update</summary>
 
 ```python
 W0 = torch.eye(2, dtype=dtype)  # frozen, no parameter gradient
@@ -444,12 +481,19 @@ Bz = nn.Parameter(torch.zeros(2, 1, dtype=dtype))
 assert Az.grad.abs().sum().item() == Bz.grad.abs().sum().item() == 0
 ```
 
-### A frozen layer can still carry the gradient
+</details>
+
+<span id="a-frozen-layer-can-still-carry-the-gradient"></span>
+
+### Backpropagation through frozen layers
 
 Put a frozen projection $U$ above the adapted layer. Backpropagation needs
 $U^T\nabla_y\mathcal L$ to reach $B$ and $A$ even though no gradient
 for the entries of $U$ is accumulated. Wrapping that projection in
 `torch.no_grad()` would detach its output and break this path.
+
+<details id="peft-code-frozen-layer">
+<summary>Code: input gradients through a frozen layer</summary>
 
 ```python
 U = torch.tensor([[2., 0.], [0., 3.]], dtype=dtype)
@@ -461,6 +505,8 @@ with torch.no_grad():
 assert not detached.requires_grad
 ```
 
+</details>
+
 Freezing removes gradients and optimizer state for the base weights, but
 does not remove the forward pass, all activation storage, or all backward
 matrix multiplications. Gradient checkpointing can trade saved activations
@@ -468,9 +514,11 @@ for recomputation. The memory saving therefore need not equal the ratio
 between the numbers of trainable parameters.
 
 <a id="merging-and-serving"></a>
-## Merging, checkpoints and serving different adapters
+<span id="merging-checkpoints-and-serving-different-adapters"></span>
 
-![[00 Учебник/Assets/Figures/curated/peft-2026-10-29/lora-merge.png|Original Hugging Face LoRA merging diagram]]
+## Merging and serving LoRA adapters
+
+![[00 Учебник/Assets/Figures/curated/peft-2026-10-29/lora-merge.png|The low-rank update is added to the base matrix before inference so that one projection replaces two branches]]
 
 *Hugging Face Team, [PEFT: Merge LoRA weights into the base model](https://github.com/huggingface/peft/blob/fee923eb6e0382236478e4259bc69f4aeaab6813/docs/source/package_reference/lora.md#merge-lora-weights-into-the-base-model),
 [original PNG](https://huggingface.co/datasets/huggingface/documentation-images/blob/861b6c920fe27492d35256c39f266592a518d50c/peft/lora_diagram.png),
@@ -485,6 +533,9 @@ latency” claim for a merged LoRA projection. Training-time dropout in the
 LoRA branch must be disabled for this comparison. Quantized weights add a
 rounding step, so a quantized merge is not the same exact arithmetic identity.
 
+<details id="peft-code-merge">
+<summary>Code: the floating-point merge</summary>
+
 ```python
 torch.manual_seed(29)
 test_inputs = torch.randn(7, 2, dtype=dtype)
@@ -494,6 +545,8 @@ with torch.no_grad():
     merged = test_inputs @ merged_weight.T
 torch.testing.assert_close(merged, unmerged, rtol=1e-12, atol=1e-12)
 ```
+
+</details>
 
 The PEFT documentation describes the deployment operation:
 
@@ -515,26 +568,33 @@ that two base checkpoints have compatible representations. A **merged
 checkpoint** stores the resulting model weights and is correspondingly
 larger.
 
-For multiple customers, merging a different adapter into a separate base
-copy for each customer loses much of the storage sharing. Keeping adapters
-unmerged allows a server to share the base and select a branch per request,
-but those branches have real runtime and scheduling costs. Batched
-multi-adapter kernels are an implementation problem; algebra does not make
-task switching free. Likewise, combining factors is not generally the
-same as combining weight updates:
+For the three tasks at the start, separate merged checkpoints again
+store three full weight files. With unmerged adapters, a server can
+keep one base and select a branch per request. A batch with several
+adapters then needs LoRA factors selected by request; a single shared
+merged matrix cannot represent the batch. Implementations differ in
+how they batch those extra projections.
+
+Adding two adapters also requires choosing what to add:
+a sum of completed weight updates does not include the cross terms
+that appear when the factors themselves are added:
 
 $$
-(B_1+B_2)(A_1+A_2)
-=B_1A_1+B_2A_2+B_1A_2+B_2A_1.
+\begin{aligned}
+(B_1+B_2)(A_1+A_2)&=B_1A_1+B_2A_2\\
+&\quad+B_1A_2+B_2A_1.
+\end{aligned}
 $$
 
 The two cross terms are absent from the desired sum of independent updates.
 Adapter composition must specify its operation and then be evaluated.
 
 <a id="qlora-training"></a>
-## QLoRA: training through a quantized frozen base
+<span id="qlora-training-through-a-quantized-frozen-base"></span>
 
-![[00 Учебник/Assets/Figures/curated/quantization-review-2026-10/qlora-training-original.png|Original QLoRA comparison of full fine-tuning, LoRA and QLoRA]]
+## QLoRA
+
+![[00 Учебник/Assets/Figures/curated/quantization-review-2026-10/qlora-training-original.png|Full tuning stores optimizer state for the base; LoRA trains added factors; QLoRA also stores the base in four bits]]
 
 *Tim Dettmers, Artidoro Pagnoni, Ari Holtzman and Luke Zettlemoyer,
 [QLoRA, Figure 1](https://arxiv.org/html/2305.14314v1), CC BY 4.0.
@@ -569,7 +629,9 @@ factors. Quantization changes the fixed function through which those
 gradients pass; it does not remove that computation.
 
 <a id="qlora-frozen-gradient-example"></a>
-### One update through a frozen quantized projection
+<span id="one-update-through-a-frozen-quantized-projection"></span>
+
+### An update through a quantized projection
 
 Take a floating-point base $W_0=\operatorname{diag}(1.1,1.9)$.
 For this constructed example, use uniform signed four-bit values with
@@ -584,6 +646,9 @@ $h=(1,-2)^T$ and loss $2.5$. Since $Ax=-1$, the LoRA gradients are
 $\nabla_B=(-1,2)^T$ and $\nabla_A=(0,0)$. The input receives
 $\nabla_x=\widetilde W_0^Th=(1,-4)^T$. An earlier trainable layer can
 use this input gradient even though the base codes and scale stay fixed.
+
+<details id="peft-code-quantized-step">
+<summary>Code: the frozen quantized projection</summary>
 
 ```python
 q_original = torch.diag(torch.tensor([1.1, 1.9], dtype=dtype))
@@ -618,6 +683,8 @@ assert math.isclose((.5 * quantized_adapter_output().square().sum()).item(), 2.0
 torch.testing.assert_close(q_codes, q_codes_before)
 ```
 
+</details>
+
 Only $B$ changes on this first step; neither the rounding operation nor
 the integer codes need a weight gradient. Zero-initialized $B$ preserves
 the **reconstructed** base output, not the output of the original
@@ -625,6 +692,18 @@ floating-point weights. This example follows the frozen-base gradient
 path in [QLoRA, §3, equations 5–6](https://arxiv.org/html/2305.14314v1#S3);
 its uniform codebook and FP64 arithmetic are chosen for inspection,
 not to reproduce NF4, double quantization or BF16 rounding.
+
+<a id="qlora-requantized-merge"></a>
+
+#### Merging and rounding
+
+In the same uniform quantizer, take one reconstructed weight of 1
+and a learned update of 0.2. For an input of 1, the unmerged layer
+returns $1+0.2=1.2$. Storing the merged weight in floating point keeps
+that sum. To store it again on the original grid with scale 0.5,
+we round $1.2/0.5=2.4$ to code 2 and reconstruct 1. The update disappears
+in this example. A different scale or codebook changes the error; the
+floating-point merge identity alone cannot predict it.
 
 ### NF4, double quantization and paged optimizers
 
@@ -656,7 +735,9 @@ in 48 GB merely because its trainable adapter is small.
 
 <a id="qlora-target-placement"></a>
 
-### What changes when adapters are moved to other projections
+<span id="what-changes-when-adapters-are-moved-to-other-projections"></span>
+
+### QLoRA placement
 
 ![[00 Учебник/Assets/Figures/curated/peft-qlora-2026-11-14/qlora-figure2-target-modules.svg|Five groups of runs. QLoRA-All is around 64.5 ROUGE-L, QLoRA-FFN around 64.0 and QLoRA-Attention around 63.4. The authors' 16-bit full fine-tuning baseline is around 64.3.]]
 
@@ -682,13 +763,21 @@ variation across datasets. In PEFT, `target_modules="all-linear"`
 selects a broad set of modules. List the actual matches before applying
 the seven-projection count from Llama 3 8B to another model.
 
-### Account for base weights, trainable state and activations separately
+<span id="account-for-base-weights-trainable-state-and-activations-separately"></span>
 
-A useful first estimate is
+### Training memory
+
+<a id="peft-memory-budget"></a>
+
+Count frozen weights separately from trainable weights and their
+associated state. Add activations and temporary buffers to estimate
+the training footprint:
 
 $$
-M\approx M_{\mathrm{base}}+M_{\mathrm{trainable\ state}}
-+M_{\mathrm{activations}}+M_{\mathrm{temporary}}.
+\begin{aligned}
+M\approx{}&M_{\mathrm{frozen\ weights}}+M_{\mathrm{trainable\ state}}\\
+&+M_{\mathrm{activations}}+M_{\mathrm{temporary}}.
+\end{aligned}
 $$
 
 For an illustrative mixed-precision Adam setup, a trainable parameter
@@ -698,14 +787,23 @@ would bring this to 16. Another implementation can keep parameters and
 gradients in FP32 directly. State the actual dtypes and sharding scheme;
 neither number is a universal PyTorch default.
 
-Under the 12-byte assumption, seven billion fully trainable parameters
-already require 84 decimal GB, excluding activations and temporaries.
-A frozen BF16 base instead requires 14 GB of weights, plus the trainable
-adapter state. The earlier $4\,194\,304$-parameter adapter would require
-about 50.3 MB at 12 bytes per parameter. Reducing that adapter by half
-does not halve the 14 GB base, or the activation memory needed for a long
-sequence. Quantization, checkpointing, sequence length, batch size and
-sharding address different terms.
+Use the 7B model from the opening and a LoRA adapter with
+$4\,194\,304$ parameters. At 12 bytes per trainable parameter the
+adapter state occupies 50.3 MB. If every frozen weight is stored as a
+four-bit code with the scale overhead derived above, the base costs
+$7\cdot10^9(4+0.126953125)/8$ bytes, about 3.61 GB.
+
+| Setup | Frozen weights | Trainable state | Subtotal |
+|---|---:|---:|---:|
+| Full tuning | 0 | 84 GB | 84 GB |
+| LoRA, BF16 base | 14 GB | 50.3 MB | 14.05 GB |
+| LoRA, 4-bit base | 3.61 GB | 50.3 MB | 3.66 GB |
+
+The subtotal excludes activations, temporary buffers and any tensors
+kept outside the quantized format. Halving the adapter rank halves
+the factor state at fixed placement and dtype; it does not halve the
+base or guarantee a similar decrease in activations. The paper's
+breakdown below includes more of these terms.
 
 <a id="qlora-memory-breakdown"></a>
 
@@ -731,6 +829,9 @@ The paper also reports 99.3% for Guanaco 65B relative to ChatGPT on
 That number is a ratio of scores assigned by GPT-4, not an estimate
 of memory, a win probability or a comparison with full fine-tuning.
 
+<details id="peft-code-cost">
+<summary>Code: factor and scale accounting</summary>
+
 ```python
 rank, width, layers = 8, 4096, 32
 per_projection = rank * (width + width)
@@ -745,10 +846,14 @@ assert math.isclose(saved_gb_65b, 3.031005859375)
 assert 175_000_000_000 * 4 / 8 / 1e9 == 87.5
 ```
 
-<a id="soft-prompts"></a>
-## Soft prompts change the input embeddings
+</details>
 
-![[00 Учебник/Assets/Figures/curated/peft-2026-10-29/prompt-tuning.png|Original model-tuning and prompt-tuning comparison]]
+<a id="soft-prompts"></a>
+<span id="soft-prompts-change-the-input-embeddings"></span>
+
+## Prompt tuning
+
+![[00 Учебник/Assets/Figures/curated/peft-2026-10-29/prompt-tuning.png|Full tuning uses separate model weights for each task; prompt tuning reuses the model and learns separate input vectors]]
 
 *Brian Lester, Rami Al-Rfou and Noah Constant,
 [The Power of Scale for Parameter-Efficient Prompt Tuning, Figure 2](https://aclanthology.org/2021.emnlp-main.243/),
@@ -791,6 +896,9 @@ $(0.33024,0.66976)$. The output is $(0.66976,0)$ rather than $(1,0)$.
 Even a zero prompt changes the denominator of the softmax; it is not
 automatically an identity initialization.
 
+<details id="peft-code-prompt">
+<summary>Code: attention to a soft prompt</summary>
+
 ```python
 def attention_row(query, keys, values):
     weights = torch.softmax(keys @ query / math.sqrt(query.numel()), dim=0)
@@ -807,6 +915,8 @@ target = torch.tensor([0., 1.], dtype=dtype)
 assert prompt.grad.norm().item() > 0
 ```
 
+</details>
+
 The loss updates the prompt through its effects on both keys and values,
 despite the projections being fixed identities. In a real Transformer,
 backpropagation passes through the frozen layers in the same way.
@@ -822,9 +932,11 @@ an arbitrary frozen base and twenty zero vectors will match full
 fine-tuning. See [Lester et al., §§2–3](https://aclanthology.org/2021.emnlp-main.243/).
 
 <a id="prefix-keys-values"></a>
-## Prefix tuning learns states at multiple layers
+<span id="prefix-tuning-learns-states-at-multiple-layers"></span>
 
-![[00 Учебник/Assets/Figures/curated/peft-2026-10-29/prefix-tuning.png|Original prefix-tuning architecture comparison]]
+## Prefix tuning
+
+![[00 Учебник/Assets/Figures/curated/peft-2026-10-29/prefix-tuning.png|Fine-tuning changes the network at all sequence positions; prefix tuning learns states at prefix positions while the network stays frozen]]
 
 *Xiang Lisa Li and Percy Liang,
 [Prefix-Tuning, Figure 1](https://aclanthology.org/2021.acl-long.353/),
@@ -863,6 +975,9 @@ $(0.66976,0.66048)$: the prefix contributes a second-coordinate value
 without also changing its key. This freedom was absent from our
 identity-projection soft prompt, where the same vector supplied both.
 
+<details id="peft-code-prefix">
+<summary>Code: independent prefix keys and values</summary>
+
 ```python
 prefix_k = nn.Parameter(torch.zeros(1, 2, dtype=dtype))
 prefix_v = nn.Parameter(torch.tensor([[0., 2.]], dtype=dtype))
@@ -876,6 +991,8 @@ torch.testing.assert_close(prefix_output, torch.tensor([
 (.5 * (prefix_output - target).square().sum()).backward()
 assert prefix_k.grad.norm().item() > 0 and prefix_v.grad.norm().item() > 0
 ```
+
+</details>
 
 For $L$ decoder layers, $p$ positions, $H_{KV}$ KV heads and head size
 $d_h$, direct per-layer K/V prefixes contain
@@ -929,7 +1046,9 @@ initial weights of selected layers, and the right panel varies the update
 budget on STS-B with 1,000 training examples. These are separate experiments,
 not three settings measured on one common axis.*
 
-### A failed optimization run and a generalization difference
+<span id="a-failed-optimization-run-and-a-generalization-difference"></span>
+
+### Optimization failure and generalization
 
 A balanced binary classifier that predicts 0.5 for every training example
 has cross-entropy $-\log 0.5\approx0.6931$. If its loss stays near this
@@ -940,6 +1059,9 @@ Those runs have different generalization, not the same optimization failure.
 
 The following prescribed predictions illustrate the distinction. They
 are not results of training BERT.
+
+<details id="peft-code-failure">
+<summary>Code: failed runs and held-out accuracy</summary>
 
 ```python
 balanced_targets = torch.tensor([0., 0., 1., 1.], dtype=dtype)
@@ -966,6 +1088,8 @@ assert head_weight.grad.item() > .7
 assert 0 < lower_weight.grad.item() < 1e-7
 ```
 
+</details>
+
 In the last calculation, the head receives a gradient of about 0.731,
 while the lower parameter receives about $6.0\cdot10^{-9}$.
 The derivative of $\tanh(10)$ supplies the small multiplier. An upper
@@ -988,7 +1112,9 @@ learned the new task. Preserving MLM perplexity alone does not establish
 that downstream optimization is working.
 
 <a id="fine-tuning-bias-correction"></a>
-### Adam bias correction changes the early updates
+<span id="adam-bias-correction-changes-the-early-updates"></span>
+
+### Adam bias correction
 
 Take a scalar parameter with first gradient $g_1=2$, learning rate
 $\alpha=0.001$, $\beta_1=0.9$ and $\beta_2=0.999$. For this calculation
@@ -996,8 +1122,10 @@ only, set epsilon and weight decay to zero. Starting the moment estimates
 at zero gives
 
 $$
-m_1=(1-0.9)2=0.2,\qquad
-v_1=(1-0.999)2^2=0.004.
+\begin{aligned}
+m_1&=(1-0.9)2=0.2,\\
+v_1&=(1-0.999)2^2=0.004.
+\end{aligned}
 $$
 
 Using these raw moments changes the parameter by
@@ -1033,6 +1161,9 @@ not an unpredictable jump in the learning rate. Nor is its early shape
 the same as a monotone linear warmup. Epsilon placement and weight decay
 must be retained when comparing actual optimizer implementations.
 
+<details id="peft-code-adam">
+<summary>Code: the first Adam update</summary>
+
 ```python
 beta1, beta2, step_size, first_gradient = .9, .999, .001, 2.
 first_m = (1 - beta1) * first_gradient
@@ -1055,6 +1186,8 @@ scalar_adam = torch.optim.AdamW(
 scalar_adam.step()
 assert math.isclose(scalar_parameter.item(), 1 - corrected_update)
 ```
+
+</details>
 
 The historical BERTAdam omitted this correction. Zhang et al. compared
 the two optimizers over 50 seeds and reported that 48% of their uncorrected
@@ -1089,6 +1222,9 @@ discard the transfer from pretraining; resetting only the classifier is
 the usual baseline, not this upper-layer intervention.
 
 This reduced example preserves those parameter-type distinctions:
+
+<details id="peft-code-reset">
+<summary>Code: resetting upper layers</summary>
 
 ```python
 def reset_top_blocks(blocks, pooler, count, std=.02):
@@ -1131,6 +1267,8 @@ torch.testing.assert_close(toy_blocks[-1][2].bias, torch.zeros(4, dtype=dtype))
 assert all(p.requires_grad for p in toy_blocks.parameters())
 ```
 
+</details>
+
 The zero-block case still resets the pooler. It must not accidentally
 select every block through Python's `[-0:]` slice. Reinitialization happens
 before constructing a new fine-tuning optimizer; otherwise optimizer
@@ -1159,6 +1297,9 @@ The same number of epochs therefore does not specify the same optimization
 budget. Dropping the partial batch, accumulating gradients or distributing
 examples changes the count again.
 
+<details id="peft-code-budget">
+<summary>Code: counting optimizer updates</summary>
+
 ```python
 def single_device_updates(examples, batch, epochs, drop_last=False):
     per_epoch = examples // batch if drop_last else math.ceil(examples / batch)
@@ -1169,6 +1310,8 @@ assert single_device_updates(1000, 32, 3, drop_last=True) == 93
 assert single_device_updates(2400, 32, 3) == 225
 assert single_device_updates(1000, 32, 20) == 640
 ```
+
+</details>
 
 A linear schedule also depends on this count. With a 10% warmup, a
 96-update run has roughly ten warmup updates, whereas a 3,200-update run
@@ -1208,6 +1351,9 @@ parameters. The tokenizer and input representation must remain compatible.
 The next block starts from a supplied toy intermediate checkpoint. It
 checks this transfer contract and one target update, not learning MNLI.
 
+<details id="peft-code-transfer">
+<summary>Code: replacing the classifier during transfer</summary>
+
 ```python
 intermediate_encoder = nn.Linear(4, 4, bias=False).to(dtype)
 with torch.no_grad():
@@ -1237,6 +1383,8 @@ assert not torch.equal(target_encoder.weight, intermediate_state["weight"])
 torch.testing.assert_close(intermediate_encoder.weight, intermediate_state["weight"])
 ```
 
+</details>
+
 In [Zhang et al., §7 and Table 2](https://arxiv.org/html/2006.05987v3),
 intermediate-task training uses additional annotated MNLI data. Its cost
 and supervision are therefore different from an optimizer correction on
@@ -1248,23 +1396,29 @@ deviations**, not new Bookvar measurements. They come from Table 2:
 BERT-Large, bias-corrected Adam, 20 seeds, and three target-task epochs
 except for the Longer setting.
 
-| Target and metric | Standard | Re-init | Longer | MNLI intermediate task |
-|---|---:|---:|---:|---:|
-| RTE accuracy, % | 69.5 ± 2.5 | 72.6 ± 1.6 | 72.3 ± 1.9 | 81.8 ± 1.7 |
-| MRPC F1 | 90.8 ± 1.3 | 91.4 ± 0.8 | 91.0 ± 1.3 | 91.8 ± 1.0 |
-| CoLA MCC | 63.0 ± 1.5 | 64.2 ± 1.6 | 62.4 ± 1.7 | 63.9 ± 1.8 |
+| Setup | RTE accuracy, % | MRPC F1 | CoLA MCC |
+|---|---:|---:|---:|
+| Standard | 69.5 ± 2.5 | 90.8 ± 1.3 | 63.0 ± 1.5 |
+| Re-init | 72.6 ± 1.6 | 91.4 ± 0.8 | 64.2 ± 1.6 |
+| Longer | 72.3 ± 1.9 | 91.0 ± 1.3 | 62.4 ± 1.7 |
+| MNLI transfer | 81.8 ± 1.7 | 91.8 ± 1.0 | 63.9 ± 1.8 |
 
 The CoLA Re-init entry differs between Tables 1 and 2 of the source
 version; the row above follows Table 2 rather than silently mixing them.
 Longer training also does not improve every entry. These task-specific
 results do not imply that LLRD or Mixout never help another model or task.
 
-### Report failed runs and keep selection separate from testing
+<span id="report-failed-runs-and-keep-selection-separate-from-testing"></span>
+
+### Failed runs and model selection
 
 Suppose four seeds score 0.50, 0.51, 0.70 and 0.72 on a development set.
 Their mean is 0.6075. Removing the first two as “degenerate” changes the
 reported mean to 0.71 and hides a 50% failure rate. It describes a
 conditional subset of the runs, not the reliability of the full procedure.
+
+<details id="peft-code-seeds">
+<summary>Code: including failed seeds</summary>
 
 ```python
 from statistics import mean, stdev
@@ -1276,6 +1430,8 @@ assert math.isclose(mean(retained_scores), .71)
 assert sum(score < .55 for score in seed_scores) / len(seed_scores) == .5
 assert stdev(retained_scores) < stdev(seed_scores)
 ```
+
+</details>
 
 A validation-based early-stopping or run-allocation rule can be a legitimate
 algorithm. State that rule, its total compute budget and the fate of the
@@ -1320,15 +1476,18 @@ penalizes movement away from a saved checkpoint. These methods require different
 information and need not preserve the same behaviour. They can also be combined.
 
 <a id="fine-tuning-replay"></a>
-### Replay adds old examples to the objective
+<span id="replay-adds-old-examples-to-the-objective"></span>
+
+### Replay
 
 Write $\mathcal L_{\mathrm{new}}$ and $\mathcal L_{\mathrm{old}}$ as mean losses
-on new and replay data. One mixture is
+on new and replay data. With replay probability $0\leq\rho\leq1$,
+the objective is
 
 $$
 \mathcal L_{\mathrm{mix}}(\theta)
 =(1-\rho)\mathcal L_{\mathrm{new}}(\theta)
-+\rho\mathcal L_{\mathrm{old}}(\theta),\qquad 0\leq\rho\leq1.
++\rho\mathcal L_{\mathrm{old}}(\theta).
 $$
 
 Sampling an old example with probability $\rho$ and a new one otherwise gives an
@@ -1351,6 +1510,9 @@ A 25% replay weight gives $-0.5$, with old loss 1.125 and new loss 0.125.
 Equal weights give 0, with loss 0.5 on each task. The compromise follows from
 the chosen weights; no value of this one parameter solves both targets exactly.
 
+<details id="peft-code-replay">
+<summary>Code: the replay compromise</summary>
+
 ```python
 def replay_losses(theta):
     return .5 * (theta - 1)**2, .5 * (theta + 1)**2
@@ -1367,6 +1529,8 @@ old_at_quarter, new_at_quarter = replay_losses(-.5)
 assert math.isclose(old_at_quarter, 1.125)
 assert math.isclose(new_at_quarter, .125)
 ```
+
+</details>
 
 In language-model training, $\rho$ must specify its unit. Selecting 25% of
 documents from an old corpus does not imply that 25% of loss-bearing tokens
@@ -1386,7 +1550,9 @@ The interleaving argument is described in
 the scalar calculation above is an added example.
 
 <a id="l2-sp"></a>
-### L2-SP uses the pretrained checkpoint as the reference
+<span id="l2-sp-uses-the-pretrained-checkpoint-as-the-reference"></span>
+
+### L2-SP regularization
 
 Ordinary zero-centred L2 regularization adds
 $\tfrac{\lambda}{2}\|\theta\|^2$, whose gradient is $\lambda\theta$.
@@ -1417,6 +1583,9 @@ zero gives $\theta^*=(b+\lambda\theta_A)/(1+\lambda)$.
 With $\theta_A=(2,2)$, $b=(0,0)$ and $\lambda=1$, L2-SP gives $(1,1)$.
 A zero-centred penalty gives $(0,0)$ in this example: both its terms prefer zero.
 
+<details id="peft-code-l2sp">
+<summary>Code: a penalty around the starting weights</summary>
+
 ```python
 anchor = torch.tensor([2., 2.], dtype=dtype).detach().clone()
 new_target = torch.zeros(2, dtype=dtype)
@@ -1432,6 +1601,8 @@ zero_centred_solution = new_target / (1 + strength)
 torch.testing.assert_close(zero_centred_solution, torch.zeros(2, dtype=dtype))
 ```
 
+</details>
+
 The anchor must be a detached snapshot, not a view of live parameters that changes
 with every optimizer step. When fine-tuning replaces a classification head, the
 new head has no corresponding pretrained tensor. Li et al.'s Eq. 3 applies the
@@ -1445,7 +1616,9 @@ L2-SP. An explicit checkpoint-centred loss must use the intended parameter set
 and normalization.
 
 <a id="elastic-weight-consolidation"></a>
-### EWC assigns different penalties to different parameters
+<span id="ewc-assigns-different-penalties-to-different-parameters"></span>
+
+### EWC penalties
 
 L2-SP treats equal displacements in every parameter equally. Elastic weight
 consolidation stores an importance coefficient $F_i$ for each parameter after
@@ -1483,6 +1656,9 @@ $\tfrac12\sum_iF_i(\theta_i-\theta_{A,i})^2$ gives these exact trade-offs:
 These numbers compare objectives in a constructed example. They are not accuracy
 scores, and the protected quadratic is not an evaluation of a real old task.
 
+<details id="peft-code-ewc">
+<summary>Code: a coordinate-weighted penalty</summary>
+
 ```python
 importance = torch.tensor([9., .1], dtype=dtype)
 ewc_solution = ((new_target + strength * importance * anchor)
@@ -1506,6 +1682,8 @@ assert (frozen_base @ old_input).item() == 1.
 assert ((frozen_base + adapter_b @ adapter_a) @ old_input).item() == -1.
 ```
 
+</details>
+
 EWC's original motivation approximates the parameter posterior after task A by
 a Gaussian around $\theta_A$, then uses that approximation when learning B.
 The diagonal Fisher supplies the per-coordinate precision approximation.
@@ -1522,7 +1700,9 @@ replay. These choices are not interchangeable with applying a Fisher estimated
 for the original base directly to LoRA factor coordinates.
 
 <a id="fisher-for-ewc"></a>
-### Estimating the Fisher: square before averaging
+<span id="estimating-the-fisher-square-before-averaging"></span>
+
+### Estimating the Fisher diagonal
 
 For a conditional model, one diagonal Fisher convention is
 
@@ -1551,6 +1731,9 @@ class 1 is 0.5. Two old examples with labels 1 and 0 have loss gradients
 $-0.5$ and $+0.5$. Their mean gradient is zero, but the mean of their squared
 gradients is 0.25. Averaging first would incorrectly assign zero importance.
 
+<details id="peft-code-fisher">
+<summary>Code: per-example squared gradients</summary>
+
 ```python
 logistic_weight = torch.tensor(0., dtype=dtype, requires_grad=True)
 old_labels = torch.tensor([1., 0.], dtype=dtype)
@@ -1573,6 +1756,8 @@ model_fisher = p * (1 - p)
 assert math.isclose(observed_label_square, .01)
 assert math.isclose(model_fisher, .09)
 ```
+
+</details>
 
 The first example happens to have balanced labels matching the model
 probabilities. In the second, replacing the model expectation with observed
@@ -1597,7 +1782,9 @@ problem with treating the former as exact sequential Bayesian inference.
 The two-task equation above does not silently define a complete multi-task
 implementation.
 
-### What the original transfer experiment measures
+<span id="what-the-original-transfer-experiment-measures"></span>
+
+### L2-SP transfer results
 
 ![[00 Учебник/Assets/Figures/curated/retention-2026-10-29/l2sp-target-comparison.png|Original L2-SP comparison on four target datasets]]
 
@@ -1638,7 +1825,9 @@ Tune the mixture or penalty against the stated objective and report both.
 Keep unchanged evaluation data and the original base checkpoint so that a
 later adaptation can be compared with the same reference.
 
-## Training and evaluating an adaptation
+<span id="training-and-evaluating-an-adaptation"></span>
+
+## Comparing adaptations
 
 Keep the task and data fixed when comparing parameterizations. For a
 small classification dataset, compare a fixed-representation head,
@@ -1668,12 +1857,9 @@ silently dropping them from the mean. A small trainable parameter count
 does not establish generalization, freedom from forgetting or superiority
 over full fine-tuning.
 
-The [[00 Учебник/12 Post-training и Alignment/02 Preference data|next chapter]]
-changes the available supervision from one demonstration to a comparison
-between responses. That change is separate from whether the policy is
-represented by full weights or a PEFT parameterization.
+<span id="sources-and-reproduced-material"></span>
 
-## Sources and reproduced material
+## References
 
 - Houlsby et al., [Parameter-Efficient Transfer Learning for NLP](https://proceedings.mlr.press/v97/houlsby19a.html),
   Introduction and §2.1. The quoted bottleneck description and original
@@ -1720,6 +1906,8 @@ represented by full weights or a PEFT parameterization.
   These sources support the mechanism and its limits; their full text and
   figures are linked rather than reproduced.
 
-The CPU blocks run in order with PyTorch and no model download. They
-check small linear/attention examples and memory arithmetic, not a
-full-model fine-tuning result or a GPU QLoRA implementation.
+Previous: [[00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT: learning from demonstrations]].
+
+Next: [[00 Учебник/12 Post-training и Alignment/02 Preference data|Preference data]].
+A pair of responses supplies a different training signal regardless of
+whether all weights or only an adapter will change.

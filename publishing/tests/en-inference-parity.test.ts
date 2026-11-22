@@ -14,7 +14,7 @@ describe('complete English inference chapter reconciliation', () => {
     expect(totals.displayMath).toBe(72);
     expect(totals.codeFences).toBe(43);
     expect(totals.originalExcerpts).toBe(20);
-    expect(totals.canonicalSections).toBe(185);
+    expect(totals.canonicalSections).toBe(186);
   });
 
   it('reports the current decoding metadata separately from the unchanged historical receipt', () => {

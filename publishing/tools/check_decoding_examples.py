@@ -61,9 +61,10 @@ def main():
     torch.set_num_threads(1)
     assert importlib.metadata.version("transformers") == "4.57.1"
     for module, name, expected in SOURCES:
-        archived = (ARCHIVE/name).read_bytes()
-        assert hashlib.sha256(archived).hexdigest() == expected
-        assert Path(module.__file__).read_bytes() == archived, name
+        installed = Path(module.__file__).read_bytes()
+        assert hashlib.sha256(installed).hexdigest() == expected, name
+        if ARCHIVE.is_dir():
+            assert (ARCHIVE/name).read_bytes() == installed, name
     text = CHAPTER.read_text()
     blocks = re.findall(r"^~~~python\n(.*?)^~~~\s*$", text, re.M | re.S)
     assert len(blocks) == 6
@@ -101,6 +102,21 @@ def main():
     }
     for name, values in expected.items():
         torch.testing.assert_close(ns["filtered_probabilities"][name], torch.tensor(values, dtype=f64))
+    # The worked example fixes the first uniform draw; E denotes EOS.
+    first = ns["filtered_probabilities"]["top-p=0.8"][0]
+    chosen = torch.searchsorted(first.cumsum(0), torch.tensor(.60, dtype=f64)).item()
+    assert chosen == 1
+    next_history = torch.cat([ns["history"], torch.tensor([[chosen]])], dim=-1)
+    p_next = torch.tensor([[.02, .05, .02, .01, .9]], dtype=f64)
+    second = logits_process.TopPLogitsWarper(.8)(next_history, p_next.log()).softmax(-1)[0]
+    torch.testing.assert_close(second, torch.tensor([0, 0, 0, 0, 1], dtype=f64))
+    assert math.isclose((p[0, chosen]*p_next[0, 4]).item(), .27)
+    assert math.isclose((first[chosen]*second[4]).item(), 1/3)
+    ids = torch.tensor([[ns["vocabulary"][piece] for piece in ("st", "opera")]])
+    assert ns["criterion"](ids, None).item()
+    decoded = ns["tokenizer"].decode(ids[0])
+    assert decoded == "stopera"
+    assert decoded.partition("stop") == ("", "stop", "era")
     torch.testing.assert_close(ns["k_then_p"], torch.tensor([[1, 0, 0, 0, 0]], dtype=f64))
     torch.testing.assert_close(ns["p_then_k"], torch.tensor(expected["top-k=2"], dtype=f64))
     tied = torch.tensor([[2., 1., 1., 0.]])

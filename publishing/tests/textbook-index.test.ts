@@ -43,16 +43,20 @@ describe('reader-facing textbook order', () => {
     }
   });
 
-  it('sends the post-training introduction to SFT instead of a later preference calculation', () => {
+  it('uses the main reading route after the post-training introduction', () => {
     const intro = readFileSync(resolve(root,
       '00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md'), 'utf8');
+    const paths = readingPaths(textbook).find(path => path.id === 'main')!.routes;
+    const at = paths.indexOf('textbook/post-training/module-map');
+    expect(at).toBeGreaterThan(0);
+    expect(paths.slice(at - 1, at + 2)).toEqual([
+      'textbook/inference/decoding', 'textbook/post-training/module-map',
+      'textbook/post-training/sft-instruction-data',
+    ]);
     expect(intro).toContain('next: "[[00 Учебник/12 Post-training и Alignment/01 SFT и instruction data]]"');
-    const choices = [...intro.matchAll(/^\d+\. (\[\[[^\n]+\]\])[^\n]*$/gm)]
-      .flatMap(match => chapterLinks(match[1]));
-    const expected = readingPaths(textbook).find(path => path.id === 'main')!.routes
-      .filter(route => route.startsWith('textbook/post-training/')
-        && !route.endsWith('/module-map'));
-    expect(choices).toEqual(expected);
+    const footer = intro.split('<span id="маршрут-по-модулю"></span>')[1];
+    expect(chapterLinks(footer)).toEqual([paths[at - 1], paths[at + 1]]);
+    expect(intro).not.toMatch(/^\d+\. \[\[/m);
   });
 
   it('does not leak source-file ordinals into chapter link labels', () => {

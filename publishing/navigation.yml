@@ -489,9 +489,11 @@ sections:
           - label: IX. Дообучение и рассуждения
             label_en: IX. Post-training and reasoning
             items:
-              - label: Карта post-training и источники
+              - label: Постобучение языковых моделей
+                label_en: Language model post-training
                 route: textbook/post-training/module-map
-              - label: SFT и instruction data
+              - label: "SFT: обучение на демонстрациях"
+                label_en: "SFT: learning from demonstrations"
                 route: textbook/post-training/sft-instruction-data
               - label: Fine-tuning и PEFT
                 label_en: Fine-tuning and PEFT
