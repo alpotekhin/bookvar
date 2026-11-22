@@ -1,0 +1,203 @@
+{
+  "date": "2026-11-22",
+  "scope": "Bilingual machine translation chapter after T5 and before GPT-1. Covers aligned data, conditional loss, search, back-translation, multilingual conditioning and translation evaluation. No new practice route.",
+  "read_scope": "full-body",
+  "sources": [
+    {
+      "sections": "Jurafsky & Martin, SLP Chapter 13; existing Bookvar Transformer, T5 and evaluation chapters",
+      "verification": "Same source-conditioned autoregressive factorization, shifted target and masked access. Keep the fixed start symbol in the toy separate from T5's decoder start ID."
+    },
+    {
+      "sections": "Heffernan et al., LASER3 §3 and Fig. 1",
+      "verification": "Distinguish teacher and student inputs, source of each target, cosine training and monolingual MLM. The encoder is used to mine bitext."
+    },
+    {
+      "sections": "Sennrich et al. §3.2; Edunov et al. §5.1 and Fig. 1; Johnson et al. §§2 and 4; NLLB Nature 2024",
+      "verification": "Correct reverse direction and synthetic source. Check plot axes and that generation methods apply to synthetic training data rather than the evaluation decoder. Target-language signal and per-direction multilingual coverage."
+    },
+    {
+      "sections": "Post 2018; Rei et al. §2.3 and Fig. 1; Freitag et al. §3",
+      "verification": "Clipped BLEU counts, brevity penalty, source-conditioned reference-based COMET estimator, and human category/severity; avoid claiming a score for an actual checkpoint in the illustrative example."
+    }
+  ],
+  "figures": [
+    {
+      "file": "heffernan-laser3-fig1.png",
+      "source": "https://aclanthology.org/2022.findings-emnlp.154.pdf#page=3",
+      "sha256": "d1a7149e6afe28a4f385e0dfd9ff16e44e67b06665e3083b6a3b77b572fdf2e6",
+      "license": "CC BY 4.0",
+      "modifications": "Complete labeled figure cropped from PDF; no redraw."
+    },
+    {
+      "file": "edunov-backtranslation-fig1.png",
+      "source": "https://aclanthology.org/D18-1045.pdf#page=4",
+      "sha256": "7a209bc13e5b3b45eb3b8b9a17a9363584755a360fa461822f98cd4962c92b6c",
+      "license": "CC BY 4.0",
+      "modifications": "Complete labeled figure cropped from PDF; no redraw."
+    },
+    {
+      "file": "rei-comet-estimator-fig1.png",
+      "source": "https://aclanthology.org/2020.emnlp-main.213.pdf#page=3",
+      "sha256": "1a3f199f681064ed42d9a8399bec5987c4855a902d97047fdc5db71874296b96",
+      "license": "CC BY 4.0",
+      "modifications": "Complete labeled figure cropped from PDF; no redraw."
+    }
+  ],
+  "files": [
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md",
+      "created": true,
+      "after_sha256": "b59c7f5e7c02a14e29b77a7cb123e012087e769e54b93f35f5185826ea306172",
+      "changes": []
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "before_sha256": "64cbf967a20dc9a34f122fd3570f5a34b572f3c8872716fc370b554ca0ad7ecc",
+      "after_sha256": "5e1afc0a3a78243b161f4317d7cf77b68510b0dbc9d29b41944abb3914733545",
+      "changes": [
+        {
+          "old": "type: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-21\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]\"\nprimary_sources:\n  - https://jmlr.org/papers/v21/20-074.html\n  - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4\n  - https://github.com/huggingface/transformers/tree/753d61104116eefc8ffc977327b441ee0c8d599f/src/transformers/models/t5\n",
+          "new": "type: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-21\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод]]\"\nprimary_sources:\n  - https://jmlr.org/papers/v21/20-074.html\n  - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4\n  - https://github.com/huggingface/transformers/tree/753d61104116eefc8ffc977327b441ee0c8d599f/src/transformers/models/t5\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|Семейство T5]].\n- [[02 Areas/ML & DL/Papers/T5|Подробная заметка о статье и протоколах сравнения]].\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Извлечение информации из документов]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].\n",
+          "new": "- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|Семейство T5]].\n- [[02 Areas/ML & DL/Papers/T5|Подробная заметка о статье и протоколах сравнения]].\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Извлечение информации из документов]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Машинный перевод]].\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "before_sha256": "7e74aa938f50b011956fd74febcdc0659987a2a785417dc79eb49cdd95dc4753",
+      "after_sha256": "92504fc25d8efc4861cdcfe9a23fb56cb1fbe82a771eb5583aa598ea83f08161",
+      "changes": [
+        {
+          "old": "type: textbook-chapter\nstatus: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"64cbf967a20dc9a34f122fd3570f5a34b572f3c8872716fc370b554ca0ad7ecc\"\ntranslation_reviewed: \"2026-11-21\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md\"\nlast_updated: 2026-11-21\nprimary_sources:\n  - https://jmlr.org/papers/v21/20-074.html\n  - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4\n  - https://github.com/huggingface/transformers/tree/753d61104116eefc8ffc977327b441ee0c8d599f/src/transformers/models/t5\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]\"\n---\n\n# T5: the text-to-text Transformer\n",
+          "new": "type: textbook-chapter\nstatus: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"5e1afc0a3a78243b161f4317d7cf77b68510b0dbc9d29b41944abb3914733545\"\ntranslation_reviewed: \"2026-11-21\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md\"\nlast_updated: 2026-11-21\nprimary_sources:\n  - https://jmlr.org/papers/v21/20-074.html\n  - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4\n  - https://github.com/huggingface/transformers/tree/753d61104116eefc8ffc977327b441ee0c8d599f/src/transformers/models/t5\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод]]\"\n---\n\n# T5: the text-to-text Transformer\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|T5 family]].\n- [[02 Areas/ML & DL/Papers/T5|Detailed paper and comparison-protocol note]].\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Information extraction from documents]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].\n",
+          "new": "- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|T5 family]].\n- [[02 Areas/ML & DL/Papers/T5|Detailed paper and comparison-protocol note]].\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Information extraction from documents]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Machine translation]].\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md",
+      "before_sha256": "a61f95738040c4e47c1b25a74a517a5bb173b527565153b862d57492578e37cc",
+      "after_sha256": "49fed5b4ed154e9b5ad1b74b81cc3b6979e411846f7351886df2bf4be911b815",
+      "changes": [
+        {
+          "old": "title: GPT-1 — генеративное предобучение\ntype: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-21\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"\nprimary_sources:\n  - https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf\n  - https://github.com/openai/finetune-transformer-lm/tree/a69b5c43b0452462890bca8ff92fb75dee9290cf\n",
+          "new": "title: GPT-1 — генеративное предобучение\ntype: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-21\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"\nprimary_sources:\n  - https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf\n  - https://github.com/openai/finetune-transformer-lm/tree/a69b5c43b0452462890bca8ff92fb75dee9290cf\n"
+        },
+        {
+          "old": "- [Stanford CS224n, Lecture 9: Pretraining, слайды 46–50](https://web.stanford.edu/class/cs224n/slides/cs224n-spr2024-lecture09-pretraining-updated.pdf#page=46). Языковая и классификационная головы, GPT-1, формат NLI и результаты; оригинал на английском.\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектурных паттерна]] — видимость входа и обучающие задачи.\n- [[02 Areas/ML & DL/Papers/GPT 1.0|Старая заметка о GPT-1]] — дополнительные записи; не заменяет первичную статью.\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].\n",
+          "new": "- [Stanford CS224n, Lecture 9: Pretraining, слайды 46–50](https://web.stanford.edu/class/cs224n/slides/cs224n-spr2024-lecture09-pretraining-updated.pdf#page=46). Языковая и классификационная головы, GPT-1, формат NLI и результаты; оригинал на английском.\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектурных паттерна]] — видимость входа и обучающие задачи.\n- [[02 Areas/ML & DL/Papers/GPT 1.0|Старая заметка о GPT-1]] — дополнительные записи; не заменяет первичную статью.\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Машинный перевод]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md",
+      "before_sha256": "906912d59979a1987632a256c8dd034dbbd91c6ad6465fba4b6fba3f6f729baa",
+      "after_sha256": "e4f54f69aeae47affa51a972c8017b441803becae6bef524286a50d82db0a1de",
+      "changes": [
+        {
+          "old": "type: textbook-chapter\nstatus: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"a61f95738040c4e47c1b25a74a517a5bb173b527565153b862d57492578e37cc\"\ntranslation_reviewed: \"2026-11-21\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\"\nlast_updated: 2026-11-21\nprimary_sources:\n  - https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf\n  - https://github.com/openai/finetune-transformer-lm/tree/a69b5c43b0452462890bca8ff92fb75dee9290cf\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"\n---\n\n# GPT-1: generative pre-training\n",
+          "new": "type: textbook-chapter\nstatus: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"49fed5b4ed154e9b5ad1b74b81cc3b6979e411846f7351886df2bf4be911b815\"\ntranslation_reviewed: \"2026-11-21\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\"\nlast_updated: 2026-11-21\nprimary_sources:\n  - https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf\n  - https://github.com/openai/finetune-transformer-lm/tree/a69b5c43b0452462890bca8ff92fb75dee9290cf\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык]]\"\n---\n\n# GPT-1: generative pre-training\n"
+        },
+        {
+          "old": "- [Stanford CS224n, Lecture 9: Pretraining, slides 46–50](https://web.stanford.edu/class/cs224n/slides/cs224n-spr2024-lecture09-pretraining-updated.pdf#page=46). Language and classification heads, GPT-1, NLI formatting, and results, in the original English.\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three architectural patterns]] — input visibility and training objectives.\n- [[02 Areas/ML & DL/Papers/GPT 1.0|Earlier GPT-1 note]] — additional notes, not a replacement for the primary paper.\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].\n",
+          "new": "- [Stanford CS224n, Lecture 9: Pretraining, slides 46–50](https://web.stanford.edu/class/cs224n/slides/cs224n-spr2024-lecture09-pretraining-updated.pdf#page=46). Language and classification heads, GPT-1, NLI formatting, and results, in the original English.\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three architectural patterns]] — input visibility and training objectives.\n- [[02 Areas/ML & DL/Papers/GPT 1.0|Earlier GPT-1 note]] — additional notes, not a replacement for the primary paper.\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Machine translation]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2]].\n"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "3b976eb0dbc6eae80eaa034246335f0384e49cb384f4947659d04cc542bec28c",
+      "after_sha256": "6e40801a63fa01e892a14c02ecd182b90b8cf7ea7e8bd3b09ccc0974b7eeaf44",
+      "changes": [
+        {
+          "old": "        route: textbook/models/information-extraction\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md\n        route: textbook/models/t5\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md\n        route: textbook/models/gpt-1\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md\n",
+          "new": "        route: textbook/models/information-extraction\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md\n        route: textbook/models/t5\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/08 Machine translation.md\n        route: textbook/models/machine-translation\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md\n        route: textbook/models/gpt-1\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md\n"
+        },
+        {
+          "old": "                label_en: Information extraction from documents\n                route: textbook/models/information-extraction\n              - label: T5 — text-to-text Transformer\n                route: textbook/models/t5\n          - label: V. От GPT-1 к LLaMA\n            label_en: V. From GPT-1 to LLaMA\n            items:\n              - label: GPT-1 — генеративное предобучение\n",
+          "new": "                label_en: Information extraction from documents\n                route: textbook/models/information-extraction\n              - label: T5 — text-to-text Transformer\n                route: textbook/models/t5\n              - label: Машинный перевод\n                label_en: Machine translation\n                route: textbook/models/machine-translation\n          - label: V. От GPT-1 к LLaMA\n            label_en: V. From GPT-1 to LLaMA\n            items:\n              - label: GPT-1 — генеративное предобучение\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "773151671f7c1a4a4a03595d913cc13afa3448cc87b1dabbf31ba60520e7336e",
+      "after_sha256": "42e86ebe521074e3bd0d0b35a5100eba529bdfc491d02b7097ee02af237ea8e7",
+      "changes": [
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Распознавание именованных сущностей]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Классификация документов]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Извлечение информации из документов]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 — text-to-text Transformer]]\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n<a id=\"vi-анатомия-современной-llm\"></a>\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Распознавание именованных сущностей]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Классификация документов]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Извлечение информации из документов]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 — text-to-text Transformer]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Машинный перевод]]\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n<a id=\"vi-анатомия-современной-llm\"></a>\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "787301edc9ffc7473b1937fb2d4d47856886491c81bf0981c43b0e3cf1c8df2b",
+      "after_sha256": "a39e35c268b6002c18a40e156641fb56ac8d993988b66924841cc3d514c581d9",
+      "changes": [
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Named entity recognition]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Document classification]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Information extraction from documents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: the text-to-text Transformer]] · **EN**\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n<a id=\"vi-anatomy-of-a-modern-llm\"></a>\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Named entity recognition]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Document classification]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Information extraction from documents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: the text-to-text Transformer]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Machine translation]] · **EN**\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n<a id=\"vi-anatomy-of-a-modern-llm\"></a>\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "b074d4ea5f272721e8fe9e8038158bdc24f21554082e0f896b5790a6ed2f8305",
+      "after_sha256": "6fd812cfcd1dbb175b1274f777d945a5aeb284843f1eef40b1cb4184cb6bde77",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов#doccls-bert|BERT: классификация документа по CLS]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов#doccls-evaluation|Оценивание текстового классификатора и выбор порога]]\n- [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|Маски, несколько голов и формы тензоров]]\n  - [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#causal-mask-shifted-targets|Причинная маска — видимость токенов и сдвиг целей]]\n- [[00 Учебник/05 Attention и Transformer/04 Позиционная информация|Позиционная информация в Transformer]]\n- [[00 Учебник/05 Attention и Transformer/03 Полный Transformer|Полный Transformer: энкодер и декодер]]\n  - [[00 Учебник/05 Attention и Transformer/03 Полный Transformer#transformer-dropout|Attention, residual and embedding dropout]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Распознавание именованных сущностей]]\n",
+          "new": "  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов#doccls-bert|BERT: классификация документа по CLS]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов#doccls-evaluation|Оценивание текстового классификатора и выбор порога]]\n- [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|Маски, несколько голов и формы тензоров]]\n  - [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#causal-mask-shifted-targets|Причинная маска — видимость токенов и сдвиг целей]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Машинный перевод]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод#mt-parallel-data|Параллельные данные и добыча битекста]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод#mt-objective|Условная вероятность перевода и обучение]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод#mt-decoding|Жадное декодирование и поиск лучом при переводе]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод#mt-back-translation|Обратный перевод и выбор целевого языка]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод#mt-evaluation|Проверка качества машинного перевода]]\n- [[00 Учебник/05 Attention и Transformer/04 Позиционная информация|Позиционная информация в Transformer]]\n- [[00 Учебник/05 Attention и Transformer/03 Полный Transformer|Полный Transformer: энкодер и декодер]]\n  - [[00 Учебник/05 Attention и Transformer/03 Полный Transformer#transformer-dropout|Attention, residual and embedding dropout]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Распознавание именованных сущностей]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "da7a4fcf97cb164ceb91b93c27a080607fea3c899ac99a13ada2f97d126c1126",
+      "after_sha256": "875a6a7d9aab38a6071c8907d12f7d5a270a7308e135fe513bd0af619d479110",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-linking|Entity linking to a catalog]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-relations|Document-level relation extraction]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-events|Events and time normalization]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-evaluation|Evaluating information extraction]]\n- [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|Masking, heads, and tensor shapes]] · **EN**\n  - [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#causal-mask-shifted-targets|Causal mask — token visibility and shifted targets]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Named entity recognition]] · **EN**\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-bio|BIO (IOB2): named entity boundaries and types]]\n",
+          "new": "  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-linking|Entity linking to a catalog]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-relations|Document-level relation extraction]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-events|Events and time normalization]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-evaluation|Evaluating information extraction]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Machine translation]] · **EN**\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод#mt-parallel-data|Parallel data and bitext mining]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод#mt-objective|Conditional translation probability and training]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод#mt-decoding|Greedy and beam decoding in translation]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод#mt-back-translation|Back-translation and target-language control]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод#mt-evaluation|Evaluating machine translation]]\n- [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|Masking, heads, and tensor shapes]] · **EN**\n  - [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#causal-mask-shifted-targets|Causal mask — token visibility and shifted targets]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Named entity recognition]] · **EN**\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-bio|BIO (IOB2): named entity boundaries and types]]\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "de50490d2356bbceb21827920560e121c1ec734f849eb48c1eb4fd36e0c84adf",
+      "after_sha256": "cac074b6418fbaee5a107d59a81cb62ac7ff98a60b57e2b5956b6984a9aa2822",
+      "changes": [
+        {
+          "old": "    modifications: copied without visual modification from the source slide render\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\nassets:\n  - id: curated-lee-antecedents-fig2-a230e3a281f7\n    asset: 00 Учебник/Assets/Figures/curated/information-extraction-2026-11-22/lee-antecedents-fig2.png\n    title: \"Mention and antecedent scores, Figure 2\"\n    author: \"Kenton Lee, Luheng He, Mike Lewis, and Luke Zettlemoyer\"\n",
+          "new": "    modifications: copied without visual modification from the source slide render\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\nassets:\n  - id: curated-heffernan-laser3-fig1-d1a7149e6afe\n    asset: 00 Учебник/Assets/Figures/curated/machine-translation-2026-11-22/heffernan-laser3-fig1.png\n    title: \"LASER3 auxiliary MLM and multilingual distillation, Figure 1\"\n    author: \"Kevin Heffernan, Onur Çelebi, and Holger Schwenk\"\n    source_url: https://aclanthology.org/2022.findings-emnlp.154.pdf#page=3\n    source_image_url: https://aclanthology.org/2022.findings-emnlp.154.pdf\n    rights_evidence: https://aclanthology.org/faq/copyright/\n    sha256: d1a7149e6afe28a4f385e0dfd9ff16e44e67b06665e3083b6a3b77b572fdf2e6\n    source_pdf_sha256: a01217d1d10b37e263070f2a1e56b64b9baf8fba24829f1ce5d0ab3088fa02c1\n    source_page: 3\n    dimensions_px: [1710, 765]\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    derivation: source-pdf-render\n    crop_px: [535, 312, 1710, 765]\n    modifications: \"Full diagram or plot rendered with pdftoppm at -scale-to 3900 and cropped from the surrounding PDF page; labels unchanged.\"\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-22\"\n    used_in:\n      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md\n      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/08 Machine translation.md\n  - id: curated-edunov-backtranslation-fig1-7a209bc13e5b\n    asset: 00 Учебник/Assets/Figures/curated/machine-translation-2026-11-22/edunov-backtranslation-fig1.png\n    title: \"Back-translation generation strategies on WMT En→De, Figure 1\"\n    author: \"Sergey Edunov, Myle Ott, Michael Auli, and David Grangier\"\n    source_url: https://aclanthology.org/D18-1045.pdf#page=4\n    source_image_url: https://aclanthology.org/D18-1045.pdf\n    rights_evidence: https://aclanthology.org/faq/copyright/\n    sha256: 7a209bc13e5b3b45eb3b8b9a17a9363584755a360fa461822f98cd4962c92b6c\n    source_pdf_sha256: 871e257c56f98ed886a7a23ccce65a1424b26f76c6114757df5cbb0567934556\n    source_page: 4\n    dimensions_px: [1075, 805]\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    derivation: source-pdf-render\n    crop_px: [1410, 276, 1075, 805]\n    modifications: \"Full diagram or plot rendered with pdftoppm at -scale-to 3900 and cropped from the surrounding PDF page; labels unchanged.\"\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-22\"\n    used_in:\n      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md\n      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/08 Machine translation.md\n  - id: curated-rei-comet-estimator-fig1-1a3f199f6810\n    asset: 00 Учебник/Assets/Figures/curated/machine-translation-2026-11-22/rei-comet-estimator-fig1.png\n    title: \"COMET estimator inputs and regression head, Figure 1\"\n    author: \"Ricardo Rei, Craig Stewart, Ana C Farinha, and Alon Lavie\"\n    source_url: https://aclanthology.org/2020.emnlp-main.213.pdf#page=3\n    source_image_url: https://aclanthology.org/2020.emnlp-main.213.pdf\n    rights_evidence: https://aclanthology.org/faq/copyright/\n    sha256: 1a3f199f681064ed42d9a8399bec5987c4855a902d97047fdc5db71874296b96\n    source_pdf_sha256: b852d8db07905ed912366d06e898a40388bc7de5abb0a9ce310bac0e5b8947b3\n    source_page: 3\n    dimensions_px: [1010, 915]\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    derivation: source-pdf-render\n    crop_px: [336, 345, 1010, 915]\n    modifications: \"Full diagram or plot rendered with pdftoppm at -scale-to 3900 and cropped from the surrounding PDF page; labels unchanged.\"\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-22\"\n    used_in:\n      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md\n      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/08 Machine translation.md\n  - id: curated-lee-antecedents-fig2-a230e3a281f7\n    asset: 00 Учебник/Assets/Figures/curated/information-extraction-2026-11-22/lee-antecedents-fig2.png\n    title: \"Mention and antecedent scores, Figure 2\"\n    author: \"Kenton Lee, Luheng He, Mike Lewis, and Luke Zettlemoyer\"\n"
+        }
+      ]
+    }
+  ],
+  "added_sources": [
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/08 Machine translation.md",
+      "sha256": "3b55c7e4df182c712f84f560aa237f2d7bdb3777b53334d91aec836cdbfe3f43",
+      "canonical": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md",
+      "route": "textbook/models/machine-translation",
+      "status": "current",
+      "en_body_read": true,
+      "outstanding_expansions": []
+    }
+  ],
+  "verification": {
+    "explanation": "Both editions use the same negated instruction to show parallel alignment, teacher-forced loss and prefix search, synthetic source construction, and why overlap is insufficient for meaning.",
+    "example": "The shared Python block verifies log loss 0.916, greedy and beam scores 0.24 and 0.38, and unsmoothed pedagogical BLEU-4 67.3 on the wrong output and 0 on the valid paraphrase.",
+    "style": "Reread both complete editions. Keep the worked instruction, selected intermediate scores and plots; distinguish training input generation, actual decoding and evaluation.",
+    "publication": "91 core chapters and 159 reference topics. Local build 2111 pages. Publication suite: 846 passed, 13 skipped. Rendered output suite: 380 passed. Zero broken internal links. Restore both historical reading checkpoints directly from current chapter bytes.",
+    "visual": "Both editions inspected at 390 and 1440 px. All three source figures and axis labels are intact, and the back-translation plot can be zoomed to 2× with attribution and original link. Equations and tables fit; no document overflow, English fallback or KaTeX errors.",
+    "open": "Summarization and question answering; speech."
+  }
+}

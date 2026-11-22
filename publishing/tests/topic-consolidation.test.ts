@@ -21,7 +21,7 @@ describe('one primary explanation per published topic', () => {
   it('covers every textbook subject in both topic indexes without writing second explanations', () => {
     const book = pages.filter(page => page.route.startsWith('textbook/')
       && !['textbook/index', 'textbook/how-to-use'].includes(page.route));
-    expect(book).toHaveLength(156);
+    expect(book).toHaveLength(159);
     for (const path of ['01 Справочник/_index.md', 'en/01 Reference/_index.md']) {
       const content = read(path), links = targets(content);
       for (const page of book) expect(links.has(page.source.replace(/\.md$/, '')), page.source).toBe(true);

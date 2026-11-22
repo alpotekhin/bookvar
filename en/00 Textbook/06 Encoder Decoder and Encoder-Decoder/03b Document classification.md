@@ -6,7 +6,7 @@ status: canonical
 locale: en
 translation_status: current
 translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов.md"
-canonical_revision: "efd33393c82c5aea1b82517a265e7ac1c352c16f478a06a68a11db57a7449e0e"
+canonical_revision: "ce4198c891a166efc1b940abd3d677f01457b1845d392a05b6d65d5f861a9644"
 translation_reviewed: "2026-11-22"
 last_updated: 2026-11-22
 last_verified: 2026-11-22
@@ -28,7 +28,7 @@ primary_sources:
   - https://aclanthology.org/N19-1423/
   - https://d2l.ai/chapter_natural-language-processing-applications/finetuning-bert.html#fig-bert-one-seq
 previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей]]"
-next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]"
+next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов]]"
 ---
 
 “Great screen, awful battery” and “Awful screen, great battery” contain
@@ -325,4 +325,4 @@ cases the model stops distinguishing.
 - In this textbook: [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 Представление текста числами|word counts and TF-IDF]] and the [[02 Areas/ML & DL/00 Учебник/01 Классическое машинное обучение/02 Линейная регрессия и классификация|derivation of logistic regression]].
 
 **Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Named entity recognition]] ·
-**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 and tasks expressed as text transformations]].
+**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Information extraction from documents]].

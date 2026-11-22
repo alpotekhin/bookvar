@@ -63,8 +63,10 @@ describe('whole-owner reading receipts',()=>{
       seen.add(path);
       expect(sha(text),path).toBe(revision.currentSha256);
       expect(revision.currentSha256,path).not.toBe(expected);
-      expect(sha(beforeTopicConsolidation(text,path,root,revision.stopBefore)),path).toBe(expected);
-      expect(() => beforeTopicConsolidation(text+'\nUnreviewed text.\n',
+      // Each rewind starts from the current bytes. The intermediate text
+      // above is already older than any journals applied to reach it.
+      expect(sha(beforeTopicConsolidation(current,path,root,revision.stopBefore)),path).toBe(expected);
+      expect(() => beforeTopicConsolidation(current+'\nUnreviewed text.\n',
         path,root,revision.stopBefore),path).toThrow();
     }
     expect(seen).toEqual(new Set(Object.keys(revisions)));

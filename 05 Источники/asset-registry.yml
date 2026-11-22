@@ -45,6 +45,187 @@ course_asset_defaults:
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
 assets:
+  - id: curated-heffernan-laser3-fig1-d1a7149e6afe
+    asset: 00 Учебник/Assets/Figures/curated/machine-translation-2026-11-22/heffernan-laser3-fig1.png
+    title: "LASER3 auxiliary MLM and multilingual distillation, Figure 1"
+    author: "Kevin Heffernan, Onur Çelebi, and Holger Schwenk"
+    source_url: https://aclanthology.org/2022.findings-emnlp.154.pdf#page=3
+    source_image_url: https://aclanthology.org/2022.findings-emnlp.154.pdf
+    rights_evidence: https://aclanthology.org/faq/copyright/
+    sha256: d1a7149e6afe28a4f385e0dfd9ff16e44e67b06665e3083b6a3b77b572fdf2e6
+    source_pdf_sha256: a01217d1d10b37e263070f2a1e56b64b9baf8fba24829f1ce5d0ab3088fa02c1
+    source_page: 3
+    dimensions_px: [1710, 765]
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    derivation: source-pdf-render
+    crop_px: [535, 312, 1710, 765]
+    modifications: "Full diagram or plot rendered with pdftoppm at -scale-to 3900 and cropped from the surrounding PDF page; labels unchanged."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/08 Machine translation.md
+  - id: curated-edunov-backtranslation-fig1-7a209bc13e5b
+    asset: 00 Учебник/Assets/Figures/curated/machine-translation-2026-11-22/edunov-backtranslation-fig1.png
+    title: "Back-translation generation strategies on WMT En→De, Figure 1"
+    author: "Sergey Edunov, Myle Ott, Michael Auli, and David Grangier"
+    source_url: https://aclanthology.org/D18-1045.pdf#page=4
+    source_image_url: https://aclanthology.org/D18-1045.pdf
+    rights_evidence: https://aclanthology.org/faq/copyright/
+    sha256: 7a209bc13e5b3b45eb3b8b9a17a9363584755a360fa461822f98cd4962c92b6c
+    source_pdf_sha256: 871e257c56f98ed886a7a23ccce65a1424b26f76c6114757df5cbb0567934556
+    source_page: 4
+    dimensions_px: [1075, 805]
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    derivation: source-pdf-render
+    crop_px: [1410, 276, 1075, 805]
+    modifications: "Full diagram or plot rendered with pdftoppm at -scale-to 3900 and cropped from the surrounding PDF page; labels unchanged."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/08 Machine translation.md
+  - id: curated-rei-comet-estimator-fig1-1a3f199f6810
+    asset: 00 Учебник/Assets/Figures/curated/machine-translation-2026-11-22/rei-comet-estimator-fig1.png
+    title: "COMET estimator inputs and regression head, Figure 1"
+    author: "Ricardo Rei, Craig Stewart, Ana C Farinha, and Alon Lavie"
+    source_url: https://aclanthology.org/2020.emnlp-main.213.pdf#page=3
+    source_image_url: https://aclanthology.org/2020.emnlp-main.213.pdf
+    rights_evidence: https://aclanthology.org/faq/copyright/
+    sha256: 1a3f199f681064ed42d9a8399bec5987c4855a902d97047fdc5db71874296b96
+    source_pdf_sha256: b852d8db07905ed912366d06e898a40388bc7de5abb0a9ce310bac0e5b8947b3
+    source_page: 3
+    dimensions_px: [1010, 915]
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    derivation: source-pdf-render
+    crop_px: [336, 345, 1010, 915]
+    modifications: "Full diagram or plot rendered with pdftoppm at -scale-to 3900 and cropped from the surrounding PDF page; labels unchanged."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/08 Machine translation.md
+  - id: curated-lee-antecedents-fig2-a230e3a281f7
+    asset: 00 Учебник/Assets/Figures/curated/information-extraction-2026-11-22/lee-antecedents-fig2.png
+    title: "Mention and antecedent scores, Figure 2"
+    author: "Kenton Lee, Luheng He, Mike Lewis, and Luke Zettlemoyer"
+    source_url: https://aclanthology.org/D17-1018.pdf#page=3
+    source_image_url: https://aclanthology.org/D17-1018.pdf
+    rights_evidence: https://aclanthology.org/faq/copyright/
+    sha256: a230e3a281f7efad2c3d450f6bf978908e54d219735fb2af3b51a51dcfa428f1
+    source_pdf_sha256: dad6c3228f17c0d1906975f5602239cbb647827e390b51779ba1ab4162d89496
+    source_page: 3
+    dimensions_px: [1140, 690]
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    derivation: source-pdf-render
+    crop_px: [360, 1499, 1140, 690]
+    modifications: "Full diagram rendered with pdftoppm at -scale-to 4350 and cropped from the surrounding PDF page; labels unchanged."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03c Information extraction from documents.md
+  - id: curated-wu-blink-fig1-bd5eeac3e740
+    asset: 00 Учебник/Assets/Figures/curated/information-extraction-2026-11-22/wu-blink-fig1.png
+    title: "Dense candidate retrieval and reranking, Figure 1"
+    author: "Ledell Wu, Fabio Petroni, Martin Josifoski, Sebastian Riedel, and Luke Zettlemoyer"
+    source_url: https://aclanthology.org/2020.emnlp-main.519.pdf#page=2
+    source_image_url: https://aclanthology.org/2020.emnlp-main.519.pdf
+    rights_evidence: https://aclanthology.org/faq/copyright/
+    sha256: bd5eeac3e740452be2b8ba9dc1fd7ea8c16899b83b6d56563e1f4a36f3514ff1
+    source_pdf_sha256: b93834a27f2870fbb2f2d8ce13c3b83e899c5d9033a5bc094124febffde620b6
+    source_page: 2
+    dimensions_px: [2375, 935]
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    derivation: source-pdf-render
+    crop_px: [350, 330, 2375, 935]
+    modifications: "Full diagram rendered with pdftoppm at -scale-to 4350 and cropped from the surrounding PDF page; labels unchanged."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03c Information extraction from documents.md
+  - id: curated-wadden-dygie-fig1-b52b7a3944f8
+    asset: 00 Учебник/Assets/Figures/curated/information-extraction-2026-11-22/wadden-dygie-fig1.png
+    title: "Shared span representations for information extraction, Figure 1"
+    author: "David Wadden, Ulme Wennberg, Yi Luan, and Hannaneh Hajishirzi"
+    source_url: https://aclanthology.org/D19-1585.pdf#page=1
+    source_image_url: https://aclanthology.org/D19-1585.pdf
+    rights_evidence: https://aclanthology.org/faq/copyright/
+    sha256: b52b7a3944f8030122497eb935e7f0d2352ff4e35b84d12a99021dc52e35316f
+    source_pdf_sha256: 87e463c0d415a925e348f4f9fdddc86b2b78dc6e6411e24a8b02a3a2f01a525e
+    source_page: 1
+    dimensions_px: [1180, 700]
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    derivation: source-pdf-render
+    crop_px: [1560, 1140, 1180, 700]
+    modifications: "Full diagram rendered with pdftoppm at -scale-to 4350 and cropped from the surrounding PDF page; labels unchanged."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03c Information extraction from documents.md
+  - id: curated-alzetta-parallel-trees-9ccca2081987
+    asset: 00 Учебник/Assets/Figures/curated/syntax-2026-11-22/parallel-trees-fig1.png
+    title: "The same Italian sentence in two syntactic representations, Figure 1"
+    author: "Chiara Alzetta, Alessio Miaschi, Felice Dell’Orletta, Giulia Venturi, and Simonetta Montemagni"
+    source_url: https://link.springer.com/article/10.1007/s10579-025-09826-3#Fig1
+    source_image_url: https://media.springernature.com/full/springer-static/image/art%3A10.1007%2Fs10579-025-09826-3/MediaObjects/10579_2025_9826_Fig1_HTML.png
+    rights_evidence: https://link.springer.com/article/10.1007/s10579-025-09826-3#rightslink
+    sha256: 9ccca2081987975d7196df0c6bcd5870a57f57c67aac115b64da902ff05cb9a5
+    dimensions_px: [1381, 685]
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    derivation: source-raster-copy
+    modifications: "Complete publisher-provided figure copied byte-for-byte; no crop, translation or redraw."
+    metadata_status: verified
+    rights_status: source-license-verified
+    provenance_confirmation: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/02 Представление текста и токенизация/04 Синтаксический разбор.md
+      - en/00 Textbook/02 Text representation and tokenization/04 Syntactic parsing.md
+  - id: curated-stern-top-down-e9e197664579
+    asset: 00 Учебник/Assets/Figures/curated/syntax-2026-11-22/stern-top-down-fig1.png
+    title: "Steps of top-down constituency parsing and the resulting tree, Figure 1"
+    author: "Mitchell Stern, Jacob Andreas, and Dan Klein"
+    source_url: https://aclanthology.org/P17-1076.pdf#page=4
+    source_image_url: https://aclanthology.org/P17-1076.pdf
+    rights_evidence: https://aclanthology.org/faq/copyright/
+    sha256: e9e19766457970735284172cbe0125e0d3b64cf2e24ed8d2142646b357133fcf
+    source_pdf_sha256: d46bdb61df9b2dbaae4bab4c0eb56eb80144daa0defa219c33a7c7ee9a53db4f
+    source_page: 4
+    dimensions_px: [2145, 1044]
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    derivation: source-pdf-render
+    crop_px: [315, 276, 2145, 1044]
+    modifications: "Both figure panels and their labels rasterized together with pdftoppm at -scale-to 3900. The surrounding article text and prose caption are excluded."
+    metadata_status: verified
+    rights_status: source-license-verified
+    provenance_confirmation: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/02 Представление текста и токенизация/04 Синтаксический разбор.md
+      - en/00 Textbook/02 Text representation and tokenization/04 Syntactic parsing.md
   - id: curated-joulin-fasttext-50aa9ec43769
     asset: 00 Учебник/Assets/Figures/curated/document-classification-2026-11-22/joulin-fasttext-figure1.png
     title: "fastText feature pooling, Figure 1"

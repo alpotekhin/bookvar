@@ -71,7 +71,7 @@ reference_terms:
   - label: "Ограничения памяти, градиента и параллелизма"
     label_en: "Limits of state capacity, gradients and parallelism"
     anchor: rnn-limitations
-previous: "[[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей]]"
+previous: "[[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/04 Синтаксический разбор]]"
 next: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU]]"
 primary_sources:
   - https://docs.pytorch.org/docs/2.14/generated/torch.nn.RNN.html
@@ -1371,5 +1371,5 @@ computational graph at a chunk boundary.
 - Rumelhart, Hinton, Williams, [Learning representations by back-propagating errors](https://doi.org/10.1038/323533a0), 1986 — обратное распространение ошибки.
 - [[05 Источники/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-recurrent-neural-networks.pdf|Stanford CS230 — Recurrent Neural Networks Cheatsheet]] — краткие схемы и формулы после полного разбора.
 
-**Назад:** [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей]] ·
+**Назад:** [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/04 Синтаксический разбор]] ·
 **Дальше:** [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU]]

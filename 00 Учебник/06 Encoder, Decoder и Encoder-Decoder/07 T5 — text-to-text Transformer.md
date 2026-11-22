@@ -3,8 +3,8 @@ title: T5 — text-to-text Transformer
 type: textbook-chapter
 status: canonical
 last_updated: 2026-11-21
-previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов]]"
-next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]"
+previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов]]"
+next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод]]"
 primary_sources:
   - https://jmlr.org/papers/v21/20-074.html
   - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4
@@ -903,5 +903,5 @@ mT5, ByT5 и FLAN-T5 рассматриваются отдельно в
 - [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|Семейство T5]].
 - [[02 Areas/ML & DL/Papers/T5|Подробная заметка о статье и протоколах сравнения]].
 
-**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Классификация документов]].
-**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].
+**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Извлечение информации из документов]].
+**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Машинный перевод]].

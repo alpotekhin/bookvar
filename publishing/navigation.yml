@@ -76,6 +76,9 @@ sections:
       - source: 00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей.md
         source_en: en/00 Textbook/02 Text representation and tokenization/03 Morphology and sequence labeling.md
         route: textbook/text-representation/morphology-pos
+      - source: 00 Учебник/02 Представление текста и токенизация/04 Синтаксический разбор.md
+        source_en: en/00 Textbook/02 Text representation and tokenization/04 Syntactic parsing.md
+        route: textbook/text-representation/syntactic-parsing
       - source: 00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md
         route: textbook/recurrent-networks/rnn-bptt
       - source: 00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md
@@ -108,9 +111,15 @@ sections:
       - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов.md
         source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03b Document classification.md
         route: textbook/models/document-classification
+      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов.md
+        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03c Information extraction from documents.md
+        route: textbook/models/information-extraction
       - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md
         source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md
         route: textbook/models/t5
+      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод.md
+        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/08 Machine translation.md
+        route: textbook/models/machine-translation
       - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md
         source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md
         route: textbook/models/gpt-1
@@ -424,6 +433,9 @@ sections:
               - label: Морфология и разметка последовательностей
                 label_en: Morphology and sequence labeling
                 route: textbook/text-representation/morphology-pos
+              - label: Синтаксический разбор
+                label_en: Syntactic parsing
+                route: textbook/text-representation/syntactic-parsing
               - label: RNN и BPTT
                 route: textbook/recurrent-networks/rnn-bptt
               - label: LSTM и GRU
@@ -454,8 +466,14 @@ sections:
               - label: Классификация документов
                 label_en: Document classification
                 route: textbook/models/document-classification
+              - label: Извлечение информации из документов
+                label_en: Information extraction from documents
+                route: textbook/models/information-extraction
               - label: T5 — text-to-text Transformer
                 route: textbook/models/t5
+              - label: Машинный перевод
+                label_en: Machine translation
+                route: textbook/models/machine-translation
           - label: V. От GPT-1 к LLaMA
             label_en: V. From GPT-1 to LLaMA
             items:

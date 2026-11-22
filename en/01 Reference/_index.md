@@ -355,6 +355,12 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-attention-gradients|Learning attention weights]]
   - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-memory-cost|Attention storage and computation]]
   - [[00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора#seq2seq-scope|Seq2Seq, encoder–decoder and causality]]
+- [[00 Учебник/02 Представление текста и токенизация/04 Синтаксический разбор|Syntactic parsing]] · **EN**
+  - [[00 Учебник/02 Представление текста и токенизация/04 Синтаксический разбор#syntax-two-trees|Constituency and dependency trees]]
+  - [[00 Учебник/02 Представление текста и токенизация/04 Синтаксический разбор#syntax-cky|CKY constituency parsing]]
+  - [[00 Учебник/02 Представление текста и токенизация/04 Синтаксический разбор#syntax-ud|Arcs in Universal Dependencies]]
+  - [[00 Учебник/02 Представление текста и токенизация/04 Синтаксический разбор#syntax-arc-standard|The arc-standard dependency parser]]
+  - [[00 Учебник/02 Представление текста и токенизация/04 Синтаксический разбор#syntax-evaluation|Evaluating syntactic parses]]
 - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction|Text probability and next-token prediction]]
   - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-sequence-nll|Autoregressive NLL and shared parameters]]
   - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-head|Context vector, output projection and logits]]
@@ -425,6 +431,19 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#lambada-gpt3-fill-blank|LAMBADA — filling in a blank with GPT-3]]
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt-llama-completion-scoring|HellaSwag — scoring continuations with GPT-3 and LLaMA]]
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-surface-form-competition|Surface form competition — scoring answers with PMI]]
+- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Information extraction from documents]] · **EN**
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-mentions|Mention boundaries and entity IDs]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-coreference|Coreference and antecedent scoring]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-linking|Entity linking to a catalog]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-relations|Document-level relation extraction]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-events|Events and time normalization]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-evaluation|Evaluating information extraction]]
+- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод|Machine translation]] · **EN**
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод#mt-parallel-data|Parallel data and bitext mining]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод#mt-objective|Conditional translation probability and training]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод#mt-decoding|Greedy and beam decoding in translation]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод#mt-back-translation|Back-translation and target-language control]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/08 Машинный перевод#mt-evaluation|Evaluating machine translation]]
 - [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|Masking, heads, and tensor shapes]] · **EN**
   - [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#causal-mask-shifted-targets|Causal mask — token visibility and shifted targets]]
 - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Named entity recognition]] · **EN**

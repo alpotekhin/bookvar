@@ -5,6 +5,7 @@ import { execFileSync } from 'node:child_process';
 import matter from 'gray-matter';
 import YAML from 'yaml';
 import { describe, expect, it } from 'vitest';
+import { beforeTopicConsolidation } from '../tools/topic-consolidation-baseline.mjs';
 
 const root = resolve(import.meta.dirname, '../..');
 const read = (path: string) => readFileSync(resolve(root, path), 'utf8');
@@ -17,8 +18,11 @@ const audit = JSON.parse(read('docs/audit/2026-11-22-morphology-pos-editorial-pa
 
 describe('Morphology and sequence labeling', () => {
   it('pins both read editions and preserves the examples and figures', () => {
-    expect(sha(ru)).toBe(audit.files.find((row: {source: string}) => row.source === ruPath).after_sha256);
-    expect(sha(en)).toBe(audit.added_sources.find((row: {source: string}) => row.source === enPath).sha256);
+    const review = '2026-11-22-morphology-pos-editorial-pass.json';
+    expect(sha(beforeTopicConsolidation(ru, ruPath, root, review)))
+      .toBe(audit.files.find((row: {source: string}) => row.source === ruPath).after_sha256);
+    expect(sha(beforeTopicConsolidation(en, enPath, root, review)))
+      .toBe(audit.added_sources.find((row: {source: string}) => row.source === enPath).sha256);
     expect(matter(en).data).toMatchObject({
       locale: 'en',
       translation_status: 'current',

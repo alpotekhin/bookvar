@@ -41,6 +41,9 @@ const laterEditions = [
   { journal: '2026-11-22-morphology-pos-editorial-pass.json', figureCount: 2 },
   { journal: '2026-11-22-ner-editorial-pass.json', figureCount: 2 },
   { journal: '2026-11-22-document-classification-editorial-pass.json', figureCount: 2 },
+  { journal: '2026-11-22-syntactic-parsing-editorial-pass.json', figureCount: 2 },
+  { journal: '2026-11-22-information-extraction-editorial-pass.json', figureCount: 3 },
+  { journal: '2026-11-22-machine-translation-editorial-pass.json', figureCount: 3 },
 ].flatMap(({ journal, figureCount }) => {
   const receipt = JSON.parse(read('docs/audit/' + journal));
   return (receipt.added_sources as AddedEdition[]).map(edition => ({

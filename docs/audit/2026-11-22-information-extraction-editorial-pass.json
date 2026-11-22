@@ -1,0 +1,207 @@
+{
+  "date": "2026-11-22",
+  "scope": "One bilingual chapter after document classification and before T5. Resolve a document's mentions, retrieve and rerank entity IDs, extract relations and a dated event. No new practice route.",
+  "read_scope": "full-body",
+  "sources": [
+    {
+      "sections": "Jurafsky & Martin, SLP ch. 21 (relations, events, time) and ch. 24 (mentions, coreference, linking)",
+      "verification": "Separate event, trigger, role and date; distinguish local mention clusters from external IDs; the Anna Levina document and catalog are constructed for this walkthrough."
+    },
+    {
+      "sections": "Lee et al., End-to-end Neural Coreference Resolution §§2–4 and Fig. 2; Pradhan et al. §2, B³",
+      "verification": "Verify the sum of mention and pair scores and fixed dummy antecedent; compare cluster intersection denominators on aligned mention boundaries."
+    },
+    {
+      "sections": "Wu et al., Scalable Zero-shot Entity Linking with Dense Entity Retrieval §§3–4 and Fig. 1",
+      "verification": "Trace independent context/description scoring, top-K, and joint reranking. The NIL option is a deployment requirement, not attributed to the figure or the closed candidate benchmark."
+    },
+    {
+      "sections": "Yao et al., DocRED §3 and Fig. 1; Wadden et al., DyGIE++ §2 and Fig. 1; Chang & Manning, SUTime §2–3",
+      "verification": "Trace document-level evidence with local entity IDs, trigger/role labeling and time anchors. Preserve DyGIE++'s within-sentence relation output and distinguish it from its cross-sentence representations."
+    }
+  ],
+  "figures": [
+    {
+      "file": "lee-antecedents-fig2.png",
+      "source": "https://aclanthology.org/D17-1018.pdf#page=3",
+      "sha256": "a230e3a281f7efad2c3d450f6bf978908e54d219735fb2af3b51a51dcfa428f1",
+      "license": "CC BY 4.0",
+      "modifications": "PDF crop of the complete diagram with original labels, no redraw."
+    },
+    {
+      "file": "wu-blink-fig1.png",
+      "source": "https://aclanthology.org/2020.emnlp-main.519.pdf#page=2",
+      "sha256": "bd5eeac3e740452be2b8ba9dc1fd7ea8c16899b83b6d56563e1f4a36f3514ff1",
+      "license": "CC BY 4.0",
+      "modifications": "PDF crop of the complete diagram with original labels, no redraw."
+    },
+    {
+      "file": "wadden-dygie-fig1.png",
+      "source": "https://aclanthology.org/D19-1585.pdf#page=1",
+      "sha256": "b52b7a3944f8030122497eb935e7f0d2352ff4e35b84d12a99021dc52e35316f",
+      "license": "CC BY 4.0",
+      "modifications": "PDF crop of the complete diagram with original labels, no redraw."
+    }
+  ],
+  "files": [
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов.md",
+      "created": true,
+      "after_sha256": "ad9a00cbb0b6986fc450b347c2b72c968f498d7ee8a29a555cf5911692c8c4d6",
+      "changes": []
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов.md",
+      "before_sha256": "efd33393c82c5aea1b82517a265e7ac1c352c16f478a06a68a11db57a7449e0e",
+      "after_sha256": "ce4198c891a166efc1b940abd3d677f01457b1845d392a05b6d65d5f861a9644",
+      "changes": [
+        {
+          "old": "  - https://aclanthology.org/E17-2068/\n  - https://aclanthology.org/N19-1423/\n  - https://d2l.ai/chapter_natural-language-processing-applications/finetuning-bert.html#fig-bert-one-seq\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\n---\n\n«Great screen, awful battery» и «Awful screen, great battery» состоят из\nодних и тех же слов. Если задача — определить оценку **экрана**,\n",
+          "new": "  - https://aclanthology.org/E17-2068/\n  - https://aclanthology.org/N19-1423/\n  - https://d2l.ai/chapter_natural-language-processing-applications/finetuning-bert.html#fig-bert-one-seq\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов]]\"\n---\n\n«Great screen, awful battery» и «Awful screen, great battery» состоят из\nодних и тех же слов. Если задача — определить оценку **экрана**,\n"
+        },
+        {
+          "old": "- Jacob Devlin et al., [BERT](https://aclanthology.org/N19-1423/), §3 и рис. 4b; [D2L, §16.6.1](https://d2l.ai/chapter_natural-language-processing-applications/finetuning-bert.html#single-text-classification): одна метка на последовательность.\n- [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 Представление текста числами|Счётчики слов и TF-IDF]] и [[02 Areas/ML & DL/00 Учебник/01 Классическое машинное обучение/02 Линейная регрессия и классификация|вывод логистической регрессии]] в учебнике.\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Распознавание именованных сущностей]] ·\n**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 и представление задач в виде текста]].\n",
+          "new": "- Jacob Devlin et al., [BERT](https://aclanthology.org/N19-1423/), §3 и рис. 4b; [D2L, §16.6.1](https://d2l.ai/chapter_natural-language-processing-applications/finetuning-bert.html#single-text-classification): одна метка на последовательность.\n- [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 Представление текста числами|Счётчики слов и TF-IDF]] и [[02 Areas/ML & DL/00 Учебник/01 Классическое машинное обучение/02 Линейная регрессия и классификация|вывод логистической регрессии]] в учебнике.\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Распознавание именованных сущностей]] ·\n**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Извлечение информации из документов]].\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03b Document classification.md",
+      "before_sha256": "aaf2f65c1cda7206e6951433fd6d6c4ca1fdefd3b760ed82b30a9493e3e74d33",
+      "after_sha256": "0f79b926c51580184667c625f5a5a535b5dcc0f45e381b547157f62af748d209",
+      "changes": [
+        {
+          "old": "status: canonical\nlocale: en\ntranslation_status: current\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов.md\"\ncanonical_revision: \"efd33393c82c5aea1b82517a265e7ac1c352c16f478a06a68a11db57a7449e0e\"\ntranslation_reviewed: \"2026-11-22\"\nlast_updated: 2026-11-22\nlast_verified: 2026-11-22\nreference_terms:\n",
+          "new": "status: canonical\nlocale: en\ntranslation_status: current\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов.md\"\ncanonical_revision: \"ce4198c891a166efc1b940abd3d677f01457b1845d392a05b6d65d5f861a9644\"\ntranslation_reviewed: \"2026-11-22\"\nlast_updated: 2026-11-22\nlast_verified: 2026-11-22\nreference_terms:\n"
+        },
+        {
+          "old": "  - https://aclanthology.org/E17-2068/\n  - https://aclanthology.org/N19-1423/\n  - https://d2l.ai/chapter_natural-language-processing-applications/finetuning-bert.html#fig-bert-one-seq\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\n---\n\n“Great screen, awful battery” and “Awful screen, great battery” contain\nthe same words. If the task is to classify sentiment about the\n",
+          "new": "  - https://aclanthology.org/E17-2068/\n  - https://aclanthology.org/N19-1423/\n  - https://d2l.ai/chapter_natural-language-processing-applications/finetuning-bert.html#fig-bert-one-seq\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов]]\"\n---\n\n“Great screen, awful battery” and “Awful screen, great battery” contain\nthe same words. If the task is to classify sentiment about the\n"
+        },
+        {
+          "old": "- Jacob Devlin et al., [BERT](https://aclanthology.org/N19-1423/), §3 and Figure 4b; [D2L, §16.6.1](https://d2l.ai/chapter_natural-language-processing-applications/finetuning-bert.html#single-text-classification): one label per input sequence.\n- In this textbook: [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 Представление текста числами|word counts and TF-IDF]] and the [[02 Areas/ML & DL/00 Учебник/01 Классическое машинное обучение/02 Линейная регрессия и классификация|derivation of logistic regression]].\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Named entity recognition]] ·\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 and tasks expressed as text transformations]].\n",
+          "new": "- Jacob Devlin et al., [BERT](https://aclanthology.org/N19-1423/), §3 and Figure 4b; [D2L, §16.6.1](https://d2l.ai/chapter_natural-language-processing-applications/finetuning-bert.html#single-text-classification): one label per input sequence.\n- In this textbook: [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 Представление текста числами|word counts and TF-IDF]] and the [[02 Areas/ML & DL/00 Учебник/01 Классическое машинное обучение/02 Линейная регрессия и классификация|derivation of logistic regression]].\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Named entity recognition]] ·\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Information extraction from documents]].\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "before_sha256": "40a94f2b1f2a325e96e06868a812851a840367a636220b8c66a6e52ec560b123",
+      "after_sha256": "64cbf967a20dc9a34f122fd3570f5a34b572f3c8872716fc370b554ca0ad7ecc",
+      "changes": [
+        {
+          "old": "title: T5 — text-to-text Transformer\ntype: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-21\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]\"\nprimary_sources:\n  - https://jmlr.org/papers/v21/20-074.html\n  - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4\n",
+          "new": "title: T5 — text-to-text Transformer\ntype: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-21\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]\"\nprimary_sources:\n  - https://jmlr.org/papers/v21/20-074.html\n  - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/01 Справочник/Attention/Self-Attention|Self-attention в справочнике]].\n- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|Семейство T5]].\n- [[02 Areas/ML & DL/Papers/T5|Подробная заметка о статье и протоколах сравнения]].\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Классификация документов]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].\n",
+          "new": "- [[02 Areas/ML & DL/01 Справочник/Attention/Self-Attention|Self-attention в справочнике]].\n- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|Семейство T5]].\n- [[02 Areas/ML & DL/Papers/T5|Подробная заметка о статье и протоколах сравнения]].\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Извлечение информации из документов]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "before_sha256": "9a9a3e06bb949a828bebcb0876d64fd1cbddbbd1dc98e8e0c8ac5336eff70173",
+      "after_sha256": "7e74aa938f50b011956fd74febcdc0659987a2a785417dc79eb49cdd95dc4753",
+      "changes": [
+        {
+          "old": "type: textbook-chapter\nstatus: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"40a94f2b1f2a325e96e06868a812851a840367a636220b8c66a6e52ec560b123\"\ntranslation_reviewed: \"2026-11-21\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md\"\nlast_updated: 2026-11-21\nprimary_sources:\n  - https://jmlr.org/papers/v21/20-074.html\n  - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4\n  - https://github.com/huggingface/transformers/tree/753d61104116eefc8ffc977327b441ee0c8d599f/src/transformers/models/t5\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]\"\n---\n\n# T5: the text-to-text Transformer\n",
+          "new": "type: textbook-chapter\nstatus: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"64cbf967a20dc9a34f122fd3570f5a34b572f3c8872716fc370b554ca0ad7ecc\"\ntranslation_reviewed: \"2026-11-21\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md\"\nlast_updated: 2026-11-21\nprimary_sources:\n  - https://jmlr.org/papers/v21/20-074.html\n  - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4\n  - https://github.com/huggingface/transformers/tree/753d61104116eefc8ffc977327b441ee0c8d599f/src/transformers/models/t5\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]\"\n---\n\n# T5: the text-to-text Transformer\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/01 Справочник/Attention/Self-Attention|Self-attention reference]].\n- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|T5 family]].\n- [[02 Areas/ML & DL/Papers/T5|Detailed paper and comparison-protocol note]].\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Document classification]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].\n",
+          "new": "- [[02 Areas/ML & DL/01 Справочник/Attention/Self-Attention|Self-attention reference]].\n- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|T5 family]].\n- [[02 Areas/ML & DL/Papers/T5|Detailed paper and comparison-protocol note]].\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Information extraction from documents]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].\n"
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "26a13516c3b1e3aabab8dbd124fc398d9c9902ef9e5577b81d08dce9a483f7b5",
+      "after_sha256": "3b976eb0dbc6eae80eaa034246335f0384e49cb384f4947659d04cc542bec28c",
+      "changes": [
+        {
+          "old": "        route: textbook/models/named-entity-recognition\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03b Document classification.md\n        route: textbook/models/document-classification\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md\n        route: textbook/models/t5\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\n",
+          "new": "        route: textbook/models/named-entity-recognition\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03b Document classification.md\n        route: textbook/models/document-classification\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03c Information extraction from documents.md\n        route: textbook/models/information-extraction\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md\n        route: textbook/models/t5\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\n"
+        },
+        {
+          "old": "                route: textbook/models/named-entity-recognition\n              - label: Классификация документов\n                label_en: Document classification\n                route: textbook/models/document-classification\n              - label: T5 — text-to-text Transformer\n                route: textbook/models/t5\n          - label: V. От GPT-1 к LLaMA\n            label_en: V. From GPT-1 to LLaMA\n",
+          "new": "                route: textbook/models/named-entity-recognition\n              - label: Классификация документов\n                label_en: Document classification\n                route: textbook/models/document-classification\n              - label: Извлечение информации из документов\n                label_en: Information extraction from documents\n                route: textbook/models/information-extraction\n              - label: T5 — text-to-text Transformer\n                route: textbook/models/t5\n          - label: V. От GPT-1 к LLaMA\n            label_en: V. From GPT-1 to LLaMA\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "6d4145bde0bdeb702d50b3f78a79e04b3389124e21be7d9c2107617fde6a6484",
+      "after_sha256": "773151671f7c1a4a4a03595d913cc13afa3448cc87b1dabbf31ba60520e7336e",
+      "changes": [
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектуры Transformer]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa и DeBERTa]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Распознавание именованных сущностей]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Классификация документов]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 — text-to-text Transformer]]\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n<a id=\"vi-анатомия-современной-llm\"></a>\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектуры Transformer]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa и DeBERTa]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Распознавание именованных сущностей]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Классификация документов]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Извлечение информации из документов]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 — text-to-text Transformer]]\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n<a id=\"vi-анатомия-современной-llm\"></a>\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "678009e247771f715fb18e5dfe40da7295b3c8ae14abe1f174f9edcff13aa7a1",
+      "after_sha256": "787301edc9ffc7473b1937fb2d4d47856886491c81bf0981c43b0e3cf1c8df2b",
+      "changes": [
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three Transformer architectures]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa, and DeBERTa]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Named entity recognition]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Document classification]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: the text-to-text Transformer]] · **EN**\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n<a id=\"vi-anatomy-of-a-modern-llm\"></a>\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three Transformer architectures]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa, and DeBERTa]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Named entity recognition]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Document classification]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Information extraction from documents]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: the text-to-text Transformer]] · **EN**\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n<a id=\"vi-anatomy-of-a-modern-llm\"></a>\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "f776af559ee65a0939652757b56eb14f725a629bfc1b15b5767563eb9b21dc47",
+      "after_sha256": "b074d4ea5f272721e8fe9e8038158bdc24f21554082e0f896b5790a6ed2f8305",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-retrieval|Почему поисковый embedding требует отдельного обучения]]\n\n### Transformer и первые языковые модели\n\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Классификация документов]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов#doccls-tfidf|TF-IDF и биграммы в классификации текста]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов#doccls-linear|Логистическая регрессия и мультиномиальный наивный Байес]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов#doccls-fasttext|fastText: усреднение признаков]]\n",
+          "new": "  - [[00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings#emb-retrieval|Почему поисковый embedding требует отдельного обучения]]\n\n### Transformer и первые языковые модели\n\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Извлечение информации из документов]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-mentions|Границы упоминаний и идентификаторы объектов]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-coreference|Кореференция и выбор антецедента]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-linking|Связывание сущностей с каталогом]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-relations|Извлечение отношений из документа]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-events|События и нормализация времени]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-evaluation|Оценивание извлечения информации]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Классификация документов]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов#doccls-tfidf|TF-IDF и биграммы в классификации текста]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов#doccls-linear|Логистическая регрессия и мультиномиальный наивный Байес]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов#doccls-fasttext|fastText: усреднение признаков]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "2b03172718c59335dd5c1fb37f5bfe6bada34362256bf8ae4bd5b28528678722",
+      "after_sha256": "da7a4fcf97cb164ceb91b93c27a080607fea3c899ac99a13ada2f97d126c1126",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3: in-context learning]] · **EN**\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#lambada-gpt3-fill-blank|LAMBADA — filling in a blank with GPT-3]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt-llama-completion-scoring|HellaSwag — scoring continuations with GPT-3 and LLaMA]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-surface-form-competition|Surface form competition — scoring answers with PMI]]\n- [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|Masking, heads, and tensor shapes]] · **EN**\n  - [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#causal-mask-shifted-targets|Causal mask — token visibility and shifted targets]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Named entity recognition]] · **EN**\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-bio|BIO (IOB2): named entity boundaries and types]]\n",
+          "new": "- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3: in-context learning]] · **EN**\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#lambada-gpt3-fill-blank|LAMBADA — filling in a blank with GPT-3]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt-llama-completion-scoring|HellaSwag — scoring continuations with GPT-3 and LLaMA]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-surface-form-competition|Surface form competition — scoring answers with PMI]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов|Information extraction from documents]] · **EN**\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-mentions|Mention boundaries and entity IDs]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-coreference|Coreference and antecedent scoring]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-linking|Entity linking to a catalog]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-relations|Document-level relation extraction]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-events|Events and time normalization]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов#ie-evaluation|Evaluating information extraction]]\n- [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|Masking, heads, and tensor shapes]] · **EN**\n  - [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#causal-mask-shifted-targets|Causal mask — token visibility and shifted targets]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Named entity recognition]] · **EN**\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-bio|BIO (IOB2): named entity boundaries and types]]\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "146b1c1101c94597f207b8ed4d7283ab8ec2c3ee6171e76337fd10eaefc6dd72",
+      "after_sha256": "de50490d2356bbceb21827920560e121c1ec734f849eb48c1eb4fd36e0c84adf",
+      "changes": [
+        {
+          "old": "    modifications: copied without visual modification from the source slide render\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\nassets:\n  - id: curated-alzetta-parallel-trees-9ccca2081987\n    asset: 00 Учебник/Assets/Figures/curated/syntax-2026-11-22/parallel-trees-fig1.png\n    title: \"The same Italian sentence in two syntactic representations, Figure 1\"\n    author: \"Chiara Alzetta, Alessio Miaschi, Felice Dell’Orletta, Giulia Venturi, and Simonetta Montemagni\"\n",
+          "new": "    modifications: copied without visual modification from the source slide render\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\nassets:\n  - id: curated-lee-antecedents-fig2-a230e3a281f7\n    asset: 00 Учебник/Assets/Figures/curated/information-extraction-2026-11-22/lee-antecedents-fig2.png\n    title: \"Mention and antecedent scores, Figure 2\"\n    author: \"Kenton Lee, Luheng He, Mike Lewis, and Luke Zettlemoyer\"\n    source_url: https://aclanthology.org/D17-1018.pdf#page=3\n    source_image_url: https://aclanthology.org/D17-1018.pdf\n    rights_evidence: https://aclanthology.org/faq/copyright/\n    sha256: a230e3a281f7efad2c3d450f6bf978908e54d219735fb2af3b51a51dcfa428f1\n    source_pdf_sha256: dad6c3228f17c0d1906975f5602239cbb647827e390b51779ba1ab4162d89496\n    source_page: 3\n    dimensions_px: [1140, 690]\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    derivation: source-pdf-render\n    crop_px: [360, 1499, 1140, 690]\n    modifications: \"Full diagram rendered with pdftoppm at -scale-to 4350 and cropped from the surrounding PDF page; labels unchanged.\"\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-22\"\n    used_in:\n      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов.md\n      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03c Information extraction from documents.md\n  - id: curated-wu-blink-fig1-bd5eeac3e740\n    asset: 00 Учебник/Assets/Figures/curated/information-extraction-2026-11-22/wu-blink-fig1.png\n    title: \"Dense candidate retrieval and reranking, Figure 1\"\n    author: \"Ledell Wu, Fabio Petroni, Martin Josifoski, Sebastian Riedel, and Luke Zettlemoyer\"\n    source_url: https://aclanthology.org/2020.emnlp-main.519.pdf#page=2\n    source_image_url: https://aclanthology.org/2020.emnlp-main.519.pdf\n    rights_evidence: https://aclanthology.org/faq/copyright/\n    sha256: bd5eeac3e740452be2b8ba9dc1fd7ea8c16899b83b6d56563e1f4a36f3514ff1\n    source_pdf_sha256: b93834a27f2870fbb2f2d8ce13c3b83e899c5d9033a5bc094124febffde620b6\n    source_page: 2\n    dimensions_px: [2375, 935]\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    derivation: source-pdf-render\n    crop_px: [350, 330, 2375, 935]\n    modifications: \"Full diagram rendered with pdftoppm at -scale-to 4350 and cropped from the surrounding PDF page; labels unchanged.\"\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-22\"\n    used_in:\n      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов.md\n      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03c Information extraction from documents.md\n  - id: curated-wadden-dygie-fig1-b52b7a3944f8\n    asset: 00 Учебник/Assets/Figures/curated/information-extraction-2026-11-22/wadden-dygie-fig1.png\n    title: \"Shared span representations for information extraction, Figure 1\"\n    author: \"David Wadden, Ulme Wennberg, Yi Luan, and Hannaneh Hajishirzi\"\n    source_url: https://aclanthology.org/D19-1585.pdf#page=1\n    source_image_url: https://aclanthology.org/D19-1585.pdf\n    rights_evidence: https://aclanthology.org/faq/copyright/\n    sha256: b52b7a3944f8030122497eb935e7f0d2352ff4e35b84d12a99021dc52e35316f\n    source_pdf_sha256: 87e463c0d415a925e348f4f9fdddc86b2b78dc6e6411e24a8b02a3a2f01a525e\n    source_page: 1\n    dimensions_px: [1180, 700]\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    derivation: source-pdf-render\n    crop_px: [1560, 1140, 1180, 700]\n    modifications: \"Full diagram rendered with pdftoppm at -scale-to 4350 and cropped from the surrounding PDF page; labels unchanged.\"\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-22\"\n    used_in:\n      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов.md\n      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03c Information extraction from documents.md\n  - id: curated-alzetta-parallel-trees-9ccca2081987\n    asset: 00 Учебник/Assets/Figures/curated/syntax-2026-11-22/parallel-trees-fig1.png\n    title: \"The same Italian sentence in two syntactic representations, Figure 1\"\n    author: \"Chiara Alzetta, Alessio Miaschi, Felice Dell’Orletta, Giulia Venturi, and Simonetta Montemagni\"\n"
+        }
+      ]
+    }
+  ],
+  "added_sources": [
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03c Information extraction from documents.md",
+      "sha256": "ad30ab91985230818b32baa4a2e1404b0be4dad4901bd99d301b7ca6a4a7a42d",
+      "canonical": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03c Извлечение информации из документов.md",
+      "route": "textbook/models/information-extraction",
+      "status": "current",
+      "en_body_read": true,
+      "outstanding_expansions": []
+    }
+  ],
+  "verification": {
+    "explanation": "Use the same two-sentence document for local vs external IDs, mention scoring, retrieval and reranking, ordered triples, event arguments, anchor year, and evaluation. Scope of the neighboring edits is navigation and canonical revision pins only.",
+    "example": "The identical Python block gives antecedent 0.838, dense retrieval P54 then P17, reranker P17 at 0.832, B³ F1=6/7, triple F1 1 or 0.8 at the two thresholds, and the dated record only when the pronoun is linked to the person.",
+    "style": "Read both bodies in full, then tightened the relation classifier and retrieval-metric wording. Keep one explicit document, three stage-level denominators, and the evidence needed for the dated appointment.",
+    "publication": "90 core chapters; 158 reference topics. Final local root build: 2109 pages, 842 publication tests passed (13 skipped), 379 built-output tests passed, and 0 broken internal routes, fragments or files.",
+    "visual": "Both editions inspected in Chromium at 390 and 1440 px. The three original source diagrams are intact; the wide BLINK diagram is legible at 2× with access to both sides, credit and original link. KaTeX fits; no document overflow or English fallback. Wide tables can reach the last column.",
+    "open": "Translation, summarization and question answering; speech."
+  }
+}

@@ -5,6 +5,7 @@ import { execFileSync } from 'node:child_process';
 import matter from 'gray-matter';
 import YAML from 'yaml';
 import { describe, expect, it } from 'vitest';
+import { beforeTopicConsolidation } from '../tools/topic-consolidation-baseline.mjs';
 
 const root = resolve(import.meta.dirname, '../..');
 const read = (path: string) => readFileSync(resolve(root, path));
@@ -16,8 +17,9 @@ const receipt = JSON.parse(read('docs/audit/2026-11-22-document-classification-e
 
 describe('Document classification', () => {
   it('retains the same worked example, equations and original figures in both editions', () => {
-    expect(sha(ru)).toBe(receipt.files[0].after_sha256);
-    expect(sha(en)).toBe(receipt.added_sources[0].sha256);
+    const review = '2026-11-22-document-classification-editorial-pass.json';
+    expect(sha(beforeTopicConsolidation(ru, ruPath, root, review))).toBe(receipt.files[0].after_sha256);
+    expect(sha(beforeTopicConsolidation(en, enPath, root, review))).toBe(receipt.added_sources[0].sha256);
     expect(matter(en).data).toMatchObject({locale: 'en', translation_of: ruPath,
       canonical_revision: sha(ru), translation_status: 'current'});
     const code = (text: string) =>

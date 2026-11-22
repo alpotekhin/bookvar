@@ -6,7 +6,7 @@ status: canonical
 locale: en
 translation_status: current
 translation_of: "00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей.md"
-canonical_revision: "d35b5a6fca7515682059360074b9b5f8c45f0bbcc251d52885a46c086033a979"
+canonical_revision: "004332a58fefa44803fd686b3737cf42eba141a9945ee0b439a23564864b216e"
 translation_reviewed: "2026-11-22"
 last_updated: 2026-11-22
 last_verified: 2026-11-22
@@ -356,4 +356,4 @@ between training and test sets.
 - John Lafferty, Andrew McCallum, and Fernando Pereira, [Conditional Random Fields](https://www.cs.columbia.edu/~jebara/6772/papers/crf.pdf), 2001, §§1–4: conditional chain models and parameter estimation.
 
 **Previous:** [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram|BPE, WordPiece, and Unigram]] ·
-**Next:** [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT|how a recurrent network carries information from earlier words]].
+**Next:** [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/04 Синтаксический разбор|how words form phrases and dependencies]].

@@ -236,7 +236,7 @@ describe('loadManifest', () => {
     expect([...sidebarRoutes].sort()).toEqual(textbook.pages.map((page) => page.route).sort());
     const paths = readingPaths(textbook);
     const main = paths.find(path => path.id === 'main')!.routes;
-    expect(main).toHaveLength(88);
+    expect(main).toHaveLength(91);
     expect(paths.filter(path => path.id !== 'main')).toHaveLength(10);
     expect(main.slice(main.indexOf('textbook/models/gpt-1'), main.indexOf('textbook/models/gpt-1') + 4))
       .toEqual(['textbook/models/gpt-1', 'textbook/models/gpt-2', 'textbook/models/gpt-3',
@@ -251,13 +251,21 @@ describe('loadManifest', () => {
     expect(readingNeighbours(paths, 'textbook/text-representation/tokenization')?.next)
       .toBe('textbook/text-representation/morphology-pos');
     expect(readingNeighbours(paths, 'textbook/text-representation/morphology-pos')?.next)
+      .toBe('textbook/text-representation/syntactic-parsing');
+    expect(readingNeighbours(paths, 'textbook/text-representation/syntactic-parsing')?.next)
       .toBe('textbook/recurrent-networks/rnn-bptt');
     expect(readingNeighbours(paths, 'textbook/models/bert-roberta-deberta')?.next)
       .toBe('textbook/models/named-entity-recognition');
     expect(readingNeighbours(paths, 'textbook/models/named-entity-recognition')?.next)
       .toBe('textbook/models/document-classification');
     expect(readingNeighbours(paths, 'textbook/models/document-classification')?.next)
+      .toBe('textbook/models/information-extraction');
+    expect(readingNeighbours(paths, 'textbook/models/information-extraction')?.next)
       .toBe('textbook/models/t5');
+    expect(readingNeighbours(paths, 'textbook/models/t5')?.next)
+      .toBe('textbook/models/machine-translation');
+    expect(readingNeighbours(paths, 'textbook/models/machine-translation')?.next)
+      .toBe('textbook/models/gpt-1');
     expect(readingNeighbours(paths, 'textbook/classical-ml/kernels-svm-rff')?.next).toBeUndefined();
     expect(readingNeighbours(paths, 'textbook/pretraining/moco-queue-momentum')?.next)
       .toBe('textbook/pretraining/mae-masked-autoencoders');
