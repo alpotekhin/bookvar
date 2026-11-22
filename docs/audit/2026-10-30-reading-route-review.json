@@ -2,6 +2,18 @@
   "date": "2026-10-30",
   "lastReviewedDate": "2026-11-09",
   "editorialRevisions": {
+    "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md": {
+      "currentSha256": "c975a9c002ade8c78f834f1925d1dde6f9b966c6e913f0869bfc8250aa774030",
+      "stopBefore": "2026-11-22-data-collection-editorial-pass.json"
+    },
+    "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md": {
+      "currentSha256": "97ca8232726c52c35c4b85198af344dd5ddef77148b7a79a60d2e32432052700",
+      "stopBefore": "2026-11-22-data-pretraining-editorial-pass.json"
+    },
+    "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md": {
+      "currentSha256": "f57929fc391d20ce33291fb2e80f83b991cbe305ba76548b0fd3b0676c48f0ce",
+      "stopBefore": "2026-11-21-sequence-models-editorial-pass.json"
+    },
     "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md": {
       "currentSha256": "c864451c4d06f558656bc2291702e29695f293f85619dc051683ce29fe9a2e32",
       "stopBefore": "2026-11-21-moe-editorial-pass.json"

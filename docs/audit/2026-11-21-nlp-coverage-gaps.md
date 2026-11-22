@@ -70,7 +70,10 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«MHA, MQA и GQA»](2026-11-21-gqa-editorial-pass.json),
 [«MLA и сжатие KV-кэша»](2026-11-21-mla-editorial-pass.json),
 [«Длинный контекст»](2026-11-21-long-context-editorial-pass.json),
-[«Mixture of Experts»](2026-11-21-moe-editorial-pass.json) и
-[«SSM, Mamba, линейное внимание и гибриды»](2026-11-21-sequence-models-editorial-pass.json).
-Следующая глава — «Данные и предобучение»: как из корпуса получают
-последовательности токенов и примеры для обучения языковой модели.
+[«Mixture of Experts»](2026-11-21-moe-editorial-pass.json),
+[«SSM, Mamba, линейное внимание и гибриды»](2026-11-21-sequence-models-editorial-pass.json),
+[«Данные и предобучение»](2026-11-22-data-pretraining-editorial-pass.json),
+[«Сбор, очистка и смеси данных»](2026-11-22-data-collection-editorial-pass.json) и
+[«Дедупликация, PII и контроль качества корпуса»](2026-11-22-corpus-dedup-editorial-pass.json).
+Следующая глава — «Целевая функция предобучения»: какие прогнозы
+оцениваются на последовательности и как из них получается средняя потеря.

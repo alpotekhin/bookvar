@@ -3365,6 +3365,14 @@ describe('static handbook output', () => {
     expect(html).toContain('href="/licenses/semdedup-CC-BY-NC-4.0.txt"');
     for (const id of ['pii', 'harm-policy', 'exact-dedup', 'minhash-lsh', 'image-deduplication', 'contamination', 'audit-log'])
       expect(html).toContain('id="' + id + '"');
+    const ids = ['exact-dedup','minhash-lsh','pii','harm-policy','contamination','audit-log','image-deduplication'];
+    const positions = ids.map(id => html.indexOf('id="' + id + '"'));
+    expect(positions).toEqual([...positions].sort((a,b)=>a-b));
+    for(const panel of ['exact-code','minhash-code','log-json','dhash-code','phash-code','semantic-code'])
+      expect(html).toMatch(new RegExp('<details\\b[^>]*id="dedup-'+panel+'"'));
+    expect(text).toContain('Документ D');
+    expect(text).toContain('индекс теста находит');
+    expect(text).not.toContain('Собрать воспроизводимый корпус и сравнить два способа');
     expect(html).not.toContain('katex-error');
     expect(html).toContain('href="/textbook/pretraining/data-pipeline/"');
     expect(html).toContain('href="/textbook/pretraining/next-token-objective/"');
@@ -3476,8 +3484,13 @@ describe('static handbook output', () => {
   it('renders the corpus mix, OLMo schedule and benchmark overlap comparison in both interfaces', async () => {
     for (const locale of ['', 'en/']) {
       const html = await readFile(join(distDir, locale+'textbook/pretraining/data-and-pretraining/index.html'), 'utf8');
-      for (const anchor of ['dolmino-source-vs-mixture-share', 'olmo-early-loss-vs-anneal', 'gpt3-overlap-vs-memorization'])
+      for (const anchor of ['corpus-extraction-to-targets', 'dolmino-source-vs-mixture-share',
+        'olmo-early-loss-vs-anneal', 'corpus-same-budget-olmo', 'gpt3-overlap-vs-memorization'])
         expect(html).toContain('id="'+anchor+'"');
+      for (const value of ['[17, 31, 24, 2]', '[17, 9, 24, 2]', '50.6 → 61.2', '5,7 пункта'])
+        expect(html).toContain(value);
+      expect(html).toContain('href="/'+locale+'textbook/pretraining/data-pipeline/"');
+      expect(html).not.toContain('<h2 id="дальнейший-маршрут">');
       for (const file of ['olmo2-learning-rates-figure11.svg','olmo2-learning-rate-anneals-figure11.svg',
         'lee-dedup-perplexity-figure2.png'])
         expect(html).toMatch(new RegExp('<img[^>]+src="[^"]*/'+file.replaceAll('.','\\.')+'"'));
@@ -3507,8 +3520,12 @@ describe('static handbook output', () => {
     for(const locale of ['', 'en/']){
       const html=await readFile(join(distDir,locale+'textbook/pretraining/data-pipeline/index.html'),'utf8');
       const card=await readFile(join(distDir,locale+'sources/papers/fineweb/index.html'),'utf8');
-      for(const a of ['common-crawl-record-range','fineweb-deduplication-scope'])
+      for(const a of ['common-crawl-record-range','fineweb-deduplication-scope','mixture-after-deduplication'])
         expect(html).toContain('id="'+a+'"');
+      for(const panel of ['record-json','pareto-code','mixture-code','pile-table','dolma-table','olmix-table'])
+        expect(html).toMatch(new RegExp('<details\\b[^>]*id="collection-'+panel+'"'));
+      for (const s of ['теперь за шесть проходов', 'не более 20 млрд', 'по 140 млрд'])
+        expect(html).toContain(s);
       for(const f of ['fineweb-global-dedup-old-snapshot.svg','fineweb-per-snapshot-dedup.svg'])
         expect(html).toMatch(new RegExp('<img[^>]+src="[^"]*/'+f.replaceAll('.','\\.')+'"'));
       expect(html).toContain('160581106-160593800');

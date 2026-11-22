@@ -9,12 +9,13 @@ import io
 import json
 import math
 import re
-import subprocess
+from topic_consolidation_baseline import before_topic_consolidation
 
 ROOT = Path(__file__).resolve().parents[2]
 REL = '00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md'
 chapter = (ROOT / REL).read_text()
-before = subprocess.check_output(['git', 'show', f'HEAD:{REL}'], cwd=ROOT, text=True)
+before = before_topic_consolidation(
+    chapter, REL, '2026-11-22-data-pretraining-editorial-pass.json')
 
 # Execute the actual displayed function, not a second implementation.
 snippets = re.findall(r'```python\n(.*?)\n```', chapter, re.S)
@@ -148,18 +149,41 @@ print('PASS: document-vs-token weighting and inverse conversion')
 
 # UniMax-style water filling in token units. Original paper uses characters.
 sizes = {'web': 800, 'code': 80, 'science': 20}
-remaining, allocation = Fraction(300), {}
-ordered = sorted(sizes, key=sizes.get)
 cap = 2
-for index, name in enumerate(ordered):
-    share = min(remaining / (len(ordered) - index), cap * sizes[name])
-    allocation[name] = share
-    remaining -= share
-assert remaining == 0
+
+def cap_allocation(sizes, budget, cap):
+    remaining, allocation = Fraction(budget), {}
+    ordered = sorted(sizes, key=sizes.get)
+    for index, name in enumerate(ordered):
+        share = min(remaining / (len(ordered) - index), cap * sizes[name])
+        allocation[name] = share
+        remaining -= share
+    if remaining:
+        raise ValueError('budget exceeds all available capped passes')
+    return allocation
+
+allocation = cap_allocation(sizes, 300, cap)
 assert allocation == {'science': 40, 'code': 130, 'web': 130}
 assert all(allocation[k] <= cap * sizes[k] for k in sizes)
 assert [float(allocation[k] / sizes[k]) for k in ['web', 'code', 'science']] == [0.1625, 1.625, 2.0]
 print('PASS: capped equal-budget allocation is feasible and matches the text')
+
+deduped = dict(sizes, science=10)
+fixed = check(deduped, namespace['shares'], 300)
+assert fixed['science']['sampled_tokens'] == 60
+assert fixed['science']['epochs'] == 6
+assert fixed['science']['sampled_tokens'] > cap * deduped['science']
+revised = cap_allocation(deduped, 300, cap)
+assert revised == {'science': 20, 'code': 140, 'web': 140}
+assert Fraction(revised['science'], 300) == Fraction(1, 15)
+assert Fraction(revised['code'], deduped['code']) == Fraction(7, 4)
+try:
+    cap_allocation(deduped, 2 * sum(deduped.values()) + 1, cap)
+except ValueError:
+    pass
+else:
+    raise AssertionError('accepted budget larger than all capped data')
+print('PASS: after deduplication the old share doubles the passes; a capped mixture reallocates the budget')
 
 small, large = Fraction(10_000_000_000), Fraction(1_000_000_000_000)
 ratio = small / large
@@ -179,8 +203,13 @@ assert chapter.count('```') % 2 == 0
 for target in re.findall(r'!\[\[(.*?)\]\]', chapter):
     path = target.split('|', 1)[0].removeprefix('02 Areas/ML & DL/')
     assert (ROOT / path).exists(), target
-assert len(re.findall(r'!\[\[', chapter)) == 9
-print('PASS: source units, explicit anchors, code fences, nine image paths')
+image_paths = lambda s: re.findall(r'!\[\[([^|\]]+)(?:\|[^\]]*)?\]\]', s)
+assert len(image_paths(chapter)) == 11
+assert image_paths(chapter) == image_paths(before)
+assert len(re.findall(r'!\[\[[^|\]]+\|[^\]]+\]\]', chapter)) == 11
+assert re.findall(r'^(```|~~~)([a-z]+\n[\s\S]*?)^\1$', chapter, re.M) == re.findall(
+    r'^(```|~~~)([a-z]+\n[\s\S]*?)^\1$', before, re.M)
+print('PASS: source units, explicit anchors, five unchanged listings, eleven attributed image paths with alt')
 
 # Independent filter rates overlap; they are not a sequential retention chain.
 assert math.isclose(sum([6.0, 0.2, 2.7, 9.9, 1.1, 18.1, 9.0]), 47.0)

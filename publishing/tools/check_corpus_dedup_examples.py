@@ -9,8 +9,8 @@ from math import isclose, sqrt
 from pathlib import Path
 import ast
 import re
-import subprocess
 import sys
+from topic_consolidation_baseline import before_topic_consolidation
 
 ROOT = Path(__file__).resolve().parents[2]
 REL = Path("00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md")
@@ -163,22 +163,36 @@ assert jaccard(sets["B"], sets["C"]) == .75
 assert jaccard(sets["A"], sets["C"]) == .5
 edges = {(a, b) for a in sets for b in sets if a < b and jaccard(sets[a], sets[b]) >= .7}
 assert edges == {("A", "B"), ("B", "C")}
-representatives = []
-for item in sorted(sets):
-    if not any(jaccard(sets[item], sets[rep]) >= .7 for rep in representatives):
-        representatives.append(item)
-assert representatives == ["A", "C"]
-print("PASS nontransitivity: one connected component but two direct-match representatives")
+def direct_representatives(order):
+    representatives = []
+    for item in order:
+        if not any(jaccard(sets[item], sets[rep]) >= .7 for rep in representatives):
+            representatives.append(item)
+    return representatives
+
+assert direct_representatives("ABC") == ["A", "C"]
+assert direct_representatives("BAC") == ["B"]
+bench = {"test-001": "учебное условие и решение"}
+corpus = {"A": "независимый текст", "C": bench["test-001"]}
+assert [k for k in direct_representatives("ABC") if corpus[k] not in bench.values()] == ["A"]
+assert bench == {"test-001": "учебное условие и решение"}
+print("PASS nontransitive priority choices and separate benchmark comparison")
 
 # This is only a finite, fictitious fixture for the transformation contract,
 # not a PII recognizer quality test and not production email detection.
 def fixture_mask(s):
-    return re.subn(r"reader@example\.com", "|||EMAIL_ADDRESS|||", s)
+    return re.subn(r"(?:reader|a|b)@example\.com", "|||EMAIL_ADDRESS|||", s)
 
 masked, n = fixture_mask("Пишите на reader@example.com; |||EMAIL_ADDRESS|||")
 assert n == 1 and fixture_mask(masked) == (masked, 0)
+contacts = [("a", "Контакт: a@example.com"), ("b", "Контакт: b@example.com")]
+assert len(dedup(contacts)[0]) == 2
+after_mask = [(key, fixture_mask(item)[0]) for key, item in contacts]
+assert dedup(after_mask) == ([("a", "Контакт: |||EMAIL_ADDRESS|||")], {"b": "a"})
+assert Fraction(85, 85 + 15) == Fraction(17, 20)
+assert Fraction(85, 85 + 85) == Fraction(1, 2)
 assert sum(Counter(["retained", "modified", "dropped", "quarantined"]).values()) == 4
-print("PASS masking idempotence contract on a fictitious fixture; document balance")
+print("PASS fictitious mask order, idempotence, recall examples and document balance")
 
 group_sizes = [900, 50, 40, 10]
 sample_errors = [1, 2, 3, 0]
@@ -187,19 +201,27 @@ unweighted = Fraction(sum(sample_errors), 40)
 assert weighted == Fraction(14, 125) and unweighted == Fraction(3, 20)
 print("PASS stratified-audit weights: 11.2 percent vs incorrect unweighted 15 percent")
 
-old = subprocess.check_output(["git", "show", "HEAD:" + str(REL)], cwd=ROOT, text=True)
+old = before_topic_consolidation(text, str(REL), "2026-11-22-data-collection-editorial-pass.json")
 old_ids = set(re.findall(r"<!-- source_unit_id: (.*?) -->", old))
 new_ids = set(re.findall(r"<!-- source_unit_id: (.*?) -->", text))
 assert old_ids == new_ids, (old_ids - new_ids, new_ids - old_ids)
 old_anchors = set(re.findall(r'<a id="([^"]+)"', old))
 new_anchors = set(re.findall(r'<a id="([^"]+)"', text))
 assert old_anchors <= new_anchors
-image_stems = re.findall(r"!\[\[02 Areas/ML & DL/(.*?)\]\]", text)
-assert len(image_stems) == 4
+paths = lambda document: set(re.findall(r"!\[\[(?:02 Areas/ML & DL/)?([^|\]]+)\|[^\]]+\]\]", document))
+image_stems = paths(text)
+assert len(image_stems) == 7
+assert image_stems == paths(old)
 for stem in image_stems:
     assert (ROOT / stem).is_file(), stem
 assert "42 Next-token prediction|" in text
 assert "minhash-agreement-trace.png" not in text
-print(f"PASS {len(old_ids)} source-unit markers, original anchors, 4 figure paths, next chapter")
+code = lambda chapter: sorted(re.findall(r"^```[a-z]+\n[\s\S]*?^```$", chapter, re.M))
+assert code(text) == code(old) and len(code(text)) == 6
+assert "/06 Практика/" not in text
+anchors = [text.index(f'id="{a}"') for a in ("exact-dedup", "minhash-lsh", "pii", "harm-policy",
+                                             "contamination", "audit-log", "image-deduplication")]
+assert anchors == sorted(anchors)
+print(f"PASS {len(old_ids)} source units, stable anchors, six unchanged listings, 7 figures and linear navigation")
 print("Chapter SHA-256:", sha256((ROOT / REL).read_bytes()).hexdigest())
 print("All checks passed. CPU only; no corpus-scale quality or privacy claim.")

@@ -1,6 +1,6 @@
-"""Check the hand-worked examples in the corpus introduction (CPU, stdlib)."""
+"""Check the worked examples and source tables in the corpus introduction."""
 
-from math import isclose
+from math import isclose, log
 from pathlib import Path
 import hashlib
 import re
@@ -44,20 +44,40 @@ def check_original_recipe(text):
                           for a in original.find_all('a', href=True)]
         assert actual_links == expected_links, (paragraph_id, actual_links, expected_links)
 
-    # Compare all 40 reported scores with the actual HTML table, preserving
-    # checkpoint order across the two more readable Markdown tables.
+    # Transpose the four original checkpoint rows into before/after columns
+    # without losing any of the table's 40 cells.
     rows = []
     for row in article.find(id='S4.T9').find_all('tr'):
         cells = [c.get_text(' ', strip=True) for c in row.find_all(['td', 'th'], recursive=False)]
         if cells and cells[0] in {'Pretraining', 'Pretraining & mid-training'}:
             rows.append([float(cell) for cell in cells[1:]])
     assert len(rows) == 4 and all(len(row) == 10 for row in rows)
-    chapter_rows = []
+    chapter_rows = [[] for _ in rows]
     for line in text.splitlines():
-        if re.match(r'\| (?:7B|13B) · pretraining', line):
-            chapter_rows.append([float(cell.strip()) for cell in line.strip('|').split('|')[1:]])
-    assert len(chapter_rows) == 8
-    assert [left + right for left, right in zip(chapter_rows[:4], chapter_rows[4:])] == rows
+        if re.match(r'\| (?:Avg|MMLU|ARC-C|HSwag|WinoG|NQ|DROP|AGIEval|GSM8K|MMLU-Pro) \|', line):
+            pairs = line.strip('|').split('|')[1:]
+            values = [float(value.strip()) for pair in pairs for value in pair.split('→')]
+            assert len(values) == 4
+            for checkpoint, score in zip(chapter_rows, values):
+                checkpoint.append(score)
+    assert chapter_rows == rows
+
+    # Keep both comparison groups from Table 11; it is possible to reproduce
+    # an incorrect effect by subtracting the score of the original checkpoint.
+    mix_rows = []
+    for row in article.find(id='S4.T11').find_all('tr'):
+        cells = [c.get_text(' ', strip=True) for c in row.find_all(['th', 'td'], recursive=False)]
+        if len(cells) == 5 and re.fullmatch(r'\d+\.\d+', cells[2]):
+            mix_rows.append((float(cells[2]), float(cells[4])))
+    assert len(mix_rows) == 8
+    shown = re.findall(
+        r'^\| (?:Чекпойнт до продолжения|Исходная смесь \(PT Mix\)|Новая смесь с математикой и инструкциями) '
+        r'\| (\d+,\d+) \| (\d+,\d+) \|$', text, flags=re.M)
+    assert [tuple(float(cell.replace(',', '.')) for cell in row) for row in shown] == [
+        mix_rows[0], mix_rows[1], mix_rows[-1]]
+    assert isclose(mix_rows[-1][0] - mix_rows[1][0], 5.7)
+    assert isclose(mix_rows[-1][1] - mix_rows[1][1], 19.5)
+    assert not isclose(mix_rows[-1][0] - mix_rows[0][0], 5.7)
     inventory_rows = []
     for table_id in ('S2.T1', 'S2.T2'):
         for row in article.find(id=table_id).find_all('tr'):
@@ -87,6 +107,22 @@ def check_original_recipe(text):
 
 
 def main():
+    text = CHAPTER.read_text('utf-8')
+    target_rows = re.findall(
+        r'^\| (С отступом|Без отступа) \| `\[([0-9, ]+)\]` → `\[([0-9, ]+)\]` \|$',
+        text, flags=re.M)
+    assert [kind for kind, _, _ in target_rows] == ['С отступом', 'Без отступа']
+    sequences = []
+    for _, ids, labels in target_rows:
+        sequence = list(map(int, ids.split(',')))
+        assert sequence[1:] == list(map(int, labels.split(',')))
+        assert len(sequence) == 4 and sequence[-1] == 2
+        sequences.append(sequence)
+    assert sequences == [[17, 31, 24, 2], [17, 9, 24, 2]]
+    assert isclose(-log(1 / 8) + log(3 / 4), log(6))
+    assert (10 * (len(sequences[0]) - 1), len(sequences[0]) - 1) == (30, 3)
+    print('PASS: corrupted extraction changes next-token labels; same-prefix loss term and duplicate counts')
+
     before = 10 / 100
     after = 1 / (100 - 9)
     assert isclose(before, 0.1)
@@ -112,7 +148,8 @@ def main():
     assert 130e9 < 3 * 50e9
     print('PASS: duplicate weight, mixture budget, OLMo corpus and Dolmino shares')
     print('PASS: microanneal token budget and learning-rate schedule')
-    check_original_recipe(CHAPTER.read_text('utf-8'))
+    check_original_recipe(text)
+    print('PASS: Table 11 controlled mixture comparison, separate from extra steps')
     print('Chapter SHA-256:', hashlib.sha256(CHAPTER.read_bytes()).hexdigest())
 
 
