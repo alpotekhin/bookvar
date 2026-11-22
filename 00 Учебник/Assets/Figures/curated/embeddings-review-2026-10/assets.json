@@ -83,7 +83,7 @@
   {
     "id": "curated-embeddings-simcse-08f61771e5ea",
     "asset": "00 Учебник/Assets/Figures/curated/embeddings-review-2026-10/simcse.png",
-    "author": "Tong Gao, Xingcheng Yao, Danqi Chen",
+    "author": "Tianyu Gao, Xingcheng Yao, Danqi Chen",
     "source_url": "https://github.com/princeton-nlp/SimCSE/tree/49fa580a853752ede55b8c76d9debf748e214d3f",
     "source_image_url": "https://raw.githubusercontent.com/princeton-nlp/SimCSE/49fa580a853752ede55b8c76d9debf748e214d3f/figure/model.png",
     "commit": "49fa580a853752ede55b8c76d9debf748e214d3f",

@@ -531,9 +531,11 @@ sections:
           - label: XI. Поиск и RAG
             label_en: XI. Retrieval and RAG
             items:
-              - label: Embeddings и metric learning
+              - label: Эмбеддинги и метрическое обучение
+                label_en: Embeddings and metric learning
                 route: textbook/retrieval/embeddings-metric-learning
-              - label: Retrieval — от BM25 до dense и hybrid
+              - label: Лексический, плотный и гибридный поиск
+                label_en: Lexical, dense and hybrid retrieval
                 route: textbook/retrieval/sparse-dense-hybrid
               - label: Reranking — cross-encoder и late interaction
                 route: textbook/retrieval/reranking

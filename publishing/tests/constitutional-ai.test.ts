@@ -42,6 +42,29 @@ describe('Constitutional AI data construction and preference targets', () => {
     expect(read(chapter).toString()).toContain('full original caption');
   });
 
+  it('uses the unmodified Lee et al. RLHF/RLAIF diagram with a pinned version and verified license', () => {
+    const path = '00 Учебник/Assets/Figures/curated/rlaif-lee-2026-11-22/rlhf-vs-rlaif.png';
+    const licensedPage = '05 Источники/Originals/rlaif-lee-2026-11-22/arxiv-abs-2309.00267v2.html';
+    const digest = 'edb7992b19f76c3c5ac0f06e5390c9866c38c5bd5116eee52983b4630412e39e';
+    const bytes = read(path);
+    const rows = parse(read('05 Источники/asset-registry.yml').toString()).assets;
+    expect(rows.filter((entry: { asset: string }) => entry.asset === path)).toHaveLength(1);
+    expect(rows.find((entry: { asset: string }) => entry.asset === path)).toMatchObject({
+      author: 'Harrison Lee et al.',
+      source_url: 'https://arxiv.org/html/2309.00267v2#S1.F2',
+      source_image_url: 'https://arxiv.org/html/2309.00267v2/rlaif.png',
+      source_asset: path, source_asset_sha256: digest, sha256: digest,
+      license: 'CC BY 4.0', license_evidence: licensedPage,
+      license_evidence_sha256: hash(read(licensedPage)),
+      derivation: 'source-png-copy', dimensions_px: [959, 470], used_in: [chapter],
+    });
+    expect(read(licensedPage).toString()).toContain('creativecommons.org/licenses/by/4.0/');
+    expect(read(licensedPage).toString()).toContain('2309.00267v2');
+    expect(hash(bytes)).toBe(digest);
+    expect([bytes.readUInt32BE(16), bytes.readUInt32BE(20)]).toEqual([959, 470]);
+    expect(read(chapter).toString()).toContain(path);
+  });
+
   it('restores only the reviewed additions and preserves the earlier chapter and figure', () => {
     const j = JSON.parse(read('docs/audit/2026-10-29-constitutional-ai-additions.json').toString());
     expect(j.files).toHaveLength(2);

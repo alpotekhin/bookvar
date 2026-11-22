@@ -90,6 +90,25 @@ def main():
     assert set_loss < 1e-10 and -np.log(prob[:2]).mean() > 9.9
     cases['temperature_accumulation_and_positive_objective'] = 5
 
+    q = np.array([1., 0.])
+    d = np.array([[2., 0.], [1., 1.], [0., 1.]])
+    _, _, score_gradient = ce(d @ q, [0])
+    query_gradient = d.T @ score_gradient
+    assert np.allclose(query_gradient, [-.425, .335], atol=.001, rtol=0)
+    updated_query = q - .1 * query_gradient
+    updated_scores = d @ updated_query
+    assert np.allclose(updated_scores, [2.085, 1.009, -.0335], atol=.001, rtol=0)
+    assert updated_scores[1] > 1 and updated_scores[0] - updated_scores[1] > 1
+    assert ce(updated_scores, [0])[0] < ce(d @ q, [0])[0]
+
+    exact_top = ['d1', 'd2', 'd5']
+    approx_top = ['d1', 'd3', 'd5']
+    exact_agreement = len(set(exact_top) & set(approx_top)) / 3
+    assert exact_agreement == 2 / 3
+    assert metric(exact_top, ns['qrels'], 3)['recall'] == 2 / 3
+    assert metric(approx_top, ns['qrels'], 3)['recall'] == 1
+    cases['worked_query_update_and_ann_recall'] = 7
+
     assert math.isclose((.6 - 2) ** 2, 1.96)
     assert math.isclose((105 - 103), (5 - 3))
     assert math.isclose(max(0, .2 + .5 - .6), .1)
@@ -159,7 +178,7 @@ def main():
            '5-triplet-multiple-negatives-и-distillation', '6-анизотропия-pooling-и-размерность',
            '7-как-проверять-эмбеддинг', 'источники-и-дальнейшее-чтение']
     assert all(page.find(id=name) for name in old)
-    assert len(article.select('img')) == 8
+    assert len(article.select('img')) == 9
     assert len(article.select('pre')) == 4
     assert not article.select('.katex-error')
     assert len(article.select('.katex-display')) == 12
@@ -167,7 +186,9 @@ def main():
     assert 'cross-encoder MiniLM' in article.get_text(' ', strip=True)
     assert 'без NLI-классификатора' in article.get_text(' ', strip=True)
     assert article.select_one('a[href$="/textbook/retrieval/sparse-dense-hybrid/"]') is not None
-    cases['built_anchors_images_math_quotes_and_next_link'] = len(old) + 7
+    assert article.select_one('a[href$="/textbook/evaluation/models-contamination/"]') is not None
+    assert len(article.select('details[id^="emb-code-"]')) == 3
+    cases['built_anchors_images_math_quotes_and_navigation'] = len(old) + 9
     print(json.dumps({'chapter_sha256': digest(CHAPTER), 'case_groups': cases,
                       'cases_total': sum(cases.values()),
                       'scope': 'synthetic examples and built page; no real-model retrieval benchmark'},

@@ -146,8 +146,8 @@ last_updated: 2026-11-14
 
 Нужны векторные представления, BERT и оценивание. Последовательно разбираются обучение embeddings, поиск, повторное ранжирование и сборка ответа с найденным контекстом.
 
-- [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning|Embeddings и metric learning]]
-- [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid|Retrieval — от BM25 до dense и hybrid]]
+- [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning|Эмбеддинги и метрическое обучение]]
+- [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid|Лексический, плотный и гибридный поиск]]
 - [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction|Reranking — cross-encoder и late interaction]]
 - [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер|RAG — полный конвейер]]
 

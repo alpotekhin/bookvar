@@ -933,7 +933,8 @@ describe('static handbook output', () => {
       expect(html).not.toContain('href="/textbook/' + route + '/"');
     }
     expect(html).toContain('href="/textbook/evaluation/models-contamination/"');
-    expect(html).toContain('Две модели правильно ответили');
+    expect(html).toContain('id="eval-paired-example"');
+    expect(html).toContain('Две модели на ста задачах');
     expect(html).toContain('bert-score-recall.png');
   });
   it('shows one edition notice per textbook page, or none for current/native English content', async () => {
@@ -1022,6 +1023,16 @@ describe('static handbook output', () => {
         'bert-score-recall.png','bertscore-19e7f551-MIT.txt','53.7285'])
         expect(html).toContain(value);
       expect(html.match(/<pre\b/g)).toHaveLength(13);
+      expect(html.match(/<details\b[^>]*id="eval-code-/g)).toHaveLength(9);
+      expect(html.match(/<img\b[^>]*\bsrc=/g)).toHaveLength(20);
+      const steps = ['eval-paired-example', 'формальные-ограничения-и-содержательная-правильность',
+        'reference-based-text-evaluation', 'eval-paired-uncertainty', 'humaneval-benchmark',
+        'eval-contamination', 'перестановочный-тест-без-доступа-к-корпусу'];
+      const positions = steps.map(id => html.indexOf(`id="${id}"`));
+      expect(positions.every((position, i) => position > (positions[i - 1] ?? -1))).toBe(true);
+      expect(html).toContain('id="что-такое-контаминация"');
+      expect(html).toContain(`href="/${locale}textbook/retrieval/embeddings-metric-learning/"`);
+      expect(html).not.toContain('Основной курс завершён');
       expect(html).not.toContain('katex-error');
       expect(html).not.toContain('<p>![');
       if(locale)expectCanonicalEditionNotice(html);
@@ -1107,6 +1118,19 @@ describe('static handbook output', () => {
     for (const locale of ['', 'en/']) {
       const chapter = await readFile(join(distDir, locale, route, 'index.html'), 'utf8');
       const section = chapter.match(/<a id="emb-gradcache"><\/a>[\s\S]*?(?=<a id="emb-simcse")/)?.[0];
+      expect(chapter.match(/<img\b[^>]*\bsrc=/g)).toHaveLength(9);
+      expect(chapter.match(/<pre\b/g)).toHaveLength(4);
+      expect(chapter.match(/<details\b[^>]*id="emb-code-/g)).toHaveLength(3);
+      const anchors = ['emb-password-case', 'emb-pooling', 'emb-encoders', 'emb-batch-example',
+        'emb-positive-sets', 'emb-negatives', 'emb-gradcache', 'emb-exact-search',
+        'emb-error-decomposition'];
+      const positions = anchors.map(id => chapter.indexOf(`id="${id}"`));
+      expect(positions.every((pos, i) => pos > (positions[i - 1] ?? -1))).toBe(true);
+      expect(chapter).toContain('ANN recall@3');
+      expect(chapter).toContain('Recall@3 по разметке');
+      expect(chapter).toContain(`href="/${locale}textbook/evaluation/models-contamination/"`);
+      expect(chapter).toContain(`href="/${locale}textbook/retrieval/sparse-dense-hybrid/"`);
+      if (locale) expectCanonicalEditionNotice(chapter);
       expect(section).toBeDefined();
       expect(section).toMatch(/<img[^>]+src="[^"]*\/contaccum-figure1\.png"[^>]+alt="Three panels:/);
       for (const value of ['0.7437', '0.3133', 'not zero-valued logits', 'five negatives',
@@ -6743,6 +6767,20 @@ describe('static handbook output', () => {
     expect(html).toMatch(/<a\b[^>]*href="[^"]*\/ivf-build\.png"[^>]*>\s*<img/);
     expect(html).toContain('rel="prev"');
     expect(html).toContain('rel="next"');
+    for (const locale of ['', 'en/']) {
+      const chapter = await readFile(join(distDir, locale, 'textbook/retrieval/sparse-dense-hybrid/index.html'), 'utf8');
+      expect(chapter.match(/<img\b[^>]*\bsrc=/g)).toHaveLength(8);
+      expect(chapter.match(/<pre\b/g)).toHaveLength(7);
+      expect(chapter.match(/<details\b[^>]*id="ret-code-/g)).toHaveLength(6);
+      const ids = ['ret-e42-case', 'ret-recall', 'ret-bm25', 'ret-ann', 'ret-chunking',
+        'ret-rrf', 'ret-fusion-limits', 'ret-trace'];
+      const offsets = ids.map(id => chapter.indexOf(`id="${id}"`));
+      expect(offsets.every((n, i) => n > (offsets[i - 1] ?? -1))).toBe(true);
+      expect(chapter).toContain('https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf');
+      expect(chapter).toContain(`href="/${locale}textbook/retrieval/embeddings-metric-learning/"`);
+      expect(chapter).toContain(`href="/${locale}textbook/retrieval/reranking/"`);
+      if (locale) expectCanonicalEditionNotice(chapter);
+    }
   });
   it('links the 404 header to the configured publication root', async () => {
     const html = await readFile(join(distDir, '404.html'), 'utf8');

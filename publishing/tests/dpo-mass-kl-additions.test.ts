@@ -64,7 +64,7 @@ describe('DPO probability-mass and KL worked example',()=>{
     }
   });
   it('distinguishes a stipulated redistribution, a pair loss and full-policy KL',()=>{
-    const t=body.split('<a id="dpo-normalized-mass-kl"></a>')[1].split('> [!warning]')[0];
+    const t=body.split('<a id="dpo-normalized-mass-kl"></a>')[1].split('<span id="16-варианты-dpo">')[0];
     for(const value of ['это не утверждение','конкретный шаг оптимизатора',
       '0.599675','0.534800','70%','Одиночная','из-за случайности',
       'Систематическое усреднение по другому распределению','https://arxiv.org/html/2305.18290v3#S3'])

@@ -14,7 +14,7 @@ const read=(p:string)=>readFileSync(resolve(root,p),'utf8');
 const hash=(s:string|Buffer)=>createHash('sha256').update(s).digest('hex');
 const j=JSON.parse(read('docs/audit/'+own)),row=j.files[0],body=read(row.source);
 const undo=(s:string,r:any)=>{for(const c of [...r.changes].reverse())s=s.replace(c.new,()=>c.old);return s;};
-const old=undo(body,row);
+const old=undo(beforeTopicConsolidation(body,row.source,root,own),row);
 const blocks=(s:string)=>[...s.matchAll(/^```python\n([\s\S]*?)^```/gm)].map(m=>m[1]);
 const math=(s:string)=>[...s.matchAll(/^\$\$\n([\s\S]*?)^\$\$/gm)].map(m=>m[1]);
 const images=(s:string)=>[...s.matchAll(/!\[\[([^\]|]+)(?:\|([^\]]*))?\]\]/g)];

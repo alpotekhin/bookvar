@@ -89,6 +89,9 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«DPO: обучение на парах ответов»](2026-11-22-dpo-editorial-pass.json),
 [«RLVR: обучение по проверяемой награде»](2026-11-22-rlvr-editorial-pass.json),
 [«GRPO и DeepSeek-R1»](2026-11-22-grpo-editorial-pass.json),
-[«Дистилляция рассуждений»](2026-11-22-distillation-editorial-pass.json) и
-[«Вычисления во время ответа»](2026-11-22-test-time-compute-editorial-pass.json).
-Следующая глава — «Оценивание моделей и контаминация».
+[«Дистилляция рассуждений»](2026-11-22-distillation-editorial-pass.json),
+[«Вычисления во время ответа»](2026-11-22-test-time-compute-editorial-pass.json),
+[«Оценивание моделей и контаминация»](2026-11-22-evaluation-editorial-pass.json),
+[«Эмбеддинги и метрическое обучение»](2026-11-22-embeddings-editorial-pass.json) и
+[«Лексический, плотный и гибридный поиск»](2026-11-22-retrieval-editorial-pass.json).
+Следующая глава — «Переранжирование: cross-encoder и late interaction».

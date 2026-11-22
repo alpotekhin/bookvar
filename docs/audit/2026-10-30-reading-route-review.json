@@ -2,6 +2,14 @@
   "date": "2026-10-30",
   "lastReviewedDate": "2026-11-09",
   "editorialRevisions": {
+    "00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid.md": {
+        "currentSha256": "6db98b8f0c15d2089ff894d516483f7c7bb5c5ab0d32a0b3f575c1c1dfde2059",
+      "stopBefore": "2026-11-22-embeddings-editorial-pass.json"
+    },
+    "00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md": {
+        "currentSha256": "ecf59073aa3468813c3b579aa6eb1cb324e3a94b9d036c3acd37bb1dfa0a68f9",
+      "stopBefore": "2026-11-22-evaluation-editorial-pass.json"
+    },
     "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md": {
       "currentSha256": "4293412fecdbb6c7fba03ad1756195f770b9a107742bc039e0c6258b069e62a2",
       "stopBefore": "2026-11-22-distillation-editorial-pass.json"
@@ -259,7 +267,7 @@
         "stopBefore": "2026-11-14-gpt-decoder-history-component-additions.json"
       },
       "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md": {
-        "currentSha256": "75648b9405a1ed301ce71ab8380d5f6735c13fb2ccc60e1aeefa605d08560e2b",
+        "currentSha256": "df13ba9f55d2e55e4c738e47dfaeff028fdc7a4859759dc35fde58f9cce97cfe",
         "stopBefore": "2026-11-14-gpt-decoder-history-component-additions.json"
       },
       "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md": {

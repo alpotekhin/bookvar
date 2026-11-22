@@ -167,7 +167,17 @@ def main():
         rejects(windows, [1, 2, 3], width, overlap)
     counts['chunk_offsets_and_span_coverage_parameter_sets'] = 24 * sum(range(1, 9)) + 6
 
-    assert [doc for doc, _ in rrf([['A', 'B', 'C'], ['C', 'B', 'D']])] == ['C', 'B', 'A', 'D']
+    lexical, dense = ['A', 'B', 'C'], ['C', 'B', 'D']
+    atlas = [doc for doc, _ in rrf([lexical, dense])]
+    assert atlas == ['C', 'B', 'A', 'D']
+    needed = {'A', 'C'}
+    assert set(lexical[:2]) & needed == {'A'} and set(dense[:2]) & needed == {'C'}
+    assert (set(lexical[:2]) | set(dense[:2])) >= needed
+    assert set(atlas[:2]) & needed == {'C'} and atlas.index('A') + 1 == 3
+    shortened = [doc for doc, _ in rrf([lexical[:2], dense[:2]])]
+    assert shortened == ['B', 'A', 'C']
+    assert set(shortened[:2]) & needed == {'A'}
+    counts['atlas_evidence_coverage_and_fusion_cutoff'] = 6
     assert rrf([['A'], ['B']], weights=[0, 2]) == [('B', 2 / 61)]
     assert rrf([[], []]) == []
     assert rrf([['B'], ['A']]) == [('A', 1 / 61), ('B', 1 / 61)]

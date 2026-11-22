@@ -65,7 +65,8 @@ describe('full embeddings explanation and GradCache addition',()=>{
       expect(hash(readFileSync(resolve(root,path)))).toBe(asset.sha256);
     }
     for(const caption of original.split(/\n\n/).filter(p=>/^\*(?!\*)/.test(p)&&p.endsWith('*')))
-      expect(body).toContain(caption);
+      expect(body).toContain(caption.replace(/^\*Tong Gao, Xingcheng Yao, Danqi Chen,/,
+        '*Tianyu Gao, Xingcheng Yao, Danqi Chen,'));
     const fixtures=JSON.parse(read('publishing/fixtures/gradcache-906f0383/sources.json'));
     expect(fixtures.commit).toBe('906f03835fbc183132a9db32612a9e8f180ca3b4');
     for(const f of fixtures.files)
