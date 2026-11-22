@@ -18,6 +18,7 @@ import torch
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md"
+ENGLISH = ROOT / "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md"
 SOURCE = ROOT / "05 Источники/Originals/resolution-2026-10-20"
 FIGURES = ROOT / "00 Учебник/Assets/Figures/curated/resolution-review-2026-10"
 
@@ -41,17 +42,29 @@ def source_function(path, name, **extra):
     return env[name]
 
 
-def main():
-    chapter = CHAPTER.read_text()
+def run_examples(path, chapter):
     blocks = re.findall(r"^```python\n(.*?)^```", chapter, re.M | re.S)
     assert len(blocks) == 9
     spaces, shared = [], {}
     for i, block in enumerate(blocks, 1):
-        code = compile(block, f"{CHAPTER}:block-{i}", "exec")
+        code = compile(block, f"{path}:block-{i}", "exec")
         local = {}
         exec(code, local)
         exec(code, shared)
         spaces.append(local)
+    return spaces
+
+
+def main():
+    chapter, english = CHAPTER.read_text(), ENGLISH.read_text()
+    assert f'canonical_revision: "{sha(CHAPTER)}"' in english
+    spaces = run_examples(CHAPTER, chapter)
+    equivalent = run_examples(ENGLISH, english)
+    for a, b, name in [
+        (0, 0, "positions"), (1, 1, "grid"), (3, 3, "y"),
+        (6, 6, "position_ids"), (8, 8, "expected"),
+    ]:
+        assert np.array_equal(spaces[a][name], equivalent[b][name])
 
     # Molmo's nested function counts patches before the final pooling division.
     molmo_count = source_function(
@@ -200,6 +213,37 @@ def main():
         assert np.allclose(inverse(local, scale, pad, origin), box.ravel())
     assert 16*64**2 == 65_536 and 1024**2 == 1_048_576
 
+    # Same square output, different retained evidence: change only the cell.
+    original = Image.new("L", (1600, 1000), color=255)
+    changed = original.copy()
+    changed.paste(0, (1475, 700, 1525, 716))
+    resized_w = round(1600 * 336 / 1000)
+    crop_left = (resized_w - 336) // 2
+    crop_box = (crop_left, 0, crop_left + 336, 336)
+    def fitted(image):
+        base = Image.new("L", (336, 336), color=255)
+        base.paste(image.resize((336, 210), Image.Resampling.BICUBIC), (0, 63))
+        return base
+    for before, after in [
+        (original.resize((336, 210)), changed.resize((336, 210))),
+        (fitted(original), fitted(changed)),
+        (original.resize((1260, 784)), changed.resize((1260, 784))),
+    ]:
+        assert ImageChops.difference(before, after).getbbox() is not None
+    crop_a, crop_b = [
+        im.resize((resized_w, 336), Image.Resampling.BICUBIC).crop(crop_box)
+        for im in (original, changed)
+    ]
+    assert crop_a.size == (336, 336)
+    assert ImageChops.difference(crop_a, crop_b).getbbox() is None
+    assert (math.floor(1475 * 1260 / 1600 / 28),
+            math.floor(1525 * 1260 / 1600 / 28)) == (41, 42)
+    assert round(16 * 336 / 1600, 1) == 3.4
+    assert round(16 * 784 / 1000, 1) == 12.5
+    assert (784 // 28) * (1260 // 28) + 2 == 1262
+    assert (224 // 28) * (28 // 28) == 8
+    assert (1260 // 28) * (700 // 28) == 1125
+
     # Pixel equality, hashes and explicit paper-license evidence for the new crop.
     records = json.loads((FIGURES/"assets.json").read_text())
     assert len(records) == 1
@@ -226,10 +270,13 @@ def main():
     after = Image.open(ROOT/repair["asset"]).convert("RGB")
     assert list(before.size) == repair["source_raster_size_px"]
     assert ImageChops.difference(before.crop(repair["crop_box_px"]), after).getbbox() is None
-    reader_figures = {
-        link.split("|", 1)[0].rsplit("/", 1)[-1]
-        for link in re.findall(r"!\[\[([^\]\n]+)\]\]", chapter)
-    }
+    def image_names(text):
+        return {
+            link.split("|", 1)[0].rsplit("/", 1)[-1]
+            for link in re.findall(r"!\[\[([^\]\n]+)\]\]", text)
+        }
+    reader_figures = image_names(chapter)
+    assert reader_figures == image_names(english)
     assert reader_figures == {
         "llava-onevision-anyres.png",
         "qwen2-vl-architecture.png", "pixtral-vision-packing.png", "qwen2vl-figure3-mrope.png",
@@ -256,8 +303,11 @@ def main():
     assert router["asset"] in chapter and router["license"] == "CC BY 4.0"
     base, routed = 6 * 256, 4 * 256 + 2 * 64
     assert (base, routed, (base - routed) / base) == (1536, 1152, .25)
+    assert .06 / .02 == 3 and .06 / .02 >= 2
     print(json.dumps({
-        "chapter_sha256": sha(CHAPTER), "standalone_and_shared_code_runs": 18,
+        "chapter_sha256": [sha(CHAPTER), sha(ENGLISH)], "standalone_and_shared_code_runs": 36,
+        "same_size_scan_controls": {"fit_keeps_difference": True, "crop_loses_difference": True,
+                                    "qwen_merged_columns": [41, 42], "qwen_positions_with_boundaries": 1262},
         "pinned_resize_cases": resize_cases, "internvl_images_with_thumbnail": image_counts,
         "molmo_axis_cases": 6, "pixtral_row_shapes": 20, "mrope_grid_shapes": 20,
         "molmo_seam_context_without_duplicate_patches": True,

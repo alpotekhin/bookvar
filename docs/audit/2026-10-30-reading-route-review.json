@@ -2,6 +2,14 @@
   "date": "2026-10-30",
   "lastReviewedDate": "2026-11-09",
   "editorialRevisions": {
+    "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md": {
+      "currentSha256": "863735716405d1b65fde69cf066ea5a0a5dfee819d12f0c2cfb7e5f97ec198fe",
+      "stopBefore": "2026-11-22-vision-connectors-editorial-pass.json"
+    },
+    "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md": {
+      "currentSha256": "f97077d23ee2d51d15e5b454ac148c3ca90a69985a1828edeba60a92fb17971a",
+      "stopBefore": "2026-11-22-vision-encoders-editorial-pass.json"
+    },
     "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md": {
       "currentSha256": "b580672f262588eca508200a55b408a42edd47388da321bb00e97c46cc88e8a0",
       "stopBefore": "2026-11-22-rag-editorial-pass.json"

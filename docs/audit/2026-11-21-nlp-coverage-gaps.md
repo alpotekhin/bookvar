@@ -95,6 +95,8 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«Эмбеддинги и метрическое обучение»](2026-11-22-embeddings-editorial-pass.json),
 [«Лексический, плотный и гибридный поиск»](2026-11-22-retrieval-editorial-pass.json),
 [«Переранжирование документов»](2026-11-22-reranking-editorial-pass.json),
-[«RAG: от источника до проверяемого ответа»](2026-11-22-rag-editorial-pass.json) и
-[«Визуальные токены: ViT, CLIP и SigLIP»](2026-11-22-vision-encoders-editorial-pass.json).
-Следующая глава — «Как vision encoder подключается к LLM: projector, Q-Former и cross-attention».
+[«RAG: от источника до проверяемого ответа»](2026-11-22-rag-editorial-pass.json),
+[«Визуальные токены: ViT, CLIP и SigLIP»](2026-11-22-vision-encoders-editorial-pass.json),
+[«Как подключить визуальный энкодер к LLM»](2026-11-22-vision-connectors-editorial-pass.json) и
+[«Разрешение, плитки и позиции изображения»](2026-11-22-vision-resolution-editorial-pass.json).
+Следующая глава — «Обучение VLM: alignment, instruction tuning и данные».

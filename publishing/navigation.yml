@@ -549,10 +549,10 @@ sections:
               - label: "Визуальные токены: ViT, CLIP и SigLIP"
                 label_en: "Visual tokens: ViT, CLIP and SigLIP"
                 route: textbook/multimodal/models
-              - label: Connectors и fusion
-                label_en: Connectors and fusion
+              - label: Как подключить визуальный энкодер к LLM
+                label_en: Connecting a vision encoder to an LLM
                 route: textbook/multimodal/connectors-fusion
-              - label: Разрешение, tiling и пространственные позиции
+              - label: Разрешение, плитки и позиции изображения
                 label_en: Resolution, tiling, and spatial positions
                 route: textbook/multimodal/visual-tokenization-resolution
               - label: Обучение VLM — alignment, instruction tuning и данные

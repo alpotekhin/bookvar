@@ -5,6 +5,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 JOURNALS = (
+    '2026-11-22-vision-resolution-editorial-pass.json',
+    '2026-11-22-vision-connectors-editorial-pass.json',
     '2026-11-22-vision-encoders-editorial-pass.json',
     '2026-11-22-rag-editorial-pass.json',
     '2026-11-22-reranking-editorial-pass.json',

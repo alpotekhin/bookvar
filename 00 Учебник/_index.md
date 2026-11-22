@@ -159,8 +159,8 @@ last_updated: 2026-11-14
 Начните после CNN и Transformer. Модуль проходит путь от зрительного представления к языковому ответу, затем рассматривает документы, видео, аудио и оценивание. Генерация изображений вынесена в отдельный модуль.
 
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64 Мультимодальные модели|Визуальные токены: ViT, CLIP и SigLIP]]
-- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64a Connectors и fusion|Connectors и fusion]]
-- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции|Разрешение, tiling и пространственные позиции]]
+- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64a Connectors и fusion|Как подключить визуальный энкодер к LLM]]
+- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции|Разрешение, плитки и позиции изображения]]
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Обучение VLM — alignment, instruction tuning и данные]]
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding|Документы, OCR и visual grounding]]
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|Видео, аудио и omni-модели]]

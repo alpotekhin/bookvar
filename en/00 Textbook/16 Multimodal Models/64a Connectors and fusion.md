@@ -1,14 +1,17 @@
 ---
-title: "64.1. Connecting a vision encoder to an LLM"
+title: "Connecting a vision encoder to an LLM"
 type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "921ed614d591512dc1fcb18e517f9b091ceb9733c986253d25a3eb085f144271"
-translation_reviewed: "2026-11-09"
+canonical_revision: "f97077d23ee2d51d15e5b454ac148c3ca90a69985a1828edeba60a92fb17971a"
+translation_reviewed: "2026-11-22"
 translation_of: "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md"
-last_updated: 2026-11-09
-last_verified: 2026-09-15
+last_updated: 2026-11-22
+last_verified: 2026-11-22
+previous: "[[en/00 Textbook/16 Multimodal Models/64 Multimodal models]]"
+next:
+  - "[[en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions]]"
 primary_sources:
   - https://arxiv.org/abs/2304.08485
   - https://arxiv.org/abs/2408.03326
@@ -21,11 +24,37 @@ primary_sources:
 
 # Connecting a vision encoder to an LLM
 
-A vision encoder returns a grid $Z_v\in\mathbb R^{N_v\times d_v}$, while the LLM expects hidden states of width $d_l$. The connector must align dimensions, possibly reduce $N_v$, and decide where visual information enters the language network. Those choices control information loss, context usage, and serving cost.
+In the [[en/00 Textbook/16 Multimodal Models/64 Multimodal models#vlm-crop-evidence|previous chapter]],
+the table cell fell outside the crop. This time the scan includes
+the cell. A $24\times24$ patch grid gives us 576 vectors, and
+“How many days are allowed for review?” becomes a sequence of
+text tokens. Where can the question read the features of that cell?
+
+LLaVA places the features in the same sequence as the text.
+BLIP-2 first combines the grid into 32 vectors. Flamingo produces
+64 vectors and keeps them in separate memory for the text to read
+through cross-attention. The scan has the same grid in these
+examples so we can compare the interfaces. The actual systems use
+different vision encoders.
+
+## Feature width and sequence length
+
+A vision encoder returns $Z_v\in\mathbb R^{N_v\times d_v}$.
+For $d_v=1024$ and language-model width $d_l=4096$, the
+image rows cannot go in the same matrix as the text embeddings.
+A projection from $[576,1024]$ to $[576,4096]$ changes the
+row width and keeps 576 positions. An output of $[32,4096]$
+also reduces the number of positions, by combining rows or
+dropping some of them.
+When the features stay in separate memory, cross-attention can
+project its own keys and values without first converting the
+memory to input embeddings.
 
 <span id="2-llava-линейная-проекция-и-единая-последовательность"></span>
 
-## LLaVA: projection into one token stream
+<span id="llava-projection-into-one-token-stream"></span>
+
+## Visual positions in the LLaVA input
 
 The original LLaVA takes CLIP ViT patch features and learns
 
@@ -48,13 +77,20 @@ changes the width of $Z_v$ without removing positions. The light $H_v$
 and gray $H_q$ enter the same decoder; green $X_a$ denotes the text response.
 The schematic does not give actual token counts.*
 
-This design inherits standard decoder kernels and caching. Its cost is equally direct: every image token occupies context and contributes to LLM prefill. A projector does not translate an image into words; it produces continuous vectors that the LLM learns to interpret. Information absent from the vision features cannot be restored by the projector.
+The decoder uses the same causal attention and cache as it does for
+text, now with additional positions to process during prefill.
+The projected vectors are continuous; the LLM learns to use them
+when it predicts text tokens.
 
-### A projector changes width, not sequence length
+<span id="a-projector-changes-width-not-sequence-length"></span>
 
-For a LLaVA-1.5-style example, CLIP ViT-L/14 at $336\times336$ supplies 576 patch vectors of width 1024. Its two-layer MLP maps $[576,1024]$ to $[576,4096]$ for a language backbone of width 4096. The number of positions is unchanged. With 40 instruction tokens, the prefix contains 616 positions before generating the answer; a 60-token answer takes the conceptual sequence length to 676, ignoring template markers.
+### From a linear projection to an MLP
 
-These numbers explain the bottleneck. A small connector may be cheap to train while its output creates substantial KV state in every LLM layer. Replacing a linear map with an MLP does not by itself lower that cache cost.
+For a LLaVA-1.5-style example, CLIP ViT-L/14 at $336\times336$
+supplies 576 patch vectors of width 1024. A two-layer MLP maps
+$[576,1024]$ to $[576,4096]$ for a language backbone of width 4096.
+It acts on each row independently, so it does not combine
+neighboring patches of the table.
 
 The original LLaVA uses a linear projector. LLaVA-1.5's `mlp2x_gelu`, in the [pinned implementation](https://github.com/haotian-liu/LLaVA/tree/c121f0432da27facab705978f83c4ada465e46fd), computes
 
@@ -69,6 +105,9 @@ For widths 1024 and 4096, the linear layer has 4,198,400 parameters including it
 ### Where the image placeholder goes
 
 The input processor replaces the image placeholder with a sequence of visual embeddings. It does not turn the entire image into one vector. Text positions after the placeholder shift accordingly. In this miniature example, two prefix positions, three visual positions, two question positions, and two answer positions form a nine-position sequence:
+
+<details id="connectors-code-projection">
+<summary>Projection, positions, and targets</summary>
 
 ```python
 import numpy as np
@@ -93,9 +132,26 @@ assert causal[6, 2:5].all()
 assert not causal[2, 3]
 ```
 
-The output at position 6 predicts the first answer token at position 7; position 7 predicts the next. `-100` excludes a position as a supervised target, not as an attention source. Answer loss can still send gradients through attention into the projected image features. Text before the image cannot attend to later image positions in the causal decoder. The visual features themselves were already contextualized by the vision encoder's non-causal attention.
+</details>
 
-The 616-position prefill in the earlier example produces the distribution for the first answer token. Selecting that token does not yet put its K/V into the cache. The next forward pass processes it, grows the cache to 617 positions, and predicts the second token. The 676-position sequence describes teacher forcing with all 60 answer tokens, not work that must finish before the first generated token can appear.
+With zero-based indices, positions 2–4 hold the visual features and
+positions 5–6 hold the question. Position 6 can attend to all three
+visual positions; its logits predict the first answer token at position 7.
+The logits at 7 predict the token at 8. `-100` removes the target at a
+visual position without masking its key and value, so the answer loss
+can send gradients back to the projector.
+
+Bidirectional ViT attention has already let patches exchange
+information. The language decoder uses a different mask: position
+2 cannot read position 3, and text before the image cannot read it.
+The question comes after the image and can attend to all of it.
+
+With 576 visual positions and 40 text positions including template
+tokens, the 616-position prefill produces the distribution for the
+first answer token. The cache still has 616 positions when that token
+is selected. The next forward pass processes it, grows the cache to
+617 positions and predicts the second token. A sequence of 676
+positions with all 60 answer tokens describes teacher forcing.
 
 For a hypothetical decoder with 32 layers, 32 KV heads, head dimension 128, and two-byte cache elements, each cached position uses $2\times32\times32\times128\times2=524{,}288$ bytes, or 0.5 MiB. Thus 576, 64, and 32 additional positions use 288, 32, and 16 MiB respectively. These are comparisons under one specified MHA configuration, not measured cache sizes for BLIP-2 or Flamingo. GQA, cache precision, and separate cross-attention memory change the calculation.
 
@@ -105,42 +161,58 @@ For a hypothetical decoder with 32 layers, 32 KV heads, head dimension 128, and 
 
 [LLaVA-OneVision](https://arxiv.org/abs/2408.03326) retains the vision-encoder → projector → LLM structure but changes the surrounding system: SigLIP supplies visual features, a two-layer MLP connects them to Qwen2, and the data and visual budgets cover images, multiple images, and video.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision.png|Images and video frames pass through SigLIP and a shared two-layer projector. Qwen2 receives the resulting visual features alongside text.]]
 
-*Stanford CS336, Lecture 17, architecture illustration based on Li et al., [LLaVA-OneVision, Figure 1](https://arxiv.org/abs/2408.03326). Separate feature extraction, dimensional projection, and language processing when tracing the arrows.*
+*Bo Li et al., [LLaVA-OneVision, Figure 1](https://arxiv.org/abs/2408.03326v1), as used in Stanford CS336. SigLIP encodes the images or frames, the two-layer MLP changes the feature width, and Qwen2 processes the visual and text sequence.*
 
 An improvement over early LLaVA cannot be assigned to the connector alone: resolution, vision features, language backbone, and training data also change. Nor are two projectors interchangeable merely because their matrix shapes agree. A trained connector targets the geometry of particular vision and language checkpoints.
 
-## BLIP-2: Q-Former as a learned bottleneck
+<span id="blip-2-q-former-as-a-learned-bottleneck"></span>
 
-BLIP-2 keeps both a strong image encoder and a strong LLM frozen. A Querying Transformer places a fixed number of learned query embeddings between them. Queries cross-attend to image features and produce a compact visual representation.
+## How Q-Former reads visual features
+
+BLIP-2 freezes the image encoder and the LLM. Its Querying
+Transformer, or Q-Former, uses a fixed number of learned queries to
+read the image features.
 
 The 32 query embeddings are learned parameters, not a user's question and not 32 selected image patches. Every image starts with the same query parameters; cross-attention makes their outputs image-dependent. Q-Former uses width 768, a shared self-attention module for queries and text, BERT-base initialization, and newly initialized cross-attention inserted every other block.
 
-![[00 Учебник/Assets/Figures/curated/connectors-review-2026-10/blip2-qformer.png]]
+On the 576-position scan grid, one cross-attention head would
+compute a score matrix of shape $[32,576]$. Each query can
+include the cell's feature in its weighted sum. After all of
+its layers, Q-Former returns 32 query states, not a selection
+of 32 patches. The shape does not tell us whether the digit
+remains distinguishable in those states.
+
+![[00 Учебник/Assets/Figures/curated/connectors-review-2026-10/blip2-qformer.png|Learned queries read the frozen image encoder's features. Query and text states share attention layers with a mask for each objective.]]
 
 *Li et al., [BLIP-2, Figure 2, left panel](https://proceedings.mlr.press/v202/li23q.html), CC BY 4.0. Learned queries read the frozen image encoder's features; the large LLM is not involved in this first training stage.*
 
 <a id="vlm-qformer-masks"></a>
 
-### Three objectives, three attention masks
+<span id="three-objectives-three-attention-masks"></span>
 
-![[00 Учебник/Assets/Figures/curated/connectors-review-2026-10/blip2-attention-masks.png]]
+### Masks for comparison, matching, and generation
+
+![[00 Учебник/Assets/Figures/curated/connectors-review-2026-10/blip2-attention-masks.png|Three Q-Former masks: separate query and text attention, bidirectional attention for matching, and causal text attention with access to all queries.]]
 
 *BLIP-2, Figure 2, right panel, CC BY 4.0. Rows are querying positions and columns are keys. White cells permit attention; gray cells prohibit it.*
 
-| Attention direction | Contrastive (ITC) | Matching (ITM) | Grounded generation (ITG) |
+| Link | ITC | ITM | ITG |
 |---|---|---|---|
-| Query → query | allowed | allowed | allowed |
-| Query → text | blocked | allowed | blocked |
-| Text → query | blocked | allowed | allowed |
-| Text → text | bidirectional | bidirectional | causal |
+| Query → query | All | All | All |
+| Query → text | None | All | None |
+| Text → query | None | All | All |
+| Text → text | All | All | Causal |
 
 **ITC** encodes queries and text independently. If queries could read the paired caption before contrastive comparison, they could copy the information they were meant to retrieve from the image. The image–text similarity is the maximum similarity between the text's CLS representation and any of the 32 query outputs. It is not similarity with their mean: for queries $(1,0),(0,1)$ and text $(1,0)$, the maximum dot product is 1, whereas the mean query gives 0.5.
 
 **ITM** asks whether image and text match after allowing both directions of interaction. A classifier produces two-class logits for each query; the logits are averaged before softmax. Averaging already normalized probabilities is a different operation. For query logits $(-1,2)$ and $(0,1)$, the mean logits are $(-0.5,1.5)$ and the positive probability is approximately 0.880797; averaging the two positive probabilities instead gives about 0.842.
 
 **ITG** predicts a caption. Queries can see each other and image features but not the caption. Text can attend to all queries and preceding text. This lets caption prediction use the image without letting query outputs leak future answer tokens.
+
+<details id="connectors-code-qformer">
+<summary>The three Q-Former masks</summary>
 
 ```python
 import numpy as np
@@ -182,6 +254,8 @@ assert np.allclose(mean_logits, [-.5, 1.5])
 assert np.isclose(matching_prob[1], .8807970779)
 ```
 
+</details>
+
 Real batches also need padding masks. The three objectives share parameters but cannot exchange masks without changing what information is available to the prediction.
 
 <a id="vlm-qformer-positives"></a>
@@ -200,8 +274,10 @@ LAVIS assigns 90% of the target weight to that distribution and
 spreads the remaining 10% evenly across the three candidates:
 
 $$
-q=0.9(1/2,1/2,0)+0.1(1/3,1/3,1/3)
-  =(29/60,29/60,1/30).
+\begin{aligned}
+q &= 0.9(1/2,1/2,0)+0.1(1/3,1/3,1/3) \\
+  &= (29/60,29/60,1/30).
+\end{aligned}
 $$
 
 The row loss is $-\sum_j q_j\log p_j$. Its gradient on the second
@@ -216,11 +292,13 @@ The matching ID also excludes both captions from ITM hard-negative
 sampling. The third caption gets a small contrastive target weight
 through smoothing but remains negative for ITM.
 
-Thirty-two queries make LLM-side cost predictable regardless of the original patch count. They are also an information bottleneck: the same limited representation must support global captioning and questions about tiny details.
+### Where the 32 vectors enter OPT and Flan-T5
 
-In the second BLIP-2 stage, Q-Former outputs are projected to the frozen LLM's input width and trained for image-conditioned generation. Decoder-only and encoder–decoder backbones use different input arrangements. Frozen parameters still participate in differentiation: the loss must backpropagate through the LLM to train the connector, even though no optimizer updates are applied to LLM weights.
+In the second BLIP-2 stage, the training loss comes from the frozen
+LLM's predictions. The projection and Q-Former learn from that
+loss. The image encoder and language model stay frozen.
 
-![[00 Учебник/Assets/Figures/curated/connectors-review-2026-10/blip2-llm-connection.png]]
+![[00 Учебник/Assets/Figures/curated/connectors-review-2026-10/blip2-llm-connection.png|Top: projected queries precede text in OPT. Bottom: projected queries and a text prefix enter Flan-T5's encoder, and the decoder generates the suffix.]]
 
 *BLIP-2, [Figure 3](https://proceedings.mlr.press/v202/li23q.html), CC BY 4.0. OPT receives projected queries as a decoder prefix; Flan-T5 receives them on the encoder side.*
 
@@ -231,13 +309,92 @@ For an LLM of width 4096, projection maps $[32,768]$ to $[32,4096]$. With OPT, t
 Flamingo targets interleaved image, video, and text sequences. A Perceiver Resampler maps a variable spatiotemporal grid to a fixed set of latents. Newly inserted gated cross-attention layers let text states query that memory between frozen LM blocks.
 
 In [Flamingo, Figure 3, p. 4](https://arxiv.org/pdf/2204.14198v2#page=4),
-follow the image through the vision encoder and Perceiver Resampler,
-and the text through the original language-model layers. The two paths
+the image goes through the vision encoder and Perceiver Resampler.
+The text goes through the original language-model layers. The two paths
 meet in the new `GATED XATTN-DENSE` blocks. Snowflakes mark the frozen
 vision encoder and language layers; the resampler and the new blocks
 train from scratch.
 
-A frozen NFNet-F6 supplies spatial features, with temporal information added for video. The Perceiver Resampler produces 64 latents per image or video. Image markers remain in the text stream, but the latents are held in separate memory. With 100 text positions and 64 latents, a text-to-image cross-attention head has a $100\times64$ score matrix, not a $164\times164$ self-attention matrix.
+A frozen NFNet-F6 supplies spatial features, with temporal
+information added for video. The Perceiver Resampler produces
+64 latents for the scan. The text prefix can still have 40
+positions, counting the image marker and other control tokens.
+The latents are held separately. With 100 text positions and 64
+latents, one text-to-image attention head scores $100\times64$
+pairs. The separate text self-attention still runs on 100 positions.
+
+<span id="resampling-early-fusion-and-deep-fusion"></span>
+
+### How the Perceiver Resampler reduces the grid
+
+The resampler forms 64 output vectors even when the input grid
+is longer. Each learned latent reads the grid through attention.
+
+<span id="trace-a-learned-resampler"></span>
+
+#### Keys and values from the grid and the latents
+
+Suppose the encoder returns $Z_v\in\mathbb R^{576\times1024}$ and the interface has a budget of 64 latents. A simplified learned-query attention block computes
+
+$$
+\begin{gathered}
+A=\operatorname{softmax}\left(\frac{QK(Z_v)^\top}{\sqrt{d_k}}\right),
+\\
+H=AV(Z_v).
+\end{gathered}
+$$
+
+$A$ has shape $[64,576]$. Each row of $H$ is a weighted sum of
+patch features; it need not correspond to one patch. Flamingo
+keeps the resulting states in separate memory. The language
+blocks project keys and values from that memory when they read it.
+
+This simplified formula is not the full Flamingo resampler. [Appendix A.1.1 and Figure 5](https://arxiv.org/abs/2204.14198v2) also include the current latents in keys and values:
+
+$$
+\begin{gathered}
+K_{\rm all}=[K(Z_v);K(R)],\\
+V_{\rm all}=[V(Z_v);V(R)].
+\end{gathered}
+$$
+
+The attention matrix is then $[M,N_v+M]$, but the output still has $M$ positions. Residual connections and a feed-forward block update the latents; the next block reads the visual grid again. This small example uses identity projections and omits normalization and the MLP:
+
+<details id="connectors-code-resampler">
+<summary>Resampler keys and values</summary>
+
+```python
+import numpy as np
+
+def attention(q, k, v):
+    scores = q @ k.T / np.sqrt(q.shape[-1])
+    weights = np.exp(scores - scores.max(axis=1, keepdims=True))
+    weights /= weights.sum(axis=1, keepdims=True)
+    return weights @ v, weights
+
+visual = np.array([[1., 0.], [0., 1.], [1., 1.], [-1., 0.]])
+latents = np.array([[1., 0.], [0., 1.]])
+plain, a_plain = attention(latents, visual, visual)
+memory = np.concatenate([visual, latents])
+update, a_full = attention(latents, memory, memory)
+result = latents + update
+assert a_plain.shape == (2, 4)
+assert a_full.shape == (2, 6)
+assert result.shape == (2, 2)
+assert np.allclose(a_full.sum(axis=1), 1)
+assert not np.allclose(plain, update)
+assert np.all(a_full[:, 4:] > 0)
+```
+
+</details>
+
+For the first query, unscaled similarities to the four visual vectors are $(1,0,1,-1)$; the two added latents contribute $(1,0)$. All six participate in one softmax. Their weights are approximately $(0.2364,0.1166,0.2364,0.0575,0.2364,0.1166)$, giving $(1.6519,0.4696)$ after the residual addition. This is a calculation for specified vectors, not an output measured on a photograph. After nonlinear blocks, a latent cannot be interpreted as a linear average of pixels. Q-Former shares the use of learned queries but adds a text branch and three pre-LLM training objectives; Flamingo trains its resampler and added cross-attention as part of a generative system.
+
+A single-object photo and a page with a hundred lines can receive
+the same 64 output positions. Whether the table digits survive has
+to be tested separately from whether the model can describe a photo.
+
+### How visual memory changes text states
 
 The inserted GATED XATTN-DENSE block has two gated branches:
 
@@ -274,6 +431,9 @@ nonzero output.
 
 Original Flamingo directly exposes only the most recent preceding image or video, not every preceding image. In “image A — description A — image B — question about B,” the question's cross-attention reads B. Information about A can still reach it through causal text states, because the earlier description already attended to A.
 
+<details id="connectors-code-mask">
+<summary>The image mask and gate gradient</summary>
+
 ```python
 import numpy as np
 
@@ -298,6 +458,8 @@ grad_alpha = (value - target) * theta * (1 - np.tanh(alpha)**2)
 assert grad_theta == 0
 assert grad_alpha == -2
 ```
+
+</details>
 
 Here −1 means that no image precedes the text position. Equal allowed logits are used only to illustrate the mask. Real logits depend on text and image content. An all-masked row needs explicit handling: softmax over only $-\infty$ is not a valid distribution.
 
@@ -335,80 +497,27 @@ each of the eight cross-attention layers of the third. This does not
 predict a latency ratio: the latter adds projections and layers, and
 compression happens before decoding and can discard visual detail.
 
-## Resampling, early fusion, and deep fusion
-
-Q-Former and Perceiver Resampler both use latent queries to read a longer grid, but their training and placement differ. Q-Former is explicitly trained with text-aware objectives before connecting to an LLM. Flamingo’s resampler normalizes image/video features, which are then queried repeatedly by layer-wise cross-attention.
-
-LLaVA is an early-fusion design: vision and text meet before the first LLM layer. Flamingo uses layer-wise fusion. Qwen3-VL adds a DeepStack variation, injecting features from several vision-encoder depths into corresponding early LLM layers. Repeated injection shortens the path from vision to deep language states but complicates implementation.
-
-### Trace a learned resampler
-
-Suppose the encoder returns $Z_v\in\mathbb R^{576\times1024}$ and the interface has a budget of 64 latents. A simplified learned-query attention block computes
-
-$$
-\begin{gathered}
-A=\operatorname{softmax}\left(\frac{QK(Z_v)^\top}{\sqrt{d_k}}\right),
-\\
-H=AV(Z_v).
-\end{gathered}
-$$
-
-$A$ has shape $[64,576]$: every output latent mixes information from the input patches. After further blocks and projection, the LLM may receive $[64,4096]$. These are not 64 selected squares. Attention weights depend on image content and may spread across many patches; a resampler attention map is not automatically a segmentation mask.
-
-This simplified formula is not the full Flamingo resampler. [Appendix A.1.1 and Figure 5](https://arxiv.org/abs/2204.14198v2) also include the current latents in keys and values:
-
-$$
-\begin{gathered}
-K_{\rm all}=[K(Z_v);K(R)],\\
-V_{\rm all}=[V(Z_v);V(R)].
-\end{gathered}
-$$
-
-The attention matrix is then $[M,N_v+M]$, but the output still has $M$ positions. Residual connections and a feed-forward block update the latents; the next block reads the visual grid again. This small example uses identity projections and omits normalization and the MLP:
-
-```python
-import numpy as np
-
-def attention(q, k, v):
-    scores = q @ k.T / np.sqrt(q.shape[-1])
-    weights = np.exp(scores - scores.max(axis=1, keepdims=True))
-    weights /= weights.sum(axis=1, keepdims=True)
-    return weights @ v, weights
-
-visual = np.array([[1., 0.], [0., 1.], [1., 1.], [-1., 0.]])
-latents = np.array([[1., 0.], [0., 1.]])
-plain, a_plain = attention(latents, visual, visual)
-memory = np.concatenate([visual, latents])
-update, a_full = attention(latents, memory, memory)
-result = latents + update
-assert a_plain.shape == (2, 4)
-assert a_full.shape == (2, 6)
-assert result.shape == (2, 2)
-assert np.allclose(a_full.sum(axis=1), 1)
-assert not np.allclose(plain, update)
-assert np.all(a_full[:, 4:] > 0)
-```
-
-For the first query, unscaled similarities to the four visual vectors are $(1,0,1,-1)$; the two added latents contribute $(1,0)$. All six participate in one softmax. Their weights are approximately $(0.2364,0.1166,0.2364,0.0575,0.2364,0.1166)$, giving $(1.6519,0.4696)$ after the residual addition. This is a calculation for specified vectors, not an output measured on a photograph. After nonlinear blocks, a latent cannot be interpreted as a linear average of pixels. Q-Former shares the use of learned queries but adds a text branch and three pre-LLM training objectives; Flamingo trains its resampler and added cross-attention as part of a generative system.
-
-| Interface | Example shapes | Changes | Does not guarantee |
-|---|---|---|---|
-| MLP projector | $[576,1024]\to[576,4096]$ | feature width and geometry | token compression or recovered detail |
-| Learned resampler | $[576,1024]\to[64,4096]$ | sequence length and aggregated content | preservation of every small character |
-
-A fixed budget is convenient for video but treats a simple object photograph and a dense newspaper page alike. The latter may need dynamic resolution or a larger latent budget.
+<a id="vlm-deepstack"></a>
 
 <span id="6-early-fusion-и-deep-fusion"></span>
 
-<a id="vlm-deepstack"></a>
+<span id="deepstack-adds-features-inside-the-decoder"></span>
 
-### DeepStack adds features inside the decoder
+## DeepStack adds features inside the Qwen3-VL decoder
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen3-vl.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen3-vl.png|The main merger supplies the visual input, while three dedicated mergers send intermediate vision features into the first three language blocks.]]
 
 *Stanford CS336, Lecture 17, illustration based on the [Qwen3-VL Technical Report](https://arxiv.org/abs/2511.21631). The main merger supplies a visual prefix; DeepStack additionally injects intermediate vision features into early LLM layers.*
 
-Qwen3-VL's main merger groups neighboring $2\times2$ patches before its MLP, reducing the number of positions fourfold. This grouping, not the MLP alone, causes compression. Separate mergers process features from three intermediate vision layers. In the [Transformers v4.57.1 implementation](https://github.com/huggingface/transformers/blob/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/models/qwen3_vl/modeling_qwen3_vl.py#L862), those features are added after each of the first three decoder blocks, at visual positions only. They neither add three new copies of the prefix nor modify every text position:
+Qwen3-VL's main merger groups neighboring $2\times2$ patches before
+its MLP. Our $24\times24$ grid would give $12\times12=144$ input
+positions. Three separate mergers make three feature sets aligned
+with the same 144 positions. In the [Transformers v4.57.1 implementation](https://github.com/huggingface/transformers/blob/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/models/qwen3_vl/modeling_qwen3_vl.py#L862),
+one set is added after each of the first three decoder blocks, at
+visual positions only. The prefix stays the same length.
+
+<details id="connectors-code-deepstack">
+<summary>Adding DeepStack features</summary>
 
 ```python
 import numpy as np
@@ -429,17 +538,22 @@ assert np.array_equal(hidden[~visual_mask], before[~visual_mask])
 assert np.array_equal(hidden[visual_mask] - before[visual_mask], np.ones((2, 3)))
 ```
 
+</details>
+
 This tests only the masked additions. The real decoder places different blocks between them; adding all three feature sets once at the input would compute something else. Repeated injection requires intermediate features and alignment even though sequence length is unchanged.
 
 “Early fusion” describes where modalities meet, not whether they share a discrete vocabulary. LLaVA supplies continuous vectors that its output head cannot emit as image IDs. Chameleon instead uses discrete image codes in the autoregressive stream. Both can fuse early, but their generation contracts differ.
 
-## Which parameters should move?
+<span id="which-parameters-should-move"></span>
+
+## Gradients through a frozen LLM
 
 Original LLaVA first trains only the projector with CLIP and Vicuna frozen, then trains the projector and LLM while keeping the vision encoder frozen. BLIP-2 keeps both large backbones frozen during its second stage. Flamingo trains the resampler and inserted GATED XATTN-DENSE blocks. These are distinct training choices, not a universal prescription for all VLMs.
 
-A reproducible experiment must state trainable and frozen components at every stage. “Trained on image-text data” is not enough to determine where gradients flowed.
-
-Freezing the LLM removes weight gradients and optimizer state for its parameters, but not necessarily its activation-memory cost: connector training needs derivatives through the downstream computation. Conversely, replacing the vision encoder changes the feature distribution even when output width is identical. Component swaps need retraining and task evaluation, not just a successful shape assertion.
+Freezing the LLM removes weight gradients. If the frozen parameters
+are left out of the optimizer, they need no optimizer state either.
+Training the connector still needs derivatives through the LLM's
+downstream computation.
 
 If $h=P_\theta(z)$ and $y=F(h)$, training the projector requires
 
@@ -451,6 +565,9 @@ $$
 $$
 
 The parameters of $F$ need not change, but its derivative with respect to $h$ is still needed. In PyTorch, freezing parameters is therefore different from wrapping the forward pass in `no_grad()`:
+
+<details id="connectors-code-gradient">
+<summary>Gradients through a frozen layer</summary>
 
 ```python
 import torch
@@ -473,22 +590,42 @@ with torch.no_grad():
 assert not detached.requires_grad
 ```
 
+</details>
+
 Putting the frozen module's entire forward inside `no_grad()` would sever the projector's gradient path. Input derivatives and activation storage can remain necessary even when weight gradients and optimizer state are absent.
 
-[VILA, §3.1 and Table 1](https://arxiv.org/abs/2312.07533v2) compares freezing and training the LLM during multimodal pretraining. Under that experiment's conditions, zero-shot scores could remain similar while four-example in-context performance was worse with the frozen LLM. This is an ablation result, not proof that every frozen backbone is unsuitable. Sections 3.2–3.3 separately examine interleaved data and text-only instructions. Visual benchmarks alone do not show whether text-only abilities survived unfreezing; [[en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data|the training chapter]] develops these data choices.
+[VILA, §3.1 and Table 1](https://arxiv.org/abs/2312.07533v2) compares
+freezing and updating the LLM during multimodal pretraining in rows (b)
+and (c). Both update the LLM during SFT. The zero-shot average across
+four tasks is 66.8 for both rows. With four examples in context, the
+average is 57.6 when the LLM was frozen during pretraining and 68.8 when
+it was updated. These are averages of different metrics (answer
+accuracy and caption CIDEr) under that ablation's conditions.
+Sections 3.2–3.3 separately examine interleaved data and text-only
+instructions. [[en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data|The training chapter]]
+follows those data choices.
 
-## Choosing a connector
+<span id="choosing-a-connector"></span>
 
-A projector is the simplest default for a moderate number of image tokens. A learned bottleneck is attractive when backbone training is expensive or LLM context is scarce. Separate cross-attention memory fits long interleaved inputs and repeated access to visual evidence. Documents may remain limited by resolution before the connector is reached.
+## Diagnosing an error on the scan
 
-Connector comparisons should hold the vision encoder, LLM, data, resolution, and visual-token budget fixed. Otherwise a data or resolution improvement is easily misattributed to fusion architecture.
+If the model reports the wrong deadline, look at the input to ViT
+first: is the cell still present, and can we distinguish the digits
+after resizing? Take two scans that differ only in the digit and
+trace the difference from the input to the answer. If their visual
+vectors are identical and the text and other inputs are fixed,
+the decoder gives both scans the same next-token distribution.
 
-| Design | LLM-side visual length | Fusion point | Serving consequence |
-|---|---|---|---|
-| LLaVA projector | usually one position per retained patch | before the decoder | standard causal self-attention with a longer prefix |
-| BLIP-2 Q-Former | fixed learned-query count | OPT input or Flan-T5 encoder memory | compact interface, potentially lossy bottleneck |
-| Flamingo resampler and cross-attention | fixed latents per image | inside selected layers | separate visual memory and modified blocks |
-| Qwen3-VL merger and DeepStack | merged grid plus aligned intermediate features | input and first three decoder blocks | masked feature additions without extra prefix copies |
+To measure the effect of the connector, keep the vision encoder,
+LLM, data, and resolution the same. Then compare digit recognition,
+latency, and memory, reporting the visual-token budget for each result.
+
+| Model | Path from a 576-position grid |
+| --- | --- |
+| LLaVA | 576 positions at the decoder input; the decoder blocks stay unchanged. |
+| BLIP-2 | 32 Q-Former outputs at the OPT input or the Flan-T5 encoder input. |
+| Flamingo | 64 vectors in separate memory read by the added attention layers. |
+| Qwen3-VL | 144 input positions, with aligned features added in the first three blocks. |
 
 Twenty frames at 576 vectors each create 11,520 visual positions before text if no compression is used. Under that workload, a resampler is a substantial cost-control decision, not merely an architectural embellishment. Compare OCR, grounding, spatial relations, TTFT, and KV memory alongside aggregate VQA.
 

@@ -7100,11 +7100,17 @@ describe('static handbook output', () => {
       expect(html).toContain('/connectors-2026-11-09/llava-figure1-projector.png"');
       expect(html).not.toContain('/vlm-2026/llava-figure1-projector.png"');
       expect(html).toContain('href="/' + prefix + 'textbook/multimodal/models/#vlm-multi-positive"');
+      expect(html).toContain('href="/' + prefix + 'textbook/multimodal/models/#vlm-crop-evidence"');
+      expect(html).toContain('href="/' + prefix + 'textbook/multimodal/visual-tokenization-resolution/"');
+      for (const name of ['projection', 'qformer', 'resampler', 'mask', 'deepstack', 'gradient'])
+        expect(html).toContain('id="connectors-code-' + name + '"');
+      expect(html.indexOf('id="vlm-visual-kv"')).toBeGreaterThan(html.indexOf(prefix
+        ? 'id="trace-a-learned-resampler"' : 'id="что-именно-вычисляет-resampler"'));
       for (const anchor of ['vlm-projector-prefix', 'vlm-qformer-masks', 'vlm-qformer-positives', 'vlm-visual-kv', 'vlm-deepstack']) {
         expect(html).toContain('id="' + anchor + '"');
         expect(reference).toContain('href="/' + prefix + route + '#' + anchor + '"');
       }
-      for (const result of ['0.3833', '0.0667', '308 MiB', '36 MiB', '20 MiB', '8 MiB'])
+      for (const result of ['0.3833', '0.0667', '308 MiB', '36 MiB', '20 MiB', '8 MiB', '144', '57.6', '68.8'])
         expect(html).toContain(result);
       expect(html).not.toContain('katex-error');
       expect(html).not.toContain('This content is not available in your language yet.');
@@ -7118,6 +7124,15 @@ describe('static handbook output', () => {
       const reference = await readFile(join(distDir, prefix + 'reference/index.html'), 'utf8');
       expect(html).toContain('/resolution-2026-11-09/llava-onevision-anyres.png"');
       expect(html).not.toContain('/stanford-cs336-2026/multimodal/llava-onevision-anyres.png"');
+      expect(html).toContain('href="/' + prefix + 'textbook/multimodal/connectors-fusion/"');
+      expect(html).toContain('href="/' + prefix + 'textbook/multimodal/training-data/"');
+      expect(html).toContain('href="https://arxiv.org/pdf/2409.12191v1#page=4"');
+      for (const name of ['molmo', 'anyres', 'internvl', 'unshuffle', 'resize',
+        'pixtral', 'positions', 'rotary', 'inverse'])
+        expect(html).toContain('id="resolution-code-' + name + '"');
+      expect(html.indexOf('id="vlm-anyres"')).toBeLessThan(html.indexOf('id="vlm-internvl-resolution-router"'));
+      for (const result of ['1475', '1525', '1262'])
+        expect(html).toContain(result);
       for (const anchor of ['vlm-pixel-budget', 'vlm-molmo-overlap', 'vlm-anyres', 'vlm-pixtral-packing', 'vlm-mrope-frequencies', 'vlm-tile-boxes']) {
         expect(html).toContain('id="' + anchor + '"');
         expect(reference).toContain('href="/' + prefix + route + '#' + anchor + '"');
