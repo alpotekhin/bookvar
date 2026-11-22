@@ -67,6 +67,82 @@ afterAll(async () => {
 });
 
 describe('static handbook output', () => {
+  it('renders the complete document-classification example in both editions', async () => {
+    const route = 'textbook/models/document-classification';
+    for (const locale of ['', 'en/']) {
+      const html = await readFile(join(distDir, locale, route, 'index.html'), 'utf8');
+      expect(html).not.toContain('aria-label="English edition status"');
+      expect(html).not.toContain('katex-error');
+      expect(html).toContain('class="katex-display"');
+      expect(html).toContain('href="/' + locale + 'textbook/models/named-entity-recognition/" rel="prev"');
+      expect(html).toContain('href="/' + locale + 'textbook/models/t5/" rel="next"');
+      const contents = await readFile(join(distDir, locale, 'textbook/index.html'), 'utf8');
+      expect(contents).toContain('href="/' + locale + route + '/"');
+      const index = await readFile(join(distDir, locale, 'reference/index.html'), 'utf8');
+      const order = ['doccls-tfidf', 'doccls-linear', 'doccls-fasttext', 'doccls-bert', 'doccls-evaluation'];
+      let prev = -1;
+      for (const id of order) {
+        const at = html.indexOf('id="' + id + '"');
+        expect(at).toBeGreaterThan(prev);
+        expect(index).toContain('href="/' + locale + route + '/#' + id + '"');
+        prev = at;
+      }
+      expect(html).toMatch(/<img[^>]+joulin-fasttext-figure1\.png"[^>]+alt="[^"]+"/);
+      expect(html).toMatch(/<img[^>]+d2l-bert-one-seq\.svg"[^>]+alt="[^"]+"/);
+      expect(html).toContain('great screen awful battery');
+      expect(html).toContain(locale ? '0.688' : '0,688');
+      expect(html).toContain('caltech');
+    }
+  });
+  it('renders the NER chapter between BERT and T5 in both languages', async () => {
+    const route = 'textbook/models/named-entity-recognition';
+    for (const locale of ['', 'en/']) {
+      const html = await readFile(join(distDir, locale, route, 'index.html'), 'utf8');
+      expect(html).not.toContain('aria-label="English edition status"');
+      expect(html).not.toContain('katex-error');
+      expect(html).toContain('class="katex-display"');
+      expect(html).toContain('href="/' + locale + 'textbook/models/bert-roberta-deberta/" rel="prev"');
+      expect(html).toContain('href="/' + locale + 'textbook/models/document-classification/" rel="next"');
+      expect(html).toContain('href="/' + locale + 'textbook/text-representation/morphology-pos/#hmm-viterbi"');
+      const contents = await readFile(join(distDir, locale, 'textbook/index.html'), 'utf8');
+      expect(contents).toContain('href="/' + locale + route + '/"');
+      const index = await readFile(join(distDir, locale, 'reference/index.html'), 'utf8');
+      for (const anchor of ['ner-bio', 'ner-wordpiece-alignment', 'ner-constrained-decoding', 'ner-span-metrics', 'ner-nested']) {
+        expect(html).toContain('id="' + anchor + '"');
+        expect(index).toContain('href="/' + locale + route + '/#' + anchor + '"');
+      }
+      for (const file of ['kim-biobert-bio.png', 'park-flat-nested.png']) {
+        expect(html).toMatch(new RegExp('<img[^>]+src="[^"]*' + file.replace('.', '\\.') + '"[^>]+alt="[^"]+"'));
+      }
+      expect(html).toContain('creativecommons.org/licenses/by/4.0/');
+      expect(html).toContain('##gging');
+      expect(html).toContain('[17, 29)');
+    }
+  });
+  it('connects morphology to tokenization and RNNs in both editions', async () => {
+    const route = 'textbook/text-representation/morphology-pos';
+    const prev = 'textbook/text-representation/tokenization';
+    const next = 'textbook/recurrent-networks/rnn-bptt';
+    for (const locale of ['', 'en/']) {
+      const html = await readFile(join(distDir, locale, route, 'index.html'), 'utf8');
+      expect(html).not.toContain('aria-label="English edition status"');
+      expect(html).not.toContain('katex-error');
+      expect(html).toContain('class="katex-display"');
+      expect(html).toContain('href="/' + locale + prev + '/" rel="prev"');
+      expect(html).toContain('href="/' + locale + next + '/" rel="next"');
+      const contents = await readFile(join(distDir, locale, 'textbook/index.html'), 'utf8');
+      expect(contents).toContain('href="/' + locale + route + '/"');
+      const subjectIndex = await readFile(join(distDir, locale, 'reference/index.html'), 'utf8');
+      for (const id of ['morphology-tags', 'hmm-viterbi', 'linear-chain-crf', 'pos-evaluation']) {
+        expect(html).toContain('id="' + id + '"');
+        expect(subjectIndex).toContain('href="/' + locale + route + '/#' + id + '"');
+      }
+      expect(html).toMatch(/<img[^>]*kamper-hmm-transitions\.png"[^>]*alt="[^"]+"/);
+      expect(html).toMatch(/<img[^>]*kamper-viterbi-trellis\.png"[^>]*alt="[^"]+"/);
+      expect(html).toContain('creativecommons.org/licenses/by-sa/4.0/');
+      expect(html).toContain(locale ? 'Evaluating morphological annotation' : 'Как измеряют ошибки разметки');
+    }
+  });
   it('serves all 23 imbalanced-learn gallery figures locally with their original attribution', async () => {
     const source = join(rootDir, '05 Источники/imbalanced-learn/0.14.2');
     const { figures, galleries, docs_base } = JSON.parse(await readFile(join(source, 'figures.json'), 'utf8')) as {
@@ -1950,7 +2026,7 @@ describe('static handbook output', () => {
       }
       checked++;
     }
-    expect(checked).toBe(306);
+    expect(checked).toBe(312);
   });
   it('renders the complete original GAN/DCGAN reader and four-route gradient explanation in both locales',async()=>{
     const source=await readFile(join(rootDir,'00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор.md'),'utf8');
@@ -4544,7 +4620,7 @@ describe('static handbook output', () => {
     for(const prefix of ['','en/']){
       const comparisonPage=await readFile(join(distDir,prefix,llama.slice(1),'index.html'),'utf8');
       const gpt3Page=await readFile(join(distDir,prefix,paths[2].slice(1),'index.html'),'utf8');
-      const steps=['/textbook/models/bert-roberta-deberta/','/textbook/models/t5/',...paths,llama];
+      const steps=['/textbook/models/bert-roberta-deberta/','/textbook/models/named-entity-recognition/','/textbook/models/document-classification/','/textbook/models/t5/',...paths,llama];
       const localized=steps.map(path=>'/'+prefix+path.slice(1));
       const contents=await readFile(join(distDir,prefix,'textbook/index.html'),'utf8');
       const curriculum=contents.match(/<h2\b[^>]*id="(?:основной-курс|core-course)"[^>]*>[\s\S]*/)?.[0] ?? '';
@@ -5608,7 +5684,7 @@ describe('static handbook output', () => {
     expect(text).not.toContain('[14, 9, 12, 1, -100');
     expect(html).toContain('href="/sources/papers/t5/"');
     expect(html).not.toContain('katex-error');
-    expect(html).toMatch(/<strong>Назад:<\/strong>[\s\S]{0,300}href="\/textbook\/models\/bert-roberta-deberta\/"/);
+    expect(html).toMatch(/<strong>Назад:<\/strong>[\s\S]{0,300}href="\/textbook\/models\/document-classification\/"/);
     expect(html).toMatch(/<strong>Далее:<\/strong>[\s\S]{0,300}href="\/textbook\/models\/gpt-1\/"/);
   });
   it('follows original T5 span targets through the shift, batch loss and fine-tuning in both locales',async()=>{
@@ -5878,7 +5954,7 @@ describe('static handbook output', () => {
     expect(html.match(/<pre/g)).toHaveLength(12);
     expect(html).not.toContain('katex-error');
     expect(html).toMatch(/<strong>Назад:<\/strong>[\s\S]{0,300}href="\/textbook\/transformer\/encoder-decoder-patterns\/"/);
-    expect(html).toMatch(/<strong>Дальше:<\/strong>[\s\S]{0,300}href="\/textbook\/models\/t5\/"/);
+    expect(html).toMatch(/<strong>Дальше:<\/strong>[\s\S]{0,300}href="\/textbook\/models\/named-entity-recognition\/"/);
   });
   it('renders grouped masking, SOP, RTD and GDES in both BERT locales', async()=>{
     for (const prefix of ['', 'en/']) {
@@ -5909,7 +5985,7 @@ describe('static handbook output', () => {
         'id="'+deberta+'"','3.674235','2.390310','id="bert-corruption-variants"','id="bert-rtd-variants"'];
       const offsets=sequence.map(token=>html.indexOf(token));
       expect(offsets.every((at,i)=>at>=0&&(i===0||at>offsets[i-1]))).toBe(true);
-      expect(html).toContain('href="/'+prefix+'textbook/models/t5/" rel="next"');
+      expect(html).toContain('href="/'+prefix+'textbook/models/named-entity-recognition/" rel="next"');
     }
   });
   it('renders corrected RoBERTa and DeBERTa paper notes with links to the full chapter', async()=>{

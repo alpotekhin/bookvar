@@ -4,7 +4,7 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "2a658ef7dc210ea1633bbcdc481f6a673416b0648377083983e78eb7e3afa369"
+canonical_revision: "40a94f2b1f2a325e96e06868a812851a840367a636220b8c66a6e52ec560b123"
 translation_reviewed: "2026-11-21"
 translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md"
 last_updated: 2026-11-21
@@ -12,7 +12,7 @@ primary_sources:
   - https://jmlr.org/papers/v21/20-074.html
   - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4
   - https://github.com/huggingface/transformers/tree/753d61104116eefc8ffc977327b441ee0c8d599f/src/transformers/models/t5
-previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa]]"
+previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов]]"
 next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]"
 ---
 
@@ -869,5 +869,5 @@ T5 instead generates the label as text.
 - [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|T5 family]].
 - [[02 Areas/ML & DL/Papers/T5|Detailed paper and comparison-protocol note]].
 
-**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa, and DeBERTa]].
+**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Document classification]].
 **Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].

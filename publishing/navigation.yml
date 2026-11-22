@@ -73,6 +73,9 @@ sections:
         route: textbook/text-representation/word2vec-glove
       - source: 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md
         route: textbook/text-representation/tokenization
+      - source: 00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей.md
+        source_en: en/00 Textbook/02 Text representation and tokenization/03 Morphology and sequence labeling.md
+        route: textbook/text-representation/morphology-pos
       - source: 00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md
         route: textbook/recurrent-networks/rnn-bptt
       - source: 00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md
@@ -99,6 +102,12 @@ sections:
       - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md
         source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md
         route: textbook/models/bert-roberta-deberta
+      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей.md
+        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03a Named entity recognition.md
+        route: textbook/models/named-entity-recognition
+      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов.md
+        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03b Document classification.md
+        route: textbook/models/document-classification
       - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md
         source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md
         route: textbook/models/t5
@@ -412,6 +421,9 @@ sections:
                 route: textbook/text-representation/word2vec-glove
               - label: BPE, WordPiece и Unigram
                 route: textbook/text-representation/tokenization
+              - label: Морфология и разметка последовательностей
+                label_en: Morphology and sequence labeling
+                route: textbook/text-representation/morphology-pos
               - label: RNN и BPTT
                 route: textbook/recurrent-networks/rnn-bptt
               - label: LSTM и GRU
@@ -436,6 +448,12 @@ sections:
                 route: textbook/transformer/encoder-decoder-patterns
               - label: BERT, RoBERTa и DeBERTa
                 route: textbook/models/bert-roberta-deberta
+              - label: Распознавание именованных сущностей
+                label_en: Named entity recognition
+                route: textbook/models/named-entity-recognition
+              - label: Классификация документов
+                label_en: Document classification
+                route: textbook/models/document-classification
               - label: T5 — text-to-text Transformer
                 route: textbook/models/t5
           - label: V. От GPT-1 к LLaMA

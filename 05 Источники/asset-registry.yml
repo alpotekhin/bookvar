@@ -45,6 +45,136 @@ course_asset_defaults:
     metadata_status: verified
     provenance_confirmation: user-confirmed-open-materials
 assets:
+  - id: curated-joulin-fasttext-50aa9ec43769
+    asset: 00 Учебник/Assets/Figures/curated/document-classification-2026-11-22/joulin-fasttext-figure1.png
+    title: "fastText feature pooling, Figure 1"
+    author: "Armand Joulin, Edouard Grave, Piotr Bojanowski, and Tomas Mikolov"
+    source_url: https://aclanthology.org/E17-2068.pdf#page=2
+    source_image_url: https://aclanthology.org/E17-2068.pdf
+    rights_evidence: https://aclanthology.org/faq/copyright/
+    sha256: 50aa9ec43769099a402486952a09ee72257c52de22d77a7a6b84d9269739be3e
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    source_pdf_sha256: 54070bc0dc0670bcab027f6f4424201f20f4896a9a7f8f033c2a61bab9886863
+    source_page: 2
+    dimensions_px: [995, 520]
+    derivation: source-pdf-render
+    crop_px: [344, 270, 995, 520]
+    modifications: "Entire original figure at pdftoppm -scale-to 3900, cropped outside every diagram label. The surrounding page and original prose caption are excluded."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03b Document classification.md
+  - id: curated-d2l-doccls-efe3c77a65cd
+    asset: 00 Учебник/Assets/Figures/curated/document-classification-2026-11-22/d2l-bert-one-seq.svg
+    title: "BERT for single text classification, Figure 16.6.1"
+    author: "Aston Zhang, Zachary C. Lipton, Mu Li, and Alexander J. Smola"
+    source_url: https://d2l.ai/chapter_natural-language-processing-applications/finetuning-bert.html#fig-bert-one-seq
+    source_image_url: https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/bert-one-seq.svg
+    rights_evidence: https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/LICENSE
+    sha256: efe3c77a65cd1e4f03909e39b19ff8338e018c53889ebf13d78af8389745834c
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    license_evidence_sha256: a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c
+    viewBox: [0, 0, 361, 200]
+    derivation: source-svg-copy
+    modifications: "Complete original SVG, copied byte-for-byte."
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03b Document classification.md
+  - id: curated-kim-biobert-bio-e635a384818c
+    asset: 00 Учебник/Assets/Figures/curated/ner-2026-11-22/kim-biobert-bio.png
+    title: "BERT input pieces and BIO target positions, Figure 3"
+    author: "Kwangmin Kim and Doheon Lee"
+    source_url: https://link.springer.com/article/10.1186/s12859-021-04248-8/figures/3
+    source_image_url: https://media.springernature.com/full/springer-static/image/art%3A10.1186%2Fs12859-021-04248-8/MediaObjects/12859_2021_4248_Fig3_HTML.png
+    rights_evidence: https://link.springer.com/article/10.1186/s12859-021-04248-8#rightslink
+    sha256: e635a384818cc011945225792b6fef2f0a1157bba66a2b457aa76c0199e8cfd3
+    dimensions_px: [1425, 596]
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    derivation: source-raster-copy
+    modifications: "Complete publisher-provided figure copied byte-for-byte; no crop, translation or redraw."
+    metadata_status: verified
+    rights_status: source-license-verified
+    provenance_confirmation: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03a Named entity recognition.md
+  - id: curated-park-flat-nested-6b92f582ceae
+    asset: 00 Учебник/Assets/Figures/curated/ner-2026-11-22/park-flat-nested.png
+    title: "Flat and nested annotations of the same sentence, Figure 1"
+    author: "Yesol Park, Gyujin Son, and Mina Rho"
+    source_url: https://www.mdpi.com/2076-3417/14/20/9302#fig_body_display_applsci-14-09302-f001
+    source_image_url: https://mdpi-res.com/applsci/applsci-14-09302/article_deploy/html/images/applsci-14-09302-g001.png
+    rights_evidence: https://www.mdpi.com/2076-3417/14/20/9302
+    sha256: 6b92f582ceaedc88090921f50e272a55f7d75d5bb6d1bf7064ab8d05c41b6d20
+    dimensions_px: [3375, 1310]
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    derivation: source-raster-copy
+    modifications: "Complete publisher-provided figure copied byte-for-byte; no crop, translation or redraw."
+    metadata_status: verified
+    rights_status: source-license-verified
+    provenance_confirmation: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей.md
+      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03a Named entity recognition.md
+  - id: curated-kamper-hmm-transitions-99eacc3f9d67
+    asset: 00 Учебник/Assets/Figures/curated/pos-tagging-2026-11-22/kamper-hmm-transitions.png
+    title: State diagram for part-of-speech tagging
+    author: Herman Kamper
+    source_url: https://www.kamperh.com/nlp817/notes/05_hmm_notes.pdf#page=5
+    source_pdf_url: https://www.kamperh.com/nlp817/notes/05_hmm_notes.pdf
+    source_pdf_sha256: 00666aa543634289a53a6fa3204a84fef262abfff358043a693b2b2dbed54150
+    source_page: 5
+    sha256: 99eacc3f9d67d1daf6ad3655b9800c69983399db8d06f74cfc11a900f4f9c1c1
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    rights_evidence: https://www.kamperh.com/nlp817/notes/05_hmm_notes.pdf#page=1
+    modifications: "PDF rasterized with Poppler pdftoppm 26.04.0 at -scale-to 2600; exact crop of the diagram or table, no relabeling."
+    crop_px: [360, 276, 1120, 948]
+    dimensions_px: [1120, 948]
+    derivation: source-pdf-render
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей.md
+      - en/00 Textbook/02 Text representation and tokenization/03 Morphology and sequence labeling.md
+  - id: curated-kamper-viterbi-trellis-dc23d4ada364
+    asset: 00 Учебник/Assets/Figures/curated/pos-tagging-2026-11-22/kamper-viterbi-trellis.png
+    title: Calculated Viterbi variables with backtracking
+    author: Herman Kamper
+    source_url: https://www.kamperh.com/nlp817/notes/05_hmm_notes.pdf#page=14
+    source_pdf_url: https://www.kamperh.com/nlp817/notes/05_hmm_notes.pdf
+    source_pdf_sha256: 00666aa543634289a53a6fa3204a84fef262abfff358043a693b2b2dbed54150
+    source_page: 14
+    sha256: dc23d4ada364e1c3a2b58bbbac55c14fed72d2dc5b7dfeb68f6970c5fa284587
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0/
+    rights_evidence: https://www.kamperh.com/nlp817/notes/05_hmm_notes.pdf#page=1
+    modifications: "PDF rasterized with Poppler pdftoppm 26.04.0 at -scale-to 2600; exact crop of the diagram or table, no relabeling."
+    crop_px: [154, 253, 1446, 548]
+    dimensions_px: [1446, 548]
+    derivation: source-pdf-render
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in:
+      - 00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей.md
+      - en/00 Textbook/02 Text representation and tokenization/03 Morphology and sequence labeling.md
   - id: curated-distill-rlvr-wen-cc9b9f8cfe64
     asset: 00 Учебник/Assets/Figures/curated/distill-rlvr-2026-11-14/wen-figure6a.svg
     author: Xumeng Wen et al.

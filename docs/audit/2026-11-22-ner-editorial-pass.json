@@ -1,0 +1,208 @@
+{
+  "date": "2026-11-22",
+  "scope": "New RU and EN chapter between BERT and T5. Flat NER, subword classification, exact spans, and the limits of flat BIO. The related relation extraction, entity linking and coreference chapter is still open.",
+  "read_scope": "full-body",
+  "files": [
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей.md",
+      "created": true,
+      "after_sha256": "f75d714f39354c07871374e96b614e388fc801708fdc296fe9d4cbc60c139ea0",
+      "changes": []
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "ac40723c82b76b0556fceb4b3089f620d988016ab44216ffee115a04fe40f5e3",
+      "after_sha256": "788389c7fa46a2a934962b7a57398d7ba3795dda7d1722bd3dd2bc2f41f99028",
+      "changes": [
+        {
+          "old": "        route: textbook/transformer/encoder-decoder-patterns\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md\n        route: textbook/models/bert-roberta-deberta\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md\n        route: textbook/models/t5\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\n",
+          "new": "        route: textbook/transformer/encoder-decoder-patterns\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md\n        route: textbook/models/bert-roberta-deberta\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03a Named entity recognition.md\n        route: textbook/models/named-entity-recognition\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md\n        source_en: en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md\n        route: textbook/models/t5\n      - source: 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md\n"
+        },
+        {
+          "old": "              - label: Три архитектуры Transformer\n                route: textbook/transformer/encoder-decoder-patterns\n              - label: BERT, RoBERTa и DeBERTa\n                route: textbook/models/bert-roberta-deberta\n              - label: T5 — text-to-text Transformer\n                route: textbook/models/t5\n          - label: V. От GPT-1 к LLaMA\n            label_en: V. From GPT-1 to LLaMA\n",
+          "new": "              - label: Три архитектуры Transformer\n                route: textbook/transformer/encoder-decoder-patterns\n              - label: BERT, RoBERTa и DeBERTa\n                route: textbook/models/bert-roberta-deberta\n              - label: Распознавание именованных сущностей\n                label_en: Named entity recognition\n                route: textbook/models/named-entity-recognition\n              - label: T5 — text-to-text Transformer\n                route: textbook/models/t5\n          - label: V. От GPT-1 к LLaMA\n            label_en: V. From GPT-1 to LLaMA\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "dc4cef30d6d660b7961987a53c84bd9b11126fbce683768d69136be64025f1d9",
+      "after_sha256": "9b10d8d58be4039dc5659f1114da1e8071944412c677af33a95f2338e0420050",
+      "changes": [
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/04 Позиционная информация|Позиционная информация]]\n- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/03 Полный Transformer|Полный Transformer: энкодер и декодер]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектуры Transformer]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa и DeBERTa]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 — text-to-text Transformer]]\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n<a id=\"vi-анатомия-современной-llm\"></a>\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/04 Позиционная информация|Позиционная информация]]\n- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/03 Полный Transformer|Полный Transformer: энкодер и декодер]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектуры Transformer]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa и DeBERTa]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Распознавание именованных сущностей]]\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5 — text-to-text Transformer]]\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n<a id=\"vi-анатомия-современной-llm\"></a>\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "d2a6ec4f89ebb56837cb065d08183e2d87c6d26a6a1410770d7bbcdd432d5ab7",
+      "after_sha256": "15d0b53de60b0c79671155a03502bbba4d715375a63d9f5fc33722acf01ebd9e",
+      "changes": [
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/04 Позиционная информация|Positional information]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/03 Полный Transformer|The complete encoder–decoder Transformer]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three Transformer architectures]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa, and DeBERTa]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: the text-to-text Transformer]] · **EN**\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n<a id=\"vi-anatomy-of-a-modern-llm\"></a>\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/04 Позиционная информация|Positional information]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/03 Полный Transformer|The complete encoder–decoder Transformer]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three Transformer architectures]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa, and DeBERTa]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Named entity recognition]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: the text-to-text Transformer]] · **EN**\n\n<a id=\"vii-анатомия-современной-llm\"></a>\n<a id=\"vi-anatomy-of-a-modern-llm\"></a>\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "0e522358740d7eac51035a49475cc912454feef1e1eef0f9777e3a4f1b87a4fc",
+      "after_sha256": "9c25df85392210f83dbe4ca9de3d016290d7a057a88c8afcde9c1cbc514a1eac",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#causal-mask-shifted-targets|Причинная маска — видимость токенов и сдвиг целей]]\n- [[00 Учебник/05 Attention и Transformer/04 Позиционная информация|Позиционная информация в Transformer]]\n- [[00 Учебник/05 Attention и Transformer/03 Полный Transformer|Полный Transformer: энкодер и декодер]]\n  - [[00 Учебник/05 Attention и Transformer/03 Полный Transformer#transformer-dropout|Attention, residual and embedding dropout]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектуры Transformer]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна#decoder-only-next-token|Decoder-only — маска и следующий токен]]\n- [[00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer|Attention для перевода]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa и DeBERTa]]\n",
+          "new": "  - [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#causal-mask-shifted-targets|Причинная маска — видимость токенов и сдвиг целей]]\n- [[00 Учебник/05 Attention и Transformer/04 Позиционная информация|Позиционная информация в Transformer]]\n- [[00 Учебник/05 Attention и Transformer/03 Полный Transformer|Полный Transformer: энкодер и декодер]]\n  - [[00 Учебник/05 Attention и Transformer/03 Полный Transformer#transformer-dropout|Attention, residual and embedding dropout]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Распознавание именованных сущностей]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-bio|BIO (IOB2): границы и типы именованных сущностей]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-wordpiece-alignment|NER на BERT: выравнивание слов и субтокенов]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-constrained-decoding|NER: декодирование допустимой цепочки]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-span-metrics|Точность и полнота по границам сущностей]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-nested|Вложенные сущности и классификация фрагментов]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Три архитектуры Transformer]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна#decoder-only-next-token|Decoder-only — маска и следующий токен]]\n- [[00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer|Attention для перевода]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa и DeBERTa]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "badd2fbf910f3e6f6b141b9f6f97b6cbba41eb3b29feb9224a6c277663f4dbb6",
+      "after_sha256": "55c9d7de132d33a72c7532951e352c113e3abdde37b2a4efbdbac484f2b34f46",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt-llama-completion-scoring|HellaSwag — scoring continuations with GPT-3 and LLaMA]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-surface-form-competition|Surface form competition — scoring answers with PMI]]\n- [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|Masking, heads, and tensor shapes]] · **EN**\n  - [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#causal-mask-shifted-targets|Causal mask — token visibility and shifted targets]]\n- [[00 Учебник/05 Attention и Transformer/04 Позиционная информация|Positional information]] · **EN**\n- [[00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V|Self-attention: Q, K, and V]] · **EN**\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: the text-to-text Transformer]] · **EN**\n- [[00 Учебник/05 Attention и Transformer/03 Полный Transformer|The complete encoder–decoder Transformer]] · **EN**\n",
+          "new": "  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt-llama-completion-scoring|HellaSwag — scoring continuations with GPT-3 and LLaMA]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-surface-form-competition|Surface form competition — scoring answers with PMI]]\n- [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|Masking, heads, and tensor shapes]] · **EN**\n  - [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#causal-mask-shifted-targets|Causal mask — token visibility and shifted targets]]\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Named entity recognition]] · **EN**\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-bio|BIO (IOB2): named entity boundaries and types]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-wordpiece-alignment|NER with BERT: word-to-subword alignment]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-constrained-decoding|NER: constrained sequence decoding]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-span-metrics|Exact-span precision and recall]]\n  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-nested|Nested entities and span classification]]\n- [[00 Учебник/05 Attention и Transformer/04 Позиционная информация|Positional information]] · **EN**\n- [[00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V|Self-attention: Q, K, and V]] · **EN**\n- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: the text-to-text Transformer]] · **EN**\n- [[00 Учебник/05 Attention и Transformer/03 Полный Transformer|The complete encoder–decoder Transformer]] · **EN**\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "8ef20524d6d93d9711210c90fdf3f2423bba1ddeecbb1e1a2ba3b1dd4358cf6d",
+      "after_sha256": "7520077e9704ab68f6ac6062bf19ac1e6cc1bfb140f90248742d5520939f44ef",
+      "changes": [
+        {
+          "old": "    modifications: copied without visual modification from the source slide render\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\nassets:\n  - id: curated-kamper-hmm-transitions-99eacc3f9d67\n    asset: 00 Учебник/Assets/Figures/curated/pos-tagging-2026-11-22/kamper-hmm-transitions.png\n    title: State diagram for part-of-speech tagging\n    author: Herman Kamper\n",
+          "new": "    modifications: copied without visual modification from the source slide render\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\nassets:\n  - id: curated-kim-biobert-bio-e635a384818c\n    asset: 00 Учебник/Assets/Figures/curated/ner-2026-11-22/kim-biobert-bio.png\n    title: \"BERT input pieces and BIO target positions, Figure 3\"\n    author: \"Kwangmin Kim and Doheon Lee\"\n    source_url: https://link.springer.com/article/10.1186/s12859-021-04248-8/figures/3\n    source_image_url: https://media.springernature.com/full/springer-static/image/art%3A10.1186%2Fs12859-021-04248-8/MediaObjects/12859_2021_4248_Fig3_HTML.png\n    rights_evidence: https://link.springer.com/article/10.1186/s12859-021-04248-8#rightslink\n    sha256: e635a384818cc011945225792b6fef2f0a1157bba66a2b457aa76c0199e8cfd3\n    dimensions_px: [1425, 596]\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    derivation: source-raster-copy\n    modifications: \"Complete publisher-provided figure copied byte-for-byte; no crop, translation or redraw.\"\n    metadata_status: verified\n    rights_status: source-license-verified\n    provenance_confirmation: source-license-verified\n    last_verified: \"2026-11-22\"\n    used_in:\n      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей.md\n      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03a Named entity recognition.md\n  - id: curated-park-flat-nested-6b92f582ceae\n    asset: 00 Учебник/Assets/Figures/curated/ner-2026-11-22/park-flat-nested.png\n    title: \"Flat and nested annotations of the same sentence, Figure 1\"\n    author: \"Yesol Park, Gyujin Son, and Mina Rho\"\n    source_url: https://www.mdpi.com/2076-3417/14/20/9302#fig_body_display_applsci-14-09302-f001\n    source_image_url: https://mdpi-res.com/applsci/applsci-14-09302/article_deploy/html/images/applsci-14-09302-g001.png\n    rights_evidence: https://www.mdpi.com/2076-3417/14/20/9302\n    sha256: 6b92f582ceaedc88090921f50e272a55f7d75d5bb6d1bf7064ab8d05c41b6d20\n    dimensions_px: [3375, 1310]\n    license: CC BY 4.0\n    license_url: https://creativecommons.org/licenses/by/4.0/\n    derivation: source-raster-copy\n    modifications: \"Complete publisher-provided figure copied byte-for-byte; no crop, translation or redraw.\"\n    metadata_status: verified\n    rights_status: source-license-verified\n    provenance_confirmation: source-license-verified\n    last_verified: \"2026-11-22\"\n    used_in:\n      - 00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей.md\n      - en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03a Named entity recognition.md\n  - id: curated-kamper-hmm-transitions-99eacc3f9d67\n    asset: 00 Учебник/Assets/Figures/curated/pos-tagging-2026-11-22/kamper-hmm-transitions.png\n    title: State diagram for part-of-speech tagging\n    author: Herman Kamper\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+      "before_sha256": "2cefc2abd39c42f5850facd2ef4dab64a275b55be199baecc0b01952182509c1",
+      "after_sha256": "7ae01f5ceabee591297dad10b1db720f2d9e4a1d96e1b01040239da6acf8e712",
+      "changes": [
+        {
+          "old": "type: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-21\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\nreference_terms:\n  - label: Whole-word masking — выбор целых слов\n    label_en: Whole-word masking — grouped targets\n    anchor: whole-word-masking\n",
+          "new": "type: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-21\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей]]\"\nreference_terms:\n  - label: Whole-word masking — выбор целых слов\n    label_en: Whole-word masking — grouped targets\n    anchor: whole-word-masking\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/01 Справочник/Архитектурные паттерны/Encoder-only|Encoder-only в справочнике]].\n- [[02 Areas/ML & DL/04 Вопросы/100 вопросов по NLP|Вопросы по NLP]].\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]] ·\n**Дальше:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\n",
+          "new": "- [[02 Areas/ML & DL/01 Справочник/Архитектурные паттерны/Encoder-only|Encoder-only в справочнике]].\n- [[02 Areas/ML & DL/04 Вопросы/100 вопросов по NLP|Вопросы по NLP]].\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]] ·\n**Дальше:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md",
+      "before_sha256": "77f5b00124bef1e6d1165f91f9e8332a78adb985a863b01e83b4db54670d987e",
+      "after_sha256": "1db88893119cee279801633e3350fc438c8045738a55903b0fc7623d5dd315f2",
+      "changes": [
+        {
+          "old": "type: textbook-chapter\nstatus: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"2cefc2abd39c42f5850facd2ef4dab64a275b55be199baecc0b01952182509c1\"\ntranslation_reviewed: \"2026-11-21\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md\"\nlast_updated: 2026-11-21\nprimary_sources:\n",
+          "new": "type: textbook-chapter\nstatus: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"7ae01f5ceabee591297dad10b1db720f2d9e4a1d96e1b01040239da6acf8e712\"\ntranslation_reviewed: \"2026-11-21\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md\"\nlast_updated: 2026-11-21\nprimary_sources:\n"
+        },
+        {
+          "old": "  - https://arxiv.org/abs/1909.11942v6\n  - https://arxiv.org/abs/2003.10555v1\n  - https://arxiv.org/abs/2111.09543v4\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]\"\n---\n\n# BERT, RoBERTa, and DeBERTa\n",
+          "new": "  - https://arxiv.org/abs/1909.11942v6\n  - https://arxiv.org/abs/2003.10555v1\n  - https://arxiv.org/abs/2111.09543v4\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей]]\"\n---\n\n# BERT, RoBERTa, and DeBERTa\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/01 Справочник/Архитектурные паттерны/Encoder-only|Encoder-only reference]].\n- [[02 Areas/ML & DL/04 Вопросы/100 вопросов по NLP|NLP questions]].\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three Transformer architectures]] ·\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]].\n",
+          "new": "- [[02 Areas/ML & DL/01 Справочник/Архитектурные паттерны/Encoder-only|Encoder-only reference]].\n- [[02 Areas/ML & DL/04 Вопросы/100 вопросов по NLP|NLP questions]].\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three Transformer architectures]] ·\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Named entity recognition]].\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "before_sha256": "2a658ef7dc210ea1633bbcdc481f6a673416b0648377083983e78eb7e3afa369",
+      "after_sha256": "a8f9b1d059e99f1bb6437662fbd36781ef8e037e588aa21e1be2d8a61593c8a6",
+      "changes": [
+        {
+          "old": "title: T5 — text-to-text Transformer\ntype: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-21\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]\"\nprimary_sources:\n  - https://jmlr.org/papers/v21/20-074.html\n  - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4\n",
+          "new": "title: T5 — text-to-text Transformer\ntype: textbook-chapter\nstatus: canonical\nlast_updated: 2026-11-21\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]\"\nprimary_sources:\n  - https://jmlr.org/papers/v21/20-074.html\n  - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/01 Справочник/Attention/Self-Attention|Self-attention в справочнике]].\n- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|Семейство T5]].\n- [[02 Areas/ML & DL/Papers/T5|Подробная заметка о статье и протоколах сравнения]].\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa и DeBERTa]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].\n",
+          "new": "- [[02 Areas/ML & DL/01 Справочник/Attention/Self-Attention|Self-attention в справочнике]].\n- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|Семейство T5]].\n- [[02 Areas/ML & DL/Papers/T5|Подробная заметка о статье и протоколах сравнения]].\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Распознавание именованных сущностей]].\n**Далее:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "before_sha256": "ad7089a58408fb78e601609c02e36ef174c344558a5ece284cef5bd29fed3ca6",
+      "after_sha256": "71e55b27193441cb629efc8ccfeae6ccace399cd19c0c857595f8a71f696f151",
+      "changes": [
+        {
+          "old": "type: textbook-chapter\nstatus: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"2a658ef7dc210ea1633bbcdc481f6a673416b0648377083983e78eb7e3afa369\"\ntranslation_reviewed: \"2026-11-21\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md\"\nlast_updated: 2026-11-21\nprimary_sources:\n  - https://jmlr.org/papers/v21/20-074.html\n  - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4\n  - https://github.com/huggingface/transformers/tree/753d61104116eefc8ffc977327b441ee0c8d599f/src/transformers/models/t5\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]\"\n---\n\n# T5: the text-to-text Transformer\n",
+          "new": "type: textbook-chapter\nstatus: canonical\nlocale: en\ntranslation_status: current\ncanonical_revision: \"a8f9b1d059e99f1bb6437662fbd36781ef8e037e588aa21e1be2d8a61593c8a6\"\ntranslation_reviewed: \"2026-11-21\"\ntranslation_of: \"00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md\"\nlast_updated: 2026-11-21\nprimary_sources:\n  - https://jmlr.org/papers/v21/20-074.html\n  - https://github.com/google-research/text-to-text-transfer-transformer/tree/42909aa15d1fbd16c69333aa474a00ae8ed9fde4\n  - https://github.com/huggingface/transformers/tree/753d61104116eefc8ffc977327b441ee0c8d599f/src/transformers/models/t5\nprevious: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение]]\"\n---\n\n# T5: the text-to-text Transformer\n"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/01 Справочник/Attention/Self-Attention|Self-attention reference]].\n- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|T5 family]].\n- [[02 Areas/ML & DL/Papers/T5|Detailed paper and comparison-protocol note]].\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT, RoBERTa, and DeBERTa]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].\n",
+          "new": "- [[02 Areas/ML & DL/01 Справочник/Attention/Self-Attention|Self-attention reference]].\n- [[02 Areas/ML & DL/02 Атлас моделей/Семейства/T5|T5 family]].\n- [[02 Areas/ML & DL/Papers/T5|Detailed paper and comparison-protocol note]].\n\n**Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Named entity recognition]].\n**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1]].\n"
+        }
+      ]
+    }
+  ],
+  "added_sources": [
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03a Named entity recognition.md",
+      "sha256": "4831f855f63257d278e1f460cb479b8c61d3506d7c343ed0322ea26bf715b49b",
+      "canonical": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей.md",
+      "route": "textbook/models/named-entity-recognition",
+      "status": "current",
+      "en_body_read": true,
+      "outstanding_expansions": []
+    }
+  ],
+  "sources": [
+    {
+      "sections": "CoNLL-2003 §§2.2–2.4 and Hugging Face Token classification, Data and Metrics",
+      "verification": "Distinguished original IOB1 from course IOB2 examples; reproduced exact type and interval matching."
+    },
+    {
+      "sections": "Devlin et al. BERT §5.3, Appendix A.5 Figure 4d; Hugging Face Token classification, Processing the data and Data collation",
+      "verification": "First-subword loss versus continuation conversion B→I, special and padding labels. Checked shape 14×7 and 11 active positions for realistic WordPiece pieces."
+    },
+    {
+      "sections": "Park, Son and Rho (2024) §§2.1–2.3 and 4.2",
+      "verification": "Flat versus nested span representation; six contiguous interval candidates for three words. The original figure illustrates containment rather than asserting a general biological annotation schema."
+    }
+  ],
+  "tokenizer": {
+    "model": "google-bert/bert-base-cased",
+    "revision": "cd5ef92a9fb2f889e972770a36d4ed042daf221e",
+    "tokenizer_json_sha256": "5b3360be30cdf39081153cf9d30bfb0503c011462fc9f77f097127c83ef0f4d9",
+    "vocab_sha256": "eeaa9875b23b04b4c54ef759d03db9d1ba1554838f8fb26c5d96fa551df93d02",
+    "method": "Ran longest-match WordPiece using the pinned vocabulary for the exact ASCII example. BERT normalizer is cased, and no weights or inference were needed.",
+    "hugging": [
+      "Hu",
+      "##gging"
+    ],
+    "ids": [
+      20164,
+      10932
+    ]
+  },
+  "figures": [
+    {
+      "source": "https://link.springer.com/article/10.1186/s12859-021-04248-8/figures/3",
+      "sha256": "e635a384818cc011945225792b6fef2f0a1157bba66a2b457aa76c0199e8cfd3",
+      "license": "CC BY 4.0",
+      "modifications": "None"
+    },
+    {
+      "source": "https://www.mdpi.com/2076-3417/14/20/9302#fig_body_display_applsci-14-09302-f001",
+      "sha256": "6b92f582ceaedc88090921f50e272a55f7d75d5bb6d1bf7064ab8d05c41b6d20",
+      "license": "CC BY 4.0",
+      "modifications": "None"
+    }
+  ],
+  "verification": {
+    "whole_read": "Complete Russian and English chapter read against the cited source sections and examples. Neighbouring BERT and T5 chapters changed only in navigation and canonical-revision pins.",
+    "example": "Executed the shared Python block. Checked first-piece and all-piece labels, gold and predicted character intervals, valid and invalid IOB2 paths, and exact span scoring. Independent test reproduces 97/100 token accuracy with F1=0 and F1=1/3 after restoring one mention.",
+    "publication": "155 topics; 87 main-route chapters. Verified 344 directed adjacent chapter links in both editions. Root build has 2103 pages; 831 publication tests passed (13 skipped); 376 rendered-output tests passed; zero broken internal routes, fragments, and files.",
+    "visual": "Opened the final RU and EN pages in Chromium at 390 and 1440 CSS pixels. Both source figures decoded and were inspected in the layout. Tested the original-image link, author caption, 2× zoom, scrolling to the edge and reset. Tables can scroll to their final columns; the display formula fits 390 px. No viewport overflow, KaTeX error or English fallback.",
+    "open": "Relation extraction, linking and coreference are a separate curriculum gap. Some broader course topics and English fallbacks remain."
+  }
+}

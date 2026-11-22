@@ -28,8 +28,11 @@ describe('Plan-Seq-Learn original source transfer', () => {
     expect(createHash('sha256').update(prior).digest('hex')).toBe(
       '718e68fb6cf58e941e10d76e02acc0761e06a19d8c4bb8496ac6dd3353bcd628');
     for (const pattern of [/^>[^\n]*$/gm, /^~~~python\n[\s\S]*?^~~~$/gm,
-      /^\$\$\n[\s\S]*?^\$\$$/gm, /!\[\[[^\]]+\]\]/g])
+      /^\$\$\n[\s\S]*?^\$\$$/gm])
       expect(text.match(pattern)).toEqual(prior.match(pattern));
+    const figures = (markdown: string) =>
+      [...markdown.matchAll(/!\[\[([^\]|]+)/g)].map(match => match[1]);
+    expect(figures(text)).toEqual(figures(prior));
   });
   it('keeps the original chapter outside the bounded addition', () => {
     const text = read(chapter).toString();

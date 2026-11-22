@@ -1,0 +1,158 @@
+{
+  "date": "2026-11-22",
+  "scope": "New RU and EN chapter between subword tokenization and RNNs. Morphology and POS, not yet NER or syntax.",
+  "read_scope": "full-body",
+  "files": [
+    {
+      "source": "00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей.md",
+      "created": true,
+      "after_sha256": "d35b5a6fca7515682059360074b9b5f8c45f0bbcc251d52885a46c086033a979",
+      "changes": []
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "50ee355b40ae45993d817e11c01e1432225fceaad1262d7cb0fbcaced5d30c05",
+      "after_sha256": "ac40723c82b76b0556fceb4b3089f620d988016ab44216ffee115a04fe40f5e3",
+      "changes": [
+        {
+          "old": "      - source: 00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md\n        route: textbook/text-representation/word2vec-glove\n      - source: 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md\n        route: textbook/text-representation/tokenization\n      - source: 00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md\n        route: textbook/recurrent-networks/rnn-bptt\n      - source: 00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md\n        route: textbook/recurrent-networks/lstm-gru\n",
+          "new": "      - source: 00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md\n        route: textbook/text-representation/word2vec-glove\n      - source: 00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md\n        route: textbook/text-representation/tokenization\n      - source: 00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей.md\n        source_en: en/00 Textbook/02 Text representation and tokenization/03 Morphology and sequence labeling.md\n        route: textbook/text-representation/morphology-pos\n      - source: 00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md\n        route: textbook/recurrent-networks/rnn-bptt\n      - source: 00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md\n        route: textbook/recurrent-networks/lstm-gru\n"
+        },
+        {
+          "old": "              - label: Word2Vec, GloVe и распределительные представления\n                route: textbook/text-representation/word2vec-glove\n              - label: BPE, WordPiece и Unigram\n                route: textbook/text-representation/tokenization\n              - label: RNN и BPTT\n                route: textbook/recurrent-networks/rnn-bptt\n              - label: LSTM и GRU\n                route: textbook/recurrent-networks/lstm-gru\n",
+          "new": "              - label: Word2Vec, GloVe и распределительные представления\n                route: textbook/text-representation/word2vec-glove\n              - label: BPE, WordPiece и Unigram\n                route: textbook/text-representation/tokenization\n              - label: Морфология и разметка последовательностей\n                label_en: Morphology and sequence labeling\n                route: textbook/text-representation/morphology-pos\n              - label: RNN и BPTT\n                route: textbook/recurrent-networks/rnn-bptt\n              - label: LSTM и GRU\n                route: textbook/recurrent-networks/lstm-gru\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "c7b75b9110b298c4297e41a467d83390919d22318f4692e53602e4def8ef324a",
+      "after_sha256": "dc4cef30d6d660b7961987a53c84bd9b11126fbce683768d69136be64025f1d9",
+      "changes": [
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель|N-граммная языковая модель]]\n- [[02 Areas/ML & DL/00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction|Вероятность текста и next-token prediction]]\n- [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings|Word2Vec, GloVe и распределительные представления]]\n- [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram|BPE, WordPiece и Unigram]]\n- [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT|RNN и BPTT]]\n- [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU|LSTM и GRU]]\n- [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора|Seq2Seq с фиксированным контекстом]]\n- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer|Attention для перевода]]\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель|N-граммная языковая модель]]\n- [[02 Areas/ML & DL/00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction|Вероятность текста и next-token prediction]]\n- [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings|Word2Vec, GloVe и распределительные представления]]\n- [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram|BPE, WordPiece и Unigram]]\n- [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей|Морфология и разметка последовательностей]]\n- [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT|RNN и BPTT]]\n- [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU|LSTM и GRU]]\n- [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора|Seq2Seq с фиксированным контекстом]]\n- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer|Attention для перевода]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "ad6ab41a65fd0a5f9d9374810e9d94ed29fb2a4af1a385a12a15603394f6f5fd",
+      "after_sha256": "d2a6ec4f89ebb56837cb065d08183e2d87c6d26a6a1410770d7bbcdd432d5ab7",
+      "changes": [
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель|N-gram language models]]\n- [[02 Areas/ML & DL/00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction|Text probability and next-token prediction]]\n- [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings|Word2Vec, GloVe, and distributional representations]]\n- [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram|BPE, WordPiece, and Unigram]]\n- [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT|RNNs and backpropagation through time]]\n- [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU|LSTM and GRU]]\n- [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора|Seq2Seq with a fixed context]]\n- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer|Attention for translation]]\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель|N-gram language models]]\n- [[02 Areas/ML & DL/00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction|Text probability and next-token prediction]]\n- [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings|Word2Vec, GloVe, and distributional representations]]\n- [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram|BPE, WordPiece, and Unigram]]\n- [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей|Morphology and sequence labeling]] · **EN**\n- [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT|RNNs and backpropagation through time]]\n- [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU|LSTM and GRU]]\n- [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора|Seq2Seq with a fixed context]]\n- [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer|Attention for translation]]\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "70925bb0e723c22603342f47827f091844be2d75f2d4e509655746ef2ef075e2",
+      "after_sha256": "0e522358740d7eac51035a49475cc912454feef1e1eef0f9777e3a4f1b87a4fc",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-eos-pad-mask|Маска позиций при общем ID EOS и PAD]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-window-training|Полное обучение WindowLM на малом корпусе]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-bengio-architecture|Нейронная LM Bengio — схема и обозначения]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-context-permutation|Порядок окна и общий градиент embeddings]]\n- [[00 Учебник/02 Представление текста и токенизация/01 Представление текста числами|Представление текста числами]]\n- [[00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram|BPE, WordPiece и Unigram]]\n- [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU|LSTM и GRU]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-two-states|Память c и скрытое состояние h]]\n",
+          "new": "  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-eos-pad-mask|Маска позиций при общем ID EOS и PAD]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-window-training|Полное обучение WindowLM на малом корпусе]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-bengio-architecture|Нейронная LM Bengio — схема и обозначения]]\n  - [[00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction#nlm-context-permutation|Порядок окна и общий градиент embeddings]]\n- [[00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей|Морфология и разметка последовательностей]]\n  - [[00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей#morphology-tags|Морфологическая разметка: лемма, UPOS и FEATS]]\n  - [[00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей#hmm-viterbi|Скрытая марковская модель и алгоритм Витерби]]\n  - [[00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей#linear-chain-crf|Линейный CRF и оценка цепочки меток]]\n  - [[00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей#pos-evaluation|Метрики морфологической разметки]]\n- [[00 Учебник/02 Представление текста и токенизация/01 Представление текста числами|Представление текста числами]]\n- [[00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram|BPE, WordPiece и Unigram]]\n- [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU|LSTM и GRU]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-two-states|Память c и скрытое состояние h]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "53d293e8f36c1ff4de7b14dc2f4eab9f7ef9fae4c1b2f3cad59bc088c1f58bf6",
+      "after_sha256": "badd2fbf910f3e6f6b141b9f6f97b6cbba41eb3b29feb9224a6c277663f4dbb6",
+      "changes": [
+        {
+          "old": "  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#recurrent-bidirectional|Two directions and final states]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-projection|Projection inside recurrent state]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gated-packed-sequences|True LSTM/GRU lengths and padding]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gated-state-carry|Carrying and detaching both states]]\n- [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель|N-gram language models]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-chain-rule|Chain rule for sequence probability]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-boundaries|BOS, EOS, prefixes and termination]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-markov|Markov assumption and n-gram order]]\n",
+          "new": "  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#recurrent-bidirectional|Two directions and final states]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-projection|Projection inside recurrent state]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gated-packed-sequences|True LSTM/GRU lengths and padding]]\n  - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gated-state-carry|Carrying and detaching both states]]\n- [[00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей|Morphology and sequence labeling]] · **EN**\n  - [[00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей#morphology-tags|Morphological annotation: lemma, UPOS, and FEATS]]\n  - [[00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей#hmm-viterbi|Hidden Markov models and the Viterbi algorithm]]\n  - [[00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей#linear-chain-crf|Linear-chain CRF and sequence scores]]\n  - [[00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей#pos-evaluation|Evaluating morphological annotation]]\n- [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель|N-gram language models]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-chain-rule|Chain rule for sequence probability]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-boundaries|BOS, EOS, prefixes and termination]]\n  - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-markov|Markov assumption and n-gram order]]\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "before_sha256": "8d0fa034654143e0ce6fdd4cca57f99593c10eb7982b4542fd9ddeb74c5f1983",
+      "after_sha256": "8102168225e599f58037ebcf6b92ad86b2058ab6c1d1e48aa621928586ae691e",
+      "changes": [
+        {
+          "old": "  - https://github.com/google-research/bert/blob/eedf5716ce1268e56f0a50264a88cafad334ac61/tokenization.py\n  - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_01.py\n  - https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf\nprevious: \"[[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT]]\"\n---\n\n# Токенизация: BPE, WordPiece и Unigram\n",
+          "new": "  - https://github.com/google-research/bert/blob/eedf5716ce1268e56f0a50264a88cafad334ac61/tokenization.py\n  - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_01.py\n  - https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf\nprevious: \"[[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей]]\"\n---\n\n# Токенизация: BPE, WordPiece и Unigram\n"
+        },
+        {
+          "old": "- [OpenAI GPT-2 — Encoder, закреплённый код](https://github.com/openai/gpt-2/blob/e5c5054474f583d6d9499624649353995d63c70a/src/encoder.py)\n- [OpenAI GPT-2 — входная таблица и выходная проекция](https://github.com/openai/gpt-2/blob/e5c5054474f583d6d9499624649353995d63c70a/src/model.py#L147-L174)\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings]] ·\n**Дальше:** [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT|как модель заменяет фиксированное окно рекуррентным состоянием]].\n",
+          "new": "- [OpenAI GPT-2 — Encoder, закреплённый код](https://github.com/openai/gpt-2/blob/e5c5054474f583d6d9499624649353995d63c70a/src/encoder.py)\n- [OpenAI GPT-2 — входная таблица и выходная проекция](https://github.com/openai/gpt-2/blob/e5c5054474f583d6d9499624649353995d63c70a/src/model.py#L147-L174)\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings]] ·\n**Дальше:** [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей|как разметить словоформы с учётом контекста]].\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md",
+      "before_sha256": "a4a31e6c421dfa190c65619fd45b1e47ec75c73e67b656c8124f91ccc9128114",
+      "after_sha256": "71a53c215d2afe4da4f36923bad219e191690d79b8c645429def72d4a785234b",
+      "changes": [
+        {
+          "old": "    anchor: rnn-packed-sequences\n  - label: \"Ограничения памяти, градиента и параллелизма\"\n    label_en: \"Limits of state capacity, gradients and parallelism\"\n    anchor: rnn-limitations\nprevious: \"[[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU]]\"\nprimary_sources:\n  - https://docs.pytorch.org/docs/2.14/generated/torch.nn.RNN.html\n  - https://docs.pytorch.org/docs/2.14/generated/torch.nn.utils.rnn.pack_padded_sequence.html\n",
+          "new": "    anchor: rnn-packed-sequences\n  - label: \"Ограничения памяти, градиента и параллелизма\"\n    label_en: \"Limits of state capacity, gradients and parallelism\"\n    anchor: rnn-limitations\nprevious: \"[[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей]]\"\nnext: \"[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU]]\"\nprimary_sources:\n  - https://docs.pytorch.org/docs/2.14/generated/torch.nn.RNN.html\n  - https://docs.pytorch.org/docs/2.14/generated/torch.nn.utils.rnn.pack_padded_sequence.html\n"
+        },
+        {
+          "old": "- Elman, [Finding Structure in Time](https://doi.org/10.1016/0364-0213(90)90002-E), 1990 — простая рекуррентная сеть.\n- Rumelhart, Hinton, Williams, [Learning representations by back-propagating errors](https://doi.org/10.1038/323533a0), 1986 — обратное распространение ошибки.\n- [[05 Источники/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-recurrent-neural-networks.pdf|Stanford CS230 — Recurrent Neural Networks Cheatsheet]] — краткие схемы и формулы после полного разбора.\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram]] ·\n**Дальше:** [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU]]\n",
+          "new": "- Elman, [Finding Structure in Time](https://doi.org/10.1016/0364-0213(90)90002-E), 1990 — простая рекуррентная сеть.\n- Rumelhart, Hinton, Williams, [Learning representations by back-propagating errors](https://doi.org/10.1038/323533a0), 1986 — обратное распространение ошибки.\n- [[05 Источники/Courses/Stanford CS230 Cheatsheets/en/cheatsheet-recurrent-neural-networks.pdf|Stanford CS230 — Recurrent Neural Networks Cheatsheet]] — краткие схемы и формулы после полного разбора.\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей]] ·\n**Дальше:** [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU]]\n"
+        }
+      ]
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "before_sha256": "25d06a143ce834c95278b631aff6553b10df0c0205879a3a91f97b2c9a1756b1",
+      "after_sha256": "8ef20524d6d93d9711210c90fdf3f2423bba1ddeecbb1e1a2ba3b1dd4358cf6d",
+      "changes": [
+        {
+          "old": "    modifications: copied without visual modification from the source slide render\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\nassets:\n  - id: curated-distill-rlvr-wen-cc9b9f8cfe64\n    asset: 00 Учебник/Assets/Figures/curated/distill-rlvr-2026-11-14/wen-figure6a.svg\n    author: Xumeng Wen et al.\n    source_url: https://arxiv.org/html/2506.14245v2#S6.F6.sf1\n",
+          "new": "    modifications: copied without visual modification from the source slide render\n    metadata_status: verified\n    provenance_confirmation: user-confirmed-open-materials\nassets:\n  - id: curated-kamper-hmm-transitions-99eacc3f9d67\n    asset: 00 Учебник/Assets/Figures/curated/pos-tagging-2026-11-22/kamper-hmm-transitions.png\n    title: State diagram for part-of-speech tagging\n    author: Herman Kamper\n    source_url: https://www.kamperh.com/nlp817/notes/05_hmm_notes.pdf#page=5\n    source_pdf_url: https://www.kamperh.com/nlp817/notes/05_hmm_notes.pdf\n    source_pdf_sha256: 00666aa543634289a53a6fa3204a84fef262abfff358043a693b2b2dbed54150\n    source_page: 5\n    sha256: 99eacc3f9d67d1daf6ad3655b9800c69983399db8d06f74cfc11a900f4f9c1c1\n    license: CC BY-SA 4.0\n    license_url: https://creativecommons.org/licenses/by-sa/4.0/\n    rights_evidence: https://www.kamperh.com/nlp817/notes/05_hmm_notes.pdf#page=1\n    modifications: \"PDF rasterized with Poppler pdftoppm 26.04.0 at -scale-to 2600; exact crop of the diagram or table, no relabeling.\"\n    crop_px: [360, 276, 1120, 948]\n    dimensions_px: [1120, 948]\n    derivation: source-pdf-render\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-22\"\n    used_in:\n      - 00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей.md\n      - en/00 Textbook/02 Text representation and tokenization/03 Morphology and sequence labeling.md\n  - id: curated-kamper-viterbi-trellis-dc23d4ada364\n    asset: 00 Учебник/Assets/Figures/curated/pos-tagging-2026-11-22/kamper-viterbi-trellis.png\n    title: Calculated Viterbi variables with backtracking\n    author: Herman Kamper\n    source_url: https://www.kamperh.com/nlp817/notes/05_hmm_notes.pdf#page=14\n    source_pdf_url: https://www.kamperh.com/nlp817/notes/05_hmm_notes.pdf\n    source_pdf_sha256: 00666aa543634289a53a6fa3204a84fef262abfff358043a693b2b2dbed54150\n    source_page: 14\n    sha256: dc23d4ada364e1c3a2b58bbbac55c14fed72d2dc5b7dfeb68f6970c5fa284587\n    license: CC BY-SA 4.0\n    license_url: https://creativecommons.org/licenses/by-sa/4.0/\n    rights_evidence: https://www.kamperh.com/nlp817/notes/05_hmm_notes.pdf#page=1\n    modifications: \"PDF rasterized with Poppler pdftoppm 26.04.0 at -scale-to 2600; exact crop of the diagram or table, no relabeling.\"\n    crop_px: [154, 253, 1446, 548]\n    dimensions_px: [1446, 548]\n    derivation: source-pdf-render\n    metadata_status: verified\n    provenance_confirmation: source-license-verified\n    rights_status: source-license-verified\n    last_verified: \"2026-11-22\"\n    used_in:\n      - 00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей.md\n      - en/00 Textbook/02 Text representation and tokenization/03 Morphology and sequence labeling.md\n  - id: curated-distill-rlvr-wen-cc9b9f8cfe64\n    asset: 00 Учебник/Assets/Figures/curated/distill-rlvr-2026-11-14/wen-figure6a.svg\n    author: Xumeng Wen et al.\n    source_url: https://arxiv.org/html/2506.14245v2#S6.F6.sf1\n"
+        }
+      ]
+    }
+  ],
+  "added_sources": [
+    {
+      "source": "en/00 Textbook/02 Text representation and tokenization/03 Morphology and sequence labeling.md",
+      "sha256": "43a8c65a1e9a9db962eb90bc23ac7c416f29ab7dd6efa9101667caf9906c3820",
+      "canonical": "00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей.md",
+      "route": "textbook/text-representation/morphology-pos",
+      "status": "current",
+      "en_body_read": true,
+      "outstanding_expansions": []
+    }
+  ],
+  "explanation": [
+    {
+      "mechanism": "Word segmentation and morphology",
+      "sections": "CoNLL-U v2 §§Words, Tokens and Empty Nodes; Morphological Annotation; Korobov (2015), §§3–4",
+      "example": "стали → стать/VERB or сталь/NOUN; книги keeps NOUN but case and number change. Spanish al has separate surface-token and word rows."
+    },
+    {
+      "mechanism": "HMM estimation and decoding",
+      "sections": "Kamper, NLP817, Hidden Markov Models pp. 2–19; Brants (2000) §§2–3",
+      "example": "Both constrained paths, 0.00072 vs 0.0018, posterior 5/7. Reconstruct Kamper's C V C trace using the matrices on p. 12 and table on p. 14."
+    },
+    {
+      "mechanism": "Linear-chain CRF",
+      "sections": "Lafferty, McCallum, Pereira (2001), §§1–4: conditional normalization and feature weights",
+      "example": "Scores 0.3 vs 1.1, probability 0.690, loss 0.371, gradient −0.310 for VERB→VERB. Independent output tags versus contextual features; word/subword alignment."
+    },
+    {
+      "mechanism": "Evaluation",
+      "sections": "UD v2 annotation fields; Brants (2000) §3 on known and unknown word accuracy",
+      "example": "UPOS 3/4; exact feature bundles 2/4; four of six gold features and six predicted give micro-F1 2/3. Punctuation participates in score denominators according to the protocol."
+    }
+  ],
+  "provenance": {
+    "author": "Herman Kamper",
+    "figures": "Original diagram/table from NLP817 HMM notes pp. 5, 14. Complete labels preserved in the crops; no redraw or translation. PDF hash, PNG hashes and crop bounds in registry.",
+    "license": "CC BY-SA 4.0 on PDF p. 1 and course site."
+  },
+  "verification": {
+    "source_review": "Compared both full editions to cited course and paper sections; checked rationale, arithmetic, and no-ai-slop criteria. Neighbouring chapters changed in navigation only.",
+    "examples": "Ran the identical Python example and independently reproduced the source trellis, conditional probability, loss, gradient, and exact/partial feature scores in morphology-pos.test.ts.",
+    "publication": "154 topics and 86 chapters on the core route; 340 directed adjacent chapter links across RU and EN. Root artifact: 2101 pages. 828 publication tests passed, 13 skipped; 375 rendered-output tests passed.",
+    "visual": "Inspected both editions in Chromium at 390 and 1440 CSS pixels. Both original figures load, and the trellis viewer zooms to 2×, scrolls to the end, fits back to 1×, and retains its author link. Aligned display formulae fit at 390 px. The widest table scrolls to its last column. No overflow, KaTeX errors, or English fallback.",
+    "open": "NER/BIO and span metrics need a chapter after BERT. Dependency and constituency parsing are not covered here."
+  }
+}

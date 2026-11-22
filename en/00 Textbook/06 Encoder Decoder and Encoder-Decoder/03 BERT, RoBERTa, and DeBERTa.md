@@ -4,7 +4,7 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "2cefc2abd39c42f5850facd2ef4dab64a275b55be199baecc0b01952182509c1"
+canonical_revision: "7ae01f5ceabee591297dad10b1db720f2d9e4a1d96e1b01040239da6acf8e712"
 translation_reviewed: "2026-11-21"
 translation_of: "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md"
 last_updated: 2026-11-21
@@ -17,7 +17,7 @@ primary_sources:
   - https://arxiv.org/abs/2003.10555v1
   - https://arxiv.org/abs/2111.09543v4
 previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]"
-next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]"
+next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей]]"
 ---
 
 # BERT, RoBERTa, and DeBERTa
@@ -1563,4 +1563,4 @@ example, requires neither the generator nor the RTD head.
 - [[02 Areas/ML & DL/04 Вопросы/100 вопросов по NLP|NLP questions]].
 
 **Previous:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|Three Transformer architectures]] ·
-**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5]].
+**Next:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Named entity recognition]].

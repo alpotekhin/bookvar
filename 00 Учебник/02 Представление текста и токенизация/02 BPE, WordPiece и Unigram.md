@@ -34,7 +34,7 @@ primary_sources:
   - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_01.py
   - https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf
 previous: "[[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings]]"
-next: "[[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT]]"
+next: "[[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей]]"
 ---
 
 # Токенизация: BPE, WordPiece и Unigram
@@ -873,4 +873,4 @@ Findings of NAACL 2024. Исходный рисунок, [CC BY 4.0](https://cre
 - [OpenAI GPT-2 — входная таблица и выходная проекция](https://github.com/openai/gpt-2/blob/e5c5054474f583d6d9499624649353995d63c70a/src/model.py#L147-L174)
 
 **Назад:** [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings]] ·
-**Дальше:** [[02 Areas/ML & DL/00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT|как модель заменяет фиксированное окно рекуррентным состоянием]].
+**Дальше:** [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей|как разметить словоформы с учётом контекста]].

@@ -5,6 +5,10 @@
     "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md": "2026-11-22-agent-security-ru-revision.json"
   },
   "editorialRevisions": {
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей.md": {
+      "currentSha256": "774771c0d0ccd8543f4cb482872d8bc2508a14231f89501d5cbead0f841e2e1c",
+      "stopBefore": "2026-11-22-ner-editorial-pass.json"
+    },
     "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md": {
       "currentSha256": "e2b076b6e583c8ff0578fceb78eace665878bd16f5a085812b909252a14d61ab",
       "stopBefore": "2026-11-22-formal-math-editorial-pass.json"
@@ -222,11 +226,11 @@
     "scope": "These current bytes restore to the historical whole-read receipts via the exact journals. This does not claim another full read or acceptance of those chapters.",
     "chapters": {
       "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md": {
-        "currentSha256": "2a658ef7dc210ea1633bbcdc481f6a673416b0648377083983e78eb7e3afa369",
+        "currentSha256": "40a94f2b1f2a325e96e06868a812851a840367a636220b8c66a6e52ec560b123",
         "stopBefore": "2026-11-21-bert-family-editorial-pass.json"
       },
       "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md": {
-        "currentSha256": "2cefc2abd39c42f5850facd2ef4dab64a275b55be199baecc0b01952182509c1",
+        "currentSha256": "7ae01f5ceabee591297dad10b1db720f2d9e4a1d96e1b01040239da6acf8e712",
         "stopBefore": "2026-11-21-architecture-patterns-editorial-pass.json"
       },
       "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md": {
@@ -262,11 +266,11 @@
         "stopBefore": "2026-11-21-rnn-bptt-editorial-pass.json"
       },
       "00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md": {
-        "currentSha256": "a4a31e6c421dfa190c65619fd45b1e47ec75c73e67b656c8124f91ccc9128114",
+        "currentSha256": "71a53c215d2afe4da4f36923bad219e191690d79b8c645429def72d4a785234b",
         "stopBefore": "2026-11-21-tokenization-editorial-pass.json"
       },
       "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md": {
-        "currentSha256": "8d0fa034654143e0ce6fdd4cca57f99593c10eb7982b4542fd9ddeb74c5f1983",
+        "currentSha256": "8102168225e599f58037ebcf6b92ad86b2058ab6c1d1e48aa621928586ae691e",
         "stopBefore": "2026-11-21-word2vec-glove-editorial-pass.json"
       },
       "00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md": {
@@ -3556,7 +3560,7 @@
       "exit": 0
     },
     "readReceipt": {
-      "currentHashMatches": 153,
+      "currentHashMatches": 156,
       "outsideTextbookManifest": 0,
       "unreadOwnersInRoutePass": 0
     },
@@ -3689,6 +3693,33 @@
   "scope": "Conceptual and editorial reading-route review, separate from the completed 31-note archive reconciliation.",
   "goalTurnClassification": "progress: the preceding turn completed the English GPT-to-LLaMA reader route. This turn resolved the linked-only sequential DeepSeek-V3 MTP figure using the author repository PDF and MIT notice, integrated it with the CS336 topic and numerical/source-verified chapter explanation, and verified the final root and /bookvar artifacts. See 2026-11-09-deepseek-mtp-original-additions.json. The remaining inherited illustrations, whole-book source completeness and authorized release remain open; no commit, push or deployment.",
   "fullReads": [
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов.md",
+      "route": "textbook/models/document-classification",
+      "sha256": "efd33393c82c5aea1b82517a265e7ac1c352c16f478a06a68a11db57a7449e0e",
+      "lines": 333,
+      "read": "Complete Russian and English bodies checked against the source sections and calculations.",
+      "sourceComparisonEvidence": "docs/audit/2026-11-22-document-classification-editorial-pass.json",
+      "reviewStage": "Full chapter read; no claim about transfer benchmarks or other classification tasks."
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей.md",
+      "route": "textbook/models/named-entity-recognition",
+      "sha256": "f75d714f39354c07871374e96b614e388fc801708fdc296fe9d4cbc60c139ea0",
+      "lines": 332,
+      "read": "Complete Russian and English bodies checked against the source sections and worked examples.",
+      "sourceComparisonEvidence": "docs/audit/2026-11-22-ner-editorial-pass.json",
+      "reviewStage": "Full chapter read; no claim about entity linking, relation extraction or coreference."
+    },
+    {
+      "path": "00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей.md",
+      "route": "textbook/text-representation/morphology-pos",
+      "sha256": "d35b5a6fca7515682059360074b9b5f8c45f0bbcc251d52885a46c086033a979",
+      "lines": 369,
+      "read": "Complete Russian and English bodies checked against the source sections and worked examples.",
+      "sourceComparisonEvidence": "docs/audit/2026-11-22-morphology-pos-editorial-pass.json",
+      "reviewStage": "Full chapter read; no claim about NER or syntax."
+    },
     {
       "path": "00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA.md",
       "route": "textbook/pretraining/masked-diffusion-language-models",
@@ -7987,7 +8018,7 @@
       "reviewStage": "Whole-owner reading and scoped source, CPU and reader evidence; no new online effect claim."
     }
   ],
-  "reviewLimits": "139 complete canonical-owner reads in this selected route pass and 14 reused earlier whole-owner reads with exact current hashes or separately reviewed bounded deltas. Also 28 complete atlas documents and nine English editions read. Not a fresh whole-book reread or explanation/source-completeness acceptance of all 153 owners. CPU/source checks, prose review, factual corrections, material permissions and selected visual checks remain distinct; no GPU benchmark or deployment inferred.",
+  "reviewLimits": "142 complete canonical-owner reads in this selected route pass and 14 reused earlier whole-owner reads with exact current hashes or separately reviewed bounded deltas. Also 28 complete atlas documents and nine English editions in the original pass, with later English editions documented separately. Not a fresh whole-book reread or explanation/source-completeness acceptance of all 156 owners. CPU/source checks, prose review, factual corrections, material permissions and selected visual checks remain distinct; no GPU benchmark or deployment inferred.",
   "acceptedRouteObservations": [
     "Lookup, sequence axes, shared parameter gradients and masked pooling are established before attention.",
     "Tokenization explains train/apply/decode and algorithm-specific choices rather than assuming BPE is longest-match search.",

@@ -4,7 +4,7 @@ type: textbook-chapter
 status: canonical
 last_updated: 2026-11-21
 previous: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]]"
-next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]"
+next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей]]"
 reference_terms:
   - label: Whole-word masking — выбор целых слов
     label_en: Whole-word masking — grouped targets
@@ -1588,4 +1588,4 @@ $E_G+E_\Delta$. Генератор и RTD-голова не нужны, когд
 - [[02 Areas/ML & DL/04 Вопросы/100 вопросов по NLP|Вопросы по NLP]].
 
 **Назад:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна]] ·
-**Дальше:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer]]
+**Дальше:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей]]

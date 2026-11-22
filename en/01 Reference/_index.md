@@ -280,6 +280,11 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#lstm-projection|Projection inside recurrent state]]
   - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gated-packed-sequences|True LSTM/GRU lengths and padding]]
   - [[00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU#gated-state-carry|Carrying and detaching both states]]
+- [[00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей|Morphology and sequence labeling]] · **EN**
+  - [[00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей#morphology-tags|Morphological annotation: lemma, UPOS, and FEATS]]
+  - [[00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей#hmm-viterbi|Hidden Markov models and the Viterbi algorithm]]
+  - [[00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей#linear-chain-crf|Linear-chain CRF and sequence scores]]
+  - [[00 Учебник/02 Представление текста и токенизация/03 Морфология и разметка последовательностей#pos-evaluation|Evaluating morphological annotation]]
 - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель|N-gram language models]]
   - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-chain-rule|Chain rule for sequence probability]]
   - [[00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель#ngram-boundaries|BOS, EOS, prefixes and termination]]
@@ -406,6 +411,12 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa#sentence-order-prediction|ALBERT and sentence-order prediction]]
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa#electra-replaced-token-detection|ELECTRA and replaced-token detection]]
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa#debertav3-gradient-disentangling|DeBERTaV3 and gradient-disentangled embedding sharing]]
+- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов|Document classification]] · **EN**
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов#doccls-tfidf|TF-IDF and bigrams for text classification]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов#doccls-linear|Logistic regression and multinomial naive Bayes]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов#doccls-fasttext|fastText: averaging feature vectors]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов#doccls-bert|BERT: document classification with CLS]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03b Классификация документов#doccls-evaluation|Evaluating a text classifier and choosing a threshold]]
 - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1: generative pre-training]] · **EN**
 - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2: tasks as text continuations]] · **EN**
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык#gpt2-gpt3-lambada|LAMBADA — the last word and GPT-2's filter]]
@@ -416,6 +427,12 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning#gpt3-surface-form-competition|Surface form competition — scoring answers with PMI]]
 - [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров|Masking, heads, and tensor shapes]] · **EN**
   - [[00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров#causal-mask-shifted-targets|Causal mask — token visibility and shifted targets]]
+- [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей|Named entity recognition]] · **EN**
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-bio|BIO (IOB2): named entity boundaries and types]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-wordpiece-alignment|NER with BERT: word-to-subword alignment]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-constrained-decoding|NER: constrained sequence decoding]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-span-metrics|Exact-span precision and recall]]
+  - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03a Распознавание именованных сущностей#ner-nested|Nested entities and span classification]]
 - [[00 Учебник/05 Attention и Transformer/04 Позиционная информация|Positional information]] · **EN**
 - [[00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V|Self-attention: Q, K, and V]] · **EN**
 - [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|T5: the text-to-text Transformer]] · **EN**
