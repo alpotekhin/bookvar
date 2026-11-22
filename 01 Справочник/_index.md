@@ -1432,7 +1432,7 @@ last_updated: 2026-10-30
   - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-evaluation|Раздельная оценка каналов, ANN и fusion]]
   - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-hnsw-queue|HNSW: очереди, efSearch и остановка]]
   - [[00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid#ret-hnsw-links|HNSW: выбор связей при построении]]
-- [[00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction|Переранжирование: cross-encoder и late interaction]]
+- [[00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction|Переранжирование документов]]
   - [[00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction#rerank-cross-encoder|Cross-encoder: совместный вход и оценка пары]]
   - [[00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction#rerank-pair-budget|Токенный бюджет и обрезка пары]]
   - [[00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction#rerank-minilm-example|MiniLM: пример реальной оценки двух пар]]

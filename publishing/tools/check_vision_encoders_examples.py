@@ -1,33 +1,47 @@
 #!/usr/bin/env python3
 """Vision encoder mechanisms and original-source identity; not a trained-model benchmark."""
 import hashlib
+import io
 import itertools
 import json
 from pathlib import Path
 import re
+import subprocess
 
 import numpy as np
 from PIL import Image, ImageChops
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md"
+EN_CHAPTER = ROOT / "en/00 Textbook/16 Multimodal Models/64 Multimodal models.md"
 SOURCE = ROOT / "05 Источники/Originals/vision-encoders-2026-10-20"
 FIGURES = ROOT / "00 Учебник/Assets/Figures/curated/vision-encoders-review-2026-10"
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
-def main():
-    chapter = CHAPTER.read_text()
-    blocks = re.findall(r"^```python\n(.*?)^```", chapter, re.M | re.S)
+def run_blocks(path):
+    blocks = re.findall(r"^```python\n(.*?)^```", path.read_text(), re.M | re.S)
     assert len(blocks) == 6
     spaces, shared = [], {}
     for i, block in enumerate(blocks, 1):
         local = {}
-        code = compile(block, f"{CHAPTER}:block-{i}", "exec")
+        code = compile(block, f"{path}:block-{i}", "exec")
         exec(code, local)
         exec(code, shared)
         spaces.append(local)
+    return spaces
+
+def main():
+    chapter = CHAPTER.read_text()
+    english = EN_CHAPTER.read_text()
+    assert f'canonical_revision: "{digest(CHAPTER)}"' in english
+    spaces, en_spaces = run_blocks(CHAPTER), run_blocks(EN_CHAPTER)
+    for i, names in enumerate([("patches", "projected"), ("original", "swapped"),
+        ("loss",), ("before", "after"), ("chunked",), ("scores",)]):
+        for name in names:
+            if name in spaces[i]:
+                np.testing.assert_array_equal(spaces[i][name], en_spaces[i][name])
 
     assert spaces[0]["patches"].shape == (4, 12)
     assert spaces[0]["projected"].shape == (4, 2)
@@ -73,6 +87,19 @@ def main():
         assert paired(m.T) == (visual, text, group)
     # 640x480 -> 448x336, then center crop: 80 original pixels per side.
     assert (448 - 336) / 2 / (336/480) == 80
+    source = np.full((480, 640, 3), 255, dtype=np.uint8)
+    outside, inside = source.copy(), source.copy()
+    outside[400:420, 590:610] = 0
+    inside[400:420, 400:420] = 0
+    resize = lambda x: Image.fromarray(x).resize((448, 336), Image.Resampling.BICUBIC)
+    crop = lambda im: np.asarray(im.crop((56, 0, 392, 336)))
+    reference = resize(source)
+    assert not np.array_equal(np.asarray(reference), np.asarray(resize(outside)))
+    assert np.array_equal(crop(reference), crop(resize(outside)))
+    assert not np.array_equal(crop(reference), crop(resize(inside)))
+    assert 576**2 == 331776 and 2304**2 == 5308416 == 16 * 576**2
+    assert np.isclose(np.exp(1) / (2 * np.exp(1)), .5)
+    assert np.exp(1) / (2 * np.exp(1) + np.exp(-5)) < .5
 
     records = json.loads((FIGURES / "assets.json").read_text())
     assert len(records) == 3
@@ -87,18 +114,29 @@ def main():
         assert row["asset"] in chapter
     for row in json.loads((SOURCE / "references.json").read_text())["downloaded"]:
         assert digest(ROOT / row["path"]) == row["sha256"]
+    curated = ROOT / "00 Учебник/Assets/Figures/curated"
     originals = ROOT / "05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images"
-    for source, target in [
-        ("vit.png", "vlm-2026/vit-figure1-patch-sequence.png"),
-        ("clip.png", "vlm-2026/clip-figure1-training-and-zero-shot.png"),
-        ("siglip-parallelism.png", "stanford-cs336-2026/multimodal/siglip-parallelism.png")
+    vit = curated / "vlm-2026/vit-figure1-patch-sequence.png"
+    assert digest(originals / "vit.png") == digest(vit)
+    for filename, pdf, page_no, rectangle in [
+        ("clip-figure1-training-and-zero-shot.png", "clip.pdf", 2, (265, 324, 2725, 1213)),
+        ("siglip-parallelism.png", "siglip.pdf", 3, (235, 342, 2745, 1461)),
     ]:
-        assert digest(originals/source) == digest(ROOT / "00 Учебник/Assets/Figures/curated" / target)
-    assert len(re.findall(r"!\[\[", chapter)) == 6
-    print(json.dumps({"chapter_sha256": digest(CHAPTER), "standalone_and_shared_blocks": 12,
+        target = curated / "vision-objectives-2026-11-09" / filename
+        rendered = subprocess.check_output([
+            "pdftoppm", "-png", "-r", "360", "-f", str(page_no), "-l", str(page_no),
+            "-singlefile", str(SOURCE / pdf)])
+        page = Image.open(io.BytesIO(rendered)).convert("RGB")
+        assert page.size == (3060, 3960)
+        assert ImageChops.difference(page.crop(rectangle), Image.open(target).convert("RGB")).getbbox() is None
+        assert filename in chapter and filename in english
+    assert len(re.findall(r"!\[\[", chapter)) == len(re.findall(r"!\[\[", english)) == 6
+    print(json.dumps({"chapter_sha256": [digest(CHAPTER), digest(EN_CHAPTER)],
+        "standalone_and_shared_blocks": 24,
         "patch_permutations": 24, "loss_gradient_samples": 40,
-        "paired_metric_cases": 81, "new_pixel_identical_crops": 3,
-        "unchanged_course_figures": 3, "pretrained_model_run": False}, indent=2))
+        "paired_metric_cases": 81, "pixel_identical_paper_figures": 5,
+        "unchanged_course_figures": 1, "crop_controls": 3,
+        "pretrained_model_run": False}, indent=2))
 
 if __name__ == "__main__":
     main()

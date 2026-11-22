@@ -576,6 +576,22 @@ describe('static handbook output', () => {
     for (const locale of ['', 'en']) {
       const get = (page: string) => readFile(join(distDir, locale, page, 'index.html'), 'utf8');
       const [chapter, ref] = await Promise.all([get('textbook/rag/full-pipeline'), get('reference')]);
+      const flow = chapter.indexOf('/hf-rag-evaluation-workflow.png"');
+      const origin = chapter.indexOf('/rag-sequence-token.png"');
+      expect(flow).toBeGreaterThan(0);
+      expect(origin).toBeGreaterThan(flow);
+      const series = ['rag-app-pipeline', 'rag-original', 'rag-example-answer', 'rag-example-coverage'];
+      const positions = series.map(id => chapter.indexOf(`id="${id}"`));
+      expect(positions.every((pos, i) => pos > (positions[i - 1] ?? -1))).toBe(true);
+      for (const id of ['rag-source-policy', 'rag-source-backup']) {
+        expect(chapter).toContain(`id="${id}"`);
+        expect(chapter).toContain(`#${id}"`);
+      }
+      const prefix = locale ? 'en/' : '';
+      expect(chapter).toContain(`href="/${prefix}textbook/retrieval/reranking/#rerank-e42-case"`);
+      expect(chapter).toContain(`href="/${prefix}textbook/multimodal/models/"`);
+      expect(chapter.match(/<details\b[^>]*id="rag-code-/g)).toHaveLength(9);
+      if (locale) expectCanonicalEditionNotice(chapter);
       const begin = chapter.indexOf('<a id="rag-self-rag"></a>');
       const end = chapter.indexOf('<a id="rag-openscholar"></a>');
       expect(begin).toBeGreaterThan(chapter.indexOf('<a id="rag-conflicting-sources"></a>'));
@@ -6780,6 +6796,16 @@ describe('static handbook output', () => {
       expect(chapter).toContain(`href="/${locale}textbook/retrieval/embeddings-metric-learning/"`);
       expect(chapter).toContain(`href="/${locale}textbook/retrieval/reranking/"`);
       if (locale) expectCanonicalEditionNotice(chapter);
+      const reranking = await readFile(join(distDir, locale, 'textbook/retrieval/reranking/index.html'), 'utf8');
+      expect(reranking.match(/<img\b[^>]*\bsrc=/g)).toHaveLength(8);
+      expect(reranking.match(/<details\b[^>]*id="rerank-code-/g)).toHaveLength(8);
+      const rerankingAnchors = ['rerank-e42-case', 'rerank-cross-encoder', 'rerank-hard-negatives',
+        'rerank-maxsim', 'rerank-token-index', 'rerank-rankgpt', 'rerank-oracle'];
+      const rerankingOffsets = rerankingAnchors.map(id => reranking.indexOf(`id="${id}"`));
+      expect(rerankingOffsets.every((n, i) => n > (rerankingOffsets[i - 1] ?? -1))).toBe(true);
+      expect(reranking).toContain(`href="/${locale}textbook/retrieval/sparse-dense-hybrid/#ret-fusion-limits"`);
+      expect(reranking).toContain(`href="/${locale}textbook/rag/full-pipeline/"`);
+      if (locale) expectCanonicalEditionNotice(reranking);
     }
   });
   it('links the 404 header to the configured publication root', async () => {
@@ -7038,6 +7064,12 @@ describe('static handbook output', () => {
       }
       for (const rounded of ['0.2231', '0.1054', '1.2629', '0.0111', '0.4000'])
         expect(html).toContain(rounded);
+      expect(html).toContain('id="vlm-crop-evidence"');
+      expect(html).toContain(`href="/${prefix}textbook/rag/full-pipeline/#rag-example-answer"`);
+      expect(html).toContain(`href="/${prefix}textbook/multimodal/connectors-fusion/"`);
+      expect(html.match(/<details\b[^>]*id="vlm-code-/g)).toHaveLength(6);
+      expect(html.match(/<img\b[^>]*\bsrc=/g)).toHaveLength(6);
+      expect(html).not.toContain('aria-label="English edition status"');
       expect(html).not.toContain('katex-error');
       expect(html).not.toContain('This content is not available in your language yet.');
     }

@@ -537,15 +537,17 @@ sections:
               - label: Лексический, плотный и гибридный поиск
                 label_en: Lexical, dense and hybrid retrieval
                 route: textbook/retrieval/sparse-dense-hybrid
-              - label: Reranking — cross-encoder и late interaction
+              - label: Переранжирование документов
+                label_en: Document reranking
                 route: textbook/retrieval/reranking
-              - label: RAG — полный конвейер
+              - label: "RAG: от источника до проверяемого ответа"
+                label_en: "RAG: from sources to verifiable answers"
                 route: textbook/rag/full-pipeline
           - label: XII. Мультимодальные модели
             label_en: XII. Multimodal models
             items:
-              - label: Мультимодальные модели
-                label_en: Multimodal models
+              - label: "Визуальные токены: ViT, CLIP и SigLIP"
+                label_en: "Visual tokens: ViT, CLIP and SigLIP"
                 route: textbook/multimodal/models
               - label: Connectors и fusion
                 label_en: Connectors and fusion

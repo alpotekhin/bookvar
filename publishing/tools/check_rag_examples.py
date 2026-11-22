@@ -7,6 +7,7 @@ from pathlib import Path
 import re
 
 import numpy as np
+from bs4 import BeautifulSoup
 from PIL import Image, ImageChops
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -20,7 +21,7 @@ def digest(path):
 def main():
     chapter = CHAPTER.read_text()
     blocks = re.findall(r"^```python\n(.*?)^```", chapter, re.M | re.S)
-    assert len(blocks) == 6
+    assert len(blocks) == 7
     spaces, shared = [], {}
     for i, block in enumerate(blocks, 1):
         ns = {}
@@ -77,8 +78,30 @@ def main():
                      for i, ids in enumerate(combo) for c in ids)
         n = sum(map(len, combo))
         assert score(combo, entails) == (sum(flags)/3, useful/n if n else 0)
-    assert spaces[5]["evidence_coverage"]({"p4-exception", "noise"},
-           {"p4-exception", "p2-cleanup"}) == (.5, 0)
+    adaptive = spaces[5]
+    assert np.isclose(adaptive["retrieve"], .60)
+    assert np.isclose(adaptive["a"], .75) and np.isclose(adaptive["b"], .30)
+    assert (.50 + .5 * adaptive["a"]) < (.80 + .5 * adaptive["b"])
+    assert (.50 + adaptive["a"]) > (.80 + adaptive["b"])
+
+    coverage = spaces[6]["evidence_coverage"]
+    required = {"p4-exception", "p2-cleanup"}
+    assert coverage({"p4-exception", "noise"}, required) == (.5, 0)
+    by_id = {row["id"]: row for row in candidates}
+    source_spans = {"exception": "p4-exception", "backup": "p2-cleanup"}
+    def coverage_for(chosen):
+        spans = set().union(*(by_id[key]["spans"] for key in chosen))
+        return coverage({source_spans[s] for s in spans if s in source_spans}, required)
+
+    plain_budget, plain = 6144, []
+    for row in candidates:
+        if row["tokens"] <= plain_budget:
+            plain.append(row["id"])
+            plain_budget -= row["tokens"]
+    assert plain_budget == 244
+    expected = [coverage_for(plain), coverage_for(pack(candidates, 6144)[0]),
+                coverage_for(pack(candidates, 3000)[0])]
+    assert expected == [(.5, 0), (1, 1), (.5, 0)]
 
     assets = json.loads((FIGURES / "assets.json").read_text())
     assert len(assets) == 5
@@ -98,12 +121,34 @@ def main():
         assert digest(ROOT / source["path"]) == source["sha256"]
     for block in re.findall(r"^```json\n(.*?)^```", chapter, re.M | re.S):
         json.loads(block)
-    assert len(re.findall(r"!\[\[", chapter)) == 8
+    assert len(re.findall(r"!\[\[", chapter)) == 10
+    for locale in ("", "en/"):
+        page = ROOT / f"site/dist/{locale}textbook/rag/full-pipeline/index.html"
+        soup = BeautifulSoup(page.read_text(), "html.parser")
+        article = soup.select_one(".sl-markdown-content")
+        assert article is not None and len(article.select("img")) == 10
+        assert len(article.select('details[id^="rag-code-"]')) == 9
+        assert len(article.select(".katex-display")) == 5 and not article.select(".katex-error")
+        figures = [img["src"] for img in article.select("img")]
+        assert "hf-rag-evaluation-workflow.png" in figures[0]
+        assert "rag-sequence-token.png" in figures[1]
+        for anchor, term in (("rag-source-policy", "30 дней"), ("rag-source-backup", "7 суток")):
+            proof = article.select_one(f"span#{anchor}")
+            assert proof is not None and term in proof.find_parent("tr").get_text()
+            citations = article.select(f'blockquote a[href$="#{anchor}"]')
+            assert len(citations) == 2 and citations[0].get_text() == citations[1].get_text()
+        example_table = article.select_one("#rag-example-coverage").find_next("table")
+        assert [r.select("td")[-1].get_text(strip=True) for r in example_table.select("tbody tr")] == ["1/2", "2/2", "1/2"]
+        assert article.select_one(f'a[href="/{locale}textbook/retrieval/reranking/#rerank-e42-case"]')
+        assert article.select_one(f'a[href="/{locale}textbook/multimodal/models/"]')
+        assert not locale or soup.select_one('[aria-label="English edition status"]')
     print(json.dumps({"chapter_sha256": digest(CHAPTER),
-        "code_blocks_standalone_and_shared": 12, "probability_normalizations": 40,
+        "code_blocks_standalone_and_shared": 14, "probability_normalizations": 40,
         "posterior_gradients": 2, "context_order_budget_cases": 42,
-        "citation_subset_cases": 512, "new_figure_pixel_crops": 5,
-        "unchanged_hf_images": 2, "ppr": graph["r"].tolist(),
+        "citation_subset_cases": 512, "figure_pixel_crops": 5,
+        "unchanged_hf_images": 2, "adaptive_retrieval_checks": 4,
+        "context_selection_controls": expected, "rendered_locales": 2,
+        "ppr": graph["r"].tolist(),
         "llm_quality_run": False}, ensure_ascii=False, indent=2))
 
 if __name__ == "__main__":

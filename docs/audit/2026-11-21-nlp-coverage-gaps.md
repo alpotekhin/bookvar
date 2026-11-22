@@ -92,6 +92,9 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«Дистилляция рассуждений»](2026-11-22-distillation-editorial-pass.json),
 [«Вычисления во время ответа»](2026-11-22-test-time-compute-editorial-pass.json),
 [«Оценивание моделей и контаминация»](2026-11-22-evaluation-editorial-pass.json),
-[«Эмбеддинги и метрическое обучение»](2026-11-22-embeddings-editorial-pass.json) и
-[«Лексический, плотный и гибридный поиск»](2026-11-22-retrieval-editorial-pass.json).
-Следующая глава — «Переранжирование: cross-encoder и late interaction».
+[«Эмбеддинги и метрическое обучение»](2026-11-22-embeddings-editorial-pass.json),
+[«Лексический, плотный и гибридный поиск»](2026-11-22-retrieval-editorial-pass.json),
+[«Переранжирование документов»](2026-11-22-reranking-editorial-pass.json),
+[«RAG: от источника до проверяемого ответа»](2026-11-22-rag-editorial-pass.json) и
+[«Визуальные токены: ViT, CLIP и SigLIP»](2026-11-22-vision-encoders-editorial-pass.json).
+Следующая глава — «Как vision encoder подключается к LLM: projector, Q-Former и cross-attention».

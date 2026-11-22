@@ -2,6 +2,18 @@
   "date": "2026-10-30",
   "lastReviewedDate": "2026-11-09",
   "editorialRevisions": {
+    "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md": {
+      "currentSha256": "b580672f262588eca508200a55b408a42edd47388da321bb00e97c46cc88e8a0",
+      "stopBefore": "2026-11-22-rag-editorial-pass.json"
+    },
+    "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md": {
+      "currentSha256": "a7d2b5244d65240c99864b53aaca9c73221a5fdb90cff626a325c3dc9b82aa13",
+      "stopBefore": "2026-11-22-reranking-editorial-pass.json"
+    },
+    "00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md": {
+      "currentSha256": "42633499333bc33388e62fdaef32c76f94cf254780b7ebdb9b27d2cbb1ab8dc6",
+      "stopBefore": "2026-11-22-retrieval-editorial-pass.json"
+    },
     "00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid.md": {
         "currentSha256": "6db98b8f0c15d2089ff894d516483f7c7bb5c5ab0d32a0b3f575c1c1dfde2059",
       "stopBefore": "2026-11-22-embeddings-editorial-pass.json"

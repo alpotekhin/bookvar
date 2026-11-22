@@ -4,11 +4,13 @@ type: textbook-chapter
 status: canonical
 locale: en
 translation_status: current
-canonical_revision: "8d013d93864cb436131ce75d9a24fee009c80b946e9985470863aad4667edcac"
-translation_reviewed: "2026-11-09"
+canonical_revision: "b580672f262588eca508200a55b408a42edd47388da321bb00e97c46cc88e8a0"
+translation_reviewed: "2026-11-22"
 translation_of: "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md"
-last_updated: 2026-11-09
-last_verified: 2026-09-15
+last_updated: 2026-11-22
+last_verified: 2026-11-22
+previous: "[[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер]]"
+next: "[[en/00 Textbook/16 Multimodal Models/64a Connectors and fusion]]"
 primary_sources:
   - https://arxiv.org/abs/2010.11929
   - https://arxiv.org/abs/2103.00020
@@ -21,7 +23,18 @@ primary_sources:
 
 # From images to visual tokens: ViT and CLIP
 
-A language model receives a sequence of discrete token indices. An image is a rectangular grid of intensity values. Before a Transformer can process both, the image must become a sequence of vectors. This conversion determines spatial resolution, visual-token count, and which details remain available to every later stage.
+In the [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер#rag-example-answer|RAG example]],
+the retention periods were available as text. Suppose search instead finds
+a scan, with the period in the bottom-right cell of a table. Finding that
+page and reading a particular cell are different tasks. A page embedding
+may be enough for search; reading the cell requires both the digits and
+their location.
+
+Vision Transformer (ViT) turns an image into a sequence of features, one
+per patch. CLIP trains an image encoder and a text encoder to match images
+with captions. SigLIP changes the loss for that task. Vector similarity
+can select a caption from a list, but an answer in free text requires a
+decoder that receives the relevant image features.
 
 <span id="две-задачи-понять-чужую-модальность-и-породить-её"></span>
 
@@ -29,14 +42,21 @@ A language model receives a sequence of discrete token indices. An image is a re
 
 Turning an image into “tokens” can mean two different things. For visual question answering, continuous feature vectors are sufficient: they condition a text decoder. For image generation, the model also needs an output representation that can be decoded back into pixels. A retrieval embedding need not preserve every texture or be invertible; a generative representation must retain enough detail to reconstruct an image.
 
-This module first follows the perception path—vision encoder, semantic training, connector, and text generation. Image output is developed separately in [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|diffusion and flow models]] and [[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|discrete image codes and Chameleon]]. Those pages may currently use the explicitly labeled Russian fallback. A shared embedding space alone does not supply either generator.
+The following chapters connect a vision encoder to a language decoder.
+For image output, [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|diffusion and flow models]]
+use a continuous generator, while
+[[00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|Chameleon]]
+predicts discrete image codes alongside text.
 
 <span id="1-изображение-как-тензор"></span>
 <a id="vlm-patch-projection"></a>
 
 ## Images as sequences of patches
 
-Write a color image as $X\in\mathbb R^{H\times W\times C}$. A pixel is too small to carry useful semantics on its own, while a single vector for the whole image discards location. Vision Transformer divides the image into $P\times P$ patches, flattens each patch, and maps it through a learned linear projection. The sequence length is
+Write a color image as $X\in\mathbb R^{H\times W\times C}$, with height
+$H$, width $W$, and $C$ channels. Vision Transformer divides the image into
+$P\times P$ patches, flattens each patch, and applies a shared learned
+linear projection. The patch count is
 
 $$
 N=\frac{H}{P}\frac{W}{P}.
@@ -44,7 +64,7 @@ $$
 
 A $336\times336$ image with patch size 14 produces $24\times24=576$ patches. This count assumes dimensions divisible by the patch size after preprocessing. Position embeddings are added before the sequence enters a standard Transformer encoder; original ViT also prepends a classification token.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/vit-figure1-patch-sequence.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/vlm-2026/vit-figure1-patch-sequence.png|ViT Figure 1: grid of image patches, shared linear projection, position embeddings, Transformer encoder and classification head.]]
 
 *Figure 1 from Dosovitskiy et al., [An Image is Worth 16×16 Words](https://arxiv.org/abs/2010.11929), PDF p. 3. Patches are linearly projected and passed to an ordinary Transformer encoder.*
 
@@ -76,6 +96,9 @@ to 47. With $2\times2$ patches, the upper-left patch contains
 four rows would mix rectangular patch boundaries. We must expose the grid
 axes, move them next to each other, then flatten each patch.
 
+<details id="vlm-code-patch">
+<summary>Code: patch indexing and projection</summary>
+
 ```python
 import numpy as np
 
@@ -102,6 +125,8 @@ assert np.allclose(projected, conv)
 assert np.allclose(projected[0], [15.24, 18.26])
 ```
 
+</details>
+
 The result has shape `[4,2]`. Matching the C/H/W order and the filter
 coefficient order makes the two calculations equal. The original
 [CLIP VisionTransformer](https://github.com/openai/CLIP/blob/d05afc436d78f1c48dc0dbf8e5980a9d471f35f6/clip/model.py#L206)
@@ -118,6 +143,9 @@ disabled is permutation-equivariant: $f(\Pi Z)=\Pi f(Z)$. If a permutation
 leaves CLS in place, its output cannot distinguish the original arrangement
 from the reordered patches. The following small attention operation checks
 this property and then fixes positional vectors to locations.
+
+<details id="vlm-code-positions">
+<summary>Code: permuting patches</summary>
 
 ```python
 import numpy as np
@@ -138,6 +166,8 @@ original = attend(z + positions)[0]
 swapped = attend(z[permutation] + positions)[0]
 assert not np.allclose(original, swapped)
 ```
+
+</details>
 
 Original ViT stores learned positions in a one-dimensional table whose
 entries correspond to the two-dimensional patch grid. For a new resolution,
@@ -162,7 +192,9 @@ normalized CLS goes to the ViT classifier or, in CLIP's ViT variant, to the
 image–text comparison projection. Local patch states are already contextual
 after the first attention layer.
 
-## Resolution is a compute decision
+<span id="resolution-is-a-compute-decision"></span>
+
+## Image resolution and attention cost
 
 Patch count grows with area. Doubling both sides creates four times as many tokens; full attention inside the vision encoder grows faster still. Large patches are often sufficient for scene classification, but small print, chart marks, and interface controls require much finer sampling. This is why modern VLMs use native resolution, tiling, and token compression rather than treating input size as an incidental preprocessing choice.
 
@@ -180,10 +212,15 @@ resizes the short side, takes a center crop, converts to RGB and normalizes
 channels. The target comes from `model.input_resolution`; 336 belongs to
 ViT-L/14@336px, not every CLIP model. A 640-wide, 480-high image resized to
 a short side of 336 becomes $448\times336$. The central crop removes 56
-columns at each side, about 80 original pixels per side. A label near the
-edge may vanish before encoding. Resizing reduces sampling density, whereas
-cropping removes complete regions. Resolution, tiling and token compression
-must therefore be evaluated at each stage, not inferred from the input file.
+columns at each side, about 80 original pixels per side.
+
+<a id="vlm-crop-evidence"></a>
+
+The crop keeps approximately the original interval $[80,560)$. Put the
+answer cell between columns 590 and 610. Two scans that differ only in that
+cell will yield the same cropped input to ViT. Later attention cannot
+recover the difference. Resizing reduces sampling density, whereas a crop
+removes complete regions.
 
 <span id="3-от-классификации-к-общему-пространству-изображения-и-текста"></span>
 
@@ -261,6 +298,9 @@ alone lie between −1 and 1, limiting the concentration of a softmax over
 many captions. For the displayed matrix, the first row loss is approximately
 0.002443 and the first column loss 0.001908: their competitors differ.
 
+<details id="vlm-code-clip">
+<summary>Code: both directions of the CLIP loss</summary>
+
 ```python
 import numpy as np
 
@@ -290,14 +330,16 @@ assert np.isclose(clip_loss(scores + 1000), loss)
 assert np.isclose(clip_loss(np.zeros((2, 2))), np.log(2))
 ```
 
+</details>
+
 An off-diagonal pair is labeled negative because it was not an observed
-pair, not because someone proved its caption false. Two dog photographs
-with the same caption give identical text vectors while the diagonal target
-asks the model to distinguish their indices. With just those two captions,
-each image-to-text probability is $1/2$, so this directional loss cannot
-reach zero. Larger batches supply both difficult alternatives and false
-negatives. Adding a common constant to logits changes neither softmax nor
-loss; changing an individual competitor affects both directions.
+pair, even if the caption fits the image. Two identical captions produce
+equal logits. Each gets exactly $1/2$ if those are the only choices, and
+less if there are other captions. With a diagonal target, the loss of
+that row is at least $\log 2$. A larger batch adds competing captions
+and may also add unmarked valid pairs. Adding a common constant to logits
+preserves both softmax and loss; changing one entry affects its row and
+its column.
 
 <a id="vlm-multi-positive"></a>
 
@@ -355,7 +397,7 @@ predicts the next caption token after “a dog in the.” The contrastive
 model receives the complete image and caption, then scores the pair.
 It does not predict a vocabulary distribution at each caption position.
 
-![[00 Учебник/Assets/Figures/curated/vision-encoders-review-2026-10/clip-objectives.png]]
+![[00 Учебник/Assets/Figures/curated/vision-encoders-review-2026-10/clip-objectives.png|ImageNet accuracy over processed images for caption generation, bag-of-words prediction, and contrastive training.]]
 
 *Radford et al., [CLIP Figure 2](https://proceedings.mlr.press/v139/radford21a.html),
 CC BY 4.0. The horizontal axis counts processed images and the vertical axis
@@ -371,6 +413,9 @@ dog or a person. CLIP §3.1.4 uses context and prompt ensembles. Normalize
 each template embedding, average them for one class and normalize that
 average again. The resulting class vector can be cached. This differs from
 averaging several classifiers' softmax probabilities.
+
+<details id="vlm-code-zero-shot">
+<summary>Code: text-derived class vectors</summary>
 
 ```python
 import numpy as np
@@ -402,6 +447,8 @@ prototype = unit(templates.mean(axis=0))
 assert np.allclose(prototype, [.948683298, .316227766])
 ```
 
+</details>
+
 The three initial cosine scores are 0.8, 0.6 and −0.8. Adding a fourth class
 reduces the first class's probability from 0.731 to 0.331 even though neither
 the image nor any old cosine score changed. These probabilities depend on
@@ -414,7 +461,7 @@ while freezing the encoder. Fine-tuning also changes encoder weights. These
 protocols have different data access and should not share an unlabeled
 “CLIP accuracy” result.
 
-![[00 Учебник/Assets/Figures/curated/vision-encoders-review-2026-10/clip-zero-shot-linear-probe.png]]
+![[00 Учебник/Assets/Figures/curated/vision-encoders-review-2026-10/clip-zero-shot-linear-probe.png|The star is zero-shot CLIP. Curves show linear classifiers trained with different numbers of labeled images.]]
 
 *Radford et al., [CLIP Figure 5](https://proceedings.mlr.press/v139/radford21a.html),
 CC BY 4.0. The star is zero-shot CLIP; curves train classifiers with different
@@ -477,6 +524,9 @@ the positive pair with logit 2 contributes $\log(1+e^{-2})=0.126928$;
 the negative pair with logit −1 contributes $\log(1+e^{-1})=0.313262$.
 The other terms repeat those values. Their sum divided by two is 0.440190.
 
+<details id="vlm-code-siglip">
+<summary>Code: pairwise SigLIP loss</summary>
+
 ```python
 import numpy as np
 
@@ -502,6 +552,8 @@ chunked = sum(terms[np.ix_(r, c)].sum() for r in blocks for c in blocks) / B
 assert np.isclose(chunked, siglip_loss(neutral + prior_bias))
 ```
 
+</details>
+
 There are $B$ positives and $B(B-1)$ negatives. If dot products are initially
 zero and only the bias varies, its optimum satisfies $\sigma(b)=1/B$,
 giving $b=-\log(B-1)$ for $B>1$. This is about −0.693 for $B=3$ and −10.4
@@ -524,8 +576,6 @@ Device 1 keeps images $I_{1:4}$ and receives two blocks of remote text
 features. After three computations its four images have been compared
 with all 12 texts.*
 
-This changes the optimization and communication problem, not the meaning of a visual token. Compare losses with the encoder, data, hardware, and training budget controlled; training-day figures on different accelerators are not an isolated speedup.
-
 The diagram has 12 matched pairs across three devices, four per device:
 144 pair comparisons. The first local $4\times4$ blocks cover 48 comparisons;
 two exchanges of text features supply the remaining 96. Blocking reduces
@@ -535,7 +585,7 @@ implementations may still use all-gather. For CLIP, independent block-wise
 cross-entropies cannot replace the global loss: row/column normalization
 sums and gradients must be accumulated consistently across all candidates.
 
-![[00 Учебник/Assets/Figures/curated/vision-encoders-review-2026-10/siglip-batch-size.png]]
+![[00 Учебник/Assets/Figures/curated/vision-encoders-review-2026-10/siglip-batch-size.png|ImageNet accuracy versus batch size for sigmoid and softmax objectives after nine billion examples.]]
 
 *Zhai et al., [SigLIP Figure 2, middle panel](https://arxiv.org/abs/2303.15343v4),
 CC BY 4.0. Batch size in thousands versus zero-shot ImageNet accuracy after
@@ -550,21 +600,30 @@ $+0.5$ with a negative label and $-0.5$ with a positive label, before
 division by $B$. Pairwise sigmoid removes the shared denominator;
 it does not correct a wrong target.
 
-## Dual encoders and generative VLMs are different systems
+<span id="dual-encoders-and-generative-vlms-are-different-systems"></span>
 
-Dual encoders produce a shared representation and excel at search, ranking, and zero-shot classification. A generative VLM conditions an autoregressive decoder on visual information. It needs an interface between the vision encoder and the LLM: a projector, Q-Former, Perceiver Resampler, or cross-attention.
+## Search, joint scoring, and answer generation
 
-The distinction prevents misleading comparisons. Better contrastive retrieval may not improve document OCR. A capable dialogue model may be inefficient for billion-image search. Increasing visual-token count may improve small-text accuracy while making time to first token much worse.
+A dual encoder can encode a collection once and compare the saved vectors
+with a new text query. A model that reads a page and a question together
+can use their interaction, but must process each pair. For a free-text
+answer, visual features condition the language decoder through a projector,
+Q-Former, Perceiver Resampler, or cross-attention.
 
-| System | Output | Interaction | Main limitation |
-|---|---|---|---|
-| Dual encoder | independent image and text vectors | scalar similarity | global pooling can hide fine structure |
-| Cross-encoder | pair score or task output | joint image–text processing | pair-specific interaction cannot be cached as two independent final vectors |
-| Generative VLM | next-token probabilities | visual memory conditions a decoder | context cost and possible unsupported generation |
+| System | How it produces a result |
+|---|---|
+| Dual encoder | Compares independently encoded image and text vectors |
+| Cross-encoder | Processes image and text together to score the pair |
+| Generative VLM | Predicts answer tokens from the question and image features |
 
-## Diagnostic tests
+<span id="diagnostic-tests"></span>
 
-Evaluation should alter the evidence. Occluding the answer region should change the prediction. Swapping object relations should change compositional answers. Reducing font size should produce a measurable degradation curve. For CLIP-like models, retrieval, zero-shot classification, linear probing, and distribution-shift robustness answer different questions and should be reported separately.
+## Tests for local details and relations
+
+To test whether the model reads a table, change only the cell that
+answers the question. To test relations, swap the roles of two objects
+while keeping the same set of words. Retrieval, zero-shot classification,
+and linear probing measure different abilities and use different data.
 
 <a id="vlm-winoground"></a>
 
@@ -576,6 +635,9 @@ relations, such as a person leading a horse versus a horse leading a person.
 All four pairings are scored. Text success requires the correct caption
 for both images; image success requires the correct image for both captions;
 group success requires both. Strict inequalities make ties failures.
+
+<details id="vlm-code-winoground">
+<summary>Code: the Winoground metrics</summary>
 
 ```python
 import numpy as np
@@ -593,17 +655,22 @@ assert paired_scores([[3, 2], [4, 5]]) == (True, False, False)
 assert paired_scores(np.ones((2, 2))) == (False, False, False)
 ```
 
+</details>
+
 In the second matrix both rows prefer the correct caption, yet caption one
 scores higher for image two. Reporting only text success conceals that
 failure. These numbers illustrate the metric, not measured CLIP performance.
-Likewise, masking a document cell does not test reading if surrounding
-context reveals its value. Choose examples whose answer depends on the
-hidden region, and inspect preprocessing, encoder grid, selected layer and
-connector input before attributing the error to the language decoder.
+For the scan above, replace 7 with 9 only in the answer cell and leave the
+question unchanged. First compare the two preprocessed images. If they
+are identical, this test cannot show whether the model reads tables. If
+both digits survive preprocessing, check both answers. If either is
+wrong, compare the encoder output with the features sent to the decoder.
 
 ## Sources and next chapter
 
 - Stanford CS231n, [Multimodal Foundation Models, Lecture 16](https://cs231n.stanford.edu/slides/2025/lecture_16.pdf), PDF pp. 13–55.
 - Dosovitskiy et al., [An Image is Worth 16×16 Words](https://arxiv.org/abs/2010.11929).
 - Radford et al., [Learning Transferable Visual Models From Natural Language Supervision](https://arxiv.org/abs/2103.00020).
+- Zhai et al., [Sigmoid Loss for Language Image Pre-Training](https://arxiv.org/abs/2303.15343v4), Algorithm 1 and §3.3.
+- Stanford CS336, [Lecture 17: Multimodality](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_17.py).
 - Next: [[en/00 Textbook/16 Multimodal Models/64a Connectors and fusion|Connectors and fusion]].

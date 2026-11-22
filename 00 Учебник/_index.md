@@ -148,8 +148,8 @@ last_updated: 2026-11-14
 
 - [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning|Эмбеддинги и метрическое обучение]]
 - [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid|Лексический, плотный и гибридный поиск]]
-- [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction|Reranking — cross-encoder и late interaction]]
-- [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер|RAG — полный конвейер]]
+- [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction|Переранжирование документов]]
+- [[02 Areas/ML & DL/00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер|RAG: от источника до проверяемого ответа]]
 
 <a id="xiii-мультимодальные-модели"></a>
 <a id="мультимодальные-модели"></a>
@@ -158,7 +158,7 @@ last_updated: 2026-11-14
 
 Начните после CNN и Transformer. Модуль проходит путь от зрительного представления к языковому ответу, затем рассматривает документы, видео, аудио и оценивание. Генерация изображений вынесена в отдельный модуль.
 
-- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64 Мультимодальные модели|Мультимодальные модели]]
+- [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64 Мультимодальные модели|Визуальные токены: ViT, CLIP и SigLIP]]
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64a Connectors и fusion|Connectors и fusion]]
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции|Разрешение, tiling и пространственные позиции]]
 - [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные|Обучение VLM — alignment, instruction tuning и данные]]
