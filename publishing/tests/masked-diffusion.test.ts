@@ -46,12 +46,17 @@ describe('masked diffusion language models',()=>{
       expect(registry.find((r:any)=>r.asset===spec.asset)?.used_in).toContain(path);
     }
   });
-  it('integrates the explanation in the existing module and both subject indexes',()=>{
+  it('places the canonical chapter on the main path and in both subject indexes',()=>{
     const book=loadManifest(resolve(root,'publishing/navigation.yml')).sections.find(s=>s.id==='textbook')!;
     const route='textbook/pretraining/masked-diffusion-language-models';
     expect(book.pages.find(p=>p.route===route)?.source).toBe(path);
-    expect(readingPaths(book).find(p=>p.id==='representation-learning')?.routes.slice(-2))
-      .toEqual(['textbook/pretraining/mae-masked-autoencoders',route]);
+    const paths = readingPaths(book);
+    const main = paths.find(p=>p.id==='main')!.routes;
+    const position = main.indexOf(route);
+    expect(position).toBeGreaterThan(0);
+    expect(main.slice(position-1, position+2))
+      .toEqual(['textbook/pretraining/scaling-laws',route,'textbook/inference/decoding']);
+    expect(paths.find(p=>p.id==='representation-learning')!.routes).not.toContain(route);
     for(const p of ['00 Учебник/_index.md','en/00 Textbook/_index.md','01 Справочник/_index.md','en/01 Reference/_index.md'])
       expect(read(p)).toContain(path.replace(/\.md$/,''));
     for(const anchor of ['masking-process','weighted-mask-loss','reverse-transition','complete-toy-sampler',
@@ -59,6 +64,26 @@ describe('masked diffusion language models',()=>{
       expect(body).toContain('id="'+anchor+'"');
     expect(body).toContain('not a complete ReMDM sampler');
     expect(body).toContain('a different estimator');
-    expect(body).toContain('not just the word “block”');
+    expect(body).toContain('Scheduling the updates in blocks does not make these prefix states');
+    expect(body).toContain('It cannot read the clean second block');
+  });
+  it('keeps the conditional reveal and fixed-count calculations aligned with the examples',()=>{
+    const text = body.replace(/\s+/g, ' ');
+    const [numerator, denominator] = text.match(/0\.4\\cdot\(1\/3\)=(\d+)\/(\d+)/)!.slice(1).map(Number);
+    expect(numerator / denominator).toBeCloseTo((2 / 3) * 0.6 * (1 / 3), 12);
+    const likelihood = text.split('<a id="llada-fixed-mask-likelihood"></a>')[1].split('### Denoiser calls')[0];
+    const fixedEstimate = Number(likelihood.match(/about (0\.\d+)/)![1]);
+    const bernoulliEstimate = Number(likelihood.match(/giving (0\.\d+)/)![1]);
+    expect(fixedEstimate).toBeCloseTo(-Math.log(0.8 * 0.5) / 2, 6);
+    expect(bernoulliEstimate).toBeCloseTo(-Math.log(0.8 * 0.5) / (4 * 0.25), 6);
+    // For length four the integrated Bernoulli coefficient is cubic;
+    // Simpson's rule is exact. Compare to uniform mask-count sampling.
+    for (let masks = 1; masks <= 4; masks++) {
+      const weighted = (t: number) => t ** (masks - 1) * (1 - t) ** (4 - masks) / 4;
+      const integral = (weighted(0) + 4 * weighted(0.5) + weighted(1)) / 6;
+      expect(integral).toBeCloseTo(1 / (4 * masks * [0, 4, 6, 4, 1][masks]), 12);
+    }
+    expect((0.5 * 0.75 + 0.5 * 0.5)).toBeCloseTo(0.625, 12);
+    expect(text).toContain('0.5=0.625');
   });
 });

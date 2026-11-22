@@ -104,7 +104,7 @@ last_updated: 2026-11-14
 - [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных|Сбор, очистка и смеси данных]]
 - [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса|Дедупликация, PII и контроль качества корпуса]]
 - [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/42 Next-token prediction|Целевая функция предобучения]]
-- [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/43 Scaling laws|Scaling laws]]
+- [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/43 Scaling laws|Законы масштабирования]]
 - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA|Диффузионные языковые модели: MDLM и LLaDA]]
 
 ### VIII. Декодирование

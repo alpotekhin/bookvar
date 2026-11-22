@@ -474,7 +474,8 @@ sections:
                 route: textbook/pretraining/dedup-pii-corpus-quality
               - label: Целевая функция предобучения
                 route: textbook/pretraining/next-token-objective
-              - label: Scaling laws
+              - label: Законы масштабирования
+                label_en: Scaling laws
                 route: textbook/pretraining/scaling-laws
               - label: "Диффузионные языковые модели: MDLM и LLaDA"
                 label_en: "Masked diffusion: MDLM and LLaDA"

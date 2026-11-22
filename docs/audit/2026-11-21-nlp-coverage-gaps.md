@@ -73,7 +73,9 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«Mixture of Experts»](2026-11-21-moe-editorial-pass.json),
 [«SSM, Mamba, линейное внимание и гибриды»](2026-11-21-sequence-models-editorial-pass.json),
 [«Данные и предобучение»](2026-11-22-data-pretraining-editorial-pass.json),
-[«Сбор, очистка и смеси данных»](2026-11-22-data-collection-editorial-pass.json) и
-[«Дедупликация, PII и контроль качества корпуса»](2026-11-22-corpus-dedup-editorial-pass.json).
-Следующая глава — «Целевая функция предобучения»: какие прогнозы
-оцениваются на последовательности и как из них получается средняя потеря.
+[«Сбор, очистка и смеси данных»](2026-11-22-data-collection-editorial-pass.json),
+[«Дедупликация, PII и контроль качества корпуса»](2026-11-22-corpus-dedup-editorial-pass.json),
+[«Целевая функция предобучения»](2026-11-22-ntp-objective-editorial-pass.json),
+[«Законы масштабирования»](2026-11-22-scaling-laws-editorial-pass.json) и
+[«Диффузионные языковые модели: MDLM и LLaDA»](2026-11-22-masked-diffusion-editorial-pass.json).
+Следующая глава — «Декодирование и выбор следующего токена».

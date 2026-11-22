@@ -2,6 +2,18 @@
   "date": "2026-10-30",
   "lastReviewedDate": "2026-11-09",
   "editorialRevisions": {
+    "00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA.md": {
+      "currentSha256": "3e18229bdda45a87e291d5e7112be52e86c41005b48a974ab903c53d3294659a",
+      "stopBefore": "2026-11-22-scaling-laws-editorial-pass.json"
+    },
+    "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md": {
+      "currentSha256": "4a70ceecb3e3d943ed0f5b68d84690f87c179f86a959180675bed5cf685ea258",
+      "stopBefore": "2026-11-22-ntp-objective-editorial-pass.json"
+    },
+    "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md": {
+      "currentSha256": "132534860bc4c416f008a0d46f35cf12bc0ac9f72ca022876b7f50531f908cdf",
+      "stopBefore": "2026-11-22-corpus-dedup-editorial-pass.json"
+    },
     "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md": {
       "currentSha256": "c975a9c002ade8c78f834f1925d1dde6f9b966c6e913f0869bfc8250aa774030",
       "stopBefore": "2026-11-22-data-collection-editorial-pass.json"

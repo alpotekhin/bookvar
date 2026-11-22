@@ -3,8 +3,8 @@ title: Masked diffusion — MDLM, LLaDA and block generation
 type: textbook-chapter
 status: canonical
 source_language: en
-last_updated: 2026-11-05
-last_verified: 2026-11-05
+last_updated: 2026-11-22
+last_verified: 2026-11-22
 reference_terms:
   - anchor: masking-process
     label: "MDLM: поглощающее маскирование и обучающий вход"
@@ -55,12 +55,10 @@ primary_sources:
 
 # Masked diffusion — MDLM, LLaDA and block generation
 
-Consider a four-token sequence: `The cat sleeps here`. An autoregressive
-model generates it by sampling `The`, then `cat` conditioned on `The`,
-then `sleeps` conditioned on both preceding tokens. A masked diffusion
-model can instead start with four `[MASK]` tokens, reveal `sleeps` first,
-then fill other positions using everything already visible on either side.
-The output positions exist before their contents are known.
+An autoregressive model fills the positions of `The cat sleeps here` in
+order. A masked diffusion model can fill position 3 first and then use
+`sleeps` to help predict the missing tokens before and after it. It starts
+with four output positions, all masked.
 
 | Reverse-process state | Sequence (positions 1–4) |
 |---|---|
@@ -69,23 +67,18 @@ The output positions exist before their contents are known.
 | Later | `The` `[MASK]` `sleeps` `here` |
 | Complete | `The` `cat` `sleeps` `here` |
 
-This is a hand-constructed trajectory, not the output of a model run.
-Words stand for tokens only in this example. A step can reveal several
-positions, or none; it need not move from left to right. Once a position
-is committed, the basic MDLM sampler keeps it unchanged. Revising a
-committed mistake requires a different sampler, discussed below.
+This toy trajectory treats each word as one token. A reverse step can
+reveal several positions or none. The basic MDLM sampler keeps a token
+once revealed; ReMDM later relaxes that constraint.
 
-The prerequisites are [[00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V|self-attention]],
-[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|masked language modeling]],
-and [[00 Учебник/11 Pre-training и Scaling/42 Next-token prediction|autoregressive likelihood]].
-The exposition follows MDLM §§3–4, LLaDA §2, and Block Diffusion §§2–3.
-The longer [Kuleshov group tutorial](https://kuleshov-group.github.io/blog/blog/2026/how-to-build-a-diffusion-language-model/)
-also connects these mechanisms to subsequent architectures and post-training.
-The examples below are added to work through the equations, not reported
-experiments from those papers.
+The predictor uses [[00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V|bidirectional self-attention]],
+as in [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|BERT]].
+Unlike the [[00 Учебник/11 Pre-training и Scaling/42 Next-token prediction|shifted targets of a next-token model]],
+the target at a masked position is the clean token at that same position.
 
 <a id="masking-process"></a>
-## Corrupting a sequence creates the training input
+<span id="corrupting-a-sequence-creates-the-training-input"></span>
+## The masked training input
 
 ![[00 Учебник/Assets/Figures/curated/masked-diffusion-2026-10-29/mdlm-overview.png|Original MDLM training diagram and historical LM1B comparison]]
 
@@ -128,21 +121,20 @@ and time-independent variants. LLaDA uses its bidirectional predictor
 without a separate time input. These choices matter when reusing a
 prediction at another noise level.
 
-For example, the model might receive `The [MASK] sleeps [MASK]`. Both
-missing positions can attend to `The` and `sleeps`, including visible
-tokens to their right. This is the architectural connection to BERT.
-The model still needs positional information: two identical mask-token
-embeddings must be distinguishable by where they occur.
+For `The [MASK] sleeps [MASK]`, position 2 can use `sleeps` to its right,
+and position 4 can use it to its left. The model distinguishes the two
+positions through positional information even though they share the
+same mask-token embedding.
 
 <a id="weighted-mask-loss"></a>
-## Training averages over masking rates
+<span id="training-averages-over-masking-rates"></span>
+## The weighted denoising loss
 
-MDLM's SUBS parameterization incorporates two constraints. The predicted
+MDLM uses a substitution-based parameterization (SUBS). The predicted
 clean token cannot itself be `[MASK]`, so its mask-token logit is set to
 $-\infty$. At visible positions the clean-token distribution copies the
-input token. Consequently, only masked positions contribute to the loss.
-These are constraints on the parameterization, not abilities the network
-must discover from examples.
+input token. At an unmasked position the copy has probability one, so its negative
+log-probability is zero.
 
 For the linear schedule, the continuous-time negative evidence lower
 bound, normalized by sequence length, becomes
@@ -165,9 +157,10 @@ schedule, the positive cross-entropy weight is
 $-\alpha'_t/(1-\alpha_t)$ rather than $1/t$.
 The source derivation is [MDLM §§3.2–3.5](https://arxiv.org/html/2406.07524v2#S3).
 
-Suppose $L=4$, $t=0.25$, and a particular draw masks two positions.
-The probabilities assigned to their correct tokens are 0.8 and 0.5.
-The sampled per-token loss is
+At $t=0.25$, one possible draw again gives `The [MASK] sleeps [MASK]`.
+Suppose the network assigns probabilities 0.8 and 0.5 to the targets
+`cat` and `here`. Only positions 2 and 4 contribute to the sampled
+per-token loss:
 
 $$
 \frac{-\log0.8-\log0.5}{4\cdot0.25}
@@ -175,10 +168,14 @@ $$
 $$
 
 Dividing by the *observed* number of masks instead would give 0.458145.
-That is a different estimator. The denominator in this objective uses
-the sequence length and sampled masking probability, not a replacement
-by the actual mask count. A draw with no masks contributes zero; forcing
-one position to be masked changes the sampling distribution.
+With this Bernoulli corruption, that is a different estimator: $Lt=1$
+is the expected count, while this draw contains two masks. A draw with
+no masks contributes zero. Forcing it to have a mask would change the
+corruption distribution. Later we will see a likelihood estimator that
+deliberately samples the mask count first.
+
+<details id="mdlm-weighted-code">
+<summary>Code: loss for a sampled mask</summary>
 
 ```python
 import math
@@ -198,6 +195,8 @@ assert masked_loss([], 0.25, 4) == 0
 assert math.isclose(loss / 2, -math.log(0.4) / 2)
 ```
 
+</details>
+
 This code checks the reduction and weighting of supplied probabilities;
 it does not train a Transformer. A training implementation obtains those
 probabilities from logits and differentiates the corresponding weighted
@@ -208,14 +207,18 @@ Block Diffusion §§4–5 studies this variance explicitly.
 
 <a id="diffusion-bert-boundary"></a>
 
-BERT also learns to predict missing tokens, but its original corruption
-recipe uses a fixed selected fraction and a mixture of replacements.
-Replacing that recipe with one masking rate does not establish the
-generative model above. MDLM defines a complete corruption path, reverse
-transitions and likelihood objective over the range of noise levels.
+### BERT and masked diffusion
+
+The BERT objective also predicts tokens at their original positions.
+Its corruption recipe selects a fixed fraction of positions and can
+replace a selected token with a mask or a random token, or leave it
+unchanged. The original objective does not specify how to go from an
+all-mask string to a sample from a sequence distribution. MDLM specifies
+that chain and trains against its likelihood bound.
 
 <a id="reverse-transition"></a>
-## A reverse step decides both what to predict and what to reveal
+<span id="a-reverse-step-decides-both-what-to-predict-and-what-to-reveal"></span>
+## The reverse transition
 
 Assume first that the clean token $x_i$ is known. If $z_t^i$ is visible,
 then $z_s^i=z_t^i$: reversing an absorbing masking process cannot change
@@ -247,11 +250,19 @@ p_\theta(z_s^i=v\mid z_t)=
 .
 $$
 
-For $t=0.75$, $s=0.25$, the reveal probability is $2/3$. If the denoiser
-predicts `cat` with probability 0.6 and `dog` with probability 0.4, the
-next-state probabilities are 0.4 for `cat`, $4/15$ for `dog`, and $1/3$
-for remaining masked. A high-confidence prediction can therefore remain
-masked simply because this transition did not reveal its position.
+Take the same visible pattern, `The [MASK] sleeps [MASK]`, during
+generation. For $t=0.75$, $s=0.25$, the reveal probability is $2/3$.
+If the predictor assigns probability 0.6 to `cat` and 0.4 to `dog`
+at position 2, that position becomes `cat` with probability 0.4,
+`dog` with probability $4/15$, or stays masked with probability $1/3$.
+Position 4 stays masked with probability $1/3$ regardless of its
+token predictions. The MDLM step samples the two positions independently,
+so the probability of `The cat sleeps [MASK]` after this step is
+$0.4\cdot(1/3)=2/15$. On the next pass the predictor can use the newly
+visible `cat` as context.
+
+<details id="mdlm-reverse-code">
+<summary>Code: reverse distribution at one position</summary>
 
 ```python
 MASK = "[MASK]"
@@ -275,13 +286,16 @@ assert math.isclose(transition[MASK], 1 / 3)
 assert reverse_token("cat", {"dog": 1.0}, 0.25, 0.75) == {"cat": 1.0}
 ```
 
+</details>
+
 The last assertion expresses carry-over: even a new prediction preferring
 `dog` cannot overwrite a committed `cat` in this sampler. At the final
 step $s=0$, $r=1$ and all remaining masks are filled. Predicted probability
 and reveal probability have distinct roles throughout the trajectory.
 
 <a id="complete-toy-sampler"></a>
-## A complete sampler on a two-token distribution
+<span id="a-complete-sampler-on-a-two-token-distribution"></span>
+## Simultaneous reveals on a two-token dataset
 
 Consider a dataset containing only `red fox` and `blue whale`, each with
 probability one half. The clean-token predictor below computes the exact
@@ -293,6 +307,9 @@ With both positions masked, each predicts two alternatives with probability
 one half. After `red` is visible, the second position predicts `fox` with
 probability one. The two positions are dependent even though each
 individual marginal is easy to compute.
+
+<details id="mdlm-toy-code">
+<summary>Code: the two-token sampler</summary>
 
 ```python
 import random
@@ -350,6 +367,8 @@ for steps in (1, 2, 4, 16):
             assert all(a == MASK or a == b for a, b in zip(before, after))
 ```
 
+</details>
+
 The sampler starts from pure masks, recomputes the conditional predictions
 after its state changes, and samples each position from the reverse
 transition. It performs no model loading or training. The carry-over check
@@ -357,16 +376,18 @@ holds even for an invalid final pair such as `red whale`: a committed
 mistake also remains committed.
 
 An invalid pair can appear when both positions are revealed in one step.
-Independent draws from their
-marginals produce four equally probable pairs. Two never occur in the
-dataset. More steps reduce the chance of simultaneous revelation and let
+Independent draws from their marginals produce four equally probable
+pairs. `red whale` and `blue fox` are outside the dataset. More steps reduce the chance of simultaneous revelation and let
 one sampled token condition the other.
 
 <a id="diffusion-pair-factorization"></a>
 
 For a linear schedule with $T$ equally spaced reverse steps, each position
-has a uniform reveal-step index in $\{1,\ldots,T\}$. Their independent
-indices coincide with probability $1/T$. When that happens, the two
+has a uniform reveal-step index in $\{1,\ldots,T\}$. When there are
+$k$ steps left, the reveal probability for a still-masked position is
+$1/k$. Thus each of the $T$ steps gets the same unconditional probability:
+for example, the second step has probability $(1-1/T)/(T-1)=1/T$ when
+$T>1$. The independent indices coincide with probability $1/T$. When that happens, the two
 independent token draws disagree with probability $1/2$. Otherwise the
 second reveal sees the first and is correct. Therefore, in this particular
 toy model,
@@ -382,23 +403,24 @@ through its shared input, but independent token draws in a finite reverse
 step do not become a joint draw merely because attention is bidirectional.
 
 <a id="llada-training-and-selection"></a>
-## LLaDA: a bidirectional predictor trained at language-model scale
+<span id="llada-a-bidirectional-predictor-trained-at-language-model-scale"></span>
+## LLaDA training and decoding
 
-LLaDA uses a Transformer mask predictor and the same broad pre-training
-and instruction-tuning stages as an autoregressive language model. Its
-attention is bidirectional. Removing the causal attention mask from a
-decoder-style backbone changes which positions can communicate; it does
-not by itself train the denoising conditionals needed above.
+LLaDA pre-trains a bidirectional Transformer by masking tokens
+independently at a sampled rate. For instruction fine-tuning, the prompt
+stays visible and only the response can be masked. In
+[§2.3, Eq. (5)](https://arxiv.org/html/2502.09992v3#S2.SS3) the loss sums
+the negative log-probabilities of the masked response tokens and weights
+the sum by the inverse masking rate. The accompanying guidelines show a
+per-answer reduction that also divides by the padded response length.
 
-During pre-training, random noise levels determine which input tokens
-become masks, and the model reconstructs their original values. During
-SFT, the instruction remains visible while only response positions are
-corrupted. The target at a masked response position is its own clean
-token, not the next token shifted by one. Loss normalization must use the
-selected response region, including any EOS positions the recipe trains.
-In the original LLaDA SFT recipe, short responses are padded with EOS
-tokens, which are trained as ordinary targets. These positions are not
-automatically excluded by a generic padding mask.
+For example, suppose a prompt is followed by the padded response
+`red fox [EOS] [EOS]`. If the draw gives `red [MASK] [EOS] [MASK]`,
+the targets are `fox` at position 2 and `[EOS]` at position 4. The
+guidelines count all four response positions in the length. The prompt
+provides context, and the visible EOS is already known. Neither adds a
+loss term on this draw. In this recipe the EOS padding is part of the
+training target, unlike padding excluded from a next-token loss.
 
 In the pinned [LLaDA guidelines](https://github.com/ML-GSAI/LLaDA/blob/9182493720ed723ef8031210d85959364e51cbe0/GUIDELINES.md),
 masking probability is bounded below by a small epsilon. The guidelines
@@ -411,8 +433,11 @@ divides a fixed output length into blocks and allocates a number of token
 commitments to each step. In `low_confidence` mode, candidate tokens are
 ranked by their predicted probabilities; the highest-confidence candidates
 are committed, while other proposals remain masks. `random` uses random
-scores instead. These policies differ from independent Bernoulli reveal
-decisions in the MDLM ancestral step.
+scores instead. Suppose the current block has two masks, the proposed tokens have
+probabilities 0.6 and 0.5, and the step can commit one position. The
+confidence rule keeps the 0.6 proposal and leaves the other mask in
+place. The MDLM ancestral step makes separate random reveal decisions:
+it can reveal zero, one or both positions.
 
 The name `remasking` in this implementation does not mean that it can
 erase any previously committed token. The code restricts selection to
@@ -427,7 +452,8 @@ every autoregressive objective with masked diffusion improves quality.
 See [LLaDA §2 and Appendix B.4](https://arxiv.org/html/2502.09992v3#S2).
 
 <a id="block-diffusion-and-kv"></a>
-## Block diffusion changes the factorization and the attention mask
+<span id="block-diffusion-changes-the-factorization-and-the-attention-mask"></span>
+## Block diffusion and block-causal attention
 
 ![[00 Учебник/Assets/Figures/curated/masked-diffusion-2026-10-29/block-diffusion-overview.svg|Original Block Diffusion sequence of completed context and an active noisy block]]
 
@@ -475,22 +501,32 @@ prompt token has attended to changing answer positions. For example,
 with uniform attention and scalar values 2 for a prefix token and 0 for
 an active token, their mean is 1. Replacing the active value by 6 changes
 the mean to 4. A subsequent projection of the prefix state changes too.
-An exact prefix KV cache requires the appropriate attention structure,
-not just the word “block” in a sampling option.
+Scheduling the updates in blocks does not make these prefix states
+invariant. Exact prefix caching requires the block-causal mask or another
+mechanism that prevents the dependency.
 
 <a id="diffusion-stream-leakage"></a>
 
-Training must also prevent target leakage. To denoise block $b$, the
-model needs its noisy version and clean earlier blocks. To use block $b$
-as context for a later block, it needs the clean version of $b$. The
-source's vectorized training concatenates noisy and clean streams and
-uses a specialized attention mask so that a noisy target cannot read
-its own clean copy or a later clean block. This is described in
-[Block Diffusion §3.2 and Appendix B.6](https://arxiv.org/html/2503.09573v3#S3.SS2).
-Changing only the attention mask of one clean stream would expose answers.
+### Clean and noisy streams during training
+
+Take the clean blocks `The cat` and `sleeps here`, and suppose their
+noisy copies are `The [MASK]` and `sleeps [MASK]`. To predict `here`,
+the second noisy block can read its own noisy copy and the clean first
+block. It cannot read the clean second block, where the answer is still
+present, or the noisy first block. The clean stream attends only to the
+clean stream with a block-causal mask. Earlier clean states cannot
+relay `here` to the predictor because they cannot attend forward.
+
+The vectorized algorithm concatenates the noisy and clean streams in
+one forward pass. It processes two copies of each position, and the
+mask makes each noisy block see only its own noisy inputs and the clean
+prefix it will have at generation time. See
+[Block Diffusion §3.2](https://arxiv.org/html/2503.09573v3#S3.SS2) and
+[Appendix B.6](https://arxiv.org/html/2503.09573v3#A2.SS6).
 
 <a id="remasking-and-refinement"></a>
-## ReMDM permits a committed token to become uncertain again
+<span id="remdm-permits-a-committed-token-to-become-uncertain-again"></span>
+## ReMDM and remasking
 
 ![[00 Учебник/Assets/Figures/curated/masked-diffusion-2026-10-29/remasking-overview.svg|Original ReMDM example correcting She sell to She sells]]
 
@@ -499,10 +535,9 @@ CC BY 4.0. The left-hand trajectory runs upward from $t=1$ to $t=0$:
 `sell` becomes a mask and is then replaced by `sells`. The right-hand
 MAUVE values belong to the original OpenWebText experiment, not to our toy sampler.*
 
-ReMDM adds a probability $\sigma_t$ of remasking a visible position.
-It also changes the transition out of the masked state so that the
-desired marginal visible fraction remains $\alpha_s$. Under the
-known-clean-data posterior in [ReMDM §3.1](https://arxiv.org/html/2503.00307v4#S3.SS1),
+ReMDM removes a visible token with probability $\sigma_t$. To keep the
+next marginal visible probability at $\alpha_s$, it must reveal more
+of the masked positions. Under the known-clean-data posterior in [ReMDM §3.1](https://arxiv.org/html/2503.00307v4#S3.SS1),
 a visible token survives with probability $1-\sigma_t$, while a masked
 position is revealed with probability
 
@@ -513,13 +548,17 @@ $$
 For $\alpha_t=0.5$, $\alpha_s=0.75$, and $\sigma_t=0.25$, one quarter
 of the visible positions are removed. Masked positions are filled with
 probability 0.75. The next expected visible fraction is
-$0.5\cdot0.75+0.5\cdot0.75=0.75$. Keeping the old reveal probability
-while adding remasking would instead produce the wrong marginal.
+$0.5\cdot0.75+0.5\cdot0.75=0.75$. The MDLM reveal probability here was
+0.5. Keeping it while adding remasking would leave an expected visible
+fraction of only $0.5\cdot0.75+0.5\cdot0.5=0.625$.
 
 The probabilities are valid only when
 $0\le\sigma_t\le\min(1,(1-\alpha_s)/\alpha_t)$ for $\alpha_t>0$.
 At $\alpha_t=0$, there are no visible positions to remove. Previously
 visible tokens must not be remasked at the final clean endpoint.
+
+<details id="mdlm-remask-code">
+<summary>Code: remasking and reveal probabilities</summary>
 
 ```python
 def remask_rates(alpha_t, alpha_s, sigma):
@@ -538,11 +577,12 @@ assert remask_rates(0.5, 0.75, 0) == (0, 0.5)
 assert remask_rates(0.5, 1, 0) == (0, 1)
 ```
 
+</details>
+
 These are posterior schedule calculations, not a complete ReMDM sampler.
 During generation the network supplies the clean-token probabilities.
-A remasked mistake can be replaced using the surrounding context at a
-later step, but correct tokens can also be removed. Neither more steps
-nor a large $\sigma_t$ guarantees improvement for every sample.
+A later step can replace a remasked mistake using its new context, but
+it can also replace a correct token.
 
 ![[00 Учебник/Assets/Figures/curated/masked-diffusion-2026-10-29/remasking-loop.svg|Original ReMDM-loop noise and remasking schedules]]
 
@@ -564,32 +604,68 @@ and confidence-dependent remasking schedules; they are distinct choices,
 not consequences of the name “diffusion”.
 
 <a id="likelihood-and-serving"></a>
-## Likelihood, latency and what to compare
+<span id="likelihood-latency-and-what-to-compare"></span>
+## Likelihood estimates and generation cost
 
-An autoregressive model assigns an exact tractable likelihood by summing
-token log-probabilities along the observed prefix. A masked diffusion
-model defines probability through latent trajectories; its common
-evaluation uses a variational bound estimated over noise levels and
-corruptions. Exponentiating a per-token NELBO produces an upper bound on
-perplexity, subject to estimation error. It must not be relabeled as exact
-autoregressive perplexity. Loss from one arbitrary mask pattern is not
-the sequence likelihood either.
+For an autoregressive model, summing the log-probabilities of the
+observed tokens given their prefixes gives the sequence log-likelihood.
+A masked diffusion model defines the sequence probability by summing over
+latent trajectories. The expected NELBO bounds the negative log-likelihood
+from above; exponentiating its per-token value bounds perplexity from above.
+A Monte Carlo estimate of that bound still has sampling error.
 
-Predicting a whole block per pass does not automatically make generation
-faster. An autoregressive decode step processes a new token using cached
-prefix state; a fully bidirectional denoising step can process the whole
-sequence again. Report the number of network evaluations, tokens processed
-per evaluation, block size, cache policy and actual end-to-end latency.
-Count extra unconditional evaluations if classifier-free guidance is used.
+<a id="llada-fixed-mask-likelihood"></a>
+### Likelihood estimation with a fixed number of masks
+
+For conditional likelihood evaluation, [LLaDA §2.4, Eq. (6)](https://arxiv.org/html/2502.09992v3#S2.SS4)
+estimates the same bound as Eq. (5) by sampling the mask count instead of
+the noise level. Its predictor needs only the masked response and prompt.
+For a response of length $L$,
+first draw the mask count $\ell$ uniformly from 1 to $L$. Then choose
+exactly $\ell$ positions uniformly without replacement and multiply
+their summed loss by $L/\ell$. Dividing by $L$ for a per-token result
+leaves $1/\ell$ times the sum.
+
+For the same toy response, take `The [MASK] sleeps [MASK]` with
+$\ell=2$ and reuse the illustrative target probabilities 0.8 and 0.5. The
+per-token estimate is $(-\log 0.8-\log 0.5)/2$, about 0.458145. That
+division is part of the fixed-count scheme. The training example drew
+a masking probability of 0.25 and then happened to get two masks; its
+denominator was $L t=1$, giving 0.916291. The two draws look the same,
+but their mask counts were sampled differently. Neither draw by itself
+gives a sequence likelihood.
+
+<details id="mdlm-estimator-weights">
+<summary>Why averaging over the masking rate gives the same weight</summary>
+
+Fix a particular mask set of size $\ell>0$. Under Bernoulli corruption
+its probability at rate $t$ is $t^\ell(1-t)^{L-\ell}$. Multiplying by the
+per-token weight $1/(Lt)$ and integrating $t$ from 0 to 1 gives
+$1/(L\ell\binom{L}{\ell})$. If the predictor does not take $t$ as an input,
+the loss for this mask pattern is the same throughout that integral.
+The fixed-count sampler gives the pattern probability
+$1/(L\binom{L}{\ell})$ and uses weight $1/\ell$. The resulting coefficient
+is identical for each nonempty mask set.
+
+</details>
+
+### Denoiser calls and cache reuse
+
+An autoregressive decode step can process one new token against a cached
+prefix. A fully bidirectional denoising step may process the entire
+sequence again. To compare them, count network evaluations and tokens
+per evaluation, then measure latency on the same workload. Classifier-free
+guidance evaluates an unconditional input too, even if the implementation
+batches it with the conditional input.
 
 <a id="diffusion-prediction-reuse"></a>
 
-MDLM §4.1 describes another form of reuse: when a step reveals no tokens,
-the next input sequence is identical. A time-independent denoiser can
-reuse its entire clean-token prediction and apply a new reverse-transition
-probability without another network call. This is not a prefix KV cache.
-It becomes invalid when an input token changes, or when a changed time
-embedding changes the denoiser's input.
+In [MDLM §4.1](https://arxiv.org/html/2406.07524v2#S4.SS1), if a step
+leaves every mask in place, the next step receives the same sequence. A
+time-independent denoiser can reuse its predicted distributions; only the
+reverse-transition probabilities need updating. A newly revealed token
+or a different time embedding invalidates that prediction. A prefix KV
+cache, by contrast, can stay valid while the active block changes.
 
 For an output of $L$ tokens split into $B$ blocks, with $K$ denoising passes
 per block, the nominal denoiser count is $BK$, not merely $K$.
@@ -600,13 +676,13 @@ See [[00 Учебник/14 Inference и оптимизация/55a Физика 
 and [[00 Учебник/10 ML Systems/03 Измерение производительности и roofline|performance measurement]]
 for the corresponding hardware model.
 
-For instruction-following, compare generated answers, not only masked
-reconstruction. Keep tokenizer, prompts, length budget, sampling policy
-and benchmark protocol explicit. A preserved prompt is conditioning,
-not evidence that every instruction will be obeyed; a corrected grammar
-example does not establish general reasoning or reliable tool use.
+Masked reconstruction gives the predictor part of the reference response.
+To test instruction-following, start with a masked response and score
+the generated answers. Report the prompts, tokenizer, length budget,
+and sampling policy so the results can be compared.
 
-## Sources and adjacent chapters
+<span id="sources-and-adjacent-chapters"></span>
+## References
 
 - Sahoo et al., [Simple and Effective Masked Diffusion Language Models, v2](https://arxiv.org/html/2406.07524v2): §§3.2–3.5, §4, Appendix B.3. Forward process, SUBS, weighted loss and ancestral sampling; CC BY 4.0.
 - Nie et al., [Large Language Diffusion Models, v3](https://arxiv.org/html/2502.09992v3): §2 and Appendices B.4–B.7. LLaDA training, SFT, sampling and evaluation. The model-weight license is not used as a license for the paper's figures.
@@ -619,4 +695,4 @@ Related: [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoB
 [[00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|diffusion and flow models for images]].
 
 Previous: [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/43 Scaling laws|Scaling laws]].
-[[00 Учебник/_index#Контрастивное и маскированное предобучение|Back to the module]].
+Next: [[00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена|Decoding and selecting the next token]].

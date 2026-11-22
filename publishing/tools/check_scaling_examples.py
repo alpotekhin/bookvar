@@ -64,6 +64,28 @@ def mean_example():
     RESULTS["mean_mse"] = errors
 
 
+def opening_and_llama_budgets():
+    opening = TEXT.split('<a id="scaling-history"></a>', 1)[1].split(
+        '<a id="data-scaling"></a>', 1)[0]
+    budget, power = need(r"При бюджете \$(\d+)\\cdot10\^\{(\d+)\}\$", opening).groups()
+    pairs = re.findall(r"(\d+) млрд параметров на\s*(\d+) млрд токенов", opening)
+    assert len(pairs) == 2
+    expected = int(budget) * 10 ** int(power)
+    assert all(6 * int(n) * int(d) * 10 ** 18 == expected for n, d in pairs)
+
+    llama = TEXT.split('<a id="scaling-llama-budget"></a>', 1)[1].split("### ", 1)[0]
+    forecast_n, forecast_d, actual_n, actual_d = map(number, need(
+        r"даёт (\d+) млрд параметров и\s*([0-9,]+) трлн токенов.*?"
+        r"обучили с (\d+) млрд параметров на ([0-9,]+) трлн токенов", llama).groups())
+    assert (forecast_n, forecast_d) == (402, 16.55)  # report §3.2.1
+    assert (actual_n, actual_d) == (405, 15.6)  # report Introduction and §2
+    forecast_ratio = 1e3 * forecast_d / forecast_n
+    actual_ratio = 1e3 * actual_d / actual_n
+    shown = [int(x) for x in re.findall(r"около (\d+) токен[аов]* на параметр", llama)]
+    assert shown[:2] == [round(forecast_ratio), round(actual_ratio)] == [41, 39]
+    RESULTS["llama_tokens_per_parameter"] = {"forecast": forecast_ratio, "actual": actual_ratio}
+
+
 def isoflop_example():
     coefficient, power = need(r"C_1=(\d+)\\cdot10\^\{(\d+)\}").groups()
     compute = int(coefficient) * 10**int(power)
@@ -538,7 +560,7 @@ def structure_and_assets():
 
 
 if __name__ == "__main__":
-    for check in [mean_example, nonparametric_example, isoflop_example, fitted_examples, batch_and_wsd_examples,
+    for check in [opening_and_llama_budgets, mean_example, nonparametric_example, isoflop_example, fitted_examples, batch_and_wsd_examples,
                   deepseek_example, historical_fit_examples, mup_examples, inference_example,
                   emergence_example, isoflop_bias_example,
                   structure_and_assets]:

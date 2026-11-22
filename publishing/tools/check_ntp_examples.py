@@ -166,6 +166,28 @@ def main():
     assert abs(full_grad.item() - wrong_grad.item()) > 1e-4
     print("PASS: token-weighted microbatch losses AND shared-parameter gradients")
 
+    # Simulate the default rank mean using two independent autograd graphs.
+    # The test does not run a distributed process group.
+    ranks = len(batch_ids)
+    counts = batch_mask[:, 1:].sum(dim=1)
+    assert counts.tolist() == [3, 1]
+    total_count = counts.sum()
+    rank_grads = []
+    for rank, count in enumerate(counts):
+        parameter = scalar.detach().clone().requires_grad_(True)
+        local_logits = base[rank:rank+1] + parameter * direction[rank:rank+1]
+        local_sum = count * loss_fn(local_logits, batch_ids[rank:rank+1],
+                                    batch_mask[rank:rank+1])
+        (grad,) = torch.autograd.grad(local_sum, parameter)
+        rank_grads.append(grad)
+    rank_grads = torch.stack(rank_grads)
+    close((rank_grads * ranks / total_count).mean(), full_grad)
+    close((rank_grads / total_count).mean(), full_grad / ranks)
+    close((rank_grads / counts).mean(), wrong_grad)
+    close((2 * 6 / 4 + 2 * 4 / 4) / 2, (6 + 4) / 4)
+    close((6 / 3 + 4 / 1) / 2, 3)
+    print("PASS: simulated DDP rank averaging with global, missing-scale and rank-local counts")
+
     windows = namespace["scoring_windows"]
     for length in range(2, 20):
         for context in range(2, 10):

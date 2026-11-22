@@ -1196,7 +1196,7 @@ describe('static handbook output', () => {
     expect(answer).toContain('href="/' + route + '#lora-update"');
     expect(answer).not.toContain('/curated/lora/fig1.png');
   });
-  it('renders masked diffusion with four source figures, executable programs and module navigation', async () => {
+  it('renders masked diffusion with four source figures, optional programs and main-course navigation', async () => {
     for (const locale of ['', 'en/']) {
       const html = await readFile(join(distDir, locale, 'textbook/pretraining/masked-diffusion-language-models/index.html'), 'utf8');
       for (const anchor of ['masking-process', 'weighted-mask-loss', 'reverse-transition', 'complete-toy-sampler',
@@ -1209,6 +1209,18 @@ describe('static handbook output', () => {
       expect(html).not.toContain('katex-error');
       expect(html).toContain('CC BY 4.0');
       expect(html).toContain('textbook/pretraining/mae-masked-autoencoders/');
+      for (const name of ['weighted-code','reverse-code','toy-code','remask-code','estimator-weights'])
+        expect(html).toMatch(new RegExp('<details\\b[^>]*id="mdlm-' + name + '"'));
+      const fixedCount = html.indexOf('id="llada-fixed-mask-likelihood"');
+      const cache = html.indexOf('id="diffusion-prediction-reuse"');
+      expect(fixedCount).toBeGreaterThan(html.indexOf('id="likelihood-and-serving"'));
+      expect(cache).toBeGreaterThan(fixedCount);
+      expect(html.slice(fixedCount, cache)).toContain('0.458145');
+      expect(html.slice(fixedCount, cache)).toContain('0.916291');
+      const links = html.match(/<a\b[^>]*>/g) ?? [];
+      for (const [rel, path] of [['next','inference/decoding'],['prev','pretraining/scaling-laws']])
+        expect(links.some(tag => tag.includes('rel="' + rel + '"')
+          && tag.includes('href="/' + locale + 'textbook/' + path + '/"'))).toBe(true);
       if (locale) expect(html).not.toContain('This content is not available in your language yet.');
     }
   });
@@ -3159,6 +3171,26 @@ describe('static handbook output', () => {
       if(locale)expectCanonicalEditionNotice(html);
     }
   });
+  it('presents the IsoFLOP example before extrapolation and separates the Llama 3 forecast from the run', async () => {
+    for (const locale of ['', 'en/']) {
+      const html = await readFile(join(distDir, locale + 'textbook/pretraining/scaling-laws/index.html'), 'utf8');
+      const ids = ['joint-model-data-scaling','isoflops-experiment','scaling-quadratic-code',
+        'scaling-log-fit','isoflop-parabola-bias','scaling-budget-projection','scaling-llama-budget'];
+      const positions = ids.map(id => html.indexOf('id="' + id + '"'));
+      expect(positions.every(i => i >= 0)).toBe(true);
+      expect(positions).toEqual([...positions].sort((a,b) => a-b));
+      for (const id of ['estimation-analogy','quadratic-code','log-fit','budget-code'])
+        expect(html).toMatch(new RegExp('<details\\b[^>]*id="scaling-' + id + '"'));
+      const llama = html.slice(positions.at(-1), html.indexOf('<h3', positions.at(-1)));
+      for (const value of ['402 млрд', '16,55 трлн', '41 токен', '405 млрд', '15,6 трлн', '39 токен'])
+        expect(llama.replace(/\s+/g, ' ')).toContain(value);
+      expect(html).toContain('href="/'+locale+'textbook/pretraining/masked-diffusion-language-models/"');
+      const article = html.slice(html.indexOf('id="scaling-history"'), html.indexOf('</main>'));
+      expect(article.length).toBeGreaterThan(1000);
+      expect(article.match(/href="[^"]*\/practice\//g) ?? []).toEqual([]);
+      if (locale) expectCanonicalEditionNotice(html);
+    }
+  });
   it('keeps both old speculative decoding bookmarks beside the renamed algorithm', async () => {
     const route = 'textbook/inference/speculative-decoding/index.html';
     for (const [prefix, current] of [
@@ -3317,6 +3349,23 @@ describe('static handbook output', () => {
     expect(html).toContain('href="/licenses/transformers-e7b03417-Apache-2.0.txt"');
     expect(html).toContain('href="/textbook/pretraining/scaling-laws/"');
     expect(html).toContain('href="/textbook/pretraining/dedup-pii-corpus-quality/"');
+  });
+  it('places token counts before evaluation and keeps NTP examples optional in both editions', async () => {
+    for (const locale of ['', 'en/']) {
+      const html = await readFile(join(distDir, locale + 'textbook/pretraining/next-token-objective/index.html'), 'utf8');
+      const ids = ['ntp-packed-document-boundary','ntp-token-normalization-ddp','перплексия',
+        'multi-token-training-objective','deepseek-sequential-mtp'];
+      const order = ids.map(id => html.indexOf('id="' + id + '"'));
+      expect(order.every(index => index >= 0)).toBe(true);
+      expect(order).toEqual([...order].sort((a,b) => a-b));
+      expect(html).toContain('href="/' + locale + 'textbook/language-modeling/next-token-probability/#nlm-sequence-nll"');
+      expect(html).toContain('href="https://docs.pytorch.org/docs/2.15/notes/ddp.html"');
+      expect(html).not.toContain('the nanoGPT practice section');
+      for (const id of ['window-code','loss-code','probabilities-code','packed-code']) {
+        expect(html).toMatch(new RegExp('<details\\b[^>]*id="ntp-' + id + '"'));
+      }
+      if (locale) expectCanonicalEditionNotice(html);
+    }
   });
   it('keeps the packed-document goal separate from the original attention mask figure', async () => {
     for (const base of ['', 'en/']) {
