@@ -12,6 +12,7 @@ import subprocess
 import tempfile
 
 from PIL import Image
+from topic_consolidation_baseline import before_topic_consolidation
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / '00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md'
@@ -36,7 +37,9 @@ def main():
     text = CHAPTER.read_text('utf-8')
     assert text.count(START) == text.count(END) == 1
     addition = text.split(START, 1)[1].split(END, 1)[0]
-    baseline = text.replace(START + addition + END + '\n\n', '')
+    historical = before_topic_consolidation(text, CHAPTER)
+    historical_addition = historical.split(START, 1)[1].split(END, 1)[0]
+    baseline = historical.replace(START + historical_addition + END + '\n\n', '')
     baseline = baseline.replace('last_updated: 2026-10-26', 'last_updated: 2026-10-21')
     baseline = baseline.replace('last_verified: 2026-10-26', 'last_verified: 2026-10-21')
     baseline = baseline.replace('  - meeting-08-slides-riemann-zeta-demo\n', '')

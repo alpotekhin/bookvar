@@ -33,6 +33,8 @@ const laterEditions = [
   { journal: '2026-11-22-tool-use-editorial-pass.json', figureCount: 6 },
   { journal: '2026-11-22-harness-context-editorial-pass.json', figureCount: 4 },
   { journal: '2026-11-22-agent-memory-planning-editorial-pass.json', figureCount: 12 },
+  { journal: '2026-11-22-agent-evaluation-editorial-pass.json', figureCount: 9 },
+  { journal: '2026-11-22-computer-agents-editorial-pass.json', figureCount: 20 },
 ].flatMap(({ journal, figureCount }) => {
   const receipt = JSON.parse(read('docs/audit/' + journal));
   return (receipt.added_sources as AddedEdition[]).map(edition => ({

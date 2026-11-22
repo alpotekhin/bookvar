@@ -6437,8 +6437,9 @@ describe('static handbook output', () => {
       expect(html).toContain(value);
     for (const name of ['best_first_fixture', 'parse_assignment', 'express_hypothesis',
       'collect_more_information', 'CC BY 4.0', '14,6%', '16,7%', '6 963',
-      'heap-buffer-overflow', 'Step Accuracy', 'None', 'dispatch_click', 'stale_observation'])
+      'Step Accuracy', 'None', 'dispatch_click', 'stale_observation'])
       expect(html.includes(name), 'missing mechanism: ' + name).toBe(true);
+    expect(html.indexOf('parse_assignment')).toBeLessThan(html.indexOf('/swe-agent-overview.png'));
     for (const anchor of ['свободный-loop-aci-и-процедурный-workflow',
       'html-accessibility-tree-screenshot-и-set-of-marks',
       'web-agent-observation-bound-marks',
@@ -6465,25 +6466,47 @@ describe('static handbook output', () => {
       await expect(readFile(join(distDir, path, retired))).rejects.toMatchObject({code: 'ENOENT'});
     }
   });
-  it('links the Berkeley reading to the EnIGMA section and displays both proceedings figures locally', async () => {
+  it('links the Berkeley reading to the persistent-session explanation', async () => {
     const route = 'textbook/agents/coding-web-computer-use/';
     const anchor = 'ctf-состояние-специализированные-инструменты-и-обратная-связь';
     const note = 'sources/courses/berkeley-advanced-llm-agents-spring-2025/readings/meeting-05-reading-01/';
     for (const prefix of ['', 'en/']) {
       const html = await readFile(join(distDir, prefix + route, 'index.html'), 'utf8');
-      const ctf = html.match(new RegExp('id="' + anchor + '"[\\s\\S]*?(?=<h2\\b)'))?.[0];
+      const ctf = html.match(new RegExp('id="' + anchor + '"[\\s\\S]*?</h2>[\\s\\S]*?(?=<h2\\b)'))?.[0];
       expect(ctf).toBeDefined();
-      for (const figure of ['enigma-figure1.png', 'enigma-figure3.png']) {
-        expect(ctf).toMatch(new RegExp('<img[^>]+src="[^"]*/' + figure.replace('.', '\\.') + '"'));
-      }
-      for (const text of ['debug_add_breakpoint parse_header', 'starti', '170 строк', 'ещё 155',
-        '29,5%', '27,4%', '20,45%', '11,36%', '17,24%', 'https://proceedings.mlr.press/v267/abramovich25a.html'])
+      const evidence = prefix
+        ? ['stack frame', '170 lines', '155 more below', '29.5%', '27.4%', '20.45%', '11.36%', '17.24%']
+        : ['кадр стека', '170 строк', 'ещё 155', '29,5%', '27,4%', '20,45%', '11,36%', '17,24%'];
+      for (const text of [...evidence, 'https://proceedings.mlr.press/v267/abramovich25a.html'])
         expect(ctf).toContain(text);
-      expect(ctf).not.toContain('EnIGMA_Figure1.png');
-      if (prefix) expectCanonicalEditionNotice(html);
+      expect(ctf).not.toMatch(/<img[^>]+src="[^"]*\/enigma-figure[13]\.png"/);
+      expect(html).not.toContain('aria-label="English edition status"');
     }
     const source = await readFile(join(distDir, note, 'index.html'), 'utf8');
     expect(source).toContain('href="/' + route + '#' + encodeURIComponent(anchor) + '"');
+  });
+  it('renders the English computer-agents chapter with the same figures and executable examples', async () => {
+    const route = 'textbook/agents/coding-web-computer-use/';
+    const ru = await readFile(join(distDir, route, 'index.html'), 'utf8');
+    const en = await readFile(join(distDir, 'en', route, 'index.html'), 'utf8');
+    const figures = (html: string) => [...html.matchAll(/<img[^>]+src="([^"]*\/curated\/[^"]+)"[^>]+alt="([^"]+)"/g)]
+      .map(match => match[1]);
+    expect(figures(ru)).toHaveLength(20);
+    expect(figures(en)).toEqual(figures(ru));
+    for (const title of ['Repairing a parser from a failing test', 'A mark belongs to one observation',
+      'How OSWorld checks the saved result', 'How Aguvis learns where to click'])
+      expect(en).toContain(title);
+    for (const value of ['14.6%', '16.7%', '6,963', '39.7%', 'Web 2.24M',
+      'stale_observation', 'best_first_fixture', 'parse_assignment'])
+      expect(en).toContain(value);
+    for (const page of [18, 29, 35, 50, 60, 70, 80, 90]) {
+      const href = `href="https://rdi.berkeley.edu/adv-llm-agents/slides/ruslan-multimodal.pdf#page=${page}"`;
+      expect(ru).toContain(href);
+      expect(en).toContain(href);
+    }
+    expect(en).toContain('href="/en/textbook/agents/evaluation/"');
+    expect(en).toContain('href="/en/textbook/agents/formal-math/"');
+    expect(en).not.toContain('katex-error');
   });
   it('renders agent evaluation mechanisms, original figures and worked examples', async () => {
     const html = await readFile(join(distDir, 'textbook/agents/evaluation/index.html'), 'utf8');
@@ -6534,13 +6557,14 @@ describe('static handbook output', () => {
       expect(chapter).toContain(`href="/${locale}${source}"`);
       expect(note).toContain(`href="/${locale}${route}#agent-eval-toolsandbox"`);
       expect(chapter).not.toContain('katex-error');
-      if (locale) expectCanonicalEditionNotice(chapter);
+      expect(chapter).not.toContain('aria-label="English edition status"');
     }
   });
   it('keeps the stateful evaluation case and AppWorld source connected in both readers', async () => {
     const route = 'textbook/agents/evaluation/';
     const source = 'sources/papers/appworld/';
-    const ids = ['agent-eval-state-side-effects', 'agent-eval-appworld', 'agent-eval-coverage'];
+    const ids = ['agent-eval-state-side-effects', 'agent-eval-appworld', 'agent-eval-coverage',
+      'agent-eval-pass-k', 'agent-eval-paired', 'agent-eval-judge'];
     for (const locale of ['', 'en/']) {
       const chapter = await readFile(join(distDir, locale, route, 'index.html'), 'utf8');
       const index = await readFile(join(distDir, locale, 'reference/index.html'), 'utf8');
@@ -6553,6 +6577,15 @@ describe('static handbook output', () => {
       expect(chapter).toContain('https://arxiv.org/html/2407.18901v1#S3.F3');
       expect(chapter).toContain('70–72%');
       expect(chapter).toContain('Score.unscored()');
+      for (const panel of ['booking', 'pass-k', 'paired', 'rubric'])
+        expect(chapter).toContain(`<details id="agent-eval-code-${panel}">`);
+      for (const figure of ['swe-bench-construction.png', 'swe-bench-evaluation.png',
+        'tau-bench-task-components.png', 'paperbench-rubric-tree.png', 'agentbench-environments-results.png'])
+        expect(chapter).toContain('/' + figure);
+      for (const neighbour of ['memory-planning-orchestration', 'coding-web-computer-use'])
+        expect(chapter).toContain(`href="/${locale}textbook/agents/${neighbour}/"`);
+      const catalogueLink = locale ? 'GenAI Agents course catalogue' : 'библиотеке GenAI Agents';
+      expect(chapter).toContain(`<a href="/${locale}sources/genai-agents/">${catalogueLink}</a>`);
       expect(chapter).toContain(`href="/${locale}${source}"`);
       expect(note).toContain(`href="/${locale}${route}#agent-eval-appworld"`);
       expect(chapter).not.toContain('katex-error');

@@ -328,8 +328,10 @@ sections:
         source_en: en/00 Textbook/17 Tools and Agents/67 Agent memory, planning, and orchestration.md
         route: textbook/agents/memory-planning-orchestration
       - source: 00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md
+        source_en: en/00 Textbook/17 Tools and Agents/68 Evaluating agent systems.md
         route: textbook/agents/evaluation
       - source: 00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md
+        source_en: en/00 Textbook/17 Tools and Agents/69 Coding, web, and computer-use agents.md
         route: textbook/agents/coding-web-computer-use
       - source: 00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md
         route: textbook/agents/formal-math
@@ -591,8 +593,10 @@ sections:
                 label_en: Agent memory, planning, and orchestration
                 route: textbook/agents/memory-planning-orchestration
               - label: Оценивание агентных систем
+                label_en: Evaluating agent systems
                 route: textbook/agents/evaluation
-              - label: Coding, web и computer-use agents
+              - label: Программирующие агенты и работа с интерфейсами
+                label_en: Coding, web, and computer-use agents
                 route: textbook/agents/coding-web-computer-use
               - label: Формальные доказательства и математические агенты
                 route: textbook/agents/formal-math

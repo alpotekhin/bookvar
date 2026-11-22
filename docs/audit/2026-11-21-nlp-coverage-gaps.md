@@ -106,6 +106,8 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«Chameleon: текст и изображения в одной последовательности»](2026-11-22-chameleon-editorial-pass.json),
 [«Как агент работает с инструментами»](2026-11-22-agent-intro-editorial-pass.json),
 [«Как вызов функции становится действием»](2026-11-22-tool-use-editorial-pass.json),
-[«Как агент управляет контекстом»](2026-11-22-harness-context-editorial-pass.json) и
-[«Память, планирование и оркестрация агентов»](2026-11-22-agent-memory-planning-editorial-pass.json).
-Следующая глава — «Оценивание агентных систем».
+[«Как агент управляет контекстом»](2026-11-22-harness-context-editorial-pass.json),
+[«Память, планирование и оркестрация агентов»](2026-11-22-agent-memory-planning-editorial-pass.json),
+[«Оценивание агентных систем»](2026-11-22-agent-evaluation-editorial-pass.json) и
+[«Программирующие агенты и работа с интерфейсами»](2026-11-22-computer-agents-editorial-pass.json).
+Следующая глава — «Формальные доказательства и математические агенты».
