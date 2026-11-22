@@ -507,12 +507,13 @@ sections:
               - label: Градиент стратегии и PPO
                 label_en: Policy gradients and PPO for LLMs
                 route: textbook/post-training/ppo
-              - label: Цели alignment, HHH, Constitutional AI и RLAIF
-                label_en: Alignment goals, HHH, Constitutional AI, and RLAIF
+              - label: HHH, Constitutional AI и RLAIF
+                label_en: HHH, Constitutional AI, and RLAIF
                 route: textbook/post-training/alignment-goals
               - label: DPO
                 route: textbook/post-training/dpo
-              - label: RLVR и verifiers
+              - label: "RLVR: проверяемая награда"
+                label_en: RLVR and verifiers
                 route: textbook/post-training/rlvr-verifiers
               - label: GRPO и DeepSeek-R1
                 route: textbook/post-training/grpo-deepseek-r1

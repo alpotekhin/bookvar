@@ -83,6 +83,9 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«SFT: обучение на демонстрациях»](2026-11-22-sft-editorial-pass.json),
 [«Fine-tuning и PEFT»](2026-11-22-peft-editorial-pass.json),
 [«Данные предпочтений»](2026-11-22-preference-data-editorial-pass.json),
-[«Модель награды»](2026-11-22-reward-model-editorial-pass.json) и
-[«Градиент стратегии и PPO»](2026-11-22-ppo-editorial-pass.json).
-Следующая глава — «Цели alignment, HHH, Constitutional AI и RLAIF».
+[«Модель награды»](2026-11-22-reward-model-editorial-pass.json),
+[«Градиент стратегии и PPO»](2026-11-22-ppo-editorial-pass.json),
+[«HHH, Constitutional AI и RLAIF»](2026-11-22-alignment-goals-editorial-pass.json),
+[«DPO: обучение на парах ответов»](2026-11-22-dpo-editorial-pass.json) и
+[«RLVR: обучение по проверяемой награде»](2026-11-22-rlvr-editorial-pass.json).
+Следующая глава — «GRPO и DeepSeek-R1».

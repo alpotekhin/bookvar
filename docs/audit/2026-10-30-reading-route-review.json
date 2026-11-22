@@ -2,6 +2,18 @@
   "date": "2026-10-30",
   "lastReviewedDate": "2026-11-09",
   "editorialRevisions": {
+    "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md": {
+      "currentSha256": "39c1c254cdc5838d8e61b2a0c4d56efb112ab167a6c2c980fe92ca3b16d598e1",
+      "stopBefore": "2026-11-22-dpo-editorial-pass.json"
+    },
+    "00 Учебник/12 Post-training и Alignment/05 DPO.md": {
+      "currentSha256": "d6f76a107a011e71f1223211aaf44e7f4e0ac00678b1a2bbc75f2346f81d00cb",
+      "stopBefore": "2026-11-22-alignment-goals-editorial-pass.json"
+    },
+    "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md": {
+      "currentSha256": "ed2f8b22cfd653eda8c1542bb02931d1361e1da7cf3c8030f5270183217834d1",
+      "stopBefore": "2026-11-22-ppo-editorial-pass.json"
+    },
     "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md": {
       "currentSha256": "77c1f0da1a8051effaaea80dc6610c22527ef7030427be838f6716ddff922ca2",
       "stopBefore": "2026-11-22-reward-model-editorial-pass.json"

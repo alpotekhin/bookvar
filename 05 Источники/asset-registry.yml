@@ -166,6 +166,29 @@ assets:
     rights_status: source-license-verified
     last_verified: "2026-11-14"
     used_in: [ "00 Учебник/12 Post-training и Alignment/05 DPO.md" ]
+  - id: curated-lee-rlaif-vs-rlhf-edb7992b19f7
+    asset: 00 Учебник/Assets/Figures/curated/rlaif-lee-2026-11-22/rlhf-vs-rlaif.png
+    title: "RLAIF versus RLHF (Figure 2)"
+    author: Harrison Lee et al.
+    source_url: https://arxiv.org/html/2309.00267v2#S1.F2
+    source_image_url: https://arxiv.org/html/2309.00267v2/rlaif.png
+    source_asset: 00 Учебник/Assets/Figures/curated/rlaif-lee-2026-11-22/rlhf-vs-rlaif.png
+    source_asset_sha256: edb7992b19f76c3c5ac0f06e5390c9866c38c5bd5116eee52983b4630412e39e
+    sha256: edb7992b19f76c3c5ac0f06e5390c9866c38c5bd5116eee52983b4630412e39e
+    dimensions_px: [959, 470]
+    bytes: 141699
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    license_evidence: 05 Источники/Originals/rlaif-lee-2026-11-22/arxiv-abs-2309.00267v2.html
+    license_evidence_sha256: a0ededbb23cdf5386967f3d7a7cd35aa70ba98fd1c3fcd36479c70f42f5de4d8
+    rights_evidence: https://arxiv.org/abs/2309.00267v2
+    modifications: "None; complete original drawing and labels."
+    derivation: source-png-copy
+    metadata_status: verified
+    provenance_confirmation: source-license-verified
+    rights_status: source-license-verified
+    last_verified: "2026-11-22"
+    used_in: [ "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md" ]
   - id: curated-cai-human-elo-9fd352f1052c
     asset: 00 Учебник/Assets/Figures/curated/cai-evaluation-2026-11-14/human-elo-frontier.png
     author: Yuntao Bai et al.

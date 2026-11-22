@@ -2660,7 +2660,7 @@ describe('static handbook output', () => {
     const text = html.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ');
     expect(html.match(/<pre data-language="python"/g)).toHaveLength(6);
     for (const value of ['ascent_gradient', 'updated_reward', 'log_failure', 'include_stop_str_in_output',
-      '0.13125', '0.488', 'allow_set_relation_comp', 'градиентный подъём',
+      '0.13125', '0.488', 'allow_set_relation_comp', 'Обновление на четырёх ответах',
       'single_tool_reward', 'completion_efficiency_reward', 'greedily consumes']) expect(text).toContain(value);
     expect(html).toContain('id="agent-reward-design"');
     expect(html).toContain('/licenses/toolrl-8cee13ec-Apache-2.0.txt');
@@ -2689,6 +2689,17 @@ describe('static handbook output', () => {
       expect(html.match(/<pre data-language="python"/g)).toHaveLength(6);
       expect(html.match(/<img\b[^>]*\bsrc=/g)).toHaveLength(7);
       expect(html).toContain('second-latest inference');
+      expect(html.match(/<details\b[^>]*id="rlvr-code-/g)).toHaveLength(6);
+      const sequence = [
+        'rlvr-equation-example', 'parser-vs-verifier', 'rlvr-code-parser',
+        'rlvr-reward-components', 'rlvr-task-records', 'rlvr-rollout-records',
+        'rlvr-score-function', 'rlvr-reward-gradient', 'rlvr-false-acceptance',
+        'rlvr-pass-at-k', 'rlvr-tulu-experiment',
+      ];
+      const offsets = sequence.map(id => html.indexOf(`id="${id}"`));
+      expect(offsets.every((offset, i) => offset > (offsets[i - 1] ?? -1))).toBe(true);
+      expect(html).toContain('id="разбор-ответа-и-проверка--разные-задачи"');
+      expect(html).toContain('id="практика-и-первоисточники"');
       expect(html).toContain('/'+locale+'textbook/post-training/grpo-deepseek-r1/#offpolicy-ratios');
       expect(html).not.toContain('katex-error');
       if(locale)expectCanonicalEditionNotice(html);
@@ -2739,6 +2750,21 @@ describe('static handbook output', () => {
       }
       expect(html.match(/<pre data-language="python"/g)).toHaveLength(7);
       expect(html.match(/<img\b[^>]*\bsrc=/g)).toHaveLength(7);
+      expect(html.match(/<details\b[^>]*id="dpo-code-/g)).toHaveLength(7);
+      const progression = ['dpo-stages', 'dpo-sequence-logp', 'dpo-preference-model',
+        'dpo-rhf-objective', 'dpo-derivation', 'dpo-margin', 'dpo-gradient',
+        'dpo-beta', 'dpo-dataflow', 'dpo-reference', 'dpo-normalized-mass-kl'];
+      const positions = progression.map(id => html.indexOf('id="' + id + '"'));
+      expect(positions.every((pos, i) => pos >= 0 && (!i || positions[i - 1] < pos))).toBe(true);
+      const introduction = html.slice(html.indexOf('class="sl-markdown-content'), positions[0]);
+      for (const value of ['UDP', '1,22', '2,72']) expect(introduction).toContain(value);
+      for (const id of ['6-что-именно-сравнивает-функция-потерь-dpo', 'ручной-пример',
+        '15-диагностика-обучения', 'практика-и-первоисточники'])
+        expect(html.split('id="' + id + '"')).toHaveLength(2);
+      expect(html.match(/<a\b[^>]*\brel="prev"[^>]*>/)?.[0])
+        .toContain('/' + locale + 'textbook/post-training/alignment-goals/');
+      expect(html.match(/<a\b[^>]*\brel="next"[^>]*>/)?.[0])
+        .toContain('/' + locale + 'textbook/post-training/rlvr-verifiers/');
       expect(html).toContain('mass_exact_kl');
       expect(html).toContain('paired-results.png');
       expect(html).toContain('math-prompts.svg');
@@ -3003,12 +3029,26 @@ describe('static handbook output', () => {
       const html = await readFile(join(distDir, locale,
         'textbook/post-training/alignment-goals/index.html'), 'utf8');
       expect(html.match(/<pre data-language="python"/g)).toHaveLength(2);
+      expect(html.match(/<details\b[^>]*id="cai-code-/g)).toHaveLength(2);
       for (const image of ['constitutional-ai-overview.png', 'revisions-tradeoff.png',
-        'human-elo-frontier.png', 'absolute-harmfulness.svg'])
+        'rlhf-vs-rlaif.png', 'human-elo-frontier.png', 'absolute-harmfulness.svg'])
         expect(html).toMatch(new RegExp('<img[^>]+src="[^\"]*/' + image.replaceAll('.', '\\.') + '"'));
       expect(html).toContain('href="/' + locale + 'textbook/post-training/reward-modeling/#bradley-terry"');
-      expect(html).toContain('id="cai-human-elo"');
-      expect(html).toContain('id="cai-harmfulness-score"');
+      const anchors = [
+        'hhh-три-группы-требований', 'constitutional-ai-принципы-превращаются-в-данные',
+        'constitutional-data-example', 'cai-code-sft', 'cai-rlaif', 'cai-soft-labels',
+        'cai-code-preferences', 'оценка-поведения-после-обучения', 'cai-human-elo',
+        'cai-harmfulness-score', 'что-измерять-у-своего-помощника',
+      ];
+      const positions = anchors.map(id => {
+        const key = 'id="' + id + '"';
+        expect(html.split(key)).toHaveLength(2);
+        return html.indexOf(key);
+      });
+      expect(positions.every((pos, i) => i === 0 || positions[i - 1] < pos)).toBe(true);
+      expect(html).toContain('https://arxiv.org/html/2309.00267v2#S2.SS2.SSS2');
+      expect(html).toContain('https://arxiv.org/html/2309.00267v2#S1.F2');
+      expect(html).toContain('7{,}5-1');
       expect(html).not.toContain('can be read before SFT');
       expect(html).not.toContain('katex-error');
       if (locale) expectCanonicalEditionNotice(html);
