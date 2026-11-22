@@ -319,10 +319,13 @@ sections:
         source_en: en/00 Textbook/17 Tools and Agents/00 How agents use tools.md
         route: textbook/agents/module-map
       - source: 00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md
+        source_en: en/00 Textbook/17 Tools and Agents/65 How a function call becomes an action.md
         route: textbook/agents/tool-use
       - source: 00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md
+        source_en: en/00 Textbook/17 Tools and Agents/66 How agents manage context.md
         route: textbook/agents/harness-context-engineering
       - source: 00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md
+        source_en: en/00 Textbook/17 Tools and Agents/67 Agent memory, planning, and orchestration.md
         route: textbook/agents/memory-planning-orchestration
       - source: 00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md
         route: textbook/agents/evaluation
@@ -578,11 +581,14 @@ sections:
               - label: Как агент работает с инструментами
                 label_en: How agents use tools
                 route: textbook/agents/module-map
-              - label: Tool use — от вызова функции к действию
+              - label: Как вызов функции становится действием
+                label_en: How a function call becomes an action
                 route: textbook/agents/tool-use
-              - label: Agent harness и context engineering
+              - label: Как агент управляет контекстом
+                label_en: How agents manage context
                 route: textbook/agents/harness-context-engineering
               - label: Память, планирование и оркестрация агентов
+                label_en: Agent memory, planning, and orchestration
                 route: textbook/agents/memory-planning-orchestration
               - label: Оценивание агентных систем
                 route: textbook/agents/evaluation

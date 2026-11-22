@@ -1586,17 +1586,12 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
 
 ### Tools and agents
 
-- [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering|Agent harnesses and context engineering]]
-  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-loop|Agent loop — model call, execution, and verification]]
-  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-context-budget|Agent context — token budget]]
-  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-prompt-prefix|Prefix caching in the agent loop]]
-  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-authoritative-state|Event log, active context, and task state]]
-  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-observation-masking|Observation masking and history summarization]]
-  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-compaction-boundaries|Compaction — boundaries around calls and observations]]
-  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-handoff-unknown|Handoff after an operation with an unknown outcome]]
-  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-reminder-tokens|Reminder tokens — triggers, reminders, and checks]]
-  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-verified-completion|Agent completion — verifying the current revision]]
-- [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов|Agent memory, planning, and orchestration]]
+- [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов|Agent memory, planning, and orchestration]] · **EN**
+  - [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов#agent-memory-records|Agent memory — record revisions and provenance]]
+  - [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов#agent-memory-ranking|Memory retrieval — recency, importance, and relevance]]
+  - [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов#agent-planning-branches|Planning — preconditions and branching search]]
+  - [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов#agent-reflexion-feedback|Reflexion — feedback between attempts]]
+  - [[00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов#agent-worker-dependencies|Orchestration — checking the inputs a worker result depends on]]
 - [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем|Agent-system security]]
   - [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#agent-security-bound-approval|Action approval — mail version and permissions]]
   - [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#agent-security-transactional-outbox|Transactional outbox — queue entry and delivery]]
@@ -1611,11 +1606,7 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
 - [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|Formal proofs and mathematical agents]]
   - [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#alphaproof-search-vs-ttrl|AlphaProof — search and adaptation budgets]]
   - [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#lean-proof-acceptance|Lean — checking the statement and its axioms]]
-- [[00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля|How agents use tools]] · **EN**
-- [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery|Scientific search and discovery agents]]
-  - [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery#funsearch-program-search|FunSearch — program search and cap-set verification]]
-  - [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery#alphaevolve-evaluation-cascade|AlphaEvolve — evaluation cascade and construction verification]]
-- [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию|Tool use: from a function call to an action]]
+- [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию|How a function call becomes an action]] · **EN**
   - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#tool-call-contract|Tool calls — schema, permissions, and result verification]]
   - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#toolformer-curation-evaluation|Toolformer — call selection and evaluation]]
   - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#mcp-host-client-server|MCP — client, server, and protocol boundaries]]
@@ -1623,6 +1614,20 @@ EN marks a reviewed English edition; EN original marks a chapter written in Engl
   - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#react-prompting-learning|ReAct — prompting, fallback, and fine-tuning]]
   - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#tool-retry-idempotency|Idempotency — retries after a lost response]]
   - [[00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию#tool-use-verification|Tool use — verifying episode completion]]
+- [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering|How agents manage context]] · **EN**
+  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-loop|Agent loop — model call, execution, and verification]]
+  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-context-budget|Agent context — token budget]]
+  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-prompt-prefix|Prefix caching in the agent loop]]
+  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-authoritative-state|Event log, active context, and task state]]
+  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-observation-masking|Observation masking and history summarization]]
+  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-compaction-boundaries|Compaction — boundaries around calls and observations]]
+  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-handoff-unknown|Handoff after an operation with an unknown outcome]]
+  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-reminder-tokens|Reminder tokens — triggers, reminders, and checks]]
+  - [[00 Учебник/17 Tools и Agents/66 Agent harness и context engineering#harness-verified-completion|Agent completion — verifying the current revision]]
+- [[00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля|How agents use tools]] · **EN**
+- [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery|Scientific search and discovery agents]]
+  - [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery#funsearch-program-search|FunSearch — program search and cap-set verification]]
+  - [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery#alphaevolve-evaluation-cascade|AlphaEvolve — evaluation cascade and construction verification]]
 
 ### Evaluation and operations
 

@@ -175,8 +175,8 @@ last_updated: 2026-11-14
 Нужны генерация, post-training и оценивание языковых моделей. Сначала разбираются вызовы инструментов и управление контекстом, затем память, планирование, приложения и безопасность.
 
 - [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля|Как агент работает с инструментами]]
-- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию|Tool use — от вызова функции к действию]]
-- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/66 Agent harness и context engineering|Agent harness и context engineering]]
+- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию|Как вызов функции становится действием]]
+- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/66 Agent harness и context engineering|Как агент управляет контекстом]]
 - [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов|Память, планирование и оркестрация агентов]]
 - [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/68 Оценивание агентных систем|Оценивание агентных систем]]
 - [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|Coding, web и computer-use agents]]

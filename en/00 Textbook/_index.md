@@ -184,9 +184,9 @@ Start after CNNs and the Transformer. Follow visual representations into languag
 Prerequisites: generation, post-training, and language-model evaluation. Study tool calls and context management before memory, planning, applications, and security.
 
 - [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля|How agents use tools]] · **EN**
-- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию|Tool use: from a function call to an action]]
-- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/66 Agent harness и context engineering|Agent harnesses and context engineering]]
-- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов|Agent memory, planning, and orchestration]]
+- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию|How a function call becomes an action]] · **EN**
+- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/66 Agent harness и context engineering|How agents manage context]] · **EN**
+- [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов|Agent memory, planning, and orchestration]] · **EN**
 - [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/68 Оценивание агентных систем|Evaluating agent systems]]
 - [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents|Coding, web, and computer-use agents]]
 - [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты|Formal proofs and mathematical agents]]

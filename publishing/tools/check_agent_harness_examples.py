@@ -15,9 +15,11 @@ import re
 from types import SimpleNamespace
 
 from PIL import Image, ImageChops
+from topic_consolidation_baseline import before_topic_consolidation
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md"
+ENGLISH = ROOT / "en/00 Textbook/17 Tools and Agents/66 How agents manage context.md"
 ARCHIVE = ROOT / "05 Источники/Originals/agent-harness-2026-10-20"
 
 
@@ -105,23 +107,43 @@ def check_pinned_condenser():
     assert condenser.condensation_requirement(view, fake_llm) == Requirement.HARD
 
 
-def main():
-    text = CHAPTER.read_text()
-    blocks = re.findall(r"^~~~python\n(.*?)^~~~", text, re.M | re.S)
-    assert len(blocks) == 5
-    shared, scopes = {}, []
-    for i, block in enumerate(blocks):
-        code = compile(block, f"{CHAPTER}:example-{i+1}", "exec")
+def run_examples(path, text):
+    blocks = re.findall(
+        r'^<details id="harness-code-([^"]+)">\n<summary>[^\n]+</summary>\n\n'
+        r'^(~~~|```)(python|json)\n(.*?)^\2\n\n</details>$',
+        text, re.M | re.S,
+    )
+    assert len(blocks) == 7 == len({name for name, _, _, _ in blocks})
+    shared, scopes, asts, snapshots = {}, {}, {}, {}
+    for name, _, kind, block in blocks:
+        if kind == "json":
+            snapshots[name] = json.loads(block)
+            continue
+        code = compile(block, f"{path}:{name}", "exec")
         namespace = {}
         exec(code, namespace)
         exec(code, shared)
-        scopes.append(namespace)
-    json_blocks = re.findall(r"^(~~~|```)json\n(.*?)^\1", text, re.M | re.S)
-    assert len(json_blocks) == 1
-    for _, block in json_blocks:
-        assert isinstance(json.loads(block), dict)
+        scopes[name] = namespace
+        asts[name] = ast.dump(ast.parse(block))
+    assert set(scopes) == {"budget", "prefix", "cuts", "checkpoint", "reminder", "episode"}
+    assert set(snapshots) == {"handoff"}
+    return scopes, asts, snapshots
 
-    budget, prefix, checkpoint, reminder, runner = scopes
+
+def main():
+    text, english = CHAPTER.read_text(), ENGLISH.read_text()
+    assert f'canonical_revision: "{sha(CHAPTER)}"' in english
+    scopes, asts, snapshots = run_examples(CHAPTER, text)
+    translated, translated_asts, translated_snapshots = run_examples(ENGLISH, english)
+    assert asts == translated_asts and snapshots == translated_snapshots
+    budget, prefix, cuts, checkpoint, reminder, runner = (
+        scopes[name] for name in ("budget", "prefix", "cuts", "checkpoint", "reminder", "episode")
+    )
+    assert cuts["naive_end"] == 9 and cuts["end"] == 11
+    assert not any(i >= 9 for i in cuts["safe_cuts"](cuts["events"][:-1]))
+    handoff = snapshots["handoff"]
+    assert handoff["next_action"] == "read_by_idempotency_key"
+    assert {k: v for k, v in handoff.items() if k != "next_action"} == checkpoint["trusted"]
     assert budget["after_compaction"] == 6960
     assert prefix["common_prefix_length"]([], [1]) == 0
     assert prefix["common_prefix_length"]([1, 2], [1]) == 1
@@ -180,7 +202,8 @@ def main():
 
     check_pinned_condenser()
     refs = json.loads((ARCHIVE / "references.json").read_text())
-    assert sha(CHAPTER) == refs["chapter_sha256"]
+    original = before_topic_consolidation(text, CHAPTER)
+    assert hashlib.sha256(original.encode()).hexdigest() == refs["chapter_sha256"]
     for row in refs["downloaded"] + refs["reused"] + refs["derived"]:
         assert sha(ROOT / row["path"]) == row["sha256"], row["path"]
     for row in refs["figures"]:
@@ -197,8 +220,11 @@ def main():
         assert row["license"] == "CC BY 4.0"
 
     print(json.dumps({
-        "chapter_sha256": sha(CHAPTER), "python_blocks": len(blocks),
-        "standalone_and_shared_runs": 2*len(blocks), "json_examples_parsed": len(json_blocks),
+        "chapter_sha256": [sha(CHAPTER), sha(ENGLISH)],
+        "python_blocks_per_locale": len(scopes),
+        "standalone_and_shared_runs": 2 * (len(scopes) + len(translated)),
+        "json_examples_parsed": len(snapshots) + len(translated_snapshots),
+        "naive_and_safe_condensation_end": [cuts["naive_end"], cuts["end"]],
         "token_budget_after_compaction": budget["after_compaction"],
         "protected_checkpoint_fields_checked": len(checkpoint["trusted"]),
         "fresh_revision_and_budget_failures_checked": True,

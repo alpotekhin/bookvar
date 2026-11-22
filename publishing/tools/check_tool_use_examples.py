@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Check chapter 65's deterministic fixtures and original ReAct crops.
 
-No LLM API, network requests, real side effects or agent-quality benchmark.
+Run the fixtures in both editions without a model, network or filesystem tools.
 """
+import ast
 from copy import deepcopy
 import hashlib
 import json
@@ -15,6 +16,7 @@ from topic_consolidation_baseline import before_topic_consolidation
 
 ROOT = Path(__file__).resolve().parents[2]
 CHAPTER = ROOT / "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md"
+ENGLISH = ROOT / "en/00 Textbook/17 Tools and Agents/65 How a function call becomes an action.md"
 ARCHIVE = ROOT / "05 Источники/Originals/tool-use-2026-10-20"
 
 
@@ -22,26 +24,55 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def run_examples(path, text):
+    blocks = re.findall(
+        r'^<details id="tool-use-code-([^"]+)">\n<summary>[^\n]+</summary>\n\n'
+        r'^(~~~|```)(python|json)\n(.*?)^\2\n\n</details>$',
+        text, re.M | re.S,
+    )
+    assert len(blocks) == 11 == len({name for name, _, _, _ in blocks})
+    scopes, shared, sources, wire = {}, {}, {}, {}
+    for name, _, kind, block in blocks:
+        if kind == "json":
+            wire[name] = json.loads(block)
+            assert isinstance(wire[name], dict)
+        else:
+            namespace = {}
+            compiled = compile(block, f"{path}:{name}", "exec")
+            exec(compiled, namespace)
+            exec(compiled, shared)
+            scopes[name] = namespace
+            sources[name] = ast.dump(ast.parse(block))
+    assert set(wire) == {"schema", "proposal", "rejected", "observation", "mcp-request"}
+    assert set(scopes) == {"loss", "sampling", "mcp-correlation", "react-vote", "retry", "episode"}
+    return scopes, sources, wire
+
+
 def main():
-    text = CHAPTER.read_text()
+    text, english = CHAPTER.read_text(), ENGLISH.read_text()
     refs = json.loads((ARCHIVE / "references.json").read_text())
     preceding = before_topic_consolidation(text, CHAPTER)
     assert hashlib.sha256(preceding.encode()).hexdigest() == refs["chapter_sha256"], "Unreviewed chapter change"
-    json_blocks = re.findall(r"^(~~~|```)json\n(.*?)^\1", text, re.M | re.S)
-    assert len(json_blocks) == 5
-    for _, block in json_blocks:
-        assert isinstance(json.loads(block), dict)
-    blocks = re.findall(r"^~~~python\n(.*?)^~~~", text, re.M | re.S)
-    assert len(blocks) == 6
-    scopes, shared = [], {}
-    for index, block in enumerate(blocks):
-        namespace = {}
-        compiled = compile(block, f"{CHAPTER}:example-{index+1}", "exec")
-        exec(compiled, namespace)
-        exec(compiled, shared)
-        scopes.append(namespace)
+    assert f'canonical_revision: "{sha(CHAPTER)}"' in english
+    scopes, sources, wire = run_examples(CHAPTER, text)
+    translated, en_sources, en_wire = run_examples(ENGLISH, english)
+    assert sources == en_sources and wire == en_wire
 
-    losses, sampling, mcp, voting, writing, episode = scopes
+    for ns in (scopes, translated):
+        fixture = ns["episode"]
+        success, history = fixture["run_episode"](fixture["proposals"])
+        assert success and history[0][0]["arguments"] == wire["proposal"]
+        assert history[0][1]["error"] == wire["rejected"]["error"]["type"]
+        assert not history[0][1]["executed"]
+        assert history[1][1] == wire["observation"]
+        assert history[1][0]["arguments"] == wire["mcp-request"]["params"]["arguments"]
+        assert wire["mcp-request"]["id"] == 17
+        schema = wire["schema"]["parameters"]
+        assert schema["properties"]["start_line"]["minimum"] == wire["rejected"]["error"]["minimum"]
+
+    losses, sampling, mcp, voting, writing, episode = (
+        scopes[name] for name in ("loss", "sampling", "mcp-correlation", "react-vote", "retry", "episode")
+    )
     correlate, rpc, pending = mcp["correlate_response"], mcp["rpc"], mcp["pending"]
     assert not pending
     pending.update({17: "current-read", 18: "failed-read"})
@@ -172,9 +203,10 @@ def main():
                 assert ImageChops.difference(crop, actual.convert("RGB")).getbbox() is None
 
     print(json.dumps({
-        "chapter_sha256": sha(CHAPTER),
-        "code_blocks": len(blocks), "standalone_and_shared_runs": 2*len(blocks),
-        "json_examples_parsed": len(json_blocks),
+        "chapter_sha256": [sha(CHAPTER), sha(ENGLISH)],
+        "python_blocks_per_locale": len(scopes),
+        "standalone_and_shared_runs": 2 * (len(scopes) + len(translated)),
+        "json_examples_parsed": len(wire) + len(en_wire),
         "toolformer_useful_delta": useful_delta,
         "toolformer_irrelevant_delta": irrelevant_delta,
         "schema_policy_and_missing_cases": len(rejected) + 1,

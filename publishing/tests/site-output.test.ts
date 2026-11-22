@@ -898,7 +898,7 @@ describe('static handbook output', () => {
       const disclosure = html.match(/(<details[^>]*>)\s*<summary>Source text and attribution<\/summary>([\s\S]*?)<\/details>/);
       expect(disclosure).not.toBeNull();
       expect(disclosure![1].includes('open')).toBe(false);
-      expect(disclosure![2].includes('Ниже сохранены')).toBe(true);
+      expect(disclosure![2].includes(prefix ? 'expandable source sections preserve' : 'Ниже сохранены')).toBe(true);
       expect(disclosure![2].includes('<blockquote>')).toBe(false);
       const start = html.indexOf('id="plan-seq-learn"');
       const end = html.indexOf('id="всегда-ли-дополнительный-планировщик-полезен"', start);
@@ -909,8 +909,9 @@ describe('static handbook output', () => {
         'Sequencing Module: Vision-based Plan Tracking', 'Learning Module: Efficiently Learning Local Control',
         'Stage Termination Details', 'There are several limitations of PSL'])
         expect(section.includes(text)).toBe(true);
+      expect(section.match(/<details id="psl-source-[^"]+">/g)).toHaveLength(6);
       expect(html.includes('katex-error')).toBe(false);
-      if (prefix) expectCanonicalEditionNotice(html);
+      expect(html).not.toContain('aria-label="English edition status"');
     }
   });
   it('renders the three modern-route corrections in both interfaces without dropping examples', async () => {
@@ -6626,8 +6627,25 @@ describe('static handbook output', () => {
         const images = [...html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/gi)].map(([, src]) => src);
         expect(images.filter(src => /^(?:https?:)?\/\//i.test(src)), chapter).toEqual([]);
         expect(images.some(src => src.endsWith('/' + figure)), chapter).toBe(true);
-        expect(html, chapter).toContain(example);
+        expect(html, chapter).toContain(locale && chapter === 'memory-planning-orchestration' ? 'time zone' : example);
       }
+    }
+  });
+  it('links memory, planning and coordination through the same seminar example in both editions', async () => {
+    const path = 'textbook/agents/memory-planning-orchestration/';
+    for (const locale of ['', 'en/']) {
+      const html = await readFile(join(distDir, locale, path, 'index.html'), 'utf8');
+      const reference = await readFile(join(distDir, locale, 'reference/index.html'), 'utf8');
+      expect(html.match(/<details id="memory-code-/g)).toHaveLength(5);
+      expect(html).toContain(locale ? 'The organizer moves a research seminar' : 'Организатор переносит научный семинар');
+      for (const term of ['agent-memory-records', 'agent-memory-ranking',
+        'agent-planning-branches', 'agent-reflexion-feedback', 'agent-worker-dependencies']) {
+        expect(html).toContain('id="' + term + '"');
+        expect(reference).toContain('href="/' + locale + path + '#' + term + '"');
+      }
+      expect(html).toContain(`href="/${locale}textbook/agents/harness-context-engineering/"`);
+      expect(html).toContain(`href="/${locale}textbook/agents/evaluation/"`);
+      expect(html).toContain(`href="/${locale}sources/genai-agents/"`);
     }
   });
   it('joins agent harness boundaries, source evidence and the subject index in both locales', async () => {
@@ -6644,10 +6662,16 @@ describe('static handbook output', () => {
         expect(reference).toContain('href="/' + prefix + chapter + '#' + term + '"');
       }
       expect(html).toMatch(/<img[^>]+src="[^"]*\/harness-context-2026-11-09\/management-strategies\.png"/);
-      for (const value of ['54,8%', '53,8%', 'safe_cuts', 'ToolCallMatchingProperty'])
+      expect(html).not.toContain('aria-label="English edition status"');
+      expect(html.match(/<details id="harness-code-/g)).toHaveLength(7);
+      const results = prefix ? ['54.8%', '53.8%'] : ['54,8%', '53,8%'];
+      for (const value of [...results, 'safe_cuts', 'ToolCallMatchingProperty', '6960'])
         expect(html).toContain(value);
       expect(html).toContain('href="https://arxiv.org/html/2508.21433v3#S3.F3"');
       expect(html).toContain('href="/' + prefix + 'textbook/agents/tool-use/#mcp-response-correlation"');
+      expect(html).toContain('href="/' + prefix + 'textbook/agents/tool-use/#tool-call-contract"');
+      expect(html).toContain('href="/' + prefix + 'textbook/agents/memory-planning-orchestration/"');
+      expect(html).toContain('href="/' + prefix + 'sources/genai-agents/"');
       expect(html).toContain('href="/' + prefix + note + '"');
       expect(library).toContain('href="/' + note + '"');
       expect(source).toContain('href="/' + prefix + chapter + '#harness-observation-masking"');
@@ -6656,6 +6680,13 @@ describe('static handbook output', () => {
   it('renders the tool-use mechanisms, original ReAct panels and executable fixtures', async () => {
     for (const locale of ['', 'en/']) {
     const html = await readFile(join(distDir, locale, 'textbook/agents/tool-use/index.html'), 'utf8');
+    expect(html).not.toContain('aria-label="English edition status"');
+    expect(html.match(/<details id="tool-use-code-/g)).toHaveLength(11);
+    expect(html.indexOf('id="tool-call-contract"')).toBeLessThan(html.indexOf('id="react-hotpotqa-trajectories"'));
+    expect(html).toContain(locale ? 'What the application checks before execution' : 'Что приложение проверяет перед исполнением');
+    expect(html).toContain(`href="/${locale}textbook/agents/module-map/"`);
+    expect(html).toContain(`href="/${locale}textbook/agents/harness-context-engineering/"`);
+    expect(html).toContain(`href="/${locale}sources/genai-agents/"`);
     for (const name of ['react-hotpotqa-primary.png', 'react-alfworld-primary.png'])
       expect(html.includes('/' + name), 'missing ReAct panel: ' + name).toBe(true);
     const project = 'https://react-lm.github.io/files/diagram.png';

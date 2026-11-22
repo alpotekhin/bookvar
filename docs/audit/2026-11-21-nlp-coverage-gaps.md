@@ -103,6 +103,9 @@ Language Processing, редакция от 19 августа 2026 года](http
 [«Чтение документов: OCR, поля и координаты»](2026-11-22-ocr-grounding-editorial-pass.json),
 [«Как модели понимают видео и отвечают голосом»](2026-11-22-video-omni-editorial-pass.json),
 [«Как оценивать качество и задержку VLM»](2026-11-22-vlm-evaluation-serving-editorial-pass.json),
-[«Chameleon: текст и изображения в одной последовательности»](2026-11-22-chameleon-editorial-pass.json) и
-[«Как агент работает с инструментами»](2026-11-22-agent-intro-editorial-pass.json).
-Следующая глава — «Как вызов функции становится действием».
+[«Chameleon: текст и изображения в одной последовательности»](2026-11-22-chameleon-editorial-pass.json),
+[«Как агент работает с инструментами»](2026-11-22-agent-intro-editorial-pass.json),
+[«Как вызов функции становится действием»](2026-11-22-tool-use-editorial-pass.json),
+[«Как агент управляет контекстом»](2026-11-22-harness-context-editorial-pass.json) и
+[«Память, планирование и оркестрация агентов»](2026-11-22-agent-memory-planning-editorial-pass.json).
+Следующая глава — «Оценивание агентных систем».
